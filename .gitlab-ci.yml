@@ -1,0 +1,37 @@
+stages:
+  - install
+  - renovate
+  - build
+  - test
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+install:
+  stage: install
+  image: node:latest
+  script:
+    - npm install --cache .npm
+
+renovate:
+  stage: renovate
+  variables:
+    RENOVATE_TOKEN: 'glpat-uSR-fM626y2z1p3RW1Qv'
+  image: renovate/renovate
+  script:
+    - npx renovate --platform gitlab --token $RENOVATE_TOKEN studiolabs/open.studio/web/front-demo
+
+build:
+  stage: build
+  image: node:latest
+  script:
+    - npm run build
+
+test:
+  stage: test
+  image: node:latest
+  script:
+    - npm run lint:fix
+    - npm run test

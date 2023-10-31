@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Horizontal layout to match snapshot 1`] = `
+<div
+  className="sc-beqWaB blFoJQ"
+  display="flex"
+>
+  <div
+    className="sc-beqWaB bDFJkp"
+    height={50}
+    width={50}
+  />
+  <div
+    className="sc-beqWaB dtTecj"
+    height={50}
+    width={50}
+  />
+  <div
+    className="sc-beqWaB cRjFxL"
+    height={50}
+    width={50}
+  />
+</div>
+`;

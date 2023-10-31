@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select component Select to match snapshot 1`] = `
+<div
+  className="sc-beqWaB cyuWSe"
+  display="flex"
+  onClick={[Function]}
+  onPress={[Function]}
+  role="SelectBox"
+>
+  <div
+    className="sc-beqWaB fpWsAm"
+    color="primary"
+    cursor="auto"
+    display="flex"
+    filter="brightness(1)"
+    fontSize={20}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    width="100%"
+  >
+    <div
+      className="sc-beqWaB ePTaBv"
+      display="flex"
+      width="100%"
+    >
+      <select
+        className="sc-beqWaB ecbNzp"
+        disabled={false}
+        height={0}
+        multiple={false}
+        name="name"
+        onChange={[Function]}
+        onFocus={[Function]}
+        opacity={0}
+        readOnly={true}
+        value="Item1"
+        width={0}
+      >
+        <option
+          value="Item1"
+        >
+          Item1
+        </option>
+        <option
+          value="Item2"
+        >
+          Item2
+        </option>
+        <option
+          value="Item3"
+        >
+          Item3
+        </option>
+      </select>
+      <div
+        className="sc-beqWaB eQmJTo"
+        color="blueGray.700"
+        cursor="auto"
+        fontSize={20}
+        fontStyle="normal"
+        fontWeight={400}
+        role="text"
+        textDecoration="none"
+        width="95%"
+      >
+        Item1
+      </div>
+    </div>
+    <div
+      className="sc-beqWaB jZgKEP"
+      display="flex"
+      transform="translateY(-50%)"
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextArea to match snapshot 1`] = `
+<div
+  className="sc-beqWaB cqcfJy"
+  display="flex"
+>
+  <div
+    className="sc-beqWaB dlvxjD"
+    color="primary"
+    cursor="pointer"
+    display="flex"
+    filter="brightness(1)"
+    fontSize={20}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    width="100%"
+  >
+    <div
+      className="sc-beqWaB ePTaBv"
+      display="flex"
+      width="100%"
+    >
+      <textarea
+        autoFocus={false}
+        className="sc-beqWaB gedPta"
+        color="blueGray.700"
+        cols={35}
+        cursor="auto"
+        disabled={false}
+        fontSize={20}
+        name="name"
+        on={
+          Object {
+            "focus": Object {
+              "outline": "none",
+            },
+          }
+        }
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="Name"
+        readOnly={false}
+        rows={3}
+        value=""
+        width="100%"
+      />
+    </div>
+  </div>
+  <div
+    className="sc-beqWaB hiliWR"
+    color="error"
+    fontSize={12}
+    fontStyle="normal"
+    fontWeight={400}
+    label={
+      Object {
+        "fontSize": 15,
+      }
+    }
+    role="text"
+    textDecoration="none"
+  >
+    required
+  </div>
+</div>
+`;

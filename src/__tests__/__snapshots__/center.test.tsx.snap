@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Center layout to match snapshot 1`] = `
+<div
+  className="sc-beqWaB jHOsDW"
+  display="flex"
+  height={100}
+  width={100}
+>
+  This is the Center
+</div>
+`;

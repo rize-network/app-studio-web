@@ -1,0 +1,15 @@
+export { ColorArea } from 'src/components/Form/TextArea/examples/ColorScheme';
+export { DefaultArea } from 'src/components/Form/TextArea/examples/Default';
+export { DisabledArea } from 'src/components/Form/TextArea/examples/DisabledInput';
+export { ErrorArea } from 'src/components/Form/TextArea/examples/ErrorInput';
+export { FormikErrorArea } from 'src/components/Form/TextArea/examples/FormikErrorInput';
+export { FormikHelperTextArea } from 'src/components/Form/TextArea/examples/FormikHelperText';
+export { HelperTextArea } from 'src/components/Form/TextArea/examples/HelperText';
+export { LabelArea } from 'src/components/Form/TextArea/examples/LabelInput';
+export { MaxArea } from 'src/components/Form/TextArea/examples/MaxRowCol';
+export { PlaceholderArea } from 'src/components/Form/TextArea/examples/Placeholder';
+export { ReadOnlyArea } from 'src/components/Form/TextArea/examples/ReadOnlyInput';
+export { ShapesArea } from 'src/components/Form/TextArea/examples/ShapeInput';
+export { SizeArea } from 'src/components/Form/TextArea/examples/SizeInput';
+export { StyledArea } from 'src/components/Form/TextArea/examples/StylesInput';
+export { VariantsArea } from 'src/components/Form/TextArea/examples/VariantsInputs';
