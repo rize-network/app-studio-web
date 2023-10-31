@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Element, useTheme } from 'app-studio';
+import { Element } from 'app-studio';
 import { Link } from 'src/components';
 
 import { ButtonProps } from './Button.props';
@@ -26,7 +26,6 @@ const ButtonView: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const isActive = !(isDisabled || isLoading);
-  const { getColor } = useTheme();
 
   const defaultNativeProps = { disabled: !isActive };
 
