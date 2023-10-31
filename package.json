@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -143,12 +143,12 @@
   },
   "size-limit": [
     {
-      "path": "dist/web.esm.cjs.production.min.js",
-      "limit": "10 KB"
+      "path": "dist/web.cjs.production.min.js",
+      "limit": "100 KB"
     },
     {
-      "path": "dist/web.esm.esm.js",
-      "limit": "10 KB"
+      "path": "dist/web.esm.js",
+      "limit": "100 KB"
     }
   ],
   "module": "dist/web.esm.js"
