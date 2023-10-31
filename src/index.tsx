@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Wrapper from 'src/components/Wrapper';
+import AppProvider from 'src/providers';
 
 import { App } from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <Wrapper>
+    <AppProvider>
       <App />
-    </Wrapper>
+    </AppProvider>
   </React.StrictMode>
 );

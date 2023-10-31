@@ -43,10 +43,11 @@
       "strictBindCallApply": true,
       "strictPropertyInitialization": true,
       "noImplicitThis": true,
-      "alwaysStrict": true
+      "alwaysStrict": true,
+      "outDir":"./dist"
     },
     "noEmit": false,
-    "include": ["src/components/**/*"],
+    "include": ["./src/components/**/*"],
     "exclude": ["node_modules"]
   }
   
