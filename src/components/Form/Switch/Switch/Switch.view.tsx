@@ -60,7 +60,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         borderRadius={24}
         filter={isHovered && on ? 'brightness(0.9)' : 'brightness(1)'}
         transition="justify-content 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
-        backgroundColor={isDisabled ? 'disabled' : on ? colorScheme : 'lightGrey'}
+        backgroundColor={isDisabled ? 'disabled' : on ? colorScheme : 'lightgray'}
         justifyContent={activeChild ? 'space-between' : on ? 'flex-end' : 'flex-start'}
         {...shadow}
         {...SliderPadding[size]}

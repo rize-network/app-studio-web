@@ -92,7 +92,7 @@ const size = {
         justify={justify}
         gap={5}
         height={300}
-        backgroundColor="lightGrey"
+        backgroundColor="lightgray"
       >
         <View backgroundColor="theme.primary" {...size} />
         <View backgroundColor="theme.secondary" {...size} />

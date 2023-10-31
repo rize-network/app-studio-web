@@ -14,7 +14,7 @@ export const JustifyVertical = () => {
       {['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'].map((justify) => (
         <Vertical flex={1} key={justify}>
           {justify}
-          <Vertical justify={justify as Justify} gap={5} height={300} backgroundColor="lightgrey">
+          <Vertical justify={justify as Justify} gap={5} height={300} backgroundColor="lightgray">
             <View backgroundColor="theme.primary" {...size} />
             <View backgroundColor="theme.secondary" {...size} />
             <View backgroundColor="theme.warning" {...size} />

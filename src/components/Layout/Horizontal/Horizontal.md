@@ -79,7 +79,7 @@ const size = {
         flex={4}
         justify={justify}
         gap={5}
-        backgroundColor="lightGrey"
+        backgroundColor="lightgray"
       >
         <View backgroundColor="theme.primary" {...size} />
         <View backgroundColor="theme.secondary" {...size} />

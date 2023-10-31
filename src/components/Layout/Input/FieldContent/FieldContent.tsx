@@ -25,7 +25,7 @@ export const FieldContent: React.FC<ContentProps> = ({
   ...props
 }) => {
   const isInteractive = (isHovered || isFocused) && !isDisabled;
-  const color = error ? 'error' : isInteractive ? colorScheme : 'midGrey';
+  const color = error ? 'error' : isInteractive ? colorScheme : 'midgray';
 
   return (
     <Horizontal

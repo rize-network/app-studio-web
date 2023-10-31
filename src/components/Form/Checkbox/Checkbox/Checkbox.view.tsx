@@ -61,7 +61,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
         ? { backgroundColor: colorScheme }
         : {
             borderWidth: 2,
-            borderColor: error ? 'theme.error' : isHovered ? 'color.grey.500' : 'color.grey.300',
+            borderColor: error ? 'theme.error' : isHovered ? 'color.gray.500' : 'color.gray.300',
             borderStyle: 'solid',
           }),
       borderRadius: 3,
