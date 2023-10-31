@@ -34,7 +34,7 @@
       "types": ["react-scripts"],
       "baseUrl": "./",
       "paths": {
-        "src/components/*": ["./src/components/*"],
+        "src/*": ["./src/*"],
       },
       "strict": true,
       "noImplicitAny": true,
@@ -50,6 +50,6 @@
       "verbose": false,
       "resolveFullPaths": true
     },
-    "include": ["./src/components/**/*"]
+    "include": ["./src"]
   }
   
