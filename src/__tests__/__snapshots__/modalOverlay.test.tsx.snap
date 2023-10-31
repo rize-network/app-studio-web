@@ -2,30 +2,27 @@
 
 exports[`Modal Overlay to match snapshot 1`] = `
 <div
-  className="sc-beqWaB dGsqvw"
+  className="sc-aXZVg fHXWtx"
   display="flex"
   height="100%"
   onClick={[Function]}
-  onPress={[Function]}
   visibility="visible"
   width="100%"
 >
   <div
-    className="sc-beqWaB jIKJrP"
+    className="sc-aXZVg ijyIBO"
     cursor="pointer"
     display="flex"
     height="100vh"
     onClick={[Function]}
-    onPress={[Function]}
     width="100vw"
   >
     <div
-      className="sc-beqWaB enCvwY"
+      className="sc-aXZVg kxQuqZ"
       cursor="default"
       display="flex"
       height="fit-content"
       onClick={[Function]}
-      onPress={[Function]}
       overflow="hidden"
       width={600}
     >

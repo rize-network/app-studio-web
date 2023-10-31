@@ -37,7 +37,7 @@ export const FormCheckbox = () => {
           isChecked={isCarrotChecked}
           onChange={setIsCarrotChecked}
         />
-        <Button type="submit" onPress={handleSubmit}>
+        <Button type="submit" onClick={handleSubmit}>
           Submit
         </Button>
       </Vertical>

@@ -36,10 +36,16 @@ export const FormikErrorPassword = () => {
         }, 400);
       }}
     >
-      {({ errors, touched, handleChange, handleBlur, isSubmitting }) => (
+      {({ errors, touched, isSubmitting }) => (
         <Form>
           <Vertical gap={10}>
-            <Field as={TextField} name="name" label="Name" error={touched.name && errors.name} colorScheme="theme.secondary" />
+            <Field
+              as={TextField}
+              name="name"
+              label="Name"
+              error={touched.name && errors.name}
+              colorScheme="theme.secondary"
+            />
             <Field
               as={Password}
               name="password"

@@ -3,7 +3,6 @@ import { Text as TextApp } from 'src/components';
 import { View } from 'src/components/Layout/View/View';
 import { Size, TextWeights } from 'src/components/Text/Text/Text.type';
 
-
 export const TextPage = () => {
   return (
     <View>

@@ -2,12 +2,11 @@
 
 exports[`Modal Container to match snapshot 1`] = `
 <div
-  className="sc-beqWaB bAMrnX"
+  className="sc-aXZVg jtCCUu"
   cursor="default"
   display="flex"
   height="100%"
   onClick={[Function]}
-  onPress={[Function]}
   overflow="hidden"
   role="container"
   width="100%"

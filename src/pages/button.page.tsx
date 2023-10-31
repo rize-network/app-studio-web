@@ -20,7 +20,7 @@ export const ButtonPage = () => {
             <th>Property</th>
             <th>App-Studio</th>
           </tr>
-         
+
           <tr>
             <td>IsDisabled</td>
             <td>
@@ -56,14 +56,14 @@ export const ButtonPage = () => {
           </tr>
           <tr>
             <td>Variant</td>
- 
+
             <td>
               <VariantButtons />
             </td>
           </tr>
           <tr>
             <td>Bordered</td>
-  
+
             <td>
               <BorderedButtons />
             </td>

@@ -75,8 +75,8 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   return (
     <Label
       htmlFor={id}
-      as="checkbox"
-      onPress={handleChange}
+      as="div"
+      onClick={handleChange}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       size={Typography.fontSizes[size]}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Element,Input,Typography,useTheme } from 'app-studio';
+import { Element, Input, Typography, useTheme } from 'app-studio';
 import { FieldContainer, FieldContent, FieldIcons, FieldLabel, FieldWrapper } from 'src/components/Layout/Input';
 import { ArrowDownSvg } from 'src/components/Svg/ArrowDown';
 import { ArrowUpSvg } from 'src/components/Svg/ArrowUp';
@@ -38,7 +38,7 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
       paddingHorizontal={12}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
-      onPress={handleOptionClick}
+      onClick={handleOptionClick}
       fontSize={Typography.fontSizes[size]}
       backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
       {...styles['text']}
@@ -177,7 +177,7 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   };
 
   return (
-    <FieldContainer helperText={helperText} error={error} styles={styles} onPress={handleClick}>
+    <FieldContainer helperText={helperText} error={error} styles={styles} onClick={handleClick}>
       <FieldContent
         label={label}
         size={size}

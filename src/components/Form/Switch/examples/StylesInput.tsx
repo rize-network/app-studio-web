@@ -19,9 +19,7 @@ export const StyledSwitch = () => {
           variant="unStyled"
           shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }}
           styles={{
-            slider: { borderRadius: 8,  borderColor: 'theme.primary',
-            borderStyle: 'solid',
-            borderWidth: 1, },
+            slider: { borderRadius: 8, borderColor: 'theme.primary', borderStyle: 'solid', borderWidth: 1 },
             circle: { backgroundColor: 'theme.primary' },
           }}
         />

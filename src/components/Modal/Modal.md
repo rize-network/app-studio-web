@@ -15,7 +15,7 @@ import { useState } from 'react';
 const [show, setShow] = useState(false);
 
 <>
-  <Button onPress={() => setShow(true)} isAuto>
+  <Button onClick={() => setShow(true)} isAuto>
     Open Modal
   </Button>
   <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
@@ -27,7 +27,7 @@ const [show, setShow] = useState(false);
         nisl consectetur et.
       </Modal.Body>
       <Modal.Footer>
-        <Button onPress={() => setShow(false)}>Cancel</Button>
+        <Button onClick={() => setShow(false)}>Cancel</Button>
       </Modal.Footer>
     </Modal.Container>
   </Modal.Overlay>
@@ -49,7 +49,7 @@ import { useState } from 'react';
 const [show, setShow] = useState(false);
 
 <>
-  <Button onPress={() => setShow(true)} isAuto>
+  <Button onClick={() => setShow(true)} isAuto>
     Full Screen
   </Button>
   <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
@@ -61,7 +61,7 @@ const [show, setShow] = useState(false);
         nisl consectetur et.
       </Modal.Body>
       <Modal.Footer>
-        <Button onPress={() => setShow(false)}>Cancel</Button>
+        <Button onClick={() => setShow(false)}>Cancel</Button>
       </Modal.Footer>
     </Modal.Container>
   </Modal.Overlay>
@@ -85,11 +85,11 @@ const [showCenter, setShowCenter] = useState(false);
 
 <>
   <Horizontal gap={10} wrap="nowrap">
-    <Button onPress={() => setShowTop(true)}>Top</Button>
-    <Button onPress={() => setShowBottom(true)}>Bottom</Button>
-    <Button onPress={() => setShowRight(true)}>Right</Button>
-    <Button onPress={() => setShowLeft(true)}>Left</Button>
-    <Button onPress={() => setShowCenter(true)}>Center</Button>
+    <Button onClick={() => setShowTop(true)}>Top</Button>
+    <Button onClick={() => setShowBottom(true)}>Bottom</Button>
+    <Button onClick={() => setShowRight(true)}>Right</Button>
+    <Button onClick={() => setShowLeft(true)}>Left</Button>
+    <Button onClick={() => setShowCenter(true)}>Center</Button>
   </Horizontal>
 
   {showBottom && (
@@ -102,7 +102,7 @@ const [showCenter, setShowCenter] = useState(false);
           nisl consectetur et.
         </Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShowBottom(false)}>Cancel</Button>
+          <Button onClick={() => setShowBottom(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -117,7 +117,7 @@ const [showCenter, setShowCenter] = useState(false);
           nisl consectetur et.
         </Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShowTop(false)}>Cancel</Button>
+          <Button onClick={() => setShowTop(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -132,7 +132,7 @@ const [showCenter, setShowCenter] = useState(false);
           nisl consectetur et.
         </Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShowLeft(false)}>Cancel</Button>
+          <Button onClick={() => setShowLeft(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -147,7 +147,7 @@ const [showCenter, setShowCenter] = useState(false);
           nisl consectetur et.
         </Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShowRight(false)}>Cancel</Button>
+          <Button onClick={() => setShowRight(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -162,7 +162,7 @@ const [showCenter, setShowCenter] = useState(false);
           nisl consectetur et.
         </Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShowCenter(false)}>Cancel</Button>
+          <Button onClick={() => setShowCenter(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -181,7 +181,7 @@ import { Button } from '../Button/Button';
 const [show, setShow] = useState(false);
 
 <>
-  <Button onPress={() => setShow(true)}>Blur Overlay</Button>
+  <Button onClick={() => setShow(true)}>Blur Overlay</Button>
   <Modal.Overlay isOpen={show} onClose={() => setShow(false)} blur={10}>
     <Modal.Container>
       <Modal.Header>Title</Modal.Header>
@@ -191,7 +191,7 @@ const [show, setShow] = useState(false);
         nisl consectetur et.
       </Modal.Body>
       <Modal.Footer>
-        <Button onPress={() => setShow(false)}>Cancel</Button>
+        <Button onClick={() => setShow(false)}>Cancel</Button>
       </Modal.Footer>
     </Modal.Container>
   </Modal.Overlay>
@@ -209,7 +209,7 @@ import { Button } from '../Button/Button';
 const [show, setShow] = useState(false);
 
 <>
-  <Button onPress={() => setShow(true)} isAuto>
+  <Button onClick={() => setShow(true)} isAuto>
     Prevent Close on Overlay
   </Button>
   <Modal.Overlay isOpen={show} onClose={() => setShow(false)} isClosePrevented>
@@ -221,7 +221,7 @@ const [show, setShow] = useState(false);
         nisl consectetur et.
       </Modal.Body>
       <Modal.Footer>
-        <Button onPress={() => setShow(false)}>Cancel</Button>
+        <Button onClick={() => setShow(false)}>Cancel</Button>
       </Modal.Footer>
     </Modal.Container>
   </Modal.Overlay>
@@ -247,8 +247,8 @@ const [showRounded, setShowRounded] = useState(false);
 
 <>
   <Horizontal gap={10}>
-    <Button onPress={() => setShowSharp(true)}>Sharp</Button>
-    <Button onPress={() => setShowRounded(true)}>Rounded</Button>
+    <Button onClick={() => setShowSharp(true)}>Sharp</Button>
+    <Button onClick={() => setShowRounded(true)}>Rounded</Button>
   </Horizontal>
 
   {showSharp && (
@@ -292,7 +292,7 @@ import { Text } from '../Text/Text';
 const [show, setShow] = useState(false);
 
 <>
-  <Button onPress={() => setShow(true)}>Shadow</Button>
+  <Button onClick={() => setShow(true)}>Shadow</Button>
 
   {show && (
     <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
@@ -329,13 +329,13 @@ const [showLeft, setShowLeft] = useState(false);
 
 <>
   <Horizontal gap={10}>
-    <Button onPress={() => setShowRight(true)} isAuto>
+    <Button onClick={() => setShowRight(true)} isAuto>
       Close button on the right
     </Button>
-    <Button onPress={() => setShowWithout(true)} isAuto>
+    <Button onClick={() => setShowWithout(true)} isAuto>
       Without Close Button
     </Button>
-    <Button onPress={() => setShowLeft(true)} isAuto>
+    <Button onClick={() => setShowLeft(true)} isAuto>
       Without Close left
     </Button>
   </Horizontal>
@@ -345,7 +345,7 @@ const [showLeft, setShowLeft] = useState(false);
         <Modal.Header> Close Button</Modal.Header>
         <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShowRight(false)}>Cancel</Button>
+          <Button onClick={() => setShowRight(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -356,7 +356,7 @@ const [showLeft, setShowLeft] = useState(false);
         <Modal.Header buttonPosition="none"> Close Button</Modal.Header>
         <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShowWithout(false)}>Cancel</Button>
+          <Button onClick={() => setShowWithout(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -367,7 +367,7 @@ const [showLeft, setShowLeft] = useState(false);
         <Modal.Header buttonPosition="left">Close Button</Modal.Header>
         <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShowLeft(false)}>Cancel</Button>
+          <Button onClick={() => setShowLeft(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -391,7 +391,7 @@ import { Text } from '../Text/Text';
 const [show, setShow] = useState(false);
 
 <>
-  <Button onPress={() => setShow(true)}>Scroll</Button>
+  <Button onClick={() => setShow(true)}>Scroll</Button>
   {show && (
     <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
       <Modal.Container>
@@ -412,7 +412,7 @@ const [show, setShow] = useState(false);
           fermentum.Cras mattis consectetur purus sit amet fermentum.
         </Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShow(false)}>Cancel</Button>
+          <Button onClick={() => setShow(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>
@@ -432,7 +432,7 @@ import { Text } from '../Text/Text';
 const [show, setShow] = useState(false);
 
 <>
-  <Button onPress={() => setShow(true)}>Footer</Button>
+  <Button onClick={() => setShow(true)}>Footer</Button>
   {show && (
     <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
       <Modal.Container>
@@ -447,7 +447,7 @@ const [show, setShow] = useState(false);
           purus sit amet fermentum.
         </Modal.Body>
         <Modal.Footer>
-          <Button onPress={() => setShow(false)}>Cancel</Button>
+          <Button onClick={() => setShow(false)}>Cancel</Button>
         </Modal.Footer>
       </Modal.Container>
     </Modal.Overlay>

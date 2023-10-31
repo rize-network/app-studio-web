@@ -1,5 +1,4 @@
 import React from 'react';
-import { Horizontal, View } from 'src/components';
 import { ReversedVertical, WrapVertical } from 'src/components/Layout/Vertical/examples';
 import { DefaultVertical } from 'src/components/Layout/Vertical/examples/Default';
 import { JustifyVertical } from 'src/components/Layout/Vertical/examples/Justify';
@@ -16,31 +15,28 @@ export const VerticalPage = () => {
       <tbody>
         <tr>
           <td>Default</td>
-          
+
           <td>
             <DefaultVertical />
           </td>
         </tr>
         <tr>
           <td>Wrap</td>
-          
-          
+
           <td>
             <WrapVertical />
           </td>
         </tr>
         <tr>
           <td>IsReversed</td>
-          
-          
+
           <td>
             <ReversedVertical />
           </td>
         </tr>
         <tr>
           <td>Justify</td>
-          
-          
+
           <td>
             <JustifyVertical />
           </td>

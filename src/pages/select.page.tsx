@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import React from 'react';
 import { ColorSelect } from 'src/components/Form/Select/examples/Color';
 import { DefaultSelect } from 'src/components/Form/Select/examples/Default';
@@ -15,7 +14,6 @@ import { StyledSelect } from 'src/components/Form/Select/examples/StylesInput';
 import { View } from 'src/components/Layout/View/View';
 
 export const SelectPage = () => {
-  const [service, setService] = useState('');
   return (
     <View>
       <table className="table" cellSpacing={0}>
@@ -34,14 +32,12 @@ export const SelectPage = () => {
           <tr>
             <th>Disabled</th>
 
-
             <td>
               <DisabledSelect />
             </td>
           </tr>
           <tr>
             <th>ReadOnly</th>
-
 
             <td>
               <ReadOnlySelect />
@@ -50,14 +46,12 @@ export const SelectPage = () => {
           <tr>
             <th>Multiple</th>
 
-
             <td>
               <MultiSelect />
             </td>
           </tr>
           <tr>
             <th>Styles</th>
-
 
             <td>
               <StyledSelect />
@@ -66,14 +60,12 @@ export const SelectPage = () => {
           <tr>
             <th>ColorScheme</th>
 
-
             <td>
               <ColorSelect />
             </td>
           </tr>
           <tr>
             <th>Sizes</th>
-
 
             <td>
               <SizeSelect />
@@ -103,14 +95,12 @@ export const SelectPage = () => {
           <tr>
             <th>Formik</th>
 
-
             <td>
               <FormikSelect />
             </td>
           </tr>
           <tr>
             <th>Form</th>
-
 
             <td>
               <FormSelect />

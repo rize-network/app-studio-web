@@ -19,9 +19,7 @@ export const StyledInput = () => {
           variant="unStyled"
           shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }}
           styles={{
-            box: { borderRadius: 8,  borderColor: 'theme.primary',
-            borderStyle: 'solid',
-            borderWidth: 1, },
+            box: { borderRadius: 8, borderColor: 'theme.primary', borderStyle: 'solid', borderWidth: 1 },
             text: { color: 'theme.primary' },
             label: { color: 'theme.primary' },
           }}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Typography} from 'app-studio';
+import { Typography } from 'app-studio';
 
 import { InputVariants, PadddingWithLabel, PaddingWithoutLabel, Shapes } from '../../configs/Input.style';
 import { Horizontal } from '../../Horizontal/Horizontal';

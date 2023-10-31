@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Input,Typography,useTheme } from 'app-studio';
+import { Input, Typography, useTheme } from 'app-studio';
 import { FieldContainer } from 'src/components/Layout/Input/FieldContainer/FieldContainer';
 import { FieldContent } from 'src/components/Layout/Input/FieldContent/FieldContent';
 import { FieldIcons } from 'src/components/Layout/Input/FieldIcons/FieldIcons';
@@ -41,7 +41,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   setIsFocused = () => {},
   setIsHovered = () => {},
   setInputValue = () => {},
-  onPress = () => {},
+  onClick = () => {},
   onFocus,
   onBlur = () => {},
   ...props

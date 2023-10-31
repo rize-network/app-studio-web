@@ -20,7 +20,6 @@ import {
 } from 'src/components/Form/TextField/examples';
 import { View } from 'src/components/Layout/View/View';
 
-
 export const InputPage = () => {
   return (
     <View>
@@ -34,21 +33,21 @@ export const InputPage = () => {
           </tr>
           <tr>
             <td>Default</td>
-         
+
             <td>
               <DefaultInput />
             </td>
           </tr>
           <tr>
             <td>Disabled</td>
-          
+
             <td>
               <DisabledInput />
             </td>
           </tr>
           <tr>
             <td>ReadOnly</td>
-          
+
             <td>
               <ReadOnlyInput />
             </td>

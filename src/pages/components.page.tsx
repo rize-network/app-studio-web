@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Horizontal, Text, Vertical } from 'src/components';
+import { Horizontal, Vertical } from 'src/components';
 import styled from 'styled-components';
 
 // Lazy-loaded imports

@@ -10,7 +10,6 @@ import {
   TypeLoader,
 } from 'src/components/Loader/examples';
 
-
 export const LoaderPage = () => {
   return (
     <View>

@@ -7,7 +7,7 @@ export const FullScreenModal = () => {
   const [show, setShow] = useState(false);
   return (
     <>
-      <Button onPress={() => setShow(true)} isAuto>
+      <Button onClick={() => setShow(true)} isAuto>
         Full Screen
       </Button>
       <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
@@ -19,7 +19,7 @@ export const FullScreenModal = () => {
             scelerisque nisl consectetur et.
           </Modal.Body>
           <Modal.Footer>
-            <Button onPress={() => setShow(false)}>Cancel</Button>
+            <Button onClick={() => setShow(false)}>Cancel</Button>
           </Modal.Footer>
         </Modal.Container>
       </Modal.Overlay>

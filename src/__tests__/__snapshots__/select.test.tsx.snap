@@ -2,15 +2,14 @@
 
 exports[`Select component Select to match snapshot 1`] = `
 <div
-  className="sc-beqWaB cyuWSe"
+  className="sc-aXZVg ivnAHP"
   display="flex"
   onClick={[Function]}
-  onPress={[Function]}
   role="SelectBox"
 >
   <div
-    className="sc-beqWaB fpWsAm"
-    color="primary"
+    className="sc-aXZVg boCghH"
+    color="theme.primary"
     cursor="auto"
     display="flex"
     filter="brightness(1)"
@@ -20,12 +19,12 @@ exports[`Select component Select to match snapshot 1`] = `
     width="100%"
   >
     <div
-      className="sc-beqWaB ePTaBv"
+      className="sc-aXZVg btOgmi"
       display="flex"
       width="100%"
     >
       <select
-        className="sc-beqWaB ecbNzp"
+        className="sc-aXZVg bsUJuA"
         disabled={false}
         height={0}
         multiple={false}
@@ -54,7 +53,7 @@ exports[`Select component Select to match snapshot 1`] = `
         </option>
       </select>
       <div
-        className="sc-beqWaB eQmJTo"
+        className="sc-aXZVg hoUbwI"
         color="blueGray.700"
         cursor="auto"
         fontSize={20}
@@ -68,7 +67,7 @@ exports[`Select component Select to match snapshot 1`] = `
       </div>
     </div>
     <div
-      className="sc-beqWaB jZgKEP"
+      className="sc-aXZVg fJamLe"
       display="flex"
       transform="translateY(-50%)"
     />

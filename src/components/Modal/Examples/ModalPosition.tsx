@@ -23,11 +23,11 @@ export const ModalPosition = () => {
   return (
     <>
       <Horizontal gap={10} wrap="nowrap">
-        <Button onPress={() => setShowTop(true)}>Top</Button>
-        <Button onPress={() => setShowBottom(true)}>Bottom</Button>
-        <Button onPress={() => setShowRight(true)}>Right</Button>
-        <Button onPress={() => setShowLeft(true)}>Left</Button>
-        <Button onPress={() => setShowCenter(true)}>Center</Button>
+        <Button onClick={() => setShowTop(true)}>Top</Button>
+        <Button onClick={() => setShowBottom(true)}>Bottom</Button>
+        <Button onClick={() => setShowRight(true)}>Right</Button>
+        <Button onClick={() => setShowLeft(true)}>Left</Button>
+        <Button onClick={() => setShowCenter(true)}>Center</Button>
       </Horizontal>
 
       {showTop && (

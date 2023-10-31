@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { useTheme } from 'app-studio';
 import { Center, Vertical } from 'src/components';
 import { Horizontal } from 'src/components';
 import { Button } from 'src/components';
@@ -42,7 +41,7 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
       width="100%"
       height="100%"
       zIndex={1000}
-      onPress={handleClick}
+      onClick={handleClick}
       visibility={isOpen ? 'visible' : 'hidden'}
     >
       <View
@@ -56,7 +55,7 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
         display="flex"
         backgroundColor="blackAlpha.500"
         backdropFilter={blur ? `blur(${blur}px)` : undefined}
-        onPress={handleClick}
+        onClick={handleClick}
         {...OverlayAlignments[position]}
         {...props}
       >
@@ -94,7 +93,7 @@ export const ModalContainer: React.FC<ContainerProps> = ({
       backgroundColor="white"
       width={isFullScreen ? '100%' : 600}
       height={isFullScreen ? '100%' : 'fit-content'}
-      onPress={handleClick}
+      onClick={handleClick}
       {...(shadow ? shadow : defaultShadow)}
       {...ContainerShapes[shape]}
       {...props}
@@ -115,7 +114,7 @@ export const ModalHeader: React.FC<HeaderProps> = ({
 
   const buttonIcon = (
     <Button
-      onPress={onClose}
+      onClick={onClose}
       colorScheme="transparent"
       icon={<CloseSvg size={HeaderIconSizes[iconSize]} color={buttonColor} />}
       padding={0}

@@ -72,7 +72,7 @@ export interface TextFieldProps {
   /**
    * Event called when the input field is clicked/pressed.
    */
-  onPress?: () => void;
+  onClick?: () => void;
   /**
    * Callback function called when the text input receives focus.
    */

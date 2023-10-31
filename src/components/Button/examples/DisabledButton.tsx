@@ -3,7 +3,7 @@ import { Button } from 'src/components';
 
 export const DisabledButton = () => (
   <Button
-    onPress={() => {
+    onClick={() => {
       alert('Disabled');
     }}
     isDisabled

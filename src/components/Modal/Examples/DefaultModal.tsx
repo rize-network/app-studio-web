@@ -8,7 +8,7 @@ export const DefaultModal = () => {
 
   return (
     <>
-      <Button onPress={() => setShow(true)} isAuto>
+      <Button onClick={() => setShow(true)} isAuto>
         Blur Overlay
       </Button>
 
@@ -28,7 +28,7 @@ export const DefaultModal = () => {
               </Text>
             </Modal.Body>
             <Modal.Footer>
-              <Button onPress={() => setShow(false)}>Cancel</Button>
+              <Button onClick={() => setShow(false)}>Cancel</Button>
             </Modal.Footer>
           </Modal.Container>
         </Modal.Overlay>

@@ -14,7 +14,6 @@ import {
 } from 'src/components/Form/Checkbox/examples';
 import { View } from 'src/components/Layout/View/View';
 
-
 export const CheckboxPage = () => {
   return (
     <View>
@@ -28,14 +27,14 @@ export const CheckboxPage = () => {
           </tr>
           <tr>
             <td>Default</td>
-        
+
             <td>
               <DefaultCheckbox />
             </td>
           </tr>
           <tr>
             <td>Disabled</td>
-          
+
             <td>
               <DisabledCheckbox />
             </td>
@@ -49,7 +48,7 @@ export const CheckboxPage = () => {
           </tr>
           <tr>
             <td>Indeterminate</td>
-          
+
             <td>
               <IndeterminateCheckbox />
             </td>
@@ -63,7 +62,6 @@ export const CheckboxPage = () => {
           </tr>
           <tr>
             <td>ColorScheme</td>
-          
 
             <td>
               <ColorCheckbox />
@@ -71,7 +69,7 @@ export const CheckboxPage = () => {
           </tr>
           <tr>
             <td>Sizes</td>
-         
+
             <td>
               <SizeCheckbox />
             </td>

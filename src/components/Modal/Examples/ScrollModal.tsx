@@ -7,7 +7,7 @@ export const ScrollModal = () => {
   const [show, setShow] = useState(false);
   return (
     <>
-      <Button onPress={() => setShow(true)} isAuto>
+      <Button onClick={() => setShow(true)} isAuto>
         Scroll
       </Button>
       {show && (
@@ -31,7 +31,7 @@ export const ScrollModal = () => {
               fermentum.
             </Modal.Body>
             <Modal.Footer>
-              <Button onPress={() => setShow(false)}>Cancel</Button>
+              <Button onClick={() => setShow(false)}>Cancel</Button>
             </Modal.Footer>
           </Modal.Container>
         </Modal.Overlay>

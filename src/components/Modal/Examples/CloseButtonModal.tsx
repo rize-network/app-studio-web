@@ -10,10 +10,10 @@ export const CloseButtonModal = () => {
   return (
     <>
       <Horizontal gap={10}>
-        <Button onPress={() => setShowWith(true)} isAuto>
+        <Button onClick={() => setShowWith(true)} isAuto>
           With Close Button
         </Button>
-        <Button onPress={() => setShowWithout(true)} isAuto>
+        <Button onClick={() => setShowWithout(true)} isAuto>
           Without Close Button
         </Button>
       </Horizontal>
@@ -23,7 +23,7 @@ export const CloseButtonModal = () => {
             <Modal.Header buttonPosition="left" />
             <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
             <Modal.Footer>
-              <Button onPress={() => setShowWith(false)}>Cancel</Button>
+              <Button onClick={() => setShowWith(false)}>Cancel</Button>
             </Modal.Footer>
           </Modal.Container>
         </Modal.Overlay>
@@ -34,7 +34,7 @@ export const CloseButtonModal = () => {
             <Modal.Header buttonPosition="none">Without Close Button</Modal.Header>
             <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
             <Modal.Footer>
-              <Button onPress={() => setShowWithout(false)}>Cancel</Button>
+              <Button onClick={() => setShowWithout(false)}>Cancel</Button>
             </Modal.Footer>
           </Modal.Container>
         </Modal.Overlay>

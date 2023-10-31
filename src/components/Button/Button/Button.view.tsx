@@ -22,11 +22,11 @@ const ButtonView: React.FC<ButtonProps> = ({
   iconPosition = 'left',
   colorScheme = 'theme.primary',
   shape = 'rounded',
-  onPress = () => {},
+  onClick = () => {},
   ...props
 }) => {
   const isActive = !(isDisabled || isLoading);
-  const {getColor} = useTheme()
+  const { getColor } = useTheme();
 
   const defaultNativeProps = { disabled: !isActive };
 
@@ -77,8 +77,6 @@ const ButtonView: React.FC<ButtonProps> = ({
     </>
   );
 
-  console.log({buttonColor, r: getColor(buttonColor)})
-
   return (
     <Element
       gap={8}
@@ -92,7 +90,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       ariaLabel={ariaLabel}
       backgroundColor={buttonColor}
       borderRadius={ButtonShapes[shape]}
-      onPress={props.onClick ?? onPress}
+      onClick={props.onClick ?? onClick}
       cursor={isActive ? 'pointer' : 'default'}
       {...defaultNativeProps} // set default native html button properties
       {...buttonSizeStyles} // set default width, paddings and fonts

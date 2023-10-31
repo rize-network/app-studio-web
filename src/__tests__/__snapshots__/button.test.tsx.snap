@@ -2,8 +2,8 @@
 
 exports[`Button will a pillShaped shape to match snapshot 1`] = `
 <button
-  className="sc-beqWaB eAbEzC"
-  color="white"
+  className="sc-aXZVg dJQJx"
+  color="color.white"
   cursor="pointer"
   disabled={false}
   display="flex"
@@ -14,7 +14,6 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  onPress={[Function]}
   role="button"
   width="fit-content"
 >
@@ -24,8 +23,8 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
 
 exports[`Button with an icon on the left to match snapshot 1`] = `
 <button
-  className="sc-beqWaB fKwfuG"
-  color="white"
+  className="sc-aXZVg eaFbqZ"
+  color="color.white"
   cursor="pointer"
   disabled={false}
   display="flex"
@@ -36,12 +35,11 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  onPress={[Function]}
   role="button"
   width={144}
 >
   <div
-    className="sc-beqWaB jqYfZi"
+    className="sc-aXZVg gClNYL"
     display="flex"
     height="24px"
     width="24px"
@@ -79,8 +77,8 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
 
 exports[`Button with an icon on the right to match snapshot 1`] = `
 <button
-  className="sc-beqWaB fKwfuG"
-  color="white"
+  className="sc-aXZVg eaFbqZ"
+  color="color.white"
   cursor="pointer"
   disabled={false}
   display="flex"
@@ -91,13 +89,12 @@ exports[`Button with an icon on the right to match snapshot 1`] = `
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  onPress={[Function]}
   role="button"
   width={144}
 >
   Delete
   <div
-    className="sc-beqWaB jqYfZi"
+    className="sc-aXZVg gClNYL"
     display="flex"
     height="24px"
     width="24px"

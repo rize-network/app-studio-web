@@ -1,5 +1,5 @@
 import React from 'react';
-import {Typography} from 'app-studio';
+import { Typography } from 'app-studio';
 
 import { Vertical } from '../../Vertical/Vertical';
 

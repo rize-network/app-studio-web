@@ -9,10 +9,10 @@ export const VariantModal = () => {
   return (
     <>
       <Horizontal gap={10}>
-        <Button onPress={() => setShowSharp(true)} isAuto>
+        <Button onClick={() => setShowSharp(true)} isAuto>
           Sharp
         </Button>
-        <Button onPress={() => setShowRounded(true)} isAuto>
+        <Button onClick={() => setShowRounded(true)} isAuto>
           Rounded
         </Button>
       </Horizontal>

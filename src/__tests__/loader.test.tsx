@@ -12,7 +12,7 @@ test('should render Loading component without crashing', () => {
   render(<Loading />);
 });
 
-test('Loading with loader color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot', () => {
+test('Loading with loader color equals to theme.primary should match snapshot', () => {
   const tree = renderer.create(<Loading loaderColor="theme.primary">Loading</Loading>).toJSON();
   expect(tree).toMatchSnapshot();
 });

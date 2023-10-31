@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkbox to match snapshot 1`] = `
-<checkbox
-  className="sc-beqWaB gvgukj"
+<div
+  className="sc-aXZVg cYDEpS"
   color="blue"
   cursor="default"
   display="flex"
@@ -13,15 +13,14 @@ exports[`Checkbox to match snapshot 1`] = `
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  onPress={[Function]}
   textDecoration="none"
   width="fit-content"
 >
   <div
-    className="sc-beqWaB kAflSA"
+    className="sc-aXZVg EixHO"
     display="flex"
     height={30}
     width={30}
   />
-</checkbox>
+</div>
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Element,Typography } from 'app-studio';
+import { Element, Typography } from 'app-studio';
 
 import { LabelProps } from './Label.props';
 import { HeadingSizes } from './Label.style';

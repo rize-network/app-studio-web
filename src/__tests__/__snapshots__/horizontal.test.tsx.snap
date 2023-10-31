@@ -2,21 +2,21 @@
 
 exports[`Horizontal layout to match snapshot 1`] = `
 <div
-  className="sc-beqWaB blFoJQ"
+  className="sc-aXZVg gfWQmF"
   display="flex"
 >
   <div
-    className="sc-beqWaB bDFJkp"
+    className="sc-aXZVg iKQqOr"
     height={50}
     width={50}
   />
   <div
-    className="sc-beqWaB dtTecj"
+    className="sc-aXZVg aGRft"
     height={50}
     width={50}
   />
   <div
-    className="sc-beqWaB cRjFxL"
+    className="sc-aXZVg eQfhcF"
     height={50}
     width={50}
   />

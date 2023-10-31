@@ -2,12 +2,12 @@
 
 exports[`TextField to match snapshot 1`] = `
 <div
-  className="sc-beqWaB cqcfJy"
+  className="sc-aXZVg eoQJKn"
   display="flex"
 >
   <div
-    className="sc-beqWaB dlvxjD"
-    color="primary"
+    className="sc-aXZVg giOKpl"
+    color="theme.primary"
     cursor="pointer"
     display="flex"
     filter="brightness(1)"
@@ -17,7 +17,7 @@ exports[`TextField to match snapshot 1`] = `
     width="100%"
   >
     <div
-      className="sc-beqWaB kQdNna"
+      className="sc-aXZVg TjQrj"
       display="flex"
       height="12px"
       width="12px"
@@ -79,15 +79,15 @@ exports[`TextField to match snapshot 1`] = `
       </svg>
     </div>
     <div
-      className="sc-beqWaB ePTaBv"
+      className="sc-aXZVg btOgmi"
       display="flex"
       width="100%"
     >
       <input
         autoComplete="off"
         autoFocus={true}
-        className="sc-beqWaB jifvDd"
-        color="blueGray.700"
+        className="sc-aXZVg jVKOse"
+        color="color.blueGray.700"
         cursor="auto"
         disabled={false}
         fontSize={20}
@@ -111,8 +111,8 @@ exports[`TextField to match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-beqWaB hiliWR"
-    color="error"
+    className="sc-aXZVg jViPHz"
+    color="theme.error"
     fontSize={12}
     fontStyle="normal"
     fontWeight={400}

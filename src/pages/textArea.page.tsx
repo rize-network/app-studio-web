@@ -18,7 +18,6 @@ import {
 } from 'src/components/Form/TextArea/examples';
 import { View } from 'src/components/Layout/View/View';
 
-
 export const TextAreaPage = () => {
   return (
     <View>
@@ -36,21 +35,20 @@ export const TextAreaPage = () => {
           </tr>
           <tr>
             <th>Disabled</th>
-            
+
             <td>
               <DisabledArea />
             </td>
           </tr>
           <tr>
             <th>ReadOnly</th>
-     
+
             <td>
               <ReadOnlyArea />
             </td>
           </tr>
           <tr>
             <th>Label</th>
-            
 
             <td>
               <LabelArea />
@@ -87,7 +85,7 @@ export const TextAreaPage = () => {
 
           <tr>
             <th>Variants</th>
-            
+
             <td>
               <VariantsArea />
             </td>

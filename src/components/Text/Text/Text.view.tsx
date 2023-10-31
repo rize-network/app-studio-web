@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Element,Typography } from 'app-studio';
+import { Element, Typography } from 'app-studio';
 
 import { ContentProps, TextProps, TruncateTextProps } from './Text.props';
 import { HeadingSizes } from './Text.style';

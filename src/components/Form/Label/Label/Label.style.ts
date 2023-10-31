@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Headings } from './Label.type';
 
 export const HeadingSizes: Record<Headings, Record<string, number | string>> = {

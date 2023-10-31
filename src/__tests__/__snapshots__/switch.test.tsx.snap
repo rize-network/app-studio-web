@@ -2,7 +2,7 @@
 
 exports[`Switch to match snapshot 1`] = `
 <label
-  className="sc-beqWaB bssle"
+  className="sc-aXZVg fxfdrw"
   fontSize="sm"
   fontStyle="normal"
   fontWeight={400}
@@ -13,7 +13,7 @@ exports[`Switch to match snapshot 1`] = `
 >
   <input
     checked={false}
-    className="sc-beqWaB kIbCMK"
+    className="sc-aXZVg kuzOXb"
     disabled={false}
     height={0}
     name="name"
@@ -24,7 +24,7 @@ exports[`Switch to match snapshot 1`] = `
     width={0}
   />
   <div
-    className="sc-beqWaB iTpBMv"
+    className="sc-aXZVg bZVRfa"
     cursor="pointer"
     display="flex"
     filter="brightness(1)"
@@ -32,7 +32,7 @@ exports[`Switch to match snapshot 1`] = `
     width={60}
   >
     <div
-      className="sc-beqWaB bstfz"
+      className="sc-aXZVg kXjUaK"
       height={18}
       width={18}
     />

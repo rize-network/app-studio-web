@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input,Typography } from 'app-studio';
+import { Input, Typography } from 'app-studio';
 import { FieldContainer } from 'src/components/Layout/Input/FieldContainer/FieldContainer';
 import { FieldContent } from 'src/components/Layout/Input/FieldContent/FieldContent';
 import { FieldLabel } from 'src/components/Layout/Input/FieldLabel/FieldLabel';

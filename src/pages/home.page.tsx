@@ -121,7 +121,13 @@ export const HomePage = () => {
         <Horizontal justify="space-evenly" gap={30}>
           {Features.map((feature) => (
             <Vertical key={feature.title} gap={7} width={400} minHeight={100} alignItems="center">
-              <Center color="white" borderRadius="50%" padding="10px" backgroundColor="theme.primary" media={media.icon}>
+              <Center
+                color="white"
+                borderRadius="50%"
+                padding="10px"
+                backgroundColor="theme.primary"
+                media={media.icon}
+              >
                 {feature.icon}
               </Center>
               <Text weight="bold" color="black" size={'lg'} media={{ mobile: { fontSize: 14, lineHeight: 14 } }}>

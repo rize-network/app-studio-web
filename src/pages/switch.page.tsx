@@ -10,7 +10,6 @@ import { ReadOnlySwitch } from 'src/components/Form/Switch/examples/ReadOnlyInpu
 import { ShadowSwitch } from 'src/components/Form/Switch/examples/Shadow';
 import { SizeSwitch } from 'src/components/Form/Switch/examples/SizeInput';
 
-
 export const SwitchPage = () => {
   return (
     <View>

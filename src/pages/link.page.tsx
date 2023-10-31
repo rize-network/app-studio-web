@@ -3,7 +3,6 @@ import { DefaultLink } from 'src/components/Link/examples/Default';
 import { ExternalLink } from 'src/components/Link/examples/IsExternal';
 import { UnderlineLink } from 'src/components/Link/examples/Underline';
 
-
 export const LinkPage = () => {
   return (
     <table className="table" cellSpacing={0}>

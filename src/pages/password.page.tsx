@@ -3,12 +3,8 @@ import { DefaultPassword } from 'src/components/Form/Password/example/Default';
 import { DisabledPassword } from 'src/components/Form/Password/example/DisabledInput';
 import { ErrorPassword } from 'src/components/Form/Password/example/ErrorInput';
 import { HelperTextPassword } from 'src/components/Form/Password/example/HelperText';
-import { CloseEyeSvg, OpenEyeSvg } from 'src/components/Svg';
 
 export const PasswordPage = () => {
-  const [show, setShow] = React.useState(false);
-
-  const handleClick = () => setShow(!show);
   return (
     <table className="table" cellSpacing={0}>
       <tr>
@@ -30,14 +26,13 @@ export const PasswordPage = () => {
         </tr>
         <tr>
           <td>Error</td>
-          
-          
+
           <td>
             <ErrorPassword />
           </td>
         </tr>
         <tr>
-          <td>HelperText</td>       
+          <td>HelperText</td>
           <td>
             <HelperTextPassword />
           </td>

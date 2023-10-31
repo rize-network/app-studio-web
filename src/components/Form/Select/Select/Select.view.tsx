@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Element } from 'app-studio';
-import {Typography} from 'app-studio';
+import { Typography } from 'app-studio';
 import { Horizontal, Text } from 'src/components';
 import { FieldContainer } from 'src/components/Layout/Input/FieldContainer/FieldContainer';
 import { FieldContent } from 'src/components/Layout/Input/FieldContent/FieldContent';
@@ -34,7 +34,7 @@ const Item: React.FC<ItemProps> = ({ isHovered, setIsHovered, option, size = 'md
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       fontSize={Typography.fontSizes[size]}
-      onPress={() => handleOptionClick(option)}
+      onClick={() => handleOptionClick(option)}
       backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
       {...props}
     >
@@ -177,12 +177,7 @@ const DropDown: React.FC<DropDownProps> = ({ size, styles = { dropDown: {} }, op
   );
 };
 
-export const MultiSelect: React.FC<MultiSelectProps> = ({
-  option,
-  size = 'md',
-  removeOption = (option: any) => {},
-  ...props
-}) => {
+export const MultiSelect: React.FC<MultiSelectProps> = ({ option, size = 'md', removeOption = () => {}, ...props }) => {
   const handleClick = () => removeOption(option);
 
   return (
@@ -193,7 +188,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       alignItems="center"
       fontSize={Typography.fontSizes[size]}
       backgroundColor="trueGray.300"
-      onPress={(event: any) => event.stopPropagation()}
+      onClick={(event: any) => event.stopPropagation()}
       {...props}
     >
       <Text size={size}>{option}</Text>
@@ -230,7 +225,7 @@ const SelectView: React.FC<SelectViewProps> = ({
     label: {},
     helperText: {},
   },
-  onChange = (event: any) => {},
+  onChange = () => {},
   setHide = () => {},
   setSelected = () => {},
   setIsHovered = () => {},
@@ -274,7 +269,7 @@ const SelectView: React.FC<SelectViewProps> = ({
       helperText={helperText}
       error={error}
       styles={styles}
-      onPress={isDisabled || isReadOnly ? () => {} : handleClick}
+      onClick={isDisabled || isReadOnly ? () => {} : handleClick}
     >
       <FieldContent
         label={label}

@@ -20,7 +20,11 @@ export const LoadingButtons = () => (
       </Loading>
     </Button>
     <Button isLoading isFilled>
-      <Loading type="quarter" textPosition="right" styles={{ loader: { color: 'color.black' }, text: { color: 'color.black' } }}>
+      <Loading
+        type="quarter"
+        textPosition="right"
+        styles={{ loader: { color: 'color.black' }, text: { color: 'color.black' } }}
+      >
         Submitting
       </Loading>
     </Button>

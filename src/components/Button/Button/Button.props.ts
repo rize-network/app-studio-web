@@ -51,7 +51,7 @@ export interface ButtonProps {
   /**
    * The event handler called when the button is clicked or pressed.
    */
-  onPress?: Function;
+  onClick?: Function;
   /**
    * Specifies the size of the button's text and padding.
    */

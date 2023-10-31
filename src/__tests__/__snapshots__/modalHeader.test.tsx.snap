@@ -2,13 +2,13 @@
 
 exports[`Modal Header renders with closing button color black 1`] = `
 <div
-  className="sc-beqWaB jQqoUh"
+  className="sc-aXZVg liCUIU"
   display="flex"
 >
   Modal Content
   <button
-    className="sc-beqWaB bmNAC"
-    color="white"
+    className="sc-aXZVg hLmiUW"
+    color="color.white"
     cursor="pointer"
     disabled={false}
     display="flex"
@@ -19,12 +19,11 @@ exports[`Modal Header renders with closing button color black 1`] = `
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    onPress={[Function]}
     role="button"
     width="fit-content"
   >
     <div
-      className="sc-beqWaB hLTXFy"
+      className="sc-aXZVg eXhFFb"
       display="flex"
       height="20px"
       width="20px"
@@ -50,7 +49,7 @@ exports[`Modal Header renders with closing button color black 1`] = `
         >
           <path
             d="M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z"
-            fill="#000000"
+            fill="black"
           />
         </g>
       </svg>
@@ -61,13 +60,13 @@ exports[`Modal Header renders with closing button color black 1`] = `
 
 exports[`Modal Header renders with closing button with size large 1`] = `
 <div
-  className="sc-beqWaB jQqoUh"
+  className="sc-aXZVg liCUIU"
   display="flex"
 >
   Modal Content
   <button
-    className="sc-beqWaB bmNAC"
-    color="white"
+    className="sc-aXZVg hLmiUW"
+    color="color.white"
     cursor="pointer"
     disabled={false}
     display="flex"
@@ -78,12 +77,11 @@ exports[`Modal Header renders with closing button with size large 1`] = `
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    onPress={[Function]}
     role="button"
     width="fit-content"
   >
     <div
-      className="sc-beqWaB hLTXFy"
+      className="sc-aXZVg eXhFFb"
       display="flex"
       height="20px"
       width="20px"
@@ -109,7 +107,7 @@ exports[`Modal Header renders with closing button with size large 1`] = `
         >
           <path
             d="M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z"
-            fill="rgba(249, 115, 22, 1)"
+            fill="theme.primary"
           />
         </g>
       </svg>
@@ -120,12 +118,12 @@ exports[`Modal Header renders with closing button with size large 1`] = `
 
 exports[`Modal Header renders with custom closing button 1`] = `
 <div
-  className="sc-beqWaB jQqoUh"
+  className="sc-aXZVg liCUIU"
   display="flex"
 >
   <button
-    className="sc-beqWaB bmNAC"
-    color="white"
+    className="sc-aXZVg hLmiUW"
+    color="color.white"
     cursor="pointer"
     disabled={false}
     display="flex"
@@ -136,12 +134,11 @@ exports[`Modal Header renders with custom closing button 1`] = `
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    onPress={[Function]}
     role="button"
     width="fit-content"
   >
     <div
-      className="sc-beqWaB hLTXFy"
+      className="sc-aXZVg eXhFFb"
       display="flex"
       height="20px"
       width="20px"
@@ -167,7 +164,7 @@ exports[`Modal Header renders with custom closing button 1`] = `
         >
           <path
             d="M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z"
-            fill="rgba(249, 115, 22, 1)"
+            fill="theme.primary"
           />
         </g>
       </svg>
@@ -179,7 +176,7 @@ exports[`Modal Header renders with custom closing button 1`] = `
 
 exports[`Modal Header renders without closing button 1`] = `
 <div
-  className="sc-beqWaB fpsRRl"
+  className="sc-aXZVg kZvKaE"
   display="flex"
 >
   Modal Content

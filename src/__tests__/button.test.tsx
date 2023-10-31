@@ -53,7 +53,7 @@ test('should render a button with backgroundColor theme.secondary', () => {
 
 test('button component calls onClick function when clicked', () => {
   const handleClick = jest.fn();
-  render(<Button onPress={handleClick}>Button</Button>);
+  render(<Button onClick={handleClick}>Button</Button>);
   const buttonElement = screen.getByRole('button');
   fireEvent.click(buttonElement);
   expect(handleClick).toHaveBeenCalledTimes(1);

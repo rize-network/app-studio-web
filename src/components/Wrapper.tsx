@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { ResponsiveProvider,ThemeProvider } from 'app-studio';
+import { ResponsiveProvider, ThemeProvider } from 'app-studio';
 import { RouterProvider } from 'src/providers/Router';
 
 interface WrapperProps {

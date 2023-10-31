@@ -40,7 +40,7 @@ export const FormikErrorInput = () => {
         }, 400);
       }}
     >
-      {({ errors, touched, handleChange, handleBlur, isSubmitting }) => (
+      {({ errors, touched, isSubmitting }) => (
         <Form>
           <Vertical gap={10}>
             <Field

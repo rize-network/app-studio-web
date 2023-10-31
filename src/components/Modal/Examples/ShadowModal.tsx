@@ -7,7 +7,7 @@ export const ShadowModal = () => {
   const [show, setShow] = useState(false);
   return (
     <>
-      <Button onPress={() => setShow(true)} isAuto>
+      <Button onClick={() => setShow(true)} isAuto>
         Shadow
       </Button>
 

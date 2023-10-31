@@ -2,12 +2,12 @@
 
 exports[`TextArea to match snapshot 1`] = `
 <div
-  className="sc-beqWaB cqcfJy"
+  className="sc-aXZVg eoQJKn"
   display="flex"
 >
   <div
-    className="sc-beqWaB dlvxjD"
-    color="primary"
+    className="sc-aXZVg giOKpl"
+    color="theme.primary"
     cursor="pointer"
     display="flex"
     filter="brightness(1)"
@@ -17,13 +17,13 @@ exports[`TextArea to match snapshot 1`] = `
     width="100%"
   >
     <div
-      className="sc-beqWaB ePTaBv"
+      className="sc-aXZVg btOgmi"
       display="flex"
       width="100%"
     >
       <textarea
         autoFocus={false}
-        className="sc-beqWaB gedPta"
+        className="sc-aXZVg hbdZAS"
         color="blueGray.700"
         cols={35}
         cursor="auto"
@@ -49,8 +49,8 @@ exports[`TextArea to match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-beqWaB hiliWR"
-    color="error"
+    className="sc-aXZVg jViPHz"
+    color="theme.error"
     fontSize={12}
     fontStyle="normal"
     fontWeight={400}

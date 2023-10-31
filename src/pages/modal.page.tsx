@@ -45,38 +45,35 @@ export const ModalPage = () => (
     </tr>
     <tr>
       <td>FullScreen</td>
-      
+
       <td>
         <FullScreenModal />
       </td>
     </tr>
     <tr>
       <td>Close Button</td>
-      
-      
+
       <td>
         <CloseButtonModal />
       </td>
     </tr>
     <tr>
       <td>Scroll</td>
-      
+
       <td>
         <ScrollModal />
       </td>
     </tr>
     <tr>
       <td>Variant</td>
-      
-      
+
       <td>
         <VariantModal />
       </td>
     </tr>
     <tr>
       <td>Shadow</td>
-      
-      
+
       <td>
         <ShadowModal />
       </td>

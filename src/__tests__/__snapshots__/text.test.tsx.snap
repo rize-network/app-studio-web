@@ -2,7 +2,7 @@
 
 exports[`should render a subscript text to match snapshot 1`] = `
 <div
-  className="sc-beqWaB cWgAjp"
+  className="sc-aXZVg ixQyqQ"
   fontSize={16}
   fontStyle="normal"
   fontWeight={400}
@@ -11,9 +11,9 @@ exports[`should render a subscript text to match snapshot 1`] = `
 >
   H
   <div
-    className="sc-beqWaB bpPsLX"
+    className="sc-aXZVg fsvipS"
     display="inline"
-    fontSize={12}
+    fontSize={16}
     fontStyle="normal"
     fontWeight={400}
     role="text"
@@ -29,7 +29,7 @@ exports[`should render a subscript text to match snapshot 1`] = `
 
 exports[`should render a superscript text to match snapshot 1`] = `
 <div
-  className="sc-beqWaB cWgAjp"
+  className="sc-aXZVg ixQyqQ"
   fontSize={16}
   fontStyle="normal"
   fontWeight={400}
@@ -38,9 +38,9 @@ exports[`should render a superscript text to match snapshot 1`] = `
 >
   H
   <div
-    className="sc-beqWaB bpPsLX"
+    className="sc-aXZVg fsvipS"
     display="inline"
-    fontSize={12}
+    fontSize={16}
     fontStyle="normal"
     fontWeight={400}
     role="text"
@@ -56,7 +56,7 @@ exports[`should render a superscript text to match snapshot 1`] = `
 
 exports[`should render one truncated text line to match snapshot 1`] = `
 <div
-  className="sc-beqWaB bxEwwx"
+  className="sc-aXZVg kpfSkE"
   fontSize={16}
   fontStyle="normal"
   fontWeight={400}
@@ -71,7 +71,7 @@ exports[`should render one truncated text line to match snapshot 1`] = `
 
 exports[`text to match snapshot 1`] = `
 <div
-  className="sc-beqWaB iYotTF"
+  className="sc-aXZVg cuGlWQ"
   fontSize={96}
   fontStyle="normal"
   fontWeight={700}

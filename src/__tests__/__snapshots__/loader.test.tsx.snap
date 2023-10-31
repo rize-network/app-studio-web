@@ -2,13 +2,13 @@
 
 exports[`Loading with an a size xl where width equals to 30px should match snapshot 1`] = `
 <div
-  className="sc-beqWaB cNwUwV"
+  className="sc-aXZVg iLkdJI"
   display="flex"
 >
   <svg
     fill="none"
     height="30px"
-    stroke="rgba(158, 158, 158, 1)"
+    stroke="theme.loading"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="2"
@@ -39,22 +39,22 @@ exports[`Loading with an a size xl where width equals to 30px should match snaps
     </g>
   </svg>
   <div
-    className="sc-beqWaB cJjaUv"
+    className="sc-aXZVg DfWLa"
   >
     Delete
   </div>
 </div>
 `;
 
-exports[`Loading with loader color equals to primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
+exports[`Loading with loader color equals to theme.primary should match snapshot 1`] = `
 <div
-  className="sc-beqWaB cNwUwV"
+  className="sc-aXZVg iLkdJI"
   display="flex"
 >
   <svg
     fill="none"
     height="22px"
-    stroke="rgba(249, 115, 22, 1)"
+    stroke="theme.primary"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="2"
@@ -85,22 +85,22 @@ exports[`Loading with loader color equals to primary(rgba(249, 115, 22, 1)) shou
     </g>
   </svg>
   <div
-    className="sc-beqWaB cJjaUv"
+    className="sc-aXZVg DfWLa"
   >
     Loading
   </div>
 </div>
 `;
 
-exports[`Loading with text color equals to primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
+exports[`Loading with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
 <div
-  className="sc-beqWaB cNwUwV"
+  className="sc-aXZVg iLkdJI"
   display="flex"
 >
   <svg
     fill="none"
     height="22px"
-    stroke="rgba(158, 158, 158, 1)"
+    stroke="theme.loading"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="2"
@@ -131,8 +131,8 @@ exports[`Loading with text color equals to primary(rgba(249, 115, 22, 1)) should
     </g>
   </svg>
   <div
-    className="sc-beqWaB dTaahr"
-    color="primary"
+    className="sc-aXZVg bdaFBF"
+    color="theme.primary"
   >
     Loading
   </div>
@@ -141,13 +141,13 @@ exports[`Loading with text color equals to primary(rgba(249, 115, 22, 1)) should
 
 exports[`Loading with text position bottom should match snapshot 1`] = `
 <div
-  className="sc-beqWaB frdrPx"
+  className="sc-aXZVg iMehcA"
   display="flex"
 >
   <svg
     fill="none"
     height="22px"
-    stroke="rgba(158, 158, 158, 1)"
+    stroke="theme.loading"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="2"
@@ -178,7 +178,7 @@ exports[`Loading with text position bottom should match snapshot 1`] = `
     </g>
   </svg>
   <div
-    className="sc-beqWaB cJjaUv"
+    className="sc-aXZVg DfWLa"
   >
     Loading
   </div>
