@@ -1,6 +1,6 @@
 import React from 'react';
-import { CountryPicker } from 'src/components';
-import { Vertical } from 'src/components/Layout/Vertical/examples';
+import { CountryPicker } from '../../..';
+import { Vertical } from '../../../Layout/Vertical/examples';
 
 import { Shape } from '../CountryPicker/CountryPicker.type';
 

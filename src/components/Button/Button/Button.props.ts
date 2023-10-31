@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { Shadow } from 'app-studio';
-import { Elevation } from 'src/utils/elevation';
+
+import { Elevation } from '../../../utils/elevation';
 
 import { IconPosition, Shape, Size, Variant } from './Button.type';
 

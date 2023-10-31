@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextFieldStyles } from 'src/components/Layout/configs/Input.type';
+import { TextFieldStyles } from '../../../../Layout/configs/Input.type';
 
 export interface ContainerProps {
   /**

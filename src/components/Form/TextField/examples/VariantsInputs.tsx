@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextField } from 'src/components';
-import { Vertical } from 'src/components/Layout/Vertical/examples';
+import { TextField } from '../../..';
+import { Vertical } from '../../../Layout/Vertical/examples';
 
 import { Variant } from '../TextField/TextField.type';
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Vertical } from 'src/components';
-import { Horizontal } from 'src/components';
-import { Justify } from 'src/components/Layout/Vertical/Vertical/Vertical.type';
-import { View } from 'src/components/Layout/View/View';
+import { Vertical } from '../../..';
+import { Horizontal } from '../../..';
+import { Justify } from '../../../Layout/Vertical/Vertical/Vertical.type';
+import { View } from '../../../Layout/View/View';
 
 export const JustifyVertical = () => {
   const size = {

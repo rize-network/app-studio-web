@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checkbox } from 'src/components';
+import { Checkbox } from '../../..';
 
 export const ShadowCheckbox = () => (
   <Checkbox

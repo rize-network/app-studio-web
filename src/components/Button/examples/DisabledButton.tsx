@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'src/components';
+import { Button } from '../..';
 
 export const DisabledButton = () => (
   <Button

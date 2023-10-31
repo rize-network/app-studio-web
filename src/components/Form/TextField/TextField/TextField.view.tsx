@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { Input, Typography, useTheme } from 'app-studio';
-import { FieldContainer } from 'src/components/Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from 'src/components/Layout/Input/FieldContent/FieldContent';
-import { FieldIcons } from 'src/components/Layout/Input/FieldIcons/FieldIcons';
-import { FieldLabel } from 'src/components/Layout/Input/FieldLabel/FieldLabel';
-import { FieldWrapper } from 'src/components/Layout/Input/FieldWrapper/FieldWrapper';
-import { CloseSvg } from 'src/components/Svg';
+import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
+import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
+import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
+import { CloseSvg } from '../../../Svg';
 
 import { TextFieldViewProps } from './TextField.props';
 

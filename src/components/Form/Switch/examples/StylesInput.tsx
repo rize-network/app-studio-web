@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from 'src/components';
-import { Horizontal } from 'src/components';
+import { Button } from '../../..';
+import { Horizontal } from '../../..';
 
 import { Switch } from '../Switch';
 

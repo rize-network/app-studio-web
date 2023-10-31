@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Element, Input, Typography, useTheme } from 'app-studio';
-import { FieldContainer, FieldContent, FieldIcons, FieldLabel, FieldWrapper } from 'src/components/Layout/Input';
-import { ArrowDownSvg } from 'src/components/Svg/ArrowDown';
-import { ArrowUpSvg } from 'src/components/Svg/ArrowUp';
+import { FieldContainer, FieldContent, FieldIcons, FieldLabel, FieldWrapper } from '../../../Layout/Input';
+import { ArrowDownSvg } from '../../../Svg/ArrowDown';
+import { ArrowUpSvg } from '../../../Svg/ArrowUp';
 
 import countryList from '../countries.json';
 

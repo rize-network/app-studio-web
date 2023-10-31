@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from 'src/components';
-import { Vertical } from 'src/components/Layout/Vertical/examples';
+import { Button } from '../../../Button/Button';
+import { Vertical } from '../../../Layout/Vertical/examples';
 
 import { Select } from '../Select';
 

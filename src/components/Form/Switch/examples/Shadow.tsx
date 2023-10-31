@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch } from 'src/components';
+import { Switch } from '../../..';
 
 export const ShadowSwitch = () => (
   <Switch

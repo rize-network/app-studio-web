@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditSvg } from 'src/components/Svg';
+import { EditSvg } from '../../../Svg';
 
 import { Checkbox } from '../Checkbox';
 

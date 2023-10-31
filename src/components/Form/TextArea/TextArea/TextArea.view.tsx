@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Element, Typography } from 'app-studio';
-import { FieldContainer, FieldContent, FieldLabel, FieldWrapper } from 'src/components/Layout/Input';
+import { FieldContainer, FieldContent, FieldLabel, FieldWrapper } from '../../../Layout/Input';
 
 import { TextAreaViewProps } from './TextArea.props';
 

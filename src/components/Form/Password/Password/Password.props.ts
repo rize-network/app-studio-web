@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextFieldProps } from 'src/components/Form/TextField/TextField/TextField.props';
+import { TextFieldProps } from '../../../Form/TextField/TextField/TextField.props';
 
 export interface PasswordProps extends TextFieldProps {
   /**

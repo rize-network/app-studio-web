@@ -1,6 +1,7 @@
 import React from 'react';
-import { Horizontal } from 'src/components';
-import { View } from 'src/components/Layout/View/View';
+
+import { View } from '../../../Layout/View/View';
+import { Horizontal } from '../../Horizontal/Horizontal';
 
 export const DefaultHorizontal = () => (
   <Horizontal>

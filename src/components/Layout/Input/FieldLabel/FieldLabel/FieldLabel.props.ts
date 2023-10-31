@@ -1,5 +1,5 @@
 import React from 'react';
-import { Size } from 'src/components/Layout/configs/Input.type';
+import { Size } from '../../../../Layout/configs/Input.type';
 
 export interface LabelProps {
   /**

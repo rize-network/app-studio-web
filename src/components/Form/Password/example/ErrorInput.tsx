@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import React from 'react';
-import { Button } from 'src/components';
-import { Password, TextField } from 'src/components';
-import { Vertical } from 'src/components';
-import { CloseEyeSvg } from 'src/components/Svg/CloseEye';
-import { OpenEyeSvg } from 'src/components/Svg/OpenEye';
+import { Button } from '../../..';
+import { Password, TextField } from '../../..';
+import { Vertical } from '../../..';
+import { CloseEyeSvg } from '../../../Svg/CloseEye';
+import { OpenEyeSvg } from '../../../Svg/OpenEye';
 
 export const ErrorPassword = () => {
   const initialValues = {

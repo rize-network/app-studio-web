@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Center, Vertical } from 'src/components';
-import { Horizontal } from 'src/components';
-import { Button } from 'src/components';
-import { View } from 'src/components/Layout/View/View';
-import { CloseSvg } from 'src/components/Svg';
+import { Center, Vertical } from '../..';
+import { Horizontal } from '../..';
+import { Button } from '../..';
+import { View } from '../../Layout/View/View';
+import { CloseSvg } from '../../Svg';
 import { useModalStore } from 'src/store/useModalStore';
 
 import { BodyProps, ContainerProps, FooterProps, HeaderProps, OverlayProps } from '../Modal/Modal.props';

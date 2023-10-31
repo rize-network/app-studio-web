@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
 import { Element } from 'app-studio';
 import { Typography } from 'app-studio';
-import { Horizontal, Text } from 'src/components';
-import { FieldContainer } from 'src/components/Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from 'src/components/Layout/Input/FieldContent/FieldContent';
-import { FieldIcons } from 'src/components/Layout/Input/FieldIcons/FieldIcons';
-import { FieldLabel } from 'src/components/Layout/Input/FieldLabel/FieldLabel';
-import { FieldWrapper } from 'src/components/Layout/Input/FieldWrapper/FieldWrapper';
-import { ArrowDownSvg, ArrowUpSvg, CloseSvg } from 'src/components/Svg';
+import { Horizontal, Text } from '../../..';
+import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
+import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
+import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
+import { ArrowDownSvg, ArrowUpSvg, CloseSvg } from '../../../Svg';
 
 import {
   DropDownProps,

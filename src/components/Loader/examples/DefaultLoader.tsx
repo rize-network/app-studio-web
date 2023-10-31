@@ -1,4 +1,4 @@
 import React from 'react';
-import { Loading } from 'src/components';
+import { Loading } from '../..';
 
 export const DefaultLoader = () => <Loading />;

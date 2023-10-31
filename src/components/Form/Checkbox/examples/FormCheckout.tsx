@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button } from 'src/components';
-import { Vertical } from 'src/components/Layout/Vertical/examples';
-import { View } from 'src/components/Layout/View/View';
+import { Button } from '../../..';
+import { Vertical } from '../../../Layout/Vertical/examples';
+import { View } from '../../../Layout/View/View';
 
 import { Checkbox } from '../Checkbox';
 

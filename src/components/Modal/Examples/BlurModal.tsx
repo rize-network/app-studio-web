@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import React from 'react';
-import { Button, Text } from 'src/components';
+import { Button, Text } from '../..';
 
 import Modal from '../Modal';
 

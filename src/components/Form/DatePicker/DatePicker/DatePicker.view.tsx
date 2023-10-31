@@ -1,9 +1,9 @@
 import React from 'react';
 import { Input, Typography } from 'app-studio';
-import { FieldContainer } from 'src/components/Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from 'src/components/Layout/Input/FieldContent/FieldContent';
-import { FieldLabel } from 'src/components/Layout/Input/FieldLabel/FieldLabel';
-import { FieldWrapper } from 'src/components/Layout/Input/FieldWrapper/FieldWrapper';
+import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
+import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
 
 import { DatePickerViewProps } from './DatePicker.props';
 

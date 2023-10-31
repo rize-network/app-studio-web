@@ -1,8 +1,8 @@
 import React from 'react';
 import { Typography } from 'app-studio';
-import { Center } from 'src/components';
-import { Label } from 'src/components/Form/Label/Label';
-import { CheckSvg, IndeterminateSvg } from 'src/components/Svg';
+import { Center } from '../../..';
+import { Label } from '../../../Form/Label/Label';
+import { CheckSvg, IndeterminateSvg } from '../../../Svg';
 
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes } from './Checkbox.style';

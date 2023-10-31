@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, View } from 'src/components';
+import { TextField, View } from '../../..';
 
 import { PasswordViewProps } from './Password.props';
 

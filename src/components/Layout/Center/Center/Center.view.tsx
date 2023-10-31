@@ -1,5 +1,6 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+
+import { View } from '../../View/View';
 
 import { CenterProps } from './Center.props';
 

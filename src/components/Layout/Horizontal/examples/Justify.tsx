@@ -1,7 +1,7 @@
 import React from 'react';
-import { Horizontal } from 'src/components';
-import { Justify } from 'src/components/Layout/configs/Input.type';
-import { View } from 'src/components/Layout/View/View';
+import { Horizontal } from '../../Horizontal/Horizontal';
+import { Justify } from '../../../Layout/configs/Input.type';
+import { View } from '../../../Layout/View/View';
 
 export const JustifyHorizontal = () => {
   const size = {

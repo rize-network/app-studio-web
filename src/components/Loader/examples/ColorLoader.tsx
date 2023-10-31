@@ -1,5 +1,5 @@
 import React from 'react';
-import { Horizontal, Loading } from 'src/components';
+import { Horizontal, Loading } from '../..';
 
 export const StyleLoader = () => (
   <Horizontal gap={15} wrap="nowrap">

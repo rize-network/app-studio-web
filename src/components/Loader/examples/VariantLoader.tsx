@@ -1,5 +1,5 @@
 import React from 'react';
-import { Horizontal, Loading } from 'src/components';
+import { Horizontal, Loading } from '../..';
 
 import { LoaderType } from '../Loader/Loader.type';
 

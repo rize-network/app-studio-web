@@ -1,6 +1,6 @@
 import React from 'react';
-import { CloseEyeSvg } from 'src/components/Svg/CloseEye';
-import { OpenEyeSvg } from 'src/components/Svg/OpenEye';
+import { CloseEyeSvg } from '../../../Svg/CloseEye';
+import { OpenEyeSvg } from '../../../Svg/OpenEye';
 
 import { Password } from '../Password';
 

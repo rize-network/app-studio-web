@@ -1,4 +1,4 @@
 import React from 'react';
-import { DatePicker } from 'src/components';
+import { DatePicker } from '../../..';
 
 export const ErrorDatePicker = () => <DatePicker id="error" name="error" error />;

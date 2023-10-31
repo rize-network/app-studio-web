@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileSvg } from 'src/components/Svg';
+import { ProfileSvg } from '../../../Svg';
 
 import { TextField } from '../TextField';
 

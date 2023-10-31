@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'src/components';
+import { Select } from '../../..';
 
 export const ShadowSelect = () => (
   <Select

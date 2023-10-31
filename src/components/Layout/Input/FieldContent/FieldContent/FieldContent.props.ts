@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Shape, Size, TextFieldStyles, Variant } from 'src/components/Layout/configs/Input.type';
+import { Shape, Size, TextFieldStyles, Variant } from '../../../../Layout/configs/Input.type';
 import { Elevation } from 'src/utils/elevation';
 import { Shadow } from 'app-studio';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Size, TextFieldStyles } from 'src/components/Layout/configs/Input.type';
+import { Size, TextFieldStyles } from '../../../../Layout/configs/Input.type';
 
 export interface FieldProps {
   /**

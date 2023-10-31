@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Vertical } from 'src/components';
+import { Text, Vertical } from '../..';
 
 import { Link } from '../Link';
 

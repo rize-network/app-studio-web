@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label } from 'src/components/Form/Label/Label';
+import { Label } from '../../../Form/Label/Label';
 
 import { LabelSizes } from '../../configs/Input.style';
 

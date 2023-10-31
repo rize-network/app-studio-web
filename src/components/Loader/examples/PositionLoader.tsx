@@ -1,5 +1,5 @@
 import React from 'react';
-import { Loading, Vertical } from 'src/components';
+import { Loading, Vertical } from '../..';
 
 export const PositionLoader = () => (
   <Vertical gap={15}>

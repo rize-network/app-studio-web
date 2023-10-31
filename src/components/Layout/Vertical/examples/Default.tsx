@@ -1,6 +1,6 @@
 import React from 'react';
-import { Vertical } from 'src/components';
-import { View } from 'src/components/Layout/View/View';
+import { Vertical } from '../../..';
+import { View } from '../../../Layout/View/View';
 
 export const DefaultVertical = () => (
   <Vertical>

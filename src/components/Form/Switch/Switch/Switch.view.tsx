@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'app-studio';
-import { Label } from 'src/components/Form/Label/Label';
-import { View } from 'src/components/Layout/View/View';
+import { Label } from '../../../Form/Label/Label';
+import { View } from '../../../Layout/View/View';
 
 import { SwitchViewProps } from './Switch.props';
 import { KnobSizes, SliderPadding, SliderSizes } from './Switch.style';

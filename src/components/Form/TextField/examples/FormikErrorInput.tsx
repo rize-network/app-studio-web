@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
-import { Button } from 'src/components';
-import { TextField } from 'src/components';
-import { Vertical } from 'src/components/Layout/Vertical/examples';
+import { Button } from '../../..';
+import { TextField } from '../../..';
+import { Vertical } from '../../../Layout/Vertical/examples';
 
 export const FormikErrorInput = () => {
   const initialValues = {

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import React from 'react';
-import { Button } from 'src/components';
-import { TextField } from 'src/components';
-import { Vertical } from 'src/components/Layout/Vertical/examples';
+import { Button } from '../../..';
+import { TextField } from '../../..';
+import { Vertical } from '../../../Layout/Vertical/examples';
 
 export const HelperTextInput = () => {
   const initialValues = {

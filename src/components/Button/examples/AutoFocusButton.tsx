@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Horizontal } from 'src/components';
+import { Button, Horizontal } from '../..';
 
 export const ExternalButton = () => (
   <Horizontal gap={10}>

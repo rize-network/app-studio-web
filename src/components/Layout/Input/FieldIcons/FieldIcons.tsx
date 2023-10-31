@@ -1,5 +1,5 @@
 import React from 'react';
-import { Center } from 'src/components';
+import { Center } from '../../..';
 
 import { FieldIconsProps } from './FieldIcons/FieldIcons.props';
 

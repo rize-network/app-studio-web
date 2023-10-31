@@ -1,4 +1,4 @@
 import React from 'react';
-import { DatePicker } from 'src/components';
+import { DatePicker } from '../../..';
 
 export const DefaultDatePicker = () => <DatePicker label="Select a date" />;

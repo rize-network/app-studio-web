@@ -1,5 +1,5 @@
 import React from 'react';
-import { DatePicker } from 'src/components';
+import { DatePicker } from '../../..';
 
 export const ShadowDatePicker = () => (
   <DatePicker

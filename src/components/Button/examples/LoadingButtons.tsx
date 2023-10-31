@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Loading, Vertical } from 'src/components';
+import { Button, Loading, Vertical } from '../..';
 
 export const LoadingButtons = () => (
   <Vertical gap={15}>

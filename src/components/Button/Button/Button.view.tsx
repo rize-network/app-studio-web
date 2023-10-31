@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import { Element } from 'app-studio';
-import { Link } from 'src/components';
 
+import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
 import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
 import { Variant } from './Button.type';
