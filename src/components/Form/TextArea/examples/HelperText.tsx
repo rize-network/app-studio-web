@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import React from 'react';
-import { Button, TextArea } from '../../..';
+
+import { Button } from '../../../Button/Button';
+import { TextArea } from '../../../Form/TextArea/TextArea';
+
 import { Vertical } from '../../../Layout/Vertical/examples';
 
 export const HelperTextArea = () => {

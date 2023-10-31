@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from '../../..';
+import { View } from '../../../Layout/View/View';
 
 import { HorizontalProps } from './Horizontal.props';
 

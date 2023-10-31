@@ -1,13 +1,13 @@
 ### Import
 
 ```tsx static
-import { Loading } from 'app-studio';
+import { Loader } from 'app-studio';
 ```
 
 ### Default
 
 ```tsx
-<Loading />
+<Loader />
 ```
 
 ### Sizes
@@ -19,7 +19,7 @@ import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
 <Horizontal wrap="nowrap">
   {['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'].map((size) => (
-    <Loading key={size} size={size} />
+    <Loader key={size} size={size} />
   ))}
 </Horizontal>;
 ```
@@ -33,7 +33,7 @@ import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
 <Horizontal justifyContent="space-evenly">
   {['default', 'quarter', 'dotted'].map((type) => (
-    <Loading key={type} type={type} />
+    <Loader key={type} type={type} />
   ))}
 </Horizontal>;
 ```
@@ -47,7 +47,7 @@ import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
 <Horizontal justifyContent="space-evenly">
   {['slow', 'normal', 'fast'].map((speed) => (
-    <Loading key={speed} speed={speed} />
+    <Loader key={speed} speed={speed} />
   ))}
 </Horizontal>;
 ```
@@ -60,12 +60,12 @@ import { Horizontal } from '../Layout/Horizontal/Horizontal';
 import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
 <Horizontal justifyContent="space-evenly">
-  <Loading loaderColor="black" textColor="black">
+  <Loader loaderColor="black" textColor="black">
     Submitting
-  </Loading>
-  <Loading loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
+  </Loader>
+  <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
     Submitting
-  </Loading>
+  </Loader>
 </Horizontal>;
 ```
 
@@ -77,18 +77,18 @@ import { Horizontal } from '../Layout/Horizontal/Horizontal';
 import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
 <Horizontal justifyContent="space-evenly">
-  <Loading loaderColor="black" textColor="black">
+  <Loader loaderColor="black" textColor="black">
     Submitting
-  </Loading>
-  <Loading loaderColor="theme.primary" textColor="theme.primary" textPosition="top">
+  </Loader>
+  <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="top">
     Submitting
-  </Loading>
-  <Loading loaderColor="theme.primary" textColor="theme.primary" textPosition="bottom">
+  </Loader>
+  <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="bottom">
     Submitting
-  </Loading>
-  <Loading loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
+  </Loader>
+  <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
     Submitting
-  </Loading>
+  </Loader>
 </Horizontal>;
 ```
 

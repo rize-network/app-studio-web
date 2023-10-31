@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button } from '../../..';
+import { Button } from '../../../Button/Button';
+
 import { Vertical } from '../../../Layout/Vertical/examples';
 
 import { CountryPicker } from '../CountryPicker';

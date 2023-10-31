@@ -1,5 +1,6 @@
 import React from 'react';
-import { Horizontal } from '../../..';
+import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+
 import { View } from '../../../Layout/View/View';
 
 import { Wrap } from '../../configs/Input.type';

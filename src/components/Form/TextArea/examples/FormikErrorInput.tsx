@@ -1,7 +1,9 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
-import { Button } from '../../..';
-import { TextArea } from '../../..';
+import { Button } from '../../../Button/Button';
+
+import { TextArea } from '../../../Form/TextArea/TextArea';
+
 import { Vertical } from '../../../Layout/Vertical/examples';
 
 export const FormikErrorArea = () => {

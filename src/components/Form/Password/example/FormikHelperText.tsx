@@ -1,8 +1,11 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
-import { Button } from '../../..';
-import { Password, TextField } from '../../..';
-import { Vertical } from '../../..';
+import { Button } from '../../../Button/Button';
+
+import { TextField } from '../../../Form/TextField/TextField';
+import { Password } from '../../../Form/Password/Password';
+
+import { Vertical } from '../../../Layout/Vertical/Vertical';
 import { CloseEyeSvg } from '../../../Svg/CloseEye';
 import { OpenEyeSvg } from '../../../Svg/OpenEye';
 

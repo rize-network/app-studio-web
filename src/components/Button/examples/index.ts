@@ -3,7 +3,7 @@ export * from '../../Button/examples/ColoredButtons';
 export * from '../../Button/examples/DefaultButton';
 export * from '../../Button/examples/DisabledButton';
 export * from '../../Button/examples/IconButtons';
-export * from '../../Button/examples/LoadingButtons';
+export * from '../../Button/examples/LoaderButtons';
 export * from '../../Button/examples/ShadowButton';
 export * from '../../Button/examples/SizeButtons';
 export * from '../../Button/examples/VariantButtons';

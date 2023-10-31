@@ -1,8 +1,8 @@
 import React from 'react';
-import { Loading } from '../..';
+import { Loader } from '../../Loader/Loader';
 
 export const TextLoader = () => (
-  <Loading textColor="theme.secondary" textPosition="left" loaderColor="theme.secondary">
-    Loading
-  </Loading>
+  <Loader textColor="theme.secondary" textPosition="left" loaderColor="theme.secondary">
+    Loader
+  </Loader>
 );

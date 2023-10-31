@@ -24,7 +24,7 @@ export interface ButtonProps {
   /**
    * Indicates whether the button is in a loading state.
    */
-  isLoading?: boolean;
+  isLoader?: boolean;
   /**
    * The icon component rendered within the button.
    */

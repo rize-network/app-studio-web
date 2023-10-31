@@ -1,7 +1,8 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
-import { Button } from '../../..';
-import { Horizontal } from '../../..';
+import { Button } from '../../../Button/Button';
+
+import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
 
 import { DatePicker } from '../DatePicker';
 

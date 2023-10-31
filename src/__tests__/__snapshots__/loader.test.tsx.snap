@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loading with an a size xl where width equals to 30px should match snapshot 1`] = `
+exports[`Loader with an a size xl where width equals to 30px should match snapshot 1`] = `
 <div
   className="sc-aXZVg iLkdJI"
   display="flex"
@@ -46,7 +46,7 @@ exports[`Loading with an a size xl where width equals to 30px should match snaps
 </div>
 `;
 
-exports[`Loading with loader color equals to theme.primary should match snapshot 1`] = `
+exports[`Loader with loader color equals to theme.primary should match snapshot 1`] = `
 <div
   className="sc-aXZVg iLkdJI"
   display="flex"
@@ -87,12 +87,12 @@ exports[`Loading with loader color equals to theme.primary should match snapshot
   <div
     className="sc-aXZVg DfWLa"
   >
-    Loading
+    Loader
   </div>
 </div>
 `;
 
-exports[`Loading with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
+exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
 <div
   className="sc-aXZVg iLkdJI"
   display="flex"
@@ -134,12 +134,12 @@ exports[`Loading with text color equals to theme.primary(rgba(249, 115, 22, 1)) 
     className="sc-aXZVg bdaFBF"
     color="theme.primary"
   >
-    Loading
+    Loader
   </div>
 </div>
 `;
 
-exports[`Loading with text position bottom should match snapshot 1`] = `
+exports[`Loader with text position bottom should match snapshot 1`] = `
 <div
   className="sc-aXZVg iMehcA"
   display="flex"
@@ -180,7 +180,7 @@ exports[`Loading with text position bottom should match snapshot 1`] = `
   <div
     className="sc-aXZVg DfWLa"
   >
-    Loading
+    Loader
   </div>
 </div>
 `;

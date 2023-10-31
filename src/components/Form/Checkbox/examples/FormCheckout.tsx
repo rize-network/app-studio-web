@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button } from '../../..';
+import { Button } from '../../../Button/Button';
+
 import { Vertical } from '../../../Layout/Vertical/examples';
 import { View } from '../../../Layout/View/View';
 

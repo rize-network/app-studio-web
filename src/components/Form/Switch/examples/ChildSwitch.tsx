@@ -1,6 +1,7 @@
 import React from 'react';
-import { Switch } from '../../..';
-import { Text } from '../../..';
+import { Switch } from '../../../Form/Switch/Switch';
+
+import { Text } from '../../../Text/Text';
 
 export const ChildSwitch = () => (
   <Switch

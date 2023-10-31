@@ -70,18 +70,18 @@ import { Center } from '../Layout/Center/Center';
 </Center>;
 ```
 
-### **Loading**
+### **Loader**
 
-"isLoading" and "loading" attributes display a loading animation, which indicates that an action is in progress.
+"isLoader" and "loading" attributes display a loading animation, which indicates that an action is in progress.
 
 ```tsx
-import { Loading } from '../Loader/Loader';
+import { Loader } from '../Loader/Loader';
 import { Text } from '../Text/Text';
 import { Center } from '../Layout/Center/Center';
 
 <Center width="100%">
-  <Button isLoading>
-    <Loading loaderColor="white" />
+  <Button isLoader>
+    <Loader loaderColor="white" />
     <Text size="sm">Submitting</Text>
   </Button>
 </Center>;

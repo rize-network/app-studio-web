@@ -1,7 +1,7 @@
 import React from 'react';
 import { Element } from 'app-studio';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import { Horizontal } from '../..';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { ExternalLinkSvg } from '../../Svg';
 
 import { LinkViewProps } from './Link.props';

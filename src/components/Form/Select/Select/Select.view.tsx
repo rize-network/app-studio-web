@@ -1,7 +1,10 @@
 import React, { useCallback } from 'react';
 import { Element } from 'app-studio';
 import { Typography } from 'app-studio';
-import { Horizontal, Text } from '../../..';
+
+import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Text } from '../../../Text/Text';
+
 import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';

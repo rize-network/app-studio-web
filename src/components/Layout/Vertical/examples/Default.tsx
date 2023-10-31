@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from '../../..';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
 import { View } from '../../../Layout/View/View';
 
 export const DefaultVertical = () => (

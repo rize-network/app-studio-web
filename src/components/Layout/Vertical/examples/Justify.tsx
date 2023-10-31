@@ -1,6 +1,7 @@
 import React from 'react';
-import { Vertical } from '../../..';
-import { Horizontal } from '../../..';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
+import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+
 import { Justify } from '../../../Layout/Vertical/Vertical/Vertical.type';
 import { View } from '../../../Layout/View/View';
 

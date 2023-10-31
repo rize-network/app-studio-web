@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextField, View } from '../../..';
+import { TextField } from '../../../Form/TextField/TextField';
+import { View } from '../../../Layout/View/View';
 
 import { PasswordViewProps } from './Password.props';
 

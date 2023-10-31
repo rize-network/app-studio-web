@@ -1,12 +1,13 @@
 import React from 'react';
-import { Horizontal, Loading } from '../..';
+import { Loader } from '../../Loader/Loader';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 import { LoaderType } from '../Loader/Loader.type';
 
 export const TypeLoader = () => (
   <Horizontal justifyContent="space-evenly">
     {['default', 'quarter', 'dotted'].map((type) => (
-      <Loading key={type} type={type as LoaderType} />
+      <Loader key={type} type={type as LoaderType} />
     ))}
   </Horizontal>
 );

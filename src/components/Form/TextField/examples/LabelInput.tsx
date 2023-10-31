@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button } from '../../..';
-import { Horizontal } from '../../..';
+import { Button } from '../../../Button/Button';
+
+import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
 
 import { TextField } from '../TextField';
 

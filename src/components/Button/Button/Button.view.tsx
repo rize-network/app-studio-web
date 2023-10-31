@@ -15,7 +15,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   isAuto = false,
   isFilled = false,
   isIconRounded = false,
-  isLoading = false,
+  isLoader = false,
   isDisabled = false,
   size = 'md',
   variant = 'filled',
@@ -25,7 +25,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   onClick = () => {},
   ...props
 }) => {
-  const isActive = !(isDisabled || isLoading);
+  const isActive = !(isDisabled || isLoader);
 
   const defaultNativeProps = { disabled: !isActive };
 
@@ -70,9 +70,9 @@ const ButtonView: React.FC<ButtonProps> = ({
 
   const content = (
     <>
-      {icon && iconPosition === 'left' && !isLoading && icon}
+      {icon && iconPosition === 'left' && !isLoader && icon}
       {children}
-      {icon && iconPosition === 'right' && !isLoading && icon}
+      {icon && iconPosition === 'right' && !isLoader && icon}
     </>
   );
 

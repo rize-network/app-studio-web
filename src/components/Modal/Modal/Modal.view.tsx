@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { Center, Vertical } from '../..';
-import { Horizontal } from '../..';
-import { Button } from '../..';
+import { Center } from '../../Layout/Center/Center';
+import { Vertical } from '../../Layout/Vertical/Vertical';
+
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Button } from '../../Button/Button';
 import { View } from '../../Layout/View/View';
 import { CloseSvg } from '../../Svg';
 import { useModalStore } from 'src/store/useModalStore';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
-import { Button } from '../../..';
+import { Button } from '../../../Button/Button';
+
 import { Vertical } from '../../../Layout/Vertical/examples';
 
 import { Label } from '../../Label/Label';

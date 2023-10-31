@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTheme } from 'app-studio';
-import { Center, View } from '../..';
+import { Center } from '../../Layout/Center/Center';
+import { View } from '../../Layout/View/View';
 
 import { DefaultSpinnerProps, DottedProps, LoaderProps, QuarterProps } from '../Loader/Loader.props';
 

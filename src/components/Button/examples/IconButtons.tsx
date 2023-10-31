@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, Center } from '../..';
+import { Button } from '../../Button/Button';
+import { Center } from '../../Layout/Center/Center';
+
 import { DustBinSvg } from '../../Svg';
 
 import { Shape } from '../Button/Button.type';

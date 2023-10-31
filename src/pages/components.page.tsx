@@ -108,7 +108,7 @@ export const ComponentsPage = () => {
         </List>
       </Vertical>
       <Vertical flex={4} padding="1rem 2rem" gap={10}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>Loader...</div>}>
           <SubTitle>{selected.name}</SubTitle>
           {selected.element}
         </Suspense>

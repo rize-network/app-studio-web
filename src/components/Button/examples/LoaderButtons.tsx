@@ -1,13 +1,15 @@
 import React from 'react';
-import { Button, Loading, Vertical } from '../..';
+import { Button } from '../Button';
+import { Loader } from '../../Loader/Loader';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
-export const LoadingButtons = () => (
+export const LoaderButtons = () => (
   <Vertical gap={15}>
-    <Button isLoading isFilled>
-      {<Loading />}
+    <Button isLoader isFilled>
+      {<Loader />}
     </Button>
-    <Button isLoading isFilled>
-      <Loading
+    <Button isLoader isFilled>
+      <Loader
         type="dotted"
         styles={{
           loader: { color: 'color.white' },
@@ -16,17 +18,17 @@ export const LoadingButtons = () => (
           },
         }}
       >
-        Loading
-      </Loading>
+        Loader
+      </Loader>
     </Button>
-    <Button isLoading isFilled>
-      <Loading
+    <Button isLoader isFilled>
+      <Loader
         type="quarter"
         textPosition="right"
         styles={{ loader: { color: 'color.black' }, text: { color: 'color.black' } }}
       >
         Submitting
-      </Loading>
+      </Loader>
     </Button>
   </Vertical>
 );

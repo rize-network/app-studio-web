@@ -1,13 +1,14 @@
 import React from 'react';
-import { Horizontal, Loading } from '../..';
+import { Loader } from '../../Loader/Loader';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 export const StyleLoader = () => (
   <Horizontal gap={15} wrap="nowrap">
-    <Loading loaderColor="black" textColor="black">
+    <Loader loaderColor="black" textColor="black">
       Submitting
-    </Loading>
-    <Loading loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
+    </Loader>
+    <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
       Submitting
-    </Loading>
+    </Loader>
   </Horizontal>
 );

@@ -5,7 +5,7 @@ import {
   ColoredButtons,
   DisabledButton,
   IconButtons,
-  LoadingButtons,
+  LoaderButtons,
   ShadowButton,
   VariantButtons,
 } from 'src/components/Button/examples';
@@ -49,9 +49,9 @@ export const ButtonPage = () => {
             </td>
           </tr>
           <tr>
-            <td>isLoading</td>
+            <td>isLoader</td>
             <td>
-              <LoadingButtons />
+              <LoaderButtons />
             </td>
           </tr>
           <tr>

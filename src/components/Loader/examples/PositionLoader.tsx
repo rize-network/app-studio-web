@@ -1,19 +1,20 @@
 import React from 'react';
-import { Loading, Vertical } from '../..';
+import { Loader } from '../../Loader/Loader';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 export const PositionLoader = () => (
   <Vertical gap={15}>
-    <Loading loaderColor="black" textColor="black">
+    <Loader loaderColor="black" textColor="black">
       Submitting
-    </Loading>
-    <Loading loaderColor="theme.primary" textColor="theme.primary" textPosition="top">
+    </Loader>
+    <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="top">
       Submitting
-    </Loading>
-    <Loading loaderColor="theme.primary" textColor="theme.primary" textPosition="bottom">
+    </Loader>
+    <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="bottom">
       Submitting
-    </Loading>
-    <Loading loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
+    </Loader>
+    <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
       Submitting
-    </Loading>
+    </Loader>
   </Vertical>
 );

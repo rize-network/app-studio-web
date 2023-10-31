@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Horizontal } from '../..';
+import { Button } from '../../Button/Button';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 import Modal from '../Modal';
 
