@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
@@ -9,7 +9,8 @@
   "dependencies": {
     "app-studio": "^0.1.16",
     "date-fns": "^2.30.0",
-    "formik": "^2.2.9"
+    "formik": "^2.2.9",
+    "react-helmet": "^6.1.0"
   },
   "engines": {
     "node": ">=10"

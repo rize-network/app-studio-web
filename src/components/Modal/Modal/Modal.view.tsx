@@ -6,7 +6,7 @@ import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Button } from '../../Button/Button';
 import { View } from '../../Layout/View/View';
 import { CloseSvg } from '../../Svg';
-import { useModalStore } from 'src/store/useModalStore';
+import { useModalStore } from '../../../store/useModalStore';
 
 import { BodyProps, ContainerProps, FooterProps, HeaderProps, OverlayProps } from '../Modal/Modal.props';
 import { ContainerShapes, OverlayAlignments } from '../Modal/Modal.style';
