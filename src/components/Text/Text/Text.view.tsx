@@ -21,6 +21,7 @@ const TextContent: React.FC<ContentProps> = ({ children, isSub, isSup }) => (
 const TruncateText: React.FC<TruncateTextProps> = ({ text, maxLines = 1 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [content, setContent] = useState(text);
+  
 
   useEffect(() => {
     let textContent = content;

@@ -1,13 +1,12 @@
 {
   "name": "@app-studio/web",
-  "version": "0.3.5",
+  "version": "0.3.7",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
     "dist"
   ],
   "dependencies": {
-    "app-studio": "^0.1.16",
     "date-fns": "^2.30.0",
     "formik": "^2.2.9",
     "react-helmet": "^6.1.0",
@@ -140,7 +139,8 @@
   },
   "peerDependencies": {
     "react": ">= 16",
-    "styled-components": ">= 5"
+    "styled-components": ">= 5",
+    "app-studio": ">= 0.1"
   },
   "size-limit": [
     {
