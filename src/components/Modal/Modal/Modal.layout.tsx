@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 
-import { hideModal, useModalStore } from './Modal.store';
+import { ModalState, hideModal, useModalStore } from './Modal.store';
 import { ModalOverlay } from './Modal.view';
 import { ModalLayoutProps } from './Modal.props';
 
 export const ModalLayout = ({ modals }: ModalLayoutProps) => {
-  const modalStore = useModalStore(({ modal, modalProps, overlayProps }) => ({
+  const modalStore = useModalStore(({ modal, modalProps, overlayProps }:ModalState) => ({
     modal,
     modalProps,
     overlayProps,

@@ -16,7 +16,7 @@ export const useModalStore = create<ModalState>((set) => ({
     if (modal) {
       modalProps.isVisible = true;
     }
-    set((state) => ({
+    set((state:ModalState) => ({
       ...state,
       modal,
       modalProps,
@@ -24,7 +24,7 @@ export const useModalStore = create<ModalState>((set) => ({
     }));
   },
   hide: () => {
-    set((state) => ({
+    set((state:ModalState) => ({
       ...state,
       modalProps: {
         isVisible: false,
