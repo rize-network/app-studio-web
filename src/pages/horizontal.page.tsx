@@ -1,5 +1,9 @@
 import React from 'react';
-import { JustifyHorizontal, ReversedHorizontal, WrapHorizontal } from 'src/components/Layout/Horizontal/examples';
+import {
+  JustifyHorizontal,
+  ReversedHorizontal,
+  WrapHorizontal,
+} from 'src/components/Layout/Horizontal/examples';
 
 export const HorizontalPage = () => {
   return (

@@ -7,7 +7,12 @@ export const ColorArea = () => {
   return (
     <Vertical gap={10}>
       <TextArea name="surname" label="Surname" colorScheme="theme.secondary" />
-      <TextArea name="name" label="Name" colorScheme="theme.primary" variant="outline" />
+      <TextArea
+        name="name"
+        label="Name"
+        colorScheme="theme.primary"
+        variant="outline"
+      />
     </Vertical>
   );
 };

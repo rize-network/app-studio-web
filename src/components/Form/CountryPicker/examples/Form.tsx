@@ -14,7 +14,11 @@ export const FormCountryPicker = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Vertical gap={10} width="100%">
-        <CountryPicker id="formItem" name="formItem" placeholder="CountryPicker an item..." />
+        <CountryPicker
+          id="formItem"
+          name="formItem"
+          placeholder="CountryPicker an item..."
+        />
         <Button type="submit" alignSelf="center">
           Submit
         </Button>

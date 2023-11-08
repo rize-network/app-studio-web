@@ -1,45 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '../../Button/Button';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 import Modal from '../Modal';
+import { hideModal, showModal } from '../Modal/Modal.store';
 
 export const CloseButtonModal = () => {
-  const [showWith, setShowWith] = useState(false);
-  const [showWithout, setShowWithout] = useState(false);
-
   return (
     <>
       <Horizontal gap={10}>
-        <Button onClick={() => setShowWith(true)} isAuto>
+        <Button
+          onClick={() => showModal('CloseButtonModal', { canClose: true })}
+          isAuto
+        >
           With Close Button
         </Button>
-        <Button onClick={() => setShowWithout(true)} isAuto>
+        <Button
+          onClick={() => showModal('CloseButtonModal', { canClose: false })}
+          isAuto
+        >
           Without Close Button
         </Button>
       </Horizontal>
-      {showWith && (
-        <Modal.Overlay isOpen={showWith} onClose={() => setShowWith(false)}>
-          <Modal.Container>
-            <Modal.Header buttonPosition="left" />
-            <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
-            <Modal.Footer>
-              <Button onClick={() => setShowWith(false)}>Cancel</Button>
-            </Modal.Footer>
-          </Modal.Container>
-        </Modal.Overlay>
-      )}
-      {showWithout && (
-        <Modal.Overlay isOpen={showWithout} onClose={() => setShowWithout(false)}>
-          <Modal.Container>
-            <Modal.Header buttonPosition="none">Without Close Button</Modal.Header>
-            <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
-            <Modal.Footer>
-              <Button onClick={() => setShowWithout(false)}>Cancel</Button>
-            </Modal.Footer>
-          </Modal.Container>
-        </Modal.Overlay>
-      )}
+      <Modal.Layout
+        modals={{
+          CloseButtonModal: ({ canClose = false }: any) => (
+            <Modal.Container>
+              {canClose && <Modal.Header buttonPosition="left" />}
+              {canClose && (
+                <Modal.Header buttonPosition="none">
+                  Without Close Button
+                </Modal.Header>
+              )}
+
+              <Modal.Body>
+                Cras mattis consectetur purus sit amet fermentum.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={hideModal}>Cancel</Button>
+              </Modal.Footer>
+            </Modal.Container>
+          ),
+        }}
+      />
     </>
   );
 };

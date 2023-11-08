@@ -3,7 +3,9 @@ import type { TextProps as TextAppProps } from 'app-studio';
 
 import { Headings, Size, TextWeights } from './Text.type';
 
-export interface TextProps extends Omit<TextAppProps, 'children' | 'style' | 'pointerEvents'>, CSSProperties {
+export interface TextProps
+  extends Omit<TextAppProps, 'children' | 'style' | 'pointerEvents'>,
+    CSSProperties {
   /**
    * The content of the text.
    */

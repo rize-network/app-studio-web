@@ -33,7 +33,11 @@ test('should render Link component with correct text', () => {
 test('should render Link component with correct class name', () => {
   render(
     <BrowserRouter>
-      <Link role="Link" href={'https://www.npmjs.com/package/app-studio'} className="link">
+      <Link
+        role="Link"
+        href={'https://www.npmjs.com/package/app-studio'}
+        className="link"
+      >
         External
       </Link>
     </BrowserRouter>
@@ -46,7 +50,10 @@ test('Link to have text decoration underline on hover should match snapshot', ()
   const tree = renderer
     .create(
       <BrowserRouter>
-        <Link href={'https://www.npmjs.com/package/app-studio'} underline="hover">
+        <Link
+          href={'https://www.npmjs.com/package/app-studio'}
+          underline="hover"
+        >
           Link
         </Link>
       </BrowserRouter>
@@ -60,7 +67,11 @@ test('Link to open external link in a new tab should match snapshot', () => {
     .create(
       <BrowserRouter>
         {' '}
-        <Link href={'https://www.npmjs.com/package/app-studio'} isExternal iconSize="sm">
+        <Link
+          href={'https://www.npmjs.com/package/app-studio'}
+          isExternal
+          iconSize="sm"
+        >
           External
         </Link>
       </BrowserRouter>

@@ -2,36 +2,69 @@
 
 exports[`Modal to match snapshot 1`] = `
 <div
-  className="sc-aXZVg fHXWtx"
+  alignItems="center"
+  className="sc-bdfCDU lgPMqH"
   display="flex"
   height="100%"
+  justifyContent="center"
+  left={0}
   onClick={[Function]}
+  position="fixed"
+  top={0}
   visibility="visible"
   width="100%"
+  zIndex={1000}
 >
   <div
-    className="sc-aXZVg iilYVW"
+    alignItems="center"
+    backdropFilter="blur(10px)"
+    backgroundColor="blackAlpha.500"
+    className="sc-bdfCDU UxOAg"
     cursor="pointer"
     display="flex"
     height="100vh"
+    isFullScreen={true}
+    left={0}
     onClick={[Function]}
+    position="absolute"
+    top={0}
     width="100vw"
+    zIndex={1000}
   >
     <div
-      className="sc-aXZVg brbHrj"
+      backgroundColor="white"
+      borderRadius={4}
+      boxShadow="none"
+      className="sc-bdfCDU cHJcWF"
       cursor="default"
       display="flex"
+      flexDirection="column"
+      flexWrap="nowrap"
       height="fit-content"
+      isClosePrevented={true}
+      justifyContent="flex-start"
       onClick={[Function]}
       overflow="hidden"
+      variant="sharp"
       width={600}
     >
       <div
-        className="sc-aXZVg liCUIU"
+        alignItems="center"
+        buttonSize="xl"
+        className="sc-bdfCDU eYHFiu"
         display="flex"
+        flexDirection="row"
+        flexWrap="wrap"
+        justifyContent="space-between"
+        paddingHorizontal={20}
+        paddingVertical={15}
       >
         <button
-          className="sc-aXZVg hLmiUW"
+          alignItems="center"
+          backgroundColor="transparent"
+          border="none"
+          borderRadius={4}
+          className="sc-bdfCDU hAwArg"
           color="color.white"
           cursor="pointer"
           disabled={false}
@@ -39,17 +72,28 @@ exports[`Modal to match snapshot 1`] = `
           filter="none"
           fontSize="md"
           fontWeight={600}
+          gap={8}
+          justifyContent="center"
           letterSpacing={1.25}
+          lineHeight={24}
+          margin={0}
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
+          padding={0}
+          paddingBottom={12}
+          paddingLeft={18}
+          paddingRight={18}
+          paddingTop={12}
           role="button"
           width="fit-content"
         >
           <div
-            className="sc-aXZVg eXhFFb"
+            alignItems="center"
+            className="sc-bdfCDU lmiYPB"
             display="flex"
             height="20px"
+            justifyContent="center"
             width="20px"
           >
             <svg
@@ -82,17 +126,35 @@ exports[`Modal to match snapshot 1`] = `
         Modal Container
       </div>
       <div
-        className="sc-aXZVg gmnNHz"
+        borderBottomWidth={2}
+        borderColor="rgba(250, 250, 250, 1)"
+        borderStyle="solid"
+        borderTopWidth={2}
+        className="sc-bdfCDU gMioEx"
         height="200px"
+        overflowY="auto"
+        paddingHorizontal={20}
+        paddingVertical={15}
       >
         Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum. Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.
       </div>
       <div
-        className="sc-aXZVg jyYTgo"
+        alignItems="center"
+        className="sc-bdfCDU erlawm"
         display="flex"
+        flexDirection="row"
+        flexWrap="wrap"
+        justifyContent="flex-end"
+        marginTop="auto"
+        paddingHorizontal={20}
+        paddingVertical={15}
       >
         <button
-          className="sc-aXZVg hYEFzJ"
+          alignItems="center"
+          backgroundColor="theme.primary"
+          border="none"
+          borderRadius={4}
+          className="sc-bdfCDU huRRnb"
           color="color.white"
           cursor="pointer"
           disabled={false}
@@ -100,10 +162,17 @@ exports[`Modal to match snapshot 1`] = `
           filter="brightness(1)"
           fontSize="md"
           fontWeight={600}
+          gap={8}
+          justifyContent="center"
           letterSpacing={1.25}
+          lineHeight={24}
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
+          paddingBottom={12}
+          paddingLeft={18}
+          paddingRight={18}
+          paddingTop={12}
           role="button"
           width={144}
         >

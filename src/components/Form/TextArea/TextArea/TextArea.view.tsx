@@ -1,6 +1,11 @@
 import React, { useMemo } from 'react';
 import { Element, Typography } from 'app-studio';
-import { FieldContainer, FieldContent, FieldLabel, FieldWrapper } from '../../../Layout/Input';
+import {
+  FieldContainer,
+  FieldContent,
+  FieldLabel,
+  FieldWrapper,
+} from '../../../Layout/Input';
 
 import { TextAreaViewProps } from './TextArea.props';
 
@@ -43,7 +48,9 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   const isWithLabel = !!(isFocused && label);
 
   useMemo(() => {
-    setHint(isFocused && !inputValue ? placeholder ?? '' : label ?? placeholder);
+    setHint(
+      isFocused && !inputValue ? placeholder ?? '' : label ?? placeholder
+    );
   }, [inputValue, isFocused, label, placeholder]);
 
   const fieldStyles = {
@@ -76,7 +83,9 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     setIsFocused(false);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement> | string) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement> | string
+  ) => {
     if (typeof event === 'string') {
       //for ios and android
       setInputValue(event);
@@ -110,7 +119,12 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
       >
         <FieldWrapper>
           {isWithLabel && (
-            <FieldLabel htmlFor={id} color={colorScheme} error={error} {...styles}>
+            <FieldLabel
+              htmlFor={id}
+              color={colorScheme}
+              error={error}
+              {...styles}
+            >
               {label}
             </FieldLabel>
           )}

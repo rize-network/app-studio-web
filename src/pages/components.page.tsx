@@ -14,6 +14,7 @@ const TextFieldPage = lazy(() => import('src/pages/input.page'));
 const LinkPage = lazy(() => import('src/pages/link.page'));
 const LoaderPage = lazy(() => import('src/pages/loader.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
+const MessagePage = lazy(() => import('src/pages/message.page'));
 const PasswordPage = lazy(() => import('src/pages/password.page'));
 const SelectPage = lazy(() => import('src/pages/select.page'));
 const SwitchPage = lazy(() => import('src/pages/switch.page'));
@@ -74,6 +75,7 @@ export const ComponentsPage = () => {
       { name: 'TextField', path: '/textfield', element: <TextFieldPage /> },
       { name: 'Text', path: '/text', element: <TextPage /> },
       { name: 'Vertical', path: '/vertical', element: <VerticalPage /> },
+      { name: 'Message', path: '/message', element: <MessagePage /> },
     ];
   }, []);
 
@@ -89,8 +91,12 @@ export const ComponentsPage = () => {
   };
 
   return (
-    <Horizontal height="100vh" wrap="nowrap">
-      <Vertical flex={1} boxShadow="0 2px 5px rgba(0, 0, 0, 0.2)" transition="box-shadow 0.3s ease-in-out">
+    <Horizontal height="100%" wrap="nowrap">
+      <Vertical
+        flex={1}
+        boxShadow="0 2px 5px rgba(0, 0, 0, 0.2)"
+        transition="box-shadow 0.3s ease-in-out"
+      >
         <Title onClick={() => navigate('/home')}>Navigation</Title>
         <List>
           {componentList.map((item, index) => (

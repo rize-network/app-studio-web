@@ -1,0 +1,509 @@
+### **Import**
+
+```tsx static
+import { Message } from 'app-studio';
+```
+
+### **Default**
+
+It uses the isOpen and onClose properties to display the message.
+
+```tsx
+import { Button } from '../Button/Button';
+import { useState } from 'react';
+
+const [show, setShow] = useState(false);
+
+<>
+  <Button onClick={() => setShow(true)} isAuto>
+    Open Message
+  </Button>
+  <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
+    <Message.Container>
+      <Message.Header>Title</Message.Header>
+      <Message.Body>
+        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+        nisl consectetur et.
+      </Message.Body>
+      <Message.Footer>
+        <Button onClick={() => setShow(false)}>Cancel</Button>
+      </Message.Footer>
+    </Message.Container>
+  </Message.Overlay>
+</>;
+```
+
+## **Message Overlay**
+
+It represents the overlay or backdrop that appears behind the message content when the message is displayed.
+
+### **FullScreen**
+
+“**is*fullScreen***” property changes the width and height of the message so that it fits the entire screen.
+
+```tsx
+import { Button } from '../Button/Button';
+import { useState } from 'react';
+
+const [show, setShow] = useState(false);
+
+<>
+  <Button onClick={() => setShow(true)} isAuto>
+    Full Screen
+  </Button>
+  <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
+    <Message.Container isFullScreen>
+      <Message.Header>Title</Message.Header>
+      <Message.Body>
+        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+        nisl consectetur et.
+      </Message.Body>
+      <Message.Footer>
+        <Button onClick={() => setShow(false)}>Cancel</Button>
+      </Message.Footer>
+    </Message.Container>
+  </Message.Overlay>
+</>;
+```
+
+### **Position**
+
+“**_position_**” places the message in the specified direction. It has a default positioning of “center”.
+
+```tsx
+import { useState } from 'react';
+import { Button } from '../Button/Button';
+import { Horizontal } from '../Layout/Horizontal/Horizontal';
+
+const [showTop, setShowTop] = useState(false);
+const [showBottom, setShowBottom] = useState(false);
+const [showRight, setShowRight] = useState(false);
+const [showLeft, setShowLeft] = useState(false);
+const [showCenter, setShowCenter] = useState(false);
+
+<>
+  <Horizontal gap={10} wrap="nowrap">
+    <Button onClick={() => setShowTop(true)}>Top</Button>
+    <Button onClick={() => setShowBottom(true)}>Bottom</Button>
+    <Button onClick={() => setShowRight(true)}>Right</Button>
+    <Button onClick={() => setShowLeft(true)}>Left</Button>
+    <Button onClick={() => setShowCenter(true)}>Center</Button>
+  </Horizontal>
+
+  {showBottom && (
+    <Message.Overlay isOpen={showBottom} onClose={() => setShowBottom(false)} position="bottom">
+      <Message.Container>
+        <Message.Header>Title</Message.Header>
+        <Message.Body>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+          nisl consectetur et.
+        </Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShowBottom(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+  {showTop && (
+    <Message.Overlay isOpen={showTop} onClose={() => setShowTop(false)} position="top">
+      <Message.Container>
+        <Message.Header>Title</Message.Header>
+        <Message.Body>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+          nisl consectetur et.
+        </Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShowTop(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+  {showLeft && (
+    <Message.Overlay isOpen={showLeft} onClose={() => setShowLeft(false)} position="left">
+      <Message.Container>
+        <Message.Header>Title</Message.Header>
+        <Message.Body>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+          nisl consectetur et.
+        </Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShowLeft(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+  {showRight && (
+    <Message.Overlay isOpen={showRight} onClose={() => setShowRight(false)} position="right">
+      <Message.Container>
+        <Message.Header>Title</Message.Header>
+        <Message.Body>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+          nisl consectetur et.
+        </Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShowRight(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+  {showCenter && (
+    <Message.Overlay isOpen={showCenter} onClose={() => setShowCenter(false)} position="center">
+      <Message.Container>
+        <Message.Header>Title</Message.Header>
+        <Message.Body>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+          nisl consectetur et.
+        </Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShowCenter(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+</>;
+```
+
+### **Blur**
+
+“**_blur_**” adds a blur effect on the message overlay.
+
+```tsx
+import { useState } from 'react';
+import { Button } from '../Button/Button';
+
+const [show, setShow] = useState(false);
+
+<>
+  <Button onClick={() => setShow(true)}>Blur Overlay</Button>
+  <Message.Overlay isOpen={show} onClose={() => setShow(false)} blur={10}>
+    <Message.Container>
+      <Message.Header>Title</Message.Header>
+      <Message.Body>
+        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+        nisl consectetur et.
+      </Message.Body>
+      <Message.Footer>
+        <Button onClick={() => setShow(false)}>Cancel</Button>
+      </Message.Footer>
+    </Message.Container>
+  </Message.Overlay>
+</>;
+```
+
+### **Prevent Close**
+
+“**_isClosePrevented_**” prevents the user from closing the message when clicking outside of it.
+
+```tsx
+import { useState } from 'react';
+import { Button } from '../Button/Button';
+
+const [show, setShow] = useState(false);
+
+<>
+  <Button onClick={() => setShow(true)} isAuto>
+    Prevent Close on Overlay
+  </Button>
+  <Message.Overlay isOpen={show} onClose={() => setShow(false)} isClosePrevented>
+    <Message.Container>
+      <Message.Header>Title</Message.Header>
+      <Message.Body>
+        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
+        nisl consectetur et.
+      </Message.Body>
+      <Message.Footer>
+        <Button onClick={() => setShow(false)}>Cancel</Button>
+      </Message.Footer>
+    </Message.Container>
+  </Message.Overlay>
+</>;
+```
+
+## **Message Container**
+
+It represents the main container or wrapper that holds all the content and components of a message.
+
+### **Shapes**
+
+“**_shape_**” gives a sharp or rounded edges to the message container.
+
+```tsx
+import { useState } from 'react';
+import { Button } from '../Button/Button';
+import { Text } from '../Text/Text';
+import { Horizontal } from '../Layout/Horizontal/Horizontal';
+
+const [showSharp, setShowSharp] = useState(false);
+const [showRounded, setShowRounded] = useState(false);
+
+<>
+  <Horizontal gap={10}>
+    <Button onClick={() => setShowSharp(true)}>Sharp</Button>
+    <Button onClick={() => setShowRounded(true)}>Rounded</Button>
+  </Horizontal>
+
+  {showSharp && (
+    <Message.Overlay isOpen={showSharp} onClose={() => setShowSharp(false)}>
+      <Message.Container variant="sharp">
+        <Message.Body>
+          <Text isTruncated maxLines={2}>
+            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
+            scelerisque nisl consectetur et.
+          </Text>
+        </Message.Body>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+  {showRounded && (
+    <Message.Overlay isOpen={showRounded} onClose={() => setShowRounded(false)}>
+      <Message.Container variant="rounded">
+        <Message.Body>
+          <Text isTruncated maxLines={2}>
+            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
+            scelerisque nisl consectetur et.
+          </Text>
+        </Message.Body>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+</>;
+```
+
+### **Shadow**
+
+“**_shadow_**” adds a shadow effect on the message container.
+
+```tsx
+import { useState } from 'react';
+import { Button } from '../Button/Button';
+import { Text } from '../Text/Text';
+
+const [show, setShow] = useState(false);
+
+<>
+  <Button onClick={() => setShow(true)}>Shadow</Button>
+
+  {show && (
+    <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
+      <Message.Container shadow={{ boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.6)' }}>
+        <Message.Body>
+          <Text isTruncated maxLines={2}>
+            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
+            scelerisque nisl consectetur et.
+          </Text>
+        </Message.Body>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+</>;
+```
+
+## **Message Header**
+
+It represents the header section of a message, which typically contains a title or heading and optionally other elements such as a close button or additional controls.
+
+### **Close Button Alignment**
+
+“**_buttonPosition_**” places the closing button found in the header message in the specified direction. It has a default position of “**right**”.
+
+```tsx
+import { useState } from 'react';
+import { Button } from '../Button/Button';
+import { Horizontal } from '../Layout/Horizontal/Horizontal';
+
+const [showRight, setShowRight] = useState(false);
+const [showWithout, setShowWithout] = useState(false);
+const [showLeft, setShowLeft] = useState(false);
+
+<>
+  <Horizontal gap={10}>
+    <Button onClick={() => setShowRight(true)} isAuto>
+      Close button on the right
+    </Button>
+    <Button onClick={() => setShowWithout(true)} isAuto>
+      Without Close Button
+    </Button>
+    <Button onClick={() => setShowLeft(true)} isAuto>
+      Without Close left
+    </Button>
+  </Horizontal>
+  {showRight && (
+    <Message.Overlay isOpen={showRight} onClose={() => setShowRight(false)}>
+      <Message.Container>
+        <Message.Header> Close Button</Message.Header>
+        <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShowRight(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+  {showWithout && (
+    <Message.Overlay isOpen={showWithout} onClose={() => setShowWithout(false)}>
+      <Message.Container>
+        <Message.Header buttonPosition="none"> Close Button</Message.Header>
+        <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShowWithout(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+  {showLeft && (
+    <Message.Overlay isOpen={showLeft} onClose={() => setShowLeft(false)}>
+      <Message.Container>
+        <Message.Header buttonPosition="left">Close Button</Message.Header>
+        <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShowLeft(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+</>;
+```
+
+## **Message Body**
+
+It represents the main content area of a message, where the primary information or user interaction elements are displayed.
+
+### **LargeContent**
+
+A vertical scroll is displayed, if the content height exceed the body height.
+
+```tsx
+import { useState } from 'react';
+import { Button } from '../Button/Button';
+import { Text } from '../Text/Text';
+
+const [show, setShow] = useState(false);
+
+<>
+  <Button onClick={() => setShow(true)}>Scroll</Button>
+  {show && (
+    <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
+      <Message.Container>
+        <Message.Header buttonPosition="none">
+          <Text size="lg" weight="semibold">
+            Title
+          </Text>
+        </Message.Header>
+        <Message.Body height="200px">
+          Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
+          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
+          purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit
+          amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras
+          mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
+          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
+          purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit
+          amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet
+          fermentum.Cras mattis consectetur purus sit amet fermentum.
+        </Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShow(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+</>;
+```
+
+## **Message Footer**
+
+It represents the footer section of a message, which typically contains buttons or controls for actions related to the message's content.
+
+```tsx
+import { useState } from 'react';
+import { Button } from '../Button/Button';
+import { Text } from '../Text/Text';
+
+const [show, setShow] = useState(false);
+
+<>
+  <Button onClick={() => setShow(true)}>Footer</Button>
+  {show && (
+    <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
+      <Message.Container>
+        <Message.Header buttonPosition="none">
+          <Text size="lg" weight="semibold">
+            Title
+          </Text>
+        </Message.Header>
+        <Message.Body height="200px">
+          Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
+          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
+          purus sit amet fermentum.
+        </Message.Body>
+        <Message.Footer>
+          <Button onClick={() => setShow(false)}>Cancel</Button>
+        </Message.Footer>
+      </Message.Container>
+    </Message.Overlay>
+  )}
+</>;
+```
+
+## **Types**
+
+```tsx static
+type Position = 'top' | 'left' | 'right' | 'bottom' | 'center';
+```
+
+```tsx static
+type Shape = 'sharp' | 'rounded';
+```
+
+```tsx static
+type CloseButtonPosition = 'left' | 'right' | 'none';
+```
+
+```tsx static
+type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+```
+
+## **Default Styles**
+
+#### **OverlayAlignments**
+
+```tsx static
+const OverlayAlignments: Record<Position, CSSProperties> = {
+  center: { justifyContent: 'center', alignItems: 'center' },
+  top: { justifyContent: 'center' },
+  right: { justifyContent: 'flex-end', alignItems: 'center' },
+  bottom: { justifyContent: 'center', alignItems: 'flex-end' },
+  left: { alignItems: 'center' },
+};
+```
+
+#### **ContainerShapes**
+
+```tsx static
+const ContainerShapes: Record<Shape, CSSProperties> = {
+  sharp: { borderRadius: 0 },
+  rounded: { borderRadius: 4 },
+};
+```
+
+#### **HeaderIconSizes**
+
+```tsx static
+const HeaderIconSizes: Record<Size, number> = {
+  xs: 12,
+  sm: 16,
+  md: 20,
+  lg: 24,
+  xl: 28,
+};
+```

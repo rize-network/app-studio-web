@@ -16,3 +16,4 @@ export * from './Link/Link';
 export * from './Loader/Loader';
 export * from './Modal/Modal';
 export * from './Text/Text';
+export * from './File/File';

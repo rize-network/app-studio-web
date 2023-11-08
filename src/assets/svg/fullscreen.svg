@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Navigation/fullscreen</title>
+    <defs>
+        <path d="M6.99999997,14 L4.99999997,14 L4.99999997,19 L9.99999997,19 L9.99999997,17 L6.99999997,17 L6.99999997,14 L6.99999997,14 Z M4.99999997,9.99999997 L6.99999997,9.99999997 L6.99999997,6.99999997 L9.99999997,6.99999997 L9.99999997,4.99999997 L4.99999997,4.99999997 L4.99999997,9.99999997 L4.99999997,9.99999997 Z M17,17 L14,17 L14,19 L19,19 L19,14 L17,14 L17,17 L17,17 Z M14,4.99999997 L14,6.99999997 L17,6.99999997 L17,9.99999997 L19,9.99999997 L19,4.99999997 L14,4.99999997 L14,4.99999997 Z" id="path-1"></path>
+    </defs>
+    <g id="Icons/Navigation/fullscreen" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Base" points="-5.00000112e-08 -4.9999926e-08 24 -4.9999926e-08 24 24.0000001 -5.00000112e-08 24.0000001"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Icon" fill-rule="nonzero"></g>
+        <rect id="↳-🎨-Color" fill="#9E9E9E" mask="url(#mask-2)" x="0" y="0" width="24" height="24"></rect>
+    </g>
+</svg>

@@ -12,10 +12,22 @@ export const JustifyVertical = () => {
   };
   return (
     <Horizontal gap={20} wrap="nowrap" justify="space-between">
-      {['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'].map((justify) => (
+      {[
+        'flex-start',
+        'flex-end',
+        'center',
+        'space-between',
+        'space-around',
+        'space-evenly',
+      ].map((justify) => (
         <Vertical flex={1} key={justify}>
           {justify}
-          <Vertical justify={justify as Justify} gap={5} height={300} backgroundColor="lightgray">
+          <Vertical
+            justify={justify as Justify}
+            gap={5}
+            height={300}
+            backgroundColor="lightgray"
+          >
             <View backgroundColor="theme.primary" {...size} />
             <View backgroundColor="theme.secondary" {...size} />
             <View backgroundColor="theme.warning" {...size} />

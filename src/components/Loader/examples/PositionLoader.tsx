@@ -7,13 +7,25 @@ export const PositionLoader = () => (
     <Loader loaderColor="black" textColor="black">
       Submitting
     </Loader>
-    <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="top">
+    <Loader
+      loaderColor="theme.primary"
+      textColor="theme.primary"
+      textPosition="top"
+    >
       Submitting
     </Loader>
-    <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="bottom">
+    <Loader
+      loaderColor="theme.primary"
+      textColor="theme.primary"
+      textPosition="bottom"
+    >
       Submitting
     </Loader>
-    <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
+    <Loader
+      loaderColor="theme.primary"
+      textColor="theme.primary"
+      textPosition="left"
+    >
       Submitting
     </Loader>
   </Vertical>

@@ -2,7 +2,11 @@
 
 exports[`Button will a pillShaped shape to match snapshot 1`] = `
 <button
-  className="sc-aXZVg dJQJx"
+  alignItems="center"
+  backgroundColor="theme.primary"
+  border="none"
+  borderRadius={24}
+  className="sc-bdfCDU btHyRL"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -10,10 +14,17 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
   filter="brightness(1)"
   fontSize="md"
   fontWeight={600}
+  gap={8}
+  justifyContent="center"
   letterSpacing={1.25}
+  lineHeight={24}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
+  paddingBottom={12}
+  paddingLeft={18}
+  paddingRight={18}
+  paddingTop={12}
   role="button"
   width="fit-content"
 >
@@ -23,7 +34,11 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
 
 exports[`Button with an icon on the left to match snapshot 1`] = `
 <button
-  className="sc-aXZVg eaFbqZ"
+  alignItems="center"
+  backgroundColor="theme.secondary"
+  border="none"
+  borderRadius={24}
+  className="sc-bdfCDU jUCVZL"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -31,17 +46,26 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
   filter="brightness(1)"
   fontSize="md"
   fontWeight={600}
+  gap={8}
+  justifyContent="center"
   letterSpacing={1.25}
+  lineHeight={24}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
+  paddingBottom={12}
+  paddingLeft={18}
+  paddingRight={18}
+  paddingTop={12}
   role="button"
   width={144}
 >
   <div
-    className="sc-aXZVg gClNYL"
+    alignItems="center"
+    className="sc-bdfCDU loJUqV"
     display="flex"
     height="24px"
+    justifyContent="center"
     width="24px"
   >
     <svg
@@ -77,7 +101,11 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
 
 exports[`Button with an icon on the right to match snapshot 1`] = `
 <button
-  className="sc-aXZVg eaFbqZ"
+  alignItems="center"
+  backgroundColor="theme.secondary"
+  border="none"
+  borderRadius={24}
+  className="sc-bdfCDU jUCVZL"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -85,18 +113,27 @@ exports[`Button with an icon on the right to match snapshot 1`] = `
   filter="brightness(1)"
   fontSize="md"
   fontWeight={600}
+  gap={8}
+  justifyContent="center"
   letterSpacing={1.25}
+  lineHeight={24}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
+  paddingBottom={12}
+  paddingLeft={18}
+  paddingRight={18}
+  paddingTop={12}
   role="button"
   width={144}
 >
   Delete
   <div
-    className="sc-aXZVg gClNYL"
+    alignItems="center"
+    className="sc-bdfCDU loJUqV"
     display="flex"
     height="24px"
+    justifyContent="center"
     width="24px"
   >
     <svg

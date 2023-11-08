@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Navigation/close</title>
+    <defs>
+        <polygon id="path-1" points="19 6.40999998 17.59 4.99999997 12 10.59 6.40999998 4.99999997 4.99999997 6.40999998 10.59 12 4.99999997 17.59 6.40999998 19 12 13.41 17.59 19 19 17.59 13.41 12"></polygon>
+    </defs>
+    <g id="Icons/Navigation/close" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Base" points="-5.00000112e-08 -5.00000397e-08 24 -5.00000397e-08 24 24 -5.00000112e-08 24"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Icon"></g>
+        <rect id="↳-🎨-Color" fill="#9E9E9E" mask="url(#mask-2)" x="0" y="0" width="24" height="24"></rect>
+    </g>
+</svg>

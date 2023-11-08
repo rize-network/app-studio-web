@@ -52,7 +52,9 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   const isWithLabel = !!(isFocused && label);
 
   useMemo(() => {
-    setHint(isFocused && !inputValue ? placeholder ?? '' : label ?? placeholder);
+    setHint(
+      isFocused && !inputValue ? placeholder ?? '' : label ?? placeholder
+    );
   }, [inputValue, isFocused, label, placeholder]);
 
   const fieldStyles = {
@@ -86,7 +88,9 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     setIsFocused(false);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement> | string) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement> | string
+  ) => {
     if (typeof event === 'string') {
       //for ios and android
       setInputValue(event);
@@ -133,7 +137,12 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         {leftChild}
         <FieldWrapper>
           {isWithLabel && (
-            <FieldLabel htmlFor={id} color={colorScheme} error={error} {...styles}>
+            <FieldLabel
+              htmlFor={id}
+              color={colorScheme}
+              error={error}
+              {...styles}
+            >
               {label}
             </FieldLabel>
           )}
@@ -158,7 +167,11 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
           <FieldIcons>
             {rightChild && <>{rightChild}</>}
             {isClearable && inputValue && !isReadOnly && !isDisabled && (
-              <CloseSvg size={Typography.fontSizes[size]} color={IconColor} onClick={handleClear} />
+              <CloseSvg
+                size={Typography.fontSizes[size]}
+                color={IconColor}
+                onClick={handleClear}
+              />
             )}
           </FieldIcons>
         )}

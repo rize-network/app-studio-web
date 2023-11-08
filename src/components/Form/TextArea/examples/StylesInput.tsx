@@ -19,7 +19,13 @@ export const StyledArea = () => {
           label="Surname"
           variant="unStyled"
           styles={{
-            box: { borderRadius: 8, padding: 5, borderColor: 'theme.primary', borderStyle: 'solid', borderWidth: 1 },
+            box: {
+              borderRadius: 8,
+              padding: 5,
+              borderColor: 'theme.primary',
+              borderStyle: 'solid',
+              borderWidth: 1,
+            },
             field: { color: 'theme.primary', padding: 0 },
             label: { color: 'theme.primary' },
           }}

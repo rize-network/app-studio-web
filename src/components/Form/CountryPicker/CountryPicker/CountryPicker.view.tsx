@@ -1,20 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Element, Input, Typography, useTheme } from 'app-studio';
-import { FieldContainer, FieldContent, FieldIcons, FieldLabel, FieldWrapper } from '../../../Layout/Input';
+import {
+  FieldContainer,
+  FieldContent,
+  FieldIcons,
+  FieldLabel,
+  FieldWrapper,
+} from '../../../Layout/Input';
 import { ArrowDownSvg } from '../../../Svg/ArrowDown';
 import { ArrowUpSvg } from '../../../Svg/ArrowUp';
 
 import countryList from '../countries.json';
 
-import { CountryPickerViewProps, DropDownItemProps, DropDownProps } from './CountryPicker.props';
+import {
+  CountryPickerViewProps,
+  DropDownItemProps,
+  DropDownProps,
+} from './CountryPicker.props';
 import { IconSizes } from './CountryPicker.style';
 import { Country } from './CountryPicker.type';
 
-const CountryList: React.FC<DropDownProps> = (props) => <Element as="ul" {...props} />;
+const CountryList: React.FC<DropDownProps> = (props) => (
+  <Element as="ul" {...props} />
+);
 
-const CountrySelector: React.FC<any> = (props) => <Input type="country" {...props} />;
+const CountrySelector: React.FC<any> = (props) => (
+  <Input type="country" {...props} />
+);
 
-const CountryItem: React.FC<DropDownItemProps> = (props) => <Element as="li" {...props} />;
+const CountryItem: React.FC<DropDownItemProps> = (props) => (
+  <Element as="li" {...props} />
+);
 
 export const DropDownItem: React.FC<DropDownItemProps> = ({
   option,
@@ -177,7 +193,12 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   };
 
   return (
-    <FieldContainer helperText={helperText} error={error} styles={styles} onClick={handleClick}>
+    <FieldContainer
+      helperText={helperText}
+      error={error}
+      styles={styles}
+      onClick={handleClick}
+    >
       <FieldContent
         label={label}
         size={size}
@@ -199,7 +220,12 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
       >
         <FieldWrapper>
           {isWithLabel && (
-            <FieldLabel htmlFor={id} color={colorScheme} error={error} {...styles}>
+            <FieldLabel
+              htmlFor={id}
+              color={colorScheme}
+              error={error}
+              {...styles}
+            >
               {label}
             </FieldLabel>
           )}
@@ -220,13 +246,28 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         </FieldWrapper>
         <FieldIcons>
           {hide ? (
-            <ArrowDownSvg size={IconSizes[size]} color={IconColor} style={styles['icon']} />
+            <ArrowDownSvg
+              size={IconSizes[size]}
+              color={IconColor}
+              style={styles['icon']}
+            />
           ) : (
-            <ArrowUpSvg size={IconSizes[size]} color={IconColor} style={styles['icon']} />
+            <ArrowUpSvg
+              size={IconSizes[size]}
+              color={IconColor}
+              style={styles['icon']}
+            />
           )}
         </FieldIcons>
       </FieldContent>
-      {!hide && <DropDown size={size} styles={styles} options={newOptions} callback={handleCallback} />}
+      {!hide && (
+        <DropDown
+          size={size}
+          styles={styles}
+          options={newOptions}
+          callback={handleCallback}
+        />
+      )}
     </FieldContainer>
   );
 };

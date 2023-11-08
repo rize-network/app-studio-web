@@ -1,7 +1,12 @@
 import React from 'react';
 import { Typography } from 'app-studio';
 
-import { InputVariants, PadddingWithLabel, PaddingWithoutLabel, Shapes } from '../../configs/Input.style';
+import {
+  InputVariants,
+  PadddingWithLabel,
+  PaddingWithoutLabel,
+  Shapes,
+} from '../../configs/Input.style';
 import { Horizontal } from '../../Horizontal/Horizontal';
 
 import { ContentProps } from './FieldContent/FieldContent.props';

@@ -7,7 +7,12 @@ export const StyledCountryPicker = () => (
     name="colorScheme"
     colorScheme="theme.primary"
     styles={{
-      box: { borderRadius: 10, borderColor: 'theme.primary', borderStyle: 'solid', borderWidth: 1 },
+      box: {
+        borderRadius: 10,
+        borderColor: 'theme.primary',
+        borderStyle: 'solid',
+        borderWidth: 1,
+      },
       text: { color: 'theme.primary' },
       label: { fontWeight: 'bold', color: 'theme.primary' },
       dropDown: { color: 'theme.primary' },

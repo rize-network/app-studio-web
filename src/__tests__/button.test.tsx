@@ -62,7 +62,11 @@ test('button component calls onClick function when clicked', () => {
 test('Button with an icon on the left to match snapshot', () => {
   const tree = renderer
     .create(
-      <Button icon={<DustBinSvg size={24} />} shape={'pillShaped' as Shape} colorScheme="theme.secondary">
+      <Button
+        icon={<DustBinSvg size={24} />}
+        shape={'pillShaped' as Shape}
+        colorScheme="theme.secondary"
+      >
         Delete
       </Button>
     )

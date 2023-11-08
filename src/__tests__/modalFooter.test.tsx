@@ -15,6 +15,8 @@ test('Modal footer renders without errors', () => {
 });
 
 test('Modal footer to match snapshot', () => {
-  const tree = renderer.create(<Modal.Footer>Modal Content</Modal.Footer>).toJSON();
+  const tree = renderer
+    .create(<Modal.Footer>Modal Content</Modal.Footer>)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

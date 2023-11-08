@@ -2,26 +2,45 @@
 
 exports[`Modal Overlay to match snapshot 1`] = `
 <div
-  className="sc-aXZVg fHXWtx"
+  alignItems="center"
+  className="sc-bdfCDU lgPMqH"
   display="flex"
   height="100%"
+  justifyContent="center"
+  left={0}
   onClick={[Function]}
+  position="fixed"
+  top={0}
   visibility="visible"
   width="100%"
+  zIndex={1000}
 >
   <div
-    className="sc-aXZVg ijyIBO"
+    backdropFilter="blur(5px)"
+    backgroundColor="blackAlpha.500"
+    className="sc-bdfCDU hgpLEU"
     cursor="pointer"
     display="flex"
     height="100vh"
+    justifyContent="center"
+    left={0}
     onClick={[Function]}
+    position="absolute"
+    top={0}
     width="100vw"
+    zIndex={1000}
   >
     <div
-      className="sc-aXZVg kxQuqZ"
+      backgroundColor="white"
+      borderRadius={4}
+      boxShadow="0px 2px 8px rgba(0, 0, 0, 0.3)"
+      className="sc-bdfCDU hueQZf"
       cursor="default"
       display="flex"
+      flexDirection="column"
+      flexWrap="nowrap"
       height="fit-content"
+      justifyContent="flex-start"
       onClick={[Function]}
       overflow="hidden"
       width={600}

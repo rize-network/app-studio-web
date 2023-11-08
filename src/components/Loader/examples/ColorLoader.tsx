@@ -7,7 +7,11 @@ export const StyleLoader = () => (
     <Loader loaderColor="black" textColor="black">
       Submitting
     </Loader>
-    <Loader loaderColor="theme.primary" textColor="theme.primary" textPosition="left">
+    <Loader
+      loaderColor="theme.primary"
+      textColor="theme.primary"
+      textPosition="left"
+    >
       Submitting
     </Loader>
   </Horizontal>

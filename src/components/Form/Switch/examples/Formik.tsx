@@ -21,7 +21,13 @@ export const FormikSwitch = () => {
         <Form>
           <Vertical gap={10}>
             <Label>Formik</Label>
-            <Field id="toggle" name="toggle" as={Switch} isChecked={values.toggle} onChange={handleChange} />
+            <Field
+              id="toggle"
+              name="toggle"
+              as={Switch}
+              isChecked={values.toggle}
+              onChange={handleChange}
+            />
             <Button type="submit">Submit</Button>
           </Vertical>
         </Form>

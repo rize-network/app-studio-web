@@ -8,7 +8,13 @@ export const ShapesInput = () => {
   return (
     <Vertical gap={10} width="300px">
       {['default', 'sharp', 'rounded', 'pillShaped'].map((shape, index) => (
-        <TextField key={index} name={shape} placeholder={shape} shape={shape as Shape} variant="outline" />
+        <TextField
+          key={index}
+          name={shape}
+          placeholder={shape}
+          shape={shape as Shape}
+          variant="outline"
+        />
       ))}
     </Vertical>
   );

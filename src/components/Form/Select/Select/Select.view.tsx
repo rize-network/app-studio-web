@@ -23,7 +23,14 @@ import {
 import { useItemState } from './Select.state';
 import { IconSizes } from './Select.style';
 
-const Item: React.FC<ItemProps> = ({ isHovered, setIsHovered, option, size = 'md', callback = () => {}, ...props }) => {
+const Item: React.FC<ItemProps> = ({
+  isHovered,
+  setIsHovered,
+  option,
+  size = 'md',
+  callback = () => {},
+  ...props
+}) => {
   const handleOptionClick = (option: string) => callback(option);
   const handleHover = () => setIsHovered(!isHovered);
 
@@ -71,7 +78,8 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
   return (
     <Text {...fieldStyles}>
-      {(selected === '' || (selected && selected.length === 0)) && !!placeholder ? (
+      {(selected === '' || (selected && selected.length === 0)) &&
+      !!placeholder ? (
         placeholder
       ) : (
         <>
@@ -81,7 +89,11 @@ const SelectBox: React.FC<SelectBoxProps> = ({
               selected.length > 0 && (
                 <Horizontal gap={6}>
                   {selected.map((option) => (
-                    <MultiSelect key={option} option={option} removeOption={removeOption} />
+                    <MultiSelect
+                      key={option}
+                      option={option}
+                      removeOption={removeOption}
+                    />
                   ))}
                 </Horizontal>
               )}
@@ -132,7 +144,12 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
   );
 };
 
-const DropDown: React.FC<DropDownProps> = ({ size, styles = { dropDown: {} }, options, callback = () => {} }) => {
+const DropDown: React.FC<DropDownProps> = ({
+  size,
+  styles = { dropDown: {} },
+  options,
+  callback = () => {},
+}) => {
   const itemStates = useItemState();
   const handleCallback = (option: string) => callback(option);
   const shadow =
@@ -174,13 +191,25 @@ const DropDown: React.FC<DropDownProps> = ({ size, styles = { dropDown: {} }, op
       {...styles['dropDown']}
     >
       {options.map((option) => (
-        <Item key={option} size={size} option={option} callback={handleCallback} {...itemStates} {...styles['text']} />
+        <Item
+          key={option}
+          size={size}
+          option={option}
+          callback={handleCallback}
+          {...itemStates}
+          {...styles['text']}
+        />
       ))}
     </Element>
   );
 };
 
-export const MultiSelect: React.FC<MultiSelectProps> = ({ option, size = 'md', removeOption = () => {}, ...props }) => {
+export const MultiSelect: React.FC<MultiSelectProps> = ({
+  option,
+  size = 'md',
+  removeOption = () => {},
+  ...props
+}) => {
   const handleClick = () => removeOption(option);
 
   return (
@@ -195,7 +224,12 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({ option, size = 'md', r
       {...props}
     >
       <Text size={size}>{option}</Text>
-      <CloseSvg role="close-button" color="inherit" size={IconSizes[size]} onClick={handleClick} />
+      <CloseSvg
+        role="close-button"
+        color="inherit"
+        size={IconSizes[size]}
+        onClick={handleClick}
+      />
     </Horizontal>
   );
 };
@@ -261,7 +295,9 @@ const SelectView: React.FC<SelectViewProps> = ({
 
   const handleRemoveOption = (selectedOption: string) => {
     if (Array.isArray(selected) && selected.includes(selectedOption)) {
-      const newSelected = selected.filter((option) => option !== selectedOption);
+      const newSelected = selected.filter(
+        (option) => option !== selectedOption
+      );
       setSelected(newSelected.length === 0 ? [] : newSelected);
     }
   };
@@ -295,7 +331,12 @@ const SelectView: React.FC<SelectViewProps> = ({
       >
         <FieldWrapper>
           {isWithLabel && (
-            <FieldLabel htmlFor={id} color={colorScheme} error={error} {...styles}>
+            <FieldLabel
+              htmlFor={id}
+              color={colorScheme}
+              error={error}
+              {...styles}
+            >
               {label}
             </FieldLabel>
           )}
@@ -324,15 +365,30 @@ const SelectView: React.FC<SelectViewProps> = ({
           {!isReadOnly && !isDisabled && (
             <>
               {hide ? (
-                <ArrowDownSvg color="inherit" size={IconSizes[size]} style={styles.icon} />
+                <ArrowDownSvg
+                  color="inherit"
+                  size={IconSizes[size]}
+                  style={styles.icon}
+                />
               ) : (
-                <ArrowUpSvg color="inherit" size={IconSizes[size]} style={styles.icon} />
+                <ArrowUpSvg
+                  color="inherit"
+                  size={IconSizes[size]}
+                  style={styles.icon}
+                />
               )}
             </>
           )}
         </FieldIcons>
       </FieldContent>
-      {!hide && <DropDown size={size} styles={styles} options={options} callback={handleCallback} />}
+      {!hide && (
+        <DropDown
+          size={size}
+          styles={styles}
+          options={options}
+          callback={handleCallback}
+        />
+      )}
     </FieldContainer>
   );
 };

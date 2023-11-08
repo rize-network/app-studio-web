@@ -94,13 +94,25 @@ export const HomePage = () => {
           App-Studio
         </Text>
         <Text textAlign="center" media={media.paragraph}>
-          Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
-          tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-          semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+          Pellentesque habitant morbi tristique senectus et netus et malesuada
+          fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
+          ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+          egestas semper. Aenean ultricies mi vitae est. Mauris placerat
+          eleifend leo.
         </Text>
 
-        <Center width="100%" gap={60} media={{ mobile: { gap: 10 } }} wrap="nowrap">
-          <Button colorScheme="black" onClick={handleClick} {...buttonStyle} isAuto>
+        <Center
+          width="100%"
+          gap={60}
+          media={{ mobile: { gap: 10 } }}
+          wrap="nowrap"
+        >
+          <Button
+            colorScheme="black"
+            onClick={handleClick}
+            {...buttonStyle}
+            isAuto
+          >
             Get Started
           </Button>
           <Button variant="outline" colorScheme="black" {...buttonStyle} isAuto>
@@ -120,7 +132,13 @@ export const HomePage = () => {
         </Text>
         <Horizontal justify="space-evenly" gap={30}>
           {Features.map((feature) => (
-            <Vertical key={feature.title} gap={7} width={400} minHeight={100} alignItems="center">
+            <Vertical
+              key={feature.title}
+              gap={7}
+              width={400}
+              minHeight={100}
+              alignItems="center"
+            >
               <Center
                 color="white"
                 borderRadius="50%"
@@ -130,10 +148,19 @@ export const HomePage = () => {
               >
                 {feature.icon}
               </Center>
-              <Text weight="bold" color="black" size={'lg'} media={{ mobile: { fontSize: 14, lineHeight: 14 } }}>
+              <Text
+                weight="bold"
+                color="black"
+                size={'lg'}
+                media={{ mobile: { fontSize: 14, lineHeight: 14 } }}
+              >
                 {feature.title}
               </Text>
-              <Text textAlign="center" size={'md'} media={{ mobile: { fontSize: 12, lineHeight: 12 } }}>
+              <Text
+                textAlign="center"
+                size={'md'}
+                media={{ mobile: { fontSize: 12, lineHeight: 12 } }}
+              >
                 {feature.description}
               </Text>
             </Vertical>

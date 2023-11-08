@@ -3,7 +3,8 @@ import React from 'react';
 export const Features = [
   {
     title: 'Bundle analyzer plugin',
-    description: "Optimize your React JS application's performance and reduce bundle size.",
+    description:
+      "Optimize your React JS application's performance and reduce bundle size.",
     icon: (
       <svg
         height="24px"
@@ -59,7 +60,11 @@ export const Features = [
         stroke="currentColor"
         className="h-6 w-6"
       >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M4.5 12.75l6 6 9-13.5"
+        />
       </svg>
     ),
   },
@@ -113,7 +118,12 @@ export const Features = [
     description:
       'Provides actionable insights for optimizing website performance, accessibility, SEO, and user experience.',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="48" viewBox="0 0 24 48">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="48"
+        viewBox="0 0 24 48"
+      >
         <path fill="#fff" d="M12 0l-12 24h24zm-12 24h24v24h-24z" />
         <path fill="#000" d="M12 6v18h8v-18zm-8 18h16v8h-16z" />
         <circle cx="12" cy="6" r="6" fill="#FED72E" />
@@ -122,7 +132,8 @@ export const Features = [
   },
   {
     title: 'Renovate BOT',
-    description: 'Streamline dependency management and stay up-to-date with automated updates and pull requests.',
+    description:
+      'Streamline dependency management and stay up-to-date with automated updates and pull requests.',
     icon: (
       <svg
         height="24px"

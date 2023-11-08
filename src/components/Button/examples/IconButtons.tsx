@@ -20,6 +20,11 @@ export const IconButtons = () => (
     >
       Delete
     </Button>
-    <Button icon={<DustBinSvg size={24} />} colorScheme="theme.primary" isIconRounded isAuto />
+    <Button
+      icon={<DustBinSvg size={24} />}
+      colorScheme="theme.primary"
+      isIconRounded
+      isAuto
+    />
   </Center>
 );

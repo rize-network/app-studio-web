@@ -8,7 +8,13 @@ export const ShapesArea = () => {
   return (
     <Vertical gap={10} width="300px">
       {['default', 'sharp', 'rounded'].map((shape, index) => (
-        <TextArea key={index} name={shape} placeholder={shape} shape={shape as Shape} variant="outline" />
+        <TextArea
+          key={index}
+          name={shape}
+          placeholder={shape}
+          shape={shape as Shape}
+          variant="outline"
+        />
       ))}
     </Vertical>
   );

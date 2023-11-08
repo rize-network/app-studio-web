@@ -50,7 +50,11 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       alignItems: 'center',
       height: 'fit-content',
       width: 'fit-content',
-      color: error ? 'theme.error' : isDisabled ? 'theme.disabled' : 'color.blueGray.700',
+      color: error
+        ? 'theme.error'
+        : isDisabled
+        ? 'theme.disabled'
+        : 'color.blueGray.700',
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
       ...styles['label'],
     },
@@ -61,7 +65,11 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
         ? { backgroundColor: colorScheme }
         : {
             borderWidth: 2,
-            borderColor: error ? 'theme.error' : isHovered ? 'color.gray.500' : 'color.gray.300',
+            borderColor: error
+              ? 'theme.error'
+              : isHovered
+              ? 'color.gray.500'
+              : 'color.gray.300',
             borderStyle: 'solid',
           }),
       borderRadius: 3,
@@ -87,7 +95,8 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
         {isIndeterminate ? (
           <IndeterminateSvg />
         ) : (
-          (isChecked || isSelected) && (icon ?? <CheckSvg size={IconSizes[size]} />)
+          (isChecked || isSelected) &&
+          (icon ?? <CheckSvg size={IconSizes[size]} />)
         )}
       </Center>
       {label}

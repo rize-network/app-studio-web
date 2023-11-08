@@ -38,7 +38,14 @@ describe('TextArea', () => {
   });
 
   test('renders TextArea with unStyled variant', () => {
-    render(<TextArea name="username" defaultValue="John" role="textbox" variant="unStyled" />);
+    render(
+      <TextArea
+        name="username"
+        defaultValue="John"
+        role="textbox"
+        variant="unStyled"
+      />
+    );
     const TextAreaElement = screen.getByRole('textbox');
     expect(TextAreaElement).toHaveStyle({
       border: 'none',
@@ -55,7 +62,9 @@ describe('TextArea', () => {
   });
 
   test('renders TextArea with custom styles', () => {
-    render(<TextArea name="username" style={{ color: 'red' }} role="textbox" />);
+    render(
+      <TextArea name="username" style={{ color: 'red' }} role="textbox" />
+    );
     const TextAreaElement = screen.getByRole('textbox');
     expect(TextAreaElement).toHaveStyle({ color: 'red' });
   });
@@ -67,7 +76,14 @@ describe('TextArea', () => {
   });
 
   test('renders helper text when helperText and error are provided', () => {
-    render(<TextArea name="username" helperText="Helper text" error={true} role="textbox" />);
+    render(
+      <TextArea
+        name="username"
+        helperText="Helper text"
+        error={true}
+        role="textbox"
+      />
+    );
     const helperTextElement = screen.getByText('Helper text');
     expect(helperTextElement).toBeInTheDocument();
   });

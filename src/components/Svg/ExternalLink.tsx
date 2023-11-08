@@ -8,7 +8,11 @@ interface SvgProps {
   [x: string]: any;
 }
 
-export const ExternalLinkSvg: React.FC<SvgProps> = ({ size = 64, color = 'white', ...props }) => (
+export const ExternalLinkSvg: React.FC<SvgProps> = ({
+  size = 64,
+  color = 'white',
+  ...props
+}) => (
   <Center width={`${size}px`} height={`${size}px`}>
     <svg
       fill={color}
@@ -20,7 +24,11 @@ export const ExternalLinkSvg: React.FC<SvgProps> = ({ size = 64, color = 'white'
       {...props}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
       <g id="SVGRepo_iconCarrier">
         <path d="M38.288 10.297l1.414 1.415-14.99 14.99-1.414-1.414z"></path>
         <path d="M40 20h-2v-8h-8v-2h10z"></path>

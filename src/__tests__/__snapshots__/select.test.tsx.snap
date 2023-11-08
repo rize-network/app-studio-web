@@ -2,29 +2,56 @@
 
 exports[`Select component Select to match snapshot 1`] = `
 <div
-  className="sc-aXZVg ivnAHP"
+  className="sc-bdfCDU bChUJt"
   display="flex"
+  flexDirection="column"
+  flexWrap="nowrap"
+  gap={5}
+  justifyContent="flex-start"
   onClick={[Function]}
+  position="relative"
   role="SelectBox"
 >
   <div
-    className="sc-aXZVg boCghH"
+    alignItems="center"
+    backgroundColor="trueGray.50"
+    borderBottomLeftRadius={0}
+    borderBottomRightRadius={0}
+    borderBottomWidth={2}
+    borderColor="error"
+    borderStyle="solid"
+    borderTopLeftRadius={6}
+    borderTopRightRadius={6}
+    borderWidth={0}
+    boxShadow="rgb(249, 115, 22) 0px 4px 14px 0px"
+    className="sc-bdfCDU bMSBRZ"
     color="theme.primary"
     cursor="auto"
     display="flex"
     filter="brightness(1)"
+    flexDirection="row"
+    flexWrap="nowrap"
     fontSize={20}
+    gap={10}
+    justifyContent="space-between"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    paddingLeft={16}
+    paddingRight={35}
+    paddingVertical={8}
+    transition="padding 0.2s ease"
     width="100%"
   >
     <div
-      className="sc-aXZVg btOgmi"
+      className="sc-bdfCDU jCBzwc"
       display="flex"
+      flexDirection="column"
+      flexWrap="nowrap"
+      justifyContent="flex-start"
       width="100%"
     >
       <select
-        className="sc-aXZVg bsUJuA"
+        className="sc-bdfCDU kePnPK"
         disabled={false}
         height={0}
         multiple={false}
@@ -32,6 +59,7 @@ exports[`Select component Select to match snapshot 1`] = `
         onChange={[Function]}
         onFocus={[Function]}
         opacity={0}
+        position="absolute"
         readOnly={true}
         value="Item1"
         width={0}
@@ -53,12 +81,19 @@ exports[`Select component Select to match snapshot 1`] = `
         </option>
       </select>
       <div
-        className="sc-aXZVg hoUbwI"
+        backgroundColor="transparent"
+        border="none"
+        className="sc-bdfCDU gArlgq"
         color="blueGray.700"
         cursor="auto"
         fontSize={20}
         fontStyle="normal"
         fontWeight={400}
+        heigth="100%"
+        lineHeight={16}
+        margin={0}
+        paddingHorizontal={0}
+        paddingVertical={8}
         role="text"
         textDecoration="none"
         width="95%"
@@ -67,9 +102,17 @@ exports[`Select component Select to match snapshot 1`] = `
       </div>
     </div>
     <div
-      className="sc-aXZVg fJamLe"
+      alignItems="center"
+      className="sc-bdfCDU gYnDEY"
       display="flex"
+      flexWrap="nowrap"
+      gap={10}
+      justifyContent="center"
+      position="absolute"
+      right={16}
+      top="50%"
       transform="translateY(-50%)"
+      zIndex={500}
     />
   </div>
 </div>

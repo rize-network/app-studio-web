@@ -1,5 +1,8 @@
 import React from 'react';
-import { ReversedVertical, WrapVertical } from 'src/components/Layout/Vertical/examples';
+import {
+  ReversedVertical,
+  WrapVertical,
+} from 'src/components/Layout/Vertical/examples';
 import { DefaultVertical } from 'src/components/Layout/Vertical/examples/Default';
 import { JustifyVertical } from 'src/components/Layout/Vertical/examples/Justify';
 

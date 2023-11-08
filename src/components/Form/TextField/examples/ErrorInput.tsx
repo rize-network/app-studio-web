@@ -40,7 +40,9 @@ export const ErrorInput = () => {
     event.preventDefault();
     validate(formValues);
     if (Object.values(formErrors).length === 0) {
-      alert(`Hello, ${formValues.firstName} ${formValues.lastName} ${formValues.email}`);
+      alert(
+        `Hello, ${formValues.firstName} ${formValues.lastName} ${formValues.email}`
+      );
     }
   };
   return (

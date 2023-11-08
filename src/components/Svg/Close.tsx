@@ -8,7 +8,11 @@ interface SvgProps {
   [x: string]: any;
 }
 
-export const CloseSvg: React.FC<SvgProps> = ({ size = 64, color = 'white', ...props }) => (
+export const CloseSvg: React.FC<SvgProps> = ({
+  size = 64,
+  color = 'white',
+  ...props
+}) => (
   <Center width={`${size}px`} height={`${size}px`}>
     <svg
       width={`${size}px`}
@@ -19,7 +23,11 @@ export const CloseSvg: React.FC<SvgProps> = ({ size = 64, color = 'white', ...pr
       {...props}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
       <g id="SVGRepo_iconCarrier">
         <path
           fill={color}

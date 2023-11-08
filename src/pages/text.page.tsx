@@ -42,30 +42,52 @@ export const TextPage = () => {
             <td>Truncate</td>
             <td>
               <TextApp isTruncated maxLines={2} size="xl">
-                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
-                tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-                semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+                Pellentesque habitant morbi tristique senectus et netus et
+                malesuada fames ac turpis egestas. Vestibulum tortor quam,
+                feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
+                libero sit amet quam egestas semper. Aenean ultricies mi vitae
+                est. Mauris placerat eleifend leo.
               </TextApp>
             </td>
           </tr>
           <tr>
             <td>Underline</td>
             <td>
-              <TextApp isUnderlined>Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</TextApp>
+              <TextApp isUnderlined>
+                Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+              </TextApp>
             </td>
           </tr>
           <tr>
             <td>Italic</td>
 
             <td>
-              <TextApp isItalic>Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</TextApp>
+              <TextApp isItalic>
+                Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+              </TextApp>
             </td>
           </tr>
           <tr>
             <td>Sizes</td>
             <td>
-              <View display="flex" gap={5} flexDirection="column" alignItems="center">
-                {['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'].map((size, index) => (
+              <View
+                display="flex"
+                gap={5}
+                flexDirection="column"
+                alignItems="center"
+              >
+                {[
+                  'xs',
+                  'sm',
+                  'md',
+                  'lg',
+                  'xl',
+                  '2xl',
+                  '3xl',
+                  '4xl',
+                  '5xl',
+                  '6xl',
+                ].map((size, index) => (
                   <TextApp key={index} size={size as Size}>
                     {size}
                   </TextApp>
@@ -89,14 +111,27 @@ export const TextPage = () => {
           <tr>
             <td>Weights</td>
             <td>
-              <View display="flex" gap={5} flexDirection="column" alignItems="center">
-                {['hairline', 'tdin', 'light', 'normal', 'medium', 'semiBold', 'bold', 'extraBold', 'black'].map(
-                  (weight, index) => (
-                    <TextApp key={index} weight={weight as TextWeights}>
-                      {weight}
-                    </TextApp>
-                  )
-                )}
+              <View
+                display="flex"
+                gap={5}
+                flexDirection="column"
+                alignItems="center"
+              >
+                {[
+                  'hairline',
+                  'tdin',
+                  'light',
+                  'normal',
+                  'medium',
+                  'semiBold',
+                  'bold',
+                  'extraBold',
+                  'black',
+                ].map((weight, index) => (
+                  <TextApp key={index} weight={weight as TextWeights}>
+                    {weight}
+                  </TextApp>
+                ))}
               </View>
             </td>
           </tr>

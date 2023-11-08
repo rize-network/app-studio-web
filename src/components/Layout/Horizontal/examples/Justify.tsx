@@ -10,7 +10,14 @@ export const JustifyHorizontal = () => {
   };
   return (
     <View>
-      {['flex-start', 'flex-end', 'center', 'space-between', 'space-around', 'space-evenly'].map((justify) => (
+      {[
+        'flex-start',
+        'flex-end',
+        'center',
+        'space-between',
+        'space-around',
+        'space-evenly',
+      ].map((justify) => (
         <View key={justify} marginTop={10}>
           {justify}
           <Horizontal justify={justify as Justify} gap={5} width="100%">

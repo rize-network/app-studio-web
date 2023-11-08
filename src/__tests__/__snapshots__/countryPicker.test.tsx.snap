@@ -2,33 +2,59 @@
 
 exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
 <div
-  className="sc-aXZVg ivnAHP"
+  className="sc-bdfCDU bChUJt"
   display="flex"
+  flexDirection="column"
+  flexWrap="nowrap"
+  gap={5}
+  justifyContent="flex-start"
   onClick={[Function]}
+  position="relative"
 >
   <div
-    className="sc-aXZVg hWVGcA"
+    alignItems="center"
+    backgroundColor="trueGray.50"
+    borderColor="error"
+    borderRadius={24}
+    borderStyle="solid"
+    borderWidth={1}
+    className="sc-bdfCDU drLOlu"
     color="theme.primary"
     cursor="pointer"
     display="flex"
     filter="brightness(1)"
+    flexDirection="row"
+    flexWrap="nowrap"
     fontSize={20}
+    gap={10}
+    justifyContent="space-between"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    paddingLeft={16}
+    paddingRight={35}
+    paddingVertical={8}
+    transition="padding 0.2s ease"
     width="100%"
   >
     <div
-      className="sc-aXZVg btOgmi"
+      className="sc-bdfCDU jCBzwc"
       display="flex"
+      flexDirection="column"
+      flexWrap="nowrap"
+      justifyContent="flex-start"
       width="100%"
     >
       <input
         autoFocus={true}
-        className="sc-aXZVg jxZkFw"
+        backgroundColor="transparent"
+        border="none"
+        className="sc-bdfCDU cbFLIy"
         color="color.blueGray.700"
         cursor="auto"
         disabled={false}
         fontSize={20}
+        heigth="100%"
+        margin={0}
         name="name"
         on={
           Object {
@@ -40,6 +66,8 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        paddingHorizonatl={0}
+        paddingVerical={8}
         placeholder="Name"
         readOnly={false}
         type="country"
@@ -48,14 +76,24 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
       />
     </div>
     <div
-      className="sc-aXZVg fJamLe"
+      alignItems="center"
+      className="sc-bdfCDU gYnDEY"
       display="flex"
+      flexWrap="nowrap"
+      gap={10}
+      justifyContent="center"
+      position="absolute"
+      right={16}
+      top="50%"
       transform="translateY(-50%)"
+      zIndex={500}
     >
       <div
-        className="sc-aXZVg cynYKT"
+        alignItems="center"
+        className="sc-bdfCDU hcIsQh"
         display="flex"
         height="16px"
+        justifyContent="center"
         width="16px"
       >
         <svg
@@ -119,17 +157,40 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-aXZVg jViPHz"
+    className="sc-bdfCDU VdVeV"
     color="theme.error"
+    dropDown={
+      Object {
+        "backgrounColor": "theme.primary",
+      }
+    }
     fontSize={12}
     fontStyle="normal"
     fontWeight={400}
+    helperText={
+      Object {
+        "color": "red",
+      }
+    }
+    icon={
+      Object {
+        "width": 0.2,
+      }
+    }
     label={
       Object {
         "fontSize": 15,
       }
     }
+    lineHeight={12}
+    marginHorizontal={0}
+    marginVertical={0}
     role="text"
+    text={
+      Object {
+        "color": "theme.primary",
+      }
+    }
     textDecoration="none"
   >
     required

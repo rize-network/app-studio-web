@@ -28,13 +28,23 @@ const LinkView: React.FC<LinkViewProps> = ({
         color={colorScheme}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
-        textDecoration={isHovered || underline === 'underline' ? 'underline !important' : 'none'}
+        textDecoration={
+          isHovered || underline === 'underline'
+            ? 'underline !important'
+            : 'none'
+        }
         {...styles.text}
         {...props}
       >
         <Horizontal gap={3} alignItems="center" wrap="nowrap">
           {children}
-          {isExternal && <ExternalLinkSvg color={colorScheme} size={IconSizes[iconSize]} style={styles.icon} />}
+          {isExternal && (
+            <ExternalLinkSvg
+              color={colorScheme}
+              size={IconSizes[iconSize]}
+              style={styles.icon}
+            />
+          )}
         </Horizontal>
       </Element>
     </ReactRouterLink>

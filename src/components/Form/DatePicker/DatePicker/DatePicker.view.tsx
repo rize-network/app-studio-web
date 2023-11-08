@@ -93,7 +93,12 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
       >
         <FieldWrapper>
           {isWithLabel && (
-            <FieldLabel htmlFor={id} color={colorScheme} error={error} {...styles}>
+            <FieldLabel
+              htmlFor={id}
+              color={colorScheme}
+              error={error}
+              {...styles}
+            >
               {label}
             </FieldLabel>
           )}

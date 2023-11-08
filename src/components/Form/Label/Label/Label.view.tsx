@@ -23,7 +23,9 @@ const LabelView: React.FC<LabelProps> = ({
       fontSize={size}
       fontStyle={isItalic ? 'italic' : 'normal'}
       fontWeight={Typography.fontWeights[weight]}
-      textDecoration={isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'}
+      textDecoration={
+        isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'
+      }
       {...headingStyles}
       {...props}
     >

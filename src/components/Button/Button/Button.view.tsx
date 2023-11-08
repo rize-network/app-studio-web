@@ -65,7 +65,9 @@ const ButtonView: React.FC<ButtonProps> = ({
   };
 
   const changePadding = {
-    padding: isIconRounded ? IconSizes[size].padding : ButtonSizes[size].padding,
+    padding: isIconRounded
+      ? IconSizes[size].padding
+      : ButtonSizes[size].padding,
   };
 
   const content = (
@@ -100,7 +102,12 @@ const ButtonView: React.FC<ButtonProps> = ({
       {...props}
     >
       {variant === 'link' && externalHref ? (
-        <Link href={externalHref} textDecorationColor={colorScheme} colorScheme={colorScheme} isExternal>
+        <Link
+          href={externalHref}
+          textDecorationColor={colorScheme}
+          colorScheme={colorScheme}
+          isExternal
+        >
           {content}
         </Link>
       ) : (

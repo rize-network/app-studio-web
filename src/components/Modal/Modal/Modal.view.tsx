@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Center } from '../../Layout/Center/Center';
 import { Vertical } from '../../Layout/Vertical/Vertical';
 
@@ -6,9 +6,15 @@ import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Button } from '../../Button/Button';
 import { View } from '../../Layout/View/View';
 import { CloseSvg } from '../../Svg';
-import { useModalStore } from './Modal.store';
+import { hideModal } from './Modal.store';
 
-import { BodyProps, ContainerProps, FooterProps, HeaderProps, OverlayProps } from '../Modal/Modal.props';
+import {
+  BodyProps,
+  ContainerProps,
+  FooterProps,
+  HeaderProps,
+  OverlayProps,
+} from '../Modal/Modal.props';
 import { ContainerShapes, OverlayAlignments } from '../Modal/Modal.style';
 import { HeaderIconSizes } from '../Modal/Modal.style';
 
@@ -21,16 +27,6 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
   position = 'center',
   ...props
 }) => {
-  const setOpen = useModalStore((state: any) => state.setOpen);
-  const setOnClose = useModalStore((state: any) => state.setOnClose);
-
-  useEffect(() => {
-    setOnClose(onClose);
-    if (isOpen) setOpen();
-  });
-
-  if (!isOpen) return null;
-
   const handleClick = () => {
     if (!isClosePrevented) onClose();
   };
@@ -112,7 +108,7 @@ export const ModalHeader: React.FC<HeaderProps> = ({
   buttonPosition = 'right',
   ...props
 }) => {
-  const onClose = useModalStore((state: any) => state.onClose);
+  const onClose = props.onClose ? props.onClose : hideModal;
 
   const buttonIcon = (
     <Button
@@ -149,7 +145,13 @@ export const ModalBody: React.FC<BodyProps> = ({ children, ...props }) => {
     borderStyle: 'solid',
   };
   return (
-    <View overflowY="auto" paddingVertical={15} paddingHorizontal={20} {...defaultBorder} {...props}>
+    <View
+      overflowY="auto"
+      paddingVertical={15}
+      paddingHorizontal={20}
+      {...defaultBorder}
+      {...props}
+    >
       {children}
     </View>
   );

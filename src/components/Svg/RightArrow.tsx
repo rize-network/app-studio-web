@@ -8,7 +8,11 @@ interface SvgProps {
   [x: string]: any;
 }
 
-export const RightArrowSvg: React.FC<SvgProps> = ({ size = 64, color = 'white', ...props }) => (
+export const RightArrowSvg: React.FC<SvgProps> = ({
+  size = 64,
+  color = 'white',
+  ...props
+}) => (
   <Center width={`${size}px`} height={`${size}px`}>
     <svg
       width={`${size}px`}
@@ -20,10 +24,20 @@ export const RightArrowSvg: React.FC<SvgProps> = ({ size = 64, color = 'white', 
       {...props}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
       <g id="SVGRepo_iconCarrier">
         <title>right-arrow</title> <desc>Created with Sketch.</desc>
-        <g id="icons" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        <g
+          id="icons"
+          stroke="none"
+          strokeWidth="1"
+          fill="none"
+          fillRule="evenodd"
+        >
           <g
             id="ui-gambling-website-lined-icnos-casinoshunter"
             transform="translate(-212.000000, -159.000000)"

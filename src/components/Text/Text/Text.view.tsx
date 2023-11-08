@@ -21,7 +21,6 @@ const TextContent: React.FC<ContentProps> = ({ children, isSub, isSup }) => (
 const TruncateText: React.FC<TruncateTextProps> = ({ text, maxLines = 1 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [content, setContent] = useState(text);
-  
 
   useEffect(() => {
     let textContent = content;
@@ -32,7 +31,8 @@ const TruncateText: React.FC<TruncateTextProps> = ({ text, maxLines = 1 }) => {
 
       const comLineHeight = getComputedStyle(textNode).lineHeight;
 
-      const lineHeight: number = comLineHeight !== 'normal' ? parseFloat(comLineHeight) : 20;
+      const lineHeight: number =
+        comLineHeight !== 'normal' ? parseFloat(comLineHeight) : 20;
 
       const maxHeight = Math.ceil(lineHeight * maxLines);
 
@@ -78,7 +78,9 @@ const TextView: React.FC<TextProps> = ({
       lineHeight={Typography.lineHeights[size]}
       fontStyle={isItalic ? 'italic' : 'normal'}
       fontWeight={Typography.fontWeights[weight]}
-      textDecoration={isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'}
+      textDecoration={
+        isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'
+      }
       {...noLineBreak}
       {...headingStyles}
       {...props}

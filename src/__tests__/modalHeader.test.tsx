@@ -15,21 +15,29 @@ test('Modal Header renders without errors', () => {
 });
 
 test('Modal Header renders without closing button', () => {
-  const tree = renderer.create(<Modal.Header buttonPosition="none">Modal Content</Modal.Header>).toJSON();
+  const tree = renderer
+    .create(<Modal.Header buttonPosition="none">Modal Content</Modal.Header>)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test('Modal Header renders with custom closing button', () => {
-  const tree = renderer.create(<Modal.Header buttonPosition="left">Modal Content</Modal.Header>).toJSON();
+  const tree = renderer
+    .create(<Modal.Header buttonPosition="left">Modal Content</Modal.Header>)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test('Modal Header renders with closing button with size large', () => {
-  const tree = renderer.create(<Modal.Header buttonSize="lg">Modal Content</Modal.Header>).toJSON();
+  const tree = renderer
+    .create(<Modal.Header buttonSize="lg">Modal Content</Modal.Header>)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test('Modal Header renders with closing button color black', () => {
-  const tree = renderer.create(<Modal.Header buttonColor="black">Modal Content</Modal.Header>).toJSON();
+  const tree = renderer
+    .create(<Modal.Header buttonColor="black">Modal Content</Modal.Header>)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

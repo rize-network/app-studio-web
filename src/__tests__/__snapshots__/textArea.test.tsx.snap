@@ -2,33 +2,64 @@
 
 exports[`TextArea to match snapshot 1`] = `
 <div
-  className="sc-aXZVg eoQJKn"
+  className="sc-bdfCDU fuoWwh"
   display="flex"
+  flexDirection="column"
+  flexWrap="nowrap"
+  gap={5}
+  justifyContent="flex-start"
+  position="relative"
 >
   <div
-    className="sc-aXZVg giOKpl"
+    alignItems="center"
+    backgroundColor="red"
+    borderBottomLeftRadius={0}
+    borderBottomRightRadius={0}
+    borderColor="error"
+    borderStyle="solid"
+    borderTopLeftRadius={6}
+    borderTopRightRadius={6}
+    borderWidth={1}
+    className="sc-bdfCDU iGHSMT"
     color="theme.primary"
     cursor="pointer"
     display="flex"
     filter="brightness(1)"
+    flexDirection="row"
+    flexWrap="nowrap"
     fontSize={20}
+    gap={10}
+    justifyContent="space-between"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    paddingLeft={16}
+    paddingRight={35}
+    paddingVertical={8}
+    transition="padding 0.2s ease"
     width="100%"
   >
     <div
-      className="sc-aXZVg btOgmi"
+      className="sc-bdfCDU jCBzwc"
       display="flex"
+      flexDirection="column"
+      flexWrap="nowrap"
+      justifyContent="flex-start"
       width="100%"
     >
       <textarea
         autoFocus={false}
-        className="sc-aXZVg hbdZAS"
+        backgroundColor="red"
+        border="none"
+        className="sc-bdfCDU csTWjI"
         color="blueGray.700"
         cols={35}
         cursor="auto"
         disabled={false}
+        editable={false}
         fontSize={20}
+        heigth="100%"
+        margin={0}
+        multiline={false}
         name="name"
         on={
           Object {
@@ -40,6 +71,8 @@ exports[`TextArea to match snapshot 1`] = `
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        paddingHorizontal={0}
+        paddingVertical={8}
         placeholder="Name"
         readOnly={false}
         rows={3}
@@ -49,8 +82,18 @@ exports[`TextArea to match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-aXZVg jViPHz"
+    box={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
+    className="sc-bdfCDU VdVeV"
     color="theme.error"
+    field={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
     fontSize={12}
     fontStyle="normal"
     fontWeight={400}
@@ -59,6 +102,9 @@ exports[`TextArea to match snapshot 1`] = `
         "fontSize": 15,
       }
     }
+    lineHeight={12}
+    marginHorizontal={0}
+    marginVertical={0}
     role="text"
     textDecoration="none"
   >

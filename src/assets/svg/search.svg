@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Action/search</title>
+    <defs>
+        <path d="M15.5,14 L14.71,14 L14.43,13.73 C15.41,12.59 16,11.11 16,9.49999996 C16,5.90999997 13.09,2.99999996 9.49999996,2.99999996 C5.90999997,2.99999996 2.99999996,5.90999997 2.99999996,9.49999996 C2.99999996,13.09 5.90999997,16 9.49999996,16 C11.11,16 12.59,15.41 13.73,14.43 L14,14.71 L14,15.5 L19,20.49 L20.49,19 L15.5,14 L15.5,14 Z M9.49999997,14 C7.00999998,14 4.99999997,11.99 4.99999997,9.49999997 C4.99999997,7.00999998 7.00999998,4.99999997 9.49999997,4.99999997 C11.99,4.99999997 14,7.00999998 14,9.49999997 C14,11.99 11.99,14 9.49999997,14 L9.49999997,14 Z" id="path-1"></path>
+    </defs>
+    <g id="Icons/Action/search" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Base" fill-rule="nonzero" points="-4.99999828e-08 -4.9999926e-08 24.0000001 -4.9999926e-08 24.0000001 24.0000001 -4.99999828e-08 24.0000001"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Icon" fill-rule="nonzero"></g>
+        <rect id="↳-🎨-Color" fill="#9E9E9E" mask="url(#mask-2)" x="0" y="0" width="24" height="24"></rect>
+    </g>
+</svg>

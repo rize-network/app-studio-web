@@ -2,7 +2,13 @@ import { CSSProperties } from 'react';
 import { Elevation } from 'src/utils/elevation';
 import { Shadow } from 'app-studio';
 
-import { Country, CountryPickerStyles, Shape, Size, Variant } from './CountryPicker.type';
+import {
+  Country,
+  CountryPickerStyles,
+  Shape,
+  Size,
+  Variant,
+} from './CountryPicker.type';
 
 export interface CountryPickerProps {
   /**

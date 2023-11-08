@@ -5,5 +5,8 @@ import { OpenEyeSvg } from '../../../Svg/OpenEye';
 import { Password } from '../Password';
 
 export const DefaultPassword = () => (
-  <Password visibleIcon={<OpenEyeSvg size={14} />} hiddenIcon={<CloseEyeSvg size={14} />} />
+  <Password
+    visibleIcon={<OpenEyeSvg size={14} />}
+    hiddenIcon={<CloseEyeSvg size={14} />}
+  />
 );

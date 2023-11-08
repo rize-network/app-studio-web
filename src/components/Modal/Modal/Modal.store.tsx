@@ -1,9 +1,46 @@
 import { create } from 'zustand';
 
-export const useModalStore = create((set) => ({
-  isOpen: false,
-  onClose: () => {},
-  toggleModal: () => set((state: any) => ({ isOpen: !state.isOpen })),
-  setOpen: (isOpen: boolean) => set(() => ({ isOpen })),
-  setOnClose: (onClose: Function) => set(() => ({ onClose })),
+export interface ModalState {
+  modal: string | boolean;
+  modalProps: any & { isVisible: boolean };
+  overlayProps: any;
+  show: (modal: string, modalProps?: any, overlayProps?: any) => void;
+  hide: () => void;
+}
+
+export const useModalStore = create<ModalState>((set) => ({
+  modal: false,
+  modalProps: { isVisible: false },
+  overlayProps: {},
+  show: (modal, modalProps = {}, overlayProps = {}) => {
+    if (modal) {
+      modalProps.isVisible = true;
+    }
+    set((state) => ({
+      ...state,
+      modal,
+      modalProps,
+      overlayProps,
+    }));
+  },
+  hide: () => {
+    set((state) => ({
+      ...state,
+      modalProps: {
+        isVisible: false,
+      },
+    }));
+  },
 }));
+
+export const showModal = (
+  modal: string,
+  modalProps: any = {},
+  overlayProps: any = {}
+) => {
+  useModalStore.getState().show(modal, modalProps, overlayProps);
+};
+
+export const hideModal = () => {
+  useModalStore.getState().hide();
+};

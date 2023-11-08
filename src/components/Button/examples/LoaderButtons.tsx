@@ -25,7 +25,10 @@ export const LoaderButtons = () => (
       <Loader
         type="quarter"
         textPosition="right"
-        styles={{ loader: { color: 'color.black' }, text: { color: 'color.black' } }}
+        styles={{
+          loader: { color: 'color.black' },
+          text: { color: 'color.black' },
+        }}
       >
         Submitting
       </Loader>

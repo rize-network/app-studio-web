@@ -2,8 +2,12 @@
 
 exports[`Loader with an a size xl where width equals to 30px should match snapshot 1`] = `
 <div
-  className="sc-aXZVg iLkdJI"
+  alignItems="center"
+  className="sc-bdfCDU fPfAum"
   display="flex"
+  flexDirection="row"
+  gap={10}
+  justifyContent="center"
 >
   <svg
     fill="none"
@@ -39,7 +43,7 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
     </g>
   </svg>
   <div
-    className="sc-aXZVg DfWLa"
+    className="sc-bdfCDU fgJVig"
   >
     Delete
   </div>
@@ -48,8 +52,12 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
 
 exports[`Loader with loader color equals to theme.primary should match snapshot 1`] = `
 <div
-  className="sc-aXZVg iLkdJI"
+  alignItems="center"
+  className="sc-bdfCDU fPfAum"
   display="flex"
+  flexDirection="row"
+  gap={10}
+  justifyContent="center"
 >
   <svg
     fill="none"
@@ -85,7 +93,7 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
     </g>
   </svg>
   <div
-    className="sc-aXZVg DfWLa"
+    className="sc-bdfCDU fgJVig"
   >
     Loader
   </div>
@@ -94,8 +102,12 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
 
 exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
 <div
-  className="sc-aXZVg iLkdJI"
+  alignItems="center"
+  className="sc-bdfCDU fPfAum"
   display="flex"
+  flexDirection="row"
+  gap={10}
+  justifyContent="center"
 >
   <svg
     fill="none"
@@ -131,7 +143,7 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
     </g>
   </svg>
   <div
-    className="sc-aXZVg bdaFBF"
+    className="sc-bdfCDU vGhqj"
     color="theme.primary"
   >
     Loader
@@ -141,8 +153,12 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
 
 exports[`Loader with text position bottom should match snapshot 1`] = `
 <div
-  className="sc-aXZVg iMehcA"
+  alignItems="center"
+  className="sc-bdfCDU fBXRtu"
   display="flex"
+  flexDirection="column"
+  gap={10}
+  justifyContent="center"
 >
   <svg
     fill="none"
@@ -178,7 +194,7 @@ exports[`Loader with text position bottom should match snapshot 1`] = `
     </g>
   </svg>
   <div
-    className="sc-aXZVg DfWLa"
+    className="sc-bdfCDU fgJVig"
   >
     Loader
   </div>

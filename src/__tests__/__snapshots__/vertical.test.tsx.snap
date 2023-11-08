@@ -2,21 +2,27 @@
 
 exports[`Vertical layout to match snapshot 1`] = `
 <div
-  className="sc-aXZVg bjAhdg"
+  className="sc-bdfCDU jYRqaa"
   display="flex"
+  flexDirection="column"
+  flexWrap="nowrap"
+  justifyContent="space-between"
 >
   <div
-    className="sc-aXZVg iKQqOr"
+    backgroundColor="theme.primary"
+    className="sc-bdfCDU hnsiER"
     height={50}
     width={50}
   />
   <div
-    className="sc-aXZVg aGRft"
+    backgroundColor="theme.secondary"
+    className="sc-bdfCDU ezdjXX"
     height={50}
     width={50}
   />
   <div
-    className="sc-aXZVg eQfhcF"
+    backgroundColor="theme.warning"
+    className="sc-bdfCDU edaeWf"
     height={50}
     width={50}
   />

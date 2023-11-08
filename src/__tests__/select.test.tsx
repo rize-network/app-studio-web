@@ -11,19 +11,39 @@ afterEach(() => {
 
 describe('Select component', () => {
   test('renders Select component', () => {
-    render(<Select name="active" role="textbox" options={['Item1', 'Item2', 'Item3']} />);
+    render(
+      <Select
+        name="active"
+        role="textbox"
+        options={['Item1', 'Item2', 'Item3']}
+      />
+    );
     const SelectElement = screen.getByRole('textbox');
     expect(SelectElement).toBeInTheDocument();
   });
 
   test('renders disabled Select', () => {
-    render(<Select name="diabled" isDisabled role="textbox" options={['Item1', 'Item2', 'Item3']} />);
+    render(
+      <Select
+        name="diabled"
+        isDisabled
+        role="textbox"
+        options={['Item1', 'Item2', 'Item3']}
+      />
+    );
     const inputElement = screen.getByRole('textbox');
     expect(inputElement).toBeDisabled();
   });
 
   test('renders readonly Select', () => {
-    render(<Select name="username" isReadOnly role="textbox" options={['Item1', 'Item2', 'Item3']} />);
+    render(
+      <Select
+        name="username"
+        isReadOnly
+        role="textbox"
+        options={['Item1', 'Item2', 'Item3']}
+      />
+    );
     const inputElement = screen.getByRole('textbox');
     expect(inputElement).toHaveAttribute('readonly');
   });
@@ -75,7 +95,14 @@ describe('MultiSelect component', () => {
   });
 
   test('renders MultiSelect component with provided size', () => {
-    render(<MultiSelect option={option} role="MultiSelect" size="md" removeOption={() => {}} />);
+    render(
+      <MultiSelect
+        option={option}
+        role="MultiSelect"
+        size="md"
+        removeOption={() => {}}
+      />
+    );
     const MultiSelectElement = screen.getByRole('MultiSelect');
     expect(MultiSelectElement).toBeInTheDocument();
     expect(MultiSelectElement).toHaveStyle({ fontSize: 16 });

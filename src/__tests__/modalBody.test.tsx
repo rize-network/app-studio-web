@@ -15,6 +15,8 @@ test('Modal body renders without errors', () => {
 });
 
 test('Modal body to match snapshot', () => {
-  const tree = renderer.create(<Modal.Body buttonColor="black">Modal Content</Modal.Body>).toJSON();
+  const tree = renderer
+    .create(<Modal.Body buttonColor="black">Modal Content</Modal.Body>)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

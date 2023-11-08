@@ -3,7 +3,12 @@ import { useTheme } from 'app-studio';
 import { Center } from '../../Layout/Center/Center';
 import { View } from '../../Layout/View/View';
 
-import { DefaultSpinnerProps, DottedProps, LoaderProps, QuarterProps } from '../Loader/Loader.props';
+import {
+  DefaultSpinnerProps,
+  DottedProps,
+  LoaderProps,
+  QuarterProps,
+} from '../Loader/Loader.props';
 
 import { DefaultSizes, DefaultSpeeds } from './Loader.style';
 
@@ -42,7 +47,11 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
       {...props}
     >
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></g>
       <g id="SVGRepo_iconCarrier">
         <path d="M21 12a9 9 0 11-6.219-8.56"></path>
       </g>
@@ -50,7 +59,12 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   );
 };
 
-const Dotted: React.FC<DottedProps> = ({ size = 'md', speed = 'normal', color = 'theme.loading', ...props }) => {
+const Dotted: React.FC<DottedProps> = ({
+  size = 'md',
+  speed = 'normal',
+  color = 'theme.loading',
+  ...props
+}) => {
   const theme = useTheme();
   const colorStyle = theme.getColor(color);
   const sizeStyle = typeof size === 'number' ? size : DefaultSizes[size];
@@ -81,7 +95,12 @@ const Dotted: React.FC<DottedProps> = ({ size = 'md', speed = 'normal', color = 
   );
 };
 
-const Quarter: React.FC<QuarterProps> = ({ size = 'md', speed = 'normal', color = 'theme.loading', ...props }) => {
+const Quarter: React.FC<QuarterProps> = ({
+  size = 'md',
+  speed = 'normal',
+  color = 'theme.loading',
+  ...props
+}) => {
   const theme = useTheme();
   const colorStyle = theme.getColor(color);
   const sizeStyle = typeof size === 'number' ? size : DefaultSizes[size];
@@ -105,7 +124,15 @@ const Quarter: React.FC<QuarterProps> = ({ size = 'md', speed = 'normal', color 
       style={{ transform: `rotate(${angle}deg)` }}
       {...props}
     >
-      <circle cx="25" cy="25" r="20" fill="none" stroke={colorStyle} strokeWidth="5" strokeDasharray="1,10" />
+      <circle
+        cx="25"
+        cy="25"
+        r="20"
+        fill="none"
+        stroke={colorStyle}
+        strokeWidth="5"
+        strokeDasharray="1,10"
+      />
     </svg>
   );
 };
@@ -128,10 +155,20 @@ const LoaderView: React.FC<LoaderProps> = ({
   };
 
   return (
-    <Center gap={10} flexDirection={textPosition === 'top' || textPosition === 'bottom' ? 'column' : 'row'} {...props}>
-      {(textPosition === 'left' || textPosition === 'top') && children && <View color={textColor}>{children}</View>}
+    <Center
+      gap={10}
+      flexDirection={
+        textPosition === 'top' || textPosition === 'bottom' ? 'column' : 'row'
+      }
+      {...props}
+    >
+      {(textPosition === 'left' || textPosition === 'top') && children && (
+        <View color={textColor}>{children}</View>
+      )}
       {variants[type]}
-      {(textPosition === 'right' || textPosition === 'bottom') && children && <View color={textColor}>{children}</View>}
+      {(textPosition === 'right' || textPosition === 'bottom') && children && (
+        <View color={textColor}>{children}</View>
+      )}
     </Center>
   );
 };

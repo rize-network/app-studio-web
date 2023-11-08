@@ -5,4 +5,6 @@ interface RouterProps {
   children: React.ReactNode;
 }
 
-export const RouterProvider: FC<RouterProps> = ({ children }) => <BrowserRouter>{children}</BrowserRouter>;
+export const RouterProvider: FC<RouterProps> = ({ children }) => (
+  <BrowserRouter>{children}</BrowserRouter>
+);

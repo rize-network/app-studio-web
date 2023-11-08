@@ -7,7 +7,12 @@ export const ColorInput = () => {
   return (
     <Vertical gap={10} width="300px">
       <TextField name="surname" label="Surname" colorScheme="theme.secondary" />
-      <TextField name="name" label="Name" colorScheme="theme.primary" variant="outline" />
+      <TextField
+        name="name"
+        label="Name"
+        colorScheme="theme.primary"
+        variant="outline"
+      />
     </Vertical>
   );
 };

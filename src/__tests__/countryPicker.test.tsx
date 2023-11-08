@@ -2,7 +2,10 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { CountryPicker } from 'src/components';
 import countries from 'src/components/Form/CountryPicker/countries.json';
-import { DropDown, DropDownItem } from 'src/components/Form/CountryPicker/CountryPicker/CountryPicker.view';
+import {
+  DropDown,
+  DropDownItem,
+} from 'src/components/Form/CountryPicker/CountryPicker/CountryPicker.view';
 
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
@@ -168,7 +171,9 @@ describe('DropDownItem component', () => {
     text: { color: 'red' },
   };
   test('renders DropDownItem component without crashing', () => {
-    render(<DropDownItem option={option} callback={() => {}} styles={styles} />);
+    render(
+      <DropDownItem option={option} callback={() => {}} styles={styles} />
+    );
     const DropDownItemElement = screen.getByRole('DropDownItem');
     expect(DropDownItemElement).toBeInTheDocument();
   });
@@ -176,7 +181,9 @@ describe('DropDownItem component', () => {
   test('calls callback function when option is clicked', () => {
     const option = 'United States';
     const callback = jest.fn();
-    render(<DropDownItem option={option} callback={callback} styles={styles} />);
+    render(
+      <DropDownItem option={option} callback={callback} styles={styles} />
+    );
 
     const optionElement = screen.getByText(option);
     fireEvent.click(optionElement);
@@ -186,7 +193,9 @@ describe('DropDownItem component', () => {
 
   test('changes background color on hover', () => {
     const option = 'United States';
-    render(<DropDownItem option={option} callback={() => {}} styles={styles} />);
+    render(
+      <DropDownItem option={option} callback={() => {}} styles={styles} />
+    );
 
     const optionElement = screen.getByText(option);
     fireEvent.mouseEnter(optionElement);
@@ -199,7 +208,15 @@ describe('DropDownItem component', () => {
   });
 
   test('renders DropDownItem component with provided size', () => {
-    render(<DropDownItem option={option} selected="Option 1" size="md" callback={() => {}} styles={styles} />);
+    render(
+      <DropDownItem
+        option={option}
+        selected="Option 1"
+        size="md"
+        callback={() => {}}
+        styles={styles}
+      />
+    );
     const DropDownItemElement = screen.getByRole('DropDownItem');
     expect(DropDownItemElement).toBeInTheDocument();
     expect(DropDownItemElement).toHaveStyle({ fontSize: 16 });
@@ -207,7 +224,14 @@ describe('DropDownItem component', () => {
 
   test('should call callback when an option is selected', () => {
     const callback = jest.fn();
-    render(<DropDownItem option={option} selected="Option 2" callback={callback} styles={styles} />);
+    render(
+      <DropDownItem
+        option={option}
+        selected="Option 2"
+        callback={callback}
+        styles={styles}
+      />
+    );
     fireEvent.click(screen.getByRole('DropDownItem'));
     expect(callback).toHaveBeenCalledTimes(1);
   });

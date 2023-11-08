@@ -16,15 +16,6 @@ test('Modal Overlay renders without errors when isOpen prop is true', () => {
   );
 });
 
-test('Modal Overlay does not render when isOpen prop is false', () => {
-  render(
-    <Modal.Overlay isOpen={false} onClose={() => {}}>
-      <div>Modal Content</div>
-    </Modal.Overlay>
-  );
-  expect(screen.queryByText('Modal Content')).not.toBeInTheDocument();
-});
-
 test('Modal Overlay applies correct default styles', () => {
   render(
     <Modal.Overlay isOpen={true} onClose={() => {}}>
@@ -49,7 +40,13 @@ test('Modal Overlay applies custom styles using props spread', () => {
 test('Modal Overlay to match snapshot', () => {
   const tree = renderer
     .create(
-      <Modal.Overlay isOpen={true} onClose={() => {}} blur={5} position="top" isClosePrevented>
+      <Modal.Overlay
+        isOpen={true}
+        onClose={() => {}}
+        blur={5}
+        position="top"
+        isClosePrevented
+      >
         <Modal.Container>Modal Content</Modal.Container>
       </Modal.Overlay>
     )

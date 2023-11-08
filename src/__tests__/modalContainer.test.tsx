@@ -60,7 +60,12 @@ test('ModalContainer applies custom styles using props spread', () => {
 test('Modal Container to match snapshot', () => {
   const tree = renderer
     .create(
-      <Modal.Container role="container" shape="rounded" shadow={{ boxShadow: 'none' }} isFullScreen>
+      <Modal.Container
+        role="container"
+        shape="rounded"
+        shadow={{ boxShadow: 'none' }}
+        isFullScreen
+      >
         <div>Modal Content</div>
       </Modal.Container>
     )

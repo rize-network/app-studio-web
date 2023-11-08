@@ -6,8 +6,11 @@ import { CountryPickerProps } from './CountryPicker.props';
 import { Country } from './CountryPicker.type';
 
 export const useCountryPickerState = ({ placeholder }: CountryPickerProps) => {
-  const [newOptions, setNewOptions] = React.useState<Array<Country>>(countryList);
-  const [selected, setSelected] = React.useState<string>(placeholder ?? countryList[0].name);
+  const [newOptions, setNewOptions] =
+    React.useState<Array<Country>>(countryList);
+  const [selected, setSelected] = React.useState<string>(
+    placeholder ?? countryList[0].name
+  );
 
   const [hide, setHide] = React.useState(true);
   const [isFocused, setIsFocused] = React.useState(false);

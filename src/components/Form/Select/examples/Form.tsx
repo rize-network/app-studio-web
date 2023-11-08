@@ -13,7 +13,12 @@ export const FormSelect = () => {
   return (
     <form onSubmit={handleSubmit}>
       <Vertical gap={10} width="100%">
-        <Select id="formItem" name="formItem" options={['Item1', 'Item2', 'Item3']} placeholder="Select an item..." />
+        <Select
+          id="formItem"
+          name="formItem"
+          options={['Item1', 'Item2', 'Item3']}
+          placeholder="Select an item..."
+        />
         <Button type="submit" alignSelf="center">
           Submit
         </Button>

@@ -96,6 +96,11 @@ export interface ModalType extends React.FunctionComponent<ModalProps> {
    * The footer component of the modal.
    */
   Footer: React.FC<FooterProps>;
+
+  /**
+   * The header component of the modal.
+   */
+  Layout: React.FC<ModalLayoutProps>;
 }
 
 export interface OverlayProps {
@@ -154,6 +159,10 @@ export interface HeaderProps {
    * Other properties
    */
   [x: string]: any;
+}
+
+export interface ModalLayoutProps {
+  modals: { [x: string]: React.FC<any> };
 }
 
 export interface ContainerProps {

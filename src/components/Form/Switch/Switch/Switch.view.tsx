@@ -60,15 +60,24 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         borderRadius={24}
         filter={isHovered && on ? 'brightness(0.9)' : 'brightness(1)'}
         transition="justify-content 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
-        backgroundColor={isDisabled ? 'disabled' : on ? colorScheme : 'lightgray'}
-        justifyContent={activeChild ? 'space-between' : on ? 'flex-end' : 'flex-start'}
+        backgroundColor={
+          isDisabled ? 'disabled' : on ? colorScheme : 'lightgray'
+        }
+        justifyContent={
+          activeChild ? 'space-between' : on ? 'flex-end' : 'flex-start'
+        }
         {...shadow}
         {...SliderPadding[size]}
         {...SliderSizes[size]}
         {...styles['slider']}
       >
         {activeChild && on && <View>{activeChild}</View>}
-        <View borderRadius="50%" backgroundColor="white" {...KnobSizes[size]} {...styles['circle']} />
+        <View
+          borderRadius="50%"
+          backgroundColor="white"
+          {...KnobSizes[size]}
+          {...styles['circle']}
+        />
         {inActiveChild && !on && <View>{inActiveChild}</View>}
       </View>
     </Label>

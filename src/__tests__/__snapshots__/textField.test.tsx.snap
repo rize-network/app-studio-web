@@ -2,24 +2,48 @@
 
 exports[`TextField to match snapshot 1`] = `
 <div
-  className="sc-aXZVg eoQJKn"
+  className="sc-bdfCDU fuoWwh"
   display="flex"
+  flexDirection="column"
+  flexWrap="nowrap"
+  gap={5}
+  justifyContent="flex-start"
+  position="relative"
 >
   <div
-    className="sc-aXZVg giOKpl"
+    alignItems="center"
+    backgroundColor="red"
+    borderBottomLeftRadius={0}
+    borderBottomRightRadius={0}
+    borderColor="error"
+    borderStyle="solid"
+    borderTopLeftRadius={6}
+    borderTopRightRadius={6}
+    borderWidth={1}
+    className="sc-bdfCDU iGHSMT"
     color="theme.primary"
     cursor="pointer"
     display="flex"
     filter="brightness(1)"
+    flexDirection="row"
+    flexWrap="nowrap"
     fontSize={20}
+    gap={10}
+    justifyContent="space-between"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    paddingLeft={16}
+    paddingRight={35}
+    paddingVertical={8}
+    transition="padding 0.2s ease"
     width="100%"
   >
     <div
-      className="sc-aXZVg TjQrj"
+      alignItems="center"
+      className="sc-bdfCDU hahxoN"
       display="flex"
       height="12px"
+      justifyContent="center"
       width="12px"
     >
       <svg
@@ -79,18 +103,25 @@ exports[`TextField to match snapshot 1`] = `
       </svg>
     </div>
     <div
-      className="sc-aXZVg btOgmi"
+      className="sc-bdfCDU jCBzwc"
       display="flex"
+      flexDirection="column"
+      flexWrap="nowrap"
+      justifyContent="flex-start"
       width="100%"
     >
       <input
         autoComplete="off"
         autoFocus={true}
-        className="sc-aXZVg jVKOse"
+        backgroundColor="red"
+        border="none"
+        className="sc-bdfCDU iZCSdI"
         color="color.blueGray.700"
         cursor="auto"
         disabled={false}
         fontSize={20}
+        heigth="100%"
+        margin={0}
         name="name"
         on={
           Object {
@@ -102,6 +133,8 @@ exports[`TextField to match snapshot 1`] = `
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        padddingHorizontal={0}
+        paddingVertical={8}
         placeholder="Name"
         readOnly={false}
         type="text"
@@ -111,8 +144,18 @@ exports[`TextField to match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-aXZVg jViPHz"
+    box={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
+    className="sc-bdfCDU VdVeV"
     color="theme.error"
+    field={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
     fontSize={12}
     fontStyle="normal"
     fontWeight={400}
@@ -121,6 +164,9 @@ exports[`TextField to match snapshot 1`] = `
         "fontSize": 15,
       }
     }
+    lineHeight={12}
+    marginHorizontal={0}
+    marginVertical={0}
     role="text"
     textDecoration="none"
   >
