@@ -3,10 +3,11 @@
 exports[`Center layout to match snapshot 1`] = `
 <div
   alignItems="center"
-  className="sc-bdfCDU ePetRJ"
+  className="sc-bdfCDU fKtRMd"
   display="flex"
   height={100}
   justifyContent="center"
+  onClick={[Function]}
   width={100}
 >
   This is the Center

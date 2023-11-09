@@ -3,7 +3,7 @@
 exports[`Modal to match snapshot 1`] = `
 <div
   alignItems="center"
-  className="sc-bdfCDU lgPMqH"
+  className="sc-bdfCDU bcAYvh"
   display="flex"
   height="100%"
   justifyContent="center"
@@ -19,7 +19,7 @@ exports[`Modal to match snapshot 1`] = `
     alignItems="center"
     backdropFilter="blur(10px)"
     backgroundColor="blackAlpha.500"
-    className="sc-bdfCDU UxOAg"
+    className="sc-bdfCDU krrJWc"
     cursor="pointer"
     display="flex"
     height="100vh"
@@ -35,7 +35,7 @@ exports[`Modal to match snapshot 1`] = `
       backgroundColor="white"
       borderRadius={4}
       boxShadow="none"
-      className="sc-bdfCDU cHJcWF"
+      className="sc-bdfCDU krrJWc"
       cursor="default"
       display="flex"
       flexDirection="column"
@@ -51,11 +51,12 @@ exports[`Modal to match snapshot 1`] = `
       <div
         alignItems="center"
         buttonSize="xl"
-        className="sc-bdfCDU eYHFiu"
+        className="sc-bdfCDU iMdcdr"
         display="flex"
         flexDirection="row"
         flexWrap="wrap"
         justifyContent="space-between"
+        onClick={[Function]}
         paddingHorizontal={20}
         paddingVertical={15}
       >
@@ -64,7 +65,7 @@ exports[`Modal to match snapshot 1`] = `
           backgroundColor="transparent"
           border="none"
           borderRadius={4}
-          className="sc-bdfCDU hAwArg"
+          className="sc-bdfCDU krrJWc"
           color="color.white"
           cursor="pointer"
           disabled={false}
@@ -90,10 +91,11 @@ exports[`Modal to match snapshot 1`] = `
         >
           <div
             alignItems="center"
-            className="sc-bdfCDU lmiYPB"
+            className="sc-bdfCDU eztudp"
             display="flex"
             height="20px"
             justifyContent="center"
+            onClick={[Function]}
             width="20px"
           >
             <svg
@@ -130,8 +132,9 @@ exports[`Modal to match snapshot 1`] = `
         borderColor="rgba(250, 250, 250, 1)"
         borderStyle="solid"
         borderTopWidth={2}
-        className="sc-bdfCDU gMioEx"
+        className="sc-bdfCDU iMdcdr"
         height="200px"
+        onClick={[Function]}
         overflowY="auto"
         paddingHorizontal={20}
         paddingVertical={15}
@@ -140,12 +143,13 @@ exports[`Modal to match snapshot 1`] = `
       </div>
       <div
         alignItems="center"
-        className="sc-bdfCDU erlawm"
+        className="sc-bdfCDU iMdcdr"
         display="flex"
         flexDirection="row"
         flexWrap="wrap"
         justifyContent="flex-end"
         marginTop="auto"
+        onClick={[Function]}
         paddingHorizontal={20}
         paddingVertical={15}
       >
@@ -154,7 +158,7 @@ exports[`Modal to match snapshot 1`] = `
           backgroundColor="theme.primary"
           border="none"
           borderRadius={4}
-          className="sc-bdfCDU huRRnb"
+          className="sc-bdfCDU krrJWc"
           color="color.white"
           cursor="pointer"
           disabled={false}

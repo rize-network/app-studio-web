@@ -2,7 +2,7 @@
 
 exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU bChUJt"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="column"
   flexWrap="nowrap"
@@ -13,12 +13,12 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
 >
   <div
     alignItems="center"
-    backgroundColor="trueGray.50"
+    backgroundColor="color.trueGray.50"
     borderColor="error"
     borderRadius={24}
     borderStyle="solid"
     borderWidth={1}
-    className="sc-bdfCDU drLOlu"
+    className="sc-bdfCDU iBzhpA"
     color="theme.primary"
     cursor="pointer"
     display="flex"
@@ -28,6 +28,7 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
     fontSize={20}
     gap={10}
     justifyContent="space-between"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     paddingLeft={16}
@@ -37,18 +38,19 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
     width="100%"
   >
     <div
-      className="sc-bdfCDU jCBzwc"
+      className="sc-bdfCDU krrJWc"
       display="flex"
       flexDirection="column"
       flexWrap="nowrap"
       justifyContent="flex-start"
+      onClick={[Function]}
       width="100%"
     >
       <input
         autoFocus={true}
         backgroundColor="transparent"
         border="none"
-        className="sc-bdfCDU cbFLIy"
+        className="sc-bdfCDU hWVPoC"
         color="color.blueGray.700"
         cursor="auto"
         disabled={false}
@@ -56,15 +58,9 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
         heigth="100%"
         margin={0}
         name="name"
-        on={
-          Object {
-            "focus": Object {
-              "outline": "none",
-            },
-          }
-        }
         onBlur={[Function]}
         onChange={[Function]}
+        onClick={[Function]}
         onFocus={[Function]}
         paddingHorizonatl={0}
         paddingVerical={8}
@@ -77,11 +73,12 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
     </div>
     <div
       alignItems="center"
-      className="sc-bdfCDU gYnDEY"
+      className="sc-bdfCDU krrJWc"
       display="flex"
       flexWrap="nowrap"
       gap={10}
       justifyContent="center"
+      onClick={[Function]}
       position="absolute"
       right={16}
       top="50%"
@@ -90,10 +87,11 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
     >
       <div
         alignItems="center"
-        className="sc-bdfCDU hcIsQh"
+        className="sc-bdfCDU fQuoKB"
         display="flex"
         height="16px"
         justifyContent="center"
+        onClick={[Function]}
         width="16px"
       >
         <svg
@@ -157,43 +155,17 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-bdfCDU VdVeV"
+    className="sc-bdfCDU krrJWc"
     color="theme.error"
-    dropDown={
-      Object {
-        "backgrounColor": "theme.primary",
-      }
-    }
     fontSize={12}
     fontStyle="normal"
     fontWeight={400}
-    helperText={
-      Object {
-        "color": "red",
-      }
-    }
-    icon={
-      Object {
-        "width": 0.2,
-      }
-    }
-    label={
-      Object {
-        "fontSize": 15,
-      }
-    }
     lineHeight={12}
     marginHorizontal={0}
     marginVertical={0}
+    onClick={[Function]}
     role="text"
-    text={
-      Object {
-        "color": "theme.primary",
-      }
-    }
     textDecoration="none"
-  >
-    required
-  </div>
+  />
 </div>
 `;

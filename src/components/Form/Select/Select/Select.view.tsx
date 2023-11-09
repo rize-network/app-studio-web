@@ -70,7 +70,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     paddingHorizontal: 0,
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
-    color: isDisabled ? 'trueGray.600' : 'blueGray.700',
+    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
     cursor: isDisabled ? 'not-allowed' : 'auto',
     ...styles['field'],
     ...styles['text'],
@@ -219,7 +219,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       borderRadius={4}
       alignItems="center"
       fontSize={Typography.fontSizes[size]}
-      backgroundColor="trueGray.300"
+      backgroundColor="color.trueGray.300"
       onClick={(event: any) => event.stopPropagation()}
       {...props}
     >

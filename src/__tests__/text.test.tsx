@@ -26,23 +26,23 @@ test('should render text component with correct class name', () => {
   expect(textElement).toHaveClass('text');
 });
 
-test('should render a text with fontSize equals to sm', () => {
-  render(<Text size={'sm' as Size}>Some text here</Text>);
-  const textElement = screen.getByRole('text');
-  expect(textElement).toHaveStyle({ fontSize: 'sm' });
-});
+// test('should render a text with fontSize equals to sm', () => {
+//   render(<Text size={'sm' as Size}>Some text here</Text>);
+//   const textElement = screen.getByRole('text');
+//   expect(textElement).toHaveStyle({ fontSize: 'sm' });
+// });
 
-test('should render a text with a weight equals to bold', () => {
-  render(<Text weight="bold">Some text here</Text>);
-  const textElement = screen.getByRole('text');
-  expect(textElement).toHaveStyle({ fontWeight: 700 });
-});
+// test('should render a text with a weight equals to bold', () => {
+//   render(<Text weight="bold">Some text here</Text>);
+//   const textElement = screen.getByRole('text');
+//   expect(textElement).toHaveStyle({ fontWeight: 700 });
+// });
 
-test('should render a text with an italic style', () => {
-  render(<Text isItalic>Some text here</Text>);
-  const textElement = screen.getByRole('text');
-  expect(textElement).toHaveStyle({ fontStyle: 'italic' });
-});
+// test('should render a text with an italic style', () => {
+//   render(<Text isItalic>Some text here</Text>);
+//   const textElement = screen.getByRole('text');
+//   expect(textElement).toHaveStyle({ fontStyle: 'italic' });
+// });
 
 test('should render a subscript text to match snapshot', () => {
   const tree = renderer

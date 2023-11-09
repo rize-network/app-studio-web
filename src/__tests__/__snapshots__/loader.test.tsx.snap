@@ -3,11 +3,12 @@
 exports[`Loader with an a size xl where width equals to 30px should match snapshot 1`] = `
 <div
   alignItems="center"
-  className="sc-bdfCDU fPfAum"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="row"
   gap={10}
   justifyContent="center"
+  onClick={[Function]}
 >
   <svg
     fill="none"
@@ -43,7 +44,8 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
     </g>
   </svg>
   <div
-    className="sc-bdfCDU fgJVig"
+    className="sc-bdfCDU krrJWc"
+    onClick={[Function]}
   >
     Delete
   </div>
@@ -53,11 +55,12 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
 exports[`Loader with loader color equals to theme.primary should match snapshot 1`] = `
 <div
   alignItems="center"
-  className="sc-bdfCDU fPfAum"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="row"
   gap={10}
   justifyContent="center"
+  onClick={[Function]}
 >
   <svg
     fill="none"
@@ -93,7 +96,8 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
     </g>
   </svg>
   <div
-    className="sc-bdfCDU fgJVig"
+    className="sc-bdfCDU krrJWc"
+    onClick={[Function]}
   >
     Loader
   </div>
@@ -103,11 +107,12 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
 exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
 <div
   alignItems="center"
-  className="sc-bdfCDU fPfAum"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="row"
   gap={10}
   justifyContent="center"
+  onClick={[Function]}
 >
   <svg
     fill="none"
@@ -143,8 +148,9 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
     </g>
   </svg>
   <div
-    className="sc-bdfCDU vGhqj"
+    className="sc-bdfCDU krrJWc"
     color="theme.primary"
+    onClick={[Function]}
   >
     Loader
   </div>
@@ -154,11 +160,12 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
 exports[`Loader with text position bottom should match snapshot 1`] = `
 <div
   alignItems="center"
-  className="sc-bdfCDU fBXRtu"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="column"
   gap={10}
   justifyContent="center"
+  onClick={[Function]}
 >
   <svg
     fill="none"
@@ -194,7 +201,8 @@ exports[`Loader with text position bottom should match snapshot 1`] = `
     </g>
   </svg>
   <div
-    className="sc-bdfCDU fgJVig"
+    className="sc-bdfCDU krrJWc"
+    onClick={[Function]}
   >
     Loader
   </div>

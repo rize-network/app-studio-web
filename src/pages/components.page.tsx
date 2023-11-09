@@ -96,6 +96,8 @@ export const ComponentsPage = () => {
         flex={1}
         boxShadow="0 2px 5px rgba(0, 0, 0, 0.2)"
         transition="box-shadow 0.3s ease-in-out"
+       
+
       >
         <Title onClick={() => navigate('/home')}>Navigation</Title>
         <List>

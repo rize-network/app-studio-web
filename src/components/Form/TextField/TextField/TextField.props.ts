@@ -12,7 +12,7 @@ export interface TextFieldProps {
   /**
    * Specifies whether the input field should display an error state.
    */
-  error?: boolean;
+  error?: any;
   /**
    * Provides additional information about the input field.
    */

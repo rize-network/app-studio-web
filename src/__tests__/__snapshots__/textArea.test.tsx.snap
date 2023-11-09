@@ -2,12 +2,13 @@
 
 exports[`TextArea to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU fuoWwh"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="column"
   flexWrap="nowrap"
   gap={5}
   justifyContent="flex-start"
+  onClick={[Function]}
   position="relative"
 >
   <div
@@ -20,7 +21,7 @@ exports[`TextArea to match snapshot 1`] = `
     borderTopLeftRadius={6}
     borderTopRightRadius={6}
     borderWidth={1}
-    className="sc-bdfCDU iGHSMT"
+    className="sc-bdfCDU iBzhpA"
     color="theme.primary"
     cursor="pointer"
     display="flex"
@@ -30,6 +31,7 @@ exports[`TextArea to match snapshot 1`] = `
     fontSize={20}
     gap={10}
     justifyContent="space-between"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     paddingLeft={16}
@@ -39,19 +41,20 @@ exports[`TextArea to match snapshot 1`] = `
     width="100%"
   >
     <div
-      className="sc-bdfCDU jCBzwc"
+      className="sc-bdfCDU krrJWc"
       display="flex"
       flexDirection="column"
       flexWrap="nowrap"
       justifyContent="flex-start"
+      onClick={[Function]}
       width="100%"
     >
       <textarea
         autoFocus={false}
         backgroundColor="red"
         border="none"
-        className="sc-bdfCDU csTWjI"
-        color="blueGray.700"
+        className="sc-bdfCDU ibMnua"
+        color="color.blueGray.700"
         cols={35}
         cursor="auto"
         disabled={false}
@@ -61,15 +64,9 @@ exports[`TextArea to match snapshot 1`] = `
         margin={0}
         multiline={false}
         name="name"
-        on={
-          Object {
-            "focus": Object {
-              "outline": "none",
-            },
-          }
-        }
         onBlur={[Function]}
         onChange={[Function]}
+        onClick={[Function]}
         onFocus={[Function]}
         paddingHorizontal={0}
         paddingVertical={8}
@@ -82,33 +79,17 @@ exports[`TextArea to match snapshot 1`] = `
     </div>
   </div>
   <div
-    box={
-      Object {
-        "backgroundColor": "red",
-      }
-    }
-    className="sc-bdfCDU VdVeV"
+    className="sc-bdfCDU krrJWc"
     color="theme.error"
-    field={
-      Object {
-        "backgroundColor": "red",
-      }
-    }
     fontSize={12}
     fontStyle="normal"
     fontWeight={400}
-    label={
-      Object {
-        "fontSize": 15,
-      }
-    }
     lineHeight={12}
     marginHorizontal={0}
     marginVertical={0}
+    onClick={[Function]}
     role="text"
     textDecoration="none"
-  >
-    required
-  </div>
+  />
 </div>
 `;

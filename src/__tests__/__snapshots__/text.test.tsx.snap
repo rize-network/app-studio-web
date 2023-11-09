@@ -2,22 +2,24 @@
 
 exports[`should render a subscript text to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU eyQhtS"
+  className="sc-bdfCDU krrJWc"
   fontSize={16}
   fontStyle="normal"
   fontWeight={400}
   lineHeight={16}
+  onClick={[Function]}
   role="text"
   textDecoration="none"
 >
   H
   <div
-    className="sc-bdfCDU kVfvQs"
+    className="sc-bdfCDU krrJWc"
     display="inline"
     fontSize={16}
     fontStyle="normal"
     fontWeight={400}
     lineHeight={16}
+    onClick={[Function]}
     role="text"
     textDecoration="none"
   >
@@ -31,22 +33,24 @@ exports[`should render a subscript text to match snapshot 1`] = `
 
 exports[`should render a superscript text to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU eyQhtS"
+  className="sc-bdfCDU krrJWc"
   fontSize={16}
   fontStyle="normal"
   fontWeight={400}
   lineHeight={16}
+  onClick={[Function]}
   role="text"
   textDecoration="none"
 >
   H
   <div
-    className="sc-bdfCDU kVfvQs"
+    className="sc-bdfCDU krrJWc"
     display="inline"
     fontSize={16}
     fontStyle="normal"
     fontWeight={400}
     lineHeight={16}
+    onClick={[Function]}
     role="text"
     textDecoration="none"
   >
@@ -60,11 +64,12 @@ exports[`should render a superscript text to match snapshot 1`] = `
 
 exports[`should render one truncated text line to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU AFKiu"
+  className="sc-bdfCDU krrJWc"
   fontSize={16}
   fontStyle="normal"
   fontWeight={400}
   lineHeight={16}
+  onClick={[Function]}
   role="text"
   textDecoration="underline"
 >
@@ -76,12 +81,13 @@ exports[`should render one truncated text line to match snapshot 1`] = `
 
 exports[`text to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU azuJS"
+  className="sc-bdfCDU krrJWc"
   fontSize={96}
   fontStyle="normal"
   fontWeight={700}
   letterSpacing={-1.5}
   lineHeight={112}
+  onClick={[Function]}
   role="text"
   textDecoration="line-through"
 >

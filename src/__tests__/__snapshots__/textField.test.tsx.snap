@@ -2,12 +2,13 @@
 
 exports[`TextField to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU fuoWwh"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="column"
   flexWrap="nowrap"
   gap={5}
   justifyContent="flex-start"
+  onClick={[Function]}
   position="relative"
 >
   <div
@@ -20,7 +21,7 @@ exports[`TextField to match snapshot 1`] = `
     borderTopLeftRadius={6}
     borderTopRightRadius={6}
     borderWidth={1}
-    className="sc-bdfCDU iGHSMT"
+    className="sc-bdfCDU iBzhpA"
     color="theme.primary"
     cursor="pointer"
     display="flex"
@@ -30,6 +31,7 @@ exports[`TextField to match snapshot 1`] = `
     fontSize={20}
     gap={10}
     justifyContent="space-between"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     paddingLeft={16}
@@ -40,10 +42,11 @@ exports[`TextField to match snapshot 1`] = `
   >
     <div
       alignItems="center"
-      className="sc-bdfCDU hahxoN"
+      className="sc-bdfCDU gmVaNF"
       display="flex"
       height="12px"
       justifyContent="center"
+      onClick={[Function]}
       width="12px"
     >
       <svg
@@ -103,11 +106,12 @@ exports[`TextField to match snapshot 1`] = `
       </svg>
     </div>
     <div
-      className="sc-bdfCDU jCBzwc"
+      className="sc-bdfCDU krrJWc"
       display="flex"
       flexDirection="column"
       flexWrap="nowrap"
       justifyContent="flex-start"
+      onClick={[Function]}
       width="100%"
     >
       <input
@@ -115,7 +119,7 @@ exports[`TextField to match snapshot 1`] = `
         autoFocus={true}
         backgroundColor="red"
         border="none"
-        className="sc-bdfCDU iZCSdI"
+        className="sc-bdfCDU ibMnua"
         color="color.blueGray.700"
         cursor="auto"
         disabled={false}
@@ -123,15 +127,9 @@ exports[`TextField to match snapshot 1`] = `
         heigth="100%"
         margin={0}
         name="name"
-        on={
-          Object {
-            "focus": Object {
-              "outline": "none",
-            },
-          }
-        }
         onBlur={[Function]}
         onChange={[Function]}
+        onClick={[Function]}
         onFocus={[Function]}
         padddingHorizontal={0}
         paddingVertical={8}
@@ -144,33 +142,17 @@ exports[`TextField to match snapshot 1`] = `
     </div>
   </div>
   <div
-    box={
-      Object {
-        "backgroundColor": "red",
-      }
-    }
-    className="sc-bdfCDU VdVeV"
+    className="sc-bdfCDU krrJWc"
     color="theme.error"
-    field={
-      Object {
-        "backgroundColor": "red",
-      }
-    }
     fontSize={12}
     fontStyle="normal"
     fontWeight={400}
-    label={
-      Object {
-        "fontSize": 15,
-      }
-    }
     lineHeight={12}
     marginHorizontal={0}
     marginVertical={0}
+    onClick={[Function]}
     role="text"
     textDecoration="none"
-  >
-    required
-  </div>
+  />
 </div>
 `;

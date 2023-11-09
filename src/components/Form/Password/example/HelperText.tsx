@@ -47,14 +47,14 @@ export const HelperTextPassword = () => {
           name="firstName"
           label="First Name"
           helperText={formErrors.firstName}
-          error={!!formErrors.firstName}
+          error={formErrors.firstName}
           onChange={handleChange}
         />
         <Password
           name="password"
           label="Password"
           helperText={formErrors.password}
-          error={!!formErrors.password}
+          error={formErrors.password}
           onChange={handleChange}
           visibleIcon={<OpenEyeSvg size={14} />}
           hiddenIcon={<CloseEyeSvg size={14} />}

@@ -6,7 +6,7 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
   backgroundColor="theme.primary"
   border="none"
   borderRadius={24}
-  className="sc-bdfCDU btHyRL"
+  className="sc-bdfCDU krrJWc"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -38,7 +38,7 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
   backgroundColor="theme.secondary"
   border="none"
   borderRadius={24}
-  className="sc-bdfCDU jUCVZL"
+  className="sc-bdfCDU krrJWc"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -62,10 +62,11 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
 >
   <div
     alignItems="center"
-    className="sc-bdfCDU loJUqV"
+    className="sc-bdfCDU ecSIal"
     display="flex"
     height="24px"
     justifyContent="center"
+    onClick={[Function]}
     width="24px"
   >
     <svg
@@ -105,7 +106,7 @@ exports[`Button with an icon on the right to match snapshot 1`] = `
   backgroundColor="theme.secondary"
   border="none"
   borderRadius={24}
-  className="sc-bdfCDU jUCVZL"
+  className="sc-bdfCDU krrJWc"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -130,10 +131,11 @@ exports[`Button with an icon on the right to match snapshot 1`] = `
   Delete
   <div
     alignItems="center"
-    className="sc-bdfCDU loJUqV"
+    className="sc-bdfCDU ecSIal"
     display="flex"
     height="24px"
     justifyContent="center"
+    onClick={[Function]}
     width="24px"
   >
     <svg

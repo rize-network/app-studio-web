@@ -2,28 +2,32 @@
 
 exports[`Vertical layout to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU jYRqaa"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="column"
   flexWrap="nowrap"
   justifyContent="space-between"
+  onClick={[Function]}
 >
   <div
     backgroundColor="theme.primary"
-    className="sc-bdfCDU hnsiER"
+    className="sc-bdfCDU dffHnx"
     height={50}
+    onClick={[Function]}
     width={50}
   />
   <div
     backgroundColor="theme.secondary"
-    className="sc-bdfCDU ezdjXX"
+    className="sc-bdfCDU dffHnx"
     height={50}
+    onClick={[Function]}
     width={50}
   />
   <div
     backgroundColor="theme.warning"
-    className="sc-bdfCDU edaeWf"
+    className="sc-bdfCDU dffHnx"
     height={50}
+    onClick={[Function]}
     width={50}
   />
 </div>

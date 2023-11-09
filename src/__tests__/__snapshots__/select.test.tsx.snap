@@ -2,7 +2,7 @@
 
 exports[`Select component Select to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU bChUJt"
+  className="sc-bdfCDU krrJWc"
   display="flex"
   flexDirection="column"
   flexWrap="nowrap"
@@ -14,7 +14,7 @@ exports[`Select component Select to match snapshot 1`] = `
 >
   <div
     alignItems="center"
-    backgroundColor="trueGray.50"
+    backgroundColor="color.trueGray.50"
     borderBottomLeftRadius={0}
     borderBottomRightRadius={0}
     borderBottomWidth={2}
@@ -24,7 +24,7 @@ exports[`Select component Select to match snapshot 1`] = `
     borderTopRightRadius={6}
     borderWidth={0}
     boxShadow="rgb(249, 115, 22) 0px 4px 14px 0px"
-    className="sc-bdfCDU bMSBRZ"
+    className="sc-bdfCDU iBzhpA"
     color="theme.primary"
     cursor="auto"
     display="flex"
@@ -34,6 +34,7 @@ exports[`Select component Select to match snapshot 1`] = `
     fontSize={20}
     gap={10}
     justifyContent="space-between"
+    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     paddingLeft={16}
@@ -43,20 +44,22 @@ exports[`Select component Select to match snapshot 1`] = `
     width="100%"
   >
     <div
-      className="sc-bdfCDU jCBzwc"
+      className="sc-bdfCDU krrJWc"
       display="flex"
       flexDirection="column"
       flexWrap="nowrap"
       justifyContent="flex-start"
+      onClick={[Function]}
       width="100%"
     >
       <select
-        className="sc-bdfCDU kePnPK"
+        className="sc-bdfCDU krrJWc"
         disabled={false}
         height={0}
         multiple={false}
         name="name"
         onChange={[Function]}
+        onClick={[Function]}
         onFocus={[Function]}
         opacity={0}
         position="absolute"
@@ -83,8 +86,8 @@ exports[`Select component Select to match snapshot 1`] = `
       <div
         backgroundColor="transparent"
         border="none"
-        className="sc-bdfCDU gArlgq"
-        color="blueGray.700"
+        className="sc-bdfCDU iBzhpA"
+        color="color.blueGray.700"
         cursor="auto"
         fontSize={20}
         fontStyle="normal"
@@ -92,6 +95,7 @@ exports[`Select component Select to match snapshot 1`] = `
         heigth="100%"
         lineHeight={16}
         margin={0}
+        onClick={[Function]}
         paddingHorizontal={0}
         paddingVertical={8}
         role="text"
@@ -103,11 +107,12 @@ exports[`Select component Select to match snapshot 1`] = `
     </div>
     <div
       alignItems="center"
-      className="sc-bdfCDU gYnDEY"
+      className="sc-bdfCDU krrJWc"
       display="flex"
       flexWrap="nowrap"
       gap={10}
       justifyContent="center"
+      onClick={[Function]}
       position="absolute"
       right={16}
       top="50%"
@@ -115,5 +120,18 @@ exports[`Select component Select to match snapshot 1`] = `
       zIndex={500}
     />
   </div>
+  <div
+    className="sc-bdfCDU krrJWc"
+    color="theme.error"
+    fontSize={12}
+    fontStyle="normal"
+    fontWeight={400}
+    lineHeight={12}
+    marginHorizontal={0}
+    marginVertical={0}
+    onClick={[Function]}
+    role="text"
+    textDecoration="none"
+  />
 </div>
 `;

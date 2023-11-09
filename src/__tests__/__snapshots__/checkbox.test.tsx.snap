@@ -3,7 +3,7 @@
 exports[`Checkbox to match snapshot 1`] = `
 <div
   alignItems="center"
-  className="sc-bdfCDU gkDLdE"
+  className="sc-bdfCDU esuVst"
   color="blue"
   cursor="default"
   display="flex"
@@ -26,10 +26,11 @@ exports[`Checkbox to match snapshot 1`] = `
     borderStyle="solid"
     borderWidth={2}
     boxShadow="rgb(249, 115, 22) 0px 4px 14px 0px"
-    className="sc-bdfCDU eJWbgw"
+    className="sc-bdfCDU gssZIZ"
     display="flex"
     height={30}
     justifyContent="center"
+    onClick={[Function]}
     width={30}
   />
 </div>

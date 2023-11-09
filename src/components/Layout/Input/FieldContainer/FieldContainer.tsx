@@ -4,6 +4,7 @@ import { Vertical } from '../../Vertical/examples';
 import { HelperText } from '../HelperText/HelperText';
 
 import { ContainerProps } from './FieldContainer/FieldContainer.props';
+import { Text } from '../../../Text/Text';
 
 export const FieldContainer: React.FC<ContainerProps> = ({
   children,
@@ -14,10 +15,20 @@ export const FieldContainer: React.FC<ContainerProps> = ({
 }) => (
   <Vertical gap={5} position="relative" {...props}>
     {children}
-    {helperText && (
-      <HelperText error={error} {...styles}>
+    {!error && helperText && (
+      <HelperText {...styles}>
         {helperText}
       </HelperText>
+    )}
+    {error && (
+      <Text
+        size="xs"
+        marginVertical={0}
+        marginHorizontal={0}
+        color={'theme.error'}
+      >
+        {error}
+      </Text>
     )}
   </Vertical>
 );

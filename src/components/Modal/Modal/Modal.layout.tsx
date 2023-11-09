@@ -5,11 +5,13 @@ import { ModalOverlay } from './Modal.view';
 import { ModalLayoutProps } from './Modal.props';
 
 export const ModalLayout = ({ modals }: ModalLayoutProps) => {
-  const modalStore = useModalStore(({ modal, modalProps, overlayProps }:ModalState) => ({
-    modal,
-    modalProps,
-    overlayProps,
-  }));
+  const modalStore = useModalStore(
+    ({ modal, modalProps, overlayProps }: ModalState) => ({
+      modal,
+      modalProps,
+      overlayProps,
+    })
+  );
   if (typeof modalStore.modal === 'boolean') {
     return null;
   }

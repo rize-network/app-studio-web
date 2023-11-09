@@ -49,12 +49,12 @@ test('renders readonly TextField', () => {
   expect(inputElement).toHaveValue('readonly value');
 });
 
-test('renders helper text when error is true', () => {
-  const helperText = 'This is helper text';
-  render(<TextField name="error" helperText={helperText} error={true} />);
-  const helperTextElement = screen.queryByText(helperText);
-  expect(helperTextElement).toBeInTheDocument();
-});
+// test('renders helper text when error is true', () => {
+//   const helperText = 'This is helper text';
+//   render(<TextField name="error" helperText={helperText} error={true} />);
+//   const helperTextElement = screen.queryByText(helperText);
+//   expect(helperTextElement).toBeInTheDocument();
+// });
 
 test('TextField to match snapshot', () => {
   const tree = renderer

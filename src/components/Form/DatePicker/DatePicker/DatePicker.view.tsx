@@ -65,7 +65,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
     },
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
-    color: isDisabled ? 'trueGray.600' : 'blueGray.700',
+    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
     ...styles['field'],
   };

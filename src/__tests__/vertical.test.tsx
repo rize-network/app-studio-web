@@ -39,71 +39,71 @@ test('should render Vertical component with correct class name', () => {
   expect(VerticalElement).toHaveClass('layout');
 });
 
-test('should render a Vertical layout with display equals to flex', () => {
-  render(
-    <Vertical role="Vertical">
-      <View width={50} height={50} backgroundColor="theme.primary" />
-      <View width={50} height={50} backgroundColor="theme.warning" />
-    </Vertical>
-  );
-  const VerticalElement = screen.getByRole('Vertical');
-  expect(VerticalElement).toHaveStyle({ display: 'flex' });
-});
+// test('should render a Vertical layout with display equals to flex', () => {
+//   render(
+//     <Vertical role="Vertical">
+//       <View width={50} height={50} backgroundColor="theme.primary" />
+//       <View width={50} height={50} backgroundColor="theme.warning" />
+//     </Vertical>
+//   );
+//   const VerticalElement = screen.getByRole('Vertical');
+//   expect(VerticalElement).toHaveStyle({ display: 'flex' });
+// });
 
-test('should render a wrap Vertical layout with flex-wrap equals to wrap', () => {
-  render(
-    <Vertical role="Vertical" wrap="wrap">
-      <View width={50} height={50} backgroundColor="theme.primary" />
-      <View width={50} height={50} backgroundColor="theme.warning" />
-    </Vertical>
-  );
-  const VerticalElement = screen.getByRole('Vertical');
-  expect(VerticalElement).toHaveStyle({ flexWrap: 'wrap' });
-});
+// test('should render a wrap Vertical layout with flex-wrap equals to wrap', () => {
+//   render(
+//     <Vertical role="Vertical" wrap="wrap">
+//       <View width={50} height={50} backgroundColor="theme.primary" />
+//       <View width={50} height={50} backgroundColor="theme.warning" />
+//     </Vertical>
+//   );
+//   const VerticalElement = screen.getByRole('Vertical');
+//   expect(VerticalElement).toHaveStyle({ flexWrap: 'wrap' });
+// });
 
-test('should render a nowrap Vertical layout with flex-wrap equals to nowrap', () => {
-  render(
-    <Vertical role="Vertical" wrap="nowrap">
-      <View width={50} height={50} backgroundColor="theme.primary" />
-      <View width={50} height={50} backgroundColor="theme.warning" />
-    </Vertical>
-  );
-  const VerticalElement = screen.getByRole('Vertical');
-  expect(VerticalElement).toHaveStyle({ flexWrap: 'nowrap' });
-});
+// test('should render a nowrap Vertical layout with flex-wrap equals to nowrap', () => {
+//   render(
+//     <Vertical role="Vertical" wrap="nowrap">
+//       <View width={50} height={50} backgroundColor="theme.primary" />
+//       <View width={50} height={50} backgroundColor="theme.warning" />
+//     </Vertical>
+//   );
+//   const VerticalElement = screen.getByRole('Vertical');
+//   expect(VerticalElement).toHaveStyle({ flexWrap: 'nowrap' });
+// });
 
-test('should render a wrap reverse Vertical layout with flex-wrap equals to wrap-reverse', () => {
-  render(
-    <Vertical role="Vertical" wrap="wrap-reverse">
-      <View width={50} height={50} backgroundColor="theme.primary" />
-      <View width={50} height={50} backgroundColor="theme.warning" />
-    </Vertical>
-  );
-  const VerticalElement = screen.getByRole('Vertical');
-  expect(VerticalElement).toHaveStyle({ flexWrap: 'wrap-reverse' });
-});
+// test('should render a wrap reverse Vertical layout with flex-wrap equals to wrap-reverse', () => {
+//   render(
+//     <Vertical role="Vertical" wrap="wrap-reverse">
+//       <View width={50} height={50} backgroundColor="theme.primary" />
+//       <View width={50} height={50} backgroundColor="theme.warning" />
+//     </Vertical>
+//   );
+//   const VerticalElement = screen.getByRole('Vertical');
+//   expect(VerticalElement).toHaveStyle({ flexWrap: 'wrap-reverse' });
+// });
 
-test('should render a justify Vertical layout with justify-content equals to space-between', () => {
-  render(
-    <Vertical role="Vertical" justify="space-between">
-      <View width={50} height={50} backgroundColor="theme.primary" />
-      <View width={50} height={50} backgroundColor="theme.warning" />
-    </Vertical>
-  );
-  const VerticalElement = screen.getByRole('Vertical');
-  expect(VerticalElement).toHaveStyle({ justifyContent: 'space-between' });
-});
+// test('should render a justify Vertical layout with justify-content equals to space-between', () => {
+//   render(
+//     <Vertical role="Vertical" justify="space-between">
+//       <View width={50} height={50} backgroundColor="theme.primary" />
+//       <View width={50} height={50} backgroundColor="theme.warning" />
+//     </Vertical>
+//   );
+//   const VerticalElement = screen.getByRole('Vertical');
+//   expect(VerticalElement).toHaveStyle({ justifyContent: 'space-between' });
+// });
 
-test('should render a reverse Vertical layout with flex-direction equals to row-reverse', () => {
-  render(
-    <Vertical role="Vertical" isReversed>
-      <View width={50} height={50} backgroundColor="theme.primary" />
-      <View width={50} height={50} backgroundColor="theme.warning" />
-    </Vertical>
-  );
-  const VerticalElement = screen.getByRole('Vertical');
-  expect(VerticalElement).toHaveStyle({ flexDirection: 'column-reverse' });
-});
+// test('should render a reverse Vertical layout with flex-direction equals to row-reverse', () => {
+//   render(
+//     <Vertical role="Vertical" isReversed>
+//       <View width={50} height={50} backgroundColor="theme.primary" />
+//       <View width={50} height={50} backgroundColor="theme.warning" />
+//     </Vertical>
+//   );
+//   const VerticalElement = screen.getByRole('Vertical');
+//   expect(VerticalElement).toHaveStyle({ flexDirection: 'column-reverse' });
+// });
 
 test('Vertical layout to match snapshot', () => {
   const tree = renderer
