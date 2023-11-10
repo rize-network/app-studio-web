@@ -44,7 +44,7 @@ import { TextArea } from "app-studio";
 import { Vertical } from "../../Layout/Vertical/Vertical";
 
 <Vertical gap={10} width="300px">
-  {["default", "outline", "unStyled"].map((variant, index) => (
+  {["default", "outline", "none"].map((variant, index) => (
     <TextArea
       key={index}
       name={variant}
@@ -96,7 +96,7 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 <TextArea
   name="surname"
   label="Surname"
-  variant="unStyled"
+  variant="none"
   styles={{
     box: { borderRadius: 8, padding: 5,  borderColor: 'theme.primary',
         borderStyle: 'solid',
@@ -126,7 +126,7 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 ### **Types**
 
 ```tsx static
-type Variant = "outline" | "default" | "unStyled";
+type Variant = "outline" | "default" | "none";
 ```
 
 ```tsx static

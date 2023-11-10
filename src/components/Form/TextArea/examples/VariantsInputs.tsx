@@ -7,7 +7,7 @@ import { Variant } from '../TextArea/TextArea.type';
 export const VariantsArea = () => {
   return (
     <Vertical gap={10} width="300px">
-      {['default', 'outline', 'unStyled'].map((variant, index) => (
+      {['default', 'outline', 'none'].map((variant, index) => (
         <TextArea
           key={index}
           name={variant}

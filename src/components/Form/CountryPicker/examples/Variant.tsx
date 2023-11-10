@@ -7,7 +7,7 @@ import { Variant } from '../CountryPicker/CountryPicker.type';
 
 export const VariantCountryPicker = () => (
   <Vertical gap={10}>
-    {['outline', 'default', 'unStyled'].map((variant) => (
+    {['outline', 'default', 'none'].map((variant) => (
       <CountryPicker
         key={variant}
         variant={variant as Variant}

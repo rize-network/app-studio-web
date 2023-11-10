@@ -86,7 +86,7 @@ const Shapes: Record<Shape, number | string> = {
 ## Types
 
 ```tsx static
-type Variant = "outline" | "default" | "unStyled";
+type Variant = "outline" | "default" | "none";
 ```
 
 ```tsx static

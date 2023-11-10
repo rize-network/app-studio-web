@@ -17,7 +17,7 @@ export const StyledSwitch = () => {
         <Switch
           name="surname"
           label="Surname"
-          variant="unStyled"
+          variant="none"
           shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }}
           styles={{
             slider: {

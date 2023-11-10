@@ -12,4 +12,4 @@ export type Position = 'top' | 'left' | 'right' | 'bottom';
 
 export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
 
-export type Variant = 'default' | 'outline' | 'unStyled';
+export type Variant = 'default' | 'outline' | 'none';

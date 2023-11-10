@@ -37,13 +37,13 @@ describe('TextArea', () => {
     expect(inputElement).toHaveValue('readonly value');
   });
 
-  // test('renders TextArea with unStyled variant', () => {
+  // test('renders TextArea with none variant', () => {
   //   render(
   //     <TextArea
   //       name="username"
   //       defaultValue="John"
   //       role="textbox"
-  //       variant="unStyled"
+  //       variant="none"
   //     />
   //   );
   //   const TextAreaElement = screen.getByRole('textbox');

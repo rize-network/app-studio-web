@@ -45,7 +45,7 @@ export const FieldContent: React.FC<ContentProps> = ({
       transition="padding 0.2s ease"
       justifyContent="space-between"
       fontSize={Typography.fontSizes[size]}
-     // filter={isHovered ?  'brightness(1)':'brightness(0.97)'}
+      // filter={isHovered ?  'brightness(1)':'brightness(0.97)'}
       cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer'}
       {...(isWithLabel ? PadddingWithLabel : PaddingWithoutLabel)}
       {...shadow}

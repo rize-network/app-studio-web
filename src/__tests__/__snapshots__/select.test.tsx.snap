@@ -15,7 +15,7 @@ exports[`Select component Select to match snapshot 1`] = `
   <div
     alignItems="center"
     backgroundColor="color.white"
-    borderBottomWidth={2}
+    borderBottomWidth={1}
     borderColor="error"
     borderRadius={0}
     borderStyle="solid"

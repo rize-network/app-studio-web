@@ -60,7 +60,7 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 import { Vertical } from "../../Layout/Vertical/Vertical";
 
 <Vertical gap={10} width="300px">
-  {["default", "outline", "unStyled"].map((variant, index) => (
+  {["default", "outline", "none"].map((variant, index) => (
     <TextField
       key={index}
       name={variant}
@@ -128,7 +128,7 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 <TextField
   name="surname"
   label="Surname"
-  variant="unStyled"
+  variant="none"
   isClearable="false"
   shadow={{ boxShadow: "rgba(0, 0, 0, 0.20) 0px 3px 8px" }}
   styles={{
@@ -160,7 +160,7 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 ### **Types**
 
 ```tsx static
-type Variant = "outline" | "default" | "unStyled";
+type Variant = "outline" | "default" | "none";
 ```
 
 ```tsx static

@@ -17,7 +17,7 @@ export const StyledArea = () => {
         <TextArea
           name="surname"
           label="Surname"
-          variant="unStyled"
+          variant="none"
           styles={{
             box: {
               borderRadius: 8,

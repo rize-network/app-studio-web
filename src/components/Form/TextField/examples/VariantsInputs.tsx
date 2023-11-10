@@ -8,7 +8,7 @@ import { Variant } from '../TextField/TextField.type';
 export const VariantsInput = () => {
   return (
     <Vertical gap={10} width="300px">
-      {['default', 'outline', 'unStyled'].map((variant, index) => (
+      {['default', 'outline', 'none'].map((variant, index) => (
         <TextField
           key={index}
           name={variant}

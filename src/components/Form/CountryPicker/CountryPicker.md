@@ -68,7 +68,7 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 import { Vertical } from "../../Layout/Vertical/Vertical";
 
 <Vertical gap={10}>
-  {["outline", "default", "unStyled"].map((variant) => (
+  {["outline", "default", "none"].map((variant) => (
     <CountryPicker
       key={variant}
       variant={variant}
@@ -170,7 +170,7 @@ type Country = {
 ```
 
 ```js static
-type Variant = "default" | "outline" | "unStyled";
+type Variant = "default" | "outline" | "none";
 ```
 
 ```jsx static

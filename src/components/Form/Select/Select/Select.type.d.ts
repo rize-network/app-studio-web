@@ -2,7 +2,7 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
 
-export type Variant = 'outline' | 'default' | 'unStyled';
+export type Variant = 'outline' | 'default' | 'none';
 
 export type SelectStyles = {
   text?: CSSProperties;
