@@ -139,100 +139,100 @@ describe('DropDown component', () => {
   //   expect(DropDownElement).toHaveStyle({ fontSize: 16 });
   // });
 
-//   test('calls callback function with selected option', () => {
-//     const options = [
-//       {
-//         name: 'Aland Islands',
-//         dial_code: '+358',
-//         emoji: '🇦🇽',
-//         code: 'AX',
-//       },
-//       {
-//         name: 'Albania',
-//         dial_code: '+355',
-//         emoji: '🇦🇱',
-//         code: 'AL',
-//       },
-//     ];
-//     const callback = jest.fn();
-//     render(<DropDown options={options} callback={callback} styles={styles} />);
+  //   test('calls callback function with selected option', () => {
+  //     const options = [
+  //       {
+  //         name: 'Aland Islands',
+  //         dial_code: '+358',
+  //         emoji: '🇦🇽',
+  //         code: 'AX',
+  //       },
+  //       {
+  //         name: 'Albania',
+  //         dial_code: '+355',
+  //         emoji: '🇦🇱',
+  //         code: 'AL',
+  //       },
+  //     ];
+  //     const callback = jest.fn();
+  //     render(<DropDown options={options} callback={callback} styles={styles} />);
 
-//     const selectedOption = options[1];
-//     const optionElement = screen.getByText(selectedOption.name);
-//     fireEvent.click(optionElement);
+  //     const selectedOption = options[1];
+  //     const optionElement = screen.getByText(selectedOption.name);
+  //     fireEvent.click(optionElement);
 
-//     expect(callback).toHaveBeenCalledWith(selectedOption.name);
-//   });
-// });
-
-describe('DropDownItem component', () => {
-  const option = 'Albania';
-  const styles = {
-    text: { color: 'red' },
-  };
-  test('renders DropDownItem component without crashing', () => {
-    render(
-      <DropDownItem option={option} callback={() => {}} styles={styles} />
-    );
-    const DropDownItemElement = screen.getByRole('DropDownItem');
-    expect(DropDownItemElement).toBeInTheDocument();
-  });
-
-  // test('calls callback function when option is clicked', () => {
-  //   const option = 'United States';
-  //   const callback = jest.fn();
-  //   render(
-  //     <DropDownItem option={option} callback={callback} styles={styles} />
-  //   );
-
-  //   const optionElement = screen.getByText(option);
-  //   fireEvent.click(optionElement);
-
-  //   expect(callback).toHaveBeenCalledWith(option);
+  //     expect(callback).toHaveBeenCalledWith(selectedOption.name);
+  //   });
   // });
 
-  // test('changes background color on hover', () => {
-  //   const option = 'United States';
-  //   render(
-  //     <DropDownItem option={option} callback={() => {}} styles={styles} />
-  //   );
+  describe('DropDownItem component', () => {
+    const option = 'Albania';
+    const styles = {
+      text: { color: 'red' },
+    };
+    test('renders DropDownItem component without crashing', () => {
+      render(
+        <DropDownItem option={option} callback={() => {}} styles={styles} />
+      );
+      const DropDownItemElement = screen.getByRole('DropDownItem');
+      expect(DropDownItemElement).toBeInTheDocument();
+    });
 
-  //   const optionElement = screen.getByText(option);
-  //   fireEvent.mouseEnter(optionElement);
+    // test('calls callback function when option is clicked', () => {
+    //   const option = 'United States';
+    //   const callback = jest.fn();
+    //   render(
+    //     <DropDownItem option={option} callback={callback} styles={styles} />
+    //   );
 
-  //   expect(optionElement).toHaveStyle('background-color: color.trueGray.100');
+    //   const optionElement = screen.getByText(option);
+    //   fireEvent.click(optionElement);
 
-  //   fireEvent.mouseLeave(optionElement);
+    //   expect(callback).toHaveBeenCalledWith(option);
+    // });
 
-  //   expect(optionElement).not.toHaveStyle('background-color: color.trueGray.100');
-  // });
+    // test('changes background color on hover', () => {
+    //   const option = 'United States';
+    //   render(
+    //     <DropDownItem option={option} callback={() => {}} styles={styles} />
+    //   );
 
-  // test('renders DropDownItem component with provided size', () => {
-  //   render(
-  //     <DropDownItem
-  //       option={option}
-  //       selected="Option 1"
-  //       size="md"
-  //       callback={() => {}}
-  //       styles={styles}
-  //     />
-  //   );
-  //   const DropDownItemElement = screen.getByRole('DropDownItem');
-  //   expect(DropDownItemElement).toBeInTheDocument();
-  //   expect(DropDownItemElement).toHaveStyle({ fontSize: 16 });
-  // });
+    //   const optionElement = screen.getByText(option);
+    //   fireEvent.mouseEnter(optionElement);
 
-  // test('should call callback when an option is selected', () => {
-  //   const callback = jest.fn();
-  //   render(
-  //     <DropDownItem
-  //       option={option}
-  //       selected="Option 2"
-  //       callback={callback}
-  //       styles={styles}
-  //     />
-  //   );
-  //   fireEvent.click(screen.getByRole('DropDownItem'));
-  //   expect(callback).toHaveBeenCalledTimes(1);
+    //   expect(optionElement).toHaveStyle('background-color: color.trueGray.100');
+
+    //   fireEvent.mouseLeave(optionElement);
+
+    //   expect(optionElement).not.toHaveStyle('background-color: color.trueGray.100');
+    // });
+
+    // test('renders DropDownItem component with provided size', () => {
+    //   render(
+    //     <DropDownItem
+    //       option={option}
+    //       selected="Option 1"
+    //       size="md"
+    //       callback={() => {}}
+    //       styles={styles}
+    //     />
+    //   );
+    //   const DropDownItemElement = screen.getByRole('DropDownItem');
+    //   expect(DropDownItemElement).toBeInTheDocument();
+    //   expect(DropDownItemElement).toHaveStyle({ fontSize: 16 });
+    // });
+
+    // test('should call callback when an option is selected', () => {
+    //   const callback = jest.fn();
+    //   render(
+    //     <DropDownItem
+    //       option={option}
+    //       selected="Option 2"
+    //       callback={callback}
+    //       styles={styles}
+    //     />
+    //   );
+    //   fireEvent.click(screen.getByRole('DropDownItem'));
+    //   expect(callback).toHaveBeenCalledTimes(1);
   });
 });

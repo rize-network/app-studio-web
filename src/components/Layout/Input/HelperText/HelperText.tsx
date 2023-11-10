@@ -12,7 +12,7 @@ export const HelperText: React.FC<HelperTextProps> = ({
     size="xs"
     marginVertical={0}
     marginHorizontal={0}
-    color={ 'theme.text.dark'}
+    color={'theme.text.dark'}
     {...(styles['helperText'] as any)}
     {...props}
   >

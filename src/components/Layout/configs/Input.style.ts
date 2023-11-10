@@ -4,10 +4,7 @@ import { Shape, Size, Variant } from './Input.type';
 
 export const Shapes: Record<Shape, CSSProperties> = {
   default: {
-    borderTopLeftRadius: 6,
-    borderTopRightRadius: 6,
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
+    borderRadius: 0
   },
   sharp: { borderRadius: 0 },
   rounded: { borderRadius: 4 },

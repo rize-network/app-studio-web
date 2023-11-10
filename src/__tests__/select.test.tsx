@@ -105,6 +105,6 @@ describe('MultiSelect component', () => {
     );
     const MultiSelectElement = screen.getByRole('MultiSelect');
     expect(MultiSelectElement).toBeInTheDocument();
-   // expect(MultiSelectElement).toHaveStyle({ fontSize: 16 });
+    // expect(MultiSelectElement).toHaveStyle({ fontSize: 16 });
   });
 });

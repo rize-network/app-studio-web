@@ -74,8 +74,6 @@ describe('TextArea', () => {
     const TextAreaElement = screen.getByTestId('textarea');
     expect(TextAreaElement).toBeInTheDocument();
   });
-
- 
 });
 
 test('TextArea to match snapshot', () => {

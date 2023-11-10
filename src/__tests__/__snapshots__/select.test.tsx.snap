@@ -14,21 +14,17 @@ exports[`Select component Select to match snapshot 1`] = `
 >
   <div
     alignItems="center"
-    backgroundColor="color.trueGray.50"
-    borderBottomLeftRadius={0}
-    borderBottomRightRadius={0}
+    backgroundColor="color.white"
     borderBottomWidth={2}
     borderColor="error"
+    borderRadius={0}
     borderStyle="solid"
-    borderTopLeftRadius={6}
-    borderTopRightRadius={6}
     borderWidth={0}
     boxShadow="rgb(249, 115, 22) 0px 4px 14px 0px"
     className="sc-bdfCDU iBzhpA"
     color="theme.primary"
     cursor="auto"
     display="flex"
-    filter="brightness(1)"
     flexDirection="row"
     flexWrap="nowrap"
     fontSize={20}

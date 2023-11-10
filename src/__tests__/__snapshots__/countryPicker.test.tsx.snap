@@ -13,7 +13,7 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
 >
   <div
     alignItems="center"
-    backgroundColor="color.trueGray.50"
+    backgroundColor="color.white"
     borderColor="error"
     borderRadius={24}
     borderStyle="solid"
@@ -22,7 +22,6 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
     color="theme.primary"
     cursor="pointer"
     display="flex"
-    filter="brightness(1)"
     flexDirection="row"
     flexWrap="nowrap"
     fontSize={20}

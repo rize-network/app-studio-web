@@ -15,11 +15,7 @@ export const FieldContainer: React.FC<ContainerProps> = ({
 }) => (
   <Vertical gap={5} position="relative" {...props}>
     {children}
-    {!error && helperText && (
-      <HelperText {...styles}>
-        {helperText}
-      </HelperText>
-    )}
+    {!error && helperText && <HelperText {...styles}>{helperText}</HelperText>}
     {error && (
       <Text
         size="xs"
