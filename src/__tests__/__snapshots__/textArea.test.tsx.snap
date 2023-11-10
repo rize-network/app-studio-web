@@ -30,10 +30,10 @@ exports[`TextArea to match snapshot 1`] = `
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    paddingBottom={2}
+    paddingBottom={4}
     paddingLeft={18}
     paddingRight={36}
-    paddingTop={14}
+    paddingTop={10}
     transition="padding 0.2s ease"
     width="100%"
   >
