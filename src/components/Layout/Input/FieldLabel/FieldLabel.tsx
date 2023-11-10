@@ -14,7 +14,7 @@ export const FieldLabel: React.FC<LabelProps> = ({
   ...props
 }) => (
   <Label
-    top={4}
+    top={0}
     zIndex={1000}
     lineHeight={14}
     letterSpacing={0.25}
