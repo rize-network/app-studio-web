@@ -122,6 +122,7 @@ exports[`TextField to match snapshot 1`] = `
         disabled={false}
         fontSize={20}
         heigth="100%"
+        lineHeight={20}
         margin={0}
         name="name"
         onBlur={[Function]}

@@ -70,6 +70,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
       },
     },
     fontSize: Typography.fontSizes[size],
+    lineHeight: Typography.fontSizes[size],
     backgroundColor: 'transparent',
     color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
     cursor: isDisabled ? 'not-allowed' : 'auto',
