@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Container to match snapshot 1`] = `
+<div
+  backgroundColor="white"
+  borderRadius={4}
+  boxShadow="none"
+  className="sc-bdfCDU bcAYvh"
+  cursor="default"
+  display="flex"
+  flexDirection="column"
+  flexWrap="nowrap"
+  height="100%"
+  justifyContent="flex-start"
+  onClick={[Function]}
+  overflow="hidden"
+  role="container"
+  width="100%"
+>
+  <div>
+    Modal Content
+  </div>
+</div>
+`;

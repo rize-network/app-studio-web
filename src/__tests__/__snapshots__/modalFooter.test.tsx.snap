@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal footer to match snapshot 1`] = `
+<div
+  alignItems="center"
+  className="sc-bdfCDU iMdcdr"
+  display="flex"
+  flexDirection="row"
+  flexWrap="wrap"
+  justifyContent="flex-end"
+  marginTop="auto"
+  onClick={[Function]}
+  paddingHorizontal={20}
+  paddingVertical={15}
+>
+  Modal Content
+</div>
+`;
