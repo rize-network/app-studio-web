@@ -12,11 +12,11 @@ export const Shapes: Record<Shape, CSSProperties> = {
 };
 
 export const LabelSizes: Record<Size, number> = {
-  xs: 8,
-  sm: 10,
-  md: 12,
-  lg: 14,
-  xl: 16,
+  xs: 6,
+  sm: 8,
+  md: 10,
+  lg: 12,
+  xl: 14,
 };
 
 export const InputVariants: Record<Variant, CSSProperties> = {
@@ -34,14 +34,15 @@ export const InputVariants: Record<Variant, CSSProperties> = {
 };
 
 export const PadddingWithLabel = {
-  paddingTop: 16,
-  paddingBottom: 0,
-  paddingLeft: 16,
-  paddingRight: 35,
+  paddingTop: 14,
+  paddingBottom: 2,
+  paddingLeft: 18,
+  paddingRight: 36,
 };
 
 export const PaddingWithoutLabel = {
-  paddingVertical: 8,
-  paddingLeft: 16,
-  paddingRight: 35,
+  paddingTop: 14,
+  paddingBottom: 2,
+  paddingLeft: 18,
+  paddingRight: 36,
 };
