@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField } from '../../../Form/TextField/TextField';
 import { View } from '../../../Layout/View/View';
 
@@ -10,17 +10,20 @@ const PasswordView: React.FC<PasswordViewProps> = ({
   visibleIcon = <OpenEyeSvg size={14} />,
   hiddenIcon = <CloseEyeSvg size={14} />,
   isDisabled = false,
-  isVisible = false,
-  setIsVisible = () => {},
+  isVisible = true,
   ...props
-}) => (
+}) => {
+const [visible,setVisible] = useState(isVisible)
+return (
   <TextField
     name={name}
     type={isVisible ? 'text' : 'password'}
     rightChild={
       <View
         onClick={() => {
-          if (!isDisabled) setIsVisible(!isVisible);
+          if (!isDisabled) {
+            setVisible(!visible);
+          }
         }}
       >
         {isVisible ? visibleIcon : hiddenIcon}
@@ -29,6 +32,8 @@ const PasswordView: React.FC<PasswordViewProps> = ({
     isClearable={false}
     {...props}
   />
-);
+)
+
+} ;
 
 export default PasswordView;

@@ -29,8 +29,4 @@ export interface PasswordViewProps extends PasswordProps {
    * Optional prop to determine if the password is visible
    */
   isVisible?: boolean;
-  /**
-   * Optional callback prop to update the visibility state
-   */
-  setIsVisible?: Function;
 }
