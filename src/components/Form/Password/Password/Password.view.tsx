@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import { TextField } from '../../../Form/TextField/TextField';
 import { View } from '../../../Layout/View/View';
 
-import { PasswordViewProps } from './Password.props';
+import { PasswordProps } from './Password.props';
 import { CloseEyeSvg, OpenEyeSvg } from '../../../Svg';
 
-const PasswordView: React.FC<PasswordViewProps> = ({
+const PasswordView: React.FC<PasswordProps> = ({
   name,
   visibleIcon = <OpenEyeSvg size={14} />,
   hiddenIcon = <CloseEyeSvg size={14} />,
   isDisabled = false,
-  isVisible = false,
   ...props
 }) => {
-  const [visible, setVisible] = useState(isVisible);
+  const [visible, setVisible] = useState(false);
   return (
     <TextField
       name={name}
