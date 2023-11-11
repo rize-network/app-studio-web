@@ -3,7 +3,7 @@ import { Button } from '../../Button/Button';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 import { showMessage } from '../Message/Message.store';
-import { FileSVG } from 'src/components/File/File';
+import { FileSVG } from '../../File/File';
 import { MessageLayout } from '../Message';
 
 export const VariantMessage = () => {

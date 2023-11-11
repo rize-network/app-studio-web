@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../../Button/Button';
 
 import { showMessage } from '../Message/Message.store';
-import { FileSVG } from 'src/components/File/File';
+import { FileSVG } from '../../File/File';
 import { MessageLayout } from '../Message';
 
 export const DefaultMessage = () => {

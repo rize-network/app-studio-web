@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { FileSVG } from 'src/components/File/File';
-import { Center } from 'src/components/Layout/Center/Center';
-import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
-import { Text } from 'src/components/Text/Text';
+import { FileSVG } from '../../File/File';
+import { Center } from '../../Layout/Center/Center';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Text } from '../../Text/Text';
 
 interface IMessage {
   message: string;

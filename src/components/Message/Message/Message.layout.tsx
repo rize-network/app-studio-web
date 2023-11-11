@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { hideMessage, useMessageStore } from './Message.store';
-import { Center } from 'src/components/Layout/Center/Center';
+import { Center } from '../../Layout/Center/Center';
 import { MessageView } from './Message.view';
 import { MessageLayoutProps } from './Message.props';
 

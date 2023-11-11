@@ -3,7 +3,7 @@ import { TextField } from '../../../Form/TextField/TextField';
 import { View } from '../../../Layout/View/View';
 
 import { PasswordViewProps } from './Password.props';
-import { CloseEyeSvg, OpenEyeSvg } from 'src/components/Svg';
+import { CloseEyeSvg, OpenEyeSvg } from '../../../Svg';
 
 const PasswordView: React.FC<PasswordViewProps> = ({
   name,
