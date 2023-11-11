@@ -5,8 +5,8 @@ import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
 import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
 import { Variant } from './Button.type';
-import { Loader } from 'src/components/Loader/Loader';
-import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
+import { Loader } from '../../Loader/Loader';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 const ButtonView: React.FC<ButtonProps> = ({
   icon,

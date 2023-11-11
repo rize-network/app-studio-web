@@ -19,7 +19,9 @@ export const LoaderButtons = () => (
         },
       }}
       isFilled
-    >Submitting</Button>
+    >
+      Submitting
+    </Button>
     <Button
       isLoading
       loaderPosition="right"

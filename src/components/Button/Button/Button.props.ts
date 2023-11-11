@@ -3,8 +3,14 @@ import { Shadow } from 'app-studio';
 
 import { Elevation } from '../../../utils/elevation';
 
-import { IconPosition, Shape, Size, Variant, LoaderPosition} from './Button.type';
-import { LoaderProps } from 'src/components/Loader/Loader/Loader.props';
+import {
+  IconPosition,
+  Shape,
+  Size,
+  Variant,
+  LoaderPosition,
+} from './Button.type';
+import { LoaderProps } from '../../Loader/Loader/Loader.props';
 
 /**
  * Represents the properties for the Button component.

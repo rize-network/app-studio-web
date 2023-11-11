@@ -7,7 +7,6 @@ import { Password } from '../../../Form/Password/Password';
 
 import { Vertical } from '../../../Layout/Vertical/Vertical';
 
-
 export const FormikHelperTextPassword = () => {
   const initialValues = {
     firstName: '',
