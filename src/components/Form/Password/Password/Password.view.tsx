@@ -10,7 +10,7 @@ const PasswordView: React.FC<PasswordViewProps> = ({
   visibleIcon = <OpenEyeSvg size={14} />,
   hiddenIcon = <CloseEyeSvg size={14} />,
   isDisabled = false,
-  isVisible = true,
+  isVisible = false,
   ...props
 }) => {
   const [visible, setVisible] = useState(isVisible);
@@ -26,7 +26,7 @@ const PasswordView: React.FC<PasswordViewProps> = ({
             }
           }}
         >
-          {isVisible ? visibleIcon : hiddenIcon}
+          {visible ? visibleIcon : hiddenIcon}
         </View>
       }
       isClearable={false}
