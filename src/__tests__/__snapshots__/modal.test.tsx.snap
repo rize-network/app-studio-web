@@ -90,39 +90,49 @@ exports[`Modal to match snapshot 1`] = `
           width="fit-content"
         >
           <div
-            alignItems="center"
-            className="sc-bdfCDU eztudp"
+            className="sc-bdfCDU krrJWc"
             display="flex"
-            height="20px"
-            justifyContent="center"
+            flexDirection="row"
+            flexWrap="wrap"
+            gap={4}
+            justifyContent="flex-start"
             onClick={[Function]}
-            width="20px"
           >
-            <svg
-              fill="#000000"
+            <div
+              alignItems="center"
+              className="sc-bdfCDU eztudp"
+              display="flex"
               height="20px"
-              viewBox="0 0 1024 1024"
+              justifyContent="center"
+              onClick={[Function]}
               width="20px"
-              xmlns="http://www.w3.org/2000/svg"
             >
-              <g
-                id="SVGRepo_bgCarrier"
-                strokeWidth="0"
-              />
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <g
-                id="SVGRepo_iconCarrier"
+              <svg
+                fill="#000000"
+                height="20px"
+                viewBox="0 0 1024 1024"
+                width="20px"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z"
-                  fill="theme.primary"
+                <g
+                  id="SVGRepo_bgCarrier"
+                  strokeWidth="0"
                 />
-              </g>
-            </svg>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <g
+                  id="SVGRepo_iconCarrier"
+                >
+                  <path
+                    d="M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z"
+                    fill="theme.primary"
+                  />
+                </g>
+              </svg>
+            </div>
           </div>
         </button>
         Modal Container
@@ -180,7 +190,17 @@ exports[`Modal to match snapshot 1`] = `
           role="button"
           width={144}
         >
-          Cancel
+          <div
+            className="sc-bdfCDU krrJWc"
+            display="flex"
+            flexDirection="row"
+            flexWrap="wrap"
+            gap={4}
+            justifyContent="flex-start"
+            onClick={[Function]}
+          >
+            Cancel
+          </div>
         </button>
       </div>
     </div>

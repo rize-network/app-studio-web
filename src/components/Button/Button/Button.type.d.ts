@@ -8,4 +8,6 @@ export type Loaders = 'spinner' | 'points' | 'points-opacity';
 
 export type IconPosition = 'left' | 'right';
 
+export type LoaderPosition = 'left' | 'right';
+
 export type Variant = 'filled' | 'outline' | 'link' | 'ghost';

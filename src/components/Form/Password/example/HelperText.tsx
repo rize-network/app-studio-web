@@ -5,8 +5,6 @@ import { TextField } from '../../../Form/TextField/TextField';
 import { Password } from '../../../Form/Password/Password';
 
 import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { CloseEyeSvg } from '../../../Svg/CloseEye';
-import { OpenEyeSvg } from '../../../Svg/OpenEye';
 
 export const HelperTextPassword = () => {
   const initialValues = {
@@ -56,8 +54,6 @@ export const HelperTextPassword = () => {
           helperText={formErrors.password}
           error={formErrors.password}
           onChange={handleChange}
-          visibleIcon={<OpenEyeSvg size={14} />}
-          hiddenIcon={<CloseEyeSvg size={14} />}
         />
         <Button type="submit" height="40px">
           Submit

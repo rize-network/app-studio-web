@@ -6,8 +6,7 @@ import { TextField } from '../../../Form/TextField/TextField';
 import { Password } from '../../../Form/Password/Password';
 
 import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { CloseEyeSvg } from '../../../Svg/CloseEye';
-import { OpenEyeSvg } from '../../../Svg/OpenEye';
+
 
 export const FormikHelperTextPassword = () => {
   const initialValues = {
@@ -52,10 +51,7 @@ export const FormikHelperTextPassword = () => {
               as={Password}
               name="password"
               placeholder="Password"
-              error={touched.password && errors.password}
-              helperText={touched.password && errors.password}
-              visibleIcon={<OpenEyeSvg size={14} />}
-              hiddenIcon={<CloseEyeSvg size={14} />}
+              error={errors.password}
             />
             <Button type="submit" isDisabled={isSubmitting}>
               Submit

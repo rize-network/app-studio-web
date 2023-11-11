@@ -52,7 +52,7 @@ export const FormikErrorPassword = () => {
               name="password"
               label="Password"
               colorScheme="theme.secondary"
-              error={touched.password && errors.password}
+              error={errors.password}
             />
 
             <Button type="submit" isDisabled={isSubmitting}>

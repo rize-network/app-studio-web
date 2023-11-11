@@ -28,7 +28,17 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
   role="button"
   width="fit-content"
 >
-  Pill Shape
+  <div
+    className="sc-bdfCDU krrJWc"
+    display="flex"
+    flexDirection="row"
+    flexWrap="wrap"
+    gap={4}
+    justifyContent="flex-start"
+    onClick={[Function]}
+  >
+    Pill Shape
+  </div>
 </button>
 `;
 
@@ -61,42 +71,52 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
   width={144}
 >
   <div
-    alignItems="center"
-    className="sc-bdfCDU ecSIal"
+    className="sc-bdfCDU krrJWc"
     display="flex"
-    height="24px"
-    justifyContent="center"
+    flexDirection="row"
+    flexWrap="wrap"
+    gap={4}
+    justifyContent="flex-start"
     onClick={[Function]}
-    width="24px"
   >
-    <svg
-      fill="#ffffff"
+    <div
+      alignItems="center"
+      className="sc-bdfCDU ecSIal"
+      display="flex"
       height="24px"
-      id="Capa_1"
-      version="1.1"
-      viewBox="0 0 197.516 197.516"
+      justifyContent="center"
+      onClick={[Function]}
       width="24px"
-      xmlns="http://www.w3.org/2000/svg"
     >
-      <g
-        id="SVGRepo_bgCarrier"
-        strokeWidth="0"
-      />
-      <g
-        id="SVGRepo_tracerCarrier"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <g
-        id="SVGRepo_iconCarrier"
+      <svg
+        fill="#ffffff"
+        height="24px"
+        id="Capa_1"
+        version="1.1"
+        viewBox="0 0 197.516 197.516"
+        width="24px"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M68.758,170.083V72.649h15v97.434H68.758z M128.758,72.649h-15v97.434h15V72.649z M140.539,0v12.631h34.885v47.746h-10.525 v137.139H32.617V60.377H22.092V12.631h34.883V0H140.539z M149.898,60.377H47.617v122.139h102.281V60.377z M125.539,27.631V15H71.975 v12.631H37.092v17.585h123.332V27.631H125.539z"
+        <g
+          id="SVGRepo_bgCarrier"
+          strokeWidth="0"
         />
-      </g>
-    </svg>
+        <g
+          id="SVGRepo_tracerCarrier"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <g
+          id="SVGRepo_iconCarrier"
+        >
+          <path
+            d="M68.758,170.083V72.649h15v97.434H68.758z M128.758,72.649h-15v97.434h15V72.649z M140.539,0v12.631h34.885v47.746h-10.525 v137.139H32.617V60.377H22.092V12.631h34.883V0H140.539z M149.898,60.377H47.617v122.139h102.281V60.377z M125.539,27.631V15H71.975 v12.631H37.092v17.585h123.332V27.631H125.539z"
+          />
+        </g>
+      </svg>
+    </div>
+    Delete
   </div>
-  Delete
 </button>
 `;
 
@@ -128,42 +148,52 @@ exports[`Button with an icon on the right to match snapshot 1`] = `
   role="button"
   width={144}
 >
-  Delete
   <div
-    alignItems="center"
-    className="sc-bdfCDU ecSIal"
+    className="sc-bdfCDU krrJWc"
     display="flex"
-    height="24px"
-    justifyContent="center"
+    flexDirection="row"
+    flexWrap="wrap"
+    gap={4}
+    justifyContent="flex-start"
     onClick={[Function]}
-    width="24px"
   >
-    <svg
-      fill="#ffffff"
+    Delete
+    <div
+      alignItems="center"
+      className="sc-bdfCDU ecSIal"
+      display="flex"
       height="24px"
-      id="Capa_1"
-      version="1.1"
-      viewBox="0 0 197.516 197.516"
+      justifyContent="center"
+      onClick={[Function]}
       width="24px"
-      xmlns="http://www.w3.org/2000/svg"
     >
-      <g
-        id="SVGRepo_bgCarrier"
-        strokeWidth="0"
-      />
-      <g
-        id="SVGRepo_tracerCarrier"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <g
-        id="SVGRepo_iconCarrier"
+      <svg
+        fill="#ffffff"
+        height="24px"
+        id="Capa_1"
+        version="1.1"
+        viewBox="0 0 197.516 197.516"
+        width="24px"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M68.758,170.083V72.649h15v97.434H68.758z M128.758,72.649h-15v97.434h15V72.649z M140.539,0v12.631h34.885v47.746h-10.525 v137.139H32.617V60.377H22.092V12.631h34.883V0H140.539z M149.898,60.377H47.617v122.139h102.281V60.377z M125.539,27.631V15H71.975 v12.631H37.092v17.585h123.332V27.631H125.539z"
+        <g
+          id="SVGRepo_bgCarrier"
+          strokeWidth="0"
         />
-      </g>
-    </svg>
+        <g
+          id="SVGRepo_tracerCarrier"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <g
+          id="SVGRepo_iconCarrier"
+        >
+          <path
+            d="M68.758,170.083V72.649h15v97.434H68.758z M128.758,72.649h-15v97.434h15V72.649z M140.539,0v12.631h34.885v47.746h-10.525 v137.139H32.617V60.377H22.092V12.631h34.883V0H140.539z M149.898,60.377H47.617v122.139h102.281V60.377z M125.539,27.631V15H71.975 v12.631H37.092v17.585h123.332V27.631H125.539z"
+          />
+        </g>
+      </svg>
+    </div>
   </div>
 </button>
 `;

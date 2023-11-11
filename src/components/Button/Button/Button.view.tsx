@@ -5,6 +5,8 @@ import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
 import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
 import { Variant } from './Button.type';
+import { Loader } from 'src/components/Loader/Loader';
+import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
 
 const ButtonView: React.FC<ButtonProps> = ({
   icon,
@@ -15,7 +17,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   isAuto = false,
   isFilled = false,
   isIconRounded = false,
-  isLoader = false,
+  isLoading = false,
   isDisabled = false,
   size = 'md',
   variant = 'filled',
@@ -23,9 +25,11 @@ const ButtonView: React.FC<ButtonProps> = ({
   colorScheme = 'theme.primary',
   shape = 'rounded',
   onClick = () => {},
+  loaderProps = {},
+  loaderPosition = 'left',
   ...props
 }) => {
-  const isActive = !(isDisabled || isLoader);
+  const isActive = !(isDisabled || isLoading);
 
   const defaultNativeProps = { disabled: !isActive };
 
@@ -71,11 +75,13 @@ const ButtonView: React.FC<ButtonProps> = ({
   };
 
   const content = (
-    <>
-      {icon && iconPosition === 'left' && !isLoader && icon}
+    <Horizontal gap={4}>
+      {isLoading && loaderPosition === 'left' && <Loader {...loaderProps} />}
+      {icon && iconPosition === 'left' && !isLoading && icon}
       {children}
-      {icon && iconPosition === 'right' && !isLoader && icon}
-    </>
+      {icon && iconPosition === 'right' && !isLoading && icon}
+      {isLoading && loaderPosition === 'right' && <Loader {...loaderProps} />}
+    </Horizontal>
   );
 
   return (

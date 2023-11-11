@@ -1,37 +1,38 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Loader } from '../../Loader/Loader';
 import { Vertical } from '../../Layout/Vertical/Vertical';
 
 export const LoaderButtons = () => (
   <Vertical gap={15}>
-    <Button isLoader isFilled>
-      {<Loader />}
+    <Button isLoading isFilled>
+      Submitting
     </Button>
-    <Button isLoader isFilled>
-      <Loader
-        type="dotted"
-        styles={{
+    <Button
+      isLoading
+      loaderProps={{
+        type: 'dotted',
+        styles: {
           loader: { color: 'color.white' },
           text: {
             color: 'color.black',
           },
-        }}
-      >
-        Loader
-      </Loader>
-    </Button>
-    <Button isLoader isFilled>
-      <Loader
-        type="quarter"
-        textPosition="right"
-        styles={{
+        },
+      }}
+      isFilled
+    >Submitting</Button>
+    <Button
+      isLoading
+      loaderPosition="right"
+      loaderProps={{
+        type: 'quarter',
+        styles: {
           loader: { color: 'color.black' },
           text: { color: 'color.black' },
-        }}
-      >
-        Submitting
-      </Loader>
+        },
+      }}
+      isFilled
+    >
+      Submitting
     </Button>
   </Vertical>
 );

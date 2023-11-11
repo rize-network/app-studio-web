@@ -3,7 +3,8 @@ import { Shadow } from 'app-studio';
 
 import { Elevation } from '../../../utils/elevation';
 
-import { IconPosition, Shape, Size, Variant } from './Button.type';
+import { IconPosition, Shape, Size, Variant, LoaderPosition} from './Button.type';
+import { LoaderProps } from 'src/components/Loader/Loader/Loader.props';
 
 /**
  * Represents the properties for the Button component.
@@ -24,7 +25,15 @@ export interface ButtonProps {
   /**
    * Indicates whether the button is in a loading state.
    */
-  isLoader?: boolean;
+  isLoading?: boolean;
+  /**
+   * Indicates whether the button is in a loading state.
+   */
+  loaderProps?: LoaderProps;
+  /**
+   * Specifies the position of the icon within the button.
+   */
+  loaderPosition?: LoaderPosition;
   /**
    * The icon component rendered within the button.
    */
