@@ -13,8 +13,7 @@ const PasswordComponent: React.FC<PasswordProps> = ({
 }) => {
   const { isVisible, setIsVisible, ...passwordState } = usePasswordState(props);
   return (
-    <TextFieldView
-      type={isVisible ? 'text' : 'password'}
+    isVisible?<TextFieldView
       isClearable={false}
       rightChild={
         <View
@@ -29,6 +28,23 @@ const PasswordComponent: React.FC<PasswordProps> = ({
       }
       {...passwordState}
       {...props}
+    />:
+    <TextFieldView
+      isClearable={false}
+      rightChild={
+        <View
+          onClick={() => {
+            if (!props.isDisabled) {
+              setIsVisible(!isVisible);
+            }
+          }}
+        >
+          {isVisible ? visibleIcon : hiddenIcon}
+        </View>
+      }
+      {...passwordState}
+      {...props}
+      type={'password'}
     />
   );
 };

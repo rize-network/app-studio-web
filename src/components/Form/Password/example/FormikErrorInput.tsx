@@ -6,8 +6,6 @@ import { TextField } from '../../../Form/TextField/TextField';
 import { Password } from '../../../Form/Password/Password';
 
 import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { CloseEyeSvg } from '../../../Svg/CloseEye';
-import { OpenEyeSvg } from '../../../Svg/OpenEye';
 
 export const FormikErrorPassword = () => {
   const initialValues = {
@@ -54,8 +52,6 @@ export const FormikErrorPassword = () => {
               name="password"
               label="Password"
               colorScheme="theme.secondary"
-              visibleIcon={<OpenEyeSvg size={14} />}
-              hiddenIcon={<CloseEyeSvg size={14} />}
               error={touched.password && errors.password}
             />
 
