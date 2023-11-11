@@ -36,13 +36,13 @@ export const InputVariants: Record<Variant, CSSProperties> = {
 export const PadddingWithLabel = {
   paddingTop: 14,
   paddingBottom: 0,
-  paddingLeft: 18,
+  paddingLeft: 16,
   paddingRight: 36,
 };
 
 export const PaddingWithoutLabel = {
   paddingTop: 10,
   paddingBottom: 4,
-  paddingLeft: 18,
+  paddingLeft: 16,
   paddingRight: 36,
 };

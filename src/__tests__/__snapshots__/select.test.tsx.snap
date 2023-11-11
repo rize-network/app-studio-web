@@ -34,7 +34,7 @@ exports[`Select component Select to match snapshot 1`] = `
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     paddingBottom={4}
-    paddingLeft={18}
+    paddingLeft={16}
     paddingRight={36}
     paddingTop={10}
     transition="padding 0.2s ease"
@@ -112,8 +112,6 @@ exports[`Select component Select to match snapshot 1`] = `
       onClick={[Function]}
       position="absolute"
       right={16}
-      top="50%"
-      transform="translateY(-50%)"
       zIndex={500}
     />
   </div>
