@@ -3,11 +3,12 @@ import { TextField } from '../../../Form/TextField/TextField';
 import { View } from '../../../Layout/View/View';
 
 import { PasswordViewProps } from './Password.props';
+import { CloseEyeSvg, OpenEyeSvg } from 'src/components/Svg';
 
 const PasswordView: React.FC<PasswordViewProps> = ({
   name,
-  visibleIcon,
-  hiddenIcon,
+  visibleIcon = <OpenEyeSvg size={14} />,
+  hiddenIcon = <CloseEyeSvg size={14} />,
   isDisabled = false,
   isVisible = false,
   setIsVisible = () => {},
