@@ -60,7 +60,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   const fieldStyles = {
     margin: 0,
     paddingVertical: 8,
-    padddingHorizontal: 0,
+    paddingHorizontal: 0,
     width: '100%',
     heigth: '100%',
     border: 'none',
