@@ -27,6 +27,7 @@ export const useModalStore = create<ModalState>((set) => ({
     set((state: ModalState) => ({
       ...state,
       modalProps: {
+        ...state.modalProps,
         isVisible: false,
       },
     }));

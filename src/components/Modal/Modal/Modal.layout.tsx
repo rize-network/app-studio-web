@@ -31,7 +31,7 @@ export const ModalLayout = ({ modals }: ModalLayoutProps) => {
         blur={10}
         {...modalStore.overlayProps}
       >
-        {Modal !== undefined && <Modal {...modalStore.modalProps} />}
+        { Modal !== undefined && <Modal {...modalStore.modalProps} />}
       </ModalOverlay>
     </Fragment>
   );
