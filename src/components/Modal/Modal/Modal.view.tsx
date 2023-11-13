@@ -43,7 +43,6 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
       visibility={isOpen ? 'visible' : 'hidden'}
     >
       <View
-        cursor="pointer"
         position="absolute"
         top={0}
         left={0}

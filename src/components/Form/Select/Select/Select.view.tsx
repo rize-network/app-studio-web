@@ -275,7 +275,7 @@ const SelectView: React.FC<SelectViewProps> = ({
   const handleFocus = () => setIsFocused(true);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if(event && event.stopPropagation) event.stopPropagation();
+    if (event && event.stopPropagation) event.stopPropagation();
     setHide(!hide);
     setIsFocused(!isFocused);
   };

@@ -19,7 +19,6 @@ exports[`Modal Overlay to match snapshot 1`] = `
     backdropFilter="blur(5px)"
     backgroundColor="blackAlpha.500"
     className="sc-bdfCDU krrJWc"
-    cursor="pointer"
     display="flex"
     height="100vh"
     justifyContent="center"
