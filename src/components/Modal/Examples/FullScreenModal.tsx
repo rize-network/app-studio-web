@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
 
-import Modal from '../Modal';
+import {Modal} from '../Modal';
 import { hideModal, showModal } from '../Modal/Modal.store';
 
 export const FullScreenModal = () => {

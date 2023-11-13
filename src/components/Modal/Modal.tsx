@@ -24,5 +24,3 @@ Modal.Footer = ModalFooter;
 Modal.Layout = ModalLayout;
 
 export * from './Modal/Modal.store';
-
-export default Modal;

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Button } from 'src/components';
-import Modal from 'src/components/Modal/Modal';
+import {Modal} from 'src/components/Modal/Modal';
 
 test('Modal to match snapshot', () => {
   const tree = renderer
