@@ -41,7 +41,7 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
   const [isHovered, setIsHovered] = useState(false);
 
   const handleOptionClick = (event: any) => {
-    event.stopPropagation();
+    if (event && event.stopPropagation) event.stopPropagation();
     callback(option);
   };
   const handleHover = () => setIsHovered(!isHovered);

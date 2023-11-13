@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Modal} from 'src/components/Modal/Modal';
+import { Modal } from 'src/components/Modal/Modal';
 
 import { cleanup, render, screen } from '@testing-library/react';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../../Button/Button';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
-import {Modal} from '../Modal';
+import { Modal } from '../Modal';
 import { hideModal, showModal } from '../Modal/Modal.store';
 
 export const CloseButtonModal = () => {

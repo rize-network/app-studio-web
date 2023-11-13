@@ -82,7 +82,9 @@ export const ModalContainer: React.FC<ContainerProps> = ({
           shadowRadius: 8,
         };
 
-  const handleClick = (event: any) => event.stopPropagation();
+  const handleClick = (event: any) =>  {
+    if (event && event.stopPropagation) event.stopPropagation();
+  }
   return (
     <Vertical
       cursor="default"
