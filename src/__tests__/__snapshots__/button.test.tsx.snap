@@ -2,11 +2,7 @@
 
 exports[`Button will a pillShaped shape to match snapshot 1`] = `
 <button
-  alignItems="center"
-  backgroundColor="theme.primary"
-  border="none"
-  borderRadius={24}
-  className="sc-bdfCDU krrJWc"
+  className="sc-bdfCDU enWhJl"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -14,28 +10,16 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
   filter="brightness(1)"
   fontSize="md"
   fontWeight={600}
-  gap={8}
-  justifyContent="center"
   letterSpacing={1.25}
-  lineHeight={24}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  paddingBottom={12}
-  paddingLeft={18}
-  paddingRight={18}
-  paddingTop={12}
   role="button"
   width="fit-content"
 >
   <div
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU hfEgNn"
     display="flex"
-    flexDirection="row"
-    flexWrap="wrap"
-    gap={4}
-    justifyContent="flex-start"
-    onClick={[Function]}
   >
     Pill Shape
   </div>
@@ -44,11 +28,7 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
 
 exports[`Button with an icon on the left to match snapshot 1`] = `
 <button
-  alignItems="center"
-  backgroundColor="theme.secondary"
-  border="none"
-  borderRadius={24}
-  className="sc-bdfCDU krrJWc"
+  className="sc-bdfCDU fnxAjt"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -56,36 +36,21 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
   filter="brightness(1)"
   fontSize="md"
   fontWeight={600}
-  gap={8}
-  justifyContent="center"
   letterSpacing={1.25}
-  lineHeight={24}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  paddingBottom={12}
-  paddingLeft={18}
-  paddingRight={18}
-  paddingTop={12}
   role="button"
   width={144}
 >
   <div
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU hfEgNn"
     display="flex"
-    flexDirection="row"
-    flexWrap="wrap"
-    gap={4}
-    justifyContent="flex-start"
-    onClick={[Function]}
   >
     <div
-      alignItems="center"
-      className="sc-bdfCDU ecSIal"
+      className="sc-bdfCDU dMZcpT"
       display="flex"
       height="24px"
-      justifyContent="center"
-      onClick={[Function]}
       width="24px"
     >
       <svg
@@ -122,11 +87,7 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
 
 exports[`Button with an icon on the right to match snapshot 1`] = `
 <button
-  alignItems="center"
-  backgroundColor="theme.secondary"
-  border="none"
-  borderRadius={24}
-  className="sc-bdfCDU krrJWc"
+  className="sc-bdfCDU fnxAjt"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -134,37 +95,22 @@ exports[`Button with an icon on the right to match snapshot 1`] = `
   filter="brightness(1)"
   fontSize="md"
   fontWeight={600}
-  gap={8}
-  justifyContent="center"
   letterSpacing={1.25}
-  lineHeight={24}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  paddingBottom={12}
-  paddingLeft={18}
-  paddingRight={18}
-  paddingTop={12}
   role="button"
   width={144}
 >
   <div
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU hfEgNn"
     display="flex"
-    flexDirection="row"
-    flexWrap="wrap"
-    gap={4}
-    justifyContent="flex-start"
-    onClick={[Function]}
   >
     Delete
     <div
-      alignItems="center"
-      className="sc-bdfCDU ecSIal"
+      className="sc-bdfCDU dMZcpT"
       display="flex"
       height="24px"
-      justifyContent="center"
-      onClick={[Function]}
       width="24px"
     >
       <svg

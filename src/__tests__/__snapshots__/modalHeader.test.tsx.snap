@@ -2,23 +2,12 @@
 
 exports[`Modal Header renders with closing button color black 1`] = `
 <div
-  alignItems="center"
-  className="sc-bdfCDU iMdcdr"
+  className="sc-bdfCDU MMgKI"
   display="flex"
-  flexDirection="row"
-  flexWrap="wrap"
-  justifyContent="space-between"
-  onClick={[Function]}
-  paddingHorizontal={20}
-  paddingVertical={15}
 >
   Modal Content
   <button
-    alignItems="center"
-    backgroundColor="transparent"
-    border="none"
-    borderRadius={4}
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU jhakBq"
     color="color.white"
     cursor="pointer"
     disabled={false}
@@ -26,38 +15,21 @@ exports[`Modal Header renders with closing button color black 1`] = `
     filter="none"
     fontSize="md"
     fontWeight={600}
-    gap={8}
-    justifyContent="center"
     letterSpacing={1.25}
-    lineHeight={24}
-    margin={0}
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    padding={0}
-    paddingBottom={12}
-    paddingLeft={18}
-    paddingRight={18}
-    paddingTop={12}
     role="button"
     width="fit-content"
   >
     <div
-      className="sc-bdfCDU krrJWc"
+      className="sc-bdfCDU hfEgNn"
       display="flex"
-      flexDirection="row"
-      flexWrap="wrap"
-      gap={4}
-      justifyContent="flex-start"
-      onClick={[Function]}
     >
       <div
-        alignItems="center"
-        className="sc-bdfCDU eztudp"
+        className="sc-bdfCDU cccTHv"
         display="flex"
         height="20px"
-        justifyContent="center"
-        onClick={[Function]}
         width="20px"
       >
         <svg
@@ -93,24 +65,12 @@ exports[`Modal Header renders with closing button color black 1`] = `
 
 exports[`Modal Header renders with closing button with size large 1`] = `
 <div
-  alignItems="center"
-  buttonSize="lg"
-  className="sc-bdfCDU iMdcdr"
+  className="sc-bdfCDU MMgKI"
   display="flex"
-  flexDirection="row"
-  flexWrap="wrap"
-  justifyContent="space-between"
-  onClick={[Function]}
-  paddingHorizontal={20}
-  paddingVertical={15}
 >
   Modal Content
   <button
-    alignItems="center"
-    backgroundColor="transparent"
-    border="none"
-    borderRadius={4}
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU jhakBq"
     color="color.white"
     cursor="pointer"
     disabled={false}
@@ -118,38 +78,21 @@ exports[`Modal Header renders with closing button with size large 1`] = `
     filter="none"
     fontSize="md"
     fontWeight={600}
-    gap={8}
-    justifyContent="center"
     letterSpacing={1.25}
-    lineHeight={24}
-    margin={0}
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    padding={0}
-    paddingBottom={12}
-    paddingLeft={18}
-    paddingRight={18}
-    paddingTop={12}
     role="button"
     width="fit-content"
   >
     <div
-      className="sc-bdfCDU krrJWc"
+      className="sc-bdfCDU hfEgNn"
       display="flex"
-      flexDirection="row"
-      flexWrap="wrap"
-      gap={4}
-      justifyContent="flex-start"
-      onClick={[Function]}
     >
       <div
-        alignItems="center"
-        className="sc-bdfCDU eztudp"
+        className="sc-bdfCDU cccTHv"
         display="flex"
         height="20px"
-        justifyContent="center"
-        onClick={[Function]}
         width="20px"
       >
         <svg
@@ -185,22 +128,11 @@ exports[`Modal Header renders with closing button with size large 1`] = `
 
 exports[`Modal Header renders with custom closing button 1`] = `
 <div
-  alignItems="center"
-  className="sc-bdfCDU iMdcdr"
+  className="sc-bdfCDU MMgKI"
   display="flex"
-  flexDirection="row"
-  flexWrap="wrap"
-  justifyContent="space-between"
-  onClick={[Function]}
-  paddingHorizontal={20}
-  paddingVertical={15}
 >
   <button
-    alignItems="center"
-    backgroundColor="transparent"
-    border="none"
-    borderRadius={4}
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU jhakBq"
     color="color.white"
     cursor="pointer"
     disabled={false}
@@ -208,38 +140,21 @@ exports[`Modal Header renders with custom closing button 1`] = `
     filter="none"
     fontSize="md"
     fontWeight={600}
-    gap={8}
-    justifyContent="center"
     letterSpacing={1.25}
-    lineHeight={24}
-    margin={0}
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    padding={0}
-    paddingBottom={12}
-    paddingLeft={18}
-    paddingRight={18}
-    paddingTop={12}
     role="button"
     width="fit-content"
   >
     <div
-      className="sc-bdfCDU krrJWc"
+      className="sc-bdfCDU hfEgNn"
       display="flex"
-      flexDirection="row"
-      flexWrap="wrap"
-      gap={4}
-      justifyContent="flex-start"
-      onClick={[Function]}
     >
       <div
-        alignItems="center"
-        className="sc-bdfCDU eztudp"
+        className="sc-bdfCDU cccTHv"
         display="flex"
         height="20px"
-        justifyContent="center"
-        onClick={[Function]}
         width="20px"
       >
         <svg
@@ -276,15 +191,8 @@ exports[`Modal Header renders with custom closing button 1`] = `
 
 exports[`Modal Header renders without closing button 1`] = `
 <div
-  alignItems="center"
-  className="sc-bdfCDU iMdcdr"
+  className="sc-bdfCDU PTVuA"
   display="flex"
-  flexDirection="row"
-  flexWrap="wrap"
-  justifyContent="center"
-  onClick={[Function]}
-  paddingHorizontal={20}
-  paddingVertical={15}
 >
   Modal Content
 </div>

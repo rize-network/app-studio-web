@@ -2,48 +2,23 @@
 
 exports[`TextField to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU krrJWc"
+  className="sc-bdfCDU bQLfgH"
   display="flex"
-  flexDirection="column"
-  flexWrap="nowrap"
-  gap={5}
-  justifyContent="flex-start"
-  onClick={[Function]}
-  position="relative"
 >
   <div
-    alignItems="center"
-    backgroundColor="red"
-    borderColor="error"
-    borderRadius={0}
-    borderStyle="solid"
-    borderWidth={1}
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU fusqxw"
     color="theme.primary"
     cursor="pointer"
     display="flex"
-    flexDirection="row"
-    flexWrap="nowrap"
     fontSize={20}
-    gap={10}
-    justifyContent="space-between"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    paddingBottom={4}
-    paddingLeft={16}
-    paddingRight={36}
-    paddingTop={10}
-    transition="padding 0.2s ease"
     width="100%"
   >
     <div
-      alignItems="center"
-      className="sc-bdfCDU gmVaNF"
+      className="sc-bdfCDU bStJnL"
       display="flex"
       height="12px"
-      justifyContent="center"
-      onClick={[Function]}
       width="12px"
     >
       <svg
@@ -103,34 +78,29 @@ exports[`TextField to match snapshot 1`] = `
       </svg>
     </div>
     <div
-      className="sc-bdfCDU krrJWc"
+      className="sc-bdfCDU gFyoGC"
       display="flex"
-      flexDirection="column"
-      flexWrap="nowrap"
-      justifyContent="flex-start"
-      onClick={[Function]}
       width="100%"
     >
       <input
         autoComplete="off"
         autoFocus={true}
-        backgroundColor="red"
-        border="none"
-        className="sc-bdfCDU ibMnua"
+        className="sc-bdfCDU kWxYva"
         color="color.blueGray.700"
         cursor="auto"
         disabled={false}
         fontSize={20}
-        heigth="100%"
-        lineHeight={20}
-        margin={0}
         name="name"
+        on={
+          Object {
+            "focus": Object {
+              "outline": "none",
+            },
+          }
+        }
         onBlur={[Function]}
         onChange={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
-        paddingHorizontal={0}
-        paddingVertical={8}
         placeholder="Name"
         readOnly={false}
         type="text"
@@ -140,15 +110,11 @@ exports[`TextField to match snapshot 1`] = `
     </div>
   </div>
   <div
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU kpEGz"
     color="theme.error"
     fontSize={10}
     fontStyle="normal"
     fontWeight={400}
-    lineHeight={10}
-    marginHorizontal={0}
-    marginVertical={0}
-    onClick={[Function]}
     role="text"
     textDecoration="none"
   />

@@ -2,15 +2,13 @@
 
 exports[`Checkbox to match snapshot 1`] = `
 <div
-  alignItems="center"
-  className="sc-bdfCDU esuVst"
+  className="sc-bdfCDU eCPOuS"
   color="blue"
   cursor="default"
   display="flex"
   fontSize={20}
   fontStyle="normal"
   fontWeight={400}
-  gap={10}
   height="fit-content"
   onClick={[Function]}
   onMouseEnter={[Function]}
@@ -19,18 +17,9 @@ exports[`Checkbox to match snapshot 1`] = `
   width="fit-content"
 >
   <div
-    alignItems="center"
-    backgroundColor="red"
-    borderColor="theme.error"
-    borderRadius={3}
-    borderStyle="solid"
-    borderWidth={2}
-    boxShadow="rgb(249, 115, 22) 0px 4px 14px 0px"
-    className="sc-bdfCDU gssZIZ"
+    className="sc-bdfCDU edAivK"
     display="flex"
     height={30}
-    justifyContent="center"
-    onClick={[Function]}
     width={30}
   />
 </div>

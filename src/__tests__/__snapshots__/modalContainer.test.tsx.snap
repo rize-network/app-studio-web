@@ -2,16 +2,10 @@
 
 exports[`Modal Container to match snapshot 1`] = `
 <div
-  backgroundColor="white"
-  borderRadius={4}
-  boxShadow="none"
-  className="sc-bdfCDU bcAYvh"
+  className="sc-bdfCDU kErhm"
   cursor="default"
   display="flex"
-  flexDirection="column"
-  flexWrap="nowrap"
   height="100%"
-  justifyContent="flex-start"
   onClick={[Function]}
   overflow="hidden"
   role="container"

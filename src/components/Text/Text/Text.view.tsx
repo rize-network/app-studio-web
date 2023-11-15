@@ -20,37 +20,46 @@ const TextContent: React.FC<ContentProps> = ({ children, isSub, isSup }) => (
 
 const TruncateText: React.FC<TruncateTextProps> = ({ text, maxLines = 1 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [content, setContent] = useState(text);
+  const [truncatedLength, setTruncatedLength] = useState(text.length);
 
   useEffect(() => {
-    let textContent = content;
     const textNode = containerRef.current;
+    if (!textNode) return;
 
-    if (textNode) {
-      const contentHeight = textNode.offsetHeight;
-
+    const updateTruncatedText = () => {
       const comLineHeight = getComputedStyle(textNode).lineHeight;
+      const lineHeight = comLineHeight !== 'normal' ? parseFloat(comLineHeight) : 20;
+      const maxHeight = lineHeight * maxLines;
 
-      const lineHeight: number =
-        comLineHeight !== 'normal' ? parseFloat(comLineHeight) : 20;
+      let start = 0;
+      let end = text.length;
+      let middle;
 
-      const maxHeight = Math.ceil(lineHeight * maxLines);
+      while (start <= end) {
+        middle = Math.floor((start + end) / 2);
+        textNode.innerText = text.substring(0, middle) + '...';
+        const currentHeight = textNode.offsetHeight;
 
-      if (contentHeight > maxHeight) {
-        textContent = textContent.slice(0, -1);
-      } else if (contentHeight === maxHeight) {
-        if (content.length !== text.length) {
-          textContent = textContent.slice(0, -3) + '...';
+        if (currentHeight > maxHeight) {
+          end = middle - 1;
+        } else {
+          start = middle + 1;
         }
       }
 
-      setContent(textContent);
-    }
-  }, [maxLines, text, containerRef, content]);
+      setTruncatedLength(end);
+    };
 
-  return <div ref={containerRef}>{content}</div>;
+    updateTruncatedText();
+
+  }, [text, maxLines]);
+
+
+
+  const displayText = text.length > truncatedLength ? text.substring(0, truncatedLength) + '...' : text;
+
+  return <div ref={containerRef}>{displayText}</div>;
 };
-
 const TextView: React.FC<TextProps> = ({
   children,
   heading,

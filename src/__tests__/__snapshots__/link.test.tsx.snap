@@ -6,22 +6,15 @@ exports[`Link to have text decoration underline on hover should match snapshot 1
   target="_self"
 >
   <div
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU gQxXuq"
     color="#0072F5"
-    onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     textDecoration="none"
   >
     <div
-      alignItems="center"
-      className="sc-bdfCDU krrJWc"
+      className="sc-bdfCDU gtjvF"
       display="flex"
-      flexDirection="row"
-      flexWrap="nowrap"
-      gap={3}
-      justifyContent="flex-start"
-      onClick={[Function]}
     >
       Link
     </div>
@@ -37,31 +30,21 @@ Array [
     target="_blank"
   >
     <div
-      className="sc-bdfCDU krrJWc"
+      className="sc-bdfCDU gQxXuq"
       color="#0072F5"
-      onClick={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       textDecoration="none"
     >
       <div
-        alignItems="center"
-        className="sc-bdfCDU krrJWc"
+        className="sc-bdfCDU gtjvF"
         display="flex"
-        flexDirection="row"
-        flexWrap="nowrap"
-        gap={3}
-        justifyContent="flex-start"
-        onClick={[Function]}
       >
         External
         <div
-          alignItems="center"
-          className="sc-bdfCDU jxmEwZ"
+          className="sc-bdfCDU kWVsuj"
           display="flex"
           height="14px"
-          justifyContent="center"
-          onClick={[Function]}
           width="14px"
         >
           <svg

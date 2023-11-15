@@ -2,11 +2,10 @@
 
 exports[`Switch to match snapshot 1`] = `
 <label
-  className="sc-bdfCDU krrJWc"
+  className="sc-bdfCDU dVgYMM"
   fontSize="sm"
   fontStyle="normal"
   fontWeight={400}
-  onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   textDecoration="none"
@@ -14,40 +13,27 @@ exports[`Switch to match snapshot 1`] = `
 >
   <input
     checked={false}
-    className="sc-bdfCDU krrJWc"
+    className="sc-bdfCDU Ttntf"
     disabled={false}
     height={0}
     name="name"
     onChange={[Function]}
-    onClick={[Function]}
     opacity={0}
     readOnly={true}
     type="checkbox"
     width={0}
   />
   <div
-    alignItems="center"
-    backgroundColor="red"
-    borderRadius={24}
-    boxShadow="rgb(249, 115, 22) 0px 4px 14px 0px"
-    className="sc-bdfCDU fxLFlD"
+    className="sc-bdfCDU kMCAiq"
     cursor="pointer"
     display="flex"
     filter="brightness(1)"
     height={32}
-    justifyContent="flex-start"
-    onClick={[Function]}
-    paddingHorizontal={8}
-    paddingVertical={0}
-    transition="justify-content 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
     width={60}
   >
     <div
-      backgroundColor="blue"
-      borderRadius="50%"
-      className="sc-bdfCDU KifEJ"
+      className="sc-bdfCDU bUUORK"
       height={18}
-      onClick={[Function]}
       width={18}
     />
   </div>
