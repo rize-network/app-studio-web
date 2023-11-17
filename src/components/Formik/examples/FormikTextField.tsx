@@ -1,13 +1,13 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
-import { Form } from '../Formik.Form';
+import { FormikForm } from '../Formik.Form';
 
-import { TextField } from '../Formik.TextField';
+import { FormikTextField } from '../Formik.TextField';
 
 import { Vertical } from '../../Layout/Vertical/examples';
 
-export const FormikTextField = () => {
+export const FormikTextFieldExemple = () => {
   const initialValues = {
     firstName: 'ok',
     lastName: 'ok',
@@ -17,19 +17,19 @@ export const FormikTextField = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <Form>
+        <FormikForm>
           <Vertical gap={10}>
-            <TextField
+            <FormikTextField
               name="firstName"
               placeholder="First Name"
               colorScheme="theme.secondary"
             />
-            <TextField
+            <FormikTextField
               name="lastName"
               placeholder="Last Name"
               colorScheme="theme.secondary"
             />
-            <TextField
+            <FormikTextField
               type="email"
               name="email"
               placeholder="Email"
@@ -39,7 +39,7 @@ export const FormikTextField = () => {
               Submit
             </Button>
           </Vertical>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );

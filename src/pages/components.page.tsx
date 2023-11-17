@@ -56,6 +56,7 @@ export const ComponentsPage = () => {
   const navigate = useNavigate();
   const componentList = useMemo(() => {
     return [
+      { name: 'Formik', path: '/formik', element: <FormikPage /> },
       { name: 'Button', path: '/button', element: <ButtonPage /> },
       { name: 'Center', path: '/center', element: <CenterPage /> },
       { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
@@ -66,7 +67,6 @@ export const ComponentsPage = () => {
       },
       { name: 'DatePicker', path: '/datepicker', element: <DatePickerPage /> },
       { name: 'Horizontal', path: '/horizontal', element: <HorizontalPage /> },
-      { name: 'Formik', path: '/formik', element: <FormikPage /> },
       { name: 'Link', path: '/link', element: <LinkPage /> },
       { name: 'Loader', path: '/loader', element: <LoaderPage /> },
       { name: 'Modal', path: '/modal', element: <ModalPage /> },

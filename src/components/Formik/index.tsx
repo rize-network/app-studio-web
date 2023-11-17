@@ -1,12 +1,14 @@
-export { Checkbox } from './Formik.Checkbox';
-export { DatePicker } from './Formik.DatePicker';
-export { CountryPicker } from './Formik.CountryPicker';
-export { Select } from './Formik.Select';
-export { Switch } from './Formik.Switch';
-export { TextArea } from './Formik.TextArea';
-export { TextField } from './Formik.TextField';
-export { Password } from './Formik.Password';
-export { Form } from './Formik.Form';
+export { FormikCheckbox  } from './Formik.Checkbox';
+export { FormikDatePicker } from './Formik.DatePicker';
+export { FormikCountryPicker } from './Formik.CountryPicker';
+export { FormikSelect } from './Formik.Select';
+export { FormikSwitch } from './Formik.Switch';
+export { FormikTextArea } from './Formik.TextArea';
+export { FormikTextField } from './Formik.TextField';
+export { FormikPassword } from './Formik.Password';
+export { FormikForm } from './Formik.Form';
+
+
 
 // import FormPicker from 'src/Picker/Picker';
 // import FormRater from 'src/Rate/Rate';

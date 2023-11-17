@@ -15,4 +15,4 @@ const DatePickerComponent: React.FC<DatePickerProps> = (props) => {
 /**
  * Date picker allows users to select a date from a calendar view.
  */
-export const DatePicker = DatePickerComponent;
+export const FormikDatePicker = DatePickerComponent;

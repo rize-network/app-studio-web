@@ -14,4 +14,4 @@ const TextAreaComponent: React.FC<TextAreaProps> = (props) => {
 /**
  * Text Area is an component used to create a multi-line input field.
  */
-export const TextArea = TextAreaComponent;
+export const FormikTextArea = TextAreaComponent;

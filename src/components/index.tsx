@@ -9,6 +9,7 @@ export * from './Form/Switch/Switch';
 export * from './Form/TextArea/TextArea';
 export * from './Form/TextField/TextField';
 export * from './Layout/Center/Center';
+export * from './Formik';
 export * from './Layout/Horizontal/Horizontal';
 export * from './Layout/Vertical/Vertical';
 export * from './Layout/View/View';

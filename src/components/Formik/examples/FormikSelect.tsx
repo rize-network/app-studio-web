@@ -1,13 +1,13 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
-import { Form } from '../Formik.Form';
+import { FormikForm } from '../Formik.Form';
 
 import { Vertical } from '../../Layout/Vertical/examples';
 
-import { Select } from '../Formik.Select';
+import { FormikSelect } from '../Formik.Select';
 
-export const FormikSelect = () => {
+export const FormikSelectExemple = () => {
   const options = ['Item1', 'Item2', 'Item3'];
   const initialValues = {
     formik: options[0],
@@ -16,9 +16,9 @@ export const FormikSelect = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <Form>
+        <FormikForm>
           <Vertical gap={10}>
-            <Select
+            <FormikSelect
               id="formik"
               name="formik"
               placeholder="Select an item..."
@@ -33,7 +33,7 @@ export const FormikSelect = () => {
               Submit
             </Button>
           </Vertical>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );

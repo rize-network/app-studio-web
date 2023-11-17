@@ -1,13 +1,13 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
-import { Form } from '../Formik.Form';
+import { FormikForm } from '../Formik.Form';
 
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
-import { DatePicker } from '../Formik.DatePicker';
+import { FormikDatePicker } from '../Formik.DatePicker';
 
-export const FormikDatePicker = () => {
+export const FormikDatePickerExemple = () => {
   const initialValues = {
     selectdate: '2023-05-30',
   };
@@ -15,14 +15,14 @@ export const FormikDatePicker = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <Form>
+        <FormikForm>
           <Horizontal gap={10}>
-            <DatePicker id="selectdate" name="selectdate" />
+            <FormikDatePicker id="selectdate" name="selectdate" />
             <Button type="submit" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Horizontal>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );

@@ -5,7 +5,7 @@ import { TextFieldProps } from './TextField.props';
 export const useTextFieldState = ({
   label,
   placeholder,
-  value : defaultValue,
+  value: defaultValue,
 }: TextFieldProps) => {
   const [hint, setHint] = useState(label ?? placeholder);
   const [isFocused, setIsFocused] = useState(false);

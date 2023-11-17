@@ -17,4 +17,4 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
  * Select provides a dropdown list of options for the user to choose from.
  */
 
-export const Select = SelectComponent;
+export const FormikSelect = SelectComponent;

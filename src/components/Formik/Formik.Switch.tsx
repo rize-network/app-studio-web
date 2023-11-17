@@ -12,4 +12,4 @@ const SwitchComponent: React.FC<SwitchProps> = (props) => {
   return <SwitchView {...switchStates} {...formProps} />;
 };
 
-export const Switch = SwitchComponent;
+export const FormikSwitch = SwitchComponent;

@@ -14,4 +14,4 @@ const CountryPickerComponent: React.FC<CountryPickerProps> = (props) => {
 /**
  * Country picker allows users to select a country from a dropdown list or search field.
  */
-export const CountryPicker = CountryPickerComponent;
+export const FormikCountryPicker = CountryPickerComponent;

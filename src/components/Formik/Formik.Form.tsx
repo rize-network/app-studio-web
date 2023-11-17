@@ -36,7 +36,7 @@ const FocusContext = createContext<FocusContextType>({
 
 export const useFormFocus = () => useContext(FocusContext);
 
-export const Form = <T extends {}>({
+export const FormikForm = <T extends {}>({
   children,
   autoFocus = false,
   initFocus,

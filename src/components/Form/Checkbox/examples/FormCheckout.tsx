@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from '../../../Button/Button';
-import { Form } from '../../../Formik/Formik.Form';
+import {  FormikForm } from '../../../Formik/Formik.Form';
 
 import { Vertical } from '../../../Layout/Vertical/examples';
 import { View } from '../../../Layout/View/View';
-import { Checkbox } from '../../../Formik/Formik.Checkbox';
+import { FormikCheckbox } from '../../../Formik/Formik.Checkbox';
 import { Formik } from 'formik';
 
 export const FormCheckbox = () => {
@@ -29,16 +29,16 @@ export const FormCheckbox = () => {
       //}}
     >
       {(props: any) => (
-        <Form margin={10}>
+        < FormikForm margin={10}>
           <Vertical gap={10}>
             <View>Choose your vegetables:</View>
-            <Checkbox name="onion" label="onion" />
-            <Checkbox name="carrot" label="carrot" />
+            <FormikCheckbox name="onion" label="onion" />
+            <FormikCheckbox name="carrot" label="carrot" />
             <Button type="submit" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Vertical>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );

@@ -1,14 +1,14 @@
 import React from 'react';
 import { View } from 'src/components';
 import {
-  FormikTextArea,
-  FormikTextField,
-  FormikDatePicker,
-  FormikCountryPicker,
-  FormikPassword,
-  FormCheckbox,
-  FormikSelect,
-  FormikSwitch,
+  FormikTextAreaExemple,
+  FormikTextFieldExemple,
+  FormikDatePickerExemple,
+  FormikCountryPickerExemple,
+  FormikPasswordExemple,
+  FormCheckboxExemple,
+  FormikSelectExemple,
+  FormikSwitchExemple,
 } from 'src/components/Formik/examples';
 
 export const FormikPage = () => {
@@ -23,49 +23,49 @@ export const FormikPage = () => {
           <tr>
             <td>Checkbox</td>
             <td>
-              <FormCheckbox />
+              <FormCheckboxExemple />
             </td>
           </tr>
           <tr>
             <th>CountryPicker</th>
             <td>
-              <FormikCountryPicker />
+              <FormikCountryPickerExemple />
             </td>
           </tr>
           <tr>
             <td>DatePicker</td>
             <td>
-              <FormikDatePicker />
+              <FormikDatePickerExemple />
             </td>
           </tr>
           <tr>
             <td>Password</td>
             <td>
-              <FormikPassword />
+              <FormikPasswordExemple />
             </td>
           </tr>
           <tr>
             <th>Select</th>
             <td>
-              <FormikSelect />
+              <FormikSelectExemple />
             </td>
           </tr>
           <tr>
             <th>Switch</th>
             <td>
-              <FormikSwitch />
+              <FormikSwitchExemple />
             </td>
           </tr>
           <tr>
             <th>TextArea</th>
             <td>
-              <FormikTextArea />
+              <FormikTextAreaExemple />
             </td>
           </tr>
           <tr>
             <td>TextField</td>
             <td>
-              <FormikTextField />
+              <FormikTextFieldExemple />
             </td>
           </tr>
         </tbody>

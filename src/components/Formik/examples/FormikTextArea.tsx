@@ -1,10 +1,10 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
-import { TextArea } from '../Formik.TextArea';
-import { Form } from '../Formik.Form';
+import { FormikTextArea } from '../Formik.TextArea';
+import { FormikForm } from '../Formik.Form';
 
-export const FormikTextArea = () => {
+export const FormikTextAreaExemple = () => {
   const initialValues = {
     thoughts: '',
   };
@@ -12,8 +12,8 @@ export const FormikTextArea = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <Form>
-          <TextArea
+        <FormikForm>
+          <FormikTextArea
             name="thoughts"
             placeholder="Write your thoughts here..."
             colorScheme="theme.secondary"
@@ -21,7 +21,7 @@ export const FormikTextArea = () => {
           <Button type="submit" onClick={props.handleSubmit}>
             Submit
           </Button>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
-import { Form } from '../Formik.Form';
-import { Password } from '../Formik.Password';
+import { FormikForm } from '../Formik.Form';
+import { FormikPassword } from '../Formik.Password';
 
 import { Vertical } from '../../Layout/Vertical/Vertical';
 
-export const FormikPassword = () => {
+export const FormikPasswordExemple = () => {
   const initialValues = {
     password: '',
   };
@@ -14,9 +14,9 @@ export const FormikPassword = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <Form>
+        <FormikForm>
           <Vertical gap={10}>
-            <Password
+            <FormikPassword
               name="password"
               label="Password"
               colorScheme="theme.secondary"
@@ -26,7 +26,7 @@ export const FormikPassword = () => {
               Submit
             </Button>
           </Vertical>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );

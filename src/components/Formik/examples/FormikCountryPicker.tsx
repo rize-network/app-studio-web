@@ -1,12 +1,12 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
-import { Form } from '../Formik.Form';
+import { FormikForm } from '../Formik.Form';
 
 import { Vertical } from '../../Layout/Vertical/examples';
-import { CountryPicker } from '../Formik.CountryPicker';
+import { FormikCountryPicker } from '../Formik.CountryPicker';
 
-export const FormikCountryPicker = () => {
+export const FormikCountryPickerExemple = () => {
   const initialValues = {
     country: '',
   };
@@ -14,9 +14,9 @@ export const FormikCountryPicker = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <Form>
+        <FormikForm>
           <Vertical gap={10}>
-            <CountryPicker
+            <FormikCountryPicker
               id="country"
               name="country"
               placeholder="CountryPicker an item..."
@@ -29,7 +29,7 @@ export const FormikCountryPicker = () => {
               Submit
             </Button>
           </Vertical>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );

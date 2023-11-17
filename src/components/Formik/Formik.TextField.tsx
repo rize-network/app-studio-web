@@ -9,11 +9,11 @@ const TextFieldComponent: React.FC<TextFieldProps> = (
   props: TextFieldProps
 ) => {
   const formProps = useFormikInput(props);
-  const textFieldStates = useTextFieldState(props);
+  const {value, ...textFieldStates} = useTextFieldState(props);
 
-  return <TextFieldView {...textFieldStates}  {...formProps}   />;
+  return <TextFieldView {...textFieldStates} {...formProps} />;
 };
 /**
  * TextField is used to capture text data from users.
  */
-export const TextField = TextFieldComponent;
+export const FormikTextField = TextFieldComponent;

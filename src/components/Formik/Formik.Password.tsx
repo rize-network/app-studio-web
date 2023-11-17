@@ -24,11 +24,11 @@ const PasswordComponent: React.FC<PasswordProps> = ({
       isClearable={false}
       rightChild={
         <View
-        onClick={() => {
-          if (!props.isDisabled) {
-            setIsVisible(!isVisible);
-          }
-        }}
+          onClick={() => {
+            if (!props.isDisabled) {
+              setIsVisible(!isVisible);
+            }
+          }}
         >
           {isVisible ? visibleIcon : hiddenIcon}
         </View>
@@ -40,4 +40,4 @@ const PasswordComponent: React.FC<PasswordProps> = ({
 /**
  * To allow users to securely enter sensitive information
  */
-export const Password = PasswordComponent;
+export const FormikPassword = PasswordComponent;

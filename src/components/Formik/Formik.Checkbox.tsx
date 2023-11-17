@@ -15,4 +15,4 @@ const CheckboxComponent: React.FC<CheckboxProps> = (props) => {
 /**
  * Checkbox allows users to select one or more options from a list of choices.
  */
-export const Checkbox = CheckboxComponent;
+export const FormikCheckbox = CheckboxComponent;

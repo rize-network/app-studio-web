@@ -1,10 +1,10 @@
 import React from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
-import { Form } from '../Formik.Form';
-import { Switch } from '../Formik.Switch';
+import { FormikForm } from '../Formik.Form';
+import { FormikSwitch } from '../Formik.Switch';
 
-export const FormikSwitch = () => {
+export const FormikSwitchExemple = () => {
   const initialValues = {
     toggle: false,
   };
@@ -12,12 +12,12 @@ export const FormikSwitch = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <Form>
-          <Switch id="toggle" name="toggle" />
+        <FormikForm>
+          <FormikSwitch id="toggle" name="toggle" />
           <Button type="submit" onClick={props.handleSubmit}>
             Submit
           </Button>
-        </Form>
+        </FormikForm>
       )}
     </Formik>
   );
