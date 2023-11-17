@@ -78,7 +78,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   const handleHover = () => setIsHovered(!isHovered);
 
   const handleBlur = (event: any) => {
-    onBlur(event);
+    if (onBlur) onBlur(event);
     setIsFocused(false);
   };
 
@@ -90,7 +90,6 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
       setValue(event);
       if (onChangeText) onChangeText(event);
       if (onChange) onChange(event);
-
     } else {
       //Web
       setValue(event.target.value);
@@ -104,7 +103,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     //Web
     if (onChange) {
       onBlur({ target: { name } });
-      onChange({ target: { name, value: '' } });
+      if (onChangeText) onChangeText('');
+      if (onChange) onChange('');
     }
     //for ios and android
     if (typeof document === 'undefined' && onChangeText) onChangeText('');
@@ -157,7 +157,6 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
             {...props}
             onChange={handleChange}
             value={value}
-            {...(onChange && { onChange: handleChange })}
           />
         </FieldWrapper>
         {(rightChild || (isClearable && value)) && (

@@ -104,7 +104,6 @@ exports[`TextField to match snapshot 1`] = `
         placeholder="Name"
         readOnly={false}
         type="text"
-        value=""
         width="100%"
       />
     </div>

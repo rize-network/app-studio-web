@@ -6,5 +6,5 @@ export const usePasswordState = (props: PasswordProps) => {
   const textFieldStates = useTextFieldState(props);
   const [isVisible, setIsVisible] = useState(false);
 
-  return { isVisible, setIsVisible, ...textFieldStates };
+  return { isVisible, setIsVisible, ...props, ...textFieldStates };
 };

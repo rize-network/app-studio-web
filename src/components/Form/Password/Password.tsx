@@ -11,11 +11,11 @@ const PasswordComponent: React.FC<PasswordProps> = ({
   hiddenIcon = <CloseEyeSvg size={14} />,
   ...props
 }) => {
-  const { isVisible, setIsVisible, ...passwordState } = usePasswordState(props);
+  const { isVisible, setIsVisible, ...passwordProps } = usePasswordState(props);
+
   return (
     <TextFieldView
-      {...props}
-      {...passwordState}
+      {...passwordProps}
       type={isVisible ? 'text' : 'password'}
       isClearable={false}
       rightChild={

@@ -22,10 +22,7 @@ export const FormikPassword = () => {
               colorScheme="theme.secondary"
             />
 
-            <Button
-              type="submit"
-              onClick={props.handleSubmit}
-            >
+            <Button type="submit" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Vertical>

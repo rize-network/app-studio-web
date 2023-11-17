@@ -7,13 +7,13 @@ const getInputTypeProps = (type: string) => {
   switch (type) {
     case 'email':
       return {
-        //     autoCorrect: false,
+        autoCorrect: 'off',
         keyboardType: 'email-address',
         autoCapitalize: 'none',
       };
     case 'password':
       return {
-        //     autoCorrect: false,
+        autoCorrect: 'off',
         secureTextEntry: true,
         autoCapitalize: 'none',
       };
@@ -23,7 +23,7 @@ const getInputTypeProps = (type: string) => {
       };
     case 'name':
       return {
-        //     autoCorrect: false,
+        autoCorrect: 'off',
       };
     default:
       return {};
@@ -65,7 +65,6 @@ export const useFormikInput = ({ name, type, ...props }: any) => {
   };
   const isText = ['text', 'password', 'email', 'digits'].includes(type);
 
-  //  console.log({values})
   return {
     ...getInputTypeProps(type),
     ...props,

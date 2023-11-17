@@ -14,21 +14,21 @@ const PasswordComponent: React.FC<PasswordProps> = ({
 }) => {
   const formProps = useFormikInput(props);
 
-  const { isVisible, setIsVisible, ...passwordState } =
+  const { isVisible, setIsVisible, ...passwordProps } =
     usePasswordState(formProps);
+
   return (
     <TextFieldView
-      {...formProps}
-      {...passwordState}
+      {...passwordProps}
       type={isVisible ? 'text' : 'password'}
       isClearable={false}
       rightChild={
         <View
-          onClick={() => {
-            if (!props.isDisabled) {
-              setIsVisible(!isVisible);
-            }
-          }}
+        onClick={() => {
+          if (!props.isDisabled) {
+            setIsVisible(!isVisible);
+          }
+        }}
         >
           {isVisible ? visibleIcon : hiddenIcon}
         </View>

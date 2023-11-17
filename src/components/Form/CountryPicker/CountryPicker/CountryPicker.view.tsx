@@ -154,7 +154,6 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   const handleClick = () => {
     if (!isDisabled && !isReadOnly) {
       setHide(!hide);
-      
     }
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

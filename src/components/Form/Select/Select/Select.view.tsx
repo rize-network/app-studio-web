@@ -78,8 +78,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
   return (
     <Text {...fieldStyles}>
-      {(value === '' || (value && value.length === 0)) &&
-      !!placeholder ? (
+      {(value === '' || (value && value.length === 0)) && !!placeholder ? (
         placeholder
       ) : (
         <>
@@ -288,7 +287,7 @@ const SelectView: React.FC<SelectViewProps> = ({
       } else {
         setValue(option);
       }
-      if(onChange) onChange(option);
+      if (onChange) onChange(option);
     },
 
     [hide, isMulti, value]
@@ -296,9 +295,7 @@ const SelectView: React.FC<SelectViewProps> = ({
 
   const handleRemoveOption = (valueOption: string) => {
     if (Array.isArray(value) && value.includes(valueOption)) {
-      const newValue = value.filter(
-        (option) => option !== valueOption
-      );
+      const newValue = value.filter((option) => option !== valueOption);
       setValue(newValue.length === 0 ? [] : newValue);
     }
   };

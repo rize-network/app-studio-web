@@ -9,9 +9,9 @@ import { Vertical } from '../../Layout/Vertical/examples';
 
 export const FormikTextField = () => {
   const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
+    firstName: 'ok',
+    lastName: 'ok',
+    email: 'ok',
   };
 
   return (
@@ -35,10 +35,7 @@ export const FormikTextField = () => {
               placeholder="Email"
               colorScheme="theme.secondary"
             />
-            <Button
-              type="submit"
-              onClick={props.handleSubmit}
-            >
+            <Button type="submit" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Vertical>
