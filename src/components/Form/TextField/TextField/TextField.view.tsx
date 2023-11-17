@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Input, Typography, useTheme } from 'app-studio';
 import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
@@ -50,12 +50,6 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   const IconColor = getColor('color.blueGray.700');
 
   const isWithLabel = !!(isFocused && label);
-
-  useMemo(() => {
-    setHint(
-      isFocused && !inputValue ? placeholder ?? '' : label ?? placeholder
-    );
-  }, [inputValue, isFocused, label, placeholder]);
 
   const fieldStyles = {
     margin: 0,
@@ -161,7 +155,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
             {...fieldStyles}
             {...props}
             onChange={handleChange}
-            {...(onChangeText && { onChangeText: handleChange })}
+            {...(onChange && { onChange: handleChange })}
           />
         </FieldWrapper>
         {(rightChild || (isClearable && inputValue)) && (

@@ -4,7 +4,7 @@ import { ChildSwitch } from 'src/components/Form/Switch/examples/ChildSwitch';
 import { ColorSwitch } from 'src/components/Form/Switch/examples/ColorScheme';
 import { DefaultSwitch } from 'src/components/Form/Switch/examples/Default';
 import { DisabledSwitch } from 'src/components/Form/Switch/examples/DisabledInput';
-import { FormikSwitch } from 'src/components/Form/Switch/examples/Formik';
+import { FormikSwitch } from 'src/components/Formik/examples/FormikSwitch';
 import { FormSwitch } from 'src/components/Form/Switch/examples/FormSwitch';
 import { ReadOnlySwitch } from 'src/components/Form/Switch/examples/ReadOnlyInput';
 import { ShadowSwitch } from 'src/components/Form/Switch/examples/Shadow';

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 // Lazy-loaded imports
 const ButtonPage = lazy(() => import('src/pages/button.page'));
+const FormikPage = lazy(() => import('src/pages/formik.page'));
 const CenterPage = lazy(() => import('src/pages/center.page'));
 const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
 const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
@@ -65,6 +66,7 @@ export const ComponentsPage = () => {
       },
       { name: 'DatePicker', path: '/datepicker', element: <DatePickerPage /> },
       { name: 'Horizontal', path: '/horizontal', element: <HorizontalPage /> },
+      { name: 'Formik', path: '/formik', element: <FormikPage /> },
       { name: 'Link', path: '/link', element: <LinkPage /> },
       { name: 'Loader', path: '/loader', element: <LoaderPage /> },
       { name: 'Modal', path: '/modal', element: <ModalPage /> },

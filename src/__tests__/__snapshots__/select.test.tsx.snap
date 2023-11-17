@@ -8,7 +8,7 @@ exports[`Select component Select to match snapshot 1`] = `
   role="SelectBox"
 >
   <div
-    className="sc-bdfCDU ddeaMh"
+    className="sc-bdfCDU HFiNZ"
     color="theme.primary"
     cursor="auto"
     display="flex"

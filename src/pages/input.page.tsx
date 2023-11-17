@@ -4,10 +4,6 @@ import {
   ColorInput,
   DefaultInput,
   DisabledInput,
-  ErrorInput,
-  FormikErrorInput,
-  FormikHelperTextInput,
-  HelperTextInput,
   LabelInput,
   LeftInput,
   Placeholder,
@@ -109,28 +105,6 @@ export const InputPage = () => {
             <td>Styles</td>
             <td>
               <StyledInput />
-            </td>
-          </tr>
-          <tr>
-            <td>Error</td>
-
-            <td>
-              <>
-                <h4>With Formik</h4>
-              </>
-              <FormikErrorInput />
-              <h4 style={{ marginTop: 10 }}> Without Formik</h4>
-
-              <ErrorInput />
-            </td>
-          </tr>
-          <tr>
-            <td>HelperText</td>
-            <td>
-              <h4>With Formik</h4>
-              <FormikHelperTextInput />
-              <h4 style={{ marginTop: 10 }}> Without Formik</h4>
-              <HelperTextInput />
             </td>
           </tr>
         </tbody>

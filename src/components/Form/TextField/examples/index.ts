@@ -3,8 +3,6 @@ export * from '../../../Form/TextField/examples/ColorScheme';
 export * from '../../../Form/TextField/examples/Default';
 export * from '../../../Form/TextField/examples/DisabledInput';
 export * from '../../../Form/TextField/examples/ErrorInput';
-export * from '../../../Form/TextField/examples/FormikErrorInput';
-export * from '../../../Form/TextField/examples/FormikHelperText';
 export * from '../../../Form/TextField/examples/HelperText';
 export * from '../../../Form/TextField/examples/LabelInput';
 export * from '../../../Form/TextField/examples/LeftChild';

@@ -6,6 +6,7 @@ import CheckboxView from './Checkbox/Checkbox.view';
 
 const CheckboxComponent: React.FC<CheckboxProps> = (props) => {
   const checkboxStates = useCheckboxState(props);
+
   return <CheckboxView {...checkboxStates} {...props} />;
 };
 

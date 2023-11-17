@@ -2,8 +2,6 @@ export { ColorArea } from '../../../Form/TextArea/examples/ColorScheme';
 export { DefaultArea } from '../../../Form/TextArea/examples/Default';
 export { DisabledArea } from '../../../Form/TextArea/examples/DisabledInput';
 export { ErrorArea } from '../../../Form/TextArea/examples/ErrorInput';
-export { FormikErrorArea } from '../../../Form/TextArea/examples/FormikErrorInput';
-export { FormikHelperTextArea } from '../../../Form/TextArea/examples/FormikHelperText';
 export { HelperTextArea } from '../../../Form/TextArea/examples/HelperText';
 export { LabelArea } from '../../../Form/TextArea/examples/LabelInput';
 export { MaxArea } from '../../../Form/TextArea/examples/MaxRowCol';

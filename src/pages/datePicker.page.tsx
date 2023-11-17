@@ -5,7 +5,6 @@ import {
   DisabledDatePicker,
   ErrorDatePicker,
   FormDatePicker,
-  FormikDatePicker,
   HelperTextDatePicker,
   ReadOnlyDatePicker,
   ShadowDatePicker,
@@ -78,12 +77,7 @@ export const DatePickerPage = () => {
               <HelperTextDatePicker />
             </td>
           </tr>
-          <tr>
-            <td>Formik</td>
-            <td>
-              <FormikDatePicker />
-            </td>
-          </tr>
+
           <tr>
             <td>Form</td>
             <td>

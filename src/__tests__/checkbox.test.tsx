@@ -17,7 +17,6 @@ test('Checkbox to match snapshot', () => {
   const tree = renderer
     .create(
       <Checkbox
-        name="name"
         size="xl"
         styles={{
           checkbox: {

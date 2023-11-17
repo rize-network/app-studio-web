@@ -3,10 +3,6 @@ import {
   ColorArea,
   DefaultArea,
   DisabledArea,
-  ErrorArea,
-  FormikErrorArea,
-  FormikHelperTextArea,
-  HelperTextArea,
   LabelArea,
   MaxArea,
   PlaceholderArea,
@@ -102,28 +98,6 @@ export const TextAreaPage = () => {
 
             <td>
               <StyledArea />
-            </td>
-          </tr>
-          <tr>
-            <th>Error</th>
-
-            <td>
-              <>
-                <h4>With Formik</h4>
-              </>
-              <FormikErrorArea />
-              <h4 style={{ marginTop: 10 }}> Without Formik</h4>
-
-              <ErrorArea />
-            </td>
-          </tr>
-          <tr>
-            <th>HelperText</th>
-            <td>
-              <h4>With Formik</h4>
-              <FormikHelperTextArea />
-              <h4 style={{ marginTop: 10 }}> Without Formik</h4>
-              <HelperTextArea />
             </td>
           </tr>
         </tbody>

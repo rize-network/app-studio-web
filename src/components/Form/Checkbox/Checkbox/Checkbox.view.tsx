@@ -30,17 +30,13 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   styles = { checkbox: {}, label: {} },
   ...props
 }) => {
-  
   const handleHover = () => setIsHovered(!isHovered);
 
   const handleChange = () => {
     if (!isReadOnly && !isDisabled) {
-      if (isChecked === undefined) {
-        setIsSelected(!isSelected);
-      } else {
-        if (onChange) onChange(!isChecked);
-        if (onValueChange) onValueChange(!isChecked);
-      }
+      if (setIsSelected) setIsSelected(!isSelected);
+      if (onChange) onChange(!isChecked);
+      if (onValueChange) onValueChange(!isChecked);
     }
   };
 
@@ -81,17 +77,6 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
     },
   };
 
-  console.log('CheckboxView', {
-    props,
-    id,
-    icon,
-    name,
-    label,
-    isChecked,
-    onChange,
-    onValueChange,
-
-  });
   return (
     <Label
       htmlFor={id}

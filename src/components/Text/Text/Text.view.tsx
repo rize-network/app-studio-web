@@ -28,7 +28,8 @@ const TruncateText: React.FC<TruncateTextProps> = ({ text, maxLines = 1 }) => {
 
     const updateTruncatedText = () => {
       const comLineHeight = getComputedStyle(textNode).lineHeight;
-      const lineHeight = comLineHeight !== 'normal' ? parseFloat(comLineHeight) : 20;
+      const lineHeight =
+        comLineHeight !== 'normal' ? parseFloat(comLineHeight) : 20;
       const maxHeight = lineHeight * maxLines;
 
       let start = 0;
@@ -51,12 +52,12 @@ const TruncateText: React.FC<TruncateTextProps> = ({ text, maxLines = 1 }) => {
     };
 
     updateTruncatedText();
-
   }, [text, maxLines]);
 
-
-
-  const displayText = text.length > truncatedLength ? text.substring(0, truncatedLength) + '...' : text;
+  const displayText =
+    text.length > truncatedLength
+      ? text.substring(0, truncatedLength) + '...'
+      : text;
 
   return <div ref={containerRef}>{displayText}</div>;
 };

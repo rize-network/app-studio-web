@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from '../../../Button/Button';
-import { Form } from '../../../Formik/Formik.Form';
+import { Button } from '../../Button/Button';
+import { Form } from '../Formik.Form';
 
-import { Vertical } from '../../../Layout/Vertical/examples';
-import { View } from '../../../Layout/View/View';
-import { Checkbox } from '../../../Formik/Formik.Checkbox';
+import { Vertical } from '../../Layout/Vertical/examples';
+import { View } from '../../Layout/View/View';
+import { Checkbox } from '../Formik.Checkbox';
 import { Formik } from 'formik';
 
 export const FormCheckbox = () => {
@@ -17,17 +17,7 @@ export const FormCheckbox = () => {
   //   alert(`You selected: ${selectedVegetables.join(', ')}`);
   // };
   return (
-    <Formik
-      initialValues={{}}
-      onSubmit={console.log}
-
-      // onSubmit={(values, { setSubmitting }) => {
-      //   setTimeout(() => {
-      //     alert(JSON.stringify(values, null, 2));
-      //     setSubmitting(false);
-      //   }, 400);
-      //}}
-    >
+    <Formik initialValues={{}} onSubmit={console.log}>
       {(props: any) => (
         <Form margin={10}>
           <Vertical gap={10}>

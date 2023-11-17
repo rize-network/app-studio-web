@@ -58,6 +58,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         cursor="pointer"
         alignItems="center"
         borderRadius={24}
+        marginBottom={5}
         filter={isHovered && on ? 'brightness(0.9)' : 'brightness(1)'}
         transition="justify-content 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
         backgroundColor={

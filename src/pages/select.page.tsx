@@ -4,7 +4,6 @@ import { DefaultSelect } from 'src/components/Form/Select/examples/Default';
 import { DisabledSelect } from 'src/components/Form/Select/examples/Disabled';
 import { ErrorSelect } from 'src/components/Form/Select/examples/Error';
 import { FormSelect } from 'src/components/Form/Select/examples/Form';
-import { FormikSelect } from 'src/components/Form/Select/examples/Formik';
 import { HelperTextSelect } from 'src/components/Form/Select/examples/HelperText';
 import { MultiSelect } from 'src/components/Form/Select/examples/Multiple';
 import { ReadOnlySelect } from 'src/components/Form/Select/examples/ReadOnlyInput';
@@ -92,13 +91,7 @@ export const SelectPage = () => {
               <HelperTextSelect />
             </td>
           </tr>
-          <tr>
-            <th>Formik</th>
 
-            <td>
-              <FormikSelect />
-            </td>
-          </tr>
           <tr>
             <th>Form</th>
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Element, Input, Typography, useTheme } from 'app-studio';
 import {
   FieldContainer,
@@ -106,7 +106,7 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   id,
   name,
   label,
-  selected,
+  value,
   placeholder,
   helperText,
   hide = false,
@@ -128,7 +128,7 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   setNewOptions = () => {},
   setIsHovered = () => {},
   setIsFocused = () => {},
-  setSelected = () => {},
+  setvalue = () => {},
   styles = {
     text: {},
     icon: {},
@@ -147,7 +147,7 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
 
   const handleCallback = (option: string) => {
     setHide(!hide);
-    setSelected(option);
+    setvalue(option);
   };
 
   const handleClick = () => {
@@ -156,14 +156,14 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     }
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedCountry = event.target.value;
+    const valueCountry = event.target.value;
     const filteredCountries = countryList.filter((country) =>
-      country.name.toLowerCase().startsWith(selectedCountry.toLowerCase())
+      country.name.toLowerCase().startsWith(valueCountry.toLowerCase())
     );
     if (hide) setHide(false);
-    setSelected(event.target.value);
+    setvalue(event.target.value);
     setNewOptions(filteredCountries);
-    if (onChange) onChange(event);
+    if (onChange) onChange(event.target.value);
   };
 
   const handleBlur = (event: any) => {
@@ -171,9 +171,9 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     setIsFocused(false);
   };
 
-  useEffect(() => {
-    if (onChange) onChange(selected); // Call onChange when selectedCountry changes
-  }, [onChange, selected]);
+  // useEffect(() => {
+  //   if (onChange) onChange(value); // Call onChange when valueCountry changes
+  // }, [onChange, value]);
 
   const isWithLabel = !!(isFocused && label);
 
@@ -207,7 +207,7 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         styles={styles}
         shadow={shadow}
         variant={variant}
-        value={selected}
+        value={value}
         color={colorScheme}
         isHovered={isHovered}
         isDisabled={isDisabled}
@@ -240,7 +240,7 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
             onFocus={handleFocus}
             {...fieldStyles}
             {...props}
-            value={selected}
+            value={value}
             onChange={handleChange}
           />
         </FieldWrapper>
