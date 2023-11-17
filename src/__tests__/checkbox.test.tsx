@@ -8,7 +8,7 @@ afterEach(() => {
   cleanup();
 });
 test('renders Checkbox component', () => {
-  render(<Checkbox name="active" role="textbox" />);
+  render(<Checkbox role="textbox" />);
   const CheckboxElement = screen.getByRole('textbox');
   expect(CheckboxElement).toBeInTheDocument();
 });

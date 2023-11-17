@@ -14,7 +14,6 @@ export const ColorCheckbox = () => (
     ].map((color) => (
       <Checkbox
         key={color}
-        name="name"
         colorScheme={color}
         label={color}
         defaultIsSelected

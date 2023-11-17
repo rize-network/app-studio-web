@@ -28,6 +28,6 @@ export const FileSVG = ({
   );
 };
 
-export const FileImage = ({ path, ...props }: { path: string }) => {
+export const FileImage = ({ path, ...props }: { path: string } & any) => {
   return <Image src={path} {...props} />;
 };

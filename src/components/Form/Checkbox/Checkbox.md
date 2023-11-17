@@ -46,19 +46,19 @@ import { Checkbox } from "app-studio";
 import { Vertical } from "../../Layout/Vertical/Vertical";
 
 <Vertical gap={10}>
-  <Checkbox name="xs" size="xs" isChecked>
+  <Checkbox  size="xs" isChecked>
     xs
   </Checkbox>
-  <Checkbox name="sm" size="sm" isChecked>
+  <Checkbox size="sm" isChecked>
     sm
   </Checkbox>
-  <Checkbox name="md" size="md" isChecked>
+  <Checkbox size="md" isChecked>
     md
   </Checkbox>
-  <Checkbox name="lg" size="lg" isChecked>
+  <Checkbox size="lg" isChecked>
     lg
   </Checkbox>
-  <Checkbox name="xl" size="xl" isChecked>
+  <Checkbox size="xl" isChecked>
     xl
   </Checkbox>
 </Vertical>;

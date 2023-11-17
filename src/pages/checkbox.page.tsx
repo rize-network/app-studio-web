@@ -21,8 +21,6 @@ export const CheckboxPage = () => {
         <tbody>
           <tr>
             <th>Property</th>
-            <th>NextUI</th>
-            <th>NativeBase</th>
             <th>App-Studio</th>
           </tr>
           <tr>
