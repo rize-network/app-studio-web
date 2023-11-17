@@ -41,8 +41,8 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
         onFocus={[Function]}
         placeholder="Name"
         readOnly={false}
-        selected="Name"
         type="country"
+        value="Name"
         width="100%"
       />
     </div>

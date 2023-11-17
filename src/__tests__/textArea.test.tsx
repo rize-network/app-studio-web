@@ -17,7 +17,7 @@ describe('TextArea', () => {
   });
 
   test('renders TextArea with default value', () => {
-    render(<TextArea name="username" defaultValue="John" role="textbox" />);
+    render(<TextArea name="username" value="John" role="textbox" />);
     const TextAreaElement = screen.getByRole('textbox');
     expect(TextAreaElement).toHaveValue('John');
   });
@@ -41,7 +41,7 @@ describe('TextArea', () => {
   //   render(
   //     <TextArea
   //       name="username"
-  //       defaultValue="John"
+  //       value="John"
   //       role="textbox"
   //       variant="none"
   //     />

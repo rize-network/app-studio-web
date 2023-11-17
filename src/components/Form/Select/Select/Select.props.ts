@@ -97,12 +97,12 @@ export interface SelectViewProps extends SelectProps {
   /**
    * Optional prop indicating if an option is selected
    */
-  selected: string | Array<string>;
+  value: string | Array<string>;
 
   /**
    * Optional callback prop to update the selected option
    */
-  setSelected: Function;
+  setValue: Function;
 
   /**
    * Prop to determine if the select dropdown is hidden
@@ -137,9 +137,9 @@ export interface SelectViewProps extends SelectProps {
 
 export interface SelectBoxProps {
   /**
-   * The option that will be selected
+   * The option that will be selected value
    */
-  selected?: string | Array<string>;
+  value?: string | Array<string>;
   /**
    * If true, the select will be unusable
    */
@@ -211,7 +211,7 @@ export interface HiddenSelectProps {
   /**
    * The option that has been selected
    */
-  selected: string | Array<string>;
+  value: string | Array<string>;
   /**
    * If true, multiple options can be selected
    */

@@ -10,6 +10,7 @@ const TextFieldComponent: React.FC<TextFieldProps> = (
 ) => {
   const formProps = useFormikInput(props);
   const textFieldStates = useTextFieldState(props);
+
   return <TextFieldView {...textFieldStates} {...formProps} />;
 };
 /**

@@ -135,12 +135,12 @@ export interface TextAreaViewProps extends TextAreaProps {
   /**
    * The current value of the textarea input.
    */
-  inputValue?: string | number;
+  value?: string | number;
 
   /**
    * Callback prop to update the value of the textarea input.
    */
-  setInputValue?: Function;
+  setValue?: Function;
 
   /**
    * Prop indicating if the textarea is currently focused.

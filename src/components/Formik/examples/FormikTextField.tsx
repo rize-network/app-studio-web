@@ -37,7 +37,6 @@ export const FormikTextField = () => {
             />
             <Button
               type="submit"
-              isDisabled={props.isSubmitting}
               onClick={props.handleSubmit}
             >
               Submit

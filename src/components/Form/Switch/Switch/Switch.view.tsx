@@ -31,7 +31,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   const handleToggle = (event: any) => {
     if (!isReadOnly) {
       setOn(!on);
-      if (onChange) onChange(event);
+      if (onChange) onChange(event.target.checked);
     }
   };
 

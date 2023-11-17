@@ -1,25 +1,30 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { TextAreaProps } from './TextArea.props';
 
 export const useTextAreaState = ({
   label,
   placeholder,
-  defaultValue,
-  value,
+  value :defaultValue
 }: TextAreaProps) => {
   const [hint, setHint] = useState(label ?? placeholder);
   const [isHovered, setIsHovered] = useState(false);
-  const [inputValue, setInputValue] = useState(value || defaultValue || '');
+  const [value, setValue] = useState(  defaultValue || '');
   const [isFocused, setIsFocused] = useState(false);
+
+  useMemo(() => {
+    setHint(
+      isFocused && !value ? placeholder ?? '' : label ?? placeholder
+    );
+  }, [value, isFocused, label, placeholder]);
 
   return {
     hint,
     setHint,
     isHovered,
     setIsHovered,
-    inputValue,
-    setInputValue,
+    value,
+    setValue,
     isFocused,
     setIsFocused,
   };

@@ -15,9 +15,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   id,
   name,
   label,
-  value,
   hint,
-  inputValue,
+  value,
   onChange,
   leftChild,
   rightChild,
@@ -40,7 +39,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   setHint = () => {},
   setIsFocused = () => {},
   setIsHovered = () => {},
-  setInputValue = () => {},
+  setValue = () => {},
   onClick = () => {},
   onFocus,
   onBlur = () => {},
@@ -88,17 +87,20 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   ) => {
     if (typeof event === 'string') {
       //for ios and android
-      setInputValue(event);
+      setValue(event);
       if (onChangeText) onChangeText(event);
+      if (onChange) onChange(event);
+
     } else {
       //Web
-      setInputValue(event.target.value);
-      if (onChange) onChange(event);
+      setValue(event.target.value);
+      if (onChangeText) onChangeText(event.target.value);
+      if (onChange) onChange(event.target.value);
     }
   };
 
   const handleClear = () => {
-    setInputValue('');
+    setValue('');
     //Web
     if (onChange) {
       onBlur({ target: { name } });
@@ -118,7 +120,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         styles={styles}
         shadow={shadow}
         variant={variant}
-        value={inputValue}
+        value={value}
         color={colorScheme}
         isHovered={isHovered}
         isDisabled={isDisabled}
@@ -144,7 +146,6 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
           <TextFieldInput
             id={id}
             name={name}
-            value={inputValue}
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
@@ -155,13 +156,14 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
             {...fieldStyles}
             {...props}
             onChange={handleChange}
+            value={value}
             {...(onChange && { onChange: handleChange })}
           />
         </FieldWrapper>
-        {(rightChild || (isClearable && inputValue)) && (
+        {(rightChild || (isClearable && value)) && (
           <FieldIcons>
             {rightChild && <>{rightChild}</>}
-            {isClearable && inputValue && !isReadOnly && !isDisabled && (
+            {isClearable && value && !isReadOnly && !isDisabled && (
               <CloseSvg
                 size={Typography.fontSizes[size]}
                 color={IconColor}

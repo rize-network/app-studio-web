@@ -56,7 +56,7 @@ const Item: React.FC<ItemProps> = ({
 const SelectBox: React.FC<SelectBoxProps> = ({
   size = 'md',
   styles = { field: {}, text: {} },
-  selected,
+  value,
   isDisabled,
   placeholder,
   removeOption = () => {},
@@ -78,17 +78,17 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
   return (
     <Text {...fieldStyles}>
-      {(selected === '' || (selected && selected.length === 0)) &&
+      {(value === '' || (value && value.length === 0)) &&
       !!placeholder ? (
         placeholder
       ) : (
         <>
-          {typeof selected === 'string'
-            ? selected
-            : selected &&
-              selected.length > 0 && (
+          {typeof value === 'string'
+            ? value
+            : value &&
+              value.length > 0 && (
                 <Horizontal gap={6}>
-                  {selected.map((option) => (
+                  {value.map((option) => (
                     <MultiSelect
                       key={option}
                       option={option}
@@ -106,7 +106,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 const HiddenSelect: React.FC<HiddenSelectProps> = ({
   id,
   name,
-  selected,
+  value,
   onChange,
   isMulti = false,
   isDisabled = false,
@@ -126,7 +126,7 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
       width={0}
       height={0}
       position="absolute"
-      value={selected}
+      value={value}
       disabled={isDisabled}
       readOnly={isReadOnly}
       onChange={handleChange}
@@ -238,7 +238,7 @@ const SelectView: React.FC<SelectViewProps> = ({
   id,
   name,
   label,
-  selected,
+  value,
   placeholder,
   helperText,
   hide = false,
@@ -264,7 +264,7 @@ const SelectView: React.FC<SelectViewProps> = ({
   },
   onChange = () => {},
   setHide = () => {},
-  setSelected = () => {},
+  setValue = () => {},
   setIsHovered = () => {},
   setIsFocused = () => {},
   ...props
@@ -283,22 +283,23 @@ const SelectView: React.FC<SelectViewProps> = ({
   const handleCallback = useCallback(
     (option: string) => {
       setHide(!hide);
-      if (isMulti && Array.isArray(selected)) {
-        !selected.includes(option) && setSelected([...selected, option]);
+      if (isMulti && Array.isArray(value)) {
+        !value.includes(option) && setValue([...value, option]);
       } else {
-        setSelected(option);
+        setValue(option);
       }
+      if(onChange) onChange(option);
     },
 
-    [hide, isMulti, selected]
+    [hide, isMulti, value]
   );
 
-  const handleRemoveOption = (selectedOption: string) => {
-    if (Array.isArray(selected) && selected.includes(selectedOption)) {
-      const newSelected = selected.filter(
-        (option) => option !== selectedOption
+  const handleRemoveOption = (valueOption: string) => {
+    if (Array.isArray(value) && value.includes(valueOption)) {
+      const newValue = value.filter(
+        (option) => option !== valueOption
       );
-      setSelected(newSelected.length === 0 ? [] : newSelected);
+      setValue(newValue.length === 0 ? [] : newValue);
     }
   };
 
@@ -318,7 +319,7 @@ const SelectView: React.FC<SelectViewProps> = ({
         styles={styles}
         shadow={shadow}
         variant={variant}
-        value={selected}
+        value={value}
         color={colorScheme}
         isHovered={isHovered}
         isDisabled={isDisabled}
@@ -345,7 +346,7 @@ const SelectView: React.FC<SelectViewProps> = ({
             name={name}
             options={options}
             onChange={onChange}
-            selected={selected}
+            value={value}
             isDisabled={isDisabled}
             isReadOnly={isReadOnly}
             isMulti={isMulti}
@@ -355,7 +356,7 @@ const SelectView: React.FC<SelectViewProps> = ({
           <SelectBox
             size={size}
             styles={styles}
-            selected={selected}
+            value={value}
             isDisabled={isDisabled}
             placeholder={placeholder}
             removeOption={handleRemoveOption}

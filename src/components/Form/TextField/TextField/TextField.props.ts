@@ -127,8 +127,8 @@ export interface TextFieldViewProps extends TextFieldProps {
   setIsHovered?: Function;
 
   /** The current value of the text field */
-  inputValue?: string;
+  value?: string;
 
   /** Function to set the value of the text field */
-  setInputValue?: Function;
+  setValue?: Function;
 }

@@ -7,17 +7,17 @@ export const useSelectState = ({
   isMulti,
   options,
 }: SelectProps) => {
-  const defaultSelected = placeholder ? (isMulti ? [] : '') : options[0];
+  const defaultValue = placeholder ? (isMulti ? [] : '') : options[0];
 
   const [hide, setHide] = React.useState(true);
   const [isHovered, setIsHovered] = React.useState(false);
   const [isFocused, setIsFocused] = React.useState(false);
-  const [selected, setSelected] = React.useState<string | Array<string>>(
-    defaultSelected
+  const [value, setValue] = React.useState<string | Array<string>>(
+    defaultValue
   );
   return {
-    selected,
-    setSelected,
+    value,
+    setValue,
     hide,
     setHide,
     isHovered,

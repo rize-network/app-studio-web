@@ -128,7 +128,7 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   setNewOptions = () => {},
   setIsHovered = () => {},
   setIsFocused = () => {},
-  setvalue = () => {},
+  setValue = () => {},
   styles = {
     text: {},
     icon: {},
@@ -147,12 +147,14 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
 
   const handleCallback = (option: string) => {
     setHide(!hide);
-    setvalue(option);
+    setValue(option);
+    if (onChange) onChange(option);
   };
 
   const handleClick = () => {
     if (!isDisabled && !isReadOnly) {
       setHide(!hide);
+      
     }
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -161,9 +163,8 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
       country.name.toLowerCase().startsWith(valueCountry.toLowerCase())
     );
     if (hide) setHide(false);
-    setvalue(event.target.value);
     setNewOptions(filteredCountries);
-    if (onChange) onChange(event.target.value);
+    if (onChange) onChange(valueCountry);
   };
 
   const handleBlur = (event: any) => {

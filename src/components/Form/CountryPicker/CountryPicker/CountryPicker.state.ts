@@ -8,7 +8,7 @@ import { Country } from './CountryPicker.type';
 export const useCountryPickerState = ({ placeholder }: CountryPickerProps) => {
   const [newOptions, setNewOptions] =
     React.useState<Array<Country>>(countryList);
-  const [selected, setSelected] = React.useState<string>(
+  const [value, setValue] = React.useState<string>(
     placeholder ?? countryList[0].name
   );
 
@@ -25,7 +25,7 @@ export const useCountryPickerState = ({ placeholder }: CountryPickerProps) => {
     setIsHovered,
     isFocused,
     setIsFocused,
-    selected,
-    setSelected,
+    value,
+    setValue,
   };
 };

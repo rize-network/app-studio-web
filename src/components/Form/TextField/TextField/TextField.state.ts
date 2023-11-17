@@ -5,18 +5,19 @@ import { TextFieldProps } from './TextField.props';
 export const useTextFieldState = ({
   label,
   placeholder,
-  value,
+  value :defaultValue
 }: TextFieldProps) => {
   const [hint, setHint] = useState(label ?? placeholder);
   const [isFocused, setIsFocused] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [inputValue, setInputValue] = useState(value || '');
+  const [value, setValue] = useState(  defaultValue || '');
+
 
   useMemo(() => {
     setHint(
-      isFocused && !inputValue ? placeholder ?? '' : label ?? placeholder
+      isFocused && !value ? placeholder ?? '' : label ?? placeholder
     );
-  }, [inputValue, isFocused, label, placeholder]);
+  }, [value, isFocused, label, placeholder]);
 
   return {
     hint,
@@ -25,7 +26,7 @@ export const useTextFieldState = ({
     setIsFocused,
     isHovered,
     setIsHovered,
-    inputValue,
-    setInputValue,
+    setValue,
+    value,
   };
 };

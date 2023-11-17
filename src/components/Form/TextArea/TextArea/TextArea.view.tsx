@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Element, Typography } from 'app-studio';
 import {
   FieldContainer,
@@ -17,10 +17,8 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   value,
   label,
   shadow,
-  inputValue,
   helperText,
   placeholder,
-  defaultValue,
   size = 'sm',
   shape = 'default',
   variant = 'default',
@@ -39,19 +37,13 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   onFocus,
   onChangeText,
   setHint = () => {},
-  setInputValue = () => {},
+  setValue = () => {},
   setIsFocused = () => {},
   setIsHovered = () => {},
   styles = { box: {}, text: {}, label: {}, helperText: {}, field: {} },
   ...props
 }) => {
   const isWithLabel = !!(isFocused && label);
-
-  useMemo(() => {
-    setHint(
-      isFocused && !inputValue ? placeholder ?? '' : label ?? placeholder
-    );
-  }, [inputValue, isFocused, label, placeholder]);
 
   const fieldStyles = {
     margin: 0,
@@ -88,11 +80,11 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   ) => {
     if (typeof event === 'string') {
       //for ios and android
-      setInputValue(event);
+      setValue(event);
       if (onChangeText) onChangeText(event);
     } else {
-      setInputValue(event.target.value);
-      if (onChange) onChange(event);
+      setValue(event.target.value);
+      if (onChange) onChange(event.target.value);
     }
   };
 
@@ -106,7 +98,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
         styles={styles}
         shadow={shadow}
         variant={variant}
-        value={inputValue}
+        value={value}
         color={colorScheme}
         isHovered={isHovered}
         isDisabled={isDisabled}
@@ -134,7 +126,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             name={name}
             rows={maxRows}
             cols={maxCols}
-            value={inputValue}
+            value={value}
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}

@@ -12,10 +12,10 @@ import { TextArea } from "app-studio";
 
 ### **Default Value**
 
-“**_defaultValue_**” it sets the initial value of the textarea.
+“**_value_**” it sets the initial value of the textarea.
 
 ```tsx
-<TextArea defaultValue="Write your thougts here..." />
+<TextArea value="Write your thougts here..." />
 ```
 
 ### **Disabled**

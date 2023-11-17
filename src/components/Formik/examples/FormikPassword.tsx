@@ -8,7 +8,6 @@ import { Vertical } from '../../Layout/Vertical/Vertical';
 
 export const FormikPassword = () => {
   const initialValues = {
-    name: '',
     password: '',
   };
 
@@ -25,7 +24,6 @@ export const FormikPassword = () => {
 
             <Button
               type="submit"
-              isDisabled={props.isSubmitting}
               onClick={props.handleSubmit}
             >
               Submit
