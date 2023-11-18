@@ -1,5 +1,5 @@
 import React from 'react';
-import {  View } from 'src/components';
+import { View } from 'src/components';
 import { ChildSwitch } from 'src/components/Form/Switch/examples/ChildSwitch';
 import { ColorSwitch } from 'src/components/Form/Switch/examples/ColorScheme';
 import { DefaultSwitch } from 'src/components/Form/Switch/examples/Default';
@@ -61,7 +61,6 @@ export const SwitchPage = () => {
               <ShadowSwitch />
             </td>
           </tr>
-       
         </tbody>
       </table>
     </View>

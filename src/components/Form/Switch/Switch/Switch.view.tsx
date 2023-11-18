@@ -16,21 +16,19 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   shadow = {},
   size = 'sm',
   colorScheme = 'theme.primary',
-  on = false,
+  value = false,
   isHovered = false,
-  isChecked = false,
   isDisabled = false,
   isReadOnly = false,
   onChange,
-  onValueChange,
-  setOn = () => {},
+  setValue = () => {},
   setIsHovered = () => {},
   styles = { slider: {}, circle: {} },
   ...props
 }) => {
   const handleToggle = (event: any) => {
     if (!isReadOnly) {
-      setOn(!on);
+      setValue(!value);
       if (onChange) onChange(event.target.checked);
     }
   };
@@ -45,11 +43,10 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         opacity={0}
         width={0}
         height={0}
-        checked={on}
+        checked={value}
         onChange={handleToggle}
         disabled={isDisabled}
         readOnly={isReadOnly}
-        {...(onValueChange && { onValueChange: handleToggle })}
         {...props}
       />
       {/* Slide */}
@@ -59,27 +56,27 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         alignItems="center"
         borderRadius={24}
         marginBottom={5}
-        filter={isHovered && on ? 'brightness(0.9)' : 'brightness(1)'}
+        filter={isHovered && value ? 'brightness(0.9)' : 'brightness(1)'}
         transition="justify-content 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
         backgroundColor={
-          isDisabled ? 'disabled' : on ? colorScheme : 'lightgray'
+          isDisabled ? 'disabled' : value ? colorScheme : 'lightgray'
         }
         justifyContent={
-          activeChild ? 'space-between' : on ? 'flex-end' : 'flex-start'
+          activeChild ? 'space-between' : value ? 'flex-end' : 'flex-start'
         }
         {...shadow}
         {...SliderPadding[size]}
         {...SliderSizes[size]}
         {...styles['slider']}
       >
-        {activeChild && on && <View>{activeChild}</View>}
+        {activeChild && value && <View>{activeChild}</View>}
         <View
           borderRadius="50%"
           backgroundColor="white"
           {...KnobSizes[size]}
           {...styles['circle']}
         />
-        {inActiveChild && !on && <View>{inActiveChild}</View>}
+        {inActiveChild && !value && <View>{inActiveChild}</View>}
       </View>
     </Label>
   );

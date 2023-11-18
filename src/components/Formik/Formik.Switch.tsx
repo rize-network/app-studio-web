@@ -6,8 +6,7 @@ import SwitchView from '../Form/Switch/Switch/Switch.view';
 import { useFormikInput } from './Formik.Hook';
 
 const SwitchComponent: React.FC<SwitchProps> = (props) => {
-  let { value, ...formProps } = useFormikInput(props);
-  formProps.isChecked = value;
+  const formProps = useFormikInput(props);
   const switchStates = useSwitchState(props);
   return <SwitchView {...switchStates} {...formProps} />;
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../../../Button/Button';
-import {  FormikForm } from '../../../Formik/Formik.Form';
+import { FormikForm } from '../../../Formik/Formik.Form';
 
 import { Vertical } from '../../../Layout/Vertical/examples';
 import { View } from '../../../Layout/View/View';
@@ -29,7 +29,7 @@ export const FormCheckbox = () => {
       //}}
     >
       {(props: any) => (
-        < FormikForm margin={10}>
+        <FormikForm margin={10}>
           <Vertical gap={10}>
             <View>Choose your vegetables:</View>
             <FormikCheckbox name="onion" label="onion" />

@@ -10,12 +10,12 @@ import { Switch } from 'app-studio';
 <Switch />
 ```
 
-### **Checked**
+### **Active**
 
-“**_isChecked_**” is the toggle's initial state. It has a default value of false.
+“**_value_**” is the toggle's initial state. It has a default value={true} of false.
 
 ```tsx
-<Switch name="checked" isChecked />
+<Switch  value={true} />
 ```
 
 ### **Disabled**
@@ -23,7 +23,7 @@ import { Switch } from 'app-studio';
 “**_isDisabled_**” makes the toggle unusable.
 
 ```tsx
-<Switch name="disabled" isDisabled />
+<Switch  isDisabled />
 ```
 
 ### **Read Only**
@@ -31,22 +31,22 @@ import { Switch } from 'app-studio';
 “**_isReadOnly_**” makes the toggle only readable. The user will be unable to change the state of the toggle.
 
 ```tsx
-<Switch name="readOnly" isReadOnly isChecked />
+<Switch  isReadOnly value={true} />
 ```
 
 ### **Sizes**
 
-“**_size_**” changes the toggle size. It has a default value of “sm”.
+“**_size_**” changes the toggle size. It has a default value={true} of “sm”.
 
 ```tsx
 import { Vertical } from '../../Layout/Vertical/Vertical';
 
 <Vertical gap={10}>
-  <Switch name="xs" size="xs" isChecked />
-  <Switch name="sm" size="sm" isChecked />
-  <Switch name="md" size="md" isChecked />
-  <Switch name="lg" size="lg" isChecked />
-  <Switch name="xl" size="xl" isChecked />
+  <Switch name="xs" size="xs" value={true} />
+  <Switch name="sm" size="sm" value={true} />
+  <Switch name="md" size="md" value={true} />
+  <Switch name="lg" size="lg" value={true} />
+  <Switch name="xl" size="xl" value={true} />
 </Vertical>;
 ```
 
@@ -55,7 +55,7 @@ import { Vertical } from '../../Layout/Vertical/Vertical';
 “**_shadow_**” adds a shadow effect to the toggle.
 
 ```tsx
-<Switch id="checkbox" name="shadow" shadow={{ boxShadow: 'rgb(249, 115, 22) 0px 4px 14px 0px' }} isChecked />
+<Switch id="checkbox" name="shadow" shadow={{ boxShadow: 'rgb(249, 115, 22) 0px 4px 14px 0px' }} value={true} />
 ```
 
 ### **Child**
@@ -84,7 +84,7 @@ import { Text } from '../../Text/Text';
 “**_colorScheme_**” modifies the toggle's background color.
 
 ```tsx
-<Switch name="name" colorScheme="theme.primary" isChecked />
+<Switch name="name" colorScheme="theme.primary" value={true} />
 ```
 
 ## **Types**
