@@ -21,11 +21,6 @@ export interface SwitchProps {
   id?: string;
 
   /**
-   * Indicates the initial value of the switch.
-   */
-  isChecked?: boolean;
-
-  /**
    * If set to true, the switch is disabled and cannot be interacted with.
    */
   isDisabled?: boolean;
@@ -39,11 +34,6 @@ export interface SwitchProps {
    * A callback function that is invoked when the switch's value changes.
    */
   onChange?: Function;
-
-  /**
-   * A callback function that is invoked when the switch's value changes on iOS and Android devices.
-   */
-  onValueChange?: (event: any) => void;
 
   /**
    * The name of the switch.
@@ -70,6 +60,11 @@ export interface SwitchProps {
    */
   size?: Size;
 
+/** 
+ * Label position
+ */
+ labelPosition?: 'left' | 'right';
+
   /**
    * Additional properties and attributes.
    */
@@ -84,8 +79,10 @@ export interface SwitchViewProps extends SwitchProps {
   setIsHovered: Function;
 
   /** Prop indicating the current state of the switch */
-  on?: boolean;
+  value?: boolean;
 
   /** Callback prop to update the state of the switch */
-  setOn?: Function;
+  setValue?: Function;
+
+
 }

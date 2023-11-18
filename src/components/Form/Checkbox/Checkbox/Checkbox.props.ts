@@ -62,6 +62,11 @@ export interface CheckboxProps {
    */
   isIndeterminate?: boolean;
 
+  /** 
+   * Label position
+   */
+  labelPosition?: 'left' | 'right';
+
   /**
    * Handler function called when the controlled checkbox value changes.
    */

@@ -17,7 +17,7 @@ export const FormCheckboxExemple = () => {
   //   alert(`You selected: ${selectedVegetables.join(', ')}`);
   // };
   return (
-    <Formik initialValues={{onion:true}} onSubmit={console.log}>
+    <Formik initialValues={{ onion: true }} onSubmit={console.log}>
       {(props: any) => (
         <FormikForm margin={10}>
           <Vertical gap={10}>

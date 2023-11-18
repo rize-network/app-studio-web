@@ -13,4 +13,5 @@ export type Size =
 export type SwitchStyles = {
   slider?: CSSProperties;
   circle?: CSSProperties;
+  label?: CSSProperties;
 };

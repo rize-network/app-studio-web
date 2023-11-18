@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from 'app-studio';
+import { Typography, View } from 'app-studio';
 import { Center } from '../../../Layout/Center/Center';
 import { Label } from '../../../Form/Label/Label';
 import { CheckSvg, IndeterminateSvg } from '../../../Svg';
@@ -16,6 +16,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   onChange,
   onValueChange,
   shadow = {},
+  labelPosition = 'right',
   size = 'md',
   colorScheme = 'theme.primary',
   error = false,
@@ -88,6 +89,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       {...checkboxStyle.container}
       {...props}
     >
+      {labelPosition === 'left' && label && <View>{label}</View>}
       <Center {...checkboxStyle.checkbox}>
         {isIndeterminate ? (
           <IndeterminateSvg />
@@ -96,7 +98,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           (icon ?? <CheckSvg size={IconSizes[size]} />)
         )}
       </Center>
-      {label}
+      {labelPosition === 'right' && label && <View>{label}</View>}
     </Label>
   );
 };

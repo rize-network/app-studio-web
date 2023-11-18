@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Modal body to match snapshot 1`] = `
-<div
-  className="sc-bdfCDU kSFsWD"
->
-  Modal Content
-</div>
-`;

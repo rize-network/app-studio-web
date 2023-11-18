@@ -11,8 +11,10 @@ const SwitchContent = (props: any) => <Input type="checkbox" {...props} />;
 const SwitchView: React.FC<SwitchViewProps> = ({
   id,
   name,
+  label,
   inActiveChild,
   activeChild,
+  labelPosition = 'right',
   shadow = {},
   size = 'sm',
   colorScheme = 'theme.primary',
@@ -23,7 +25,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   onChange,
   setValue = () => {},
   setIsHovered = () => {},
-  styles = { slider: {}, circle: {} },
+  styles = { slider: {}, circle: {}, label: {}  },
   ...props
 }) => {
   const handleToggle = (event: any) => {
@@ -35,8 +37,20 @@ const SwitchView: React.FC<SwitchViewProps> = ({
 
   const handleHover = () => setIsHovered(!isHovered);
 
+  const switchStyle = {
+    container: {
+      gap: 10,
+      display: 'flex',
+      height: 'fit-content',
+      width: 'fit-content',
+      cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
+      ...styles.label,
+    },
+  };
   return (
-    <Label htmlFor={id} onMouseEnter={handleHover} onMouseLeave={handleHover}>
+    <Label htmlFor={id} onMouseEnter={handleHover} onMouseLeave={handleHover}
+    {...switchStyle.container}
+    {...props}> 
       <SwitchContent
         id={id}
         name={name}
@@ -49,7 +63,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         readOnly={isReadOnly}
         {...props}
       />
-      {/* Slide */}
+      {labelPosition === 'left' && label && <View>{label}</View>}
       <View
         display="flex"
         cursor="pointer"
@@ -78,6 +92,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         />
         {inActiveChild && !value && <View>{inActiveChild}</View>}
       </View>
+      {labelPosition === 'right' && label && <View>{label}</View>}
     </Label>
   );
 };
