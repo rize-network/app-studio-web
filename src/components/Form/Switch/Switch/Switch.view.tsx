@@ -25,7 +25,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   onChange,
   setValue = () => {},
   setIsHovered = () => {},
-  styles = { slider: {}, circle: {}, label: {}  },
+  styles = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
   const handleToggle = (event: any) => {
@@ -48,9 +48,13 @@ const SwitchView: React.FC<SwitchViewProps> = ({
     },
   };
   return (
-    <Label htmlFor={id} onMouseEnter={handleHover} onMouseLeave={handleHover}
-    {...switchStyle.container}
-    {...props}> 
+    <Label
+      htmlFor={id}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}
+      {...switchStyle.container}
+      {...props}
+    >
       <SwitchContent
         id={id}
         name={name}

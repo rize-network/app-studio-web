@@ -60,10 +60,10 @@ export interface SwitchProps {
    */
   size?: Size;
 
-/** 
- * Label position
- */
- labelPosition?: 'left' | 'right';
+  /**
+   * Label position
+   */
+  labelPosition?: 'left' | 'right';
 
   /**
    * Additional properties and attributes.
@@ -83,6 +83,4 @@ export interface SwitchViewProps extends SwitchProps {
 
   /** Callback prop to update the state of the switch */
   setValue?: Function;
-
-
 }

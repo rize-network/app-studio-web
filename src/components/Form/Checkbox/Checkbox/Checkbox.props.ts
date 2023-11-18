@@ -62,7 +62,7 @@ export interface CheckboxProps {
    */
   isIndeterminate?: boolean;
 
-  /** 
+  /**
    * Label position
    */
   labelPosition?: 'left' | 'right';
