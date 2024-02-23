@@ -161,7 +161,6 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         </FieldWrapper>
         {(rightChild || (isClearable && value)) && (
           <FieldIcons>
-            {rightChild && <>{rightChild}</>}
             {isClearable && value && !isReadOnly && !isDisabled && (
               <CloseSvg
                 size={Typography.fontSizes[size]}
@@ -169,6 +168,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
                 onClick={handleClear}
               />
             )}
+            {rightChild && <>{rightChild}</>}
           </FieldIcons>
         )}
       </FieldContent>
