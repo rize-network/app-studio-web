@@ -42,6 +42,7 @@
     "bundle-analyzer": "node ./scripts/analyse.js",
     "size": "size-limit",
     "analyze": "size-limit --why",
+    "prerelease": "npm run build",
     "release": "release-it"
   },
   "config": {
