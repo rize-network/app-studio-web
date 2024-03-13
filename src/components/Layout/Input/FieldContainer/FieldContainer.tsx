@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Vertical } from '../../Vertical/examples';
 import { HelperText } from '../HelperText/HelperText';
 
 import { ContainerProps } from './FieldContainer/FieldContainer.props';
 import { Text } from '../../../Text/Text';
+import { Vertical } from '../../Vertical/Vertical';
 
 export const FieldContainer: React.FC<ContainerProps> = ({
   children,

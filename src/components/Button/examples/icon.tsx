@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../../Button/Button';
+import { Button } from '../Button';
 import { Center } from '../../Layout/Center/Center';
 
 import { DustBinSvg } from '../../Svg';

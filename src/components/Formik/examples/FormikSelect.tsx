@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 
-import { Vertical } from '../../Layout/Vertical/examples';
+import { Vertical } from 'src/components/Layout/Vertical/Vertical';
 
 import { FormikSelect } from '../Formik.Select';
 

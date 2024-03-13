@@ -1,0 +1,13 @@
+import React from 'react';
+import { EditSvg } from 'src/components/Svg';
+import { Alert } from '../Alert';
+
+export const AlertIcon = () => {
+  return (
+    <Alert
+      title="Heads up!"
+      description="You can add components to your app using the cli."
+      icon={<EditSvg size={24} color="black" />}
+    />
+  );
+};

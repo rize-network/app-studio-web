@@ -18,3 +18,5 @@ export * from './Loader/Loader';
 export * from './Modal/Modal';
 export * from './Text/Text';
 export * from './File/File';
+export * from './Tabs/Tabs';
+export * from './Alert/Alert';

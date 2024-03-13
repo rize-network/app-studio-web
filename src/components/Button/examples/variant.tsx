@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../../Button/Button';
+import { Button } from '../Button';
 import { Vertical } from '../../Layout/Vertical/Vertical';
 
 import { Variant } from '../Button/Button.type';

@@ -7,10 +7,14 @@
     "dist"
   ],
   "dependencies": {
+    "axios": "^1.6.7",
+    "cheerio": "^1.0.0-rc.12",
     "date-fns": "^2.30.0",
     "formik": "^2.2.9",
+    "openai": "^4.28.4",
     "rc-upload": "^4.4.0",
     "react-helmet": "^6.1.0",
+    "simple-git": "^3.22.0",
     "zustand": "^4.3.8"
   },
   "engines": {
@@ -43,7 +47,9 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "prerelease": "npm run build",
-    "release": "release-it"
+    "release": "release-it",
+    "bot-doc": "ts-node src/bot/index.ts",
+    "create-doc": "ts-node scripts/create-doc.ts"
   },
   "config": {
     "commitizen": {

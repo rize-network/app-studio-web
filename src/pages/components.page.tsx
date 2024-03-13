@@ -22,6 +22,8 @@ const SwitchPage = lazy(() => import('src/pages/switch.page'));
 const TextPage = lazy(() => import('src/pages/text.page'));
 const TextAreaPage = lazy(() => import('src/pages/textArea.page'));
 const VerticalPage = lazy(() => import('src/pages/vertical.page'));
+const TabsPage = lazy(() => import('src/pages/tabs.page'));
+const AlertPage = lazy(() => import('src/pages/alert.page'));
 
 const ListItem = styled.li<{ isHovered: boolean; isSelected: boolean }>`
   text-decoration: none;
@@ -78,6 +80,8 @@ export const ComponentsPage = () => {
       { name: 'Text', path: '/text', element: <TextPage /> },
       { name: 'Vertical', path: '/vertical', element: <VerticalPage /> },
       { name: 'Message', path: '/message', element: <MessagePage /> },
+      { name: 'Tabs', path: '/tabs', element: <TabsPage /> },
+      { name: 'Alert', path: '/alert', element: <AlertPage /> },
     ];
   }, []);
 
