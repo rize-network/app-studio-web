@@ -4,8 +4,8 @@ APPLICATION_SETTINGS : Un objet pour les paramètres généraux de l'application
 */
 
 export const API_CONFIG = {
-  openaiApiKey: process.env.OPENAI_API_KEY ?? '',
-  openaiOrganization: process.env.OPENAI_ORGANIZATION ?? '',
+  openaiApiKey: process.env.REACT_APP_OPENAI_API_KEY ?? '',
+  openaiOrganization: process.env.REACT_APP_OPENAI_ORGANIZATION ?? '',
   defaultModel: 'gpt-4-1106-preview', // ou tout autre modèle que vous souhaitez utiliser par défaut
   // Ajoutez d'autres configurations relatives à l'API ici, si nécessaire
 };
