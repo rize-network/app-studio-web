@@ -11,6 +11,7 @@ exports[`Avatar to match snapshot 1`] = `
 >
   <img
     alt="IM"
+    className="sc-bdfCDU eEedzs"
     height={48}
     onError={[Function]}
     src="https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/07/insert-image-html.jpg"

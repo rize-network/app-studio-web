@@ -1,6 +1,6 @@
 import React from 'react';
 import { Center, Text } from 'src/components';
-// import { Image } from 'app-studio';
+import { Image } from 'app-studio';
 import { AvatarViewProps } from './Avatar.props';
 import { AvatarSizeMap } from './Avatar.style';
 
@@ -33,7 +33,7 @@ export const AvatarView = ({
       {...styles?.container}
     >
       {!imageError ? (
-        <img
+        <Image
           alt="IM"
           src={src}
           style={imageStyle}
