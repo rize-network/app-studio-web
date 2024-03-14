@@ -25,6 +25,7 @@ const VerticalPage = lazy(() => import('src/pages/vertical.page'));
 const TabsPage = lazy(() => import('src/pages/tabs.page'));
 const AlertPage = lazy(() => import('src/pages/alert.page'));
 const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
+const AvatarPage = lazy(() => import('src/pages/avatar.page'));
 
 const ListItem = styled.li<{ isHovered: boolean; isSelected: boolean }>`
   text-decoration: none;
@@ -87,6 +88,11 @@ export const ComponentsPage = () => {
         name: 'AspectRatio',
         path: '/aspectRatio',
         element: <AspectRatioPage />,
+      },
+      {
+        name: 'Avatar',
+        path: '/avatar',
+        element: <AvatarPage />,
       },
     ];
   }, []);

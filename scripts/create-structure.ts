@@ -40,16 +40,7 @@ const createComponent = async (componentName: string) => {
     await fs.writeFile(path.join(innerComponentDir, fileName), content);
   }
 
-  // Optionally create an example file within the examples directory
-  const exampleContent = `import React from 'react';\nimport { ${componentName} } from '../${componentName}';\n\nexport const ${componentName}Example = () => { return <${componentName} />; };\n`;
-  await fs.writeFile(
-    path.join(examplesDir, `${componentName}Example.tsx`),
-    exampleContent
-  );
-
-  console.log(
-    `Component ${componentName}, its page, and example created successfully.`
-  );
+  console.log(`Component ${componentName} created successfully.`);
 };
 
 // To run this script with a component name argument:

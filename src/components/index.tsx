@@ -21,3 +21,4 @@ export * from './File/File';
 export * from './Tabs/Tabs';
 export * from './Alert/Alert';
 export * from './AspectRatio/AspectRatio';
+export * from './Avatar/Avatar';

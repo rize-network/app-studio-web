@@ -10,8 +10,11 @@ function generatePropFiles(componentName: string): void {
     fs.mkdirSync(examplesDirPath, { recursive: true });
   }
 
+  // Create default example file
+  createDefaultExampleFile(componentName, examplesDirPath);
+
   // Read the TypeScript file
-  const sourceCode = fs.readFileSync(propsFilePath, { encoding: 'utf-8' });
+  const sourceCode = fs.readFileSync(propsFilePath, 'utf-8');
   const sourceFile = ts.createSourceFile(
     propsFilePath,
     sourceCode,
@@ -34,16 +37,16 @@ function generatePropFiles(componentName: string): void {
           const propName = (
             member.name as ts.Identifier
           ).escapedText.toString();
-          const propDemoContent = createPropDemoContent(
-            componentName,
-            propName
-          );
+          const exampleFilePath = `${examplesDirPath}/${propName}.tsx`;
 
-          // Create a .tsx file for each prop in the examples directory, excluding 'children'
-          fs.writeFileSync(
-            `${examplesDirPath}/${propName}.tsx`,
-            propDemoContent
-          );
+          // Check if the example file already exists
+          if (!fs.existsSync(exampleFilePath)) {
+            const propDemoContent = createPropDemoContent(
+              componentName,
+              propName
+            );
+            fs.writeFileSync(exampleFilePath, propDemoContent);
+          }
         }
       });
     }
@@ -60,7 +63,7 @@ function createPropDemoContent(
   propName: string
 ): string {
   const ComponentName =
-    componentName.charAt(0).toUpperCase() + componentName.slice(1); // Ensure proper casing
+    componentName.charAt(0).toUpperCase() + componentName.slice(1);
   return `import React from 'react';
 import { View } from 'src/components';
 import { ${ComponentName} } from '../${ComponentName}';
@@ -75,6 +78,26 @@ export const ${
   );
 };
 `;
+}
+
+function createDefaultExampleFile(
+  componentName: string,
+  examplesDirPath: string
+) {
+  const defaultFilePath = `${examplesDirPath}/default.tsx`;
+  if (!fs.existsSync(defaultFilePath)) {
+    const ComponentName =
+      componentName.charAt(0).toUpperCase() + componentName.slice(1);
+    const defaultDemoContent = `import React from 'react';
+import { ${ComponentName} } from '../${ComponentName}';
+
+export const DefaultDemo = () => {
+  return <${ComponentName} />;
+};
+`;
+
+    fs.writeFileSync(defaultFilePath, defaultDemoContent);
+  }
 }
 
 // Adjust this line to use command line arguments

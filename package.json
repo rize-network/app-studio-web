@@ -52,9 +52,10 @@
     "release": "release-it",
     "bot-doc": "ts-node src/bot/index.ts",
     "create-docs": "ts-node scripts/create-docs.ts",
+    "create-structure": "ts-node scripts/create-structure.ts",
     "create-indices": "ts-node scripts/create-indices.ts",
     "create-example": "ts-node scripts/create-example.ts",
-    "create-pages": "npm run create-indices && create-&& ts-node scripts/create-pages.ts"
+    "create-pages": "npm run create-indices && ts-node scripts/create-pages.ts"
   },
   "config": {
     "commitizen": {

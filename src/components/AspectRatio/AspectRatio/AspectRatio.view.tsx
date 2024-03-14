@@ -12,6 +12,7 @@ export const AspectRatioView = ({
     position="relative"
     overflow="hidden"
     paddingTop={`${(1 / ratio) * 100}%`}
+    borderRadius={8}
     {...props}
   >
     <View position="absolute" top={0} right={0} bottom={0} left={0}>

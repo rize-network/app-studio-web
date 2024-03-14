@@ -4,13 +4,13 @@ import { AspectRatio } from '../AspectRatio';
 
 export const RatioDemo = () => {
   return (
-    <AspectRatio ratio={4 / 3} width={300} borderRadius={8}>
+    <AspectRatio ratio={4 / 3} width={300}>
       <Image
         alt="image"
         objectFit="cover"
         width="100%"
         height="100%"
-        src="https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/07/insert-image-html.jpg"
+        src="https://t3.ftcdn.net/jpg/02/82/15/88/360_F_282158853_VtXRiSiN5eCjPddHobErJewxJ65lYZGt.jpg"
       />
     </AspectRatio>
   );
