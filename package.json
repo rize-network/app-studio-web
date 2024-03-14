@@ -51,7 +51,10 @@
     "prerelease": "npm run build",
     "release": "release-it",
     "bot-doc": "ts-node src/bot/index.ts",
-    "create-docs": "ts-node scripts/create-docs.ts"
+    "create-docs": "ts-node scripts/create-docs.ts",
+    "create-pages": "ts-node scripts/create-pages.ts",
+    "create-indices": "ts-node scripts/create-indices.ts",
+    "create-example": "ts-node scripts/create-example.ts"
   },
   "config": {
     "commitizen": {

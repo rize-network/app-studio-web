@@ -1,5 +1,3 @@
-export * from './ClearInput';
-export * from './ColorScheme';
 export * from './Default';
 export * from './DisabledInput';
 export * from './ErrorInput';
@@ -13,3 +11,5 @@ export * from './ShapeInput';
 export * from './SizeInput';
 export * from './StylesInput';
 export * from './VariantsInputs';
+export * from './colorScheme';
+export * from './isClearable';

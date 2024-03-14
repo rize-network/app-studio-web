@@ -11,7 +11,7 @@ const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
 const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
 const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
 const HorizontalPage = lazy(() => import('src/pages/horizontal.page'));
-const TextFieldPage = lazy(() => import('src/pages/input.page'));
+const TextFieldPage = lazy(() => import('src/pages/textfield.page'));
 const LinkPage = lazy(() => import('src/pages/link.page'));
 const LoaderPage = lazy(() => import('src/pages/loader.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
@@ -24,6 +24,7 @@ const TextAreaPage = lazy(() => import('src/pages/textArea.page'));
 const VerticalPage = lazy(() => import('src/pages/vertical.page'));
 const TabsPage = lazy(() => import('src/pages/tabs.page'));
 const AlertPage = lazy(() => import('src/pages/alert.page'));
+const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
 
 const ListItem = styled.li<{ isHovered: boolean; isSelected: boolean }>`
   text-decoration: none;
@@ -82,6 +83,11 @@ export const ComponentsPage = () => {
       { name: 'Message', path: '/message', element: <MessagePage /> },
       { name: 'Tabs', path: '/tabs', element: <TabsPage /> },
       { name: 'Alert', path: '/alert', element: <AlertPage /> },
+      {
+        name: 'AspectRatio',
+        path: '/aspectRatio',
+        element: <AspectRatioPage />,
+      },
     ];
   }, []);
 

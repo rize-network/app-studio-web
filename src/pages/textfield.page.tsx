@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  ClearInput,
-  ColorInput,
+  IsClearableDemo,
+  ColorSchemeDemo,
   DefaultInput,
   DisabledInput,
   LabelInput,
@@ -61,13 +61,13 @@ export const InputPage = () => {
           <tr>
             <td>Clear</td>
             <td>
-              <ClearInput />
+              <IsClearableDemo />
             </td>
           </tr>
           <tr>
             <td>ColorScheme</td>
             <td>
-              <ColorInput />
+              <ColorSchemeDemo />
             </td>
           </tr>
           <tr>

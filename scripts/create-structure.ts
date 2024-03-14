@@ -5,8 +5,6 @@ const createComponent = async (componentName: string) => {
   const componentDir = path.join('src/components', componentName);
   const innerComponentDir = path.join(componentDir, componentName);
   const examplesDir = path.join(componentDir, 'examples'); // Path for the examples directory
-  const pagesDir = path.join('src/pages');
-  const pageFileName = `${componentName.toLowerCase()}.page.tsx`;
 
   // Create the component directories including the examples directory
   await fs.mkdir(innerComponentDir, { recursive: true });
@@ -48,10 +46,6 @@ const createComponent = async (componentName: string) => {
     path.join(examplesDir, `${componentName}Example.tsx`),
     exampleContent
   );
-
-  // Create the page file in `src/pages`
-  const pageContent = `import React from 'react';\n\nexport const ${componentName}Page = () => { return <></>; };\n`;
-  await fs.writeFile(path.join(pagesDir, pageFileName), pageContent);
 
   console.log(
     `Component ${componentName}, its page, and example created successfully.`
