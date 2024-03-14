@@ -1,6 +1,6 @@
 import React from 'react';
-import { AlertProps } from './Alert/Alert.props';
 import { AlertView } from './Alert/Alert.view';
+import { AlertProps } from './Alert/Alert.props';
 
 const AlertComponent = ({
   icon,

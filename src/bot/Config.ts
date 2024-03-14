@@ -1,3 +1,4 @@
+require('dotenv').config();
 /**
 API_CONFIG : Un objet contenant les paramètres de configuration pour l'API OpenAI, tels que la clé API et l'organisation. Ces valeurs peuvent être définies directement ou récupérées à partir de variables d'environnement.
 APPLICATION_SETTINGS : Un objet pour les paramètres généraux de l'application. Vous pouvez inclure ici des configurations telles que le mode de débogage, les paramètres de journalisation, etc.
