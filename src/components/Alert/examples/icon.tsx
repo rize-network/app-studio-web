@@ -2,7 +2,7 @@ import React from 'react';
 import { EditSvg } from 'src/components/Svg';
 import { Alert } from '../Alert';
 
-export const AlertIcon = () => {
+export const IconDemo = () => {
   return (
     <Alert
       title="Heads up!"

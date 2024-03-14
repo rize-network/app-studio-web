@@ -4,7 +4,6 @@ export const Themes = {
       backgroundColor: 'white',
       border: 'color.blackAlpha.800',
     },
-
     content: {
       color: 'color.blackAlpha.800',
     },

@@ -10,9 +10,10 @@ const ButtonComponent: React.FC<ButtonProps> = (props: any) => {
 
   return (
     <ButtonView
+      isHovered={isHovered}
+      setIsHovered={setIsHovered}
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
-      filter={isHovered ? 'brightness(0.85)' : 'brightness(1)'}
       {...props}
     />
   );

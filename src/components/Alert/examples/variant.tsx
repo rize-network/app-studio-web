@@ -3,7 +3,7 @@ import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Alert } from '../Alert';
 import { Variant } from '../Alert/Alert.type';
 
-export const AlertVariants = () => (
+export const VariantDemo = () => (
   <Horizontal gap={10}>
     {['default', 'info', 'warning', 'success', 'error'].map((color, index) => (
       <Alert

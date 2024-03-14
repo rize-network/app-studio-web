@@ -1,6 +1,7 @@
 export * from './autofocus';
 export * from './colorScheme';
 export * from './default';
+export * from './effect';
 export * from './icon';
 export * from './isAuto';
 export * from './isDisabled';

@@ -9,6 +9,7 @@ import {
   Size,
   Variant,
   LoaderPosition,
+  Effects,
 } from './Button.type';
 import { LoaderProps } from '../../Loader/Loader/Loader.props';
 
@@ -88,6 +89,7 @@ export interface ButtonProps {
    * Specifies the style variant of the button.
    */
   variant?: Variant;
+  effect?: Effects;
   /**
    * Additional properties for the button component.
    */

@@ -11,7 +11,5 @@ export const ButtonSizes = () => (
         Button
       </Button>
     ))}
-    <Button isAuto>Auto Width</Button>
-    <Button isFilled>Fill Width</Button>
   </Vertical>
 );

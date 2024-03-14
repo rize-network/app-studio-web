@@ -11,3 +11,5 @@ export type IconPosition = 'left' | 'right';
 export type LoaderPosition = 'left' | 'right';
 
 export type Variant = 'filled' | 'outline' | 'link' | 'ghost';
+
+export type Effects = 'hover' | 'default' | 'reverse';

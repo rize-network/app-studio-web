@@ -1,11 +1,13 @@
 import React from 'react';
-import { Default } from 'src/components/Alert/examples/default';
-import { AlertIcon } from 'src/components/Alert/examples/icon';
-import { AlertStyles } from 'src/components/Alert/examples/styles';
-import { AlertVariants } from 'src/components/Alert/examples/variant';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'src/components';
+import {
+  DefaultDemo,
+  IconDemo,
+  StylesDemo,
+  VariantDemo,
+} from 'src/components/Alert/examples';
 
-export const AlertPage = () => {
+const AlertPage = () => {
   return (
     <View>
       <table className="table" cellSpacing={0}>
@@ -18,26 +20,28 @@ export const AlertPage = () => {
           <tr>
             <td>Default</td>
             <td>
-              <Default />
+              <DefaultDemo />
             </td>
           </tr>
-          <tr>
-            <td>Variant</td>
 
-            <td>
-              <AlertVariants />
-            </td>
-          </tr>
-          <tr>
-            <td>Styles</td>
-            <td>
-              <AlertStyles />
-            </td>
-          </tr>
           <tr>
             <td>Icon</td>
             <td>
-              <AlertIcon />
+              <IconDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Styles</td>
+            <td>
+              <StylesDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Variant</td>
+            <td>
+              <VariantDemo />
             </td>
           </tr>
         </tbody>

@@ -1,5 +1,8 @@
 import { Bot } from './Bot';
 import { DocuCode } from './DocuCode';
+require('dotenv').config();
+
+console.log(process.env.REACT_APP_OPENAI_API_KEY);
 
 async function main() {
   const projectName = 'MDX Documentation';

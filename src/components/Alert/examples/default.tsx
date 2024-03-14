@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert } from '../Alert';
 
-export const Default = () => {
+export const DefaultDemo = () => {
   return (
     <Alert
       title="Heads up!"
