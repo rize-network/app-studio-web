@@ -7,6 +7,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 afterEach(() => {
   cleanup();
 });
+
 test('renders Checkbox component', () => {
   render(<Checkbox role="textbox" />);
   const CheckboxElement = screen.getByRole('textbox');

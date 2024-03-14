@@ -20,3 +20,4 @@ export * from './Text/Text';
 export * from './File/File';
 export * from './Tabs/Tabs';
 export * from './Alert/Alert';
+export * from './AspectRatio/AspectRatio';
