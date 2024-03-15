@@ -2,18 +2,20 @@ import React, { CSSProperties } from 'react';
 import { BadgeProps } from './Badge.props';
 import { BadgeShapes, BadgeSizes, PositionStyles } from './Badge.style';
 import { Variant } from './Badge.type';
+import { Text, Center } from 'src/components';
 
 const BadgeView: React.FC<BadgeProps> = ({
   content,
-  shape = 'rounded',
-  colorScheme = 'red',
-  position = 'top-right',
+  position,
+  shape = 'pillShaped',
+  colorScheme = 'theme.primary',
   variant = 'filled',
   size = 'md',
+  styles,
 }) => {
   const BadgeVariants: Record<Variant, CSSProperties> = {
     filled: {
-      backgroundColor: 'theme.secondary',
+      backgroundColor: colorScheme,
       color: 'color.white',
       borderWidth: 1,
       borderStyle: 'solid',
@@ -42,18 +44,22 @@ const BadgeView: React.FC<BadgeProps> = ({
       borderColor: 'transparent',
     },
   };
-  const combinedStyles: any = {
-    position: 'absolute',
+
+  const combinedStyles: Record<string, any> = {
+    width: 'fit-content',
     borderRadius: BadgeShapes[shape],
-    ...PositionStyles[position],
     ...BadgeSizes[size],
     ...BadgeVariants[variant],
+    ...(position ? PositionStyles[position] : {}),
+    ...styles?.container,
   };
 
   return (
-    <span className={`badge`} style={combinedStyles}>
-      {content}
-    </span>
+    <Center role="badge" {...combinedStyles}>
+      <Text role="badgeText" size={size} {...styles?.text}>
+        {content}
+      </Text>
+    </Center>
   );
 };
 

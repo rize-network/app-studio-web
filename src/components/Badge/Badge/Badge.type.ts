@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 export type Shape = 'sharp' | 'rounded' | 'pillShaped';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -9,3 +11,8 @@ export type Position =
   | 'top-left'
   | 'bottom-right'
   | 'bottom-left';
+
+export type BadgeStyles = {
+  container?: CSSProperties;
+  text?: any;
+};

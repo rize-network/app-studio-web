@@ -7,6 +7,7 @@ import {
   PositionDemo,
   ShapeDemo,
   SizeDemo,
+  StylesDemo,
   VariantDemo,
 } from 'src/components/Badge/examples';
 
@@ -59,6 +60,13 @@ const BadgePage = () => {
             <td>Size</td>
             <td>
               <SizeDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Styles</td>
+            <td>
+              <StylesDemo />
             </td>
           </tr>
 

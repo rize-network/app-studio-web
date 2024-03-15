@@ -9,6 +9,7 @@ export const Badge = ({
   position,
   variant,
   size,
+  styles,
 }: BadgeProps) => (
   <BadgeView
     content={content}
@@ -17,5 +18,6 @@ export const Badge = ({
     position={position}
     variant={variant}
     size={size}
+    styles={styles}
   />
 );
