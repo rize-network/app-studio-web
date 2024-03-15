@@ -27,6 +27,7 @@ const AlertPage = lazy(() => import('src/pages/alert.page'));
 const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
 const AvatarPage = lazy(() => import('src/pages/avatar.page'));
 const BadgePage = lazy(() => import('src/pages/badge.page'));
+const TogglePage = lazy(() => import('src/pages/toggle.page'));
 
 const ListItem = styled.li<{ isHovered: boolean; isSelected: boolean }>`
   text-decoration: none;
@@ -99,6 +100,11 @@ export const ComponentsPage = () => {
         name: 'Badge',
         path: '/badge',
         element: <BadgePage />,
+      },
+      {
+        name: 'Toggle',
+        path: '/toggle',
+        element: <TogglePage />,
       },
     ];
   }, []);
