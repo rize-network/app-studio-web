@@ -23,3 +23,4 @@ export * from './Alert/Alert';
 export * from './AspectRatio/AspectRatio';
 export * from './Avatar/Avatar';
 export * from './Badge/Badge';
+export * from './Toggle/Toggle';

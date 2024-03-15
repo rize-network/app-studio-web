@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ToggleProps } from './Toggle/Toggle.props';
 import { useToggleState } from './Toggle/Toggle.state';
 import ToggleView from './Toggle/Toggle.view';
@@ -11,9 +11,14 @@ const ToggleComponent = ({
   isDisabled,
   isToggled = false,
   onToggle,
+  ...props
 }: ToggleProps) => {
   const { isHovered, setIsHovered, isToggle, setIsToggled } =
     useToggleState(isToggled);
+
+  useEffect(() => {
+    setIsToggled(isToggled);
+  }, [isToggled]);
   return (
     <ToggleView
       shape={shape}
@@ -25,6 +30,7 @@ const ToggleComponent = ({
       isToggle={isToggle}
       setIsToggled={setIsToggled}
       onToggle={onToggle}
+      {...props}
     >
       {children}
     </ToggleView>

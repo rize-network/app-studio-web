@@ -28,6 +28,7 @@ const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
 const AvatarPage = lazy(() => import('src/pages/avatar.page'));
 const BadgePage = lazy(() => import('src/pages/badge.page'));
 const TogglePage = lazy(() => import('src/pages/toggle.page'));
+const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 
 const ListItem = styled.li<{ isHovered: boolean; isSelected: boolean }>`
   text-decoration: none;
@@ -105,6 +106,11 @@ export const ComponentsPage = () => {
         name: 'Toggle',
         path: '/toggle',
         element: <TogglePage />,
+      },
+      {
+        name: 'ToggleGroup',
+        path: '/togglegroup',
+        element: <ToggleGroupPage />,
       },
     ];
   }, []);
