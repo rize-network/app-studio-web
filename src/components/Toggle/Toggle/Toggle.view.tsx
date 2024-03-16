@@ -22,11 +22,6 @@ const ToggleView: React.FC<ToggleViewProps> = ({
   const isActive = !!(isToggle || isHovered);
 
   const ToggleVariants: Record<Variant, CSSProperties> = {
-    filled: {
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: 'transparent',
-    },
     outline: {
       borderWidth: 1,
       borderStyle: 'solid',

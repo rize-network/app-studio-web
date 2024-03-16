@@ -1,6 +1,6 @@
 export type Shape = 'sharp' | 'rounded' | 'pillShaped';
 
-export type Variant = 'filled' | 'outline' | 'link' | 'ghost';
+export type Variant = 'outline' | 'link' | 'ghost';
 
 export type ToggleItem = {
   id: string;

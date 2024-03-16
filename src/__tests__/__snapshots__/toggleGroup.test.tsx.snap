@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToggleGroup Component ToggleGroup to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU gxaCay"
+  display="flex"
+  role="ToggleGroup"
+>
+  <div
+    className="sc-bdfCDU dmlQCl"
+    color="color.trueGray.400"
+    cursor="pointer"
+    display="flex"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    role="toggle-B"
+    width="fit-content"
+  >
+    <div
+      className="sc-bdfCDU FxXNY"
+      fontSize={14}
+      fontStyle="normal"
+      fontWeight={400}
+      role="text"
+      textDecoration="none"
+    >
+      B
+    </div>
+  </div>
+  <div
+    className="sc-bdfCDU eTueVD"
+    color="color.white"
+    cursor="pointer"
+    display="flex"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    role="toggle-C"
+    width="fit-content"
+  >
+    <div
+      className="sc-bdfCDU FxXNY"
+      fontSize={14}
+      fontStyle="normal"
+      fontWeight={400}
+      role="text"
+      textDecoration="none"
+    >
+      C
+    </div>
+  </div>
+  <div
+    className="sc-bdfCDU icIFMv"
+    color="theme.disabled"
+    cursor="not-allowed"
+    display="flex"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    role="toggle-D"
+    width="fit-content"
+  >
+    <div
+      className="sc-bdfCDU FxXNY"
+      fontSize={14}
+      fontStyle="normal"
+      fontWeight={400}
+      role="text"
+      textDecoration="none"
+    >
+      D
+    </div>
+  </div>
+</div>
+`;

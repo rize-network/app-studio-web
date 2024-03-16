@@ -1,12 +1,12 @@
 import React from 'react';
-// import { View } from 'src/components';,
+import { Text } from 'src/components';
 import { ToggleGroup } from '../ToggleGroup';
 
 export const ItemsDemo = () => {
   const items = [
-    { id: 'B', value: 'B' },
-    { id: 'C', value: 'C' },
-    { id: 'D', value: 'D' },
+    { id: 'B', value: <Text>B</Text> },
+    { id: 'C', value: <Text>C</Text> },
+    { id: 'D', value: <Text>D</Text> },
   ];
   return <ToggleGroup items={items} />;
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Button } from 'src/components/Button/Button';
-import { Shape, Size } from 'src/components/Button/Button/Button.type';
+import { Shape } from 'src/components/Button/Button/Button.type';
 import { DustBinSvg } from 'src/components/Svg';
 
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';

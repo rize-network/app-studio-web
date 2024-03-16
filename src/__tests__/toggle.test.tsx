@@ -43,7 +43,6 @@ describe('Toggle Component', () => {
   // Variant Styles
   describe('Variant Styles', () => {
     test.each([
-      ['filled', { borderWidth: '1px' }],
       ['outline', { borderStyle: 'solid' }],
       ['link', { textDecoration: 'underline' }],
       ['ghost', {}], // Add expected styles for ghost if necessary

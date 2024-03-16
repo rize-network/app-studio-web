@@ -36,14 +36,15 @@ export const ToggleGroupView = ({
   );
 
   return (
-    <Horizontal display="flex" gap={5}>
+    <Horizontal role="ToggleGroup" display="flex" gap={5}>
       {items.map((item) => (
         <Toggle
+          role={`toggle-${item.id}`}
           key={item.id}
           colorScheme={colorScheme}
           shape={shape}
           variant={variant}
-          isToggled={activeToggles.includes(item.id)}
+          isToggled={activeToggles.includes(item.id) || item.isActive}
           onToggle={(state) => handleToggle(item.id, state)}
           isDisabled={item.isDisabled}
           isIntern={true}

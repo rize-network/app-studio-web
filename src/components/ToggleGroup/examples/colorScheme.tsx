@@ -1,12 +1,12 @@
 import React from 'react';
-import { Vertical } from 'src/components';
+import { Vertical, Text } from 'src/components';
 import { ToggleGroup } from '../ToggleGroup';
 
 export const ColorSchemeDemo = () => {
   const items = [
-    { id: 'B', value: 'B', state: false },
-    { id: 'C', value: 'C', state: true },
-    { id: 'D', value: 'D', isDisabled: true },
+    { id: 'B', value: <Text>B</Text> },
+    { id: 'C', value: <Text>C</Text>, isActive: true },
+    { id: 'D', value: <Text>D</Text>, isDisabled: true },
   ];
   return (
     <Vertical gap={10}>

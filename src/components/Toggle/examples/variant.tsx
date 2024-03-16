@@ -5,7 +5,7 @@ import { Variant } from '../Toggle/Toggle.type';
 
 export const VariantDemo = () => (
   <Vertical gap={15}>
-    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
+    {['outline', 'link', 'ghost'].map((variant, index) => (
       <Toggle key={index} variant={variant as Variant}>
         {variant}
       </Toggle>

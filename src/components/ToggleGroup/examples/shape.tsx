@@ -1,13 +1,16 @@
 import React from 'react';
 import { Horizontal, View } from 'src/components';
+import { DustBinSvg } from 'src/components/Svg';
 import { ToggleGroup } from '../ToggleGroup';
 import { Shape } from '../ToggleGroup/ToggleGroup.type';
 
 export const ShapeDemo = () => {
   const items = [
-    { id: 'B', value: 'B' },
-    { id: 'C', value: 'C' },
-    { id: 'D', value: 'D' },
+    {
+      id: 'item',
+      value: <DustBinSvg color="black" size={18} />,
+      isActive: true,
+    },
   ];
   return (
     <Horizontal gap={15}>
