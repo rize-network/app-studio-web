@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from '../../../Layout/Vertical/examples';
+import { Vertical } from 'src/components/Layout/Vertical/Vertical';
 
 import { DatePicker } from '../DatePicker';
 

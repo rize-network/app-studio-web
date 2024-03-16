@@ -4,13 +4,18 @@ import { Center } from '../Layout/Center/Center';
 
 interface SvgProps {
   size?: number;
+  color?: string;
   [x: string]: any;
 }
 
-export const DustBinSvg: React.FC<SvgProps> = ({ size = 64, ...props }) => (
+export const DustBinSvg: React.FC<SvgProps> = ({
+  size = 64,
+  color = '#ffffff',
+  ...props
+}) => (
   <Center width={`${size}px`} height={`${size}px`}>
     <svg
-      fill="#ffffff"
+      fill={color}
       width={`${size}px`}
       height={`${size}px`}
       version="1.1"

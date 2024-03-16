@@ -4,12 +4,13 @@ import {
   ButtonSizes,
   ColoredButtons,
   DisabledButton,
+  EffectButton,
   IconButtons,
   LoaderButtons,
   ShadowButton,
   VariantButtons,
 } from 'src/components/Button/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'src/components';
 
 export const ButtonPage = () => {
   return (
@@ -69,9 +70,15 @@ export const ButtonPage = () => {
             </td>
           </tr>
           <tr>
-            <td>Icons</td>
+            <td>Icon</td>
             <td>
               <IconButtons />
+            </td>
+          </tr>
+          <tr>
+            <td>Effect</td>
+            <td>
+              <EffectButton />
             </td>
           </tr>
         </tbody>

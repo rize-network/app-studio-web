@@ -4,7 +4,7 @@ import { Button } from '../../../Button/Button';
 
 import { TextField } from '../../../Form/TextField/TextField';
 
-import { Vertical } from '../../../Layout/Vertical/examples';
+import { Vertical } from 'src/components/Layout/Vertical/Vertical';
 
 export const HelperTextInput = () => {
   const initialValues = {

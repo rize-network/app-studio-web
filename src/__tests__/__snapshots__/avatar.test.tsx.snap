@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Avatar to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU jJxXul"
+  display="flex"
+  height={48}
+  overflow="hidden"
+  role="avatar"
+  width={48}
+>
+  <img
+    alt="IM"
+    className="sc-bdfCDU eEedzs"
+    height={48}
+    onError={[Function]}
+    src="https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/07/insert-image-html.jpg"
+    style={
+      Object {
+        "objectFit": "cover",
+      }
+    }
+    width={48}
+  />
+</div>
+`;

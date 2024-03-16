@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 
-import { Vertical } from '../../Layout/Vertical/examples';
+import { Vertical } from 'src/components/Layout/Vertical/Vertical';
 import { View } from '../../Layout/View/View';
 import { FormikCheckbox } from '../Formik.Checkbox';
 import { Formik } from 'formik';

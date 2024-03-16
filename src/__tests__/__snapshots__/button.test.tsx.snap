@@ -2,7 +2,7 @@
 
 exports[`Button will a pillShaped shape to match snapshot 1`] = `
 <button
-  className="sc-bdfCDU enWhJl"
+  className="sc-bdfCDU eMuXTf"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -15,10 +15,11 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   role="button"
+  transform=""
   width="fit-content"
 >
   <div
-    className="sc-bdfCDU hfEgNn"
+    className="sc-bdfCDU dpBfNq"
     display="flex"
   >
     Pill Shape
@@ -28,7 +29,7 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
 
 exports[`Button with an icon on the left to match snapshot 1`] = `
 <button
-  className="sc-bdfCDU fnxAjt"
+  className="sc-bdfCDU eSlpEH"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -41,10 +42,11 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   role="button"
+  transform=""
   width={144}
 >
   <div
-    className="sc-bdfCDU hfEgNn"
+    className="sc-bdfCDU dpBfNq"
     display="flex"
   >
     <div
@@ -87,7 +89,7 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
 
 exports[`Button with an icon on the right to match snapshot 1`] = `
 <button
-  className="sc-bdfCDU fnxAjt"
+  className="sc-bdfCDU eSlpEH"
   color="color.white"
   cursor="pointer"
   disabled={false}
@@ -100,10 +102,11 @@ exports[`Button with an icon on the right to match snapshot 1`] = `
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   role="button"
+  transform=""
   width={144}
 >
   <div
-    className="sc-bdfCDU hfEgNn"
+    className="sc-bdfCDU dpBfNq"
     display="flex"
   >
     Delete

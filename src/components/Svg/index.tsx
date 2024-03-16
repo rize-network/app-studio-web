@@ -10,3 +10,4 @@ export * from './Indeterminate';
 export * from './OpenEye';
 export * from './Profile';
 export * from './RightArrow';
+export * from './Warning';

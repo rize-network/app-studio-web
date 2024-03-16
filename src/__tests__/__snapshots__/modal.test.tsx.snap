@@ -30,7 +30,7 @@ exports[`Modal to match snapshot 1`] = `
         display="flex"
       >
         <button
-          className="sc-bdfCDU jhakBq"
+          className="sc-bdfCDU dXOPYQ"
           color="color.white"
           cursor="pointer"
           disabled={false}
@@ -43,10 +43,11 @@ exports[`Modal to match snapshot 1`] = `
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
           role="button"
+          transform=""
           width="fit-content"
         >
           <div
-            className="sc-bdfCDU hfEgNn"
+            className="sc-bdfCDU dpBfNq"
             display="flex"
           >
             <div
@@ -96,7 +97,7 @@ exports[`Modal to match snapshot 1`] = `
         display="flex"
       >
         <button
-          className="sc-bdfCDU eAXvQR"
+          className="sc-bdfCDU bjTbpr"
           color="color.white"
           cursor="pointer"
           disabled={false}
@@ -109,10 +110,11 @@ exports[`Modal to match snapshot 1`] = `
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
           role="button"
+          transform=""
           width={144}
         >
           <div
-            className="sc-bdfCDU hfEgNn"
+            className="sc-bdfCDU dpBfNq"
             display="flex"
           >
             Cancel
