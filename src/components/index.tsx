@@ -25,3 +25,4 @@ export * from './Avatar/Avatar';
 export * from './Badge/Badge';
 export * from './Toggle/Toggle';
 export * from './ToggleGroup/ToggleGroup';
+export * from './Message/Message';

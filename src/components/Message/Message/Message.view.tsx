@@ -63,6 +63,7 @@ export const MessageView = ({
 
   return (
     <Horizontal
+      role="messageContent"
       gap={16}
       width={400}
       safe={true}

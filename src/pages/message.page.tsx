@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from '../components/Layout/View/View';
 import {
   ActionDemo,
   DefaultDemo,
@@ -10,8 +10,8 @@ import {
   TimeoutDemo,
   TitleDemo,
   VariantDemo,
-} from 'src/components/Message/examples';
-import { MessageLayout } from 'src/components/Message/Message/Message.layout';
+} from '../components/Message/examples';
+import { MessageLayout } from '../components/Message/Message/Message.layout';
 
 const MessagePage = () => {
   return (

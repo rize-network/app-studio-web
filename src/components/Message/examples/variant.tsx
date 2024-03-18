@@ -18,7 +18,7 @@ export const VariantDemo = () => {
           }
           isAuto
         >
-          Show Toast
+          Show {variant}
         </Button>
       ))}
     </Horizontal>
