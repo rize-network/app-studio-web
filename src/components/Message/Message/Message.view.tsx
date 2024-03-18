@@ -1,36 +1,27 @@
 import React, { useEffect } from 'react';
-import { Center } from '../../Layout/Center/Center';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { View } from '../../Layout/View/View';
 import { Text } from '../../Text/Text';
-
-interface IMessage {
-  message: string;
-  variant?: string;
-  show?: boolean;
-  hide: Function;
-  closable?: boolean;
-  timeout?: number;
-  props?: any;
-  icons?: Record<string, string>;
-  text?: any;
-  icon?: any;
-  theme?: Record<string, any>;
-  iconProps?: any;
-  textProps?: any;
-  containerProps?: any;
-}
+import { Themes } from './Message.style';
+import { MessageProps } from './Message.props';
+import { CloseSvg, WarningSvg, SuccessSvg, ErrorSvg, InfoSvg } from '../../Svg';
 
 export const MessageView = ({
-  variant = 'info',
-  message,
+  variant,
   hide,
-  props,
+  title,
+  subtitle,
+  theme,
+  action,
+  actionText,
+  showIcon = false,
+  isClosable = false,
   timeout = 3000,
-
-  text,
-}: IMessage) => {
+  styles,
+}: MessageProps) => {
   useEffect(() => {
-    if (timeout) {
+    if (timeout && !isClosable) {
       const timeId = setTimeout(() => {
         // After 3 seconds set the show value to false
         hide();
@@ -44,37 +35,87 @@ export const MessageView = ({
     return;
   }, []);
 
-  const MessageText = text ? text : Text;
+  const Theme = theme ?? Themes;
+  const isWithAction = !!(action && actionText);
+
+  const containerStyle = {
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 8,
+    borderColor: `${Theme[variant].container.border}`,
+  };
+
+  const iconComponent = {
+    info: <InfoSvg size={24} color="#3b82f6" {...styles?.icon} />,
+    success: <SuccessSvg size={24} color="#4ade80" {...styles?.icon} />,
+    warning: <WarningSvg size={24} color="#f97316" {...styles?.icon} />,
+    error: <ErrorSvg size={24} color="#ef4444" {...styles?.icon} />,
+  }[variant];
+
+  const isShowIcon = showIcon && iconComponent;
 
   return (
     <Horizontal
-      borderWidth={1}
-      borderStyle="solid"
-      alignSelf={'center'}
-      justifyContent="center"
-      verticalAlign="middle"
-      borderRadius={8}
-      minHeight={40}
-      paddingVertical={5}
-      paddingHorizontal={10}
-      height={'auto'}
+      gap={16}
+      width={400}
       safe={true}
-      backgroundColor={`theme.message.${variant}.background`}
-      borderColor={`theme.message.${variant}.border`}
-      onClick={() => {
-        hide();
-      }}
-      {...props}
+      wrap="nowrap"
+      position={'relative'}
+      alignItems="center"
+      padding="14px 24px 14px 14px"
+      color={`${Theme[variant].content.color}`}
+      backgroundColor={`${Theme[variant].container.backgroundColor}`}
+      onClick={
+        isClosable
+          ? () => {}
+          : () => {
+              hide();
+            }
+      }
+      {...containerStyle}
+      {...styles?.container}
     >
-      <Center>
-        <MessageText
-          height={'auto'}
-          paddingLeft={10}
-          color={`theme.message.${variant}.textColor`}
+      {isShowIcon && iconComponent}
+      <Vertical gap={8} width="100%">
+        <Text size="lg" weight="semiBold" {...styles?.title}>
+          {title}
+        </Text>
+        {subtitle && (
+          <Text size="md" {...styles?.subtitle}>
+            {subtitle}
+          </Text>
+        )}
+      </Vertical>
+      {isWithAction && (
+        <Text
+          marginRight={10}
+          onClick={action}
+          padding="6px 10px"
+          whiteSpace="nowrap"
+          {...containerStyle}
+          {...styles?.actionText}
         >
-          {message}
-        </MessageText>
-      </Center>
+          {actionText}
+        </Text>
+      )}
+      {isClosable && (
+        <View
+          position="absolute"
+          zIndex={10000}
+          right={8}
+          top={6}
+          onClick={() => {
+            hide();
+          }}
+          {...styles?.closingIcon?.container}
+        >
+          <CloseSvg
+            size={16}
+            color={`${Theme[variant].icon.color}`}
+            {...styles?.closingIcon?.icon}
+          />
+        </View>
+      )}
     </Horizontal>
   );
 };

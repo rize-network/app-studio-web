@@ -5,10 +5,17 @@ import { showMessage } from '../Message/Message.store';
 
 export const DefaultMessage = () => {
   return (
-    <>
-      <Button onClick={() => showMessage('success', 'Test')} isAuto>
-        Blur Overlay
-      </Button>
-    </>
+    <Button
+      onClick={() =>
+        showMessage(
+          'success',
+          'Scheduled: Catch up',
+          'Friday, February 10, 2023 at 5:57 PM'
+        )
+      }
+      isAuto
+    >
+      Add Calendar
+    </Button>
   );
 };

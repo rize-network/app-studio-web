@@ -7,10 +7,18 @@ export const VariantMessage = () => {
   return (
     <>
       <Horizontal gap={10}>
-        <Button onClick={() => showMessage('success', 'Success')} isAuto>
+        <Button
+          onClick={() =>
+            showMessage('success', 'Success', 'Display the success message')
+          }
+          isAuto
+        >
           Sharp
         </Button>
-        <Button onClick={() => showMessage('error', 'Error')} isAuto>
+        <Button
+          onClick={() => showMessage('error', 'Error', 'Display Error message')}
+          isAuto
+        >
           Rounded
         </Button>
       </Horizontal>

@@ -1,37 +1,53 @@
 import React from 'react';
 import { hideMessage, useMessageStore } from './Message.store';
-import { Center } from '../../Layout/Center/Center';
+import { View } from '../../Layout/View/View';
 import { MessageView } from './Message.view';
 import { MessageLayoutProps } from './Message.props';
 
 export const MessageLayout = ({
   container,
-  icons,
-  text,
-  icon,
+  theme,
+  position = 'topRight',
 }: MessageLayoutProps) => {
-  const { visible, message, variant } = useMessageStore();
+  const { visible, title, variant, subtitle } = useMessageStore();
+
+  const toastPosition = {
+    topLeft: {
+      top: 6,
+      left: 8,
+    },
+    topRight: {
+      top: 6,
+      right: 8,
+    },
+    bottomLeft: {
+      bottom: 8,
+      left: 6,
+    },
+    bottomRight: {
+      bottom: 8,
+      left: 6,
+    },
+  }[position];
 
   // Crée une fonction pour construire le contenu du message
   const renderMessageContent = () => (
     <MessageView
       variant={variant}
-      message={message}
+      subtitle={subtitle}
       show={visible}
-      icons={icons}
-      text={text}
-      icon={icon}
+      title={title}
+      theme={theme}
       hide={() => hideMessage()}
     />
   );
 
-  // Utilise 'container' si disponible, sinon utilise 'Center' par défaut
   const MessageContainer = container ? (
     React.cloneElement(container, {}, renderMessageContent())
   ) : (
-    <Center width={'100vw'} position={'absolute'} top={'5vh'}>
+    <View position={'absolute'} zIndex={10000} {...toastPosition}>
       {renderMessageContent()}
-    </Center>
+    </View>
   );
 
   return visible ? MessageContainer : null;
