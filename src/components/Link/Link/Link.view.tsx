@@ -37,10 +37,7 @@ const LinkView: React.FC<LinkViewProps> = ({
         <Horizontal gap={3} alignItems="center" wrap="nowrap">
           {children}
           {isExternal && (
-            <ExternalLinkSvg
-              size={IconSizes[iconSize]}
-              style={styles.icon}
-            />
+            <ExternalLinkSvg size={IconSizes[iconSize]} style={styles.icon} />
           )}
         </Horizontal>
       </Element>
