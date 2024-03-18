@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { FileSVG } from '../../File/File';
 import { Center } from '../../Layout/Center/Center';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Text } from '../../Text/Text';
@@ -27,11 +26,8 @@ export const MessageView = ({
   hide,
   props,
   timeout = 3000,
-  closable = false,
-  icons,
+
   text,
-  theme = {},
-  icon,
 }: IMessage) => {
   useEffect(() => {
     if (timeout) {
@@ -49,8 +45,6 @@ export const MessageView = ({
   }, []);
 
   const MessageText = text ? text : Text;
-
-  const Icon = icon ? icon : FileSVG;
 
   return (
     <Horizontal
@@ -72,15 +66,6 @@ export const MessageView = ({
       }}
       {...props}
     >
-      {icons && icons[variant] && (
-        <Center>
-          <Icon
-            borderColor={`theme.message.${variant}.iconBorderColor`}
-            size={14}
-            {...{ src: icons[variant] }}
-          />
-        </Center>
-      )}
       <Center>
         <MessageText
           height={'auto'}
@@ -90,17 +75,6 @@ export const MessageView = ({
           {message}
         </MessageText>
       </Center>
-      {closable && (
-        <Center
-          marginTop={0}
-          paddingLeft={40}
-          onClick={() => {
-            hide();
-          }}
-        >
-          <Icon size={14} name="CloseSvg" {...theme.close[variant]} />
-        </Center>
-      )}
     </Horizontal>
   );
 };
