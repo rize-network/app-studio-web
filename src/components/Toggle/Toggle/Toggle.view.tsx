@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import { ToggleViewProps } from './Toggle.props';
 import { ToggleShapes } from './Toggle.style';
 import { Variant } from './Toggle.type';
-import { Center } from 'src/components';
+import { Center } from '../../Layout/Center/Center';
 
 const ToggleView: React.FC<ToggleViewProps> = ({
   children,

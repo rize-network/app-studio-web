@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'src/components';
+import { View } from 'src/components/Layout/View/View';
 import { ChildSwitch } from 'src/components/Form/Switch/examples/ChildSwitch';
 import { ColorSwitch } from 'src/components/Form/Switch/examples/ColorScheme';
 import { DefaultSwitch } from 'src/components/Form/Switch/examples/Default';

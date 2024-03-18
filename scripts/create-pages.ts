@@ -36,8 +36,7 @@ const generateComponentPage = (
     // Generate a single import statement for all demo components
     const importStatement = `
     import React from 'react';
-    import { View } from 'src/components';
-    import {\n${tsxFiles
+    import { View } from 'src/components/Layout/View/View';    import {\n${tsxFiles
       .map((file) => {
         const propName = file.replace('.tsx', '');
         return `  ${capitalizeFirstLetter(propName)}Demo,`;

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Center, Text } from 'src/components';
+
+import { Text } from '../../Text/Text';
+import { Center } from '../../Layout/Center/Center';
 import { Image } from 'app-studio';
 import { AvatarViewProps } from './Avatar.props';
 import { AvatarSizeMap } from './Avatar.style';

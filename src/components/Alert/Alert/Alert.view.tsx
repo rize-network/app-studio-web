@@ -1,6 +1,9 @@
 import React from 'react';
-import { Horizontal, Vertical, Text, View } from 'src/components';
-import { WarningSvg } from 'src/components/Svg';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { WarningSvg } from '../../Svg';
 import { AlertProps } from './Alert.props';
 import { Themes } from './Alert.style';
 

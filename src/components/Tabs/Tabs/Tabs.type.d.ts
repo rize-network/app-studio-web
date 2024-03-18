@@ -1,5 +1,5 @@
-import { ButtonProps } from 'src/components/Button/Button/Button.props';
-import { TextProps } from 'src/components/Text/Text/Text.props';
+import { ButtonProps } from '../../Button/Button/Button.props';
+import { TextProps } from '../../Text/Text/Text.props';
 export type Tab = {
   // Defines the type 'Tab' representing each tab's structure with title, value, and an optional content property that can be of various types including a string, React node, or any other type.
   title: string;

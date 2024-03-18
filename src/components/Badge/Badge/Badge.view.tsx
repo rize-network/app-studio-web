@@ -2,7 +2,8 @@ import React, { CSSProperties } from 'react';
 import { BadgeProps } from './Badge.props';
 import { BadgeShapes, BadgeSizes, PositionStyles } from './Badge.style';
 import { Variant } from './Badge.type';
-import { Text, Center } from 'src/components';
+import { Center } from '../../Layout/Center/Center';
+import { Text } from '../../Text/Text';
 
 const BadgeView: React.FC<BadgeProps> = ({
   content,

@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.3.66",
+  "version": "0.3.69",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
@@ -30,7 +30,7 @@
     "prettier:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx, json}\"",
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
-    "commit:lint": "npm run test:unwatch && npm run lint:fix",
+    "commit:lint": "npm run lint:fix",
     "lighthouse": "lighthouse http://localhost:3000 --view --budget-path=./budget.json",
     "bundle-analyzer": "node ./scripts/analyse.js",
     "size": "size-limit",

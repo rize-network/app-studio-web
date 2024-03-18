@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import { Horizontal } from 'src/components';
-import { Toggle } from 'src/components';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Toggle } from '../../Toggle/Toggle';
 import { ToggleGroupViewProps } from './ToggleGroup.props';
 
 export const ToggleGroupView = ({

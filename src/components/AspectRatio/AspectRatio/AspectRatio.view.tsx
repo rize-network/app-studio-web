@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Center } from 'src/components';
+import { View } from '../../Layout/View/View';
+import { Center } from '../../Layout/Center/Center';
 import { AspectRatioProps } from './AspectRatio.props';
 
 export const AspectRatioView = ({

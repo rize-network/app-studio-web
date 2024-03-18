@@ -1,6 +1,7 @@
 import React from 'react';
-import { Vertical, Text } from 'src/components';
 import { ToggleGroup } from '../ToggleGroup';
+import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Text } from 'src/components/Text/Text';
 
 export const ColorSchemeDemo = () => {
   const items = [

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Tab } from 'src/components/Tabs/Tabs/Tabs.type';
+import { Tab } from './Tabs.type';
 export const useTabsState = (propTabs: Tab[]) => {
   // Defines a custom hook, named `useTabsState`, that manages the state of tabs within a component.
   const [isActive, setIsActive] = useState<Tab>(propTabs[0]);

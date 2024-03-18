@@ -1,6 +1,7 @@
 import React from 'react';
 import { Badge } from '../Badge';
-import { Horizontal, View } from 'src/components';
+import { View } from '../../Layout/View/View';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Position } from '../Badge/Badge.type';
 
 export const PositionDemo = () => (

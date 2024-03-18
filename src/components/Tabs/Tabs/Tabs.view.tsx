@@ -1,8 +1,10 @@
 import { Tab } from './Tabs.type';
 import { TabsViewProps } from './Tabs.props';
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
-import { Button, Text, Horizontal } from 'src/components';
+import { View } from '../../Layout/View/View';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Button } from '../../Button/Button';
+import { Text } from '../../Text/Text';
 
 export const TabsView = (props: TabsViewProps) => {
   const { tabs, styles, isActive, setIsActive, tabsState, setTabsState } =

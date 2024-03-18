@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text } from 'src/components';
 import { ToggleGroup } from '../ToggleGroup';
+import { Text } from 'src/components/Text/Text';
 
 export const ItemsDemo = () => {
   const items = [
