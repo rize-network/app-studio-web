@@ -8,7 +8,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     box-sizing: border-box;
-    font-family: "Mulish", sans-serif, monospace;
   }
 `;
 

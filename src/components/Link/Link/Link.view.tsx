@@ -14,7 +14,6 @@ const LinkView: React.FC<LinkViewProps> = ({
   underline = 'default',
   isHovered = false,
   isExternal = false,
-  colorScheme = '#0072F5',
   styles = { icon: {}, text: {} },
   setIsHovered = () => {},
   ...props
@@ -25,7 +24,6 @@ const LinkView: React.FC<LinkViewProps> = ({
   return (
     <ReactRouterLink to={href} target={isExternal ? '_blank' : '_self'}>
       <Element
-        color={colorScheme}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
         textDecoration={
@@ -40,7 +38,6 @@ const LinkView: React.FC<LinkViewProps> = ({
           {children}
           {isExternal && (
             <ExternalLinkSvg
-              color={colorScheme}
               size={IconSizes[iconSize]}
               style={styles.icon}
             />

@@ -3,39 +3,24 @@
 exports[`TextArea to match snapshot 1`] = `
 <div
   className="sc-bdfCDU bQLfgH"
-  display="flex"
 >
   <div
     className="sc-bdfCDU gBoRhg"
-    color="theme.primary"
-    cursor="pointer"
-    display="flex"
-    fontSize={20}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    width="100%"
   >
     <div
       className="sc-bdfCDU gFyoGC"
-      display="flex"
-      width="100%"
     >
       <textarea
         autoFocus={false}
         className="sc-bdfCDU bcwFXV"
-        color="color.blueGray.700"
         cols={35}
-        cursor="auto"
         disabled={false}
-        fontSize={20}
+        editable={false}
+        heigth="100%"
+        multiline={false}
         name="name"
-        on={
-          Object {
-            "focus": Object {
-              "outline": "none",
-            },
-          }
-        }
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
@@ -43,18 +28,12 @@ exports[`TextArea to match snapshot 1`] = `
         readOnly={false}
         rows={3}
         value=""
-        width="100%"
       />
     </div>
   </div>
   <div
     className="sc-bdfCDU kpEGz"
-    color="theme.error"
-    fontSize={10}
-    fontStyle="normal"
-    fontWeight={400}
     role="text"
-    textDecoration="none"
   />
 </div>
 `;

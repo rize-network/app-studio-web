@@ -3,58 +3,38 @@
 exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
 <div
   className="sc-bdfCDU dWkXMr"
-  display="flex"
   onClick={[Function]}
 >
   <div
     className="sc-bdfCDU etESBx"
-    color="theme.primary"
-    cursor="pointer"
-    display="flex"
-    fontSize={20}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    width="100%"
   >
     <div
       className="sc-bdfCDU gFyoGC"
-      display="flex"
-      width="100%"
     >
       <input
         autoFocus={true}
         className="sc-bdfCDU fXGfns"
-        color="color.blueGray.700"
-        cursor="auto"
         disabled={false}
-        fontSize={20}
+        heigth="100%"
         name="name"
-        on={
-          Object {
-            "focus": Object {
-              "outline": "none",
-            },
-          }
-        }
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        paddingHorizonatl={0}
+        paddingVerical={8}
         placeholder="Name"
         readOnly={false}
         type="country"
         value="Name"
-        width="100%"
       />
     </div>
     <div
       className="sc-bdfCDU dBLlLe"
-      display="flex"
     >
       <div
         className="sc-bdfCDU dDpRWj"
-        display="flex"
-        height="16px"
-        width="16px"
       >
         <svg
           fill="#000000"
@@ -118,12 +98,7 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
   </div>
   <div
     className="sc-bdfCDU kpEGz"
-    color="theme.error"
-    fontSize={10}
-    fontStyle="normal"
-    fontWeight={400}
     role="text"
-    textDecoration="none"
   />
 </div>
 `;

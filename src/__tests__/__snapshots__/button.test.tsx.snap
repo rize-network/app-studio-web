@@ -3,24 +3,15 @@
 exports[`Button will a pillShaped shape to match snapshot 1`] = `
 <button
   className="sc-bdfCDU eMuXTf"
-  color="color.white"
-  cursor="pointer"
   disabled={false}
-  display="flex"
-  filter="brightness(1)"
-  fontSize="md"
-  fontWeight={600}
-  letterSpacing={1.25}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   role="button"
-  transform=""
-  width="fit-content"
+  setIsHovered={[Function]}
 >
   <div
     className="sc-bdfCDU dpBfNq"
-    display="flex"
   >
     Pill Shape
   </div>
@@ -30,30 +21,18 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
 exports[`Button with an icon on the left to match snapshot 1`] = `
 <button
   className="sc-bdfCDU eSlpEH"
-  color="color.white"
-  cursor="pointer"
   disabled={false}
-  display="flex"
-  filter="brightness(1)"
-  fontSize="md"
-  fontWeight={600}
-  letterSpacing={1.25}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   role="button"
-  transform=""
-  width={144}
+  setIsHovered={[Function]}
 >
   <div
     className="sc-bdfCDU dpBfNq"
-    display="flex"
   >
     <div
       className="sc-bdfCDU dMZcpT"
-      display="flex"
-      height="24px"
-      width="24px"
     >
       <svg
         fill="#ffffff"
@@ -90,31 +69,19 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
 exports[`Button with an icon on the right to match snapshot 1`] = `
 <button
   className="sc-bdfCDU eSlpEH"
-  color="color.white"
-  cursor="pointer"
   disabled={false}
-  display="flex"
-  filter="brightness(1)"
-  fontSize="md"
-  fontWeight={600}
-  letterSpacing={1.25}
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   role="button"
-  transform=""
-  width={144}
+  setIsHovered={[Function]}
 >
   <div
     className="sc-bdfCDU dpBfNq"
-    display="flex"
   >
     Delete
     <div
       className="sc-bdfCDU dMZcpT"
-      display="flex"
-      height="24px"
-      width="24px"
     >
       <svg
         fill="#ffffff"
