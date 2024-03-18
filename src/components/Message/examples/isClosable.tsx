@@ -4,21 +4,23 @@ import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 import { showMessage } from '../Message/Message.store';
 
-export const CloseButtonMessage = () => {
+export const IsClosableDemo = () => {
   return (
     <>
       <Horizontal gap={10} position="relative">
         <Button
           onClick={() =>
             showMessage(
-              'warning',
+              'success',
               'Scheduled: Catch up',
-              'Friday, February 10, 2023 at 5:57 PM'
+              'Friday, February 10, 2023 at 5:57 PM',
+              {
+                isClosable: true,
+              }
             )
           }
-          isAuto
         >
-          With Close Button
+          Close Button
         </Button>
       </Horizontal>
     </>

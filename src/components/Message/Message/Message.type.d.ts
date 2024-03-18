@@ -45,3 +45,12 @@ export type ThemesType = {
   error: Theme;
   warning: Theme;
 };
+
+export type ShowMessageType = {
+  isClosable?: boolean;
+  styles?: MessageViewStyles;
+  action?: Function;
+  actionText?: string;
+  showIcon?: boolean;
+  timeout?: number;
+};

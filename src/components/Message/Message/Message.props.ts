@@ -1,12 +1,7 @@
-import { CSSProperties } from 'react';
-import { Elevation } from 'src/utils/elevation';
-import { Shadow } from 'app-studio';
-
 import {
   Message,
   MessageViewStyles,
   Position,
-  Shape,
   ThemesType,
 } from './Message.type';
 
@@ -16,20 +11,44 @@ export interface MessageLayoutProps {
   theme?: ThemesType;
   position?: Position;
 }
-
-export interface MessageProps {
-  subtitle?: string;
-  variant: Message;
-  show?: boolean;
-  hide: Function;
-  timeout?: number;
-  title: string;
-  theme?: ThemesType;
+export interface ShowMessageProps {
   isClosable?: boolean;
-  shadow?: Shadow | Elevation | CSSProperties;
-  shape?: Shape;
   styles?: MessageViewStyles;
   action?: Function;
   actionText?: string;
   showIcon?: boolean;
+  timeout?: number;
+}
+export interface MessageProps extends ShowMessageProps {
+  subtitle?: string;
+  variant: Message;
+  show?: boolean;
+  hide: Function;
+  title: string;
+  theme?: ThemesType;
+}
+
+export interface MessageState {
+  visible: boolean;
+  variant: Message;
+  title: string;
+  subtitle: string;
+  isClosable?: boolean;
+  styles?: MessageViewStyles;
+  action?: Function;
+  actionText?: string;
+  showIcon?: boolean;
+  timeout?: number;
+  show: (
+    variant: Message,
+    title?: string,
+    subtitle?: string,
+    isClosable?: boolean,
+    styles?: MessageViewStyles,
+    action?: Function,
+    actionText?: string,
+    showIcon?: boolean,
+    timeout?: number
+  ) => void;
+  hide: () => void;
 }

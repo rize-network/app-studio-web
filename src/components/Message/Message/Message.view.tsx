@@ -45,11 +45,18 @@ export const MessageView = ({
     borderColor: `${Theme[variant].container.border}`,
   };
 
+  const iconColor = {
+    info: '#3b82f6',
+    success: '#4ade80',
+    warning: '#f97316',
+    error: '#ef4444',
+  }[variant];
+
   const iconComponent = {
-    info: <InfoSvg size={24} color="#3b82f6" {...styles?.icon} />,
-    success: <SuccessSvg size={24} color="#4ade80" {...styles?.icon} />,
-    warning: <WarningSvg size={24} color="#f97316" {...styles?.icon} />,
-    error: <ErrorSvg size={24} color="#ef4444" {...styles?.icon} />,
+    info: <InfoSvg size={24} color={iconColor} {...styles?.icon} />,
+    success: <SuccessSvg size={24} color={iconColor} {...styles?.icon} />,
+    warning: <WarningSvg size={24} color={iconColor} {...styles?.icon} />,
+    error: <ErrorSvg size={24} color={iconColor} {...styles?.icon} />,
   }[variant];
 
   const isShowIcon = showIcon && iconComponent;
@@ -77,11 +84,11 @@ export const MessageView = ({
     >
       {isShowIcon && iconComponent}
       <Vertical gap={8} width="100%">
-        <Text size="lg" weight="semiBold" {...styles?.title}>
+        <Text size="md" weight="semiBold" {...styles?.title}>
           {title}
         </Text>
         {subtitle && (
-          <Text size="md" {...styles?.subtitle}>
+          <Text size="sm" {...styles?.subtitle}>
             {subtitle}
           </Text>
         )}
@@ -110,8 +117,8 @@ export const MessageView = ({
           {...styles?.closingIcon?.container}
         >
           <CloseSvg
-            size={16}
-            color={`${Theme[variant].icon.color}`}
+            size={18}
+            color={iconColor}
             {...styles?.closingIcon?.icon}
           />
         </View>

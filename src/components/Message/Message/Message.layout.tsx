@@ -9,7 +9,18 @@ export const MessageLayout = ({
   theme,
   position = 'topRight',
 }: MessageLayoutProps) => {
-  const { visible, title, variant, subtitle } = useMessageStore();
+  const {
+    visible,
+    title,
+    variant,
+    subtitle,
+    isClosable,
+    styles,
+    action,
+    actionText,
+    showIcon,
+    timeout,
+  } = useMessageStore();
 
   const toastPosition = {
     topLeft: {
@@ -38,6 +49,12 @@ export const MessageLayout = ({
       show={visible}
       title={title}
       theme={theme}
+      isClosable={isClosable}
+      styles={styles}
+      action={action}
+      actionText={actionText}
+      showIcon={showIcon}
+      timeout={timeout}
       hide={() => hideMessage()}
     />
   );

@@ -1,14 +1,6 @@
 import { create } from 'zustand';
-import { Message } from './Message.type';
-
-export interface MessageState {
-  visible: boolean;
-  variant: Message;
-  title: string;
-  subtitle: string;
-  show: (variant: Message, title?: string, subtitle?: string) => void;
-  hide: () => void;
-}
+import { MessageState } from './Message.props';
+import { Message, ShowMessageType } from './Message.type';
 
 // Create your store with the initial state and actions.
 export const useMessageStore = create<MessageState>((set) => ({
@@ -16,13 +8,35 @@ export const useMessageStore = create<MessageState>((set) => ({
   visible: false,
   title: '',
   subtitle: '',
-  variant: 'info', // Assuming 'info' is a valid value for Message type
-  show: (variant, title = '', subtitle = '') =>
+  variant: 'info',
+  isClosable: false,
+  styles: {},
+  action: () => {},
+  actionText: '',
+  showIcon: false,
+  timeout: 3000,
+  show: (
+    variant,
+    title = '',
+    subtitle = '',
+    isClosable,
+    styles,
+    action,
+    actionText,
+    showIcon,
+    timeout
+  ) =>
     set({
       visible: true,
       variant,
       title,
       subtitle,
+      isClosable,
+      styles,
+      action,
+      actionText,
+      showIcon,
+      timeout,
     }),
 
   hide: () => set({ visible: false }),
@@ -31,9 +45,22 @@ export const useMessageStore = create<MessageState>((set) => ({
 export const showMessage = (
   variant: Message,
   title?: string,
-  subtitle?: string
+  subtitle?: string,
+  props?: ShowMessageType
 ) => {
-  useMessageStore.getState().show(variant, title, subtitle);
+  useMessageStore
+    .getState()
+    .show(
+      variant,
+      title,
+      subtitle,
+      props?.isClosable,
+      props?.styles,
+      props?.action,
+      props?.actionText,
+      props?.showIcon,
+      props?.timeout
+    );
 };
 
 export const hideMessage = () => {
