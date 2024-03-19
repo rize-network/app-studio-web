@@ -5,8 +5,12 @@ import {
   LabelDemo,
   LeftDemo,
   OnSelectDemo,
+  PlaceholderDemo,
   RightDemo,
   SearchEnabledDemo,
+  SearchPlaceholderDemo,
+  ShowTickDemo,
+  StylesDemo,
 } from 'src/components/ComboBox/examples';
 
 const ComboBoxPage = () => {
@@ -25,6 +29,7 @@ const ComboBoxPage = () => {
               <DefaultDemo />
             </td>
           </tr>
+
           <tr>
             <td>Label</td>
             <td>
@@ -47,6 +52,13 @@ const ComboBoxPage = () => {
           </tr>
 
           <tr>
+            <td>Placeholder</td>
+            <td>
+              <PlaceholderDemo />
+            </td>
+          </tr>
+
+          <tr>
             <td>Right</td>
             <td>
               <RightDemo />
@@ -57,6 +69,27 @@ const ComboBoxPage = () => {
             <td>SearchEnabled</td>
             <td>
               <SearchEnabledDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>SearchPlaceholder</td>
+            <td>
+              <SearchPlaceholderDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>ShowTick</td>
+            <td>
+              <ShowTickDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Styles</td>
+            <td>
+              <StylesDemo />
             </td>
           </tr>
         </tbody>

@@ -24,12 +24,5 @@ export const SearchEnabledDemo = () => {
       label: 'Astro',
     },
   ];
-  return (
-    <ComboBox
-      items={items}
-      onSelect={(selected) => {
-        console.log(selected);
-      }}
-    />
-  );
+  return <ComboBox items={items} searchEnabled={false} />;
 };

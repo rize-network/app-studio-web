@@ -6,9 +6,10 @@ import ComboBoxView from './ComboBox/ComboBox.view';
 const ComboBoxComponent: React.FC<ComboBoxProps> = ({
   items,
   placeholder,
+  searchPlaceholder,
   ...props
 }) => {
-  const state = useComboBoxState(items, placeholder);
+  const state = useComboBoxState(items, placeholder, searchPlaceholder);
 
   return <ComboBoxView items={items} {...state} {...props} />;
 };

@@ -11,6 +11,7 @@ export interface ComboBoxProps {
   showTick?: boolean;
   placeholder?: string;
   styles?: ComboBoxStyles;
+  searchPlaceholder?: string;
 }
 
 export interface ComboBoxItem {
