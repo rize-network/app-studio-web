@@ -2,6 +2,7 @@
 
 exports[`Modal body to match snapshot 1`] = `
 <div
+  buttonColor="black"
   className="sc-bdfCDU kSFsWD"
 >
   Modal Content

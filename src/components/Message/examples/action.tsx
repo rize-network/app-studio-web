@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
+
 import { showMessage } from '../Message/Message.store';
 
 export const ActionDemo = () => {
@@ -9,17 +10,12 @@ export const ActionDemo = () => {
         showMessage(
           'success',
           'Scheduled: Catch up',
-          'Friday, February 10, 2023 at 5:57 PM',
-          {
-            action: () => {
-              console.log('Scheduled: Catch up');
-            },
-            actionText: 'Undo',
-          }
+          'Friday, February 10, 2023 at 5:57 PM'
         )
       }
+      isAuto
     >
-      Show Toast
+      Add Calendar
     </Button>
   );
 };

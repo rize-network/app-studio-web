@@ -9,11 +9,9 @@ exports[`Link to have text decoration underline on hover should match snapshot 1
     className="sc-bdfCDU fiYbZn"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    textDecoration="none"
   >
     <div
       className="sc-bdfCDU gtjvF"
-      display="flex"
     >
       Link
     </div>
@@ -32,18 +30,13 @@ Array [
       className="sc-bdfCDU fiYbZn"
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      textDecoration="none"
     >
       <div
         className="sc-bdfCDU gtjvF"
-        display="flex"
       >
         External
         <div
           className="sc-bdfCDU kWVsuj"
-          display="flex"
-          height="14px"
-          width="14px"
         >
           <svg
             fill="white"
