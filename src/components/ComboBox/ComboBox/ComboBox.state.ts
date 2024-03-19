@@ -1,6 +1,27 @@
+// Import the necessary types
 import { useState } from 'react';
+import { ComboBoxItem, ComboBoxStateActions } from './ComboBox.props';
 
-export const useComboBoxState = () => {
-  const [isHovered, setIsHovered] = useState(false);
-  return { isHovered, setIsHovered };
+// Define the useComboBoxState hook properly with types
+export const useComboBoxState = (
+  items: ComboBoxItem[],
+  placeholder?: string
+): ComboBoxStateActions => {
+  const [filteredItems, setFilteredItems] = useState<ComboBoxItem[]>(items);
+  const [selectedItem, setSelectedItem] = useState<ComboBoxItem>(
+    placeholder ? { value: placeholder, label: placeholder } : items[0]
+  );
+  const [highlightedIndex, setHighlightedIndex] = useState<number>(0);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  return {
+    filteredItems,
+    setFilteredItems,
+    selectedItem,
+    setSelectedItem,
+    highlightedIndex,
+    setHighlightedIndex,
+    searchQuery,
+    setSearchQuery,
+  };
 };

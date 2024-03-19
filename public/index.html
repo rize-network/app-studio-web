@@ -48,6 +48,23 @@
       background-color: black;
       color: white;
     }
+
+    input[type="search"] {
+      /* Remove default browser styles */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      outline: none;
+      /* Remove outline on focus */
+    }
+
+    /* Hide the close button in input type search */
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+      display: none;
+    }
   </style>
   <title>React App</title>
 </head>

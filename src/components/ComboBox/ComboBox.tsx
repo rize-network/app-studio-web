@@ -1,3 +1,16 @@
 import React from 'react';
-import { View } from 'src/components';
-export const ComboBox = () => { return <View><View/></View>; };
+import { ComboBoxProps } from './ComboBox/ComboBox.props';
+import { useComboBoxState } from './ComboBox/ComboBox.state';
+import ComboBoxView from './ComboBox/ComboBox.view';
+
+const ComboBoxComponent: React.FC<ComboBoxProps> = ({
+  items,
+  placeholder,
+  ...props
+}) => {
+  const state = useComboBoxState(items, placeholder);
+
+  return <ComboBoxView items={items} {...state} {...props} />;
+};
+
+export const ComboBox = ComboBoxComponent;
