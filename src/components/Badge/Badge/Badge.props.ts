@@ -1,5 +1,5 @@
 import { Size, Variant, Shape, Position, BadgeStyles } from './Badge.type';
-
+//code
 export interface BadgeProps {
   content: string | number;
   variant?: Variant;
