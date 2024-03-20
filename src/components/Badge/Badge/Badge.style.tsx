@@ -4,10 +4,10 @@ export type BadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Define a type that enumerates all possible sizes for badges.
 export const BadgeSizes: Record<Size, CSSProperties> = {
   xs: {
-// Create an object that maps badge sizes to their corresponding CSS properties, defining minimum width, height and padding for each size.
-    minWidth: '20px', 
+    // Create an object that maps badge sizes to their corresponding CSS properties, defining minimum width, height and padding for each size.
+    minWidth: '20px',
     height: '20px',
-    padding: '0 6px', 
+    padding: '0 6px',
   },
   sm: {
     minWidth: '24px',
@@ -19,13 +19,13 @@ export const BadgeSizes: Record<Size, CSSProperties> = {
     height: '28px',
     padding: '0 10px',
   },
-// Create an object that maps badge shapes to their corresponding border-radius values to define the curvature of the badge's corners.
+  // Create an object that maps badge shapes to their corresponding border-radius values to define the curvature of the badge's corners.
   lg: {
     minWidth: '32px',
     height: '32px',
     padding: '0 12px',
   },
-// Create an object defining CSS properties for positioning badges in the corners of a relative container, using absolute positioning.
+  // Create an object defining CSS properties for positioning badges in the corners of a relative container, using absolute positioning.
   xl: {
     minWidth: '36px',
     height: '36px',

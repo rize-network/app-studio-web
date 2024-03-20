@@ -6,10 +6,10 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type Variant = 'filled' | 'outline' | 'link' | 'ghost';
 // Determines the styling variants a UI component can have, which could include filled, outlined, or ghost styles among others.
 export type Position =
-// Lists possible positions for UI elements that can be placed in one of the corners of a container, like notification badges.
+  // Lists possible positions for UI elements that can be placed in one of the corners of a container, like notification badges.
   | 'top-right'
   | 'top-left'
-// Describes the style properties available for badge components, where container styles the outer part and text styles the inner content.
+  // Describes the style properties available for badge components, where container styles the outer part and text styles the inner content.
   | 'bottom-right'
   | 'bottom-left';
 export type BadgeStyles = {
