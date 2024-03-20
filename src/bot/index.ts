@@ -2,10 +2,7 @@ import { Bot } from './Bot';
 import { DocuCode } from './DocuCode';
 require('dotenv').config();
 
-console.log(process.env.REACT_APP_OPENAI_API_KEY);
-
 async function main() {
-  const projectName = 'MDX Documentation';
   const descriptionPath = 'docs/description.md';
 
   // Get componentName from command line arguments
@@ -27,8 +24,9 @@ async function main() {
   // Implementation for Documentation of the code
   console.log('Initializing documentation process...');
   const docuCode = new DocuCode(componentName);
+
   const assistantDocumentation = await assistantGPT.init(
-    projectName,
+    'DocuCode',
     [],
     descriptionPath,
     'docu'
@@ -40,11 +38,12 @@ async function main() {
   console.log('Generating props file...');
   const { fileIds } = await assistantGPT.addFiles(componentPath);
 
-  const assistantCreation = await assistantGPT.init(
-    projectName,
+  const assistantCreation = await assistantGPT.initMDX(
+    'MDX Doc',
     fileIds,
     descriptionPath,
-    'props'
+    'props',
+    propsPath
   );
 
   await assistantGPT.response(assistantCreation.id, propsPath);

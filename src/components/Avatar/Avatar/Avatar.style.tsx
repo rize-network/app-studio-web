@@ -1,9 +1,15 @@
 import { Size } from './Avatar.type';
-
+// Import the 'Size' type which likely enumerates possible size labels for avatar components.
 export const AvatarSizeMap: Record<Size, number> = {
-  xs: 24, // Extra small: 24px - Ideal for very small spaces or subtle user hints.
-  sm: 32, // Small: 32px - Good for less prominent user interfaces or smaller devices.
-  md: 48, // Medium: 48px - Standard size for most use cases.
-  lg: 64, // Large: 64px - Great for featured profiles or more prominent user displays.
-  xl: 80, // Extra large: 80px - Best for main profile images or key user interfaces.
+// Define 'AvatarSizeMap' as an object that maps 'Size' labels to numeric pixel values, setting specific dimensions for different avatar sizes.
+  xs: 24, 
+// Map 'xs' (extra small) size to 24 pixels.
+  sm: 32, 
+// Map 'sm' (small) size to 32 pixels.
+  md: 48, 
+// Map 'md' (medium) size to 48 pixels.
+  lg: 64, 
+// Map 'lg' (large) size to 64 pixels.
+  xl: 80, 
+// Map 'xl' (extra large) size to 80 pixels. This mapping setup helps maintain consistency in avatar sizing across the application.
 };

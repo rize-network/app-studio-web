@@ -13,11 +13,14 @@ import {
   MessageCreateParams,
   ThreadMessage,
 } from 'openai/resources/beta/threads';
+import { FileHandler } from './FileHandler';
+import { API_CONFIG } from './Config';
 
 export class OpenAIConnector {
   private readonly apiKey: string;
   private readonly organization: string;
   private readonly openai: OpenAI;
+  private readonly fileHandler: FileHandler;
 
   constructor(apiKey: string, organization: string) {
     this.apiKey = apiKey;
@@ -26,6 +29,10 @@ export class OpenAIConnector {
       apiKey: this.apiKey,
       organization: this.organization,
     });
+    this.fileHandler = new FileHandler(
+      API_CONFIG.openaiApiKey,
+      API_CONFIG.openaiOrganization
+    );
   }
 
   async sendChatMessage(model: string, messages: MessageCreateParams[]) {
@@ -57,6 +64,58 @@ export class OpenAIConnector {
       return assistant;
     } catch (error) {
       console.error('Error in creating assistant:', error);
+      throw error;
+    }
+  }
+
+  async updateAssistantFiles(
+    assistantId: string,
+    newFileIds: string[]
+  ): Promise<Assistant> {
+    try {
+      // Retrieve the current assistant to get the existing file IDs
+      const currentAssistant = await this.openai.beta.assistants.retrieve(
+        assistantId
+      );
+      console.log({ existing: currentAssistant.file_ids });
+      // Create sets for existing and new file IDs for efficient comparison
+      const existingFileIdsSet = new Set(currentAssistant.file_ids);
+      const newFileIdsSet = new Set(newFileIds);
+
+      // Check if the new file IDs are different from the existing file IDs
+      const hasDifferentFiles =
+        [...newFileIdsSet].some((id) => !existingFileIdsSet.has(id)) ||
+        [...existingFileIdsSet].some((id) => !newFileIdsSet.has(id));
+
+      if (hasDifferentFiles) {
+        console.log(
+          'Existing and new file IDs are different. Updating assistant with new file IDs.'
+        );
+
+        // Delete the existing file IDs that are not needed anymore
+        const fileIdsToDelete = [...existingFileIdsSet].filter(
+          (id) => !newFileIdsSet.has(id)
+        );
+        if (fileIdsToDelete.length > 0) {
+          console.log('Deleting old file IDs:', fileIdsToDelete);
+          await this.fileHandler.deleteFiles(fileIdsToDelete);
+        }
+
+        // Update the assistant with the new list of file IDs
+        const updatedAssistant = await this.openai.beta.assistants.update(
+          assistantId,
+          { file_ids: newFileIds } // Replace existing file IDs with the new ones
+        );
+
+        return updatedAssistant;
+      } else {
+        console.log(
+          'Existing and new file IDs are the same. No update necessary.'
+        );
+        return currentAssistant;
+      }
+    } catch (error) {
+      console.error('Error in updating assistant files:', error);
       throw error;
     }
   }

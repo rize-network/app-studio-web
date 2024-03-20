@@ -1,0 +1,46 @@
+{
+  "src": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": [
+      "src is a string representing the source URL of the avatar image."
+    ],
+    "defaultValue": []
+  },
+  "size": {
+    "type": [
+      "Size"
+    ],
+    "typeValues": [],
+    "description": [
+      "size is an optional property of type Size to set the size of the avatar."
+    ],
+    "defaultValue": [
+      "'md'"
+    ]
+  },
+  "fallback": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": [
+      "fallback is an optional string for a fallback image URL, in case the src fails to load."
+    ],
+    "defaultValue": [
+      "'IM'"
+    ]
+  },
+  "styles": {
+    "type": [
+      "AvatarStyles"
+    ],
+    "typeValues": [],
+    "description": [
+      "styles is an optional property for custom styling of the Avatar component, following the AvatarStyles type."
+    ],
+    "defaultValue": []
+  }
+}

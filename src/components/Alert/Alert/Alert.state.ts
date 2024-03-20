@@ -1,9 +1,9 @@
 import React from 'react';
 export const useAlertState = () => {
-  // Defines a custom React hook named useAlertState that manages the hover state of an element.
+// Defines a custom React hook called 'useAlertState' that manages the alert state within a component.
   const [isHovered, setIsHovered] = React.useState(false);
-  // Sets 'setIsHovered' as the function to update the state of 'isHovered' when required.
-  // Initializes the 'isHovered' state variable to 'false'. This variable will track if an element is currently hovered or not.
+// Provides the 'setIsHovered' function which allows other components to update the value of 'isHovered'.
+// Initializes 'isHovered' state variable with a default value of 'false'. This state will track whether an element is being hovered over or not.
   return { isHovered, setIsHovered };
-  // The hook returns an object containing the 'isHovered' state and the 'setIsHovered' state updater function, allowing the component that uses this hook to have access to the hover state and the ability to modify it.
+// The hook returns an object containing the 'isHovered' state variable and the 'setIsHovered' function to allow other components to read and modify the hover state.
 };
