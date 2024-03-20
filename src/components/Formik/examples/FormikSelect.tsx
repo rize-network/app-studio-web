@@ -9,6 +9,7 @@ import { FormikSelect } from '../Formik.Select';
 
 export const FormikSelectExemple = () => {
   const options = ['Item1', 'Item2', 'Item3'];
+
   const initialValues = {
     formik: options[0],
   };

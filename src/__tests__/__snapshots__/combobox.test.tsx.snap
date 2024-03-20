@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU foBlXZ"
+  id="combo"
+  role="combobox"
+>
+  <div
+    className="sc-bdfCDU dRoCvi"
+  >
+    <div
+      className="sc-bdfCDU eTWVak"
+    >
+      <div
+        className="sc-bdfCDU jwEnfw"
+        onClick={[Function]}
+      >
+        <div
+          className="sc-bdfCDU gVoSlS"
+          role="text"
+        >
+          Option 1
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

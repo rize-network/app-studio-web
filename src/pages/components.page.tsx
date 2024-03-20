@@ -1,34 +1,8 @@
-import React, { lazy, Suspense, useMemo, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Horizontal, Vertical } from 'src/components';
 import styled from 'styled-components';
-
-// Lazy-loaded imports
-const ButtonPage = lazy(() => import('src/pages/button.page'));
-const FormikPage = lazy(() => import('src/pages/formik.page'));
-const CenterPage = lazy(() => import('src/pages/center.page'));
-const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
-const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
-const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
-const HorizontalPage = lazy(() => import('src/pages/horizontal.page'));
-const TextFieldPage = lazy(() => import('src/pages/textfield.page'));
-const LinkPage = lazy(() => import('src/pages/link.page'));
-const LoaderPage = lazy(() => import('src/pages/loader.page'));
-const ModalPage = lazy(() => import('src/pages/modal.page'));
-const MessagePage = lazy(() => import('src/pages/message.page'));
-const PasswordPage = lazy(() => import('src/pages/password.page'));
-const SelectPage = lazy(() => import('src/pages/select.page'));
-const SwitchPage = lazy(() => import('src/pages/switch.page'));
-const TextPage = lazy(() => import('src/pages/text.page'));
-const TextAreaPage = lazy(() => import('src/pages/textArea.page'));
-const VerticalPage = lazy(() => import('src/pages/vertical.page'));
-const TabsPage = lazy(() => import('src/pages/tabs.page'));
-const AlertPage = lazy(() => import('src/pages/alert.page'));
-const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
-const AvatarPage = lazy(() => import('src/pages/avatar.page'));
-const BadgePage = lazy(() => import('src/pages/badge.page'));
-const TogglePage = lazy(() => import('src/pages/toggle.page'));
-const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
+import { componentList } from '../utils/componentsPageImports'; // Adjust the path as necessary
 
 const ListItem = styled.li<{ isHovered: boolean; isSelected: boolean }>`
   text-decoration: none;
@@ -37,7 +11,7 @@ const ListItem = styled.li<{ isHovered: boolean; isSelected: boolean }>`
   padding: 0.5rem 1rem;
   margin: 0;
   background-color: ${(props) => (props.isHovered ? '#f2f2f2' : 'transparent')};
-  font-weight: ${(props) => (props.isSelected ? 'bold' : '')};
+  font-weight: ${(props) => (props.isSelected ? 'bold' : 'normal')};
 `;
 
 const List = styled.ul`
@@ -61,62 +35,8 @@ const SubTitle = styled.h3`
 
 export const ComponentsPage = () => {
   const navigate = useNavigate();
-  const componentList = useMemo(() => {
-    return [
-      { name: 'Formik', path: '/formik', element: <FormikPage /> },
-      { name: 'Button', path: '/button', element: <ButtonPage /> },
-      { name: 'Center', path: '/center', element: <CenterPage /> },
-      { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
-      {
-        name: 'CountryPicker',
-        path: '/countryPicker',
-        element: <CountryPickerPage />,
-      },
-      { name: 'DatePicker', path: '/datepicker', element: <DatePickerPage /> },
-      { name: 'Horizontal', path: '/horizontal', element: <HorizontalPage /> },
-      { name: 'Link', path: '/link', element: <LinkPage /> },
-      { name: 'Loader', path: '/loader', element: <LoaderPage /> },
-      { name: 'Modal', path: '/modal', element: <ModalPage /> },
-      { name: 'Password', path: '/password', element: <PasswordPage /> },
-      { name: 'Select', path: '/select', element: <SelectPage /> },
-      { name: 'Switch', path: '/switch', element: <SwitchPage /> },
-      { name: 'TextArea', path: '/textarea', element: <TextAreaPage /> },
-      { name: 'TextField', path: '/textfield', element: <TextFieldPage /> },
-      { name: 'Text', path: '/text', element: <TextPage /> },
-      { name: 'Vertical', path: '/vertical', element: <VerticalPage /> },
-      { name: 'Message', path: '/message', element: <MessagePage /> },
-      { name: 'Tabs', path: '/tabs', element: <TabsPage /> },
-      { name: 'Alert', path: '/alert', element: <AlertPage /> },
-      {
-        name: 'AspectRatio',
-        path: '/aspectRatio',
-        element: <AspectRatioPage />,
-      },
-      {
-        name: 'Avatar',
-        path: '/avatar',
-        element: <AvatarPage />,
-      },
-      {
-        name: 'Badge',
-        path: '/badge',
-        element: <BadgePage />,
-      },
-      {
-        name: 'Toggle',
-        path: '/toggle',
-        element: <TogglePage />,
-      },
-      {
-        name: 'ToggleGroup',
-        path: '/togglegroup',
-        element: <ToggleGroupPage />,
-      },
-    ];
-  }, []);
-
-  const [hoveredIndex, setHoveredIndex] = useState(-1);
   const [selected, setSelected] = useState(componentList[0]);
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
 
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
@@ -124,6 +44,10 @@ export const ComponentsPage = () => {
 
   const handleMouseLeave = () => {
     setHoveredIndex(-1);
+  };
+
+  const handleListItemClick = (item: any) => {
+    setSelected(item);
   };
 
   return (
@@ -140,7 +64,7 @@ export const ComponentsPage = () => {
               key={index}
               isHovered={index === hoveredIndex}
               isSelected={selected.name === item.name}
-              onClick={() => setSelected(item)}
+              onClick={() => handleListItemClick(item)}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={handleMouseLeave}
             >
@@ -150,7 +74,7 @@ export const ComponentsPage = () => {
         </List>
       </Vertical>
       <Vertical flex={4} padding="1rem 2rem" gap={10}>
-        <Suspense fallback={<div>Loader...</div>}>
+        <Suspense fallback={<div>Loading...</div>}>
           <SubTitle>{selected.name}</SubTitle>
           {selected.element}
         </Suspense>

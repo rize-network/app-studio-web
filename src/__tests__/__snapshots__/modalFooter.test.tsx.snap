@@ -3,7 +3,6 @@
 exports[`Modal footer to match snapshot 1`] = `
 <div
   className="sc-bdfCDU jmYYGs"
-  display="flex"
 >
   Modal Content
 </div>
