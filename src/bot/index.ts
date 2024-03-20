@@ -17,7 +17,6 @@ async function main() {
   const basePath = 'src/components';
   const propsPath = `src/data/props/${componentName}.props.json`;
   const componentFolder = `${basePath}/${componentName}`;
-
   const assistantGPT = new Bot(componentName);
 
   // Implementation for Documentation of the code
@@ -27,7 +26,7 @@ async function main() {
   const { fileId } = await assistantGPT.addFile(descriptionPath);
 
   const assistantDocumentation = await assistantGPT.init(
-    'Docu-Code',
+    'AppStudio DocuCode',
     [fileId],
     'docu'
   );
@@ -36,7 +35,11 @@ async function main() {
 
   // Generating props file for code
   console.log('Generating props file...');
-  const assistantCreation = await assistantGPT.init('MDX-Doc', [], 'props');
+  const assistantCreation = await assistantGPT.init(
+    'AppStudio MDXDoc',
+    [],
+    'props'
+  );
 
   await assistantGPT.response(
     assistantCreation.id,

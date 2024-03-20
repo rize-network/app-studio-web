@@ -1,0 +1,34 @@
+{
+  "ratio": {
+    "type": [
+      "number"
+    ],
+    "typeValues": [],
+    "description": [
+      "Optional; used to determine the aspect ratio of the child element."
+    ],
+    "defaultValue": [
+      "16 / 9"
+    ]
+  },
+  "children": {
+    "type": [
+      "React.ReactNode"
+    ],
+    "typeValues": [],
+    "description": [
+      "Optional; accepts any valid React node, this is where you place the content inside the component."
+    ],
+    "defaultValue": []
+  },
+  "[x: string]": {
+    "type": [
+      "any"
+    ],
+    "typeValues": [],
+    "description": [
+      "Allows the interface to accept an indeterminate number of additional properties using an index signature, adding flexibility to the component."
+    ],
+    "defaultValue": []
+  }
+}

@@ -44,7 +44,7 @@ export class Bot {
     }
 
     const Assistant = await this.openAIConnector.createAssistant(
-      ProjectPrompt(name),
+      ProjectPrompt(),
       name + ' - Assistant',
       fileIds
     );

@@ -1,0 +1,120 @@
+{
+  "AspectRatio.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines the 'AspectRatioProps' interface for the component to specify the types of props it accepts."
+        },
+        {
+          "line": 3,
+          "comment": "Defines an optional 'ratio' property of type number, which could be used to determine the aspect ratio of the child element."
+        },
+        {
+          "line": 4,
+          "comment": "Defines an optional 'children' property which accepts any valid React node, this is where you place the content inside the component."
+        },
+        {
+          "line": 5,
+          "comment": "Allows the interface to accept an indeterminate number of additional properties using an index signature. This adds flexibility to the component, enabling it to accept other props not explicitly defined in the interface."
+        }
+      ]
+    }
+  ],
+  "AspectRatio.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Import the custom View component from the Layout View directory."
+        },
+        {
+          "line": 4,
+          "comment": "Import the custom Center component, used for aligning children centrally in a container, from the Layout Center directory."
+        },
+        {
+          "line": 5,
+          "comment": "Import the AspectRatioProps type definition, ensuring props passed to AspectRatioView adhere to the defined contract."
+        },
+        {
+          "line": 6,
+          "comment": "Define the AspectRatioView functional component, which controls the aspect ratio of its children content."
+        },
+        {
+          "line": 7,
+          "comment": "Set a default value for 'ratio' prop to maintain an aspect ratio of 16:9 if not specifically provided."
+        },
+        {
+          "line": 8,
+          "comment": "Children is a special prop that allows other components to be passed inside this component."
+        },
+        {
+          "line": 12,
+          "comment": "Center component utilized here to maintain the aspect ratio container with a defined width of 100%."
+        },
+        {
+          "line": 13,
+          "comment": "Position set to 'relative' to enable absolute positioning of child components based on this parent container."
+        },
+        {
+          "line": 14,
+          "comment": "Overflow set to 'hidden' to prevent any child content from overflowing the bounds of the container."
+        },
+        {
+          "line": 15,
+          "comment": "Padding top calculated from the aspect ratio to maintain the desired height relative to the width of the container."
+        },
+        {
+          "line": 16,
+          "comment": "Border radius set to 8 for rounded corners of the container."
+        },
+        {
+          "line": 18,
+          "comment": "Set the View component with an absolute position to fill up the entire space of its parent container."
+        },
+        {
+          "line": 19,
+          "comment": "Props being spread to inherit additional props that may be needed for custom behavior or styling."
+        },
+        {
+          "line": 21,
+          "comment": "Render the children components inside the View component, which are the contents that maintain the aspect ratio within the container."
+        }
+      ]
+    }
+  ],
+  "AspectRatio.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Declaration of the `AspectRatioComponent`, a functional component that takes `AspectRatioProps` props."
+        },
+        {
+          "line": 5,
+          "comment": "The `ratio` property specifies the aspect ratio of the `AspectRatioComponent`."
+        },
+        {
+          "line": 6,
+          "comment": "`children` denotes the child components that will be displayed inside the `AspectRatioView`."
+        },
+        {
+          "line": 7,
+          "comment": "`props` holds any additional properties passed to `AspectRatioComponent` that aren't `ratio` or `children`."
+        },
+        {
+          "line": 9,
+          "comment": "Render the `AspectRatioView` component with the passed `ratio` and any additional props."
+        },
+        {
+          "line": 10,
+          "comment": "Place the `children` inside the `AspectRatioView`, so they conform to the specified aspect ratio."
+        },
+        {
+          "line": 13,
+          "comment": "Export `AspectRatio` as the main component from this module, it is an alias for `AspectRatioComponent`."
+        }
+      ]
+    }
+  ]
+}
