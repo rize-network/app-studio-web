@@ -156,8 +156,6 @@ export class DocuCode {
       const stat = await fs.statSync(fullPath);
 
       if (path.basename(fullPath) === 'examples') {
-        // Skip processing this directory
-
         continue;
       }
 

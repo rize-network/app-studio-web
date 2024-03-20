@@ -17,7 +17,6 @@ async function main() {
   const basePath = 'src/components';
   const propsPath = `src/data/props/${componentName}.props.json`;
   const componentFolder = `${basePath}/${componentName}`;
-  const componentPath = `${basePath}/${componentName}/${componentName}`;
 
   const assistantGPT = new Bot(componentName);
 
@@ -25,10 +24,11 @@ async function main() {
   console.log('Initializing documentation process...');
   const docuCode = new DocuCode(componentName);
 
+  const { fileId } = await assistantGPT.addFile(descriptionPath);
+
   const assistantDocumentation = await assistantGPT.init(
-    'DocuCode',
-    [],
-    descriptionPath,
+    'Docu-Code',
+    [fileId],
     'docu'
   );
 
@@ -36,17 +36,13 @@ async function main() {
 
   // Generating props file for code
   console.log('Generating props file...');
-  const { fileIds } = await assistantGPT.addFiles(componentPath);
+  const assistantCreation = await assistantGPT.init('MDX-Doc', [], 'props');
 
-  const assistantCreation = await assistantGPT.initMDX(
-    'MDX Doc',
-    fileIds,
-    descriptionPath,
-    'props',
-    propsPath
+  await assistantGPT.response(
+    assistantCreation.id,
+    propsPath,
+    `${componentFolder}/${componentName}`
   );
-
-  await assistantGPT.response(assistantCreation.id, propsPath);
 
   await assistantGPT.MarkdownGeneration(
     componentFolder,

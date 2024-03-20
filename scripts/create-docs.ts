@@ -31,7 +31,7 @@ async function createDocumentationForComponent(
 
   if (fs.existsSync(mdFilePath)) {
     await deleteComponentCache(componentName);
-    fs.unlinkSync(mdFilePath); // Direct deletion as we already checked existence
+    await fs.unlinkSync(mdFilePath); // Direct deletion as we already checked existence
   }
 
   const command = `npm run bot-doc -- ${componentName}`;
@@ -43,7 +43,9 @@ async function createDocumentationForComponent(
     }
     console.log(`Documentation generated for ${componentName}:\n${stdout}`);
   } catch (error) {
-    console.error(`Error executing command for ${componentName}:`, error);
+    console.error(
+      `Error executing command for ${componentName}: Commit changes and try again`
+    );
   }
 }
 

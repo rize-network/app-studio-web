@@ -1,11 +1,30 @@
-export const RespondPrompt = () => `
-Analyse the props and type files and return the following information as follows:
+export const RespondPrompt = (props: string, view: string, type: string) => `
+Please analyze the provided files and extract detailed information as specified below:
 
-**PropsName**: Will be obtained in the props file. Note all props in the props file should be return in the json file.
-Other required informations will be collected in the type.ts and view.tsx files provided.
-Ensure that the exact values are set for the type values and default values.
+**Files Content:**
+- Props.ts:
+\`\`\`
+${props}
+\`\`\`
 
-Json Format:
+- View.ts:
+\`\`\`
+${view}
+\`\`\`
+
+- Type.ts:
+\`\`\`
+${type}
+\`\`\`
+
+**Instructions:**
+1. From the Props.ts file, extract all property names and their details.
+2. Use the Type.ts and View.ts files to complement the information where necessary, especially for type values, default values, and descriptions.
+3. Ensure that the exact values are set for the type values and default values.
+
+
+
+**Expected JSON Output Format:**
 {
   propsName:{
     type:[props type],
@@ -14,4 +33,6 @@ Json Format:
     defaultValue:[default value in any in the view.file]
   }
 }
+
+Return the information in the JSON format shown above. If there is no data available, return an empty object (\`{}\`).
 `;

@@ -1,21 +1,24 @@
 import React from 'react';
 import { AlertView } from './Alert/Alert.view';
 import { AlertProps } from './Alert/Alert.props';
+// React import is required to use JSX in the code.
 const AlertComponent = ({
+  // AlertView is a custom component imported to be used in the AlertComponent.
   icon,
+  // AlertProps is the TypeScript interface or type being imported to type-check the component props.
   title,
-  // The component destructures its props to individually pass them into the AlertView component.
-  // AlertComponent is a functional component that serves as a wrapper for AlertView.
+  // Destructuring is used here to directly extract the properties from the props object passed to the AlertComponent.
+  // AlertComponent is a stateless functional component, utilizing ES6 arrow function syntax.
   styles,
-  // The component is rendering AlertView with the props: icon, title, styles, description, and variant.
   description,
   variant,
 }: AlertProps) => (
   <AlertView
-    // Exporting AlertComponent as Alert for use in other parts of the application.
+    // The AlertComponent renders the AlertView component with the destructured props.
     icon={icon}
     title={title}
     styles={styles}
+    // Exporting AlertComponent as Alert to be used in other parts of the application.
     description={description}
     variant={variant}
   />

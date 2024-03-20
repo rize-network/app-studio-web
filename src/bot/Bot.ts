@@ -33,11 +33,8 @@ export class Bot {
   async init(
     name: string,
     fileIds: string[],
-    descriptionPath: string,
     cachePath: string
   ): Promise<Assistant> {
-    let description = '';
-
     const cachedResponse = this.cache.getJsonFromCache(
       `${cachePath}_assistant`
     );
@@ -45,12 +42,9 @@ export class Bot {
     if (cachedResponse) {
       return cachedResponse;
     }
-    if (descriptionPath) {
-      description = await this.fileHandler.readFile(descriptionPath);
-    }
 
     const Assistant = await this.openAIConnector.createAssistant(
-      ProjectPrompt(name, description),
+      ProjectPrompt(name),
       name + ' - Assistant',
       fileIds
     );
@@ -58,101 +52,6 @@ export class Bot {
     this.cache.saveJsonToCache(`/${cachePath}_assistant`, Assistant);
 
     return Assistant;
-  }
-
-  async initMDX(
-    name: string,
-    fileIds: string[],
-    descriptionPath: string,
-    cachePath: string,
-    propsPath: string
-  ): Promise<Assistant> {
-    console.log(`Initializing MDX for: ${name}`);
-
-    // Attempt to read component props to check if they exist
-    const componentPropsExist = await this.fileHandler.pathExists(propsPath);
-    console.log(`Component props exist (${componentPropsExist}): ${propsPath}`);
-
-    // Fetch the cached assistant if available
-    const cachedAssistant = this.cache.getJsonFromCache(
-      `${cachePath}_assistant`
-    );
-
-    if (cachedAssistant && componentPropsExist) {
-      console.log('Returning cached assistant');
-      return cachedAssistant;
-    }
-
-    if (cachedAssistant) {
-      console.log('Found cached assistant');
-      let assistantId = cachedAssistant.id;
-
-      // Check if there are file IDs to update
-      if (fileIds.length > 0) {
-        console.log('Updating assistant with new file IDs');
-        const updatedAssistant =
-          await this.openAIConnector.updateAssistantFiles(assistantId, fileIds);
-        cachedAssistant.file_ids = updatedAssistant.file_ids;
-        this.cache.saveJsonToCache(`${cachePath}_assistant`, cachedAssistant);
-        return updatedAssistant;
-      }
-
-      return cachedAssistant;
-    }
-
-    // Create a new assistant if not cached
-    console.log('Creating a new assistant');
-    let description = '';
-    if (descriptionPath) {
-      description = await this.fileHandler.readFile(descriptionPath);
-    }
-    const assistant = await this.openAIConnector.createAssistant(
-      ProjectPrompt(name, description),
-      `${name} - Assistant`,
-      fileIds
-    );
-    this.cache.saveJsonToCache(`${cachePath}_assistant`, assistant);
-
-    return assistant;
-  }
-
-  async addFiles(componentFolder: string) {
-    const cachedResponse = this.cache.getJsonFromCache(this.cacheKey + `/file`);
-
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-    // Read the files in the directory
-    const files = await this.fileHandler.readFiles(componentFolder);
-
-    // Array to store file IDs
-    const fileIds = [];
-
-    for (const file of files) {
-      // Check if the file ends with the desired extensions
-      if (
-        file.endsWith('.props.ts') ||
-        file.endsWith('.type.d.ts') ||
-        file.endsWith('.view.tsx')
-      ) {
-        const filePath = `${componentFolder}/${file}`;
-
-        // Upload the file and store the returned file ID
-        const fileId = await this.fileHandler.uploadFile(
-          filePath,
-          'assistants'
-        );
-
-        // Store the file ID in the array
-        fileIds.push(fileId);
-      }
-    }
-    // Save the array of file IDs to cache
-    this.cache.saveJsonToCache(this.cacheKey + `/file`, {
-      fileIds,
-    });
-
-    return { fileIds };
   }
 
   async createFile(fileContent: string, fileName: string) {
@@ -176,14 +75,59 @@ export class Bot {
     return { fileId, fileName };
   }
 
-  async response(assistantId: string, propsPath: string): Promise<any> {
-    // Créez un nouveau thread pour la conversation
+  async addFile(filePath: string) {
+    const cachedResponse = this.cache.getJsonFromCache('/doc_file');
+
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+
+    // Téléchargez le fichier de référence vers OpenAI
+    const fileId = await this.fileHandler.uploadFile(filePath, 'assistants');
+
+    this.cache.saveJsonToCache('/doc_file', { fileId });
+
+    return { fileId };
+  }
+
+  async response(
+    assistantId: string,
+    propsPath: string,
+    componentFolder: string
+  ): Promise<any> {
+    const cachedResponse = this.cache.getJsonFromCache(
+      this.cacheKey + '/props'
+    );
+
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+
+    const files = await this.fileHandler.readFiles(componentFolder);
+
+    let propsContent = '';
+    let viewContent = '';
+    let typeContent = '';
+
+    for (const file of files) {
+      const filePath = `${componentFolder}/${file}`;
+
+      // Check the file type and read content accordingly
+      if (file.endsWith('.props.ts')) {
+        propsContent = await this.fileHandler.readFile(filePath);
+      } else if (file.endsWith('.view.tsx')) {
+        viewContent = await this.fileHandler.readFile(filePath);
+      } else if (file.endsWith('.type.d.ts')) {
+        typeContent = await this.fileHandler.readFile(filePath);
+      }
+    }
+
     const thread = await this.openAIConnector.createThread();
 
     // Définissez le prompt initial pour la compréhension globale du dossier
     await this.openAIConnector.addMessageToThread(thread.id, {
       role: 'user',
-      content: RespondPrompt(),
+      content: RespondPrompt(propsContent, viewContent, typeContent),
     });
 
     // Récupérez et traitez la réponse pour la compréhension globale
@@ -193,7 +137,8 @@ export class Bot {
     );
 
     const propsJson = extractJsonCode(response.text.value);
-    // this.cache.saveJsonToCache(this.cacheKey + '/props', propsJson);
+    this.cache.saveJsonToCache(this.cacheKey + '/props', propsJson);
+
     await this.fileHandler.writeFile(
       path.dirname(propsPath),
       path.basename(propsPath),

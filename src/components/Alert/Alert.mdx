@@ -1,11 +1,9 @@
 ### **Import**
-
 ```tsx static
 import { Alert } from '@app-studio/web';
 ```
 
 ### **Default**
-
 ```tsx
 import React from 'react';
 import { Alert } from '../Alert';
@@ -18,11 +16,11 @@ export const DefaultDemo = () => {
     />
   );
 };
+
 ```
 
 ### **icon**
-
-"Optional 'icon' prop which can be any React node, typically used to render a visual icon element."
+"Optional 'icon' property which allows for a React node (e.g., an image or SVG) to be included in the alert."
 
 ```tsx
 import React from 'react';
@@ -38,11 +36,11 @@ export const IconDemo = () => {
     />
   );
 };
+
 ```
 
 ### **variant**
-
-"Optional 'variant' prop used to determine the stylistic variation of the alert based on predefined types."
+"Optional 'variant' property to specify the type of alert, which modifies the appearance (e.g., success, error)."
 
 ```tsx
 import React from 'react';
@@ -62,11 +60,11 @@ export const VariantDemo = () => (
     ))}
   </Horizontal>
 );
+
 ```
 
 ### **styles**
-
-"Optional 'styles' prop that allows custom styles to be applied to the alert component, adhering to the AlertStyles type."
+"Optional 'styles' property to allow for custom styling via a defined AlertStyles type."
 
 ```tsx
 import React from 'react';
@@ -84,4 +82,6 @@ export const StylesDemo = () => (
     }}
   />
 );
+
 ```
+

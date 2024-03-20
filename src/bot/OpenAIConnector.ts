@@ -78,6 +78,11 @@ export class OpenAIConnector {
         assistantId
       );
       console.log({ existing: currentAssistant.file_ids });
+      await this.fileHandler.writeFile(
+        './',
+        'test',
+        `${currentAssistant.file_ids.toString()}`
+      );
       // Create sets for existing and new file IDs for efficient comparison
       const existingFileIdsSet = new Set(currentAssistant.file_ids);
       const newFileIdsSet = new Set(newFileIds);

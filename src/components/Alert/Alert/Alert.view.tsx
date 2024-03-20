@@ -9,49 +9,51 @@ import { Themes } from './Alert.style';
 export const AlertView = ({
   icon,
   title,
-  // Defines the AlertView component which accepts AlertProps as its props for configuration
+  // The AlertView component is a functional component using object destructuring to infer props from AlertProps.
   styles,
-  // The component uses the Horizontal layout from the layout library, setting up styles and props for the alert's container
   description,
   variant = 'default',
-}: // Usage of dynamic theming based on the variant prop, which alters the border color of the alert container
-AlertProps) => (
+}: AlertProps) => (
   <Horizontal
+    // Setting up the outermost layout as a horizontal container with specific gap, border, and padding properties, which can be further customized with styles.
     gap={15}
-    // Inserts an icon in the view; if an icon is provided as a prop, that icon is used, otherwise a default WarningSvg is displayed
     borderRadius={10}
     borderWidth={1}
-    // Renders the custom icon passed as a prop if it exists
     borderStyle="solid"
     padding={16}
-    // Renders the default WarningSvg icon with size and color determined by the variant's theme or custom styles
+    // Allows the styles object that may be passed as a prop to override the default container styles.
     wrap="nowrap"
     borderColor={Themes[variant].container.border}
+    // The View component is used to wrap the alert icon, self-aligning to the center.
     {...styles?.container}
   >
     <View alignSelf={'center'}>
-      // Provides a Vertical layout for the text content of the alert with a
-      fixed gap between elements
+      // Conditionally renders the provided icon prop if it exists, otherwise
+      falls back to a default WarningSvg icon. fixed gap between elements //
+      Displays the user-provided icon.
       {icon ? (
         icon
       ) : (
-        // Displays the title text with default or variant-specific theming, overridable by custom styles
+        // Renders the WarningSvg as a fallback with predefined size and color, which can be overridden by icon props.
         <WarningSvg
           size={24}
           color={styles?.icon.color ?? Themes[variant].content.color}
         />
-        // Displays the description text, following the same theming and customization pattern as the title text
       )}
     </View>
     <Vertical gap={10}>
+      // The Vertical container is used to stack the title and description Text
+      components with a fixed gap between them.
       <Text
         fontSize="16px"
+        // The Text component displays the title, with fontSize and color controlled by the variant and potentially overridden by styles.
         color={Themes[variant].content.color}
         {...styles?.title}
       >
         {title}
       </Text>
       <Text
+        // Another Text component for the description featuring a slightly smaller fontSize and same theming options as the title.
         fontSize="14px"
         color={Themes[variant].content.color}
         {...styles?.description}

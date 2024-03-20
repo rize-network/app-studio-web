@@ -1,0 +1,44 @@
+{
+    "icon": {
+        "type": [
+            "React.ReactNode"
+        ],
+        "typeValues": [],
+        "description": "Optional 'icon' property which allows for a React node (e.g., an image or SVG) to be included in the alert.",
+        "defaultValue": []
+    },
+    "title": {
+        "type": [
+            "string"
+        ],
+        "typeValues": [],
+        "description": "Mandatory 'title' property of type string to display as the alert's heading.",
+        "defaultValue": []
+    },
+    "description": {
+        "type": [
+            "string"
+        ],
+        "typeValues": [],
+        "description": "Mandatory 'description' property of type string that holds the main message of the alert.",
+        "defaultValue": []
+    },
+    "variant": {
+        "type": [
+            "Variant"
+        ],
+        "typeValues": [],
+        "description": "Optional 'variant' property to specify the type of alert, which modifies the appearance (e.g., success, error).",
+        "defaultValue": [
+            "default"
+        ]
+    },
+    "styles": {
+        "type": [
+            "AlertStyles"
+        ],
+        "typeValues": [],
+        "description": "Optional 'styles' property to allow for custom styling via a defined AlertStyles type.",
+        "defaultValue": []
+    }
+}
