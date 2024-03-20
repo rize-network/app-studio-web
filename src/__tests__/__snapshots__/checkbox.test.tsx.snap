@@ -3,24 +3,12 @@
 exports[`Checkbox to match snapshot 1`] = `
 <div
   className="sc-bdfCDU eCPOuS"
-  color="blue"
-  cursor="default"
-  display="flex"
-  fontSize={20}
-  fontStyle="normal"
-  fontWeight={400}
-  height="fit-content"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  textDecoration="none"
-  width="fit-content"
 >
   <div
     className="sc-bdfCDU edAivK"
-    display="flex"
-    height={30}
-    width={30}
   />
 </div>
 `;
