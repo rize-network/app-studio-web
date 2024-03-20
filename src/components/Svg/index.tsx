@@ -11,3 +11,6 @@ export * from './OpenEye';
 export * from './Profile';
 export * from './RightArrow';
 export * from './Warning';
+export * from './Success';
+export * from './Info';
+export * from './Error';

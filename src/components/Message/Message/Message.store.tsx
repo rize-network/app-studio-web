@@ -1,32 +1,66 @@
 import { create } from 'zustand';
+import { MessageState } from './Message.props';
+import { Message, ShowMessageType } from './Message.type';
 
-export interface MessageState {
-  visible: boolean;
-  variant?: string;
-  message: string;
-  show: (variant?: string, message?: string) => void;
-  hide: () => void;
-}
-
-// Créez votre magasin avec l'état initial et les actions.
+// Create your store with the initial state and actions.
 export const useMessageStore = create<MessageState>((set) => ({
-  // état initial
+  // initial state
   visible: false,
-  message: '',
-  // les actions peuvent simplement muter l'état en utilisant la fonction `set`
-  show: (variant, message) =>
-    set((state) => ({
-      ...state,
+  title: '',
+  subtitle: '',
+  variant: 'info',
+  isClosable: false,
+  styles: {},
+  action: () => {},
+  actionText: '',
+  showIcon: false,
+  timeout: 3000,
+  show: (
+    variant,
+    title = '',
+    subtitle = '',
+    isClosable,
+    styles,
+    action,
+    actionText,
+    showIcon,
+    timeout
+  ) =>
+    set({
       visible: true,
-      variant: variant ?? state.variant, // Utiliser l'ancienne variante si aucune n'est fournie
-      message: message ?? state.message, // Utiliser l'ancien message si aucun n'est fourni
-    })),
+      variant,
+      title,
+      subtitle,
+      isClosable,
+      styles,
+      action,
+      actionText,
+      showIcon,
+      timeout,
+    }),
 
   hide: () => set({ visible: false }),
 }));
 
-export const showMessage = (variant: string, message?: string) => {
-  useMessageStore.getState().show(variant, message);
+export const showMessage = (
+  variant: Message,
+  title?: string,
+  subtitle?: string,
+  props?: ShowMessageType
+) => {
+  useMessageStore
+    .getState()
+    .show(
+      variant,
+      title,
+      subtitle,
+      props?.isClosable,
+      props?.styles,
+      props?.action,
+      props?.actionText,
+      props?.showIcon,
+      props?.timeout
+    );
 };
 
 export const hideMessage = () => {
