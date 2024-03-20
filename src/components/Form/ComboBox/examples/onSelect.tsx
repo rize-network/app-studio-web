@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComboBox } from '../ComboBox';
-import { Vertical } from '../../Layout';
-import { MessageLayout, showMessage } from '../..';
+import { Vertical } from '../../../Layout';
+import { MessageLayout, showMessage } from '../../..';
 
 export const OnSelectDemo = () => {
   const items = [

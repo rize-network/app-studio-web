@@ -12,6 +12,7 @@ export interface ComboBoxProps {
   placeholder?: string;
   styles?: ComboBoxStyles;
   searchPlaceholder?: string;
+  [x: string]: any;
 }
 
 export interface ComboBoxItem {

@@ -33,7 +33,7 @@ const Item: React.FC<ItemProps> = ({
 }) => {
   const handleOptionClick = (option: string) => callback(option);
   const handleHover = () => setIsHovered(!isHovered);
-
+  console.log(props.name);
   return (
     <Element
       as="li"

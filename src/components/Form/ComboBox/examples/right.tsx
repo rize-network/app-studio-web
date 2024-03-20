@@ -1,5 +1,5 @@
 import React from 'react';
-import { Badge } from '../..';
+import { Badge } from '../../..';
 import { ComboBox } from '../ComboBox';
 
 export const RightDemo = () => {

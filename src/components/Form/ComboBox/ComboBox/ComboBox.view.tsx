@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Horizontal } from '../../Layout'; // Assuming View and Text are from the same location
+import { View, Horizontal } from '../../../Layout'; // Assuming View and Text are from the same location
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
-import { Text } from '../..';
+import { Text } from '../../..';
 import TextField from 'src/components/Form/TextField/TextField/TextField.view';
 import TickSvg from 'src/components/Svg/Tick';
 import SearchLoopSvg from 'src/components/Svg/Search';
@@ -24,6 +24,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   setSearchQuery,
   setFilteredItems,
   styles,
+  ...props
 }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -63,8 +64,18 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   };
 
   return (
-    <Horizontal wrap="nowrap" gap={15} alignItems="center" width="100%">
-      {label && <Text styles={styles?.label}>{label}</Text>}
+    <Horizontal
+      wrap="nowrap"
+      gap={15}
+      alignItems="center"
+      width="100%"
+      {...props}
+    >
+      {label && (
+        <Text styles={styles?.label} htmlFor={props.id}>
+          {label}
+        </Text>
+      )}
       <View position="relative">
         <Horizontal
           cursor="pointer"
@@ -111,6 +122,8 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             >
               {searchEnabled && (
                 <TextField
+                  id={props.id}
+                  name={props.name}
                   width="100%"
                   type="search"
                   value={searchQuery}
