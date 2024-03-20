@@ -2,6 +2,8 @@ import { ReactNode, Dispatch, SetStateAction } from 'react';
 import { ComboBoxStyles } from './ComboBox.type';
 
 export interface ComboBoxProps {
+  id: string;
+  name?: string;
   items: ComboBoxItem[];
   onSelect?: (item: ComboBoxItem) => void;
   searchEnabled?: boolean;
@@ -30,6 +32,8 @@ export interface ComboBoxStateActions {
   setHighlightedIndex: Dispatch<SetStateAction<number>>;
   searchQuery: string;
   setSearchQuery: Dispatch<SetStateAction<string>>;
+  isDropdownVisible: boolean;
+  setIsDropdownVisible: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface ComboBoxViewProps extends ComboBoxProps, ComboBoxStateActions {

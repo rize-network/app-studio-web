@@ -17,6 +17,8 @@ export const useComboBoxState = (
     searchPlaceholder ?? ''
   );
 
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
   return {
     filteredItems,
     setFilteredItems,
@@ -26,5 +28,7 @@ export const useComboBoxState = (
     setHighlightedIndex,
     searchQuery,
     setSearchQuery,
+    isDropdownVisible,
+    setIsDropdownVisible,
   };
 };

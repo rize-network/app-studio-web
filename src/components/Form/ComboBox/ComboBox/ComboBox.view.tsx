@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, Horizontal } from '../../../Layout'; // Assuming View and Text are from the same location
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../..';
@@ -24,10 +24,10 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   setSearchQuery,
   setFilteredItems,
   styles,
+  isDropdownVisible,
+  setIsDropdownVisible,
   ...props
 }) => {
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const path = event.composedPath();
@@ -65,6 +65,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
 
   return (
     <Horizontal
+      role="combobox"
       wrap="nowrap"
       gap={15}
       alignItems="center"

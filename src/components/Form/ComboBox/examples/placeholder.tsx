@@ -13,6 +13,12 @@ export const PlaceholderDemo = () => {
     },
   ];
   return (
-    <ComboBox placeholder="Select..." searchEnabled={false} items={items} />
+    <ComboBox
+      id="placeholder"
+      name="placeholder"
+      placeholder="Select..."
+      searchEnabled={false}
+      items={items}
+    />
   );
 };

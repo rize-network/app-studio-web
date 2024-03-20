@@ -14,6 +14,7 @@ export const SearchPlaceholderDemo = () => {
   ];
   return (
     <ComboBox
+      id="searchPlaceholder"
       placeholder="Select..."
       searchPlaceholder="FilterStatus.."
       items={items}

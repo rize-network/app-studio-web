@@ -24,5 +24,5 @@ export const ShowTickDemo = () => {
       label: 'Canceled',
     },
   ];
-  return <ComboBox items={statuses} showTick={false} />;
+  return <ComboBox id="showTick" items={statuses} showTick={false} />;
 };

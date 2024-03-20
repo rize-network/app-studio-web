@@ -16,5 +16,5 @@ export const DefaultDemo = () => {
       label: 'Nuxt.js',
     },
   ];
-  return <ComboBox items={items} />;
+  return <ComboBox id="default" name="default" items={items} />;
 };

@@ -14,5 +14,7 @@ export const RightDemo = () => {
     },
   ];
 
-  return <ComboBox items={items} right={<Badge content="Status" />} />;
+  return (
+    <ComboBox id="right" items={items} right={<Badge content="Status" />} />
+  );
 };

@@ -29,6 +29,7 @@ export const OnSelectDemo = () => {
   return (
     <Vertical gap={15}>
       <ComboBox
+        id="onSelect"
         items={items}
         onSelect={(item) => {
           showMessage('success', `Item selected: ${item.label}`);

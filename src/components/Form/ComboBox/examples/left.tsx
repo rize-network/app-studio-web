@@ -14,5 +14,12 @@ export const LeftDemo = () => {
     },
   ];
 
-  return <ComboBox items={items} left={<Badge content="Status" />} />;
+  return (
+    <ComboBox
+      id="left"
+      name="left"
+      items={items}
+      left={<Badge content="Status" />}
+    />
+  );
 };

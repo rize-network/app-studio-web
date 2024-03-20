@@ -24,5 +24,5 @@ export const SearchEnabledDemo = () => {
       label: 'Astro',
     },
   ];
-  return <ComboBox items={items} searchEnabled={false} />;
+  return <ComboBox id="searchEnabled" items={items} searchEnabled={false} />;
 };

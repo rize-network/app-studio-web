@@ -4,6 +4,9 @@ import { useComboBoxState } from './ComboBox/ComboBox.state';
 import ComboBoxView from './ComboBox/ComboBox.view';
 
 const ComboBoxComponent: React.FC<ComboBoxProps> = ({
+  // Ensure there is a unique ID for each ComboBox
+  id,
+  name,
   items,
   placeholder,
   searchPlaceholder,
@@ -11,7 +14,9 @@ const ComboBoxComponent: React.FC<ComboBoxProps> = ({
 }) => {
   const state = useComboBoxState(items, placeholder, searchPlaceholder);
 
-  return <ComboBoxView items={items} {...state} {...props} />;
+  return (
+    <ComboBoxView id={id} name={name} items={items} {...state} {...props} />
+  );
 };
 
 export const ComboBox = ComboBoxComponent;

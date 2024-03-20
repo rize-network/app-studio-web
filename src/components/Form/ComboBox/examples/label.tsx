@@ -13,5 +13,13 @@ export const LabelDemo = () => {
       label: 'In Progress',
     },
   ];
-  return <ComboBox label="Status" items={items} left={<PlusSvg size={12} />} />;
+  return (
+    <ComboBox
+      id="label"
+      name="label"
+      label="Status"
+      items={items}
+      left={<PlusSvg size={12} />}
+    />
+  );
 };

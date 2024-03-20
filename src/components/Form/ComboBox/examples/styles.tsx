@@ -14,6 +14,7 @@ export const StylesDemo = () => {
   ];
   return (
     <ComboBox
+      id="styles"
       items={items}
       searchEnabled={false}
       styles={{
