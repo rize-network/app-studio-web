@@ -23,7 +23,7 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
         onChange={[Function]}
         onFocus={[Function]}
         paddingHorizonatl={0}
-        paddingVertical={8}
+        paddingVerical={8}
         placeholder="Name"
         readOnly={false}
         type="country"
@@ -61,12 +61,12 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
             <title>
               arrow_down [#338]
             </title>
-
+             
             <desc>
               Created with Sketch.
             </desc>
             <defs>
-
+               
             </defs>
             <g
               fill="none"
