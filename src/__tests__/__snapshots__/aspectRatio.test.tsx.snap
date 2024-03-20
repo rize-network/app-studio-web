@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AspectRatio to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU xaxf"
+>
+  <div
+    className="sc-bdfCDU dRiktu"
+  >
+    <div
+      className="sc-bdfCDU fyIxcV"
+    />
+  </div>
+</div>
+`;

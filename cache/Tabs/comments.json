@@ -1,0 +1,224 @@
+{
+  "Tabs.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "The TabsProps interface is declared here, specifying the props required for a Tabs component. It includes an array of Tab items and an optional TabsStyles object for custom styling."
+        },
+        {
+          "line": 6,
+          "comment": "TabsViewProps extends the TabsProps to include properties unique to the view layer of the tabs component. This indicates that the view needs to know the current active tab and also needs functions to update the active tab and the list of all tabs."
+        },
+        {
+          "line": 7,
+          "comment": "isActive is a Tab object that represents the currently active tab in the tabs list."
+        },
+        {
+          "line": 8,
+          "comment": "setIsActive is a dispatch function from React's useReducer hook, allowing the tabs component to update the active tab state."
+        },
+        {
+          "line": 9,
+          "comment": "tabsState is an array of Tab objects representing the complete state of tabs at any given moment, possibly controlling the rendering or the order of tabs."
+        },
+        {
+          "line": 10,
+          "comment": "setTabsState is a dispatch function for updating the tabsState, allowing for operations like adding, removing, or reordering tabs within the tabs component."
+        }
+      ]
+    }
+  ],
+  "Tabs.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines a custom hook, named `useTabsState`, that manages the state of tabs within a component."
+        },
+        {
+          "line": 4,
+          "comment": "Initializes 'isActive' state with the first tab from the 'propTabs' array, indicating the currently active tab."
+        },
+        {
+          "line": 5,
+          "comment": "Initializes 'tabsState' as a stateful array that reflects the tabs passed through 'propTabs' prop, setting the initial state of tabs."
+        },
+        {
+          "line": 6,
+          "comment": "The hook returns an object containing both the state and the functions to update the state, allowing components to control and access the current state of the tabs."
+        }
+      ]
+    }
+  ],
+  "Tabs.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines the type 'Tab' representing each tab's structure with title, value, and an optional content property that can be of various types including a string, React node, or any other type."
+        },
+        {
+          "line": 8,
+          "comment": "Defines the type 'TabsStyles' representing the CSS styles for different parts of the tabs component. It includes styles for the container, active/inactive tabs and text, the content area, the title, and the header where tabs are housed."
+        },
+        {
+          "line": 9,
+          "comment": "Optional 'container' property to apply custom CSS styles or properties to the main container wrapping the entire tabs component."
+        },
+        {
+          "line": 10,
+          "comment": "Optional 'activeTab' property to apply custom styles or ButtonProps to the currently active tab."
+        },
+        {
+          "line": 11,
+          "comment": "Optional 'activeText' property to customize the appearance of the text within the active tab, allowing for CSS styles or TextProps."
+        },
+        {
+          "line": 12,
+          "comment": "Optional 'tab' property for styling any tab or to pass ButtonProps, allowing customization of tabs regardless of their active state."
+        },
+        {
+          "line": 13,
+          "comment": "Optional 'content' property to apply custom CSS styles to the content area that displays the active tab's associated content."
+        },
+        {
+          "line": 14,
+          "comment": "Optional 'title' property to style the title of the tabs, which can include CSS properties or specific TextProps."
+        },
+        {
+          "line": 15,
+          "comment": "Optional 'headerTabs' property to apply custom styles to the header section that contains all the tab titles."
+        }
+      ]
+    }
+  ],
+  "Tabs.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 6,
+          "comment": "Destructure the props to get access to the tabs array, styles object, and the functions to handle active state and tabs state."
+        },
+        {
+          "line": 7,
+          "comment": "Defines a function to move the selected tab to the top of the tabs array. It also updates the tabs state and active tab using `setTabsState` and `setIsActive` props."
+        },
+        {
+          "line": 8,
+          "comment": "Creates a copy of the `tabs` array to avoid mutating the prop directly."
+        },
+        {
+          "line": 9,
+          "comment": "Removes the selected tab from its current position."
+        },
+        {
+          "line": 10,
+          "comment": "Adds the selected tab to the beginning of the array to make it the first tab."
+        },
+        {
+          "line": 11,
+          "comment": "Updates the tab state with the new array of tabs."
+        },
+        {
+          "line": 12,
+          "comment": "Sets the first tab in the new array as the active tab."
+        },
+        {
+          "line": 13,
+          "comment": "A helper function to determine if the content of a tab should be active based on the current tab state."
+        },
+        {
+          "line": 18,
+          "comment": "A horizontal container that wraps the entire TabsView component, takes 100% of the width and 100% of the available height."
+        },
+        {
+          "line": 19,
+          "comment": "A horizontal container for the tabs headers with a margin-bottom of 20 pixels. Additional styles can be applied via `styles.headerTabs`."
+        },
+        {
+          "line": 20,
+          "comment": "Iterates over the tabs array, rendering each tab using a `Button` component."
+        },
+        {
+          "line": 21,
+          "comment": "The `key` prop helps React identify which items have changed, are added, or are removed."
+        },
+        {
+          "line": 22,
+          "comment": "Sets up the click event handler to call `moveSelectedTabToTop` when the tab's button is clicked."
+        },
+        {
+          "line": 23,
+          "comment": "Sets the variant of the button based on whether the tab is active (`filled`) or not (`ghost`)."
+        },
+        {
+          "line": 24,
+          "comment": "Applies pill-shaped styling to the button components."
+        },
+        {
+          "line": 25,
+          "comment": "Uses a pointer cursor to indicate the tab can be clicked."
+        },
+        {
+          "line": 26,
+          "comment": "The `isAuto` prop might control component's width auto-adjustment, but the specific behavior is dependent on its implementation."
+        },
+        {
+          "line": 27,
+          "comment": "Applies additional tab-specific styles passed in through the `styles` prop."
+        },
+        {
+          "line": 28,
+          "comment": "Applies active tab styles if the tab is the active one."
+        },
+        {
+          "line": 31,
+          "comment": "Conditionally applies active text styles if the tab is active."
+        },
+        {
+          "line": 34,
+          "comment": "Displays the content of the tabs within a vertical `View` component that takes up the remaining width and height of the container."
+        },
+        {
+          "line": 35,
+          "comment": "Iterates over the `tabsState` array to render the content of each tab. Renders the tab content only if it is active."
+        },
+        {
+          "line": 36,
+          "comment": "The `key` prop on the View component helps with tracking and optimization during re-renders."
+        },
+        {
+          "line": 37,
+          "comment": "Checks if the tab content is active using the `isContentActive` function before rendering its content."
+        }
+      ]
+    }
+  ],
+  "Tabs.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Define the functional component TabsComponent that utilizes the TabsProps interface for its props."
+        },
+        {
+          "line": 5,
+          "comment": "Destructure the 'tabs' and 'styles' properties from the component's props."
+        },
+        {
+          "line": 6,
+          "comment": "Invoke the useTabsState custom hook with 'tabs' to manage state related to tab activities like the active tab and tab state management."
+        },
+        {
+          "line": 7,
+          "comment": "Render the TabsView component and pass down the necessary props such as 'tabs', 'styles', and state management functions and values."
+        },
+        {
+          "line": 10,
+          "comment": "React.memo is used to optimize performance by memorizing the output of the TabsComponent and only re-rendering it when props change, reducing the number of unnecessary renders."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU eCPOuS"
+  onClick={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <div
+    className="sc-bdfCDU edAivK"
+  />
+</div>
+`;

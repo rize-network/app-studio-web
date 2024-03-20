@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU ePQxSx"
+  onClick={[Function]}
+>
+  <div
+    className="sc-bdfCDU hRvVii"
+    isFullScreen={true}
+    onClick={[Function]}
+  >
+    <div
+      className="sc-bdfCDU gdfEff"
+      isClosePrevented={true}
+      onClick={[Function]}
+      variant="sharp"
+    >
+      <div
+        buttonSize="xl"
+        className="sc-bdfCDU MMgKI"
+      >
+        <button
+          className="sc-bdfCDU dXOPYQ"
+          disabled={false}
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          role="button"
+          setIsHovered={[Function]}
+        >
+          <div
+            className="sc-bdfCDU dpBfNq"
+          >
+            <div
+              className="sc-bdfCDU cccTHv"
+            >
+              <svg
+                fill="#000000"
+                height="20px"
+                viewBox="0 0 1024 1024"
+                width="20px"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g
+                  id="SVGRepo_bgCarrier"
+                  strokeWidth="0"
+                />
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <g
+                  id="SVGRepo_iconCarrier"
+                >
+                  <path
+                    d="M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z"
+                    fill="theme.primary"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
+        </button>
+        Modal Container
+      </div>
+      <div
+        className="sc-bdfCDU csgvYH"
+      >
+        Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum. Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.
+      </div>
+      <div
+        className="sc-bdfCDU jmYYGs"
+      >
+        <button
+          className="sc-bdfCDU bjTbpr"
+          disabled={false}
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          role="button"
+          setIsHovered={[Function]}
+        >
+          <div
+            className="sc-bdfCDU dpBfNq"
+          >
+            Cancel
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

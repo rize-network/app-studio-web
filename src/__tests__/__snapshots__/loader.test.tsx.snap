@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader with an a size xl where width equals to 30px should match snapshot 1`] = `
+<div
+  className="sc-bdfCDU deAZJE"
+>
+  <svg
+    fill="none"
+    height="30px"
+    stroke="theme.loading"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    style={
+      Object {
+        "transform": "rotate(0deg)",
+      }
+    }
+    viewBox="0 0 24 24"
+    width="30px"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      id="SVGRepo_bgCarrier"
+      strokeWidth="0"
+    />
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <g
+      id="SVGRepo_iconCarrier"
+    >
+      <path
+        d="M21 12a9 9 0 11-6.219-8.56"
+      />
+    </g>
+  </svg>
+  <div
+    className="sc-bdfCDU cYBAia"
+  >
+    Delete
+  </div>
+</div>
+`;
+
+exports[`Loader with loader color equals to theme.primary should match snapshot 1`] = `
+<div
+  className="sc-bdfCDU deAZJE"
+>
+  <svg
+    fill="none"
+    height="22px"
+    stroke="theme.primary"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    style={
+      Object {
+        "transform": "rotate(0deg)",
+      }
+    }
+    viewBox="0 0 24 24"
+    width="22px"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      id="SVGRepo_bgCarrier"
+      strokeWidth="0"
+    />
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <g
+      id="SVGRepo_iconCarrier"
+    >
+      <path
+        d="M21 12a9 9 0 11-6.219-8.56"
+      />
+    </g>
+  </svg>
+  <div
+    className="sc-bdfCDU cYBAia"
+  >
+    Loader
+  </div>
+</div>
+`;
+
+exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
+<div
+  className="sc-bdfCDU deAZJE"
+>
+  <svg
+    fill="none"
+    height="22px"
+    stroke="theme.loading"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    style={
+      Object {
+        "transform": "rotate(0deg)",
+      }
+    }
+    viewBox="0 0 24 24"
+    width="22px"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      id="SVGRepo_bgCarrier"
+      strokeWidth="0"
+    />
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <g
+      id="SVGRepo_iconCarrier"
+    >
+      <path
+        d="M21 12a9 9 0 11-6.219-8.56"
+      />
+    </g>
+  </svg>
+  <div
+    className="sc-bdfCDU jjOcgx"
+  >
+    Loader
+  </div>
+</div>
+`;
+
+exports[`Loader with text position bottom should match snapshot 1`] = `
+<div
+  className="sc-bdfCDU gcSHdQ"
+>
+  <svg
+    fill="none"
+    height="22px"
+    stroke="theme.loading"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    style={
+      Object {
+        "transform": "rotate(0deg)",
+      }
+    }
+    viewBox="0 0 24 24"
+    width="22px"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      id="SVGRepo_bgCarrier"
+      strokeWidth="0"
+    />
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <g
+      id="SVGRepo_iconCarrier"
+    >
+      <path
+        d="M21 12a9 9 0 11-6.219-8.56"
+      />
+    </g>
+  </svg>
+  <div
+    className="sc-bdfCDU cYBAia"
+  >
+    Loader
+  </div>
+</div>
+`;

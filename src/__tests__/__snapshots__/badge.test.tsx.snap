@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU gXUExN"
+  role="badge"
+>
+  <div
+    className="sc-bdfCDU FxXNY"
+    role="badgeText"
+  >
+    default
+  </div>
+</div>
+`;

@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "platform": "gitlab",
+  "gitlab":true,
+  "repositories": [
+    {
+      "repository": "studiolabs/open.studio/web/front-demo",
+      "depTypes": [
+        "dependencies",
+        "devDependencies"
+      ],
+      "updateTypes": [
+        "minor",
+        "patch",
+        "pin"
+      ]
+    }
+  ]
+}

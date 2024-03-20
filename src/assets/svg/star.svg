@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Toggle/star</title>
+    <defs>
+        <polygon id="path-1" points="12 17.27 18.18 21 16.54 13.97 22 9.23999999 14.81 8.62999999 12 1.99999996 9.18999999 8.62999999 1.99999996 9.23999999 7.45999998 13.97 5.81999997 21"></polygon>
+    </defs>
+    <g id="Icons/Toggle/star" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Base" points="-4.99999828e-08 -4.9999926e-08 24.0000001 -4.9999926e-08 24.0000001 24.0000001 -4.99999828e-08 24.0000001"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Icon"></g>
+        <rect id="↳-🎨-Color" fill="#9E9E9E" mask="url(#mask-2)" x="0" y="0" width="24" height="24"></rect>
+    </g>
+</svg>

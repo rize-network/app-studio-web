@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AspectRatio to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU cYBAia"
+>
+  <button
+    className="sc-bdfCDU bjTbpr"
+    disabled={false}
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    role="button"
+    setIsHovered={[Function]}
+  >
+    <div
+      className="sc-bdfCDU dpBfNq"
+    >
+      Show Toast
+    </div>
+  </button>
+</div>
+`;

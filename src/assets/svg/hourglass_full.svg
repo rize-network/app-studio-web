@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Action/hourglass_full</title>
+    <defs>
+        <polygon id="path-1" points="5.99999998 1.99999996 5.99999998 7.99999998 6.00999998 7.99999998 5.99999998 8.00999998 9.99999999 12 5.99999998 16 6.00999998 16.01 5.99999998 16.01 5.99999998 22 18 22 18 16.01 17.99 16.01 18 16 14 12 18 8.00999998 17.99 7.99999998 18 7.99999998 18 1.99999996"></polygon>
+    </defs>
+    <g id="Icons/Action/hourglass_full" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Base" points="-5.00000112e-08 -4.9999926e-08 24 -4.9999926e-08 24 24.0000001 -5.00000112e-08 24.0000001"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Icon"></g>
+        <rect id="↳-🎨-Color" fill="#9E9E9E" mask="url(#mask-2)" x="0" y="0" width="24" height="24"></rect>
+    </g>
+</svg>

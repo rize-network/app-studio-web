@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch to match snapshot 1`] = `
+<label
+  className="sc-bdfCDU gNCvrc"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  setOn={[Function]}
+>
+  <input
+    checked={false}
+    className="sc-bdfCDU Ttntf"
+    disabled={false}
+    name="name"
+    onChange={[Function]}
+    readOnly={true}
+    setOn={[Function]}
+    type="checkbox"
+  />
+  <div
+    className="sc-bdfCDU crvySG"
+  >
+    <div
+      className="sc-bdfCDU bUUORK"
+    />
+  </div>
+</label>
+`;

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/Av/volume_off</title>
+    <defs>
+        <path d="M16.5,12 C16.5,10.23 15.48,8.70999999 14,7.96999998 L14,10.18 L16.45,12.63 C16.48,12.43 16.5,12.22 16.5,12 L16.5,12 Z M19,12 C19,12.94 18.8,13.82 18.46,14.64 L19.97,16.15 C20.63,14.91 21,13.5 21,12 C21,7.71999998 18.01,4.13999997 14,3.22999996 L14,5.28999997 C16.89,6.14999997 19,8.82999999 19,12 L19,12 Z M4.26999997,2.99999996 L2.99999996,4.26999997 L7.72999998,8.99999996 L2.99999996,8.99999996 L2.99999996,15 L6.99999996,15 L12,20 L12,13.27 L16.25,17.52 C15.58,18.04 14.83,18.45 14,18.7 L14,20.76 C15.38,20.45 16.63,19.81 17.69,18.95 L19.73,21 L21,19.73 L12,10.73 L4.26999997,2.99999996 L4.26999997,2.99999996 Z M12,3.99999997 L9.90999999,6.08999998 L12,8.17999998 L12,3.99999997 L12,3.99999997 Z" id="path-1"></path>
+    </defs>
+    <g id="Icons/Av/volume_off" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Base" fill-rule="nonzero" points="-5.00000112e-08 -5.00003807e-08 24 -5.00003807e-08 24 24 -5.00000112e-08 24"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Icon" fill-rule="nonzero"></g>
+        <rect id="↳-🎨-Color" fill="#9E9E9E" mask="url(#mask-2)" x="0" y="0" width="24" height="24"></rect>
+    </g>
+</svg>

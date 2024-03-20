@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select component Select to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU dWkXMr"
+  onClick={[Function]}
+  role="SelectBox"
+>
+  <div
+    className="sc-bdfCDU HFiNZ"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="sc-bdfCDU gFyoGC"
+    >
+      <select
+        className="sc-bdfCDU bYrJww"
+        disabled={false}
+        multiple={false}
+        name="name"
+        onChange={[Function]}
+        onFocus={[Function]}
+        readOnly={true}
+        value="Item1"
+      >
+        <option
+          value="Item1"
+        >
+          Item1
+        </option>
+        <option
+          value="Item2"
+        >
+          Item2
+        </option>
+        <option
+          value="Item3"
+        >
+          Item3
+        </option>
+      </select>
+      <div
+        className="sc-bdfCDU ewhBIh"
+        heigth="100%"
+        role="text"
+      >
+        Item1
+      </div>
+    </div>
+    <div
+      className="sc-bdfCDU dBLlLe"
+    />
+  </div>
+  <div
+    className="sc-bdfCDU kpEGz"
+    role="text"
+  />
+</div>
+`;

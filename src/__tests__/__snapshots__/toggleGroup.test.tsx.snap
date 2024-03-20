@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToggleGroup Component ToggleGroup to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU gxaCay"
+  role="ToggleGroup"
+>
+  <div
+    className="sc-bdfCDU dmlQCl"
+    isIntern={true}
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    role="toggle-B"
+  >
+    <div
+      className="sc-bdfCDU FxXNY"
+      role="text"
+    >
+      B
+    </div>
+  </div>
+  <div
+    className="sc-bdfCDU eTueVD"
+    isIntern={true}
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    role="toggle-C"
+  >
+    <div
+      className="sc-bdfCDU FxXNY"
+      role="text"
+    >
+      C
+    </div>
+  </div>
+  <div
+    className="sc-bdfCDU icIFMv"
+    isIntern={true}
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    role="toggle-D"
+  >
+    <div
+      className="sc-bdfCDU FxXNY"
+      role="text"
+    >
+      D
+    </div>
+  </div>
+</div>
+`;
