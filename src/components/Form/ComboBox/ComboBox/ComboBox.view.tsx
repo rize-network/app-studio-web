@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { View, Horizontal } from '../../../Layout'; // Assuming View and Text are from the same location
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../..';
-import TextField from 'src/components/Form/TextField/TextField/TextField.view';
-import TickSvg from 'src/components/Svg/Tick';
-import SearchLoopSvg from 'src/components/Svg/Search';
+import TextField from '../../../Form/TextField/TextField/TextField.view';
+import TickSvg from '../../../Svg/Tick';
+import SearchLoopSvg from '../../../Svg/Search';
 
 const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   placeholder,
