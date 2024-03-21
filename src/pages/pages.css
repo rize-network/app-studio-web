@@ -1,0 +1,27 @@
+table {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
+  border-radius: 1em;
+  /* overflow: hidden */
+}
+
+table td,
+table th {
+  border: 0.5px solid #ddd;
+  padding: 14px;
+  font-weight: 600;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table th {
+  padding: 8px;
+  width: 33.33%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: black;
+  color: white;
+}
