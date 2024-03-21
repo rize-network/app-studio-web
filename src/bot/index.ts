@@ -5,6 +5,8 @@ import { DocuCode } from './DocuCode';
 async function main() {
   // Get componentName from command line arguments
   const componentName = process.argv[2]; // Assuming it's the first argument passed
+  const componentArgFolder = process.argv[3] ?? '';
+
   if (!componentName) {
     console.error('Please provide a component name as an argument.');
     process.exit(1);
@@ -12,7 +14,7 @@ async function main() {
 
   const descriptionPath = 'docs/description.md';
   const basePath = 'src/components';
-  const componentFolder = `${basePath}/${componentName}`;
+  const componentFolder = componentArgFolder ?? `${basePath}/${componentName}`;
   const propsPath = `src/data/props/${componentName}.props.json`;
 
   // Check if the component directory exists

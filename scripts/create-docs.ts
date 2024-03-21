@@ -34,19 +34,20 @@ async function createDocumentationForComponent(
     await fs.unlinkSync(mdFilePath); // Direct deletion as we already checked existence
   }
 
-  const command = `npm run bot-doc -- ${componentName}`;
-  try {
-    const { stdout, stderr } = await execAsync(command);
-    if (stderr) {
-      console.error(`Error in command output for ${componentName}:`, stderr);
-      return;
-    }
-    console.log(`Documentation generated for ${componentName}:\n${stdout}`);
-  } catch (error) {
-    console.error(
-      `Error executing command for ${componentName}: Commit changes and try again`
-    );
-  }
+  const command = `npm run bot-doc -- ${componentName} ${componentPath}`;
+
+  const childProcess = exec(command);
+  childProcess.stdout?.pipe(process.stdout); // Optional chaining to safely access stdout
+  childProcess.stderr?.pipe(process.stderr); // Optional chaining to safely access stderr
+  await new Promise<void>((resolve, reject) => {
+    childProcess.on('exit', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`Child process exited with code ${code}`));
+      }
+    });
+  });
 }
 
 async function getChangedComponentsSinceLastCommit(): Promise<string[]> {
@@ -59,8 +60,7 @@ async function getChangedComponentsSinceLastCommit(): Promise<string[]> {
         const parts = file.split(path.sep);
         const componentsIndex = parts.indexOf('components');
         if (componentsIndex !== -1 && parts.length > componentsIndex + 1) {
-          const componentName = parts[componentsIndex + 1];
-          const componentPath = path.join(componentsDir, componentName);
+          const componentPath = parts.slice(0, -2).join(path.sep);
           componentSet.add(componentPath);
         }
       }
@@ -75,7 +75,7 @@ async function getChangedComponentsSinceLastCommit(): Promise<string[]> {
 
 async function main() {
   const changedComponents = await getChangedComponentsSinceLastCommit();
-  console.log({ changedComponents });
+  console.log(changedComponents);
   if (changedComponents.length > 0) {
     console.log(
       'Generating documentation for new or changed components since last commit:'

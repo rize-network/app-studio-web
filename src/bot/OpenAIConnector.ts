@@ -167,7 +167,6 @@ export class OpenAIConnector {
     message: MessageCreateParams
   ): Promise<ThreadMessage> {
     try {
-      console.log({ message });
       const response = await this.openai.beta.threads.messages.create(
         threadId,
         message

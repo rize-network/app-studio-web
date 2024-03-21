@@ -1,0 +1,326 @@
+{
+  "Checkbox.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 7,
+          "comment": "The CheckboxProps interface defines the types and structure for the props accepted by the Checkbox component."
+        },
+        {
+          "line": 8,
+          "comment": "Optional identifier for the checkbox element, useful for accessibility."
+        },
+        {
+          "line": 9,
+          "comment": "An optional ReactNode (element) to set an icon for the checkbox."
+        },
+        {
+          "line": 10,
+          "comment": "Optional boolean to indicate an error state for the checkbox."
+        },
+        {
+          "line": 11,
+          "comment": "Optional name attribute for the checkbox, important for form submission."
+        },
+        {
+          "line": 12,
+          "comment": "The text label associated with the checkbox component."
+        },
+        {
+          "line": 13,
+          "comment": "Optional color scheme string that might allow customization of the checkbox's appearance."
+        },
+        {
+          "line": 14,
+          "comment": "Boolean to control the checked state of the checkbox."
+        },
+        {
+          "line": 15,
+          "comment": "Boolean to set the default selected state of the checkbox when the component first mounts."
+        },
+        {
+          "line": 16,
+          "comment": "Flag to set the checkbox as readonly, preventing user modifications."
+        },
+        {
+          "line": 17,
+          "comment": "Boolean that disables the checkbox when true, preventing user interaction."
+        },
+        {
+          "line": 18,
+          "comment": "Flag that indicates whether the checkbox appears in an indeterminate state, often used in tree structures."
+        },
+        {
+          "line": 19,
+          "comment": "Controls the label position relative to the checkbox, can be 'left' or 'right'."
+        },
+        {
+          "line": 20,
+          "comment": "A callback function that fires when the checkbox state changes."
+        },
+        {
+          "line": 21,
+          "comment": "A callback function that fires with the new value when the checkbox state changes."
+        },
+        {
+          "line": 22,
+          "comment": "Optional styling properties specific to the Checkbox component."
+        },
+        {
+          "line": 23,
+          "comment": "Optional size property to define the size of the checkbox, based on a predefined set of sizes."
+        },
+        {
+          "line": 24,
+          "comment": "An optional shadow or elevation effect that can be applied to the Checkbox component, accepting either a Shadow, Elevation, or generic CSSProperties object."
+        },
+        {
+          "line": 26,
+          "comment": "An index signature allowing for additional properties not explicitly defined in the interface."
+        },
+        {
+          "line": 27,
+          "comment": "The CheckboxViewProps interface builds on CheckboxProps with additional properties related to the Checkbox's view state."
+        },
+        {
+          "line": 28,
+          "comment": "Optional boolean indicating if the checkbox is being hovered by user input."
+        },
+        {
+          "line": 29,
+          "comment": "A function to set the hovered state of the checkbox, typically used to control visual styling on hover."
+        },
+        {
+          "line": 30,
+          "comment": "This redefines 'isChecked' from CheckboxProps to facilitate state management internal to the Checkbox component."
+        },
+        {
+          "line": 31,
+          "comment": "A function to set the checked state of the checkbox, often used in controlled components."
+        }
+      ]
+    }
+  ],
+  "Checkbox.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines a custom hook `useCheckboxState` which takes an object complying with the CheckboxProps interface. It manages the state for checkbox selection and hovering."
+        },
+        {
+          "line": 4,
+          "comment": "The `defaultIsSelected` parameter specifies the initial selected state of the checkbox, with a default value set to false."
+        },
+        {
+          "line": 5,
+          "comment": "Declares a state variable `isHovered` to track the hover state of the checkbox element. It's initialized to false."
+        },
+        {
+          "line": 6,
+          "comment": "Declares a state variable `isSelected` to manage the checkbox's selected state. Its initial value is determined by the `defaultIsSelected` parameter."
+        },
+        {
+          "line": 10,
+          "comment": "Returns an object containing the state variables and their corresponding setter functions, which allows for controlling the checkbox's hover and selected states from other components."
+        }
+      ]
+    }
+  ],
+  "Checkbox.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Sizes is an object that maps Size types to specific CSSProperties, defining the height and width for different size categories ranging from 'xs' to '6xl'."
+        },
+        {
+          "line": 4,
+          "comment": "'xs' size setting with height and width set to 8 pixels."
+        },
+        {
+          "line": 5,
+          "comment": "'sm' size setting with height and width set to 12 pixels."
+        },
+        {
+          "line": 6,
+          "comment": "'md' size setting with height and width set to 18 pixels."
+        },
+        {
+          "line": 7,
+          "comment": "'lg' size setting with height and width set to 24 pixels."
+        },
+        {
+          "line": 8,
+          "comment": "'xl' size setting with height and width set to 30 pixels."
+        },
+        {
+          "line": 9,
+          "comment": "'2xl' size setting with height and width set to 36 pixels."
+        },
+        {
+          "line": 10,
+          "comment": "'3xl' size setting with height and width set to 42 pixels."
+        },
+        {
+          "line": 11,
+          "comment": "'4xl' size setting with height and width set to 48 pixels."
+        },
+        {
+          "line": 12,
+          "comment": "'5xl' size setting with height and width set to 54 pixels."
+        },
+        {
+          "line": 13,
+          "comment": "'6xl' size setting with height and width set to 60 pixels."
+        },
+        {
+          "line": 14,
+          "comment": "Declaration is complete for CSSProperties sizes based on the predefined Size type."
+        },
+        {
+          "line": 15,
+          "comment": "IconSizes is an object mapping Size types to numeric values representing the icon size for different size categories ranging from 'xs' to '6xl'."
+        },
+        {
+          "line": 16,
+          "comment": "Icon size for 'xs' is set to 6."
+        },
+        {
+          "line": 17,
+          "comment": "Icon size for 'sm' is set to 12."
+        },
+        {
+          "line": 18,
+          "comment": "Icon size for 'md' is set to 18."
+        },
+        {
+          "line": 19,
+          "comment": "Icon size for 'lg' is set to 24."
+        },
+        {
+          "line": 20,
+          "comment": "Icon size for 'xl' is set to 30."
+        },
+        {
+          "line": 21,
+          "comment": "Icon size for '2xl' is set to 36."
+        },
+        {
+          "line": 22,
+          "comment": "Icon size for '3xl' is set to 42."
+        },
+        {
+          "line": 23,
+          "comment": "Icon size for '4xl' is set to 48."
+        },
+        {
+          "line": 24,
+          "comment": "Icon size for '5xl' is set to 54."
+        },
+        {
+          "line": 25,
+          "comment": "Icon size for '6xl' is set to 60."
+        },
+        {
+          "line": 26,
+          "comment": "Declaration is complete for numeric icon sizes based on the predefined Size type."
+        }
+      ]
+    }
+  ],
+  "Checkbox.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a TypeScript type 'Size' which allows specific string values representing size options from 'xs' to '6xl'."
+        },
+        {
+          "line": 13,
+          "comment": "Defines a TypeScript type 'CheckboxStyles' for possible custom style objects for checkbox component, with optional 'checkbox' and 'label' properties that are of type 'CSSProperties'."
+        },
+        {
+          "line": 17,
+          "comment": "Defines a TypeScript type 'Variant' that represents the state of a checkbox, where it can only be 'selected', 'unselected', or 'indeterminate'."
+        }
+      ]
+    }
+  ],
+  "Checkbox.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 14,
+          "comment": "Main functional component for the Checkbox view, a stateless presentation component receiving properties to control its behavior and appearance."
+        },
+        {
+          "line": 26,
+          "comment": "handleHover function declaration: Changes the hover state by toggling the isHovered boolean value."
+        },
+        {
+          "line": 27,
+          "comment": "handleChange function declaration: If the checkbox is neither read-only nor disabled, it toggles the selected state and calls onChange or onValueChange callbacks if they are provided."
+        },
+        {
+          "line": 35,
+          "comment": "checkboxStyle object holding styling properties for the container and checkbox elements, conditionally applying styles based on component state."
+        },
+        {
+          "line": 51,
+          "comment": "Renders the Checkbox component's UI, using the Label component to wrap the actual checkbox and accompanying label text."
+        },
+        {
+          "line": 53,
+          "comment": "Handles hover and change events to modify the checkbox's visual state and internal state related to user interactions."
+        },
+        {
+          "line": 55,
+          "comment": "Conditionally renders the label to the left of the checkbox if labelPosition is set to 'left'."
+        },
+        {
+          "line": 57,
+          "comment": "Center component is used to ensure the checkbox icon is centrally aligned within the view."
+        },
+        {
+          "line": 58,
+          "comment": "Renders either the IndeterminateSvg icon or a checked state with the CheckSvg icon or custom icon provided through the icon prop."
+        },
+        {
+          "line": 66,
+          "comment": "Conditionally renders the label to the right of the checkbox if labelPosition is set to 'right'."
+        },
+        {
+          "line": 68,
+          "comment": "Closing tag for Label component, ending the CheckboxView component return block."
+        },
+        {
+          "line": 70,
+          "comment": "Export statement to make CheckboxView component available for import in other parts of the application."
+        }
+      ]
+    }
+  ],
+  "Checkbox.tsx": [
+    {
+      "comments": [
+        {
+          "line": 6,
+          "comment": "Definition of CheckboxComponent functional component in React. It utilizes React.FC generic type to define functional components with TypeScript support, specifying the CheckboxProps interface for its props."
+        },
+        {
+          "line": 7,
+          "comment": "Invokes the useCheckboxState custom hook to manage the state logic of the checkbox. It passes all of the incoming props to the hook to receive the stateful logic and handlers back."
+        },
+        {
+          "line": 8,
+          "comment": "Renders the CheckboxView component, spreading the state and handlers from checkboxStates together with any props passed to CheckboxComponent for a complete set of properties."
+        },
+        {
+          "line": 9,
+          "comment": "Export the CheckboxComponent as Checkbox which can be imported and used in other parts of the application."
+        }
+      ]
+    }
+  ]
+}

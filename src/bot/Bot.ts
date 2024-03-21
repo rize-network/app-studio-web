@@ -148,8 +148,6 @@ export class Bot {
 
       const propsJson = extractJsonCode(response.text.value);
 
-      console.log({ response }, propsJson);
-
       // Check if propsJson is in JSON format
       if (!this.isObject(propsJson)) {
         console.error('Error: Props format is incorrect.');
