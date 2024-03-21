@@ -1,0 +1,330 @@
+{
+  "DatePicker.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "DatePickerProps interface defines the type signature for the props that can be passed to the DatePicker component. It includes optional properties such as icon elements, helper texts, and event callbacks, along with styles and variations to control the appearance and behavior of the date picker."
+        },
+        {
+          "line": 5,
+          "comment": "id is an optional string to uniquely identify the DatePicker component instance. Useful for handling form submissions and associating label elements."
+        },
+        {
+          "line": 6,
+          "comment": "icon prop accepts a React node to be used as an icon within the DatePicker, offering a visual cue or additional functionality like a calendar icon."
+        },
+        {
+          "line": 7,
+          "comment": "error prop denotes whether the DatePicker is in an error state, typically used to indicate validation errors."
+        },
+        {
+          "line": 8,
+          "comment": "helperText provides additional guidance or context to the user, often used for hints or error messages."
+        },
+        {
+          "line": 9,
+          "comment": "name property is a string that represents the name of the DatePicker component, often used when the value is submitted with a form."
+        },
+        {
+          "line": 10,
+          "comment": "colorScheme allows customization of the color theme for the DatePicker, influencing its appearance."
+        },
+        {
+          "line": 11,
+          "comment": "isReadOnly when true, prevents the user from entering or changing the date, but still allows selection from a dropdown or calendar view."
+        },
+        {
+          "line": 12,
+          "comment": "isDisabled when set to true, disables the DatePicker component, preventing user interaction entirely."
+        },
+        {
+          "line": 13,
+          "comment": "label property provides an accessible name for the DatePicker, often displayed above or near the input field."
+        },
+        {
+          "line": 14,
+          "comment": "onChange is a callback function that is called when the date value changes, receiving the new value as an argument."
+        },
+        {
+          "line": 15,
+          "comment": "onChangeText is a callback that provides the text value when the input changes, useful for custom parsing or validation."
+        },
+        {
+          "line": 16,
+          "comment": "styles prop can be used to apply custom styling to the DatePicker component, using a predefined structure of style properties."
+        },
+        {
+          "line": 17,
+          "comment": "shape defines the overall shape of the DatePicker, controlled via a predefined set of shape options such as rounded, square, etc."
+        },
+        {
+          "line": 18,
+          "comment": "variant property sets the DatePicker's visual representation, such as outlined or filled, based on a set of predefined variants."
+        },
+        {
+          "line": 19,
+          "comment": "size prop determines the scale of the DatePicker component, such as small, medium, or large, to fit various UI contexts."
+        },
+        {
+          "line": 20,
+          "comment": "shadow property allows for the application of shadow effects, utilizing either built-in shadows, elevations, or custom CSS properties."
+        },
+        {
+          "line": 21,
+          "comment": "The indexer property [x: string]: any; denotes that DatePickerProps can accept additional properties with string key names, providing flexibility to extend with other properties as needed."
+        },
+        {
+          "line": 24,
+          "comment": "DatePickerViewProps extends the basic DatePickerProps to include properties specific to managing the state of the date value and the component's UI state such as hovering and focus."
+        },
+        {
+          "line": 25,
+          "comment": "date is the current selected date string value, which is controlled by the component managing the DatePicker."
+        },
+        {
+          "line": 26,
+          "comment": "setDate is a callback function used to update the date state when a new date is selected by the user."
+        },
+        {
+          "line": 27,
+          "comment": "isHovered is a boolean representing whether the DatePicker is currently hovered by the cursor, which can trigger visual changes."
+        },
+        {
+          "line": 28,
+          "comment": "setIsHovered is the callback function to update the isHovered state when the cursor hovers or stops hovering over the component."
+        },
+        {
+          "line": 29,
+          "comment": "isFocused is a boolean indicating whether the DatePicker has input focus, which may influence styles such as the outline color."
+        },
+        {
+          "line": 30,
+          "comment": "setIsFocused is the callback function to update the isFocused state, typically called when the focus on the DatePicker changes."
+        }
+      ]
+    }
+  ],
+  "DatePicker.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines a custom hook named 'useDatePickerState' that will manage the state for a date picker component."
+        },
+        {
+          "line": 4,
+          "comment": "Initializes 'isHovered' state to track if the date picker is being hovered over with a default value of false."
+        },
+        {
+          "line": 4,
+          "comment": "Provides 'setIsHovered' function to allow updating the 'isHovered' state."
+        },
+        {
+          "line": 5,
+          "comment": "Initializes 'isFocused' state to track if the date picker is focused with a default value of false."
+        },
+        {
+          "line": 5,
+          "comment": "Provides 'setIsFocused' function to allow updating the 'isFocused' state."
+        },
+        {
+          "line": 6,
+          "comment": "Initializes 'date' state with the current date formatted to 'yyyy-MM-dd'."
+        },
+        {
+          "line": 6,
+          "comment": "Provides 'setDate' function to allow updating the 'date' state."
+        },
+        {
+          "line": 8,
+          "comment": "Returns an object from the hook containing the state values and their respective update functions to be used in components that require date picking functionality."
+        }
+      ]
+    }
+  ],
+  "DatePicker.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Imports the Size type from DatePicker.type for use in defining IconSizes and LabelSizes."
+        },
+        {
+          "line": 2,
+          "comment": "Declaration of IconSizes as a Record, which is an object type that maps keys of type Size to string values representing pixel sizes for icons."
+        },
+        {
+          "line": 2,
+          "comment": "The Size type is used as the key, ensuring that only those specific sizes can be used as keys in the IconSizes Record."
+        },
+        {
+          "line": 3,
+          "comment": "Defines the 'xs' (extra small) size for icons as 8 pixels."
+        },
+        {
+          "line": 4,
+          "comment": "Defines the 'sm' (small) size for icons as 10 pixels."
+        },
+        {
+          "line": 5,
+          "comment": "Defines the 'md' (medium) size for icons as 12 pixels."
+        },
+        {
+          "line": 6,
+          "comment": "Defines the 'lg' (large) size for icons as 14 pixels."
+        },
+        {
+          "line": 7,
+          "comment": "Defines the 'xl' (extra large) size for icons as 16 pixels."
+        },
+        {
+          "line": 8,
+          "comment": "Export statement for IconSizes making it available for import in other modules."
+        },
+        {
+          "line": 9,
+          "comment": "Declaration of LabelSizes as a Record mapping Size keys to number values representing font sizes for labels."
+        },
+        {
+          "line": 9,
+          "comment": "Defines numeric sizes for labels corresponding to each Size key, ensuring consistency with IconSizes but with a different type."
+        },
+        {
+          "line": 10,
+          "comment": "The 'xs' size for labels is set to 8, consistent in value with the IconSizes but represented as a number."
+        },
+        {
+          "line": 11,
+          "comment": "The 'sm' size for labels is set to 10, aligning the naming and sizing convention between icons and labels."
+        },
+        {
+          "line": 12,
+          "comment": "The 'md' size for labels is set to 12, using the same pattern as other sizes."
+        },
+        {
+          "line": 13,
+          "comment": "The 'lg' size for labels is set to 14, keeping the size options standardized across different UI elements."
+        },
+        {
+          "line": 14,
+          "comment": "The 'xl' size for labels is set to 16, completing the set of predefined size options."
+        },
+        {
+          "line": 15,
+          "comment": "Export statement for LabelSizes making it available for import in other modules and enforcing type consistency for label sizes."
+        }
+      ]
+    }
+  ],
+  "DatePicker.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a type alias 'Size' representing potential size categories."
+        },
+        {
+          "line": 2,
+          "comment": "Declares 'DatePickerStyles' type with optional CSSProperties for various DatePicker components."
+        },
+        {
+          "line": 7,
+          "comment": "Defines a type alias 'Position' for potential placement positions of an element or a component."
+        },
+        {
+          "line": 8,
+          "comment": "Establishes a 'Shape' type to denote the various border shapes a component can take on."
+        },
+        {
+          "line": 9,
+          "comment": "Introduces a 'Variant' type to specify different style variants of a UI component."
+        }
+      ]
+    }
+  ],
+  "DatePicker.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines a custom DatePicker content component using the generic Input component from 'app-studio', specifically tailored for date input types."
+        },
+        {
+          "line": 7,
+          "comment": "DatePickerView is a functional component defined using TypeScript with props destructured from DatePickerViewProps."
+        },
+        {
+          "line": 17,
+          "comment": "Determines whether the label should be displayed alongside the input based on focus state and label existence."
+        },
+        {
+          "line": 18,
+          "comment": "Function to toggle hover state which is triggered by mouse enter and leave events on the field."
+        },
+        {
+          "line": 19,
+          "comment": "Function to set the focus state to true."
+        },
+        {
+          "line": 20,
+          "comment": "Handles the change event for the date picker, accommodating both standard events and custom string inputs."
+        },
+        {
+          "line": 34,
+          "comment": "Define style properties for the field, including padding, width, border styling, and dynamic properties based on component states like disabled or focused."
+        },
+        {
+          "line": 35,
+          "comment": "Sets the font size based on `size` prop using predefined font sizes from the Typography module."
+        },
+        {
+          "line": 36,
+          "comment": "Adjusts the text color based on the disabled state, defaulting to gray shades."
+        },
+        {
+          "line": 37,
+          "comment": "Sets the cursor style depending on whether the field is disabled or read-only."
+        },
+        {
+          "line": 44,
+          "comment": "Renders the FieldContainer component, providing helper text and error state, passing along extra styles."
+        },
+        {
+          "line": 45,
+          "comment": "Renders the FieldContent component which includes the field and its associated label and error messaging, passing necessary props and states."
+        },
+        {
+          "line": 56,
+          "comment": "Conditionally renders the FieldLabel component if a label is provided and the input is focused."
+        },
+        {
+          "line": 61,
+          "comment": "Renders the custom DatePickerContent component with event handlers and dynamic styles applied, also passing any additional props received by the DatePickerView component."
+        }
+      ]
+    }
+  ],
+  "DatePicker.tsx": [
+    {
+      "comments": [
+        {
+          "line": 6,
+          "comment": "Define a functional component `DatePickerComponent` that adheres to the type defined by `DatePickerProps`."
+        },
+        {
+          "line": 7,
+          "comment": "Utilize `useDatePickerState` custom hook to get the state needed by the DatePicker."
+        },
+        {
+          "line": 8,
+          "comment": "Render `DatePickerView` component, spreading in the states and props to pass down necessary data and handlers."
+        },
+        {
+          "line": 9,
+          "comment": "Explicitly export the `DatePickerComponent` as `DatePicker`, allowing it to be imported with this given alias."
+        }
+      ]
+    }
+  ]
+}

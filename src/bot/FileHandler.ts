@@ -79,13 +79,17 @@ export class FileHandler {
   }
 
   async deleteFile(fileId: string) {
-    try {
-      const response = await this.openai.files.del(fileId);
-      return response.deleted;
-    } catch (error) {
-      console.error('Error deleting file:', error);
-      throw error;
+    const response = await this.openai.files.del(fileId);
+    return response.deleted;
+  }
+
+  async deleteFiles(fileIds: string[]) {
+    const results = [];
+    for (const fileId of fileIds) {
+      const deleted = await this.deleteFile(fileId);
+      results.push({ fileId, deleted, error: null });
     }
+    return results;
   }
 
   async listFiles() {

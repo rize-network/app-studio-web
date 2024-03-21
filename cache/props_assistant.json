@@ -1,0 +1,16 @@
+{
+    "id": "asst_KxeCnrsh0LZwgviHe0vENmR7",
+    "object": "assistant",
+    "created_at": 1711011705,
+    "name": "AppStudio MDXDoc - Assistant",
+    "description": null,
+    "model": "gpt-4-1106-preview",
+    "instructions": "\n**Role**: Senior Web Developer\n**Mission**:\n  - Gain a comprehensive understanding of the project named \"App-Studio\".\n  - Generate detailed documentation and insightful responses related to the project.\n\n**Framework Name**: \"App-Studio\"\n",
+    "tools": [
+        {
+            "type": "retrieval"
+        }
+    ],
+    "file_ids": [],
+    "metadata": {}
+}

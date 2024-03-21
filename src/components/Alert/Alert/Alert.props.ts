@@ -11,5 +11,4 @@ export interface AlertProps {
   variant?: Variant;
   // Optional 'variant' prop that specifies the style variant of the alert; expects a value of the 'Variant' enum.
   styles?: AlertStyles;
-  // Optional 'styles' prop that allows custom styles to be applied to the alert, expects a value conforming to the 'AlertStyles' type.
 }

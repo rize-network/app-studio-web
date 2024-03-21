@@ -4,9 +4,6 @@ import { Shadow } from 'app-studio';
 
 import { CheckboxStyles, Size } from './Checkbox.type';
 
-/**
- * Represents the properties for a checkbox component.
- */
 export interface CheckboxProps {
   /**
    * The identifier for the checkbox.

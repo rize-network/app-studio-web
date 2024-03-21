@@ -1,0 +1,177 @@
+{
+    "componentDescription": "A customizable checkbox form element with optional label and various styles.",
+    "id": {
+        "type": [
+            "string"
+        ],
+        "typeValues": [],
+        "description": "Optional identifier for the checkbox element, useful for accessibility.",
+        "defaultValue": []
+    },
+    "icon": {
+        "type": [
+            "React.ReactNode"
+        ],
+        "typeValues": [],
+        "description": "An optional ReactNode (element) to set an icon for the checkbox.",
+        "defaultValue": []
+    },
+    "error": {
+        "type": [
+            "boolean"
+        ],
+        "typeValues": [],
+        "description": "Optional boolean to indicate an error state for the checkbox.",
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "name": {
+        "type": [
+            "string"
+        ],
+        "typeValues": [],
+        "description": "Optional name attribute for the checkbox, important for form submission.",
+        "defaultValue": []
+    },
+    "label": {
+        "type": [
+            "string"
+        ],
+        "typeValues": [],
+        "description": "The text label associated with the checkbox component.",
+        "defaultValue": []
+    },
+    "colorScheme": {
+        "type": [
+            "string"
+        ],
+        "typeValues": [],
+        "description": "Optional color scheme string that might allow customization of the checkbox's appearance.",
+        "defaultValue": [
+            "theme.primary"
+        ]
+    },
+    "isChecked": {
+        "type": [
+            "boolean"
+        ],
+        "typeValues": [],
+        "description": "Boolean to control the checked state of the checkbox.",
+        "defaultValue": []
+    },
+    "defaultIsSelected": {
+        "type": [
+            "boolean"
+        ],
+        "typeValues": [],
+        "description": "Boolean to set the default selected state of the checkbox when the component first mounts.",
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "isReadOnly": {
+        "type": [
+            "boolean"
+        ],
+        "typeValues": [],
+        "description": "Flag to set the checkbox as readonly, preventing user modifications.",
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "isDisabled": {
+        "type": [
+            "boolean"
+        ],
+        "typeValues": [],
+        "description": "Boolean that disables the checkbox when true, preventing user interaction.",
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "isIndeterminate": {
+        "type": [
+            "boolean"
+        ],
+        "typeValues": [],
+        "description": "Flag that indicates whether the checkbox appears in an indeterminate state, often used in tree structures.",
+        "defaultValue": [
+            "false"
+        ]
+    },
+    "labelPosition": {
+        "type": [
+            "'left'",
+            "'right'"
+        ],
+        "typeValues": [],
+        "description": "Controls the label position relative to the checkbox, can be 'left' or 'right'.",
+        "defaultValue": [
+            "right"
+        ]
+    },
+    "onChange": {
+        "type": [
+            "Function"
+        ],
+        "typeValues": [],
+        "description": "A callback function that fires when the checkbox state changes.",
+        "defaultValue": []
+    },
+    "onValueChange": {
+        "type": [
+            "Function"
+        ],
+        "typeValues": [],
+        "description": "A callback function that fires with the new value when the checkbox state changes.",
+        "defaultValue": []
+    },
+    "styles": {
+        "type": [
+            "CheckboxStyles"
+        ],
+        "typeValues": {
+            "checkbox": "CSSProperties",
+            "label": "CSSProperties"
+        },
+        "description": "Optional styling properties specific to the Checkbox component.",
+        "defaultValue": {
+            "checkbox": {},
+            "label": {}
+        }
+    },
+    "size": {
+        "type": [
+            "Size"
+        ],
+        "typeValues": [
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "2xl",
+            "3xl",
+            "4xl",
+            "5xl",
+            "6xl"
+        ],
+        "description": "Optional size property to define the size of the checkbox, based on a predefined set of sizes.",
+        "defaultValue": [
+            "md"
+        ]
+    },
+    "shadow": {
+        "type": [
+            "Shadow",
+            "Elevation",
+            "CSSProperties"
+        ],
+        "typeValues": [],
+        "description": "An optional shadow or elevation effect that can be applied to the Checkbox component, accepting either a Shadow, Elevation, or generic CSSProperties object.",
+        "defaultValue": [
+            "{}"
+        ]
+    }
+}

@@ -38,7 +38,6 @@ export const BadgeShapes: Record<Shape, number | string> = {
   pillShaped: 24,
 };
 
-// Example of how you might adjust styles based on the 'position' prop
 export const PositionStyles: { [key: string]: React.CSSProperties } = {
   'top-right': { top: 0, right: 0, position: 'absolute' },
   'top-left': { top: 0, left: 0, position: 'absolute' },
