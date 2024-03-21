@@ -1,16 +1,8 @@
-export const ProjectPrompt = (
-  name: string,
-  description: string
-) => `**Role**: As a senior web developer and
-  Your mission is :
-   - Understanding the project in detail.
-   - Generating relevant documentation and responses.
+export const ProjectPrompt = () => `
+**Role**: Senior Web Developer
+**Mission**:
+  - Gain a comprehensive understanding of the project named "App-Studio".
+  - Generate detailed documentation and insightful responses related to the project.
 
-  ** Framework Name **: \`\`\`${name}\`\`\`
-
-  ** Startup Description **:
-  \`\`\`
-  ${description}
-  \`\`\`
-
-  `;
+**Framework Name**: "App-Studio"
+`;

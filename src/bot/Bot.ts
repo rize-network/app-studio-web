@@ -33,72 +33,25 @@ export class Bot {
   async init(
     name: string,
     fileIds: string[],
-    descriptionPath: string,
     cachePath: string
   ): Promise<Assistant> {
-    let description = '';
     const cachedResponse = this.cache.getJsonFromCache(
-      this.cacheKey + `/${cachePath}_assistant`
+      `${cachePath}_assistant`
     );
 
     if (cachedResponse) {
       return cachedResponse;
     }
-    if (descriptionPath) {
-      description = await this.fileHandler.readFile(descriptionPath);
-    }
 
     const Assistant = await this.openAIConnector.createAssistant(
-      ProjectPrompt(name, description),
+      ProjectPrompt(),
       name + ' - Assistant',
       fileIds
     );
 
-    this.cache.saveJsonToCache(
-      this.cacheKey + `/${cachePath}_assistant`,
-      Assistant
-    );
+    this.cache.saveJsonToCache(`/${cachePath}_assistant`, Assistant);
 
     return Assistant;
-  }
-
-  async addFiles(componentFolder: string) {
-    const cachedResponse = this.cache.getJsonFromCache(this.cacheKey + `file`);
-
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-    // Read the files in the directory
-    const files = await this.fileHandler.readFiles(componentFolder);
-
-    // Array to store file IDs
-    const fileIds = [];
-
-    for (const file of files) {
-      // Check if the file ends with the desired extensions
-      if (
-        file.endsWith('.props.ts') ||
-        file.endsWith('.type.d.ts') ||
-        file.endsWith('.view.tsx')
-      ) {
-        const filePath = `${componentFolder}/${file}`;
-
-        // Upload the file and store the returned file ID
-        const fileId = await this.fileHandler.uploadFile(
-          filePath,
-          'assistants'
-        );
-
-        // Store the file ID in the array
-        fileIds.push(fileId);
-      }
-    }
-    // Save the array of file IDs to cache
-    this.cache.saveJsonToCache(this.cacheKey + `/file`, {
-      fileIds,
-    });
-
-    return { fileIds };
   }
 
   async createFile(fileContent: string, fileName: string) {
@@ -122,39 +75,101 @@ export class Bot {
     return { fileId, fileName };
   }
 
-  async response(assistantId: string, propsPath: string): Promise<any> {
-    // const cachedResponse = this.cache.getFromCache(
-    //   this.cacheKey + '/props.json'
-    // );
+  async addFile(filePath: string) {
+    const cachedResponse = this.cache.getJsonFromCache('/doc_file');
 
-    // if (cachedResponse) {
-    //   return cachedResponse;
-    // }
+    if (cachedResponse) {
+      return cachedResponse;
+    }
 
-    // Créez un nouveau thread pour la conversation
-    const thread = await this.openAIConnector.createThread();
+    // Téléchargez le fichier de référence vers OpenAI
+    const fileId = await this.fileHandler.uploadFile(filePath, 'assistants');
 
-    // Définissez le prompt initial pour la compréhension globale du dossier
-    await this.openAIConnector.addMessageToThread(thread.id, {
-      role: 'user',
-      content: RespondPrompt(),
-    });
+    this.cache.saveJsonToCache('/doc_file', { fileId });
 
-    // Récupérez et traitez la réponse pour la compréhension globale
-    const response = await this.openAIConnector.runAssistant(
-      assistantId,
-      thread.id
+    return { fileId };
+  }
+
+  async response(
+    assistantId: string,
+    propsPath: string,
+    componentFolder: string,
+    componentName: string
+  ): Promise<any> {
+    const componentPath = `${componentFolder}/${componentName}`;
+
+    const cachedResponse = this.cache.getJsonFromCache(
+      this.cacheKey + '/props'
     );
 
-    const propsJson = extractJsonCode(response.text.value);
+    if (!cachedResponse) {
+      const files = await this.fileHandler.readFiles(componentPath);
 
-    // this.cache.saveJsonToCache(this.cacheKey + '/props', propsJson);
+      let propsContent = '';
+      let viewContent = '';
+      let typeContent = '';
 
-    await this.fileHandler.writeFile(
-      path.dirname(propsPath),
-      path.basename(propsPath),
-      propsJson
-    );
+      let propsFound = false;
+      let viewFound = false;
+
+      for (const file of files) {
+        const filePath = `${componentPath}/${file}`;
+
+        // Check the file type and read content accordingly
+        if (file.endsWith('.props.ts')) {
+          propsContent = await this.fileHandler.readFile(filePath);
+          propsFound = true;
+        } else if (file.endsWith('.view.tsx')) {
+          viewContent = await this.fileHandler.readFile(filePath);
+          viewFound = true;
+        } else if (file.endsWith('.type.d.ts')) {
+          typeContent = await this.fileHandler.readFile(filePath);
+        }
+      }
+
+      if (!propsFound || !viewFound) {
+        console.error('Error: Props file or View file not found.');
+        return; // Exit the function if props or view files are missing
+      }
+
+      // console.log({ propsContent }, { viewContent }, { typeContent });
+      const thread = await this.openAIConnector.createThread();
+      // Set the initial prompt for overall understanding of the folder
+      await this.openAIConnector.addMessageToThread(thread.id, {
+        role: 'user',
+        content: await RespondPrompt(propsContent, viewContent, typeContent),
+      });
+
+      // Retrieve and process the response for overall understanding
+      const response = await this.openAIConnector.runAssistant(
+        assistantId,
+        thread.id
+      );
+
+      const propsJson = extractJsonCode(response.text.value);
+
+      console.log({ response }, propsJson);
+
+      // Check if propsJson is in JSON format
+      if (!this.isObject(propsJson)) {
+        console.error('Error: Props format is incorrect.');
+        return; // Exit the function if props format is incorrect
+      }
+
+      this.cache.saveJsonToCache(this.cacheKey + '/props', propsJson);
+
+      await this.fileHandler.writeFile(
+        path.dirname(propsPath),
+        path.basename(propsPath),
+        propsJson
+      );
+    }
+    console.log('Props file generated successfully');
+    await this.MarkdownGeneration(componentFolder, componentName, propsPath);
+  }
+
+  isObject(value: any): boolean {
+    return value !== null && typeof value === 'object' && !Array.isArray(value);
   }
 
   async MarkdownGeneration(
@@ -162,14 +177,24 @@ export class Bot {
     componentName: string,
     propsPath: string
   ) {
+    // Read component props from JSON file
     const componentProps = await this.fileHandler.readComponentPropsFromJson(
       propsPath
     );
 
-    let markdown = `### **Import**
-\`\`\`tsx static
-import { ${componentName} } from '@app-studio/web';
-\`\`\`\n\n`;
+    // Check if componentProps is null or not in JSON format
+    if (!componentProps || typeof componentProps !== 'object') {
+      console.warn('Warning: Props file does not contain valid JSON data.');
+      return; // Exit the function if data is not in the correct format
+    }
+
+    let markdown = `# ${componentName}\n\n`;
+    markdown += `${componentProps.componentDescription}\n\n`;
+
+    markdown += `### **Import**
+  \`\`\`tsx static
+  import { ${componentName} } from '@app-studio/web';
+  \`\`\`\n\n`;
 
     // Check for the Default example
     const defaultExamplePath = path.resolve(
@@ -184,14 +209,19 @@ import { ${componentName} } from '@app-studio/web';
       markdown += '```tsx\n';
       markdown += defaultExampleCode;
       markdown += '\n```\n\n';
+    } else {
+      console.warn('Warning: No default example found.');
     }
 
+    // Generate documentation for each prop
+    let examplesFound = false;
     for (const propName of Object.keys(componentProps)) {
       const exampleFilePath = path.resolve(
         `${componentFolder}/examples/${propName}.tsx`
       );
 
       if (this.fileHandler.pathExists(exampleFilePath)) {
+        examplesFound = true;
         const exampleCode = await this.fileHandler.readFile(exampleFilePath);
         markdown += `### **${propName}**\n`;
         markdown += `"${componentProps[propName].description}"\n\n`;
@@ -201,9 +231,16 @@ import { ${componentName} } from '@app-studio/web';
       }
     }
 
+    if (!examplesFound) {
+      console.warn('Warning: No examples found.');
+    }
+
+    // Write markdown content to .mdx file
     await this.fileHandler.writeWithoutCheck(
       `${componentFolder}/${componentName}.mdx`,
       markdown
     );
+
+    console.log('\nDocumentation generation completed.');
   }
 }

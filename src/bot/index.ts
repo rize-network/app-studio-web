@@ -1,13 +1,8 @@
+import fs from 'fs';
 import { Bot } from './Bot';
 import { DocuCode } from './DocuCode';
-require('dotenv').config();
-
-console.log(process.env.REACT_APP_OPENAI_API_KEY);
 
 async function main() {
-  const projectName = 'MDX Documentation';
-  const descriptionPath = 'docs/description.md';
-
   // Get componentName from command line arguments
   const componentName = process.argv[2]; // Assuming it's the first argument passed
   if (!componentName) {
@@ -15,47 +10,56 @@ async function main() {
     process.exit(1);
   }
 
-  console.log(`Generating documentation for component: ${componentName}`);
-
+  const descriptionPath = 'docs/description.md';
   const basePath = 'src/components';
-  const propsPath = `src/data/props/${componentName}.props.json`;
   const componentFolder = `${basePath}/${componentName}`;
-  const componentPath = `${basePath}/${componentName}/${componentName}`;
+  const propsPath = `src/data/props/${componentName}.props.json`;
 
+  // Check if the component directory exists
+  if (!fs.existsSync(componentFolder)) {
+    console.error(
+      `Component directory not found for ${componentName}. Please ensure the component exists.`
+    );
+    process.exit(1);
+  }
+
+  console.log(
+    `\n=== Generating documentation for component: ${componentName} ===`
+  );
+
+  // Initialize assistantGPT for commenting files
+  console.log('\nInitializing documentation process...');
   const assistantGPT = new Bot(componentName);
-
-  // Implementation for Documentation of the code
-  console.log('Initializing documentation process...');
   const docuCode = new DocuCode(componentName);
+
+  // Initialize assistantGPT for DocuCode
+  const { fileId } = await assistantGPT.addFile(descriptionPath);
   const assistantDocumentation = await assistantGPT.init(
-    projectName,
-    [],
-    descriptionPath,
+    'AppStudio DocuCode',
+    [fileId],
     'docu'
   );
 
+  // Process directory for commenting
+  console.log('\nProcessing files for annotation...');
   await docuCode.processDirectory(componentFolder, assistantDocumentation.id);
+  console.log('Annotation process completed.');
 
-  // Generating props file for code
-  console.log('Generating props file...');
-  const { fileIds } = await assistantGPT.addFiles(componentPath);
-
+  // Initialize assistantGPT for props generation
+  console.log('\nGenerating props file...');
   const assistantCreation = await assistantGPT.init(
-    projectName,
-    fileIds,
-    descriptionPath,
+    'AppStudio MDXDoc',
+    [],
     'props'
   );
 
-  await assistantGPT.response(assistantCreation.id, propsPath);
-
-  await assistantGPT.MarkdownGeneration(
+  // Generate props file
+  await assistantGPT.response(
+    assistantCreation.id,
+    propsPath,
     componentFolder,
-    componentName,
-    propsPath
+    componentName
   );
-
-  console.log('Documentation generation completed.');
 }
 
 main().catch((error) => {

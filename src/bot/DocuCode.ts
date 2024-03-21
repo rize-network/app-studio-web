@@ -116,7 +116,7 @@ export class DocuCode {
 
   async removeCommentsAndCleanFile(filePath: string) {
     // Read the content of the file
-    let content: string = fs.readFileSync(filePath, 'utf8');
+    let content: string = this.fileHandler.readFile(filePath);
 
     // Regular expression to match single line, multi-line, and JSDoc comments
     const singleLineCommentsPattern = /\/\/.*/g;
@@ -135,7 +135,7 @@ export class DocuCode {
     content = content.replace(extraNewLinesAndWhitespacePattern, '\n');
 
     // Write the modified content back to the file
-    fs.writeFileSync(filePath, content, 'utf8');
+    this.fileHandler.writeWithoutCheck(filePath, content);
 
     console.log(`Comments and extra newlines removed from '${filePath}'.`);
   }
@@ -156,8 +156,6 @@ export class DocuCode {
       const stat = await fs.statSync(fullPath);
 
       if (path.basename(fullPath) === 'examples') {
-        // Skip processing this directory
-
         continue;
       }
 
