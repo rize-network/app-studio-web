@@ -4,8 +4,9 @@ import {
   DefaultDemo,
   FooterDemo,
   StylesDemo,
-} from 'src/components/Table/examples';
-import { Table } from 'src/components/Table/Table';
+  DataDemo,
+} from '../components/Table/examples';
+import { Table } from '../components/Table/Table';
 
 const TablePage = () => {
   const columns = [
@@ -17,6 +18,10 @@ const TablePage = () => {
     {
       property: 'Caption',
       appStudio: <CaptionDemo />,
+    },
+    {
+      property: 'Data',
+      appStudio: <DataDemo />,
     },
     {
       property: 'Default',
