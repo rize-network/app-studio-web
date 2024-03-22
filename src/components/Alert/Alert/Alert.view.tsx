@@ -9,41 +9,49 @@ import { Themes } from './Alert.style';
 export const AlertView = ({
   icon,
   title,
-  // Defines the AlertView functional component with destructured props from AlertProps.
+// The `AlertView` component is created as a functional component using object destructuring to extract properties from `AlertProps`.
   styles,
-  // The 'Horizontal' component is used to create a horizontal layout, and is being customized with specific properties such as gap, borderRadius, borderWidth, etc.
   description,
+// Uses the `Horizontal` layout component to align child components in a row.
   variant = 'default',
-}: // Passes additional custom styles for the container if provided through the 'styles' prop.
+// Sets a fixed gap of 15 pixels between child components.
+}: 
+// Sets a border radius of 10 pixels for rounded corners.
 AlertProps) => (
-  // The 'View' component is utilized here with an alignSelf style to ensure it is centered within its container.
+// Applies a border width of 1 pixel around the component.
   <Horizontal
-    // Conditional rendering: if an 'icon' prop is provided, it is displayed; otherwise, a default WarningSvg icon is used.
+// Sets the border style to 'solid'.
     gap={15}
+// Applies a padding of 16 pixels inside the component.
     borderRadius={10}
+// Disables wrapping of child components with 'nowrap' ensuring they stay in a single line.
     borderWidth={1}
-    // The icon color is either provided through the 'styles' prop or falls back to a default color as defined in 'Themes[variant].content.color'.
+// Dynamically sets the border color based on the `variant` theme.
     borderStyle="solid"
+// Spreads any additional container styles passed in through the `styles` prop, allowing for further customization.
     padding={16}
     wrap="nowrap"
-    // The 'Vertical' component arranges its children vertically with a fixed gap between them.
+// Positions the icon (or default SVG) in the center vertically within the `Horizontal` component.
     borderColor={Themes[variant].container.border}
-    // Renders the 'title' prop using the 'Text' component with custom fontSize and color. The color is defined by the current 'variant' in 'Themes'.
     {...styles?.container}
   >
+// Conditionally renders the passed `icon` prop or defaults to rendering a `WarningSvg` icon.
     <View alignSelf={'center'}>
-      // Renders the 'description' prop, similarly to the 'title', but
       potentially with different styles as provided through the 'styles' prop.
+// Determines the size and color of the default `WarningSvg` icon, using the `variant` theme color or custom color provided through the `styles` prop.
       falls back to a default WarningSvg icon. fixed gap between elements
       Displays the user-provided icon.
       {icon ? (
         icon
+// Uses the `Vertical` layout component to stack child components vertically with a fixed gap.
       ) : (
         <WarningSvg
+// Displays the `title` prop as a `Text` component with font size '16px' and a color based on the `variant` theme.
           size={24}
           color={styles?.icon.color ?? Themes[variant].content.color}
         />
       )}
+// Displays the `description` prop as a `Text` component with a smaller font size '14px' and a color matching the `title`.
     </View>
     <Vertical gap={10}>
       components with a fixed gap between them.

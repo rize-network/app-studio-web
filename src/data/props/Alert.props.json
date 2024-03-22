@@ -1,35 +1,46 @@
 {
-  "componentDescription": "Displays an alert message with optional custom icon and styles",
+  "componentDescription": "Provides visual feedback with icons and messages for user alerts",
   "icon": {
-    "type": "React.ReactNode",
+    "type": [
+      "React.ReactNode"
+    ],
     "typeValues": [],
-    "description": "Optional property for providing a custom icon.",
-    "defaultValue": "<WarningSvg size={24} color={Themes[variant].content.color}/>"
+    "description": "Optional icon to be displayed as the alert's icon",
+    "defaultValue": "<WarningSvg size={24} color={Themes[variant].content.color} />"
   },
   "title": {
-    "type": "string",
+    "type": [
+      "string"
+    ],
     "typeValues": [],
-    "description": "Title text of the Alert component.",
-    "defaultValue": ""
+    "description": "Mandatory title text to be displayed as the alert's title",
+    "defaultValue": []
   },
   "description": {
-    "type": "string",
+    "type": [
+      "string"
+    ],
     "typeValues": [],
-    "description": "Text content or message for the Alert component.",
-    "defaultValue": ""
+    "description": "Mandatory message content to be displayed as the alert's description",
+    "defaultValue": []
   },
   "variant": {
-    "type": "Variant",
-    "typeValues": [
-      "default"
+    "type": [
+      "Variant"
     ],
-    "description": "Style or behavior variant for the Alert component.",
-    "defaultValue": "default"
+    "typeValues": [
+      "'default'",
+      "...other variants from Themes"
+    ],
+    "description": "Type of alert, influences the appearance",
+    "defaultValue": "'default'"
   },
   "styles": {
-    "type": "AlertStyles",
+    "type": [
+      "AlertStyles"
+    ],
     "typeValues": [],
-    "description": "Custom styles object for the Alert component.",
-    "defaultValue": "{}"
+    "description": "Custom styles to be applied to the alert",
+    "defaultValue": []
   }
 }

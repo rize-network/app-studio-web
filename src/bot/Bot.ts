@@ -233,7 +233,7 @@ export class Bot {
       console.warn('Warning: No examples found.');
     }
 
-    // Write markdown content to .mdx file
+    // Write markdown content to .md file
     await this.fileHandler.writeWithoutCheck(
       `${componentFolder}/${componentName}.md`,
       markdown
