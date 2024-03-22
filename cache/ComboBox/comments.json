@@ -1,0 +1,348 @@
+{
+  "ComboBox.context.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines an interface for ComboBox context which includes a dictionary to track open dropdowns by key, and a function to toggle dropdown state."
+        },
+        {
+          "line": 5,
+          "comment": "Creates a React context for the ComboBox component with the specified interface, initialized as not nullable using the non-null assertion operator (!)."
+        },
+        {
+          "line": 6,
+          "comment": "Exports a custom hook that allows the use of ComboBoxContext in functional components, providing access to the context's value."
+        }
+      ]
+    }
+  ],
+  "ComboBox.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Represents the properties that can be passed to the ComboBox component."
+        },
+        {
+          "line": 5,
+          "comment": "Unique identifier for the ComboBox, used to differentiate it from others in a form."
+        },
+        {
+          "line": 6,
+          "comment": "Optional name property, usually used when the ComboBox is part of a form."
+        },
+        {
+          "line": 7,
+          "comment": "List of items that the ComboBox will display as options to choose from."
+        },
+        {
+          "line": 8,
+          "comment": "Optional callback function that is called when an item is selected."
+        },
+        {
+          "line": 9,
+          "comment": "Boolean flag to enable or disable the search functionality within the ComboBox."
+        },
+        {
+          "line": 10,
+          "comment": "Optional ReactNode to be displayed on the left side of the ComboBox."
+        },
+        {
+          "line": 11,
+          "comment": "Optional ReactNode to be displayed on the right side of the ComboBox."
+        },
+        {
+          "line": 12,
+          "comment": "Optional label to describe the purpose of the ComboBox to the user."
+        },
+        {
+          "line": 13,
+          "comment": "Boolean flag to show or hide a tick mark next to selected items."
+        },
+        {
+          "line": 14,
+          "comment": "Placeholder text to be shown when nothing is selected in the ComboBox."
+        },
+        {
+          "line": 15,
+          "comment": "Optional object to override default ComboBox styles."
+        },
+        {
+          "line": 16,
+          "comment": "Placeholder for the search input when the search is enabled."
+        },
+        {
+          "line": 17,
+          "comment": "Allows the ComboBox to accept additional properties not explicitly defined in the interface."
+        },
+        {
+          "line": 20,
+          "comment": "Defines each item's structure within the ComboBox."
+        },
+        {
+          "line": 21,
+          "comment": "Visible label for the ComboBox item, displayed in the list of options."
+        },
+        {
+          "line": 22,
+          "comment": "Value that represents the ComboBox item and is typically sent to the server upon form submission."
+        },
+        {
+          "line": 23,
+          "comment": "Optional icon to be displayed next to the item label within the ComboBox."
+        },
+        {
+          "line": 26,
+          "comment": "Holds state actions for managing ComboBox state, like filtering, selection, and dropdown visibility."
+        },
+        {
+          "line": 27,
+          "comment": "Array of ComboBox items that match the current search query - used when search is enabled."
+        },
+        {
+          "line": 28,
+          "comment": "Function to update the list of filtered items displayed in the dropdown."
+        },
+        {
+          "line": 29,
+          "comment": "Currently selected item from the ComboBox options."
+        },
+        {
+          "line": 30,
+          "comment": "Function to update the currently selected item."
+        },
+        {
+          "line": 31,
+          "comment": "Index of the highlighted item in the dropdown list, useful for keyboard navigation."
+        },
+        {
+          "line": 32,
+          "comment": "Function to update the highlighted item's index."
+        },
+        {
+          "line": 33,
+          "comment": "Current search query string entered by the user, used to filter the ComboBox list."
+        },
+        {
+          "line": 34,
+          "comment": "Function to update the current search query."
+        },
+        {
+          "line": 35,
+          "comment": "Boolean value that controls the visibility of the ComboBox dropdown list."
+        },
+        {
+          "line": 36,
+          "comment": "Function to set the visibility of the dropdown list."
+        },
+        {
+          "line": 39,
+          "comment": "Combines both ComboBoxProps and ComboBoxStateActions to represent props required by the view components."
+        }
+      ]
+    }
+  ],
+  "ComboBox.provider.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines the 'ComboBoxProvider' component which wraps its children with a 'ComboBoxContext.Provider' to share state about dropdown visibility."
+        },
+        {
+          "line": 4,
+          "comment": "Declares state to keep track of which dropdowns are open using an object that maps identifiers to a boolean indicating visibility."
+        },
+        {
+          "line": 6,
+          "comment": "Creates a function 'toggleDropdown' to change the visibility state of a specific dropdown identified by 'id'."
+        },
+        {
+          "line": 7,
+          "comment": "Uses the function 'setOpenDropdowns' to update the state. It takes the previous state, spreads it to retain existing values, and toggles the value for the specified 'id'."
+        },
+        {
+          "line": 10,
+          "comment": "The ComboBoxContext.Provider supplies the 'openDropdowns' state and 'toggleDropdown' function to all children components, allowing them to control and access the dropdowns' state."
+        }
+      ]
+    }
+  ],
+  "ComboBox.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Define a custom hook `useComboBoxState` to manage the state of a combo box component."
+        },
+        {
+          "line": 4,
+          "comment": "Receives `items` as an array of ComboBoxItem, and optional `placeholder` and `searchPlaceholder` strings."
+        },
+        {
+          "line": 5,
+          "comment": "Initializes `filteredItems` state with the full list of items provided."
+        },
+        {
+          "line": 6,
+          "comment": "Initializes `selectedItem` state with the provided placeholder or defaults to the first item if placeholder is not provided."
+        },
+        {
+          "line": 7,
+          "comment": "Initializes `highlightedIndex` state to indicate which item is currently highlighted, starting at index 0."
+        },
+        {
+          "line": 8,
+          "comment": "Initializes `searchQuery` state to store the current search value, defaults to empty or `searchPlaceholder` if provided."
+        },
+        {
+          "line": 9,
+          "comment": "Initializes `isDropdownVisible` state to control the visibility of the dropdown list, initially set to false."
+        },
+        {
+          "line": 10,
+          "comment": "Returns an object containing states and setter functions to be used by the consuming component to manage the combo box's behavior and UI."
+        }
+      ]
+    }
+  ],
+  "ComboBox.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a type alias 'Styles' representing an object where each property is a string (key) with values of type 'React.CSSProperties'. This allows for a flexible object that can define any number of CSS properties for dynamic styling in React components."
+        },
+        {
+          "line": 3,
+          "comment": "Defines a type alias 'ComboBoxStyles' for specialized styling of ComboBox components, allowing optional custom styling for elements such as the container, label, dropdown, and item. The 'label' and 'text' properties accept any type, indicating flexibility in the data that can be used for rendering these elements."
+        },
+        {
+          "line": 4,
+          "comment": "The 'container' property within 'ComboBoxStyles' is optional and defines styling for the outermost wrapper of a ComboBox component, using React.CSSProperties for type."
+        },
+        {
+          "line": 5,
+          "comment": "The 'label' property is optional and can be of any type, which can include not only styling information but potentially other data, such as for accessibility or data attributes."
+        },
+        {
+          "line": 6,
+          "comment": "The 'dropdown' property is optional and allows for defining the appearance of the dropdown list portion of the ComboBox, using React.CSSProperties."
+        },
+        {
+          "line": 7,
+          "comment": "The 'item' property is optional and refers to the individual items within the dropdown list, enabling specific styling for each item."
+        },
+        {
+          "line": 8,
+          "comment": "The 'labelContainer' property is optional and is meant to style the container that might house the ComboBox's label, separate from the 'label' itself."
+        },
+        {
+          "line": 9,
+          "comment": "The 'text' property much like the 'label' property, is optionally any type, pointing to its flexibility in representing complex non-style based data or configurations, likely associated with the textual content within the ComboBox."
+        }
+      ]
+    }
+  ],
+  "ComboBox.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 7,
+          "comment": "ComboBoxView is a functional component with destructured props for managing the behavior and appearance of the combo box."
+        },
+        {
+          "line": 13,
+          "comment": "useEffect hook used to add event listener to entire document to handle clicks outside the dropdown, to close it if it is open."
+        },
+        {
+          "line": 14,
+          "comment": "The handleClickOutside function checks if the click event path includes the element with id 'combobox-dropdown', and hides the dropdown if clicked outside."
+        },
+        {
+          "line": 19,
+          "comment": "Cleanup function to remove event listener from the document when the component will unmount."
+        },
+        {
+          "line": 22,
+          "comment": "handleSearch function updates the search query state and filters items based on the query, with case insensitive matching."
+        },
+        {
+          "line": 28,
+          "comment": "Resets the highlighted index to 0 after the items are filtered to ensure correct display and selection."
+        },
+        {
+          "line": 31,
+          "comment": "The handleSelect function updates the selected item state, invokes the onSelect callback if provided, and hides the dropdown."
+        },
+        {
+          "line": 50,
+          "comment": "Conditionally rendering a label for the ComboBox if the label prop is provided."
+        },
+        {
+          "line": 52,
+          "comment": "Main container for the ComboBox with specified styles and behaviors."
+        },
+        {
+          "line": 58,
+          "comment": "Inner container that responds to clicks to toggle the visibility of the dropdown."
+        },
+        {
+          "line": 64,
+          "comment": "Display of the currently selected item's label within the combobox."
+        },
+        {
+          "line": 68,
+          "comment": "Conditionally rendered right-aligned component passed through props, typically used for actions or indicators."
+        },
+        {
+          "line": 69,
+          "comment": "Toggle the dropdown visibility based on its current state, only shown if isDropdownVisible is true."
+        },
+        {
+          "line": 77,
+          "comment": "Search input field for filtering items within the dropdown, visible only if searchEnabled is true."
+        },
+        {
+          "line": 90,
+          "comment": "Mapping over filteredItems to display them as selectable options in a list within the dropdown."
+        },
+        {
+          "line": 93,
+          "comment": "Each item in the dropdown can be highlighted on mouse enter, and selected on click."
+        },
+        {
+          "line": 99,
+          "comment": "Optionally display a tick icon next to the currently selected item if showTick is true and the item doesn't have its own icon."
+        }
+      ]
+    }
+  ],
+  "ComboBox.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Define a React functional component with generic type `React.FC` and destructuring its props against `ComboBoxProps`."
+        },
+        {
+          "line": 5,
+          "comment": "The `ComboBoxComponent` takes in parameters for ID, name, an array of items, two placeholders, and any additional properties passed as `...props`."
+        },
+        {
+          "line": 6,
+          "comment": "Invoke the custom hook `useComboBoxState` with the provided items and placeholders which likely manages the component's state."
+        },
+        {
+          "line": 7,
+          "comment": "Render the `ComboBoxView` component, passing the deconstructed props, the generated state, and any additional props."
+        },
+        {
+          "line": 9,
+          "comment": "Export the `ComboBox` component for use in other parts of the application under the named export `ComboBox`."
+        }
+      ]
+    }
+  ]
+}

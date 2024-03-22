@@ -1,0 +1,67 @@
+{
+  "componentDescription": "Provides interactive UI for binary user input",
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "defaultShape",
+      "rounded",
+      "pillShaped"
+    ],
+    "description": "Optional 'shape' prop to determine the shape of the toggle.",
+    "defaultValue": "rounded"
+  },
+  "isToggled": {
+    "type": "boolean",
+    "typeValues": [
+      "true",
+      "false"
+    ],
+    "description": "Optional boolean indicating the current state of the toggle.",
+    "defaultValue": "null"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": [
+      "true",
+      "false"
+    ],
+    "description": "Optional boolean to specify if the toggle should be disabled.",
+    "defaultValue": "null"
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Mandatory prop, representing the child elements of the toggle component.",
+    "defaultValue": "null"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "outline",
+      "link",
+      "ghost"
+    ],
+    "description": "Optional prop to apply predefined style variants.",
+    "defaultValue": "ghost"
+  },
+  "colorScheme": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Optional string to customize the color theme of the toggle component.",
+    "defaultValue": "color.trueGray.400"
+  },
+  "onToggle": {
+    "type": "function",
+    "typeValues": [
+      "function(isToggled: boolean)"
+    ],
+    "description": "Optional function prop that gets executed when the toggle state changes.",
+    "defaultValue": "null"
+  },
+  "[x: string]": {
+    "type": "any",
+    "typeValues": [],
+    "description": "Index signature allowing any additional properties not explicitly defined.",
+    "defaultValue": "null"
+  }
+}

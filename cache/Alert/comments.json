@@ -4,31 +4,183 @@
       "comments": [
         {
           "line": 1,
-          "comment": "Imports `AlertStyles` and `Variant` type definitions from the external module `Alert.type` for typing purposes in this interface."
+          "comment": "Import statement for AlertStyles and Variant types from a type definitions file, presumably to ensure type safety and consistency for the Alert component."
         },
         {
           "line": 2,
-          "comment": "Defines an interface `AlertProps` which serves as a contract for props passed to the Alert component."
+          "comment": "Defines an interface called AlertProps representing the props that the Alert component accepts."
         },
         {
           "line": 3,
-          "comment": "Optional `icon` property that allows for a React node (component, HTML element, etc.) to be passed and displayed as an icon in the Alert component."
+          "comment": "Optional 'icon' property that can accept any React node, allowing for customizable icons in the Alert component."
         },
         {
           "line": 4,
-          "comment": "Required `title` property that will display the main message or heading of the Alert component."
+          "comment": "Mandatory 'title' property of type string, which will be used as the Alert component's title text."
         },
         {
           "line": 5,
-          "comment": "Required `description` property to provide additional information or context in the Alert component."
+          "comment": "Mandatory 'description' property of type string, meant to hold the textual content or message for the Alert component."
         },
         {
           "line": 6,
-          "comment": "Optional `variant` property that likely controls the appearance or type of the Alert (e.g., success, error, warning, etc.). It references the `Variant` type for a constrained set of possible values."
+          "comment": "Optional 'variant' property with a type of Variant, which probably refers to predefined style or behavior variants for the Alert component."
         },
         {
           "line": 7,
-          "comment": "Optional `styles` property that accepts an object of `AlertStyles`, allowing custom styling options for the Alert component."
+          "comment": "Optional 'styles' property, which allows for custom styling by passing an object matching the AlertStyles type."
+        }
+      ]
+    }
+  ],
+  "Alert.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "This file exports a custom React hook named 'useAlertState'."
+        },
+        {
+          "line": 3,
+          "comment": "Definition of 'useAlertState' hook which manages the state related to whether an element is being hovered over or not."
+        },
+        {
+          "line": 3,
+          "comment": "The 'isHovered' state is initialized to 'false', indicating the element is not hovered by default."
+        },
+        {
+          "line": 3,
+          "comment": "The 'setIsHovered' function is used to update the 'isHovered' state."
+        },
+        {
+          "line": 4,
+          "comment": "The hook returns an object containing both 'isHovered' and 'setIsHovered' allowing components that consume this hook to read and set the hover state."
+        }
+      ]
+    }
+  ],
+  "Alert.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Declare a constant object named 'Themes' exporting different theme objects which can be utilized throughout the application for consistent styling."
+        },
+        {
+          "line": 2,
+          "comment": "'default' theme object, holding style properties for a default visual theme."
+        },
+        {
+          "line": 3,
+          "comment": "Specify the 'container' style properties for the default theme, such as background color and border."
+        },
+        {
+          "line": 7,
+          "comment": "Define the 'content' style properties, particularly its text color for the default theme."
+        },
+        {
+          "line": 11,
+          "comment": "'info' theme object, intended for informational messages or interface elements."
+        },
+        {
+          "line": 12,
+          "comment": "Set 'info' theme's 'container' background and border colors using a predefined color palette."
+        },
+        {
+          "line": 16,
+          "comment": "Assign a hex color code for the 'content' text color within the 'info' theme."
+        },
+        {
+          "line": 20,
+          "comment": "'success' theme object, used for indicating successful operations or states."
+        },
+        {
+          "line": 21,
+          "comment": "Define the 'container' styling for the 'success' theme, using shades of green to signify success."
+        },
+        {
+          "line": 25,
+          "comment": "Apply a hex color code for 'content' text color in the 'success' theme, aligning with success semantics."
+        },
+        {
+          "line": 29,
+          "comment": "'error' theme object; includes styles typically used to denote errors or problematic states."
+        },
+        {
+          "line": 30,
+          "comment": "Style the 'error' theme's 'container' with red shades to represent errors or warnings."
+        },
+        {
+          "line": 34,
+          "comment": "Select a hex color for the 'content' within the 'error' theme to maintain the error-related color scheme."
+        },
+        {
+          "line": 38,
+          "comment": "'warning' theme object, primarily for cautionary messages or states needing attention."
+        },
+        {
+          "line": 39,
+          "comment": "Choose 'container' styles for the 'warning' theme with orange colors, commonly associated with warnings."
+        },
+        {
+          "line": 43,
+          "comment": "Determine a specific hex color for 'content' text in the 'warning' theme, complementing the warning motif."
+        }
+      ]
+    }
+  ],
+  "Alert.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a custom type 'Variant' which represents different contextual styles for the component, such as 'default', 'info', 'success', 'error', and 'warning'."
+        },
+        {
+          "line": 3,
+          "comment": "Defines a type 'AlertStyles' for styling the Alert component, with optional properties for the container, title, description, and icon that can take CSSProperties or any other applicable types."
+        }
+      ]
+    }
+  ],
+  "Alert.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 11,
+          "comment": "Defines the AlertView functional component with destructured props from AlertProps."
+        },
+        {
+          "line": 12,
+          "comment": "The 'Horizontal' component is used to create a horizontal layout, and is being customized with specific properties such as gap, borderRadius, borderWidth, etc."
+        },
+        {
+          "line": 14,
+          "comment": "Passes additional custom styles for the container if provided through the 'styles' prop."
+        },
+        {
+          "line": 15,
+          "comment": "The 'View' component is utilized here with an alignSelf style to ensure it is centered within its container."
+        },
+        {
+          "line": 16,
+          "comment": "Conditional rendering: if an 'icon' prop is provided, it is displayed; otherwise, a default WarningSvg icon is used."
+        },
+        {
+          "line": 19,
+          "comment": "The icon color is either provided through the 'styles' prop or falls back to a default color as defined in 'Themes[variant].content.color'."
+        },
+        {
+          "line": 22,
+          "comment": "The 'Vertical' component arranges its children vertically with a fixed gap between them."
+        },
+        {
+          "line": 23,
+          "comment": "Renders the 'title' prop using the 'Text' component with custom fontSize and color. The color is defined by the current 'variant' in 'Themes'."
+        },
+        {
+          "line": 26,
+          "comment": "Renders the 'description' prop, similarly to the 'title', but potentially with different styles as provided through the 'styles' prop."
         }
       ]
     }

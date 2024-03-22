@@ -1,15 +1,15 @@
 import { AlertStyles, Variant } from './Alert.type';
-// Imports `AlertStyles` and `Variant` type definitions from the external module `Alert.type` for typing purposes in this interface.
+// Import statement for AlertStyles and Variant types from a type definitions file, presumably to ensure type safety and consistency for the Alert component.
 export interface AlertProps {
-// Defines an interface `AlertProps` which serves as a contract for props passed to the Alert component.
+  // Defines an interface called AlertProps representing the props that the Alert component accepts.
   icon?: React.ReactNode;
-// Optional `icon` property that allows for a React node (component, HTML element, etc.) to be passed and displayed as an icon in the Alert component.
+  // Optional 'icon' property that can accept any React node, allowing for customizable icons in the Alert component.
   title: string;
-// Required `title` property that will display the main message or heading of the Alert component.
+  // Mandatory 'title' property of type string, which will be used as the Alert component's title text.
   description: string;
-// Required `description` property to provide additional information or context in the Alert component.
+  // Mandatory 'description' property of type string, meant to hold the textual content or message for the Alert component.
   variant?: Variant;
-// Optional `variant` property that likely controls the appearance or type of the Alert (e.g., success, error, warning, etc.). It references the `Variant` type for a constrained set of possible values.
+  // Optional 'variant' property with a type of Variant, which probably refers to predefined style or behavior variants for the Alert component.
   styles?: AlertStyles;
-// Optional `styles` property that accepts an object of `AlertStyles`, allowing custom styling options for the Alert component.
+  // Optional 'styles' property, which allows for custom styling by passing an object matching the AlertStyles type.
 }

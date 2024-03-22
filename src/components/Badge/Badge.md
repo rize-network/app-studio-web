@@ -1,0 +1,177 @@
+# Badge
+
+Displays a visual badge for labeling or highlighting items
+
+### **Import**
+  ```tsx static
+  import { Badge } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Badge } from '../Badge';
+
+export const DefaultDemo = () => <Badge content="default" />;
+
+```
+
+### **content**
+"The content displayed in the Badge component."
+
+```tsx
+import React from 'react';
+import { Badge } from '../Badge';
+
+export const ContentDemo = () => <Badge content="content" />;
+
+```
+
+### **variant**
+"Determines the Badge's style variant."
+
+```tsx
+import React from 'react';
+import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+
+import { Badge } from '../Badge';
+import { Variant } from '../Badge/Badge.type';
+import { View } from 'src/components/Layout/View/View';
+export const VariantDemo = () => (
+  <Vertical gap={15}>
+    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
+      <View position={'relative'} key={index}>
+        <Badge
+          content={variant}
+          variant={variant as Variant}
+          colorScheme="theme.primary"
+        />
+      </View>
+    ))}
+  </Vertical>
+);
+
+```
+
+### **colorScheme**
+"Specifies a custom color scheme for the Badge."
+
+```tsx
+import React from 'react';
+import { Badge } from '../Badge';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+
+export const ColorSchemeDemo = () => (
+  <Horizontal gap={10}>
+    {[
+      'theme.primary',
+      'theme.secondary',
+      'theme.warning',
+      'theme.success',
+      'theme.error',
+    ].map((color, index) => (
+      <Badge key={index} colorScheme={color} isAuto content={color} />
+    ))}
+  </Horizontal>
+);
+
+```
+
+### **position**
+"Defines the position of the Badge relative to its container."
+
+```tsx
+import React from 'react';
+import { Badge } from '../Badge';
+import { View } from '../../Layout/View/View';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Position } from '../Badge/Badge.type';
+
+export const PositionDemo = () => (
+  <Horizontal gap={10}>
+    {['top-right', 'top-left', 'bottom-right', 'bottom-left'].map(
+      (position, index) => (
+        <View
+          key={index}
+          position="relative"
+          height="100px"
+          width="200px"
+          backgroundColor="#F2EFE5"
+        >
+          <Badge position={position as Position} content={position} />
+        </View>
+      )
+    )}
+  </Horizontal>
+);
+
+```
+
+### **size**
+"Determines the size of the Badge."
+
+```tsx
+import React from 'react';
+import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+
+import { Badge } from '../Badge';
+import { Size } from '../Badge/Badge.type';
+import { View } from 'src/components/Layout/View/View';
+export const SizeDemo = () => (
+  <Vertical gap={10}>
+    {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
+      <View position="relative" key={index}>
+        <Badge content={size} size={size as Size} />
+      </View>
+    ))}
+  </Vertical>
+);
+
+```
+
+### **shape**
+"Specifies the shape of the Badge."
+
+```tsx
+import React from 'react';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Badge } from '../Badge';
+import { Shape } from '../Badge/Badge.type';
+import { View } from 'src/components/Layout/View/View';
+export const ShapeDemo = () => (
+  <Horizontal gap={15}>
+    {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
+      <View position="relative" key={index}>
+        <Badge content={border} shape={border as Shape} />
+      </View>
+    ))}
+  </Horizontal>
+);
+
+```
+
+### **styles**
+"Custom styling that overrides default styles."
+
+```tsx
+import React from 'react';
+import { Badge } from '../Badge';
+
+export const StylesDemo = () => {
+  return (
+    <Badge
+      content="styles"
+      styles={{
+        container: {
+          backgroundColor: 'transparent',
+        },
+        text: {
+          color: 'purple',
+        },
+      }}
+    />
+  );
+};
+
+```
+

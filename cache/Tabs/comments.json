@@ -1,0 +1,165 @@
+{
+  "Tabs.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Importing 'TabsStyles' and 'Tab' type definitions, likely from a local file named 'Tabs.type', to ensure type safety in components using these types."
+        },
+        {
+          "line": 3,
+          "comment": "Defining the 'TabsProps' interface to type-check the props expected by the parent 'Tabs' component."
+        },
+        {
+          "line": 4,
+          "comment": "Declaring the required 'tabs' prop, which is an array of 'Tab' objects to render as tabs."
+        },
+        {
+          "line": 5,
+          "comment": "Optionally including 'styles' as a prop, which would provide custom styling options defined by 'TabsStyles'. Its use is not mandatory, as denoted by the '?'."
+        },
+        {
+          "line": 7,
+          "comment": "Extending 'TabsProps' in the 'TabsViewProps' interface to reuse the common props while adding additional properties specific to the view behavior."
+        },
+        {
+          "line": 8,
+          "comment": "'isActive' is used to keep track of currently active 'Tab' indicating which tab is currently selected."
+        },
+        {
+          "line": 9,
+          "comment": "'setIsActive' is a React dispatch function from 'useState' hook, allowing to update the currently active 'Tab'."
+        },
+        {
+          "line": 10,
+          "comment": "'tabsState' is an array of Tab objects representing the current state of tabs, which might include states like disabled, hidden, etc."
+        },
+        {
+          "line": 11,
+          "comment": "'setTabsState' provides a method to update the entire array of tabs' states. This function probably comes from using a 'useState' hook at a higher level in the component tree."
+        }
+      ]
+    }
+  ],
+  "Tabs.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines a custom hook named 'useTabsState' that manages the state of tabs in a tabbed interface."
+        },
+        {
+          "line": 4,
+          "comment": "Initializes the 'isActive' state to store the current active tab, defaulting to the first tab in the 'propTabs' array."
+        },
+        {
+          "line": 5,
+          "comment": "Initializes the 'tabsState' state to store the complete list of tabs, starting with the initial tabs provided through 'propTabs'."
+        },
+        {
+          "line": 6,
+          "comment": "Returns an object containing the 'isActive' state, the 'setIsActive' state updater function, the 'tabsState', and the 'setTabsState' state updater function for external use."
+        }
+      ]
+    }
+  ],
+  "Tabs.type.d.ts": [
+    null
+  ],
+  "Tabs.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "TabsView component: Builds a horizontal view with interactive tabs. It manages state for active tabs and renders tab content."
+        },
+        {
+          "line": 6,
+          "comment": "moveSelectedTabToTop function: Reorders tabs by moving the selected tab at the specified index to the first position and updates the active tab state."
+        },
+        {
+          "line": 12,
+          "comment": "isContentActive function: Determines if the content of a passed tab is actively displayed based on the current state."
+        },
+        {
+          "line": 14,
+          "comment": "Horizontal component at root: Sets up the overall layout, takes the full width and available height of the container."
+        },
+        {
+          "line": 15,
+          "comment": "Mapping of tabs to render tab buttons: Iterates over tabs to produce a clickable button for each, applying styles and setting the active state."
+        },
+        {
+          "line": 19,
+          "comment": "Button onClick event: Triggers reordering of tabs and updates the active tab state when a tab gets clicked."
+        },
+        {
+          "line": 20,
+          "comment": "Button variant determination: Visually differentiates the active tab from inactive ones using filled or ghost variants."
+        },
+        {
+          "line": 21,
+          "comment": "Shape and cursor style: Sets the shape of the tab buttons to pill-shaped and changes the cursor to pointer on hover for better user experience."
+        },
+        {
+          "line": 22,
+          "comment": "isAuto prop: This property likely relates to some automatic behavior or default styling in the Button component."
+        },
+        {
+          "line": 23,
+          "comment": "Conditional styling: Applies different styles for an active tab versus inactive tabs; active styling is prioritized when a condition is met."
+        },
+        {
+          "line": 25,
+          "comment": "Text component inside Button: Renders the title text within each tab, with applied styles and active state changes."
+        },
+        {
+          "line": 28,
+          "comment": "View component for tab content area: Provides a container for displaying the active tab's content."
+        },
+        {
+          "line": 29,
+          "comment": "Conditional rendering of tab content: Renders only the content of the tab that is currently selected by the user."
+        }
+      ]
+    }
+  ],
+  "Tabs.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Importing type definitions for the tabs' props to ensure the component receives the correct properties"
+        },
+        {
+          "line": 4,
+          "comment": "Importing a hook that provides state and its setter functions for active tab and tabs state"
+        },
+        {
+          "line": 5,
+          "comment": "Importing the presentational component for the Tabs, which will receive props and state info to render the UI"
+        },
+        {
+          "line": 6,
+          "comment": "Defines 'TabsComponent' as a functional component using TypeScript with 'TabsProps' for prop types"
+        },
+        {
+          "line": 7,
+          "comment": "Destructures the 'tabs' and 'styles' props received by the component"
+        },
+        {
+          "line": 8,
+          "comment": "Extracting the stateful logic and state setters from the 'useTabsState' hook to manage active tabs and general tabs state"
+        },
+        {
+          "line": 10,
+          "comment": "Returning the 'TabsView' presentational component and passing down the tabs props, styles, active state, and the state setters"
+        },
+        {
+          "line": 14,
+          "comment": "Creates a memoized version of the 'TabsComponent' to prevent unnecessary re-renders when props don't change"
+        }
+      ]
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
 export type Variant = 'default' | 'info' | 'success' | 'error' | 'warning';
-// Defines the 'Variant' type representing the different styles an alert can have. It can be one of 'default', 'info', 'success', 'error', or 'warning'.
+// Defines a custom type 'Variant' which represents different contextual styles for the component, such as 'default', 'info', 'success', 'error', and 'warning'.
 export type AlertStyles = {
-  // Specifies the 'AlertStyles' type that defines optional style properties for the different parts of an alert component: 'container', 'title', 'description', and 'icon'.
+  // Defines a type 'AlertStyles' for styling the Alert component, with optional properties for the container, title, description, and icon that can take CSSProperties or any other applicable types.
   container?: CSSProperties;
   title?: any;
   description?: any;

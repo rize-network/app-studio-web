@@ -1,0 +1,274 @@
+{
+  "Toggle.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Import custom types 'Shape' and 'Variant' from Toggle.type for use in component prop typing."
+        },
+        {
+          "line": 2,
+          "comment": "Define TypeScript interface for the props of the Toggle component."
+        },
+        {
+          "line": 3,
+          "comment": "Optional 'shape' prop to determine the shape of the toggle, using the custom 'Shape' type."
+        },
+        {
+          "line": 4,
+          "comment": "Optional 'isToggled' boolean indicating the current state of the toggle."
+        },
+        {
+          "line": 5,
+          "comment": "Optional 'isDisabled' boolean to specify if the toggle should be disabled."
+        },
+        {
+          "line": 6,
+          "comment": "Mandatory 'children' prop of type React.ReactNode, representing the child elements of the toggle component."
+        },
+        {
+          "line": 7,
+          "comment": "Optional 'variant' prop to apply predefined style variants, utilizing the 'Variant' type."
+        },
+        {
+          "line": 8,
+          "comment": "Optional 'colorScheme' string to customize the color theme of the toggle component."
+        },
+        {
+          "line": 9,
+          "comment": "Optional 'onToggle' function prop that gets executed when the toggle state changes, receiving the new state as a parameter."
+        },
+        {
+          "line": 10,
+          "comment": "Index signature allowing any additional properties not explicitly defined in this interface, giving the component flexibility for extension."
+        },
+        {
+          "line": 11,
+          "comment": "Define TypeScript interface 'ToggleViewProps' for the view component of the Toggle, extending the basic 'ToggleProps' interface."
+        },
+        {
+          "line": 12,
+          "comment": "Mandatory 'isHovered' boolean indicating if the toggle is currently being hovered by the cursor."
+        },
+        {
+          "line": 13,
+          "comment": "'setIsHovered' function used to change the state of 'isHovered', following the React useState convention."
+        },
+        {
+          "line": 14,
+          "comment": "Mandatory boolean 'isToggle' to keep synchronous state with 'isToggled' prop, could be linked directly to display styling."
+        },
+        {
+          "line": 15,
+          "comment": "'setIsToggled' function is the dispatcher from React's useState hook to update the 'isToggle' state."
+        }
+      ]
+    }
+  ],
+  "Toggle.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a custom hook `useToggleState` that takes a default boolean value to set the initial state of a toggle functionality."
+        },
+        {
+          "line": 3,
+          "comment": "Declares `isHovered` state to track the hovered state of an element with its setter function `setIsHovered` initialized to `false`."
+        },
+        {
+          "line": 4,
+          "comment": "Declares `isToggle` state to represent the toggled state of an element with its setter `setIsToggled`, initialized with the `defaultToggled` parameter."
+        },
+        {
+          "line": 5,
+          "comment": "Returns an object containing the `isHovered` state, its setter function, the `isToggle` state, and its setter function, to be used by the components that require toggle behavior."
+        }
+      ]
+    }
+  ],
+  "Toggle.style.tsx": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Import the 'Shape' type from the adjacent 'Toggle.type' module. This type is likely used to define acceptable shape values for the toggle component."
+        },
+        {
+          "line": 2,
+          "comment": "Declare a constant 'ToggleShapes' as a record (an object type that maps keys to values), where keys are of the 'Shape' type and values are either a number or a string. The actual values here could represent different CSS border-radius measurements, which determine the shape of the toggle's visual appearance."
+        },
+        {
+          "line": 3,
+          "comment": "The 'sharp' shape is represented by a border-radius of 0, indicating no curvature at the edges, thus creating a sharp-cornered rectangle."
+        },
+        {
+          "line": 4,
+          "comment": "The 'rounded' shape has a moderate border-radius of 4, offering slightly rounded corners."
+        },
+        {
+          "line": 5,
+          "comment": "The 'pillShaped' value has a larger border-radius of 24, which suggests a pill-like, highly rounded shape for the toggle component."
+        }
+      ]
+    }
+  ],
+  "Toggle.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines TypeScript type 'Shape' with possible values 'sharp', 'rounded', or 'pillShaped' to specify the shape styles for UI components."
+        },
+        {
+          "line": 2,
+          "comment": "Defines TypeScript type 'Variant' with possible values 'outline', 'link', or 'ghost' to specify the variant styles for UI components."
+        }
+      ]
+    }
+  ],
+  "Toggle.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Declares the 'ToggleView' functional component using ES6 arrow function syntax."
+        },
+        {
+          "line": 2,
+          "comment": "Destructures props within the 'ToggleViewProps' interface, providing defaults for optional props and handling the rest as a spread operator."
+        },
+        {
+          "line": 5,
+          "comment": "Determines the color to use when the toggle is disabled."
+        },
+        {
+          "line": 6,
+          "comment": "Evaluates whether the toggle is active based on the 'isToggle' or 'isHovered' state."
+        },
+        {
+          "line": 7,
+          "comment": "Defines CSS properties for each toggle variant using the 'Variant' type as keys."
+        },
+        {
+          "line": 8,
+          "comment": "Defines 'outline' variant styles with solid border."
+        },
+        {
+          "line": 13,
+          "comment": "Defines 'link' variant styles with conditional border transparency and text decoration."
+        },
+        {
+          "line": 16,
+          "comment": "Empty object for 'ghost' variant represents no additional styling."
+        },
+        {
+          "line": 18,
+          "comment": "Defines a function to handle toggle actions which updates the toggle state and, if available, calls the onToggle callback with new state."
+        },
+        {
+          "line": 25,
+          "comment": "Renders the 'Center' styled component, passing in calculated styles and states."
+        },
+        {
+          "line": 26,
+          "comment": "Specifies the role attribute for better accessibility."
+        },
+        {
+          "line": 27,
+          "comment": "Applies conditional padding based on the 'shape' prop."
+        },
+        {
+          "line": 28,
+          "comment": "Sets width to 'fit-content' to ensure content dictates the size."
+        },
+        {
+          "line": 29,
+          "comment": "Text color based on active state, defaulting to toggle color or white."
+        },
+        {
+          "line": 30,
+          "comment": "Background color based on active state, either toggle color or transparent."
+        },
+        {
+          "line": 31,
+          "comment": "Mouse event handlers for changing hover state."
+        },
+        {
+          "line": 33,
+          "comment": "Conditional cursor style based on whether the toggle is disabled."
+        },
+        {
+          "line": 34,
+          "comment": "Applies a border-radius based on the 'shape' prop."
+        },
+        {
+          "line": 35,
+          "comment": "Attaches click event to the 'handleToggle' function."
+        },
+        {
+          "line": 36,
+          "comment": "Spreads variant-specific styles and rest properties onto the 'Center' component."
+        },
+        {
+          "line": 38,
+          "comment": "Passes 'children' prop to render inside the 'Center' component."
+        }
+      ]
+    }
+  ],
+  "Toggle.tsx": [
+    {
+      "comments": [
+        {
+          "line": 6,
+          "comment": "Define a functional component 'ToggleComponent' with destructured props from 'ToggleProps' and default value for 'isToggled' prop."
+        },
+        {
+          "line": 7,
+          "comment": "Utilize the custom hook 'useToggleState', initialized with 'isToggled', to manage the toggle's state."
+        },
+        {
+          "line": 9,
+          "comment": "Invoke 'useEffect' to synchronize the internal toggle state when the 'isToggled' prop changes."
+        },
+        {
+          "line": 10,
+          "comment": "Update the internal toggle state 'setIsToggled' whenever the 'isToggled' prop changes, as indicated by the dependencies array."
+        },
+        {
+          "line": 14,
+          "comment": "Render the 'ToggleView' component with the required props and handlers to manage the toggle's state and appearance."
+        },
+        {
+          "line": 15,
+          "comment": "Pass down 'shape', 'colorScheme', 'variant', 'isDisabled' props for styling and behavior."
+        },
+        {
+          "line": 16,
+          "comment": "Pass the 'isHovered' state and 'setIsHovered' callback to manage hover state within 'ToggleView'."
+        },
+        {
+          "line": 17,
+          "comment": "Provide 'isToggle' state and 'setIsToggled' callback to control the toggled state and its updates."
+        },
+        {
+          "line": 18,
+          "comment": "Pass down 'onToggle' callback prop to be invoked when the toggle interaction occurs."
+        },
+        {
+          "line": 19,
+          "comment": "Spread the remaining props to 'ToggleView' to ensure extensibility of the component."
+        },
+        {
+          "line": 20,
+          "comment": "Include children within 'ToggleView' which allows for nested content or additional components."
+        },
+        {
+          "line": 23,
+          "comment": "Export 'Toggle' as an alias for 'ToggleComponent' to be used for imports within other components or modules."
+        }
+      ]
+    }
+  ]
+}

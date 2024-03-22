@@ -1,6 +1,6 @@
 # Alert
 
-Displays an alert message with optional custom icon and styling.
+Displays an alert message with optional custom icon and styles
 
 ### **Import**
   ```tsx static
@@ -24,7 +24,7 @@ export const DefaultDemo = () => {
 ```
 
 ### **icon**
-"Optional property to display as an icon in the Alert component."
+"Optional property for providing a custom icon."
 
 ```tsx
 import React from 'react';
@@ -44,7 +44,7 @@ export const IconDemo = () => {
 ```
 
 ### **variant**
-"Optional property that controls the appearance or type of the Alert."
+"Style or behavior variant for the Alert component."
 
 ```tsx
 import React from 'react';
@@ -68,7 +68,7 @@ export const VariantDemo = () => (
 ```
 
 ### **styles**
-"Optional property that accepts an object allowing custom styling options."
+"Custom styles object for the Alert component."
 
 ```tsx
 import React from 'react';

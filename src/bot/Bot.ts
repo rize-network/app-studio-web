@@ -235,7 +235,7 @@ export class Bot {
 
     // Write markdown content to .mdx file
     await this.fileHandler.writeWithoutCheck(
-      `${componentFolder}/${componentName}.mdx`,
+      `${componentFolder}/${componentName}.md`,
       markdown
     );
 

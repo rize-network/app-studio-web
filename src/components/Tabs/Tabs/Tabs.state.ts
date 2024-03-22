@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Tab } from './Tabs.type';
 export const useTabsState = (propTabs: Tab[]) => {
-  // Defines a custom hook, named `useTabsState`, that manages the state of tabs within a component.
+  // Defines a custom hook named 'useTabsState' that manages the state of tabs in a tabbed interface.
   const [isActive, setIsActive] = useState<Tab>(propTabs[0]);
-  // Initializes 'isActive' state with the first tab from the 'propTabs' array, indicating the currently active tab.
+  // Initializes the 'isActive' state to store the current active tab, defaulting to the first tab in the 'propTabs' array.
   const [tabsState, setTabsState] = useState<Tab[]>(propTabs);
-  // Initializes 'tabsState' as a stateful array that reflects the tabs passed through 'propTabs' prop, setting the initial state of tabs.
+  // Initializes the 'tabsState' state to store the complete list of tabs, starting with the initial tabs provided through 'propTabs'.
   return {
-    // The hook returns an object containing both the state and the functions to update the state, allowing components to control and access the current state of the tabs.
+    // Returns an object containing the 'isActive' state, the 'setIsActive' state updater function, the 'tabsState', and the 'setTabsState' state updater function for external use.
     isActive,
     setIsActive,
     tabsState,
