@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table to match snapshot 1`] = `
+<table
+  className="sc-bdfCDU fvLDyq"
+  role="Table"
+>
+  <thead
+    className="sc-bdfCDU gxlqWj"
+  >
+    <tr
+      className="sc-bdfCDU cYBAia"
+    >
+      <th
+        className="sc-bdfCDU frJuHz"
+      >
+        Invoice
+      </th>
+      <th
+        className="sc-bdfCDU frJuHz"
+      >
+        Payment Status
+      </th>
+      <th
+        className="sc-bdfCDU frJuHz"
+      >
+        Total Amount
+      </th>
+      <th
+        className="sc-bdfCDU frJuHz"
+      >
+        Payment Method
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    className="sc-bdfCDU cYBAia"
+  >
+    <tr
+      className="sc-bdfCDU cYBAia"
+    >
+      <td
+        className="sc-bdfCDU jpUhUe"
+        isFirstColumn={true}
+      >
+        INV001
+      </td>
+      <td
+        className="sc-bdfCDU fPWZcZ"
+        isFirstColumn={false}
+      >
+        Paid
+      </td>
+      <td
+        className="sc-bdfCDU fPWZcZ"
+        isFirstColumn={false}
+      >
+        $250.00
+      </td>
+      <td
+        className="sc-bdfCDU fPWZcZ"
+        isFirstColumn={false}
+      >
+        Credit Card
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

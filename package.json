@@ -42,7 +42,8 @@
     "create-structure": "ts-node scripts/create-structure.ts",
     "create-indices": "ts-node scripts/create-indices.ts",
     "create-example": "ts-node scripts/create-example.ts",
-    "create-pages": "npm run create-indices && ts-node scripts/create-pages.ts"
+    "page-imports": "ts-node scripts/generate-page-imports.ts",
+    "create-pages": "npm run create-indices && ts-node scripts/create-pages.ts && npm run page-imports"
   },
   "config": {
     "commitizen": {

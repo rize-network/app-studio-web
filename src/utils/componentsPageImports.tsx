@@ -8,6 +8,7 @@ const ButtonPage = lazy(() => import('src/pages/button.page'));
 const CenterPage = lazy(() => import('src/pages/center.page'));
 const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
 const ComboBoxPage = lazy(() => import('src/pages/comboBox.page'));
+const ComponentsPage = lazy(() => import('src/pages/components.page'));
 const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
 const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
 const FormikPage = lazy(() => import('src/pages/formik.page'));
@@ -20,6 +21,7 @@ const ModalPage = lazy(() => import('src/pages/modal.page'));
 const PasswordPage = lazy(() => import('src/pages/password.page'));
 const SelectPage = lazy(() => import('src/pages/select.page'));
 const SwitchPage = lazy(() => import('src/pages/switch.page'));
+const TablePage = lazy(() => import('src/pages/table.page'));
 const TabsPage = lazy(() => import('src/pages/tabs.page'));
 const TextPage = lazy(() => import('src/pages/text.page'));
 const TextAreaPage = lazy(() => import('src/pages/textArea.page'));
@@ -37,6 +39,7 @@ export const componentList = [
   { name: 'Center', path: '/center', element: <CenterPage /> },
   { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
   { name: 'ComboBox', path: '/combobox', element: <ComboBoxPage /> },
+  { name: 'Components', path: '/components', element: <ComponentsPage /> },
   {
     name: 'CountryPicker',
     path: '/countrypicker',
@@ -53,6 +56,7 @@ export const componentList = [
   { name: 'Password', path: '/password', element: <PasswordPage /> },
   { name: 'Select', path: '/select', element: <SelectPage /> },
   { name: 'Switch', path: '/switch', element: <SwitchPage /> },
+  { name: 'Table', path: '/table', element: <TablePage /> },
   { name: 'Tabs', path: '/tabs', element: <TabsPage /> },
   { name: 'Text', path: '/text', element: <TextPage /> },
   { name: 'TextArea', path: '/textarea', element: <TextAreaPage /> },
