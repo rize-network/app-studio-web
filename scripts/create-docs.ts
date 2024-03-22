@@ -1,4 +1,4 @@
-import * as crypto from 'crypto';
+// import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
 import { exec } from 'child_process';
@@ -12,38 +12,38 @@ const componentsDir: string = 'src/components';
 const cacheDir: string = 'cache';
 const hashDir: string = 'hashes'; // Directory to store the hash files
 
-function generateMD5ForComponent(componentPath: string): string {
-  let hash = crypto.createHash('md5');
-  let files = fs.readdirSync(componentPath).sort();
+// function generateMD5ForComponent(componentPath: string): string {
+//   let hash = crypto.createHash('md5');
+//   let files = fs.readdirSync(componentPath).sort();
 
-  files.forEach((file) => {
-    let filePath = path.join(componentPath, file);
-    if (fs.statSync(filePath).isFile()) {
-      let fileContent = fs.readFileSync(filePath);
-      hash.update(fileContent);
-    }
-  });
+//   files.forEach((file) => {
+//     let filePath = path.join(componentPath, file);
+//     if (fs.statSync(filePath).isFile()) {
+//       let fileContent = fs.readFileSync(filePath);
+//       hash.update(fileContent);
+//     }
+//   });
 
-  let digest = hash.digest('hex');
-  return digest;
-}
+//   let digest = hash.digest('hex');
+//   return digest;
+// }
 
-function checkComponentChange(
-  componentPath: string,
-  storedHashPath: string
-): boolean {
-  let currentHash = generateMD5ForComponent(componentPath);
-  let storedHash = fs.existsSync(storedHashPath)
-    ? fs.readFileSync(storedHashPath, 'utf8')
-    : null;
+// function checkComponentChange(
+//   componentPath: string,
+//   storedHashPath: string
+// ): boolean {
+//   let currentHash = generateMD5ForComponent(componentPath);
+//   let storedHash = fs.existsSync(storedHashPath)
+//     ? fs.readFileSync(storedHashPath, 'utf8')
+//     : null;
 
-  if (!storedHash || currentHash !== storedHash) {
-    fs.writeFileSync(storedHashPath, currentHash);
-    return true;
-  }
+//   if (!storedHash || currentHash !== storedHash) {
+//     fs.writeFileSync(storedHashPath, currentHash);
+//     return true;
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 async function deleteComponentCache(componentName: string): Promise<void> {
   const componentCachePath = path.join(cacheDir, componentName);
@@ -70,7 +70,7 @@ async function createDocumentationForComponent(
   componentPath: string
 ): Promise<void> {
   const componentName = path.basename(componentPath);
-  const mdFilePath = path.join(componentPath, `${componentName}.mdx`);
+  const mdFilePath = path.join(componentPath, `${componentName}.md`);
 
   if (fs.existsSync(mdFilePath)) {
     await deleteComponentCache(componentName);
@@ -82,41 +82,41 @@ async function createDocumentationForComponent(
   await runCommand(botDocCommand);
 
   // After bot-doc completes, run lint:fix to clean up any generated files
-  const lintFixCommand = 'npm run lint:fix';
-  await runCommand(lintFixCommand);
+  // const lintFixCommand = 'npm run lint:fix';
+  // await runCommand(lintFixCommand);
 
   console.log(
     `Documentation generated and linted for ${componentName}. Updating hash.`
   );
 
   // Update the hash after successful lint fix and documentation generation
-  const storedHashPath = path.join(hashDir, `${componentName}.md5`);
-  const newHash = generateMD5ForComponent(componentPath);
-  fs.writeFileSync(storedHashPath, newHash);
+  // const storedHashPath = path.join(hashDir, `${componentName}.md5`);
+  // const newHash = generateMD5ForComponent(componentPath);
+  // fs.writeFileSync(storedHashPath, newHash);
 }
 
 async function getChangedComponents(
   componentDirs: string[],
   gitComponents: string[]
 ): Promise<string[]> {
-  let changedComponents: string[] = [];
+  // let changedComponents: string[] = [];
 
   const commonComponents = componentDirs.filter((componentDir) =>
     gitComponents.includes(componentDir)
   );
 
-  for (const componentDir of commonComponents) {
-    const componentName = path.basename(componentDir);
-    const storedHashPath = path.join(hashDir, `${componentName}.md5`);
+  // for (const componentDir of commonComponents) {
+  //   const componentName = path.basename(componentDir);
+  //   const storedHashPath = path.join(hashDir, `${componentName}.md5`);
 
-    if (
-      checkComponentChange(`${componentDir}/${componentName}`, storedHashPath)
-    ) {
-      changedComponents.push(componentDir);
-    }
-  }
+  //   // if (
+  //   //   checkComponentChange(`${componentDir}/${componentName}`, storedHashPath)
+  //   // ) {
+  //   changedComponents.push(componentDir);
+  //   // }
+  // }
 
-  return changedComponents;
+  return commonComponents;
 }
 
 async function findAllComponentFolders(baseDir: string): Promise<string[]> {
