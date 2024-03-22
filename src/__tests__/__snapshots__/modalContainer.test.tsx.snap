@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Container to match snapshot 1`] = `
+<div
+  className="sc-bdfCDU kErhm"
+  onClick={[Function]}
+  role="container"
+>
+  <div>
+    Modal Content
+  </div>
+</div>
+`;
