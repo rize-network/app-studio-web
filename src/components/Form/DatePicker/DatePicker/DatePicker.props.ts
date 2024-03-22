@@ -5,9 +5,6 @@ import { Shadow } from 'app-studio';
 import { DatePickerStyles, Shape, Size, Variant } from './DatePicker.type';
 
 export interface DatePickerProps {
-  /**
-   * The identifier for the DatePicker component.
-   */
   id?: string;
   /**
    * Custom icon to display when the DatePicker is checked.
