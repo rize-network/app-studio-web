@@ -15,7 +15,7 @@ const TablePage = () => {
 
   const data = [
     {
-      property: 'Data',
+      property: 'Caption',
       appStudio: <CaptionDemo />,
     },
     {
@@ -32,7 +32,7 @@ const TablePage = () => {
     },
   ];
 
-  return <Table columns={columns} data={data} />;
+  return <Table.Template columns={columns} data={data} />;
 };
 
 export default TablePage;

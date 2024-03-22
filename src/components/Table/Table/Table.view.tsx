@@ -1,84 +1,98 @@
 import React from 'react';
 import { Element } from 'app-studio';
 import { TableViewProps } from './Table.props';
+import { useTableStyles } from './Table.context';
 
-const TableView: React.FC<TableViewProps> = ({
-  data,
-  columns,
-  footer,
-  caption,
-  styles,
-}) => {
-  const Table = (props: any) => (
+export const TableContainer: React.FC<any> = (props) => {
+  const styles = useTableStyles();
+  return (
     <Element
       as="table"
       borderCollapse="collapse"
-      {...styles?.table}
+      {...styles.table}
       {...props}
     />
   );
+};
 
-  const TableHead = (props: any) => (
+export const TableHead: React.FC<any> = (props) => {
+  const styles = useTableStyles();
+  return (
     <Element
       as="thead"
       borderBottom="0.5px solid #ddd"
       textAlign="left"
       color="color.gray.400"
-      {...styles?.thead}
+      {...styles.thead}
       {...props}
     />
   );
+};
 
-  const TableHeadCell = (props: any) => (
+export const TableHeadCell: React.FC<any> = (props) => {
+  const styles = useTableStyles();
+  return (
     <Element
       as="th"
       padding="14px"
       whiteSpace="nowrap"
       fontWeight="500"
-      {...styles?.th}
+      {...styles.th}
       {...props}
     />
   );
+};
 
-  const TableRow = (props: any) => (
-    <Element as="tr" {...styles?.tr} {...props} />
-  );
+export const TableRow: React.FC<any> = (props) => {
+  const styles = useTableStyles();
+  return <Element as="tr" {...styles.tr} {...props} />;
+};
 
-  const TableCell = (props: any) => (
+export const TableCell: React.FC<any> = (props) => {
+  const styles = useTableStyles();
+  return (
     <Element
       as="td"
       padding="14px"
       whiteSpace="nowrap"
       fontWeight={props.isFirstColumn ? '400' : '300'}
-      {...styles?.td}
+      {...styles.td}
       {...props}
     />
   );
+};
 
-  const TableFooter = (props: any) => (
-    <Element as="tfoot" {...styles?.tfoot} {...props} />
-  );
+export const TableBody: React.FC<any> = (props) => {
+  const styles = useTableStyles();
+  return <Element as="tbody" {...styles.tbody} {...props} />;
+};
 
-  const TableBody = (props: any) => (
-    <Element as="tbody" {...styles?.tbody} {...props} />
-  );
+export const TableFooter: React.FC<any> = (props) => {
+  const styles = useTableStyles();
+  return <Element as="tfoot" {...styles.tfoot} {...props} />;
+};
 
-  const TableCaption = (props: any) => (
+export const TableCaption: React.FC<any> = (props) => {
+  const styles = useTableStyles();
+  return (
     <Element
       as="caption"
       margin={'10px 0'}
       color="color.gray.400"
-      {...styles?.caption}
+      {...styles.caption}
       {...props}
     />
   );
+};
 
-  const totalColumns = columns.length; // Total number of columns in the table
-  const cellsBeforeLast = (footer && footer?.length - 1) ?? 0; // Number of cells before the last one
-  const colspanForLast = totalColumns - cellsBeforeLast; // Remaining columns for the last cell
-
+export const TableView: React.FC<TableViewProps> = ({
+  data,
+  columns,
+  footer,
+  caption,
+}) => {
   return (
-    <Table>
+    <TableContainer>
       {caption && <TableCaption>{caption}</TableCaption>}
       <TableHead>
         <TableRow>
@@ -91,40 +105,24 @@ const TableView: React.FC<TableViewProps> = ({
         {data.map((row, index) => (
           <TableRow key={index}>
             {columns.map((column, columnIndex) => (
-              <TableCell
-                key={column.field}
-                isFirstColumn={columnIndex === 0}
-                borderBottom={
-                  index === row.length - 1
-                    ? '0.5px solid transparent'
-                    : '0.5px solid #ddd'
-                }
-              >
+              <TableCell key={column.field} isFirstColumn={columnIndex === 0}>
                 {row[column.field]}
               </TableCell>
             ))}
           </TableRow>
         ))}
       </TableBody>
-      {footer && footer.length > 0 && (
+      {footer && (
         <TableFooter>
           <TableRow>
-            {footer.map((footerItem, index) => {
-              const isLastItem = index === footer.length - 1;
-              return (
-                <TableCell
-                  key={index}
-                  colSpan={isLastItem ? colspanForLast : 1}
-                >
-                  {footerItem.value}
-                </TableCell>
-              );
-            })}
+            {footer.map((cell, index) => (
+              <TableCell key={index} {...cell.props}>
+                {cell.value}
+              </TableCell>
+            ))}
           </TableRow>
         </TableFooter>
       )}
-    </Table>
+    </TableContainer>
   );
 };
-
-export default TableView;

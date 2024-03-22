@@ -53,7 +53,7 @@ export const CaptionDemo = () => {
     },
   ];
   return (
-    <Table
+    <Table.Template
       caption="A list of your recent invoices."
       columns={cols}
       data={invoices}

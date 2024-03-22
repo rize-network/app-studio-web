@@ -1,14 +1,29 @@
 import React from 'react';
-import { Table } from '../Table';
+import {
+  TableContainer,
+  TableCaption,
+  TableHead,
+  TableRow,
+  TableHeadCell,
+  TableBody,
+  TableCell,
+} from '../Table/Table.view';
 
 export const DefaultDemo = () => {
-  const cols = [
+  interface DataRow {
+    invoice: string;
+    paymentStatus: string;
+    totalAmount: string;
+    paymentMethod: string;
+  }
+
+  const columns = [
     { title: 'Invoice', field: 'invoice' },
     { title: 'Payment Status', field: 'paymentStatus' },
     { title: 'Total Amount', field: 'totalAmount' },
     { title: 'Payment Method', field: 'paymentMethod' },
   ];
-  const invoices = [
+  const data: DataRow[] = [
     {
       invoice: 'INV001',
       paymentStatus: 'Paid',
@@ -52,5 +67,27 @@ export const DefaultDemo = () => {
       paymentMethod: 'Credit Card',
     },
   ];
-  return <Table columns={cols} data={invoices} />;
+  return (
+    <TableContainer>
+      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableHead>
+        <TableRow>
+          {columns.map((column) => (
+            <TableHeadCell key={column.field}>{column.title}</TableHeadCell>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {data.map((row, index) => (
+          <TableRow key={index}>
+            {columns.map((column, columnIndex) => (
+              <TableCell key={column.field} isFirstColumn={columnIndex === 0}>
+                {row[column.field as keyof DataRow]}
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </TableContainer>
+  );
 };

@@ -54,9 +54,24 @@ export const FooterDemo = () => {
   ];
   return (
     <Table
-      columns={cols}
-      data={invoices}
-      footer={[{ field: 'Total', value: '$2,500.00' }]}
-    />
+      styles={{
+        tfoot: {
+          borderTop: '1px solid gray',
+          borderBottom: '1px solid gray',
+        },
+      }}
+    >
+      <Table.Template
+        columns={cols}
+        data={invoices}
+        footer={[
+          {
+            value: 'Total Amount',
+            props: { colspan: 3, style: { fontWeight: 'bold' } },
+          },
+          { value: '$2,500.00' },
+        ]}
+      />
+    </Table>
   );
 };

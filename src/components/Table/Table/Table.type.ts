@@ -10,3 +10,12 @@ export type TableViewStyles = {
   th?: CSSProperties;
   caption?: CSSProperties;
 };
+
+export interface Column {
+  title: string;
+  field: string;
+}
+export interface FooterCell {
+  value: string;
+  props?: any;
+}

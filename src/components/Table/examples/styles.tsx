@@ -54,8 +54,6 @@ export const StylesDemo = () => {
   ];
   return (
     <Table
-      columns={cols}
-      data={invoices}
       styles={{
         table: {
           boxShadow:
@@ -64,6 +62,8 @@ export const StylesDemo = () => {
           borderRadius: '1em',
         },
       }}
-    />
+    >
+      <Table.Template columns={cols} data={invoices} />
+    </Table>
   );
 };
