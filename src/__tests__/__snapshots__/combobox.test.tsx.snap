@@ -6,6 +6,7 @@ exports[`Checkbox to match snapshot 1`] = `
   id="combo"
   role="combobox"
 >
+  // Conditionally rendered right-aligned component passed through props, typically used for actions or indicators.
   <div
     className="sc-bdfCDU dRoCvi"
   >
@@ -22,6 +23,7 @@ exports[`Checkbox to match snapshot 1`] = `
         >
           Option 1
         </div>
+        // Optionally display a tick icon next to the currently selected item if showTick is true and the item doesn't have its own icon.
       </div>
     </div>
   </div>
