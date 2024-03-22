@@ -4,7 +4,6 @@ import * as path from 'path';
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import simpleGit, { SimpleGit } from 'simple-git';
-
 const git: SimpleGit = simpleGit();
 const execAsync = promisify(exec);
 
