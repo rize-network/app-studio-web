@@ -88,10 +88,13 @@ export class DocuCode {
         return;
       }
 
+      console.log({ commentsObj });
       // Sort and process comments
       commentsObj.comments.sort(
         (a: { line: number }, b: { line: number }) => b.line - a.line
       );
+      console.log({ commentsObj });
+
       for (const commentObj of commentsObj.comments) {
         await this.insertCommentIntoFile(
           filePath,
@@ -106,8 +109,12 @@ export class DocuCode {
   }
 
   async insertCommentIntoFile(filePath: string, line: number, comment: string) {
+    console.log({ filePath, line, comment });
+
     const fileContent = await this.fileHandler.readFile(filePath);
     let lines = fileContent.split('\n');
+
+    console.log(lines.length);
 
     lines.splice(line, 0, `// ${comment}`); // Insert the comment.
 
@@ -141,13 +148,13 @@ export class DocuCode {
   }
 
   async processDirectory(dirPath: string, assistantId: string) {
-    const cachedResponse = this.cache.getJsonFromCache(
-      this.cacheKey + `/comments`
-    );
+    // const cachedResponse = this.cache.getJsonFromCache(
+    //   this.cacheKey + `/comments`
+    // );
 
-    if (cachedResponse) {
-      return cachedResponse;
-    }
+    // if (cachedResponse) {
+    //   return cachedResponse;
+    // }
 
     const files = await this.fileHandler.readFiles(dirPath);
 
@@ -163,8 +170,10 @@ export class DocuCode {
         (stat.isFile() && path.extname(file) === '.ts') ||
         path.extname(file) === '.tsx'
       ) {
-        await this.removeCommentsAndCleanFile(fullPath);
-        await this.commentCodeFile(fullPath, assistantId);
+        if (fullPath === 'src/components/Alert/Alert/Alert.props.ts') {
+          await this.removeCommentsAndCleanFile(fullPath);
+          await this.commentCodeFile(fullPath, assistantId);
+        }
       } else if (stat.isDirectory()) {
         await this.processDirectory(fullPath, assistantId); // Recursively process subdirectories
       }

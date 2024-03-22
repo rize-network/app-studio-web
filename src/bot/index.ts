@@ -18,7 +18,7 @@ async function main() {
   const basePath = 'src/components';
   const componentFolder = componentArgFolder ?? `${basePath}/${componentName}`;
   console.log({ componentFolder });
-  const propsPath = `src/data/props/${componentName}.props.json`;
+  // const propsPath = `src/data/props/${componentName}.props.json`;
 
   // Check if the component directory exists
   if (!fs.existsSync(componentFolder)) {
@@ -48,22 +48,22 @@ async function main() {
   // Process directory for commenting
   console.log('\nProcessing files for annotation...');
   await docuCode.processDirectory(componentFolder, assistantDocumentation.id);
-  console.log('Annotation process completed.');
+  // console.log('Annotation process completed.');
 
-  // Initialize assistantGPT for props generation
-  console.log('\nGenerating props file...');
-  const assistantCreation = await assistantGPT.init(
-    'AppStudio MDXDoc',
-    [],
-    'props'
-  );
-  // Generate props file
-  await assistantGPT.response(
-    assistantCreation.id,
-    propsPath,
-    componentFolder,
-    componentName
-  );
+  // // Initialize assistantGPT for props generation
+  // console.log('\nGenerating props file...');
+  // const assistantCreation = await assistantGPT.init(
+  //   'AppStudio MDXDoc',
+  //   [],
+  //   'props'
+  // );
+  // // Generate props file
+  // await assistantGPT.response(
+  //   assistantCreation.id,
+  //   propsPath,
+  //   componentFolder,
+  //   componentName
+  // );
 }
 
 main().catch((error) => {

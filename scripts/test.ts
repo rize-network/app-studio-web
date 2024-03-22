@@ -1,50 +1,114 @@
-import * as crypto from 'crypto';
-import * as fs from 'fs';
-import * as path from 'path';
+function insertComments(code: string, comments: any[]): string {
+  const lines = code.split('\n');
+  const commentMap = new Map<
+    number,
+    { comment: string; codeSnippet: string }
+  >();
 
-function generateMD5ForComponent(componentPath: string): string {
-  let hash = crypto.createHash('md5');
-  let files = fs.readdirSync(componentPath).sort();
-
-  files.forEach((file) => {
-    let filePath = path.join(componentPath, file);
-    if (fs.statSync(filePath).isFile()) {
-      let fileContent = fs.readFileSync(filePath);
-      hash.update(fileContent);
+  // Prepare comment map with additional check for code snippet
+  for (const comment of comments) {
+    if (comment.line < 1 || comment.line > lines.length) {
+      console.warn(
+        `Comment for non-existent line ${comment.line} will be ignored.`
+      );
+      continue;
     }
-  });
-
-  let digest = hash.digest('hex');
-  console.log(`Generated hash for ${componentPath}: ${digest}`);
-  return digest;
-}
-
-function checkComponentChange(
-  componentPath: string,
-  storedHashPath: string
-): boolean {
-  let currentHash = generateMD5ForComponent(componentPath);
-  let storedHash = fs.existsSync(storedHashPath)
-    ? fs.readFileSync(storedHashPath, 'utf8')
-    : null;
-
-  console.log(`Current hash: ${currentHash}`);
-  console.log(`Stored hash: ${storedHash || 'none'}`);
-
-  if (!storedHash || currentHash !== storedHash) {
-    fs.writeFileSync(storedHashPath, currentHash);
-    return true;
+    if (commentMap.has(comment.line)) {
+      console.warn(`Duplicate comment for line ${comment.line}.`);
+    }
+    commentMap.set(comment.line, {
+      comment: comment.comment,
+      codeSnippet: comment.codeSnippet,
+    });
   }
 
-  return false;
-}
+  return lines
+    .map((line, index) => {
+      const lineNum = index + 1;
+      const commentData = commentMap.get(lineNum);
 
-// Example usage
-const componentPath = 'src/components/Alert/Alert';
-const storedHashPath = 'src/components/Alert/hash.txt';
+      if (commentData) {
+        const { comment, codeSnippet } = commentData;
+        const lineStart = line.trim().substring(0, 4);
+        console.log({ lineNum: lineStart, codeSnippet });
+        if (lineStart.toLocaleLowerCase() === codeSnippet) {
+          return `// ${comment}\n${line}`;
+        } else {
+          console.warn(
+            `Code snippet '${codeSnippet}' does not match the start of line ${lineNum}.`
+          );
+        }
+      }
 
-if (checkComponentChange(componentPath, storedHashPath)) {
-  console.log('Component has changed or is new.');
-} else {
-  console.log('No changes detected in the component.');
+      return line;
+    })
+    .join('\n');
 }
+// Sample code and comments
+const code: string = `import { AlertStyles, Variant } from './Alert.type';
+export interface AlertProps {
+icon?: React.ReactNode;
+title: string;
+description: string;
+variant?: Variant;
+styles?: AlertStyles;
+}`;
+
+const comments: any[] = [
+  {
+    line: 1,
+    comment: 'Importing type definitions for Badge component properties.',
+    codeSnippet: 'impo',
+  },
+  {
+    line: 2,
+    comment: "Defines the structure for the Badge component's props.",
+    codeSnippet: 'expo',
+  },
+  {
+    line: 3,
+    comment: 'content: Text or number to be displayed within the badge.',
+    codeSnippet: 'cont',
+  },
+  {
+    line: 4,
+    comment: 'variant: Optional prop to specify the badge style variant.',
+    codeSnippet: 'vari',
+  },
+  {
+    line: 5,
+    comment:
+      'colorScheme: Optional prop to define the color theme of the badge.',
+    codeSnippet: 'colo',
+  },
+  {
+    line: 6,
+    comment:
+      "position: Optional prop to determine the badge's position on the container element.",
+    codeSnippet: 'posi',
+  },
+  {
+    line: 7,
+    comment: 'size: Optional prop to define the size of the badge.',
+    codeSnippet: 'size',
+  },
+  {
+    line: 8,
+    comment: 'shape: Optional prop to define the shape of the badge.',
+    codeSnippet: 'shap',
+  },
+  {
+    line: 9,
+    comment: 'styles: Optional prop to apply custom styles to the badge.',
+    codeSnippet: 'styl',
+  },
+  {
+    line: 10,
+    comment:
+      'Allows additional props not explicitly defined in the type to be included.',
+    codeSnippet: '[x: ',
+  },
+];
+
+// Inserting comments into the code
+const result = insertComments(code, comments);
