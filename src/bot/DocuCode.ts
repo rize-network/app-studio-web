@@ -38,7 +38,7 @@ export class DocuCode {
     // Créez un nouveau thread pour la conversation
     const thread = await this.openAIConnector.createThread();
 
-    console.log('ok threads');
+    // console.log('ok threads');
 
     // Définissez le prompt initial pour la compréhension globale du dossier
     await this.openAIConnector.addMessageToThread(thread.id, {
@@ -46,7 +46,7 @@ export class DocuCode {
       content: prompt,
     });
 
-    console.log('ok message');
+    // console.log('ok message');
 
     // Récupérez et traitez la réponse pour la compréhension globale
     const response = await this.openAIConnector.runAssistant(
@@ -54,11 +54,11 @@ export class DocuCode {
       thread.id
     );
 
-    console.log('ok run ');
+    // console.log('ok run ');
 
     // Process the commented code to extract only the code part
     const codeOnly = extractJsonCode(response.text.value);
-    console.log('ok run ');
+    // console.log('ok run ');
 
     this.cache.saveEachJsonToCache(
       this.cacheKey + `/comments`,
@@ -69,7 +69,7 @@ export class DocuCode {
     // Replace file content with the extracted code
     await this.processComments(filePath, codeOnly);
 
-    console.log('commentCodeFile successful');
+    // console.log('commentCodeFile successful');
   }
 
   async processComments(filePath: string, commentsJson: any) {
@@ -99,7 +99,7 @@ export class DocuCode {
           commentObj.comment
         );
       }
-      console.log('processComments successful');
+      // console.log('processComments successful');
     } catch (error) {
       console.error('Error processing comments:', error);
     }
@@ -116,7 +116,7 @@ export class DocuCode {
 
   async removeCommentsAndCleanFile(filePath: string) {
     // Read the content of the file
-    let content: string = fs.readFileSync(filePath, 'utf8');
+    let content: string = this.fileHandler.readFile(filePath);
 
     // Regular expression to match single line, multi-line, and JSDoc comments
     const singleLineCommentsPattern = /\/\/.*/g;
@@ -135,9 +135,9 @@ export class DocuCode {
     content = content.replace(extraNewLinesAndWhitespacePattern, '\n');
 
     // Write the modified content back to the file
-    fs.writeFileSync(filePath, content, 'utf8');
+    this.fileHandler.writeWithoutCheck(filePath, content);
 
-    console.log(`Comments and extra newlines removed from '${filePath}'.`);
+    // console.log(`Comments and extra newlines removed from '${filePath}'.`);
   }
 
   async processDirectory(dirPath: string, assistantId: string) {

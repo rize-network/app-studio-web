@@ -1,44 +1,36 @@
 {
+  "componentDescription": "Displays a customizable alert with icons, title, and description",
   "icon": {
-    "type": [
-      "React.ReactNode"
-    ],
-    "typeValues": [],
-    "description": "Optional 'icon' property which allows for a React node (e.g., an image or SVG) to be included in the alert.",
-    "defaultValue": []
+    "type": "React.ReactNode",
+    "typeValues": "ReactNode",
+    "description": "Optional icon rendered in the component",
+    "defaultValue": "<WarningSvg size={24} color={Themes[variant].content.color} />"
   },
   "title": {
-    "type": [
-      "string"
-    ],
-    "typeValues": [],
-    "description": "Mandatory 'title' property of type string to display as the alert's heading.",
-    "defaultValue": []
+    "type": "string",
+    "typeValues": "string",
+    "description": "Required main message or header of the component",
+    "defaultValue": ""
   },
   "description": {
-    "type": [
-      "string"
-    ],
-    "typeValues": [],
-    "description": "Mandatory 'description' property of type string that holds the main message of the alert.",
-    "defaultValue": []
+    "type": "string",
+    "typeValues": "string",
+    "description": "Required additional details about the alert",
+    "defaultValue": ""
   },
   "variant": {
-    "type": [
-      "Variant"
+    "type": "Variant",
+    "typeValues": [
+      "'default'",
+      "[provided by 'Variant' type from './Alert.type']"
     ],
-    "typeValues": [],
-    "description": "Optional 'variant' property to specify the type of alert, which modifies the appearance (e.g., success, error).",
-    "defaultValue": [
-      "default"
-    ]
+    "description": "Visual style of the component, e.g., success, warning, error",
+    "defaultValue": "'default'"
   },
   "styles": {
-    "type": [
-      "AlertStyles"
-    ],
-    "typeValues": [],
-    "description": "Optional 'styles' property to allow for custom styling via a defined AlertStyles type.",
-    "defaultValue": []
+    "type": "AlertStyles",
+    "typeValues": "[provided by 'AlertStyles' type from './Alert.type']",
+    "description": "Custom styling for the component",
+    "defaultValue": "{}"
   }
 }

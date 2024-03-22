@@ -37,7 +37,7 @@ export const MessageLayout = ({
     },
     bottomRight: {
       bottom: 8,
-      left: 6,
+      right: 6,
     },
   }[position];
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from '../components/Layout/View/View';
 import {
   FormikTextAreaExemple,
   FormikTextFieldExemple,
@@ -9,7 +9,8 @@ import {
   FormCheckboxExemple,
   FormikSelectExemple,
   FormikSwitchExemple,
-} from 'src/components/Formik/examples';
+} from '../components/Formik/examples';
+import { FormikComboBoxDemo } from '../components/Formik/examples/FormikComboBox';
 
 export const FormikPage = () => {
   return (
@@ -66,6 +67,12 @@ export const FormikPage = () => {
             <td>TextField</td>
             <td>
               <FormikTextFieldExemple />
+            </td>
+          </tr>
+          <tr>
+            <td>Combobox</td>
+            <td>
+              <FormikComboBoxDemo />
             </td>
           </tr>
         </tbody>

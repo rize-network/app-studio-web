@@ -1,11 +1,11 @@
 {
-    "id": "asst_u6uwfgfqhnttAvlcFW6azbjo",
+    "id": "asst_KxeCnrsh0LZwgviHe0vENmR7",
     "object": "assistant",
-    "created_at": 1710951336,
-    "name": "MDX-Doc - Assistant",
+    "created_at": 1711011705,
+    "name": "AppStudio MDXDoc - Assistant",
     "description": null,
     "model": "gpt-4-1106-preview",
-    "instructions": "**Role**: As a senior web developer and\n  Your mission is :\n   - Understanding the project in detail.\n   - Generating relevant documentation and responses.\n\n  ** Framework Name **: ```MDX-Doc```\n\n  ",
+    "instructions": "\n**Role**: Senior Web Developer\n**Mission**:\n  - Gain a comprehensive understanding of the project named \"App-Studio\".\n  - Generate detailed documentation and insightful responses related to the project.\n\n**Framework Name**: \"App-Studio\"\n",
     "tools": [
         {
             "type": "retrieval"

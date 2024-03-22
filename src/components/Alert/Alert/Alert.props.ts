@@ -1,15 +1,14 @@
 import { AlertStyles, Variant } from './Alert.type';
-// Import required types from './Alert.type' for use in defining the AlertProps interface.
+// Imports the 'AlertStyles' type and 'Variant' enum from './Alert.type', which define the styles and variant types for the Alert component.
 export interface AlertProps {
-  // Define the AlertProps interface which specifies the expected properties for an Alert component.
+  // Defines an 'AlertProps' interface representing the props the Alert component expects.
   icon?: React.ReactNode;
-  // Optional 'icon' property which allows for a React node (e.g., an image or SVG) to be included in the alert.
+  // Optional 'icon' prop that allows a React node to be provided, which will be displayed as the icon of the alert.
   title: string;
-  // Mandatory 'title' property of type string to display as the alert's heading.
+  // Mandatory 'title' prop that specifies the title text for the alert.
   description: string;
-  // Mandatory 'description' property of type string that holds the main message of the alert.
+  // Mandatory 'description' prop that provides details or additional information for the alert.
   variant?: Variant;
-  // Optional 'variant' property to specify the type of alert, which modifies the appearance (e.g., success, error).
+  // Optional 'variant' prop that specifies the style variant of the alert; expects a value of the 'Variant' enum.
   styles?: AlertStyles;
-  // Optional 'styles' property to allow for custom styling via a defined AlertStyles type.
 }
