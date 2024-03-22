@@ -1,9 +1,9 @@
 import { useState } from 'react';
 export const useAvatarState = () => {
-  // Defines and exports a custom hook named useAvatarState for managing avatar image loading state.
+// Define the `useAvatarState` custom hook that manages avatar image error state.
   const [imageError, setImageError] = useState(false);
-  // useState hook initializes the imageError state variable to false, indicating no error by default.
+// `setImageError` is a function that allows updating the value of `imageError`.
+// Initialize a state variable `imageError` with a default value of `false`. This will track if there is an error with the avatar image loading.
   return { imageError, setImageError };
-  // setImageError is a function that allows updating the imageError state to handle error scenarios when loading an image.
+// Return an object containing the `imageError` state and the `setImageError` function to manipulate the state, which can be used in components that require handling avatar image errors.
 };
-// The hook returns an object containing both the imageError state and setImageError function for external use.

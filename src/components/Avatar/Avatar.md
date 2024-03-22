@@ -1,9 +1,11 @@
 ### **Import**
+
 ```tsx static
 import { Avatar } from '@app-studio/web';
 ```
 
 ### **Default**
+
 ```tsx
 import React from 'react';
 import { Avatar } from '../Avatar';
@@ -11,10 +13,10 @@ import { Avatar } from '../Avatar';
 export const DefaultDemo = () => (
   <Avatar src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg" />
 );
-
 ```
 
 ### **size**
+
 "size is an optional property of type Size to set the size of the avatar."
 
 ```tsx
@@ -36,10 +38,10 @@ export const SizeDemo = () => {
     </Vertical>
   );
 };
-
 ```
 
 ### **fallback**
+
 "fallback is an optional string for a fallback image URL, in case the src fails to load."
 
 ```tsx
@@ -47,10 +49,10 @@ import React from 'react';
 import { Avatar } from '../Avatar';
 
 export const FallbackDemo = () => <Avatar src="" fallback="ML" />;
-
 ```
 
 ### **styles**
+
 "styles is an optional property for custom styling of the Avatar component, following the AvatarStyles type."
 
 ```tsx
@@ -75,6 +77,4 @@ export const StylesDemo = () => {
     />
   );
 };
-
 ```
-

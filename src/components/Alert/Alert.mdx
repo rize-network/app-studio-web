@@ -1,7 +1,11 @@
+# Alert
+
+Displays an alert message with optional custom icon and styling.
+
 ### **Import**
-```tsx static
-import { Alert } from '@app-studio/web';
-```
+  ```tsx static
+  import { Alert } from '@app-studio/web';
+  ```
 
 ### **Default**
 ```tsx
@@ -20,7 +24,7 @@ export const DefaultDemo = () => {
 ```
 
 ### **icon**
-"Optional 'icon' property which allows for a React node (e.g., an image or SVG) to be included in the alert."
+"Optional property to display as an icon in the Alert component."
 
 ```tsx
 import React from 'react';
@@ -40,7 +44,7 @@ export const IconDemo = () => {
 ```
 
 ### **variant**
-"Optional 'variant' property to specify the type of alert, which modifies the appearance (e.g., success, error)."
+"Optional property that controls the appearance or type of the Alert."
 
 ```tsx
 import React from 'react';
@@ -64,7 +68,7 @@ export const VariantDemo = () => (
 ```
 
 ### **styles**
-"Optional 'styles' property to allow for custom styling via a defined AlertStyles type."
+"Optional property that accepts an object allowing custom styling options."
 
 ```tsx
 import React from 'react';

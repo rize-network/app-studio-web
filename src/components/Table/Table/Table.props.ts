@@ -1,6 +1,5 @@
 import React from 'react';
 import { Column, FooterCell, TableViewStyles } from './Table.type';
-
 export interface TableProps {
   data: any[];
   columns: Column[];
@@ -8,9 +7,7 @@ export interface TableProps {
   caption?: React.ReactNode;
   styles?: TableViewStyles;
 }
-
 export interface TableViewProps extends TableProps {}
-
 export interface TableLayoutProps {
   Head?: React.FC<any>;
   Body?: React.FC<any>;

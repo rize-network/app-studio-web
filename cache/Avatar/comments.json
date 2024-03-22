@@ -1,0 +1,188 @@
+{
+  "Avatar.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines an interface 'AvatarProps' for the Avatar component props. This includes the image source URL, an optional size from a predefined set of sizes, an optional fallback URL for when the image source fails, and optional custom styles."
+        },
+        {
+          "line": 6,
+          "comment": "Extends 'AvatarProps' to include 'AvatarViewProps' for the view-specific properties. This adds an 'imageError' flag to signal when an image has failed to load and a 'setImageError' function to update this flag."
+        },
+        {
+          "line": 7,
+          "comment": "The 'setImageError' function uses React.Dispatch to ensure that the state update is strongly typed with 'React.SetStateAction', ensuring type safety when updating the state."
+        }
+      ]
+    }
+  ],
+  "Avatar.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Define the `useAvatarState` custom hook that manages avatar image error state."
+        },
+        {
+          "line": 3,
+          "comment": "Initialize a state variable `imageError` with a default value of `false`. This will track if there is an error with the avatar image loading."
+        },
+        {
+          "line": 3,
+          "comment": "`setImageError` is a function that allows updating the value of `imageError`."
+        },
+        {
+          "line": 4,
+          "comment": "Return an object containing the `imageError` state and the `setImageError` function to manipulate the state, which can be used in components that require handling avatar image errors."
+        }
+      ]
+    }
+  ],
+  "Avatar.style.tsx": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "This import statement brings in the 'Size' type from the 'Avatar.type' file, which is probably an enumeration or set of predefined string sizes that 'AvatarSizeMap' uses as keys."
+        },
+        {
+          "line": 2,
+          "comment": "Exporting a constant 'AvatarSizeMap' which is a mapping from the 'Size' type to numerical values. This map defines specific numeric sizes for different avatar size variants."
+        },
+        {
+          "line": 3,
+          "comment": "Defines an extra-small avatar size as 24 pixels."
+        },
+        {
+          "line": 4,
+          "comment": "Defines a small avatar size as 32 pixels."
+        },
+        {
+          "line": 5,
+          "comment": "Defines a medium avatar size as 48 pixels."
+        },
+        {
+          "line": 6,
+          "comment": "Defines a large avatar size as 64 pixels."
+        },
+        {
+          "line": 7,
+          "comment": "Defines an extra-large avatar size as 80 pixels. This mapping is essential for providing consistent avatar sizes across the application based on the size designation (xs, sm, md, lg, xl)."
+        }
+      ]
+    }
+  ],
+  "Avatar.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a type alias 'Size' which can be one of five string literal values representing size categories."
+        },
+        {
+          "line": 3,
+          "comment": "Describes the basic shape of the AvatarStyles object, allowing for optional customization of container, image, and fallback styles."
+        },
+        {
+          "line": 4,
+          "comment": "container property within AvatarStyles may hold CSS properties specific to the container element of an avatar."
+        },
+        {
+          "line": 5,
+          "comment": "image property within AvatarStyles may hold CSS properties specific to the image element within the avatar container."
+        },
+        {
+          "line": 6,
+          "comment": "fallback property within AvatarStyles can be of any type, implying usage for alternative content when the image is not available."
+        }
+      ]
+    }
+  ],
+  "Avatar.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 7,
+          "comment": "AvatarView is a functional React component that is exported for use in other parts of the application."
+        },
+        {
+          "line": 8,
+          "comment": "The component takes an object of props defined by AvatarViewProps interface."
+        },
+        {
+          "line": 10,
+          "comment": "Assigns a default 'md' if no size prop is provided when the component is used."
+        },
+        {
+          "line": 11,
+          "comment": "Uses a default fallback text 'IM' when no fallback prop is provided or in case of an image load error."
+        },
+        {
+          "line": 12,
+          "comment": "styles is an optional prop for custom styling, used by spreading its properties into inline styles where applicable."
+        },
+        {
+          "line": 13,
+          "comment": "imageError is a state hook, initially false, that when true, changes the borderColor prop and conditionally renders the Text component."
+        },
+        {
+          "line": 14,
+          "comment": "setImageError is a function that is called to set the imageError state to true when an image fails to load."
+        },
+        {
+          "line": 16,
+          "comment": "Maps the size prop to a specific set of width and height values defined in AvatarSizeMap."
+        },
+        {
+          "line": 17,
+          "comment": "Defines inline styles for how the image should be displayed using the CSS object-fit property and merges with optional image styles from props."
+        },
+        {
+          "line": 27,
+          "comment": "Uses a 'Center' layout component to provide a centered and circular frame for the avatar."
+        },
+        {
+          "line": 28,
+          "comment": "Uses ARIA role 'avatar' to improve accessibility by semantically defining the purpose of the element."
+        },
+        {
+          "line": 33,
+          "comment": "Conditionally applies a black border color if the image has failed to load."
+        },
+        {
+          "line": 35,
+          "comment": "Spreads any container-style props if provided for custom styling the Center component."
+        },
+        {
+          "line": 36,
+          "comment": "Conditionally renders the Image component if there's no image load error."
+        },
+        {
+          "line": 38,
+          "comment": "Sets alt text for the Image component which is useful for accessibility and when the image cannot be displayed."
+        },
+        {
+          "line": 40,
+          "comment": "Applies the calculated size and inline styles to the Image component."
+        },
+        {
+          "line": 41,
+          "comment": "The onError callback updates the imageError state, triggering a UI update to display fallback content."
+        },
+        {
+          "line": 43,
+          "comment": "Conditionally renders the Text component if the image fails to load, displaying a fallback text."
+        },
+        {
+          "line": 44,
+          "comment": "Applies a custom size to the Text component based on the 'size' prop allowing for scalable text size."
+        },
+        {
+          "line": 45,
+          "comment": "Spreads any fallback-style props if provided for custom styling the Text component when it's rendered as a fallback."
+        }
+      ]
+    }
+  ]
+}

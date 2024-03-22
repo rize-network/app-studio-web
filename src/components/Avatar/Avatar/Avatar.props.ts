@@ -1,20 +1,14 @@
 import { AvatarStyles, Size } from './Avatar.type';
-// Imports custom type definitions for styling and size from Avatar.type module, to be used in defining the props for the Avatar component.
 export interface AvatarProps {
+// Defines an interface 'AvatarProps' for the Avatar component props. This includes the image source URL, an optional size from a predefined set of sizes, an optional fallback URL for when the image source fails, and optional custom styles.
   src: string;
-  // Defines the AvatarProps interface specifying the properties that can be passed to the Avatar component.
   size?: Size;
-  // src is a string representing the source URL of the avatar image.
   fallback?: string;
-  // size is an optional property of type Size to set the size of the avatar.
   styles?: AvatarStyles;
-  // fallback is an optional string for a fallback image URL, in case the src fails to load.
+// Extends 'AvatarProps' to include 'AvatarViewProps' for the view-specific properties. This adds an 'imageError' flag to signal when an image has failed to load and a 'setImageError' function to update this flag.
 }
-// styles is an optional property for custom styling of the Avatar component, following the AvatarStyles type.
+// The 'setImageError' function uses React.Dispatch to ensure that the state update is strongly typed with 'React.SetStateAction', ensuring type safety when updating the state.
 export interface AvatarViewProps extends AvatarProps {
   imageError: boolean;
-  // Defines the AvatarViewProps interface extending AvatarProps to include additional properties for the view logic.
   setImageError: React.Dispatch<React.SetStateAction<boolean>>;
-  // imageError is a boolean flag to indicate if there has been an error loading the image.
 }
-// setImageError is a function from React's useState hook to toggle the imageError state.

@@ -1,15 +1,15 @@
 import { Size } from './Avatar.type';
-// Import the 'Size' type which likely enumerates possible size labels for avatar components.
+// This import statement brings in the 'Size' type from the 'Avatar.type' file, which is probably an enumeration or set of predefined string sizes that 'AvatarSizeMap' uses as keys.
 export const AvatarSizeMap: Record<Size, number> = {
-  // Define 'AvatarSizeMap' as an object that maps 'Size' labels to numeric pixel values, setting specific dimensions for different avatar sizes.
+// Exporting a constant 'AvatarSizeMap' which is a mapping from the 'Size' type to numerical values. This map defines specific numeric sizes for different avatar size variants.
   xs: 24,
-  // Map 'xs' (extra small) size to 24 pixels.
+// Defines an extra-small avatar size as 24 pixels.
   sm: 32,
-  // Map 'sm' (small) size to 32 pixels.
+// Defines a small avatar size as 32 pixels.
   md: 48,
-  // Map 'md' (medium) size to 48 pixels.
+// Defines a medium avatar size as 48 pixels.
   lg: 64,
-  // Map 'lg' (large) size to 64 pixels.
+// Defines a large avatar size as 64 pixels.
   xl: 80,
-  // Map 'xl' (extra large) size to 80 pixels. This mapping setup helps maintain consistency in avatar sizing across the application.
+// Defines an extra-large avatar size as 80 pixels. This mapping is essential for providing consistent avatar sizes across the application based on the size designation (xs, sm, md, lg, xl).
 };

@@ -11,7 +11,6 @@ export const Themes = {
     },
   },
   info: {
-    // The `info` theme configuration with a light blue background and a slightly darker blue border for containers, using a specific hex color for the content.
     container: {
       backgroundColor: 'color.blue.200',
       border: 'color.blue.400',
