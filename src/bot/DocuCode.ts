@@ -88,12 +88,12 @@ export class DocuCode {
         return;
       }
 
-      console.log({ commentsObj });
+      // console.log({ commentsObj });
       // Sort and process comments
       commentsObj.comments.sort(
         (a: { line: number }, b: { line: number }) => b.line - a.line
       );
-      console.log({ commentsObj });
+      // console.log({ commentsObj });
 
       for (const commentObj of commentsObj.comments) {
         await this.insertCommentIntoFile(
@@ -109,12 +109,12 @@ export class DocuCode {
   }
 
   async insertCommentIntoFile(filePath: string, line: number, comment: string) {
-    console.log({ filePath, line, comment });
+    // console.log({ filePath, line, comment });
 
     const fileContent = await this.fileHandler.readFile(filePath);
     let lines = fileContent.split('\n');
 
-    console.log(lines.length);
+    // console.log(lines.length);
 
     lines.splice(line, 0, `// ${comment}`); // Insert the comment.
 

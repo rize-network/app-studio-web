@@ -1,46 +1,35 @@
 {
-  "componentDescription": "Provides visual feedback with icons and messages for user alerts",
+  "componentDescription": "Displays an alert with an icon, title, and additional message.",
   "icon": {
-    "type": [
-      "React.ReactNode"
-    ],
+    "type": "React.ReactNode",
     "typeValues": [],
-    "description": "Optional icon to be displayed as the alert's icon",
+    "description": "Optional icon element that can be displayed in the Alert component.",
     "defaultValue": "<WarningSvg size={24} color={Themes[variant].content.color} />"
   },
   "title": {
-    "type": [
-      "string"
-    ],
+    "type": "string",
     "typeValues": [],
-    "description": "Mandatory title text to be displayed as the alert's title",
-    "defaultValue": []
+    "description": "The title of the Alert. This property is mandatory and will display as the Alert's main header text.",
+    "defaultValue": null
   },
   "description": {
-    "type": [
-      "string"
-    ],
+    "type": "string",
     "typeValues": [],
-    "description": "Mandatory message content to be displayed as the alert's description",
-    "defaultValue": []
+    "description": "An additional description or message that will be displayed below the title in the Alert component.",
+    "defaultValue": null
   },
   "variant": {
-    "type": [
-      "Variant"
-    ],
+    "type": "Variant",
     "typeValues": [
-      "'default'",
-      "...other variants from Themes"
+      "'default'"
     ],
-    "description": "Type of alert, influences the appearance",
+    "description": "Optional variant property to specify the type of Alert, which may alter its color or style.",
     "defaultValue": "'default'"
   },
   "styles": {
-    "type": [
-      "AlertStyles"
-    ],
+    "type": "AlertStyles",
     "typeValues": [],
-    "description": "Custom styles to be applied to the alert",
-    "defaultValue": []
+    "description": "Optional styles property to provide custom styling to the Alert component.",
+    "defaultValue": null
   }
 }

@@ -51,47 +51,74 @@ async function deleteComponentCache(componentName: string): Promise<void> {
     console.log(`Deleted cache for component: ${componentName}`);
   }
 }
-async function runCommand(command: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    exec(command, (error, stdout, stderr) => {
-      if (error) {
-        console.error(stderr);
-        reject(error.message);
-      } else {
-        console.log(stdout);
-        resolve(stdout);
-      }
-    });
-  });
-}
+// async function runCommand(command: string): Promise<string> {
+//   return new Promise((resolve, reject) => {
+//     exec(command, (error, stdout, stderr) => {
+//       if (error) {
+//         console.error(stderr);
+//         reject(error.message);
+//       } else {
+//         console.log(stdout);
+//         resolve(stdout);
+//       }
+//     });
+//   });
+// }
+
+// async function createDocumentationForComponent(
+//   componentPath: string
+// ): Promise<void> {
+//   const componentName = path.basename(componentPath);
+//   const mdFilePath = path.join(componentPath, `${componentName}.md`);
+
+//   if (fs.existsSync(mdFilePath)) {
+//     await deleteComponentCache(componentName);
+//     fs.unlinkSync(mdFilePath); // Direct deletion as we already checked existence
+//   }
+
+//   // Run bot-doc to generate the documentation
+//   const botDocCommand = `npm run bot-doc -- ${componentName} ${componentPath}`;
+//   await runCommand(botDocCommand);
+
+//   // After bot-doc completes, run lint:fix to clean up any generated files
+//   // const lintFixCommand = 'npm run lint:fix';
+//   // await runCommand(lintFixCommand);
+
+//   console.log(
+//     `Documentation generated and linted for ${componentName}. Updating hash.`
+//   );
+
+//   // Update the hash after successful lint fix and documentation generation
+//   // const storedHashPath = path.join(hashDir, `${componentName}.md5`);
+//   // const newHash = generateMD5ForComponent(componentPath);
+//   // fs.writeFileSync(storedHashPath, newHash);
+// }
 
 async function createDocumentationForComponent(
   componentPath: string
 ): Promise<void> {
   const componentName = path.basename(componentPath);
-  const mdFilePath = path.join(componentPath, `${componentName}.md`);
+  const mdFilePath = path.join(componentPath, `${componentName}.mdx`);
 
   if (fs.existsSync(mdFilePath)) {
     await deleteComponentCache(componentName);
-    fs.unlinkSync(mdFilePath); // Direct deletion as we already checked existence
+    await fs.unlinkSync(mdFilePath); // Direct deletion as we already checked existence
   }
 
-  // Run bot-doc to generate the documentation
-  const botDocCommand = `npm run bot-doc -- ${componentName} ${componentPath}`;
-  await runCommand(botDocCommand);
+  const command = `npm run bot-doc -- ${componentName} ${componentPath}`;
 
-  // After bot-doc completes, run lint:fix to clean up any generated files
-  // const lintFixCommand = 'npm run lint:fix';
-  // await runCommand(lintFixCommand);
-
-  console.log(
-    `Documentation generated and linted for ${componentName}. Updating hash.`
-  );
-
-  // Update the hash after successful lint fix and documentation generation
-  // const storedHashPath = path.join(hashDir, `${componentName}.md5`);
-  // const newHash = generateMD5ForComponent(componentPath);
-  // fs.writeFileSync(storedHashPath, newHash);
+  const childProcess = exec(command);
+  childProcess.stdout?.pipe(process.stdout); // Optional chaining to safely access stdout
+  childProcess.stderr?.pipe(process.stderr); // Optional chaining to safely access stderr
+  await new Promise<void>((resolve, reject) => {
+    childProcess.on('exit', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`Child process exited with code ${code}`));
+      }
+    });
+  });
 }
 
 async function getChangedComponents(

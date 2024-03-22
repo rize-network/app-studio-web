@@ -127,6 +127,98 @@
           "comment": "End of the AlertProps interface definition."
         }
       ]
+    },
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "The line imports two types, 'AlertStyles' and 'Variant', from a type definition file 'Alert.type', which are going to be used in the 'AlertProps' interface to define the shape of style-related props and variant type for the Alert component."
+        },
+        {
+          "line": 2,
+          "comment": "The 'AlertProps' interface is declared here to type the properties that the Alert component will accept. This helps in type-checking within the component and when it is used elsewhere in the project."
+        },
+        {
+          "line": 3,
+          "comment": "The 'icon' property is optional and accepts any valid React node. It's used to render an icon within the Alert component if provided."
+        },
+        {
+          "line": 4,
+          "comment": "The 'title' property is mandatory and must be a string. It signifies the title of the Alert component."
+        },
+        {
+          "line": 5,
+          "comment": "The 'description' property is mandatory and must be a string. This will be the description text displayed in the Alert component."
+        },
+        {
+          "line": 6,
+          "comment": "The 'variant' property is optional and it employs the 'Variant' type imported from './Alert.type'. It determines the stylistic variation of the Alert component such as 'error', 'warning', etc."
+        },
+        {
+          "line": 7,
+          "comment": "The 'styles' property is optional and utilizes the 'AlertStyles' type. It allows custom styles to be passed to the Alert component which can override default styles."
+        }
+      ]
+    },
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Importing types 'AlertStyles' and 'Variant' from './Alert.type' for use in defining AlertProps."
+        },
+        {
+          "line": 3,
+          "comment": "Defines the structure of the props that the Alert component will accept."
+        },
+        {
+          "line": 4,
+          "comment": "Optional 'icon' prop which may contain any React node, typically used for adding an icon in the alert."
+        },
+        {
+          "line": 5,
+          "comment": "Mandatory 'title' prop that will be the main header or bold text showing in the alert."
+        },
+        {
+          "line": 6,
+          "comment": "Mandatory 'description' prop that will hold the main message or further details of the alert."
+        },
+        {
+          "line": 7,
+          "comment": "Optional 'variant' prop to determine the style of the alert, e.g., success, warning, etc. Uses the 'Variant' type imported."
+        },
+        {
+          "line": 8,
+          "comment": "Optional 'styles' prop which allows custom styling to be applied to the Alert component. Uses the 'AlertStyles' type imported."
+        }
+      ]
+    },
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines an interface for the properties accepted by the Alert component."
+        },
+        {
+          "line": 3,
+          "comment": "Optional icon element that can be displayed in the Alert component. It's a React node, allowing for JSX or component insertion."
+        },
+        {
+          "line": 4,
+          "comment": "The title of the Alert. This property is mandatory and will display as the Alert's main header text."
+        },
+        {
+          "line": 5,
+          "comment": "An additional description or message that will be displayed below the title in the Alert component."
+        },
+        {
+          "line": 6,
+          "comment": "Optional variant property to specify the type of Alert, which may alter its color or style. The type is defined by the Variant enum imported from Alert.type."
+        },
+        {
+          "line": 7,
+          "comment": "Optional styles property to provide custom styling to the Alert component. The styles should adhere to the AlertStyles type specifications."
+        }
+      ]
     }
   ],
   "Alert.state.ts": [
