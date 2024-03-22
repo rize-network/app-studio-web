@@ -92,7 +92,7 @@ export const TableView: React.FC<TableViewProps> = ({
   caption,
 }) => {
   return (
-    <TableContainer>
+    <TableContainer role="Table">
       {caption && <TableCaption>{caption}</TableCaption>}
       <TableHead>
         <TableRow>
