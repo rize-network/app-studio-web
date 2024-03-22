@@ -224,7 +224,6 @@ async function main() {
     gitComponents
   );
 
-  console.log({ gitComponents, adjustedComponents, changedComponents });
   console.log('Changed components: ' + changedComponents);
   if (changedComponents.length > 0) {
     console.log('Generating documentation for changed components:');
