@@ -3,11 +3,13 @@
 Displays a circular avatar with image fallback and custom styling options.
 
 ### **Import**
-  ```tsx static
-  import { Avatar } from '@app-studio/web';
-  ```
+
+```tsx static
+import { Avatar } from '@app-studio/web';
+```
 
 ### **Default**
+
 ```tsx
 import React from 'react';
 import { Avatar } from '../Avatar';
@@ -15,10 +17,10 @@ import { Avatar } from '../Avatar';
 export const DefaultDemo = () => (
   <Avatar src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg" />
 );
-
 ```
 
 ### **size**
+
 "Optional property to specify the size of the avatar, from predefined Size options."
 
 ```tsx
@@ -40,10 +42,10 @@ export const SizeDemo = () => {
     </Vertical>
   );
 };
-
 ```
 
 ### **fallback**
+
 "Optional string for an image URL to use if the primary 'src' fails to load."
 
 ```tsx
@@ -51,10 +53,10 @@ import React from 'react';
 import { Avatar } from '../Avatar';
 
 export const FallbackDemo = () => <Avatar src="" fallback="ML" />;
-
 ```
 
 ### **styles**
+
 "Optional object to apply custom styles to the avatar component."
 
 ```tsx
@@ -79,6 +81,4 @@ export const StylesDemo = () => {
     />
   );
 };
-
 ```
-

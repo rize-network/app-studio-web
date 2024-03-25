@@ -40,7 +40,7 @@ export class DocuCode {
     // Define the prompt
     const prompt = CommentPrompt(
       componentName,
-      filePath,
+      path.basename(filePath),
       JSON.stringify(updatedCodeContent)
     );
 
