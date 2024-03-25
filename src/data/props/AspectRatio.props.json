@@ -1,34 +1,33 @@
 {
+  "componentDescription": "Maintains a set aspect ratio for child content",
   "ratio": {
     "type": [
       "number"
     ],
-    "typeValues": [],
-    "description": [
-      "Optional; used to determine the aspect ratio of the child element."
+    "typeValues": [
+      "any number"
     ],
-    "defaultValue": [
-      "16 / 9"
-    ]
+    "description": "specifying the aspect ratio",
+    "defaultValue": "16/9"
   },
   "children": {
     "type": [
       "React.ReactNode"
     ],
-    "typeValues": [],
-    "description": [
-      "Optional; accepts any valid React node, this is where you place the content inside the component."
+    "typeValues": [
+      "any valid React node"
     ],
-    "defaultValue": []
+    "description": "defining the child components",
+    "defaultValue": "undefined"
   },
   "[x: string]": {
     "type": [
       "any"
     ],
-    "typeValues": [],
-    "description": [
-      "Allows the interface to accept an indeterminate number of additional properties using an index signature, adding flexibility to the component."
+    "typeValues": [
+      "any value"
     ],
-    "defaultValue": []
+    "description": "Allows for an indefinite number of additional properties with any types, adding flexibility to the props",
+    "defaultValue": "undefined"
   }
 }

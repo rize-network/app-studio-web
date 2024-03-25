@@ -113,8 +113,6 @@ export class DocuCode {
 
     // Write the modified content back to the file
     this.fileHandler.writeWithoutCheck(filePath, content);
-
-    // console.log(`Comments and extra newlines removed from '${filePath}'.`);
   }
 
   async processDirectory(dirPath: string, assistantId: string) {
@@ -140,10 +138,10 @@ export class DocuCode {
         (stat.isFile() && path.extname(file) === '.ts') ||
         path.extname(file) === '.tsx'
       ) {
-        if (fullPath === 'src/components/Alert/Alert.tsx') {
-          await this.removeCommentsAndCleanFile(fullPath);
-          await this.commentCodeFile(fullPath, assistantId);
-        }
+        // if (fullPath === 'src/components/AspectRatio/AspectRatio.tsx') {
+        await this.removeCommentsAndCleanFile(fullPath);
+        await this.commentCodeFile(fullPath, assistantId);
+        // }
       } else if (stat.isDirectory()) {
         await this.processDirectory(fullPath, assistantId); // Recursively process subdirectories
       }
@@ -187,28 +185,39 @@ export class DocuCode {
     }
 
     let inBlock = false; // To track if we are inside a JSX block or similar
+    let blockDepth = 0; // To handle nested JSX blocks
 
     return lines
       .map((line, index) => {
         const lineNum = index + 1;
         const commentData = commentMap.get(lineNum);
 
-        // Check if we are entering or leaving a block
+        // Check if we are entering or leaving a JSX block
         if (line.includes('<') && !line.includes('/>')) {
           inBlock = true;
+          blockDepth++;
         }
         if (line.includes('/>') || line.includes('</')) {
-          inBlock = false;
+          blockDepth--;
+          if (blockDepth === 0) {
+            inBlock = false;
+          }
         }
 
         if (commentData && !inBlock) {
           const { comment, codeSnippet } = commentData;
-          const lineStart = line.trim().substring(0, 4);
-
-          if (
-            lineStart.toLocaleLowerCase() ===
-            codeSnippet.trim().substring(0, 4).toLocaleLowerCase()
-          ) {
+          const lineStart = line.trim().substring(0, 3).toLocaleLowerCase();
+          const codeSnippetLine = codeSnippet
+            .trim()
+            .substring(0, 3)
+            .toLocaleLowerCase();
+          console.log(
+            lineStart,
+            codeSnippetLine,
+            typeof lineStart,
+            typeof codeSnippetLine
+          );
+          if (lineStart === codeSnippetLine) {
             return `// ${comment}\n${line}`;
           } else {
             console.warn(

@@ -34,7 +34,7 @@ function insertComments(code: string, comments: any[]): string {
       codeSnippet: comment.codeSnippet,
     });
   }
-
+  console.log();
   let inBlock = false; // To track if we are inside a JSX block or similar
 
   return lines
@@ -72,14 +72,21 @@ function insertComments(code: string, comments: any[]): string {
 }
 
 // Sample code and comments
-const code: string = `import { AlertStyles, Variant } from './Alert.type';
-export interface AlertProps {
-  icon?: React.ReactNode;
-  title: string;
-  description: string;
-  variant?: Variant;
-  styles?: AlertStyles;
-}
+const code: string = `import React from 'react';
+import { AspectRatioProps } from './AspectRatio/AspectRatio.props';
+import { AspectRatioView } from './AspectRatio/AspectRatio.view';
+const AspectRatioComponent = ({
+  ratio,
+  children,
+  ...props
+}: AspectRatioProps) => {
+  return (
+    <AspectRatioView ratio={ratio} {...props}>
+      {children}
+    </AspectRatioView>
+  );
+};
+export const AspectRatio = AspectRatioComponent;
 `;
 
 const comments: any[] = [
@@ -123,3 +130,5 @@ const comments: any[] = [
 // Inserting comments into the code
 const result = insertComments(code, comments);
 console.log(`${result}`);
+const t = 'hello';
+console.log(t.trim().substring(0, 4).toLocaleLowerCase());

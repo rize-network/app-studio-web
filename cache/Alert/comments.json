@@ -1,0 +1,218 @@
+{
+  "Alert.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines the AlertProps interface for alert components",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Optional icon property, expecting a React node element",
+          "codeSnippet": "icon"
+        },
+        {
+          "line": 4,
+          "comment": "Mandatory title property, must be a string",
+          "codeSnippet": "titl"
+        },
+        {
+          "line": 5,
+          "comment": "Mandatory description property, must be a string",
+          "codeSnippet": "desc"
+        },
+        {
+          "line": 6,
+          "comment": "Optional variant property to determine the style of the alert",
+          "codeSnippet": "vari"
+        },
+        {
+          "line": 7,
+          "comment": "Optional styles property to apply custom styles to the alert component",
+          "codeSnippet": "styl"
+        }
+      ]
+    }
+  ],
+  "Alert.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Declare a custom React hook named useAlertState.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Within the hook, initialize a state variable isHovered with a default value of false using the useState hook.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 4,
+          "comment": "Return an object containing the state variable isHovered and the updater function setIsHovered from the hook.",
+          "codeSnippet": "retu"
+        }
+      ]
+    }
+  ],
+  "Alert.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Define a constant object 'Themes' exporting various theme styles.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Start of the 'default' theme definition with style properties.",
+          "codeSnippet": "defa"
+        },
+        {
+          "line": 8,
+          "comment": "Defines the content style for the 'default' theme.",
+          "codeSnippet": "cont"
+        },
+        {
+          "line": 12,
+          "comment": "The 'info' theme with unique container and content styles.",
+          "codeSnippet": "info"
+        },
+        {
+          "line": 17,
+          "comment": "Content styles specific to the 'info' theme.",
+          "codeSnippet": "cont"
+        },
+        {
+          "line": 21,
+          "comment": "Specifies the 'success' theme with corresponding container and content styles.",
+          "codeSnippet": "succ"
+        },
+        {
+          "line": 26,
+          "comment": "Sets the content styling nuances for the 'success' theme.",
+          "codeSnippet": "cont"
+        },
+        {
+          "line": 30,
+          "comment": "Start of the 'error' theme with its characteristic styles.",
+          "codeSnippet": "erro"
+        },
+        {
+          "line": 35,
+          "comment": "Content styling for the 'error' theme.",
+          "codeSnippet": "cont"
+        },
+        {
+          "line": 39,
+          "comment": "Introduction of the 'warning' theme styles.",
+          "codeSnippet": "warn"
+        },
+        {
+          "line": 44,
+          "comment": "Defines color and aesthetics for the 'warning' theme's content.",
+          "codeSnippet": "cont"
+        }
+      ]
+    }
+  ],
+  "Alert.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a 'Variant' type representing the different states an alert can have.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Begins the type definition for 'AlertStyles', which will hold customizable style properties for an alert component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 8,
+          "comment": "Ends the 'AlertStyles' type definition, encapsulating style properties that can be optionally provided.",
+          "codeSnippet": "};"
+        }
+      ]
+    }
+  ],
+  "Alert.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 9,
+          "comment": "Defines AlertView as a functional component using destructuring to extract props.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 14,
+          "comment": "Sets a default variant prop to 'default' if none is provided.",
+          "codeSnippet": "vari"
+        },
+        {
+          "line": 16,
+          "comment": "Begins a Horizontal layout component that will contain the alert's elements.",
+          "codeSnippet": "<Hor"
+        },
+        {
+          "line": 26,
+          "comment": "The View wrapper around the icon, to ensure it is aligned center.",
+          "codeSnippet": "<Vie"
+        },
+        {
+          "line": 27,
+          "comment": "Conditionally renders the passed icon or a default WarningSvg if no icon is provided.",
+          "codeSnippet": "{ico"
+        },
+        {
+          "line": 30,
+          "comment": "This is the default WarningSvg icon with its styles.",
+          "codeSnippet": "<War"
+        },
+        {
+          "line": 36,
+          "comment": "A Vertical layout component to stack the title and description texts.",
+          "codeSnippet": "<Ver"
+        },
+        {
+          "line": 37,
+          "comment": "Renders the title text with customizable styles through props.",
+          "codeSnippet": "<Tex"
+        },
+        {
+          "line": 44,
+          "comment": "Renders the description text below the title, with customizable styles through props.",
+          "codeSnippet": "<Tex"
+        }
+      ]
+    }
+  ],
+  "Alert.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Definition of the AlertComponent functional component with destructured props.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 10,
+          "comment": "Destructured arguments are typed with AlertProps interface which defines the expected shape of props.",
+          "codeSnippet": "}:"
+        },
+        {
+          "line": 11,
+          "comment": "Start of the JSX block where the AlertView component is returned.",
+          "codeSnippet": "<Al"
+        },
+        {
+          "line": 19,
+          "comment": "Exporting the AlertComponent as 'Alert' for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

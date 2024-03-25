@@ -1,53 +1,57 @@
-// Define an exportable constant object named Themes, which will contain different theme configurations for an application.
+
+// Define a constant object 'Themes' exporting various theme styles.
 export const Themes = {
-  // The 'default' theme configuration which serves as the base theme for the application.
+// Start of the 'default' theme definition with style properties.
   default: {
-    // In the 'default' theme, define styles for the 'container' element, likely defining the overall look and boundaries for UI components.
     container: {
       backgroundColor: 'white',
       border: 'color.blackAlpha.800',
     },
-    // Define styles for the 'content' elements within the 'default' theme, which probably include text, icons, or other elements that carry meaning.
+// Defines the content style for the 'default' theme.
     content: {
       color: 'color.blackAlpha.800',
     },
   },
-  // The 'info' theme configuration with visual styles that could be used to display informational messages or elements in the application.
+// The 'info' theme with unique container and content styles.
   info: {
     container: {
       backgroundColor: 'color.blue.200',
       border: 'color.blue.400',
     },
+// Content styles specific to the 'info' theme.
     content: {
       color: '#60a5fa',
     },
   },
-  // The 'success' theme configuration tailored for indicating successful operations or positive messages.
+// Specifies the 'success' theme with corresponding container and content styles.
   success: {
     container: {
       backgroundColor: 'color.green.200',
       border: 'color.green.400',
     },
+// Sets the content styling nuances for the 'success' theme.
     content: {
       color: '#22c55e',
     },
   },
-  // The 'error' theme configuration used to denote error messages or elements that require urgent user attention.
+// Start of the 'error' theme with its characteristic styles.
   error: {
     container: {
       backgroundColor: 'color.red.200',
       border: 'color.red.400',
     },
+// Content styling for the 'error' theme.
     content: {
       color: '#ef4444',
     },
   },
-  // The 'warning' theme configuration designed for warning signs or to caution users about a specific operation or context.
+// Introduction of the 'warning' theme styles.
   warning: {
     container: {
       backgroundColor: 'color.orange.200',
       border: 'color.orange.400',
     },
+// Defines color and aesthetics for the 'warning' theme's content.
     content: {
       color: '#f97316',
     },
