@@ -12,7 +12,7 @@ export const AlertView = ({
   title,
   styles,
   description,
-// Sets the default variant prop to 'default' if not provided
+  // Sets the default variant prop to 'default' if not provided
   variant = 'default',
 }: AlertProps) => (
   <Horizontal
