@@ -6,10 +6,9 @@ const AspectRatioComponent = ({
   ratio,
   children,
   ...props
-}: 
-// Opening of the functional component's body.
+}: // Opening of the functional component's body.
 AspectRatioProps) => {
-// Beginning of the return statement in the functional component.
+  // Beginning of the return statement in the functional component.
   return (
     <AspectRatioView ratio={ratio} {...props}>
       {children}

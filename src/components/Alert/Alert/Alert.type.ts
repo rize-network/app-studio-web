@@ -7,5 +7,5 @@ export type AlertStyles = {
   title?: any;
   description?: any;
   icon?: any;
-// Ends the 'AlertStyles' type definition, encapsulating style properties that can be optionally provided.
+  // Ends the 'AlertStyles' type definition, encapsulating style properties that can be optionally provided.
 };

@@ -4,11 +4,11 @@ import { Center } from '../../Layout/Center/Center';
 import { AspectRatioProps } from './AspectRatio.props';
 // Declaration of a functional component named AspectRatioView.
 export const AspectRatioView = ({
-// Set a default aspect ratio of 16:9 if no ratio is provided as a prop.
+  // Set a default aspect ratio of 16:9 if no ratio is provided as a prop.
   ratio = 16 / 9,
-// children prop used to render enclosed components.
+  // children prop used to render enclosed components.
   children,
-// Spread the rest of the props to inherit additional properties.
+  // Spread the rest of the props to inherit additional properties.
   ...props
 }: AspectRatioProps) => (
   <Center
