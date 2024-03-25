@@ -15,5 +15,6 @@ export const IsScrollableDemo = () => {
     'Central Africa Time (CAT)',
     'East Africa Time (EAT',
   ];
-  return <Select options={timeZones} label="Select a time zone" />;
+
+  return <Select options={timeZones} />;
 };

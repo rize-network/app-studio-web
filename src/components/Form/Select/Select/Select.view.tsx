@@ -38,7 +38,7 @@ const Item: React.FC<ItemProps> = ({
     <Element
       as="li"
       margin={0}
-      paddingVertical={8}
+      paddingVertical={10}
       paddingHorizontal={12}
       listStyleType="none"
       onMouseEnter={handleHover}
@@ -48,7 +48,7 @@ const Item: React.FC<ItemProps> = ({
       backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
       {...props}
     >
-      {option}
+      <Text> {option}</Text>
     </Element>
   );
 };
@@ -148,6 +148,8 @@ const DropDown: React.FC<DropDownProps> = ({
   styles = { dropDown: {} },
   options,
   callback = () => {},
+  highlightedIndex,
+  setHighlightedIndex,
 }) => {
   const itemStates = useItemState();
   const handleCallback = (option: string) => callback(option);
@@ -197,12 +199,16 @@ const DropDown: React.FC<DropDownProps> = ({
       {...shadow}
       {...styles['dropDown']}
     >
-      {options.map((option) => (
+      {options.map((option, index) => (
         <Item
           key={option}
           size={size}
           option={option}
           callback={handleCallback}
+          backgroundColor={
+            index === highlightedIndex ? 'color.gray.100' : 'transparent'
+          }
+          onMouseEnter={() => setHighlightedIndex(index)}
           {...itemStates}
           {...styles['text']}
         />
@@ -274,6 +280,8 @@ const SelectView: React.FC<SelectViewProps> = ({
   setValue = () => {},
   setIsHovered = () => {},
   setIsFocused = () => {},
+  setHighlightedIndex,
+  highlightedIndex,
   ...props
 }) => {
   const isWithLabel = !!(isFocused && label);
@@ -393,6 +401,8 @@ const SelectView: React.FC<SelectViewProps> = ({
           styles={styles}
           options={options}
           callback={handleCallback}
+          highlightedIndex={highlightedIndex}
+          setHighlightedIndex={setHighlightedIndex}
         />
       )}
     </FieldContainer>
