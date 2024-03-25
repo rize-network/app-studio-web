@@ -77,8 +77,6 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
       width="100%"
       {...props}
     >
-      // Conditionally rendered right-aligned component passed through props,
-      typically used for actions or indicators.
       {label && (
         // Toggle the dropdown visibility based on its current state, only shown if isDropdownVisible is true.
         <Text styles={styles?.label} htmlFor={props.id}>
@@ -114,8 +112,6 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             <Text weight="medium" flexGrow={1} {...styles?.label}>
               {selectedItem.label}
             </Text>
-            // Optionally display a tick icon next to the currently selected
-            item if showTick is true and the item doesn't have its own icon.
           </Horizontal>
           {right}
           {isDropdownVisible && (

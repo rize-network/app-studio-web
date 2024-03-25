@@ -211,12 +211,12 @@ export class DocuCode {
             .trim()
             .substring(0, 3)
             .toLocaleLowerCase();
-          console.log(
-            lineStart,
-            codeSnippetLine,
-            typeof lineStart,
-            typeof codeSnippetLine
-          );
+          // console.log(
+          //   lineStart,
+          //   codeSnippetLine,
+          //   typeof lineStart,
+          //   typeof codeSnippetLine
+          // );
           if (lineStart === codeSnippetLine) {
             return `// ${comment}\n${line}`;
           } else {

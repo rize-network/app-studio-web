@@ -42,27 +42,17 @@ AvatarViewProps) => {
       {...styles?.container}
     >
       {!imageError ? (
-        // Conditionally applies a black border color if the image has failed to load.
         <Image
           alt="IM"
-          // Spreads any container-style props if provided for custom styling the Center component.
           src={src}
-          // Conditionally renders the Image component if there's no image load error.
           style={imageStyle}
           width={avatarSize}
-          // Sets alt text for the Image component which is useful for accessibility and when the image cannot be displayed.
           height={avatarSize}
           onError={() => setImageError(true)}
-          // Applies the calculated size and inline styles to the Image component.
         />
       ) : (
-        // The onError callback updates the imageError state, triggering a UI update to display fallback content.
         <Text size={size} {...styles?.fallback}>
-          // Conditionally renders the Text component if the image fails to
-          load, displaying a fallback text.
           {fallback}
-          // Applies a custom size to the Text component based on the 'size'
-          prop allowing for scalable text size.
         </Text>
         // Spreads any fallback-style props if provided for custom styling the Text component when it's rendered as a fallback.
       )}

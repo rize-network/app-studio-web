@@ -28,12 +28,7 @@ export const TabsView = (props: TabsViewProps) => {
   return (
     // Shape and cursor style: Sets the shape of the tab buttons to pill-shaped and changes the cursor to pointer on hover for better user experience.
     <Horizontal width="100w" height={'100%'} {...styles?.container}>
-      // isAuto prop: This property likely relates to some automatic behavior or
-      default styling in the Button component.
       <Horizontal marginBottom={20} {...styles?.headerTabs}>
-        // Conditional styling: Applies different styles for an active tab
-        versus inactive tabs; active styling is prioritized when a condition is
-        met.
         {tabs.map((tab, idx) => (
           <Button
             // Text component inside Button: Renders the title text within each tab, with applied styles and active state changes.
