@@ -86,6 +86,7 @@ export interface SelectProps {
    * Applies a shadow effect to the select field.
    */
   shadow?: Shadow | Elevation | CSSProperties;
+  isScrollable?: boolean;
 
   /**
    * Additional properties and attributes for the select field.
