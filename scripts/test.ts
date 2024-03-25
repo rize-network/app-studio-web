@@ -1,3 +1,13 @@
+function splitArrayToJSON(array: string[]): { line: number; code: string }[] {
+  const linesArray = array.map((item) => item.split('\n')).flat();
+  const lineNumbers = linesArray.map((_, index) => index + 1);
+
+  return lineNumbers.map((lineNum, index) => ({
+    line: lineNum,
+    code: linesArray[index],
+  }));
+}
+
 function insertComments(code: string, comments: any[]): string {
   const lines = code.split('\n');
   const commentMap = new Map<
@@ -5,7 +15,10 @@ function insertComments(code: string, comments: any[]): string {
     { comment: string; codeSnippet: string }
   >();
 
-  // Prepare comment map with additional check for code snippet
+  if (!Array.isArray(comments)) {
+    throw new TypeError('Comments must be an array.');
+  }
+
   for (const comment of comments) {
     if (comment.line < 1 || comment.line > lines.length) {
       console.warn(
@@ -22,16 +35,29 @@ function insertComments(code: string, comments: any[]): string {
     });
   }
 
+  let inBlock = false; // To track if we are inside a JSX block or similar
+
   return lines
     .map((line, index) => {
       const lineNum = index + 1;
       const commentData = commentMap.get(lineNum);
 
-      if (commentData) {
+      // Check if we are entering or leaving a block
+      if (line.includes('<') && !line.includes('/>')) {
+        inBlock = true;
+      }
+      if (line.includes('/>') || line.includes('</')) {
+        inBlock = false;
+      }
+
+      if (commentData && !inBlock) {
         const { comment, codeSnippet } = commentData;
         const lineStart = line.trim().substring(0, 4);
-        console.log({ lineNum: lineStart, codeSnippet });
-        if (lineStart.toLocaleLowerCase() === codeSnippet) {
+
+        if (
+          lineStart.toLocaleLowerCase() ===
+          codeSnippet.trim().substring(0, 4).toLocaleLowerCase()
+        ) {
           return `// ${comment}\n${line}`;
         } else {
           console.warn(
@@ -44,71 +70,56 @@ function insertComments(code: string, comments: any[]): string {
     })
     .join('\n');
 }
+
 // Sample code and comments
 const code: string = `import { AlertStyles, Variant } from './Alert.type';
 export interface AlertProps {
-icon?: React.ReactNode;
-title: string;
-description: string;
-variant?: Variant;
-styles?: AlertStyles;
-}`;
+  icon?: React.ReactNode;
+  title: string;
+  description: string;
+  variant?: Variant;
+  styles?: AlertStyles;
+}
+`;
 
 const comments: any[] = [
   {
-    line: 1,
-    comment: 'Importing type definitions for Badge component properties.',
-    codeSnippet: 'impo',
-  },
-  {
     line: 2,
-    comment: "Defines the structure for the Badge component's props.",
+    comment: 'Start of AlertProps interface definition.',
     codeSnippet: 'expo',
   },
   {
     line: 3,
-    comment: 'content: Text or number to be displayed within the badge.',
-    codeSnippet: 'cont',
+    comment: 'Optional icon property, can be any React node.',
+    codeSnippet: 'icon',
   },
   {
     line: 4,
-    comment: 'variant: Optional prop to specify the badge style variant.',
-    codeSnippet: 'vari',
+    comment: 'Mandatory title property of type string.',
+    codeSnippet: 'titl',
   },
   {
     line: 5,
-    comment:
-      'colorScheme: Optional prop to define the color theme of the badge.',
-    codeSnippet: 'colo',
+    comment: 'Mandatory description property of type string.',
+    codeSnippet: 'desc',
   },
   {
     line: 6,
-    comment:
-      "position: Optional prop to determine the badge's position on the container element.",
-    codeSnippet: 'posi',
+    comment: 'Optional variant property with type Variant.',
+    codeSnippet: 'vari',
   },
   {
     line: 7,
-    comment: 'size: Optional prop to define the size of the badge.',
-    codeSnippet: 'size',
-  },
-  {
-    line: 8,
-    comment: 'shape: Optional prop to define the shape of the badge.',
-    codeSnippet: 'shap',
-  },
-  {
-    line: 9,
-    comment: 'styles: Optional prop to apply custom styles to the badge.',
+    comment: 'Optional styles property with type AlertStyles.',
     codeSnippet: 'styl',
   },
   {
-    line: 10,
-    comment:
-      'Allows additional props not explicitly defined in the type to be included.',
-    codeSnippet: '[x: ',
+    line: 8,
+    comment: 'End of AlertProps interface definition.',
+    codeSnippet: '}',
   },
 ];
 
 // Inserting comments into the code
 const result = insertComments(code, comments);
+console.log(`${result}`);

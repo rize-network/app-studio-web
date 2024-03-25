@@ -1,30 +1,30 @@
+// Define an exportable constant object named Themes, which will contain different theme configurations for an application.
 export const Themes = {
-  // Define a 'Themes' object that serves as a theme configuration for various UI components.
+// The 'default' theme configuration which serves as the base theme for the application.
   default: {
-    // 'default' theme properties with a white background and dark border for general use.
+// In the 'default' theme, define styles for the 'container' element, likely defining the overall look and boundaries for UI components.
     container: {
       backgroundColor: 'white',
       border: 'color.blackAlpha.800',
     },
-    // 'info' theme properties with light blue shades for informational messages or elements.
+// Define styles for the 'content' elements within the 'default' theme, which probably include text, icons, or other elements that carry meaning.
     content: {
       color: 'color.blackAlpha.800',
     },
   },
+// The 'info' theme configuration with visual styles that could be used to display informational messages or elements in the application.
   info: {
-    // 'success' theme properties with green shades indicating success states or confirmation messages.
     container: {
       backgroundColor: 'color.blue.200',
       border: 'color.blue.400',
     },
     content: {
-      // 'error' theme properties with red shades for error messages or critical warnings.
       color: '#60a5fa',
     },
   },
+// The 'success' theme configuration tailored for indicating successful operations or positive messages.
   success: {
     container: {
-      // 'warning' theme properties with orange shades for warnings or important notices.
       backgroundColor: 'color.green.200',
       border: 'color.green.400',
     },
@@ -32,6 +32,7 @@ export const Themes = {
       color: '#22c55e',
     },
   },
+// The 'error' theme configuration used to denote error messages or elements that require urgent user attention.
   error: {
     container: {
       backgroundColor: 'color.red.200',
@@ -41,6 +42,7 @@ export const Themes = {
       color: '#ef4444',
     },
   },
+// The 'warning' theme configuration designed for warning signs or to caution users about a specific operation or context.
   warning: {
     container: {
       backgroundColor: 'color.orange.200',
