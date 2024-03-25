@@ -1,10 +1,10 @@
 import { useState } from 'react';
+// Declares the useToggleState function which takes defaultToggled parameter to initialize the toggle state.
 export const useToggleState = (defaultToggled: boolean) => {
-  // Defines a custom hook `useToggleState` that takes a default boolean value to set the initial state of a toggle functionality.
+  // Creates a stateful value isHovered for tracking hover state and a function setIsHovered to update that state, initially false.
   const [isHovered, setIsHovered] = useState(false);
-  // Declares `isHovered` state to track the hovered state of an element with its setter function `setIsHovered` initialized to `false`.
+  // Creates a stateful value isToggle to store the current toggle state and a function setIsToggled to modify it, initialized with defaultToggled.
   const [isToggle, setIsToggled] = useState(defaultToggled);
-  // Declares `isToggle` state to represent the toggled state of an element with its setter `setIsToggled`, initialized with the `defaultToggled` parameter.
+  // Returns an object containing the current states and the functions to update them for external use.
   return { isHovered, setIsHovered, isToggle, setIsToggled };
-  // Returns an object containing the `isHovered` state, its setter function, the `isToggle` state, and its setter function, to be used by the components that require toggle behavior.
 };

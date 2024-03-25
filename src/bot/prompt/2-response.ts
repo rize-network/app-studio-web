@@ -1,6 +1,5 @@
 export const RespondPrompt = (props: string, view: string, type?: string) => `
 Please use the provided """Files Content""" as specified below:
->>>>>>> main
 
 **Files Content:**
 - Props.ts:
@@ -30,7 +29,6 @@ Just one line to indicate its use for the user. It should never be an object.
 
 **Expected JSON Output Format:**
 \`\`\`json
->>>>>>> main
 {
   componentDescription :"",
   [state each propsName here]:{
@@ -43,5 +41,4 @@ Just one line to indicate its use for the user. It should never be an object.
 \`\`\`
 
 Return the information in the ""JSON format"" shown above. If there is no data available, return an empty object (\`{}\`).
->>>>>>> main
 `;

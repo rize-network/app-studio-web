@@ -1,18 +1,23 @@
 export interface ToggleGroupProps {}
-// Defines an empty interface `ToggleGroupProps` as a placeholder for later expansion or to signify its usage for type-checking or component prop definition.
 import { Shape, ToggleItem, Variant } from './ToggleGroup.type';
-// Imports specific types `Shape`, `ToggleItem`, and `Variant` from './ToggleGroup.type' which are to be used within the `ToggleGroupProps` interface definition.
+// Defines the structure for ToggleGroup component properties.
 export interface ToggleGroupProps {
-  // Extends `ToggleGroupProps` to include optional properties such as `shape', 'items`, `variant`, `colorScheme`, and a method `onToggleChange` for handling changes, as well as an Index Signature to allow any additional properties.
+  // Optional shape prop to define the shape of toggle elements.
   shape?: Shape;
+  // Mandatory array of items defining each toggle in the group.
   items: ToggleItem[];
+  // Optional variant prop to specify the visual style of the toggle group.
   variant?: Variant;
+  // Optional colorScheme prop for theming the toggle group.
   colorScheme?: string;
-  // `ToggleGroupViewProps` interface extends `ToggleGroupProps` and adds two more properties: `activeToggles` to keep track of active toggle items, and `setActiveToggles` as a dispatch function to update the active items state.
+  // Optional callback function that fires when the active toggle changes, providing the IDs of active toggles.
   onToggleChange?: (activeIds: string[]) => void;
+  // Allows the ToggleGroupProps to accept additional properties dynamically.
   [x: string]: any;
 }
+// Interface extending ToggleGroup props for use in the ToggleGroupView component.
 export interface ToggleGroupViewProps extends ToggleGroupProps {
+  // Array storing the IDs of active toggles within the group.
   activeToggles: string[];
   setActiveToggles: React.Dispatch<React.SetStateAction<string[]>>;
 }

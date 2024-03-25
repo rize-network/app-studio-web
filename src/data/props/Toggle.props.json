@@ -1,38 +1,37 @@
 {
-  "componentDescription": "Provides interactive UI for binary user input",
+  "componentDescription": "A user-interface element for toggling between on/off states.",
   "shape": {
     "type": "Shape",
     "typeValues": [
-      "defaultShape",
       "rounded",
       "pillShaped"
     ],
-    "description": "Optional 'shape' prop to determine the shape of the toggle.",
+    "description": "Optional property to determine the shape of the toggle component.",
     "defaultValue": "rounded"
   },
   "isToggled": {
     "type": "boolean",
     "typeValues": [
-      "true",
-      "false"
+      true,
+      false
     ],
-    "description": "Optional boolean indicating the current state of the toggle.",
-    "defaultValue": "null"
+    "description": "Optional boolean to define the initial toggle state.",
+    "defaultValue": "false"
   },
   "isDisabled": {
     "type": "boolean",
     "typeValues": [
-      "true",
-      "false"
+      true,
+      false
     ],
-    "description": "Optional boolean to specify if the toggle should be disabled.",
-    "defaultValue": "null"
+    "description": "Optional boolean to set the toggle component as disabled or not.",
+    "defaultValue": "false"
   },
   "children": {
     "type": "React.ReactNode",
     "typeValues": [],
-    "description": "Mandatory prop, representing the child elements of the toggle component.",
-    "defaultValue": "null"
+    "description": "Children property to pass React nodes inside the toggle component.",
+    "defaultValue": null
   },
   "variant": {
     "type": "Variant",
@@ -41,27 +40,57 @@
       "link",
       "ghost"
     ],
-    "description": "Optional prop to apply predefined style variants.",
+    "description": "Optional property to style the toggle component with predefined sets of visual types.",
     "defaultValue": "ghost"
   },
   "colorScheme": {
     "type": "string",
     "typeValues": [],
-    "description": "Optional string to customize the color theme of the toggle component.",
+    "description": "Optional string to set the color scheme for the toggle component's appearance.",
     "defaultValue": "color.trueGray.400"
   },
   "onToggle": {
     "type": "function",
     "typeValues": [
-      "function(isToggled: boolean)"
+      "(isToggled: boolean) => void"
     ],
-    "description": "Optional function prop that gets executed when the toggle state changes.",
-    "defaultValue": "null"
+    "description": "Optional function that triggers when the toggle state changes, receives the new state as an argument.",
+    "defaultValue": null
   },
   "[x: string]": {
     "type": "any",
     "typeValues": [],
-    "description": "Index signature allowing any additional properties not explicitly defined.",
-    "defaultValue": "null"
+    "description": "Allows the inclusion of additional properties with string keys.",
+    "defaultValue": null
+  },
+  "isHovered": {
+    "type": "boolean",
+    "typeValues": [
+      true,
+      false
+    ],
+    "description": "Boolean to indicate whether the toggle component is hovered over by the user.",
+    "defaultValue": "false"
+  },
+  "setIsHovered": {
+    "type": "React.Dispatch<React.SetStateAction<boolean>>",
+    "typeValues": [],
+    "description": "Function to change the hover state of the toggle component.",
+    "defaultValue": null
+  },
+  "isToggle": {
+    "type": "boolean",
+    "typeValues": [
+      true,
+      false
+    ],
+    "description": "Boolean that represents the current state of the toggle.",
+    "defaultValue": "false"
+  },
+  "setIsToggled": {
+    "type": "React.Dispatch<React.SetStateAction<boolean>>",
+    "typeValues": [],
+    "description": "Function to change the toggled state of the component.",
+    "defaultValue": null
   }
 }

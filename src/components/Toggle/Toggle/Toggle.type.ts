@@ -1,4 +1,4 @@
+// Defines a TypeScript type for the shape of the Toggle component, allowing 'sharp', 'rounded', or 'pillShaped' as possible values.
 export type Shape = 'sharp' | 'rounded' | 'pillShaped';
-// Defines TypeScript type 'Shape' with possible values 'sharp', 'rounded', or 'pillShaped' to specify the shape styles for UI components.
+// Defines a TypeScript type for the variant of the Toggle component, allowing 'outline', 'link', or 'ghost' as possible stylistic variations.
 export type Variant = 'outline' | 'link' | 'ghost';
-// Defines TypeScript type 'Variant' with possible values 'outline', 'link', or 'ghost' to specify the variant styles for UI components.

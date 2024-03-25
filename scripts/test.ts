@@ -1,134 +1,64 @@
-function splitArrayToJSON(array: string[]): { line: number; code: string }[] {
-  const linesArray = array.map((item) => item.split('\n')).flat();
-  const lineNumbers = linesArray.map((_, index) => index + 1);
+import { parse } from '@babel/parser';
+import traverse from '@babel/traverse';
 
-  return lineNumbers.map((lineNum, index) => ({
-    line: lineNum,
-    code: linesArray[index],
-  }));
+interface Comment {
+  line: number;
+  comment: string;
+  codeSnippet: string;
 }
 
-function insertComments(code: string, comments: any[]): string {
-  const lines = code.split('\n');
-  const commentMap = new Map<
-    number,
-    { comment: string; codeSnippet: string }
-  >();
+function insertCommentsUsingAST(code: string, comments: Comment[]): string {
+  const ast = parse(code, {
+    sourceType: 'module',
+    plugins: ['jsx', 'typescript'],
+  });
 
-  if (!Array.isArray(comments)) {
-    throw new TypeError('Comments must be an array.');
-  }
+  const commentMap = new Map(
+    comments.map((comment) => [comment.line, comment])
+  );
+  let lines = code.split('\n');
 
-  for (const comment of comments) {
-    if (comment.line < 1 || comment.line > lines.length) {
-      console.warn(
-        `Comment for non-existent line ${comment.line} will be ignored.`
-      );
-      continue;
-    }
-    if (commentMap.has(comment.line)) {
-      console.warn(`Duplicate comment for line ${comment.line}.`);
-    }
-    commentMap.set(comment.line, {
-      comment: comment.comment,
-      codeSnippet: comment.codeSnippet,
-    });
-  }
-  console.log();
-  let inBlock = false; // To track if we are inside a JSX block or similar
+  traverse(ast, {
+    JSXElement(path) {
+      const loc = path.node.loc;
+      if (!loc) return; // Skip if location information is not available
 
-  return lines
-    .map((line, index) => {
-      const lineNum = index + 1;
-      const commentData = commentMap.get(lineNum);
+      const startLine = loc.start.line;
+      const endLine = loc.end.line;
 
-      // Check if we are entering or leaving a block
-      if (line.includes('<') && !line.includes('/>')) {
-        inBlock = true;
-      }
-      if (line.includes('/>') || line.includes('</')) {
-        inBlock = false;
-      }
-
-      if (commentData && !inBlock) {
-        const { comment, codeSnippet } = commentData;
-        const lineStart = line.trim().substring(0, 4);
-
+      for (let line = startLine; line <= endLine; line++) {
+        const comment = commentMap.get(line);
         if (
-          lineStart.toLocaleLowerCase() ===
-          codeSnippet.trim().substring(0, 4).toLocaleLowerCase()
+          comment &&
+          lines[line - 1].trim().startsWith(comment.codeSnippet.trim())
         ) {
-          return `// ${comment}\n${line}`;
-        } else {
-          console.warn(
-            `Code snippet '${codeSnippet}' does not match the start of line ${lineNum}.`
-          );
+          // Insert the comment directly before the JSX block in the original code
+          lines[line - 1] = `// ${comment.comment}\n${lines[line - 1]}`;
         }
       }
+    },
+  });
 
-      return line;
-    })
-    .join('\n');
+  return lines.join('\n');
 }
 
-// Sample code and comments
-const code: string = `import React from 'react';
-import { AspectRatioProps } from './AspectRatio/AspectRatio.props';
-import { AspectRatioView } from './AspectRatio/AspectRatio.view';
-const AspectRatioComponent = ({
-  ratio,
-  children,
-  ...props
-}: AspectRatioProps) => {
-  return (
-    <AspectRatioView ratio={ratio} {...props}>
-      {children}
-    </AspectRatioView>
-  );
+const tsxCode = `
+import React from 'react';
+
+const MyComponent: React.FC = () => {
+  return <div>Hello, world!</div>;
 };
-export const AspectRatio = AspectRatioComponent;
+
+export default MyComponent;
 `;
 
-const comments: any[] = [
-  {
-    line: 2,
-    comment: 'Start of AlertProps interface definition.',
-    codeSnippet: 'expo',
-  },
-  {
-    line: 3,
-    comment: 'Optional icon property, can be any React node.',
-    codeSnippet: 'icon',
-  },
+const comments: Comment[] = [
   {
     line: 4,
-    comment: 'Mandatory title property of type string.',
-    codeSnippet: 'titl',
-  },
-  {
-    line: 5,
-    comment: 'Mandatory description property of type string.',
-    codeSnippet: 'desc',
-  },
-  {
-    line: 6,
-    comment: 'Optional variant property with type Variant.',
-    codeSnippet: 'vari',
-  },
-  {
-    line: 7,
-    comment: 'Optional styles property with type AlertStyles.',
-    codeSnippet: 'styl',
-  },
-  {
-    line: 8,
-    comment: 'End of AlertProps interface definition.',
-    codeSnippet: '}',
+    comment: 'This is the JSX block of MyComponent',
+    codeSnippet: 'return <div>',
   },
 ];
 
-// Inserting comments into the code
-const result = insertComments(code, comments);
-console.log(`${result}`);
-const t = 'hello';
-console.log(t.trim().substring(0, 4).toLocaleLowerCase());
+const modifiedCode = insertCommentsUsingAST(tsxCode, comments);
+console.log(modifiedCode);

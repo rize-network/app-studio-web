@@ -1,11 +1,12 @@
 import { createContext, useContext } from 'react';
 interface ComboBoxContextType {
+  // Defines an object that tracks the open state of combo boxes by ID
   openDropdowns: { [key: string]: boolean };
-  // Defines an interface for ComboBox context which includes a dictionary to track open dropdowns by key, and a function to toggle dropdown state.
+  // Function type for toggling the open state of a combo box by ID
   toggleDropdown: (id: string) => void;
 }
-// Creates a React context for the ComboBox component with the specified interface, initialized as not nullable using the non-null assertion operator (!).
+// Creates the context for ComboBox with a default value enforcing non-null
 const ComboBoxContext = createContext<ComboBoxContextType>(null!);
-// Exports a custom hook that allows the use of ComboBoxContext in functional components, providing access to the context's value.
+// Hook for consuming ComboBoxContext and accessing combo box states and toggle function
 export const useComboBoxContext = () => useContext(ComboBoxContext);
 export default ComboBoxContext;

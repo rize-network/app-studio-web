@@ -3,20 +3,289 @@
     {
       "comments": [
         {
-          "line": 1,
-          "comment": "Defines an empty interface `ToggleGroupProps` as a placeholder for later expansion or to signify its usage for type-checking or component prop definition."
-        },
-        {
-          "line": 2,
-          "comment": "Imports specific types `Shape`, `ToggleItem`, and `Variant` from './ToggleGroup.type' which are to be used within the `ToggleGroupProps` interface definition."
-        },
-        {
           "line": 3,
-          "comment": "Extends `ToggleGroupProps` to include optional properties such as `shape', 'items`, `variant`, `colorScheme`, and a method `onToggleChange` for handling changes, as well as an Index Signature to allow any additional properties."
+          "comment": "Defines the structure for ToggleGroup component properties.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 4,
+          "comment": "Optional shape prop to define the shape of toggle elements.",
+          "codeSnippet": " shap"
+        },
+        {
+          "line": 5,
+          "comment": "Mandatory array of items defining each toggle in the group.",
+          "codeSnippet": " item"
+        },
+        {
+          "line": 6,
+          "comment": "Optional variant prop to specify the visual style of the toggle group.",
+          "codeSnippet": " vari"
         },
         {
           "line": 7,
-          "comment": "`ToggleGroupViewProps` interface extends `ToggleGroupProps` and adds two more properties: `activeToggles` to keep track of active toggle items, and `setActiveToggles` as a dispatch function to update the active items state."
+          "comment": "Optional colorScheme prop for theming the toggle group.",
+          "codeSnippet": " colo"
+        },
+        {
+          "line": 8,
+          "comment": "Optional callback function that fires when the active toggle changes, providing the IDs of active toggles.",
+          "codeSnippet": " onTo"
+        },
+        {
+          "line": 9,
+          "comment": "Allows the ToggleGroupProps to accept additional properties dynamically.",
+          "codeSnippet": " [x: "
+        },
+        {
+          "line": 11,
+          "comment": "Interface extending ToggleGroup props for use in the ToggleGroupView component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 12,
+          "comment": "Array storing the IDs of active toggles within the group.",
+          "codeSnippet": " acti"
+        },
+        {
+          "line": 13,
+          "comment": "State setter function to update active toggles.",
+          "codeSnippet": " setA"
+        }
+      ]
+    }
+  ],
+  "ToggleGroup.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Define a custom hook for managing ToggleGroup state",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Create state for active toggles, initialized as an empty array of strings",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 4,
+          "comment": "Return the state and the state setter function for active toggles",
+          "codeSnippet": "retu"
+        }
+      ]
+    }
+  ],
+  "ToggleGroup.style.tsx": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a TypeScript Record object to map Shape values to corresponding numerical styles for border-radius.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Sharp shape with a border-radius of 0 (no rounding on corners).",
+          "codeSnippet": "shar"
+        },
+        {
+          "line": 4,
+          "comment": "Rounded shape with a small border-radius of 4 to provide slight corner rounding.",
+          "codeSnippet": "roun"
+        },
+        {
+          "line": 5,
+          "comment": "PillShaped with a high border-radius of 24 to give a fully rounded pill-like shape.",
+          "codeSnippet": "pill"
+        }
+      ]
+    }
+  ],
+  "ToggleGroup.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines the possible shapes for the toggle button within the group.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 2,
+          "comment": "Specifies the visual styles or variants the toggle button can have.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Begins the definition of the data structure for each toggle item in the group.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 4,
+          "comment": "Unique identifier for the toggle item, used for distinguishing between items.",
+          "codeSnippet": "  id"
+        },
+        {
+          "line": 5,
+          "comment": "The content rendered inside the toggle item, which can be any React node.",
+          "codeSnippet": "  va"
+        },
+        {
+          "line": 6,
+          "comment": "Optional boolean representing toggle item's current state (on/off).",
+          "codeSnippet": "  st"
+        },
+        {
+          "line": 7,
+          "comment": "Optional flag to disable interaction with the toggle item.",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 8,
+          "comment": "Optional flag indicating whether the toggle item is the active/selected one.",
+          "codeSnippet": "  is"
+        }
+      ]
+    }
+  ],
+  "ToggleGroup.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "ToggleGroupView component declaration with destructured properties from props.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 6,
+          "comment": "Prop 'items' defines the list of toggle elements to be rendered.",
+          "codeSnippet": "item"
+        },
+        {
+          "line": 7,
+          "comment": "Prop 'onToggleChange' is a callback function triggered when the toggle state changes.",
+          "codeSnippet": "onTo"
+        },
+        {
+          "line": 8,
+          "comment": "Prop 'activeToggles' holds the array of active toggle identifiers.",
+          "codeSnippet": "acti"
+        },
+        {
+          "line": 9,
+          "comment": "Prop 'setActiveToggles' is a function to update the active toggle states.",
+          "codeSnippet": "setA"
+        },
+        {
+          "line": 10,
+          "comment": "Prop 'shape' with default value 'rounded', determines the shape of the toggle buttons.",
+          "codeSnippet": "shap"
+        },
+        {
+          "line": 11,
+          "comment": "Prop 'variant' with default value 'ghost' represents the visual style variant of the toggles.",
+          "codeSnippet": "vari"
+        },
+        {
+          "line": 12,
+          "comment": "Prop 'colorScheme' with default value 'color.trueGray.400' sets the color theme for toggles.",
+          "codeSnippet": "colo"
+        },
+        {
+          "line": 14,
+          "comment": "handleToggle is a memoized callback that handles the toggle state changes.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 34,
+          "comment": "Renders a Horizontal layout container for toggle group with a set gap between elements.",
+          "codeSnippet": "<Hor"
+        },
+        {
+          "line": 36,
+          "comment": "Renders the Toggle component with various props derived from the item and parent component props.",
+          "codeSnippet": "<Tog"
+        },
+        {
+          "line": 37,
+          "comment": "Prop 'role' defines the accessibility role for each toggle with a unique identifier.",
+          "codeSnippet": "role"
+        },
+        {
+          "line": 38,
+          "comment": "Prop 'key' ensures each toggle component has a unique key for React’s rendering process.",
+          "codeSnippet": "key="
+        },
+        {
+          "line": 42,
+          "comment": "Prop 'isToggled' determines the current state of the toggle element.",
+          "codeSnippet": "isTo"
+        },
+        {
+          "line": 43,
+          "comment": "Prop 'onToggle' attaches the handleToggle function to the toggle's onChange event.",
+          "codeSnippet": "onTo"
+        },
+        {
+          "line": 44,
+          "comment": "Prop 'isDisabled' conditionally renders the toggle as disabled.",
+          "codeSnippet": "isDi"
+        },
+        {
+          "line": 45,
+          "comment": "Prop 'isIntern' is a custom boolean attribute, its purpose unclear without further context.",
+          "codeSnippet": "isIn"
+        }
+      ]
+    }
+  ],
+  "ToggleGroup.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Define the functional component with destructured props",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 6,
+          "comment": "Destructure 'items' prop which represents the group items to toggle",
+          "codeSnippet": "  ite"
+        },
+        {
+          "line": 7,
+          "comment": "Destructure 'shape' prop to define the shape of the toggle buttons",
+          "codeSnippet": "  sha"
+        },
+        {
+          "line": 8,
+          "comment": "Destructure 'colorScheme' prop for toggle button styling",
+          "codeSnippet": "  col"
+        },
+        {
+          "line": 9,
+          "comment": "Destructure 'variant' prop to determine the visual style of the toggle group",
+          "codeSnippet": "  var"
+        },
+        {
+          "line": 10,
+          "comment": "Destructure 'onToggleChange' prop for the callback when toggle state changes",
+          "codeSnippet": "  onT"
+        },
+        {
+          "line": 12,
+          "comment": "Hook to manage toggle group state, returns active toggles and a setter for it",
+          "codeSnippet": "  con"
+        },
+        {
+          "line": 14,
+          "comment": "Render the view component of the toggle group",
+          "codeSnippet": "    <T"
+        },
+        {
+          "line": 25,
+          "comment": "Expose the ToggleGroupComponent for import into other modules",
+          "codeSnippet": "expo"
         }
       ]
     }

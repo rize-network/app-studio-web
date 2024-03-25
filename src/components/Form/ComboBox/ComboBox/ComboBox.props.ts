@@ -1,67 +1,65 @@
 import { ReactNode, Dispatch, SetStateAction } from 'react';
 import { ComboBoxStyles } from './ComboBox.type';
+// Declaration of the main properties for ComboBox component.
 export interface ComboBoxProps {
+  // Unique identifier for the ComboBox, required for accessibility.
   id: string;
-  // Represents the properties that can be passed to the ComboBox component.
+  // Optional name attribute for the ComboBox, useful when submitted in a form.
   name?: string;
-  // Unique identifier for the ComboBox, used to differentiate it from others in a form.
+  // Array of ComboBox items that the user can select from.
   items: ComboBoxItem[];
-  // Optional name property, usually used when the ComboBox is part of a form.
+  // Optional callback function triggered when an item is selected.
   onSelect?: (item: ComboBoxItem) => void;
-  // List of items that the ComboBox will display as options to choose from.
+  // Flag to enable search functionality within the ComboBox.
   searchEnabled?: boolean;
-  // Optional callback function that is called when an item is selected.
+  // Optional element to display on the left side of the ComboBox.
   left?: ReactNode;
-  // Boolean flag to enable or disable the search functionality within the ComboBox.
+  // Optional element to display on the right side of the ComboBox.
   right?: ReactNode;
-  // Optional ReactNode to be displayed on the left side of the ComboBox.
+  // Optional label to describe the purpose of the ComboBox.
   label?: string;
-  // Optional ReactNode to be displayed on the right side of the ComboBox.
+  // Flag to show a tick mark next to selected items.
   showTick?: boolean;
-  // Optional label to describe the purpose of the ComboBox to the user.
+  // Text to display when nothing has been selected in the ComboBox.
   placeholder?: string;
-  // Boolean flag to show or hide a tick mark next to selected items.
+  // Optional custom styles to apply to the ComboBox.
   styles?: ComboBoxStyles;
-  // Placeholder text to be shown when nothing is selected in the ComboBox.
+  // Placeholder text for the search input when search is enabled.
   searchPlaceholder?: string;
-  // Optional object to override default ComboBox styles.
   [x: string]: any;
-  // Placeholder for the search input when the search is enabled.
 }
-// Allows the ComboBox to accept additional properties not explicitly defined in the interface.
+// Defines the shape of an item within the ComboBox.
 export interface ComboBoxItem {
+  // Visible text for the ComboBox item.
   label: string;
+  // Underlying value associated with a ComboBox item.
   value: string;
-  // Defines each item's structure within the ComboBox.
+  // Optional icon to display alongside the ComboBox item text.
   icon?: ReactNode;
-  // Visible label for the ComboBox item, displayed in the list of options.
 }
-// Value that represents the ComboBox item and is typically sent to the server upon form submission.
+// Interface defining the actions and state handling of the ComboBox.
 export interface ComboBoxStateActions {
-  // Optional icon to be displayed next to the item label within the ComboBox.
+  // Array of items filtered based on the search query.
   filteredItems: ComboBoxItem[];
+  // Function to update the state of filtered ComboBox items.
   setFilteredItems: Dispatch<SetStateAction<ComboBoxItem[]>>;
+  // The currently selected item in the ComboBox.
   selectedItem: ComboBoxItem;
-  // Holds state actions for managing ComboBox state, like filtering, selection, and dropdown visibility.
+  // Function to set the currently selected item in the ComboBox.
   setSelectedItem: Dispatch<SetStateAction<ComboBoxItem>>;
-  // Array of ComboBox items that match the current search query - used when search is enabled.
+  // Index of the item that is currently highlighted for keyboard navigation.
   highlightedIndex: number;
-  // Function to update the list of filtered items displayed in the dropdown.
+  // Function to set the index of the highlighted item.
   setHighlightedIndex: Dispatch<SetStateAction<number>>;
-  // Currently selected item from the ComboBox options.
+  // The text of the search query entered by the user.
   searchQuery: string;
-  // Function to update the currently selected item.
+  // Function to update the search query state.
   setSearchQuery: Dispatch<SetStateAction<string>>;
-  // Index of the highlighted item in the dropdown list, useful for keyboard navigation.
+  // Boolean state to control the visibility of the dropdown list.
   isDropdownVisible: boolean;
-  // Function to update the highlighted item's index.
+  // Function to toggle the dropdown list's visibility.
   setIsDropdownVisible: Dispatch<SetStateAction<boolean>>;
-  // Current search query string entered by the user, used to filter the ComboBox list.
 }
-// Function to update the current search query.
-export interface ComboBoxViewProps extends ComboBoxProps, ComboBoxStateActions {
-  // Boolean value that controls the visibility of the ComboBox dropdown list.
-}
-// Function to set the visibility of the dropdown list.
-
-// Combines both ComboBoxProps and ComboBoxStateActions to represent props required by the view components.
+export interface ComboBoxViewProps
+  extends ComboBoxProps,
+    ComboBoxStateActions {}

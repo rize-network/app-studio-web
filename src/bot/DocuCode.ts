@@ -29,12 +29,21 @@ export class DocuCode {
   }
 
   async commentCodeFile(filePath: string, assistantId: string) {
+    const parts = filePath.split('/');
+    const componentName = parts[parts.length - 2];
+
     // Read the file content
     const codeContent = await this.fileHandler.readFile(filePath);
 
     const updatedCodeContent = this.splitArrayToJSON(codeContent);
+
     // Define the prompt
-    const prompt = CommentPrompt(JSON.stringify(updatedCodeContent));
+    const prompt = CommentPrompt(
+      componentName,
+      filePath,
+      JSON.stringify(updatedCodeContent)
+    );
+
     // Créez un nouveau thread pour la conversation
     const thread = await this.openAIConnector.createThread();
 
@@ -138,7 +147,9 @@ export class DocuCode {
         (stat.isFile() && path.extname(file) === '.ts') ||
         path.extname(file) === '.tsx'
       ) {
-        // if (fullPath === 'src/components/AspectRatio/AspectRatio.tsx') {
+        // if (
+        //   fullPath === 'src/components/Form/ComboBox/ComboBox/ComboBox.view.tsx'
+        // ) {
         await this.removeCommentsAndCleanFile(fullPath);
         await this.commentCodeFile(fullPath, assistantId);
         // }
@@ -175,45 +186,48 @@ export class DocuCode {
         );
         continue;
       }
-      if (commentMap.has(comment.line)) {
-        console.warn(`Duplicate comment for line ${comment.line}.`);
-      }
       commentMap.set(comment.line, {
         comment: comment.comment,
         codeSnippet: comment.codeSnippet,
       });
     }
 
-    let inBlock = false; // To track if we are inside a JSX block or similar
-    let blockDepth = 0; // To handle nested JSX blocks
+    let inBlock = false;
+    let blockDepth = 0;
 
     return lines
       .map((line, index) => {
         const lineNum = index + 1;
         const commentData = commentMap.get(lineNum);
 
-        // Check if we are entering or leaving a JSX block
-        if (line.includes('<') && !line.includes('/>')) {
+        // Enhanced block detection
+        if (
+          !inBlock &&
+          line.trim().startsWith('<') &&
+          !line.trim().endsWith('/>')
+        ) {
           inBlock = true;
-          blockDepth++;
         }
-        if (line.includes('/>') || line.includes('</')) {
-          blockDepth--;
-          if (blockDepth === 0) {
-            inBlock = false;
+        if (inBlock) {
+          if (line.includes('<') && !line.includes('/>')) {
+            blockDepth++;
+          }
+          if (line.includes('/>') || line.includes('</')) {
+            blockDepth--;
+            if (blockDepth === 0) {
+              inBlock = false;
+            }
           }
         }
 
+        // Insert comments outside of JSX blocks
         if (commentData && !inBlock) {
           const { comment, codeSnippet } = commentData;
-
-          if (this.compareStrings(line, codeSnippet)) {
+          if (line.includes(codeSnippet)) {
             return `// ${comment}\n${line}`;
           } else {
             console.warn(
-              `Code snippet '${codeSnippet}' does not match the start of line ${lineNum} - ${line
-                .trim()
-                .substring(0, 3)}.`
+              `Code snippet '${codeSnippet}' does not match the start of line ${lineNum}: '${line.trim()}'`
             );
           }
         }

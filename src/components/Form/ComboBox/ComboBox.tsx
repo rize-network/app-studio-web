@@ -2,22 +2,28 @@ import React from 'react';
 import { ComboBoxProps } from './ComboBox/ComboBox.props';
 import { useComboBoxState } from './ComboBox/ComboBox.state';
 import ComboBoxView from './ComboBox/ComboBox.view';
+
+// Defines the ComboBoxComponent functional component with ComboBoxProps
 const ComboBoxComponent: React.FC<ComboBoxProps> = ({
-  // The `ComboBoxComponent` takes in parameters for ID, name, an array of items, two placeholders, and any additional properties passed as `...props`.
-  // Define a React functional component with generic type `React.FC` and destructuring its props against `ComboBoxProps`.
+  // Destructures 'id' from component props
   id,
-  // Invoke the custom hook `useComboBoxState` with the provided items and placeholders which likely manages the component's state.
+  // Destructures 'name' from component props
   name,
-  // Render the `ComboBoxView` component, passing the deconstructed props, the generated state, and any additional props.
+  // Destructures 'items' from component props, used to populate combobox
   items,
+  // Destructures 'placeholder' from component props, displayed when no item selected
   placeholder,
-  // Export the `ComboBox` component for use in other parts of the application under the named export `ComboBox`.
+  // Destructures 'searchPlaceholder' from component props, used as the search field placeholder
   searchPlaceholder,
+  // Destructures the rest of the props not explicitly defined
   ...props
 }) => {
+  // Initializes ComboBox state using custom hook with items and placeholders
   const state = useComboBoxState(items, placeholder, searchPlaceholder);
   return (
+    // Render ComboBoxView with passed and state props
     <ComboBoxView id={id} name={name} items={items} {...state} {...props} />
   );
 };
+// Exports the ComboBoxComponent as ComboBox
 export const ComboBox = ComboBoxComponent;

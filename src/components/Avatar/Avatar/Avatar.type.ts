@@ -1,12 +1,12 @@
 import { CSSProperties } from 'react';
+// Defines Avatar size options as a predefined set of string literals for consistent usage across the application
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-// Defines a type alias 'Size' which can be one of five string literal values representing size categories.
+// Begins the declaration of an object type that specifies styling properties for different parts of the Avatar component
 export type AvatarStyles = {
-  // Describes the basic shape of the AvatarStyles object, allowing for optional customization of container, image, and fallback styles.
+  // Optional CSSProperties object for customizing the container element of the Avatar
   container?: CSSProperties;
-  // container property within AvatarStyles may hold CSS properties specific to the container element of an avatar.
+  // Optional CSSProperties object for customizing the image element within the Avatar
   image?: CSSProperties;
-  // image property within AvatarStyles may hold CSS properties specific to the image element within the avatar container.
+  // Optional any type property for defining a fallback display when the image is not available
   fallback?: any;
-  // fallback property within AvatarStyles can be of any type, implying usage for alternative content when the image is not available.
 };

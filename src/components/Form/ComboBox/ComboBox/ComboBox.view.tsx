@@ -5,37 +5,33 @@ import { Text } from '../../..';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
 import TickSvg from '../../../Svg/Tick';
 import SearchLoopSvg from '../../../Svg/Search';
-// ComboBoxView is a functional component with destructured props for managing the behavior and appearance of the combo box.
+// Defines the functional component 'ComboBoxView' with destructured props.
 const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   placeholder,
   items,
   showTick = true,
   onSelect,
   searchEnabled = true,
-  // useEffect hook used to add event listener to entire document to handle clicks outside the dropdown, to close it if it is open.
   left,
-  // The handleClickOutside function checks if the click event path includes the element with id 'combobox-dropdown', and hides the dropdown if clicked outside.
   right,
   label,
   filteredItems,
   setSelectedItem,
   selectedItem,
-  // Cleanup function to remove event listener from the document when the component will unmount.
   highlightedIndex,
   setHighlightedIndex,
   searchQuery,
-  // handleSearch function updates the search query state and filters items based on the query, with case insensitive matching.
   setSearchQuery,
   setFilteredItems,
   styles,
   isDropdownVisible,
   setIsDropdownVisible,
+  // Collects all further props not destructured explicitly.
   ...props
-  // Resets the highlighted index to 0 after the items are filtered to ensure correct display and selection.
 }) => {
+  // Sets up an effect to handle clicking outside the dropdown to close it.
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // The handleSelect function updates the selected item state, invokes the onSelect callback if provided, and hides the dropdown.
       const path = event.composedPath();
       const isOutside = !path.some(
         (element: any) => element?.id === 'combobox-dropdown'
@@ -47,6 +43,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+  // Defines 'handleSearch' to filter items based on the user's query.
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query === '') {
@@ -55,30 +52,27 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
       const filtered = items.filter((item) =>
         item.label.toLowerCase().includes(query.toLowerCase())
       );
-      // Conditionally rendering a label for the ComboBox if the label prop is provided.
       setFilteredItems(filtered);
     }
-    // Main container for the ComboBox with specified styles and behaviors.
     setHighlightedIndex(0);
   };
+  // Defines 'handleSelect' to handle item selection and close the dropdown.
   const handleSelect = (item: ComboBoxItem) => {
     setSelectedItem(item);
     onSelect?.(item);
     setIsDropdownVisible(false);
-    // Inner container that responds to clicks to toggle the visibility of the dropdown.
   };
+  // Starts the JSX returned by the component representing the combobox.
   return (
     <Horizontal
       role="combobox"
       wrap="nowrap"
       gap={15}
-      // Display of the currently selected item's label within the combobox.
       alignItems="center"
       width="100%"
       {...props}
     >
       {label && (
-        // Toggle the dropdown visibility based on its current state, only shown if isDropdownVisible is true.
         <Text styles={styles?.label} htmlFor={props.id}>
           {label}
         </Text>
@@ -87,7 +81,6 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
         <Horizontal
           cursor="pointer"
           backgroundColor="white"
-          // Search input field for filtering items within the dropdown, visible only if searchEnabled is true.
           boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
           padding="12px"
           display="flex"
@@ -101,11 +94,9 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           <Horizontal
             gap={15}
             alignItems="center"
-            // Mapping over filteredItems to display them as selectable options in a list within the dropdown.
             position="relative"
             width="100%"
             onClick={() => setIsDropdownVisible(!isDropdownVisible)}
-            // Each item in the dropdown can be highlighted on mouse enter, and selected on click.
             {...styles?.labelContainer}
           >
             {left}

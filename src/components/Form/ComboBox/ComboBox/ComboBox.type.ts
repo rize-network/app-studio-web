@@ -1,19 +1,20 @@
+// Defines an interface for styles where keys are string properties and values are React.CSSProperties
 export type Styles = {
-  // Defines a type alias 'Styles' representing an object where each property is a string (key) with values of type 'React.CSSProperties'. This allows for a flexible object that can define any number of CSS properties for dynamic styling in React components.
+  // Allows for any key to be used as long as it maps to a set of React.CSSProperties
   [key: string]: React.CSSProperties;
 };
-// Defines a type alias 'ComboBoxStyles' for specialized styling of ComboBox components, allowing optional custom styling for elements such as the container, label, dropdown, and item. The 'label' and 'text' properties accept any type, indicating flexibility in the data that can be used for rendering these elements.
+// Defines specific style properties for various parts of the ComboBox component
 export type ComboBoxStyles = {
-  // The 'container' property within 'ComboBoxStyles' is optional and defines styling for the outermost wrapper of a ComboBox component, using React.CSSProperties for type.
+  // Style for the container element of the ComboBox
   container?: React.CSSProperties;
-  // The 'label' property is optional and can be of any type, which can include not only styling information but potentially other data, such as for accessibility or data attributes.
+  // Style for the label of the ComboBox which can be of any type
   label?: any;
-  // The 'dropdown' property is optional and allows for defining the appearance of the dropdown list portion of the ComboBox, using React.CSSProperties.
+  // Style for the dropdown element of the ComboBox
   dropdown?: React.CSSProperties;
-  // The 'item' property is optional and refers to the individual items within the dropdown list, enabling specific styling for each item.
+  // Style for each item within the ComboBox dropdown
   item?: React.CSSProperties;
-  // The 'labelContainer' property is optional and is meant to style the container that might house the ComboBox's label, separate from the 'label' itself.
+  // Style for the container of the label element within the ComboBox
   labelContainer?: React.CSSProperties;
-  // The 'text' property much like the 'label' property, is optionally any type, pointing to its flexibility in representing complex non-style based data or configurations, likely associated with the textual content within the ComboBox.
+  // Style for the text property, which can accept any type, potentially allowing for extended customization.
   text?: any;
 };

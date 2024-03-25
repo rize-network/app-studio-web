@@ -1,11 +1,13 @@
-### **Import**
+# Avatar
 
-```tsx static
-import { Avatar } from '@app-studio/web';
-```
+Displays a circular avatar with image fallback and custom styling options.
+
+### **Import**
+  ```tsx static
+  import { Avatar } from '@app-studio/web';
+  ```
 
 ### **Default**
-
 ```tsx
 import React from 'react';
 import { Avatar } from '../Avatar';
@@ -13,11 +15,11 @@ import { Avatar } from '../Avatar';
 export const DefaultDemo = () => (
   <Avatar src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg" />
 );
+
 ```
 
 ### **size**
-
-"size is an optional property of type Size to set the size of the avatar."
+"Optional property to specify the size of the avatar, from predefined Size options."
 
 ```tsx
 import React from 'react';
@@ -38,22 +40,22 @@ export const SizeDemo = () => {
     </Vertical>
   );
 };
+
 ```
 
 ### **fallback**
-
-"fallback is an optional string for a fallback image URL, in case the src fails to load."
+"Optional string for an image URL to use if the primary 'src' fails to load."
 
 ```tsx
 import React from 'react';
 import { Avatar } from '../Avatar';
 
 export const FallbackDemo = () => <Avatar src="" fallback="ML" />;
+
 ```
 
 ### **styles**
-
-"styles is an optional property for custom styling of the Avatar component, following the AvatarStyles type."
+"Optional object to apply custom styles to the avatar component."
 
 ```tsx
 import React from 'react';
@@ -77,4 +79,6 @@ export const StylesDemo = () => {
     />
   );
 };
+
 ```
+

@@ -145,8 +145,11 @@ export class Bot {
         assistantId,
         thread.id
       );
+      const propsJsonString = response.text.value;
+      // Log the string to be parsed to help with debugging
+      // console.log('propsJsonString:', propsJsonString);
 
-      const propsJson = extractJsonCode(response.text.value);
+      const propsJson = extractJsonCode(propsJsonString);
 
       // Check if propsJson is in JSON format
       if (!this.isObject(propsJson)) {

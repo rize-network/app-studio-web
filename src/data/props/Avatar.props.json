@@ -1,46 +1,55 @@
 {
+  "componentDescription": "Displays a circular avatar with image fallback and custom styling options.",
   "src": {
     "type": [
       "string"
     ],
     "typeValues": [],
-    "description": [
-      "src is a string representing the source URL of the avatar image."
-    ],
+    "description": "Mandatory string indicating the image source URL for the avatar.",
     "defaultValue": []
   },
   "size": {
     "type": [
       "Size"
     ],
-    "typeValues": [],
-    "description": [
-      "size is an optional property of type Size to set the size of the avatar."
+    "typeValues": [
+      "'sm'",
+      "'md'",
+      "'lg'"
     ],
-    "defaultValue": [
-      "'md'"
-    ]
+    "description": "Optional property to specify the size of the avatar, from predefined Size options.",
+    "defaultValue": "'md'"
   },
   "fallback": {
     "type": [
       "string"
     ],
     "typeValues": [],
-    "description": [
-      "fallback is an optional string for a fallback image URL, in case the src fails to load."
-    ],
-    "defaultValue": [
-      "'IM'"
-    ]
+    "description": "Optional string for an image URL to use if the primary 'src' fails to load.",
+    "defaultValue": "'IM'"
   },
   "styles": {
     "type": [
       "AvatarStyles"
     ],
     "typeValues": [],
-    "description": [
-      "styles is an optional property for custom styling of the Avatar component, following the AvatarStyles type."
+    "description": "Optional object to apply custom styles to the avatar component.",
+    "defaultValue": []
+  },
+  "imageError": {
+    "type": [
+      "boolean"
     ],
+    "typeValues": [],
+    "description": "Boolean to track if there was an error loading the image, for conditional rendering or fallbacks.",
+    "defaultValue": []
+  },
+  "setImageError": {
+    "type": [
+      "React.Dispatch<React.SetStateAction<boolean>>"
+    ],
+    "typeValues": [],
+    "description": "Function to set the image error state, aiding in error handling for the avatar.",
     "defaultValue": []
   }
 }

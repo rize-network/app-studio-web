@@ -1,6 +1,6 @@
 # ToggleGroup
 
-Allows users to manage a group of toggle buttons.
+Enables selection from a group of toggle switches.
 
 ### **Import**
   ```tsx static
@@ -24,7 +24,7 @@ export const DefaultDemo = () => {
 ```
 
 ### **shape**
-"Defines the shape of the toggle buttons."
+"Optional shape prop to define the shape of toggle elements."
 
 ```tsx
 import React from 'react';
@@ -56,7 +56,7 @@ export const ShapeDemo = () => {
 ```
 
 ### **items**
-"An array of toggle items to display and manage."
+"Mandatory array of items defining each toggle in the group."
 
 ```tsx
 import React from 'react';
@@ -75,7 +75,7 @@ export const ItemsDemo = () => {
 ```
 
 ### **variant**
-"The visual style variant of the toggle group."
+"Optional variant prop to specify the visual style of the toggle group."
 
 ```tsx
 import React from 'react';
@@ -102,7 +102,7 @@ export const VariantDemo = () => {
 ```
 
 ### **colorScheme**
-"The color scheme of the toggle component."
+"Optional colorScheme prop for theming the toggle group."
 
 ```tsx
 import React from 'react';
@@ -134,7 +134,7 @@ export const ColorSchemeDemo = () => {
 ```
 
 ### **onToggleChange**
-"Callback function that is called when the active state of any toggle changes."
+"Optional callback function that fires when the active toggle changes, providing the IDs of active toggles."
 
 ```tsx
 import React, { useState } from 'react';

@@ -1,31 +1,40 @@
-export const CommentPrompt = (codeContent: string) =>
-  `
-  This process aim is to generate short insightful comments purpose/use for a provided array of object, specifically focusing on descriptions, parameters, and steps involved in the code's functionality.
+export const CommentPrompt = (
+  componentName: string,
+  fileName: string,
+  codeContent: string
+) => `
+  The aim of this process is to generate concise and insightful comments that describe the purpose or use of various parts of the code, focusing on descriptions, parameters, and steps involved in the code's functionality.
 
-  Here's how the process works:
+  **Process Overview:**
+  - Analyze a provided array of objects representing code lines, where each object contains a 'line' (the line number) and 'code' (the actual code on that line).
+  - Generate comments that enhance understanding of the code, particularly its functionality and structure.
 
-  - Each object in the provided reference array corresponds to a specific line in the code, with 'line' indicating the line number and 'code' representing the actual code on that line.
-  - The code component array : ${codeContent}.
+  **Commenting Guidelines:**
+  - Exclude Import statements and CSS properties to maintain clarity and relevance.
+  - For the "${componentName}.props.ts" and "${componentName}.type.ts" files, include a comment for each property.
+  - For the "${componentName}.state.ts" file, provide a single comment summarizing the file's purpose.
+  - In "${componentName}.view.tsx" and "${componentName}.tsx" files, comment only on functions and variables, not on properties.
+  - Avoid comments within JSX blocks to keep the code structure clear.
 
-  Important considerations:
+  **Format Specifications:**
+  - Comments should be in JSON format, with each comment linked to its respective line number and the initial code snippet.
+  - The comment should elucidate the component's use or purpose, providing valuable insights.
 
-  - Do not provide comments for Import statements code or CSS properties code so that to keep the analysis clear and relevant.
-  - Identify any retun JSX Block and do not create any comments for the code inside the JSX Block Code.
-  - Comments should be formatted in JSON, linking each comment to its respective line number and the initial code snippet.
-  - The comment should describe the use/purpose of the code component so that it gives the user feedback on the component .
-  - All three key name are required.
-
-  The goal is to focus commentary only on significant lines of code, avoiding return blocks and lines that do not significantly contribute to understanding the code's functionality.
-  This approach ensures the code structure remains undisturbed.
-
- Completion: The expected JSON format for comments is:
-
+  **Expected JSON Format:**
   \`\`\`json
   {
     "comments": [
-      { "line": [line number], "comment": "[explanatory comment]", "codeSnippet": "[first 4 letters of the code line, excluding spaces]" },
-      ...
+      { "line": [line number], "comment": "[explanatory comment]", "codeSnippet": "[first 4 letters of the code line, excluding spaces]" }
     ]
   }
   \`\`\`
-  `;
+
+  Ensure a single comment for the "${componentName}.state.ts", "${componentName}.provider.tsx", "${componentName}.context.tsx", and "${componentName}.tsx" codes.
+
+  **Component Name:** ${componentName}
+  **File Name:** ${fileName}
+  **Code Content:**
+  \`\`\`json
+  ${codeContent}
+  \`\`\`
+`;

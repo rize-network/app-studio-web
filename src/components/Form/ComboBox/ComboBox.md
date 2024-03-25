@@ -1,13 +1,15 @@
 # ComboBox
 
-A dropdown list component allowing users to select an option or search for items.
+A customizable dropdown list with optional search functionality.
 
 ### **Import**
-  ```tsx static
-  import { ComboBox } from '@app-studio/web';
-  ```
+
+```tsx static
+import { ComboBox } from '@app-studio/web';
+```
 
 ### **Default**
+
 ```tsx
 import React from 'react';
 import { ComboBox } from '../ComboBox';
@@ -29,11 +31,11 @@ export const DefaultDemo = () => {
   ];
   return <ComboBox id="default" name="default" items={items} />;
 };
-
 ```
 
 ### **onSelect**
-"Optional callback function that is called when an item is selected."
+
+"Optional callback function triggered when an item is selected."
 
 ```tsx
 import React from 'react';
@@ -77,11 +79,11 @@ export const OnSelectDemo = () => {
     </Vertical>
   );
 };
-
 ```
 
 ### **searchEnabled**
-"Boolean flag to enable or disable the search functionality within the ComboBox."
+
+"Flag to enable search functionality within the ComboBox."
 
 ```tsx
 import React from 'react';
@@ -112,11 +114,11 @@ export const SearchEnabledDemo = () => {
   ];
   return <ComboBox id="searchEnabled" items={items} searchEnabled={false} />;
 };
-
 ```
 
 ### **left**
-"Optional ReactNode to be displayed on the left side of the ComboBox."
+
+"Optional element to display on the left side of the ComboBox."
 
 ```tsx
 import React from 'react';
@@ -144,11 +146,11 @@ export const LeftDemo = () => {
     />
   );
 };
-
 ```
 
 ### **right**
-"Optional ReactNode to be displayed on the right side of the ComboBox."
+
+"Optional element to display on the right side of the ComboBox."
 
 ```tsx
 import React from 'react';
@@ -171,11 +173,11 @@ export const RightDemo = () => {
     <ComboBox id="right" items={items} right={<Badge content="Status" />} />
   );
 };
-
 ```
 
 ### **label**
-"Optional label to describe the purpose of the ComboBox to the user."
+
+"Optional label to describe the purpose of the ComboBox."
 
 ```tsx
 import React from 'react';
@@ -203,11 +205,11 @@ export const LabelDemo = () => {
     />
   );
 };
-
 ```
 
 ### **showTick**
-"Boolean flag to show or hide a tick mark next to selected items."
+
+"Flag to show a tick mark next to selected items."
 
 ```tsx
 import React from 'react';
@@ -238,11 +240,11 @@ export const ShowTickDemo = () => {
   ];
   return <ComboBox id="showTick" items={statuses} showTick={false} />;
 };
-
 ```
 
 ### **placeholder**
-"Placeholder text to be shown when nothing is selected in the ComboBox."
+
+"Text to display when nothing has been selected in the ComboBox."
 
 ```tsx
 import React from 'react';
@@ -269,11 +271,11 @@ export const PlaceholderDemo = () => {
     />
   );
 };
-
 ```
 
 ### **styles**
-"Optional object to override default ComboBox styles."
+
+"Optional custom styles to apply to the ComboBox."
 
 ```tsx
 import React from 'react';
@@ -314,11 +316,11 @@ export const StylesDemo = () => {
     />
   );
 };
-
 ```
 
 ### **searchPlaceholder**
-"Placeholder for the search input when the search is enabled."
+
+"Placeholder text for the search input when search is enabled."
 
 ```tsx
 import React from 'react';
@@ -344,6 +346,4 @@ export const SearchPlaceholderDemo = () => {
     />
   );
 };
-
 ```
-

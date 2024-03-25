@@ -1,6 +1,6 @@
 # Toggle
 
-Provides interactive UI for binary user input
+A user-interface element for toggling between on/off states.
 
 ### **Import**
   ```tsx static
@@ -19,7 +19,7 @@ export const DefaultDemo = () => {
 ```
 
 ### **shape**
-"Optional 'shape' prop to determine the shape of the toggle."
+"Optional property to determine the shape of the toggle component."
 
 ```tsx
 import React from 'react';
@@ -40,7 +40,7 @@ export const ShapeDemo = () => (
 ```
 
 ### **isToggled**
-"Optional boolean indicating the current state of the toggle."
+"Optional boolean to define the initial toggle state."
 
 ```tsx
 import React from 'react';
@@ -57,7 +57,7 @@ export const IsToggledDemo = () => {
 ```
 
 ### **isDisabled**
-"Optional boolean to specify if the toggle should be disabled."
+"Optional boolean to set the toggle component as disabled or not."
 
 ```tsx
 import React from 'react';
@@ -70,7 +70,7 @@ export const IsDisabledDemo = () => {
 ```
 
 ### **variant**
-"Optional prop to apply predefined style variants."
+"Optional property to style the toggle component with predefined sets of visual types."
 
 ```tsx
 import React from 'react';
@@ -91,7 +91,7 @@ export const VariantDemo = () => (
 ```
 
 ### **colorScheme**
-"Optional string to customize the color theme of the toggle component."
+"Optional string to set the color scheme for the toggle component's appearance."
 
 ```tsx
 import React from 'react';
@@ -117,7 +117,7 @@ export const ColorSchemeDemo = () => (
 ```
 
 ### **onToggle**
-"Optional function prop that gets executed when the toggle state changes."
+"Optional function that triggers when the toggle state changes, receives the new state as an argument."
 
 ```tsx
 import React from 'react';
