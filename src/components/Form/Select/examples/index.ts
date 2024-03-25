@@ -1,4 +1,4 @@
-export * from './Color';
+export * from './color';
 export * from './Default';
 export * from './Disabled';
 export * from './Error';
@@ -9,3 +9,4 @@ export * from './ReadOnlyInput';
 export * from './Shadow';
 export * from './SizeInput';
 export * from './StylesInput';
+export * from './isScrollable';
