@@ -33,7 +33,7 @@ const Item: React.FC<ItemProps> = ({
 }) => {
   const handleOptionClick = (option: string) => callback(option);
   const handleHover = () => setIsHovered(!isHovered);
-  console.log(props.name);
+
   return (
     <Element
       as="li"
@@ -167,6 +167,7 @@ const DropDown: React.FC<DropDownProps> = ({
           shadowOpacity: 1,
           shadowRadius: 1,
         };
+
   return (
     <Element
       as="ul"
@@ -175,7 +176,7 @@ const DropDown: React.FC<DropDownProps> = ({
       width="100%"
       display="flex"
       zIndex={1000}
-      overflowY="auto"
+      overflowY="scroll"
       marginTop={5}
       marginLeft={0}
       marginRight={0}
@@ -185,7 +186,14 @@ const DropDown: React.FC<DropDownProps> = ({
       position="absolute"
       flexDirection="column"
       backgroundColor="white"
-      justifyContent="space-evenly"
+      maxHeight="200px"
+      style={{
+        scrollbarWidth: 'none' /* For Firefox */,
+        msOverflowStyle: 'none' /* For Internet Explorer and Edge */,
+        '&::-webkit-scrollbar': {
+          display: 'none' /* For Chrome, Safari, and Opera */,
+        },
+      }}
       {...shadow}
       {...styles['dropDown']}
     >
