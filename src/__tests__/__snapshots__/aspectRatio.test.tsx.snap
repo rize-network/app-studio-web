@@ -7,12 +7,9 @@ exports[`AspectRatio to match snapshot 1`] = `
   <div
     className="sc-bdfCDU dRiktu"
   >
-    // Set the View component with an absolute position to fill up the entire space of its parent container.
-    // Place the \`children\` inside the \`AspectRatioView\`, so they conform to the specified aspect ratio.
     <div
       className="sc-bdfCDU fyIxcV"
     />
-    // Props being spread to inherit additional props that may be needed for custom behavior or styling.
   </div>
 </div>
 `;
