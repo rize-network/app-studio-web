@@ -20,6 +20,7 @@ export interface CheckboxProps {
   styles?: CheckboxStyles;
   size?: Size;
   shadow?: Shadow | Elevation | CSSProperties;
+  infoText?: string;
   [x: string]: any;
 }
 export interface CheckboxViewProps extends CheckboxProps {

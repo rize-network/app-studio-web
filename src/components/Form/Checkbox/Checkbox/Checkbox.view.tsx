@@ -1,11 +1,13 @@
 import React from 'react';
-import { Typography, View } from 'app-studio';
+import { Typography } from 'app-studio';
 import { Center } from '../../../Layout/Center/Center';
 import { Label } from '../../../Form/Label/Label';
 import { CheckSvg, IndeterminateSvg } from '../../../Svg';
 
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes } from './Checkbox.style';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
+import { Text } from '../../../Text/Text';
 
 const CheckboxView: React.FC<CheckboxViewProps> = ({
   id,
@@ -29,6 +31,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   setIsSelected = () => {},
   setIsHovered = () => {},
   styles = { checkbox: {}, label: {} },
+  infoText,
   ...props
 }) => {
   const handleHover = () => setIsHovered(!isHovered);
@@ -89,7 +92,9 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       {...checkboxStyle.container}
       {...props}
     >
-      {labelPosition === 'left' && label && <View>{label}</View>}
+      {labelPosition === 'left' && label && (
+        <LabelContent label={label} infoText={infoText} />
+      )}
       <Center {...checkboxStyle.checkbox}>
         {isIndeterminate ? (
           <IndeterminateSvg />
@@ -98,9 +103,27 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           (icon ?? <CheckSvg size={IconSizes[size]} />)
         )}
       </Center>
-      {labelPosition === 'right' && label && <View>{label}</View>}
+      {labelPosition === 'right' && label && (
+        <LabelContent label={label} infoText={infoText} />
+      )}
     </Label>
   );
 };
 
+const LabelContent = ({
+  label,
+  infoText,
+}: {
+  label: string;
+  infoText?: string;
+}) => (
+  <Vertical gap={5}>
+    <Text>{label}</Text>
+    {infoText && (
+      <Text color="color.gray.400" size="sm">
+        {infoText}
+      </Text>
+    )}
+  </Vertical>
+);
 export default CheckboxView;
