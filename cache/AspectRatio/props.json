@@ -1,0 +1,33 @@
+{
+    "componentDescription": "Maintains a set aspect ratio for child content",
+    "ratio": {
+        "type": [
+            "number"
+        ],
+        "typeValues": [
+            "any number"
+        ],
+        "description": "specifying the aspect ratio",
+        "defaultValue": "16/9"
+    },
+    "children": {
+        "type": [
+            "React.ReactNode"
+        ],
+        "typeValues": [
+            "any valid React node"
+        ],
+        "description": "defining the child components",
+        "defaultValue": "undefined"
+    },
+    "[x: string]": {
+        "type": [
+            "any"
+        ],
+        "typeValues": [
+            "any value"
+        ],
+        "description": "Allows for an indefinite number of additional properties with any types, adding flexibility to the props",
+        "defaultValue": "undefined"
+    }
+}

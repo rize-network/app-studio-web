@@ -1,0 +1,192 @@
+{
+  "Label.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Define an interface called `LabelProps` to type-check the props that can be passed to Label component."
+        },
+        {
+          "line": 3,
+          "comment": "Declare `children` prop, which is of type `React.ReactNode` to accept any element that can be rendered by React, like a string, number, or JSX."
+        },
+        {
+          "line": 4,
+          "comment": "Optional `heading` prop allowing to specify the heading level, which should be one of the predefined `Headings` type."
+        },
+        {
+          "line": 5,
+          "comment": "Optional `isItalic` boolean prop to determine if the label text should be italicized."
+        },
+        {
+          "line": 6,
+          "comment": "Optional `isStriked` boolean prop to determine if the label text should have a strikethrough."
+        },
+        {
+          "line": 7,
+          "comment": "Optional `isUnderlined` boolean prop to determine if the label text should be underlined."
+        },
+        {
+          "line": 8,
+          "comment": "Optional `size` prop that can either be one of the predefined `Sizes` type or a custom `number` size value."
+        },
+        {
+          "line": 9,
+          "comment": "Optional `weight` prop that defines the font weight of the label using the predefined `TextWeights` type."
+        },
+        {
+          "line": 10,
+          "comment": "Use index signature to allow any additional properties with `string` keys and values of `any` type, adding flexibility to the `LabelProps` interface."
+        }
+      ]
+    }
+  ],
+  "Label.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Import Headings type definition from Label.type module for type safety and consistency."
+        },
+        {
+          "line": 2,
+          "comment": "Initialize a constant 'HeadingSizes' to define styles for different heading levels."
+        },
+        {
+          "line": 3,
+          "comment": "Use TypeScript's 'Record' utility type to ensure the object matches the shape of 'Headings'."
+        },
+        {
+          "line": 4,
+          "comment": "Define style properties for 'h1' heading tag, including font size, line height, and letter spacing."
+        },
+        {
+          "line": 9,
+          "comment": "Define style properties for 'h2' heading tag similar to 'h1', but with adjusted values for size and spacing."
+        },
+        {
+          "line": 14,
+          "comment": "Define style properties for 'h3' heading tag with a standard letter spacing of 0."
+        },
+        {
+          "line": 19,
+          "comment": "Provide style properties for 'h4' heading tag, with a slight increase in letter spacing."
+        },
+        {
+          "line": 24,
+          "comment": "Set the 'h5' heading tag styles, opting for no additional letter spacing."
+        },
+        {
+          "line": 29,
+          "comment": "Set the 'h6' heading tag styles, with the smallest font size and a subtle letter spacing."
+        }
+      ]
+    }
+  ],
+  "Label.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a TypeScript type 'TextWeights' which allows specifying the visual weight (thickness) of text, with predefined values ranging from 'hairline' to 'black'."
+        },
+        {
+          "line": 2,
+          "comment": "Each value corresponds to a conventional font weight used in styling."
+        },
+        {
+          "line": 10,
+          "comment": "Defines a TypeScript type 'Sizes' to standardize the sizing scale for UI elements. Predefined sizes range from 'xs' for extra small to '6xl' for 6 times extra large."
+        },
+        {
+          "line": 11,
+          "comment": "This type can be used for consistent application of size-related styling across the application."
+        },
+        {
+          "line": 20,
+          "comment": "Defines a TypeScript type 'Headings' to ensure heading elements use one of the standard HTML heading tags, such as 'h1' to 'h6'."
+        },
+        {
+          "line": 21,
+          "comment": "Enforcing the use of this type can enhance semantic markup and accessibility of the web app."
+        }
+      ]
+    }
+  ],
+  "Label.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 6,
+          "comment": "LabelView is a functional component that utilizes the LabelProps interface for its props."
+        },
+        {
+          "line": 7,
+          "comment": "The component is deconstructing its properties to apply conditional styles and pass them to the underlying Element."
+        },
+        {
+          "line": 10,
+          "comment": "Creates a dynamic style object based on the 'heading' prop, if provided, selecting the appropriate size from HeadingSizes."
+        },
+        {
+          "line": 11,
+          "comment": "Returns an Element component with the role of a label, styled dynamically based on incoming props."
+        },
+        {
+          "line": 13,
+          "comment": "The fontSize prop for the Element is determined by the 'size' prop passed to LabelView."
+        },
+        {
+          "line": 14,
+          "comment": "The fontStyle prop toggles between 'italic' and 'normal' based on the 'isItalic' boolean prop."
+        },
+        {
+          "line": 15,
+          "comment": "fontWeight is derived from the Typography module, ensuring consistent font weighting across the app."
+        },
+        {
+          "line": 16,
+          "comment": "textDecoration conditionally applies 'line-through' or 'underline' based on respective boolean props; defaults to 'none' if both are false."
+        },
+        {
+          "line": 18,
+          "comment": "Spreads any additional style properties from headingStyles into the Element if a heading size is specified."
+        },
+        {
+          "line": 19,
+          "comment": "Spreads the rest of the props to support extensibility of the LabelView component for future use cases."
+        },
+        {
+          "line": 20,
+          "comment": "Includes children elements inside the Element, allowing for nested content within the label."
+        }
+      ]
+    }
+  ],
+  "Label.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Import custom type 'LabelProps' to type check the properties passed into the Label component."
+        },
+        {
+          "line": 4,
+          "comment": "Import 'LabelView' as a visual component for the label, separating the view from business logic."
+        },
+        {
+          "line": 5,
+          "comment": "Define 'LabelComponent' as a functional component that uses React's FC type for type checking and utilizing React features."
+        },
+        {
+          "line": 6,
+          "comment": "Pass all properties received by 'LabelComponent' to 'LabelView' using the spread syntax, ensuring it has all props needed for rendering."
+        },
+        {
+          "line": 7,
+          "comment": "Export the 'LabelComponent' as 'Label' to be reused throughout the project."
+        }
+      ]
+    }
+  ]
+}

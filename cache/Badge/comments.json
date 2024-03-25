@@ -1,0 +1,184 @@
+{
+  "Badge.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Imports custom type definitions for the Badge component such as size, variant, etc."
+        },
+        {
+          "line": 2,
+          "comment": "Defines a TypeScript interface for the Badge component props."
+        },
+        {
+          "line": 3,
+          "comment": "Mandatory content of the badge, can be a string or a number."
+        },
+        {
+          "line": 4,
+          "comment": "Optional variant, controls the visual style of the badge (e.g., success, warning, etc)."
+        },
+        {
+          "line": 5,
+          "comment": "Optional color scheme, likely to define the foreground and background colors."
+        },
+        {
+          "line": 6,
+          "comment": "Optional position, possibly to set the badge's position in relation to its parent element."
+        },
+        {
+          "line": 7,
+          "comment": "Optional size, could be predefined sizes for the badge (e.g., small, medium, large)."
+        },
+        {
+          "line": 8,
+          "comment": "Optional shape, to define the badge geometry (e.g., circle, square, rounded corners)."
+        },
+        {
+          "line": 9,
+          "comment": "Optional styles, perhaps to provide additional inline styling or CSS classes."
+        },
+        {
+          "line": 10,
+          "comment": "Allows for additional properties not explicitly defined in the interface."
+        }
+      ]
+    }
+  ],
+  "Badge.style.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Define a type that enumerates all possible sizes for badges."
+        },
+        {
+          "line": 5,
+          "comment": "Create an object that maps badge sizes to their corresponding CSS properties, defining minimum width, height and padding for each size."
+        },
+        {
+          "line": 19,
+          "comment": "Create an object that maps badge shapes to their corresponding border-radius values to define the curvature of the badge's corners."
+        },
+        {
+          "line": 24,
+          "comment": "Create an object defining CSS properties for positioning badges in the corners of a relative container, using absolute positioning."
+        }
+      ]
+    }
+  ],
+  "Badge.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines possible values for the shape of a UI component such as buttons or badges."
+        },
+        {
+          "line": 3,
+          "comment": "Specifies available sizes for UI elements, catering to a range of scalability from extra small to extra large."
+        },
+        {
+          "line": 4,
+          "comment": "Determines the styling variants a UI component can have, which could include filled, outlined, or ghost styles among others."
+        },
+        {
+          "line": 5,
+          "comment": "Lists possible positions for UI elements that can be placed in one of the corners of a container, like notification badges."
+        },
+        {
+          "line": 7,
+          "comment": "Describes the style properties available for badge components, where container styles the outer part and text styles the inner content."
+        }
+      ]
+    }
+  ],
+  "Badge.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Importing React and specific type CSSProperties from the 'react' module."
+        },
+        {
+          "line": 2,
+          "comment": "Importing BadgeProps for typing the component's expected props."
+        },
+        {
+          "line": 3,
+          "comment": "Importing styling constants for badge shapes, sizes, and position styles."
+        },
+        {
+          "line": 4,
+          "comment": "Importing Variant type enumeration to type badge variants."
+        },
+        {
+          "line": 5,
+          "comment": "Importing Center component to centrally place child component."
+        },
+        {
+          "line": 6,
+          "comment": "Importing Text component to display the content text within the badge."
+        },
+        {
+          "line": 7,
+          "comment": "Declaring the functional component BadgeView with BadgeProps as its type for props."
+        },
+        {
+          "line": 8,
+          "comment": "Destructuring props with default values for shape, colorScheme, variant, size, and styles."
+        },
+        {
+          "line": 14,
+          "comment": "Defining BadgeVariants as a record of CSSProperties based on the variant type and associated stylings."
+        },
+        {
+          "line": 24,
+          "comment": "Combining various style objects along with conditional styles based on props to create the badge's appearance."
+        },
+        {
+          "line": 32,
+          "comment": "Rendering the Badge component using the Center layout component with combinedStyles applied."
+        },
+        {
+          "line": 33,
+          "comment": "Inserting a Text component into the badge to display the content, with dynamic size and additional text styles."
+        },
+        {
+          "line": 36,
+          "comment": "Exporting BadgeView to be used in other parts of the application."
+        }
+      ]
+    }
+  ],
+  "Badge.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Importing type definitions for BadgeProps that will be used to type-check the Badge component's props."
+        },
+        {
+          "line": 4,
+          "comment": "Importing the BadgeView component which is the presentation component for Badge."
+        },
+        {
+          "line": 5,
+          "comment": "Exporting the Badge as a functional component from this module."
+        },
+        {
+          "line": 6,
+          "comment": "Destructuring the props in the component function parameter list, to directly access individual properties."
+        },
+        {
+          "line": 7,
+          "comment": "The functional component Badge is implicitly returning the BadgeView component."
+        },
+        {
+          "line": 8,
+          "comment": "Passing all the destructured props to the BadgeView component to maintain the same API surface."
+        }
+      ]
+    }
+  ]
+}

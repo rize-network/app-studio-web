@@ -1,0 +1,198 @@
+{
+  "Avatar.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines the properties for the Avatar component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Source URL for the avatar image.",
+          "codeSnippet": "  sr"
+        },
+        {
+          "line": 4,
+          "comment": "Optional size of the avatar, predefined in 'Size' type.",
+          "codeSnippet": "  si"
+        },
+        {
+          "line": 5,
+          "comment": "URL or path for the fallback image if the source fails to load.",
+          "codeSnippet": "  fa"
+        },
+        {
+          "line": 6,
+          "comment": "Optional custom styles for the avatar, defined by 'AvatarStyles'.",
+          "codeSnippet": "  st"
+        },
+        {
+          "line": 8,
+          "comment": "Extends 'AvatarProps' with additional view-related properties.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 9,
+          "comment": "Signals whether there was an error when loading the avatar image.",
+          "codeSnippet": "  im"
+        },
+        {
+          "line": 10,
+          "comment": "Function to change the state of image load error.",
+          "codeSnippet": "  se"
+        }
+      ]
+    }
+  ],
+  "Avatar.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a state hook for managing avatar image error status, initialized as false.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 4,
+          "comment": "Provides an object containing the image error state and its setter function.",
+          "codeSnippet": "retu"
+        }
+      ]
+    }
+  ],
+  "Avatar.style.tsx": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a mapping of avatar sizes to their respective numeric values",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Avatar.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines Avatar size options as a predefined set of string literals for consistent usage across the application",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Begins the declaration of an object type that specifies styling properties for different parts of the Avatar component",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 4,
+          "comment": "Optional CSSProperties object for customizing the container element of the Avatar",
+          "codeSnippet": "cont"
+        },
+        {
+          "line": 5,
+          "comment": "Optional CSSProperties object for customizing the image element within the Avatar",
+          "codeSnippet": "imag"
+        },
+        {
+          "line": 6,
+          "comment": "Optional any type property for defining a fallback display when the image is not available",
+          "codeSnippet": "fall"
+        }
+      ]
+    }
+  ],
+  "Avatar.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 7,
+          "comment": "Declaration of the AvatarView functional component with destructured props from AvatarViewProps.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 15,
+          "comment": "Determines the size of the avatar by mapping the size prop to the predefined AvatarSizeMap.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 16,
+          "comment": "Initiates a style object for the image with an objectFit property and spreads additional image styles if provided.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 20,
+          "comment": "Start of the JSX returned by the AvatarView component, which uses the Center component as its root element.",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 29,
+          "comment": "Sets the borderColor of the avatar border based on the imageError flag, showing black on error and transparent otherwise.",
+          "codeSnippet": "borde"
+        },
+        {
+          "line": 33,
+          "comment": "Conditionally renders the Image or Text component based on the presence of an image error using the imageError flag.",
+          "codeSnippet": "if (ima"
+        },
+        {
+          "line": 34,
+          "comment": "Renders the Image component when no image error is present, with properties and event handler for load error.",
+          "codeSnippet": "Imag"
+        },
+        {
+          "line": 40,
+          "comment": "Event handler that sets the image error flag to true when an error occurs loading the image.",
+          "codeSnippet": "onEr"
+        },
+        {
+          "line": 42,
+          "comment": "Renders fallback Text component instead of the image if an image error has occurred.",
+          "codeSnippet": "Text"
+        },
+        {
+          "line": 49,
+          "comment": "End of the AvatarView functional component definition.",
+          "codeSnippet": "};"
+        }
+      ]
+    }
+  ],
+  "Avatar.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines the AvatarComponent functional component with destructured props from AvatarProps type.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 6,
+          "comment": "Uses custom hook useAvatarState to manage the avatar image loading error state.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 7,
+          "comment": "Begins the JSX return block for rendering the AvatarView component.",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 8,
+          "comment": "The AvatarView component is a presentational component responsible for rendering the avatar image.",
+          "codeSnippet": "    "
+        },
+        {
+          "line": 17,
+          "comment": "AvatarComponent is a functional component that wraps the AvatarView with added state logic.",
+          "codeSnippet": "};"
+        },
+        {
+          "line": 18,
+          "comment": "Exports the AvatarComponent as Avatar for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

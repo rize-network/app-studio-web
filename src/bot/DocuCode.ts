@@ -29,16 +29,23 @@ export class DocuCode {
   }
 
   async commentCodeFile(filePath: string, assistantId: string) {
+    const parts = filePath.split('/');
+    const componentName = parts[parts.length - 2];
+
     // Read the file content
-    const codeContent = this.fileHandler.readFile(filePath);
+    const codeContent = await this.fileHandler.readFile(filePath);
+
+    const updatedCodeContent = this.splitArrayToJSON(codeContent);
 
     // Define the prompt
-    const prompt = CommentPrompt(codeContent);
+    const prompt = CommentPrompt(
+      componentName,
+      path.basename(filePath),
+      JSON.stringify(updatedCodeContent)
+    );
 
     // Créez un nouveau thread pour la conversation
     const thread = await this.openAIConnector.createThread();
-
-    // console.log('ok threads');
 
     // Définissez le prompt initial pour la compréhension globale du dossier
     await this.openAIConnector.addMessageToThread(thread.id, {
@@ -46,19 +53,13 @@ export class DocuCode {
       content: prompt,
     });
 
-    // console.log('ok message');
-
     // Récupérez et traitez la réponse pour la compréhension globale
     const response = await this.openAIConnector.runAssistant(
       assistantId,
       thread.id
     );
-
-    // console.log('ok run ');
-
     // Process the commented code to extract only the code part
     const codeOnly = extractJsonCode(response.text.value);
-    // console.log('ok run ');
 
     this.cache.saveEachJsonToCache(
       this.cacheKey + `/comments`,
@@ -67,51 +68,36 @@ export class DocuCode {
     );
 
     // Replace file content with the extracted code
-    await this.processComments(filePath, codeOnly);
-
-    // console.log('commentCodeFile successful');
+    await this.processComments(filePath, codeContent, codeOnly);
   }
 
-  async processComments(filePath: string, commentsJson: any) {
+  async processComments(filePath: string, code: string, commentsJson: any) {
     try {
       // Check if commentsJson is already an object or a string that needs parsing
-      const commentsObj =
-        typeof commentsJson === 'object'
-          ? commentsJson
-          : JSON.parse(commentsJson);
+      let commentsObj;
+      if (typeof commentsJson === 'object') {
+        commentsObj = commentsJson;
+      } else {
+        try {
+          commentsObj = JSON.parse(commentsJson);
+        } catch (parseError) {
+          console.error('Error parsing comments JSON:', parseError);
+          return;
+        }
+      }
 
-      if (!Array.isArray(commentsObj.comments)) {
+      if (!commentsObj || !Array.isArray(commentsObj.comments)) {
         console.error(
-          "Expected 'comments' to be an array, received:",
-          typeof commentsObj.comments
+          "Expected 'comments' to be an array in the object, received:",
+          commentsObj ? typeof commentsObj.comments : 'null'
         );
         return;
       }
-
-      // Sort and process comments
-      commentsObj.comments.sort(
-        (a: { line: number }, b: { line: number }) => b.line - a.line
-      );
-      for (const commentObj of commentsObj.comments) {
-        await this.insertCommentIntoFile(
-          filePath,
-          commentObj.line,
-          commentObj.comment
-        );
-      }
-      // console.log('processComments successful');
+      const updatedCode = this.insertComments(code, commentsObj.comments); // Use commentsObj.comments here
+      await this.fileHandler.writeWithoutCheck(filePath, updatedCode);
     } catch (error) {
       console.error('Error processing comments:', error);
     }
-  }
-
-  async insertCommentIntoFile(filePath: string, line: number, comment: string) {
-    const fileContent = await this.fileHandler.readFile(filePath);
-    let lines = fileContent.split('\n');
-
-    lines.splice(line, 0, `// ${comment}`); // Insert the comment.
-
-    await this.fileHandler.writeWithoutCheck(filePath, lines.join('\n'));
   }
 
   async removeCommentsAndCleanFile(filePath: string) {
@@ -136,8 +122,6 @@ export class DocuCode {
 
     // Write the modified content back to the file
     this.fileHandler.writeWithoutCheck(filePath, content);
-
-    // console.log(`Comments and extra newlines removed from '${filePath}'.`);
   }
 
   async processDirectory(dirPath: string, assistantId: string) {
@@ -163,11 +147,108 @@ export class DocuCode {
         (stat.isFile() && path.extname(file) === '.ts') ||
         path.extname(file) === '.tsx'
       ) {
+        // if (
+        //   fullPath === 'src/components/Form/ComboBox/ComboBox/ComboBox.view.tsx'
+        // ) {
         await this.removeCommentsAndCleanFile(fullPath);
         await this.commentCodeFile(fullPath, assistantId);
+        // }
       } else if (stat.isDirectory()) {
         await this.processDirectory(fullPath, assistantId); // Recursively process subdirectories
       }
     }
+  }
+
+  splitArrayToJSON(code: string): { line: number; code: string }[] {
+    const linesArray = code.split('\n'); // Directly split the input code by new lines
+
+    return linesArray.map((lineCode, index) => ({
+      line: index + 1, // Line number starts at 1
+      code: lineCode, // The actual code on this line
+    }));
+  }
+
+  insertComments(code: string, comments: any[]): string {
+    const lines = code.split('\n');
+    const commentMap = new Map<
+      number,
+      { comment: string; codeSnippet: string }
+    >();
+
+    if (!Array.isArray(comments)) {
+      throw new TypeError('Comments must be an array.');
+    }
+
+    for (const comment of comments) {
+      if (comment.line < 1 || comment.line > lines.length) {
+        console.warn(
+          `Comment for non-existent line ${comment.line} will be ignored.`
+        );
+        continue;
+      }
+      commentMap.set(comment.line, {
+        comment: comment.comment,
+        codeSnippet: comment.codeSnippet,
+      });
+    }
+
+    let inBlock = false;
+    let blockDepth = 0;
+
+    return lines
+      .map((line, index) => {
+        const lineNum = index + 1;
+        const commentData = commentMap.get(lineNum);
+
+        // Enhanced block detection
+        if (
+          !inBlock &&
+          line.trim().startsWith('<') &&
+          !line.trim().endsWith('/>')
+        ) {
+          inBlock = true;
+        }
+        if (inBlock) {
+          if (line.includes('<') && !line.includes('/>')) {
+            blockDepth++;
+          }
+          if (line.includes('/>') || line.includes('</')) {
+            blockDepth--;
+            if (blockDepth === 0) {
+              inBlock = false;
+            }
+          }
+        }
+
+        // Insert comments outside of JSX blocks
+        if (commentData && !inBlock) {
+          const { comment, codeSnippet } = commentData;
+          if (line.includes(codeSnippet)) {
+            return `// ${comment}\n${line}`;
+          } else {
+            console.warn(
+              `Code snippet '${codeSnippet}' does not match the start of line ${lineNum}: '${line.trim()}'`
+            );
+          }
+        }
+
+        return line;
+      })
+      .join('\n');
+  }
+
+  compareStrings(line: string, codeSnippet: string) {
+    // Trim, convert to lowercase, and get the first three characters
+    const lineStart = line.trim().toLowerCase().substring(0, 3);
+    const codeSnippetLine = codeSnippet.trim().toLowerCase().substring(0, 3);
+
+    // Determine the minimum length to compare
+    const minLength = Math.min(lineStart.length, codeSnippetLine.length);
+
+    // Compare the substrings based on the minimum length
+    return (
+      lineStart.substring(0, minLength) ===
+      codeSnippetLine.substring(0, minLength)
+    );
   }
 }

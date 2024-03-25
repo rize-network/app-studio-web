@@ -1,62 +1,83 @@
 {
+  "componentDescription": "Provides an interactive tab interface for content organization",
   "tabs": {
     "type": [
       "Tab[]"
     ],
-    "typeValues": [],
-    "description": [
-      "The prop 'tabs' is an array of Tab items."
+    "typeValues": [
+      {
+        "title": "string",
+        "value": "string",
+        "content": "string | React.ReactNode | any"
+      }
     ],
+    "description": "Declares an array of tabs, expecting each element to conform to the Tab interface.",
     "defaultValue": []
   },
   "styles": {
     "type": [
       "TabsStyles?"
     ],
-    "typeValues": [],
-    "description": [
-      "The prop 'styles' is an optional object for custom styling."
+    "typeValues": [
+      {
+        "container": "CSSProperties",
+        "activeTab": "CSSProperties | ButtonProps",
+        "activeText": "CSSProperties | TextProps",
+        "tab": "CSSProperties | ButtonProps",
+        "content": "CSSProperties",
+        "title": "CSSProperties | TextProps",
+        "headerTabs": "CSSProperties"
+      }
     ],
-    "defaultValue": []
+    "description": "Allows for optional styling to be applied to the tabs via a TabsStyles object.",
+    "defaultValue": "{}"
   },
   "isActive": {
     "type": [
       "Tab"
     ],
-    "typeValues": [],
-    "description": [
-      "'isActive' is a Tab object that represents the currently active tab in the tabs list."
+    "typeValues": [
+      {
+        "title": "string",
+        "value": "string",
+        "content": "string | React.ReactNode | any"
+      }
     ],
-    "defaultValue": []
+    "description": "Holds the current active Tab object.",
+    "defaultValue": "{}"
   },
   "setIsActive": {
     "type": [
       "React.Dispatch<React.SetStateAction<Tab>>"
     ],
-    "typeValues": [],
-    "description": [
-      "'setIsActive' is a dispatch function allowing the tabs component to update the active tab state."
+    "typeValues": [
+      "function"
     ],
-    "defaultValue": []
+    "description": "Function to update the current active tab.",
+    "defaultValue": "()=>{}"
   },
   "tabsState": {
     "type": [
       "Tab[]"
     ],
-    "typeValues": [],
-    "description": [
-      "'tabsState' is an array of Tab objects representing the complete state of tabs at any given moment."
+    "typeValues": [
+      {
+        "title": "string",
+        "value": "string",
+        "content": "string | React.ReactNode | any"
+      }
     ],
-    "defaultValue": []
+    "description": "Array representing the current state of tabs, which includes the tab order and content.",
+    "defaultValue": "[]"
   },
   "setTabsState": {
     "type": [
       "React.Dispatch<React.SetStateAction<Tab[]>>"
     ],
-    "typeValues": [],
-    "description": [
-      "'setTabsState' is a dispatch function for updating 'tabsState'."
+    "typeValues": [
+      "function"
     ],
-    "defaultValue": []
+    "description": "Function to update the state of the tabs array.",
+    "defaultValue": "()=>{}"
   }
 }
