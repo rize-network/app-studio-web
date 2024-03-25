@@ -6,12 +6,13 @@ import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { WarningSvg } from '../../Svg';
 import { AlertProps } from './Alert.props';
 import { Themes } from './Alert.style';
-
+// Defines AlertView as a functional component using destructuring to extract props.
 export const AlertView = ({
   icon,
   title,
   styles,
   description,
+  // Sets a default variant prop to 'default' if none is provided.
   variant = 'default',
 }: AlertProps) => (
   <Horizontal

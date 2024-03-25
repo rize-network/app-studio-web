@@ -1,0 +1,64 @@
+{
+  "componentDescription": "Enables selection from a group of toggle switches.",
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "rounded",
+      "square",
+      "pill",
+      "circle"
+    ],
+    "description": "Optional shape prop to define the shape of toggle elements.",
+    "defaultValue": "rounded"
+  },
+  "items": {
+    "type": "ToggleItem[]",
+    "typeValues": [
+      "array of items defining each toggle in the group"
+    ],
+    "description": "Mandatory array of items defining each toggle in the group.",
+    "defaultValue": "N/A"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "ghost",
+      "solid",
+      "outline"
+    ],
+    "description": "Optional variant prop to specify the visual style of the toggle group.",
+    "defaultValue": "ghost"
+  },
+  "colorScheme": {
+    "type": "string",
+    "typeValues": [
+      "any theme color identifier as string"
+    ],
+    "description": "Optional colorScheme prop for theming the toggle group.",
+    "defaultValue": "color.trueGray.400"
+  },
+  "onToggleChange": {
+    "type": "function",
+    "typeValues": [
+      "(activeIds: string[]) => void"
+    ],
+    "description": "Optional callback function that fires when the active toggle changes, providing the IDs of active toggles.",
+    "defaultValue": "N/A"
+  },
+  "activeToggles": {
+    "type": "string[]",
+    "typeValues": [
+      "array of active toggle IDs"
+    ],
+    "description": "Array storing the IDs of active toggles within the group.",
+    "defaultValue": "N/A"
+  },
+  "setActiveToggles": {
+    "type": "React.Dispatch<React.SetStateAction<string[]>>",
+    "typeValues": [
+      "function to update active toggles"
+    ],
+    "description": "Function to update the active toggle states.",
+    "defaultValue": "N/A"
+  }
+}

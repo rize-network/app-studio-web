@@ -1,0 +1,53 @@
+{
+  "componentDescription": "Renders a customizable data table with optional footer and caption.",
+  "data": {
+    "type": [
+      "any[]"
+    ],
+    "typeValues": [
+      "array"
+    ],
+    "description": "Array of data objects to be displayed in the table rows.",
+    "defaultValue": []
+  },
+  "columns": {
+    "type": [
+      "Column[]"
+    ],
+    "typeValues": [
+      "array of objects with at least field and title as string properties"
+    ],
+    "description": "Configurations for each column in the table, including header titles.",
+    "defaultValue": []
+  },
+  "footer": {
+    "type": [
+      "FooterCell[]"
+    ],
+    "typeValues": [
+      "array of objects with at least value as a string and props as an optional object"
+    ],
+    "description": "Optional array of footer cells to add at the bottom of the table.",
+    "defaultValue": "undefined"
+  },
+  "caption": {
+    "type": [
+      "React.ReactNode"
+    ],
+    "typeValues": [
+      "React node"
+    ],
+    "description": "Optional table caption as a React node.",
+    "defaultValue": "undefined"
+  },
+  "styles": {
+    "type": [
+      "TableViewStyles"
+    ],
+    "typeValues": [
+      "object with optional style properties for table, thead, tbody, tr, th, td"
+    ],
+    "description": "Optional custom styles to apply to the table and its elements.",
+    "defaultValue": "undefined"
+  }
+}
