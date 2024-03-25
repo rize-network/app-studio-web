@@ -1,6 +1,6 @@
 # Tabs
 
-Interface for a tabs component that manages active states and tab content rendering
+Provides an interactive tab interface for content organization
 
 ### **Import**
   ```tsx static
@@ -113,7 +113,7 @@ const DummyContent = () => {
 ```
 
 ### **styles**
-"Optional prop for providing custom styling options defined by TabsStyles."
+"Allows for optional styling to be applied to the tabs via a TabsStyles object."
 
 ```tsx
 import React from 'react';

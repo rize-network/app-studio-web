@@ -1,1 +1,83 @@
-{"componentDescription":"Interface for a tabs component that manages active states and tab content rendering","tabs":{"type":"Tab[]","typeValues":[{"title":"string","value":"string","content":"string | React.ReactNode | any"}],"description":"The tabs prop requires an array of Tab objects to render as tabs.","defaultValue":"[]"},"styles":{"type":"TabsStyles","typeValues":[{"container":"CSSProperties","activeTab":"CSSProperties | ButtonProps","activeText":"CSSProperties | TextProps","tab":"CSSProperties | ButtonProps","content":"CSSProperties","title":"CSSProperties | TextProps","headerTabs":"CSSProperties"}],"description":"Optional prop for providing custom styling options defined by TabsStyles.","defaultValue":"{}"},"isActive":{"type":"Tab","typeValues":[{"title":"string","value":"string","content":"string | React.ReactNode | any"}],"description":"Used to track the currently active Tab.","defaultValue":"null"},"setIsActive":{"type":"React.Dispatch<React.SetStateAction<Tab>>","typeValues":"Function","description":"React dispatch function allowing to update the currently active Tab.","defaultValue":"() => {}"},"tabsState":{"type":"Tab[]","typeValues":[{"title":"string","value":"string","content":"string | React.ReactNode | any"}],"description":"An array of Tab objects representing the current state of tabs.","defaultValue":"[]"},"setTabsState":{"type":"React.Dispatch<React.SetStateAction<Tab[]>>","typeValues":"Function","description":"Provides a method to update the entire array of tabs' states.","defaultValue":"() => {}"}}
+{
+    "componentDescription": "Provides an interactive tab interface for content organization",
+    "tabs": {
+        "type": [
+            "Tab[]"
+        ],
+        "typeValues": [
+            {
+                "title": "string",
+                "value": "string",
+                "content": "string | React.ReactNode | any"
+            }
+        ],
+        "description": "Declares an array of tabs, expecting each element to conform to the Tab interface.",
+        "defaultValue": []
+    },
+    "styles": {
+        "type": [
+            "TabsStyles?"
+        ],
+        "typeValues": [
+            {
+                "container": "CSSProperties",
+                "activeTab": "CSSProperties | ButtonProps",
+                "activeText": "CSSProperties | TextProps",
+                "tab": "CSSProperties | ButtonProps",
+                "content": "CSSProperties",
+                "title": "CSSProperties | TextProps",
+                "headerTabs": "CSSProperties"
+            }
+        ],
+        "description": "Allows for optional styling to be applied to the tabs via a TabsStyles object.",
+        "defaultValue": "{}"
+    },
+    "isActive": {
+        "type": [
+            "Tab"
+        ],
+        "typeValues": [
+            {
+                "title": "string",
+                "value": "string",
+                "content": "string | React.ReactNode | any"
+            }
+        ],
+        "description": "Holds the current active Tab object.",
+        "defaultValue": "{}"
+    },
+    "setIsActive": {
+        "type": [
+            "React.Dispatch<React.SetStateAction<Tab>>"
+        ],
+        "typeValues": [
+            "function"
+        ],
+        "description": "Function to update the current active tab.",
+        "defaultValue": "()=>{}"
+    },
+    "tabsState": {
+        "type": [
+            "Tab[]"
+        ],
+        "typeValues": [
+            {
+                "title": "string",
+                "value": "string",
+                "content": "string | React.ReactNode | any"
+            }
+        ],
+        "description": "Array representing the current state of tabs, which includes the tab order and content.",
+        "defaultValue": "[]"
+    },
+    "setTabsState": {
+        "type": [
+            "React.Dispatch<React.SetStateAction<Tab[]>>"
+        ],
+        "typeValues": [
+            "function"
+        ],
+        "description": "Function to update the state of the tabs array.",
+        "defaultValue": "()=>{}"
+    }
+}

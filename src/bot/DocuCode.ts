@@ -206,22 +206,14 @@ export class DocuCode {
 
         if (commentData && !inBlock) {
           const { comment, codeSnippet } = commentData;
-          const lineStart = line.trim().substring(0, 3).toLocaleLowerCase();
-          const codeSnippetLine = codeSnippet
-            .trim()
-            .substring(0, 3)
-            .toLocaleLowerCase();
-          // console.log(
-          //   lineStart,
-          //   codeSnippetLine,
-          //   typeof lineStart,
-          //   typeof codeSnippetLine
-          // );
-          if (lineStart === codeSnippetLine) {
+
+          if (this.compareStrings(line, codeSnippet)) {
             return `// ${comment}\n${line}`;
           } else {
             console.warn(
-              `Code snippet '${codeSnippet}' does not match the start of line ${lineNum}.`
+              `Code snippet '${codeSnippet}' does not match the start of line ${lineNum} - ${line
+                .trim()
+                .substring(0, 3)}.`
             );
           }
         }
@@ -229,5 +221,20 @@ export class DocuCode {
         return line;
       })
       .join('\n');
+  }
+
+  compareStrings(line: string, codeSnippet: string) {
+    // Trim, convert to lowercase, and get the first three characters
+    const lineStart = line.trim().toLowerCase().substring(0, 3);
+    const codeSnippetLine = codeSnippet.trim().toLowerCase().substring(0, 3);
+
+    // Determine the minimum length to compare
+    const minLength = Math.min(lineStart.length, codeSnippetLine.length);
+
+    // Compare the substrings based on the minimum length
+    return (
+      lineStart.substring(0, minLength) ===
+      codeSnippetLine.substring(0, minLength)
+    );
   }
 }
