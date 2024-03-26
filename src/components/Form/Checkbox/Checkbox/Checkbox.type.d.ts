@@ -13,6 +13,7 @@ export type Size =
 export type CheckboxStyles = {
   checkbox?: CSSProperties;
   label?: CSSProperties;
+  infoText?: CSSProperties;
 };
 
 export type Variant = 'selected' | 'unselected' | 'indeterminate';

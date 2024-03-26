@@ -1,11 +1,13 @@
-### **Import**
+# Tabs
 
-```tsx static
-import { Tabs } from '@app-studio/web';
-```
+Provides an interactive tab interface for content organization
+
+### **Import**
+  ```tsx static
+  import { Tabs } from '@app-studio/web';
+  ```
 
 ### **Default**
-
 ```tsx
 import React from 'react';
 import { Tabs, View, Text } from 'src/components';
@@ -107,15 +109,16 @@ const DummyContent = () => {
     ></View>
   );
 };
+
 ```
 
 ### **styles**
-
-"The prop 'styles' is an optional object for custom styling."
+"Allows for optional styling to be applied to the tabs via a TabsStyles object."
 
 ```tsx
 import React from 'react';
-import { Tabs, Text } from 'src/components';
+import { Text } from 'src/components/Text/Text';
+import { Tabs } from 'src/components/Tabs/Tabs';
 
 export const StylesTabs = () => {
   const tabs = [
@@ -200,4 +203,6 @@ export const StylesTabs = () => {
     />
   );
 };
+
 ```
+

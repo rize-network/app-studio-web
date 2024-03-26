@@ -145,8 +145,11 @@ export class Bot {
         assistantId,
         thread.id
       );
+      const propsJsonString = response.text.value;
+      // Log the string to be parsed to help with debugging
+      // console.log('propsJsonString:', propsJsonString);
 
-      const propsJson = extractJsonCode(response.text.value);
+      const propsJson = extractJsonCode(propsJsonString);
 
       // Check if propsJson is in JSON format
       if (!this.isObject(propsJson)) {
@@ -233,9 +236,9 @@ export class Bot {
       console.warn('Warning: No examples found.');
     }
 
-    // Write markdown content to .mdx file
+    // Write markdown content to .md file
     await this.fileHandler.writeWithoutCheck(
-      `${componentFolder}/${componentName}.mdx`,
+      `${componentFolder}/${componentName}.md`,
       markdown
     );
 

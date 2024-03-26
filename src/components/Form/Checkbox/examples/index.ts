@@ -9,3 +9,4 @@ export * from './ReadOnlyInput';
 export * from './Shadow';
 export * from './SizeInput';
 export * from './StylesInput';
+export * from './infoText';
