@@ -6,8 +6,8 @@ import { CheckSvg, IndeterminateSvg } from '../../../Svg';
 
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes } from './Checkbox.style';
-import { Vertical } from '../../../Layout/Vertical/Vertical';
 import { Text } from '../../../Text/Text';
+import { Horizontal, Vertical } from 'src/components/Layout';
 
 const CheckboxView: React.FC<CheckboxViewProps> = ({
   id,
@@ -92,38 +92,40 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       {...checkboxStyle.container}
       {...props}
     >
-      {labelPosition === 'left' && label && (
-        <LabelContent label={label} infoText={infoText} />
-      )}
-      <Center {...checkboxStyle.checkbox}>
-        {isIndeterminate ? (
-          <IndeterminateSvg />
-        ) : (
-          (isChecked || isSelected) &&
-          (icon ?? <CheckSvg size={IconSizes[size]} />)
+      <Vertical gap={8}>
+        <Horizontal gap={10} alignItems="center">
+          {labelPosition === 'left' && label && (
+            <Text size={size} {...styles?.label}>
+              {label}
+            </Text>
+          )}
+          <Center {...checkboxStyle.checkbox}>
+            {isIndeterminate ? (
+              <IndeterminateSvg />
+            ) : (
+              (isChecked || isSelected) &&
+              (icon ?? <CheckSvg size={IconSizes[size]} />)
+            )}
+          </Center>
+          {labelPosition === 'right' && label && (
+            <Text size={size} {...styles?.label}>
+              {label}
+            </Text>
+          )}
+        </Horizontal>
+        {infoText && (
+          <Text
+            marginLeft={labelPosition === 'left' ? 0 : 27}
+            color="color.gray.400"
+            size="sm"
+            {...styles?.infoText}
+          >
+            {infoText}
+          </Text>
         )}
-      </Center>
-      {labelPosition === 'right' && label && (
-        <LabelContent label={label} infoText={infoText} />
-      )}
+      </Vertical>
     </Label>
   );
 };
 
-const LabelContent = ({
-  label,
-  infoText,
-}: {
-  label: string;
-  infoText?: string;
-}) => (
-  <Vertical gap={5}>
-    <Text>{label}</Text>
-    {infoText && (
-      <Text color="color.gray.400" size="sm">
-        {infoText}
-      </Text>
-    )}
-  </Vertical>
-);
 export default CheckboxView;
