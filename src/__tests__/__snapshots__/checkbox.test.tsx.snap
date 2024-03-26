@@ -8,7 +8,15 @@ exports[`Checkbox to match snapshot 1`] = `
   onMouseLeave={[Function]}
 >
   <div
-    className="sc-bdfCDU edAivK"
-  />
+    className="sc-bdfCDU fZelUa"
+  >
+    <div
+      className="sc-bdfCDU kVOtgy"
+    >
+      <div
+        className="sc-bdfCDU edAivK"
+      />
+    </div>
+  </div>
 </div>
 `;
