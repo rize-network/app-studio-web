@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Horizontal } from '../../../Layout'; // Assuming View and Text are from the same location
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
-import { Text } from '../../..';
+import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
 import TickSvg from '../../../Svg/Tick';
 import SearchLoopSvg from '../../../Svg/Search';
