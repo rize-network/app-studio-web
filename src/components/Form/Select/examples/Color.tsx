@@ -3,7 +3,7 @@ import { Vertical } from 'src/components/Layout/Vertical/Vertical';
 
 import { Select } from '../Select';
 
-export const ColorSelect = () => (
+export const ColorDemo = () => (
   <Vertical gap={15}>
     {[
       'theme.primary',
