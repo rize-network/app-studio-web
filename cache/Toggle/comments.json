@@ -1,0 +1,288 @@
+{
+  "Toggle.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Optional 'shape' property to determine the shape of the toggle component.",
+          "codeSnippet": "shap"
+        },
+        {
+          "line": 4,
+          "comment": "Optional boolean to define the initial toggle state.",
+          "codeSnippet": "isTo"
+        },
+        {
+          "line": 5,
+          "comment": "Optional boolean to set the toggle component as disabled or not.",
+          "codeSnippet": "isDi"
+        },
+        {
+          "line": 6,
+          "comment": "Children property to pass React nodes inside the toggle component.",
+          "codeSnippet": "chil"
+        },
+        {
+          "line": 7,
+          "comment": "Optional 'variant' to style the toggle component with predefined sets of visual types.",
+          "codeSnippet": "vari"
+        },
+        {
+          "line": 8,
+          "comment": "Optional string to set the color scheme for the toggle component's appearance.",
+          "codeSnippet": "colo"
+        },
+        {
+          "line": 9,
+          "comment": "Optional function that triggers when the toggle state changes, receives the new state as an argument.",
+          "codeSnippet": "onTo"
+        },
+        {
+          "line": 10,
+          "comment": "Allows the inclusion of additional properties with string keys.",
+          "codeSnippet": "[x:"
+        },
+        {
+          "line": 13,
+          "comment": "Boolean to indicate whether the toggle component is hovered over by the user.",
+          "codeSnippet": "isHo"
+        },
+        {
+          "line": 14,
+          "comment": "Function to set the hover state, using React's state management.",
+          "codeSnippet": "setI"
+        },
+        {
+          "line": 15,
+          "comment": "Boolean to represent the current toggle state within a view.",
+          "codeSnippet": "isTo"
+        },
+        {
+          "line": 16,
+          "comment": "Function to modify the toggle state, employing React's state management utilities.",
+          "codeSnippet": "setI"
+        }
+      ]
+    }
+  ],
+  "Toggle.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Declares the useToggleState function which takes defaultToggled parameter to initialize the toggle state.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Creates a stateful value isHovered for tracking hover state and a function setIsHovered to update that state, initially false.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 4,
+          "comment": "Creates a stateful value isToggle to store the current toggle state and a function setIsToggled to modify it, initialized with defaultToggled.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 5,
+          "comment": "Returns an object containing the current states and the functions to update them for external use.",
+          "codeSnippet": "retu"
+        }
+      ]
+    }
+  ],
+  "Toggle.style.tsx": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines an object 'ToggleShapes' to map 'Shape' types to corresponding numerical values",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Assigns a numerical value of 0 for a 'sharp' shape",
+          "codeSnippet": "shar"
+        },
+        {
+          "line": 4,
+          "comment": "Assigns a numerical value of 4 for a 'rounded' shape",
+          "codeSnippet": "roun"
+        },
+        {
+          "line": 5,
+          "comment": "Assigns a numerical value of 24 for a 'pillShaped' shape",
+          "codeSnippet": "pill"
+        }
+      ]
+    }
+  ],
+  "Toggle.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a TypeScript type for the shape of the Toggle component, allowing 'sharp', 'rounded', or 'pillShaped' as possible values.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 2,
+          "comment": "Defines a TypeScript type for the variant of the Toggle component, allowing 'outline', 'link', or 'ghost' as possible stylistic variations.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Toggle.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 6,
+          "comment": "Declare the main functional component with deconstructed props from ToggleViewProps",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 8,
+          "comment": "Set default shape prop to 'rounded'",
+          "codeSnippet": "shap"
+        },
+        {
+          "line": 9,
+          "comment": "Set default colorScheme prop to 'color.trueGray.400'",
+          "codeSnippet": "colo"
+        },
+        {
+          "line": 10,
+          "comment": "Set default variant prop to 'ghost'",
+          "codeSnippet": "vari"
+        },
+        {
+          "line": 19,
+          "comment": "Determine the toggle color based on whether the toggle is disabled",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 20,
+          "comment": "Calculate the active state of the toggle based on hover and toggle state",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 21,
+          "comment": "Define the CSS properties for different toggle variants",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 25,
+          "comment": "Set border color for the 'outline' variant based on the current color scheme",
+          "codeSnippet": "bor"
+        },
+        {
+          "line": 30,
+          "comment": "Set 'link' variant border color and make it transparent when inactive",
+          "codeSnippet": "bor"
+        },
+        {
+          "line": 31,
+          "comment": "Add underline text decoration for 'link' variant",
+          "codeSnippet": "text"
+        },
+        {
+          "line": 35,
+          "comment": "Create a function to handle the toggle action",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 38,
+          "comment": "Negate the previous toggle state to update the new state",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 39,
+          "comment": "Execute the onToggle callback with the new toggle state if provided",
+          "codeSnippet": "if"
+        },
+        {
+          "line": 47,
+          "comment": "Render the Center component with toggle-specific props and event handlers",
+          "codeSnippet": "<Cen"
+        },
+        {
+          "line": 51,
+          "comment": "Set color based on if the toggle is active",
+          "codeSnippet": "colo"
+        },
+        {
+          "line": 52,
+          "comment": "Set background color based on toggle's active state",
+          "codeSnippet": "back"
+        },
+        {
+          "line": 53,
+          "comment": "Define mouse enter event handler to set hover state",
+          "codeSnippet": "onMo"
+        },
+        {
+          "line": 54,
+          "comment": "Define mouse leave event handler to unset hover state",
+          "codeSnippet": "onMo"
+        },
+        {
+          "line": 55,
+          "comment": "Set cursor style based on if the toggle is disabled",
+          "codeSnippet": "cur"
+        },
+        {
+          "line": 56,
+          "comment": "Assign the appropriate border-radius based on the toggle's shape",
+          "codeSnippet": "bor"
+        },
+        {
+          "line": 57,
+          "comment": "Set the click handler of the component to the handleToggle function",
+          "codeSnippet": "onCl"
+        }
+      ]
+    }
+  ],
+  "Toggle.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Destructuring properties from ToggleProps to be used within the ToggleComponent.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 11,
+          "comment": "Assigning a default value of false to the isToggled property if none is provided.",
+          "codeSnippet": "  isT"
+        },
+        {
+          "line": 15,
+          "comment": "Initializing toggle state and set state functions using the custom hook useToggleState.",
+          "codeSnippet": "  co"
+        },
+        {
+          "line": 17,
+          "comment": "Creating an effect that updates the isToggled state whenever the isToggled prop changes.",
+          "codeSnippet": "  use"
+        },
+        {
+          "line": 20,
+          "comment": "Beginning of the JSX block to render the Toggle view component.",
+          "codeSnippet": "  re"
+        },
+        {
+          "line": 21,
+          "comment": "Rendering the ToggleView component with passed and state-controlled properties.",
+          "codeSnippet": "    <"
+        },
+        {
+          "line": 37,
+          "comment": "Exporting the ToggleComponent as Toggle for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

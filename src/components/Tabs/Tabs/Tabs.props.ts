@@ -1,18 +1,17 @@
 import React from 'react';
 import { TabsStyles, Tab } from './Tabs.type';
+// Defines the structure for the TabsProps with the necessary properties for tabs.
 export interface TabsProps {
-  // The TabsProps interface is declared here, specifying the props required for a Tabs component. It includes an array of Tab items and an optional TabsStyles object for custom styling.
+  // Declares an array of tabs, expecting each element to conform to the Tab interface.
   tabs: Tab[];
+  // Allows for optional styling to be applied to the tabs via a TabsStyles object.
   styles?: TabsStyles;
 }
-// TabsViewProps extends the TabsProps to include properties unique to the view layer of the tabs component. This indicates that the view needs to know the current active tab and also needs functions to update the active tab and the list of all tabs.
+// Extends TabsProps to include properties specific to the view component of the tabs.
 export interface TabsViewProps extends TabsProps {
-  // isActive is a Tab object that represents the currently active tab in the tabs list.
+  // Holds the current active Tab object.
   isActive: Tab;
-  // setIsActive is a dispatch function from React's useReducer hook, allowing the tabs component to update the active tab state.
   setIsActive: React.Dispatch<React.SetStateAction<Tab>>;
-  // tabsState is an array of Tab objects representing the complete state of tabs at any given moment, possibly controlling the rendering or the order of tabs.
   tabsState: Tab[];
-  // setTabsState is a dispatch function for updating the tabsState, allowing for operations like adding, removing, or reordering tabs within the tabs component.
   setTabsState: React.Dispatch<React.SetStateAction<Tab[]>>;
 }

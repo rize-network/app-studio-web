@@ -1,11 +1,13 @@
 import React from 'react';
-import { Typography, View } from 'app-studio';
+import { Typography } from 'app-studio';
 import { Center } from '../../../Layout/Center/Center';
 import { Label } from '../../../Form/Label/Label';
 import { CheckSvg, IndeterminateSvg } from '../../../Svg';
 
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes } from './Checkbox.style';
+import { Text } from '../../../Text/Text';
+import { Horizontal, Vertical } from 'src/components/Layout';
 
 const CheckboxView: React.FC<CheckboxViewProps> = ({
   id,
@@ -29,6 +31,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   setIsSelected = () => {},
   setIsHovered = () => {},
   styles = { checkbox: {}, label: {} },
+  infoText,
   ...props
 }) => {
   const handleHover = () => setIsHovered(!isHovered);
@@ -89,16 +92,38 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       {...checkboxStyle.container}
       {...props}
     >
-      {labelPosition === 'left' && label && <View>{label}</View>}
-      <Center {...checkboxStyle.checkbox}>
-        {isIndeterminate ? (
-          <IndeterminateSvg />
-        ) : (
-          (isChecked || isSelected) &&
-          (icon ?? <CheckSvg size={IconSizes[size]} />)
+      <Vertical gap={8}>
+        <Horizontal gap={10} alignItems="center">
+          {labelPosition === 'left' && label && (
+            <Text size={size} {...styles?.label}>
+              {label}
+            </Text>
+          )}
+          <Center {...checkboxStyle.checkbox}>
+            {isIndeterminate ? (
+              <IndeterminateSvg />
+            ) : (
+              (isChecked || isSelected) &&
+              (icon ?? <CheckSvg size={IconSizes[size]} />)
+            )}
+          </Center>
+          {labelPosition === 'right' && label && (
+            <Text size={size} {...styles?.label}>
+              {label}
+            </Text>
+          )}
+        </Horizontal>
+        {infoText && (
+          <Text
+            marginLeft={labelPosition === 'left' ? 0 : 27}
+            color="color.gray.400"
+            size="sm"
+            {...styles?.infoText}
+          >
+            {infoText}
+          </Text>
         )}
-      </Center>
-      {labelPosition === 'right' && label && <View>{label}</View>}
+      </Vertical>
     </Label>
   );
 };

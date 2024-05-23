@@ -1,0 +1,342 @@
+{
+  "Button.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 10,
+          "comment": "Defines the types and structure required for the ButtonProps interface, used as a contract for Button component properties."
+        },
+        {
+          "line": 11,
+          "comment": "Optional React node(s) to be displayed as the button's content."
+        },
+        {
+          "line": 12,
+          "comment": "Optional string to define the color scheme of the button."
+        },
+        {
+          "line": 13,
+          "comment": "Optional string for an external hyperlink that the button will redirect to when clicked."
+        },
+        {
+          "line": 14,
+          "comment": "Optional boolean to control the display of a loader animation over the button."
+        },
+        {
+          "line": 15,
+          "comment": "Optional LoaderProps object to configure the appearance and behavior of the loader animation."
+        },
+        {
+          "line": 16,
+          "comment": "Optional LoaderPosition to determine the location of the loader animation relative to the button content."
+        },
+        {
+          "line": 17,
+          "comment": "Optional React node(s) defining the icon to be displayed within the button."
+        },
+        {
+          "line": 18,
+          "comment": "Optional IconPosition to specify the icon placement inside the button relative to text."
+        },
+        {
+          "line": 19,
+          "comment": "Optional boolean to indicate if the button is non-interactive/disabled."
+        },
+        {
+          "line": 20,
+          "comment": "Optional boolean to control the fill property of the button, affecting its style."
+        },
+        {
+          "line": 21,
+          "comment": "Optional boolean indicating if the button size should automatically adjust to its content."
+        },
+        {
+          "line": 22,
+          "comment": "Optional boolean that adds a rounded style to the icon if present."
+        },
+        {
+          "line": 23,
+          "comment": "Optional function that will be called when the button is clicked."
+        },
+        {
+          "line": 24,
+          "comment": "Optional Size to specify the size of the button."
+        },
+        {
+          "line": 25,
+          "comment": "Optional shadow property that can be a predefined Shadow, Elevation value or custom CSSProperties to apply shadow effects to the button."
+        },
+        {
+          "line": 26,
+          "comment": "Optional Shape to specify the shape of the button (e.g., rounded or square edges)."
+        },
+        {
+          "line": 27,
+          "comment": "Optional string used as an accessible label for screen readers."
+        },
+        {
+          "line": 28,
+          "comment": "Optional Variant to define the stylistic variation of the button."
+        },
+        {
+          "line": 29,
+          "comment": "Optional effect to apply interactive effects (e.g., ripple) to the button."
+        },
+        {
+          "line": 30,
+          "comment": "Additional optional properties of any type, making the interface extensible for custom attributes not explicitly defined."
+        }
+      ]
+    }
+  ],
+  "Button.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "This custom react hook 'useButtonState' is defined for managing the state of a button, especially for hover interactions."
+        },
+        {
+          "line": 4,
+          "comment": "A state variable 'isHovered' is declared with its initial value set to 'false', indicating that the button is not hovered by default."
+        },
+        {
+          "line": 4,
+          "comment": "The 'setIsHovered' function is used to update the value of 'isHovered' state when the hover status of the button changes."
+        },
+        {
+          "line": 5,
+          "comment": "The hook returns an object containing 'isHovered' state and the 'setIsHovered' function to enable state management from the consumer component."
+        }
+      ]
+    }
+  ],
+  "Button.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines a constant 'ButtonSizes' as a mapping from 'Size' to corresponding 'CSSProperties'."
+        },
+        {
+          "line": 4,
+          "comment": "Establishes style configuration for extra-small (xs) button size."
+        },
+        {
+          "line": 13,
+          "comment": "Establishes style configuration for small (sm) button size."
+        },
+        {
+          "line": 22,
+          "comment": "Establishes style configuration for medium (md) button size."
+        },
+        {
+          "line": 31,
+          "comment": "Establishes style configuration for large (lg) button size."
+        },
+        {
+          "line": 40,
+          "comment": "Establishes style configuration for extra-large (xl) button size."
+        },
+        {
+          "line": 50,
+          "comment": "Defines a constant 'ButtonShapes' with style properties for different button shapes such as 'sharp', 'rounded', and 'pillShaped'."
+        },
+        {
+          "line": 51,
+          "comment": "Sets the border-radius for a sharp-edged button shape to '0'."
+        },
+        {
+          "line": 52,
+          "comment": "Sets the border-radius for a rounded button shape to '4'."
+        },
+        {
+          "line": 53,
+          "comment": "Sets the border-radius for a pill-shaped button to '24'."
+        },
+        {
+          "line": 55,
+          "comment": "Defines a constant 'IconSizes' as a mapping from 'Size' to corresponding 'CSSProperties' for icons."
+        },
+        {
+          "line": 56,
+          "comment": "Sets the width, height, and padding for icons of extra-small size."
+        },
+        {
+          "line": 60,
+          "comment": "Sets the width, height, and padding for icons of small size."
+        },
+        {
+          "line": 64,
+          "comment": "Sets the width, height, and padding for icons of medium size."
+        },
+        {
+          "line": 68,
+          "comment": "Sets the width, height, and padding for icons of large size."
+        },
+        {
+          "line": 72,
+          "comment": "Sets the width, height, and padding for icons of extra-large size."
+        }
+      ]
+    }
+  ],
+  "Button.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a TypeScript type 'BorderWeights' that allows for any of these string literal values: 'light', 'normal', 'bold', 'extrabold', or 'black' to represent the weight (thickness) of borders."
+        },
+        {
+          "line": 2,
+          "comment": "Defines a TypeScript type 'Shape' which can be one of these string literals: 'sharp', 'rounded', or 'pillShaped', likely representing the shape of UI elements like buttons."
+        },
+        {
+          "line": 3,
+          "comment": "Creates a TypeScript type 'Size' for standardized size categories such as 'xs' for extra-small, 'sm' for small, 'md' for medium, 'lg' for large, or 'xl' for extra-large."
+        },
+        {
+          "line": 4,
+          "comment": "Introduces a TypeScript type 'Loaders' which could be used to define the style of loading indicators from a set of predefined options: 'spinner', 'points', 'points-opacity'."
+        },
+        {
+          "line": 5,
+          "comment": "Specifies a TypeScript type 'IconPosition' to define the position where an icon should be placed relative to another element, with possible values 'left' or 'right'."
+        },
+        {
+          "line": 6,
+          "comment": "Specifying a 'LoaderPosition' type for positioning a loader on the 'left' or 'right' side within a component where it is used."
+        },
+        {
+          "line": 7,
+          "comment": "Declares a type 'Variant' used for styling components where each value—'filled', 'outline', 'link', 'ghost'—likely describes a visual style or theme."
+        },
+        {
+          "line": 8,
+          "comment": "Defines a type 'Effects' which could be used for UI interaction states or animations, where each value represents a different visual effect like 'hover', 'default', or 'reverse'."
+        }
+      ]
+    }
+  ],
+  "Button.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 12,
+          "comment": "Defines the functional component ButtonView with its expected props detailed in ButtonProps."
+        },
+        {
+          "line": 13,
+          "comment": "Initializes default values for the ButtonProps object; useful for defining states like isAuto, isFilled, etc."
+        },
+        {
+          "line": 15,
+          "comment": "Determines if button should be active based on isDisabled and isLoading properties."
+        },
+        {
+          "line": 16,
+          "comment": "Prepares default properties for the native button element based on isActive state."
+        },
+        {
+          "line": 17,
+          "comment": "Sets button color; defaults to the theme's disabled color if button is not active."
+        },
+        {
+          "line": 18,
+          "comment": "Determines if the hover effect shall be applied based on isHovered and effect property."
+        },
+        {
+          "line": 19,
+          "comment": "Determines if the reverse style shall be applied based on isHovered and effect property."
+        },
+        {
+          "line": 22,
+          "comment": "Defines CSS properties for 'filled' variant of the button with conditional styles based on reverse state."
+        },
+        {
+          "line": 30,
+          "comment": "Defines CSS properties for 'outline' variant of the button with conditional styles based on reverse state."
+        },
+        {
+          "line": 38,
+          "comment": "Defines CSS properties for 'link' variant of the button with conditional styles based on reverse state, includes text decoration."
+        },
+        {
+          "line": 46,
+          "comment": "Defines CSS properties for 'ghost' variant of the button with conditional styles based on reverse state."
+        },
+        {
+          "line": 49,
+          "comment": "Fetches size-specific styles from ButtonSizes based on the 'size' prop."
+        },
+        {
+          "line": 50,
+          "comment": "Fetches variant-specific styles from ButtonVariants based on the 'variant' prop."
+        },
+        {
+          "line": 51,
+          "comment": "Adjusts button width based on isAuto and isFilled properties, using buttonSizeStyles for fallback width."
+        },
+        {
+          "line": 53,
+          "comment": "Changes padding for the button based on whether isIconRounded is true or false."
+        },
+        {
+          "line": 55,
+          "comment": "Creates the content for the button including loaders and icons positioned based on their respective properties."
+        },
+        {
+          "line": 67,
+          "comment": "Executes rendering of the button or a link element based on the variant; applies conditional rendering for externalHref in 'link' variant."
+        }
+      ]
+    }
+  ],
+  "Button.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Importing TypeScript type for button properties to ensure the component receives the correct props."
+        },
+        {
+          "line": 4,
+          "comment": "Importing a custom hook to manage the state specific to the button component."
+        },
+        {
+          "line": 5,
+          "comment": "Importing the view part of the button, which is presumably a presentational component."
+        },
+        {
+          "line": 6,
+          "comment": "Defining the button component with generic React Functional Component type augmented with ButtonProps type."
+        },
+        {
+          "line": 7,
+          "comment": "Destructuring the state and state update function from the custom hook for button state management."
+        },
+        {
+          "line": 8,
+          "comment": "Defines a function to toggle the hover state of the button."
+        },
+        {
+          "line": 10,
+          "comment": "Rendering the ButtonView component and spreading the received props on it."
+        },
+        {
+          "line": 11,
+          "comment": "Passing the isHovered state and the setIsHovered function to the ButtonView."
+        },
+        {
+          "line": 12,
+          "comment": "Binding handleHover function to onMouseEnter and onMouseLeave events to toggle hover effect."
+        },
+        {
+          "line": 16,
+          "comment": "Exports the Button component for use in other parts of the application."
+        }
+      ]
+    }
+  ]
+}

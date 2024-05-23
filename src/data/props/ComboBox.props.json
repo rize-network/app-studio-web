@@ -1,0 +1,113 @@
+{
+  "componentDescription": "A customizable dropdown list with optional search functionality.",
+  "id": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Unique identifier for the ComboBox, required for accessibility.",
+    "defaultValue": []
+  },
+  "name": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Optional name attribute for the ComboBox, useful when submitted in a form.",
+    "defaultValue": []
+  },
+  "items": {
+    "type": [
+      "ComboBoxItem[]"
+    ],
+    "typeValues": [],
+    "description": "Array of ComboBox items that the user can select from.",
+    "defaultValue": []
+  },
+  "onSelect": {
+    "type": [
+      "function"
+    ],
+    "typeValues": [
+      "(item: ComboBoxItem) => void"
+    ],
+    "description": "Optional callback function triggered when an item is selected.",
+    "defaultValue": []
+  },
+  "searchEnabled": {
+    "type": [
+      "boolean"
+    ],
+    "typeValues": [],
+    "description": "Flag to enable search functionality within the ComboBox.",
+    "defaultValue": [
+      "true"
+    ]
+  },
+  "left": {
+    "type": [
+      "ReactNode"
+    ],
+    "typeValues": [],
+    "description": "Optional element to display on the left side of the ComboBox.",
+    "defaultValue": []
+  },
+  "right": {
+    "type": [
+      "ReactNode"
+    ],
+    "typeValues": [],
+    "description": "Optional element to display on the right side of the ComboBox.",
+    "defaultValue": []
+  },
+  "label": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Optional label to describe the purpose of the ComboBox.",
+    "defaultValue": []
+  },
+  "showTick": {
+    "type": [
+      "boolean"
+    ],
+    "typeValues": [],
+    "description": "Flag to show a tick mark next to selected items.",
+    "defaultValue": [
+      "true"
+    ]
+  },
+  "placeholder": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Text to display when nothing has been selected in the ComboBox.",
+    "defaultValue": []
+  },
+  "styles": {
+    "type": [
+      "ComboBoxStyles"
+    ],
+    "typeValues": [],
+    "description": "Optional custom styles to apply to the ComboBox.",
+    "defaultValue": []
+  },
+  "searchPlaceholder": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Placeholder text for the search input when search is enabled.",
+    "defaultValue": []
+  },
+  "[x: string]": {
+    "type": [
+      "any"
+    ],
+    "typeValues": [],
+    "description": "Allows the ComboBox to receive any additional properties.",
+    "defaultValue": []
+  }
+}

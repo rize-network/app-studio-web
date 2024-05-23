@@ -11,6 +11,7 @@ import {
   ShadowCheckbox,
   SizeCheckbox,
   StyledCheckbox,
+  InfoTextDemo,
 } from 'src/components/Form/Checkbox/examples';
 import { View } from 'src/components/Layout/View/View';
 
@@ -49,6 +50,13 @@ export const CheckboxPage = () => {
 
             <td>
               <IndeterminateCheckbox />
+            </td>
+          </tr>
+          <tr>
+            <td>InfoText</td>
+
+            <td>
+              <InfoTextDemo />
             </td>
           </tr>
           <tr>

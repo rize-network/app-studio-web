@@ -1,0 +1,95 @@
+{
+  "AspectRatio.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines an interface 'AspectRatioProps' for component properties.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Optional 'ratio' prop specifying the aspect ratio, as a number.",
+          "codeSnippet": "rati"
+        },
+        {
+          "line": 4,
+          "comment": "Optional 'children' prop that can be of type ReactNode, defining the child components.",
+          "codeSnippet": "chil"
+        },
+        {
+          "line": 5,
+          "comment": "Allows for an indefinite number of additional properties with any types, adding flexibility to the props.",
+          "codeSnippet": "[x:"
+        }
+      ]
+    }
+  ],
+  "AspectRatio.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Declaration of a functional component named AspectRatioView.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 6,
+          "comment": "Set a default aspect ratio of 16:9 if no ratio is provided as a prop.",
+          "codeSnippet": "rati"
+        },
+        {
+          "line": 7,
+          "comment": "children prop used to render enclosed components.",
+          "codeSnippet": "chil"
+        },
+        {
+          "line": 8,
+          "comment": "Spread the rest of the props to inherit additional properties.",
+          "codeSnippet": "...p"
+        },
+        {
+          "line": 9,
+          "comment": "AspectRatioProps used as the type for the component props.",
+          "codeSnippet": "}:"
+        }
+      ]
+    }
+  ],
+  "AspectRatio.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Declaration of the AspectRatioComponent functional component with destructured props.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 8,
+          "comment": "Destructuring the AspectRatioProps to extract 'ratio', 'children', and other props.",
+          "codeSnippet": "}: As"
+        },
+        {
+          "line": 9,
+          "comment": "Opening of the functional component's body.",
+          "codeSnippet": "Aspec"
+        },
+        {
+          "line": 10,
+          "comment": "Beginning of the return statement in the functional component.",
+          "codeSnippet": "retur"
+        },
+        {
+          "line": 14,
+          "comment": "End of the return statement in the functional component.",
+          "codeSnippet": "  );"
+        },
+        {
+          "line": 16,
+          "comment": "Exporting the AspectRatioComponent as named export 'AspectRatio'.",
+          "codeSnippet": "expor"
+        }
+      ]
+    }
+  ]
+}

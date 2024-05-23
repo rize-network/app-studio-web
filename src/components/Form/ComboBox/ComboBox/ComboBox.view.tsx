@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, Horizontal } from '../../../Layout'; // Assuming View and Text are from the same location
+import { View, Horizontal } from '../../../Layout';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
 import TickSvg from '../../../Svg/Tick';
 import SearchLoopSvg from '../../../Svg/Search';
-
+// Defines the functional component 'ComboBoxView' with destructured props.
 const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   placeholder,
   items,
@@ -26,24 +26,24 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   styles,
   isDropdownVisible,
   setIsDropdownVisible,
+  // Collects all further props not destructured explicitly.
   ...props
 }) => {
+  // Sets up an effect to handle clicking outside the dropdown to close it.
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const path = event.composedPath();
       const isOutside = !path.some(
         (element: any) => element?.id === 'combobox-dropdown'
       );
-
       if (isOutside) {
         setIsDropdownVisible(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
+  // Defines 'handleSearch' to filter items based on the user's query.
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     if (query === '') {
@@ -56,13 +56,13 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
     }
     setHighlightedIndex(0);
   };
-
+  // Defines 'handleSelect' to handle item selection and close the dropdown.
   const handleSelect = (item: ComboBoxItem) => {
     setSelectedItem(item);
     onSelect?.(item);
     setIsDropdownVisible(false);
   };
-
+  // Starts the JSX returned by the component representing the combobox.
   return (
     <Horizontal
       role="combobox"
@@ -145,7 +145,6 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                   }}
                 />
               )}
-
               {filteredItems.length > 0 && (
                 <View margin={0} padding={4}>
                   {filteredItems.map((item, index) => (
@@ -182,5 +181,4 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
     </Horizontal>
   );
 };
-
 export default ComboBoxView;

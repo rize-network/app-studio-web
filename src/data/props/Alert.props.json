@@ -1,36 +1,46 @@
 {
-  "componentDescription": "Displays a customizable alert with icons, title, and description",
+  "componentDescription": "Displays an alert with optional icon and customizable styles.",
   "icon": {
-    "type": "React.ReactNode",
-    "typeValues": "ReactNode",
-    "description": "Optional icon rendered in the component",
+    "type": [
+      "React.ReactNode"
+    ],
+    "typeValues": [],
+    "description": "Optional icon property, expecting a React node element",
     "defaultValue": "<WarningSvg size={24} color={Themes[variant].content.color} />"
   },
   "title": {
-    "type": "string",
-    "typeValues": "string",
-    "description": "Required main message or header of the component",
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Mandatory title property, must be a string",
     "defaultValue": ""
   },
   "description": {
-    "type": "string",
-    "typeValues": "string",
-    "description": "Required additional details about the alert",
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Mandatory description property, must be a string",
     "defaultValue": ""
   },
   "variant": {
-    "type": "Variant",
+    "type": [
+      "Variant"
+    ],
     "typeValues": [
       "'default'",
-      "[provided by 'Variant' type from './Alert.type']"
+      "...other possible variants"
     ],
-    "description": "Visual style of the component, e.g., success, warning, error",
+    "description": "Optional variant property to determine the style of the alert",
     "defaultValue": "'default'"
   },
   "styles": {
-    "type": "AlertStyles",
-    "typeValues": "[provided by 'AlertStyles' type from './Alert.type']",
-    "description": "Custom styling for the component",
+    "type": [
+      "AlertStyles"
+    ],
+    "typeValues": [],
+    "description": "Optional styles property to apply custom styles to the alert component",
     "defaultValue": "{}"
   }
 }

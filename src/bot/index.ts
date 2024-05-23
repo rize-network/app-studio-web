@@ -2,6 +2,8 @@ import fs from 'fs';
 import { Bot } from './Bot';
 import { DocuCode } from './DocuCode';
 
+require('dotenv').config();
+
 async function main() {
   // Get componentName from command line arguments
   const componentName = process.argv[2]; // Assuming it's the first argument passed
@@ -15,7 +17,7 @@ async function main() {
   const descriptionPath = 'docs/description.md';
   const basePath = 'src/components';
   const componentFolder = componentArgFolder ?? `${basePath}/${componentName}`;
-  console.log({ componentFolder });
+
   const propsPath = `src/data/props/${componentName}.props.json`;
 
   // Check if the component directory exists
@@ -55,7 +57,6 @@ async function main() {
     [],
     'props'
   );
-
   // Generate props file
   await assistantGPT.response(
     assistantCreation.id,

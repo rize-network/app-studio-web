@@ -3,7 +3,6 @@ import { ToggleViewProps } from './Toggle.props';
 import { ToggleShapes } from './Toggle.style';
 import { Variant } from './Toggle.type';
 import { Center } from '../../Layout/Center/Center';
-
 const ToggleView: React.FC<ToggleViewProps> = ({
   children,
   shape = 'rounded',
@@ -18,9 +17,7 @@ const ToggleView: React.FC<ToggleViewProps> = ({
   ...props
 }) => {
   const toggleColor = !isDisabled ? colorScheme : 'theme.disabled';
-
   const isActive = !!(isToggle || isHovered);
-
   const ToggleVariants: Record<Variant, CSSProperties> = {
     outline: {
       borderWidth: 1,
@@ -35,20 +32,17 @@ const ToggleView: React.FC<ToggleViewProps> = ({
     },
     ghost: {},
   };
-
   const handleToggle = () => {
     if (!isDisabled) {
       setIsToggled((prev) => {
         const newState = !prev;
         if (onToggle) {
-          // Check if onToggle is defined before calling it
           onToggle(newState);
         }
-        return newState; // Expecting the onToggle to possibly do something with the newState
+        return newState;
       });
     }
   };
-
   return (
     <Center
       role="Toggle"
@@ -68,5 +62,4 @@ const ToggleView: React.FC<ToggleViewProps> = ({
     </Center>
   );
 };
-
 export default ToggleView;
