@@ -88,7 +88,6 @@ export const ModalContainer: React.FC<ContainerProps> = ({
   return (
     <Vertical
       cursor="default"
-      overflow="hidden"
       backgroundColor="white"
       width={isFullScreen ? '100%' : 600}
       height={isFullScreen ? '100%' : 'fit-content'}
@@ -147,7 +146,6 @@ export const ModalBody: React.FC<BodyProps> = ({ children, ...props }) => {
   };
   return (
     <View
-      overflowY="auto"
       paddingVertical={15}
       paddingHorizontal={20}
       {...defaultBorder}
