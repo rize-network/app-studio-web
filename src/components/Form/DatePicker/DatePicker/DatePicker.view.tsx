@@ -110,7 +110,6 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
             readOnly={isReadOnly}
             {...fieldStyles}
             {...props}
-            value={date}
             {...(onChangeText && { onChangeText: handleDateChange })}
             onChange={handleDateChange}
           />
