@@ -3,6 +3,7 @@
 exports[`Loader with an a size xl where width equals to 30px should match snapshot 1`] = `
 <div
   className="sc-bdfCDU deAZJE"
+  display="flex"
 >
   <svg
     fill="none"
@@ -48,6 +49,7 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
 exports[`Loader with loader color equals to theme.primary should match snapshot 1`] = `
 <div
   className="sc-bdfCDU deAZJE"
+  display="flex"
 >
   <svg
     fill="none"
@@ -93,6 +95,7 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
 exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
 <div
   className="sc-bdfCDU deAZJE"
+  display="flex"
 >
   <svg
     fill="none"
@@ -129,6 +132,7 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
   </svg>
   <div
     className="sc-bdfCDU jjOcgx"
+    color="theme.primary"
   >
     Loader
   </div>
@@ -138,6 +142,7 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
 exports[`Loader with text position bottom should match snapshot 1`] = `
 <div
   className="sc-bdfCDU gcSHdQ"
+  display="flex"
 >
   <svg
     fill="none"

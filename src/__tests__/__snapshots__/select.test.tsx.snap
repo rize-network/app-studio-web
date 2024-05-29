@@ -3,26 +3,37 @@
 exports[`Select component Select to match snapshot 1`] = `
 <div
   className="sc-bdfCDU dWkXMr"
+  display="flex"
   onClick={[Function]}
   role="SelectBox"
 >
   <div
     className="sc-bdfCDU HFiNZ"
+    color="theme.primary"
+    cursor="auto"
+    display="flex"
+    fontSize={20}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    width="100%"
   >
     <div
       className="sc-bdfCDU gFyoGC"
+      display="flex"
+      width="100%"
     >
       <select
         className="sc-bdfCDU bYrJww"
         disabled={false}
+        height={0}
         multiple={false}
         name="name"
         onChange={[Function]}
         onFocus={[Function]}
+        opacity={0}
         readOnly={true}
         value="Item1"
+        width={0}
       >
         <option
           value="Item1"
@@ -42,19 +53,31 @@ exports[`Select component Select to match snapshot 1`] = `
       </select>
       <div
         className="sc-bdfCDU ewhBIh"
-        heigth="100%"
+        color="color.blueGray.700"
+        cursor="auto"
+        fontSize={20}
+        fontStyle="normal"
+        fontWeight={400}
         role="text"
+        textDecoration="none"
+        width="95%"
       >
         Item1
       </div>
     </div>
     <div
       className="sc-bdfCDU dBLlLe"
+      display="flex"
     />
   </div>
   <div
     className="sc-bdfCDU kpEGz"
+    color="theme.error"
+    fontSize={10}
+    fontStyle="normal"
+    fontWeight={400}
     role="text"
+    textDecoration="none"
   />
 </div>
 `;
