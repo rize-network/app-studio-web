@@ -196,6 +196,10 @@ export interface ItemProps {
    */
   size?: Size;
   /**
+   * Css styles for the Item
+   */
+  style?: SelectStyles;
+  /**
    * other properties
    */
   [x: string]: any;
