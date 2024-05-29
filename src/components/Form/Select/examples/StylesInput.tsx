@@ -8,7 +8,7 @@ export const StyledSelect = () => (
     options={['Item1', 'Item2', 'Item3']}
     styles={{
       selectBox: { borderRadius: 10, border: '1px solid purple' },
-      text: { color: 'theme.primary' },
+      text: { color: 'red', fontSize: 30 },
       label: { fontWeight: 'bold', color: 'theme.primary' },
     }}
   />

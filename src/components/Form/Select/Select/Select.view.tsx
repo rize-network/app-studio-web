@@ -29,6 +29,7 @@ const Item: React.FC<ItemProps> = ({
   option,
   size = 'md',
   callback = () => {},
+  style,
   ...props
 }) => {
   const handleOptionClick = (option: string) => callback(option);
@@ -43,12 +44,13 @@ const Item: React.FC<ItemProps> = ({
       listStyleType="none"
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
-      fontSize={Typography.fontSizes[size]}
       onClick={() => handleOptionClick(option)}
       backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
       {...props}
     >
-      <Text> {option}</Text>
+      <Text fontSize={Typography.fontSizes[size]} {...style}>
+        {option}
+      </Text>
     </Element>
   );
 };
@@ -203,6 +205,7 @@ const DropDown: React.FC<DropDownProps> = ({
         <Item
           key={option}
           size={size}
+          style={styles['text']}
           option={option}
           callback={handleCallback}
           backgroundColor={
@@ -210,7 +213,6 @@ const DropDown: React.FC<DropDownProps> = ({
           }
           onMouseEnter={() => setHighlightedIndex(index)}
           {...itemStates}
-          {...styles['text']}
         />
       ))}
     </Element>
