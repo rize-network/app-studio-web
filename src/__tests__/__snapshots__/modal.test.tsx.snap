@@ -3,37 +3,58 @@
 exports[`Modal to match snapshot 1`] = `
 <div
   className="sc-bdfCDU ePQxSx"
+  display="flex"
+  height="100%"
   onClick={[Function]}
+  visibility="visible"
+  width="100%"
 >
   <div
     className="sc-bdfCDU hRvVii"
-    isFullScreen={true}
+    display="flex"
+    height="100vh"
     onClick={[Function]}
+    width="100vw"
   >
     <div
       className="sc-bdfCDU gdfEff"
-      isClosePrevented={true}
+      cursor="default"
+      display="flex"
+      height="fit-content"
       onClick={[Function]}
-      variant="sharp"
+      overflow="hidden"
+      width={600}
     >
       <div
-        buttonSize="xl"
         className="sc-bdfCDU MMgKI"
+        display="flex"
       >
         <button
           className="sc-bdfCDU dXOPYQ"
+          color="color.white"
+          cursor="pointer"
           disabled={false}
+          display="flex"
+          filter="none"
+          fontSize="md"
+          fontWeight={600}
+          letterSpacing={1.25}
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
           role="button"
-          setIsHovered={[Function]}
+          transform=""
+          width="fit-content"
         >
           <div
             className="sc-bdfCDU dpBfNq"
+            display="flex"
           >
             <div
               className="sc-bdfCDU cccTHv"
+              display="flex"
+              height="20px"
+              width="20px"
             >
               <svg
                 fill="#000000"
@@ -67,23 +88,34 @@ exports[`Modal to match snapshot 1`] = `
       </div>
       <div
         className="sc-bdfCDU csgvYH"
+        height="200px"
       >
         Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum. Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.
       </div>
       <div
         className="sc-bdfCDU jmYYGs"
+        display="flex"
       >
         <button
           className="sc-bdfCDU bjTbpr"
+          color="color.white"
+          cursor="pointer"
           disabled={false}
+          display="flex"
+          filter="brightness(1)"
+          fontSize="md"
+          fontWeight={600}
+          letterSpacing={1.25}
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
           role="button"
-          setIsHovered={[Function]}
+          transform=""
+          width={144}
         >
           <div
             className="sc-bdfCDU dpBfNq"
+            display="flex"
           >
             Cancel
           </div>

@@ -1,4 +1,4 @@
-export * from './color';
+export * from './Color';
 export * from './Default';
 export * from './Disabled';
 export * from './Error';

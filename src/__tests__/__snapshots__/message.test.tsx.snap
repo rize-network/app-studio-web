@@ -6,15 +6,24 @@ exports[`AspectRatio to match snapshot 1`] = `
 >
   <button
     className="sc-bdfCDU bjTbpr"
+    color="color.white"
+    cursor="pointer"
     disabled={false}
+    display="flex"
+    filter="brightness(1)"
+    fontSize="md"
+    fontWeight={600}
+    letterSpacing={1.25}
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     role="button"
-    setIsHovered={[Function]}
+    transform=""
+    width={144}
   >
     <div
       className="sc-bdfCDU dpBfNq"
+      display="flex"
     >
       Show Toast
     </div>
