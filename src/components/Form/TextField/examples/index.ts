@@ -11,5 +11,5 @@ export * from './ShapeInput';
 export * from './SizeInput';
 export * from './StylesInput';
 export * from './VariantsInputs';
-export * from './colorScheme';
+export * from './ColorScheme';
 export * from './isClearable';

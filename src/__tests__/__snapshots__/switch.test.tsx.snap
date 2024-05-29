@@ -3,25 +3,41 @@
 exports[`Switch to match snapshot 1`] = `
 <label
   className="sc-bdfCDU gNCvrc"
+  cursor="default"
+  display="flex"
+  fontSize="sm"
+  fontStyle="normal"
+  fontWeight={400}
+  height="fit-content"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  setOn={[Function]}
+  textDecoration="none"
+  width="fit-content"
 >
   <input
     checked={false}
     className="sc-bdfCDU Ttntf"
     disabled={false}
+    height={0}
     name="name"
     onChange={[Function]}
+    opacity={0}
     readOnly={true}
-    setOn={[Function]}
     type="checkbox"
+    width={0}
   />
   <div
     className="sc-bdfCDU crvySG"
+    cursor="pointer"
+    display="flex"
+    filter="brightness(1)"
+    height={32}
+    width={60}
   >
     <div
       className="sc-bdfCDU bUUORK"
+      height={18}
+      width={18}
     />
   </div>
 </label>

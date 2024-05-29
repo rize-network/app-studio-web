@@ -3,6 +3,9 @@
 exports[`Center layout to match snapshot 1`] = `
 <div
   className="sc-bdfCDU fkGNJn"
+  display="flex"
+  height={100}
+  width={100}
 >
   This is the Center
 </div>

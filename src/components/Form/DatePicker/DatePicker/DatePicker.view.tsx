@@ -46,7 +46,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
       if (onChangeText) onChangeText(event);
     } else {
       setDate(event.target.value);
-      if (onChange) onChange(event);
+      if (onChange) onChange(event.target.value);
     }
   };
 
@@ -105,14 +105,14 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
           <DatePickerContent
             id={id}
             name={name}
-            value={date}
             onFocus={handleFocus}
-            onChange={handleDateChange}
             disabled={isDisabled}
             readOnly={isReadOnly}
             {...fieldStyles}
-            {...(onChangeText && { onChangeText: handleDateChange })}
             {...props}
+            value={date}
+            {...(onChangeText && { onChangeText: handleDateChange })}
+            onChange={handleDateChange}
           />
         </FieldWrapper>
       </FieldContent>

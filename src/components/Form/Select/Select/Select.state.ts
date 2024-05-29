@@ -15,6 +15,7 @@ export const useSelectState = ({
   const [value, setValue] = React.useState<string | Array<string>>(
     defaultValue
   );
+  const [highlightedIndex, setHighlightedIndex] = React.useState<number>(0);
   return {
     value,
     setValue,
@@ -24,6 +25,8 @@ export const useSelectState = ({
     setIsHovered,
     isFocused,
     setIsFocused,
+    highlightedIndex,
+    setHighlightedIndex,
   };
 };
 

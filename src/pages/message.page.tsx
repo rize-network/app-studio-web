@@ -10,7 +10,7 @@ import {
   TimeoutDemo,
   TitleDemo,
   VariantDemo,
-} from '../components/Message/examples';
+} from '../components/Message/Examples';
 import { MessageLayout } from '../components/Message/Message/Message.layout';
 
 const MessagePage = () => {

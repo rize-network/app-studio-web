@@ -1,5 +1,8 @@
 import React from 'react';
-import { ColorSelect } from 'src/components/Form/Select/examples/Color';
+import {
+  ColorDemo,
+  IsScrollableDemo,
+} from 'src/components/Form/Select/examples';
 import { DefaultSelect } from 'src/components/Form/Select/examples/Default';
 import { DisabledSelect } from 'src/components/Form/Select/examples/Disabled';
 import { ErrorSelect } from 'src/components/Form/Select/examples/Error';
@@ -50,6 +53,13 @@ export const SelectPage = () => {
             </td>
           </tr>
           <tr>
+            <th>IsScrollable</th>
+
+            <td>
+              <IsScrollableDemo />
+            </td>
+          </tr>
+          <tr>
             <th>Styles</th>
 
             <td>
@@ -60,7 +70,7 @@ export const SelectPage = () => {
             <th>ColorScheme</th>
 
             <td>
-              <ColorSelect />
+              <ColorDemo />
             </td>
           </tr>
           <tr>

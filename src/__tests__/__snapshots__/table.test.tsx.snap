@@ -7,27 +7,32 @@ exports[`Table to match snapshot 1`] = `
 >
   <thead
     className="sc-bdfCDU gxlqWj"
+    color="color.gray.400"
   >
     <tr
       className="sc-bdfCDU cYBAia"
     >
       <th
         className="sc-bdfCDU frJuHz"
+        fontWeight="500"
       >
         Invoice
       </th>
       <th
         className="sc-bdfCDU frJuHz"
+        fontWeight="500"
       >
         Payment Status
       </th>
       <th
         className="sc-bdfCDU frJuHz"
+        fontWeight="500"
       >
         Total Amount
       </th>
       <th
         className="sc-bdfCDU frJuHz"
+        fontWeight="500"
       >
         Payment Method
       </th>
@@ -41,25 +46,25 @@ exports[`Table to match snapshot 1`] = `
     >
       <td
         className="sc-bdfCDU jpUhUe"
-        isFirstColumn={true}
+        fontWeight="400"
       >
         INV001
       </td>
       <td
         className="sc-bdfCDU fPWZcZ"
-        isFirstColumn={false}
+        fontWeight="300"
       >
         Paid
       </td>
       <td
         className="sc-bdfCDU fPWZcZ"
-        isFirstColumn={false}
+        fontWeight="300"
       >
         $250.00
       </td>
       <td
         className="sc-bdfCDU fPWZcZ"
-        isFirstColumn={false}
+        fontWeight="300"
       >
         Credit Card
       </td>

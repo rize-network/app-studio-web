@@ -3,22 +3,32 @@
 exports[`Checkbox to match snapshot 1`] = `
 <div
   className="sc-bdfCDU foBlXZ"
+  display="flex"
   id="combo"
   role="combobox"
+  width="100%"
 >
   <div
     className="sc-bdfCDU dRoCvi"
   >
     <div
       className="sc-bdfCDU eTWVak"
+      cursor="pointer"
+      display="flex"
     >
       <div
         className="sc-bdfCDU jwEnfw"
+        display="flex"
         onClick={[Function]}
+        width="100%"
       >
         <div
           className="sc-bdfCDU gVoSlS"
+          fontSize={14}
+          fontStyle="normal"
+          fontWeight={500}
           role="text"
+          textDecoration="none"
         >
           Option 1
         </div>

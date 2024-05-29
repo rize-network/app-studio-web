@@ -3,10 +3,14 @@
 exports[`Toggle to match snapshot 1`] = `
 <div
   className="sc-bdfCDU dmlQCl"
+  color="color.trueGray.400"
+  cursor="pointer"
+  display="flex"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   role="Toggle"
+  width="fit-content"
 >
   Default
 </div>

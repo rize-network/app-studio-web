@@ -9,7 +9,7 @@ import { FormikDatePicker } from '../Formik.DatePicker';
 
 export const FormikDatePickerExemple = () => {
   const initialValues = {
-    selectdate: '2023-05-30',
+    selectDate: new Date(Date.now()),
   };
 
   return (
@@ -17,7 +17,7 @@ export const FormikDatePickerExemple = () => {
       {(props: any) => (
         <FormikForm>
           <Horizontal gap={10}>
-            <FormikDatePicker id="selectdate" name="selectdate" />
+            <FormikDatePicker id="selectDate" name="selectDate" />
             <Button type="submit" onClick={props.handleSubmit}>
               Submit
             </Button>

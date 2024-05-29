@@ -3,8 +3,13 @@
 exports[`Modal Container to match snapshot 1`] = `
 <div
   className="sc-bdfCDU kErhm"
+  cursor="default"
+  display="flex"
+  height="100%"
   onClick={[Function]}
+  overflow="hidden"
   role="container"
+  width="100%"
 >
   <div>
     Modal Content
