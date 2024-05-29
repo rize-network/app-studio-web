@@ -1,6 +1,8 @@
 import React from 'react';
-import { IsScrollableDemo } from 'src/components/Form/Select/examples';
-import { ColorDemo } from 'src/components/Form/Select/examples/color';
+import {
+  ColorDemo,
+  IsScrollableDemo,
+} from 'src/components/Form/Select/examples';
 import { DefaultSelect } from 'src/components/Form/Select/examples/Default';
 import { DisabledSelect } from 'src/components/Form/Select/examples/Disabled';
 import { ErrorSelect } from 'src/components/Form/Select/examples/Error';
