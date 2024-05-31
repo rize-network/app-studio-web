@@ -17,7 +17,7 @@ export interface ButtonProps {
   // Optional string for an external hyperlink that the button will redirect to when clicked.
   children?: React.ReactNode;
   // Optional boolean to control the display of a loader animation over the button.
-  colorScheme?: string;
+  colorScheme?: any;
   // Optional LoaderProps object to configure the appearance and behavior of the loader animation.
   externalHref?: string;
   // Optional LoaderPosition to determine the location of the loader animation relative to the button content.

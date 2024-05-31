@@ -17,5 +17,17 @@ export const VariantButtons = () => (
         {variant}
       </Button>
     ))}
+     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
+      <Button
+        key={index}
+        externalHref="https://www.npmjs.com/package/app-studio"
+        variant={variant as Variant}
+        colorScheme="theme.primary"
+        isFilled
+        effect='reverse'
+      >
+        {variant}
+      </Button>
+    ))}
   </Vertical>
 );

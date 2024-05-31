@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
@@ -81,6 +81,7 @@
   "dependencies": {
     "axios": "^1.6.7",
     "cheerio": "^1.0.0-rc.12",
+    "contrast": "^1.0.1",
     "crypto": "^1.0.1",
     "date-fns": "^2.30.0",
     "formik": "^2.2.9",
