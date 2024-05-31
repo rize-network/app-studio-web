@@ -56,11 +56,11 @@ const ButtonView: React.FC<ButtonProps> = ({
       backgroundColor: reverse ? 'transparent' : buttonColor,
       color: reverse
         ? isLight
-          ? 'color.white'
+          ? getColor('color.white')
           : buttonColor
         : isLight
         ? buttonColor
-        : 'color.white',
+        : getColor('color.white'),
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: reverse ? buttonColor : 'transparent',
