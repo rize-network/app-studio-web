@@ -8,13 +8,11 @@ interface WrapperProps {
 
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   return (
-      <ThemeProvider>
-        <ResponsiveProvider>
-          <RouterProvider>
-          {children}
-          </RouterProvider>
-        </ResponsiveProvider>
-      </ThemeProvider>
+    <ThemeProvider>
+      <ResponsiveProvider>
+        <RouterProvider>{children}</RouterProvider>
+      </ResponsiveProvider>
+    </ThemeProvider>
   );
 };
 
