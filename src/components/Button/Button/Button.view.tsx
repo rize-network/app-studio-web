@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Element } from 'app-studio';
+import { Element,useTheme } from 'app-studio';
 import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
 import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
@@ -40,19 +40,21 @@ const ButtonView: React.FC<ButtonProps> = ({
   isHovered,
   ...props
   // Defines CSS properties for 'outline' variant of the button with conditional styles based on reverse state.
-}) => {
+}) => {  
+  const { getColor } = useTheme();
+
   const isActive = !(isDisabled || isLoading);
   const defaultNativeProps = { disabled: !isActive };
   const buttonColor = isActive ? colorScheme : 'theme.disabled';
   const hovering = isHovered && effect === 'hover';
   const reverse = isHovered && effect === 'reverse';
 
-  const isLight = contrast(buttonColor) == 'light';
+  const isLight = contrast(getColor(buttonColor)) == 'light';
   const ButtonVariants: Record<Variant, CSSProperties> = {
     filled: {
       // Defines CSS properties for 'link' variant of the button with conditional styles based on reverse state, includes text decoration.
       backgroundColor: reverse ? 'transparent' : buttonColor,
-      color: reverse && !isLight  ? buttonColor : 'color.white',
+      color: reverse && !isLight ? buttonColor : 'color.white',
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: reverse ? buttonColor : 'transparent',
@@ -80,7 +82,7 @@ const ButtonView: React.FC<ButtonProps> = ({
     },
     ghost: {
       backgroundColor: reverse ? buttonColor : 'transparent',
-      color: reverse && !isLight  ? 'color.white' : buttonColor,
+      color: reverse && !isLight ? 'color.white' : buttonColor,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: reverse ? buttonColor : 'transparent',
