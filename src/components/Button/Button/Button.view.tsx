@@ -54,7 +54,13 @@ const ButtonView: React.FC<ButtonProps> = ({
     filled: {
       // Defines CSS properties for 'link' variant of the button with conditional styles based on reverse state, includes text decoration.
       backgroundColor: reverse ? 'transparent' : buttonColor,
-      color: reverse ? (isLight ? 'color.white' : buttonColor) : (isLight ? buttonColor : 'color.white')  ,
+      color: reverse
+        ? isLight
+          ? 'color.white'
+          : buttonColor
+        : isLight
+        ? buttonColor
+        : 'color.white',
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: reverse ? buttonColor : 'transparent',
