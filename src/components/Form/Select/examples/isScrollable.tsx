@@ -3,17 +3,9 @@ import { Select } from '../Select';
 
 export const IsScrollableDemo = () => {
   const timeZones = [
-    'Eastern Standard Time',
-    'Central Standard Time',
-    'Mountain Standard Time',
-    'Pacific Standard Time',
-    'Alaska Standard Time',
-    'Hawaii Standard Time',
-    'Greenwich Mean Time (GMT)',
-    'Central European Time (CET)',
-    'Eastern European Time (EET)',
-    'Central Africa Time (CAT)',
-    'East Africa Time (EAT',
+    { label: 'Item1', value: '1' },
+    { label: 'Item2', value: '2' },
+    { label: 'Item3', value: '3' },
   ];
 
   return <Select options={timeZones} />;

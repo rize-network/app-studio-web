@@ -16,7 +16,11 @@ export const FormSelect = () => {
         <Select
           id="formItem"
           name="formItem"
-          options={['Item1', 'Item2', 'Item3']}
+          options={[
+            { label: 'Item1', value: '1' },
+            { label: 'Item2', value: '2' },
+            { label: 'Item3', value: '3' },
+          ]}
           placeholder="Select an item..."
         />
         <Button type="submit" alignSelf="center">

@@ -44,12 +44,12 @@ const Item: React.FC<ItemProps> = ({
       listStyleType="none"
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
-      onClick={() => handleOptionClick(option)}
+      onClick={() => handleOptionClick(option.value)}
       backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
       {...props}
     >
       <Text fontSize={Typography.fontSizes[size]} {...style}>
-        {option}
+        {option.label}
       </Text>
     </Element>
   );
@@ -62,6 +62,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   isDisabled,
   placeholder,
   removeOption = () => {},
+  options,
 }) => {
   const fieldStyles = {
     margin: 0,
@@ -77,7 +78,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     ...styles['field'],
     ...styles['text'],
   };
-
+  const option = options.find((option) => option.value === value);
   return (
     <Text {...fieldStyles}>
       {(value === '' || (value && value.length === 0)) && !!placeholder ? (
@@ -85,7 +86,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
       ) : (
         <>
           {typeof value === 'string'
-            ? value
+            ? option?.label ?? value
             : value &&
               value.length > 0 && (
                 <Horizontal gap={6}>
@@ -118,6 +119,7 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
   const handleChange = (event: any) => {
     if (onChange) onChange(event);
   };
+
   return (
     <Element
       id={id}
@@ -136,8 +138,8 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
     >
       {options.map((option) => {
         return (
-          <option key={option} value={option}>
-            {option}
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         );
       })}
@@ -203,7 +205,7 @@ const DropDown: React.FC<DropDownProps> = ({
     >
       {options.map((option, index) => (
         <Item
-          key={option}
+          key={option.value}
           size={size}
           style={styles['text']}
           option={option}
@@ -369,6 +371,7 @@ const SelectView: React.FC<SelectViewProps> = ({
             {...props}
           />
           <SelectBox
+            options={options}
             size={size}
             styles={styles}
             value={value}

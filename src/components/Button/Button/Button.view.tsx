@@ -1,11 +1,14 @@
 import React, { CSSProperties } from 'react';
-import { Element } from 'app-studio';
+import { Element, useTheme } from 'app-studio';
 import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
 import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
 import { Variant } from './Button.type';
 import { Loader } from '../../Loader/Loader';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+
+var contrast = require('contrast');
+
 const ButtonView: React.FC<ButtonProps> = ({
   icon,
   shadow,
@@ -38,16 +41,26 @@ const ButtonView: React.FC<ButtonProps> = ({
   ...props
   // Defines CSS properties for 'outline' variant of the button with conditional styles based on reverse state.
 }) => {
+  const { getColor } = useTheme();
+
   const isActive = !(isDisabled || isLoading);
   const defaultNativeProps = { disabled: !isActive };
   const buttonColor = isActive ? colorScheme : 'theme.disabled';
   const hovering = isHovered && effect === 'hover';
   const reverse = isHovered && effect === 'reverse';
+
+  const isLight = contrast(getColor(buttonColor)) == 'light';
   const ButtonVariants: Record<Variant, CSSProperties> = {
     filled: {
       // Defines CSS properties for 'link' variant of the button with conditional styles based on reverse state, includes text decoration.
       backgroundColor: reverse ? 'transparent' : buttonColor,
-      color: reverse ? buttonColor : 'color.white',
+      color: reverse
+        ? isLight
+          ? 'white'
+          : buttonColor
+        : isLight
+        ? buttonColor
+        : 'white',
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: reverse ? buttonColor : 'transparent',
@@ -75,7 +88,7 @@ const ButtonView: React.FC<ButtonProps> = ({
     },
     ghost: {
       backgroundColor: reverse ? buttonColor : 'transparent',
-      color: reverse ? 'color.white' : buttonColor,
+      color: reverse ? 'white' : buttonColor,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: reverse ? buttonColor : 'transparent',
