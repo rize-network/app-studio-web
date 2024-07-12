@@ -13,3 +13,9 @@ export type SelectStyles = {
   helperText?: CSSProperties;
   field?: CSSProperties;
 };
+
+// Defines the shape of an item within the ComboBox.
+export interface Option {
+  label: string;
+  value: string;
+}

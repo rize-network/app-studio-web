@@ -2,7 +2,7 @@ import { CSSProperties } from 'react';
 import { Elevation } from 'src/utils/elevation';
 import { Shadow } from 'app-studio';
 
-import { SelectStyles, Shape, Size, Variant } from './Select.type';
+import { SelectStyles, Shape, Size, Variant, Option } from './Select.type';
 
 export interface SelectProps {
   /**
@@ -43,7 +43,7 @@ export interface SelectProps {
   /**
    * An array of options for the select field.
    */
-  options: Array<string>;
+  options: Option[];
 
   /**
    * If true, allows multiple options to be selected.
@@ -137,6 +137,7 @@ export interface SelectViewProps extends SelectProps {
 }
 
 export interface SelectBoxProps {
+  options: Option[];
   /**
    * The option that will be selected value
    */
@@ -190,7 +191,7 @@ export interface ItemProps {
   /**
    * Option to be displayed
    */
-  option: string;
+  option: Option;
   /**
    * To set the item's fontSize
    */
@@ -236,7 +237,7 @@ export interface HiddenSelectProps {
   /**
    * List of options
    */
-  options: Array<string>;
+  options: Option[];
   /**
    * other properties
    */
@@ -255,7 +256,7 @@ export interface DropDownProps {
   /**
    * List of options
    */
-  options: Array<string>;
+  options: Option[];
   /**
    * Css styles for the select container and label
    */

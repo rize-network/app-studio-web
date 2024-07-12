@@ -8,7 +8,11 @@ import { Vertical } from 'src/components/Layout/Vertical/Vertical';
 import { FormikSelect } from '../Formik.Select';
 
 export const FormikSelectExemple = () => {
-  const options = ['Item1', 'Item2', 'Item3'];
+  const options = [
+    { label: 'Item1', value: '1' },
+    { label: 'Item2', value: '2' },
+    { label: 'Item3', value: '3' },
+  ];
 
   const initialValues = {
     formik: options[0],
