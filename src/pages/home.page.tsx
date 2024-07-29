@@ -130,7 +130,7 @@ export const HomePage = () => {
         >
           Discover our features
         </Text>
-        <Horizontal justify="space-evenly" gap={30}>
+        <Horizontal justifyContent="space-evenly" gap={30}>
           {Features.map((feature) => (
             <Vertical
               key={feature.title}

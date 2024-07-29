@@ -85,7 +85,7 @@ test('should render Vertical component with correct class name', () => {
 
 // test('should render a justify Vertical layout with justify-content equals to space-between', () => {
 //   render(
-//     <Vertical role="Vertical" justify="space-between">
+//     <Vertical role="Vertical" justifyContent="space-between">
 //       <View width={50} height={50} backgroundColor="theme.primary" />
 //       <View width={50} height={50} backgroundColor="theme.warning" />
 //     </Vertical>
@@ -108,7 +108,7 @@ test('should render Vertical component with correct class name', () => {
 test('Vertical layout to match snapshot', () => {
   const tree = renderer
     .create(
-      <Vertical justify="space-between">
+      <Vertical justifyContent="space-between">
         <View width={50} height={50} backgroundColor="theme.primary" />
         <View width={50} height={50} backgroundColor="theme.secondary" />
         <View width={50} height={50} backgroundColor="theme.warning" />

@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react';
 import { Elevation } from 'src/utils/elevation';
-import { Shadow } from 'app-studio';
+import { InputProps, Shadow } from 'app-studio';
 import { CheckboxStyles, Size } from './Checkbox.type';
-export interface CheckboxProps {
+export interface CheckboxProps extends Omit<InputProps, 'size'> {
   id?: string;
   icon?: React.ReactNode;
   error?: boolean;
@@ -21,7 +21,6 @@ export interface CheckboxProps {
   size?: Size;
   shadow?: Shadow | Elevation | CSSProperties;
   infoText?: string;
-  [x: string]: any;
 }
 export interface CheckboxViewProps extends CheckboxProps {
   isHovered?: boolean;

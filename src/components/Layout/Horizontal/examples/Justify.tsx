@@ -1,6 +1,5 @@
 import React from 'react';
 import { Horizontal } from '../../Horizontal/Horizontal';
-import { Justify } from '../../../Layout/configs/Input.type';
 import { View } from '../../../Layout/View/View';
 
 export const JustifyHorizontal = () => {
@@ -20,7 +19,7 @@ export const JustifyHorizontal = () => {
       ].map((justify) => (
         <View key={justify} marginTop={10}>
           {justify}
-          <Horizontal justify={justify as Justify} gap={5} width="100%">
+          <Horizontal justifyContent={justify} gap={5} width="100%">
             <View backgroundColor="theme.primary" {...size} />
             <View backgroundColor="theme.secondary" {...size} />
             <View backgroundColor="theme.warning" {...size} />

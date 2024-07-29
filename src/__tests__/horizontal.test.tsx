@@ -81,7 +81,7 @@ test('should render Horizontal component with correct class name', () => {
 
 // test('should render a justify horizontal layout with justify-content equals to space-between', () => {
 //   render(
-//     <Horizontal role="Horizontal" justify="space-between">
+//     <Horizontal role="Horizontal" justifyContent="space-between">
 //       <View width={50} height={50} backgroundColor="theme.primary" />
 //       <View width={50} height={50} backgroundColor="theme.warning" />
 //     </Horizontal>
@@ -104,7 +104,7 @@ test('should render Horizontal component with correct class name', () => {
 test('Horizontal layout to match snapshot', () => {
   const tree = renderer
     .create(
-      <Horizontal justify="space-between">
+      <Horizontal justifyContent="space-between">
         <View width={50} height={50} backgroundColor="theme.primary" />
         <View width={50} height={50} backgroundColor="theme.secondary" />
         <View width={50} height={50} backgroundColor="theme.warning" />

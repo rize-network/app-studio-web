@@ -6,9 +6,9 @@ import {
   Variant,
 } from '../../../../Layout/configs/Input.type';
 import { Elevation } from 'src/utils/elevation';
-import { Shadow } from 'app-studio';
+import { Shadow, ViewProps } from 'app-studio';
 
-export interface ContentProps {
+export interface ContentProps extends Omit<ViewProps, 'size'> {
   /**
    * The color of the Content component.
    */
@@ -73,8 +73,4 @@ export interface ContentProps {
    * The shadow effect applied to the Content component.
    */
   shadow?: Shadow | Elevation | CSSProperties;
-  /**
-   * Additional properties and attributes for the field.
-   */
-  [x: string]: any;
 }

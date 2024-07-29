@@ -50,7 +50,7 @@ import { Vertical } from '../Layout/Vertical/Vertical';
 ```tsx
 import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
-<Horizontal justify="space-evenly" gap={10}>
+<Horizontal justifyContent="space-evenly" gap={10}>
   {['theme.primary', 'theme.secondary', 'theme.warning', 'theme.success', 'theme.error'].map((color, index) => (
     <Button key={index} colorScheme={color} isAuto>
       {color}
@@ -94,7 +94,7 @@ import { Center } from '../Layout/Center/Center';
 ```tsx
 import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
-<Horizontal justify="space-evenly" gap={10}>
+<Horizontal justifyContent="space-evenly" gap={10}>
   {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
     <Button key={index} variant={variant} colorScheme="theme.primary" isAuto>
       {variant}
@@ -110,7 +110,7 @@ import { Horizontal } from '../Layout/Horizontal/Horizontal';
 ```tsx
 import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
-<Horizontal justify="space-evenly" wrap="nowrap" gap={10}>
+<Horizontal justifyContent="space-evenly" wrap="nowrap" gap={10}>
   {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
     <Button key={index} shape={border} isAuto>
       {border}

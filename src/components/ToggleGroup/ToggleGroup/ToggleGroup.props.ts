@@ -1,7 +1,8 @@
 export interface ToggleGroupProps {}
+import { InputProps } from 'app-studio';
 import { Shape, ToggleItem, Variant } from './ToggleGroup.type';
 // Defines the structure for ToggleGroup component properties.
-export interface ToggleGroupProps {
+export interface ToggleGroupProps extends Omit<InputProps, 'size'> {
   // Optional shape prop to define the shape of toggle elements.
   shape?: Shape;
   // Mandatory array of items defining each toggle in the group.
@@ -12,8 +13,6 @@ export interface ToggleGroupProps {
   colorScheme?: string;
   // Optional callback function that fires when the active toggle changes, providing the IDs of active toggles.
   onToggleChange?: (activeIds: string[]) => void;
-  // Allows the ToggleGroupProps to accept additional properties dynamically.
-  [x: string]: any;
 }
 // Interface extending ToggleGroup props for use in the ToggleGroupView component.
 export interface ToggleGroupViewProps extends ToggleGroupProps {

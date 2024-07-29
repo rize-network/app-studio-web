@@ -1,15 +1,10 @@
 import React, { CSSProperties } from 'react';
 import { Elevation } from 'src/utils/elevation';
-import { Shadow } from 'app-studio';
+import { Shadow, ViewProps } from 'app-studio';
 
 import { CloseButtonPosition, Position, Shape, Size } from './Modal.type';
 
-export interface ModalProps {
-  /**
-   * The content to be displayed inside the modal.
-   */
-  children: React.ReactNode;
-
+export interface ModalProps extends Omit<ViewProps, 'size'> {
   /**
    * The color of the close button in the header.
    */
@@ -64,11 +59,6 @@ export interface ModalProps {
    * Applies a shadow effect to the button.
    */
   shadow?: Shadow | Elevation | CSSProperties;
-
-  /**
-   * Additional properties.
-   */
-  [x: string]: any;
 }
 
 export interface ModalType extends React.FunctionComponent<ModalProps> {
@@ -103,7 +93,7 @@ export interface ModalType extends React.FunctionComponent<ModalProps> {
   Layout: React.FC<ModalLayoutProps>;
 }
 
-export interface OverlayProps {
+export interface OverlayProps extends Omit<ViewProps, 'size'> {
   /**
    * The content of the Overlay
    */
@@ -128,13 +118,9 @@ export interface OverlayProps {
    * Action to be handled when the button close is clicked or pressed
    */
   onClose: () => void;
-  /**
-   * Other properties
-   */
-  [x: string]: any;
 }
 
-export interface HeaderProps {
+export interface HeaderProps extends Omit<ViewProps, 'size'> {
   /**
    * The content of the header
    */
@@ -155,17 +141,13 @@ export interface HeaderProps {
    * Action to be handled when the button close is clicked or pressed
    */
   onClose?: () => void;
-  /**
-   * Other properties
-   */
-  [x: string]: any;
 }
 
 export interface ModalLayoutProps {
   modals: { [x: string]: React.FC<any> };
 }
 
-export interface ContainerProps {
+export interface ContainerProps extends Omit<ViewProps, 'size'> {
   /**
    * The content of the modal container
    */
@@ -182,30 +164,8 @@ export interface ContainerProps {
    * Set a shadow effect on the button.
    */
   shadow?: Shadow | Elevation | CSSProperties;
-  /**
-   * Other properties
-   */
-  [x: string]: any;
 }
 
-export interface BodyProps {
-  /**
-   * The content of the Body
-   */
-  children?: React.ReactNode;
-  /**
-   * Other properties
-   */
-  [x: string]: any;
-}
+export interface BodyProps extends Omit<ViewProps, 'size'> {}
 
-export interface FooterProps {
-  /**
-   * The content of the Footer
-   */
-  children?: React.ReactNode;
-  /**
-   * Other properties
-   */
-  [x: string]: any;
-}
+export interface FooterProps extends ViewProps {}

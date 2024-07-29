@@ -1,7 +1,8 @@
 import React from 'react';
 import { Size, TextFieldStyles } from '../../../../Layout/configs/Input.type';
+import { ViewProps } from 'app-studio';
 
-export interface FieldProps {
+export interface FieldProps extends Omit<ViewProps, 'size'> {
   /**
    * The content to be rendered inside the Field.
    */
@@ -22,8 +23,4 @@ export interface FieldProps {
    * CSS styles applied to the field (default: {}).
    */
   styles?: TextFieldStyles;
-  /**
-   * Additional properties and attributes for the field.
-   */
-  [x: string]: any;
 }

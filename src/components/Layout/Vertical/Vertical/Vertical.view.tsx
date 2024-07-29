@@ -1,23 +1,21 @@
 import React from 'react';
 import { View } from 'app-studio';
-
 import { VerticalProps } from './Vertical.props';
 
 const VerticalView: React.FC<VerticalProps> = ({
-  children,
-  wrap = 'nowrap',
-  justify = 'flex-start',
+  wrap = 'wrap',
+  justifyContent = 'flex-start',
   isReversed = false,
   ...props
 }) => (
   <View
     display="flex"
     flexWrap={wrap}
+    justifyContent={justifyContent}
     flexDirection={isReversed ? 'column-reverse' : 'column'}
-    justifyContent={justify}
-    {...props}
-  >
-    {children}
-  </View>
+    {...props} />
 );
+
+
+
 export default VerticalView;

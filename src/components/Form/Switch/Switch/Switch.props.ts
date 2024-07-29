@@ -1,10 +1,10 @@
 import { CSSProperties } from 'react';
 import { Elevation } from 'src/utils/elevation';
-import { Shadow } from 'app-studio';
+import { InputProps, Shadow } from 'app-studio';
 
 import { Size, SwitchStyles } from './Switch.type';
 
-export interface SwitchProps {
+export interface SwitchProps extends Omit<InputProps, 'size'> {
   /**
    * The content to be rendered when the switch is active.
    */
@@ -64,11 +64,6 @@ export interface SwitchProps {
    * Label position
    */
   labelPosition?: 'left' | 'right';
-
-  /**
-   * Additional properties and attributes.
-   */
-  [x: string]: any;
 }
 
 export interface SwitchViewProps extends SwitchProps {

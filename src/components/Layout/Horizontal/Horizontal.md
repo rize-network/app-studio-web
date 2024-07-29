@@ -11,7 +11,7 @@ Flex direction is set as value “row”.
 ```tsx
 import { View } from "../View/View";
 
-<Horizontal justify="space-evenly" wrap="nowrap">
+<Horizontal justifyContent="space-evenly" wrap="nowrap">
   <View width="100%" height={50} backgroundColor="theme.primary" />
   <View width="100%" height={50} backgroundColor="theme.secondary" />
   <View width="100%" height={50} backgroundColor="theme.warning" />
@@ -64,7 +64,7 @@ const size = {
   height: 50,
 };
 
-<Vertical gap={20} wrap="nowrap" justify="space-between">
+<Vertical gap={20} wrap="nowrap" justifyContent="space-between">
   {[
     "flex-start",
     "flex-end",
@@ -77,7 +77,7 @@ const size = {
       <View flex={1}>{justify}</View>
       <Horizontal
         flex={4}
-        justify={justify}
+        justifyContent={justify}
         gap={5}
         backgroundColor="lightgray"
       >

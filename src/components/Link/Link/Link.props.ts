@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { Size, Styles, TextDecorationStyle } from './Link.type';
+import { ViewProps } from 'app-studio';
 
-export interface LinkProps {
+export interface LinkProps extends Omit<ViewProps, 'size'> {
   /**
    * The content of the link.
    */
@@ -32,10 +33,6 @@ export interface LinkProps {
    * CSS styles for the  external icon.
    */
   styles?: Styles;
-  /**
-   * Additional props for customization.
-   */
-  [x: string]: any;
 }
 
 export interface LinkViewProps extends LinkProps {

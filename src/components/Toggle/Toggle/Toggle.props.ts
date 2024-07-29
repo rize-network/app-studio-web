@@ -1,5 +1,6 @@
+import { InputProps } from 'app-studio';
 import { Shape, Variant } from './Toggle.type';
-export interface ToggleProps {
+export interface ToggleProps extends Omit<InputProps, 'size'> {
   // Optional 'shape' property to determine the shape of the toggle component.
   shape?: Shape;
   // Optional boolean to define the initial toggle state.
@@ -14,8 +15,6 @@ export interface ToggleProps {
   colorScheme?: string;
   // Optional function that triggers when the toggle state changes, receives the new state as an argument.
   onToggle?: (isToggled: boolean) => void;
-  // Allows the inclusion of additional properties with string keys.
-  [x: string]: any;
 }
 export interface ToggleViewProps extends ToggleProps {
   // Boolean to indicate whether the toggle component is hovered over by the user.

@@ -1,10 +1,10 @@
 import { CSSProperties } from 'react';
-import { Shadow } from 'app-studio';
+import { InputProps, Shadow } from 'app-studio';
 import { Elevation } from 'src/utils/elevation';
 
 import { Shape, Size, TextAreaStyles, Variant } from './TextArea.type';
 
-export interface TextAreaProps {
+export interface TextAreaProps extends Omit<InputProps, 'size'> {
   /**
    * Changes the label and border color of the input field.
    */
@@ -105,10 +105,6 @@ export interface TextAreaProps {
    * Changes the style variant of the input field.
    */
   variant?: Variant;
-  /**
-   * Additional properties for customization and extension.
-   */
-  [x: string]: any;
 }
 
 export interface TextAreaViewProps extends TextAreaProps {

@@ -1,5 +1,8 @@
 import { Size, Variant, Shape, Position, BadgeStyles } from './Badge.type';
-export interface BadgeProps {
+import { ViewProps } from 'app-studio';
+
+// Defines an interface 'AspectRatioProps' for component properties.
+export interface BadgeProps extends Omit<ViewProps, 'content'> {
   content: string | number;
   variant?: Variant;
   colorScheme?: string;
@@ -7,5 +10,4 @@ export interface BadgeProps {
   size?: Size;
   shape?: Shape;
   styles?: BadgeStyles;
-  [x: string]: any;
 }

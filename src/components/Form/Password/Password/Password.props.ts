@@ -1,7 +1,10 @@
 import React from 'react';
 import { TextFieldProps } from '../../../Form/TextField/TextField/TextField.props';
+import { InputProps } from 'app-studio';
 
-export interface PasswordProps extends TextFieldProps {
+export interface PasswordProps
+  extends TextFieldProps,
+    Omit<InputProps, 'size'> {
   /**
    * The name of the input field
    */
@@ -18,10 +21,6 @@ export interface PasswordProps extends TextFieldProps {
    * Icon to Indicate that the password is hidden
    */
   hiddenIcon?: React.ReactNode;
-  /**
-   * other properties
-   */
-  [x: string]: any;
 }
 
 export interface PasswordViewProps extends PasswordProps {

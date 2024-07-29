@@ -1,12 +1,3 @@
-import React from 'react';
+import { ImageProps } from 'app-studio';
 
-export interface FieldIconsProps {
-  /**
-   * The content to be rendered inside the Wrapper Field.
-   */
-  children?: React.ReactNode;
-  /**
-   * Additional properties and attributes for the field.
-   */
-  [x: string]: any;
-}
+export interface FieldIconsProps extends Omit<ImageProps, 'size'> {}

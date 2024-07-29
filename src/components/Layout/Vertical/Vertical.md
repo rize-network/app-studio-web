@@ -33,7 +33,7 @@ const size = {
   height: 50,
 };
 
-<Horizontal gap={5} justify="space-evenly">
+<Horizontal gap={5} justifyContent="space-evenly">
   {["wrap", "nowrap", "wrap-reverse"].map((wrapping, index) => (
     <View key={index}>
       <View>{wrapping}</View>
@@ -77,7 +77,7 @@ const size = {
   height: 50,
 };
 
-<Horizontal gap={20} wrap="nowrap" justify="space-between">
+<Horizontal gap={20} wrap="nowrap" justifyContent="space-between">
   {[
     "flex-start",
     "flex-end",
@@ -89,7 +89,7 @@ const size = {
     <Vertical flex={1}>
       {justify}
       <Vertical
-        justify={justify}
+        justifyContent={justify}
         gap={5}
         height={300}
         backgroundColor="lightgray"

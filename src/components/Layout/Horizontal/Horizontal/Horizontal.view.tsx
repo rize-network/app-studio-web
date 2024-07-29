@@ -1,12 +1,10 @@
 import React from 'react';
-import { View } from '../../../Layout/View/View';
-
+import { View } from 'app-studio';
 import { HorizontalProps } from './Horizontal.props';
 
 const HorizontalView: React.FC<HorizontalProps> = ({
-  children,
   wrap = 'wrap',
-  justify = 'flex-start',
+  justifyContent = 'flex-start',
   isReversed = false,
   ...props
 }) => (
@@ -14,11 +12,8 @@ const HorizontalView: React.FC<HorizontalProps> = ({
     display="flex"
     flexWrap={wrap}
     flexDirection={isReversed ? 'row-reverse' : 'row'}
-    justifyContent={justify}
-    {...props}
-  >
-    {children}
-  </View>
+    justifyContent={justifyContent}
+    {...props} />
 );
 
 export default HorizontalView;

@@ -1,19 +1,15 @@
 import React from 'react';
 
-import { View } from '../../View/View';
+import { View } from 'app-studio';
 
 import { CenterProps } from './Center.props';
 
-const CenterView: React.FC<CenterProps> = ({ children, wrap, ...props }) => (
+const CenterView: React.FC<CenterProps> = (props : CenterProps) => (
   <View
     display="flex"
     justifyContent="center"
     alignItems="center"
-    flexWrap={wrap}
-    {...props}
-  >
-    {children}
-  </View>
+    {...props} />
 );
 
 export default CenterView;
