@@ -1,3 +1,2 @@
 import { ViewProps } from '../../View/View';
-export interface CenterProps extends ViewProps{
-}
+export interface CenterProps extends ViewProps {}

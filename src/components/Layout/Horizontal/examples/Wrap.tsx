@@ -3,7 +3,6 @@ import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
 
 import { View } from '../../../Layout/View/View';
 
-
 export const WrapHorizontal = () => {
   const size = {
     width: 50,

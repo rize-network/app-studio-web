@@ -13,7 +13,8 @@ const HorizontalView: React.FC<HorizontalProps> = ({
     flexWrap={wrap}
     flexDirection={isReversed ? 'row-reverse' : 'row'}
     justifyContent={justifyContent}
-    {...props} />
+    {...props}
+  />
 );
 
 export default HorizontalView;

@@ -13,9 +13,8 @@ const VerticalView: React.FC<VerticalProps> = ({
     flexWrap={wrap}
     justifyContent={justifyContent}
     flexDirection={isReversed ? 'column-reverse' : 'column'}
-    {...props} />
+    {...props}
+  />
 );
-
-
 
 export default VerticalView;

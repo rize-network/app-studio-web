@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme, Image } from 'app-studio';
+import { useTheme, Image, ViewProps, ImageProps } from 'app-studio';
 import { Center } from '../Layout/Center/Center';
 
 export const FileSVG = ({
@@ -9,7 +9,7 @@ export const FileSVG = ({
 }: {
   src: string;
   color?: string;
-}) => {
+} & ViewProps) => {
   const { getColor } = useTheme();
 
   const Colorprops = color
@@ -28,6 +28,9 @@ export const FileSVG = ({
   );
 };
 
-export const FileImage = ({ path, ...props }: { path: string } & any) => {
+export const FileImage = ({
+  path,
+  ...props
+}: { path: string } & ImageProps) => {
   return <Image src={path} {...props} />;
 };
