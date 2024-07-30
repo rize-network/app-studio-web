@@ -50,10 +50,6 @@ export interface TextProps
    * Specifies the font weight of the text.
    */
   weight?: TextWeights;
-  /**
-   * Additional properties for customization and extension.
-   */
-  [x: string]: any;
 }
 
 export interface ContentProps {

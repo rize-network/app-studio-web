@@ -1,10 +1,10 @@
 import React, { CSSProperties } from 'react';
 import { Elevation } from 'src/utils/elevation';
-import { Shadow } from 'app-studio';
+import { Shadow, ViewProps } from 'app-studio';
 
 import { DatePickerStyles, Shape, Size, Variant } from './DatePicker.type';
 
-export interface DatePickerProps {
+export interface DatePickerProps   extends Omit<ViewProps, 'size'> {
   id?: string;
   /**
    * Custom icon to display when the DatePicker is checked.
@@ -68,10 +68,7 @@ export interface DatePickerProps {
    * Adds a shadow effect to the DatePicker.
    */
   shadow?: Shadow | Elevation | CSSProperties;
-  /**
-   * Other properties that can be passed to the component.
-   */
-  [x: string]: any;
+
 }
 
 export interface DatePickerViewProps extends DatePickerProps {
