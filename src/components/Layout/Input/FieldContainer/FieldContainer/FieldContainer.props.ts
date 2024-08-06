@@ -1,7 +1,8 @@
 import React from 'react';
 import { TextFieldStyles } from '../../../../Layout/configs/Input.type';
+import { ViewProps } from 'app-studio';
 
-export interface ContainerProps {
+export interface ContainerProps extends ViewProps {
   /**
    * The content to be rendered inside the container.
    */
@@ -18,8 +19,4 @@ export interface ContainerProps {
    * CSS styles for the select box and dropdown.
    */
   styles?: TextFieldStyles;
-  /**
-   * Additional properties and attributes for the field.
-   */
-  [x: string]: any;
 }

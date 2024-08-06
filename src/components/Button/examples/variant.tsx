@@ -22,7 +22,6 @@ export const VariantButtons = () => (
         key={index}
         externalHref="https://www.npmjs.com/package/app-studio"
         variant={variant as Variant}
-        colorScheme="theme.primary"
         isFilled
         effect="reverse"
       >

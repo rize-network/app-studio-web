@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { LoaderType, Size, Speed, TextPosition } from './Loader.type';
+import { ViewProps } from 'app-studio';
 
 /**
  * Props for the Loader component.
  */
-export interface LoaderProps {
+export interface LoaderProps extends Omit<ViewProps, 'size'> {
   /**
    * The text content.
    */
@@ -40,14 +41,9 @@ export interface LoaderProps {
    * The rotation speed of the loader.
    */
   speed?: Speed;
-
-  /**
-   * Additional properties.
-   */
-  [x: string]: any;
 }
 
-export interface DefaultSpinnerProps {
+export interface DefaultSpinnerProps extends Omit<ViewProps, 'size'> {
   /**
    * To set the spinner height and width
    */
@@ -60,13 +56,9 @@ export interface DefaultSpinnerProps {
    * To change the spinner color
    */
   color?: string;
-  /**
-   * Other props
-   *  */
-  [x: string]: any;
 }
 
-export interface DottedProps {
+export interface DottedProps extends Omit<ViewProps, 'size'> {
   /**
    * To set the spinner height and width
    */
@@ -79,13 +71,9 @@ export interface DottedProps {
    * To change the spinner color
    */
   color?: string;
-  /**
-   * Other properties
-   */
-  [x: string]: any;
 }
 
-export interface QuarterProps {
+export interface QuarterProps extends Omit<ViewProps, 'size'> {
   /**
    * To set the spinner height and width
    */
@@ -98,8 +86,4 @@ export interface QuarterProps {
    * To change the spinner color
    */
   color?: string;
-  /**
-   *Other properties
-   */
-  [x: string]: any;
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Size } from '../../../../Layout/configs/Input.type';
+import { ViewProps } from 'app-studio';
 
-export interface LabelProps {
+export interface LabelProps extends Omit<ViewProps, 'size'> {
   /**
    * The content to be rendered inside the Label.
    */
@@ -24,8 +25,4 @@ export interface LabelProps {
    * CSS styles applied to the Label
    */
   styles?: { label: any };
-  /**
-   * Additional properties and attributes for the field.
-   */
-  [x: string]: any;
 }

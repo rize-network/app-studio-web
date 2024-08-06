@@ -1,10 +1,10 @@
 import { CSSProperties } from 'react';
 import { Elevation } from 'src/utils/elevation';
-import { Shadow } from 'app-studio';
+import { InputProps, Shadow } from 'app-studio';
 
 import { SelectStyles, Shape, Size, Variant, Option } from './Select.type';
 
-export interface SelectProps {
+export interface SelectProps extends Omit<InputProps, 'size'> {
   /**
    * The identifier of the select field.
    */
@@ -87,11 +87,6 @@ export interface SelectProps {
    */
   shadow?: Shadow | Elevation | CSSProperties;
   isScrollable?: boolean;
-
-  /**
-   * Additional properties and attributes for the select field.
-   */
-  [x: string]: any;
 }
 
 export interface SelectViewProps extends SelectProps {
@@ -164,7 +159,7 @@ export interface SelectBoxProps {
   size?: Size;
 }
 
-export interface MultiSelectProps {
+export interface MultiSelectProps extends Omit<InputProps, 'size'> {
   /**
    * Option to be displayed
    */
@@ -177,13 +172,9 @@ export interface MultiSelectProps {
    * To set the item's fontSize
    */
   size?: Size;
-  /**
-   * other properties
-   */
-  [x: string]: any;
 }
 
-export interface ItemProps {
+export interface ItemProps extends Omit<InputProps, 'size'> {
   /**
    * Function that will be called when the option is clicked
    */
@@ -200,12 +191,8 @@ export interface ItemProps {
    * Css styles for the Item
    */
   style?: SelectStyles;
-  /**
-   * other properties
-   */
-  [x: string]: any;
 }
-export interface HiddenSelectProps {
+export interface HiddenSelectProps extends Omit<InputProps, 'size'> {
   /**
    * Identifier
    */
@@ -238,13 +225,9 @@ export interface HiddenSelectProps {
    * List of options
    */
   options: Option[];
-  /**
-   * other properties
-   */
-  [x: string]: any;
 }
 
-export interface DropDownProps {
+export interface DropDownProps extends Omit<InputProps, 'size'> {
   /**
    * To set the height and width of the item list.
    */
@@ -261,8 +244,4 @@ export interface DropDownProps {
    * Css styles for the select container and label
    */
   styles?: SelectStyles;
-  /**
-   * other properties
-   */
-  [x: string]: any;
 }

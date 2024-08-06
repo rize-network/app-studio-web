@@ -8,8 +8,6 @@ export const LinkPage = () => {
     <table className="table" cellSpacing={0}>
       <tr>
         <th>Property</th>
-        <th>NextUI</th>
-        <th>NativeBase</th>
         <th>App-Studio</th>
       </tr>
       <tbody>

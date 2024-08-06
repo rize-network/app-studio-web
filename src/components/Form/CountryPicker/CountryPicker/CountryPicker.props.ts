@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { Elevation } from 'src/utils/elevation';
-import { Shadow } from 'app-studio';
+import { InputProps, Shadow } from 'app-studio';
 
 import {
   Country,
@@ -10,7 +10,7 @@ import {
   Variant,
 } from './CountryPicker.type';
 
-export interface CountryPickerProps {
+export interface CountryPickerProps extends Omit<InputProps, 'size'> {
   /**
    * The identifier for the CountryPicker component.
    */
@@ -83,10 +83,6 @@ export interface CountryPickerProps {
    * Adds a shadow effect to the CountryPicker.
    */
   shadow?: Shadow | Elevation | CSSProperties;
-  /**
-   * Other properties that can be passed to the component.
-   */
-  [x: string]: any;
 }
 
 export interface CountryPickerViewProps extends CountryPickerProps {
@@ -146,7 +142,7 @@ export interface CountryPickerViewProps extends CountryPickerProps {
   setNewOptions?: (newOptions: Array<Country>) => void;
 }
 
-export interface DropDownProps {
+export interface DropDownProps extends Omit<InputProps, 'size'> {
   /**
    * To set the height and width of the item list.
    */
@@ -163,13 +159,9 @@ export interface DropDownProps {
    * Css styles for the CountryPicker container and label
    */
   styles?: CountryPickerStyles;
-  /**
-   * other properties
-   */
-  [x: string]: any;
 }
 
-export interface DropDownItemProps {
+export interface DropDownItemProps extends Omit<InputProps, 'size'> {
   /**
    * Function that will be called when the option is clicked
    */
@@ -186,8 +178,4 @@ export interface DropDownItemProps {
    * Css styles
    */
   styles?: CountryPickerStyles;
-  /**
-   * other properties
-   */
-  [x: string]: any;
 }

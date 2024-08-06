@@ -1,10 +1,10 @@
 import React, { CSSProperties } from 'react';
-import { Shadow } from 'app-studio';
+import { InputProps, Shadow } from 'app-studio';
 import { Elevation } from 'src/utils/elevation';
 
 import { Shape, Size, TextFieldStyles, Variant } from './TextField.type';
 
-export interface TextFieldProps {
+export interface TextFieldProps extends Omit<InputProps, 'size'> {
   /**
    * The input field identifier.
    */
@@ -101,10 +101,6 @@ export interface TextFieldProps {
    * Changes the style variant of the input field.
    */
   variant?: Variant;
-  /**
-   * Additional properties for customization and extension.
-   */
-  [x: string]: any;
 }
 
 export interface TextFieldViewProps extends TextFieldProps {

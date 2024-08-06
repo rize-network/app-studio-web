@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Center } from '../Layout/Center/Center';
+import { ViewProps } from 'app-studio';
 
-interface SvgProps {
+interface SvgProps extends Omit<ViewProps, 'size'> {
   size?: number;
   color?: string;
-  [x: string]: any;
 }
 
 export const CloseSvg: React.FC<SvgProps> = ({

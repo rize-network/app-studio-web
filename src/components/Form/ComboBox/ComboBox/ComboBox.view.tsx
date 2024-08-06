@@ -86,7 +86,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           display="flex"
           alignItems="center"
           borderRadius="4px"
-          justify="space-between"
+          justifyContent="space-between"
           minWidth={300}
           wrap="nowrap"
           {...styles?.container}
@@ -149,7 +149,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                 <View margin={0} padding={4}>
                   {filteredItems.map((item, index) => (
                     <Horizontal
-                      justify="space-between"
+                      justifyContent="space-between"
                       key={item.value}
                       padding="12px"
                       cursor="pointer"

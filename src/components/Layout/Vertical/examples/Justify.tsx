@@ -2,7 +2,6 @@ import React from 'react';
 import { Vertical } from '../../../Layout/Vertical/Vertical';
 import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
 
-import { Justify } from '../../../Layout/Vertical/Vertical/Vertical.type';
 import { View } from '../../../Layout/View/View';
 
 export const JustifyVertical = () => {
@@ -11,7 +10,7 @@ export const JustifyVertical = () => {
     height: 50,
   };
   return (
-    <Horizontal gap={20} wrap="nowrap" justify="space-between">
+    <Horizontal gap={20} wrap="nowrap" justifyContent="space-between">
       {[
         'flex-start',
         'flex-end',
@@ -23,7 +22,7 @@ export const JustifyVertical = () => {
         <Vertical flex={1} key={justify}>
           {justify}
           <Vertical
-            justify={justify as Justify}
+            justifyContent={justify}
             gap={5}
             height={300}
             backgroundColor="lightgray"

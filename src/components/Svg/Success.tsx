@@ -1,10 +1,11 @@
 import React from 'react';
 import { Center } from '../Layout/Center/Center';
 
-interface SvgProps {
+import { ViewProps } from 'app-studio';
+
+interface SvgProps extends Omit<ViewProps, 'size'> {
   size?: number;
   color?: string;
-  [x: string]: any;
 }
 
 export const SuccessSvg: React.FC<SvgProps> = ({

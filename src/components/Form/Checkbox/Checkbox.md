@@ -71,7 +71,7 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 ```tsx
 import { Horizontal } from "../../Layout/Horizontal/Horizontal";
 
-<Horizontal justify="space-evenly" gap={10}>
+<Horizontal justifyContent="space-evenly" gap={10}>
   {["theme.primary", "theme.secondary", "theme.error", "theme.success", "theme.warning"].map(
     (color, index) => (
       <Checkbox key={index} name="name" colorScheme={color} isChecked>

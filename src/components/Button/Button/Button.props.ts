@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Shadow } from 'app-studio';
+import { ButtonProps as $ButtonProps, Shadow } from 'app-studio';
 import { Elevation } from '../../../utils/elevation';
 import {
   IconPosition,
@@ -13,7 +13,7 @@ import {
 // Optional React node(s) to be displayed as the button's content.
 import { LoaderProps } from '../../Loader/Loader/Loader.props';
 // Optional string to define the color scheme of the button.
-export interface ButtonProps {
+export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional string for an external hyperlink that the button will redirect to when clicked.
   children?: React.ReactNode;
   // Optional boolean to control the display of a loader animation over the button.
@@ -51,5 +51,4 @@ export interface ButtonProps {
   // Additional optional properties of any type, making the interface extensible for custom attributes not explicitly defined.
   variant?: Variant;
   effect?: Effects;
-  [x: string]: any;
 }
