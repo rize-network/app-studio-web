@@ -1,14 +1,14 @@
-import { CSSProperties } from 'react';
+import { ViewProps } from 'app-studio';
 
 export type TableViewStyles = {
-  table?: CSSProperties;
-  thead?: CSSProperties;
-  tfoot?: CSSProperties;
-  tbody?: CSSProperties;
-  tr?: CSSProperties;
-  td?: CSSProperties;
-  th?: CSSProperties;
-  caption?: CSSProperties;
+  table?: ViewProps;
+  thead?: ViewProps;
+  tfoot?: ViewProps;
+  tbody?: ViewProps;
+  tr?: ViewProps;
+  td?: ViewProps;
+  th?: ViewProps;
+  caption?: ViewProps;
 };
 
 export interface Column {
@@ -17,5 +17,5 @@ export interface Column {
 }
 export interface FooterCell {
   value: string;
-  props?: any;
+  props?: ViewProps;
 }
