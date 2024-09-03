@@ -7,7 +7,8 @@ import { CheckSvg, IndeterminateSvg } from '../../../Svg';
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes } from './Checkbox.style';
 import { Text } from '../../../Text/Text';
-import { Horizontal, Vertical } from 'src/components/Layout';
+import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
+import { Vertical } from 'src/components/Layout/Vertical/Vertical';
 
 const CheckboxView: React.FC<CheckboxViewProps> = ({
   id,
