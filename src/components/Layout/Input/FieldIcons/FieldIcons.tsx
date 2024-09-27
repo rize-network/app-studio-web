@@ -11,7 +11,7 @@ export const FieldIcons: React.FC<FieldIconsProps> = ({
     gap={10}
     right={16}
     zIndex={500}
-    wrap="nowrap"
+    flexWrap="nowrap"
     position="absolute"
     {...props}
   >

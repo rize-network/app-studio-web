@@ -71,7 +71,7 @@ export const HomePage = () => {
     <Vertical
       gap={50}
       position="relative"
-      wrap="nowrap"
+      flexWrap="nowrap"
       overflowY="scroll"
       color="warmGray.500"
       alignItems="center"
@@ -105,7 +105,7 @@ export const HomePage = () => {
           width="100%"
           gap={60}
           media={{ mobile: { gap: 10 } }}
-          wrap="nowrap"
+          flexWrap="nowrap"
         >
           <Button
             colorScheme="black"

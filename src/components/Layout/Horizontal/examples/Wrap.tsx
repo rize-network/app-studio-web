@@ -13,7 +13,7 @@ export const WrapHorizontal = () => {
       {['wrap', 'nowrap', 'wrap-reverse'].map((wrapping) => (
         <div key={wrapping}>
           {wrapping}
-          <Horizontal wrap={wrapping} gap={5} marginTop={10}>
+          <Horizontal flexWrap={wrapping as any} gap={5} marginTop={10}>
             <View backgroundColor="theme.primary" {...size} />
             <View backgroundColor="theme.secondary" {...size} />
             <View backgroundColor="theme.warning" {...size} />

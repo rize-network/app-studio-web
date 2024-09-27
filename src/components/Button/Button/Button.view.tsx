@@ -42,6 +42,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   ...props
   // Defines CSS properties for 'outline' variant of the button with conditional styles based on reverse state.
 }) => {
+  console.log({ button: props, size, isDisabled });
   const { getColor } = useTheme();
   const handleHover = () => setIsHovered(!isHovered);
 
