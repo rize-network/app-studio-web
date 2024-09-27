@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "tsdx build --entry ./src/components/index.tsx --tsconfig tsconfig.build.json",
+    "build": "tsdx build --format cjs,esm,umd --entry ./src/components/index.tsx --tsconfig tsconfig.build.json",
     "test": "react-scripts test",
     "test:unwatch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
@@ -100,6 +100,7 @@
     "@babel/preset-react": "^7.18.6",
     "@commitlint/cli": "^19.2.0",
     "@commitlint/config-conventional": "^19.1.0",
+    "@size-limit/preset-small-lib": "^10.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^13.5.0",
@@ -110,7 +111,7 @@
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
-    "app-studio": "^0.2.29",
+    "app-studio": "^0.2.30",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-named-exports-order": "^0.0.2",
@@ -153,7 +154,8 @@
     "webpack-cli": "^5.1.3"
   },
   "peerDependencies": {
-    "react": ">= 17"
+    "react": ">= 17",
+    "app-studio": ">= 0.8"
   },
   "size-limit": [
     {
@@ -163,7 +165,12 @@
     {
       "path": "dist/web.esm.js",
       "limit": "100 KB"
+    },
+    {
+      "path": "dist/web.umd.production.min.js",
+      "limit": "100 KB"
     }
   ],
-  "module": "dist/web.esm.js"
+  "module": "dist/web.esm.js",
+  "unpkg": "dist/web.umd.production.min.js"
 }
