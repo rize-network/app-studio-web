@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from '../../LayoutVertical/Vertical';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 import { Badge } from '../Badge';
 import { Size } from '../Badge/Badge.type';
