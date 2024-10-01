@@ -8,7 +8,8 @@ const getInputTypeProps = (type: string) => {
     case 'email':
       return {
         autoCorrect: 'off',
-        keyboardType: 'email-address',
+        // keyboardType: 'email-address',
+        inputmode: 'email',
         autoCapitalize: 'none',
       };
     case 'password':
@@ -19,7 +20,13 @@ const getInputTypeProps = (type: string) => {
       };
     case 'digits':
       return {
-        keyboardType: 'phone-pad',
+        // keyboardType: 'phone-pad',
+        inputmode: 'tel',
+      };
+    case 'numeric':
+      return {
+        // keyboardType: 'phone-pad',
+        inputmode: 'numeric',
       };
     case 'name':
       return {
