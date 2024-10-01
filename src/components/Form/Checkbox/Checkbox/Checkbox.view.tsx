@@ -75,7 +75,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
             borderStyle: 'solid',
           }),
       borderRadius: 3,
-      filter: isHovered ? 'brightness(0.9)' : undefined,
+      ...(isHovered ? { filter: 'brightness(0.9)' } : {}),
       ...Sizes[size],
       ...shadow,
       ...styles['checkbox'],
