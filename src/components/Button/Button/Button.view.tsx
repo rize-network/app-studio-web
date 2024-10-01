@@ -140,7 +140,15 @@ const ButtonView: React.FC<ButtonProps> = ({
       {...buttonSizeStyles}
       {...buttonVariant}
       {...scaleWidth}
-      {...changePadding}
+      {...(props.padding ||
+      props.paddingHorizontal ||
+      props.paddingVertical ||
+      props.paddingLeft ||
+      props.paddingRight ||
+      props.paddingTop ||
+      props.paddingBottom
+        ? {}
+        : changePadding)}
       {...shadow}
       {...props}
     >
