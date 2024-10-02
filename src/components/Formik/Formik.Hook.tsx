@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormikContext, FormikValues } from 'formik';
+import { useFormikContext, FormikValues, getIn } from 'formik';
 
 import { useFormFocus } from './Formik.Form';
 
@@ -47,7 +47,6 @@ export const useFormikInput = ({ name, type, ...props }: any) => {
     setFieldTouched,
     setFieldValue,
   } = useFormikContext<FormikValues>();
-  const error = touched[name] || submitCount > 0 ? errors[name] : undefined;
 
   const onChangeText = (text: string) => {
     setFieldValue(name, text);
@@ -71,11 +70,14 @@ export const useFormikInput = ({ name, type, ...props }: any) => {
     }
   };
   const isText = ['text', 'password', 'email', 'digits'].includes(type);
+  const error =
+    getIn(touched, name) || submitCount > 0 ? getIn(errors, name) : undefined;
+  const value = getIn(values, name);
 
   return {
     ...getInputTypeProps(type),
     ...props,
-    value: values[name],
+    value,
     error,
     onBlur: handleBlur,
     onKeyPress: handleKeyPress,
