@@ -33,6 +33,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   setIsHovered = () => {},
   styles = { checkbox: {}, label: {} },
   infoText,
+  helperText,
   ...props
 }) => {
   const handleHover = () => setIsHovered(!isHovered);

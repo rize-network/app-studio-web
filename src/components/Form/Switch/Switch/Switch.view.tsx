@@ -27,6 +27,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   onChange,
   setValue = () => {},
   setIsHovered = () => {},
+  helperText,
   styles = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
