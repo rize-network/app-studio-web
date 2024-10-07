@@ -4,7 +4,7 @@ import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 
 import { FormikTextField } from '../Formik.TextField';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 export const FormikTextFieldExemple = () => {
   const initialValues = {

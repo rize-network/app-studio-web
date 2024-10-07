@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 import { FormikSelect } from '../Formik.Select';
 
@@ -15,7 +15,7 @@ export const FormikSelectExemple = () => {
   ];
 
   const initialValues = {
-    formik: options[0],
+    formik: options[1].value,
   };
 
   return (
@@ -23,13 +23,7 @@ export const FormikSelectExemple = () => {
       {(props: any) => (
         <FormikForm>
           <Vertical gap={10}>
-            <FormikSelect
-              id="formik"
-              name="formik"
-              placeholder="Select an item..."
-              options={options}
-            />
-
+            <FormikSelect id="formik" name="formik" options={options} />
             <Button
               type="submit"
               alignSelf="center"

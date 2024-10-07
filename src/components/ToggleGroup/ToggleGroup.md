@@ -28,11 +28,11 @@ export const DefaultDemo = () => {
 
 ```tsx
 import React from 'react';
-import { DustBinSvg } from 'src/components/Svg';
+import { DustBinSvg } from '../../Svg';
 import { ToggleGroup } from '../ToggleGroup';
 import { Shape } from '../ToggleGroup/ToggleGroup.type';
-import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
-import { View } from 'src/components/Layout/View/View';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { View } from '../../Layout/View/View';
 
 export const ShapeDemo = () => {
   const items = [
@@ -61,7 +61,7 @@ export const ShapeDemo = () => {
 ```tsx
 import React from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Text } from 'src/components/Text/Text';
+import { Text } from '../../Text/Text';
 
 export const ItemsDemo = () => {
   const items = [
@@ -79,10 +79,10 @@ export const ItemsDemo = () => {
 
 ```tsx
 import React from 'react';
-import { Text } from 'src/components/Text/Text';
+import { Text } from '../../Text/Text';
 import { ToggleGroup } from '../ToggleGroup';
 import { Variant } from '../ToggleGroup/ToggleGroup.type';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 export const VariantDemo = () => {
   const items = [
@@ -107,8 +107,8 @@ export const VariantDemo = () => {
 ```tsx
 import React from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
-import { Text } from 'src/components/Text/Text';
+import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Text } from '../../Text/Text';
 
 export const ColorSchemeDemo = () => {
   const items = [
@@ -139,8 +139,8 @@ export const ColorSchemeDemo = () => {
 ```tsx
 import React, { useState } from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Text } from 'src/components/Text/Text';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Text } from '../../Text/Text';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 export const OnToggleChangeDemo = () => {
   const [newItems, setNewItems] = useState<any>([]);

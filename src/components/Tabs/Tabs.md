@@ -10,7 +10,7 @@ Provides an interactive tab interface for content organization
 ### **Default**
 ```tsx
 import React from 'react';
-import { Tabs, View, Text } from 'src/components';
+import { Tabs, View, Text } from '../..';
 
 export const Default = () => (
   <Tabs
@@ -117,8 +117,8 @@ const DummyContent = () => {
 
 ```tsx
 import React from 'react';
-import { Text } from 'src/components/Text/Text';
-import { Tabs } from 'src/components/Tabs/Tabs';
+import { Text } from '../../Text/Text';
+import { Tabs } from '../../Tabs/Tabs';
 
 export const StylesTabs = () => {
   const tabs = [

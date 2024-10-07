@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 import { Avatar } from '../Avatar';
 import { Size } from '../Avatar/Avatar.type';
 
