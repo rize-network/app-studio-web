@@ -7,7 +7,8 @@ import { CheckSvg, IndeterminateSvg } from '../../../Svg';
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes } from './Checkbox.style';
 import { Text } from '../../../Text/Text';
-import { Horizontal, Vertical } from '../../../Layout';
+import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
 
 const CheckboxView: React.FC<CheckboxViewProps> = ({
   id,
@@ -32,6 +33,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   setIsHovered = () => {},
   styles = { checkbox: {}, label: {} },
   infoText,
+  helperText,
   ...props
 }) => {
   const handleHover = () => setIsHovered(!isHovered);
@@ -74,7 +76,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
             borderStyle: 'solid',
           }),
       borderRadius: 3,
-      filter: isHovered ? 'brightness(0.9)' : undefined,
+      ...(isHovered ? { filter: 'brightness(0.9)' } : {}),
       ...Sizes[size],
       ...shadow,
       ...styles['checkbox'],

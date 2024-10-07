@@ -10,7 +10,7 @@ export const JustifyVertical = () => {
     height: 50,
   };
   return (
-    <Horizontal gap={20} wrap="nowrap" justifyContent="space-between">
+    <Horizontal gap={20} flexWrap="nowrap" justifyContent="space-between">
       {[
         'flex-start',
         'flex-end',

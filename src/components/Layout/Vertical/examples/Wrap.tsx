@@ -14,7 +14,7 @@ export const WrapVertical = () => {
       {['wrap', 'nowrap', 'wrap-reverse'].map((wrapping, index) => (
         <View key={index}>
           <View>{wrapping}</View>
-          <Vertical wrap={wrapping} gap={5} height={200} flex={1}>
+          <Vertical flexWrap={wrapping as any} gap={5} height={200} flex={1}>
             <View backgroundColor="theme.primary" {...size} />
             <View backgroundColor="theme.secondary" {...size} />
             <View backgroundColor="theme.warning" {...size} />

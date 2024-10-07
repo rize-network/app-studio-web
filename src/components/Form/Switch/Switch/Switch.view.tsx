@@ -22,15 +22,19 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   isHovered = false,
   isDisabled = false,
   isReadOnly = false,
+  on,
+  setOn,
   onChange,
   setValue = () => {},
   setIsHovered = () => {},
+  helperText,
   styles = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
   const handleToggle = (event: any) => {
     if (!isReadOnly) {
       setValue(!value);
+      setOn(!on);
       if (onChange) onChange(event.target.checked);
     }
   };

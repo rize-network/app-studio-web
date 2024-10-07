@@ -37,7 +37,7 @@ const size = {
   {["wrap", "nowrap", "wrap-reverse"].map((wrapping, index) => (
     <View key={index}>
       <View>{wrapping}</View>
-      <Vertical wrap={wrapping} gap={5} height={200} flex={1}>
+      <Vertical flexWrap={wrapping} gap={5} height={200} flex={1}>
         <View backgroundColor="theme.primary" {...size} />
         <View backgroundColor="theme.secondary" {...size} />
         <View backgroundColor="theme.warning" {...size} />
@@ -77,7 +77,7 @@ const size = {
   height: 50,
 };
 
-<Horizontal gap={20} wrap="nowrap" justifyContent="space-between">
+<Horizontal gap={20} flexWrap="nowrap" justifyContent="space-between">
   {[
     "flex-start",
     "flex-end",

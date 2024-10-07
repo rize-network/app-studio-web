@@ -8,8 +8,6 @@ import { useFormikInput } from './Formik.Hook';
 const SelectComponent: React.FC<SelectProps> = (props) => {
   let formProps = useFormikInput(props);
   formProps.selected = formProps.value;
-  // formProps.value = formProps.value.value;
-  console.log({ formProps, test: formProps.value });
   const selectStates = useSelectState(props);
   return <SelectView {...selectStates} {...formProps} />;
 };

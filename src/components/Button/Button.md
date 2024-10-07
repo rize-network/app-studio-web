@@ -110,7 +110,7 @@ import { Horizontal } from '../Layout/Horizontal/Horizontal';
 ```tsx
 import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
-<Horizontal justifyContent="space-evenly" wrap="nowrap" gap={10}>
+<Horizontal justifyContent="space-evenly" flexWrap="nowrap" gap={10}>
   {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
     <Button key={index} shape={border} isAuto>
       {border}

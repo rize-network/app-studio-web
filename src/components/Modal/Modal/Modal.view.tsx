@@ -50,7 +50,7 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
         width="100vw"
         height="100vh"
         display="flex"
-        backgroundColor="blackAlpha.500"
+        backgroundColor="color.blackAlpha.500"
         backdropFilter={blur ? `blur(${blur}px)` : undefined}
         onClick={handleClick}
         {...OverlayAlignments[position]}
