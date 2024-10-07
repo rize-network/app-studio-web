@@ -1,7 +1,7 @@
 ### **Import**
 
 ```tsx static
-import { Vertical } from "app-studio";
+import { Vertical } from "@app-studio/web";
 ```
 
 ### **Default**

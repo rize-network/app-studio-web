@@ -1,7 +1,7 @@
 ### **Import**
 
 ```tsx static
-import { Center } from "app-studio";
+import { Center } from "@app-studio/web";
 ```
 
 ### **Default**

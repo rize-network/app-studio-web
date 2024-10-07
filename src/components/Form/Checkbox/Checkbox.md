@@ -1,7 +1,7 @@
 ### **Import**
 
 ```tsx static
-import { Checkbox } from "app-studio";
+import { Checkbox } from "@app-studio/web";
 ```
 
 ### **Default**

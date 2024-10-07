@@ -1,7 +1,7 @@
 ### **Import**
 
 ```jsx static
-import { CountryPicker } from "app-studio";
+import { CountryPicker } from "@app-studio/web";
 ```
 
 ### **Default**
