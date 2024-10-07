@@ -21,7 +21,7 @@ export const AlertView = ({
     borderWidth={1}
     borderStyle="solid"
     padding={16}
-    wrap="nowrap"
+    flexWrap="nowrap"
     borderColor={Themes[variant].container.border}
     {...styles?.container}
   >

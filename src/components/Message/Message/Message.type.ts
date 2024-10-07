@@ -6,7 +6,7 @@ export type CloseButtonPosition = 'left' | 'right' | 'none';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export type Message = 'info' | 'warning' | 'error' | 'success';
+export type MessageType = 'info' | 'warning' | 'error' | 'success';
 
 export type MessageViewStyles = {
   container?: any;
@@ -19,8 +19,6 @@ export type MessageViewStyles = {
     icon?: any;
   };
 };
-
-export type Message = 'info' | 'warning' | 'error' | 'success';
 
 export type Theme = {
   container: {

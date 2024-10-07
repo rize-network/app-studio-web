@@ -119,7 +119,7 @@ export const TextPage = () => {
               >
                 {[
                   'hairline',
-                  'tdin',
+                  'thin',
                   'light',
                   'normal',
                   'medium',

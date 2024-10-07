@@ -1,5 +1,5 @@
 import React from 'react';
-import PlusSvg from 'src/components/Svg/Plus';
+import PlusSvg from '../../../Svg/Plus';
 import { ComboBox } from '../ComboBox';
 
 export const LabelDemo = () => {

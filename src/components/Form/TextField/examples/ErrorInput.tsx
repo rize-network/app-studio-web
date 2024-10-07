@@ -4,7 +4,7 @@ import { Button } from '../../../Button/Button';
 
 import { TextField } from '../../../Form/TextField/TextField';
 
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
 
 export const ErrorInput = () => {
   const initialValues = {
@@ -47,7 +47,7 @@ export const ErrorInput = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Vertical gap={10} alignItems="center" wrap="nowrap">
+      <Vertical gap={10} alignItems="center" flexWrap="nowrap">
         <TextField
           name="firstName"
           placeholder="First Name"

@@ -102,11 +102,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   const scaleWidth = {
     width: isAuto ? 'fit-content' : isFilled ? '100%' : buttonSizeStyles.width,
   };
-  const changePadding = {
-    padding: isIconRounded
-      ? IconSizes[size].padding
-      : ButtonSizes[size].padding,
-  };
+  const changePadding = isIconRounded ? IconSizes[size] : ButtonSizes[size];
   const content = (
     <Horizontal gap={10}>
       {isLoading && loaderPosition === 'left' && <Loader {...loaderProps} />}
@@ -116,6 +112,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       {isLoading && loaderPosition === 'right' && <Loader {...loaderProps} />}
     </Horizontal>
   );
+
   return (
     <Element
       gap={8}
@@ -126,7 +123,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
-      ariaLabel={ariaLabel}
+      aria-label={ariaLabel}
       backgroundColor={buttonColor}
       borderRadius={ButtonShapes[shape]}
       onClick={props.onClick ?? onClick}
@@ -134,13 +131,24 @@ const ButtonView: React.FC<ButtonProps> = ({
       onMouseLeave={handleHover}
       cursor={isActive ? 'pointer' : 'default'}
       filter={hovering ? 'brightness(0.85)' : 'brightness(1)'}
-      transition={hovering && !props.isDisabled ? 'transform 0.3s ease' : ''}
-      transform={hovering && !props.isDisabled ? 'translateY(-5px)' : ''}
+      {...(hovering && !props.isDisabled
+        ? { transition: 'transform 0.3s ease', transform: 'translateY(-5px)' }
+        : {})}
+      //  transition={hovering && !props.isDisabled ?  : ''}
+      //   transform={hovering && !props.isDisabled ?  : ''}
       {...defaultNativeProps}
       {...buttonSizeStyles}
       {...buttonVariant}
       {...scaleWidth}
-      {...changePadding}
+      {...(props.padding ||
+      props.paddingHorizontal ||
+      props.paddingVertical ||
+      props.paddingLeft ||
+      props.paddingRight ||
+      props.paddingTop ||
+      props.paddingBottom
+        ? {}
+        : changePadding)}
       {...shadow}
       {...props}
     >

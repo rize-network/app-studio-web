@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, View, Text } from 'src/components';
+import { Tabs, View, Text } from '../..';
 
 export const Default = () => (
   <Tabs

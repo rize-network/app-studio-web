@@ -13,7 +13,7 @@ export const StyledSwitch = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Horizontal gap={10} alignItems="center" wrap="nowrap">
+      <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
         <Switch
           name="surname"
           label="Surname"

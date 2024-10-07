@@ -84,7 +84,7 @@ const [showLeft, setShowLeft] = useState(false);
 const [showCenter, setShowCenter] = useState(false);
 
 <>
-  <Horizontal gap={10} wrap="nowrap">
+  <Horizontal gap={10} flexWrap="nowrap">
     <Button onClick={() => setShowTop(true)}>Top</Button>
     <Button onClick={() => setShowBottom(true)}>Bottom</Button>
     <Button onClick={() => setShowRight(true)}>Right</Button>

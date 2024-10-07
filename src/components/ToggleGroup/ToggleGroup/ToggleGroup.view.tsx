@@ -51,7 +51,6 @@ export const ToggleGroupView = ({
           isToggled={activeToggles.includes(item.id) || item.isActive}
           onToggle={(state) => handleToggle(item.id, state)}
           isDisabled={item.isDisabled}
-          isIntern={true}
         >
           {item.value}
         </Toggle>

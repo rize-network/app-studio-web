@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from 'src/components/Button/Button';
-import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
+import { Button } from '../../Button/Button';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 export const EffectButton = () => (
   <Horizontal gap={10}>

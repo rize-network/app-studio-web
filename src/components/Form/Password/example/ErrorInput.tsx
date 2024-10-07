@@ -40,7 +40,7 @@ export const ErrorPassword = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Vertical gap={10} wrap="nowrap">
+      <Vertical gap={10} flexWrap="nowrap">
         <TextField
           name="name"
           placeholder="Name"

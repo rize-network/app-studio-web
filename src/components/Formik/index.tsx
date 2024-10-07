@@ -8,7 +8,3 @@ export { FormikTextField } from './Formik.TextField';
 export { FormikPassword } from './Formik.Password';
 export { FormikForm } from './Formik.Form';
 export { FormikComboBox } from './Formik.ComboBox';
-
-// import FormPicker from 'src/Picker/Picker';
-// import FormRater from 'src/Rate/Rate';
-// import Upload from 'src/Upload/Upload';

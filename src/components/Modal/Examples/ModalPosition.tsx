@@ -9,7 +9,7 @@ import { showModal } from '../Modal/Modal.store';
 export const ModalPosition = () => {
   return (
     <>
-      <Horizontal gap={10} wrap="nowrap">
+      <Horizontal gap={10} flexWrap="nowrap">
         <Button
           onClick={() => showModal('ModalPosition', {}, { position: 'top' })}
         >

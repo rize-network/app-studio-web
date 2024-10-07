@@ -1,9 +1,9 @@
 import React from 'react';
-import { DustBinSvg } from 'src/components/Svg';
+import { DustBinSvg } from '../../Svg';
 import { ToggleGroup } from '../ToggleGroup';
 import { Shape } from '../ToggleGroup/ToggleGroup.type';
-import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
-import { View } from 'src/components/Layout/View/View';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { View } from '../../Layout/View/View';
 
 export const ShapeDemo = () => {
   const items = [

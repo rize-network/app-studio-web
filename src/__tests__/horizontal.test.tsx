@@ -48,7 +48,7 @@ test('should render Horizontal component with correct class name', () => {
 
 // test('should render a wrap horizontal layout with flex-wrap equals to wrap', () => {
 //   render(
-//     <Horizontal role="Horizontal" wrap="wrap">
+//     <Horizontal role="Horizontal" flexWrap="wrap">
 //       <View width={50} height={50} backgroundColor="theme.primary" />
 //       <View width={50} height={50} backgroundColor="theme.warning" />
 //     </Horizontal>
@@ -59,7 +59,7 @@ test('should render Horizontal component with correct class name', () => {
 
 // test('should render a nowrap horizontal layout with flex-wrap equals to nowrap', () => {
 //   render(
-//     <Horizontal role="Horizontal" wrap="nowrap">
+//     <Horizontal role="Horizontal" flexWrap="nowrap">
 //       <View width={50} height={50} backgroundColor="theme.primary" />
 //       <View width={50} height={50} backgroundColor="theme.warning" />
 //     </Horizontal>
@@ -70,7 +70,7 @@ test('should render Horizontal component with correct class name', () => {
 
 // test('should render a wrap reverse horizontal layout with flex-wrap equals to wrap-reverse', () => {
 //   render(
-//     <Horizontal role="Horizontal" wrap="wrap-reverse">
+//     <Horizontal role="Horizontal" flexWrap="wrap-reverse">
 //       <View width={50} height={50} backgroundColor="theme.primary" />
 //       <View width={50} height={50} backgroundColor="theme.warning" />
 //     </Horizontal>

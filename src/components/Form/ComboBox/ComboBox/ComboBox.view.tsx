@@ -66,7 +66,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   return (
     <Horizontal
       role="combobox"
-      wrap="nowrap"
+      flexWrap="nowrap"
       gap={15}
       alignItems="center"
       width="100%"
@@ -88,7 +88,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           borderRadius="4px"
           justifyContent="space-between"
           minWidth={300}
-          wrap="nowrap"
+          flexWrap="nowrap"
           {...styles?.container}
         >
           <Horizontal

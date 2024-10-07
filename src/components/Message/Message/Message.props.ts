@@ -1,5 +1,5 @@
 import {
-  Message,
+  MessageType,
   MessageViewStyles,
   Position,
   ThemesType,
@@ -21,7 +21,7 @@ export interface ShowMessageProps {
 }
 export interface MessageProps extends ShowMessageProps {
   subtitle?: string;
-  variant: Message;
+  variant: MessageType;
   show?: boolean;
   hide: Function;
   title: string;
@@ -30,7 +30,7 @@ export interface MessageProps extends ShowMessageProps {
 
 export interface MessageState {
   visible: boolean;
-  variant: Message;
+  variant: MessageType;
   title: string;
   subtitle: string;
   isClosable?: boolean;
@@ -40,7 +40,7 @@ export interface MessageState {
   showIcon?: boolean;
   timeout?: number;
   show: (
-    variant: Message,
+    variant: MessageType,
     title?: string,
     subtitle?: string,
     isClosable?: boolean,

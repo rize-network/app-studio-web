@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Elevation } from 'src/utils/elevation';
+import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow } from 'app-studio';
 import { CheckboxStyles, Size } from './Checkbox.type';
 export interface CheckboxProps extends Omit<InputProps, 'size'> {

@@ -13,7 +13,7 @@ export const StyledArea = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Horizontal gap={10} alignItems="center" wrap="nowrap">
+      <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
         <TextArea
           name="surname"
           label="Surname"

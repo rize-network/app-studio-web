@@ -11,6 +11,7 @@ export const FieldLabel: React.FC<LabelProps> = ({
   error = false,
   color = 'theme.primary',
   styles = { label: {} },
+  helperText,
   ...props
 }) => (
   <Label

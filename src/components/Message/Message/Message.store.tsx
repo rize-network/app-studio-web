@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { MessageState } from './Message.props';
-import { Message, ShowMessageType } from './Message.type';
+import { MessageType, ShowMessageType } from './Message.type';
 
 // Create your store with the initial state and actions.
 export const useMessageStore = create<MessageState>((set) => ({
@@ -43,7 +43,7 @@ export const useMessageStore = create<MessageState>((set) => ({
 }));
 
 export const showMessage = (
-  variant: Message,
+  variant: MessageType,
   title?: string,
   subtitle?: string,
   props?: ShowMessageType

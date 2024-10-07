@@ -20,7 +20,7 @@ import {
 import { IconSizes } from './CountryPicker.style';
 import { Country } from './CountryPicker.type';
 
-const CountryList: React.FC<DropDownProps> = (props) => (
+const CountryList: React.FC<DropDownProps> = ({ size, ...props }) => (
   <Element as="ul" {...props} />
 );
 
@@ -28,7 +28,7 @@ const CountrySelector: React.FC<any> = (props) => (
   <Input type="country" {...props} />
 );
 
-const CountryItem: React.FC<DropDownItemProps> = (props) => (
+const CountryItem: React.FC<DropDownItemProps> = ({ size, ...props }) => (
   <Element as="li" {...props} />
 );
 

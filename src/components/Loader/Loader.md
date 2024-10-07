@@ -17,7 +17,7 @@ import { Loader } from 'app-studio';
 ```tsx
 import { Horizontal } from '../Layout/Horizontal/Horizontal';
 
-<Horizontal wrap="nowrap">
+<Horizontal flexWrap="nowrap">
   {['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'].map((size) => (
     <Loader key={size} size={size} />
   ))}
