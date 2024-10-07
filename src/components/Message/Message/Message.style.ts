@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 
-import { Message, Shape, Size } from './Message.type';
+import { MessageType, Shape, Size } from './Message.type';
 
 export const ContainerShapes: Record<Shape, CSSProperties> = {
   sharp: { borderRadius: 0 },
@@ -15,7 +15,7 @@ export const HeaderIconSizes: Record<Size, number> = {
   xl: 28,
 };
 
-export const Themes: Record<Message, any> = {
+export const Themes: Record<MessageType, any> = {
   info: {
     container: {
       backgroundColor: 'color.blue.200',
