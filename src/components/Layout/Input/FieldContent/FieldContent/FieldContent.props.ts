@@ -5,7 +5,7 @@ import {
   TextFieldStyles,
   Variant,
 } from '../../../../Layout/configs/Input.type';
-import { Elevation } from 'src/utils/elevation';
+import { Elevation } from '../../../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
 
 export interface ContentProps extends Omit<ViewProps, 'size'> {

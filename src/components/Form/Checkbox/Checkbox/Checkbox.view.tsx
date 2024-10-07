@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography } from 'app-studio';
+
 import { Center } from '../../../Layout/Center/Center';
 import { Label } from '../../../Form/Label/Label';
 import { CheckSvg, IndeterminateSvg } from '../../../Svg';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Text } from 'src/components/Text/Text';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Text } from '../../Text/Text';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 export const OnToggleChangeDemo = () => {
   const [newItems, setNewItems] = useState<any>([]);

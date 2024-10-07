@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text } from 'src/components/Text/Text';
-import { Tabs } from 'src/components/Tabs/Tabs';
+import { Text } from '../../Text/Text';
+import { Tabs } from '../../Tabs/Tabs';
 
 export const StylesTabs = () => {
   const tabs = [

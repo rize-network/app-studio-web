@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-import { Elevation } from 'src/utils/elevation';
+import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow } from 'app-studio';
 
 import { SelectStyles, Shape, Size, Variant, Option } from './Select.type';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../../Button/Button';
 
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
 
 import { CountryPicker } from '../CountryPicker';
 

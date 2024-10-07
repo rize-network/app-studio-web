@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Elevation } from 'src/utils/elevation';
+import { Elevation } from '../../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
 
 import { DatePickerStyles, Shape, Size, Variant } from './DatePicker.type';
