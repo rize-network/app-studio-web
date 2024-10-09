@@ -1,7 +1,7 @@
 ### **Import**
 
 ```tsx static
-import { Password } from "app-studio";
+import { Password } from "@app-studio/web";
 ```
 
 ### **Default**

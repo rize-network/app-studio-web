@@ -1,7 +1,7 @@
 ### **Import**
 
 ```tsx static
-import { TextArea } from "app-studio";
+import { TextArea } from "@app-studio/web";
 ```
 
 ### **Default**

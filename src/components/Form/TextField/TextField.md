@@ -1,7 +1,7 @@
 ### Import
 
 ```tsx static
-import { TextField } from "app-studio";
+import { TextField } from "@app-studio/web";
 ```
 
 ### Default
