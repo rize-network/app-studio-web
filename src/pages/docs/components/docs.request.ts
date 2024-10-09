@@ -2,7 +2,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export type Sections = { title: string; items?: { name: string; link: string }[] }[];
+export type Sections = {
+  title: string;
+  items?: { name: string; link: string }[];
+}[];
 export const useDocsRequest = () => {
   const sections: Sections = [
     { title: 'overview' },
