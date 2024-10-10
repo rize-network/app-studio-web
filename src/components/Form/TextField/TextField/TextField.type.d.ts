@@ -7,14 +7,14 @@ export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Describes 'TextFieldStyles' as a type for custom styling of various parts of the TextField component.
 export type TextFieldStyles = {
-// Gives an optional 'box' style property to customize the container of the TextField using CSS properties.
+  // Gives an optional 'box' style property to customize the container of the TextField using CSS properties.
   box?: CSSProperties;
-// Allows for optional 'text' style customization that applies to the text within the TextField.
+  // Allows for optional 'text' style customization that applies to the text within the TextField.
   text?: CSSProperties;
-// Provides an optional 'label' style property to tailor the appearance of the TextField's label.
+  // Provides an optional 'label' style property to tailor the appearance of the TextField's label.
   label?: CSSProperties;
-// Defines an optional 'helperText' style property for styling the helper text associated with the TextField.
+  // Defines an optional 'helperText' style property for styling the helper text associated with the TextField.
   helperText?: CSSProperties;
-// Introduces an optional 'field' style property to modify the styling of the TextField itself.
+  // Introduces an optional 'field' style property to modify the styling of the TextField itself.
   field?: CSSProperties;
 };

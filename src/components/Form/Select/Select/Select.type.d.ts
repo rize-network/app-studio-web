@@ -16,8 +16,8 @@ export type SelectStyles = {
 };
 // Defines an 'Option' interface representing individual options within the Select component.
 export interface Option {
-// The 'label' property in 'Option' interface, which represents the display text for the option.
+  // The 'label' property in 'Option' interface, which represents the display text for the option.
   label: string;
-// The 'value' property in 'Option' interface, indicating the actual value the option represents.
+  // The 'value' property in 'Option' interface, indicating the actual value the option represents.
   value: string;
 }

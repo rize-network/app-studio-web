@@ -29,9 +29,9 @@ const Item: React.FC<ItemProps> = ({
   style,
   ...props
 }) => {
-// Handles the click event on an option by invoking the callback with the selected option's value.
+  // Handles the click event on an option by invoking the callback with the selected option's value.
   const handleOptionClick = (option: string) => callback(option);
-// Toggles the hover state on the item.
+  // Toggles the hover state on the item.
   const handleHover = () => setIsHovered(!isHovered);
   return (
     <Element
@@ -187,10 +187,10 @@ const DropDown: React.FC<DropDownProps> = ({
       backgroundColor="white"
       maxHeight="200px"
       style={{
-        scrollbarWidth: 'none' ,
-        msOverflowStyle: 'none' ,
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
         '&::-webkit-scrollbar': {
-          display: 'none' ,
+          display: 'none',
         },
       }}
       {...shadow}

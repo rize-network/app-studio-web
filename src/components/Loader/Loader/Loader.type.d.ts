@@ -1,24 +1,24 @@
 // Defines the Size type representing permissible sizes for the Loader component
 export type Size =
-// Extra small size option for the Loader component
+  // Extra small size option for the Loader component
   | 'xs'
-// Small size option for the Loader component
+  // Small size option for the Loader component
   | 'sm'
-// Medium size option for the Loader component
+  // Medium size option for the Loader component
   | 'md'
-// Large size option for the Loader component
+  // Large size option for the Loader component
   | 'lg'
-// Extra large size option for the Loader component
+  // Extra large size option for the Loader component
   | 'xl'
-// 2 times extra large size option for the Loader component
+  // 2 times extra large size option for the Loader component
   | '2xl'
-// 3 times extra large size option for the Loader component
+  // 3 times extra large size option for the Loader component
   | '3xl'
-// 4 times extra large size option for the Loader component
+  // 4 times extra large size option for the Loader component
   | '4xl'
-// 5 times extra large size option for the Loader component
+  // 5 times extra large size option for the Loader component
   | '5xl'
-// 6 times extra large size option for the Loader component
+  // 6 times extra large size option for the Loader component
   | '6xl';
 // Defines the LoaderType type for different Loader visual styles
 export type LoaderType = 'default' | 'dotted' | 'quarter';
