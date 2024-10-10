@@ -10,7 +10,6 @@ export const API_CONFIG = {
   defaultModel: 'gpt-4-1106-preview', // ou tout autre modèle que vous souhaitez utiliser par défaut
   // Ajoutez d'autres configurations relatives à l'API ici, si nécessaire
 };
-
 export const APPLICATION_SETTINGS = {
   // Paramètres généraux de l'application
   // Par exemple: mode de debug, configurations de journalisation, etc.
