@@ -17,7 +17,7 @@ export const DefaultDemo = () => <Badge content="default" />;
 ```
 
 ### **content**
-"The content displayed in the Badge component."
+The content displayed in the Badge component.
 
 ```tsx
 import React from 'react';
@@ -28,15 +28,15 @@ export const ContentDemo = () => <Badge content="content" />;
 ```
 
 ### **variant**
-"Determines the Badge's style variant."
+Determines the Badge's style variant.
 
 ```tsx
 import React from 'react';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 import { Badge } from '../Badge';
 import { Variant } from '../Badge/Badge.type';
-import { View } from 'src/components/Layout/View/View';
+import { View } from '../../Layout/View/View';
 export const VariantDemo = () => (
   <Vertical gap={15}>
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
@@ -54,7 +54,7 @@ export const VariantDemo = () => (
 ```
 
 ### **colorScheme**
-"Specifies a custom color scheme for the Badge."
+Specifies a custom color scheme for the Badge.
 
 ```tsx
 import React from 'react';
@@ -78,7 +78,7 @@ export const ColorSchemeDemo = () => (
 ```
 
 ### **position**
-"Defines the position of the Badge relative to its container."
+Defines the position of the Badge relative to its container.
 
 ```tsx
 import React from 'react';
@@ -108,15 +108,15 @@ export const PositionDemo = () => (
 ```
 
 ### **size**
-"Determines the size of the Badge."
+Determines the size of the Badge.
 
 ```tsx
 import React from 'react';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
 import { Badge } from '../Badge';
 import { Size } from '../Badge/Badge.type';
-import { View } from 'src/components/Layout/View/View';
+import { View } from '../../Layout/View/View';
 export const SizeDemo = () => (
   <Vertical gap={10}>
     {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
@@ -130,14 +130,14 @@ export const SizeDemo = () => (
 ```
 
 ### **shape**
-"Specifies the shape of the Badge."
+Specifies the shape of the Badge.
 
 ```tsx
 import React from 'react';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Badge } from '../Badge';
 import { Shape } from '../Badge/Badge.type';
-import { View } from 'src/components/Layout/View/View';
+import { View } from '../../Layout/View/View';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
     {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
@@ -151,7 +151,7 @@ export const ShapeDemo = () => (
 ```
 
 ### **styles**
-"Custom styling that overrides default styles."
+Custom styling that overrides default styles.
 
 ```tsx
 import React from 'react';

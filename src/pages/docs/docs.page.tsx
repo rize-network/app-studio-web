@@ -59,7 +59,7 @@ const DocsPage = () => {
   }, [componentName]);
 
   return (
-    <Horizontal height="100%" overflowY="auto" overflow={'hidden'}>
+    <Horizontal height="100%" overflowY="auto">
       <SideMenu docs={docs} flex={1} />
       <Vertical flex={5} padding="5px 10px">
         {!isLoading ? (
