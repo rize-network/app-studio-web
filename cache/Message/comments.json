@@ -1,0 +1,64 @@
+{
+  "action.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines the `ActionDemo` functional component that encapsulates the button interaction logic.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 7,
+          "comment": "Button onClick event handler that will trigger the `showMessage` function upon click.",
+          "codeSnippet": "onCl"
+        },
+        {
+          "line": 8,
+          "comment": "Invokes the `showMessage` function with specific parameters when the button is clicked.",
+          "codeSnippet": "show"
+        },
+        {
+          "line": 9,
+          "comment": "Specifies the message type as 'success'.",
+          "codeSnippet": "'suc"
+        },
+        {
+          "line": 10,
+          "comment": "Adds the primary content of the message, e.g., 'Scheduled: Catch up'.",
+          "codeSnippet": "'Sch"
+        },
+        {
+          "line": 11,
+          "comment": "Provides additional details of the message indicating the scheduled time.",
+          "codeSnippet": "'Fri"
+        },
+        {
+          "line": 14,
+          "comment": "Indicates that the button is of type 'isAuto', likely affecting its auto-trigger behavior or style.",
+          "codeSnippet": "isAu"
+        },
+        {
+          "line": 16,
+          "comment": "Sets the button's displayed text to 'Add Calendar'.",
+          "codeSnippet": "Add"
+        }
+      ]
+    }
+  ],
+  "default.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "This is a functional component named 'DefaultDemo' that renders a Button component from the '../../Button/Button' path.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 7,
+          "comment": "The Button's onClick event handler is set to display a toast message with predefined success type and content when clicked.",
+          "codeSnippet": "onCl"
+        }
+      ]
+    }
+  ]
+}

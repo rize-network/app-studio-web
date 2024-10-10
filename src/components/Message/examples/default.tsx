@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
-
 import { showMessage } from '../Message/Message.store';
-
+// This is a functional component named 'DefaultDemo' that renders a Button component from the '../../Button/Button' path.
 export const DefaultDemo = () => {
   return (
     <Button

@@ -1,7 +1,6 @@
 import { CSSProperties } from 'react';
-
 import { Size } from './Switch.type';
-
+// Defines a mapping of size types to their respective knob style properties, specifying the height and width for various predefined sizes.
 export const KnobSizes: Record<Size, CSSProperties> = {
   xs: { height: 6, width: 6 },
   sm: { height: 9, width: 9 },
@@ -14,7 +13,7 @@ export const KnobSizes: Record<Size, CSSProperties> = {
   '5xl': { height: 30, width: 30 },
   '6xl': { height: 33, width: 33 },
 };
-
+// Specifies the dimensions of the switch's slider for each predefined size by mapping them to the height and width CSS properties.
 export const SliderSizes: Record<Size, CSSProperties> = {
   xs: {
     height: 16,
@@ -57,7 +56,7 @@ export const SliderSizes: Record<Size, CSSProperties> = {
     width: 100,
   },
 };
-
+// Associates each size type with corresponding padding values for vertical and horizontal spacing, used to adjust the position of the elements within the switch.
 export const SliderPadding: Record<Size, Record<string, number>> = {
   xs: { paddingVertical: 0, paddingHorizontal: 2 },
   sm: { paddingVertical: 0, paddingHorizontal: 3 },

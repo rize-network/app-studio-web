@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build:web": "react-scripts build",
     "build": "tsdx build --format cjs,esm,umd --entry ./src/components/index.tsx --tsconfig tsconfig.build.json",
     "test": "react-scripts test",
     "test:unwatch": "react-scripts test --watchAll=false",
@@ -37,7 +38,7 @@
     "analyze": "size-limit --why",
     "prerelease": "npm run build",
     "release": "release-it",
-    "bot-doc": "ts-node src/bot/index.ts",
+    "bot-doc": "ts-node bot/index.ts",
     "create-docs": "ts-node scripts/create-docs.ts",
     "create-structure": "ts-node scripts/create-structure.ts",
     "create-indices": "ts-node scripts/create-indices.ts",
@@ -79,6 +80,11 @@
     ]
   },
   "dependencies": {
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/mdx": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@mdx-js/runtime": "^2.0.0",
+    "@mdxeditor/editor": "^3.14.0",
     "axios": "^1.6.7",
     "cheerio": "^1.0.0-rc.12",
     "contrast": "^1.0.1",
@@ -86,10 +92,12 @@
     "date-fns": "^2.30.0",
     "formik": "^2.2.9",
     "install": "^0.13.0",
+    "markdown-loader": "^8.0.0",
     "npm": "^10.5.0",
     "openai": "^4.28.4",
     "rc-upload": "^4.4.0",
     "react-helmet": "^6.1.0",
+    "react-live": "^4.1.7",
     "simple-git": "^3.22.0",
     "typescript": "^4.9.5",
     "zustand": "^4.3.8"
@@ -154,8 +162,8 @@
     "webpack-cli": "^5.1.3"
   },
   "peerDependencies": {
-    "react": ">= 17",
-    "app-studio": ">= 0.4"
+    "app-studio": ">= 0.4",
+    "react": ">= 17"
   },
   "size-limit": [
     {

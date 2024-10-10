@@ -1,9 +1,7 @@
 import React from 'react';
 import type { ViewProps } from 'app-studio';
 import { View } from 'app-studio';
-/**
- * Horizontal layout aligns all the elements in a container on the horizontal axis.
- */
+// Defines a functional component 'HorizontalComponent' utilizing 'ViewProps'. It leverages flexbox to create a horizontal view, which can be reversed based on a prop.
 const HorizontalComponent: React.FC<ViewProps> = (props) => (
   <View
     display="flex"
@@ -11,5 +9,5 @@ const HorizontalComponent: React.FC<ViewProps> = (props) => (
     {...props}
   />
 );
-
+// Exports the HorizontalComponent as 'Horizontal', making it available for use in other parts of the application.
 export const Horizontal = HorizontalComponent;

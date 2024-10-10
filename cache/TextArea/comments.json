@@ -1,0 +1,131 @@
+{
+  "TextArea.props.ts": [
+    null
+  ],
+  "TextArea.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Declaration of the useTextAreaState custom hook for managing the text area component state.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 7,
+          "comment": "Initializes the custom hook with properties from TextAreaProps and returns the text area state management functions and values.",
+          "codeSnippet": "}: T"
+        },
+        {
+          "line": 8,
+          "comment": "State hook for the 'hint' value, displaying either the label or placeholder as guidance within the text area.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 9,
+          "comment": "State hook for tracking whether the text area is hovered over.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 10,
+          "comment": "State hook to manage the current value of the text area, initialized with the default value or an empty string.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 11,
+          "comment": "State hook to determine if the text area is currently focused.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 12,
+          "comment": "Memoized callback that sets the hint based on focus state and value presence to ensure proper label or placeholder visibility.",
+          "codeSnippet": "useM"
+        },
+        {
+          "line": 25,
+          "comment": "Export of the useTextAreaState hook for external usage.",
+          "codeSnippet": "};"
+        }
+      ]
+    }
+  ],
+  "TextArea.type.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines the 'Variant' type for the TextArea component, indicating the visual style of the TextArea such as 'outline', 'default', or 'none'",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Defines the 'Shape' type for the TextArea component, indicating the border shape options like 'default', 'sharp', or 'rounded'",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 4,
+          "comment": "Defines the 'Size' type for the TextArea component, indicating the available size options including 'xs' (extra small) to 'xl' (extra large)",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 5,
+          "comment": "Begins declaring the 'TextAreaStyles' type to specify the custom styling options for different parts of the TextArea component",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 6,
+          "comment": "Defining optional custom CSSProperties for the 'box' part of the TextArea component, allowing for custom styles to be applied to the outer container",
+          "codeSnippet": "  bo"
+        },
+        {
+          "line": 7,
+          "comment": "Defining optional custom CSSProperties for the 'text' part of the TextArea component, allowing for custom styles to be applied to the text within",
+          "codeSnippet": "  te"
+        },
+        {
+          "line": 8,
+          "comment": "Defining optional custom CSSProperties for the 'label' part of the TextArea component, allowing for custom styles to be applied to the label element",
+          "codeSnippet": "  la"
+        },
+        {
+          "line": 9,
+          "comment": "Defining optional custom CSSProperties for the 'helperText' part of the TextArea component, allowing for custom styles to be applied to the helper text beneath the text area",
+          "codeSnippet": "  he"
+        },
+        {
+          "line": 10,
+          "comment": "Defining optional custom CSSProperties for the 'field' part of the TextArea component, allowing for custom styles to be applied to the text field itself",
+          "codeSnippet": "  fi"
+        }
+      ]
+    }
+  ],
+  "TextArea.view.tsx": [
+    null
+  ],
+  "TextArea.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines the TextAreaComponent as a functional component that accepts TextAreaProps for type safety and structure.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 6,
+          "comment": "Creates a state for the TextAreaComponent using custom hook useTextAreaState which initializes the state with props.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 7,
+          "comment": "Renders the TextAreaView component, passing along the state and any received props.",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 9,
+          "comment": "Exports the TextAreaComponent as TextArea for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

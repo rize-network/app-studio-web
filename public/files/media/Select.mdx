@@ -1,0 +1,113 @@
+# Select
+
+A customizable UI component for selecting from a list of options.
+
+### **Import**
+  ```tsx
+  import { Select } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Select } from '../Select';
+
+export const DefaultSelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    label="Select an item"
+  />
+);
+
+```
+
+### **error**
+Flag to indicate if the select has an error state
+
+```tsx
+import React from 'react';
+import { Select } from '../Select';
+
+export const ErrorSelect = () => (
+  <Select
+    id="error"
+    name="error"
+    error
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+  />
+);
+
+```
+
+### **helperText**
+Helper text that appears below the select box
+
+```tsx
+import React from 'react';
+
+import { Select } from '../Select';
+
+export const HelperTextSelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    helperText="select one item!"
+    error
+  />
+);
+
+```
+
+### **shadow**
+Determines the shadow property of the select component
+
+```tsx
+import React from 'react';
+import { Select } from '../../../Form/Select/Select';
+
+export const ShadowSelect = () => (
+  <Select
+    shadow={{
+      boxShadow:
+        'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
+    }}
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+  />
+);
+
+```
+
+### **isScrollable**
+Boolean to control whether the select options are scrollable
+
+```tsx
+import React from 'react';
+import { Select } from '../Select';
+
+export const IsScrollableDemo = () => {
+  const timeZones = [
+    { label: 'Item1', value: '1' },
+    { label: 'Item2', value: '2' },
+    { label: 'Item3', value: '3' },
+  ];
+
+  return <Select options={timeZones} />;
+};
+
+```
+

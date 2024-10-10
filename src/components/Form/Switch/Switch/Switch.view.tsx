@@ -2,12 +2,9 @@ import React from 'react';
 import { Input } from 'app-studio';
 import { Label } from '../../../Form/Label/Label';
 import { View } from '../../../Layout/View/View';
-
 import { SwitchViewProps } from './Switch.props';
 import { KnobSizes, SliderPadding, SliderSizes } from './Switch.style';
-
 const SwitchContent = (props: any) => <Input type="checkbox" {...props} />;
-
 const SwitchView: React.FC<SwitchViewProps> = ({
   id,
   name,
@@ -38,9 +35,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       if (onChange) onChange(event.target.checked);
     }
   };
-
   const handleHover = () => setIsHovered(!isHovered);
-
   const switchStyle = {
     container: {
       gap: 10,
@@ -104,5 +99,4 @@ const SwitchView: React.FC<SwitchViewProps> = ({
     </Label>
   );
 };
-
 export default SwitchView;

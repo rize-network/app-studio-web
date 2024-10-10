@@ -1,0 +1,110 @@
+# CountryPicker
+
+Enables users to select a country from a dropdown list with various styling options.
+
+### **Import**
+  ```tsx
+  import { CountryPicker } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+
+export const DefaultCountryPicker = () => <CountryPicker label="Country" />;
+
+```
+
+### **error**
+Optional error flag to indicate validation state
+
+```tsx
+import React from 'react';
+import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+
+export const ErrorCountryPicker = () => (
+  <CountryPicker id="error" label="Country" error />
+);
+
+```
+
+### **helperText**
+Optional helper text for guiding the user
+
+```tsx
+import React from 'react';
+
+import { CountryPicker } from '../CountryPicker';
+
+export const HelperTextCountryPicker = () => (
+  <CountryPicker helperText="CountryPicker one item!" error />
+);
+
+```
+
+### **shape**
+Optional shape of the CountryPicker for visual styles
+
+```tsx
+import React from 'react';
+import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+
+import { Vertical } from '../../../Layout/Vertical/Vertical';
+
+import { Shape } from '../CountryPicker/CountryPicker.type';
+
+export const ShapeCountryPicker = () => (
+  <Vertical gap={10}>
+    {['default', 'sharp', 'rounded', 'pillShaped'].map((shape) => (
+      <CountryPicker
+        key={shape}
+        label={shape}
+        shape={shape as Shape}
+        placeholder="Select a country..."
+      />
+    ))}
+  </Vertical>
+);
+
+```
+
+### **variant**
+Variant for different visual types of CountryPicker
+
+```tsx
+import React from 'react';
+import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+
+import { Vertical } from '../../../Layout/Vertical/Vertical';
+
+import { Variant } from '../CountryPicker/CountryPicker.type';
+
+export const VariantCountryPicker = () => (
+  <Vertical gap={10}>
+    {['outline', 'default', 'none'].map((variant) => (
+      <CountryPicker
+        key={variant}
+        variant={variant as Variant}
+        label={variant}
+        placeholder="Select a country..."
+      />
+    ))}
+  </Vertical>
+);
+
+```
+
+### **shadow**
+Shadow or Elevation styles for visual depth and perspective
+
+```tsx
+import React from 'react';
+import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+
+export const ShadowCountryPicker = () => (
+  <CountryPicker shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }} />
+);
+
+```
+

@@ -22,6 +22,18 @@ module.exports = {
       minRatio: 0.8,
     }),
   ],
+  module: {
+    rules: [
+      {
+        test: /\.(md|mdx)$/, // Regular expression to match .md and .mdx files
+        use: [
+          {
+            loader: '@mdx-js/loader', // MDX loader for handling MDX content
+          },
+        ],
+      },
+    ],
+  },
   optimization: {
     moduleIds: 'deterministic',
     runtimeChunk: 'single',

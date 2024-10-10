@@ -1,0 +1,1 @@
+{"componentDescription":"A container that arranges its children in a vertical stack.","isReversed":{"type":"boolean","typeValues":"true | false","description":"Determines if the vertical view should be displayed in reverse order.","defaultValue":"false"}}

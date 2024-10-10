@@ -193,7 +193,7 @@ async function ensureDocumentationForComponents(
   const componentsWithoutMD = adjustedComponents.filter((componentDir) => {
     const componentName = path.basename(componentDir);
 
-    const mdFilePath = `${componentDir}/${componentName}.md`;
+    const mdFilePath = `${componentDir}/${componentName}.mdx`;
     return !fs.existsSync(mdFilePath);
   });
 
@@ -219,7 +219,7 @@ async function getChangedComponentsSinceLastCommit(): Promise<string[]> {
     let componentSet = new Set<string>();
 
     allChanges.split('\n').forEach((file) => {
-      if (file.startsWith(componentsDir) && !file.endsWith('.md')) {
+      if (file.startsWith(componentsDir) && !file.endsWith('.mdx')) {
         const parts = file.split(path.sep);
         const componentsIndex = parts.indexOf('components');
         if (componentsIndex !== -1 && parts.length > componentsIndex + 1) {

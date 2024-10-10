@@ -1,0 +1,304 @@
+{
+  "TextField.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "The TextFieldProps interface extends InputProps and customizes the TextField component, omitting the 'size' prop from InputProps.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 6,
+          "comment": "Optional unique identifier for the TextField.",
+          "codeSnippet": "  id"
+        },
+        {
+          "line": 7,
+          "comment": "Optional property for error handling within the TextField.",
+          "codeSnippet": "  er"
+        },
+        {
+          "line": 8,
+          "comment": "Optional helper text that appears below the TextField.",
+          "codeSnippet": "  he"
+        },
+        {
+          "line": 9,
+          "comment": "Optional name attribute for the TextField, useful for form submission.",
+          "codeSnippet": "  na"
+        },
+        {
+          "line": 10,
+          "comment": "Optional label text for the TextField to indicate the field's purpose.",
+          "codeSnippet": "  la"
+        },
+        {
+          "line": 11,
+          "comment": "Optional property to specify the color scheme of the TextField.",
+          "codeSnippet": "  co"
+        },
+        {
+          "line": 12,
+          "comment": "Optional React node to be rendered on the left side of the TextField.",
+          "codeSnippet": "  le"
+        },
+        {
+          "line": 13,
+          "comment": "Optional React node to be rendered on the right side of the TextField.",
+          "codeSnippet": "  ri"
+        },
+        {
+          "line": 14,
+          "comment": "Optional placeholder text shown inside the TextField when empty.",
+          "codeSnippet": "  pl"
+        },
+        {
+          "line": 15,
+          "comment": "Optional flag to set the TextField as read-only.",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 16,
+          "comment": "Optional flag to indicate whether the TextField is disabled.",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 17,
+          "comment": "Optional flag that when true allows the TextField to be cleared.",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 18,
+          "comment": "Optional flag to autofocus the TextField when it mounts.",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 19,
+          "comment": "Optional callback function that is called when the TextField value changes.",
+          "codeSnippet": "  on"
+        },
+        {
+          "line": 20,
+          "comment": "Optional callback function that is called when the text in the TextField changes.",
+          "codeSnippet": "  on"
+        },
+        {
+          "line": 21,
+          "comment": "Optional callback function that is called when the TextField loses focus.",
+          "codeSnippet": "  on"
+        },
+        {
+          "line": 22,
+          "comment": "Optional callback function that is called when the TextField is clicked.",
+          "codeSnippet": "  on"
+        },
+        {
+          "line": 23,
+          "comment": "Optional callback function that is called when the TextField gains focus.",
+          "codeSnippet": "  on"
+        },
+        {
+          "line": 24,
+          "comment": "Optional Size enum to specify the size of the TextField.",
+          "codeSnippet": "  si"
+        },
+        {
+          "line": 25,
+          "comment": "Optional shadow property that could be of type Shadow, Elevation, or CSSProperties to give depth effect.",
+          "codeSnippet": "  sh"
+        },
+        {
+          "line": 26,
+          "comment": "Optional Shape enum to specify the shape of the TextField's corners.",
+          "codeSnippet": "  sh"
+        },
+        {
+          "line": 27,
+          "comment": "Optional custom styles to apply to the TextField component.",
+          "codeSnippet": "  st"
+        },
+        {
+          "line": 28,
+          "comment": "Optional controlled value of the TextField, driving its current state.",
+          "codeSnippet": "  va"
+        },
+        {
+          "line": 29,
+          "comment": "Optional Variant enum to specify the variant of the TextField component.",
+          "codeSnippet": "  va"
+        },
+        {
+          "line": 31,
+          "comment": "The TextFieldViewProps interface extends TextFieldProps and adds props specific to the view-layer customization of the component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 32,
+          "comment": "Optional property to give hints to the user about how to fill in the TextField.",
+          "codeSnippet": "  hi"
+        },
+        {
+          "line": 33,
+          "comment": "Optional function that allows changing the hint text.",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 34,
+          "comment": "Optional property indicating whether the TextField is currently focused.",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 35,
+          "comment": "Optional function to update the focused state of the TextField.",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 36,
+          "comment": "Optional property indicating whether the TextField is currently hovered by the mouse cursor.",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 37,
+          "comment": "Optional function to update the hovered state of the TextField.",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 38,
+          "comment": "Optional controlled value of the TextField, potentially used in a state management context.",
+          "codeSnippet": "  va"
+        },
+        {
+          "line": 39,
+          "comment": "Optional function to programmatically set the value of the TextField.",
+          "codeSnippet": "  se"
+        }
+      ]
+    }
+  ],
+  "TextField.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Define a custom hook `useTextFieldState` that creates and manages the state of a text field component based on its properties.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 8,
+          "comment": "Initialize `hint` state with either the label or placeholder text, using label as a priority if it exists.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 9,
+          "comment": "Set up a boolean state `isFocused` to track if the text field is focused.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 10,
+          "comment": "Introduce a boolean state `isHovered` for tracking mouse hover status over the text field.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 11,
+          "comment": "Manage the `value` state that holds the current value of the text field, initialized with defaultValue.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 12,
+          "comment": "Use `useMemo` hook to recompute hint text when any dependency changes, updating it based on focus state and presence of value.",
+          "codeSnippet": "useM"
+        },
+        {
+          "line": 13,
+          "comment": "Update the `hint` state depending on whether the text field is focused and if value is not present, falling back to placeholder or label.",
+          "codeSnippet": "setH"
+        },
+        {
+          "line": 14,
+          "comment": "Specify the dependencies for the `useMemo` hook - updating the `hint` text when value, isFocused, label, or placeholder changes.",
+          "codeSnippet": "}, ["
+        },
+        {
+          "line": 15,
+          "comment": "Return an object exposing the states and state setter functions for consumer components to use and manage the text field's UI and behavior.",
+          "codeSnippet": "retu"
+        }
+      ]
+    }
+  ],
+  "TextField.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines 'Variant' as a TypeScript type alias representing possible visual styles of the TextField component such as 'outline', 'default', or 'none'.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Establishes 'Shape' as a type for defining the border-radius of the TextField, allowing 'default', 'sharp', 'rounded', or 'pillShaped' styles.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 4,
+          "comment": "Specifies 'Size' as a type indicating the scale of the TextField, ranging from 'xs' for extra small to 'xl' for extra large.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 5,
+          "comment": "Describes 'TextFieldStyles' as a type for custom styling of various parts of the TextField component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 6,
+          "comment": "Gives an optional 'box' style property to customize the container of the TextField using CSS properties.",
+          "codeSnippet": "  bo"
+        },
+        {
+          "line": 7,
+          "comment": "Allows for optional 'text' style customization that applies to the text within the TextField.",
+          "codeSnippet": "  te"
+        },
+        {
+          "line": 8,
+          "comment": "Provides an optional 'label' style property to tailor the appearance of the TextField's label.",
+          "codeSnippet": "  la"
+        },
+        {
+          "line": 9,
+          "comment": "Defines an optional 'helperText' style property for styling the helper text associated with the TextField.",
+          "codeSnippet": "  he"
+        },
+        {
+          "line": 10,
+          "comment": "Introduces an optional 'field' style property to modify the styling of the TextField itself.",
+          "codeSnippet": "  fi"
+        }
+      ]
+    }
+  ],
+  "TextField.view.tsx": [
+    null
+  ],
+  "TextField.tsx": [
+    {
+      "comments": [
+        {
+          "line": 8,
+          "comment": "Initializes the 'textFieldStates' with state-management logic and relevant properties from 'useTextFieldState' hook, passing current 'props' as the argument",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 9,
+          "comment": "Renders the 'TextFieldView' component with the spread attributes from both 'textFieldStates' and 'props' to pass all necessary data",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 11,
+          "comment": "Exports 'TextFieldComponent' as 'TextField' for use in other parts of the application",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

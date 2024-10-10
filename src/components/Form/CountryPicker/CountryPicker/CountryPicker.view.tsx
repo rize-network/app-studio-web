@@ -9,9 +9,7 @@ import {
 } from '../../../Layout/Input';
 import { ArrowDownSvg } from '../../../Svg/ArrowDown';
 import { ArrowUpSvg } from '../../../Svg/ArrowUp';
-
 import countryList from '../countries.json';
-
 import {
   CountryPickerViewProps,
   DropDownItemProps,
@@ -19,19 +17,15 @@ import {
 } from './CountryPicker.props';
 import { IconSizes } from './CountryPicker.style';
 import { Country } from './CountryPicker.type';
-
 const CountryList: React.FC<DropDownProps> = ({ size, ...props }) => (
   <Element as="ul" {...props} />
 );
-
 const CountrySelector: React.FC<any> = (props) => (
   <Input type="country" {...props} />
 );
-
 const CountryItem: React.FC<DropDownItemProps> = ({ size, ...props }) => (
   <Element as="li" {...props} />
 );
-
 export const DropDownItem: React.FC<DropDownItemProps> = ({
   option,
   size = 'md',
@@ -39,7 +33,6 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
   styles = { text: {} },
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-
   const handleOptionClick = (event: any) => {
     if (event && event.stopPropagation) event.stopPropagation();
     callback(option);
@@ -63,7 +56,6 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
     </CountryItem>
   );
 };
-
 export const DropDown: React.FC<DropDownProps> = ({
   size,
   styles = { dropDown: {} },
@@ -101,7 +93,6 @@ export const DropDown: React.FC<DropDownProps> = ({
     </CountryList>
   );
 };
-
 const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   id,
   name,
@@ -141,16 +132,13 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
 }) => {
   const { getColor } = useTheme();
   const IconColor = getColor('color.blueGray.700');
-
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
-
   const handleCallback = (option: string) => {
     setHide(!hide);
     setValue(option);
     if (onChange) onChange(option);
   };
-
   const handleClick = () => {
     if (!isDisabled && !isReadOnly) {
       setHide(!hide);
@@ -165,18 +153,11 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     setNewOptions(filteredCountries);
     if (onChange) onChange(valueCountry);
   };
-
   const handleBlur = (event: any) => {
     onBlur(event);
     setIsFocused(false);
   };
-
-  // useEffect(() => {
-  //   if (onChange) onChange(value); // Call onChange when valueCountry changes
-  // }, [onChange, value]);
-
   const isWithLabel = !!(isFocused && label);
-
   const fieldStyles = {
     margin: 0,
     paddingVerical: 8,
@@ -191,7 +172,6 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     cursor: isDisabled ? 'not-allowed' : 'auto',
     ...styles['field'],
   };
-
   return (
     <FieldContainer
       helperText={helperText}
@@ -271,5 +251,4 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     </FieldContainer>
   );
 };
-
 export default CountryPickerView;

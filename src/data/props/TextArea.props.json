@@ -1,0 +1,180 @@
+{
+  "componentDescription": "A text input field for multi-line text editing with customizable features.",
+  "colorScheme": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Optional color scheme for the component.",
+    "defaultValue": "theme.primary"
+  },
+  "defaultValue": {
+    "type": "string",
+    "typeValues": [],
+    "description": "The default value of the text area when initially rendered.",
+    "defaultValue": ""
+  },
+  "error": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the text area has an error state.",
+    "defaultValue": ""
+  },
+  "isEditable": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Determines if the text area is editable.",
+    "defaultValue": "false"
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Helper text that appears below the text area.",
+    "defaultValue": ""
+  },
+  "id": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Unique identifier for the text area.",
+    "defaultValue": ""
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "If true, the text area is read-only.",
+    "defaultValue": "false"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "If true, the text area is disabled and cannot be interacted with.",
+    "defaultValue": "false"
+  },
+  "isAutoFocus": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "If true, the text area will automatically focus when the component is mounted.",
+    "defaultValue": "false"
+  },
+  "isMultiline": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Determines if the text area allows for multiple lines of input.",
+    "defaultValue": "false"
+  },
+  "label": {
+    "type": "string",
+    "typeValues": [],
+    "description": "The label for the text area.",
+    "defaultValue": ""
+  },
+  "maxRows": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Maximum number of rows the text area can expand to.",
+    "defaultValue": "3"
+  },
+  "maxCols": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Maximum number of columns the text area can display.",
+    "defaultValue": "30"
+  },
+  "name": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Name attribute of the text area element.",
+    "defaultValue": ""
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Placeholder text for the text area when it is empty.",
+    "defaultValue": ""
+  },
+  "onChange": {
+    "type": "function",
+    "typeValues": [
+      "(value: any) => void"
+    ],
+    "description": "Callback function triggered when the value of the text area changes.",
+    "defaultValue": ""
+  },
+  "onChangeText": {
+    "type": "function",
+    "typeValues": [
+      "(text: string) => void"
+    ],
+    "description": "Callback function triggered when the text within the text area changes.",
+    "defaultValue": ""
+  },
+  "onBlur": {
+    "type": "function",
+    "typeValues": [
+      "(value: any) => void"
+    ],
+    "description": "Callback function triggered when the text area loses focus.",
+    "defaultValue": ""
+  },
+  "onFocus": {
+    "type": "function",
+    "typeValues": [
+      "() => void"
+    ],
+    "description": "Callback function triggered when the text area gains focus.",
+    "defaultValue": "() => {}"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Size of the text area, typically affecting its height.",
+    "defaultValue": "sm"
+  },
+  "shadow": {
+    "type": [
+      "Shadow",
+      "Elevation",
+      "CSSProperties"
+    ],
+    "typeValues": [],
+    "description": "Shadow or elevation applied to the text area, or custom CSS properties for the shadow.",
+    "defaultValue": ""
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "default",
+      "rounded",
+      "square"
+    ],
+    "description": "Shape of the text area, affecting the border-radius.",
+    "defaultValue": "default"
+  },
+  "styles": {
+    "type": "TextAreaStyles",
+    "typeValues": [],
+    "description": "Custom styles for the text area component.",
+    "defaultValue": "{ box: {}, text: {}, label: {}, helperText: {}, field: {} }"
+  },
+  "value": {
+    "type": [
+      "string",
+      "number"
+    ],
+    "typeValues": [],
+    "description": "The value of the text area.",
+    "defaultValue": ""
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "filled",
+      "outlined"
+    ],
+    "description": "Variant of the text area, typically affecting the visual style.",
+    "defaultValue": "default"
+  }
+}

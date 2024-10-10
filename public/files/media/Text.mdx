@@ -1,0 +1,163 @@
+### **Import**
+
+```tsx
+import { Text } from "@app-studio/web";
+```
+
+### **Default**
+
+```tsx
+<Text>Some text here</Text>
+```
+
+### **Sizes**
+
+“**_size_**” changes the text-size. It has a type "Sizes" with default value “md”.
+
+```tsx
+import { Vertical } from "../Layout/Vertical/Vertical";
+
+<Vertical gap={5} alignItems="center">
+  {["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl"].map(
+    (size, index) => (
+      <Text key={index} size={size}>
+        {size}
+      </Text>
+    )
+  )}
+</Vertical>;
+```
+
+### **Headings**
+
+“**_heading_**” renders a specific heading html tag. “h1” indicates the most important heading and “h6” the least important heading.
+
+```tsx
+import { Vertical } from "../Layout/Vertical/Vertical";
+<Vertical gap={2}>
+  <Text heading="h1">Heading 1</Text>
+  <Text heading="h2">Heading 2</Text>
+  <Text heading="h3">Heading 3</Text>
+  <Text heading="h4">Heading 4</Text>
+  <Text heading="h5">Heading 5</Text>
+  <Text heading="h6">Heading 6</Text>
+</Vertical>;
+```
+
+### **Strike**
+
+“**_isStriked_**” marks up a text to indicate that it is no longer valid.
+
+```tsx
+<Text color="theme.secondary" isStriked>
+  Some text here
+</Text>
+```
+
+### **Subscript**
+
+“**_isSub_**” makes text appears slightly below the baseline of the surrounding text.
+
+```tsx
+<Text>
+  H<Text isSub>2</Text>0
+</Text>
+```
+
+### **Superscript**
+
+“isSup” makes text appears slightly above the surrounding text.
+
+```tsx
+<Text>
+  H<Text isSup>2</Text>0
+</Text>
+```
+
+### **Weights**
+
+“**_weight_**” changes the font weight of the text. It have a default value of “medium”.
+
+```tsx
+import { Vertical } from "../Layout/Vertical/Vertical";
+
+<Vertical gap={5} alignItems="center">
+  {[
+    "hairline",
+    "thin",
+    "light",
+    "normal",
+    "medium",
+    "semiBold",
+    "bold",
+    "extraBold",
+    "black",
+  ].map((weight, index) => (
+    <Text key={index} weight={weight}>
+      {weight}
+    </Text>
+  ))}
+</Vertical>;
+```
+
+### **Truncate**
+
+“**_isTruncated_**” removes a part of the text and add an ellipsis to the end.
+
+```tsx
+import { Center } from "../Layout/Center/Center";
+
+<Center>
+  <Text maxLines={3} width="200px" isTruncated>
+    Pellentesque habitant morbi tristique senectus et netus et malesuada fames
+    ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget,
+    tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
+    ultricies mi vitae est.
+  </Text>
+</Center>;
+```
+
+### **Italic**
+
+“**_isItalic_**” styles the text in italic.
+
+```tsx
+<Text isItalic>Some text here</Text>
+```
+
+### **Underline**
+
+“**_isUnderlined_**” underlines the text.
+
+```tsx
+<Text isUnderlined>Some text here</Text>
+```
+
+## **Types**
+
+```tsx
+export type Sizes =
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl"
+  | "2xl"
+  | "3xl"
+  | "4xl"
+  | "5xl"
+  | "6xl";
+```
+
+```tsx
+type TextWeights =
+  | "hairline"
+  | "thin"
+  | "light"
+  | "normal"
+  | "medium"
+  | "semibold"
+  | "bold"
+  | "extrabold"
+  | "black";
+```

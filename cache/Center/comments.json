@@ -1,0 +1,55 @@
+{
+  "Center.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines the type for Center component props, extending from ViewProps to inherit properties of a generic view component.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Center.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines a React Functional Component named CenterView which centers its children both horizontally and vertically using flexbox.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 5,
+          "comment": "Renders a 'View' component with display flex and center alignment applied on both axes, passing all received props.",
+          "codeSnippet": "  <Vi"
+        },
+        {
+          "line": 7,
+          "comment": "Exports the CenterView component for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Center.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines a functional component named CenterComponent utilizing React's functional component structure, which expects props of the CenterProps type.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 5,
+          "comment": "Renders the CenterView component, passing down all the props received by the CenterComponent.",
+          "codeSnippet": "  <Ce"
+        },
+        {
+          "line": 7,
+          "comment": "Exports CenterComponent as Center, making it available for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}
