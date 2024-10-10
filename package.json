@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build:web": "react-scripts build",
     "build": "tsdx build --format cjs,esm,umd --entry ./src/components/index.tsx --tsconfig tsconfig.build.json",
     "test": "react-scripts test",
     "test:unwatch": "react-scripts test --watchAll=false",
@@ -37,7 +38,7 @@
     "analyze": "size-limit --why",
     "prerelease": "npm run build",
     "release": "release-it",
-    "bot-doc": "ts-node src/bot/index.ts",
+    "bot-doc": "ts-node bot/index.ts",
     "create-docs": "ts-node scripts/create-docs.ts",
     "create-structure": "ts-node scripts/create-structure.ts",
     "create-indices": "ts-node scripts/create-indices.ts",
@@ -81,6 +82,7 @@
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
+    "@mdxeditor/editor": "^3.14.0",
     "axios": "^1.6.7",
     "cheerio": "^1.0.0-rc.12",
     "contrast": "^1.0.1",

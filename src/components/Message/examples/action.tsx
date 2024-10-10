@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
-
 import { showMessage } from '../Message/Message.store';
-
 export const ActionDemo = () => {
   return (
     <Button

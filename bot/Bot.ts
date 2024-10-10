@@ -193,7 +193,7 @@ export class Bot {
     markdown += `${componentProps.componentDescription}\n\n`;
 
     markdown += `### **Import**
-  \`\`\`tsx static
+  \`\`\`tsx
   import { ${componentName} } from '@app-studio/web';
   \`\`\`\n\n`;
 
@@ -225,7 +225,7 @@ export class Bot {
         examplesFound = true;
         const exampleCode = await this.fileHandler.readFile(exampleFilePath);
         markdown += `### **${propName}**\n`;
-        markdown += `"${componentProps[propName].description}"\n\n`;
+        markdown += `${componentProps[propName].description}\n\n`;
         markdown += '```tsx\n';
         markdown += exampleCode;
         markdown += '\n```\n\n';
@@ -238,7 +238,7 @@ export class Bot {
 
     // Write markdown content to .md file
     await this.fileHandler.writeWithoutCheck(
-      `${componentFolder}/${componentName}.mdx`,
+      `public/files/media/${componentName}.mdx`,
       markdown
     );
 

@@ -1,6 +1,6 @@
 ### **Import**
 
-```jsx static
+```jsx
 import { CountryPicker } from "@app-studio/web";
 ```
 
@@ -116,8 +116,8 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 ```jsx
 <CountryPicker
   styles={{
-    box: { 
-      borderRadius: 10, 
+    box: {
+      borderRadius: 10,
       borderColor: 'theme.primary',
       borderStyle: 'solid',
       borderWidth: 1
@@ -130,7 +130,7 @@ import { Vertical } from "../../Layout/Vertical/Vertical";
 />
 ```
 
-```jsx static
+```jsx
 const Shapes: Record<Shape, number | string> = {
   default: "6px 6px 0 0",
   sharp: 0,
@@ -141,11 +141,11 @@ const Shapes: Record<Shape, number | string> = {
 
 ## Types
 
-```tsx static
+```tsx
 type Size = "xs" | "sm" | "md" | "lg" | "xl";
 ```
 
-```jsx static
+```jsx
 type CountryPickerStyles = {
   text?: CSSProperties,
   icon?: CSSProperties,
@@ -156,11 +156,11 @@ type CountryPickerStyles = {
 };
 ```
 
-```jsx static
+```jsx
 type Shape = "default" | "sharp" | "rounded" | "pillShaped";
 ```
 
-```jsx static
+```jsx
 type Country = {
   name: string,
   dial_code: string,
@@ -169,11 +169,11 @@ type Country = {
 };
 ```
 
-```js static
+```js
 type Variant = "default" | "outline" | "none";
 ```
 
-```jsx static
+```jsx
 type Styles = {
   box?: CSSProperties,
   text?: CSSProperties,
@@ -185,7 +185,7 @@ type Styles = {
 
 ## Default Values
 
-```jsx static
+```jsx
 const LabelSizes: Record<Size, number> = {
   xs: 8,
   sm: 10,
@@ -195,7 +195,7 @@ const LabelSizes: Record<Size, number> = {
 };
 ```
 
-```jsx static
+```jsx
 const IconSizes: Record<Size, string> = {
   xs: "8px",
   sm: "10px",

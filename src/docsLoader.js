@@ -1,7 +1,8 @@
 export async function loadDocs() {
   try {
     // Use webpack's require.context to get all .md and .mdx files
-    const context = require.context('./components', true, /\.mdx?$/);
+    const context = require.context('../public', true, /\.mdx?$/);
+    console.log('Processing key:', context);
 
     const docsPromises = context.keys().map(async (key) => {
       // console.log('Processing key:', key);
@@ -14,18 +15,17 @@ export async function loadDocs() {
           ?.replace(/\.[^/.]+$/, '') || '';
       const componentName =
         fileName.charAt(0).toUpperCase() + fileName.slice(1);
+
       // console.log('Component Name:', componentName);
 
+      // console.log({ import: `${key.slice(1)}` });
       // Dynamically import the documentation component
-      const module = await import(`./components${key.slice(1)}`);
-      console.log({ import: `./components${key.slice(1)}` });
-      console.log({ module });
-      const DocComponent = module.default;
-      console.log('Doc Component', DocComponent);
+      // const module = await import(`${key.slice(1)}`);
+
       return {
-        path: key,
+        path: key.slice(1),
         componentName,
-        DocComponent,
+        // text,
       };
     });
 

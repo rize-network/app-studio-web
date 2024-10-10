@@ -28,13 +28,6 @@ module.exports = {
         test: /\.(md|mdx)$/, // Regular expression to match .md and .mdx files
         use: [
           {
-            loader: 'babel-loader',
-            // This is required if you're using modern JavaScript features in MDX files
-            options: {
-              presets: ['@babel/preset-react'],
-            },
-          },
-          {
             loader: '@mdx-js/loader', // MDX loader for handling MDX content
           },
         ],

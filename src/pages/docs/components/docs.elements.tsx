@@ -2,17 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Vertical, Text } from '../../../components';
 
-export const SideMenu = ({ docs }: { docs: any }) => {
+export const SideMenu = ({ docs, ...props }: any) => {
   return (
     <Vertical
       gap={20}
       alignItems="center"
       color="black"
-      height="100vh"
       backgroundColor="#f9f9f9"
-      padding="30px 0px 100px"
-      overflowY="auto"
+      paddingVertical={50}
       width={250}
+      {...props}
     >
       {docs.map((doc: any) => (
         <Link
