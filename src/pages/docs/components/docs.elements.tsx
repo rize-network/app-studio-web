@@ -25,3 +25,4 @@ export const SideMenu = ({ docs, ...props }: any) => {
     </Vertical>
   );
 };
+export const Text1 = () => <>Hello</>;

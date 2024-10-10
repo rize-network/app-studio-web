@@ -1,0 +1,100 @@
+{
+  "Horizontal.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Definition of the HorizontalProps interface which extends the base ViewProps to include Horizontal specific properties.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Optional boolean property to determine if the child components should be rendered in reverse order.",
+          "codeSnippet": "isRe"
+        }
+      ]
+    }
+  ],
+  "Horizontal.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines the HorizontalView functional component using destructuring to extract default props from HorizontalProps.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 5,
+          "comment": "Sets the default alignment of items along the main axis to 'flex-start'.",
+          "codeSnippet": "  ju"
+        },
+        {
+          "line": 6,
+          "comment": "Determines if the flex items are displayed in reverse order by default as false.",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 7,
+          "comment": "Spreads the remaining props to be passed to the View component.",
+          "codeSnippet": "  .."
+        },
+        {
+          "line": 9,
+          "comment": "Starts the JSX block for the View component, which renders as part of the HorizontalView.",
+          "codeSnippet": "  <V"
+        },
+        {
+          "line": 10,
+          "comment": "Configures the View component to have a 'flex' display to enable flexbox layout.",
+          "codeSnippet": "    d"
+        },
+        {
+          "line": 11,
+          "comment": "Sets the flexDirection based on the 'isReversed' prop to display flex items in normal or reverse order.",
+          "codeSnippet": "    f"
+        },
+        {
+          "line": 12,
+          "comment": "Applies the justifyContent prop to control the alignment of flex items on the main axis.",
+          "codeSnippet": "    j"
+        },
+        {
+          "line": 13,
+          "comment": "Passes all other props to the View component, allowing for component customization.",
+          "codeSnippet": "    {"
+        },
+        {
+          "line": 16,
+          "comment": "Exports the HorizontalView component for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Horizontal.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines a functional component 'HorizontalComponent' utilizing 'ViewProps'. It leverages flexbox to create a horizontal view, which can be reversed based on a prop.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 7,
+          "comment": "Determines the direction of items within the flex container, allowing for default 'row' or reversed 'row-reverse' if 'isReversed' prop is true.",
+          "codeSnippet": "    f"
+        },
+        {
+          "line": 8,
+          "comment": "Spreads the remaining 'props' to the 'View' component to pass down any additional properties.",
+          "codeSnippet": "    {"
+        },
+        {
+          "line": 11,
+          "comment": "Exports the HorizontalComponent as 'Horizontal', making it available for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

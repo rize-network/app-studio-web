@@ -1,0 +1,277 @@
+{
+  "Loader.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines the LoaderProps interface, extending from ViewProps excluding 'size', to configure the Loader component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 5,
+          "comment": "Optional children prop to pass React nodes inside the Loader component.",
+          "codeSnippet": "chil"
+        },
+        {
+          "line": 6,
+          "comment": "Optional prop to define the color of the loader element.",
+          "codeSnippet": "load"
+        },
+        {
+          "line": 7,
+          "comment": "Defines the type of the loader based on the LoaderType enum.",
+          "codeSnippet": "type"
+        },
+        {
+          "line": 8,
+          "comment": "Optional prop for setting the color of the text displayed with the loader.",
+          "codeSnippet": "text"
+        },
+        {
+          "line": 9,
+          "comment": "Determines the position of the text relative to the loader from the TextPosition enum.",
+          "codeSnippet": "text"
+        },
+        {
+          "line": 10,
+          "comment": "Sets the size of the loader, which can be a specific pixel number or a standard Size enum.",
+          "codeSnippet": "size"
+        },
+        {
+          "line": 11,
+          "comment": "Controls the speed of the loader's animation, using the values from the Speed enum.",
+          "codeSnippet": "spee"
+        },
+        {
+          "line": 13,
+          "comment": "Defines properties specific to the default spinner variant of the loader.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 16,
+          "comment": "Overrides the color for the default spinner loader variant.",
+          "codeSnippet": "colo"
+        },
+        {
+          "line": 18,
+          "comment": "Defines properties for the dotted variant of the loader component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 21,
+          "comment": "Overrides the color for the dotted loader variant.",
+          "codeSnippet": "colo"
+        },
+        {
+          "line": 23,
+          "comment": "Defines properties for the quarter variant of the loader component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 26,
+          "comment": "Overrides the color for the quarter loader variant.",
+          "codeSnippet": "colo"
+        }
+      ]
+    }
+  ],
+  "Loader.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a mapping of spinning speed labels to their respective duration in seconds for the Loader component animations.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 7,
+          "comment": "Sets up a scale of sizes, mapping size labels to numerical values to be used for Loader component dimensions.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 19,
+          "comment": "Specifies a mapping of spinning speed labels to numerical millisecond values, determining the speed of the Loader component's animation cycles.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Loader.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines the Size type representing permissible sizes for the Loader component",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 2,
+          "comment": "Extra small size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 3,
+          "comment": "Small size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 4,
+          "comment": "Medium size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 5,
+          "comment": "Large size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 6,
+          "comment": "Extra large size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 7,
+          "comment": "2 times extra large size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 8,
+          "comment": "3 times extra large size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 9,
+          "comment": "4 times extra large size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 10,
+          "comment": "5 times extra large size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 11,
+          "comment": "6 times extra large size option for the Loader component",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 12,
+          "comment": "Defines the LoaderType type for different Loader visual styles",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 13,
+          "comment": "Defines the TextPosition type for text positioning relative to the Loader",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 14,
+          "comment": "Defines the Speed type representing different speed options for the Loader's animation",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Loader.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 12,
+          "comment": "Defines a functional component for the default spinner animation, with customizable properties for size, speed, and color.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 21,
+          "comment": "Initializes the rotation angle state for animating the spinner.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 22,
+          "comment": "Sets up an effect that updates the spinner's rotation angle at a set interval determined by the speed property.",
+          "codeSnippet": "useE"
+        },
+        {
+          "line": 26,
+          "comment": "Cleans up by clearing the interval when the component unmounts or when the speed changes.",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 28,
+          "comment": "Renders an SVG simulating a rotating spinner using the angle state for rotation.",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 54,
+          "comment": "Defines a functional component for a dotted spinner animation with customizable size, speed, and color properties.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 63,
+          "comment": "Initializes the rotation angle state used for animating the dotted spinner.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 64,
+          "comment": "Sets up an effect to periodically update the rotation angle of the dotted spinner based on the speed property.",
+          "codeSnippet": "useE"
+        },
+        {
+          "line": 85,
+          "comment": "Defines a functional component for a quarter spinner animation, where part of the circle is dashed, with customizable size, speed, and color.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 94,
+          "comment": "Initializes rotation angle state for the quarter spinner animation.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 95,
+          "comment": "Sets up an effect for updating the rotation angle at intervals based on the speed, rotating the quarter circle.",
+          "codeSnippet": "useE"
+        },
+        {
+          "line": 122,
+          "comment": "The LoaderView functional component handles rendering of the loader based on type, speed, and color, and optionally includes text content.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 132,
+          "comment": "Prepares the style object to pass down to the specific loader variant chosen.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 133,
+          "comment": "Maps loader type strings to their respective JSX elements (spinner variations).",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 138,
+          "comment": "Renders the loader and optional text in the specified position around it using a flexible Center component.",
+          "codeSnippet": "retu"
+        }
+      ]
+    }
+  ],
+  "Loader.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines a LoaderComponent as a functional component with props defined by LoaderProps and returns the LoaderView component, passing along any received props.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 5,
+          "comment": "Renders the LoaderView component by spreading the received props, which allows for a clean pass-through of properties.",
+          "codeSnippet": "  <Lo"
+        },
+        {
+          "line": 7,
+          "comment": "Exports the LoaderComponent as Loader, making it available for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

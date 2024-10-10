@@ -1,0 +1,90 @@
+{
+  "Vertical.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Declaration of the VerticalProps interface which extends the ViewProps from 'app-studio', indicating that it inherits all the properties of a view.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Optional boolean property 'isReversed' to determine if the vertical view should be displayed in reverse order.",
+          "codeSnippet": "  isR"
+        }
+      ]
+    }
+  ],
+  "Vertical.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines the functional component VerticalView with props specified by VerticalProps",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 5,
+          "comment": "Sets a default alignment for content within the vertical container to 'flex-start'",
+          "codeSnippet": "  ju"
+        },
+        {
+          "line": 6,
+          "comment": "Determines the direction in which the vertical elements are stacked, default not reversed",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 9,
+          "comment": "Start of the JSX return block where the View component is customized to act as a vertical container",
+          "codeSnippet": "  <V"
+        },
+        {
+          "line": 10,
+          "comment": "Sets the display style of the container to 'flex' to enable flexbox properties",
+          "codeSnippet": "    d"
+        },
+        {
+          "line": 11,
+          "comment": "Applies the justifyContent value to align child components within the vertical container",
+          "codeSnippet": "    j"
+        },
+        {
+          "line": 12,
+          "comment": "Uses the isReversed prop to set the flex direction to 'column-reverse' if true, otherwise to 'column'",
+          "codeSnippet": "    f"
+        },
+        {
+          "line": 13,
+          "comment": "Spreads the rest of the props onto the View component to handle additional properties passed",
+          "codeSnippet": "    {"
+        },
+        {
+          "line": 16,
+          "comment": "Exports the VerticalView component for use in other parts of the application",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Vertical.tsx": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines the VerticalComponent as a functional component with VerticalProps as its props signature.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 5,
+          "comment": "Renders the VerticalView component, passing all of the received props through to it.",
+          "codeSnippet": "<Ver"
+        },
+        {
+          "line": 7,
+          "comment": "Exports the VerticalComponent as Vertical for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

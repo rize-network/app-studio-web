@@ -1,0 +1,358 @@
+{
+  "Select.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines the interface for Select component properties, extending from InputProps but omitting 'size'",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 6,
+          "comment": "Optional string identifier for the select element",
+          "codeSnippet": "  id"
+        },
+        {
+          "line": 7,
+          "comment": "Flag to indicate if the select has an error state",
+          "codeSnippet": "  er"
+        },
+        {
+          "line": 8,
+          "comment": "Name attribute for the select element, useful for form submission",
+          "codeSnippet": "  na"
+        },
+        {
+          "line": 9,
+          "comment": "Label text associated with the select element",
+          "codeSnippet": "  la"
+        },
+        {
+          "line": 10,
+          "comment": "Defines the color scheme for the select component",
+          "codeSnippet": "  co"
+        },
+        {
+          "line": 11,
+          "comment": "Helper text that appears below the select box",
+          "codeSnippet": "  he"
+        },
+        {
+          "line": 12,
+          "comment": "Placeholder text shown when the select is empty",
+          "codeSnippet": "  pl"
+        },
+        {
+          "line": 13,
+          "comment": "Array of options that the user can choose from",
+          "codeSnippet": "  op"
+        },
+        {
+          "line": 14,
+          "comment": "Boolean to allow multi-selection",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 15,
+          "comment": "Boolean to set the select as read-only, preventing user modification",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 16,
+          "comment": "Boolean to disable the select element",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 17,
+          "comment": "Function that handles the change event when the selected option(s) change",
+          "codeSnippet": "  on"
+        },
+        {
+          "line": 18,
+          "comment": "Determines the overall shape of the select box, e.g., rounded or sharp edges",
+          "codeSnippet": "  sh"
+        },
+        {
+          "line": 19,
+          "comment": "Defines the styling variant for the select component",
+          "codeSnippet": "  va"
+        },
+        {
+          "line": 20,
+          "comment": "Custom styles that can be applied to the select component",
+          "codeSnippet": "  st"
+        },
+        {
+          "line": 21,
+          "comment": "Defines the size of the component",
+          "codeSnippet": "  si"
+        },
+        {
+          "line": 22,
+          "comment": "Determines the shadow property of the select component",
+          "codeSnippet": "  sh"
+        },
+        {
+          "line": 23,
+          "comment": "Boolean to control whether the select options are scrollable",
+          "codeSnippet": "  is"
+        }
+      ]
+    }
+  ],
+  "Select.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Initializes the custom hook 'useSelectState' for managing the state of the Select component",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 8,
+          "comment": "Determines the default value based on the 'placeholder' and 'isMulti' props, setting to an empty array for multi-select or an empty string/single default option",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 9,
+          "comment": "State hook for managing visibility of the Select dropdown, initially set to hidden",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 10,
+          "comment": "State hook for tracking mouse hover status over the Select component",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 11,
+          "comment": "State hook for tracking focus status of the Select input field",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 12,
+          "comment": "State hook for managing the value(s) selected by the user, initialized with the default value",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 13,
+          "comment": "State hook for keeping track of the currently highlighted index in the options list",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 14,
+          "comment": "Returns an object containing all stateful values and their associated setters to manage the Select component's state",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 26,
+          "comment": "This custom hook encapsulates the local state logic for the Select component",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 27,
+          "comment": "Initializes another custom hook 'useItemState' for managing the hover state of each Select item",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 28,
+          "comment": "State hook for tracking mouse hover status over individual Select item options",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 29,
+          "comment": "Returns an object with 'isHovered' state and its associated setter from the 'useItemState' hook, for controlling individual Select item hover state",
+          "codeSnippet": "retu"
+        }
+      ]
+    }
+  ],
+  "Select.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines a mapping of 'Size' types to their corresponding CSSProperties. This allows different size configurations to be provided for the Select component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 10,
+          "comment": "Specifies the pixel sizes of icons associated with the Select component based on the predefined 'Size' types allowing for consistent icon scaling.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Select.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a 'Size' type with predefined size options for the Select component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 2,
+          "comment": "Declares a 'Shape' type with predefined shape options for the corners of the Select component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Specifies a 'Variant' type representing the visual style variations of the Select component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 4,
+          "comment": "Initiates a 'SelectStyles' type outlining style properties applicable to the Select component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 13,
+          "comment": "Defines an 'Option' interface representing individual options within the Select component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 14,
+          "comment": "The 'label' property in 'Option' interface, which represents the display text for the option.",
+          "codeSnippet": " labe"
+        },
+        {
+          "line": 15,
+          "comment": "The 'value' property in 'Option' interface, indicating the actual value the option represents.",
+          "codeSnippet": " valu"
+        }
+      ]
+    }
+  ],
+  "Select.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 22,
+          "comment": "Defines a component to render individual selection items within a list.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 31,
+          "comment": "Handles the click event on an option by invoking the callback with the selected option's value.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 32,
+          "comment": "Toggles the hover state on the item.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 52,
+          "comment": "Component rendering the visual representation of the selected value(s).",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 75,
+          "comment": "Find the option object that matches the provided value.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 78,
+          "comment": "Conditionally displays the placeholder or selected value(s).",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 101,
+          "comment": "Renders a hidden native select element to be managed for form submissions.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 112,
+          "comment": "Handles changes in the native select element, propagating it up if there's a provided onChange handler.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 141,
+          "comment": "Component representing the dropdown part of the select.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 149,
+          "comment": "Uses the 'useItemState' hook to manage the state of items within the dropdown.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 150,
+          "comment": "Wrapper function for the callback to be called when selecting an option from the drop-down.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 213,
+          "comment": "Component used to render multi-selection tags with the ability to remove them.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 219,
+          "comment": "Handles the removal of a selected option in the multi-select.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 241,
+          "comment": "The main view for the Select component, orchestrating sub-components and state.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 278,
+          "comment": "Determines whether the label should be displayed based on focus state.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 279,
+          "comment": "Toggles the hover state for the Select component.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 280,
+          "comment": "Sets focus state to true, used in focus-related styling.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 283,
+          "comment": "Handles clicks on the Select box, toggling its visibility and focus states.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 287,
+          "comment": "Memoized callback function updating the value state based on selection handling. Refreshes based on 'hide', 'isMulti', and 'value' states.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 298,
+          "comment": "Removes a selected option from a multi-select's value array.",
+          "codeSnippet": "cons"
+        }
+      ]
+    }
+  ],
+  "Select.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines a functional component named 'SelectComponent', which is expected to receive 'SelectProps' as properties.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 6,
+          "comment": "Invokes the 'useSelectState' hook with props to obtain stateful logic for the Select component.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 7,
+          "comment": "Renders the 'SelectView' component, passing along any states controlled by 'useSelectState' and all properties passed to 'SelectComponent'.",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 9,
+          "comment": "Exports 'SelectComponent' as 'Select', making it available for import in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

@@ -1,165 +1,273 @@
-### **Import**
+# Button
 
-```tsx
-import { Button } from 'app-studio';
-```
+Customizable button for user interaction
+
+### **Import**
+  ```tsx
+  import { Button } from '@app-studio/web';
+  ```
 
 ### **Default**
-
 ```tsx
-import { Center } from '../Layout/Center/Center';
+import React from 'react';
+import { Button } from '../Button';
 
-<Center width="100%">
-  <Button>Push Me</Button>
-</Center>;
+export const DefaultButton = () => (
+  <Button onClick={() => alert('Hello, World!')}>Default</Button>
+);
+
 ```
 
-### **Disabled**
-
-“isDisabled” makes the button unusable and un-clickable with a “disabled” look.
+### **colorScheme**
+Optional string to define the color scheme of the button.
 
 ```tsx
-import { Center } from '../Layout/Center/Center';
-<Center width="100%">
-  <Button isDisabled>Disabled</Button>
-</Center>;
+import React from 'react';
+import { Button } from '../Button';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+
+export const ColoredButtons = () => (
+  <Horizontal gap={10}>
+    {[
+      'theme.primary',
+      'theme.secondary',
+      'theme.warning',
+      'theme.success',
+      'theme.error',
+    ].map((color, index) => (
+      <Button key={index} colorScheme={color} isAuto>
+        {color}
+      </Button>
+    ))}
+  </Horizontal>
+);
+
 ```
 
-### **Size**
+### **loaderProps**
+Optional LoaderProps object to configure the appearance and behavior of the loader animation.
 
-“size” alters the padding, text size, and border of the button. This attribute belongs to the "Sizes" type and has a default value of "md".
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
-```jsx
-import { Vertical } from '../Layout/Vertical/Vertical';
-
-<Vertical gap={10}>
-  {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
-    <Button key={index} size={size}>
-      {size}
+export const LoaderButtons = () => (
+  <Vertical gap={15}>
+    <Button isLoading isFilled>
+      Submitting
     </Button>
-  ))}
-  <Button isAuto>Auto Width</Button>
-  <Button isFilled>Full Width</Button>
-</Vertical>;
-```
-
-### **ColorScheme**
-
-“colorScheme” allows you to modify the background color of the button. It accepts a value from the "ColorThemes" type, with the default color set to "theme.primary".
-
-```tsx
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
-
-<Horizontal justifyContent="space-evenly" gap={10}>
-  {['theme.primary', 'theme.secondary', 'theme.warning', 'theme.success', 'theme.error'].map((color, index) => (
-    <Button key={index} colorScheme={color} isAuto>
-      {color}
+    <Button
+      isLoading
+      loaderProps={{
+        type: 'dotted',
+        styles: {
+          loader: { color: 'color.white' },
+          text: {
+            color: 'color.black',
+          },
+        },
+      }}
+      isFilled
+    >
+      Submitting
     </Button>
-  ))}
-</Horizontal>;
+    <Button
+      isLoading
+      loaderPosition="right"
+      loaderProps={{
+        type: 'quarter',
+        styles: {
+          loader: { color: 'color.black' },
+          text: { color: 'color.black' },
+        },
+      }}
+      isFilled
+    >
+      Submitting
+    </Button>
+  </Vertical>
+);
+
 ```
 
-### **Shadow**
-
-"shadow" attribute applies a shadow effect to the button.
+### **icon**
+Optional React node(s) defining the icon to be displayed within the button.
 
 ```tsx
-import { Center } from '../Layout/Center/Center';
-<Center width="100%">
-  <Button shadow={{ boxShadow: 'rgb(249, 115, 22) 0px 4px 14px 0px' }}>Click Me</Button>
-</Center>;
+import React from 'react';
+import { Button } from '../Button';
+import { Center } from '../../Layout/Center/Center';
+
+import { DustBinSvg } from '../../Svg';
+
+import { Shape } from '../Button/Button.type';
+
+export const IconButtons = () => (
+  <Center gap={15}>
+    <Button icon={<DustBinSvg size={24} />} height={48}>
+      Delete
+    </Button>
+    <Button
+      height={48}
+      icon={<DustBinSvg size={24} />}
+      shape={'pillShaped' as Shape}
+      iconPosition="right"
+      colorScheme="theme.secondary"
+    >
+      Delete
+    </Button>
+    <Button
+      icon={<DustBinSvg size={24} />}
+      colorScheme="theme.primary"
+      isIconRounded
+      isAuto
+    />
+  </Center>
+);
+
 ```
 
-### **Loader**
-
-"isLoader" and "loading" attributes display a loading animation, which indicates that an action is in progress.
+### **isDisabled**
+Optional boolean to indicate if the button is non-interactive/disabled.
 
 ```tsx
-import { Loader } from '../Loader/Loader';
-import { Text } from '../Text/Text';
-import { Center } from '../Layout/Center/Center';
+import React from 'react';
+import { Button } from '../Button';
 
-<Center width="100%">
-  <Button isLoader>
-    <Loader loaderColor="white" />
-    <Text size="sm">Submitting</Text>
+export const DisabledButton = () => (
+  <Button
+    onClick={() => {
+      alert('Disabled');
+    }}
+    isDisabled
+  >
+    Disabled
   </Button>
-</Center>;
+);
+
 ```
 
-### **Variant**
-
-"variant" allows for the customization of the button's styles. The attribute belongs to the "Variants" type and has a default variant of "filled".
+### **isAuto**
+Optional boolean indicating if the button size should automatically adjust to its content.
 
 ```tsx
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
+import React from 'react';
+import { Button } from '../Button';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
-<Horizontal justifyContent="space-evenly" gap={10}>
-  {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-    <Button key={index} variant={variant} colorScheme="theme.primary" isAuto>
-      {variant}
-    </Button>
-  ))}
-</Horizontal>;
+import { Shape } from '../Button/Button.type';
+
+export const BorderedButtons = () => (
+  <Horizontal gap={15}>
+    {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
+      <Button key={index} shape={border as Shape} isAuto>
+        {border}
+      </Button>
+    ))}
+  </Horizontal>
+);
+
 ```
 
-### **Shape**
-
-“shape” property changes the edges of the button. This property belongs to the "Shapes" type and has a default value of "rounded".
+### **size**
+Optional Size to specify the size of the button.
 
 ```tsx
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 
-<Horizontal justifyContent="space-evenly" flexWrap="nowrap" gap={10}>
-  {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
-    <Button key={index} shape={border} isAuto>
-      {border}
-    </Button>
-  ))}
-</Horizontal>;
+import { Size } from '../Button/Button.type';
+
+export const ButtonSizes = () => (
+  <Vertical gap={10}>
+    {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
+      <Button key={index} size={size as Size}>
+        Button
+      </Button>
+    ))}
+  </Vertical>
+);
+
 ```
 
-### **Icon**
-
-“icon” provides the flexibility to incorporate any desired icon within the button.
+### **shadow**
+Optional shadow property that can be a predefined Shadow, Elevation value or custom CSSProperties to apply shadow effects to the button.
 
 ```tsx
-import { Center } from '../Layout/Center/Center';
-import { DustBinSvg } from '../Svg/DustBin';
+import React from 'react';
+import { Button } from '../Button';
 
-<Center justifyContent="space-evenly">
-  <Button icon={<BsBucket size={24} />} height={48}>
-    Delete
+export const ShadowButton = () => (
+  <Button shadow={{ boxShadow: 'rgb(249, 115, 22) 0px 4px 14px 0px' }}>
+    Click Me
   </Button>
-  <Button height={48} icon={<DustBinSvg size={24} />} shape={'pillShaped'} iconPosition="right" colorScheme="theme.secondary">
-    Delete
-  </Button>
-  <Button icon={<DustBinSvg size={24} />} colorScheme="color.black" isIconRounded isAuto />
-</Center>;
+);
+
 ```
 
-### Types
-
-#### Sizes
+### **variant**
+Optional Variant to define the stylistic variation of the button.
 
 ```tsx
-type ButtonSizes = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from '../../Layout/Vertical/Vertical';
+
+import { Variant } from '../Button/Button.type';
+
+export const VariantButtons = () => (
+  <Vertical gap={15}>
+    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
+      <Button
+        key={index}
+        externalHref="https://www.npmjs.com/package/app-studio"
+        variant={variant as Variant}
+        colorScheme="theme.primary"
+        isFilled
+      >
+        {variant}
+      </Button>
+    ))}
+    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
+      <Button
+        key={index}
+        externalHref="https://www.npmjs.com/package/app-studio"
+        variant={variant as Variant}
+        isFilled
+        effect="reverse"
+      >
+        {variant}
+      </Button>
+    ))}
+  </Vertical>
+);
+
 ```
 
-#### Variants
+### **effect**
+Optional effect to apply interactive effects (e.g., ripple) to the button.
 
 ```tsx
-type Variants = 'filled' | 'outline' | 'link' | 'ghost';
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+
+export const EffectButton = () => (
+  <Horizontal gap={10}>
+    <Button effect="hover">Hover</Button>
+    <Button colorScheme="theme.error" variant="ghost" effect="hover">
+      Hover
+    </Button>
+    <Button colorScheme="theme.secondary" variant="outline" effect="reverse">
+      Reverse
+    </Button>
+    <Button colorScheme="theme.warning" variant="link" effect="reverse">
+      Reverse
+    </Button>
+  </Horizontal>
+);
+
 ```
 
-#### IconPositions
-
-```tsx
-type IconPositions = 'left' | 'right';
-```
-
-#### Shapes
-
-```tsx
-type Shapes = 'sharp' | 'rounded' | 'pillShaped';
-```

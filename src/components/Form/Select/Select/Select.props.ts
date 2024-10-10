@@ -2,24 +2,43 @@ import { CSSProperties } from 'react';
 import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow } from 'app-studio';
 import { SelectStyles, Shape, Size, Variant, Option } from './Select.type';
+// Defines the interface for Select component properties, extending from InputProps but omitting 'size'
 export interface SelectProps extends Omit<InputProps, 'size'> {
+// Optional string identifier for the select element
   id?: string;
+// Flag to indicate if the select has an error state
   error?: boolean;
+// Name attribute for the select element, useful for form submission
   name?: string;
+// Label text associated with the select element
   label?: string;
+// Defines the color scheme for the select component
   colorScheme?: string;
+// Helper text that appears below the select box
   helperText?: string;
+// Placeholder text shown when the select is empty
   placeholder?: string;
+// Array of options that the user can choose from
   options: Option[];
+// Boolean to allow multi-selection
   isMulti?: boolean;
+// Boolean to set the select as read-only, preventing user modification
   isReadOnly?: boolean;
+// Boolean to disable the select element
   isDisabled?: boolean;
+// Function that handles the change event when the selected option(s) change
   onChange?: (value: any) => void;
+// Determines the overall shape of the select box, e.g., rounded or sharp edges
   shape?: Shape;
+// Defines the styling variant for the select component
   variant?: Variant;
+// Custom styles that can be applied to the select component
   styles?: SelectStyles;
+// Defines the size of the component
   size?: Size;
+// Determines the shadow property of the select component
   shadow?: Shadow | Elevation | CSSProperties;
+// Boolean to control whether the select options are scrollable
   isScrollable?: boolean;
 }
 export interface SelectViewProps extends SelectProps {

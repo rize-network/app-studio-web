@@ -1,0 +1,233 @@
+{
+  "Link.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 4,
+          "comment": "Defines the props for the Link component, excluding 'size' which comes from the extended 'ViewProps'.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 5,
+          "comment": "Represents the content within the Link component which can be any valid React node.",
+          "codeSnippet": "chil"
+        },
+        {
+          "line": 6,
+          "comment": "Optional prop to define the text decoration style of the link as underline styles.",
+          "codeSnippet": "unde"
+        },
+        {
+          "line": 7,
+          "comment": "Optional boolean indicating whether the link points to an external resource. Default behavior may vary based on this value.",
+          "codeSnippet": "isEx"
+        },
+        {
+          "line": 8,
+          "comment": "Optional prop to set the size of an icon if present within the link.",
+          "codeSnippet": "icon"
+        },
+        {
+          "line": 9,
+          "comment": "Optional prop to set the color scheme of the link which might influence its appearance.",
+          "codeSnippet": "colo"
+        },
+        {
+          "line": 10,
+          "comment": "The href attribute specifying the URL the link points to.",
+          "codeSnippet": "href"
+        },
+        {
+          "line": 11,
+          "comment": "Optional styles object to customize the appearance using predefined style types.",
+          "codeSnippet": "styl"
+        },
+        {
+          "line": 13,
+          "comment": "Extends the basic LinkProps with additional properties related to the Link view.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 14,
+          "comment": "Indicates whether the link is under a hover state, which may adjust the link's style.",
+          "codeSnippet": "isHo"
+        },
+        {
+          "line": 15,
+          "comment": "A function to update the hover state of the link.",
+          "codeSnippet": "setI"
+        }
+      ]
+    }
+  ],
+  "Link.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "This function initializes the Link component's state using the useState hook and exposes its state and setter function.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Link.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines a mapping of various size names (from 'xs' to '6xl') to their respective numeric icon sizes, providing a scalable way to reference icon sizes throughout the component.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Link.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a union type for text decoration styles which can be 'default', 'hover', or 'underline'.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 2,
+          "comment": "Begins the declaration of a 'Styles' type that will specify the shape of style properties for the Link component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 3,
+          "comment": "Optional 'icon' property of type 'CSSProperties' to define styles for the icon within the link.",
+          "codeSnippet": "  ic"
+        },
+        {
+          "line": 4,
+          "comment": "Optional 'text' property of type 'CSSProperties' to define styles for the text within the link.",
+          "codeSnippet": "  te"
+        },
+        {
+          "line": 6,
+          "comment": "Begins the declaration of a 'Size' type to dictate allowable size options for the Link component.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 7,
+          "comment": "The 'Size' type includes 'xs' as one of its possible values for the size of the Link component.",
+          "codeSnippet": "  | "
+        },
+        {
+          "line": 16,
+          "comment": "The 'Size' type includes '6xl' as its largest defined value for the size of the Link component.",
+          "codeSnippet": "  | "
+        }
+      ]
+    }
+  ],
+  "Link.view.tsx": [
+    {
+      "comments": [
+        {
+          "line": 8,
+          "comment": "Component definition for 'LinkView', a functional component with props defined by 'LinkViewProps'.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 10,
+          "comment": "Default href prop set to root '/', used for navigation target.",
+          "codeSnippet": " href"
+        },
+        {
+          "line": 11,
+          "comment": "Default icon size for links, with 'sm' specifying a small-sized icon.",
+          "codeSnippet": " icon"
+        },
+        {
+          "line": 12,
+          "comment": "Determines the default underline behavior of the link, set to 'default'.",
+          "codeSnippet": " unde"
+        },
+        {
+          "line": 13,
+          "comment": "State flag indicating whether the link is being hovered over.",
+          "codeSnippet": " isHo"
+        },
+        {
+          "line": 14,
+          "comment": "Boolean indicating if the link leads to an external resource.",
+          "codeSnippet": " isEx"
+        },
+        {
+          "line": 15,
+          "comment": "Custom styles for the icon and text, provided via a styles object.",
+          "codeSnippet": " styl"
+        },
+        {
+          "line": 16,
+          "comment": "Setter function for the hover state, noop function provided by default.",
+          "codeSnippet": " setI"
+        },
+        {
+          "line": 19,
+          "comment": "Function to handle mouse enter/leave events to toggle hover state.",
+          "codeSnippet": "  con"
+        },
+        {
+          "line": 23,
+          "comment": "Renders a React Router Link component with 'href' as its navigation target and target attribute based on 'isExternal'.",
+          "codeSnippet": "    <R"
+        },
+        {
+          "line": 27,
+          "comment": "Determines the text decoration based on hover state and underline prop.",
+          "codeSnippet": "        t"
+        },
+        {
+          "line": 35,
+          "comment": "A 'Horizontal' component layout, used to align link child elements horizontally.",
+          "codeSnippet": "        <"
+        },
+        {
+          "line": 37,
+          "comment": "Conditionally includes an 'ExternalLinkSvg' if the link is external.",
+          "codeSnippet": "          {"
+        },
+        {
+          "line": 38,
+          "comment": "Renders the ExternalLinkSvg component with the icon size and style defined.",
+          "codeSnippet": "            <"
+        },
+        {
+          "line": 44,
+          "comment": "Exports 'LinkView' as a default export of the module.",
+          "codeSnippet": "};"
+        }
+      ]
+    }
+  ],
+  "Link.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines the 'LinkComponent' as a functional component with props typed to 'LinkProps'",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 6,
+          "comment": "Gets stateful logic and data necessary for the link component via 'useLinkState' hook",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 7,
+          "comment": "Renders 'LinkView' component passing down link state and props",
+          "codeSnippet": "retu"
+        },
+        {
+          "line": 9,
+          "comment": "Exports 'LinkComponent' as 'Link' for use in other parts of the application",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

@@ -1,165 +1,113 @@
-### **Import**
+# Select
 
-```tsx
-import { Select } from "@app-studio/web";
-```
+A customizable UI component for selecting from a list of options.
+
+### **Import**
+  ```tsx
+  import { Select } from '@app-studio/web';
+  ```
 
 ### **Default**
-
 ```tsx
-<Select label="Select an item" options={["Item1", "Item2", "Item3"]} />
+import React from 'react';
+import { Select } from '../Select';
+
+export const DefaultSelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    label="Select an item"
+  />
+);
+
 ```
 
-### **Disabled**
-
-“**_isDisabled_**” makes the select field unclickable.
+### **error**
+Flag to indicate if the select has an error state
 
 ```tsx
-<Select isDisabled options={["Item1", "Item2", "Item3"]} />
+import React from 'react';
+import { Select } from '../Select';
+
+export const ErrorSelect = () => (
+  <Select
+    id="error"
+    name="error"
+    error
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+  />
+);
+
 ```
 
-### **IsReadOnly**
-
-“**_isReadOnly_**” makes the field readable but not writable. Can only read the element.
+### **helperText**
+Helper text that appears below the select box
 
 ```tsx
-<Select options={["Item1", "Item2", "Item3"]} isReadOnly />
+import React from 'react';
+
+import { Select } from '../Select';
+
+export const HelperTextSelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    helperText="select one item!"
+    error
+  />
+);
+
 ```
 
-### **Sizes**
-
-“**_size_**” changes the text and icon size . It has a default value of “md”.
+### **shadow**
+Determines the shadow property of the select component
 
 ```tsx
-import { Vertical } from "../../Layout/Vertical/Vertical";
+import React from 'react';
+import { Select } from '../../../Form/Select/Select';
 
-const options = ["Item1", "Item2", "Item3"];
+export const ShadowSelect = () => (
+  <Select
+    shadow={{
+      boxShadow:
+        'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
+    }}
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+  />
+);
 
-<Vertical gap={10}>
-  <Select name="xs" size="xs" placeholder="xs" options={options} />
-  <Select name="sm" size="sm" placeholder="sm" options={options} />
-  <Select name="md" size="md" placeholder="md" options={options} />
-  <Select name="lg" size="lg" placeholder="lg" options={options} />
-  <Select name="xl" size="xl" placeholder="xl" options={options} />
-</Vertical>;
 ```
 
-### **ColorScheme**
-
-“**_colorScheme_**” modifies the border color of the select field.
-
-```tsx
-import { Vertical } from "../../Layout/Vertical/Vertical";
-
-<Vertical gap={15}>
-  {["theme.primary", "theme.secondary", "error", "success", "warning"].map((color) => (
-    <Select
-      key={color}
-      options={["Item1", "Item2", "Item3"]}
-      colorScheme={color}
-    />
-  ))}
-</Vertical>;
-```
-
-### **Shadow**
-
-“**_shadow_**” adds a shadow effect to the field.
+### **isScrollable**
+Boolean to control whether the select options are scrollable
 
 ```tsx
-<Select
-  shadow={{
-    boxShadow:
-      "rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset",
-  }}
-  options={["Item1", "Item2", "Item3"]}
-/>
-```
+import React from 'react';
+import { Select } from '../Select';
 
-### **Multiple**
+export const IsScrollableDemo = () => {
+  const timeZones = [
+    { label: 'Item1', value: '1' },
+    { label: 'Item2', value: '2' },
+    { label: 'Item3', value: '3' },
+  ];
 
-“**_isMulti_**” indicates whether the select component allows the selection of multiple options.
-
-```tsx
-<Select
-  options={["Item1", "Item2", "Item3"]}
-  placeholder="Select an item.."
-  isMulti
-/>
-```
-
-### **Error**
-
-“**error**” indicates whether the field has an error.
-
-```tsx
-<Select options={["Item1", "Item2", "Item3"]} error />
-```
-
-### **HelperText**
-
-“**_helperText_**” provides additional information about the field.
-
-```tsx
-<Select
-  options={["Item1", "Item2", "Item3"]}
-  helperText="select one item!"
-  error
-/>
-```
-
-### **Styles**
-
-“**_styles_**” changes the style of the select field.
-
-```tsx
-<Select
-  colorScheme="theme.primary"
-  options={["Item1", "Item2", "Item3"]}
-  styles={{
-    selectBox: { borderRadius: 10,  borderColor: 'theme.primary',
-        borderStyle: 'solid',
-        borderWidth: 1, },
-    text: { color: "theme.primary"  },
-    label: { fontWeight: "bold", color: "theme.primary"  },
-  }}
-/>
-```
-
-### **Default Value**
-
-```tsx
-const Sizes: Record<Size, CSSProperties> = {
-  xs: { height: 6, width: 6 },
-  sm: { height: 12, width: 12 },
-  md: { height: 18, width: 18 },
-  lg: { height: 24, width: 24 },
-  xl: { height: 30, width: 30 },
+  return <Select options={timeZones} />;
 };
+
 ```
 
-```tsx
-const IconSizes: Record<Size, string> = {
-  xs: "8px",
-  sm: "10px",
-  md: "12px",
-  lg: "14px",
-  xl: "16px",
-};
-```
-
-### Types
-
-```tsx
-type Size = "xs" | "sm" | "md" | "lg" | "xl";
-```
-
-```tsx
-type SelectStyles = {
-  box?: CSSProperties;
-  text?: CSSProperties;
-  label?: CSSProperties;
-  helperText?: CSSProperties;
-  field?: CSSProperties;
-};
-```

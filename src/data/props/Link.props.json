@@ -1,0 +1,109 @@
+{
+  "componentDescription": "Enables users to navigate to specified URLs or paths.",
+  "children": {
+    "type": [
+      "React.ReactNode"
+    ],
+    "typeValues": [],
+    "description": "Represents the content within the Link component which can be any valid React node.",
+    "defaultValue": []
+  },
+  "underline": {
+    "type": [
+      "TextDecorationStyle"
+    ],
+    "typeValues": [
+      "default",
+      "hover",
+      "underline"
+    ],
+    "description": "Optional prop to define the text decoration style of the link as underline styles.",
+    "defaultValue": [
+      "default"
+    ]
+  },
+  "isExternal": {
+    "type": [
+      "boolean"
+    ],
+    "typeValues": [],
+    "description": "Optional boolean indicating whether the link points to an external resource. Default behavior may vary based on this value.",
+    "defaultValue": [
+      false
+    ]
+  },
+  "iconSize": {
+    "type": [
+      "Size"
+    ],
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "2xl",
+      "3xl",
+      "4xl",
+      "5xl",
+      "6xl"
+    ],
+    "description": "Optional prop to set the size of an icon if present within the link.",
+    "defaultValue": [
+      "sm"
+    ]
+  },
+  "colorScheme": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Optional prop to set the color scheme of the link which might influence its appearance.",
+    "defaultValue": []
+  },
+  "href": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "The href attribute specifying the URL the link points to.",
+    "defaultValue": [
+      "/"
+    ]
+  },
+  "styles": {
+    "type": [
+      "Styles"
+    ],
+    "typeValues": [
+      "CSSProperties"
+    ],
+    "description": "Optional styles object to customize the appearance using predefined style types.",
+    "defaultValue": [
+      {
+        "icon": {},
+        "text": {}
+      }
+    ]
+  },
+  "isHovered": {
+    "type": [
+      "boolean"
+    ],
+    "typeValues": [],
+    "description": "Indicates whether the link is under a hover state, which may adjust the link's style.",
+    "defaultValue": [
+      false
+    ]
+  },
+  "setIsHovered": {
+    "type": [
+      "Function"
+    ],
+    "typeValues": [],
+    "description": "A function to update the hover state of the link.",
+    "defaultValue": [
+      "noop function"
+    ]
+  }
+}
