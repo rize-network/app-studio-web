@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { HeaderDocs, Menu } from './components/docs.views';
 import { View, Vertical, Horizontal } from 'src/components';
 import { useParams } from 'react-router-dom';
