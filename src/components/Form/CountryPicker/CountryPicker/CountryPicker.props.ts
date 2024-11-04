@@ -1,7 +1,6 @@
 import { CSSProperties } from 'react';
 import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow } from 'app-studio';
-
 import {
   Country,
   CountryPickerStyles,
@@ -9,173 +8,87 @@ import {
   Size,
   Variant,
 } from './CountryPicker.type';
-
+// Defines properties for CountryPicker excluding 'size' from InputProps for customization
 export interface CountryPickerProps extends Omit<InputProps, 'size'> {
-  /**
-   * The identifier for the CountryPicker component.
-   */
+  // Optional ID for the CountryPicker input
   id?: string;
-  /**
-   * Indicates whether the field has an error.
-   */
+  // Optional error flag to indicate validation state
   error?: boolean;
-  /**
-   * The name of the field.
-   */
+  // Optional name attribute for the CountryPicker input
   name?: string;
-  /**
-   * The label text for the field.
-   */
+  // Optional label text for the CountryPicker input
   label?: string;
-  /**
-   * The color scheme that changes the border color on hover of the field.
-   */
+  // Optional color scheme for styling
   colorScheme?: string;
-  /**
-   * Additional helper text that provides information about the field.
-   */
+  // Optional helper text for guiding the user
   helperText?: string;
-  /**
-   * A brief text or hint that appears in the field before the user enters any value.
-   */
+  // Optional placeholder text for the CountryPicker input
   placeholder?: string;
-  /**
-   * The shape that changes the outlines of the CountryPicker.
-   */
+  // Optional shape of the CountryPicker for visual styles
   shape?: Shape;
-  /**
-   * If true, the field will be automatically focused.
-   */
+  // Flag to auto-focus the CountryPicker on render
   isAutoFocus?: boolean;
-  /**
-   * If true, the CountryPicker cannot be edited.
-   */
+  // Flag to mark the CountryPicker as read-only
   isReadOnly?: boolean;
-  /**
-   * If true, the field will be unusable.
-   */
+  // Flag to disable the CountryPicker input
   isDisabled?: boolean;
-  /**
-   * Callback function triggered when the CountryPicker loses focus.
-   */
+  // Optional blur handler function
   onBlur?: (value: any) => void;
-  /**
-   * Callback function triggered when the field value changes.
-   */
+  // Optional change handler function
   onChange?: (value: any) => void;
-  /**
-   * CSS styles for the CountryPicker component.
-   */
+  // Optional styles object specific to CountryPicker
   styles?: CountryPickerStyles;
-  /**
-   * The font size of the CountryPicker.
-   */
+  // Optional size of the CountryPicker for visual styles
   size?: Size;
-  /**
-   * The default value of the input field.
-   */
+  // Value to be used as the current selection
   value?: string | number;
-  /**
-   * Changes the style of the input field.
-   */
+  // Variant for different visual types of CountryPicker
   variant?: Variant;
-  /**
-   * Adds a shadow effect to the CountryPicker.
-   */
+  // Shadow or Elevation styles for visual depth and perspective
   shadow?: Shadow | Elevation | CSSProperties;
 }
-
+// Includes all CountryPickerProps and properties specific to the view
 export interface CountryPickerViewProps extends CountryPickerProps {
-  /**
-   * Indicates whether the country picker is currently being hovered.
-   */
+  // Flag for hover state
   isHovered?: boolean;
-
-  /**
-   * A function to set the hovered state of the country picker.
-   * @param hovered - The hovered state to set.
-   */
+  // Setter function for hover state
   setIsHovered?: (hovered: boolean) => void;
-
-  /**
-   * Indicates whether the country picker is focused.
-   */
+  // Flag for focus state
   isFocused?: boolean;
-
-  /**
-   * A function to set the focus state of the country picker.
-   * @param focused - The focus state to set.
-   */
+  // Setter function for focus state
   setIsFocused?: (focused: boolean) => void;
-
-  /**
-   * Indicates the currently selected country.
-   */
+  // Selected item's value
   selected?: string;
-
-  /**
-   * A function to set the selected country.
-   * @param selected - The selected country to set.
-   */
+  // Setter function for selected item
   setSelected?: (selected: string) => void;
-
-  /**
-   * Indicates whether the country picker should be hidden.
-   */
+  // Flag for toggling visibility
   hide?: boolean;
-
-  /**
-   * A function to set the hide state of the country picker.
-   * @param hide - The hide state to set.
-   */
+  // Setter function for visibility
   setHide?: (hide: boolean) => void;
-
-  /**
-   * Options for the country picker.
-   */
+  // Array of new options for dropdown list
   newOptions?: Array<Country>;
-
-  /**
-   * A function to set the new options for the country picker.
-   * @param newOptions - The new options to set.
-   */
+  // Setter function for new options
   setNewOptions?: (newOptions: Array<Country>) => void;
 }
-
+// Defines properties for DropDown excluding 'size' from InputProps for customization
 export interface DropDownProps extends Omit<InputProps, 'size'> {
-  /**
-   * To set the height and width of the item list.
-   */
+  // Optional size of the dropdown for visual styles
   size?: Size;
-  /**
-   * Function that will be called when the option is CountryPickered
-   */
+  // Callback function for dropdown actions
   callback?: Function;
-  /**
-   * List of options
-   */
+  // Options array to populate the dropdown
   options: Array<Country>;
-  /**
-   * Css styles for the CountryPicker container and label
-   */
+  // Optional styles object specific to dropdown
   styles?: CountryPickerStyles;
 }
-
+// Defines properties for DropDownItem excluding 'size' from InputProps for customization
 export interface DropDownItemProps extends Omit<InputProps, 'size'> {
-  /**
-   * Function that will be called when the option is clicked
-   */
+  // Callback function for dropdown item actions
   callback?: Function;
-  /**
-   * Option to be displayed
-   */
+  // The option value for the dropdown item
   option: string;
-  /**
-   * To set the DropDownItem's fontSize
-   */
+  // Optional size of the dropdown item for visual styles
   size?: Size;
-  /**
-   * Css styles
-   */
+  // Optional styles object specific to dropdown item
   styles?: CountryPickerStyles;
 }

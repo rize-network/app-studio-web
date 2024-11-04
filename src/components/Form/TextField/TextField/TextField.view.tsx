@@ -6,11 +6,8 @@ import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
 import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
 import { CloseSvg } from '../../../Svg';
-
 import { TextFieldViewProps } from './TextField.props';
-
 const TextFieldInput = (props: any) => <Input type="text" {...props} />;
-
 const TextFieldView: React.FC<TextFieldViewProps> = ({
   id,
   name,
@@ -47,9 +44,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
 }) => {
   const { getColor } = useTheme();
   const IconColor = getColor('color.blueGray.700');
-
   const isWithLabel = !!(isFocused && label);
-
   const fieldStyles = {
     margin: 0,
     paddingVertical: 8,
@@ -69,47 +64,37 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     cursor: isDisabled ? 'not-allowed' : 'auto',
     ...styles['field'],
   };
-
   const handleFocus = () => {
     setIsFocused(true);
     if (onFocus) onFocus();
   };
-
   const handleHover = () => setIsHovered(!isHovered);
-
   const handleBlur = (event: any) => {
     if (onBlur) onBlur(event);
     setIsFocused(false);
   };
-
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement> | string
   ) => {
     if (typeof event === 'string') {
-      //for ios and android
       setValue(event);
       if (onChangeText) onChangeText(event);
       if (onChange) onChange(event);
     } else {
-      //Web
       setValue(event.target.value);
       if (onChangeText) onChangeText(event.target.value);
       if (onChange) onChange(event.target.value);
     }
   };
-
   const handleClear = () => {
     setValue('');
-    //Web
     if (onChange) {
       onBlur({ target: { name } });
       if (onChangeText) onChangeText('');
       if (onChange) onChange('');
     }
-    //for ios and android
     if (typeof document === 'undefined' && onChangeText) onChangeText('');
   };
-
   return (
     <FieldContainer helperText={helperText} error={error} styles={styles}>
       <FieldContent
@@ -175,5 +160,4 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     </FieldContainer>
   );
 };
-
 export default TextFieldView;

@@ -1,0 +1,50 @@
+# Switch
+
+A toggle switch for user interactions like turning settings on or off.
+
+### **Import**
+  ```tsx
+  import { Switch } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Switch } from '../../../Form/Switch/Switch';
+
+export const DefaultSwitch = () => <Switch id="check" name="checkbox" />;
+
+```
+
+### **colorScheme**
+Defines the color theme for the switch component.
+
+```tsx
+import React from 'react';
+
+import { Switch } from '../Switch';
+
+export const ColorSwitch = () => (
+  <Switch name="name" colorScheme="theme.primary" isChecked />
+);
+
+```
+
+### **shadow**
+Defines the shadow appearance of the switch using predefined Shadow or Elevation, or a custom CSSProperties object.
+
+```tsx
+import React from 'react';
+import { Switch } from '../../../Form/Switch/Switch';
+
+export const ShadowSwitch = () => (
+  <Switch
+    id="shadowCheckbox"
+    name="shadowCheckbox"
+    shadow={{ boxShadow: 'rgb(249, 115, 22) 0px 4px 14px 0px' }}
+    isChecked
+  />
+);
+
+```
+

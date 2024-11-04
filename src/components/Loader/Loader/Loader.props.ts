@@ -1,89 +1,41 @@
 import React from 'react';
-
 import { LoaderType, Size, Speed, TextPosition } from './Loader.type';
 import { ViewProps } from 'app-studio';
-
-/**
- * Props for the Loader component.
- */
+// Defines the LoaderProps interface, extending from ViewProps excluding 'size', to configure the Loader component.
 export interface LoaderProps extends Omit<ViewProps, 'size'> {
-  /**
-   * The text content.
-   */
+  // Optional children prop to pass React nodes inside the Loader component.
   children?: React.ReactNode;
-
-  /**
-   * The color of the loader.
-   */
+  // Optional prop to define the color of the loader element.
   loaderColor?: string;
-
-  /**
-   * The type of loader.
-   */
+  // Defines the type of the loader based on the LoaderType enum.
   type?: LoaderType;
-
-  /**
-   * The color of the text.
-   */
+  // Optional prop for setting the color of the text displayed with the loader.
   textColor?: string;
-
-  /**
-   * The position where to place the children.
-   */
+  // Determines the position of the text relative to the loader from the TextPosition enum.
   textPosition?: TextPosition;
-
-  /**
-   * The width and height of the loader.
-   */
+  // Sets the size of the loader, which can be a specific pixel number or a standard Size enum.
   size?: number | Size;
-
-  /**
-   * The rotation speed of the loader.
-   */
+  // Controls the speed of the loader's animation, using the values from the Speed enum.
   speed?: Speed;
 }
-
+// Defines properties specific to the default spinner variant of the loader.
 export interface DefaultSpinnerProps extends Omit<ViewProps, 'size'> {
-  /**
-   * To set the spinner height and width
-   */
   size?: number | Size;
-  /**
-   * To set the rate at which the spinner moves
-   */
   speed?: Speed;
-  /**
-   * To change the spinner color
-   */
+  // Overrides the color for the default spinner loader variant.
   color?: string;
 }
-
+// Defines properties for the dotted variant of the loader component.
 export interface DottedProps extends Omit<ViewProps, 'size'> {
-  /**
-   * To set the spinner height and width
-   */
   size?: number | Size;
-  /**
-   * To set the rate at which the spinner moves
-   */
   speed?: Speed;
-  /**
-   * To change the spinner color
-   */
+  // Overrides the color for the dotted loader variant.
   color?: string;
 }
-
+// Defines properties for the quarter variant of the loader component.
 export interface QuarterProps extends Omit<ViewProps, 'size'> {
-  /**
-   * To set the spinner height and width
-   */
   size?: number | Size;
-  /**
-   * To set the rate at which the spinner moves
-   */
   speed?: Speed;
-  /**
-   * To change the spinner color
-   */
+  // Overrides the color for the quarter loader variant.
   color?: string;
 }

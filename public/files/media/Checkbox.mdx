@@ -1,0 +1,66 @@
+# Checkbox
+
+A customizable checkbox form element with optional label and various styles.
+
+### **Import**
+  ```tsx
+  import { Checkbox } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+
+import { Checkbox } from '../Checkbox';
+
+export const DefaultCheckbox = () => <Checkbox label="option" />;
+
+```
+
+### **colorScheme**
+Optional color scheme string that might allow customization of the checkbox's appearance.
+
+```tsx
+import React from 'react';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
+
+import { Checkbox } from '../Checkbox';
+
+export const ColorCheckbox = () => (
+  <Vertical gap={15}>
+    {[
+      'theme.primary',
+      'theme.secondary',
+      'theme.error',
+      'theme.success',
+      'theme.warning',
+    ].map((color) => (
+      <Checkbox
+        key={color}
+        colorScheme={color}
+        label={color}
+        defaultIsSelected
+      />
+    ))}
+  </Vertical>
+);
+
+```
+
+### **shadow**
+An optional shadow or elevation effect that can be applied to the Checkbox component, accepting either a Shadow, Elevation, or generic CSSProperties object.
+
+```tsx
+import React from 'react';
+import { Checkbox } from '../../../Form/Checkbox/Checkbox';
+
+export const ShadowCheckbox = () => (
+  <Checkbox
+    id="shadowCheckbox"
+    shadow={{ boxShadow: 'rgb(249, 115, 22) 0px 4px 14px 0px' }}
+    defaultIsSelected
+  />
+);
+
+```
+

@@ -1,0 +1,84 @@
+# Avatar
+
+Displays a circular avatar with image fallback and custom styling options.
+
+### **Import**
+  ```tsx
+  import { Avatar } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Avatar } from '../Avatar';
+
+export const DefaultDemo = () => (
+  <Avatar src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg" />
+);
+
+```
+
+### **size**
+Optional property to specify the size of the avatar, from predefined Size options.
+
+```tsx
+import React from 'react';
+import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Avatar } from '../Avatar';
+import { Size } from '../Avatar/Avatar.type';
+
+export const SizeDemo = () => {
+  return (
+    <Vertical gap={10}>
+      {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
+        <Avatar
+          key={index}
+          src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg"
+          size={size as Size}
+        />
+      ))}
+    </Vertical>
+  );
+};
+
+```
+
+### **fallback**
+Optional string for an image URL to use if the primary 'src' fails to load.
+
+```tsx
+import React from 'react';
+import { Avatar } from '../Avatar';
+
+export const FallbackDemo = () => <Avatar src="" fallback="ML" />;
+
+```
+
+### **styles**
+Optional object to apply custom styles to the avatar component.
+
+```tsx
+import React from 'react';
+import { Avatar } from '../Avatar';
+
+export const StylesDemo = () => {
+  return (
+    <Avatar
+      src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg"
+      styles={{
+        container: {
+          boxShadow: 'none', // Add shadow effect
+        },
+        fallback: {
+          color: 'theme.secondary',
+        },
+        image: {
+          objectFit: 'fill',
+        },
+      }}
+    />
+  );
+};
+
+```
+

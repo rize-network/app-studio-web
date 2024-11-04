@@ -1,130 +1,74 @@
 import React, { CSSProperties } from 'react';
 import { InputProps, Shadow } from 'app-studio';
 import { Elevation } from '../../../../utils/elevation';
-
 import { Shape, Size, TextFieldStyles, Variant } from './TextField.type';
-
+// The TextFieldProps interface extends InputProps and customizes the TextField component, omitting the 'size' prop from InputProps.
 export interface TextFieldProps extends Omit<InputProps, 'size'> {
-  /**
-   * The input field identifier.
-   */
+  // Optional unique identifier for the TextField.
   id?: string;
-  /**
-   * Specifies whether the input field should display an error state.
-   */
+  // Optional property for error handling within the TextField.
   error?: any;
-  /**
-   * Provides additional information about the input field.
-   */
+  // Optional helper text that appears below the TextField.
   helperText?: string;
-  /**
-   * The name of the input field.
-   */
+  // Optional name attribute for the TextField, useful for form submission.
   name?: string;
-  /**
-   * Displays a label above the user input.
-   */
+  // Optional label text for the TextField to indicate the field's purpose.
   label?: string;
-  /**
-   * Changes the label and border color of the input field.
-   */
+  // Optional property to specify the color scheme of the TextField.
   colorScheme?: string;
-  /**
-   * The left child to include in the field.
-   */
+  // Optional React node to be rendered on the left side of the TextField.
   leftChild?: React.ReactNode;
-  /**
-   * The right child to include in the field.
-   */
+  // Optional React node to be rendered on the right side of the TextField.
   rightChild?: React.ReactNode;
-  /**
-   * Placeholder text to display in the input field until the user enters text.
-   */
+  // Optional placeholder text shown inside the TextField when empty.
   placeholder?: string;
-  /**
-   * Specifies whether the input field is read-only and cannot be edited.
-   */
+  // Optional flag to set the TextField as read-only.
   isReadOnly?: boolean;
-  /**
-   * Specifies whether the input field is disabled and cannot be interacted with.
-   */
+  // Optional flag to indicate whether the TextField is disabled.
   isDisabled?: boolean;
-  /**
-   * Specifies whether a clear button should be added to the input field that clears its value when clicked.
-   */
+  // Optional flag that when true allows the TextField to be cleared.
   isClearable?: boolean;
-  /**
-   * Specifies whether the input field should be automatically focused.
-   */
+  // Optional flag to autofocus the TextField when it mounts.
   isAutoFocus?: boolean;
-  /**
-   * Handler function called when the input field value changes.
-   */
+  // Optional callback function that is called when the TextField value changes.
   onChange?: (value: any) => void;
-  /**
-   * Handler function called when the input field value changes for iOS and Android.
-   */
+  // Optional callback function that is called when the text in the TextField changes.
   onChangeText?: (value: string) => void;
-  /**
-   * Callback function triggered when the field loses focus.
-   */
+  // Optional callback function that is called when the TextField loses focus.
   onBlur?: (value: any) => void;
-  /**
-   * Event called when the input field is clicked/pressed.
-   */
+  // Optional callback function that is called when the TextField is clicked.
   onClick?: () => void;
-  /**
-   * Callback function called when the text input receives focus.
-   */
+  // Optional callback function that is called when the TextField gains focus.
   onFocus?: () => void;
-  /**
-   * Sets the text size and padding of the input field.
-   */
+  // Optional Size enum to specify the size of the TextField.
   size?: Size;
-  /**
-   * Applies a shadow effect to the input field.
-   */
+  // Optional shadow property that could be of type Shadow, Elevation, or CSSProperties to give depth effect.
   shadow?: Shadow | Elevation | CSSProperties;
-  /**
-   * Changes the shape or outline of the input field.
-   */
+  // Optional Shape enum to specify the shape of the TextField's corners.
   shape?: Shape;
-  /**
-   * CSS styles for the input container and field.
-   */
+  // Optional custom styles to apply to the TextField component.
   styles?: TextFieldStyles;
-  /**
-   * The default value of the input field.
-   */
+  // Optional controlled value of the TextField, driving its current state.
   value?: string;
-  /**
-   * Changes the style variant of the input field.
-   */
+  // Optional Variant enum to specify the variant of the TextField component.
   variant?: Variant;
 }
-
+// The TextFieldViewProps interface extends TextFieldProps and adds props specific to the view-layer customization of the component.
 export interface TextFieldViewProps extends TextFieldProps {
-  /** The hint text for the text field */
+  // Optional property to give hints to the user about how to fill in the TextField.
   hint?: string;
-
-  /** Function to set the hint text for the text field */
+  // Optional function that allows changing the hint text.
   setHint?: Function;
-
-  /** Indicates whether the text field is currently focused or not */
+  // Optional property indicating whether the TextField is currently focused.
   isFocused?: boolean;
-
-  /** Function to set the focused state of the text field */
+  // Optional function to update the focused state of the TextField.
   setIsFocused?: Function;
-
-  /** Indicates whether the mouse pointer is currently hovering over the text field or not */
+  // Optional property indicating whether the TextField is currently hovered by the mouse cursor.
   isHovered?: boolean;
-
-  /** Function to set the hovered state of the text field */
+  // Optional function to update the hovered state of the TextField.
   setIsHovered?: Function;
-
-  /** The current value of the text field */
+  // Optional controlled value of the TextField, potentially used in a state management context.
   value?: string;
-
-  /** Function to set the value of the text field */
+  // Optional function to programmatically set the value of the TextField.
   setValue?: Function;
 }

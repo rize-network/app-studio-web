@@ -1,17 +1,14 @@
 import React, { useCallback } from 'react';
 import { Element } from 'app-studio';
 import { Typography } from 'app-studio';
-
 import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
 import { Text } from '../../../Text/Text';
-
 import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
 import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
 import { ArrowDownSvg, ArrowUpSvg, CloseSvg } from '../../../Svg';
-
 import {
   DropDownProps,
   HiddenSelectProps,
@@ -22,7 +19,7 @@ import {
 } from './Select.props';
 import { useItemState } from './Select.state';
 import { IconSizes } from './Select.style';
-
+// Defines a component to render individual selection items within a list.
 const Item: React.FC<ItemProps> = ({
   isHovered,
   setIsHovered,
@@ -32,9 +29,10 @@ const Item: React.FC<ItemProps> = ({
   style,
   ...props
 }) => {
+  // Handles the click event on an option by invoking the callback with the selected option's value.
   const handleOptionClick = (option: string) => callback(option);
+  // Toggles the hover state on the item.
   const handleHover = () => setIsHovered(!isHovered);
-
   return (
     <Element
       as="li"
@@ -54,7 +52,6 @@ const Item: React.FC<ItemProps> = ({
     </Element>
   );
 };
-
 const SelectBox: React.FC<SelectBoxProps> = ({
   size = 'md',
   styles = { field: {}, text: {} },
@@ -104,7 +101,6 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     </Text>
   );
 };
-
 const HiddenSelect: React.FC<HiddenSelectProps> = ({
   id,
   name,
@@ -119,7 +115,6 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
   const handleChange = (event: any) => {
     if (onChange) onChange(event);
   };
-
   return (
     <Element
       id={id}
@@ -146,7 +141,6 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
     </Element>
   );
 };
-
 const DropDown: React.FC<DropDownProps> = ({
   size,
   styles = { dropDown: {} },
@@ -173,7 +167,6 @@ const DropDown: React.FC<DropDownProps> = ({
           shadowOpacity: 1,
           shadowRadius: 1,
         };
-
   return (
     <Element
       as="ul"
@@ -194,10 +187,10 @@ const DropDown: React.FC<DropDownProps> = ({
       backgroundColor="white"
       maxHeight="200px"
       style={{
-        scrollbarWidth: 'none' /* For Firefox */,
-        msOverflowStyle: 'none' /* For Internet Explorer and Edge */,
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
         '&::-webkit-scrollbar': {
-          display: 'none' /* For Chrome, Safari, and Opera */,
+          display: 'none',
         },
       }}
       {...shadow}
@@ -220,7 +213,6 @@ const DropDown: React.FC<DropDownProps> = ({
     </Element>
   );
 };
-
 export const MultiSelect: React.FC<MultiSelectProps> = ({
   option,
   size = 'md',
@@ -228,7 +220,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   ...props
 }) => {
   const handleClick = () => removeOption(option);
-
   return (
     <Horizontal
       gap={10}
@@ -250,7 +241,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
     </Horizontal>
   );
 };
-
 const SelectView: React.FC<SelectViewProps> = ({
   id,
   name,
@@ -289,16 +279,13 @@ const SelectView: React.FC<SelectViewProps> = ({
   ...props
 }) => {
   const isWithLabel = !!(isFocused && label);
-
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
-
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (event && event.stopPropagation) event.stopPropagation();
     setHide(!hide);
     setIsFocused(!isFocused);
   };
-
   const handleCallback = useCallback(
     (option: string) => {
       setHide(!hide);
@@ -309,17 +296,14 @@ const SelectView: React.FC<SelectViewProps> = ({
       }
       if (onChange) onChange(option);
     },
-
     [hide, isMulti, value]
   );
-
   const handleRemoveOption = (valueOption: string) => {
     if (Array.isArray(value) && value.includes(valueOption)) {
       const newValue = value.filter((option) => option !== valueOption);
       setValue(newValue.length === 0 ? [] : newValue);
     }
   };
-
   return (
     <FieldContainer
       role="SelectBox"
@@ -413,5 +397,4 @@ const SelectView: React.FC<SelectViewProps> = ({
     </FieldContainer>
   );
 };
-
 export default SelectView;

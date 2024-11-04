@@ -1,10 +1,8 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-
 import { Modal } from '../Modal';
 import { hideModal, showModal } from '../Modal/Modal.store';
-
 export const BlurModal = () => {
   return (
     <>

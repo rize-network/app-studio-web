@@ -1,0 +1,190 @@
+{
+  "Switch.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines the properties for the Switch component excluding 'size' from the InputProps to allow customization.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 6,
+          "comment": "The content to be displayed when the switch is in an active state.",
+          "codeSnippet": "acti"
+        },
+        {
+          "line": 7,
+          "comment": "Defines the color theme for the switch component.",
+          "codeSnippet": "colo"
+        },
+        {
+          "line": 8,
+          "comment": "Unique identifier for the switch component.",
+          "codeSnippet": "id?:"
+        },
+        {
+          "line": 9,
+          "comment": "Determines if the switch is disabled.",
+          "codeSnippet": "isDi"
+        },
+        {
+          "line": 10,
+          "comment": "Determines if the switch is read-only.",
+          "codeSnippet": "isRe"
+        },
+        {
+          "line": 11,
+          "comment": "Callback function to handle the change event.",
+          "codeSnippet": "onCh"
+        },
+        {
+          "line": 12,
+          "comment": "Name attribute for the switch component, useful for form submission.",
+          "codeSnippet": "name"
+        },
+        {
+          "line": 13,
+          "comment": "The content to be displayed when the switch is in an inactive state.",
+          "codeSnippet": "inAc"
+        },
+        {
+          "line": 14,
+          "comment": "Custom styles to apply to the switch component.",
+          "codeSnippet": "styl"
+        },
+        {
+          "line": 15,
+          "comment": "Defines the shadow appearance of the switch using predefined Shadow or Elevation, or a custom CSSProperties object.",
+          "codeSnippet": "shad"
+        },
+        {
+          "line": 16,
+          "comment": "Specifies the size of the switch component.",
+          "codeSnippet": "size"
+        },
+        {
+          "line": 17,
+          "comment": "The position of the label relative to the switch, either 'left' or 'right'.",
+          "codeSnippet": "labe"
+        },
+        {
+          "line": 19,
+          "comment": "Extends SwitchProps to include properties specific to the switch's view, like hover state.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 20,
+          "comment": "Denotes if the switch component is currently hovered by the cursor.",
+          "codeSnippet": "isHo"
+        },
+        {
+          "line": 21,
+          "comment": "Function to set the hover state of the switch component.",
+          "codeSnippet": "setI"
+        },
+        {
+          "line": 22,
+          "comment": "Controls the value or state of the switch (on/off).",
+          "codeSnippet": "valu"
+        },
+        {
+          "line": 23,
+          "comment": "Function to update the value of the switch.",
+          "codeSnippet": "setV"
+        }
+      ]
+    }
+  ],
+  "Switch.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "This file defines a custom hook for managing the state of a Switch component. It allows tracking whether the switch is hovered, and its on/off state based on 'isDisabled' and 'isChecked' properties.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Switch.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Defines a mapping of size types to their respective knob style properties, specifying the height and width for various predefined sizes.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 15,
+          "comment": "Specifies the dimensions of the switch's slider for each predefined size by mapping them to the height and width CSS properties.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 57,
+          "comment": "Associates each size type with corresponding padding values for vertical and horizontal spacing, used to adjust the position of the elements within the switch.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "Switch.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines the Size type which can be one of several predefined string values representing size categories for the component",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 12,
+          "comment": "Defines the SwitchStyles type for styling with optional CSSProperties for slider, circle, and label elements",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 13,
+          "comment": "Optional CSS properties to style the slider part of the switch",
+          "codeSnippet": "  sl"
+        },
+        {
+          "line": 14,
+          "comment": "Optional CSS properties to style the circle part that moves within the switch",
+          "codeSnippet": "  ci"
+        },
+        {
+          "line": 15,
+          "comment": "Optional CSS properties to style the label associated with the switch",
+          "codeSnippet": "  la"
+        }
+      ]
+    }
+  ],
+  "Switch.view.tsx": [
+    null
+  ],
+  "Switch.tsx": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines the SwitchComponent as a functional component that takes SwitchProps as props.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 6,
+          "comment": "Invokes useSwitchState hook to obtain state for this component, passing props to it.",
+          "codeSnippet": "  co"
+        },
+        {
+          "line": 7,
+          "comment": "Renders the SwitchView component, spreading the switchStates and props to pass all necessary data.",
+          "codeSnippet": "  re"
+        },
+        {
+          "line": 9,
+          "comment": "Exports the SwitchComponent as 'Switch' for use in other parts of the application.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

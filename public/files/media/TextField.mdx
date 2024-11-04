@@ -1,0 +1,225 @@
+# TextField
+
+A customizable text input field with optional helpers, labels, and icons.
+
+### **Import**
+  ```tsx
+  import { TextField } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Button } from '../../../Button/Button';
+
+import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+
+import { TextField } from '../TextField';
+
+export const DefaultInput = () => {
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    alert(`Hello, ${formData.get('surname')}`);
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
+        <TextField name="surname" />
+        <Button type="submit" height="40px" isAuto>
+          Submit
+        </Button>
+      </Horizontal>
+    </form>
+  );
+};
+
+```
+
+### **helperText**
+Optional helper text that appears below the TextField.
+
+```tsx
+import { useState } from 'react';
+import React from 'react';
+import { Button } from '../../../Button/Button';
+
+import { TextField } from '../../../Form/TextField/TextField';
+
+import { Vertical } from '../../../Layout/Vertical/Vertical';
+
+export const HelperTextInput = () => {
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+  };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState(initialValues);
+
+  const validate = (values: any) => {
+    const errors: any = {};
+    if (!values.firstName) {
+      errors.firstName = 'Required';
+    }
+    if (!values.lastName) {
+      errors.lastName = 'Required';
+    }
+    setFormErrors(errors);
+  };
+
+  const handleChange = (event: any) => {
+    setFormValues({ ...formValues, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    validate(formValues);
+    if (Object.values(formErrors).length === 0) {
+      alert(`Hello, ${formValues.firstName} ${formValues.lastName} `);
+    }
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <Vertical gap={10} alignItems="center" flexWrap="nowrap">
+        <TextField
+          name="firstName"
+          placeholder="First Name"
+          helperText={formErrors.firstName}
+          error={!!formErrors.firstName}
+          onChange={handleChange}
+        />
+        <TextField
+          name="lastName"
+          placeholder="Last Name"
+          helperText={formErrors.lastName}
+          error={!!formErrors.lastName}
+          onChange={handleChange}
+        />
+        <Button type="submit" height="40px" isAuto>
+          Submit
+        </Button>
+      </Vertical>
+    </form>
+  );
+};
+
+```
+
+### **colorScheme**
+Optional property to specify the color scheme of the TextField.
+
+```tsx
+import React from 'react';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
+
+import { TextField } from '../TextField';
+
+export const ColorSchemeDemo = () => {
+  return (
+    <Vertical gap={10} width="300px">
+      <TextField name="surname" label="Surname" colorScheme="theme.secondary" />
+      <TextField
+        name="name"
+        label="Name"
+        colorScheme="theme.primary"
+        variant="outline"
+      />
+    </Vertical>
+  );
+};
+
+```
+
+### **leftChild**
+Optional React node to be rendered on the left side of the TextField.
+
+```tsx
+import React from 'react';
+import { ProfileSvg } from '../../../Svg';
+
+import { TextField } from '../TextField';
+
+export const LeftInput = () => {
+  return (
+    <TextField
+      name="name"
+      placeholder="Name"
+      leftChild={<ProfileSvg color="black" size={16} />}
+    />
+  );
+};
+
+```
+
+### **rightChild**
+Optional React node to be rendered on the right side of the TextField.
+
+```tsx
+import React from 'react';
+import { EditSvg } from '../../../Svg';
+
+import { TextField } from '../TextField';
+
+export const RightInput = () => {
+  return (
+    <TextField
+      name="name"
+      placeholder="Name"
+      rightChild={<EditSvg color="black" size={16} />}
+    />
+  );
+};
+
+```
+
+### **placeholder**
+Optional placeholder text shown inside the TextField when empty.
+
+```tsx
+import React from 'react';
+import { Button } from '../../../Button/Button';
+
+import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+
+import { TextField } from '../TextField';
+
+export const Placeholder = () => {
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    alert(`Hello, ${formData.get('surname')}`);
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
+        <TextField name="surname" placeholder="Surname" />
+        <Button type="submit" height="40px" isAuto>
+          Submit
+        </Button>
+      </Horizontal>
+    </form>
+  );
+};
+
+```
+
+### **isClearable**
+Optional flag that when true allows the TextField to be cleared.
+
+```tsx
+import React from 'react';
+import { Vertical } from '../../../Layout/Vertical/Vertical';
+
+import { TextField } from '../TextField';
+
+export const IsClearableDemo = () => {
+  return (
+    <Vertical gap={10} width="300px">
+      <TextField value="Clear Button" size="xs" />
+      <TextField size="xs" value="No Clear Button" isClearable={false} />
+    </Vertical>
+  );
+};
+
+```
+

@@ -1,0 +1,355 @@
+{
+  "CountryPicker.props.ts": [
+    {
+      "comments": [
+        {
+          "line": 11,
+          "comment": "Defines properties for CountryPicker excluding 'size' from InputProps for customization",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 12,
+          "comment": "Optional ID for the CountryPicker input",
+          "codeSnippet": "  id"
+        },
+        {
+          "line": 13,
+          "comment": "Optional error flag to indicate validation state",
+          "codeSnippet": "  er"
+        },
+        {
+          "line": 14,
+          "comment": "Optional name attribute for the CountryPicker input",
+          "codeSnippet": "  na"
+        },
+        {
+          "line": 15,
+          "comment": "Optional label text for the CountryPicker input",
+          "codeSnippet": "  la"
+        },
+        {
+          "line": 16,
+          "comment": "Optional color scheme for styling",
+          "codeSnippet": "  co"
+        },
+        {
+          "line": 17,
+          "comment": "Optional helper text for guiding the user",
+          "codeSnippet": "  he"
+        },
+        {
+          "line": 18,
+          "comment": "Optional placeholder text for the CountryPicker input",
+          "codeSnippet": "  pl"
+        },
+        {
+          "line": 19,
+          "comment": "Optional shape of the CountryPicker for visual styles",
+          "codeSnippet": "  sh"
+        },
+        {
+          "line": 20,
+          "comment": "Flag to auto-focus the CountryPicker on render",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 21,
+          "comment": "Flag to mark the CountryPicker as read-only",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 22,
+          "comment": "Flag to disable the CountryPicker input",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 23,
+          "comment": "Optional blur handler function",
+          "codeSnippet": "  on"
+        },
+        {
+          "line": 24,
+          "comment": "Optional change handler function",
+          "codeSnippet": "  on"
+        },
+        {
+          "line": 25,
+          "comment": "Optional styles object specific to CountryPicker",
+          "codeSnippet": "  st"
+        },
+        {
+          "line": 26,
+          "comment": "Optional size of the CountryPicker for visual styles",
+          "codeSnippet": "  si"
+        },
+        {
+          "line": 27,
+          "comment": "Value to be used as the current selection",
+          "codeSnippet": "  va"
+        },
+        {
+          "line": 28,
+          "comment": "Variant for different visual types of CountryPicker",
+          "codeSnippet": "  va"
+        },
+        {
+          "line": 29,
+          "comment": "Shadow or Elevation styles for visual depth and perspective",
+          "codeSnippet": "  sh"
+        },
+        {
+          "line": 31,
+          "comment": "Includes all CountryPickerProps and properties specific to the view",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 32,
+          "comment": "Flag for hover state",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 33,
+          "comment": "Setter function for hover state",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 34,
+          "comment": "Flag for focus state",
+          "codeSnippet": "  is"
+        },
+        {
+          "line": 35,
+          "comment": "Setter function for focus state",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 36,
+          "comment": "Selected item's value",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 37,
+          "comment": "Setter function for selected item",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 38,
+          "comment": "Flag for toggling visibility",
+          "codeSnippet": "  hi"
+        },
+        {
+          "line": 39,
+          "comment": "Setter function for visibility",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 40,
+          "comment": "Array of new options for dropdown list",
+          "codeSnippet": "  ne"
+        },
+        {
+          "line": 41,
+          "comment": "Setter function for new options",
+          "codeSnippet": "  se"
+        },
+        {
+          "line": 43,
+          "comment": "Defines properties for DropDown excluding 'size' from InputProps for customization",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 44,
+          "comment": "Optional size of the dropdown for visual styles",
+          "codeSnippet": "  si"
+        },
+        {
+          "line": 45,
+          "comment": "Callback function for dropdown actions",
+          "codeSnippet": "  ca"
+        },
+        {
+          "line": 46,
+          "comment": "Options array to populate the dropdown",
+          "codeSnippet": "  op"
+        },
+        {
+          "line": 47,
+          "comment": "Optional styles object specific to dropdown",
+          "codeSnippet": "  st"
+        },
+        {
+          "line": 49,
+          "comment": "Defines properties for DropDownItem excluding 'size' from InputProps for customization",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 50,
+          "comment": "Callback function for dropdown item actions",
+          "codeSnippet": "  ca"
+        },
+        {
+          "line": 51,
+          "comment": "The option value for the dropdown item",
+          "codeSnippet": "  op"
+        },
+        {
+          "line": 52,
+          "comment": "Optional size of the dropdown item for visual styles",
+          "codeSnippet": "  si"
+        },
+        {
+          "line": 53,
+          "comment": "Optional styles object specific to dropdown item",
+          "codeSnippet": "  st"
+        }
+      ]
+    }
+  ],
+  "CountryPicker.state.ts": [
+    {
+      "comments": [
+        {
+          "line": 5,
+          "comment": "Defines a custom hook for managing the CountryPicker component's state, including options from a country list, selected value, and UI states for hiding, focus, and hover.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "CountryPicker.style.ts": [
+    {
+      "comments": [
+        {
+          "line": 2,
+          "comment": "Defines the size of icons based on predefined size categories to maintain design consistency.",
+          "codeSnippet": "expo"
+        },
+        {
+          "line": 9,
+          "comment": "Maps predefined size categories to specific numerical values to standardize label sizes throughout the component.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ],
+  "CountryPicker.type.d.ts": [
+    {
+      "comments": [
+        {
+          "line": 1,
+          "comment": "Defines a type for styling the CountryPicker component.",
+          "codeSnippet": "expor"
+        },
+        {
+          "line": 2,
+          "comment": "Optional style properties for the text element within the CountryPicker.",
+          "codeSnippet": "text?"
+        },
+        {
+          "line": 3,
+          "comment": "Optional style properties for the icon element within the CountryPicker.",
+          "codeSnippet": "icon?"
+        },
+        {
+          "line": 4,
+          "comment": "Optional style properties for the dropDown element within the CountryPicker.",
+          "codeSnippet": "dropD"
+        },
+        {
+          "line": 5,
+          "comment": "Optional style properties for the outer box element of the CountryPicker.",
+          "codeSnippet": "box?:"
+        },
+        {
+          "line": 6,
+          "comment": "Optional style properties for the label element associated with the CountryPicker.",
+          "codeSnippet": "labe"
+        },
+        {
+          "line": 7,
+          "comment": "Optional style properties for the helper text element within the CountryPicker.",
+          "codeSnippet": "help"
+        },
+        {
+          "line": 8,
+          "comment": "Optional style properties for the input field within the CountryPicker.",
+          "codeSnippet": "fiel"
+        },
+        {
+          "line": 10,
+          "comment": "Defines a type representing a country with specific properties.",
+          "codeSnippet": "expor"
+        },
+        {
+          "line": 11,
+          "comment": "Property 'name': the country's name as a string.",
+          "codeSnippet": "name:"
+        },
+        {
+          "line": 12,
+          "comment": "Property 'dial_code': the country's dialing code as a string.",
+          "codeSnippet": "dial_"
+        },
+        {
+          "line": 13,
+          "comment": "Property 'emoji': the emoji representing the country as a string.",
+          "codeSnippet": "emoj"
+        },
+        {
+          "line": 14,
+          "comment": "Property 'code': the country's code as a string (often 2-3 letters).",
+          "codeSnippet": "code:"
+        },
+        {
+          "line": 16,
+          "comment": "Defines a type for specifying size categories (e.g., for buttons or form elements).",
+          "codeSnippet": "expor"
+        },
+        {
+          "line": 17,
+          "comment": "Defines a type for specifying shape categories (affects the border-radius of elements).",
+          "codeSnippet": "expor"
+        },
+        {
+          "line": 18,
+          "comment": "Defines a type for specifying variant types (e.g., for button styles).",
+          "codeSnippet": "expor"
+        }
+      ]
+    }
+  ],
+  "CountryPicker.view.tsx": [
+    null
+  ],
+  "CountryPicker.tsx": [
+    {
+      "comments": [
+        {
+          "line": 3,
+          "comment": "Uses the custom hook 'useCountryPickerState' to manage state specific to the CountryPicker component.",
+          "codeSnippet": "impo"
+        },
+        {
+          "line": 5,
+          "comment": "Defines the CountryPickerComponent as a functional component with type 'React.FC' that takes 'CountryPickerProps' as props.",
+          "codeSnippet": "cons"
+        },
+        {
+          "line": 6,
+          "comment": "Invokes the 'useCountryPickerState' hook to obtain state and methods related to country picking functionality.",
+          "codeSnippet": "  co"
+        },
+        {
+          "line": 7,
+          "comment": "Renders the CountryPickerView component passing in state and props for dynamic UI representation.",
+          "codeSnippet": "  re"
+        },
+        {
+          "line": 9,
+          "comment": "Exports the CountryPickerComponent for use in other parts of the application as 'CountryPicker'.",
+          "codeSnippet": "expo"
+        }
+      ]
+    }
+  ]
+}

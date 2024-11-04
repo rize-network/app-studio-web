@@ -6,9 +6,7 @@ import {
   FieldLabel,
   FieldWrapper,
 } from '../../../Layout/Input';
-
 import { TextAreaViewProps } from './TextArea.props';
-
 const TextAreaView: React.FC<TextAreaViewProps> = ({
   id,
   name,
@@ -44,7 +42,6 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   ...props
 }) => {
   const isWithLabel = !!(isFocused && label);
-
   const fieldStyles = {
     margin: 0,
     paddingVertical: 8,
@@ -63,23 +60,19 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     cursor: isDisabled ? 'not-allowed' : 'auto',
     ...styles['field'],
   };
-
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => {
     setIsFocused(true);
     if (onFocus) onFocus();
   };
-
   const handleBlur = (event: any) => {
     onBlur(event);
     setIsFocused(false);
   };
-
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement> | string
   ) => {
     if (typeof event === 'string') {
-      //for ios and android
       setValue(event);
       if (onChangeText) onChangeText(event);
     } else {
@@ -87,7 +80,6 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
       if (onChange) onChange(event.target.value);
     }
   };
-
   return (
     <FieldContainer helperText={helperText} error={error} styles={styles}>
       <FieldContent
@@ -145,5 +137,4 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     </FieldContainer>
   );
 };
-
 export default TextAreaView;

@@ -1,81 +1,42 @@
 import { CSSProperties } from 'react';
 import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow } from 'app-studio';
-
 import { Size, SwitchStyles } from './Switch.type';
-
+// Defines the properties for the Switch component excluding 'size' from the InputProps to allow customization.
 export interface SwitchProps extends Omit<InputProps, 'size'> {
-  /**
-   * The content to be rendered when the switch is active.
-   */
+  // The content to be displayed when the switch is in an active state.
   activeChild?: React.ReactNode;
-
-  /**
-   * Specifies the color scheme for the switch's background.
-   */
+  // Defines the color theme for the switch component.
   colorScheme?: string;
-
-  /**
-   * Specifies the unique identifier of the switch.
-   */
+  // Unique identifier for the switch component.
   id?: string;
-
-  /**
-   * If set to true, the switch is disabled and cannot be interacted with.
-   */
+  // Determines if the switch is disabled.
   isDisabled?: boolean;
-
-  /**
-   * If set to true, the switch cannot be turned on or off and is in read-only mode.
-   */
+  // Determines if the switch is read-only.
   isReadOnly?: boolean;
-
-  /**
-   * A callback function that is invoked when the switch's value changes.
-   */
+  // Callback function to handle the change event.
   onChange?: Function;
-
-  /**
-   * The name of the switch.
-   */
+  // Name attribute for the switch component, useful for form submission.
   name?: string;
-
-  /**
-   * The content to be rendered when the switch is inactive.
-   */
+  // The content to be displayed when the switch is in an inactive state.
   inActiveChild?: React.ReactNode;
-
-  /**
-   * Custom CSS styles for the switch container and its components.
-   */
+  // Custom styles to apply to the switch component.
   styles?: SwitchStyles;
-
-  /**
-   * Adds a shadow effect to the switch.
-   */
+  // Defines the shadow appearance of the switch using predefined Shadow or Elevation, or a custom CSSProperties object.
   shadow?: Shadow | Elevation | CSSProperties;
-
-  /**
-   * Specifies the size of the switch, affecting its height and width.
-   */
+  // Specifies the size of the switch component.
   size?: Size;
-
-  /**
-   * Label position
-   */
+  // The position of the label relative to the switch, either 'left' or 'right'.
   labelPosition?: 'left' | 'right';
 }
-
+// Extends SwitchProps to include properties specific to the switch's view, like hover state.
 export interface SwitchViewProps extends SwitchProps {
-  /** Prop indicating if the switch is being hovered */
+  // Denotes if the switch component is currently hovered by the cursor.
   isHovered: boolean;
-
-  /** Callback prop to update the hover state of the switch */
+  // Function to set the hover state of the switch component.
   setIsHovered: Function;
-
-  /** Prop indicating the current state of the switch */
+  // Controls the value or state of the switch (on/off).
   value?: boolean;
-
-  /** Callback prop to update the state of the switch */
+  // Function to update the value of the switch.
   setValue?: Function;
 }

@@ -1,0 +1,141 @@
+{
+  "componentDescription": "A customizable date selection input for user interfaces.",
+  "id": {
+    "type": ["string"],
+    "typeValues": [],
+    "description": "Unique identifier for the DatePicker component.",
+    "defaultValue": []
+  },
+  "icon": {
+    "type": ["React.ReactNode"],
+    "typeValues": [],
+    "description": "Custom icon to display when the DatePicker is checked.",
+    "defaultValue": []
+  },
+  "error": {
+    "type": ["boolean"],
+    "typeValues": [],
+    "description": "Indicates whether the DatePicker has an error.",
+    "defaultValue": []
+  },
+  "helperText": {
+    "type": ["string"],
+    "typeValues": [],
+    "description": "Additional helper text that provides information about the field.",
+    "defaultValue": []
+  },
+  "name": {
+    "type": ["string"],
+    "typeValues": [],
+    "description": "The name of the toggle.",
+    "defaultValue": []
+  },
+  "colorScheme": {
+    "type": ["string"],
+    "typeValues": [],
+    "description": "The color scheme that changes the background color of the DatePicker.",
+    "defaultValue": "theme.primary"
+  },
+  "isReadOnly": {
+    "type": ["boolean"],
+    "typeValues": [],
+    "description": "If true, the DatePicker cannot be selected.",
+    "defaultValue": []
+  },
+  "isDisabled": {
+    "type": ["boolean"],
+    "typeValues": [],
+    "description": "If true, the DatePicker will be unusable.",
+    "defaultValue": []
+  },
+  "label": {
+    "type": ["string"],
+    "typeValues": [],
+    "description": "The label text for the field.",
+    "defaultValue": []
+  },
+  "onChange": {
+    "type": ["function"],
+    "typeValues": [],
+    "description": "Callback function triggered when the DatePicker value changes.",
+    "defaultValue": []
+  },
+  "onChangeText": {
+    "type": ["function"],
+    "typeValues": [],
+    "description": "Callback function triggered when the DatePicker value changes for IOS and Android.",
+    "defaultValue": []
+  },
+  "styles": {
+    "type": ["DatePickerStyles"],
+    "typeValues": ["object"],
+    "description": "CSS styles for the DatePicker container and label.",
+    "defaultValue": {
+      "box": {},
+      "label": {},
+      "helperText": {},
+      "text": {},
+      "field": {}
+    }
+  },
+  "shape": {
+    "type": ["Shape"],
+    "typeValues": ["'default'", "'sharp'", "'rounded'", "'pillShaped'"],
+    "description": "The shape that changes the outlines of the field.",
+    "defaultValue": "default"
+  },
+  "variant": {
+    "type": ["Variant"],
+    "typeValues": ["'default'", "'outline'", "'none'"],
+    "description": "Changes the style of the field.",
+    "defaultValue": "default"
+  },
+  "size": {
+    "type": ["Size"],
+    "typeValues": ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
+    "description": "The size that sets the height and width of the DatePicker.",
+    "defaultValue": "md"
+  },
+  "shadow": {
+    "type": ["Shadow", "Elevation", "CSSProperties"],
+    "typeValues": [],
+    "description": "Adds a shadow effect to the DatePicker.",
+    "defaultValue": {}
+  },
+  "date": {
+    "type": ["string"],
+    "typeValues": [],
+    "description": "The selected date value as a string.",
+    "defaultValue": []
+  },
+  "setDate": {
+    "type": ["function"],
+    "typeValues": [],
+    "description": "A function to set the selected date value.",
+    "defaultValue": []
+  },
+  "isHovered": {
+    "type": ["boolean"],
+    "typeValues": [],
+    "description": "Flag indicating if the date picker is currently being hovered.",
+    "defaultValue": []
+  },
+  "setIsHovered": {
+    "type": ["function"],
+    "typeValues": [],
+    "description": "A function to set the hovered state of the date picker.",
+    "defaultValue": []
+  },
+  "isFocused": {
+    "type": ["boolean"],
+    "typeValues": [],
+    "description": "Flag indicating if the date picker is currently focused.",
+    "defaultValue": []
+  },
+  "setIsFocused": {
+    "type": ["function"],
+    "typeValues": [],
+    "description": "A function to set the focus state of the date picker.",
+    "defaultValue": []
+  }
+}
