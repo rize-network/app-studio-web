@@ -118,7 +118,7 @@ export const ModalHeader: React.FC<HeaderProps> = ({
       padding={0}
       margin={0}
       filter="none"
-      isAuto
+      width={0}
     />
   );
 
