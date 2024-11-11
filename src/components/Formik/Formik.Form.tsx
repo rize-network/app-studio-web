@@ -40,6 +40,7 @@ export const FormikForm = <T extends {}>({
   children,
   autoFocus = false,
   initFocus,
+  ...props
 }: CustomFormProps<T> & any) => {
   const formik: any = useFormikContext();
   const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
@@ -87,7 +88,7 @@ export const FormikForm = <T extends {}>({
 
   return (
     <FocusContext.Provider value={contextValue}>
-      <$Form>{children}</$Form>
+      <$Form {...props}>{children}</$Form>
     </FocusContext.Provider>
   );
 };
