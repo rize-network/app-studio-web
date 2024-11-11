@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
 import { FormikTextArea } from '../Formik.TextArea';
@@ -12,7 +12,11 @@ export const FormikTextAreaExemple = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <FormikForm>
+        <FormikForm
+          onChange={() => {
+            console.log('FormikTextAreaExemple onChange', props.values);
+          }}
+        >
           <FormikTextArea
             name="thoughts"
             placeholder="Write your thoughts here..."
