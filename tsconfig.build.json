@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-      "target": "es5",
+      "target": "es2020",      
+      "module": "esnext",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
       "importHelpers": true,
@@ -8,11 +9,9 @@
       "declaration": true,
       // output .js.map sourcemap files for consumers
       "sourceMap": true,
-      // match output dir to input dir. e.g. dist/index instead of dist/src/index
-      "rootDir": "./src",
       // stricter type-checking for stronger correctness. Recommended by TS
        // linter checks for common issues
-       "noImplicitReturns": true,
+       "noImplicitReturns": false,
        "noFallthroughCasesInSwitch": true,
        // noUnused* overlap with @typescript-eslint/no-unused-vars, can disable if duplicative
        "noUnusedLocals": true,
@@ -28,28 +27,29 @@
       // error out if import and file system have a casing mismatch. Recommended by TS
       "forceConsistentCasingInFileNames": true,
       // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
-      "noEmit": true,
-      "module": "esnext",
       "resolveJsonModule": true,
       "types": ["react-scripts"],
       "baseUrl": "./",
       "paths": {
         "src/*": ["./src/*"],
       },
-      "strict": true,
+      // match output dir to input dir. e.g. dist/index instead of dist/src/index
+      "rootDir": "./src",
+      "strict": false,
       "noImplicitAny": true,
       "strictNullChecks": true,
       "strictFunctionTypes": true,
       "strictBindCallApply": true,
       "strictPropertyInitialization": true,
       "noImplicitThis": true,
-      "alwaysStrict": true,
+      "alwaysStrict": false,
       "outDir":"./dist"
     },
     "tsc-alias": {
       "verbose": false,
       "resolveFullPaths": true
     },
+    "noEmit": false,
     "include": ["./src"]
   }
   
