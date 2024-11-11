@@ -3,12 +3,13 @@ import { View, Text } from 'app-studio';
 import { useParams } from 'react-router-dom';
 import { Alert, Horizontal, Loader, Vertical } from '../../components';
 import { loadDocs } from '../../docsLoader';
+import * as runtime from 'react/jsx-runtime';
+
 import { SideMenu } from './components/docs.elements';
 import { MarkdownEditor } from './components/MarkdownEditor.component';
 import LiveCode from './components/LiveCode.component';
 import { MDXProvider } from '@mdx-js/react';
-import MDXRuntime from '@mdx-js/mdx';
-import { compile } from '@mdx-js/mdx';
+import { evaluate } from '@mdx-js/mdx';
 
 import '@mdxeditor/editor/style.css';
 
@@ -24,7 +25,7 @@ const DocsPage = () => {
 
   const [docs, setDocs] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [text, setText] = useState<any>('');
+  const [Content, setContent] = useState<React.ComponentType | null>(null);
 
   useEffect(() => {
     const fetchDocs = async () => {
@@ -37,6 +38,8 @@ const DocsPage = () => {
 
   useEffect(() => {
     const fetchDoc = async () => {
+      if (!docs || docs.length === 0) return;
+
       const doc = docs.find(
         (d: any) =>
           d.componentName.toLowerCase() === componentName?.toLowerCase()
@@ -46,14 +49,18 @@ const DocsPage = () => {
         setIsLoading(true);
         const response = await fetch(doc.path);
         const text = await response.text();
-        const compiled = await compile(text);
-        setText(compiled);
+
+        const evaluatedMdx = await evaluate(text, {
+          ...runtime,
+          useMDXComponents: () => components,
+        } as any);
+        setContent(() => evaluatedMdx.default);
         setIsLoading(false);
       }
     };
 
     fetchDoc();
-  }, [componentName]);
+  }, [docs, componentName]);
 
   return (
     <Horizontal height="100%" overflowY="auto">
@@ -61,9 +68,7 @@ const DocsPage = () => {
       <Vertical flex={5} padding="5px 10px">
         {!isLoading ? (
           <MDXProvider components={components}>
-            {/* <MarkdownEditor key={new Date().getTime()} markdown={text} /> */}
-            {/* <MDXRuntime>{text}</MDXRuntime> */}
-            {/* <LiveCode code={code} scope={{ Alert }} /> */}
+            {Content ? <Content /> : null}
           </MDXProvider>
         ) : (
           <Loader />
