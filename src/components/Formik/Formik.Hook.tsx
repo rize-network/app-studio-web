@@ -36,7 +36,6 @@ const getInputTypeProps = (type: string) => {
       return {};
   }
 };
-
 export const useFormikInput = ({ name, type, ...props }: any) => {
   const focus = useFormFocus();
   const {
@@ -60,7 +59,6 @@ export const useFormikInput = ({ name, type, ...props }: any) => {
 
   const handleBlur = () => {
     setFieldTouched(name, true);
-    // if(props.onBlur)props.onBlur();
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -69,6 +67,7 @@ export const useFormikInput = ({ name, type, ...props }: any) => {
       focus.focusNextInput(name);
     }
   };
+
   const isText = ['text', 'password', 'email', 'digits'].includes(type);
   const error =
     getIn(touched, name) || submitCount > 0 ? getIn(errors, name) : undefined;
