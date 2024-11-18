@@ -13,6 +13,7 @@ export * from './Form/Checkbox/Checkbox';
 export * from './Form/CountryPicker/CountryPicker';
 export * from './Form/DatePicker/DatePicker';
 export * from './Form/Password/Password';
+export * from './Form/ComboBox/ComboBox';
 export * from './Formik';
 export * from './Layout/Center/Center';
 export * from './Layout/Horizontal/Horizontal';
