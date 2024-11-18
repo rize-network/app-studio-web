@@ -16,7 +16,7 @@ export interface TextAreaProps extends Omit<InputProps, 'size'> {
   label?: string;
   maxRows?: number;
   maxCols?: number;
-  name: string;
+  name?: string;
   placeholder?: string;
   onChange?: (value: any) => void;
   onChangeText?: (text: string) => void;
