@@ -5,7 +5,7 @@ import { View } from '../../Layout/View/View';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Vertical } from 'src/components/Layout';
+import { Vertical } from '../../Layout/Vertical/Vertical';
 // Defines a functional component 'TabsView' with props of type 'TabsViewProps'.
 export const TabsView = (props: TabsViewProps) => {
   // Destructures 'tabs', 'styles', 'isActive', 'setIsActive', 'tabsState', and 'setTabsState' from the component props.

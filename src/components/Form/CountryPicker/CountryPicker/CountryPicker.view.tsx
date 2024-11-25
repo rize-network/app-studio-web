@@ -16,7 +16,7 @@ import {
 } from './CountryPicker.props';
 import { IconSizes } from './CountryPicker.style';
 import { Country } from './CountryPicker.type';
-import { ChevronIcon } from 'src/components/Icon/Icon';
+import { ChevronIcon } from '../../../Icon/Icon';
 const CountryList: React.FC<DropDownProps> = ({ size, ...props }) => (
   <Element as="ul" {...props} />
 );

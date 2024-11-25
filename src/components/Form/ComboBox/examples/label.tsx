@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComboBox } from '../ComboBox';
-import { PlusIcon } from 'src/components/Icon/Icon';
+import { PlusIcon } from '../../../Icon/Icon';
 
 export const LabelDemo = () => {
   const items = [

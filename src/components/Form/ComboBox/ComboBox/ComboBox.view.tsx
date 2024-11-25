@@ -3,7 +3,7 @@ import { View, Horizontal } from '../../../Layout';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
-import { SearchIcon, TickIcon } from 'src/components/Icon/Icon';
+import { SearchIcon, TickIcon } from '../../../Icon/Icon';
 
 // Defines the functional component 'ComboBoxView' with destructured props.
 const ComboBoxView: React.FC<ComboBoxViewProps> = ({
