@@ -1,10 +1,27 @@
 import React from 'react';
 import { View } from 'app-studio';
 import { CenterProps } from './Center.props';
-// Defines a React Functional Component named CenterView which centers its children both horizontally and vertically using flexbox.
-const CenterView: React.FC<CenterProps> = (props: CenterProps) => (
-  // Renders a 'View' component with display flex and center alignment applied on both axes, passing all received props.
-  <View display="flex" justifyContent="center" alignItems="center" {...props} />
+
+const CenterView = React.forwardRef<HTMLElement, CenterProps>(
+  (
+    {
+      // Sets a default alignment for content within the Center container to 'flex-start'
+      // Determines the direction in which the Center elements are stacked, default not reversed
+      isReversed = false,
+      ...props
+    },
+    ref
+  ) => (
+    <View
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      {...props}
+      ref={ref}
+    />
+  )
 );
-// Exports the CenterView component for use in other parts of the application.
-export default CenterView;
+
+CenterView.displayName = 'Center';
+
+export { CenterView };
