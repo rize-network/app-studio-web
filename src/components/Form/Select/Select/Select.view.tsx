@@ -8,7 +8,7 @@ import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
 import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
-import { ArrowIcon, ChevronIcon, CloseIcon } from '../../../Icon/Icon';
+import { ChevronIcon, CloseIcon } from '../../../Icon/Icon';
 import {
   DropDownProps,
   HiddenSelectProps,

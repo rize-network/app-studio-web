@@ -1,4 +1,4 @@
-import { View, ViewProps } from 'app-studio';
+import { ViewProps } from 'app-studio';
 import React from 'react';
 import { Center } from '../Layout/Center/Center';
 
