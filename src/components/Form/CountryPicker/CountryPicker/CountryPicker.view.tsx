@@ -7,8 +7,7 @@ import {
   FieldLabel,
   FieldWrapper,
 } from '../../../Layout/Input';
-import { ArrowDownSvg } from '../../../Svg/ArrowDown';
-import { ArrowUpSvg } from '../../../Svg/ArrowUp';
+
 import countryList from '../countries.json';
 import {
   CountryPickerViewProps,
@@ -17,6 +16,7 @@ import {
 } from './CountryPicker.props';
 import { IconSizes } from './CountryPicker.style';
 import { Country } from './CountryPicker.type';
+import { ChevronIcon } from 'src/components/Icon/Icon';
 const CountryList: React.FC<DropDownProps> = ({ size, ...props }) => (
   <Element as="ul" {...props} />
 );
@@ -43,6 +43,7 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
       margin={0}
       role="DropDownItem"
       listStyleType="none"
+      fontWeight="normal"
       paddingVertical={6}
       paddingHorizontal={12}
       onMouseEnter={handleHover}
@@ -226,13 +227,15 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         </FieldWrapper>
         <FieldIcons>
           {hide ? (
-            <ArrowDownSvg
+            <ChevronIcon
+              orientation="down"
               size={IconSizes[size]}
               color={IconColor}
               style={styles['icon']}
             />
           ) : (
-            <ArrowUpSvg
+            <ChevronIcon
+              orientation="up"
               size={IconSizes[size]}
               color={IconColor}
               style={styles['icon']}

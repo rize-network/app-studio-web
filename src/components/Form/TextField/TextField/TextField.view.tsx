@@ -5,7 +5,7 @@ import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
 import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
-import { CloseSvg } from '../../../Svg';
+import { CloseIcon } from '../../../Icon/Icon';
 import { TextFieldViewProps } from './TextField.props';
 const TextFieldInput = (props: any) => <Input type="text" {...props} />;
 const TextFieldView: React.FC<TextFieldViewProps> = ({
@@ -147,7 +147,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         {(rightChild || (isClearable && value)) && (
           <FieldIcons>
             {isClearable && value && !isReadOnly && !isDisabled && (
-              <CloseSvg
+              <CloseIcon
                 size={Typography.fontSizes[size]}
                 color={IconColor}
                 onClick={handleClear}

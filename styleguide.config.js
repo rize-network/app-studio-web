@@ -55,7 +55,9 @@ module.exports = {
   usageMode: 'collapse',
   pagePerSection: true,
   components: 'src/components/**/*.tsx',
-  propsParser: require('react-docgen-typescript').withCustomConfig('./tsconfig.json').parse,
+  propsParser: require('react-docgen-typescript').withCustomConfig(
+    './tsconfig.json'
+  ).parse,
   styleguideComponents: {
     Wrapper: path.join(__dirname, 'src/StyleGuideWrapper'),
   },
@@ -102,6 +104,6 @@ module.exports = {
     'src/components/Layout/Input/**',
     'src/components/Label/**',
     'src/components/Layout/View/View.tsx',
-    'src/components/Svg/**.tsx',
+    'src/components/Icon/**.tsx',
   ],
 };

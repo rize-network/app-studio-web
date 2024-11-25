@@ -3,7 +3,7 @@ import { Typography } from 'app-studio';
 
 import { Center } from '../../../Layout/Center/Center';
 import { Label } from '../../../Form/Label/Label';
-import { CheckSvg, IndeterminateSvg } from '../../../Svg';
+import { TickIcon, MinusIcon } from '../../../Icon/Icon';
 
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes } from './Checkbox.style';
@@ -104,10 +104,10 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           )}
           <Center {...checkboxStyle.checkbox}>
             {isIndeterminate ? (
-              <IndeterminateSvg />
+              <MinusIcon size={IconSizes[size]} color="white" />
             ) : (
               (isChecked || isSelected) &&
-              (icon ?? <CheckSvg size={IconSizes[size]} />)
+              (icon ?? <TickIcon size={IconSizes[size]} color="white" />)
             )}
           </Center>
           {labelPosition === 'right' && label && (

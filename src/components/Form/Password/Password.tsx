@@ -3,12 +3,12 @@ import React from 'react';
 import { PasswordProps } from './Password/Password.props';
 import { usePasswordState } from './Password/Password.state';
 import { View } from 'app-studio';
-import { CloseEyeSvg, OpenEyeSvg } from '../../Svg';
+import { CloseEyeIcon, OpenEyeIcon } from '../../Icon/Icon';
 import TextFieldView from '../TextField/TextField/TextField.view';
 
 const PasswordComponent: React.FC<PasswordProps> = ({
-  visibleIcon = <OpenEyeSvg size={14} />,
-  hiddenIcon = <CloseEyeSvg size={14} />,
+  visibleIcon = <OpenEyeIcon size={14} />,
+  hiddenIcon = <CloseEyeIcon size={14} />,
   ...props
 }) => {
   const { isVisible, setIsVisible, ...passwordProps } = usePasswordState(props);

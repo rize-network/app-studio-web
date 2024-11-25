@@ -8,7 +8,7 @@ import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
 import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
-import { ArrowDownSvg, ArrowUpSvg, CloseSvg } from '../../../Svg';
+import { ArrowIcon, ChevronIcon, CloseIcon } from '../../../Icon/Icon';
 import {
   DropDownProps,
   HiddenSelectProps,
@@ -232,7 +232,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       {...props}
     >
       <Text size={size}>{option}</Text>
-      <CloseSvg
+      <CloseIcon
         role="close-button"
         color="inherit"
         size={IconSizes[size]}
@@ -368,14 +368,16 @@ const SelectView: React.FC<SelectViewProps> = ({
           {!isReadOnly && !isDisabled && (
             <>
               {hide ? (
-                <ArrowDownSvg
+                <ChevronIcon
                   color="inherit"
                   size={IconSizes[size]}
                   style={styles.icon}
+                  orientation="down"
                 />
               ) : (
-                <ArrowUpSvg
+                <ChevronIcon
                   color="inherit"
+                  orientation="up"
                   size={IconSizes[size]}
                   style={styles.icon}
                 />

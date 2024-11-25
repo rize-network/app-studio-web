@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditSvg } from '../../../Svg';
+import { EditIcon } from '../../../Icon/Icon';
 
 import { TextField } from '../TextField';
 
@@ -8,7 +8,7 @@ export const RightInput = () => {
     <TextField
       name="name"
       placeholder="Name"
-      rightChild={<EditSvg color="black" size={16} />}
+      rightChild={<EditIcon color="black" size={16} />}
     />
   );
 };

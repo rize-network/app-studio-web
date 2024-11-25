@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProfileSvg } from '../../../Svg';
+import { ProfileIcon } from '../../../Icon/Icon';
 
 import { TextField } from '../TextField';
 
@@ -8,7 +8,7 @@ export const LeftInput = () => {
     <TextField
       name="name"
       placeholder="Name"
-      leftChild={<ProfileSvg color="black" size={16} />}
+      leftChild={<ProfileIcon color="black" size={16} />}
     />
   );
 };

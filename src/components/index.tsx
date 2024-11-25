@@ -26,5 +26,6 @@ export * from './Modal/Modal';
 export * from './Table/Table';
 export * from './Tabs/Tabs';
 export * from './Text/Text';
+export * as Icon from './Icon/Icon';
 export * from './Toggle/Toggle';
 export * from './ToggleGroup/ToggleGroup';

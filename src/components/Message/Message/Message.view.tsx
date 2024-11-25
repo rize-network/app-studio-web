@@ -5,7 +5,13 @@ import { View } from '../../Layout/View/View';
 import { Text } from '../../Text/Text';
 import { Themes } from './Message.style';
 import { MessageProps } from './Message.props';
-import { CloseSvg, WarningSvg, SuccessSvg, ErrorSvg, InfoSvg } from '../../Svg';
+import {
+  CloseIcon,
+  WarningIcon,
+  SuccessIcon,
+  ErrorIcon,
+  InfoIcon,
+} from '../../Icon/Icon';
 
 export const MessageView = ({
   variant,
@@ -53,10 +59,10 @@ export const MessageView = ({
   }[variant];
 
   const iconComponent = {
-    info: <InfoSvg size={24} color={iconColor} {...styles?.icon} />,
-    success: <SuccessSvg size={24} color={iconColor} {...styles?.icon} />,
-    warning: <WarningSvg size={24} color={iconColor} {...styles?.icon} />,
-    error: <ErrorSvg size={24} color={iconColor} {...styles?.icon} />,
+    info: <InfoIcon size={24} color={iconColor} {...styles?.icon} />,
+    success: <SuccessIcon size={24} color={iconColor} {...styles?.icon} />,
+    warning: <WarningIcon size={24} color={iconColor} {...styles?.icon} />,
+    error: <ErrorIcon size={24} color={iconColor} {...styles?.icon} />,
   }[variant];
 
   const isShowIcon = showIcon && iconComponent;
@@ -117,7 +123,7 @@ export const MessageView = ({
           }}
           {...styles?.closingIcon?.container}
         >
-          <CloseSvg
+          <CloseIcon
             size={18}
             color={iconColor}
             {...styles?.closingIcon?.icon}

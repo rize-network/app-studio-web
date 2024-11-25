@@ -1,8 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Password } from 'src/components';
-import { CloseEyeSvg } from 'src/components/Svg/CloseEye';
-import { OpenEyeSvg } from 'src/components/Svg/OpenEye';
+import { CloseEyeIcon } from 'src/components/Icon/CloseEye';
+import { OpenEyeIcon } from 'src/components/Icon/OpenEye';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
@@ -43,8 +43,8 @@ test('Password to match snapshot', () => {
         variant="outline"
         placeholder="Name"
         helperText={'required'}
-        visibleIcon={<OpenEyeSvg size={14} />}
-        hiddenIcon={<CloseEyeSvg size={14} />}
+        visibleIcon={<OpenEyeIcon size={14} />}
+        hiddenIcon={<CloseEyeIcon size={14} />}
         size="xl"
         styles={{
           box: {

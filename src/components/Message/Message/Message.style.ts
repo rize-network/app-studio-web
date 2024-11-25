@@ -23,14 +23,14 @@ export const Themes: Record<MessageType, any> = {
     },
     icon: {
       color: 'color.blue.500',
-      name: 'InformationSvg',
+      name: 'InformationIcon',
     },
     content: {
       color: 'color.blue.500',
     },
     close: {
       color: 'color.blue.500',
-      name: 'CloseSvg',
+      name: 'CloseIcon',
     },
   },
   success: {
@@ -40,14 +40,14 @@ export const Themes: Record<MessageType, any> = {
     },
     icon: {
       color: 'color.green.500',
-      name: 'CheckCircleSvg',
+      name: 'CheckCircleIcon',
     },
     content: {
       color: 'color.green.500',
     },
     close: {
       color: 'color.green.500',
-      name: 'CloseSvg',
+      name: 'CloseIcon',
     },
   },
   error: {
@@ -57,14 +57,14 @@ export const Themes: Record<MessageType, any> = {
     },
     icon: {
       color: 'color.red.500',
-      name: 'ErrrorSvg',
+      name: 'ErrrorIcon',
     },
     content: {
       color: 'color.red.500',
     },
     close: {
       color: 'color.red.500',
-      name: 'CloseSvg',
+      name: 'CloseIcon',
     },
   },
   warning: {
@@ -74,14 +74,14 @@ export const Themes: Record<MessageType, any> = {
     },
     icon: {
       color: 'color.orange.500',
-      name: 'ErrrorSvg',
+      name: 'ErrrorIcon',
     },
     content: {
       color: 'color.orange.500',
     },
     close: {
       color: 'color.orange.500',
-      name: 'CloseSvg',
+      name: 'CloseIcon',
     },
   },
 };

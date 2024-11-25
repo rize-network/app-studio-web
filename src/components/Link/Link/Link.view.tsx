@@ -2,7 +2,7 @@ import React from 'react';
 import { Element } from 'app-studio';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { ExternalLinkSvg } from '../../Svg';
+import { ExternalLinkIcon } from '../../Icon/Icon';
 import { LinkViewProps } from './Link.props';
 import { IconSizes } from './Link.style';
 // Component definition for 'LinkView', a functional component with props defined by 'LinkViewProps'.
@@ -44,7 +44,7 @@ const LinkView: React.FC<LinkViewProps> = ({
         <Horizontal gap={3} alignItems="center" flexWrap="nowrap">
           {children}
           {isExternal && (
-            <ExternalLinkSvg size={IconSizes[iconSize]} style={styles.icon} />
+            <ExternalLinkIcon size={IconSizes[iconSize]} style={styles.icon} />
           )}
         </Horizontal>
       </Element>

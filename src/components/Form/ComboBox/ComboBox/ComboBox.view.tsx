@@ -3,8 +3,8 @@ import { View, Horizontal } from '../../../Layout';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
-import TickSvg from '../../../Svg/Tick';
-import SearchLoopSvg from '../../../Svg/Search';
+import { SearchIcon, TickIcon } from 'src/components/Icon/Icon';
+
 // Defines the functional component 'ComboBoxView' with destructured props.
 const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   placeholder,
@@ -131,7 +131,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                   onChange={(value) => handleSearch(value)}
                   hint={placeholder}
                   isClearable={false}
-                  leftChild={<SearchLoopSvg size={12} />}
+                  leftChild={<SearchIcon size={12} />}
                   styles={{
                     box: {
                       width: '100%',
@@ -168,7 +168,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                         {item.icon && item.icon}
                         {item.value === selectedItem.value &&
                           showTick &&
-                          !item.icon && <TickSvg />}
+                          !item.icon && <TickIcon size={20} />}
                       </>
                     </Horizontal>
                   ))}

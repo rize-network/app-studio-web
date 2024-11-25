@@ -5,6 +5,7 @@ import { View } from '../../Layout/View/View';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
+import { Vertical } from 'src/components/Layout';
 // Defines a functional component 'TabsView' with props of type 'TabsViewProps'.
 export const TabsView = (props: TabsViewProps) => {
   // Destructures 'tabs', 'styles', 'isActive', 'setIsActive', 'tabsState', and 'setTabsState' from the component props.
@@ -29,7 +30,7 @@ export const TabsView = (props: TabsViewProps) => {
     return tab.value === tabsState[0].value;
   };
   return (
-    <Horizontal width="100w" height={'100%'} {...styles?.container}>
+    <Vertical width="100w" height={'100%'} {...styles?.container}>
       <Horizontal marginBottom={20} {...styles?.headerTabs}>
         {tabs.map((tab, idx) => (
           <Button
@@ -59,6 +60,6 @@ export const TabsView = (props: TabsViewProps) => {
             isContentActive(tab) && <View key={idx}>{tab.content}</View>
         )}
       </View>
-    </Horizontal>
+    </Vertical>
   );
 };
