@@ -1,7 +1,28 @@
 import React from 'react';
-import { HorizontalView } from './Horizontal/Horizontal.view';
-import { HorizontalProps } from './Horizontal/Horizontal.props';
+import { View } from 'app-studio';
+import { HorizontalProps } from './Horizontal.props';
 
-export const Horizontal: React.FC<HorizontalProps> = (props) => (
-  <HorizontalView {...props} />
+const Horizontal = React.forwardRef<HTMLElement, HorizontalProps>(
+  (
+    {
+      // Sets a default alignment for content within the Horizontal container to 'flex-start'
+      justifyContent = 'flex-start',
+      // Determines the direction in which the Horizontal elements are stacked, default not reversed
+      isReversed = false,
+      ...props
+    },
+    ref
+  ) => (
+    <View
+      display="flex"
+      justifyContent={justifyContent}
+      flexDirection={isReversed ? 'row-reverse' : 'row'}
+      {...props}
+      ref={ref}
+    />
+  )
 );
+
+Horizontal.displayName = 'Horizontal';
+
+export { Horizontal };
