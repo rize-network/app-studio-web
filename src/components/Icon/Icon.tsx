@@ -57,12 +57,7 @@ export const CheckIcon: React.FC<IconProps> = ({
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={'currentColor'}
-      strokeWidth="1"
-    >
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1">
       <path
         d="M17.0001 9L10 16L7 13"
         strokeLinecap="round"
@@ -78,8 +73,19 @@ export const CloseIcon: React.FC<IconProps> = ({
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
-    <svg viewBox="0 0 24 24" fill={'currentColor'}>
-      <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
   </IconWrapper>
 );
@@ -232,7 +238,7 @@ export const ProfileIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
-export const ArrowIcon: React.FC<IconProps> = ({
+export const BoldArrowIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
   ...props
@@ -240,6 +246,28 @@ export const ArrowIcon: React.FC<IconProps> = ({
   <IconWrapper size={size} color={color} {...props}>
     <svg viewBox="0 0 24 24" fill={'currentColor'}>
       <path d="M12 4l7 7h-4v7h-6v-7H5l7-7z" />
+    </svg>
+  </IconWrapper>
+);
+
+export const ArrowIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      strokeWidth="1"
+      stroke={'currentColor'}
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="12" y1="20" x2="12" y2="8"></line>
+      <polyline points="6 12 12 6 18 12"></polyline>
     </svg>
   </IconWrapper>
 );
