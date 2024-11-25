@@ -11,7 +11,7 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
     stroke="theme.loading"
     strokeLinecap="round"
     strokeLinejoin="round"
-    strokeWidth="2"
+    strokeWidth="1"
     style={
       Object {
         "transform": "rotate(0deg)",
@@ -57,7 +57,7 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
     stroke="theme.primary"
     strokeLinecap="round"
     strokeLinejoin="round"
-    strokeWidth="2"
+    strokeWidth="1"
     style={
       Object {
         "transform": "rotate(0deg)",
@@ -103,7 +103,7 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
     stroke="theme.loading"
     strokeLinecap="round"
     strokeLinejoin="round"
-    strokeWidth="2"
+    strokeWidth="1"
     style={
       Object {
         "transform": "rotate(0deg)",
@@ -150,7 +150,7 @@ exports[`Loader with text position bottom should match snapshot 1`] = `
     stroke="theme.loading"
     strokeLinecap="round"
     strokeLinejoin="round"
-    strokeWidth="2"
+    strokeWidth="1"
     style={
       Object {
         "transform": "rotate(0deg)",
