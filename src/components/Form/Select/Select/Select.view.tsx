@@ -75,27 +75,34 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     ...styles['field'],
     ...styles['text'],
   };
-  const option = options.find((option) => option.value === value);
+  const option: any =
+    options.length > 0 && options.find((option) => option.value === value);
   return (
     <Text {...fieldStyles}>
-      {(value === '' || (value && value.length === 0)) && !!placeholder ? (
+      {/* Check if value is an empty string or if value is an array but with no items, then show placeholder */}
+      {(value === '' || (Array.isArray(value) && value.length === 0)) &&
+      !!placeholder ? (
         placeholder
       ) : (
         <>
-          {typeof value === 'string'
-            ? option?.label ?? value
-            : value &&
-              value.length > 0 && (
-                <Horizontal gap={6}>
-                  {value.map((option) => (
-                    <MultiSelect
-                      key={option}
-                      option={option}
-                      removeOption={removeOption}
-                    />
-                  ))}
-                </Horizontal>
-              )}
+          {/* If value is a string, use the option label or value */}
+          {typeof value === 'string' ? (
+            (option && option.label) ?? value
+          ) : // If value is an array and not empty, render MultiSelect options
+          Array.isArray(value) && value.length > 0 ? (
+            <Horizontal gap={6}>
+              {value.map((option) => (
+                <MultiSelect
+                  key={option}
+                  option={option}
+                  removeOption={removeOption}
+                />
+              ))}
+            </Horizontal>
+          ) : (
+            // Handle any other types of value (including objects or unexpected values)
+            <span>{value}</span>
+          )}
         </>
       )}
     </Text>
@@ -131,13 +138,14 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
       multiple={isMulti}
       {...props}
     >
-      {options.map((option) => {
-        return (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        );
-      })}
+      {options.length > 0 &&
+        options.map((option) => {
+          return (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          );
+        })}
     </Element>
   );
 };
@@ -196,20 +204,21 @@ const DropDown: React.FC<DropDownProps> = ({
       {...shadow}
       {...styles['dropDown']}
     >
-      {options.map((option, index) => (
-        <Item
-          key={option.value}
-          size={size}
-          style={styles['text']}
-          option={option}
-          callback={handleCallback}
-          backgroundColor={
-            index === highlightedIndex ? 'color.gray.100' : 'transparent'
-          }
-          onMouseEnter={() => setHighlightedIndex(index)}
-          {...itemStates}
-        />
-      ))}
+      {options.length > 0 &&
+        options.map((option, index) => (
+          <Item
+            key={option.value}
+            size={size}
+            style={styles['text']}
+            option={option}
+            callback={handleCallback}
+            backgroundColor={
+              index === highlightedIndex ? 'color.gray.100' : 'transparent'
+            }
+            onMouseEnter={() => setHighlightedIndex(index)}
+            {...itemStates}
+          />
+        ))}
     </Element>
   );
 };
