@@ -25,3 +25,4 @@ const Center = React.forwardRef<HTMLElement, CenterProps>(
 Center.displayName = 'Center';
 
 export { Center };
+export type { CenterProps };
