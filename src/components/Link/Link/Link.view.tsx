@@ -9,7 +9,7 @@ import { IconSizes } from './Link.style';
 const LinkView: React.FC<LinkViewProps> = ({
   children,
   // Default href prop set to root '/', used for navigation target.
-  href = '/',
+  to = '/',
   // Default icon size for links, with 'sm' specifying a small-sized icon.
   iconSize = 'sm',
   // Determines the default underline behavior of the link, set to 'default'.
@@ -29,7 +29,7 @@ const LinkView: React.FC<LinkViewProps> = ({
     if (underline === 'hover') setIsHovered(true);
   };
   return (
-    <ReactRouterLink to={href} target={isExternal ? '_blank' : '_self'}>
+    <ReactRouterLink to={to} target={isExternal ? '_blank' : '_self'}>
       <Element
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}

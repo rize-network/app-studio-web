@@ -14,7 +14,7 @@ export interface LinkProps extends Omit<ViewProps, 'size'> {
   // Optional prop to set the color scheme of the link which might influence its appearance.
   colorScheme?: string;
   // The href attribute specifying the URL the link points to.
-  href: string;
+  to: string;
   // Optional styles object to customize the appearance using predefined style types.
   styles?: Styles;
 }
