@@ -8,6 +8,7 @@ interface IconProps extends Omit<ViewProps, 'size'> {
   color?: string;
   filled?: boolean;
   strokeWidth?: number;
+  orientation?: 'left' | 'right' | 'up' | 'down';
 }
 
 // Default wrapper component for consistent sizing
