@@ -54,7 +54,6 @@ export const FooterDemo = () => {
   ];
   return (
     <Table
-      onClick={() => console.log('hello')}
       styles={{
         tfoot: {
           borderTop: '1px solid gray',
@@ -68,7 +67,7 @@ export const FooterDemo = () => {
         footer={[
           {
             value: 'Total Amount',
-            props: { colspan: 3, style: { fontWeight: 'bold' } },
+            props: { colSpan: 3, style: { fontWeight: 'bold' } },
           },
           { value: '$2,500.00' },
         ]}

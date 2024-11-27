@@ -7,6 +7,5 @@ interface ComboBoxContextType {
 }
 // Creates the context for ComboBox with a default value enforcing non-null
 const ComboBoxContext = createContext<ComboBoxContextType>(null!);
-// Hook for consuming ComboBoxContext and accessing combo box states and toggle function
-export const useComboBoxContext = () => useContext(ComboBoxContext);
+
 export default ComboBoxContext;
