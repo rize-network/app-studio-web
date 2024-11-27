@@ -7,7 +7,14 @@ export const useSelectState = ({
   options,
 }: SelectProps) => {
   // Determines the default value based on the 'placeholder' and 'isMulti' props, setting to an empty array for multi-select or an empty string/single default option
-  const defaultValue = placeholder ? (isMulti ? [] : '') : options[0].value;
+  const defaultValue = placeholder
+    ? isMulti
+      ? []
+      : '' // If there's a placeholder, set default to empty array for multi-select or empty string for single select
+    : Array.isArray(options) && options.length > 0
+    ? options[0].value
+    : ''; // If no placeholder, use the first option value if available, otherwise undefined
+
   // State hook for managing visibility of the Select dropdown, initially set to hidden
   const [hide, setHide] = React.useState(true);
   // State hook for tracking mouse hover status over the Select component

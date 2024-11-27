@@ -45,5 +45,5 @@
     "alwaysStrict": true
   },
   "noEmit": false,
-  "include": ["./src", "bot"]
+  "include": ["./src"]
 }

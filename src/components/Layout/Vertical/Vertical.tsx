@@ -1,10 +1,28 @@
 import React from 'react';
-import VerticalView from './Vertical/Vertical.view';
-import { VerticalProps } from './Vertical/Vertical.props';
-// Defines the VerticalComponent as a functional component with VerticalProps as its props signature.
-const VerticalComponent: React.FC<VerticalProps> = (props) => (
-  // Renders the VerticalView component, passing all of the received props through to it.
-  <VerticalView {...props} />
+import { View } from 'app-studio';
+import { VerticalProps } from './Vertical.props';
+
+const Vertical = React.forwardRef<HTMLElement, VerticalProps>(
+  (
+    {
+      // Sets a default alignment for content within the Vertical container to 'flex-start'
+      justifyContent = 'flex-start',
+      // Determines the direction in which the Vertical elements are stacked, default not reversed
+      isReversed = false,
+      ...props
+    },
+    ref
+  ) => (
+    <View
+      display="flex"
+      justifyContent={justifyContent}
+      flexDirection={isReversed ? 'column-reverse' : 'column'}
+      {...props}
+      ref={ref}
+    />
+  )
 );
-// Exports the VerticalComponent as Vertical for use in other parts of the application.
-export const Vertical = VerticalComponent;
+
+Vertical.displayName = 'Vertical';
+
+export { Vertical };

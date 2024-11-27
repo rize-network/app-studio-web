@@ -1,10 +1,27 @@
 import React from 'react';
-import { CenterProps } from './Center/Center.props';
-import CenterView from './Center/Center.view';
-// Defines a functional component named CenterComponent utilizing React's functional component structure, which expects props of the CenterProps type.
-const CenterComponent: React.FC<CenterProps> = (props) => (
-  // Renders the CenterView component, passing down all the props received by the CenterComponent.
-  <CenterView {...props} />
+import { View } from 'app-studio';
+import { CenterProps } from './Center.props';
+
+const Center = React.forwardRef<HTMLElement, CenterProps>(
+  (
+    {
+      // Sets a default alignment for content within the Center container to 'flex-start'
+      // Determines the direction in which the Center elements are stacked, default not reversed
+      isReversed = false,
+      ...props
+    },
+    ref
+  ) => (
+    <View
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      {...props}
+      ref={ref}
+    />
+  )
 );
-// Exports CenterComponent as Center, making it available for use in other parts of the application.
-export const Center = CenterComponent;
+
+Center.displayName = 'Center';
+
+export { Center };

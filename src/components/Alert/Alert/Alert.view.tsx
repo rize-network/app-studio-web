@@ -3,7 +3,7 @@ import { View } from '../../Layout/View/View';
 import { Text } from '../../Text/Text';
 import { Vertical } from '../../Layout/Vertical/Vertical';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { WarningSvg } from '../../Svg';
+import { WarningIcon } from '../../Icon/Icon';
 import { AlertProps } from './Alert.props';
 import { Themes } from './Alert.style';
 // Defines AlertView as a functional component using destructuring to extract props.
@@ -22,14 +22,14 @@ export const AlertView = ({
     borderStyle="solid"
     padding={16}
     flexWrap="nowrap"
-    borderColor={Themes[variant].container.border}
+    // borderColor={Themes[variant].container.border}
     {...styles?.container}
   >
     <View alignSelf={'center'}>
       {icon ? (
         icon
       ) : (
-        <WarningSvg
+        <WarningIcon
           size={24}
           color={styles?.icon.color ?? Themes[variant].content.color}
         />

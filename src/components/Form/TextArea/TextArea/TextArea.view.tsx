@@ -75,8 +75,10 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     if (typeof event === 'string') {
       setValue(event);
       if (onChangeText) onChangeText(event);
+      if (onChange) onChange(event);
     } else {
       setValue(event.target.value);
+      if (onChangeText) onChangeText(event.target.value);
       if (onChange) onChange(event.target.value);
     }
   };
@@ -126,11 +128,11 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             placeholder={hint}
             onBlur={handleBlur}
             onFocus={handleFocus}
-            onChange={handleChange}
             multiline={isMultiline}
             {...fieldStyles}
             {...props}
-            {...(onChangeText && { onChangeText: handleChange })}
+            onChange={handleChange}
+            onChangeText={handleChange}
           />
         </FieldWrapper>
       </FieldContent>

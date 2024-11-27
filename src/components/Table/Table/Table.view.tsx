@@ -1,10 +1,10 @@
 import React from 'react';
 import { Element } from 'app-studio';
 import { TableViewProps } from './Table.props';
-import { useTableStyles } from './Table.context';
+import { useTableContext } from './Table.context';
 
 export const TableContainer: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+  const { styles } = useTableContext();
   return (
     <Element
       as="table"
@@ -16,7 +16,7 @@ export const TableContainer: React.FC<any> = (props) => {
 };
 
 export const TableHead: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+  const { styles } = useTableContext();
   return (
     <Element
       as="thead"
@@ -30,7 +30,7 @@ export const TableHead: React.FC<any> = (props) => {
 };
 
 export const TableHeadCell: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+  const { styles } = useTableContext();
   return (
     <Element
       as="th"
@@ -44,12 +44,12 @@ export const TableHeadCell: React.FC<any> = (props) => {
 };
 
 export const TableRow: React.FC<any> = (props) => {
-  const styles = useTableStyles();
-  return <Element as="tr" {...styles.tr} {...props} />;
+  const { styles, onClick } = useTableContext();
+  return <Element as="tr" {...styles.tr} onClick={onClick} {...props} />;
 };
 
 export const TableCell: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+  const { styles } = useTableContext();
   return (
     <Element
       as="td"
@@ -63,17 +63,17 @@ export const TableCell: React.FC<any> = (props) => {
 };
 
 export const TableBody: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+  const { styles } = useTableContext();
   return <Element as="tbody" {...styles.tbody} {...props} />;
 };
 
 export const TableFooter: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+  const { styles } = useTableContext();
   return <Element as="tfoot" {...styles.tfoot} {...props} />;
 };
 
 export const TableCaption: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+  const { styles } = useTableContext();
   return (
     <Element
       as="caption"
@@ -90,6 +90,7 @@ export const TableView: React.FC<TableViewProps> = ({
   columns,
   footer,
   caption,
+  onClick,
 }) => {
   return (
     <TableContainer role="Table">

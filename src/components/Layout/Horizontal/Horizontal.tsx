@@ -1,13 +1,28 @@
 import React from 'react';
-import type { ViewProps } from 'app-studio';
 import { View } from 'app-studio';
-// Defines a functional component 'HorizontalComponent' utilizing 'ViewProps'. It leverages flexbox to create a horizontal view, which can be reversed based on a prop.
-const HorizontalComponent: React.FC<ViewProps> = (props) => (
-  <View
-    display="flex"
-    flexDirection={props.isReversed ? 'row-reverse' : 'row'}
-    {...props}
-  />
+import { HorizontalProps } from './Horizontal.props';
+
+const Horizontal = React.forwardRef<HTMLElement, HorizontalProps>(
+  (
+    {
+      // Sets a default alignment for content within the Horizontal container to 'flex-start'
+      justifyContent = 'flex-start',
+      // Determines the direction in which the Horizontal elements are stacked, default not reversed
+      isReversed = false,
+      ...props
+    },
+    ref
+  ) => (
+    <View
+      display="flex"
+      justifyContent={justifyContent}
+      flexDirection={isReversed ? 'row-reverse' : 'row'}
+      {...props}
+      ref={ref}
+    />
+  )
 );
-// Exports the HorizontalComponent as 'Horizontal', making it available for use in other parts of the application.
-export const Horizontal = HorizontalComponent;
+
+Horizontal.displayName = 'Horizontal';
+
+export { Horizontal };

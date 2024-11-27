@@ -135,7 +135,7 @@ Optional React node to be rendered on the left side of the TextField.
 
 ```tsx
 import React from 'react';
-import { ProfileSvg } from '../../../Svg';
+import { ProfileIcon } from '../../../Icon';
 
 import { TextField } from '../TextField';
 
@@ -144,7 +144,7 @@ export const LeftInput = () => {
     <TextField
       name="name"
       placeholder="Name"
-      leftChild={<ProfileSvg color="black" size={16} />}
+      leftChild={<ProfileIcon color="black" size={16} />}
     />
   );
 };
@@ -156,7 +156,7 @@ Optional React node to be rendered on the right side of the TextField.
 
 ```tsx
 import React from 'react';
-import { EditSvg } from '../../../Svg';
+import { EditIcon } from '../../../Icon';
 
 import { TextField } from '../TextField';
 
@@ -165,7 +165,7 @@ export const RightInput = () => {
     <TextField
       name="name"
       placeholder="Name"
-      rightChild={<EditSvg color="black" size={16} />}
+      rightChild={<EditIcon color="black" size={16} />}
     />
   );
 };

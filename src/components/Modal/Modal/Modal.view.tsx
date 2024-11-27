@@ -5,7 +5,7 @@ import { Vertical } from '../../Layout/Vertical/Vertical';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Button } from '../../Button/Button';
 import { View } from '../../Layout/View/View';
-import { CloseSvg } from '../../Svg';
+import { CloseIcon } from '../../Icon/Icon';
 import { hideModal } from './Modal.store';
 
 import {
@@ -114,11 +114,11 @@ export const ModalHeader: React.FC<HeaderProps> = ({
     <Button
       onClick={onClose}
       colorScheme="transparent"
-      icon={<CloseSvg size={HeaderIconSizes[iconSize]} color={buttonColor} />}
+      icon={<CloseIcon size={HeaderIconSizes[iconSize]} color={buttonColor} />}
       padding={0}
       margin={0}
       filter="none"
-      isAuto
+      width={0}
     />
   );
 

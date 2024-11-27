@@ -9,9 +9,9 @@ export const ButtonSizes: Record<Size, CSSProperties> = {
     paddingBottom: 8,
     paddingLeft: 12,
     paddingRight: 12,
-    fontWeight: 600,
-    fontSize: 'xs',
-    lineHeight: 16,
+    fontWeight: 400,
+    fontSize: 11,
+    lineHeight: 14,
     letterSpacing: 1.25,
     // Establishes style configuration for small (sm) button size.
   },
@@ -21,10 +21,10 @@ export const ButtonSizes: Record<Size, CSSProperties> = {
     paddingBottom: 10,
     paddingLeft: 16,
     paddingRight: 16,
-    fontWeight: 600,
-    fontSize: 'sm',
+    fontWeight: 400,
+    fontSize: 12,
     // Establishes style configuration for medium (md) button size.
-    lineHeight: 20,
+    lineHeight: 16,
     letterSpacing: 1.25,
   },
   md: {
@@ -34,9 +34,10 @@ export const ButtonSizes: Record<Size, CSSProperties> = {
     paddingLeft: 18,
     paddingRight: 18,
     // Establishes style configuration for large (lg) button size.
-    fontWeight: 600,
-    fontSize: 'md',
-    lineHeight: 24,
+
+    fontSize: 14,
+    fontWeight: 400,
+    lineHeight: 18,
     letterSpacing: 1.25,
   },
   lg: {
@@ -46,8 +47,8 @@ export const ButtonSizes: Record<Size, CSSProperties> = {
     // Establishes style configuration for extra-large (xl) button size.
     paddingLeft: 22,
     paddingRight: 22,
-    fontWeight: 600,
-    fontSize: 'lg',
+    fontWeight: 400,
+    fontSize: 18,
     lineHeight: 24,
     letterSpacing: 1.25,
   },
@@ -61,10 +62,10 @@ export const ButtonSizes: Record<Size, CSSProperties> = {
     // Sets the border-radius for a rounded button shape to '4'.
     paddingRight: 26,
     // Sets the border-radius for a pill-shaped button to '24'.
-    fontWeight: 600,
-    fontSize: 'xl',
+    fontWeight: 400,
+    fontSize: 22,
     // Defines a constant 'IconSizes' as a mapping from 'Size' to corresponding 'CSSProperties' for icons.
-    lineHeight: 24,
+    lineHeight: 28,
     // Sets the width, height, and padding for icons of extra-small size.
     letterSpacing: 1.25,
   },

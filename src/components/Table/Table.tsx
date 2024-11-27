@@ -10,11 +10,15 @@ import {
   TableView,
   TableHeadCell,
 } from './Table/Table.view';
-import { TableStylesProvider } from './Table/Table.context';
+import { TableProvider } from './Table/Table.context';
 import { TableLayoutProps } from './Table/Table.props';
 
-export const Table = ({ children, styles }: TableLayoutProps) => {
-  return <TableStylesProvider styles={styles}>{children}</TableStylesProvider>;
+export const Table = ({ children, styles, onClick }: TableLayoutProps) => {
+  return (
+    <TableProvider styles={styles} onClick={onClick ? onClick : () => {}}>
+      {children}
+    </TableProvider>
+  );
 };
 
 Table.Head = TableHead;

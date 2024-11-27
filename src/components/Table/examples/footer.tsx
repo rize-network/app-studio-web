@@ -54,6 +54,7 @@ export const FooterDemo = () => {
   ];
   return (
     <Table
+      onClick={() => console.log('hello')}
       styles={{
         tfoot: {
           borderTop: '1px solid gray',

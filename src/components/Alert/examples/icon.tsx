@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditSvg } from '../../Svg';
+import { EditIcon } from '../../Icon/Icon';
 import { Alert } from '../Alert';
 
 export const IconDemo = () => {
@@ -7,7 +7,7 @@ export const IconDemo = () => {
     <Alert
       title="Heads up!"
       description="You can add components to your app using the cli."
-      icon={<EditSvg size={24} color="black" />}
+      icon={<EditIcon size={24} color="black" />}
     />
   );
 };

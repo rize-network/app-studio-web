@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { Button } from 'src/components/Button/Button';
 import { Shape } from 'src/components/Button/Button/Button.type';
-import { DustBinSvg } from 'src/components/Svg';
+import { DustBinIcon } from 'src/components/Icon/Icon';
 
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 
@@ -63,7 +63,7 @@ test('Button with an icon on the left to match snapshot', () => {
   const tree = renderer
     .create(
       <Button
-        icon={<DustBinSvg size={24} />}
+        icon={<DustBinIcon size={24} />}
         shape={'pillShaped' as Shape}
         colorScheme="theme.secondary"
       >
@@ -78,7 +78,7 @@ test('Button with an icon on the right to match snapshot', () => {
   const tree = renderer
     .create(
       <Button
-        icon={<DustBinSvg size={24} />}
+        icon={<DustBinIcon size={24} />}
         shape={'pillShaped' as Shape}
         iconPosition="right"
         colorScheme="theme.secondary"
