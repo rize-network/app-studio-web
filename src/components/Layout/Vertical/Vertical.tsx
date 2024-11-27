@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'app-studio';
 import { VerticalProps } from './Vertical.props';
+import { View } from 'app-studio';
 
 const Vertical = React.forwardRef<HTMLElement, VerticalProps>(
   (
@@ -26,3 +26,4 @@ const Vertical = React.forwardRef<HTMLElement, VerticalProps>(
 Vertical.displayName = 'Vertical';
 
 export { Vertical };
+export type { VerticalProps };
