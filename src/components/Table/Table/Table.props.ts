@@ -6,6 +6,7 @@ export interface TableProps {
   footer?: FooterCell[];
   caption?: React.ReactNode;
   styles?: TableViewStyles;
+  onClick?: Function;
 }
 export interface TableViewProps extends TableProps {}
 export interface TableLayoutProps {
@@ -18,4 +19,5 @@ export interface TableLayoutProps {
   TableContainer?: React.FC<any>;
   children?: React.ReactNode;
   styles?: TableViewStyles;
+  onClick?: Function;
 }

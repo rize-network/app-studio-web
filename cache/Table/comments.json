@@ -16,7 +16,7 @@
         },
         {
           "line": 14,
-          "comment": "Exports 'TableStylesProvider', a functional component which wraps its children with the 'TableStylesContext.Provider'. This Provider will allow nested components to access the style configuration."
+          "comment": "Exports 'TableProvider', a functional component which wraps its children with the 'TableContext.Provider'. This Provider will allow nested components to access the style configuration."
         },
         {
           "line": 17,
@@ -24,7 +24,7 @@
         },
         {
           "line": 20,
-          "comment": "Exports a custom hook 'useTableStyles' that encapsulates the logic for consuming the 'TableStylesContext' and returns its value, which are the current style configurations."
+          "comment": "Exports a custom hook 'useTableStyles' that encapsulates the logic for consuming the 'TableContext' and returns its value, which are the current style configurations."
         }
       ]
     }
