@@ -114,7 +114,7 @@ export const MinusIcon: React.FC<IconProps> = ({
       focusable="false"
       {...getSvgProps(filled, color, strokeWidth)}
     >
-      <path d="M5 12h14" />
+      <line stroke={color} x1="8" y1="12" x2="16" y2="12" />
     </svg>
   </IconWrapper>
 );
@@ -938,7 +938,8 @@ export const PlusIcon: React.FC<IconProps> = ({
       focusable="false"
       {...getSvgProps(false, color, strokeWidth)}
     >
-      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+      <line stroke={color} x1="12" y1="5" x2="12" y2="19" />
+      <line stroke={color} x1="5" y1="12" x2="19" y2="12" />
     </svg>
   </IconWrapper>
 );
