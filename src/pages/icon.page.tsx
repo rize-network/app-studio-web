@@ -12,7 +12,12 @@ export const ButtonPage = () => {
         return (
           <Horizontal key={name} gap={20}>
             <Text lineHeight={16}>{name} :</Text>
-            <IcComponent key={name} size={16} color="black" />
+            <IcComponent
+              key={name}
+              size={16}
+              color="black"
+              //   orientation="down"
+            />
           </Horizontal>
         );
       })}
