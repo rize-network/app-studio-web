@@ -44,8 +44,8 @@ export const TableHeadCell: React.FC<any> = (props) => {
 };
 
 export const TableRow: React.FC<any> = (props) => {
-  const { styles, onClick } = useTableContext();
-  return <Element as="tr" {...styles.tr} onClick={onClick} {...props} />;
+  const { styles, onRowClick } = useTableContext();
+  return <Element as="tr" {...styles.tr} onClick={onRowClick} {...props} />;
 };
 
 export const TableCell: React.FC<any> = (props) => {
@@ -90,7 +90,6 @@ export const TableView: React.FC<TableViewProps> = ({
   columns,
   footer,
   caption,
-  onClick,
 }) => {
   return (
     <TableContainer role="Table">

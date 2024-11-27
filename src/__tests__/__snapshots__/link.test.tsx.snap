@@ -2,7 +2,7 @@
 
 exports[`Link to have text decoration underline on hover should match snapshot 1`] = `
 <a
-  href="https://www.npmjs.com/package/app-studio"
+  to="https://www.npmjs.com/package/app-studio"
   target="_self"
 >
   <div
@@ -25,7 +25,7 @@ exports[`Link to open external link in a new tab should match snapshot 1`] = `
 Array [
   " ",
   <a
-    href="https://www.npmjs.com/package/app-studio"
+    to="https://www.npmjs.com/package/app-studio"
     target="_blank"
   >
     <div

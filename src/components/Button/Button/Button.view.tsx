@@ -154,7 +154,7 @@ const ButtonView: React.FC<ButtonProps> = ({
     >
       {variant === 'link' && externalHref ? (
         <Link
-          href={externalHref}
+          to={externalHref}
           textDecorationColor={colorScheme}
           colorScheme={colorScheme}
           isExternal

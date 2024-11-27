@@ -26,3 +26,4 @@ const Horizontal = React.forwardRef<HTMLElement, HorizontalProps>(
 Horizontal.displayName = 'Horizontal';
 
 export { Horizontal };
+export type { HorizontalProps };
