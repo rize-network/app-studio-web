@@ -43,9 +43,7 @@ const LinkView: React.FC<LinkViewProps> = ({
       >
         <Horizontal gap={3} alignItems="center" flexWrap="nowrap">
           {children}
-          {isExternal && (
-            <ExternalLinkIcon size={IconSizes[iconSize]} style={styles.icon} />
-          )}
+          {isExternal && <ExternalLinkIcon size={IconSizes[iconSize]} />}
         </Horizontal>
       </Element>
     </ReactRouterLink>
