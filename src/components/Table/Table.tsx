@@ -15,7 +15,7 @@ import { TableLayoutProps } from './Table/Table.props';
 
 export const Table = ({ children, styles, onClick }: TableLayoutProps) => {
   return (
-    <TableProvider styles={styles} onClick={onClick ? onClick : () => {}}>
+    <TableProvider styles={styles} onRowClick={onClick}>
       {children}
     </TableProvider>
   );
