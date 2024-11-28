@@ -10,7 +10,7 @@ const Horizontal = React.forwardRef<HTMLElement, HorizontalProps>(
       // Determines the direction in which the Horizontal elements are stacked, default not reversed
       isReversed = false,
       ...props
-    },
+    }: HorizontalProps,
     ref
   ) => (
     <View

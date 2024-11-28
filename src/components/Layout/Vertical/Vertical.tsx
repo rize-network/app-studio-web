@@ -10,7 +10,7 @@ const Vertical = React.forwardRef<HTMLElement, VerticalProps>(
       // Determines the direction in which the Vertical elements are stacked, default not reversed
       isReversed = false,
       ...props
-    },
+    }: VerticalProps,
     ref
   ) => (
     <View
