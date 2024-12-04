@@ -16,7 +16,7 @@ export const ButtonPage = () => {
               key={name}
               size={16}
               color="black"
-              //   orientation="down"
+              orientation="left"
             />
           </Horizontal>
         );

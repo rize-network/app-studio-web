@@ -53,6 +53,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       display: 'flex',
       alignItems: 'center',
       height: 'fit-content',
+      flexDirection: 'column',
       width: 'fit-content',
       color: error
         ? 'theme.error'
@@ -102,6 +103,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
               {label}
             </Text>
           )}
+
           <Center {...checkboxStyle.checkbox}>
             {isIndeterminate ? (
               <MinusIcon size={IconSizes[size]} color="white" />
@@ -110,6 +112,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
               (icon ?? <TickIcon size={IconSizes[size]} color="white" />)
             )}
           </Center>
+
           {labelPosition === 'right' && label && (
             <Text size={size} {...styles?.label}>
               {label}
@@ -127,6 +130,16 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           </Text>
         )}
       </Vertical>
+      {error && (
+        <Text
+          size="xs"
+          marginVertical={0}
+          marginHorizontal={0}
+          color={'theme.error'}
+        >
+          {error}
+        </Text>
+      )}
     </Label>
   );
 };
