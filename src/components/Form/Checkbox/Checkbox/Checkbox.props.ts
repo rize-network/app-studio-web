@@ -5,7 +5,7 @@ import { CheckboxStyles, Size } from './Checkbox.type';
 export interface CheckboxProps extends Omit<InputProps, 'size'> {
   id?: string;
   icon?: React.ReactNode;
-  error?: boolean;
+  error?: any;
   name?: string;
   label?: string;
   colorScheme?: string;
