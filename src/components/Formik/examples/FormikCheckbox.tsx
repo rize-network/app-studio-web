@@ -1,29 +1,28 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
-
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { View } from '../../Layout/View/View';
 import { FormikCheckbox } from '../Formik.Checkbox';
 import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { Vertical } from 'src/components/Layout';
 
 export const FormCheckboxExemple = () => {
-  // const handleSubmit = (event: any) => {
-  //   event.preventDefault();
-
-  //   const selectedVegetables: Array<string> = [];
-  //   if (isOnionChecked) selectedVegetables.push('onion');
-  //   if (isCarrotChecked) selectedVegetables.push('carrot');
-  //   alert(`You selected: ${selectedVegetables.join(', ')}`);
-  // };
+  const validationSchema = Yup.object().shape({
+    acceptTerms: Yup.boolean().oneOf(
+      [true],
+      'You must accept the terms and conditions.'
+    ),
+  });
   return (
-    <Formik initialValues={{ onion: true }} onSubmit={console.log}>
+    <Formik
+      initialValues={{ acceptTerms: false }}
+      validationSchema={validationSchema}
+      onSubmit={console.log}
+    >
       {(props: any) => (
         <FormikForm margin={10}>
           <Vertical gap={10}>
-            <View>Choose your vegetables:</View>
-            <FormikCheckbox name="onion" label="onion" />
-            <FormikCheckbox name="carrot" label="carrot" />
+            <FormikCheckbox name="acceptTerms" label="Terms and conditions" />
             <Button type="submit" onClick={props.handleSubmit}>
               Submit
             </Button>

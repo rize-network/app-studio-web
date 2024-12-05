@@ -51,7 +51,6 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
     container: {
       gap: 10,
       display: 'flex',
-      alignItems: 'center',
       height: 'fit-content',
       flexDirection: 'column',
       width: 'fit-content',
