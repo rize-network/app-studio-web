@@ -9,6 +9,8 @@ export interface AvatarProps {
   fallback?: string;
   // Optional custom styles for the avatar, defined by 'AvatarStyles'.
   styles?: AvatarStyles;
+  //Optional onClick handler
+  onClick?: Function;
 }
 // Extends 'AvatarProps' with additional view-related properties.
 export interface AvatarViewProps extends AvatarProps {
