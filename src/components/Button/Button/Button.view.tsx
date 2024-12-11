@@ -17,7 +17,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   ariaLabel,
   // Initializes default values for the ButtonProps object; useful for defining states like isAuto, isFilled, etc.
   externalHref,
-  isAuto = false,
+  isAuto,
   // Determines if button should be active based on isDisabled and isLoading properties.
   isFilled = false,
   // Prepares default properties for the native button element based on isActive state.
@@ -100,7 +100,11 @@ const ButtonView: React.FC<ButtonProps> = ({
   const buttonSizeStyles = ButtonSizes[size];
   const buttonVariant = ButtonVariants[variant];
   const scaleWidth = {
-    width: isAuto ? 'fit-content' : isFilled ? '100%' : buttonSizeStyles.width,
+    minWidth: isAuto
+      ? 'fit-content'
+      : isFilled
+      ? '100%'
+      : buttonSizeStyles.width,
   };
   const changePadding = isIconRounded ? IconSizes[size] : ButtonSizes[size];
   const content = (

@@ -12,6 +12,7 @@ export const AvatarView = ({
   styles,
   imageError,
   setImageError,
+  onClick = () => {},
 }: AvatarViewProps) => {
   // Determines the size of the avatar by mapping the size prop to the predefined AvatarSizeMap.
   const avatarSize = AvatarSizeMap[size];
@@ -32,6 +33,7 @@ export const AvatarView = ({
       borderStyle="solid"
       borderColor={imageError ? 'black' : 'transparent'}
       boxShadow="0px 2px 4px rgba(0, 0, 0, 0.25)"
+      onClick={onClick}
       {...styles?.container}
     >
       {!imageError ? (

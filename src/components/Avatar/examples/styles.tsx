@@ -16,6 +16,7 @@ export const StylesDemo = () => {
           objectFit: 'fill',
         },
       }}
+      onClick={() => console.log('hello')}
     />
   );
 };
