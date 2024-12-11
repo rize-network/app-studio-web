@@ -27,7 +27,7 @@ export const BlurModal = () => {
                 </Text>
               </Modal.Body>
               <Modal.Footer>
-                <Button onClick={hideModal}>Cancel</Button>
+                <Button onClick={() => hideModal()}>Cancel</Button>
               </Modal.Footer>
             </Modal.Container>
           ),

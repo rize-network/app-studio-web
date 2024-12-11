@@ -1,47 +1,54 @@
 import { create } from 'zustand';
 
-export interface ModalState {
-  modal: string | boolean;
-  modalProps: any & { isVisible: boolean };
+export interface ModalItem {
+  name: string;
+  props: any & { isVisible: boolean };
   overlayProps: any;
-  show: (modal: string, modalProps?: any, overlayProps?: any) => void;
-  hide: () => void;
+}
+
+export interface ModalState {
+  modals: ModalItem[];
+  show: (name: string, modalProps?: any, overlayProps?: any) => void;
+  hide: (name?: string) => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
-  modal: false,
-  modalProps: { isVisible: false },
-  overlayProps: {},
-  show: (modal, modalProps = {}, overlayProps = {}) => {
-    if (modal) {
-      modalProps.isVisible = true;
-    }
+  modals: [],
+  show: (name, modalProps = {}, overlayProps = {}) => {
     set((state: ModalState) => ({
-      ...state,
-      modal,
-      modalProps,
-      overlayProps,
+      modals: [
+        ...state.modals,
+        {
+          name,
+          props: { ...modalProps, isVisible: true },
+          overlayProps,
+        },
+      ],
     }));
   },
-  hide: () => {
-    set((state: ModalState) => ({
-      ...state,
-      modalProps: {
-        ...state.modalProps,
-        isVisible: false,
-      },
-    }));
+  hide: (name) => {
+    set((state: ModalState) => {
+      if (!name) {
+        // Hide all modals
+        return { modals: [] };
+      }
+      // Hide specific modal by name
+      return {
+        modals: state.modals.filter((modal) => modal.name !== name),
+      };
+    });
   },
 }));
 
 export const showModal = (
-  modal: string,
+  name: string,
   modalProps: any = {},
   overlayProps: any = {}
 ) => {
-  useModalStore.getState().show(modal, modalProps, overlayProps);
+  useModalStore.getState().show(name, modalProps, overlayProps);
 };
 
-export const hideModal = () => {
-  useModalStore.getState().hide();
+export const hideModal = (name?: string) => {
+  console.log('hideModal', name);
+  useModalStore.getState().hide(typeof name === 'string' ? name : undefined);
 };
