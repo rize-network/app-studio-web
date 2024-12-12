@@ -100,7 +100,18 @@ const ButtonView: React.FC<ButtonProps> = ({
   const buttonSizeStyles = ButtonSizes[size];
   const buttonVariant = ButtonVariants[variant];
   const scaleWidth = {
-    minWidth: isAuto ? props.width : isFilled ? '100%' : buttonSizeStyles.width,
+    width:
+      isAuto === true
+        ? 'fit-content'
+        : isFilled
+        ? '100%'
+        : buttonSizeStyles.width,
+    // minWidth:
+    //   isAuto === true
+    //     ? 'fit-content'
+    //     : isFilled
+    //     ? '100%'
+    //     : buttonSizeStyles.width,
   };
   const changePadding = isIconRounded ? IconSizes[size] : ButtonSizes[size];
   const content = (
