@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.8.46",
+  "version": "0.8.47",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
@@ -164,7 +164,7 @@
     "yup": "^1.5.0"
   },
   "peerDependencies": {
-    "app-studio": ">= 0.5",
+    "app-studio": ">= 0.5.36",
     "react": ">= 17"
   },
   "size-limit": [
