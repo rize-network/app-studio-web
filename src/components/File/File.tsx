@@ -2,14 +2,12 @@ import React from 'react';
 import { useTheme, Image, ViewProps, ImageProps } from 'app-studio';
 import { Center } from '../Layout/Center/Center';
 
-export const FileSVG = ({
-  src,
-  color,
-  ...props
-}: {
+export type FileProps = {
   src: string;
   color?: string;
-} & ViewProps) => {
+} & ViewProps;
+
+export const FileSVG = ({ src, color, ...props }: FileProps) => {
   const { getColor } = useTheme();
 
   const Colorprops = color

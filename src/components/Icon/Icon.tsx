@@ -3,7 +3,7 @@ import React from 'react';
 import { Center } from '../Layout/Center/Center';
 
 // Base icon interface with added transform and orientation
-interface IconProps extends Omit<ViewProps, 'size'> {
+export interface IconProps extends Omit<ViewProps, 'size'> {
   size?: number;
   color?: string;
   filled?: boolean;

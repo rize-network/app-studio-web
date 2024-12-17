@@ -71,7 +71,7 @@ export interface CountryPickerViewProps extends CountryPickerProps {
   setNewOptions?: (newOptions: Array<Country>) => void;
 }
 // Defines properties for DropDown excluding 'size' from InputProps for customization
-export interface DropDownProps extends Omit<InputProps, 'size'> {
+export interface CountryPickerDropDownProps extends Omit<InputProps, 'size'> {
   // Optional size of the dropdown for visual styles
   size?: Size;
   // Callback function for dropdown actions

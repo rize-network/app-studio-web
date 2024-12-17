@@ -12,14 +12,15 @@ import countryList from '../countries.json';
 import {
   CountryPickerViewProps,
   DropDownItemProps,
-  DropDownProps,
+  CountryPickerDropDownProps,
 } from './CountryPicker.props';
 import { IconSizes } from './CountryPicker.style';
 import { Country } from './CountryPicker.type';
 import { ChevronIcon } from '../../../Icon/Icon';
-const CountryList: React.FC<DropDownProps> = ({ size, ...props }) => (
-  <Element as="ul" {...props} />
-);
+const CountryList: React.FC<CountryPickerDropDownProps> = ({
+  size,
+  ...props
+}) => <Element as="ul" {...props} />;
 const CountrySelector: React.FC<any> = (props) => (
   <Input type="country" {...props} />
 );
@@ -57,7 +58,7 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
     </CountryItem>
   );
 };
-export const DropDown: React.FC<DropDownProps> = ({
+export const DropDown: React.FC<CountryPickerDropDownProps> = ({
   size,
   styles = { dropDown: {} },
   options,
