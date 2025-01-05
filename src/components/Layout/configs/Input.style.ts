@@ -37,12 +37,12 @@ export const PadddingWithLabel = {
   paddingTop: 14,
   paddingBottom: 0,
   paddingLeft: 16,
-  paddingRight: 36,
+  paddingRight: 16,
 };
 
 export const PaddingWithoutLabel = {
   paddingTop: 10,
   paddingBottom: 4,
   paddingLeft: 16,
-  paddingRight: 36,
+  paddingRight: 16,
 };
