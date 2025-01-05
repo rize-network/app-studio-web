@@ -130,7 +130,7 @@ export const ColorSchemeDemo = () => {
 
 ```
 
-### **leftChild**
+### **left**
 Optional React node to be rendered on the left side of the TextField.
 
 ```tsx
@@ -144,14 +144,14 @@ export const LeftInput = () => {
     <TextField
       name="name"
       placeholder="Name"
-      leftChild={<ProfileIcon color="black" size={16} />}
+      left={<ProfileIcon color="black" size={16} />}
     />
   );
 };
 
 ```
 
-### **rightChild**
+### **right**
 Optional React node to be rendered on the right side of the TextField.
 
 ```tsx
@@ -165,7 +165,7 @@ export const RightInput = () => {
     <TextField
       name="name"
       placeholder="Name"
-      rightChild={<EditIcon color="black" size={16} />}
+      right={<EditIcon color="black" size={16} />}
     />
   );
 };

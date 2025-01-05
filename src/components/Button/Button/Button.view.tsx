@@ -16,7 +16,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   // Defines the functional component ButtonView with its expected props detailed in ButtonProps.
   ariaLabel,
   // Initializes default values for the ButtonProps object; useful for defining states like isAuto, isFilled, etc.
-  externalHref,
+  to,
   isAuto = false,
   // Determines if button should be active based on isDisabled and isLoading properties.
   isFilled = false,
@@ -39,6 +39,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   effect = 'default',
   isHovered,
   setIsHovered = () => {},
+  isExternal = false,
   ...props
   // Defines CSS properties for 'outline' variant of the button with conditional styles based on reverse state.
 }) => {
@@ -96,7 +97,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       borderColor: reverse ? buttonColor : 'transparent',
     },
   };
-  // Executes rendering of the button or a link element based on the variant; applies conditional rendering for externalHref in 'link' variant.
+  // Executes rendering of the button or a link element based on the variant; applies conditional rendering for to in 'link' variant.
   const buttonSizeStyles = ButtonSizes[size];
   const buttonVariant = ButtonVariants[variant];
   const scaleWidth = {
@@ -163,12 +164,12 @@ const ButtonView: React.FC<ButtonProps> = ({
       {...shadow}
       {...props}
     >
-      {variant === 'link' && externalHref ? (
+      {variant === 'link' && to ? (
         <Link
-          to={externalHref}
+          to={to}
           textDecorationColor={colorScheme}
           colorScheme={colorScheme}
-          isExternal
+          isExternal={isExternal}
         >
           {content}
         </Link>

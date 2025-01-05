@@ -17,9 +17,9 @@ export interface TextFieldProps extends Omit<InputProps, 'size'> {
   // Optional property to specify the color scheme of the TextField.
   colorScheme?: string;
   // Optional React node to be rendered on the left side of the TextField.
-  leftChild?: React.ReactNode;
+  left?: React.ReactNode;
   // Optional React node to be rendered on the right side of the TextField.
-  rightChild?: React.ReactNode;
+  right?: React.ReactNode;
   // Optional placeholder text shown inside the TextField when empty.
   placeholder?: string;
   // Optional flag to set the TextField as read-only.

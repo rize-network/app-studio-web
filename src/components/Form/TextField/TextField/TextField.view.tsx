@@ -15,8 +15,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   hint,
   value,
   onChange,
-  leftChild,
-  rightChild,
+  left,
+  right,
   helperText,
   placeholder,
   onChangeText,
@@ -116,7 +116,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
-        {leftChild}
+        {left}
         <FieldWrapper>
           {isWithLabel && (
             <FieldLabel
@@ -144,18 +144,16 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
             value={value}
           />
         </FieldWrapper>
-        {(rightChild || (isClearable && value)) && (
+        {isClearable && value && !isReadOnly && !isDisabled && (
           <FieldIcons>
-            {isClearable && value && !isReadOnly && !isDisabled && (
-              <CloseIcon
-                size={Typography.fontSizes[size]}
-                color={IconColor}
-                onClick={handleClear}
-              />
-            )}
-            {rightChild && <>{rightChild}</>}
+            <CloseIcon
+              size={Typography.fontSizes[size]}
+              color={IconColor}
+              onClick={handleClear}
+            />
           </FieldIcons>
         )}
+        {right}
       </FieldContent>
     </FieldContainer>
   );

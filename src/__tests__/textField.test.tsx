@@ -62,7 +62,7 @@ test('TextField to match snapshot', () => {
       <TextField
         name="name"
         placeholder="Name"
-        leftChild={<ProfileIcon size={12} />}
+        left={<ProfileIcon size={12} />}
         error={true}
         helperText={'required'}
         variant="outline"

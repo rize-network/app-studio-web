@@ -19,7 +19,7 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional boolean to control the display of a loader animation over the button.
   colorScheme?: any;
   // Optional LoaderProps object to configure the appearance and behavior of the loader animation.
-  externalHref?: string;
+  to?: string;
   // Optional LoaderPosition to determine the location of the loader animation relative to the button content.
   isLoading?: boolean;
   // Optional React node(s) defining the icon to be displayed within the button.

@@ -18,7 +18,7 @@ const PasswordComponent: React.FC<PasswordProps> = ({
       {...passwordProps}
       type={isVisible ? 'text' : 'password'}
       isClearable={false}
-      rightChild={
+      right={
         <View
           onClick={() => {
             if (!props.isDisabled) {

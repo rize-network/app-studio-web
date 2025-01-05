@@ -36,13 +36,13 @@
     "description": "Optional property to specify the color scheme of the TextField.",
     "defaultValue": "'theme.primary'"
   },
-  "leftChild": {
+  "left": {
     "type": "React.ReactNode",
     "typeValues": [],
     "description": "Optional React node to be rendered on the left side of the TextField.",
     "defaultValue": ""
   },
-  "rightChild": {
+  "right": {
     "type": "React.ReactNode",
     "typeValues": [],
     "description": "Optional React node to be rendered on the right side of the TextField.",
@@ -110,34 +110,19 @@
   },
   "size": {
     "type": "enum",
-    "typeValues": [
-      "'xs'",
-      "'sm'",
-      "'md'",
-      "'lg'",
-      "'xl'"
-    ],
+    "typeValues": ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
     "description": "Optional Size enum to specify the size of the TextField.",
     "defaultValue": "'md'"
   },
   "shadow": {
-    "type": [
-      "Shadow",
-      "Elevation",
-      "CSSProperties"
-    ],
+    "type": ["Shadow", "Elevation", "CSSProperties"],
     "typeValues": [],
     "description": "Optional shadow property that could be of type Shadow, Elevation, or CSSProperties to give depth effect.",
     "defaultValue": "{}"
   },
   "shape": {
     "type": "enum",
-    "typeValues": [
-      "'default'",
-      "'sharp'",
-      "'rounded'",
-      "'pillShaped'"
-    ],
+    "typeValues": ["'default'", "'sharp'", "'rounded'", "'pillShaped'"],
     "description": "Optional Shape enum to specify the shape of the TextField's corners.",
     "defaultValue": "'default'"
   },
@@ -155,11 +140,7 @@
   },
   "variant": {
     "type": "enum",
-    "typeValues": [
-      "'outline'",
-      "'default'",
-      "'none'"
-    ],
+    "typeValues": ["'outline'", "'default'", "'none'"],
     "description": "Optional Variant enum to specify the variant of the TextField component.",
     "defaultValue": "'default'"
   },

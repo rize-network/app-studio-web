@@ -8,7 +8,7 @@ export const FieldWrapper: React.FC<WrapperFieldProps> = ({
   children,
   ...props
 }) => (
-  <Vertical width="100%" {...props}>
+  <Vertical width="100%" maxWidth={'100%'} {...props}>
     {children}
   </Vertical>
 );
