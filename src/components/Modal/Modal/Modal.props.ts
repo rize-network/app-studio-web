@@ -145,6 +145,8 @@ export interface HeaderProps extends Omit<ViewProps, 'size'> {
 
 export interface ModalLayoutProps {
   modals: { [x: string]: React.FC<any> };
+  onShow?: (name: string, props?: any) => void;
+  onHide?: (name?: string, props?: any) => void;
 }
 
 export interface ContainerProps extends Omit<ViewProps, 'size'> {

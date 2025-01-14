@@ -3,8 +3,20 @@ import { ModalState, hideModal, useModalStore } from './Modal.store';
 import { ModalOverlay } from './Modal.view';
 import { ModalLayoutProps } from './Modal.props';
 
-export const ModalLayout = ({ modals: availableModals }: ModalLayoutProps) => {
+export const ModalLayout = ({
+  modals: availableModals,
+  onShow,
+  onHide,
+}: ModalLayoutProps) => {
   const activeModals = useModalStore((state: ModalState) => state.modals);
+
+  if (onShow) {
+    useModalStore.getState().setOnShow(onShow);
+  }
+
+  if (onHide) {
+    useModalStore.getState().setOnHide(onHide);
+  }
 
   if (activeModals.length === 0) {
     return null;
