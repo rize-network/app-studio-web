@@ -18,10 +18,11 @@ export interface ModalState {
 
 export const useModalStore = create<ModalState>((set) => ({
   modals: [],
-  onHide: (name?: string) => {},
-  onShow: (name: string, props?: any) => {},
+  onHide: (name?: string) => name,
+  onShow: (name: string, props?: any) => ({ name, props }),
   show: (name, modalProps = {}, overlayProps = {}) => {
     set((state: ModalState) => ({
+      ...state,
       modals: [
         ...state.modals,
         {
@@ -40,15 +41,16 @@ export const useModalStore = create<ModalState>((set) => ({
       }
       // Hide specific modal by name
       return {
+        ...state,
         modals: state.modals.filter((modal) => modal.name !== name),
       };
     });
   },
   setOnHide: (onHide: (name?: string) => void) => {
-    set((state: ModalState) => ({ onHide }));
+    set((state: ModalState) => ({ ...state, onHide }));
   },
   setOnShow: (onShow: (name: string, props?: any) => void) => {
-    set((state: ModalState) => ({ onShow }));
+    set((state: ModalState) => ({ ...state, onShow }));
   },
 }));
 

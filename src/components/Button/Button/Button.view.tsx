@@ -45,7 +45,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   // Defines CSS properties for 'outline' variant of the button with conditional styles based on reverse state.
 }) => {
   const { getColor, themeMode } = useTheme();
-  const handleHover = (over: boolean) => setIsHovered(!isHovered);
+  const handleHover = (over: boolean) => setIsHovered(over);
 
   const isActive = !(isDisabled || isLoading);
   const defaultNativeProps = { disabled: !isActive };
@@ -141,8 +141,8 @@ const ButtonView: React.FC<ButtonProps> = ({
       backgroundColor={buttonColor}
       borderRadius={ButtonShapes[shape]}
       onClick={props.onClick ?? onClick}
-      // onMouseEnter={() => handleHover(true)}
-      // onMouseLeave={() => handleHover(false)}
+      onMouseEnter={() => handleHover(true)}
+      onMouseLeave={() => handleHover(false)}
       cursor={isActive ? 'pointer' : 'default'}
       filter={hovering ? 'brightness(0.85)' : 'brightness(1)'}
       {...(hovering && !props.isDisabled
