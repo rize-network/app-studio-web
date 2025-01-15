@@ -40,10 +40,14 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   onClick = () => {},
   onFocus,
   onBlur = () => {},
+  themeMode: elementMode,
   ...props
 }) => {
-  const { getColor } = useTheme();
-  const IconColor = getColor('color.blueGray.700');
+  const { getColor, themeMode } = useTheme();
+  const IconColor = getColor(
+    'color.blueGray.700',
+    elementMode ? elementMode : themeMode
+  );
   const isWithLabel = !!(isFocused && label);
   const fieldStyles = {
     margin: 0,

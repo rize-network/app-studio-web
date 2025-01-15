@@ -16,10 +16,11 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   size = 'md',
   speed = 'normal',
   color = 'theme.loading',
+  themeMode: elementMode,
   ...props
 }) => {
-  const theme = useTheme();
-  const colorStyle = theme.getColor(color);
+  const { getColor, themeMode } = useTheme();
+  const colorStyle = getColor(color, elementMode ? elementMode : themeMode);
   const sizeStyle = typeof size === 'number' ? size : DefaultSizes[size];
 
   const [angle, setAngle] = useState(0);
@@ -63,10 +64,11 @@ const Dotted: React.FC<DottedProps> = ({
   size = 'md',
   speed = 'normal',
   color = 'theme.loading',
+  themeMode: elementMode,
   ...props
 }) => {
-  const theme = useTheme();
-  const colorStyle = theme.getColor(color);
+  const { getColor, themeMode } = useTheme();
+  const colorStyle = getColor(color, elementMode ? elementMode : themeMode);
   const sizeStyle = typeof size === 'number' ? size : DefaultSizes[size];
 
   const [angle, setAngle] = useState(0);
@@ -99,10 +101,11 @@ const Quarter: React.FC<QuarterProps> = ({
   size = 'md',
   speed = 'normal',
   color = 'theme.loading',
+  themeMode: elementMode,
   ...props
 }) => {
-  const theme = useTheme();
-  const colorStyle = theme.getColor(color);
+  const { getColor, themeMode } = useTheme();
+  const colorStyle = getColor(color, elementMode ? elementMode : themeMode);
   const sizeStyle = typeof size === 'number' ? size : DefaultSizes[size];
 
   const [angle, setAngle] = useState(0);

@@ -83,7 +83,6 @@ const TextView: React.FC<TextProps> = ({
 
   return (
     <Element
-      role="text"
       fontSize={fontSize}
       lineHeight={Typography.lineHeights[size]}
       fontStyle={isItalic ? 'italic' : 'normal'}

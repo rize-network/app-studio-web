@@ -7,11 +7,19 @@ export type FileProps = {
   color?: string;
 } & ViewProps;
 
-export const FileSVG = ({ src, color, ...props }: FileProps) => {
-  const { getColor } = useTheme();
+export const FileSVG = ({
+  src,
+  color,
+  themeMode: elementMode,
+  ...props
+}: FileProps) => {
+  const { getColor, themeMode } = useTheme();
 
   const Colorprops = color
-    ? { fill: getColor(color), stroke: getColor(color) }
+    ? {
+        fill: getColor(color, elementMode ? elementMode : themeMode),
+        stroke: getColor(color, elementMode ? elementMode : themeMode),
+      }
     : {};
 
   return (

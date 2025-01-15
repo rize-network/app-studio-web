@@ -10,16 +10,16 @@ export interface ModalState {
   modals: ModalItem[];
   show: (name: string, modalProps?: any, overlayProps?: any) => void;
   hide: (name?: string) => void;
-  onShow: (name?: string, props?: any) => void;
+  onShow: (name: string, props?: any) => void;
   onHide: (name?: string) => void;
-  setOnShow: (onShow: (name?: string, props?: any) => void) => void;
+  setOnShow: (onShow: (name: string, props?: any) => void) => void;
   setOnHide: (onHide: (name?: string) => void) => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
   modals: [],
   onHide: (name?: string) => {},
-  onShow: (name?: string, props?: any) => {},
+  onShow: (name: string, props?: any) => {},
   show: (name, modalProps = {}, overlayProps = {}) => {
     set((state: ModalState) => ({
       modals: [
@@ -47,7 +47,7 @@ export const useModalStore = create<ModalState>((set) => ({
   setOnHide: (onHide: (name?: string) => void) => {
     set((state: ModalState) => ({ onHide }));
   },
-  setOnShow: (onShow: (name?: string, props?: any) => void) => {
+  setOnShow: (onShow: (name: string, props?: any) => void) => {
     set((state: ModalState) => ({ onShow }));
   },
 }));

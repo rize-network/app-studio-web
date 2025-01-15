@@ -130,10 +130,14 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     helperText: {},
     box: {},
   },
+  themeMode: elementMode,
   ...props
 }) => {
-  const { getColor } = useTheme();
-  const IconColor = getColor('color.blueGray.700');
+  const { getColor, themeMode } = useTheme();
+  const IconColor = getColor(
+    'color.blueGray.700',
+    elementMode ? elementMode : themeMode
+  );
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
   const handleCallback = (option: string) => {
