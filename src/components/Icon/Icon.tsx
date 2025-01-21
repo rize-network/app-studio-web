@@ -16,7 +16,7 @@ const IconWrapper: React.FC<IconProps> = ({
   size,
   color = 'black',
   transform,
-  orientation,
+  orientation = 'up',
   children,
   ...rest
 }) => (
@@ -71,6 +71,37 @@ export const ChevronIcon: React.FC<IconProps> = ({
       {...getSvgProps(filled, color, strokeWidth)}
     >
       <path d="M12.771 7.115a.829.829 0 0 0-1.2 0L3 15.686l1.2 1.2 7.971-7.971 7.972 7.971 1.2-1.2-8.572-8.571Z" />
+    </svg>
+  </IconWrapper>
+);
+
+// Example of a Twitch Icon
+export const TwitchIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = false,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        d="M2 2v16h5v4l4-4h5l6-6V2H2zm18 10-3 3h-5l-3 3v-3H4V4h16v8z"
+        fill={filled ? color : 'none'}
+        stroke={color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
+      <path
+        d="M14 7h2v5h-2V7zm-4 0h2v5H10V7z"
+        fill={filled ? color : 'none'}
+        stroke={color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
     </svg>
   </IconWrapper>
 );
