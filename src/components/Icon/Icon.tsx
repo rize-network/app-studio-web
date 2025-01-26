@@ -79,7 +79,7 @@ export const ChevronIcon: React.FC<IconProps> = ({
 export const TwitchIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
-  filled = false,
+  filled = true,
   strokeWidth = 1,
   ...props
 }) => (
@@ -151,14 +151,55 @@ export const InstagramIcon: React.FC<IconProps> = ({
 export const YoutubeIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
-  filled = false,
+  filled = true,
   strokeWidth = 1,
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
-    <svg viewBox="0 0 24 24" {...getSvgProps(filled, color, strokeWidth)}>
-      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-      <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      {/* YouTube Play Button Background */}
+      <path
+        d="M21.8 8.001A2.8 2.8 0 0 0 19 5.2C17.793 5 12 5 12 5s-5.793 0-7 0.2a2.8 2.8 0 0 0-2.8 2.8c-0.2 1.207-0.2 3-0.2 3s0 1.793 0.2 3a2.8 2.8 0 0 0 2.8 2.8c1.207 0.2 7 0.2 7 0.2s5.793 0 7-0.2a2.8 2.8 0 0 0 2.8-2.8c0.2-1.207 0.2-3 0.2-3s0-1.793-0.2-3z"
+        fill={filled ? color : 'none'}
+        stroke={filled ? 'none' : color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
+
+      <polygon
+        points="10 8 10 14 14 10"
+        fill="white" // Ensures the play button is transparent
+        stroke={'white'}
+        strokeWidth={strokeWidth}
+      />
+    </svg>
+  </IconWrapper>
+);
+
+export const FacebookIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        d="M22 2H2v20h10v-7h-2v-3h2V9.5a4 4 0 0 1 4-4h3v3h-3a1 1 0 0 0-1 1V12h4l-1 3h-3v7h6V2z"
+        fill={filled ? color : 'none'}
+        stroke={color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
     </svg>
   </IconWrapper>
 );
@@ -358,7 +399,7 @@ export const BookmarkIcon: React.FC<IconProps> = ({
 export const CloudIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
-  filled = false,
+  filled = true,
   strokeWidth = 1,
   ...props
 }) => (
@@ -488,6 +529,8 @@ export const MenuIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
   strokeWidth = 1,
+  filled = false,
+
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
@@ -495,7 +538,7 @@ export const MenuIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <line stroke={color} x1="3" y1="12" x2="21" y2="12"></line>
       <line stroke={color} x1="3" y1="6" x2="21" y2="6"></line>
@@ -531,6 +574,8 @@ export const RefreshIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
   strokeWidth = 1,
+  filled = false,
+
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
@@ -538,7 +583,7 @@ export const RefreshIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <polyline points="23 4 23 10 17 10"></polyline>
       <path d="M20.49 15a9 9 0 1 1-2.13-9.36L23 10"></path>
@@ -569,6 +614,8 @@ export const PanelIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
   strokeWidth = 1,
+  filled = false,
+
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
@@ -576,7 +623,7 @@ export const PanelIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <line stroke={color} x1="4" y1="21" x2="4" y2="14"></line>
       <line stroke={color} x1="4" y1="10" x2="4" y2="3"></line>
@@ -830,6 +877,8 @@ export const ClockIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
   strokeWidth = 1,
+  filled = false,
+
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
@@ -837,7 +886,7 @@ export const ClockIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <circle cx="12" cy="12" r="10"></circle>
       <polyline points="12 6 12 12 16 14"></polyline>
@@ -849,6 +898,8 @@ export const CameraIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
   strokeWidth = 1,
+  filled = false,
+
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
@@ -856,7 +907,7 @@ export const CameraIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3l2-3h8l2 3h3a2 2 0 0 1 2 2z"></path>
       <circle cx="12" cy="13" r="4"></circle>
@@ -876,7 +927,7 @@ export const BluetoothIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <path d="M17.71 7.71L12 2h-1v7.59L6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29 4.3-4.29zM13 5.83l1.88 1.88L13 9.59V5.83zm1.88 10.46L13 18.17v-3.76l1.88 1.88z" />
     </svg>
@@ -967,6 +1018,7 @@ export const SearchIcon: React.FC<IconProps> = ({
   color = 'currentColor',
   filled = true,
   strokeWidth = 1,
+
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
@@ -974,7 +1026,7 @@ export const SearchIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
     </svg>
@@ -993,7 +1045,7 @@ export const CloseEyeIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <path
         d="M19.7071 5.70711C20.0976 5.31658 20.0976 4.68342 19.7071 4.29289C19.3166 3.90237 18.6834 3.90237 18.2929 4.29289L14.032 8.55382C13.4365 8.20193 12.7418 8 12 8C9.79086 8 8 9.79086 8 12C8 12.7418 8.20193 13.4365 8.55382 14.032L4.29289 18.2929C3.90237 18.6834 3.90237 19.3166 4.29289 19.7071C4.68342 20.0976 5.31658 20.0976 5.70711 19.7071L9.96803 15.4462C10.5635 15.7981 11.2582 16 12 16C14.2091 16 16 14.2091 16 12C16 11.2582 15.7981 10.5635 15.4462 9.96803L19.7071 5.70711ZM12.518 10.0677C12.3528 10.0236 12.1792 10 12 10C10.8954 10 10 10.8954 10 12C10 12.1792 10.0236 12.3528 10.0677 12.518L12.518 10.0677ZM11.482 13.9323L13.9323 11.482C13.9764 11.6472 14 11.8208 14 12C14 13.1046 13.1046 14 12 14C11.8208 14 11.6472 13.9764 11.482 13.9323ZM15.7651 4.8207C14.6287 4.32049 13.3675 4 12 4C9.14754 4 6.75717 5.39462 4.99812 6.90595C3.23268 8.42276 2.00757 10.1376 1.46387 10.9698C1.05306 11.5985 1.05306 12.4015 1.46387 13.0302C1.92276 13.7326 2.86706 15.0637 4.21194 16.3739L5.62626 14.9596C4.4555 13.8229 3.61144 12.6531 3.18002 12C3.6904 11.2274 4.77832 9.73158 6.30147 8.42294C7.87402 7.07185 9.81574 6 12 6C12.7719 6 13.5135 6.13385 14.2193 6.36658L15.7651 4.8207ZM12 18C11.2282 18 10.4866 17.8661 9.78083 17.6334L8.23496 19.1793C9.37136 19.6795 10.6326 20 12 20C14.8525 20 17.2429 18.6054 19.002 17.0941C20.7674 15.5772 21.9925 13.8624 22.5362 13.0302C22.947 12.4015 22.947 11.5985 22.5362 10.9698C22.0773 10.2674 21.133 8.93627 19.7881 7.62611L18.3738 9.04043C19.5446 10.1771 20.3887 11.3469 20.8201 12C20.3097 12.7726 19.2218 14.2684 17.6986 15.5771C16.1261 16.9282 14.1843 18 12 18Z"
@@ -1015,7 +1067,7 @@ export const ExternalLinkIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(true, color, strokeWidth)}
     >
       <path d="M14 3h7v7h-2V5.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3ZM5 5h5v2H6v11h11v-4h2v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
     </svg>
@@ -1025,7 +1077,7 @@ export const ExternalLinkIcon: React.FC<IconProps> = ({
 export const PlusIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
-  filled = true,
+  filled = false,
   strokeWidth = 1,
   ...props
 }) => (
@@ -1034,7 +1086,7 @@ export const PlusIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <line stroke={color} x1="12" y1="5" x2="12" y2="19" />
       <line stroke={color} x1="5" y1="12" x2="19" y2="12" />
@@ -1045,7 +1097,7 @@ export const PlusIcon: React.FC<IconProps> = ({
 export const TickIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
-  filled = true,
+  filled = false,
   strokeWidth = 1,
   ...props
 }) => (
@@ -1054,7 +1106,7 @@ export const TickIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -1073,7 +1125,7 @@ export const BoldArrowIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <path d="M12 4l7 7h-4v7h-6v-7H5l7-7z" />
     </svg>
@@ -1083,7 +1135,7 @@ export const BoldArrowIcon: React.FC<IconProps> = ({
 export const ArrowIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
-  filled = true,
+  filled = false,
   strokeWidth = 1,
   ...props
 }) => (
@@ -1092,7 +1144,7 @@ export const ArrowIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <line stroke={color} x1="12" y1="20" x2="12" y2="8"></line>
       <polyline points="6 12 12 6 18 12"></polyline>
@@ -1103,7 +1155,7 @@ export const ArrowIcon: React.FC<IconProps> = ({
 export const SpinnerIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
-  filled = true,
+  filled = false,
   strokeWidth = 1,
   ...props
 }) => (
@@ -1112,7 +1164,7 @@ export const SpinnerIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <circle cx="12" cy="12" r="10" strokeOpacity="0.25"></circle>
       <path d="M12 2a10 10 0 0 1 10 10" strokeOpacity="1"></path>
@@ -1124,6 +1176,7 @@ export const CalendarIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
   strokeWidth = 1,
+  filled = false,
   ...props
 }) => (
   <IconWrapper size={size} color={color} {...props}>
@@ -1131,7 +1184,7 @@ export const CalendarIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="false"
       focusable="false"
-      {...getSvgProps(false, color, strokeWidth)}
+      {...getSvgProps(filled, color, strokeWidth)}
     >
       <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
       <line stroke={color} x1="16" y1="2" x2="16" y2="6"></line>
