@@ -75,6 +75,54 @@ export const ChevronIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+export const TwitterIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        d="M22.46 6.01c-.83.37-1.72.62-2.65.74a4.6 4.6 0 0 0 2.01-2.54 9.2 9.2 0 0 1-2.91 1.11 4.54 4.54 0 0 0-7.75 4.14A12.86 12.86 0 0 1 3.15 4.47a4.54 4.54 0 0 0 1.4 6.06 4.5 4.5 0 0 1-2.06-.57v.06a4.54 4.54 0 0 0 3.64 4.45 4.61 4.61 0 0 1-2.05.08 4.54 4.54 0 0 0 4.23 3.15 9.12 9.12 0 0 1-5.64 1.94c-.37 0-.74-.02-1.1-.07A12.86 12.86 0 0 0 8.21 21c8.38 0 12.96-6.94 12.96-12.96 0-.2 0-.4-.01-.6a9.28 9.28 0 0 0 2.3-2.37z"
+        fill={filled ? color : 'none'}
+        stroke={filled ? 'none' : color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
+    </svg>
+  </IconWrapper>
+);
+
+export const XIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+        fill={filled ? color : 'none'}
+        stroke={color}
+        strokeWidth={strokeWidth}
+      />
+    </svg>
+  </IconWrapper>
+);
+
 // Example of a Twitch Icon
 export const TwitchIcon: React.FC<IconProps> = ({
   size = 24,

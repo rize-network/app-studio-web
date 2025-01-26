@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.8.58",
+  "version": "0.8.59",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
