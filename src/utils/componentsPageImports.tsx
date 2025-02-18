@@ -1,4 +1,5 @@
 import React, { lazy } from 'react';
+import DragAndDropPage from 'src/pages/dragAndDrop.page';
 // Lazy-loaded imports
 const AlertPage = lazy(() => import('src/pages/alert.page'));
 const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
@@ -51,6 +52,7 @@ export const componentList = [
   { name: 'Link', path: '/link', element: <LinkPage /> },
   { name: 'Loader', path: '/loader', element: <LoaderPage /> },
   { name: 'Icon', path: '/icon', element: <IconPage /> },
+  { name: 'Drag and Drop', path: '/dragAndDrop', element: <DragAndDropPage /> },
 
   { name: 'Message', path: '/message', element: <MessagePage /> },
   { name: 'Modal', path: '/modal', element: <ModalPage /> },

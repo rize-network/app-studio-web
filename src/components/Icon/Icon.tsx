@@ -75,6 +75,35 @@ export const ChevronIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+export const DragHandleIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <g>
+        {/* First column */}
+        <circle cx="9" cy="6" r="2" />
+        <circle cx="9" cy="12" r="2" />
+        <circle cx="9" cy="18" r="2" />
+
+        {/* Second column */}
+        <circle cx="15" cy="6" r="2" />
+        <circle cx="15" cy="12" r="2" />
+        <circle cx="15" cy="18" r="2" />
+      </g>
+    </svg>
+  </IconWrapper>
+);
+
 export const TwitterIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',

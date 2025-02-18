@@ -3,7 +3,7 @@ import React from 'react';
 import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
 import * as Icon from 'src/components/Icon/Icon';
 import { View } from 'src/components/Layout/View/View';
-export const ButtonPage = () => {
+export const IconPage = () => {
   const iconList = Object.keys(Icon);
   return (
     <View>
@@ -20,4 +20,4 @@ export const ButtonPage = () => {
   );
 };
 
-export default ButtonPage;
+export default IconPage;

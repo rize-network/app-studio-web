@@ -30,6 +30,7 @@ export * from './Icon/Icon';
 export * as Icon from './Icon/Icon';
 export * from './Toggle/Toggle';
 export * from './ToggleGroup/ToggleGroup';
+export * from './DragAndDrop/DragAndDrop';
 
 export * from './Alert/Alert/Alert.props';
 export * from './AspectRatio/AspectRatio/AspectRatio.props';
