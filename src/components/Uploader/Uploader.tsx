@@ -5,6 +5,35 @@ import { UploadProps, UseUploadProps } from './Uploader.props';
 import { showMessage } from '../Message/Message';
 import { Center } from '../Layout';
 
+export const generateThumbnail = (
+  videoFile: File,
+  setThumbnailUrl: (url: string) => void
+) => {
+  const video = document.createElement('video');
+  video.preload = 'metadata';
+
+  video.onloadedmetadata = () => {
+    video.currentTime = 1;
+  };
+
+  video.oncanplay = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const thumbnailDataUrl = canvas.toDataURL('image/jpeg');
+      setThumbnailUrl(thumbnailDataUrl);
+    }
+
+    URL.revokeObjectURL(video.src);
+  };
+
+  video.src = URL.createObjectURL(videoFile);
+};
+
 export const useUpload = ({
   maxSize = 100 * 1024 * 1024, // 100MB default
   onFileSelect,
@@ -22,31 +51,6 @@ export const useUpload = ({
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(
     thumbnail || null
   );
-  const generateThumbnail = (videoFile: File) => {
-    const video = document.createElement('video');
-    video.preload = 'metadata';
-
-    video.onloadedmetadata = () => {
-      video.currentTime = 1;
-    };
-
-    video.oncanplay = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const thumbnailDataUrl = canvas.toDataURL('image/jpeg');
-        setThumbnailUrl(thumbnailDataUrl);
-      }
-
-      URL.revokeObjectURL(video.src);
-    };
-
-    video.src = URL.createObjectURL(videoFile);
-  };
 
   const handleFileChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,7 +83,7 @@ export const useUpload = ({
       setPreviewUrl(URL.createObjectURL(file));
 
       if (file.type.startsWith('video/')) {
-        generateThumbnail(file);
+        generateThumbnail(file, setThumbnailUrl);
       }
 
       if (onFileSelect) {
