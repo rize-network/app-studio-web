@@ -175,7 +175,7 @@ export const Uploader: React.FC<UploadProps> = ({
           objectFit="cover"
           {...imageProps}
         />
-        <PlayIcon
+        {/* <PlayIcon
           position="absolute"
           top="50%"
           left="50%"
@@ -183,7 +183,7 @@ export const Uploader: React.FC<UploadProps> = ({
           size={'20%'}
           transform="translate(-50%, -50%)"
           {...iconProps}
-        />
+        /> */}
       </View>
     );
   },
