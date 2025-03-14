@@ -1,5 +1,6 @@
 import React, { lazy } from 'react';
 import DragAndDropPage from 'src/pages/dragAndDrop.page';
+import UploadPage from 'src/pages/upload.page';
 // Lazy-loaded imports
 const AlertPage = lazy(() => import('src/pages/alert.page'));
 const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
@@ -67,4 +68,5 @@ export const componentList = [
   { name: 'Toggle', path: '/toggle', element: <TogglePage /> },
   { name: 'ToggleGroup', path: '/togglegroup', element: <ToggleGroupPage /> },
   { name: 'Vertical', path: '/vertical', element: <VerticalPage /> },
+  { name: 'Upload', path: '/upload', element: <UploadPage /> },
 ];

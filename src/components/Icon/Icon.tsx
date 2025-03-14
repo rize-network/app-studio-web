@@ -104,6 +104,117 @@ export const DragHandleIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+// File Icon Component
+export const FileIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
+        fill={filled ? color : 'none'}
+        stroke={filled ? 'none' : color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
+      <polyline
+        points="14 2 14 8 20 8"
+        fill="none"
+        stroke={color}
+        strokeWidth={strokeWidth}
+      />
+    </svg>
+  </IconWrapper>
+);
+
+// Video Icon Component
+export const VideoIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <rect
+        x="2"
+        y="4"
+        width="20"
+        height="16"
+        rx="2"
+        ry="2"
+        fill={filled ? color : 'none'}
+        stroke={filled ? 'none' : color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
+      <polygon
+        points="10 8 16 12 10 16 10 8"
+        fill={filled ? (filled ? 'white' : color) : 'none'}
+        stroke={filled ? 'none' : color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
+    </svg>
+  </IconWrapper>
+);
+
+// Image Icon Component
+export const ImageIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <rect
+        x="2"
+        y="2"
+        width="20"
+        height="20"
+        rx="2"
+        ry="2"
+        fill={filled ? color : 'none'}
+        stroke={filled ? 'none' : color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
+      <circle
+        cx="8.5"
+        cy="8.5"
+        r="1.5"
+        fill={filled ? (filled ? 'white' : color) : 'none'}
+        stroke={filled ? 'none' : color}
+        strokeWidth={filled ? 0 : strokeWidth}
+      />
+      <polyline
+        points="21 15 16 10 5 21"
+        fill="none"
+        stroke={filled ? 'white' : color}
+        strokeWidth={strokeWidth}
+      />
+    </svg>
+  </IconWrapper>
+);
+
 export const TwitterIcon: React.FC<IconProps> = ({
   size = 24,
   color = 'currentColor',
@@ -351,6 +462,44 @@ export const InfoIcon: React.FC<IconProps> = ({
       {...getSvgProps(filled, color, strokeWidth)}
     >
       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+    </svg>
+  </IconWrapper>
+);
+
+export const PlayIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path d="M8 5v14l11-7z"></path>
+    </svg>
+  </IconWrapper>
+);
+
+export const PauseIcon: React.FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper size={size} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"></path>
     </svg>
   </IconWrapper>
 );

@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Element, useTheme } from 'app-studio';
+import { Animation, Element, useTheme, View } from 'app-studio';
 import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
 import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
@@ -41,6 +41,9 @@ const ButtonView: React.FC<ButtonProps> = ({
   setIsHovered = () => {},
   isExternal = false,
   themeMode: elementMode,
+  containerProps,
+  linkProps,
+
   ...props
   // Defines CSS properties for 'outline' variant of the button with conditional styles based on reverse state.
 }) => {
@@ -121,9 +124,17 @@ const ButtonView: React.FC<ButtonProps> = ({
   const content = (
     <Horizontal gap={10}>
       {isLoading && loaderPosition === 'left' && <Loader {...loaderProps} />}
-      {icon && iconPosition === 'left' && !isLoading && icon}
+      {icon && iconPosition === 'left' && !isLoading && (
+        <View {...(isHovered ? { animate: Animation.jackInTheBox({}) } : {})}>
+          {icon}
+        </View>
+      )}
       {children}
-      {icon && iconPosition === 'right' && !isLoading && icon}
+      {icon && iconPosition === 'right' && !isLoading && (
+        <View {...(isHovered ? { animate: Animation.jackInTheBox({}) } : {})}>
+          {icon}
+        </View>
+      )}
       {isLoading && loaderPosition === 'right' && <Loader {...loaderProps} />}
     </Horizontal>
   );
@@ -149,7 +160,11 @@ const ButtonView: React.FC<ButtonProps> = ({
         ? { transition: 'transform 0.3s ease', transform: 'translateY(-5px)' }
         : {})}
       //  transition={hovering && !props.isDisabled ?  : ''}
-      //   transform={hovering && !props.isDisabled ?  : ''}
+      // transform={
+      //   hovering && !props.isDisabled
+      //     ? { transition: 'transform 0.3s ease', transform: 'translateY(-5px)' }
+      //     : ''
+      // }
       {...defaultNativeProps}
       {...buttonSizeStyles}
       {...buttonVariant}
@@ -165,6 +180,7 @@ const ButtonView: React.FC<ButtonProps> = ({
         : changePadding)}
       {...shadow}
       {...props}
+      {...containerProps}
     >
       {variant === 'link' && to ? (
         <Link
@@ -172,6 +188,7 @@ const ButtonView: React.FC<ButtonProps> = ({
           textDecorationColor={colorScheme}
           colorScheme={colorScheme}
           isExternal={isExternal}
+          {...linkProps}
         >
           {content}
         </Link>

@@ -70,7 +70,6 @@ const TextView: React.FC<TextProps> = ({
   isSub = false,
   isSup = false,
   isStriked = false,
-  isTruncated = false,
   weight = 'normal',
   size = 'md',
   ...props
@@ -94,7 +93,7 @@ const TextView: React.FC<TextProps> = ({
       {...headingStyles}
       {...props}
     >
-      {isTruncated && maxLines && typeof children === 'string' ? (
+      {maxLines && typeof children === 'string' ? (
         <TruncateText text={children} maxLines={maxLines} />
       ) : (
         <TextContent isSub={isSub} isSup={isSup} {...props}>

@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { ButtonProps as $ButtonProps, Shadow } from 'app-studio';
+import { ButtonProps as $ButtonProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../utils/elevation';
 import {
   IconPosition,
@@ -48,7 +48,16 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   shape?: Shape;
   // Optional effect to apply interactive effects (e.g., ripple) to the button.
   ariaLabel?: string;
-  // Additional optional properties of any type, making the interface extensible for custom attributes not explicitly defined.
+
+  // Variant to define the stylistic variation of the button.
   variant?: Variant;
+
+  // Optional effect to apply interactive effects to the button.
   effect?: Effects;
+
+  // Optional props to be passed to the container View component.
+  containerProps?: ViewProps;
+
+  // Optional props to be passed to the Link component.
+  linkProps?: ViewProps;
 }

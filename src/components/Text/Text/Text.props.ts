@@ -9,7 +9,6 @@ export interface TextProps
   isItalic?: boolean;
   isStriked?: boolean;
   isUnderlined?: boolean;
-  isTruncated?: boolean;
   isSub?: boolean;
   isSup?: boolean;
   maxLines?: number;
