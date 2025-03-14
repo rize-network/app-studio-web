@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { View, Text, Image, Horizontal } from 'app-studio';
-import { UploadIcon, PlayIcon } from '../Icon/Icon';
+import { UploadIcon } from '../Icon/Icon';
 import { UploadProps, UseUploadProps } from './Uploader.props';
 import { showMessage } from '../Message/Message';
 import { Center } from '../Layout';
@@ -153,7 +153,7 @@ export const Uploader: React.FC<UploadProps> = ({
     videoRef,
     videoProps,
     imageProps,
-    iconProps,
+    // iconProps,
   }) => {
     console.log('thumbnailUrl', thumbnailUrl);
     return (
