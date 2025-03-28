@@ -2,6 +2,19 @@
 
 A toggle switch for user interactions like turning settings on or off.
 
+## Props
+
+| Prop          | Type          | Description                                                                                                                               | Default |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| name             | string        | Name of the switch.                                                                                                                        |         |
+| id               | string        | Id of the switch.                                                                                                                          |         |
+| colorScheme      | string        | Defines the color theme for the switch component.                                                                                             |         |
+| shadow           | Shadow        | Defines the shadow appearance of the switch using predefined Shadow or Elevation, or a custom CSSProperties object.                        |         |
+| styles           | CSSProperties | Optional custom styles for the switch component.                                                                                              |         |
+| className        | string        | Optional className for the switch component.                                                                                                |         |
+| isChecked        | boolean       | Defines the initial toggle state.                                                                                                          | false   |
+| isDisabled       | boolean       | Sets the toggle component as disabled or not.                                                                                              | false   |
+
 ### **Import**
   ```tsx
   import { Switch } from '@app-studio/web';
@@ -47,4 +60,3 @@ export const ShadowSwitch = () => (
 );
 
 ```
-

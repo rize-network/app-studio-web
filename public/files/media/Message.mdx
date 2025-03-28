@@ -38,6 +38,18 @@ const [show, setShow] = useState(false);
 
 It represents the overlay or backdrop that appears behind the message content when the message is displayed.
 
+### **Props**
+
+| Prop             | Type          | Description                                                                                                                               | Default |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| isOpen           | boolean       | Whether the message overlay is open.                                                                                                       | false   |
+| onClose          | function      | Callback function to close the message.                                                                                                     |         |
+| position         | Position      | Positions the message overlay ('top', 'left', 'right', 'bottom', 'center').                                                                 | 'center' |
+| blur             | number        | Adds a blur effect on the message overlay.                                                                                                |         |
+| isClosePrevented | boolean       | Prevents the user from closing the message when clicking outside of it.                                                                   | false   |
+| styles           | CSSProperties | Optional custom styles for the MessageOverlay.                                                                                              |         |
+| className        | string        | Optional className for the MessageOverlay container.                                                                                        |         |
+
 ### **FullScreen**
 
 “**is*fullScreen***” property changes the width and height of the message so that it fits the entire screen.
@@ -209,9 +221,7 @@ import { Button } from '../Button/Button';
 const [show, setShow] = useState(false);
 
 <>
-  <Button onClick={() => setShow(true)} isAuto>
-    Prevent Close on Overlay
-  </Button>
+  <Button onClick={() => setShow(true)}>Blur Overlay</Button>
   <Message.Overlay isOpen={show} onClose={() => setShow(false)} isClosePrevented>
     <Message.Container>
       <Message.Header>Title</Message.Header>
@@ -231,6 +241,15 @@ const [show, setShow] = useState(false);
 ## **Message Container**
 
 It represents the main container or wrapper that holds all the content and components of a message.
+
+### **Props**
+| Prop | Type | Description | Default |
+| ----------- | ----------- | ----------- | ----------- |
+| isFullScreen      | boolean      |  Changes the width and height of the message so that it fits the entire screen.       |    false         |
+| variant     | 'sharp' \| 'rounded'      |  Gives a sharp or rounded edges to the message container.               | 'rounded'     |
+| shadow | object | Adds a shadow effect on the message container. | |
+| styles    | CSSProperties | Optional custom styles for the MessageContainer.                 |          |
+| className | string        | Optional className for the MessageContainer.           |          |
 
 ### **Shapes**
 
@@ -293,7 +312,6 @@ const [show, setShow] = useState(false);
 
 <>
   <Button onClick={() => setShow(true)}>Shadow</Button>
-
   {show && (
     <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
       <Message.Container shadow={{ boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.6)' }}>
@@ -329,20 +347,14 @@ const [showLeft, setShowLeft] = useState(false);
 
 <>
   <Horizontal gap={10}>
-    <Button onClick={() => setShowRight(true)} isAuto>
-      Close button on the right
-    </Button>
-    <Button onClick={() => setShowWithout(true)} isAuto>
-      Without Close Button
-    </Button>
-    <Button onClick={() => setShowLeft(true)} isAuto>
-      Without Close left
-    </Button>
+    <Button onClick={() => setShowRight(true)}>Right</Button>
+    <Button onClick={() => setShowWithout(true)}>Without</Button>
+    <Button onClick={() => setShowLeft(true)}>Left</Button>
   </Horizontal>
   {showRight && (
     <Message.Overlay isOpen={showRight} onClose={() => setShowRight(false)}>
       <Message.Container>
-        <Message.Header> Close Button</Message.Header>
+        <Message.Header> Right</Message.Header>
         <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
         <Message.Footer>
           <Button onClick={() => setShowRight(false)}>Cancel</Button>
@@ -353,7 +365,7 @@ const [showLeft, setShowLeft] = useState(false);
   {showWithout && (
     <Message.Overlay isOpen={showWithout} onClose={() => setShowWithout(false)}>
       <Message.Container>
-        <Message.Header buttonPosition="none"> Close Button</Message.Header>
+        <Message.Header buttonPosition="none"> Without</Message.Header>
         <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
         <Message.Footer>
           <Button onClick={() => setShowWithout(false)}>Cancel</Button>
@@ -364,7 +376,7 @@ const [showLeft, setShowLeft] = useState(false);
   {showLeft && (
     <Message.Overlay isOpen={showLeft} onClose={() => setShowLeft(false)}>
       <Message.Container>
-        <Message.Header buttonPosition="left">Close Button</Message.Header>
+        <Message.Header buttonPosition="left">Left</Message.Header>
         <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
         <Message.Footer>
           <Button onClick={() => setShowLeft(false)}>Cancel</Button>
@@ -422,7 +434,7 @@ const [show, setShow] = useState(false);
 
 ## **Message Footer**
 
-It represents the footer section of a message, which typically contains buttons or controls for actions related to the message's content.
+It represents the footer section of a message, where the primary information or user interaction elements are displayed.
 
 ```tsx
 import { useState } from 'react';
@@ -507,3 +519,53 @@ const HeaderIconSizes: Record<Size, number> = {
   xl: 28,
 };
 ```
+
+</file_content>
+
+Try again with fewer/more precise SEARCH blocks.
+(If you run into this error two times in a row, you may use the write_to_file tool as a fallback.)
+</error><environment_details>
+# VSCode Visible Files
+public/files/media/Message.mdx
+
+# VSCode Open Tabs
+src/components/Form/CountryPicker/CountryPicker/CountryPicker.view.tsx
+src/components/DragAndDrop/DragAndDrop.tsx
+public/files/media/DragAndDrop.mdx
+public/files/media/File.mdx
+public/files/media/Form.mdx
+public/files/media/Formik.mdx
+public/files/media/Icon.mdx
+public/files/media/Uploader.mdx
+public/files/media/Alert.mdx
+public/files/media/AspectRatio.mdx
+public/files/media/Avatar.mdx
+public/files/media/Badge.mdx
+public/files/media/Button.mdx
+public/files/media/Center.mdx
+public/files/media/Checkbox.mdx
+public/files/media/ComboBox.mdx
+public/files/media/CountryPicker.mdx
+public/files/media/DatePicker.mdx
+public/files/media/Horizontal.mdx
+public/files/media/Label.mdx
+public/files/media/Link.mdx
+public/files/media/Loader.mdx
+public/files/media/Message.mdx
+src/components/Button/Button/Button.view.tsx
+src/utils/componentsPageImports.tsx
+src/components/Uploader/Uploader.tsx
+src/components/Uploader/Uploader.props.ts
+src/pages/upload.page.tsx
+src/components/index.tsx
+src/components/Text/Text.tsx
+src/components/Text/Text/Text.view.tsx
+package.json
+src/components/Button/examples/effect.tsx
+
+# Current Time
+22/03/2025 9:02:50 PM (Africa/Dar_es_Salaam, UTC+3:00)
+
+# Current Mode
+ACT MODE
+</environment_details>

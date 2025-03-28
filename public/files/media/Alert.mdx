@@ -1,13 +1,26 @@
 # Alert
 
-Le composant `Alert` est utilisé pour afficher des messages importants à l'utilisateur.
+The `Alert` component is used to display important messages to the user.
 
-## Exemple
+### **Import**
 
-```jsx
-    <Alert
-      title="Heads up!"
-      description="You can add components to your app using the cli."
-    />
+```tsx
+import { Alert } from '@app-studio/web';
 ```
 
+## Example
+
+```jsx
+<Alert
+  title="Heads up!"
+  description="You can add components to your app using the cli."
+/>
+```
+
+## Props
+
+| Prop        | Type        | Description                                   | Default |
+| ----------- | ----------- | --------------------------------------------- | ------- |
+| title       | string      | The title of the alert.                       |         |
+| description | string      | The description of the alert.                 |         |
+| styles      | CSSProperties | Optional custom styles for the alert component. |         |

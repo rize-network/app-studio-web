@@ -38,6 +38,30 @@ const [show, setShow] = useState(false);
 
 It represents the overlay or backdrop that appears behind the modal content when the modal is displayed.
 
+### **Props**
+
+| Prop             | Type          | Description                                                                                                                               | Default |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| isOpen           | boolean       | Whether the modal overlay is open.                                                                                                       | false   |
+| onClose          | function      | Callback function to close the modal.                                                                                                     |         |
+| position         | Position      | Positions the modal overlay ('top', 'left', 'right', 'bottom', 'center').                                                                 | 'center' |
+| blur             | number        | Adds a blur effect on the modal overlay.                                                                                                |         |
+| isClosePrevented | boolean       | Prevents the user from closing the modal when clicking outside of it.                                                                   | false   |
+| styles           | CSSProperties | Optional custom styles for the ModalOverlay.                                                                                              |         |
+| className        | string        | Optional className for the ModalOverlay container.                                                                                        |         |
+
+### **Props**
+
+| Prop             | Type          | Description                                                                                                                               | Default |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| isOpen           | boolean       | Whether the modal overlay is open.                                                                                                       | false   |
+| onClose          | function      | Callback function to close the modal.                                                                                                     |         |
+| position         | Position      | Positions the modal overlay ('top', 'left', 'right', 'bottom', 'center').                                                                 | 'center' |
+| blur             | number        | Adds a blur effect on the modal overlay.                                                                                                |         |
+| isClosePrevented | boolean       | Prevents the user from closing the modal when clicking outside of it.                                                                   | false   |
+| styles           | CSSProperties | Optional custom styles for the ModalOverlay.                                                                                              |         |
+| className        | string        | Optional className for the ModalOverlay container.                                                                                        |         |
+
 ### **FullScreen**
 
 “**is*fullScreen***” property changes the width and height of the modal so that it fits the entire screen.

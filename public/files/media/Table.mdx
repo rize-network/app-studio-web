@@ -2,6 +2,17 @@
 
 Renders a customizable data table with optional footer and caption.
 
+## Props
+
+| Prop      | Type          | Description                                                                                                                               | Default |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| columns          | array        | Array of column objects, each defining a title and field.                                                                                                     |         |
+| data             | array         | Array of data objects to be displayed in the table rows.                                                                                                    |         |
+| footer           | array         | Optional array of footer cells to add at the bottom of the table.                                                                                             |         |
+| caption          | ReactNode     | Optional table caption as a React node.                                                                                                   |         |
+| styles           | CSSProperties | Optional custom styles to apply to the table and its elements.                                                                                              |         |
+| className        | string        | Optional className for the table.                                                                                                         |         |
+
 ### **Import**
   ```tsx
   import { Table } from '@app-studio/web';
@@ -396,4 +407,3 @@ export const StylesDemo = () => {
 };
 
 ```
-

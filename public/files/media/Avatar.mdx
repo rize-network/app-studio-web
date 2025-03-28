@@ -54,6 +54,16 @@ export const FallbackDemo = () => <Avatar src="" fallback="ML" />;
 
 ```
 
+## Props
+
+| Prop       | Type          | Description                                                                | Default |
+| ---------- | ------------- | -------------------------------------------------------------------------- | ------- |
+| src        | string        | The URL of the avatar image.                                               |         |
+| size       | Size          | The size of the avatar ('xs', 'sm', 'md', 'lg', 'xl').                     | 'md'    |
+| fallback   | string        | A fallback string to display if the image fails to load or src is empty.   |         |
+| styles     | CSSProperties | Optional custom styles for the avatar (container, fallback, image).       |         |
+| className  | string        | Optional className for the avatar container.                               |         |
+
 ### **styles**
 Optional object to apply custom styles to the avatar component.
 
@@ -81,4 +91,3 @@ export const StylesDemo = () => {
 };
 
 ```
-

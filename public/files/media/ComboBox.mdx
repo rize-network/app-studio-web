@@ -80,6 +80,22 @@ export const OnSelectDemo = () => {
 
 ```
 
+## Props
+
+| Prop              | Type          | Description                                                                 | Default     |
+| ----------------- | ------------- | --------------------------------------------------------------------------- | ----------- |
+| items             | array         | Array of items to be displayed in the dropdown.                             |             |
+| onSelect          | function      | Callback function triggered when an item is selected.                       |             |
+| searchEnabled     | boolean       | Flag to enable search functionality.                                        | true        |
+| left              | ReactNode     | Element to display on the left side.                                        |             |
+| right             | ReactNode     | Element to display on the right side.                                       |             |
+| label             | string        | Label to describe the ComboBox.                                             |             |
+| showTick          | boolean       | Flag to show a tick mark next to selected items.                            | true        |
+| placeholder       | string        | Placeholder text when nothing is selected.                                  |             |
+| styles            | CSSProperties | Optional custom styles for the ComboBox.                                    |             |
+| searchPlaceholder | string        | Placeholder text for the search input.                                     | 'Search...' |
+| className         | string        | Optional className for the ComboBox container.                              |             |
+
 ### **searchEnabled**
 Flag to enable search functionality within the ComboBox.
 
@@ -346,4 +362,3 @@ export const SearchPlaceholderDemo = () => {
 };
 
 ```
-

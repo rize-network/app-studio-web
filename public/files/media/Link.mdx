@@ -69,3 +69,15 @@ export const ExternalLink = () => (
 
 ```
 
+## Props
+
+| Prop               | Type          | Description                                                                                                                               | Default |
+| ------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| href               | string        | The URL or path the link points to.                                                                                                       |         |
+| underline          | string        | The text decoration style of the link ('default', 'hover', 'underline').                                                                 |         |
+| isExternal         | boolean       | Whether the link points to an external resource.                                                                                          | false   |
+| iconSize           | Size          | The size of the icon if the link is external ('xs', 'sm', 'md', 'lg', 'xl').                                                              | 'md'    |
+| color              | string        | The color of the link text.                                                                                                               |         |
+| textDecorationColor | string        | The color of the text decoration (e.g., underline).                                                                                       |         |
+| styles             | CSSProperties | Optional custom styles for the link (container, text, icon).                                                                              |         |
+| children           | React.ReactNode | The content of the link (typically text or an icon).                                                                                       |         |

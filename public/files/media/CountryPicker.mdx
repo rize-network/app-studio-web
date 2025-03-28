@@ -43,6 +43,20 @@ export const HelperTextCountryPicker = () => (
 
 ```
 
+## Props
+
+| Prop        | Type          | Description                                                              | Default |
+| ----------- | ------------- | ------------------------------------------------------------------------ | ------- |
+| label       | string        | The label text for the country picker.                                  |         |
+| error       | boolean       | Flag to indicate validation state.                                       | false   |
+| helperText  | string        | Helper text for guiding the user.                                        |         |
+| shape       | Shape         | Shape of the CountryPicker for visual styles.                            |         |
+| variant     | Variant       | Variant for different visual types of CountryPicker.                     |         |
+| shadow      | Shadow/Elevation | Shadow or Elevation styles for visual depth and perspective.            |         |
+| styles      | CSSProperties | Optional custom styles for the CountryPicker (container, input, label). |         |
+| className   | string        | Optional className for the CountryPicker container.                      |         |
+| placeholder | string        | Placeholder text when no country is selected.                           |         |
+
 ### **shape**
 Optional shape of the CountryPicker for visual styles
 
@@ -107,4 +121,3 @@ export const ShadowCountryPicker = () => (
 );
 
 ```
-

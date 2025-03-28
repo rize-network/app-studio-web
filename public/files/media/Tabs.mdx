@@ -2,6 +2,14 @@
 
 Provides an interactive tab interface for content organization
 
+## Props
+
+| Prop      | Type          | Description                                                                                                                               | Default |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| tabs             | {title: string; value: string; content: ReactNode;}[] | An array of tab objects, each defining a title, value, and content.                                                                                                     |         |
+| styles           | TabsStyles    | Allows for optional styling to be applied to the tabs via a TabsStyles object.                                                                                              |         |
+| className        | string        | Optional className for the tabs.                                                                                                          |         |
+
 ### **Import**
   ```tsx
   import { Tabs } from '@app-studio/web';
@@ -205,4 +213,3 @@ export const StylesTabs = () => {
 };
 
 ```
-

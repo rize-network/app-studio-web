@@ -2,6 +2,20 @@
 
 A customizable UI component for selecting from a list of options.
 
+## Props
+
+| Prop           | Type          | Description                                                                                                                               | Default |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| options          | { label: string; value: string }[] | Array of options for the select box.                                                                                                     |         |
+| label            | string        | Label for the select box.                                                                                                                               |         |
+| placeholder      | string        | Placeholder text for the select box.                                                                                                                      |         |
+| error            | boolean       | Flag to indicate if the select has an error state.                                                                                                       | false   |
+| helperText       | string        | Helper text that appears below the select box.                                                                                                            |         |
+| shadow           | Shadow        | Determines the shadow property of the select component.                                                                                                  |         |
+| styles           | CSSProperties | Optional custom styles for the select component.                                                                                                        |         |
+| className        | string        | Optional className for the select component.                                                                                                          |         |
+| isScrollable     | boolean       | Boolean to control whether the select options are scrollable                                                                                             | true    |
+
 ### **Import**
   ```tsx
   import { Select } from '@app-studio/web';
@@ -110,4 +124,3 @@ export const IsScrollableDemo = () => {
 };
 
 ```
-
