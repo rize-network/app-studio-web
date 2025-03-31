@@ -91,31 +91,6 @@ export const LoaderButtons = () => (
 
 ```
 
-## Props
-
-| Prop           | Type             | Description                                                                                   | Default      |
-| -------------- | ---------------- | --------------------------------------------------------------------------------------------- | ------------ |
-| onClick        | function         | Callback function when the button is clicked.                                                |              |
-| colorScheme    | string           | The color scheme of the button.                                                               |              |
-| loaderProps    | LoaderProps      | Configuration for the loader animation.                                                       |              |
-| icon           | ReactNode        | Icon to be displayed within the button.                                                       |              |
-| isDisabled     | boolean          | Whether the button is disabled.                                                               | false        |
-| isAuto         | boolean          | Whether the button size adjusts to its content.                                               | false        |
-| size           | Size             | The size of the button ('xs', 'sm', 'md', 'lg', 'xl').                                         | 'md'         |
-| shadow         | Shadow/Elevation | Shadow effects for the button.                                                                |              |
-| variant        | Variant          | The stylistic variation of the button ('filled', 'outline', 'link', 'ghost').                 | 'filled'     |
-| effect         | string           | Interactive effects for the button ('hover', 'reverse').                                      |              |
-| to             | string           | URL or path for the button to navigate to (if applicable).                                    |              |
-| type           | string           | HTML button type ('button', 'submit', 'reset').                                               | 'button'     |
-| isFilled       | boolean          | Whether the button has a filled background (for 'filled' and 'outline' variants).             | true         |
-| isLoading      | boolean          | Whether to show a loading indicator.                                                          | false        |
-| loaderPosition | string           | Position of the loader ('left', 'right').                                                     | 'left'       |
-| isIconRounded  | boolean          | Whether the icon should have a rounded background.                                             | false        |
-| shape          | Shape            | The shape of the button ('sharp', 'rounded', 'pillShaped').                                   | 'rounded'    |
-| iconPosition   | string           | Position of the icon ('left', 'right').                                                       | 'left'       |
-| styles         | CSSProperties    | Optional custom styles for the button (container, text, icon, loader).                       |              |
-| className      | string           | Optional className for the button container.                                                  |              |
-
 ### **icon**
 Optional React node(s) defining the icon to be displayed within the button.
 
@@ -124,18 +99,18 @@ import React from 'react';
 import { Button } from '../Button';
 import { Center } from '../../Layout/Center/Center';
 
-import { DustBinIcon } from '../../Icon';
+import { DustBinIcon } from '../../Icon/Icon';
 
 import { Shape } from '../Button/Button.type';
 
 export const IconButtons = () => (
   <Center gap={15}>
-    <Button icon={<DustBinIcon size={24} />} height={48}>
+    <Button icon={<DustBinIcon size={16} />} height={48}>
       Delete
     </Button>
     <Button
       height={48}
-      icon={<DustBinIcon size={24} />}
+      icon={<DustBinIcon size={16} />}
       shape={'pillShaped' as Shape}
       iconPosition="right"
       colorScheme="theme.secondary"
@@ -143,7 +118,7 @@ export const IconButtons = () => (
       Delete
     </Button>
     <Button
-      icon={<DustBinIcon size={24} />}
+      icon={<DustBinIcon size={16} />}
       colorScheme="theme.primary"
       isIconRounded
       isAuto
@@ -295,3 +270,4 @@ export const EffectButton = () => (
 );
 
 ```
+

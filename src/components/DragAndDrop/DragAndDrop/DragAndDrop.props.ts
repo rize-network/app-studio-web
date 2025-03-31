@@ -1,5 +1,4 @@
 import { ViewProps } from 'app-studio';
-
 export interface DragAndDropProps {
   items: any[];
   onChange?: (items: any[]) => void;

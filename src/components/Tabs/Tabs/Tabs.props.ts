@@ -14,4 +14,6 @@ export interface TabsViewProps extends TabsProps {
   setIsActive: React.Dispatch<React.SetStateAction<Tab>>;
   tabsState: Tab[];
   setTabsState: React.Dispatch<React.SetStateAction<Tab[]>>;
+  renderTab?: (tab: Tab, isActive: boolean, index: number) => React.ReactNode;
+  renderContent?: (tab: Tab, index: number) => React.ReactNode;
 }
