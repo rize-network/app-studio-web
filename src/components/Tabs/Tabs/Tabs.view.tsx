@@ -1,79 +1,82 @@
-import { Tab } from './Tabs.type';
-import { TabsViewProps } from './Tabs.props';
 import React from 'react';
-import { View } from '../../Layout/View/View';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-// Defines a functional component 'TabsView' with props of type 'TabsViewProps'.
-export const TabsView = (props: TabsViewProps) => {
-  // Destructures 'tabs', 'styles', 'isActive', 'setIsActive', 'tabsState', and 'setTabsState' from the component props.
-  const {
-    tabs,
-    styles,
-    isActive,
-    setIsActive,
-    tabsState,
-    setTabsState,
-    renderTab,
-    renderContent,
-  } = props;
-  // Declares a function 'moveSelectedTabToTop' that takes an index and modifies the tabs order.
-  const moveSelectedTabToTop = (idx: number) => {
-    // Creates a copy of the 'tabs' array from props to be altered.
-    const newTabs = [...tabs];
-    // Removes the tab at the provided index, effectively selecting this tab.
-    const selectedTab = newTabs.splice(idx, 1);
-    // Places the selected tab at the start of the 'newTabs' array.
-    newTabs.unshift(selectedTab[0]);
-    // Updates the state with the reordered tabs.
-    setTabsState(newTabs);
-    // Sets the active tab to the first tab in the 'newTabs' array.
-    setIsActive(newTabs[0]);
-  };
-  // Defines a function 'isContentActive' that checks if the given tab's content is to be displayed.
-  const isContentActive = (tab: Tab) => {
-    // Returns a boolean indicating if the given tab is identical to the first tab in 'tabsState'.
-    return tab.value === tabsState[0].value;
-  };
+import { TabsViewProps } from './Tabs.props';
+import { View } from '../../Layout/View/View'; // Adjust path as needed
+import { Horizontal } from '../../Layout/Horizontal/Horizontal'; // Adjust path as needed
+import { Button } from '../../Button/Button'; // Adjust path as needed
+import { Text } from '../../Text/Text'; // Adjust path as needed
+import { Vertical } from '../../Layout/Vertical/Vertical'; // Adjust path as needed
+
+/**
+ * The presentation component for Tabs. Renders the UI based on props.
+ */
+export const TabsView: React.FC<TabsViewProps> = ({
+  tabs = [], // Default to empty array
+  activeTab,
+  handleTabClick,
+  styles = {}, // Default to empty object
+  renderTab,
+  renderContent,
+}) => {
+  // If there's no active tab (e.g., tabs array is empty), render nothing or a placeholder
+  if (!activeTab) {
+    // Optionally render a placeholder when no tabs are active/available
+    // return <View {...styles.container}><Text>No tabs available.</Text></View>;
+    return null; // Or simply render nothing
+  }
+
   return (
-    <Vertical width="100%" height={'100%'} {...styles?.container}>
-      <Horizontal {...styles?.headerTabs}>
-        {tabs.map((tab, idx) =>
-          renderTab ? (
-            renderTab(tab, isContentActive(tab), idx)
-          ) : (
+    // Use Vertical layout for overall structure (tabs header above content)
+    <Vertical width="100%" height={'100%'} {...styles.container}>
+      {/* Horizontal layout for the tab headers/buttons */}
+      <Horizontal {...styles.headerTabs}>
+        {tabs.map((tab) => {
+          // Determine if the current tab in the loop is the active one
+          const isActive = tab.title === activeTab.title;
+          // Prepare the onClick handler for this specific tab
+          const onClick = () => handleTabClick(tab);
+
+          // Use the custom renderTab function if provided
+          if (renderTab) {
+            return renderTab(tab, isActive, onClick);
+          }
+
+          // Default rendering for a tab button
+          return (
             <Button
-              key={tab.title}
-              onClick={() => {
-                moveSelectedTabToTop(idx);
-              }}
-              variant={isActive.value === tab.value ? 'filled' : 'ghost'}
-              shape="pillShaped"
-              cursor="pointer"
-              isAuto
-              margin={10}
-              {...styles?.tab}
-              {...(isActive.value === tab.value ? styles?.activeTab : {})}
+              key={tab.title} // Use the unique title as the key
+              onClick={onClick}
+              borderBottomLeftRadius={0} // Example: Apply border radius if active
+              borderBottomRightRadius={0} // Example: Apply border radius if active
+              // Apply base tab styles and merge activeTab styles if this tab is active
+              {...styles.tab}
+              {...(isActive ? styles.activeTab : {})}
+              // Example: Set variant based on active state (can be overridden by styles)
+              variant={isActive ? 'filled' : 'ghost'}
+              cursor="pointer" // Ensure pointer cursor
+              // Removed isAuto and margin={10} - should be controlled via styles.tab if needed
             >
+              {/* Render tab icon if provided */}
+              {tab.icon}
+              {/* Render tab title */}
               <Text
-                {...styles?.title}
-                {...(isActive.value === tab.value ? styles?.activeText : {})}
+                // Apply base title styles and merge activeText styles if this tab is active
+                {...styles.title}
+                {...(isActive ? styles.activeText : {})}
               >
                 {tab.title}
               </Text>
             </Button>
-          )
-        )}
+          );
+        })}
       </Horizontal>
-      <View width={'100%'} height="100%" {...styles?.content}>
-        {tabsState.map(
-          renderContent
-            ? renderContent
-            : (tab, idx) =>
-                isContentActive(tab) && <View key={idx}>{tab.content}</View>
-        )}
+
+      {/* Content area */}
+      <View width={'100%'} height="100%" {...styles.content}>
+        {/* Use the custom renderContent function if provided */}
+        {renderContent
+          ? renderContent(activeTab)
+          : // Otherwise, render the content property from the active tab object
+            activeTab.content}
       </View>
     </Vertical>
   );

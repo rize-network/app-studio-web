@@ -1,18 +1,37 @@
-import { ButtonProps } from '../../Button/Button/Button.props';
-import { TextProps } from '../../Text/Text/Text.props';
-// Declare the 'Tab' type with required title and value properties, and an optional content property that can be a string, a React node, or any type.
+import { CSSProperties } from 'react'; // Import CSSProperties
+import { ButtonProps } from '../../Button/Button/Button.props'; // Adjust path as needed
+import { TextProps } from '../../Text/Text/Text.props'; // Adjust path as needed
+import { ViewProps } from 'app-studio';
+
+/**
+ * Defines the structure for a single tab.
+ */
 export type Tab = {
+  /** The text displayed on the tab header/button. */
   title: string;
-  value: string;
-  content?: string | React.ReactNode | any;
+  /** Optional icon element to display next to the title. */
+  icon?: React.ReactNode; // Use React.ReactNode instead of any
+  /** The content to display when this tab is active. Can be any renderable React node. */
+  content?: React.ReactNode; // Use React.ReactNode instead of any
 };
-// Declare the 'TabsStyles' type for styling the tab components, with optional properties to customize container, active/inactive tabs, text, content display, and the header tabs.
+
+/**
+ * Defines the structure for applying custom styles to various parts of the Tabs component.
+ * Allows using either direct CSSProperties or passing props compatible with underlying Button/Text components.
+ */
 export type TabsStyles = {
-  container?: CSSProperties;
-  activeTab?: CSSProperties | ButtonProps;
-  activeText?: CSSProperties | TextProps;
-  tab?: CSSProperties | ButtonProps;
-  content?: CSSProperties;
-  title?: CSSProperties | TextProps;
-  headerTabs?: CSSProperties;
+  /** Styles for the main container wrapping the tabs and content. */
+  container?: ViewProps;
+  /** Styles applied specifically to the active tab button/header. Merged with `tab` styles. */
+  activeTab?: ButtonProps;
+  /** Styles applied specifically to the text within the active tab button/header. Merged with `title` styles. */
+  activeText?: TextProps;
+  /** Styles applied to each tab button/header (both active and inactive). */
+  tab?: ButtonProps;
+  /** Styles applied to the content area displaying the active tab's content. */
+  content?: ViewProps;
+  /** Styles applied to the text within each tab button/header (both active and inactive). */
+  title?: TextProps;
+  /** Styles applied to the container element that wraps the tab buttons/headers. */
+  headerTabs?: ViewProps;
 };

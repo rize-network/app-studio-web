@@ -4,7 +4,7 @@ import { Headings, Size, TextWeights } from './Text.type';
 export interface TextProps
   extends Omit<TextAppProps, 'children' | 'style' | 'pointerEvents'>,
     CSSProperties {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   heading?: Headings;
   isItalic?: boolean;
   isStriked?: boolean;

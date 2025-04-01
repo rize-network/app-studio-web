@@ -166,3 +166,137 @@ Start with the General Principles, then focus on the App Studio Specific Best Pr
 ## VI. Conclusion
 
 Following these cursor rules will help maintain the quality, consistency, and developer experience of the App Studio library. They provide a clear framework for building components that are robust, maintainable, and easy to integrate. Remember to prioritize consistency with existing patterns and continuously refine your understanding and application of these guidelines.
+
+
+
+# Create new component for App Studio Web
+
+1.  **Component Structure:** Components generally follow a consistent pattern:
+    *   `ComponentName/` (Root folder for the component)
+        *   `ComponentName/` (Inner folder for core files)
+            *   `ComponentName.props.ts` (or `.tsx`): Defines TypeScript interfaces for props. Often extends base props like `ViewProps` or `InputProps` from `app-studio`.
+            *   `ComponentName.state.ts` (or `.tsx`): Usually contains a custom hook `useComponentNameState` using `React.useState` to manage component-specific state (like hover, focus, selection).
+            *   `ComponentName.style.ts` (or `.tsx`): Contains style-related constants, mappings (e.g., `Size` to CSS), or theme definitions.
+            *   `ComponentName.type.ts` (or `.tsx`, `.d.ts`): Defines specific TypeScript types/enums used within the component (e.g., `Variant`, `Size`, `Shape`, custom style object types).
+            *   `ComponentName.view.tsx`: The core presentational component. It receives props (often including state values and setters from the hook) and renders the UI, typically using base components like `View`, `Text`, `Horizontal`, `Vertical`, `Center` from the library itself or `app-studio`.
+        *   `examples/` (Folder for usage examples)
+            *   `default.tsx`: A basic usage example.
+            *   Other `.tsx` files: Demonstrating specific props, variants, or states (e.g., `size.tsx`, `variant.tsx`, `isDisabled.tsx`).
+            *   `index.ts` (or `.tsx`): Exports all examples from the directory.
+        *   `ComponentName.tsx` (Top-level file): The public API for the component. It usually imports the state hook and the view, wires them together, and exports the final component.
+
+2.  **Styling:**
+    *   Relies heavily on the `app-studio` library's components (`View`, `Element`, `Horizontal`, `Vertical`, `Center`) which accept style props directly.
+    *   Uses a theme system (`useTheme`, `getColor`) provided by `app-studio`.
+    *   Style constants (like size mappings) are defined in `.style.ts` files.
+    *   Custom style overrides are often passed via a `styles` prop, typed in `.type.ts`.
+    *   Minimal use of global CSS, mostly for specific input overrides (`styles.css` in some form components).
+
+3.  **State Management:**
+    *   Primarily local component state managed via `React.useState` encapsulated in custom `useComponentNameState` hooks.
+    *   Global/Shared state for components like `Modal` and `Message` uses Zustand (`create`, `useMessageStore`, `useModalStore`).
+
+4.  **Dependencies & Base Components:**
+    *   Strong reliance on `app-studio` for base elements, layout, input primitives, and theming.
+    *   Uses internal layout components (`Horizontal`, `Vertical`, `Center`, `View`).
+    *   Uses internal `Text`, `Icon`, `Button`, `Loader` components.
+    *   Form components often use shared layout helpers (`FieldContainer`, `FieldContent`, etc.).
+    *   `react-router-dom` for `Link`.
+    *   `formik` and `yup` for form handling examples/integrations.
+
+5.  **TypeScript:** The library is strongly typed using TypeScript interfaces and types defined in dedicated files.
+
+6.  **Exports:** Components and their primary prop types are exported from the root `index.tsx`.
+
+**Guideline for Creating New Components**
+
+Based on the analysis, here's a guideline for adding new components to this library:
+
+**I. Core Principles:**
+
+1.  **Consistency:** Adhere strictly to the established file structure, naming conventions, and coding patterns.
+2.  **Separation of Concerns:** Keep props, types, state logic, styling constants, and view presentation in separate, dedicated files.
+3.  **TypeScript First:** Define clear interfaces and types for all props, state, and internal structures.
+4.  **Reusability:** Leverage existing base components (`View`, `Text`, `Horizontal`, `Icon`, etc.) and `app-studio` primitives whenever possible. Avoid introducing new external dependencies unless absolutely necessary and approved.
+5.  **Presentational View:** The `.view.tsx` component should be purely presentational, receiving all data and event handlers via props.
+6.  **State Encapsulation:** Use the `useComponentNameState` hook pattern for managing local component state.
+
+**II. Steps to Create a New Component (`NewComponent`):**
+
+1.  **Planning:**
+    *   Define the component's purpose and core functionality.
+    *   Identify the necessary props (API). Consider variations (variants, sizes, shapes).
+    *   Determine if any internal state is needed.
+    *   Sketch the basic UI structure.
+
+2.  **Directory Structure:**
+    *   Create the main folder: `NewComponent/`
+    *   Create the inner folder: `NewComponent/NewComponent/`
+    *   Create the examples folder: `NewComponent/examples/`
+
+3.  **Define Types (`NewComponent/NewComponent/NewComponent.type.ts` or `.d.ts`):**
+    *   Define any specific enums needed (e.g., `Variant`, `Size`, `Shape`).
+    *   Define the type for the `styles` prop (e.g., `NewComponentStyles`).
+
+4.  **Define Props (`NewComponent/NewComponent/NewComponent.props.ts`):**
+    *   Create the main props interface (e.g., `NewComponentProps`).
+        *   Extend relevant base props if applicable (e.g., `extends ViewProps`). Omit props like `size` if you redefine them.
+        *   Include props for variations (variant, size, shape), content (`children`), event handlers (`onClick`, `onChange`), state control (`isDisabled`, `isLoading`), and custom styling (`styles`).
+    *   Create the view props interface (e.g., `NewComponentViewProps`) extending the main props and adding state values/setters from the hook (e.g., `isHovered`, `setIsHovered`).
+
+5.  **Define Style Constants (`NewComponent/NewComponent/NewComponent.style.ts`):**
+    *   If the component has standard size/shape/variant mappings to CSS properties, define them here as `Record<TypeName, CSSProperties>` (e.g., `NewComponentSizes`, `NewComponentShapes`).
+
+6.  **Implement State Hook (`NewComponent/NewComponent/NewComponent.state.ts`):**
+    *   Create the `useNewComponentState` hook.
+    *   Use `React.useState` for any internal state (e.g., hover, focus, active state).
+    *   Accept relevant props (like default values) if needed for initialization.
+    *   Return an object containing state values and their setters.
+
+7.  **Implement the View (`NewComponent/NewComponent/NewComponent.view.tsx`):**
+    *   Create a functional component that accepts `NewComponentViewProps`.
+    *   Use `View`, `Text`, `Horizontal`, `Vertical`, `Center`, `Icon`, etc., to build the UI.
+    *   Apply styles based on props (variant, size, shape, isDisabled, isHovered, isFocused) using mappings from `.style.ts` or conditional logic.
+    *   Integrate theme colors using `useTheme` if necessary.
+    *   Apply custom styles from the `styles` prop to the appropriate elements.
+    *   Connect event handlers (like `onClick`, `onMouseEnter`, `onMouseLeave`) from props to the relevant elements.
+
+8.  **Create Component Entry Point (`NewComponent/NewComponent.tsx`):**
+    *   Create a functional component accepting `NewComponentProps`.
+    *   Call the `useNewComponentState` hook.
+    *   Render the `NewComponentView`, passing the state values/setters from the hook and all original props.
+    *   Export this component as `NewComponent`.
+
+9.  **Add Examples (`NewComponent/examples/`):**
+    *   Create `default.tsx` showing basic usage.
+    *   Create examples for different props/variants (e.g., `size.tsx`, `variant.tsx`, `disabled.tsx`).
+    *   Create `index.ts` to export all examples.
+
+10. **Export from Library (`index.tsx`):**
+    *   Add `export * from './NewComponent/NewComponent';` to the main `index.tsx`.
+    *   Add `export * from './NewComponent/NewComponent/NewComponent.props';` to export the primary props interface.
+
+11. **Testing & Documentation (Implicit):**
+    *   Write unit/integration tests for the component (framework not specified, but essential).
+    *   Update any relevant documentation (e.g., Storybook, style guides).
+
+**III. Requirements & Restrictions:**
+
+*   **File Structure:** Strictly follow the `Component/Component/` and `Component/examples/` structure.
+*   **Naming:** Use consistent naming (`ComponentName`, `useComponentNameState`, `ComponentNameProps`, `ComponentNameView`, etc.).
+*   **State:** Use the `useComponentNameState` hook pattern. Avoid direct `useState` in the view or entry point component. Use Zustand (`useModalStore`, `useMessageStore`) *only* if the component requires interaction with the existing global Modal or Message system. Do not introduce new global stores without strong justification.
+*   **Styling:**
+    *   Prioritize using `app-studio` components (`View`, `Element`) and style props.
+    *   Use the `styles` prop pattern for custom overrides.
+    *   Use `.style.ts` for reusable style constants/mappings.
+    *   Use `useTheme` for theme colors.
+    *   **Restriction:** Avoid adding new global CSS files unless absolutely necessary for browser resets or complex pseudo-selectors not achievable via style props.
+*   **Props & Types:** Define all props and types using TypeScript interfaces/types in their respective files. Export the main props interface.
+*   **Dependencies:**
+    *   **Requirement:** Reuse existing internal components (`Text`, `Button`, `Icon`, layout components) and `app-studio` primitives.
+    *   **Restriction:** Do not add new external libraries without discussion and approval.
+*   **Examples:** Provide comprehensive examples covering common use cases and prop variations.
+*   **Exports:** Ensure the component and its props are exported correctly from the main `index.tsx`.
+*   **Form Components:** If creating a form input, follow the patterns seen in `TextField`, `Select`, etc., potentially using the `FieldContainer`, `FieldContent`, `FieldLabel`, `FieldWrapper`, `HelperText` layout components. If Formik integration is needed, create a separate `Formik.NewComponent.tsx` file following the existing pattern using `useFormikInput`.
+
+By following these guidelines, new components will integrate smoothly into the existing library, maintaining consistency in structure, style, and API design.
