@@ -1,9 +1,8 @@
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React from 'react';
 import { View, Text, Image, Horizontal } from 'app-studio';
 import { UploadIcon } from '../../Icon/Icon';
 import { UploadStateProps, UploadViewProps } from './Uploader.props';
 import { Center } from '../../Layout';
-import { useUpload } from './Uploader.state';
 
 export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   accept,
