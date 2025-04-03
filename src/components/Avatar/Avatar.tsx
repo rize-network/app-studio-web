@@ -7,7 +7,7 @@ import { AvatarView } from './Avatar/Avatar.view';
 const AvatarComponent = ({
   src,
   size,
-  styles,
+  views,
   fallback,
   onClick,
 }: AvatarProps) => {
@@ -18,7 +18,7 @@ const AvatarComponent = ({
     <AvatarView
       src={src}
       size={size}
-      styles={styles}
+      views={views}
       fallback={fallback}
       imageError={imageError}
       setImageError={setImageError}

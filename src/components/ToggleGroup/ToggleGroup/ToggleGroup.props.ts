@@ -9,13 +9,11 @@ export interface ToggleGroupProps extends Omit<InputProps, 'size'> {
   items: ToggleItem[];
   // Optional variant prop to specify the visual style of the toggle group.
   variant?: Variant;
-  // Optional colorScheme prop for theming the toggle group.
-  colorScheme?: string;
   // Optional callback function that fires when the active toggle changes, providing the IDs of active toggles.
   onToggleChange?: (activeIds: string[]) => void;
 }
 // Interface extending ToggleGroup props for use in the ToggleGroupView component.
-export interface ToggleGroupViewProps extends ToggleGroupProps {
+export interface ToggleGroupViewProps extends Omit<ToggleGroupProps, ''> {
   // Array storing the IDs of active toggles within the group.
   activeToggles: string[];
   setActiveToggles: React.Dispatch<React.SetStateAction<string[]>>;

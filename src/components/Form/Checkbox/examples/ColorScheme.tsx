@@ -12,12 +12,7 @@ export const ColorCheckbox = () => (
       'theme.success',
       'theme.warning',
     ].map((color) => (
-      <Checkbox
-        key={color}
-        colorScheme={color}
-        label={color}
-        defaultIsSelected
-      />
+      <Checkbox key={color} label={color} defaultIsSelected />
     ))}
   </Vertical>
 );

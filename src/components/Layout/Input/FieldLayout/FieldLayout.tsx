@@ -10,7 +10,7 @@ export const FieldLayout: React.FC<FieldProps> = ({
   size = 'md',
   isDisabled = false,
   isReadOnly = false,
-  styles = { text: {} },
+  views = { text: {} },
   ...props
 }) => (
   <Vertical
@@ -25,7 +25,7 @@ export const FieldLayout: React.FC<FieldProps> = ({
     backgroundColor="transparent"
     color={isDisabled ? 'theme.text.disable' : 'theme.text.normal'}
     cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer'}
-    {...styles['text']}
+    {...views['text']}
     {...props}
   >
     {children}

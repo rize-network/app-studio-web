@@ -15,20 +15,20 @@ const defaultStyles: TableViewStyles = {};
 
 // Create a context that includes both styles and the onClick function
 const TableContext = React.createContext<{
-  styles: TableViewStyles;
+  views: TableViewStyles;
   onRowClick?: Function; // Accept the onClick prop
 }>({
-  styles: defaultStyles,
+  views: defaultStyles,
   onRowClick: () => {}, // Default to undefined if no onClick is passed
 });
 
 export const TableProvider: React.FC<{
   children: React.ReactNode;
-  styles?: TableViewStyles;
+  views?: TableViewStyles;
   onRowClick?: Function; // Accept the onClick prop
-}> = ({ children, styles = defaultStyles, onRowClick }) => (
+}> = ({ children, views = defaultStyles, onRowClick }) => (
   // Pass both styles and onClick to the context
-  <TableContext.Provider value={{ styles, onRowClick }}>
+  <TableContext.Provider value={{ views, onRowClick }}>
     {children}
   </TableContext.Provider>
 );

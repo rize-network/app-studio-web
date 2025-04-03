@@ -12,12 +12,7 @@ export const ColorDatePicker = () => (
       'theme.success',
       'theme.warning',
     ].map((color) => (
-      <DatePicker
-        key={color}
-        name="name"
-        colorScheme={color}
-        label="Select a date:"
-      />
+      <DatePicker key={color} name="name" label="Select a date:" />
     ))}
   </Vertical>
 );

@@ -18,22 +18,9 @@ export const FormikTextFieldExemple = () => {
       {(props: any) => (
         <FormikForm>
           <Vertical gap={10}>
-            <FormikTextField
-              name="firstName"
-              placeholder="First Name"
-              colorScheme="theme.secondary"
-            />
-            <FormikTextField
-              name="lastName"
-              placeholder="Last Name"
-              colorScheme="theme.secondary"
-            />
-            <FormikTextField
-              type="email"
-              name="email"
-              placeholder="Email"
-              colorScheme="theme.secondary"
-            />
+            <FormikTextField name="firstName" placeholder="First Name" />
+            <FormikTextField name="lastName" placeholder="Last Name" />
+            <FormikTextField type="email" name="email" placeholder="Email" />
             <Button type="submit" onClick={props.handleSubmit}>
               Submit
             </Button>

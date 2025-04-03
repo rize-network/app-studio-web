@@ -35,7 +35,7 @@ const UploadPage = () => {
         </Text>
         <Uploader
           accept="image/*"
-          icon={<ImageIcon size={32} />}
+          icon={<ImageIcon widthHeight={32} />}
           maxSize={5 * 1024 * 1024}
           onFileSelect={simulateUpload}
           isLoading={isLoading}
@@ -47,7 +47,7 @@ const UploadPage = () => {
       <View marginTop={32}>
         <Text fontSize={16}>File Uploader</Text>
         <Uploader
-          icon={<UploadIcon size={32} />}
+          icon={<UploadIcon widthHeight={32} />}
           maxSize={10 * 1024 * 1024}
           onFileSelect={simulateUpload}
           isLoading={isLoading}
@@ -60,7 +60,7 @@ const UploadPage = () => {
         <Text fontSize={16}>Video Uploader</Text>
         <Uploader
           accept="video/*"
-          icon={<VideoIcon size={32} />}
+          icon={<VideoIcon widthHeight={32} />}
           maxSize={100 * 1024 * 1024}
           onFileSelect={simulateUpload}
           isLoading={isLoading}

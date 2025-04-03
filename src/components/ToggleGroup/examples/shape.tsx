@@ -9,7 +9,7 @@ export const ShapeDemo = () => {
   const items = [
     {
       id: 'item',
-      value: <DustBinIcon color="black" size={18} />,
+      value: <DustBinIcon color="black" widthHeight={18} />,
       isActive: true,
     },
   ];

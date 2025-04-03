@@ -46,7 +46,7 @@ test('Password to match snapshot', () => {
         visibleIcon={<OpenEyeIcon size={14} />}
         hiddenIcon={<CloseEyeIcon size={14} />}
         size="xl"
-        styles={{
+        views={{
           box: {
             backgroundColor: 'red',
           },

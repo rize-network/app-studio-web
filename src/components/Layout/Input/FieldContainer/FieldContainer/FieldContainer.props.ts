@@ -18,5 +18,5 @@ export interface ContainerProps extends ViewProps {
   /**
    * CSS styles for the select box and dropdown.
    */
-  styles?: TextFieldStyles;
+  views?: TextFieldStyles;
 }

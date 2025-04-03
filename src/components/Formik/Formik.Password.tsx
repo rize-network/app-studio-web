@@ -8,8 +8,8 @@ import TextFieldView from '../Form/TextField/TextField/TextField.view';
 import { useFormikInput } from './Formik.Hook';
 
 const PasswordComponent: React.FC<PasswordProps> = ({
-  visibleIcon = <OpenEyeIcon size={14} />,
-  hiddenIcon = <CloseEyeIcon size={14} />,
+  visibleIcon = <OpenEyeIcon widthHeight={14} />,
+  hiddenIcon = <CloseEyeIcon widthHeight={14} />,
   ...props
 }) => {
   const formProps = useFormikInput(props);

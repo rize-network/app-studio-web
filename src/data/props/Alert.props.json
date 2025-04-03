@@ -1,10 +1,10 @@
 {
-  "componentDescription": "Displays an alert with optional icon and customizable styles.",
+  "componentDescription": "Displays an alert with optional icon and customizable views.",
   "icon": {
     "type": ["React.ReactNode"],
     "typeValues": [],
     "description": "Optional icon property, expecting a React node element",
-    "defaultValue": "<WarningIcon size={24} color={Themes[variant].content.color} />"
+    "defaultValue": "<WarningIcon widthHeight={24} color={Themes[variant].content.color} />"
   },
   "title": {
     "type": ["string"],

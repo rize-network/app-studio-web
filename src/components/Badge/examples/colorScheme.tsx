@@ -11,7 +11,7 @@ export const ColorSchemeDemo = () => (
       'theme.success',
       'theme.error',
     ].map((color, index) => (
-      <Badge key={index} colorScheme={color} isAuto content={color} />
+      <Badge key={index} isAuto content={color} />
     ))}
   </Horizontal>
 );

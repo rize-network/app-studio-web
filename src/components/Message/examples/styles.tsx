@@ -14,7 +14,7 @@ export const StylesDemo = () => {
           {
             action: () => {},
             actionText: 'Try again',
-            styles: {
+            views: {
               container: {
                 borderColor: 'black',
                 backgroundColor: '#f0f0f0',

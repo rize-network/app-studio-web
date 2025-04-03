@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BorderedButtons,
   ButtonSizes,
-  ColoredButtons,
   DisabledButton,
   EffectButton,
   IconButtons,
@@ -34,13 +33,7 @@ export const ButtonPage = () => {
               <ButtonSizes />
             </td>
           </tr>
-          <tr>
-            <td>Colors</td>
 
-            <td>
-              <ColoredButtons />
-            </td>
-          </tr>
           <tr>
             <td>Shadow</td>
 

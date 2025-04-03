@@ -20,7 +20,6 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   size = 'sm',
   shape = 'default',
   variant = 'default',
-  colorScheme = 'theme.primary',
   isHovered = false,
   isFocused = false,
   isEditable = false,
@@ -38,7 +37,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   setValue = () => {},
   setIsFocused = () => {},
   setIsHovered = () => {},
-  styles = { box: {}, text: {}, label: {}, helperText: {}, field: {} },
+  views = { box: {}, text: {}, label: {}, helperText: {}, field: {} },
   ...props
 }) => {
   const isWithLabel = !!(isFocused && label);
@@ -58,7 +57,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     backgroundColor: 'transparent',
     color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
     cursor: isDisabled ? 'not-allowed' : 'auto',
-    ...styles['field'],
+    ...views['field'],
   };
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => {
@@ -83,23 +82,22 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     }
   };
   return (
-    <FieldContainer helperText={helperText} error={error} styles={styles}>
+    <FieldContainer helperText={helperText} error={error} views={views}>
       <FieldContent
         label={label}
         size={size}
         error={error}
         shape={shape}
-        styles={styles}
+        views={views}
         shadow={shadow}
         variant={variant}
         value={value}
-        color={colorScheme}
+        color={'theme.primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         isWithLabel={isWithLabel}
-        colorScheme={colorScheme}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
@@ -107,9 +105,9 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
           {isWithLabel && (
             <FieldLabel
               htmlFor={id}
-              color={colorScheme}
+              color={'theme.primary'}
               error={error}
-              {...styles}
+              {...views}
             >
               {label}
             </FieldLabel>

@@ -8,7 +8,7 @@ export const RightInput = () => {
     <TextField
       name="name"
       placeholder="Name"
-      right={<EditIcon color="black" size={16} />}
+      right={<EditIcon color="black" widthHeight={16} />}
     />
   );
 };

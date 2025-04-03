@@ -26,7 +26,6 @@ export interface DatePickerProps extends Omit<ViewProps, 'size'> {
   /**
    * The color scheme that changes the background color of the DatePicker.
    */
-  colorScheme?: string;
   /**
    * If true, the DatePicker cannot be selected.
    */
@@ -51,7 +50,7 @@ export interface DatePickerProps extends Omit<ViewProps, 'size'> {
   /**
    * CSS styles for the DatePicker container and label.
    */
-  styles?: DatePickerStyles;
+  views?: DatePickerStyles;
   /**
    * The shape that changes the outlines of the field.
    */

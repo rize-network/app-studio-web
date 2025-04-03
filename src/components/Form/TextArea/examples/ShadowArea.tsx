@@ -20,7 +20,7 @@ export const ShadowArea = () => {
           variant="none"
           shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }}
         />
-        <Button type="submit" height="40px" colorScheme="theme.primary" isAuto>
+        <Button type="submit" height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

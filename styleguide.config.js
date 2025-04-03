@@ -86,7 +86,7 @@ module.exports = {
       linkHover: 'rgba(0, 0, 0, 0.7)',
     },
   },
-  styles: {
+  views: {
     Logo: {
       logo: {
         color: 'rgba(0, 0, 0, 1)',

@@ -1,6 +1,6 @@
 import type { ImageProps, TextProps, ViewProps } from 'app-studio';
 
-import { IconProps } from '..';
+import { IconProps } from '../..';
 
 export interface UseUploadProps {
   accept?: string;
@@ -11,15 +11,14 @@ export interface UseUploadProps {
   thumbnail?: string;
 }
 
-export interface UploadProps {
-  isLoading?: boolean;
-  icon?: React.ReactNode;
-  accept?: string;
-  text?: string;
-  maxSize?: number;
-  progress?: number;
-  onFileSelect?: (file: File) => void;
-  validateFile?: (file: File) => string | null;
+export interface UploadStateProps {
+  handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  selectedFile: File | null;
+  fileInputRef: React.RefObject<HTMLInputElement>;
+  videoRef: React.RefObject<HTMLVideoElement>;
+}
+
+export interface UploadViewProps {
   onError?: (error: string) => void;
   containerProps?: ViewProps;
   errorMessageProps?: TextProps;
@@ -36,4 +35,19 @@ export interface UploadProps {
   renderError?: (props: any) => React.ReactNode;
   renderFile?: (props: any) => React.ReactNode;
   renderProgress?: (props: any) => React.ReactNode;
+  previewUrl?: string | null;
+  thumbnailUrl?: string | null;
+  errorMessage?: string | null;
+  isLoading?: boolean;
+  icon?: React.ReactNode;
+  accept?: string;
+  text?: string;
+  maxSize?: number;
+  progress?: number;
+  fileType?: 'video' | 'image' | 'file';
+  handleClick?: () => void;
+  onFileSelect?: (file: File) => void;
+  validateFile?: (file: File) => string | null;
 }
+
+export interface UploadProps extends UseUploadProps, UploadViewProps {}

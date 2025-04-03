@@ -54,7 +54,7 @@ export const FooterDemo = () => {
   ];
   return (
     <Table
-      styles={{
+      views={{
         tfoot: {
           borderTop: '1px solid gray',
           borderBottom: '1px solid gray',

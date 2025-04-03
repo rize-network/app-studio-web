@@ -3,7 +3,6 @@ import { InputProps, Shadow } from 'app-studio';
 import { Elevation } from '../../../../utils/elevation';
 import { Shape, Size, TextAreaStyles, Variant } from './TextArea.type';
 export interface TextAreaProps extends Omit<InputProps, 'size'> {
-  colorScheme?: string;
   defaultValue?: string;
   error?: boolean;
   isEditable?: boolean;
@@ -25,7 +24,7 @@ export interface TextAreaProps extends Omit<InputProps, 'size'> {
   size?: Size;
   shadow?: Shadow | Elevation | CSSProperties;
   shape?: Shape;
-  styles?: TextAreaStyles;
+  views?: TextAreaStyles;
   value?: string | number;
   variant?: Variant;
 }

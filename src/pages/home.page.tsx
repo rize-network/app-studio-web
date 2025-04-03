@@ -107,15 +107,10 @@ export const HomePage = () => {
           media={{ mobile: { gap: 10 } }}
           flexWrap="nowrap"
         >
-          <Button
-            colorScheme="black"
-            onClick={handleClick}
-            {...buttonStyle}
-            isAuto
-          >
+          <Button onClick={handleClick} {...buttonStyle} isAuto>
             Get Started
           </Button>
-          <Button variant="outline" colorScheme="black" {...buttonStyle} isAuto>
+          <Button variant="outline" {...buttonStyle} isAuto>
             Deploy Now
           </Button>
         </Center>

@@ -31,7 +31,6 @@ const ButtonView: React.FC<ButtonProps> = ({
   variant = 'filled',
   iconPosition = 'left',
   // Defines CSS properties for 'filled' variant of the button with conditional styles based on reverse state.
-  colorScheme = 'theme.primary',
   shape = 'rounded',
   onClick = () => {},
   loaderProps = {},
@@ -52,7 +51,7 @@ const ButtonView: React.FC<ButtonProps> = ({
 
   const isActive = !(isDisabled || isLoading);
   const defaultNativeProps = { disabled: !isActive };
-  const buttonColor = isActive ? colorScheme : 'theme.disabled';
+  const buttonColor = isActive ? 'theme.primary' : 'theme.disabled';
   const hovering = isHovered && effect === 'hover';
   const reverse = isHovered && effect === 'reverse';
 
@@ -79,7 +78,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       // Defines CSS properties for 'ghost' variant of the button with conditional styles based on reverse state.
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : colorScheme,
+      borderColor: reverse ? buttonColor : 'theme.primary',
       // Fetches size-specific styles from ButtonSizes based on the 'size' prop.
       color: reverse ? 'white' : buttonColor,
       // Fetches variant-specific styles from ButtonVariants based on the 'variant' prop.
@@ -185,8 +184,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       {variant === 'link' && to ? (
         <Link
           to={to}
-          textDecorationColor={colorScheme}
-          colorScheme={colorScheme}
+          textDecorationColor={'theme.primary'}
           isExternal={isExternal}
           {...linkProps}
         >

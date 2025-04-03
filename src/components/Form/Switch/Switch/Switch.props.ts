@@ -6,8 +6,6 @@ import { Size, SwitchStyles } from './Switch.type';
 export interface SwitchProps extends Omit<InputProps, 'size'> {
   // The content to be displayed when the switch is in an active state.
   activeChild?: React.ReactNode;
-  // Defines the color theme for the switch component.
-  colorScheme?: string;
   // Unique identifier for the switch component.
   id?: string;
   // Determines if the switch is disabled.
@@ -21,7 +19,7 @@ export interface SwitchProps extends Omit<InputProps, 'size'> {
   // The content to be displayed when the switch is in an inactive state.
   inActiveChild?: React.ReactNode;
   // Custom styles to apply to the switch component.
-  styles?: SwitchStyles;
+  views?: SwitchStyles;
   // Defines the shadow appearance of the switch using predefined Shadow or Elevation, or a custom CSSProperties object.
   shadow?: Shadow | Elevation | CSSProperties;
   // Specifies the size of the switch component.

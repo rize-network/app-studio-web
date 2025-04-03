@@ -15,7 +15,7 @@ export const MessageLayout = ({
     variant,
     subtitle,
     isClosable,
-    styles,
+    views,
     action,
     actionText,
     showIcon,
@@ -50,7 +50,7 @@ export const MessageLayout = ({
       title={title}
       theme={theme}
       isClosable={isClosable}
-      styles={styles}
+      views={views}
       action={action}
       actionText={actionText}
       showIcon={showIcon}

@@ -3,7 +3,7 @@ import React, { CSSProperties } from 'react';
 import { BadgeProps } from './Badge.props';
 // Importing BadgeProps for typing the component's expected props.
 import { BadgeShapes, BadgeSizes, PositionStyles } from './Badge.style';
-// Importing styling constants for badge shapes, sizes, and position styles.
+// Importing styling constants for badge shapes, sizes, and position views.
 import { Variant } from './Badge.type';
 // Importing Variant type enumeration to type badge variants.
 import { Center } from '../../Layout/Center/Center';
@@ -13,18 +13,17 @@ import { Text } from '../../Text/Text';
 const BadgeView: React.FC<BadgeProps> = ({
   // Declaring the functional component BadgeView with BadgeProps as its type for props.
   content,
-  // Destructuring props with default values for shape, colorScheme, variant, size, and styles.
+  // Destructuring props with default values for shape, variant, size, and views.
   position,
   shape = 'pillShaped',
-  colorScheme = 'theme.primary',
   variant = 'filled',
   size = 'md',
-  styles,
+  views,
   // Defining BadgeVariants as a record of CSSProperties based on the variant type and associated stylings.
 }) => {
   const BadgeVariants: Record<Variant, CSSProperties> = {
     filled: {
-      backgroundColor: colorScheme,
+      backgroundColor: 'theme.primary',
       color: 'color.white',
       borderWidth: 1,
       borderStyle: 'solid',
@@ -35,23 +34,23 @@ const BadgeView: React.FC<BadgeProps> = ({
       backgroundColor: 'transparent',
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: colorScheme,
-      color: colorScheme,
+      borderColor: 'theme.primary',
+      color: 'theme.primary',
     },
     link: {
       backgroundColor: 'transparent',
       // Rendering the Badge component using the Center layout component with combinedStyles applied.
       borderWidth: 1,
-      // Inserting a Text component into the badge to display the content, with dynamic size and additional text styles.
+      // Inserting a Text component into the badge to display the content, with dynamic size and additional text views.
       borderStyle: 'solid',
       borderColor: 'transparent',
-      color: colorScheme,
+      color: 'theme.primary',
       // Exporting BadgeView to be used in other parts of the application.
       textDecoration: 'underline',
     },
     ghost: {
       backgroundColor: 'transparent',
-      color: colorScheme,
+      color: 'color.trueGray.400',
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'transparent',
@@ -63,11 +62,11 @@ const BadgeView: React.FC<BadgeProps> = ({
     ...BadgeSizes[size],
     ...BadgeVariants[variant],
     ...(position ? PositionStyles[position] : {}),
-    ...styles?.container,
+    ...views?.container,
   };
   return (
     <Center role="badge" {...combinedStyles}>
-      <Text role="badgeText" size={size} {...styles?.text}>
+      <Text role="badgeText" size={size} {...views?.text}>
         {content}
       </Text>
     </Center>

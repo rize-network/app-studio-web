@@ -14,7 +14,6 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   labelPosition = 'right',
   shadow = {},
   size = 'sm',
-  colorScheme = 'theme.primary',
   value = false,
   isHovered = false,
   isDisabled = false,
@@ -25,7 +24,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   setValue = () => {},
   setIsHovered = () => {},
   helperText,
-  styles = { slider: {}, circle: {}, label: {} },
+  views = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
   const handleToggle = (event: any) => {
@@ -43,7 +42,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       height: 'fit-content',
       width: 'fit-content',
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
-      ...styles.label,
+      ...views.label,
     },
   };
   return (
@@ -76,7 +75,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         filter={isHovered && value ? 'brightness(0.9)' : 'brightness(1)'}
         transition="justify-content 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
         backgroundColor={
-          isDisabled ? 'disabled' : value ? colorScheme : 'lightgray'
+          isDisabled ? 'disabled' : value ? 'theme.primary' : 'lightgray'
         }
         justifyContent={
           activeChild ? 'space-between' : value ? 'flex-end' : 'flex-start'
@@ -84,14 +83,14 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         {...shadow}
         {...SliderPadding[size]}
         {...SliderSizes[size]}
-        {...styles['slider']}
+        {...views['slider']}
       >
         {activeChild && value && <View>{activeChild}</View>}
         <View
           borderRadius="50%"
           backgroundColor="white"
           {...KnobSizes[size]}
-          {...styles['circle']}
+          {...views['circle']}
         />
         {inActiveChild && !value && <View>{inActiveChild}</View>}
       </View>

@@ -12,7 +12,7 @@ export const IconPage = () => {
         return (
           <Horizontal key={name} gap={20}>
             <Text lineHeight={16}>{name} :</Text>
-            <IcComponent key={name} size={16} color="black" />
+            <IcComponent key={name} widthHeight={16} color="black" />
           </Horizontal>
         );
       })}

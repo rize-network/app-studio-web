@@ -54,7 +54,7 @@ const Item: React.FC<ItemProps> = ({
 };
 const SelectBox: React.FC<SelectBoxProps> = ({
   size = 'md',
-  styles = { field: {}, text: {} },
+  views = { field: {}, text: {} },
   value,
   isDisabled,
   placeholder,
@@ -72,8 +72,8 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     backgroundColor: 'transparent',
     color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
     cursor: isDisabled ? 'not-allowed' : 'auto',
-    ...styles['field'],
-    ...styles['text'],
+    ...views['field'],
+    ...views['text'],
   };
   const option: any =
     options.length > 0 && options.find((option) => option.value === value);
@@ -151,7 +151,7 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
 };
 const DropDown: React.FC<DropDownProps> = ({
   size,
-  styles = { dropDown: {} },
+  views = { dropDown: {} },
   options,
   callback = () => {},
   highlightedIndex,
@@ -202,14 +202,14 @@ const DropDown: React.FC<DropDownProps> = ({
         },
       }}
       {...shadow}
-      {...styles['dropDown']}
+      {...views['dropDown']}
     >
       {options.length > 0 &&
         options.map((option, index) => (
           <Item
             key={option.value}
             size={size}
-            style={styles['text']}
+            style={views['text']}
             option={option}
             callback={handleCallback}
             backgroundColor={
@@ -267,10 +267,9 @@ const SelectView: React.FC<SelectViewProps> = ({
   options = [],
   shadow = {},
   size = 'md',
-  colorScheme = 'theme.primary',
   shape = 'default',
   variant = 'default',
-  styles = {
+  views = {
     text: {},
     icon: {},
     dropDown: {},
@@ -318,7 +317,7 @@ const SelectView: React.FC<SelectViewProps> = ({
       role="SelectBox"
       helperText={helperText}
       error={error}
-      styles={styles}
+      views={views}
       onClick={isDisabled || isReadOnly ? () => {} : handleClick}
     >
       <FieldContent
@@ -326,17 +325,16 @@ const SelectView: React.FC<SelectViewProps> = ({
         size={size}
         error={error}
         shape={shape}
-        styles={styles}
+        views={views}
         shadow={shadow}
         variant={variant}
         value={value}
-        color={colorScheme}
+        color={'theme.primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         isWithLabel={isWithLabel}
-        colorScheme={colorScheme}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
@@ -344,9 +342,9 @@ const SelectView: React.FC<SelectViewProps> = ({
           {isWithLabel && (
             <FieldLabel
               htmlFor={id}
-              color={colorScheme}
+              color={'theme.primary'}
               error={error}
-              {...styles}
+              {...views}
             >
               {label}
             </FieldLabel>
@@ -366,7 +364,7 @@ const SelectView: React.FC<SelectViewProps> = ({
           <SelectBox
             options={options}
             size={size}
-            styles={styles}
+            views={views}
             value={value}
             isDisabled={isDisabled}
             placeholder={placeholder}
@@ -380,7 +378,7 @@ const SelectView: React.FC<SelectViewProps> = ({
                 <ChevronIcon
                   color="inherit"
                   size={IconSizes[size]}
-                  style={styles.icon}
+                  style={views.icon}
                   orientation="down"
                 />
               ) : (
@@ -388,7 +386,7 @@ const SelectView: React.FC<SelectViewProps> = ({
                   color="inherit"
                   orientation="up"
                   size={IconSizes[size]}
-                  style={styles.icon}
+                  style={views.icon}
                 />
               )}
             </>
@@ -398,7 +396,7 @@ const SelectView: React.FC<SelectViewProps> = ({
       {!hide && (
         <DropDown
           size={size}
-          styles={styles}
+          views={views}
           options={options}
           callback={handleCallback}
           highlightedIndex={highlightedIndex}

@@ -53,21 +53,18 @@ export const ErrorInput = () => {
           placeholder="First Name"
           error={!!formErrors.firstName}
           onChange={handleChange}
-          colorScheme="theme.secondary"
         />
         <TextField
           name="lastName"
           placeholder="Last Name"
           error={!!formErrors.lastName}
           onChange={handleChange}
-          colorScheme="theme.secondary"
         />
         <TextField
           name="email"
           placeholder="Email"
           error={!!formErrors.email}
           onChange={handleChange}
-          colorScheme="theme.secondary"
         />
         <Button type="submit" height="40px" isAuto>
           Submit

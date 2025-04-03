@@ -9,7 +9,7 @@ export const AvatarView = ({
   src,
   size = 'md',
   fallback = 'IM',
-  styles,
+  views,
   imageError,
   setImageError,
   onClick = () => {},
@@ -19,7 +19,7 @@ export const AvatarView = ({
   // Initiates a style object for the image with an objectFit property and spreads additional image styles if provided.
   const imageStyle: any = {
     objectFit: 'cover',
-    ...(styles?.image || {}),
+    ...(views?.image || {}),
   };
   // Start of the JSX returned by the AvatarView component, which uses the Center component as its root element.
   return (
@@ -34,7 +34,7 @@ export const AvatarView = ({
       borderColor={imageError ? 'black' : 'transparent'}
       boxShadow="0px 2px 4px rgba(0, 0, 0, 0.25)"
       onClick={onClick}
-      {...styles?.container}
+      {...views?.container}
     >
       {!imageError ? (
         <Image
@@ -46,7 +46,7 @@ export const AvatarView = ({
           onError={() => setImageError(true)}
         />
       ) : (
-        <Text size={size} {...styles?.fallback}>
+        <Text size={size} {...views?.fallback}>
           {fallback}
         </Text>
       )}

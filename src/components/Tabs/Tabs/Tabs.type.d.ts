@@ -22,9 +22,9 @@ export type Tab = {
 export type TabsStyles = {
   /** Styles for the main container wrapping the tabs and content. */
   container?: ViewProps;
-  /** Styles applied specifically to the active tab button/header. Merged with `tab` styles. */
+  /** Styles applied specifically to the active tab button/header. Merged with `tab` views. */
   activeTab?: ButtonProps;
-  /** Styles applied specifically to the text within the active tab button/header. Merged with `title` styles. */
+  /** Styles applied specifically to the text within the active tab button/header. Merged with `title` views. */
   activeText?: TextProps;
   /** Styles applied to each tab button/header (both active and inactive). */
   tab?: ButtonProps;

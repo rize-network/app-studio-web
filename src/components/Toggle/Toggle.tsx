@@ -6,7 +6,6 @@ import ToggleView from './Toggle/Toggle.view';
 const ToggleComponent = ({
   children,
   shape,
-  colorScheme,
   variant,
   isDisabled,
   // Assigning a default value of false to the isToggled property if none is provided.
@@ -25,7 +24,6 @@ const ToggleComponent = ({
   return (
     <ToggleView
       shape={shape}
-      colorScheme={colorScheme}
       variant={variant}
       isDisabled={isDisabled}
       isHovered={isHovered}

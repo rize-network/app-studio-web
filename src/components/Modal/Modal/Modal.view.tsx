@@ -113,8 +113,12 @@ export const ModalHeader: React.FC<HeaderProps> = ({
   const buttonIcon = (
     <Button
       onClick={onClose}
-      colorScheme="transparent"
-      icon={<CloseIcon size={HeaderIconSizes[iconSize]} color={buttonColor} />}
+      icon={
+        <CloseIcon
+          widthHeight={HeaderIconSizes[iconSize]}
+          color={buttonColor}
+        />
+      }
       padding={0}
       margin={0}
       filter="none"

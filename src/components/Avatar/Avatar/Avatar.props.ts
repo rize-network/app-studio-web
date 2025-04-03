@@ -8,7 +8,7 @@ export interface AvatarProps {
   // URL or path for the fallback image if the source fails to load.
   fallback?: string;
   // Optional custom styles for the avatar, defined by 'AvatarStyles'.
-  styles?: AvatarStyles;
+  views?: AvatarStyles;
   //Optional onClick handler
   onClick?: Function;
 }

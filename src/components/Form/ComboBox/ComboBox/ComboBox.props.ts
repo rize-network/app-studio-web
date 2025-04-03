@@ -24,7 +24,7 @@ export interface ComboBoxProps extends Omit<InputProps, 'size'> {
   // Text to display when nothing has been selected in the ComboBox.
   placeholder?: string;
   // Optional custom styles to apply to the ComboBox.
-  styles?: ComboBoxStyles;
+  views?: ComboBoxStyles;
   // Placeholder text for the search input when search is enabled.
   searchPlaceholder?: string;
 }

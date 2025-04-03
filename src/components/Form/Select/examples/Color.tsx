@@ -19,7 +19,6 @@ export const ColorDemo = () => (
           { label: 'Item2', value: '2' },
           { label: 'Item3', value: '3' },
         ]}
-        colorScheme={color}
       />
     ))}
   </Vertical>

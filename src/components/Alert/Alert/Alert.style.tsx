@@ -1,4 +1,4 @@
-// Define a constant object 'Themes' exporting various theme styles.
+// Define a constant object 'Themes' exporting various theme views.
 export const Themes = {
   // Start of the 'default' theme definition with style properties.
   default: {
@@ -11,7 +11,7 @@ export const Themes = {
       color: 'color.blackAlpha.800',
     },
   },
-  // The 'info' theme with unique container and content styles.
+  // The 'info' theme with unique container and content views.
   info: {
     container: {
       backgroundColor: 'color.blue.200',
@@ -22,7 +22,7 @@ export const Themes = {
       color: '#60a5fa',
     },
   },
-  // Specifies the 'success' theme with corresponding container and content styles.
+  // Specifies the 'success' theme with corresponding container and content views.
   success: {
     container: {
       backgroundColor: 'color.green.200',
@@ -33,7 +33,7 @@ export const Themes = {
       color: '#22c55e',
     },
   },
-  // Start of the 'error' theme with its characteristic styles.
+  // Start of the 'error' theme with its characteristic views.
   error: {
     container: {
       backgroundColor: 'color.red.200',
@@ -44,7 +44,7 @@ export const Themes = {
       color: '#ef4444',
     },
   },
-  // Introduction of the 'warning' theme styles.
+  // Introduction of the 'warning' theme views.
   warning: {
     container: {
       backgroundColor: 'color.orange.200',

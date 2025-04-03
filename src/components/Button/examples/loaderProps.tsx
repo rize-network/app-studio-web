@@ -11,7 +11,7 @@ export const LoaderButtons = () => (
       isLoading
       loaderProps={{
         type: 'dotted',
-        styles: {
+        views: {
           loader: { color: 'color.white' },
           text: {
             color: 'color.black',
@@ -27,7 +27,7 @@ export const LoaderButtons = () => (
       loaderPosition="right"
       loaderProps={{
         type: 'quarter',
-        styles: {
+        views: {
           loader: { color: 'color.black' },
           text: { color: 'color.black' },
         },

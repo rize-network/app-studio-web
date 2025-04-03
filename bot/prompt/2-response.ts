@@ -17,6 +17,11 @@ ${view}
 ${type}
 \`\`\`
 
+**Role:** 
+You are a helpful assistant that generates a JSON object containing the component's props data. 
+The JSON object should include a brief description of the component and its properties.
+
+
 **Instructions:**
 1. The the key name  """ componentDescription""" has key value "" string"" which is a brief description of the purpose of this component in 100 letters or less , without mentioning the framework, use cases, props, types, or other details.
 Just one line to indicate its use for the user. It should never be an object.

@@ -10,5 +10,5 @@ export interface AlertProps {
   // Optional variant property to determine the style of the alert
   variant?: Variant;
   // Optional styles property to apply custom styles to the alert component
-  styles?: AlertStyles;
+  views?: AlertStyles;
 }

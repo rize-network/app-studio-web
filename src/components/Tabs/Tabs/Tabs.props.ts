@@ -12,7 +12,7 @@ export interface TabsProps {
   /** Optional callback function triggered when the active tab changes. Receives the newly active tab object. */
   onTabChange?: (activeTab: Tab) => void;
   /** Optional styles object to customize the appearance of the tabs container, headers, buttons, text, and content area. */
-  styles?: TabsStyles;
+  views?: TabsStyles;
   /**
    * Optional custom renderer for a single tab button/header.
    * Receives the tab data, whether it's currently active, and an onClick handler to activate the tab.
@@ -42,7 +42,7 @@ export interface TabsViewProps {
   /** Callback function to handle clicking on a tab header/button. */
   handleTabClick: (tab: Tab) => void;
   /** Optional styles object. */
-  styles?: TabsStyles;
+  views?: TabsStyles;
   /** Optional custom renderer for a tab button/header. */
   renderTab?: (
     tab: Tab,

@@ -19,7 +19,7 @@ export const StyledSwitch = () => {
           label="Surname"
           variant="none"
           shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }}
-          styles={{
+          views={{
             slider: {
               borderRadius: 8,
               borderColor: 'theme.primary',
@@ -29,7 +29,7 @@ export const StyledSwitch = () => {
             circle: { backgroundColor: 'theme.primary' },
           }}
         />
-        <Button type="submit" height="40px" colorScheme="theme.primary" isAuto>
+        <Button type="submit" height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

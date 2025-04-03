@@ -25,12 +25,11 @@ export const FieldContent: React.FC<ContentProps> = ({
   isHovered = false,
   isDisabled = false,
   isReadOnly = false,
-  colorScheme = 'theme.primary',
-  styles = { pickerBox: {} },
+  views = { pickerBox: {} },
   ...props
 }) => {
   const isInteractive = (isHovered || isFocused) && !isDisabled;
-  const color = error ? 'error' : isInteractive ? colorScheme : 'midgray';
+  const color = error ? 'error' : isInteractive ? 'theme.primary' : 'midgray';
 
   return (
     <Horizontal
@@ -52,7 +51,7 @@ export const FieldContent: React.FC<ContentProps> = ({
       {...shadow}
       {...Shapes[shape]}
       {...InputVariants[variant]}
-      {...styles['box']}
+      {...views['box']}
       {...props}
     >
       {children}

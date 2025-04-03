@@ -8,7 +8,6 @@ export interface CheckboxProps extends Omit<InputProps, 'size'> {
   error?: any;
   name?: string;
   label?: string;
-  colorScheme?: string;
   isChecked?: boolean;
   defaultIsSelected?: boolean;
   isReadOnly?: boolean;
@@ -17,7 +16,7 @@ export interface CheckboxProps extends Omit<InputProps, 'size'> {
   labelPosition?: 'left' | 'right';
   onChange?: Function;
   onValueChange?: Function;
-  styles?: CheckboxStyles;
+  views?: CheckboxStyles;
   size?: Size;
   shadow?: Shadow | Elevation | CSSProperties;
   infoText?: string;

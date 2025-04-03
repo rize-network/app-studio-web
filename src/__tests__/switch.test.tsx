@@ -26,7 +26,7 @@ test('Switch to match snapshot', () => {
       <Switch
         name="name"
         size="xl"
-        styles={{
+        views={{
           slider: {
             backgroundColor: 'red',
           },

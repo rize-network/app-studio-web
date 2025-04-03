@@ -12,7 +12,7 @@ export const ColorCountryPicker = () => (
       'theme.success',
       'theme.warning',
     ].map((color) => (
-      <CountryPicker key={color} label={color} colorScheme={color} />
+      <CountryPicker key={color} label={color} />
     ))}
   </Vertical>
 );

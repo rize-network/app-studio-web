@@ -110,7 +110,7 @@ Start with the General Principles, then focus on the App Studio Specific Best Pr
 *   **`styles` Prop:** Allow consumers to override specific parts of the component's style via the `styles` prop, which should accept an object mapping keys (e.g., `container`, `label`, `icon`) to `CSSProperties`. Define the structure of this `styles` object in `ComponentName.type.ts`.
 *   **Theme Variables:** Prefer using theme variables (e.g., `theme.primary`, `color.blueGray.700`) over hardcoded hex/rgb values to maintain theme consistency. Use `useTheme` hook if necessary to access theme values dynamically.
 *   **Inline Styles vs. `styles` Prop:** Use inline styles within `.view.tsx` for structural layout (using layout components) and dynamic styles based on state (e.g., hover effects). Use the `styles` prop for customizable theme/appearance overrides.
-*   **CSS Files:** Limit usage. Prefer inline styles passed via props or theme-based styling. Use CSS files (like `styles.css` in `TextArea` and `TextField`) only for styles that cannot be easily applied via inline styles (e.g., pseudo-elements, complex selectors).
+*   **CSS Files:** Limit usage. Prefer inline styles passed via props or theme-based styling. Use CSS files (like `style.css` in `TextArea` and `TextField`) only for styles that cannot be easily applied via inline styles (e.g., pseudo-elements, complex selectors).
 
 ### Form Components & Formik
 
@@ -190,7 +190,7 @@ Following these cursor rules will help maintain the quality, consistency, and de
     *   Uses a theme system (`useTheme`, `getColor`) provided by `app-studio`.
     *   Style constants (like size mappings) are defined in `.style.ts` files.
     *   Custom style overrides are often passed via a `styles` prop, typed in `.type.ts`.
-    *   Minimal use of global CSS, mostly for specific input overrides (`styles.css` in some form components).
+    *   Minimal use of global CSS, mostly for specific input overrides (`style.css` in some form components).
 
 3.  **State Management:**
     *   Primarily local component state managed via `React.useState` encapsulated in custom `useComponentNameState` hooks.

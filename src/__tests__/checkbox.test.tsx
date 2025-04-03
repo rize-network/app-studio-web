@@ -19,7 +19,7 @@ test('Checkbox to match snapshot', () => {
     .create(
       <Checkbox
         size="xl"
-        styles={{
+        views={{
           checkbox: {
             backgroundColor: 'red',
           },

@@ -18,7 +18,7 @@ export const ColorSchemeDemo = () => {
         'theme.success',
         'theme.error',
       ].map((color, index) => (
-        <ToggleGroup key={index} items={items} colorScheme={color} />
+        <ToggleGroup key={index} items={items} />
       ))}
     </Vertical>
   );

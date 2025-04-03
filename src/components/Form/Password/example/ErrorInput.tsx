@@ -46,7 +46,6 @@ export const ErrorPassword = () => {
           placeholder="Name"
           error={!!formErrors.name}
           onChange={handleChange}
-          colorScheme="theme.secondary"
           isClearable={true}
         />
         <Password
@@ -54,7 +53,6 @@ export const ErrorPassword = () => {
           placeholder="Password"
           error={!!formErrors.password}
           onChange={handleChange}
-          colorScheme="theme.secondary"
         />
         <Button type="submit" height="40px">
           Submit

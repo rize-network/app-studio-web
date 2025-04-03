@@ -13,7 +13,7 @@ export interface MessageLayoutProps {
 }
 export interface ShowMessageProps {
   isClosable?: boolean;
-  styles?: MessageViewStyles;
+  views?: MessageViewStyles;
   action?: Function;
   actionText?: string;
   showIcon?: boolean;
@@ -34,7 +34,7 @@ export interface MessageState {
   title: string;
   subtitle: string;
   isClosable?: boolean;
-  styles?: MessageViewStyles;
+  views?: MessageViewStyles;
   action?: Function;
   actionText?: string;
   showIcon?: boolean;
@@ -44,7 +44,7 @@ export interface MessageState {
     title?: string,
     subtitle?: string,
     isClosable?: boolean,
-    styles?: MessageViewStyles,
+    views?: MessageViewStyles,
     action?: Function,
     actionText?: string,
     showIcon?: boolean,

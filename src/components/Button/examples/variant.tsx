@@ -11,7 +11,6 @@ export const VariantButtons = () => (
         key={index}
         to="https://www.npmjs.com/package/app-studio"
         variant={variant as Variant}
-        colorScheme="theme.primary"
         isFilled
       >
         {variant}

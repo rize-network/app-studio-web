@@ -46,7 +46,7 @@ export type ThemesType = {
 
 export type ShowMessageType = {
   isClosable?: boolean;
-  styles?: MessageViewStyles;
+  views?: MessageViewStyles;
   action?: Function;
   actionText?: string;
   showIcon?: boolean;

@@ -16,8 +16,6 @@ export const ToggleGroupView = ({
   shape = 'rounded',
   // Prop 'variant' with default value 'ghost' represents the visual style variant of the toggles.
   variant = 'ghost',
-  // Prop 'colorScheme' with default value 'color.trueGray.400' sets the color theme for toggles.
-  colorScheme = 'color.trueGray.400',
 }: ToggleGroupViewProps) => {
   // handleToggle is a memoized callback that handles the toggle state changes.
   const handleToggle = useCallback(
@@ -41,11 +39,10 @@ export const ToggleGroupView = ({
   );
   return (
     <Horizontal role="ToggleGroup" display="flex" gap={5}>
-      {items.map((item) => (
+      {items.map((item: any) => (
         <Toggle
           role={`toggle-${item.id}`}
           key={item.id}
-          colorScheme={colorScheme}
           shape={shape}
           variant={variant}
           isToggled={activeToggles.includes(item.id) || item.isActive}

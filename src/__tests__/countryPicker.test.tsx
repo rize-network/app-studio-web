@@ -75,7 +75,7 @@ describe('CountryPicker component', () => {
           isAutoFocus
           shape="pillShaped"
           variant="outline"
-          styles={{
+          views={{
             text: { color: 'theme.primary' },
             icon: { width: 0.2 },
             label: { fontSize: 15 },
@@ -92,19 +92,19 @@ describe('CountryPicker component', () => {
 describe('DropDown component', () => {
   const options = countries;
   const callback = jest.fn();
-  const styles = {
+  const views = {
     dropDown: { backgroundColor: 'red' },
     text: { color: 'white' },
   };
 
   test('renders DropDown component without crashing', () => {
-    render(<DropDown options={options} styles={styles} />);
+    render(<DropDown options={options} views={views} />);
     const DropDownElement = screen.getByRole('dropDown');
     expect(DropDownElement).toBeInTheDocument();
   });
 
   // test('applies custom styles to the dropdown list', () => {
-  //   render(<DropDown options={options} callback={callback} styles={styles} />);
+  //   render(<DropDown options={options} callback={callback} views={views} />);
   //   const dropDownList = screen.getByRole('dropDown');
   //   expect(dropDownList).toHaveStyle('background-color: red');
   // });
@@ -124,7 +124,7 @@ describe('DropDown component', () => {
         code: 'AL',
       },
     ];
-    render(<DropDown options={options} callback={() => {}} styles={styles} />);
+    render(<DropDown options={options} callback={() => {}} views={views} />);
 
     options.forEach((option) => {
       const optionElement = screen.getByText(option.name);
@@ -133,7 +133,7 @@ describe('DropDown component', () => {
   });
 
   // test('renders DropDown component with provided size', () => {
-  //   render(<DropDown options={options} styles={styles} size="md" />);
+  //   render(<DropDown options={options} views={views} size="md" />);
   //   const DropDownElement = screen.getByRole('dropDown');
   //   expect(DropDownElement).toBeInTheDocument();
   //   expect(DropDownElement).toHaveStyle({ fontSize: 16 });
@@ -155,7 +155,7 @@ describe('DropDown component', () => {
   //       },
   //     ];
   //     const callback = jest.fn();
-  //     render(<DropDown options={options} callback={callback} styles={styles} />);
+  //     render(<DropDown options={options} callback={callback} views={views} />);
 
   //     const selectedOption = options[1];
   //     const optionElement = screen.getByText(selectedOption.name);
@@ -167,12 +167,12 @@ describe('DropDown component', () => {
 
   describe('DropDownItem component', () => {
     const option = 'Albania';
-    const styles = {
+    const views = {
       text: { color: 'red' },
     };
     test('renders DropDownItem component without crashing', () => {
       render(
-        <DropDownItem option={option} callback={() => {}} styles={styles} />
+        <DropDownItem option={option} callback={() => {}} views={views} />
       );
       const DropDownItemElement = screen.getByRole('DropDownItem');
       expect(DropDownItemElement).toBeInTheDocument();
@@ -182,7 +182,7 @@ describe('DropDown component', () => {
     //   const option = 'United States';
     //   const callback = jest.fn();
     //   render(
-    //     <DropDownItem option={option} callback={callback} styles={styles} />
+    //     <DropDownItem option={option} callback={callback} views={views} />
     //   );
 
     //   const optionElement = screen.getByText(option);
@@ -194,7 +194,7 @@ describe('DropDown component', () => {
     // test('changes background color on hover', () => {
     //   const option = 'United States';
     //   render(
-    //     <DropDownItem option={option} callback={() => {}} styles={styles} />
+    //     <DropDownItem option={option} callback={() => {}} views={views} />
     //   );
 
     //   const optionElement = screen.getByText(option);
@@ -214,7 +214,7 @@ describe('DropDown component', () => {
     //       selected="Option 1"
     //       size="md"
     //       callback={() => {}}
-    //       styles={styles}
+    //       views={views}
     //     />
     //   );
     //   const DropDownItemElement = screen.getByRole('DropDownItem');
@@ -229,7 +229,7 @@ describe('DropDown component', () => {
     //       option={option}
     //       selected="Option 2"
     //       callback={callback}
-    //       styles={styles}
+    //       views={views}
     //     />
     //   );
     //   fireEvent.click(screen.getByRole('DropDownItem'));

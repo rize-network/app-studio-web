@@ -88,7 +88,7 @@ test('TextArea to match snapshot', () => {
         helperText={'required'}
         variant="outline"
         size="xl"
-        styles={{
+        views={{
           box: {
             backgroundColor: 'red',
           },

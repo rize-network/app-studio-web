@@ -18,8 +18,6 @@ export interface CountryPickerProps extends Omit<InputProps, 'size'> {
   name?: string;
   // Optional label text for the CountryPicker input
   label?: string;
-  // Optional color scheme for styling
-  colorScheme?: string;
   // Optional helper text for guiding the user
   helperText?: string;
   // Optional placeholder text for the CountryPicker input
@@ -37,7 +35,7 @@ export interface CountryPickerProps extends Omit<InputProps, 'size'> {
   // Optional change handler function
   onChange?: (value: any) => void;
   // Optional styles object specific to CountryPicker
-  styles?: CountryPickerStyles;
+  views?: CountryPickerStyles;
   // Optional size of the CountryPicker for visual styles
   size?: Size;
   // Value to be used as the current selection
@@ -79,7 +77,7 @@ export interface CountryPickerDropDownProps extends Omit<InputProps, 'size'> {
   // Options array to populate the dropdown
   options: Array<Country>;
   // Optional styles object specific to dropdown
-  styles?: CountryPickerStyles;
+  views?: CountryPickerStyles;
 }
 // Defines properties for DropDownItem excluding 'size' from InputProps for customization
 export interface DropDownItemProps extends Omit<InputProps, 'size'> {
@@ -90,5 +88,5 @@ export interface DropDownItemProps extends Omit<InputProps, 'size'> {
   // Optional size of the dropdown item for visual styles
   size?: Size;
   // Optional styles object specific to dropdown item
-  styles?: CountryPickerStyles;
+  views?: CountryPickerStyles;
 }

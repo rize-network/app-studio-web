@@ -46,7 +46,7 @@ test('should render button component with correct class name', () => {
 // });
 
 // test('should render a button with backgroundColor theme.secondary', () => {
-//   render(<Button colorScheme="theme.secondary">Button</Button>);
+//   render(<Button >Button</Button>);
 //   const buttonElement = screen.getByRole('button');
 //   expect(buttonElement).toHaveStyle({ backgroundColor: 'theme.secondary' });
 // });
@@ -62,11 +62,7 @@ test('button component calls onClick function when clicked', () => {
 test('Button with an icon on the left to match snapshot', () => {
   const tree = renderer
     .create(
-      <Button
-        icon={<DustBinIcon size={24} />}
-        shape={'pillShaped' as Shape}
-        colorScheme="theme.secondary"
-      >
+      <Button icon={<DustBinIcon size={24} />} shape={'pillShaped' as Shape}>
         Delete
       </Button>
     )
@@ -81,7 +77,6 @@ test('Button with an icon on the right to match snapshot', () => {
         icon={<DustBinIcon size={24} />}
         shape={'pillShaped' as Shape}
         iconPosition="right"
-        colorScheme="theme.secondary"
       >
         Delete
       </Button>

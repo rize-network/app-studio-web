@@ -41,7 +41,6 @@ export const ErrorArea = () => {
           placeholder="Write your thoughts here..."
           error={!!formErrors.thoughts}
           onChange={handleChange}
-          colorScheme="theme.secondary"
         />
         <Button type="submit" height="40px" isAuto>
           Submit

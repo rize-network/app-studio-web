@@ -24,7 +24,7 @@ export const MessageView = ({
   showIcon = false,
   isClosable = false,
   timeout = 3000,
-  styles,
+  views,
 }: MessageProps) => {
   useEffect(() => {
     if (timeout && !isClosable) {
@@ -59,10 +59,14 @@ export const MessageView = ({
   }[variant];
 
   const iconComponent = {
-    info: <InfoIcon size={24} color={iconColor} {...styles?.icon} />,
-    success: <SuccessIcon size={24} color={iconColor} {...styles?.icon} />,
-    warning: <WarningIcon size={24} color={iconColor} {...styles?.icon} />,
-    error: <ErrorIcon size={24} color={iconColor} {...styles?.icon} />,
+    info: <InfoIcon widthHeight={24} color={iconColor} {...views?.icon} />,
+    success: (
+      <SuccessIcon widthHeight={24} color={iconColor} {...views?.icon} />
+    ),
+    warning: (
+      <WarningIcon widthHeight={24} color={iconColor} {...views?.icon} />
+    ),
+    error: <ErrorIcon widthHeight={24} color={iconColor} {...views?.icon} />,
   }[variant];
 
   const isShowIcon = showIcon && iconComponent;
@@ -87,15 +91,15 @@ export const MessageView = ({
             }
       }
       {...containerStyle}
-      {...styles?.container}
+      {...views?.container}
     >
       {isShowIcon && iconComponent}
       <Vertical gap={8} width="100%">
-        <Text size="md" weight="semiBold" {...styles?.title}>
+        <Text size="md" weight="semiBold" {...views?.title}>
           {title}
         </Text>
         {subtitle && (
-          <Text size="sm" {...styles?.subtitle}>
+          <Text size="sm" {...views?.subtitle}>
             {subtitle}
           </Text>
         )}
@@ -107,7 +111,7 @@ export const MessageView = ({
           padding="6px 10px"
           whiteSpace="nowrap"
           {...containerStyle}
-          {...styles?.actionText}
+          {...views?.actionText}
         >
           {actionText}
         </Text>
@@ -121,12 +125,12 @@ export const MessageView = ({
           onClick={() => {
             hide();
           }}
-          {...styles?.closingIcon?.container}
+          {...views?.closingIcon?.container}
         >
           <CloseIcon
-            size={18}
+            widthHeight={18}
             color={iconColor}
-            {...styles?.closingIcon?.icon}
+            {...views?.closingIcon?.icon}
           />
         </View>
       )}

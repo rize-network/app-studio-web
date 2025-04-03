@@ -10,7 +10,7 @@ import { Tab } from './Tabs/Tabs.type'; // Import Tab type
  */
 const TabsComponent: React.FC<TabsProps> = ({
   tabs,
-  styles,
+  views,
   initialTabValue,
   onTabChange,
   renderTab,
@@ -35,7 +35,7 @@ const TabsComponent: React.FC<TabsProps> = ({
   return (
     <TabsView
       tabs={tabs}
-      styles={styles}
+      views={views}
       activeTab={activeTab} // Pass the activeTab object from state
       handleTabClick={handleTabClick} // Pass the click handler
       renderTab={renderTab}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
-  ColorSchemeDemo,
   DefaultDemo,
   IsDisabledDemo,
   IsToggledDemo,
@@ -18,13 +17,6 @@ const TogglePage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
-          </tr>
-
-          <tr>
-            <td>ColorScheme</td>
-            <td>
-              <ColorSchemeDemo />
-            </td>
           </tr>
 
           <tr>

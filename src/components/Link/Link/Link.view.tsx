@@ -19,7 +19,7 @@ const LinkView: React.FC<LinkViewProps> = ({
   // Boolean indicating if the link leads to an external resource.
   isExternal = false,
   // Custom styles for the icon and text, provided via a styles object.
-  styles = { icon: {}, text: {} },
+  views = { icon: {}, text: {} },
   // Setter function for the hover state, noop function provided by default.
   setIsHovered = () => {},
   ...props
@@ -38,12 +38,12 @@ const LinkView: React.FC<LinkViewProps> = ({
             ? 'underline !important'
             : 'none'
         }
-        {...styles.text}
+        {...views.text}
         {...props}
       >
         <Horizontal gap={3} alignItems="center" flexWrap="nowrap">
           {children}
-          {isExternal && <ExternalLinkIcon size={IconSizes[iconSize]} />}
+          {isExternal && <ExternalLinkIcon widthHeight={IconSizes[iconSize]} />}
         </Horizontal>
       </Element>
     </ReactRouterLink>

@@ -21,7 +21,7 @@ const IconWrapper: React.FC<IconProps> = ({
   ...rest
 }) => (
   <Center
-    size={size}
+    widthHeight={size}
     lineHeight={size}
     color={color}
     display="flex"
@@ -63,7 +63,7 @@ export const ChevronIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -82,7 +82,7 @@ export const DragHandleIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -112,7 +112,7 @@ export const FileIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -143,7 +143,7 @@ export const VideoIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -179,7 +179,7 @@ export const ImageIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -222,7 +222,7 @@ export const TwitterIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -246,7 +246,7 @@ export const XIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -271,7 +271,7 @@ export const TwitchIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -302,7 +302,7 @@ export const CloseIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -322,7 +322,7 @@ export const InstagramIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -343,7 +343,7 @@ export const YoutubeIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -375,7 +375,7 @@ export const FacebookIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -399,7 +399,7 @@ export const LinkedinIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg viewBox="0 0 24 24" {...getSvgProps(filled, color, strokeWidth)}>
       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
       <rect x="2" y="9" width="4" height="12"></rect>
@@ -415,7 +415,7 @@ export const ThreadsIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg viewBox="0 0 24 24" {...getSvgProps(filled, color, strokeWidth)}>
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path
@@ -434,7 +434,7 @@ export const MinusIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -454,7 +454,12 @@ export const InfoIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props} aria-label="Information">
+  <IconWrapper
+    widthHeight={size}
+    color={color}
+    {...props}
+    aria-label="Information"
+  >
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -473,7 +478,7 @@ export const PlayIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -492,7 +497,7 @@ export const PauseIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -511,7 +516,7 @@ export const HeartIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -530,7 +535,7 @@ export const StarIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -549,7 +554,7 @@ export const SaveIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -570,7 +575,7 @@ export const WarningIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -591,7 +596,7 @@ export const BatteryIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -610,7 +615,7 @@ export const BookmarkIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -629,7 +634,7 @@ export const CloudIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -648,7 +653,7 @@ export const CopyIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -668,7 +673,7 @@ export const DustBinIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -687,7 +692,7 @@ export const EditIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -706,7 +711,7 @@ export const ErrorIcon: React.FC<IconProps> = ({
   filled = true,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -739,7 +744,7 @@ export const DownloadIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -759,7 +764,7 @@ export const MenuIcon: React.FC<IconProps> = ({
 
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -780,7 +785,7 @@ export const ShareIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -804,7 +809,7 @@ export const RefreshIcon: React.FC<IconProps> = ({
 
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -824,7 +829,7 @@ export const PrintIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       fill="none"
@@ -844,7 +849,7 @@ export const PanelIcon: React.FC<IconProps> = ({
 
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -870,7 +875,7 @@ export const FilterIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -889,7 +894,7 @@ export const HomeIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -908,7 +913,7 @@ export const LocationIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -927,7 +932,7 @@ export const LockIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -947,7 +952,7 @@ export const MicrophoneIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -969,7 +974,7 @@ export const MoonIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -988,7 +993,7 @@ export const NotificationIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1008,7 +1013,7 @@ export const OpenEyeIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1027,7 +1032,7 @@ export const ProfileIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1049,7 +1054,7 @@ export const SettingsIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1068,7 +1073,7 @@ export const SuccessIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1087,7 +1092,7 @@ export const UnLikeIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1107,7 +1112,7 @@ export const ClockIcon: React.FC<IconProps> = ({
 
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1128,7 +1133,7 @@ export const CameraIcon: React.FC<IconProps> = ({
 
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1148,7 +1153,7 @@ export const BluetoothIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1167,7 +1172,7 @@ export const LikeIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1186,7 +1191,7 @@ export const UnlockIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1206,7 +1211,7 @@ export const WifiIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1225,7 +1230,7 @@ export const UploadIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1247,7 +1252,7 @@ export const SearchIcon: React.FC<IconProps> = ({
 
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1266,7 +1271,7 @@ export const CloseEyeIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1288,7 +1293,7 @@ export const ExternalLinkIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1307,7 +1312,7 @@ export const PlusIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1327,7 +1332,7 @@ export const TickIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1346,7 +1351,7 @@ export const BoldArrowIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1365,7 +1370,7 @@ export const ArrowIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1385,7 +1390,7 @@ export const SpinnerIcon: React.FC<IconProps> = ({
   strokeWidth = 1,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"
@@ -1405,7 +1410,7 @@ export const CalendarIcon: React.FC<IconProps> = ({
   filled = false,
   ...props
 }) => (
-  <IconWrapper size={size} color={color} {...props}>
+  <IconWrapper widthHeight={size} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
       aria-hidden="false"

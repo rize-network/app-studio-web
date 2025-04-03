@@ -5,14 +5,14 @@ import { AlertProps } from './Alert/Alert.props';
 const AlertComponent = ({
   icon,
   title,
-  styles,
+  views,
   description,
   variant,
 }: AlertProps) => (
   <AlertView
     icon={icon}
     title={title}
-    styles={styles}
+    views={views}
     description={description}
     variant={variant}
   />

@@ -4,19 +4,18 @@ import { CountryPicker } from '../CountryPicker';
 
 export const StyledCountryPicker = () => (
   <CountryPicker
-    name="colorScheme"
-    colorScheme="theme.primary"
-    styles={{
+    name="noColorScheme"
+    views={{
       box: {
         borderRadius: 10,
-        borderColor: 'theme.primary',
+        borderColor: 'theme.primary', // Assuming theme.primary is still desired
         borderStyle: 'solid',
         borderWidth: 1,
       },
-      text: { color: 'theme.primary' },
-      label: { fontWeight: 'bold', color: 'theme.primary' },
-      dropDown: { color: 'theme.primary' },
-      field: { color: 'theme.primary' },
+      text: { color: 'theme.primary' }, // Assuming theme.primary is still desired
+      label: { fontWeight: 'bold', color: 'theme.primary' }, // Assuming theme.primary is still desired
+      dropDown: { color: 'theme.primary' }, // Assuming theme.primary is still desired
+      field: { color: 'theme.primary' }, // Assuming theme.primary is still desired
     }}
   />
 );

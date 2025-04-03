@@ -5,7 +5,7 @@ import { HelperTextProps } from './HelperText.props';
 
 export const HelperText: React.FC<HelperTextProps> = ({
   children,
-  styles = { helperText: {} },
+  views = { helperText: {} },
   ...props
 }) => (
   <Text
@@ -13,7 +13,7 @@ export const HelperText: React.FC<HelperTextProps> = ({
     marginVertical={0}
     marginHorizontal={0}
     color={'theme.text.dark'}
-    {...(styles['helperText'] as any)}
+    {...(views['helperText'] as any)}
     {...props}
   >
     {children}

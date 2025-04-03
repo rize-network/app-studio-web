@@ -13,22 +13,22 @@ export const TabsView: React.FC<TabsViewProps> = ({
   tabs = [], // Default to empty array
   activeTab,
   handleTabClick,
-  styles = {}, // Default to empty object
+  views = {}, // Default to empty object
   renderTab,
   renderContent,
 }) => {
   // If there's no active tab (e.g., tabs array is empty), render nothing or a placeholder
   if (!activeTab) {
     // Optionally render a placeholder when no tabs are active/available
-    // return <View {...styles.container}><Text>No tabs available.</Text></View>;
+    // return <View {...views.container}><Text>No tabs available.</Text></View>;
     return null; // Or simply render nothing
   }
 
   return (
     // Use Vertical layout for overall structure (tabs header above content)
-    <Vertical width="100%" height={'100%'} {...styles.container}>
+    <Vertical width="100%" height={'100%'} {...views.container}>
       {/* Horizontal layout for the tab headers/buttons */}
-      <Horizontal {...styles.headerTabs}>
+      <Horizontal {...views.headerTabs}>
         {tabs.map((tab) => {
           // Determine if the current tab in the loop is the active one
           const isActive = tab.title === activeTab.title;
@@ -48,20 +48,20 @@ export const TabsView: React.FC<TabsViewProps> = ({
               borderBottomLeftRadius={0} // Example: Apply border radius if active
               borderBottomRightRadius={0} // Example: Apply border radius if active
               // Apply base tab styles and merge activeTab styles if this tab is active
-              {...styles.tab}
-              {...(isActive ? styles.activeTab : {})}
+              {...views.tab}
+              {...(isActive ? views.activeTab : {})}
               // Example: Set variant based on active state (can be overridden by styles)
               variant={isActive ? 'filled' : 'ghost'}
               cursor="pointer" // Ensure pointer cursor
-              // Removed isAuto and margin={10} - should be controlled via styles.tab if needed
+              // Removed isAuto and margin={10} - should be controlled via views.tab if needed
             >
               {/* Render tab icon if provided */}
               {tab.icon}
               {/* Render tab title */}
               <Text
                 // Apply base title styles and merge activeText styles if this tab is active
-                {...styles.title}
-                {...(isActive ? styles.activeText : {})}
+                {...views.title}
+                {...(isActive ? views.activeText : {})}
               >
                 {tab.title}
               </Text>
@@ -71,7 +71,7 @@ export const TabsView: React.FC<TabsViewProps> = ({
       </Horizontal>
 
       {/* Content area */}
-      <View width={'100%'} height="100%" {...styles.content}>
+      <View width={'100%'} height="100%" {...views.content}>
         {/* Use the custom renderContent function if provided */}
         {renderContent
           ? renderContent(activeTab)

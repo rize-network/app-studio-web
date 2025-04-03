@@ -8,11 +8,7 @@ export const VariantDemo = () => (
   <Vertical gap={15}>
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
       <View position={'relative'} key={index}>
-        <Badge
-          content={variant}
-          variant={variant as Variant}
-          colorScheme="theme.primary"
-        />
+        <Badge content={variant} variant={variant as Variant} />
       </View>
     ))}
   </Vertical>

@@ -14,8 +14,6 @@ export interface TextFieldProps extends Omit<InputProps, 'size'> {
   name?: string;
   // Optional label text for the TextField to indicate the field's purpose.
   label?: string;
-  // Optional property to specify the color scheme of the TextField.
-  colorScheme?: string;
   // Optional React node to be rendered on the left side of the TextField.
   left?: React.ReactNode;
   // Optional React node to be rendered on the right side of the TextField.
@@ -47,7 +45,7 @@ export interface TextFieldProps extends Omit<InputProps, 'size'> {
   // Optional Shape enum to specify the shape of the TextField's corners.
   shape?: Shape;
   // Optional custom styles to apply to the TextField component.
-  styles?: TextFieldStyles;
+  views?: TextFieldStyles;
   // Optional controlled value of the TextField, driving its current state.
   value?: string;
   // Optional Variant enum to specify the variant of the TextField component.

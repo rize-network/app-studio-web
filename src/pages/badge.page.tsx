@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
-  ColorSchemeDemo,
   ContentDemo,
   DefaultDemo,
   PositionDemo,
@@ -19,13 +18,6 @@ const BadgePage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
-          </tr>
-
-          <tr>
-            <td>ColorScheme</td>
-            <td>
-              <ColorSchemeDemo />
-            </td>
           </tr>
 
           <tr>

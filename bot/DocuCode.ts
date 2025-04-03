@@ -1,40 +1,47 @@
 import { FileHandler } from './FileHandler';
-
-import { OpenAIConnector } from './OpenAIConnector';
 import { API_CONFIG, APPLICATION_SETTINGS } from './Config';
 import { extractJsonCode } from './extractors';
 import { CommentPrompt } from './prompt/3-comment';
-
 import path from 'path';
 import fs from 'fs';
 import { Cache } from './Cache';
+import { AiService } from './ai/ai.service';
+import { MODEL_INFO, Providers } from './ai/ai.config';
 
 export class DocuCode {
-  private readonly openAIConnector: OpenAIConnector;
   private readonly fileHandler: FileHandler;
   private readonly cache: Cache;
   private readonly cacheKey: string = '';
+  private readonly aiService: AiService;
+  private selectedModel: string = 'gpt-4o';
+  private selectedProvider: string = 'openai';
 
-  constructor(cacheKey: string) {
-    this.openAIConnector = new OpenAIConnector(
-      API_CONFIG.openaiApiKey,
-      API_CONFIG.openaiOrganization
-    );
+  constructor(
+    cacheKey: string,
+    model: string = 'gpt-4o',
+    provider: string = 'openai'
+  ) {
     this.cacheKey = cacheKey;
     this.cache = new Cache(APPLICATION_SETTINGS.cacheDirectory);
-    this.fileHandler = new FileHandler(
-      API_CONFIG.openaiApiKey,
-      API_CONFIG.openaiOrganization
-    );
+    this.fileHandler = new FileHandler();
+    this.aiService = new AiService();
+
+    // Set model and provider if they are valid
+    if (model && MODEL_INFO[model]) {
+      this.selectedModel = model;
+    }
+
+    if (provider && Providers.includes(provider as any)) {
+      this.selectedProvider = provider;
+    }
   }
 
-  async commentCodeFile(filePath: string, assistantId: string) {
+  async commentCodeFile(filePath: string) {
     const parts = filePath.split('/');
     const componentName = parts[parts.length - 2];
 
     // Read the file content
     const codeContent = await this.fileHandler.readFile(filePath);
-
     const updatedCodeContent = this.splitArrayToJSON(codeContent);
 
     // Define the prompt
@@ -44,22 +51,30 @@ export class DocuCode {
       JSON.stringify(updatedCodeContent)
     );
 
-    // Créez un nouveau thread pour la conversation
-    const thread = await this.openAIConnector.createThread();
+    // System message
+    const systemMessage = {
+      role: 'system',
+      content:
+        'You are an expert code commenter. Analyze code and provide useful comments that explain functionality.',
+    };
 
-    // Définissez le prompt initial pour la compréhension globale du dossier
-    await this.openAIConnector.addMessageToThread(thread.id, {
+    // User message with the comment prompt
+    const userMessage = {
       role: 'user',
       content: prompt,
+    };
+
+    // Send message to AI service
+    const response = await this.aiService.send({
+      model: this.selectedModel,
+      provider: this.selectedProvider as any,
+      messages: [systemMessage, userMessage],
+      temperature: 0.2,
+      json: true,
     });
 
-    // Récupérez et traitez la réponse pour la compréhension globale
-    const response = await this.openAIConnector.runAssistant(
-      assistantId,
-      thread.id
-    );
-    // Process the commented code to extract only the code part
-    const codeOnly = extractJsonCode(response.text.value);
+    // Extract JSON from response
+    const codeOnly = extractJsonCode(response) || JSON.parse(response);
 
     this.cache.saveEachJsonToCache(
       this.cacheKey + `/comments`,
@@ -94,7 +109,7 @@ export class DocuCode {
         return;
       }
       const updatedCode = this.insertComments(code, commentsObj.comments); // Use commentsObj.comments here
-      await this.fileHandler.writeWithoutCheck(filePath, updatedCode);
+      await this.fileHandler.writeFileDirect(filePath, updatedCode);
     } catch (error) {
       console.error('Error processing comments:', error);
     }
@@ -121,10 +136,10 @@ export class DocuCode {
     content = content.replace(extraNewLinesAndWhitespacePattern, '\n');
 
     // Write the modified content back to the file
-    this.fileHandler.writeWithoutCheck(filePath, content);
+    this.fileHandler.writeFileDirect(filePath, content);
   }
 
-  async processDirectory(dirPath: string, assistantId: string) {
+  async processDirectory(dirPath: string) {
     const cachedResponse = this.cache.getJsonFromCache(
       this.cacheKey + `/comments`
     );
@@ -147,14 +162,10 @@ export class DocuCode {
         (stat.isFile() && path.extname(file) === '.ts') ||
         path.extname(file) === '.tsx'
       ) {
-        // if (
-        //   fullPath === 'src/components/Form/ComboBox/ComboBox/ComboBox.view.tsx'
-        // ) {
         await this.removeCommentsAndCleanFile(fullPath);
-        await this.commentCodeFile(fullPath, assistantId);
-        // }
+        await this.commentCodeFile(fullPath);
       } else if (stat.isDirectory()) {
-        await this.processDirectory(fullPath, assistantId); // Recursively process subdirectories
+        await this.processDirectory(fullPath); // Recursively process subdirectories
       }
     }
   }

@@ -18,7 +18,7 @@ export const StyledArea = () => {
           name="surname"
           label="Surname"
           variant="none"
-          styles={{
+          views={{
             box: {
               borderRadius: 8,
               padding: 5,
@@ -30,7 +30,7 @@ export const StyledArea = () => {
             label: { color: 'theme.primary' },
           }}
         />
-        <Button type="submit" height="40px" colorScheme="theme.primary" isAuto>
+        <Button type="submit" height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 // Defines 'Variant' as a TypeScript type alias representing possible visual styles of the TextField component such as 'outline', 'default', or 'none'.
 export type Variant = 'outline' | 'default' | 'none';
-// Establishes 'Shape' as a type for defining the border-radius of the TextField, allowing 'default', 'sharp', 'rounded', or 'pillShaped' styles.
+// Establishes 'Shape' as a type for defining the border-radius of the TextField, allowing 'default', 'sharp', 'rounded', or 'pillShaped' views.
 export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
 // Specifies 'Size' as a type indicating the scale of the TextField, ranging from 'xs' for extra small to 'xl' for extra large.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

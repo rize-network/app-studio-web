@@ -10,7 +10,7 @@ import { Themes } from './Alert.style';
 export const AlertView = ({
   icon,
   title,
-  styles,
+  views,
   description,
   // Sets a default variant prop to 'default' if none is provided.
   variant = 'default',
@@ -23,7 +23,7 @@ export const AlertView = ({
     padding={16}
     flexWrap="nowrap"
     // borderColor={Themes[variant].container.border}
-    {...styles?.container}
+    {...views?.container}
   >
     <View alignSelf={'center'}>
       {icon ? (
@@ -31,7 +31,7 @@ export const AlertView = ({
       ) : (
         <WarningIcon
           size={24}
-          color={styles?.icon.color ?? Themes[variant].content.color}
+          color={views?.icon.color ?? Themes[variant].content.color}
         />
       )}
     </View>
@@ -39,14 +39,14 @@ export const AlertView = ({
       <Text
         fontSize="16px"
         color={Themes[variant].content.color}
-        {...styles?.title}
+        {...views?.title}
       >
         {title}
       </Text>
       <Text
         fontSize="14px"
         color={Themes[variant].content.color}
-        {...styles?.description}
+        {...views?.description}
       >
         {description}
       </Text>

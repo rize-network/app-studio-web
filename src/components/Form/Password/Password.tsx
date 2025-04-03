@@ -7,8 +7,8 @@ import { CloseEyeIcon, OpenEyeIcon } from '../../Icon/Icon';
 import TextFieldView from '../TextField/TextField/TextField.view';
 
 const PasswordComponent: React.FC<PasswordProps> = ({
-  visibleIcon = <OpenEyeIcon size={14} />,
-  hiddenIcon = <CloseEyeIcon size={14} />,
+  visibleIcon = <OpenEyeIcon widthHeight={14} />,
+  hiddenIcon = <CloseEyeIcon widthHeight={14} />,
   ...props
 }) => {
   const { isVisible, setIsVisible, ...passwordProps } = usePasswordState(props);

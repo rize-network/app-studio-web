@@ -11,7 +11,7 @@ export const ColoredButtons = () => (
       'theme.success',
       'theme.error',
     ].map((color, index) => (
-      <Button key={index} colorScheme={color} isAuto>
+      <Button key={index} isAuto>
         {color}
       </Button>
     ))}

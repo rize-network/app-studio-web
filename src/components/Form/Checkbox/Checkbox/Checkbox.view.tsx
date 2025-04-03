@@ -22,7 +22,6 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   shadow = {},
   labelPosition = 'right',
   size = 'md',
-  colorScheme = 'theme.primary',
   error = false,
   isSelected = false,
   isHovered = false,
@@ -32,7 +31,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   defaultIsSelected = false,
   setIsSelected = () => {},
   setIsHovered = () => {},
-  styles = { checkbox: {}, label: {} },
+  views = { checkbox: {}, label: {} },
   infoText,
   helperText,
   ...props
@@ -60,13 +59,13 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
         ? 'theme.disabled'
         : 'color.blueGray.700',
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
-      ...styles['label'],
+      ...views['label'],
     },
     checkbox: {
       ...(isDisabled
         ? { backgroundColor: 'theme.disabled' }
         : ((isChecked || isSelected) && !isIndeterminate) || isIndeterminate
-        ? { backgroundColor: colorScheme }
+        ? { backgroundColor: 'theme.primary' }
         : {
             borderWidth: 2,
             borderColor: error
@@ -80,7 +79,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       ...(isHovered ? { filter: 'brightness(0.9)' } : {}),
       ...Sizes[size],
       ...shadow,
-      ...styles['checkbox'],
+      ...views['checkbox'],
     },
   };
 
@@ -98,7 +97,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       <Vertical gap={8}>
         <Horizontal gap={10} alignItems="center">
           {labelPosition === 'left' && label && (
-            <Text size={size} {...styles?.label}>
+            <Text size={size} {...views?.label}>
               {label}
             </Text>
           )}
@@ -113,7 +112,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           </Center>
 
           {labelPosition === 'right' && label && (
-            <Text size={size} {...styles?.label}>
+            <Text size={size} {...views?.label}>
               {label}
             </Text>
           )}
@@ -123,7 +122,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
             marginLeft={labelPosition === 'left' ? 0 : 27}
             color="color.gray.400"
             size="sm"
-            {...styles?.infoText}
+            {...views?.infoText}
           >
             {infoText}
           </Text>

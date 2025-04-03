@@ -1,12 +1,11 @@
-import React, { CSSProperties } from 'react';
-import { ToggleViewProps } from './Toggle.props';
-import { ToggleShapes } from './Toggle.style';
-import { Variant } from './Toggle.type';
+import React from 'react';
 import { Center } from '../../Layout/Center/Center';
+import { ToggleViewProps } from './Toggle.props';
+import { ViewProps } from 'app-studio';
+
 const ToggleView: React.FC<ToggleViewProps> = ({
   children,
   shape = 'rounded',
-  colorScheme = 'color.trueGray.400',
   variant = 'ghost',
   isHovered,
   setIsHovered,
@@ -16,13 +15,13 @@ const ToggleView: React.FC<ToggleViewProps> = ({
   onToggle,
   ...props
 }) => {
-  const toggleColor = !isDisabled ? colorScheme : 'theme.disabled';
+  const toggleColor = !isDisabled ? 'color.trueGray.400' : 'theme.disabled';
   const isActive = !!(isToggle || isHovered);
-  const ToggleVariants: Record<Variant, CSSProperties> = {
+  const toggleVariants: { [key: string]: ViewProps } = {
     outline: {
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: colorScheme,
+      borderColor: 'color.trueGray.400',
     },
     link: {
       borderWidth: 1,
@@ -43,6 +42,7 @@ const ToggleView: React.FC<ToggleViewProps> = ({
       });
     }
   };
+
   return (
     <Center
       role="Toggle"
@@ -53,9 +53,9 @@ const ToggleView: React.FC<ToggleViewProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       cursor={isDisabled ? 'not-allowed' : 'pointer'}
-      borderRadius={ToggleShapes[shape]}
+      borderRadius={shape === 'pillShaped' ? '50px' : '8px'}
       onClick={handleToggle}
-      {...ToggleVariants[variant]}
+      {...toggleVariants[variant]}
       {...props}
     >
       {children}

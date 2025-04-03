@@ -19,7 +19,7 @@ export const LabelDemo = () => {
       name="label"
       label="Status"
       items={items}
-      left={<PlusIcon size={12} />}
+      left={<PlusIcon widthHeight={12} />}
     />
   );
 };

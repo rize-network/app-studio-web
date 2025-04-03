@@ -14,10 +14,8 @@ import {
 import { LoaderProps } from '../../Loader/Loader/Loader.props';
 // Optional string to define the color scheme of the button.
 export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
-  // Optional string for an external hyperlink that the button will redirect to when clicked.
+  // Optional React node(s) to be displayed as the button's content.
   children?: React.ReactNode;
-  // Optional boolean to control the display of a loader animation over the button.
-  colorScheme?: any;
   // Optional LoaderProps object to configure the appearance and behavior of the loader animation.
   to?: string;
   // Optional LoaderPosition to determine the location of the loader animation relative to the button content.

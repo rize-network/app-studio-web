@@ -21,11 +21,10 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   placeholder,
   onChangeText,
   shadow = {},
-  styles = { box: {}, field: {}, label: {}, helperText: {}, text: {} },
+  views = { box: {}, field: {}, label: {}, helperText: {}, text: {} },
   size = 'md',
   shape = 'default',
   variant = 'default',
-  colorScheme = 'theme.primary',
   error = false,
   isFocused = false,
   isHovered = false,
@@ -66,7 +65,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     backgroundColor: 'transparent',
     color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
     cursor: isDisabled ? 'not-allowed' : 'auto',
-    ...styles['field'],
+    ...views['field'],
   };
   const handleFocus = () => {
     setIsFocused(true);
@@ -100,23 +99,22 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     if (typeof document === 'undefined' && onChangeText) onChangeText('');
   };
   return (
-    <FieldContainer helperText={helperText} error={error} styles={styles}>
+    <FieldContainer helperText={helperText} error={error} views={views}>
       <FieldContent
         label={label}
         size={size}
         error={error}
         shape={shape}
-        styles={styles}
+        views={views}
         shadow={shadow}
         variant={variant}
         value={value}
-        color={colorScheme}
+        color={'theme.primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         isWithLabel={isWithLabel}
-        colorScheme={colorScheme}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
@@ -125,9 +123,9 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
           {isWithLabel && (
             <FieldLabel
               htmlFor={id}
-              color={colorScheme}
+              color={'theme.primary'}
               error={error}
-              {...styles}
+              {...views}
             >
               {label}
             </FieldLabel>

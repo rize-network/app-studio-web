@@ -7,7 +7,7 @@ export const IconDemo = () => {
     <Alert
       title="Heads up!"
       description="You can add components to your app using the cli."
-      icon={<EditIcon size={24} color="black" />}
+      icon={<EditIcon widthHeight={24} color="black" />}
     />
   );
 };

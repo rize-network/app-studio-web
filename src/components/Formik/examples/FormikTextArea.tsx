@@ -20,7 +20,6 @@ export const FormikTextAreaExemple = () => {
           <FormikTextArea
             name="thoughts"
             placeholder="Write your thoughts here..."
-            colorScheme="theme.secondary"
           />
           <Button type="submit" onClick={props.handleSubmit}>
             Submit

@@ -10,7 +10,7 @@ export const FieldLabel: React.FC<LabelProps> = ({
   size = 'md',
   error = false,
   color = 'theme.primary',
-  styles = { label: {} },
+  views = { label: {} },
   helperText,
   ...props
 }) => (
@@ -23,7 +23,7 @@ export const FieldLabel: React.FC<LabelProps> = ({
     position="absolute"
     color={error ? 'error' : color}
     fontSize={LabelSizes[size]}
-    {...styles['label']}
+    {...views['label']}
     {...props}
   >
     {children}

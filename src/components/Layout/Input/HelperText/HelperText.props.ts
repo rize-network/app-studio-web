@@ -14,5 +14,5 @@ export interface HelperTextProps extends ViewProps {
   /**
    * CSS styles applied to the HelperText.
    */
-  styles?: TextFieldStyles;
+  views?: TextFieldStyles;
 }

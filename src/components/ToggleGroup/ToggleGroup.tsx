@@ -8,8 +8,7 @@ const ToggleGroupComponent = ({
   items,
   // Destructure 'shape' prop to define the shape of the toggle buttons
   shape,
-  // Destructure 'colorScheme' prop for toggle button styling
-  colorScheme,
+
   // Destructure 'variant' prop to determine the visual style of the toggle group
   variant,
   // Destructure 'onToggleChange' prop for the callback when toggle state changes
@@ -21,7 +20,6 @@ const ToggleGroupComponent = ({
     <ToggleGroupView
       items={items}
       shape={shape}
-      colorScheme={colorScheme}
       variant={variant}
       activeToggles={activeToggles}
       setActiveToggles={setActiveToggles}

@@ -29,13 +29,13 @@ export const HeadingSizes: Record<Headings, Record<string, number | string>> = {
   },
   h5: {
     fontSize: 24,
-    // Set the 'h5' heading tag styles, opting for no additional letter spacing.
+    // Set the 'h5' heading tag views, opting for no additional letter spacing.
     lineHeight: 28,
     letterSpacing: 0,
   },
   h6: {
     fontSize: 20,
-    // Set the 'h6' heading tag styles, with the smallest font size and a subtle letter spacing.
+    // Set the 'h6' heading tag views, with the smallest font size and a subtle letter spacing.
     lineHeight: 24,
     letterSpacing: 0.15,
   },

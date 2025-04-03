@@ -5,9 +5,8 @@ import { ViewProps } from 'app-studio';
 export interface BadgeProps extends Omit<ViewProps, 'content'> {
   content: string | number;
   variant?: Variant;
-  colorScheme?: string;
   position?: Position;
   size?: Size;
   shape?: Shape;
-  styles?: BadgeStyles;
+  views?: BadgeStyles;
 }

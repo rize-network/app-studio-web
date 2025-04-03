@@ -14,10 +14,6 @@ export interface ContentProps extends Omit<ViewProps, 'size'> {
    */
   color?: string;
   /**
-   * Changes the color style of the field.
-   */
-  colorScheme?: string;
-  /**
    * The content to be rendered inside the Content component.
    */
   children?: React.ReactNode;
@@ -68,7 +64,7 @@ export interface ContentProps extends Omit<ViewProps, 'size'> {
   /**
    * CSS styles applied to the Content component. Default value is an empty object.
    */
-  styles?: TextFieldStyles;
+  views?: TextFieldStyles;
   /**
    * The shadow effect applied to the Content component.
    */

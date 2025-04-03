@@ -17,8 +17,8 @@ export const FileSVG = ({
 
   const Colorprops = color
     ? {
-        fill: getColor(color, elementMode ? elementMode : themeMode),
-        stroke: getColor(color, elementMode ? elementMode : themeMode),
+        fill: getColor(color, { themeMode }),
+        stroke: getColor(color, { themeMode }),
       }
     : {};
 

@@ -55,7 +55,7 @@ export * from './Link/Link/Link.props';
 export * from './Loader/Loader/Loader.props';
 export * from './Message/Message/Message.props';
 export * from './Modal/Modal/Modal.props';
-export * from './Uploader/Uploader.props';
+export * from './Uploader/Uploader/Uploader.props';
 export * from './Table/Table/Table.props';
 export * from './Tabs/Tabs/Tabs.props';
 export * from './Text/Text/Text.props';

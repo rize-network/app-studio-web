@@ -12,8 +12,6 @@ export interface SelectProps extends Omit<InputProps, 'size'> {
   name?: string;
   // Label text associated with the select element
   label?: string;
-  // Defines the color scheme for the select component
-  colorScheme?: string;
   // Helper text that appears below the select box
   helperText?: string;
   // Placeholder text shown when the select is empty
@@ -33,7 +31,7 @@ export interface SelectProps extends Omit<InputProps, 'size'> {
   // Defines the styling variant for the select component
   variant?: Variant;
   // Custom styles that can be applied to the select component
-  styles?: SelectStyles;
+  views?: SelectStyles;
   // Defines the size of the component
   size?: Size;
   // Determines the shadow property of the select component
@@ -57,7 +55,7 @@ export interface SelectBoxProps {
   isDisabled?: boolean;
   placeholder?: string;
   removeOption?: Function;
-  styles?: SelectStyles;
+  views?: SelectStyles;
   size?: Size;
 }
 export interface MultiSelectProps extends Omit<InputProps, 'size'> {
@@ -85,5 +83,5 @@ export interface DropDownProps extends Omit<InputProps, 'size'> {
   size?: Size;
   callback?: Function;
   options: Option[];
-  styles?: SelectStyles;
+  views?: SelectStyles;
 }

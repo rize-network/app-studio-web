@@ -22,5 +22,5 @@ export interface FieldProps extends Omit<ViewProps, 'size'> {
   /**
    * CSS styles applied to the field (default: {}).
    */
-  styles?: TextFieldStyles;
+  views?: TextFieldStyles;
 }

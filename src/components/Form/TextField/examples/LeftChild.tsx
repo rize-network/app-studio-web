@@ -8,7 +8,7 @@ export const LeftInput = () => {
     <TextField
       name="name"
       placeholder="Name"
-      left={<ProfileIcon color="black" size={16} />}
+      left={<ProfileIcon color="black" widthHeight={16} />}
     />
   );
 };

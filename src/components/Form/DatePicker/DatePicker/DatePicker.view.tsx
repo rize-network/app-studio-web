@@ -21,8 +21,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
   size = 'md',
   variant = 'default',
   shape = 'default',
-  colorScheme = 'theme.primary',
-  styles = { box: {}, label: {}, helperText: {}, text: {}, field: {} },
+  views = { box: {}, label: {}, helperText: {}, text: {}, field: {} },
   error = false,
   isHovered = false,
   isFocused = false,
@@ -67,27 +66,26 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
     backgroundColor: 'transparent',
     color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
-    ...styles['field'],
+    ...views['field'],
   };
 
   return (
-    <FieldContainer helperText={helperText} error={error} styles={styles}>
+    <FieldContainer helperText={helperText} error={error} views={views}>
       <FieldContent
         label={label}
         size={size}
         error={error}
         shape={shape}
-        styles={styles}
+        views={views}
         shadow={shadow}
+        color={'theme.primary'}
         variant={variant}
         value={date}
-        color={colorScheme}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         isWithLabel={isWithLabel}
-        colorScheme={colorScheme}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
@@ -95,9 +93,9 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
           {isWithLabel && (
             <FieldLabel
               htmlFor={id}
-              color={colorScheme}
+              color={'theme.primary'}
               error={error}
-              {...styles}
+              {...views}
             >
               {label}
             </FieldLabel>
