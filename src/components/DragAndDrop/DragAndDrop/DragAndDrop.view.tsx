@@ -1,16 +1,6 @@
 import React from 'react';
 import { View } from 'app-studio';
-import { DragAndDropProps } from './DragAndDrop.props';
-
-interface DragAndDropViewProps extends DragAndDropProps {
-  draggedIndex: number | null;
-  itemRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
-  renderItem?: (item: any, index: number) => React.ReactNode;
-  handleDragStart: (
-    e: React.MouseEvent | React.TouchEvent,
-    index: number
-  ) => void;
-}
+import { DragAndDropViewProps } from './DragAndDrop.props';
 
 export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
   items,
@@ -20,8 +10,14 @@ export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
   draggedIndex,
   itemRefs,
   handleDragStart,
+  views,
 }) => (
-  <View overflow="hidden" position="relative" {...containerProps}>
+  <View
+    overflow="hidden"
+    position="relative"
+    {...containerProps}
+    {...views?.container}
+  >
     {items.map((item, index) => (
       <View
         key={index}
@@ -35,6 +31,7 @@ export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
           draggedIndex === index ? 'color.gray.100' : 'transparent'
         }
         {...itemProps}
+        {...views?.item}
       >
         {renderItem ? renderItem(item, index) : item}
       </View>

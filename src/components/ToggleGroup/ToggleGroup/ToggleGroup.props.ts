@@ -1,5 +1,5 @@
 export interface ToggleGroupProps {}
-import { InputProps } from 'app-studio';
+import { InputProps, ViewProps } from 'app-studio';
 import { Shape, ToggleItem, Variant } from './ToggleGroup.type';
 // Defines the structure for ToggleGroup component properties.
 export interface ToggleGroupProps extends Omit<InputProps, 'size'> {
@@ -17,4 +17,8 @@ export interface ToggleGroupViewProps extends Omit<ToggleGroupProps, ''> {
   // Array storing the IDs of active toggles within the group.
   activeToggles: string[];
   setActiveToggles: React.Dispatch<React.SetStateAction<string[]>>;
+  views?: {
+    container?: ViewProps;
+    toggle?: ViewProps;
+  };
 }

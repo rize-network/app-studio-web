@@ -1,11 +1,13 @@
+import { ViewProps } from 'app-studio';
+
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type DatePickerStyles = {
-  box?: CSSProperties;
-  text?: CSSProperties;
-  label?: CSSProperties;
-  helperText?: CSSProperties;
-  field?: CSSProperties;
+  box?: ViewProps;
+  text?: ViewProps;
+  label?: ViewProps;
+  helperText?: ViewProps;
+  field?: ViewProps;
 };
 
 export type Position = 'top' | 'left' | 'right' | 'bottom';

@@ -1,23 +1,26 @@
-import React, { CSSProperties } from 'react';
+import React, { createContext, useContext } from 'react';
+import { ViewProps } from 'app-studio';
 
 export type TableViewStyles = {
-  table?: CSSProperties;
-  thead?: CSSProperties;
-  tfoot?: CSSProperties;
-  tbody?: CSSProperties;
-  tr?: CSSProperties;
-  td?: CSSProperties;
-  th?: CSSProperties;
-  caption?: CSSProperties;
+  table?: ViewProps;
+  thead?: ViewProps;
+  tfoot?: ViewProps;
+  tbody?: ViewProps;
+  tr?: ViewProps;
+  td?: ViewProps;
+  th?: ViewProps;
+  caption?: ViewProps;
 };
 
 const defaultStyles: TableViewStyles = {};
 
-// Create a context that includes both styles and the onClick function
-const TableContext = React.createContext<{
+interface TableContextProps {
   views: TableViewStyles;
-  onRowClick?: Function; // Accept the onClick prop
-}>({
+  onRowClick?: Function;
+}
+
+// Create a context that includes both styles and the onClick function
+const TableContext = createContext<TableContextProps>({
   views: defaultStyles,
   onRowClick: () => {}, // Default to undefined if no onClick is passed
 });
@@ -34,4 +37,4 @@ export const TableProvider: React.FC<{
 );
 
 // Custom hook to consume the context and get the styles and onClick handler
-export const useTableContext = () => React.useContext(TableContext);
+export const useTableContext = () => useContext(TableContext);

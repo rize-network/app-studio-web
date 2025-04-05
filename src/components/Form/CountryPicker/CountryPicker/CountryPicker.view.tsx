@@ -61,7 +61,7 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
 export const DropDown: React.FC<CountryPickerDropDownProps> = ({
   size,
   views = { dropDown: {} },
-  options,
+  options = [],
   callback = () => {},
 }) => {
   const handleCallback = (option: string) => callback(option);
@@ -232,14 +232,14 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
           {hide ? (
             <ChevronIcon
               orientation="down"
-              size={IconSizes[size]}
+              widthHeight={IconSizes[size]}
               color={IconColor}
               style={views['icon']}
             />
           ) : (
             <ChevronIcon
               orientation="up"
-              size={IconSizes[size]}
+              widthHeight={IconSizes[size]}
               color={IconColor}
               style={views['icon']}
             />

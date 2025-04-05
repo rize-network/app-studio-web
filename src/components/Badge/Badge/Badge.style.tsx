@@ -1,10 +1,9 @@
-import { CSSProperties } from 'react';
-
+import { ViewProps } from 'app-studio';
 import { Shape, Size } from './Badge.type';
 
 export type BadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export const BadgeSizes: Record<Size, CSSProperties> = {
+export const BadgeSizes: Record<Size, ViewProps> = {
   xs: {
     minWidth: '20px', // Minimum width to ensure content fits
     height: '20px',

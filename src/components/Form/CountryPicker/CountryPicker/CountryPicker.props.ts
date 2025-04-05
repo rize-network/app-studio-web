@@ -1,6 +1,5 @@
-import { CSSProperties } from 'react';
 import { Elevation } from '../../../../utils/elevation';
-import { InputProps, Shadow } from 'app-studio';
+import { InputProps, Shadow, ViewProps } from 'app-studio';
 import {
   Country,
   CountryPickerStyles,
@@ -43,7 +42,7 @@ export interface CountryPickerProps extends Omit<InputProps, 'size'> {
   // Variant for different visual types of CountryPicker
   variant?: Variant;
   // Shadow or Elevation styles for visual depth and perspective
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
 }
 // Includes all CountryPickerProps and properties specific to the view
 export interface CountryPickerViewProps extends CountryPickerProps {
@@ -75,16 +74,16 @@ export interface CountryPickerDropDownProps extends Omit<InputProps, 'size'> {
   // Callback function for dropdown actions
   callback?: Function;
   // Options array to populate the dropdown
-  options: Array<Country>;
+  options?: Array<Country>;
   // Optional styles object specific to dropdown
   views?: CountryPickerStyles;
 }
 // Defines properties for DropDownItem excluding 'size' from InputProps for customization
-export interface DropDownItemProps extends Omit<InputProps, 'size'> {
+export interface DropDownItemProps extends InputProps {
   // Callback function for dropdown item actions
   callback?: Function;
   // The option value for the dropdown item
-  option: string;
+  option?: string;
   // Optional size of the dropdown item for visual styles
   size?: Size;
   // Optional styles object specific to dropdown item

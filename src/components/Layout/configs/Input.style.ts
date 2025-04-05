@@ -1,8 +1,7 @@
-import { CSSProperties } from 'react';
-
+import { ViewProps } from 'app-studio';
 import { Shape, Size, Variant } from './Input.type';
 
-export const Shapes: Record<Shape, CSSProperties> = {
+export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: 0,
   },
@@ -19,7 +18,7 @@ export const LabelSizes: Record<Size, number> = {
   xl: 14,
 };
 
-export const InputVariants: Record<Variant, CSSProperties> = {
+export const InputVariants: Record<Variant, ViewProps> = {
   outline: {
     borderWidth: 1,
   },

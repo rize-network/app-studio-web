@@ -20,5 +20,4 @@ export const Inline = (props: ViewProps) => (
   <$View display={'inline-flex'} wordBreak="break-word" {...props} />
 );
 
-export type { ViewProps };
 export const View = $View;

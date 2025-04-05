@@ -1,8 +1,7 @@
-import { CSSProperties } from 'react';
-
+import { ViewProps } from 'app-studio';
 import { Size } from './Checkbox.type';
 
-export const Sizes: Record<Size, CSSProperties> = {
+export const Sizes: Record<Size, ViewProps> = {
   xs: { height: 8, width: 8 },
   sm: { height: 12, width: 12 },
   md: { height: 18, width: 18 },

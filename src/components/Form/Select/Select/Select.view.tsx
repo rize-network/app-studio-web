@@ -244,7 +244,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       <CloseIcon
         role="close-button"
         color="inherit"
-        size={IconSizes[size]}
+        widthHeight={IconSizes[size]}
         onClick={handleClick}
       />
     </Horizontal>
@@ -377,7 +377,7 @@ const SelectView: React.FC<SelectViewProps> = ({
               {hide ? (
                 <ChevronIcon
                   color="inherit"
-                  size={IconSizes[size]}
+                  widthHeight={IconSizes[size]}
                   style={views.icon}
                   orientation="down"
                 />
@@ -385,7 +385,7 @@ const SelectView: React.FC<SelectViewProps> = ({
                 <ChevronIcon
                   color="inherit"
                   orientation="up"
-                  size={IconSizes[size]}
+                  widthHeight={IconSizes[size]}
                   style={views.icon}
                 />
               )}

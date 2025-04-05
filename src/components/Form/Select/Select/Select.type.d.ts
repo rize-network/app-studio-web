@@ -6,13 +6,13 @@ export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
 export type Variant = 'outline' | 'default' | 'none';
 // Initiates a 'SelectStyles' type outlining style properties applicable to the Select component.
 export type SelectStyles = {
-  text?: CSSProperties;
-  icon?: CSSProperties;
-  dropDown?: CSSProperties;
-  selectBox?: CSSProperties;
-  label?: CSSProperties;
-  helperText?: CSSProperties;
-  field?: CSSProperties;
+  text?: ViewProps;
+  icon?: ViewProps;
+  dropDown?: ViewProps;
+  selectBox?: ViewProps;
+  label?: ViewProps;
+  helperText?: ViewProps;
+  field?: ViewProps;
 };
 // Defines an 'Option' interface representing individual options within the Select component.
 export interface Option {

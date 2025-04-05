@@ -1,3 +1,5 @@
+import { ViewProps } from 'app-studio';
+
 export type Size =
   | 'xs'
   | 'sm'
@@ -11,9 +13,9 @@ export type Size =
   | '6xl';
 
 export type CheckboxStyles = {
-  checkbox?: CSSProperties;
-  label?: CSSProperties;
-  infoText?: CSSProperties;
+  checkbox?: ViewProps;
+  label?: ViewProps;
+  infoText?: ViewProps;
 };
 
 export type Variant = 'selected' | 'unselected' | 'indeterminate';

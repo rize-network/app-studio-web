@@ -1,15 +1,51 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Element, Typography } from 'app-studio';
+import { Element, Typography, View, ViewProps } from 'app-studio';
 
-import { ContentProps, TextProps, TruncateTextProps } from './Text.props';
+import { TextProps } from './Text.props';
 import { HeadingSizes } from './Text.style';
 
-const TextContent: React.FC<ContentProps> = ({ children, isSub, isSup }) => (
+interface Props extends TextProps {
+  views?: {
+    container?: ViewProps;
+  };
+}
+
+interface ContentProps extends React.HTMLAttributes<HTMLElement> {
+  children: React.ReactNode;
+  isSub?: boolean;
+  isSup?: boolean;
+  views?: {
+    sup?: ViewProps;
+  };
+}
+
+interface TruncateTextProps extends React.HTMLAttributes<HTMLDivElement> {
+  text: string;
+  maxLines?: number;
+  views?: {
+    truncateText?: ViewProps;
+  };
+}
+
+const TextContent: React.FC<ContentProps> = ({
+  children,
+  isSub,
+  isSup,
+  views,
+}) => (
   <>
     {typeof children === 'string' ? (
       <>
-        {isSub && <sup>{children}</sup>}
-        {isSup && <sup>{children}</sup>}
+        {isSub && (
+          <View as="sup" {...views?.sup}>
+            {children}
+          </View>
+        )}
+        {isSup && (
+          <View as="sup" {...views?.sup}>
+            {children}
+          </View>
+        )}
         {!isSub && !isSup && <>{children}</>}
       </>
     ) : (
@@ -18,7 +54,11 @@ const TextContent: React.FC<ContentProps> = ({ children, isSub, isSup }) => (
   </>
 );
 
-const TruncateText: React.FC<TruncateTextProps> = ({ text, maxLines = 1 }) => {
+const TruncateText: React.FC<TruncateTextProps> = ({
+  text,
+  maxLines = 1,
+  views,
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [truncatedLength, setTruncatedLength] = useState(text.length);
 
@@ -59,9 +99,13 @@ const TruncateText: React.FC<TruncateTextProps> = ({ text, maxLines = 1 }) => {
       ? text.substring(0, truncatedLength) + '...'
       : text;
 
-  return <div ref={containerRef}>{displayText}</div>;
+  return (
+    <View ref={containerRef} {...views?.truncateText}>
+      {displayText}
+    </View>
+  );
 };
-const TextView: React.FC<TextProps> = ({
+const TextView: React.FC<Props> = ({
   children,
   heading,
   maxLines,
@@ -72,6 +116,7 @@ const TextView: React.FC<TextProps> = ({
   isStriked = false,
   weight = 'normal',
   size = 'md',
+  views,
   ...props
 }) => {
   const headingStyles = heading ? HeadingSizes[heading] : {};
@@ -92,11 +137,12 @@ const TextView: React.FC<TextProps> = ({
       {...noLineBreak}
       {...headingStyles}
       {...props}
+      {...views?.container}
     >
       {maxLines && typeof children === 'string' ? (
         <TruncateText text={children} maxLines={maxLines} />
       ) : (
-        <TextContent isSub={isSub} isSup={isSup} {...props}>
+        <TextContent isSub={isSub} isSup={isSup}>
           {children}
         </TextContent>
       )}

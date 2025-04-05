@@ -2,14 +2,19 @@ import React from 'react';
 import { useTheme, Image, ViewProps, ImageProps } from 'app-studio';
 import { Center } from '../Layout/Center/Center';
 
-export type FileProps = {
+export interface FileProps extends ViewProps {
   src: string;
   color?: string;
-} & ViewProps;
+  views?: {
+    container?: ViewProps;
+    image?: ImageProps;
+  };
+}
 
 export const FileSVG = ({
   src,
   color,
+  views,
   themeMode: elementMode,
   ...props
 }: FileProps) => {
@@ -23,12 +28,13 @@ export const FileSVG = ({
     : {};
 
   return (
-    <Center {...props}>
+    <Center {...props} {...views?.container}>
       <Image
         {...Colorprops}
         content={'url("' + src + '")'}
         width="100%"
         height="100%"
+        {...views?.image}
       />
     </Center>
   );

@@ -104,10 +104,10 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
 
           <Center {...checkboxStyle.checkbox}>
             {isIndeterminate ? (
-              <MinusIcon size={IconSizes[size]} color="white" />
+              <MinusIcon widthHeight={IconSizes[size]} color="white" />
             ) : (
               (isChecked || isSelected) &&
-              (icon ?? <TickIcon size={IconSizes[size]} color="white" />)
+              (icon ?? <TickIcon widthHeight={IconSizes[size]} color="white" />)
             )}
           </Center>
 

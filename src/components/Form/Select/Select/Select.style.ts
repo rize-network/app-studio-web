@@ -1,7 +1,7 @@
-import { CSSProperties } from 'react';
+import { ViewProps } from 'app-studio';
 import { Size } from './Select.type';
 // Defines a mapping of 'Size' types to their corresponding CSSProperties. This allows different size configurations to be provided for the Select component.
-export const Sizes: Record<Size, CSSProperties> = {
+export const Sizes: Record<Size, ViewProps> = {
   xs: { height: 6, width: 6 },
   sm: { height: 12, width: 12 },
   md: { height: 18, width: 18 },

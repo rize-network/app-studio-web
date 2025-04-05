@@ -1,6 +1,5 @@
-import { CSSProperties } from 'react';
 import { Elevation } from '../../../../utils/elevation';
-import { InputProps, Shadow } from 'app-studio';
+import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { SelectStyles, Shape, Size, Variant, Option } from './Select.type';
 // Defines the interface for Select component properties, extending from InputProps but omitting 'size'
 export interface SelectProps extends Omit<InputProps, 'size'> {
@@ -35,7 +34,7 @@ export interface SelectProps extends Omit<InputProps, 'size'> {
   // Defines the size of the component
   size?: Size;
   // Determines the shadow property of the select component
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
   // Boolean to control whether the select options are scrollable
   isScrollable?: boolean;
 }

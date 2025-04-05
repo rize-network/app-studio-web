@@ -1,6 +1,6 @@
 import React from 'react';
-import { VerticalProps } from './Vertical.props';
 import { View } from 'app-studio';
+import { VerticalProps } from './Vertical.props';
 
 export const VerticalBase = React.forwardRef<
   HTMLElement,

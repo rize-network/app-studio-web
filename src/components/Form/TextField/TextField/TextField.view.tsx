@@ -149,7 +149,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         {isClearable && value && !isReadOnly && !isDisabled && (
           <FieldIcons>
             <CloseIcon
-              size={Typography.fontSizes[size]}
+              widthHeight={Typography.fontSizes[size]}
               color={IconColor}
               onClick={handleClear}
             />

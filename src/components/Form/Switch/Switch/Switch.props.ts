@@ -1,6 +1,5 @@
-import { CSSProperties } from 'react';
 import { Elevation } from '../../../../utils/elevation';
-import { InputProps, Shadow } from 'app-studio';
+import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Size, SwitchStyles } from './Switch.type';
 // Defines the properties for the Switch component excluding 'size' from the InputProps to allow customization.
 export interface SwitchProps extends Omit<InputProps, 'size'> {
@@ -21,7 +20,7 @@ export interface SwitchProps extends Omit<InputProps, 'size'> {
   // Custom styles to apply to the switch component.
   views?: SwitchStyles;
   // Defines the shadow appearance of the switch using predefined Shadow or Elevation, or a custom CSSProperties object.
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
   // Specifies the size of the switch component.
   size?: Size;
   // The position of the label relative to the switch, either 'left' or 'right'.

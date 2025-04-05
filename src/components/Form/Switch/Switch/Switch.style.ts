@@ -1,7 +1,7 @@
-import { CSSProperties } from 'react';
+import { ViewProps } from 'app-studio';
 import { Size } from './Switch.type';
 // Defines a mapping of size types to their respective knob style properties, specifying the height and width for various predefined sizes.
-export const KnobSizes: Record<Size, CSSProperties> = {
+export const KnobSizes: Record<Size, ViewProps> = {
   xs: { height: 6, width: 6 },
   sm: { height: 9, width: 9 },
   md: { height: 12, width: 12 },
@@ -14,7 +14,7 @@ export const KnobSizes: Record<Size, CSSProperties> = {
   '6xl': { height: 33, width: 33 },
 };
 // Specifies the dimensions of the switch's slider for each predefined size by mapping them to the height and width CSS properties.
-export const SliderSizes: Record<Size, CSSProperties> = {
+export const SliderSizes: Record<Size, ViewProps> = {
   xs: {
     height: 16,
     width: 28,

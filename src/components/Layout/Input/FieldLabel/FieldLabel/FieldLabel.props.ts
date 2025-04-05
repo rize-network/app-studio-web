@@ -24,5 +24,5 @@ export interface LabelProps extends Omit<ViewProps, 'size'> {
   /**
    * CSS styles applied to the Label
    */
-  views?: { label: any };
+  views?: { label?: ViewProps };
 }

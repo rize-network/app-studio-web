@@ -1,3 +1,5 @@
+import { ViewProps } from 'app-studio';
+
 export type Position = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 
 export type Shape = 'sharp' | 'rounded';
@@ -9,14 +11,14 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type MessageType = 'info' | 'warning' | 'error' | 'success';
 
 export type MessageViewStyles = {
-  container?: any;
-  title?: any;
-  subtitle?: any;
-  icon?: any;
-  actionText?: any;
+  container?: ViewProps;
+  title?: ViewProps;
+  subtitle?: ViewProps;
+  icon?: ViewProps;
+  actionText?: ViewProps;
   closingIcon?: {
-    container?: any;
-    icon?: any;
+    container?: ViewProps;
+    icon?: ViewProps;
   };
 };
 

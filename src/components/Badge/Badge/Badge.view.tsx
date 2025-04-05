@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 // Importing React and specific type CSSProperties from the 'react' module.
 import { BadgeProps } from './Badge.props';
 // Importing BadgeProps for typing the component's expected props.
@@ -9,6 +9,7 @@ import { Variant } from './Badge.type';
 import { Center } from '../../Layout/Center/Center';
 // Importing Center component to centrally place child component.
 import { Text } from '../../Text/Text';
+import { ViewProps } from 'app-studio';
 // Importing Text component to display the content text within the badge.
 const BadgeView: React.FC<BadgeProps> = ({
   // Declaring the functional component BadgeView with BadgeProps as its type for props.
@@ -21,7 +22,7 @@ const BadgeView: React.FC<BadgeProps> = ({
   views,
   // Defining BadgeVariants as a record of CSSProperties based on the variant type and associated stylings.
 }) => {
-  const BadgeVariants: Record<Variant, CSSProperties> = {
+  const BadgeVariants: Record<Variant, ViewProps> = {
     filled: {
       backgroundColor: 'theme.primary',
       color: 'color.white',

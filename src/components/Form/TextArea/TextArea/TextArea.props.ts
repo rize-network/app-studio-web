@@ -1,5 +1,4 @@
-import { CSSProperties } from 'react';
-import { InputProps, Shadow } from 'app-studio';
+import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../../utils/elevation';
 import { Shape, Size, TextAreaStyles, Variant } from './TextArea.type';
 export interface TextAreaProps extends Omit<InputProps, 'size'> {
@@ -22,7 +21,7 @@ export interface TextAreaProps extends Omit<InputProps, 'size'> {
   onBlur?: (value: any) => void;
   onFocus?: () => void;
   size?: Size;
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
   shape?: Shape;
   views?: TextAreaStyles;
   value?: string | number;

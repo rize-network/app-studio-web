@@ -1,4 +1,5 @@
 import { AvatarStyles, Size } from './Avatar.type';
+
 // Defines the properties for the Avatar component.
 export interface AvatarProps {
   // Source URL for the avatar image.

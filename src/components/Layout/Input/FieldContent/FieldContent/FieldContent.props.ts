@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import {
   Shape,
   Size,
@@ -68,5 +68,5 @@ export interface ContentProps extends Omit<ViewProps, 'size'> {
   /**
    * The shadow effect applied to the Content component.
    */
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
 }

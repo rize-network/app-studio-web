@@ -1,19 +1,21 @@
+import { ViewProps } from 'app-studio';
+
 // Defines a type for styling the CountryPicker component.
 export type CountryPickerStyles = {
   // Optional style properties for the text element within the CountryPicker.
-  text?: CSSProperties;
+  text?: ViewProps;
   // Optional style properties for the icon element within the CountryPicker.
-  icon?: CSSProperties;
+  icon?: ViewProps;
   // Optional style properties for the dropDown element within the CountryPicker.
-  dropDown?: CSSProperties;
+  dropDown?: ViewProps;
   // Optional style properties for the outer box element of the CountryPicker.
-  box?: CSSProperties;
+  box?: ViewProps;
   // Optional style properties for the label element associated with the CountryPicker.
-  label?: CSSProperties;
+  label?: ViewProps;
   // Optional style properties for the helper text element within the CountryPicker.
-  helperText?: CSSProperties;
+  helperText?: ViewProps;
   // Optional style properties for the input field within the CountryPicker.
-  field?: CSSProperties;
+  field?: ViewProps;
 };
 // Defines a type representing a country with specific properties.
 export type Country = {

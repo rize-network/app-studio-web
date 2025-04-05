@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from 'app-studio';
+import { useTheme, View, ViewProps } from 'app-studio';
 import { Center } from '../../Layout/Center/Center';
-import { View } from '../../Layout/View/View';
 
 import {
   DefaultSpinnerProps,
@@ -11,6 +10,13 @@ import {
 } from '../Loader/Loader.props';
 
 import { DefaultSizes, DefaultSpeeds } from './Loader.style';
+
+interface Props extends LoaderProps {
+  views?: {
+    container?: ViewProps;
+    text?: ViewProps;
+  };
+}
 
 const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   size = 'md',
@@ -139,7 +145,7 @@ const Quarter: React.FC<QuarterProps> = ({
     </svg>
   );
 };
-const LoaderView: React.FC<LoaderProps> = ({
+const LoaderView: React.FC<Props> = ({
   size,
   children,
   textColor,
@@ -147,6 +153,7 @@ const LoaderView: React.FC<LoaderProps> = ({
   type = 'default',
   speed = 'normal',
   textPosition = 'right',
+  views,
   ...props
 }) => {
   const style = { size, speed, color: loaderColor };
@@ -164,13 +171,18 @@ const LoaderView: React.FC<LoaderProps> = ({
         textPosition === 'top' || textPosition === 'bottom' ? 'column' : 'row'
       }
       {...props}
+      {...views?.container}
     >
       {(textPosition === 'left' || textPosition === 'top') && children && (
-        <View color={textColor}>{children}</View>
+        <View color={textColor} {...views?.text}>
+          {children}
+        </View>
       )}
       {variants[type]}
       {(textPosition === 'right' || textPosition === 'bottom') && children && (
-        <View color={textColor}>{children}</View>
+        <View color={textColor} {...views?.text}>
+          {children}
+        </View>
       )}
     </Center>
   );

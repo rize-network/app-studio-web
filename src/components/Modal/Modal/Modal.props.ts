@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { Elevation } from '../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
 
@@ -58,14 +58,14 @@ export interface ModalProps extends Omit<ViewProps, 'size'> {
   /**
    * Applies a shadow effect to the button.
    */
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
 }
 
 export interface ModalType extends React.FunctionComponent<ModalProps> {
   /**
    * The overlay component of the modal.
    */
-  Overlay: React.FC<OverlayProps>;
+  Overlay?: React.FC<OverlayProps>;
 
   /**
    * The container component of the modal.
@@ -93,7 +93,7 @@ export interface ModalType extends React.FunctionComponent<ModalProps> {
   Layout: React.FC<ModalLayoutProps>;
 }
 
-export interface OverlayProps extends Omit<ViewProps, 'size'> {
+export interface OverlayProps extends Omit<ViewProps, 'position' | 'isOpen'> {
   /**
    * The content of the Overlay
    */
@@ -121,6 +121,10 @@ export interface OverlayProps extends Omit<ViewProps, 'size'> {
 }
 
 export interface HeaderProps extends Omit<ViewProps, 'size'> {
+  views?: {
+    container?: ViewProps;
+    header?: ViewProps;
+  };
   /**
    * The content of the header
    */
@@ -150,6 +154,9 @@ export interface ModalLayoutProps {
 }
 
 export interface ContainerProps extends Omit<ViewProps, 'size'> {
+  views?: {
+    container?: ViewProps;
+  };
   /**
    * The content of the modal container
    */
@@ -165,9 +172,17 @@ export interface ContainerProps extends Omit<ViewProps, 'size'> {
   /**
    * Set a shadow effect on the button.
    */
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
 }
 
-export interface BodyProps extends Omit<ViewProps, 'size'> {}
+export interface BodyProps extends ViewProps {
+  views?: {
+    view?: ViewProps;
+  };
+}
 
-export interface FooterProps extends ViewProps {}
+export interface FooterProps extends ViewProps {
+  views?: {
+    container?: ViewProps;
+  };
+}

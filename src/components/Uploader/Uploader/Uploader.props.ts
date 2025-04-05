@@ -48,6 +48,13 @@ export interface UploadViewProps {
   handleClick?: () => void;
   onFileSelect?: (file: File) => void;
   validateFile?: (file: File) => string | null;
+  views?: {
+    container?: ViewProps;
+    view?: ViewProps;
+    image?: ImageProps;
+    horizontal?: ViewProps;
+    text?: ViewProps;
+  };
 }
 
 export interface UploadProps extends UseUploadProps, UploadViewProps {}

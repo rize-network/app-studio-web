@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { ButtonProps as $ButtonProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../utils/elevation';
 import {
@@ -41,7 +41,7 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional Shape to specify the shape of the button (e.g., rounded or square edges).
   size?: Size;
   // Optional string used as an accessible label for screen readers.
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
   // Optional Variant to define the stylistic variation of the button.
   shape?: Shape;
   // Optional effect to apply interactive effects (e.g., ripple) to the button.

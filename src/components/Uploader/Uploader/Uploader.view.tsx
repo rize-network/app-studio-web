@@ -28,22 +28,35 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   fileType,
   previewUrl: externalPreviewUrl,
   renderError = ({ errorMessage, errorMessageProps }) => (
-    <Text color="red" fontSize={12} marginTop={8} {...errorMessageProps}>
+    <Text
+      color="red"
+      fontSize={12}
+      marginTop={8}
+      {...errorMessageProps}
+      {...views?.text}
+    >
       {errorMessage}
     </Text>
   ),
   renderText = ({ text, textProps }) => (
-    <Text marginTop={8} {...textProps}>
+    <Text marginTop={8} {...textProps} {...views?.text}>
       {text}
     </Text>
   ),
   renderFile = ({ selectedFile, textProps }) => {
     return selectedFile ? (
-      <Center marginTop={8} gap={10} flexDirection="column">
-        <Text maxLines={2} {...textProps}>
+      <Center
+        marginTop={8}
+        gap={10}
+        flexDirection="column"
+        {...views?.container}
+      >
+        <Text maxLines={2} {...textProps} {...views?.text}>
           {selectedFile.name}
         </Text>
-        <Text {...textProps}>({Math.round(selectedFile.size / 1024)} KB)</Text>
+        <Text {...textProps} {...views?.text}>
+          ({Math.round(selectedFile.size / 1024)} KB)
+        </Text>
       </Center>
     ) : null;
   },
@@ -55,7 +68,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
     imageProps,
   }) => {
     return (
-      <View width="100%" height="100%" position="relative">
+      <View width="100%" height="100%" position="relative" {...views?.view}>
         <View
           as="video"
           width="100%"
@@ -64,6 +77,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
           style={{ objectFit: 'cover' }}
           ref={videoRef}
           {...videoProps}
+          {...views?.view}
         />
         {thumbnailUrl && (
           <Image
@@ -73,6 +87,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
             height="100%"
             objectFit="cover"
             {...imageProps}
+            {...views?.image}
           />
         )}
       </View>
@@ -87,29 +102,40 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
         height="100%"
         objectFit="cover"
         {...imageProps}
+        {...views?.image}
       />
     );
   },
   renderProgress = ({ progress, progressProps }) => {
     return (
-      <Horizontal gap={8} alignItems="center" {...progressProps}>
+      <Horizontal
+        gap={8}
+        alignItems="center"
+        {...progressProps}
+        {...views?.horizontal}
+      >
         <View
           height={4}
           backgroundColor="rgba(0,0,0,0.1)"
           width="100%"
           borderRadius={2}
+          {...views?.view}
         >
           <View
             height={4}
             width={`${progress}%`}
             borderRadius={2}
             backgroundColor="#000"
+            {...views?.view}
           />
         </View>
-        <Text fontSize={12}>{progress}%</Text>
+        <Text fontSize={12} {...views?.text}>
+          {progress}%
+        </Text>
       </Horizontal>
     );
   },
+  views = {},
 }) => {
   const finalPreviewUrl = externalPreviewUrl || previewUrl;
 
@@ -124,6 +150,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
       overflow="hidden"
       position="relative"
       {...containerProps}
+      {...views?.container}
     >
       {progress === 100 &&
         fileType === 'image' &&
@@ -155,6 +182,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
         onChange={handleFileChange}
         accept={accept}
         style={{ display: 'none' }}
+        {...views?.view}
       />
     </Center>
   );

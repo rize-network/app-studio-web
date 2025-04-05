@@ -30,8 +30,8 @@ export const AlertView = ({
         icon
       ) : (
         <WarningIcon
-          size={24}
-          color={views?.icon.color ?? Themes[variant].content.color}
+          widthHeight={24}
+          color={views?.icon?.color ?? Themes[variant].content.color}
         />
       )}
     </View>

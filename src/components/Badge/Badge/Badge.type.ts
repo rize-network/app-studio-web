@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { ViewProps } from 'app-studio';
 export type Shape = 'sharp' | 'rounded' | 'pillShaped';
 // Defines possible values for the shape of a UI component such as buttons or badges.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -13,6 +13,6 @@ export type Position =
   | 'bottom-right'
   | 'bottom-left';
 export type BadgeStyles = {
-  container?: CSSProperties;
-  text?: any;
+  container?: ViewProps;
+  text?: ViewProps;
 };

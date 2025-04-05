@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import { Elevation } from '../../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
 
@@ -66,7 +66,7 @@ export interface DatePickerProps extends Omit<ViewProps, 'size'> {
   /**
    * Adds a shadow effect to the DatePicker.
    */
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
 }
 
 export interface DatePickerViewProps extends DatePickerProps {

@@ -1,4 +1,3 @@
-import { CSSProperties } from 'react'; // Import CSSProperties
 import { ButtonProps } from '../../Button/Button/Button.props'; // Adjust path as needed
 import { TextProps } from '../../Text/Text/Text.props'; // Adjust path as needed
 import { ViewProps } from 'app-studio';

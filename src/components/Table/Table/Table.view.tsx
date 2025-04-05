@@ -1,16 +1,21 @@
 import React from 'react';
-import { Element } from 'app-studio';
+import { Element, ViewProps } from 'app-studio';
 import { TableViewProps } from './Table.props';
 import { useTableContext } from './Table.context';
 
-export const TableContainer: React.FC<any> = (props) => {
+export const TableContainer: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
   return (
-    <Element as="table" borderCollapse="collapse" {...views.table} {...props} />
+    <Element
+      as="table"
+      borderCollapse="collapse"
+      {...views?.table}
+      {...props}
+    />
   );
 };
 
-export const TableHead: React.FC<any> = (props) => {
+export const TableHead: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
   return (
     <Element
@@ -18,13 +23,13 @@ export const TableHead: React.FC<any> = (props) => {
       borderBottom="0.5px solid #ddd"
       textAlign="left"
       color="color.gray.400"
-      {...views.thead}
+      {...views?.thead}
       {...props}
     />
   );
 };
 
-export const TableHeadCell: React.FC<any> = (props) => {
+export const TableHeadCell: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
   return (
     <Element
@@ -32,18 +37,18 @@ export const TableHeadCell: React.FC<any> = (props) => {
       padding="14px"
       whiteSpace="nowrap"
       fontWeight="500"
-      {...views.th}
+      {...views?.th}
       {...props}
     />
   );
 };
 
-export const TableRow: React.FC<any> = (props) => {
+export const TableRow: React.FC<ViewProps> = (props) => {
   const { views, onRowClick } = useTableContext();
-  return <Element as="tr" {...views.tr} onClick={onRowClick} {...props} />;
+  return <Element as="tr" {...views?.tr} onClick={onRowClick} {...props} />;
 };
 
-export const TableCell: React.FC<any> = (props) => {
+export const TableCell: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
   return (
     <Element
@@ -51,30 +56,30 @@ export const TableCell: React.FC<any> = (props) => {
       padding="14px"
       whiteSpace="nowrap"
       fontWeight={props.isFirstColumn ? '400' : '300'}
-      {...views.td}
+      {...views?.td}
       {...props}
     />
   );
 };
 
-export const TableBody: React.FC<any> = (props) => {
+export const TableBody: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
-  return <Element as="tbody" {...views.tbody} {...props} />;
+  return <Element as="tbody" {...views?.tbody} {...props} />;
 };
 
-export const TableFooter: React.FC<any> = (props) => {
+export const TableFooter: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
-  return <Element as="tfoot" {...views.tfoot} {...props} />;
+  return <Element as="tfoot" {...views?.tfoot} {...props} />;
 };
 
-export const TableCaption: React.FC<any> = (props) => {
+export const TableCaption: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
   return (
     <Element
       as="caption"
       margin={'10px 0'}
       color="color.gray.400"
-      {...views.caption}
+      {...views?.caption}
       {...props}
     />
   );

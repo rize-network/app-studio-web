@@ -1,10 +1,6 @@
 import React from 'react';
-import { Center } from '../../Layout/Center/Center';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { View, Horizontal, ViewProps, Vertical } from 'app-studio';
 import { Button } from '../../Button/Button';
-import { View } from '../../Layout/View/View';
 import { CloseIcon } from '../../Icon/Icon';
 import { hideModal } from './Modal.store';
 
@@ -13,18 +9,33 @@ import {
   ContainerProps,
   FooterProps,
   HeaderProps,
-  OverlayProps,
 } from '../Modal/Modal.props';
 import { ContainerShapes, OverlayAlignments } from '../Modal/Modal.style';
 import { HeaderIconSizes } from '../Modal/Modal.style';
+import { Position } from './Modal.type';
+import { Center } from 'src/components/Layout';
 
-export const ModalOverlay: React.FC<OverlayProps> = ({
+export interface OverlayProps {
+  views?: {
+    container?: ViewProps;
+    view?: ViewProps;
+  };
+  blur?: number;
+  isOpen?: boolean;
+  isClosePrevented?: boolean;
+  onClose?: () => void;
+  position?: Position;
+  children?: React.ReactNode;
+}
+
+export const ModalOverlay: React.FC<OverlayProps & any> = ({
   children,
   blur,
   isOpen = false,
   isClosePrevented = false,
   onClose = () => {},
   position = 'center',
+  views,
   ...props
 }) => {
   const handleClick = () => {
@@ -41,6 +52,7 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
       zIndex={1000}
       onClick={handleClick}
       visibility={isOpen ? 'visible' : 'hidden'}
+      {...views?.container}
     >
       <View
         position="absolute"
@@ -55,6 +67,7 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
         onClick={handleClick}
         {...OverlayAlignments[position]}
         {...props}
+        {...views?.view}
       >
         {children}
       </View>
@@ -67,6 +80,7 @@ export const ModalContainer: React.FC<ContainerProps> = ({
   shadow,
   isFullScreen = false,
   shape = 'rounded',
+  views,
   ...props
 }) => {
   const defaultShadow =
@@ -95,6 +109,7 @@ export const ModalContainer: React.FC<ContainerProps> = ({
       {...(shadow ? shadow : defaultShadow)}
       {...ContainerShapes[shape]}
       {...props}
+      {...views?.container}
     >
       {children}
     </Vertical>
@@ -106,6 +121,7 @@ export const ModalHeader: React.FC<HeaderProps> = ({
   buttonColor = 'theme.primary',
   iconSize = 'md',
   buttonPosition = 'right',
+  views,
   ...props
 }) => {
   const onClose = props.onClose ? props.onClose : hideModal;
@@ -133,6 +149,7 @@ export const ModalHeader: React.FC<HeaderProps> = ({
       paddingVertical={15}
       paddingHorizontal={20}
       {...props}
+      {...views?.header}
     >
       {buttonPosition === 'left' && buttonIcon}
       {children}
@@ -141,7 +158,11 @@ export const ModalHeader: React.FC<HeaderProps> = ({
   );
 };
 
-export const ModalBody: React.FC<BodyProps> = ({ children, ...props }) => {
+export const ModalBody: React.FC<BodyProps> = ({
+  children,
+  views,
+  ...props
+}) => {
   const defaultBorder = {
     borderBottomWidth: 2,
     borderTopWidth: 2,
@@ -154,13 +175,18 @@ export const ModalBody: React.FC<BodyProps> = ({ children, ...props }) => {
       paddingHorizontal={20}
       {...defaultBorder}
       {...props}
+      {...views?.view}
     >
       {children}
     </View>
   );
 };
 
-export const ModalFooter: React.FC<FooterProps> = ({ children, ...props }) => {
+export const ModalFooter: React.FC<FooterProps> = ({
+  children,
+  views,
+  ...props
+}) => {
   return (
     <Horizontal
       marginTop="auto"
@@ -169,6 +195,7 @@ export const ModalFooter: React.FC<FooterProps> = ({ children, ...props }) => {
       paddingVertical={15}
       paddingHorizontal={20}
       {...props}
+      {...views?.container}
     >
       {children}
     </Horizontal>

@@ -1,12 +1,11 @@
-import { CSSProperties } from 'react';
+import { ViewProps } from 'app-studio';
+import { Shape, Size } from './Modal.type';
 
-import { Position, Shape, Size } from './Modal.type';
-
-export const ContainerShapes: Record<Shape, CSSProperties> = {
+export const ContainerShapes: Record<Shape, ViewProps> = {
   sharp: { borderRadius: 0 },
   rounded: { borderRadius: 4 },
 };
-export const OverlayAlignments: Record<Position, CSSProperties> = {
+export const OverlayAlignments: Record<string, ViewProps> = {
   center: { justifyContent: 'center', alignItems: 'center' },
   top: { justifyContent: 'center' },
   right: { justifyContent: 'flex-end', alignItems: 'center' },

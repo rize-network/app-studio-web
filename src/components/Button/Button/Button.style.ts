@@ -1,6 +1,6 @@
-import { CSSProperties } from 'react';
+import { ViewProps } from 'app-studio';
 import { Shape, Size } from './Button.type';
-export const ButtonSizes: Record<Size, CSSProperties> = {
+export const ButtonSizes: Record<Size, ViewProps> = {
   // Defines a constant 'ButtonSizes' as a mapping from 'Size' to corresponding 'CSSProperties'.
   xs: {
     // Establishes style configuration for extra-small (xs) button size.
@@ -77,7 +77,7 @@ export const ButtonShapes: Record<Shape, number | string> = {
   pillShaped: 24,
 };
 // Sets the width, height, and padding for icons of medium size.
-export const IconSizes: Record<Size, CSSProperties> = {
+export const IconSizes: Record<Size, ViewProps> = {
   xs: {
     width: 24,
     height: 24,

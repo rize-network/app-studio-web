@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react';
-import { InputProps, Shadow } from 'app-studio';
+import React from 'react';
+import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../../utils/elevation';
 import { Shape, Size, TextFieldStyles, Variant } from './TextField.type';
 // The TextFieldProps interface extends InputProps and customizes the TextField component, omitting the 'size' prop from InputProps.
@@ -41,7 +41,7 @@ export interface TextFieldProps extends Omit<InputProps, 'size'> {
   // Optional Size enum to specify the size of the TextField.
   size?: Size;
   // Optional shadow property that could be of type Shadow, Elevation, or CSSProperties to give depth effect.
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
   // Optional Shape enum to specify the shape of the TextField's corners.
   shape?: Shape;
   // Optional custom styles to apply to the TextField component.
