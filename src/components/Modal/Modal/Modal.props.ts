@@ -65,7 +65,7 @@ export interface ModalType extends React.FunctionComponent<ModalProps> {
   /**
    * The overlay component of the modal.
    */
-  Overlay?: React.FC<OverlayProps>;
+  Overlay: React.FC<OverlayProps>;
 
   /**
    * The container component of the modal.

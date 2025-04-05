@@ -1,6 +1,8 @@
 import React from 'react';
-import type { ViewProps } from 'app-studio';
+import type { ViewProps as $ViewProps } from 'app-studio';
 import { View as $View } from 'app-studio';
+
+export type ViewProps = $ViewProps;
 
 export const Top = (props: ViewProps) => (
   <$View marginBottom="auto" {...props} />
