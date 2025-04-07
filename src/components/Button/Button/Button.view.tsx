@@ -121,6 +121,7 @@ const ButtonView: React.FC<Props> = ({
     <Element
       gap={8}
       as="button"
+      type="button"
       border="none"
       color="color.white"
       display="flex"
