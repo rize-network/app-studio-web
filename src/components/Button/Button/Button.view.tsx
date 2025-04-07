@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animation, Element, useTheme, View, ViewProps } from 'app-studio';
+import { Element, useTheme, Vertical, View, ViewProps } from 'app-studio';
 import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
 import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
@@ -9,13 +9,7 @@ import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
 var contrast = require('contrast');
 
-interface Props extends ButtonProps {
-  views?: {
-    container?: ViewProps;
-    link?: ViewProps;
-    horizontal?: ViewProps;
-  };
-}
+interface Props extends ButtonProps {}
 
 const ButtonView: React.FC<Props> = ({
   icon,
@@ -105,22 +99,22 @@ const ButtonView: React.FC<Props> = ({
         : buttonSizeStyles.width,
   };
   const changePadding = isIconRounded ? IconSizes[size] : ButtonSizes[size];
+
+  const Container = ['left', 'right'].includes(iconPosition)
+    ? Horizontal
+    : Vertical;
   const content = (
-    <Horizontal gap={10} {...views?.horizontal}>
+    <Container gap={10} alignItems="center" {...views?.container}>
       {isLoading && loaderPosition === 'left' && <Loader {...loaderProps} />}
-      {icon && iconPosition === 'left' && !isLoading && (
-        <View {...(isHovered ? { animate: Animation.jackInTheBox({}) } : {})}>
-          {icon}
-        </View>
+      {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
+        <View {...views?.icon}>{icon}</View>
       )}
       {children}
-      {icon && iconPosition === 'right' && !isLoading && (
-        <View {...(isHovered ? { animate: Animation.jackInTheBox({}) } : {})}>
-          {icon}
-        </View>
+      {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
+        <View {...views?.icon}>{icon}</View>
       )}
       {isLoading && loaderPosition === 'right' && <Loader {...loaderProps} />}
-    </Horizontal>
+    </Container>
   );
 
   return (

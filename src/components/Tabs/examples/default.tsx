@@ -1,5 +1,15 @@
 import React from 'react';
-import { Tabs, View, Text } from '../..'; // Assuming components are exported from index
+import {
+  Tabs,
+  View,
+  Text,
+  MoonIcon,
+  ShareIcon,
+  PanelIcon,
+  SaveIcon,
+  MinusIcon,
+  PauseIcon,
+} from '../..'; // Assuming components are exported from index
 
 // Example demonstrating basic usage of the Tabs component.
 export const Default = () => (
@@ -8,6 +18,7 @@ export const Default = () => (
     tabs={[
       {
         title: 'Product',
+        icon: <MoonIcon />,
         content: (
           <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
@@ -19,6 +30,7 @@ export const Default = () => (
       },
       {
         title: 'Services',
+        icon: <ShareIcon />,
         content: (
           <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
@@ -30,6 +42,7 @@ export const Default = () => (
       },
       {
         title: 'Playground',
+        icon: <PanelIcon />,
         content: (
           <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
@@ -41,6 +54,7 @@ export const Default = () => (
       },
       {
         title: 'Content',
+        icon: <SaveIcon />,
         content: (
           <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
@@ -52,6 +66,7 @@ export const Default = () => (
       },
       {
         title: 'Random',
+        icon: <PauseIcon />,
         content: (
           <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">

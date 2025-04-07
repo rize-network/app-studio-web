@@ -16,6 +16,7 @@ export const TabsView: React.FC<TabsViewProps> = ({
   views = {}, // Default to empty object
   renderTab,
   renderContent,
+  iconPosition = 'left', // Default to left
 }) => {
   // If there's no active tab (e.g., tabs array is empty), render nothing or a placeholder
   if (!activeTab) {
@@ -53,11 +54,10 @@ export const TabsView: React.FC<TabsViewProps> = ({
               // Example: Set variant based on active state (can be overridden by styles)
               variant={isActive ? 'filled' : 'ghost'}
               cursor="pointer" // Ensure pointer cursor
+              iconPosition={iconPosition} // Pass icon position prop
+              icon={tab.icon} // Conditionally render icon
               // Removed isAuto and margin={10} - should be controlled via views.tab if needed
             >
-              {/* Render tab icon if provided */}
-              {tab.icon}
-              {/* Render tab title */}
               <Text
                 // Apply base title styles and merge activeText styles if this tab is active
                 {...views.title}

@@ -58,4 +58,9 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
 
   // Optional props to be passed to the Link component.
   linkProps?: ViewProps;
+  views?: {
+    container?: ViewProps;
+    icon?: ViewProps;
+    link?: ViewProps;
+  };
 }

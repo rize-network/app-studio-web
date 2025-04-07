@@ -35,6 +35,7 @@ export interface TabsProps {
  * These props are derived or passed down from the main Tabs component.
  */
 export interface TabsViewProps {
+  iconPosition?: 'left' | 'right' | 'bottom' | 'top'; // Added iconPosition prop
   /** The original array of tab objects. */
   tabs: Tab[];
   /** The currently active tab object, or undefined if none is active. */
