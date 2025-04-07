@@ -20,5 +20,20 @@ export const IconButtons = () => (
       Delete
     </Button>
     <Button icon={<DustBinIcon widthHeight={16} />} isIconRounded isAuto />
+    <Button
+      icon={<DustBinIcon widthHeight={16} />}
+      height={48}
+      iconPosition="top"
+    >
+      Delete
+    </Button>
+    <Button
+      height={48}
+      icon={<DustBinIcon widthHeight={16} />}
+      shape={'pillShaped' as Shape}
+      iconPosition="bottom"
+    >
+      Delete
+    </Button>
   </Center>
 );

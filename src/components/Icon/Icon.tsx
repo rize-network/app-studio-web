@@ -843,6 +843,42 @@ export const PrintIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+export const MagicWandIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  strokeWidth = 1,
+  filled = true,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      {/* Main wand - thicker and better positioned */}
+      <rect
+        x="-3"
+        y="17"
+        width="15"
+        height="4"
+        rx="1"
+        transform="rotate(-40 2 13)"
+      />
+
+      {/* Star 1 - larger top right */}
+      <path d="M17 3L18 6L21 7L18 8L17 11L16 8L13 7L16 6L17 3Z" />
+
+      {/* Star 2 - middle size middle right */}
+      <path d="M21 9L21.7 11L23.5 12L21.7 13L21 15L20.3 13L18.5 12L20.3 11L21 9Z" />
+
+      {/* Star 3 - smaller bottom right */}
+      <path d="M16 15L16.7 16.5L18 17L16.7 17.5L16 19L15.3 17.5L14 17L15.3 16.5L16 15Z" />
+    </svg>
+  </IconWrapper>
+);
+
 export const SliderVerticalIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',

@@ -104,7 +104,7 @@ const ButtonView: React.FC<Props> = ({
     ? Horizontal
     : Vertical;
   const content = (
-    <Container gap={10} alignItems="center" {...views?.container}>
+    <Container gap={5} alignItems="center" {...views?.container}>
       {isLoading && loaderPosition === 'left' && <Loader {...loaderProps} />}
       {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
         <View {...views?.icon}>{icon}</View>
