@@ -1,7 +1,10 @@
 import { ViewProps } from 'app-studio';
 import { Position, Size, Variant } from './Sidebar.type';
 
-export const SidebarSizes: Record<Size, { expandedWidth: string; collapsedWidth: string }> = {
+export const SidebarSizes: Record<
+  Size,
+  { expandedWidth: string; collapsedWidth: string }
+> = {
   sm: {
     expandedWidth: '240px',
     collapsedWidth: '64px',

@@ -37,6 +37,7 @@ const PaginationPage = lazy(() => import('src/pages/pagination.page'));
 const PasswordPage = lazy(() => import('src/pages/password.page'));
 const SelectPage = lazy(() => import('src/pages/select.page'));
 const SeparatorPage = lazy(() => import('src/pages/separator.page'));
+const ResizablePage = lazy(() => import('src/pages/resizable.page'));
 const SidebarPage = lazy(() => import('src/pages/sidebar.page'));
 const SliderPage = lazy(() => import('src/pages/slider.page'));
 const SwitchPage = lazy(() => import('src/pages/switch.page'));
@@ -94,6 +95,7 @@ export const componentList = [
   { name: 'OTP Input', path: '/otpinput', element: <OTPInputPage /> },
   { name: 'Pagination', path: '/pagination', element: <PaginationPage /> },
   { name: 'Password', path: '/password', element: <PasswordPage /> },
+  { name: 'Resizable', path: '/resizable', element: <ResizablePage /> },
   { name: 'Select', path: '/select', element: <SelectPage /> },
   { name: 'Separator', path: '/separator', element: <SeparatorPage /> },
   { name: 'Sidebar', path: '/sidebar', element: <SidebarPage /> },

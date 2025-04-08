@@ -12,7 +12,12 @@ export interface ResizableContextType {
   variant: Variant;
   isResizing: boolean;
   setIsResizing: (isResizing: boolean) => void;
-  registerPanel: (id: string, initialSize: number, minSize?: number, maxSize?: number) => void;
+  registerPanel: (
+    id: string,
+    initialSize: number,
+    minSize?: number,
+    maxSize?: number
+  ) => void;
   unregisterPanel: (id: string) => void;
   getPanelSize: (id: string) => number;
   setPanelSize: (id: string, size: number) => void;

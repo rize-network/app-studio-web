@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  SidebarProps,
-  SidebarType,
-} from './Sidebar/Sidebar.props';
+import { SidebarProps, SidebarType } from './Sidebar/Sidebar.props';
 import { useSidebarState } from './Sidebar/Sidebar.state';
 import {
   SidebarProvider,
@@ -33,13 +30,8 @@ const SidebarComponent: React.FC<SidebarProps> = ({
   views,
   ...props
 }) => {
-  const {
-    isExpanded,
-    toggleExpanded,
-    expand,
-    collapse,
-    isMobile,
-  } = useSidebarState(defaultExpanded, expanded, onExpandedChange, breakpoint);
+  const { isExpanded, toggleExpanded, expand, collapse, isMobile } =
+    useSidebarState(defaultExpanded, expanded, onExpandedChange, breakpoint);
 
   return (
     <SidebarProvider

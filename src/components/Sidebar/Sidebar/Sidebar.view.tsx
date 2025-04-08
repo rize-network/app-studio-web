@@ -63,7 +63,11 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
       {...props}
     >
       {isExpanded ? (
-        <Horizontal width="100%" alignItems="center" justifyContent="space-between">
+        <Horizontal
+          width="100%"
+          alignItems="center"
+          justifyContent="space-between"
+        >
           {children}
           {showToggleButton && (
             <View
@@ -200,14 +204,16 @@ export const SidebarView: React.FC<SidebarProps> = ({
 
   // Determine if sidebar should be visible based on mobile state and breakpoint behavior
   const isVisible = !isMobile || (isMobile && breakpointBehavior !== 'hide');
-  
+
   // Determine if sidebar should be fixed or absolute based on mobile state and breakpoint behavior
-  const position_type = fixed || (isMobile && breakpointBehavior === 'overlay')
-    ? 'fixed'
-    : 'relative';
+  const position_type =
+    fixed || (isMobile && breakpointBehavior === 'overlay')
+      ? 'fixed'
+      : 'relative';
 
   // Determine if backdrop should be shown
-  const showBackdrop = hasBackdrop && isMobile && isExpanded && breakpointBehavior === 'overlay';
+  const showBackdrop =
+    hasBackdrop && isMobile && isExpanded && breakpointBehavior === 'overlay';
 
   return (
     <>
