@@ -22,6 +22,7 @@ const MessagePage = lazy(() => import('src/pages/message.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
 const PasswordPage = lazy(() => import('src/pages/password.page'));
 const SelectPage = lazy(() => import('src/pages/select.page'));
+const SliderPage = lazy(() => import('src/pages/slider.page'));
 const SwitchPage = lazy(() => import('src/pages/switch.page'));
 const TablePage = lazy(() => import('src/pages/table.page'));
 const TabsPage = lazy(() => import('src/pages/tabs.page'));
@@ -59,6 +60,8 @@ export const componentList = [
   { name: 'Modal', path: '/modal', element: <ModalPage /> },
   { name: 'Password', path: '/password', element: <PasswordPage /> },
   { name: 'Select', path: '/select', element: <SelectPage /> },
+  { name: 'Slider', path: '/slider', element: <SliderPage /> },
+
   { name: 'Switch', path: '/switch', element: <SwitchPage /> },
   { name: 'Table', path: '/table', element: <TablePage /> },
   { name: 'Tabs', path: '/tabs', element: <TabsPage /> },
