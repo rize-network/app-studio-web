@@ -11,12 +11,12 @@ export const SeparatorThicknesses = () => {
         <Text marginBottom={8}>Thin Thickness (Default)</Text>
         <Separator thickness="thin" />
       </View>
-      
+
       <View>
         <Text marginBottom={8}>Medium Thickness</Text>
         <Separator thickness="medium" />
       </View>
-      
+
       <View>
         <Text marginBottom={8}>Thick Thickness</Text>
         <Separator thickness="thick" />

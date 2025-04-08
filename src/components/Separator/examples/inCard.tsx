@@ -9,18 +9,21 @@ export const SeparatorInCard = () => {
   return (
     <Card variant="outlined" shape="rounded" isFullWidth>
       <Card.Header>
-        <Text fontWeight="bold" size="lg">Card Title</Text>
+        <Text fontWeight="bold" size="lg">
+          Card Title
+        </Text>
       </Card.Header>
       <Card.Content>
         <Vertical gap={16}>
           <Text>
-            This is the first section of content in the card. The separator below
-            helps to organize the content into distinct sections.
+            This is the first section of content in the card. The separator
+            below helps to organize the content into distinct sections.
           </Text>
           <Separator spacing="8px" />
           <Text>
-            This is the second section of content. Notice how the separator creates
-            a clear visual distinction between content areas within the card.
+            This is the second section of content. Notice how the separator
+            creates a clear visual distinction between content areas within the
+            card.
           </Text>
           <Separator label="ADDITIONAL INFORMATION" spacing="8px" />
           <Text>
@@ -30,7 +33,9 @@ export const SeparatorInCard = () => {
         </Vertical>
       </Card.Content>
       <Card.Footer>
-        <Text size="sm" color="color.gray.500">Card Footer</Text>
+        <Text size="sm" color="color.gray.500">
+          Card Footer
+        </Text>
       </Card.Footer>
     </Card>
   );

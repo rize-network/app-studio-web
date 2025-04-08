@@ -14,8 +14,8 @@ export const DefaultSeparator = () => {
       </Text>
       <Separator />
       <Text>
-        This is some text below the separator. Notice how the separator creates a
-        clear visual distinction between content areas.
+        This is some text below the separator. Notice how the separator creates
+        a clear visual distinction between content areas.
       </Text>
     </Vertical>
   );

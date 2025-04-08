@@ -11,12 +11,12 @@ export const SeparatorVariants = () => {
         <Text marginBottom={8}>Solid Variant (Default)</Text>
         <Separator variant="solid" />
       </View>
-      
+
       <View>
         <Text marginBottom={8}>Dashed Variant</Text>
         <Separator variant="dashed" />
       </View>
-      
+
       <View>
         <Text marginBottom={8}>Dotted Variant</Text>
         <Separator variant="dotted" />

@@ -12,7 +12,7 @@ export const SeparatorOrientations = () => {
         <Text marginBottom={8}>Horizontal Orientation (Default)</Text>
         <Separator orientation="horizontal" />
       </View>
-      
+
       <View>
         <Text marginBottom={8}>Vertical Orientation</Text>
         <Horizontal height={100} alignItems="center">
