@@ -14,24 +14,26 @@ export const AccordionVariants = () => {
             </Accordion.Header>
             <Accordion.Content>
               <Text>
-                This is the content for the first item in the outline variant accordion.
+                This is the content for the first item in the outline variant
+                accordion.
               </Text>
             </Accordion.Content>
           </Accordion.Item>
-          
+
           <Accordion.Item id="outline-2">
             <Accordion.Header>
               <Text fontWeight="bold">Second Item</Text>
             </Accordion.Header>
             <Accordion.Content>
               <Text>
-                This is the content for the second item in the outline variant accordion.
+                This is the content for the second item in the outline variant
+                accordion.
               </Text>
             </Accordion.Content>
           </Accordion.Item>
         </Accordion>
       </Vertical>
-      
+
       <Vertical gap={10}>
         <Text fontWeight="bold">Filled Variant</Text>
         <Accordion variant="filled">
@@ -41,24 +43,26 @@ export const AccordionVariants = () => {
             </Accordion.Header>
             <Accordion.Content>
               <Text>
-                This is the content for the first item in the filled variant accordion.
+                This is the content for the first item in the filled variant
+                accordion.
               </Text>
             </Accordion.Content>
           </Accordion.Item>
-          
+
           <Accordion.Item id="filled-2">
             <Accordion.Header>
               <Text fontWeight="bold">Second Item</Text>
             </Accordion.Header>
             <Accordion.Content>
               <Text>
-                This is the content for the second item in the filled variant accordion.
+                This is the content for the second item in the filled variant
+                accordion.
               </Text>
             </Accordion.Content>
           </Accordion.Item>
         </Accordion>
       </Vertical>
-      
+
       <Vertical gap={10}>
         <Text fontWeight="bold">Sharp Shape</Text>
         <Accordion shape="sharp" variant="outline">
@@ -68,18 +72,20 @@ export const AccordionVariants = () => {
             </Accordion.Header>
             <Accordion.Content>
               <Text>
-                This is the content for the first item in the sharp shape accordion.
+                This is the content for the first item in the sharp shape
+                accordion.
               </Text>
             </Accordion.Content>
           </Accordion.Item>
-          
+
           <Accordion.Item id="sharp-2">
             <Accordion.Header>
               <Text fontWeight="bold">Second Item</Text>
             </Accordion.Header>
             <Accordion.Content>
               <Text>
-                This is the content for the second item in the sharp shape accordion.
+                This is the content for the second item in the sharp shape
+                accordion.
               </Text>
             </Accordion.Content>
           </Accordion.Item>

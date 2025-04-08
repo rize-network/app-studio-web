@@ -1,19 +1,22 @@
 import React from 'react';
-import { NavigationMenuProps, NavigationMenuType } from './NavigationMenu/NavigationMenu.props';
+import {
+  NavigationMenuProps,
+  NavigationMenuType,
+} from './NavigationMenu/NavigationMenu.props';
 import { useNavigationMenuState } from './NavigationMenu/NavigationMenu.state';
-import { 
-  NavigationMenuProvider, 
-  NavigationMenuList, 
-  NavigationMenuItem, 
-  NavigationMenuTrigger, 
+import {
+  NavigationMenuProvider,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
   NavigationMenuContent,
-  NavigationMenuView
+  NavigationMenuView,
 } from './NavigationMenu/NavigationMenu.view';
 
 /**
  * NavigationMenu component for creating navigation menus with optional nested items.
  */
-const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({ 
+const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
   items,
   orientation = 'vertical',
   size = 'md',
@@ -24,29 +27,26 @@ const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
   views,
   ...props
 }) => {
-  const { 
-    activeItemId, 
-    setActiveItemId, 
-    expandedItemIds, 
-    toggleExpandedItem, 
-    isItemExpanded 
-  } = useNavigationMenuState(
-    defaultActiveItemId,
-    defaultExpandedItemIds
-  );
+  const {
+    activeItemId,
+    setActiveItemId,
+    expandedItemIds,
+    toggleExpandedItem,
+    isItemExpanded,
+  } = useNavigationMenuState(defaultActiveItemId, defaultExpandedItemIds);
 
   return (
-    <NavigationMenuProvider 
-      value={{ 
-        activeItemId, 
-        setActiveItemId, 
-        expandedItemIds, 
-        toggleExpandedItem, 
+    <NavigationMenuProvider
+      value={{
+        activeItemId,
+        setActiveItemId,
+        expandedItemIds,
+        toggleExpandedItem,
         isItemExpanded,
         orientation,
         size,
         variant,
-        onItemActivate
+        onItemActivate,
       }}
     >
       <NavigationMenuView

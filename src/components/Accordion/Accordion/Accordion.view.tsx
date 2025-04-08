@@ -1,10 +1,10 @@
 import React, { createContext, useContext } from 'react';
 import { View, Horizontal, Vertical } from 'app-studio';
 import { AccordionContextType } from './Accordion.type';
-import { 
-  AccordionHeaderProps, 
-  AccordionContentProps, 
-  AccordionItemProps 
+import {
+  AccordionHeaderProps,
+  AccordionContentProps,
+  AccordionItemProps,
 } from './Accordion.props';
 import { AccordionShapes, AccordionVariants } from './Accordion.style';
 
@@ -31,7 +31,9 @@ export const AccordionProvider: React.FC<{
 export const useAccordionContext = () => {
   const context = useContext(AccordionContext);
   if (!context) {
-    throw new Error('useAccordionContext must be used within an AccordionProvider');
+    throw new Error(
+      'useAccordionContext must be used within an AccordionProvider'
+    );
   }
   return context;
 };
@@ -73,12 +75,9 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 };
 
 // Accordion Header component
-export const AccordionHeader: React.FC<AccordionHeaderProps & { id?: string; isExpanded?: boolean }> = ({
-  children,
-  id,
-  isExpanded,
-  views,
-}) => {
+export const AccordionHeader: React.FC<
+  AccordionHeaderProps & { id?: string; isExpanded?: boolean }
+> = ({ children, id, isExpanded, views }) => {
   const { toggleItem } = useAccordionContext();
 
   const handleClick = () => {
@@ -126,11 +125,9 @@ export const AccordionHeader: React.FC<AccordionHeaderProps & { id?: string; isE
 };
 
 // Accordion Content component
-export const AccordionContent: React.FC<AccordionContentProps & { isExpanded?: boolean }> = ({
-  children,
-  isExpanded,
-  views,
-}) => {
+export const AccordionContent: React.FC<
+  AccordionContentProps & { isExpanded?: boolean }
+> = ({ children, isExpanded, views }) => {
   if (!isExpanded) {
     return null;
   }
@@ -155,12 +152,7 @@ export const AccordionView: React.FC<{
   shape?: 'sharp' | 'rounded';
   variant?: 'default' | 'outline' | 'filled';
   views?: any;
-}> = ({
-  children,
-  shape = 'rounded',
-  variant = 'default',
-  views,
-}) => {
+}> = ({ children, shape = 'rounded', variant = 'default', views }) => {
   return (
     <Vertical
       width="100%"

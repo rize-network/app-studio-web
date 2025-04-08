@@ -4,14 +4,18 @@ export const useNavigationMenuState = (
   defaultActiveItemId: string | null = null,
   defaultExpandedItemIds: string[] = []
 ) => {
-  const [activeItemId, setActiveItemId] = useState<string | null>(defaultActiveItemId);
-  const [expandedItemIds, setExpandedItemIds] = useState<string[]>(defaultExpandedItemIds);
+  const [activeItemId, setActiveItemId] = useState<string | null>(
+    defaultActiveItemId
+  );
+  const [expandedItemIds, setExpandedItemIds] = useState<string[]>(
+    defaultExpandedItemIds
+  );
 
   const toggleExpandedItem = (itemId: string) => {
     setExpandedItemIds((prevExpandedItemIds) => {
       // Check if the item is already expanded
       const isExpanded = prevExpandedItemIds.includes(itemId);
-      
+
       if (isExpanded) {
         // If expanded, remove it from the list
         return prevExpandedItemIds.filter((id) => id !== itemId);

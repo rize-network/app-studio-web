@@ -4,7 +4,7 @@ import {
   DefaultNavigationMenu,
   HorizontalNavigationMenu,
   NavigationMenuVariants,
-  NavigationMenuSizes
+  NavigationMenuSizes,
 } from 'src/components/NavigationMenu/examples';
 
 const NavigationMenuPage = () => {
