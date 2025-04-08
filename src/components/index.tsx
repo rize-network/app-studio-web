@@ -36,6 +36,7 @@ export * as Icon from './Icon/Icon';
 export * from './Toggle/Toggle';
 export * from './ToggleGroup/ToggleGroup';
 export * from './DragAndDrop/DragAndDrop';
+export * from './DropdownMenu/DropdownMenu';
 export * from './HoverCard/HoverCard';
 
 export * from './Accordion/Accordion/Accordion.props';
@@ -70,3 +71,4 @@ export * from './Toggle/Toggle/Toggle.props';
 export * from './ToggleGroup/ToggleGroup/ToggleGroup.props';
 export * from './HoverCard/HoverCard/HoverCard.props';
 export * from './NavigationMenu/NavigationMenu/NavigationMenu.props';
+export * from './DropdownMenu/DropdownMenu/DropdownMenu.props';

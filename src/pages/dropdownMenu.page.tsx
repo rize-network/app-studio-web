@@ -1,13 +1,14 @@
 import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
-  DefaultContextMenu,
-  ContextMenuVariants,
-  ContextMenuSizes,
-  CustomContextMenu,
-} from 'src/components/ContextMenu/examples';
+  DefaultDropdownMenu,
+  DropdownMenuPositions,
+  DropdownMenuVariants,
+  DropdownMenuSizes,
+  CustomDropdownMenu
+} from 'src/components/DropdownMenu/examples';
 
-const ContextMenuPage = () => {
+const DropdownMenuPage = () => {
   return (
     <View>
       <table className="table" cellSpacing={0}>
@@ -20,28 +21,35 @@ const ContextMenuPage = () => {
           <tr>
             <td>Default</td>
             <td>
-              <DefaultContextMenu />
+              <DefaultDropdownMenu />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Positions</td>
+            <td>
+              <DropdownMenuPositions />
             </td>
           </tr>
 
           <tr>
             <td>Variants</td>
             <td>
-              <ContextMenuVariants />
+              <DropdownMenuVariants />
             </td>
           </tr>
 
           <tr>
             <td>Sizes</td>
             <td>
-              <ContextMenuSizes />
+              <DropdownMenuSizes />
             </td>
           </tr>
 
           <tr>
             <td>Custom</td>
             <td>
-              <CustomContextMenu />
+              <CustomDropdownMenu />
             </td>
           </tr>
         </tbody>
@@ -50,4 +58,4 @@ const ContextMenuPage = () => {
   );
 };
 
-export default ContextMenuPage;
+export default DropdownMenuPage;

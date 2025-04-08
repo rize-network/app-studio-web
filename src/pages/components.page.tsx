@@ -17,6 +17,7 @@ const ComboBoxPage = lazy(() => import('src/pages/comboBox.page'));
 const ContextMenuPage = lazy(() => import('src/pages/contextMenu.page'));
 const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
 const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
+const DropdownMenuPage = lazy(() => import('src/pages/dropdownMenu.page'));
 const FormikPage = lazy(() => import('src/pages/formik.page'));
 const HomePage = lazy(() => import('src/pages/home.page'));
 const HorizontalPage = lazy(() => import('src/pages/horizontal.page'));
@@ -57,6 +58,11 @@ export const componentList = [
     element: <CountryPickerPage />,
   },
   { name: 'DatePicker', path: '/datepicker', element: <DatePickerPage /> },
+  {
+    name: 'DropdownMenu',
+    path: '/dropdownmenu',
+    element: <DropdownMenuPage />,
+  },
   { name: 'Formik', path: '/formik', element: <FormikPage /> },
   { name: 'Home', path: '/home', element: <HomePage /> },
   { name: 'Horizontal', path: '/horizontal', element: <HorizontalPage /> },

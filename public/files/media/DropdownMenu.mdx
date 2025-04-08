@@ -1,0 +1,205 @@
+# DropdownMenu
+
+A dropdown menu component that appears when clicking on a trigger element.
+
+### **Import**
+  ```tsx
+  import { DropdownMenu } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { DropdownMenu } from '../DropdownMenu';
+import { Button } from '../../Button/Button';
+import { CopyIcon, EditIcon, DeleteIcon } from '../../Icon/Icon';
+
+export const DefaultDropdownMenu = () => {
+  const items = [
+    {
+      id: 'copy',
+      label: 'Copy',
+      icon: <CopyIcon widthHeight={16} />,
+      onClick: () => alert('Copy clicked')
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <EditIcon widthHeight={16} />,
+      onClick: () => alert('Edit clicked')
+    },
+    {
+      id: 'divider-1',
+      divider: true
+    },
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: <DeleteIcon widthHeight={16} />,
+      onClick: () => alert('Delete clicked')
+    }
+  ];
+
+  return (
+    <DropdownMenu 
+      trigger={<Button>Open Menu</Button>}
+      items={items}
+    />
+  );
+};
+```
+
+### **Submenu**
+Create nested dropdown menus with submenus.
+
+```tsx
+import React from 'react';
+import { DropdownMenu } from '../DropdownMenu';
+import { Button } from '../../Button/Button';
+import { 
+  CopyIcon, 
+  EditIcon, 
+  DownloadIcon, 
+  ShareIcon 
+} from '../../Icon/Icon';
+
+export const SubmenuDropdownMenu = () => {
+  const items = [
+    {
+      id: 'copy',
+      label: 'Copy',
+      icon: <CopyIcon widthHeight={16} />,
+      onClick: () => alert('Copy clicked')
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <EditIcon widthHeight={16} />,
+      onClick: () => alert('Edit clicked')
+    },
+    {
+      id: 'more',
+      label: 'More Options',
+      items: [
+        {
+          id: 'download',
+          label: 'Download',
+          icon: <DownloadIcon widthHeight={16} />,
+          onClick: () => alert('Download clicked')
+        },
+        {
+          id: 'share',
+          label: 'Share',
+          icon: <ShareIcon widthHeight={16} />,
+          onClick: () => alert('Share clicked')
+        }
+      ]
+    }
+  ];
+
+  return (
+    <DropdownMenu 
+      trigger={<Button>Open Menu</Button>}
+      items={items}
+    />
+  );
+};
+```
+
+### **Positioning**
+Control the position and alignment of the dropdown menu.
+
+```tsx
+import React from 'react';
+import { DropdownMenu } from '../DropdownMenu';
+import { Button } from '../../Button/Button';
+import { CopyIcon, EditIcon } from '../../Icon/Icon';
+
+export const PositionedDropdownMenu = () => {
+  const items = [
+    {
+      id: 'copy',
+      label: 'Copy',
+      icon: <CopyIcon widthHeight={16} />,
+      onClick: () => alert('Copy clicked')
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <EditIcon widthHeight={16} />,
+      onClick: () => alert('Edit clicked')
+    }
+  ];
+
+  return (
+    <>
+      <DropdownMenu 
+        trigger={<Button>Bottom (Default)</Button>}
+        items={items}
+        side="bottom"
+        align="start"
+      />
+      
+      <DropdownMenu 
+        trigger={<Button>Top Center</Button>}
+        items={items}
+        side="top"
+        align="center"
+      />
+      
+      <DropdownMenu 
+        trigger={<Button>Right End</Button>}
+        items={items}
+        side="right"
+        align="end"
+      />
+    </>
+  );
+};
+```
+
+### **Custom Styling**
+Customize the appearance of the dropdown menu.
+
+```tsx
+import React from 'react';
+import { DropdownMenu } from '../DropdownMenu';
+import { Button } from '../../Button/Button';
+import { CopyIcon, EditIcon } from '../../Icon/Icon';
+
+export const CustomDropdownMenu = () => {
+  const items = [
+    {
+      id: 'copy',
+      label: 'Copy',
+      icon: <CopyIcon widthHeight={16} />,
+      onClick: () => alert('Copy clicked')
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <EditIcon widthHeight={16} />,
+      onClick: () => alert('Edit clicked')
+    }
+  ];
+
+  return (
+    <DropdownMenu 
+      trigger={<Button variant="outline">Custom Menu</Button>}
+      items={items}
+      views={{
+        menu: {
+          backgroundColor: 'color.primary',
+          color: 'white',
+          borderRadius: '8px',
+        },
+        item: {
+          _hover: {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          }
+        }
+      }}
+    />
+  );
+};
+```

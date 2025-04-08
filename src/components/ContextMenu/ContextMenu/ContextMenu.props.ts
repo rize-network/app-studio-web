@@ -1,12 +1,12 @@
 import React from 'react';
 import { ViewProps } from 'app-studio';
-import { 
-  ContextMenuItem, 
-  ContextMenuStyles, 
-  Size, 
+import {
+  ContextMenuItem,
+  ContextMenuStyles,
+  Size,
   Variant,
   Position,
-  Alignment
+  Alignment,
 } from './ContextMenu.type';
 
 export interface ContextMenuProps {
