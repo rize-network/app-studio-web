@@ -9,6 +9,9 @@ import {
   StepValuesDemo,
 } from 'src/components/Slider/examples/stepValues';
 import { VariantsDemo } from 'src/components/Slider/examples/variants';
+import { VerticalDemo } from 'src/components/Slider/examples/vertical';
+import { TooltipDemo } from 'src/components/Slider/examples/tooltip';
+import { ControlledDemo } from 'src/components/Slider/examples/controlled';
 
 export const LinkPage = () => {
   return (
@@ -66,6 +69,27 @@ export const LinkPage = () => {
           <td>Pricing Tiers</td>
           <td>
             <PricingTiersDemo />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Controlled Slider</td>
+          <td>
+            <ControlledDemo />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Vertical Slider</td>
+          <td>
+            <VerticalDemo />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Tooltip</td>
+          <td>
+            <TooltipDemo />
           </td>
         </tr>
       </tbody>

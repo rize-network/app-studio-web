@@ -1,0 +1,90 @@
+# HoverCard
+
+A floating card that appears when hovering over a trigger element.
+
+### **Import**
+  ```tsx
+  import { HoverCard } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { HoverCard } from '../HoverCard';
+import { Button } from '../../Button/Button';
+import { Text } from '../../Text/Text';
+
+export const DefaultHoverCard = () => {
+  return (
+    <HoverCard>
+      <HoverCard.Trigger>
+        <Button>Hover Me</Button>
+      </HoverCard.Trigger>
+      <HoverCard.Content>
+        <Text>
+          The React Framework – created and maintained by @vercel.
+        </Text>
+      </HoverCard.Content>
+    </HoverCard>
+  );
+};
+```
+
+### **Positioning**
+You can control the position of the HoverCard content using the `side` and `align` props.
+
+```tsx
+import React from 'react';
+import { HoverCard } from '../HoverCard';
+import { Button } from '../../Button/Button';
+import { Text } from '../../Text/Text';
+
+export const PositionedHoverCard = () => {
+  return (
+    <HoverCard>
+      <HoverCard.Trigger>
+        <Button>Hover Me</Button>
+      </HoverCard.Trigger>
+      <HoverCard.Content side="top" align="center">
+        <Text>
+          This content appears above the trigger.
+        </Text>
+      </HoverCard.Content>
+    </HoverCard>
+  );
+};
+```
+
+### **Custom Styling**
+You can customize the appearance of the HoverCard using the `views` prop.
+
+```tsx
+import React from 'react';
+import { HoverCard } from '../HoverCard';
+import { Button } from '../../Button/Button';
+import { Text } from '../../Text/Text';
+
+export const StyledHoverCard = () => {
+  return (
+    <HoverCard>
+      <HoverCard.Trigger>
+        <Button variant="outline">Custom Styled HoverCard</Button>
+      </HoverCard.Trigger>
+      <HoverCard.Content
+        views={{
+          container: {
+            backgroundColor: 'color.primary',
+            color: 'white',
+            borderRadius: '8px',
+            padding: '16px',
+          },
+        }}
+      >
+        <Text color="white">
+          This HoverCard has custom styling with a primary background color.
+        </Text>
+      </HoverCard.Content>
+    </HoverCard>
+  );
+};
+```

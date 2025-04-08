@@ -1,5 +1,5 @@
 import { ViewProps } from 'app-studio';
-import { Shape, Size, Variant } from './Slider.type';
+import { Orientation, Shape, Size, Variant } from './Slider.type';
 
 export const SliderSizes: Record<Size, ViewProps> = {
   xs: {
@@ -62,5 +62,35 @@ export const SliderVariants: Record<Variant, ViewProps> = {
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'color.blueGray.300',
+  },
+};
+
+// Maps Size enum to track height/width and thumb size for the new implementation
+export const EnhancedSliderSizes: Record<
+  Size,
+  { trackCrossAxisSize: number; thumbSize: number }
+> = {
+  xs: { trackCrossAxisSize: 4, thumbSize: 12 },
+  sm: { trackCrossAxisSize: 6, thumbSize: 16 },
+  md: { trackCrossAxisSize: 8, thumbSize: 20 },
+  lg: { trackCrossAxisSize: 10, thumbSize: 24 },
+  xl: { trackCrossAxisSize: 12, thumbSize: 28 },
+};
+
+// Basic styles for horizontal and vertical orientation
+export const OrientationStyles: Record<Orientation, ViewProps> = {
+  horizontal: {
+    width: '100%',
+    minWidth: '120px', // Ensure a minimum clickable area
+    height: 'auto', // Height determined by track/thumb size + padding
+    flexDirection: 'row',
+    paddingVertical: 8, // Add padding for easier thumb interaction
+  },
+  vertical: {
+    height: '100%',
+    minHeight: '120px', // Ensure a minimum clickable area
+    width: 'auto', // Width determined by track/thumb size + padding
+    flexDirection: 'column-reverse', // Place track visually bottom-to-top
+    paddingHorizontal: 8, // Add padding for easier thumb interaction
   },
 };
