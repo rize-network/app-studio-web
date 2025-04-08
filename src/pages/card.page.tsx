@@ -6,7 +6,7 @@ import {
   StructuredDemo,
   ShapesDemo,
   SizesDemo,
-  CustomDemo
+  CustomDemo,
 } from 'src/components/Card/examples';
 
 const CardPage = () => {

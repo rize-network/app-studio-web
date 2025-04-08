@@ -10,6 +10,7 @@ import {
   FormikSelectExemple,
   FormikSwitchExemple,
   FormikSliderExample,
+  FormikOTPInputExample,
 } from '../components/Formik/examples';
 import { FormikComboBoxDemo } from '../components/Formik/examples/FormikComboBox';
 
@@ -80,6 +81,12 @@ export const FormikPage = () => {
             <td>Slider</td>
             <td>
               <FormikSliderExample />
+            </td>
+          </tr>
+          <tr>
+            <td>OTP Input</td>
+            <td>
+              <FormikOTPInputExample />
             </td>
           </tr>
         </tbody>

@@ -65,8 +65,4 @@ export interface ContentProps extends Omit<ViewProps, 'size'> {
    * CSS styles applied to the Content component. Default value is an empty object.
    */
   views?: TextFieldStyles;
-  /**
-   * The shadow effect applied to the Content component.
-   */
-  shadow?: Shadow | Elevation | ViewProps;
 }

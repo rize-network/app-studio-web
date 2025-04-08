@@ -74,9 +74,9 @@ export const CustomDemo = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Card 
-              variant="elevated" 
-              width="80%" 
+            <Card
+              variant="elevated"
+              width="80%"
               maxWidth="500px"
               padding="20px"
             >
@@ -86,9 +86,7 @@ export const CustomDemo = () => {
                 </Text>
               </Card.Header>
               <Card.Content>
-                <Text fontSize="16px">
-                  {card.description}
-                </Text>
+                <Text fontSize="16px">{card.description}</Text>
               </Card.Content>
               <Card.Footer>
                 <Horizontal justifyContent="flex-end">

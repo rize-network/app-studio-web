@@ -14,11 +14,7 @@ export const AutoPlayDemo = () => {
 
   return (
     <View height="300px" width="100%">
-      <Carousel 
-        autoPlay 
-        autoPlayInterval={2000} 
-        pauseOnHover
-      >
+      <Carousel autoPlay autoPlayInterval={2000} pauseOnHover>
         {slides.map((slide, index) => (
           <View
             key={index}

@@ -12,14 +12,12 @@ export const VariantsDemo = () => {
           This is a card with the default variant.
         </Text>
       </Card>
-      
+
       <Card variant="outlined">
         <Text>Outlined Card</Text>
-        <Text color="color.gray.500">
-          This card has a border around it.
-        </Text>
+        <Text color="color.gray.500">This card has a border around it.</Text>
       </Card>
-      
+
       <Card variant="elevated">
         <Text>Elevated Card</Text>
         <Text color="color.gray.500">

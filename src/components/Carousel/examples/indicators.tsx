@@ -23,10 +23,7 @@ export const IndicatorsDemo = () => {
           <Text marginBottom="10px" fontWeight="bold">
             {variant.charAt(0).toUpperCase() + variant.slice(1)} Indicators
           </Text>
-          <Carousel 
-            indicatorVariant={variant}
-            indicatorPosition="bottom"
-          >
+          <Carousel indicatorVariant={variant} indicatorPosition="bottom">
             {slides.map((slide, index) => (
               <View
                 key={index}

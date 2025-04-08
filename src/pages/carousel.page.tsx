@@ -5,7 +5,7 @@ import {
   AutoPlayDemo,
   IndicatorsDemo,
   NavigationDemo,
-  CustomDemo
+  CustomDemo,
 } from 'src/components/Carousel/examples';
 
 const CarouselPage = () => {

@@ -2,6 +2,7 @@ export * from './FormikCheckbox';
 export * from './FormikComboBox';
 export * from './FormikCountryPicker';
 export * from './FormikDatePicker';
+export * from './FormikOTPInput';
 export * from './FormikPassword';
 export * from './FormikSelect';
 export * from './FormikSlider';

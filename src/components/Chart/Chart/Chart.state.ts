@@ -19,7 +19,7 @@ export const useChartState = ({
 }: ChartStateProps) => {
   // State for animation progress (0 to 1)
   const [animationProgress, setAnimationProgress] = useState(animated ? 0 : 1);
-  
+
   // State for tooltip
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
@@ -32,42 +32,42 @@ export const useChartState = ({
     y: 0,
     content: '',
   });
-  
+
   // Reference to animation frame
   const animationRef = useRef<number | null>(null);
-  
+
   // Reference to chart container
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   // Handle animation
   useEffect(() => {
     if (!animated) {
       setAnimationProgress(1);
       return;
     }
-    
+
     const startTime = Date.now();
-    
+
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / animationDuration, 1);
-      
+
       setAnimationProgress(progress);
-      
+
       if (progress < 1) {
         animationRef.current = requestAnimationFrame(animate);
       }
     };
-    
+
     animationRef.current = requestAnimationFrame(animate);
-    
+
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
   }, [animated, animationDuration]);
-  
+
   // Process data for charts
   const processedData = useCallback(() => {
     if (data) {
@@ -79,29 +79,32 @@ export const useChartState = ({
         })),
       };
     }
-    
+
     if (dataPoints) {
       return dataPoints.map((point, index) => ({
         ...point,
         color: point.color || DEFAULT_COLORS[index % DEFAULT_COLORS.length],
       }));
     }
-    
+
     return null;
   }, [data, dataPoints]);
-  
+
   // Handle tooltip show
-  const showTooltip = useCallback((x: number, y: number, content: string) => {
-    if (!showTooltips) return;
-    
-    setTooltip({
-      visible: true,
-      x,
-      y,
-      content,
-    });
-  }, [showTooltips]);
-  
+  const showTooltip = useCallback(
+    (x: number, y: number, content: string) => {
+      if (!showTooltips) return;
+
+      setTooltip({
+        visible: true,
+        x,
+        y,
+        content,
+      });
+    },
+    [showTooltips]
+  );
+
   // Handle tooltip hide
   const hideTooltip = useCallback(() => {
     setTooltip((prev) => ({
@@ -109,17 +112,17 @@ export const useChartState = ({
       visible: false,
     }));
   }, []);
-  
+
   // Calculate chart dimensions
   const getChartDimensions = useCallback(() => {
     if (!containerRef.current) {
       return { width: 0, height: 0 };
     }
-    
+
     const { width, height } = containerRef.current.getBoundingClientRect();
     return { width, height };
   }, []);
-  
+
   return {
     animationProgress,
     tooltip,

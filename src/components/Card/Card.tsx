@@ -1,6 +1,11 @@
 import React from 'react';
 import { CardProps, CardType } from './Card/Card.props';
-import { CardView, CardHeader, CardContent, CardFooter } from './Card/Card.view';
+import {
+  CardView,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from './Card/Card.view';
 
 /**
  * Card component for displaying content in a contained, styled box.

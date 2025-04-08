@@ -1,0 +1,150 @@
+# Pagination
+
+A flexible pagination component for navigating through pages of content.
+
+### **Import**
+  ```tsx
+  import { Pagination } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '../Pagination';
+
+export const DefaultPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={setCurrentPage}
+    />
+  );
+};
+```
+
+### **Variants**
+The Pagination component supports different visual variants:
+
+```tsx
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  variant="default"
+/>
+
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  variant="filled"
+/>
+
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  variant="outline"
+/>
+```
+
+### **Sizes**
+The Pagination component supports different sizes:
+
+```tsx
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  size="sm"
+/>
+
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  size="md"
+/>
+
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  size="lg"
+/>
+```
+
+### **Shapes**
+The Pagination component supports different button shapes:
+
+```tsx
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  shape="rounded"
+/>
+
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  shape="square"
+/>
+
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  shape="circular"
+/>
+```
+
+### **Advanced Usage**
+The Pagination component can be customized with additional features:
+
+```tsx
+<Pagination
+  currentPage={currentPage}
+  totalPages={totalPages}
+  onPageChange={setCurrentPage}
+  pageSize={pageSize}
+  onPageSizeChange={setPageSize}
+  showPageSizeSelector={true}
+  showFirstLastButtons={true}
+  maxPageButtons={7}
+  variant="outline"
+/>
+```
+
+### **Table Integration**
+The Pagination component can be integrated with the Table component:
+
+```tsx
+<Table.Template
+  columns={columns}
+  data={getCurrentPageData()}
+/>
+
+<View marginTop={16} display="flex" justifyContent="space-between" alignItems="center">
+  <Text>
+    Showing {(currentPage - 1) * pageSize + 1} to {Math.min(currentPage * pageSize, totalItems)} of {totalItems} entries
+  </Text>
+  
+  <Pagination
+    currentPage={currentPage}
+    totalPages={totalPages}
+    onPageChange={setCurrentPage}
+    pageSize={pageSize}
+    onPageSizeChange={setPageSize}
+    showPageSizeSelector={true}
+    showPageInfo={false}
+    variant="outline"
+    size="sm"
+  />
+</View>
+```

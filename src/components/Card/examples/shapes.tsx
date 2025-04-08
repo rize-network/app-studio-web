@@ -6,7 +6,7 @@ import { Shape } from '../Card/Card.type';
 
 export const ShapesDemo = () => {
   const shapes: Shape[] = ['sharp', 'rounded', 'pillShaped'];
-  
+
   return (
     <Vertical gap={20}>
       {shapes.map((shape) => (

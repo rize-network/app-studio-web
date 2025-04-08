@@ -29,8 +29,11 @@ const LinkPage = lazy(() => import('src/pages/link.page'));
 const LoaderPage = lazy(() => import('src/pages/loader.page'));
 const IconPage = lazy(() => import('src/pages/icon.page'));
 const MessagePage = lazy(() => import('src/pages/message.page'));
+const MenubarPage = lazy(() => import('src/pages/menubar.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
 const NavigationMenuPage = lazy(() => import('src/pages/navigationMenu.page'));
+const OTPInputPage = lazy(() => import('src/pages/otpInput.page'));
+const PaginationPage = lazy(() => import('src/pages/pagination.page'));
 const PasswordPage = lazy(() => import('src/pages/password.page'));
 const SelectPage = lazy(() => import('src/pages/select.page'));
 const SliderPage = lazy(() => import('src/pages/slider.page'));
@@ -79,12 +82,15 @@ export const componentList = [
   { name: 'Drag and Drop', path: '/dragAndDrop', element: <DragAndDropPage /> },
 
   { name: 'Message', path: '/message', element: <MessagePage /> },
+  { name: 'Menubar', path: '/menubar', element: <MenubarPage /> },
   { name: 'Modal', path: '/modal', element: <ModalPage /> },
   {
     name: 'NavigationMenu',
     path: '/navigationmenu',
     element: <NavigationMenuPage />,
   },
+  { name: 'OTP Input', path: '/otpinput', element: <OTPInputPage /> },
+  { name: 'Pagination', path: '/pagination', element: <PaginationPage /> },
   { name: 'Password', path: '/password', element: <PasswordPage /> },
   { name: 'Select', path: '/select', element: <SelectPage /> },
   { name: 'Slider', path: '/slider', element: <SliderPage /> },

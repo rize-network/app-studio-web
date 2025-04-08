@@ -34,14 +34,14 @@ export const CustomDemo = () => {
           Custom Styled Card
         </Text>
       </Card.Header>
-      
+
       <Card.Content>
         <Text>
-          This card has custom styling applied to all its parts.
-          You can customize the container, header, content, and footer.
+          This card has custom styling applied to all its parts. You can
+          customize the container, header, content, and footer.
         </Text>
       </Card.Content>
-      
+
       <Card.Footer>
         <Horizontal justifyContent="flex-end" gap={10}>
           <Button variant="outline">Cancel</Button>

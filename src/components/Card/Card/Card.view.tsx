@@ -1,13 +1,18 @@
 import React from 'react';
 import { View } from '../../Layout/View/View';
 import { Vertical } from '../../Layout/Vertical/Vertical';
-import { CardProps, CardHeaderProps, CardContentProps, CardFooterProps } from './Card.props';
+import {
+  CardProps,
+  CardHeaderProps,
+  CardContentProps,
+  CardFooterProps,
+} from './Card.props';
 import { CardSizes, CardShapes, CardVariants } from './Card.style';
 
-export const CardHeader: React.FC<CardHeaderProps> = ({ 
-  children, 
+export const CardHeader: React.FC<CardHeaderProps> = ({
+  children,
   views,
-  ...props 
+  ...props
 }) => {
   return (
     <View
@@ -23,27 +28,22 @@ export const CardHeader: React.FC<CardHeaderProps> = ({
   );
 };
 
-export const CardContent: React.FC<CardContentProps> = ({ 
-  children, 
+export const CardContent: React.FC<CardContentProps> = ({
+  children,
   views,
-  ...props 
+  ...props
 }) => {
   return (
-    <View
-      paddingTop="16px"
-      paddingBottom="16px"
-      {...views}
-      {...props}
-    >
+    <View paddingTop="16px" paddingBottom="16px" {...views} {...props}>
       {children}
     </View>
   );
 };
 
-export const CardFooter: React.FC<CardFooterProps> = ({ 
-  children, 
+export const CardFooter: React.FC<CardFooterProps> = ({
+  children,
   views,
-  ...props 
+  ...props
 }) => {
   return (
     <View
@@ -73,8 +73,11 @@ export const CardView: React.FC<CardProps> = ({
   // Determine if we have explicit Card.Header, Card.Content, Card.Footer components
   // or if we need to wrap children in a default layout
   const hasExplicitStructure = React.Children.toArray(children).some(
-    child => React.isValidElement(child) && 
-    (child.type === CardHeader || child.type === CardContent || child.type === CardFooter)
+    (child) =>
+      React.isValidElement(child) &&
+      (child.type === CardHeader ||
+        child.type === CardContent ||
+        child.type === CardFooter)
   );
 
   return (
@@ -90,19 +93,9 @@ export const CardView: React.FC<CardProps> = ({
         children
       ) : (
         <Vertical>
-          {header && (
-            <CardHeader {...views?.header}>
-              {header}
-            </CardHeader>
-          )}
-          <CardContent {...views?.content}>
-            {children}
-          </CardContent>
-          {footer && (
-            <CardFooter {...views?.footer}>
-              {footer}
-            </CardFooter>
-          )}
+          {header && <CardHeader {...views?.header}>{header}</CardHeader>}
+          <CardContent {...views?.content}>{children}</CardContent>
+          {footer && <CardFooter {...views?.footer}>{footer}</CardFooter>}
         </Vertical>
       )}
     </View>

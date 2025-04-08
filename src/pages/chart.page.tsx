@@ -6,7 +6,7 @@ import {
   AreaChartDemo,
   PieChartDemo,
   DonutChartDemo,
-  CustomChartDemo
+  CustomChartDemo,
 } from 'src/components/Chart/examples';
 
 const ChartPage = () => {

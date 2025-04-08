@@ -19,10 +19,7 @@ export const NavigationDemo = () => {
         <Text marginBottom="10px" fontWeight="bold">
           Inside Navigation
         </Text>
-        <Carousel 
-          navigationPosition="inside"
-          showIndicators={false}
-        >
+        <Carousel navigationPosition="inside" showIndicators={false}>
           {slides.map((slide, index) => (
             <View
               key={index}
@@ -45,7 +42,7 @@ export const NavigationDemo = () => {
         <Text marginBottom="10px" fontWeight="bold">
           Custom Navigation Buttons
         </Text>
-        <Carousel 
+        <Carousel
           showIndicators={false}
           prevButton={
             <Button size="sm" variant="outline">

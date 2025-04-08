@@ -22,7 +22,9 @@ export const useCarouselState = ({
   totalSlides,
 }: CarouselStateProps) => {
   const [activeIndex, setActiveIndex] = useState(
-    controlledActiveIndex !== undefined ? controlledActiveIndex : defaultActiveIndex
+    controlledActiveIndex !== undefined
+      ? controlledActiveIndex
+      : defaultActiveIndex
   );
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -41,7 +43,7 @@ export const useCarouselState = ({
   const goToSlide = useCallback(
     (index: number) => {
       let newIndex = index;
-      
+
       // Handle infinite looping
       if (infinite) {
         if (index < 0) {
@@ -53,11 +55,11 @@ export const useCarouselState = ({
         // Clamp index to valid range
         newIndex = Math.max(0, Math.min(index, totalSlides - 1));
       }
-      
+
       if (controlledActiveIndex === undefined) {
         setActiveIndex(newIndex);
       }
-      
+
       if (onChange) {
         onChange(newIndex);
       }
@@ -88,7 +90,14 @@ export const useCarouselState = ({
         clearInterval(autoPlayTimerRef.current);
       }
     };
-  }, [autoPlay, autoPlayInterval, isHovered, isDragging, nextSlide, pauseOnHover]);
+  }, [
+    autoPlay,
+    autoPlayInterval,
+    isHovered,
+    isDragging,
+    nextSlide,
+    pauseOnHover,
+  ]);
 
   // Handle mouse enter/leave for pause on hover
   const handleMouseEnter = useCallback(() => {
@@ -102,25 +111,28 @@ export const useCarouselState = ({
   }, []);
 
   // Handle drag interactions
-  const handleDragStart = useCallback((e: React.MouseEvent | React.TouchEvent) => {
-    setIsDragging(true);
-    
-    if ('touches' in e) {
-      setDragStartX(e.touches[0].clientX);
-      setDragStartY(e.touches[0].clientY);
-    } else {
-      setDragStartX(e.clientX);
-      setDragStartY(e.clientY);
-    }
-  }, []);
+  const handleDragStart = useCallback(
+    (e: React.MouseEvent | React.TouchEvent) => {
+      setIsDragging(true);
+
+      if ('touches' in e) {
+        setDragStartX(e.touches[0].clientX);
+        setDragStartY(e.touches[0].clientY);
+      } else {
+        setDragStartX(e.clientX);
+        setDragStartY(e.clientY);
+      }
+    },
+    []
+  );
 
   const handleDragMove = useCallback(
     (e: React.MouseEvent | React.TouchEvent) => {
       if (!isDragging) return;
-      
+
       let currentX: number;
       let currentY: number;
-      
+
       if ('touches' in e) {
         currentX = e.touches[0].clientX;
         currentY = e.touches[0].clientY;
@@ -128,10 +140,10 @@ export const useCarouselState = ({
         currentX = e.clientX;
         currentY = e.clientY;
       }
-      
+
       const diffX = currentX - dragStartX;
       const diffY = currentY - dragStartY;
-      
+
       // Determine if horizontal drag is more significant than vertical
       if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
         if (diffX > 0) {

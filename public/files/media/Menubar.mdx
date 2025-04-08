@@ -1,0 +1,124 @@
+# Menubar
+
+A flexible menubar component for creating application menus with dropdown submenus.
+
+### **Import**
+  ```tsx
+  import { Menubar } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Menubar } from '../Menubar';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+
+export const DefaultMenubar = () => {
+  const items = [
+    {
+      id: 'file',
+      label: 'File',
+      items: [
+        {
+          id: 'new',
+          label: 'New',
+          onClick: () => console.log('New clicked'),
+        },
+        {
+          id: 'open',
+          label: 'Open',
+          onClick: () => console.log('Open clicked'),
+        },
+        { separator: true },
+        {
+          id: 'save',
+          label: 'Save',
+          onClick: () => console.log('Save clicked'),
+        },
+      ],
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      items: [
+        {
+          id: 'undo',
+          label: 'Undo',
+          onClick: () => console.log('Undo clicked'),
+        },
+        {
+          id: 'redo',
+          label: 'Redo',
+          onClick: () => console.log('Redo clicked'),
+        },
+      ],
+    },
+  ];
+
+  return (
+    <Menubar items={items} />
+  );
+};
+```
+
+### **Variants**
+The Menubar component supports different visual variants:
+
+```tsx
+<Menubar items={items} variant="default" />
+<Menubar items={items} variant="filled" />
+<Menubar items={items} variant="outline" />
+```
+
+### **Orientation**
+The Menubar can be displayed horizontally or vertically:
+
+```tsx
+<Menubar items={items} orientation="horizontal" />
+<Menubar items={items} orientation="vertical" />
+```
+
+### **Sizes**
+The Menubar supports different sizes:
+
+```tsx
+<Menubar items={items} size="sm" />
+<Menubar items={items} size="md" />
+<Menubar items={items} size="lg" />
+```
+
+### **Composite Pattern**
+You can also use the Menubar's subcomponents for more control:
+
+```tsx
+<Menubar.Root orientation="horizontal" variant="outline">
+  <Menubar.Menu id="file">
+    <Menubar.Trigger>File</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.Item id="new" onClick={() => console.log('New clicked')}>
+        New
+      </Menubar.Item>
+      <Menubar.Item id="open" onClick={() => console.log('Open clicked')}>
+        Open
+      </Menubar.Item>
+      <Menubar.Separator />
+      <Menubar.Item id="save" onClick={() => console.log('Save clicked')}>
+        Save
+      </Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
+  
+  <Menubar.Menu id="edit">
+    <Menubar.Trigger>Edit</Menubar.Trigger>
+    <Menubar.Content>
+      <Menubar.Item id="undo" onClick={() => console.log('Undo clicked')}>
+        Undo
+      </Menubar.Item>
+      <Menubar.Item id="redo" onClick={() => console.log('Redo clicked')}>
+        Redo
+      </Menubar.Item>
+    </Menubar.Content>
+  </Menubar.Menu>
+</Menubar.Root>
+```
