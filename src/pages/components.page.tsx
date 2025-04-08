@@ -14,6 +14,7 @@ const ButtonPage = lazy(() => import('src/pages/button.page'));
 const CenterPage = lazy(() => import('src/pages/center.page'));
 const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
 const ComboBoxPage = lazy(() => import('src/pages/comboBox.page'));
+const ContextMenuPage = lazy(() => import('src/pages/contextMenu.page'));
 const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
 const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
 const FormikPage = lazy(() => import('src/pages/formik.page'));
@@ -49,6 +50,7 @@ export const componentList = [
   { name: 'Center', path: '/center', element: <CenterPage /> },
   { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
   { name: 'ComboBox', path: '/combobox', element: <ComboBoxPage /> },
+  { name: 'ContextMenu', path: '/contextmenu', element: <ContextMenuPage /> },
   {
     name: 'CountryPicker',
     path: '/countrypicker',

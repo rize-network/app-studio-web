@@ -725,6 +725,8 @@ export const DustBinIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+export const DeleteIcon = DustBinIcon;
+
 export const EditIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',
