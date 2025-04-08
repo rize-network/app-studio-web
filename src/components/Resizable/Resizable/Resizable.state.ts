@@ -69,16 +69,11 @@ export const useResizableState = (
   );
 
   // Set the size of a panel
-  const setPanelSize = useCallback(
-    (id: string, size: number) => {
-      setPanels((prevPanels) =>
-        prevPanels.map((panel) =>
-          panel.id === id ? { ...panel, size } : panel
-        )
-      );
-    },
-    []
-  );
+  const setPanelSize = useCallback((id: string, size: number) => {
+    setPanels((prevPanels) =>
+      prevPanels.map((panel) => (panel.id === id ? { ...panel, size } : panel))
+    );
+  }, []);
 
   // Start resizing
   const startResize = useCallback(
@@ -99,20 +94,30 @@ export const useResizableState = (
       const handleId = activeHandleRef.current;
       const delta = clientPosition - startPositionRef.current;
       const panelIndex = panels.findIndex((p) => p.id === handleId);
-      
+
       if (panelIndex === -1 || panelIndex >= panels.length - 1) return;
 
       const currentPanel = panels[panelIndex];
       const nextPanel = panels[panelIndex + 1];
-      
+
       // Calculate new sizes
-      let newCurrentSize = startSizesRef.current[panelIndex] + (orientation === 'horizontal' ? delta : delta);
-      let newNextSize = startSizesRef.current[panelIndex + 1] - (orientation === 'horizontal' ? delta : delta);
-      
+      let newCurrentSize =
+        startSizesRef.current[panelIndex] +
+        (orientation === 'horizontal' ? delta : delta);
+      let newNextSize =
+        startSizesRef.current[panelIndex + 1] -
+        (orientation === 'horizontal' ? delta : delta);
+
       // Apply constraints
-      newCurrentSize = Math.max(currentPanel.minSize ?? defaultMinSize, Math.min(currentPanel.maxSize ?? defaultMaxSize, newCurrentSize));
-      newNextSize = Math.max(nextPanel.minSize ?? defaultMinSize, Math.min(nextPanel.maxSize ?? defaultMaxSize, newNextSize));
-      
+      newCurrentSize = Math.max(
+        currentPanel.minSize ?? defaultMinSize,
+        Math.min(currentPanel.maxSize ?? defaultMaxSize, newCurrentSize)
+      );
+      newNextSize = Math.max(
+        nextPanel.minSize ?? defaultMinSize,
+        Math.min(nextPanel.maxSize ?? defaultMaxSize, newNextSize)
+      );
+
       // Update panel sizes
       setPanels((prevPanels) =>
         prevPanels.map((panel, index) => {
@@ -145,7 +150,7 @@ export const useResizableState = (
 
       const handleId = activeHandleRef.current;
       const panelIndex = panels.findIndex((p) => p.id === handleId);
-      
+
       if (panelIndex === -1 || panelIndex >= panels.length - 1) return;
 
       let delta = 0;
@@ -190,7 +195,8 @@ export const useResizableState = (
     const handleTouchMove = (e: TouchEvent) => {
       if (!isResizing || e.touches.length === 0) return;
       const touch = e.touches[0];
-      const position = orientation === 'horizontal' ? touch.clientX : touch.clientY;
+      const position =
+        orientation === 'horizontal' ? touch.clientX : touch.clientY;
       onResize(position);
     };
 
@@ -206,9 +212,10 @@ export const useResizableState = (
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchend', handleMouseUp);
       document.addEventListener('keydown', handleKeyDown);
-      
+
       // Set cursor based on orientation
-      document.body.style.cursor = orientation === 'horizontal' ? 'col-resize' : 'row-resize';
+      document.body.style.cursor =
+        orientation === 'horizontal' ? 'col-resize' : 'row-resize';
       document.body.style.userSelect = 'none';
     }
 
@@ -218,7 +225,7 @@ export const useResizableState = (
       document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('touchend', handleMouseUp);
       document.removeEventListener('keydown', handleKeyDown);
-      
+
       // Reset cursor
       document.body.style.cursor = '';
       document.body.style.userSelect = '';
@@ -228,11 +235,11 @@ export const useResizableState = (
   // Initialize panel sizes when the component mounts
   useEffect(() => {
     if (panels.length === 0 || defaultSizes) return;
-    
+
     // If no default sizes are provided, distribute sizes equally
     const totalSize = getTotalSize();
     const equalSize = totalSize / panels.length;
-    
+
     setPanels((prevPanels) =>
       prevPanels.map((panel) => ({
         ...panel,
@@ -243,8 +250,9 @@ export const useResizableState = (
 
   // Update panel sizes when defaultSizes changes
   useEffect(() => {
-    if (!defaultSizes || defaultSizes.length === 0 || panels.length === 0) return;
-    
+    if (!defaultSizes || defaultSizes.length === 0 || panels.length === 0)
+      return;
+
     const totalSize = getTotalSize();
     const newSizes = defaultSizes.map((size) => {
       if (typeof size === 'string' && size.endsWith('%')) {
@@ -252,7 +260,7 @@ export const useResizableState = (
       }
       return typeof size === 'number' ? size : parseFloat(size);
     });
-    
+
     setPanels((prevPanels) =>
       prevPanels.map((panel, index) => ({
         ...panel,

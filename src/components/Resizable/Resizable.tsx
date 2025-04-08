@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  ResizableProps,
-  ResizableType,
-} from './Resizable/Resizable.props';
+import { ResizableProps, ResizableType } from './Resizable/Resizable.props';
 import { useResizableState } from './Resizable/Resizable.state';
 import {
   ResizableProvider,

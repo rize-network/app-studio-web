@@ -46,6 +46,7 @@ const TabsPage = lazy(() => import('src/pages/tabs.page'));
 const TextPage = lazy(() => import('src/pages/text.page'));
 const TextAreaPage = lazy(() => import('src/pages/textArea.page'));
 const TextfieldPage = lazy(() => import('src/pages/textfield.page'));
+const ToastPage = lazy(() => import('src/pages/toast.page'));
 const TogglePage = lazy(() => import('src/pages/toggle.page'));
 const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 const VerticalPage = lazy(() => import('src/pages/vertical.page'));
@@ -107,6 +108,7 @@ export const componentList = [
   { name: 'Text', path: '/text', element: <TextPage /> },
   { name: 'TextArea', path: '/textarea', element: <TextAreaPage /> },
   { name: 'Textfield', path: '/textfield', element: <TextfieldPage /> },
+  { name: 'Toast', path: '/toast', element: <ToastPage /> },
   { name: 'Toggle', path: '/toggle', element: <TogglePage /> },
   { name: 'ToggleGroup', path: '/togglegroup', element: <ToggleGroupPage /> },
   { name: 'Vertical', path: '/vertical', element: <VerticalPage /> },
