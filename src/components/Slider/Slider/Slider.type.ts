@@ -11,4 +11,5 @@ export interface SliderStyles {
   thumb?: ViewProps;
   label?: ViewProps;
   valueLabel?: ViewProps;
+  stepMarks?: ViewProps;
 }

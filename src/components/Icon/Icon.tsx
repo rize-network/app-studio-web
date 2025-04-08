@@ -422,7 +422,7 @@ export const ThreadsIcon: React.FC<IconProps> = ({
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path
         d="M19 7.5c-1.333 -3 -3.667 -4.5 -7 -4.5c-5 0 -8 2.5 -8 9s3.5 9 8 9s7 -3 7
-                                    -5s-1 -5 -7 -5c-2.5 0 -3 1.25 -3 2.5c0 1.5 1 2.5 2.5 2.5c2.5 0 3.5 -1.5 
+                                    -5s-1 -5 -7 -5c-2.5 0 -3 1.25 -3 2.5c0 1.5 1 2.5 2.5 2.5c2.5 0 3.5 -1.5
                                     3.5 -5s-2 -4 -3 -4s-1.833 .333 -2.5 1"
       ></path>
     </svg>
@@ -1000,8 +1000,15 @@ export const LockIcon: React.FC<IconProps> = ({
       focusable="false"
       {...getSvgProps(filled, color, strokeWidth)}
     >
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      {filled ? (
+        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+      ) : (
+        <>
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          <circle cx="12" cy="16" r="1.5"></circle>
+        </>
+      )}
     </svg>
   </IconWrapper>
 );
@@ -1259,8 +1266,15 @@ export const UnlockIcon: React.FC<IconProps> = ({
       focusable="false"
       {...getSvgProps(filled, color, strokeWidth)}
     >
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-      <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+      {filled ? (
+        <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6h1.9c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z" />
+      ) : (
+        <>
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+          <circle cx="12" cy="16" r="1.5"></circle>
+        </>
+      )}
     </svg>
   </IconWrapper>
 );

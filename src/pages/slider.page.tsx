@@ -4,6 +4,10 @@ import { DefaultDemo } from 'src/components/Slider/examples/default';
 import { DisabledDemo } from 'src/components/Slider/examples/disabled';
 import { RangeDemo } from 'src/components/Slider/examples/range';
 import { SizesDemo } from 'src/components/Slider/examples/sizes';
+import {
+  PricingTiersDemo,
+  StepValuesDemo,
+} from 'src/components/Slider/examples/stepValues';
 import { VariantsDemo } from 'src/components/Slider/examples/variants';
 
 export const LinkPage = () => {
@@ -48,6 +52,20 @@ export const LinkPage = () => {
           <td>Range</td>
           <td>
             <RangeDemo />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Step Values</td>
+          <td>
+            <StepValuesDemo />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Pricing Tiers</td>
+          <td>
+            <PricingTiersDemo />
           </td>
         </tr>
       </tbody>

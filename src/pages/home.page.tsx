@@ -125,12 +125,17 @@ export const HomePage = () => {
         >
           Discover our features
         </Text>
-        <Horizontal justifyContent="space-evenly" gap={30}>
+        <Horizontal
+          justifyContent="space-evenly"
+          flexWrap="wrap"
+          gap={30}
+          width="100%"
+        >
           {Features.map((feature) => (
             <Vertical
               key={feature.title}
               gap={7}
-              width={400}
+              width={200}
               minHeight={100}
               alignItems="center"
             >

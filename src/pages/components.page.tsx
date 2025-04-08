@@ -74,6 +74,8 @@ export const ComponentsPage = () => {
         flex={1}
         boxShadow="0 2px 5px rgba(0, 0, 0, 0.2)"
         transition="box-shadow 0.3s ease-in-out"
+        height="100vh"
+        overflow="auto"
       >
         <Title onPress={() => navigate('/home')}>Navigation</Title>
         <List>
@@ -97,6 +99,8 @@ export const ComponentsPage = () => {
         paddingHorizontal={32}
         paddingVertical={16}
         gap={10}
+        height="100vh"
+        overflow="auto"
       >
         <Suspense fallback={<View>Loading...</View>}>
           <SubTitle>{selected.name}</SubTitle>

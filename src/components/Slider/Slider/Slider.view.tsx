@@ -18,6 +18,7 @@ const SliderView: React.FC<SliderViewProps> = ({
   max = 100,
   value = 50,
   step = 1,
+  stepValues,
   shape = 'rounded',
   size = 'md',
   variant = 'default',
@@ -38,6 +39,7 @@ const SliderView: React.FC<SliderViewProps> = ({
     thumb: {},
     label: {},
     valueLabel: {},
+    stepMarks: {},
   },
   ...props
 }) => {
@@ -58,6 +60,7 @@ const SliderView: React.FC<SliderViewProps> = ({
     elementMode ? elementMode : themeMode
   );
 
+  // Calculate the percentage for the progress bar
   const percentage = ((value - min) / (max - min)) * 100;
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -94,11 +97,31 @@ const SliderView: React.FC<SliderViewProps> = ({
     let newPercentage = (offsetX / width) * 100;
     newPercentage = Math.max(0, Math.min(100, newPercentage));
 
-    const rawValue = min + (newPercentage / 100) * (max - min);
-    const steppedValue = Math.round(rawValue / step) * step;
-    const clampedValue = Math.max(min, Math.min(max, steppedValue));
+    // If stepValues are provided, find the closest value in the array
+    if (stepValues && stepValues.length > 0) {
+      const rawValue = min + (newPercentage / 100) * (max - min);
 
-    setValue(clampedValue);
+      // Find the closest value in stepValues
+      let closestValue = stepValues[0];
+      let minDistance = Math.abs(rawValue - closestValue);
+
+      for (let i = 1; i < stepValues.length; i++) {
+        const distance = Math.abs(rawValue - stepValues[i]);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestValue = stepValues[i];
+        }
+      }
+
+      setValue(closestValue);
+    } else {
+      // Use regular step logic
+      const rawValue = min + (newPercentage / 100) * (max - min);
+      const steppedValue = Math.round(rawValue / step) * step;
+      const clampedValue = Math.max(min, Math.min(max, steppedValue));
+
+      setValue(clampedValue);
+    }
   };
 
   const handleMouseEnter = () => setIsHovered(true);
@@ -145,6 +168,31 @@ const SliderView: React.FC<SliderViewProps> = ({
         {...shadow}
         {...views.track}
       >
+        {/* Step markers */}
+        {stepValues && stepValues.length > 0 && (
+          <>
+            {stepValues.map((stepValue) => {
+              const stepPercentage = ((stepValue - min) / (max - min)) * 100;
+              return (
+                <View
+                  key={stepValue}
+                  position="absolute"
+                  top="50%"
+                  left={`${stepPercentage}%`}
+                  transform="translate(-50%, -50%)"
+                  width={4}
+                  height={4}
+                  borderRadius="50%"
+                  backgroundColor={isDisabled ? disabledColor : primaryColor}
+                  zIndex={1}
+                  {...views.stepMarks}
+                />
+              );
+            })}
+          </>
+        )}
+
+        {/* Progress bar */}
         <View
           position="absolute"
           top={0}
@@ -156,11 +204,12 @@ const SliderView: React.FC<SliderViewProps> = ({
           transition="width 0.1s ease-in-out"
           {...views.progress}
         />
+
+        {/* Thumb */}
         <View
           position="absolute"
           top="50%"
           left={`${percentage}%`}
-          // transform="translate(-50%, -50%)"
           borderRadius="50%"
           backgroundColor="white"
           boxShadow="0 2px 4px rgba(0, 0, 0, 0.2)"
@@ -171,6 +220,7 @@ const SliderView: React.FC<SliderViewProps> = ({
               ? 'translate(-50%, -50%) scale(1.1)'
               : 'translate(-50%, -50%)'
           }
+          zIndex={2}
           {...ThumbSizes[size]}
           {...views.thumb}
         />

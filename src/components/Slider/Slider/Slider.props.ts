@@ -19,6 +19,11 @@ export interface SliderProps extends Omit<InputProps, 'size'> {
    */
   step?: number;
   /**
+   * Array of specific values to use as steps
+   * When provided, the slider will only allow these values
+   */
+  stepValues?: number[];
+  /**
    * The shape of the slider
    */
   shape?: Shape;
