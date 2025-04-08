@@ -1,0 +1,282 @@
+# Carousel
+
+A component for displaying a series of content items that can be navigated through.
+
+### **Import**
+  ```tsx
+  import { Carousel } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Carousel } from '../Carousel';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+
+export const DefaultDemo = () => {
+  // Create an array of slides with different background colors
+  const slides = [
+    { color: 'color.blue.500', text: 'Slide 1' },
+    { color: 'color.green.500', text: 'Slide 2' },
+    { color: 'color.purple.500', text: 'Slide 3' },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Carousel>
+        {slides.map((slide, index) => (
+          <View
+            key={index}
+            backgroundColor={slide.color}
+            width="100%"
+            height="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Text color="white" fontSize="24px" fontWeight="bold">
+              {slide.text}
+            </Text>
+          </View>
+        ))}
+      </Carousel>
+    </View>
+  );
+};
+```
+
+### **Auto-Play**
+Automatically advance through slides with customizable interval.
+
+```tsx
+import React from 'react';
+import { Carousel } from '../Carousel';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+
+export const AutoPlayDemo = () => {
+  const slides = [
+    { color: 'color.red.500', text: 'Auto-play Slide 1' },
+    { color: 'color.yellow.500', text: 'Auto-play Slide 2' },
+    { color: 'color.teal.500', text: 'Auto-play Slide 3' },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Carousel 
+        autoPlay 
+        autoPlayInterval={2000} 
+        pauseOnHover
+      >
+        {slides.map((slide, index) => (
+          <View
+            key={index}
+            backgroundColor={slide.color}
+            width="100%"
+            height="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Text color="white" fontSize="24px" fontWeight="bold">
+              {slide.text}
+            </Text>
+          </View>
+        ))}
+      </Carousel>
+    </View>
+  );
+};
+```
+
+### **Indicators**
+Different styles of indicators to show the current slide position.
+
+```tsx
+import React from 'react';
+import { Carousel } from '../Carousel';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+
+export const IndicatorsDemo = () => {
+  const slides = [
+    { color: 'color.indigo.500', text: 'Slide 1' },
+    { color: 'color.cyan.500', text: 'Slide 2' },
+    { color: 'color.amber.500', text: 'Slide 3' },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Carousel 
+        indicatorVariant="dot" // Options: 'dot', 'line', 'number'
+        indicatorPosition="bottom" // Options: 'top', 'bottom'
+      >
+        {slides.map((slide, index) => (
+          <View
+            key={index}
+            backgroundColor={slide.color}
+            width="100%"
+            height="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Text color="white" fontSize="24px" fontWeight="bold">
+              {slide.text}
+            </Text>
+          </View>
+        ))}
+      </Carousel>
+    </View>
+  );
+};
+```
+
+### **Navigation**
+Customize the navigation controls.
+
+```tsx
+import React from 'react';
+import { Carousel } from '../Carousel';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+import { Button } from '../../Button/Button';
+
+export const NavigationDemo = () => {
+  const slides = [
+    { color: 'color.blue.500', text: 'Slide 1' },
+    { color: 'color.green.500', text: 'Slide 2' },
+    { color: 'color.purple.500', text: 'Slide 3' },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Carousel 
+        navigationPosition="inside" // Options: 'inside', 'outside'
+        prevButton={
+          <Button size="sm" variant="outline">
+            Previous
+          </Button>
+        }
+        nextButton={
+          <Button size="sm" variant="outline">
+            Next
+          </Button>
+        }
+      >
+        {slides.map((slide, index) => (
+          <View
+            key={index}
+            backgroundColor={slide.color}
+            width="100%"
+            height="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Text color="white" fontSize="24px" fontWeight="bold">
+              {slide.text}
+            </Text>
+          </View>
+        ))}
+      </Carousel>
+    </View>
+  );
+};
+```
+
+### **Custom Styling**
+Customize the appearance of the carousel.
+
+```tsx
+import React from 'react';
+import { Carousel } from '../Carousel';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+import { Card } from '../../Card/Card';
+
+export const CustomDemo = () => {
+  const cards = [
+    {
+      title: 'Mountain Retreat',
+      description: 'Peaceful mountain cabin with stunning views.',
+    },
+    {
+      title: 'Beach Paradise',
+      description: 'Relax on white sandy beaches with crystal clear water.',
+    },
+    {
+      title: 'City Adventure',
+      description: 'Explore the vibrant streets and culture of the city.',
+    },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Carousel
+        views={{
+          container: {
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+          },
+          indicators: {
+            bottom: '20px',
+          },
+          indicator: {
+            width: '30px',
+            height: '4px',
+            borderRadius: '2px',
+            backgroundColor: 'color.gray.200',
+          },
+          activeIndicator: {
+            backgroundColor: 'color.blue.500',
+            width: '40px',
+          },
+          prevButton: {
+            backgroundColor: 'color.blue.500',
+            color: 'white',
+          },
+          nextButton: {
+            backgroundColor: 'color.blue.500',
+            color: 'white',
+          },
+        }}
+        indicatorVariant="line"
+      >
+        {cards.map((card, index) => (
+          <View
+            key={index}
+            width="100%"
+            height="100%"
+            padding="20px"
+            backgroundColor="color.blue.50"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Card 
+              variant="elevated" 
+              width="80%" 
+              maxWidth="500px"
+              padding="20px"
+            >
+              <Card.Header>
+                <Text fontSize="24px" fontWeight="bold">
+                  {card.title}
+                </Text>
+              </Card.Header>
+              <Card.Content>
+                <Text fontSize="16px">
+                  {card.description}
+                </Text>
+              </Card.Content>
+            </Card>
+          </View>
+        ))}
+      </Carousel>
+    </View>
+  );
+};
+```

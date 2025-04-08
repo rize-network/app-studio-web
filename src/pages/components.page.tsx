@@ -11,6 +11,9 @@ const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
 const AvatarPage = lazy(() => import('src/pages/avatar.page'));
 const BadgePage = lazy(() => import('src/pages/badge.page'));
 const ButtonPage = lazy(() => import('src/pages/button.page'));
+const CardPage = lazy(() => import('src/pages/card.page'));
+const CarouselPage = lazy(() => import('src/pages/carousel.page'));
+const ChartPage = lazy(() => import('src/pages/chart.page'));
 const CenterPage = lazy(() => import('src/pages/center.page'));
 const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
 const ComboBoxPage = lazy(() => import('src/pages/comboBox.page'));
@@ -48,6 +51,9 @@ export const componentList = [
   { name: 'Avatar', path: '/avatar', element: <AvatarPage /> },
   { name: 'Badge', path: '/badge', element: <BadgePage /> },
   { name: 'Button', path: '/button', element: <ButtonPage /> },
+  { name: 'Card', path: '/card', element: <CardPage /> },
+  { name: 'Carousel', path: '/carousel', element: <CarouselPage /> },
+  { name: 'Chart', path: '/chart', element: <ChartPage /> },
   { name: 'Center', path: '/center', element: <CenterPage /> },
   { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
   { name: 'ComboBox', path: '/combobox', element: <ComboBoxPage /> },

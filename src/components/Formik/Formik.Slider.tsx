@@ -8,7 +8,7 @@ import { useFormikInput } from './Formik.Hook';
 const SliderComponent: React.FC<SliderProps> = (props) => {
   // Get Formik props (value, onChange, etc.)
   const formProps = useFormikInput(props);
-  
+
   // Get slider state and handlers
   const sliderState = useSliderState({
     ...props,
@@ -18,7 +18,7 @@ const SliderComponent: React.FC<SliderProps> = (props) => {
       formProps.onChange(value);
       // Call the original onChange if provided
       props.onChange?.(value);
-    }
+    },
   });
 
   // Render the slider with both Formik props and slider state

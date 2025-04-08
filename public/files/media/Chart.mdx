@@ -1,0 +1,232 @@
+# Chart
+
+A component for visualizing data in various chart formats.
+
+### **Import**
+  ```tsx
+  import { Chart } from '@app-studio/web';
+  ```
+
+### **Bar Chart**
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from '../../Layout/View/View';
+
+export const BarChartDemo = () => {
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Revenue',
+        data: [30, 40, 35, 50, 49, 60],
+        color: 'color.blue.500',
+      },
+      {
+        name: 'Expenses',
+        data: [20, 25, 30, 35, 30, 40],
+        color: 'color.red.500',
+      },
+    ],
+  };
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="bar"
+        data={data}
+        title="Monthly Revenue vs Expenses"
+        showGrid
+        animated
+      />
+    </View>
+  );
+};
+```
+
+### **Line Chart**
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from '../../Layout/View/View';
+
+export const LineChartDemo = () => {
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Users',
+        data: [500, 800, 1200, 1800, 2500, 3000],
+        color: 'color.purple.500',
+      },
+      {
+        name: 'Sessions',
+        data: [1000, 1600, 2400, 3600, 5000, 6000],
+        color: 'color.teal.500',
+      },
+    ],
+  };
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="line"
+        data={data}
+        title="Website Traffic"
+        showGrid
+        animated
+        legendPosition="top"
+      />
+    </View>
+  );
+};
+```
+
+### **Area Chart**
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from '../../Layout/View/View';
+
+export const AreaChartDemo = () => {
+  const data = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    series: [
+      {
+        name: 'This Week',
+        data: [10, 15, 12, 20, 18, 25, 22],
+        color: 'color.green.500',
+      },
+      {
+        name: 'Last Week',
+        data: [8, 12, 10, 15, 14, 20, 17],
+        color: 'color.blue.500',
+      },
+    ],
+  };
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="area"
+        data={data}
+        title="Weekly Performance"
+        showGrid
+        animated
+      />
+    </View>
+  );
+};
+```
+
+### **Pie Chart**
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from '../../Layout/View/View';
+
+export const PieChartDemo = () => {
+  const dataPoints = [
+    { label: 'Mobile', value: 45, color: 'color.blue.500' },
+    { label: 'Desktop', value: 30, color: 'color.green.500' },
+    { label: 'Tablet', value: 15, color: 'color.purple.500' },
+    { label: 'Other', value: 10, color: 'color.orange.500' },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="pie"
+        dataPoints={dataPoints}
+        title="Device Distribution"
+        animated
+      />
+    </View>
+  );
+};
+```
+
+### **Donut Chart**
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from '../../Layout/View/View';
+
+export const DonutChartDemo = () => {
+  const dataPoints = [
+    { label: 'Completed', value: 65, color: 'color.green.500' },
+    { label: 'In Progress', value: 25, color: 'color.blue.500' },
+    { label: 'Pending', value: 10, color: 'color.orange.500' },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="donut"
+        dataPoints={dataPoints}
+        title="Task Status"
+        animated
+      />
+    </View>
+  );
+};
+```
+
+### **Custom Styling**
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from '../../Layout/View/View';
+
+export const CustomChartDemo = () => {
+  const data = {
+    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+    series: [
+      {
+        name: 'Sales',
+        data: [120, 180, 150, 210],
+      },
+    ],
+  };
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="bar"
+        data={data}
+        title="Quarterly Sales"
+        animated
+        views={{
+          container: {
+            backgroundColor: 'color.gray.50',
+            padding: '16px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+          },
+          chart: {
+            margin: '16px 0',
+          },
+          bar: {
+            rx: '4px',
+            ry: '4px',
+            fill: 'color.primary',
+          },
+          grid: {
+            stroke: 'color.gray.300',
+            strokeDasharray: '4',
+          },
+          axis: {
+            stroke: 'color.gray.400',
+            strokeWidth: '2px',
+          },
+          legend: {
+            backgroundColor: 'white',
+            padding: '8px',
+            borderRadius: '4px',
+          },
+        }}
+      />
+    </View>
+  );
+};
+```
