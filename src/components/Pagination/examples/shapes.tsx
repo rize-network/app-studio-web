@@ -22,7 +22,7 @@ export const PaginationShapes = () => {
           variant="outline"
         />
       </View>
-      
+
       <View>
         <Text marginBottom={10}>Square Shape</Text>
         <Pagination
@@ -33,7 +33,7 @@ export const PaginationShapes = () => {
           variant="outline"
         />
       </View>
-      
+
       <View>
         <Text marginBottom={10}>Circular Shape</Text>
         <Pagination

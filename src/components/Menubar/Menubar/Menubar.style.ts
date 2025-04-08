@@ -57,14 +57,16 @@ export const MenubarItemStates = {
   },
 };
 
-export const getMenubarContentPosition = (orientation: Orientation): ViewProps => {
+export const getMenubarContentPosition = (
+  orientation: Orientation
+): ViewProps => {
   if (orientation === 'horizontal') {
     return {
       top: '100%',
       left: 0,
     };
   }
-  
+
   return {
     top: 0,
     left: '100%',

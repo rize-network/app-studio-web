@@ -4,8 +4,12 @@ export const useMenubarState = (
   defaultActiveMenuId: string | null = null,
   defaultOpenMenuId: string | null = null
 ) => {
-  const [activeMenuId, setActiveMenuId] = useState<string | null>(defaultActiveMenuId);
-  const [openMenuId, setOpenMenuId] = useState<string | null>(defaultOpenMenuId);
+  const [activeMenuId, setActiveMenuId] = useState<string | null>(
+    defaultActiveMenuId
+  );
+  const [openMenuId, setOpenMenuId] = useState<string | null>(
+    defaultOpenMenuId
+  );
 
   const isMenuOpen = (menuId: string) => {
     return openMenuId === menuId;

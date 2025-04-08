@@ -44,6 +44,7 @@ export * from './DropdownMenu/DropdownMenu';
 export * from './HoverCard/HoverCard';
 export * from './Menubar/Menubar';
 export * from './Pagination/Pagination';
+export * from './Separator/Separator';
 
 export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';
@@ -84,3 +85,4 @@ export * from './NavigationMenu/NavigationMenu/NavigationMenu.props';
 export * from './DropdownMenu/DropdownMenu/DropdownMenu.props';
 export * from './Menubar/Menubar/Menubar.props';
 export * from './Pagination/Pagination/Pagination.props';
+export * from './Separator/Separator/Separator.props';

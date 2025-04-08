@@ -17,12 +17,7 @@ export const DefaultOTPInput = () => {
     <form onSubmit={handleSubmit}>
       <Vertical gap={20}>
         <Text>Enter verification code:</Text>
-        <OTPInput
-          name="otp"
-          value={otp}
-          onChange={setOtp}
-          isAutoFocus
-        />
+        <OTPInput name="otp" value={otp} onChange={setOtp} isAutoFocus />
         <Button type="submit" isAuto>
           Verify
         </Button>

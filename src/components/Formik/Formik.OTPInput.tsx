@@ -11,15 +11,15 @@ import { useFormikInput } from './Formik.Hook';
 const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
   // Get Formik integration props
   const formProps = useFormikInput(props);
-  
+
   // Get OTP input state
-  const { 
-    isFocused, 
-    setIsFocused, 
-    isHovered, 
+  const {
+    isFocused,
+    setIsFocused,
+    isHovered,
     setIsHovered,
     setInputRef,
-    focusInput
+    focusInput,
   } = useOTPInputState(props);
 
   // Handle value changes through Formik

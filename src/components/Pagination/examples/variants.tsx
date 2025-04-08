@@ -21,7 +21,7 @@ export const PaginationVariants = () => {
           variant="default"
         />
       </View>
-      
+
       <View>
         <Text marginBottom={10}>Filled Variant</Text>
         <Pagination
@@ -31,7 +31,7 @@ export const PaginationVariants = () => {
           variant="filled"
         />
       </View>
-      
+
       <View>
         <Text marginBottom={10}>Outline Variant</Text>
         <Pagination

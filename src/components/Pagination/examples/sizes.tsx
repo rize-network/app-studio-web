@@ -22,7 +22,7 @@ export const PaginationSizes = () => {
           variant="outline"
         />
       </View>
-      
+
       <View>
         <Text marginBottom={10}>Medium Size (Default)</Text>
         <Pagination
@@ -33,7 +33,7 @@ export const PaginationSizes = () => {
           variant="outline"
         />
       </View>
-      
+
       <View>
         <Text marginBottom={10}>Large Size</Text>
         <Pagination

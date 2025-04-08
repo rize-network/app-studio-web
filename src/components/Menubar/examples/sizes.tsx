@@ -62,12 +62,12 @@ export const MenubarSizes = () => {
         <Text marginBottom={10}>Small Size</Text>
         <Menubar items={items} size="sm" variant="outline" />
       </View>
-      
+
       <View>
         <Text marginBottom={10}>Medium Size (Default)</Text>
         <Menubar items={items} size="md" variant="outline" />
       </View>
-      
+
       <View>
         <Text marginBottom={10}>Large Size</Text>
         <Menubar items={items} size="lg" variant="outline" />

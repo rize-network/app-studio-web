@@ -8,15 +8,15 @@ import OTPInputView from './OTPInput/OTPInput.view';
  * Provides multiple input fields for entering digits with auto-focus functionality.
  */
 const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
-  const { 
-    value, 
-    setValue, 
-    isFocused, 
-    setIsFocused, 
-    isHovered, 
+  const {
+    value,
+    setValue,
+    isFocused,
+    setIsFocused,
+    isHovered,
     setIsHovered,
     setInputRef,
-    focusInput
+    focusInput,
   } = useOTPInputState(props);
 
   return (

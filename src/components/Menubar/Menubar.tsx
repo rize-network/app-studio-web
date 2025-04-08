@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  MenubarProps,
-  MenubarType,
-} from './Menubar/Menubar.props';
+import { MenubarProps, MenubarType } from './Menubar/Menubar.props';
 import { useMenubarState } from './Menubar/Menubar.state';
 import {
   MenubarProvider,
