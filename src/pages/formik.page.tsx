@@ -9,6 +9,7 @@ import {
   FormCheckboxExemple,
   FormikSelectExemple,
   FormikSwitchExemple,
+  FormikSliderExample,
 } from '../components/Formik/examples';
 import { FormikComboBoxDemo } from '../components/Formik/examples/FormikComboBox';
 
@@ -73,6 +74,12 @@ export const FormikPage = () => {
             <td>Combobox</td>
             <td>
               <FormikComboBoxDemo />
+            </td>
+          </tr>
+          <tr>
+            <td>Slider</td>
+            <td>
+              <FormikSliderExample />
             </td>
           </tr>
         </tbody>

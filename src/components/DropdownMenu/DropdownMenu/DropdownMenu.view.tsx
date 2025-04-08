@@ -1,16 +1,8 @@
-import React, {
-  createContext,
-  useContext,
-  useRef,
-  useEffect,
-  useState,
-} from 'react';
-import { View, Horizontal } from 'app-studio';
+import React, { createContext, useContext, useRef, useState } from 'react';
+import { View } from 'app-studio';
 import {
   DropdownMenuContextType,
   DropdownMenuItem as DropdownMenuItemType,
-  Size,
-  Variant,
   Position,
   Alignment,
 } from './DropdownMenu.type';
@@ -96,8 +88,10 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   views,
   ...props
 }) => {
-  const { isOpen, activeSubmenuId, setActiveSubmenuId, size, variant } =
-    useDropdownMenuContext();
+  const {
+    isOpen, //activeSubmenuId, setActiveSubmenuId, size,
+    variant,
+  } = useDropdownMenuContext();
 
   if (!isOpen) {
     return null;
@@ -133,8 +127,12 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
   views,
   ...props
 }) => {
-  const { activeSubmenuId, setActiveSubmenuId, size, variant } =
-    useDropdownMenuContext();
+  const {
+    activeSubmenuId,
+    setActiveSubmenuId,
+    size,
+    //variant
+  } = useDropdownMenuContext();
 
   const [isHovered, setIsHovered] = useState(false);
   const hasSubmenu = item.items && item.items.length > 0;

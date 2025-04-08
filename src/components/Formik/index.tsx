@@ -8,3 +8,4 @@ export { FormikTextField } from './Formik.TextField';
 export { FormikPassword } from './Formik.Password';
 export { FormikForm } from './Formik.Form';
 export { FormikComboBox } from './Formik.ComboBox';
+export { FormikSlider } from './Formik.Slider';

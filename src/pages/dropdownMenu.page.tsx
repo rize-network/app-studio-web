@@ -5,7 +5,7 @@ import {
   DropdownMenuPositions,
   DropdownMenuVariants,
   DropdownMenuSizes,
-  CustomDropdownMenu
+  CustomDropdownMenu,
 } from 'src/components/DropdownMenu/examples';
 
 const DropdownMenuPage = () => {

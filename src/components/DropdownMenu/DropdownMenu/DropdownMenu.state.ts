@@ -9,9 +9,8 @@ export const useDropdownMenuState = (defaultOpen: boolean = false) => {
     const handleClickOutside = (event: MouseEvent) => {
       const path = event.composedPath();
       const isOutside = !path.some(
-        (element: any) => 
-          element?.id === 'dropdown-menu' || 
-          element?.id === 'dropdown-trigger'
+        (element: any) =>
+          element?.id === 'dropdown-menu' || element?.id === 'dropdown-trigger'
       );
       if (isOutside && isOpen) {
         setIsOpen(false);

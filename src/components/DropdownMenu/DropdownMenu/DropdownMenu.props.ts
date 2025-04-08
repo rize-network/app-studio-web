@@ -1,12 +1,12 @@
 import React from 'react';
 import { ViewProps } from 'app-studio';
-import { 
-  DropdownMenuItem, 
-  DropdownMenuStyles, 
-  Size, 
+import {
+  DropdownMenuItem,
+  DropdownMenuStyles,
+  Size,
   Variant,
   Position,
-  Alignment
+  Alignment,
 } from './DropdownMenu.type';
 
 export interface DropdownMenuProps {

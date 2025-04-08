@@ -1,19 +1,22 @@
 import React from 'react';
-import { DropdownMenuProps, DropdownMenuType } from './DropdownMenu/DropdownMenu.props';
+import {
+  DropdownMenuProps,
+  DropdownMenuType,
+} from './DropdownMenu/DropdownMenu.props';
 import { useDropdownMenuState } from './DropdownMenu/DropdownMenu.state';
-import { 
-  DropdownMenuProvider, 
-  DropdownMenuTrigger, 
-  DropdownMenuContent, 
+import {
+  DropdownMenuProvider,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuDivider,
-  DropdownMenuView
+  DropdownMenuView,
 } from './DropdownMenu/DropdownMenu.view';
 
 /**
  * DropdownMenu component for displaying a menu when clicking on a trigger element.
  */
-const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({ 
+const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
   trigger,
   items,
   size = 'md',
@@ -24,22 +27,18 @@ const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
   views,
   ...props
 }) => {
-  const { 
-    isOpen, 
-    setIsOpen, 
-    activeSubmenuId, 
-    setActiveSubmenuId 
-  } = useDropdownMenuState(defaultOpen);
+  const { isOpen, setIsOpen, activeSubmenuId, setActiveSubmenuId } =
+    useDropdownMenuState(defaultOpen);
 
   return (
-    <DropdownMenuProvider 
-      value={{ 
-        isOpen, 
-        setIsOpen, 
-        activeSubmenuId, 
+    <DropdownMenuProvider
+      value={{
+        isOpen,
+        setIsOpen,
+        activeSubmenuId,
         setActiveSubmenuId,
         size,
-        variant
+        variant,
       }}
     >
       <DropdownMenuView

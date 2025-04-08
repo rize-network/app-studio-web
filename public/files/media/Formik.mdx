@@ -1,8 +1,474 @@
 # Formik
 
-Formik component.
+Formik integration components for form state management and validation.
 
 ### **Import**
-  \`\`\`tsx
-  import { Formik } from '@app-studio/web';
-  \`\`\`
+  ```tsx
+  import { FormikForm, FormikTextField, FormikCheckbox, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider } from '@app-studio/web';
+  ```
+
+### **Basic Form**
+A basic form with Formik integration.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikTextField } from '../Formik.TextField';
+import { FormikCheckbox } from '../Formik.Checkbox';
+import { Button } from '../../Button/Button';
+import { Vertical } from '../../Layout/Vertical/Vertical';
+
+export const BasicFormExample = () => {
+  // Define initial values
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    agreeToTerms: false,
+  };
+
+  // Define validation schema
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('Required'),
+    lastName: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    agreeToTerms: Yup.boolean().oneOf([true], 'You must agree to the terms'),
+  });
+
+  // Handle form submission
+  const handleSubmit = (values: any) => {
+    console.log('Form values:', values);
+    alert(JSON.stringify(values, null, 2));
+  };
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <Vertical gap={16} width="100%" maxWidth={400}>
+            <FormikTextField
+              name="firstName"
+              label="First Name"
+              placeholder="Enter your first name"
+            />
+            <FormikTextField
+              name="lastName"
+              label="Last Name"
+              placeholder="Enter your last name"
+            />
+            <FormikTextField
+              name="email"
+              label="Email"
+              placeholder="Enter your email"
+              type="email"
+            />
+            <FormikCheckbox
+              name="agreeToTerms"
+              label="I agree to the terms and conditions"
+            />
+            <Button type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Vertical>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikTextField**
+Text input field integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikTextField } from '../Formik.TextField';
+import { Button } from '../../Button/Button';
+
+export const FormikTextFieldExample = () => {
+  return (
+    <Formik
+      initialValues={{ username: '' }}
+      validationSchema={Yup.object({
+        username: Yup.string().required('Username is required'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikTextField
+            name="username"
+            label="Username"
+            placeholder="Enter username"
+            helperText="Your unique username"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikTextArea**
+Multi-line text input integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikTextArea } from '../Formik.TextArea';
+import { Button } from '../../Button/Button';
+
+export const FormikTextAreaExample = () => {
+  return (
+    <Formik
+      initialValues={{ comments: '' }}
+      validationSchema={Yup.object({
+        comments: Yup.string().required('Comments are required'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikTextArea
+            name="comments"
+            label="Comments"
+            placeholder="Enter your comments"
+            rows={4}
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikCheckbox**
+Checkbox input integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikCheckbox } from '../Formik.Checkbox';
+import { Button } from '../../Button/Button';
+
+export const FormikCheckboxExample = () => {
+  return (
+    <Formik
+      initialValues={{ subscribe: false }}
+      validationSchema={Yup.object({
+        subscribe: Yup.boolean().oneOf([true], 'You must subscribe'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikCheckbox
+            name="subscribe"
+            label="Subscribe to newsletter"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikSelect**
+Select dropdown integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikSelect } from '../Formik.Select';
+import { Button } from '../../Button/Button';
+
+export const FormikSelectExample = () => {
+  const options = [
+    { label: 'Apple', value: 'apple' },
+    { label: 'Banana', value: 'banana' },
+    { label: 'Orange', value: 'orange' },
+  ];
+
+  return (
+    <Formik
+      initialValues={{ fruit: '' }}
+      validationSchema={Yup.object({
+        fruit: Yup.string().required('Please select a fruit'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikSelect
+            name="fruit"
+            label="Favorite Fruit"
+            options={options}
+            placeholder="Select a fruit"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikSwitch**
+Toggle switch integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm } from '../Formik.Form';
+import { FormikSwitch } from '../Formik.Switch';
+import { Button } from '../../Button/Button';
+
+export const FormikSwitchExample = () => {
+  return (
+    <Formik
+      initialValues={{ darkMode: false }}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikSwitch
+            name="darkMode"
+            label="Dark Mode"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikDatePicker**
+Date picker integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikDatePicker } from '../Formik.DatePicker';
+import { Button } from '../../Button/Button';
+
+export const FormikDatePickerExample = () => {
+  return (
+    <Formik
+      initialValues={{ birthdate: '' }}
+      validationSchema={Yup.object({
+        birthdate: Yup.date().required('Birthdate is required'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikDatePicker
+            name="birthdate"
+            label="Birthdate"
+            placeholder="Select your birthdate"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikCountryPicker**
+Country selection dropdown integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikCountryPicker } from '../Formik.CountryPicker';
+import { Button } from '../../Button/Button';
+
+export const FormikCountryPickerExample = () => {
+  return (
+    <Formik
+      initialValues={{ country: '' }}
+      validationSchema={Yup.object({
+        country: Yup.string().required('Country is required'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikCountryPicker
+            name="country"
+            label="Country"
+            placeholder="Select your country"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikPassword**
+Password input with show/hide toggle integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikPassword } from '../Formik.Password';
+import { Button } from '../../Button/Button';
+
+export const FormikPasswordExample = () => {
+  return (
+    <Formik
+      initialValues={{ password: '' }}
+      validationSchema={Yup.object({
+        password: Yup.string()
+          .min(8, 'Password must be at least 8 characters')
+          .required('Password is required'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikPassword
+            name="password"
+            label="Password"
+            placeholder="Enter your password"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikComboBox**
+Combobox with search functionality integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikComboBox } from '../Formik.ComboBox';
+import { Button } from '../../Button/Button';
+
+export const FormikComboBoxExample = () => {
+  const items = [
+    { label: 'React', value: 'react' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'Angular', value: 'angular' },
+    { label: 'Svelte', value: 'svelte' },
+  ];
+
+  return (
+    <Formik
+      initialValues={{ framework: '' }}
+      validationSchema={Yup.object({
+        framework: Yup.string().required('Framework is required'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikComboBox
+            name="framework"
+            label="Framework"
+            placeholder="Select or search for a framework"
+            items={items}
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikSlider**
+Slider component integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikSlider } from '../Formik.Slider';
+import { Button } from '../../Button/Button';
+
+export const FormikSliderExample = () => {
+  return (
+    <Formik
+      initialValues={{ volume: 50 }}
+      validationSchema={Yup.object({
+        volume: Yup.number()
+          .min(0, 'Volume cannot be negative')
+          .max(100, 'Volume cannot exceed 100')
+          .required('Volume is required'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikSlider
+            name="volume"
+            label="Volume"
+            min={0}
+            max={100}
+            step={1}
+            showValue
+            helperText="Adjust the volume level"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```

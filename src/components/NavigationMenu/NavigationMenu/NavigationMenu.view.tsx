@@ -1,6 +1,5 @@
 import React, { createContext, useContext } from 'react';
 import { View, Horizontal, Vertical } from 'app-studio';
-import { Link } from 'react-router-dom';
 import {
   NavigationMenuContextType,
   NavigationItem,
@@ -85,7 +84,7 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
   const {
     activeItemId,
     setActiveItemId,
-    isItemExpanded,
+    // isItemExpanded,
     orientation,
     size,
     variant,
@@ -94,7 +93,7 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
 
   const isActive = activeItemId === item.id;
   const hasSubItems = item.items && item.items.length > 0;
-  const isExpanded = hasSubItems && isItemExpanded(item.id);
+  // const isExpanded = hasSubItems && isItemExpanded(item.id);
 
   const handleClick = () => {
     if (item.disabled) return;
@@ -266,7 +265,12 @@ export const NavigationMenuView: React.FC<{
   size: Size;
   variant: Variant;
   views?: any;
-}> = ({ items, orientation, size, variant, views }) => {
+}> = ({
+  items,
+  orientation,
+  //size, variant,
+  views,
+}) => {
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
 
   return (

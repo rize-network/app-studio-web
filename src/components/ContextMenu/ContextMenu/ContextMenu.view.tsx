@@ -5,13 +5,11 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { View, Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 import {
   ContextMenuContextType,
   Size,
   Variant,
-  Position,
-  Alignment,
   ContextMenuItem as ContextMenuItemType,
 } from './ContextMenu.type';
 import {
@@ -99,9 +97,9 @@ export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
   const {
     isOpen,
     position: contextPosition,
-    activeSubmenuId,
-    setActiveSubmenuId,
-    size,
+    // activeSubmenuId,
+    // setActiveSubmenuId,
+    // size,
     variant,
   } = useContextMenuContext();
 
@@ -169,8 +167,7 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
   views,
   ...props
 }) => {
-  const { activeSubmenuId, setActiveSubmenuId, size, variant } =
-    useContextMenuContext();
+  const { activeSubmenuId, setActiveSubmenuId, size } = useContextMenuContext();
 
   const [isHovered, setIsHovered] = useState(false);
   const hasSubmenu = item.items && item.items.length > 0;

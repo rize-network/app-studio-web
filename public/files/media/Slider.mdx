@@ -1,0 +1,232 @@
+# Slider
+
+A component that allows users to select a value from a range by moving a handle.
+
+### **Import**
+  ```tsx
+  import { Slider } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { Slider } from '../Slider';
+
+export const DefaultSlider = () => {
+  const [value, setValue] = useState(50);
+
+  const handleChange = (newValue: number) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Slider
+      label="Default Slider"
+      value={value}
+      onChange={handleChange}
+      showValue
+      helperText="Drag the slider to change the value"
+    />
+  );
+};
+```
+
+### **Range**
+Customize the min, max, and step values.
+
+```tsx
+import React, { useState } from 'react';
+import { Slider } from '../Slider';
+
+export const RangeSlider = () => {
+  const [value, setValue] = useState(25);
+
+  return (
+    <Slider
+      label="Custom Range"
+      value={value}
+      onChange={setValue}
+      min={0}
+      max={200}
+      step={5}
+      showValue
+      helperText="Range from 0 to 200 with steps of 5"
+    />
+  );
+};
+```
+
+### **Step Values**
+Use specific step values instead of a continuous range.
+
+```tsx
+import React, { useState } from 'react';
+import { Slider } from '../Slider';
+
+export const StepValuesSlider = () => {
+  const [value, setValue] = useState(40);
+  const stepValues = [0, 20, 40, 60, 80, 100];
+
+  return (
+    <Slider
+      label="Step Values Slider"
+      value={value}
+      onChange={setValue}
+      min={0}
+      max={100}
+      stepValues={stepValues}
+      showValue
+      helperText="This slider only allows specific values"
+    />
+  );
+};
+```
+
+### **Orientation**
+Change the orientation of the slider.
+
+```tsx
+import React, { useState } from 'react';
+import { Slider } from '../Slider';
+import { View } from '../../Layout/View/View';
+
+export const VerticalSlider = () => {
+  const [value, setValue] = useState(50);
+
+  return (
+    <View height={250}>
+      <Slider
+        orientation="vertical"
+        value={value}
+        onChange={setValue}
+        min={0}
+        max={100}
+        step={1}
+        showTooltip
+        ariaLabel="Vertical slider"
+      />
+    </View>
+  );
+};
+```
+
+### **Tooltip**
+Show a tooltip when dragging the slider.
+
+```tsx
+import React, { useState } from 'react';
+import { Slider } from '../Slider';
+
+export const TooltipSlider = () => {
+  const [value, setValue] = useState(50);
+
+  return (
+    <Slider
+      label="Slider with Tooltip"
+      value={value}
+      onChange={setValue}
+      showTooltip
+      helperText="Drag to see the tooltip"
+    />
+  );
+};
+```
+
+### **Disabled**
+Disable the slider to prevent interaction.
+
+```tsx
+import React from 'react';
+import { Slider } from '../Slider';
+
+export const DisabledSlider = () => {
+  return (
+    <Slider
+      label="Disabled Slider"
+      value={30}
+      isDisabled
+      helperText="This slider cannot be interacted with"
+    />
+  );
+};
+```
+
+### **Custom Styling**
+Customize the appearance of the slider.
+
+```tsx
+import React, { useState } from 'react';
+import { Slider } from '../Slider';
+
+export const CustomStyledSlider = () => {
+  const [value, setValue] = useState(60);
+
+  return (
+    <Slider
+      label="Custom Styled Slider"
+      value={value}
+      onChange={setValue}
+      showValue
+      colorScheme="theme.secondary"
+      views={{
+        track: {
+          backgroundColor: 'color.gray.200',
+          height: 8,
+          borderRadius: 4,
+        },
+        progress: {
+          backgroundColor: 'color.blue.500',
+        },
+        thumb: {
+          backgroundColor: 'white',
+          border: '2px solid color.blue.500',
+          width: 20,
+          height: 20,
+        },
+        valueLabel: {
+          color: 'color.blue.500',
+          fontWeight: 'bold',
+        },
+      }}
+    />
+  );
+};
+```
+
+### **Formik Integration**
+Use the slider with Formik for form state management.
+
+```tsx
+import React from 'react';
+import { Formik, Form } from 'formik';
+import { FormikSlider } from '../../Formik/Formik.Slider';
+import { Button } from '../../Button/Button';
+
+export const FormikSliderExample = () => {
+  return (
+    <Formik
+      initialValues={{ slider: 50 }}
+      onSubmit={(values) => {
+        alert(JSON.stringify(values, null, 2));
+      }}
+    >
+      {({ handleSubmit }) => (
+        <Form>
+          <FormikSlider
+            name="slider"
+            label="Formik Slider"
+            min={0}
+            max={100}
+            step={1}
+            showValue
+            helperText="This slider is connected to Formik"
+          />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
+```
