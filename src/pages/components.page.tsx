@@ -5,6 +5,7 @@ import { Horizontal } from 'src/components';
 import DragAndDropPage from 'src/pages/dragAndDrop.page';
 import UploadPage from 'src/pages/upload.page';
 // Lazy-loaded imports
+const AccordionPage = lazy(() => import('src/pages/accordion.page'));
 const AlertPage = lazy(() => import('src/pages/alert.page'));
 const AspectRatioPage = lazy(() => import('src/pages/aspectRatio.page'));
 const AvatarPage = lazy(() => import('src/pages/avatar.page'));
@@ -24,6 +25,7 @@ const LoaderPage = lazy(() => import('src/pages/loader.page'));
 const IconPage = lazy(() => import('src/pages/icon.page'));
 const MessagePage = lazy(() => import('src/pages/message.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
+const NavigationMenuPage = lazy(() => import('src/pages/navigationMenu.page'));
 const PasswordPage = lazy(() => import('src/pages/password.page'));
 const SelectPage = lazy(() => import('src/pages/select.page'));
 const SliderPage = lazy(() => import('src/pages/slider.page'));
@@ -38,6 +40,7 @@ const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 const VerticalPage = lazy(() => import('src/pages/vertical.page'));
 
 export const componentList = [
+  { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
   { name: 'Alert', path: '/alert', element: <AlertPage /> },
   { name: 'AspectRatio', path: '/aspectratio', element: <AspectRatioPage /> },
   { name: 'Avatar', path: '/avatar', element: <AvatarPage /> },
@@ -63,6 +66,11 @@ export const componentList = [
 
   { name: 'Message', path: '/message', element: <MessagePage /> },
   { name: 'Modal', path: '/modal', element: <ModalPage /> },
+  {
+    name: 'NavigationMenu',
+    path: '/navigationmenu',
+    element: <NavigationMenuPage />,
+  },
   { name: 'Password', path: '/password', element: <PasswordPage /> },
   { name: 'Select', path: '/select', element: <SelectPage /> },
   { name: 'Slider', path: '/slider', element: <SliderPage /> },

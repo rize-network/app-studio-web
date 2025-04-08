@@ -1,3 +1,4 @@
+export * from './Accordion/Accordion';
 export * from './Alert/Alert';
 export * from './AspectRatio/AspectRatio';
 export * from './Avatar/Avatar';
@@ -25,6 +26,7 @@ export * from './Loader/Loader';
 export * from './Uploader/Uploader';
 export * from './Message/Message';
 export * from './Modal/Modal';
+export * from './NavigationMenu/NavigationMenu';
 export * from './Table/Table';
 export * from './Tabs/Tabs';
 export * from './Text/Text';
@@ -35,6 +37,7 @@ export * from './ToggleGroup/ToggleGroup';
 export * from './DragAndDrop/DragAndDrop';
 export * from './HoverCard/HoverCard';
 
+export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';
 export * from './AspectRatio/AspectRatio/AspectRatio.props';
 export * from './Avatar/Avatar/Avatar.props';
@@ -64,3 +67,4 @@ export * from './Text/Text/Text.props';
 export * from './Toggle/Toggle/Toggle.props';
 export * from './ToggleGroup/ToggleGroup/ToggleGroup.props';
 export * from './HoverCard/HoverCard/HoverCard.props';
+export * from './NavigationMenu/NavigationMenu/NavigationMenu.props';

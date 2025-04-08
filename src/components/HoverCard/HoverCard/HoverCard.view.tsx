@@ -1,7 +1,10 @@
 import React, { createContext, useContext } from 'react';
 import { View } from 'app-studio';
 import { HoverCardContextType } from './HoverCard.type';
-import { HoverCardContentProps, HoverCardTriggerProps } from './HoverCard.props';
+import {
+  HoverCardContentProps,
+  HoverCardTriggerProps,
+} from './HoverCard.props';
 import { ContentPositions } from './HoverCard.style';
 
 // Create context for the HoverCard
@@ -24,7 +27,9 @@ export const HoverCardProvider: React.FC<{
 export const useHoverCardContext = () => {
   const context = useContext(HoverCardContext);
   if (!context) {
-    throw new Error('useHoverCardContext must be used within a HoverCardProvider');
+    throw new Error(
+      'useHoverCardContext must be used within a HoverCardProvider'
+    );
   }
   return context;
 };
