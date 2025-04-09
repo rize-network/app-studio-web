@@ -11,13 +11,16 @@ import {
   NavigationMenuTrigger,
   NavigationMenuContent,
   NavigationMenuView,
+  NavigationMenuLink,
 } from './NavigationMenu/NavigationMenu.view';
 
 /**
  * NavigationMenu component for creating navigation menus with optional nested items.
+ * Supports both data-driven approach (with items prop) and compound component pattern.
  */
 const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
   items,
+  children,
   orientation = 'vertical',
   size = 'md',
   variant = 'default',
@@ -49,14 +52,18 @@ const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
         onItemActivate,
       }}
     >
-      <NavigationMenuView
-        items={items}
-        orientation={orientation}
-        size={size}
-        variant={variant}
-        views={views}
-        {...props}
-      />
+      {items ? (
+        <NavigationMenuView
+          items={items}
+          orientation={orientation}
+          size={size}
+          variant={variant}
+          views={views}
+          {...props}
+        />
+      ) : (
+        children
+      )}
     </NavigationMenuProvider>
   );
 };
@@ -68,3 +75,4 @@ NavigationMenu.List = NavigationMenuList;
 NavigationMenu.Item = NavigationMenuItem;
 NavigationMenu.Trigger = NavigationMenuTrigger;
 NavigationMenu.Content = NavigationMenuContent;
+NavigationMenu.Link = NavigationMenuLink;

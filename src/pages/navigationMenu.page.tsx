@@ -5,6 +5,7 @@ import {
   HorizontalNavigationMenu,
   NavigationMenuVariants,
   NavigationMenuSizes,
+  CompoundNavigationMenu,
 } from 'src/components/NavigationMenu/examples';
 
 const NavigationMenuPage = () => {
@@ -42,6 +43,13 @@ const NavigationMenuPage = () => {
             <td>Sizes</td>
             <td>
               <NavigationMenuSizes />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Compound Pattern</td>
+            <td>
+              <CompoundNavigationMenu />
             </td>
           </tr>
         </tbody>

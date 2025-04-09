@@ -76,38 +76,83 @@ export const NavigationMenuList: React.FC<NavigationMenuListProps> = ({
   );
 };
 
+// Create a context for NavigationMenuItem
+const NavigationMenuItemContext = createContext<{
+  itemValue: string | null;
+  isDisabled: boolean;
+}>({ itemValue: null, isDisabled: false });
+
+// Hook to use the NavigationMenuItem context
+export const useNavigationMenuItemContext = () => {
+  const context = useContext(NavigationMenuItemContext);
+  if (!context) {
+    throw new Error(
+      'useNavigationMenuItemContext must be used within a NavigationMenuItem'
+    );
+  }
+  return context;
+};
+
 // NavigationMenu Item component
 export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
   item,
+  value,
+  isDisabled = false,
+  children,
   views,
 }) => {
   const {
     activeItemId,
     setActiveItemId,
-    // isItemExpanded,
     orientation,
     size,
     variant,
     onItemActivate,
   } = useNavigationMenuContext();
 
-  const isActive = activeItemId === item.id;
-  const hasSubItems = item.items && item.items.length > 0;
-  // const isExpanded = hasSubItems && isItemExpanded(item.id);
+  // Handle both data-driven and compound component patterns
+  const itemId = item?.id || value;
+  const isActive = activeItemId === itemId;
+  const hasSubItems = item?.items && item.items.length > 0;
+  const disabled = item?.disabled || isDisabled;
 
   const handleClick = () => {
-    if (item.disabled) return;
+    if (disabled) return;
 
-    setActiveItemId(item.id);
-    if (onItemActivate) {
-      onItemActivate(item.id);
+    if (itemId) {
+      setActiveItemId(itemId);
+      if (onItemActivate) {
+        onItemActivate(itemId);
+      }
     }
   };
 
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
 
-  // Render item with sub-items
-  if (hasSubItems) {
+  // For compound component pattern
+  if (children) {
+    return (
+      <NavigationMenuItemContext.Provider
+        value={{ itemValue: itemId || null, isDisabled: disabled }}
+      >
+        <View
+          width="100%"
+          cursor={disabled ? 'not-allowed' : 'pointer'}
+          opacity={disabled ? 0.5 : 1}
+          {...NavigationMenuSizes[size]}
+          {...NavigationMenuVariants[variant]}
+          {...(isActive ? NavigationMenuItemStates.active : {})}
+          _hover={!disabled ? NavigationMenuItemStates.hover : {}}
+          {...views?.item}
+        >
+          {children}
+        </View>
+      </NavigationMenuItemContext.Provider>
+    );
+  }
+
+  // For data-driven pattern with sub-items
+  if (hasSubItems && item) {
     return (
       <Container
         width="100%"
@@ -128,9 +173,7 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
           {item.label}
         </NavigationMenuTrigger>
 
-        <NavigationMenuContent
-          itemId={item.id} //views={views}
-        >
+        <NavigationMenuContent itemId={item.id}>
           <NavigationMenuList>
             {item.items?.map((subItem) => (
               <NavigationMenuItem key={subItem.id} item={subItem} />
@@ -141,33 +184,37 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
     );
   }
 
-  // Render regular item (no sub-items)
-  return (
-    <View
-      as={item.href ? 'a' : 'div'}
-      to={item.href}
-      onClick={handleClick}
-      cursor={item.disabled ? 'not-allowed' : 'pointer'}
-      opacity={item.disabled ? 0.5 : 1}
-      width="100%"
-      display="flex"
-      alignItems="center"
-      borderRadius={4}
-      transition="background-color 0.2s ease"
-      {...NavigationMenuSizes[size]}
-      {...NavigationMenuVariants[variant]}
-      {...(isActive ? NavigationMenuItemStates.active : {})}
-      _hover={!item.disabled ? NavigationMenuItemStates.hover : {}}
-      {...views?.item}
-    >
-      {item.icon && (
-        <View marginRight={8} {...views?.icon}>
-          {item.icon}
-        </View>
-      )}
-      {item.label}
-    </View>
-  );
+  // For data-driven pattern without sub-items
+  if (item) {
+    return (
+      <View
+        as={item.href ? 'a' : 'div'}
+        to={item.href}
+        onClick={handleClick}
+        cursor={item.disabled ? 'not-allowed' : 'pointer'}
+        opacity={item.disabled ? 0.5 : 1}
+        width="100%"
+        display="flex"
+        alignItems="center"
+        borderRadius={4}
+        transition="background-color 0.2s ease"
+        {...NavigationMenuSizes[size]}
+        {...NavigationMenuVariants[variant]}
+        {...(isActive ? NavigationMenuItemStates.active : {})}
+        _hover={!item.disabled ? NavigationMenuItemStates.hover : {}}
+        {...views?.item}
+      >
+        {item.icon && (
+          <View marginRight={8} {...views?.icon}>
+            {item.icon}
+          </View>
+        )}
+        {item.label}
+      </View>
+    );
+  }
+
+  return null;
 };
 
 // NavigationMenu Trigger component
@@ -259,8 +306,65 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
 };
 
 // Main NavigationMenu View component
+// NavigationMenu Link component
+import { NavigationMenuLinkProps } from './NavigationMenu.props';
+
+export const NavigationMenuLink: React.FC<NavigationMenuLinkProps> = ({
+  href,
+  children,
+  views,
+  ...props
+}) => {
+  const { itemValue, isDisabled } = useNavigationMenuItemContext();
+  const { activeItemId, setActiveItemId, onItemActivate } =
+    useNavigationMenuContext();
+
+  const isActive = activeItemId === itemValue;
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (isDisabled) {
+      e.preventDefault();
+      return;
+    }
+
+    if (itemValue) {
+      setActiveItemId(itemValue);
+      if (onItemActivate) {
+        onItemActivate(itemValue);
+      }
+    }
+
+    // Allow the user's onClick handler to run
+    if (props.onClick) {
+      props.onClick(e);
+    }
+  };
+
+  return (
+    <View
+      as="a"
+      href={isDisabled ? undefined : href}
+      onClick={handleClick}
+      cursor={isDisabled ? 'not-allowed' : 'pointer'}
+      opacity={isDisabled ? 0.5 : 1}
+      width="100%"
+      display="flex"
+      alignItems="center"
+      aria-current={isActive ? 'page' : undefined}
+      aria-disabled={isDisabled}
+      data-active={isActive ? '' : undefined}
+      data-disabled={isDisabled ? '' : undefined}
+      {...(isActive ? { fontWeight: 'bold' } : {})}
+      {...views?.container}
+      {...props}
+    >
+      {children}
+    </View>
+  );
+};
+
 export const NavigationMenuView: React.FC<{
-  items: NavigationItem[];
+  items?: NavigationItem[];
   orientation: Orientation;
   size: Size;
   variant: Variant;
@@ -272,6 +376,10 @@ export const NavigationMenuView: React.FC<{
   views,
 }) => {
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
+
+  if (!items || items.length === 0) {
+    return null;
+  }
 
   return (
     <Container

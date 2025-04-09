@@ -1,5 +1,6 @@
 import React from 'react';
 import { ViewProps } from 'app-studio';
+import { LinkProps } from '../../Link/Link/Link.props';
 import {
   NavigationItem,
   NavigationMenuStyles,
@@ -10,9 +11,13 @@ import {
 
 export interface NavigationMenuProps {
   /**
-   * The items to display in the navigation menu
+   * The items to display in the navigation menu (for data-driven approach)
    */
-  items: NavigationItem[];
+  items?: NavigationItem[];
+  /**
+   * The content of the navigation menu (for compound component pattern)
+   */
+  children?: React.ReactNode;
   /**
    * The orientation of the navigation menu
    */
@@ -64,7 +69,19 @@ export interface NavigationMenuItemProps {
   /**
    * The navigation item data
    */
-  item: NavigationItem;
+  item?: NavigationItem;
+  /**
+   * The unique value for the item (used for compound component pattern)
+   */
+  value?: string;
+  /**
+   * Whether the item is disabled
+   */
+  isDisabled?: boolean;
+  /**
+   * The content of the item (used for compound component pattern)
+   */
+  children?: React.ReactNode;
   /**
    * Custom styles for the item
    */
@@ -118,6 +135,24 @@ export interface NavigationMenuContentProps {
   };
 }
 
+export interface NavigationMenuLinkProps extends Omit<LinkProps, 'to'> {
+  /**
+   * The URL the link points to
+   */
+  href?: string;
+  /**
+   * The content of the link
+   */
+  children: React.ReactNode;
+  /**
+   * Custom styles for the link
+   */
+  views?: {
+    container?: ViewProps;
+    icon?: ViewProps;
+  };
+}
+
 export interface NavigationMenuType extends React.FC<NavigationMenuProps> {
   /**
    * The list component for the navigation menu
@@ -135,4 +170,8 @@ export interface NavigationMenuType extends React.FC<NavigationMenuProps> {
    * The content component for navigation menu items with sub-items
    */
   Content: React.FC<NavigationMenuContentProps>;
+  /**
+   * The link component for navigation menu items
+   */
+  Link: React.FC<NavigationMenuLinkProps>;
 }
