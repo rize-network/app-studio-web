@@ -104,7 +104,9 @@ export const GroupedCommand = () => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Open Grouped Command Palette</Button>
+      <Button onClick={() => setOpen(true)}>
+        Open Grouped Command Palette
+      </Button>
       <Command
         open={open}
         onOpenChange={setOpen}

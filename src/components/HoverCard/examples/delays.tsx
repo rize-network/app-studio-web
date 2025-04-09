@@ -15,7 +15,8 @@ export const DelaysHoverCard = () => {
           </HoverCard.Trigger>
           <HoverCard.Content>
             <Text>
-              This card opens quickly (100ms) after hovering, but has a standard close delay (300ms).
+              This card opens quickly (100ms) after hovering, but has a standard
+              close delay (300ms).
             </Text>
           </HoverCard.Content>
         </HoverCard>
@@ -29,7 +30,8 @@ export const DelaysHoverCard = () => {
           </HoverCard.Trigger>
           <HoverCard.Content>
             <Text>
-              This card has a standard open delay (200ms), but stays open longer (1000ms) after you move away.
+              This card has a standard open delay (200ms), but stays open longer
+              (1000ms) after you move away.
             </Text>
           </HoverCard.Content>
         </HoverCard>
@@ -45,7 +47,8 @@ export const DelaysHoverCard = () => {
             </HoverCard.Trigger>
             <HoverCard.Content side="top">
               <Text>
-                This card uses the asChild prop to apply hover behavior directly to the Link component.
+                This card uses the asChild prop to apply hover behavior directly
+                to the Link component.
               </Text>
             </HoverCard.Content>
           </HoverCard>
