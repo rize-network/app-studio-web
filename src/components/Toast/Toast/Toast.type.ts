@@ -1,7 +1,13 @@
 import { ViewProps } from 'app-studio';
 
 export type ToastVariant = 'info' | 'success' | 'warning' | 'error';
-export type ToastPosition = 'top' | 'top-right' | 'top-left' | 'bottom' | 'bottom-right' | 'bottom-left';
+export type ToastPosition =
+  | 'top'
+  | 'top-right'
+  | 'top-left'
+  | 'bottom'
+  | 'bottom-right'
+  | 'bottom-left';
 
 export interface Theme {
   container: {

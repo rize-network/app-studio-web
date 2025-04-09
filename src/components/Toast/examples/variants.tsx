@@ -13,7 +13,7 @@ export const ToastVariants = () => {
       >
         Info
       </Button>
-      
+
       <Button
         onClick={() =>
           Toast.success('Success', 'Your action was completed successfully.')
@@ -21,7 +21,7 @@ export const ToastVariants = () => {
       >
         Success
       </Button>
-      
+
       <Button
         onClick={() =>
           Toast.warning('Warning', 'Please be careful with this action.')
@@ -29,10 +29,13 @@ export const ToastVariants = () => {
       >
         Warning
       </Button>
-      
+
       <Button
         onClick={() =>
-          Toast.error('Error', 'An error occurred while processing your request.')
+          Toast.error(
+            'Error',
+            'An error occurred while processing your request.'
+          )
         }
       >
         Error

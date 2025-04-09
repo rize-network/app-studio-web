@@ -1,0 +1,252 @@
+# Command
+
+A command palette for displaying a searchable list of commands.
+
+### **Import**
+  ```tsx
+  import { Command } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { Command } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { HomeIcon, SettingsIcon, UserIcon } from '@app-studio/web';
+
+export const DefaultCommand = () => {
+  const [open, setOpen] = useState(false);
+
+  const commands = [
+    {
+      id: 'home',
+      name: 'Home',
+      description: 'Go to home page',
+      icon: <HomeIcon widthHeight={16} />,
+      shortcut: '⌘H',
+      onSelect: () => console.log('Home selected'),
+    },
+    {
+      id: 'settings',
+      name: 'Settings',
+      description: 'Open settings page',
+      icon: <SettingsIcon widthHeight={16} />,
+      shortcut: '⌘S',
+      onSelect: () => console.log('Settings selected'),
+    },
+    {
+      id: 'profile',
+      name: 'Profile',
+      description: 'View your profile',
+      icon: <UserIcon widthHeight={16} />,
+      shortcut: '⌘P',
+      onSelect: () => console.log('Profile selected'),
+    },
+  ];
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Command Palette</Button>
+      <Command
+        open={open}
+        onOpenChange={setOpen}
+        commands={commands}
+        placeholder="Search commands..."
+      />
+    </>
+  );
+};
+```
+
+### **Groups**
+The Command component supports grouping commands:
+
+```tsx
+const groups = [
+  {
+    id: 'navigation',
+    name: 'Navigation',
+    commands: [
+      {
+        id: 'home',
+        name: 'Home',
+        description: 'Go to home page',
+        icon: <HomeIcon widthHeight={16} />,
+        shortcut: '⌘H',
+        onSelect: () => console.log('Home selected'),
+      },
+      // More commands...
+    ],
+  },
+  {
+    id: 'actions',
+    name: 'Actions',
+    commands: [
+      {
+        id: 'edit',
+        name: 'Edit',
+        description: 'Edit current document',
+        icon: <EditIcon widthHeight={16} />,
+        shortcut: '⌘E',
+        onSelect: () => console.log('Edit selected'),
+      },
+      // More commands...
+    ],
+  },
+];
+
+<Command
+  open={open}
+  onOpenChange={setOpen}
+  groups={groups}
+  placeholder="Search commands..."
+/>
+```
+
+### **Variants**
+The Command component supports different visual variants:
+
+```tsx
+// Default variant
+<Command variant="default" />
+
+// Filled variant
+<Command variant="filled" />
+
+// Outline variant
+<Command variant="outline" />
+```
+
+### **Sizes**
+The Command component supports different sizes:
+
+```tsx
+// Small size
+<Command size="sm" />
+
+// Medium size (default)
+<Command size="md" />
+
+// Large size
+<Command size="lg" />
+```
+
+### **Custom Empty State**
+The Command component supports a custom empty state:
+
+```tsx
+const customEmptyState = (
+  <View
+    alignItems="center"
+    justifyContent="center"
+    padding="24px"
+    flexDirection="column"
+  >
+    <Text fontSize="16px" fontWeight="bold" color="color.gray.600">
+      No commands found
+    </Text>
+    <Text fontSize="14px" color="color.gray.500" marginTop="8px">
+      Try a different search term
+    </Text>
+  </View>
+);
+
+<Command
+  open={open}
+  onOpenChange={setOpen}
+  commands={commands}
+  emptyState={customEmptyState}
+/>
+```
+
+### **Custom Footer**
+The Command component supports a custom footer:
+
+```tsx
+const customFooter = (
+  <Horizontal justifyContent="space-between" width="100%">
+    <Text fontSize="12px" color="color.gray.500">
+      Press ↑↓ to navigate
+    </Text>
+    <Text fontSize="12px" color="color.gray.500">
+      Press Enter to select
+    </Text>
+    <Text fontSize="12px" color="color.gray.500">
+      Press Esc to close
+    </Text>
+  </Horizontal>
+);
+
+<Command
+  open={open}
+  onOpenChange={setOpen}
+  commands={commands}
+  footer={customFooter}
+/>
+```
+
+### **Customization**
+The Command component can be customized with the views prop:
+
+```tsx
+<Command
+  open={open}
+  onOpenChange={setOpen}
+  commands={commands}
+  views={{
+    container: {
+      backgroundColor: 'color.blue.50',
+      borderColor: 'color.blue.200',
+      borderWidth: '2px',
+      borderRadius: '12px',
+    },
+    searchInput: {
+      container: {
+        backgroundColor: 'white',
+        borderBottomColor: 'color.blue.200',
+      },
+      input: {
+        color: 'color.blue.800',
+        fontWeight: 'medium',
+      },
+    },
+    item: {
+      backgroundColor: 'transparent',
+      borderRadius: '8px',
+      _hover: {
+        backgroundColor: 'color.blue.100',
+      },
+    },
+    selectedItem: {
+      backgroundColor: 'color.blue.200',
+      _hover: {
+        backgroundColor: 'color.blue.300',
+      },
+    },
+    name: {
+      color: 'color.blue.800',
+      fontWeight: 'bold',
+    },
+    description: {
+      color: 'color.blue.600',
+    },
+    shortcut: {
+      backgroundColor: 'white',
+      padding: '2px 6px',
+      borderRadius: '4px',
+      fontWeight: 'bold',
+    },
+    footer: {
+      backgroundColor: 'white',
+      borderTopColor: 'color.blue.200',
+    },
+  }}
+/>
+```
+
+### **Keyboard Navigation**
+The Command component supports keyboard navigation:
+
+- `↑` and `↓` to navigate between commands
+- `Enter` to select a command
+- `Escape` to close the command palette

@@ -10,16 +10,19 @@ import { View } from 'app-studio';
 
 /**
  * HoverCard component displays floating content when hovering over a trigger element.
+ * Supports configurable open and close delays for a smoother user experience.
  */
 const HoverCardComponent: React.FC<HoverCardProps> = ({
   children,
   views,
+  openDelay,
+  closeDelay,
   ...props
 }) => {
-  const { isOpen, setIsOpen } = useHoverCardState();
+  const hoverCardState = useHoverCardState({ openDelay, closeDelay });
 
   return (
-    <HoverCardProvider value={{ isOpen, setIsOpen }}>
+    <HoverCardProvider value={hoverCardState}>
       <View
         position="relative"
         display="inline-block"

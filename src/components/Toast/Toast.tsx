@@ -1,14 +1,14 @@
 import React from 'react';
 import { ToastView, ToastContainer } from './Toast/Toast.view';
 import { ToastProps, ToastContainerProps } from './Toast/Toast.props';
-import { 
-  showToast, 
-  showInfoToast, 
-  showSuccessToast, 
-  showWarningToast, 
+import {
+  showToast,
+  showInfoToast,
+  showSuccessToast,
+  showWarningToast,
   showErrorToast,
   removeToast,
-  removeAllToasts
+  removeAllToasts,
 } from './Toast/Toast.store';
 
 /**

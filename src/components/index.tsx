@@ -48,6 +48,7 @@ export * from './Separator/Separator';
 export * from './Sidebar/Sidebar';
 export * from './Resizable/Resizable';
 export * from './Toast/Toast';
+export * from './Command/Command';
 
 export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';
@@ -92,3 +93,4 @@ export * from './Separator/Separator/Separator.props';
 export * from './Sidebar/Sidebar/Sidebar.props';
 export * from './Resizable/Resizable/Resizable.props';
 export * from './Toast/Toast/Toast.props';
+export * from './Command/Command/Command.props';

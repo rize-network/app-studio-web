@@ -6,11 +6,11 @@ export const DisabledAccordion = () => {
   return (
     <Vertical gap={20} width="100%" maxWidth={600}>
       <Text marginBottom={10}>Disabled Item</Text>
-      <Accordion>
-        <Accordion.Item id="disabled-1">
-          <Accordion.Header>
+      <Accordion type="single" defaultValue="disabled-1" collapsible>
+        <Accordion.Item value="disabled-1">
+          <Accordion.Trigger>
             <Text fontWeight="bold">Regular Item</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               This is a regular accordion item that can be expanded and
@@ -19,10 +19,10 @@ export const DisabledAccordion = () => {
           </Accordion.Content>
         </Accordion.Item>
 
-        <Accordion.Item id="disabled-2" isDisabled>
-          <Accordion.Header>
+        <Accordion.Item value="disabled-2" isDisabled>
+          <Accordion.Trigger>
             <Text fontWeight="bold">Disabled Item</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               This content wont be accessible because the item is disabled.
@@ -30,10 +30,10 @@ export const DisabledAccordion = () => {
           </Accordion.Content>
         </Accordion.Item>
 
-        <Accordion.Item id="disabled-3">
-          <Accordion.Header>
+        <Accordion.Item value="disabled-3">
+          <Accordion.Trigger>
             <Text fontWeight="bold">Another Regular Item</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               This is another regular accordion item that can be expanded and

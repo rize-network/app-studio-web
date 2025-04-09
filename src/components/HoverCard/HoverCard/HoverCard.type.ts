@@ -3,5 +3,11 @@ export type Alignment = 'start' | 'center' | 'end';
 
 export interface HoverCardContextType {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  openCard: () => void;
+  closeCard: () => void;
+  cancelCloseTimer: () => void;
+  triggerRef: React.RefObject<HTMLDivElement>;
+  contentRef: React.RefObject<HTMLDivElement>;
+  contentId: string;
+  triggerId: string;
 }

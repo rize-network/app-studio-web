@@ -1,8 +1,14 @@
-import React, { createContext, useContext } from 'react';
-import { View, Horizontal, Vertical } from 'app-studio';
+import React, {
+  createContext,
+  useContext,
+  Children,
+  cloneElement,
+  isValidElement,
+} from 'react';
+import { View, Horizontal, Vertical, Button } from 'app-studio';
 import { AccordionContextType } from './Accordion.type';
 import {
-  AccordionHeaderProps,
+  AccordionTriggerProps,
   AccordionContentProps,
   AccordionItemProps,
 } from './Accordion.props';
@@ -13,6 +19,9 @@ const AccordionContext = createContext<AccordionContextType>({
   expandedItems: [],
   toggleItem: () => {},
   isItemExpanded: () => false,
+  type: 'single',
+  collapsible: false,
+  baseId: '',
 });
 
 // Provider component for the Accordion context
@@ -40,13 +49,18 @@ export const useAccordionContext = () => {
 
 // Accordion Item component
 export const AccordionItem: React.FC<AccordionItemProps> = ({
-  id,
+  value,
   children,
   isDisabled = false,
   views,
+  ...props
 }) => {
-  const { isItemExpanded } = useAccordionContext();
-  const isExpanded = isItemExpanded(id);
+  const { isItemExpanded, baseId, toggleItem } = useAccordionContext();
+  const isExpanded = isItemExpanded(value);
+
+  // Generate unique IDs for ARIA attributes
+  const triggerId = `${baseId}-trigger-${value}`;
+  const contentId = `${baseId}-content-${value}`;
 
   return (
     <View
@@ -57,15 +71,21 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       overflow="hidden"
       opacity={isDisabled ? 0.5 : 1}
       pointerEvents={isDisabled ? 'none' : 'auto'}
+      data-state={isExpanded ? 'open' : 'closed'}
+      data-disabled={isDisabled ? '' : undefined}
       {...views?.item}
+      {...props}
     >
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          // Pass the id and isExpanded props to AccordionHeader and AccordionContent
+          // Pass the necessary props to AccordionTrigger and AccordionContent
           return React.cloneElement(child, {
             ...child.props,
-            id,
+            value,
             isExpanded,
+            isDisabled,
+            triggerId,
+            contentId,
           });
         }
         return child;
@@ -74,28 +94,60 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   );
 };
 
-// Accordion Header component
-export const AccordionHeader: React.FC<
-  AccordionHeaderProps & { id?: string; isExpanded?: boolean }
-> = ({ children, id, isExpanded, views }) => {
+// Accordion Trigger component
+export const AccordionTrigger: React.FC<
+  AccordionTriggerProps & {
+    value?: string;
+    isExpanded?: boolean;
+    isDisabled?: boolean;
+    triggerId?: string;
+    contentId?: string;
+  }
+> = ({
+  children,
+  value,
+  isExpanded,
+  isDisabled,
+  triggerId,
+  contentId,
+  views,
+  asChild = false,
+  ...props
+}) => {
   const { toggleItem } = useAccordionContext();
 
   const handleClick = () => {
-    if (id) {
-      toggleItem(id);
+    if (value && !isDisabled) {
+      toggleItem(value);
     }
   };
 
+  const triggerProps = {
+    id: triggerId,
+    'aria-expanded': isExpanded,
+    'aria-controls': contentId,
+    'aria-disabled': isDisabled,
+    'data-state': isExpanded ? 'open' : 'closed',
+    'data-disabled': isDisabled ? '' : undefined,
+    onClick: handleClick,
+    padding: 16,
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'color.white',
+    width: '100%',
+    ...views?.container,
+    ...props,
+  };
+
+  // If asChild is true, clone the child element and merge props
+  if (asChild && isValidElement(children)) {
+    const child = Children.only(children);
+    return cloneElement(child, { ...triggerProps, ...child.props });
+  }
+
   return (
-    <Horizontal
-      padding={16}
-      cursor="pointer"
-      alignItems="center"
-      justifyContent="space-between"
-      backgroundColor="color.white"
-      onClick={handleClick}
-      {...views?.container}
-    >
+    <Horizontal {...triggerProps}>
       {children}
       <View
         width={24}
@@ -126,20 +178,40 @@ export const AccordionHeader: React.FC<
 
 // Accordion Content component
 export const AccordionContent: React.FC<
-  AccordionContentProps & { isExpanded?: boolean }
-> = ({ children, isExpanded, views }) => {
+  AccordionContentProps & {
+    isExpanded?: boolean;
+    isDisabled?: boolean;
+    triggerId?: string;
+    contentId?: string;
+  }
+> = ({
+  children,
+  isExpanded,
+  isDisabled,
+  triggerId,
+  contentId,
+  views,
+  ...props
+}) => {
   if (!isExpanded) {
     return null;
   }
 
   return (
     <View
+      id={contentId}
+      role="region"
+      aria-labelledby={triggerId}
       padding={16}
       backgroundColor="color.white"
       maxHeight={isExpanded ? '1000px' : '0'}
-      transition="max-height 0.3s ease-in-out"
+      transition="max-height 0.3s ease-in-out, opacity 0.3s ease-in-out"
+      opacity={1}
       overflow="hidden"
+      data-state={isExpanded ? 'open' : 'closed'}
+      data-disabled={isDisabled ? '' : undefined}
       {...views?.container}
+      {...props}
     >
       {children}
     </View>
@@ -152,13 +224,27 @@ export const AccordionView: React.FC<{
   shape?: 'sharp' | 'rounded';
   variant?: 'default' | 'outline' | 'filled';
   views?: any;
-}> = ({ children, shape = 'rounded', variant = 'default', views }) => {
+  baseId: string;
+  type: 'single' | 'multiple';
+  collapsible: boolean;
+}> = ({
+  children,
+  shape = 'rounded',
+  variant = 'default',
+  views,
+  baseId,
+  type,
+  collapsible,
+  ...props
+}) => {
   return (
     <Vertical
       width="100%"
+      data-orientation="vertical"
       {...AccordionShapes[shape]}
       {...AccordionVariants[variant]}
       {...views?.container}
+      {...props}
     >
       {children}
     </Vertical>

@@ -16,21 +16,29 @@ export const ToastActions = () => {
     <Horizontal gap={10}>
       <Button
         onClick={() =>
-          Toast.success('Item Deleted', 'The item has been successfully deleted.', {
-            action: handleUndo,
-            actionText: 'Undo',
-          })
+          Toast.success(
+            'Item Deleted',
+            'The item has been successfully deleted.',
+            {
+              action: handleUndo,
+              actionText: 'Undo',
+            }
+          )
         }
       >
         With Undo Action
       </Button>
-      
+
       <Button
         onClick={() =>
-          Toast.error('Failed to Save', 'There was an error saving your changes.', {
-            action: handleRetry,
-            actionText: 'Retry',
-          })
+          Toast.error(
+            'Failed to Save',
+            'There was an error saving your changes.',
+            {
+              action: handleRetry,
+              actionText: 'Retry',
+            }
+          )
         }
       >
         With Retry Action

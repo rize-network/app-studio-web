@@ -7,11 +7,11 @@ export const AccordionVariants = () => {
     <Vertical gap={30} width="100%" maxWidth={600}>
       <Vertical gap={10}>
         <Text fontWeight="bold">Outline Variant</Text>
-        <Accordion variant="outline">
-          <Accordion.Item id="outline-1">
-            <Accordion.Header>
+        <Accordion type="single" defaultValue="outline-1" variant="outline">
+          <Accordion.Item value="outline-1">
+            <Accordion.Trigger>
               <Text fontWeight="bold">First Item</Text>
-            </Accordion.Header>
+            </Accordion.Trigger>
             <Accordion.Content>
               <Text>
                 This is the content for the first item in the outline variant
@@ -20,10 +20,10 @@ export const AccordionVariants = () => {
             </Accordion.Content>
           </Accordion.Item>
 
-          <Accordion.Item id="outline-2">
-            <Accordion.Header>
+          <Accordion.Item value="outline-2">
+            <Accordion.Trigger>
               <Text fontWeight="bold">Second Item</Text>
-            </Accordion.Header>
+            </Accordion.Trigger>
             <Accordion.Content>
               <Text>
                 This is the content for the second item in the outline variant
@@ -36,11 +36,11 @@ export const AccordionVariants = () => {
 
       <Vertical gap={10}>
         <Text fontWeight="bold">Filled Variant</Text>
-        <Accordion variant="filled">
-          <Accordion.Item id="filled-1">
-            <Accordion.Header>
+        <Accordion type="single" defaultValue="filled-1" variant="filled">
+          <Accordion.Item value="filled-1">
+            <Accordion.Trigger>
               <Text fontWeight="bold">First Item</Text>
-            </Accordion.Header>
+            </Accordion.Trigger>
             <Accordion.Content>
               <Text>
                 This is the content for the first item in the filled variant
@@ -49,10 +49,10 @@ export const AccordionVariants = () => {
             </Accordion.Content>
           </Accordion.Item>
 
-          <Accordion.Item id="filled-2">
-            <Accordion.Header>
+          <Accordion.Item value="filled-2">
+            <Accordion.Trigger>
               <Text fontWeight="bold">Second Item</Text>
-            </Accordion.Header>
+            </Accordion.Trigger>
             <Accordion.Content>
               <Text>
                 This is the content for the second item in the filled variant
@@ -65,11 +65,16 @@ export const AccordionVariants = () => {
 
       <Vertical gap={10}>
         <Text fontWeight="bold">Sharp Shape</Text>
-        <Accordion shape="sharp" variant="outline">
-          <Accordion.Item id="sharp-1">
-            <Accordion.Header>
+        <Accordion
+          type="single"
+          defaultValue="sharp-1"
+          shape="sharp"
+          variant="outline"
+        >
+          <Accordion.Item value="sharp-1">
+            <Accordion.Trigger>
               <Text fontWeight="bold">First Item</Text>
-            </Accordion.Header>
+            </Accordion.Trigger>
             <Accordion.Content>
               <Text>
                 This is the content for the first item in the sharp shape
@@ -78,10 +83,10 @@ export const AccordionVariants = () => {
             </Accordion.Content>
           </Accordion.Item>
 
-          <Accordion.Item id="sharp-2">
-            <Accordion.Header>
+          <Accordion.Item value="sharp-2">
+            <Accordion.Trigger>
               <Text fontWeight="bold">Second Item</Text>
-            </Accordion.Header>
+            </Accordion.Trigger>
             <Accordion.Content>
               <Text>
                 This is the content for the second item in the sharp shape

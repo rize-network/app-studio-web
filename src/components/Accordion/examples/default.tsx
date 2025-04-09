@@ -1,16 +1,16 @@
 import React from 'react';
 import { Accordion } from '../Accordion';
-import { Text, Vertical } from 'app-studio';
+import { Text, Vertical, View } from 'app-studio';
 
 export const DefaultAccordion = () => {
   return (
     <Vertical gap={20} width="100%" maxWidth={600}>
-      <Text marginBottom={10}>Default Accordion</Text>
-      <Accordion>
-        <Accordion.Item id="item-1">
-          <Accordion.Header>
+      <Text marginBottom={10}>Default Accordion (Single)</Text>
+      <Accordion type="single" defaultValue="item-1">
+        <Accordion.Item value="item-1">
+          <Accordion.Trigger>
             <Text fontWeight="bold">What is React?</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               React is a JavaScript library for building user interfaces. It is
@@ -21,10 +21,10 @@ export const DefaultAccordion = () => {
           </Accordion.Content>
         </Accordion.Item>
 
-        <Accordion.Item id="item-2">
-          <Accordion.Header>
+        <Accordion.Item value="item-2">
+          <Accordion.Trigger>
             <Text fontWeight="bold">What are React Hooks?</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               Hooks are functions that let you hook into React state and
@@ -34,10 +34,10 @@ export const DefaultAccordion = () => {
           </Accordion.Content>
         </Accordion.Item>
 
-        <Accordion.Item id="item-3">
-          <Accordion.Header>
+        <Accordion.Item value="item-3">
+          <Accordion.Trigger>
             <Text fontWeight="bold">What is JSX?</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               JSX is a syntax extension for JavaScript. It was written to be

@@ -20,21 +20,17 @@ export const ToastPositions = () => {
         <Button onClick={() => showToastAtPosition('top-left')}>
           Top Left
         </Button>
-        <Button onClick={() => showToastAtPosition('top')}>
-          Top
-        </Button>
+        <Button onClick={() => showToastAtPosition('top')}>Top</Button>
         <Button onClick={() => showToastAtPosition('top-right')}>
           Top Right
         </Button>
       </Horizontal>
-      
+
       <Horizontal gap={10}>
         <Button onClick={() => showToastAtPosition('bottom-left')}>
           Bottom Left
         </Button>
-        <Button onClick={() => showToastAtPosition('bottom')}>
-          Bottom
-        </Button>
+        <Button onClick={() => showToastAtPosition('bottom')}>Bottom</Button>
         <Button onClick={() => showToastAtPosition('bottom-right')}>
           Bottom Right
         </Button>

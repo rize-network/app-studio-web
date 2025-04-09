@@ -1,6 +1,6 @@
 # HoverCard
 
-A floating card that appears when hovering over a trigger element.
+A floating card that appears when hovering over a trigger element. Supports configurable open and close delays for a smoother user experience.
 
 ### **Import**
   ```tsx
@@ -82,6 +82,56 @@ export const StyledHoverCard = () => {
       >
         <Text color="white">
           This HoverCard has custom styling with a primary background color.
+        </Text>
+      </HoverCard.Content>
+    </HoverCard>
+  );
+};
+```
+
+### **Delay Options**
+You can control the timing of when the HoverCard opens and closes using the `openDelay` and `closeDelay` props.
+
+```tsx
+import React from 'react';
+import { HoverCard } from '../HoverCard';
+import { Button } from '../../Button/Button';
+import { Text } from '../../Text/Text';
+
+export const DelayedHoverCard = () => {
+  return (
+    <HoverCard openDelay={100} closeDelay={1000}>
+      <HoverCard.Trigger>
+        <Button>Hover Me</Button>
+      </HoverCard.Trigger>
+      <HoverCard.Content>
+        <Text>
+          This card opens quickly (100ms) but stays open longer (1000ms) after you move away.
+        </Text>
+      </HoverCard.Content>
+    </HoverCard>
+  );
+};
+```
+
+### **Using with Other Components**
+You can use the `asChild` prop on the Trigger to apply hover behavior directly to another component.
+
+```tsx
+import React from 'react';
+import { HoverCard } from '../HoverCard';
+import { Link } from '../../Link/Link';
+import { Text } from '../../Text/Text';
+
+export const LinkHoverCard = () => {
+  return (
+    <HoverCard>
+      <HoverCard.Trigger asChild>
+        <Link to="https://example.com">example.com</Link>
+      </HoverCard.Trigger>
+      <HoverCard.Content>
+        <Text>
+          This card uses the asChild prop to apply hover behavior directly to the Link component.
         </Text>
       </HoverCard.Content>
     </HoverCard>

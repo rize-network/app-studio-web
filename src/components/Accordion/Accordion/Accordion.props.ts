@@ -1,26 +1,48 @@
 import React from 'react';
 import { ViewProps } from 'app-studio';
-import { AccordionStyles, Shape, Variant } from './Accordion.type';
+import {
+  AccordionStyles,
+  Shape,
+  Variant,
+  AccordionType,
+} from './Accordion.type';
 
-export interface AccordionProps {
+export interface AccordionProps
+  extends Omit<ViewProps, 'value' | 'defaultValue' | 'onChange'> {
   /**
    * The content of the accordion (AccordionItem components)
    */
   children: React.ReactNode;
   /**
-   * Whether multiple items can be expanded at once
+   * Determines whether one or multiple items can be opened at the same time
+   * @default 'single'
    */
-  allowMultiple?: boolean;
+  type?: AccordionType;
   /**
-   * Default expanded item IDs
+   * The value of the item(s) to be opened when initially rendered (uncontrolled)
    */
-  defaultExpandedItems?: string[];
+  defaultValue?: string | string[];
+  /**
+   * The controlled value of the item(s) to be opened
+   */
+  value?: string | string[];
+  /**
+   * Event handler called when the value changes
+   */
+  onValueChange?: (value: string | string[] | undefined) => void;
+  /**
+   * When type is 'single', allows closing the currently open item
+   * @default false
+   */
+  collapsible?: boolean;
   /**
    * The shape of the accordion items
+   * @default 'rounded'
    */
   shape?: Shape;
   /**
    * The visual style variant of the accordion
+   * @default 'default'
    */
   variant?: Variant;
   /**
@@ -29,11 +51,11 @@ export interface AccordionProps {
   views?: AccordionStyles;
 }
 
-export interface AccordionItemProps {
+export interface AccordionItemProps extends Omit<ViewProps, 'value'> {
   /**
    * Unique identifier for the accordion item
    */
-  id: string;
+  value: string;
   /**
    * The content of the accordion item
    */
@@ -47,24 +69,29 @@ export interface AccordionItemProps {
    */
   views?: {
     item?: ViewProps;
-    header?: ViewProps;
+    trigger?: ViewProps;
     content?: ViewProps;
     icon?: ViewProps;
   };
 }
 
-export interface AccordionHeaderProps {
+export interface AccordionTriggerProps extends ViewProps {
   /**
-   * The content of the accordion header
+   * The content of the accordion trigger
    */
   children: React.ReactNode;
   /**
-   * Custom styles for the header
+   * Custom styles for the trigger
    */
   views?: {
     container?: ViewProps;
     icon?: ViewProps;
   };
+  /**
+   * If true, merges props onto the immediate child, useful for custom trigger elements
+   * @default false
+   */
+  asChild?: boolean;
 }
 
 export interface AccordionContentProps {
@@ -80,15 +107,15 @@ export interface AccordionContentProps {
   };
 }
 
-export interface AccordionType extends React.FC<AccordionProps> {
+export interface AccordionComponentType extends React.FC<AccordionProps> {
   /**
    * Individual accordion item component
    */
   Item: React.FC<AccordionItemProps>;
   /**
-   * Header component for accordion items
+   * Trigger component for accordion items
    */
-  Header: React.FC<AccordionHeaderProps>;
+  Trigger: React.FC<AccordionTriggerProps>;
   /**
    * Content component for accordion items
    */

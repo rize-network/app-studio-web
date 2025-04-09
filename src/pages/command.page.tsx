@@ -1,14 +1,14 @@
 import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
-  DefaultAccordion,
-  AccordionVariants,
-  MultipleAccordion,
-  DisabledAccordion,
-  CollapsibleAccordion,
-} from 'src/components/Accordion/examples';
+  DefaultCommand,
+  GroupedCommand,
+  CommandVariants,
+  CommandSizes,
+  CustomizedCommand,
+} from 'src/components/Command/examples';
 
-const AccordionPage = () => {
+const CommandPage = () => {
   return (
     <View>
       <table className="table" cellSpacing={0}>
@@ -21,35 +21,35 @@ const AccordionPage = () => {
           <tr>
             <td>Default</td>
             <td>
-              <DefaultAccordion />
+              <DefaultCommand />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Groups</td>
+            <td>
+              <GroupedCommand />
             </td>
           </tr>
 
           <tr>
             <td>Variants</td>
             <td>
-              <AccordionVariants />
+              <CommandVariants />
             </td>
           </tr>
 
           <tr>
-            <td>Multiple</td>
+            <td>Sizes</td>
             <td>
-              <MultipleAccordion />
+              <CommandSizes />
             </td>
           </tr>
 
           <tr>
-            <td>Disabled</td>
+            <td>Customized</td>
             <td>
-              <DisabledAccordion />
-            </td>
-          </tr>
-
-          <tr>
-            <td>Collapsible</td>
-            <td>
-              <CollapsibleAccordion />
+              <CustomizedCommand />
             </td>
           </tr>
         </tbody>
@@ -58,4 +58,4 @@ const AccordionPage = () => {
   );
 };
 
-export default AccordionPage;
+export default CommandPage;

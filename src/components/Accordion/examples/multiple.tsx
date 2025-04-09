@@ -6,11 +6,11 @@ export const MultipleAccordion = () => {
   return (
     <Vertical gap={20} width="100%" maxWidth={600}>
       <Text marginBottom={10}>Multiple Expanded Items</Text>
-      <Accordion allowMultiple defaultExpandedItems={['multi-1']}>
-        <Accordion.Item id="multi-1">
-          <Accordion.Header>
+      <Accordion type="multiple" defaultValue={['multi-1']}>
+        <Accordion.Item value="multi-1">
+          <Accordion.Trigger>
             <Text fontWeight="bold">First Item (Initially Expanded)</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               This item is initially expanded. You can expand multiple items at
@@ -19,10 +19,10 @@ export const MultipleAccordion = () => {
           </Accordion.Content>
         </Accordion.Item>
 
-        <Accordion.Item id="multi-2">
-          <Accordion.Header>
+        <Accordion.Item value="multi-2">
+          <Accordion.Trigger>
             <Text fontWeight="bold">Second Item</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               This is the second item. Try expanding this while the first item
@@ -31,10 +31,10 @@ export const MultipleAccordion = () => {
           </Accordion.Content>
         </Accordion.Item>
 
-        <Accordion.Item id="multi-3">
-          <Accordion.Header>
+        <Accordion.Item value="multi-3">
+          <Accordion.Trigger>
             <Text fontWeight="bold">Third Item</Text>
-          </Accordion.Header>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
               This is the third item. You can have all three items expanded at

@@ -30,17 +30,21 @@ export const CustomizedToast = () => {
       >
         Custom Styled Toast
       </Button>
-      
+
       <Button
         onClick={() =>
-          Toast.success('No Close Button', 'This toast does not have a close button.', {
-            isClosable: false,
-          })
+          Toast.success(
+            'No Close Button',
+            'This toast does not have a close button.',
+            {
+              isClosable: false,
+            }
+          )
         }
       >
         No Close Button
       </Button>
-      
+
       <Button
         onClick={() =>
           Toast.warning('No Icon', 'This toast does not display an icon.', {
