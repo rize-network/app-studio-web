@@ -1,4 +1,5 @@
 import { ViewProps } from 'app-studio';
+import { ButtonProps } from '../../Button/Button/Button.props';
 import React from 'react';
 
 export type Size = 'sm' | 'md' | 'lg';
@@ -25,14 +26,22 @@ export interface ContextMenuContextType {
   setActiveSubmenuId: (id: string | null) => void;
   size: Size;
   variant: Variant;
+  triggerRef?: React.RefObject<HTMLElement>;
+  contentRef?: React.RefObject<HTMLDivElement>;
+  contentId?: string;
+  closeMenu?: () => void;
+  openMenu?: (event: React.MouseEvent) => void;
+  styles?: ContextMenuStyles;
 }
 
 export interface ContextMenuStyles {
   container?: ViewProps;
   menu?: ViewProps;
-  item?: ViewProps;
+  content?: ViewProps;
+  item?: ButtonProps & { _disabled?: ButtonProps }; // Style items like Buttons
   activeItem?: ViewProps;
   divider?: ViewProps;
+  separator?: ViewProps;
   icon?: ViewProps;
   submenuIndicator?: ViewProps;
   submenu?: ViewProps;

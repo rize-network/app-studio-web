@@ -10,11 +10,13 @@ import {
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuDivider,
+  ContextMenuSeparator,
   ContextMenuView,
 } from './ContextMenu/ContextMenu.view';
 
 /**
  * ContextMenu component for displaying a custom context menu on right-click.
+ * Supports both data-driven approach (with items prop) and compound component pattern.
  */
 const ContextMenuComponent: React.FC<ContextMenuProps> = ({
   children,
@@ -22,9 +24,16 @@ const ContextMenuComponent: React.FC<ContextMenuProps> = ({
   size = 'md',
   variant = 'default',
   disableNativeContextMenu = true,
+  onOpenChange,
   views,
   ...props
 }) => {
+  const state = useContextMenuState({
+    size,
+    variant,
+    onOpenChange,
+  });
+
   const {
     isOpen,
     setIsOpen,
@@ -32,7 +41,12 @@ const ContextMenuComponent: React.FC<ContextMenuProps> = ({
     setPosition,
     activeSubmenuId,
     setActiveSubmenuId,
-  } = useContextMenuState();
+    triggerRef,
+    contentRef,
+    contentId,
+    openMenu,
+    closeMenu,
+  } = state;
 
   return (
     <ContextMenuProvider
@@ -45,6 +59,12 @@ const ContextMenuComponent: React.FC<ContextMenuProps> = ({
         setActiveSubmenuId,
         size,
         variant,
+        triggerRef,
+        contentRef,
+        contentId,
+        openMenu,
+        closeMenu,
+        styles: views,
       }}
     >
       <ContextMenuView
@@ -68,3 +88,4 @@ ContextMenu.Trigger = ContextMenuTrigger;
 ContextMenu.Content = ContextMenuContent;
 ContextMenu.Item = ContextMenuItem;
 ContextMenu.Divider = ContextMenuDivider;
+ContextMenu.Separator = ContextMenuSeparator; // Add the Separator component

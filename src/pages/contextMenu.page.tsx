@@ -5,6 +5,7 @@ import {
   ContextMenuVariants,
   ContextMenuSizes,
   CustomContextMenu,
+  CompoundContextMenu,
 } from 'src/components/ContextMenu/examples';
 
 const ContextMenuPage = () => {
@@ -42,6 +43,13 @@ const ContextMenuPage = () => {
             <td>Custom</td>
             <td>
               <CustomContextMenu />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Compound Pattern</td>
+            <td>
+              <CompoundContextMenu />
             </td>
           </tr>
         </tbody>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ViewProps } from 'app-studio';
+import { ButtonProps } from '../../Button/Button/Button.props';
 import {
   ContextMenuItem,
   ContextMenuStyles,
@@ -15,9 +16,9 @@ export interface ContextMenuProps {
    */
   children: React.ReactNode;
   /**
-   * The items to display in the context menu
+   * The items to display in the context menu (for data-driven approach)
    */
-  items: ContextMenuItem[];
+  items?: ContextMenuItem[];
   /**
    * The size of the context menu items
    */
@@ -30,6 +31,10 @@ export interface ContextMenuProps {
    * Whether to disable the default browser context menu
    */
   disableNativeContextMenu?: boolean;
+  /**
+   * Callback fired when the menu open state changes
+   */
+  onOpenChange?: (isOpen: boolean) => void;
   /**
    * Custom styles for different parts of the context menu
    */
@@ -50,6 +55,14 @@ export interface ContextMenuTriggerProps {
    */
   disableNativeContextMenu?: boolean;
   /**
+   * If true, merges props onto the immediate child
+   */
+  asChild?: boolean;
+  /**
+   * Disables the trigger
+   */
+  isDisabled?: boolean;
+  /**
    * Custom styles for the trigger container
    */
   views?: {
@@ -57,11 +70,15 @@ export interface ContextMenuTriggerProps {
   };
 }
 
-export interface ContextMenuContentProps {
+export interface ContextMenuContentProps extends Omit<ViewProps, 'position'> {
   /**
-   * The items to display in the context menu
+   * The items to display in the context menu (for data-driven approach)
    */
-  items: ContextMenuItem[];
+  items?: ContextMenuItem[];
+  /**
+   * The content of the menu (for compound component pattern)
+   */
+  children?: React.ReactNode;
   /**
    * The position of the context menu
    */
@@ -79,18 +96,33 @@ export interface ContextMenuContentProps {
    */
   views?: {
     menu?: ViewProps;
+    content?: ViewProps;
     item?: ViewProps;
     divider?: ViewProps;
+    separator?: ViewProps;
     icon?: ViewProps;
     submenuIndicator?: ViewProps;
   };
 }
 
-export interface ContextMenuItemProps {
+export interface ContextMenuItemProps
+  extends Omit<ButtonProps, 'onPress' | 'onClick'> {
   /**
-   * The item data
+   * The item data (for data-driven approach)
    */
-  item: ContextMenuItem;
+  item?: ContextMenuItem;
+  /**
+   * The content of the menu item (for compound component pattern)
+   */
+  children?: React.ReactNode;
+  /**
+   * Callback fired when the item is selected (clicked)
+   */
+  onSelect?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  /**
+   * Disables interaction with the item
+   */
+  isDisabled?: boolean;
   /**
    * Custom styles for the item
    */
@@ -107,6 +139,15 @@ export interface ContextMenuDividerProps {
    */
   views?: {
     divider?: ViewProps;
+  };
+}
+
+export interface ContextMenuSeparatorProps extends ViewProps {
+  /**
+   * Custom styling for the separator
+   */
+  views?: {
+    separator?: ViewProps;
   };
 }
 
@@ -127,4 +168,8 @@ export interface ContextMenuType extends React.FC<ContextMenuProps> {
    * The divider component for the context menu
    */
   Divider: React.FC<ContextMenuDividerProps>;
+  /**
+   * The separator component for the context menu (alias for Divider)
+   */
+  Separator: React.FC<ContextMenuSeparatorProps>;
 }
