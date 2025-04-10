@@ -7,6 +7,7 @@ import {
   ToastDurations,
   ToastActions,
   CustomizedToast,
+  HookUsageDemo,
 } from 'src/components/Toast/examples';
 import { Toast } from 'src/components/Toast/Toast';
 
@@ -62,6 +63,13 @@ const ToastPage = () => {
             <td>Customization</td>
             <td>
               <CustomizedToast />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Hook API & Advanced Features</td>
+            <td>
+              <HookUsageDemo />
             </td>
           </tr>
         </tbody>

@@ -5,6 +5,9 @@ import { ToastOptions, ToastVariant } from './Toast.type';
 // Generate a unique ID for each toast
 const generateId = () => Math.random().toString(36).substring(2, 9);
 
+// Create a ref to store timeouts for cleanup
+let timeouts = new Map<string, NodeJS.Timeout>();
+
 // Create the toast store
 export const useToastStore = create<ToastState>((set) => ({
   toasts: [],
@@ -16,6 +19,7 @@ export const useToastStore = create<ToastState>((set) => ({
       title,
       description,
       createdAt: Date.now(),
+      isVisible: true, // For animation purposes
       ...options,
     };
 
@@ -23,15 +27,54 @@ export const useToastStore = create<ToastState>((set) => ({
       toasts: [...state.toasts, toast],
     }));
 
+    // Set up auto-dismiss timeout if duration is provided
+    if (options.duration !== 0) {
+      const duration = options.duration || 5000; // Default 5 seconds
+      const timerId = setTimeout(() => {
+        useToastStore.getState().remove(id);
+      }, duration);
+
+      // Store the timeout for cleanup
+      timeouts.set(id, timerId);
+    }
+
     return id;
   },
   remove: (id) => {
+    // First set isVisible to false for animation
     set((state) => ({
-      toasts: state.toasts.filter((toast) => toast.id !== id),
+      toasts: state.toasts.map((toast) =>
+        toast.id === id ? { ...toast, isVisible: false } : toast
+      ),
     }));
+
+    // Clear any existing timeout
+    if (timeouts.has(id)) {
+      clearTimeout(timeouts.get(id)!);
+      timeouts.delete(id);
+    }
+
+    // Then remove after a short delay to allow for animation
+    setTimeout(() => {
+      set((state) => ({
+        toasts: state.toasts.filter((toast) => toast.id !== id),
+      }));
+    }, 300); // Animation duration
   },
   removeAll: () => {
-    set({ toasts: [] });
+    // Clear all timeouts
+    timeouts.forEach(clearTimeout);
+    timeouts.clear();
+
+    // Set all toasts to invisible first for animation
+    set((state) => ({
+      toasts: state.toasts.map((toast) => ({ ...toast, isVisible: false })),
+    }));
+
+    // Then remove after animation delay
+    setTimeout(() => {
+      set({ toasts: [] });
+    }, 300);
   },
 }));
 

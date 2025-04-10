@@ -9,6 +9,11 @@ import {
 
 export interface ToastProps {
   /**
+   * Unique identifier for the toast
+   */
+  id?: string;
+
+  /**
    * The variant of the toast
    */
   variant: ToastVariant;
@@ -62,6 +67,21 @@ export interface ToastProps {
    * Duration in milliseconds before the toast auto-closes
    */
   duration?: number;
+
+  /**
+   * Custom render function for complete control over toast appearance
+   */
+  render?: (props: { id: string; onClose: () => void }) => React.ReactNode;
+
+  /**
+   * Custom icon to display instead of the default variant icon
+   */
+  icon?: React.ReactNode;
+
+  /**
+   * Whether the toast is visible (for animation purposes)
+   */
+  isVisible?: boolean;
 }
 
 export interface ToastContainerProps {

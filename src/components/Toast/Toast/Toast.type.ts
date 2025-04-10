@@ -48,6 +48,14 @@ export interface ToastOptions {
   actionText?: string;
   showIcon?: boolean;
   views?: ToastStyles;
+  /**
+   * Custom render function for complete control over toast appearance
+   */
+  render?: (props: { id: string; onClose: () => void }) => React.ReactNode;
+  /**
+   * Custom icon to display instead of the default variant icon
+   */
+  icon?: React.ReactNode;
 }
 
 export interface ToastItem extends ToastOptions {
@@ -56,4 +64,8 @@ export interface ToastItem extends ToastOptions {
   title: string;
   description?: string;
   createdAt: number;
+  /**
+   * Whether the toast is visible (for animation purposes)
+   */
+  isVisible?: boolean;
 }

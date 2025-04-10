@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from '../../Layout/View/View';
 import { Text } from '../../Text/Text';
 import { Vertical } from '../../Layout/Vertical/Vertical';
@@ -21,23 +21,23 @@ export const ToastView: React.FC<ToastProps> = ({
   showIcon = true,
   theme,
   views,
-  duration = 5000,
+  render,
+  icon: customIcon,
+  id,
+  isVisible = true,
 }) => {
-  // Auto-close the toast after a certain duration
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      onClose();
-    }, duration);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [onClose, duration]);
+  // We don't need the auto-close timer here anymore as it's handled in the store
 
   const Theme = theme ?? Themes;
 
   // Get the appropriate icon based on the variant
   const getIcon = () => {
+    // If a custom icon is provided, use it
+    if (customIcon !== undefined) {
+      return customIcon;
+    }
+
+    // Otherwise use the default icon based on variant
     switch (variant) {
       case 'info':
         return <InfoIcon widthHeight={20} color={Theme.info.icon.color} />;
@@ -58,9 +58,22 @@ export const ToastView: React.FC<ToastProps> = ({
     }
   };
 
+  // If a custom render function is provided, use it
+  if (render) {
+    return <>{render({ id: id || '', onClose })}</>;
+  }
+
+  // Determine appropriate ARIA role and live region based on variant
+  const ariaRole = variant === 'error' ? 'alert' : 'status';
+  const ariaLive =
+    variant === 'error' || variant === 'warning' ? 'assertive' : 'polite';
+
   return (
     <Horizontal
-      role="alert"
+      role={ariaRole}
+      aria-live={ariaLive}
+      aria-atomic="true"
+      data-state={isVisible ? 'open' : 'closed'}
       gap={12}
       width="100%"
       maxWidth="400px"
@@ -73,6 +86,9 @@ export const ToastView: React.FC<ToastProps> = ({
       backgroundColor={Theme[variant].container.backgroundColor}
       borderColor={Theme[variant].container.border}
       boxShadow="0 2px 8px rgba(0, 0, 0, 0.15)"
+      opacity={isVisible ? 1 : 0}
+      transform={isVisible ? 'scale(1)' : 'scale(0.95)'}
+      transition="opacity 300ms ease-in-out, transform 300ms ease-in-out"
       {...views?.container}
     >
       {showIcon && (
@@ -155,8 +171,35 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
 }) => {
   const { toasts, remove } = useToastStore();
 
-  // Limit the number of toasts shown
-  const visibleToasts = toasts.slice(-limit);
+  // Group toasts by position
+  const toastsByPosition = React.useMemo(() => {
+    const grouped: Record<ToastPosition, typeof toasts> = {
+      top: [],
+      'top-right': [],
+      'top-left': [],
+      bottom: [],
+      'bottom-right': [],
+      'bottom-left': [],
+    };
+
+    // Group toasts by their position or the container's default position
+    toasts.forEach((toast) => {
+      const pos = toast.position || position;
+      grouped[pos].push(toast);
+    });
+
+    // Apply limits to each position group
+    Object.keys(grouped).forEach((pos) => {
+      grouped[pos as ToastPosition] = grouped[pos as ToastPosition].slice(
+        -limit
+      );
+    });
+
+    return grouped;
+  }, [toasts, position, limit]);
+
+  // Get toasts for the current position
+  const visibleToasts = toastsByPosition[position];
 
   return (
     <View
@@ -186,6 +229,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
           }
         >
           <ToastView
+            id={toast.id}
             variant={toast.variant}
             title={toast.title}
             description={toast.description}
@@ -195,6 +239,9 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
             actionText={toast.actionText}
             showIcon={toast.showIcon}
             views={toast.views}
+            render={toast.render}
+            icon={toast.icon}
+            isVisible={toast.isVisible}
           />
         </View>
       ))}

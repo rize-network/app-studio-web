@@ -10,6 +10,7 @@ import {
   removeToast,
   removeAllToasts,
 } from './Toast/Toast.store';
+import { useToast as useToastHook } from './Toast/Toast.hook';
 
 /**
  * Toast component for displaying temporary notifications
@@ -29,5 +30,8 @@ const Toast = Object.assign(ToastComponent, {
   remove: removeToast,
   removeAll: removeAllToasts,
 });
+
+// Export the hook for component usage
+export const useToast = useToastHook;
 
 export { Toast };
