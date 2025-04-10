@@ -1,4 +1,5 @@
 import { ViewProps } from 'app-studio';
+import { ButtonProps } from '../../Button/Button/Button.props';
 
 export type NavigationPosition = 'inside' | 'outside';
 export type IndicatorPosition = 'top' | 'bottom';
@@ -14,4 +15,24 @@ export interface CarouselStyles {
   indicators?: ViewProps;
   indicator?: ViewProps;
   activeIndicator?: ViewProps;
+  // New compound component styles
+  content?: ViewProps;
+  innerContainer?: ViewProps;
+  item?: ViewProps;
+}
+
+// New types for the compound component pattern
+export interface CarouselContextValue {
+  currentIndex: number;
+  totalSlides: number;
+  goToSlide: (index: number) => void;
+  goToNext: () => void;
+  goToPrevious: () => void;
+  canGoNext: boolean;
+  canGoPrevious: boolean;
+  registerSlide: () => number;
+  unregisterSlide: (id: number) => void;
+  styles?: CarouselStyles;
+  contentId: string;
+  infinite: boolean;
 }

@@ -1,6 +1,9 @@
 # Carousel
 
-A component for displaying a series of content items that can be navigated through.
+A component for displaying a series of content items that can be navigated through. The Carousel can be used in two ways:
+
+1. **Traditional approach**: Direct children as slides
+2. **Compound component pattern**: Using `Carousel.Content`, `Carousel.Item`, `Carousel.Previous`, and `Carousel.Next`
 
 ### **Import**
   ```tsx
@@ -46,6 +49,132 @@ export const DefaultDemo = () => {
 };
 ```
 
+### **Compound Component Pattern**
+Use the compound component pattern for more flexibility and control over the carousel structure.
+
+```tsx
+import React from 'react';
+import { Carousel } from '../Carousel';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+
+export const CompoundDemo = () => {
+  const slides = [
+    { color: 'color.blue.500', text: 'Slide 1' },
+    { color: 'color.green.500', text: 'Slide 2' },
+    { color: 'color.purple.500', text: 'Slide 3' },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Carousel
+        aria-label="Compound Carousel Example"
+        views={{
+          container: {
+            borderRadius: '8px',
+            overflow: 'hidden',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          },
+        }}
+      >
+        <Carousel.Content>
+          {slides.map((slide, index) => (
+            <Carousel.Item key={index}>
+              <View
+                backgroundColor={slide.color}
+                width="100%"
+                height="100%"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Text color="white" fontSize="24px" fontWeight="bold">
+                  {slide.text}
+                </Text>
+              </View>
+            </Carousel.Item>
+          ))}
+        </Carousel.Content>
+
+        <Carousel.Previous />
+        <Carousel.Next />
+      </Carousel>
+    </View>
+  );
+};
+```
+
+### **Custom Navigation**
+Customize the navigation buttons with your own content.
+
+```tsx
+<Carousel>
+  <Carousel.Content>
+    {/* Slides here */}
+  </Carousel.Content>
+
+  <Carousel.Previous>
+    Previous
+  </Carousel.Previous>
+
+  <Carousel.Next>
+    Next
+  </Carousel.Next>
+</Carousel>
+```
+
+### **Step Navigation**
+Restrict navigation to specific slide indices using the `stepIndices` prop.
+
+```tsx
+import React, { useState } from 'react';
+import { Carousel } from '../Carousel';
+import { View } from '../../Layout/View/View';
+import { Button } from '../../Button/Button';
+
+export const StepIndicesDemo = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // Create an array of slides
+  const slides = [
+    { text: 'Introduction', id: 0 },
+    { text: 'Step 1', id: 1 },
+    { text: 'Step 2', id: 2 },
+    { text: 'Step 3', id: 3 },
+    { text: 'Step 4', id: 4 },
+    { text: 'Summary', id: 5 },
+  ];
+
+  // Only allow navigation to specific slides
+  const stepIndices = [0, 2, 4, 5];
+
+  return (
+    <View height="300px" width="100%">
+      <Carousel
+        activeIndex={activeIndex}
+        onChange={setActiveIndex}
+        stepIndices={stepIndices}
+      >
+        {/* Slides here */}
+      </Carousel>
+
+      {/* External navigation */}
+      <Horizontal justifyContent="center" gap={4} marginTop={4}>
+        {stepIndices.map((index) => (
+          <Button
+            key={index}
+            onClick={() => setActiveIndex(index)}
+            variant={activeIndex === index ? 'filled' : 'outline'}
+          >
+            {slides[index].text}
+          </Button>
+        ))}
+      </Horizontal>
+    </View>
+  );
+};
+```
+
 ### **Auto-Play**
 Automatically advance through slides with customizable interval.
 
@@ -64,9 +193,9 @@ export const AutoPlayDemo = () => {
 
   return (
     <View height="300px" width="100%">
-      <Carousel 
-        autoPlay 
-        autoPlayInterval={2000} 
+      <Carousel
+        autoPlay
+        autoPlayInterval={2000}
         pauseOnHover
       >
         {slides.map((slide, index) => (
@@ -108,7 +237,7 @@ export const IndicatorsDemo = () => {
 
   return (
     <View height="300px" width="100%">
-      <Carousel 
+      <Carousel
         indicatorVariant="dot" // Options: 'dot', 'line', 'number'
         indicatorPosition="bottom" // Options: 'top', 'bottom'
       >
@@ -152,7 +281,7 @@ export const NavigationDemo = () => {
 
   return (
     <View height="300px" width="100%">
-      <Carousel 
+      <Carousel
         navigationPosition="inside" // Options: 'inside', 'outside'
         prevButton={
           <Button size="sm" variant="outline">
@@ -256,9 +385,9 @@ export const CustomDemo = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Card 
-              variant="elevated" 
-              width="80%" 
+            <Card
+              variant="elevated"
+              width="80%"
               maxWidth="500px"
               padding="20px"
             >

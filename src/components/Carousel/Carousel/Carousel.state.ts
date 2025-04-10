@@ -1,4 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { generateId } from '../../../utils/id';
+import { CarouselProps } from './Carousel.props';
 
 export interface CarouselStateProps {
   defaultActiveIndex?: number;
@@ -8,7 +10,8 @@ export interface CarouselStateProps {
   autoPlayInterval?: number;
   pauseOnHover?: boolean;
   infinite?: boolean;
-  totalSlides: number;
+  totalSlides?: number; // Optional for compound component pattern
+  stepIndices?: number[]; // Optional specific indices to navigate to
 }
 
 export const useCarouselState = ({
@@ -19,8 +22,15 @@ export const useCarouselState = ({
   autoPlayInterval = 3000,
   pauseOnHover = true,
   infinite = true,
-  totalSlides,
+  totalSlides: initialTotalSlides,
+  stepIndices,
 }: CarouselStateProps) => {
+  // For compound component pattern: track slides dynamically
+  const slideCountRef = useRef<number>(initialTotalSlides || 0);
+  const [totalSlides, setTotalSlides] = useState(initialTotalSlides || 0);
+  const slideRegistry = useRef<Set<number>>(new Set());
+  const nextSlideId = useRef<number>(0);
+  const contentId = useMemo(() => generateId('carousel-content'), []);
   const [activeIndex, setActiveIndex] = useState(
     controlledActiveIndex !== undefined
       ? controlledActiveIndex
@@ -54,6 +64,22 @@ export const useCarouselState = ({
       } else {
         // Clamp index to valid range
         newIndex = Math.max(0, Math.min(index, totalSlides - 1));
+      }
+
+      // If stepIndices is provided, find the closest allowed index
+      if (stepIndices && stepIndices.length > 0) {
+        // If the exact index is in stepIndices, use it
+        if (stepIndices.includes(newIndex)) {
+          // Index is already valid
+        } else {
+          // Find the closest step index
+          const closestIndex = stepIndices.reduce((prev, curr) => {
+            return Math.abs(curr - newIndex) < Math.abs(prev - newIndex)
+              ? curr
+              : prev;
+          });
+          newIndex = closestIndex;
+        }
       }
 
       if (controlledActiveIndex === undefined) {
@@ -161,15 +187,57 @@ export const useCarouselState = ({
     setIsDragging(false);
   }, []);
 
+  // For compound component pattern: register/unregister slides
+  const registerSlide = useCallback(() => {
+    const id = nextSlideId.current++;
+    slideRegistry.current.add(id);
+    const newCount = slideRegistry.current.size;
+    slideCountRef.current = newCount;
+    setTotalSlides(newCount);
+    return id;
+  }, []);
+
+  const unregisterSlide = useCallback(
+    (id: number) => {
+      slideRegistry.current.delete(id);
+      const newCount = slideRegistry.current.size;
+      slideCountRef.current = newCount;
+      setTotalSlides(newCount);
+
+      // Adjust currentIndex if it becomes invalid due to slide removal
+      if (newCount > 0 && activeIndex >= newCount) {
+        const newIndex = Math.max(0, newCount - 1);
+        if (controlledActiveIndex === undefined) {
+          setActiveIndex(newIndex);
+        }
+        if (onChange) {
+          onChange(newIndex);
+        }
+      }
+    },
+    [activeIndex, controlledActiveIndex, onChange]
+  );
+
+  // Calculate if we can navigate
+  const canGoPrevious = infinite || activeIndex > 0;
+  const canGoNext = infinite || activeIndex < totalSlides - 1;
+
   return {
     activeIndex,
+    totalSlides,
     goToSlide,
     nextSlide,
     prevSlide,
+    canGoNext,
+    canGoPrevious,
     handleMouseEnter,
     handleMouseLeave,
     handleDragStart,
     handleDragMove,
     handleDragEnd,
+    registerSlide,
+    unregisterSlide,
+    contentId,
+    infinite,
   };
 };

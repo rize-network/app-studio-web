@@ -6,6 +6,9 @@ import {
   IndicatorsDemo,
   NavigationDemo,
   CustomDemo,
+  CompoundDemo,
+  CustomCompoundDemo,
+  StepIndicesDemo,
 } from 'src/components/Carousel/examples';
 
 const CarouselPage = () => {
@@ -50,6 +53,27 @@ const CarouselPage = () => {
             <td>Custom</td>
             <td>
               <CustomDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Compound Pattern</td>
+            <td>
+              <CompoundDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Custom Compound</td>
+            <td>
+              <CustomCompoundDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Step Navigation</td>
+            <td>
+              <StepIndicesDemo />
             </td>
           </tr>
         </tbody>
