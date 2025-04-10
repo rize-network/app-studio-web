@@ -1,5 +1,5 @@
 import { ViewProps } from 'app-studio';
-import { Shape, Size, Variant } from './Card.type';
+import { CardStyles, Shape, Size, Variant } from './Card.type';
 
 export const CardSizes: Record<Size, ViewProps> = {
   sm: {
@@ -36,3 +36,31 @@ export const CardVariants: Record<Variant, ViewProps> = {
     border: 'none',
   },
 };
+
+// Function to get default styles for Card components
+export const getDefaultCardStyles = (theme: any): CardStyles => ({
+  container: {
+    backgroundColor: 'white',
+    borderRadius: theme?.radii?.md || 8,
+    overflow: 'hidden',
+  },
+  header: {
+    paddingHorizontal: '16px',
+    paddingBottom: '16px',
+    borderBottomWidth: '1px',
+    borderBottomStyle: 'solid',
+    borderBottomColor: 'color.gray.200',
+  },
+  content: {
+    paddingHorizontal: '16px',
+    paddingTop: '16px',
+    paddingBottom: '16px',
+  },
+  footer: {
+    paddingHorizontal: '16px',
+    paddingTop: '16px',
+    borderTopWidth: '1px',
+    borderTopStyle: 'solid',
+    borderTopColor: 'color.gray.200',
+  },
+});

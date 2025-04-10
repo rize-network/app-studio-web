@@ -40,14 +40,14 @@ export const VariantsDemo = () => {
           This is a card with the default variant.
         </Text>
       </Card>
-      
+
       <Card variant="outlined">
         <Text>Outlined Card</Text>
         <Text color="color.gray.500">
           This card has a border around it.
         </Text>
       </Card>
-      
+
       <Card variant="elevated">
         <Text>Elevated Card</Text>
         <Text color="color.gray.500">
@@ -75,14 +75,14 @@ export const StructuredDemo = () => {
       <Card.Header>
         <Text fontWeight="bold" fontSize={18}>Card Title</Text>
       </Card.Header>
-      
+
       <Card.Content>
         <Text>
           This card uses the structured layout with separate header, content, and footer sections.
           The content area is where the main information goes.
         </Text>
       </Card.Content>
-      
+
       <Card.Footer>
         <Horizontal justifyContent="flex-end" gap={10}>
           <Button variant="outline">Cancel</Button>
@@ -106,7 +106,7 @@ import { Shape } from '../Card/Card.type';
 
 export const ShapesDemo = () => {
   const shapes: Shape[] = ['sharp', 'rounded', 'pillShaped'];
-  
+
   return (
     <Vertical gap={20}>
       {shapes.map((shape) => (
@@ -134,7 +134,7 @@ import { Size } from '../Card/Card.type';
 
 export const SizesDemo = () => {
   const sizes: Size[] = ['sm', 'md', 'lg'];
-  
+
   return (
     <Vertical gap={20}>
       {sizes.map((size) => (
@@ -190,14 +190,74 @@ export const CustomDemo = () => {
           Custom Styled Card
         </Text>
       </Card.Header>
-      
+
       <Card.Content>
         <Text>
           This card has custom styling applied to all its parts.
           You can customize the container, header, content, and footer.
         </Text>
       </Card.Content>
-      
+
+      <Card.Footer>
+        <Horizontal justifyContent="flex-end" gap={10}>
+          <Button variant="outline">Cancel</Button>
+          <Button>Submit</Button>
+        </Horizontal>
+      </Card.Footer>
+    </Card>
+  );
+};
+```
+
+### **Context-Based Styling**
+The Card component uses a context-based styling system that allows styles to be passed down from the parent Card to its child components (Header, Content, Footer).
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from '../../Text/Text';
+import { Button } from '../../Button/Button';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+
+export const ContextStylingDemo = () => {
+  return (
+    <Card
+      views={{
+        // These styles will be passed down to all child components via context
+        container: {
+          backgroundColor: 'color.blue.50',
+          borderRadius: '12px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        },
+        header: {
+          backgroundColor: 'color.blue.100',
+          padding: '16px',
+          borderBottomColor: 'color.blue.200',
+        },
+        content: {
+          padding: '24px',
+        },
+        footer: {
+          backgroundColor: 'color.blue.100',
+          padding: '16px',
+          borderTopColor: 'color.blue.200',
+        },
+      }}
+    >
+      <Card.Header>
+        <Text fontWeight="bold" fontSize={18}>
+          Context-Based Styling
+        </Text>
+      </Card.Header>
+
+      <Card.Content>
+        <Text>
+          This card demonstrates the improved context-based styling system.
+          The styles defined in the Card's "views" prop are automatically
+          passed down to the Header, Content, and Footer components.
+        </Text>
+      </Card.Content>
+
       <Card.Footer>
         <Horizontal justifyContent="flex-end" gap={10}>
           <Button variant="outline">Cancel</Button>

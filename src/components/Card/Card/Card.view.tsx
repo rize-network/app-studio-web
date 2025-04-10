@@ -1,5 +1,5 @@
-import React from 'react';
-import { View } from '../../Layout/View/View';
+import React, { useMemo } from 'react';
+import { View, useTheme } from 'app-studio';
 import { Vertical } from '../../Layout/Vertical/Vertical';
 import {
   CardProps,
@@ -7,56 +7,87 @@ import {
   CardContentProps,
   CardFooterProps,
 } from './Card.props';
-import { CardSizes, CardShapes, CardVariants } from './Card.style';
+import {
+  CardSizes,
+  CardShapes,
+  CardVariants,
+  getDefaultCardStyles,
+} from './Card.style';
+import { CardContext, useCardContext } from './Card.context';
 
 export const CardHeader: React.FC<CardHeaderProps> = ({
   children,
   views,
+  style,
   ...props
 }) => {
-  return (
-    <View
-      paddingBottom="16px"
-      borderBottomWidth="1px"
-      borderBottomStyle="solid"
-      borderBottomColor="color.gray.200"
-      {...views}
-      {...props}
-    >
-      {children}
-    </View>
-  );
+  const theme = useTheme();
+  const { styles: contextStyles } = useCardContext();
+  const defaultStyles = getDefaultCardStyles(theme).header;
+
+  // Merge styles: Default < Context Override < Direct Props/Style
+  const mergedProps = {
+    ...defaultStyles,
+    ...contextStyles?.header,
+    ...props,
+    style: {
+      ...defaultStyles?.style,
+      ...contextStyles?.header?.style,
+      ...style,
+    },
+  };
+
+  return <View {...mergedProps}>{children}</View>;
 };
 
 export const CardContent: React.FC<CardContentProps> = ({
   children,
   views,
+  style,
   ...props
 }) => {
-  return (
-    <View paddingTop="16px" paddingBottom="16px" {...views} {...props}>
-      {children}
-    </View>
-  );
+  const theme = useTheme();
+  const { styles: contextStyles } = useCardContext();
+  const defaultStyles = getDefaultCardStyles(theme).content;
+
+  // Merge styles: Default < Context Override < Direct Props/Style
+  const mergedProps = {
+    ...defaultStyles,
+    ...contextStyles?.content,
+    ...props,
+    style: {
+      ...defaultStyles?.style,
+      ...contextStyles?.content?.style,
+      ...style,
+    },
+  };
+
+  return <View {...mergedProps}>{children}</View>;
 };
 
 export const CardFooter: React.FC<CardFooterProps> = ({
   children,
   views,
+  style,
   ...props
 }) => {
-  return (
-    <View
-      paddingTop="16px"
-      borderTopWidth="1px"
-      borderTopStyle="solid"
-      borderTopColor="color.gray.200"
-      {...views}
-      {...props}
-    >
-      {children}
-    </View>
-  );
+  const theme = useTheme();
+  const { styles: contextStyles } = useCardContext();
+  const defaultStyles = getDefaultCardStyles(theme).footer;
+
+  // Merge styles: Default < Context Override < Direct Props/Style
+  const mergedProps = {
+    ...defaultStyles,
+    ...contextStyles?.footer,
+    ...props,
+    style: {
+      ...defaultStyles?.style,
+      ...contextStyles?.footer?.style,
+      ...style,
+    },
+  };
+
+  return <View {...mergedProps}>{children}</View>;
 };
 
 export const CardView: React.FC<CardProps> = ({
@@ -68,8 +99,25 @@ export const CardView: React.FC<CardProps> = ({
   footer,
   isFullWidth = false,
   views,
+  style,
   ...props
 }) => {
+  const theme = useTheme();
+  const defaultStyles = getDefaultCardStyles(theme);
+
+  // Prepare context value, merging default styles with user's `views` overrides
+  const contextValue = useMemo(
+    () => ({
+      styles: {
+        container: { ...defaultStyles.container, ...views?.container },
+        header: { ...defaultStyles.header, ...views?.header },
+        content: { ...defaultStyles.content, ...views?.content },
+        footer: { ...defaultStyles.footer, ...views?.footer },
+      },
+    }),
+    [defaultStyles, views]
+  );
+
   // Determine if we have explicit Card.Header, Card.Content, Card.Footer components
   // or if we need to wrap children in a default layout
   const hasExplicitStructure = React.Children.toArray(children).some(
@@ -80,24 +128,30 @@ export const CardView: React.FC<CardProps> = ({
         child.type === CardFooter)
   );
 
+  // Merge styles for the root element
+  const mergedRootProps = {
+    width: isFullWidth ? '100%' : 'auto',
+    borderRadius: CardShapes[shape],
+    overflow: 'hidden',
+    ...CardVariants[variant],
+    ...contextValue.styles.container,
+    ...props,
+    style: { ...contextValue.styles.container?.style, ...style },
+  };
+
   return (
-    <View
-      width={isFullWidth ? '100%' : 'auto'}
-      borderRadius={CardShapes[shape]}
-      overflow="hidden"
-      {...CardVariants[variant]}
-      {...props}
-      {...views?.container}
-    >
-      {hasExplicitStructure ? (
-        children
-      ) : (
-        <Vertical>
-          {header && <CardHeader {...views?.header}>{header}</CardHeader>}
-          <CardContent {...views?.content}>{children}</CardContent>
-          {footer && <CardFooter {...views?.footer}>{footer}</CardFooter>}
-        </Vertical>
-      )}
-    </View>
+    <CardContext.Provider value={contextValue}>
+      <View {...mergedRootProps}>
+        {hasExplicitStructure ? (
+          children
+        ) : (
+          <Vertical>
+            {header && <CardHeader>{header}</CardHeader>}
+            <CardContent>{children}</CardContent>
+            {footer && <CardFooter>{footer}</CardFooter>}
+          </Vertical>
+        )}
+      </View>
+    </CardContext.Provider>
   );
 };

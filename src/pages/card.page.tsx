@@ -7,6 +7,7 @@ import {
   ShapesDemo,
   SizesDemo,
   CustomDemo,
+  ContextStylingDemo,
 } from 'src/components/Card/examples';
 
 const CardPage = () => {
@@ -58,6 +59,13 @@ const CardPage = () => {
             <td>Custom</td>
             <td>
               <CustomDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Context Styling</td>
+            <td>
+              <ContextStylingDemo />
             </td>
           </tr>
         </tbody>
