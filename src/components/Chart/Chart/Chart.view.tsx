@@ -2,6 +2,8 @@ import React from 'react';
 import { View } from '../../Layout/View/View';
 import { Text } from '../../Text/Text';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Center } from '../../Layout/Center/Center';
+import { Loader } from '../../Loader/Loader';
 import { ChartProps } from './Chart.props';
 import { useChartState } from './Chart.state';
 import {
@@ -12,6 +14,9 @@ import {
   LegendColorStyles,
   LegendTextStyles,
   TooltipStyles,
+  LoadingOverlayStyles,
+  ErrorOverlayStyles,
+  NoDataOverlayStyles,
 } from './Chart.style';
 import { BarChart } from './BarChart';
 import { LineChart } from './LineChart';
@@ -35,6 +40,13 @@ export const ChartView: React.FC<ChartProps> = ({
   views,
   onDataPointClick,
   onSeriesClick,
+  isLoading = false,
+  error,
+  noData,
+  loadingIndicator,
+  errorIndicator,
+  noDataIndicator,
+  'aria-label': ariaLabel,
   ...props
 }) => {
   // Use chart state hook
@@ -66,17 +78,24 @@ export const ChartView: React.FC<ChartProps> = ({
 
   // Render legend
   const renderLegend = () => {
-    if (!showLegend) return null;
+    if (!showLegend || !chartData) return null;
 
     let items = [];
 
     if (type === 'pie' || type === 'donut') {
       // For pie/donut charts, use dataPoints
-      items = chartData as any[];
+      if (Array.isArray(chartData)) {
+        items = chartData as any[];
+      }
     } else {
       // For other charts, use data.series
-      items = (chartData as any).series;
+      if (chartData && (chartData as any).series) {
+        items = (chartData as any).series;
+      }
     }
+
+    // If no items to display, don't render the legend
+    if (!items || items.length === 0) return null;
 
     return (
       <Horizontal
@@ -172,22 +191,84 @@ export const ChartView: React.FC<ChartProps> = ({
     );
   };
 
+  // Default loading indicator
+  const renderLoadingIndicator = () => {
+    if (!isLoading) return null;
+
+    return (
+      <View {...LoadingOverlayStyles} {...views?.loadingOverlay}>
+        {loadingIndicator || (
+          <Center>
+            <Loader size="lg" />
+          </Center>
+        )}
+      </View>
+    );
+  };
+
+  // Default error indicator
+  const renderErrorIndicator = () => {
+    if (!error) return null;
+
+    return (
+      <View {...ErrorOverlayStyles} {...views?.errorOverlay}>
+        {errorIndicator || (
+          <Text fontWeight="medium">
+            {typeof error === 'string' ? error : 'An error occurred'}
+          </Text>
+        )}
+      </View>
+    );
+  };
+
+  // Default no data indicator
+  const renderNoDataIndicator = () => {
+    if (!noData) return null;
+
+    return (
+      <View {...NoDataOverlayStyles} {...views?.noDataOverlay}>
+        {noDataIndicator || (
+          <Text>
+            {typeof noData === 'string' ? noData : 'No data available'}
+          </Text>
+        )}
+      </View>
+    );
+  };
+
+  // Determine effective aria-label
+  const effectiveAriaLabel =
+    ariaLabel ?? (typeof title === 'string' ? title : 'Chart');
+
+  // Determine if we should show the chart content
+  const showChartContent = !error && !isLoading && !noData;
+
   return (
     <View
       ref={containerRef}
+      role="region"
+      aria-label={effectiveAriaLabel}
+      aria-busy={isLoading}
       {...ChartContainerStyles}
       {...views?.container}
       {...props}
     >
       {title && <Text {...ChartTitleStyles}>{title}</Text>}
 
-      {legendPosition === 'top' && renderLegend()}
+      {/* Only show legend when chart content is visible */}
+      {showChartContent && legendPosition === 'top' && renderLegend()}
 
       <View flex={1} width="100%" position="relative" {...views?.chart}>
-        {renderChart()}
+        {showChartContent && renderChart()}
+
+        {/* Render overlays */}
+        {renderLoadingIndicator()}
+        {renderErrorIndicator()}
+        {renderNoDataIndicator()}
       </View>
 
-      {legendPosition === 'bottom' && renderLegend()}
+      {/* Only show legend when chart content is visible */}
+      {showChartContent && legendPosition === 'bottom' && renderLegend()}
 
       {renderTooltip()}
     </View>

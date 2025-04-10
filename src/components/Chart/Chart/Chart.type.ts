@@ -35,4 +35,7 @@ export interface ChartStyles {
   axisLabel?: ViewProps;
   axisLine?: ViewProps;
   axisTick?: ViewProps;
+  loadingOverlay?: ViewProps;
+  errorOverlay?: ViewProps;
+  noDataOverlay?: ViewProps;
 }

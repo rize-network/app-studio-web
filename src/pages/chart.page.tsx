@@ -7,6 +7,7 @@ import {
   PieChartDemo,
   DonutChartDemo,
   CustomChartDemo,
+  ChartStatesDemo,
 } from 'src/components/Chart/examples';
 
 const ChartPage = () => {
@@ -58,6 +59,13 @@ const ChartPage = () => {
             <td>Custom Chart</td>
             <td>
               <CustomChartDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Chart States</td>
+            <td>
+              <ChartStatesDemo />
             </td>
           </tr>
         </tbody>

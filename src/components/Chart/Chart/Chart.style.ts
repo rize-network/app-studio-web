@@ -129,3 +129,39 @@ export const PieSliceStyles: ViewProps = {
     opacity: 0.8,
   },
 };
+
+// Default styles for overlay base (shared by loading, error, no data)
+export const OverlayBaseStyles: ViewProps = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  borderRadius: '4px',
+  zIndex: 10,
+  padding: '16px',
+  textAlign: 'center',
+};
+
+// Default styles for loading overlay
+export const LoadingOverlayStyles: ViewProps = {
+  ...OverlayBaseStyles,
+};
+
+// Default styles for error overlay
+export const ErrorOverlayStyles: ViewProps = {
+  ...OverlayBaseStyles,
+  backgroundColor: 'rgba(255, 235, 238, 0.9)',
+  color: 'color.red.700',
+};
+
+// Default styles for no data overlay
+export const NoDataOverlayStyles: ViewProps = {
+  ...OverlayBaseStyles,
+  backgroundColor: 'rgba(245, 245, 245, 0.8)',
+  color: 'color.gray.600',
+};

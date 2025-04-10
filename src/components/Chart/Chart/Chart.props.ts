@@ -91,4 +91,39 @@ export interface ChartProps extends Omit<ViewProps, 'animationDuration'> {
    * Callback when a series is clicked
    */
   onSeriesClick?: (seriesName: string, index: number) => void;
+
+  /**
+   * If true, displays a loading indicator overlay
+   */
+  isLoading?: boolean;
+
+  /**
+   * If provided, displays an error message overlay. Takes precedence over isLoading.
+   */
+  error?: React.ReactNode;
+
+  /**
+   * If true and not loading/error, displays a "no data" message. Can also be custom content.
+   */
+  noData?: boolean | React.ReactNode;
+
+  /**
+   * Custom placeholder for the loading state
+   */
+  loadingIndicator?: React.ReactNode;
+
+  /**
+   * Custom placeholder for the error state
+   */
+  errorIndicator?: React.ReactNode;
+
+  /**
+   * Custom placeholder for the no data state
+   */
+  noDataIndicator?: React.ReactNode;
+
+  /**
+   * Aria-label for the chart region. Defaults to the title if provided.
+   */
+  'aria-label'?: string;
 }
