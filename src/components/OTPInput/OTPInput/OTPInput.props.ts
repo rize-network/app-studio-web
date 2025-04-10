@@ -2,7 +2,7 @@ import React from 'react';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../utils/elevation';
 import { Shape, Size, Variant } from '../../Layout/configs/Input.type';
-import { OTPInputStyles } from './OTPInput.type';
+import { OTPInputStyles, OTPInputType } from './OTPInput.type';
 
 export interface OTPInputProps extends Omit<InputProps, 'size'> {
   /**
@@ -56,6 +56,20 @@ export interface OTPInputProps extends Omit<InputProps, 'size'> {
   isAutoFocus?: boolean;
 
   /**
+   * The type of input to display
+   * - 'text': Regular text input (default)
+   * - 'password': Masked input for secure entry
+   * - 'number': Numeric input (uses text with inputMode="numeric" for better UX)
+   */
+  type?: OTPInputType;
+
+  /**
+   * Callback fired when all input boxes have been filled
+   * Receives the complete OTP string
+   */
+  onComplete?: (value: string) => void;
+
+  /**
    * Callback when the OTP value changes
    */
   onChange?: (value: string) => void;
@@ -79,6 +93,23 @@ export interface OTPInputProps extends Omit<InputProps, 'size'> {
    * Callback when an input field gains focus
    */
   onFocus?: () => void;
+
+  /**
+   * Pattern for input validation
+   * Can be a RegExp or a string pattern
+   */
+  pattern?: RegExp | string;
+
+  /**
+   * Function to transform pasted content
+   */
+  pasteTransformer?: (pasted: string) => string;
+
+  /**
+   * Specific values that the OTP input can take
+   * Used for step-based OTP input
+   */
+  stepValues?: number[];
 
   /**
    * Size of the input fields

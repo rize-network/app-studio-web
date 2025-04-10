@@ -50,18 +50,29 @@ export const ChartStatesDemo = () => {
   const toggleError = () => {
     setHasError(!hasError);
     setShowNoData(false);
+    // Make sure data is available when not in error state
+    if (hasError) {
+      setData(sampleData);
+    }
   };
 
   // Toggle no data state
   const toggleNoData = () => {
     setShowNoData(!showNoData);
     setHasError(false);
+    // Make sure data is available when not in no-data state
+    if (showNoData) {
+      setData(sampleData);
+    } else {
+      setData(emptyData);
+    }
   };
 
   // Reset to normal state
   const resetChart = () => {
     setHasError(false);
     setShowNoData(false);
+    setData(sampleData);
   };
 
   return (
@@ -102,30 +113,49 @@ export const ChartStatesDemo = () => {
       </Horizontal>
 
       {/* Interactive Example */}
-      <View padding={16} borderWidth={1} borderColor="color.gray.200" borderRadius={8}>
+      <View
+        padding={16}
+        borderWidth={1}
+        borderColor="color.gray.200"
+        borderRadius={8}
+      >
         <Vertical gap={16}>
-          <Text fontSize="lg" fontWeight="bold">Interactive State Example</Text>
-          
+          <Text fontSize="lg" fontWeight="bold">
+            Interactive State Example
+          </Text>
+
           <Horizontal gap={10}>
-            <Button onClick={toggleError} variant={hasError ? 'filled' : 'outline'}>
+            <Button
+              onClick={toggleError}
+              variant={hasError ? 'filled' : 'outline'}
+            >
               {hasError ? 'Hide Error' : 'Show Error'}
             </Button>
-            <Button onClick={toggleNoData} variant={showNoData ? 'filled' : 'outline'}>
+            <Button
+              onClick={toggleNoData}
+              variant={showNoData ? 'filled' : 'outline'}
+            >
               {showNoData ? 'Hide No Data' : 'Show No Data'}
             </Button>
             <Button onClick={resetChart} variant="outline">
               Reset
             </Button>
           </Horizontal>
-          
+
           <View height="300px">
             <Chart
               type="bar"
-              data={showNoData ? emptyData : data}
+              data={data}
               title="Interactive State Demo"
               isLoading={isLoading}
-              error={hasError ? 'An error occurred while fetching data' : undefined}
-              noData={showNoData}
+              error={
+                hasError ? 'An error occurred while fetching data' : undefined
+              }
+              noData={
+                showNoData
+                  ? 'No data available for the selected period'
+                  : undefined
+              }
               showGrid
               animated
             />
@@ -146,8 +176,12 @@ export const ChartStatesDemo = () => {
           isLoading={true}
           loadingIndicator={
             <Vertical alignItems="center" gap={10}>
-              <Text fontSize="lg" color="color.primary">Custom Loading...</Text>
-              <Text fontSize="sm" color="color.gray.500">Please wait while we prepare your data</Text>
+              <Text fontSize="lg" color="color.primary">
+                Custom Loading...
+              </Text>
+              <Text fontSize="sm" color="color.gray.500">
+                Please wait while we prepare your data
+              </Text>
             </Vertical>
           }
         />

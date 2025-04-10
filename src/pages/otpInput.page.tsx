@@ -4,10 +4,15 @@ import {
   DefaultOTPInput,
   CustomizedOTPInput,
   OTPInputWithLabel,
+  PasswordOTPInput,
+  OnCompleteDemo,
+  StepValuesOTPInput,
 } from '../components/OTPInput/examples';
 import {
   FormikOTPInputExample,
   FormikCustomOTPInputExample,
+  FormikPasswordOTPExample,
+  FormikStepValuesOTPExample,
 } from '../components/Formik/examples/FormikOTPInput';
 
 const OTPInputPage = () => {
@@ -47,6 +52,36 @@ const OTPInputPage = () => {
             <td>Formik Custom</td>
             <td>
               <FormikCustomOTPInputExample />
+            </td>
+          </tr>
+          <tr>
+            <td>Password Type</td>
+            <td>
+              <PasswordOTPInput />
+            </td>
+          </tr>
+          <tr>
+            <td>onComplete Callback</td>
+            <td>
+              <OnCompleteDemo />
+            </td>
+          </tr>
+          <tr>
+            <td>Formik Password</td>
+            <td>
+              <FormikPasswordOTPExample />
+            </td>
+          </tr>
+          <tr>
+            <td>Step Values</td>
+            <td>
+              <StepValuesOTPInput />
+            </td>
+          </tr>
+          <tr>
+            <td>Formik Step Values</td>
+            <td>
+              <FormikStepValuesOTPExample />
             </td>
           </tr>
         </tbody>

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, KeyboardEvent, ClipboardEvent } from 'react';
-import { Input, Typography, useTheme } from 'app-studio';
+import React, { useEffect, createContext } from 'react';
+import { Input, useTheme } from 'app-studio';
 import { FieldContainer } from '../../Layout/Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../Layout/Input/FieldContent/FieldContent';
 import { FieldLabel } from '../../Layout/Input/FieldLabel/FieldLabel';
@@ -7,19 +7,79 @@ import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { View } from '../../Layout/View/View';
 import { OTPInputViewProps } from './OTPInput.props';
 
+// Create a context for OTP input slots
+export const OTPInputContext = createContext<{
+  slots: Array<{
+    char: string | null;
+    placeholderChar: string | null;
+    isActive: boolean;
+    hasFakeCaret: boolean;
+  }>;
+  isFocused: boolean;
+  isHovering: boolean;
+}>({ slots: [], isFocused: false, isHovering: false });
+
+// CSS for noscript fallback
+const NOSCRIPT_CSS_FALLBACK = `
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+[data-input-otp] {
+  --nojs-bg: white !important;
+  --nojs-fg: black !important;
+
+  background-color: var(--nojs-bg) !important;
+  color: var(--nojs-fg) !important;
+  caret-color: var(--nojs-fg) !important;
+  letter-spacing: .25em !important;
+  text-align: center !important;
+  border: 1px solid var(--nojs-fg) !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+}
+@media (prefers-color-scheme: dark) {
+  [data-input-otp] {
+    --nojs-bg: black !important;
+    --nojs-fg: white !important;
+  }
+}`;
+
+// Helper function to safely insert CSS rules
+function safeInsertRule(sheet: CSSStyleSheet, rule: string) {
+  try {
+    sheet.insertRule(rule);
+  } catch {
+    console.error('input-otp could not insert CSS rule:', rule);
+  }
+}
+
 const OTPInputView: React.FC<
   OTPInputViewProps & {
-    setInputRef: (index: number, ref: HTMLInputElement | null) => void;
-    focusInput: (index: number) => void;
+    setInputRef: (ref: HTMLInputElement | null) => void;
+    inputRef: React.RefObject<HTMLInputElement>;
+    containerRef: React.RefObject<HTMLDivElement>;
+    mirrorSelectionStart: number | null;
+    mirrorSelectionEnd: number | null;
+    setMirrorSelectionStart: (value: number | null) => void;
+    setMirrorSelectionEnd: (value: number | null) => void;
+    handlePaste: (e: React.ClipboardEvent<HTMLInputElement>) => void;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleFocus: () => void;
+    handleBlur: () => void;
+    handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    stepValues?: number[];
   }
 > = ({
   id,
   name,
   label,
-  value,
+  value = '',
   length = 6,
   onChange,
   onChangeText,
+  onComplete,
   helperText,
   placeholder = '',
   shadow,
@@ -35,6 +95,7 @@ const OTPInputView: React.FC<
   shape = 'rounded',
   variant = 'outline',
   gap = 8,
+  type = 'text',
   error = false,
   isFocused = false,
   isHovered = false,
@@ -44,202 +105,317 @@ const OTPInputView: React.FC<
   setValue,
   setIsFocused,
   setIsHovered,
+  inputRef,
+  containerRef,
+  mirrorSelectionStart,
+  mirrorSelectionEnd,
+  setMirrorSelectionStart,
+  setMirrorSelectionEnd,
+  handlePaste,
+  handleChange,
+  handleFocus,
+  handleBlur,
+  handleKeyDown,
+  stepValues,
   setInputRef,
-  focusInput,
   onBlur = () => {},
   onClick = () => {},
   onFocus = () => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ...props
 }) => {
-  const { getColor, themeMode } = useTheme();
+  useTheme(); // Initialize theme context
   const isWithLabel = !!label;
 
-  // Split the value into an array of characters
-  const valueArray = value.split('');
+  // Create context value for slots
+  const contextValue = React.useMemo(() => {
+    return {
+      slots: Array.from({ length }).map((_, slotIdx) => {
+        const isActive =
+          isFocused &&
+          mirrorSelectionStart !== null &&
+          mirrorSelectionEnd !== null &&
+          ((mirrorSelectionStart === mirrorSelectionEnd &&
+            slotIdx === mirrorSelectionStart) ||
+            (slotIdx >= mirrorSelectionStart && slotIdx < mirrorSelectionEnd));
 
-  // Handle input change
-  const handleChange = (index: number, inputValue: string) => {
-    if (isDisabled || isReadOnly) return;
+        const char = value[slotIdx] !== undefined ? value[slotIdx] : null;
+        const placeholderChar =
+          value[0] !== undefined ? null : placeholder?.[slotIdx] ?? null;
 
-    // Only allow digits
-    const digit = inputValue.replace(/[^0-9]/g, '');
+        return {
+          char,
+          placeholderChar,
+          isActive,
+          hasFakeCaret: isActive && char === null,
+        };
+      }),
+      isFocused,
+      isHovering: !isDisabled && isHovered,
+    };
+  }, [
+    isFocused,
+    isHovered,
+    isDisabled,
+    length,
+    mirrorSelectionEnd,
+    mirrorSelectionStart,
+    placeholder,
+    value,
+  ]);
 
-    if (digit) {
-      // Create a new value with the digit at the specified index
-      const newValue = [...valueArray];
-      newValue[index] = digit.charAt(0);
-
-      // Fill in the new value
-      const updatedValue = newValue.join('').slice(0, length);
-
-      // Update the value
-      setValue(updatedValue);
-      onChange?.(updatedValue);
-      onChangeText?.(updatedValue);
-
-      // Focus the next input if available
-      if (index < length - 1) {
-        focusInput(index + 1);
-      }
-    }
-  };
-
-  // Handle key press
-  const handleKeyDown = (index: number, e: KeyboardEvent<HTMLInputElement>) => {
-    if (isDisabled || isReadOnly) return;
-
-    // Handle backspace
-    if (e.key === 'Backspace') {
-      e.preventDefault();
-
-      // If the current input has a value, clear it
-      if (valueArray[index]) {
-        const newValue = [...valueArray];
-        newValue[index] = '';
-        const updatedValue = newValue.join('');
-
-        setValue(updatedValue);
-        onChange?.(updatedValue);
-        onChangeText?.(updatedValue);
-      }
-      // Otherwise, go to the previous input
-      else if (index > 0) {
-        focusInput(index - 1);
-      }
-    }
-    // Handle arrow keys
-    else if (e.key === 'ArrowLeft' && index > 0) {
-      e.preventDefault();
-      focusInput(index - 1);
-    } else if (e.key === 'ArrowRight' && index < length - 1) {
-      e.preventDefault();
-      focusInput(index + 1);
-    }
-  };
-
-  // Handle paste
-  const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
-    if (isDisabled || isReadOnly) return;
-
-    e.preventDefault();
-    const pastedData = e.clipboardData.getData('text/plain').trim();
-
-    // Filter out non-digits and limit to the length
-    const digits = pastedData.replace(/[^0-9]/g, '').slice(0, length);
-
-    if (digits) {
-      // Pad with empty strings if needed
-      const newValue = digits.padEnd(length, '').slice(0, length);
-
-      setValue(digits);
-      onChange?.(digits);
-      onChangeText?.(digits);
-
-      // Focus the last input
-      if (digits.length === length) {
-        focusInput(length - 1);
-      } else {
-        focusInput(digits.length);
-      }
-    }
-  };
-
-  // Handle focus
-  const handleFocus = (index: number) => {
-    setIsFocused(true);
-    onFocus?.();
-  };
-
-  // Handle blur
-  const handleBlur = () => {
-    setIsFocused(false);
-    onBlur?.(value);
-  };
-
-  // Handle hover
-  const handleHover = () => {
-    setIsHovered(!isHovered);
-  };
-
-  // Auto-focus the first input on mount
+  // Auto-focus the input on mount
   useEffect(() => {
-    if (isAutoFocus) {
-      focusInput(0);
+    if (isAutoFocus && inputRef.current) {
+      inputRef.current.focus();
     }
-  }, [isAutoFocus]);
+  }, [isAutoFocus, inputRef]);
 
-  return (
-    <FieldContainer helperText={helperText} error={error} views={views}>
-      {isWithLabel && (
-        <FieldLabel
-          htmlFor={id}
-          color={'theme.primary'}
-          error={error}
-          {...views.label}
-        >
-          {label}
-        </FieldLabel>
-      )}
+  // Add CSS styles for OTP input
+  useEffect(() => {
+    if (!document.getElementById('input-otp-style')) {
+      const styleEl = document.createElement('style');
+      styleEl.id = 'input-otp-style';
+      document.head.appendChild(styleEl);
 
+      if (styleEl.sheet) {
+        const autofillStyles =
+          'background: transparent !important; color: transparent !important; border-color: transparent !important; opacity: 0 !important; box-shadow: none !important; -webkit-box-shadow: none !important; -webkit-text-fill-color: transparent !important;';
+
+        // Add blink animation
+        safeInsertRule(
+          styleEl.sheet,
+          `@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }`
+        );
+
+        safeInsertRule(
+          styleEl.sheet,
+          '[data-input-otp]::selection { background: transparent !important; color: transparent !important; }'
+        );
+        safeInsertRule(
+          styleEl.sheet,
+          `[data-input-otp]:autofill { ${autofillStyles} }`
+        );
+        safeInsertRule(
+          styleEl.sheet,
+          `[data-input-otp]:-webkit-autofill { ${autofillStyles} }`
+        );
+        // iOS
+        safeInsertRule(
+          styleEl.sheet,
+          `@supports (-webkit-touch-callout: none) { [data-input-otp] { letter-spacing: -.6em !important; font-weight: 100 !important; font-stretch: ultra-condensed; font-optical-sizing: none !important; left: -1px !important; right: 1px !important; } }`
+        );
+        // PWM badges
+        safeInsertRule(
+          styleEl.sheet,
+          `[data-input-otp] + * { pointer-events: all !important; }`
+        );
+      }
+    }
+  }, []);
+
+  // Render the OTP input slots
+  const renderSlots = () => {
+    return (
       <Horizontal
         gap={gap}
         width="100%"
         justifyContent="center"
+        minHeight={
+          size === 'xs'
+            ? '32px'
+            : size === 'sm'
+            ? '36px'
+            : size === 'md'
+            ? '40px'
+            : size === 'lg'
+            ? '48px'
+            : '56px'
+        }
         {...views.container}
       >
-        {Array.from({ length }, (_, index) => (
+        {contextValue.slots.map((slot, index) => (
           <FieldContent
             key={`${id || name}-${index}`}
             size={size}
             error={error}
             shape={shape}
             views={views}
-            // shadow={shadow}
             variant={variant}
-            value={valueArray[index] || ''}
+            value={slot.char || ''}
             color={'theme.primary'}
             isHovered={isHovered}
             isDisabled={isDisabled}
             isReadOnly={isReadOnly}
-            isFocused={isFocused}
+            isFocused={slot.isActive}
             isWithLabel={false}
-            onMouseEnter={handleHover}
-            onMouseLeave={handleHover}
-            width={40}
-            height={40}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
             justifyContent="center"
             alignItems="center"
+            width="100%"
+            position="relative"
+            height={
+              size === 'xs'
+                ? '32px'
+                : size === 'sm'
+                ? '36px'
+                : size === 'md'
+                ? '40px'
+                : size === 'lg'
+                ? '48px'
+                : '56px'
+            }
             {...views.box}
           >
-            <Input
-              ref={(ref) => setInputRef(index, ref as any)}
-              id={`${id || name}-${index}`}
-              name={`${name}-${index}`}
-              type="text"
-              inputMode="numeric"
-              pattern="[0-9]*"
-              maxLength={1}
-              readOnly={isReadOnly}
-              disabled={isDisabled}
-              placeholder={placeholder}
-              value={valueArray[index] || ''}
-              onChange={(e: any) => handleChange(index, e.target.value)}
-              onKeyDown={(e: any) => handleKeyDown(index, e)}
-              onPaste={index === 0 ? handlePaste : undefined}
-              onFocus={() => handleFocus(index)}
-              onBlur={handleBlur}
-              onClick={onClick}
-              autoComplete="off"
-              textAlign="center"
-              width="100%"
-              height="100%"
-              fontSize={Typography.fontSizes[size]}
-              {...views.input}
-            />
+            {slot.char ? (
+              <View
+                textAlign="center"
+                fontSize={
+                  size === 'xs'
+                    ? '14px'
+                    : size === 'sm'
+                    ? '16px'
+                    : size === 'md'
+                    ? '18px'
+                    : size === 'lg'
+                    ? '20px'
+                    : '24px'
+                }
+                fontWeight="medium"
+                {...views.text}
+              >
+                {type === 'password' ? '•' : slot.char}
+              </View>
+            ) : slot.placeholderChar ? (
+              <View
+                textAlign="center"
+                fontSize={
+                  size === 'xs'
+                    ? '14px'
+                    : size === 'sm'
+                    ? '16px'
+                    : size === 'md'
+                    ? '18px'
+                    : size === 'lg'
+                    ? '20px'
+                    : '24px'
+                }
+                color="color.gray.400"
+                opacity={0.5}
+                {...views.text}
+              >
+                {slot.placeholderChar}
+              </View>
+            ) : null}
+            {slot.hasFakeCaret && (
+              <View
+                position="absolute"
+                width="2px"
+                height="60%"
+                backgroundColor="theme.primary"
+                animation="blink 1s step-start infinite"
+                style={{
+                  animationName: 'blink',
+                  animationDuration: '1s',
+                  animationIterationCount: 'infinite',
+                  animationTimingFunction: 'step-start',
+                }}
+              />
+            )}
           </FieldContent>
         ))}
       </Horizontal>
-    </FieldContainer>
+    );
+  };
+
+  // Input style for the hidden input
+  const inputStyle: React.CSSProperties = {
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    textAlign: 'center',
+    opacity: '1',
+    color: 'transparent',
+    pointerEvents: 'all',
+    background: 'transparent',
+    caretColor: 'transparent',
+    border: '0 solid transparent',
+    outline: '0 solid transparent',
+    boxShadow: 'none',
+    lineHeight: '1',
+    letterSpacing: '-.5em',
+    fontSize: 'var(--root-height)',
+    fontFamily: 'monospace',
+    fontVariantNumeric: 'tabular-nums',
+  };
+
+  return (
+    <>
+      <noscript>
+        <style>{NOSCRIPT_CSS_FALLBACK}</style>
+      </noscript>
+
+      <FieldContainer helperText={helperText} error={error} views={views}>
+        {isWithLabel && (
+          <FieldLabel
+            htmlFor={id}
+            color={'theme.primary'}
+            error={error}
+            {...views.label}
+          >
+            {label}
+          </FieldLabel>
+        )}
+
+        <View
+          ref={containerRef}
+          data-input-otp-container
+          position="relative"
+          cursor={isDisabled ? 'default' : 'text'}
+          userSelect="none"
+          pointerEvents="none"
+        >
+          <OTPInputContext.Provider value={contextValue}>
+            {renderSlots()}
+          </OTPInputContext.Provider>
+
+          <View position="absolute" inset={0} pointerEvents="none">
+            <Input
+              ref={(ref) => setInputRef(ref as any)}
+              data-input-otp
+              data-input-otp-placeholder-shown={value.length === 0 || undefined}
+              data-input-otp-mss={mirrorSelectionStart}
+              data-input-otp-mse={mirrorSelectionEnd}
+              id={id || name}
+              name={name}
+              type={type === 'password' ? 'password' : 'text'}
+              inputMode={type !== 'password' ? 'numeric' : undefined}
+              pattern="[0-9]*"
+              maxLength={length}
+              readOnly={isReadOnly}
+              disabled={isDisabled}
+              placeholder={placeholder}
+              value={value}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+              onPaste={handlePaste}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onClick={onClick}
+              onMouseOver={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              autoComplete="one-time-code"
+              aria-label={`OTP input with ${length} digits`}
+              style={inputStyle}
+              {...views.input}
+            />
+          </View>
+        </View>
+      </FieldContainer>
+    </>
   );
 };
 

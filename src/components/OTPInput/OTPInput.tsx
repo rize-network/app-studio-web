@@ -6,8 +6,12 @@ import OTPInputView from './OTPInput/OTPInput.view';
 /**
  * OTPInput component for entering one-time passwords or verification codes.
  * Provides multiple input fields for entering digits with auto-focus functionality.
+ * Supports step-based input and improved accessibility.
  */
 const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
+  // Extract the controlled value from props if it exists
+  const { value: controlledValue } = props;
+
   const {
     value,
     setValue,
@@ -15,21 +19,45 @@ const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
     setIsFocused,
     isHovered,
     setIsHovered,
+    inputRef,
+    containerRef,
+    mirrorSelectionStart,
+    mirrorSelectionEnd,
+    setMirrorSelectionStart,
+    setMirrorSelectionEnd,
     setInputRef,
-    focusInput,
+    handleChange,
+    handleFocus,
+    handleBlur,
+    handleKeyDown,
+    handlePaste,
   } = useOTPInputState(props);
+
+  // Use the controlled value if it exists, otherwise use the internal state value
+  const displayValue = controlledValue !== undefined ? controlledValue : value;
 
   return (
     <OTPInputView
       {...props}
-      value={value}
+      value={displayValue}
       setValue={setValue}
       isFocused={isFocused}
       setIsFocused={setIsFocused}
       isHovered={isHovered}
       setIsHovered={setIsHovered}
+      inputRef={inputRef}
+      containerRef={containerRef}
+      mirrorSelectionStart={mirrorSelectionStart}
+      mirrorSelectionEnd={mirrorSelectionEnd}
+      setMirrorSelectionStart={setMirrorSelectionStart}
+      setMirrorSelectionEnd={setMirrorSelectionEnd}
       setInputRef={setInputRef}
-      focusInput={focusInput}
+      handleChange={handleChange}
+      handleFocus={handleFocus}
+      handleBlur={handleBlur}
+      handleKeyDown={handleKeyDown}
+      handlePaste={handlePaste}
+      stepValues={props.stepValues}
     />
   );
 };
