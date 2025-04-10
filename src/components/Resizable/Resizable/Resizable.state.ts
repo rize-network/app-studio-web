@@ -1,19 +1,35 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { Orientation } from './Resizable.type';
+import { Orientation, PanelInfo, ResizableStorage } from './Resizable.type';
 
-interface PanelInfo {
-  id: string;
-  size: number;
-  minSize?: number;
-  maxSize?: number;
-}
+// Default storage implementation using localStorage
+const createDefaultStorage = (): ResizableStorage => ({
+  getItem: (id: string) => {
+    try {
+      return localStorage.getItem(`resizable-${id}`);
+    } catch (e) {
+      console.warn('Failed to access localStorage:', e);
+      return null;
+    }
+  },
+  setItem: (id: string, value: string) => {
+    try {
+      localStorage.setItem(`resizable-${id}`, value);
+    } catch (e) {
+      console.warn('Failed to write to localStorage:', e);
+    }
+  },
+});
 
 export const useResizableState = (
   orientation: Orientation,
   defaultSizes?: (number | string)[],
   onSizesChange?: (sizes: number[]) => void,
   defaultMinSize: number = 50,
-  defaultMaxSize: number = Infinity
+  defaultMaxSize: number = Infinity,
+  collapsible: boolean = false,
+  autoSaveId?: string,
+  storage?: ResizableStorage,
+  keyboardResizeBy: number = 10
 ) => {
   const [isResizing, setIsResizing] = useState(false);
   const [panels, setPanels] = useState<PanelInfo[]>([]);
@@ -21,6 +37,9 @@ export const useResizableState = (
   const activeHandleRef = useRef<string | null>(null);
   const startPositionRef = useRef<number>(0);
   const startSizesRef = useRef<number[]>([]);
+  const storageRef = useRef<ResizableStorage | null>(
+    storage || (typeof window !== 'undefined' ? createDefaultStorage() : null)
+  );
 
   // Calculate the total size of the container
   const getTotalSize = useCallback(() => {
@@ -30,9 +49,47 @@ export const useResizableState = (
       : containerRef.current.offsetHeight;
   }, [orientation]);
 
+  // Load saved panel sizes from storage if autoSaveId is provided
+  const loadSavedSizes = useCallback(() => {
+    if (!autoSaveId || !storageRef.current) return null;
+
+    const savedData = storageRef.current.getItem(autoSaveId);
+    if (!savedData) return null;
+
+    try {
+      const parsed = JSON.parse(savedData);
+      if (Array.isArray(parsed.sizes)) {
+        return parsed.sizes;
+      }
+      return null;
+    } catch (e) {
+      console.warn('Failed to parse saved panel sizes:', e);
+      return null;
+    }
+  }, [autoSaveId]);
+
+  // Save panel sizes to storage
+  const savePanelSizes = useCallback(() => {
+    if (!autoSaveId || !storageRef.current || panels.length === 0) return;
+
+    const sizes = panels.map((panel) => ({
+      id: panel.id,
+      size: panel.size,
+      collapsed: panel.collapsed || false,
+    }));
+
+    storageRef.current.setItem(autoSaveId, JSON.stringify({ sizes }));
+  }, [autoSaveId, panels]);
+
   // Register a panel with the resizable container
   const registerPanel = useCallback(
-    (id: string, initialSize: number, minSize?: number, maxSize?: number) => {
+    (
+      id: string,
+      initialSize: number,
+      minSize?: number,
+      maxSize?: number,
+      panelCollapsible?: boolean
+    ) => {
       setPanels((prevPanels) => {
         // Check if panel already exists
         if (prevPanels.some((panel) => panel.id === id)) {
@@ -47,11 +104,13 @@ export const useResizableState = (
             size: initialSize,
             minSize: minSize ?? defaultMinSize,
             maxSize: maxSize ?? defaultMaxSize,
+            collapsible: panelCollapsible ?? collapsible,
+            collapsed: false,
           },
         ];
       });
     },
-    [defaultMinSize, defaultMaxSize]
+    [defaultMinSize, defaultMaxSize, collapsible]
   );
 
   // Unregister a panel from the resizable container
@@ -75,6 +134,37 @@ export const useResizableState = (
     );
   }, []);
 
+  // Check if a panel is collapsed
+  const isPanelCollapsed = useCallback(
+    (id: string) => {
+      const panel = panels.find((p) => p.id === id);
+      return panel ? !!panel.collapsed : false;
+    },
+    [panels]
+  );
+
+  // Toggle panel collapse state
+  const togglePanelCollapse = useCallback((id: string) => {
+    setPanels((prevPanels) => {
+      const panelIndex = prevPanels.findIndex((p) => p.id === id);
+      if (panelIndex === -1) return prevPanels;
+
+      const panel = prevPanels[panelIndex];
+      if (!panel.collapsible) return prevPanels;
+
+      // Store the current size before collapsing
+      const updatedPanel = {
+        ...panel,
+        collapsed: !panel.collapsed,
+      };
+
+      const newPanels = [...prevPanels];
+      newPanels[panelIndex] = updatedPanel;
+
+      return newPanels;
+    });
+  }, []);
+
   // Start resizing
   const startResize = useCallback(
     (handleId: string, clientPosition: number) => {
@@ -93,19 +183,39 @@ export const useResizableState = (
 
       const handleId = activeHandleRef.current;
       const delta = clientPosition - startPositionRef.current;
-      const panelIndex = panels.findIndex((p) => p.id === handleId);
 
-      if (panelIndex === -1 || panelIndex >= panels.length - 1) return;
+      // Find the handle's position in the DOM order
+      // This is more reliable than trying to match handle IDs with panel IDs
+      let handleIndex = -1;
 
-      const currentPanel = panels[panelIndex];
-      const nextPanel = panels[panelIndex + 1];
+      // Extract numeric part from handle ID if it follows a pattern like 'handle1'
+      const handleNumMatch = handleId.match(/\d+$/);
+      if (handleNumMatch) {
+        handleIndex = parseInt(handleNumMatch[0], 10) - 1; // Convert to 0-based index
+      }
+
+      // If we couldn't extract a number, try to find the handle's position
+      // by checking if it's between two panels
+      if (handleIndex === -1 && panels.length >= 2) {
+        // Just use the first handle position as a fallback
+        handleIndex = 0;
+      }
+
+      // Ensure the handle index is valid
+      if (handleIndex < 0 || handleIndex >= panels.length - 1) return;
+
+      const currentPanel = panels[handleIndex];
+      const nextPanel = panels[handleIndex + 1];
+
+      // Skip if either panel is collapsed
+      if (currentPanel.collapsed || nextPanel.collapsed) return;
 
       // Calculate new sizes
       let newCurrentSize =
-        startSizesRef.current[panelIndex] +
+        startSizesRef.current[handleIndex] +
         (orientation === 'horizontal' ? delta : delta);
       let newNextSize =
-        startSizesRef.current[panelIndex + 1] -
+        startSizesRef.current[handleIndex + 1] -
         (orientation === 'horizontal' ? delta : delta);
 
       // Apply constraints
@@ -121,10 +231,10 @@ export const useResizableState = (
       // Update panel sizes
       setPanels((prevPanels) =>
         prevPanels.map((panel, index) => {
-          if (index === panelIndex) {
+          if (index === handleIndex) {
             return { ...panel, size: newCurrentSize };
           }
-          if (index === panelIndex + 1) {
+          if (index === handleIndex + 1) {
             return { ...panel, size: newNextSize };
           }
           return panel;
@@ -141,7 +251,12 @@ export const useResizableState = (
     }
     activeHandleRef.current = null;
     setIsResizing(false);
-  }, [isResizing, panels, onSizesChange]);
+
+    // Save panel sizes to storage if autoSaveId is provided
+    if (autoSaveId) {
+      savePanelSizes();
+    }
+  }, [isResizing, panels, onSizesChange, autoSaveId, savePanelSizes]);
 
   // Handle keyboard navigation for accessibility
   const handleKeyDown = useCallback(
@@ -149,20 +264,41 @@ export const useResizableState = (
       if (!isResizing || !activeHandleRef.current) return;
 
       const handleId = activeHandleRef.current;
-      const panelIndex = panels.findIndex((p) => p.id === handleId);
 
-      if (panelIndex === -1 || panelIndex >= panels.length - 1) return;
+      // Find the handle's position in the DOM order using the same logic as onResize
+      let handleIndex = -1;
+
+      // Extract numeric part from handle ID if it follows a pattern like 'handle1'
+      const handleNumMatch = handleId.match(/\d+$/);
+      if (handleNumMatch) {
+        handleIndex = parseInt(handleNumMatch[0], 10) - 1; // Convert to 0-based index
+      }
+
+      // If we couldn't extract a number, try to find the handle's position
+      // by checking if it's between two panels
+      if (handleIndex === -1 && panels.length >= 2) {
+        // Just use the first handle position as a fallback
+        handleIndex = 0;
+      }
+
+      // Ensure the handle index is valid
+      if (handleIndex < 0 || handleIndex >= panels.length - 1) return;
 
       let delta = 0;
-      const step = 10; // 10px step for keyboard navigation
 
       // Handle arrow keys based on orientation
       if (orientation === 'horizontal') {
-        if (e.key === 'ArrowLeft') delta = -step;
-        if (e.key === 'ArrowRight') delta = step;
+        if (e.key === 'ArrowLeft') delta = -keyboardResizeBy;
+        if (e.key === 'ArrowRight') delta = keyboardResizeBy;
+        // Home and End keys for larger jumps
+        if (e.key === 'Home') delta = -100;
+        if (e.key === 'End') delta = 100;
       } else {
-        if (e.key === 'ArrowUp') delta = -step;
-        if (e.key === 'ArrowDown') delta = step;
+        if (e.key === 'ArrowUp') delta = -keyboardResizeBy;
+        if (e.key === 'ArrowDown') delta = keyboardResizeBy;
+        // Home and End keys for larger jumps
+        if (e.key === 'Home') delta = -100;
+        if (e.key === 'End') delta = 100;
       }
 
       if (delta !== 0) {
@@ -181,7 +317,7 @@ export const useResizableState = (
         endResize();
       }
     },
-    [isResizing, panels, orientation, onResize, endResize]
+    [isResizing, panels, orientation, onResize, endResize, keyboardResizeBy]
   );
 
   // Set up event listeners for mouse/touch events
@@ -234,19 +370,43 @@ export const useResizableState = (
 
   // Initialize panel sizes when the component mounts
   useEffect(() => {
-    if (panels.length === 0 || defaultSizes) return;
+    if (panels.length === 0) return;
 
-    // If no default sizes are provided, distribute sizes equally
-    const totalSize = getTotalSize();
-    const equalSize = totalSize / panels.length;
+    // Try to load saved sizes first if autoSaveId is provided
+    if (autoSaveId) {
+      const savedSizes = loadSavedSizes();
+      if (savedSizes) {
+        // Map saved sizes to panels
+        setPanels((prevPanels) => {
+          return prevPanels.map((panel) => {
+            const savedPanel = savedSizes.find((s: any) => s.id === panel.id);
+            if (savedPanel) {
+              return {
+                ...panel,
+                size: savedPanel.size,
+                collapsed: savedPanel.collapsed || false,
+              };
+            }
+            return panel;
+          });
+        });
+        return;
+      }
+    }
 
-    setPanels((prevPanels) =>
-      prevPanels.map((panel) => ({
-        ...panel,
-        size: equalSize,
-      }))
-    );
-  }, [panels.length, defaultSizes, getTotalSize]);
+    // If no saved sizes or defaultSizes, distribute sizes equally
+    if (!defaultSizes) {
+      const totalSize = getTotalSize();
+      const equalSize = totalSize / panels.length;
+
+      setPanels((prevPanels) =>
+        prevPanels.map((panel) => ({
+          ...panel,
+          size: equalSize,
+        }))
+      );
+    }
+  }, [panels.length, defaultSizes, getTotalSize, autoSaveId, loadSavedSizes]);
 
   // Update panel sizes when defaultSizes changes
   useEffect(() => {
@@ -269,6 +429,13 @@ export const useResizableState = (
     );
   }, [defaultSizes, panels.length, getTotalSize]);
 
+  // Save panel sizes when they change (if autoSaveId is provided)
+  useEffect(() => {
+    if (panels.length > 0 && autoSaveId && !isResizing) {
+      savePanelSizes();
+    }
+  }, [panels, autoSaveId, isResizing, savePanelSizes]);
+
   return {
     isResizing,
     setIsResizing,
@@ -278,6 +445,8 @@ export const useResizableState = (
     unregisterPanel,
     getPanelSize,
     setPanelSize,
+    isPanelCollapsed,
+    togglePanelCollapse,
     startResize,
     onResize,
     endResize,

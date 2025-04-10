@@ -5,3 +5,5 @@ export * from './variants';
 export * from './sizes';
 export * from './codeEditor';
 export * from './controlled';
+export * from './collapsible';
+export * from './test';

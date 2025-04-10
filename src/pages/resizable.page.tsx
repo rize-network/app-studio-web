@@ -8,6 +8,8 @@ import {
   ResizableSizes,
   CodeEditorLayout,
   ControlledResizable,
+  CollapsibleResizable,
+  ResizableTest,
 } from 'src/components/Resizable/examples';
 
 const ResizablePage = () => {
@@ -66,6 +68,20 @@ const ResizablePage = () => {
             <td>Code Editor Layout</td>
             <td>
               <CodeEditorLayout />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Collapsible Panels</td>
+            <td>
+              <CollapsibleResizable />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Simple Test</td>
+            <td>
+              <ResizableTest />
             </td>
           </tr>
         </tbody>

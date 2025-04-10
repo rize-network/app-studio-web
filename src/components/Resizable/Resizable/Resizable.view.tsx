@@ -26,6 +26,8 @@ const ResizableContext = createContext<ResizableContextType>({
   unregisterPanel: () => {},
   getPanelSize: () => 0,
   setPanelSize: () => {},
+  isPanelCollapsed: () => false,
+  togglePanelCollapse: () => {},
   startResize: () => {},
   onResize: () => {},
   endResize: () => {},
@@ -54,11 +56,19 @@ export const ResizablePanel: React.FC<ResizablePanelProps> = ({
   minSize,
   maxSize,
   collapsible,
+  defaultCollapsed,
+  onCollapseChange,
   views,
   ...props
 }) => {
-  const { orientation, registerPanel, unregisterPanel, getPanelSize } =
-    useResizableContext();
+  const {
+    orientation,
+    registerPanel,
+    unregisterPanel,
+    getPanelSize,
+    isPanelCollapsed,
+    togglePanelCollapse,
+  } = useResizableContext();
 
   // Convert percentage to pixels if needed
   const initialSize =
@@ -70,12 +80,54 @@ export const ResizablePanel: React.FC<ResizablePanelProps> = ({
 
   // Register panel on mount
   useEffect(() => {
-    registerPanel(id, initialSize, minSize, maxSize);
+    registerPanel(id, initialSize, minSize, maxSize, collapsible);
     return () => unregisterPanel(id);
-  }, [id, initialSize, minSize, maxSize, registerPanel, unregisterPanel]);
+  }, [
+    id,
+    initialSize,
+    minSize,
+    maxSize,
+    collapsible,
+    registerPanel,
+    unregisterPanel,
+  ]);
 
-  // Get current panel size
+  // Get current panel size and collapsed state
   const size = getPanelSize(id);
+  const isCollapsed = isPanelCollapsed(id);
+
+  // Handle collapse state changes
+  useEffect(() => {
+    if (onCollapseChange && isCollapsed !== undefined) {
+      onCollapseChange(isCollapsed);
+    }
+  }, [isCollapsed, onCollapseChange]);
+
+  // Apply default collapsed state on mount if specified
+  useEffect(() => {
+    if (collapsible && defaultCollapsed && !isCollapsed) {
+      togglePanelCollapse(id);
+    }
+  }, [id, collapsible, defaultCollapsed, isCollapsed, togglePanelCollapse]);
+
+  // If panel is collapsed, render a minimal version
+  if (isCollapsed) {
+    return (
+      <View
+        flex="0 0 auto"
+        width={orientation === 'horizontal' ? '10px' : '100%'}
+        height={orientation === 'vertical' ? '10px' : '100%'}
+        backgroundColor="color.gray.200"
+        cursor="pointer"
+        onClick={() => togglePanelCollapse(id)}
+        aria-label={`Expand panel ${id}`}
+        role="button"
+        tabIndex={0}
+        {...views?.collapsedPanel}
+        {...props}
+      />
+    );
+  }
 
   return (
     <View
@@ -97,10 +149,38 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
   position = 'both',
   disabled = false,
   withVisualIndicator = true,
+  withCollapseButton = false,
+  collapseTarget,
   views,
   ...props
 }) => {
-  const { orientation, size, variant, startResize } = useResizableContext();
+  const {
+    orientation,
+    size,
+    variant,
+    startResize,
+    isPanelCollapsed,
+    togglePanelCollapse,
+  } = useResizableContext();
+
+  // Determine which panel to collapse when the collapse button is clicked
+  // By default, it's the panel before this handle (if any)
+  const getPanelToCollapse = () => {
+    if (collapseTarget) return collapseTarget;
+
+    // Extract panel index from handle ID (assuming handle IDs follow a pattern like 'handle1')
+    const handleNumMatch = id.match(/\d+$/);
+    if (!handleNumMatch) return '';
+
+    const handleIndex = parseInt(handleNumMatch[0], 10);
+    if (isNaN(handleIndex)) return '';
+
+    // Target the panel before this handle
+    return `panel${handleIndex}`;
+  };
+
+  const panelToCollapse = getPanelToCollapse();
+  const isTargetPanelCollapsed = isPanelCollapsed(panelToCollapse);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (disabled) return;
@@ -127,6 +207,13 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
     }
   };
 
+  const handleCollapseClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering resize
+    if (panelToCollapse) {
+      togglePanelCollapse(panelToCollapse);
+    }
+  };
+
   return (
     <View
       role="separator"
@@ -138,6 +225,7 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
+      position="relative"
       {...getHandleSizeStyles(size, orientation)}
       {...HandleVariants[variant]}
       onMouseDown={handleMouseDown}
@@ -169,6 +257,70 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
               <View {...HandleIconStyles.vertical} />
             </Vertical>
           )}
+        </View>
+      )}
+
+      {withCollapseButton && panelToCollapse && (
+        <View
+          position="absolute"
+          top={orientation === 'horizontal' ? '-20px' : '50%'}
+          left={orientation === 'horizontal' ? '50%' : '-20px'}
+          transform={
+            orientation === 'horizontal'
+              ? 'translateX(-50%)'
+              : 'translateY(-50%)'
+          }
+          width="16px"
+          height="16px"
+          borderRadius="full"
+          backgroundColor="color.gray.100"
+          border="1px solid"
+          borderColor="color.gray.300"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          cursor="pointer"
+          zIndex={1}
+          onClick={handleCollapseClick}
+          aria-label={
+            isTargetPanelCollapsed
+              ? `Expand panel ${panelToCollapse}`
+              : `Collapse panel ${panelToCollapse}`
+          }
+          role="button"
+          tabIndex={0}
+          pointerEvents="auto"
+          _hover={{ backgroundColor: 'color.gray.200' }}
+          {...views?.collapseIcon}
+        >
+          {/* Collapse/expand icon */}
+          <View
+            width="8px"
+            height="8px"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            {isTargetPanelCollapsed ? (
+              /* Expand icon (plus) */
+              <Horizontal>
+                <View
+                  width="6px"
+                  height="2px"
+                  backgroundColor="color.gray.600"
+                />
+                <View
+                  width="2px"
+                  height="6px"
+                  backgroundColor="color.gray.600"
+                  position="absolute"
+                />
+              </Horizontal>
+            ) : (
+              /* Collapse icon (minus) */
+              <View width="6px" height="2px" backgroundColor="color.gray.600" />
+            )}
+          </View>
         </View>
       )}
     </View>

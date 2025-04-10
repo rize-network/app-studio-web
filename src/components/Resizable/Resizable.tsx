@@ -21,6 +21,9 @@ const ResizableComponent: React.FC<ResizableProps> = ({
   minSize = 50,
   maxSize,
   collapsible = false,
+  autoSaveId,
+  storage,
+  keyboardResizeBy = 10,
   views,
   ...props
 }) => {
@@ -32,6 +35,8 @@ const ResizableComponent: React.FC<ResizableProps> = ({
     unregisterPanel,
     getPanelSize,
     setPanelSize,
+    isPanelCollapsed,
+    togglePanelCollapse,
     startResize,
     onResize,
     endResize,
@@ -40,7 +45,11 @@ const ResizableComponent: React.FC<ResizableProps> = ({
     defaultSizes,
     onSizesChange,
     minSize,
-    maxSize
+    maxSize,
+    collapsible,
+    autoSaveId,
+    storage,
+    keyboardResizeBy
   );
 
   return (
@@ -55,6 +64,8 @@ const ResizableComponent: React.FC<ResizableProps> = ({
         unregisterPanel,
         getPanelSize,
         setPanelSize,
+        isPanelCollapsed,
+        togglePanelCollapse,
         startResize,
         onResize,
         endResize,
@@ -68,6 +79,8 @@ const ResizableComponent: React.FC<ResizableProps> = ({
         minSize={minSize}
         maxSize={maxSize}
         collapsible={collapsible}
+        autoSaveId={autoSaveId}
+        keyboardResizeBy={keyboardResizeBy}
         containerRef={containerRef}
         views={views}
         {...props}

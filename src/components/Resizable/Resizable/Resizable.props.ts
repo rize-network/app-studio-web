@@ -6,6 +6,7 @@ import {
   Size,
   Variant,
   ResizableStyles,
+  ResizableStorage,
 } from './Resizable.type';
 
 export interface ResizableProps {
@@ -56,6 +57,23 @@ export interface ResizableProps {
   collapsible?: boolean;
 
   /**
+   * Unique ID for persisting panel sizes in storage
+   */
+  autoSaveId?: string;
+
+  /**
+   * Storage mechanism for persisting panel sizes
+   * Defaults to localStorage if not provided
+   */
+  storage?: ResizableStorage;
+
+  /**
+   * Amount to resize by when using keyboard navigation (in pixels)
+   * Defaults to 10px
+   */
+  keyboardResizeBy?: number;
+
+  /**
    * Custom styles for different parts of the resizable component
    */
   views?: ResizableStyles;
@@ -98,10 +116,22 @@ export interface ResizablePanelProps {
   collapsible?: boolean;
 
   /**
+   * Whether the panel is initially collapsed
+   * Only works if collapsible is true
+   */
+  defaultCollapsed?: boolean;
+
+  /**
+   * Callback when panel collapse state changes
+   */
+  onCollapseChange?: (collapsed: boolean) => void;
+
+  /**
    * Custom styles for the panel
    */
   views?: {
     panel?: ViewProps;
+    collapsedPanel?: ViewProps;
   };
 
   /**
@@ -132,11 +162,24 @@ export interface ResizableHandleProps {
   withVisualIndicator?: boolean;
 
   /**
+   * Whether to show a collapse button for adjacent panels
+   * Only works if the adjacent panel has collapsible=true
+   */
+  withCollapseButton?: boolean;
+
+  /**
+   * The panel ID to collapse when clicking the collapse button
+   * If not provided, will collapse the panel before this handle
+   */
+  collapseTarget?: string;
+
+  /**
    * Custom styles for the handle
    */
   views?: {
     handle?: ViewProps;
     handleIcon?: ViewProps;
+    collapseIcon?: ViewProps;
   };
 
   /**
