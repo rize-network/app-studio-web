@@ -2,9 +2,11 @@ import { ViewProps } from 'app-studio';
 import React from 'react';
 
 export type Position = 'left' | 'right';
-export type Size = 'sm' | 'md' | 'lg';
-export type Variant = 'default' | 'filled' | 'outline';
+export type Size = 'sm' | 'md' | 'lg' | 'xl';
+export type Variant = 'default' | 'filled' | 'outline' | 'subtle' | 'elevated';
 export type BreakpointBehavior = 'collapse' | 'overlay' | 'hide';
+export type Elevation = 'none' | 'low' | 'medium' | 'high';
+export type TransitionPreset = 'fast' | 'normal' | 'slow' | 'bounce';
 
 export interface SidebarContextType {
   isExpanded: boolean;
@@ -14,6 +16,7 @@ export interface SidebarContextType {
   position: Position;
   size: Size;
   variant: Variant;
+  views?: SidebarStyles;
 }
 
 export interface SidebarStyles {
@@ -24,4 +27,9 @@ export interface SidebarStyles {
   backdrop?: ViewProps;
   toggleButton?: ViewProps;
   toggleButtonIcon?: ViewProps;
+  divider?: ViewProps;
+  navItem?: ViewProps;
+  navItemActive?: ViewProps;
+  navItemIcon?: ViewProps;
+  navItemText?: ViewProps;
 }

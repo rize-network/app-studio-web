@@ -7,6 +7,7 @@ import {
   SidebarSizes,
   ControlledSidebar,
   CustomizedSidebar,
+  AccessibleSidebar,
 } from 'src/components/Sidebar/examples';
 
 const SidebarPage = () => {
@@ -58,6 +59,13 @@ const SidebarPage = () => {
             <td>Customized</td>
             <td>
               <CustomizedSidebar />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Enhanced Accessibility</td>
+            <td>
+              <AccessibleSidebar />
             </td>
           </tr>
         </tbody>

@@ -7,6 +7,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarView,
+  useSidebarContext,
 } from './Sidebar/Sidebar.view';
 
 /**
@@ -43,6 +44,7 @@ const SidebarComponent: React.FC<SidebarProps> = ({
         position,
         size,
         variant,
+        views,
       }}
     >
       <SidebarView
@@ -76,3 +78,6 @@ export const Sidebar = SidebarComponent as SidebarType;
 Sidebar.Header = SidebarHeader;
 Sidebar.Content = SidebarContent;
 Sidebar.Footer = SidebarFooter;
+
+// Expose the context hook for custom components
+Sidebar.useContext = useSidebarContext;

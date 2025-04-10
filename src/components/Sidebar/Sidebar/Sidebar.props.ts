@@ -6,6 +6,9 @@ import {
   Variant,
   BreakpointBehavior,
   SidebarStyles,
+  Elevation,
+  TransitionPreset,
+  SidebarContextType,
 } from './Sidebar.type';
 
 export interface SidebarProps {
@@ -78,6 +81,21 @@ export interface SidebarProps {
    * The behavior of the sidebar at the breakpoint
    */
   breakpointBehavior?: BreakpointBehavior;
+
+  /**
+   * The elevation level of the sidebar (shadow depth)
+   */
+  elevation?: Elevation;
+
+  /**
+   * The transition preset for the sidebar animations
+   */
+  transitionPreset?: TransitionPreset;
+
+  /**
+   * ARIA label for the sidebar for accessibility
+   */
+  ariaLabel?: string;
 
   /**
    * Custom styles for different parts of the sidebar
@@ -169,4 +187,9 @@ export interface SidebarType extends React.FC<SidebarProps> {
    * The footer component for the sidebar
    */
   Footer: React.FC<SidebarFooterProps>;
+
+  /**
+   * Hook to access the sidebar context
+   */
+  useContext: () => SidebarContextType;
 }

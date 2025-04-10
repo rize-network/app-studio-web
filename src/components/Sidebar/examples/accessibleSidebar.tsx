@@ -1,0 +1,220 @@
+import React from 'react';
+import { Sidebar } from '../Sidebar';
+import { View } from '../../Layout/View/View';
+import { Text } from '../../Text/Text';
+import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import {
+  HomeIcon,
+  SettingsIcon,
+  UserIcon,
+  HelpIcon,
+  NotificationIcon,
+} from '../../Icon/Icon';
+import { Separator } from '../../Separator/Separator';
+import { useSidebarContext } from '../Sidebar/Sidebar.view';
+
+export const AccessibleSidebar = () => {
+  return (
+    <View
+      height="500px"
+      position="relative"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Horizontal width="100%" height="100%">
+        <Sidebar
+          fixed={false}
+          variant="subtle"
+          elevation="medium"
+          transitionPreset="bounce"
+          ariaLabel="Main navigation"
+          views={{
+            container: {
+              borderRight: 'none',
+            },
+            content: {
+              padding: '12px',
+            },
+            divider: {
+              marginY: '12px',
+            },
+            navItem: {
+              padding: '10px 12px',
+              borderRadius: '6px',
+              marginBottom: '4px',
+              transition: 'all 0.2s ease',
+            },
+            navItemActive: {
+              backgroundColor: 'color.blue.50',
+              color: 'color.blue.600',
+            },
+            navItemIcon: {
+              color: 'color.gray.500',
+              marginRight: '12px',
+            },
+            navItemText: {
+              fontWeight: 'medium',
+            },
+          }}
+        >
+          <Sidebar.Header>
+            <Text fontWeight="bold" size="lg">
+              Enhanced Sidebar
+            </Text>
+          </Sidebar.Header>
+          <Sidebar.Content>
+            <Vertical gap={2}>
+              <Text
+                fontSize="sm"
+                color="color.gray.500"
+                fontWeight="medium"
+                marginBottom="8px"
+              >
+                MAIN NAVIGATION
+              </Text>
+
+              <EnhancedNavItem
+                icon={<HomeIcon widthHeight={20} />}
+                label="Dashboard"
+                isActive
+                ariaLabel="Go to Dashboard"
+              />
+              <EnhancedNavItem
+                icon={<UserIcon widthHeight={20} />}
+                label="Profile"
+                ariaLabel="Go to Profile"
+              />
+              <EnhancedNavItem
+                icon={<NotificationIcon widthHeight={20} />}
+                label="Notifications"
+                ariaLabel="Go to Notifications"
+                badge={3}
+              />
+
+              <Separator marginY="12px" />
+
+              <Text
+                fontSize="sm"
+                color="color.gray.500"
+                fontWeight="medium"
+                marginY="8px"
+              >
+                SETTINGS
+              </Text>
+
+              <EnhancedNavItem
+                icon={<SettingsIcon widthHeight={20} />}
+                label="Preferences"
+                ariaLabel="Go to Preferences"
+              />
+              <EnhancedNavItem
+                icon={<HelpIcon widthHeight={20} />}
+                label="Help & Support"
+                ariaLabel="Go to Help and Support"
+              />
+            </Vertical>
+          </Sidebar.Content>
+          <Sidebar.Footer>
+            <Horizontal alignItems="center" gap={8}>
+              <View
+                width="32px"
+                height="32px"
+                borderRadius="full"
+                backgroundColor="color.blue.100"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Text fontWeight="bold" color="color.blue.600">
+                  JS
+                </Text>
+              </View>
+              <Vertical gap={0}>
+                <Text fontWeight="medium" size="sm">
+                  John Smith
+                </Text>
+                <Text size="xs" color="color.gray.500">
+                  john@example.com
+                </Text>
+              </Vertical>
+            </Horizontal>
+          </Sidebar.Footer>
+        </Sidebar>
+        <View flex="1" padding="24px" backgroundColor="color.gray.50">
+          <Text fontWeight="bold" size="xl" marginBottom="16px">
+            Enhanced Sidebar Example
+          </Text>
+          <Text marginBottom="12px">
+            This sidebar demonstrates the following enhancements:
+          </Text>
+          <Vertical gap={8} marginLeft="16px">
+            <Text>• Improved accessibility with ARIA attributes</Text>
+            <Text>• Custom animation with bounce transition preset</Text>
+            <Text>• Medium elevation shadow effect</Text>
+            <Text>• Subtle variant with section Separators</Text>
+            <Text>• Enhanced navigation items with badges</Text>
+          </Vertical>
+        </View>
+      </Horizontal>
+    </View>
+  );
+};
+
+interface EnhancedNavItemProps {
+  icon: React.ReactNode;
+  label: string;
+  isActive?: boolean;
+  ariaLabel?: string;
+  badge?: number;
+}
+
+const EnhancedNavItem = ({
+  icon,
+  label,
+  isActive = false,
+  ariaLabel,
+  badge,
+}: EnhancedNavItemProps) => {
+  // Import the useSidebarContext hook directly to avoid TypeScript errors
+  const { views } = useSidebarContext();
+
+  return (
+    <Horizontal
+      as="button"
+      role="link"
+      aria-label={ariaLabel || label}
+      aria-current={isActive ? 'page' : undefined}
+      alignItems="center"
+      cursor="pointer"
+      width="100%"
+      {...views?.navItem}
+      {...(isActive && views?.navItemActive)}
+      _hover={{
+        backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100',
+      }}
+    >
+      <View {...views?.navItemIcon}>{icon}</View>
+      <Text flex="1" {...views?.navItemText}>
+        {label}
+      </Text>
+      {badge && (
+        <View
+          minWidth="20px"
+          height="20px"
+          borderRadius="full"
+          backgroundColor={isActive ? 'color.blue.500' : 'color.gray.400'}
+          color="white"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          fontSize="xs"
+          fontWeight="bold"
+        >
+          {badge}
+        </View>
+      )}
+    </Horizontal>
+  );
+};

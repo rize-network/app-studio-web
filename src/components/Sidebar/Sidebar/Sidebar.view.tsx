@@ -14,6 +14,8 @@ import {
   SidebarSizes,
   SidebarVariants,
   SidebarPositions,
+  SidebarElevations,
+  SidebarTransitions,
 } from './Sidebar.style';
 import { SidebarContextType } from './Sidebar.type';
 
@@ -188,6 +190,9 @@ export const SidebarView: React.FC<SidebarProps> = ({
   collapsedWidth,
   breakpoint = 768,
   breakpointBehavior = 'overlay',
+  elevation = 'none',
+  transitionPreset = 'normal',
+  ariaLabel = 'Sidebar navigation',
   isExpanded,
   isMobile,
   toggleExpanded,
@@ -240,14 +245,17 @@ export const SidebarView: React.FC<SidebarProps> = ({
           height="100vh"
           width={width}
           zIndex={999}
-          transition="width 0.3s ease, transform 0.3s ease"
+          transition={SidebarTransitions[transitionPreset]}
           transform={
             isMobile && breakpointBehavior === 'overlay' && !isExpanded
               ? `translateX(${position === 'left' ? '-100%' : '100%'})`
               : 'translateX(0)'
           }
+          role="navigation"
+          aria-label={ariaLabel}
           {...SidebarVariants[variant]}
           {...SidebarPositions[position]}
+          {...SidebarElevations[elevation]}
           {...views?.container}
           {...props}
         >
