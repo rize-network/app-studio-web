@@ -6,7 +6,7 @@ import { OTPInput } from '../OTPInput';
 
 export const StepValuesOTPInput = () => {
   const [otp, setOtp] = useState('');
-  
+
   // Define specific values that the OTP can take
   const stepValues = [1234, 2468, 3579, 5678, 9876];
 
@@ -34,7 +34,7 @@ export const StepValuesOTPInput = () => {
           },
         }}
       />
-      
+
       <Horizontal justifyContent="space-between" width="100%">
         {stepValues.map((step) => (
           <Text key={step} fontSize={14} color="color.blueGray.500">
@@ -42,9 +42,10 @@ export const StepValuesOTPInput = () => {
           </Text>
         ))}
       </Horizontal>
-      
+
       <Text fontSize={14} color="color.gray.600">
-        This OTP input will snap to the closest value from: {stepValues.join(', ')}
+        This OTP input will snap to the closest value from:{' '}
+        {stepValues.join(', ')}
       </Text>
     </Vertical>
   );
