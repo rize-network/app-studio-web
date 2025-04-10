@@ -22,7 +22,7 @@ export const AlertView = ({
     borderStyle="solid"
     padding={16}
     flexWrap="nowrap"
-    // borderColor={Themes[variant].container.border}
+    borderColor={Themes[variant].container.border}
     {...views?.container}
   >
     <View alignSelf={'center'}>
