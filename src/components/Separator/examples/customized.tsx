@@ -10,28 +10,21 @@ export const CustomizedSeparators = () => {
     <Vertical width="100%" gap={24}>
       <View>
         <Text marginBottom={8}>Custom Thickness and Color</Text>
-        <Separator 
-          thickness="thick" 
-          color="color.blue.500" 
-        />
+        <Separator thickness="thick" color="color.blue.500" />
       </View>
 
       <View>
         <Text marginBottom={8}>Custom Border Style with Direct Props</Text>
         {/* Using direct props to override default styles */}
-        <Separator 
-          variant="dashed"
-          color="color.orange.500"
-          spacing="24px"
-        />
+        <Separator variant="dashed" color="color.orange.500" spacing="24px" />
       </View>
 
       <View>
         <Text marginBottom={8}>Vertical Separator with Custom Styling</Text>
         <Horizontal height={100} alignItems="center" gap={16}>
           <Text>Left Content</Text>
-          <Separator 
-            orientation="vertical" 
+          <Separator
+            orientation="vertical"
             thickness="medium"
             color="color.purple.500"
             spacing="8px"
