@@ -8,7 +8,7 @@ import { useToast } from '../Toast';
 export const HookUsageDemo = () => {
   // Use the hook to get toast functions
   const toast = useToast();
-  
+
   const showCustomRenderToast = () => {
     toast.success('Custom Render', 'This toast uses a custom render function', {
       render: ({ id, onClose }) => (
