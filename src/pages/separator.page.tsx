@@ -8,6 +8,7 @@ import {
   SeparatorColors,
   SeparatorWithLabel,
   SeparatorInCard,
+  CustomizedSeparators,
 } from 'src/components/Separator/examples';
 
 const SeparatorPage = () => {
@@ -66,6 +67,13 @@ const SeparatorPage = () => {
             <td>In Card</td>
             <td>
               <SeparatorInCard />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Advanced Customization</td>
+            <td>
+              <CustomizedSeparators />
             </td>
           </tr>
         </tbody>
