@@ -1,3 +1,4 @@
+import React from 'react';
 import { AlertStyles, Variant } from './Alert.type';
 // Defines the AlertProps interface for alert components
 export interface AlertProps {
@@ -6,7 +7,7 @@ export interface AlertProps {
   // Mandatory title property, must be a string
   title: string;
   // Mandatory description property, must be a string
-  description: string;
+  description: string | React.ReactNode;
   // Optional variant property to determine the style of the alert
   variant?: Variant;
   // Optional styles property to apply custom styles to the alert component

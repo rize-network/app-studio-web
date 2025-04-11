@@ -15,6 +15,7 @@ const TabsComponent: React.FC<TabsProps> = ({
   onTabChange,
   renderTab,
   renderContent,
+  iconPosition = 'left',
 }) => {
   // Use the custom hook to manage the active tab state
   const { activeTab, setActiveTab } = useTabsState(tabs, initialTabValue);
@@ -40,6 +41,7 @@ const TabsComponent: React.FC<TabsProps> = ({
       handleTabClick={handleTabClick} // Pass the click handler
       renderTab={renderTab}
       renderContent={renderContent}
+      iconPosition={iconPosition}
     />
   );
 };

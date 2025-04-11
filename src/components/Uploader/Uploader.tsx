@@ -12,6 +12,7 @@ export const Uploader: React.FC<UploadProps> = ({
   validateFile,
   isLoading = false,
   progress = 0,
+  fileType,
   ...props
 }: UploadProps) => {
   const {
@@ -24,6 +25,23 @@ export const Uploader: React.FC<UploadProps> = ({
     handleFileChange,
     handleClick,
   } = useUpload({ accept, maxSize, onFileSelect, validateFile });
+
+  // Determine file type based on the selected file's MIME type if not explicitly provided
+  const determineFileType = () => {
+    if (fileType) return fileType;
+
+    if (!selectedFile) return undefined;
+
+    if (selectedFile.type.startsWith('image/')) {
+      return 'image';
+    } else if (selectedFile.type.startsWith('video/')) {
+      return 'video';
+    } else {
+      return 'file';
+    }
+  };
+
+  const detectedFileType = determineFileType();
 
   return (
     <UploadView
@@ -43,6 +61,7 @@ export const Uploader: React.FC<UploadProps> = ({
       fileInputRef={fileInputRef}
       previewUrl={previewUrl}
       thumbnailUrl={thumbnailUrl}
+      fileType={detectedFileType}
       {...props}
     />
   );

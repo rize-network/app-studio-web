@@ -12,8 +12,9 @@ import { VariantsDemo } from 'src/components/Slider/examples/variants';
 import { VerticalDemo } from 'src/components/Slider/examples/vertical';
 import { TooltipDemo } from 'src/components/Slider/examples/tooltip';
 import { ControlledDemo } from 'src/components/Slider/examples/controlled';
+import { TooltipIntegrationDemo } from 'src/components/Slider/examples/tooltipIntegration';
 
-export const LinkPage = () => {
+export const SliderPage = () => {
   return (
     <table className="table" cellSpacing={0}>
       <tr>
@@ -92,9 +93,16 @@ export const LinkPage = () => {
             <TooltipDemo />
           </td>
         </tr>
+
+        <tr>
+          <td>Tooltip Integration</td>
+          <td>
+            <TooltipIntegrationDemo />
+          </td>
+        </tr>
       </tbody>
     </table>
   );
 };
 
-export default LinkPage;
+export default SliderPage;

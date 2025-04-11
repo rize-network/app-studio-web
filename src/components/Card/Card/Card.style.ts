@@ -45,20 +45,16 @@ export const getDefaultCardStyles = (theme: any): CardStyles => ({
     overflow: 'hidden',
   },
   header: {
-    paddingHorizontal: '16px',
-    paddingBottom: '16px',
+    padding: '16px',
     borderBottomWidth: '1px',
     borderBottomStyle: 'solid',
     borderBottomColor: 'color.gray.200',
   },
   content: {
-    paddingHorizontal: '16px',
-    paddingTop: '16px',
-    paddingBottom: '16px',
+    padding: '16px',
   },
   footer: {
-    paddingHorizontal: '16px',
-    paddingTop: '16px',
+    padding: '16px',
     borderTopWidth: '1px',
     borderTopStyle: 'solid',
     borderTopColor: 'color.gray.200',

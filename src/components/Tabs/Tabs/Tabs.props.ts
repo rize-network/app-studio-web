@@ -11,10 +11,12 @@ export interface TabsProps {
   initialTabValue?: string | number;
   /** Optional callback function triggered when the active tab changes. Receives the newly active tab object. */
   onTabChange?: (activeTab: Tab) => void;
-  /** Optional styles object to customize the appearance of the tabs container, headers, buttons, text, and content area. */
+  /** Optional styles object to customize the appearance of the tabs container, headers, text, and content area. */
   views?: TabsStyles;
+  /** Optional position of the icon relative to the text in tab headers. */
+  iconPosition?: 'left' | 'right' | 'top' | 'bottom';
   /**
-   * Optional custom renderer for a single tab button/header.
+   * Optional custom renderer for a single tab header.
    * Receives the tab data, whether it's currently active, and an onClick handler to activate the tab.
    */
   renderTab?: (

@@ -2,6 +2,7 @@ import React from 'react';
 import { Carousel } from '../Carousel';
 import { View } from '../../Layout/View/View';
 import { Text } from '../../Text/Text';
+import { Vertical } from 'app-studio';
 
 export const AutoPlayDemo = () => {
   // Create an array of slides with different background colors
@@ -16,7 +17,7 @@ export const AutoPlayDemo = () => {
     <View height="300px" width="100%">
       <Carousel autoPlay autoPlayInterval={2000} pauseOnHover>
         {slides.map((slide, index) => (
-          <View
+          <Vertical
             key={index}
             backgroundColor={slide.color}
             width="100%"
@@ -31,7 +32,7 @@ export const AutoPlayDemo = () => {
             <Text color="white" fontSize="16px" marginTop="10px">
               Auto-advances every 2 seconds. Hover to pause.
             </Text>
-          </View>
+          </Vertical>
         ))}
       </Carousel>
     </View>

@@ -1,5 +1,3 @@
-import { ButtonProps } from '../../Button/Button/Button.props'; // Adjust path as needed
-import { TextProps } from '../../Text/Text/Text.props'; // Adjust path as needed
 import { ViewProps } from 'app-studio';
 
 /**
@@ -21,16 +19,16 @@ export type Tab = {
 export type TabsStyles = {
   /** Styles for the main container wrapping the tabs and content. */
   container?: ViewProps;
-  /** Styles applied specifically to the active tab button/header. Merged with `tab` views. */
-  activeTab?: ButtonProps;
-  /** Styles applied specifically to the text within the active tab button/header. Merged with `title` views. */
-  activeText?: TextProps;
-  /** Styles applied to each tab button/header (both active and inactive). */
-  tab?: ButtonProps;
+  /** Styles applied specifically to the active tab header. Merged with `tab` views. */
+  activeTab?: ViewProps;
+  /** Styles applied specifically to the text within the active tab header. Merged with `title` views. */
+  activeText?: ViewProps;
+  /** Styles applied to each tab header (both active and inactive). */
+  tab?: ViewProps;
   /** Styles applied to the content area displaying the active tab's content. */
   content?: ViewProps;
-  /** Styles applied to the text within each tab button/header (both active and inactive). */
-  title?: TextProps;
+  /** Styles applied to the text within each tab header (both active and inactive). */
+  title?: ViewProps;
   /** Styles applied to the container element that wraps the tab buttons/headers. */
   headerTabs?: ViewProps;
 };

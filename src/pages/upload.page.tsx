@@ -8,6 +8,9 @@ const UploadPage = () => {
   const [progress, setProgress] = useState(0);
 
   const simulateUpload = (file: File) => {
+    // Log file info for debugging
+    console.log('Uploading file:', file.name, file.type, file.size);
+
     setIsLoading(true);
     setProgress(0);
 
@@ -41,6 +44,8 @@ const UploadPage = () => {
           isLoading={isLoading}
           progress={progress}
           text="Upload Image"
+          fileType="image"
+          containerProps={{ height: progress === 100 ? '200px' : 'auto' }}
         />
       </View>
 
@@ -53,6 +58,8 @@ const UploadPage = () => {
           isLoading={isLoading}
           progress={progress}
           text="Upload File"
+          fileType="file"
+          containerProps={{ height: progress === 100 ? '200px' : 'auto' }}
         />
       </View>
 
@@ -66,6 +73,8 @@ const UploadPage = () => {
           isLoading={isLoading}
           progress={progress}
           text="Upload Video"
+          fileType="video"
+          containerProps={{ height: progress === 100 ? '200px' : 'auto' }}
         />
       </View>
     </View>

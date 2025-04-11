@@ -79,31 +79,24 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
           {...videoProps}
           {...views?.view}
         />
-        {thumbnailUrl && (
-          <Image
-            src={thumbnailUrl}
-            alt="Video Thumbnail"
-            width="100%"
-            height="100%"
-            objectFit="cover"
-            {...imageProps}
-            {...views?.image}
-          />
-        )}
       </View>
     );
   },
   renderImage = ({ previewUrl, imageProps }) => {
+    console.log('Rendering image with URL:', previewUrl);
     return (
-      <Image
-        src={previewUrl}
-        alt="Preview"
-        width="100%"
-        height="100%"
-        objectFit="cover"
-        {...imageProps}
-        {...views?.image}
-      />
+      <View width="100%" height="100%" position="relative" {...views?.view}>
+        <Image
+          src={previewUrl}
+          alt="Preview"
+          width="100%"
+          height="100%"
+          objectFit="cover"
+          style={{ maxHeight: '100%', maxWidth: '100%' }}
+          {...imageProps}
+          {...views?.image}
+        />
+      </View>
     );
   },
   renderProgress = ({ progress, progressProps }) => {
@@ -139,6 +132,14 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
 }) => {
   const finalPreviewUrl = externalPreviewUrl || previewUrl;
 
+  // Debug log to help troubleshoot
+  console.log('Uploader state:', {
+    fileType,
+    finalPreviewUrl,
+    selectedFile: selectedFile?.name,
+    progress,
+  });
+
   return (
     <Center
       onClick={handleClick}
@@ -149,13 +150,17 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
       flexDirection="column"
       overflow="hidden"
       position="relative"
+      height={selectedFile && progress === 100 ? '200px' : 'auto'}
       {...containerProps}
       {...views?.container}
     >
+      {/* Image Preview */}
       {progress === 100 &&
         fileType === 'image' &&
         finalPreviewUrl &&
         renderImage({ previewUrl: finalPreviewUrl, imageProps })}
+
+      {/* Video Preview */}
       {progress === 100 &&
         fileType === 'video' &&
         thumbnailUrl &&
@@ -166,6 +171,8 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
           videoProps,
           imageProps,
         })}
+
+      {/* File Preview */}
       {progress === 100 &&
         fileType === 'file' &&
         selectedFile &&

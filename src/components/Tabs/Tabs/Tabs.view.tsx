@@ -1,10 +1,7 @@
 import React from 'react';
+import { View, Horizontal, Text, Vertical } from 'app-studio';
 import { TabsViewProps } from './Tabs.props';
-import { View } from '../../Layout/View/View'; // Adjust path as needed
-import { Horizontal } from '../../Layout/Horizontal/Horizontal'; // Adjust path as needed
-import { Button } from '../../Button/Button'; // Adjust path as needed
-import { Text } from '../../Text/Text'; // Adjust path as needed
-import { Vertical } from '../../Layout/Vertical/Vertical'; // Adjust path as needed
+import { TabHeader } from './TabHeader';
 
 /**
  * The presentation component for Tabs. Renders the UI based on props.
@@ -41,31 +38,23 @@ export const TabsView: React.FC<TabsViewProps> = ({
             return renderTab(tab, isActive, onClick);
           }
 
-          // Default rendering for a tab button
+          // Default rendering for a tab using our custom TabHeader component
           return (
-            <Button
+            <TabHeader
               key={tab.title} // Use the unique title as the key
+              tab={tab}
+              isActive={isActive}
               onClick={onClick}
-              borderBottomLeftRadius={0} // Example: Apply border radius if active
-              borderBottomRightRadius={0} // Example: Apply border radius if active
-              // Apply base tab styles and merge activeTab styles if this tab is active
-              {...views.tab}
-              {...(isActive ? views.activeTab : {})}
-              // Example: Set variant based on active state (can be overridden by styles)
-              variant={isActive ? 'filled' : 'ghost'}
-              cursor="pointer" // Ensure pointer cursor
-              iconPosition={iconPosition} // Pass icon position prop
-              icon={tab.icon} // Conditionally render icon
-              // Removed isAuto and margin={10} - should be controlled via views.tab if needed
-            >
-              <Text
-                // Apply base title styles and merge activeText styles if this tab is active
-                {...views.title}
-                {...(isActive ? views.activeText : {})}
-              >
-                {tab.title}
-              </Text>
-            </Button>
+              iconPosition={iconPosition}
+              tabStyles={{
+                ...views.tab,
+                ...(isActive ? views.activeTab : {})
+              }}
+              textStyles={{
+                ...views.title,
+                ...(isActive ? views.activeText : {})
+              }}
+            />
           );
         })}
       </Horizontal>
