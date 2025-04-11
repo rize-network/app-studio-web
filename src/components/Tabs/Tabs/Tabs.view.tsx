@@ -48,11 +48,11 @@ export const TabsView: React.FC<TabsViewProps> = ({
               iconPosition={iconPosition}
               tabStyles={{
                 ...views.tab,
-                ...(isActive ? views.activeTab : {})
+                ...(isActive ? views.activeTab : {}),
               }}
               textStyles={{
                 ...views.title,
-                ...(isActive ? views.activeText : {})
+                ...(isActive ? views.activeText : {}),
               }}
             />
           );

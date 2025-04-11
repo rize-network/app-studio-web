@@ -12,7 +12,7 @@ export const TooltipPositions = () => {
       <Text fontWeight="bold" marginBottom={10}>
         Different Positions
       </Text>
-      
+
       <Horizontal gap={20} flexWrap="wrap">
         <Vertical gap={10} alignItems="center">
           <Text>Top Position</Text>
@@ -42,11 +42,11 @@ export const TooltipPositions = () => {
           </Tooltip>
         </Vertical>
       </Horizontal>
-      
+
       <Text fontWeight="bold" marginTop={20} marginBottom={10}>
         Different Alignments
       </Text>
-      
+
       <Horizontal gap={20} flexWrap="wrap">
         <Vertical gap={10} alignItems="center">
           <Text>Start Alignment</Text>

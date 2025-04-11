@@ -26,7 +26,10 @@ export const TooltipSizes = () => {
 
         <Vertical gap={10} alignItems="center">
           <Text>Large Size</Text>
-          <Tooltip content="Large tooltip with more content that might wrap to multiple lines" size="lg">
+          <Tooltip
+            content="Large tooltip with more content that might wrap to multiple lines"
+            size="lg"
+          >
             <Button>Large</Button>
           </Tooltip>
         </Vertical>

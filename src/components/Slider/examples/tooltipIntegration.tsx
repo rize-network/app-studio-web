@@ -19,7 +19,7 @@ export const TooltipIntegrationDemo = () => {
             <InfoIcon size={16} cursor="pointer" />
           </Tooltip>
         </Horizontal>
-        
+
         <Slider
           value={value}
           onChange={setValue}

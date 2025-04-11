@@ -29,9 +29,7 @@ export const TooltipProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ value, children }) => {
   return (
-    <TooltipContext.Provider value={value}>
-      {children}
-    </TooltipContext.Provider>
+    <TooltipContext.Provider value={value}>{children}</TooltipContext.Provider>
   );
 };
 
@@ -134,7 +132,7 @@ export const TooltipView: React.FC<{
 
   // Get position styles
   const positionStyles = getTooltipPositionStyles(position, align);
-  
+
   // Get arrow styles
   const arrowStyles = showArrow ? getArrowStyles(position) : {};
 
@@ -167,14 +165,9 @@ export const TooltipView: React.FC<{
           ) : (
             content
           )}
-          
+
           {/* Arrow */}
-          {showArrow && (
-            <View
-              {...arrowStyles}
-              {...views?.arrow}
-            />
-          )}
+          {showArrow && <View {...arrowStyles} {...views?.arrow} />}
         </View>
       )}
     </View>

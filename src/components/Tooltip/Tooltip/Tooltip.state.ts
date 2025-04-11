@@ -19,7 +19,7 @@ export const useTooltipState = ({
   const contentRef = useRef<HTMLElement>(null);
   const openTimerRef = useRef<NodeJS.Timeout | null>(null);
   const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   // Generate unique IDs for accessibility
   const triggerId = useRef(`tooltip-trigger-${generateId()}`).current;
   const contentId = useRef(`tooltip-content-${generateId()}`).current;
@@ -27,13 +27,13 @@ export const useTooltipState = ({
   // Open tooltip with delay
   const openTooltip = useCallback(() => {
     if (isDisabled) return;
-    
+
     // Clear any existing close timer
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
       closeTimerRef.current = null;
     }
-    
+
     // Set open timer
     if (!isOpen && !openTimerRef.current) {
       openTimerRef.current = setTimeout(() => {
@@ -50,7 +50,7 @@ export const useTooltipState = ({
       clearTimeout(openTimerRef.current);
       openTimerRef.current = null;
     }
-    
+
     // Set close timer
     if (isOpen && !closeTimerRef.current) {
       closeTimerRef.current = setTimeout(() => {
