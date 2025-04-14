@@ -13,6 +13,7 @@ import { AIResponseDisplay } from '../../AIResponseDisplay/AIResponseDisplay';
 import { MessageBubbleProps } from './MessageBubble.props';
 import {
   getContainerStyles,
+  getMessageContentStyles,
   contentStyles,
   timestampStyles,
   actionsStyles,
@@ -62,38 +63,45 @@ export const MessageBubbleView: React.FC<Props> = ({
       onMouseLeave={() => setIsHovered(false)}
     >
       {isLoading ? (
-        <LoadingIndicator size="sm" />
+        <View {...getMessageContentStyles(type)}>
+          <LoadingIndicator size="sm" />
+        </View>
       ) : (
-        <Vertical width="100%">
+        <>
           {isEditing ? (
-            <Vertical gap="sm" width="100%">
-              <textarea
-                value={editValue}
-                onChange={(e) => setEditValue(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '8px',
-                  borderRadius: '4px',
-                  border: '1px solid #ccc',
-                  minHeight: '80px',
-                }}
-              />
-              <Horizontal gap="sm" justifyContent="flex-end">
-                <Button variant="outline" onClick={cancelEditing}>
-                  Cancel
-                </Button>
-                <Button onClick={saveEditing}>Save</Button>
-              </Horizontal>
-            </Vertical>
+            <View {...getMessageContentStyles(type)}>
+              <Vertical gap="sm" width="100%">
+                <textarea
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '8px',
+                    borderRadius: '4px',
+                    border: '1px solid #ccc',
+                    minHeight: '80px',
+                    backgroundColor: 'transparent',
+                  }}
+                />
+                <Horizontal gap="sm" justifyContent="flex-end">
+                  <Button variant="outline" onClick={cancelEditing}>
+                    Cancel
+                  </Button>
+                  <Button onClick={saveEditing}>Save</Button>
+                </Horizontal>
+              </Vertical>
+            </View>
           ) : (
             <>
-              {type === 'assistant' ? (
-                <AIResponseDisplay content={content} />
-              ) : (
-                <Text {...contentStyles} {...styles.content}>
-                  {content}
-                </Text>
-              )}
+              <View {...getMessageContentStyles(type)}>
+                {type === 'assistant' ? (
+                  <AIResponseDisplay content={content} />
+                ) : (
+                  <Text {...contentStyles} {...styles.content}>
+                    {content}
+                  </Text>
+                )}
+              </View>
 
               {showTimestamp && (
                 <Text {...timestampStyles} {...styles.timestamp}>
@@ -102,7 +110,7 @@ export const MessageBubbleView: React.FC<Props> = ({
               )}
             </>
           )}
-        </Vertical>
+        </>
       )}
 
       {showActions && isHovered && !isLoading && !isEditing && (
@@ -113,8 +121,14 @@ export const MessageBubbleView: React.FC<Props> = ({
               size="xs"
               onClick={() => startEditing(content)}
               aria-label="Edit message"
+              color="color.gray.600"
+              _hover={{ color: 'color.gray.900' }}
+              // '@media (prefers-color-scheme: dark)': {
+              //   color: 'color.gray.400',
+              //   _hover: { color: 'color.gray.100' },
+              // }
             >
-              Edit
+              ✏️
             </Button>
           )}
           {onDelete && (
@@ -123,8 +137,14 @@ export const MessageBubbleView: React.FC<Props> = ({
               size="xs"
               onClick={onDelete}
               aria-label="Delete message"
+              color="color.gray.600"
+              _hover={{ color: 'color.red.500' }}
+              // '@media (prefers-color-scheme: dark)': {
+              //   color: 'color.gray.400',
+              //   _hover: { color: 'color.red.400' },
+              // }
             >
-              Delete
+              🗑️
             </Button>
           )}
         </View>

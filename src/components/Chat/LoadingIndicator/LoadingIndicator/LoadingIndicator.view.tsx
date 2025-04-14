@@ -18,7 +18,7 @@ import {
 
 export const LoadingIndicatorView: React.FC<LoadingIndicatorProps> = ({
   size = 'md',
-  variant = 'spinner',
+  variant = 'dots',
   color = 'currentColor',
   text,
   styles = {},
@@ -32,12 +32,12 @@ export const LoadingIndicatorView: React.FC<LoadingIndicatorProps> = ({
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
-      
+
       @keyframes pulse {
         0%, 100% { opacity: 0.2; transform: scale(0.8); }
         50% { opacity: 1; transform: scale(1); }
       }
-      
+
       @keyframes typing {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-5px); }

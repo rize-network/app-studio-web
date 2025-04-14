@@ -27,6 +27,11 @@ export interface AIResponseDisplayProps extends ViewProps {
   enableMath?: boolean;
 
   /**
+   * Whether to enable automatic link detection
+   */
+  enableLinkDetection?: boolean;
+
+  /**
    * Custom styles for the component
    */
   styles?: AIResponseDisplayStyles;

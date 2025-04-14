@@ -54,7 +54,11 @@ export const dotStyles = (
   height: `${dotSizeMap[size]}px`,
   borderRadius: '50%',
   backgroundColor: color,
+  opacity: 0.6,
   animation: `pulse 1.4s ease-in-out ${index * 0.16}s infinite`,
+  '@media (prefers-color-scheme: dark)': {
+    backgroundColor: 'color.gray.300',
+  },
 });
 
 export const typingContainerStyles: ViewProps = {
@@ -72,5 +76,9 @@ export const typingDotStyles = (
   height: `${dotSizeMap[size]}px`,
   borderRadius: '50%',
   backgroundColor: color,
+  opacity: 0.6,
   animation: `typing 1.4s ease-in-out ${index * 0.16}s infinite`,
+  '@media (prefers-color-scheme: dark)': {
+    backgroundColor: 'color.gray.300',
+  },
 });

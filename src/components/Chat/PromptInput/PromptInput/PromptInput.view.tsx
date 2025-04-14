@@ -73,28 +73,32 @@ export const PromptInputView: React.FC<Props> = ({
         </View>
       )}
 
-      <textarea
-        ref={textareaRef}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        placeholder={placeholder}
-        disabled={isDisabled || isLoading}
-        rows={calculateRows()}
-        style={{
-          width: '100%',
-          padding: '12px',
-          borderRadius: '8px',
-          border: '1px solid #ccc',
-          fontSize: '16px',
-          lineHeight: '1.5',
-          resize: 'none',
-          outline: 'none',
-          transition: 'border-color 0.2s ease',
-        }}
-      />
+      <View {...getInputContainerStyles(transparentBackground)} dir="auto">
+        <textarea
+          ref={textareaRef}
+          id="chat-input"
+          dir="auto"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          placeholder={placeholder}
+          disabled={isDisabled || isLoading}
+          rows={calculateRows()}
+          className="scrollbar-hidden"
+          style={{
+            width: '100%',
+            padding: '12px',
+            backgroundColor: 'transparent',
+            fontSize: '16px',
+            lineHeight: '1.5',
+            resize: 'none',
+            outline: 'none',
+            border: 'none',
+          }}
+        />
+      </View>
 
       <View {...buttonsContainerStyles} {...styles.buttonsContainer}>
         {enableFileUpload && (

@@ -10,9 +10,8 @@ import { AIResponseDisplayProps } from './AIResponseDisplay.props';
 import {
   containerStyles,
   textStyles,
-  codeBlockStyles,
   inlineCodeStyles,
-  citationStyles,
+  linkStyles,
 } from './AIResponseDisplay.style';
 
 export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
@@ -20,6 +19,7 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
   enableSyntaxHighlighting = true,
   enableCitations = true,
   enableMath = false,
+  enableLinkDetection = true,
   styles = {},
   ...props
 }) => {
@@ -28,7 +28,6 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
     if (!content) return [];
 
     const parts: React.ReactNode[] = [];
-    let currentText = '';
 
     // Split content by code blocks
     const codeBlockRegex = /```([a-z]*)\n([\s\S]*?)```/g;
@@ -65,55 +64,127 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
     return parts;
   };
 
-  // Parse text with inline code
+  interface TextPart {
+    type: 'code' | 'link';
+    placeholder: string;
+    element: React.ReactNode;
+  }
+
+  // Parse text with inline code and links
   const parseTextWithInlineCode = (text: string) => {
-    const parts: React.ReactNode[] = [];
-    let currentText = '';
+    const parts: TextPart[] = [];
 
-    // Split by inline code
+    // First, process inline code
     const inlineCodeRegex = /`([^`]+)`/g;
-    let lastIndex = 0;
-    let match;
+    let processedText = '';
+    let lastCodeIndex = 0;
+    let codeMatch;
 
-    while ((match = inlineCodeRegex.exec(text)) !== null) {
+    while ((codeMatch = inlineCodeRegex.exec(text)) !== null) {
       // Add text before inline code
-      const textBeforeCode = text.slice(lastIndex, match.index);
-      if (textBeforeCode) {
-        parts.push(textBeforeCode);
-      }
+      processedText += text.slice(lastCodeIndex, codeMatch.index);
 
-      // Add inline code
-      const code = match[1];
-      parts.push(
-        <Text
-          key={`inline-code-${parts.length}`}
-          as="span"
-          fontFamily="monospace"
-          backgroundColor="color.gray.100"
-          padding="0 4px"
-          borderRadius="sm"
-        >
-          {code}
-        </Text>
-      );
+      // Add a placeholder for the inline code
+      const codePlaceholder = `__INLINE_CODE_${parts.length}__`;
+      processedText += codePlaceholder;
 
-      lastIndex = match.index + match[0].length;
+      // Store the inline code element
+      parts.push({
+        type: 'code',
+        placeholder: codePlaceholder as string,
+        element: (
+          <Text
+            key={`inline-code-${parts.length}`}
+            as="span"
+            {...inlineCodeStyles}
+          >
+            {codeMatch[1]}
+          </Text>
+        ),
+      });
+
+      lastCodeIndex = codeMatch.index + codeMatch[0].length;
     }
 
     // Add remaining text
-    if (lastIndex < text.length) {
-      parts.push(text.slice(lastIndex));
+    processedText += text.slice(lastCodeIndex);
+
+    // Now, process links in the processed text if enabled
+    const linkRegex = /(https?:\/\/[^\s]+)/g;
+    let finalText = '';
+    let lastLinkIndex = 0;
+    let linkMatch;
+
+    while (
+      enableLinkDetection &&
+      (linkMatch = linkRegex.exec(processedText)) !== null
+    ) {
+      // Add text before link
+      finalText += processedText.slice(lastLinkIndex, linkMatch.index);
+
+      // Add a placeholder for the link
+      const linkPlaceholder = `__LINK_${parts.length}__`;
+      finalText += linkPlaceholder;
+
+      // Store the link element
+      const url = linkMatch[1];
+      parts.push({
+        type: 'link',
+        placeholder: linkPlaceholder,
+        element: (
+          <Text
+            key={`link-${parts.length}`}
+            as="a"
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            {...linkStyles}
+          >
+            {url}
+          </Text>
+        ),
+      });
+
+      lastLinkIndex = linkMatch.index + linkMatch[0].length;
     }
 
-    // If there were no inline codes, just return the text
-    if (parts.length === 0) {
+    // Add remaining text
+    finalText += enableLinkDetection
+      ? processedText.slice(lastLinkIndex)
+      : processedText;
+
+    // Replace all placeholders with their corresponding elements
+    let result = finalText;
+    const segments: React.ReactNode[] = [];
+    let currentIndex = 0;
+
+    // Sort parts by their placeholder position in the final text
+    const sortedParts = [...parts].sort((a, b) => {
+      return result.indexOf(a.placeholder) - result.indexOf(b.placeholder);
+    });
+
+    for (const part of sortedParts) {
+      const placeholderIndex = result.indexOf(part.placeholder);
+      if (placeholderIndex > currentIndex) {
+        segments.push(result.slice(currentIndex, placeholderIndex));
+      }
+      segments.push(part.element);
+      currentIndex = placeholderIndex + part.placeholder.length;
+    }
+
+    if (currentIndex < result.length) {
+      segments.push(result.slice(currentIndex));
+    }
+
+    // If there were no special elements, just return the text
+    if (segments.length === 0) {
       return text;
     }
 
-    // Otherwise, return the array of parts
+    // Otherwise, return the array of segments
     return (
       <Text key={`text-${Math.random()}`} {...textStyles} {...styles.text}>
-        {parts}
+        {segments}
       </Text>
     );
   };

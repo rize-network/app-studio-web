@@ -11,41 +11,45 @@ export const getContainerStyles = (
 ): ViewProps => {
   const baseStyles: ViewProps = {
     display: 'flex',
-    padding: 'md',
-    borderRadius: 'md',
-    maxWidth: '80%',
+    flexDirection: 'column',
     position: 'relative',
+    width: 'fit-content',
+    maxWidth: '100%',
   };
 
   const typeStyles: Record<MessageType, ViewProps> = {
     user: {
       alignSelf: 'flex-end',
-      backgroundColor: 'theme.primary',
-      color: 'color.white',
+      marginLeft: 'auto',
     },
     assistant: {
       alignSelf: 'flex-start',
-      backgroundColor: 'color.gray.100',
-      color: 'color.gray.900',
+      marginRight: 'auto',
     },
     system: {
       alignSelf: 'center',
+      marginX: 'auto',
       backgroundColor: 'color.gray.200',
       color: 'color.gray.700',
       fontStyle: 'italic',
+      padding: 'sm',
+      borderRadius: 'md',
     },
     error: {
       alignSelf: 'center',
+      marginX: 'auto',
       backgroundColor: 'color.red.100',
       color: 'color.red.900',
       borderLeft: '4px solid',
       borderColor: 'color.red.500',
+      padding: 'sm',
+      borderRadius: 'md',
     },
   };
 
   const hoverStyles: ViewProps = isHovered
     ? {
-        boxShadow: 'sm',
+        zIndex: 10,
       }
     : {};
 
@@ -53,6 +57,38 @@ export const getContainerStyles = (
     ...baseStyles,
     ...typeStyles[type],
     ...hoverStyles,
+  };
+};
+
+export const getMessageContentStyles = (type: MessageType): ViewProps => {
+  const baseStyles: ViewProps = {
+    padding: 'md',
+    borderRadius: 'lg',
+    position: 'relative',
+  };
+
+  const typeStyles: Record<MessageType, ViewProps> = {
+    user: {
+      backgroundColor: 'theme.primary',
+      color: 'color.white',
+      borderTopRightRadius: '0',
+    },
+    assistant: {
+      backgroundColor: 'color.gray.100',
+      color: 'color.gray.900',
+      borderTopLeftRadius: '0',
+      '@media (prefers-color-scheme: dark)': {
+        backgroundColor: 'color.gray.800',
+        color: 'color.gray.100',
+      },
+    },
+    system: {},
+    error: {},
+  };
+
+  return {
+    ...baseStyles,
+    ...typeStyles[type],
   };
 };
 
@@ -64,18 +100,23 @@ export const contentStyles: ViewProps = {
 export const timestampStyles: ViewProps = {
   fontSize: 'xs',
   color: 'color.gray.500',
-  marginTop: 'xs',
+  marginTop: '4px',
+  marginX: '8px',
   textAlign: 'right',
 };
 
 export const actionsStyles: ViewProps = {
   position: 'absolute',
-  top: '-8px',
-  right: '8px',
+  top: '-24px',
+  right: '0',
   display: 'flex',
   gap: 'xs',
   backgroundColor: 'color.white',
-  borderRadius: 'full',
-  padding: '2px',
+  borderRadius: 'md',
+  padding: '4px',
   boxShadow: 'sm',
+  zIndex: 20,
+  '@media (prefers-color-scheme: dark)': {
+    backgroundColor: 'color.gray.800',
+  },
 };
