@@ -1,3 +1,10 @@
+/**
+ * FieldLabel Component
+ *
+ * Renders a label for a form field with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { Label } from '../../../Form/Label/Label';
 
@@ -15,14 +22,22 @@ export const FieldLabel: React.FC<LabelProps> = ({
   ...props
 }) => (
   <Label
-    top={6}
+    // Position properties
+    top={8} // 2 × 4px grid
     zIndex={1000}
-    lineHeight={LabelSizes[size]}
-    letterSpacing={0.25}
-    whiteSpace="noWrap"
     position="absolute"
-    color={error ? 'error' : color}
+    // Typography properties
     fontSize={LabelSizes[size]}
+    lineHeight={LabelSizes[size]}
+    letterSpacing="-0.01em" // Slight negative tracking for modern look
+    fontWeight="500" // Medium weight for better readability
+    fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+    whiteSpace="nowrap"
+    // Color properties
+    color={error ? 'color.red.500' : color}
+    // Animation
+    transition="all 0.2s ease"
+    // Apply custom styles
     {...views['label']}
     {...props}
   >

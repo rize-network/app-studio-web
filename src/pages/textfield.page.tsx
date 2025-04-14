@@ -3,6 +3,7 @@ import {
   IsClearableDemo,
   ColorSchemeDemo,
   DefaultInput,
+  DesignSystemTextFields,
   DisabledInput,
   LabelInput,
   LeftInput,
@@ -26,8 +27,14 @@ export const InputPage = () => {
             <th>App-Studio</th>
           </tr>
           <tr>
-            <td>Default</td>
+            <td>Design System</td>
+            <td>
+              <DesignSystemTextFields />
+            </td>
+          </tr>
 
+          <tr>
+            <td>Default</td>
             <td>
               <DefaultInput />
             </td>

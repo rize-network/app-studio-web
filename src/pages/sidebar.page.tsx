@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
   DefaultSidebar,
+  DesignSystemSidebar,
   SidebarVariants,
   SidebarPositions,
   SidebarSizes,
@@ -18,6 +19,13 @@ const SidebarPage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemSidebar />
+            </td>
           </tr>
 
           <tr>

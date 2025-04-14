@@ -1,3 +1,10 @@
+/**
+ * FieldContainer Component
+ *
+ * Renders a container for a form field with helper text and error handling
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 
 import { HelperText } from '../HelperText/HelperText';
@@ -13,15 +20,36 @@ export const FieldContainer: React.FC<ContainerProps> = ({
   views,
   ...props
 }) => (
-  <Vertical gap={5} position="relative" {...props}>
+  <Vertical
+    // Layout properties
+    gap={8} // 2 × 4px grid
+    position="relative"
+    width="100%"
+    // Apply custom props
+    {...props}
+  >
+    {/* Field content */}
     {children}
-    {!error && helperText && <HelperText {...views}>{helperText}</HelperText>}
+
+    {/* Helper text (when no error) */}
+    {!error && helperText && (
+      <HelperText
+        marginTop={4} // 1 × 4px grid
+        {...views}
+      >
+        {helperText}
+      </HelperText>
+    )}
+
+    {/* Error message */}
     {error && (
       <Text
         size="xs"
-        marginVertical={0}
+        marginTop={4} // 1 × 4px grid
         marginHorizontal={0}
-        color={'theme.error'}
+        fontWeight="500" // Medium weight for better readability
+        color="color.red.500"
+        transition="all 0.2s ease"
       >
         {error}
       </Text>

@@ -1,3 +1,10 @@
+/**
+ * TextArea View Component
+ *
+ * Renders a multi-line text input field with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { Element, Typography } from 'app-studio';
 import {
@@ -41,22 +48,49 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   ...props
 }) => {
   const isWithLabel = !!(isFocused && label);
+  /**
+   * Styles for the textarea field
+   */
   const fieldStyles = {
+    // Layout properties
     margin: 0,
-    paddingVertical: 8,
+    paddingVertical: 12, // 3 × 4px grid
     paddingHorizontal: 0,
     width: '100%',
-    heigth: '100%',
+    height: '100%',
+    minHeight: '80px', // 20 × 4px grid
     border: 'none',
+    resize: 'vertical',
+
+    // Focus state
     on: {
       focus: {
         outline: 'none',
       },
     },
+
+    // Typography properties
     fontSize: Typography.fontSizes[size],
+    lineHeight: '1.5', // 1.5 × font size for better readability in multi-line text
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    letterSpacing: '-0.01em', // Slight negative tracking for modern look
+
+    // Visual properties
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
-    cursor: isDisabled ? 'not-allowed' : 'auto',
+    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+
+    // State properties
+    cursor: isDisabled ? 'not-allowed' : 'text',
+
+    // Animation
+    transition: 'all 0.2s ease',
+
+    // Dark mode support
+    '@media (prefers-color-scheme: dark)': {
+      color: isDisabled ? 'color.gray.600' : 'color.gray.100',
+    },
+
+    // Apply custom field styles
     ...views['field'],
   };
   const handleHover = () => setIsHovered(!isHovered);

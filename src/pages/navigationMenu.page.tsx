@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
   DefaultNavigationMenu,
+  DesignSystemNavigationMenu,
   HorizontalNavigationMenu,
   NavigationMenuVariants,
   NavigationMenuSizes,
@@ -16,6 +17,13 @@ const NavigationMenuPage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemNavigationMenu />
+            </td>
           </tr>
 
           <tr>

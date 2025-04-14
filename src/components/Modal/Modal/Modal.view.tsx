@@ -1,3 +1,10 @@
+/**
+ * Modal View Component
+ *
+ * Renders a modal dialog with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { View, Horizontal, ViewProps, Vertical } from 'app-studio';
 import { Button } from '../../Button/Button';
@@ -10,8 +17,13 @@ import {
   FooterProps,
   HeaderProps,
 } from '../Modal/Modal.props';
-import { ContainerShapes, OverlayAlignments } from '../Modal/Modal.style';
-import { HeaderIconSizes } from '../Modal/Modal.style';
+import {
+  ContainerShapes,
+  OverlayAlignments,
+  HeaderIconSizes,
+  ModalAnimations,
+  ModalTypography,
+} from '../Modal/Modal.style';
 import { Position } from './Modal.type';
 import { Center } from 'src/components/Layout';
 
@@ -52,6 +64,7 @@ export const ModalOverlay: React.FC<OverlayProps & any> = ({
       zIndex={1000}
       onClick={handleClick}
       visibility={isOpen ? 'visible' : 'hidden'}
+      transition="all 0.3s ease"
       {...views?.container}
     >
       <View
@@ -64,6 +77,7 @@ export const ModalOverlay: React.FC<OverlayProps & any> = ({
         display="flex"
         backgroundColor="color.blackAlpha.500"
         backdropFilter={blur ? `blur(${blur}px)` : undefined}
+        transition="all 0.3s ease"
         onClick={handleClick}
         {...OverlayAlignments[position]}
         {...props}
@@ -86,14 +100,14 @@ export const ModalContainer: React.FC<ContainerProps> = ({
   const defaultShadow =
     typeof document !== undefined
       ? {
-          boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.3)',
+          boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.15)', // Subtle shadow following design system
         }
       : {
           elevation: 5,
-          shadowColor: 'rgba(0, 0, 0, 0.3)',
-          shadowOffset: { width: 0, height: 2 },
+          shadowColor: 'rgba(0, 0, 0, 0.15)',
+          shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 1,
-          shadowRadius: 8,
+          shadowRadius: 16,
         };
 
   const handleClick = (event: any) => {
@@ -106,6 +120,8 @@ export const ModalContainer: React.FC<ContainerProps> = ({
       width={isFullScreen ? '100%' : 600}
       height={isFullScreen ? '100%' : 'fit-content'}
       onClick={handleClick}
+      fontFamily={ModalTypography.fontFamily}
+      transition="all 0.3s ease"
       {...(shadow ? shadow : defaultShadow)}
       {...ContainerShapes[shape]}
       {...props}
@@ -146,8 +162,12 @@ export const ModalHeader: React.FC<HeaderProps> = ({
     <Horizontal
       justifyContent={buttonPosition === 'none' ? 'center' : 'space-between'}
       alignItems="center"
-      paddingVertical={15}
-      paddingHorizontal={20}
+      paddingVertical={16} // 4×4px grid
+      paddingHorizontal={24} // 6×4px grid
+      borderBottomWidth="1px"
+      borderBottomStyle="solid"
+      borderBottomColor="color.gray.200"
+      fontFamily={ModalTypography.fontFamily}
       {...props}
       {...views?.header}
     >
@@ -163,17 +183,15 @@ export const ModalBody: React.FC<BodyProps> = ({
   views,
   ...props
 }) => {
-  const defaultBorder = {
-    borderBottomWidth: 2,
-    borderTopWidth: 2,
-    borderColor: 'rgba(250, 250, 250, 1)',
-    borderStyle: 'solid',
-  };
   return (
     <View
-      paddingVertical={15}
-      paddingHorizontal={20}
-      {...defaultBorder}
+      paddingVertical={16} // 4×4px grid
+      paddingHorizontal={24} // 6×4px grid
+      fontFamily={ModalTypography.fontFamily}
+      fontSize={ModalTypography.body.fontSize}
+      fontWeight={ModalTypography.body.fontWeight}
+      lineHeight={ModalTypography.body.lineHeight}
+      color={ModalTypography.body.color}
       {...props}
       {...views?.view}
     >
@@ -192,8 +210,13 @@ export const ModalFooter: React.FC<FooterProps> = ({
       marginTop="auto"
       alignItems="center"
       justifyContent="flex-end"
-      paddingVertical={15}
-      paddingHorizontal={20}
+      paddingVertical={16} // 4×4px grid
+      paddingHorizontal={24} // 6×4px grid
+      borderTopWidth="1px"
+      borderTopStyle="solid"
+      borderTopColor="color.gray.200"
+      fontFamily={ModalTypography.fontFamily}
+      gap={12} // 3×4px grid
       {...props}
       {...views?.container}
     >

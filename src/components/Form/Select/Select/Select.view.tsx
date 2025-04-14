@@ -19,7 +19,11 @@ import {
 } from './Select.props';
 import { useItemState } from './Select.state';
 import { IconSizes } from './Select.style';
-// Defines a component to render individual selection items within a list.
+/**
+ * Item Component
+ *
+ * Renders an individual option item in the select dropdown
+ */
 const Item: React.FC<ItemProps> = ({
   isHovered,
   setIsHovered,
@@ -29,29 +33,51 @@ const Item: React.FC<ItemProps> = ({
   style,
   ...props
 }) => {
-  // Handles the click event on an option by invoking the callback with the selected option's value.
+  // Handles the click event on an option by invoking the callback with the selected option's value
   const handleOptionClick = (option: string) => callback(option);
-  // Toggles the hover state on the item.
+
+  // Toggles the hover state on the item
   const handleHover = () => setIsHovered(!isHovered);
+
   return (
     <Element
       as="li"
+      // Layout properties
       margin={0}
-      paddingVertical={10}
-      paddingHorizontal={12}
+      paddingVertical={12} // 3 × 4px grid
+      paddingHorizontal={16} // 4 × 4px grid
       listStyleType="none"
+      // Event handlers
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       onClick={() => handleOptionClick(option.value)}
-      backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
+      // Visual properties
+      backgroundColor={isHovered ? 'color.gray.100' : 'transparent'}
+      borderRadius="4px" // Subtle rounded corners for items
+      // Animation
+      transition="all 0.15s ease"
+      // Apply custom props
       {...props}
     >
-      <Text fontSize={Typography.fontSizes[size]} {...style}>
+      <Text
+        // Typography properties
+        fontSize={Typography.fontSizes[size]}
+        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+        fontWeight="400" // Regular weight
+        lineHeight="1.5"
+        // Apply custom styles
+        {...style}
+      >
         {option.label}
       </Text>
     </Element>
   );
 };
+/**
+ * SelectBox Component
+ *
+ * Renders the main select box with selected value(s)
+ */
 const SelectBox: React.FC<SelectBoxProps> = ({
   size = 'md',
   views = { field: {}, text: {} },
@@ -61,17 +87,41 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   removeOption = () => {},
   options,
 }) => {
+  /**
+   * Styles for the select field
+   */
   const fieldStyles = {
+    // Layout properties
     margin: 0,
     width: '95%',
-    heigth: '100%',
+    height: '100%',
     border: 'none',
-    paddingVertical: 8,
+    paddingVertical: 12, // 3 × 4px grid
     paddingHorizontal: 0,
+
+    // Typography properties
     fontSize: Typography.fontSizes[size],
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    fontWeight: '400', // Regular weight
+    lineHeight: '1.5',
+    letterSpacing: '-0.01em', // Slight negative tracking for modern look
+
+    // Visual properties
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
-    cursor: isDisabled ? 'not-allowed' : 'auto',
+    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+
+    // State properties
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
+
+    // Animation
+    transition: 'all 0.2s ease',
+
+    // Dark mode support
+    '@media (prefers-color-scheme: dark)': {
+      color: isDisabled ? 'color.gray.600' : 'color.gray.100',
+    },
+
+    // Apply custom styles
     ...views['field'],
     ...views['text'],
   };
@@ -149,6 +199,11 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
     </Element>
   );
 };
+/**
+ * DropDown Component
+ *
+ * Renders the dropdown list of options for the select component
+ */
 const DropDown: React.FC<DropDownProps> = ({
   size,
   views = { dropDown: {} },
@@ -159,22 +214,13 @@ const DropDown: React.FC<DropDownProps> = ({
 }) => {
   const itemStates = useItemState();
   const handleCallback = (option: string) => callback(option);
-  const shadow =
-    typeof document !== undefined
-      ? {
-          boxShadow:
-            'rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px',
-        }
-      : {
-          elevation: 2,
-          shadowColor: 'rgba(0, 0, 0, 0.07)',
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 1,
-          shadowRadius: 1,
-        };
+
+  // Shadow styles for the dropdown
+  const shadow = {
+    boxShadow:
+      '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+  };
+
   return (
     <Element
       as="ul"
@@ -182,23 +228,34 @@ const DropDown: React.FC<DropDownProps> = ({
       top="100%"
       width="100%"
       display="flex"
-      zIndex={100000}
-      overflowY="scroll"
-      marginTop={5}
+      flexDirection="column"
+      position="absolute"
+      marginTop={8} // 2 × 4px grid
       marginLeft={0}
       marginRight={0}
       marginBottom={0}
       padding={0}
-      borderRadius={4}
-      position="absolute"
-      flexDirection="column"
+      maxHeight="240px" // 60 × 4px grid
+      overflowY="auto"
+      zIndex={1000}
       backgroundColor="white"
-      maxHeight="200px"
+      borderRadius="8px" // Consistent with design system (rounded-md)
+      borderWidth="1px"
+      borderStyle="solid"
+      borderColor="color.gray.200"
+      transition="all 0.2s ease"
       style={{
-        scrollbarWidth: 'none',
-        msOverflowStyle: 'none',
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'rgba(0, 0, 0, 0.2) transparent',
         '&::-webkit-scrollbar': {
-          display: 'none',
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'rgba(0, 0, 0, 0.2)',
+          borderRadius: '4px',
         },
       }}
       {...shadow}
@@ -222,6 +279,11 @@ const DropDown: React.FC<DropDownProps> = ({
     </Element>
   );
 };
+/**
+ * MultiSelect Component
+ *
+ * Renders a selected option in a multi-select component
+ */
 export const MultiSelect: React.FC<MultiSelectProps> = ({
   option,
   size = 'md',
@@ -229,23 +291,36 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   ...props
 }) => {
   const handleClick = () => removeOption(option);
+
   return (
     <Horizontal
-      gap={10}
-      padding={6}
-      borderRadius={4}
+      gap={8}
+      padding={8}
       alignItems="center"
+      borderRadius="6px"
+      backgroundColor="color.gray.200"
       fontSize={Typography.fontSizes[size]}
-      backgroundColor="color.trueGray.300"
       onClick={(event: any) => event.stopPropagation()}
+      transition="all 0.2s ease"
       {...props}
     >
-      <Text size={size}>{option}</Text>
+      <Text
+        size={size}
+        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+        fontWeight="500" // Medium weight
+      >
+        {option}
+      </Text>
+
       <CloseIcon
         role="close-button"
         color="inherit"
         widthHeight={IconSizes[size]}
         onClick={handleClick}
+        transition="all 0.2s ease"
+        _hover={{
+          opacity: 0.7,
+        }}
       />
     </Horizontal>
   );

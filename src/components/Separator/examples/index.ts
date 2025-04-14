@@ -1,4 +1,5 @@
 export * from './default';
+export * from './designSystem';
 export * from './variants';
 export * from './thicknesses';
 export * from './orientations';

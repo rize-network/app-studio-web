@@ -1,6 +1,7 @@
 export * from '../../Modal/Examples/BlurModal';
 export * from '../../Modal/Examples/CloseButtonModal';
 export * from '../../Modal/Examples/DefaultModal';
+export * from './designSystem';
 export * from '../../Modal/Examples/FullScreenModal';
 export * from '../../Modal/Examples/ModalPosition';
 export * from '../../Modal/Examples/PreventCloseModal';

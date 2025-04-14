@@ -39,7 +39,7 @@ export const Themes: Record<MessageType, any> = {
     },
     icon: {
       color: 'color.green.500',
-      name: 'CheckCircleIcon',
+      name: 'SuccessIcon',
     },
     content: {
       color: 'color.green.500',

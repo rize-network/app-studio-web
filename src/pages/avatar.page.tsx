@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
   DefaultDemo,
+  DesignSystemAvatars,
   FallbackDemo,
   SizeDemo,
   StylesDemo,
@@ -15,6 +16,13 @@ const AvatarPage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemAvatars />
+            </td>
           </tr>
 
           <tr>

@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ColorArea,
   DefaultArea,
+  DesignSystemTextAreas,
   DisabledArea,
   LabelArea,
   MaxArea,
@@ -23,6 +24,13 @@ export const TextAreaPage = () => {
             <th>Property</th>
             <th>App-Studio</th>
           </tr>
+          <tr>
+            <th>Design System</th>
+            <td>
+              <DesignSystemTextAreas />
+            </td>
+          </tr>
+
           <tr>
             <th>Default</th>
             <td>

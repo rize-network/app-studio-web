@@ -1,10 +1,21 @@
+/**
+ * Separator View Component
+ *
+ * Renders a separator with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { View } from '../../Layout/View/View';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 import { Text } from '../../Text/Text';
 import { useTheme } from 'app-studio';
 import { SeparatorProps } from './Separator.props';
-import { SeparatorVariants, SeparatorThicknesses } from './Separator.style';
+import {
+  SeparatorVariants,
+  SeparatorThicknesses,
+  DefaultSeparatorStyles,
+} from './Separator.style';
 
 export const SeparatorView: React.FC<SeparatorProps> = ({
   orientation = 'horizontal',
@@ -46,14 +57,10 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
           borderTopWidth={borderWidth}
           borderTopStyle={borderStyle as any}
           borderTopColor={separatorColor}
+          {...DefaultSeparatorStyles.container}
           {...views?.container}
         />
-        <Text
-          paddingHorizontal="8px"
-          color="color.gray.500"
-          fontSize="14px"
-          {...views?.label}
-        >
+        <Text {...DefaultSeparatorStyles.label} {...views?.label}>
           {label}
         </Text>
         <View
@@ -62,6 +69,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
           borderTopWidth={borderWidth}
           borderTopStyle={borderStyle as any}
           borderTopColor={separatorColor}
+          {...DefaultSeparatorStyles.container}
           {...views?.container}
         />
       </Horizontal>
@@ -78,6 +86,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
         borderTopStyle={borderStyle as any}
         borderTopColor={separatorColor}
         margin={spacing}
+        {...DefaultSeparatorStyles.container}
         {...ariaProps}
         {...views?.container}
         {...props}
@@ -94,6 +103,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
       borderLeftStyle={borderStyle as any}
       borderLeftColor={separatorColor}
       margin={spacing}
+      {...DefaultSeparatorStyles.container}
       {...ariaProps}
       {...views?.container}
       {...props}

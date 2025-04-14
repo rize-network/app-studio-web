@@ -1,3 +1,10 @@
+/**
+ * TextField View Component
+ *
+ * Renders a text input field with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { Input, Typography, useTheme } from 'app-studio';
 import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
@@ -7,6 +14,10 @@ import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
 import { CloseIcon } from '../../../Icon/Icon';
 import { TextFieldViewProps } from './TextField.props';
+
+/**
+ * Input component for text fields
+ */
 const TextFieldInput = (props: any) => <Input type="text" {...props} />;
 const TextFieldView: React.FC<TextFieldViewProps> = ({
   id,
@@ -48,23 +59,47 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     elementMode ? elementMode : themeMode
   );
   const isWithLabel = !!(isFocused && label);
+  /**
+   * Styles for the input field
+   */
   const fieldStyles = {
+    // Layout properties
     margin: 0,
-    paddingVertical: 8,
+    paddingVertical: 8, // 2 × 4px grid
     paddingHorizontal: 0,
     width: '100%',
-    heigth: '100%',
+    height: '100%',
     border: 'none',
+
+    // Focus state
     on: {
       focus: {
         outline: 'none',
       },
     },
+
+    // Typography properties
     fontSize: Typography.fontSizes[size],
     lineHeight: Typography.fontSizes[size],
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    letterSpacing: '-0.01em', // Slight negative tracking for modern look
+
+    // Visual properties
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
-    cursor: isDisabled ? 'not-allowed' : 'auto',
+    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+
+    // State properties
+    cursor: isDisabled ? 'not-allowed' : 'text',
+
+    // Animation
+    transition: 'all 0.2s ease',
+
+    // Dark mode support
+    '@media (prefers-color-scheme: dark)': {
+      color: isDisabled ? 'color.gray.600' : 'color.gray.100',
+    },
+
+    // Apply custom field styles
     ...views['field'],
   };
   const handleFocus = () => {

@@ -1,3 +1,10 @@
+/**
+ * FieldWrapper Component
+ *
+ * Renders a wrapper for form field content with appropriate styling
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 
 import { Vertical } from '../../Vertical/Vertical';
@@ -8,7 +15,14 @@ export const FieldWrapper: React.FC<WrapperFieldProps> = ({
   children,
   ...props
 }) => (
-  <Vertical width="100%" maxWidth={'100%'} {...props}>
+  <Vertical
+    // Layout properties
+    width="100%"
+    maxWidth="100%"
+    position="relative"
+    // Apply custom props
+    {...props}
+  >
     {children}
   </Vertical>
 );

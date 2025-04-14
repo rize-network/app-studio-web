@@ -1,45 +1,128 @@
+/**
+ * Badge Styles
+ *
+ * Defines the styles for the Badge component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
+
 import { ViewProps } from 'app-studio';
-import { Shape, Size } from './Badge.type';
+import { Shape, Size, Variant } from './Badge.type';
 
-export type BadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
+/**
+ * Badge sizes following the 4px grid system
+ */
 export const BadgeSizes: Record<Size, ViewProps> = {
   xs: {
-    minWidth: '20px', // Minimum width to ensure content fits
+    // Height: 20px (5 × 4px)
+    minWidth: '20px',
     height: '20px',
-    padding: '0 6px', // Horizontal padding
+    padding: '0 6px',
+    // Typography
+    fontSize: '10px', // Smallest text size
+    fontWeight: '500', // Medium weight for better readability
+    lineHeight: '20px', // Match height for vertical centering
   },
   sm: {
+    // Height: 24px (6 × 4px)
     minWidth: '24px',
     height: '24px',
     padding: '0 8px',
+    // Typography
+    fontSize: '12px', // text-xs
+    fontWeight: '500', // Medium weight
+    lineHeight: '24px',
   },
   md: {
+    // Height: 28px (7 × 4px)
     minWidth: '28px',
     height: '28px',
     padding: '0 10px',
+    // Typography
+    fontSize: '14px', // text-sm
+    fontWeight: '500', // Medium weight
+    lineHeight: '28px',
   },
   lg: {
+    // Height: 32px (8 × 4px)
     minWidth: '32px',
     height: '32px',
     padding: '0 12px',
+    // Typography
+    fontSize: '14px', // text-sm
+    fontWeight: '500', // Medium weight
+    lineHeight: '32px',
   },
   xl: {
+    // Height: 36px (9 × 4px)
     minWidth: '36px',
     height: '36px',
     padding: '0 14px',
+    // Typography
+    fontSize: '16px', // text-md
+    fontWeight: '500', // Medium weight
+    lineHeight: '36px',
   },
 };
 
+/**
+ * Badge shapes with consistent border radius
+ */
 export const BadgeShapes: Record<Shape, number | string> = {
   sharp: 0,
-  rounded: 4,
-  pillShaped: 24,
+  rounded: '8px', // Consistent with design system (rounded-md)
+  pillShaped: '9999px', // Full rounded for pill shape
 };
 
+/**
+ * Badge positions for absolute positioning
+ */
 export const PositionStyles: { [key: string]: React.CSSProperties } = {
-  'top-right': { top: 0, right: 0, position: 'absolute' },
-  'top-left': { top: 0, left: 0, position: 'absolute' },
-  'bottom-right': { bottom: 0, right: 0, position: 'absolute' },
-  'bottom-left': { bottom: 0, left: 0, position: 'absolute' },
+  'top-right': { top: '4px', right: '4px', position: 'absolute' }, // 4px offset (1 × 4px grid)
+  'top-left': { top: '4px', left: '4px', position: 'absolute' },
+  'bottom-right': { bottom: '4px', right: '4px', position: 'absolute' },
+  'bottom-left': { bottom: '4px', left: '4px', position: 'absolute' },
+};
+
+/**
+ * Badge variants with consistent styling
+ */
+export const BadgeVariants: Record<Variant, ViewProps> = {
+  filled: {
+    backgroundColor: 'theme.primary',
+    color: 'color.white',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'transparent',
+    transition: 'all 0.2s ease',
+  },
+  outline: {
+    backgroundColor: 'transparent',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'theme.primary',
+    color: 'theme.primary',
+    transition: 'all 0.2s ease',
+  },
+  link: {
+    backgroundColor: 'transparent',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'transparent',
+    color: 'theme.primary',
+    textDecoration: 'underline',
+    textUnderlineOffset: '2px',
+    transition: 'all 0.2s ease',
+  },
+  ghost: {
+    backgroundColor: 'transparent',
+    color: 'color.gray.500',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'transparent',
+    transition: 'all 0.2s ease',
+  },
 };

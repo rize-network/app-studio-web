@@ -3,6 +3,7 @@ import { View } from 'src/components/Layout/View/View';
 import {
   ContentDemo,
   DefaultDemo,
+  DesignSystemBadges,
   PositionDemo,
   ShapeDemo,
   SizeDemo,
@@ -18,6 +19,13 @@ const BadgePage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemBadges />
+            </td>
           </tr>
 
           <tr>

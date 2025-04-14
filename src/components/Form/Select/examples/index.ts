@@ -1,5 +1,6 @@
 export * from './Color';
 export * from './Default';
+export * from './designSystem';
 export * from './Disabled';
 export * from './Error';
 export * from './Form';

@@ -67,8 +67,10 @@ export const NavigationMenuList: React.FC<NavigationMenuListProps> = ({
   return (
     <Container
       width="100%"
-      gap={2}
       {...NavigationMenuOrientations[orientation]}
+      fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+      transition="all 0.2s ease"
+      borderRadius="4px"
       {...views?.container}
     >
       {children}
@@ -138,7 +140,10 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
         <View
           width="100%"
           cursor={disabled ? 'not-allowed' : 'pointer'}
-          opacity={disabled ? 0.5 : 1}
+          opacity={disabled ? 0.6 : 1}
+          borderRadius="4px"
+          transition="all 0.2s ease"
+          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           {...NavigationMenuSizes[size]}
           {...NavigationMenuVariants[variant]}
           {...(isActive ? NavigationMenuItemStates.active : {})}
@@ -192,12 +197,14 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
         to={item.href}
         onClick={handleClick}
         cursor={item.disabled ? 'not-allowed' : 'pointer'}
-        opacity={item.disabled ? 0.5 : 1}
+        opacity={item.disabled ? 0.6 : 1}
         width="100%"
         display="flex"
         alignItems="center"
-        borderRadius={4}
-        transition="background-color 0.2s ease"
+        borderRadius="4px"
+        transition="all 0.2s ease"
+        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+        gap="8px"
         {...NavigationMenuSizes[size]}
         {...NavigationMenuVariants[variant]}
         {...(isActive ? NavigationMenuItemStates.active : {})}

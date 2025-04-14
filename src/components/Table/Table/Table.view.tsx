@@ -1,7 +1,15 @@
+/**
+ * Table View Component
+ *
+ * Renders a table with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { Element, ViewProps } from 'app-studio';
 import { TableViewProps } from './Table.props';
 import { useTableContext } from './Table.context';
+import { DefaultTableStyles } from './Table.style';
 
 export const TableContainer: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
@@ -9,6 +17,7 @@ export const TableContainer: React.FC<ViewProps> = (props) => {
     <Element
       as="table"
       borderCollapse="collapse"
+      {...DefaultTableStyles.table}
       {...views?.table}
       {...props}
     />
@@ -20,9 +29,8 @@ export const TableHead: React.FC<ViewProps> = (props) => {
   return (
     <Element
       as="thead"
-      borderBottom="0.5px solid #ddd"
       textAlign="left"
-      color="color.gray.400"
+      {...DefaultTableStyles.thead}
       {...views?.thead}
       {...props}
     />
@@ -34,9 +42,8 @@ export const TableHeadCell: React.FC<ViewProps> = (props) => {
   return (
     <Element
       as="th"
-      padding="14px"
       whiteSpace="nowrap"
-      fontWeight="500"
+      {...DefaultTableStyles.th}
       {...views?.th}
       {...props}
     />
@@ -45,7 +52,15 @@ export const TableHeadCell: React.FC<ViewProps> = (props) => {
 
 export const TableRow: React.FC<ViewProps> = (props) => {
   const { views, onRowClick } = useTableContext();
-  return <Element as="tr" {...views?.tr} onClick={onRowClick} {...props} />;
+  return (
+    <Element
+      as="tr"
+      {...DefaultTableStyles.tr}
+      {...views?.tr}
+      onClick={onRowClick}
+      {...props}
+    />
+  );
 };
 
 export const TableCell: React.FC<ViewProps> = (props) => {
@@ -53,9 +68,9 @@ export const TableCell: React.FC<ViewProps> = (props) => {
   return (
     <Element
       as="td"
-      padding="14px"
       whiteSpace="nowrap"
-      fontWeight={props.isFirstColumn ? '400' : '300'}
+      fontWeight={props.isFirstColumn ? '500' : '400'}
+      {...DefaultTableStyles.td}
       {...views?.td}
       {...props}
     />
@@ -64,12 +79,26 @@ export const TableCell: React.FC<ViewProps> = (props) => {
 
 export const TableBody: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
-  return <Element as="tbody" {...views?.tbody} {...props} />;
+  return (
+    <Element
+      as="tbody"
+      {...DefaultTableStyles.tbody}
+      {...views?.tbody}
+      {...props}
+    />
+  );
 };
 
 export const TableFooter: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
-  return <Element as="tfoot" {...views?.tfoot} {...props} />;
+  return (
+    <Element
+      as="tfoot"
+      {...DefaultTableStyles.tfoot}
+      {...views?.tfoot}
+      {...props}
+    />
+  );
 };
 
 export const TableCaption: React.FC<ViewProps> = (props) => {
@@ -77,8 +106,7 @@ export const TableCaption: React.FC<ViewProps> = (props) => {
   return (
     <Element
       as="caption"
-      margin={'10px 0'}
-      color="color.gray.400"
+      {...DefaultTableStyles.caption}
       {...views?.caption}
       {...props}
     />

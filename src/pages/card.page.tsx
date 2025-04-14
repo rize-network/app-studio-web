@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
   DefaultDemo,
+  DesignSystemCards,
   VariantsDemo,
   StructuredDemo,
   ShapesDemo,
@@ -18,6 +19,13 @@ const CardPage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemCards />
+            </td>
           </tr>
 
           <tr>

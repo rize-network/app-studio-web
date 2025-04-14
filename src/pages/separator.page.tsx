@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
   DefaultSeparator,
+  DesignSystemSeparator,
   SeparatorVariants,
   SeparatorThicknesses,
   SeparatorOrientations,
@@ -19,6 +20,13 @@ const SeparatorPage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemSeparator />
+            </td>
           </tr>
 
           <tr>

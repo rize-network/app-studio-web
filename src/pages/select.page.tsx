@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ColorDemo,
+  DesignSystemSelects,
   IsScrollableDemo,
 } from 'src/components/Form/Select/examples';
 import { DefaultSelect } from 'src/components/Form/Select/examples/Default';
@@ -25,8 +26,14 @@ export const SelectPage = () => {
             <th>App-Studio</th>
           </tr>
           <tr>
-            <th>Default</th>
+            <th>Design System</th>
+            <td>
+              <DesignSystemSelects />
+            </td>
+          </tr>
 
+          <tr>
+            <th>Default</th>
             <td>
               <DefaultSelect />
             </td>

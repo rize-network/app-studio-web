@@ -1,5 +1,6 @@
 export * from './autofocus';
 export * from './default';
+export * from './designSystem'; // New design system example
 export * from './effect';
 export * from './icon';
 export * from './isAuto';

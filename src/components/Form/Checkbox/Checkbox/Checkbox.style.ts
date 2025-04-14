@@ -1,28 +1,118 @@
-import { ViewProps } from 'app-studio';
-import { Size } from './Checkbox.type';
+/**
+ * Checkbox Styles
+ *
+ * Defines the styles for the Checkbox component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
 
+import { ViewProps } from 'app-studio';
+import { Size, Variant } from './Checkbox.type';
+
+/**
+ * Size configurations for the Checkbox component
+ * Following the 4px grid system
+ */
 export const Sizes: Record<Size, ViewProps> = {
-  xs: { height: 8, width: 8 },
-  sm: { height: 12, width: 12 },
-  md: { height: 18, width: 18 },
-  lg: { height: 24, width: 24 },
-  xl: { height: 30, width: 30 },
-  '2xl': { height: 36, width: 36 },
-  '3xl': { height: 42, width: 42 },
-  '4xl': { height: 48, width: 48 },
-  '5xl': { height: 54, width: 54 },
-  '6xl': { height: 60, width: 60 },
+  xs: { height: '16px', width: '16px' }, // 4 × 4px grid
+  sm: { height: '20px', width: '20px' }, // 5 × 4px grid
+  md: { height: '24px', width: '24px' }, // 6 × 4px grid
+  lg: { height: '28px', width: '28px' }, // 7 × 4px grid
+  xl: { height: '32px', width: '32px' }, // 8 × 4px grid
+  '2xl': { height: '36px', width: '36px' }, // 9 × 4px grid
+  '3xl': { height: '40px', width: '40px' }, // 10 × 4px grid
+  '4xl': { height: '44px', width: '44px' }, // 11 × 4px grid
+  '5xl': { height: '48px', width: '48px' }, // 12 × 4px grid
+  '6xl': { height: '52px', width: '52px' }, // 13 × 4px grid
 };
 
+/**
+ * Icon sizes for the Checkbox component
+ * Proportional to the component size
+ */
 export const IconSizes: Record<Size, number> = {
-  xs: 6,
-  sm: 12,
-  md: 18,
-  lg: 24,
-  xl: 30,
-  '2xl': 36,
-  '3xl': 42,
-  '4xl': 48,
-  '5xl': 54,
-  '6xl': 60,
+  xs: 10, // 2.5 × 4px grid
+  sm: 14, // 3.5 × 4px grid
+  md: 16, // 4 × 4px grid
+  lg: 20, // 5 × 4px grid
+  xl: 24, // 6 × 4px grid
+  '2xl': 28, // 7 × 4px grid
+  '3xl': 32, // 8 × 4px grid
+  '4xl': 36, // 9 × 4px grid
+  '5xl': 40, // 10 × 4px grid
+  '6xl': 44, // 11 × 4px grid
+};
+
+/**
+ * Variant styles for the Checkbox component
+ */
+export const VariantStyles: Record<Variant, ViewProps> = {
+  selected: {
+    backgroundColor: 'theme.primary',
+    borderColor: 'theme.primary',
+    color: 'white',
+  },
+  unselected: {
+    backgroundColor: 'transparent',
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    borderColor: 'color.gray.300',
+    color: 'transparent',
+  },
+  indeterminate: {
+    backgroundColor: 'theme.primary',
+    borderColor: 'theme.primary',
+    color: 'white',
+  },
+};
+
+/**
+ * State styles for the Checkbox component
+ */
+export const StateStyles = {
+  hover: {
+    selected: {
+      backgroundColor: 'color.blue.600',
+      borderColor: 'color.blue.600',
+    },
+    unselected: {
+      borderColor: 'color.gray.400',
+    },
+    indeterminate: {
+      backgroundColor: 'color.blue.600',
+      borderColor: 'color.blue.600',
+    },
+  },
+  disabled: {
+    selected: {
+      backgroundColor: 'color.gray.300',
+      borderColor: 'color.gray.300',
+      opacity: 0.6,
+    },
+    unselected: {
+      borderColor: 'color.gray.300',
+      opacity: 0.6,
+    },
+    indeterminate: {
+      backgroundColor: 'color.gray.300',
+      borderColor: 'color.gray.300',
+      opacity: 0.6,
+    },
+  },
+  error: {
+    selected: {
+      backgroundColor: 'color.red.500',
+      borderColor: 'color.red.500',
+    },
+    unselected: {
+      borderColor: 'color.red.500',
+    },
+    indeterminate: {
+      backgroundColor: 'color.red.500',
+      borderColor: 'color.red.500',
+    },
+  },
 };

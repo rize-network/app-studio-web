@@ -1,3 +1,10 @@
+/**
+ * Checkbox View Component
+ *
+ * Renders a checkbox with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { Typography } from 'app-studio';
 
@@ -6,7 +13,7 @@ import { Label } from '../../../Form/Label/Label';
 import { TickIcon, MinusIcon } from '../../../Icon/Icon';
 
 import { CheckboxViewProps } from './Checkbox.props';
-import { IconSizes, Sizes } from './Checkbox.style';
+import { IconSizes, Sizes, VariantStyles, StateStyles } from './Checkbox.style';
 import { Text } from '../../../Text/Text';
 import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
 import { Vertical } from '../../../Layout/Vertical/Vertical';
@@ -46,38 +53,75 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
     }
   };
 
+  /**
+   * Determine the variant based on component state
+   */
+  const variant = isIndeterminate
+    ? 'indeterminate'
+    : isChecked || isSelected
+    ? 'selected'
+    : 'unselected';
+
+  /**
+   * Apply state-specific styles
+   */
+  const stateStyle = error
+    ? StateStyles.error[variant]
+    : isDisabled
+    ? StateStyles.disabled[variant]
+    : isHovered
+    ? StateStyles.hover[variant]
+    : {};
+
+  /**
+   * Styles for the checkbox component
+   */
   const checkboxStyle = {
     container: {
-      gap: 10,
+      // Layout properties
+      gap: 8, // 2 × 4px grid
       display: 'flex',
       height: 'fit-content',
       flexDirection: 'column',
       width: 'fit-content',
+
+      // Typography properties
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
+      // Visual properties
       color: error
-        ? 'theme.error'
+        ? 'color.red.600'
         : isDisabled
-        ? 'theme.disabled'
-        : 'color.blueGray.700',
+        ? 'color.gray.400'
+        : 'color.gray.700',
+
+      // State properties
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
+      opacity: isDisabled ? 0.6 : 1,
+
+      // Animation
+      transition: 'all 0.2s ease',
+
+      // Apply custom styles
       ...views['label'],
     },
     checkbox: {
-      ...(isDisabled
-        ? { backgroundColor: 'theme.disabled' }
-        : ((isChecked || isSelected) && !isIndeterminate) || isIndeterminate
-        ? { backgroundColor: 'theme.primary' }
-        : {
-            borderWidth: 2,
-            borderColor: error
-              ? 'theme.error'
-              : isHovered
-              ? 'color.gray.500'
-              : 'color.gray.300',
-            borderStyle: 'solid',
-          }),
-      borderRadius: 3,
-      ...(isHovered ? { filter: 'brightness(0.9)' } : {}),
+      // Base variant styles
+      ...VariantStyles[variant],
+
+      // State-specific styles
+      ...stateStyle,
+
+      // Visual properties
+      borderRadius: '4px', // Consistent with design system
+
+      // Size properties
       ...Sizes[size],
+
+      // Animation
+      transition: 'all 0.2s ease',
+
+      // Apply shadow and custom styles
       ...shadow,
       ...views['checkbox'],
     },
@@ -95,45 +139,79 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       {...props}
     >
       <Vertical gap={8}>
-        <Horizontal gap={10} alignItems="center">
+        {' '}
+        {/* 2 × 4px grid */}
+        <Horizontal gap={12} alignItems="center">
+          {' '}
+          {/* 3 × 4px grid */}
+          {/* Label on the left side */}
           {labelPosition === 'left' && label && (
-            <Text size={size} {...views?.label}>
+            <Text
+              size={size}
+              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+              fontWeight="500" // Medium weight for better readability
+              {...views?.label}
+            >
               {label}
             </Text>
           )}
-
+          {/* Checkbox */}
           <Center {...checkboxStyle.checkbox}>
             {isIndeterminate ? (
-              <MinusIcon widthHeight={IconSizes[size]} color="white" />
+              <MinusIcon
+                widthHeight={IconSizes[size]}
+                color="white"
+                transition="all 0.2s ease"
+              />
             ) : (
               (isChecked || isSelected) &&
-              (icon ?? <TickIcon widthHeight={IconSizes[size]} color="white" />)
+              (icon ?? (
+                <TickIcon
+                  widthHeight={IconSizes[size]}
+                  color="white"
+                  transition="all 0.2s ease"
+                />
+              ))
             )}
           </Center>
-
+          {/* Label on the right side */}
           {labelPosition === 'right' && label && (
-            <Text size={size} {...views?.label}>
+            <Text
+              size={size}
+              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+              fontWeight="500" // Medium weight for better readability
+              {...views?.label}
+            >
               {label}
             </Text>
           )}
         </Horizontal>
+        {/* Info text */}
         {infoText && (
           <Text
-            marginLeft={labelPosition === 'left' ? 0 : 27}
-            color="color.gray.400"
+            marginLeft={labelPosition === 'left' ? 0 : 36} // 9 × 4px grid
+            color="color.gray.500"
             size="sm"
+            fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+            fontWeight="400" // Regular weight
+            lineHeight="1.5"
             {...views?.infoText}
           >
             {infoText}
           </Text>
         )}
       </Vertical>
+
+      {/* Error message */}
       {error && (
         <Text
           size="xs"
-          marginVertical={0}
+          marginTop={4} // 1 × 4px grid
           marginHorizontal={0}
-          color={'theme.error'}
+          color="color.red.500"
+          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+          fontWeight="500" // Medium weight for better readability
+          transition="all 0.2s ease"
         >
           {error}
         </Text>

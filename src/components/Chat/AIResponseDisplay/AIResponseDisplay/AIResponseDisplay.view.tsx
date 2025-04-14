@@ -1,5 +1,8 @@
 /**
  * AIResponseDisplay View
+ *
+ * A component for displaying AI-generated responses with support for
+ * code blocks, inline code, links, and other formatting.
  */
 
 import React from 'react';
@@ -12,6 +15,7 @@ import {
   textStyles,
   inlineCodeStyles,
   linkStyles,
+  citationStyles,
 } from './AIResponseDisplay.style';
 
 export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
@@ -23,7 +27,7 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
   styles = {},
   ...props
 }) => {
-  // Simple parser for markdown-like content
+  // Parse markdown-like content into React components
   const parseContent = () => {
     if (!content) return [];
 
@@ -41,7 +45,7 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
         parts.push(parseTextWithInlineCode(textBeforeCode));
       }
 
-      // Add code block
+      // Add code block with enhanced styling
       const language = match[1] || 'plaintext';
       const code = match[2];
       parts.push(
@@ -50,6 +54,12 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
           code={code}
           language={language}
           enableSyntaxHighlighting={enableSyntaxHighlighting}
+          // Apply consistent styling from design system
+          showLineNumbers={true}
+          showCopyButton={true}
+          styles={{
+            container: styles.codeBlock,
+          }}
         />
       );
 
@@ -74,7 +84,7 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
   const parseTextWithInlineCode = (text: string) => {
     const parts: TextPart[] = [];
 
-    // First, process inline code
+    // First, process inline code with improved styling
     const inlineCodeRegex = /`([^`]+)`/g;
     let processedText = '';
     let lastCodeIndex = 0;
@@ -88,7 +98,7 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
       const codePlaceholder = `__INLINE_CODE_${parts.length}__`;
       processedText += codePlaceholder;
 
-      // Store the inline code element
+      // Store the inline code element with enhanced styling
       parts.push({
         type: 'code',
         placeholder: codePlaceholder as string,
@@ -97,6 +107,8 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
             key={`inline-code-${parts.length}`}
             as="span"
             {...inlineCodeStyles}
+            // Apply any custom styles from props
+            {...(styles.inlineCode || {})}
           >
             {codeMatch[1]}
           </Text>
@@ -108,6 +120,47 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
 
     // Add remaining text
     processedText += text.slice(lastCodeIndex);
+
+    // Process citations if enabled
+    // This is a simple implementation - could be enhanced for more complex citation formats
+    if (enableCitations) {
+      // Simple citation pattern: [1], [2], etc.
+      const citationRegex = /\[(\d+)\]/g;
+      let citationMatch;
+      let citationProcessedText = '';
+      let lastCitationIndex = 0;
+
+      while ((citationMatch = citationRegex.exec(processedText)) !== null) {
+        citationProcessedText += processedText.slice(
+          lastCitationIndex,
+          citationMatch.index
+        );
+
+        const citationPlaceholder = `__CITATION_${parts.length}__`;
+        citationProcessedText += citationPlaceholder;
+
+        const citationNumber = citationMatch[1];
+        parts.push({
+          type: 'link', // Reusing link type
+          placeholder: citationPlaceholder,
+          element: (
+            <Text
+              key={`citation-${parts.length}`}
+              as="sup"
+              {...citationStyles}
+              {...(styles.citation || {})}
+            >
+              [{citationNumber}]
+            </Text>
+          ),
+        });
+
+        lastCitationIndex = citationMatch.index + citationMatch[0].length;
+      }
+
+      processedText =
+        citationProcessedText + processedText.slice(lastCitationIndex);
+    }
 
     // Now, process links in the processed text if enabled
     const linkRegex = /(https?:\/\/[^\s]+)/g;
@@ -126,7 +179,7 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
       const linkPlaceholder = `__LINK_${parts.length}__`;
       finalText += linkPlaceholder;
 
-      // Store the link element
+      // Store the link element with enhanced styling
       const url = linkMatch[1];
       parts.push({
         type: 'link',
@@ -139,6 +192,8 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             {...linkStyles}
+            // Apply any custom styles from props
+            {...(styles.link || {})}
           >
             {url}
           </Text>
@@ -189,6 +244,7 @@ export const AIResponseDisplayView: React.FC<AIResponseDisplayProps> = ({
     );
   };
 
+  // Parse the content once
   const parsedContent = parseContent();
 
   return (

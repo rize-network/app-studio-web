@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
   DefaultDemo,
+  DesignSystemAlerts,
   IconDemo,
   StylesDemo,
   VariantDemo,
@@ -15,6 +16,13 @@ const AlertPage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemAlerts />
+            </td>
           </tr>
 
           <tr>

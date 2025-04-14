@@ -98,7 +98,7 @@ export interface NavigationMenuTriggerProps {
   /**
    * The content of the navigation menu trigger
    */
-  children: React.ReactNode;
+  children: React.ReactNode | React.ReactElement;
   /**
    * The ID of the item this trigger belongs to
    */

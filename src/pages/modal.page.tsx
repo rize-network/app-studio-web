@@ -3,6 +3,7 @@ import {
   BlurModal,
   CloseButtonModal,
   DefaultModal,
+  DesignSystemModal,
   FullScreenModal,
   ModalPosition,
   PreventClose,
@@ -16,6 +17,12 @@ export const ModalPage = () => (
     <tr>
       <th>Property</th>
       <th>App-Studio</th>
+    </tr>
+    <tr>
+      <td>Design System</td>
+      <td>
+        <DesignSystemModal />
+      </td>
     </tr>
     <tr>
       <td>Default</td>

@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'src/components/Layout/View/View';
 import {
   DefaultToast,
+  DesignSystemToast,
   ToastVariants,
   ToastPositions,
   ToastDurations,
@@ -22,6 +23,13 @@ const ToastPage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemToast />
+            </td>
           </tr>
 
           <tr>

@@ -79,16 +79,16 @@ export const ToastView: React.FC<ToastProps> = ({
       maxWidth="400px"
       borderWidth="1px"
       borderStyle="solid"
-      borderRadius="6px"
-      padding="12px 16px"
+      borderRadius="8px" // 2 × 4px grid
+      padding="12px 16px" // 3 × 4px grid and 4 × 4px grid
       alignItems="flex-start"
       position="relative"
       backgroundColor={Theme[variant].container.backgroundColor}
       borderColor={Theme[variant].container.border}
-      boxShadow="0 2px 8px rgba(0, 0, 0, 0.15)"
+      boxShadow="0 4px 12px rgba(0, 0, 0, 0.08)" // Subtle shadow
       opacity={isVisible ? 1 : 0}
       transform={isVisible ? 'scale(1)' : 'scale(0.95)'}
-      transition="opacity 300ms ease-in-out, transform 300ms ease-in-out"
+      transition="all 0.3s ease"
       {...views?.container}
     >
       {showIcon && (
@@ -100,8 +100,10 @@ export const ToastView: React.FC<ToastProps> = ({
       <Vertical gap={4} flex="1">
         <Text
           size="md"
-          weight="semiBold"
+          fontWeight="600" // Semi-bold for better readability
           color={Theme[variant].content.color}
+          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+          lineHeight="1.4"
           {...views?.title}
         >
           {title}
@@ -111,6 +113,9 @@ export const ToastView: React.FC<ToastProps> = ({
           <Text
             size="sm"
             color={Theme[variant].content.color}
+            fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+            fontWeight="400" // Regular weight
+            lineHeight="1.5"
             {...views?.description}
           >
             {description}
@@ -120,15 +125,17 @@ export const ToastView: React.FC<ToastProps> = ({
         {action && actionText && (
           <Text
             size="sm"
-            weight="semiBold"
-            marginTop="4px"
+            fontWeight="600" // Semi-bold for better readability
+            marginTop="8px" // 2 × 4px grid
             cursor="pointer"
             color={Theme[variant].content.color}
+            fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
             onClick={(e: React.MouseEvent) => {
               e.stopPropagation();
               action();
             }}
             _hover={{ textDecoration: 'underline' }}
+            transition="all 0.2s ease"
             {...views?.actionButton}
           >
             {actionText}
@@ -143,16 +150,17 @@ export const ToastView: React.FC<ToastProps> = ({
           backgroundColor="transparent"
           border="none"
           cursor="pointer"
-          padding="4px"
-          marginLeft="8px"
-          marginTop="-4px"
-          marginRight="-8px"
-          borderRadius="4px"
+          padding="4px" // 1 × 4px grid
+          marginLeft="8px" // 2 × 4px grid
+          marginTop="-4px" // 1 × 4px grid
+          marginRight="-8px" // 2 × 4px grid
+          borderRadius="4px" // 1 × 4px grid
           onClick={(e: React.MouseEvent) => {
             e.stopPropagation();
             onClose();
           }}
           _hover={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
+          transition="all 0.2s ease"
           {...views?.closeButton}
         >
           <CloseIcon widthHeight={16} color={Theme[variant].content.color} />
@@ -220,12 +228,12 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
           pointerEvents="auto"
           animation={
             position.includes('right')
-              ? 'slideInRight 0.3s, fadeIn 0.3s'
+              ? 'slideInRight 0.3s ease-out, fadeIn 0.3s ease-out'
               : position.includes('left')
-              ? 'slideInLeft 0.3s, fadeIn 0.3s'
+              ? 'slideInLeft 0.3s ease-out, fadeIn 0.3s ease-out'
               : position.includes('top')
-              ? 'slideInDown 0.3s, fadeIn 0.3s'
-              : 'slideInUp 0.3s, fadeIn 0.3s'
+              ? 'slideInDown 0.3s ease-out, fadeIn 0.3s ease-out'
+              : 'slideInUp 0.3s ease-out, fadeIn 0.3s ease-out'
           }
         >
           <ToastView

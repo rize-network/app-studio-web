@@ -1,108 +1,194 @@
+/**
+ * Button Styles
+ *
+ * Defines the styles for the Button component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
+
 import { ViewProps } from 'app-studio';
-import { Shape, Size } from './Button.type';
+import { Shape, Size, Variant } from './Button.type';
+
+/**
+ * Button sizes following the 4px grid system
+ */
 export const ButtonSizes: Record<Size, ViewProps> = {
-  // Defines a constant 'ButtonSizes' as a mapping from 'Size' to corresponding 'CSSProperties'.
   xs: {
-    // Establishes style configuration for extra-small (xs) button size.
-    width: 79,
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 12,
-    paddingRight: 12,
-    fontWeight: 400,
-    fontSize: 11,
-    lineHeight: 14,
-    letterSpacing: 1.25,
-    // Establishes style configuration for small (sm) button size.
+    // Height: 28px (7 × 4px)
+    height: '28px',
+    paddingTop: '4px',
+    paddingBottom: '4px',
+    paddingLeft: '8px',
+    paddingRight: '8px',
+    // Typography
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    fontSize: '12px', // text-xs
+    fontWeight: '500', // medium
+    lineHeight: '20px',
+    letterSpacing: '-0.01em',
   },
   sm: {
-    width: 128,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 16,
-    paddingRight: 16,
-    fontWeight: 400,
-    fontSize: 12,
-    // Establishes style configuration for medium (md) button size.
-    lineHeight: 16,
-    letterSpacing: 1.25,
+    // Height: 32px (8 × 4px)
+    height: '32px',
+    paddingTop: '6px',
+    paddingBottom: '6px',
+    paddingLeft: '12px',
+    paddingRight: '12px',
+    // Typography
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    fontSize: '14px', // text-sm
+    fontWeight: '500', // medium
+    lineHeight: '20px',
+    letterSpacing: '-0.01em',
   },
   md: {
-    width: 144,
-    paddingTop: 12,
-    paddingBottom: 12,
-    paddingLeft: 18,
-    paddingRight: 18,
-    // Establishes style configuration for large (lg) button size.
-
-    fontSize: 14,
-    fontWeight: 400,
-    lineHeight: 18,
-    letterSpacing: 1.25,
+    // Height: 40px (10 × 4px) - standard height for interactive elements
+    height: '40px',
+    paddingTop: '8px',
+    paddingBottom: '8px',
+    paddingLeft: '16px',
+    paddingRight: '16px',
+    // Typography
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    fontSize: '14px', // text-sm/md
+    fontWeight: '500', // medium
+    lineHeight: '24px',
+    letterSpacing: '-0.01em',
   },
   lg: {
-    width: 178,
-    paddingTop: 14,
-    paddingBottom: 14,
-    // Establishes style configuration for extra-large (xl) button size.
-    paddingLeft: 22,
-    paddingRight: 22,
-    fontWeight: 400,
-    fontSize: 18,
-    lineHeight: 24,
-    letterSpacing: 1.25,
+    // Height: 48px (12 × 4px)
+    height: '48px',
+    paddingTop: '12px',
+    paddingBottom: '12px',
+    paddingLeft: '20px',
+    paddingRight: '20px',
+    // Typography
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    fontSize: '16px', // text-md/lg
+    fontWeight: '500', // medium
+    lineHeight: '24px',
+    letterSpacing: '-0.01em',
   },
   xl: {
-    width: 220,
-    paddingTop: 16,
-    // Defines a constant 'ButtonShapes' with style properties for different button shapes such as 'sharp', 'rounded', and 'pillShaped'.
-    paddingBottom: 16,
-    // Sets the border-radius for a sharp-edged button shape to '0'.
-    paddingLeft: 26,
-    // Sets the border-radius for a rounded button shape to '4'.
-    paddingRight: 26,
-    // Sets the border-radius for a pill-shaped button to '24'.
-    fontWeight: 400,
-    fontSize: 22,
-    // Defines a constant 'IconSizes' as a mapping from 'Size' to corresponding 'CSSProperties' for icons.
-    lineHeight: 28,
-    // Sets the width, height, and padding for icons of extra-small size.
-    letterSpacing: 1.25,
+    // Height: 56px (14 × 4px)
+    height: '56px',
+    paddingTop: '16px',
+    paddingBottom: '16px',
+    paddingLeft: '24px',
+    paddingRight: '24px',
+    // Typography
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    fontSize: '18px', // text-lg
+    fontWeight: '500', // medium
+    lineHeight: '24px',
+    letterSpacing: '-0.01em',
   },
 };
+
+/**
+ * Button shapes with consistent border radius
+ */
 export const ButtonShapes: Record<Shape, number | string> = {
-  // Sets the width, height, and padding for icons of small size.
   sharp: 0,
-  rounded: 4,
-  pillShaped: 24,
+  rounded: '8px', // Consistent with design system (rounded-md)
+  pillShaped: '9999px', // Full rounded for pill shape
 };
-// Sets the width, height, and padding for icons of medium size.
+
+/**
+ * Icon sizes for different button sizes
+ */
 export const IconSizes: Record<Size, ViewProps> = {
   xs: {
-    width: 24,
-    height: 24,
-    // Sets the width, height, and padding for icons of large size.
-    padding: 12,
+    width: '16px',
+    height: '16px',
+    padding: '6px',
   },
   sm: {
-    width: 24,
-    // Sets the width, height, and padding for icons of extra-large size.
-    height: 24,
-    padding: 15,
+    width: '20px',
+    height: '20px',
+    padding: '6px',
   },
   md: {
-    width: 36,
-    height: 36,
-    padding: 15,
+    width: '24px',
+    height: '24px',
+    padding: '8px',
   },
   lg: {
-    width: 36,
-    height: 36,
-    padding: 18,
+    width: '24px',
+    height: '24px',
+    padding: '12px',
   },
   xl: {
-    width: 36,
-    height: 36,
-    padding: 24,
+    width: '28px',
+    height: '28px',
+    padding: '14px',
   },
 };
+
+/**
+ * Button variants with consistent styling
+ */
+export const getButtonVariants = (
+  color: string,
+  isLight: boolean
+): Record<Variant, ViewProps> => ({
+  filled: {
+    backgroundColor: color,
+    color: isLight ? 'color.gray.900' : 'color.white',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'transparent',
+    _hover: {
+      filter: 'brightness(0.9)',
+      transform: 'translateY(-1px)',
+    },
+    _active: {
+      filter: 'brightness(0.85)',
+      transform: 'translateY(0)',
+    },
+    transition: 'all 0.2s ease',
+  },
+  outline: {
+    backgroundColor: 'transparent',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: color,
+    color: color,
+    _hover: {
+      backgroundColor: `${color}10`, // 10% opacity
+      transform: 'translateY(-1px)',
+    },
+    _active: {
+      backgroundColor: `${color}20`, // 20% opacity
+      transform: 'translateY(0)',
+    },
+    transition: 'all 0.2s ease',
+  },
+  ghost: {
+    backgroundColor: 'transparent',
+    color: color,
+    _hover: {
+      backgroundColor: `${color}10`, // 10% opacity
+      transform: 'translateY(-1px)',
+    },
+    _active: {
+      backgroundColor: `${color}20`, // 20% opacity
+      transform: 'translateY(0)',
+    },
+    transition: 'all 0.2s ease',
+  },
+  link: {
+    backgroundColor: 'transparent',
+    color: color,
+    textDecoration: 'underline',
+    textUnderlineOffset: '2px',
+    _hover: {
+      textDecoration: 'underline',
+      textDecorationThickness: '2px',
+    },
+    transition: 'all 0.2s ease',
+  },
+});

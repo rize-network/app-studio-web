@@ -1,9 +1,20 @@
+/**
+ * Button View Component
+ *
+ * Renders a button with various styles and states according to the design guidelines.
+ */
+
 import React from 'react';
-import { Element, useTheme, Vertical, View, ViewProps } from 'app-studio';
+import { Element, useTheme, Vertical, View } from 'app-studio';
 import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
-import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
-import { Variant } from './Button.type';
+import {
+  ButtonShapes,
+  ButtonSizes,
+  IconSizes,
+  getButtonVariants,
+} from './Button.style';
+// We don't need to import Variant as it's already imported in Button.style
 import { Loader } from '../../Loader/Loader';
 import { Horizontal } from '../../Layout/Horizontal/Horizontal';
 
@@ -45,49 +56,17 @@ const ButtonView: React.FC<Props> = ({
   const isActive = !(isDisabled || isLoading);
   const defaultNativeProps = { disabled: !isActive };
   const buttonColor = isActive ? 'theme.primary' : 'theme.disabled';
-  const hovering = isHovered && effect === 'hover';
-  const reverse = isHovered && effect === 'reverse';
+  // We'll handle hover effects through CSS transitions in the style
 
+  // Determine if the button color is light or dark for proper contrast
   const isLight =
     contrast(getColor(buttonColor, elementMode ? elementMode : themeMode)) ==
     'light';
-  const ButtonVariants: Record<Variant, ViewProps> = {
-    filled: {
-      backgroundColor: reverse ? 'transparent' : buttonColor,
-      color: reverse
-        ? isLight
-          ? 'white'
-          : buttonColor
-        : isLight
-        ? buttonColor
-        : 'white',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : 'transparent',
-    },
-    outline: {
-      backgroundColor: reverse ? buttonColor : 'transparent',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : 'theme.primary',
-      color: reverse ? 'white' : buttonColor,
-    },
-    link: {
-      backgroundColor: 'transparent',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : 'transparent',
-      color: buttonColor,
-      textDecoration: reverse ? 'none' : 'underline',
-    },
-    ghost: {
-      backgroundColor: 'transparent',
-      color: reverse ? 'white' : buttonColor,
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : 'transparent',
-    },
-  };
+
+  // Get button variants based on color and light/dark status
+  const ButtonVariants = getButtonVariants(buttonColor, isLight);
+
+  // Note: Effects are now handled through CSS transitions in the style definitions
   const buttonSizeStyles = ButtonSizes[size];
   const buttonVariant = ButtonVariants[variant];
   const scaleWidth = {
@@ -100,20 +79,61 @@ const ButtonView: React.FC<Props> = ({
   };
   const changePadding = isIconRounded ? IconSizes[size] : ButtonSizes[size];
 
+  // Use Horizontal or Vertical container based on icon position
   const Container = ['left', 'right'].includes(iconPosition)
     ? Horizontal
     : Vertical;
+
+  // Create the button content with proper spacing and alignment
   const content = (
-    <Container gap={5} alignItems="center" {...views?.container}>
-      {isLoading && loaderPosition === 'left' && <Loader {...loaderProps} />}
+    <Container
+      gap={8} // 8px gap (2x4px grid) for consistent spacing
+      alignItems="center"
+      justifyContent="center"
+      {...views?.container}
+    >
+      {/* Show loader on the left if loading and position is left */}
+      {isLoading && loaderPosition === 'left' && (
+        <Loader
+          size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+          {...loaderProps}
+        />
+      )}
+
+      {/* Show icon on the left/top if not loading */}
       {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
-        <View {...views?.icon}>{icon}</View>
+        <View
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          {...views?.icon}
+        >
+          {icon}
+        </View>
       )}
+
+      {/* Button text/children */}
       {children}
+
+      {/* Show icon on the right/bottom if not loading */}
       {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
-        <View {...views?.icon}>{icon}</View>
+        <View
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          {...views?.icon}
+        >
+          {icon}
+        </View>
       )}
-      {isLoading && loaderPosition === 'right' && <Loader {...loaderProps} />}
+
+      {/* Show loader on the right if loading and position is right */}
+      {isLoading && loaderPosition === 'right' && (
+        <Loader
+          size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+          {...loaderProps}
+        />
+      )}
     </Container>
   );
 
@@ -122,26 +142,25 @@ const ButtonView: React.FC<Props> = ({
       gap={8}
       as="button"
       type="button"
-      border="none"
-      color="color.white"
       display="flex"
       alignItems="center"
       justifyContent="center"
       aria-label={ariaLabel}
-      backgroundColor={buttonColor}
       borderRadius={ButtonShapes[shape]}
       onClick={props.onClick ?? onClick}
       onMouseEnter={() => handleHover(true)}
       onMouseLeave={() => handleHover(false)}
       cursor={isActive ? 'pointer' : 'default'}
-      filter={hovering ? 'brightness(0.85)' : 'brightness(1)'}
-      {...(hovering && !props.isDisabled
-        ? { transition: 'transform 0.3s ease', transform: 'translateY(-5px)' }
-        : {})}
+      // Apply consistent styling according to design guidelines
+      fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+      // Apply shadow if provided
+      boxShadow={shadow ? shadow : undefined}
+      // Apply default props and styles
       {...defaultNativeProps}
       {...buttonSizeStyles}
       {...buttonVariant}
       {...scaleWidth}
+      // Only apply padding from ButtonSizes if no custom padding is provided
       {...(props.padding ||
       props.paddingHorizontal ||
       props.paddingVertical ||
@@ -151,7 +170,7 @@ const ButtonView: React.FC<Props> = ({
       props.paddingBottom
         ? {}
         : changePadding)}
-      {...shadow}
+      // Apply any custom props and views
       {...props}
       {...views?.container}
     >
@@ -159,7 +178,14 @@ const ButtonView: React.FC<Props> = ({
         <Link
           to={to}
           textDecorationColor={'theme.primary'}
+          textDecorationThickness="1px"
+          textUnderlineOffset="2px"
+          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+          transition="all 0.2s ease"
           isExternal={isExternal}
+          _hover={{
+            textDecorationThickness: '2px',
+          }}
           {...linkProps}
           {...views?.link}
         >

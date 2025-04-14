@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ColorCheckbox,
   DefaultCheckbox,
+  DesignSystemCheckboxes,
   DisabledCheckbox,
   ErrorCheckbox,
   FormCheckbox,
@@ -25,8 +26,14 @@ export const CheckboxPage = () => {
             <th>App-Studio</th>
           </tr>
           <tr>
-            <td>Default</td>
+            <td>Design System</td>
+            <td>
+              <DesignSystemCheckboxes />
+            </td>
+          </tr>
 
+          <tr>
+            <td>Default</td>
             <td>
               <DefaultCheckbox />
             </td>

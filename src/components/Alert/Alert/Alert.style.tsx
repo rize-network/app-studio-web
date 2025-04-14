@@ -1,58 +1,87 @@
-// Define a constant object 'Themes' exporting various theme views.
-export const Themes = {
-  // Start of the 'default' theme definition with style properties.
+/**
+ * Alert Styles
+ *
+ * Defines the styles for the Alert component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
+
+import { ViewProps } from 'app-studio';
+import { Variant } from './Alert.type';
+
+/**
+ * Theme styles for different alert variants
+ */
+export const Themes: Record<
+  Variant,
+  { container: ViewProps; content: ViewProps; icon: ViewProps }
+> = {
   default: {
     container: {
-      backgroundColor: 'white',
-      border: 'color.blackAlpha.800',
+      backgroundColor: 'color.gray.50',
+      borderColor: 'color.gray.200',
+      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)',
     },
-    // Defines the content style for the 'default' theme.
     content: {
-      color: 'color.blackAlpha.800',
+      color: 'color.gray.700',
+    },
+    icon: {
+      color: 'color.gray.500',
     },
   },
-  // The 'info' theme with unique container and content views.
   info: {
     container: {
-      backgroundColor: 'color.blue.200',
-      border: 'color.blue.400',
+      backgroundColor: 'color.blue.50',
+      borderColor: 'color.blue.200',
+      boxShadow: '0 1px 2px rgba(59, 130, 246, 0.05)',
     },
-    // Content styles specific to the 'info' theme.
     content: {
-      color: '#60a5fa',
+      color: 'color.blue.700',
+    },
+    icon: {
+      color: 'color.blue.500',
     },
   },
-  // Specifies the 'success' theme with corresponding container and content views.
   success: {
     container: {
-      backgroundColor: 'color.green.200',
-      border: 'color.green.400',
+      backgroundColor: 'color.green.50',
+      borderColor: 'color.green.200',
+      boxShadow: '0 1px 2px rgba(34, 197, 94, 0.05)',
     },
-    // Sets the content styling nuances for the 'success' theme.
     content: {
-      color: '#22c55e',
+      color: 'color.green.700',
+    },
+    icon: {
+      color: 'color.green.500',
     },
   },
-  // Start of the 'error' theme with its characteristic views.
   error: {
     container: {
-      backgroundColor: 'color.red.200',
-      border: 'color.red.400',
+      backgroundColor: 'color.red.50',
+      borderColor: 'color.red.200',
+      boxShadow: '0 1px 2px rgba(239, 68, 68, 0.05)',
     },
-    // Content styling for the 'error' theme.
     content: {
-      color: '#ef4444',
+      color: 'color.red.700',
+    },
+    icon: {
+      color: 'color.red.500',
     },
   },
-  // Introduction of the 'warning' theme views.
   warning: {
     container: {
-      backgroundColor: 'color.orange.200',
-      border: 'color.orange.400',
+      backgroundColor: 'color.orange.50',
+      borderColor: 'color.orange.200',
+      boxShadow: '0 1px 2px rgba(249, 115, 22, 0.05)',
     },
-    // Defines color and aesthetics for the 'warning' theme's content.
     content: {
-      color: '#f97316',
+      color: 'color.orange.700',
+    },
+    icon: {
+      color: 'color.orange.500',
     },
   },
 };
