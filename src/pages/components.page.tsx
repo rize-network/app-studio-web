@@ -4,6 +4,7 @@ import { View, Text } from 'app-studio';
 import { Horizontal } from 'src/components';
 import DragAndDropPage from 'src/pages/dragAndDrop.page';
 import UploadPage from 'src/pages/upload.page';
+import AIChatPage from './chat.page';
 // Lazy-loaded imports
 const AccordionPage = lazy(() => import('src/pages/accordion.page'));
 const AlertPage = lazy(() => import('src/pages/alert.page'));
@@ -55,6 +56,8 @@ const VerticalPage = lazy(() => import('src/pages/vertical.page'));
 
 export const componentList = [
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
+  { name: 'Chat', path: '/chat', element: <AIChatPage /> },
+
   { name: 'Alert', path: '/alert', element: <AlertPage /> },
   { name: 'AspectRatio', path: '/aspectratio', element: <AspectRatioPage /> },
   { name: 'Avatar', path: '/avatar', element: <AvatarPage /> },

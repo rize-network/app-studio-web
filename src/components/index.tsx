@@ -96,3 +96,7 @@ export * from './Resizable/Resizable/Resizable.props';
 export * from './Toast/Toast/Toast.props';
 export * from './Command/Command/Command.props';
 export * from './Tooltip/Tooltip/Tooltip.props';
+
+// AI App Studio Components
+import * as AIComponents from './Chat';
+export { AIComponents };
