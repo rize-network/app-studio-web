@@ -1,12 +1,13 @@
 import React from 'react';
 import { Chart } from '../Chart';
 import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
 
 export const DonutChartDemo = () => {
   const dataPoints = [
-    { label: 'Completed', value: 65, color: 'color.green.500' },
-    { label: 'In Progress', value: 25, color: 'color.blue.500' },
-    { label: 'Pending', value: 10, color: 'color.orange.500' },
+    { label: 'Completed', value: 65, color: CHART_COLORS.green },
+    { label: 'In Progress', value: 25, color: CHART_COLORS.blue },
+    { label: 'Pending', value: 10, color: CHART_COLORS.orange },
   ];
 
   return (

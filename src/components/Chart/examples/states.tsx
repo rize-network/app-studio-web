@@ -5,6 +5,7 @@ import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Button } from '../../Button/Button';
+import { CHART_COLORS } from '../Chart/ChartColors';
 
 export const ChartStatesDemo = () => {
   // State for loading example
@@ -20,12 +21,12 @@ export const ChartStatesDemo = () => {
       {
         name: 'Revenue',
         data: [30, 40, 35, 50, 49, 60],
-        color: 'color.blue.500',
+        color: CHART_COLORS.blue,
       },
       {
         name: 'Expenses',
         data: [20, 25, 30, 35, 30, 40],
-        color: 'color.red.500',
+        color: CHART_COLORS.green,
       },
     ],
   };
@@ -168,9 +169,9 @@ export const ChartStatesDemo = () => {
         <Chart
           type="pie"
           dataPoints={[
-            { label: 'A', value: 30, color: 'color.blue.500' },
-            { label: 'B', value: 40, color: 'color.green.500' },
-            { label: 'C', value: 30, color: 'color.purple.500' },
+            { label: 'A', value: 30, color: CHART_COLORS.blue },
+            { label: 'B', value: 40, color: CHART_COLORS.green },
+            { label: 'C', value: 30, color: CHART_COLORS.purple },
           ]}
           title="Custom Loading Indicator"
           isLoading={true}

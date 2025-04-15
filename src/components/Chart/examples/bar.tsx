@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chart } from '../Chart';
 import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
 
 export const BarChartDemo = () => {
   const data = {
@@ -9,17 +10,17 @@ export const BarChartDemo = () => {
       {
         name: 'Revenue',
         data: [30, 40, 35, 50, 49, 60],
-        color: 'color.blue.500',
+        color: CHART_COLORS.blue,
       },
       {
         name: 'Expenses',
         data: [20, 25, 30, 35, 30, 40],
-        color: 'color.red.500',
+        color: CHART_COLORS.green,
       },
       {
         name: 'Profit',
         data: [10, 15, 5, 15, 19, 20],
-        color: 'color.green.500',
+        color: CHART_COLORS.purple,
       },
     ],
   };

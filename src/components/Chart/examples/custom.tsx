@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chart } from '../Chart';
 import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
 
 export const CustomChartDemo = () => {
   const data = {
@@ -9,18 +10,18 @@ export const CustomChartDemo = () => {
       {
         name: 'Sales',
         data: [120, 180, 150, 210],
-        color: 'color.blue.500',
+        color: CHART_COLORS.blue,
       },
       {
         name: 'Costs',
         data: [80, 100, 90, 120],
-        color: 'color.green.500',
+        color: CHART_COLORS.green,
       },
     ],
   };
 
   return (
-    <View height="300px" width="100%">
+    <View height="400px" width="100%">
       <Chart
         type="bar"
         data={data}

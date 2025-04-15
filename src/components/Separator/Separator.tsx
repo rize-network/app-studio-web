@@ -10,3 +10,5 @@ const SeparatorComponent: React.FC<SeparatorProps> = (props) => {
 };
 
 export const Separator = SeparatorComponent;
+
+export const Divider = SeparatorComponent;

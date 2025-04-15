@@ -7,6 +7,7 @@ import {
   AxisLabelStyles,
   GridStyles,
 } from './Chart.style';
+import { useTheme } from 'app-studio';
 
 interface LineChartProps {
   data: ChartData;
@@ -32,6 +33,8 @@ export const LineChart: React.FC<LineChartProps> = ({
   views,
 }) => {
   // Calculate chart dimensions
+  const { getColor } = useTheme();
+
   const padding = { top: 20, right: 20, bottom: 40, left: 50 };
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
@@ -171,7 +174,7 @@ export const LineChart: React.FC<LineChartProps> = ({
           {/* Area fill (if needed) */}
           <path
             d={generateAreaPath(series.data)}
-            fill={series.color}
+            fill={series.color ? getColor(series.color) : 'black'}
             opacity={0.1}
             {...views?.area}
           />
@@ -179,7 +182,7 @@ export const LineChart: React.FC<LineChartProps> = ({
           {/* Line */}
           <path
             d={generatePath(series.data)}
-            stroke={series.color}
+            stroke={series.color ? getColor(series.color) : 'black'}
             {...LineStyles}
             {...views?.line}
           />

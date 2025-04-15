@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useTheme } from 'app-studio';
 import { ChartData } from './Chart.type';
 import {
   BarStyles,
@@ -30,6 +31,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   hideTooltip,
   views,
 }) => {
+  const { getColor } = useTheme();
   // Calculate chart dimensions
   const padding = { top: 20, right: 20, bottom: 40, left: 50 };
   const chartWidth = width - padding.left - padding.right;
@@ -169,7 +171,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                 y={y}
                 width={barWidth}
                 height={barHeight}
-                fill={series.color}
+                fill={series.color ? getColor(series.color) : 'black'}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={hideTooltip}
                 onClick={handleClick}

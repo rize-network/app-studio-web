@@ -1,18 +1,8 @@
 import { ViewProps } from 'app-studio';
+import { DEFAULT_CHART_COLORS } from './ChartColors';
 
 // Default colors for chart series
-export const DEFAULT_COLORS = [
-  'color.blue.500',
-  'color.green.500',
-  'color.purple.500',
-  'color.orange.500',
-  'color.red.500',
-  'color.teal.500',
-  'color.pink.500',
-  'color.indigo.500',
-  'color.yellow.500',
-  'color.cyan.500',
-];
+export const DEFAULT_COLORS = DEFAULT_CHART_COLORS;
 
 // Default styles for chart container
 export const ChartContainerStyles: ViewProps = {

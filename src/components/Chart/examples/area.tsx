@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chart } from '../Chart';
 import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
 
 export const AreaChartDemo = () => {
   const data = {
@@ -9,17 +10,17 @@ export const AreaChartDemo = () => {
       {
         name: 'This Week',
         data: [10, 15, 12, 20, 18, 25, 22],
-        color: 'color.blue.500',
+        color: CHART_COLORS.blue,
       },
       {
         name: 'Last Week',
         data: [8, 12, 10, 15, 14, 20, 17],
-        color: 'color.green.500',
+        color: CHART_COLORS.green,
       },
       {
         name: 'Two Weeks Ago',
         data: [6, 10, 8, 12, 10, 16, 14],
-        color: 'color.purple.500',
+        color: CHART_COLORS.purple,
       },
     ],
   };

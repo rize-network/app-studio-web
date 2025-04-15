@@ -15,16 +15,11 @@ import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
 
 export const DesignSystemCharts = () => {
-  // Consistent color palette across all chart types
-  const colors = {
-    blue: 'color.blue.500',
-    green: 'color.green.500',
-    purple: 'color.purple.500',
-    orange: 'color.orange.500',
-    red: 'color.red.500',
-  };
+  // Use the consistent color palette from ChartColors
+  const colors = CHART_COLORS;
 
   // Sample data for bar and line charts
   const timeSeriesData = {

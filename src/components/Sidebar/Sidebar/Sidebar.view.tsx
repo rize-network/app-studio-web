@@ -18,7 +18,7 @@ import {
   SidebarTransitions,
 } from './Sidebar.style';
 import { SidebarContextType } from './Sidebar.type';
-import { Badge } from 'src/components/Badge/Badge';
+import { Badge } from '../../Badge/Badge';
 
 // Create context for the Sidebar
 const SidebarContext = createContext<SidebarContextType>({
