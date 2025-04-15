@@ -7,7 +7,7 @@ import { AIModel } from './ModelSelector.type';
 
 export const useModelSelectorState = (
   models: AIModel[],
-  selectedModelId: string,
+  _selectedModelId: string,
   enableSearch: boolean
 ) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,6 +1,4 @@
 import React, { useMemo } from 'react';
-import { View } from '../../Layout/View/View';
-import { Text } from '../../Text/Text';
 import { ChartData } from './Chart.type';
 import {
   LineStyles,
@@ -52,10 +50,10 @@ export const LineChart: React.FC<LineChartProps> = ({
   // Generate y-axis ticks
   const yAxisTicks = useMemo(() => {
     const tickCount = 5;
-    const ticks = [];
+    const ticks: number[] = [];
 
     for (let i = 0; i <= tickCount; i++) {
-      const value = (maxValue / tickCount) * i;
+      const value: number = (maxValue / tickCount) * i;
       ticks.push(value);
     }
 
@@ -63,7 +61,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   }, [maxValue]);
 
   // Generate path for each series
-  const generatePath = (series: number[], seriesIndex: number) => {
+  const generatePath = (series: number[]) => {
     const points = series.map((value, index) => {
       const x = padding.left + (index / (data.labels.length - 1)) * chartWidth;
       const y =
@@ -77,7 +75,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   };
 
   // Generate area path for each series (for area charts)
-  const generateAreaPath = (series: number[], seriesIndex: number) => {
+  const generateAreaPath = (series: number[]) => {
     const startX = padding.left;
     const endX = padding.left + chartWidth;
     const baseY = height - padding.bottom;
@@ -172,7 +170,7 @@ export const LineChart: React.FC<LineChartProps> = ({
         <React.Fragment key={`series-${seriesIndex}`}>
           {/* Area fill (if needed) */}
           <path
-            d={generateAreaPath(series.data, seriesIndex)}
+            d={generateAreaPath(series.data)}
             fill={series.color}
             opacity={0.1}
             {...views?.area}
@@ -180,7 +178,7 @@ export const LineChart: React.FC<LineChartProps> = ({
 
           {/* Line */}
           <path
-            d={generatePath(series.data, seriesIndex)}
+            d={generatePath(series.data)}
             stroke={series.color}
             {...LineStyles}
             {...views?.line}

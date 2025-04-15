@@ -4,7 +4,7 @@ import {
   DefaultRadioGroup,
   DesignSystemRadios,
 } from 'src/components/Form/Radio/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export default function RadioPage() {
   return (

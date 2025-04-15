@@ -51,13 +51,13 @@ export const SidebarVariants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'white',
     color: 'color.gray.800',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     transition: 'all 0.2s ease',
   },
   filled: {
     backgroundColor: 'color.gray.100',
     color: 'color.gray.800',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     transition: 'all 0.2s ease',
   },
   outline: {
@@ -66,20 +66,20 @@ export const SidebarVariants: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color.gray.200',
     color: 'color.gray.800',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     transition: 'all 0.2s ease',
   },
   subtle: {
     backgroundColor: 'color.gray.50',
     color: 'color.gray.800',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     transition: 'all 0.2s ease',
   },
   elevated: {
     backgroundColor: 'white',
     boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
     color: 'color.gray.800',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     transition: 'all 0.2s ease',
   },
 };

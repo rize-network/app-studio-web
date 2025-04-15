@@ -1,6 +1,6 @@
 import React from 'react';
 import { Loader } from '../../Loader/Loader';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 export const StyleLoader = () => (
   <Horizontal gap={15} flexWrap="nowrap">

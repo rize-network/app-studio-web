@@ -12,7 +12,7 @@ import {
   PositionStyles,
   BadgeVariants,
 } from './Badge.style';
-import { Center } from '../../Layout/Center/Center';
+import { Center } from 'app-studio';
 import { Text } from '../../Text/Text';
 // No need to import ViewProps as it's not used directly
 /**
@@ -33,7 +33,7 @@ const BadgeView: React.FC<BadgeProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+    backgrounColor: 'color.black',
 
     // Apply shape, size, and variant styles
     borderRadius: BadgeShapes[shape],
@@ -50,12 +50,12 @@ const BadgeView: React.FC<BadgeProps> = ({
     <Center role="badge" {...combinedStyles}>
       <Text
         role="badgeText"
-        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
         fontWeight="500" // Medium weight for better readability
         textAlign="center"
         {...views?.text}
+        color={combinedStyles.color}
       >
-        {content}
+        {content || ''}
       </Text>
     </Center>
   );

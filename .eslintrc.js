@@ -10,9 +10,13 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'import'],
+  rules: {
+    'unused-imports/no-unused-imports': 'error',
+  },
+  plugins: ['react', '@typescript-eslint', 'import', 'unused-imports'],
   overrides: [
     {
       files: ['**/*.js', '**/*.ts', '**/*.tsx'],
-    }]
+    },
+  ],
 };

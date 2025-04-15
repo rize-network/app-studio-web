@@ -1,6 +1,6 @@
 import React from 'react';
 import { DropdownMenu } from '../DropdownMenu';
-import { Text, Vertical, View, Horizontal } from 'app-studio';
+import { Text, Vertical, Horizontal } from 'app-studio';
 import { Button, CopyIcon, EditIcon, DeleteIcon } from 'src/components';
 
 export const DropdownMenuPositions = () => {

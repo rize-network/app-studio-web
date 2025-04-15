@@ -22,10 +22,6 @@ export * from './Form/ComboBox/ComboBox';
 export * from './OTPInput/OTPInput';
 export * from './Formik';
 export * from './Slider';
-export * from './Layout/Center/Center';
-export * from './Layout/Horizontal/Horizontal';
-export * from './Layout/Vertical/Vertical';
-export * from './Layout/View/View';
 export * from './Link/Link';
 export * from './Loader/Loader';
 export * from './Uploader/Uploader';
@@ -72,9 +68,6 @@ export * from './Form/DatePicker/DatePicker/DatePicker.props';
 export * from './Form/Password/Password/Password.props';
 export * from './Form/ComboBox/ComboBox/ComboBox.props';
 export * from './OTPInput/OTPInput/OTPInput.props';
-export * from './Layout/Center/Center.props';
-export * from './Layout/Horizontal/Horizontal.props';
-export * from './Layout/Vertical/Vertical.props';
 export * from './Link/Link/Link.props';
 export * from './Loader/Loader/Loader.props';
 export * from './Message/Message/Message.props';
@@ -96,7 +89,3 @@ export * from './Resizable/Resizable/Resizable.props';
 export * from './Toast/Toast/Toast.props';
 export * from './Command/Command/Command.props';
 export * from './Tooltip/Tooltip/Tooltip.props';
-
-// AI App Studio Components
-import * as AIComponents from './Chat';
-export { AIComponents };

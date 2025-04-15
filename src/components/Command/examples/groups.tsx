@@ -5,8 +5,6 @@ import {
   HomeIcon,
   SettingsIcon,
   UserIcon,
-  InfoIcon,
-  SearchIcon,
   EditIcon,
   DustBinIcon,
   CopyIcon,

@@ -1,8 +1,8 @@
 import { Text } from 'app-studio';
 import React from 'react';
-import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import * as Icon from 'src/components/Icon/Icon';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 export const IconPage = () => {
   const iconList = Object.keys(Icon);
   return (

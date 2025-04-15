@@ -122,9 +122,9 @@ export const TooltipView: React.FC<{
 }) => {
   const {
     isOpen,
-    openTooltip,
-    closeTooltip,
-    triggerRef,
+    // openTooltip,
+    // closeTooltip,
+    // triggerRef,
     contentRef,
     contentId,
     triggerId,

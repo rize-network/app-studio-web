@@ -2,8 +2,8 @@ import React from 'react';
 import { DustBinIcon } from '../../Icon/Icon';
 import { ToggleGroup } from '../ToggleGroup';
 import { Shape } from '../ToggleGroup/ToggleGroup.type';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 
 export const ShapeDemo = () => {
   const items = [

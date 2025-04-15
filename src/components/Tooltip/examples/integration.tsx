@@ -2,10 +2,10 @@ import React from 'react';
 import { Tooltip } from '../Tooltip';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
-import { WarningIcon, InfoIcon } from '../../Icon/Icon';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
+import { InfoIcon } from '../../Icon/Icon';
 import { Slider } from '../../Slider/Slider';
 import { Alert } from '../../Alert/Alert';
 

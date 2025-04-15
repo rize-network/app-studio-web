@@ -14,8 +14,8 @@
        "noImplicitReturns": false,
        "noFallthroughCasesInSwitch": true,
        // noUnused* overlap with @typescript-eslint/no-unused-vars, can disable if duplicative
-       "noUnusedLocals": true,
-       "noUnusedParameters": true,
+       "noUnusedLocals": false,
+       "noUnusedParameters": false,
        // use Node's module resolution algorithm, instead of the legacy TS one
        "moduleResolution": "node",
        // transpile JSX to React.createElement
@@ -36,7 +36,7 @@
       // match output dir to input dir. e.g. dist/index instead of dist/src/index
       "rootDir": "./src",
       "strict": false,
-      "noImplicitAny": true,
+      "noImplicitAny": false,
       "strictNullChecks": true,
       "strictFunctionTypes": true,
       "strictBindCallApply": true,

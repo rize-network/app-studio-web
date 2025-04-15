@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { View } from 'app-studio';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
 import { LoadingIndicatorProps } from './LoadingIndicator.props';
 import {

@@ -13,9 +13,9 @@ import React, { useState } from 'react';
 import { Modal } from '../Modal';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 
 export const DesignSystemModal = () => {
   const [isBasicModalOpen, setIsBasicModalOpen] = useState(false);
@@ -44,14 +44,10 @@ export const DesignSystemModal = () => {
         >
           <Modal.Body>
             <Vertical gap={16}>
-              <Text
-                size="xl"
-                fontWeight="600"
-                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-              >
+              <Text size="xl" fontWeight="600">
                 Basic Modal
               </Text>
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+              <Text>
                 This is a basic modal following the design system guidelines. It
                 has consistent typography, spacing based on a 4px grid system,
                 and subtle animations.
@@ -79,16 +75,12 @@ export const DesignSystemModal = () => {
           onClose={() => setIsHeaderFooterModalOpen(false)}
         >
           <Modal.Header>
-            <Text
-              size="xl"
-              fontWeight="600"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text size="xl" fontWeight="600">
               Modal with Header and Footer
             </Text>
           </Modal.Header>
           <Modal.Body>
-            <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+            <Text>
               This modal has a header with a close button and a footer with
               action buttons. The header and footer have subtle borders to
               separate them from the content.
@@ -123,17 +115,13 @@ export const DesignSystemModal = () => {
           isFullScreen
         >
           <Modal.Header>
-            <Text
-              size="xl"
-              fontWeight="600"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text size="xl" fontWeight="600">
               Fullscreen Modal
             </Text>
           </Modal.Header>
           <Modal.Body>
             <Vertical gap={16} height="100%">
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+              <Text>
                 This modal takes up the full screen. Its useful for complex
                 forms or detailed content that requires more space.
               </Text>
@@ -144,9 +132,7 @@ export const DesignSystemModal = () => {
                 padding={16}
                 marginVertical={16}
               >
-                <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
-                  Content area with flexible height
-                </Text>
+                <Text>Content area with flexible height</Text>
               </View>
             </Vertical>
           </Modal.Body>
@@ -211,16 +197,12 @@ export const DesignSystemModal = () => {
           position={position}
         >
           <Modal.Header>
-            <Text
-              size="xl"
-              fontWeight="600"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text size="xl" fontWeight="600">
               {position.charAt(0).toUpperCase() + position.slice(1)} Position
             </Text>
           </Modal.Header>
           <Modal.Body>
-            <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+            <Text>
               This modal is positioned at the {position} of the screen.
             </Text>
           </Modal.Body>
@@ -244,16 +226,12 @@ export const DesignSystemModal = () => {
           blur={8}
         >
           <Modal.Header>
-            <Text
-              size="xl"
-              fontWeight="600"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text size="xl" fontWeight="600">
               Blurred Background
             </Text>
           </Modal.Header>
           <Modal.Body>
-            <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+            <Text>
               This modal has a blurred background effect, creating a frosted
               glass appearance that follows the design systems aesthetic.
             </Text>
@@ -292,12 +270,7 @@ export const DesignSystemModal = () => {
               },
             }}
           >
-            <Text
-              size="xl"
-              fontWeight="600"
-              color="color.blue.800"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text size="xl" fontWeight="600" color="color.blue.800">
               Custom Styled Modal
             </Text>
           </Modal.Header>
@@ -308,7 +281,7 @@ export const DesignSystemModal = () => {
               },
             }}
           >
-            <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+            <Text>
               This modal has custom styling while still following the design
               systems principles. It uses the blue color palette with consistent
               spacing and typography.

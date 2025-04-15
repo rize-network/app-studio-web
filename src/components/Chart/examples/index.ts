@@ -5,3 +5,4 @@ export * from './pie';
 export * from './donut';
 export * from './custom';
 export * from './states';
+export * from './designSystem';

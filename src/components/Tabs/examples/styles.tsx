@@ -72,24 +72,24 @@ export const StylesTabs = () => {
         },
         // Styles for each individual tab button (inactive state)
         tab: {
-          shape: 'rounded', // Example: Apply shape to Button
-          variant: 'ghost', // Default variant for inactive tabs
+          borderRadius: '8px', // Use borderRadius instead of shape
+          backgroundColor: 'transparent', // Use backgroundColor instead of variant
+          color: 'white',
           flexGrow: 1, // Example: Make tabs fill width
         },
         // Styles specifically for the active tab button (merged with 'tab' styles)
         activeTab: {
-          variant: 'filled', // Example: Active tab has different variant
           backgroundColor: 'lightcoral', // Example active background
         },
         // Styles for the text inside any tab button
         title: {
           color: 'white',
-          weight: 'normal', // Default weight
+          fontWeight: 'normal', // Use fontWeight instead of weight
         },
         // Styles specifically for the text inside the active tab button (merged with 'title' styles)
         activeText: {
-          weight: 'bold',
-          size: 'lg',
+          fontWeight: 'bold', // Use fontWeight instead of weight
+          fontSize: 'lg', // Use fontSize instead of size
           color: 'black', // Example active text color
         },
         // Styles for the content area below the tabs

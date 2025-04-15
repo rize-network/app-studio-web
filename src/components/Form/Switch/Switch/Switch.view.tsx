@@ -8,7 +8,7 @@
 import React from 'react';
 import { Input } from 'app-studio';
 import { Label } from '../../../Form/Label/Label';
-import { View } from '../../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../../Text/Text';
 import { SwitchViewProps } from './Switch.props';
 import {
@@ -61,7 +61,6 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       alignItems: 'center',
 
       // Typography properties
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
 
       // State properties
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
@@ -97,7 +96,6 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       {/* Label on the left side */}
       {labelPosition === 'left' && label && (
         <Text
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           fontWeight="500" // Medium weight for better readability
           color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
           transition="all 0.2s ease"
@@ -172,7 +170,6 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       {/* Label on the right side */}
       {labelPosition === 'right' && label && (
         <Text
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           fontWeight="500" // Medium weight for better readability
           color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
           transition="all 0.2s ease"

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Size } from '../Button/Button.type';
 

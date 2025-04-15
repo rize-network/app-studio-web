@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
-import { View } from '../../Layout/View/View';
-import { Text } from '../../Text/Text';
+import { useTheme } from 'app-studio';
 import { ChartDataPoint } from './Chart.type';
-import { PieSliceStyles } from './Chart.style';
+import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
 
 interface PieChartProps {
   dataPoints: ChartDataPoint[];
@@ -27,6 +26,8 @@ export const PieChart: React.FC<PieChartProps> = ({
   hideTooltip,
   views,
 }) => {
+  // Get theme color function
+  const { getColor } = useTheme();
   // Calculate chart dimensions
   const size = Math.min(width, height);
   const radius = (size / 2) * 0.8;
@@ -41,7 +42,7 @@ export const PieChart: React.FC<PieChartProps> = ({
 
   // Generate pie slices
   const slices = useMemo(() => {
-    const result = [];
+    const result: any[] = [];
     let startAngle = -Math.PI / 2; // Start from top (12 o'clock position)
 
     for (let i = 0; i < dataPoints.length; i++) {
@@ -96,9 +97,15 @@ export const PieChart: React.FC<PieChartProps> = ({
       // Calculate percentage
       const percentageText = `${(percentage * 100).toFixed(1)}%`;
 
+      // Get color from dataPoint, DEFAULT_COLORS, or generate a random one
+      const colorValue =
+        dataPoints[i].color || DEFAULT_COLORS[i % DEFAULT_COLORS.length];
+      // Resolve the color through the theme system
+      const resolvedColor = getColor(colorValue);
+
       result.push({
         path,
-        color: dataPoints[i].color,
+        color: resolvedColor,
         label: dataPoints[i].label,
         value: dataPoints[i].value,
         percentage: percentageText,

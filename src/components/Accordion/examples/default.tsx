@@ -1,6 +1,6 @@
 import React from 'react';
 import { Accordion } from '../Accordion';
-import { Text, Vertical, View } from 'app-studio';
+import { Text, Vertical } from 'app-studio';
 
 export const DefaultAccordion = () => {
   return (

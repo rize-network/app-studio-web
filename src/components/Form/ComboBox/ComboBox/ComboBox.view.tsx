@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Horizontal } from '../../../Layout';
+import { View, Horizontal } from 'app-studio';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
@@ -100,7 +100,12 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             {...views?.labelContainer}
           >
             {left}
-            <Text weight="medium" flexGrow={1} {...views?.label}>
+            <Text
+              weight="medium"
+              flexGrow={1}
+              color="color.gray.800"
+              {...views?.label}
+            >
               {selectedItem.label}
             </Text>
           </Horizontal>

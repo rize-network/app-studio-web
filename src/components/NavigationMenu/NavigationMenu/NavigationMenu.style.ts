@@ -20,19 +20,19 @@ export const NavigationMenuSizes: Record<Size, ViewProps> = {
   sm: {
     padding: '8px 12px', // 2×4px and 3×4px grid
     fontSize: '14px',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     fontWeight: '500', // Medium weight for better readability
   },
   md: {
     padding: '12px 16px', // 3×4px and 4×4px grid
     fontSize: '16px',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     fontWeight: '500', // Medium weight for better readability
   },
   lg: {
     padding: '16px 20px', // 4×4px and 5×4px grid
     fontSize: '18px',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     fontWeight: '500', // Medium weight for better readability
   },
 };

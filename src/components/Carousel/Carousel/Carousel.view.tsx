@@ -1,9 +1,8 @@
 import React, { useMemo, useEffect, useRef } from 'react';
 import { View } from 'app-studio';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Button } from '../../Button/Button';
 import { ChevronIcon } from '../../Icon/Icon';
-import { Text } from '../../Text/Text';
 import {
   CarouselProps,
   CarouselSlideProps,
@@ -249,7 +248,7 @@ export const CarouselView: React.FC<CarouselProps> = ({
   } = carouselState;
 
   // Prepare base styles for context
-  const baseStyles = getDefaultCarouselStyles();
+  // const baseStyles = getDefaultCarouselStyles();
 
   // Render navigation buttons
   const renderNavigation = () => {

@@ -7,7 +7,7 @@ import {
   Shape,
 } from './Pagination.type';
 
-export interface PaginationProps {
+export interface PaginationProps extends ViewProps {
   /**
    * The current page number (1-based)
    */
@@ -77,9 +77,4 @@ export interface PaginationProps {
    * Custom styles for different parts of the pagination component
    */
   views?: PaginationStyles;
-
-  /**
-   * Additional props to be spread to the container element
-   */
-  [key: string]: any;
 }

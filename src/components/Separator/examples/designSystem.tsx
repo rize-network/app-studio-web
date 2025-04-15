@@ -11,10 +11,10 @@
 
 import React from 'react';
 import { Separator } from '../Separator';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Card } from '../../Card/Card';
 
 export const DesignSystemSeparator = () => {
@@ -22,11 +22,7 @@ export const DesignSystemSeparator = () => {
     <Vertical gap={32}>
       {/* Basic Separators */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Basic Separators
         </Text>
         <Vertical
@@ -35,12 +31,12 @@ export const DesignSystemSeparator = () => {
           padding={16}
           borderRadius="8px"
         >
-          <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+          <Text>
             This is content above the separator. The separator creates a visual
             distinction between content sections.
           </Text>
           <Separator spacing="8px" />
-          <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+          <Text>
             This is content below the separator. Notice how it helps organize
             the content into distinct sections.
           </Text>
@@ -49,11 +45,7 @@ export const DesignSystemSeparator = () => {
 
       {/* Separator Variants */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Separator Variants
         </Text>
         <Vertical
@@ -63,33 +55,21 @@ export const DesignSystemSeparator = () => {
           borderRadius="8px"
         >
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Solid (Default)
             </Text>
             <Separator variant="solid" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Dashed
             </Text>
             <Separator variant="dashed" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Dotted
             </Text>
             <Separator variant="dotted" spacing="8px" />
@@ -99,11 +79,7 @@ export const DesignSystemSeparator = () => {
 
       {/* Separator Thicknesses */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Separator Thicknesses
         </Text>
         <Vertical
@@ -113,33 +89,21 @@ export const DesignSystemSeparator = () => {
           borderRadius="8px"
         >
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Thin (1px)
             </Text>
             <Separator thickness="thin" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Medium (2px)
             </Text>
             <Separator thickness="medium" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Thick (4px)
             </Text>
             <Separator thickness="thick" spacing="8px" />
@@ -149,11 +113,7 @@ export const DesignSystemSeparator = () => {
 
       {/* Separator Orientations */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Separator Orientations
         </Text>
         <Vertical
@@ -163,22 +123,14 @@ export const DesignSystemSeparator = () => {
           borderRadius="8px"
         >
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Horizontal (Default)
             </Text>
             <Separator orientation="horizontal" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Vertical
             </Text>
             <Horizontal
@@ -188,13 +140,9 @@ export const DesignSystemSeparator = () => {
               padding={16}
               borderRadius="8px"
             >
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
-                Left Content
-              </Text>
+              <Text>Left Content</Text>
               <Separator orientation="vertical" spacing="16px" />
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
-                Right Content
-              </Text>
+              <Text>Right Content</Text>
             </Horizontal>
           </View>
         </Vertical>
@@ -202,11 +150,7 @@ export const DesignSystemSeparator = () => {
 
       {/* Separator Colors */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Separator Colors
         </Text>
         <Vertical
@@ -216,55 +160,35 @@ export const DesignSystemSeparator = () => {
           borderRadius="8px"
         >
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Default (Gray)
             </Text>
             <Separator color="color.gray.200" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Primary (Blue)
             </Text>
             <Separator color="color.blue.500" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Success (Green)
             </Text>
             <Separator color="color.green.500" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Warning (Yellow)
             </Text>
             <Separator color="color.yellow.500" spacing="8px" />
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Danger (Red)
             </Text>
             <Separator color="color.red.500" spacing="8px" />
@@ -274,11 +198,7 @@ export const DesignSystemSeparator = () => {
 
       {/* Separator with Label */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Separator with Label
         </Text>
         <Vertical
@@ -288,11 +208,7 @@ export const DesignSystemSeparator = () => {
           borderRadius="8px"
         >
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Simple Label
             </Text>
             <Separator
@@ -308,11 +224,7 @@ export const DesignSystemSeparator = () => {
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Styled Label
             </Text>
             <Separator
@@ -336,11 +248,7 @@ export const DesignSystemSeparator = () => {
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Colored Label with Thicker Line
             </Text>
             <Separator
@@ -368,31 +276,23 @@ export const DesignSystemSeparator = () => {
 
       {/* Separator in Card */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Separator in Card
         </Text>
         <Card variant="outlined" shape="rounded" isFullWidth>
           <Card.Header>
-            <Text
-              fontWeight="600"
-              fontSize="18px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text fontWeight="600" fontSize="18px">
               Card with Separators
             </Text>
           </Card.Header>
           <Card.Content>
             <Vertical gap={16}>
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+              <Text>
                 This is the first section of content in the card. The separator
                 below helps to organize the content into distinct sections.
               </Text>
               <Separator spacing="8px" />
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+              <Text>
                 This is the second section of content. Notice how the separator
                 creates a clear visual distinction between content areas within
                 the card.
@@ -410,7 +310,7 @@ export const DesignSystemSeparator = () => {
                   },
                 }}
               />
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+              <Text>
                 This is the third section with additional information. The
                 labeled separator provides context for this section.
               </Text>
@@ -421,11 +321,7 @@ export const DesignSystemSeparator = () => {
 
       {/* Advanced Customization */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Advanced Customization
         </Text>
         <Vertical
@@ -435,11 +331,7 @@ export const DesignSystemSeparator = () => {
           borderRadius="8px"
         >
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Gradient Separator
             </Text>
             <Separator
@@ -457,11 +349,7 @@ export const DesignSystemSeparator = () => {
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Double Line Separator
             </Text>
             <Separator
@@ -481,11 +369,7 @@ export const DesignSystemSeparator = () => {
           </View>
 
           <View>
-            <Text
-              marginBottom={4}
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text marginBottom={4} fontSize="14px">
               Fancy Label Separator
             </Text>
             <Separator
@@ -498,11 +382,7 @@ export const DesignSystemSeparator = () => {
                   borderRadius="16px"
                   boxShadow="0 2px 4px rgba(0,0,0,0.1)"
                 >
-                  <Text
-                    fontWeight="600"
-                    fontSize="12px"
-                    fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-                  >
+                  <Text fontWeight="600" fontSize="12px">
                     CUSTOM LABEL
                   </Text>
                 </View>

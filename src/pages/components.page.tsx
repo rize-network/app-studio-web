@@ -1,7 +1,6 @@
 import React, { Suspense, useState, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { View, Text } from 'app-studio';
-import { Horizontal } from 'src/components';
+import { View, Text, Horizontal } from 'app-studio';
 import DragAndDropPage from 'src/pages/dragAndDrop.page';
 import UploadPage from 'src/pages/upload.page';
 import AIChatPage from './chat.page';
@@ -16,7 +15,6 @@ const ButtonPage = lazy(() => import('src/pages/button.page'));
 const CardPage = lazy(() => import('src/pages/card.page'));
 const CarouselPage = lazy(() => import('src/pages/carousel.page'));
 const ChartPage = lazy(() => import('src/pages/chart.page'));
-const CenterPage = lazy(() => import('src/pages/center.page'));
 const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
 const ComboBoxPage = lazy(() => import('src/pages/comboBox.page'));
 const CommandPage = lazy(() => import('src/pages/command.page'));
@@ -26,7 +24,6 @@ const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
 const DropdownMenuPage = lazy(() => import('src/pages/dropdownMenu.page'));
 const FormikPage = lazy(() => import('src/pages/formik.page'));
 const HomePage = lazy(() => import('src/pages/home.page'));
-const HorizontalPage = lazy(() => import('src/pages/horizontal.page'));
 const HoverCardPage = lazy(() => import('src/pages/hoverCard.page'));
 const LinkPage = lazy(() => import('src/pages/link.page'));
 const LoaderPage = lazy(() => import('src/pages/loader.page'));
@@ -53,7 +50,6 @@ const ToastPage = lazy(() => import('src/pages/toast.page'));
 const TooltipPage = lazy(() => import('src/pages/tooltip.page'));
 const TogglePage = lazy(() => import('src/pages/toggle.page'));
 const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
-const VerticalPage = lazy(() => import('src/pages/vertical.page'));
 
 export const componentList = [
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
@@ -68,7 +64,6 @@ export const componentList = [
   { name: 'Card', path: '/card', element: <CardPage /> },
   { name: 'Carousel', path: '/carousel', element: <CarouselPage /> },
   { name: 'Chart', path: '/chart', element: <ChartPage /> },
-  { name: 'Center', path: '/center', element: <CenterPage /> },
   { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
   { name: 'Command', path: '/command', element: <CommandPage /> },
   { name: 'ComboBox', path: '/combobox', element: <ComboBoxPage /> },
@@ -86,7 +81,6 @@ export const componentList = [
   },
   { name: 'Formik', path: '/formik', element: <FormikPage /> },
   { name: 'Home', path: '/home', element: <HomePage /> },
-  { name: 'Horizontal', path: '/horizontal', element: <HorizontalPage /> },
   { name: 'HoverCard', path: '/hovercard', element: <HoverCardPage /> },
   { name: 'Link', path: '/link', element: <LinkPage /> },
   { name: 'Loader', path: '/loader', element: <LoaderPage /> },
@@ -120,7 +114,6 @@ export const componentList = [
   { name: 'Tooltip', path: '/tooltip', element: <TooltipPage /> },
   { name: 'Toggle', path: '/toggle', element: <TogglePage /> },
   { name: 'ToggleGroup', path: '/togglegroup', element: <ToggleGroupPage /> },
-  { name: 'Vertical', path: '/vertical', element: <VerticalPage /> },
   { name: 'Upload', path: '/upload', element: <UploadPage /> },
 ];
 

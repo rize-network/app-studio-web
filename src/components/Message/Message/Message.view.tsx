@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Themes } from './Message.style';
 import { MessageProps } from './Message.props';
@@ -42,7 +42,7 @@ export const MessageView = ({
   }, []);
 
   const Theme = theme ?? Themes;
-  const isWithAction = !!(action && actionText);
+  const showAction = !!(action && actionText);
 
   const containerStyle = {
     borderWidth: 1,
@@ -104,7 +104,7 @@ export const MessageView = ({
           </Text>
         )}
       </Vertical>
-      {isWithAction && (
+      {showAction && (
         <Text
           marginRight={10}
           onClick={action}

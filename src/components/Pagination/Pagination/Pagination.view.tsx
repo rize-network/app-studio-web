@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from '../../Layout/View/View';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { View } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { ChevronIcon } from '../../Icon/Icon';
 import { PaginationProps } from './Pagination.props';
@@ -11,7 +11,6 @@ import {
   ActivePageButtonStyles,
   DisabledButtonStyles,
 } from './Pagination.style';
-import { Form } from 'app-studio';
 
 export const PaginationView: React.FC<PaginationProps> = ({
   currentPage,

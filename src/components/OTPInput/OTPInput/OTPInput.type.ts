@@ -1,5 +1,4 @@
 import { ViewProps } from 'app-studio';
-import { Shape, Size, Variant } from '../../Layout/configs/Input.type';
 
 /**
  * Type of input for OTP fields

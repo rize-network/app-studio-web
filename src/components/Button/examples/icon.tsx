@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Center } from '../../Layout/Center/Center';
+import { Center } from 'app-studio';
 
 import { DustBinIcon } from '../../Icon/Icon';
 

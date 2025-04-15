@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
-import { View } from '../../Layout/View/View';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { View } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
 import {
   MenubarContextType,
   MenubarItem as MenubarItemType,
@@ -186,7 +186,7 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
 // Menubar Item component
 export const MenubarItem: React.FC<MenubarItemProps> = ({
   children,
-  id,
+  // id,
   icon,
   disabled = false,
   onClick,

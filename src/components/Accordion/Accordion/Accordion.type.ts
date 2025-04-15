@@ -1,5 +1,4 @@
 import { ViewProps } from 'app-studio';
-import { RefObject } from 'react';
 
 export type Shape = 'sharp' | 'rounded';
 export type Variant = 'default' | 'outline' | 'filled';

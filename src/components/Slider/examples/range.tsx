@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Slider } from '../Slider';
 

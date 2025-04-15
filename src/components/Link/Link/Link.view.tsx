@@ -1,7 +1,7 @@
 import React from 'react';
 import { Element } from 'app-studio';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { ExternalLinkIcon } from '../../Icon/Icon';
 import { LinkViewProps } from './Link.props';
 import { IconSizes } from './Link.style';

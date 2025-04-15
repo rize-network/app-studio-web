@@ -6,7 +6,7 @@ import {
   FieldIcons,
   FieldLabel,
   FieldWrapper,
-} from '../../../Layout/Input';
+} from '../../../Input';
 
 import countryList from '../countries.json';
 import {
@@ -162,7 +162,8 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     onBlur(event);
     setIsFocused(false);
   };
-  const isWithLabel = !!(isFocused && label);
+  // Show label if it exists and either the field is focused or has a value
+  const showLabel = !!(label && (isFocused || value));
   const fieldStyles = {
     margin: 0,
     paddingVerical: 8,
@@ -198,12 +199,12 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
         <FieldWrapper>
-          {isWithLabel && (
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
               color={'theme.primary'}

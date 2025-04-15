@@ -2,8 +2,8 @@ import React from 'react';
 import { Button } from '../../../Button/Button';
 import { FormikForm } from '../../../Formik/Formik.Form';
 
-import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { View } from '../../../Layout/View/View';
+import { Vertical } from 'app-studio';
+import { View } from 'app-studio';
 import { FormikCheckbox } from '../../../Formik/Formik.Checkbox';
 import { Formik } from 'formik';
 

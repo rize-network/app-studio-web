@@ -9,7 +9,7 @@ import {
   ShadowButton,
   VariantButtons,
 } from 'src/components/Button/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 export const ButtonPage = () => {
   return (
     <View>

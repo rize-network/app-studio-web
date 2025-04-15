@@ -1,9 +1,9 @@
 import React from 'react';
 import { Input, Typography } from 'app-studio';
-import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
-import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
-import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
+import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Input/FieldContent/FieldContent';
+import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 
 import { DatePickerViewProps } from './DatePicker.props';
 
@@ -34,7 +34,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
   onChangeText,
   ...props
 }) => {
-  const isWithLabel = !!(isFocused && label);
+  const showLabel = !!(isFocused && label);
 
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
@@ -85,12 +85,12 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
         <FieldWrapper>
-          {isWithLabel && (
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
               color={'theme.primary'}

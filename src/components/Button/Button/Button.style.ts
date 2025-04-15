@@ -17,73 +17,73 @@ import { Shape, Size, Variant } from './Button.type';
  */
 export const ButtonSizes: Record<Size, ViewProps> = {
   xs: {
-    // Height: 28px (7 × 4px)
-    height: '28px',
-    paddingTop: '4px',
-    paddingBottom: '4px',
-    paddingLeft: '8px',
-    paddingRight: '8px',
+    // Height: 24px (6 × 4px)
+    height: 24,
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 6,
+    paddingRight: 6,
     // Typography
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-    fontSize: '12px', // text-xs
+
+    fontSize: 12, // text-xs
     fontWeight: '500', // medium
-    lineHeight: '20px',
+    lineHeight: 20,
     letterSpacing: '-0.01em',
   },
   sm: {
     // Height: 32px (8 × 4px)
-    height: '32px',
-    paddingTop: '6px',
-    paddingBottom: '6px',
-    paddingLeft: '12px',
-    paddingRight: '12px',
+    height: 32,
+    paddingTop: 6,
+    paddingBottom: 6,
+    paddingLeft: 12,
+    paddingRight: 12,
     // Typography
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-    fontSize: '14px', // text-sm
+
+    fontSize: 14, // text-sm
     fontWeight: '500', // medium
-    lineHeight: '20px',
+    lineHeight: 20,
     letterSpacing: '-0.01em',
   },
   md: {
     // Height: 40px (10 × 4px) - standard height for interactive elements
-    height: '40px',
-    paddingTop: '8px',
-    paddingBottom: '8px',
-    paddingLeft: '16px',
-    paddingRight: '16px',
+    height: 40,
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
     // Typography
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-    fontSize: '14px', // text-sm/md
+
+    fontSize: 14, // text-sm/md
     fontWeight: '500', // medium
-    lineHeight: '24px',
+    lineHeight: 24,
     letterSpacing: '-0.01em',
   },
   lg: {
     // Height: 48px (12 × 4px)
-    height: '48px',
-    paddingTop: '12px',
-    paddingBottom: '12px',
-    paddingLeft: '20px',
-    paddingRight: '20px',
+    height: 48,
+    paddingTop: 12,
+    paddingBottom: 12,
+    paddingLeft: 20,
+    paddingRight: 20,
     // Typography
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-    fontSize: '16px', // text-md/lg
+
+    fontSize: 16, // text-md/lg
     fontWeight: '500', // medium
-    lineHeight: '24px',
+    lineHeight: 24,
     letterSpacing: '-0.01em',
   },
   xl: {
-    // Height: 56px (14 × 4px)
-    height: '56px',
-    paddingTop: '16px',
-    paddingBottom: '16px',
-    paddingLeft: '24px',
-    paddingRight: '24px',
+    // Height: 60px (15 × 4px)
+    height: 60,
+    paddingTop: 16,
+    paddingBottom: 16,
+    paddingLeft: 28,
+    paddingRight: 28,
     // Typography
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-    fontSize: '18px', // text-lg
+
+    fontSize: 18, // text-lg
     fontWeight: '500', // medium
-    lineHeight: '24px',
+    lineHeight: 28,
     letterSpacing: '-0.01em',
   },
 };
@@ -93,8 +93,8 @@ export const ButtonSizes: Record<Size, ViewProps> = {
  */
 export const ButtonShapes: Record<Shape, number | string> = {
   sharp: 0,
-  rounded: '8px', // Consistent with design system (rounded-md)
-  pillShaped: '9999px', // Full rounded for pill shape
+  rounded: 8,
+  pillShaped: 999, // Full rounded for pill shape
 };
 
 /**
@@ -102,29 +102,29 @@ export const ButtonShapes: Record<Shape, number | string> = {
  */
 export const IconSizes: Record<Size, ViewProps> = {
   xs: {
-    width: '16px',
-    height: '16px',
-    padding: '6px',
+    width: 16,
+    height: 16,
+    padding: 6,
   },
   sm: {
-    width: '20px',
-    height: '20px',
-    padding: '6px',
+    width: 20,
+    height: 20,
+    padding: 6,
   },
   md: {
-    width: '24px',
-    height: '24px',
-    padding: '8px',
+    width: 24,
+    height: 24,
+    padding: 8,
   },
   lg: {
-    width: '24px',
-    height: '24px',
-    padding: '12px',
+    width: 24,
+    height: 24,
+    padding: 12,
   },
   xl: {
-    width: '28px',
-    height: '28px',
-    padding: '14px',
+    width: 28,
+    height: 28,
+    padding: 14,
   },
 };
 
@@ -138,45 +138,51 @@ export const getButtonVariants = (
   filled: {
     backgroundColor: color,
     color: isLight ? 'color.gray.900' : 'color.white',
-    borderWidth: '1px',
+    borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'transparent',
-    _hover: {
-      filter: 'brightness(0.9)',
-      transform: 'translateY(-1px)',
-    },
-    _active: {
-      filter: 'brightness(0.85)',
-      transform: 'translateY(0)',
+    on: {
+      hover: {
+        filter: 'brightness(0.9)',
+        transform: 'translateY(-1px)',
+      },
+      active: {
+        filter: 'brightness(0.85)',
+        transform: 'translateY(0)',
+      },
     },
     transition: 'all 0.2s ease',
   },
   outline: {
     backgroundColor: 'transparent',
-    borderWidth: '1px',
+    borderWidth: 1,
     borderStyle: 'solid',
     borderColor: color,
     color: color,
-    _hover: {
-      backgroundColor: `${color}10`, // 10% opacity
-      transform: 'translateY(-1px)',
-    },
-    _active: {
-      backgroundColor: `${color}20`, // 20% opacity
-      transform: 'translateY(0)',
+    on: {
+      hover: {
+        backgroundColor: `${color}10`, // 10% opacity
+        transform: 'translateY(-1px)',
+      },
+      active: {
+        backgroundColor: `${color}20`, // 20% opacity
+        transform: 'translateY(0)',
+      },
     },
     transition: 'all 0.2s ease',
   },
   ghost: {
     backgroundColor: 'transparent',
     color: color,
-    _hover: {
-      backgroundColor: `${color}10`, // 10% opacity
-      transform: 'translateY(-1px)',
-    },
-    _active: {
-      backgroundColor: `${color}20`, // 20% opacity
-      transform: 'translateY(0)',
+    on: {
+      hover: {
+        backgroundColor: `${color}10`, // 10% opacity
+        transform: 'translateY(-1px)',
+      },
+      active: {
+        backgroundColor: `${color}20`, // 20% opacity
+        transform: 'translateY(0)',
+      },
     },
     transition: 'all 0.2s ease',
   },
@@ -184,10 +190,12 @@ export const getButtonVariants = (
     backgroundColor: 'transparent',
     color: color,
     textDecoration: 'underline',
-    textUnderlineOffset: '2px',
-    _hover: {
-      textDecoration: 'underline',
-      textDecorationThickness: '2px',
+    textUnderlineOffset: 2,
+    on: {
+      hover: {
+        textDecoration: 'underline',
+        textDecorationThickness: 2,
+      },
     },
     transition: 'all 0.2s ease',
   },

@@ -11,10 +11,10 @@
 
 import React from 'react';
 import { Button } from '../../Button/Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Toast } from '../Toast';
 
 export const DesignSystemToast = () => {
@@ -368,7 +368,7 @@ export const DesignSystemToast = () => {
                 'This toast uses a custom render function',
                 {
                   position: 'top-right',
-                  render: ({ id, onClose }) => (
+                  render: ({ onClose }) => (
                     <Vertical
                       backgroundColor="color.purple.100"
                       borderColor="color.purple.300"
@@ -380,19 +380,13 @@ export const DesignSystemToast = () => {
                       width="100%"
                       maxWidth="400px"
                     >
-                      <Text
-                        size="lg"
-                        fontWeight="600"
-                        color="color.purple.800"
-                        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-                      >
+                      <Text size="lg" fontWeight="600" color="color.purple.800">
                         Custom Design System Toast
                       </Text>
                       <Text
                         size="sm"
                         color="color.purple.700"
                         marginTop="8px"
-                        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
                         lineHeight="1.5"
                       >
                         This toast is completely custom rendered following the

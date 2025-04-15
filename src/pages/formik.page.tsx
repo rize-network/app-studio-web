@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from '../components/Layout/View/View';
+import { View } from 'app-studio';
 import {
   FormikTextAreaExemple,
   FormikTextFieldExemple,

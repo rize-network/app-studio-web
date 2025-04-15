@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Toast } from '../Toast';
 import { ToastPosition } from '../Toast/Toast.type';
 

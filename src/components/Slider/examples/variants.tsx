@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 import { Slider } from '../Slider';
 import { Variant } from '../Slider/Slider.type';
 

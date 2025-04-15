@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { View } from '../../Layout/View/View';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { View } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { useTheme } from 'app-studio';
 import { SeparatorProps } from './Separator.props';

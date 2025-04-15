@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chart } from '../Chart';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 
 export const DonutChartDemo = () => {
   const dataPoints = [

@@ -1,5 +1,4 @@
 import { ViewProps } from 'app-studio';
-import { ButtonProps } from '../../Button/Button/Button.props';
 
 export type NavigationPosition = 'inside' | 'outside';
 export type IndicatorPosition = 'top' | 'bottom';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menubar } from '../Menubar';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 
 export const VerticalMenubar = () => {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Separator } from '../Separator';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const SeparatorVariants = () => {
   return (

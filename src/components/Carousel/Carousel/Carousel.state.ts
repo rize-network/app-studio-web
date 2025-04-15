@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { generateId } from '../../../utils/id';
-import { CarouselProps } from './Carousel.props';
 
 export interface CarouselStateProps {
   defaultActiveIndex?: number;

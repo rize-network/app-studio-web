@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import {
   DefaultDemo,
   DesignSystemCards,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ViewProps } from 'app-studio';
 import { ToggleViewProps } from './Toggle.props';
-import { Center } from '../../Layout/Center/Center';
+import { Center } from 'app-studio';
 
 interface Props extends ToggleViewProps {
   views?: {

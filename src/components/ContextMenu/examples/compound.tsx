@@ -1,7 +1,6 @@
 import React from 'react';
 import { ContextMenu } from '../ContextMenu';
-import { View } from '../../Layout/View/View';
-import { Text } from '../../Text/Text';
+import { View } from 'app-studio';
 
 export const CompoundContextMenu = () => {
   const handleSelect = (action: string) => {

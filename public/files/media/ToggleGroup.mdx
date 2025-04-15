@@ -31,8 +31,8 @@ import React from 'react';
 import { DustBinIcon } from '../../Icon';
 import { ToggleGroup } from '../ToggleGroup';
 import { Shape } from '../ToggleGroup/ToggleGroup.type';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 
 export const ShapeDemo = () => {
   const items = [
@@ -82,7 +82,7 @@ import React from 'react';
 import { Text } from '../../Text/Text';
 import { ToggleGroup } from '../ToggleGroup';
 import { Variant } from '../ToggleGroup/ToggleGroup.type';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const VariantDemo = () => {
   const items = [
@@ -107,7 +107,7 @@ Optional colorScheme prop for theming the toggle group.
 ```tsx
 import React from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 
 export const ColorSchemeDemo = () => {
@@ -140,7 +140,7 @@ Optional callback function that fires when the active toggle changes, providing 
 import React, { useState } from 'react';
 import { ToggleGroup } from '../ToggleGroup';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const OnToggleChangeDemo = () => {
   const [newItems, setNewItems] = useState<any>([]);

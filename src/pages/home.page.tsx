@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LandingImage from 'src/assets/orange.webp';
-import { Button, Center, Horizontal, Text, Vertical } from 'src/components';
+import { Button, Center, Horizontal, Text, Vertical } from 'app-studio';
 import { Features } from 'src/features';
 
 export const HomePage = () => {

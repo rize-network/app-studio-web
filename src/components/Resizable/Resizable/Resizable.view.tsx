@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect } from 'react';
-import { View } from '../../Layout/View/View';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { View } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
 import {
   ResizableProps,
   ResizablePanelProps,

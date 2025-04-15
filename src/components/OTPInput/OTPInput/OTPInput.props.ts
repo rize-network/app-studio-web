@@ -1,7 +1,6 @@
-import React from 'react';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../utils/elevation';
-import { Shape, Size, Variant } from '../../Layout/configs/Input.type';
+import { Shape, Size, Variant } from '../../Input/Input.type';
 import { OTPInputStyles, OTPInputType } from './OTPInput.type';
 
 export interface OTPInputProps extends Omit<InputProps, 'size'> {

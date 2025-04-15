@@ -9,9 +9,8 @@
 
 import React from 'react';
 import { Text } from '../Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
+import { Vertical } from 'app-studio';
+import { View } from 'app-studio';
 
 export const DesignSystemText = () => (
   <Vertical gap={32}>

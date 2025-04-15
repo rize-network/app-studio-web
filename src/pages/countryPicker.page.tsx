@@ -13,7 +13,7 @@ import {
   StyledCountryPicker,
   VariantCountryPicker,
 } from 'src/components/Form/CountryPicker/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const CountryPickerPage = () => {
   return (

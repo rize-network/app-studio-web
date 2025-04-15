@@ -1,6 +1,5 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { AccordionProps } from './Accordion.props';
-import { AccordionType } from './Accordion.type';
 import { generateId } from '../../../utils/id';
 
 export const useAccordionState = ({

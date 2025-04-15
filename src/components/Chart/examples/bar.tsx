@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chart } from '../Chart';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 
 export const BarChartDemo = () => {
   const data = {
@@ -15,6 +15,11 @@ export const BarChartDemo = () => {
         name: 'Expenses',
         data: [20, 25, 30, 35, 30, 40],
         color: 'color.red.500',
+      },
+      {
+        name: 'Profit',
+        data: [10, 15, 5, 15, 19, 20],
+        color: 'color.green.500',
       },
     ],
   };

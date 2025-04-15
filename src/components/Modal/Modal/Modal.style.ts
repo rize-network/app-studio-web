@@ -79,7 +79,6 @@ export const ModalAnimations = {
  * Typography configurations for the Modal component
  */
 export const ModalTypography = {
-  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
   title: {
     fontSize: '18px', // 4.5 × 4px grid
     fontWeight: '600', // Semi-bold

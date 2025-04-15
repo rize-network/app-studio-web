@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Text } from '../../Text/Text';
-import { Center } from '../../Layout/Center/Center';
+import { Center } from 'app-studio';
 import { Image } from 'app-studio';
 import { AvatarViewProps } from './Avatar.props';
 import { AvatarSizeMap, DefaultAvatarStyles } from './Avatar.style';

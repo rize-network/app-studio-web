@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useRef } from 'react';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { SearchIcon } from '../../Icon/Icon';
 import {
   CommandProps,
@@ -252,7 +252,7 @@ export const CommandView: React.FC<
   };
 
   const hasGroups = groups.length > 0;
-  const hasCommands = commands.length > 0;
+  // const hasCommands = commands.length > 0;
   const isEmpty = filteredCommands.length === 0;
 
   return (
@@ -302,7 +302,7 @@ export const CommandView: React.FC<
                   heading={group.name}
                   views={views?.groupHeading}
                 >
-                  {group.commands.map((item: any, index: number) => {
+                  {group.commands.map((item: any) => {
                     const commandIndex = filteredCommands.findIndex(
                       (cmd) => cmd.id === item.id
                     );

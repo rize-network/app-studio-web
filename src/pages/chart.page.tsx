@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import {
   BarChartDemo,
   LineChartDemo,
@@ -8,6 +8,7 @@ import {
   DonutChartDemo,
   CustomChartDemo,
   ChartStatesDemo,
+  DesignSystemCharts,
 } from 'src/components/Chart/examples';
 
 const ChartPage = () => {
@@ -18,6 +19,13 @@ const ChartPage = () => {
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemCharts />
+            </td>
           </tr>
 
           <tr>

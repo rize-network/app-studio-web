@@ -4,7 +4,7 @@ import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 import { FormikPassword } from '../Formik.Password';
 
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const FormikPasswordExemple = () => {
   const initialValues = {

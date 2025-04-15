@@ -1,15 +1,13 @@
 import React from 'react';
 import {
-  Tabs,
-  View,
-  Text,
   MoonIcon,
   ShareIcon,
   PanelIcon,
   SaveIcon,
-  MinusIcon,
   PauseIcon,
-} from '../..'; // Assuming components are exported from index
+} from '../../Icon/Icon'; // Assuming components are exported from index
+import { Text, View } from 'app-studio';
+import { Tabs } from '../Tabs';
 
 // Example demonstrating basic usage of the Tabs component.
 export const Default = () => (

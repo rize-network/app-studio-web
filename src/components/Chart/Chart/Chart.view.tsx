@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Center } from '../../Layout/Center/Center';
+import { Horizontal } from 'app-studio';
+import { Center } from 'app-studio';
 import { Loader } from '../../Loader/Loader';
 import { ChartProps } from './Chart.props';
 import { useChartState } from './Chart.state';
@@ -80,7 +80,7 @@ export const ChartView: React.FC<ChartProps> = ({
   const renderLegend = () => {
     if (!showLegend || !chartData) return null;
 
-    let items = [];
+    let items: any[] = [];
 
     if (type === 'pie' || type === 'donut') {
       // For pie/donut charts, use dataPoints

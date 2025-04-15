@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Link } from '../Link';
 

@@ -76,7 +76,7 @@ export const getDefaultCardStyles = (_theme: any): CardStyles => ({
     backgroundColor: 'white',
     borderRadius: '8px', // Consistent with design system
     overflow: 'hidden',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     transition: 'all 0.2s ease',
     '@media (prefers-color-scheme: dark)': {
       backgroundColor: 'color.gray.800',

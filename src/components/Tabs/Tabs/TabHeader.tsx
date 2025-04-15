@@ -46,26 +46,15 @@ export const TabHeader: React.FC<TabHeaderProps> = ({
     borderBottomColor: isActive ? 'transparent' : 'color.gray.200',
     backgroundColor: isActive ? 'color.white' : 'transparent',
     color: isActive ? 'theme.primary' : 'color.gray.600',
-    fontWeight: isActive ? 'bold' : 'normal',
-    transition: 'all 0.2s ease',
+    fontWeight: 'normal',
     position: 'relative',
     // If active, show a bottom border that matches the background color
     // to create the illusion that the tab is connected to the content
-    ...(isActive && {
-      '::after': {
-        content: '""',
-        position: 'absolute',
-        bottom: -1,
-        left: 0,
-        right: 0,
-        height: '2px',
-        backgroundColor: 'color.white',
-      },
-    }),
+
     // Hover state
     on: {
       hover: {
-        backgroundColor: isActive ? 'color.white' : 'color.gray.50',
+        color: 'theme.primary',
       },
     },
   };

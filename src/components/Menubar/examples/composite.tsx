@@ -1,8 +1,8 @@
 import React from 'react';
 import { Menubar } from '../Menubar';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { EditIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+import { EditIcon } from '../../Icon/Icon';
 
 export const CompositeMenubar = () => {
   return (

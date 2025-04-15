@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Vertical, Text } from '../../../components';
+import { Vertical, Text } from 'app-studio';
 
 export const SideMenu = ({ docs, ...props }: any) => {
   return (

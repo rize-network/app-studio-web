@@ -52,7 +52,6 @@ export const DefaultSeparatorStyles = {
     transition: 'all 0.2s ease',
   },
   label: {
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
     fontSize: '14px',
     color: 'color.gray.500',
     paddingHorizontal: '8px', // 2 × 4px grid

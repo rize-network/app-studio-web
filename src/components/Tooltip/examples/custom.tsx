@@ -2,8 +2,7 @@ import React from 'react';
 import { Tooltip } from '../Tooltip';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { View } from '../../Layout/View/View';
+import { Vertical } from 'app-studio';
 
 export const CustomTooltip = () => {
   return (

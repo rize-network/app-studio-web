@@ -1,9 +1,9 @@
 import React from 'react';
 import { Sidebar } from '../Sidebar';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import {
   HomeIcon,
   SettingsIcon,
@@ -12,7 +12,7 @@ import {
   NotificationIcon,
 } from '../../Icon/Icon';
 import { Separator } from '../../Separator/Separator';
-import { useSidebarContext } from '../Sidebar/Sidebar.view';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
 
 export const AccessibleSidebar = () => {
   return (
@@ -75,18 +75,18 @@ export const AccessibleSidebar = () => {
                 MAIN NAVIGATION
               </Text>
 
-              <EnhancedNavItem
+              <SideBarNavItem
                 icon={<HomeIcon widthHeight={20} />}
                 label="Dashboard"
                 isActive
                 ariaLabel="Go to Dashboard"
               />
-              <EnhancedNavItem
+              <SideBarNavItem
                 icon={<UserIcon widthHeight={20} />}
                 label="Profile"
                 ariaLabel="Go to Profile"
               />
-              <EnhancedNavItem
+              <SideBarNavItem
                 icon={<NotificationIcon widthHeight={20} />}
                 label="Notifications"
                 ariaLabel="Go to Notifications"
@@ -104,12 +104,12 @@ export const AccessibleSidebar = () => {
                 SETTINGS
               </Text>
 
-              <EnhancedNavItem
+              <SideBarNavItem
                 icon={<SettingsIcon widthHeight={20} />}
                 label="Preferences"
                 ariaLabel="Go to Preferences"
               />
-              <EnhancedNavItem
+              <SideBarNavItem
                 icon={<HelpIcon widthHeight={20} />}
                 label="Help & Support"
                 ariaLabel="Go to Help and Support"
@@ -159,62 +159,5 @@ export const AccessibleSidebar = () => {
         </View>
       </Horizontal>
     </View>
-  );
-};
-
-interface EnhancedNavItemProps {
-  icon: React.ReactNode;
-  label: string;
-  isActive?: boolean;
-  ariaLabel?: string;
-  badge?: number;
-}
-
-const EnhancedNavItem = ({
-  icon,
-  label,
-  isActive = false,
-  ariaLabel,
-  badge,
-}: EnhancedNavItemProps) => {
-  // Import the useSidebarContext hook directly to avoid TypeScript errors
-  const { views } = useSidebarContext();
-
-  return (
-    <Horizontal
-      as="button"
-      role="link"
-      aria-label={ariaLabel || label}
-      aria-current={isActive ? 'page' : undefined}
-      alignItems="center"
-      cursor="pointer"
-      width="100%"
-      {...views?.navItem}
-      {...(isActive && views?.navItemActive)}
-      _hover={{
-        backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100',
-      }}
-    >
-      <View {...views?.navItemIcon}>{icon}</View>
-      <Text flex="1" {...views?.navItemText}>
-        {label}
-      </Text>
-      {badge && (
-        <View
-          minWidth="20px"
-          height="20px"
-          borderRadius="full"
-          backgroundColor={isActive ? 'color.blue.500' : 'color.gray.400'}
-          color="white"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          fontSize="xs"
-          fontWeight="bold"
-        >
-          {badge}
-        </View>
-      )}
-    </Horizontal>
   );
 };

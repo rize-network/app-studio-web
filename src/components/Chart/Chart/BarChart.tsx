@@ -1,6 +1,4 @@
 import React, { useMemo } from 'react';
-import { View } from '../../Layout/View/View';
-import { Text } from '../../Text/Text';
 import { ChartData } from './Chart.type';
 import {
   BarStyles,
@@ -58,7 +56,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   // Generate y-axis ticks
   const yAxisTicks = useMemo(() => {
     const tickCount = 5;
-    const ticks = [];
+    const ticks: any[] = [];
 
     for (let i = 0; i <= tickCount; i++) {
       const value = (maxValue / tickCount) * i;

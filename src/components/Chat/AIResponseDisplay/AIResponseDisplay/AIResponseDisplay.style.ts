@@ -12,7 +12,7 @@ export const containerStyles: ViewProps = {
 
 export const textStyles: ViewProps = {
   // Typography guidelines: body text uses sans-serif font at 16px
-  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
   fontSize: 'md', // 16px
   fontWeight: '500', // Medium weight for better readability
   lineHeight: '1.6', // Generous line height for readability

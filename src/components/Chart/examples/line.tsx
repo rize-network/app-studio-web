@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chart } from '../Chart';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 
 export const LineChartDemo = () => {
   const data = {
@@ -9,12 +9,22 @@ export const LineChartDemo = () => {
       {
         name: 'Users',
         data: [500, 800, 1200, 1800, 2500, 3000],
-        color: 'color.purple.500',
+        color: 'color.blue.500',
       },
       {
         name: 'Sessions',
         data: [1000, 1600, 2400, 3600, 5000, 6000],
-        color: 'color.teal.500',
+        color: 'color.green.500',
+      },
+      {
+        name: 'Page Views',
+        data: [1500, 2400, 3600, 5400, 7500, 9000],
+        color: 'color.purple.500',
+      },
+      {
+        name: 'Conversions',
+        data: [50, 80, 120, 180, 250, 300],
+        color: 'color.orange.500',
       },
     ],
   };

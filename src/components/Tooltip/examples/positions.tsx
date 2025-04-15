@@ -2,9 +2,8 @@ import React from 'react';
 import { Tooltip } from '../Tooltip';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 
 export const TooltipPositions = () => {
   return (

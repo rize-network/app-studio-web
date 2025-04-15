@@ -11,10 +11,9 @@
 
 import React from 'react';
 import { TextArea } from '../TextArea';
-import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
 import { Text } from '../../../Text/Text';
-import { View } from '../../../Layout/View/View';
+import { View } from 'app-studio';
 
 export const DesignSystemTextAreas = () => (
   <Vertical gap={24}>

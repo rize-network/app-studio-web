@@ -16,7 +16,7 @@ import {
 } from './Button.style';
 // We don't need to import Variant as it's already imported in Button.style
 import { Loader } from '../../Loader/Loader';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 var contrast = require('contrast');
 
@@ -152,7 +152,7 @@ const ButtonView: React.FC<Props> = ({
       onMouseLeave={() => handleHover(false)}
       cursor={isActive ? 'pointer' : 'default'}
       // Apply consistent styling according to design guidelines
-      fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+
       // Apply shadow if provided
       boxShadow={shadow ? shadow : undefined}
       // Apply default props and styles
@@ -180,7 +180,6 @@ const ButtonView: React.FC<Props> = ({
           textDecorationColor={'theme.primary'}
           textDecorationThickness="1px"
           textUnderlineOffset="2px"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           transition="all 0.2s ease"
           isExternal={isExternal}
           _hover={{

@@ -13,7 +13,7 @@ import {
   StyledArea,
   VariantsArea,
 } from 'src/components/Form/TextArea/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const TextAreaPage = () => {
   return (

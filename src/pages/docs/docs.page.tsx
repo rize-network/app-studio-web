@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'app-studio';
 import { useParams } from 'react-router-dom';
-import { Alert, Horizontal, Loader, Vertical } from '../../components';
+import { Alert, Loader } from '../../components';
+import { Horizontal, Vertical } from 'app-studio';
 import { loadDocs } from '../../docsLoader';
 import * as runtime from 'react/jsx-runtime';
 
 import { SideMenu } from './components/docs.elements';
-import { MarkdownEditor } from './components/MarkdownEditor.component';
 import LiveCode from './components/LiveCode.component';
 import { MDXProvider } from '@mdx-js/react';
 import { evaluate } from '@mdx-js/mdx';

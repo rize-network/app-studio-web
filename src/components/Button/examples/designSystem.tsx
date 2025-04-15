@@ -11,10 +11,10 @@
 
 import React from 'react';
 import { Button } from '../Button';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 
 export const DesignSystemButtons = () => (
   <Vertical gap={24}>
@@ -103,28 +103,43 @@ export const DesignSystemButtons = () => (
       </Text>
       <Horizontal gap={16} alignItems="center" flexWrap="wrap">
         <Button
-          backgroundColor="color.blue.500"
-          color="white"
-          _hover={{
-            backgroundColor: 'color.blue.600',
+          views={{
+            container: {
+              backgroundColor: 'color.blue.500',
+              color: 'white',
+              on: {
+                hover: {
+                  backgroundColor: 'color.blue.600',
+                },
+              },
+            },
           }}
         >
           Custom Color
         </Button>
         <Button
-          backgroundColor="color.green.500"
-          color="white"
-          borderRadius="16px"
-          boxShadow="0 4px 14px rgba(0, 0, 0, 0.1)"
+          views={{
+            container: {
+              backgroundColor: 'color.green.500',
+              color: 'white',
+              borderRadius: '16px',
+              boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
+            },
+          }}
         >
           Custom Shape
         </Button>
         <Button
-          backgroundColor="color.purple.500"
-          color="white"
-          paddingX="32px"
-          fontSize="20px"
-          fontWeight="bold"
+          views={{
+            container: {
+              backgroundColor: 'color.purple.500',
+              color: 'white',
+              paddingLeft: '32px',
+              paddingRight: '32px',
+              fontSize: '20px',
+              fontWeight: 'bold',
+            },
+          }}
         >
           Custom Text
         </Button>

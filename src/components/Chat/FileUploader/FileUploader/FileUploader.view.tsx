@@ -4,8 +4,8 @@
 
 import React from 'react';
 import { View } from 'app-studio';
-import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
 import { Button } from '../../../Button/Button';
 import { FileUploaderProps } from './FileUploader.props';

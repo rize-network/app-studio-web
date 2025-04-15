@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTheme, View, ViewProps } from 'app-studio';
-import { Center } from '../../Layout/Center/Center';
+import { Center } from 'app-studio';
 
 import {
   DefaultSpinnerProps,

@@ -14,7 +14,7 @@ import {
   StyledCheckbox,
   InfoTextDemo,
 } from 'src/components/Form/Checkbox/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const CheckboxPage = () => {
   return (

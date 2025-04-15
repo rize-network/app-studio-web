@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Vertical } from 'src/components';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 import { cleanup, render, screen } from '@testing-library/react';
 afterEach(() => {

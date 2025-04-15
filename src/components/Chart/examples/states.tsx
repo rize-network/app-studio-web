@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Chart } from '../Chart';
-import { View } from '../../Layout/View/View';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { View } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Button } from '../../Button/Button';
 

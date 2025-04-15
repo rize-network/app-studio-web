@@ -3,7 +3,6 @@
  */
 
 import { ViewProps } from 'app-studio';
-import { Message } from '../../ChatInterface/ChatInterface/ChatInterface.type';
 
 export interface MessageBubbleStyles {
   container?: ViewProps;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from '../../Layout/View/View';
-import { Center } from '../../Layout/Center/Center';
+import { View } from 'app-studio';
+import { Center } from 'app-studio';
 import { AspectRatioProps } from './AspectRatio.props';
 
 // Declaration of a functional component named AspectRatioView.

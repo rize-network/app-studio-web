@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text as TextApp } from 'src/components';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import { Size, TextWeights } from 'src/components/Text/Text/Text.type';
 import { DesignSystemText } from 'src/components/Text/examples';
 

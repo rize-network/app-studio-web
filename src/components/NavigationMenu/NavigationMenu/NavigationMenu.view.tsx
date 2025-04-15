@@ -68,7 +68,6 @@ export const NavigationMenuList: React.FC<NavigationMenuListProps> = ({
     <Container
       width="100%"
       {...NavigationMenuOrientations[orientation]}
-      fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
       transition="all 0.2s ease"
       borderRadius="4px"
       {...views?.container}
@@ -143,7 +142,6 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
           opacity={disabled ? 0.6 : 1}
           borderRadius="4px"
           transition="all 0.2s ease"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           {...NavigationMenuSizes[size]}
           {...NavigationMenuVariants[variant]}
           {...(isActive ? NavigationMenuItemStates.active : {})}
@@ -203,7 +201,6 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
         alignItems="center"
         borderRadius="4px"
         transition="all 0.2s ease"
-        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
         gap="8px"
         {...NavigationMenuSizes[size]}
         {...NavigationMenuVariants[variant]}
@@ -305,6 +302,13 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
       paddingTop={orientation === 'horizontal' ? 8 : 0}
       overflow="hidden"
       width="100%"
+      position={orientation === 'horizontal' ? 'absolute' : 'relative'}
+      backgroundColor={orientation === 'horizontal' ? 'white' : 'transparent'}
+      boxShadow={
+        orientation === 'horizontal' ? '0 4px 6px rgba(0, 0, 0, 0.1)' : 'none'
+      }
+      borderRadius={orientation === 'horizontal' ? '4px' : '0'}
+      zIndex={orientation === 'horizontal' ? 10 : 1}
       {...views?.container}
     >
       {children}

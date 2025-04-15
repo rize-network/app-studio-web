@@ -1,10 +1,10 @@
 import React, { useEffect, createContext } from 'react';
 import { Input, useTheme } from 'app-studio';
-import { FieldContainer } from '../../Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from '../../Layout/Input/FieldContent/FieldContent';
-import { FieldLabel } from '../../Layout/Input/FieldLabel/FieldLabel';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
+import { FieldContainer } from '../../Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../Input/FieldContent/FieldContent';
+import { FieldLabel } from '../../Input/FieldLabel/FieldLabel';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 import { OTPInputViewProps } from './OTPInput.props';
 
 // Create a context for OTP input slots
@@ -125,7 +125,7 @@ const OTPInputView: React.FC<
   ...props
 }) => {
   useTheme(); // Initialize theme context
-  const isWithLabel = !!label;
+  const showLabel = !!label;
 
   // Create context value for slots
   const contextValue = React.useMemo(() => {
@@ -248,7 +248,7 @@ const OTPInputView: React.FC<
             isDisabled={isDisabled}
             isReadOnly={isReadOnly}
             isFocused={slot.isActive}
-            isWithLabel={false}
+            showLabel={false}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             justifyContent="center"
@@ -358,8 +358,13 @@ const OTPInputView: React.FC<
         <style>{NOSCRIPT_CSS_FALLBACK}</style>
       </noscript>
 
-      <FieldContainer helperText={helperText} error={error} views={views}>
-        {isWithLabel && (
+      <FieldContainer
+        helperText={helperText}
+        error={error}
+        views={views}
+        {...props}
+      >
+        {showLabel && (
           <FieldLabel
             htmlFor={id}
             color={'theme.primary'}

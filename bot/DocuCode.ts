@@ -1,5 +1,5 @@
 import { FileHandler } from './FileHandler';
-import { API_CONFIG, APPLICATION_SETTINGS } from './Config';
+import { APPLICATION_SETTINGS } from './Config';
 import { extractJsonCode } from './extractors';
 import { CommentPrompt } from './prompt/3-comment';
 import path from 'path';

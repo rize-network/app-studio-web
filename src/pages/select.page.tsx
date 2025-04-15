@@ -14,7 +14,7 @@ import { ReadOnlySelect } from 'src/components/Form/Select/examples/ReadOnlyInpu
 import { ShadowSelect } from 'src/components/Form/Select/examples/Shadow';
 import { SizeSelect } from 'src/components/Form/Select/examples/SizeInput';
 import { StyledSelect } from 'src/components/Form/Select/examples/StylesInput';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const SelectPage = () => {
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from '../../Text/Text';
 import { ToggleGroup } from '../ToggleGroup';
 import { Variant } from '../ToggleGroup/ToggleGroup.type';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const VariantDemo = () => {
   const items = [

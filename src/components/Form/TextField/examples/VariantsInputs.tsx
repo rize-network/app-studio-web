@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField } from '../../../Form/TextField/TextField';
 
-import { Vertical } from '../../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Variant } from '../TextField/TextField.type';
 

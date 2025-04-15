@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Horizontal, Text, Vertical } from 'app-studio';
+import { View, Horizontal, Vertical } from 'app-studio';
 import { TabsViewProps } from './Tabs.props';
 import { TabHeader } from './TabHeader';
 

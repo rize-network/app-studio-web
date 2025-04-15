@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { useToast } from '../Toast';
 
@@ -11,7 +11,7 @@ export const HookUsageDemo = () => {
 
   const showCustomRenderToast = () => {
     toast.success('Custom Render', 'This toast uses a custom render function', {
-      render: ({ id, onClose }) => (
+      render: ({ onClose }) => (
         <Vertical
           backgroundColor="color.purple.100"
           borderColor="color.purple.300"

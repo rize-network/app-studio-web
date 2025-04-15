@@ -5,10 +5,10 @@
  */
 
 import React from 'react';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { WarningIcon, InfoIcon, ErrorIcon, SuccessIcon } from '../../Icon/Icon';
 import { AlertProps } from './Alert.props';
 import { Themes } from './Alert.style';
@@ -27,9 +27,12 @@ export const AlertView = ({
   const getIcon = () => {
     if (icon) return icon;
 
+    // Use the theme color directly from Themes
+    const iconColor = views?.icon?.color ?? Themes[variant].icon.color;
+
     const iconProps = {
       size: 20,
-      color: views?.icon?.color ?? Themes[variant].icon.color,
+      color: iconColor,
     };
 
     switch (variant) {
@@ -78,7 +81,6 @@ export const AlertView = ({
           fontSize="16px"
           fontWeight="600" // Semi-bold
           lineHeight="24px"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           color={Themes[variant].content.color}
           {...views?.title}
         >
@@ -89,7 +91,6 @@ export const AlertView = ({
           fontSize="14px"
           fontWeight="400" // Regular
           lineHeight="20px"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           color={Themes[variant].content.color}
           {...views?.description}
         >

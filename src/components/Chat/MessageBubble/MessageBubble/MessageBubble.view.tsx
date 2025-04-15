@@ -4,8 +4,8 @@
 
 import React from 'react';
 import { View } from 'app-studio';
-import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
 import { Button } from '../../../Button/Button';
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator';
@@ -48,7 +48,7 @@ export const MessageBubbleView: React.FC<Props> = ({
   saveEditing,
   ...props
 }) => {
-  const { id, type, content, timestamp, isLoading } = message;
+  const { type, content, timestamp, isLoading } = message;
 
   const formatTimestamp = (date: Date) => {
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });

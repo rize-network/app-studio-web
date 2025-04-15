@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 import { Shape } from '../Button/Button.type';
 

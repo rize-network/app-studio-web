@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { InfoIcon, PlayIcon, DustBinIcon, CloseIcon } from '../../Icon/Icon';
 import { ToastProps, ToastContainerProps } from './Toast.props';
 import { Themes, ToastPositions } from './Toast.style';
@@ -102,7 +102,6 @@ export const ToastView: React.FC<ToastProps> = ({
           size="md"
           fontWeight="600" // Semi-bold for better readability
           color={Theme[variant].content.color}
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           lineHeight="1.4"
           {...views?.title}
         >
@@ -113,7 +112,6 @@ export const ToastView: React.FC<ToastProps> = ({
           <Text
             size="sm"
             color={Theme[variant].content.color}
-            fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
             fontWeight="400" // Regular weight
             lineHeight="1.5"
             {...views?.description}
@@ -129,7 +127,6 @@ export const ToastView: React.FC<ToastProps> = ({
             marginTop="8px" // 2 × 4px grid
             cursor="pointer"
             color={Theme[variant].content.color}
-            fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
             onClick={(e: React.MouseEvent) => {
               e.stopPropagation();
               action();
@@ -191,9 +188,9 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
     };
 
     // Group toasts by their position or the container's default position
-    toasts.forEach((toast) => {
+    toasts.forEach((toast: any) => {
       const pos = toast.position || position;
-      grouped[pos].push(toast);
+      grouped[pos as ToastPosition].push(toast);
     });
 
     // Apply limits to each position group
@@ -222,7 +219,7 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
       {...ToastPositions[position as ToastPosition]}
       style={containerStyle}
     >
-      {visibleToasts.map((toast) => (
+      {visibleToasts.map((toast: any) => (
         <View
           key={toast.id}
           pointerEvents="auto"

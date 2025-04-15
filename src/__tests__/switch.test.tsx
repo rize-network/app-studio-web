@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { Switch } from 'src/components';
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 
 afterEach(() => {
   cleanup();

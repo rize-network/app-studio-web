@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Text } from 'src/components/Text/Text';
-import { Size } from 'src/components/Text/Text/Text.type';
 
 import { cleanup, render, screen } from '@testing-library/react';
 

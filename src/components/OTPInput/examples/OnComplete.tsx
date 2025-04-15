@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { OTPInput } from '../OTPInput';
 

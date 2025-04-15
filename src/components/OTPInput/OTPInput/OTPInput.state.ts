@@ -321,7 +321,7 @@ export const useOTPInputState = ({
       }
     };
     updateRootHeight();
-    const resizeObserver = new ResizeObserver(updateRootHeight);
+    const resizeObserver = new (window as any).ResizeObserver(updateRootHeight);
     resizeObserver.observe(input);
 
     return () => {

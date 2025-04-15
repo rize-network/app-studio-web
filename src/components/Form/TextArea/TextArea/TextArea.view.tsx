@@ -12,7 +12,7 @@ import {
   FieldContent,
   FieldLabel,
   FieldWrapper,
-} from '../../../Layout/Input';
+} from '../../../Input';
 import { TextAreaViewProps } from './TextArea.props';
 const TextAreaView: React.FC<TextAreaViewProps> = ({
   id,
@@ -47,7 +47,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   views = { box: {}, text: {}, label: {}, helperText: {}, field: {} },
   ...props
 }) => {
-  const isWithLabel = !!(isFocused && label);
+  const showLabel = !!(isFocused && label);
   /**
    * Styles for the textarea field
    */
@@ -72,7 +72,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     // Typography properties
     fontSize: Typography.fontSizes[size],
     lineHeight: '1.5', // 1.5 × font size for better readability in multi-line text
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
 
     // Visual properties
@@ -131,12 +131,12 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
         <FieldWrapper>
-          {isWithLabel && (
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
               color={'theme.primary'}

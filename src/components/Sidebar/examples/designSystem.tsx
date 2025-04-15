@@ -23,6 +23,7 @@ import {
   ChartIcon,
   StarIcon,
 } from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
 
 export const DesignSystemSidebar = () => {
   return (
@@ -42,50 +43,46 @@ export const DesignSystemSidebar = () => {
           <Horizontal width="100%" height="100%">
             <Sidebar defaultExpanded={true} fixed={false}>
               <Sidebar.Header>
-                <Text
-                  fontWeight="600"
-                  size="lg"
-                  fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-                >
+                <Text fontWeight="600" size="lg">
                   Design System
                 </Text>
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={20} />}
                     label="Home"
                     isActive
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<ChartIcon widthHeight={20} />}
                     label="Dashboard"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={20} />}
                     label="Profile"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<NotificationIcon widthHeight={20} />}
                     label="Notifications"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={20} />}
                     label="Settings"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<DocumentIcon widthHeight={20} />}
                     label="Documents"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SearchIcon widthHeight={20} />}
                     label="Search"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<StarIcon widthHeight={20} />}
                     label="Favorites"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HelpIcon widthHeight={20} />}
                     label="Help"
                     isDisabled
@@ -93,25 +90,16 @@ export const DesignSystemSidebar = () => {
                 </Vertical>
               </Sidebar.Content>
               <Sidebar.Footer>
-                <Text
-                  size="sm"
-                  color="color.gray.500"
-                  fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-                >
+                <Text size="sm" color="color.gray.500">
                   © 2023 Design System
                 </Text>
               </Sidebar.Footer>
             </Sidebar>
             <View flex="1" padding="16px" backgroundColor="color.gray.50">
-              <Text
-                fontWeight="600"
-                size="xl"
-                marginBottom="16px"
-                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-              >
+              <Text fontWeight="600" size="xl" marginBottom="16px">
                 Main Content
               </Text>
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+              <Text>
                 This is the main content area. It will adjust based on the
                 sidebar state. The sidebar follows the design system guidelines
                 with consistent typography, spacing, colors, and animations.
@@ -147,16 +135,16 @@ export const DesignSystemSidebar = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={20} />}
                     label="Home"
                     isActive
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={20} />}
                     label="Profile"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={20} />}
                     label="Settings"
                   />
@@ -185,16 +173,16 @@ export const DesignSystemSidebar = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={20} />}
                     label="Home"
                     isActive
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={20} />}
                     label="Profile"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={20} />}
                     label="Settings"
                   />
@@ -223,16 +211,16 @@ export const DesignSystemSidebar = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={20} />}
                     label="Home"
                     isActive
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={20} />}
                     label="Profile"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={20} />}
                     label="Settings"
                   />
@@ -269,18 +257,18 @@ export const DesignSystemSidebar = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={16} />}
                     label="Home"
                     isActive
                     size="sm"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={16} />}
                     label="Profile"
                     size="sm"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={16} />}
                     label="Settings"
                     size="sm"
@@ -310,16 +298,16 @@ export const DesignSystemSidebar = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={20} />}
                     label="Home"
                     isActive
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={20} />}
                     label="Profile"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={20} />}
                     label="Settings"
                   />
@@ -348,18 +336,18 @@ export const DesignSystemSidebar = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={24} />}
                     label="Home"
                     isActive
                     size="lg"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={24} />}
                     label="Profile"
                     size="lg"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={24} />}
                     label="Settings"
                     size="lg"
@@ -390,16 +378,16 @@ export const DesignSystemSidebar = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={20} />}
                     label="Home"
                     isActive
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={20} />}
                     label="Profile"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={20} />}
                     label="Settings"
                   />
@@ -419,80 +407,5 @@ export const DesignSystemSidebar = () => {
         </View>
       </View>
     </Vertical>
-  );
-};
-
-// NavItem component with design system styling
-const NavItem = ({
-  icon,
-  label,
-  isActive = false,
-  isDisabled = false,
-  size = 'md',
-}: any) => {
-  // Size-based styles
-  const sizeStyles: any = {
-    sm: {
-      padding: '6px 10px', // 1.5×4px and 2.5×4px grid
-      gap: 8, // 2×4px grid
-      fontSize: '14px',
-    },
-    md: {
-      padding: '8px 12px', // 2×4px and 3×4px grid
-      gap: 12, // 3×4px grid
-      fontSize: '16px',
-    },
-    lg: {
-      padding: '10px 16px', // 2.5×4px and 4×4px grid
-      gap: 16, // 4×4px grid
-      fontSize: '18px',
-    },
-  };
-
-  return (
-    <Horizontal
-      alignItems="center"
-      gap={sizeStyles[size].gap}
-      padding={sizeStyles[size].padding}
-      borderRadius="4px"
-      backgroundColor={isActive ? 'color.blue.50' : 'transparent'}
-      color={
-        isActive
-          ? 'color.blue.700'
-          : isDisabled
-          ? 'color.gray.400'
-          : 'color.gray.700'
-      }
-      fontWeight={isActive ? '600' : '500'}
-      cursor={isDisabled ? 'not-allowed' : 'pointer'}
-      opacity={isDisabled ? 0.6 : 1}
-      transition="all 0.2s ease"
-      borderLeftWidth={isActive ? '3px' : '0px'}
-      borderLeftStyle="solid"
-      borderLeftColor="color.blue.600"
-      fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-      fontSize={sizeStyles[size].fontSize}
-      _hover={
-        !isDisabled
-          ? {
-              backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100',
-            }
-          : {}
-      }
-    >
-      <View
-        color={
-          isActive
-            ? 'color.blue.600'
-            : isDisabled
-            ? 'color.gray.400'
-            : 'color.gray.500'
-        }
-        transition="color 0.2s ease"
-      >
-        {icon}
-      </View>
-      <Text>{label}</Text>
-    </Horizontal>
   );
 };

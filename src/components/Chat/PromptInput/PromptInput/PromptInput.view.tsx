@@ -11,7 +11,6 @@ import { PromptInputProps } from './PromptInput.props';
 import {
   containerStyles,
   getInputContainerStyles,
-  textareaStyles,
   buttonsContainerStyles,
   suggestionsContainerStyles,
   suggestionStyles,

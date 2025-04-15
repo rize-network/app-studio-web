@@ -11,10 +11,10 @@
 
 import React from 'react';
 import { Avatar } from '../Avatar';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 
 export const DesignSystemAvatars = () => {
   // Sample image URLs
@@ -31,22 +31,14 @@ export const DesignSystemAvatars = () => {
     <Vertical gap={32}>
       {/* Size Variants */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Size Variants
         </Text>
         <Horizontal gap={16} alignItems="center" flexWrap="wrap">
           {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
             <Vertical key={size} alignItems="center" gap={8}>
               <Avatar src={sampleImages[0]} size={size as any} />
-              <Text
-                fontSize="12px"
-                color="color.gray.500"
-                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-              >
+              <Text fontSize="12px" color="color.gray.500">
                 {size}
               </Text>
             </Vertical>
@@ -56,11 +48,7 @@ export const DesignSystemAvatars = () => {
 
       {/* Fallback Initials */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Fallback Initials
         </Text>
         <Horizontal gap={16} alignItems="center" flexWrap="wrap">
@@ -72,11 +60,7 @@ export const DesignSystemAvatars = () => {
 
       {/* Image Avatars */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Image Avatars
         </Text>
         <Horizontal gap={16} alignItems="center" flexWrap="wrap">
@@ -88,11 +72,7 @@ export const DesignSystemAvatars = () => {
 
       {/* Custom Styling */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Custom Styling
         </Text>
         <Horizontal gap={16} alignItems="center" flexWrap="wrap">
@@ -107,11 +87,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text
-              fontSize="12px"
-              color="color.gray.500"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text fontSize="12px" color="color.gray.500">
               Border
             </Text>
           </Vertical>
@@ -126,11 +102,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text
-              fontSize="12px"
-              color="color.gray.500"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text fontSize="12px" color="color.gray.500">
               Shadow
             </Text>
           </Vertical>
@@ -150,11 +122,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text
-              fontSize="12px"
-              color="color.gray.500"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text fontSize="12px" color="color.gray.500">
               Custom Fallback
             </Text>
           </Vertical>
@@ -176,11 +144,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text
-              fontSize="12px"
-              color="color.gray.500"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
+            <Text fontSize="12px" color="color.gray.500">
               Gradient
             </Text>
           </Vertical>
@@ -189,11 +153,7 @@ export const DesignSystemAvatars = () => {
 
       {/* Avatar Groups */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Avatar Groups
         </Text>
         <Horizontal>
@@ -224,11 +184,7 @@ export const DesignSystemAvatars = () => {
 
       {/* Interactive Avatars */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Interactive Avatars
         </Text>
         <Horizontal gap={16} alignItems="center" flexWrap="wrap">

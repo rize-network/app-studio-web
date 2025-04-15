@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme, Image, ViewProps, ImageProps } from 'app-studio';
-import { Center } from '../Layout/Center/Center';
+import { Center } from 'app-studio';
 
 export interface FileProps extends ViewProps {
   src: string;

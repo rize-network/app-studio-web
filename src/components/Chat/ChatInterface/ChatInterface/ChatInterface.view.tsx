@@ -4,8 +4,6 @@
 
 import React from 'react';
 import { View } from 'app-studio';
-import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
 import { Text } from '../../../Text/Text';
 import { ChatInterfaceProps } from './ChatInterface.props';
 import {
@@ -18,7 +16,6 @@ import {
 } from './ChatInterface.style';
 import { MessageBubble } from '../../MessageBubble/MessageBubble';
 import { PromptInput } from '../../PromptInput/PromptInput';
-import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator';
 
 interface Props extends ChatInterfaceProps {
   inputValue: string;

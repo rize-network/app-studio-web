@@ -11,9 +11,9 @@
 
 import React from 'react';
 import { Alert } from '../Alert';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { EditIcon } from '../../Icon/Icon';
 
 export const DesignSystemAlerts = () => (

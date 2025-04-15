@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 import React from 'react';
-import { Center } from '../Layout/Center/Center';
+import { Center } from 'app-studio';
 
 // Base icon interface with added transform and orientation
 export interface IconProps extends ViewProps {

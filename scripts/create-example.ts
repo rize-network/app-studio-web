@@ -65,7 +65,7 @@ function createPropDemoContent(
   const ComponentName =
     componentName.charAt(0).toUpperCase() + componentName.slice(1);
   return `import React from 'react';
-import { View } from 'src/components/Layout/View/View';import { ${ComponentName} } from '../${ComponentName}';
+import { View } from 'app-studio';import { ${ComponentName} } from '../${ComponentName}';
 
 export const ${
     propName.charAt(0).toUpperCase() + propName.slice(1)

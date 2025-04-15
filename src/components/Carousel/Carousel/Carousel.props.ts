@@ -6,7 +6,6 @@ import {
   IndicatorVariant,
   NavigationPosition,
   SlideDirection,
-  CarouselContextValue,
 } from './Carousel.type';
 
 export interface CarouselProps extends Omit<ViewProps, 'position'> {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '../../Button/Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { OTPInput } from '../OTPInput';
 

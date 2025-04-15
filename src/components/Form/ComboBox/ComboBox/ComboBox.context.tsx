@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 interface ComboBoxContextType {
   // Defines an object that tracks the open state of combo boxes by ID
   openDropdowns: { [key: string]: boolean };

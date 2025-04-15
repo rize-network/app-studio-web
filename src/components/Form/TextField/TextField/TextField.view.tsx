@@ -7,11 +7,11 @@
 
 import React from 'react';
 import { Input, Typography, useTheme } from 'app-studio';
-import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
-import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
-import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
-import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
+import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Input/FieldContent/FieldContent';
+import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';
+import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 import { CloseIcon } from '../../../Icon/Icon';
 import { TextFieldViewProps } from './TextField.props';
 
@@ -58,7 +58,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     'color.blueGray.700',
     elementMode ? elementMode : themeMode
   );
-  const isWithLabel = !!(isFocused && label);
+  const showLabel = !!(isFocused && label);
   /**
    * Styles for the input field
    */
@@ -81,7 +81,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     // Typography properties
     fontSize: Typography.fontSizes[size],
     lineHeight: Typography.fontSizes[size],
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
 
     // Visual properties
@@ -149,13 +149,13 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
         {left}
         <FieldWrapper>
-          {isWithLabel && (
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
               color={'theme.primary'}

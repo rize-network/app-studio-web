@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, Image, Horizontal } from 'app-studio';
+import { View, Text, Image, Horizontal, Center } from 'app-studio';
 import { UploadIcon } from '../../Icon/Icon';
 import { UploadStateProps, UploadViewProps } from './Uploader.props';
-import { Center } from '../../Layout';
 
 export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   accept,
@@ -62,10 +61,10 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   },
   renderVideo = ({
     selectedFile,
-    thumbnailUrl,
+    // thumbnailUrl,
     videoRef,
     videoProps,
-    imageProps,
+    // imageProps,
   }) => {
     return (
       <View width="100%" height="100%" position="relative" {...views?.view}>

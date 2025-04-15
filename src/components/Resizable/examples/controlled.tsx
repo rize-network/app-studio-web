@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Resizable } from '../Resizable';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Button } from '../../Button/Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 export const ControlledResizable = () => {
   const [sizes, setSizes] = useState([33.33, 33.33, 33.33]);

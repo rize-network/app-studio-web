@@ -10,7 +10,6 @@ import {
   containerStyles,
   headerStyles,
   contentStyles,
-  footerStyles,
   copyButtonStyles,
   languageLabelStyles,
 } from './CodeBlock.style';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from '../Card';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 import { Size } from '../Card/Card.type';
 
 export const SizesDemo = () => {

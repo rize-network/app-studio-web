@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Command } from '../Command';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
 
 export const CustomizedCommand = () => {

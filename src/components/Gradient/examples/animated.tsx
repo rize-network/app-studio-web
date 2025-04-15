@@ -1,6 +1,6 @@
 import React from 'react';
 import { Gradient } from '../Gradient';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 
 export const AnimatedDemo = () => (

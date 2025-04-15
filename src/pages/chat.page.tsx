@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View } from 'app-studio';
-import { Vertical } from '../components/Layout/Vertical/Vertical';
-import { Horizontal } from '../components/Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../components/Text/Text';
-import { AIComponents } from '../components';
+import * as AIComponents from '../components/Chat';
 
 const AIChatPage: React.FC = () => {
   // Sample AI models

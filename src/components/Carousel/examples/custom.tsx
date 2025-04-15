@@ -1,9 +1,9 @@
 import React from 'react';
 import { Carousel } from '../Carousel';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Card } from '../../Card/Card';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 export const CustomDemo = () => {
   // Create an array of card content

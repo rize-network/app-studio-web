@@ -1,7 +1,7 @@
 import React, { createContext, useContext } from 'react';
-import { View } from '../../Layout/View/View';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { View } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { ChevronIcon } from '../../Icon/Icon';
 import {
@@ -18,6 +18,7 @@ import {
   SidebarTransitions,
 } from './Sidebar.style';
 import { SidebarContextType } from './Sidebar.type';
+import { Badge } from 'src/components/Badge/Badge';
 
 // Create context for the Sidebar
 const SidebarContext = createContext<SidebarContextType>({
@@ -185,18 +186,18 @@ export const SidebarView: React.FC<SidebarProps> = ({
   variant = 'default',
   fixed = false,
   hasBackdrop = true,
-  showToggleButton = true,
+  // showToggleButton = true,
   expandedWidth,
   collapsedWidth,
-  breakpoint = 768,
+  // breakpoint = 768,
   breakpointBehavior = 'overlay',
   elevation = 'none',
   transitionPreset = 'normal',
   ariaLabel = 'Sidebar navigation',
   isExpanded,
   isMobile,
-  toggleExpanded,
-  expand,
+  // toggleExpanded,
+  // expand,
   collapse,
   views,
   ...props
@@ -265,5 +266,48 @@ export const SidebarView: React.FC<SidebarProps> = ({
         </Vertical>
       )}
     </>
+  );
+};
+interface SideBarNavItemProps {
+  icon: React.ReactNode;
+  label: string;
+  isActive?: boolean;
+  ariaLabel?: string;
+  badge?: number;
+}
+
+export const SideBarNavItem = ({
+  icon,
+  label,
+  isActive = false,
+  badge,
+  views,
+  ...props
+}: SideBarNavItemProps & any) => {
+  // Get sidebar context to check if it's expanded
+  const { isExpanded } = useSidebarContext();
+
+  return (
+    <Horizontal
+      alignItems="center"
+      justifyContent={!isExpanded ? 'center' : undefined}
+      gap={12}
+      padding="8px 12px"
+      borderRadius="4px"
+      backgroundColor={isActive ? 'color.blue.50' : 'transparent'}
+      color={isActive ? 'color.blue.600' : 'color.gray.700'}
+      fontWeight={isActive ? 'bold' : 'normal'}
+      cursor="pointer"
+      on={{
+        hover: {
+          backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100',
+        },
+      }}
+      {...props}
+    >
+      {icon}
+      {isExpanded && <Text>{label}</Text>}
+      {isExpanded && badge && <Badge {...views?.navItemBagde}>{badge}</Badge>}
+    </Horizontal>
   );
 };

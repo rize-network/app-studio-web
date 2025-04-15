@@ -1,10 +1,11 @@
 import React from 'react';
 import { Sidebar } from '../Sidebar';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
 
 export const SidebarPositions = () => {
   return (
@@ -27,16 +28,16 @@ export const SidebarPositions = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={20} />}
                     label="Home"
                     isActive
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={20} />}
                     label="Profile"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={20} />}
                     label="Settings"
                   />
@@ -71,16 +72,16 @@ export const SidebarPositions = () => {
               </Sidebar.Header>
               <Sidebar.Content>
                 <Vertical gap={8}>
-                  <NavItem
+                  <SideBarNavItem
                     icon={<HomeIcon widthHeight={20} />}
                     label="Home"
                     isActive
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<UserIcon widthHeight={20} />}
                     label="Profile"
                   />
-                  <NavItem
+                  <SideBarNavItem
                     icon={<SettingsIcon widthHeight={20} />}
                     label="Settings"
                   />
@@ -93,20 +94,3 @@ export const SidebarPositions = () => {
     </Vertical>
   );
 };
-
-const NavItem = ({ icon, label, isActive = false }: any) => (
-  <Horizontal
-    alignItems="center"
-    gap={12}
-    padding="8px 12px"
-    borderRadius="4px"
-    backgroundColor={isActive ? 'color.blue.50' : 'transparent'}
-    color={isActive ? 'color.blue.600' : 'color.gray.700'}
-    fontWeight={isActive ? 'bold' : 'normal'}
-    cursor="pointer"
-    _hover={{ backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100' }}
-  >
-    {icon}
-    <Text>{label}</Text>
-  </Horizontal>
-);

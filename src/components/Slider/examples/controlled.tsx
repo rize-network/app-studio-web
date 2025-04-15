@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Slider } from '../Slider';
-import { View } from '../../Layout/View/View';
 import { Text } from '../../Text/Text';
 import { Button } from '../../Button/Button';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 
 export const ControlledDemo = () => {
   const [volume, setVolume] = useState(75);

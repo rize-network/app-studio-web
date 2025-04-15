@@ -114,9 +114,6 @@ export const PointStyles: ViewProps = {
   stroke: 'white',
   cursor: 'pointer',
   transition: 'r 0.2s ease',
-  _hover: {
-    r: '6px',
-  },
 };
 
 // Default styles for pie chart slices

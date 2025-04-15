@@ -1,8 +1,8 @@
 import React from 'react';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Badge } from '../Badge';
 import { Shape } from '../Badge/Badge.type';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
     {['sharp', 'rounded', 'pillShaped'].map((border, index) => (

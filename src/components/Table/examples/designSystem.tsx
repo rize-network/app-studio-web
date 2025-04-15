@@ -11,10 +11,10 @@
 
 import React from 'react';
 import { Table } from '../Table';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Button } from '../../Button/Button';
 import { Badge } from '../../Badge/Badge';
 
@@ -69,7 +69,6 @@ export const DesignSystemTable = () => {
         borderRadius="4px"
         paddingX="8px"
         paddingY="2px"
-        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
         fontSize="12px"
         fontWeight="500"
         content={status}
@@ -86,17 +85,8 @@ export const DesignSystemTable = () => {
       field: 'name',
       render: (name: string, row: any) => (
         <View>
-          <Text
-            fontWeight="600"
-            fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-          >
-            {name}
-          </Text>
-          <Text
-            fontSize="12px"
-            color="color.gray.500"
-            fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-          >
+          <Text fontWeight="600">{name}</Text>
+          <Text fontSize="12px" color="color.gray.500">
             {row.email}
           </Text>
         </View>

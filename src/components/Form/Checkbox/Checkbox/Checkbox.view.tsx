@@ -8,15 +8,15 @@
 import React from 'react';
 import { Typography } from 'app-studio';
 
-import { Center } from '../../../Layout/Center/Center';
+import { Center } from 'app-studio';
 import { Label } from '../../../Form/Label/Label';
 import { TickIcon, MinusIcon } from '../../../Icon/Icon';
 
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes, VariantStyles, StateStyles } from './Checkbox.style';
 import { Text } from '../../../Text/Text';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
-import { Vertical } from '../../../Layout/Vertical/Vertical';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
 
 const CheckboxView: React.FC<CheckboxViewProps> = ({
   id,
@@ -86,7 +86,6 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       width: 'fit-content',
 
       // Typography properties
-      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
 
       // Visual properties
       color: error
@@ -148,7 +147,6 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           {labelPosition === 'left' && label && (
             <Text
               size={size}
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
               fontWeight="500" // Medium weight for better readability
               {...views?.label}
             >
@@ -178,7 +176,6 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           {labelPosition === 'right' && label && (
             <Text
               size={size}
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
               fontWeight="500" // Medium weight for better readability
               {...views?.label}
             >
@@ -192,7 +189,6 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
             marginLeft={labelPosition === 'left' ? 0 : 36} // 9 × 4px grid
             color="color.gray.500"
             size="sm"
-            fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
             fontWeight="400" // Regular weight
             lineHeight="1.5"
             {...views?.infoText}
@@ -209,7 +205,6 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           marginTop={4} // 1 × 4px grid
           marginHorizontal={0}
           color="color.red.500"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           fontWeight="500" // Medium weight for better readability
           transition="all 0.2s ease"
         >

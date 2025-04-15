@@ -6,7 +6,8 @@
  */
 
 import React, { useMemo } from 'react';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
+import { useTheme } from 'app-studio';
 import { GradientProps } from './Gradient.props';
 import {
   DefaultColorStops,
@@ -14,7 +15,6 @@ import {
   GradientAnimations,
   generateGradientString,
 } from './Gradient.style';
-import { ColorStop } from './Gradient.type';
 
 export const GradientView: React.FC<GradientProps> = ({
   type = 'linear',
@@ -28,8 +28,10 @@ export const GradientView: React.FC<GradientProps> = ({
   animationDuration = 3,
   children,
   views,
+  themeMode: elementMode,
   ...props
 }) => {
+  const { getColor, themeMode } = useTheme();
   // Determine color stops to use
   const colorStops = useMemo(() => {
     // If colors array is provided, use it
@@ -51,8 +53,31 @@ export const GradientView: React.FC<GradientProps> = ({
 
   // Generate the gradient string
   const gradientString = useMemo(() => {
-    return generateGradientString(type, colorStops, direction, shape, position);
-  }, [type, colorStops, direction, shape, position]);
+    // Process color stops to resolve theme colors
+    const processedColorStops = colorStops.map((stop) => ({
+      ...stop,
+      color: getColor(
+        stop.color,
+        elementMode ? { themeMode: elementMode } : undefined
+      ),
+    }));
+    return generateGradientString(
+      type,
+      processedColorStops,
+      direction,
+      shape,
+      position
+    );
+  }, [
+    type,
+    colorStops,
+    direction,
+    shape,
+    position,
+    getColor,
+    themeMode,
+    elementMode,
+  ]);
 
   // Prepare animation styles if animation is enabled
   const animationStyles = useMemo(() => {

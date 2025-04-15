@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
 import { Element } from 'app-studio';
 import { Typography } from 'app-studio';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
-import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
-import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
-import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
-import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
+import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Input/FieldContent/FieldContent';
+import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';
+import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 import { ChevronIcon, CloseIcon } from '../../../Icon/Icon';
 import {
   DropDownProps,
@@ -62,7 +62,6 @@ const Item: React.FC<ItemProps> = ({
       <Text
         // Typography properties
         fontSize={Typography.fontSizes[size]}
-        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
         fontWeight="400" // Regular weight
         lineHeight="1.5"
         // Apply custom styles
@@ -101,7 +100,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
     // Typography properties
     fontSize: Typography.fontSizes[size],
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     fontWeight: '400', // Regular weight
     lineHeight: '1.5',
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
@@ -306,7 +305,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
     >
       <Text
         size={size}
-        fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
         fontWeight="500" // Medium weight
       >
         {option}
@@ -361,7 +359,7 @@ const SelectView: React.FC<SelectViewProps> = ({
   highlightedIndex,
   ...props
 }) => {
-  const isWithLabel = !!(isFocused && label);
+  const showLabel = !!(isFocused && label);
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -409,12 +407,12 @@ const SelectView: React.FC<SelectViewProps> = ({
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
         <FieldWrapper>
-          {isWithLabel && (
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
               color={'theme.primary'}

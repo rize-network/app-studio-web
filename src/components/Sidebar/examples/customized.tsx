@@ -1,10 +1,11 @@
 import React from 'react';
 import { Sidebar } from '../Sidebar';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
 
 export const CustomizedSidebar = () => {
   return (
@@ -39,7 +40,9 @@ export const CustomizedSidebar = () => {
             },
             toggleButton: {
               backgroundColor: 'color.blue.700',
-              _hover: { backgroundColor: 'color.blue.600' },
+              on: {
+                hover: { backgroundColor: 'color.blue.600' },
+              },
             },
             toggleButtonIcon: {
               color: 'white',
@@ -53,16 +56,16 @@ export const CustomizedSidebar = () => {
           </Sidebar.Header>
           <Sidebar.Content>
             <Vertical gap={12}>
-              <CustomNavItem
+              <SideBarNavItem
                 icon={<HomeIcon widthHeight={20} color="white" />}
                 label="Home"
                 isActive
               />
-              <CustomNavItem
+              <SideBarNavItem
                 icon={<UserIcon widthHeight={20} color="white" />}
                 label="Profile"
               />
-              <CustomNavItem
+              <SideBarNavItem
                 icon={<SettingsIcon widthHeight={20} color="white" />}
                 label="Settings"
               />
@@ -86,20 +89,3 @@ export const CustomizedSidebar = () => {
     </View>
   );
 };
-
-const CustomNavItem = ({ icon, label, isActive = false }: any) => (
-  <Horizontal
-    alignItems="center"
-    gap={12}
-    padding="10px 14px"
-    borderRadius="6px"
-    backgroundColor={isActive ? 'color.blue.600' : 'transparent'}
-    color="white"
-    fontWeight={isActive ? 'bold' : 'normal'}
-    cursor="pointer"
-    _hover={{ backgroundColor: isActive ? 'color.blue.600' : 'color.blue.700' }}
-  >
-    {icon}
-    <Text>{label}</Text>
-  </Horizontal>
-);

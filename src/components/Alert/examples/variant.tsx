@@ -1,5 +1,5 @@
 import React from 'react';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Alert } from '../Alert';
 import { Variant } from '../Alert/Alert.type';
 

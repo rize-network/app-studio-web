@@ -8,8 +8,8 @@
 import React from 'react';
 import { RadioGroupViewProps } from './RadioGroup.props';
 import { RadioProps } from '../Radio/Radio.props';
-import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
 
 const RadioGroupView: React.FC<RadioGroupViewProps> = ({
@@ -58,7 +58,6 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
       {/* Label */}
       {label && (
         <Text
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           fontWeight="600" // Semi-bold for better readability
           fontSize="16px" // 4 × 4px grid
           color={error ? 'color.red.600' : 'color.gray.700'}
@@ -75,7 +74,6 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
       {/* Helper text or error message */}
       {(helperText || error) && (
         <Text
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
           fontWeight={error ? '500' : '400'} // Medium weight for error, regular for helper text
           fontSize="14px" // 3.5 × 4px grid
           lineHeight="20px" // 5 × 4px grid

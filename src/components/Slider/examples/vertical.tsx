@@ -1,8 +1,8 @@
 import React from 'react';
 import { Slider } from '../Slider';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 export const VerticalDemo = () => {
   const [level, setLevel] = React.useState(25);

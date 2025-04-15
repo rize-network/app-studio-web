@@ -177,7 +177,6 @@ const TextView: React.FC<Props> = ({
       lineHeight={lineHeight}
       fontStyle={isItalic ? 'italic' : 'normal'}
       fontWeight={fontWeight}
-      fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
       letterSpacing="-0.01em"
       textDecoration={
         isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'

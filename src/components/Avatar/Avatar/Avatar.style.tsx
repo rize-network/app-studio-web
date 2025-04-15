@@ -41,7 +41,6 @@ export const DefaultAvatarStyles = {
     },
   } as ViewProps,
   fallback: {
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
     fontWeight: '500', // Medium weight for better readability
     color: 'color.gray.600',
     '@media (prefers-color-scheme: dark)': {

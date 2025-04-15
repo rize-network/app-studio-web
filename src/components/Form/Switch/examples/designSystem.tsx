@@ -11,10 +11,10 @@
 
 import React from 'react';
 import { Switch } from '../Switch';
-import { Vertical } from '../../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
-import { View } from '../../../Layout/View/View';
+import { View } from 'app-studio';
 
 export const DesignSystemSwitches = () => (
   <Vertical gap={24}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Pagination } from '../Pagination';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Table } from '../../Table/Table';
 

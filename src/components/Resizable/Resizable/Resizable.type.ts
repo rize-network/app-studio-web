@@ -1,5 +1,4 @@
 import { ViewProps } from 'app-studio';
-import React from 'react';
 
 export type Orientation = 'horizontal' | 'vertical';
 export type HandlePosition = 'start' | 'end' | 'both';

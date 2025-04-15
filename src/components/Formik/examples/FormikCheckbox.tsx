@@ -4,7 +4,7 @@ import { FormikForm } from '../Formik.Form';
 import { FormikCheckbox } from '../Formik.Checkbox';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Vertical } from 'src/components/Layout';
+import { Vertical } from 'app-studio';
 
 export const FormCheckboxExemple = () => {
   const validationSchema = Yup.object().shape({

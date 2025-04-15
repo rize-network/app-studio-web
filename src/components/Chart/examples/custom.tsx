@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chart } from '../Chart';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 
 export const CustomChartDemo = () => {
   const data = {
@@ -9,6 +9,12 @@ export const CustomChartDemo = () => {
       {
         name: 'Sales',
         data: [120, 180, 150, 210],
+        color: 'color.blue.500',
+      },
+      {
+        name: 'Costs',
+        data: [80, 100, 90, 120],
+        color: 'color.green.500',
       },
     ],
   };
@@ -33,7 +39,7 @@ export const CustomChartDemo = () => {
           bar: {
             rx: '4px',
             ry: '4px',
-            fill: 'color.primary',
+            // Using series colors instead of a fixed color
           },
           grid: {
             stroke: 'color.gray.300',

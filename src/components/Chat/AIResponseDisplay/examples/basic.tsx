@@ -3,8 +3,7 @@
  */
 
 import React from 'react';
-import { View } from 'app-studio';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { View, Vertical } from 'app-studio';
 import { Text } from 'src/components/Text/Text';
 import { AIResponseDisplay } from '../AIResponseDisplay';
 

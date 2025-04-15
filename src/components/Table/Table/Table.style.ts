@@ -9,7 +9,6 @@
  * - Transitions: Subtle animations
  */
 
-import { ViewProps } from 'app-studio';
 import { TableViewStyles } from './Table.type';
 
 /**
@@ -18,7 +17,7 @@ import { TableViewStyles } from './Table.type';
 export const DefaultTableStyles: TableViewStyles = {
   table: {
     width: '100%',
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+
     borderRadius: '8px', // 2 × 4px grid
     overflow: 'hidden',
     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SimpleDragAndDrop } from 'src/components/DragAndDrop/examples/Simple';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const DragAndDropPage = () => {
   return (

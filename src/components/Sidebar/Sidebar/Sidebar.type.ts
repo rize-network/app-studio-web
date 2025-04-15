@@ -1,5 +1,4 @@
 import { ViewProps } from 'app-studio';
-import React from 'react';
 
 export type Position = 'left' | 'right';
 export type Size = 'sm' | 'md' | 'lg' | 'xl';
@@ -32,4 +31,5 @@ export interface SidebarStyles {
   navItemActive?: ViewProps;
   navItemIcon?: ViewProps;
   navItemText?: ViewProps;
+  navItemBagde?: ViewProps;
 }

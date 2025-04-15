@@ -20,7 +20,6 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '700', // Bold
     letterSpacing: '-0.02em',
     marginBottom: '24px', // 6 × 4px grid
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
   },
   h2: {
     fontSize: '30px', // 1.875rem
@@ -28,7 +27,6 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '700', // Bold
     letterSpacing: '-0.02em',
     marginBottom: '20px', // 5 × 4px grid
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
   },
   h3: {
     fontSize: '24px', // 1.5rem
@@ -36,7 +34,6 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '600', // Semi-bold
     letterSpacing: '-0.01em',
     marginBottom: '16px', // 4 × 4px grid
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
   },
   h4: {
     fontSize: '20px', // 1.25rem
@@ -44,7 +41,6 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '600', // Semi-bold
     letterSpacing: '-0.01em',
     marginBottom: '16px', // 4 × 4px grid
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
   },
   h5: {
     fontSize: '18px', // 1.125rem
@@ -52,7 +48,6 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '600', // Semi-bold
     letterSpacing: '-0.01em',
     marginBottom: '12px', // 3 × 4px grid
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
   },
   h6: {
     fontSize: '16px', // 1rem
@@ -60,7 +55,6 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '600', // Semi-bold
     letterSpacing: '-0.01em',
     marginBottom: '8px', // 2 × 4px grid
-    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
   },
 };
 

@@ -4,8 +4,8 @@ import * as Yup from 'yup';
 import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 import { FormikOTPInput } from '../Formik.OTPInput';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
 
 export const FormikOTPInputExample = () => {

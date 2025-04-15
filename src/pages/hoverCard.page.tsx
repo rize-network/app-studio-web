@@ -3,7 +3,7 @@ import {
   DefaultHoverCard,
   DelaysHoverCard,
 } from 'src/components/HoverCard/examples';
-import { Vertical, Text } from 'src/components';
+import { Vertical, Text } from 'app-studio';
 
 const HoverCardPage = () => {
   return (

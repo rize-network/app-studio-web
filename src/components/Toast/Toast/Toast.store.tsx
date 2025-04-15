@@ -23,7 +23,7 @@ export const useToastStore = create<ToastState>((set) => ({
       ...options,
     };
 
-    set((state) => ({
+    set((state: any) => ({
       toasts: [...state.toasts, toast],
     }));
 
@@ -43,7 +43,7 @@ export const useToastStore = create<ToastState>((set) => ({
   remove: (id) => {
     // First set isVisible to false for animation
     set((state) => ({
-      toasts: state.toasts.map((toast) =>
+      toasts: state.toasts.map((toast: any) =>
         toast.id === id ? { ...toast, isVisible: false } : toast
       ),
     }));

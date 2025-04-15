@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const LoaderButtons = () => (
   <Vertical gap={15}>

@@ -1,9 +1,6 @@
 import React from 'react';
-import { View, Text, useTheme } from 'app-studio';
-import { Center } from '../../../components/Layout/Center/Center';
-import { Vertical } from '../../../components/Layout/Vertical/Vertical';
-import { Horizontal } from '../../../components/Layout/Horizontal/Horizontal';
-import { HelperText } from '../../../components/Layout/Input/HelperText/HelperText';
+import { View, Text, useTheme, Center, Vertical, Horizontal } from 'app-studio';
+import { HelperText } from '../../Input/HelperText/HelperText';
 import { SliderViewProps } from './Slider.props';
 import {
   SliderSizes,

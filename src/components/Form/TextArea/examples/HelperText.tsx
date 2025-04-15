@@ -4,7 +4,7 @@ import React from 'react';
 import { Button } from '../../../Button/Button';
 import { TextArea } from '../../../Form/TextArea/TextArea';
 
-import { Vertical } from '../../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const HelperTextArea = () => {
   const initialValues = {

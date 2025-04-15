@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 import { Modal } from '../Modal';
 import { showModal } from '../Modal/Modal.store';

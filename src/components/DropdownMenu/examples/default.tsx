@@ -1,6 +1,6 @@
 import React from 'react';
 import { DropdownMenu } from '../DropdownMenu';
-import { Text, Vertical, View } from 'app-studio';
+import { Text, Vertical } from 'app-studio';
 import {
   Button,
   CopyIcon,

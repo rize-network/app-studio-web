@@ -11,35 +11,26 @@
 
 import React from 'react';
 import { Gradient } from '../Gradient';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Card } from '../../Card/Card';
 import { Button } from '../../Button/Button';
-import { Center } from '../../Layout/Center/Center';
+import { Center } from 'app-studio';
 
 export const DesignSystemGradients = () => {
   return (
     <Vertical gap={32}>
       {/* Basic Gradients */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Basic Gradients
         </Text>
         <Vertical gap={16}>
           <Horizontal gap={16} flexWrap="wrap">
             <Vertical gap={8} width="200px">
-              <Text
-                fontSize="14px"
-                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-              >
-                Linear Gradient
-              </Text>
+              <Text fontSize="14px">Linear Gradient</Text>
               <Gradient
                 type="linear"
                 from="color.blue.500"
@@ -51,12 +42,7 @@ export const DesignSystemGradients = () => {
             </Vertical>
 
             <Vertical gap={8} width="200px">
-              <Text
-                fontSize="14px"
-                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-              >
-                Radial Gradient
-              </Text>
+              <Text fontSize="14px">Radial Gradient</Text>
               <Gradient
                 type="radial"
                 from="color.blue.500"
@@ -68,12 +54,7 @@ export const DesignSystemGradients = () => {
             </Vertical>
 
             <Vertical gap={8} width="200px">
-              <Text
-                fontSize="14px"
-                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-              >
-                Conic Gradient
-              </Text>
+              <Text fontSize="14px">Conic Gradient</Text>
               <Gradient
                 type="conic"
                 colors={[
@@ -94,23 +75,14 @@ export const DesignSystemGradients = () => {
 
       {/* Gradient Directions */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Gradient Directions
         </Text>
         <Horizontal gap={16} flexWrap="wrap">
           {['to-right', 'to-bottom', 'to-top-right', '45deg'].map(
             (direction) => (
               <Vertical key={direction} gap={8} width="150px">
-                <Text
-                  fontSize="14px"
-                  fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-                >
-                  {direction}
-                </Text>
+                <Text fontSize="14px">{direction}</Text>
                 <Gradient
                   type="linear"
                   direction={direction}
@@ -128,21 +100,12 @@ export const DesignSystemGradients = () => {
 
       {/* Multi-color Gradients */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Multi-color Gradients
         </Text>
         <Vertical gap={16}>
           <Vertical gap={8}>
-            <Text
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
-              Three-color Linear
-            </Text>
+            <Text fontSize="14px">Three-color Linear</Text>
             <Gradient
               type="linear"
               colors={[
@@ -157,12 +120,7 @@ export const DesignSystemGradients = () => {
           </Vertical>
 
           <Vertical gap={8}>
-            <Text
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
-              Rainbow
-            </Text>
+            <Text fontSize="14px">Rainbow</Text>
             <Gradient
               type="linear"
               colors={[
@@ -184,21 +142,12 @@ export const DesignSystemGradients = () => {
 
       {/* Animated Gradients */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Animated Gradients
         </Text>
         <Horizontal gap={16} flexWrap="wrap">
           <Vertical gap={8} width="200px">
-            <Text
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
-              Animated Linear
-            </Text>
+            <Text fontSize="14px">Animated Linear</Text>
             <Gradient
               type="linear"
               from="color.blue.500"
@@ -212,12 +161,7 @@ export const DesignSystemGradients = () => {
           </Vertical>
 
           <Vertical gap={8} width="200px">
-            <Text
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
-              Animated Radial
-            </Text>
+            <Text fontSize="14px">Animated Radial</Text>
             <Gradient
               type="radial"
               from="color.blue.500"
@@ -231,12 +175,7 @@ export const DesignSystemGradients = () => {
           </Vertical>
 
           <Vertical gap={8} width="200px">
-            <Text
-              fontSize="14px"
-              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-            >
-              Animated Conic
-            </Text>
+            <Text fontSize="14px">Animated Conic</Text>
             <Gradient
               type="conic"
               colors={[
@@ -258,11 +197,7 @@ export const DesignSystemGradients = () => {
 
       {/* Practical Applications */}
       <View>
-        <Text
-          marginBottom={8}
-          fontWeight="600"
-          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-        >
+        <Text marginBottom={8} fontWeight="600">
           Practical Applications
         </Text>
         <Vertical gap={16}>
@@ -277,12 +212,7 @@ export const DesignSystemGradients = () => {
           >
             <Center height="100%">
               <Vertical alignItems="center" gap={16}>
-                <Text
-                  color="white"
-                  fontWeight="600"
-                  fontSize="24px"
-                  fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-                >
+                <Text color="white" fontWeight="600" fontSize="24px">
                   Welcome to Gradients
                 </Text>
                 <Button
@@ -291,7 +221,6 @@ export const DesignSystemGradients = () => {
                   borderRadius="8px" // 2 × 4px grid
                   paddingX="16px" // 4 × 4px grid
                   paddingY="8px" // 2 × 4px grid
-                  fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
                 >
                   Get Started
                 </Button>
@@ -310,18 +239,13 @@ export const DesignSystemGradients = () => {
               borderTopRightRadius="8px" // 2 × 4px grid
             >
               <Center height="100%">
-                <Text
-                  color="white"
-                  fontWeight="600"
-                  fontSize="18px"
-                  fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
-                >
+                <Text color="white" fontWeight="600" fontSize="18px">
                   Card with Gradient Header
                 </Text>
               </Center>
             </Gradient>
             <Card.Content>
-              <Text fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+              <Text>
                 This card uses a gradient for its header section, creating a
                 visually appealing component.
               </Text>
@@ -352,7 +276,6 @@ export const DesignSystemGradients = () => {
                 color="white"
                 fontWeight="600"
                 fontSize="24px"
-                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
                 textShadow="0 2px 4px rgba(0, 0, 0, 0.3)"
               >
                 Gradient Overlay on Image

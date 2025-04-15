@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Carousel } from '../Carousel';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Button } from '../../Button/Button';
 
 export const StepIndicesDemo = () => {

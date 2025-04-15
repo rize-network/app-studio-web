@@ -32,11 +32,11 @@ Determines the Badge's style variant.
 
 ```tsx
 import React from 'react';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Badge } from '../Badge';
 import { Variant } from '../Badge/Badge.type';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 export const VariantDemo = () => (
   <Vertical gap={15}>
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
@@ -59,7 +59,7 @@ Specifies a custom color scheme for the Badge.
 ```tsx
 import React from 'react';
 import { Badge } from '../Badge';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 export const ColorSchemeDemo = () => (
   <Horizontal gap={10}>
@@ -83,8 +83,8 @@ Defines the position of the Badge relative to its container.
 ```tsx
 import React from 'react';
 import { Badge } from '../Badge';
-import { View } from '../../Layout/View/View';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { View } from 'app-studio';
+import { Horizontal } from 'app-studio';
 import { Position } from '../Badge/Badge.type';
 
 export const PositionDemo = () => (
@@ -112,11 +112,11 @@ Determines the size of the Badge.
 
 ```tsx
 import React from 'react';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Badge } from '../Badge';
 import { Size } from '../Badge/Badge.type';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 export const SizeDemo = () => (
   <Vertical gap={10}>
     {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
@@ -134,10 +134,10 @@ Specifies the shape of the Badge.
 
 ```tsx
 import React from 'react';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Badge } from '../Badge';
 import { Shape } from '../Badge/Badge.type';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
     {['sharp', 'rounded', 'pillShaped'].map((border, index) => (

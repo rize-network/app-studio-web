@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { View, Horizontal, ViewProps, Vertical } from 'app-studio';
+import { View, Horizontal, ViewProps, Vertical, Center } from 'app-studio';
 import { Button } from '../../Button/Button';
 import { CloseIcon } from '../../Icon/Icon';
 import { hideModal } from './Modal.store';
@@ -21,11 +21,9 @@ import {
   ContainerShapes,
   OverlayAlignments,
   HeaderIconSizes,
-  ModalAnimations,
   ModalTypography,
 } from '../Modal/Modal.style';
 import { Position } from './Modal.type';
-import { Center } from 'src/components/Layout';
 
 export interface OverlayProps {
   views?: {
@@ -120,7 +118,6 @@ export const ModalContainer: React.FC<ContainerProps> = ({
       width={isFullScreen ? '100%' : 600}
       height={isFullScreen ? '100%' : 'fit-content'}
       onClick={handleClick}
-      fontFamily={ModalTypography.fontFamily}
       transition="all 0.3s ease"
       {...(shadow ? shadow : defaultShadow)}
       {...ContainerShapes[shape]}
@@ -167,7 +164,6 @@ export const ModalHeader: React.FC<HeaderProps> = ({
       borderBottomWidth="1px"
       borderBottomStyle="solid"
       borderBottomColor="color.gray.200"
-      fontFamily={ModalTypography.fontFamily}
       {...props}
       {...views?.header}
     >
@@ -187,7 +183,6 @@ export const ModalBody: React.FC<BodyProps> = ({
     <View
       paddingVertical={16} // 4×4px grid
       paddingHorizontal={24} // 6×4px grid
-      fontFamily={ModalTypography.fontFamily}
       fontSize={ModalTypography.body.fontSize}
       fontWeight={ModalTypography.body.fontWeight}
       lineHeight={ModalTypography.body.lineHeight}
@@ -215,7 +210,6 @@ export const ModalFooter: React.FC<FooterProps> = ({
       borderTopWidth="1px"
       borderTopStyle="solid"
       borderTopColor="color.gray.200"
-      fontFamily={ModalTypography.fontFamily}
       gap={12} // 3×4px grid
       {...props}
       {...views?.container}

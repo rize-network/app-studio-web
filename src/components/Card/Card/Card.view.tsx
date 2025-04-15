@@ -1,18 +1,13 @@
 import React, { useMemo } from 'react';
 import { View, useTheme } from 'app-studio';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 import {
   CardProps,
   CardHeaderProps,
   CardContentProps,
   CardFooterProps,
 } from './Card.props';
-import {
-  CardSizes,
-  CardShapes,
-  CardVariants,
-  getDefaultCardStyles,
-} from './Card.style';
+import { CardShapes, CardVariants, getDefaultCardStyles } from './Card.style';
 import { CardContext, useCardContext } from './Card.context';
 
 export const CardHeader: React.FC<CardHeaderProps> = ({

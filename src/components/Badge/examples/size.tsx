@@ -1,9 +1,9 @@
 import React from 'react';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Badge } from '../Badge';
 import { Size } from '../Badge/Badge.type';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 export const SizeDemo = () => (
   <Vertical gap={10}>
     {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (

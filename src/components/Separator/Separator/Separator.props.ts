@@ -6,7 +6,7 @@ import {
   SeparatorStyles,
 } from './Separator.type';
 
-export interface SeparatorProps {
+export interface SeparatorProps extends ViewProps {
   /**
    * The orientation of the separator
    */
@@ -47,9 +47,4 @@ export interface SeparatorProps {
    * Custom styles for different parts of the separator
    */
   views?: SeparatorStyles;
-
-  /**
-   * Additional props to be spread to the container element
-   */
-  [key: string]: any;
 }

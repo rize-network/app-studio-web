@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import { RatioDemo, DefaultDemo } from 'src/components/AspectRatio/examples';
 
 const AspectRatioPage = () => {

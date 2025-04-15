@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-  CommandProps,
-  CommandInputProps,
-  CommandListProps,
-  CommandGroupProps,
-  CommandItemProps,
-  CommandEmptyProps,
-  CommandType,
-} from './Command/Command.props';
+import { CommandProps, CommandType } from './Command/Command.props';
 import { useCommandState } from './Command/Command.state';
 import {
   CommandView,

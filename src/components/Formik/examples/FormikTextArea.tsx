@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
 import { FormikTextArea } from '../Formik.TextArea';

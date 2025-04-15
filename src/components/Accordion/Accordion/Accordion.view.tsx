@@ -5,7 +5,7 @@ import React, {
   cloneElement,
   isValidElement,
 } from 'react';
-import { View, Horizontal, Vertical, Button } from 'app-studio';
+import { View, Horizontal, Vertical } from 'app-studio';
 import { AccordionContextType } from './Accordion.type';
 import {
   AccordionTriggerProps,
@@ -55,7 +55,11 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   views,
   ...props
 }) => {
-  const { isItemExpanded, baseId, toggleItem } = useAccordionContext();
+  const {
+    isItemExpanded,
+    baseId,
+    //toggleItem
+  } = useAccordionContext();
   const isExpanded = isItemExpanded(value);
 
   // Generate unique IDs for ARIA attributes

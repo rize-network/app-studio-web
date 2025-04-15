@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Toggle } from '../../Toggle/Toggle';
 import { ToggleGroupViewProps } from './ToggleGroup.props';
 

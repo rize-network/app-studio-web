@@ -1,6 +1,6 @@
 import React from 'react';
 import { hideMessage, useMessageStore } from './Message.store';
-import { View } from '../../Layout/View/View';
+import { View } from 'app-studio';
 import { MessageView } from './Message.view';
 import { MessageLayoutProps } from './Message.props';
 
