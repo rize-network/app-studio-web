@@ -138,7 +138,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                   isClearable={false}
                   left={<SearchIcon widthHeight={12} />}
                   views={{
-                    box: {
+                    container: {
                       width: '100%',
                       padding: '6px 12px',
                       borderBottom:

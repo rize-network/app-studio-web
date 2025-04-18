@@ -22,11 +22,6 @@ export const KnobSizes: Record<Size, ViewProps> = {
   md: { height: '20px', width: '20px' }, // 5 × 4px grid
   lg: { height: '24px', width: '24px' }, // 6 × 4px grid
   xl: { height: '28px', width: '28px' }, // 7 × 4px grid
-  '2xl': { height: '32px', width: '32px' }, // 8 × 4px grid
-  '3xl': { height: '36px', width: '36px' }, // 9 × 4px grid
-  '4xl': { height: '40px', width: '40px' }, // 10 × 4px grid
-  '5xl': { height: '44px', width: '44px' }, // 11 × 4px grid
-  '6xl': { height: '48px', width: '48px' }, // 12 × 4px grid
 };
 
 /**
@@ -54,26 +49,6 @@ export const SliderSizes: Record<Size, ViewProps> = {
     height: '40px', // 10 × 4px grid
     width: '72px', // 18 × 4px grid
   },
-  '2xl': {
-    height: '44px', // 11 × 4px grid
-    width: '80px', // 20 × 4px grid
-  },
-  '3xl': {
-    height: '48px', // 12 × 4px grid
-    width: '88px', // 22 × 4px grid
-  },
-  '4xl': {
-    height: '52px', // 13 × 4px grid
-    width: '96px', // 24 × 4px grid
-  },
-  '5xl': {
-    height: '56px', // 14 × 4px grid
-    width: '104px', // 26 × 4px grid
-  },
-  '6xl': {
-    height: '60px', // 15 × 4px grid
-    width: '112px', // 28 × 4px grid
-  },
 };
 
 /**
@@ -86,11 +61,6 @@ export const SliderPadding: Record<Size, Record<string, number>> = {
   md: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
   lg: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
   xl: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
-  '2xl': { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
-  '3xl': { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
-  '4xl': { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
-  '5xl': { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
-  '6xl': { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
 };
 
 /**

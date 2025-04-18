@@ -7,10 +7,11 @@ export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type TextFieldStyles = {
-  box?: ViewProps;
   text?: ViewProps;
   label?: ViewProps;
+  error?: ViewProps;
   helperText?: ViewProps;
+  container?: ViewProps;
 };
 
 export type Wrap = 'wrap' | 'nowrap' | 'wrap-reverse';

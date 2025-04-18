@@ -20,18 +20,7 @@
   },
   "iconSize": {
     "type": ["Size"],
-    "typeValues": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "2xl",
-      "3xl",
-      "4xl",
-      "5xl",
-      "6xl"
-    ],
+    "typeValues": ["xs", "sm", "md", "lg", "xl"],
     "description": "Optional prop to set the size of an icon if present within the link.",
     "defaultValue": ["sm"]
   },

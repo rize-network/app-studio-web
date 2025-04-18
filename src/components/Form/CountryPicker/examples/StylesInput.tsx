@@ -6,7 +6,7 @@ export const StyledCountryPicker = () => (
   <CountryPicker
     name="noColorScheme"
     views={{
-      box: {
+      container: {
         borderRadius: 10,
         borderColor: 'theme.primary', // Assuming theme.primary is still desired
         borderStyle: 'solid',

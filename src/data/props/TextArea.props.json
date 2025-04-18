@@ -92,63 +92,43 @@
   },
   "onChange": {
     "type": "function",
-    "typeValues": [
-      "(value: any) => void"
-    ],
+    "typeValues": ["(value: any) => void"],
     "description": "Callback function triggered when the value of the text area changes.",
     "defaultValue": ""
   },
   "onChangeText": {
     "type": "function",
-    "typeValues": [
-      "(text: string) => void"
-    ],
+    "typeValues": ["(text: string) => void"],
     "description": "Callback function triggered when the text within the text area changes.",
     "defaultValue": ""
   },
   "onBlur": {
     "type": "function",
-    "typeValues": [
-      "(value: any) => void"
-    ],
+    "typeValues": ["(value: any) => void"],
     "description": "Callback function triggered when the text area loses focus.",
     "defaultValue": ""
   },
   "onFocus": {
     "type": "function",
-    "typeValues": [
-      "() => void"
-    ],
+    "typeValues": ["() => void"],
     "description": "Callback function triggered when the text area gains focus.",
     "defaultValue": "() => {}"
   },
   "size": {
     "type": "Size",
-    "typeValues": [
-      "sm",
-      "md",
-      "lg"
-    ],
+    "typeValues": ["sm", "md", "lg"],
     "description": "Size of the text area, typically affecting its height.",
     "defaultValue": "sm"
   },
   "shadow": {
-    "type": [
-      "Shadow",
-      "Elevation",
-      "CSSProperties"
-    ],
+    "type": ["Shadow", "Elevation", "CSSProperties"],
     "typeValues": [],
     "description": "Shadow or elevation applied to the text area, or custom CSS properties for the shadow.",
     "defaultValue": ""
   },
   "shape": {
     "type": "Shape",
-    "typeValues": [
-      "default",
-      "rounded",
-      "square"
-    ],
+    "typeValues": ["default", "rounded", "square"],
     "description": "Shape of the text area, affecting the border-radius.",
     "defaultValue": "default"
   },
@@ -156,24 +136,17 @@
     "type": "TextAreaStyles",
     "typeValues": [],
     "description": "Custom styles for the text area component.",
-    "defaultValue": "{ box: {}, text: {}, label: {}, helperText: {}, field: {} }"
+    "defaultValue": "{ container: {}, text: {}, label: {}, helperText: {}, field: {} }"
   },
   "value": {
-    "type": [
-      "string",
-      "number"
-    ],
+    "type": ["string", "number"],
     "typeValues": [],
     "description": "The value of the text area.",
     "defaultValue": ""
   },
   "variant": {
     "type": "Variant",
-    "typeValues": [
-      "default",
-      "filled",
-      "outlined"
-    ],
+    "typeValues": ["default", "filled", "outlined"],
     "description": "Variant of the text area, typically affecting the visual style.",
     "defaultValue": "default"
   }

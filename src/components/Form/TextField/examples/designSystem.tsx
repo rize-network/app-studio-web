@@ -158,7 +158,7 @@ export const DesignSystemTextFields = () => (
         <TextField
           placeholder="Primary Theme"
           views={{
-            box: {
+            container: {
               borderColor: 'theme.primary',
               borderWidth: '2px',
             },
@@ -175,7 +175,7 @@ export const DesignSystemTextFields = () => (
         <TextField
           placeholder="Custom Border Radius"
           views={{
-            box: {
+            container: {
               borderRadius: '16px',
               borderColor: 'color.purple.400',
               backgroundColor: 'color.purple.50',
@@ -190,7 +190,7 @@ export const DesignSystemTextFields = () => (
             boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
           }}
           views={{
-            box: {
+            container: {
               borderRadius: '8px',
               backgroundColor: 'white',
               transition: 'all 0.3s ease',

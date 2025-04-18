@@ -130,7 +130,7 @@
     "type": "TextFieldStyles",
     "typeValues": [],
     "description": "Optional custom styles to apply to the TextField component.",
-    "defaultValue": "{ box: {}, field: {}, label: {}, helperText: {}, text: {} }"
+    "defaultValue": "{ container: {}, field: {}, label: {}, helperText: {}, text: {} }"
   },
   "value": {
     "type": "string",

@@ -28,22 +28,18 @@ export const OverlayAlignments: Record<string, ViewProps> = {
   top: {
     justifyContent: 'center',
     alignItems: 'flex-start',
-    paddingTop: '64px',
   }, // 16 × 4px grid
   right: {
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingRight: '32px',
   }, // 8 × 4px grid
   bottom: {
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingBottom: '64px',
   }, // 16 × 4px grid
   left: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingLeft: '32px',
   }, // 8 × 4px grid
 };
 

@@ -32,7 +32,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   placeholder,
   onChangeText,
   shadow = {},
-  views = { box: {}, field: {}, label: {}, helperText: {}, text: {} },
+  views = { container: {}, field: {}, label: {}, helperText: {}, text: {} },
   size = 'md',
   shape = 'default',
   variant = 'default',

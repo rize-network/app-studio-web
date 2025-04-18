@@ -9,17 +9,7 @@ import { ViewProps } from 'app-studio';
 /**
  * Size options for the Radio component
  */
-export type Size =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | '2xl'
-  | '3xl'
-  | '4xl'
-  | '5xl'
-  | '6xl';
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Style customization options for the Radio component

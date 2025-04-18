@@ -68,7 +68,7 @@ test('TextField to match snapshot', () => {
         variant="outline"
         size="xl"
         views={{
-          box: {
+          container: {
             backgroundColor: 'red',
           },
           label: {

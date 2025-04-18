@@ -50,45 +50,25 @@
   },
   "styles": {
     "type": "SwitchStyles",
-    "typeValues": [
-      "CSSProperties"
-    ],
+    "typeValues": ["CSSProperties"],
     "description": "Custom styles to apply to the switch component.",
     "defaultValue": "{ slider: {}, circle: {}, label: {} }"
   },
   "shadow": {
-    "type": [
-      "Shadow",
-      "Elevation",
-      "CSSProperties"
-    ],
+    "type": ["Shadow", "Elevation", "CSSProperties"],
     "typeValues": [],
     "description": "Defines the shadow appearance of the switch using predefined Shadow or Elevation, or a custom CSSProperties object.",
     "defaultValue": "{}"
   },
   "size": {
     "type": "Size",
-    "typeValues": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "2xl",
-      "3xl",
-      "4xl",
-      "5xl",
-      "6xl"
-    ],
+    "typeValues": ["xs", "sm", "md", "lg", "xl"],
     "description": "Specifies the size of the switch component.",
     "defaultValue": "sm"
   },
   "labelPosition": {
     "type": "string",
-    "typeValues": [
-      "left",
-      "right"
-    ],
+    "typeValues": ["left", "right"],
     "description": "The position of the label relative to the switch, either 'left' or 'right'.",
     "defaultValue": "right"
   },

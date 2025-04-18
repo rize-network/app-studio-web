@@ -9,7 +9,7 @@ export type CountryPickerStyles = {
   // Optional style properties for the dropDown element within the CountryPicker.
   dropDown?: ViewProps;
   // Optional style properties for the outer box element of the CountryPicker.
-  box?: ViewProps;
+  container?: ViewProps;
   // Optional style properties for the label element associated with the CountryPicker.
   label?: ViewProps;
   // Optional style properties for the helper text element within the CountryPicker.

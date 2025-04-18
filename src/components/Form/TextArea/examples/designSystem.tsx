@@ -136,7 +136,7 @@ export const DesignSystemTextAreas = () => (
         <TextArea
           placeholder="Primary Theme"
           views={{
-            box: {
+            container: {
               borderColor: 'theme.primary',
               borderWidth: '2px',
             },
@@ -153,7 +153,7 @@ export const DesignSystemTextAreas = () => (
         <TextArea
           placeholder="Custom Border Radius"
           views={{
-            box: {
+            container: {
               borderRadius: '16px',
               borderColor: 'color.purple.400',
               backgroundColor: 'color.purple.50',
@@ -168,7 +168,7 @@ export const DesignSystemTextAreas = () => (
             boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
           }}
           views={{
-            box: {
+            container: {
               borderRadius: '8px',
               backgroundColor: 'white',
               transition: 'all 0.3s ease',

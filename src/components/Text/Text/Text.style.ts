@@ -67,11 +67,6 @@ export const FontSizes: Record<Size, string> = {
   md: '16px', // 1rem (base)
   lg: '18px', // 1.125rem
   xl: '20px', // 1.25rem
-  '2xl': '24px', // 1.5rem
-  '3xl': '30px', // 1.875rem
-  '4xl': '36px', // 2.25rem
-  '5xl': '48px', // 3rem
-  '6xl': '60px', // 3.75rem
 };
 
 /**
@@ -83,11 +78,6 @@ export const LineHeights: Record<Size, string> = {
   md: '24px', // 1.5rem
   lg: '28px', // 1.75rem
   xl: '28px', // 1.75rem
-  '2xl': '32px', // 2rem
-  '3xl': '36px', // 2.25rem
-  '4xl': '40px', // 2.5rem
-  '5xl': '60px', // 3.75rem
-  '6xl': '72px', // 4.5rem
 };
 
 /**

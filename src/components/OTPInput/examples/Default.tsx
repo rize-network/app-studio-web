@@ -42,7 +42,7 @@ export const CustomizedOTPInput = () => {
         gap={12}
         shadow={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px' }}
         views={{
-          box: {
+          container: {
             borderColor: 'theme.primary',
             backgroundColor: 'color.gray.50',
           },

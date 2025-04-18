@@ -40,11 +40,6 @@ export const DesignSystemText = () => (
         <Text size="md">Medium (md) - 16px (default)</Text>
         <Text size="lg">Large (lg) - 18px</Text>
         <Text size="xl">Extra Large (xl) - 20px</Text>
-        <Text size="2xl">2XL - 24px</Text>
-        <Text size="3xl">3XL - 30px</Text>
-        <Text size="4xl">4XL - 36px</Text>
-        <Text size="5xl">5XL - 48px</Text>
-        <Text size="6xl">6XL - 60px</Text>
       </Vertical>
     </View>
 

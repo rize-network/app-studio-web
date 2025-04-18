@@ -22,11 +22,6 @@ export const Sizes: Record<Size, ViewProps> = {
   md: { height: '24px', width: '24px' }, // 6 × 4px grid
   lg: { height: '28px', width: '28px' }, // 7 × 4px grid
   xl: { height: '32px', width: '32px' }, // 8 × 4px grid
-  '2xl': { height: '36px', width: '36px' }, // 9 × 4px grid
-  '3xl': { height: '40px', width: '40px' }, // 10 × 4px grid
-  '4xl': { height: '44px', width: '44px' }, // 11 × 4px grid
-  '5xl': { height: '48px', width: '48px' }, // 12 × 4px grid
-  '6xl': { height: '52px', width: '52px' }, // 13 × 4px grid
 };
 
 /**
@@ -39,11 +34,6 @@ export const IconSizes: Record<Size, number> = {
   md: 16, // 4 × 4px grid
   lg: 20, // 5 × 4px grid
   xl: 24, // 6 × 4px grid
-  '2xl': 28, // 7 × 4px grid
-  '3xl': 32, // 8 × 4px grid
-  '4xl': 36, // 9 × 4px grid
-  '5xl': 40, // 10 × 4px grid
-  '6xl': 44, // 11 × 4px grid
 };
 
 /**

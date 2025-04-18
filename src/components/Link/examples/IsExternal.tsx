@@ -9,6 +9,6 @@ export const ExternalLink = () => (
     isExternal
     iconSize="md"
   >
-    <Text size="2xl">External</Text>
+    <Text size="xl">External</Text>
   </Link>
 );

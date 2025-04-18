@@ -20,7 +20,7 @@ export const StyledInput = () => {
           variant="none"
           shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }}
           views={{
-            box: {
+            container: {
               borderRadius: 8,
               borderColor: 'theme.primary',
               borderStyle: 'solid',

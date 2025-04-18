@@ -127,7 +127,6 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     label: {},
     dropDown: {},
     helperText: {},
-    box: {},
   },
   themeMode: elementMode,
   ...props

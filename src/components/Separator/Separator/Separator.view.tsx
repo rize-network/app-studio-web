@@ -22,7 +22,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
   variant = 'solid',
   thickness = 'thin',
   color,
-  spacing = '16px',
+  spacing = '0px',
   label,
   decorative = false,
   views,
@@ -47,7 +47,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
         alignItems="center"
         justifyContent="center"
         width="100%"
-        margin={spacing}
+        padding={spacing}
         {...ariaProps}
         {...props}
       >
@@ -85,7 +85,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
         borderTopWidth={borderWidth}
         borderTopStyle={borderStyle as any}
         borderTopColor={separatorColor}
-        margin={spacing}
+        padding={spacing}
         {...DefaultSeparatorStyles.container}
         {...ariaProps}
         {...views?.container}
@@ -102,7 +102,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
       borderLeftWidth={borderWidth}
       borderLeftStyle={borderStyle as any}
       borderLeftColor={separatorColor}
-      margin={spacing}
+      padding={spacing}
       {...DefaultSeparatorStyles.container}
       {...ariaProps}
       {...views?.container}

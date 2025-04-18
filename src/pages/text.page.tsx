@@ -84,18 +84,7 @@ export const TextPage = () => {
                 flexDirection="column"
                 alignItems="center"
               >
-                {[
-                  'xs',
-                  'sm',
-                  'md',
-                  'lg',
-                  'xl',
-                  '2xl',
-                  '3xl',
-                  '4xl',
-                  '5xl',
-                  '6xl',
-                ].map((size, index) => (
+                {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
                   <TextApp key={index} size={size as Size}>
                     {size}
                   </TextApp>

@@ -9,17 +9,7 @@ export type Size =
   // Large size option for the Loader component
   | 'lg'
   // Extra large size option for the Loader component
-  | 'xl'
-  // 2 times extra large size option for the Loader component
-  | '2xl'
-  // 3 times extra large size option for the Loader component
-  | '3xl'
-  // 4 times extra large size option for the Loader component
-  | '4xl'
-  // 5 times extra large size option for the Loader component
-  | '5xl'
-  // 6 times extra large size option for the Loader component
-  | '6xl';
+  | 'xl';
 // Defines the LoaderType type for different Loader visual styles
 export type LoaderType = 'default' | 'dotted' | 'quarter';
 // Defines the TextPosition type for text positioning relative to the Loader

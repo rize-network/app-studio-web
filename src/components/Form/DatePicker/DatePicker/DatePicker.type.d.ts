@@ -3,7 +3,7 @@ import { ViewProps } from 'app-studio';
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type DatePickerStyles = {
-  box?: ViewProps;
+  container?: ViewProps;
   text?: ViewProps;
   label?: ViewProps;
   helperText?: ViewProps;

@@ -83,14 +83,7 @@ const OTPInputView: React.FC<
   helperText,
   placeholder = '',
   shadow,
-  views = {
-    container: {},
-    input: {},
-    box: {},
-    text: {},
-    label: {},
-    helperText: {},
-  },
+  views = {},
   size = 'md',
   shape = 'rounded',
   variant = 'outline',
@@ -266,7 +259,7 @@ const OTPInputView: React.FC<
                 ? '48px'
                 : '56px'
             }
-            {...views.box}
+            {...views.container}
           >
             {slot.char ? (
               <View

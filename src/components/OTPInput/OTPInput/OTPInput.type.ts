@@ -9,9 +9,8 @@ export type OTPInputType = 'text' | 'password' | 'number';
  * Styles for different parts of the OTP input component
  */
 export type OTPInputStyles = {
-  container?: ViewProps;
   input?: ViewProps;
-  box?: ViewProps;
+  container?: ViewProps;
   text?: ViewProps;
   label?: ViewProps;
   helperText?: ViewProps;

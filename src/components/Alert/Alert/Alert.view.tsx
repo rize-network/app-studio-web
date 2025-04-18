@@ -61,7 +61,7 @@ export const AlertView = ({
       borderStyle="solid"
       borderColor={Themes[variant].container.borderColor}
       backgroundColor={Themes[variant].container.backgroundColor}
-      boxShadow={Themes[variant].container.boxShadow}
+      boxShadow={Themes[variant].container.containerShadow}
       // Animation
       transition="all 0.2s ease"
       // Apply custom container styles

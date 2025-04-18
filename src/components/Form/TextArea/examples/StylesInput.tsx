@@ -19,7 +19,7 @@ export const StyledArea = () => {
           label="Surname"
           variant="none"
           views={{
-            box: {
+            container: {
               borderRadius: 8,
               padding: 5,
               borderColor: 'theme.primary',

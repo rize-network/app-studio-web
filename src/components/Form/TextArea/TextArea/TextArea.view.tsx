@@ -44,7 +44,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   setValue = () => {},
   setIsFocused = () => {},
   setIsHovered = () => {},
-  views = { box: {}, text: {}, label: {}, helperText: {}, field: {} },
+  views = { label: {}, helperText: {} },
   ...props
 }) => {
   const showLabel = !!(isFocused && label);
@@ -54,14 +54,13 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   const fieldStyles = {
     // Layout properties
     margin: 0,
-    paddingVertical: 12, // 3 × 4px grid
-    paddingHorizontal: 0,
+    paddingVertical: 2, // 3 × 4px grid
+    paddingHorizontal: 2,
     width: '100%',
-    height: '100%',
-    minHeight: '80px', // 20 × 4px grid
+    maxHeight: 'calc(100vh - 100px)',
+    height: 'calc(5em)',
     border: 'none',
     resize: 'vertical',
-
     // Focus state
     on: {
       focus: {
@@ -71,7 +70,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
 
     // Typography properties
     fontSize: Typography.fontSizes[size],
-    lineHeight: '1.5', // 1.5 × font size for better readability in multi-line text
+    lineHeight: Typography.fontSizes[size] * 1.5, // 1.5 × font size for better readability in multi-line text
 
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
 
@@ -85,10 +84,10 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     // Animation
     transition: 'all 0.2s ease',
 
-    // Dark mode support
-    '@media (prefers-color-scheme: dark)': {
-      color: isDisabled ? 'color.gray.600' : 'color.gray.100',
-    },
+    // // Dark mode support
+    // '@media (prefers-color-scheme: dark)': {
+    //   color: isDisabled ? 'color.gray.600' : 'color.gray.100',
+    // },
 
     // Apply custom field styles
     ...views['field'],
@@ -116,7 +115,12 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     }
   };
   return (
-    <FieldContainer helperText={helperText} error={error} views={views}>
+    <FieldContainer
+      helperText={helperText}
+      error={error}
+      views={views}
+      {...props}
+    >
       <FieldContent
         label={label}
         size={size}
@@ -134,14 +138,15 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
         showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
+        {...views?.content}
       >
-        <FieldWrapper>
+        <FieldWrapper {...views?.warper}>
           {showLabel && (
             <FieldLabel
               htmlFor={id}
               color={'theme.primary'}
               error={error}
-              {...views}
+              {...views?.label}
             >
               {label}
             </FieldLabel>
@@ -162,9 +167,9 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             onFocus={handleFocus}
             multiline={isMultiline}
             {...fieldStyles}
-            {...props}
             onChange={handleChange}
             onChangeText={handleChange}
+            {...views?.textarea}
           />
         </FieldWrapper>
       </FieldContent>

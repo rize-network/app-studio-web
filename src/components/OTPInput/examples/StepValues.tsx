@@ -24,7 +24,7 @@ export const StepValuesOTPInput = () => {
         size="lg"
         gap={12}
         views={{
-          box: {
+          container: {
             borderColor: 'theme.primary',
             backgroundColor: 'color.gray.50',
           },

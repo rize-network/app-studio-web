@@ -177,7 +177,7 @@ const AIChatPage: React.FC = () => {
 
   return (
     <View padding="xl" height="100vh" backgroundColor="color.gray.100">
-      <Text size="2xl" fontWeight="bold" marginBottom="lg">
+      <Text size="xl" fontWeight="bold" marginBottom="lg">
         AI Chat Demo
       </Text>
 

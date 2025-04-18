@@ -32,8 +32,6 @@ export const DesignSystemRadios = () => (
         <Radio size="lg" label="Large Radio" />
 
         <Radio size="xl" label="Extra Large Radio" />
-
-        <Radio size="2xl" label="2XL Radio" />
       </Vertical>
     </View>
 

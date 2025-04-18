@@ -32,8 +32,6 @@ export const DesignSystemCheckboxes = () => (
         <Checkbox size="lg" label="Large Checkbox" />
 
         <Checkbox size="xl" label="Extra Large Checkbox" />
-
-        <Checkbox size="2xl" label="2XL Checkbox" />
       </Vertical>
     </View>
 

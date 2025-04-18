@@ -27,6 +27,7 @@ export const FieldContainer: React.FC<ContainerProps> = ({
     width="100%"
     // Apply custom props
     {...props}
+    {...views?.container}
   >
     {/* Field content */}
     {children}
@@ -35,7 +36,7 @@ export const FieldContainer: React.FC<ContainerProps> = ({
     {!error && helperText && (
       <HelperText
         marginTop={4} // 1 × 4px grid
-        {...views}
+        {...views?.helperText}
       >
         {helperText}
       </HelperText>
@@ -50,6 +51,7 @@ export const FieldContainer: React.FC<ContainerProps> = ({
         fontWeight="500" // Medium weight for better readability
         color="color.red.500"
         transition="all 0.2s ease"
+        {...views?.error}
       >
         {error}
       </Text>

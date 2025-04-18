@@ -1,4 +1,4 @@
-import { ViewProps } from 'app-studio';
+import { useTheme, ViewProps } from 'app-studio';
 import React from 'react';
 import { Center } from 'app-studio';
 
@@ -48,9 +48,10 @@ const getSvgProps = (
   color: string,
   strokeWidth: number | string
 ) => {
+  const { getColor } = useTheme();
   return {
-    fill: filled ? color : 'none',
-    stroke: filled ? 'none' : color,
+    fill: filled ? getColor(color) : 'none',
+    stroke: filled ? 'none' : getColor(color),
     strokeWidth,
     strokeLinecap: 'round' as const,
     strokeLinejoin: 'round' as const,
@@ -490,7 +491,7 @@ export const MinusIcon: React.FC<IconProps> = ({
 export const InfoIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',
-  filled = false,
+  filled = true,
   strokeWidth = 1,
   ...props
 }) => (

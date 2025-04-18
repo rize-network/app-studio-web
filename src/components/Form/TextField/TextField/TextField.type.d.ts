@@ -7,7 +7,7 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Describes 'TextFieldStyles' as a type for custom styling of various parts of the TextField component.
 export type TextFieldStyles = {
   // Gives an optional 'box' style property to customize the container of the TextField using CSS properties.
-  box?: CSSProperties;
+  container?: CSSProperties;
   // Allows for optional 'text' style customization that applies to the text within the TextField.
   text?: CSSProperties;
   // Provides an optional 'label' style property to tailor the appearance of the TextField's label.

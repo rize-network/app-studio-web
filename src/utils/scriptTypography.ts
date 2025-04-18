@@ -6,11 +6,6 @@ export const subScriptTypography: ScriptTypography = {
     md: 12,
     lg: 14,
     xl: 15,
-    '2xl': 18,
-    '3xl': 23,
-    '4xl': 27,
-    '5xl': 36,
-    '6xl': 48,
   },
 };
 
@@ -21,10 +16,5 @@ export const supScriptTypography: ScriptTypography = {
     md: 12,
     lg: 14,
     xl: 15,
-    '2xl': 18,
-    '3xl': 23,
-    '4xl': 27,
-    '5xl': 36,
-    '6xl': 48,
   },
 };

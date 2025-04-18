@@ -21,12 +21,7 @@ export const Sizes: Record<Size, ViewProps> = {
   sm: { height: '20px', width: '20px' }, // 5 × 4px grid
   md: { height: '24px', width: '24px' }, // 6 × 4px grid
   lg: { height: '28px', width: '28px' }, // 7 × 4px grid
-  xl: { height: '32px', width: '32px' }, // 8 × 4px grid
-  '2xl': { height: '36px', width: '36px' }, // 9 × 4px grid
-  '3xl': { height: '40px', width: '40px' }, // 10 × 4px grid
-  '4xl': { height: '44px', width: '44px' }, // 11 × 4px grid
-  '5xl': { height: '48px', width: '48px' }, // 12 × 4px grid
-  '6xl': { height: '52px', width: '52px' }, // 13 × 4px grid
+  xl: { height: '32px', width: '32px' }, // 8 × 4px grids
 };
 
 /**
@@ -39,11 +34,6 @@ export const DotSizes: Record<Size, ViewProps> = {
   md: { height: '12px', width: '12px' }, // 3 × 4px grid
   lg: { height: '14px', width: '14px' }, // 3.5 × 4px grid
   xl: { height: '16px', width: '16px' }, // 4 × 4px grid
-  '2xl': { height: '18px', width: '18px' }, // 4.5 × 4px grid
-  '3xl': { height: '20px', width: '20px' }, // 5 × 4px grid
-  '4xl': { height: '22px', width: '22px' }, // 5.5 × 4px grid
-  '5xl': { height: '24px', width: '24px' }, // 6 × 4px grid
-  '6xl': { height: '26px', width: '26px' }, // 6.5 × 4px grid
 };
 
 /**
