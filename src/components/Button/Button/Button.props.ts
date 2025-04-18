@@ -53,11 +53,6 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional effect to apply interactive effects to the button.
   effect?: Effects;
 
-  // Optional props to be passed to the container View component.
-  containerProps?: ViewProps;
-
-  // Optional props to be passed to the Link component.
-  linkProps?: ViewProps;
   views?: {
     container?: ViewProps;
     icon?: ViewProps;

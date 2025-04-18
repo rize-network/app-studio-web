@@ -45,8 +45,6 @@ const ButtonView: React.FC<Props> = ({
   setIsHovered = () => {},
   isExternal = false,
   themeMode: elementMode,
-  containerProps,
-  linkProps,
   views,
   ...props
 }) => {
@@ -158,6 +156,9 @@ const ButtonView: React.FC<Props> = ({
       boxShadow={shadow ? shadow : undefined}
       // Apply default props and styles
       {...defaultNativeProps}
+      // Apply any custom props except height
+      {...(({ height, ...rest }) => rest)(props)}
+      // Apply size-specific styles to ensure consistent sizing
       {...buttonSizeStyles}
       {...buttonVariant}
       {...scaleWidth}
@@ -171,8 +172,7 @@ const ButtonView: React.FC<Props> = ({
       props.paddingBottom
         ? {}
         : changePadding)}
-      // Apply any custom props and views
-      {...props}
+      // Apply container view styles last
       {...views?.container}
     >
       {variant === 'link' && to ? (
@@ -186,7 +186,6 @@ const ButtonView: React.FC<Props> = ({
           _hover={{
             textDecorationThickness: '2px',
           }}
-          {...linkProps}
           {...views?.link}
         >
           {content}
