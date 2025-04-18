@@ -191,6 +191,9 @@ export const getButtonVariants = (
   },
   link: {
     backgroundColor: 'transparent',
+    borderWidth: 0,
+    borderStyle: 'none',
+    borderColor: 'transparent',
     color: color,
     textDecoration: 'underline',
     textUnderlineOffset: 2,

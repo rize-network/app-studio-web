@@ -51,41 +51,41 @@ export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
   const isDarkMode = themeMode === 'dark';
 
   return {
-  default: {
-    backgroundColor: 'white',
-    color: 'color.gray.800',
+    default: {
+      backgroundColor: 'white',
+      color: 'color.gray.800',
 
-    transition: 'all 0.2s ease',
-  },
-  filled: {
-    backgroundColor: 'color.gray.100',
-    color: 'color.gray.800',
+      transition: 'all 0.2s ease',
+    },
+    filled: {
+      backgroundColor: 'color.gray.100',
+      color: 'color.gray.800',
 
-    transition: 'all 0.2s ease',
-  },
-  outline: {
-    backgroundColor: 'white',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    color: 'color.gray.800',
+      transition: 'all 0.2s ease',
+    },
+    outline: {
+      backgroundColor: 'white',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'color.gray.200',
+      color: 'color.gray.800',
 
-    transition: 'all 0.2s ease',
-  },
-  subtle: {
-    backgroundColor: 'color.gray.50',
-    color: 'color.gray.800',
+      transition: 'all 0.2s ease',
+    },
+    subtle: {
+      backgroundColor: 'color.gray.50',
+      color: 'color.gray.800',
 
-    transition: 'all 0.2s ease',
-  },
-  elevated: {
-    backgroundColor: 'white',
-    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-    color: 'color.gray.800',
+      transition: 'all 0.2s ease',
+    },
+    elevated: {
+      backgroundColor: 'white',
+      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+      color: 'color.gray.800',
 
-    transition: 'all 0.2s ease',
-  },
-}
+      transition: 'all 0.2s ease',
+    },
+  };
   // Add dark mode conditional styling here
 };
 

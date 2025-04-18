@@ -23,22 +23,22 @@ export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
   const isDarkMode = themeMode === 'dark';
 
   return {
-  default: {
-    backgroundColor: 'color.gray.800',
-    color: 'color.white',
-  },
-  light: {
-    backgroundColor: 'color.white',
-    color: 'color.gray.800',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-  },
-  dark: {
-    backgroundColor: 'color.black',
-    color: 'color.white',
-  },
-}
+    default: {
+      backgroundColor: 'color.gray.800',
+      color: 'color.white',
+    },
+    light: {
+      backgroundColor: 'color.white',
+      color: 'color.gray.800',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'color.gray.200',
+    },
+    dark: {
+      backgroundColor: 'color.black',
+      color: 'color.white',
+    },
+  };
   // Add dark mode conditional styling here
 };
 

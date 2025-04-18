@@ -7,7 +7,9 @@ import { Button } from '../../Button/Button';
 export const DarkModeExample = () => {
   return (
     <Vertical gap={20}>
-      <Text fontSize={20} fontWeight="bold">Light Mode Cards</Text>
+      <Text fontSize={20} fontWeight="bold">
+        Light Mode Cards
+      </Text>
       <Horizontal gap={20} alignItems="flex-start">
         <Card variant="default" themeMode="light">
           <Card.Header>
@@ -20,7 +22,7 @@ export const DarkModeExample = () => {
             <Button size="sm">Action</Button>
           </Card.Footer>
         </Card>
-        
+
         <Card variant="outlined" themeMode="light">
           <Card.Header>
             <Text fontWeight="bold">Outlined Card (Light)</Text>
@@ -32,7 +34,7 @@ export const DarkModeExample = () => {
             <Button size="sm">Action</Button>
           </Card.Footer>
         </Card>
-        
+
         <Card variant="elevated" themeMode="light">
           <Card.Header>
             <Text fontWeight="bold">Elevated Card (Light)</Text>
@@ -45,8 +47,10 @@ export const DarkModeExample = () => {
           </Card.Footer>
         </Card>
       </Horizontal>
-      
-      <Text fontSize={20} fontWeight="bold" marginTop={40}>Dark Mode Cards</Text>
+
+      <Text fontSize={20} fontWeight="bold" marginTop={40}>
+        Dark Mode Cards
+      </Text>
       <Horizontal gap={20} alignItems="flex-start">
         <Card variant="default" themeMode="dark">
           <Card.Header>
@@ -59,7 +63,7 @@ export const DarkModeExample = () => {
             <Button size="sm">Action</Button>
           </Card.Footer>
         </Card>
-        
+
         <Card variant="outlined" themeMode="dark">
           <Card.Header>
             <Text fontWeight="bold">Outlined Card (Dark)</Text>
@@ -71,7 +75,7 @@ export const DarkModeExample = () => {
             <Button size="sm">Action</Button>
           </Card.Footer>
         </Card>
-        
+
         <Card variant="elevated" themeMode="dark">
           <Card.Header>
             <Text fontWeight="bold">Elevated Card (Dark)</Text>

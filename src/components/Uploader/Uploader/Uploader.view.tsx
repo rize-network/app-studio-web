@@ -3,7 +3,8 @@ import { View, Text, Image, Horizontal, Center } from 'app-studio';
 import { UploadIcon } from '../../Icon/Icon';
 import { UploadStateProps, UploadViewProps } from './Uploader.props';
 
-export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({accept,
+export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
+  accept,
   isLoading = false,
   progress = 0,
   icon,
@@ -25,8 +26,11 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({accept
   textProps,
   fileType,
   previewUrl: externalPreviewUrl,
-  renderError = ({ errorMessage, errorMessageProps,
-  themeMode: elementMode}) => (
+  renderError = ({
+    errorMessage,
+    errorMessageProps,
+    themeMode: elementMode,
+  }) => (
     <Text
       color="red"
       fontSize={12}

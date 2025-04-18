@@ -57,16 +57,16 @@ export const getSlider = (themeMode: string): Record<Variant, ViewProps> => {
   const isDarkMode = themeMode === 'dark';
 
   return {
-  default: {
-    backgroundColor: 'color.blueGray.200',
-  },
-  outline: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'color.blueGray.300',
-  },
-}
+    default: {
+      backgroundColor: 'color.blueGray.200',
+    },
+    outline: {
+      backgroundColor: 'transparent',
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: 'color.blueGray.300',
+    },
+  };
   // Add dark mode conditional styling here
 };
 

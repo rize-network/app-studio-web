@@ -36,34 +36,34 @@ export const getHandle = (themeMode: string): Record<Variant, ViewProps> => {
   const isDarkMode = themeMode === 'dark';
 
   return {
-  default: {
-    backgroundColor: 'transparent',
-    _hover: {
-      backgroundColor: 'color.gray.200',
+    default: {
+      backgroundColor: 'transparent',
+      _hover: {
+        backgroundColor: 'color.gray.200',
+      },
+      _active: {
+        backgroundColor: 'color.gray.300',
+      },
     },
-    _active: {
-      backgroundColor: 'color.gray.300',
+    subtle: {
+      backgroundColor: 'transparent',
+      _hover: {
+        backgroundColor: 'color.gray.100',
+      },
+      _active: {
+        backgroundColor: 'color.gray.200',
+      },
     },
-  },
-  subtle: {
-    backgroundColor: 'transparent',
-    _hover: {
+    prominent: {
       backgroundColor: 'color.gray.100',
+      _hover: {
+        backgroundColor: 'color.gray.200',
+      },
+      _active: {
+        backgroundColor: 'color.gray.300',
+      },
     },
-    _active: {
-      backgroundColor: 'color.gray.200',
-    },
-  },
-  prominent: {
-    backgroundColor: 'color.gray.100',
-    _hover: {
-      backgroundColor: 'color.gray.200',
-    },
-    _active: {
-      backgroundColor: 'color.gray.300',
-    },
-  },
-}
+  };
   // Add dark mode conditional styling here
 };
 
