@@ -53,6 +53,9 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional effect to apply interactive effects to the button.
   effect?: Effects;
 
+  // Optional color scheme for the button
+  colorScheme?: string;
+
   views?: {
     container?: ViewProps;
     icon?: ViewProps;

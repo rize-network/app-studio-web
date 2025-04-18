@@ -8,13 +8,8 @@ import React from 'react';
 import { Element, useTheme, Vertical, View } from 'app-studio';
 import { Link } from './../../Link/Link';
 import { ButtonProps } from './Button.props';
-import {
-  ButtonShapes,
-  ButtonSizes,
-  IconSizes,
-  getButtonVariants,
-} from './Button.style';
-// We don't need to import Variant as it's already imported in Button.style
+import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
+import { Variant } from './Button.type';
 import { Loader } from '../../Loader/Loader';
 import { Horizontal } from 'app-studio';
 
@@ -46,6 +41,7 @@ const ButtonView: React.FC<Props> = ({
   isExternal = false,
   themeMode: elementMode,
   views,
+  colorScheme = 'theme.primary',
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
@@ -53,18 +49,90 @@ const ButtonView: React.FC<Props> = ({
 
   const isActive = !(isDisabled || isLoading);
   const defaultNativeProps = { disabled: !isActive };
-  const buttonColor = isActive ? 'theme.primary' : 'theme.disabled';
-  // We'll handle hover effects through CSS transitions in the style
+  const buttonColor = isActive ? colorScheme : 'theme.disabled';
+  const hovering = isHovered && effect === 'hover';
+  const reverse = isHovered && effect === 'reverse';
 
   // Determine if the button color is light or dark for proper contrast
   const isLight =
     contrast(getColor(buttonColor, elementMode ? elementMode : themeMode)) ==
     'light';
 
-  // Get button variants based on color and light/dark status
-  const ButtonVariants = getButtonVariants(buttonColor, isLight);
+  // Define button variants with effect support
+  const ButtonVariants: Record<Variant, any> = {
+    filled: {
+      backgroundColor: reverse ? 'transparent' : buttonColor,
+      color: reverse
+        ? isLight
+          ? 'white'
+          : buttonColor
+        : isLight
+        ? buttonColor
+        : 'white',
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: reverse ? buttonColor : 'transparent',
+      _hover: {
+        backgroundColor: reverse ? `${buttonColor}10` : `${buttonColor}`, // Slightly darker
+        transform: 'translateY(-2px)',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+      },
+      _active: {
+        backgroundColor: reverse ? `${buttonColor}20` : `${buttonColor}`, // Even darker
+        transform: 'translateY(0)',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+      },
+    },
+    outline: {
+      backgroundColor: reverse ? buttonColor : 'transparent',
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: reverse ? buttonColor : colorScheme,
+      color: reverse ? 'white' : buttonColor,
+      _hover: {
+        backgroundColor: reverse ? `${buttonColor}` : `${buttonColor}10`,
+        transform: 'translateY(-2px)',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
+      },
+      _active: {
+        backgroundColor: reverse ? `${buttonColor}b0` : `${buttonColor}20`,
+        transform: 'translateY(0)',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+      },
+    },
+    link: {
+      backgroundColor: 'transparent',
+      borderWidth: 0,
+      borderStyle: 'none',
+      borderColor: 'transparent',
+      color: buttonColor,
+      textDecoration: reverse ? 'none' : 'underline',
+      _hover: {
+        opacity: 0.8,
+        textDecorationThickness: '2px',
+      },
+      _active: {
+        opacity: 0.8,
+        textDecorationThickness: '2px',
+      },
+    },
+    ghost: {
+      backgroundColor: reverse ? buttonColor : 'transparent',
+      color: reverse ? 'white' : buttonColor,
+      borderWidth: 0,
+      borderStyle: 'none',
+      borderColor: 'transparent',
+      _hover: {
+        backgroundColor: reverse ? `${buttonColor}` : `${buttonColor}10`,
+        transform: 'translateY(-2px)',
+      },
+      _active: {
+        backgroundColor: reverse ? `${buttonColor}b0` : `${buttonColor}20`,
+        transform: 'translateY(0)',
+      },
+    },
+  };
 
-  // Note: Effects are now handled through CSS transitions in the style definitions
   const buttonSizeStyles = ButtonSizes[size];
   const buttonVariant = ButtonVariants[variant];
   const scaleWidth = {
@@ -135,6 +203,9 @@ const ButtonView: React.FC<Props> = ({
     </Container>
   );
 
+  // Extract hover and active styles from buttonVariant
+  const { _hover, _active, ...baseButtonVariant } = buttonVariant || {};
+
   return (
     <Element
       gap={8}
@@ -150,6 +221,13 @@ const ButtonView: React.FC<Props> = ({
       onMouseEnter={() => handleHover(true)}
       onMouseLeave={() => handleHover(false)}
       cursor={isActive ? 'pointer' : 'default'}
+      filter={
+        hovering && effect === 'hover' ? 'brightness(0.85)' : 'brightness(1)'
+      }
+      transition="all 0.2s ease"
+      transform={
+        hovering && effect === 'hover' && !isDisabled ? 'translateY(-5px)' : ''
+      }
       // Apply consistent styling according to design guidelines
 
       // Apply shadow if provided
@@ -160,7 +238,7 @@ const ButtonView: React.FC<Props> = ({
       {...(({ height, ...rest }) => rest)(props)}
       // Apply size-specific styles to ensure consistent sizing
       {...buttonSizeStyles}
-      {...buttonVariant}
+      {...baseButtonVariant}
       {...scaleWidth}
       // Only apply padding from ButtonSizes if no custom padding is provided
       {...(props.padding ||
@@ -172,13 +250,16 @@ const ButtonView: React.FC<Props> = ({
       props.paddingBottom
         ? {}
         : changePadding)}
+      // Apply hover and active styles
+      _hover={_hover}
+      _active={_active}
       // Apply container view styles last
       {...views?.container}
     >
       {variant === 'link' && to ? (
         <Link
           to={to}
-          textDecorationColor={'theme.primary'}
+          textDecorationColor={colorScheme}
           textDecorationThickness="1px"
           textUnderlineOffset="2px"
           transition="all 0.2s ease"
