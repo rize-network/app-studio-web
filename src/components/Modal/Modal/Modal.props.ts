@@ -178,6 +178,11 @@ export interface ContainerProps extends Omit<ViewProps, 'size'> {
 export interface BodyProps extends ViewProps {
   views?: {
     view?: ViewProps;
+
+    /**
+     * Optional theme mode override ('light' or 'dark')
+     * If not provided, the component will use the theme mode from context
+     */
   };
 }
 

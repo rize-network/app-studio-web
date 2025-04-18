@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { View } from 'app-studio';
+import { View, ViewProps } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
 import {
@@ -238,13 +238,15 @@ export const MenubarSeparator: React.FC<MenubarSeparatorProps> = ({
 };
 
 // Main Menubar View component
-export const MenubarView: React.FC<{
-  items: MenubarItemType[];
-  orientation: Orientation;
-  size: Size;
-  variant: Variant;
-  views?: any;
-}> = ({ items, orientation, size, variant, views }) => {
+export const MenubarView: React.FC<
+  {
+    items: MenubarItemType[];
+    orientation: Orientation;
+    size: Size;
+    variant: Variant;
+    views?: any;
+  } & ViewProps
+> = ({ items, orientation, size, variant, views, themeMode: elementMode }) => {
   return (
     <MenubarRoot
       orientation={orientation}

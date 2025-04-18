@@ -10,9 +10,9 @@ import {
   BadgeShapes,
   BadgeSizes,
   PositionStyles,
-  BadgeVariants,
+  getBadgeVariants,
 } from './Badge.style';
-import { Center } from 'app-studio';
+import { Center, useTheme } from 'app-studio';
 import { Text } from '../../Text/Text';
 // No need to import ViewProps as it's not used directly
 /**
@@ -25,7 +25,12 @@ const BadgeView: React.FC<BadgeProps> = ({
   variant = 'filled',
   size = 'md',
   views,
+  themeMode: elementMode,
+  ...props
 }) => {
+  const { themeMode } = useTheme();
+  const currentThemeMode = elementMode || themeMode;
+  const variantStyles = getBadgeVariants(currentThemeMode)[variant];
   // Combine styles for the badge
   const combinedStyles: Record<string, any> = {
     // Base styles
@@ -33,12 +38,12 @@ const BadgeView: React.FC<BadgeProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgrounColor: 'color.black',
+    backgroundColor: 'color.black',
 
     // Apply shape, size, and variant styles
     borderRadius: BadgeShapes[shape],
     ...BadgeSizes[size],
-    ...BadgeVariants[variant],
+    ...variantStyles,
 
     // Apply position styles if provided
     ...(position ? PositionStyles[position] : {}),
@@ -47,7 +52,7 @@ const BadgeView: React.FC<BadgeProps> = ({
     ...views?.container,
   };
   return (
-    <Center role="badge" {...combinedStyles}>
+    <Center role="badge" {...combinedStyles} {...props}>
       <Text
         role="badgeText"
         fontWeight="500" // Medium weight for better readability

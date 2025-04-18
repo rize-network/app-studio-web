@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useRef, useState } from 'react';
-import { View } from 'app-studio';
+import { View, ViewProps } from 'app-studio';
 import {
   DropdownMenuContextType,
   DropdownMenuItem as DropdownMenuItemType,
@@ -234,18 +234,22 @@ export const DropdownMenuDivider: React.FC<DropdownMenuDividerProps> = ({
 };
 
 // Main DropdownMenu View component
-export const DropdownMenuView: React.FC<{
-  trigger: React.ReactNode;
-  items: DropdownMenuItemType[];
-  side?: Position;
-  align?: Alignment;
-  views?: any;
-}> = ({
+export const DropdownMenuView: React.FC<
+  {
+    trigger: React.ReactNode;
+    items: DropdownMenuItemType[];
+    side?: Position;
+    align?: Alignment;
+    views?: any;
+  } & ViewProps
+> = ({
   trigger,
   items,
   side = 'bottom',
   align = 'start',
   views,
+
+  themeMode: elementMode,
   ...props
 }) => {
   return (

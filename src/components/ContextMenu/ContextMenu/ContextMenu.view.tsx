@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { View } from 'app-studio';
+import { View, ViewProps } from 'app-studio';
 import {
   ContextMenuContextType,
   Size,
@@ -390,20 +390,24 @@ export const ContextMenuSeparator: React.FC<ContextMenuSeparatorProps> = ({
 };
 
 // Main ContextMenu View component
-export const ContextMenuView: React.FC<{
-  children: React.ReactNode;
-  items?: ContextMenuItemType[];
-  size?: Size;
-  variant?: Variant;
-  disableNativeContextMenu?: boolean;
-  views?: any;
-}> = ({
+export const ContextMenuView: React.FC<
+  {
+    children: React.ReactNode;
+    items?: ContextMenuItemType[];
+    size?: Size;
+    variant?: Variant;
+    disableNativeContextMenu?: boolean;
+    views?: any;
+  } & ViewProps
+> = ({
   children,
   items,
   size = 'md',
   variant = 'default',
   disableNativeContextMenu = true,
   views,
+
+  themeMode: elementMode,
   ...props
 }) => {
   if (!items || items.length === 0) {

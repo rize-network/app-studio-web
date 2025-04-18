@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { View, Horizontal, ViewProps, Vertical, Center } from 'app-studio';
-import { Button } from '../../Button/Button';
 import { CloseIcon } from '../../Icon/Icon';
 import { hideModal } from './Modal.store';
 
@@ -140,19 +139,9 @@ export const ModalHeader: React.FC<HeaderProps> = ({
   const onClose = props.onClose ? props.onClose : hideModal;
 
   const buttonIcon = (
-    <Button
-      onClick={onClose}
-      icon={
-        <CloseIcon
-          widthHeight={HeaderIconSizes[iconSize]}
-          color={buttonColor}
-        />
-      }
-      padding={0}
-      margin={0}
-      filter="none"
-      width={0}
-    />
+    <View onClick={onClose}>
+      <CloseIcon widthHeight={HeaderIconSizes[iconSize]} color={buttonColor} />
+    </View>
   );
 
   return (

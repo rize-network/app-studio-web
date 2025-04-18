@@ -86,6 +86,11 @@ export interface AccordionTriggerProps extends ViewProps {
   views?: {
     container?: ViewProps;
     icon?: ViewProps;
+
+    /**
+     * Optional theme mode override ('light' or 'dark')
+     * If not provided, the component will use the theme mode from context
+     */
   };
   /**
    * If true, merges props onto the immediate child, useful for custom trigger elements

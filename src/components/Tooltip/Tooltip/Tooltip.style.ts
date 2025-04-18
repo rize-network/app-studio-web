@@ -19,7 +19,10 @@ export const TooltipSizes: Record<Size, ViewProps> = {
   },
 };
 
-export const TooltipVariants: Record<Variant, ViewProps> = {
+export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
+  const isDarkMode = themeMode === 'dark';
+
+  return {
   default: {
     backgroundColor: 'color.gray.800',
     color: 'color.white',
@@ -35,7 +38,12 @@ export const TooltipVariants: Record<Variant, ViewProps> = {
     backgroundColor: 'color.black',
     color: 'color.white',
   },
+}
+  // Add dark mode conditional styling here
 };
+
+// For backward compatibility
+export const TooltipVariants = getTooltip('light');
 
 export const getTooltipPositionStyles = (
   position: Position,

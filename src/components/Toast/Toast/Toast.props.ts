@@ -1,3 +1,4 @@
+import { ViewProps } from 'app-studio';
 import {
   ToastItem,
   ToastOptions,
@@ -7,7 +8,7 @@ import {
   ThemesType,
 } from './Toast.type';
 
-export interface ToastProps {
+export interface ToastProps extends Omit<ViewProps, 'theme'> {
   /**
    * Unique identifier for the toast
    */
@@ -71,7 +72,14 @@ export interface ToastProps {
   /**
    * Custom render function for complete control over toast appearance
    */
-  render?: (props: { id: string; onClose: () => void }) => React.ReactNode;
+  render?: (props: {
+    id: string;
+    onClose: () => void;
+    /**
+     * Optional theme mode override ('light' or 'dark')
+     * If not provided, the component will use the theme mode from context
+     */
+  }) => React.ReactNode;
 
   /**
    * Custom icon to display instead of the default variant icon

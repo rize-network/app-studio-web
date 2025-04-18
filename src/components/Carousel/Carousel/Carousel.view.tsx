@@ -215,6 +215,8 @@ export const CarouselView: React.FC<CarouselProps> = ({
   direction = 'horizontal',
   transitionDuration = 300,
   views,
+
+  themeMode: elementMode,
   ...props
 }) => {
   // Convert children to array if it's not already

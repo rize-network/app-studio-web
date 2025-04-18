@@ -174,6 +174,9 @@ export const getButtonVariants = (
   ghost: {
     backgroundColor: 'transparent',
     color: color,
+    borderWidth: 0,
+    borderStyle: 'none',
+    borderColor: 'transparent',
     on: {
       hover: {
         backgroundColor: `${color}10`, // 10% opacity

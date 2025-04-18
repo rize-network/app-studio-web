@@ -11,6 +11,7 @@ export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
   itemRefs,
   handleDragStart,
   views,
+  themeMode: elementMode,
 }) => (
   <View
     overflow="hidden"

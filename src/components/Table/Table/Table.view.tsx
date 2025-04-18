@@ -118,6 +118,7 @@ export const TableView: React.FC<TableViewProps> = ({
   columns,
   footer,
   caption,
+  themeMode: elementMode,
 }) => {
   return (
     <TableContainer role="Table">

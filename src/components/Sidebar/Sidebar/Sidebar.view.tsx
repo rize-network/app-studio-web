@@ -200,6 +200,7 @@ export const SidebarView: React.FC<SidebarProps> = ({
   // expand,
   collapse,
   views,
+  themeMode: elementMode,
   ...props
 }) => {
   // Determine width based on expanded state and size

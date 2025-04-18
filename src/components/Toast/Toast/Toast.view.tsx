@@ -25,6 +25,7 @@ export const ToastView: React.FC<ToastProps> = ({
   icon: customIcon,
   id,
   isVisible = true,
+  themeMode: elementMode,
 }) => {
   // We don't need the auto-close timer here anymore as it's handled in the store
 

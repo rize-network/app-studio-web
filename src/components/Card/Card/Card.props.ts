@@ -41,6 +41,11 @@ export interface CardProps extends ViewProps {
    * Custom styles for different parts of the card
    */
   views?: CardStyles;
+
+  /**
+   * Optional theme mode override ('light' or 'dark')
+   * If not provided, the component will use the theme mode from context
+   */
 }
 
 export interface CardHeaderProps extends ViewProps {

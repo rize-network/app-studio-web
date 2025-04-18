@@ -1,14 +1,14 @@
 import React from 'react';
 import { Column, FooterCell, TableViewStyles } from './Table.type';
+import { ViewProps } from 'app-studio';
 export interface TableProps {
   data: any[];
   columns: Column[];
   footer?: FooterCell[];
   caption?: React.ReactNode;
   views?: TableViewStyles;
-  onClick?: Function;
 }
-export interface TableViewProps extends TableProps {}
+export interface TableViewProps extends TableProps, Omit<ViewProps, 'size'> {}
 export interface TableLayoutProps {
   Head?: React.FC<any>;
   Body?: React.FC<any>;

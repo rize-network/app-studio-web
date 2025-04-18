@@ -7,13 +7,18 @@ import {
   CardContentProps,
   CardFooterProps,
 } from './Card.props';
-import { CardShapes, CardVariants, getDefaultCardStyles } from './Card.style';
+import {
+  CardShapes,
+  getCardVariants,
+  getDefaultCardStyles,
+} from './Card.style';
 import { CardContext, useCardContext } from './Card.context';
 
 export const CardHeader: React.FC<CardHeaderProps> = ({
   children,
   views,
   style,
+  themeMode: elementMode,
   ...props
 }) => {
   const theme = useTheme();
@@ -39,6 +44,7 @@ export const CardContent: React.FC<CardContentProps> = ({
   children,
   views,
   style,
+  themeMode: elementMode,
   ...props
 }) => {
   const theme = useTheme();
@@ -64,6 +70,7 @@ export const CardFooter: React.FC<CardFooterProps> = ({
   children,
   views,
   style,
+  themeMode: elementMode,
   ...props
 }) => {
   const theme = useTheme();
@@ -95,6 +102,7 @@ export const CardView: React.FC<CardProps> = ({
   isFullWidth = false,
   views,
   style,
+  themeMode: elementMode,
   ...props
 }) => {
   const theme = useTheme();
@@ -123,12 +131,17 @@ export const CardView: React.FC<CardProps> = ({
         child.type === CardFooter)
   );
 
+  // Get the appropriate variant styles based on theme mode
+  const { themeMode } = theme;
+  const currentThemeMode = elementMode || themeMode;
+  const variantStyles = getCardVariants(currentThemeMode)[variant];
+
   // Merge styles for the root element
   const mergedRootProps = {
     width: isFullWidth ? '100%' : 'auto',
     borderRadius: CardShapes[shape],
     overflow: 'hidden',
-    ...CardVariants[variant],
+    ...variantStyles,
     ...contextValue.styles.container,
     ...props,
     style: { ...contextValue.styles.container?.style, ...style },

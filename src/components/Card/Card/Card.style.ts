@@ -37,74 +37,82 @@ export const CardShapes: Record<Shape, number | string> = {
 };
 
 /**
- * Card variants with consistent styling
+ * Get card variants with consistent styling based on theme mode
  */
-export const CardVariants: Record<Variant, ViewProps> = {
-  default: {
-    backgroundColor: 'white',
-    border: 'none',
-    transition: 'all 0.2s ease',
-  },
-  outlined: {
-    backgroundColor: 'white',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    transition: 'all 0.2s ease',
-    _hover: {
-      borderColor: 'color.gray.300',
+export const getCardVariants = (
+  themeMode: string
+): Record<Variant, ViewProps> => {
+  const isDarkMode = themeMode === 'dark';
+
+  return {
+    default: {
+      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
+      border: 'none',
+      transition: 'all 0.2s ease',
     },
-  },
-  elevated: {
-    backgroundColor: 'white',
-    boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.08)',
-    border: 'none',
-    transition: 'all 0.2s ease',
-    _hover: {
-      boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.12)',
-      transform: 'translateY(-2px)',
+    outlined: {
+      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: isDarkMode ? 'color.gray.700' : 'color.gray.200',
+      transition: 'all 0.2s ease',
+      _hover: {
+        borderColor: isDarkMode ? 'color.gray.600' : 'color.gray.300',
+      },
     },
-  },
+    elevated: {
+      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
+      boxShadow: isDarkMode
+        ? '0px 2px 8px rgba(0, 0, 0, 0.2)'
+        : '0px 2px 8px rgba(0, 0, 0, 0.08)',
+      border: 'none',
+      transition: 'all 0.2s ease',
+      _hover: {
+        boxShadow: isDarkMode
+          ? '0px 4px 12px rgba(0, 0, 0, 0.25)'
+          : '0px 4px 12px rgba(0, 0, 0, 0.12)',
+        transform: 'translateY(-2px)',
+      },
+    },
+  };
 };
 
 /**
- * Function to get default styles for Card components
- * @param theme - Theme object (not used directly but kept for compatibility)
+ * Default card variants (for backward compatibility)
  */
-export const getDefaultCardStyles = (_theme: any): CardStyles => ({
-  container: {
-    backgroundColor: 'white',
-    borderRadius: '8px', // Consistent with design system
-    overflow: 'hidden',
+export const CardVariants = getCardVariants('light');
 
-    transition: 'all 0.2s ease',
-    '@media (prefers-color-scheme: dark)': {
-      backgroundColor: 'color.gray.800',
-      color: 'color.gray.100',
+/**
+ * Function to get default styles for Card components
+ * @param theme - Theme object from useTheme hook
+ */
+export const getDefaultCardStyles = (theme: any): CardStyles => {
+  const { themeMode } = theme;
+  const isDarkMode = themeMode === 'dark';
+
+  return {
+    container: {
+      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
+      color: isDarkMode ? 'color.gray.100' : 'color.gray.900',
+      borderRadius: '8px', // Consistent with design system
+      overflow: 'hidden',
+      transition: 'all 0.2s ease',
     },
-  },
-  header: {
-    padding: '16px', // 4 × 4px grid
-    borderBottomWidth: '1px',
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'color.gray.200',
-    '@media (prefers-color-scheme: dark)': {
-      borderBottomColor: 'color.gray.700',
+    header: {
+      padding: '16px', // 4 × 4px grid
+      borderBottomWidth: '1px',
+      borderBottomStyle: 'solid',
+      borderBottomColor: isDarkMode ? 'color.gray.700' : 'color.gray.200',
     },
-  },
-  content: {
-    padding: '16px', // 4 × 4px grid
-    '@media (prefers-color-scheme: dark)': {
-      color: 'color.gray.100',
+    content: {
+      padding: '16px', // 4 × 4px grid
+      color: isDarkMode ? 'color.gray.100' : 'color.gray.900',
     },
-  },
-  footer: {
-    padding: '16px', // 4 × 4px grid
-    borderTopWidth: '1px',
-    borderTopStyle: 'solid',
-    borderTopColor: 'color.gray.200',
-    '@media (prefers-color-scheme: dark)': {
-      borderTopColor: 'color.gray.700',
+    footer: {
+      padding: '16px', // 4 × 4px grid
+      borderTopWidth: '1px',
+      borderTopStyle: 'solid',
+      borderTopColor: isDarkMode ? 'color.gray.700' : 'color.gray.200',
     },
-  },
-});
+  };
+};

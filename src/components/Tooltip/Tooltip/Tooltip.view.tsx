@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { View, Text } from 'app-studio';
+import { View, Text, ViewProps } from 'app-studio';
 import { TooltipContextType, Position, Alignment } from './Tooltip.type';
 import { TooltipTriggerProps, TooltipContentProps } from './Tooltip.props';
 import {
@@ -100,16 +100,18 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
 };
 
 // Main Tooltip View component
-export const TooltipView: React.FC<{
-  content: React.ReactNode;
-  children: React.ReactNode;
-  position?: Position;
-  align?: Alignment;
-  size?: string;
-  variant?: string;
-  showArrow?: boolean;
-  views?: any;
-}> = ({
+export const TooltipView: React.FC<
+  {
+    content: React.ReactNode;
+    children: React.ReactNode;
+    position?: Position;
+    align?: Alignment;
+    size?: string;
+    variant?: string;
+    showArrow?: boolean;
+    views?: any;
+  } & Omit<ViewProps, 'position'>
+> = ({
   content,
   children,
   position = 'top',
@@ -118,6 +120,8 @@ export const TooltipView: React.FC<{
   variant = 'default',
   showArrow = true,
   views,
+
+  themeMode: elementMode,
   ...props
 }) => {
   const {

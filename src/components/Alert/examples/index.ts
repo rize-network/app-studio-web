@@ -3,3 +3,4 @@ export * from './designSystem';
 export * from './icon';
 export * from './styles';
 export * from './variant';
+export * from './darkMode';

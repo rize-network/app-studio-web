@@ -126,6 +126,11 @@ export interface CarouselSlideProps extends ViewProps {
    * Custom styles for the slide
    */
   views?: ViewProps;
+
+  /**
+   * Optional theme mode override ('light' or 'dark')
+   * If not provided, the component will use the theme mode from context
+   */
 }
 
 // New compound component props

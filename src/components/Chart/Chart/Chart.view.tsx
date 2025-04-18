@@ -47,6 +47,8 @@ export const ChartView: React.FC<ChartProps> = ({
   errorIndicator,
   noDataIndicator,
   'aria-label': ariaLabel,
+
+  themeMode: elementMode,
   ...props
 }) => {
   // Use chart state hook

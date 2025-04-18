@@ -89,3 +89,35 @@ export const StylesDemo = () => (
 
 ```
 
+### **Theme Mode Support**
+The Alert component supports both light and dark themes through the `themeMode` prop.
+
+```tsx
+import React from 'react';
+import { Alert } from '../Alert';
+import { Vertical } from 'app-studio';
+import { Text } from '../../Text/Text';
+
+export const DarkModeDemo = () => {
+  return (
+    <Vertical gap={24}>
+      <Text fontSize={20} fontWeight="bold">Light Mode Alerts</Text>
+      <Alert
+        themeMode="light"
+        variant="info"
+        title="Info Alert (Light)"
+        description="This is an info alert in light mode."
+      />
+
+      <Text fontSize={20} fontWeight="bold" marginTop={40}>Dark Mode Alerts</Text>
+      <Alert
+        themeMode="dark"
+        variant="info"
+        title="Info Alert (Dark)"
+        description="This is an info alert in dark mode."
+      />
+    </Vertical>
+  );
+};
+```
+

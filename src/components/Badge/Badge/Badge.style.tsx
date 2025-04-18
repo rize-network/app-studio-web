@@ -88,41 +88,52 @@ export const PositionStyles: { [key: string]: React.CSSProperties } = {
 };
 
 /**
- * Badge variants with consistent styling
+ * Get badge variants with consistent styling based on theme mode
  */
-export const BadgeVariants: Record<Variant, ViewProps> = {
-  filled: {
-    backgroundColor: 'theme.primary',
-    color: 'color.white',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'transparent',
-    transition: 'all 0.2s ease',
-  },
-  outline: {
-    backgroundColor: 'transparent',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'theme.primary',
-    color: 'theme.primary',
-    transition: 'all 0.2s ease',
-  },
-  link: {
-    backgroundColor: 'transparent',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'transparent',
-    color: 'theme.primary',
-    textDecoration: 'underline',
-    textUnderlineOffset: '2px',
-    transition: 'all 0.2s ease',
-  },
-  ghost: {
-    backgroundColor: 'transparent',
-    color: 'color.gray.500',
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: 'transparent',
-    transition: 'all 0.2s ease',
-  },
+export const getBadgeVariants = (
+  themeMode: string
+): Record<Variant, ViewProps> => {
+  const isDarkMode = themeMode === 'dark';
+
+  return {
+    filled: {
+      backgroundColor: 'theme.primary',
+      color: isDarkMode ? 'color.gray.900' : 'color.white',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'transparent',
+      transition: 'all 0.2s ease',
+    },
+    outline: {
+      backgroundColor: 'transparent',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'theme.primary',
+      color: 'theme.primary',
+      transition: 'all 0.2s ease',
+    },
+    link: {
+      backgroundColor: 'transparent',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'transparent',
+      color: 'theme.primary',
+      textDecoration: 'underline',
+      textUnderlineOffset: '2px',
+      transition: 'all 0.2s ease',
+    },
+    ghost: {
+      backgroundColor: 'transparent',
+      color: isDarkMode ? 'color.gray.400' : 'color.gray.500',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'transparent',
+      transition: 'all 0.2s ease',
+    },
+  };
 };
+
+/**
+ * Default badge variants for backward compatibility
+ */
+export const BadgeVariants = getBadgeVariants('light');

@@ -5,13 +5,13 @@
  */
 
 import React from 'react';
-import { View } from 'app-studio';
+import { View, useTheme } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { WarningIcon, InfoIcon, ErrorIcon, SuccessIcon } from '../../Icon/Icon';
 import { AlertProps } from './Alert.props';
-import { Themes } from './Alert.style';
+import { getThemes } from './Alert.style';
 
 /**
  * Alert component that displays important messages to users
@@ -22,13 +22,18 @@ export const AlertView = ({
   views,
   description,
   variant = 'default',
+  themeMode: elementMode,
+  ...props
 }: AlertProps) => {
+  const { themeMode } = useTheme();
+  const currentThemeMode = elementMode || themeMode;
+  const themes = getThemes(currentThemeMode);
   // Select the appropriate icon based on the variant
   const getIcon = () => {
     if (icon) return icon;
 
-    // Use the theme color directly from Themes
-    const iconColor = views?.icon?.color ?? Themes[variant].icon.color;
+    // Use the theme color directly from themes
+    const iconColor = views?.icon?.color ?? themes[variant].icon.color;
 
     const iconProps = {
       size: 20,
@@ -59,13 +64,14 @@ export const AlertView = ({
       borderRadius="8px" // Consistent with design system (rounded-md)
       borderWidth="1px"
       borderStyle="solid"
-      borderColor={Themes[variant].container.borderColor}
-      backgroundColor={Themes[variant].container.backgroundColor}
-      boxShadow={Themes[variant].container.containerShadow}
+      borderColor={themes[variant].container.borderColor}
+      backgroundColor={themes[variant].container.backgroundColor}
+      boxShadow={themes[variant].container.boxShadow}
       // Animation
       transition="all 0.2s ease"
-      // Apply custom container styles
+      // Apply custom container styles and any other props
       {...views?.container}
+      {...props}
     >
       {/* Icon */}
       <View alignSelf="flex-start" marginTop="2px" {...views?.icon}>
@@ -81,7 +87,7 @@ export const AlertView = ({
           fontSize="16px"
           fontWeight="600" // Semi-bold
           lineHeight="24px"
-          color={Themes[variant].content.color}
+          color={themes[variant].content.color}
           {...views?.title}
         >
           {title}
@@ -91,7 +97,7 @@ export const AlertView = ({
           fontSize="14px"
           fontWeight="400" // Regular
           lineHeight="20px"
-          color={Themes[variant].content.color}
+          color={themes[variant].content.color}
           {...views?.description}
         >
           {description}

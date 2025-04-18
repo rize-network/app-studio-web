@@ -53,7 +53,10 @@ export const SliderShapes: Record<Shape, number | string> = {
   pillShaped: 24,
 };
 
-export const SliderVariants: Record<Variant, ViewProps> = {
+export const getSlider = (themeMode: string): Record<Variant, ViewProps> => {
+  const isDarkMode = themeMode === 'dark';
+
+  return {
   default: {
     backgroundColor: 'color.blueGray.200',
   },
@@ -63,7 +66,12 @@ export const SliderVariants: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color.blueGray.300',
   },
+}
+  // Add dark mode conditional styling here
 };
+
+// For backward compatibility
+export const SliderVariants = getSlider('light');
 
 // Maps Size enum to track height/width and thumb size for the new implementation
 export const EnhancedSliderSizes: Record<

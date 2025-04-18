@@ -148,6 +148,11 @@ export interface ContextMenuSeparatorProps extends ViewProps {
    */
   views?: {
     separator?: ViewProps;
+
+    /**
+     * Optional theme mode override ('light' or 'dark')
+     * If not provided, the component will use the theme mode from context
+     */
   };
 }
 

@@ -146,6 +146,7 @@ const ButtonView: React.FC<Props> = ({
       alignItems="center"
       justifyContent="center"
       aria-label={ariaLabel}
+      backgroundColor="transparent"
       borderRadius={ButtonShapes[shape]}
       onClick={props.onClick ?? onClick}
       onMouseEnter={() => handleHover(true)}

@@ -32,7 +32,10 @@ export const getHandleSizeStyles = (
   return sizes[size];
 };
 
-export const HandleVariants: Record<Variant, ViewProps> = {
+export const getHandle = (themeMode: string): Record<Variant, ViewProps> => {
+  const isDarkMode = themeMode === 'dark';
+
+  return {
   default: {
     backgroundColor: 'transparent',
     _hover: {
@@ -60,7 +63,12 @@ export const HandleVariants: Record<Variant, ViewProps> = {
       backgroundColor: 'color.gray.300',
     },
   },
+}
+  // Add dark mode conditional styling here
 };
+
+// For backward compatibility
+export const HandleVariants = getHandle('light');
 
 export const HandleIconStyles: Record<Orientation, ViewProps> = {
   horizontal: {

@@ -47,4 +47,9 @@ export interface SeparatorProps extends ViewProps {
    * Custom styles for different parts of the separator
    */
   views?: SeparatorStyles;
+
+  /**
+   * Optional theme mode override ('light' or 'dark')
+   * If not provided, the component will use the theme mode from context
+   */
 }

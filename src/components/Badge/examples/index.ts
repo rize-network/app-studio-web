@@ -6,3 +6,4 @@ export * from './shape';
 export * from './size';
 export * from './styles';
 export * from './variant';
+export * from './darkMode';

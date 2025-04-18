@@ -39,7 +39,6 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   onBlur = () => {},
   onChange,
   onFocus,
-  onChangeText,
   setHint = () => {},
   setValue = () => {},
   setIsFocused = () => {},
@@ -106,11 +105,9 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   ) => {
     if (typeof event === 'string') {
       setValue(event);
-      if (onChangeText) onChangeText(event);
       if (onChange) onChange(event);
     } else {
       setValue(event.target.value);
-      if (onChangeText) onChangeText(event.target.value);
       if (onChange) onChange(event.target.value);
     }
   };
@@ -161,14 +158,13 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
-            editable={isEditable}
+            editable={!!isEditable.toString()}
             placeholder={hint}
             onBlur={handleBlur}
             onFocus={handleFocus}
-            multiline={isMultiline}
-            {...fieldStyles}
+            multiline={!!isMultiline.toString()}
             onChange={handleChange}
-            onChangeText={handleChange}
+            {...fieldStyles}
             {...views?.textarea}
           />
         </FieldWrapper>

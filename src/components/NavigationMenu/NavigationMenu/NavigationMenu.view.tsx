@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { View, Horizontal, Vertical } from 'app-studio';
+import { View, Horizontal, Vertical, ViewProps } from 'app-studio';
 import {
   NavigationMenuContextType,
   NavigationItem,
@@ -374,17 +374,20 @@ export const NavigationMenuLink: React.FC<NavigationMenuLinkProps> = ({
   );
 };
 
-export const NavigationMenuView: React.FC<{
-  items?: NavigationItem[];
-  orientation: Orientation;
-  size: Size;
-  variant: Variant;
-  views?: any;
-}> = ({
+export const NavigationMenuView: React.FC<
+  {
+    items?: NavigationItem[];
+    orientation: Orientation;
+    size: Size;
+    variant: Variant;
+    views?: any;
+  } & ViewProps
+> = ({
   items,
   orientation,
   //size, variant,
   views,
+  themeMode: elementMode,
 }) => {
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
 

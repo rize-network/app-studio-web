@@ -79,7 +79,7 @@ describe('CountryPicker component', () => {
             text: { color: 'theme.primary' },
             icon: { width: 0.2 },
             label: { fontSize: 15 },
-            dropDown: { backgrounColor: 'theme.primary' },
+            dropDown: { backgroundColor: 'theme.primary' },
             helperText: { color: 'red' },
           }}
         />

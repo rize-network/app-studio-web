@@ -77,4 +77,9 @@ export interface PaginationProps extends ViewProps {
    * Custom styles for different parts of the pagination component
    */
   views?: PaginationStyles;
+
+  /**
+   * Optional theme mode override ('light' or 'dark')
+   * If not provided, the component will use the theme mode from context
+   */
 }

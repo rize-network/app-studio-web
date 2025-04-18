@@ -5,7 +5,7 @@ import React, {
   cloneElement,
   isValidElement,
 } from 'react';
-import { View, Horizontal, Vertical } from 'app-studio';
+import { View, Horizontal, Vertical, ViewProps } from 'app-studio';
 import { AccordionContextType } from './Accordion.type';
 import {
   AccordionTriggerProps,
@@ -223,15 +223,17 @@ export const AccordionContent: React.FC<
 };
 
 // Main Accordion View component
-export const AccordionView: React.FC<{
-  children: React.ReactNode;
-  shape?: 'sharp' | 'rounded';
-  variant?: 'default' | 'outline' | 'filled';
-  views?: any;
-  baseId: string;
-  type: 'single' | 'multiple';
-  collapsible: boolean;
-}> = ({
+export const AccordionView: React.FC<
+  {
+    children: React.ReactNode;
+    shape?: 'sharp' | 'rounded';
+    variant?: 'default' | 'outline' | 'filled';
+    views?: any;
+    baseId: string;
+    type: 'single' | 'multiple';
+    collapsible: boolean;
+  } & ViewProps
+> = ({
   children,
   shape = 'rounded',
   variant = 'default',
@@ -239,6 +241,7 @@ export const AccordionView: React.FC<{
   baseId,
   type,
   collapsible,
+  themeMode: elementMode,
   ...props
 }) => {
   return (

@@ -16,7 +16,10 @@ export const CommandSizes: Record<CommandSize, ViewProps> = {
   },
 };
 
-export const CommandVariants: Record<CommandVariant, ViewProps> = {
+export const getCommand = (themeMode: string): Record<CommandVariant, ViewProps> => {
+  const isDarkMode = themeMode === 'dark';
+
+  return {
   default: {
     backgroundColor: 'white',
     borderWidth: '1px',
@@ -38,7 +41,12 @@ export const CommandVariants: Record<CommandVariant, ViewProps> = {
     borderColor: 'color.gray.300',
     boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
   },
+}
+  // Add dark mode conditional styling here
 };
+
+// For backward compatibility
+export const CommandVariants = getCommand('light');
 
 export const CommandInputStyles: ViewProps = {
   display: 'flex',

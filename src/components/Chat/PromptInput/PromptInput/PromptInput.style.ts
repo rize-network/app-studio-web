@@ -18,9 +18,7 @@ export const getInputContainerStyles = (
   borderRadius: '1.5rem',
   border: '1px solid',
   borderColor: transparentBackground ? 'color.gray.800' : 'color.gray.100',
-  backgroundColor: transparentBackground
-    ? 'color.gray.400/5'
-    : 'color.white/90',
+  backgroundColor: transparentBackground ? 'color.gray.400' : 'color.white.900',
   transition: 'all 0.2s ease',
   padding: '1px',
   _hover: {
