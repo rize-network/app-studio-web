@@ -5,7 +5,7 @@ import { UnderlineLink } from 'src/components/Link/examples/Underline';
 
 export const LinkPage = () => {
   return (
-    <table className="table" cellSpacing={0}>
+    <table>
       <tr>
         <th>Property</th>
         <th>App-Studio</th>

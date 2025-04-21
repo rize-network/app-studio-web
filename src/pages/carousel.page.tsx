@@ -14,7 +14,7 @@ import {
 const CarouselPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

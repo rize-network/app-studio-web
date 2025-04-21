@@ -18,7 +18,7 @@ const ToastPage = () => {
       {/* Toast container that will display all toasts */}
       <Toast.Container position="top-right" />
 
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

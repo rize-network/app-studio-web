@@ -13,7 +13,7 @@ import { View } from 'app-studio';
 export const ButtonPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
@@ -49,7 +49,6 @@ export const ButtonPage = () => {
           </tr>
           <tr>
             <td>Variant</td>
-
             <td>
               <VariantButtons />
             </td>

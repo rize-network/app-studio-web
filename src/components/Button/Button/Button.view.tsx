@@ -39,6 +39,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   isExternal = false,
   themeMode: elementMode,
   views,
+  color,
   backgroundColor = 'theme.primary',
   ...props
 }) => {
@@ -47,90 +48,73 @@ const ButtonView: React.FC<ButtonProps> = ({
 
   const isActive = !(isDisabled || isLoading);
   const defaultNativeProps = { disabled: !isActive };
-  const buttonColor = isActive ? backgroundColor : 'theme.disabled';
-  const hovering = isHovered && effect === 'hover';
-  const reverse = isHovered && effect === 'reverse';
+  const buttonBackgroundColor = isActive ? backgroundColor : 'theme.disabled';
+  const [hovered, setHovered] = React.useState(false);
+  const reverse = effect === 'reverse';
 
   // Determine if the button color is light or dark for proper contrast
-  const buttonMode = elementMode ? elementMode : themeMode;
-  const reverseMode = reverse && buttonMode == 'light' ? 'dark' : `light`; // Slightly darker
+  const mode = elementMode ?? themeMode; // effective mode
+  const bg = getColor(buttonBackgroundColor, { themeMode: mode });
+  const bgHover = getColor(buttonBackgroundColor, {
+    themeMode: mode == 'light' ? 'dark' : 'light',
+  });
+  const isLight = contrast(bg) == 'light';
+  const isLightHover = contrast(bgHover) == 'light';
+  const txtOnBg = isLight ? 'color.black' : 'color.white';
+  const txtOnHover = isLightHover ? 'color.black' : 'color.white';
+  const reverseTxtOnBg = isLight ? 'color.white' : 'color.black';
+  const reverseTxtOnHover = isLightHover ? 'color.white' : 'color.black';
+  const borderClr = getColor(buttonBackgroundColor, { themeMode: mode });
 
-  const isLight =
-    contrast(getColor(buttonColor, { themeMode: buttonMode })) == 'light';
-
-  // Define button variants with effect support
   const ButtonVariants: Record<Variant, any> = {
     filled: {
-      backgroundColor: reverse ? 'transparent' : buttonColor,
-      color: reverse
-        ? isLight
-          ? 'white'
-          : buttonColor
-        : isLight
-        ? buttonColor
-        : 'white',
+      backgroundColor: reverse ? 'transparent' : bg,
+      color: reverse ? reverseTxtOnBg : txtOnBg,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : 'transparent',
+      borderColor: reverse ? bg : 'transparent',
       _hover: {
-        backgroundColor: reverse
-          ? getColor(buttonColor, { themeMode: reverseMode })
-          : buttonColor,
+        backgroundColor: reverse ? bgHover : 'transparent',
+        color: reverse ? txtOnHover : reverseTxtOnHover,
         transform: 'translateY(-1px)',
-        boxShadow: '0 4px 8px rgba(60, 46, 46, 0.1)',
-      },
-      _active: {
-        themeMode: reverse && buttonMode == 'light' ? 'light' : `dark`, // Slightly darker
-        transform: 'translateY(0)',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
       },
     },
+
     outline: {
-      backgroundColor: reverse ? buttonColor : 'transparent',
+      backgroundColor: reverse ? bg : 'transparent',
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : backgroundColor,
-      color: reverse ? 'white' : buttonColor,
+      borderColor: reverse ? bg : borderClr,
+      color: reverse ? txtOnBg : reverseTxtOnBg,
       _hover: {
-        themeMode: reverse ? reverseMode : buttonMode,
+        color: reverse ? reverseTxtOnHover : txtOnHover,
         transform: 'translateY(-1px)',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
-      },
-      _active: {
-        themeMode: reverse ? reverseMode : buttonMode,
-        transform: 'translateY(0)',
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.05)',
       },
     },
+
     link: {
       backgroundColor: 'transparent',
       borderWidth: 0,
       borderStyle: 'none',
       borderColor: 'transparent',
-      color: buttonColor,
+      color: reverse ? reverseTxtOnBg : txtOnBg,
       textDecoration: reverse ? 'none' : 'underline',
       _hover: {
-        opacity: 0.8,
-        textDecorationThickness: '2px',
-      },
-      _active: {
-        opacity: 0.8,
+        transform: 'translateY(-1px)',
         textDecorationThickness: '2px',
       },
     },
+
     ghost: {
-      backgroundColor: reverse ? buttonColor : 'transparent',
-      color: reverse ? 'white' : buttonColor,
+      backgroundColor: reverse ? bg : 'transparent',
+      color: reverse ? txtOnBg : reverseTxtOnBg,
       borderWidth: 0,
       borderStyle: 'none',
       borderColor: 'transparent',
       _hover: {
-        themeMode: reverse ? reverseMode : buttonMode,
         transform: 'translateY(-1px)',
-      },
-      _active: {
-        themeMode: reverse ? reverseMode : buttonMode,
-        transform: 'translateY(0)',
       },
     },
   };
@@ -152,6 +136,9 @@ const ButtonView: React.FC<ButtonProps> = ({
     ? Horizontal
     : Vertical;
 
+  // Extract hover and active styles from buttonVariant
+  const { _hover, _active, ...baseButtonVariant } = buttonVariant;
+
   // Create the button content with proper spacing and alignment
   const content = (
     <Container
@@ -167,7 +154,6 @@ const ButtonView: React.FC<ButtonProps> = ({
           {...loaderProps}
         />
       )}
-
       {/* Show icon on the left/top if not loading */}
       {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
         <View
@@ -179,10 +165,8 @@ const ButtonView: React.FC<ButtonProps> = ({
           {icon}
         </View>
       )}
-
       {/* Button text/children */}
       {children}
-
       {/* Show icon on the right/bottom if not loading */}
       {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
         <View
@@ -194,19 +178,16 @@ const ButtonView: React.FC<ButtonProps> = ({
           {icon}
         </View>
       )}
-
       {/* Show loader on the right if loading and position is right */}
       {isLoading && loaderPosition === 'right' && (
         <Loader
           size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+          {...baseButtonVariant}
           {...loaderProps}
         />
       )}
     </Container>
   );
-
-  // Extract hover and active styles from buttonVariant
-  const { _hover, _active, ...baseButtonVariant } = buttonVariant || {};
 
   return (
     <Element
@@ -224,11 +205,19 @@ const ButtonView: React.FC<ButtonProps> = ({
       onMouseLeave={() => handleHover(false)}
       cursor={isActive ? 'pointer' : 'default'}
       filter={
-        hovering && effect === 'hover' ? 'brightness(0.85)' : 'brightness(1)'
+        isHovered
+          ? effect === 'hover'
+            ? 'brightness(0.85)'
+            : 'brightness(1)'
+          : undefined
       }
       transition="all 0.2s ease"
       transform={
-        hovering && effect === 'hover' && !isDisabled ? 'translateY(-5px)' : ''
+        isHovered
+          ? effect === 'hover' && !isDisabled
+            ? 'translateY(-5px)'
+            : ''
+          : undefined
       }
       // Apply consistent styling according to design guidelines
 
@@ -240,8 +229,8 @@ const ButtonView: React.FC<ButtonProps> = ({
       {...(({ height, ...rest }) => rest)(props)}
       // Apply size-specific styles to ensure consistent sizing
       {...buttonSizeStyles}
-      {...baseButtonVariant}
       {...scaleWidth}
+      {...baseButtonVariant}
       // Only apply padding from ButtonSizes if no custom padding is provided
       {...(props.padding ||
       props.paddingHorizontal ||

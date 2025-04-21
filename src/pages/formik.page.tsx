@@ -17,7 +17,7 @@ import { FormikComboBoxDemo } from '../components/Formik/examples/FormikComboBox
 export const FormikPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

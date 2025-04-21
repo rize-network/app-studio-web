@@ -1,3 +1,4 @@
+import { View } from 'app-studio';
 import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -6,5 +7,9 @@ interface RouterProps {
 }
 
 export const RouterProvider: FC<RouterProps> = ({ children }) => (
-  <BrowserRouter>{children}</BrowserRouter>
+  <BrowserRouter>
+    <View backgroundColor="color.white" color="color.black">
+      {children}
+    </View>
+  </BrowserRouter>
 );

@@ -5,7 +5,7 @@ import { Default, StylesTabs } from 'src/components/Tabs/examples';
 export const TabsPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

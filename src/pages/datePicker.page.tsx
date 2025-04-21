@@ -16,7 +16,7 @@ import { View } from 'app-studio';
 export const DatePickerPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

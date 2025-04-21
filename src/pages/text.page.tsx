@@ -7,7 +7,7 @@ import { DesignSystemText } from 'src/components/Text/examples';
 export const TextPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

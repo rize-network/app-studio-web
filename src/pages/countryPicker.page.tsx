@@ -18,7 +18,7 @@ import { View } from 'app-studio';
 export const CountryPickerPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th style={{ width: '10%' }}>Property</th>
