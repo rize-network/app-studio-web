@@ -54,10 +54,9 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
-  const IconColor = getColor(
-    'color.blueGray.700',
-    elementMode ? elementMode : themeMode
-  );
+  const IconColor = getColor('color.blueGray.700', {
+    themeMode: elementMode ? elementMode : themeMode,
+  });
   const showLabel = !!(isFocused && label);
   /**
    * Styles for the input field

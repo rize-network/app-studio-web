@@ -15,9 +15,7 @@ import { Horizontal } from 'app-studio';
 
 var contrast = require('contrast');
 
-interface Props extends ButtonProps {}
-
-const ButtonView: React.FC<Props> = ({
+const ButtonView: React.FC<ButtonProps> = ({
   icon,
   shadow,
   children,
@@ -41,7 +39,7 @@ const ButtonView: React.FC<Props> = ({
   isExternal = false,
   themeMode: elementMode,
   views,
-  colorScheme = 'theme.primary',
+  backgroundColor = 'theme.primary',
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
@@ -49,7 +47,7 @@ const ButtonView: React.FC<Props> = ({
 
   const isActive = !(isDisabled || isLoading);
   const defaultNativeProps = { disabled: !isActive };
-  const buttonColor = isActive ? colorScheme : 'theme.disabled';
+  const buttonColor = isActive ? backgroundColor : 'theme.disabled';
   const hovering = isHovered && effect === 'hover';
   const reverse = isHovered && effect === 'reverse';
 
@@ -57,7 +55,8 @@ const ButtonView: React.FC<Props> = ({
   const buttonMode = elementMode ? elementMode : themeMode;
   const reverseMode = reverse && buttonMode == 'light' ? 'dark' : `light`; // Slightly darker
 
-  const isLight = contrast(getColor(buttonColor, buttonMode)) == 'light';
+  const isLight =
+    contrast(getColor(buttonColor, { themeMode: buttonMode })) == 'light';
 
   // Define button variants with effect support
   const ButtonVariants: Record<Variant, any> = {
@@ -74,9 +73,11 @@ const ButtonView: React.FC<Props> = ({
       borderStyle: 'solid',
       borderColor: reverse ? buttonColor : 'transparent',
       _hover: {
-        themeMode: reverse && buttonMode == 'light' ? 'light' : `dark`, // Slightly darker
+        backgroundColor: reverse
+          ? getColor(buttonColor, { themeMode: reverseMode })
+          : buttonColor,
         transform: 'translateY(-1px)',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 4px 8px rgba(60, 46, 46, 0.1)',
       },
       _active: {
         themeMode: reverse && buttonMode == 'light' ? 'light' : `dark`, // Slightly darker
@@ -88,7 +89,7 @@ const ButtonView: React.FC<Props> = ({
       backgroundColor: reverse ? buttonColor : 'transparent',
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : colorScheme,
+      borderColor: reverse ? buttonColor : backgroundColor,
       color: reverse ? 'white' : buttonColor,
       _hover: {
         themeMode: reverse ? reverseMode : buttonMode,
@@ -260,7 +261,7 @@ const ButtonView: React.FC<Props> = ({
       {variant === 'link' && to ? (
         <Link
           to={to}
-          textDecorationColor={colorScheme}
+          textDecorationColor={backgroundColor}
           textDecorationThickness="1px"
           textUnderlineOffset="2px"
           transition="all 0.2s ease"

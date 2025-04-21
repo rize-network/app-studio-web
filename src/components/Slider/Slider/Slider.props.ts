@@ -71,10 +71,7 @@ export interface SliderProps extends Omit<InputProps, 'size' | 'onChange'> {
    * Callback function when the slider is being dragged
    */
   onDrag?: (value: number) => void;
-  /**
-   * Optional color scheme to apply (e.g., 'theme.primary')
-   */
-  colorScheme?: string;
+
   /**
    * Custom styles for the slider components
    */

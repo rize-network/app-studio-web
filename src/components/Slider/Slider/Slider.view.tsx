@@ -24,7 +24,7 @@ export const SliderView: React.FC<SliderViewProps> = ({
   isDisabled = false,
   showValue = false,
   showTooltip = false,
-  colorScheme = 'theme.primary',
+  backgroundColor = 'theme.primary',
   label,
   helperText,
   themeMode: elementMode,
@@ -53,11 +53,15 @@ export const SliderView: React.FC<SliderViewProps> = ({
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
-  const themeColor = getColor(colorScheme, elementMode || themeMode);
-  const disabledColor = getColor('theme.disabled', elementMode || themeMode);
+  const themeColor = getColor(backgroundColor, {
+    themeMode: elementMode || themeMode,
+  });
+  const disabledColor = getColor('theme.disabled', {
+    themeMode: elementMode || themeMode,
+  });
   const trackColor = getColor(
     SliderVariants[variant].backgroundColor as string,
-    elementMode || themeMode
+    { themeMode: elementMode || themeMode }
   );
 
   const isVertical = orientation === 'vertical';

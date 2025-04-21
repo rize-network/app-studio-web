@@ -296,7 +296,7 @@ function updateViewFile(viewFilePath) {
     /getColor\(\s*([^,)]+)(?:\s*,\s*[^)]+)?\s*\)/g,
     (match, colorArg) => {
       if (!match.includes('currentThemeMode')) {
-        return `getColor(${colorArg}, currentThemeMode)`;
+        return `getColor(${colorArg},{themeMode: currentThemeMode})`;
       }
       return match;
     }

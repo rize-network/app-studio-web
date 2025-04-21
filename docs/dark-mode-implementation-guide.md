@@ -86,7 +86,7 @@ When you need to get a color value, use the `getColor` function:
 ```tsx
 const { getColor, themeMode } = useTheme();
 const currentThemeMode = elementMode || themeMode;
-const backgroundColor = getColor('theme.primary', currentThemeMode);
+const backgroundColor = getColor('theme.primary', {themeMode:currentThemeMode});
 ```
 
 ### 5. Create Examples

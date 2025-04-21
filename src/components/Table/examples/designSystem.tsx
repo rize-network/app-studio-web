@@ -65,7 +65,7 @@ export const DesignSystemTable = () => {
     return (
       <Badge
         variant="outline"
-        colorScheme={color}
+        backgroundColor={color}
         borderRadius="4px"
         paddingLeft="8px"
         paddingTop="2px"
@@ -107,7 +107,7 @@ export const DesignSystemTable = () => {
       render: () => (
         <Horizontal gap={8}>
           <Button size="xs">Edit</Button>
-          <Button size="xs" variant="outline" colorScheme="red">
+          <Button size="xs" variant="outline" backgroundColor="red">
             Delete
           </Button>
         </Horizontal>

@@ -84,9 +84,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     transition: 'all 0.2s ease',
 
     // // Dark mode support
-    // '@media (prefers-color-scheme: dark)': {
-    //   color: isDisabled ? 'color.gray.600' : 'color.gray.100',
-    // },
+   
 
     // Apply custom field styles
     ...views['field'],
