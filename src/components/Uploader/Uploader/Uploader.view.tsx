@@ -136,12 +136,12 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   const finalPreviewUrl = externalPreviewUrl || previewUrl;
 
   // Debug log to help troubleshoot
-  console.log('Uploader state:', {
-    fileType,
-    finalPreviewUrl,
-    selectedFile: selectedFile?.name,
-    progress,
-  });
+  // console.log('Uploader state:', {
+  //   fileType,
+  //   finalPreviewUrl,
+  //   selectedFile: selectedFile?.name,
+  //   progress,
+  // });
 
   return (
     <Center

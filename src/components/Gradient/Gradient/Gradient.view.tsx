@@ -87,7 +87,14 @@ export const GradientView: React.FC<GradientProps> = ({
 
     return {
       ...baseAnimation,
-      animation: baseAnimation.animation.replace('3s', `${animationDuration}s`),
+      transition: baseAnimation.transition.replace(
+        '3s',
+        `${animationDuration}s`
+      ),
+      // Apply animation properties
+      animationDuration: `${animationDuration}s`,
+      animationIterationCount: 'infinite',
+      animationTimingFunction: type === 'conic' ? 'linear' : 'ease-in-out',
     };
   }, [animate, animationDuration, type]);
 

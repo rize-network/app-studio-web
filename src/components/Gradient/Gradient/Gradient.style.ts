@@ -113,33 +113,33 @@ export const generateGradientString = (
 };
 
 /**
- * Animation keyframes for animated gradients
+ * Animation styles for animated gradients using app-studio's animation system
  */
 export const GradientAnimations = {
   linear: {
-    '@keyframes gradient-animation': {
-      '0%': { backgroundPosition: '0% 50%' },
-      '50%': { backgroundPosition: '100% 50%' },
-      '100%': { backgroundPosition: '0% 50%' },
-    },
-    animation: 'gradient-animation 3s ease infinite',
     backgroundSize: '200% 200%',
+    transition: 'background-position 3s ease-in-out',
+    animate: {
+      from: { backgroundPosition: '0% 50%' },
+      '50%': { backgroundPosition: '100% 50%' },
+      to: { backgroundPosition: '0% 50%' },
+    },
   },
   radial: {
-    '@keyframes gradient-animation': {
-      '0%': { backgroundPosition: 'center' },
-      '50%': { backgroundSize: '120% 120%' },
-      '100%': { backgroundPosition: 'center', backgroundSize: '100% 100%' },
-    },
-    animation: 'gradient-animation 3s ease infinite',
     backgroundSize: '100% 100%',
+    transition: 'all 3s ease-in-out',
+    animate: {
+      from: { backgroundPosition: 'center', backgroundSize: '100% 100%' },
+      '50%': { backgroundSize: '120% 120%' },
+      to: { backgroundPosition: 'center', backgroundSize: '100% 100%' },
+    },
   },
   conic: {
-    '@keyframes gradient-animation': {
-      '0%': { transform: 'rotate(0deg)' },
-      '100%': { transform: 'rotate(360deg)' },
+    transition: 'transform 3s linear',
+    animate: {
+      from: { transform: 'rotate(0deg)' },
+      to: { transform: 'rotate(360deg)' },
     },
-    animation: 'gradient-animation 3s linear infinite',
   },
 };
 

@@ -23,9 +23,9 @@ export const useTabsState = (
         return foundTab;
       }
       // Warn if initialTabValue is provided but not found
-      console.warn(
-        `Tabs: initialTabValue "${initialTabValue}" not found in tabs. Defaulting to the first tab.`
-      );
+      // console.warn(
+      //   `Tabs: initialTabValue "${initialTabValue}" not found in tabs. Defaulting to the first tab.`
+      // );
     }
     return propTabs[0]; // Default to the first tab
   };

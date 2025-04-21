@@ -1,0 +1,1673 @@
+This file is a merged representation of a subset of the codebase, containing specifically included files, combined into a single document by Repomix.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: src/components/Command
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+
+Additional Info:
+----------------
+
+================================================================
+Directory Structure
+================================================================
+src/
+  components/
+    Command/
+      Command/
+        Command.props.ts
+        Command.state.ts
+        Command.style.ts
+        Command.type.ts
+        Command.view.tsx
+      examples/
+        customized.tsx
+        default.tsx
+        groups.tsx
+        index.ts
+        sizes.tsx
+        variants.tsx
+      Command.tsx
+      index.ts
+
+================================================================
+Files
+================================================================
+
+================
+File: src/components/Command/Command/Command.type.ts
+================
+import { ViewProps } from 'app-studio';
+import React from 'react';
+
+export type CommandSize = 'sm' | 'md' | 'lg';
+export type CommandVariant = 'default' | 'filled' | 'outline';
+
+export interface CommandItem {
+  /**
+   * Unique identifier for the command
+   */
+  id: string;
+
+  /**
+   * Display name for the command
+   */
+  name: string;
+
+  /**
+   * Optional description for the command
+   */
+  description?: string;
+
+  /**
+   * Optional icon to display with the command
+   */
+  icon?: React.ReactNode;
+
+  /**
+   * Optional keyboard shortcut for the command (e.g., "⌘K", "Ctrl+P")
+   */
+  shortcut?: string;
+
+  /**
+   * Function to execute when the command is selected
+   */
+  onSelect: () => void;
+
+  /**
+   * Optional keywords for improved search
+   */
+  keywords?: string[];
+
+  /**
+   * Optional disabled state
+   */
+  disabled?: boolean;
+}
+
+export interface CommandGroup {
+  /**
+   * Unique identifier for the group
+   */
+  id: string;
+
+  /**
+   * Display name for the group
+   */
+  name: string;
+
+  /**
+   * Commands in this group
+   */
+  commands: CommandItem[];
+}
+
+export interface CommandStyles {
+  /**
+   * Styles for the command dialog container
+   */
+  container?: ViewProps;
+
+  /**
+   * Styles for the search input
+   */
+  searchInput?: {
+    container?: ViewProps;
+    input?: ViewProps;
+  };
+
+  /**
+   * Styles for the command list container
+   */
+  list?: ViewProps;
+
+  /**
+   * Styles for the command group heading
+   */
+  groupHeading?: { container?: ViewProps; heading?: ViewProps };
+
+  /**
+   * Styles for each command item
+   */
+  item?: ViewProps;
+
+  /**
+   * Styles for the selected command item
+   */
+  selectedItem?: ViewProps;
+
+  /**
+   * Styles for the command item icon
+   */
+  icon?: ViewProps;
+
+  /**
+   * Styles for the command item content (name and description)
+   */
+  content?: ViewProps;
+
+  /**
+   * Styles for the command item name
+   */
+  name?: ViewProps;
+
+  /**
+   * Styles for the command item description
+   */
+  description?: ViewProps;
+
+  /**
+   * Styles for the command item shortcut
+   */
+  shortcut?: ViewProps;
+
+  /**
+   * Styles for the empty state
+   */
+  empty?: { container?: ViewProps };
+
+  /**
+   * Styles for the footer
+   */
+  footer?: ViewProps;
+}
+
+================
+File: src/components/Command/examples/default.tsx
+================
+import React, { useState } from 'react';
+import { Command } from '../Command';
+import { Button } from '../../Button/Button';
+import {
+  HomeIcon,
+  SettingsIcon,
+  UserIcon,
+  InfoIcon,
+  SearchIcon,
+} from '../../Icon/Icon';
+
+export const DefaultCommand = () => {
+  const [open, setOpen] = useState(false);
+
+  const commands = [
+    {
+      id: 'home',
+      name: 'Home',
+      description: 'Go to home page',
+      icon: <HomeIcon widthHeight={16} />,
+      shortcut: '⌘H',
+      onSelect: () => console.log('Home selected'),
+    },
+    {
+      id: 'settings',
+      name: 'Settings',
+      description: 'Open settings page',
+      icon: <SettingsIcon widthHeight={16} />,
+      shortcut: '⌘S',
+      onSelect: () => console.log('Settings selected'),
+    },
+    {
+      id: 'profile',
+      name: 'Profile',
+      description: 'View your profile',
+      icon: <UserIcon widthHeight={16} />,
+      shortcut: '⌘P',
+      onSelect: () => console.log('Profile selected'),
+    },
+    {
+      id: 'help',
+      name: 'Help',
+      description: 'Get help and support',
+      icon: <InfoIcon widthHeight={16} />,
+      shortcut: '⌘?',
+      onSelect: () => console.log('Help selected'),
+    },
+    {
+      id: 'search',
+      name: 'Search',
+      description: 'Search for content',
+      icon: <SearchIcon widthHeight={16} />,
+      shortcut: '⌘K',
+      onSelect: () => console.log('Search selected'),
+    },
+  ];
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Command Palette</Button>
+      <Command
+        open={open}
+        onOpenChange={setOpen}
+        commands={commands}
+        placeholder="Search commands..."
+      />
+    </>
+  );
+};
+
+================
+File: src/components/Command/examples/index.ts
+================
+export * from './default';
+export * from './groups';
+export * from './variants';
+export * from './sizes';
+export * from './customized';
+
+================
+File: src/components/Command/index.ts
+================
+export * from './Command';
+
+================
+File: src/components/Command/Command/Command.props.ts
+================
+import { ViewProps } from 'app-studio';
+import React from 'react';
+import {
+  CommandGroup,
+  CommandItem,
+  CommandSize,
+  CommandStyles,
+  CommandVariant,
+} from './Command.type';
+
+export interface CommandProps {
+  /**
+   * Whether the command palette is open
+   */
+  open: boolean;
+
+  /**
+   * Callback when the open state changes
+   */
+  onOpenChange: (open: boolean) => void;
+
+  /**
+   * Command groups to display
+   */
+  groups?: CommandGroup[];
+
+  /**
+   * Flat list of commands (alternative to groups)
+   */
+  commands?: CommandItem[];
+
+  /**
+   * Placeholder text for the search input
+   */
+  placeholder?: string;
+
+  /**
+   * Size of the command palette
+   */
+  size?: CommandSize;
+
+  /**
+   * Visual variant of the command palette
+   */
+  variant?: CommandVariant;
+
+  /**
+   * Custom filter function for searching commands
+   */
+  filter?: (value: string, item: CommandItem) => boolean;
+
+  /**
+   * Custom empty state when no commands match the search
+   */
+  emptyState?: React.ReactNode;
+
+  /**
+   * Custom footer content
+   */
+  footer?: React.ReactNode;
+
+  /**
+   * Custom styles for different parts of the command palette
+   */
+  views?: CommandStyles;
+
+  /**
+   * Additional props to be spread to the container element
+   */
+  [key: string]: any;
+}
+
+export interface CommandInputProps {
+  /**
+   * Value of the search input
+   */
+  value: string;
+
+  /**
+   * Callback when the value changes
+   */
+  onValueChange: (value: string) => void;
+
+  /**
+   * Placeholder text for the search input
+   */
+  placeholder?: string;
+
+  /**
+   * Custom styles for the input
+   */
+  views?: {
+    container?: ViewProps;
+    input?: ViewProps;
+  };
+}
+
+export interface CommandListProps {
+  /**
+   * Children to render in the list
+   */
+  children: React.ReactNode;
+
+  /**
+   * Custom styles for the list
+   */
+  views?: {
+    container?: ViewProps;
+  };
+}
+
+export interface CommandGroupProps {
+  /**
+   * Heading for the group
+   */
+  heading: string;
+
+  /**
+   * Children to render in the group
+   */
+  children: React.ReactNode;
+
+  /**
+   * Custom styles for the group
+   */
+  views?: {
+    container?: ViewProps;
+    heading?: ViewProps;
+  };
+}
+
+export interface CommandItemProps {
+  /**
+   * Command item data
+   */
+  item: CommandItem;
+
+  /**
+   * Whether the item is selected
+   */
+  selected?: boolean;
+
+  /**
+   * Callback when the item is selected
+   */
+  onSelect?: () => void;
+
+  /**
+   * Custom styles for the item
+   */
+  views?: {
+    container?: ViewProps;
+    icon?: ViewProps;
+    content?: ViewProps;
+    name?: ViewProps;
+    description?: ViewProps;
+    shortcut?: ViewProps;
+  };
+}
+
+export interface CommandEmptyProps {
+  /**
+   * Children to render in the empty state
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Custom styles for the empty state
+   */
+  views?: {
+    container?: ViewProps;
+  };
+}
+
+export interface CommandType extends React.FC<CommandProps> {
+  /**
+   * Input component for the command palette
+   */
+  Input: React.FC<CommandInputProps>;
+
+  /**
+   * List component for the command palette
+   */
+  List: React.FC<CommandListProps>;
+
+  /**
+   * Group component for the command palette
+   */
+  Group: React.FC<CommandGroupProps>;
+
+  /**
+   * Item component for the command palette
+   */
+  Item: React.FC<CommandItemProps>;
+
+  /**
+   * Empty component for the command palette
+   */
+  Empty: React.FC<CommandEmptyProps>;
+}
+
+================
+File: src/components/Command/Command/Command.state.ts
+================
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { CommandGroup, CommandItem } from './Command.type';
+
+export interface CommandStateProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  groups?: CommandGroup[];
+  commands?: CommandItem[];
+  filter?: (value: string, item: CommandItem) => boolean;
+}
+
+export const useCommandState = ({
+  open,
+  onOpenChange,
+  groups = [],
+  commands = [],
+  filter,
+}: CommandStateProps) => {
+  // Combine commands from groups and flat list
+  const allCommands = useCallback(() => {
+    const groupCommands = groups.flatMap((group) => group.commands);
+    return [...groupCommands, ...commands];
+  }, [groups, commands]);
+
+  // State for search input
+  const [search, setSearch] = useState('');
+
+  // State for selected item index
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  // Ref for the command list element
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // Default filter function
+  const defaultFilter = (value: string, item: CommandItem) => {
+    if (!value) return true;
+
+    const searchValue = value.toLowerCase();
+    const matchesName = item.name.toLowerCase().includes(searchValue);
+    const matchesDescription =
+      item.description?.toLowerCase().includes(searchValue) || false;
+    const matchesKeywords =
+      item.keywords?.some((keyword) =>
+        keyword.toLowerCase().includes(searchValue)
+      ) || false;
+
+    return matchesName || matchesDescription || matchesKeywords;
+  };
+
+  // Filter commands based on search
+  const filterCommands = useCallback(
+    (searchValue: string) => {
+      const filterFn = filter || defaultFilter;
+      const commands = allCommands();
+      return searchValue.trim() === ''
+        ? commands
+        : commands.filter((item) => filterFn(searchValue, item));
+    },
+    [allCommands, filter]
+  );
+
+  // Filtered commands based on search
+  const [filteredCommands, setFilteredCommands] = useState<CommandItem[]>([]);
+
+  // Filtered groups based on search
+  const filteredGroups = useCallback(() => {
+    if (!search) return groups;
+
+    return groups
+      .map((group) => ({
+        ...group,
+        commands: group.commands.filter((command) =>
+          (filter || defaultFilter)(search, command)
+        ),
+      }))
+      .filter((group) => group.commands.length > 0);
+  }, [groups, search, filter]);
+
+  // Update filtered commands when search or commands change
+  useEffect(() => {
+    setFilteredCommands(filterCommands(search));
+    setSelectedIndex(0);
+  }, [search, filterCommands]);
+
+  // Handle keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!open) return;
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          setSelectedIndex((prev) =>
+            prev < filteredCommands.length - 1 ? prev + 1 : prev
+          );
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev));
+          break;
+        case 'Enter':
+          e.preventDefault();
+          if (filteredCommands[selectedIndex]) {
+            filteredCommands[selectedIndex].onSelect();
+            onOpenChange(false);
+            setSearch('');
+          }
+          break;
+        case 'Escape':
+          e.preventDefault();
+          onOpenChange(false);
+          setSearch('');
+          break;
+      }
+    },
+    [open, filteredCommands, selectedIndex, onOpenChange, setSearch]
+  );
+
+  // Add keyboard event listener
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+  // Scroll selected item into view
+  useEffect(() => {
+    if (listRef.current && open) {
+      const selectedElement = listRef.current.querySelector(
+        `[data-index="${selectedIndex}"]`
+      );
+      if (selectedElement) {
+        selectedElement.scrollIntoView({ block: 'nearest' });
+      }
+    }
+  }, [selectedIndex, open]);
+
+  // Reset state when command palette is opened
+  useEffect(() => {
+    if (open) {
+      setSelectedIndex(0);
+    }
+  }, [open]);
+
+  return {
+    search,
+    setSearch,
+    selectedIndex,
+    setSelectedIndex,
+    filteredCommands,
+    filteredGroups: filteredGroups(),
+    listRef,
+  };
+};
+
+================
+File: src/components/Command/Command/Command.view.tsx
+================
+import React, { createContext, useContext, useRef } from 'react';
+import { View } from 'app-studio';
+import { Text } from '../../Text/Text';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { SearchIcon } from '../../Icon/Icon';
+import {
+  CommandProps,
+  CommandInputProps,
+  CommandListProps,
+  CommandGroupProps,
+  CommandItemProps,
+  CommandEmptyProps,
+} from './Command.props';
+import {
+  CommandSizes,
+  CommandVariants,
+  CommandInputStyles,
+  CommandListStyles,
+  CommandGroupStyles,
+  CommandGroupHeadingStyles,
+  CommandItemStyles,
+  CommandItemSelectedStyles,
+  CommandItemDisabledStyles,
+  CommandItemIconStyles,
+  CommandItemContentStyles,
+  CommandItemNameStyles,
+  CommandItemDescriptionStyles,
+  CommandItemShortcutStyles,
+  CommandEmptyStyles,
+  CommandFooterStyles,
+} from './Command.style';
+import { CommandItem as CommandItemInterface } from './Command.type';
+
+// Create context for the Command component
+interface CommandContextType {
+  search: string;
+  setSearch: (value: string) => void;
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
+  filteredCommands: CommandItemInterface[];
+  onSelect: (item: CommandItemInterface) => void;
+}
+
+const CommandContext = createContext<CommandContextType>({
+  search: '',
+  setSearch: () => {},
+  selectedIndex: 0,
+  setSelectedIndex: () => {},
+  filteredCommands: [],
+  onSelect: () => {},
+});
+
+// Hook to use the Command context
+export const useCommandContext = () => useContext(CommandContext);
+
+// Provider component for the Command context
+export const CommandProvider: React.FC<{
+  value: CommandContextType;
+  children: React.ReactNode;
+}> = ({ value, children }) => {
+  return (
+    <CommandContext.Provider value={value}>{children}</CommandContext.Provider>
+  );
+};
+
+// Command Input component
+export const CommandInput: React.FC<CommandInputProps> = ({
+  value,
+  onValueChange,
+  placeholder = 'Type a command or search...',
+  views,
+  ...props
+}) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Focus input when component mounts
+  React.useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  return (
+    <View {...CommandInputStyles} {...views?.container} {...props}>
+      <SearchIcon widthHeight={16} color="color.gray.400" marginRight="8px" />
+      <View
+        as="input"
+        type="text"
+        value={value}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onValueChange(e.target.value)
+        }
+        placeholder={placeholder}
+        width="100%"
+        border="none"
+        outline="none"
+        backgroundColor="transparent"
+        fontSize="14px"
+        ref={inputRef}
+        {...views?.input}
+      />
+    </View>
+  );
+};
+
+// Command List component
+export const CommandList: React.FC<CommandListProps> = ({
+  children,
+  views,
+  ...props
+}) => {
+  return (
+    <View {...CommandListStyles} {...views?.container} {...props}>
+      {children}
+    </View>
+  );
+};
+
+// Command Group component
+export const CommandGroup: React.FC<CommandGroupProps> = ({
+  heading,
+  children,
+  views,
+  ...props
+}) => {
+  return (
+    <View {...CommandGroupStyles} {...views?.container} {...props}>
+      <Text {...CommandGroupHeadingStyles} {...views?.heading}>
+        {heading}
+      </Text>
+      {children}
+    </View>
+  );
+};
+
+// Command Item component
+export const CommandItem: React.FC<CommandItemProps> = ({
+  item,
+  selected = false,
+  onSelect,
+  views,
+  ...props
+}) => {
+  const handleClick = () => {
+    if (!item.disabled && onSelect) {
+      onSelect();
+    }
+  };
+
+  return (
+    <Horizontal
+      {...CommandItemStyles}
+      {...(selected ? CommandItemSelectedStyles : {})}
+      {...(item.disabled ? CommandItemDisabledStyles : {})}
+      onClick={handleClick}
+      {...views?.container}
+      {...props}
+    >
+      {item.icon && (
+        <View {...CommandItemIconStyles} {...views?.icon}>
+          {item.icon}
+        </View>
+      )}
+      <Vertical {...CommandItemContentStyles} {...views?.content}>
+        <Text {...CommandItemNameStyles} {...views?.name}>
+          {item.name}
+        </Text>
+        {item.description && (
+          <Text {...CommandItemDescriptionStyles} {...views?.description}>
+            {item.description}
+          </Text>
+        )}
+      </Vertical>
+      {item.shortcut && (
+        <Text {...CommandItemShortcutStyles} {...views?.shortcut}>
+          {item.shortcut}
+        </Text>
+      )}
+    </Horizontal>
+  );
+};
+
+// Command Empty component
+export const CommandEmpty: React.FC<CommandEmptyProps> = ({
+  children = 'No results found.',
+  views,
+  ...props
+}) => {
+  return (
+    <View {...CommandEmptyStyles} {...views?.container} {...props}>
+      {children}
+    </View>
+  );
+};
+
+// Main Command View component
+export const CommandView: React.FC<
+  CommandProps & {
+    search: string;
+    setSearch: (value: string) => void;
+    selectedIndex: number;
+    setSelectedIndex: (index: number) => void;
+    filteredCommands: CommandItemInterface[];
+    filteredGroups: any[];
+    listRef: React.RefObject<HTMLDivElement>;
+  }
+> = ({
+  open,
+  onOpenChange,
+  groups = [],
+  commands = [],
+  placeholder,
+  size = 'md',
+  variant = 'default',
+  emptyState,
+  footer,
+  search,
+  setSearch,
+  selectedIndex,
+  setSelectedIndex,
+  filteredCommands,
+  filteredGroups,
+  listRef,
+  views,
+  filter,
+  ...props
+}) => {
+  if (!open) return null;
+
+  const handleItemSelect = (item: CommandItemInterface) => {
+    if (!item.disabled) {
+      item.onSelect();
+      onOpenChange(false);
+      setSearch('');
+    }
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onOpenChange(false);
+    }
+  };
+
+  const contextValue = {
+    search,
+    setSearch,
+    selectedIndex,
+    setSelectedIndex,
+    filteredCommands,
+    onSelect: handleItemSelect,
+  };
+
+  const hasGroups = groups.length > 0;
+  // const hasCommands = commands.length > 0;
+  const isEmpty = filteredCommands.length === 0;
+
+  return (
+    <View
+      position="fixed"
+      top={0}
+      left={0}
+      right={0}
+      bottom={0}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      backgroundColor="rgba(0, 0, 0, 0.4)"
+      zIndex={9999}
+      onClick={handleBackdropClick}
+      {...props}
+    >
+      <CommandProvider value={contextValue}>
+        <View
+          borderRadius="8px"
+          overflow="hidden"
+          display="flex"
+          flexDirection="column"
+          {...CommandSizes[size]}
+          {...CommandVariants[variant]}
+          {...views?.container}
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+        >
+          {/* <CommandInput
+            value={search}
+            onValueChange={setSearch}
+            placeholder={placeholder}
+            views={views?.searchInput}
+          /> */}
+
+          <View ref={listRef} flex={1} overflow="auto" {...views?.list}>
+            {isEmpty ? (
+              emptyState ? (
+                emptyState
+              ) : (
+                <CommandEmpty views={views?.empty} />
+              )
+            ) : hasGroups ? (
+              filteredGroups.map((group) => (
+                <CommandGroup
+                  key={group.id}
+                  heading={group.name}
+                  views={views?.groupHeading}
+                >
+                  {group.commands.map((item: any) => {
+                    const commandIndex = filteredCommands.findIndex(
+                      (cmd) => cmd.id === item.id
+                    );
+                    return (
+                      <CommandItem
+                        key={item.id}
+                        item={item}
+                        selected={commandIndex === selectedIndex}
+                        onSelect={() => handleItemSelect(item)}
+                        data-index={commandIndex}
+                        views={{
+                          container: views?.item,
+                          icon: views?.icon,
+                          content: views?.content,
+                          name: views?.name,
+                          description: views?.description,
+                          shortcut: views?.shortcut,
+                        }}
+                      />
+                    );
+                  })}
+                </CommandGroup>
+              ))
+            ) : (
+              filteredCommands.map((item, index) => (
+                <CommandItem
+                  key={item.id}
+                  item={item}
+                  selected={index === selectedIndex}
+                  onSelect={() => handleItemSelect(item)}
+                  data-index={index}
+                  views={{
+                    container: views?.item,
+                    icon: views?.icon,
+                    content: views?.content,
+                    name: views?.name,
+                    description: views?.description,
+                    shortcut: views?.shortcut,
+                  }}
+                />
+              ))
+            )}
+          </View>
+
+          {footer && (
+            <View {...CommandFooterStyles} {...views?.footer}>
+              {footer}
+            </View>
+          )}
+        </View>
+      </CommandProvider>
+    </View>
+  );
+};
+
+================
+File: src/components/Command/examples/customized.tsx
+================
+import React, { useState } from 'react';
+import { Command } from '../Command';
+import { Button } from '../../Button/Button';
+import { Text } from '../../Text/Text';
+import { Horizontal } from 'app-studio';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+
+export const CustomizedCommand = () => {
+  const [open, setOpen] = useState(false);
+
+  const commands = [
+    {
+      id: 'home',
+      name: 'Home',
+      description: 'Go to home page',
+      icon: <HomeIcon widthHeight={16} />,
+      shortcut: '⌘H',
+      onSelect: () => console.log('Home selected'),
+    },
+    {
+      id: 'settings',
+      name: 'Settings',
+      description: 'Open settings page',
+      icon: <SettingsIcon widthHeight={16} />,
+      shortcut: '⌘S',
+      onSelect: () => console.log('Settings selected'),
+    },
+    {
+      id: 'profile',
+      name: 'Profile',
+      description: 'View your profile',
+      icon: <UserIcon widthHeight={16} />,
+      shortcut: '⌘P',
+      onSelect: () => console.log('Profile selected'),
+    },
+  ];
+
+  const customEmptyState = (
+    <Horizontal
+      alignItems="center"
+      justifyContent="center"
+      padding="24px"
+      flexDirection="column"
+    >
+      <Text fontSize="16px" fontWeight="bold" color="color.gray.600">
+        No commands found
+      </Text>
+      <Text fontSize="14px" color="color.gray.500" marginTop="8px">
+        Try a different search term
+      </Text>
+    </Horizontal>
+  );
+
+  const customFooter = (
+    <Horizontal justifyContent="space-between" width="100%">
+      <Text fontSize="12px" color="color.gray.500">
+        Press ↑↓ to navigate
+      </Text>
+      <Text fontSize="12px" color="color.gray.500">
+        Press Enter to select
+      </Text>
+      <Text fontSize="12px" color="color.gray.500">
+        Press Esc to close
+      </Text>
+    </Horizontal>
+  );
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Customized Command</Button>
+      <Command
+        open={open}
+        onOpenChange={setOpen}
+        commands={commands}
+        placeholder="Search commands..."
+        emptyState={customEmptyState}
+        footer={customFooter}
+        views={{
+          container: {
+            backgroundColor: 'color.blue.50',
+            borderColor: 'color.blue.200',
+            borderWidth: '2px',
+            borderRadius: '12px',
+          },
+          searchInput: {
+            container: {
+              backgroundColor: 'white',
+              borderBottomColor: 'color.blue.200',
+            },
+            input: {
+              color: 'color.blue.800',
+              fontWeight: 'medium',
+            },
+          },
+          item: {
+            backgroundColor: 'transparent',
+            borderRadius: '8px',
+            _hover: {
+              backgroundColor: 'color.blue.100',
+            },
+          },
+          selectedItem: {
+            backgroundColor: 'color.blue.200',
+            _hover: {
+              backgroundColor: 'color.blue.300',
+            },
+          },
+          name: {
+            color: 'color.blue.800',
+            fontWeight: 'bold',
+          },
+          description: {
+            color: 'color.blue.600',
+          },
+          shortcut: {
+            backgroundColor: 'white',
+            padding: '2px 6px',
+            borderRadius: '4px',
+            fontWeight: 'bold',
+          },
+          footer: {
+            backgroundColor: 'white',
+            borderTopColor: 'color.blue.200',
+          },
+        }}
+      />
+    </>
+  );
+};
+
+================
+File: src/components/Command/examples/sizes.tsx
+================
+import React, { useState } from 'react';
+import { Command } from '../Command';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+
+export const CommandSizes = () => {
+  const [smallOpen, setSmallOpen] = useState(false);
+  const [mediumOpen, setMediumOpen] = useState(false);
+  const [largeOpen, setLargeOpen] = useState(false);
+
+  const commands = [
+    {
+      id: 'home',
+      name: 'Home',
+      description: 'Go to home page',
+      icon: <HomeIcon widthHeight={16} />,
+      shortcut: '⌘H',
+      onSelect: () => console.log('Home selected'),
+    },
+    {
+      id: 'settings',
+      name: 'Settings',
+      description: 'Open settings page',
+      icon: <SettingsIcon widthHeight={16} />,
+      shortcut: '⌘S',
+      onSelect: () => console.log('Settings selected'),
+    },
+    {
+      id: 'profile',
+      name: 'Profile',
+      description: 'View your profile',
+      icon: <UserIcon widthHeight={16} />,
+      shortcut: '⌘P',
+      onSelect: () => console.log('Profile selected'),
+    },
+  ];
+
+  return (
+    <Horizontal gap={10}>
+      <Button onClick={() => setSmallOpen(true)}>Small Size</Button>
+      <Button onClick={() => setMediumOpen(true)}>Medium Size</Button>
+      <Button onClick={() => setLargeOpen(true)}>Large Size</Button>
+
+      <Command
+        open={smallOpen}
+        onOpenChange={setSmallOpen}
+        commands={commands}
+        size="sm"
+        placeholder="Search commands..."
+      />
+
+      <Command
+        open={mediumOpen}
+        onOpenChange={setMediumOpen}
+        commands={commands}
+        size="md"
+        placeholder="Search commands..."
+      />
+
+      <Command
+        open={largeOpen}
+        onOpenChange={setLargeOpen}
+        commands={commands}
+        size="lg"
+        placeholder="Search commands..."
+      />
+    </Horizontal>
+  );
+};
+
+================
+File: src/components/Command/examples/variants.tsx
+================
+import React, { useState } from 'react';
+import { Command } from '../Command';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+
+export const CommandVariants = () => {
+  const [defaultOpen, setDefaultOpen] = useState(false);
+  const [filledOpen, setFilledOpen] = useState(false);
+  const [outlineOpen, setOutlineOpen] = useState(false);
+
+  const commands = [
+    {
+      id: 'home',
+      name: 'Home',
+      description: 'Go to home page',
+      icon: <HomeIcon widthHeight={16} />,
+      shortcut: '⌘H',
+      onSelect: () => console.log('Home selected'),
+    },
+    {
+      id: 'settings',
+      name: 'Settings',
+      description: 'Open settings page',
+      icon: <SettingsIcon widthHeight={16} />,
+      shortcut: '⌘S',
+      onSelect: () => console.log('Settings selected'),
+    },
+    {
+      id: 'profile',
+      name: 'Profile',
+      description: 'View your profile',
+      icon: <UserIcon widthHeight={16} />,
+      shortcut: '⌘P',
+      onSelect: () => console.log('Profile selected'),
+    },
+  ];
+
+  return (
+    <Horizontal gap={10}>
+      <Button onClick={() => setDefaultOpen(true)}>Default Variant</Button>
+      <Button onClick={() => setFilledOpen(true)}>Filled Variant</Button>
+      <Button onClick={() => setOutlineOpen(true)}>Outline Variant</Button>
+
+      <Command
+        open={defaultOpen}
+        onOpenChange={setDefaultOpen}
+        commands={commands}
+        variant="default"
+        placeholder="Search commands..."
+      />
+
+      <Command
+        open={filledOpen}
+        onOpenChange={setFilledOpen}
+        commands={commands}
+        variant="filled"
+        placeholder="Search commands..."
+      />
+
+      <Command
+        open={outlineOpen}
+        onOpenChange={setOutlineOpen}
+        commands={commands}
+        variant="outline"
+        placeholder="Search commands..."
+      />
+    </Horizontal>
+  );
+};
+
+================
+File: src/components/Command/Command.tsx
+================
+import React from 'react';
+import { CommandProps, CommandType } from './Command/Command.props';
+import { useCommandState } from './Command/Command.state';
+import {
+  CommandView,
+  CommandInput,
+  CommandList,
+  CommandGroup,
+  CommandItem as CommandItemView,
+  CommandEmpty,
+} from './Command/Command.view';
+
+/**
+ * Command component for displaying a command palette with search functionality.
+ */
+const CommandComponent: React.FC<CommandProps> = ({
+  open,
+  onOpenChange,
+  groups = [],
+  commands = [],
+  placeholder,
+  size = 'md',
+  variant = 'default',
+  filter,
+  emptyState,
+  footer,
+  views,
+  ...props
+}) => {
+  const {
+    search,
+    setSearch,
+    selectedIndex,
+    setSelectedIndex,
+    filteredCommands,
+    filteredGroups,
+    listRef,
+  } = useCommandState({
+    open,
+    onOpenChange,
+    groups,
+    commands,
+    filter,
+  });
+
+  return (
+    <CommandView
+      open={open}
+      onOpenChange={onOpenChange}
+      groups={groups}
+      commands={commands}
+      placeholder={placeholder}
+      size={size}
+      variant={variant}
+      emptyState={emptyState}
+      footer={footer}
+      search={search}
+      setSearch={setSearch}
+      selectedIndex={selectedIndex}
+      setSelectedIndex={setSelectedIndex}
+      filteredCommands={filteredCommands}
+      filteredGroups={filteredGroups}
+      listRef={listRef}
+      views={views}
+      {...props}
+    />
+  );
+};
+
+export const Command = CommandComponent as CommandType;
+
+// Assign the sub-components to the main component
+Command.Input = CommandInput;
+Command.List = CommandList;
+Command.Group = CommandGroup;
+Command.Item = CommandItemView;
+Command.Empty = CommandEmpty;
+
+================
+File: src/components/Command/Command/Command.style.ts
+================
+import { ViewProps } from 'app-studio';
+import { CommandSize, CommandVariant } from './Command.type';
+
+export const CommandSizes: Record<CommandSize, ViewProps> = {
+  sm: {
+    width: '400px',
+    maxHeight: '300px',
+  },
+  md: {
+    width: '500px',
+    maxHeight: '400px',
+  },
+  lg: {
+    width: '600px',
+    maxHeight: '500px',
+  },
+};
+
+export const getCommand = (
+  themeMode: string
+): Record<CommandVariant, ViewProps> => {
+  const isDarkMode = themeMode === 'dark';
+
+  return {
+    default: {
+      backgroundColor: 'white',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'color.gray.200',
+      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+    },
+    filled: {
+      backgroundColor: 'color.gray.50',
+      borderWidth: '1px',
+      borderStyle: 'solid',
+      borderColor: 'color.gray.200',
+      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+    },
+    outline: {
+      backgroundColor: 'white',
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      borderColor: 'color.gray.300',
+      boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
+    },
+  };
+  // Add dark mode conditional styling here
+};
+
+// For backward compatibility
+export const CommandVariants = getCommand('light');
+
+export const CommandInputStyles: ViewProps = {
+  display: 'flex',
+  alignItems: 'center',
+  padding: '12px 16px',
+  borderBottomWidth: '1px',
+  borderBottomStyle: 'solid',
+  borderBottomColor: 'color.gray.200',
+};
+
+export const CommandListStyles: ViewProps = {
+  overflow: 'auto',
+  padding: '8px 0',
+};
+
+export const CommandGroupStyles: ViewProps = {
+  marginBottom: '8px',
+};
+
+export const CommandGroupHeadingStyles: ViewProps = {
+  padding: '8px 16px',
+  fontSize: '12px',
+  fontWeight: 'bold',
+  color: 'color.gray.500',
+  textTransform: 'uppercase',
+};
+
+export const CommandItemStyles: ViewProps = {
+  display: 'flex',
+  alignItems: 'center',
+  padding: '8px 16px',
+  cursor: 'pointer',
+  userSelect: 'none',
+  borderRadius: '4px',
+  margin: '0 8px',
+  _hover: {
+    backgroundColor: 'color.gray.100',
+  },
+};
+
+export const CommandItemSelectedStyles: ViewProps = {
+  backgroundColor: 'color.blue.50',
+  _hover: {
+    backgroundColor: 'color.blue.100',
+  },
+};
+
+export const CommandItemDisabledStyles: ViewProps = {
+  opacity: 0.5,
+  cursor: 'not-allowed',
+  _hover: {
+    backgroundColor: 'transparent',
+  },
+};
+
+export const CommandItemIconStyles: ViewProps = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginRight: '12px',
+  color: 'color.gray.500',
+};
+
+export const CommandItemContentStyles: ViewProps = {
+  display: 'flex',
+  flexDirection: 'column',
+  flex: 1,
+};
+
+export const CommandItemNameStyles: ViewProps = {
+  fontSize: '14px',
+  fontWeight: 'medium',
+};
+
+export const CommandItemDescriptionStyles: ViewProps = {
+  fontSize: '12px',
+  color: 'color.gray.500',
+  marginTop: '2px',
+};
+
+export const CommandItemShortcutStyles: ViewProps = {
+  display: 'flex',
+  alignItems: 'center',
+  marginLeft: '12px',
+  fontSize: '12px',
+  color: 'color.gray.500',
+};
+
+export const CommandEmptyStyles: ViewProps = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '16px',
+  color: 'color.gray.500',
+  textAlign: 'center',
+};
+
+export const CommandFooterStyles: ViewProps = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  padding: '8px 16px',
+  borderTopWidth: '1px',
+  borderTopStyle: 'solid',
+  borderTopColor: 'color.gray.200',
+  fontSize: '12px',
+  color: 'color.gray.500',
+};
+
+================
+File: src/components/Command/examples/groups.tsx
+================
+import React, { useState } from 'react';
+import { Command } from '../Command';
+import { Button } from '../../Button/Button';
+import {
+  HomeIcon,
+  SettingsIcon,
+  UserIcon,
+  EditIcon,
+  DustBinIcon,
+  CopyIcon,
+  PlayIcon,
+  PauseIcon,
+} from '../../Icon/Icon';
+
+export const GroupedCommand = () => {
+  const [open, setOpen] = useState(false);
+
+  const groups = [
+    {
+      id: 'navigation',
+      name: 'Navigation',
+      commands: [
+        {
+          id: 'home',
+          name: 'Home',
+          description: 'Go to home page',
+          icon: <HomeIcon widthHeight={16} />,
+          shortcut: '⌘H',
+          onSelect: () => console.log('Home selected'),
+        },
+        {
+          id: 'settings',
+          name: 'Settings',
+          description: 'Open settings page',
+          icon: <SettingsIcon widthHeight={16} />,
+          shortcut: '⌘S',
+          onSelect: () => console.log('Settings selected'),
+        },
+        {
+          id: 'profile',
+          name: 'Profile',
+          description: 'View your profile',
+          icon: <UserIcon widthHeight={16} />,
+          shortcut: '⌘P',
+          onSelect: () => console.log('Profile selected'),
+        },
+      ],
+    },
+    {
+      id: 'actions',
+      name: 'Actions',
+      commands: [
+        {
+          id: 'edit',
+          name: 'Edit',
+          description: 'Edit current document',
+          icon: <EditIcon widthHeight={16} />,
+          shortcut: '⌘E',
+          onSelect: () => console.log('Edit selected'),
+        },
+        {
+          id: 'delete',
+          name: 'Delete',
+          description: 'Delete current document',
+          icon: <DustBinIcon widthHeight={16} />,
+          shortcut: '⌘⌫',
+          onSelect: () => console.log('Delete selected'),
+        },
+        {
+          id: 'copy',
+          name: 'Copy',
+          description: 'Copy to clipboard',
+          icon: <CopyIcon widthHeight={16} />,
+          shortcut: '⌘C',
+          onSelect: () => console.log('Copy selected'),
+        },
+      ],
+    },
+    {
+      id: 'media',
+      name: 'Media Controls',
+      commands: [
+        {
+          id: 'play',
+          name: 'Play',
+          description: 'Play media',
+          icon: <PlayIcon widthHeight={16} />,
+          shortcut: 'Space',
+          onSelect: () => console.log('Play selected'),
+        },
+        {
+          id: 'pause',
+          name: 'Pause',
+          description: 'Pause media',
+          icon: <PauseIcon widthHeight={16} />,
+          shortcut: 'Space',
+          onSelect: () => console.log('Pause selected'),
+        },
+      ],
+    },
+  ];
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>
+        Open Grouped Command Palette
+      </Button>
+      <Command
+        open={open}
+        onOpenChange={setOpen}
+        groups={groups}
+        placeholder="Search commands..."
+      />
+    </>
+  );
+};
+
+
+
+================================================================
+End of Codebase
+================================================================

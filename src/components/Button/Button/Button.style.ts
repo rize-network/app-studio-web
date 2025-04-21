@@ -161,11 +161,11 @@ export const getButtonVariants = (
     color: color,
     on: {
       hover: {
-        backgroundColor: `${color}10`, // 10% opacity
+        opacity: 0.6,
         transform: 'translateY(-1px)',
       },
       active: {
-        backgroundColor: `${color}20`, // 20% opacity
+        opacity: 0.8,
         transform: 'translateY(0)',
       },
     },
@@ -179,11 +179,11 @@ export const getButtonVariants = (
     borderColor: 'transparent',
     on: {
       hover: {
-        backgroundColor: `${color}10`, // 10% opacity
+        opacity: 0.6,
         transform: 'translateY(-1px)',
       },
       active: {
-        backgroundColor: `${color}20`, // 20% opacity
+        opacity: 0.8,
         transform: 'translateY(0)',
       },
     },

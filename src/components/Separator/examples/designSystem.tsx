@@ -377,8 +377,8 @@ export const DesignSystemSeparator = () => {
                 <View
                   backgroundColor="color.purple.600"
                   color="white"
-                  paddingX="12px"
-                  paddingY="4px"
+                  paddingLeft="12px"
+                  paddingTop="4px"
                   borderRadius="16px"
                   boxShadow="0 2px 4px rgba(0,0,0,0.1)"
                 >

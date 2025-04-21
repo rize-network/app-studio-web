@@ -219,8 +219,8 @@ export const DesignSystemGradients = () => {
                   backgroundColor="white"
                   color="color.purple.600"
                   borderRadius="8px" // 2 × 4px grid
-                  paddingX="16px" // 4 × 4px grid
-                  paddingY="8px" // 2 × 4px grid
+                  paddingLeft="16px" // 4 × 4px grid
+                  paddingTop="8px" // 2 × 4px grid
                 >
                   Get Started
                 </Button>

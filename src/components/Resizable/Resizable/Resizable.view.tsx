@@ -342,6 +342,7 @@ export const ResizableView: React.FC<
   maxSize,
   collapsible = false,
   containerRef,
+  autoSaveId,
   views,
   ...props
 }) => {

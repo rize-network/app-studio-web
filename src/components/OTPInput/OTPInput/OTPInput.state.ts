@@ -17,6 +17,12 @@ export const useOTPInputState = ({
   onChange,
   onChangeText,
   onComplete,
+  onKeyDown,
+  onKeyPress,
+  onBlur,
+  onFocus,
+  isReadOnly,
+  isDisabled,
   pattern,
   stepValues,
   pasteTransformer,
@@ -170,6 +176,17 @@ export const useOTPInputState = ({
   const handleKeyDown = useCallback((_: KeyboardEvent<HTMLInputElement>) => {
     // Handle special keys like backspace, arrows, etc.
     // This is handled by the browser for the single input
+    if (onKeyDown) {
+      onKeyDown(_);
+    }
+  }, []);
+
+  const handleKeyPress = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    // Handle key press events
+    // This is handled by the browser for the single input
+    if (onKeyPress) {
+      onKeyPress(e);
+    }
   }, []);
 
   const handlePaste = useCallback(
@@ -374,6 +391,7 @@ export const useOTPInputState = ({
     handleFocus,
     handleBlur,
     handleKeyDown,
+    handleKeyPress,
     handlePaste,
   };
 };

@@ -39,12 +39,7 @@ const NOSCRIPT_CSS_FALLBACK = `
   border-radius: 4px !important;
   width: 100% !important;
 }
-@media (prefers-color-scheme: dark) {
-  [data-input-otp] {
-    --nojs-bg: black !important;
-    --nojs-fg: white !important;
-  }
-}`;
+`;
 
 // Helper function to safely insert CSS rules
 function safeInsertRule(sheet: CSSStyleSheet, rule: string) {
@@ -70,6 +65,7 @@ const OTPInputView: React.FC<
     handleBlur: () => void;
     handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     stepValues?: number[];
+    handleKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   }
 > = ({
   id,
@@ -109,6 +105,9 @@ const OTPInputView: React.FC<
   handleFocus,
   handleBlur,
   handleKeyDown,
+  handleKeyPress,
+  secureTextEntry,
+  isFirstColumn,
   stepValues,
   setInputRef,
   onBlur = () => {},

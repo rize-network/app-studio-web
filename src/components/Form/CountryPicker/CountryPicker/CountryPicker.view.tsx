@@ -165,8 +165,8 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   const showLabel = !!(label && (isFocused || value));
   const fieldStyles = {
     margin: 0,
-    paddingVerical: 8,
-    paddingHorizonatl: 0,
+    paddingVertical: 8,
+    paddingHorizontal: 0,
     width: '100%',
     heigth: '100%',
     border: 'none',

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { CommandGroup, CommandItem } from './Command.type';
 
 export interface CommandStateProps {
@@ -9,6 +9,22 @@ export interface CommandStateProps {
   filter?: (value: string, item: CommandItem) => boolean;
 }
 
+// Default filter function defined outside the hook to avoid recreating it on each render
+const defaultFilterFn = (value: string, item: CommandItem) => {
+  if (!value) return true;
+
+  const searchValue = value.toLowerCase();
+  const matchesName = item.name.toLowerCase().includes(searchValue);
+  const matchesDescription =
+    item.description?.toLowerCase().includes(searchValue) || false;
+  const matchesKeywords =
+    item.keywords?.some((keyword) =>
+      keyword.toLowerCase().includes(searchValue)
+    ) || false;
+
+  return matchesName || matchesDescription || matchesKeywords;
+};
+
 export const useCommandState = ({
   open,
   onOpenChange,
@@ -16,12 +32,6 @@ export const useCommandState = ({
   commands = [],
   filter,
 }: CommandStateProps) => {
-  // Combine commands from groups and flat list
-  const allCommands = useCallback(() => {
-    const groupCommands = groups.flatMap((group) => group.commands);
-    return [...groupCommands, ...commands];
-  }, [groups, commands]);
-
   // State for search input
   const [search, setSearch] = useState('');
 
@@ -31,55 +41,38 @@ export const useCommandState = ({
   // Ref for the command list element
   const listRef = useRef<HTMLDivElement>(null);
 
-  // Default filter function
-  const defaultFilter = (value: string, item: CommandItem) => {
-    if (!value) return true;
+  // Use the provided filter or fall back to the default
+  const filterFn = useMemo(() => filter || defaultFilterFn, [filter]);
 
-    const searchValue = value.toLowerCase();
-    const matchesName = item.name.toLowerCase().includes(searchValue);
-    const matchesDescription =
-      item.description?.toLowerCase().includes(searchValue) || false;
-    const matchesKeywords =
-      item.keywords?.some((keyword) =>
-        keyword.toLowerCase().includes(searchValue)
-      ) || false;
+  // Combine and memoize all commands from groups and flat list
+  const allCommands = useMemo(() => {
+    const groupCommands = groups.flatMap((group) => group.commands);
+    return [...groupCommands, ...commands];
+  }, [groups, commands]);
 
-    return matchesName || matchesDescription || matchesKeywords;
-  };
+  // Filter and memoize commands based on search
+  const filteredCommands = useMemo(() => {
+    if (!search.trim()) return allCommands;
+    return allCommands.filter((item) => filterFn(search, item));
+  }, [allCommands, search, filterFn]);
 
-  // Filter commands based on search
-  const filterCommands = useCallback(
-    (searchValue: string) => {
-      const filterFn = filter || defaultFilter;
-      return allCommands().filter((item) => filterFn(searchValue, item));
-    },
-    [allCommands, filter, defaultFilter]
-  );
-
-  // Filtered commands based on search
-  const [filteredCommands, setFilteredCommands] = useState<CommandItem[]>(
-    allCommands()
-  );
-
-  // Filtered groups based on search
-  const filteredGroups = useCallback(() => {
+  // Filter and memoize groups based on search
+  const filteredGroups = useMemo(() => {
     if (!search) return groups;
 
+    const filterFn = filter || defaultFilterFn;
     return groups
-      .map((group) => ({
-        ...group,
-        commands: group.commands.filter((command) =>
-          (filter || defaultFilter)(search, command)
-        ),
+      .map((g) => ({
+        ...g,
+        commands: g.commands.filter((c) => filterFn(search, c)),
       }))
-      .filter((group) => group.commands.length > 0);
-  }, [groups, search, filter, defaultFilter]);
+      .filter((g) => g.commands.length);
+  }, [groups, search, filter]);
 
-  // Update filtered commands when search changes
+  // Reset selected index when filtered commands change
   useEffect(() => {
-    setFilteredCommands(filterCommands(search));
     setSelectedIndex(0);
-  }, [search, filterCommands]);
+  }, [filteredCommands.length]);
 
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
@@ -139,6 +132,9 @@ export const useCommandState = ({
   useEffect(() => {
     if (open) {
       setSelectedIndex(0);
+    } else {
+      // Clear search when closed
+      setSearch('');
     }
   }, [open]);
 
@@ -148,7 +144,7 @@ export const useCommandState = ({
     selectedIndex,
     setSelectedIndex,
     filteredCommands,
-    filteredGroups: filteredGroups(),
+    filteredGroups,
     listRef,
   };
 };

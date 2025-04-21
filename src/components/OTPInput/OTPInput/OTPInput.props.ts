@@ -83,6 +83,10 @@ export interface OTPInputProps extends Omit<InputProps, 'size'> {
    */
   onBlur?: (value: any) => void;
 
+  onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+
   /**
    * Callback when an input field is clicked
    */

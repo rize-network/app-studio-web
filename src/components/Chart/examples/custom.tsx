@@ -63,7 +63,7 @@ export const CustomChartDemo = () => {
             padding: '4px 8px',
           },
           tooltip: {
-            backgroundColor: 'color.primary',
+            backgroundColor: 'color.blue',
             color: 'white',
             fontWeight: 'bold',
           },

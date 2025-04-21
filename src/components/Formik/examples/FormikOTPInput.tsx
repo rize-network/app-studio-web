@@ -128,6 +128,7 @@ export const FormikPasswordOTPExample = () => {
           <Vertical gap={20}>
             <Text>Secure PIN Entry:</Text>
             <FormikOTPInput
+              id="formikSecurePin"
               name="securePin"
               length={4}
               type="password"

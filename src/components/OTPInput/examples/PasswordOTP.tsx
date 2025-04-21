@@ -23,6 +23,7 @@ export const PasswordOTPInput = () => {
     <Vertical gap={20}>
       <Text>Secure PIN Entry (Password Type):</Text>
       <OTPInput
+        id="passwordOtpPin"
         name="securePin"
         value={otp}
         onChange={setOtp}

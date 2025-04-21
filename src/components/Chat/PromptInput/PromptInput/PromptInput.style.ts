@@ -27,15 +27,6 @@ export const getInputContainerStyles = (
   _focusWithin: {
     borderColor: transparentBackground ? 'color.gray.800' : 'color.gray.200',
   },
-  '@media (prefers-color-scheme: dark)': {
-    borderColor: transparentBackground ? 'color.gray.850' : 'color.gray.850',
-    _hover: {
-      borderColor: transparentBackground ? 'color.gray.800' : 'color.gray.800',
-    },
-    _focusWithin: {
-      borderColor: transparentBackground ? 'color.gray.800' : 'color.gray.800',
-    },
-  },
 });
 
 export const textareaStyles: ViewProps = {
@@ -49,9 +40,6 @@ export const textareaStyles: ViewProps = {
   transition: 'border-color 0.2s ease',
   _disabled: {
     cursor: 'not-allowed',
-  },
-  '@media (prefers-color-scheme: dark)': {
-    color: 'color.gray.100',
   },
 };
 

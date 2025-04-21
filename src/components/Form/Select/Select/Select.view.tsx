@@ -115,11 +115,6 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     // Animation
     transition: 'all 0.2s ease',
 
-    // Dark mode support
-    '@media (prefers-color-scheme: dark)': {
-      color: isDisabled ? 'color.gray.600' : 'color.gray.100',
-    },
-
     // Apply custom styles
     ...views['field'],
     ...views['text'],
@@ -205,7 +200,7 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
  */
 const DropDown: React.FC<DropDownProps> = ({
   size,
-  views = { dropDown: {} },
+  views = {},
   options,
   callback = () => {},
   highlightedIndex,
@@ -258,7 +253,7 @@ const DropDown: React.FC<DropDownProps> = ({
         },
       }}
       {...shadow}
-      {...views['dropDown']}
+      {...views?.dropDown}
     >
       {options.length > 0 &&
         options.map((option, index) => (

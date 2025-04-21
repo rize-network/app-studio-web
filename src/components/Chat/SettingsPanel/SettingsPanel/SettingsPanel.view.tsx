@@ -57,7 +57,7 @@ export const SettingsPanelView: React.FC<SettingsPanelProps> = ({
       case 'toggle':
         return (
           <Toggle
-            isChecked={value}
+            isToggled={value}
             onChange={(checked: any) => onSettingChange(id, checked)}
             isDisabled={isDisabled}
           >

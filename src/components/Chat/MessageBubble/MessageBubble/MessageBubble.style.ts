@@ -28,7 +28,7 @@ export const getContainerStyles = (
     },
     system: {
       alignSelf: 'center',
-      marginX: 'auto',
+      marginLeft: 'auto',
       backgroundColor: 'color.gray.200',
       color: 'color.gray.700',
       fontStyle: 'italic',
@@ -37,7 +37,7 @@ export const getContainerStyles = (
     },
     error: {
       alignSelf: 'center',
-      marginX: 'auto',
+      marginLeft: 'auto',
       backgroundColor: 'color.red.100',
       color: 'color.red.900',
       borderLeft: '4px solid',
@@ -77,10 +77,6 @@ export const getMessageContentStyles = (type: MessageType): ViewProps => {
       backgroundColor: 'color.gray.100',
       color: 'color.gray.900',
       borderTopLeftRadius: '0',
-      '@media (prefers-color-scheme: dark)': {
-        backgroundColor: 'color.gray.800',
-        color: 'color.gray.100',
-      },
     },
     system: {},
     error: {},
@@ -101,7 +97,7 @@ export const timestampStyles: ViewProps = {
   fontSize: 'xs',
   color: 'color.gray.500',
   marginTop: '4px',
-  marginX: '8px',
+  marginLeft: '8px',
   textAlign: 'right',
 };
 
@@ -116,7 +112,4 @@ export const actionsStyles: ViewProps = {
   padding: '4px',
   boxShadow: 'sm',
   zIndex: 20,
-  '@media (prefers-color-scheme: dark)': {
-    backgroundColor: 'color.gray.800',
-  },
 };

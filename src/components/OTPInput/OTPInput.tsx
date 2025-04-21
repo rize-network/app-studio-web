@@ -31,6 +31,7 @@ const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
     handleBlur,
     handleKeyDown,
     handlePaste,
+    handleKeyPress,
   } = useOTPInputState(props);
 
   // Use the controlled value if it exists, otherwise use the internal state value
@@ -56,6 +57,7 @@ const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
       handleFocus={handleFocus}
       handleBlur={handleBlur}
       handleKeyDown={handleKeyDown}
+      handleKeyPress={handleKeyPress}
       handlePaste={handlePaste}
       stepValues={props.stepValues}
     />

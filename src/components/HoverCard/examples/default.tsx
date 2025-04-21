@@ -41,7 +41,7 @@ export const DefaultHoverCard = () => {
           <HoverCard.Content
             views={{
               container: {
-                backgroundColor: 'color.primary',
+                backgroundColor: 'color.blue',
                 color: 'white',
                 borderRadius: '8px',
                 padding: '16px',

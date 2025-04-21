@@ -37,7 +37,7 @@ export const CustomContextMenu = () => {
         items={items}
         views={{
           menu: {
-            backgroundColor: 'color.primary',
+            backgroundColor: 'color.blue',
             color: 'white',
             borderRadius: '8px',
           },
@@ -53,7 +53,7 @@ export const CustomContextMenu = () => {
       >
         <View
           padding={20}
-          backgroundColor="color.primary.100"
+          backgroundColor="color.blue.100"
           borderRadius={8}
           textAlign="center"
           cursor="context-menu"

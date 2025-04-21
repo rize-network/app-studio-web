@@ -11,13 +11,10 @@ export const containerStyles: ViewProps = {
   borderRadius: '8px', // Consistent with design system (rounded-md)
   overflow: 'hidden',
   backgroundColor: 'color.gray.900',
-  marginY: '16px', // 16px margin (4px grid)
+  marginTop: '16px', // 16px margin (4px grid)
   border: '1px solid',
   borderColor: 'color.gray.800',
   boxShadow: '0 1px 2px rgba(0, 0, 0, 0.05)', // Subtle shadow for depth
-  '@media (prefers-color-scheme: dark)': {
-    borderColor: 'color.gray.700',
-  },
 };
 
 export const headerStyles: ViewProps = {
@@ -38,9 +35,6 @@ export const contentStyles: ViewProps = {
   fontSize: 'sm', // Smaller text for code (14px)
   lineHeight: '1.6', // Improved line height for readability
   color: 'color.gray.100',
-  '@media (prefers-color-scheme: dark)': {
-    color: 'color.gray.50',
-  },
 };
 
 export const footerStyles: ViewProps = {

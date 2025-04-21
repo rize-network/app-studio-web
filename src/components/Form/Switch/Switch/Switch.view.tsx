@@ -23,6 +23,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   name,
   label,
   inActiveChild,
+  isChecked,
   activeChild,
   labelPosition = 'right',
   shadow = {},

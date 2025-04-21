@@ -123,10 +123,6 @@ export const MessageBubbleView: React.FC<Props> = ({
               aria-label="Edit message"
               color="color.gray.600"
               _hover={{ color: 'color.gray.900' }}
-              // '@media (prefers-color-scheme: dark)': {
-              //   color: 'color.gray.400',
-              //   _hover: { color: 'color.gray.100' },
-              // }
             >
               ✏️
             </Button>
@@ -139,10 +135,6 @@ export const MessageBubbleView: React.FC<Props> = ({
               aria-label="Delete message"
               color="color.gray.600"
               _hover={{ color: 'color.red.500' }}
-              // '@media (prefers-color-scheme: dark)': {
-              //   color: 'color.gray.400',
-              //   _hover: { color: 'color.red.400' },
-              // }
             >
               🗑️
             </Button>

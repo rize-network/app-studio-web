@@ -92,6 +92,7 @@ export const ModalContainer: React.FC<ContainerProps> = ({
   isFullScreen = false,
   shape = 'rounded',
   views,
+  isOpen,
   ...props
 }) => {
   const defaultShadow =

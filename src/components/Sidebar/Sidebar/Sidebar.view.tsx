@@ -283,6 +283,7 @@ export const SideBarNavItem = ({
   isActive = false,
   badge,
   views,
+  ariaLabel,
   ...props
 }: SideBarNavItemProps & any) => {
   // Get sidebar context to check if it's expanded
@@ -299,6 +300,7 @@ export const SideBarNavItem = ({
       color={isActive ? 'color.blue.600' : 'color.gray.700'}
       fontWeight={isActive ? 'bold' : 'normal'}
       cursor="pointer"
+      aria-label={ariaLabel}
       on={{
         hover: {
           backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100',

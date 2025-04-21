@@ -59,12 +59,4 @@ export const dropdownStyles: ViewProps = {
 
   // Animation
   transition: 'all 0.2s ease',
-
-  // Dark mode support
-  '@media (prefers-color-scheme: dark)': {
-    backgroundColor: 'color.gray.800',
-    borderColor: 'color.gray.700',
-    boxShadow:
-      '0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1)',
-  },
 };

@@ -92,9 +92,6 @@ export const ChatInterfaceView: React.FC<Props> = ({
                 maxWidth="500px"
                 textAlign="center"
                 boxShadow="sm"
-                // '@media (prefers-color-scheme: dark)': {
-                // backgroundColor="color.gray.800"
-                // }
               >
                 <Text size="xl" fontWeight="bold" marginBottom="md">
                   Welcome to the Chat
@@ -113,11 +110,11 @@ export const ChatInterfaceView: React.FC<Props> = ({
                     display="flex"
                     flexDirection="column"
                     justifyContent="between"
-                    paddingX="5"
+                    paddingLeft="5"
                     marginBottom="3"
                     width="100%"
                     maxWidth="100%"
-                    marginX="auto"
+                    marginLeft="auto"
                     borderRadius="lg"
                   >
                     <MessageBubble
@@ -139,11 +136,11 @@ export const ChatInterfaceView: React.FC<Props> = ({
                     display="flex"
                     flexDirection="column"
                     justifyContent="between"
-                    paddingX="5"
+                    paddingLeft="5"
                     marginBottom="3"
                     width="100%"
                     maxWidth="100%"
-                    marginX="auto"
+                    marginLeft="auto"
                     borderRadius="lg"
                   >
                     <MessageBubble
@@ -168,8 +165,8 @@ export const ChatInterfaceView: React.FC<Props> = ({
         <View {...defaultInputContainerStyles} {...styles.inputContainer}>
           <View
             width="100%"
-            marginX="auto"
-            insetX="0"
+            marginLeft="auto"
+            // insetX="0"
             backgroundColor="transparent"
             display="flex"
             justifyContent="center"
@@ -177,7 +174,7 @@ export const ChatInterfaceView: React.FC<Props> = ({
             <View
               display="flex"
               flexDirection="column"
-              paddingX="3"
+              paddingLeft="3"
               width="100%"
               maxWidth="6xl"
             >

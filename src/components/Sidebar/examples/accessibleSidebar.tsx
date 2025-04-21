@@ -38,7 +38,7 @@ export const AccessibleSidebar = () => {
               padding: '12px',
             },
             divider: {
-              marginY: '12px',
+              marginTop: '12px',
             },
             navItem: {
               padding: '10px 12px',
@@ -93,13 +93,13 @@ export const AccessibleSidebar = () => {
                 badge={3}
               />
 
-              <Separator marginY="12px" />
+              <Separator marginTop="12px" />
 
               <Text
                 fontSize="sm"
                 color="color.gray.500"
                 fontWeight="medium"
-                marginY="8px"
+                marginTop="8px"
               >
                 SETTINGS
               </Text>

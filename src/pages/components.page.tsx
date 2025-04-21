@@ -1,10 +1,12 @@
 import React, { Suspense, useState, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { View, Text, Horizontal } from 'app-studio';
-import DragAndDropPage from 'src/pages/dragAndDrop.page';
-import UploadPage from 'src/pages/upload.page';
-import AIChatPage from './chat.page';
-import GradientPage from './gradient.page';
+
+const GradientPage = lazy(() => import('src/pages/gradient.page'));
+const DragAndDropPage = lazy(() => import('src/pages/dragAndDrop.page'));
+const UploadPage = lazy(() => import('src/pages/upload.page'));
+const AIChatPage = lazy(() => import('src/pages/chat.page'));
+
 // Lazy-loaded imports
 const AccordionPage = lazy(() => import('src/pages/accordion.page'));
 const AlertPage = lazy(() => import('src/pages/alert.page'));

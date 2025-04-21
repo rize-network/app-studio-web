@@ -65,8 +65,4 @@ export const backgroundOverlayStyles: ViewProps = {
   background:
     'linear-gradient(to top, var(--color-white) 0%, rgba(255, 255, 255, 0.85) 100%)',
   zIndex: 0,
-  '@media (prefers-color-scheme: dark)': {
-    background:
-      'linear-gradient(to top, var(--color-gray-900) 0%, rgba(17, 24, 39, 0.9) 100%)',
-  },
 };

@@ -58,17 +58,6 @@ export const InputVariants: Record<Variant, ViewProps> = {
       borderColor: 'theme.primary',
       boxShadow: '0 0 0 1px rgba(66, 153, 225, 0.2)',
     },
-    '@media (prefers-color-scheme: dark)': {
-      backgroundColor: 'color.gray.800',
-      borderColor: 'color.gray.700',
-      _hover: {
-        borderColor: 'color.gray.600',
-      },
-      _focus: {
-        borderColor: 'theme.primary',
-        boxShadow: '0 0 0 1px rgba(66, 153, 225, 0.4)',
-      },
-    },
   },
   default: {
     borderWidth: 0,
@@ -83,16 +72,6 @@ export const InputVariants: Record<Variant, ViewProps> = {
     },
     _focus: {
       borderBottomColor: 'theme.primary',
-    },
-    '@media (prefers-color-scheme: dark)': {
-      backgroundColor: 'color.gray.800',
-      borderBottomColor: 'color.gray.700',
-      _hover: {
-        borderBottomColor: 'color.gray.600',
-      },
-      _focus: {
-        borderBottomColor: 'theme.primary',
-      },
     },
   },
   none: {

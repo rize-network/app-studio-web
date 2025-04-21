@@ -54,9 +54,10 @@ const ButtonView: React.FC<Props> = ({
   const reverse = isHovered && effect === 'reverse';
 
   // Determine if the button color is light or dark for proper contrast
-  const isLight =
-    contrast(getColor(buttonColor, elementMode ? elementMode : themeMode)) ==
-    'light';
+  const buttonMode = elementMode ? elementMode : themeMode;
+  const reverseMode = reverse && buttonMode == 'light' ? 'dark' : `light`; // Slightly darker
+
+  const isLight = contrast(getColor(buttonColor, buttonMode)) == 'light';
 
   // Define button variants with effect support
   const ButtonVariants: Record<Variant, any> = {
@@ -73,12 +74,12 @@ const ButtonView: React.FC<Props> = ({
       borderStyle: 'solid',
       borderColor: reverse ? buttonColor : 'transparent',
       _hover: {
-        backgroundColor: reverse ? `${buttonColor}10` : `${buttonColor}`, // Slightly darker
-        transform: 'translateY(-2px)',
+        themeMode: reverse && buttonMode == 'light' ? 'light' : `dark`, // Slightly darker
+        transform: 'translateY(-1px)',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
       },
       _active: {
-        backgroundColor: reverse ? `${buttonColor}20` : `${buttonColor}`, // Even darker
+        themeMode: reverse && buttonMode == 'light' ? 'light' : `dark`, // Slightly darker
         transform: 'translateY(0)',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
       },
@@ -90,12 +91,12 @@ const ButtonView: React.FC<Props> = ({
       borderColor: reverse ? buttonColor : colorScheme,
       color: reverse ? 'white' : buttonColor,
       _hover: {
-        backgroundColor: reverse ? `${buttonColor}` : `${buttonColor}10`,
-        transform: 'translateY(-2px)',
+        themeMode: reverse ? reverseMode : buttonMode,
+        transform: 'translateY(-1px)',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.05)',
       },
       _active: {
-        backgroundColor: reverse ? `${buttonColor}b0` : `${buttonColor}20`,
+        themeMode: reverse ? reverseMode : buttonMode,
         transform: 'translateY(0)',
         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
       },
@@ -123,11 +124,11 @@ const ButtonView: React.FC<Props> = ({
       borderStyle: 'none',
       borderColor: 'transparent',
       _hover: {
-        backgroundColor: reverse ? `${buttonColor}` : `${buttonColor}10`,
-        transform: 'translateY(-2px)',
+        themeMode: reverse ? reverseMode : buttonMode,
+        transform: 'translateY(-1px)',
       },
       _active: {
-        backgroundColor: reverse ? `${buttonColor}b0` : `${buttonColor}20`,
+        themeMode: reverse ? reverseMode : buttonMode,
         transform: 'translateY(0)',
       },
     },

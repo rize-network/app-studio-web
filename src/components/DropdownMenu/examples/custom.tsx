@@ -37,7 +37,7 @@ export const CustomDropdownMenu = () => {
         items={items}
         views={{
           menu: {
-            backgroundColor: 'color.primary',
+            backgroundColor: 'color.blue',
             color: 'white',
             borderRadius: '8px',
           },

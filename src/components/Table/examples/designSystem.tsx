@@ -67,8 +67,8 @@ export const DesignSystemTable = () => {
         variant="outline"
         colorScheme={color}
         borderRadius="4px"
-        paddingX="8px"
-        paddingY="2px"
+        paddingLeft="8px"
+        paddingTop="2px"
         fontSize="12px"
         fontWeight="500"
         content={status}

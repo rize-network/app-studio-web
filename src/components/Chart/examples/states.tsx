@@ -177,7 +177,7 @@ export const ChartStatesDemo = () => {
           isLoading={true}
           loadingIndicator={
             <Vertical alignItems="center" gap={10}>
-              <Text fontSize="lg" color="color.primary">
+              <Text fontSize="lg" color="color.blue">
                 Custom Loading...
               </Text>
               <Text fontSize="sm" color="color.gray.500">

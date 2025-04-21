@@ -228,28 +228,40 @@ export const CommandView: React.FC<
 }) => {
   if (!open) return null;
 
-  const handleItemSelect = (item: CommandItemInterface) => {
-    if (!item.disabled) {
+  const handleItemSelect = React.useCallback(
+    (item: CommandItemInterface) => {
+      if (item.disabled) return;
       item.onSelect();
       onOpenChange(false);
       setSearch('');
-    }
-  };
+    },
+    [onOpenChange, setSearch]
+  );
 
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onOpenChange(false);
-    }
-  };
+  const handleBackdropClick = React.useCallback(
+    (e: React.MouseEvent) =>
+      e.target === e.currentTarget && onOpenChange(false),
+    [onOpenChange]
+  );
 
-  const contextValue = {
-    search,
-    setSearch,
-    selectedIndex,
-    setSelectedIndex,
-    filteredCommands,
-    onSelect: handleItemSelect,
-  };
+  const contextValue = React.useMemo(
+    () => ({
+      search,
+      setSearch,
+      selectedIndex,
+      setSelectedIndex,
+      filteredCommands,
+      onSelect: handleItemSelect,
+    }),
+    [
+      search,
+      selectedIndex,
+      filteredCommands,
+      handleItemSelect,
+      setSearch,
+      setSelectedIndex,
+    ]
+  );
 
   const hasGroups = groups.length > 0;
   // const hasCommands = commands.length > 0;

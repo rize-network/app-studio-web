@@ -215,7 +215,7 @@ export const CarouselView: React.FC<CarouselProps> = ({
   direction = 'horizontal',
   transitionDuration = 300,
   views,
-
+  stepIndices,
   themeMode: elementMode,
   ...props
 }) => {
