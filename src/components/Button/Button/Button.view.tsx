@@ -350,7 +350,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       // Apply container view styles last (Note: views?.container is also applied to the inner Container)
       // {...views?.container} // Applying here might override variant styles, prefer applying to inner Container
     >
-      {isLink ? (
+      {to ? (
         <Link
           to={to}
           isExternal={isExternal}
