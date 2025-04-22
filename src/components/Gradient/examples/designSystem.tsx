@@ -216,7 +216,7 @@ export const DesignSystemGradients = () => {
                   Welcome to Gradients
                 </Text>
                 <Button
-                  backgroundColor="white"
+                  backgroundColor="color.white"
                   color="color.purple.600"
                   borderRadius="8px" // 2 × 4px grid
                   paddingLeft="16px" // 4 × 4px grid

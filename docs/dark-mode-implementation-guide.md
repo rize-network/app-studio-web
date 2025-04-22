@@ -36,7 +36,7 @@ Create theme-aware style functions that accept the theme mode:
 // Before
 export const MyComponentVariants: Record<Variant, ViewProps> = {
   default: {
-    backgroundColor: 'white',
+    backgroundColor: 'color.white',
     color: 'color.gray.900',
   },
   // Other variants...
@@ -44,12 +44,11 @@ export const MyComponentVariants: Record<Variant, ViewProps> = {
 
 // After
 export const getMyComponentVariants = (themeMode: string): Record<Variant, ViewProps> => {
-  const isDarkMode = themeMode === 'dark';
 
   return {
     default: {
-      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
-      color: isDarkMode ? 'color.gray.100' : 'color.gray.900',
+      backgroundColor:  'white',
+      color: 'color.gray.900',
     },
     // Other variants with dark mode support...
   };

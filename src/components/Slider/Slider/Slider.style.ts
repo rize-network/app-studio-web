@@ -54,8 +54,6 @@ export const SliderShapes: Record<Shape, number | string> = {
 };
 
 export const getSlider = (themeMode: string): Record<Variant, ViewProps> => {
-  const isDarkMode = themeMode === 'dark';
-
   return {
     default: {
       backgroundColor: 'color.blueGray.200',

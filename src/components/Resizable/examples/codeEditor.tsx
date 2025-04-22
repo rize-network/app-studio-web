@@ -146,25 +146,41 @@ export const CodeEditorLayout = () => {
               Properties
             </Text>
             <Vertical gap={8}>
-              <View padding="8px" borderRadius="4px" backgroundColor="white">
+              <View
+                padding="8px"
+                borderRadius="4px"
+                backgroundColor="color.white"
+              >
                 <Text fontWeight="bold" fontSize="12px" color="color.gray.500">
                   COMPONENT
                 </Text>
                 <Text>Resizable</Text>
               </View>
-              <View padding="8px" borderRadius="4px" backgroundColor="white">
+              <View
+                padding="8px"
+                borderRadius="4px"
+                backgroundColor="color.white"
+              >
                 <Text fontWeight="bold" fontSize="12px" color="color.gray.500">
                   ORIENTATION
                 </Text>
                 <Text>horizontal</Text>
               </View>
-              <View padding="8px" borderRadius="4px" backgroundColor="white">
+              <View
+                padding="8px"
+                borderRadius="4px"
+                backgroundColor="color.white"
+              >
                 <Text fontWeight="bold" fontSize="12px" color="color.gray.500">
                   SIZE
                 </Text>
                 <Text>md</Text>
               </View>
-              <View padding="8px" borderRadius="4px" backgroundColor="white">
+              <View
+                padding="8px"
+                borderRadius="4px"
+                backgroundColor="color.white"
+              >
                 <Text fontWeight="bold" fontSize="12px" color="color.gray.500">
                   VARIANT
                 </Text>

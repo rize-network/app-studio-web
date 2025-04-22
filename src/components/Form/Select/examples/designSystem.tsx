@@ -279,7 +279,7 @@ export const DesignSystemSelects = () => (
           views={{
             selectBox: {
               borderRadius: '8px',
-              backgroundColor: 'white',
+              backgroundColor: 'color.white',
               transition: 'all 0.3s ease',
               _hover: {
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',

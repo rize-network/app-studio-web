@@ -25,7 +25,7 @@ export const CustomDemo = () => {
             backgroundColor: 'color.purple.500',
           },
           thumb: {
-            backgroundColor: 'white',
+            backgroundColor: 'color.white',
             border: '2px solid color.purple.500',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
           },
@@ -35,7 +35,7 @@ export const CustomDemo = () => {
           },
           valueLabel: {
             backgroundColor: 'color.purple.500',
-            color: 'white',
+            color: 'color.white',
             padding: '2px 8px',
             borderRadius: 4,
           },

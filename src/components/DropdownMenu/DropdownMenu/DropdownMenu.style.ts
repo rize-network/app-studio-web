@@ -21,7 +21,7 @@ export const DropdownMenuSizes: Record<Size, ViewProps> = {
 
 export const DropdownMenuVariants: Record<Variant, ViewProps> = {
   default: {
-    backgroundColor: 'white',
+    backgroundColor: 'color.white',
     color: 'color.gray.800',
   },
   filled: {
@@ -29,7 +29,7 @@ export const DropdownMenuVariants: Record<Variant, ViewProps> = {
     color: 'color.gray.800',
   },
   outline: {
-    backgroundColor: 'white',
+    backgroundColor: 'color.white',
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color.gray.200',

@@ -142,7 +142,6 @@ export const DesignSystemCards = () => (
               padding: '20px',
             },
             footer: {
-              backgroundColor: 'color.gray.50',
               padding: '16px',
               borderTop: 'none',
             },

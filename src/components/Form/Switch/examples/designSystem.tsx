@@ -169,7 +169,7 @@ export const DesignSystemSwitches = () => (
               backgroundColor: 'color.purple.500',
             },
             circle: {
-              backgroundColor: 'white',
+              backgroundColor: 'color.white',
             },
           }}
           isChecked

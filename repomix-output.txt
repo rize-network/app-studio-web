@@ -1110,7 +1110,7 @@ export const CustomizedCommand = () => {
           },
           searchInput: {
             container: {
-              backgroundColor: 'white',
+              backgroundColor: 'color.white',
               borderBottomColor: 'color.blue.200',
             },
             input: {
@@ -1139,13 +1139,13 @@ export const CustomizedCommand = () => {
             color: 'color.blue.600',
           },
           shortcut: {
-            backgroundColor: 'white',
+            backgroundColor: 'color.white',
             padding: '2px 6px',
             borderRadius: '4px',
             fontWeight: 'bold',
           },
           footer: {
-            backgroundColor: 'white',
+            backgroundColor: 'color.white',
             borderTopColor: 'color.blue.200',
           },
         }}
@@ -1411,7 +1411,7 @@ export const getCommand = (
 
   return {
     default: {
-      backgroundColor: 'white',
+      backgroundColor: 'color.white',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'color.gray.200',
@@ -1425,7 +1425,7 @@ export const getCommand = (
       boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
     },
     outline: {
-      backgroundColor: 'white',
+      backgroundColor: 'color.white',
       borderWidth: '2px',
       borderStyle: 'solid',
       borderColor: 'color.gray.300',

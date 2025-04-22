@@ -44,7 +44,7 @@ export const ActiveIndicatorStyles: Record<IndicatorVariant, ViewProps> = {
   },
   number: {
     backgroundColor: 'theme.primary',
-    color: 'white',
+    color: 'color.white',
   },
 };
 

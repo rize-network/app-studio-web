@@ -47,7 +47,7 @@ export const dropdownStyles: ViewProps = {
   zIndex: 1000,
 
   // Visual properties
-  backgroundColor: 'white',
+  backgroundColor: 'color.white',
   borderRadius: '8px', // Consistent with design system (rounded-md)
   borderWidth: '1px',
   borderStyle: 'solid',

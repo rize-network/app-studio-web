@@ -95,7 +95,11 @@ export const CustomCompoundDemo = () => {
                 <Text color="white" fontSize="24px" fontWeight="bold">
                   {slide.text}
                 </Text>
-                <Button size="sm" variant="outline" backgroundColor="white">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  backgroundColor="color.white"
+                >
                   Learn More
                 </Button>
               </View>

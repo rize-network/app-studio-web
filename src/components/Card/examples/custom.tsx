@@ -15,7 +15,7 @@ export const CustomDemo = () => {
         },
         header: {
           backgroundColor: 'color.blue.500',
-          color: 'white',
+          color: 'color.white',
           padding: '16px',
           borderBottomWidth: '0',
         },
@@ -24,7 +24,6 @@ export const CustomDemo = () => {
         },
         footer: {
           padding: '16px',
-          backgroundColor: 'color.gray.50',
           borderTopWidth: '0',
         },
       }}

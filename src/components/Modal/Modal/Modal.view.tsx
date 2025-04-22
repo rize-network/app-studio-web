@@ -114,7 +114,7 @@ export const ModalContainer: React.FC<ContainerProps> = ({
   return (
     <Vertical
       cursor="default"
-      backgroundColor="white"
+      backgroundColor="color.white"
       width={isFullScreen ? '100%' : 600}
       height={isFullScreen ? '100%' : 'fit-content'}
       onClick={handleClick}

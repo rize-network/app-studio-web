@@ -24,7 +24,7 @@ export const CustomizedSidebar = () => {
           views={{
             container: {
               backgroundColor: 'color.blue.800',
-              color: 'white',
+              color: 'color.white',
               borderRight: 'none',
             },
             header: {
@@ -45,7 +45,7 @@ export const CustomizedSidebar = () => {
               },
             },
             toggleButtonIcon: {
-              color: 'white',
+              color: 'color.white',
             },
           }}
         >

@@ -80,7 +80,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
       <View position="relative">
         <Horizontal
           cursor="pointer"
-          backgroundColor="white"
+          backgroundColor="color.white"
           boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
           padding="12px"
           display="flex"
@@ -114,7 +114,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             <View
               id="combobox-dropdown"
               position="absolute"
-              backgroundColor="white"
+              backgroundColor="color.white"
               boxShadow="rgba(0, 0 ,0 ,0.16) 0px 1px 4px"
               width="100%"
               overflowY="auto"

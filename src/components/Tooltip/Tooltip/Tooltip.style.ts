@@ -20,8 +20,6 @@ export const TooltipSizes: Record<Size, ViewProps> = {
 };
 
 export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
-  const isDarkMode = themeMode === 'dark';
-
   return {
     default: {
       backgroundColor: 'color.gray.800',

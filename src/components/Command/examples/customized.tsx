@@ -84,7 +84,7 @@ export const CustomizedCommand = () => {
           },
           searchInput: {
             container: {
-              backgroundColor: 'white',
+              backgroundColor: 'color.white',
               borderBottomColor: 'color.blue.200',
             },
             input: {
@@ -113,13 +113,13 @@ export const CustomizedCommand = () => {
             color: 'color.blue.600',
           },
           shortcut: {
-            backgroundColor: 'white',
+            backgroundColor: 'color.white',
             padding: '2px 6px',
             borderRadius: '4px',
             fontWeight: 'bold',
           },
           footer: {
-            backgroundColor: 'white',
+            backgroundColor: 'color.white',
             borderTopColor: 'color.blue.200',
           },
         }}

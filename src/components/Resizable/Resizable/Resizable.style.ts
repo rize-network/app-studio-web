@@ -33,8 +33,6 @@ export const getHandleSizeStyles = (
 };
 
 export const getHandle = (themeMode: string): Record<Variant, ViewProps> => {
-  const isDarkMode = themeMode === 'dark';
-
   return {
     default: {
       backgroundColor: 'transparent',

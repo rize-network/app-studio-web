@@ -29,8 +29,6 @@ export const SeparatorOrientations: Record<Orientation, ViewProps> = {
  * Variant configurations for the Separator component
  */
 export const getSeparator = (themeMode: string): Record<Variant, string> => {
-  const isDarkMode = themeMode === 'dark';
-
   return {
     solid: 'solid',
     dashed: 'dashed',

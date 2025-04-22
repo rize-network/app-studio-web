@@ -139,7 +139,7 @@ export const DesignSystemAvatars = () => {
                   borderColor: 'transparent',
                 },
                 fallback: {
-                  color: 'white',
+                  color: 'color.white',
                   fontWeight: '600',
                 },
               }}

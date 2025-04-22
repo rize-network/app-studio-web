@@ -63,7 +63,7 @@ export const PaginationShapes: Record<Shape, ViewProps> = {
 
 export const ActivePageButtonStyles: ViewProps = {
   backgroundColor: 'color.blue.500',
-  color: 'white',
+  color: 'color.white',
   _hover: {
     backgroundColor: 'color.blue.600',
   },

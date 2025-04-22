@@ -74,7 +74,7 @@ export const StylesTabs = () => {
         tab: {
           borderRadius: '8px', // Use borderRadius instead of shape
           backgroundColor: 'transparent', // Use backgroundColor instead of variant
-          color: 'white',
+          color: 'color.white',
           flexGrow: 1, // Example: Make tabs fill width
         },
         // Styles specifically for the active tab button (merged with 'tab' styles)
@@ -83,14 +83,14 @@ export const StylesTabs = () => {
         },
         // Styles for the text inside any tab button
         title: {
-          color: 'white',
+          color: 'color.white',
           fontWeight: 'normal', // Use fontWeight instead of weight
         },
         // Styles specifically for the text inside the active tab button (merged with 'title' styles)
         activeText: {
           fontWeight: 'bold', // Use fontWeight instead of weight
           fontSize: 'lg', // Use fontSize instead of size
-          color: 'black', // Example active text color
+          color: 'color.black', // Example active text color
         },
         // Styles for the content area below the tabs
         content: {

@@ -55,7 +55,7 @@ export const CustomChartDemo = () => {
             fontWeight: 'bold',
           },
           legend: {
-            backgroundColor: 'white',
+            backgroundColor: 'color.white',
             padding: '8px',
             borderRadius: '4px',
           },
@@ -64,7 +64,7 @@ export const CustomChartDemo = () => {
           },
           tooltip: {
             backgroundColor: 'color.blue',
-            color: 'white',
+            color: 'color.white',
             fontWeight: 'bold',
           },
         }}

@@ -192,13 +192,13 @@ export const DesignSystemTable = () => {
             },
             thead: {
               backgroundColor: 'color.blue.600',
-              color: 'white',
+              color: 'color.white',
             },
             th: {
               padding: '12px 16px', // 3 × 4px and 4 × 4px grid
               fontWeight: '600',
               fontSize: '14px',
-              color: 'white',
+              color: 'color.white',
             },
             td: {
               padding: '12px 16px', // 3 × 4px and 4 × 4px grid
@@ -239,7 +239,7 @@ export const DesignSystemTable = () => {
               borderColor: 'color.gray.200',
             },
             thead: {
-              backgroundColor: 'white',
+              backgroundColor: 'color.white',
               borderBottom: '2px solid',
               borderBottomColor: 'color.gray.200',
             },

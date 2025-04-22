@@ -49,7 +49,7 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color.gray.200',
-    backgroundColor: 'white',
+    backgroundColor: 'color.white',
     transition: 'all 0.2s ease',
     _hover: {
       borderColor: 'color.gray.300',
@@ -65,7 +65,7 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderBottomStyle: 'solid',
     borderBottomColor: 'color.gray.200',
     borderRadius: 0,
-    backgroundColor: 'white',
+    backgroundColor: 'color.white',
     transition: 'all 0.2s ease',
     _hover: {
       borderBottomColor: 'color.gray.300',

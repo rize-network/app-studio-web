@@ -106,7 +106,7 @@ export const DesignSystemButtons = () => (
           views={{
             container: {
               backgroundColor: 'color.blue.500',
-              color: 'white',
+              color: 'color.white',
               on: {
                 hover: {
                   backgroundColor: 'color.blue.600',
@@ -121,7 +121,7 @@ export const DesignSystemButtons = () => (
           views={{
             container: {
               backgroundColor: 'color.green.500',
-              color: 'white',
+              color: 'color.white',
               borderRadius: '16px',
               boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
             },
@@ -133,7 +133,7 @@ export const DesignSystemButtons = () => (
           views={{
             container: {
               backgroundColor: 'color.purple.500',
-              color: 'white',
+              color: 'color.white',
               paddingLeft: '32px',
               paddingRight: '32px',
               fontSize: '20px',

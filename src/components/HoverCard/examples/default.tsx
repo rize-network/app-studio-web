@@ -42,7 +42,7 @@ export const DefaultHoverCard = () => {
             views={{
               container: {
                 backgroundColor: 'color.blue',
-                color: 'white',
+                color: 'color.white',
                 borderRadius: '8px',
                 padding: '16px',
               },

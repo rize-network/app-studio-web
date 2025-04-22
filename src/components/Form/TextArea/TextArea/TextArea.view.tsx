@@ -84,7 +84,6 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     transition: 'all 0.2s ease',
 
     // // Dark mode support
-   
 
     // Apply custom field styles
     ...views['field'],

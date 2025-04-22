@@ -22,7 +22,7 @@ export const WithContentDemo = () => (
           <Text color="white" fontWeight="600" fontSize="24px">
             Welcome to Gradients
           </Text>
-          <Button backgroundColor="white" color="color.purple.600">
+          <Button backgroundColor="color.white" color="color.purple.600">
             Get Started
           </Button>
         </Vertical>

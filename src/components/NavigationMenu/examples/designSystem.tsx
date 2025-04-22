@@ -102,7 +102,7 @@ export const DesignSystemNavigationMenu = () => {
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="white"
+              backgroundColor="color.white"
             >
               <NavigationMenu
                 items={items}
@@ -163,7 +163,7 @@ export const DesignSystemNavigationMenu = () => {
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="white"
+              backgroundColor="color.white"
               padding="4px"
             >
               <NavigationMenu
@@ -212,7 +212,7 @@ export const DesignSystemNavigationMenu = () => {
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="white"
+              backgroundColor="color.white"
             >
               <NavigationMenu
                 items={items.slice(0, 4)}
@@ -231,7 +231,7 @@ export const DesignSystemNavigationMenu = () => {
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="white"
+              backgroundColor="color.white"
             >
               <NavigationMenu
                 items={items.slice(0, 4)}
@@ -250,7 +250,7 @@ export const DesignSystemNavigationMenu = () => {
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="white"
+              backgroundColor="color.white"
             >
               <NavigationMenu
                 items={items.slice(0, 4)}
@@ -272,7 +272,7 @@ export const DesignSystemNavigationMenu = () => {
           border="1px solid #e2e8f0"
           borderRadius="8px"
           overflow="hidden"
-          backgroundColor="white"
+          backgroundColor="color.white"
           width="300px"
         >
           <NavigationMenu defaultActiveItemId="home">

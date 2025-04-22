@@ -27,7 +27,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="white"
+          backgroundColor="color.white"
           padding={16}
           borderRadius="8px"
         >
@@ -50,7 +50,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="white"
+          backgroundColor="color.white"
           padding={16}
           borderRadius="8px"
         >
@@ -84,7 +84,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="white"
+          backgroundColor="color.white"
           padding={16}
           borderRadius="8px"
         >
@@ -118,7 +118,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="white"
+          backgroundColor="color.white"
           padding={16}
           borderRadius="8px"
         >
@@ -155,7 +155,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="white"
+          backgroundColor="color.white"
           padding={16}
           borderRadius="8px"
         >
@@ -203,7 +203,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="white"
+          backgroundColor="color.white"
           padding={16}
           borderRadius="8px"
         >
@@ -326,7 +326,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="white"
+          backgroundColor="color.white"
           padding={16}
           borderRadius="8px"
         >

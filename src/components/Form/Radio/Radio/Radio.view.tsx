@@ -126,7 +126,7 @@ const RadioView: React.FC<RadioViewProps> = ({
 
       // Visual properties
       borderRadius: '50%', // Always circular for radio buttons
-      backgroundColor: 'white',
+      backgroundColor: 'color.white',
 
       // Size properties
       ...Sizes[size],

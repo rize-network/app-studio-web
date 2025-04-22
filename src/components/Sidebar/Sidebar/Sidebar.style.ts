@@ -48,11 +48,9 @@ export const SidebarSizes: Record<
  * Variant styles for the Sidebar component
  */
 export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
-  const isDarkMode = themeMode === 'dark';
-
   return {
     default: {
-      backgroundColor: 'white',
+      backgroundColor: 'color.white',
       color: 'color.gray.800',
 
       transition: 'all 0.2s ease',
@@ -64,7 +62,7 @@ export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
       transition: 'all 0.2s ease',
     },
     outline: {
-      backgroundColor: 'white',
+      backgroundColor: 'color.white',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'color.gray.200',
@@ -79,7 +77,7 @@ export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
       transition: 'all 0.2s ease',
     },
     elevated: {
-      backgroundColor: 'white',
+      backgroundColor: 'color.white',
       boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
       color: 'color.gray.800',
 

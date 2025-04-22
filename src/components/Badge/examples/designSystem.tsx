@@ -115,7 +115,7 @@ export const DesignSystemBadges = () => (
           views={{
             container: {
               background: 'linear-gradient(90deg, #4F46E5 0%, #9333EA 100%)',
-              color: 'white',
+              color: 'color.white',
               boxShadow: '0 2px 8px rgba(99, 102, 241, 0.3)',
             },
             text: {

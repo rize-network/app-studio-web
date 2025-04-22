@@ -62,12 +62,12 @@ export const PricingTiersDemo = () => {
             backgroundColor: 'color.green.500',
           },
           thumb: {
-            backgroundColor: 'white',
+            backgroundColor: 'color.white',
             border: '2px solid color.green.500',
           },
           valueLabel: {
             backgroundColor: 'color.green.500',
-            color: 'white',
+            color: 'color.white',
             padding: '2px 8px',
             borderRadius: 4,
             fontWeight: 600,

@@ -43,19 +43,19 @@ export const VariantStyles: Record<Variant, ViewProps> = {
   selected: {
     backgroundColor: 'theme.primary',
     borderColor: 'theme.primary',
-    color: 'white',
+    color: 'color.white',
   },
   unselected: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'color.white',
     borderWidth: '2px',
     borderStyle: 'solid',
     borderColor: 'color.gray.300',
-    color: 'transparent',
+    color: 'color.black',
   },
   indeterminate: {
     backgroundColor: 'theme.primary',
     borderColor: 'theme.primary',
-    color: 'white',
+    color: 'color.white',
   },
 };
 

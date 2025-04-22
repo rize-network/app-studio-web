@@ -53,7 +53,7 @@ export const LegendTextStyles: ViewProps = {
 // Default styles for tooltip
 export const TooltipStyles: ViewProps = {
   position: 'absolute',
-  backgroundColor: 'white',
+  backgroundColor: 'color.white',
   padding: '8px 12px',
   borderRadius: '4px',
   boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',

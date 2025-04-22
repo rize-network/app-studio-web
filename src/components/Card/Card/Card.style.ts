@@ -42,35 +42,29 @@ export const CardShapes: Record<Shape, number | string> = {
 export const getCardVariants = (
   themeMode: string
 ): Record<Variant, ViewProps> => {
-  const isDarkMode = themeMode === 'dark';
-
   return {
     default: {
-      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
+      backgroundColor: 'color.white',
       border: 'none',
       transition: 'all 0.2s ease',
     },
     outlined: {
-      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
+      backgroundColor: 'color.white',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: isDarkMode ? 'color.gray.700' : 'color.gray.200',
+      borderColor: 'color.gray.200',
       transition: 'all 0.2s ease',
       _hover: {
-        borderColor: isDarkMode ? 'color.gray.600' : 'color.gray.300',
+        borderColor: 'color.gray.300',
       },
     },
     elevated: {
-      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
-      boxShadow: isDarkMode
-        ? '0px 2px 8px rgba(0, 0, 0, 0.2)'
-        : '0px 2px 8px rgba(0, 0, 0, 0.08)',
+      backgroundColor: 'color.white',
+      boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.08)',
       border: 'none',
       transition: 'all 0.2s ease',
       _hover: {
-        boxShadow: isDarkMode
-          ? '0px 4px 12px rgba(0, 0, 0, 0.25)'
-          : '0px 4px 12px rgba(0, 0, 0, 0.12)',
+        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.12)',
         transform: 'translateY(-2px)',
       },
     },
@@ -87,13 +81,10 @@ export const CardVariants = getCardVariants('light');
  * @param theme - Theme object from useTheme hook
  */
 export const getDefaultCardStyles = (theme: any): CardStyles => {
-  const { themeMode } = theme;
-  const isDarkMode = themeMode === 'dark';
-
   return {
     container: {
-      backgroundColor: isDarkMode ? 'color.gray.800' : 'white',
-      color: isDarkMode ? 'color.gray.100' : 'color.gray.900',
+      backgroundColor: 'color.white',
+      color: 'color.black',
       borderRadius: '8px', // Consistent with design system
       overflow: 'hidden',
       transition: 'all 0.2s ease',
@@ -102,17 +93,18 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
       padding: '16px', // 4 × 4px grid
       borderBottomWidth: '1px',
       borderBottomStyle: 'solid',
-      borderBottomColor: isDarkMode ? 'color.gray.700' : 'color.gray.200',
+      borderBottomColor: 'color.gray.200',
+      color: 'color.black',
     },
     content: {
       padding: '16px', // 4 × 4px grid
-      color: isDarkMode ? 'color.gray.100' : 'color.gray.900',
+      color: 'color.black',
     },
     footer: {
       padding: '16px', // 4 × 4px grid
       borderTopWidth: '1px',
       borderTopStyle: 'solid',
-      borderTopColor: isDarkMode ? 'color.gray.700' : 'color.gray.200',
+      borderTopColor: 'color.gray.200',
     },
   };
 };

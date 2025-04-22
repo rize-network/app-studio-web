@@ -77,12 +77,12 @@ export const FormikSliderExample = () => {
                     backgroundColor: 'color.blue.500',
                   },
                   thumb: {
-                    backgroundColor: 'white',
+                    backgroundColor: 'color.white',
                     border: '2px solid color.blue.500',
                   },
                   tooltip: {
                     backgroundColor: 'color.blue.500',
-                    color: 'white',
+                    color: 'color.white',
                   },
                 }}
               />

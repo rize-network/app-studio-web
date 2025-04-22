@@ -93,12 +93,10 @@ export const PositionStyles: { [key: string]: React.CSSProperties } = {
 export const getBadgeVariants = (
   themeMode: string
 ): Record<Variant, ViewProps> => {
-  const isDarkMode = themeMode === 'dark';
-
   return {
     filled: {
       backgroundColor: 'theme.primary',
-      color: isDarkMode ? 'color.gray.900' : 'color.white',
+      color: 'color.white',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'transparent',
@@ -124,7 +122,7 @@ export const getBadgeVariants = (
     },
     ghost: {
       backgroundColor: 'transparent',
-      color: isDarkMode ? 'color.gray.400' : 'color.gray.500',
+      color: 'color.gray.500',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'transparent',

@@ -18,7 +18,7 @@ export const CustomTooltip = () => {
         views={{
           content: {
             backgroundColor: 'theme.primary',
-            color: 'white',
+            color: 'color.white',
             borderRadius: '8px',
           },
           arrow: {

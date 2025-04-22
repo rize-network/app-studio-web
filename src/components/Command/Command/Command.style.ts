@@ -19,11 +19,9 @@ export const CommandSizes: Record<CommandSize, ViewProps> = {
 export const getCommand = (
   themeMode: string
 ): Record<CommandVariant, ViewProps> => {
-  const isDarkMode = themeMode === 'dark';
-
   return {
     default: {
-      backgroundColor: 'white',
+      backgroundColor: 'color.white',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'color.gray.200',
@@ -37,7 +35,7 @@ export const getCommand = (
       boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
     },
     outline: {
-      backgroundColor: 'white',
+      backgroundColor: 'color.white',
       borderWidth: '2px',
       borderStyle: 'solid',
       borderColor: 'color.gray.300',
