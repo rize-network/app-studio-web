@@ -348,7 +348,9 @@ const ButtonView: React.FC<ButtonProps> = ({
       _hover={_hover}
       _active={_active}
       // Apply container view styles last (Note: views?.container is also applied to the inner Container)
-      // {...views?.container} // Applying here might override variant styles, prefer applying to inner Container
+      {...props}
+      {...views?.container}
+      // Applying here might override variant styles, prefer applying to inner Container
     >
       {to ? (
         <Link
