@@ -142,20 +142,14 @@ const ButtonView: React.FC<ButtonProps> = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
-      width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+      // width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
       /* visuals */
       borderRadius={ButtonShapes[shape]}
-      backgroundColor={base.backgroundColor}
-      color={base.color}
-      borderWidth={base.borderWidth}
-      borderStyle={base.borderStyle}
-      borderColor={base.borderColor}
-      _hover={base._hover}
-      _active={base._active}
       boxShadow={shadow}
       transition="all 0.2s ease"
       cursor={isDisabled ? 'default' : 'pointer'}
       onClick={onClick}
+      {...base}
       {...views?.container}
       {...props}
     >

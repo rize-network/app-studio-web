@@ -8,11 +8,11 @@ import { Shape } from '../Button/Button.type';
 
 export const IconButtons = () => (
   <Center gap={15}>
-    <Button icon={<DustBinIcon widthHeight={16} />} size="lg">
+    <Button icon={<DustBinIcon widthHeight={16} />} size="md">
       Delete
     </Button>
     <Button
-      size="lg"
+      size="md"
       icon={<DustBinIcon widthHeight={16} />}
       shape={'pillShaped' as Shape}
       iconPosition="right"
@@ -22,13 +22,13 @@ export const IconButtons = () => (
     <Button icon={<DustBinIcon widthHeight={16} />} isIconRounded isAuto />
     <Button
       icon={<DustBinIcon widthHeight={16} />}
-      size="lg"
+      size="md"
       iconPosition="top"
     >
       Delete
     </Button>
     <Button
-      size="lg"
+      size="md"
       icon={<DustBinIcon widthHeight={16} />}
       shape={'pillShaped' as Shape}
       iconPosition="bottom"

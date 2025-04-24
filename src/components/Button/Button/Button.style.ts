@@ -18,11 +18,11 @@ import { Shape, Size, Variant } from './Button.type';
 export const ButtonSizes: Record<Size, ViewProps> = {
   xs: {
     // Height: 24px (6 × 4px)
-    minHeight: 24,
+    minHeight: 4 * 4,
     paddingTop: 2,
     paddingBottom: 2,
-    paddingLeft: 6,
-    paddingRight: 6,
+    paddingLeft: 4,
+    paddingRight: 4,
     // Typography
 
     fontSize: 12, // text-xs
@@ -32,58 +32,57 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   },
   sm: {
     // Height: 32px (8 × 4px)
-    minHeight: 32,
+    minHeight: 6 * 4,
     paddingTop: 6,
     paddingBottom: 6,
     paddingLeft: 12,
     paddingRight: 12,
     // Typography
 
-    fontSize: 14, // text-sm
+    fontSize: 12, // text-sm
     fontWeight: '500', // medium
-    lineHeight: 20,
+    lineHeight: 12,
     letterSpacing: '-0.01em',
   },
   md: {
     // Height: 40px (10 × 4px) - standard height for interactive elements
-    minHeight: 40,
+    minHeight: 8 * 4,
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 16,
     paddingRight: 16,
     // Typography
 
-    fontSize: 14, // text-sm/md
+    fontSize: 16, // text-sm/md
     fontWeight: '500', // medium
-    lineHeight: 24,
+    lineHeight: 16,
     letterSpacing: '-0.01em',
   },
   lg: {
-    // Height: 48px (12 × 4px)
-    minHeight: 48,
-    paddingTop: 12,
-    paddingBottom: 12,
+    minHeight: 10 * 4,
+    paddingTop: 10,
+    paddingBottom: 10,
     paddingLeft: 20,
     paddingRight: 20,
     // Typography
 
     fontSize: 16, // text-md/lg
     fontWeight: '500', // medium
-    lineHeight: 24,
+    lineHeight: 20,
     letterSpacing: '-0.01em',
   },
   xl: {
     // Height: 60px (15 × 4px)
-    minHeight: 60,
-    paddingTop: 16,
-    paddingBottom: 16,
-    paddingLeft: 28,
-    paddingRight: 28,
+    minHeight: 12 * 4,
+    paddingTop: 12,
+    paddingBottom: 12,
+    paddingLeft: 24,
+    paddingRight: 24,
     // Typography
 
     fontSize: 18, // text-lg
     fontWeight: '500', // medium
-    lineHeight: 28,
+    lineHeight: 24,
     letterSpacing: '-0.01em',
   },
 };
@@ -139,15 +138,16 @@ export const getButtonVariants = (
     borderStyle: 'solid',
     borderColor: 'transparent',
     _hover: {
-      backgroundColor: 'transparent',
-      color: color,
-      borderColor: color,
       transform: 'translateY(-1px)',
+      textDecoration: 'underline',
+      textUnderlineOffset: '1px',
+      textDecorationThickness: '1px',
     },
     _active: {
-      color: color,
-      borderColor: color,
-      transform: 'translateY(0)',
+      transform: 'translateY(-1px)',
+      textDecoration: 'underline',
+      textUnderlineOffset: '1px',
+      textDecorationThickness: '1px',
     },
     transition: 'all 0.2s ease',
   },
@@ -161,11 +161,17 @@ export const getButtonVariants = (
       backgroundColor: color,
       color: isLight ? 'light.black' : 'light.white',
       transform: 'translateY(-1px)',
+      textDecoration: 'underline',
+      textUnderlineOffset: '1px',
+      textDecorationThickness: '1px',
     },
     _active: {
       backgroundColor: color,
       color: isLight ? 'light.black' : 'light.white',
       transform: 'translateY(0)',
+      textDecoration: 'underline',
+      textUnderlineOffset: '1px',
+      textDecorationThickness: '1px',
     },
     transition: 'all 0.2s ease',
   },
@@ -179,11 +185,17 @@ export const getButtonVariants = (
       backgroundColor: color,
       color: isLight ? 'light.black' : 'light.white',
       transform: 'translateY(-1px)',
+      textDecoration: 'underline',
+      textUnderlineOffset: '1px',
+      textDecorationThickness: '1px',
     },
     _active: {
       backgroundColor: color,
       color: isLight ? 'light.black' : 'light.white',
       transform: 'translateY(0)',
+      textDecoration: 'underline',
+      textUnderlineOffset: '1px',
+      textDecorationThickness: '1px',
     },
     transition: 'all 0.2s ease',
   },
@@ -194,11 +206,12 @@ export const getButtonVariants = (
     borderStyle: 'none',
     borderColor: 'transparent',
     textDecoration: 'underline',
-    textUnderlineOffset: 2,
+    textUnderlineOffset: '1px',
+    textDecorationThickness: '1px',
     _hover: {
-      textDecorationThickness: 2,
+      textDecorationThickness: '2px',
     },
-    _active: { textDecorationThickness: 2 },
+    _active: { textDecorationThickness: '2px' },
     transition: 'all 0.2s ease',
   },
 });
