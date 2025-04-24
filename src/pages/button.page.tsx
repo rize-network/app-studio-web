@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-  BorderedButtons,
-  ButtonSizes,
-  DisabledButton,
   EffectButton,
-  IconButtons,
-  LoaderButtons,
-  ShadowButton,
+  IconButtons as IconButtons,
   VariantButtons,
+  ShadowButton,
+  ButtonSizes as ButtonSizes,
+  DisabledButton,
+  LoaderButtons,
 } from 'src/components/Button/examples';
 import { View } from 'app-studio';
 export const ButtonPage = () => {
@@ -51,13 +50,6 @@ export const ButtonPage = () => {
             <td>Variant</td>
             <td>
               <VariantButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Bordered</td>
-
-            <td>
-              <BorderedButtons />
             </td>
           </tr>
           <tr>

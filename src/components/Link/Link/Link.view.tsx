@@ -1,5 +1,4 @@
 import React from 'react';
-import { Element } from 'app-studio';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import { Horizontal } from 'app-studio';
 import { ExternalLinkIcon } from '../../Icon/Icon';
@@ -29,23 +28,24 @@ const LinkView: React.FC<LinkViewProps> = ({
     if (underline === 'hover') setIsHovered(true);
   };
   return (
-    <ReactRouterLink to={to} target={isExternal ? '_blank' : '_self'}>
-      <Element
+    <ReactRouterLink
+      to={to}
+      target={isExternal ? '_blank' : '_self'}
+      style={{ textDecoration: 'inherit', color: 'inherit' }}
+    >
+      <Horizontal
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
-        textDecoration={
-          isHovered || underline === 'underline'
-            ? 'underline !important'
-            : 'none'
-        }
+        gap={3}
+        alignItems="center"
+        flexWrap="nowrap"
+        textDecoration={'none'}
         {...views.text}
         {...props}
       >
-        <Horizontal gap={3} alignItems="center" flexWrap="nowrap">
-          {children}
-          {isExternal && <ExternalLinkIcon widthHeight={IconSizes[iconSize]} />}
-        </Horizontal>
-      </Element>
+        {children}
+        {isExternal && <ExternalLinkIcon widthHeight={IconSizes[iconSize]} />}
+      </Horizontal>
     </ReactRouterLink>
   );
 };

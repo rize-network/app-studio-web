@@ -18,7 +18,7 @@ export const VariantButtons = () => (
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
       <Button
         key={index}
-        to="https://www.npmjs.com/package/app-studio"
+        // to="https://www.npmjs.com/package/app-studio"
         variant={variant as Variant}
         effect="reverse"
       >

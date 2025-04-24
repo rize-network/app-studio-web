@@ -18,7 +18,7 @@ import { Shape, Size, Variant } from './Button.type';
 export const ButtonSizes: Record<Size, ViewProps> = {
   xs: {
     // Height: 24px (6 × 4px)
-    height: 24,
+    minHeight: 24,
     paddingTop: 2,
     paddingBottom: 2,
     paddingLeft: 6,
@@ -32,7 +32,7 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   },
   sm: {
     // Height: 32px (8 × 4px)
-    height: 32,
+    minHeight: 32,
     paddingTop: 6,
     paddingBottom: 6,
     paddingLeft: 12,
@@ -46,7 +46,7 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   },
   md: {
     // Height: 40px (10 × 4px) - standard height for interactive elements
-    height: 40,
+    minHeight: 40,
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 16,
@@ -60,7 +60,7 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   },
   lg: {
     // Height: 48px (12 × 4px)
-    height: 48,
+    minHeight: 48,
     paddingTop: 12,
     paddingBottom: 12,
     paddingLeft: 20,
@@ -74,7 +74,7 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   },
   xl: {
     // Height: 60px (15 × 4px)
-    height: 60,
+    minHeight: 60,
     paddingTop: 16,
     paddingBottom: 16,
     paddingLeft: 28,
@@ -128,46 +128,44 @@ export const IconSizes: Record<Size, ViewProps> = {
   },
 };
 
-/**
- * Button variants with consistent styling
- */
 export const getButtonVariants = (
   color: string,
   isLight: boolean
 ): Record<Variant, ViewProps> => ({
   filled: {
     backgroundColor: color,
-    color: isLight ? 'color.gray.900' : 'color.white',
+    color: isLight ? 'color.black' : 'color.white',
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'transparent',
-    on: {
-      hover: {
-        filter: 'brightness(0.9)',
-        transform: 'translateY(-1px)',
-      },
-      active: {
-        filter: 'brightness(0.85)',
-        transform: 'translateY(0)',
-      },
+    _hover: {
+      backgroundColor: 'transparent',
+      color: color,
+      borderColor: color,
+      transform: 'translateY(-1px)',
+    },
+    _active: {
+      color: color,
+      borderColor: color,
+      transform: 'translateY(0)',
     },
     transition: 'all 0.2s ease',
   },
   outline: {
     backgroundColor: 'transparent',
+    color: color,
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: color,
-    color: color,
-    on: {
-      hover: {
-        opacity: 0.6,
-        transform: 'translateY(-1px)',
-      },
-      active: {
-        opacity: 0.8,
-        transform: 'translateY(0)',
-      },
+    _hover: {
+      backgroundColor: color,
+      color: isLight ? 'light.black' : 'light.white',
+      transform: 'translateY(-1px)',
+    },
+    _active: {
+      backgroundColor: color,
+      color: isLight ? 'light.black' : 'light.white',
+      transform: 'translateY(0)',
     },
     transition: 'all 0.2s ease',
   },
@@ -177,32 +175,30 @@ export const getButtonVariants = (
     borderWidth: 0,
     borderStyle: 'none',
     borderColor: 'transparent',
-    on: {
-      hover: {
-        opacity: 0.6,
-        transform: 'translateY(-1px)',
-      },
-      active: {
-        opacity: 0.8,
-        transform: 'translateY(0)',
-      },
+    _hover: {
+      backgroundColor: color,
+      color: isLight ? 'light.black' : 'light.white',
+      transform: 'translateY(-1px)',
+    },
+    _active: {
+      backgroundColor: color,
+      color: isLight ? 'light.black' : 'light.white',
+      transform: 'translateY(0)',
     },
     transition: 'all 0.2s ease',
   },
   link: {
     backgroundColor: 'transparent',
+    color: isLight ? color : 'light.black',
     borderWidth: 0,
     borderStyle: 'none',
     borderColor: 'transparent',
-    color: color,
     textDecoration: 'underline',
     textUnderlineOffset: 2,
-    on: {
-      hover: {
-        textDecoration: 'underline',
-        textDecorationThickness: 2,
-      },
+    _hover: {
+      textDecorationThickness: 2,
     },
+    _active: { textDecorationThickness: 2 },
     transition: 'all 0.2s ease',
   },
 });
