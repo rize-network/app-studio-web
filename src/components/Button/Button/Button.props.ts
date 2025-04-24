@@ -7,7 +7,6 @@ import {
   Size,
   Variant,
   LoaderPosition,
-  Effects,
   // Defines the types and structure required for the ButtonProps interface, used as a contract for Button component properties.
 } from './Button.type';
 // Optional React node(s) to be displayed as the button's content.
@@ -49,9 +48,6 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
 
   // Variant to define the stylistic variation of the button.
   variant?: Variant;
-
-  // Optional effect to apply interactive effects to the button.
-  effect?: Effects;
 
   // Optional color scheme for the button
   color?: string;

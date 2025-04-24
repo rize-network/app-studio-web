@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  EffectButton,
   IconButtons as IconButtons,
   VariantButtons,
   ShadowButton,
@@ -56,12 +55,6 @@ export const ButtonPage = () => {
             <td>Icon</td>
             <td>
               <IconButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Effect</td>
-            <td>
-              <EffectButton />
             </td>
           </tr>
         </tbody>

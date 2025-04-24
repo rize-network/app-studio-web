@@ -12,5 +12,3 @@ export type LoaderPosition = 'left' | 'right';
 // Specifying a 'LoaderPosition' type for positioning a loader on the 'left' or 'right' side within a component where it is used.
 export type Variant = 'filled' | 'outline' | 'link' | 'ghost';
 // Declares a type 'Variant' used for styling components where each value—'filled', 'outline', 'link', 'ghost'—likely describes a visual style or theme.
-export type Effects = 'hover' | 'default' | 'reverse';
-// Defines a type 'Effects' which could be used for UI interaction states or animations, where each value represents a different visual effect like 'hover', 'default', or 'reverse'.

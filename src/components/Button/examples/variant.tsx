@@ -12,16 +12,11 @@ export const VariantButtons = () => (
         to="https://www.npmjs.com/package/app-studio"
         variant={variant as Variant}
       >
-        {variant} a
+        App Studio Link {variant}
       </Button>
     ))}
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-      <Button
-        key={index}
-        // to="https://www.npmjs.com/package/app-studio"
-        variant={variant as Variant}
-        effect="reverse"
-      >
+      <Button key={index} variant={variant as Variant}>
         {variant}
       </Button>
     ))}
