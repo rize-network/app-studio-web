@@ -250,14 +250,14 @@ const ButtonView: React.FC<ButtonProps> = ({
       gap={8} // 8px gap (2x4px grid) for consistent spacing
       alignItems="center"
       justifyContent="center"
-      {...views?.container} // Apply container view overrides
+      {...views?.content} // Apply container view overrides
     >
       {/* Show loader on the left if loading and position is left */}
       {isLoading && loaderPosition === 'left' && (
         <Loader
           size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
           color={baseButtonVariantStyles.color} // Use calculated text color for loader
-          {...loaderProps}
+          {...views?.loader}
         />
       )}
 
@@ -295,7 +295,7 @@ const ButtonView: React.FC<ButtonProps> = ({
         <Loader
           size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
           color={baseButtonVariantStyles.color} // Use calculated text color for loader
-          {...loaderProps}
+          {...views?.loader}
         />
       )}
     </Container>

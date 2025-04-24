@@ -58,6 +58,8 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
 
   views?: {
     container?: ViewProps;
+    content?: ViewProps;
+    loader?: ViewProps;
     icon?: ViewProps;
     link?: ViewProps;
   };
