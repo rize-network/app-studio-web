@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Element, View, ViewProps } from 'app-studio';
+import { Element, Text, View, ViewProps } from 'app-studio';
 
 import { TextProps } from './Text.props';
 import {
@@ -170,7 +170,7 @@ const TruncateText: React.FC<TruncateTextProps> = ({
   }, [text, maxLines]);
 
   return (
-    <View
+    <Text
       ref={containerRef}
       overflow="hidden" // Crucial for final display state
       {...views?.truncateText}
@@ -180,7 +180,7 @@ const TruncateText: React.FC<TruncateTextProps> = ({
     >
       {/* Render the text from state */}
       {truncatedText}
-    </View>
+    </Text>
   );
 };
 
