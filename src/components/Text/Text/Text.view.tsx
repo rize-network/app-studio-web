@@ -223,11 +223,6 @@ const TextView: React.FC<Props> = ({
       textDecoration={
         isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'
       }
-      color="color.gray.900"
-      // Apply dark mode styles
-      _dark={{
-        color: 'color.gray.100',
-      }}
       // Apply layout styles
       {...noLineBreak}
       // Apply heading styles if specified
