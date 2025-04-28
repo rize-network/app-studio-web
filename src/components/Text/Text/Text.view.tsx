@@ -82,62 +82,104 @@ const TextContent: React.FC<ContentProps> = ({
   </>
 );
 
+// Keep the interface
+interface TruncateTextProps extends React.HTMLAttributes<HTMLDivElement> {
+  text: string;
+  maxLines?: number;
+  views?: {
+    truncateText?: ViewProps;
+  };
+}
+
 /**
- * Renders text with truncation after a specified number of lines
+ * Renders text with truncation after a specified number of lines (JS calculation)
  */
 const TruncateText: React.FC<TruncateTextProps> = ({
   text,
   maxLines = 1,
   views,
+  ...rest // Pass down other HTML attributes
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [truncatedLength, setTruncatedLength] = useState(text.length);
+  const [truncatedText, setTruncatedText] = useState(text);
+  const [isTruncated, setIsTruncated] = useState(false);
 
   useEffect(() => {
-    const textNode = containerRef.current;
-    if (!textNode) return;
+    const node = containerRef.current;
+    if (!node || !text || maxLines <= 0) {
+      setTruncatedText(text ?? '');
+      setIsTruncated(false);
+      return;
+    }
 
-    const updateTruncatedText = () => {
-      const comLineHeight = getComputedStyle(textNode).lineHeight;
-      const lineHeight =
-        comLineHeight !== 'normal' ? parseFloat(comLineHeight) : 20;
-      const maxHeight = lineHeight * maxLines;
+    const { overflow, height, maxHeight, lineHeight } = node.style;
 
-      let start = 0;
-      let end = text.length;
-      let middle;
+    node.style.overflow = 'visible';
+    node.style.height = 'auto';
+    node.style.maxHeight = 'none';
 
-      while (start <= end) {
-        middle = Math.floor((start + end) / 2);
-        textNode.innerText = text.substring(0, middle) + '...';
-        const currentHeight = textNode.offsetHeight;
+    node.innerText = text[0] || 'M';
+    let singleLine = node.offsetHeight;
+    if (!singleLine) {
+      const cs = getComputedStyle(node);
+      singleLine =
+        cs.lineHeight !== 'normal'
+          ? parseFloat(cs.lineHeight)
+          : parseFloat(cs.fontSize || '16') * 1.2;
+    }
 
-        if (currentHeight > maxHeight) {
-          end = middle - 1;
-        } else {
-          start = middle + 1;
-        }
+    const limit = singleLine * maxLines;
+
+    node.innerText = text;
+    if (node.offsetHeight <= limit) {
+      setTruncatedText(text);
+      setIsTruncated(false);
+      restore(node);
+      return;
+    }
+
+    let lo = 0;
+    let hi = text.length;
+    let fit = 0;
+
+    while (lo <= hi) {
+      const mid = Math.floor((lo + hi) / 2);
+      node.innerText = text.slice(0, mid);
+      if (node.offsetHeight <= limit) {
+        fit = mid;
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
       }
+    }
 
-      setTruncatedLength(end);
-    };
+    const finalText =
+      fit < text.length
+        ? text.slice(0, text.length > fit + 3 ? fit - 3 : fit).trimEnd() + '…'
+        : text;
+    setTruncatedText(finalText);
+    setIsTruncated(fit < text.length);
+    restore(node);
 
-    updateTruncatedText();
+    function restore(n) {
+      n.style.overflow = overflow;
+      n.style.height = height;
+      n.style.maxHeight = maxHeight;
+      n.style.lineHeight = lineHeight;
+    }
   }, [text, maxLines]);
-
-  const displayText =
-    text.length > truncatedLength
-      ? text.substring(0, truncatedLength) + '...'
-      : text;
 
   return (
     <View
       ref={containerRef}
-      overflow="hidden"
-      textOverflow="ellipsis"
+      overflow="hidden" // Crucial for final display state
       {...views?.truncateText}
+      {...rest} // Spread remaining props
+      // Add title attribute for accessibility/hover to see full text
+      title={isTruncated ? text : undefined}
     >
-      {displayText}
+      {/* Render the text from state */}
+      {truncatedText}
     </View>
   );
 };
