@@ -1,10 +1,10 @@
-# App Studio Cursor Rules (app-studio.cursorules)
+# App Studio Rules
 
 ## I. Introduction
 
 ### Purpose
 
-These cursor rules are designed to guide developers in building high-quality, consistent, and maintainable components for or with the **App Studio library**. They combine general clean code principles with best practices specific to React, TypeScript, and the established patterns within the App Studio codebase. Adhering to these rules will ensure that new components integrate seamlessly and the library remains easy to understand, use, and extend.
+These rules are designed to guide developers in building high-quality, consistent, and maintainable components for or with the **App Studio library**. They combine general clean code principles with best practices specific to React, TypeScript, and the established patterns within the App Studio codebase. Adhering to these rules will ensure that new components integrate seamlessly and the library remains easy to understand, use, and extend.
 
 ### How to Use
 
@@ -165,7 +165,7 @@ Start with the General Principles, then focus on the App Studio Specific Best Pr
 
 ## VI. Conclusion
 
-Following these cursor rules will help maintain the quality, consistency, and developer experience of the App Studio library. They provide a clear framework for building components that are robust, maintainable, and easy to integrate. Remember to prioritize consistency with existing patterns and continuously refine your understanding and application of these guidelines.
+Following these rules will help maintain the quality, consistency, and developer experience of the App Studio library. They provide a clear framework for building components that are robust, maintainable, and easy to integrate. Remember to prioritize consistency with existing patterns and continuously refine your understanding and application of these guidelines.
 
 
 

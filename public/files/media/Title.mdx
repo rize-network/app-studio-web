@@ -1,0 +1,263 @@
+# Title
+
+A component for rendering animated and highlighted titles in hero sections.
+
+### **Import**
+
+```tsx
+import { Title } from "@app-studio/web";
+```
+
+### **Default**
+
+```tsx
+<Title>Simple Hero Title</Title>
+```
+
+### **Sizes**
+
+"**_size_**" changes the title size. It has a type "TitleSize" with default value "xl".
+
+```tsx
+import { Vertical } from "app-studio";
+
+<Vertical gap={32}>
+  <Title size="xs">Extra Small Title</Title>
+  <Title size="sm">Small Title</Title>
+  <Title size="md">Medium Title</Title>
+  <Title size="lg">Large Title</Title>
+  <Title size="xl">Extra Large Title</Title>
+  <Title size="2xl">2XL Title</Title>
+  <Title size="3xl">3XL Title</Title>
+  <Title size="4xl">4XL Title</Title>
+  <Title size="5xl">5XL Title</Title>
+  <Title size="6xl">6XL Title</Title>
+</Vertical>
+```
+
+### **Highlight Text**
+
+"**_highlightText_**" specifies which part of the text should be highlighted. You can provide a string or an array of strings.
+
+```tsx
+<Title highlightText="highlighted" highlightStyle="background" highlightColor="theme.primary">
+  Text with highlighted words
+</Title>
+```
+
+### **Highlight Styles**
+
+"**_highlightStyle_**" determines how the highlighted text is styled. Options include 'background', 'underline', 'gradient', 'outline', and 'glow'.
+
+```tsx
+import { Vertical } from "app-studio";
+
+<Vertical gap={32}>
+  <Title highlightText="background" highlightStyle="background" highlightColor="theme.primary">
+    Text with background highlight
+  </Title>
+  
+  <Title highlightText="underlined" highlightStyle="underline" highlightColor="theme.secondary">
+    Text with underlined highlight
+  </Title>
+  
+  <Title 
+    highlightText="gradient" 
+    highlightStyle="gradient" 
+    highlightColor="theme.primary" 
+    highlightSecondaryColor="theme.secondary"
+  >
+    Text with gradient highlight
+  </Title>
+  
+  <Title highlightText="outline" highlightStyle="outline" highlightColor="theme.primary">
+    Text with outline highlight
+  </Title>
+  
+  <Title highlightText="glow" highlightStyle="glow" highlightColor="theme.primary">
+    Text with glow highlight
+  </Title>
+</Vertical>
+```
+
+### **Multiple Highlights**
+
+You can highlight multiple parts of the text by providing an array of strings.
+
+```tsx
+<Title 
+  highlightText={["multiple", "highlights"]} 
+  highlightStyle="background" 
+  highlightColor="theme.primary"
+>
+  Text with multiple highlights in the same sentence
+</Title>
+```
+
+### **Animations**
+
+"**_animation_**" adds animation effects to the title. Options include 'fadeIn', 'slideIn', 'typewriter', 'highlight', 'reveal', and 'bounce'.
+
+```tsx
+import { Vertical } from "app-studio";
+
+<Vertical gap={48}>
+  <Title animation="fadeIn" animationDuration="1.5s">
+    Fade In Animation
+  </Title>
+  
+  <Title animation="slideIn" animationDirection="left" animationDuration="1s">
+    Slide In From Left
+  </Title>
+  
+  <Title animation="typewriter" animationDuration="3s">
+    Typewriter Effect Animation
+  </Title>
+  
+  <Title animation="reveal" animationDuration="1.5s">
+    Reveal Animation
+  </Title>
+  
+  <Title animation="bounce" animationDuration="1s">
+    Bounce Animation
+  </Title>
+</Vertical>
+```
+
+### **Responsive**
+
+You can make the title responsive using the `media` prop.
+
+```tsx
+<Title
+  media={{
+    mobile: {
+      fontSize: 32,
+      lineHeight: '40px',
+    },
+    tablet: {
+      fontSize: 48,
+      lineHeight: '56px',
+    },
+    desktop: {
+      fontSize: 64,
+      lineHeight: '72px',
+    },
+  }}
+  highlightText="Responsive"
+  highlightStyle="background"
+  highlightColor="theme.primary"
+>
+  Responsive Title Example
+</Title>
+```
+
+### **Custom Styling**
+
+You can customize the title using the `views` prop.
+
+```tsx
+<Title
+  views={{
+    container: {
+      fontFamily: 'Georgia, serif',
+      letterSpacing: '0.05em',
+      textTransform: 'uppercase',
+    },
+    highlight: {
+      borderRadius: '8px',
+      padding: '0 12px',
+    },
+  }}
+  highlightText="Custom"
+  highlightStyle="background"
+  highlightColor="color.purple.500"
+>
+  Title with Custom Styling
+</Title>
+```
+
+### **Hero Section Example**
+
+```tsx
+import { Button, Text } from "@app-studio/web";
+import { Vertical, Horizontal, View } from "app-studio";
+
+<View
+  backgroundColor="color.gray.50"
+  padding={48}
+  borderRadius={8}
+  width="100%"
+>
+  <Vertical gap={24} maxWidth={800} marginX="auto">
+    <Title 
+      size="4xl"
+      animation="fadeIn"
+      animationDuration="1s"
+      highlightText="Platform"
+      highlightStyle="gradient"
+      highlightColor="theme.primary"
+      highlightSecondaryColor="theme.secondary"
+      centered
+    >
+      Welcome to Our Platform
+    </Title>
+    
+    <Text 
+      textAlign="center" 
+      color="color.gray.600"
+      fontSize={20}
+      lineHeight={28}
+    >
+      Build beautiful, responsive, and interactive user interfaces with our powerful component library.
+    </Text>
+    
+    <Horizontal gap={16} justifyContent="center" marginTop={16}>
+      <Button variant="primary" size="lg">
+        Get Started
+      </Button>
+      <Button variant="outline" size="lg">
+        Learn More
+      </Button>
+    </Horizontal>
+  </Vertical>
+</View>
+```
+
+## **Types**
+
+```tsx
+export type HighlightStyle = 
+  | 'underline'   // Underline the text
+  | 'background'  // Background color highlight
+  | 'gradient'    // Gradient background
+  | 'outline'     // Text with outline
+  | 'glow';       // Text with glow effect
+
+export type TitleAnimation = 
+  | 'fadeIn'      // Fade in animation
+  | 'slideIn'     // Slide in animation
+  | 'typewriter'  // Typewriter effect
+  | 'highlight'   // Highlight text animation
+  | 'reveal'      // Text reveal animation
+  | 'bounce'      // Bounce animation
+  | 'none';       // No animation
+
+export type AnimationDirection = 
+  | 'left'
+  | 'right'
+  | 'top'
+  | 'bottom';
+
+export type TitleSize = 
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl';
+```

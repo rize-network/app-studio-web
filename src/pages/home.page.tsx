@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import LandingImage from 'src/assets/orange.webp';
 import { Button, Center, Horizontal, Text, Vertical } from 'app-studio';
 import { Features } from 'src/features';
+import { CookieConsent } from 'src/components/CookieConsent/CookieConsent';
 
 export const HomePage = () => {
   const navigate = useNavigate();
@@ -68,106 +69,115 @@ export const HomePage = () => {
   };
 
   return (
-    <Vertical
-      gap={50}
-      position="relative"
-      flexWrap="nowrap"
-      overflowY="scroll"
-      color="warmGray.500"
-      alignItems="center"
-      scroll-behavior="smooth"
-      backgroundImage={`url(${LandingImage})`}
-      backgroundRepeat="no-repeat"
-      backgroundPosition="top"
-      media={media.container}
-    >
-      <Vertical gap={60} alignItems="center" media={{ mobile: { gap: 20 } }}>
-        <Text
-          width="100%"
-          weight="bold"
-          color="black"
-          textAlign="center"
-          whiteSpace="nowrap"
-          textShadow="2px 2px 4px rgba(0, 0, 0, 0.2)"
-          media={media.title}
-        >
-          App-Studio
-        </Text>
-        <Text textAlign="center" media={media.paragraph}>
-          Pellentesque habitant morbi tristique senectus et netus et malesuada
-          fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
-          ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
-          egestas semper. Aenean ultricies mi vitae est. Mauris placerat
-          eleifend leo.
-        </Text>
+    <>
+      <Vertical
+        gap={50}
+        position="relative"
+        flexWrap="nowrap"
+        overflowY="scroll"
+        color="warmGray.500"
+        alignItems="center"
+        scroll-behavior="smooth"
+        backgroundImage={`url(${LandingImage})`}
+        backgroundRepeat="no-repeat"
+        backgroundPosition="top"
+        media={media.container}
+      >
+        <Vertical gap={60} alignItems="center" media={{ mobile: { gap: 20 } }}>
+          <Text
+            width="100%"
+            weight="bold"
+            color="black"
+            textAlign="center"
+            whiteSpace="nowrap"
+            textShadow="2px 2px 4px rgba(0, 0, 0, 0.2)"
+            media={media.title}
+          >
+            App-Studio
+          </Text>
+          <Text textAlign="center" media={media.paragraph}>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
+            ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+            egestas semper. Aenean ultricies mi vitae est. Mauris placerat
+            eleifend leo.
+          </Text>
 
-        <Center
-          width="100%"
-          gap={60}
-          media={{ mobile: { gap: 10 } }}
-          flexWrap="nowrap"
-        >
-          <Button onClick={handleClick} {...buttonStyle} isAuto>
-            Get Started
-          </Button>
-          <Button variant="outline" {...buttonStyle} isAuto>
-            Deploy Now
-          </Button>
-        </Center>
+          <Center
+            width="100%"
+            gap={60}
+            media={{ mobile: { gap: 10 } }}
+            flexWrap="nowrap"
+          >
+            <Button onClick={handleClick} {...buttonStyle} isAuto>
+              Get Started
+            </Button>
+            <Button variant="outline" {...buttonStyle} isAuto>
+              Deploy Now
+            </Button>
+          </Center>
+        </Vertical>
+        <Vertical gap={30} width="100%">
+          <Text
+            width="100%"
+            color="black"
+            weight="semiBold"
+            textShadow="1px 1px 2px rgba(0, 0, 0, 0.1)"
+            media={media.subtitle}
+          >
+            Discover our features
+          </Text>
+          <Horizontal
+            justifyContent="space-evenly"
+            flexWrap="wrap"
+            gap={30}
+            width="100%"
+          >
+            {Features.map((feature) => (
+              <Vertical
+                key={feature.title}
+                gap={7}
+                width={200}
+                minHeight={100}
+                alignItems="center"
+              >
+                <Center
+                  color="white"
+                  borderRadius="50%"
+                  padding="10px"
+                  backgroundColor="theme.primary"
+                  media={media.icon}
+                >
+                  {feature.icon}
+                </Center>
+                <Text
+                  weight="bold"
+                  color="black"
+                  size={'lg'}
+                  media={{ mobile: { fontSize: 14, lineHeight: 14 } }}
+                >
+                  {feature.title}
+                </Text>
+                <Text
+                  textAlign="center"
+                  size={'md'}
+                  media={{ mobile: { fontSize: 12, lineHeight: 12 } }}
+                >
+                  {feature.description}
+                </Text>
+              </Vertical>
+            ))}
+          </Horizontal>
+        </Vertical>
       </Vertical>
-      <Vertical gap={30} width="100%">
-        <Text
-          width="100%"
-          color="black"
-          weight="semiBold"
-          textShadow="1px 1px 2px rgba(0, 0, 0, 0.1)"
-          media={media.subtitle}
-        >
-          Discover our features
-        </Text>
-        <Horizontal
-          justifyContent="space-evenly"
-          flexWrap="wrap"
-          gap={30}
-          width="100%"
-        >
-          {Features.map((feature) => (
-            <Vertical
-              key={feature.title}
-              gap={7}
-              width={200}
-              minHeight={100}
-              alignItems="center"
-            >
-              <Center
-                color="white"
-                borderRadius="50%"
-                padding="10px"
-                backgroundColor="theme.primary"
-                media={media.icon}
-              >
-                {feature.icon}
-              </Center>
-              <Text
-                weight="bold"
-                color="black"
-                size={'lg'}
-                media={{ mobile: { fontSize: 14, lineHeight: 14 } }}
-              >
-                {feature.title}
-              </Text>
-              <Text
-                textAlign="center"
-                size={'md'}
-                media={{ mobile: { fontSize: 12, lineHeight: 12 } }}
-              >
-                {feature.description}
-              </Text>
-            </Vertical>
-          ))}
-        </Horizontal>
-      </Vertical>
-    </Vertical>
+
+      {/* Cookie Consent Banner */}
+      <CookieConsent
+        variant="info"
+        position="bottom"
+        onCustomize={() => alert('Préférences de personnalisation cliquées')}
+      />
+    </>
   );
 };
 

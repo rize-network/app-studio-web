@@ -48,6 +48,8 @@ const TabsPage = lazy(() => import('src/pages/tabs.page'));
 const TextPage = lazy(() => import('src/pages/text.page'));
 const TextAreaPage = lazy(() => import('src/pages/textArea.page'));
 const TextfieldPage = lazy(() => import('src/pages/textfield.page'));
+const TitlePage = lazy(() => import('src/pages/title.page'));
+const CookieConsentPage = lazy(() => import('src/pages/cookieConsent.page'));
 const ToastPage = lazy(() => import('src/pages/toast.page'));
 const TooltipPage = lazy(() => import('src/pages/tooltip.page'));
 const TogglePage = lazy(() => import('src/pages/toggle.page'));
@@ -112,6 +114,8 @@ export const componentList = [
   { name: 'Text', path: '/text', element: <TextPage /> },
   { name: 'TextArea', path: '/textarea', element: <TextAreaPage /> },
   { name: 'Textfield', path: '/textfield', element: <TextfieldPage /> },
+  { name: 'Title', path: '/title', element: <TitlePage /> },
+  { name: 'CookieConsent', path: '/cookieconsent', element: <CookieConsentPage /> },
   { name: 'Toast', path: '/toast', element: <ToastPage /> },
   { name: 'Tooltip', path: '/tooltip', element: <TooltipPage /> },
   { name: 'Toggle', path: '/toggle', element: <TogglePage /> },
