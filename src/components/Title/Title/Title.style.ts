@@ -24,8 +24,13 @@ export const LineHeights: Record<TitleSize, number> = {
   xs: 24,
   sm: 28,
   md: 32,
-  lg: 64,
-  xl: 88,
+  lg: 40,
+  xl: 48,
+  '2xl': 56,
+  '3xl': 64,
+  '4xl': 72,
+  '5xl': 80,
+  '6xl': 88,
 };
 
 /**
@@ -49,11 +54,12 @@ export const HighlightStyles: Record<
   }),
   gradient: (color, secondaryColor) => ({
     background: `linear-gradient(135deg, ${color}, ${secondaryColor || color})`,
-    webkitBackgroundClip: 'text',
-    webkitTextFillColor: 'transparent',
     backgroundClip: 'text',
+    WebkitBackgroundClip: 'text',
     color: 'transparent',
+    WebkitTextFillColor: 'transparent',
     display: 'inline-block',
+    textShadow: 'none',
   }),
   outline: (color) => ({
     webkitTextStroke: `1px ${color}`,

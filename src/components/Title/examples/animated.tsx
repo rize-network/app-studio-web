@@ -1,69 +1,92 @@
 import React from 'react';
-import { Title } from '../Title';
 import { Vertical } from 'app-studio';
+import { Title } from '../Title';
 
 /**
- * Examples of Title component with different animations
+ * Examples of Title with different animation types
  */
 export const AnimatedTitle = () => {
   return (
     <Vertical gap={48}>
-      <Title animation="fadeIn" animationDuration="1.5s">
+      <Title
+        animate={{
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+          duration: '1.5s',
+          iterationCount: '1',
+        }}
+      >
         Fade In Animation
       </Title>
 
       <Title
-        animation="slideIn"
-        animationDirection="left"
-        animationDuration="1s"
+        animate={{
+          from: { transform: 'translateX(-100%)' },
+          to: { transform: 'translateX(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
       >
         Slide In From Left
       </Title>
 
       <Title
-        animation="slideIn"
-        animationDirection="right"
-        animationDuration="1s"
+        animate={{
+          from: { transform: 'translateX(100%)' },
+          to: { transform: 'translateX(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
       >
         Slide In From Right
       </Title>
 
       <Title
-        animation="slideIn"
-        animationDirection="top"
-        animationDuration="1s"
+        animate={{
+          from: { transform: 'translateY(-100%)' },
+          to: { transform: 'translateY(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
       >
         Slide In From Top
       </Title>
 
       <Title
-        animation="slideIn"
-        animationDirection="bottom"
-        animationDuration="1s"
+        animate={{
+          from: { transform: 'translateY(100%)' },
+          to: { transform: 'translateY(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
       >
         Slide In From Bottom
       </Title>
 
-      <Title animation="typewriter" animationDuration="3s">
-        Typewriter Effect Animation
-      </Title>
-
-      <Title animation="reveal" animationDuration="1.5s">
+      <Title
+        animate={{
+          from: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' },
+          to: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
+          duration: '1.5s',
+          iterationCount: '1',
+        }}
+      >
         Reveal Animation
       </Title>
 
-      <Title animation="bounce" animationDuration="1s">
-        Bounce Animation
-      </Title>
-
       <Title
-        animation="highlight"
-        animationDuration="1.5s"
-        highlightText="highlighted"
-        highlightStyle="underline"
-        highlightColor="theme.primary"
+        animate={{
+          from: { transform: 'translateY(0)' },
+          '20%': { transform: 'translateY(-30px)' },
+          '40%': { transform: 'translateY(0)' },
+          '60%': { transform: 'translateY(-15px)' },
+          '80%': { transform: 'translateY(0)' },
+          to: { transform: 'translateY(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
       >
-        Text with highlighted animation
+        Bounce Animation
       </Title>
     </Vertical>
   );

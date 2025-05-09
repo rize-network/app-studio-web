@@ -1,0 +1,795 @@
+This file is a merged representation of a subset of the codebase, containing specifically included files, combined into a single document by Repomix.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+4. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: src/components/Title/Title
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+
+Additional Info:
+----------------
+
+================================================================
+Directory Structure
+================================================================
+src/
+  components/
+    Title/
+      Title/
+        Title.props.ts
+        Title.state.ts
+        Title.style.ts
+        Title.type.ts
+        Title.view.tsx
+        useInView.ts
+
+================================================================
+Files
+================================================================
+
+================
+File: src/components/Title/Title/useInView.ts
+================
+import { useEffect, useRef, useState } from 'react';
+
+/**
+ * Custom hook to detect when an element is in the viewport
+ * @returns An object with a ref to attach to the element and a boolean indicating if the element is in view
+ */
+export const useInView = () => {
+  const ref = useRef<HTMLElement | null>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Update state when the element enters the viewport
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          // Once the element is in view, we don't need to observe it anymore
+          observer.unobserve(element);
+        }
+      },
+      {
+        // Element is considered in view when at least 10% is visible
+        threshold: 0.1,
+        // Start observing when element is 100px from entering the viewport
+        rootMargin: '100px',
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, []);
+
+  return { ref, isInView };
+};
+
+================
+File: src/components/Title/Title/Title.props.ts
+================
+import { ViewProps } from 'app-studio';
+import {
+  HighlightStyle,
+  TitleAnimation,
+  AnimationDirection,
+  TitleSize,
+  TitleStyles,
+} from './Title.type';
+
+/**
+ * Props for the Title component
+ */
+export interface TitleProps extends ViewProps {
+  /**
+   * Internal prop to indicate if the component is in view
+   * @internal
+   */
+  _isInView?: boolean;
+  /**
+   * The main text content of the title
+   */
+  children: React.ReactNode;
+
+  /**
+   * Text to be highlighted within the title
+   * If not provided, no highlighting will be applied
+   */
+  highlightText?: string | string[];
+
+  /**
+   * Array of strings to cycle through, replacing the text specified in highlightText
+   * Used with alternateAnimation to create an infinite loop of changing words
+   */
+  alternateHighlightText?: string[];
+
+  /**
+   * Enable alternating animation that replaces the highlightText with words from alternateHighlightText
+   * When enabled, the component will replace the text specified in highlightText with each word
+   * from alternateHighlightText in sequence, creating an infinite loop animation
+   * @default false
+   */
+  alternateAnimation?: boolean;
+
+  /**
+   * Duration for each alternation cycle in milliseconds
+   * Controls how long each word from alternateHighlightText is displayed before switching to the next
+   * @default 3000
+   */
+  alternateDuration?: number;
+
+  /**
+   * Style of the highlight effect
+   * @default 'background'
+   */
+  highlightStyle?: HighlightStyle;
+
+  /**
+   * Color for the highlight effect
+   * @default 'theme.primary'
+   */
+  highlightColor?: string;
+
+  /**
+   * Secondary color for gradient highlights
+   * @default 'theme.secondary'
+   */
+  highlightSecondaryColor?: string;
+
+  /**
+   * Animation type for the title
+   * @default 'none'
+   */
+  animation?: TitleAnimation;
+
+  /**
+   * Direction for slide animations
+   * @default 'left'
+   */
+  animationDirection?: AnimationDirection;
+
+  /**
+   * Duration of the animation in seconds
+   * @default '1s'
+   */
+  animationDuration?: string;
+
+  /**
+   * Delay before animation starts in seconds
+   * @default '0s'
+   */
+  animationDelay?: string;
+
+  /**
+   * Size of the title
+   * @default 'xl'
+   */
+  size?: TitleSize;
+
+  /**
+   * Whether to center the title
+   * @default false
+   */
+  centered?: boolean;
+
+  /**
+   * Custom styles for different parts of the component
+   */
+  views?: TitleStyles;
+}
+
+================
+File: src/components/Title/Title/Title.style.ts
+================
+import { ViewProps } from 'app-studio';
+import { TitleSize, HighlightStyle } from './Title.type';
+
+/**
+ * Font sizes for different title sizes
+ */
+export const TitleSizes = {
+  xs: 16,
+  sm: 20,
+  md: 24,
+  lg: 32,
+  xl: 40,
+  '2xl': 48,
+  '3xl': 56,
+  '4xl': 64,
+  '5xl': 72,
+  '6xl': 80,
+};
+
+/**
+ * Line heights for different title sizes
+ */
+export const LineHeights: Record<TitleSize, number> = {
+  xs: 24,
+  sm: 28,
+  md: 32,
+  lg: 64,
+  xl: 88,
+};
+
+/**
+ * Default styles for different highlight types
+ */
+export const HighlightStyles: Record<
+  HighlightStyle,
+  (color: string, secondaryColor?: string) => ViewProps
+> = {
+  underline: (color) => ({
+    textDecoration: 'underline',
+    textDecorationColor: color,
+    textDecorationThickness: '4px',
+    textUnderlineOffset: '4px',
+  }),
+  background: (color) => ({
+    backgroundColor: color,
+    color: 'color.white',
+    padding: '0 8px',
+    borderRadius: '4px',
+  }),
+  gradient: (color, secondaryColor) => ({
+    background: `linear-gradient(135deg, ${color}, ${secondaryColor || color})`,
+    webkitBackgroundClip: 'text',
+    webkitTextFillColor: 'transparent',
+    display: 'inline-block',
+  }),
+  outline: (color) => ({
+    webkitTextStroke: `1px ${color}`,
+    webkitTextFillColor: 'transparent',
+    color: 'transparent',
+    textShadow: 'none',
+  }),
+  glow: (color) => ({
+    color: color,
+    textShadow: `0 0 10px ${color}80, 0 0 20px ${color}40, 0 0 30px ${color}20`,
+  }),
+};
+
+================
+File: src/components/Title/Title/Title.type.ts
+================
+import { ViewProps } from 'app-studio';
+
+/**
+ * Highlight style options for the Title component
+ */
+export type HighlightStyle =
+  | 'underline' // Underline the text
+  | 'background' // Background color highlight
+  | 'gradient' // Gradient background
+  | 'outline' // Text with outline
+  | 'glow'; // Text with glow effect
+
+/**
+ * Animation type for the Title component
+ */
+export type TitleAnimation =
+  | 'fadeIn' // Fade in animation
+  | 'slideIn' // Slide in animation
+  | 'typewriter' // Typewriter effect
+  | 'highlight' // Highlight text animation
+  | 'reveal' // Text reveal animation
+  | 'bounce' // Bounce animation
+  | 'alternate' // Alternate between different highlighted texts
+  | 'none'; // No animation
+
+/**
+ * Animation direction for slide animations
+ */
+export type AnimationDirection = 'left' | 'right' | 'top' | 'bottom';
+
+/**
+ * Title size options
+ */
+export type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+/**
+ * Title styles for customization
+ */
+export type TitleStyles = {
+  container?: ViewProps;
+  text?: ViewProps;
+  highlight?: ViewProps;
+};
+
+================
+File: src/components/Title/Title/Title.state.ts
+================
+import { useEffect, useState } from 'react';
+import { TitleProps } from './Title.props';
+
+/**
+ * Custom hook for managing Title component state and animations
+ */
+export const useTitleState = (props: TitleProps) => {
+  const {
+    animation = 'none',
+    animationDirection = 'left',
+    animationDuration = '1s',
+    animationDelay = '0s',
+    children, // Original children
+    _isInView = false,
+    alternateHighlightText = [],
+    alternateAnimation = false, // Default to false as per prop definition
+    alternateDuration = 3000,
+    highlightText: initialHighlightText, // Renamed to avoid confusion with the dynamic target
+  } = props;
+
+  // State for typewriter animation
+  const [displayTextForTypewriter, setDisplayTextForTypewriter] =
+    useState<string>('');
+
+  // State for the final text to be displayed (could be original children or alternating text)
+  const [finalDisplayedText, setFinalDisplayedText] =
+    useState<React.ReactNode>(children);
+
+  // State for the text that should be actively highlighted (could be initialHighlightText or a word from alternateHighlightText)
+  const [activeHighlightTarget, setActiveHighlightTarget] = useState<
+    string | string[] | undefined
+  >(initialHighlightText);
+
+  // Handle alternating highlight text animation
+  useEffect(() => {
+    // If not using alternating animation or conditions not met, reset to initial/non-alternating state
+    if (
+      !alternateAnimation ||
+      alternateHighlightText.length === 0 ||
+      !_isInView ||
+      typeof children !== 'string' || // Base text must be a string for replacement
+      typeof initialHighlightText !== 'string' // Placeholder must be a string
+    ) {
+      setFinalDisplayedText(children);
+      setActiveHighlightTarget(initialHighlightText);
+      return () => {};
+    }
+
+    // Proceed with alternating animation
+    const baseText = children as string;
+    const placeholder = initialHighlightText as string;
+    let currentIndex = 0;
+
+    // Function to update the state for alternating text
+    const updateAlternatingState = (index: number) => {
+      const currentWordToHighlight = alternateHighlightText[index];
+      // Replace the placeholder in the baseText with the current alternating word
+      const regex = new RegExp(placeholder, 'gi');
+      const newContent = baseText.replace(regex, currentWordToHighlight);
+
+      setFinalDisplayedText(newContent);
+      setActiveHighlightTarget(currentWordToHighlight); // Set the current word as the highlight target
+    };
+
+    // Set initial alternating state
+    updateAlternatingState(currentIndex);
+
+    // Create interval to cycle through the alternateHighlightText array
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % alternateHighlightText.length;
+      updateAlternatingState(currentIndex);
+    }, alternateDuration);
+
+    return () => clearInterval(interval);
+  }, [
+    alternateAnimation,
+    alternateHighlightText,
+    alternateDuration,
+    initialHighlightText, // Depends on the placeholder
+    children,
+    _isInView,
+  ]);
+
+  // Handle typewriter animation
+  useEffect(() => {
+    // Typewriter should type out the finalDisplayedText if it's a string
+    const textToType =
+      typeof finalDisplayedText === 'string'
+        ? finalDisplayedText
+        : typeof children === 'string'
+        ? children
+        : '';
+
+    if (animation === 'typewriter' && _isInView && textToType) {
+      let currentIndex = 0;
+      setDisplayTextForTypewriter(''); // Reset
+
+      const interval = setInterval(() => {
+        if (currentIndex <= textToType.length) {
+          setDisplayTextForTypewriter(textToType.substring(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 100); // Adjust speed as needed (consider making this configurable)
+
+      return () => clearInterval(interval);
+    }
+
+    // Reset the typewriter text if not in view or animation is not typewriter
+    if (animation === 'typewriter' && !_isInView) {
+      setDisplayTextForTypewriter('');
+    }
+    return () => {};
+  }, [animation, finalDisplayedText, children, _isInView]); // Depends on finalDisplayedText (and children as fallback)
+
+  // Get animation configuration based on animation type
+  const getAnimation = () => {
+    // For typewriter animation, we handle it separately with useState and useEffect
+    if (animation === 'typewriter') {
+      return undefined;
+    }
+
+    switch (animation) {
+      case 'fadeIn':
+        return {
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+          duration: animationDuration,
+          delay: animationDelay,
+          direction: 'alternate', // Note: 'direction' might not be what you intend for a simple fadeIn.
+          // 'iterationCount: 1' is typical for a one-time animation.
+          // If you want it to fade in and out, 'alternate' with 'iterationCount: infinite' is one way.
+          // For a single fade-in, remove 'direction: alternate'.
+        };
+
+      case 'slideIn':
+        // Similar note about 'direction: alternate' for slideIn.
+        // Typically, slideIn is a one-time effect.
+        let transformFrom = 'translateX(-100%)';
+        switch (animationDirection) {
+          case 'right':
+            transformFrom = 'translateX(100%)';
+            break;
+          case 'top':
+            transformFrom = 'translateY(-100%)';
+            break;
+          case 'bottom':
+            transformFrom = 'translateY(100%)';
+            break;
+          case 'left': // Default
+          default:
+            transformFrom = 'translateX(-100%)';
+            break;
+        }
+        return {
+          from: { transform: transformFrom },
+          to: { transform: 'translateX(0)' }, // Should be 'translateY(0)' for top/bottom
+          duration: animationDuration,
+          delay: animationDelay,
+          // direction: 'alternate', // Consider if this is intended for a single slide-in
+        };
+      // A more robust slideIn:
+      // let fromTransform = {};
+      // let toTransform = {};
+      // switch (animationDirection) {
+      //   case 'left': fromTransform = { transform: 'translateX(-100%)' }; toTransform = { transform: 'translateX(0)' }; break;
+      //   case 'right': fromTransform = { transform: 'translateX(100%)' }; toTransform = { transform: 'translateX(0)' }; break;
+      //   case 'top': fromTransform = { transform: 'translateY(-100%)' }; toTransform = { transform: 'translateY(0)' }; break;
+      //   case 'bottom': fromTransform = { transform: 'translateY(100%)' }; toTransform = { transform: 'translateY(0)' }; break;
+      //   default: fromTransform = { transform: 'translateX(-100%)' }; toTransform = { transform: 'translateX(0)' }; break;
+      // }
+      // return {
+      //   from: fromTransform,
+      //   to: toTransform,
+      //   duration: animationDuration,
+      //   delay: animationDelay,
+      // };
+
+      case 'bounce':
+        return {
+          from: { transform: 'translateY(0)' },
+          '20%': { transform: 'translateY(-30px)' },
+          '40%': { transform: 'translateY(0)' },
+          '60%': { transform: 'translateY(-15px)' },
+          '80%': { transform: 'translateY(0)' },
+          to: { transform: 'translateY(0)' },
+          duration: animationDuration,
+          delay: animationDelay,
+          iterationCount: '1',
+        };
+
+      case 'highlight': // This animation seems to be for a text background sweep
+        return {
+          from: { backgroundSize: '0 100%' },
+          to: { backgroundSize: '100% 100%' },
+          duration: animationDuration,
+          delay: animationDelay,
+        };
+
+      case 'reveal':
+        return {
+          from: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' },
+          to: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
+          duration: animationDuration,
+          delay: animationDelay,
+        };
+
+      case 'none':
+      default:
+        return undefined;
+    }
+  };
+
+  return {
+    displayTextForTypewriter,
+    getAnimation,
+    finalDisplayedText, // This is the text that TitleView should render
+    activeHighlightTarget, // This is the text that TitleView should highlight
+  };
+};
+
+================
+File: src/components/Title/Title/Title.view.tsx
+================
+import React from 'react';
+import { Element, Text, useInView, useTheme } from 'app-studio';
+
+import { TitleProps } from './Title.props';
+import { useTitleState } from './Title.state';
+import { HighlightStyles, LineHeights, TitleSizes } from './Title.style';
+
+// Helper function to escape special characters for use in RegExp
+function escapeRegExp(string: string): string {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
+/**
+ * Title View Component
+ *
+ * Renders a title with optional highlighting and animations for hero sections.
+ */
+const TitleView: React.FC<TitleProps> = ({
+  children,
+  highlightText, // Original highlightText, used for initial state in useTitleState
+  highlightStyle = 'background',
+  highlightColor = 'theme.primary',
+  highlightSecondaryColor,
+  animation = 'none',
+  size = 'xl',
+  centered = false,
+  views,
+  ...props // This includes alternateAnimation, alternateHighlightText, alternateDuration etc.
+}) => {
+  // Use the inView hook to detect when the component is visible
+  const { ref, inView } = useInView();
+
+  // Get theme utilities
+  const { getColor, themeMode: contextThemeMode } = useTheme();
+  const themeMode = props.themeMode || contextThemeMode;
+
+  // Resolve theme colors
+  const resolvedHighlightColor = getColor(highlightColor, { themeMode });
+  const resolvedSecondaryColor = highlightSecondaryColor
+    ? getColor(highlightSecondaryColor, { themeMode })
+    : undefined;
+
+  // Get state and animation functions from custom hook
+  const {
+    displayTextForTypewriter,
+    getAnimation,
+    finalDisplayedText, // This is the text to display (e.g., "Our Product is Amazing")
+    activeHighlightTarget, // This is what to highlight (e.g., "Amazing" or ["multiple", "highlights"])
+  } = useTitleState({
+    children,
+    highlightText,
+    animation,
+    _isInView: inView,
+    ...props, // Pass all other relevant props like alternateAnimation, alternateHighlightText, alternateDuration
+  });
+
+  // Get animation configuration only when the component is in view
+  // For typewriter animation, we don't need an animation config as it's handled by useState/useEffect
+  const animationConfig =
+    inView && animation !== 'typewriter' ? getAnimation() : undefined;
+
+  // Get highlight styles
+  const highlightStyleProps = HighlightStyles[highlightStyle](
+    resolvedHighlightColor,
+    resolvedSecondaryColor
+  );
+
+  // Get font size and line height based on size prop
+  const fontSize = TitleSizes[size];
+  const lineHeight = LineHeights[size];
+
+  // Determine the content to be processed for rendering and potential highlighting
+  // If typewriter, it's displayTextForTypewriter. Otherwise, it's finalDisplayedText.
+  const textForRenderingAndHighlighting =
+    animation === 'typewriter' ? displayTextForTypewriter : finalDisplayedText;
+
+  // If the textForRenderingAndHighlighting is a string and we have activeHighlightTarget
+  if (
+    typeof textForRenderingAndHighlighting === 'string' &&
+    activeHighlightTarget
+  ) {
+    const text = textForRenderingAndHighlighting; // Current text to display
+
+    // For a single highlight text (string)
+    if (typeof activeHighlightTarget === 'string') {
+      type TextPart = string | { highlight: boolean; text: string };
+      const pattern = new RegExp(
+        `(${escapeRegExp(activeHighlightTarget)})`,
+        'gi'
+      );
+
+      if (pattern.test(text)) {
+        pattern.lastIndex = 0; // Reset regex
+        const parts: TextPart[] = [];
+        let lastIndex = 0;
+        let match: RegExpExecArray | null;
+
+        while ((match = pattern.exec(text)) !== null) {
+          if (match.index > lastIndex) {
+            parts.push(text.substring(lastIndex, match.index));
+          }
+          parts.push({ highlight: true, text: match[0] });
+          lastIndex = match.index + match[0].length;
+        }
+        if (lastIndex < text.length) {
+          parts.push(text.substring(lastIndex));
+        }
+
+        return (
+          <Element
+            ref={ref}
+            as="h1"
+            fontSize={fontSize}
+            lineHeight={`${lineHeight}px`}
+            fontWeight="bold"
+            textAlign={centered ? 'center' : 'left'}
+            animate={animationConfig}
+            {...props}
+            {...views?.container}
+          >
+            {parts.map((part, index) => (
+              <React.Fragment key={index}>
+                {typeof part === 'string' ? (
+                  part
+                ) : (
+                  <Text
+                    as="span"
+                    display="inline"
+                    {...highlightStyleProps}
+                    {...views?.highlight}
+                  >
+                    {part.text}
+                  </Text>
+                )}
+              </React.Fragment>
+            ))}
+          </Element>
+        );
+      }
+    }
+
+    // For multiple highlight texts (array of strings)
+    if (Array.isArray(activeHighlightTarget)) {
+      type TextPart = string | { highlight: boolean; text: string };
+      const pattern = new RegExp(
+        `(${activeHighlightTarget.map(escapeRegExp).join('|')})`,
+        'gi'
+      );
+
+      if (pattern.test(text)) {
+        pattern.lastIndex = 0; // Reset regex
+        const parts: TextPart[] = [];
+        let lastIndex = 0;
+        let match: RegExpExecArray | null;
+
+        while ((match = pattern.exec(text)) !== null) {
+          if (match.index > lastIndex) {
+            parts.push(text.substring(lastIndex, match.index));
+          }
+          parts.push({ highlight: true, text: match[0] });
+          lastIndex = match.index + match[0].length;
+        }
+        if (lastIndex < text.length) {
+          parts.push(text.substring(lastIndex));
+        }
+
+        return (
+          <Element
+            ref={ref}
+            as="h1"
+            fontSize={fontSize}
+            lineHeight={`${lineHeight}px`}
+            fontWeight="bold"
+            textAlign={centered ? 'center' : 'left'}
+            animate={animationConfig}
+            {...props}
+            {...views?.container}
+          >
+            {parts.map((part, index) => (
+              <React.Fragment key={index}>
+                {typeof part === 'string' ? (
+                  part
+                ) : (
+                  <Text
+                    as="span"
+                    display="inline"
+                    {...highlightStyleProps}
+                    {...views?.highlight}
+                    key={part.text}
+                  >
+                    {part.text}
+                  </Text>
+                )}
+              </React.Fragment>
+            ))}
+          </Element>
+        );
+      }
+    }
+  }
+
+  // Default rendering for non-string children or no (matching) highlighting
+  return (
+    <Element
+      ref={ref}
+      as="h1"
+      fontSize={fontSize}
+      lineHeight={`${lineHeight}px`}
+      fontWeight="bold"
+      textAlign={centered ? 'center' : 'left'}
+      animate={animationConfig}
+      {...props}
+      {...views?.container}
+    >
+      {textForRenderingAndHighlighting}
+    </Element>
+  );
+};
+
+export default TitleView;
+
+
+
+================================================================
+End of Codebase
+================================================================

@@ -1,11 +1,10 @@
 import React from 'react';
+import { View, Vertical, Horizontal, Text } from 'app-studio';
 import { Title } from '../Title';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
-import { Vertical, Horizontal, View } from 'app-studio';
 
 /**
- * Example of Title component in a hero section context
+ * Example of Title in a hero section context
  */
 export const HeroTitle = () => {
   return (
@@ -18,8 +17,12 @@ export const HeroTitle = () => {
       <Vertical gap={24} maxWidth={800} marginX="auto">
         <Title
           size="xl"
-          animation="fadeIn"
-          animationDuration="1s"
+          animate={{
+            from: { opacity: 0 },
+            to: { opacity: 1 },
+            duration: '1s',
+            iterationCount: '1',
+          }}
           highlightText="Platform"
           highlightStyle="gradient"
           highlightColor="theme.primary"

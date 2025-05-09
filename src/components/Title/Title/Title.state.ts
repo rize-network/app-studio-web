@@ -2,14 +2,10 @@ import { useEffect, useState } from 'react';
 import { TitleProps } from './Title.props';
 
 /**
- * Custom hook for managing Title component state and animations
+ * Custom hook for managing Title component state
  */
 export const useTitleState = (props: TitleProps) => {
   const {
-    animation = 'none',
-    animationDirection = 'left',
-    animationDuration = '1s',
-    animationDelay = '0s',
     children, // Original children
     _isInView = false,
     alternateHighlightText = [],
@@ -17,10 +13,6 @@ export const useTitleState = (props: TitleProps) => {
     alternateDuration = 3000,
     highlightText: initialHighlightText, // Renamed to avoid confusion with the dynamic target
   } = props;
-
-  // State for typewriter animation
-  const [displayTextForTypewriter, setDisplayTextForTypewriter] =
-    useState<string>('');
 
   // State for the final text to be displayed (could be original children or alternating text)
   const [finalDisplayedText, setFinalDisplayedText] =
@@ -81,140 +73,7 @@ export const useTitleState = (props: TitleProps) => {
     _isInView,
   ]);
 
-  // Handle typewriter animation
-  useEffect(() => {
-    // Typewriter should type out the finalDisplayedText if it's a string
-    const textToType =
-      typeof finalDisplayedText === 'string'
-        ? finalDisplayedText
-        : typeof children === 'string'
-        ? children
-        : '';
-
-    if (animation === 'typewriter' && _isInView && textToType) {
-      let currentIndex = 0;
-      setDisplayTextForTypewriter(''); // Reset
-
-      const interval = setInterval(() => {
-        if (currentIndex <= textToType.length) {
-          setDisplayTextForTypewriter(textToType.substring(0, currentIndex));
-          currentIndex++;
-        } else {
-          clearInterval(interval);
-        }
-      }, 100); // Adjust speed as needed (consider making this configurable)
-
-      return () => clearInterval(interval);
-    }
-
-    // Reset the typewriter text if not in view or animation is not typewriter
-    if (animation === 'typewriter' && !_isInView) {
-      setDisplayTextForTypewriter('');
-    }
-    return () => {};
-  }, [animation, finalDisplayedText, children, _isInView]); // Depends on finalDisplayedText (and children as fallback)
-
-  // Get animation configuration based on animation type
-  const getAnimation = () => {
-    // For typewriter animation, we handle it separately with useState and useEffect
-    if (animation === 'typewriter') {
-      return undefined;
-    }
-
-    switch (animation) {
-      case 'fadeIn':
-        return {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
-          duration: animationDuration,
-          delay: animationDelay,
-          direction: 'alternate', // Note: 'direction' might not be what you intend for a simple fadeIn.
-          // 'iterationCount: 1' is typical for a one-time animation.
-          // If you want it to fade in and out, 'alternate' with 'iterationCount: infinite' is one way.
-          // For a single fade-in, remove 'direction: alternate'.
-        };
-
-      case 'slideIn':
-        // Similar note about 'direction: alternate' for slideIn.
-        // Typically, slideIn is a one-time effect.
-        let transformFrom = 'translateX(-100%)';
-        switch (animationDirection) {
-          case 'right':
-            transformFrom = 'translateX(100%)';
-            break;
-          case 'top':
-            transformFrom = 'translateY(-100%)';
-            break;
-          case 'bottom':
-            transformFrom = 'translateY(100%)';
-            break;
-          case 'left': // Default
-          default:
-            transformFrom = 'translateX(-100%)';
-            break;
-        }
-        return {
-          from: { transform: transformFrom },
-          to: { transform: 'translateX(0)' }, // Should be 'translateY(0)' for top/bottom
-          duration: animationDuration,
-          delay: animationDelay,
-          // direction: 'alternate', // Consider if this is intended for a single slide-in
-        };
-      // A more robust slideIn:
-      // let fromTransform = {};
-      // let toTransform = {};
-      // switch (animationDirection) {
-      //   case 'left': fromTransform = { transform: 'translateX(-100%)' }; toTransform = { transform: 'translateX(0)' }; break;
-      //   case 'right': fromTransform = { transform: 'translateX(100%)' }; toTransform = { transform: 'translateX(0)' }; break;
-      //   case 'top': fromTransform = { transform: 'translateY(-100%)' }; toTransform = { transform: 'translateY(0)' }; break;
-      //   case 'bottom': fromTransform = { transform: 'translateY(100%)' }; toTransform = { transform: 'translateY(0)' }; break;
-      //   default: fromTransform = { transform: 'translateX(-100%)' }; toTransform = { transform: 'translateX(0)' }; break;
-      // }
-      // return {
-      //   from: fromTransform,
-      //   to: toTransform,
-      //   duration: animationDuration,
-      //   delay: animationDelay,
-      // };
-
-      case 'bounce':
-        return {
-          from: { transform: 'translateY(0)' },
-          '20%': { transform: 'translateY(-30px)' },
-          '40%': { transform: 'translateY(0)' },
-          '60%': { transform: 'translateY(-15px)' },
-          '80%': { transform: 'translateY(0)' },
-          to: { transform: 'translateY(0)' },
-          duration: animationDuration,
-          delay: animationDelay,
-          iterationCount: '1',
-        };
-
-      case 'highlight': // This animation seems to be for a text background sweep
-        return {
-          from: { backgroundSize: '0 100%' },
-          to: { backgroundSize: '100% 100%' },
-          duration: animationDuration,
-          delay: animationDelay,
-        };
-
-      case 'reveal':
-        return {
-          from: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' },
-          to: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
-          duration: animationDuration,
-          delay: animationDelay,
-        };
-
-      case 'none':
-      default:
-        return undefined;
-    }
-  };
-
   return {
-    displayTextForTypewriter,
-    getAnimation,
     finalDisplayedText, // This is the text that TitleView should render
     activeHighlightTarget, // This is the text that TitleView should highlight
   };

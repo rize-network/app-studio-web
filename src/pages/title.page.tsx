@@ -11,6 +11,7 @@ import {
   GradientTest,
   HighlightTest,
   AlternatingTitle,
+  HighlightStylesDemo,
 } from 'src/components/Title/examples';
 
 /**
@@ -93,6 +94,13 @@ const TitlePage = () => {
             <td>Alternating Highlight</td>
             <td>
               <AlternatingTitle />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Highlight Styles</td>
+            <td>
+              <HighlightStylesDemo />
             </td>
           </tr>
         </tbody>

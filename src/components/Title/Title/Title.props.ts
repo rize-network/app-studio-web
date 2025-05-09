@@ -1,11 +1,6 @@
 import { ViewProps } from 'app-studio';
-import {
-  HighlightStyle,
-  TitleAnimation,
-  AnimationDirection,
-  TitleSize,
-  TitleStyles,
-} from './Title.type';
+import { HighlightStyle, TitleSize, TitleStyles } from './Title.type';
+import { AnimationProps } from 'app-studio/dist/utils/constants';
 
 /**
  * Props for the Title component
@@ -34,19 +29,11 @@ export interface TitleProps extends ViewProps {
   alternateHighlightText?: string[];
 
   /**
-   * Enable alternating animation that replaces the highlightText with words from alternateHighlightText
-   * When enabled, the component will replace the text specified in highlightText with each word
-   * from alternateHighlightText in sequence, creating an infinite loop animation
-   * @default false
+   * Animation for the highlighted text
+   * This can be a single animation object or an array of animation objects
+   * for multiple highlighted words
    */
-  alternateAnimation?: boolean;
-
-  /**
-   * Duration for each alternation cycle in milliseconds
-   * Controls how long each word from alternateHighlightText is displayed before switching to the next
-   * @default 3000
-   */
-  alternateDuration?: number;
+  highlightAnimate?: AnimationProps | AnimationProps[];
 
   /**
    * Style of the highlight effect
@@ -67,28 +54,10 @@ export interface TitleProps extends ViewProps {
   highlightSecondaryColor?: string;
 
   /**
-   * Animation type for the title
-   * @default 'none'
+   * Animation for the title
+   * This should be an animation object with properties like from, to, duration, etc.
    */
-  animation?: TitleAnimation;
-
-  /**
-   * Direction for slide animations
-   * @default 'left'
-   */
-  animationDirection?: AnimationDirection;
-
-  /**
-   * Duration of the animation in seconds
-   * @default '1s'
-   */
-  animationDuration?: string;
-
-  /**
-   * Delay before animation starts in seconds
-   * @default '0s'
-   */
-  animationDelay?: string;
+  animate?: AnimationProps | AnimationProps[];
 
   /**
    * Size of the title
@@ -106,4 +75,16 @@ export interface TitleProps extends ViewProps {
    * Custom styles for different parts of the component
    */
   views?: TitleStyles;
+
+  /**
+   * Whether to animate the alternating highlight text
+   * @default false
+   */
+  alternateAnimation?: boolean;
+
+  /**
+   * Duration in milliseconds for each alternating highlight text
+   * @default 3000
+   */
+  alternateDuration?: number;
 }

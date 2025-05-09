@@ -11,27 +11,19 @@ export type HighlightStyle =
   | 'glow'; // Text with glow effect
 
 /**
- * Animation type for the Title component
- */
-export type TitleAnimation =
-  | 'fadeIn' // Fade in animation
-  | 'slideIn' // Slide in animation
-  | 'typewriter' // Typewriter effect
-  | 'highlight' // Highlight text animation
-  | 'reveal' // Text reveal animation
-  | 'bounce' // Bounce animation
-  | 'alternate' // Alternate between different highlighted texts
-  | 'none'; // No animation
-
-/**
- * Animation direction for slide animations
- */
-export type AnimationDirection = 'left' | 'right' | 'top' | 'bottom';
-
-/**
  * Title size options
  */
-export type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type TitleSize =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'xl'
+  | '2xl'
+  | '3xl'
+  | '4xl'
+  | '5xl'
+  | '6xl';
 
 /**
  * Title styles for customization
