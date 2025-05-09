@@ -5,6 +5,11 @@ import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
 import { HighlightStyles, LineHeights, TitleSizes } from './Title.style';
 
+// Helper function to escape special characters for use in RegExp
+function escapeRegExp(string: string): string {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
 /**
  * Title View Component
  *
@@ -12,7 +17,7 @@ import { HighlightStyles, LineHeights, TitleSizes } from './Title.style';
  */
 const TitleView: React.FC<TitleProps> = ({
   children,
-  highlightText,
+  highlightText, // Original highlightText, used for initial state in useTitleState
   highlightStyle = 'background',
   highlightColor = 'theme.primary',
   highlightSecondaryColor,
@@ -20,7 +25,7 @@ const TitleView: React.FC<TitleProps> = ({
   size = 'xl',
   centered = false,
   views,
-  ...props
+  ...props // This includes alternateAnimation, alternateHighlightText, alternateDuration etc.
 }) => {
   // Use the inView hook to detect when the component is visible
   const { ref, inView } = useInView();
@@ -37,18 +42,16 @@ const TitleView: React.FC<TitleProps> = ({
 
   // Get state and animation functions from custom hook
   const {
-    displayText,
+    displayTextForTypewriter,
     getAnimation,
-    currentHighlightText,
-    alternatingContent,
+    finalDisplayedText, // This is the text to display (e.g., "Our Product is Amazing")
+    activeHighlightTarget, // This is what to highlight (e.g., "Amazing" or ["multiple", "highlights"])
   } = useTitleState({
     children,
     highlightText,
-    highlightStyle,
-    highlightColor: resolvedHighlightColor,
     animation,
     _isInView: inView,
-    ...props,
+    ...props, // Pass all other relevant props like alternateAnimation, alternateHighlightText, alternateDuration
   });
 
   // Get animation configuration only when the component is in view
@@ -66,51 +69,39 @@ const TitleView: React.FC<TitleProps> = ({
   const fontSize = TitleSizes[size];
   const lineHeight = LineHeights[size];
 
-  // For typewriter animation, use the displayText state
-  // For alternating animation, use the alternatingContent state
-  const content =
-    animation === 'typewriter'
-      ? displayText
-      : props.alternateAnimation && typeof alternatingContent === 'string'
-      ? alternatingContent
-      : children;
+  // Determine the content to be processed for rendering and potential highlighting
+  // If typewriter, it's displayTextForTypewriter. Otherwise, it's finalDisplayedText.
+  const textForRenderingAndHighlighting =
+    animation === 'typewriter' ? displayTextForTypewriter : finalDisplayedText;
 
-  // If the content is a simple string and we have highlight text
-  if (typeof children === 'string' && currentHighlightText) {
-    const text = children as string;
+  // If the textForRenderingAndHighlighting is a string and we have activeHighlightTarget
+  if (
+    typeof textForRenderingAndHighlighting === 'string' &&
+    activeHighlightTarget
+  ) {
+    const text = textForRenderingAndHighlighting; // Current text to display
 
-    // For a single highlight text
-    if (typeof currentHighlightText === 'string') {
-      // Define a type for our parts array
+    // For a single highlight text (string)
+    if (typeof activeHighlightTarget === 'string') {
       type TextPart = string | { highlight: boolean; text: string };
+      const pattern = new RegExp(
+        `(${escapeRegExp(activeHighlightTarget)})`,
+        'gi'
+      );
 
-      // Create a regex pattern to match the highlight text
-      // Use a more flexible approach that can match within words
-      const pattern = new RegExp(`(${currentHighlightText})`, 'gi');
-
-      // Check if the pattern matches anything in the text
       if (pattern.test(text)) {
-        // Reset the regex pattern's lastIndex property
-        pattern.lastIndex = 0;
-
-        // Split the text by the pattern and keep the matches
+        pattern.lastIndex = 0; // Reset regex
         const parts: TextPart[] = [];
         let lastIndex = 0;
         let match: RegExpExecArray | null;
 
         while ((match = pattern.exec(text)) !== null) {
-          // Add the text before the match
           if (match.index > lastIndex) {
             parts.push(text.substring(lastIndex, match.index));
           }
-
-          // Add the match as a special part to be highlighted
           parts.push({ highlight: true, text: match[0] });
-
           lastIndex = match.index + match[0].length;
         }
-
-        // Add any remaining text after the last match
         if (lastIndex < text.length) {
           parts.push(text.substring(lastIndex));
         }
@@ -148,38 +139,27 @@ const TitleView: React.FC<TitleProps> = ({
       }
     }
 
-    // For multiple highlight texts
-    if (Array.isArray(currentHighlightText)) {
-      // Define a type for our parts array
+    // For multiple highlight texts (array of strings)
+    if (Array.isArray(activeHighlightTarget)) {
       type TextPart = string | { highlight: boolean; text: string };
+      const pattern = new RegExp(
+        `(${activeHighlightTarget.map(escapeRegExp).join('|')})`,
+        'gi'
+      );
 
-      // Create a regex pattern to match any of the highlight texts
-      // Use a more flexible approach that can match within words
-      const pattern = new RegExp(`(${currentHighlightText.join('|')})`, 'gi');
-
-      // Check if the pattern matches anything in the text
       if (pattern.test(text)) {
-        // Reset the regex pattern's lastIndex property
-        pattern.lastIndex = 0;
-
-        // Split the text by the pattern and keep the matches
+        pattern.lastIndex = 0; // Reset regex
         const parts: TextPart[] = [];
         let lastIndex = 0;
         let match: RegExpExecArray | null;
 
         while ((match = pattern.exec(text)) !== null) {
-          // Add the text before the match
           if (match.index > lastIndex) {
             parts.push(text.substring(lastIndex, match.index));
           }
-
-          // Add the match as a special part to be highlighted
           parts.push({ highlight: true, text: match[0] });
-
           lastIndex = match.index + match[0].length;
         }
-
-        // Add any remaining text after the last match
         if (lastIndex < text.length) {
           parts.push(text.substring(lastIndex));
         }
@@ -218,7 +198,7 @@ const TitleView: React.FC<TitleProps> = ({
     }
   }
 
-  // Default rendering for non-string children or no highlighting
+  // Default rendering for non-string children or no (matching) highlighting
   return (
     <Element
       ref={ref}
@@ -231,7 +211,7 @@ const TitleView: React.FC<TitleProps> = ({
       {...props}
       {...views?.container}
     >
-      {content}
+      {textForRenderingAndHighlighting}
     </Element>
   );
 };
