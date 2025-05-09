@@ -29,16 +29,18 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
 }) => {
   // Convert text to array if it's a string
   const textArray = Array.isArray(text) ? text : [text];
-  
+
   // State for the currently displayed text
-  const [displayedText, setDisplayedText] = useState<string[]>(textArray.map(() => ''));
-  
+  const [displayedText, setDisplayedText] = useState<string[]>(
+    textArray.map(() => '')
+  );
+
   // State to track if typing is complete
   const [isComplete, setIsComplete] = useState(false);
-  
+
   // State to track which text item we're currently typing
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  
+
   // State to track the character position within the current text
   const [charIndex, setCharIndex] = useState(0);
 
@@ -59,7 +61,7 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
 
     // Get the current text we're typing
     const currentText = textArray[currentTextIndex];
-    
+
     // If we've typed all characters in the current text
     if (charIndex >= currentText.length) {
       // If we've typed all texts, we're done
@@ -67,28 +69,36 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
         setIsComplete(true);
         return;
       }
-      
+
       // Otherwise, move to the next text after a pause
       const timeout = setTimeout(() => {
-        setCurrentTextIndex(prev => prev + 1);
+        setCurrentTextIndex((prev) => prev + 1);
         setCharIndex(0);
       }, pauseTime);
-      
+
       return () => clearTimeout(timeout);
     }
 
     // Type the next character
     const timeout = setTimeout(() => {
-      setDisplayedText(prev => {
+      setDisplayedText((prev) => {
         const newText = [...prev];
         newText[currentTextIndex] = currentText.substring(0, charIndex + 1);
         return newText;
       });
-      setCharIndex(prev => prev + 1);
+      setCharIndex((prev) => prev + 1);
     }, typingSpeed);
 
     return () => clearTimeout(timeout);
-  }, [textArray, currentTextIndex, charIndex, isComplete, onComplete, pauseTime, typingSpeed]);
+  }, [
+    textArray,
+    currentTextIndex,
+    charIndex,
+    isComplete,
+    onComplete,
+    pauseTime,
+    typingSpeed,
+  ]);
 
   return (
     <>
@@ -106,7 +116,7 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
                 animation: 'blink 1s step-end infinite',
                 verticalAlign: 'text-bottom',
                 marginLeft: '1px',
-                ...textStyle
+                ...textStyle,
               }}
             />
           )}
