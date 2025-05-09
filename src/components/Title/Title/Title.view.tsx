@@ -24,9 +24,20 @@ const TitleView: React.FC<TitleProps> = ({
   const { ref, inView } = useInView();
   const { getColor, themeMode: ctxMode } = useTheme();
   const themeMode = props.themeMode || ctxMode;
-  const resolvedColor = getColor(highlightColor, { themeMode });
+
+  // Resolve colors, handling both theme colors and direct hex values
+  const resolveColorValue = (colorValue: string) => {
+    // If it's already a hex color, return it directly
+    if (colorValue.startsWith('#')) {
+      return colorValue;
+    }
+    // Otherwise, use the theme's getColor function
+    return getColor(colorValue, { themeMode });
+  };
+
+  const resolvedColor = resolveColorValue(highlightColor);
   const resolvedSecondary = highlightSecondaryColor
-    ? getColor(highlightSecondaryColor, { themeMode })
+    ? resolveColorValue(highlightSecondaryColor)
     : undefined;
 
   const { finalDisplayedText, activeHighlightTarget } = useTitleState({

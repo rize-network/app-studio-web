@@ -8,9 +8,9 @@ import { Title } from '../Title';
 export const HighlightTest = () => {
   return (
     <Vertical gap={32}>
-      <Title 
-        highlightText="animated highlight" 
-        highlightStyle="background" 
+      <Title
+        highlightText="animated highlight"
+        highlightStyle="background"
         highlightColor="theme.primary"
         highlightAnimate={{
           from: { opacity: 0, transform: 'scale(0.9)' },
@@ -21,10 +21,10 @@ export const HighlightTest = () => {
       >
         Text with animated highlight
       </Title>
-      
-      <Title 
-        highlightText={["first", "second", "third"]} 
-        highlightStyle="background" 
+
+      <Title
+        highlightText={['first', 'second', 'third']}
+        highlightStyle="background"
         highlightColor="theme.primary"
         highlightAnimate={[
           {
@@ -44,10 +44,11 @@ export const HighlightTest = () => {
             to: { opacity: 1, transform: 'translateY(0)' },
             duration: '0.5s',
             delay: '0.5s',
-          }
+          },
         ]}
       >
-        This text has first, second, and third highlighted words with staggered animations
+        This text has first, second, and third highlighted words with staggered
+        animations
       </Title>
     </Vertical>
   );

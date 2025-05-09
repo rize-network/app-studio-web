@@ -23,6 +23,16 @@ export const GradientTest = () => {
       </Title>
 
       <Title
+        highlightText={['specific', 'colors']}
+        highlightStyle="gradient"
+        highlightColor="#3b82f6"
+        highlightSecondaryColor="#a855f7"
+        size="2xl"
+      >
+        Gradient with specific hex colors #3b82f6 to #a855f7
+      </Title>
+
+      <Title
         highlightText={['blue', 'purple']}
         highlightStyle="gradient"
         highlightColor="color.blue.500"
