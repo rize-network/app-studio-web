@@ -1787,3 +1787,43 @@ export const ShieldIcon: React.FC<IconProps> = ({
 );
 
 export const CheckIcon = TickIcon;
+
+export const LogoutIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  strokeWidth = 1,
+  filled = false,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path d="M16 17l5-5-5-5" />
+      <path d="M21 12H9" />
+      <path d="M13 5v-2a1 1 0 0 0-1-1H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h7a1 1 0 0 0 1-1v-2" />
+    </svg>
+  </IconWrapper>
+);
+export const PowerOffIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  strokeWidth = 1.5,
+  filled = false,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <line x1="12" y1="2" x2="12" y2="8" />
+      <path d="M6.8 6.8a8 8 0 1 0 10 0" />
+    </svg>
+  </IconWrapper>
+);
