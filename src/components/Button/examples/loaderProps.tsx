@@ -4,36 +4,13 @@ import { Vertical } from 'app-studio';
 
 export const LoaderButtons = () => (
   <Vertical gap={15}>
+    <Button isLoading isFilled onClick={(e) => alert('ok')}>
+      Submitting
+    </Button>
     <Button isLoading isFilled>
       Submitting
     </Button>
-    <Button
-      isLoading
-      loaderProps={{
-        type: 'dotted',
-        views: {
-          loader: { color: 'color.white' },
-          text: {
-            color: 'color.black',
-          },
-        },
-      }}
-      isFilled
-    >
-      Submitting
-    </Button>
-    <Button
-      isLoading
-      loaderPosition="right"
-      loaderProps={{
-        type: 'quarter',
-        views: {
-          loader: { color: 'color.black' },
-          text: { color: 'color.black' },
-        },
-      }}
-      isFilled
-    >
+    <Button isLoading loaderPosition="right" isFilled>
       Submitting
     </Button>
   </Vertical>
