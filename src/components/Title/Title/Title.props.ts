@@ -36,6 +36,18 @@ export interface TitleProps extends ViewProps {
   highlightAnimate?: AnimationProps | AnimationProps[];
 
   /**
+   * Whether to apply a typewriter effect to the highlighted text
+   * @default false
+   */
+  highlightTypewriter?: boolean;
+
+  /**
+   * Duration in milliseconds for the typewriter effect on highlighted text
+   * @default 1500
+   */
+  highlightTypewriterDuration?: number;
+
+  /**
    * Style of the highlight effect
    * @default 'background'
    */

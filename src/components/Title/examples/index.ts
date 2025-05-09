@@ -9,3 +9,4 @@ export * from './gradient';
 export * from './highlight';
 export * from './alternating';
 export * from './highlightStyles';
+export * from './typewriterHighlight';

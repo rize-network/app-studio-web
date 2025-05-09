@@ -12,6 +12,8 @@ export const useTitleState = (props: TitleProps) => {
     alternateAnimation = false, // Default to false as per prop definition
     alternateDuration = 3000,
     highlightText: initialHighlightText, // Renamed to avoid confusion with the dynamic target
+    highlightTypewriter = false,
+    highlightTypewriterDuration = 1500,
   } = props;
 
   // State for the final text to be displayed (could be original children or alternating text)
@@ -22,6 +24,8 @@ export const useTitleState = (props: TitleProps) => {
   const [activeHighlightTarget, setActiveHighlightTarget] = useState<
     string | string[] | undefined
   >(initialHighlightText);
+
+  // We don't need state for typewriter text anymore as we're using the TypewriterEffect component
 
   // Handle alternating highlight text animation
   useEffect(() => {
@@ -73,8 +77,12 @@ export const useTitleState = (props: TitleProps) => {
     _isInView,
   ]);
 
+  // We don't need a separate effect for typewriter animation anymore
+  // as we're using the TypewriterEffect component directly in the view
+
   return {
     finalDisplayedText, // This is the text that TitleView should render
     activeHighlightTarget, // This is the text that TitleView should highlight
+    highlightTypewriter, // Whether typewriter effect is enabled
   };
 };

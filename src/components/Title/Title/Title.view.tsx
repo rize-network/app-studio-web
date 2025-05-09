@@ -3,6 +3,7 @@ import { Element, Text, useInView, useTheme } from 'app-studio';
 import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
 import { HighlightStyles, LineHeights, TitleSizes } from './Title.style';
+import TypewriterEffect from './TypewriterEffect';
 
 function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\\]\\/g, '\\$&');
@@ -19,6 +20,8 @@ const TitleView: React.FC<TitleProps> = ({
   views,
   highlightAnimate,
   animate,
+  highlightTypewriter: propHighlightTypewriter = false,
+  highlightTypewriterDuration = 3000,
   ...props
 }) => {
   const { ref, inView } = useInView();
@@ -40,12 +43,15 @@ const TitleView: React.FC<TitleProps> = ({
     ? resolveColorValue(highlightSecondaryColor)
     : undefined;
 
-  const { finalDisplayedText, activeHighlightTarget } = useTitleState({
-    children,
-    highlightText,
-    _isInView: inView,
-    ...props,
-  });
+  const { finalDisplayedText, activeHighlightTarget, highlightTypewriter } =
+    useTitleState({
+      children,
+      highlightText,
+      _isInView: inView,
+      highlightTypewriter: propHighlightTypewriter,
+      highlightTypewriterDuration,
+      ...props,
+    });
 
   const fontSize = TitleSizes[size];
   const lineHeight = LineHeights[size];
@@ -110,7 +116,19 @@ const TitleView: React.FC<TitleProps> = ({
               )}
               {...views?.highlight}
             >
-              {part.text}
+              {highlightTypewriter ? (
+                <TypewriterEffect
+                  text={part.text}
+                  typingSpeed={Math.max(
+                    30,
+                    highlightTypewriterDuration / (part.text.length * 10)
+                  )}
+                  showCursor={true}
+                  cursorColor="currentColor"
+                />
+              ) : (
+                part.text
+              )}
             </Text>
           )
         )}
@@ -139,7 +157,19 @@ const TitleView: React.FC<TitleProps> = ({
           {...HighlightStyles[highlightStyle](resolvedColor, resolvedSecondary)}
           {...views?.highlight}
         >
-          {text}
+          {highlightTypewriter ? (
+            <TypewriterEffect
+              text={text}
+              typingSpeed={Math.max(
+                30,
+                highlightTypewriterDuration / (text.length * 10)
+              )}
+              showCursor={true}
+              cursorColor="currentColor"
+            />
+          ) : (
+            text
+          )}
         </Text>
       </Element>
     );
