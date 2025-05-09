@@ -11,53 +11,52 @@
 
 import { ViewProps } from 'app-studio';
 import { Size } from './Switch.type';
-
 /**
  * Knob (circle) sizes for the Switch component
- * Following the 4px grid system
+ * Following the 4px grid system - dimensions réduites
  */
 export const KnobSizes: Record<Size, ViewProps> = {
-  xs: { height: '12px', width: '12px' }, // 3 × 4px grid
-  sm: { height: '16px', width: '16px' }, // 4 × 4px grid
-  md: { height: '20px', width: '20px' }, // 5 × 4px grid
-  lg: { height: '24px', width: '24px' }, // 6 × 4px grid
-  xl: { height: '28px', width: '28px' }, // 7 × 4px grid
+  xs: { height: '8px', width: '8px' }, // 2 × 4px grid
+  sm: { height: '12px', width: '12px' }, // 3 × 4px grid
+  md: { height: '16px', width: '16px' }, // 4 × 4px grid
+  lg: { height: '20px', width: '20px' }, // 5 × 4px grid
+  xl: { height: '24px', width: '24px' }, // 6 × 4px grid
 };
 
 /**
  * Slider (track) sizes for the Switch component
- * Following the 4px grid system
+ * Following the 4px grid system - dimensions réduites
  */
 export const SliderSizes: Record<Size, ViewProps> = {
   xs: {
-    height: '24px', // 6 × 4px grid
-    width: '40px', // 10 × 4px grid
+    height: '16px', // 4 × 4px grid
+    width: '36px', // 9 × 4px grid - increased for content
   },
   sm: {
-    height: '28px', // 7 × 4px grid
-    width: '48px', // 12 × 4px grid
+    height: '20px', // 5 × 4px grid
+    width: '44px', // 11 × 4px grid - increased for content
   },
   md: {
-    height: '32px', // 8 × 4px grid
-    width: '56px', // 14 × 4px grid
+    height: '24px', // 6 × 4px grid
+    width: '52px', // 13 × 4px grid - increased for content
   },
   lg: {
-    height: '36px', // 9 × 4px grid
-    width: '64px', // 16 × 4px grid
+    height: '28px', // 7 × 4px grid
+    width: '60px', // 15 × 4px grid - increased for content
   },
   xl: {
-    height: '40px', // 10 × 4px grid
-    width: '72px', // 18 × 4px grid
+    height: '32px', // 8 × 4px grid
+    width: '68px', // 17 × 4px grid - increased for content
   },
 };
 
 /**
- * Padding for the Switch slider
+ * Padding for the Switch slider - ajusté pour les nouvelles dimensions
  * Following the 4px grid system
  */
 export const SliderPadding: Record<Size, Record<string, number>> = {
-  xs: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
-  sm: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
+  xs: { paddingVertical: 4, paddingHorizontal: 2 }, // 0.5 × 4px grid horizontalement
+  sm: { paddingVertical: 4, paddingHorizontal: 2 }, // 0.5 × 4px grid horizontalement
   md: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
   lg: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
   xl: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid

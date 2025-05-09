@@ -136,7 +136,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                   onChange={(value) => handleSearch(value)}
                   hint={placeholder}
                   isClearable={false}
-                  left={<SearchIcon widthHeight={12} />}
+                  left={<SearchIcon widthHeight={16} />}
                   views={{
                     container: {
                       width: '100%',

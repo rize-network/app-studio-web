@@ -34,7 +34,13 @@ const Item: React.FC<ItemProps> = ({
   ...props
 }) => {
   // Handles the click event on an option by invoking the callback with the selected option's value
-  const handleOptionClick = (option: string) => callback(option);
+  const handleOptionClick = (e: React.MouseEvent, option: string) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (typeof callback === 'function') {
+      callback(option);
+    }
+  };
 
   // Toggles the hover state on the item
   const handleHover = () => setIsHovered(!isHovered);
@@ -44,13 +50,14 @@ const Item: React.FC<ItemProps> = ({
       as="li"
       // Layout properties
       margin={0}
-      paddingVertical={12} // 3 × 4px grid
-      paddingHorizontal={16} // 4 × 4px grid
+      paddingVertical={8} // 2 × 4px grid
+      paddingHorizontal={8} // 2 × 4px grid
       listStyleType="none"
+      cursor="pointer"
       // Event handlers
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
-      onClick={() => handleOptionClick(option.value)}
+      onClick={(e: React.MouseEvent) => handleOptionClick(e, option.value)}
       // Visual properties
       backgroundColor={isHovered ? 'color.gray.100' : 'transparent'}
       borderRadius="4px" // Subtle rounded corners for items
@@ -95,7 +102,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     width: '95%',
     height: '100%',
     border: 'none',
-    paddingVertical: 12, // 3 × 4px grid
+    paddingVertical: 4, // 3 × 4px grid
     paddingHorizontal: 0,
 
     // Typography properties
@@ -209,35 +216,18 @@ const DropDown: React.FC<DropDownProps> = ({
   const itemStates = useItemState();
   const handleCallback = (option: string) => callback(option);
 
-  // Shadow styles for the dropdown
-  const shadow = {
-    boxShadow:
-      '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-  };
+  // Shadow styles for the dropdown - now applied directly in the Element
 
   return (
     <Element
       as="ul"
       role="dropdown"
-      top="100%"
       width="100%"
       display="flex"
       flexDirection="column"
-      position="absolute"
-      marginTop={8} // 2 × 4px grid
-      marginLeft={0}
-      marginRight={0}
-      marginBottom={0}
-      padding={0}
-      maxHeight="240px" // 60 × 4px grid
-      overflowY="auto"
-      zIndex={1000}
       backgroundColor="color.white"
-      borderRadius="8px" // Consistent with design system (rounded-md)
-      borderWidth="1px"
-      borderStyle="solid"
-      borderColor="color.gray.200"
       transition="all 0.2s ease"
+      margin={0}
       style={{
         scrollbarWidth: 'thin',
         scrollbarColor: 'rgba(0, 0, 0, 0.2) transparent',
@@ -252,10 +242,10 @@ const DropDown: React.FC<DropDownProps> = ({
           borderRadius: '4px',
         },
       }}
-      {...shadow}
       {...views?.dropDown}
     >
-      {options.length > 0 &&
+      {options &&
+        options.length > 0 &&
         options.map((option, index) => (
           <Item
             key={option.value}
@@ -354,25 +344,67 @@ const SelectView: React.FC<SelectViewProps> = ({
   highlightedIndex,
   ...props
 }) => {
+  // close when *any* other select opens
+  React.useEffect(() => {
+    const handleCloseAll = () => setHide(true);
+    document.addEventListener('closeAllSelects', handleCloseAll);
+    return () =>
+      document.removeEventListener('closeAllSelects', handleCloseAll);
+  }, [setHide]);
+
+  // Add a global click handler to close the dropdown when clicking outside
+  React.useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Only close if clicking outside of this specific select component
+      if (!target.closest(`#${id}`) && !hide) {
+        setHide(true);
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick);
+    return () => {
+      document.removeEventListener('click', handleGlobalClick);
+    };
+  }, [id, hide, setHide]);
   const showLabel = !!(isFocused && label);
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // tell all other selects to close
+    document.dispatchEvent(new Event('closeAllSelects'));
+
     if (event && event.stopPropagation) event.stopPropagation();
-    setHide(!hide);
-    setIsFocused(!isFocused);
+
+    // Toggle dropdown visibility
+    const newHideState = !hide;
+    setHide(newHideState);
+    setIsFocused(!newHideState); // Set focus state based on dropdown visibility
   };
   const handleCallback = useCallback(
     (option: string) => {
-      setHide(!hide);
+      // Close dropdown after selection
+      setHide(true);
+
+      // Tell all other selects to close
+      document.dispatchEvent(new Event('closeAllSelects'));
+
+      // Update value based on multi-select or single-select mode
       if (isMulti && Array.isArray(value)) {
-        !value.includes(option) && setValue([...value, option]);
+        if (!value.includes(option)) {
+          const newValue = [...value, option];
+          setValue(newValue);
+          if (onChange) onChange(option);
+        }
       } else {
         setValue(option);
+        if (onChange) onChange(option);
       }
-      if (onChange) onChange(option);
+
+      // Set focus to indicate selection
+      setIsFocused(true);
     },
-    [hide, isMulti, value]
+    [isMulti, value, setHide, setValue, onChange, setIsFocused]
   );
   const handleRemoveOption = (valueOption: string) => {
     if (Array.isArray(value) && value.includes(valueOption)) {
@@ -382,11 +414,21 @@ const SelectView: React.FC<SelectViewProps> = ({
   };
   return (
     <FieldContainer
+      style={{ position: 'relative', width: '100%', display: 'inline-block' }}
+      id={id}
       role="SelectBox"
       helperText={helperText}
       error={error}
       views={views}
-      onClick={isDisabled || isReadOnly ? () => {} : handleClick}
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+        // Stop propagation to prevent clicks from bubbling up
+        e.stopPropagation();
+
+        // Only handle click if not disabled or readonly
+        if (!(isDisabled || isReadOnly)) {
+          handleClick(e as unknown as React.MouseEvent<HTMLButtonElement>);
+        }
+      }}
     >
       <FieldContent
         label={label}
@@ -461,15 +503,36 @@ const SelectView: React.FC<SelectViewProps> = ({
           )}
         </FieldIcons>
       </FieldContent>
-      {!hide && (
-        <DropDown
-          size={size}
-          views={views}
-          options={options}
-          callback={handleCallback}
-          highlightedIndex={highlightedIndex}
-          setHighlightedIndex={setHighlightedIndex}
-        />
+      {!hide && options.length > 0 && (
+        <Element
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+          style={{
+            position: 'absolute',
+            top: 'calc(100% + 4px)',
+            left: 0,
+            right: 0,
+            zIndex: 1000,
+          }}
+        >
+          <DropDown
+            size={size}
+            views={{
+              ...views,
+              dropDown: {
+                borderRadius: '6px',
+                border: '1px solid color.gray.200',
+                boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                padding: '8px',
+                maxHeight: '240px',
+                overflowY: 'auto',
+              },
+            }}
+            options={options}
+            callback={handleCallback}
+            highlightedIndex={highlightedIndex}
+            setHighlightedIndex={setHighlightedIndex}
+          />
+        </Element>
       )}
     </FieldContainer>
   );

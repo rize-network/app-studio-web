@@ -17,11 +17,11 @@ import { Size, Variant } from './Checkbox.type';
  * Following the 4px grid system
  */
 export const Sizes: Record<Size, ViewProps> = {
-  xs: { height: '16px', width: '16px' }, // 4 × 4px grid
-  sm: { height: '20px', width: '20px' }, // 5 × 4px grid
-  md: { height: '24px', width: '24px' }, // 6 × 4px grid
-  lg: { height: '28px', width: '28px' }, // 7 × 4px grid
-  xl: { height: '32px', width: '32px' }, // 8 × 4px grid
+  xs: { height: '12px', width: '12px' }, // 3 × 4px grid
+  sm: { height: '16px', width: '16px' }, // 4 × 4px grid
+  md: { height: '20px', width: '20px' }, // 5 × 4px grid
+  lg: { height: '24px', width: '24px' }, // 6 × 4px grid
+  xl: { height: '28px', width: '28px' }, // 7 × 4px grid
 };
 
 /**

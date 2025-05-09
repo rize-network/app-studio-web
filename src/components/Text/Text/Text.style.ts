@@ -62,22 +62,22 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
  * Font sizes following typography guidelines
  */
 export const FontSizes: Record<Size, string> = {
-  xs: '12px', // 0.75rem
-  sm: '14px', // 0.875rem
-  md: '16px', // 1rem (base)
-  lg: '18px', // 1.125rem
-  xl: '20px', // 1.25rem
+  xs: '10px', // Harmonized font size
+  sm: '12px', // Harmonized font size
+  md: '14px', // Harmonized font size
+  lg: '16px', // Harmonized font size
+  xl: '20px', // Harmonized font size
 };
 
 /**
  * Line heights following typography guidelines
  */
 export const LineHeights: Record<Size, string> = {
-  xs: '16px', // 1rem
-  sm: '20px', // 1.25rem
-  md: '24px', // 1.5rem
-  lg: '28px', // 1.75rem
-  xl: '28px', // 1.75rem
+  xs: '14px', // Adjusted for 10px font
+  sm: '16px', // Adjusted for 12px font
+  md: '20px', // Adjusted for 14px font
+  lg: '22px', // Adjusted for 16px font
+  xl: '28px', // Adjusted for 20px font
 };
 
 /**

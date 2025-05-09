@@ -54,7 +54,7 @@ export const FieldContent: React.FC<ContentProps> = ({
       flexWrap="nowrap"
       alignItems="center"
       justifyContent="space-between"
-      marginBottom={8} // 2 × 4px grid
+      marginBottom={2} // 2 × 4px grid
       // Visual properties
       borderStyle="solid"
       borderColor={color}

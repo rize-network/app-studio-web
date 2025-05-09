@@ -35,10 +35,10 @@ export const DesignSystemText = () => (
         Typography - Text Sizes
       </Text>
       <Vertical gap={8}>
-        <Text size="xs">Extra Small (xs) - 12px</Text>
-        <Text size="sm">Small (sm) - 14px</Text>
-        <Text size="md">Medium (md) - 16px (default)</Text>
-        <Text size="lg">Large (lg) - 18px</Text>
+        <Text size="xs">Extra Small (xs) - 10px</Text>
+        <Text size="sm">Small (sm) - 12px</Text>
+        <Text size="md">Medium (md) - 14px (default)</Text>
+        <Text size="lg">Large (lg) - 16px</Text>
         <Text size="xl">Extra Large (xl) - 20px</Text>
       </Vertical>
     </View>

@@ -22,7 +22,7 @@ export const BadgeSizes: Record<Size, ViewProps> = {
     height: '20px',
     padding: '0 6px',
     // Typography
-    fontSize: '10px', // Smallest text size
+    fontSize: '10px', // Harmonized font size
     fontWeight: '500', // Medium weight for better readability
     lineHeight: '20px', // Match height for vertical centering
   },
@@ -32,7 +32,7 @@ export const BadgeSizes: Record<Size, ViewProps> = {
     height: '24px',
     padding: '0 8px',
     // Typography
-    fontSize: '12px', // text-xs
+    fontSize: '12px', // Harmonized font size
     fontWeight: '500', // Medium weight
     lineHeight: '24px',
   },
@@ -42,7 +42,7 @@ export const BadgeSizes: Record<Size, ViewProps> = {
     height: '28px',
     padding: '0 10px',
     // Typography
-    fontSize: '14px', // text-sm
+    fontSize: '14px', // Harmonized font size
     fontWeight: '500', // Medium weight
     lineHeight: '28px',
   },
@@ -52,7 +52,7 @@ export const BadgeSizes: Record<Size, ViewProps> = {
     height: '32px',
     padding: '0 12px',
     // Typography
-    fontSize: '14px', // text-sm
+    fontSize: '16px', // Harmonized font size
     fontWeight: '500', // Medium weight
     lineHeight: '32px',
   },
@@ -62,7 +62,7 @@ export const BadgeSizes: Record<Size, ViewProps> = {
     height: '36px',
     padding: '0 14px',
     // Typography
-    fontSize: '16px', // text-md
+    fontSize: '20px', // Harmonized font size
     fontWeight: '500', // Medium weight
     lineHeight: '36px',
   },

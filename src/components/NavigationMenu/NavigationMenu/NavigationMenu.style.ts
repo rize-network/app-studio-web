@@ -19,19 +19,19 @@ import { Orientation, Size, Variant } from './NavigationMenu.type';
 export const NavigationMenuSizes: Record<Size, ViewProps> = {
   sm: {
     padding: '8px 12px', // 2×4px and 3×4px grid
-    fontSize: '14px',
+    fontSize: '12px', // Harmonized font size
 
     fontWeight: '500', // Medium weight for better readability
   },
   md: {
     padding: '12px 16px', // 3×4px and 4×4px grid
-    fontSize: '16px',
+    fontSize: '14px', // Harmonized font size
 
     fontWeight: '500', // Medium weight for better readability
   },
   lg: {
     padding: '16px 20px', // 4×4px and 5×4px grid
-    fontSize: '18px',
+    fontSize: '16px', // Harmonized font size
 
     fontWeight: '500', // Medium weight for better readability
   },

@@ -41,11 +41,12 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   views = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
-  const handleToggle = (event: any) => {
-    if (!isReadOnly) {
-      setValue(!value);
-      setOn(!on);
-      if (onChange) onChange(event.target.checked);
+  const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isReadOnly && !isDisabled) {
+      const newValue = event.target.checked;
+      setValue(newValue);
+      setOn(newValue);
+      if (onChange) onChange(newValue);
     }
   };
   const handleHover = () => setIsHovered(!isHovered);
@@ -111,7 +112,13 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         display="flex"
         alignItems="center"
         justifyContent={
-          activeChild ? 'space-between' : value ? 'flex-end' : 'flex-start'
+          value
+            ? activeChild
+              ? 'space-between'
+              : 'flex-end'
+            : inActiveChild
+            ? 'space-between'
+            : 'flex-start'
         }
         marginBottom={4} // 1 × 4px grid
         // Visual properties
@@ -127,6 +134,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
             ? ColorSchemes.states.hover.inactive
             : ColorSchemes.default.inactive
         }
+        overflow="hidden"
         // State properties
         cursor="pointer"
         // Animation
@@ -141,7 +149,12 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         {activeChild && value && (
           <View
             marginLeft={8} // 2 × 4px grid
+            marginRight={4} // 1 × 4px grid
             transition="all 0.3s ease"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height="100%"
           >
             {activeChild}
           </View>
@@ -153,6 +166,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
           backgroundColor={ColorSchemes.default.knob}
           boxShadow="0 1px 2px rgba(0, 0, 0, 0.1)"
           transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+          zIndex={1} // Ensure knob is above content
           {...KnobSizes[size]}
           {...views['circle']}
         />
@@ -161,7 +175,12 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         {inActiveChild && !value && (
           <View
             marginRight={8} // 2 × 4px grid
+            marginLeft={4} // 1 × 4px grid
             transition="all 0.3s ease"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height="100%"
           >
             {inActiveChild}
           </View>

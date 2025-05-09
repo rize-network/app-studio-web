@@ -37,7 +37,7 @@ Notes:
 ------
 - Some files may have been excluded based on .gitignore rules and Repomix's configuration
 - Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
-- Only files matching these patterns are included: src/components/Title/Title
+- Only files matching these patterns are included: src/components/Form/Select
 - Files matching patterns in .gitignore are excluded
 - Files matching default ignore patterns are excluded
 - Files are sorted by Git change count (files with more changes are at the bottom)
@@ -50,743 +50,1408 @@ Directory Structure
 ================================================================
 src/
   components/
-    Title/
-      Title/
-        Title.props.ts
-        Title.state.ts
-        Title.style.ts
-        Title.type.ts
-        Title.view.tsx
-        useInView.ts
+    Form/
+      Select/
+        examples/
+          Color.tsx
+          Default.tsx
+          designSystem.tsx
+          Disabled.tsx
+          Error.tsx
+          Form.tsx
+          HelperText.tsx
+          index.ts
+          isScrollable.tsx
+          Multiple.tsx
+          ReadOnlyInput.tsx
+          Shadow.tsx
+          SizeInput.tsx
+          StylesInput.tsx
+        Select/
+          Select.props.ts
+          Select.state.ts
+          Select.style.ts
+          Select.type.d.ts
+          Select.view.tsx
+        Select.tsx
 
 ================================================================
 Files
 ================================================================
 
 ================
-File: src/components/Title/Title/useInView.ts
-================
-import { useEffect, useRef, useState } from 'react';
-
-/**
- * Custom hook to detect when an element is in the viewport
- * @returns An object with a ref to attach to the element and a boolean indicating if the element is in view
- */
-export const useInView = () => {
-  const ref = useRef<HTMLElement | null>(null);
-  const [isInView, setIsInView] = useState(false);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Update state when the element enters the viewport
-        if (entry.isIntersecting) {
-          setIsInView(true);
-          // Once the element is in view, we don't need to observe it anymore
-          observer.unobserve(element);
-        }
-      },
-      {
-        // Element is considered in view when at least 10% is visible
-        threshold: 0.1,
-        // Start observing when element is 100px from entering the viewport
-        rootMargin: '100px',
-      }
-    );
-
-    observer.observe(element);
-
-    return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
-    };
-  }, []);
-
-  return { ref, isInView };
-};
-
-================
-File: src/components/Title/Title/Title.props.ts
-================
-import { ViewProps } from 'app-studio';
-import {
-  HighlightStyle,
-  TitleAnimation,
-  AnimationDirection,
-  TitleSize,
-  TitleStyles,
-} from './Title.type';
-
-/**
- * Props for the Title component
- */
-export interface TitleProps extends ViewProps {
-  /**
-   * Internal prop to indicate if the component is in view
-   * @internal
-   */
-  _isInView?: boolean;
-  /**
-   * The main text content of the title
-   */
-  children: React.ReactNode;
-
-  /**
-   * Text to be highlighted within the title
-   * If not provided, no highlighting will be applied
-   */
-  highlightText?: string | string[];
-
-  /**
-   * Array of strings to cycle through, replacing the text specified in highlightText
-   * Used with alternateAnimation to create an infinite loop of changing words
-   */
-  alternateHighlightText?: string[];
-
-  /**
-   * Enable alternating animation that replaces the highlightText with words from alternateHighlightText
-   * When enabled, the component will replace the text specified in highlightText with each word
-   * from alternateHighlightText in sequence, creating an infinite loop animation
-   * @default false
-   */
-  alternateAnimation?: boolean;
-
-  /**
-   * Duration for each alternation cycle in milliseconds
-   * Controls how long each word from alternateHighlightText is displayed before switching to the next
-   * @default 3000
-   */
-  alternateDuration?: number;
-
-  /**
-   * Style of the highlight effect
-   * @default 'background'
-   */
-  highlightStyle?: HighlightStyle;
-
-  /**
-   * Color for the highlight effect
-   * @default 'theme.primary'
-   */
-  highlightColor?: string;
-
-  /**
-   * Secondary color for gradient highlights
-   * @default 'theme.secondary'
-   */
-  highlightSecondaryColor?: string;
-
-  /**
-   * Animation type for the title
-   * @default 'none'
-   */
-  animation?: TitleAnimation;
-
-  /**
-   * Direction for slide animations
-   * @default 'left'
-   */
-  animationDirection?: AnimationDirection;
-
-  /**
-   * Duration of the animation in seconds
-   * @default '1s'
-   */
-  animationDuration?: string;
-
-  /**
-   * Delay before animation starts in seconds
-   * @default '0s'
-   */
-  animationDelay?: string;
-
-  /**
-   * Size of the title
-   * @default 'xl'
-   */
-  size?: TitleSize;
-
-  /**
-   * Whether to center the title
-   * @default false
-   */
-  centered?: boolean;
-
-  /**
-   * Custom styles for different parts of the component
-   */
-  views?: TitleStyles;
-}
-
-================
-File: src/components/Title/Title/Title.style.ts
-================
-import { ViewProps } from 'app-studio';
-import { TitleSize, HighlightStyle } from './Title.type';
-
-/**
- * Font sizes for different title sizes
- */
-export const TitleSizes = {
-  xs: 16,
-  sm: 20,
-  md: 24,
-  lg: 32,
-  xl: 40,
-  '2xl': 48,
-  '3xl': 56,
-  '4xl': 64,
-  '5xl': 72,
-  '6xl': 80,
-};
-
-/**
- * Line heights for different title sizes
- */
-export const LineHeights: Record<TitleSize, number> = {
-  xs: 24,
-  sm: 28,
-  md: 32,
-  lg: 64,
-  xl: 88,
-};
-
-/**
- * Default styles for different highlight types
- */
-export const HighlightStyles: Record<
-  HighlightStyle,
-  (color: string, secondaryColor?: string) => ViewProps
-> = {
-  underline: (color) => ({
-    textDecoration: 'underline',
-    textDecorationColor: color,
-    textDecorationThickness: '4px',
-    textUnderlineOffset: '4px',
-  }),
-  background: (color) => ({
-    backgroundColor: color,
-    color: 'color.white',
-    padding: '0 8px',
-    borderRadius: '4px',
-  }),
-  gradient: (color, secondaryColor) => ({
-    background: `linear-gradient(135deg, ${color}, ${secondaryColor || color})`,
-    webkitBackgroundClip: 'text',
-    webkitTextFillColor: 'transparent',
-    display: 'inline-block',
-  }),
-  outline: (color) => ({
-    webkitTextStroke: `1px ${color}`,
-    webkitTextFillColor: 'transparent',
-    color: 'transparent',
-    textShadow: 'none',
-  }),
-  glow: (color) => ({
-    color: color,
-    textShadow: `0 0 10px ${color}80, 0 0 20px ${color}40, 0 0 30px ${color}20`,
-  }),
-};
-
-================
-File: src/components/Title/Title/Title.type.ts
-================
-import { ViewProps } from 'app-studio';
-
-/**
- * Highlight style options for the Title component
- */
-export type HighlightStyle =
-  | 'underline' // Underline the text
-  | 'background' // Background color highlight
-  | 'gradient' // Gradient background
-  | 'outline' // Text with outline
-  | 'glow'; // Text with glow effect
-
-/**
- * Animation type for the Title component
- */
-export type TitleAnimation =
-  | 'fadeIn' // Fade in animation
-  | 'slideIn' // Slide in animation
-  | 'typewriter' // Typewriter effect
-  | 'highlight' // Highlight text animation
-  | 'reveal' // Text reveal animation
-  | 'bounce' // Bounce animation
-  | 'alternate' // Alternate between different highlighted texts
-  | 'none'; // No animation
-
-/**
- * Animation direction for slide animations
- */
-export type AnimationDirection = 'left' | 'right' | 'top' | 'bottom';
-
-/**
- * Title size options
- */
-export type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-/**
- * Title styles for customization
- */
-export type TitleStyles = {
-  container?: ViewProps;
-  text?: ViewProps;
-  highlight?: ViewProps;
-};
-
-================
-File: src/components/Title/Title/Title.state.ts
-================
-import { useEffect, useState } from 'react';
-import { TitleProps } from './Title.props';
-
-/**
- * Custom hook for managing Title component state and animations
- */
-export const useTitleState = (props: TitleProps) => {
-  const {
-    animation = 'none',
-    animationDirection = 'left',
-    animationDuration = '1s',
-    animationDelay = '0s',
-    children, // Original children
-    _isInView = false,
-    alternateHighlightText = [],
-    alternateAnimation = false, // Default to false as per prop definition
-    alternateDuration = 3000,
-    highlightText: initialHighlightText, // Renamed to avoid confusion with the dynamic target
-  } = props;
-
-  // State for typewriter animation
-  const [displayTextForTypewriter, setDisplayTextForTypewriter] =
-    useState<string>('');
-
-  // State for the final text to be displayed (could be original children or alternating text)
-  const [finalDisplayedText, setFinalDisplayedText] =
-    useState<React.ReactNode>(children);
-
-  // State for the text that should be actively highlighted (could be initialHighlightText or a word from alternateHighlightText)
-  const [activeHighlightTarget, setActiveHighlightTarget] = useState<
-    string | string[] | undefined
-  >(initialHighlightText);
-
-  // Handle alternating highlight text animation
-  useEffect(() => {
-    // If not using alternating animation or conditions not met, reset to initial/non-alternating state
-    if (
-      !alternateAnimation ||
-      alternateHighlightText.length === 0 ||
-      !_isInView ||
-      typeof children !== 'string' || // Base text must be a string for replacement
-      typeof initialHighlightText !== 'string' // Placeholder must be a string
-    ) {
-      setFinalDisplayedText(children);
-      setActiveHighlightTarget(initialHighlightText);
-      return () => {};
-    }
-
-    // Proceed with alternating animation
-    const baseText = children as string;
-    const placeholder = initialHighlightText as string;
-    let currentIndex = 0;
-
-    // Function to update the state for alternating text
-    const updateAlternatingState = (index: number) => {
-      const currentWordToHighlight = alternateHighlightText[index];
-      // Replace the placeholder in the baseText with the current alternating word
-      const regex = new RegExp(placeholder, 'gi');
-      const newContent = baseText.replace(regex, currentWordToHighlight);
-
-      setFinalDisplayedText(newContent);
-      setActiveHighlightTarget(currentWordToHighlight); // Set the current word as the highlight target
-    };
-
-    // Set initial alternating state
-    updateAlternatingState(currentIndex);
-
-    // Create interval to cycle through the alternateHighlightText array
-    const interval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % alternateHighlightText.length;
-      updateAlternatingState(currentIndex);
-    }, alternateDuration);
-
-    return () => clearInterval(interval);
-  }, [
-    alternateAnimation,
-    alternateHighlightText,
-    alternateDuration,
-    initialHighlightText, // Depends on the placeholder
-    children,
-    _isInView,
-  ]);
-
-  // Handle typewriter animation
-  useEffect(() => {
-    // Typewriter should type out the finalDisplayedText if it's a string
-    const textToType =
-      typeof finalDisplayedText === 'string'
-        ? finalDisplayedText
-        : typeof children === 'string'
-        ? children
-        : '';
-
-    if (animation === 'typewriter' && _isInView && textToType) {
-      let currentIndex = 0;
-      setDisplayTextForTypewriter(''); // Reset
-
-      const interval = setInterval(() => {
-        if (currentIndex <= textToType.length) {
-          setDisplayTextForTypewriter(textToType.substring(0, currentIndex));
-          currentIndex++;
-        } else {
-          clearInterval(interval);
-        }
-      }, 100); // Adjust speed as needed (consider making this configurable)
-
-      return () => clearInterval(interval);
-    }
-
-    // Reset the typewriter text if not in view or animation is not typewriter
-    if (animation === 'typewriter' && !_isInView) {
-      setDisplayTextForTypewriter('');
-    }
-    return () => {};
-  }, [animation, finalDisplayedText, children, _isInView]); // Depends on finalDisplayedText (and children as fallback)
-
-  // Get animation configuration based on animation type
-  const getAnimation = () => {
-    // For typewriter animation, we handle it separately with useState and useEffect
-    if (animation === 'typewriter') {
-      return undefined;
-    }
-
-    switch (animation) {
-      case 'fadeIn':
-        return {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
-          duration: animationDuration,
-          delay: animationDelay,
-          direction: 'alternate', // Note: 'direction' might not be what you intend for a simple fadeIn.
-          // 'iterationCount: 1' is typical for a one-time animation.
-          // If you want it to fade in and out, 'alternate' with 'iterationCount: infinite' is one way.
-          // For a single fade-in, remove 'direction: alternate'.
-        };
-
-      case 'slideIn':
-        // Similar note about 'direction: alternate' for slideIn.
-        // Typically, slideIn is a one-time effect.
-        let transformFrom = 'translateX(-100%)';
-        switch (animationDirection) {
-          case 'right':
-            transformFrom = 'translateX(100%)';
-            break;
-          case 'top':
-            transformFrom = 'translateY(-100%)';
-            break;
-          case 'bottom':
-            transformFrom = 'translateY(100%)';
-            break;
-          case 'left': // Default
-          default:
-            transformFrom = 'translateX(-100%)';
-            break;
-        }
-        return {
-          from: { transform: transformFrom },
-          to: { transform: 'translateX(0)' }, // Should be 'translateY(0)' for top/bottom
-          duration: animationDuration,
-          delay: animationDelay,
-          // direction: 'alternate', // Consider if this is intended for a single slide-in
-        };
-      // A more robust slideIn:
-      // let fromTransform = {};
-      // let toTransform = {};
-      // switch (animationDirection) {
-      //   case 'left': fromTransform = { transform: 'translateX(-100%)' }; toTransform = { transform: 'translateX(0)' }; break;
-      //   case 'right': fromTransform = { transform: 'translateX(100%)' }; toTransform = { transform: 'translateX(0)' }; break;
-      //   case 'top': fromTransform = { transform: 'translateY(-100%)' }; toTransform = { transform: 'translateY(0)' }; break;
-      //   case 'bottom': fromTransform = { transform: 'translateY(100%)' }; toTransform = { transform: 'translateY(0)' }; break;
-      //   default: fromTransform = { transform: 'translateX(-100%)' }; toTransform = { transform: 'translateX(0)' }; break;
-      // }
-      // return {
-      //   from: fromTransform,
-      //   to: toTransform,
-      //   duration: animationDuration,
-      //   delay: animationDelay,
-      // };
-
-      case 'bounce':
-        return {
-          from: { transform: 'translateY(0)' },
-          '20%': { transform: 'translateY(-30px)' },
-          '40%': { transform: 'translateY(0)' },
-          '60%': { transform: 'translateY(-15px)' },
-          '80%': { transform: 'translateY(0)' },
-          to: { transform: 'translateY(0)' },
-          duration: animationDuration,
-          delay: animationDelay,
-          iterationCount: '1',
-        };
-
-      case 'highlight': // This animation seems to be for a text background sweep
-        return {
-          from: { backgroundSize: '0 100%' },
-          to: { backgroundSize: '100% 100%' },
-          duration: animationDuration,
-          delay: animationDelay,
-        };
-
-      case 'reveal':
-        return {
-          from: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' },
-          to: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
-          duration: animationDuration,
-          delay: animationDelay,
-        };
-
-      case 'none':
-      default:
-        return undefined;
-    }
-  };
-
-  return {
-    displayTextForTypewriter,
-    getAnimation,
-    finalDisplayedText, // This is the text that TitleView should render
-    activeHighlightTarget, // This is the text that TitleView should highlight
-  };
-};
-
-================
-File: src/components/Title/Title/Title.view.tsx
+File: src/components/Form/Select/examples/Default.tsx
 ================
 import React from 'react';
-import { Element, Text, useInView, useTheme } from 'app-studio';
+import { Select } from '../Select';
 
-import { TitleProps } from './Title.props';
-import { useTitleState } from './Title.state';
-import { HighlightStyles, LineHeights, TitleSizes } from './Title.style';
+export const DefaultSelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    label="Select an item"
+  />
+);
 
-// Helper function to escape special characters for use in RegExp
-function escapeRegExp(string: string): string {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+================
+File: src/components/Form/Select/examples/Disabled.tsx
+================
+import React from 'react';
+
+import { Select } from '../Select';
+
+export const DisabledSelect = () => (
+  <Select
+    isDisabled
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+  />
+);
+
+================
+File: src/components/Form/Select/examples/Error.tsx
+================
+import React from 'react';
+import { Select } from '../Select';
+
+export const ErrorSelect = () => (
+  <Select
+    id="error"
+    name="error"
+    error
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+  />
+);
+
+================
+File: src/components/Form/Select/examples/HelperText.tsx
+================
+import React from 'react';
+
+import { Select } from '../Select';
+
+export const HelperTextSelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    helperText="select one item!"
+    error
+  />
+);
+
+================
+File: src/components/Form/Select/examples/isScrollable.tsx
+================
+import React from 'react';
+import { Select } from '../Select';
+
+export const IsScrollableDemo = () => {
+  const timeZones = [
+    { label: 'Item1', value: '1' },
+    { label: 'Item2', value: '2' },
+    { label: 'Item3', value: '3' },
+  ];
+
+  return <Select options={timeZones} />;
+};
+
+================
+File: src/components/Form/Select/examples/Multiple.tsx
+================
+import React from 'react';
+
+import { Select } from '../../../Form/Select/Select';
+
+export const MultiSelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    placeholder="Select an item.."
+    isMulti
+  />
+);
+
+================
+File: src/components/Form/Select/examples/ReadOnlyInput.tsx
+================
+import React from 'react';
+
+import { Select } from '../Select';
+
+export const ReadOnlySelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    isReadOnly
+  />
+);
+
+================
+File: src/components/Form/Select/examples/Shadow.tsx
+================
+import React from 'react';
+import { Select } from '../../../Form/Select/Select';
+
+export const ShadowSelect = () => (
+  <Select
+    shadow={{
+      boxShadow:
+        'rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset',
+    }}
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+  />
+);
+
+================
+File: src/components/Form/Select/Select/Select.state.ts
+================
+import React from 'react';
+import { SelectProps } from './Select.props';
+
+// Initializes the custom hook 'useSelectState' for managing the state of the Select component
+export const useSelectState = ({
+  placeholder,
+  isMulti,
+  options,
+  id = `select-${Math.random().toString(36).substr(2, 9)}`,
+}: SelectProps) => {
+  // Determines the default value based on the 'placeholder' and 'isMulti' props, setting to an empty array for multi-select or an empty string/single default option
+  const defaultValue = placeholder
+    ? isMulti
+      ? []
+      : '' // If there's a placeholder, set default to empty array for multi-select or empty string for single select
+    : Array.isArray(options) && options.length > 0
+    ? options[0].value
+    : isMulti
+    ? []
+    : ''; // If no placeholder, use the first option value if available, otherwise empty array for multi-select or empty string for single select
+
+  // State hook for tracking mouse hover status over the Select component
+  const [isHovered, setIsHovered] = React.useState(false);
+  // State hook for tracking focus status of the Select input field
+  const [isFocused, setIsFocused] = React.useState(false);
+  // State hook for managing the value(s) selected by the user, initialized with the default value
+  const [value, setValue] = React.useState<string | string[]>(defaultValue);
+  // State hook for keeping track of the currently highlighted index in the options list
+  const [highlightedIndex, setHighlightedIndex] = React.useState<number>(0);
+  // State hook for managing visibility of the Select dropdown, initially set to hidden
+  const [hide, setHide] = React.useState(true);
+
+  // Returns an object containing all stateful values and their associated setters to manage the Select component's state
+  return {
+    id,
+    value,
+    setValue,
+    hide,
+    setHide,
+    isHovered,
+    setIsHovered,
+    isFocused,
+    setIsFocused,
+    highlightedIndex,
+    setHighlightedIndex,
+  };
+};
+// Initializes another custom hook 'useItemState' for managing the hover state of each Select item
+export const useItemState = () => {
+  // State hook for tracking mouse hover status over individual Select item options
+  const [isHovered, setIsHovered] = React.useState(false);
+  // Returns an object with 'isHovered' state and its associated setter from the 'useItemState' hook, for controlling individual Select item hover state
+  return { isHovered, setIsHovered };
+};
+
+================
+File: src/components/Form/Select/Select.tsx
+================
+import React from 'react';
+import { SelectProps } from './Select/Select.props';
+import { useSelectState } from './Select/Select.state';
+import SelectView from './Select/Select.view';
+
+// Defines a functional component named 'SelectComponent', which is expected to receive 'SelectProps' as properties.
+const SelectComponent: React.FC<SelectProps> = (props) => {
+  // Ensure options is always an array
+  const safeProps = {
+    ...props,
+    options: props.options || [],
+  };
+
+  // Invokes the 'useSelectState' hook with props to obtain stateful logic for the Select component.
+  const selectStates = useSelectState(safeProps);
+
+  // Renders the 'SelectView' component, passing along any states controlled by 'useSelectState' and all properties passed to 'SelectComponent'.
+  return (
+    <SelectView
+      {...selectStates}
+      {...safeProps}
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+        // Stop propagation to prevent the global click handler from closing other dropdowns
+        e.stopPropagation();
+        if (props.onClick) props.onClick(e);
+      }}
+    />
+  );
+};
+
+// Exports 'SelectComponent' as 'Select', making it available for import in other parts of the application.
+export const Select = SelectComponent;
+
+================
+File: src/components/Form/Select/examples/Form.tsx
+================
+import React from 'react';
+import { Button } from '../../../Button/Button';
+import { Vertical } from 'app-studio';
+
+import { Select } from '../Select';
+
+export const FormSelect = () => {
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    alert(`You selected: ${formData.getAll('formItem')}`);
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <Vertical gap={10} width="100%">
+        <Select
+          id="formItem"
+          name="formItem"
+          options={[
+            { label: 'Item1', value: '1' },
+            { label: 'Item2', value: '2' },
+            { label: 'Item3', value: '3' },
+          ]}
+          placeholder="Select an item..."
+        />
+        <Button type="submit" alignSelf="center">
+          Submit
+        </Button>
+      </Vertical>
+    </form>
+  );
+};
+
+================
+File: src/components/Form/Select/examples/index.ts
+================
+export * from './Color';
+export * from './Default';
+export * from './designSystem';
+export * from './Disabled';
+export * from './Error';
+export * from './Form';
+export * from './HelperText';
+export * from './Multiple';
+export * from './ReadOnlyInput';
+export * from './Shadow';
+export * from './SizeInput';
+export * from './StylesInput';
+export * from './isScrollable';
+
+================
+File: src/components/Form/Select/examples/SizeInput.tsx
+================
+import React from 'react';
+import { Vertical } from 'app-studio';
+
+import { Select } from '../Select';
+
+export const SizeSelect = () => {
+  const options = [
+    { label: 'Item1', value: '1' },
+    { label: 'Item2', value: '2' },
+    { label: 'Item3', value: '3' },
+  ];
+  return (
+    <Vertical gap={10}>
+      <Select name="sm" size="sm" placeholder="sm" options={options} />
+      <Select name="md" size="md" placeholder="md" options={options} />
+      <Select name="lg" size="lg" placeholder="lg" options={options} />
+      <Select name="xl" size="xl" placeholder="xl" options={options} />
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Form/Select/examples/StylesInput.tsx
+================
+import React from 'react';
+
+import { Select } from '../Select';
+
+export const StyledSelect = () => (
+  <Select
+    options={[
+      { label: 'Item1', value: '1' },
+      { label: 'Item2', value: '2' },
+      { label: 'Item3', value: '3' },
+    ]}
+    views={{
+      selectBox: { borderRadius: 10, border: '1px solid purple' },
+      text: { color: 'red', fontSize: 12 },
+      label: { fontWeight: 'bold', color: 'theme.primary' },
+    }}
+  />
+);
+
+================
+File: src/components/Form/Select/Select/Select.type.d.ts
+================
+// Defines a 'Size' type with predefined size options for the Select component.
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+// Declares a 'Shape' type with predefined shape options for the corners of the Select component.
+export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
+// Specifies a 'Variant' type representing the visual style variations of the Select component.
+export type Variant = 'outline' | 'default' | 'none';
+// Initiates a 'SelectStyles' type outlining style properties applicable to the Select component.
+export type SelectStyles = {
+  text?: ViewProps;
+  icon?: ViewProps;
+  dropDown?: ViewProps;
+  selectBox?: ViewProps;
+  label?: ViewProps;
+  helperText?: ViewProps;
+  field?: ViewProps;
+};
+// Defines an 'Option' interface representing individual options within the Select component.
+export interface Option {
+  // The 'label' property in 'Option' interface, which represents the display text for the option.
+  label: string;
+  // The 'value' property in 'Option' interface, indicating the actual value the option represents.
+  value: string;
 }
 
+================
+File: src/components/Form/Select/examples/Color.tsx
+================
+import React from 'react';
+import { Vertical } from 'app-studio';
+
+import { Select } from '../Select';
+
+export const ColorDemo = () => (
+  <Vertical gap={15}>
+    {[
+      'theme.primary',
+      'theme.secondary',
+      'theme.error',
+      'theme.success',
+      'theme.warning',
+    ].map((color) => (
+      <Select
+        key={color}
+        options={[
+          { label: 'Item1', value: '1' },
+          { label: 'Item2', value: '2' },
+          { label: 'Item3', value: '3' },
+        ]}
+      />
+    ))}
+  </Vertical>
+);
+
+================
+File: src/components/Form/Select/Select/Select.props.ts
+================
+import { Elevation } from '../../../../utils/elevation';
+import { InputProps, Shadow, ViewProps } from 'app-studio';
+import { SelectStyles, Shape, Size, Variant, Option } from './Select.type';
+// Defines the interface for Select component properties, extending from InputProps but omitting 'size'
+export interface SelectProps extends Omit<InputProps, 'size'> {
+  // Optional string identifier for the select element
+  id?: string;
+  // Flag to indicate if the select has an error state
+  error?: boolean;
+  // Name attribute for the select element, useful for form submission
+  name?: string;
+  // Label text associated with the select element
+  label?: string;
+  // Helper text that appears below the select box
+  helperText?: string;
+  // Placeholder text shown when the select is empty
+  placeholder?: string;
+  // Array of options that the user can choose from
+  options: Option[];
+  // Boolean to allow multi-selection
+  isMulti?: boolean;
+  // Boolean to set the select as read-only, preventing user modification
+  isReadOnly?: boolean;
+  // Boolean to disable the select element
+  isDisabled?: boolean;
+  // Function that handles the change event when the selected option(s) change
+  onChange?: (value: any) => void;
+  // Determines the overall shape of the select box, e.g., rounded or sharp edges
+  shape?: Shape;
+  // Defines the styling variant for the select component
+  variant?: Variant;
+  // Custom styles that can be applied to the select component
+  views?: SelectStyles;
+  // Defines the size of the component
+  size?: Size;
+  // Determines the shadow property of the select component
+  shadow?: Shadow | Elevation | ViewProps;
+  // Boolean to control whether the select options are scrollable
+  isScrollable?: boolean;
+}
+export interface SelectViewProps extends SelectProps {
+  value: string | Array<string>;
+  setValue: Function;
+  hide: boolean;
+  setHide: Function;
+  isHovered: boolean;
+  setIsHovered: Function;
+  isFocused: boolean;
+  setIsFocused: Function;
+}
+export interface SelectBoxProps {
+  options: Option[];
+  value?: string | Array<string>;
+  isDisabled?: boolean;
+  placeholder?: string;
+  removeOption?: Function;
+  views?: SelectStyles;
+  size?: Size;
+}
+export interface MultiSelectProps extends Omit<InputProps, 'size'> {
+  option: string;
+  removeOption: Function;
+  size?: Size;
+}
+export interface ItemProps extends Omit<InputProps, 'size'> {
+  callback?: Function;
+  option: Option;
+  size?: Size;
+  style?: SelectStyles;
+}
+export interface HiddenSelectProps extends Omit<InputProps, 'size'> {
+  id?: string;
+  name?: string;
+  value: string | Array<string>;
+  isMulti?: boolean;
+  isReadOnly?: boolean;
+  isDisabled?: boolean;
+  onChange?: (value: any) => void;
+  options: Option[];
+}
+export interface DropDownProps extends Omit<InputProps, 'size'> {
+  size?: Size;
+  callback?: Function;
+  options: Option[];
+  views?: SelectStyles;
+}
+
+================
+File: src/components/Form/Select/examples/designSystem.tsx
+================
 /**
- * Title View Component
+ * Select Examples - Design System
  *
- * Renders a title with optional highlighting and animations for hero sections.
+ * Showcases the Select component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
  */
-const TitleView: React.FC<TitleProps> = ({
-  children,
-  highlightText, // Original highlightText, used for initial state in useTitleState
-  highlightStyle = 'background',
-  highlightColor = 'theme.primary',
-  highlightSecondaryColor,
-  animation = 'none',
-  size = 'xl',
-  centered = false,
-  views,
-  ...props // This includes alternateAnimation, alternateHighlightText, alternateDuration etc.
+
+import React from 'react';
+import { Select } from '../Select';
+import { Vertical } from 'app-studio';
+import { Text } from '../../../Text/Text';
+import { View } from 'app-studio';
+
+// Sample options for all examples
+const sampleOptions = [
+  { label: 'Option 1', value: '1' },
+  { label: 'Option 2', value: '2' },
+  { label: 'Option 3', value: '3' },
+  { label: 'Option 4', value: '4' },
+  { label: 'Option 5', value: '5' },
+];
+
+// Sample options for categories
+const categoryOptions = [
+  { label: 'Productivity', value: 'productivity' },
+  { label: 'Development', value: 'development' },
+  { label: 'Design', value: 'design' },
+  { label: 'Marketing', value: 'marketing' },
+  { label: 'Finance', value: 'finance' },
+];
+
+// Sample options for countries
+const countryOptions = [
+  { label: 'United States', value: 'us' },
+  { label: 'Canada', value: 'ca' },
+  { label: 'United Kingdom', value: 'uk' },
+  { label: 'Australia', value: 'au' },
+  { label: 'Germany', value: 'de' },
+  { label: 'France', value: 'fr' },
+  { label: 'Japan', value: 'jp' },
+  { label: 'Brazil', value: 'br' },
+  { label: 'India', value: 'in' },
+  { label: 'China', value: 'cn' },
+];
+
+export const DesignSystemSelects = () => (
+  <Vertical gap={24}>
+    {/* Size Variants */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Size Variants
+      </Text>
+      <Vertical gap={16}>
+        <Select
+          size="xs"
+          options={sampleOptions}
+          placeholder="Extra Small Select"
+        />
+
+        <Select size="sm" options={sampleOptions} placeholder="Small Select" />
+
+        <Select
+          size="md"
+          options={sampleOptions}
+          placeholder="Medium Select (Default)"
+        />
+
+        <Select size="lg" options={sampleOptions} placeholder="Large Select" />
+
+        <Select
+          size="xl"
+          options={sampleOptions}
+          placeholder="Extra Large Select"
+        />
+      </Vertical>
+    </View>
+
+    {/* Shape Variants */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Shape Variants
+      </Text>
+      <Vertical gap={16}>
+        <Select
+          shape="default"
+          options={sampleOptions}
+          placeholder="Default Shape (Rounded)"
+        />
+
+        <Select
+          shape="sharp"
+          options={sampleOptions}
+          placeholder="Sharp Corners"
+        />
+
+        <Select
+          shape="rounded"
+          options={sampleOptions}
+          placeholder="Rounded Corners"
+        />
+
+        <Select
+          shape="pillShaped"
+          options={sampleOptions}
+          placeholder="Pill Shaped"
+        />
+      </Vertical>
+    </View>
+
+    {/* Style Variants */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Style Variants
+      </Text>
+      <Vertical gap={16}>
+        <Select
+          variant="outline"
+          options={sampleOptions}
+          placeholder="Outline Variant"
+        />
+
+        <Select
+          variant="default"
+          options={sampleOptions}
+          placeholder="Default Variant (Underline)"
+        />
+
+        <Select
+          variant="none"
+          options={sampleOptions}
+          placeholder="No Border Variant"
+          shadow={{
+            boxShadow:
+              '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
+          }}
+        />
+      </Vertical>
+    </View>
+
+    {/* States */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        States
+      </Text>
+      <Vertical gap={16}>
+        <Select options={sampleOptions} placeholder="Default State" />
+
+        <Select
+          options={sampleOptions}
+          placeholder="Disabled State"
+          isDisabled
+        />
+
+        <Select
+          options={sampleOptions}
+          placeholder="Read-only State"
+          isReadOnly
+        />
+
+        <Select
+          options={sampleOptions}
+          placeholder="Error State"
+          error={true}
+
+          // error="This field is required"
+        />
+
+        <Select
+          options={sampleOptions}
+          placeholder="With Helper Text"
+          helperText="This is some helpful information"
+        />
+      </Vertical>
+    </View>
+
+    {/* With Labels */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        With Labels
+      </Text>
+      <Vertical gap={16}>
+        <Select
+          label="Category"
+          options={categoryOptions}
+          placeholder="Select a category"
+        />
+
+        <Select
+          label="Country"
+          options={countryOptions}
+          placeholder="Select a country"
+        />
+
+        <Select
+          label="Priority"
+          options={[
+            { label: 'Low', value: 'low' },
+            { label: 'Medium', value: 'medium' },
+            { label: 'High', value: 'high' },
+          ]}
+          placeholder="Select priority level"
+        />
+      </Vertical>
+    </View>
+
+    {/* Multi-Select */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Multi-Select
+      </Text>
+      <Vertical gap={16}>
+        <Select
+          isMulti
+          label="Categories"
+          options={categoryOptions}
+          placeholder="Select multiple categories"
+        />
+
+        <Select
+          isMulti
+          label="Countries"
+          options={countryOptions}
+          placeholder="Select multiple countries"
+        />
+      </Vertical>
+    </View>
+
+    {/* Custom Styling */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Custom Styling
+      </Text>
+      <Vertical gap={16}>
+        <Select
+          options={sampleOptions}
+          placeholder="Primary Theme"
+          views={{
+            selectBox: {
+              borderColor: 'theme.primary',
+              borderWidth: '2px',
+            },
+            label: {
+              color: 'theme.primary',
+              fontWeight: '600',
+            },
+            text: {
+              color: 'theme.primary',
+            },
+          }}
+        />
+
+        <Select
+          options={sampleOptions}
+          placeholder="Custom Border Radius"
+          views={{
+            selectBox: {
+              borderRadius: '16px',
+              borderColor: 'color.purple.400',
+              backgroundColor: 'color.purple.50',
+            },
+            dropDown: {
+              borderRadius: '16px',
+              borderColor: 'color.purple.400',
+            },
+          }}
+        />
+
+        <Select
+          options={sampleOptions}
+          placeholder="Custom Shadow"
+          variant="none"
+          shadow={{
+            boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
+          }}
+          views={{
+            selectBox: {
+              borderRadius: '8px',
+              backgroundColor: 'color.white',
+              transition: 'all 0.3s ease',
+              _hover: {
+                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
+                transform: 'translateY(-2px)',
+              },
+            },
+          }}
+        />
+      </Vertical>
+    </View>
+  </Vertical>
+);
+
+================
+File: src/components/Form/Select/Select/Select.style.ts
+================
+/**
+ * Select Styles
+ *
+ * Defines the styles for the Select component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
+
+import { ViewProps } from 'app-studio';
+import { Size } from './Select.type';
+
+/**
+ * Size configurations for the Select component
+ * Following the 4px grid system
+ */
+export const Sizes: Record<Size, ViewProps> = {
+  xs: { height: '24px', width: '24px' }, // 6 × 4px grid
+  sm: { height: '32px', width: '32px' }, // 8 × 4px grid
+  md: { height: '40px', width: '40px' }, // 10 × 4px grid
+  lg: { height: '48px', width: '48px' }, // 12 × 4px grid
+  xl: { height: '56px', width: '56px' }, // 14 × 4px grid
+};
+
+/**
+ * Icon sizes for the Select component
+ * Proportional to the component size
+ */
+export const IconSizes: Record<Size, number> = {
+  xs: 12, // 3 × 4px grid
+  sm: 16, // 4 × 4px grid
+  md: 20, // 5 × 4px grid
+  lg: 24, // 6 × 4px grid
+  xl: 28, // 7 × 4px grid
+};
+
+/**
+ * Dropdown styles for the Select component
+ */
+export const dropdownStyles: ViewProps = {
+  // Layout properties
+  width: '100%',
+  maxHeight: '240px', // 60 × 4px grid
+  overflowY: 'auto',
+  zIndex: 1000,
+
+  // Visual properties
+  backgroundColor: 'color.white',
+  borderRadius: '8px', // Consistent with design system (rounded-md)
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: 'color.gray.200',
+
+  // Shadow
+  boxShadow:
+    '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+
+  // Animation
+  transition: 'all 0.2s ease',
+};
+
+================
+File: src/components/Form/Select/Select/Select.view.tsx
+================
+import React, { useCallback } from 'react';
+import { Element } from 'app-studio';
+import { Typography } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Text } from '../../../Text/Text';
+import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Input/FieldContent/FieldContent';
+import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';
+import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
+import { ChevronIcon, CloseIcon } from '../../../Icon/Icon';
+import {
+  DropDownProps,
+  HiddenSelectProps,
+  ItemProps,
+  MultiSelectProps,
+  SelectBoxProps,
+  SelectViewProps,
+} from './Select.props';
+import { useItemState } from './Select.state';
+import { IconSizes } from './Select.style';
+/**
+ * Item Component
+ *
+ * Renders an individual option item in the select dropdown
+ */
+const Item: React.FC<ItemProps> = ({
+  isHovered,
+  setIsHovered,
+  option,
+  size = 'md',
+  callback = () => {},
+  style,
+  ...props
 }) => {
-  // Use the inView hook to detect when the component is visible
-  const { ref, inView } = useInView();
-
-  // Get theme utilities
-  const { getColor, themeMode: contextThemeMode } = useTheme();
-  const themeMode = props.themeMode || contextThemeMode;
-
-  // Resolve theme colors
-  const resolvedHighlightColor = getColor(highlightColor, { themeMode });
-  const resolvedSecondaryColor = highlightSecondaryColor
-    ? getColor(highlightSecondaryColor, { themeMode })
-    : undefined;
-
-  // Get state and animation functions from custom hook
-  const {
-    displayTextForTypewriter,
-    getAnimation,
-    finalDisplayedText, // This is the text to display (e.g., "Our Product is Amazing")
-    activeHighlightTarget, // This is what to highlight (e.g., "Amazing" or ["multiple", "highlights"])
-  } = useTitleState({
-    children,
-    highlightText,
-    animation,
-    _isInView: inView,
-    ...props, // Pass all other relevant props like alternateAnimation, alternateHighlightText, alternateDuration
-  });
-
-  // Get animation configuration only when the component is in view
-  // For typewriter animation, we don't need an animation config as it's handled by useState/useEffect
-  const animationConfig =
-    inView && animation !== 'typewriter' ? getAnimation() : undefined;
-
-  // Get highlight styles
-  const highlightStyleProps = HighlightStyles[highlightStyle](
-    resolvedHighlightColor,
-    resolvedSecondaryColor
-  );
-
-  // Get font size and line height based on size prop
-  const fontSize = TitleSizes[size];
-  const lineHeight = LineHeights[size];
-
-  // Determine the content to be processed for rendering and potential highlighting
-  // If typewriter, it's displayTextForTypewriter. Otherwise, it's finalDisplayedText.
-  const textForRenderingAndHighlighting =
-    animation === 'typewriter' ? displayTextForTypewriter : finalDisplayedText;
-
-  // If the textForRenderingAndHighlighting is a string and we have activeHighlightTarget
-  if (
-    typeof textForRenderingAndHighlighting === 'string' &&
-    activeHighlightTarget
-  ) {
-    const text = textForRenderingAndHighlighting; // Current text to display
-
-    // For a single highlight text (string)
-    if (typeof activeHighlightTarget === 'string') {
-      type TextPart = string | { highlight: boolean; text: string };
-      const pattern = new RegExp(
-        `(${escapeRegExp(activeHighlightTarget)})`,
-        'gi'
-      );
-
-      if (pattern.test(text)) {
-        pattern.lastIndex = 0; // Reset regex
-        const parts: TextPart[] = [];
-        let lastIndex = 0;
-        let match: RegExpExecArray | null;
-
-        while ((match = pattern.exec(text)) !== null) {
-          if (match.index > lastIndex) {
-            parts.push(text.substring(lastIndex, match.index));
-          }
-          parts.push({ highlight: true, text: match[0] });
-          lastIndex = match.index + match[0].length;
-        }
-        if (lastIndex < text.length) {
-          parts.push(text.substring(lastIndex));
-        }
-
-        return (
-          <Element
-            ref={ref}
-            as="h1"
-            fontSize={fontSize}
-            lineHeight={`${lineHeight}px`}
-            fontWeight="bold"
-            textAlign={centered ? 'center' : 'left'}
-            animate={animationConfig}
-            {...props}
-            {...views?.container}
-          >
-            {parts.map((part, index) => (
-              <React.Fragment key={index}>
-                {typeof part === 'string' ? (
-                  part
-                ) : (
-                  <Text
-                    as="span"
-                    display="inline"
-                    {...highlightStyleProps}
-                    {...views?.highlight}
-                  >
-                    {part.text}
-                  </Text>
-                )}
-              </React.Fragment>
-            ))}
-          </Element>
-        );
-      }
+  // Handles the click event on an option by invoking the callback with the selected option's value
+  const handleOptionClick = (e: React.MouseEvent, option: string) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (typeof callback === 'function') {
+      callback(option);
     }
+  };
 
-    // For multiple highlight texts (array of strings)
-    if (Array.isArray(activeHighlightTarget)) {
-      type TextPart = string | { highlight: boolean; text: string };
-      const pattern = new RegExp(
-        `(${activeHighlightTarget.map(escapeRegExp).join('|')})`,
-        'gi'
-      );
+  // Toggles the hover state on the item
+  const handleHover = () => setIsHovered(!isHovered);
 
-      if (pattern.test(text)) {
-        pattern.lastIndex = 0; // Reset regex
-        const parts: TextPart[] = [];
-        let lastIndex = 0;
-        let match: RegExpExecArray | null;
-
-        while ((match = pattern.exec(text)) !== null) {
-          if (match.index > lastIndex) {
-            parts.push(text.substring(lastIndex, match.index));
-          }
-          parts.push({ highlight: true, text: match[0] });
-          lastIndex = match.index + match[0].length;
-        }
-        if (lastIndex < text.length) {
-          parts.push(text.substring(lastIndex));
-        }
-
-        return (
-          <Element
-            ref={ref}
-            as="h1"
-            fontSize={fontSize}
-            lineHeight={`${lineHeight}px`}
-            fontWeight="bold"
-            textAlign={centered ? 'center' : 'left'}
-            animate={animationConfig}
-            {...props}
-            {...views?.container}
-          >
-            {parts.map((part, index) => (
-              <React.Fragment key={index}>
-                {typeof part === 'string' ? (
-                  part
-                ) : (
-                  <Text
-                    as="span"
-                    display="inline"
-                    {...highlightStyleProps}
-                    {...views?.highlight}
-                    key={part.text}
-                  >
-                    {part.text}
-                  </Text>
-                )}
-              </React.Fragment>
-            ))}
-          </Element>
-        );
-      }
-    }
-  }
-
-  // Default rendering for non-string children or no (matching) highlighting
   return (
     <Element
-      ref={ref}
-      as="h1"
-      fontSize={fontSize}
-      lineHeight={`${lineHeight}px`}
-      fontWeight="bold"
-      textAlign={centered ? 'center' : 'left'}
-      animate={animationConfig}
+      as="li"
+      // Layout properties
+      margin={0}
+      paddingVertical={8} // 2 × 4px grid
+      paddingHorizontal={8} // 2 × 4px grid
+      listStyleType="none"
+      cursor="pointer"
+      // Event handlers
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}
+      onClick={(e: React.MouseEvent) => handleOptionClick(e, option.value)}
+      // Visual properties
+      backgroundColor={isHovered ? 'color.gray.100' : 'transparent'}
+      borderRadius="4px" // Subtle rounded corners for items
+      // Animation
+      transition="all 0.15s ease"
+      // Apply custom props
       {...props}
-      {...views?.container}
     >
-      {textForRenderingAndHighlighting}
+      <Text
+        // Typography properties
+        fontSize={Typography.fontSizes[size]}
+        fontWeight="400" // Regular weight
+        lineHeight="1.5"
+        // Apply custom styles
+        {...style}
+      >
+        {option.label}
+      </Text>
     </Element>
   );
 };
+/**
+ * SelectBox Component
+ *
+ * Renders the main select box with selected value(s)
+ */
+const SelectBox: React.FC<SelectBoxProps> = ({
+  size = 'md',
+  views = { field: {}, text: {} },
+  value,
+  isDisabled,
+  placeholder,
+  removeOption = () => {},
+  options,
+}) => {
+  /**
+   * Styles for the select field
+   */
+  const fieldStyles = {
+    // Layout properties
+    margin: 0,
+    width: '95%',
+    height: '100%',
+    border: 'none',
+    paddingVertical: 4, // 3 × 4px grid
+    paddingHorizontal: 0,
 
-export default TitleView;
+    // Typography properties
+    fontSize: Typography.fontSizes[size],
+
+    fontWeight: '400', // Regular weight
+    lineHeight: '1.5',
+    letterSpacing: '-0.01em', // Slight negative tracking for modern look
+
+    // Visual properties
+    backgroundColor: 'transparent',
+    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+
+    // State properties
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
+
+    // Animation
+    transition: 'all 0.2s ease',
+
+    // Apply custom styles
+    ...views['field'],
+    ...views['text'],
+  };
+  const option: any =
+    options.length > 0 && options.find((option) => option.value === value);
+  return (
+    <Text {...fieldStyles}>
+      {/* Check if value is an empty string or if value is an array but with no items, then show placeholder */}
+      {(value === '' || (Array.isArray(value) && value.length === 0)) &&
+      !!placeholder ? (
+        placeholder
+      ) : (
+        <>
+          {/* If value is a string, use the option label or value */}
+          {typeof value === 'string' ? (
+            (option && option.label) ?? value
+          ) : // If value is an array and not empty, render MultiSelect options
+          Array.isArray(value) && value.length > 0 ? (
+            <Horizontal gap={6}>
+              {value.map((option) => (
+                <MultiSelect
+                  key={option}
+                  option={option}
+                  removeOption={removeOption}
+                />
+              ))}
+            </Horizontal>
+          ) : (
+            // Handle any other types of value (including objects or unexpected values)
+            <span>{value}</span>
+          )}
+        </>
+      )}
+    </Text>
+  );
+};
+const HiddenSelect: React.FC<HiddenSelectProps> = ({
+  id,
+  name,
+  value,
+  onChange,
+  isMulti = false,
+  isDisabled = false,
+  isReadOnly = false,
+  options = [],
+  ...props
+}) => {
+  const handleChange = (event: any) => {
+    if (onChange) onChange(event);
+  };
+  return (
+    <Element
+      id={id}
+      name={name}
+      as="select"
+      opacity={0}
+      width={0}
+      height={0}
+      position="absolute"
+      value={value}
+      disabled={isDisabled}
+      readOnly={isReadOnly}
+      onChange={handleChange}
+      multiple={isMulti}
+      {...props}
+    >
+      {options.length > 0 &&
+        options.map((option) => {
+          return (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          );
+        })}
+    </Element>
+  );
+};
+/**
+ * DropDown Component
+ *
+ * Renders the dropdown list of options for the select component
+ */
+const DropDown: React.FC<DropDownProps> = ({
+  size,
+  views = {},
+  options,
+  callback = () => {},
+  highlightedIndex,
+  setHighlightedIndex,
+}) => {
+  const itemStates = useItemState();
+  const handleCallback = (option: string) => callback(option);
+
+  // Shadow styles for the dropdown - now applied directly in the Element
+
+  return (
+    <Element
+      as="ul"
+      role="dropdown"
+      top="100%"
+      left="0"
+      width="100%"
+      display="flex"
+      flexDirection="column"
+      position="absolute"
+      marginTop={8} // 2 × 4px grid
+      marginLeft={0}
+      marginRight={0}
+      marginBottom={0}
+      padding={8}
+      maxHeight="240px" // 60 × 4px grid
+      overflowY="auto"
+      zIndex={1000}
+      backgroundColor="color.white"
+      borderRadius="8px" // Consistent with design system (rounded-md)
+      borderWidth="1px"
+      borderStyle="solid"
+      borderColor="color.gray.200"
+      transition="all 0.2s ease"
+      boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+      style={{
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'rgba(0, 0, 0, 0.2) transparent',
+        '&::-webkit-scrollbar': {
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'rgba(0, 0, 0, 0.2)',
+          borderRadius: '4px',
+        },
+      }}
+      {...views?.dropDown}
+    >
+      {options &&
+        options.length > 0 &&
+        options.map((option, index) => (
+          <Item
+            key={option.value}
+            size={size}
+            style={views['text']}
+            option={option}
+            callback={handleCallback}
+            backgroundColor={
+              index === highlightedIndex ? 'color.gray.100' : 'transparent'
+            }
+            onMouseEnter={() => setHighlightedIndex(index)}
+            {...itemStates}
+          />
+        ))}
+    </Element>
+  );
+};
+/**
+ * MultiSelect Component
+ *
+ * Renders a selected option in a multi-select component
+ */
+export const MultiSelect: React.FC<MultiSelectProps> = ({
+  option,
+  size = 'md',
+  removeOption = () => {},
+  ...props
+}) => {
+  const handleClick = () => removeOption(option);
+
+  return (
+    <Horizontal
+      gap={8}
+      padding={8}
+      alignItems="center"
+      borderRadius="6px"
+      backgroundColor="color.gray.200"
+      fontSize={Typography.fontSizes[size]}
+      onClick={(event: any) => event.stopPropagation()}
+      transition="all 0.2s ease"
+      {...props}
+    >
+      <Text
+        size={size}
+        fontWeight="500" // Medium weight
+      >
+        {option}
+      </Text>
+
+      <CloseIcon
+        role="close-button"
+        color="inherit"
+        widthHeight={IconSizes[size]}
+        onClick={handleClick}
+        transition="all 0.2s ease"
+        _hover={{
+          opacity: 0.7,
+        }}
+      />
+    </Horizontal>
+  );
+};
+const SelectView: React.FC<SelectViewProps> = ({
+  id,
+  name,
+  label,
+  value,
+  placeholder,
+  helperText,
+  hide = false,
+  error = false,
+  isMulti = false,
+  isFocused = false,
+  isHovered = false,
+  isDisabled = false,
+  isReadOnly = false,
+  options = [],
+  shadow = {},
+  size = 'md',
+  shape = 'default',
+  variant = 'default',
+  views = {
+    text: {},
+    icon: {},
+    dropDown: {},
+    selectBox: {},
+    label: {},
+    helperText: {},
+  },
+  onChange = () => {},
+  setHide = () => {},
+  setValue = () => {},
+  setIsHovered = () => {},
+  setIsFocused = () => {},
+  setHighlightedIndex,
+  highlightedIndex,
+  ...props
+}) => {
+  // Add a global click handler to close the dropdown when clicking outside
+  React.useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Only close if clicking outside of this specific select component
+      if (!target.closest(`#${id}`) && !hide) {
+        setHide(true);
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick);
+    return () => {
+      document.removeEventListener('click', handleGlobalClick);
+    };
+  }, [id, hide, setHide]);
+  const showLabel = !!(isFocused && label);
+  const handleHover = () => setIsHovered(!isHovered);
+  const handleFocus = () => setIsFocused(true);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (event && event.stopPropagation) event.stopPropagation();
+
+    // Toggle dropdown visibility
+    const newHideState = !hide;
+    setHide(newHideState);
+    setIsFocused(!newHideState); // Set focus state based on dropdown visibility
+  };
+  const handleCallback = useCallback(
+    (option: string) => {
+      // Close dropdown after selection
+      setHide(true);
+
+      // Update value based on multi-select or single-select mode
+      if (isMulti && Array.isArray(value)) {
+        if (!value.includes(option)) {
+          const newValue = [...value, option];
+          setValue(newValue);
+          if (onChange) onChange(option);
+        }
+      } else {
+        setValue(option);
+        if (onChange) onChange(option);
+      }
+
+      // Set focus to indicate selection
+      setIsFocused(true);
+    },
+    [isMulti, value, setHide, setValue, onChange, setIsFocused]
+  );
+  const handleRemoveOption = (valueOption: string) => {
+    if (Array.isArray(value) && value.includes(valueOption)) {
+      const newValue = value.filter((option) => option !== valueOption);
+      setValue(newValue.length === 0 ? [] : newValue);
+    }
+  };
+  return (
+    <FieldContainer
+      id={id}
+      role="SelectBox"
+      helperText={helperText}
+      error={error}
+      views={views}
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+        // Stop propagation to prevent clicks from bubbling up
+        e.stopPropagation();
+
+        // Only handle click if not disabled or readonly
+        if (!(isDisabled || isReadOnly)) {
+          handleClick(e as unknown as React.MouseEvent<HTMLButtonElement>);
+        }
+      }}
+    >
+      <FieldContent
+        label={label}
+        size={size}
+        error={error}
+        shape={shape}
+        views={views}
+        shadow={shadow}
+        variant={variant}
+        value={value}
+        color={'theme.primary'}
+        isHovered={isHovered}
+        isDisabled={isDisabled}
+        isReadOnly={isReadOnly}
+        isFocused={isFocused}
+        showLabel={showLabel}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleHover}
+      >
+        <FieldWrapper>
+          {showLabel && (
+            <FieldLabel
+              htmlFor={id}
+              color={'theme.primary'}
+              error={error}
+              {...views}
+            >
+              {label}
+            </FieldLabel>
+          )}
+          <HiddenSelect
+            id={id}
+            name={name}
+            options={options}
+            onChange={onChange}
+            value={value}
+            isDisabled={isDisabled}
+            isReadOnly={isReadOnly}
+            isMulti={isMulti}
+            onFocus={handleFocus}
+            {...props}
+          />
+          <SelectBox
+            options={options}
+            size={size}
+            views={views}
+            value={value}
+            isDisabled={isDisabled}
+            placeholder={placeholder}
+            removeOption={handleRemoveOption}
+          />
+        </FieldWrapper>
+        <FieldIcons>
+          {!isReadOnly && !isDisabled && (
+            <>
+              {hide ? (
+                <ChevronIcon
+                  color="inherit"
+                  widthHeight={IconSizes[size]}
+                  style={views.icon}
+                  orientation="down"
+                />
+              ) : (
+                <ChevronIcon
+                  color="inherit"
+                  orientation="up"
+                  widthHeight={IconSizes[size]}
+                  style={views.icon}
+                />
+              )}
+            </>
+          )}
+        </FieldIcons>
+      </FieldContent>
+      {!hide && options && options.length > 0 && (
+        <Element onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+          <DropDown
+            size={size}
+            views={views}
+            options={options}
+            callback={handleCallback}
+            highlightedIndex={highlightedIndex}
+            setHighlightedIndex={setHighlightedIndex}
+          />
+        </Element>
+      )}
+    </FieldContainer>
+  );
+};
+export default SelectView;
 
 
 

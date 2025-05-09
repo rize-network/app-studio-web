@@ -11,8 +11,10 @@ export interface SwitchProps extends Omit<InputProps, 'size'> {
   isDisabled?: boolean;
   // Determines if the switch is read-only.
   isReadOnly?: boolean;
+  // Determines if the switch is checked (on).
+  isChecked?: boolean;
   // Callback function to handle the change event.
-  onChange?: Function;
+  onChange?: (checked: boolean) => void;
   // Name attribute for the switch component, useful for form submission.
   name?: string;
   // The content to be displayed when the switch is in an inactive state.

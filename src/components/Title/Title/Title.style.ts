@@ -54,8 +54,8 @@ export const HighlightStyles: Record<
   }),
   gradient: (color, secondaryColor) => ({
     background: `linear-gradient(135deg, ${color}, ${secondaryColor || color})`,
-    backgroundClip: 'text',
-    webkitBackgroundClip: 'text',
+    backgroundClip: 'text !important',
+    webkitBackgroundClip: 'text !important',
     color: 'transparent',
     webkitTextFillColor: 'transparent',
     display: 'inline-block',
