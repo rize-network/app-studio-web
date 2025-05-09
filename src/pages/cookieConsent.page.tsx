@@ -4,7 +4,7 @@ import {
   DefaultCookieConsent,
   CookieConsentVariants,
   CookieConsentPositions,
-  CustomCookieConsent
+  CustomCookieConsent,
 } from 'src/components/CookieConsent/examples';
 
 /**

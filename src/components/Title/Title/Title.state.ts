@@ -12,10 +12,79 @@ export const useTitleState = (props: TitleProps) => {
     animationDelay = '0s',
     children,
     _isInView = false,
+    alternateHighlightText = [],
+    alternateAnimation = false,
+    alternateDuration = 3000,
+    highlightText,
   } = props;
 
   // State for typewriter animation
   const [displayText, setDisplayText] = useState<string>('');
+
+  // State for alternating highlight text
+  const [currentHighlightText, setCurrentHighlightText] = useState<
+    string | string[] | undefined
+  >(highlightText);
+
+  // State for the alternating text content
+  const [alternatingContent, setAlternatingContent] = useState<
+    string | React.ReactNode
+  >(children);
+
+  // Handle alternating highlight text animation
+  useEffect(() => {
+    // Initialize with the provided highlightText
+    setCurrentHighlightText(highlightText);
+
+    // If not using alternating animation or no alternateHighlightText provided, return early
+    if (
+      !alternateAnimation ||
+      alternateHighlightText.length === 0 ||
+      !_isInView
+    ) {
+      return () => {};
+    }
+
+    // Only proceed if children is a string
+    if (typeof children !== 'string') {
+      return () => {};
+    }
+
+    // Set initial content with the first alternating text
+    const baseText = children as string;
+    let currentIndex = 0;
+
+    // Function to update the content with the current alternating text
+    const updateContent = (index: number) => {
+      if (highlightText && typeof highlightText === 'string') {
+        // Replace the highlightText with the current alternating text
+        const regex = new RegExp(highlightText, 'gi');
+        const newContent = baseText.replace(
+          regex,
+          alternateHighlightText[index]
+        );
+        setAlternatingContent(newContent);
+      }
+    };
+
+    // Set initial content
+    updateContent(currentIndex);
+
+    // Create interval to cycle through the alternateHighlightText array
+    const interval = setInterval(() => {
+      currentIndex = (currentIndex + 1) % alternateHighlightText.length;
+      updateContent(currentIndex);
+    }, alternateDuration);
+
+    return () => clearInterval(interval);
+  }, [
+    alternateAnimation,
+    alternateHighlightText,
+    alternateDuration,
+    highlightText,
+    children,
+    _isInView,
+  ]);
 
   // Handle typewriter animation
   useEffect(() => {
@@ -154,5 +223,7 @@ export const useTitleState = (props: TitleProps) => {
   return {
     displayText,
     getAnimation,
+    currentHighlightText,
+    alternatingContent,
   };
 };

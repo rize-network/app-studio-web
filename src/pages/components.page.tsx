@@ -115,7 +115,11 @@ export const componentList = [
   { name: 'TextArea', path: '/textarea', element: <TextAreaPage /> },
   { name: 'Textfield', path: '/textfield', element: <TextfieldPage /> },
   { name: 'Title', path: '/title', element: <TitlePage /> },
-  { name: 'CookieConsent', path: '/cookieconsent', element: <CookieConsentPage /> },
+  {
+    name: 'CookieConsent',
+    path: '/cookieconsent',
+    element: <CookieConsentPage />,
+  },
   { name: 'Toast', path: '/toast', element: <ToastPage /> },
   { name: 'Tooltip', path: '/tooltip', element: <TooltipPage /> },
   { name: 'Toggle', path: '/toggle', element: <TogglePage /> },

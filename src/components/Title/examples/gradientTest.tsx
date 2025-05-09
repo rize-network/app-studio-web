@@ -8,29 +8,32 @@ import { Vertical } from 'app-studio';
 export const GradientTest = () => {
   return (
     <Vertical gap={32}>
-      <Title 
-        highlightText="gradient" 
+      <Title
+        highlightText="gradient"
         highlightStyle="gradient"
-        highlightColor="#3b82f6"
-        highlightSecondaryColor="#8b5cf6"
+        // highlightColor="color.white"
+        // highlightSecondaryColor="color.red"
+
+        highlightColor="theme.primary"
+        highlightSecondaryColor="theme.secondary"
       >
         Text with gradient words using hex colors
       </Title>
-      
-      <Title 
-        highlightText="gradient" 
+
+      <Title
+        highlightText="gradient"
         highlightStyle="gradient"
-        highlightColor="rgb(59, 130, 246)"
-        highlightSecondaryColor="rgb(139, 92, 246)"
+        highlightColor="theme.primary"
+        highlightSecondaryColor="theme.secondary"
       >
         Text with gradient words using RGB colors
       </Title>
-      
-      <Title 
-        highlightText="gradient" 
+
+      <Title
+        highlightText="gradient"
         highlightStyle="gradient"
         highlightColor="color.blue.500"
-        highlightSecondaryColor="color.purple.500"
+        highlightSecondaryColor="color.red.500"
       >
         Text with gradient words using theme colors
       </Title>

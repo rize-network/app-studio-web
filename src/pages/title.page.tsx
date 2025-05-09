@@ -10,6 +10,7 @@ import {
   DirectAnimationExample,
   GradientTest,
   HighlightTest,
+  AlternatingTitle,
 } from 'src/components/Title/examples';
 
 /**
@@ -85,6 +86,13 @@ const TitlePage = () => {
             <td>Highlight Test</td>
             <td>
               <HighlightTest />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Alternating Highlight</td>
+            <td>
+              <AlternatingTitle />
             </td>
           </tr>
         </tbody>

@@ -6,7 +6,7 @@ import { View, Animation } from 'app-studio';
  */
 export const AnimationTest = () => {
   console.log('Animation object:', Animation);
-  
+
   return (
     <View
       width={200}

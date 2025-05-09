@@ -36,7 +36,12 @@ const TitleView: React.FC<TitleProps> = ({
     : undefined;
 
   // Get state and animation functions from custom hook
-  const { displayText, getAnimation } = useTitleState({
+  const {
+    displayText,
+    getAnimation,
+    currentHighlightText,
+    alternatingContent,
+  } = useTitleState({
     children,
     highlightText,
     highlightStyle,
@@ -62,20 +67,26 @@ const TitleView: React.FC<TitleProps> = ({
   const lineHeight = LineHeights[size];
 
   // For typewriter animation, use the displayText state
-  const content = animation === 'typewriter' ? displayText : children;
+  // For alternating animation, use the alternatingContent state
+  const content =
+    animation === 'typewriter'
+      ? displayText
+      : props.alternateAnimation && typeof alternatingContent === 'string'
+      ? alternatingContent
+      : children;
 
   // If the content is a simple string and we have highlight text
-  if (typeof children === 'string' && highlightText) {
+  if (typeof children === 'string' && currentHighlightText) {
     const text = children as string;
 
     // For a single highlight text
-    if (typeof highlightText === 'string') {
+    if (typeof currentHighlightText === 'string') {
       // Define a type for our parts array
       type TextPart = string | { highlight: boolean; text: string };
 
-      // Create a regex pattern to match the highlight text as a word
-      // Use word boundaries to ensure we match whole words
-      const pattern = new RegExp(`\\b(${highlightText})\\b`, 'gi');
+      // Create a regex pattern to match the highlight text
+      // Use a more flexible approach that can match within words
+      const pattern = new RegExp(`(${currentHighlightText})`, 'gi');
 
       // Check if the pattern matches anything in the text
       if (pattern.test(text)) {
@@ -138,12 +149,13 @@ const TitleView: React.FC<TitleProps> = ({
     }
 
     // For multiple highlight texts
-    if (Array.isArray(highlightText)) {
+    if (Array.isArray(currentHighlightText)) {
       // Define a type for our parts array
       type TextPart = string | { highlight: boolean; text: string };
 
-      // Create a regex pattern to match any of the highlight texts with word boundaries
-      const pattern = new RegExp(`\\b(${highlightText.join('|')})\\b`, 'gi');
+      // Create a regex pattern to match any of the highlight texts
+      // Use a more flexible approach that can match within words
+      const pattern = new RegExp(`(${currentHighlightText.join('|')})`, 'gi');
 
       // Check if the pattern matches anything in the text
       if (pattern.test(text)) {

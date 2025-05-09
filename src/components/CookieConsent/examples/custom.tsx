@@ -23,11 +23,9 @@ export const CustomCookieConsent = () => {
       <Text marginBottom={16}>
         Click the button to show a custom styled cookie consent banner
       </Text>
-      
-      <Button onClick={handleShowConsent}>
-        Show Custom Cookie Consent
-      </Button>
-      
+
+      <Button onClick={handleShowConsent}>Show Custom Cookie Consent</Button>
+
       {showConsent && (
         <CookieConsent
           title="Privacy Settings"

@@ -20,7 +20,7 @@ export const DirectAnimationExample = () => {
       >
         Direct Fade In Animation
       </View>
-      
+
       <View
         as="h1"
         fontSize={40}
@@ -34,7 +34,7 @@ export const DirectAnimationExample = () => {
       >
         Direct Slide In Animation
       </View>
-      
+
       <View
         as="h1"
         fontSize={40}

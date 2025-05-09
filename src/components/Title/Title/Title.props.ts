@@ -4,7 +4,7 @@ import {
   TitleAnimation,
   AnimationDirection,
   TitleSize,
-  TitleStyles
+  TitleStyles,
 } from './Title.type';
 
 /**
@@ -26,6 +26,27 @@ export interface TitleProps extends ViewProps {
    * If not provided, no highlighting will be applied
    */
   highlightText?: string | string[];
+
+  /**
+   * Array of strings to cycle through, replacing the text specified in highlightText
+   * Used with alternateAnimation to create an infinite loop of changing words
+   */
+  alternateHighlightText?: string[];
+
+  /**
+   * Enable alternating animation that replaces the highlightText with words from alternateHighlightText
+   * When enabled, the component will replace the text specified in highlightText with each word
+   * from alternateHighlightText in sequence, creating an infinite loop animation
+   * @default false
+   */
+  alternateAnimation?: boolean;
+
+  /**
+   * Duration for each alternation cycle in milliseconds
+   * Controls how long each word from alternateHighlightText is displayed before switching to the next
+   * @default 3000
+   */
+  alternateDuration?: number;
 
   /**
    * Style of the highlight effect

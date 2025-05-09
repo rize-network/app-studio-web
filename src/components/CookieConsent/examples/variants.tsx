@@ -23,21 +23,19 @@ export const CookieConsentVariants = () => {
       <Text marginBottom={16}>
         Click a button to show different cookie consent variants
       </Text>
-      
+
       <Vertical gap={8} marginBottom={16}>
         <Button onClick={() => handleShowVariant('default')}>
           Default Variant
         </Button>
-        
-        <Button onClick={() => handleShowVariant('info')}>
-          Info Variant
-        </Button>
-        
+
+        <Button onClick={() => handleShowVariant('info')}>Info Variant</Button>
+
         <Button onClick={() => handleShowVariant('primary')}>
           Primary Variant
         </Button>
       </Vertical>
-      
+
       {activeVariant === 'default' && (
         <CookieConsent
           variant="default"
@@ -45,7 +43,7 @@ export const CookieConsentVariants = () => {
           onCustomize={() => alert('Customize preferences clicked')}
         />
       )}
-      
+
       {activeVariant === 'info' && (
         <CookieConsent
           variant="info"
@@ -53,7 +51,7 @@ export const CookieConsentVariants = () => {
           onCustomize={() => alert('Customize preferences clicked')}
         />
       )}
-      
+
       {activeVariant === 'primary' && (
         <CookieConsent
           variant="primary"

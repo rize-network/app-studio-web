@@ -9,10 +9,12 @@ export const DefaultTitle = () => {
   return (
     <Vertical gap={32}>
       <Title>Simple Hero Title</Title>
-      
+
       <Title size="xl">Larger Hero Title</Title>
-      
-      <Title size="xl" centered>Centered Hero Title</Title>
+
+      <Title size="xl" centered>
+        Centered Hero Title
+      </Title>
     </Vertical>
   );
 };

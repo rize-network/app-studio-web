@@ -26,7 +26,7 @@ export const CustomTitle = () => {
       >
         Title with Custom Styling
       </Title>
-      
+
       <Title
         views={{
           container: {
@@ -43,7 +43,7 @@ export const CustomTitle = () => {
       >
         Another Custom Title Style
       </Title>
-      
+
       <Title
         views={{
           container: {

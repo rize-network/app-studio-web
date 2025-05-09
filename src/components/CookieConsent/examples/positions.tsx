@@ -8,7 +8,9 @@ import { CookieConsent } from '../CookieConsent';
  */
 export const CookieConsentPositions = () => {
   // State to control which position to show
-  const [activePosition, setActivePosition] = React.useState<string | null>(null);
+  const [activePosition, setActivePosition] = React.useState<string | null>(
+    null
+  );
 
   // Reset cookie consent to show the banner
   const handleShowPosition = (position: string) => {
@@ -23,17 +25,15 @@ export const CookieConsentPositions = () => {
       <Text marginBottom={16}>
         Click a button to show cookie consent in different positions
       </Text>
-      
+
       <Vertical gap={8} marginBottom={16}>
         <Button onClick={() => handleShowPosition('bottom')}>
           Bottom Position (Default)
         </Button>
-        
-        <Button onClick={() => handleShowPosition('top')}>
-          Top Position
-        </Button>
+
+        <Button onClick={() => handleShowPosition('top')}>Top Position</Button>
       </Vertical>
-      
+
       {activePosition === 'bottom' && (
         <CookieConsent
           position="bottom"
@@ -41,7 +41,7 @@ export const CookieConsentPositions = () => {
           onCustomize={() => alert('Customize preferences clicked')}
         />
       )}
-      
+
       {activePosition === 'top' && (
         <CookieConsent
           position="top"

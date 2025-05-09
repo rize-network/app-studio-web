@@ -77,21 +77,23 @@ export const UserIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
-export const HelpIcon = ({
+export const HelpIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',
-  filled = true,
   strokeWidth = 1,
+  filled = false,
   ...props
-}: IconProps) => (
+}) => (
   <IconWrapper widthHeight={widthHeight} color={color} {...props}>
     <svg
       viewBox="0 0 24 24"
-      aria-hidden="true"
+      aria-hidden="false"
       focusable="false"
       {...getSvgProps(filled, color, strokeWidth)}
     >
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+      <circle cx="12" cy="12" r="10" />
+      <path d="M9.09 9a3 3 0 1 1 5.91 1c0 2-3 3-3 3" />
+      <line x1="12" y1="17" x2="12" y2="17" />
     </svg>
   </IconWrapper>
 );
@@ -962,11 +964,8 @@ export const PanelIcon: React.FC<IconProps> = ({
       focusable="false"
       {...getSvgProps(filled, color, strokeWidth)}
     >
-      <rect x="3" y="3" width="18" height="18" rx="2" />
-      <line x1="9" y1="3" x2="9" y2="21" />
-      <line x1="12" y1="7" x2="17" y2="7" />
-      <line x1="12" y1="11" x2="17" y2="11" />
-      <line x1="12" y1="15" x2="17" y2="15" />
+      <rect width="18" height="18" x="3" y="3" rx="2" />
+      <path d="M9 3v18" />
     </svg>
   </IconWrapper>
 );
@@ -1744,3 +1743,47 @@ export const ChartIcon: React.FC<IconProps> = ({
     </svg>
   </IconWrapper>
 );
+export const GiftIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  strokeWidth = 1,
+  filled = false,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <rect x="3" y="8" width="18" height="4" rx="1" />
+      <path d="M12 8V21" />
+      <path d="M3 12v6a3 3 0 0 0 3 3h3V12" />
+      <path d="M18 21h-3v-9h6v6a3 3 0 0 1-3 3z" />
+      <path d="M12 8c-.5-2.5-4-3-5-1.5S9 10 12 8z" />
+      <path d="M12 8c.5-2.5 4-3 5-1.5S15 10 12 8z" />
+    </svg>
+  </IconWrapper>
+);
+
+export const ShieldIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  strokeWidth = 1,
+  filled = true,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  </IconWrapper>
+);
+
+export const CheckIcon = TickIcon;

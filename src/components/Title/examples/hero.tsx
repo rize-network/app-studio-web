@@ -16,7 +16,7 @@ export const HeroTitle = () => {
       width="100%"
     >
       <Vertical gap={24} maxWidth={800} marginX="auto">
-        <Title 
+        <Title
           size="xl"
           animation="fadeIn"
           animationDuration="1s"
@@ -28,20 +28,19 @@ export const HeroTitle = () => {
         >
           Welcome to Our Platform
         </Title>
-        
-        <Text 
-          textAlign="center" 
+
+        <Text
+          textAlign="center"
           color="color.gray.600"
           fontSize={20}
           lineHeight={28}
         >
-          Build beautiful, responsive, and interactive user interfaces with our powerful component library.
+          Build beautiful, responsive, and interactive user interfaces with our
+          powerful component library.
         </Text>
-        
+
         <Horizontal gap={16} justifyContent="center" marginTop={16}>
-          <Button  size="lg">
-            Get Started
-          </Button>
+          <Button size="lg">Get Started</Button>
           <Button variant="outline" size="lg">
             Learn More
           </Button>

@@ -7,3 +7,4 @@ export * from './custom';
 export * from './directAnimation';
 export * from './gradientTest';
 export * from './highlightTest';
+export * from './alternating';

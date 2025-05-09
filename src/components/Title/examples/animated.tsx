@@ -8,10 +8,7 @@ import { Vertical } from 'app-studio';
 export const AnimatedTitle = () => {
   return (
     <Vertical gap={48}>
-      <Title
-        animation="fadeIn"
-        animationDuration="1.5s"
-      >
+      <Title animation="fadeIn" animationDuration="1.5s">
         Fade In Animation
       </Title>
 
@@ -47,24 +44,15 @@ export const AnimatedTitle = () => {
         Slide In From Bottom
       </Title>
 
-      <Title
-        animation="typewriter"
-        animationDuration="3s"
-      >
+      <Title animation="typewriter" animationDuration="3s">
         Typewriter Effect Animation
       </Title>
 
-      <Title
-        animation="reveal"
-        animationDuration="1.5s"
-      >
+      <Title animation="reveal" animationDuration="1.5s">
         Reveal Animation
       </Title>
 
-      <Title
-        animation="bounce"
-        animationDuration="1s"
-      >
+      <Title animation="bounce" animationDuration="1s">
         Bounce Animation
       </Title>
 
