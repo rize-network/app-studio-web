@@ -56,24 +56,24 @@ import { Vertical } from "app-studio";
   <Title highlightText="background" highlightStyle="background" highlightColor="theme.primary">
     Text with background highlight
   </Title>
-  
+
   <Title highlightText="underlined" highlightStyle="underline" highlightColor="theme.secondary">
     Text with underlined highlight
   </Title>
-  
-  <Title 
-    highlightText="gradient" 
-    highlightStyle="gradient" 
-    highlightColor="theme.primary" 
+
+  <Title
+    highlightText="gradient"
+    highlightStyle="gradient"
+    highlightColor="theme.primary"
     highlightSecondaryColor="theme.secondary"
   >
     Text with gradient highlight
   </Title>
-  
+
   <Title highlightText="outline" highlightStyle="outline" highlightColor="theme.primary">
     Text with outline highlight
   </Title>
-  
+
   <Title highlightText="glow" highlightStyle="glow" highlightColor="theme.primary">
     Text with glow highlight
   </Title>
@@ -85,9 +85,9 @@ import { Vertical } from "app-studio";
 You can highlight multiple parts of the text by providing an array of strings.
 
 ```tsx
-<Title 
-  highlightText={["multiple", "highlights"]} 
-  highlightStyle="background" 
+<Title
+  highlightText={["multiple", "highlights"]}
+  highlightStyle="background"
   highlightColor="theme.primary"
 >
   Text with multiple highlights in the same sentence
@@ -96,32 +96,103 @@ You can highlight multiple parts of the text by providing an array of strings.
 
 ### **Animations**
 
-"**_animation_**" adds animation effects to the title. Options include 'fadeIn', 'slideIn', 'typewriter', 'highlight', 'reveal', and 'bounce'.
+The Title component supports animations through the `animate` prop, which accepts an animation object with properties like `from`, `to`, `duration`, etc.
 
 ```tsx
 import { Vertical } from "app-studio";
 
 <Vertical gap={48}>
-  <Title animation="fadeIn" animationDuration="1.5s">
+  <Title
+    animate={{
+      from: { opacity: 0 },
+      to: { opacity: 1 },
+      duration: '1.5s',
+      iterationCount: '1',
+    }}
+  >
     Fade In Animation
   </Title>
-  
-  <Title animation="slideIn" animationDirection="left" animationDuration="1s">
+
+  <Title
+    animate={{
+      from: { transform: 'translateX(-100%)' },
+      to: { transform: 'translateX(0)' },
+      duration: '1s',
+      iterationCount: '1',
+    }}
+  >
     Slide In From Left
   </Title>
-  
-  <Title animation="typewriter" animationDuration="3s">
-    Typewriter Effect Animation
-  </Title>
-  
-  <Title animation="reveal" animationDuration="1.5s">
+
+  <Title
+    animate={{
+      from: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' },
+      to: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
+      duration: '1.5s',
+      iterationCount: '1',
+    }}
+  >
     Reveal Animation
   </Title>
-  
-  <Title animation="bounce" animationDuration="1s">
-    Bounce Animation
-  </Title>
 </Vertical>
+```
+
+### **Highlight Animations**
+
+You can animate just the highlighted text using the `highlightAnimate` prop.
+
+```tsx
+<Title
+  highlightText="animated highlight"
+  highlightStyle="background"
+  highlightColor="theme.primary"
+  highlightAnimate={{
+    from: { opacity: 0, transform: 'scale(0.9)' },
+    to: { opacity: 1, transform: 'scale(1)' },
+    duration: '0.5s',
+    delay: '0.2s',
+  }}
+>
+  Text with animated highlight
+</Title>
+```
+
+### **Alternating Text**
+
+The Title component can cycle through different words in place of the highlighted text using the `alternateHighlightText` and `alternateAnimation` props.
+
+```tsx
+<Title
+  highlightText="changing"
+  alternateHighlightText={[
+    'innovative',
+    'powerful',
+    'flexible',
+    'intuitive',
+  ]}
+  alternateAnimation={true}
+  alternateDuration={2000}
+  highlightStyle="background"
+  highlightColor="theme.primary"
+>
+  Our changing solution for your business
+</Title>
+```
+
+### **Typewriter Effect**
+
+You can add a typewriter effect to the highlighted text using the `highlightTypewriter` prop.
+
+```tsx
+<Title
+  highlightText="typewriter"
+  highlightStyle="background"
+  highlightColor="theme.primary"
+  highlightTypewriter={true}
+  highlightTypewriterDuration={1500}
+>
+  This text has a typewriter effect on the highlighted word
+</Title>
 ```
 
 ### **Responsive**
@@ -190,10 +261,14 @@ import { Vertical, Horizontal, View } from "app-studio";
   width="100%"
 >
   <Vertical gap={24} maxWidth={800} marginX="auto">
-    <Title 
+    <Title
       size="4xl"
-      animation="fadeIn"
-      animationDuration="1s"
+      animate={{
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+        duration: '1s',
+        iterationCount: '1',
+      }}
       highlightText="Platform"
       highlightStyle="gradient"
       highlightColor="theme.primary"
@@ -202,16 +277,16 @@ import { Vertical, Horizontal, View } from "app-studio";
     >
       Welcome to Our Platform
     </Title>
-    
-    <Text 
-      textAlign="center" 
+
+    <Text
+      textAlign="center"
       color="color.gray.600"
       fontSize={20}
       lineHeight={28}
     >
       Build beautiful, responsive, and interactive user interfaces with our powerful component library.
     </Text>
-    
+
     <Horizontal gap={16} justifyContent="center" marginTop={16}>
       <Button variant="primary" size="lg">
         Get Started
@@ -227,29 +302,14 @@ import { Vertical, Horizontal, View } from "app-studio";
 ## **Types**
 
 ```tsx
-export type HighlightStyle = 
+export type HighlightStyle =
   | 'underline'   // Underline the text
   | 'background'  // Background color highlight
   | 'gradient'    // Gradient background
   | 'outline'     // Text with outline
   | 'glow';       // Text with glow effect
 
-export type TitleAnimation = 
-  | 'fadeIn'      // Fade in animation
-  | 'slideIn'     // Slide in animation
-  | 'typewriter'  // Typewriter effect
-  | 'highlight'   // Highlight text animation
-  | 'reveal'      // Text reveal animation
-  | 'bounce'      // Bounce animation
-  | 'none';       // No animation
-
-export type AnimationDirection = 
-  | 'left'
-  | 'right'
-  | 'top'
-  | 'bottom';
-
-export type TitleSize = 
+export type TitleSize =
   | 'xs'
   | 'sm'
   | 'md'
@@ -260,4 +320,103 @@ export type TitleSize =
   | '4xl'
   | '5xl'
   | '6xl';
+
+export interface TitleProps extends ViewProps {
+  /**
+   * The main text content of the title
+   */
+  children: React.ReactNode;
+
+  /**
+   * Text to be highlighted within the title
+   */
+  highlightText?: string | string[];
+
+  /**
+   * Array of strings to cycle through, replacing the text specified in highlightText
+   */
+  alternateHighlightText?: string[];
+
+  /**
+   * The visual style of the highlighted text
+   * @default 'background'
+   */
+  highlightStyle?: HighlightStyle;
+
+  /**
+   * The color of the highlighted text or background
+   * @default 'theme.primary'
+   */
+  highlightColor?: string;
+
+  /**
+   * The secondary color for gradient highlights
+   */
+  highlightSecondaryColor?: string;
+
+  /**
+   * Animation for the highlighted text
+   */
+  highlightAnimate?: AnimationProps | AnimationProps[];
+
+  /**
+   * Animation for the title
+   */
+  animate?: AnimationProps | AnimationProps[];
+
+  /**
+   * Size of the title
+   * @default 'xl'
+   */
+  size?: TitleSize;
+
+  /**
+   * Whether to center the title
+   * @default false
+   */
+  centered?: boolean;
+
+  /**
+   * Whether to animate the alternating highlight text
+   * @default false
+   */
+  alternateAnimation?: boolean;
+
+  /**
+   * Duration in milliseconds for each alternating highlight text
+   * @default 3000
+   */
+  alternateDuration?: number;
+
+  /**
+   * Whether to apply a typewriter effect to the highlighted text
+   * @default false
+   */
+  highlightTypewriter?: boolean;
+
+  /**
+   * Duration in milliseconds for the typewriter effect
+   * @default 3000
+   */
+  highlightTypewriterDuration?: number;
+}
 ```
+
+## **Accessibility**
+
+The Title component:
+
+- Uses semantic heading elements (`<h1>`) for proper document structure
+- Maintains proper color contrast for highlighted text
+- Supports keyboard navigation and focus management
+- Works with screen readers by using appropriate ARIA attributes
+
+## **Best Practices**
+
+- Use the Title component for main headings and important text that needs emphasis
+- Choose highlight styles that maintain good contrast with the background
+- Use animations sparingly to avoid distracting users
+- Consider using responsive sizing for different screen sizes
+- Limit the use of alternating text to avoid confusion
+- Ensure that any animations respect user preferences for reduced motion
+- Use semantic colors from the theme system rather than hardcoded values
