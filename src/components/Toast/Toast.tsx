@@ -34,4 +34,4 @@ const Toast = Object.assign(ToastComponent, {
 // Export the hook for component usage
 export const useToast = useToastHook;
 
-export { Toast };
+export { Toast, showToast };
