@@ -98,6 +98,41 @@ export const HelpIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+export const FolderIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="9" y1="17" x2="9" y2="17" />
+      <line x1="15" y1="17" x2="15" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+      <line x1="12" y1="17" x2="12" y2="17" />
+    </svg>
+  </IconWrapper>
+);
+
 // Example Icon Component: ChevronIcon
 export const ChevronIcon: React.FC<IconProps> = ({
   widthHeight = 24,

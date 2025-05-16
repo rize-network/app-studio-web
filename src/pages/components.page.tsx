@@ -1,6 +1,8 @@
 import React, { Suspense, useState, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { View, Text, Horizontal } from 'app-studio';
+import TreePage from './tree.page';
+import FlowPage from './flow.page';
 
 const GradientPage = lazy(() => import('src/pages/gradient.page'));
 const DragAndDropPage = lazy(() => import('src/pages/dragAndDrop.page'));
@@ -125,6 +127,8 @@ export const componentList = [
   { name: 'Toggle', path: '/toggle', element: <TogglePage /> },
   { name: 'ToggleGroup', path: '/togglegroup', element: <ToggleGroupPage /> },
   { name: 'Upload', path: '/upload', element: <UploadPage /> },
+  { name: 'Tree', path: '/tree', element: <TreePage /> },
+  { name: 'Flow', path: '/flow', element: <FlowPage /> },
 ];
 
 const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (
