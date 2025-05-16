@@ -34,9 +34,7 @@ export const FlowList = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Text color="color.yellow.600" fontSize="xl">
-            📊
-          </Text>
+          <Text color="color.yellow.600">📊</Text>
         </View>
       ),
     },
@@ -55,9 +53,7 @@ export const FlowList = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Text color="color.blue.600" fontSize="xl">
-            ↩️
-          </Text>
+          <Text color="color.blue.600">↩️</Text>
         </View>
       ),
     },
@@ -76,9 +72,7 @@ export const FlowList = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Text color="color.green.600" fontSize="xl">
-            ✓
-          </Text>
+          <Text color="color.green.600">✓</Text>
         </View>
       ),
     },
@@ -97,9 +91,7 @@ export const FlowList = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Text color="color.red.600" fontSize="xl">
-            📗
-          </Text>
+          <Text color="color.red.600">📗</Text>
         </View>
       ),
     },
@@ -139,9 +131,7 @@ export const FlowList = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Text color="color.gray.600" fontSize="xl">
-              +
-            </Text>
+            <Text color="color.gray.600">+</Text>
           </View>
         ),
       };
@@ -169,9 +159,7 @@ export const FlowList = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <Text color="color.gray.600" fontSize="xl">
-              +
-            </Text>
+            <Text color="color.gray.600">+</Text>
           </View>
         ),
       };
@@ -183,7 +171,7 @@ export const FlowList = () => {
 
   return (
     <Vertical gap={0} width="100%" maxWidth={500} alignItems="center">
-      <Text marginBottom={20} fontSize="lg" fontWeight="bold">
+      <Text marginBottom={20} fontWeight="bold">
         Workflow List Visualizer
       </Text>
 
@@ -212,7 +200,7 @@ export const FlowList = () => {
                   </Text>
                   <ChevronIcon orientation="down" size={16} />
                 </Horizontal>
-                <Text color="color.gray.500" fontSize="sm" isTruncated>
+                <Text color="color.gray.500" isTruncated>
                   {node.subtitle}
                 </Text>
               </Vertical>

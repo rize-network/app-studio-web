@@ -1,0 +1,15 @@
+diff --git a/src/components/Flow/Flow.tsx b/src/components/Flow/Flow.tsx
+@@
+     const addedNode = flowState.addNodeAfter(
+       afterNodeId,
+       newNodeData,
+       position,
+       edgeId
+     );
++    // Auto-re-layout immediately
++    flowState.organizeTreeNodes();
+ 
+     // Call the onNodeAdd callback if provided by the parent component
+     if (onNodeAdd) {
+       onNodeAdd(addedNode); // Pass the full new node, including its calculated position
+     }

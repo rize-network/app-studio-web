@@ -131,9 +131,7 @@ export const SettingsPanelView: React.FC<SettingsPanelProps> = ({
     <View {...containerStyles} {...props} {...styles.container}>
       {title && (
         <View {...headerStyles} {...styles.header}>
-          <Text fontSize="lg" fontWeight="bold">
-            {title}
-          </Text>
+          <Text fontWeight="bold">{title}</Text>
         </View>
       )}
 
@@ -156,9 +154,7 @@ export const SettingsPanelView: React.FC<SettingsPanelProps> = ({
                   <Text fontWeight="medium">{setting.label}</Text>
 
                   {setting.description && (
-                    <Text fontSize="sm" color="color.gray.600">
-                      {setting.description}
-                    </Text>
+                    <Text color="color.gray.600">{setting.description}</Text>
                   )}
                 </View>
 

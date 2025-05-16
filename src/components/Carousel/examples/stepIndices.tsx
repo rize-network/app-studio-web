@@ -23,7 +23,7 @@ export const StepIndicesDemo = () => {
 
   return (
     <View>
-      <Text fontSize="lg" fontWeight="bold" marginBottom={2}>
+      <Text fontWeight="bold" marginBottom={2}>
         Step Navigation (Only specific slides)
       </Text>
       <View height="300px" width="100%">

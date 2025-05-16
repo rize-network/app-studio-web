@@ -85,7 +85,7 @@ export const DefaultFlow = () => {
 
   return (
     <Vertical gap={20} width="100%" maxWidth={800}>
-      <Text marginBottom={10} fontSize="lg" fontWeight="bold">
+      <Text marginBottom={10} fontWeight="bold">
         Workflow Builder
       </Text>
 
@@ -140,9 +140,7 @@ export const DefaultFlow = () => {
         </Vertical>
 
         <Vertical gap={10} flex={1}>
-          <Text fontSize="md" fontWeight="bold">
-            Features:
-          </Text>
+          <Text fontWeight="bold">Features:</Text>
           <View padding={10} backgroundColor="color.gray.50" borderRadius={4}>
             <Vertical gap={10}>
               <Text>• Click on a node to select it</Text>

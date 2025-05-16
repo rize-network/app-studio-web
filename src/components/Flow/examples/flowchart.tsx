@@ -67,7 +67,7 @@ export const FlowchartExample = () => {
 
   return (
     <View width="100%" height="600px" padding={20}>
-      <Text fontSize="xl" fontWeight="bold" marginBottom={4}>
+      <Text fontWeight="bold" marginBottom={4}>
         Flowchart Example
       </Text>
       <View

@@ -91,7 +91,7 @@ export const ControlledTree = () => {
 
   return (
     <Vertical gap={20} width="100%" maxWidth={400}>
-      <Text marginBottom={10} fontSize="lg" fontWeight="bold">
+      <Text marginBottom={10} fontWeight="bold">
         Controlled Tree
       </Text>
 

@@ -6,7 +6,7 @@ import { FolderIcon, FileIcon, DocumentIcon } from '../../Icon/Icon'; // Assumin
 export const DefaultTree = () => {
   return (
     <Vertical gap={20} width="100%" maxWidth={400}>
-      <Text marginBottom={10} fontSize="lg" fontWeight="bold">
+      <Text marginBottom={10} fontWeight="bold">
         Default Tree (Compound)
       </Text>
       <Tree

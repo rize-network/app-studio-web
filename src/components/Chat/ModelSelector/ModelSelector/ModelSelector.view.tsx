@@ -148,9 +148,7 @@ export const ModelSelectorView: React.FC<Props> = ({
 
                   {showModelDetails && (
                     <View {...modelInfoStyles} {...styles.modelInfo}>
-                      {model.description && (
-                        <Text fontSize="xs">{model.description}</Text>
-                      )}
+                      {model.description && <Text>{model.description}</Text>}
 
                       {model.capabilities && model.capabilities.length > 0 && (
                         <Horizontal gap="xs" flexWrap="wrap" marginTop="xs">
@@ -161,16 +159,14 @@ export const ModelSelectorView: React.FC<Props> = ({
                               padding="2px 6px"
                               borderRadius="full"
                             >
-                              <Text fontSize="xs">{capability}</Text>
+                              <Text>{capability}</Text>
                             </View>
                           ))}
                         </Horizontal>
                       )}
 
                       {!model.isAvailable && (
-                        <Text color="color.red.500" fontSize="xs">
-                          Not available
-                        </Text>
+                        <Text color="color.red.500">Not available</Text>
                       )}
                     </View>
                   )}

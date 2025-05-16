@@ -121,9 +121,7 @@ export const ChartStatesDemo = () => {
         borderRadius={8}
       >
         <Vertical gap={16}>
-          <Text fontSize="lg" fontWeight="bold">
-            Interactive State Example
-          </Text>
+          <Text fontWeight="bold">Interactive State Example</Text>
 
           <Horizontal gap={10}>
             <Button
@@ -177,10 +175,8 @@ export const ChartStatesDemo = () => {
           isLoading={true}
           loadingIndicator={
             <Vertical alignItems="center" gap={10}>
-              <Text fontSize="lg" color="color.blue">
-                Custom Loading...
-              </Text>
-              <Text fontSize="sm" color="color.gray.500">
+              <Text color="color.blue">Custom Loading...</Text>
+              <Text color="color.gray.500">
                 Please wait while we prepare your data
               </Text>
             </Vertical>

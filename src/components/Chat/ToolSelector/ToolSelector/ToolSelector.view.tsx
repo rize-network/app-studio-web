@@ -81,9 +81,7 @@ export const ToolSelectorView: React.FC<ToolSelectorProps> = ({
                     <Text fontWeight="medium">{tool.name}</Text>
 
                     {showDescriptions && tool.description && (
-                      <Text fontSize="sm" color="color.gray.600">
-                        {tool.description}
-                      </Text>
+                      <Text color="color.gray.600">{tool.description}</Text>
                     )}
                   </View>
 

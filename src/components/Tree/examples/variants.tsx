@@ -93,11 +93,11 @@ export const TreeVariants = () => {
 
   return (
     <Vertical gap={30} width="100%">
-      <Text marginBottom={10} fontSize="xl" fontWeight="bold">
+      <Text marginBottom={10} fontWeight="bold">
         Tree Variants & Sizes
       </Text>
 
-      <Text marginBottom={10} fontSize="lg" fontWeight="bold">
+      <Text marginBottom={10} fontWeight="bold">
         Tree Variants
       </Text>
       <Horizontal gap={30} alignItems="flex-start" flexWrap="wrap">
@@ -129,7 +129,7 @@ export const TreeVariants = () => {
         </Vertical>
       </Horizontal>
 
-      <Text marginTop={30} marginBottom={10} fontSize="lg" fontWeight="bold">
+      <Text marginTop={30} marginBottom={10} fontWeight="bold">
         Tree Sizes
       </Text>
 

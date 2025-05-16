@@ -10,9 +10,7 @@ export const CustomHeaderExample = () => {
       icon: <HomeIcon widthHeight={16} />,
       content: (
         <View padding={20}>
-          <Text fontSize="lg" fontWeight="bold">
-            Home Content
-          </Text>
+          <Text fontWeight="bold">Home Content</Text>
           <Text marginTop={10}>This is the home tab content.</Text>
         </View>
       ),
@@ -22,9 +20,7 @@ export const CustomHeaderExample = () => {
       icon: <UserIcon widthHeight={16} />,
       content: (
         <View padding={20}>
-          <Text fontSize="lg" fontWeight="bold">
-            Profile Content
-          </Text>
+          <Text fontWeight="bold">Profile Content</Text>
           <Text marginTop={10}>This is the profile tab content.</Text>
         </View>
       ),
@@ -34,9 +30,7 @@ export const CustomHeaderExample = () => {
       icon: <SettingsIcon widthHeight={16} />,
       content: (
         <View padding={20}>
-          <Text fontSize="lg" fontWeight="bold">
-            Settings Content
-          </Text>
+          <Text fontWeight="bold">Settings Content</Text>
           <Text marginTop={10}>This is the settings tab content.</Text>
         </View>
       ),

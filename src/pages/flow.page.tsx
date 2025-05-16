@@ -7,21 +7,15 @@ const FlowPage = () => {
   return (
     <View padding={20}>
       <Vertical gap={40} width="100%" maxWidth={1200} margin="0 auto">
-        <Text fontSize="xl" fontWeight="bold">
-          Workflow Builder Components
-        </Text>
+        <Text fontWeight="bold">Workflow Builder Components</Text>
 
         <Vertical gap={20}>
-          <Text fontSize="lg" fontWeight="bold">
-            Workflow Tree
-          </Text>
+          <Text fontWeight="bold">Workflow Tree</Text>
           <FlowList />
         </Vertical>
 
         <Vertical gap={20}>
-          <Text fontSize="lg" fontWeight="bold">
-            Flow Component
-          </Text>
+          <Text fontWeight="bold">Flow Component</Text>
           <DefaultFlow />
         </Vertical>
 

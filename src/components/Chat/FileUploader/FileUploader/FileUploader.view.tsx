@@ -93,24 +93,20 @@ export const FileUploaderView: React.FC<Props> = ({
           onClick={isDisabled ? undefined : openFileDialog}
           opacity={isDisabled ? 0.6 : 1}
         >
-          <Text fontSize="xl" marginBottom="sm">
-            📂
-          </Text>
+          <Text marginBottom="sm">📂</Text>
           <Text fontWeight="medium">
             {isDragging ? 'Drop files here' : 'Drag & drop files here'}
           </Text>
-          <Text fontSize="sm" color="color.gray.500" marginTop="xs">
+          <Text color="color.gray.500" marginTop="xs">
             or click to browse
           </Text>
           {maxSize !== Infinity && (
-            <Text fontSize="xs" color="color.gray.500" marginTop="sm">
+            <Text color="color.gray.500" marginTop="sm">
               Maximum file size: {formatBytes(maxSize)}
             </Text>
           )}
           {accept !== '*' && (
-            <Text fontSize="xs" color="color.gray.500">
-              Accepted formats: {accept}
-            </Text>
+            <Text color="color.gray.500">Accepted formats: {accept}</Text>
           )}
         </View>
       )}
@@ -120,7 +116,7 @@ export const FileUploaderView: React.FC<Props> = ({
           {files.map((file) => (
             <View key={file.id} {...fileItemStyles} {...styles.fileItem}>
               <View {...fileIconStyles(file.type)}>
-                <Text fontSize="xl">{getFileIcon(file.type)}</Text>
+                <Text>{getFileIcon(file.type)}</Text>
               </View>
 
               <Vertical {...fileInfoStyles} {...styles.fileInfo}>
@@ -133,11 +129,7 @@ export const FileUploaderView: React.FC<Props> = ({
 
                 <Text {...fileSizeStyles}>{formatBytes(file.size)}</Text>
 
-                {file.error && (
-                  <Text fontSize="xs" color="color.red.500">
-                    {file.error}
-                  </Text>
-                )}
+                {file.error && <Text color="color.red.500">{file.error}</Text>}
 
                 {file.isUploading && file.progress !== undefined && (
                   <View {...progressBarContainerStyles} {...styles.progressBar}>

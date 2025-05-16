@@ -67,7 +67,6 @@ export const AccessibleSidebar = () => {
           <Sidebar.Content>
             <Vertical gap={2}>
               <Text
-                fontSize="sm"
                 color="color.gray.500"
                 fontWeight="medium"
                 marginBottom="8px"
@@ -95,12 +94,7 @@ export const AccessibleSidebar = () => {
 
               <Separator marginTop="12px" />
 
-              <Text
-                fontSize="sm"
-                color="color.gray.500"
-                fontWeight="medium"
-                marginTop="8px"
-              >
+              <Text color="color.gray.500" fontWeight="medium" marginTop="8px">
                 SETTINGS
               </Text>
 

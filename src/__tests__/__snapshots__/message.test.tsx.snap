@@ -11,7 +11,7 @@ exports[`AspectRatio to match snapshot 1`] = `
     disabled={false}
     display="flex"
     filter="brightness(1)"
-    fontSize="md"
+    
     fontWeight={600}
     letterSpacing={1.25}
     onClick={[Function]}
