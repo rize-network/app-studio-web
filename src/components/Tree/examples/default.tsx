@@ -1,13 +1,20 @@
 import React from 'react';
 import { Tree } from '../Tree';
 import { Text, Vertical } from 'app-studio';
-import { FolderIcon, FileIcon, DocumentIcon } from '../../Icon/Icon';
+import { FolderIcon, FileIcon, DocumentIcon } from '../../Icon/Icon'; // Assuming Icon path is correct
 
 export const DefaultTree = () => {
   return (
     <Vertical gap={20} width="100%" maxWidth={400}>
-      <Text marginBottom={10}>Default Tree</Text>
-      <Tree defaultExpandedItems={['files']}>
+      <Text marginBottom={10} fontSize="lg" fontWeight="bold">
+        Default Tree (Compound)
+      </Text>
+      <Tree
+        defaultExpandedItems={['files', 'documents']}
+        onItemSelect={(itemId, itemData) =>
+          console.log(`Compound item selected: ${itemId}`, itemData)
+        }
+      >
         <Tree.Item value="files" icon={<FolderIcon size={16} />}>
           <Tree.ItemLabel>Files</Tree.ItemLabel>
           <Tree.ItemContent>
@@ -18,7 +25,7 @@ export const DefaultTree = () => {
                   <Tree.ItemLabel>Document 1.docx</Tree.ItemLabel>
                 </Tree.Item>
                 <Tree.Item value="doc2" icon={<DocumentIcon size={16} />}>
-                  <Tree.ItemLabel>Document 2.docx</Tree.ItemLabel>
+                  <Tree.ItemLabel>Document 2.pdf</Tree.ItemLabel>
                 </Tree.Item>
               </Tree.ItemContent>
             </Tree.Item>
@@ -34,14 +41,17 @@ export const DefaultTree = () => {
               </Tree.ItemContent>
             </Tree.Item>
             <Tree.Item value="videos" icon={<FolderIcon size={16} />}>
-              <Tree.ItemLabel>Videos</Tree.ItemLabel>
-              <Tree.ItemContent>
-                <Tree.Item value="video1" icon={<FileIcon size={16} />}>
-                  <Tree.ItemLabel>video1.mp4</Tree.ItemLabel>
-                </Tree.Item>
-              </Tree.ItemContent>
+              <Tree.ItemLabel>Videos (Empty)</Tree.ItemLabel>
+              <Tree.ItemContent />
+              {/* To show expand icon for empty, ensure ItemContent is present, even if empty */}
+            </Tree.Item>
+            <Tree.Item value="report-file" icon={<DocumentIcon size={16} />}>
+              <Tree.ItemLabel>Annual Report.docx</Tree.ItemLabel>
             </Tree.Item>
           </Tree.ItemContent>
+        </Tree.Item>
+        <Tree.Item value="settings" icon={<FolderIcon size={16} />}>
+          <Tree.ItemLabel>Settings</Tree.ItemLabel>
         </Tree.Item>
       </Tree>
     </Vertical>

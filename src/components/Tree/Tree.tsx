@@ -12,38 +12,33 @@ import {
 
 /**
  * Tree component for displaying hierarchical data.
- * Supports both compound component pattern and data-driven approach.
+ * Supports both compound component pattern (using Tree.Item, Tree.ItemLabel, Tree.ItemContent)
+ * and a data-driven approach (passing an array of TreeNode objects to the `items` prop).
  *
  * @example
  * ```tsx
  * // Compound component pattern
- * <Tree>
- *   <Tree.Item value="item-1">
- *     <Tree.ItemLabel>Parent Item</Tree.ItemLabel>
+ * <Tree defaultExpandedItems={['parent-1']}>
+ *   <Tree.Item value="parent-1" icon={<FolderIcon />}>
+ *     <Tree.ItemLabel>Parent Item 1</Tree.ItemLabel>
  *     <Tree.ItemContent>
- *       <Tree.Item value="item-1-1">
- *         <Tree.ItemLabel>Child Item 1</Tree.ItemLabel>
- *       </Tree.Item>
- *       <Tree.Item value="item-1-2">
- *         <Tree.ItemLabel>Child Item 2</Tree.ItemLabel>
+ *       <Tree.Item value="child-1-1" icon={<FileIcon />}>
+ *         <Tree.ItemLabel>Child Item 1.1</Tree.ItemLabel>
  *       </Tree.Item>
  *     </Tree.ItemContent>
  *   </Tree.Item>
  * </Tree>
  *
  * // Data-driven approach
- * const items = [
+ * const treeNodes = [
  *   {
- *     id: 'item-1',
- *     label: 'Parent Item',
+ *     id: 'parent-1', label: 'Parent Item 1', icon: <FolderIcon />,
  *     children: [
- *       { id: 'item-1-1', label: 'Child Item 1' },
- *       { id: 'item-1-2', label: 'Child Item 2' }
+ *       { id: 'child-1-1', label: 'Child Item 1.1', icon: <FileIcon /> }
  *     ]
  *   }
  * ];
- *
- * <Tree items={items} />
+ * <Tree items={treeNodes} defaultExpandedItems={['parent-1']} />
  * ```
  */
 const TreeComponent: React.FC<TreeProps> = ({
@@ -51,15 +46,15 @@ const TreeComponent: React.FC<TreeProps> = ({
   items,
   size = 'md',
   variant = 'default',
-  defaultExpandedItems = [],
+  defaultExpandedItems, // `useTreeState` handles default empty array
   expandedItems,
   onExpandedItemsChange,
   defaultSelectedItem,
   selectedItem,
   onItemSelect,
   multiSelect = false,
-  views,
-  ...props
+  views, // Global views configuration
+  ...props // Remaining ViewProps for the root TreeView container
 }) => {
   const treeState = useTreeState({
     defaultExpandedItems,
@@ -69,7 +64,7 @@ const TreeComponent: React.FC<TreeProps> = ({
     selectedItem,
     onItemSelect,
     multiSelect,
-    items,
+    items, // Pass items for data-driven selection logic
   });
 
   return (
@@ -79,23 +74,29 @@ const TreeComponent: React.FC<TreeProps> = ({
         toggleItem: treeState.toggleItem,
         isItemExpanded: treeState.isItemExpanded,
         baseId: treeState.baseId,
+        selectedItem: treeState.selectedItem,
+        selectItem: treeState.selectItem,
+        size, // Pass global size
+        variant, // Pass global variant
+        views, // Pass global views configuration
       }}
     >
       <TreeView
-        size={size}
-        variant={variant}
-        views={views}
+        // TreeView specific props:
         baseId={treeState.baseId}
-        {...props}
+        // Pass global styling props that might affect TreeView itself
+        // size={size} // Size is used by items, not directly by TreeView container usually
+        // variant={variant} // Variant is used by items
+        views={views} // Pass views for container styling
+        {...props} // Spread other ViewProps like width, margin, etc.
       >
-        {items ? (
+        {items ? ( // If `items` prop is provided, use data-driven rendering
           <DataDrivenTreeView
             items={items}
-            size={size}
-            variant={variant}
-            views={views}
+            // size, variant, views are now sourced from context within DataDrivenTreeView/TreeNodeView
           />
         ) : (
+          // Otherwise, use compound component children
           children
         )}
       </TreeView>
@@ -105,7 +106,7 @@ const TreeComponent: React.FC<TreeProps> = ({
 
 export const Tree = TreeComponent as TreeType;
 
-// Assign the sub-components to the main component
+// Assign the sub-components to the main component for the compound pattern
 Tree.Item = TreeItem;
 Tree.ItemLabel = TreeItemLabel;
 Tree.ItemContent = TreeItemContent;

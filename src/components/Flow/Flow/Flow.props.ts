@@ -5,6 +5,7 @@ import {
   FlowNode,
   NodeConnection,
   FlowComponentType,
+  FlowViewport,
 } from './Flow.type';
 
 /**
@@ -13,6 +14,8 @@ import {
 export interface FlowProps extends Omit<ViewProps, 'position'> {
   /**
    * Child elements for compound component pattern
+   * Note: Flow component primarily uses `nodes` and `edges` props for data.
+   * Children could be used for custom overlays or context providers if needed.
    */
   children?: React.ReactNode;
 
@@ -33,13 +36,13 @@ export interface FlowProps extends Omit<ViewProps, 'position'> {
   size?: Size;
 
   /**
-   * Visual variant of the flow
+   * Visual variant of the flow nodes (affects node appearance)
    * @default 'default'
    */
   variant?: Variant;
 
   /**
-   * Direction of the flow
+   * Direction of the flow layout (influences default new node placement)
    * @default 'vertical'
    */
   direction?: 'vertical' | 'horizontal';
@@ -57,24 +60,24 @@ export interface FlowProps extends Omit<ViewProps, 'position'> {
   allowAddingNodes?: boolean;
 
   /**
-   * Whether to allow deleting nodes
+   * Whether to allow deleting nodes (functionality not fully implemented in this simplified version)
    * @default true
    */
   allowDeletingNodes?: boolean;
 
   /**
-   * Whether to allow connecting nodes
+   * Whether to allow connecting nodes (functionality not fully implemented in this simplified version)
    * @default true
    */
   allowConnectingNodes?: boolean;
 
   /**
-   * Callback when nodes change
+   * Callback when nodes change (e.g., added, position changed)
    */
   onNodesChange?: (nodes: FlowNode[]) => void;
 
   /**
-   * Callback when edges change
+   * Callback when edges change (e.g., added)
    */
   onEdgesChange?: (edges: NodeConnection[]) => void;
 
@@ -84,9 +87,11 @@ export interface FlowProps extends Omit<ViewProps, 'position'> {
   onNodeSelect?: (nodeId: string) => void;
 
   /**
-   * Callback when a node is added
+   * Callback when a node is added by user interaction
+   * The `newNode` passed will have an ID and default data, but its position
+   * will be determined by the `addNodeAfter` logic in `useFlowState`.
    */
-  onNodeAdd?: (node: FlowNode) => void;
+  onNodeAdd?: (newNode: FlowNode) => void;
 
   /**
    * Callback when a node is deleted
@@ -99,23 +104,56 @@ export interface FlowProps extends Omit<ViewProps, 'position'> {
   onConnect?: (connection: NodeConnection) => void;
 
   /**
-   * ID of the selected node
+   * ID of the selected node (controlled mode)
    */
   selectedNodeId?: string;
+
+  /**
+   * Initial viewport state (zoom, pan)
+   */
+  initialViewport?: FlowViewport;
+
+  /**
+   * Controlled viewport state
+   */
+  viewport?: FlowViewport;
+
+  /**
+   * Callback when viewport changes
+   */
+  onViewportChange?: (viewport: FlowViewport) => void;
 
   /**
    * Custom views for styling different parts of the component
    */
   views?: {
-    container?: ViewProps;
-    node?: ViewProps;
-    edge?: ViewProps;
-    controls?: ViewProps;
-    addButton?: ViewProps;
+    container?: ViewProps; // Styles for the main flow container
+    node?: {
+      // Styles for FlowNodeView
+      container?: ViewProps; // Styles for the node's root View
+      content?: ViewProps; // Styles for the Horizontal content wrapper inside the node
+      icon?: ViewProps; // Styles for the node's icon View
+    };
+    edge?: {
+      // Styles for FlowEdgeView (placeholder)
+      path?: ViewProps; // Styles for the SVG path
+      label?: ViewProps; // Styles for the edge label
+    };
+    controls?: {
+      // Styles for FlowControlsView
+      container?: ViewProps; // Styles for the controls container
+      button?: ViewProps; // Styles for individual control buttons
+    };
+    addButton?: {
+      // Styles for FlowAddNodeButtonView
+      container?: ViewProps; // Styles for the add button itself
+      icon?: ViewProps; // Styles for the plus icon inside the button
+    };
+    fixedControlsContainer?: ViewProps; // Styles for the fixed controls container
   };
 }
 
 /**
  * Type for the Flow component with sub-components
  */
-export type FlowType = FlowComponentType;
+export type FlowType = FlowComponentType<FlowProps>;

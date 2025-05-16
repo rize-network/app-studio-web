@@ -6,7 +6,6 @@ import {
   ControlledTree,
   TreeVariants,
   CustomStyledTree,
-  WorkflowTree,
 } from '../components/Tree/examples';
 
 const TreePage = () => {
@@ -50,13 +49,6 @@ const TreePage = () => {
             Custom Styled Tree
           </Text>
           <CustomStyledTree />
-        </Vertical>
-
-        <Vertical gap={20}>
-          <Text fontSize="lg" fontWeight="bold">
-            Workflow Tree
-          </Text>
-          <WorkflowTree />
         </Vertical>
       </Vertical>
     </View>

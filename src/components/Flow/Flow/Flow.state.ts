@@ -46,6 +46,21 @@ interface UseFlowStateProps {
    * Direction of the flow
    */
   direction?: 'vertical' | 'horizontal';
+
+  /**
+   * Initial viewport state (zoom, pan)
+   */
+  initialViewport?: FlowViewport;
+
+  /**
+   * Controlled viewport state
+   */
+  viewport?: FlowViewport;
+
+  /**
+   * Callback when viewport changes
+   */
+  onViewportChange?: (viewport: FlowViewport) => void;
 }
 
 /**
@@ -61,8 +76,12 @@ export const useFlowState = ({
   onNodeSelect,
   selectedNodeId: controlledSelectedNodeId,
   direction = 'vertical',
+  initialViewport = { zoom: 1, x: 0, y: 0 },
+  viewport: controlledViewport,
+  onViewportChange,
 }: UseFlowStateProps) => {
-  // Generate a unique ID for accessibility
+  // Generate a unique ID for accessibility.
+  // For production, consider using React.useId() if available and appropriate for your React version.
   const baseId = useMemo(
     () => `flow-${Math.random().toString(36).substring(2, 9)}`,
     []
@@ -81,12 +100,9 @@ export const useFlowState = ({
     string | undefined
   >(undefined);
 
-  // State for viewport (zoom and pan)
-  const [viewport, setViewport] = useState<FlowViewport>({
-    zoom: 1,
-    x: 0,
-    y: 0,
-  });
+  // State for viewport (uncontrolled mode)
+  const [uncontrolledViewport, setUncontrolledViewport] =
+    useState<FlowViewport>(initialViewport);
 
   // Determine if we're in controlled or uncontrolled mode for nodes
   const isNodesControlled = controlledNodes !== undefined;
@@ -102,13 +118,18 @@ export const useFlowState = ({
     ? controlledSelectedNodeId
     : uncontrolledSelectedNodeId;
 
+  // Determine if we're in controlled or uncontrolled mode for viewport
+  const isViewportControlled = controlledViewport !== undefined;
+  const currentViewport = isViewportControlled
+    ? controlledViewport
+    : uncontrolledViewport;
+
   // Function to update nodes
   const updateNodes = useCallback(
     (newNodes: FlowNode[]) => {
       if (!isNodesControlled) {
         setUncontrolledNodes(newNodes);
       }
-
       if (onNodesChange) {
         onNodesChange(newNodes);
       }
@@ -122,7 +143,6 @@ export const useFlowState = ({
       if (!isEdgesControlled) {
         setUncontrolledEdges(newEdges);
       }
-
       if (onEdgesChange) {
         onEdgesChange(newEdges);
       }
@@ -136,7 +156,6 @@ export const useFlowState = ({
       if (!isSelectedNodeControlled) {
         setUncontrolledSelectedNodeId(nodeId);
       }
-
       if (onNodeSelect) {
         onNodeSelect(nodeId);
       }
@@ -144,11 +163,13 @@ export const useFlowState = ({
     [isSelectedNodeControlled, onNodeSelect]
   );
 
-  // Function to add a node
+  // Function to add a node (simple append, not typically used directly by UI)
   const addNode = useCallback(
     (node: FlowNode) => {
       const newNodes = [...currentNodes, node];
       updateNodes(newNodes);
+      // Note: This simpler addNode doesn't create edges.
+      // onNodeAdd prop from FlowProps is typically called with node from addNodeAfter.
     },
     [currentNodes, updateNodes]
   );
@@ -157,43 +178,50 @@ export const useFlowState = ({
   const addNodeAfter = useCallback(
     (
       afterNodeId: string,
-      newNode: FlowNode,
+      newNodeData: Omit<FlowNode, 'position'>, // newNodeData now doesn't include position
       position?: 'below' | 'right' | 'left'
-    ) => {
-      // Find the node to add after
+    ): FlowNode => {
+      // Return the fully formed new node
       const afterNode = currentNodes.find((node) => node.id === afterNodeId);
+      if (!afterNode) {
+        // Fallback or error handling if afterNode is not found
+        console.warn(
+          `addNodeAfter: Could not find node with id ${afterNodeId}`
+        );
+        const positionedNewNode = {
+          ...newNodeData,
+          position: { x: 0, y: 0 },
+        } as FlowNode;
+        updateNodes([...currentNodes, positionedNewNode]);
+        return positionedNewNode;
+      }
 
-      if (!afterNode) return;
-
-      // Calculate position for the new node
       const newPosition = {
         x: afterNode.position?.x || 0,
         y: afterNode.position?.y || 0,
       };
 
-      // Determine position based on parameter or default to direction
       const placementPosition =
         position || (direction === 'vertical' ? 'below' : 'right');
 
-      // Check if there's already a connection in the requested direction
       const hasConnectionInDirection = (
-        direction: 'below' | 'right' | 'left'
+        dir: 'below' | 'right' | 'left'
       ): boolean => {
-        if (direction === 'below') {
+        if (dir === 'below') {
           return currentEdges.some((edge) => {
             const targetNode = currentNodes.find((n) => n.id === edge.target);
             const targetY = targetNode?.position?.y || 0;
             const sourceY = afterNode.position?.y || 0;
             return edge.source === afterNodeId && targetY > sourceY;
           });
-        } else if (direction === 'right') {
+        } else if (dir === 'right') {
           return currentEdges.some((edge) => {
             const targetNode = currentNodes.find((n) => n.id === edge.target);
             const targetX = targetNode?.position?.x || 0;
             const sourceX = afterNode.position?.x || 0;
             return edge.source === afterNodeId && targetX > sourceX;
           });
-        } else if (direction === 'left') {
+        } else if (dir === 'left') {
           return currentEdges.some((edge) => {
             const targetNode = currentNodes.find((n) => n.id === edge.target);
             const targetX = targetNode?.position?.x || 0;
@@ -204,100 +232,99 @@ export const useFlowState = ({
         return false;
       };
 
-      // Find the furthest node in the requested direction
       const getFurthestNodePosition = (
-        direction: 'below' | 'right' | 'left'
+        dir: 'below' | 'right' | 'left'
       ): { x: number; y: number } => {
         let furthestNode = afterNode;
-
-        if (direction === 'below') {
+        // This logic finds a "furthest" child for positioning, assuming a simple branching structure.
+        // More complex layouts might need more sophisticated calculations.
+        if (dir === 'below') {
           currentEdges.forEach((edge) => {
             if (edge.source === afterNodeId) {
               const targetNode = currentNodes.find((n) => n.id === edge.target);
               if (
                 targetNode &&
-                (targetNode.position?.y || 0) > (furthestNode.position?.y || 0)
+                (targetNode.position?.y || 0) >
+                  (furthestNode.position?.y || 0) &&
+                (targetNode.position?.x || 0) === (afterNode.position?.x || 0) // Only consider direct children below
               ) {
                 furthestNode = targetNode;
               }
             }
           });
-        } else if (direction === 'right') {
+        } else if (dir === 'right') {
           currentEdges.forEach((edge) => {
             if (edge.source === afterNodeId) {
               const targetNode = currentNodes.find((n) => n.id === edge.target);
               if (
                 targetNode &&
-                (targetNode.position?.x || 0) > (furthestNode.position?.x || 0)
+                (targetNode.position?.x || 0) >
+                  (furthestNode.position?.x || 0) &&
+                (targetNode.position?.y || 0) === (afterNode.position?.y || 0) // Only direct children to the right
               ) {
                 furthestNode = targetNode;
               }
             }
           });
-        } else if (direction === 'left') {
+        } else if (dir === 'left') {
           currentEdges.forEach((edge) => {
             if (edge.source === afterNodeId) {
               const targetNode = currentNodes.find((n) => n.id === edge.target);
               if (
                 targetNode &&
-                (targetNode.position?.x || 0) < (furthestNode.position?.x || 0)
+                (targetNode.position?.x || 0) <
+                  (furthestNode.position?.x || 0) &&
+                (targetNode.position?.y || 0) === (afterNode.position?.y || 0) // Only direct children to the left
               ) {
                 furthestNode = targetNode;
               }
             }
           });
         }
-
         return {
           x: furthestNode.position?.x || 0,
           y: furthestNode.position?.y || 0,
         };
       };
 
-      // If there's already a connection in this direction, add at the same level
       if (hasConnectionInDirection(placementPosition)) {
         const furthestPosition = getFurthestNodePosition(placementPosition);
-
         if (placementPosition === 'below') {
-          newPosition.x = afterNode.position?.x || 0;
-          newPosition.y = furthestPosition.y + 150;
+          newPosition.x = afterNode.position?.x || 0; // Align x with parent
+          newPosition.y = furthestPosition.y + 150; // Place below the furthest child
         } else if (placementPosition === 'right') {
-          newPosition.x = furthestPosition.x + 250;
-          newPosition.y = afterNode.position?.y || 0;
+          newPosition.x = furthestPosition.x + 250; // Place right of the furthest child
+          newPosition.y = afterNode.position?.y || 0; // Align y with parent
         } else if (placementPosition === 'left') {
-          newPosition.x = furthestPosition.x - 250;
-          newPosition.y = afterNode.position?.y || 0;
+          newPosition.x = furthestPosition.x - 250; // Place left of the furthest child
+          newPosition.y = afterNode.position?.y || 0; // Align y with parent
         }
       } else {
-        // No existing connection, add in the requested direction
         if (placementPosition === 'below') {
-          newPosition.y += 150; // Add some vertical spacing
+          newPosition.y += 150;
         } else if (placementPosition === 'right') {
-          newPosition.x += 250; // Add some horizontal spacing
+          newPosition.x += 250;
         } else if (placementPosition === 'left') {
-          newPosition.x -= 250; // Add some horizontal spacing to the left
+          newPosition.x -= 250;
         }
       }
 
-      // Create the new node with the calculated position
-      const nodeWithPosition = {
-        ...newNode,
+      const nodeWithPosition: FlowNode = {
+        ...newNodeData,
         position: newPosition,
       };
 
-      // Add the node
-      const newNodes = [...currentNodes, nodeWithPosition] as FlowNode[];
+      const newNodes = [...currentNodes, nodeWithPosition];
       updateNodes(newNodes);
 
-      // Create a connection from the after node to the new node
       const newEdge: NodeConnection = {
-        id: `${afterNodeId}-${newNode.id}`,
+        id: `edge-${afterNodeId}-${nodeWithPosition.id}`,
         source: afterNodeId,
-        target: newNode.id,
+        target: nodeWithPosition.id,
       };
-
       const newEdges = [...currentEdges, newEdge];
       updateEdges(newEdges);
+      return nodeWithPosition; // Return the created node
     },
     [currentNodes, currentEdges, updateNodes, updateEdges, direction]
   );
@@ -305,17 +332,14 @@ export const useFlowState = ({
   // Function to delete a node
   const deleteNode = useCallback(
     (nodeId: string) => {
-      // Remove the node
       const newNodes = currentNodes.filter((node) => node.id !== nodeId);
       updateNodes(newNodes);
 
-      // Remove any edges connected to the node
       const newEdges = currentEdges.filter(
         (edge) => edge.source !== nodeId && edge.target !== nodeId
       );
       updateEdges(newEdges);
 
-      // Clear selection if the deleted node was selected
       if (currentSelectedNodeId === nodeId && !isSelectedNodeControlled) {
         setUncontrolledSelectedNodeId(undefined);
       }
@@ -339,39 +363,51 @@ export const useFlowState = ({
     [currentEdges, updateEdges]
   );
 
+  // Function to update viewport
+  const updateViewport = useCallback(
+    (newViewport: FlowViewport) => {
+      if (!isViewportControlled) {
+        setUncontrolledViewport(newViewport);
+      }
+      if (onViewportChange) {
+        onViewportChange(newViewport);
+      }
+    },
+    [isViewportControlled, onViewportChange]
+  );
+
   // Function to zoom in
   const zoomIn = useCallback(() => {
-    setViewport((prev) => ({
-      ...prev,
-      zoom: Math.min(prev.zoom + 0.1, 2), // Limit max zoom to 2x
-    }));
-  }, []);
+    const newZoom = Math.min(currentViewport.zoom + 0.1, 2); // Limit max zoom to 2x
+    updateViewport({
+      ...currentViewport,
+      zoom: newZoom,
+    });
+  }, [currentViewport, updateViewport]);
 
   // Function to zoom out
   const zoomOut = useCallback(() => {
-    setViewport((prev) => ({
-      ...prev,
-      zoom: Math.max(prev.zoom - 0.1, 0.5), // Limit min zoom to 0.5x
-    }));
-  }, []);
-
-  // Function to reset zoom and pan
-  const resetView = useCallback(() => {
-    setViewport({
-      zoom: 1,
-      x: 0,
-      y: 0,
+    const newZoom = Math.max(currentViewport.zoom - 0.1, 0.5); // Limit min zoom to 0.5x
+    updateViewport({
+      ...currentViewport,
+      zoom: newZoom,
     });
-  }, []);
+  }, [currentViewport, updateViewport]);
+
+  // Function to reset viewport
+  const resetViewport = useCallback(() => {
+    updateViewport({ zoom: 1, x: 0, y: 0 });
+  }, [updateViewport]);
 
   return {
     baseId,
     nodes: currentNodes,
     edges: currentEdges,
     selectedNodeId: currentSelectedNodeId,
-    viewport,
-    updateNodes,
-    updateEdges,
+    viewport: currentViewport,
+    updateNodes, // Exposing for potential direct manipulation if needed, though usually through actions
+    updateEdges, // Exposing for potential direct manipulation
+    updateViewport, // Exposing for potential direct manipulation
     selectNode,
     addNode,
     addNodeAfter,
@@ -379,6 +415,6 @@ export const useFlowState = ({
     connectNodes,
     zoomIn,
     zoomOut,
-    resetView,
+    resetViewport,
   };
 };

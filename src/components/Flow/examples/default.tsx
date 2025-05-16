@@ -8,6 +8,7 @@ export const DefaultFlow = () => {
   const [nodes, setNodes] = useState<FlowNode[]>([
     {
       id: 'node-1',
+      position: { x: 50, y: 50 }, // Added initial positions for clarity
       data: {
         label: 'New Record',
         subtitle: 'Airtable',
@@ -29,6 +30,7 @@ export const DefaultFlow = () => {
     },
     {
       id: 'node-2',
+      position: { x: 50, y: 200 }, // Added initial positions
       data: {
         label: 'Respond on UI',
         subtitle: 'Human Input',
@@ -50,6 +52,7 @@ export const DefaultFlow = () => {
     },
     {
       id: 'node-3',
+      position: { x: 50, y: 350 }, // Added initial positions
       data: {
         label: 'Wait for Approval',
         subtitle: 'Approval (Legacy)',
@@ -101,17 +104,23 @@ export const DefaultFlow = () => {
               onEdgesChange={setEdges}
               selectedNodeId={selectedNodeId}
               onNodeSelect={setSelectedNodeId}
-              onNodeAdd={(node: FlowNode) => console.log('Node added:', node)}
-              direction="vertical"
+              onNodeAdd={(newNode: FlowNode) => {
+                console.log('Node added:', newNode);
+                // Example of how to update nodes if onNodeAdd was to manage state here
+                // setNodes((nds) => [...nds, newNode]);
+              }}
+              direction="vertical" // Note: 'vertical' direction with current FlowView only stacks vertically.
+              // x/y positioning logic in useFlowState will calculate positions,
+              // but FlowView's simple layout won't reflect complex x/y placements.
               views={{
                 node: {
-                  container: {
-                    width: '90%',
-                  },
-                  content: {
-                    width: '100%',
-                  },
+                  // Example: container style for each node in FlowView
+                  // width: '90%', // This was present, FlowNodeView now has minWidth by default
                 },
+                // Example: content style within each node in FlowView
+                // content: {
+                //   width: '100%',
+                // },
               }}
             />
           </View>
@@ -141,18 +150,22 @@ export const DefaultFlow = () => {
                 • Use the + button below a node to add a new node vertically
               </Text>
               <Text>
-                • Use the + button on the left side to add a node to the left
+                • Use the + button on the left side to add a node (position
+                calculated for a full layout engine)
               </Text>
               <Text>
-                • Use the + button on the right side to add a node to the right
+                • Use the + button on the right side to add a node (position
+                calculated for a full layout engine)
               </Text>
               <Text>
                 • If a node already has a connection in that direction, the new
-                node will be added at the same level
+                node will be added at the same level (logic in state, visual in
+                full layout engine)
               </Text>
               <Text>
                 • If a node doesnt have a connection in that direction, a new
-                node will be created directly connected to it
+                node will be created directly connected to it (logic in state,
+                visual in full layout engine)
               </Text>
               <Text>
                 • Nodes can be added in multiple directions (left, right, below)
@@ -160,12 +173,14 @@ export const DefaultFlow = () => {
               <Text>
                 • Each node can have multiple children in different directions
               </Text>
-              <Text fontWeight="bold" marginTop={4}>
-                Zoom Controls:
+              <Text fontWeight="bold" marginTop={10}>
+                Note on current view:
               </Text>
-              <Text>• Use the + button in the controls to zoom in</Text>
-              <Text>• Use the - button in the controls to zoom out</Text>
-              <Text>• Use the reset button to reset the zoom level</Text>
+              <Text>
+                The current visual rendering is simplified and primarily stacks
+                nodes vertically. Full left/right positioning requires a more
+                complex layout engine (e.g., react-flow or xyflow).
+              </Text>
             </Vertical>
           </View>
         </Vertical>

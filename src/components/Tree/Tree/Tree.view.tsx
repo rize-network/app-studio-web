@@ -1,8 +1,7 @@
 import React, { createContext, useContext } from 'react';
-import { View, Vertical, Horizontal } from 'app-studio';
-import { ViewProps } from 'app-studio';
-import { Text } from '../../Text/Text';
-import { ChevronIcon } from '../../Icon/Icon';
+import { View, Vertical, Horizontal, ViewProps } from 'app-studio';
+import { Text } from '../../Text/Text'; // Assuming Text path is correct
+import { ChevronIcon } from '../../Icon/Icon'; // Assuming Icon path is correct
 import {
   TreeContextType,
   TreeNode,
@@ -12,20 +11,17 @@ import {
   TreeItemLabelProps,
   TreeItemContentProps,
 } from './Tree.type';
+import { TreeProps } from './Tree.props'; // For TreeViewProps
+
 import {
   DefaultTreeStyles,
   TreeSizes,
-  TreeVariants,
+  TreeItemLabelVariants, // Renamed from TreeVariants for clarity
   TreeItemStates,
 } from './Tree.style';
 
 // Create context for the Tree component
-const TreeContext = createContext<TreeContextType>({
-  expandedItems: [],
-  toggleItem: () => {},
-  isItemExpanded: () => false,
-  baseId: '',
-});
+const TreeContext = createContext<TreeContextType | undefined>(undefined);
 
 // Provider component for the Tree context
 export const TreeProvider: React.FC<{
@@ -44,32 +40,34 @@ export const useTreeContext = () => {
   return context;
 };
 
-// Main Tree View component
-export const TreeView: React.FC<
-  {
-    children: React.ReactNode;
-    size?: Size;
-    variant?: Variant;
-    views?: any;
-    baseId: string;
-  } & ViewProps
-> = ({
+// Props for the main TreeView component (root container)
+interface TreeViewProps
+  extends Pick<TreeProps, 'size' | 'variant' | 'views' | 'children'>,
+    Omit<
+      ViewProps,
+      keyof Pick<TreeProps, 'size' | 'variant' | 'views' | 'children'>
+    > {
+  baseId: string;
+}
+
+// Main Tree View component (root container)
+export const TreeView: React.FC<TreeViewProps> = ({
   children,
-  size = 'md',
-  variant = 'default',
-  views,
+  // size, variant, views are accessed from context by items, but can be passed to container
+  views, // Views for the container itself
   baseId,
-  themeMode: elementMode,
+  // themeMode, // If 'app-studio' ViewProps supports themeMode
   ...props
 }) => {
   return (
     <Vertical
+      as="ul" // Semantically a list of items
       width="100%"
-      role="tree"
-      aria-label="Tree"
-      id={baseId}
+      role="tree" // ARIA role for the tree widget
+      aria-label="Tree" // Provide a general label, can be overridden by user
+      id={baseId} // Base ID for the tree
       {...DefaultTreeStyles.container}
-      {...views?.container}
+      {...views?.container} // Apply custom styles for the root container
       {...props}
     >
       {children}
@@ -77,57 +75,98 @@ export const TreeView: React.FC<
   );
 };
 
-// Tree Item component
+// Tree Item component (for compound pattern)
 export const TreeItem: React.FC<TreeItemProps> = ({
-  value,
+  value: itemId, // Renamed for clarity, 'value' is the prop name
   disabled = false,
   icon,
   children,
-  views,
+  views: itemSpecificViews, // Item-specific view overrides
+  style: itemSpecificStyle, // Item-specific direct style override
   ...props
 }) => {
-  const { isItemExpanded, toggleItem, baseId } = useTreeContext();
-  const expanded = isItemExpanded(value);
+  const {
+    isItemExpanded,
+    toggleItem,
+    baseId,
+    selectedItem,
+    selectItem,
+    size: globalSize,
+    variant: globalVariant,
+    views: globalViews,
+  } = useTreeContext();
 
-  // Check if this item has children (for rendering expand/collapse icon)
+  const expanded = isItemExpanded(itemId);
+  const isSelected = selectedItem === itemId;
+
   const hasChildren = React.Children.toArray(children).some(
     (child) => React.isValidElement(child) && child.type === TreeItemContent
   );
 
-  const handleToggle = (e: React.MouseEvent) => {
-    if (disabled) return;
-    toggleItem(value);
-    e.stopPropagation();
+  const handleToggleExpand = (e: React.MouseEvent) => {
+    if (disabled || !hasChildren) return; // Only toggle if has children and not disabled
+    toggleItem(itemId);
+    e.stopPropagation(); // Prevent selection if clicking only on expander area (optional)
   };
+
+  const handleSelect = (e: React.MouseEvent) => {
+    if (disabled) return;
+    selectItem(itemId);
+    // If it has children and click was on label (not expander), also toggle expand
+    // This depends on desired UX. Here, clicking label selects AND toggles if it has children.
+    // If only expander should toggle, then handleToggleExpand is enough.
+    if (hasChildren && e.currentTarget.contains(e.target as Node)) {
+      // Check if click was on label part
+      const targetIsExpander = (e.target as HTMLElement).closest(
+        '[data-expander="true"]'
+      );
+      if (!targetIsExpander) {
+        // Don't re-toggle if click was on expander handled by handleToggleExpand
+        // toggleItem(itemId);
+        // Decided: label click selects. Expander icon toggles.
+        // If you want label click to also toggle, uncomment above.
+      }
+    }
+  };
+
+  // Resolve views: itemSpecific takes precedence over global
+  const resolvedViews = { ...globalViews, ...itemSpecificViews };
 
   return (
     <Vertical
+      as="li" // Each item is a list item
       role="treeitem"
       aria-expanded={hasChildren ? expanded : undefined}
+      aria-selected={isSelected}
       aria-disabled={disabled}
-      id={`${baseId}-item-${value}`}
+      id={`${baseId}-item-${itemId}`} // Unique ID for the item
+      data-tree-item-id={itemId} // For easier querying
       {...DefaultTreeStyles.item}
-      {...(disabled ? TreeItemStates.disabled : {})}
-      {...views?.container}
+      {...resolvedViews.item} // Apply resolved item container styles
+      {...itemSpecificStyle} // Apply direct item style
       {...props}
     >
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          // Pass props to TreeItemLabel
           if (child.type === TreeItemLabel) {
             return React.cloneElement(child as React.ReactElement<any>, {
-              onClick: handleToggle,
+              onClick: handleSelect, // Click on label selects
+              onToggleExpand: handleToggleExpand, // Pass dedicated toggle for expander icon
               hasChildren,
               expanded,
-              icon,
+              icon, // Pass item's icon to its label
               disabled,
+              isSelected,
+              size: globalSize,
+              variant: globalVariant,
+              views: resolvedViews, // Pass resolved views down
             });
           }
-
-          // Pass props to TreeItemContent
           if (child.type === TreeItemContent) {
             return expanded
-              ? React.cloneElement(child as React.ReactElement<any>, {})
+              ? React.cloneElement(child as React.ReactElement<any>, {
+                  views: resolvedViews, // Pass resolved views down
+                })
               : null;
           }
         }
@@ -137,68 +176,103 @@ export const TreeItem: React.FC<TreeItemProps> = ({
   );
 };
 
-// Tree Item Label component
-export const TreeItemLabel: React.FC<
-  TreeItemLabelProps & {
-    onClick?: (e: React.MouseEvent) => void;
-    hasChildren?: boolean;
-    expanded?: boolean;
-    icon?: React.ReactNode;
-    disabled?: boolean;
-  }
-> = ({
+// Tree Item Label component (for compound pattern)
+interface InternalTreeItemLabelProps extends TreeItemLabelProps {
+  onClick?: (e: React.MouseEvent) => void; // For selection
+  onToggleExpand?: (e: React.MouseEvent) => void; // For expander icon click
+  hasChildren?: boolean;
+  expanded?: boolean;
+  icon?: React.ReactNode;
+  disabled?: boolean;
+  isSelected?: boolean;
+  size?: Size;
+  variant?: Variant;
+  views?: TreeProps['views']; // Global or resolved views
+}
+
+export const TreeItemLabel: React.FC<InternalTreeItemLabelProps> = ({
   children,
   onClick,
+  onToggleExpand,
   hasChildren,
   expanded,
   icon,
   disabled,
+  isSelected,
+  size = 'md',
+  variant = 'default',
   views,
   ...props
 }) => {
+  const labelStyles = {
+    ...DefaultTreeStyles.itemLabel,
+    ...TreeSizes[size], // Apply size-specific styles (padding, font)
+    ...TreeItemLabelVariants[variant], // Apply variant-specific styles (bg, border)
+    ...(isSelected && !disabled ? TreeItemStates.selected : {}), // Apply selected state styles
+    ...(disabled ? TreeItemStates.disabled : {}), // Apply disabled state styles
+  };
+  const hoverStyles = disabled
+    ? TreeItemStates.disabled._hover
+    : TreeItemStates.hover;
+
   return (
     <Horizontal
-      onClick={onClick}
+      onClick={onClick} // Click on the whole label area
       alignItems="center"
-      justifyContent="space-between"
+      // justifyContent="space-between" // Removed to allow text to flow, expander pushed by marginLeft:auto
       cursor={disabled ? 'not-allowed' : 'pointer'}
-      {...DefaultTreeStyles.itemLabel}
-      {...views?.container}
+      {...labelStyles}
+      _hover={hoverStyles} // Apply hover state styles
+      {...views?.itemLabel} // Custom global/item overrides for itemLabel
       {...props}
     >
-      <Horizontal alignItems="center">
-        {icon && (
-          <View {...DefaultTreeStyles.icon} {...views?.icon}>
-            {icon}
-          </View>
-        )}
-        {typeof children === 'string' ? <Text>{children}</Text> : children}
-      </Horizontal>
+      {/* Optional Expander Icon (rendered first for some designs, or use order prop if View supports) */}
+      {/* Let's keep icon first, then text, then expander icon */}
+      {icon && (
+        <View {...DefaultTreeStyles.icon} {...views?.icon}>
+          {icon}
+        </View>
+      )}
+      {typeof children === 'string' ? (
+        <Text isTruncated>{children}</Text>
+      ) : (
+        children
+      )}
 
       {hasChildren && (
         <View
+          data-expander="true" // For click target detection
+          onClick={onToggleExpand} // Expander icon has its own click for toggling
+          cursor="pointer" // Ensure cursor indicates clickable expander
+          aria-hidden="true" // Presentation, main item has aria-expanded
           {...DefaultTreeStyles.expandIcon}
-          transform={expanded ? 'rotate(180deg)' : 'rotate(0deg)'}
+          style={{ transform: expanded ? 'rotate(0deg)' : 'rotate(-90deg)' }} // Chevron right for collapsed, down for expanded
           {...views?.expandIcon}
         >
-          <ChevronIcon orientation="down" size={16} />
+          <ChevronIcon orientation="right" size={16} />
+          {/* Changed orientation for more standard tree view: right (collapsed) / down (expanded is done by rotate(0)) */}
+          {/* Or use 'down' and rotate 180deg vs 0deg */}
         </View>
       )}
     </Horizontal>
   );
 };
 
-// Tree Item Content component
-export const TreeItemContent: React.FC<TreeItemContentProps> = ({
+// Tree Item Content component (for compound pattern)
+interface InternalTreeItemContentProps extends TreeItemContentProps {
+  views?: TreeProps['views'];
+}
+export const TreeItemContent: React.FC<InternalTreeItemContentProps> = ({
   children,
   views,
   ...props
 }) => {
   return (
     <Vertical
-      role="group"
+      as="ul" // Children form a nested list
+      role="group" // ARIA role for a group of tree items under a parent
       {...DefaultTreeStyles.itemContent}
-      {...views?.container}
+      {...views?.itemContent} // Custom global/item overrides for itemContent
       {...props}
     >
       {children}
@@ -206,21 +280,25 @@ export const TreeItemContent: React.FC<TreeItemContentProps> = ({
   );
 };
 
-// Recursive component for rendering tree nodes from data
-export const TreeNodeView: React.FC<{
+// Recursive component for rendering tree nodes from `items` (data-driven)
+const TreeNodeView: React.FC<{
   node: TreeNode;
-  size: Size;
-  variant: Variant;
-  views?: any;
-}> = ({ node, size, variant, views }) => {
+  // size, variant, views are taken from context now
+}> = ({ node }) => {
+  const { size, variant, views } = useTreeContext(); // Get globals from context
+
   return (
     <TreeItem
       value={node.id}
       disabled={node.disabled}
       icon={node.icon}
-      {...TreeSizes[size]}
-      {...TreeVariants[variant]}
-      views={views}
+      views={{
+        // Pass only node-specific view overrides if node.style existed for this
+        ...(node.style ? { container: node.style } : {}),
+        // other sub-views from node data if necessary
+      }}
+      // Specific styles for this node can be passed via node.style prop in TreeNode
+      // and applied by TreeItem using its `style` prop.
     >
       <TreeItemLabel>{node.label}</TreeItemLabel>
 
@@ -230,9 +308,7 @@ export const TreeNodeView: React.FC<{
             <TreeNodeView
               key={child.id}
               node={child}
-              size={size}
-              variant={variant}
-              views={views}
+              // size, variant, views are implicitly passed via context to nested TreeItems
             />
           ))}
         </TreeItemContent>
@@ -241,23 +317,15 @@ export const TreeNodeView: React.FC<{
   );
 };
 
-// Data-driven Tree View component
+// Data-driven Tree View content renderer
 export const DataDrivenTreeView: React.FC<{
   items: TreeNode[];
-  size: Size;
-  variant: Variant;
-  views?: any;
-}> = ({ items, size, variant, views }) => {
+  // size, variant, views are from context
+}> = ({ items }) => {
   return (
     <>
       {items.map((item) => (
-        <TreeNodeView
-          key={item.id}
-          node={item}
-          size={size}
-          variant={variant}
-          views={views}
-        />
+        <TreeNodeView key={item.id} node={item} />
       ))}
     </>
   );

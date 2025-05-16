@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tree } from '../Tree';
 import { Text, Vertical } from 'app-studio';
-import { FolderIcon, FileIcon, DocumentIcon } from '../../Icon/Icon';
+import { FolderIcon, FileIcon, DocumentIcon } from '../../Icon/Icon'; // Assuming Icon path is correct
 import { TreeNode } from '../Tree/Tree.type';
 
 export const DataDrivenTree = () => {
@@ -23,7 +23,7 @@ export const DataDrivenTree = () => {
             },
             {
               id: 'doc2',
-              label: 'Document 2.docx',
+              label: 'Document 2.pdf', // Changed extension for variety
               icon: <DocumentIcon size={16} />,
             },
           ],
@@ -36,7 +36,7 @@ export const DataDrivenTree = () => {
             {
               id: 'img1',
               label: 'image1.jpg',
-              icon: <FileIcon size={16} />,
+              icon: <FileIcon size={16} />, // FileIcon is generic, could be ImageImageIcon
             },
             {
               id: 'img2',
@@ -47,15 +47,14 @@ export const DataDrivenTree = () => {
         },
         {
           id: 'videos',
-          label: 'Videos',
+          label: 'Videos (Empty)',
           icon: <FolderIcon size={16} />,
-          children: [
-            {
-              id: 'video1',
-              label: 'video1.mp4',
-              icon: <FileIcon size={16} />,
-            },
-          ],
+          children: [], // Example of an empty expandable folder
+        },
+        {
+          id: 'report',
+          label: 'Annual Report.docx', // Example of a file at the same level as folders
+          icon: <DocumentIcon size={16} />,
         },
       ],
     },
@@ -63,11 +62,15 @@ export const DataDrivenTree = () => {
 
   return (
     <Vertical gap={20} width="100%" maxWidth={400}>
-      <Text marginBottom={10}>Data-Driven Tree</Text>
+      <Text marginBottom={10} fontSize="lg" fontWeight="bold">
+        Data-Driven Tree
+      </Text>
       <Tree
         items={treeData}
-        defaultExpandedItems={['files']}
-        onItemSelect={(itemId) => console.log(`Selected item: ${itemId}`)}
+        defaultExpandedItems={['files', 'documents']} // Expand 'documents' as well
+        onItemSelect={(itemId, itemData) =>
+          console.log(`Selected item: ${itemId}`, itemData)
+        }
       />
     </Vertical>
   );

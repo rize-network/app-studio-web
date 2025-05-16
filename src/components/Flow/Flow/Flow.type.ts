@@ -1,12 +1,16 @@
 import { ViewProps } from 'app-studio';
+// Forward declaration for FlowProps to break circular dependency
+// The actual FlowProps is defined in Flow.props.ts
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface FlowPropsPlaceholder {}
 
 /**
- * Size options for the Flow component
+ * Size options for FlowNodeView
  */
 export type Size = 'sm' | 'md' | 'lg';
 
 /**
- * Variant options for the Flow component
+ * Variant options for FlowNodeView
  */
 export type Variant = 'default' | 'outline' | 'filled';
 
@@ -23,6 +27,12 @@ export interface NodePosition {
  */
 export interface NodeConnection {
   /**
+   * Unique ID for the connection (edge)
+   * Recommended to be `edge-${sourceNodeId}-${targetNodeId}` or similar
+   */
+  id: string;
+
+  /**
    * Source node ID
    */
   source: string;
@@ -38,12 +48,7 @@ export interface NodeConnection {
   label?: string;
 
   /**
-   * Optional ID for the connection
-   */
-  id?: string;
-
-  /**
-   * Optional custom styling for the connection
+   * Optional custom styling for the connection (applied to FlowEdgeView path)
    */
   style?: ViewProps;
 }
@@ -60,12 +65,12 @@ export interface FlowNode {
   /**
    * Node type (used for rendering different node types)
    */
-  type?: string;
+  type?: 'default' | 'start' | 'end' | 'decision' | 'process' | string;
 
   /**
-   * Position of the node
+   * Position of the node. Essential for layout in a full flow library.
    */
-  position?: NodePosition;
+  position: NodePosition; // Made position mandatory for clarity in a flow context
 
   /**
    * Data associated with the node
@@ -98,87 +103,50 @@ export interface FlowNode {
   };
 
   /**
-   * Whether the node is selected
+   * Whether the node is selected (typically managed by state, not set directly on node data)
+   * This field can be used if nodes are passed with pre-selected state, but `selectedNodeId` prop is preferred.
    */
   selected?: boolean;
 
   /**
-   * Custom styling for the node
+   * Custom styling for the node (applied to FlowNodeView container)
    */
   style?: ViewProps;
 }
 
 /**
- * Flow viewport state
+ * Flow viewport state (relevant for pan and zoom, not used in simplified view)
  */
 export interface FlowViewport {
-  /**
-   * Zoom level (scale)
-   */
   zoom: number;
-
-  /**
-   * X position offset
-   */
   x: number;
-
-  /**
-   * Y position offset
-   */
   y: number;
 }
 
 /**
- * Flow component type with sub-components
- */
-export interface FlowComponentType extends React.FC<any> {
-  Node: React.FC<FlowNodeProps>;
-  Edge: React.FC<FlowEdgeProps>;
-  Controls: React.FC<FlowControlsProps>;
-  AddNodeButton: React.FC<FlowAddNodeButtonProps>;
-}
-
-/**
- * Props for the FlowNode component
+ * Props for the FlowNodeView component (individual node)
  */
 export interface FlowNodeProps extends ViewProps {
-  /**
-   * Node data
-   */
   node: FlowNode;
-
-  /**
-   * Callback when node is selected
-   */
   onSelect?: (nodeId: string) => void;
-
-  /**
-   * Whether the node is selected
-   */
   isSelected?: boolean;
-
-  /**
-   * Custom views for styling
-   */
+  size?: Size; // Size prop for individual node styling
+  variant?: Variant; // Variant prop for individual node styling
   views?: {
-    container?: ViewProps;
-    content?: ViewProps;
-    icon?: ViewProps;
+    // Custom views for sub-parts of the node
+    container?: ViewProps; // Styles for the node's root View
+    content?: ViewProps; // Styles for the Horizontal content wrapper
+    icon?: ViewProps; // Styles for the icon View
   };
 }
 
 /**
- * Props for the FlowEdge component
+ * Props for the FlowEdgeView component (connection line)
  */
 export interface FlowEdgeProps extends ViewProps {
-  /**
-   * Edge/connection data
-   */
   edge: NodeConnection;
-
-  /**
-   * Custom views for styling
-   */
+  sourceNode?: FlowNode; // Optional: pass source/target nodes for advanced path calculation
+  targetNode?: FlowNode; // Optional
   views?: {
     path?: ViewProps;
     label?: ViewProps;
@@ -186,53 +154,43 @@ export interface FlowEdgeProps extends ViewProps {
 }
 
 /**
- * Props for the FlowControls component
+ * Props for the FlowControlsView component (zoom/pan buttons)
  */
 export interface FlowControlsProps extends ViewProps {
-  /**
-   * Callback to zoom in
-   */
   onZoomIn?: () => void;
-
-  /**
-   * Callback to zoom out
-   */
   onZoomOut?: () => void;
-
-  /**
-   * Callback to reset view
-   */
   onReset?: () => void;
-
-  /**
-   * Custom views for styling
-   */
   views?: {
     container?: ViewProps;
     button?: ViewProps;
-    controls?: ViewProps;
+    // controls?: ViewProps; // This seems redundant if 'container' is for the whole controls group
   };
 }
 
 /**
- * Props for the FlowAddNodeButton component
+ * Props for the FlowAddNodeButtonView component (the small '+' button)
  */
 export interface FlowAddNodeButtonProps extends Omit<ViewProps, 'position'> {
-  /**
-   * Callback when button is clicked
-   */
+  // HTML position attribute
   onClick?: () => void;
-
   /**
-   * Position of the button
+   * Visual position relative to the element it's attached to (for styling hints, not layout)
    */
-  position?: 'top' | 'right' | 'bottom' | 'left';
-
-  /**
-   * Custom views for styling
-   */
+  attachmentPosition?: 'top' | 'right' | 'bottom' | 'left';
   views?: {
     container?: ViewProps;
     icon?: ViewProps;
   };
+}
+
+/**
+ * Flow component type with sub-components.
+ * P represents the props of the main Flow component (e.g., FlowProps).
+ */
+export interface FlowComponentType<P = FlowPropsPlaceholder>
+  extends React.FC<P> {
+  Node: React.FC<FlowNodeProps>;
+  Edge: React.FC<FlowEdgeProps>; // Placeholder, not fully implemented
+  Controls: React.FC<FlowControlsProps>;
+  AddNodeButton: React.FC<FlowAddNodeButtonProps>;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Vertical, Text } from 'app-studio';
-import { DefaultFlow } from '../components/Flow/examples';
-import { WorkflowTree } from '../components/Tree/examples/workflow';
+import { DefaultFlow, FlowchartExample } from '../components/Flow/examples';
+import { FlowList } from '../components/Flow/examples/list';
 
 const FlowPage = () => {
   return (
@@ -15,7 +15,7 @@ const FlowPage = () => {
           <Text fontSize="lg" fontWeight="bold">
             Workflow Tree
           </Text>
-          <WorkflowTree />
+          <FlowList />
         </Vertical>
 
         <Vertical gap={20}>
@@ -23,6 +23,18 @@ const FlowPage = () => {
             Flow Component
           </Text>
           <DefaultFlow />
+        </Vertical>
+
+        <Vertical gap={20}>
+          <Text fontSize="2xl" fontWeight="bold">
+            Flowchart Component
+          </Text>
+          <Text>
+            This page demonstrates a flowchart component that can be used to
+            create diagrams like the one below. The flowchart supports zooming,
+            panning, and adding nodes in different directions.
+          </Text>
+          <FlowchartExample />
         </Vertical>
       </Vertical>
     </View>

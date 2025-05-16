@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlowProps, FlowType } from './Flow/Flow.props';
 import { useFlowState } from './Flow/Flow.state';
+import { FlowNode } from './Flow/Flow.type';
 import {
   FlowView,
   FlowNodeView,
@@ -15,108 +16,129 @@ import {
  * @example
  * ```tsx
  * // Basic usage
- * const nodes = [
+ * const initialNodes = [
  *   {
  *     id: 'node-1',
+ *     position: { x: 50, y: 50 },
  *     data: { label: 'Node 1', subtitle: 'Description' },
  *   },
  *   {
  *     id: 'node-2',
+ *     position: { x: 50, y: 200 },
  *     data: { label: 'Node 2', subtitle: 'Description' },
  *   },
  * ];
  *
- * const edges = [
- *   { id: 'edge-1', source: 'node-1', target: 'node-2' },
+ * const initialEdges = [
+ *   { id: 'edge-1-2', source: 'node-1', target: 'node-2' },
  * ];
  *
- * <Flow nodes={nodes} edges={edges} />
+ * <Flow nodes={initialNodes} edges={initialEdges} />
  * ```
  */
 const FlowComponent: React.FC<FlowProps> = ({
-  children,
-  nodes: initialNodes = [],
-  edges: initialEdges = [],
+  children, // Not typically used for rendering nodes/edges, but available
+  nodes: controlledNodes, // Renamed from initialNodes to reflect potential controlled nature
+  edges: controlledEdges, // Renamed from initialEdges
   size = 'md',
   variant = 'default',
   direction = 'vertical',
   showControls = true,
   allowAddingNodes = true,
-  allowDeletingNodes = true,
-  allowConnectingNodes = true,
+  // allowDeletingNodes = true, // Prop exists, but delete functionality not fully wired in UI
+  // allowConnectingNodes = true, // Prop exists, but connecting functionality not fully wired in UI
   onNodesChange,
   onEdgesChange,
   onNodeSelect,
   onNodeAdd,
-  onNodeDelete,
-  onConnect,
+  // onNodeDelete,
+  // onConnect,
   selectedNodeId,
+  initialViewport,
+  viewport: controlledViewport,
+  onViewportChange,
   views,
   ...props
 }) => {
   const flowState = useFlowState({
-    initialNodes,
-    initialEdges,
-    nodes: initialNodes,
-    edges: initialEdges,
+    initialNodes: controlledNodes, // Pass controlledNodes as initial if they exist
+    initialEdges: controlledEdges, // Pass controlledEdges as initial
+    nodes: controlledNodes, // For controlled mode
+    edges: controlledEdges, // For controlled mode
     onNodesChange,
     onEdgesChange,
     onNodeSelect,
     selectedNodeId,
     direction,
+    initialViewport,
+    viewport: controlledViewport,
+    onViewportChange,
   });
 
-  // Handler for adding a node after another node
+  // Handler for adding a node after another node, invoked by FlowView
   const handleAddNode = (
     afterNodeId: string,
     position?: 'below' | 'right' | 'left'
   ) => {
-    // Create a new node
-    const newNodeId = `node-${Date.now()}`;
-    const newNode = {
+    // Create a unique ID for the new node.
+    // Consider a more robust UUID generator for production.
+    const newNodeId = `node-${Date.now()}-${Math.random()
+      .toString(36)
+      .substring(2, 6)}`;
+    const newNodeData: Omit<FlowNode, 'position'> = {
+      // Data for the new node, position determined by addNodeAfter
       id: newNodeId,
       data: {
         label: 'New Step',
         subtitle: 'Select Action Type',
+        // Numbering might need recalculation based on all nodes or context
         number: flowState.nodes.length + 1,
       },
     };
 
-    // Add the node after the specified node with the specified position
-    flowState.addNodeAfter(afterNodeId, newNode, position);
+    // Add the node using state logic, which returns the fully formed node including position
+    const addedNode = flowState.addNodeAfter(
+      afterNodeId,
+      newNodeData,
+      position
+    );
 
-    // Call the onNodeAdd callback if provided
+    // Call the onNodeAdd callback if provided by the parent component
     if (onNodeAdd) {
-      onNodeAdd(newNode);
+      onNodeAdd(addedNode); // Pass the full new node, including its calculated position
     }
   };
 
-  // Use a simpler approach to render the flow view
-  return React.createElement(FlowView as any, {
+  // The FlowView component expects specific props from the state and handlers.
+  return React.createElement(FlowView, {
     nodes: flowState.nodes,
     edges: flowState.edges,
     selectedNodeId: flowState.selectedNodeId,
-    viewport: flowState.viewport,
     onNodeSelect: flowState.selectNode,
-    onAddNode: handleAddNode,
+    onAddNode: handleAddNode, // Pass the refined handler
+    baseId: flowState.baseId,
+    viewport: flowState.viewport,
     onZoomIn: flowState.zoomIn,
     onZoomOut: flowState.zoomOut,
-    onReset: flowState.resetView,
+    onReset: flowState.resetViewport,
+    onViewportChange: flowState.updateViewport, // Pass the updateViewport function
+    // Pass through other relevant props
     size,
     variant,
     direction,
     showControls,
     allowAddingNodes,
     views,
-    baseId: flowState.baseId,
-    ...props,
+    ...props, // Spread remaining ViewProps
   });
 };
 
 export const Flow = FlowComponent as FlowType;
 
-// Assign the sub-components to the main component
+// Assign the sub-components to the main component for compound usage (if any)
+// These are primarily for potential direct use or a more componentized future version.
+// The current FlowView renders these internally or has placeholders.
 Flow.Node = FlowNodeView;
-Flow.Edge = FlowEdgeView;
+Flow.Edge = FlowEdgeView; // Note: FlowEdgeView is a simplified placeholder
 Flow.Controls = FlowControlsView;
 Flow.AddNodeButton = FlowAddNodeButtonView;
