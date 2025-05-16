@@ -29,7 +29,7 @@ export const DefaultTreeStyles = {
     // Styles for TreeItemContent (wrapper for children)
     paddingLeft: 24, // Indentation for children, aligns with typical icon + expander width
     overflow: 'hidden', // For smooth expand/collapse animation if height is transitioned
-    borderLeft: '1px solid var(--app-studio-colors-gray-200)', // Guide line for hierarchy
+    borderLeft: '1px solid color.gray.100', // Guide line for hierarchy
     marginLeft: 12, // Position the guide line relative to the parent's padding start
     paddingTop: 4, // Space above children within the content area
     paddingBottom: 4, // Space below children
@@ -97,13 +97,13 @@ export const TreeItemLabelVariants: Record<Variant, ViewProps> = {
 export const TreeItemStates = {
   selected: {
     // Style for the selected item's label
-    backgroundColor: 'var(--app-studio-colors-blue-100)', // Use CSS var for theming
-    color: 'var(--app-studio-colors-blue-700)',
+    backgroundColor: 'color.blue.100', // Use CSS var for theming
+    color: 'color.blue.100',
     fontWeight: 'medium',
   },
   hover: {
     // Hover style for any item's label
-    backgroundColor: 'var(--app-studio-colors-gray-100)',
+    backgroundColor: 'color.gray.100',
   },
   disabled: {
     // Style for a disabled item's label

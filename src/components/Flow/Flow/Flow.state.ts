@@ -174,28 +174,43 @@ export const useFlowState = ({
     [currentNodes, updateNodes]
   );
 
-  // Function to add a node relative to a specific node
   const addNodeAfter = useCallback(
     (
-      afterNodeId: string,
-      newNodeData: Omit<FlowNode, 'position'>, // newNodeData now doesn't include position
+      afterNodeId: string | null, // <<< MODIFIED: Allow null for first node
+      newNodeData: Omit<FlowNode, 'position'>,
       position?: 'below' | 'right' | 'left'
     ): FlowNode => {
-      // Return the fully formed new node
+      // Handle adding the first node if afterNodeId is null or a specific marker
+      if (afterNodeId === null || afterNodeId === '') {
+        // Determine a default position for the first node
+        // This could be improved to be center of viewport or configurable
+        const firstNodePosition = { x: 150, y: 100 }; // Example default position
+
+        const positionedNewNode: FlowNode = {
+          ...newNodeData,
+          position: firstNodePosition,
+        };
+        updateNodes([...currentNodes, positionedNewNode]);
+        // No edge is created for the first node by default
+        return positionedNewNode;
+      }
+
       const afterNode = currentNodes.find((node) => node.id === afterNodeId);
       if (!afterNode) {
-        // Fallback or error handling if afterNode is not found
         console.warn(
-          `addNodeAfter: Could not find node with id ${afterNodeId}`
+          `addNodeAfter: Could not find node with id ${afterNodeId}. Adding node at default position.`
         );
+        // Fallback: add node at a default position if afterNode is not found
+        const fallbackPosition = { x: 100, y: currentNodes.length * 100 + 100 };
         const positionedNewNode = {
           ...newNodeData,
-          position: { x: 0, y: 0 },
+          position: fallbackPosition,
         } as FlowNode;
         updateNodes([...currentNodes, positionedNewNode]);
         return positionedNewNode;
       }
 
+      // Existing logic for positioning relative to afterNode
       const newPosition = {
         x: afterNode.position?.x || 0,
         y: afterNode.position?.y || 0,
@@ -204,6 +219,12 @@ export const useFlowState = ({
       const placementPosition =
         position || (direction === 'vertical' ? 'below' : 'right');
 
+      // ... (rest of the existing addNodeAfter logic for relative positioning)
+      // Ensure this logic correctly uses newPosition, placementPosition, etc.
+      // The existing logic for hasConnectionInDirection, getFurthestNodePosition,
+      // and calculating newPosition based on placementPosition seems reasonable.
+
+      // Example of how the existing logic continues:
       const hasConnectionInDirection = (
         dir: 'below' | 'right' | 'left'
       ): boolean => {
@@ -212,21 +233,39 @@ export const useFlowState = ({
             const targetNode = currentNodes.find((n) => n.id === edge.target);
             const targetY = targetNode?.position?.y || 0;
             const sourceY = afterNode.position?.y || 0;
-            return edge.source === afterNodeId && targetY > sourceY;
+            return (
+              edge.source === afterNodeId &&
+              targetY > sourceY &&
+              Math.abs(
+                (targetNode?.position?.x || 0) - (afterNode.position?.x || 0)
+              ) < 50
+            ); // Check if somewhat aligned
           });
         } else if (dir === 'right') {
           return currentEdges.some((edge) => {
             const targetNode = currentNodes.find((n) => n.id === edge.target);
             const targetX = targetNode?.position?.x || 0;
             const sourceX = afterNode.position?.x || 0;
-            return edge.source === afterNodeId && targetX > sourceX;
+            return (
+              edge.source === afterNodeId &&
+              targetX > sourceX &&
+              Math.abs(
+                (targetNode?.position?.y || 0) - (afterNode.position?.y || 0)
+              ) < 50
+            );
           });
         } else if (dir === 'left') {
           return currentEdges.some((edge) => {
             const targetNode = currentNodes.find((n) => n.id === edge.target);
             const targetX = targetNode?.position?.x || 0;
             const sourceX = afterNode.position?.x || 0;
-            return edge.source === afterNodeId && targetX < sourceX;
+            return (
+              edge.source === afterNodeId &&
+              targetX < sourceX &&
+              Math.abs(
+                (targetNode?.position?.y || 0) - (afterNode.position?.y || 0)
+              ) < 50
+            );
           });
         }
         return false;
@@ -236,8 +275,6 @@ export const useFlowState = ({
         dir: 'below' | 'right' | 'left'
       ): { x: number; y: number } => {
         let furthestNode = afterNode;
-        // This logic finds a "furthest" child for positioning, assuming a simple branching structure.
-        // More complex layouts might need more sophisticated calculations.
         if (dir === 'below') {
           currentEdges.forEach((edge) => {
             if (edge.source === afterNodeId) {
@@ -246,7 +283,9 @@ export const useFlowState = ({
                 targetNode &&
                 (targetNode.position?.y || 0) >
                   (furthestNode.position?.y || 0) &&
-                (targetNode.position?.x || 0) === (afterNode.position?.x || 0) // Only consider direct children below
+                Math.abs(
+                  (targetNode.position?.x || 0) - (afterNode.position?.x || 0)
+                ) < 50 // Consider nodes directly below
               ) {
                 furthestNode = targetNode;
               }
@@ -260,7 +299,9 @@ export const useFlowState = ({
                 targetNode &&
                 (targetNode.position?.x || 0) >
                   (furthestNode.position?.x || 0) &&
-                (targetNode.position?.y || 0) === (afterNode.position?.y || 0) // Only direct children to the right
+                Math.abs(
+                  (targetNode.position?.y || 0) - (afterNode.position?.y || 0)
+                ) < 50 // Consider nodes directly to the right
               ) {
                 furthestNode = targetNode;
               }
@@ -274,7 +315,9 @@ export const useFlowState = ({
                 targetNode &&
                 (targetNode.position?.x || 0) <
                   (furthestNode.position?.x || 0) &&
-                (targetNode.position?.y || 0) === (afterNode.position?.y || 0) // Only direct children to the left
+                Math.abs(
+                  (targetNode.position?.y || 0) - (afterNode.position?.y || 0)
+                ) < 50 // Consider nodes directly to the left
               ) {
                 furthestNode = targetNode;
               }
@@ -290,24 +333,25 @@ export const useFlowState = ({
       if (hasConnectionInDirection(placementPosition)) {
         const furthestPosition = getFurthestNodePosition(placementPosition);
         if (placementPosition === 'below') {
-          newPosition.x = afterNode.position?.x || 0; // Align x with parent
-          newPosition.y = furthestPosition.y + 150; // Place below the furthest child
+          newPosition.x = afterNode.position?.x || 0;
+          newPosition.y = furthestPosition.y + 150;
         } else if (placementPosition === 'right') {
-          newPosition.x = furthestPosition.x + 250; // Place right of the furthest child
-          newPosition.y = afterNode.position?.y || 0; // Align y with parent
+          newPosition.x = furthestPosition.x + 250;
+          newPosition.y = afterNode.position?.y || 0;
         } else if (placementPosition === 'left') {
-          newPosition.x = furthestPosition.x - 250; // Place left of the furthest child
-          newPosition.y = afterNode.position?.y || 0; // Align y with parent
+          newPosition.x = furthestPosition.x - 250;
+          newPosition.y = afterNode.position?.y || 0;
         }
       } else {
         if (placementPosition === 'below') {
-          newPosition.y += 150;
+          newPosition.y += 150; // Default spacing
         } else if (placementPosition === 'right') {
-          newPosition.x += 250;
+          newPosition.x += 250; // Default spacing
         } else if (placementPosition === 'left') {
-          newPosition.x -= 250;
+          newPosition.x -= 250; // Default spacing
         }
       }
+      // End of existing logic section to be preserved
 
       const nodeWithPosition: FlowNode = {
         ...newNodeData,
@@ -318,13 +362,13 @@ export const useFlowState = ({
       updateNodes(newNodes);
 
       const newEdge: NodeConnection = {
-        id: `edge-${afterNodeId}-${nodeWithPosition.id}`,
+        id: `edge-${afterNodeId}-${nodeWithPosition.id}`, // afterNodeId will be valid here
         source: afterNodeId,
         target: nodeWithPosition.id,
       };
       const newEdges = [...currentEdges, newEdge];
       updateEdges(newEdges);
-      return nodeWithPosition; // Return the created node
+      return nodeWithPosition;
     },
     [currentNodes, currentEdges, updateNodes, updateEdges, direction]
   );

@@ -106,6 +106,7 @@ export const FlowEdgeView: React.FC<FlowEdgeProps> = ({
   sourceNode,
   targetNode,
   views,
+  nodeSize = 'md',
   ...props
 }) => {
   // If we don't have both source and target nodes, we can't render the edge
@@ -113,99 +114,150 @@ export const FlowEdgeView: React.FC<FlowEdgeProps> = ({
     return null;
   }
 
-  // Calculate the path between the source and target nodes
+  // Calculate the positions
   const sourceX = sourceNode.position.x;
   const sourceY = sourceNode.position.y;
   const targetX = targetNode.position.x;
   const targetY = targetNode.position.y;
 
-  // Calculate the dimensions of the nodes (approximate)
-  const sourceWidth = 200; // Use the minWidth from DefaultFlowStyles.node
-  const sourceHeight = 60; // Use the minHeight from DefaultFlowStyles.node
-  const targetWidth = 200;
-  const targetHeight = 60;
+  // Determine if the connection is horizontal or vertical
+  const isHorizontal =
+    Math.abs(targetX - sourceX) > Math.abs(targetY - sourceY);
 
-  // Calculate the connection points
-  let startX: number = 0,
-    startY: number = 0,
-    endX: number = 0,
-    endY: number = 0;
+  // Use a default color for the edge
+  const lineColor = 'color.blue.500';
+  const lineThickness = 1;
 
-  // Determine if the connection is vertical or horizontal
-  if (Math.abs(targetX - sourceX) > Math.abs(targetY - sourceY)) {
-    // Horizontal connection
-    startX = sourceX + (targetX > sourceX ? sourceWidth / 2 : -sourceWidth / 2);
-    startY = sourceY;
-    endX = targetX + (sourceX > targetX ? targetWidth / 2 : -targetWidth / 2);
-    endY = targetY;
-  } else {
-    // Vertical connection
-    startX = sourceX;
-    startY =
-      sourceY + (targetY > sourceY ? sourceHeight / 2 : -sourceHeight / 2);
-    endX = targetX;
-    endY = targetY + (sourceY > targetY ? targetHeight / 2 : -targetHeight / 2);
-  }
+  // For horizontal connections
+  if (isHorizontal) {
+    const direction = targetX > sourceX ? 1 : -1; // Right or left
+    const midX = (sourceX + targetX) / 2;
 
-  // Create a unique ID for the arrow marker
-  const markerId = `arrow-${edge.id}`;
-
-  // Calculate the path
-  const path = `M${startX},${startY} L${endX},${endY}`;
-
-  return (
-    <View
-      as="svg"
-      width="100%"
-      height="100%"
-      position="absolute"
-      top={0}
-      left={0}
-      pointerEvents="none"
-      overflow="visible"
-      {...props}
-    >
-      <View as="defs">
+    return (
+      <View position="absolute" pointerEvents="none">
+        {/* Horizontal line from source to midpoint */}
         <View
-          as="marker"
-          id={markerId}
-          viewBox="0 0 10 10"
-          refX="5"
-          refY="5"
-          markerWidth="6"
-          markerHeight="6"
-          orient="auto-start-reverse"
-        >
+          position="absolute"
+          left={sourceX}
+          top={sourceY}
+          width={Math.abs(midX - sourceX)}
+          height={lineThickness}
+          backgroundColor={lineColor}
+          style={{
+            transform: `translateX(${direction > 0 ? 0 : -100}%)`,
+          }}
+        />
+
+        {/* Vertical line at midpoint */}
+        <View
+          position="absolute"
+          left={midX}
+          top={Math.min(sourceY, targetY)}
+          width={lineThickness}
+          height={Math.abs(targetY - sourceY)}
+          backgroundColor={lineColor}
+        />
+
+        {/* Horizontal line from midpoint to target */}
+        <View
+          position="absolute"
+          left={midX}
+          top={targetY}
+          width={Math.abs(targetX - midX)}
+          height={lineThickness}
+          backgroundColor={lineColor}
+          style={{
+            transform: `translateX(${direction > 0 ? 0 : -100}%)`,
+          }}
+        />
+
+        {/* Edge label if present */}
+        {edge.label && (
           <View
-            as="path"
-            d="M 0 0 L 10 5 L 0 10 z"
-            {...DefaultFlowStyles.edgeArrow}
-          />
-        </View>
-      </View>
-      <View
-        as="path"
-        d={path}
-        markerEnd={`url(#${markerId})`}
-        {...DefaultFlowStyles.edge}
-        {...edge.style}
-        {...views?.path}
-      />
-      {edge.label && (
-        <View
-          as="foreignObject"
-          x={(startX + endX) / 2 - 50}
-          y={(startY + endY) / 2 - 15}
-          width={100}
-          height={30}
-        >
-          <View {...DefaultFlowStyles.edgeLabel} {...views?.label}>
-            <Text textAlign="center">{edge.label}</Text>
+            position="absolute"
+            left={midX}
+            top={targetY}
+            transform="translate(-50%, -50%)"
+            backgroundColor="white"
+            padding={2}
+            borderRadius={4}
+            border="1px solid"
+            borderColor="color.gray.200"
+            zIndex={10}
+          >
+            <Text fontSize="xs" textAlign="center">
+              {edge.label}
+            </Text>
           </View>
-        </View>
-      )}
-    </View>
-  );
+        )}
+      </View>
+    );
+  }
+  // For vertical connections
+  else {
+    const direction = targetY > sourceY ? 1 : -1; // Down or up
+    const midY = (sourceY + targetY) / 2;
+
+    return (
+      <View position="absolute" pointerEvents="none">
+        {/* Vertical line from source to midpoint */}
+        <View
+          position="absolute"
+          left={sourceX}
+          top={sourceY}
+          width={lineThickness}
+          height={Math.abs(midY - sourceY)}
+          backgroundColor={lineColor}
+          style={{
+            transform: `translateY(${direction > 0 ? 0 : -100}%)`,
+          }}
+        />
+
+        {/* Horizontal line at midpoint */}
+        <View
+          position="absolute"
+          left={Math.min(sourceX, targetX)}
+          top={midY}
+          width={Math.abs(targetX - sourceX)}
+          height={lineThickness}
+          backgroundColor={lineColor}
+        />
+
+        {/* Vertical line from midpoint to target */}
+        <View
+          position="absolute"
+          left={targetX}
+          top={midY}
+          width={lineThickness}
+          height={Math.abs(targetY - midY)}
+          backgroundColor={lineColor}
+          style={{
+            transform: `translateY(${direction > 0 ? 0 : -100}%)`,
+          }}
+        />
+
+        {/* Edge label if present */}
+        {edge.label && (
+          <View
+            position="absolute"
+            left={targetX}
+            top={midY}
+            transform="translate(-50%, -50%)"
+            backgroundColor="white"
+            padding={2}
+            borderRadius={4}
+            border="1px solid"
+            borderColor="color.gray.200"
+            zIndex={10}
+          >
+            <Text fontSize="xs" textAlign="center">
+              {edge.label}
+            </Text>
+          </View>
+        )}
+      </View>
+    );
+  }
 };
 
 // Flow Controls component
@@ -467,25 +519,26 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
     // We need to pass this to the parent component
     if (onViewportChange) {
       onViewportChange(newViewport);
-    } else {
-      // If no onViewportChange is provided, we can try to use the zoom functions
-      if (onZoomIn && onZoomOut && onReset) {
-        const currentZoom = viewport.zoom;
-
-        if (newViewport.zoom > currentZoom) {
-          onZoomIn();
-        } else if (newViewport.zoom < currentZoom) {
-          onZoomOut();
-        } else if (
-          newViewport.x !== viewport.x ||
-          newViewport.y !== viewport.y
-        ) {
-          // This is a pan operation, but we don't have direct access to updateViewport
-          // We'll just use the zoom functions to approximate the behavior
-          onReset(); // This is not ideal, but it's the best we can do without updateViewport
-        }
-      }
     }
+    // else {
+    //   // If no onViewportChange is provided, we can try to use the zoom functions
+    //   if (onZoomIn && onZoomOut && onReset) {
+    //     const currentZoom = viewport.zoom;
+
+    //     if (newViewport.zoom > currentZoom) {
+    //       onZoomIn();
+    //     } else if (newViewport.zoom < currentZoom) {
+    //       onZoomOut();
+    //     } else if (
+    //       newViewport.x !== viewport.x ||
+    //       newViewport.y !== viewport.y
+    //     ) {
+    //       // This is a pan operation, but we don't have direct access to updateViewport
+    //       // We'll just use the zoom functions to approximate the behavior
+    //       onReset(); // This is not ideal, but it's the best we can do without updateViewport
+    //     }
+    //   }
+    // }
   };
 
   const handleAddNode = (
@@ -526,6 +579,7 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
         transform={`scale(${viewport.zoom}) translate(${viewport.x}px, ${viewport.y}px)`}
         transformOrigin="center"
         transition="transform 0.2s ease"
+        style={{ pointerEvents: 'none' }} // Don't intercept pointer events
       >
         {edges.map((edge) => {
           const sourceNode = nodes.find((n) => n.id === edge.source);
@@ -539,6 +593,7 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
                 sourceNode={sourceNode}
                 targetNode={targetNode}
                 views={views.edge}
+                nodeSize={size} // <<< PASS global node size to FlowEdgeView
               />
             );
           }
@@ -573,16 +628,14 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
               variant={variant}
               views={views.node}
             />
-
-            {/* Add buttons */}
             {allowAddingNodes && (
-              <View position="relative">
+              <View width={'100%'} height={'100%'}>
                 {/* Below Add Button */}
                 <View
                   position="absolute"
+                  bottom="-20%"
                   left="50%"
-                  top="100%"
-                  transform="translate(-50%, 10px)"
+                  transform="translate(-50%, 0%)"
                   zIndex={5}
                 >
                   <FlowAddNodeButtonView
@@ -595,9 +648,9 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
                 {/* Left Add Button */}
                 <View
                   position="absolute"
-                  left="-20px"
+                  left="0%"
                   top="50%"
-                  transform="translate(-100%, -50%)"
+                  transform="translate(-50%, -50%)"
                   zIndex={5}
                 >
                   <FlowAddNodeButtonView
@@ -612,9 +665,9 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
                 {/* Right Add Button */}
                 <View
                   position="absolute"
-                  right="-20px"
+                  right="0%"
                   top="50%"
-                  transform="translate(100%, -50%)"
+                  transform="translate(50%, -50%)"
                   zIndex={5}
                 >
                   <FlowAddNodeButtonView
@@ -640,8 +693,12 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
           >
             <FlowAddNodeButtonView
               onClick={() => {
-                console.log('Attempting to add first node');
-                // You would need to implement a special case for adding the first node
+                if (onAddNode) {
+                  // Pass null or a special ID to indicate adding the first node.
+                  // The 'below' position is arbitrary here, could be omitted if
+                  // the handler for the first node doesn't use it.
+                  onAddNode(null as any, 'below'); // <<< MODIFIED
+                }
               }}
               views={views.addButton}
               aria-label="Add first node"
@@ -653,17 +710,20 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
       {/* Fixed Controls - Always visible regardless of viewport position */}
       {showControls && (
         <View
-          position="fixed"
-          top={16}
-          right={16}
-          zIndex={100}
+          position="absolute"
+          top={40}
+          right={40}
+          zIndex={1000}
           display="flex"
           flexDirection="column"
           gap={8}
-          backgroundColor="rgba(255, 255, 255, 0.8)"
-          padding={2}
+          backgroundColor="white"
+          padding={4}
           borderRadius={8}
-          boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
+          boxShadow="0 2px 8px rgba(0, 0, 0, 0.15)"
+          border="1px solid"
+          borderColor="color.gray.200"
+          pointerEvents="auto" // Ensure controls are clickable
           {...views?.fixedControlsContainer}
         >
           <FlowControlsView
@@ -675,20 +735,21 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
         </View>
       )}
 
-      {/* Display current zoom level and navigation help */}
+      {/* Display current zoom level */}
       <View
         position="absolute"
-        bottom={4}
-        left={4}
+        bottom={16}
+        left={16}
         backgroundColor="white"
         padding={2}
         borderRadius={4}
         fontSize="xs"
-        opacity={0.7}
-        zIndex={10}
+        border="1px solid"
+        borderColor="color.gray.200"
+        zIndex={1000}
+        pointerEvents="none" // Don't intercept pointer events
       >
         <Text fontSize="xs">Zoom: {Math.round(viewport.zoom * 100)}%</Text>
-        <Text fontSize="xs">Alt+Drag to pan | Ctrl+Wheel to zoom</Text>
       </View>
     </View>
   );

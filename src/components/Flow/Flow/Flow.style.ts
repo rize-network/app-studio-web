@@ -35,17 +35,20 @@ export const DefaultFlowStyles = {
   } as ViewProps,
   selectedNode: {
     borderColor: 'color.blue.400',
-    boxShadow: '0 0 0 2px var(--app-studio-colors-blue-100)', // Use CSS var for theme compatibility
+    boxShadow: '0 0 0 2px color.blue.100', // Use CSS var for theme compatibility
   } as ViewProps,
   edge: {
     // Styles for the SVG path in FlowEdgeView
-    stroke: 'var(--app-studio-colors-gray-300)',
-    strokeWidth: 2,
+    stroke: 'color.blue.400',
+    strokeWidth: 2.5,
     fill: 'none',
+    strokeDasharray: 'none', // Remove any dashes
+    strokeLinecap: 'round', // Round the ends of the line
+    strokeLinejoin: 'round', // Round the corners
   } as ViewProps,
   edgeArrow: {
     // Styles for the arrow marker in FlowEdgeView
-    fill: 'var(--app-studio-colors-gray-300)',
+    fill: 'color.blue.400',
   } as ViewProps,
   edgeLabel: {
     // Styles for the label in FlowEdgeView

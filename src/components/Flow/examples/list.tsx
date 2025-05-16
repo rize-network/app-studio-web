@@ -201,11 +201,7 @@ export const FlowList = () => {
             marginBottom={0} // Connectors will handle spacing
             position="relative"
             zIndex={1} // Ensure node is above connector line part behind it
-            boxShadow={
-              index === 1
-                ? '0 0 0 2px var(--app-studio-colors-purple-100)'
-                : 'none'
-            }
+            boxShadow={index === 1 ? '0 0 0 2px color.purple.100' : 'none'}
           >
             <Horizontal gap={12} alignItems="center">
               {node.icon}

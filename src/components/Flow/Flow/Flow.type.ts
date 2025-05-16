@@ -151,6 +151,7 @@ export interface FlowEdgeProps extends ViewProps {
     path?: ViewProps;
     label?: ViewProps;
   };
+  nodeSize?: Size; // <<< ADDED: To help calculate node dimensions for edge connection
 }
 
 /**
