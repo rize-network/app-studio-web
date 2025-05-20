@@ -6,6 +6,7 @@ import {
   NodeConnection,
   FlowComponentType,
   FlowViewport,
+  NodePosition,
 } from './Flow.type';
 
 /**
@@ -72,6 +73,12 @@ export interface FlowProps extends Omit<ViewProps, 'position'> {
   allowConnectingNodes?: boolean;
 
   /**
+   * Whether to allow dragging nodes to reposition them
+   * @default true
+   */
+  allowDraggingNodes?: boolean;
+
+  /**
    * Callback when nodes change (e.g., added, position changed)
    */
   onNodesChange?: (nodes: FlowNode[]) => void;
@@ -102,6 +109,28 @@ export interface FlowProps extends Omit<ViewProps, 'position'> {
    * Callback when a connection is created
    */
   onConnect?: (connection: NodeConnection) => void;
+
+  /**
+   * Callback when a node drag starts
+   */
+  onNodeDragStart?: (
+    nodeId: string,
+    event: React.MouseEvent | React.TouchEvent
+  ) => void;
+
+  /**
+   * Callback when a node is being dragged
+   */
+  onNodeDrag?: (
+    nodeId: string,
+    position: NodePosition,
+    event: MouseEvent | TouchEvent
+  ) => void;
+
+  /**
+   * Callback when a node drag ends
+   */
+  onNodeDragEnd?: (nodeId: string, position: NodePosition) => void;
 
   /**
    * ID of the selected node (controlled mode)

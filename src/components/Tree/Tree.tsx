@@ -15,6 +15,12 @@ import {
  * Supports both compound component pattern (using Tree.Item, Tree.ItemLabel, Tree.ItemContent)
  * and a data-driven approach (passing an array of TreeNode objects to the `items` prop).
  *
+ * Features:
+ * - Hierarchical data display with expandable/collapsible nodes
+ * - Item selection with callbacks
+ * - Drag and drop functionality for reorganizing tree items
+ * - Customizable styling through views prop
+ *
  * @example
  * ```tsx
  * // Compound component pattern
@@ -39,6 +45,15 @@ import {
  *   }
  * ];
  * <Tree items={treeNodes} defaultExpandedItems={['parent-1']} />
+ *
+ * // With drag and drop for menu reorganization
+ * const [menuItems, setMenuItems] = useState(initialMenuItems);
+ *
+ * <Tree
+ *   items={menuItems}
+ *   allowDragAndDrop={true}
+ *   onItemsReorder={setMenuItems}
+ * />
  * ```
  */
 const TreeComponent: React.FC<TreeProps> = ({
@@ -53,6 +68,11 @@ const TreeComponent: React.FC<TreeProps> = ({
   selectedItem,
   onItemSelect,
   multiSelect = false,
+  allowDragAndDrop = false,
+  dragHandleIcon,
+  onItemsReorder,
+  onDragStart,
+  onDragEnd,
   views, // Global views configuration
   ...props // Remaining ViewProps for the root TreeView container
 }) => {
@@ -65,6 +85,10 @@ const TreeComponent: React.FC<TreeProps> = ({
     onItemSelect,
     multiSelect,
     items, // Pass items for data-driven selection logic
+    allowDragAndDrop,
+    onItemsReorder,
+    onDragStart,
+    onDragEnd,
   });
 
   return (
@@ -79,6 +103,16 @@ const TreeComponent: React.FC<TreeProps> = ({
         size, // Pass global size
         variant, // Pass global variant
         views, // Pass global views configuration
+        // Drag and drop related
+        allowDragAndDrop: treeState.allowDragAndDrop,
+        dragHandleIcon,
+        draggedItemId: treeState.draggedItemId,
+        dropTarget: treeState.dropTarget,
+        handleDragStart: treeState.handleDragStart,
+        handleDragOver: treeState.handleDragOver,
+        handleDrop: treeState.handleDrop,
+        handleDragEnd: treeState.handleDragEnd,
+        getDraggedItem: treeState.getDraggedItem,
       }}
     >
       <TreeView

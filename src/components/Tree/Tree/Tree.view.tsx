@@ -2,6 +2,42 @@ import React, { createContext, useContext } from 'react';
 import { View, Vertical, Horizontal, ViewProps } from 'app-studio';
 import { Text } from '../../Text/Text'; // Assuming Text path is correct
 import { ChevronIcon } from '../../Icon/Icon'; // Assuming Icon path is correct
+
+// Default drag handle icon
+const DefaultDragHandleIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6 4C6 4.55228 5.55228 5 5 5C4.44772 5 4 4.55228 4 4C4 3.44772 4.44772 3 5 3C5.55228 3 6 3.44772 6 4Z"
+      fill="currentColor"
+    />
+    <path
+      d="M6 8C6 8.55228 5.55228 9 5 9C4.44772 9 4 8.55228 4 8C4 7.44772 4.44772 7 5 7C5.55228 7 6 7.44772 6 8Z"
+      fill="currentColor"
+    />
+    <path
+      d="M6 12C6 12.5523 5.55228 13 5 13C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11C5.55228 11 6 11.4477 6 12Z"
+      fill="currentColor"
+    />
+    <path
+      d="M12 4C12 4.55228 11.5523 5 11 5C10.4477 5 10 4.55228 10 4C10 3.44772 10.4477 3 11 3C11.5523 3 12 3.44772 12 4Z"
+      fill="currentColor"
+    />
+    <path
+      d="M12 8C12 8.55228 11.5523 9 11 9C10.4477 9 10 8.55228 10 8C10 7.44772 10.4477 7 11 7C11.5523 7 12 7.44772 12 8Z"
+      fill="currentColor"
+    />
+    <path
+      d="M12 12C12 12.5523 11.5523 13 11 13C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11C11.5523 11 12 11.4477 12 12Z"
+      fill="currentColor"
+    />
+  </svg>
+);
 import {
   TreeContextType,
   TreeNode,
@@ -59,6 +95,35 @@ export const TreeView: React.FC<TreeViewProps> = ({
   // themeMode, // If 'app-studio' ViewProps supports themeMode
   ...props
 }) => {
+  const { allowDragAndDrop, handleDrop, handleDragEnd } = useTreeContext();
+
+  // Handle drag over for the entire tree container
+  const handleContainerDragOver = (e: React.DragEvent) => {
+    if (!allowDragAndDrop) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    // We don't set a drop target here, as we're not over a specific item
+  };
+
+  // Handle drop on the container (outside any specific item)
+  const handleContainerDrop = (e: React.DragEvent) => {
+    if (!allowDragAndDrop || !handleDrop) return;
+
+    // When dropping on the container, we want to cancel the operation
+    // rather than potentially causing data loss
+    console.log('Drop on container: canceling operation to preserve data');
+
+    // We still call handleDrop which will reset the drag state
+    // but since dropTarget is null, it won't modify the tree structure
+    handleDrop(e);
+  };
+
+  // Handle drag end for the container
+  const handleContainerDragEnd = (e: React.DragEvent) => {
+    if (!allowDragAndDrop || !handleDragEnd) return;
+    handleDragEnd(e);
+  };
+
   return (
     <Vertical
       as="ul" // Semantically a list of items
@@ -66,6 +131,9 @@ export const TreeView: React.FC<TreeViewProps> = ({
       role="tree" // ARIA role for the tree widget
       aria-label="Tree" // Provide a general label, can be overridden by user
       id={baseId} // Base ID for the tree
+      onDragOver={allowDragAndDrop ? handleContainerDragOver : undefined}
+      onDrop={allowDragAndDrop ? handleContainerDrop : undefined}
+      onDragEnd={allowDragAndDrop ? handleContainerDragEnd : undefined}
       {...DefaultTreeStyles.container}
       {...views?.container} // Apply custom styles for the root container
       {...props}
@@ -83,6 +151,7 @@ export const TreeItem: React.FC<TreeItemProps> = ({
   children,
   views: itemSpecificViews, // Item-specific view overrides
   style: itemSpecificStyle, // Item-specific direct style override
+  draggable,
   ...props
 }) => {
   const {
@@ -94,10 +163,23 @@ export const TreeItem: React.FC<TreeItemProps> = ({
     size: globalSize,
     variant: globalVariant,
     views: globalViews,
+    allowDragAndDrop,
+    draggedItemId,
+    dropTarget,
+    handleDragStart,
+    handleDragOver,
+    handleDrop,
+    handleDragEnd,
   } = useTreeContext();
 
   const expanded = isItemExpanded(itemId);
   const isSelected = selectedItem === itemId;
+  const isDragging = draggedItemId === itemId;
+  const canDrag = allowDragAndDrop && draggable !== false && !disabled;
+
+  // Determine if this item is a drop target and what position
+  const isDropTarget = dropTarget?.itemId === itemId;
+  const dropPosition = isDropTarget ? dropTarget.position : null;
 
   const hasChildren = React.Children.toArray(children).some(
     (child) => React.isValidElement(child) && child.type === TreeItemContent
@@ -129,8 +211,60 @@ export const TreeItem: React.FC<TreeItemProps> = ({
     }
   };
 
+  // Handle drag start
+  const handleItemDragStart = (e: React.DragEvent) => {
+    if (!canDrag || !handleDragStart) return;
+    handleDragStart(e, itemId);
+  };
+
+  // Handle drag over
+  const handleItemDragOver = (e: React.DragEvent) => {
+    if (!allowDragAndDrop || !handleDragOver || isDragging) return;
+    e.preventDefault(); // Necessary to allow dropping
+    e.dataTransfer.dropEffect = 'move';
+    handleDragOver(e, itemId);
+  };
+
+  // Handle drop
+  const handleItemDrop = (e: React.DragEvent) => {
+    if (!allowDragAndDrop || !handleDrop) return;
+    e.preventDefault();
+    handleDrop(e);
+  };
+
+  // Handle drag end
+  const handleItemDragEnd = (e: React.DragEvent) => {
+    if (!allowDragAndDrop || !handleDragEnd) return;
+    handleDragEnd(e);
+  };
+
   // Resolve views: itemSpecific takes precedence over global
   const resolvedViews = { ...globalViews, ...itemSpecificViews };
+
+  // Determine drag and drop styles
+  const dragStyles = isDragging
+    ? {
+        opacity: 0.5,
+        backgroundColor: 'color.gray.100',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        ...resolvedViews.draggedItem,
+      }
+    : {};
+
+  // Determine drop target styles
+  const dropTargetStyles = isDropTarget
+    ? {
+        ...(dropPosition === 'before'
+          ? { borderTop: '2px solid color.blue.500' }
+          : {}),
+        ...(dropPosition === 'after'
+          ? { borderBottom: '2px solid color.blue.500' }
+          : {}),
+        ...(dropPosition === 'inside'
+          ? { backgroundColor: 'rgba(0, 0, 255, 0.1)' }
+          : {}),
+      }
+    : {};
 
   return (
     <Vertical
@@ -141,9 +275,17 @@ export const TreeItem: React.FC<TreeItemProps> = ({
       aria-disabled={disabled}
       id={`${baseId}-item-${itemId}`} // Unique ID for the item
       data-tree-item-id={itemId} // For easier querying
+      cursor={canDrag ? 'grab' : undefined}
+      draggable={canDrag}
+      onDragStart={canDrag ? handleItemDragStart : undefined}
+      onDragOver={allowDragAndDrop ? handleItemDragOver : undefined}
+      onDrop={allowDragAndDrop ? handleItemDrop : undefined}
+      onDragEnd={canDrag ? handleItemDragEnd : undefined}
       {...DefaultTreeStyles.item}
       {...resolvedViews.item} // Apply resolved item container styles
       {...itemSpecificStyle} // Apply direct item style
+      {...dragStyles} // Apply drag-specific styles
+      {...dropTargetStyles} // Apply drop target styles
       {...props}
     >
       {React.Children.map(children, (child) => {
@@ -157,6 +299,7 @@ export const TreeItem: React.FC<TreeItemProps> = ({
               icon, // Pass item's icon to its label
               disabled,
               isSelected,
+              isDragging,
               size: globalSize,
               variant: globalVariant,
               views: resolvedViews, // Pass resolved views down
@@ -185,6 +328,7 @@ interface InternalTreeItemLabelProps extends TreeItemLabelProps {
   icon?: React.ReactNode;
   disabled?: boolean;
   isSelected?: boolean;
+  isDragging?: boolean; // Whether the item is being dragged
   size?: Size;
   variant?: Variant;
   views?: TreeProps['views']; // Global or resolved views
@@ -199,17 +343,21 @@ export const TreeItemLabel: React.FC<InternalTreeItemLabelProps> = ({
   icon,
   disabled,
   isSelected,
+  isDragging,
   size = 'md',
   variant = 'default',
   views,
   ...props
 }) => {
+  const { allowDragAndDrop, dragHandleIcon } = useTreeContext();
+
   const labelStyles = {
     ...DefaultTreeStyles.itemLabel,
     ...TreeSizes[size], // Apply size-specific styles (padding, font)
     ...TreeItemLabelVariants[variant], // Apply variant-specific styles (bg, border)
     ...(isSelected && !disabled ? TreeItemStates.selected : {}), // Apply selected state styles
     ...(disabled ? TreeItemStates.disabled : {}), // Apply disabled state styles
+    ...(isDragging ? { opacity: 0.5 } : {}), // Apply dragging state styles
   };
   const hoverStyles = disabled
     ? TreeItemStates.disabled._hover
@@ -219,39 +367,54 @@ export const TreeItemLabel: React.FC<InternalTreeItemLabelProps> = ({
     <Horizontal
       onClick={onClick} // Click on the whole label area
       alignItems="center"
-      // justifyContent="space-between" // Removed to allow text to flow, expander pushed by marginLeft:auto
+      justifyContent="space-between" // Changed to space-between to position drag handle on the right
       cursor={disabled ? 'not-allowed' : 'pointer'}
       {...labelStyles}
       _hover={hoverStyles} // Apply hover state styles
       {...views?.itemLabel} // Custom global/item overrides for itemLabel
       {...props}
     >
-      {/* Optional Expander Icon (rendered first for some designs, or use order prop if View supports) */}
-      {/* Let's keep icon first, then text, then expander icon */}
-      {icon && (
-        <View {...DefaultTreeStyles.icon} {...views?.icon}>
-          {icon}
-        </View>
-      )}
-      {typeof children === 'string' ? (
-        <Text isTruncated>{children}</Text>
-      ) : (
-        children
-      )}
+      <Horizontal alignItems="center" flex="1">
+        {/* Optional Expander Icon (rendered first for some designs, or use order prop if View supports) */}
+        {/* Let's keep icon first, then text, then expander icon */}
+        {icon && (
+          <View {...DefaultTreeStyles.icon} {...views?.icon}>
+            {icon}
+          </View>
+        )}
+        {typeof children === 'string' ? (
+          <Text isTruncated>{children}</Text>
+        ) : (
+          children
+        )}
 
-      {hasChildren && (
+        {hasChildren && (
+          <View
+            data-expander="true" // For click target detection
+            onClick={onToggleExpand} // Expander icon has its own click for toggling
+            cursor="pointer" // Ensure cursor indicates clickable expander
+            aria-hidden="true" // Presentation, main item has aria-expanded
+            {...DefaultTreeStyles.expandIcon}
+            style={{ transform: expanded ? 'rotate(0deg)' : 'rotate(-90deg)' }} // Chevron right for collapsed, down for expanded
+            {...views?.expandIcon}
+          >
+            <ChevronIcon orientation="right" size={16} />
+            {/* Changed orientation for more standard tree view: right (collapsed) / down (expanded is done by rotate(0)) */}
+            {/* Or use 'down' and rotate 180deg vs 0deg */}
+          </View>
+        )}
+      </Horizontal>
+
+      {/* Drag handle icon on the right side */}
+      {allowDragAndDrop && !disabled && (
         <View
-          data-expander="true" // For click target detection
-          onClick={onToggleExpand} // Expander icon has its own click for toggling
-          cursor="pointer" // Ensure cursor indicates clickable expander
-          aria-hidden="true" // Presentation, main item has aria-expanded
-          {...DefaultTreeStyles.expandIcon}
-          style={{ transform: expanded ? 'rotate(0deg)' : 'rotate(-90deg)' }} // Chevron right for collapsed, down for expanded
-          {...views?.expandIcon}
+          opacity={0.5}
+          _hover={{ opacity: 1 }}
+          cursor="grab"
+          marginLeft={2}
+          {...views?.dragHandle}
         >
-          <ChevronIcon orientation="right" size={16} />
-          {/* Changed orientation for more standard tree view: right (collapsed) / down (expanded is done by rotate(0)) */}
-          {/* Or use 'down' and rotate 180deg vs 0deg */}
+          {dragHandleIcon || <DefaultDragHandleIcon />}
         </View>
       )}
     </Horizontal>
@@ -285,13 +448,13 @@ const TreeNodeView: React.FC<{
   node: TreeNode;
   // size, variant, views are taken from context now
 }> = ({ node }) => {
-  const { size, variant, views } = useTreeContext(); // Get globals from context
-
+  // Context is accessed implicitly by TreeItem and its children
   return (
     <TreeItem
       value={node.id}
       disabled={node.disabled}
       icon={node.icon}
+      draggable={node.draggable !== false} // Enable dragging by default unless explicitly disabled
       views={{
         // Pass only node-specific view overrides if node.style existed for this
         ...(node.style ? { container: node.style } : {}),

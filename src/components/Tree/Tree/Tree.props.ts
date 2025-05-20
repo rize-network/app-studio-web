@@ -71,6 +71,36 @@ export interface TreeProps extends ViewProps {
   multiSelect?: boolean;
 
   /**
+   * Whether to enable drag and drop functionality for tree items.
+   * @default false
+   */
+  allowDragAndDrop?: boolean;
+
+  /**
+   * Custom icon to use for the drag handle.
+   * If not provided, a default drag handle icon will be used.
+   */
+  dragHandleIcon?: React.ReactNode;
+
+  /**
+   * Callback when items are reordered via drag and drop.
+   * Receives the updated array of tree nodes.
+   */
+  onItemsReorder?: (items: TreeNode[]) => void;
+
+  /**
+   * Callback when drag starts on an item.
+   * Receives the item ID and the event.
+   */
+  onDragStart?: (itemId: string, event: React.DragEvent) => void;
+
+  /**
+   * Callback when drag ends.
+   * Receives the item ID.
+   */
+  onDragEnd?: (itemId: string) => void;
+
+  /**
    * Custom views for styling different parts of the component.
    * Allows overriding default styles for sub-components.
    */
@@ -81,6 +111,8 @@ export interface TreeProps extends ViewProps {
     itemContent?: ViewProps; // Styles for TreeItemContent (children wrapper)
     icon?: ViewProps; // Styles for the item's main icon (folder/file)
     expandIcon?: ViewProps; // Styles for the expand/collapse chevron icon
+    draggedItem?: ViewProps; // Styles for the item being dragged
+    dragHandle?: ViewProps; // Styles for the drag handle icon
   };
 }
 

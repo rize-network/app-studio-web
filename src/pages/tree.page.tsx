@@ -6,6 +6,7 @@ import {
   ControlledTree,
   TreeVariants,
   CustomStyledTree,
+  TreeDragAndDrop,
 } from '../components/Tree/examples';
 
 const TreePage = () => {
@@ -37,6 +38,13 @@ const TreePage = () => {
         <Vertical gap={20}>
           <Text fontWeight="bold">Custom Styled Tree</Text>
           <CustomStyledTree />
+        </Vertical>
+
+        <Vertical gap={20}>
+          <Text fontWeight="bold">
+            Tree with Drag and Drop for Menu Reorganization
+          </Text>
+          <TreeDragAndDrop />
         </Vertical>
       </Vertical>
     </View>

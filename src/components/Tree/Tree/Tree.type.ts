@@ -32,6 +32,10 @@ export interface TreeNode {
   data?: any;
   /** Optional custom styles for this specific node (applied to TreeItem) */
   style?: ViewProps;
+  /** Whether the node is currently being dragged */
+  isDragging?: boolean;
+  /** Whether the node can be dragged */
+  draggable?: boolean;
 }
 
 /**
@@ -105,6 +109,27 @@ export interface TreeContextType {
   variant: Variant;
   /** Global views configuration */
   views?: TreeProps['views']; // Reference views from main TreeProps
+  /** Whether drag and drop is enabled */
+  allowDragAndDrop?: boolean;
+  /** Custom icon to use for the drag handle */
+  dragHandleIcon?: React.ReactNode;
+  /** Currently dragged item ID */
+  draggedItemId?: string | null;
+  /** Current drop target information */
+  dropTarget?: {
+    itemId: string;
+    position: 'before' | 'after' | 'inside';
+  } | null;
+  /** Function to handle drag start */
+  handleDragStart?: (e: React.DragEvent, itemId: string) => void;
+  /** Function to handle drag over */
+  handleDragOver?: (e: React.DragEvent, itemId: string) => void;
+  /** Function to handle drop */
+  handleDrop?: (e: React.DragEvent) => void;
+  /** Function to handle drag end */
+  handleDragEnd?: (e: React.DragEvent) => void;
+  /** Function to get the dragged item's data */
+  getDraggedItem?: () => TreeNode | undefined;
 }
 
 /**

@@ -1,5 +1,10 @@
-import { useState, useCallback, useMemo } from 'react';
-import { FlowNode, NodeConnection, FlowViewport } from './Flow.type';
+import { useState, useCallback, useMemo, useRef } from 'react';
+import {
+  FlowNode,
+  NodeConnection,
+  FlowViewport,
+  NodePosition,
+} from './Flow.type';
 
 interface UseFlowStateProps {
   /**
@@ -61,6 +66,33 @@ interface UseFlowStateProps {
    * Callback when viewport changes
    */
   onViewportChange?: (viewport: FlowViewport) => void;
+
+  /**
+   * Whether to allow dragging nodes
+   */
+  allowDraggingNodes?: boolean;
+
+  /**
+   * Callback when a node drag starts
+   */
+  onNodeDragStart?: (
+    nodeId: string,
+    event: React.MouseEvent | React.TouchEvent
+  ) => void;
+
+  /**
+   * Callback when a node is being dragged
+   */
+  onNodeDrag?: (
+    nodeId: string,
+    position: NodePosition,
+    event: MouseEvent | TouchEvent
+  ) => void;
+
+  /**
+   * Callback when a node drag ends
+   */
+  onNodeDragEnd?: (nodeId: string, position: NodePosition) => void;
 }
 
 /**
@@ -79,6 +111,10 @@ export const useFlowState = ({
   initialViewport = { zoom: 1, x: 0, y: 0 },
   viewport: controlledViewport,
   onViewportChange,
+  allowDraggingNodes = true,
+  onNodeDragStart,
+  onNodeDrag,
+  onNodeDragEnd,
 }: UseFlowStateProps) => {
   // Generate a unique ID for accessibility.
   // For production, consider using React.useId() if available and appropriate for your React version.
@@ -103,6 +139,11 @@ export const useFlowState = ({
   // State for viewport (uncontrolled mode)
   const [uncontrolledViewport, setUncontrolledViewport] =
     useState<FlowViewport>(initialViewport);
+
+  // State for drag and drop
+  const [draggedNodeId, setDraggedNodeId] = useState<string | null>(null);
+  const dragStartPositionRef = useRef<NodePosition | null>(null);
+  const nodePositionRef = useRef<NodePosition | null>(null);
 
   // Determine if we're in controlled or uncontrolled mode for nodes
   const isNodesControlled = controlledNodes !== undefined;
@@ -178,7 +219,7 @@ export const useFlowState = ({
     (
       afterNodeId: string | null, // <<< MODIFIED: Allow null for first node
       newNodeData: Omit<FlowNode, 'position'>,
-      position?: 'below' | 'right' | 'left'
+      position?: 'top' | 'bottom' | 'right' | 'left'
     ): FlowNode => {
       // Handle adding the first node if afterNodeId is null or a specific marker
       if (afterNodeId === null || afterNodeId === '') {
@@ -217,141 +258,90 @@ export const useFlowState = ({
       };
 
       const placementPosition =
-        position || (direction === 'vertical' ? 'below' : 'right');
+        position || (direction === 'vertical' ? 'bottom' : 'right');
 
       // ... (rest of the existing addNodeAfter logic for relative positioning)
       // Ensure this logic correctly uses newPosition, placementPosition, etc.
       // The existing logic for hasConnectionInDirection, getFurthestNodePosition,
       // and calculating newPosition based on placementPosition seems reasonable.
 
-      // Example of how the existing logic continues:
-      const hasConnectionInDirection = (
-        dir: 'below' | 'right' | 'left'
-      ): boolean => {
-        if (dir === 'below') {
-          return currentEdges.some((edge) => {
-            const targetNode = currentNodes.find((n) => n.id === edge.target);
-            const targetY = targetNode?.position?.y || 0;
-            const sourceY = afterNode.position?.y || 0;
-            return (
-              edge.source === afterNodeId &&
-              targetY > sourceY &&
-              Math.abs(
-                (targetNode?.position?.x || 0) - (afterNode.position?.x || 0)
-              ) < 50
-            ); // Check if somewhat aligned
-          });
-        } else if (dir === 'right') {
-          return currentEdges.some((edge) => {
-            const targetNode = currentNodes.find((n) => n.id === edge.target);
-            const targetX = targetNode?.position?.x || 0;
-            const sourceX = afterNode.position?.x || 0;
-            return (
-              edge.source === afterNodeId &&
-              targetX > sourceX &&
-              Math.abs(
-                (targetNode?.position?.y || 0) - (afterNode.position?.y || 0)
-              ) < 50
-            );
-          });
-        } else if (dir === 'left') {
-          return currentEdges.some((edge) => {
-            const targetNode = currentNodes.find((n) => n.id === edge.target);
-            const targetX = targetNode?.position?.x || 0;
-            const sourceX = afterNode.position?.x || 0;
-            return (
-              edge.source === afterNodeId &&
-              targetX < sourceX &&
-              Math.abs(
-                (targetNode?.position?.y || 0) - (afterNode.position?.y || 0)
-              ) < 50
-            );
-          });
-        }
-        return false;
-      };
+      // New logic for tree-like branching
+      const HORIZONTAL_SPACING_PARENT_CHILD = 275;
+      const VERTICAL_SPACING_PARENT_CHILD = 220; // Further Increased
+      const SIBLING_HORIZONTAL_SPACING = 350; // Further Increased
+      const SIBLING_VERTICAL_SPACING = 120;
+      const COLUMN_ROW_TOLERANCE = 50; // Tolerance for considering nodes in the same column/row
 
-      const getFurthestNodePosition = (
-        dir: 'below' | 'right' | 'left'
-      ): { x: number; y: number } => {
-        let furthestNode = afterNode;
-        if (dir === 'below') {
-          currentEdges.forEach((edge) => {
-            if (edge.source === afterNodeId) {
-              const targetNode = currentNodes.find((n) => n.id === edge.target);
-              if (
-                targetNode &&
-                (targetNode.position?.y || 0) >
-                  (furthestNode.position?.y || 0) &&
-                Math.abs(
-                  (targetNode.position?.x || 0) - (afterNode.position?.x || 0)
-                ) < 50 // Consider nodes directly below
-              ) {
-                furthestNode = targetNode;
-              }
-            }
-          });
-        } else if (dir === 'right') {
-          currentEdges.forEach((edge) => {
-            if (edge.source === afterNodeId) {
-              const targetNode = currentNodes.find((n) => n.id === edge.target);
-              if (
-                targetNode &&
-                (targetNode.position?.x || 0) >
-                  (furthestNode.position?.x || 0) &&
-                Math.abs(
-                  (targetNode.position?.y || 0) - (afterNode.position?.y || 0)
-                ) < 50 // Consider nodes directly to the right
-              ) {
-                furthestNode = targetNode;
-              }
-            }
-          });
-        } else if (dir === 'left') {
-          currentEdges.forEach((edge) => {
-            if (edge.source === afterNodeId) {
-              const targetNode = currentNodes.find((n) => n.id === edge.target);
-              if (
-                targetNode &&
-                (targetNode.position?.x || 0) <
-                  (furthestNode.position?.x || 0) &&
-                Math.abs(
-                  (targetNode.position?.y || 0) - (afterNode.position?.y || 0)
-                ) < 50 // Consider nodes directly to the left
-              ) {
-                furthestNode = targetNode;
-              }
-            }
-          });
-        }
-        return {
-          x: furthestNode.position?.x || 0,
-          y: furthestNode.position?.y || 0,
-        };
-      };
+      if (placementPosition === 'left' || placementPosition === 'right') {
+        // Adding a child to the left or right of the parent.
+        // These children will be stacked vertically in a column.
+        newPosition.x =
+          (afterNode.position?.x || 0) +
+          (placementPosition === 'right'
+            ? HORIZONTAL_SPACING_PARENT_CHILD
+            : -HORIZONTAL_SPACING_PARENT_CHILD);
 
-      if (hasConnectionInDirection(placementPosition)) {
-        const furthestPosition = getFurthestNodePosition(placementPosition);
-        if (placementPosition === 'below') {
+        // Find existing direct children of afterNode that are already in this target "side column"
+        const sideColumnSiblings = currentNodes.filter((node) =>
+          currentEdges.some(
+            (edge) =>
+              edge.source === afterNodeId &&
+              edge.target === node.id &&
+              Math.abs(node.position.x - newPosition.x) < COLUMN_ROW_TOLERANCE
+          )
+        );
+
+        if (sideColumnSiblings.length > 0) {
+          const bottomMostSibling = sideColumnSiblings.reduce((prev, curr) =>
+            curr.position.y > prev.position.y ? curr : prev
+          );
+          newPosition.y =
+            bottomMostSibling.position.y + SIBLING_VERTICAL_SPACING;
+        } else {
+          // First child in this side column. Position it relative to the parent's Y.
+          newPosition.y = afterNode.position?.y || 0;
+        }
+      } else if (
+        placementPosition === 'top' ||
+        placementPosition === 'bottom'
+      ) {
+        // Adding a child above or below the parent.
+        // These children will be arranged horizontally in a row.
+        newPosition.y =
+          (afterNode.position?.y || 0) +
+          (placementPosition === 'bottom'
+            ? VERTICAL_SPACING_PARENT_CHILD
+            : -VERTICAL_SPACING_PARENT_CHILD);
+
+        const horizontalRowSiblings = currentNodes.filter((node) =>
+          currentEdges.some(
+            (edge) =>
+              edge.source === afterNodeId &&
+              edge.target === node.id &&
+              Math.abs(node.position.y - newPosition.y) < COLUMN_ROW_TOLERANCE // Check they are in the same horizontal row
+          )
+        );
+
+        if (horizontalRowSiblings.length > 0) {
+          // Find the rightmost sibling in that row to stack the new node next to it
+          const rightMostSibling = horizontalRowSiblings.reduce((prev, curr) =>
+            curr.position.x > prev.position.x ? curr : prev
+          );
+          newPosition.x =
+            rightMostSibling.position.x + SIBLING_HORIZONTAL_SPACING;
+        } else {
+          // First child in this horizontal row. Position it relative to the parent's X.
           newPosition.x = afterNode.position?.x || 0;
-          newPosition.y = furthestPosition.y + 150;
-        } else if (placementPosition === 'right') {
-          newPosition.x = furthestPosition.x + 250;
-          newPosition.y = afterNode.position?.y || 0;
-        } else if (placementPosition === 'left') {
-          newPosition.x = furthestPosition.x - 250;
-          newPosition.y = afterNode.position?.y || 0;
         }
       } else {
-        if (placementPosition === 'below') {
-          newPosition.y += 150; // Default spacing
-        } else if (placementPosition === 'right') {
-          newPosition.x += 250; // Default spacing
-        } else if (placementPosition === 'left') {
-          newPosition.x -= 250; // Default spacing
-        }
+        // Fallback for other unhandled positions or default behavior
+        // This could revert to a simpler placement if needed.
+        // For now, we assume 'left', 'right', 'top', 'bottom' are the primary concern.
+        // Default to placing bottom if position is unrecognized.
+        newPosition.y =
+          (afterNode.position?.y || 0) + VERTICAL_SPACING_PARENT_CHILD;
+        newPosition.x = afterNode.position?.x || 0;
       }
-      // End of existing logic section to be preserved
 
       const nodeWithPosition: FlowNode = {
         ...newNodeData,
@@ -443,6 +433,116 @@ export const useFlowState = ({
     updateViewport({ zoom: 1, x: 0, y: 0 });
   }, [updateViewport]);
 
+  // Function to start dragging a node
+  const startNodeDrag = useCallback(
+    (nodeId: string, event: React.MouseEvent | React.TouchEvent) => {
+      if (!allowDraggingNodes) return;
+
+      setDraggedNodeId(nodeId);
+
+      const node = currentNodes.find((n) => n.id === nodeId);
+      if (!node) return;
+
+      // Store the initial node position
+      dragStartPositionRef.current = { ...node.position };
+
+      // Get the cursor position
+      const clientX =
+        'touches' in event
+          ? event.touches[0].clientX
+          : (event as React.MouseEvent).clientX;
+      const clientY =
+        'touches' in event
+          ? event.touches[0].clientY
+          : (event as React.MouseEvent).clientY;
+
+      nodePositionRef.current = { x: clientX, y: clientY };
+
+      // Call the external callback if provided
+      if (onNodeDragStart) {
+        onNodeDragStart(nodeId, event);
+      }
+    },
+    [allowDraggingNodes, currentNodes, onNodeDragStart]
+  );
+
+  // Function to update node position during drag
+  const updateNodeDrag = useCallback(
+    (event: MouseEvent | TouchEvent) => {
+      if (
+        !draggedNodeId ||
+        !dragStartPositionRef.current ||
+        !nodePositionRef.current
+      )
+        return;
+
+      // Get the current cursor position
+      const clientX =
+        'touches' in event ? event.touches[0].clientX : event.clientX;
+      const clientY =
+        'touches' in event ? event.touches[0].clientY : event.clientY;
+
+      // Calculate the offset from the drag start position
+      const offsetX = clientX - nodePositionRef.current.x;
+      const offsetY = clientY - nodePositionRef.current.y;
+
+      // Calculate the new node position
+      const newPosition: NodePosition = {
+        x: dragStartPositionRef.current.x + offsetX / currentViewport.zoom,
+        y: dragStartPositionRef.current.y + offsetY / currentViewport.zoom,
+      };
+
+      // Update the node position in the state
+      const newNodes = currentNodes.map((node) => {
+        if (node.id === draggedNodeId) {
+          return {
+            ...node,
+            position: newPosition,
+            isDragging: true,
+          };
+        }
+        return node;
+      });
+
+      updateNodes(newNodes);
+
+      // Call the external callback if provided
+      if (onNodeDrag) {
+        onNodeDrag(draggedNodeId, newPosition, event);
+      }
+    },
+    [draggedNodeId, currentNodes, updateNodes, onNodeDrag, currentViewport.zoom]
+  );
+
+  // Function to end node dragging
+  const endNodeDrag = useCallback(() => {
+    if (!draggedNodeId) return;
+
+    // Update the node to remove the dragging state
+    const newNodes = currentNodes.map((node) => {
+      if (node.id === draggedNodeId) {
+        return {
+          ...node,
+          isDragging: false,
+        };
+      }
+      return node;
+    });
+
+    updateNodes(newNodes);
+
+    // Get the final position of the node
+    const node = newNodes.find((n) => n.id === draggedNodeId);
+    if (node && onNodeDragEnd) {
+      onNodeDragEnd(draggedNodeId, node.position);
+    }
+
+    // Reset drag state
+    setDraggedNodeId(null);
+    dragStartPositionRef.current = null;
+    nodePositionRef.current = null;
+  }, [draggedNodeId, currentNodes, updateNodes, onNodeDragEnd]);
+
   return {
     baseId,
     nodes: currentNodes,
@@ -460,5 +560,11 @@ export const useFlowState = ({
     zoomIn,
     zoomOut,
     resetViewport,
+    // Drag and drop functions
+    draggedNodeId,
+    startNodeDrag,
+    updateNodeDrag,
+    endNodeDrag,
+    allowDraggingNodes,
   };
 };

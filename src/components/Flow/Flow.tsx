@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlowProps, FlowType } from './Flow/Flow.props';
 import { useFlowState } from './Flow/Flow.state';
-import { FlowNode } from './Flow/Flow.type';
+import { FlowNode, NodePosition } from './Flow/Flow.type';
 import {
   FlowView,
   FlowNodeView,
@@ -47,12 +47,16 @@ const FlowComponent: React.FC<FlowProps> = ({
   allowAddingNodes = true,
   // allowDeletingNodes = true, // Prop exists, but delete functionality not fully wired in UI
   // allowConnectingNodes = true, // Prop exists, but connecting functionality not fully wired in UI
+  allowDraggingNodes = true,
   onNodesChange,
   onEdgesChange,
   onNodeSelect,
   onNodeAdd,
   // onNodeDelete,
   // onConnect,
+  onNodeDragStart,
+  onNodeDrag,
+  onNodeDragEnd,
   selectedNodeId,
   initialViewport,
   viewport: controlledViewport,
@@ -73,12 +77,16 @@ const FlowComponent: React.FC<FlowProps> = ({
     initialViewport,
     viewport: controlledViewport,
     onViewportChange,
+    allowDraggingNodes,
+    onNodeDragStart,
+    onNodeDrag,
+    onNodeDragEnd,
   });
 
   // Handler for adding a node after another node, invoked by FlowView
   const handleAddNode = (
     afterNodeId: string,
-    position?: 'below' | 'right' | 'left'
+    position?: 'top' | 'bottom' | 'right' | 'left'
   ) => {
     // Create a unique ID for the new node.
     // Consider a more robust UUID generator for production.
@@ -109,11 +117,28 @@ const FlowComponent: React.FC<FlowProps> = ({
     }
   };
 
+  // Create wrapper functions for drag and drop handlers to match expected signatures
+  const handleNodeDrag = (
+    nodeId: string,
+    position: NodePosition,
+    event: MouseEvent | TouchEvent
+  ) => {
+    // We need to adapt the signature since flowState.updateNodeDrag expects only the event
+    flowState.updateNodeDrag(event);
+  };
+
+  // Wrapper for node drag end to ensure type compatibility
+  const handleNodeDragEnd = (nodeId: string, position: NodePosition) => {
+    // Call the original handler
+    flowState.endNodeDrag();
+  };
+
   // The FlowView component expects specific props from the state and handlers.
   return React.createElement(FlowView, {
     nodes: flowState.nodes,
     edges: flowState.edges,
     selectedNodeId: flowState.selectedNodeId,
+    draggedNodeId: flowState.draggedNodeId,
     onNodeSelect: flowState.selectNode,
     onAddNode: handleAddNode, // Pass the refined handler
     baseId: flowState.baseId,
@@ -122,12 +147,17 @@ const FlowComponent: React.FC<FlowProps> = ({
     onZoomOut: flowState.zoomOut,
     onReset: flowState.resetViewport,
     onViewportChange: flowState.updateViewport, // Pass the updateViewport function
+    // Drag and drop handlers
+    onNodeDragStart: flowState.startNodeDrag,
+    onNodeDrag: handleNodeDrag, // Use the wrapper function
+    onNodeDragEnd: flowState.endNodeDrag,
     // Pass through other relevant props
     size,
     variant,
     direction,
     showControls,
     allowAddingNodes,
+    allowDraggingNodes: flowState.allowDraggingNodes,
     views,
     ...props, // Spread remaining ViewProps
   });

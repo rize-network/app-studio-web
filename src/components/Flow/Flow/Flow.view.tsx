@@ -9,6 +9,7 @@ import {
   FlowControlsProps,
   FlowAddNodeButtonProps,
   FlowViewport,
+  NodePosition,
 } from './Flow.type';
 import { FlowProps } from './Flow.props'; // For picking props for InternalFlowViewProps
 
@@ -24,6 +25,10 @@ export const FlowNodeView: React.FC<FlowNodeProps> = ({
   node,
   onSelect,
   isSelected,
+  isDragging,
+  onDragStart,
+  onDrag,
+  onDragEnd,
   size = 'md',
   variant = 'default',
   views,
@@ -32,6 +37,21 @@ export const FlowNodeView: React.FC<FlowNodeProps> = ({
   const handleClick = () => {
     if (onSelect) {
       onSelect(node.id);
+    }
+  };
+
+  const handleDragStart = (event: React.MouseEvent | React.TouchEvent) => {
+    // Only start dragging with left mouse button
+    if ('button' in event && event.button !== 0) return;
+
+    // Prevent default to avoid text selection
+    event.preventDefault();
+
+    // If the node is not draggable, don't start dragging
+    if (node.draggable === false) return;
+
+    if (onDragStart) {
+      onDragStart(node.id, event);
     }
   };
 
@@ -83,6 +103,19 @@ export const FlowNodeView: React.FC<FlowNodeProps> = ({
     );
   };
 
+  // Determine cursor style based on draggability
+  const cursorStyle = node.draggable === false ? 'default' : 'grab';
+
+  // Apply dragging styles if the node is being dragged
+  const draggingStyles =
+    node.isDragging || isDragging
+      ? {
+          cursor: 'grabbing',
+          boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
+          zIndex: 100,
+        }
+      : {};
+
   return (
     <View
       {...DefaultFlowStyles.node}
@@ -90,8 +123,12 @@ export const FlowNodeView: React.FC<FlowNodeProps> = ({
       {...nodeTypeStyles}
       {...(isSelected ? FlowNodeStates.selected : {})}
       onClick={handleClick}
+      onMouseDown={handleDragStart}
+      onTouchStart={handleDragStart}
+      cursor={cursorStyle}
       _hover={FlowNodeStates.hover} // Apply hover state styles
       {...node.style} // Apply per-node custom style
+      {...draggingStyles} // Apply dragging styles
       {...views?.container}
       {...props} // Allow overriding all styles via props
     >
@@ -107,157 +144,138 @@ export const FlowEdgeView: React.FC<FlowEdgeProps> = ({
   targetNode,
   views,
   nodeSize = 'md',
-  ...props
+  // ...props // props are not used in the new implementation directly on the main View
 }) => {
-  // If we don't have both source and target nodes, we can't render the edge
   if (!sourceNode || !targetNode) {
     return null;
   }
 
-  // Calculate the positions
-  const sourceX = sourceNode.position.x;
-  const sourceY = sourceNode.position.y;
-  const targetX = targetNode.position.x;
-  const targetY = targetNode.position.y;
+  const nodeStyle = FlowNodeSizes[nodeSize] || FlowNodeSizes.md;
+  // Ensure minWidth and minHeight are numbers, falling back to defaults from DefaultFlowStyles
+  const nodeWidth =
+    typeof nodeStyle.minWidth === 'number'
+      ? nodeStyle.minWidth
+      : typeof DefaultFlowStyles.node.minWidth === 'number'
+      ? DefaultFlowStyles.node.minWidth
+      : 200; // Fallback if somehow not a number
+  const nodeHeight =
+    typeof DefaultFlowStyles.node.minHeight === 'number'
+      ? DefaultFlowStyles.node.minHeight
+      : 60; // Fallback
 
-  // Determine if the connection is horizontal or vertical
-  const isHorizontal =
-    Math.abs(targetX - sourceX) > Math.abs(targetY - sourceY);
+  const sX = sourceNode.position.x;
+  const sY = sourceNode.position.y;
+  const tX = targetNode.position.x;
+  const tY = targetNode.position.y;
 
-  // Use a default color for the edge
-  const lineColor = 'color.blue.500';
-  const lineThickness = 1;
+  const sHalfWidth = nodeWidth / 2;
+  const sHalfHeight = nodeHeight / 2;
+  const tHalfWidth = nodeWidth / 2; // Assuming target is same size for simplicity
+  const tHalfHeight = nodeHeight / 2;
 
-  // For horizontal connections
-  if (isHorizontal) {
-    const direction = targetX > sourceX ? 1 : -1; // Right or left
-    const midX = (sourceX + targetX) / 2;
+  const deltaX = tX - sX;
+  const deltaY = tY - sY;
 
+  const lineColor = views?.path?.backgroundColor || 'color.blue.500';
+  const lineThickness = views?.path?.height || views?.path?.width || 1; // Use height or width for thickness
+
+  const segments: JSX.Element[] = [];
+  let labelPosition = { x: (sX + tX) / 2, y: (sY + tY) / 2 }; // Default label position
+
+  // Helper to render a line segment
+  const renderLine = (
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number,
+    key: string
+  ) => {
+    const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    const angle = Math.atan2(y2 - y1, x2 - x1) * (180 / Math.PI);
     return (
-      <View position="absolute" pointerEvents="none">
-        {/* Horizontal line from source to midpoint */}
-        <View
-          position="absolute"
-          left={sourceX}
-          top={sourceY}
-          width={Math.abs(midX - sourceX)}
-          height={lineThickness}
-          backgroundColor={lineColor}
-          style={{
-            transform: `translateX(${direction > 0 ? 0 : -100}%)`,
-          }}
-        />
-
-        {/* Vertical line at midpoint */}
-        <View
-          position="absolute"
-          left={midX}
-          top={Math.min(sourceY, targetY)}
-          width={lineThickness}
-          height={Math.abs(targetY - sourceY)}
-          backgroundColor={lineColor}
-        />
-
-        {/* Horizontal line from midpoint to target */}
-        <View
-          position="absolute"
-          left={midX}
-          top={targetY}
-          width={Math.abs(targetX - midX)}
-          height={lineThickness}
-          backgroundColor={lineColor}
-          style={{
-            transform: `translateX(${direction > 0 ? 0 : -100}%)`,
-          }}
-        />
-
-        {/* Edge label if present */}
-        {edge.label && (
-          <View
-            position="absolute"
-            left={midX}
-            top={targetY}
-            transform="translate(-50%, -50%)"
-            backgroundColor="white"
-            padding={2}
-            borderRadius={4}
-            border="1px solid"
-            borderColor="color.gray.200"
-            zIndex={10}
-          >
-            <Text fontSize="xs" textAlign="center">
-              {edge.label}
-            </Text>
-          </View>
-        )}
-      </View>
+      <View
+        key={key}
+        position="absolute"
+        left={x1}
+        top={y1}
+        width={length}
+        height={lineThickness}
+        backgroundColor={lineColor}
+        transformOrigin="0 0"
+        style={{ transform: `rotate(${angle}deg)` }}
+        {...views?.path} // Allow overriding styles
+      />
     );
+  };
+
+  // Simplified Manhattan-style routing (elbow connectors)
+  // This is a basic version and can be significantly improved for complex layouts
+  // For tree structures, we often want lines to come out straight from a side then turn.
+
+  let p1, p2, p3, p4;
+
+  // Determine primary direction for cleaner tree-like connections
+  // This logic assumes that if nodes are roughly aligned vertically, it's a vertical connection, etc.
+  // It also considers the typical tree flow (e.g. parent above children)
+
+  if (Math.abs(deltaY) > Math.abs(deltaX)) {
+    // Primarily vertical
+    const midY = sY + deltaY / 2;
+    p1 = { x: sX, y: sY + (deltaY > 0 ? sHalfHeight : -sHalfHeight) }; // Exit from top/bottom center
+    p2 = { x: sX, y: midY };
+    p3 = { x: tX, y: midY };
+    p4 = { x: tX, y: tY + (deltaY > 0 ? -tHalfHeight : tHalfHeight) }; // Enter from top/bottom center
+
+    segments.push(renderLine(p1.x, p1.y, p2.x, p2.y, `${edge.id}-s1`));
+    segments.push(renderLine(p2.x, p2.y, p3.x, p3.y, `${edge.id}-s2`));
+    segments.push(renderLine(p3.x, p3.y, p4.x, p4.y, `${edge.id}-s3`));
+    labelPosition = { x: (p2.x + p3.x) / 2, y: p2.y };
+  } else {
+    // Primarily horizontal
+    const midX = sX + deltaX / 2;
+    p1 = { x: sX + (deltaX > 0 ? sHalfWidth : -sHalfWidth), y: sY }; // Exit from left/right center
+    p2 = { x: midX, y: sY };
+    p3 = { x: midX, y: tY };
+    p4 = { x: tX + (deltaX > 0 ? -tHalfWidth : tHalfWidth), y: tY }; // Enter from left/right center
+
+    segments.push(renderLine(p1.x, p1.y, p2.x, p2.y, `${edge.id}-s1`));
+    segments.push(renderLine(p2.x, p2.y, p3.x, p3.y, `${edge.id}-s2`));
+    segments.push(renderLine(p3.x, p3.y, p4.x, p4.y, `${edge.id}-s3`));
+    labelPosition = { x: p2.x, y: (p2.y + p3.y) / 2 };
   }
-  // For vertical connections
-  else {
-    const direction = targetY > sourceY ? 1 : -1; // Down or up
-    const midY = (sourceY + targetY) / 2;
 
-    return (
-      <View position="absolute" pointerEvents="none">
-        {/* Vertical line from source to midpoint */}
+  return (
+    <View
+      position="absolute"
+      top={0}
+      left={0}
+      pointerEvents="none"
+      width="100%"
+      height="100%"
+    >
+      {segments}
+      {edge.label && (
         <View
           position="absolute"
-          left={sourceX}
-          top={sourceY}
-          width={lineThickness}
-          height={Math.abs(midY - sourceY)}
-          backgroundColor={lineColor}
-          style={{
-            transform: `translateY(${direction > 0 ? 0 : -100}%)`,
-          }}
-        />
-
-        {/* Horizontal line at midpoint */}
-        <View
-          position="absolute"
-          left={Math.min(sourceX, targetX)}
-          top={midY}
-          width={Math.abs(targetX - sourceX)}
-          height={lineThickness}
-          backgroundColor={lineColor}
-        />
-
-        {/* Vertical line from midpoint to target */}
-        <View
-          position="absolute"
-          left={targetX}
-          top={midY}
-          width={lineThickness}
-          height={Math.abs(targetY - midY)}
-          backgroundColor={lineColor}
-          style={{
-            transform: `translateY(${direction > 0 ? 0 : -100}%)`,
-          }}
-        />
-
-        {/* Edge label if present */}
-        {edge.label && (
-          <View
-            position="absolute"
-            left={targetX}
-            top={midY}
-            transform="translate(-50%, -50%)"
-            backgroundColor="white"
-            padding={2}
-            borderRadius={4}
-            border="1px solid"
-            borderColor="color.gray.200"
-            zIndex={10}
-          >
-            <Text fontSize="xs" textAlign="center">
-              {edge.label}
-            </Text>
-          </View>
-        )}
-      </View>
-    );
-  }
+          left={labelPosition.x}
+          top={labelPosition.y}
+          transform="translate(-50%, -50%)" // Center the label
+          backgroundColor={views?.label?.backgroundColor || 'white'}
+          padding={views?.label?.padding || 2}
+          borderRadius={views?.label?.borderRadius || 4}
+          borderWidth={views?.label?.borderWidth || '1px'}
+          borderStyle={views?.label?.borderStyle || 'solid'}
+          borderColor={views?.label?.borderColor || 'color.gray.200'}
+          zIndex={10} // Ensure label is above lines
+          {...views?.label}
+        >
+          <Text fontSize="xs" textAlign="center">
+            {edge.label}
+          </Text>
+        </View>
+      )}
+    </View>
+  );
 };
 
 // Flow Controls component
@@ -335,6 +353,7 @@ interface InternalFlowViewProps
       | 'direction'
       | 'showControls'
       | 'allowAddingNodes'
+      | 'allowDraggingNodes'
       | 'views'
     >,
     Omit<
@@ -346,17 +365,29 @@ interface InternalFlowViewProps
         | 'direction'
         | 'showControls'
         | 'allowAddingNodes'
+        | 'allowDraggingNodes'
         | 'views'
       >
     > {
   nodes: FlowNodeType[];
   edges: NodeConnection[]; // Edges are passed but not rendered effectively by this simplified view
   selectedNodeId?: string;
+  draggedNodeId?: string | null;
   onNodeSelect: (nodeId: string) => void;
   onAddNode: (
     afterNodeId: string,
-    position?: 'below' | 'right' | 'left'
+    position?: 'top' | 'bottom' | 'right' | 'left'
   ) => void;
+  onNodeDragStart?: (
+    nodeId: string,
+    event: React.MouseEvent | React.TouchEvent
+  ) => void;
+  onNodeDrag?: (
+    nodeId: string,
+    position: NodePosition,
+    event: MouseEvent | TouchEvent
+  ) => void;
+  onNodeDragEnd?: (nodeId: string, position: NodePosition) => void;
   baseId: string;
   viewport?: FlowViewport;
   onZoomIn?: () => void;
@@ -370,14 +401,19 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
   nodes = [], // Default to empty array
   edges = [], // Default to empty array, not visually used much in this simplified view
   selectedNodeId,
+  draggedNodeId,
   onNodeSelect,
   onAddNode, // Callback to request adding a node
+  onNodeDragStart,
+  onNodeDrag,
+  onNodeDragEnd,
   size = 'md',
   variant = 'default',
   direction,
   // direction = 'vertical', // direction prop influences state logic, not directly this view's layout
   showControls = true,
   allowAddingNodes = true,
+  allowDraggingNodes = true,
   views = {},
   baseId,
   viewport = { zoom: 1, x: 0, y: 0 },
@@ -402,6 +438,53 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
 
   // Reference to the container element for keyboard focus
   const containerRef = React.useRef<HTMLDivElement>(null);
+
+  // Add global event listeners for node dragging
+  React.useEffect(() => {
+    if (!allowDraggingNodes) return;
+
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      if (draggedNodeId && onNodeDrag) {
+        onNodeDrag(draggedNodeId, { x: e.clientX, y: e.clientY }, e);
+      }
+    };
+
+    const handleGlobalTouchMove = (e: TouchEvent) => {
+      if (draggedNodeId && onNodeDrag && e.touches.length > 0) {
+        onNodeDrag(
+          draggedNodeId,
+          { x: e.touches[0].clientX, y: e.touches[0].clientY },
+          e
+        );
+      }
+    };
+
+    const handleGlobalMouseUp = () => {
+      if (draggedNodeId && onNodeDragEnd) {
+        // Find the node to get its current position
+        const node = nodes.find((n) => n.id === draggedNodeId);
+        if (node) {
+          onNodeDragEnd(draggedNodeId, node.position);
+        }
+      }
+    };
+
+    // Add event listeners if a node is being dragged
+    if (draggedNodeId) {
+      document.addEventListener('mousemove', handleGlobalMouseMove);
+      document.addEventListener('touchmove', handleGlobalTouchMove);
+      document.addEventListener('mouseup', handleGlobalMouseUp);
+      document.addEventListener('touchend', handleGlobalMouseUp);
+    }
+
+    return () => {
+      // Clean up event listeners
+      document.removeEventListener('mousemove', handleGlobalMouseMove);
+      document.removeEventListener('touchmove', handleGlobalTouchMove);
+      document.removeEventListener('mouseup', handleGlobalMouseUp);
+      document.removeEventListener('touchend', handleGlobalMouseUp);
+    };
+  }, [draggedNodeId, onNodeDrag, onNodeDragEnd, nodes, allowDraggingNodes]);
 
   // Handle mouse down for dragging
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -543,7 +626,7 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
 
   const handleAddNode = (
     sourceNodeId: string,
-    pos: 'below' | 'left' | 'right'
+    pos: 'top' | 'bottom' | 'left' | 'right'
   ) => {
     if (onAddNode) {
       onAddNode(sourceNodeId, pos);
@@ -623,14 +706,33 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
             <FlowNodeView
               node={node}
               isSelected={selectedNodeId === node.id}
+              isDragging={draggedNodeId === node.id}
               onSelect={onNodeSelect}
+              onDragStart={allowDraggingNodes ? onNodeDragStart : undefined}
+              onDrag={allowDraggingNodes ? onNodeDrag : undefined}
+              onDragEnd={allowDraggingNodes ? onNodeDragEnd : undefined}
               size={size}
               variant={variant}
               views={views.node}
             />
             {allowAddingNodes && (
               <View width={'100%'} height={'100%'}>
-                {/* Below Add Button */}
+                {/* Top Add Button */}
+                <View
+                  position="absolute"
+                  top="-20%"
+                  left="50%"
+                  transform="translate(-50%, 0%)"
+                  zIndex={5}
+                >
+                  <FlowAddNodeButtonView
+                    onClick={() => handleAddNode(node.id, 'top')}
+                    views={views.addButton}
+                    aria-label={`Add node above ${node.data?.label || node.id}`}
+                  />
+                </View>
+
+                {/* Bottom Add Button */}
                 <View
                   position="absolute"
                   bottom="-20%"
@@ -639,7 +741,7 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
                   zIndex={5}
                 >
                   <FlowAddNodeButtonView
-                    onClick={() => handleAddNode(node.id, 'below')}
+                    onClick={() => handleAddNode(node.id, 'bottom')}
                     views={views.addButton}
                     aria-label={`Add node below ${node.data?.label || node.id}`}
                   />
@@ -695,9 +797,9 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
               onClick={() => {
                 if (onAddNode) {
                   // Pass null or a special ID to indicate adding the first node.
-                  // The 'below' position is arbitrary here, could be omitted if
+                  // The 'bottom' position is arbitrary here, could be omitted if
                   // the handler for the first node doesn't use it.
-                  onAddNode(null as any, 'below'); // <<< MODIFIED
+                  onAddNode(null as any, 'bottom');
                 }
               }}
               views={views.addButton}

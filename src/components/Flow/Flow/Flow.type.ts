@@ -109,6 +109,16 @@ export interface FlowNode {
   selected?: boolean;
 
   /**
+   * Whether the node is currently being dragged
+   */
+  isDragging?: boolean;
+
+  /**
+   * Whether the node can be dragged
+   */
+  draggable?: boolean;
+
+  /**
    * Custom styling for the node (applied to FlowNodeView container)
    */
   style?: ViewProps;
@@ -130,6 +140,17 @@ export interface FlowNodeProps extends ViewProps {
   node: FlowNode;
   onSelect?: (nodeId: string) => void;
   isSelected?: boolean;
+  isDragging?: boolean;
+  onDragStart?: (
+    nodeId: string,
+    event: React.MouseEvent | React.TouchEvent
+  ) => void;
+  onDrag?: (
+    nodeId: string,
+    position: NodePosition,
+    event: MouseEvent | TouchEvent
+  ) => void;
+  onDragEnd?: (nodeId: string, position: NodePosition) => void;
   size?: Size; // Size prop for individual node styling
   variant?: Variant; // Variant prop for individual node styling
   views?: {
