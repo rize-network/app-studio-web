@@ -51,6 +51,7 @@ The library includes components in the following categories:
 
 ### Form Components
 - Checkbox
+- ChatInput
 - Radio
 - Select
 - Switch
@@ -78,6 +79,8 @@ The library includes components in the following categories:
 - Card
 - Table
 - Chart
+- Flow
+- Tree
 
 ### Utility Components
 - Button

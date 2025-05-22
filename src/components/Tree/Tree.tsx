@@ -94,9 +94,9 @@ const TreeComponent: React.FC<TreeProps> = ({
   return (
     <TreeProvider
       value={{
-        expandedItems: treeState.expandedItems,
+        expandedItems: treeState.expandedItems as any[],
         toggleItem: treeState.toggleItem,
-        isItemExpanded: treeState.isItemExpanded,
+        isItemExpanded: treeState.isItemExpanded as any,
         baseId: treeState.baseId,
         selectedItem: treeState.selectedItem,
         selectItem: treeState.selectItem,

@@ -1,23 +1,24 @@
 /**
  * TextArea Component
- * 
+ *
  * A simple textarea component with styling.
  */
 
 import React from 'react';
 import { View } from 'app-studio';
 
-export interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextAreaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Number of rows to display
    */
   rows?: number;
-  
+
   /**
    * Whether the textarea is disabled
    */
   isDisabled?: boolean;
-  
+
   /**
    * Whether the textarea has an error
    */

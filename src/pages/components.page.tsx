@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { View, Text, Horizontal } from 'app-studio';
 import TreePage from './tree.page';
 import FlowPage from './flow.page';
+import ChatInputDemo from './chat.page';
 
 const GradientPage = lazy(() => import('src/pages/gradient.page'));
 const DragAndDropPage = lazy(() => import('src/pages/dragAndDrop.page'));
 const UploadPage = lazy(() => import('src/pages/upload.page'));
-const AIChatPage = lazy(() => import('src/pages/chat.page'));
+// const AIChatPage = lazy(() => import('src/pages/chat.page'));
 
 // Lazy-loaded imports
 const AccordionPage = lazy(() => import('src/pages/accordion.page'));
@@ -59,7 +60,7 @@ const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 
 export const componentList = [
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
-  { name: 'Chat', path: '/chat', element: <AIChatPage /> },
+  { name: 'Chat', path: '/chat', element: <ChatInputDemo /> },
   { name: 'Gradient', path: '/gradient', element: <GradientPage /> },
 
   { name: 'Alert', path: '/alert', element: <AlertPage /> },

@@ -1414,6 +1414,151 @@ export const SearchIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+// Stop Icon (rectangle) for stopping agent
+export const StopIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 2,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+    </svg>
+  </IconWrapper>
+);
+
+// Send Icon (paper airplane) for chat submit
+export const SendIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  filled = false,
+  strokeWidth = 2,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <line x1="22" y1="2" x2="11" y2="13"></line>
+      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    </svg>
+  </IconWrapper>
+);
+
+// Loading Spinner Icon for agent running indicator
+export const LoadingSpinnerIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  filled = false,
+  strokeWidth = 2,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <line x1="12" y1="2" x2="12" y2="6"></line>
+      <line x1="12" y1="18" x2="12" y2="22"></line>
+      <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+      <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+      <line x1="2" y1="12" x2="6" y2="12"></line>
+      <line x1="18" y1="12" x2="22" y2="12"></line>
+      <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+      <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+    </svg>
+  </IconWrapper>
+);
+
+// Horizontal lines drag handle icon for Tree component
+export const DragHandleLinesIcon: React.FC<IconProps> = ({
+  widthHeight = 16,
+  color = 'currentColor',
+  filled = false,
+  strokeWidth = 1.5,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 16 16"
+      aria-hidden="true"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        d="M4 6H12"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+      <path
+        d="M4 10H12"
+        stroke="currentColor"
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+    </svg>
+  </IconWrapper>
+);
+
+// ChevronDown Icon for dropdown menus
+export const ChevronDownIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        d="M16.59 8.59L12 13.17L7.41 8.59L6 10L12 16L18 10L16.59 8.59Z"
+        fill="currentColor"
+      />
+    </svg>
+  </IconWrapper>
+);
+
+// ChevronRight Icon for submenu indicators
+export const ChevronRightIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="false"
+      focusable="false"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z"
+        fill="currentColor"
+      />
+    </svg>
+  </IconWrapper>
+);
+
 export const CloseEyeIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',

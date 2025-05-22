@@ -53,7 +53,7 @@ export const FlowDragAndDrop = () => {
   // Handle node drag start
   const handleNodeDragStart = (nodeId: string) => {
     console.log(`Started dragging node: ${nodeId}`);
-    
+
     // Update the node to show it's being dragged
     setNodes(
       nodes.map((node) =>
@@ -63,15 +63,16 @@ export const FlowDragAndDrop = () => {
   };
 
   // Handle node drag end
-  const handleNodeDragEnd = (nodeId: string, position: { x: number; y: number }) => {
+  const handleNodeDragEnd = (
+    nodeId: string,
+    position: { x: number; y: number }
+  ) => {
     console.log(`Finished dragging node: ${nodeId} to position:`, position);
-    
+
     // Update the node position and remove dragging state
     setNodes(
       nodes.map((node) =>
-        node.id === nodeId
-          ? { ...node, position, isDragging: false }
-          : node
+        node.id === nodeId ? { ...node, position, isDragging: false } : node
       )
     );
   };

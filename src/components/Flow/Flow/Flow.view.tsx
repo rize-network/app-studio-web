@@ -152,13 +152,15 @@ export const FlowEdgeView: React.FC<FlowEdgeProps> = ({
 
   const nodeStyle = FlowNodeSizes[nodeSize] || FlowNodeSizes.md;
   // Ensure minWidth and minHeight are numbers, falling back to defaults from DefaultFlowStyles
-  const nodeWidth =
+  // Ensure nodeWidth is explicitly a number
+  const nodeWidth: any =
     typeof nodeStyle.minWidth === 'number'
       ? nodeStyle.minWidth
       : typeof DefaultFlowStyles.node.minWidth === 'number'
       ? DefaultFlowStyles.node.minWidth
       : 200; // Fallback if somehow not a number
-  const nodeHeight =
+  // Ensure nodeHeight is explicitly a number
+  const nodeHeight: any =
     typeof DefaultFlowStyles.node.minHeight === 'number'
       ? DefaultFlowStyles.node.minHeight
       : 60; // Fallback
@@ -212,7 +214,13 @@ export const FlowEdgeView: React.FC<FlowEdgeProps> = ({
   // This is a basic version and can be significantly improved for complex layouts
   // For tree structures, we often want lines to come out straight from a side then turn.
 
-  let p1, p2, p3, p4;
+  // Define point interface to avoid 'any' type
+  interface Point {
+    x: number;
+    y: number;
+  }
+
+  let p1: Point, p2: Point, p3: Point, p4: Point;
 
   // Determine primary direction for cleaner tree-like connections
   // This logic assumes that if nodes are roughly aligned vertically, it's a vertical connection, etc.

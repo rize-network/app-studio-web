@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlowProps, FlowType } from './Flow/Flow.props';
 import { useFlowState } from './Flow/Flow.state';
-import { FlowNode, NodePosition } from './Flow/Flow.type';
+import { FlowNode, NodeConnection, NodePosition } from './Flow/Flow.type';
 import {
   FlowView,
   FlowNodeView,
@@ -100,7 +100,7 @@ const FlowComponent: React.FC<FlowProps> = ({
         label: 'New Step',
         subtitle: 'Select Action Type',
         // Numbering might need recalculation based on all nodes or context
-        number: flowState.nodes.length + 1,
+        number: ((flowState?.nodes?.length || 0) + 1) as number,
       },
     };
 
@@ -135,8 +135,8 @@ const FlowComponent: React.FC<FlowProps> = ({
 
   // The FlowView component expects specific props from the state and handlers.
   return React.createElement(FlowView, {
-    nodes: flowState.nodes,
-    edges: flowState.edges,
+    nodes: flowState.nodes as FlowNode[],
+    edges: flowState.edges as NodeConnection[],
     selectedNodeId: flowState.selectedNodeId,
     draggedNodeId: flowState.draggedNodeId,
     onNodeSelect: flowState.selectNode,

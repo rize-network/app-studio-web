@@ -1,43 +1,10 @@
 import React, { createContext, useContext } from 'react';
 import { View, Vertical, Horizontal, ViewProps } from 'app-studio';
 import { Text } from '../../Text/Text'; // Assuming Text path is correct
-import { ChevronIcon } from '../../Icon/Icon'; // Assuming Icon path is correct
+import { ChevronIcon, DragHandleIcon } from '../../Icon/Icon'; // Assuming Icon path is correct
 
-// Default drag handle icon
-const DefaultDragHandleIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M6 4C6 4.55228 5.55228 5 5 5C4.44772 5 4 4.55228 4 4C4 3.44772 4.44772 3 5 3C5.55228 3 6 3.44772 6 4Z"
-      fill="currentColor"
-    />
-    <path
-      d="M6 8C6 8.55228 5.55228 9 5 9C4.44772 9 4 8.55228 4 8C4 7.44772 4.44772 7 5 7C5.55228 7 6 7.44772 6 8Z"
-      fill="currentColor"
-    />
-    <path
-      d="M6 12C6 12.5523 5.55228 13 5 13C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11C5.55228 11 6 11.4477 6 12Z"
-      fill="currentColor"
-    />
-    <path
-      d="M12 4C12 4.55228 11.5523 5 11 5C10.4477 5 10 4.55228 10 4C10 3.44772 10.4477 3 11 3C11.5523 3 12 3.44772 12 4Z"
-      fill="currentColor"
-    />
-    <path
-      d="M12 8C12 8.55228 11.5523 9 11 9C10.4477 9 10 8.55228 10 8C10 7.44772 10.4477 7 11 7C11.5523 7 12 7.44772 12 8Z"
-      fill="currentColor"
-    />
-    <path
-      d="M12 12C12 12.5523 11.5523 13 11 13C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11C11.5523 11 12 11.4477 12 12Z"
-      fill="currentColor"
-    />
-  </svg>
-);
+// Use the DragHandleIcon component as the default
+const DefaultDragHandleIcon = () => <DragHandleIcon />;
 import {
   TreeContextType,
   TreeNode,
@@ -179,7 +146,7 @@ export const TreeItem: React.FC<TreeItemProps> = ({
 
   // Determine if this item is a drop target and what position
   const isDropTarget = dropTarget?.itemId === itemId;
-  const dropPosition = isDropTarget ? dropTarget.position : null;
+  const dropPosition = isDropTarget && dropTarget ? dropTarget?.position : null;
 
   const hasChildren = React.Children.toArray(children).some(
     (child) => React.isValidElement(child) && child.type === TreeItemContent

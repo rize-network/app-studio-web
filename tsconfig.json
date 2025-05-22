@@ -27,8 +27,10 @@
     // error out if import and file system have a casing mismatch. Recommended by TS
     "forceConsistentCasingInFileNames": true,
     // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
-    "noEmit": true,
+
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
     "types": ["react-scripts"],
     "baseUrl": "./",
     "rootDir": "./",
@@ -37,12 +39,6 @@
     },
     "strict": true,
     "noImplicitAny": false,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true
   },
   "noEmit": false,
   "include": ["./src", "./src/types/*.d.ts"]

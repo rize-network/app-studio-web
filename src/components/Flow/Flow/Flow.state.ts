@@ -147,11 +147,15 @@ export const useFlowState = ({
 
   // Determine if we're in controlled or uncontrolled mode for nodes
   const isNodesControlled = controlledNodes !== undefined;
-  const currentNodes = isNodesControlled ? controlledNodes : uncontrolledNodes;
+  const currentNodes: FlowNode[] = isNodesControlled
+    ? (controlledNodes as FlowNode[])
+    : (uncontrolledNodes as FlowNode[]);
 
   // Determine if we're in controlled or uncontrolled mode for edges
   const isEdgesControlled = controlledEdges !== undefined;
-  const currentEdges = isEdgesControlled ? controlledEdges : uncontrolledEdges;
+  const currentEdges: NodeConnection[] = isEdgesControlled
+    ? (controlledEdges as NodeConnection[])
+    : (uncontrolledEdges as NodeConnection[]);
 
   // Determine if we're in controlled or uncontrolled mode for selected node
   const isSelectedNodeControlled = controlledSelectedNodeId !== undefined;
@@ -161,7 +165,7 @@ export const useFlowState = ({
 
   // Determine if we're in controlled or uncontrolled mode for viewport
   const isViewportControlled = controlledViewport !== undefined;
-  const currentViewport = isViewportControlled
+  const currentViewport: any = isViewportControlled
     ? controlledViewport
     : uncontrolledViewport;
 
@@ -207,7 +211,7 @@ export const useFlowState = ({
   // Function to add a node (simple append, not typically used directly by UI)
   const addNode = useCallback(
     (node: FlowNode) => {
-      const newNodes = [...currentNodes, node];
+      const newNodes = [...(currentNodes as FlowNode[]), node];
       updateNodes(newNodes);
       // Note: This simpler addNode doesn't create edges.
       // onNodeAdd prop from FlowProps is typically called with node from addNodeAfter.
@@ -231,12 +235,12 @@ export const useFlowState = ({
           ...newNodeData,
           position: firstNodePosition,
         };
-        updateNodes([...currentNodes, positionedNewNode]);
+        updateNodes([...(currentNodes as FlowNode[]), positionedNewNode]);
         // No edge is created for the first node by default
         return positionedNewNode;
       }
 
-      const afterNode = currentNodes.find((node) => node.id === afterNodeId);
+      const afterNode = currentNodes?.find((node) => node.id === afterNodeId);
       if (!afterNode) {
         console.warn(
           `addNodeAfter: Could not find node with id ${afterNodeId}. Adding node at default position.`

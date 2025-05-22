@@ -70,7 +70,7 @@ export const useTreeState = ({
     : uncontrolledExpandedItems;
 
   const isSelectedControlled = controlledSelectedItem !== undefined;
-  const currentSelectedItem = isSelectedControlled
+  const currentSelectedItem: any = isSelectedControlled
     ? controlledSelectedItem
     : uncontrolledSelectedItem;
 
@@ -235,9 +235,9 @@ export const useTreeState = ({
 
   const toggleItem = useCallback(
     (itemId: string) => {
-      const newExpandedItems = currentExpandedItems.includes(itemId)
-        ? currentExpandedItems.filter((id) => id !== itemId)
-        : [...currentExpandedItems, itemId];
+      const newExpandedItems = currentExpandedItems?.includes(itemId)
+        ? currentExpandedItems?.filter((id) => id !== itemId)
+        : [...(currentExpandedItems as string[]), itemId];
 
       if (!isExpandedControlled) {
         setUncontrolledExpandedItems(newExpandedItems);
@@ -250,8 +250,8 @@ export const useTreeState = ({
   );
 
   const isItemExpanded = useCallback(
-    (itemId: string) => currentExpandedItems.includes(itemId),
-    [currentExpandedItems]
+    (itemId: string) => currentExpandedItems?.includes(itemId),
+    [currentExpandedItems as string[]]
   );
 
   const selectItem = useCallback(
@@ -341,10 +341,13 @@ export const useTreeState = ({
       if (
         position === 'inside' &&
         targetNode &&
-        !currentExpandedItems.includes(itemId)
+        !currentExpandedItems?.includes(itemId)
       ) {
         // Add the target to expanded items if it's not already expanded
-        const newExpandedItems = [...currentExpandedItems, itemId];
+        const newExpandedItems = [
+          ...(currentExpandedItems as string[]),
+          itemId,
+        ];
 
         if (!isExpandedControlled) {
           setUncontrolledExpandedItems(newExpandedItems);

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Tree } from '../Tree';
 import { TreeNode } from '../Tree/Tree.type';
 import { View, Text } from 'app-studio';
+import { DragHandleLinesIcon } from '../../Icon/Icon';
 
 export const TreeDragAndDrop = () => {
   // Initial tree data for a menu structure
@@ -116,28 +117,7 @@ export const TreeDragAndDrop = () => {
   };
 
   // Custom drag handle icon
-  const CustomDragHandleIcon = () => (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4 6H12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M4 10H12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
+  const CustomDragHandleIcon = () => <DragHandleLinesIcon />;
 
   return (
     <View padding={16}>
