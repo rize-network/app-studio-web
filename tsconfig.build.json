@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "es2020",      
+      "target": "esnext",      
       "module": "esnext",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
@@ -29,7 +29,7 @@
       // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
       "resolveJsonModule": true,
       "allowSyntheticDefaultImports": true,
-      "isolatedModules": true,
+      "isolatedModules": false,
       "types": ["react-scripts"],
       "baseUrl": "./",
       "paths": {
