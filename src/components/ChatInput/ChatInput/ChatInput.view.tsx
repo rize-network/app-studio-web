@@ -15,12 +15,8 @@ import { FileUploadHandler } from '../FileUploadHandler';
 import { PromptExamples } from '../PromptExamples';
 import { ReferenceImageButton } from '../ReferenceImageButton';
 import { ReferenceImageModal } from '../ReferenceImageModal';
-import { Loader } from 'src/components/Loader/Loader';
-import {
-  StopIcon,
-  SendIcon,
-  LoadingSpinnerIcon,
-} from 'src/components/Icon/Icon';
+import { Loader } from '../../Loader/Loader';
+import { StopIcon, SendIcon, LoadingSpinnerIcon } from '../../Icon/Icon';
 
 const ChatInputView: React.FC<ChatInputViewProps> = ({
   // Props from parent
