@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "target": "esnext",      
+      "target": "es2020",      
       "module": "esnext",
       "lib": ["dom", "dom.iterable", "esnext"],
       "allowJs": true,
@@ -45,15 +45,15 @@
       // "strictPropertyInitialization": true,
       // "noImplicitThis": true,
       // "alwaysStrict": false,
-      "noEmit": true,
-      "noEmitOnError": false,
+      // "noEmit": true,
+      // "noEmitOnError": false,
       "outDir":"./dist"
     },
     "tsc-alias": {
       "verbose": false,
       "resolveFullPaths": true
     },
-    "noEmit": false,
+    "noEmit": true,
     "include": ["./src"]
   }
   

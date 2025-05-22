@@ -16,7 +16,7 @@ interface MessageInputProps {
   onStopAgent?: () => void;
   isDraggingOver?: boolean;
   uploadedFiles: UploadedFile[];
-  
+
   fileInputRef: React.RefObject<HTMLInputElement>;
   isUploading: boolean;
   sandboxId?: string;
@@ -24,13 +24,13 @@ interface MessageInputProps {
   setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>;
   setIsUploading: React.Dispatch<React.SetStateAction<boolean>>;
   hideAttachments?: boolean;
-  
+
   selectedModel: string;
   onModelChange: (model: string) => void;
   modelOptions: ModelOption[];
   subscriptionStatus?: string;
   canAccessModel: (model: string) => boolean;
-  
+
   views?: {
     container?: any;
     textarea?: any;
@@ -54,7 +54,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
       onStopAgent,
       isDraggingOver = false,
       uploadedFiles,
-      
+
       fileInputRef,
       isUploading,
       sandboxId,
@@ -62,32 +62,36 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
       setUploadedFiles,
       setIsUploading,
       hideAttachments = false,
-      
+
       selectedModel,
       onModelChange,
       modelOptions,
       subscriptionStatus,
       canAccessModel,
-      
+
       views = {},
     },
-    ref,
+    ref
   ) => {
     const { getColor } = useTheme();
-    
+
     // Handle textarea resize
-    const handleTextareaResize = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleTextareaResize = (
+      e: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
       const textarea = e.target;
       textarea.style.height = 'auto';
       textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`;
     };
-    
+
     // Handle combined change event
-    const handleCombinedChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleCombinedChange = (
+      e: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
       onChange(e);
       handleTextareaResize(e);
     };
-    
+
     // Handle key down event
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -95,7 +99,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
         onSubmit(e as unknown as React.FormEvent);
       }
     };
-    
+
     return (
       <View
         width="100%"
@@ -126,7 +130,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
           overflow="auto"
           {...views?.textarea}
         />
-        
+
         <Horizontal
           justifyContent="space-between"
           alignItems="center"
@@ -147,12 +151,14 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
                 setIsUploading={setIsUploading}
               />
             )}
-            
+
             {/* Model selector */}
             <View
               as="select"
               value={selectedModel}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => onModelChange(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                onModelChange(e.target.value)
+              }
               height="36px"
               padding="0 12px"
               borderRadius="8px"
@@ -163,7 +169,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               cursor="pointer"
               transition="all 0.2s ease"
               _hover={{
-                backgroundColor: "color.gray.100"
+                backgroundColor: 'color.gray.100',
               }}
               {...views?.modelSelector}
             >
@@ -174,7 +180,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               ))}
             </View>
           </Horizontal>
-          
+
           <Button
             type="submit"
             onClick={onSubmit}
@@ -182,11 +188,17 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
             minWidth="36px"
             padding="0 12px"
             borderRadius="8px"
-            backgroundColor={isAgentRunning ? "theme.error" : "theme.primary"}
+            backgroundColor={isAgentRunning ? 'theme.error' : 'theme.primary'}
             color="color.white"
-            disabled={(!value.trim() && uploadedFiles.length === 0) || loading || (disabled && !isAgentRunning)}
+            disabled={
+              (!value.trim() && uploadedFiles.length === 0) ||
+              loading ||
+              (disabled && !isAgentRunning)
+            }
             _hover={{
-              backgroundColor: isAgentRunning ? "color.red.600" : "color.blue.600"
+              backgroundColor: isAgentRunning
+                ? 'color.red.600'
+                : 'color.blue.600',
             }}
             {...views?.submitButton}
           >

@@ -20,11 +20,11 @@ export const PromptExamples: React.FC<PromptExamplesProps> = ({
   views = {},
 }) => {
   const { getColor } = useTheme();
-  
+
   if (!examples || examples.length === 0) {
     return null;
   }
-  
+
   return (
     <Horizontal
       gap={8}
@@ -46,15 +46,11 @@ export const PromptExamples: React.FC<PromptExamplesProps> = ({
           transition="all 0.2s ease"
           onClick={() => onSelect(example)}
           _hover={{
-            backgroundColor: "color.gray.200"
+            backgroundColor: 'color.gray.200',
           }}
           {...views?.item}
         >
-          <Text
-            fontSize="14px"
-            color="color.gray.700"
-            {...views?.text}
-          >
+          <Text fontSize="14px" color="color.gray.700" {...views?.text}>
             {example.text}
           </Text>
         </View>

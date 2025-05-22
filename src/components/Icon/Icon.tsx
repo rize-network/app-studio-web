@@ -1581,6 +1581,8 @@ export const CloseEyeIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+export const TrashIcon = DeleteIcon;
+
 export const ExternalLinkIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',

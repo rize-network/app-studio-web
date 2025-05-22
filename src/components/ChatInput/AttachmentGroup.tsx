@@ -30,7 +30,7 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
   views = {},
 }) => {
   const { getColor } = useTheme();
-  
+
   if (files.length === 0) {
     return null;
   }
@@ -78,7 +78,7 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
           >
             {file.name}
           </Text>
-          
+
           <Text
             fontSize="10px"
             color="color.gray.500"
@@ -87,16 +87,12 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
           >
             ({formatFileSize(file.size)})
             {!sandboxId && (
-              <Text
-                as="span"
-                marginLeft="4px"
-                color="theme.primary"
-              >
+              <Text as="span" marginLeft="4px" color="theme.primary">
                 (pending)
               </Text>
             )}
           </Text>
-          
+
           <View
             as="button"
             type="button"
@@ -112,8 +108,8 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
             transition="all 0.2s ease"
             onClick={() => onRemove(index)}
             _hover={{
-              backgroundColor: "color.gray.200",
-              color: "color.gray.700"
+              backgroundColor: 'color.gray.200',
+              color: 'color.gray.700',
             }}
             {...views?.removeButton}
           >

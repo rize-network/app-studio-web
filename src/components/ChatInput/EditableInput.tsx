@@ -27,11 +27,11 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       autoFocus = true,
       views = {},
     },
-    ref,
+    ref
   ) => {
     const { getColor } = useTheme();
     const lastValueRef = useRef(value);
-    
+
     // Update the content of the editable div when the value prop changes
     useEffect(() => {
       const editableDiv = ref as React.RefObject<HTMLDivElement>;
@@ -40,7 +40,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
         lastValueRef.current = value;
       }
     }, [value, ref]);
-    
+
     // Handle input events
     const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
       const newValue = e.currentTarget.textContent || '';
@@ -49,7 +49,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
         lastValueRef.current = newValue;
       }
     };
-    
+
     // Handle key down events
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -57,7 +57,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
         onSubmit(e);
       }
     };
-    
+
     return (
       <View
         width="100%"
