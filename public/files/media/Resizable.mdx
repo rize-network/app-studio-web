@@ -1,0 +1,148 @@
+# Resizable
+
+An accessible resizable panel group component for creating flexible layouts with resizable panels.
+
+### **Import**
+  ```tsx
+  import { Resizable } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Resizable } from '@app-studio/web';
+import { View } from '@app-studio/web';
+import { Text } from '@app-studio/web';
+
+export const DefaultResizable = () => {
+  return (
+    <View height="400px" width="100%">
+      <Resizable>
+        <Resizable.Panel id="panel1" defaultSize="30%">
+          <View padding="16px" height="100%" backgroundColor="color.blue.50">
+            <Text fontWeight="bold">Panel 1</Text>
+            <Text>This is the first panel. Drag the handle to resize.</Text>
+          </View>
+        </Resizable.Panel>
+        
+        <Resizable.Handle id="handle1" withVisualIndicator />
+        
+        <Resizable.Panel id="panel2" defaultSize="40%">
+          <View padding="16px" height="100%" backgroundColor="color.green.50">
+            <Text fontWeight="bold">Panel 2</Text>
+            <Text>This is the second panel. Drag the handle to resize.</Text>
+          </View>
+        </Resizable.Panel>
+        
+        <Resizable.Handle id="handle2" withVisualIndicator />
+        
+        <Resizable.Panel id="panel3" defaultSize="30%">
+          <View padding="16px" height="100%" backgroundColor="color.purple.50">
+            <Text fontWeight="bold">Panel 3</Text>
+            <Text>This is the third panel. Drag the handle to resize.</Text>
+          </View>
+        </Resizable.Panel>
+      </Resizable>
+    </View>
+  );
+};
+```
+
+### **Orientation**
+The Resizable component supports both horizontal and vertical orientations:
+
+```tsx
+// Horizontal (default)
+<Resizable orientation="horizontal">
+  {/* Panels and handles */}
+</Resizable>
+
+// Vertical
+<Resizable orientation="vertical">
+  {/* Panels and handles */}
+</Resizable>
+```
+
+### **Nested Layouts**
+The Resizable component can be nested to create complex layouts:
+
+```tsx
+<Resizable>
+  <Resizable.Panel id="left" defaultSize="30%">
+    {/* Left panel content */}
+  </Resizable.Panel>
+  
+  <Resizable.Handle id="handle1" />
+  
+  <Resizable.Panel id="right" defaultSize="70%">
+    {/* Nested vertical resizable */}
+    <Resizable orientation="vertical">
+      <Resizable.Panel id="top" defaultSize="50%">
+        {/* Top right panel content */}
+      </Resizable.Panel>
+      
+      <Resizable.Handle id="handle2" />
+      
+      <Resizable.Panel id="bottom" defaultSize="50%">
+        {/* Bottom right panel content */}
+      </Resizable.Panel>
+    </Resizable>
+  </Resizable.Panel>
+</Resizable>
+```
+
+### **Handle Variants**
+The Resizable component supports different handle variants:
+
+```tsx
+<Resizable variant="default">
+  {/* Panels and handles */}
+</Resizable>
+
+<Resizable variant="subtle">
+  {/* Panels and handles */}
+</Resizable>
+
+<Resizable variant="prominent">
+  {/* Panels and handles */}
+</Resizable>
+```
+
+### **Handle Sizes**
+The Resizable component supports different handle sizes:
+
+```tsx
+<Resizable size="sm">
+  {/* Panels and handles */}
+</Resizable>
+
+<Resizable size="md">
+  {/* Panels and handles */}
+</Resizable>
+
+<Resizable size="lg">
+  {/* Panels and handles */}
+</Resizable>
+```
+
+### **Controlled Resizing**
+The Resizable component can be controlled externally:
+
+```tsx
+const [sizes, setSizes] = useState([33.33, 33.33, 33.33]);
+
+const handleSizesChange = (newSizes) => {
+  setSizes(newSizes);
+};
+
+<Resizable defaultSizes={sizes} onSizesChange={handleSizesChange}>
+  {/* Panels and handles */}
+</Resizable>
+```
+
+### **Accessibility**
+The Resizable component is fully accessible:
+
+- Handles have proper ARIA attributes
+- Keyboard navigation is supported (arrow keys to resize, Enter to start resizing, Escape to cancel)
+- Focus management for keyboard users

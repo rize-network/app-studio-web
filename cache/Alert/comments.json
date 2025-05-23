@@ -168,7 +168,7 @@
         },
         {
           "line": 30,
-          "comment": "This is the default WarningSvg icon with its styles.",
+          "comment": "This is the default WarningIcon icon with its styles.",
           "codeSnippet": "<War"
         },
         {

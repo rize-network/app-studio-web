@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 import { Modal } from '../Modal';
 import { hideModal, showModal } from '../Modal/Modal.store';

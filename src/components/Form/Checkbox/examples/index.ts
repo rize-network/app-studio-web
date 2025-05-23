@@ -1,5 +1,6 @@
 export * from './ColorScheme';
 export * from './Default';
+export * from './designSystem';
 export * from './DisabledInput';
 export * from './ErrorCheckbox';
 export * from './FormCheckout';

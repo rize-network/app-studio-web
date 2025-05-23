@@ -1,11 +1,17 @@
 import React, { useEffect } from 'react';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { View } from '../../Layout/View/View';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Themes } from './Message.style';
 import { MessageProps } from './Message.props';
-import { CloseSvg, WarningSvg, SuccessSvg, ErrorSvg, InfoSvg } from '../../Svg';
+import {
+  CloseIcon,
+  WarningIcon,
+  SuccessIcon,
+  ErrorIcon,
+  InfoIcon,
+} from '../../Icon/Icon';
 
 export const MessageView = ({
   variant,
@@ -18,7 +24,7 @@ export const MessageView = ({
   showIcon = false,
   isClosable = false,
   timeout = 3000,
-  styles,
+  views,
 }: MessageProps) => {
   useEffect(() => {
     if (timeout && !isClosable) {
@@ -36,7 +42,7 @@ export const MessageView = ({
   }, []);
 
   const Theme = theme ?? Themes;
-  const isWithAction = !!(action && actionText);
+  const showAction = !!(action && actionText);
 
   const containerStyle = {
     borderWidth: 1,
@@ -53,10 +59,14 @@ export const MessageView = ({
   }[variant];
 
   const iconComponent = {
-    info: <InfoSvg size={24} color={iconColor} {...styles?.icon} />,
-    success: <SuccessSvg size={24} color={iconColor} {...styles?.icon} />,
-    warning: <WarningSvg size={24} color={iconColor} {...styles?.icon} />,
-    error: <ErrorSvg size={24} color={iconColor} {...styles?.icon} />,
+    info: <InfoIcon widthHeight={24} color={iconColor} {...views?.icon} />,
+    success: (
+      <SuccessIcon widthHeight={24} color={iconColor} {...views?.icon} />
+    ),
+    warning: (
+      <WarningIcon widthHeight={24} color={iconColor} {...views?.icon} />
+    ),
+    error: <ErrorIcon widthHeight={24} color={iconColor} {...views?.icon} />,
   }[variant];
 
   const isShowIcon = showIcon && iconComponent;
@@ -67,7 +77,7 @@ export const MessageView = ({
       gap={16}
       width={400}
       // safe={true}
-      wrap="nowrap"
+      flexWrap="nowrap"
       position={'relative'}
       alignItems="center"
       padding="14px 24px 14px 14px"
@@ -81,27 +91,27 @@ export const MessageView = ({
             }
       }
       {...containerStyle}
-      {...styles?.container}
+      {...views?.container}
     >
       {isShowIcon && iconComponent}
       <Vertical gap={8} width="100%">
-        <Text size="md" weight="semiBold" {...styles?.title}>
+        <Text size="md" weight="semiBold" {...views?.title}>
           {title}
         </Text>
         {subtitle && (
-          <Text size="sm" {...styles?.subtitle}>
+          <Text size="sm" {...views?.subtitle}>
             {subtitle}
           </Text>
         )}
       </Vertical>
-      {isWithAction && (
+      {showAction && (
         <Text
           marginRight={10}
           onClick={action}
           padding="6px 10px"
           whiteSpace="nowrap"
           {...containerStyle}
-          {...styles?.actionText}
+          {...views?.actionText}
         >
           {actionText}
         </Text>
@@ -115,12 +125,12 @@ export const MessageView = ({
           onClick={() => {
             hide();
           }}
-          {...styles?.closingIcon?.container}
+          {...views?.closingIcon?.container}
         >
-          <CloseSvg
-            size={18}
+          <CloseIcon
+            widthHeight={18}
             color={iconColor}
-            {...styles?.closingIcon?.icon}
+            {...views?.closingIcon?.icon}
           />
         </View>
       )}

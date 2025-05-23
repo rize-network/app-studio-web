@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from '../components/Layout/View/View';
+import { View } from 'app-studio';
 import {
   ActionDemo,
   DefaultDemo,
@@ -16,7 +16,7 @@ import { MessageLayout } from '../components/Message/Message/Message.layout';
 const MessagePage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

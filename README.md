@@ -1,50 +1,171 @@
-# Getting Started with Create React App
+# App Studio Web Component Library
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![App Studio Web](https://img.shields.io/badge/App%20Studio-Web-blue)
+![React](https://img.shields.io/badge/React-18.x-61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-4.9.x-3178C6)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## Available Scripts
+A comprehensive, accessible, and customizable React component library built with TypeScript and App Studio. This library provides a wide range of UI components designed to help you build beautiful and functional web applications quickly and efficiently.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **40+ UI Components**: From basic elements to complex interactive components
+- **Fully Typed**: Built with TypeScript for better developer experience
+- **Accessible**: Follows WCAG guidelines for accessibility
+- **Customizable**: Easily theme and style components to match your brand
+- **Responsive**: Works across all device sizes
+- **Form Integration**: Seamless integration with Formik for form handling
+- **Modern Design**: Clean, consistent design following best practices
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm install @app-studio/web
+# or
+yarn add @app-studio/web
+```
 
-### `npm test`
+## Quick Start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```jsx
+import React from 'react';
+import { Button, Text } from '@app-studio/web';
 
-### `npm run build`
+function App() {
+  return (
+    <div>
+      <Text>Hello, world!</Text>
+      <Button onClick={() => alert('Clicked!')}>Click me</Button>
+    </div>
+  );
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Component Categories
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Layout Components
+- View
+- Center
+- Horizontal
+- Vertical
+- AspectRatio
+- Separator
+- Resizable
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Form Components
+- Checkbox
+- Radio
+- Select
+- Switch
+- TextArea
+- TextField
+- OTPInput
 
-### `npm run eject`
+### Navigation Components
+- Accordion
+- Menubar
+- NavigationMenu
+- Pagination
+- Sidebar
+- Tabs
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Feedback Components
+- Alert
+- Modal
+- Toast
+- Tooltip
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Data Display Components
+- Avatar
+- Badge
+- Card
+- Table
+- Chart
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Utility Components
+- Button
+- Gradient
+- Loader
+- Text
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Interactive Components
+- Carousel
+- ContextMenu
+- DropdownMenu
+- HoverCard
+- Slider
+- Toggle
+- ToggleGroup
 
-## Learn More
+## Design System
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+All components follow a consistent design system with:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Typography**: Inter/Geist font, specific sizes/weights
+- **Spacing**: 4px grid system
+- **Colors**: Neutral palette with semantic colors
+- **Rounded corners**: Consistent border radius
+- **Transitions**: Subtle animations
 
-##### Licensed under the [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/legalcode) license.
-See the [LICENSE](LICENSE) file. 
+## Development
 
+### Prerequisites
+
+- Node.js (>= 10.x)
+- npm or yarn
+
+### Setup
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-org/app-studio-web.git
+   cd app-studio-web
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
+3. Start the development server
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+### Available Scripts
+
+- `npm start` - Start the development server
+- `npm run build` - Build the library for production
+- `npm test` - Run tests
+- `npm run storybook` - Start Storybook for component development
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+- `npm run prettier` - Run Prettier
+- `npm run prettier:fix` - Fix Prettier issues
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
+
+### Creating New Components
+
+Use our component creation script to scaffold new components:
+
+```bash
+npm run create-structure -- --name=YourComponentName
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- Built with [React](https://reactjs.org/)
+- Styled with [App Studio](https://app-studio.dev/)
+- Form handling with [Formik](https://formik.org/)
+- State management with [Zustand](https://github.com/pmndrs/zustand)

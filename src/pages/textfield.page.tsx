@@ -3,6 +3,7 @@ import {
   IsClearableDemo,
   ColorSchemeDemo,
   DefaultInput,
+  DesignSystemTextFields,
   DisabledInput,
   LabelInput,
   LeftInput,
@@ -14,20 +15,26 @@ import {
   StyledInput,
   VariantsInput,
 } from 'src/components/Form/TextField/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const InputPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
           </tr>
           <tr>
-            <td>Default</td>
+            <td>Design System</td>
+            <td>
+              <DesignSystemTextFields />
+            </td>
+          </tr>
 
+          <tr>
+            <td>Default</td>
             <td>
               <DefaultInput />
             </td>

@@ -4,9 +4,8 @@ import { Checkbox } from '../Checkbox';
 
 export const StyledCheckbox = () => (
   <Checkbox
-    colorScheme="theme.primary"
     label="Active"
-    styles={{
+    views={{
       checkbox: {
         borderRadius: '50%',
         borderColor: 'theme.primary',

@@ -1,7 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Text } from 'src/components/Text/Text';
-import { Size } from 'src/components/Text/Text/Text.type';
 
 import { cleanup, render, screen } from '@testing-library/react';
 
@@ -69,7 +68,7 @@ test('should render a superscript text to match snapshot', () => {
 test('should render one truncated text line to match snapshot', () => {
   const tree = renderer
     .create(
-      <Text isUnderlined maxLines={2} isTruncated>
+      <Text isUnderlined maxLines={2}>
         Pellentesque habitant morbi tristique senectus et netus et malesuada
         fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
         ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam

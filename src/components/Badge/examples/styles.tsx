@@ -5,7 +5,7 @@ export const StylesDemo = () => {
   return (
     <Badge
       content="styles"
-      styles={{
+      views={{
         container: {
           backgroundColor: 'transparent',
         },

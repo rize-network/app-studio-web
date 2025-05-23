@@ -1,72 +1,88 @@
-import { CSSProperties } from 'react';
+/**
+ * Switch Styles
+ *
+ * Defines the styles for the Switch component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
 
+import { ViewProps } from 'app-studio';
 import { Size } from './Switch.type';
-
-export const KnobSizes: Record<Size, CSSProperties> = {
-  xs: { height: 6, width: 6 },
-  sm: { height: 9, width: 9 },
-  md: { height: 12, width: 12 },
-  lg: { height: 15, width: 15 },
-  xl: { height: 18, width: 18 },
-  '2xl': { height: 21, width: 21 },
-  '3xl': { height: 24, width: 24 },
-  '4xl': { height: 27, width: 27 },
-  '5xl': { height: 30, width: 30 },
-  '6xl': { height: 33, width: 33 },
+/**
+ * Knob (circle) sizes for the Switch component
+ * Following the 4px grid system - dimensions réduites
+ */
+export const KnobSizes: Record<Size, ViewProps> = {
+  xs: { height: '8px', width: '8px' }, // 2 × 4px grid
+  sm: { height: '12px', width: '12px' }, // 3 × 4px grid
+  md: { height: '16px', width: '16px' }, // 4 × 4px grid
+  lg: { height: '20px', width: '20px' }, // 5 × 4px grid
+  xl: { height: '24px', width: '24px' }, // 6 × 4px grid
 };
 
-export const SliderSizes: Record<Size, CSSProperties> = {
+/**
+ * Slider (track) sizes for the Switch component
+ * Following the 4px grid system - dimensions réduites
+ */
+export const SliderSizes: Record<Size, ViewProps> = {
   xs: {
-    height: 16,
-    width: 28,
+    height: '16px', // 4 × 4px grid
+    width: '36px', // 9 × 4px grid - increased for content
   },
   sm: {
-    height: 20,
-    width: 36,
+    height: '20px', // 5 × 4px grid
+    width: '44px', // 11 × 4px grid - increased for content
   },
   md: {
-    height: 24,
-    width: 44,
+    height: '24px', // 6 × 4px grid
+    width: '52px', // 13 × 4px grid - increased for content
   },
   lg: {
-    height: 28,
-    width: 52,
+    height: '28px', // 7 × 4px grid
+    width: '60px', // 15 × 4px grid - increased for content
   },
   xl: {
-    height: 32,
-    width: 60,
-  },
-  '2xl': {
-    height: 36,
-    width: 68,
-  },
-  '3xl': {
-    height: 40,
-    width: 76,
-  },
-  '4xl': {
-    height: 44,
-    width: 84,
-  },
-  '5xl': {
-    height: 48,
-    width: 92,
-  },
-  '6xl': {
-    height: 52,
-    width: 100,
+    height: '32px', // 8 × 4px grid
+    width: '68px', // 17 × 4px grid - increased for content
   },
 };
 
+/**
+ * Padding for the Switch slider - ajusté pour les nouvelles dimensions
+ * Following the 4px grid system
+ */
 export const SliderPadding: Record<Size, Record<string, number>> = {
-  xs: { paddingVertical: 0, paddingHorizontal: 2 },
-  sm: { paddingVertical: 0, paddingHorizontal: 3 },
-  md: { paddingVertical: 0, paddingHorizontal: 5 },
-  lg: { paddingVertical: 0, paddingHorizontal: 6 },
-  xl: { paddingVertical: 0, paddingHorizontal: 8 },
-  '2xl': { paddingVertical: 0, paddingHorizontal: 9 },
-  '3xl': { paddingVertical: 0, paddingHorizontal: 10 },
-  '4xl': { paddingVertical: 0, paddingHorizontal: 13 },
-  '5xl': { paddingVertical: 0, paddingHorizontal: 15 },
-  '6xl': { paddingVertical: 0, paddingHorizontal: 16 },
+  xs: { paddingVertical: 4, paddingHorizontal: 2 }, // 0.5 × 4px grid horizontalement
+  sm: { paddingVertical: 4, paddingHorizontal: 2 }, // 0.5 × 4px grid horizontalement
+  md: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
+  lg: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
+  xl: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
+};
+
+/**
+ * Color schemes for the Switch component
+ */
+export const ColorSchemes = {
+  // Default colors
+  default: {
+    active: 'theme.primary',
+    inactive: 'color.gray.300',
+    knob: 'white',
+    disabled: 'color.gray.200',
+  },
+  // State-specific colors
+  states: {
+    hover: {
+      active: 'color.blue.600',
+      inactive: 'color.gray.400',
+    },
+    focus: {
+      active: 'color.blue.600',
+      inactive: 'color.gray.400',
+      outline: 'rgba(66, 153, 225, 0.6)',
+    },
+  },
 };

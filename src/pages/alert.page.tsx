@@ -1,7 +1,8 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import {
   DefaultDemo,
+  DesignSystemAlerts,
   IconDemo,
   StylesDemo,
   VariantDemo,
@@ -10,11 +11,18 @@ import {
 const AlertPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
+          </tr>
+
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemAlerts />
+            </td>
           </tr>
 
           <tr>

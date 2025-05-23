@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Checkbox } from '../Checkbox';
 
@@ -14,9 +14,14 @@ export const ColorCheckbox = () => (
     ].map((color) => (
       <Checkbox
         key={color}
-        colorScheme={color}
         label={color}
         defaultIsSelected
+        views={{
+          checkbox: {
+            backgroundColor: color,
+            borderColor: color,
+          },
+        }}
       />
     ))}
   </Vertical>

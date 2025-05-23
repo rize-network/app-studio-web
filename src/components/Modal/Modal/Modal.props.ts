@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react';
-import { Elevation } from 'src/utils/elevation';
+import React from 'react';
+import { Elevation } from '../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
 
 import { CloseButtonPosition, Position, Shape, Size } from './Modal.type';
@@ -58,7 +58,7 @@ export interface ModalProps extends Omit<ViewProps, 'size'> {
   /**
    * Applies a shadow effect to the button.
    */
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
 }
 
 export interface ModalType extends React.FunctionComponent<ModalProps> {
@@ -93,7 +93,7 @@ export interface ModalType extends React.FunctionComponent<ModalProps> {
   Layout: React.FC<ModalLayoutProps>;
 }
 
-export interface OverlayProps extends Omit<ViewProps, 'size'> {
+export interface OverlayProps extends Omit<ViewProps, 'position' | 'isOpen'> {
   /**
    * The content of the Overlay
    */
@@ -121,6 +121,10 @@ export interface OverlayProps extends Omit<ViewProps, 'size'> {
 }
 
 export interface HeaderProps extends Omit<ViewProps, 'size'> {
+  views?: {
+    container?: ViewProps;
+    header?: ViewProps;
+  };
   /**
    * The content of the header
    */
@@ -145,9 +149,14 @@ export interface HeaderProps extends Omit<ViewProps, 'size'> {
 
 export interface ModalLayoutProps {
   modals: { [x: string]: React.FC<any> };
+  onShow?: (name: string, props?: any) => void;
+  onHide?: (name?: string, props?: any) => void;
 }
 
 export interface ContainerProps extends Omit<ViewProps, 'size'> {
+  views?: {
+    container?: ViewProps;
+  };
   /**
    * The content of the modal container
    */
@@ -163,9 +172,22 @@ export interface ContainerProps extends Omit<ViewProps, 'size'> {
   /**
    * Set a shadow effect on the button.
    */
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
 }
 
-export interface BodyProps extends Omit<ViewProps, 'size'> {}
+export interface BodyProps extends ViewProps {
+  views?: {
+    view?: ViewProps;
 
-export interface FooterProps extends ViewProps {}
+    /**
+     * Optional theme mode override ('light' or 'dark')
+     * If not provided, the component will use the theme mode from context
+     */
+  };
+}
+
+export interface FooterProps extends ViewProps {
+  views?: {
+    container?: ViewProps;
+  };
+}

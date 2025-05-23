@@ -1,3 +1,10 @@
+/**
+ * TextArea View Component
+ *
+ * Renders a multi-line text input field with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { Element, Typography } from 'app-studio';
 import {
@@ -5,10 +12,8 @@ import {
   FieldContent,
   FieldLabel,
   FieldWrapper,
-} from '../../../Layout/Input';
-
+} from '../../../Input';
 import { TextAreaViewProps } from './TextArea.props';
-
 const TextAreaView: React.FC<TextAreaViewProps> = ({
   id,
   name,
@@ -22,7 +27,6 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   size = 'sm',
   shape = 'default',
   variant = 'default',
-  colorScheme = 'theme.primary',
   isHovered = false,
   isFocused = false,
   isEditable = false,
@@ -35,87 +39,108 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   onBlur = () => {},
   onChange,
   onFocus,
-  onChangeText,
   setHint = () => {},
   setValue = () => {},
   setIsFocused = () => {},
   setIsHovered = () => {},
-  styles = { box: {}, text: {}, label: {}, helperText: {}, field: {} },
+  views = { label: {}, helperText: {} },
   ...props
 }) => {
-  const isWithLabel = !!(isFocused && label);
-
+  const showLabel = !!(isFocused && label);
+  /**
+   * Styles for the textarea field
+   */
   const fieldStyles = {
+    // Layout properties
     margin: 0,
-    paddingVertical: 8,
-    paddingHorizontal: 0,
+    paddingVertical: 2, // 3 × 4px grid
+    paddingHorizontal: 2,
     width: '100%',
-    heigth: '100%',
+    maxHeight: 'calc(100vh - 100px)',
+    height: 'calc(5em)',
     border: 'none',
+    resize: 'vertical',
+    // Focus state
     on: {
       focus: {
         outline: 'none',
       },
     },
-    fontSize: Typography.fontSizes[size],
-    backgroundColor: 'transparent',
-    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
-    cursor: isDisabled ? 'not-allowed' : 'auto',
-    ...styles['field'],
-  };
 
+    // Typography properties
+    fontSize: Typography.fontSizes[size],
+    lineHeight: Typography.fontSizes[size] * 1.5, // 1.5 × font size for better readability in multi-line text
+
+    letterSpacing: '-0.01em', // Slight negative tracking for modern look
+
+    // Visual properties
+    backgroundColor: 'transparent',
+    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+
+    // State properties
+    cursor: isDisabled ? 'not-allowed' : 'text',
+
+    // Animation
+    transition: 'all 0.2s ease',
+
+    // // Dark mode support
+
+    // Apply custom field styles
+    ...views['field'],
+  };
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => {
     setIsFocused(true);
     if (onFocus) onFocus();
   };
-
   const handleBlur = (event: any) => {
     onBlur(event);
     setIsFocused(false);
   };
-
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement> | string
   ) => {
     if (typeof event === 'string') {
-      //for ios and android
       setValue(event);
-      if (onChangeText) onChangeText(event);
+      if (onChange) onChange(event);
     } else {
       setValue(event.target.value);
       if (onChange) onChange(event.target.value);
     }
   };
-
   return (
-    <FieldContainer helperText={helperText} error={error} styles={styles}>
+    <FieldContainer
+      helperText={helperText}
+      error={error}
+      views={views}
+      {...props}
+    >
       <FieldContent
         label={label}
         size={size}
         error={error}
         shape={shape}
-        styles={styles}
+        views={views}
         shadow={shadow}
         variant={variant}
         value={value}
-        color={colorScheme}
+        color={'theme.primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
-        colorScheme={colorScheme}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
+        {...views?.content}
       >
-        <FieldWrapper>
-          {isWithLabel && (
+        <FieldWrapper {...views?.warper}>
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
-              color={colorScheme}
+              color={'theme.primary'}
               error={error}
-              {...styles}
+              {...views?.label}
             >
               {label}
             </FieldLabel>
@@ -130,20 +155,18 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
-            editable={isEditable}
+            editable={!!isEditable.toString()}
             placeholder={hint}
             onBlur={handleBlur}
             onFocus={handleFocus}
+            multiline={!!isMultiline.toString()}
             onChange={handleChange}
-            multiline={isMultiline}
             {...fieldStyles}
-            {...props}
-            {...(onChangeText && { onChangeText: handleChange })}
+            {...views?.textarea}
           />
         </FieldWrapper>
       </FieldContent>
     </FieldContainer>
   );
 };
-
 export default TextAreaView;

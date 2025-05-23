@@ -66,7 +66,7 @@ describe('Badge Custom Styles', () => {
       },
     };
 
-    render(<Badge content="test" styles={customStyles} />);
+    render(<Badge content="test" views={customStyles} />);
     const badgeElement = screen.getByRole('badge');
     const badgeText = screen.getByRole('badgeText');
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../../Button/Button';
 
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 import { TextField } from '../TextField';
 
@@ -13,14 +13,14 @@ export const StyledInput = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Horizontal gap={10} alignItems="center" wrap="nowrap">
+      <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
         <TextField
           name="surname"
           label="Surname"
           variant="none"
           shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }}
-          styles={{
-            box: {
+          views={{
+            container: {
               borderRadius: 8,
               borderColor: 'theme.primary',
               borderStyle: 'solid',
@@ -30,7 +30,7 @@ export const StyledInput = () => {
             label: { color: 'theme.primary' },
           }}
         />
-        <Button type="submit" height="40px" colorScheme="theme.primary" isAuto>
+        <Button type="submit" height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

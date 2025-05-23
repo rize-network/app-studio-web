@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { TextField } from '../TextField';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import {
   DefaultDemo,
   LabelDemo,
@@ -16,7 +16,7 @@ import {
 const ComboBoxPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

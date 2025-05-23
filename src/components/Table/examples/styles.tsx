@@ -54,7 +54,7 @@ export const StylesDemo = () => {
   ];
   return (
     <Table
-      styles={{
+      views={{
         table: {
           boxShadow:
             ' 0 4px 6px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.1)',

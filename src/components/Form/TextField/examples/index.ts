@@ -1,4 +1,5 @@
 export * from './Default';
+export * from './designSystem';
 export * from './DisabledInput';
 export * from './ErrorInput';
 export * from './HelperText';

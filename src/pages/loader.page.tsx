@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import {
   DefaultLoader,
   PositionLoader,
@@ -13,7 +13,7 @@ import {
 export const LoaderPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

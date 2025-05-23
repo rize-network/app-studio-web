@@ -1,7 +1,7 @@
 import React from 'react';
 import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
 
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Variant } from '../CountryPicker/CountryPicker.type';
 

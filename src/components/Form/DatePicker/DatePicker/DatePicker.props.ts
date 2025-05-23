@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react';
-import { Elevation } from 'src/utils/elevation';
+import React from 'react';
+import { Elevation } from '../../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
 
 import { DatePickerStyles, Shape, Size, Variant } from './DatePicker.type';
@@ -26,7 +26,6 @@ export interface DatePickerProps extends Omit<ViewProps, 'size'> {
   /**
    * The color scheme that changes the background color of the DatePicker.
    */
-  colorScheme?: string;
   /**
    * If true, the DatePicker cannot be selected.
    */
@@ -51,7 +50,7 @@ export interface DatePickerProps extends Omit<ViewProps, 'size'> {
   /**
    * CSS styles for the DatePicker container and label.
    */
-  styles?: DatePickerStyles;
+  views?: DatePickerStyles;
   /**
    * The shape that changes the outlines of the field.
    */
@@ -67,7 +66,7 @@ export interface DatePickerProps extends Omit<ViewProps, 'size'> {
   /**
    * Adds a shadow effect to the DatePicker.
    */
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
 }
 
 export interface DatePickerViewProps extends DatePickerProps {

@@ -12,11 +12,14 @@ export const FormikTextAreaExemple = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.log}>
       {(props: any) => (
-        <FormikForm>
+        <FormikForm
+          onChange={() => {
+            console.log('FormikTextAreaExemple onChange', props.values);
+          }}
+        >
           <FormikTextArea
             name="thoughts"
             placeholder="Write your thoughts here..."
-            colorScheme="theme.secondary"
           />
           <Button type="submit" onClick={props.handleSubmit}>
             Submit

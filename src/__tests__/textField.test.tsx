@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { TextField } from 'src/components';
-import { ProfileSvg } from 'src/components/Svg';
+import { ProfileIcon } from 'src/components/Icon/Icon';
 
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -62,13 +62,13 @@ test('TextField to match snapshot', () => {
       <TextField
         name="name"
         placeholder="Name"
-        leftChild={<ProfileSvg size={12} />}
+        left={<ProfileIcon size={12} />}
         error={true}
         helperText={'required'}
         variant="outline"
         size="xl"
-        styles={{
-          box: {
+        views={{
+          container: {
             backgroundColor: 'red',
           },
           label: {

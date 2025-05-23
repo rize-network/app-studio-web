@@ -1,47 +1,25 @@
 import React from 'react';
-
 import { Size, Styles, TextDecorationStyle } from './Link.type';
 import { ViewProps } from 'app-studio';
-
+// Defines the props for the Link component, excluding 'size' which comes from the extended 'ViewProps'.
 export interface LinkProps extends Omit<ViewProps, 'size'> {
-  /**
-   * The content of the link.
-   */
+  // Represents the content within the Link component which can be any valid React node.
   children: React.ReactNode;
-  /**
-   * The style of text decoration for the link.
-   * Can be one of "default", "hover", or "underline".
-   */
+  // Optional prop to define the text decoration style of the link as underline views.
   underline?: TextDecorationStyle;
-  /**
-   * Indicates whether the link opens in a new tab.
-   */
+  // Optional boolean indicating whether the link points to an external resource. Default behavior may vary based on this value.
   isExternal?: boolean;
-  /**
-   * The size of the icon associated with the link.
-   */
+  // Optional prop to set the size of an icon if present within the link.
   iconSize?: Size;
-  /**
-   * Sets the color of the icon and text.
-   */
-  colorScheme?: string;
-  /**
-   * The URL or destination of the link.
-   */
-  href: string;
-  /**
-   * CSS styles for the  external icon.
-   */
-  styles?: Styles;
+  // The href attribute specifying the URL the link points to.
+  to: string;
+  // Optional styles object to customize the appearance using predefined style types.
+  views?: Styles;
 }
-
+// Extends the basic LinkProps with additional properties related to the Link view.
 export interface LinkViewProps extends LinkProps {
-  /**
-   *  Indicates whether the link is currently being hovered
-   */
+  // Indicates whether the link is under a hover state, which may adjust the link's style.
   isHovered: boolean;
-  /**
-   *  Function to set the hovered state of the link
-   */
+  // A function to update the hover state of the link.
   setIsHovered: Function;
 }

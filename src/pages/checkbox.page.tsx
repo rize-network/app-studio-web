@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ColorCheckbox,
   DefaultCheckbox,
+  DesignSystemCheckboxes,
   DisabledCheckbox,
   ErrorCheckbox,
   FormCheckbox,
@@ -13,20 +14,26 @@ import {
   StyledCheckbox,
   InfoTextDemo,
 } from 'src/components/Form/Checkbox/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const CheckboxPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
           </tr>
           <tr>
-            <td>Default</td>
+            <td>Design System</td>
+            <td>
+              <DesignSystemCheckboxes />
+            </td>
+          </tr>
 
+          <tr>
+            <td>Default</td>
             <td>
               <DefaultCheckbox />
             </td>

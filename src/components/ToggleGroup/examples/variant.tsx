@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text } from 'src/components/Text/Text';
+import { Text } from '../../Text/Text';
 import { ToggleGroup } from '../ToggleGroup';
 import { Variant } from '../ToggleGroup/ToggleGroup.type';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const VariantDemo = () => {
   const items = [

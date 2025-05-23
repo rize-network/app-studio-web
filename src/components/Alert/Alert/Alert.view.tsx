@@ -1,55 +1,108 @@
+/**
+ * Alert View Component
+ *
+ * Renders an alert with various styles and states according to the design guidelines.
+ */
+
 import React from 'react';
-import { View } from '../../Layout/View/View';
+import { View, useTheme } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { WarningSvg } from '../../Svg';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { WarningIcon, InfoIcon, ErrorIcon, SuccessIcon } from '../../Icon/Icon';
 import { AlertProps } from './Alert.props';
-import { Themes } from './Alert.style';
-// Defines AlertView as a functional component using destructuring to extract props.
+import { getThemes } from './Alert.style';
+
+/**
+ * Alert component that displays important messages to users
+ */
 export const AlertView = ({
   icon,
   title,
-  styles,
+  views,
   description,
-  // Sets a default variant prop to 'default' if none is provided.
   variant = 'default',
-}: AlertProps) => (
-  <Horizontal
-    gap={15}
-    borderRadius={10}
-    borderWidth={1}
-    borderStyle="solid"
-    padding={16}
-    wrap="nowrap"
-    borderColor={Themes[variant].container.border}
-    {...styles?.container}
-  >
-    <View alignSelf={'center'}>
-      {icon ? (
-        icon
-      ) : (
-        <WarningSvg
-          size={24}
-          color={styles?.icon.color ?? Themes[variant].content.color}
-        />
-      )}
-    </View>
-    <Vertical gap={10}>
-      <Text
-        fontSize="16px"
-        color={Themes[variant].content.color}
-        {...styles?.title}
-      >
-        {title}
-      </Text>
-      <Text
-        fontSize="14px"
-        color={Themes[variant].content.color}
-        {...styles?.description}
-      >
-        {description}
-      </Text>
-    </Vertical>
-  </Horizontal>
-);
+  themeMode: elementMode,
+  ...props
+}: AlertProps) => {
+  const { themeMode } = useTheme();
+  const currentThemeMode = elementMode || themeMode;
+  const themes = getThemes(currentThemeMode);
+  // Select the appropriate icon based on the variant
+  const getIcon = () => {
+    if (icon) return icon;
+
+    // Use the theme color directly from themes
+    const iconColor = views?.icon?.color ?? themes[variant].icon.color;
+
+    const iconProps = {
+      size: 20,
+      color: iconColor,
+    };
+
+    switch (variant) {
+      case 'info':
+        return <InfoIcon {...iconProps} />;
+      case 'success':
+        return <SuccessIcon {...iconProps} />;
+      case 'error':
+        return <ErrorIcon {...iconProps} />;
+      case 'warning':
+      default:
+        return <WarningIcon {...iconProps} />;
+    }
+  };
+
+  return (
+    <Horizontal
+      // Layout properties
+      gap={12} // 3 × 4px grid
+      padding="16px" // 4 × 4px grid
+      flexWrap="nowrap"
+      alignItems="flex-start"
+      // Visual properties
+      borderRadius="8px" // Consistent with design system (rounded-md)
+      borderWidth="1px"
+      borderStyle="solid"
+      borderColor={themes[variant].container.borderColor}
+      backgroundColor={themes[variant].container.backgroundColor}
+      boxShadow={themes[variant].container.boxShadow}
+      // Animation
+      transition="all 0.2s ease"
+      // Apply custom container styles and any other props
+      {...views?.container}
+      {...props}
+    >
+      {/* Icon */}
+      <View alignSelf="flex-start" marginTop="2px" {...views?.icon}>
+        {getIcon()}
+      </View>
+
+      {/* Content */}
+      <Vertical gap={8}>
+        {' '}
+        {/* 2 × 4px grid */}
+        {/* Title */}
+        <Text
+          fontSize="16px"
+          fontWeight="600" // Semi-bold
+          lineHeight="24px"
+          color={themes[variant].content.color}
+          {...views?.title}
+        >
+          {title}
+        </Text>
+        {/* Description */}
+        <Text
+          fontSize="14px"
+          fontWeight="400" // Regular
+          lineHeight="20px"
+          color={themes[variant].content.color}
+          {...views?.description}
+        >
+          {description}
+        </Text>
+      </Vertical>
+    </Horizontal>
+  );
+};

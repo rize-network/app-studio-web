@@ -14,6 +14,7 @@ const LabelView: React.FC<LabelProps> = ({
   weight = 'normal',
   // Returns an Element component with the role of a label, styled dynamically based on incoming props.
   size = 'sm',
+  dropDown,
   ...props
   // The fontSize prop for the Element is determined by the 'size' prop passed to LabelView.
 }) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Select } from '../Select';
 
@@ -19,7 +19,6 @@ export const ColorDemo = () => (
           { label: 'Item2', value: '2' },
           { label: 'Item3', value: '3' },
         ]}
-        colorScheme={color}
       />
     ))}
   </Vertical>

@@ -1,20 +1,26 @@
 import React from 'react';
-import { Tabs, View, Text } from 'src/components';
+import {
+  MoonIcon,
+  ShareIcon,
+  PanelIcon,
+  SaveIcon,
+  PauseIcon,
+} from '../../Icon/Icon'; // Assuming components are exported from index
+import { Text, View } from 'app-studio';
+import { Tabs } from '../Tabs';
 
+// Example demonstrating basic usage of the Tabs component.
 export const Default = () => (
   <Tabs
+    // Add a unique 'value' to each tab
     tabs={[
       {
         title: 'Product',
-        value: 'product',
+        icon: <MoonIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Product Tab
+              Product Tab Content
             </Text>
             <DummyContent />
           </View>
@@ -22,15 +28,11 @@ export const Default = () => (
       },
       {
         title: 'Services',
-        value: 'services',
+        icon: <ShareIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Services tab
+              Services Tab Content
             </Text>
             <DummyContent />
           </View>
@@ -38,15 +40,11 @@ export const Default = () => (
       },
       {
         title: 'Playground',
-        value: 'playground',
+        icon: <PanelIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Playground tab
+              Playground Tab Content
             </Text>
             <DummyContent />
           </View>
@@ -54,15 +52,11 @@ export const Default = () => (
       },
       {
         title: 'Content',
-        value: 'content',
+        icon: <SaveIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Content tab
+              Content Tab Content
             </Text>
             <DummyContent />
           </View>
@@ -70,24 +64,25 @@ export const Default = () => (
       },
       {
         title: 'Random',
-        value: 'random',
+        icon: <PauseIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Random tab
+              Random Tab Content
             </Text>
             <DummyContent />
           </View>
         ),
       },
     ]}
+    // Optionally set the initially active tab
+    initialTabValue="services"
+    // Optionally listen for tab changes
+    onTabChange={(activeTab) => console.log('Active Tab:', activeTab.title)}
   />
 );
 
+// Simple placeholder content component
 const DummyContent = () => {
   return (
     <View
@@ -95,6 +90,12 @@ const DummyContent = () => {
       borderRadius="8px"
       height="300px"
       backgroundColor={'black'}
-    ></View>
+      // Added content for visibility
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Text color="grey">Dummy Content Area</Text>
+    </View>
   );
 };

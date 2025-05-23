@@ -1,11 +1,13 @@
-import React from 'react';
-import { Center } from '../../Layout/Center/Center';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+/**
+ * Modal View Component
+ *
+ * Renders a modal dialog with various styles and states
+ * according to the design guidelines.
+ */
 
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
-import { Button } from '../../Button/Button';
-import { View } from '../../Layout/View/View';
-import { CloseSvg } from '../../Svg';
+import React from 'react';
+import { View, Horizontal, ViewProps, Vertical, Center } from 'app-studio';
+import { CloseIcon } from '../../Icon/Icon';
 import { hideModal } from './Modal.store';
 
 import {
@@ -13,18 +15,36 @@ import {
   ContainerProps,
   FooterProps,
   HeaderProps,
-  OverlayProps,
 } from '../Modal/Modal.props';
-import { ContainerShapes, OverlayAlignments } from '../Modal/Modal.style';
-import { HeaderIconSizes } from '../Modal/Modal.style';
+import {
+  ContainerShapes,
+  OverlayAlignments,
+  HeaderIconSizes,
+  ModalTypography,
+} from '../Modal/Modal.style';
+import { Position } from './Modal.type';
 
-export const ModalOverlay: React.FC<OverlayProps> = ({
+export interface OverlayProps {
+  views?: {
+    container?: ViewProps;
+    view?: ViewProps;
+  };
+  blur?: number;
+  isOpen?: boolean;
+  isClosePrevented?: boolean;
+  onClose?: () => void;
+  position?: Position;
+  children?: React.ReactNode;
+}
+
+export const ModalOverlay: React.FC<OverlayProps & any> = ({
   children,
   blur,
   isOpen = false,
   isClosePrevented = false,
   onClose = () => {},
   position = 'center',
+  views,
   ...props
 }) => {
   const handleClick = () => {
@@ -41,6 +61,8 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
       zIndex={1000}
       onClick={handleClick}
       visibility={isOpen ? 'visible' : 'hidden'}
+      transition="all 0.3s ease"
+      {...views?.container}
     >
       <View
         position="absolute"
@@ -50,11 +72,13 @@ export const ModalOverlay: React.FC<OverlayProps> = ({
         width="100vw"
         height="100vh"
         display="flex"
-        backgroundColor="blackAlpha.500"
+        backgroundColor="color.blackAlpha.500"
         backdropFilter={blur ? `blur(${blur}px)` : undefined}
+        transition="all 0.3s ease"
         onClick={handleClick}
         {...OverlayAlignments[position]}
         {...props}
+        {...views?.view}
       >
         {children}
       </View>
@@ -67,19 +91,21 @@ export const ModalContainer: React.FC<ContainerProps> = ({
   shadow,
   isFullScreen = false,
   shape = 'rounded',
+  views,
+  isOpen,
   ...props
 }) => {
   const defaultShadow =
     typeof document !== undefined
       ? {
-          boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.3)',
+          boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.15)', // Subtle shadow following design system
         }
       : {
           elevation: 5,
-          shadowColor: 'rgba(0, 0, 0, 0.3)',
-          shadowOffset: { width: 0, height: 2 },
+          shadowColor: 'rgba(0, 0, 0, 0.15)',
+          shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 1,
-          shadowRadius: 8,
+          shadowRadius: 16,
         };
 
   const handleClick = (event: any) => {
@@ -88,13 +114,15 @@ export const ModalContainer: React.FC<ContainerProps> = ({
   return (
     <Vertical
       cursor="default"
-      backgroundColor="white"
+      backgroundColor="color.white"
       width={isFullScreen ? '100%' : 600}
       height={isFullScreen ? '100%' : 'fit-content'}
       onClick={handleClick}
+      transition="all 0.3s ease"
       {...(shadow ? shadow : defaultShadow)}
       {...ContainerShapes[shape]}
       {...props}
+      {...views?.container}
     >
       {children}
     </Vertical>
@@ -106,29 +134,28 @@ export const ModalHeader: React.FC<HeaderProps> = ({
   buttonColor = 'theme.primary',
   iconSize = 'md',
   buttonPosition = 'right',
+  views,
   ...props
 }) => {
   const onClose = props.onClose ? props.onClose : hideModal;
 
   const buttonIcon = (
-    <Button
-      onClick={onClose}
-      colorScheme="transparent"
-      icon={<CloseSvg size={HeaderIconSizes[iconSize]} color={buttonColor} />}
-      padding={0}
-      margin={0}
-      filter="none"
-      isAuto
-    />
+    <View onClick={onClose}>
+      <CloseIcon widthHeight={HeaderIconSizes[iconSize]} color={buttonColor} />
+    </View>
   );
 
   return (
     <Horizontal
       justifyContent={buttonPosition === 'none' ? 'center' : 'space-between'}
       alignItems="center"
-      paddingVertical={15}
-      paddingHorizontal={20}
+      paddingVertical={16} // 4×4px grid
+      paddingHorizontal={24} // 6×4px grid
+      borderBottomWidth="1px"
+      borderBottomStyle="solid"
+      borderBottomColor="color.gray.200"
       {...props}
+      {...views?.header}
     >
       {buttonPosition === 'left' && buttonIcon}
       {children}
@@ -137,34 +164,45 @@ export const ModalHeader: React.FC<HeaderProps> = ({
   );
 };
 
-export const ModalBody: React.FC<BodyProps> = ({ children, ...props }) => {
-  const defaultBorder = {
-    borderBottomWidth: 2,
-    borderTopWidth: 2,
-    borderColor: 'rgba(250, 250, 250, 1)',
-    borderStyle: 'solid',
-  };
+export const ModalBody: React.FC<BodyProps> = ({
+  children,
+  views,
+  ...props
+}) => {
   return (
     <View
-      paddingVertical={15}
-      paddingHorizontal={20}
-      {...defaultBorder}
+      paddingVertical={16} // 4×4px grid
+      paddingHorizontal={24} // 6×4px grid
+      fontSize={ModalTypography.body.fontSize}
+      fontWeight={ModalTypography.body.fontWeight}
+      lineHeight={ModalTypography.body.lineHeight}
+      color={ModalTypography.body.color}
       {...props}
+      {...views?.view}
     >
       {children}
     </View>
   );
 };
 
-export const ModalFooter: React.FC<FooterProps> = ({ children, ...props }) => {
+export const ModalFooter: React.FC<FooterProps> = ({
+  children,
+  views,
+  ...props
+}) => {
   return (
     <Horizontal
       marginTop="auto"
       alignItems="center"
       justifyContent="flex-end"
-      paddingVertical={15}
-      paddingHorizontal={20}
+      paddingVertical={16} // 4×4px grid
+      paddingHorizontal={24} // 6×4px grid
+      borderTopWidth="1px"
+      borderTopStyle="solid"
+      borderTopColor="color.gray.200"
+      gap={12} // 3×4px grid
       {...props}
+      {...views?.container}
     >
       {children}
     </Horizontal>

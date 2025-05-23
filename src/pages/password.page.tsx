@@ -6,7 +6,7 @@ import { HelperTextPassword } from 'src/components/Form/Password/example/HelperT
 
 export const PasswordPage = () => {
   return (
-    <table className="table" cellSpacing={0}>
+    <table>
       <tr>
         <th>Property</th>
         <th>App-Studio</th>

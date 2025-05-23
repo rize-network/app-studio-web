@@ -3,13 +3,13 @@ import React from 'react';
 import { PasswordProps } from '../Form/Password/Password/Password.props';
 import { usePasswordState } from '../Form/Password/Password/Password.state';
 import { View } from 'app-studio';
-import { CloseEyeSvg, OpenEyeSvg } from '../Svg';
+import { CloseEyeIcon, OpenEyeIcon } from '../Icon/Icon';
 import TextFieldView from '../Form/TextField/TextField/TextField.view';
 import { useFormikInput } from './Formik.Hook';
 
 const PasswordComponent: React.FC<PasswordProps> = ({
-  visibleIcon = <OpenEyeSvg size={14} />,
-  hiddenIcon = <CloseEyeSvg size={14} />,
+  visibleIcon = <OpenEyeIcon widthHeight={14} />,
+  hiddenIcon = <CloseEyeIcon widthHeight={14} />,
   ...props
 }) => {
   const formProps = useFormikInput(props);
@@ -22,7 +22,7 @@ const PasswordComponent: React.FC<PasswordProps> = ({
       {...passwordProps}
       type={isVisible ? 'text' : 'password'}
       isClearable={false}
-      rightChild={
+      right={
         <View
           onClick={() => {
             if (!props.isDisabled) {

@@ -1,19 +1,11 @@
-export type Size =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | '2xl'
-  | '3xl'
-  | '4xl'
-  | '5xl'
-  | '6xl';
+import { ViewProps } from 'app-studio';
+
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export type CheckboxStyles = {
-  checkbox?: CSSProperties;
-  label?: CSSProperties;
-  infoText?: CSSProperties;
+  checkbox?: ViewProps;
+  label?: ViewProps;
+  infoText?: ViewProps;
 };
 
 export type Variant = 'selected' | 'unselected' | 'indeterminate';

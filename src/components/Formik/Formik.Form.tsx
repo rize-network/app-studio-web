@@ -2,6 +2,19 @@ import React, { createContext, useContext, useRef, useEffect } from 'react';
 import { FormikConfig, useFormikContext } from 'formik';
 import { Form as $Form } from 'app-studio';
 
+export const debounce: (...args: any) => void = (
+  func: (...args: any) => void,
+  timeout = 300
+) => {
+  let timer: any;
+  return (...args: any) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func(...args);
+    }, timeout);
+  };
+};
+
 interface CustomFormProps<T> extends FormikConfig<T> {
   autoFocus?: boolean;
   initFocus?: string;
@@ -40,8 +53,14 @@ export const FormikForm = <T extends {}>({
   children,
   autoFocus = false,
   initFocus,
+  onChange = () => {},
+  ...props
 }: CustomFormProps<T> & any) => {
   const formik: any = useFormikContext();
+  useEffect(() => {
+    onChange(formik.values);
+  }, [formik.values]);
+
   const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
   const inputNames = useRef<string[]>([]);
 
@@ -87,7 +106,7 @@ export const FormikForm = <T extends {}>({
 
   return (
     <FocusContext.Provider value={contextValue}>
-      <$Form>{children}</$Form>
+      <$Form {...props}>{children}</$Form>
     </FocusContext.Provider>
   );
 };

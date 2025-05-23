@@ -1,14 +1,15 @@
-import React, { CSSProperties } from 'react';
-import { Elevation } from 'src/utils/elevation';
+import React from 'react';
+import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow } from 'app-studio';
 import { CheckboxStyles, Size } from './Checkbox.type';
+import { ViewProps } from 'app-studio';
+
 export interface CheckboxProps extends Omit<InputProps, 'size'> {
   id?: string;
   icon?: React.ReactNode;
-  error?: boolean;
+  error?: any;
   name?: string;
   label?: string;
-  colorScheme?: string;
   isChecked?: boolean;
   defaultIsSelected?: boolean;
   isReadOnly?: boolean;
@@ -17,9 +18,9 @@ export interface CheckboxProps extends Omit<InputProps, 'size'> {
   labelPosition?: 'left' | 'right';
   onChange?: Function;
   onValueChange?: Function;
-  styles?: CheckboxStyles;
+  views?: CheckboxStyles;
   size?: Size;
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
   infoText?: string;
 }
 export interface CheckboxViewProps extends CheckboxProps {

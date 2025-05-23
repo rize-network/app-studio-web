@@ -1,0 +1,165 @@
+# NavigationMenu
+
+A flexible navigation menu component that supports nested items, icons, and different orientations.
+
+### **Import**
+  ```tsx
+  import { NavigationMenu } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { NavigationMenu } from '../NavigationMenu';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+
+export const DefaultNavigationMenu = () => {
+  const items = [
+    {
+      id: 'home',
+      label: 'Home',
+      icon: <HomeIcon widthHeight={20} />,
+      href: '/home'
+    },
+    {
+      id: 'settings',
+      label: 'Settings',
+      icon: <SettingsIcon widthHeight={20} />,
+      items: [
+        {
+          id: 'profile',
+          label: 'Profile',
+          icon: <UserIcon widthHeight={20} />,
+          href: '/profile'
+        }
+      ]
+    }
+  ];
+
+  return (
+    <NavigationMenu 
+      items={items} 
+      defaultActiveItemId="home"
+      defaultExpandedItemIds={['settings']}
+    />
+  );
+};
+```
+
+### **Horizontal**
+Create a horizontal navigation menu.
+
+```tsx
+import React from 'react';
+import { NavigationMenu } from '../NavigationMenu';
+import { HomeIcon, SettingsIcon } from '../../Icon/Icon';
+
+export const HorizontalNavigationMenu = () => {
+  const items = [
+    {
+      id: 'home',
+      label: 'Home',
+      icon: <HomeIcon widthHeight={20} />,
+      href: '/home'
+    },
+    {
+      id: 'settings',
+      label: 'Settings',
+      icon: <SettingsIcon widthHeight={20} />,
+      href: '/settings'
+    }
+  ];
+
+  return (
+    <NavigationMenu 
+      items={items} 
+      orientation="horizontal"
+      defaultActiveItemId="home"
+    />
+  );
+};
+```
+
+### **Variants**
+Different visual styles for the navigation menu.
+
+```tsx
+import React from 'react';
+import { NavigationMenu } from '../NavigationMenu';
+import { HomeIcon } from '../../Icon/Icon';
+
+export const NavigationMenuVariants = () => {
+  const items = [
+    {
+      id: 'home',
+      label: 'Home',
+      icon: <HomeIcon widthHeight={20} />,
+      href: '/home'
+    }
+  ];
+
+  return (
+    <>
+      <NavigationMenu 
+        items={items} 
+        variant="default"
+        defaultActiveItemId="home"
+      />
+      
+      <NavigationMenu 
+        items={items} 
+        variant="filled"
+        defaultActiveItemId="home"
+      />
+      
+      <NavigationMenu 
+        items={items} 
+        variant="outline"
+        defaultActiveItemId="home"
+      />
+    </>
+  );
+};
+```
+
+### **Sizes**
+Different sizes for the navigation menu items.
+
+```tsx
+import React from 'react';
+import { NavigationMenu } from '../NavigationMenu';
+import { HomeIcon } from '../../Icon/Icon';
+
+export const NavigationMenuSizes = () => {
+  const items = [
+    {
+      id: 'home',
+      label: 'Home',
+      icon: <HomeIcon widthHeight={20} />,
+      href: '/home'
+    }
+  ];
+
+  return (
+    <>
+      <NavigationMenu 
+        items={items} 
+        size="sm"
+        defaultActiveItemId="home"
+      />
+      
+      <NavigationMenu 
+        items={items} 
+        size="md"
+        defaultActiveItemId="home"
+      />
+      
+      <NavigationMenu 
+        items={items} 
+        size="lg"
+        defaultActiveItemId="home"
+      />
+    </>
+  );
+};
+```

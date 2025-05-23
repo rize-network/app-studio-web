@@ -2,6 +2,7 @@ import React from 'react';
 import {
   CaptionDemo,
   DefaultDemo,
+  DesignSystemTable,
   FooterDemo,
   StylesDemo,
   DataDemo,
@@ -15,6 +16,10 @@ const TablePage = () => {
   ];
 
   const data = [
+    {
+      property: 'Design System',
+      appStudio: <DesignSystemTable />,
+    },
     {
       property: 'Caption',
       appStudio: <CaptionDemo />,

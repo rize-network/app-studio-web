@@ -1,4 +1,3 @@
-export * from './colorScheme';
 export * from './default';
 export * from './items';
 export * from './onToggleChange';

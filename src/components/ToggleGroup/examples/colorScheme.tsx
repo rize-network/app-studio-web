@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
-import { Text } from 'src/components/Text/Text';
+import { Vertical } from 'app-studio';
+import { Text } from '../../Text/Text';
 
 export const ColorSchemeDemo = () => {
   const items = [
@@ -18,7 +18,7 @@ export const ColorSchemeDemo = () => {
         'theme.success',
         'theme.error',
       ].map((color, index) => (
-        <ToggleGroup key={index} items={items} colorScheme={color} />
+        <ToggleGroup key={index} items={items} />
       ))}
     </Vertical>
   );

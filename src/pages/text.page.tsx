@@ -1,17 +1,25 @@
 import React from 'react';
 import { Text as TextApp } from 'src/components';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import { Size, TextWeights } from 'src/components/Text/Text/Text.type';
+import { DesignSystemText } from 'src/components/Text/examples';
 
 export const TextPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
           </tr>
+          <tr>
+            <td>Design System</td>
+            <td>
+              <DesignSystemText />
+            </td>
+          </tr>
+
           <tr>
             <td>Default</td>
             <td>
@@ -41,7 +49,7 @@ export const TextPage = () => {
           <tr>
             <td>Truncate</td>
             <td>
-              <TextApp isTruncated maxLines={2} size="xl">
+              <TextApp maxLines={2} size="xl">
                 Pellentesque habitant morbi tristique senectus et netus et
                 malesuada fames ac turpis egestas. Vestibulum tortor quam,
                 feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu
@@ -76,18 +84,7 @@ export const TextPage = () => {
                 flexDirection="column"
                 alignItems="center"
               >
-                {[
-                  'xs',
-                  'sm',
-                  'md',
-                  'lg',
-                  'xl',
-                  '2xl',
-                  '3xl',
-                  '4xl',
-                  '5xl',
-                  '6xl',
-                ].map((size, index) => (
+                {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
                   <TextApp key={index} size={size as Size}>
                     {size}
                   </TextApp>
@@ -119,7 +116,7 @@ export const TextPage = () => {
               >
                 {[
                   'hairline',
-                  'tdin',
+                  'thin',
                   'light',
                   'normal',
                   'medium',

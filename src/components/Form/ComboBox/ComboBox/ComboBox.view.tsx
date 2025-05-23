@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { View, Horizontal } from '../../../Layout';
+import { View, Horizontal } from 'app-studio';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
-import TickSvg from '../../../Svg/Tick';
-import SearchLoopSvg from '../../../Svg/Search';
+import { SearchIcon, TickIcon } from '../../../Icon/Icon';
+
 // Defines the functional component 'ComboBoxView' with destructured props.
 const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   placeholder,
@@ -23,7 +23,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   searchQuery,
   setSearchQuery,
   setFilteredItems,
-  styles,
+  views,
   isDropdownVisible,
   setIsDropdownVisible,
   // Collects all further props not destructured explicitly.
@@ -66,21 +66,21 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   return (
     <Horizontal
       role="combobox"
-      wrap="nowrap"
+      flexWrap="nowrap"
       gap={15}
       alignItems="center"
       width="100%"
       {...props}
     >
       {label && (
-        <Text styles={styles?.label} htmlFor={props.id}>
+        <Text views={views?.label} htmlFor={props.id}>
           {label}
         </Text>
       )}
       <View position="relative">
         <Horizontal
           cursor="pointer"
-          backgroundColor="white"
+          backgroundColor="color.white"
           boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
           padding="12px"
           display="flex"
@@ -88,8 +88,8 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           borderRadius="4px"
           justifyContent="space-between"
           minWidth={300}
-          wrap="nowrap"
-          {...styles?.container}
+          flexWrap="nowrap"
+          {...views?.container}
         >
           <Horizontal
             gap={15}
@@ -97,10 +97,15 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             position="relative"
             width="100%"
             onClick={() => setIsDropdownVisible(!isDropdownVisible)}
-            {...styles?.labelContainer}
+            {...views?.labelContainer}
           >
             {left}
-            <Text weight="medium" flexGrow={1} {...styles?.label}>
+            <Text
+              weight="medium"
+              flexGrow={1}
+              color="color.gray.800"
+              {...views?.label}
+            >
               {selectedItem.label}
             </Text>
           </Horizontal>
@@ -109,7 +114,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             <View
               id="combobox-dropdown"
               position="absolute"
-              backgroundColor="white"
+              backgroundColor="color.white"
               boxShadow="rgba(0, 0 ,0 ,0.16) 0px 1px 4px"
               width="100%"
               overflowY="auto"
@@ -119,7 +124,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
               transform="translateY(100%)"
               marginTop="4px"
               borderRadius="4px"
-              {...styles?.dropdown}
+              {...views?.dropdown}
             >
               {searchEnabled && (
                 <TextField
@@ -131,16 +136,16 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                   onChange={(value) => handleSearch(value)}
                   hint={placeholder}
                   isClearable={false}
-                  leftChild={<SearchLoopSvg size={12} />}
-                  styles={{
-                    box: {
+                  left={<SearchIcon widthHeight={16} />}
+                  views={{
+                    container: {
                       width: '100%',
                       padding: '6px 12px',
                       borderBottom:
                         filteredItems.length > 0
                           ? '1px solid #ccc'
                           : '1px solid transparent',
-                      ...styles?.text,
+                      ...views?.text,
                     },
                   }}
                 />
@@ -161,14 +166,14 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                       }
                       onMouseEnter={() => setHighlightedIndex(index)}
                       onClick={() => handleSelect(item)}
-                      {...styles?.item}
+                      {...views?.item}
                     >
                       <Text>{item.label}</Text>
                       <>
                         {item.icon && item.icon}
                         {item.value === selectedItem.value &&
                           showTick &&
-                          !item.icon && <TickSvg />}
+                          !item.icon && <TickIcon widthHeight={20} />}
                       </>
                     </Horizontal>
                   ))}

@@ -1,11 +1,11 @@
 {
-  "componentDescription": "Enables users to select a date from a calendar-style interface.",
+  "componentDescription": "A customizable date selection input for user interfaces.",
   "id": {
     "type": [
       "string"
     ],
     "typeValues": [],
-    "description": "Optional 'id' prop to uniquely identify the date picker component.",
+    "description": "Unique identifier for the DatePicker component.",
     "defaultValue": []
   },
   "icon": {
@@ -13,28 +13,23 @@
       "React.ReactNode"
     ],
     "typeValues": [],
-    "description": "Prop to allow the passing of a ReactNode, typically for an icon display inside the date picker.",
+    "description": "Custom icon to display when the DatePicker is checked.",
     "defaultValue": []
   },
   "error": {
     "type": [
       "boolean"
     ],
-    "typeValues": [
-      "true",
-      "false"
-    ],
-    "description": "Indicates whether the date picker has an error state.",
-    "defaultValue": [
-      "false"
-    ]
+    "typeValues": [],
+    "description": "Indicates whether the DatePicker has an error.",
+    "defaultValue": []
   },
   "helperText": {
     "type": [
       "string"
     ],
     "typeValues": [],
-    "description": "Helper text to display additional information or guidance for the date picker.",
+    "description": "Additional helper text that provides information about the field.",
     "defaultValue": []
   },
   "name": {
@@ -42,7 +37,7 @@
       "string"
     ],
     "typeValues": [],
-    "description": "The 'name' prop is often used to identify the form data after the form has been submitted.",
+    "description": "The name of the toggle.",
     "defaultValue": []
   },
   "colorScheme": {
@@ -50,43 +45,31 @@
       "string"
     ],
     "typeValues": [],
-    "description": "Optional color scheme to theme the date picker component.",
-    "defaultValue": [
-      "theme.primary"
-    ]
+    "description": "The color scheme that changes the background color of the DatePicker.",
+    "defaultValue": "theme.primary"
   },
   "isReadOnly": {
     "type": [
       "boolean"
     ],
-    "typeValues": [
-      "true",
-      "false"
-    ],
-    "description": "Determines if the date picker is read-only.",
-    "defaultValue": [
-      "false"
-    ]
+    "typeValues": [],
+    "description": "If true, the DatePicker cannot be selected.",
+    "defaultValue": []
   },
   "isDisabled": {
     "type": [
       "boolean"
     ],
-    "typeValues": [
-      "true",
-      "false"
-    ],
-    "description": "Controls whether the date picker is disabled and unmodifiable by the user.",
-    "defaultValue": [
-      "false"
-    ]
+    "typeValues": [],
+    "description": "If true, the DatePicker will be unusable.",
+    "defaultValue": []
   },
   "label": {
     "type": [
       "string"
     ],
     "typeValues": [],
-    "description": "The label text for the date picker component.",
+    "description": "The label text for the field.",
     "defaultValue": []
   },
   "onChange": {
@@ -94,7 +77,7 @@
       "function"
     ],
     "typeValues": [],
-    "description": "onChange event handler that is called when the value of the date picker changes.",
+    "description": "Callback function triggered when the DatePicker value changes.",
     "defaultValue": []
   },
   "onChangeText": {
@@ -102,7 +85,7 @@
       "function"
     ],
     "typeValues": [],
-    "description": "Callback function when the text within the date picker is changed.",
+    "description": "Callback function triggered when the DatePicker value changes for IOS and Android.",
     "defaultValue": []
   },
   "styles": {
@@ -110,69 +93,55 @@
       "DatePickerStyles"
     ],
     "typeValues": [
-      {
-        "box": "CSSProperties",
-        "label": "CSSProperties",
-        "helperText": "CSSProperties",
-        "text": "CSSProperties",
-        "field": "CSSProperties"
-      }
+      "object"
     ],
-    "description": "Allows for custom styles to be applied to the date picker.",
-    "defaultValue": [
-      {
-        "box": {},
-        "label": {},
-        "helperText": {},
-        "text": {},
-        "field": {}
-      }
-    ]
+    "description": "CSS styles for the DatePicker container and label.",
+    "defaultValue": {
+      "box": {},
+      "label": {},
+      "helperText": {},
+      "text": {},
+      "field": {}
+    }
   },
   "shape": {
     "type": [
       "Shape"
     ],
     "typeValues": [
-      "default",
-      "sharp",
-      "rounded",
-      "pillShaped"
+      "'default'",
+      "'sharp'",
+      "'rounded'",
+      "'pillShaped'"
     ],
-    "description": "Prop to define the shape of the date picker input, controlling border-radius, for example.",
-    "defaultValue": [
-      "default"
-    ]
+    "description": "The shape that changes the outlines of the field.",
+    "defaultValue": "default"
   },
   "variant": {
     "type": [
       "Variant"
     ],
     "typeValues": [
-      "default",
-      "outline",
-      "none"
+      "'default'",
+      "'outline'",
+      "'none'"
     ],
-    "description": "Defines the visual style of the date picker component.",
-    "defaultValue": [
-      "default"
-    ]
+    "description": "Changes the style of the field.",
+    "defaultValue": "default"
   },
   "size": {
     "type": [
       "Size"
     ],
     "typeValues": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl"
+      "'xs'",
+      "'sm'",
+      "'md'",
+      "'lg'",
+      "'xl'"
     ],
-    "description": "Prop to set the size of the date picker component.",
-    "defaultValue": [
-      "md"
-    ]
+    "description": "The size that sets the height and width of the DatePicker.",
+    "defaultValue": "md"
   },
   "shadow": {
     "type": [
@@ -181,17 +150,15 @@
       "CSSProperties"
     ],
     "typeValues": [],
-    "description": "The shadow prop can accept a predefined Shadow, an Elevation value, or custom CSSProperties for styling.",
-    "defaultValue": [
-      {}
-    ]
+    "description": "Adds a shadow effect to the DatePicker.",
+    "defaultValue": {}
   },
   "date": {
     "type": [
       "string"
     ],
     "typeValues": [],
-    "description": "Represents the currently selected date as a string.",
+    "description": "The selected date value as a string.",
     "defaultValue": []
   },
   "setDate": {
@@ -199,55 +166,39 @@
       "function"
     ],
     "typeValues": [],
-    "description": "Function to update the state with a new date whenever the date is changed.",
-    "defaultValue": [
-      "() => {}"
-    ]
+    "description": "A function to set the selected date value.",
+    "defaultValue": []
   },
   "isHovered": {
     "type": [
       "boolean"
     ],
-    "typeValues": [
-      "true",
-      "false"
-    ],
-    "description": "State that keeps track of whether the date picker is hovered by the user.",
-    "defaultValue": [
-      "false"
-    ]
+    "typeValues": [],
+    "description": "Flag indicating if the date picker is currently being hovered.",
+    "defaultValue": []
   },
   "setIsHovered": {
     "type": [
       "function"
     ],
     "typeValues": [],
-    "description": "Function to set the isHovered state, determining if the date picker is currently being hovered.",
-    "defaultValue": [
-      "() => {}"
-    ]
+    "description": "A function to set the hovered state of the date picker.",
+    "defaultValue": []
   },
   "isFocused": {
     "type": [
       "boolean"
     ],
-    "typeValues": [
-      "true",
-      "false"
-    ],
-    "description": "Holds the focus state of the date picker.",
-    "defaultValue": [
-      "false"
-    ]
+    "typeValues": [],
+    "description": "Flag indicating if the date picker is currently focused.",
+    "defaultValue": []
   },
   "setIsFocused": {
     "type": [
       "function"
     ],
     "typeValues": [],
-    "description": "Function to set the isFocused state, indicating if the date picker has focus.",
-    "defaultValue": [
-      "() => {}"
-    ]
+    "description": "A function to set the focus state of the date picker.",
+    "defaultValue": []
   }
 }

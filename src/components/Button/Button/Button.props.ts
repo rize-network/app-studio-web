@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react';
-import { ButtonProps as $ButtonProps, Shadow } from 'app-studio';
+import React from 'react';
+import { ButtonProps as $ButtonProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../utils/elevation';
 import {
   IconPosition,
@@ -7,19 +7,16 @@ import {
   Size,
   Variant,
   LoaderPosition,
-  Effects,
   // Defines the types and structure required for the ButtonProps interface, used as a contract for Button component properties.
 } from './Button.type';
 // Optional React node(s) to be displayed as the button's content.
 import { LoaderProps } from '../../Loader/Loader/Loader.props';
 // Optional string to define the color scheme of the button.
 export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
-  // Optional string for an external hyperlink that the button will redirect to when clicked.
+  // Optional React node(s) to be displayed as the button's content.
   children?: React.ReactNode;
-  // Optional boolean to control the display of a loader animation over the button.
-  colorScheme?: any;
   // Optional LoaderProps object to configure the appearance and behavior of the loader animation.
-  externalHref?: string;
+  to?: string;
   // Optional LoaderPosition to determine the location of the loader animation relative to the button content.
   isLoading?: boolean;
   // Optional React node(s) defining the icon to be displayed within the button.
@@ -43,12 +40,23 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional Shape to specify the shape of the button (e.g., rounded or square edges).
   size?: Size;
   // Optional string used as an accessible label for screen readers.
-  shadow?: Shadow | Elevation | CSSProperties;
+  shadow?: Shadow | Elevation | ViewProps;
   // Optional Variant to define the stylistic variation of the button.
   shape?: Shape;
   // Optional effect to apply interactive effects (e.g., ripple) to the button.
   ariaLabel?: string;
-  // Additional optional properties of any type, making the interface extensible for custom attributes not explicitly defined.
+
+  // Variant to define the stylistic variation of the button.
   variant?: Variant;
-  effect?: Effects;
+
+  // Optional color scheme for the button
+  color?: string;
+
+  views?: {
+    container?: ViewProps;
+    content?: ViewProps;
+    loader?: ViewProps;
+    icon?: ViewProps;
+    link?: ViewProps;
+  };
 }

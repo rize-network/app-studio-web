@@ -1,9 +1,9 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import {
-  ColorSchemeDemo,
   ContentDemo,
   DefaultDemo,
+  DesignSystemBadges,
   PositionDemo,
   ShapeDemo,
   SizeDemo,
@@ -14,7 +14,7 @@ import {
 const BadgePage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
@@ -22,9 +22,9 @@ const BadgePage = () => {
           </tr>
 
           <tr>
-            <td>ColorScheme</td>
+            <td>Design System</td>
             <td>
-              <ColorSchemeDemo />
+              <DesignSystemBadges />
             </td>
           </tr>
 

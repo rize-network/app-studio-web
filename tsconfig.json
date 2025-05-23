@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "CommonJS",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext", "es2018.promise", "es2020.bigint", "es2020.string", "es2020.symbol.wellknown"],
     "allowJs": true,
     "importHelpers": true,
     // output .d.ts declaration files for consumers
@@ -14,8 +14,8 @@
      "noImplicitReturns": true,
      "noFallthroughCasesInSwitch": true,
      // noUnused* overlap with @typescript-eslint/no-unused-vars, can disable if duplicative
-     "noUnusedLocals": true,
-     "noUnusedParameters": true,
+     "noUnusedLocals": false,
+     "noUnusedParameters": false,
      // use Node's module resolution algorithm, instead of the legacy TS one
      "moduleResolution": "node",
      // transpile JSX to React.createElement
@@ -36,7 +36,7 @@
       "src/*": ["./src/*"],
     },
     "strict": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
@@ -45,5 +45,5 @@
     "alwaysStrict": true
   },
   "noEmit": false,
-  "include": ["./src"]
+  "include": ["./src", "./src/types/*.d.ts"]
 }

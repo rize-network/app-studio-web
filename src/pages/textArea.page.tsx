@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ColorArea,
   DefaultArea,
+  DesignSystemTextAreas,
   DisabledArea,
   LabelArea,
   MaxArea,
@@ -12,17 +13,24 @@ import {
   StyledArea,
   VariantsArea,
 } from 'src/components/Form/TextArea/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const TextAreaPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
           </tr>
+          <tr>
+            <th>Design System</th>
+            <td>
+              <DesignSystemTextAreas />
+            </td>
+          </tr>
+
           <tr>
             <th>Default</th>
             <td>

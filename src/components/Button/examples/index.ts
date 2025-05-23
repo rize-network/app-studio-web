@@ -1,7 +1,6 @@
 export * from './autofocus';
-export * from './colorScheme';
 export * from './default';
-export * from './effect';
+export * from './designSystem'; // New design system example
 export * from './icon';
 export * from './isAuto';
 export * from './isDisabled';

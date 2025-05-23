@@ -1,12 +1,17 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
+import { ViewProps } from 'app-studio';
 import { ToggleViewProps } from './Toggle.props';
-import { ToggleShapes } from './Toggle.style';
-import { Variant } from './Toggle.type';
-import { Center } from '../../Layout/Center/Center';
-const ToggleView: React.FC<ToggleViewProps> = ({
+import { Center } from 'app-studio';
+
+interface Props extends ToggleViewProps {
+  views?: {
+    container?: ViewProps;
+  };
+}
+
+const ToggleView: React.FC<Props> = ({
   children,
   shape = 'rounded',
-  colorScheme = 'color.trueGray.400',
   variant = 'ghost',
   isHovered,
   setIsHovered,
@@ -14,15 +19,16 @@ const ToggleView: React.FC<ToggleViewProps> = ({
   isToggle,
   setIsToggled,
   onToggle,
+  views,
   ...props
 }) => {
-  const toggleColor = !isDisabled ? colorScheme : 'theme.disabled';
+  const toggleColor = !isDisabled ? 'color.trueGray.400' : 'theme.disabled';
   const isActive = !!(isToggle || isHovered);
-  const ToggleVariants: Record<Variant, CSSProperties> = {
+  const toggleVariants: { [key: string]: ViewProps } = {
     outline: {
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: colorScheme,
+      borderColor: 'color.trueGray.400',
     },
     link: {
       borderWidth: 1,
@@ -32,6 +38,9 @@ const ToggleView: React.FC<ToggleViewProps> = ({
     },
     ghost: {},
   };
+
+  const handleHover = () => setIsHovered(!isHovered);
+
   const handleToggle = () => {
     if (!isDisabled) {
       setIsToggled((prev) => {
@@ -43,6 +52,7 @@ const ToggleView: React.FC<ToggleViewProps> = ({
       });
     }
   };
+
   return (
     <Center
       role="Toggle"
@@ -50,13 +60,14 @@ const ToggleView: React.FC<ToggleViewProps> = ({
       width="fit-content"
       color={isActive ? 'color.white' : toggleColor}
       backgroundColor={isActive ? toggleColor : 'transparent'}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleHover}
       onMouseLeave={() => setIsHovered(false)}
       cursor={isDisabled ? 'not-allowed' : 'pointer'}
-      borderRadius={ToggleShapes[shape]}
+      borderRadius={shape === 'pillShaped' ? '50px' : '8px'}
       onClick={handleToggle}
-      {...ToggleVariants[variant]}
+      {...toggleVariants[variant]}
       {...props}
+      {...views?.container}
     >
       {children}
     </Center>

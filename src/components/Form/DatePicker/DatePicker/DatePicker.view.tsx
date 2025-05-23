@@ -1,9 +1,9 @@
 import React from 'react';
 import { Input, Typography } from 'app-studio';
-import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
-import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
-import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
+import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Input/FieldContent/FieldContent';
+import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 
 import { DatePickerViewProps } from './DatePicker.props';
 
@@ -21,8 +21,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
   size = 'md',
   variant = 'default',
   shape = 'default',
-  colorScheme = 'theme.primary',
-  styles = { box: {}, label: {}, helperText: {}, text: {}, field: {} },
+  views = { container: {}, label: {}, helperText: {}, text: {}, field: {} },
   error = false,
   isHovered = false,
   isFocused = false,
@@ -35,7 +34,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
   onChangeText,
   ...props
 }) => {
-  const isWithLabel = !!(isFocused && label);
+  const showLabel = !!(isFocused && label);
 
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
@@ -67,37 +66,36 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
     backgroundColor: 'transparent',
     color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
-    ...styles['field'],
+    ...views['field'],
   };
 
   return (
-    <FieldContainer helperText={helperText} error={error} styles={styles}>
+    <FieldContainer helperText={helperText} error={error} views={views}>
       <FieldContent
         label={label}
         size={size}
         error={error}
         shape={shape}
-        styles={styles}
+        views={views}
         shadow={shadow}
+        color={'theme.primary'}
         variant={variant}
         value={date}
-        color={colorScheme}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
-        colorScheme={colorScheme}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
         <FieldWrapper>
-          {isWithLabel && (
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
-              color={colorScheme}
+              color={'theme.primary'}
               error={error}
-              {...styles}
+              {...views}
             >
               {label}
             </FieldLabel>

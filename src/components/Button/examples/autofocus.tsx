@@ -1,14 +1,12 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 export const ExternalButton = () => (
   <Horizontal gap={10}>
-    <Button colorScheme="theme.secondary" type="button" autofocus>
+    <Button type="button" autofocus>
       Button
     </Button>
-    <Button colorScheme="theme.secondary" type="submit">
-      Button
-    </Button>
+    <Button type="submit">Button</Button>
   </Horizontal>
 );

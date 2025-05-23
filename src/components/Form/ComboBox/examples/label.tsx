@@ -1,6 +1,6 @@
 import React from 'react';
-import PlusSvg from 'src/components/Svg/Plus';
 import { ComboBox } from '../ComboBox';
+import { PlusIcon } from '../../../Icon/Icon';
 
 export const LabelDemo = () => {
   const items = [
@@ -19,7 +19,7 @@ export const LabelDemo = () => {
       name="label"
       label="Status"
       items={items}
-      left={<PlusSvg size={12} />}
+      left={<PlusIcon widthHeight={12} />}
     />
   );
 };

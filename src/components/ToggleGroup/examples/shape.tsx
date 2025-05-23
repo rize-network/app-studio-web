@@ -1,15 +1,15 @@
 import React from 'react';
-import { DustBinSvg } from 'src/components/Svg';
+import { DustBinIcon } from '../../Icon/Icon';
 import { ToggleGroup } from '../ToggleGroup';
 import { Shape } from '../ToggleGroup/ToggleGroup.type';
-import { Horizontal } from 'src/components/Layout/Horizontal/Horizontal';
-import { View } from 'src/components/Layout/View/View';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 
 export const ShapeDemo = () => {
   const items = [
     {
       id: 'item',
-      value: <DustBinSvg color="black" size={18} />,
+      value: <DustBinIcon color="black" widthHeight={18} />,
       isActive: true,
     },
   ];

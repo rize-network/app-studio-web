@@ -1,7 +1,6 @@
 import React from 'react';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 import {
-  ColorSchemeDemo,
   DefaultDemo,
   ItemsDemo,
   OnToggleChangeDemo,
@@ -12,18 +11,11 @@ import {
 const ToggleGroupPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
-          </tr>
-
-          <tr>
-            <td>ColorScheme</td>
-            <td>
-              <ColorSchemeDemo />
-            </td>
           </tr>
 
           <tr>

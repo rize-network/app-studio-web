@@ -4,7 +4,7 @@ import { Button } from '../../../Button/Button';
 
 import { TextArea } from '../../../Form/TextArea/TextArea';
 
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const ErrorArea = () => {
   const initialValues = {
@@ -41,7 +41,6 @@ export const ErrorArea = () => {
           placeholder="Write your thoughts here..."
           error={!!formErrors.thoughts}
           onChange={handleChange}
-          colorScheme="theme.secondary"
         />
         <Button type="submit" height="40px" isAuto>
           Submit

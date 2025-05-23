@@ -1,17 +1,14 @@
 import React, { useCallback } from 'react';
 import { Element } from 'app-studio';
 import { Typography } from 'app-studio';
-
-import { Horizontal } from '../../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
-
-import { FieldContainer } from '../../../Layout/Input/FieldContainer/FieldContainer';
-import { FieldContent } from '../../../Layout/Input/FieldContent/FieldContent';
-import { FieldIcons } from '../../../Layout/Input/FieldIcons/FieldIcons';
-import { FieldLabel } from '../../../Layout/Input/FieldLabel/FieldLabel';
-import { FieldWrapper } from '../../../Layout/Input/FieldWrapper/FieldWrapper';
-import { ArrowDownSvg, ArrowUpSvg, CloseSvg } from '../../../Svg';
-
+import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
+import { FieldContent } from '../../../Input/FieldContent/FieldContent';
+import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';
+import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
+import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
+import { ChevronIcon, CloseIcon } from '../../../Icon/Icon';
 import {
   DropDownProps,
   HiddenSelectProps,
@@ -22,7 +19,11 @@ import {
 } from './Select.props';
 import { useItemState } from './Select.state';
 import { IconSizes } from './Select.style';
-
+/**
+ * Item Component
+ *
+ * Renders an individual option item in the select dropdown
+ */
 const Item: React.FC<ItemProps> = ({
   isHovered,
   setIsHovered,
@@ -32,79 +33,132 @@ const Item: React.FC<ItemProps> = ({
   style,
   ...props
 }) => {
-  const handleOptionClick = (option: string) => callback(option);
+  // Handles the click event on an option by invoking the callback with the selected option's value
+  const handleOptionClick = (e: React.MouseEvent, option: string) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (typeof callback === 'function') {
+      callback(option);
+    }
+  };
+
+  // Toggles the hover state on the item
   const handleHover = () => setIsHovered(!isHovered);
 
   return (
     <Element
       as="li"
+      // Layout properties
       margin={0}
-      paddingVertical={10}
-      paddingHorizontal={12}
+      paddingVertical={8} // 2 × 4px grid
+      paddingHorizontal={8} // 2 × 4px grid
       listStyleType="none"
+      cursor="pointer"
+      // Event handlers
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
-      onClick={() => handleOptionClick(option.value)}
-      backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
+      onClick={(e: React.MouseEvent) => handleOptionClick(e, option.value)}
+      // Visual properties
+      backgroundColor={isHovered ? 'color.gray.100' : 'transparent'}
+      borderRadius="4px" // Subtle rounded corners for items
+      // Animation
+      transition="all 0.15s ease"
+      // Apply custom props
       {...props}
     >
-      <Text fontSize={Typography.fontSizes[size]} {...style}>
+      <Text
+        // Typography properties
+        fontSize={Typography.fontSizes[size]}
+        fontWeight="400" // Regular weight
+        lineHeight="1.5"
+        // Apply custom styles
+        {...style}
+      >
         {option.label}
       </Text>
     </Element>
   );
 };
-
+/**
+ * SelectBox Component
+ *
+ * Renders the main select box with selected value(s)
+ */
 const SelectBox: React.FC<SelectBoxProps> = ({
   size = 'md',
-  styles = { field: {}, text: {} },
+  views = { field: {}, text: {} },
   value,
   isDisabled,
   placeholder,
   removeOption = () => {},
   options,
 }) => {
+  /**
+   * Styles for the select field
+   */
   const fieldStyles = {
+    // Layout properties
     margin: 0,
     width: '95%',
-    heigth: '100%',
+    height: '100%',
     border: 'none',
-    paddingVertical: 8,
+    paddingVertical: 4, // 3 × 4px grid
     paddingHorizontal: 0,
+
+    // Typography properties
     fontSize: Typography.fontSizes[size],
+
+    fontWeight: '400', // Regular weight
+    lineHeight: '1.5',
+    letterSpacing: '-0.01em', // Slight negative tracking for modern look
+
+    // Visual properties
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
-    cursor: isDisabled ? 'not-allowed' : 'auto',
-    ...styles['field'],
-    ...styles['text'],
+    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+
+    // State properties
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
+
+    // Animation
+    transition: 'all 0.2s ease',
+
+    // Apply custom styles
+    ...views['field'],
+    ...views['text'],
   };
-  const option = options.find((option) => option.value === value);
+  const option: any =
+    options.length > 0 && options.find((option) => option.value === value);
   return (
     <Text {...fieldStyles}>
-      {(value === '' || (value && value.length === 0)) && !!placeholder ? (
+      {/* Check if value is an empty string or if value is an array but with no items, then show placeholder */}
+      {(value === '' || (Array.isArray(value) && value.length === 0)) &&
+      !!placeholder ? (
         placeholder
       ) : (
         <>
-          {typeof value === 'string'
-            ? option?.label ?? value
-            : value &&
-              value.length > 0 && (
-                <Horizontal gap={6}>
-                  {value.map((option) => (
-                    <MultiSelect
-                      key={option}
-                      option={option}
-                      removeOption={removeOption}
-                    />
-                  ))}
-                </Horizontal>
-              )}
+          {/* If value is a string, use the option label or value */}
+          {typeof value === 'string' ? (
+            (option && option.label) ?? value
+          ) : // If value is an array and not empty, render MultiSelect options
+          Array.isArray(value) && value.length > 0 ? (
+            <Horizontal gap={6}>
+              {value.map((option) => (
+                <MultiSelect
+                  key={option}
+                  option={option}
+                  removeOption={removeOption}
+                />
+              ))}
+            </Horizontal>
+          ) : (
+            // Handle any other types of value (including objects or unexpected values)
+            <span>{value}</span>
+          )}
         </>
       )}
     </Text>
   );
 };
-
 const HiddenSelect: React.FC<HiddenSelectProps> = ({
   id,
   name,
@@ -119,7 +173,6 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
   const handleChange = (event: any) => {
     if (onChange) onChange(event);
   };
-
   return (
     <Element
       id={id}
@@ -136,20 +189,25 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
       multiple={isMulti}
       {...props}
     >
-      {options.map((option) => {
-        return (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        );
-      })}
+      {options.length > 0 &&
+        options.map((option) => {
+          return (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          );
+        })}
     </Element>
   );
 };
-
+/**
+ * DropDown Component
+ *
+ * Renders the dropdown list of options for the select component
+ */
 const DropDown: React.FC<DropDownProps> = ({
   size,
-  styles = { dropDown: {} },
+  views = {},
   options,
   callback = () => {},
   highlightedIndex,
@@ -157,70 +215,59 @@ const DropDown: React.FC<DropDownProps> = ({
 }) => {
   const itemStates = useItemState();
   const handleCallback = (option: string) => callback(option);
-  const shadow =
-    typeof document !== undefined
-      ? {
-          boxShadow:
-            'rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px',
-        }
-      : {
-          elevation: 2,
-          shadowColor: 'rgba(0, 0, 0, 0.07)',
-          shadowOffset: {
-            width: 0,
-            height: 1,
-          },
-          shadowOpacity: 1,
-          shadowRadius: 1,
-        };
+
+  // Shadow styles for the dropdown - now applied directly in the Element
 
   return (
     <Element
       as="ul"
       role="dropdown"
-      top="100%"
       width="100%"
       display="flex"
-      zIndex={100000}
-      overflowY="scroll"
-      marginTop={5}
-      marginLeft={0}
-      marginRight={0}
-      marginBottom={0}
-      padding={0}
-      borderRadius={4}
-      position="absolute"
       flexDirection="column"
-      backgroundColor="white"
-      maxHeight="200px"
+      backgroundColor="color.white"
+      transition="all 0.2s ease"
+      margin={0}
       style={{
-        scrollbarWidth: 'none' /* For Firefox */,
-        msOverflowStyle: 'none' /* For Internet Explorer and Edge */,
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'rgba(0, 0, 0, 0.2) transparent',
         '&::-webkit-scrollbar': {
-          display: 'none' /* For Chrome, Safari, and Opera */,
+          width: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          background: 'transparent',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'rgba(0, 0, 0, 0.2)',
+          borderRadius: '4px',
         },
       }}
-      {...shadow}
-      {...styles['dropDown']}
+      {...views?.dropDown}
     >
-      {options.map((option, index) => (
-        <Item
-          key={option.value}
-          size={size}
-          style={styles['text']}
-          option={option}
-          callback={handleCallback}
-          backgroundColor={
-            index === highlightedIndex ? 'color.gray.100' : 'transparent'
-          }
-          onMouseEnter={() => setHighlightedIndex(index)}
-          {...itemStates}
-        />
-      ))}
+      {options &&
+        options.length > 0 &&
+        options.map((option, index) => (
+          <Item
+            key={option.value}
+            size={size}
+            style={views['text']}
+            option={option}
+            callback={handleCallback}
+            backgroundColor={
+              index === highlightedIndex ? 'color.gray.100' : 'transparent'
+            }
+            onMouseEnter={() => setHighlightedIndex(index)}
+            {...itemStates}
+          />
+        ))}
     </Element>
   );
 };
-
+/**
+ * MultiSelect Component
+ *
+ * Renders a selected option in a multi-select component
+ */
 export const MultiSelect: React.FC<MultiSelectProps> = ({
   option,
   size = 'md',
@@ -231,26 +278,36 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 
   return (
     <Horizontal
-      gap={10}
-      padding={6}
-      borderRadius={4}
+      gap={8}
+      padding={8}
       alignItems="center"
+      borderRadius="6px"
+      backgroundColor="color.gray.200"
       fontSize={Typography.fontSizes[size]}
-      backgroundColor="color.trueGray.300"
       onClick={(event: any) => event.stopPropagation()}
+      transition="all 0.2s ease"
       {...props}
     >
-      <Text size={size}>{option}</Text>
-      <CloseSvg
+      <Text
+        size={size}
+        fontWeight="500" // Medium weight
+      >
+        {option}
+      </Text>
+
+      <CloseIcon
         role="close-button"
         color="inherit"
-        size={IconSizes[size]}
+        widthHeight={IconSizes[size]}
         onClick={handleClick}
+        transition="all 0.2s ease"
+        _hover={{
+          opacity: 0.7,
+        }}
       />
     </Horizontal>
   );
 };
-
 const SelectView: React.FC<SelectViewProps> = ({
   id,
   name,
@@ -268,10 +325,9 @@ const SelectView: React.FC<SelectViewProps> = ({
   options = [],
   shadow = {},
   size = 'md',
-  colorScheme = 'theme.primary',
   shape = 'default',
   variant = 'default',
-  styles = {
+  views = {
     text: {},
     icon: {},
     dropDown: {},
@@ -288,72 +344,117 @@ const SelectView: React.FC<SelectViewProps> = ({
   highlightedIndex,
   ...props
 }) => {
-  const isWithLabel = !!(isFocused && label);
+  // close when *any* other select opens
+  React.useEffect(() => {
+    const handleCloseAll = () => setHide(true);
+    document.addEventListener('closeAllSelects', handleCloseAll);
+    return () =>
+      document.removeEventListener('closeAllSelects', handleCloseAll);
+  }, [setHide]);
 
+  // Add a global click handler to close the dropdown when clicking outside
+  React.useEffect(() => {
+    const handleGlobalClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Only close if clicking outside of this specific select component
+      if (!target.closest(`#${id}`) && !hide) {
+        setHide(true);
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick);
+    return () => {
+      document.removeEventListener('click', handleGlobalClick);
+    };
+  }, [id, hide, setHide]);
+  const showLabel = !!(isFocused && label);
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
-
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (event && event.stopPropagation) event.stopPropagation();
-    setHide(!hide);
-    setIsFocused(!isFocused);
-  };
+    // tell all other selects to close
+    document.dispatchEvent(new Event('closeAllSelects'));
 
+    if (event && event.stopPropagation) event.stopPropagation();
+
+    // Toggle dropdown visibility
+    const newHideState = !hide;
+    setHide(newHideState);
+    setIsFocused(!newHideState); // Set focus state based on dropdown visibility
+  };
   const handleCallback = useCallback(
     (option: string) => {
-      setHide(!hide);
+      // Close dropdown after selection
+      setHide(true);
+
+      // Tell all other selects to close
+      document.dispatchEvent(new Event('closeAllSelects'));
+
+      // Update value based on multi-select or single-select mode
       if (isMulti && Array.isArray(value)) {
-        !value.includes(option) && setValue([...value, option]);
+        if (!value.includes(option)) {
+          const newValue = [...value, option];
+          setValue(newValue);
+          if (onChange) onChange(option);
+        }
       } else {
         setValue(option);
+        if (onChange) onChange(option);
       }
-      if (onChange) onChange(option);
+
+      // Set focus to indicate selection
+      setIsFocused(true);
     },
-
-    [hide, isMulti, value]
+    [isMulti, value, setHide, setValue, onChange, setIsFocused]
   );
-
   const handleRemoveOption = (valueOption: string) => {
     if (Array.isArray(value) && value.includes(valueOption)) {
       const newValue = value.filter((option) => option !== valueOption);
       setValue(newValue.length === 0 ? [] : newValue);
     }
   };
-
   return (
     <FieldContainer
+      style={{ position: 'relative', width: '100%', display: 'inline-block' }}
+      id={id}
       role="SelectBox"
       helperText={helperText}
       error={error}
-      styles={styles}
-      onClick={isDisabled || isReadOnly ? () => {} : handleClick}
+      views={views}
+      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+        // Stop propagation to prevent clicks from bubbling up
+        e.stopPropagation();
+
+        // Only handle click if not disabled or readonly
+        if (!(isDisabled || isReadOnly)) {
+          handleClick(e as unknown as React.MouseEvent<HTMLButtonElement>);
+        }
+      }}
     >
       <FieldContent
         label={label}
         size={size}
         error={error}
         shape={shape}
-        styles={styles}
+        views={views}
         shadow={shadow}
         variant={variant}
         value={value}
-        color={colorScheme}
+        color={'theme.primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
-        colorScheme={colorScheme}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
         <FieldWrapper>
-          {isWithLabel && (
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
-              color={colorScheme}
+              color={'theme.primary'}
               error={error}
-              {...styles}
+              {...views}
             >
               {label}
             </FieldLabel>
@@ -373,7 +474,7 @@ const SelectView: React.FC<SelectViewProps> = ({
           <SelectBox
             options={options}
             size={size}
-            styles={styles}
+            views={views}
             value={value}
             isDisabled={isDisabled}
             placeholder={placeholder}
@@ -384,34 +485,56 @@ const SelectView: React.FC<SelectViewProps> = ({
           {!isReadOnly && !isDisabled && (
             <>
               {hide ? (
-                <ArrowDownSvg
+                <ChevronIcon
                   color="inherit"
-                  size={IconSizes[size]}
-                  style={styles.icon}
+                  widthHeight={IconSizes[size]}
+                  style={views.icon}
+                  orientation="down"
                 />
               ) : (
-                <ArrowUpSvg
+                <ChevronIcon
                   color="inherit"
-                  size={IconSizes[size]}
-                  style={styles.icon}
+                  orientation="up"
+                  widthHeight={IconSizes[size]}
+                  style={views.icon}
                 />
               )}
             </>
           )}
         </FieldIcons>
       </FieldContent>
-      {!hide && (
-        <DropDown
-          size={size}
-          styles={styles}
-          options={options}
-          callback={handleCallback}
-          highlightedIndex={highlightedIndex}
-          setHighlightedIndex={setHighlightedIndex}
-        />
+      {!hide && options.length > 0 && (
+        <Element
+          onClick={(e: React.MouseEvent) => e.stopPropagation()}
+          style={{
+            position: 'absolute',
+            top: 'calc(100% + 4px)',
+            left: 0,
+            right: 0,
+            zIndex: 1000,
+          }}
+        >
+          <DropDown
+            size={size}
+            views={{
+              ...views,
+              dropDown: {
+                borderRadius: '6px',
+                border: '1px solid color.gray.200',
+                boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                padding: '8px',
+                maxHeight: '240px',
+                overflowY: 'auto',
+              },
+            }}
+            options={options}
+            callback={handleCallback}
+            highlightedIndex={highlightedIndex}
+            setHighlightedIndex={setHighlightedIndex}
+          />
+        </Element>
       )}
     </FieldContainer>
   );
 };
-
 export default SelectView;

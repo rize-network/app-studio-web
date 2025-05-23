@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { Toggle } from '../../Toggle/Toggle';
 import { ToggleGroupViewProps } from './ToggleGroup.props';
+
 // ToggleGroupView component declaration with destructured properties from props.
 export const ToggleGroupView = ({
   // Prop 'items' defines the list of toggle elements to be rendered.
@@ -16,8 +17,7 @@ export const ToggleGroupView = ({
   shape = 'rounded',
   // Prop 'variant' with default value 'ghost' represents the visual style variant of the toggles.
   variant = 'ghost',
-  // Prop 'colorScheme' with default value 'color.trueGray.400' sets the color theme for toggles.
-  colorScheme = 'color.trueGray.400',
+  views,
 }: ToggleGroupViewProps) => {
   // handleToggle is a memoized callback that handles the toggle state changes.
   const handleToggle = useCallback(
@@ -40,18 +40,17 @@ export const ToggleGroupView = ({
     [onToggleChange, setActiveToggles]
   );
   return (
-    <Horizontal role="ToggleGroup" display="flex" gap={5}>
-      {items.map((item) => (
+    <Horizontal role="ToggleGroup" display="flex" gap={5} {...views?.container}>
+      {items.map((item: any) => (
         <Toggle
           role={`toggle-${item.id}`}
           key={item.id}
-          colorScheme={colorScheme}
           shape={shape}
           variant={variant}
           isToggled={activeToggles.includes(item.id) || item.isActive}
           onToggle={(state) => handleToggle(item.id, state)}
           isDisabled={item.isDisabled}
-          isIntern={true}
+          views={views?.toggle}
         >
           {item.value}
         </Toggle>

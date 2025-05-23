@@ -1,20 +1,17 @@
 import React from 'react';
 import {
-  BorderedButtons,
-  ButtonSizes,
-  ColoredButtons,
-  DisabledButton,
-  EffectButton,
-  IconButtons,
-  LoaderButtons,
-  ShadowButton,
+  IconButtons as IconButtons,
   VariantButtons,
+  ShadowButton,
+  ButtonSizes as ButtonSizes,
+  DisabledButton,
+  LoaderButtons,
 } from 'src/components/Button/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 export const ButtonPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
@@ -34,13 +31,7 @@ export const ButtonPage = () => {
               <ButtonSizes />
             </td>
           </tr>
-          <tr>
-            <td>Colors</td>
 
-            <td>
-              <ColoredButtons />
-            </td>
-          </tr>
           <tr>
             <td>Shadow</td>
 
@@ -56,28 +47,14 @@ export const ButtonPage = () => {
           </tr>
           <tr>
             <td>Variant</td>
-
             <td>
               <VariantButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Bordered</td>
-
-            <td>
-              <BorderedButtons />
             </td>
           </tr>
           <tr>
             <td>Icon</td>
             <td>
               <IconButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Effect</td>
-            <td>
-              <EffectButton />
             </td>
           </tr>
         </tbody>

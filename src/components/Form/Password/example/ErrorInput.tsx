@@ -5,7 +5,7 @@ import { Button } from '../../../Button/Button';
 import { TextField } from '../../../Form/TextField/TextField';
 import { Password } from '../../../Form/Password/Password';
 
-import { Vertical } from '../../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 export const ErrorPassword = () => {
   const initialValues = {
@@ -40,13 +40,12 @@ export const ErrorPassword = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <Vertical gap={10} wrap="nowrap">
+      <Vertical gap={10} flexWrap="nowrap">
         <TextField
           name="name"
           placeholder="Name"
           error={!!formErrors.name}
           onChange={handleChange}
-          colorScheme="theme.secondary"
           isClearable={true}
         />
         <Password
@@ -54,7 +53,6 @@ export const ErrorPassword = () => {
           placeholder="Password"
           error={!!formErrors.password}
           onChange={handleChange}
-          colorScheme="theme.secondary"
         />
         <Button type="submit" height="40px">
           Submit

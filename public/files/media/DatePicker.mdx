@@ -1,0 +1,77 @@
+# DatePicker
+
+A customizable date selection input for user interfaces.
+
+### **Import**
+  ```tsx
+  import { DatePicker } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { DatePicker } from '../../../Form/DatePicker/DatePicker';
+
+export const DefaultDatePicker = () => <DatePicker label="Select a date" />;
+
+```
+
+### **colorScheme**
+The color scheme that changes the background color of the DatePicker.
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+
+import { DatePicker } from '../DatePicker';
+
+export const ColorDatePicker = () => (
+  <Vertical gap={15}>
+    {[
+      'theme.primary',
+      'theme.secondary',
+      'theme.error',
+      'theme.success',
+      'theme.warning',
+    ].map((color) => (
+      <DatePicker
+        key={color}
+        name="name"
+        colorScheme={color}
+        label="Select a date:"
+      />
+    ))}
+  </Vertical>
+);
+
+```
+
+### **shadow**
+Adds a shadow effect to the DatePicker.
+
+```tsx
+import React from 'react';
+import { DatePicker } from '../../../Form/DatePicker/DatePicker';
+
+export const ShadowDatePicker = () => (
+  <DatePicker
+    shadow={{
+      boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px',
+    }}
+  />
+);
+
+```
+
+## Props
+
+| Prop         | Type          | Description                                                              | Default     |
+| ------------ | ------------- | ------------------------------------------------------------------------ | ----------- |
+| label        | string        | The label text for the date picker.                                     |             |
+| colorScheme  | string        | The color scheme that changes the background color.                      |             |
+| shadow       | Shadow/Elevation | Adds a shadow effect to the DatePicker.                                  |             |
+| styles       | CSSProperties | Optional custom styles for the DatePicker (container, input, calendar). |             |
+| className    | string        | Optional className for the DatePicker container.                         |             |
+| placeholder  | string        | Placeholder text when no date is selected.                              |             |
+| selectedDate | Date          | The currently selected date (controlled component).                      |             |
+| onChange     | function      | Callback function when the selected date changes.                        |             |

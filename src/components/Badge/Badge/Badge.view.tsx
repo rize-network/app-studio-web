@@ -1,74 +1,66 @@
-import React, { CSSProperties } from 'react';
-// Importing React and specific type CSSProperties from the 'react' module.
+/**
+ * Badge View Component
+ *
+ * Renders a badge with various styles and states according to the design guidelines.
+ */
+
+import React from 'react';
 import { BadgeProps } from './Badge.props';
-// Importing BadgeProps for typing the component's expected props.
-import { BadgeShapes, BadgeSizes, PositionStyles } from './Badge.style';
-// Importing styling constants for badge shapes, sizes, and position styles.
-import { Variant } from './Badge.type';
-// Importing Variant type enumeration to type badge variants.
-import { Center } from '../../Layout/Center/Center';
-// Importing Center component to centrally place child component.
+import {
+  BadgeShapes,
+  BadgeSizes,
+  PositionStyles,
+  getBadgeVariants,
+} from './Badge.style';
+import { Center, useTheme } from 'app-studio';
 import { Text } from '../../Text/Text';
-// Importing Text component to display the content text within the badge.
+// No need to import ViewProps as it's not used directly
+/**
+ * Badge View Component
+ */
 const BadgeView: React.FC<BadgeProps> = ({
-  // Declaring the functional component BadgeView with BadgeProps as its type for props.
   content,
-  // Destructuring props with default values for shape, colorScheme, variant, size, and styles.
   position,
   shape = 'pillShaped',
-  colorScheme = 'theme.primary',
   variant = 'filled',
   size = 'md',
-  styles,
-  // Defining BadgeVariants as a record of CSSProperties based on the variant type and associated stylings.
+  views,
+  themeMode: elementMode,
+  ...props
 }) => {
-  const BadgeVariants: Record<Variant, CSSProperties> = {
-    filled: {
-      backgroundColor: colorScheme,
-      color: 'color.white',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: 'transparent',
-    },
-    outline: {
-      // Combining various style objects along with conditional styles based on props to create the badge's appearance.
-      backgroundColor: 'transparent',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: colorScheme,
-      color: colorScheme,
-    },
-    link: {
-      backgroundColor: 'transparent',
-      // Rendering the Badge component using the Center layout component with combinedStyles applied.
-      borderWidth: 1,
-      // Inserting a Text component into the badge to display the content, with dynamic size and additional text styles.
-      borderStyle: 'solid',
-      borderColor: 'transparent',
-      color: colorScheme,
-      // Exporting BadgeView to be used in other parts of the application.
-      textDecoration: 'underline',
-    },
-    ghost: {
-      backgroundColor: 'transparent',
-      color: colorScheme,
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: 'transparent',
-    },
-  };
+  const { themeMode } = useTheme();
+  const currentThemeMode = elementMode || themeMode;
+  const variantStyles = getBadgeVariants(currentThemeMode)[variant];
+  // Combine styles for the badge
   const combinedStyles: Record<string, any> = {
+    // Base styles
     width: 'fit-content',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'color.black',
+
+    // Apply shape, size, and variant styles
     borderRadius: BadgeShapes[shape],
     ...BadgeSizes[size],
-    ...BadgeVariants[variant],
+    ...variantStyles,
+
+    // Apply position styles if provided
     ...(position ? PositionStyles[position] : {}),
-    ...styles?.container,
+
+    // Apply custom container styles
+    ...views?.container,
   };
   return (
-    <Center role="badge" {...combinedStyles}>
-      <Text role="badgeText" size={size} {...styles?.text}>
-        {content}
+    <Center role="badge" {...combinedStyles} {...props}>
+      <Text
+        role="badgeText"
+        fontWeight="500" // Medium weight for better readability
+        textAlign="center"
+        {...views?.text}
+        color={combinedStyles.color}
+      >
+        {content || ''}
       </Text>
     </Center>
   );

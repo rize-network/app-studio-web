@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Vertical } from 'src/components';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 import { cleanup, render, screen } from '@testing-library/react';
 afterEach(() => {
@@ -52,7 +52,7 @@ test('should render Vertical component with correct class name', () => {
 
 // test('should render a wrap Vertical layout with flex-wrap equals to wrap', () => {
 //   render(
-//     <Vertical role="Vertical" wrap="wrap">
+//     <Vertical role="Vertical" flexWrap="wrap">
 //       <View width={50} height={50} backgroundColor="theme.primary" />
 //       <View width={50} height={50} backgroundColor="theme.warning" />
 //     </Vertical>
@@ -63,7 +63,7 @@ test('should render Vertical component with correct class name', () => {
 
 // test('should render a nowrap Vertical layout with flex-wrap equals to nowrap', () => {
 //   render(
-//     <Vertical role="Vertical" wrap="nowrap">
+//     <Vertical role="Vertical" flexWrap="nowrap">
 //       <View width={50} height={50} backgroundColor="theme.primary" />
 //       <View width={50} height={50} backgroundColor="theme.warning" />
 //     </Vertical>
@@ -74,7 +74,7 @@ test('should render Vertical component with correct class name', () => {
 
 // test('should render a wrap reverse Vertical layout with flex-wrap equals to wrap-reverse', () => {
 //   render(
-//     <Vertical role="Vertical" wrap="wrap-reverse">
+//     <Vertical role="Vertical" flexWrap="wrap-reverse">
 //       <View width={50} height={50} backgroundColor="theme.primary" />
 //       <View width={50} height={50} backgroundColor="theme.warning" />
 //     </Vertical>

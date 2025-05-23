@@ -1,6 +1,6 @@
 import React from 'react';
 import { Toggle } from '../Toggle';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 export const ColorSchemeDemo = () => (
   <Horizontal gap={10}>
@@ -11,9 +11,7 @@ export const ColorSchemeDemo = () => (
       'theme.success',
       'theme.error',
     ].map((color, index) => (
-      <Toggle key={index} colorScheme={color}>
-        {color}
-      </Toggle>
+      <Toggle key={index}>{color}</Toggle>
     ))}
   </Horizontal>
 );

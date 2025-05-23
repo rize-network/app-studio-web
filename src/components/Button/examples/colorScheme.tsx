@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 export const ColoredButtons = () => (
   <Horizontal gap={10}>
@@ -11,7 +11,7 @@ export const ColoredButtons = () => (
       'theme.success',
       'theme.error',
     ].map((color, index) => (
-      <Button key={index} colorScheme={color} isAuto>
+      <Button key={index} isAuto>
         {color}
       </Button>
     ))}

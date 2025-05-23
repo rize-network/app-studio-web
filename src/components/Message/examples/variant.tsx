@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 import { showMessage } from '../Message/Message.store';
-import { Message } from '../Message/Message.type';
+import { MessageType } from '../Message/Message.type';
 
 export const VariantDemo = () => {
   return (
@@ -12,7 +12,7 @@ export const VariantDemo = () => {
           key={index}
           onClick={() =>
             showMessage(
-              variant as Message,
+              variant as MessageType,
               `${variant.toUpperCase()} toast here!`
             )
           }

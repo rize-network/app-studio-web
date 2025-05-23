@@ -1,8 +1,7 @@
-import { CSSProperties } from 'react';
+import { ViewProps } from 'app-studio';
+import { MessageType, Shape, Size } from './Message.type';
 
-import { Message, Shape, Size } from './Message.type';
-
-export const ContainerShapes: Record<Shape, CSSProperties> = {
+export const ContainerShapes: Record<Shape, ViewProps> = {
   sharp: { borderRadius: 0 },
   rounded: { borderRadius: 4 },
 };
@@ -15,7 +14,7 @@ export const HeaderIconSizes: Record<Size, number> = {
   xl: 28,
 };
 
-export const Themes: Record<Message, any> = {
+export const Themes: Record<MessageType, any> = {
   info: {
     container: {
       backgroundColor: 'color.blue.200',
@@ -23,14 +22,14 @@ export const Themes: Record<Message, any> = {
     },
     icon: {
       color: 'color.blue.500',
-      name: 'InformationSvg',
+      name: 'InformationIcon',
     },
     content: {
       color: 'color.blue.500',
     },
     close: {
       color: 'color.blue.500',
-      name: 'CloseSvg',
+      name: 'CloseIcon',
     },
   },
   success: {
@@ -40,14 +39,14 @@ export const Themes: Record<Message, any> = {
     },
     icon: {
       color: 'color.green.500',
-      name: 'CheckCircleSvg',
+      name: 'SuccessIcon',
     },
     content: {
       color: 'color.green.500',
     },
     close: {
       color: 'color.green.500',
-      name: 'CloseSvg',
+      name: 'CloseIcon',
     },
   },
   error: {
@@ -57,14 +56,14 @@ export const Themes: Record<Message, any> = {
     },
     icon: {
       color: 'color.red.500',
-      name: 'ErrrorSvg',
+      name: 'ErrrorIcon',
     },
     content: {
       color: 'color.red.500',
     },
     close: {
       color: 'color.red.500',
-      name: 'CloseSvg',
+      name: 'CloseIcon',
     },
   },
   warning: {
@@ -74,14 +73,14 @@ export const Themes: Record<Message, any> = {
     },
     icon: {
       color: 'color.orange.500',
-      name: 'ErrrorSvg',
+      name: 'ErrrorIcon',
     },
     content: {
       color: 'color.orange.500',
     },
     close: {
       color: 'color.orange.500',
-      name: 'CloseSvg',
+      name: 'CloseIcon',
     },
   },
 };

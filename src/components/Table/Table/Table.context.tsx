@@ -1,29 +1,40 @@
-import React, { CSSProperties } from 'react';
+import React, { createContext, useContext } from 'react';
+import { ViewProps } from 'app-studio';
+
 export type TableViewStyles = {
-  // Defines a type 'TableViewStyles' which will be used to style components of a table view. This ensures that these styles can be standardized and applied throughout the app.
-  table?: CSSProperties;
-  thead?: CSSProperties;
-  tfoot?: CSSProperties;
-  tbody?: CSSProperties;
-  tr?: CSSProperties;
-  td?: CSSProperties;
-  th?: CSSProperties;
-  caption?: CSSProperties;
+  table?: ViewProps;
+  thead?: ViewProps;
+  tfoot?: ViewProps;
+  tbody?: ViewProps;
+  tr?: ViewProps;
+  td?: ViewProps;
+  th?: ViewProps;
+  caption?: ViewProps;
 };
+
 const defaultStyles: TableViewStyles = {};
-// Initializes an empty 'defaultStyles' object that will be used as a fallback if no custom styles are provided.
-const TableStylesContext = React.createContext<TableViewStyles>(defaultStyles);
-// Creates a new Context object for 'TableViewStyles' with the default value set to 'defaultStyles'. This allows the styles to be passed down through the component tree without having to pass props manually.
-export const TableStylesProvider: React.FC<{
-  // Exports 'TableStylesProvider', a functional component which wraps its children with the 'TableStylesContext.Provider'. This Provider will allow nested components to access the style configuration.
+
+interface TableContextProps {
+  views: TableViewStyles;
+  onRowClick?: Function;
+}
+
+// Create a context that includes both styles and the onClick function
+const TableContext = createContext<TableContextProps>({
+  views: defaultStyles,
+  onRowClick: () => {}, // Default to undefined if no onClick is passed
+});
+
+export const TableProvider: React.FC<{
   children: React.ReactNode;
-  styles?: TableViewStyles;
-}> = ({ children, styles = defaultStyles }) => (
-  // The 'styles' prop is optional and defaults to 'defaultStyles' if not provided. When used, 'styles' are propagated down the component hierarchy.
-  <TableStylesContext.Provider value={styles}>
+  views?: TableViewStyles;
+  onRowClick?: Function; // Accept the onClick prop
+}> = ({ children, views = defaultStyles, onRowClick }) => (
+  // Pass both styles and onClick to the context
+  <TableContext.Provider value={{ views, onRowClick }}>
     {children}
-  </TableStylesContext.Provider>
-  // Exports a custom hook 'useTableStyles' that encapsulates the logic for consuming the 'TableStylesContext' and returns its value, which are the current style configurations.
+  </TableContext.Provider>
 );
-export const useTableStyles = (): TableViewStyles =>
-  React.useContext(TableStylesContext);
+
+// Custom hook to consume the context and get the styles and onClick handler
+export const useTableContext = () => useContext(TableContext);

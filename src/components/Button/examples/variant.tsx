@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Variant } from '../Button/Button.type';
 
@@ -9,22 +9,14 @@ export const VariantButtons = () => (
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
       <Button
         key={index}
-        externalHref="https://www.npmjs.com/package/app-studio"
+        to="https://www.npmjs.com/package/app-studio"
         variant={variant as Variant}
-        colorScheme="theme.primary"
-        isFilled
       >
-        {variant}
+        App Studio Link {variant}
       </Button>
     ))}
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-      <Button
-        key={index}
-        externalHref="https://www.npmjs.com/package/app-studio"
-        variant={variant as Variant}
-        isFilled
-        effect="reverse"
-      >
+      <Button key={index} variant={variant as Variant}>
         {variant}
       </Button>
     ))}

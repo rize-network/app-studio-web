@@ -1,155 +1,166 @@
-import React, { CSSProperties } from 'react';
-import { Element, useTheme } from 'app-studio';
-import { Link } from './../../Link/Link';
-import { ButtonProps } from './Button.props';
-import { ButtonShapes, ButtonSizes, IconSizes } from './Button.style';
-import { Variant } from './Button.type';
-import { Loader } from '../../Loader/Loader';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+/**
+ * ButtonView component – minimal and design‑system aligned.
+ * - Chooses a **main color** with priority: `backgroundColor` → `color` → `theme.primary`.
+ * - Uses `getButtonVariants` to derive base/hover/active styles per variant.
+ */
 
-var contrast = require('contrast');
+import React, { useMemo } from 'react';
+import { Element, Horizontal, Vertical, View, useTheme } from 'app-studio';
+import { Link } from '../../Link/Link';
+import { Loader } from '../../Loader/Loader';
+import { ButtonProps } from './Button.props';
+import {
+  ButtonSizes,
+  ButtonShapes,
+  IconSizes,
+  getButtonVariants,
+} from './Button.style';
+import contrast from 'contrast';
 
 const ButtonView: React.FC<ButtonProps> = ({
-  icon,
-  shadow,
-  children,
-  // Defines the functional component ButtonView with its expected props detailed in ButtonProps.
-  ariaLabel,
-  // Initializes default values for the ButtonProps object; useful for defining states like isAuto, isFilled, etc.
-  externalHref,
-  isAuto = false,
-  // Determines if button should be active based on isDisabled and isLoading properties.
-  isFilled = false,
-  // Prepares default properties for the native button element based on isActive state.
-  isIconRounded = false,
-  // Sets button color; defaults to the theme's disabled color if button is not active.
-  isLoading = false,
-  // Determines if the hover effect shall be applied based on isHovered and effect property.
-  isDisabled = false,
-  // Determines if the reverse style shall be applied based on isHovered and effect property.
-  size = 'md',
+  /* behaviour */
   variant = 'filled',
-  iconPosition = 'left',
-  // Defines CSS properties for 'filled' variant of the button with conditional styles based on reverse state.
-  colorScheme = 'theme.primary',
+  size = 'md',
   shape = 'rounded',
-  onClick = () => {},
-  loaderProps = {},
+  iconPosition = 'left',
   loaderPosition = 'left',
-  effect = 'default',
-  isHovered,
-  setIsHovered = () => {},
+  backgroundColor, // primary candidate for main color
+  color, // 2nd candidate for main color (NOT text‑color)
+  isAuto,
+  isFilled,
+  isDisabled,
+  isLoading,
+  isIconRounded,
+  /* content */
+  icon,
+  children,
+  /* nav */
+  to,
+  isExternal,
+  /* misc */
+  shadow,
+  onClick,
+  views = {},
+  themeMode: elementMode,
   ...props
-  // Defines CSS properties for 'outline' variant of the button with conditional styles based on reverse state.
 }) => {
-  const { getColor } = useTheme();
-  const handleHover = () => setIsHovered(!isHovered);
+  /* theme helpers */
+  const { getColor, themeMode } = useTheme();
+  const mode = elementMode ?? themeMode;
 
-  const isActive = !(isDisabled || isLoading);
-  const defaultNativeProps = { disabled: !isActive };
-  const buttonColor = isActive ? colorScheme : 'theme.disabled';
-  const hovering = isHovered && effect === 'hover';
-  const reverse = isHovered && effect === 'reverse';
+  /* MAIN COLOR – determines the entire palette */
+  const mainColorKey = backgroundColor ?? color ?? 'theme.primary';
+  const mainTone = getColor(isDisabled ? 'theme.disabled' : mainColorKey, {
+    themeMode: mode,
+  });
+  const tone = contrast(mainTone);
 
-  const isLight = contrast(getColor(buttonColor)) == 'light';
-  const ButtonVariants: Record<Variant, CSSProperties> = {
-    filled: {
-      // Defines CSS properties for 'link' variant of the button with conditional styles based on reverse state, includes text decoration.
-      backgroundColor: reverse ? 'transparent' : buttonColor,
-      color: reverse
-        ? isLight
-          ? 'white'
-          : buttonColor
-        : isLight
-        ? buttonColor
-        : 'white',
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : 'transparent',
-    },
-    outline: {
-      backgroundColor: reverse ? buttonColor : 'transparent',
-      // Defines CSS properties for 'ghost' variant of the button with conditional styles based on reverse state.
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : colorScheme,
-      // Fetches size-specific styles from ButtonSizes based on the 'size' prop.
-      color: reverse ? 'white' : buttonColor,
-      // Fetches variant-specific styles from ButtonVariants based on the 'variant' prop.
-    },
-    // Adjusts button width based on isAuto and isFilled properties, using buttonSizeStyles for fallback width.
-    link: {
-      backgroundColor: 'transparent',
-      // Changes padding for the button based on whether isIconRounded is true or false.
-      borderWidth: 1,
-      borderStyle: 'solid',
-      // Creates the content for the button including loaders and icons positioned based on their respective properties.
-      borderColor: reverse ? buttonColor : 'transparent',
-      color: buttonColor,
-      textDecoration: reverse ? 'none' : 'underline',
-    },
-    ghost: {
-      backgroundColor: reverse ? buttonColor : 'transparent',
-      color: reverse ? 'white' : buttonColor,
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: reverse ? buttonColor : 'transparent',
-    },
-  };
-  // Executes rendering of the button or a link element based on the variant; applies conditional rendering for externalHref in 'link' variant.
-  const buttonSizeStyles = ButtonSizes[size];
-  const buttonVariant = ButtonVariants[variant];
-  const scaleWidth = {
-    width: isAuto ? 'fit-content' : isFilled ? '100%' : buttonSizeStyles.width,
-  };
-  const changePadding = {
-    padding: isIconRounded
-      ? IconSizes[size].padding
-      : ButtonSizes[size].padding,
-  };
-  const content = (
-    <Horizontal gap={10}>
-      {isLoading && loaderPosition === 'left' && <Loader {...loaderProps} />}
-      {icon && iconPosition === 'left' && !isLoading && icon}
-      {children}
-      {icon && iconPosition === 'right' && !isLoading && icon}
-      {isLoading && loaderPosition === 'right' && <Loader {...loaderProps} />}
-    </Horizontal>
+  /* variant palette */
+  const palette = useMemo(
+    () => getButtonVariants(mainTone, tone == 'light'),
+    [mainTone, tone]
   );
+  const base = palette[variant];
+
+  /* layout helpers */
+  const Wrapper = ['left', 'right'].includes(iconPosition)
+    ? Horizontal
+    : Vertical;
+  const sizeStyles = ButtonSizes[size];
+  const iconPad = isIconRounded ? IconSizes[size] : {};
+
+  const content = (
+    <Wrapper
+      gap={8}
+      alignItems="center"
+      justifyContent="center"
+      color={'inherit'}
+      _hover={{
+        color: 'inherit',
+      }}
+      {...sizeStyles}
+      {...views?.content}
+    >
+      {isLoading && loaderPosition === 'left' && (
+        <Loader
+          size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+          color={'inherit'}
+          _hover={{
+            color: 'inherit',
+          }}
+          {...views?.loader}
+        />
+      )}
+
+      {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
+        <View
+          color={'inherit'}
+          _hover={{
+            color: 'inherit',
+          }}
+          {...views?.icon}
+        >
+          {icon}
+        </View>
+      )}
+
+      {children}
+
+      {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
+        <View
+          color={'inherit'}
+          _hover={{
+            color: 'inherit',
+          }}
+          {...views?.icon}
+        >
+          {icon}
+        </View>
+      )}
+
+      {isLoading && loaderPosition === 'right' && (
+        <Loader
+          size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+          color={'inherit'}
+          _hover={{
+            color: 'inherit',
+          }}
+          {...views?.loader}
+        />
+      )}
+    </Wrapper>
+  );
+
   return (
     <Element
-      gap={8}
-      as="button"
-      role="button"
-      border="none"
-      color="color.white"
+      as={variant === 'link' && to ? 'div' : 'button'}
+      type={variant === 'link' && to ? undefined : 'button'}
+      disabled={Boolean(isDisabled || isLoading)}
+      /* sizing */
+      {...sizeStyles}
+      {...iconPad}
       display="flex"
       alignItems="center"
       justifyContent="center"
-      ariaLabel={ariaLabel}
-      backgroundColor={buttonColor}
+      // width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+      /* visuals */
       borderRadius={ButtonShapes[shape]}
-      onClick={props.onClick ?? onClick}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
-      cursor={isActive ? 'pointer' : 'default'}
-      filter={hovering ? 'brightness(0.85)' : 'brightness(1)'}
-      transition={hovering && !props.isDisabled ? 'transform 0.3s ease' : ''}
-      transform={hovering && !props.isDisabled ? 'translateY(-5px)' : ''}
-      {...defaultNativeProps}
-      {...buttonSizeStyles}
-      {...buttonVariant}
-      {...scaleWidth}
-      {...changePadding}
-      {...shadow}
+      boxShadow={shadow}
+      transition="all 0.2s ease"
+      cursor={isDisabled ? 'default' : 'pointer'}
+      onClick={onClick}
+      {...base}
+      {...views?.container}
       {...props}
     >
-      {variant === 'link' && externalHref ? (
+      {to ? (
         <Link
-          href={externalHref}
-          textDecorationColor={colorScheme}
-          colorScheme={colorScheme}
-          isExternal
+          to={to}
+          isExternal={isExternal}
+          color={'inherit'}
+          textDecoration={'inherit'}
+          textDecorationColor={'inherit'} // Link underline color matches text color
+          {...views?.link}
         >
           {content}
         </Link>
@@ -159,4 +170,5 @@ const ButtonView: React.FC<ButtonProps> = ({
     </Element>
   );
 };
+
 export default ButtonView;

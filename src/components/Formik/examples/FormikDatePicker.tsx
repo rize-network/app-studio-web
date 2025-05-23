@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 import { FormikDatePicker } from '../Formik.DatePicker';
 

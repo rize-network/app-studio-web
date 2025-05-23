@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   ColorDemo,
+  DesignSystemSelects,
   IsScrollableDemo,
 } from 'src/components/Form/Select/examples';
 import { DefaultSelect } from 'src/components/Form/Select/examples/Default';
@@ -13,20 +14,26 @@ import { ReadOnlySelect } from 'src/components/Form/Select/examples/ReadOnlyInpu
 import { ShadowSelect } from 'src/components/Form/Select/examples/Shadow';
 import { SizeSelect } from 'src/components/Form/Select/examples/SizeInput';
 import { StyledSelect } from 'src/components/Form/Select/examples/StylesInput';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const SelectPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>
             <th>App-Studio</th>
           </tr>
           <tr>
-            <th>Default</th>
+            <th>Design System</th>
+            <td>
+              <DesignSystemSelects />
+            </td>
+          </tr>
 
+          <tr>
+            <th>Default</th>
             <td>
               <DefaultSelect />
             </td>

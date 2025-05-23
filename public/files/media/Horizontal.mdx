@@ -1,0 +1,40 @@
+# Horizontal
+
+Aligns child components horizontally, with optional reverse order.
+
+### **Import**
+  ```tsx
+  import { Horizontal } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+
+import { View } from 'app-studio';
+import { Horizontal } from '../../Horizontal/Horizontal';
+
+export const DefaultHorizontal = () => (
+  <Horizontal>
+    <View width={50} height={50} backgroundColor="theme.primary" />
+    <View
+      width={50}
+      height={50}
+      backgroundColor="theme.secondary"
+      margin="0 10px "
+    />
+    <View width={50} height={50} backgroundColor="theme.warning" />
+  </Horizontal>
+);
+
+```
+
+## Props
+
+| Prop      | Type          | Description                                            | Default     |
+| --------- | ------------- | ------------------------------------------------------ | ----------- |
+| children  | React.ReactNode | The content to be arranged horizontally.                |             |
+| gap       | number        | The gap between horizontally aligned items.             | 0           |
+| styles    | CSSProperties | Optional custom styles for the horizontal container.   |             |
+| className | string        | Optional className for the horizontal container.        |             |
+| wrap      | boolean       | Whether the items should wrap to the next line.        | true        |

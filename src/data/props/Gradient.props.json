@@ -1,0 +1,119 @@
+{
+  "componentDescription": "Creates beautiful gradient backgrounds with various styles and animations.",
+  "type": {
+    "type": [
+      "GradientType"
+    ],
+    "typeValues": [
+      "'linear'",
+      "'radial'",
+      "'conic'"
+    ],
+    "description": "Specifies the type of gradient to render.",
+    "defaultValue": "'linear'"
+  },
+  "direction": {
+    "type": [
+      "LinearDirection"
+    ],
+    "typeValues": [
+      "'to-right'",
+      "'to-left'",
+      "'to-bottom'",
+      "'to-top'",
+      "'to-top-right'",
+      "'to-top-left'",
+      "'to-bottom-right'",
+      "'to-bottom-left'",
+      "string"
+    ],
+    "description": "Specifies the direction for linear gradients.",
+    "defaultValue": "'to-right'"
+  },
+  "shape": {
+    "type": [
+      "RadialShape"
+    ],
+    "typeValues": [
+      "'circle'",
+      "'ellipse'"
+    ],
+    "description": "Specifies the shape for radial gradients.",
+    "defaultValue": "'circle'"
+  },
+  "position": {
+    "type": [
+      "RadialPosition"
+    ],
+    "typeValues": [
+      "'center'",
+      "'top'",
+      "'right'",
+      "'bottom'",
+      "'left'",
+      "'top-right'",
+      "'top-left'",
+      "'bottom-right'",
+      "'bottom-left'",
+      "string"
+    ],
+    "description": "Specifies the position for radial and conic gradients.",
+    "defaultValue": "'center'"
+  },
+  "from": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Specifies the start color for simple two-color gradients.",
+    "defaultValue": []
+  },
+  "to": {
+    "type": [
+      "string"
+    ],
+    "typeValues": [],
+    "description": "Specifies the end color for simple two-color gradients.",
+    "defaultValue": []
+  },
+  "colors": {
+    "type": [
+      "ColorStop[]"
+    ],
+    "typeValues": [],
+    "description": "Specifies an array of color stops for multi-color gradients.",
+    "defaultValue": []
+  },
+  "animate": {
+    "type": [
+      "boolean"
+    ],
+    "typeValues": [],
+    "description": "Enables animation for the gradient.",
+    "defaultValue": "false"
+  },
+  "animationDuration": {
+    "type": [
+      "number"
+    ],
+    "typeValues": [],
+    "description": "Specifies the duration of the animation in seconds.",
+    "defaultValue": "3"
+  },
+  "children": {
+    "type": [
+      "React.ReactNode"
+    ],
+    "typeValues": [],
+    "description": "Content to render inside the gradient.",
+    "defaultValue": []
+  },
+  "views": {
+    "type": [
+      "GradientStyles"
+    ],
+    "typeValues": [],
+    "description": "Custom styling that overrides default views.",
+    "defaultValue": []
+  }
+}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from 'app-studio';
-import { Center } from '../../Layout/Center/Center';
-import { View } from '../../Layout/View/View';
+import { useTheme, View, ViewProps } from 'app-studio';
+import { Center } from 'app-studio';
 
 import {
   DefaultSpinnerProps,
@@ -12,14 +11,24 @@ import {
 
 import { DefaultSizes, DefaultSpeeds } from './Loader.style';
 
+interface Props extends LoaderProps {
+  views?: {
+    container?: ViewProps;
+    text?: ViewProps;
+  };
+}
+
 const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   size = 'md',
   speed = 'normal',
   color = 'theme.loading',
+  themeMode: elementMode,
   ...props
 }) => {
-  const theme = useTheme();
-  const colorStyle = theme.getColor(color);
+  const { getColor, themeMode } = useTheme();
+  const colorStyle = getColor(color, {
+    themeMode: elementMode ? elementMode : themeMode,
+  });
   const sizeStyle = typeof size === 'number' ? size : DefaultSizes[size];
 
   const [angle, setAngle] = useState(0);
@@ -40,7 +49,7 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
       viewBox="0 0 24 24"
       fill="none"
       stroke={colorStyle}
-      strokeWidth="2"
+      strokeWidth="1"
       strokeLinecap="round"
       strokeLinejoin="round"
       style={{ transform: `rotate(${angle}deg)` }}
@@ -63,10 +72,13 @@ const Dotted: React.FC<DottedProps> = ({
   size = 'md',
   speed = 'normal',
   color = 'theme.loading',
+  themeMode: elementMode,
   ...props
 }) => {
-  const theme = useTheme();
-  const colorStyle = theme.getColor(color);
+  const { getColor, themeMode } = useTheme();
+  const colorStyle = getColor(color, {
+    themeMode: elementMode ? elementMode : themeMode,
+  });
   const sizeStyle = typeof size === 'number' ? size : DefaultSizes[size];
 
   const [angle, setAngle] = useState(0);
@@ -99,10 +111,13 @@ const Quarter: React.FC<QuarterProps> = ({
   size = 'md',
   speed = 'normal',
   color = 'theme.loading',
+  themeMode: elementMode,
   ...props
 }) => {
-  const theme = useTheme();
-  const colorStyle = theme.getColor(color);
+  const { getColor, themeMode } = useTheme();
+  const colorStyle = getColor(color, {
+    themeMode: elementMode ? elementMode : themeMode,
+  });
   const sizeStyle = typeof size === 'number' ? size : DefaultSizes[size];
 
   const [angle, setAngle] = useState(0);
@@ -136,7 +151,7 @@ const Quarter: React.FC<QuarterProps> = ({
     </svg>
   );
 };
-const LoaderView: React.FC<LoaderProps> = ({
+const LoaderView: React.FC<Props> = ({
   size,
   children,
   textColor,
@@ -144,6 +159,7 @@ const LoaderView: React.FC<LoaderProps> = ({
   type = 'default',
   speed = 'normal',
   textPosition = 'right',
+  views,
   ...props
 }) => {
   const style = { size, speed, color: loaderColor };
@@ -161,13 +177,18 @@ const LoaderView: React.FC<LoaderProps> = ({
         textPosition === 'top' || textPosition === 'bottom' ? 'column' : 'row'
       }
       {...props}
+      {...views?.container}
     >
       {(textPosition === 'left' || textPosition === 'top') && children && (
-        <View color={textColor}>{children}</View>
+        <View color={textColor} {...views?.text}>
+          {children}
+        </View>
       )}
       {variants[type]}
       {(textPosition === 'right' || textPosition === 'bottom') && children && (
-        <View color={textColor}>{children}</View>
+        <View color={textColor} {...views?.text}>
+          {children}
+        </View>
       )}
     </Center>
   );

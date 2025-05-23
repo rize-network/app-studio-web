@@ -1,0 +1,158 @@
+# Accordion
+
+A component that displays collapsible content panels for presenting information in a limited amount of space.
+
+### **Import**
+  ```tsx
+  import { Accordion } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Accordion } from '../Accordion';
+import { Text } from '../../Text/Text';
+
+export const DefaultAccordion = () => {
+  return (
+    <Accordion>
+      <Accordion.Item id="item-1">
+        <Accordion.Header>
+          <Text fontWeight="bold">What is React?</Text>
+        </Accordion.Header>
+        <Accordion.Content>
+          <Text>
+            React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.
+          </Text>
+        </Accordion.Content>
+      </Accordion.Item>
+      
+      <Accordion.Item id="item-2">
+        <Accordion.Header>
+          <Text fontWeight="bold">What are React Hooks?</Text>
+        </Accordion.Header>
+        <Accordion.Content>
+          <Text>
+            Hooks are functions that let you "hook into" React state and lifecycle features from function components.
+          </Text>
+        </Accordion.Content>
+      </Accordion.Item>
+    </Accordion>
+  );
+};
+```
+
+### **Multiple**
+Allow multiple items to be expanded at once.
+
+```tsx
+import React from 'react';
+import { Accordion } from '../Accordion';
+import { Text } from '../../Text/Text';
+
+export const MultipleAccordion = () => {
+  return (
+    <Accordion allowMultiple defaultExpandedItems={['item-1']}>
+      <Accordion.Item id="item-1">
+        <Accordion.Header>
+          <Text fontWeight="bold">First Item (Initially Expanded)</Text>
+        </Accordion.Header>
+        <Accordion.Content>
+          <Text>
+            This item is initially expanded. You can expand multiple items at once in this accordion.
+          </Text>
+        </Accordion.Content>
+      </Accordion.Item>
+      
+      <Accordion.Item id="item-2">
+        <Accordion.Header>
+          <Text fontWeight="bold">Second Item</Text>
+        </Accordion.Header>
+        <Accordion.Content>
+          <Text>
+            This is the second item. Try expanding this while the first item is still open.
+          </Text>
+        </Accordion.Content>
+      </Accordion.Item>
+    </Accordion>
+  );
+};
+```
+
+### **Variants**
+Different visual styles for the accordion.
+
+```tsx
+import React from 'react';
+import { Accordion } from '../Accordion';
+import { Text } from '../../Text/Text';
+
+export const AccordionVariants = () => {
+  return (
+    <>
+      <Accordion variant="outline">
+        <Accordion.Item id="outline-1">
+          <Accordion.Header>
+            <Text fontWeight="bold">Outline Variant</Text>
+          </Accordion.Header>
+          <Accordion.Content>
+            <Text>
+              This is the content for the outline variant accordion.
+            </Text>
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion>
+      
+      <Accordion variant="filled">
+        <Accordion.Item id="filled-1">
+          <Accordion.Header>
+            <Text fontWeight="bold">Filled Variant</Text>
+          </Accordion.Header>
+          <Accordion.Content>
+            <Text>
+              This is the content for the filled variant accordion.
+            </Text>
+          </Accordion.Content>
+        </Accordion.Item>
+      </Accordion>
+    </>
+  );
+};
+```
+
+### **Disabled**
+Disable specific accordion items.
+
+```tsx
+import React from 'react';
+import { Accordion } from '../Accordion';
+import { Text } from '../../Text/Text';
+
+export const DisabledAccordion = () => {
+  return (
+    <Accordion>
+      <Accordion.Item id="regular-1">
+        <Accordion.Header>
+          <Text fontWeight="bold">Regular Item</Text>
+        </Accordion.Header>
+        <Accordion.Content>
+          <Text>
+            This is a regular accordion item that can be expanded and collapsed.
+          </Text>
+        </Accordion.Content>
+      </Accordion.Item>
+      
+      <Accordion.Item id="disabled-1" isDisabled>
+        <Accordion.Header>
+          <Text fontWeight="bold">Disabled Item</Text>
+        </Accordion.Header>
+        <Accordion.Content>
+          <Text>
+            This content won't be accessible because the item is disabled.
+          </Text>
+        </Accordion.Content>
+      </Accordion.Item>
+    </Accordion>
+  );
+};
+```

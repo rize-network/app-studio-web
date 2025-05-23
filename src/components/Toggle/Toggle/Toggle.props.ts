@@ -11,12 +11,10 @@ export interface ToggleProps extends Omit<InputProps, 'size'> {
   children: React.ReactNode;
   // Optional 'variant' to style the toggle component with predefined sets of visual types.
   variant?: Variant;
-  // Optional string to set the color scheme for the toggle component's appearance.
-  colorScheme?: string;
   // Optional function that triggers when the toggle state changes, receives the new state as an argument.
   onToggle?: (isToggled: boolean) => void;
 }
-export interface ToggleViewProps extends ToggleProps {
+export interface ToggleViewProps extends Omit<ToggleProps, never> {
   // Boolean to indicate whether the toggle component is hovered over by the user.
   isHovered: boolean;
   setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;

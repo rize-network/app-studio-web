@@ -1,6 +1,6 @@
 import React from 'react';
 import { Toggle } from '../Toggle';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 import { Variant } from '../Toggle/Toggle.type';
 
 export const VariantDemo = () => (

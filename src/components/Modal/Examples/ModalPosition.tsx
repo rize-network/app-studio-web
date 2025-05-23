@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 import { Modal } from '../Modal';
 import { showModal } from '../Modal/Modal.store';
@@ -9,7 +9,7 @@ import { showModal } from '../Modal/Modal.store';
 export const ModalPosition = () => {
   return (
     <>
-      <Horizontal gap={10} wrap="nowrap">
+      <Horizontal gap={10} flexWrap="nowrap">
         <Button
           onClick={() => showModal('ModalPosition', {}, { position: 'top' })}
         >

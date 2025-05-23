@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical } from 'src/components/Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { CountryPicker } from '../CountryPicker';
 
@@ -12,7 +12,7 @@ export const ColorCountryPicker = () => (
       'theme.success',
       'theme.warning',
     ].map((color) => (
-      <CountryPicker key={color} label={color} colorScheme={color} />
+      <CountryPicker key={color} label={color} />
     ))}
   </Vertical>
 );

@@ -1,47 +1,71 @@
 import { create } from 'zustand';
 
-export interface ModalState {
-  modal: string | boolean;
-  modalProps: any & { isVisible: boolean };
+export interface ModalItem {
+  name: string;
+  props: any & { isVisible: boolean };
   overlayProps: any;
-  show: (modal: string, modalProps?: any, overlayProps?: any) => void;
-  hide: () => void;
+}
+
+export interface ModalState {
+  modals: ModalItem[];
+  show: (name: string, modalProps?: any, overlayProps?: any) => void;
+  hide: (name?: string) => void;
+  onShow: (name: string, props?: any) => void;
+  onHide: (name?: string) => void;
+  setOnShow: (onShow: (name: string, props?: any) => void) => void;
+  setOnHide: (onHide: (name?: string) => void) => void;
 }
 
 export const useModalStore = create<ModalState>((set) => ({
-  modal: false,
-  modalProps: { isVisible: false },
-  overlayProps: {},
-  show: (modal, modalProps = {}, overlayProps = {}) => {
-    if (modal) {
-      modalProps.isVisible = true;
-    }
+  modals: [],
+  onHide: (name?: string) => name,
+  onShow: (name: string, props?: any) => ({ name, props }),
+  show: (name, modalProps = {}, overlayProps = {}) => {
     set((state: ModalState) => ({
       ...state,
-      modal,
-      modalProps,
-      overlayProps,
+      modals: [
+        ...state.modals,
+        {
+          name,
+          props: { ...modalProps, isVisible: true },
+          overlayProps,
+        },
+      ],
     }));
   },
-  hide: () => {
-    set((state: ModalState) => ({
-      ...state,
-      modalProps: {
-        ...state.modalProps,
-        isVisible: false,
-      },
-    }));
+  hide: (name) => {
+    set((state: ModalState) => {
+      if (!name) {
+        // Hide all modals
+        return { modals: [] };
+      }
+      // Hide specific modal by name
+      return {
+        ...state,
+        modals: state.modals.filter((modal) => modal.name !== name),
+      };
+    });
+  },
+  setOnHide: (onHide: (name?: string) => void) => {
+    set((state: ModalState) => ({ ...state, onHide }));
+  },
+  setOnShow: (onShow: (name: string, props?: any) => void) => {
+    set((state: ModalState) => ({ ...state, onShow }));
   },
 }));
 
 export const showModal = (
-  modal: string,
+  name: string,
   modalProps: any = {},
   overlayProps: any = {}
 ) => {
-  useModalStore.getState().show(modal, modalProps, overlayProps);
+  useModalStore.getState().show(name, modalProps, overlayProps);
+  useModalStore.getState().onShow(name, modalProps);
 };
 
-export const hideModal = () => {
-  useModalStore.getState().hide();
+export const hideModal = (name?: string) => {
+  console.log('hideModal', name);
+  useModalStore.getState().onHide(name);
+
+  useModalStore.getState().hide(typeof name === 'string' ? name : undefined);
 };

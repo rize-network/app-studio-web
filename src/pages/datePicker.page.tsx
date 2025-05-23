@@ -11,12 +11,12 @@ import {
   SizeDatePicker,
   StyledDatePicker,
 } from 'src/components/Form/DatePicker/examples';
-import { View } from 'src/components/Layout/View/View';
+import { View } from 'app-studio';
 
 export const DatePickerPage = () => {
   return (
     <View>
-      <table className="table" cellSpacing={0}>
+      <table>
         <tbody>
           <tr>
             <th>Property</th>

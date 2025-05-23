@@ -1,85 +1,113 @@
-import React from 'react';
-import { Element } from 'app-studio';
-import { TableViewProps } from './Table.props';
-import { useTableStyles } from './Table.context';
+/**
+ * Table View Component
+ *
+ * Renders a table with various styles and states
+ * according to the design guidelines.
+ */
 
-export const TableContainer: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+import React from 'react';
+import { Element, ViewProps } from 'app-studio';
+import { TableViewProps } from './Table.props';
+import { useTableContext } from './Table.context';
+import { DefaultTableStyles } from './Table.style';
+
+export const TableContainer: React.FC<ViewProps> = (props) => {
+  const { views } = useTableContext();
   return (
     <Element
       as="table"
       borderCollapse="collapse"
-      {...styles.table}
+      {...DefaultTableStyles.table}
+      {...views?.table}
       {...props}
     />
   );
 };
 
-export const TableHead: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+export const TableHead: React.FC<ViewProps> = (props) => {
+  const { views } = useTableContext();
   return (
     <Element
       as="thead"
-      borderBottom="0.5px solid #ddd"
       textAlign="left"
-      color="color.gray.400"
-      {...styles.thead}
+      {...DefaultTableStyles.thead}
+      {...views?.thead}
       {...props}
     />
   );
 };
 
-export const TableHeadCell: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+export const TableHeadCell: React.FC<ViewProps> = (props) => {
+  const { views } = useTableContext();
   return (
     <Element
       as="th"
-      padding="14px"
       whiteSpace="nowrap"
-      fontWeight="500"
-      {...styles.th}
+      {...DefaultTableStyles.th}
+      {...views?.th}
       {...props}
     />
   );
 };
 
-export const TableRow: React.FC<any> = (props) => {
-  const styles = useTableStyles();
-  return <Element as="tr" {...styles.tr} {...props} />;
+export const TableRow: React.FC<ViewProps> = (props) => {
+  const { views, onRowClick } = useTableContext();
+  return (
+    <Element
+      as="tr"
+      {...DefaultTableStyles.tr}
+      {...views?.tr}
+      onClick={onRowClick}
+      {...props}
+    />
+  );
 };
 
-export const TableCell: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+export const TableCell: React.FC<ViewProps> = (props) => {
+  const { views } = useTableContext();
   return (
     <Element
       as="td"
-      padding="14px"
       whiteSpace="nowrap"
-      fontWeight={props.isFirstColumn ? '400' : '300'}
-      {...styles.td}
+      fontWeight={props.isFirstColumn ? '500' : '400'}
+      {...DefaultTableStyles.td}
+      {...views?.td}
       {...props}
     />
   );
 };
 
-export const TableBody: React.FC<any> = (props) => {
-  const styles = useTableStyles();
-  return <Element as="tbody" {...styles.tbody} {...props} />;
+export const TableBody: React.FC<ViewProps> = (props) => {
+  const { views } = useTableContext();
+  return (
+    <Element
+      as="tbody"
+      {...DefaultTableStyles.tbody}
+      {...views?.tbody}
+      {...props}
+    />
+  );
 };
 
-export const TableFooter: React.FC<any> = (props) => {
-  const styles = useTableStyles();
-  return <Element as="tfoot" {...styles.tfoot} {...props} />;
+export const TableFooter: React.FC<ViewProps> = (props) => {
+  const { views } = useTableContext();
+  return (
+    <Element
+      as="tfoot"
+      {...DefaultTableStyles.tfoot}
+      {...views?.tfoot}
+      {...props}
+    />
+  );
 };
 
-export const TableCaption: React.FC<any> = (props) => {
-  const styles = useTableStyles();
+export const TableCaption: React.FC<ViewProps> = (props) => {
+  const { views } = useTableContext();
   return (
     <Element
       as="caption"
-      margin={'10px 0'}
-      color="color.gray.400"
-      {...styles.caption}
+      {...DefaultTableStyles.caption}
+      {...views?.caption}
       {...props}
     />
   );
@@ -90,6 +118,7 @@ export const TableView: React.FC<TableViewProps> = ({
   columns,
   footer,
   caption,
+  themeMode: elementMode,
 }) => {
   return (
     <TableContainer role="Table">

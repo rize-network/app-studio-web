@@ -8,71 +8,37 @@
   },
   "heading": {
     "type": "Headings",
-    "typeValues": [
-      "h1",
-      "h2",
-      "h3",
-      "h4",
-      "h5",
-      "h6"
-    ],
+    "typeValues": ["h1", "h2", "h3", "h4", "h5", "h6"],
     "description": "Specifies the heading level for the label.",
     "defaultValue": []
   },
   "isItalic": {
     "type": "boolean",
-    "typeValues": [
-      "true",
-      "false"
-    ],
+    "typeValues": ["true", "false"],
     "description": "Determines if the label text should be italicized.",
     "defaultValue": "false"
   },
   "isStriked": {
     "type": "boolean",
-    "typeValues": [
-      "true",
-      "false"
-    ],
+    "typeValues": ["true", "false"],
     "description": "Determines if the label text should have a strikethrough.",
     "defaultValue": "false"
   },
   "isUnderlined": {
     "type": "boolean",
-    "typeValues": [
-      "true",
-      "false"
-    ],
+    "typeValues": ["true", "false"],
     "description": "Determines if the label text should be underlined.",
     "defaultValue": "false"
   },
   "size": {
-    "type": [
-      "Sizes",
-      "number"
-    ],
-    "typeValues": [
-      "sm",
-      "md",
-      "lg",
-      "xl",
-      "2xl",
-      "3xl",
-      "4xl",
-      "5xl",
-      "6xl"
-    ],
+    "type": ["Sizes", "number"],
+    "typeValues": ["sm", "md", "lg", "xl"],
     "description": "Defines the font size of the label; can be a predefined size or a custom number value.",
     "defaultValue": "sm"
   },
   "weight": {
     "type": "TextWeights",
-    "typeValues": [
-      "normal",
-      "bold",
-      "bolder",
-      "lighter"
-    ],
+    "typeValues": ["normal", "bold", "bolder", "lighter"],
     "description": "Defines the font weight of the label.",
     "defaultValue": "normal"
   },

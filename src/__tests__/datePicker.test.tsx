@@ -1,5 +1,4 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { DatePicker } from 'src/components';
 
 import { cleanup, render, screen } from '@testing-library/react';

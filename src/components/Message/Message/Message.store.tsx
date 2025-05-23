@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { MessageState } from './Message.props';
-import { Message, ShowMessageType } from './Message.type';
+import { MessageType, ShowMessageType } from './Message.type';
 
 // Create your store with the initial state and actions.
 export const useMessageStore = create<MessageState>((set) => ({
@@ -10,7 +10,7 @@ export const useMessageStore = create<MessageState>((set) => ({
   subtitle: '',
   variant: 'info',
   isClosable: false,
-  styles: {},
+  views: {},
   action: () => {},
   actionText: '',
   showIcon: false,
@@ -20,7 +20,7 @@ export const useMessageStore = create<MessageState>((set) => ({
     title = '',
     subtitle = '',
     isClosable,
-    styles,
+    views,
     action,
     actionText,
     showIcon,
@@ -32,7 +32,7 @@ export const useMessageStore = create<MessageState>((set) => ({
       title,
       subtitle,
       isClosable,
-      styles,
+      views,
       action,
       actionText,
       showIcon,
@@ -43,7 +43,7 @@ export const useMessageStore = create<MessageState>((set) => ({
 }));
 
 export const showMessage = (
-  variant: Message,
+  variant: MessageType,
   title?: string,
   subtitle?: string,
   props?: ShowMessageType
@@ -55,7 +55,7 @@ export const showMessage = (
       title,
       subtitle,
       props?.isClosable,
-      props?.styles,
+      props?.views,
       props?.action,
       props?.actionText,
       props?.showIcon,

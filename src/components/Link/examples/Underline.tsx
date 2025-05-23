@@ -1,19 +1,19 @@
 import React from 'react';
 import { Text } from '../../Text/Text';
-import { Vertical } from '../../Layout/Vertical/Vertical';
+import { Vertical } from 'app-studio';
 
 import { Link } from '../Link';
 
 export const UnderlineLink = () => (
   <Vertical gap={10}>
-    <Link href={'https://www.npmjs.com/package/app-studio'} underline="default">
+    <Link to={'https://www.npmjs.com/package/app-studio'} underline="default">
       Default
     </Link>
-    <Link href={'https://www.npmjs.com/package/app-studio'} underline="hover">
+    <Link to={'https://www.npmjs.com/package/app-studio'} underline="hover">
       Hover
     </Link>
     <Link
-      href={'https://www.npmjs.com/package/app-studio'}
+      to={'https://www.npmjs.com/package/app-studio'}
       underline="underline"
       color="theme.primary"
       textDecorationColor="theme.primary"

@@ -1,28 +1,40 @@
 import React from 'react';
 import { useTheme, Image, ViewProps, ImageProps } from 'app-studio';
-import { Center } from '../Layout/Center/Center';
+import { Center } from 'app-studio';
+
+export interface FileProps extends ViewProps {
+  src: string;
+  color?: string;
+  views?: {
+    container?: ViewProps;
+    image?: ImageProps;
+  };
+}
 
 export const FileSVG = ({
   src,
   color,
+  views,
+  themeMode: elementMode,
   ...props
-}: {
-  src: string;
-  color?: string;
-} & ViewProps) => {
-  const { getColor } = useTheme();
+}: FileProps) => {
+  const { getColor, themeMode } = useTheme();
 
   const Colorprops = color
-    ? { fill: getColor(color), stroke: getColor(color) }
+    ? {
+        fill: getColor(color, { themeMode }),
+        stroke: getColor(color, { themeMode }),
+      }
     : {};
 
   return (
-    <Center {...props}>
+    <Center {...props} {...views?.container}>
       <Image
         {...Colorprops}
         content={'url("' + src + '")'}
         width="100%"
         height="100%"
+        {...views?.image}
       />
     </Center>
   );

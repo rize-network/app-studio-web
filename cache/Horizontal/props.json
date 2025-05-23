@@ -1,0 +1,1 @@
+{"componentDescription":"Aligns child components horizontally, with optional reverse order.","isReversed":{"type":"boolean","typeValues":["true","false"],"description":"Optional boolean property to determine if the child components should be rendered in reverse order.","defaultValue":"false"}}

@@ -1,50 +1,78 @@
+/**
+ * Switch View Component
+ *
+ * Renders a switch toggle with various styles and states
+ * according to the design guidelines.
+ */
+
 import React from 'react';
 import { Input } from 'app-studio';
 import { Label } from '../../../Form/Label/Label';
-import { View } from '../../../Layout/View/View';
-
+import { View } from 'app-studio';
+import { Text } from '../../../Text/Text';
 import { SwitchViewProps } from './Switch.props';
-import { KnobSizes, SliderPadding, SliderSizes } from './Switch.style';
-
+import {
+  KnobSizes,
+  SliderPadding,
+  SliderSizes,
+  ColorSchemes,
+} from './Switch.style';
 const SwitchContent = (props: any) => <Input type="checkbox" {...props} />;
-
 const SwitchView: React.FC<SwitchViewProps> = ({
   id,
   name,
   label,
   inActiveChild,
+  isChecked,
   activeChild,
   labelPosition = 'right',
   shadow = {},
   size = 'sm',
-  colorScheme = 'theme.primary',
   value = false,
   isHovered = false,
   isDisabled = false,
   isReadOnly = false,
+  on,
+  setOn,
   onChange,
   setValue = () => {},
   setIsHovered = () => {},
-  styles = { slider: {}, circle: {}, label: {} },
+  helperText,
+  views = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
-  const handleToggle = (event: any) => {
-    if (!isReadOnly) {
-      setValue(!value);
-      if (onChange) onChange(event.target.checked);
+  const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!isReadOnly && !isDisabled) {
+      const newValue = event.target.checked;
+      setValue(newValue);
+      setOn(newValue);
+      if (onChange) onChange(newValue);
     }
   };
-
   const handleHover = () => setIsHovered(!isHovered);
-
+  /**
+   * Styles for the switch component
+   */
   const switchStyle = {
     container: {
-      gap: 10,
+      // Layout properties
+      gap: 12, // 3 × 4px grid
       display: 'flex',
       height: 'fit-content',
       width: 'fit-content',
+      alignItems: 'center',
+
+      // Typography properties
+
+      // State properties
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
-      ...styles.label,
+      opacity: isDisabled ? 0.6 : 1,
+
+      // Animation
+      transition: 'all 0.2s ease',
+
+      // Apply custom styles
+      ...views.label,
     },
   };
   return (
@@ -67,38 +95,109 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         readOnly={isReadOnly}
         {...props}
       />
-      {labelPosition === 'left' && label && <View>{label}</View>}
+      {/* Label on the left side */}
+      {labelPosition === 'left' && label && (
+        <Text
+          fontWeight="500" // Medium weight for better readability
+          color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
+          transition="all 0.2s ease"
+        >
+          {label}
+        </Text>
+      )}
+
+      {/* Switch slider */}
       <View
+        // Layout properties
         display="flex"
-        cursor="pointer"
         alignItems="center"
-        borderRadius={24}
-        marginBottom={5}
-        filter={isHovered && value ? 'brightness(0.9)' : 'brightness(1)'}
-        transition="justify-content 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
-        backgroundColor={
-          isDisabled ? 'disabled' : value ? colorScheme : 'lightgray'
-        }
         justifyContent={
-          activeChild ? 'space-between' : value ? 'flex-end' : 'flex-start'
+          value
+            ? activeChild
+              ? 'space-between'
+              : 'flex-end'
+            : inActiveChild
+            ? 'space-between'
+            : 'flex-start'
         }
+        marginBottom={4} // 1 × 4px grid
+        // Visual properties
+        borderRadius="9999px" // Full rounded for pill shape
+        backgroundColor={
+          isDisabled
+            ? ColorSchemes.default.disabled
+            : value
+            ? isHovered
+              ? ColorSchemes.states.hover.active
+              : ColorSchemes.default.active
+            : isHovered
+            ? ColorSchemes.states.hover.inactive
+            : ColorSchemes.default.inactive
+        }
+        overflow="hidden"
+        // State properties
+        cursor="pointer"
+        // Animation
+        transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+        // Apply styles
         {...shadow}
         {...SliderPadding[size]}
         {...SliderSizes[size]}
-        {...styles['slider']}
+        {...views['slider']}
       >
-        {activeChild && value && <View>{activeChild}</View>}
+        {/* Active content */}
+        {activeChild && value && (
+          <View
+            marginLeft={8} // 2 × 4px grid
+            marginRight={4} // 1 × 4px grid
+            transition="all 0.3s ease"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height="100%"
+          >
+            {activeChild}
+          </View>
+        )}
+
+        {/* Knob */}
         <View
           borderRadius="50%"
-          backgroundColor="white"
+          backgroundColor={ColorSchemes.default.knob}
+          boxShadow="0 1px 2px rgba(0, 0, 0, 0.1)"
+          transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+          zIndex={1} // Ensure knob is above content
           {...KnobSizes[size]}
-          {...styles['circle']}
+          {...views['circle']}
         />
-        {inActiveChild && !value && <View>{inActiveChild}</View>}
+
+        {/* Inactive content */}
+        {inActiveChild && !value && (
+          <View
+            marginRight={8} // 2 × 4px grid
+            marginLeft={4} // 1 × 4px grid
+            transition="all 0.3s ease"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            height="100%"
+          >
+            {inActiveChild}
+          </View>
+        )}
       </View>
-      {labelPosition === 'right' && label && <View>{label}</View>}
+
+      {/* Label on the right side */}
+      {labelPosition === 'right' && label && (
+        <Text
+          fontWeight="500" // Medium weight for better readability
+          color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
+          transition="all 0.2s ease"
+        >
+          {label}
+        </Text>
+      )}
     </Label>
   );
 };
-
 export default SwitchView;

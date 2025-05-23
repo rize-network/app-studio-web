@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
-import { Horizontal } from '../../Layout/Horizontal/Horizontal';
+import { Horizontal } from 'app-studio';
 
 import { Modal } from '../Modal';
 import { showModal } from '../Modal/Modal.store';
@@ -28,7 +28,7 @@ export const VariantModal = () => {
           SharpModal: () => (
             <Modal.Container>
               <Modal.Body>
-                <Text isTruncated maxLines={2}>
+                <Text maxLines={2}>
                   Cras mattis consectetur purus sit amet fermentum. Cras justo
                   odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
                   risus, porta ac consectetur ac, vestibulum at eros. Praesent
@@ -40,7 +40,7 @@ export const VariantModal = () => {
           RoundedModal: () => (
             <Modal.Container shape="rounded">
               <Modal.Body>
-                <Text isTruncated maxLines={2}>
+                <Text maxLines={2}>
                   Cras mattis consectetur purus sit amet fermentum. Cras justo
                   odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
                   risus, porta ac consectetur ac, vestibulum at eros. Praesent

@@ -3,6 +3,7 @@ import {
   BlurModal,
   CloseButtonModal,
   DefaultModal,
+  DesignSystemModal,
   FullScreenModal,
   ModalPosition,
   PreventClose,
@@ -12,10 +13,16 @@ import {
 } from 'src/components/Modal/Examples';
 
 export const ModalPage = () => (
-  <table className="table" cellSpacing={0}>
+  <table>
     <tr>
       <th>Property</th>
       <th>App-Studio</th>
+    </tr>
+    <tr>
+      <td>Design System</td>
+      <td>
+        <DesignSystemModal />
+      </td>
     </tr>
     <tr>
       <td>Default</td>

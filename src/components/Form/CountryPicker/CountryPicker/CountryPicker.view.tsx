@@ -6,40 +6,34 @@ import {
   FieldIcons,
   FieldLabel,
   FieldWrapper,
-} from '../../../Layout/Input';
-import { ArrowDownSvg } from '../../../Svg/ArrowDown';
-import { ArrowUpSvg } from '../../../Svg/ArrowUp';
+} from '../../../Input';
 
 import countryList from '../countries.json';
-
 import {
   CountryPickerViewProps,
   DropDownItemProps,
-  DropDownProps,
+  CountryPickerDropDownProps,
 } from './CountryPicker.props';
 import { IconSizes } from './CountryPicker.style';
 import { Country } from './CountryPicker.type';
-
-const CountryList: React.FC<DropDownProps> = (props) => (
-  <Element as="ul" {...props} />
-);
-
+import { ChevronIcon } from '../../../Icon/Icon';
+const CountryList: React.FC<CountryPickerDropDownProps> = ({
+  size,
+  ...props
+}) => <Element as="ul" {...props} />;
 const CountrySelector: React.FC<any> = (props) => (
   <Input type="country" {...props} />
 );
-
-const CountryItem: React.FC<DropDownItemProps> = (props) => (
+const CountryItem: React.FC<DropDownItemProps> = ({ size, ...props }) => (
   <Element as="li" {...props} />
 );
-
 export const DropDownItem: React.FC<DropDownItemProps> = ({
   option,
   size = 'md',
   callback = () => {},
-  styles = { text: {} },
+  views = { text: {} },
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-
   const handleOptionClick = (event: any) => {
     if (event && event.stopPropagation) event.stopPropagation();
     callback(option);
@@ -50,6 +44,7 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
       margin={0}
       role="DropDownItem"
       listStyleType="none"
+      fontWeight="normal"
       paddingVertical={6}
       paddingHorizontal={12}
       onMouseEnter={handleHover}
@@ -57,17 +52,16 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
       onClick={handleOptionClick}
       fontSize={Typography.fontSizes[size]}
       backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
-      {...styles['text']}
+      {...views['text']}
     >
       {option}
     </CountryItem>
   );
 };
-
-export const DropDown: React.FC<DropDownProps> = ({
+export const DropDown: React.FC<CountryPickerDropDownProps> = ({
   size,
-  styles = { dropDown: {} },
-  options,
+  views = { dropDown: {} },
+  options = [],
   callback = () => {},
 }) => {
   const handleCallback = (option: string) => callback(option);
@@ -85,9 +79,9 @@ export const DropDown: React.FC<DropDownProps> = ({
       borderRadius={4}
       position="absolute"
       flexDirection="column"
-      backgroundColor="white"
+      backgroundColor="color.white"
       boxShadow="rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px"
-      {...styles['dropDown']}
+      {...views['dropDown']}
     >
       {options.map((option: Country) => (
         <DropDownItem
@@ -95,14 +89,13 @@ export const DropDown: React.FC<DropDownProps> = ({
           size={size}
           option={option.name}
           callback={handleCallback}
-          {...styles['text']}
+          {...views['text']}
         />
       ))}
     </CountryList>
   );
 };
-
-const CountryPickerView: React.FC<CountryPickerViewProps> = ({
+export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   id,
   name,
   label,
@@ -121,7 +114,6 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   size = 'md',
   variant = 'default',
   shape = 'default',
-  colorScheme = 'theme.primary',
   onChange,
   onBlur = () => {},
   setHide = () => {},
@@ -129,28 +121,27 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   setIsHovered = () => {},
   setIsFocused = () => {},
   setValue = () => {},
-  styles = {
+  views = {
     text: {},
     icon: {},
     label: {},
     dropDown: {},
     helperText: {},
-    box: {},
   },
+  themeMode: elementMode,
   ...props
 }) => {
-  const { getColor } = useTheme();
-  const IconColor = getColor('color.blueGray.700');
-
+  const { getColor, themeMode } = useTheme();
+  const IconColor = getColor('color.blueGray.700', {
+    themeMode: elementMode ? elementMode : themeMode,
+  });
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
-
   const handleCallback = (option: string) => {
     setHide(!hide);
     setValue(option);
     if (onChange) onChange(option);
   };
-
   const handleClick = () => {
     if (!isDisabled && !isReadOnly) {
       setHide(!hide);
@@ -165,22 +156,16 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     setNewOptions(filteredCountries);
     if (onChange) onChange(valueCountry);
   };
-
   const handleBlur = (event: any) => {
     onBlur(event);
     setIsFocused(false);
   };
-
-  // useEffect(() => {
-  //   if (onChange) onChange(value); // Call onChange when valueCountry changes
-  // }, [onChange, value]);
-
-  const isWithLabel = !!(isFocused && label);
-
+  // Show label if it exists and either the field is focused or has a value
+  const showLabel = !!(label && (isFocused || value));
   const fieldStyles = {
     margin: 0,
-    paddingVerical: 8,
-    paddingHorizonatl: 0,
+    paddingVertical: 8,
+    paddingHorizontal: 0,
     width: '100%',
     heigth: '100%',
     border: 'none',
@@ -188,15 +173,14 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
     color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
-    cursor: isDisabled ? 'not-allowed' : 'auto',
-    ...styles['field'],
+    cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
+    ...views['field'],
   };
-
   return (
     <FieldContainer
       helperText={helperText}
       error={error}
-      styles={styles}
+      views={views}
       onClick={handleClick}
     >
       <FieldContent
@@ -204,27 +188,26 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         size={size}
         error={error}
         shape={shape}
-        styles={styles}
+        views={views}
         shadow={shadow}
         variant={variant}
         value={value}
-        color={colorScheme}
+        color={'theme.primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
-        isWithLabel={isWithLabel}
-        colorScheme={colorScheme}
+        showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
       >
         <FieldWrapper>
-          {isWithLabel && (
+          {showLabel && (
             <FieldLabel
               htmlFor={id}
-              color={colorScheme}
+              color={'theme.primary'}
               error={error}
-              {...styles}
+              {...views}
             >
               {label}
             </FieldLabel>
@@ -246,16 +229,18 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         </FieldWrapper>
         <FieldIcons>
           {hide ? (
-            <ArrowDownSvg
-              size={IconSizes[size]}
+            <ChevronIcon
+              orientation="down"
+              widthHeight={IconSizes[size]}
               color={IconColor}
-              style={styles['icon']}
+              style={views['icon']}
             />
           ) : (
-            <ArrowUpSvg
-              size={IconSizes[size]}
+            <ChevronIcon
+              orientation="up"
+              widthHeight={IconSizes[size]}
               color={IconColor}
-              style={styles['icon']}
+              style={views['icon']}
             />
           )}
         </FieldIcons>
@@ -263,7 +248,7 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
       {!hide && (
         <DropDown
           size={size}
-          styles={styles}
+          views={views}
           options={newOptions}
           callback={handleCallback}
         />
@@ -271,5 +256,3 @@ const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     </FieldContainer>
   );
 };
-
-export default CountryPickerView;
