@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Alert, Loader } from '../../components';
+import * as AllComponents from '../../components';
+import * as AppStudio from 'app-studio';
 import { Horizontal, Vertical } from 'app-studio';
 import { loadDocs } from '../../docsLoader';
 import * as runtime from 'react/jsx-runtime';
@@ -18,7 +20,7 @@ const DocsPage = () => {
     code: (props: any) => {
       const { className = '', children } = props;
       const language = className.replace('language-', '');
-      return <LiveCode code={children} language={language} scope={{ Alert }} />;
+      return <LiveCode code={children} language={language} scope={{ ...AllComponents, ...AppStudio, React }} />;
     },
   };
 
