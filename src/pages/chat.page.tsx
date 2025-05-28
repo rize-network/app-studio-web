@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, Vertical, Horizontal, Button } from 'app-studio';
-import { ChatInput, ChatInputHandles } from '../components/ChatInput';
+import { ChatInput } from '../components/ChatInput';
 import { PromptExample } from '../components/ChatInput/ChatInput/ChatInput.type';
 
 const ChatInputDemo = () => {
-  const chatInputRef = useRef<ChatInputHandles>(null);
+  const chatInputRef = useRef<any>(null);
 
   // State for messages
   const [messages, setMessages] = useState<
@@ -18,6 +18,10 @@ const ChatInputDemo = () => {
   const [showGuideTip, setShowGuideTip] = useState(false);
   const [showReferenceImage, setShowReferenceImage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  // State for upload simulation
+  const [isSimulatingUpload, setIsSimulatingUpload] = useState(false);
+  const [simulationProgress, setSimulationProgress] = useState(0);
 
   // Example prompt examples
   const promptExamples: PromptExample[] = [
@@ -70,6 +74,54 @@ const ChatInputDemo = () => {
     }
   };
 
+  // Simulate upload functionality like in upload.page.tsx
+  const simulateUpload = () => {
+    // Create some mock files for demonstration
+    const mockFiles = [
+      new File(['mock content 1'], 'document.pdf', { type: 'application/pdf' }),
+      new File(['mock content 2'], 'image.jpg', { type: 'image/jpeg' }),
+      new File(['mock content 3'], 'spreadsheet.xlsx', {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      }),
+    ];
+
+    // Log file info for debugging
+    console.log(
+      'Simulating upload of files:',
+      mockFiles.map((f) => ({
+        name: f.name,
+        type: f.type,
+        size: f.size,
+      }))
+    );
+
+    setIsSimulatingUpload(true);
+    setSimulationProgress(0);
+
+    const interval = setInterval(() => {
+      setSimulationProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsSimulatingUpload(false);
+
+          // Add a message to show the upload completed
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            {
+              text: `Upload simulation completed! Files: ${mockFiles
+                .map((f) => f.name)
+                .join(', ')}`,
+              sender: 'bot',
+            },
+          ]);
+
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 300); // Same timing as upload.page.tsx
+  };
+
   // Toggle feature buttons
   const toggleFeature = (feature: 'guide' | 'reference' | 'error') => {
     if (feature === 'guide') {
@@ -102,6 +154,15 @@ const ChatInputDemo = () => {
         </Button>
         <Button onClick={() => toggleFeature('error')}>
           {errorMessage ? 'Clear Error' : 'Show Error'}
+        </Button>
+        <Button
+          onClick={simulateUpload}
+          disabled={isSimulatingUpload}
+          variant={isSimulatingUpload ? 'filled' : 'outline'}
+        >
+          {isSimulatingUpload
+            ? `Uploading... ${simulationProgress}%`
+            : 'Simulate Upload'}
         </Button>
       </Horizontal>
 
@@ -222,6 +283,81 @@ const ChatInputDemo = () => {
               },
             }}
           />
+        </View>
+
+        <View gap={24}>
+          <Text fontSize="16px" fontWeight="bold">
+            Multiple File Upload Demo
+          </Text>
+          <Text fontSize="14px" color="color.gray.600" marginBottom="8px">
+            This ChatInput demonstrates multiple file upload capabilities. Try
+            uploading multiple files at once!
+          </Text>
+          <ChatInput
+            onSubmit={(
+              message: string,
+              options?: { model_name?: string; enable_thinking?: boolean }
+            ) => {
+              console.log('Message with files:', message);
+              console.log('Options:', options);
+              handleSubmit(message, options);
+            }}
+            placeholder="Upload multiple files and send a message..."
+            shape="rounded"
+            variant="outline"
+            views={{
+              container: {
+                backgroundColor: 'color.green.50',
+                borderRadius: '12px',
+              },
+              content: {
+                borderColor: 'color.green.200',
+                minHeight: '80px',
+              },
+              submitButton: {
+                backgroundColor: 'color.green.500',
+              },
+              fileButton: {
+                color: 'color.green.600',
+                _hover: {
+                  backgroundColor: 'color.green.100',
+                },
+              },
+            }}
+          />
+        </View>
+
+        <View gap={24}>
+          <Text fontSize="16px" fontWeight="bold">
+            File Upload Guidelines
+          </Text>
+          <View
+            padding="16px"
+            backgroundColor="color.blue.50"
+            borderRadius="8px"
+          >
+            <Text fontSize="14px" fontWeight="600" marginBottom="8px">
+              Multiple File Upload Features:
+            </Text>
+            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+              • Select multiple files at once using Ctrl/Cmd + click
+            </Text>
+            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+              • Drag and drop multiple files into the chat input
+            </Text>
+            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+              • Maximum file size: 50MB per file
+            </Text>
+            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+              • Supports all file types: images, documents, videos, etc.
+            </Text>
+            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+              • Files are validated before upload
+            </Text>
+            <Text fontSize="12px" color="color.gray.700">
+              • Preview and remove files before sending
+            </Text>
+          </View>
         </View>
       </Vertical>
     </View>

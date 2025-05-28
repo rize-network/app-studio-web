@@ -26,6 +26,7 @@ export interface UploadedFile {
   size: number;
   type: string;
   localUrl?: string;
+  isReferenceImage?: boolean;
 }
 
 /**
@@ -68,6 +69,7 @@ export interface ChatInputStyles {
   attachmentName?: ViewProps;
   attachmentSize?: ViewProps;
   attachmentRemove?: ViewProps;
+  referenceButton?: ViewProps;
   submitButton?: ViewProps;
   fileButton?: ViewProps;
   modelSelector?: ViewProps;

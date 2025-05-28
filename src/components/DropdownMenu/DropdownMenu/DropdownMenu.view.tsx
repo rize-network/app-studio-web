@@ -18,7 +18,7 @@ import {
   DropdownMenuItemStates,
   getDropdownPosition,
 } from './DropdownMenu.style';
-import { ChevronRightIcon } from '../../Icon/Icon';
+import { ChevronIcon } from '../../Icon/Icon';
 
 // Create context for the DropdownMenu
 const DropdownMenuContext = createContext<DropdownMenuContextType>({
@@ -191,7 +191,8 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
 
       {hasSubmenu && (
         <View marginLeft={8} {...views?.submenuIndicator}>
-          <ChevronRightIcon
+          <ChevronIcon
+            orientation="right"
             widthHeight={16}
             color="currentColor"
             filled={true}

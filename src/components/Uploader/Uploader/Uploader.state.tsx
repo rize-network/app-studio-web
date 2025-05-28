@@ -34,8 +34,10 @@ export const generateThumbnail = (
 export const useUpload = ({
   maxSize = 100 * 1024 * 1024, // 100MB default
   onFileSelect,
+  onMultipleFileSelect,
   validateFile,
   thumbnail,
+  multiple = false,
   onError = (error: string) => {
     showMessage('error', 'Error', error);
   },
@@ -43,6 +45,7 @@ export const useUpload = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(
@@ -51,44 +54,87 @@ export const useUpload = ({
 
   const handleFileChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0];
+      const files = event.target.files;
       setErrorMessage(null);
 
-      if (!file) {
+      if (!files || files.length === 0) {
         onError('No file selected');
         setErrorMessage('No file selected');
         return;
       }
 
-      if (file.size > maxSize) {
-        onError(`File exceeds ${Math.round(maxSize / (1024 * 1024))}MB.`);
-        setErrorMessage(
-          `File exceeds ${Math.round(maxSize / (1024 * 1024))}MB.`
-        );
-        return;
-      }
+      if (multiple) {
+        // Handle multiple files
+        const fileArray = Array.from(files);
+        const validFiles: File[] = [];
 
-      if (validateFile) {
-        const validationError = validateFile(file);
-        if (validationError) {
-          onError(validationError);
-          setErrorMessage(validationError);
+        for (const file of fileArray) {
+          if (file.size > maxSize) {
+            onError(
+              `File ${file.name} exceeds ${Math.round(
+                maxSize / (1024 * 1024)
+              )}MB.`
+            );
+            setErrorMessage(
+              `File ${file.name} exceeds ${Math.round(
+                maxSize / (1024 * 1024)
+              )}MB.`
+            );
+            continue;
+          }
+
+          if (validateFile) {
+            const validationError = validateFile(file);
+            if (validationError) {
+              onError(`${file.name}: ${validationError}`);
+              setErrorMessage(`${file.name}: ${validationError}`);
+              continue;
+            }
+          }
+
+          validFiles.push(file);
+        }
+
+        if (validFiles.length > 0) {
+          setSelectedFiles(validFiles);
+          if (onMultipleFileSelect) {
+            onMultipleFileSelect(validFiles);
+          }
+        }
+      } else {
+        // Handle single file (existing logic)
+        const file = files[0];
+
+        if (file.size > maxSize) {
+          onError(`File exceeds ${Math.round(maxSize / (1024 * 1024))}MB.`);
+          setErrorMessage(
+            `File exceeds ${Math.round(maxSize / (1024 * 1024))}MB.`
+          );
           return;
         }
-      }
 
-      setPreviewUrl(URL.createObjectURL(file));
+        if (validateFile) {
+          const validationError = validateFile(file);
+          if (validationError) {
+            onError(validationError);
+            setErrorMessage(validationError);
+            return;
+          }
+        }
 
-      if (file.type.startsWith('video/')) {
-        generateThumbnail(file, setThumbnailUrl);
-      }
+        setPreviewUrl(URL.createObjectURL(file));
 
-      if (onFileSelect) {
-        setSelectedFile(file);
-        onFileSelect(file);
+        if (file.type.startsWith('video/')) {
+          generateThumbnail(file, setThumbnailUrl);
+        }
+
+        if (onFileSelect) {
+          setSelectedFile(file);
+          onFileSelect(file);
+        }
       }
     },
-    [maxSize, onFileSelect, validateFile]
+    [maxSize, onFileSelect, onMultipleFileSelect, validateFile, multiple]
   );
 
   const handleClick = () => fileInputRef.current?.click();
@@ -107,6 +153,7 @@ export const useUpload = ({
     fileInputRef,
     videoRef,
     selectedFile,
+    selectedFiles,
     handleFileChange,
     handleClick,
   };

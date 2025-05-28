@@ -15,8 +15,10 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   fileInputRef,
   videoRef,
   selectedFile,
+  selectedFiles,
   handleFileChange,
   handleClick,
+  multiple = false,
   containerProps,
   errorMessageProps,
   progressProps,
@@ -191,6 +193,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
         ref={fileInputRef}
         onChange={handleFileChange}
         accept={accept}
+        multiple={multiple}
         style={{ display: 'none' }}
         {...views?.view}
       />

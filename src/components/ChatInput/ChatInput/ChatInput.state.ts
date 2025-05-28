@@ -34,6 +34,8 @@ export const useChatInputState = (props: ChatInputProps) => {
   const [isUploading, setIsUploading] = useState(false);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
+  // Reference images are now tracked within uploadedFiles using isReferenceImage flag
+
   // State for model selection
   const [selectedModel, setSelectedModel] = useState('gpt-4');
   const [modelOptions] = useState<ModelOption[]>([
@@ -100,9 +102,25 @@ export const useChatInputState = (props: ChatInputProps) => {
 
     let message = value;
 
+    // Separate reference images from regular files
+    const referenceFiles = uploadedFiles.filter(
+      (file) => file.isReferenceImage
+    );
+    const regularFiles = uploadedFiles.filter((file) => !file.isReferenceImage);
+
+    // Add reference image information to the message if reference images are uploaded
+    if (referenceFiles.length > 0) {
+      const referenceImageInfo = referenceFiles
+        .map((image) => `[Reference Image: ${image.path}]`)
+        .join('\n');
+      message = message
+        ? `${referenceImageInfo}\n\n${message}`
+        : referenceImageInfo;
+    }
+
     // Add file information to the message if files are uploaded
-    if (uploadedFiles.length > 0) {
-      const fileInfo = uploadedFiles
+    if (regularFiles.length > 0) {
+      const fileInfo = regularFiles
         .map((file) => `[Uploaded File: ${file.path}]`)
         .join('\n');
       message = message ? `${message}\n\n${fileInfo}` : fileInfo;
@@ -128,7 +146,7 @@ export const useChatInputState = (props: ChatInputProps) => {
       setUncontrolledValue('');
     }
 
-    // Clear uploaded files
+    // Clear uploaded files (including reference images)
     setUploadedFiles([]);
   };
 
@@ -199,6 +217,66 @@ export const useChatInputState = (props: ChatInputProps) => {
     }
   };
 
+  // Handle reference image upload
+  const handleReferenceImageUpload = (files: File[]) => {
+    const imageFiles = files.filter((file) => file.type.startsWith('image/'));
+
+    if (imageFiles.length === 0) {
+      console.error('Only image files are allowed as reference images');
+      return;
+    }
+
+    // Clear existing reference images first
+    const updatedFiles = uploadedFiles.map((file) => ({
+      ...file,
+      isReferenceImage: false,
+    }));
+
+    // Create reference image objects (only take the first one)
+    const newReferenceImage: UploadedFile = {
+      name: imageFiles[0].name,
+      path: `/workspace/${imageFiles[0].name}`,
+      size: imageFiles[0].size,
+      type: imageFiles[0].type,
+      localUrl: URL.createObjectURL(imageFiles[0]),
+      isReferenceImage: true,
+    };
+
+    // Add to pending files
+    setPendingFiles((prevFiles) => [...prevFiles, imageFiles[0]]);
+
+    // Add the reference image to uploaded files
+    setUploadedFiles([...updatedFiles, newReferenceImage]);
+  };
+
+  // Remove reference image
+  const removeReferenceImage = () => {
+    // Clear reference image flag from all uploaded files
+    const updatedFiles = uploadedFiles.map((file) => ({
+      ...file,
+      isReferenceImage: false,
+    }));
+    setUploadedFiles(updatedFiles);
+  };
+
+  // Set an uploaded file as reference image
+  const setFileAsReference = (fileIndex: number) => {
+    const file = uploadedFiles[fileIndex];
+
+    if (!file || !file.type.startsWith('image/')) {
+      console.error('Only image files can be set as reference images');
+      return;
+    }
+
+    // Update the files to mark only the selected one as reference image
+    const updatedFiles = uploadedFiles.map((f, index) => ({
+      ...f,
+      isReferenceImage: index === fileIndex,
+    }));
+
+    setUploadedFiles(updatedFiles);
+  };
+
   return {
     value,
     handleChange,
@@ -225,5 +303,8 @@ export const useChatInputState = (props: ChatInputProps) => {
     isReferenceImageModalShown,
     toggleReferenceImageModal,
     handlePromptExampleSelect,
+    handleReferenceImageUpload,
+    removeReferenceImage,
+    setFileAsReference,
   };
 };

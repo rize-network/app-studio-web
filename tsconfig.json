@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "CommonJS",
+    "module": "esnext",
     "lib": ["dom", "dom.iterable", "esnext", "es2018.promise", "es2020.bigint", "es2020.string", "es2020.symbol.wellknown"],
     "allowJs": true,
     "importHelpers": true,
@@ -31,7 +31,7 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    
+
     "types": ["react-scripts"],
     "baseUrl": "./",
     "rootDir": "./",

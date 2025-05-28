@@ -25,7 +25,7 @@ import {
   ContextMenuItemStates,
   calculateMenuPosition,
 } from './ContextMenu.style';
-import { ChevronRightIcon } from '../../Icon/Icon';
+import { ChevronIcon } from '../../Icon/Icon';
 
 // Create context for the ContextMenu
 const ContextMenuContext = createContext<ContextMenuContextType>({
@@ -299,7 +299,8 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
 
         {hasSubmenu && (
           <View marginLeft={8} {...views?.submenuIndicator}>
-            <ChevronRightIcon
+            <ChevronIcon
+              orientation="right"
               widthHeight={16}
               color="currentColor"
               filled={true}

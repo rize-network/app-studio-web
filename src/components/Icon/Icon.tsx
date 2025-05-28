@@ -70,9 +70,14 @@ export const UserIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="true"
       focusable="false"
-      {...getSvgProps(filled, color, strokeWidth)}
+      fill={filled ? color : 'none'}
+      stroke={filled ? 'none' : color}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 20c0-4 4-7 8-7s8 3 8 7" />
     </svg>
   </IconWrapper>
 );
@@ -139,6 +144,7 @@ export const ChevronIcon: React.FC<IconProps> = ({
   color = 'currentColor',
   filled = true,
   strokeWidth = 1,
+
   ...props
 }) => (
   <IconWrapper widthHeight={widthHeight} color={color} {...props}>
@@ -148,7 +154,10 @@ export const ChevronIcon: React.FC<IconProps> = ({
       focusable="false"
       {...getSvgProps(filled, color, strokeWidth)}
     >
-      <path d="M12.771 7.115a.829.829 0 0 0-1.2 0L3 15.686l1.2 1.2 7.971-7.971 7.972 7.971 1.2-1.2-8.572-8.571Z" />
+      <path
+        d="M7.41 15.41L12 10.83L16.59 15.41L18 14L12 8L6 14L7.41 15.41Z"
+        fill="currentColor"
+      />
     </svg>
   </IconWrapper>
 );
@@ -182,11 +191,10 @@ export const DragHandleIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
-// File Icon Component
 export const FileIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',
-  filled = true,
+  filled = false,
   strokeWidth = 1,
   ...props
 }) => (
@@ -195,20 +203,12 @@ export const FileIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       aria-hidden="true"
       focusable="false"
-      {...getSvgProps(filled, color, strokeWidth)}
+      fill={filled ? color : 'none'}
+      stroke={filled ? 'none' : color}
+      strokeWidth={strokeWidth}
     >
-      <path
-        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
-        fill={filled ? color : 'none'}
-        stroke={filled ? 'none' : color}
-        strokeWidth={filled ? 0 : strokeWidth}
-      />
-      <polyline
-        points="14 2 14 8 20 8"
-        fill="none"
-        stroke={color}
-        strokeWidth={strokeWidth}
-      />
+      <path d="M6 2H14L20 8V20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20V4C4 2.9 4.9 2 6 2Z" />
+      <path d="M14 2V8H20" />
     </svg>
   </IconWrapper>
 );
@@ -377,7 +377,7 @@ export const CloseIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',
   filled = false,
-  strokeWidth = 1,
+  strokeWidth = 2,
   ...props
 }) => (
   <IconWrapper widthHeight={widthHeight} color={color} {...props}>
@@ -956,35 +956,6 @@ export const MagicWandIcon: React.FC<IconProps> = ({
     </svg>
   </IconWrapper>
 );
-
-export const SliderVerticalIcon: React.FC<IconProps> = ({
-  widthHeight = 24,
-  color = 'currentColor',
-  strokeWidth = 1,
-  filled = false,
-
-  ...props
-}) => (
-  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="false"
-      focusable="false"
-      {...getSvgProps(filled, color, strokeWidth)}
-    >
-      <line stroke={color} x1="4" y1="21" x2="4" y2="14"></line>
-      <line stroke={color} x1="4" y1="10" x2="4" y2="3"></line>
-      <line stroke={color} x1="12" y1="21" x2="12" y2="12"></line>
-      <line stroke={color} x1="12" y1="8" x2="12" y2="3"></line>
-      <line stroke={color} x1="20" y1="21" x2="20" y2="16"></line>
-      <line stroke={color} x1="20" y1="12" x2="20" y2="3"></line>
-      <line stroke={color} x1="1" y1="14" x2="7" y2="14"></line>
-      <line stroke={color} x1="9" y1="8" x2="15" y2="8"></line>
-      <line stroke={color} x1="17" y1="16" x2="23" y2="16"></line>
-    </svg>
-  </IconWrapper>
-);
-
 export const PanelIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',
@@ -1513,52 +1484,6 @@ export const DragHandleLinesIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
-// ChevronDown Icon for dropdown menus
-export const ChevronDownIcon: React.FC<IconProps> = ({
-  widthHeight = 24,
-  color = 'currentColor',
-  filled = true,
-  strokeWidth = 1,
-  ...props
-}) => (
-  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="false"
-      focusable="false"
-      {...getSvgProps(filled, color, strokeWidth)}
-    >
-      <path
-        d="M16.59 8.59L12 13.17L7.41 8.59L6 10L12 16L18 10L16.59 8.59Z"
-        fill="currentColor"
-      />
-    </svg>
-  </IconWrapper>
-);
-
-// ChevronRight Icon for submenu indicators
-export const ChevronRightIcon: React.FC<IconProps> = ({
-  widthHeight = 24,
-  color = 'currentColor',
-  filled = true,
-  strokeWidth = 1,
-  ...props
-}) => (
-  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="false"
-      focusable="false"
-      {...getSvgProps(filled, color, strokeWidth)}
-    >
-      <path
-        d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z"
-        fill="currentColor"
-      />
-    </svg>
-  </IconWrapper>
-);
-
 export const CloseEyeIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',
@@ -1582,6 +1507,29 @@ export const CloseEyeIcon: React.FC<IconProps> = ({
 );
 
 export const TrashIcon = DeleteIcon;
+
+export const AttachmentIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      width={widthHeight}
+      height={widthHeight}
+      viewBox="0 0 24 24"
+      {...getSvgProps(filled, color, strokeWidth)}
+    >
+      <path
+        // fillRule="evenodd"
+        // clipRule="evenodd"
+        d="M3.70104 5.15932C3.0938 3.61775 3.85122 1.8758 5.39278 1.26856L5.56558 1.2005C7.10714 0.593259 8.84909 1.35068 9.45633 2.89225L13.071 12.0685C13.4252 12.9677 12.9833 13.9839 12.0841 14.3381L11.9977 14.3721C11.0985 14.7264 10.0823 14.2845 9.72809 13.3853L7.81051 8.5172C7.7093 8.26027 7.83554 7.96995 8.09247 7.86874C8.34939 7.76753 8.63972 7.89377 8.74092 8.1507L10.6585 13.0188C10.8103 13.4042 11.2458 13.5935 11.6312 13.4417L11.7176 13.4077C12.103 13.2559 12.2923 12.8204 12.1405 12.435L8.52592 3.25875C8.12109 2.23104 6.95979 1.72609 5.93208 2.13092L5.75929 2.19898C4.73158 2.60381 4.22663 3.76511 4.63145 4.79282L8.99282 15.8648C9.65066 17.5348 11.5378 18.3554 13.2078 17.6975L13.467 17.5954C15.137 16.9376 15.9576 15.0505 15.2997 13.3804L12.6354 6.61663C12.5342 6.3597 12.6604 6.06938 12.9173 5.96817C13.1743 5.86696 13.4646 5.9932 13.5658 6.25013L16.2301 13.0139C17.0904 15.1978 16.0174 17.6656 13.8335 18.5258L13.5743 18.6279C11.3904 19.4882 8.92266 18.4152 8.0624 16.2313L3.70104 5.15932Z"
+      ></path>{' '}
+    </svg>
+  </IconWrapper>
+);
 
 export const ExternalLinkIcon: React.FC<IconProps> = ({
   widthHeight = 24,
@@ -1739,11 +1687,8 @@ export const SliderIcon: React.FC<IconProps> = ({
       <line x1="14" y1="4" x2="21" y2="4" />
       <line x1="3" y1="12" x2="12" y2="12" />
       <line x1="16" y1="12" x2="21" y2="12" />
-      <line x1="3" y1="20" x2="8" y2="20" />
-      <line x1="12" y1="20" x2="21" y2="20" />
       <line x1="10" y1="1" x2="10" y2="7" />
       <line x1="16" y1="9" x2="16" y2="15" />
-      <line x1="8" y1="17" x2="8" y2="23" />
     </svg>
   </IconWrapper>
 );

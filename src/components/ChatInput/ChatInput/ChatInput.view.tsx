@@ -11,12 +11,17 @@ import {
 } from './ChatInput.style';
 import { AttachmentGroup } from '../AttachmentGroup';
 import { EditableInput } from '../EditableInput';
-import { FileUploadHandler } from '../FileUploadHandler';
+import { Uploader } from '../../Uploader/Uploader';
 import { PromptExamples } from '../PromptExamples';
 import { ReferenceImageButton } from '../ReferenceImageButton';
 import { ReferenceImageModal } from '../ReferenceImageModal';
 import { Loader } from '../../Loader/Loader';
-import { StopIcon, SendIcon, LoadingSpinnerIcon } from '../../Icon/Icon';
+import {
+  StopIcon,
+  SendIcon,
+  LoadingSpinnerIcon,
+  AttachmentIcon,
+} from '../../Icon/Icon';
 
 const ChatInputView: React.FC<ChatInputViewProps> = ({
   // Props from parent
@@ -26,9 +31,11 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   disabled = false,
   isAgentRunning = false,
   onStopAgent,
+  loadingText = 'Agent is working...',
   autoFocus = true,
   sandboxId,
   hideAttachments = false,
+  attachmentText = '',
   promptExamples = [],
   showReferenceImageButton = false,
   errorMessage,
@@ -60,6 +67,11 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   isReferenceImageModalShown,
   toggleReferenceImageModal,
   handlePromptExampleSelect,
+  handleDragOver,
+  handleDragLeave,
+  handleReferenceImageUpload,
+  removeReferenceImage,
+  setFileAsReference,
 
   // Other props
   ...props
@@ -85,6 +97,36 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   // Determine if the submit button should be enabled
   const hasText = (value?.trim().length ?? 0) > 0 || uploadedFiles.length > 0;
 
+  // Handle multiple file uploads for the Uploader component
+  const handleMultipleFileUpload = (files: File[]) => {
+    // Filter files that exceed size limit (50MB)
+    const filteredFiles = files.filter((file) => {
+      if (file.size > 50 * 1024 * 1024) {
+        console.error(`File size exceeds 50MB limit: ${file.name}`);
+        return false;
+      }
+      return true;
+    });
+
+    if (filteredFiles.length > 0) {
+      // Add files to pending files
+      setPendingFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
+
+      // Create uploaded file objects
+      const newUploadedFiles = filteredFiles.map((file: File) => ({
+        name: file.name,
+        path: `/workspace/${file.name}`,
+        size: file.size,
+        type: file.type || 'application/octet-stream',
+        localUrl: URL.createObjectURL(file),
+        isReferenceImage: false,
+      }));
+
+      // Add files to uploaded files
+      setUploadedFiles((prev) => [...prev, ...newUploadedFiles]);
+    }
+  };
+
   return (
     <View
       display="flex"
@@ -93,36 +135,28 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
       boxSizing="border-box"
       {...containerStyles}
       {...props}
-      onDragOver={(e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (fileInputRef.current) {
-          props.handleDragOver?.(e);
-        }
-      }}
-      onDragLeave={(e: React.DragEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-        props.handleDragLeave?.(e);
-      }}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
       onDrop={(e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
-        props.handleDragLeave?.(e);
+        handleDragLeave(e);
 
-        if (fileInputRef.current && e.dataTransfer.files.length > 0) {
+        if (e.dataTransfer.files.length > 0) {
           const files = Array.from(e.dataTransfer.files) as File[];
-          setPendingFiles((prevFiles) => [...prevFiles, ...files]);
 
-          const newUploadedFiles = files.map((file: File) => ({
-            name: file.name,
-            path: `/workspace/${file.name}`,
-            size: file.size,
-            type: file.type || 'application/octet-stream',
-            localUrl: URL.createObjectURL(file),
-          }));
+          // Separate image files from other files
+          const imageFiles = files.filter((file) =>
+            file.type.startsWith('image/')
+          );
 
-          setUploadedFiles((prev) => [...prev, ...newUploadedFiles]);
+          // Handle image files as reference images if reference image modal is open
+          if (isReferenceImageModalShown && imageFiles.length > 0) {
+            handleReferenceImageUpload(imageFiles);
+          } else {
+            // Use the same file handling logic as the Uploader component
+            handleMultipleFileUpload(files);
+          }
         }
       }}
     >
@@ -138,8 +172,34 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
         />
       )}
 
+      {isAgentRunning && (
+        <Horizontal
+          justifyContent="center"
+          alignItems="center"
+          gap={8}
+          padding="8px 0"
+          animate={{
+            from: { opacity: 0, y: -10 },
+            to: { opacity: 1, y: 0 },
+            duration: '0.3s',
+          }}
+          // animationDuration="0.3s"
+          {...views?.loadingIndicator}
+        >
+          <LoadingSpinnerIcon
+            widthHeight={12}
+            color="currentColor"
+            filled={false}
+            style={{ animation: 'spin 1s linear infinite' }}
+          />
+          <Text fontSize="12px" color="color.gray.500">
+            {loadingText}
+          </Text>
+        </Horizontal>
+      )}
+
       {/* Header */}
-      <Horizontal
+      {/* <Horizontal
         justifyContent="space-between"
         alignItems="center"
         {...views?.header}
@@ -147,22 +207,30 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
         {showReferenceImageButton && (
           <ReferenceImageButton
             onClick={toggleReferenceImageModal}
+            hasReferenceImage={uploadedFiles.some(
+              (file) => file.isReferenceImage
+            )}
             views={{
               button: views?.referenceImageButton,
             }}
           />
         )}
-      </Horizontal>
+      </Horizontal> */}
 
       {/* Reference Image Modal */}
       <View position="relative" width="100%">
-        <ReferenceImageModal
+        {/* <ReferenceImageModal
           isOpen={isReferenceImageModalShown}
           onClose={toggleReferenceImageModal}
+          referenceImages={uploadedFiles.filter(
+            (file) => file.isReferenceImage
+          )}
+          onReferenceImageUpload={handleReferenceImageUpload}
+          onRemoveReferenceImage={removeReferenceImage}
           views={{
             container: views?.referenceImageModal,
           }}
-        />
+        /> */}
 
         {/* Input Area */}
         <View
@@ -185,12 +253,14 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             files={uploadedFiles}
             sandboxId={sandboxId}
             onRemove={removeUploadedFile}
+            onSetAsReference={setFileAsReference}
             views={{
               container: views?.attachments,
               item: views?.attachmentItem,
               name: views?.attachmentName,
               size: views?.attachmentSize,
               removeButton: views?.attachmentRemove,
+              referenceButton: views?.referenceButton,
             }}
           />
 
@@ -218,18 +288,46 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             <Horizontal gap={8} alignItems="center">
               {/* File Upload Button */}
               {!hideAttachments && (
-                <FileUploadHandler
-                  ref={fileInputRef}
-                  loading={loading}
-                  disabled={disabled}
-                  isAgentRunning={isAgentRunning}
-                  isUploading={isUploading}
-                  sandboxId={sandboxId}
-                  setPendingFiles={setPendingFiles}
-                  setUploadedFiles={setUploadedFiles}
-                  setIsUploading={setIsUploading}
+                <Uploader
+                  accept="*/*"
+                  icon={<AttachmentIcon widthHeight={16} />}
+                  maxSize={50 * 1024 * 1024} // 50MB limit
+                  multiple={true}
+                  onMultipleFileSelect={handleMultipleFileUpload}
+                  isLoading={isUploading}
+                  text={attachmentText}
+                  fileType="file"
                   views={{
-                    button: views?.fileButton,
+                    container: {
+                      height: '36px',
+                      margin: '0 12px',
+                      // borderRadius: '8px',
+                      // backgroundColor: 'transparent',
+                      // border: '1px solid',
+                      // borderColor: 'color.gray.300',
+                      cursor: 'pointer',
+                      _hover: {
+                        backgroundColor: 'color.gray.100',
+                      },
+                      ...views?.fileButton,
+                      ...containerStyles,
+                    },
+                  }}
+                  containerProps={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 4,
+                  }}
+                  textProps={{
+                    fontSize: '14px',
+                    color: 'color.gray.600',
+                  }}
+                  validateFile={(file: File) => {
+                    if (file.size > 50 * 1024 * 1024) {
+                      return 'File size exceeds 50MB limit';
+                    }
+                    return null;
                   }}
                 />
               )}
@@ -299,31 +397,6 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
       )}
 
       {/* Agent Running Indicator */}
-      {isAgentRunning && (
-        <Horizontal
-          justifyContent="center"
-          alignItems="center"
-          gap={8}
-          padding="8px 0"
-          animate={{
-            from: { opacity: 0, y: -10 },
-            to: { opacity: 1, y: 0 },
-            duration: '0.3s',
-          }}
-          // animationDuration="0.3s"
-          {...views?.loadingIndicator}
-        >
-          <LoadingSpinnerIcon
-            widthHeight={12}
-            color="currentColor"
-            filled={false}
-            style={{ animation: 'spin 1s linear infinite' }}
-          />
-          <Text fontSize="12px" color="color.gray.500">
-            Agent is working...
-          </Text>
-        </Horizontal>
-      )}
     </View>
   );
 };

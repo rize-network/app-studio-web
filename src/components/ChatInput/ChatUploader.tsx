@@ -1,15 +1,17 @@
 'use client';
 
 import React, { forwardRef, useEffect } from 'react';
-import { Button, Horizontal, Text, useTheme } from 'app-studio';
+import { Button, Horizontal } from 'app-studio';
+import { useUpload } from '../Uploader/Uploader/Uploader.state';
 import { UploadedFile } from './ChatInput/ChatInput.type';
-import { LoadingSpinnerIcon, UploadIcon } from '../Icon/Icon';
+import { AttachmentIcon, LoadingSpinnerIcon } from '../Icon/Icon';
 
-interface FileUploadHandlerProps {
+interface ChatUploaderProps {
   loading: boolean;
   disabled: boolean;
   isAgentRunning: boolean;
   isUploading: boolean;
+  hideAttachments?: boolean;
   sandboxId?: string;
   setPendingFiles: React.Dispatch<React.SetStateAction<File[]>>;
   setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>;
@@ -69,10 +71,7 @@ const handleFiles = async (
   handleLocalFiles(files, setPendingFiles, setUploadedFiles);
 };
 
-export const FileUploadHandler = forwardRef<
-  HTMLInputElement,
-  FileUploadHandlerProps
->(
+export const ChatUploader = forwardRef<HTMLInputElement, ChatUploaderProps>(
   (
     {
       loading,
@@ -80,6 +79,7 @@ export const FileUploadHandler = forwardRef<
       isAgentRunning,
       isUploading,
       sandboxId,
+      hideAttachments,
       setPendingFiles,
       setUploadedFiles,
       setIsUploading,
@@ -87,7 +87,33 @@ export const FileUploadHandler = forwardRef<
     },
     ref
   ) => {
-    const { getColor } = useTheme();
+    // Validate file size (50MB limit for chat)
+    const validateFile = (file: File): string | null => {
+      if (file.size > 50 * 1024 * 1024) {
+        return `File size exceeds 50MB limit`;
+      }
+      return null;
+    };
+
+    // Handle multiple file selection
+    const handleMultipleFileSelect = async (files: File[]) => {
+      await handleFiles(
+        files,
+        sandboxId,
+        setPendingFiles,
+        setUploadedFiles,
+        setIsUploading
+      );
+    };
+
+    // Use the Uploader hook for file handling
+    const { fileInputRef, handleClick, handleFileChange } = useUpload({
+      accept: '*/*',
+      maxSize: 50 * 1024 * 1024, // 50MB limit
+      multiple: true,
+      onMultipleFileSelect: handleMultipleFileSelect,
+      validateFile,
+    });
 
     // Clean up object URLs when component unmounts
     useEffect(() => {
@@ -103,84 +129,57 @@ export const FileUploadHandler = forwardRef<
       };
     }, [setUploadedFiles]);
 
-    // Handle file upload button click
-    const handleFileUpload = () => {
-      if (ref && 'current' in ref && ref.current) {
-        ref.current.click();
-      }
-    };
-
-    // Process file upload
-    const processFileUpload = async (
-      event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-      if (!event.target.files || event.target.files.length === 0) return;
-
-      const files = Array.from(event.target.files);
-
-      // Handle files
-      handleFiles(
-        files,
-        sandboxId,
-        setPendingFiles,
-        setUploadedFiles,
-        setIsUploading
-      );
-
-      // Reset the input value
-      event.target.value = '';
-    };
-
     return (
       <>
-        <Button
-          type="button"
-          onClick={handleFileUpload}
-          variant="ghost"
-          height="36px"
-          padding="0 12px"
-          borderRadius="8px"
-          backgroundColor="transparent"
-          color="color.gray.500"
-          disabled={loading || (disabled && !isAgentRunning) || isUploading}
-          _hover={{
-            backgroundColor: 'color.gray.100',
-          }}
-          {...views?.button}
-        >
-          <Horizontal gap={4} alignItems="center">
-            {isUploading ? (
-              <LoadingSpinnerIcon
-                widthHeight={16}
-                color="currentColor"
-                filled={false}
-                style={{ animation: 'spin 1s linear infinite' }}
-                {...views?.icon}
-              />
-            ) : (
-              <UploadIcon
-                widthHeight={16}
-                color="currentColor"
-                filled={false}
-                {...views?.icon}
-              />
-            )}
-            <Text fontSize="14px" {...views?.text}>
-              Attachments
-            </Text>
-          </Horizontal>
-        </Button>
+        {hideAttachments && (
+          <Button
+            type="button"
+            onClick={handleClick}
+            variant="ghost"
+            height="36px"
+            padding="0 12px"
+            border={'1px solid'}
+            borderRadius="8px"
+            backgroundColor="transparent"
+            color="color.gray.500"
+            disabled={loading || (disabled && !isAgentRunning) || isUploading}
+            _hover={{
+              backgroundColor: 'color.gray.100',
+            }}
+            {...views?.button}
+          >
+            <Horizontal gap={4} alignItems="center">
+              {isUploading ? (
+                <LoadingSpinnerIcon
+                  widthHeight={16}
+                  color="currentColor"
+                  filled={false}
+                  style={{ animation: 'spin 1s linear infinite' }}
+                  {...views?.icon}
+                />
+              ) : (
+                <AttachmentIcon
+                  widthHeight={16}
+                  color="currentColor"
+                  filled={false}
+                  {...views?.icon}
+                />
+              )}
+            </Horizontal>
+          </Button>
+        )}
 
         <input
           type="file"
-          ref={ref}
+          ref={ref || fileInputRef}
           style={{ display: 'none' }}
-          onChange={processFileUpload}
+          onChange={handleFileChange}
           multiple
+          accept="*/*"
         />
       </>
     );
   }
 );
 
-FileUploadHandler.displayName = 'FileUploadHandler';
+ChatUploader.displayName = 'ChatUploader';

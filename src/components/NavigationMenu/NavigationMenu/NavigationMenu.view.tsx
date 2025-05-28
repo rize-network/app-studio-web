@@ -19,7 +19,7 @@ import {
   NavigationMenuOrientations,
   NavigationMenuItemStates,
 } from './NavigationMenu.style';
-import { ChevronDownIcon } from '../../Icon/Icon';
+import { ChevronIcon } from '../../Icon/Icon';
 
 // Create context for the NavigationMenu
 const NavigationMenuContext = createContext<NavigationMenuContextType>({
@@ -266,7 +266,12 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
         transform={isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'}
         {...views?.indicator}
       >
-        <ChevronDownIcon widthHeight={16} color="currentColor" filled={true} />
+        <ChevronIcon
+          orientation="down"
+          widthHeight={16}
+          color="currentColor"
+          filled={true}
+        />
       </View>
     </View>
   );

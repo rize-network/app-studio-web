@@ -1,0 +1,856 @@
+This file is a merged representation of a subset of the codebase, containing specifically included files, combined into a single document by Repomix.
+
+================================================================
+File Summary
+================================================================
+
+Purpose:
+--------
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+
+File Format:
+------------
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  a. A separator line (================)
+  b. The file path (File: path/to/file)
+  c. Another separator line
+  d. The full contents of the file
+  e. A blank line
+
+Usage Guidelines:
+-----------------
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+
+Notes:
+------
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Only files matching these patterns are included: src/components/Title/examples
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+
+
+================================================================
+Directory Structure
+================================================================
+src/
+  components/
+    Title/
+      examples/
+        alternating.tsx
+        animated.tsx
+        custom.tsx
+        default.tsx
+        directAnimation.tsx
+        gradient.tsx
+        hero.tsx
+        highlight.tsx
+        highlighted.tsx
+        highlightStyles.tsx
+        index.ts
+        responsive.tsx
+        typewriterHighlight.tsx
+
+================================================================
+Files
+================================================================
+
+================
+File: src/components/Title/examples/highlightStyles.tsx
+================
+import React from 'react';
+import { Vertical, Text } from 'app-studio';
+import { Title } from '../Title';
+
+/**
+ * Examples of Title with different highlight styles applied to the entire title
+ */
+export const HighlightStylesDemo = () => {
+  return (
+    <Vertical gap={32}>
+      <Text fontSize={14} color="color.gray.500" marginBottom={16}>
+        Different highlight styles applied to entire titles (no highlightText
+        prop)
+      </Text>
+
+      <Title
+        highlightStyle="background"
+        highlightColor="theme.primary"
+        size="xl"
+      >
+        Background Highlight Style
+      </Title>
+
+      <Title
+        highlightStyle="underline"
+        highlightColor="theme.secondary"
+        size="xl"
+      >
+        Underline Highlight Style
+      </Title>
+
+      <Title
+        highlightStyle="gradient"
+        highlightColor="color.blue.500"
+        highlightSecondaryColor="color.purple.500"
+        size="xl"
+      >
+        Gradient Highlight Style
+      </Title>
+
+      <Title highlightStyle="outline" highlightColor="theme.primary" size="xl">
+        Outline Highlight Style
+      </Title>
+
+      <Title highlightStyle="glow" highlightColor="theme.primary" size="xl">
+        Glow Highlight Style
+      </Title>
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Title/examples/typewriterHighlight.tsx
+================
+import React, { useState } from 'react';
+import { Vertical, Text, Button, Horizontal } from 'app-studio';
+import { Title } from '../Title';
+
+/**
+ * Examples of Title with typewriter effect on highlighted text
+ */
+export const TypewriterHighlightDemo = () => {
+  const [resetKey, setResetKey] = useState(0);
+
+  // Function to reset all typewriter animations
+  const resetTypewriters = () => {
+    setResetKey((prev) => prev + 1);
+  };
+
+  return (
+    <Vertical gap={32}>
+      <Horizontal
+        justifyContent="space-between"
+        alignItems="center"
+        marginBottom={16}
+      >
+        <Text fontSize={14} color="color.gray.500">
+          Typewriter effect on highlighted text
+        </Text>
+        <Button variant="outline" size="sm" onClick={resetTypewriters}>
+          Reset Animations
+        </Button>
+      </Horizontal>
+
+      {/* Single highlighted word with typewriter effect */}
+      <Title
+        key={`single-${resetKey}`}
+        highlightText="typewriter"
+        highlightStyle="background"
+        highlightColor="theme.primary"
+        highlightTypewriter={true}
+        highlightTypewriterDuration={1500}
+        size="2xl"
+      >
+        This text has a typewriter effect on the highlighted word
+      </Title>
+
+      {/* Multiple highlighted words with typewriter effect */}
+      <Title
+        key={`multiple-${resetKey}`}
+        highlightText={['multiple', 'highlighted', 'words']}
+        highlightStyle="background"
+        highlightColor="theme.primary"
+        highlightTypewriter={true}
+        highlightTypewriterDuration={2500}
+        size="2xl"
+      >
+        This text has multiple highlighted words with typewriter effect
+      </Title>
+
+      {/* Gradient highlight with typewriter effect */}
+      <Title
+        key={`gradient-${resetKey}`}
+        highlightText="gradient"
+        highlightStyle="gradient"
+        highlightColor="color.blue.500"
+        highlightSecondaryColor="color.purple.500"
+        highlightTypewriter={true}
+        highlightTypewriterDuration={1000}
+        size="2xl"
+      >
+        This text has a gradient highlight with typewriter effect
+      </Title>
+
+      {/* Full title with typewriter effect */}
+      <Title
+        key={`full-${resetKey}`}
+        highlightStyle="gradient"
+        highlightColor="color.blue.500"
+        highlightSecondaryColor="color.purple.500"
+        highlightTypewriter={true}
+        highlightTypewriterDuration={3000}
+        size="2xl"
+      >
+        This entire title has a gradient with typewriter effect
+      </Title>
+
+      {/* Typewriter with highlight animation */}
+      <Title
+        key={`animated-${resetKey}`}
+        highlightText="animated"
+        highlightStyle="background"
+        highlightColor="theme.primary"
+        highlightTypewriter={true}
+        highlightTypewriterDuration={1500}
+        highlightAnimate={{
+          from: { opacity: 0.5, transform: 'scale(0.95)' },
+          to: { opacity: 1, transform: 'scale(1)' },
+          duration: '0.5s',
+          delay: '1.5s', // Start animation after typewriter completes
+        }}
+        size="2xl"
+      >
+        This highlight has typewriter followed by animation
+      </Title>
+
+      {/* Alternating text with typewriter */}
+      <Title
+        key={`alternating-${resetKey}`}
+        highlightText="changing"
+        alternateHighlightText={[
+          'innovative',
+          'powerful',
+          'flexible',
+          'intuitive',
+        ]}
+        alternateAnimation={true}
+        alternateDuration={3000}
+        highlightStyle="background"
+        highlightColor="theme.primary"
+        highlightTypewriter={true}
+        highlightTypewriterDuration={1000}
+        size="2xl"
+      >
+        Our changing solution for your business
+      </Title>
+
+      <Text fontSize={14} color="color.gray.500" marginTop={8}>
+        The typewriter effect adds a blinking cursor while typing and has a
+        natural typing rhythm. This implementation is based on a more robust
+        TypewriterEffect component that handles the animation directly in the
+        view.
+      </Text>
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Title/examples/alternating.tsx
+================
+import React from 'react';
+import { Vertical, Text } from 'app-studio';
+import { Title } from '../Title';
+
+/**
+ * Examples of Title with alternating highlight text
+ */
+export const AlternatingTitle = () => {
+  return (
+    <Vertical gap={48}>
+      <Title
+        highlightText="changing"
+        alternateHighlightText={[
+          'innovative',
+          'powerful',
+          'flexible',
+          'intuitive',
+        ]}
+        alternateAnimation={true}
+        alternateDuration={2000}
+        highlightStyle="background"
+        highlightColor="theme.primary"
+        size="2xl"
+      >
+        Our changing solution for your business
+      </Title>
+
+      <Text
+        fontSize={14}
+        color="color.gray.500"
+        marginTop={8}
+        marginBottom={24}
+      >
+        The word &quot;changing&quot; will cycle through &quot;innovative&quot;,
+        &quot;powerful&quot;, &quot;flexible&quot;, and &quot;intuitive&quot;
+        every 2 seconds
+      </Text>
+
+      <Title
+        highlightText="rotating"
+        alternateHighlightText={['React', 'Vue', 'Angular', 'Svelte']}
+        alternateAnimation={true}
+        alternateDuration={1500}
+        highlightStyle="gradient"
+        highlightColor="theme.primary"
+        highlightSecondaryColor="theme.secondary"
+        highlightAnimate={{
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+          duration: '0.5s',
+        }}
+        size="2xl"
+      >
+        Build with rotating and other modern frameworks
+      </Title>
+
+      <Text
+        fontSize={14}
+        color="color.gray.500"
+        marginTop={8}
+        marginBottom={24}
+      >
+        The word &quot;rotating&quot; will cycle through framework names with a
+        gradient style and fade-in animation
+      </Text>
+
+      <Title
+        highlightText="cycling"
+        alternateHighlightText={['fast', 'reliable', 'secure', 'scalable']}
+        alternateAnimation={true}
+        alternateDuration={3000}
+        highlightStyle="glow"
+        highlightColor="theme.primary"
+        size="2xl"
+      >
+        Our platform is cycling and built for performance
+      </Title>
+
+      <Text fontSize={14} color="color.gray.500" marginTop={8}>
+        The word &quot;cycling&quot; will cycle through attributes with a glow
+        effect every 3 seconds
+      </Text>
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Title/examples/gradient.tsx
+================
+import React from 'react';
+import { Vertical, Text } from 'app-studio';
+import { Title } from '../Title';
+
+/**
+ * Examples of Title with gradient highlight styles
+ */
+export const GradientTest = () => {
+  return (
+    <Vertical gap={32}>
+      <Text fontSize={14} color="color.gray.500" marginBottom={16}>
+        The highlighted words below should appear with gradient text effects
+      </Text>
+
+      <Title
+        highlightText={['primary', 'secondary']}
+        highlightStyle="gradient"
+        highlightColor="theme.primary"
+        highlightSecondaryColor="theme.secondary"
+        size="2xl"
+      >
+        Gradient from primary to secondary
+      </Title>
+
+      <Title
+        highlightText={['specific', 'colors']}
+        highlightStyle="gradient"
+        highlightColor="#3b82f6"
+        highlightSecondaryColor="#a855f7"
+        size="2xl"
+      >
+        Gradient with specific hex colors #3b82f6 to #a855f7
+      </Title>
+
+      <Title
+        highlightText={['blue', 'purple']}
+        highlightStyle="gradient"
+        highlightColor="color.blue.500"
+        highlightSecondaryColor="color.purple.500"
+        size="2xl"
+      >
+        Gradient from blue to purple
+      </Title>
+
+      <Title
+        highlightText={['orange', 'red']}
+        highlightStyle="gradient"
+        highlightColor="color.orange.500"
+        highlightSecondaryColor="color.red.500"
+        size="2xl"
+      >
+        Gradient from orange to red
+      </Title>
+
+      <Title
+        highlightText={['green', 'teal']}
+        highlightStyle="gradient"
+        highlightColor="color.green.500"
+        highlightSecondaryColor="color.teal.500"
+        size="2xl"
+      >
+        Gradient from green to teal
+      </Title>
+
+      <Title
+        highlightStyle="gradient"
+        highlightColor="color.purple.500"
+        highlightSecondaryColor="color.pink.500"
+        size="2xl"
+      >
+        This entire title has a gradient with no specific highlight
+      </Title>
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Title/examples/highlight.tsx
+================
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Title } from '../Title';
+
+/**
+ * Examples of Title with different highlight animations
+ */
+export const HighlightTest = () => {
+  return (
+    <Vertical gap={32}>
+      <Title
+        highlightText="animated highlight"
+        highlightStyle="background"
+        highlightColor="theme.primary"
+        highlightAnimate={{
+          from: { opacity: 0, transform: 'scale(0.9)' },
+          to: { opacity: 1, transform: 'scale(1)' },
+          duration: '0.5s',
+          delay: '0.2s',
+        }}
+      >
+        Text with animated highlight
+      </Title>
+
+      <Title
+        highlightText={['first', 'second', 'third']}
+        highlightStyle="background"
+        highlightColor="theme.primary"
+        highlightAnimate={[
+          {
+            from: { opacity: 0, transform: 'translateY(-10px)' },
+            to: { opacity: 1, transform: 'translateY(0)' },
+            duration: '0.5s',
+            delay: '0.1s',
+          },
+          {
+            from: { opacity: 0, transform: 'translateY(-10px)' },
+            to: { opacity: 1, transform: 'translateY(0)' },
+            duration: '0.5s',
+            delay: '0.3s',
+          },
+          {
+            from: { opacity: 0, transform: 'translateY(-10px)' },
+            to: { opacity: 1, transform: 'translateY(0)' },
+            duration: '0.5s',
+            delay: '0.5s',
+          },
+        ]}
+      >
+        This text has first, second, and third highlighted words with staggered
+        animations
+      </Title>
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Title/examples/responsive.tsx
+================
+import React from 'react';
+import { Title } from '../Title';
+
+/**
+ * Example of responsive Title using media queries
+ */
+export const ResponsiveTitle = () => {
+  return (
+    <Title
+      media={{
+        mobile: {
+          fontSize: 32,
+          lineHeight: '40px',
+        },
+        tablet: {
+          fontSize: 48,
+          lineHeight: '56px',
+        },
+        desktop: {
+          fontSize: 64,
+          lineHeight: '72px',
+        },
+      }}
+      highlightText="Responsive"
+      highlightStyle="background"
+      highlightColor="theme.primary"
+    >
+      Responsive Title Example
+    </Title>
+  );
+};
+
+================
+File: src/components/Title/examples/animated.tsx
+================
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Title } from '../Title';
+
+/**
+ * Examples of Title with different animation types
+ */
+export const AnimatedTitle = () => {
+  return (
+    <Vertical gap={48}>
+      <Title
+        animate={{
+          from: { opacity: 0 },
+          to: { opacity: 1 },
+          duration: '1.5s',
+          iterationCount: '1',
+        }}
+      >
+        Fade In Animation
+      </Title>
+
+      <Title
+        animate={{
+          from: { transform: 'translateX(-100%)' },
+          to: { transform: 'translateX(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
+      >
+        Slide In From Left
+      </Title>
+
+      <Title
+        animate={{
+          from: { transform: 'translateX(100%)' },
+          to: { transform: 'translateX(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
+      >
+        Slide In From Right
+      </Title>
+
+      <Title
+        animate={{
+          from: { transform: 'translateY(-100%)' },
+          to: { transform: 'translateY(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
+      >
+        Slide In From Top
+      </Title>
+
+      <Title
+        animate={{
+          from: { transform: 'translateY(100%)' },
+          to: { transform: 'translateY(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
+      >
+        Slide In From Bottom
+      </Title>
+
+      <Title
+        animate={{
+          from: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' },
+          to: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
+          duration: '1.5s',
+          iterationCount: '1',
+        }}
+      >
+        Reveal Animation
+      </Title>
+
+      <Title
+        animate={{
+          from: { transform: 'translateY(0)' },
+          '20%': { transform: 'translateY(-30px)' },
+          '40%': { transform: 'translateY(0)' },
+          '60%': { transform: 'translateY(-15px)' },
+          '80%': { transform: 'translateY(0)' },
+          to: { transform: 'translateY(0)' },
+          duration: '1s',
+          iterationCount: '1',
+        }}
+      >
+        Bounce Animation
+      </Title>
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Title/examples/custom.tsx
+================
+import React from 'react';
+import { Title } from '../Title';
+
+/**
+ * Example of Title with custom styling using the views prop
+ */
+export const CustomTitle = () => {
+  return (
+    <Title
+      views={{
+        container: {
+          fontFamily: 'Georgia, serif',
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+        },
+        highlight: {
+          borderRadius: '8px',
+          padding: '0 12px',
+        },
+      }}
+      highlightText="Custom"
+      highlightStyle="background"
+      highlightColor="color.purple.500"
+    >
+      Title with Custom Styling
+    </Title>
+  );
+};
+
+================
+File: src/components/Title/examples/default.tsx
+================
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Title } from '../Title';
+
+/**
+ * Default Title examples showing different sizes
+ */
+export const DefaultTitle = () => {
+  return (
+    <Vertical gap={32}>
+      <Title size="xs">Extra Small Title (xs)</Title>
+      <Title size="sm">Small Title (sm)</Title>
+      <Title size="md">Medium Title (md)</Title>
+      <Title size="lg">Large Title (lg)</Title>
+      <Title size="xl">Extra Large Title (xl - default)</Title>
+      <Title size="2xl">2XL Title</Title>
+      <Title size="3xl">3XL Title</Title>
+      <Title size="4xl">4XL Title</Title>
+      <Title size="5xl">5XL Title</Title>
+      <Title size="6xl">6XL Title</Title>
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Title/examples/directAnimation.tsx
+================
+import React from 'react';
+import { Title } from '../Title';
+
+/**
+ * Example of Title with direct animation props
+ */
+export const DirectAnimationExample = () => {
+  return (
+    <Title
+      animate={{
+        from: { opacity: 0, transform: 'translateY(20px)' },
+        to: { opacity: 1, transform: 'translateY(0)' },
+        duration: '1s',
+        timingFunction: 'ease-out',
+      }}
+      highlightText="animated"
+      highlightStyle="background"
+      highlightColor="theme.primary"
+      highlightAnimate={{
+        from: { opacity: 0 },
+        to: { opacity: 1 },
+        duration: '1.5s',
+        delay: '0.5s',
+      }}
+    >
+      This title is directly animated with custom animation
+    </Title>
+  );
+};
+
+================
+File: src/components/Title/examples/hero.tsx
+================
+import React from 'react';
+import { View, Vertical, Horizontal, Text } from 'app-studio';
+import { Title } from '../Title';
+import { Button } from '../../Button/Button';
+
+/**
+ * Example of Title in a hero section context
+ */
+export const HeroTitle = () => {
+  return (
+    <View
+      backgroundColor="color.gray.50"
+      padding={48}
+      borderRadius={8}
+      width="100%"
+    >
+      <Vertical gap={24} maxWidth={800} marginX="auto">
+        <Title
+          size="xl"
+          animate={{
+            from: { opacity: 0 },
+            to: { opacity: 1 },
+            duration: '1s',
+            iterationCount: '1',
+          }}
+          highlightText="Platform"
+          highlightStyle="gradient"
+          highlightColor="theme.primary"
+          highlightSecondaryColor="theme.secondary"
+          centered
+        >
+          Welcome to Our Platform
+        </Title>
+
+        <Text
+          textAlign="center"
+          color="color.gray.600"
+          fontSize={20}
+          lineHeight={28}
+        >
+          Build beautiful, responsive, and interactive user interfaces with our
+          powerful component library.
+        </Text>
+
+        <Horizontal gap={16} justifyContent="center" marginTop={16}>
+          <Button size="lg">Get Started</Button>
+          <Button variant="outline" size="lg">
+            Learn More
+          </Button>
+        </Horizontal>
+      </Vertical>
+    </View>
+  );
+};
+
+================
+File: src/components/Title/examples/highlighted.tsx
+================
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Title } from '../Title';
+
+/**
+ * Examples of Title with different highlight styles
+ */
+export const HighlightedTitle = () => {
+  return (
+    <Vertical gap={32}>
+      <Title
+        highlightText="background"
+        highlightStyle="background"
+        highlightColor="theme.primary"
+      >
+        Text with background highlight
+      </Title>
+
+      <Title
+        highlightText="underlined"
+        highlightStyle="underline"
+        highlightColor="theme.secondary"
+      >
+        Text with underlined highlight
+      </Title>
+
+      <Title
+        highlightText="gradient"
+        highlightStyle="gradient"
+        highlightColor="theme.primary"
+        highlightSecondaryColor="theme.secondary"
+      >
+        Text with gradient highlight
+      </Title>
+
+      <Title
+        highlightText="outline"
+        highlightStyle="outline"
+        highlightColor="theme.primary"
+      >
+        Text with outline highlight
+      </Title>
+
+      <Title
+        highlightText="glow"
+        highlightStyle="glow"
+        highlightColor="theme.primary"
+      >
+        Text with glow highlight
+      </Title>
+
+      <Title
+        highlightText={['multiple', 'highlights']}
+        highlightStyle="background"
+        highlightColor="theme.primary"
+      >
+        Text with multiple highlights in the same sentence
+      </Title>
+    </Vertical>
+  );
+};
+
+================
+File: src/components/Title/examples/index.ts
+================
+export * from './default';
+export * from './highlighted';
+export * from './animated';
+export * from './hero';
+export * from './responsive';
+export * from './custom';
+export * from './directAnimation';
+export * from './gradient';
+export * from './highlight';
+export * from './alternating';
+export * from './highlightStyles';
+export * from './typewriterHighlight';
+
+
+
+
+================================================================
+End of Codebase
+================================================================

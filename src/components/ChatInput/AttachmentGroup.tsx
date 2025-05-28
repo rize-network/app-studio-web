@@ -3,11 +3,14 @@
 import React from 'react';
 import { Horizontal, Text, View, useTheme } from 'app-studio';
 import { UploadedFile } from './ChatInput/ChatInput.type';
+import { ImageIcon, TrashIcon } from '../Icon/Icon';
+import { Button } from '../Button/Button';
 
 interface AttachmentGroupProps {
   files: UploadedFile[];
   sandboxId?: string;
   onRemove: (index: number) => void;
+  onSetAsReference?: (index: number) => void;
   layout?: 'inline' | 'grid';
   maxHeight?: string;
   showPreviews?: boolean;
@@ -17,6 +20,7 @@ interface AttachmentGroupProps {
     name?: any;
     size?: any;
     removeButton?: any;
+    referenceButton?: any;
   };
 }
 
@@ -24,6 +28,7 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
   files,
   sandboxId,
   onRemove,
+  onSetAsReference,
   layout = 'inline',
   maxHeight = '120px',
   showPreviews = false,
@@ -93,40 +98,51 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
             )}
           </Text>
 
-          <View
-            as="button"
-            type="button"
-            width="16px"
-            height="16px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            borderRadius="50%"
-            backgroundColor="transparent"
-            color="color.gray.500"
-            cursor="pointer"
-            transition="all 0.2s ease"
-            onClick={() => onRemove(index)}
-            _hover={{
-              backgroundColor: 'color.gray.200',
-              color: 'color.gray.700',
-            }}
-            {...views?.removeButton}
-          >
-            <svg
-              width="10"
-              height="10"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          {/* Reference button for image files */}
+          {onSetAsReference && file.type.startsWith('image/') && (
+            <View
+              as="button"
+              type="button"
+              width="16px"
+              height="16px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              borderRadius="50%"
+              backgroundColor={
+                file.isReferenceImage ? 'theme.primary' : 'transparent'
+              }
+              color={file.isReferenceImage ? 'color.white' : 'color.gray.500'}
+              cursor="pointer"
+              transition="all 0.2s ease"
+              onClick={() => onSetAsReference(index)}
+              title={
+                file.isReferenceImage
+                  ? 'Reference image'
+                  : 'Set as reference image'
+              }
+              _hover={{
+                backgroundColor: file.isReferenceImage
+                  ? 'color.blue.600'
+                  : 'color.blue.100',
+                color: file.isReferenceImage ? 'color.white' : 'theme.primary',
+              }}
+              {...views?.referenceButton}
             >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </View>
+              <ImageIcon
+                widthHeight={20}
+                color="currentColor"
+                filled={file.isReferenceImage}
+              />
+            </View>
+          )}
+
+          <Button
+            variant="ghost"
+            size="sm"
+            icon={<TrashIcon widthHeight={12} />}
+            onClick={() => onRemove(index)}
+          />
         </Horizontal>
       ))}
     </View>

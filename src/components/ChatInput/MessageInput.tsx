@@ -1,8 +1,8 @@
 'use client';
 
 import React, { forwardRef } from 'react';
-import { Button, Element, Horizontal, Text, View, useTheme } from 'app-studio';
-import { FileUploadHandler } from './FileUploadHandler';
+import { Button, Element, Horizontal, View, useTheme } from 'app-studio';
+import { ChatUploader } from './ChatUploader';
 import { ModelOption, UploadedFile } from './ChatInput/ChatInput.type';
 
 interface MessageInputProps {
@@ -61,7 +61,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
       setPendingFiles,
       setUploadedFiles,
       setIsUploading,
-      hideAttachments = false,
+      hideAttachments = true,
 
       selectedModel,
       onModelChange,
@@ -138,19 +138,18 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
           {...views?.buttonGroup}
         >
           <Horizontal gap={8} alignItems="center">
-            {!hideAttachments && (
-              <FileUploadHandler
-                ref={fileInputRef}
-                loading={loading}
-                disabled={disabled}
-                isAgentRunning={isAgentRunning}
-                isUploading={isUploading}
-                sandboxId={sandboxId}
-                setPendingFiles={setPendingFiles}
-                setUploadedFiles={setUploadedFiles}
-                setIsUploading={setIsUploading}
-              />
-            )}
+            <ChatUploader
+              ref={fileInputRef}
+              loading={loading}
+              disabled={disabled}
+              isAgentRunning={isAgentRunning}
+              isUploading={isUploading}
+              sandboxId={sandboxId}
+              setPendingFiles={setPendingFiles}
+              setUploadedFiles={setUploadedFiles}
+              setIsUploading={setIsUploading}
+              hideAttachments={hideAttachments}
+            />
 
             {/* Model selector */}
             <View

@@ -16,6 +16,15 @@ import {
  */
 export interface ChatInputProps extends ViewProps {
   /**
+   * Get the pending files
+   */
+  getPendingFiles: () => File[];
+
+  /**
+   * Clear the pending files
+   */
+  clearPendingFiles: () => void;
+  /**
    * Callback function when the form is submitted
    */
   onSubmit: (
@@ -257,4 +266,29 @@ export interface ChatInputViewProps extends ChatInputProps {
    * Callback function to handle prompt example selection
    */
   handlePromptExampleSelect: (example: PromptExample) => void;
+
+  /**
+   * Callback function to handle drag over events
+   */
+  handleDragOver: (e: React.DragEvent<HTMLDivElement>) => void;
+
+  /**
+   * Callback function to handle drag leave events
+   */
+  handleDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
+
+  /**
+   * Callback function to handle reference image upload
+   */
+  handleReferenceImageUpload: (files: File[]) => void;
+
+  /**
+   * Callback function to remove reference image
+   */
+  removeReferenceImage: () => void;
+
+  /**
+   * Callback function to set a file as reference image
+   */
+  setFileAsReference: (fileIndex: number) => void;
 }
