@@ -155,11 +155,11 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
-            editable={!!isEditable.toString()}
+            editable={`${!!isEditable.toString()}`}
             placeholder={hint}
             onBlur={handleBlur}
             onFocus={handleFocus}
-            multiline={!!isMultiline.toString()}
+            multiline={`${!!isMultiline.toString()}`}
             onChange={handleChange}
             {...fieldStyles}
             {...views?.textarea}

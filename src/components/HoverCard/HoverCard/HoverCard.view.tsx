@@ -98,7 +98,7 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
   borderRadius = '4px',
   boxShadow = '0px 2px 8px rgba(0, 0, 0, 0.15)',
   padding = '12px',
-  minWidth = '200px',
+  minWidth = '50px',
   maxWidth = '300px',
   ...props
 }) => {

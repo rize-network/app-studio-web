@@ -13,8 +13,8 @@ import { AttachmentGroup } from '../AttachmentGroup';
 import { EditableInput } from '../EditableInput';
 import { Uploader } from '../../Uploader/Uploader';
 import { PromptExamples } from '../PromptExamples';
-import { ReferenceImageButton } from '../ReferenceImageButton';
-import { ReferenceImageModal } from '../ReferenceImageModal';
+// import { ReferenceImageButton } from '../ReferenceImageButton';
+// import { ReferenceImageModal } from '../ReferenceImageModal';
 import { Loader } from '../../Loader/Loader';
 import {
   StopIcon,
