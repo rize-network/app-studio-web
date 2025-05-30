@@ -192,9 +192,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             filled={false}
             style={{ animation: 'spin 1s linear infinite' }}
           />
-          <Text fontSize="12px" color="color.gray.500">
-            {loadingText}
-          </Text>
+          <Text color="color.gray.500">{loadingText}</Text>
         </Horizontal>
       )}
 
@@ -386,12 +384,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
 
       {/* Bottom Tip (Error Message) */}
       {errorMessage && (
-        <Text
-          fontSize="12px"
-          color="theme.error"
-          marginTop="4px"
-          {...views?.bottomTip}
-        >
+        <Text color="theme.error" marginTop="4px" {...views?.bottomTip}>
           {errorMessage}
         </Text>
       )}

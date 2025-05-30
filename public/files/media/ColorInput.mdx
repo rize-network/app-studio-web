@@ -1,0 +1,209 @@
+# ColorInput
+
+A form-integrated color picker component that allows users to select colors from a predefined palette or enter custom color values.
+
+### **Import**
+```tsx
+import { ColorInput } from '@app-studio/web';
+```
+
+### **Basic Usage**
+A simple color input with default settings.
+
+```tsx
+import React, { useState } from 'react';
+import { ColorInput } from '../ColorInput';
+
+export const BasicColorInput = () => {
+  const [color, setColor] = useState('color.blue.500');
+
+  return (
+    <ColorInput
+      label="Background Color"
+      value={color}
+      onChange={setColor}
+      placeholder="Select a color"
+      helperText="Choose a background color for your theme"
+    />
+  );
+};
+```
+
+### **Variants**
+Different visual styles for the color input.
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { ColorInput } from '../ColorInput';
+
+export const ColorInputVariants = () => {
+  return (
+    <Vertical gap={16} width="300px">
+      <ColorInput
+        label="Default Variant"
+        variant="default"
+        defaultValue="color.blue.500"
+      />
+      
+      <ColorInput
+        label="Outline Variant"
+        variant="outline"
+        defaultValue="color.green.500"
+      />
+      
+      <ColorInput
+        label="None Variant"
+        variant="none"
+        defaultValue="color.purple.500"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **Sizes**
+Different sizes for the color input.
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { ColorInput } from '../ColorInput';
+
+export const ColorInputSizes = () => {
+  return (
+    <Vertical gap={16} width="300px">
+      <ColorInput label="Extra Small" size="xs" defaultValue="color.red.500" />
+      <ColorInput label="Small" size="sm" defaultValue="color.orange.500" />
+      <ColorInput label="Medium" size="md" defaultValue="color.yellow.500" />
+      <ColorInput label="Large" size="lg" defaultValue="color.green.500" />
+      <ColorInput label="Extra Large" size="xl" defaultValue="color.blue.500" />
+    </Vertical>
+  );
+};
+```
+
+### **Custom Colors**
+Color input with custom color palette and options.
+
+```tsx
+import React, { useState } from 'react';
+import { ColorInput } from '../ColorInput';
+
+export const CustomColorInput = () => {
+  const [color, setColor] = useState('');
+  
+  const customColors = [
+    { name: 'Brand Primary', value: '#3B82F6' },
+    { name: 'Brand Secondary', value: '#10B981' },
+    { name: 'Brand Accent', value: '#F59E0B' },
+    { name: 'Brand Dark', value: '#1F2937' },
+  ];
+
+  return (
+    <ColorInput
+      label="Brand Color"
+      value={color}
+      onChange={setColor}
+      predefinedColors={customColors}
+      showCustomInput={true}
+      showRecentColors={true}
+      helperText="Choose from brand colors or enter a custom color"
+    />
+  );
+};
+```
+
+### **Form Integration**
+Color input integrated with form handling.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical, Horizontal } from 'app-studio';
+import { ColorInput } from '../ColorInput';
+import { Button } from '../../Button/Button';
+import { Text } from '../../Text/Text';
+
+export const ColorInputForm = () => {
+  const [backgroundColor, setBackgroundColor] = useState('color.blue.500');
+  const [textColor, setTextColor] = useState('color.white');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Background: ${backgroundColor}, Text: ${textColor}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Vertical gap={16} width="400px">
+        <ColorInput
+          label="Background Color"
+          value={backgroundColor}
+          onChange={setBackgroundColor}
+          helperText="Choose the background color"
+        />
+        
+        <ColorInput
+          label="Text Color"
+          value={textColor}
+          onChange={setTextColor}
+          helperText="Choose the text color"
+        />
+
+        {/* Preview */}
+        <div 
+          style={{
+            padding: '16px',
+            borderRadius: '8px',
+            backgroundColor: backgroundColor,
+            color: textColor,
+            border: '1px solid #e5e7eb'
+          }}
+        >
+          <Text fontWeight="bold">Preview</Text>
+          <Text>This is how your theme will look</Text>
+        </div>
+
+        <Horizontal gap={8}>
+          <Button type="submit" variant="filled">
+            Apply Theme
+          </Button>
+          <Button 
+            type="button" 
+            variant="outline"
+            onClick={() => {
+              setBackgroundColor('color.blue.500');
+              setTextColor('color.white');
+            }}
+          >
+            Reset
+          </Button>
+        </Horizontal>
+      </Vertical>
+    </form>
+  );
+};
+```
+
+### **Props**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | - | Label text for the color input |
+| `value` | `string` | - | Controlled value of the color input |
+| `defaultValue` | `string` | `''` | Default value for uncontrolled usage |
+| `onChange` | `(color: string) => void` | - | Callback when color changes |
+| `placeholder` | `string` | `'Select a color'` | Placeholder text |
+| `helperText` | `string` | - | Helper text below the input |
+| `error` | `boolean \| string` | `false` | Error state or message |
+| `isDisabled` | `boolean` | `false` | Whether the input is disabled |
+| `isReadOnly` | `boolean` | `false` | Whether the input is read-only |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | Size of the input |
+| `variant` | `'default' \| 'outline' \| 'none'` | `'default'` | Visual variant |
+| `shape` | `'default' \| 'sharp' \| 'rounded' \| 'pillShaped'` | `'default'` | Border radius style |
+| `predefinedColors` | `PredefinedColor[]` | Default palette | Array of predefined colors |
+| `showCustomInput` | `boolean` | `true` | Whether to show custom color input |
+| `showRecentColors` | `boolean` | `true` | Whether to show recent colors |
+| `maxRecentColors` | `number` | `8` | Maximum number of recent colors |
+| `closeOnSelect` | `boolean` | `true` | Whether to close dropdown on selection |
+| `views` | `ColorInputStyles` | `{}` | Custom styling object |

@@ -17,7 +17,7 @@ import { Title } from '@app-studio/web';
 | highlightStyle | 'background' \| 'underline' \| 'gradient' \| 'outline' \| 'glow' | 'background' | The visual style of the highlighted text |
 | highlightColor | string | 'theme.primary' | The color of the highlighted text or background |
 | highlightSecondaryColor | string | - | The secondary color for gradient highlights |
-| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl' \| '3xl' \| '4xl' \| '5xl' \| '6xl' | 'xl' | The size of the title |
+| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| 'xl' \| 'xl' \| 'xl' \| 'xl' \| '6xl' | 'xl' | The size of the title |
 | centered | boolean | false | Whether to center the title |
 | animate | AnimationProps \| AnimationProps[] | - | Animation for the title. This should be an animation object with properties like from, to, duration, etc. |
 | highlightAnimate | AnimationProps \| AnimationProps[] | - | Animation specifically for the highlighted text |
@@ -46,10 +46,10 @@ import { Title } from '@app-studio/web';
   <Title size="md">Medium Title (md)</Title>
   <Title size="lg">Large Title (lg)</Title>
   <Title size="xl">Extra Large Title (xl - default)</Title>
-  <Title size="2xl">2XL Title</Title>
-  <Title size="3xl">3XL Title</Title>
-  <Title size="4xl">4XL Title</Title>
-  <Title size="5xl">5XL Title</Title>
+  <Title size="xl">2XL Title</Title>
+  <Title size="xl">3XL Title</Title>
+  <Title size="xl">4XL Title</Title>
+  <Title size="xl">5XL Title</Title>
   <Title size="6xl">6XL Title</Title>
 </>
 ```

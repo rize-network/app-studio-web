@@ -7,14 +7,9 @@ import { TitleSize, HighlightStyle } from './Title.type';
 export const TitleSizes = {
   xs: 16,
   sm: 20,
-  md: 24,
-  lg: 32,
-  xl: 40,
-  '2xl': 48,
-  '3xl': 56,
-  '4xl': 64,
-  '5xl': 72,
-  '6xl': 80,
+  md: 32,
+  lg: 48,
+  xl: 72,
 };
 
 /**
@@ -23,14 +18,9 @@ export const TitleSizes = {
 export const LineHeights: Record<TitleSize, number> = {
   xs: 24,
   sm: 28,
-  md: 32,
-  lg: 40,
-  xl: 48,
-  '2xl': 56,
-  '3xl': 64,
-  '4xl': 72,
-  '5xl': 80,
-  '6xl': 88,
+  md: 40,
+  lg: 56,
+  xl: 80,
 };
 
 /**

@@ -2,56 +2,47 @@
 
 A component for rendering animated and highlighted titles in hero sections.
 
-### **Import**
+## Import
 
-```tsx
+```jsx
 import { Title } from "@app-studio/web";
 ```
 
-### **Default**
+## Default
 
-```tsx
+```jsx
 <Title>Simple Hero Title</Title>
 ```
 
-### **Sizes**
+## Sizes
 
-"**_size_**" changes the title size. It has a type "TitleSize" with default value "xl".
+The `size` prop changes the title size. It has a type `TitleSize` with default value `"xl"`.
 
-```tsx
-import { Vertical } from "app-studio";
-
+```jsx
 <Vertical gap={32}>
   <Title size="xs">Extra Small Title</Title>
   <Title size="sm">Small Title</Title>
   <Title size="md">Medium Title</Title>
   <Title size="lg">Large Title</Title>
   <Title size="xl">Extra Large Title</Title>
-  <Title size="2xl">2XL Title</Title>
-  <Title size="3xl">3XL Title</Title>
-  <Title size="4xl">4XL Title</Title>
-  <Title size="5xl">5XL Title</Title>
-  <Title size="6xl">6XL Title</Title>
 </Vertical>
 ```
 
-### **Highlight Text**
+## Highlight Text
 
-"**_highlightText_**" specifies which part of the text should be highlighted. You can provide a string or an array of strings.
+The `highlightText` prop specifies which part of the text should be highlighted. You can provide a string or an array of strings.
 
-```tsx
+```jsx
 <Title highlightText="highlighted" highlightStyle="background" highlightColor="theme.primary">
   Text with highlighted words
 </Title>
 ```
 
-### **Highlight Styles**
+## Highlight Styles
 
-"**_highlightStyle_**" determines how the highlighted text is styled. Options include 'background', 'underline', 'gradient', 'outline', and 'glow'.
+The `highlightStyle` prop determines how the highlighted text is styled. Options include `'background'`, `'underline'`, `'gradient'`, `'outline'`, and `'glow'`.
 
-```tsx
-import { Vertical } from "app-studio";
-
+```jsx
 <Vertical gap={32}>
   <Title highlightText="background" highlightStyle="background" highlightColor="theme.primary">
     Text with background highlight
@@ -80,11 +71,11 @@ import { Vertical } from "app-studio";
 </Vertical>
 ```
 
-### **Multiple Highlights**
+## Multiple Highlights
 
 You can highlight multiple parts of the text by providing an array of strings.
 
-```tsx
+```jsx
 <Title
   highlightText={["multiple", "highlights"]}
   highlightStyle="background"
@@ -94,13 +85,11 @@ You can highlight multiple parts of the text by providing an array of strings.
 </Title>
 ```
 
-### **Animations**
+## Animations
 
 The Title component supports animations through the `animate` prop, which accepts an animation object with properties like `from`, `to`, `duration`, etc.
 
-```tsx
-import { Vertical } from "app-studio";
-
+```jsx
 <Vertical gap={48}>
   <Title
     animate={{
@@ -137,11 +126,11 @@ import { Vertical } from "app-studio";
 </Vertical>
 ```
 
-### **Highlight Animations**
+## Highlight Animations
 
 You can animate just the highlighted text using the `highlightAnimate` prop.
 
-```tsx
+```jsx
 <Title
   highlightText="animated highlight"
   highlightStyle="background"
@@ -157,11 +146,11 @@ You can animate just the highlighted text using the `highlightAnimate` prop.
 </Title>
 ```
 
-### **Alternating Text**
+## Alternating Text
 
 The Title component can cycle through different words in place of the highlighted text using the `alternateHighlightText` and `alternateAnimation` props.
 
-```tsx
+```jsx
 <Title
   highlightText="changing"
   alternateHighlightText={[
@@ -179,11 +168,11 @@ The Title component can cycle through different words in place of the highlighte
 </Title>
 ```
 
-### **Typewriter Effect**
+## Typewriter Effect
 
 You can add a typewriter effect to the highlighted text using the `highlightTypewriter` prop.
 
-```tsx
+```jsx
 <Title
   highlightText="typewriter"
   highlightStyle="background"
@@ -195,11 +184,11 @@ You can add a typewriter effect to the highlighted text using the `highlightType
 </Title>
 ```
 
-### **Responsive**
+## Responsive
 
 You can make the title responsive using the `media` prop.
 
-```tsx
+```jsx
 <Title
   media={{
     mobile: {
@@ -223,11 +212,11 @@ You can make the title responsive using the `media` prop.
 </Title>
 ```
 
-### **Custom Styling**
+## Custom Styling
 
 You can customize the title using the `views` prop.
 
-```tsx
+```jsx
 <Title
   views={{
     container: {
@@ -248,12 +237,9 @@ You can customize the title using the `views` prop.
 </Title>
 ```
 
-### **Hero Section Example**
+## Hero Section Example
 
-```tsx
-import { Button, Text } from "@app-studio/web";
-import { Vertical, Horizontal, View } from "app-studio";
-
+```jsx
 <View
   backgroundColor="color.gray.50"
   padding={48}
@@ -262,7 +248,7 @@ import { Vertical, Horizontal, View } from "app-studio";
 >
   <Vertical gap={24} maxWidth={800} marginX="auto">
     <Title
-      size="4xl"
+      size="xl"
       animate={{
         from: { opacity: 0 },
         to: { opacity: 1 },
@@ -299,9 +285,9 @@ import { Vertical, Horizontal, View } from "app-studio";
 </View>
 ```
 
-## **Types**
+## Types
 
-```tsx
+```typescript
 export type HighlightStyle =
   | 'underline'   // Underline the text
   | 'background'  // Background color highlight
@@ -314,12 +300,7 @@ export type TitleSize =
   | 'sm'
   | 'md'
   | 'lg'
-  | 'xl'
-  | '2xl'
-  | '3xl'
-  | '4xl'
-  | '5xl'
-  | '6xl';
+  | 'xl';
 
 export interface TitleProps extends ViewProps {
   /**

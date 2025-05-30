@@ -339,22 +339,22 @@ const ChatInputDemo = () => {
             <Text fontSize="14px" fontWeight="600" marginBottom="8px">
               Multiple File Upload Features:
             </Text>
-            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+            <Text color="color.gray.700" marginBottom="4px">
               • Select multiple files at once using Ctrl/Cmd + click
             </Text>
-            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+            <Text color="color.gray.700" marginBottom="4px">
               • Drag and drop multiple files into the chat input
             </Text>
-            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+            <Text color="color.gray.700" marginBottom="4px">
               • Maximum file size: 50MB per file
             </Text>
-            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+            <Text color="color.gray.700" marginBottom="4px">
               • Supports all file types: images, documents, videos, etc.
             </Text>
-            <Text fontSize="12px" color="color.gray.700" marginBottom="4px">
+            <Text color="color.gray.700" marginBottom="4px">
               • Files are validated before upload
             </Text>
-            <Text fontSize="12px" color="color.gray.700">
+            <Text color="color.gray.700">
               • Preview and remove files before sending
             </Text>
           </View>

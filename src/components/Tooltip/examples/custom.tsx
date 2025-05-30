@@ -12,7 +12,7 @@ export const CustomTooltip = () => {
         content={
           <Vertical padding={5}>
             <Text fontWeight="bold">Custom Tooltip</Text>
-            <Text fontSize="12px">With rich content and styling</Text>
+            <Text>With rich content and styling</Text>
           </Vertical>
         }
         views={{

@@ -20,7 +20,7 @@ const FlowPage = () => {
         </Vertical>
 
         <Vertical gap={20}>
-          <Text fontSize="2xl" fontWeight="bold">
+          <Text fontSize="xl" fontWeight="bold">
             Flowchart Component
           </Text>
           <Text>

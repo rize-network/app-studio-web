@@ -53,15 +53,9 @@ export const CustomizedCommand = () => {
 
   const customFooter = (
     <Horizontal justifyContent="space-between" width="100%">
-      <Text fontSize="12px" color="color.gray.500">
-        Press ↑↓ to navigate
-      </Text>
-      <Text fontSize="12px" color="color.gray.500">
-        Press Enter to select
-      </Text>
-      <Text fontSize="12px" color="color.gray.500">
-        Press Esc to close
-      </Text>
+      <Text color="color.gray.500">Press ↑↓ to navigate</Text>
+      <Text color="color.gray.500">Press Enter to select</Text>
+      <Text color="color.gray.500">Press Esc to close</Text>
     </Horizontal>
   );
 

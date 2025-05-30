@@ -7,6 +7,7 @@ import {
   FormikCountryPickerExemple,
   FormikPasswordExemple,
   FormCheckboxExemple,
+  FormikColorInputExample,
   FormikSelectExemple,
   FormikSwitchExemple,
   FormikSliderExample,
@@ -27,6 +28,12 @@ export const FormikPage = () => {
             <td>Checkbox</td>
             <td>
               <FormCheckboxExemple />
+            </td>
+          </tr>
+          <tr>
+            <td>ColorInput</td>
+            <td>
+              <FormikColorInputExample />
             </td>
           </tr>
           <tr>

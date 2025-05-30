@@ -1,4 +1,5 @@
 export { FormikCheckbox } from './Formik.Checkbox';
+export { FormikColorInput } from './Formik.ColorInput';
 export { FormikDatePicker } from './Formik.DatePicker';
 export { FormikCountryPicker } from './Formik.CountryPicker';
 export { FormikSelect } from './Formik.Select';

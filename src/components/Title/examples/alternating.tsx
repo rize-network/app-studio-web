@@ -20,7 +20,7 @@ export const AlternatingTitle = () => {
         alternateDuration={2000}
         highlightStyle="background"
         highlightColor="theme.primary"
-        size="2xl"
+        size="xl"
       >
         Our changing solution for your business
       </Title>
@@ -49,7 +49,7 @@ export const AlternatingTitle = () => {
           to: { opacity: 1 },
           duration: '0.5s',
         }}
-        size="2xl"
+        size="xl"
       >
         Build with rotating and other modern frameworks
       </Title>
@@ -71,7 +71,7 @@ export const AlternatingTitle = () => {
         alternateDuration={3000}
         highlightStyle="glow"
         highlightColor="theme.primary"
-        size="2xl"
+        size="xl"
       >
         Our platform is cycling and built for performance
       </Title>

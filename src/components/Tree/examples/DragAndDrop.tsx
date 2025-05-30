@@ -125,35 +125,35 @@ export const TreeDragAndDrop = () => {
         Menu Structure (Drag and Drop to Reorganize)
       </Text>
       <View marginBottom={16}>
-        <Text fontSize="sm" color="color.gray.600" fontWeight="bold">
+        <Text fontSize="12px" color="color.gray.600" fontWeight="bold">
           Instructions:
         </Text>
-        <Text fontSize="sm" color="color.gray.600">
+        <Text fontSize="12px" color="color.gray.600">
           • Use the drag handle icon{' '}
           <span style={{ verticalAlign: 'middle' }}>≡</span> on the right to
           drag items
         </Text>
-        <Text fontSize="sm" color="color.gray.600">
+        <Text fontSize="12px" color="color.gray.600">
           • Drop in the top 25% of an item to place before it (blue line appears
           on top)
         </Text>
-        <Text fontSize="sm" color="color.gray.600">
+        <Text fontSize="12px" color="color.gray.600">
           • Drop in the middle 50% of an item to place inside it as a child
           (blue background)
         </Text>
-        <Text fontSize="sm" color="color.gray.600">
+        <Text fontSize="12px" color="color.gray.600">
           • Drop in the bottom 25% of an item to place after it (blue line
           appears on bottom)
         </Text>
         <Text
-          fontSize="sm"
+          fontSize="12px"
           color="color.gray.600"
           fontWeight="bold"
           marginTop={8}
         >
           Note: All children are preserved when dragging items!
         </Text>
-        <Text fontSize="sm" color="color.gray.600">
+        <Text fontSize="12px" color="color.gray.600">
           • If you drop an item outside a valid target, the operation is
           canceled and no data is lost
         </Text>
@@ -209,7 +209,7 @@ export const TreeDragAndDrop = () => {
           padding={8}
           borderRadius={4}
           fontFamily="monospace"
-          fontSize="sm"
+          fontSize="12px"
           whiteSpace="pre-wrap"
           maxHeight="300px"
           overflow="auto"

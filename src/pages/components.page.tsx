@@ -21,12 +21,14 @@ const CardPage = lazy(() => import('src/pages/card.page'));
 const CarouselPage = lazy(() => import('src/pages/carousel.page'));
 const ChartPage = lazy(() => import('src/pages/chart.page'));
 const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
+const ColorPickerPage = lazy(() => import('src/pages/colorPicker.page'));
 const ComboBoxPage = lazy(() => import('src/pages/comboBox.page'));
 const CommandPage = lazy(() => import('src/pages/command.page'));
 const ContextMenuPage = lazy(() => import('src/pages/contextMenu.page'));
 const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
 const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
 const DropdownMenuPage = lazy(() => import('src/pages/dropdownMenu.page'));
+const EmojiPickerPage = lazy(() => import('src/pages/emojiPicker.page'));
 const FormikPage = lazy(() => import('src/pages/formik.page'));
 const HomePage = lazy(() => import('src/pages/home.page'));
 const HoverCardPage = lazy(() => import('src/pages/hoverCard.page'));
@@ -72,6 +74,7 @@ export const componentList = [
   { name: 'Carousel', path: '/carousel', element: <CarouselPage /> },
   { name: 'Chart', path: '/chart', element: <ChartPage /> },
   { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
+  { name: 'ColorPicker', path: '/colorpicker', element: <ColorPickerPage /> },
   { name: 'Command', path: '/command', element: <CommandPage /> },
   { name: 'ComboBox', path: '/combobox', element: <ComboBoxPage /> },
   { name: 'ContextMenu', path: '/contextmenu', element: <ContextMenuPage /> },
@@ -86,6 +89,7 @@ export const componentList = [
     path: '/dropdownmenu',
     element: <DropdownMenuPage />,
   },
+  { name: 'EmojiPicker', path: '/emojipicker', element: <EmojiPickerPage /> },
   { name: 'Formik', path: '/formik', element: <FormikPage /> },
   { name: 'Home', path: '/home', element: <HomePage /> },
   { name: 'HoverCard', path: '/hovercard', element: <HoverCardPage /> },

@@ -343,7 +343,6 @@ export const SliderView: React.FC<SliderViewProps> = ({
               backgroundColor={getColor('color.black')}
               color={getColor('color.white')}
               borderRadius="4px"
-              fontSize="12px"
               whiteSpace="nowrap"
               zIndex={3}
               {...(isVertical

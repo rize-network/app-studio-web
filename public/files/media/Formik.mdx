@@ -4,7 +4,7 @@ Formik integration components for form state management and validation.
 
 ### **Import**
   ```tsx
-  import { FormikForm, FormikTextField, FormikCheckbox, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider } from '@app-studio/web';
+  import { FormikForm, FormikTextField, FormikCheckbox, FormikColorInput, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider } from '@app-studio/web';
   ```
 
 ### **Basic Form**
@@ -185,6 +185,66 @@ export const FormikCheckboxExample = () => {
             name="subscribe"
             label="Subscribe to newsletter"
           />
+          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+            Submit
+          </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikColorInput**
+Color picker input integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikColorInput } from '../Formik.ColorInput';
+import { Button } from '../../Button/Button';
+
+export const FormikColorInputExample = () => {
+  return (
+    <Formik
+      initialValues={{
+        backgroundColor: 'color.blue.500',
+        textColor: 'color.white'
+      }}
+      validationSchema={Yup.object({
+        backgroundColor: Yup.string().required('Background color is required'),
+        textColor: Yup.string().required('Text color is required'),
+      })}
+      onSubmit={(values) => alert(JSON.stringify(values))}
+    >
+      {({ handleSubmit, values }) => (
+        <FormikForm>
+          <FormikColorInput
+            name="backgroundColor"
+            label="Background Color"
+            helperText="Choose the background color"
+          />
+          <FormikColorInput
+            name="textColor"
+            label="Text Color"
+            helperText="Choose the text color"
+          />
+
+          {/* Preview */}
+          <div
+            style={{
+              padding: '16px',
+              borderRadius: '8px',
+              backgroundColor: values.backgroundColor,
+              color: values.textColor,
+              marginTop: '16px'
+            }}
+          >
+            Preview: This is how your colors will look
+          </div>
+
           <Button type="submit" onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>

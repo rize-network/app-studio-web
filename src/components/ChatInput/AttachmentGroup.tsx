@@ -72,7 +72,6 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
           {...views?.item}
         >
           <Text
-            fontSize="12px"
             fontWeight="500"
             color="color.gray.700"
             maxWidth="120px"

@@ -382,9 +382,7 @@ export const DesignSystemSeparator = () => {
                   borderRadius="16px"
                   boxShadow="0 2px 4px rgba(0,0,0,0.1)"
                 >
-                  <Text fontWeight="600" fontSize="12px">
-                    CUSTOM LABEL
-                  </Text>
+                  <Text fontWeight="600">CUSTOM LABEL</Text>
                 </View>
               }
               color="color.purple.300"

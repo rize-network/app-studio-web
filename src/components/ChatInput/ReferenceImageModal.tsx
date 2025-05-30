@@ -163,7 +163,7 @@ export const ReferenceImageModal: React.FC<ReferenceImageModalProps> = ({
               padding="8px 12px"
             >
               <View>
-                <Text fontSize="12px" color="color.white" fontWeight="500">
+                <Text color="color.white" fontWeight="500">
                   {currentImage.name}
                 </Text>
                 <Text fontSize="10px" color="color.gray.300">
@@ -237,7 +237,7 @@ export const ReferenceImageModal: React.FC<ReferenceImageModalProps> = ({
             >
               Drop an image here or click to upload
             </Text>
-            <Text fontSize="12px" color="color.gray.500" marginTop="4px">
+            <Text color="color.gray.500" marginTop="4px">
               Supports JPG, PNG, GIF, WebP
             </Text>
           </View>

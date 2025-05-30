@@ -166,7 +166,6 @@ export const PieChart: React.FC<PieChartProps> = ({
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fill="white"
-                fontSize="12px"
                 fontWeight="bold"
                 pointerEvents="none"
               >

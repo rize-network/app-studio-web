@@ -94,7 +94,7 @@ export const FlowNodeView: React.FC<FlowNodeProps> = ({
             </Text>
           </Horizontal>
           {node.data?.subtitle && (
-            <Text color="color.gray.500" fontSize="sm" textAlign="center">
+            <Text color="color.gray.500" fontSize="12px" textAlign="center">
               {node.data.subtitle}
             </Text>
           )}
@@ -277,7 +277,7 @@ export const FlowEdgeView: React.FC<FlowEdgeProps> = ({
           zIndex={10} // Ensure label is above lines
           {...views?.label}
         >
-          <Text fontSize="xs" textAlign="center">
+          <Text fontSize="12px" textAlign="center">
             {edge.label}
           </Text>
         </View>
@@ -853,13 +853,13 @@ export const FlowView: React.FC<InternalFlowViewProps> = ({
         backgroundColor="white"
         padding={2}
         borderRadius={4}
-        fontSize="xs"
+        fontSize="12px"
         border="1px solid"
         borderColor="color.gray.200"
         zIndex={1000}
         pointerEvents="none" // Don't intercept pointer events
       >
-        <Text fontSize="xs">Zoom: {Math.round(viewport.zoom * 100)}%</Text>
+        <Text fontSize="12px">Zoom: {Math.round(viewport.zoom * 100)}%</Text>
       </View>
     </View>
   );
