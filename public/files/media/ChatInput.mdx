@@ -267,29 +267,29 @@ export const ChatInputWithAgent = () => {
 
 | Prop | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| onSubmit | (message: string, options?: { model_name?: string; enable_thinking?: boolean }) => void | required | Callback function when the form is submitted |
+| onSubmit | `(message: string, options?: { model_name?: string; enable_thinking?: boolean }) => void` | required | Callback function when the form is submitted |
 | placeholder | string | 'Say what you want and Kimmy will surprise you' | Placeholder text for the input |
 | loading | boolean | false | Whether the input is in a loading state |
 | disabled | boolean | false | Whether the input is disabled |
 | isAgentRunning | boolean | false | Whether an agent is currently running |
-| onStopAgent | () => void | undefined | Callback function to stop the agent |
+| onStopAgent | `() => void` | undefined | Callback function to stop the agent |
 | autoFocus | boolean | true | Whether to auto focus the input |
 | value | string | undefined | Controlled value for the input |
-| onChange | (value: string) => void | undefined | Callback function when the input value changes |
-| onFileBrowse | () => void | undefined | Callback function when the file browser is opened |
+| onChange | `(value: string) => void` | undefined | Callback function when the input value changes |
+| onFileBrowse | `() => void` | undefined | Callback function when the file browser is opened |
 | sandboxId | string | undefined | ID of the sandbox |
 | hideAttachments | boolean | false | Whether to hide the attachment button |
 | title | string | undefined | Title for the chat input |
 | showGuideTip | boolean | false | Whether to show the guide tip |
 | guideVideoUrl | string | undefined | URL for the guide video |
-| onGuideClose | () => void | undefined | Callback function when the guide tip is closed |
-| promptExamples | PromptExample[] | [] | List of prompt examples |
-| onPromptExampleSelect | (example: PromptExample) => void | undefined | Callback function when a prompt example is selected |
+| onGuideClose | `() => void` | undefined | Callback function when the guide tip is closed |
+| promptExamples | `PromptExample[]` | [] | List of prompt examples |
+| onPromptExampleSelect | `(example: PromptExample) => void` | undefined | Callback function when a prompt example is selected |
 | showReferenceImageButton | boolean | false | Whether to show the reference image button |
-| onReferenceImageClick | () => void | undefined | Callback function when the reference image button is clicked |
-| size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' | 'md' | Size of the chat input |
-| shape | 'default' \| 'sharp' \| 'rounded' \| 'pillShaped' | 'rounded' | Shape of the chat input |
-| variant | 'default' \| 'outline' \| 'none' | 'default' | Visual variant of the chat input |
+| onReferenceImageClick | `() => void` | undefined | Callback function when the reference image button is clicked |
+| size | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | 'md' | Size of the chat input |
+| shape | `'default' \| 'sharp' \| 'rounded' \| 'pillShaped'` | 'rounded' | Shape of the chat input |
+| variant | `'default' \| 'outline' \| 'none'` | 'default' | Visual variant of the chat input |
 | views | object | {} | Custom styling for different parts of the component |
 
 ### **File Upload Integration**
