@@ -60,6 +60,8 @@ const TooltipPage = lazy(() => import('src/pages/tooltip.page'));
 const TogglePage = lazy(() => import('src/pages/toggle.page'));
 const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 
+const BackgroundPage = lazy(() => import('src/pages/background.page'));
+
 export const componentList = [
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
   { name: 'Chat', path: '/chat', element: <ChatInputDemo /> },
@@ -68,6 +70,7 @@ export const componentList = [
   { name: 'Alert', path: '/alert', element: <AlertPage /> },
   { name: 'AspectRatio', path: '/aspectratio', element: <AspectRatioPage /> },
   { name: 'Avatar', path: '/avatar', element: <AvatarPage /> },
+  { name: 'Background', path: '/background', element: <BackgroundPage /> },
   { name: 'Badge', path: '/badge', element: <BadgePage /> },
   { name: 'Button', path: '/button', element: <ButtonPage /> },
   { name: 'Card', path: '/card', element: <CardPage /> },

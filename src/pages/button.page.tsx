@@ -6,6 +6,8 @@ import {
   ButtonSizes as ButtonSizes,
   DisabledButton,
   LoaderButtons,
+  BorderMovingButtons,
+  AnimatedStrokeButtons,
 } from 'src/components/Button/examples';
 import { View } from 'app-studio';
 export const ButtonPage = () => {
@@ -55,6 +57,18 @@ export const ButtonPage = () => {
             <td>Icon</td>
             <td>
               <IconButtons />
+            </td>
+          </tr>
+          <tr>
+            <td>Border Moving Effect</td>
+            <td>
+              <BorderMovingButtons />
+            </td>
+          </tr>
+          <tr>
+            <td>Animated Stroke Effect</td>
+            <td>
+              <AnimatedStrokeButtons />
             </td>
           </tr>
         </tbody>

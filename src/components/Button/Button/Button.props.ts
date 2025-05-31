@@ -52,6 +52,14 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional color scheme for the button
   color?: string;
 
+  // Props for borderMoving variant
+  borderMovingDuration?: number;
+  borderMovingGradientColors?: string[];
+
+  // Props for animatedStroke variant
+  animatedStrokeAccentColor?: string;
+  animatedStrokeTextColor?: string;
+
   views?: {
     container?: ViewProps;
     content?: ViewProps;

@@ -199,4 +199,63 @@ export const getButtonVariants = (
     _active: { textDecorationThickness: '2px' },
     transition: 'all 0.2s ease',
   },
+  borderMoving: {
+    position: 'relative',
+    backgroundColor: 'black',
+    overflow: 'hidden',
+    color: 'white',
+    borderWidth: 0,
+    borderStyle: 'none',
+    borderColor: 'transparent',
+  },
+  animatedStroke: {
+    display: 'inline-block',
+    maxWidth: '20rem',
+    margin: '0 auto',
+    textAlign: 'center',
+    textDecoration: 'none',
+    position: 'relative',
+    cursor: 'pointer',
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    borderStyle: 'none',
+    borderColor: 'transparent',
+  },
 });
+
+/**
+ * Generate offset path for border animation
+ */
+export function generateOffsetPath(
+  width: number,
+  height: number,
+  borderRadius: number | string
+): string {
+  let radius: number;
+
+  if (typeof borderRadius === 'string' && borderRadius.endsWith('%')) {
+    const percentage = parseFloat(borderRadius) / 100;
+    radius = Math.min(width, height) * percentage;
+  } else {
+    radius = parseFloat(borderRadius.toString());
+  }
+
+  radius = Math.min(radius, width / 2, height / 2);
+
+  if (radius === 0) {
+    return `M 0,0 H ${width} V ${height} H 0 Z`;
+  }
+
+  return `
+    M ${radius},0
+    H ${width - radius}
+    A ${radius},${radius} 0 0 1 ${width},${radius}
+    V ${height - radius}
+    A ${radius},${radius} 0 0 1 ${width - radius},${height}
+    H ${radius}
+    A ${radius},${radius} 0 0 1 0,${height - radius}
+    V ${radius}
+    A ${radius},${radius} 0 0 1 ${radius},0
+    Z
+  `;
+}

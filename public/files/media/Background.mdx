@@ -1,0 +1,154 @@
+# Background
+
+A collection of animated background effects including Aurora, Meteors, and animated border effects.
+
+### **Import**
+```tsx
+import { Background } from '@app-studio/web';
+```
+
+### **Aurora Background**
+Creates a beautiful animated aurora gradient background effect.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Text } from '../../Text/Text';
+
+export const AuroraDemo = () => (
+  <Background.Aurora height="300px" showRadialGradient={true}>
+    <Text color="white" fontSize={20}>
+      Aurora Effect Background
+    </Text>
+  </Background.Aurora>
+);
+```
+
+### **Meteors Effect**
+Animated falling meteors effect with customizable count.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+
+export const MeteorsDemo = () => (
+  <Background.Meteors number={20} />
+);
+```
+
+### **Wall Effect**
+Interactive grid wall with hover color effects.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+
+export const WallDemo = () => (
+  <Background.Wall rows={15} cols={10} squareSize={40} />
+);
+```
+
+### **Border Moving Button**
+Button with animated moving gradient border.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+
+export const BorderButtonDemo = () => (
+  <Background.BorderMovingButton
+    duration={2}
+    borderRadius={25}
+    gradientColors={['#705CFF', '#FF5C97', '#FFC75C']}
+  >
+    Click Me
+  </Background.BorderMovingButton>
+);
+```
+
+### **Animated Stroke Button**
+Button with animated stroke effect on hover.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+
+export const StrokeButtonDemo = () => (
+  <Background.AnimatedStrokeButton
+    text="Hover Me"
+    width={300}
+    height={60}
+    accentColor="color.blue.500"
+    textColor="color.gray.800"
+    onClick={() => console.log('Clicked!')}
+  />
+);
+```
+
+### **Combined Effects**
+Multiple background effects can be combined for rich visual experiences.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Text } from '../../Text/Text';
+import { Vertical, Horizontal } from 'app-studio';
+
+export const CombinedDemo = () => (
+  <Background.Aurora height="400px" showRadialGradient={true}>
+    <Vertical alignItems="center" gap={24}>
+      <Text color="white" fontSize={24} fontWeight="600">
+        Welcome to the Future
+      </Text>
+
+      <Horizontal gap={16}>
+        <Background.BorderMovingButton duration={2}>
+          Get Started
+        </Background.BorderMovingButton>
+
+        <Background.AnimatedStrokeButton
+          text="Learn More"
+          accentColor="white"
+          textColor="white"
+        />
+      </Horizontal>
+    </Vertical>
+  </Background.Aurora>
+);
+```
+
+## Props
+
+### Aurora Background Props
+- `showRadialGradient?: boolean` - Whether to apply radial gradient mask
+- `children?: ReactNode` - Content to display over the aurora
+- `height?: string | number` - Height of the aurora container
+
+### Meteors Props
+- `number?: number` - Number of meteors to display (default: 20)
+- `width?: number` - Container width
+- `height?: number` - Container height
+
+### Wall Props
+- `rows?: number` - Number of rows in the grid (default: 15)
+- `cols?: number` - Number of columns in the grid (default: 10)
+- `squareSize?: number` - Size of each grid square (default: 40)
+- `width?: number` - Container width
+- `height?: number` - Container height
+
+### Border Moving Button Props
+- `children: ReactNode` - Button content
+- `duration?: number` - Animation duration in seconds (default: 2)
+- `borderRadius?: number` - Border radius (default: 50)
+- `gradientColors?: string[]` - Array of gradient colors
+- `width?: number` - Button width (default: 300)
+- `height?: number` - Button height (default: 64)
+
+### Animated Stroke Button Props
+- `text?: string` - Button text (default: "Learn CSS")
+- `width?: number` - Button width (default: 300)
+- `height?: number` - Button height (default: 60)
+- `accentColor?: string` - Stroke color (default: "#705CFF")
+- `textColor?: string` - Text color (default: "#333333")
+- `href?: string` - Link URL
+- `onClick?: () => void` - Click handler

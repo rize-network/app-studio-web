@@ -1,4 +1,6 @@
+export * from './animatedStroke';
 export * from './autofocus';
+export * from './borderMoving';
 export * from './default';
 export * from './designSystem'; // New design system example
 export * from './icon';

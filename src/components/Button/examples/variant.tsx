@@ -20,5 +20,8 @@ export const VariantButtons = () => (
         {variant}
       </Button>
     ))}
+    {/* Effect variants */}
+    <Button variant="borderMoving">Border Moving Effect</Button>
+    <Button variant="animatedStroke">Animated Stroke Effect</Button>
   </Vertical>
 );

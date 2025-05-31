@@ -54,6 +54,7 @@ export * from './Tooltip/Tooltip';
 export * from './Tree/Tree';
 export * from './Flow/Flow';
 export * from './ChatInput/ChatInput';
+export * from './Background/Background';
 
 export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';
@@ -105,3 +106,4 @@ export * from './Tooltip/Tooltip/Tooltip.props';
 export * from './Tree/Tree/Tree.props';
 export * from './Flow/Flow/Flow.props';
 export * from './ChatInput/ChatInput/ChatInput.props';
+export * from './Background/Background/Background.props';
