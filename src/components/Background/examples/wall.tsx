@@ -8,7 +8,7 @@ export const WallDemo = () => (
     <Text fontSize={16} fontWeight="600">
       Wall Background Effect
     </Text>
-    
+
     <Vertical gap={16}>
       <Text fontSize={14} color="color.gray.600">
         Default Wall (15x10 grid)

@@ -48,6 +48,53 @@ export const WallDemo = () => (
 );
 ```
 
+### **Particles Effect**
+Floating animated particles with customizable shapes and colors.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+
+export const ParticlesDemo = () => (
+  <Background.Particles
+    count={50}
+    speed="medium"
+    shapes={['circle', 'square', 'triangle']}
+  />
+);
+```
+
+### **Grid Effect**
+Animated geometric grid with pulsing cells.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+
+export const GridDemo = () => (
+  <Background.Grid
+    gridSize={30}
+    animationSpeed="medium"
+  />
+);
+```
+
+### **Ripples Effect**
+Expanding circular ripples from random points.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+
+export const RipplesDemo = () => (
+  <Background.Ripples
+    rippleCount={5}
+    maxSize={200}
+    frequency={3}
+  />
+);
+```
+
 ### **Border Moving Button**
 Button with animated moving gradient border.
 
@@ -133,6 +180,30 @@ export const CombinedDemo = () => (
 - `rows?: number` - Number of rows in the grid (default: 15)
 - `cols?: number` - Number of columns in the grid (default: 10)
 - `squareSize?: number` - Size of each grid square (default: 40)
+- `width?: number` - Container width
+- `height?: number` - Container height
+
+### Particles Props
+- `count?: number` - Number of particles to display (default: 50)
+- `colors?: string[]` - Array of particle colors (default: blue/purple/pink palette)
+- `speed?: 'slow' | 'medium' | 'fast'` - Animation speed (default: 'medium')
+- `shapes?: ('circle' | 'square' | 'triangle')[]` - Particle shapes (default: ['circle'])
+- `width?: number` - Container width
+- `height?: number` - Container height
+
+### Grid Props
+- `gridSize?: number` - Size of each grid cell in pixels (default: 30)
+- `lineColor?: string` - Color of grid lines (default: 'rgba(59, 130, 246, 0.3)')
+- `pulseColor?: string` - Color of pulsing cells (default: 'rgba(59, 130, 246, 0.8)')
+- `animationSpeed?: 'slow' | 'medium' | 'fast'` - Speed of pulse animation (default: 'medium')
+- `width?: number` - Container width
+- `height?: number` - Container height
+
+### Ripples Props
+- `rippleCount?: number` - Number of ripple sources (default: 5)
+- `colors?: string[]` - Array of ripple colors (default: blue/purple/pink/green palette)
+- `maxSize?: number` - Maximum ripple size in pixels (default: 200)
+- `frequency?: number` - Ripple generation frequency (default: 3)
 - `width?: number` - Container width
 - `height?: number` - Container height
 

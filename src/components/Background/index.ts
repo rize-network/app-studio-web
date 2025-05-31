@@ -3,6 +3,10 @@ export type {
   BackgroundProps,
   AuroraBackgroundProps,
   MeteorsProps,
+  WallProps,
+  ParticlesProps,
+  GridProps,
+  RipplesProps,
   BackgroundStyles,
 } from './Background/Background.props';
 export type {

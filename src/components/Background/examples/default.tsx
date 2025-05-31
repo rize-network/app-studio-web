@@ -33,5 +33,30 @@ export const DefaultDemo = () => (
       </Text>
       <Background.Wall rows={15} cols={10} squareSize={40} />
     </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color.gray.600">
+        Particles Effect
+      </Text>
+      <Background.Particles
+        count={30}
+        speed="medium"
+        shapes={['circle', 'square']}
+      />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color.gray.600">
+        Grid Effect
+      </Text>
+      <Background.Grid gridSize={25} animationSpeed="medium" />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color.gray.600">
+        Ripples Effect
+      </Text>
+      <Background.Ripples rippleCount={4} maxSize={150} frequency={2} />
+    </Vertical>
   </Vertical>
 );

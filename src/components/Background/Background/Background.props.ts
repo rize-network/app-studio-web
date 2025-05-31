@@ -37,6 +37,36 @@ export interface WallProps extends ViewProps {
 }
 
 /**
+ * Particles component props
+ */
+export interface ParticlesProps extends Omit<ViewProps, 'colors'> {
+  count?: number;
+  colors?: string[];
+  speed?: 'slow' | 'medium' | 'fast';
+  shapes?: ('circle' | 'square' | 'triangle')[];
+}
+
+/**
+ * Grid component props
+ */
+export interface GridProps extends ViewProps {
+  gridSize?: number;
+  lineColor?: string;
+  pulseColor?: string;
+  animationSpeed?: 'slow' | 'medium' | 'fast';
+}
+
+/**
+ * Ripples component props
+ */
+export interface RipplesProps extends Omit<ViewProps, 'colors'> {
+  rippleCount?: number;
+  colors?: string[];
+  maxSize?: number;
+  frequency?: number;
+}
+
+/**
  * Background styles for customization
  */
 export interface BackgroundStyles {

@@ -8,7 +8,7 @@ export const MeteorsDemo = () => (
     <Text fontSize={16} fontWeight="600">
       Meteors Effect Variations
     </Text>
-    
+
     <Horizontal gap={24} flexWrap="wrap">
       <Vertical gap={16}>
         <Text fontSize={14} color="color.gray.600">
@@ -36,10 +36,10 @@ export const MeteorsDemo = () => (
       <Text fontSize={14} color="color.gray.600">
         Custom Size Meteors
       </Text>
-      <Background.Meteors 
-        number={15} 
-        width={600} 
-        height={300} 
+      <Background.Meteors
+        number={15}
+        width={600}
+        height={300}
         backgroundColor="color.gray.900"
       />
     </Vertical>

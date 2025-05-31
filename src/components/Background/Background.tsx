@@ -25,6 +25,18 @@ import { BackgroundView } from './Background/Background.view';
  * @example
  * // Wall effect
  * <Background.Wall rows={15} cols={10} squareSize={40} />
+ *
+ * @example
+ * // Particles effect
+ * <Background.Particles count={50} speed="medium" shapes={['circle', 'square']} />
+ *
+ * @example
+ * // Grid effect
+ * <Background.Grid gridSize={30} animationSpeed="medium" />
+ *
+ * @example
+ * // Ripples effect
+ * <Background.Ripples rippleCount={5} maxSize={200} frequency={3} />
  */
 const BackgroundComponent = React.forwardRef<HTMLDivElement, BackgroundProps>(
   (props, ref) => <BackgroundView {...props} ref={ref} />
@@ -36,6 +48,9 @@ export const Background = Object.assign(BackgroundComponent, {
   Aurora: BackgroundView.Aurora,
   Meteors: BackgroundView.Meteors,
   Wall: BackgroundView.Wall,
+  Particles: BackgroundView.Particles,
+  Grid: BackgroundView.Grid,
+  Ripples: BackgroundView.Ripples,
 });
 
 Background.displayName = 'Background';

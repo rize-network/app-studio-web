@@ -3,19 +3,16 @@ import { ViewProps } from 'app-studio';
 /**
  * Background effect types
  */
-export type BackgroundEffect = 
-  | 'aurora' 
-  | 'meteors' 
-  | 'borderMoving' 
+export type BackgroundEffect =
+  | 'aurora'
+  | 'meteors'
+  | 'borderMoving'
   | 'animatedStroke';
 
 /**
  * Aurora gradient direction options
  */
-export type AuroraDirection = 
-  | 'horizontal' 
-  | 'vertical' 
-  | 'diagonal';
+export type AuroraDirection = 'horizontal' | 'vertical' | 'diagonal';
 
 /**
  * Meteor animation timing options

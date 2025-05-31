@@ -9,7 +9,7 @@ export const AuroraDemo = () => (
     <Text fontSize={16} fontWeight="600">
       Aurora Background Variations
     </Text>
-    
+
     <Vertical gap={24}>
       <Text fontSize={14} color="color.gray.600">
         With Radial Gradient
