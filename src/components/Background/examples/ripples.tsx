@@ -8,7 +8,7 @@ export const RipplesDemo = () => (
     <Text fontSize={16} fontWeight="600">
       Ripples Background Effect
     </Text>
-    
+
     <Vertical gap={16}>
       <Text fontSize={14} color="color.gray.600">
         Default Ripples (5 ripples, medium size)
@@ -39,9 +39,9 @@ export const RipplesDemo = () => (
         maxSize={180}
         frequency={3}
         colors={[
-          'rgba(255, 99, 132, 0.6)',   // red
-          'rgba(54, 162, 235, 0.6)',   // blue
-          'rgba(255, 205, 86, 0.6)',   // yellow
+          'rgba(255, 99, 132, 0.6)', // red
+          'rgba(54, 162, 235, 0.6)', // blue
+          'rgba(255, 205, 86, 0.6)', // yellow
         ]}
       />
     </Vertical>

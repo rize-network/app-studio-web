@@ -8,7 +8,7 @@ export const GridDemo = () => (
     <Text fontSize={16} fontWeight="600">
       Grid Background Effect
     </Text>
-    
+
     <Vertical gap={16}>
       <Text fontSize={14} color="color.gray.600">
         Default Grid (30px cells, medium speed)
