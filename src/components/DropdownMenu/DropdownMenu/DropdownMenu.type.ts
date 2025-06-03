@@ -23,6 +23,7 @@ export interface DropdownMenuContextType {
   setActiveSubmenuId: (id: string | null) => void;
   size: Size;
   variant: Variant;
+  triggerRef: React.RefObject<HTMLElement>;
 }
 
 export interface DropdownMenuStyles {

@@ -50,7 +50,11 @@ export const DropdownMenuItemStates = {
   },
 };
 
-// Helper function to calculate position based on side and alignment
+// Note: Static positioning logic has been replaced with intelligent viewport-aware
+// positioning in the DropdownMenu component that automatically chooses optimal placement
+// based on available space and prevents content from going off-screen.
+
+// Legacy positioning function - kept for backward compatibility if needed
 export const getDropdownPosition = (
   side: Position = 'bottom',
   align: Alignment = 'start'

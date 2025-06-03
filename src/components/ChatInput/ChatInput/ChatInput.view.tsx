@@ -30,6 +30,8 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   loading = false,
   disabled = false,
   isAgentRunning = false,
+  leftButtons,
+  rightButtons,
   onStopAgent,
   loadingText = 'Agent is working...',
   autoFocus = true,
@@ -43,6 +45,9 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   shape = 'rounded',
   variant = 'default',
   views = {},
+  mentionData = [],
+  mentionTrigger = '@',
+  onMentionSelect,
 
   // Props from state
   value,
@@ -216,7 +221,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
       </Horizontal> */}
 
       {/* Reference Image Modal */}
-      <View position="relative" width="100%">
+      <View position="relative" width="100%" overflow="visible">
         {/* <ReferenceImageModal
           isOpen={isReferenceImageModalShown}
           onClose={toggleReferenceImageModal}
@@ -234,7 +239,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
         <View
           as="form"
           onSubmit={handleSubmit}
-          overflowY="auto"
+          overflow="visible"
           display="flex"
           flexDirection="column"
           position="relative"
@@ -243,7 +248,8 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
 
           {...contentStyles}
           {...containerStyles}
-          paddingHorizontal={20}
+          paddingHorizontal={16}
+          paddingVertical={10}
           backgroundColor={isDraggingOver ? 'color.blue.50' : undefined}
         >
           {/* Attachments */}
@@ -267,10 +273,25 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             ref={editableRef}
             value={value || ''}
             onChange={handleChange}
-            onSubmit={handleSubmit}
             placeholder={placeholder}
             disabled={disabled && !isAgentRunning}
             autoFocus={autoFocus}
+            suggestions={
+              promptExamples?.map((example) => ({
+                id: example.id,
+                text: example.text,
+                description: undefined,
+              })) || []
+            }
+            showSuggestions={
+              promptExamples && promptExamples.length > 0 && !value
+            }
+            onSuggestionSelect={(suggestion) => {
+              handleChange(suggestion.text);
+            }}
+            mentionData={mentionData}
+            mentionTrigger={mentionTrigger}
+            onMentionSelect={onMentionSelect}
             views={{
               container: {},
               input: views?.editableInput,
@@ -298,7 +319,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                   views={{
                     container: {
                       height: '36px',
-                      margin: '0 12px',
+                      //margin: '0 12px',
                       // borderRadius: '8px',
                       // backgroundColor: 'transparent',
                       // border: '1px solid',
@@ -308,7 +329,6 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                         backgroundColor: 'color.gray.100',
                       },
                       ...views?.fileButton,
-                      ...containerStyles,
                     },
                   }}
                   containerProps={{
@@ -316,6 +336,8 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 4,
+                    borderRadius: shape === 'rounded' ? '50%' : 4,
+                    padding: 10,
                   }}
                   textProps={{
                     fontSize: '14px',
@@ -329,55 +351,60 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                   }}
                 />
               )}
+              {leftButtons}
             </Horizontal>
 
             {/* Submit Button */}
-            <View
-              as="button"
-              type="submit"
-              height="40px"
-              width="40px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              backgroundColor={
-                isAgentRunning
-                  ? 'theme.error'
-                  : hasText
-                  ? 'theme.primary'
-                  : 'color.gray.300'
-              }
-              color="color.white"
-              borderRadius="50%"
-              border="none"
-              cursor={hasText ? 'pointer' : 'not-allowed'}
-              disabled={!hasText || loading || (disabled && !isAgentRunning)}
-              transition="all 0.2s ease"
-              _hover={{
-                backgroundColor: isAgentRunning
-                  ? 'color.red.600'
-                  : hasText
-                  ? 'color.blue.600'
-                  : 'color.gray.300',
-              }}
-              {...views?.submitButton}
-            >
-              {isAgentRunning ? (
-                <StopIcon
-                  widthHeight={16}
-                  color="currentColor"
-                  filled={false}
-                />
-              ) : loading ? (
-                <Loader type="quarter" size={16} color="color.white" />
-              ) : (
-                <SendIcon
-                  widthHeight={16}
-                  color="currentColor"
-                  filled={false}
-                />
-              )}
-            </View>
+            <Horizontal gap={8} alignItems="center">
+              <View
+                as="button"
+                type="button"
+                onClick={handleSubmit}
+                height="40px"
+                width="40px"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                backgroundColor={
+                  isAgentRunning
+                    ? 'theme.error'
+                    : hasText
+                    ? 'theme.primary'
+                    : 'color.gray.300'
+                }
+                color="color.white"
+                borderRadius={shape === 'rounded' ? '50%' : 4}
+                border="none"
+                cursor={hasText ? 'pointer' : 'not-allowed'}
+                disabled={!hasText || loading || (disabled && !isAgentRunning)}
+                transition="all 0.2s ease"
+                _hover={{
+                  backgroundColor: isAgentRunning
+                    ? 'color.red.600'
+                    : hasText
+                    ? 'color.blue.600'
+                    : 'color.gray.300',
+                }}
+                {...views?.submitButton}
+              >
+                {isAgentRunning ? (
+                  <StopIcon
+                    widthHeight={16}
+                    color="currentColor"
+                    filled={false}
+                  />
+                ) : loading ? (
+                  <Loader type="quarter" size={16} color="color.white" />
+                ) : (
+                  <SendIcon
+                    widthHeight={16}
+                    color="currentColor"
+                    filled={false}
+                  />
+                )}
+              </View>
+              {rightButtons}
+            </Horizontal>
           </Horizontal>
         </View>
       </View>

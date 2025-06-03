@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useRef, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { View, ViewProps } from 'app-studio';
 import {
   DropdownMenuContextType,
@@ -16,7 +22,6 @@ import {
   DropdownMenuSizes,
   DropdownMenuVariants,
   DropdownMenuItemStates,
-  getDropdownPosition,
 } from './DropdownMenu.style';
 import { ChevronIcon } from '../../Icon/Icon';
 
@@ -28,6 +33,7 @@ const DropdownMenuContext = createContext<DropdownMenuContextType>({
   setActiveSubmenuId: () => {},
   size: 'md',
   variant: 'default',
+  triggerRef: { current: null },
 });
 
 // Provider component for the DropdownMenu context
@@ -59,7 +65,7 @@ export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
   views,
   ...props
 }) => {
-  const { isOpen, setIsOpen } = useDropdownMenuContext();
+  const { isOpen, setIsOpen, triggerRef } = useDropdownMenuContext();
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -68,6 +74,7 @@ export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
 
   return (
     <View
+      ref={triggerRef}
       id="dropdown-trigger"
       onClick={handleClick}
       cursor="pointer"
@@ -89,24 +96,163 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   views,
   ...props
 }) => {
-  const {
-    isOpen, //activeSubmenuId, setActiveSubmenuId, size,
-    variant,
-  } = useDropdownMenuContext();
+  const { isOpen, variant, triggerRef } = useDropdownMenuContext();
+
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [optimalPosition, setOptimalPosition] = useState({
+    x: 0,
+    y: 0,
+    placement: side,
+  });
+
+  // Calculate optimal position when the dropdown opens
+  useEffect(() => {
+    if (isOpen && contentRef.current && triggerRef.current) {
+      const contentRect = contentRef.current.getBoundingClientRect();
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+
+      // Get content dimensions
+      const contentWidth = Math.max(contentRect.width || 180, 180);
+      const contentHeight = Math.max(contentRect.height || 100, 100);
+
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate available space on all sides from the trigger
+      const availableSpace = {
+        top: triggerRect.top,
+        right: viewportWidth - triggerRect.right,
+        bottom: viewportHeight - triggerRect.bottom,
+        left: triggerRect.left,
+      };
+
+      // Determine optimal placement based on available space and preferred side
+      const placements = [
+        {
+          placement: 'bottom' as const,
+          space: availableSpace.bottom,
+          fits: availableSpace.bottom >= contentHeight + 8,
+          x:
+            align === 'start'
+              ? triggerRect.left
+              : align === 'end'
+              ? triggerRect.right - contentWidth
+              : triggerRect.left + triggerRect.width / 2 - contentWidth / 2,
+          y: triggerRect.bottom + 8,
+        },
+        {
+          placement: 'top' as const,
+          space: availableSpace.top,
+          fits: availableSpace.top >= contentHeight + 8,
+          x:
+            align === 'start'
+              ? triggerRect.left
+              : align === 'end'
+              ? triggerRect.right - contentWidth
+              : triggerRect.left + triggerRect.width / 2 - contentWidth / 2,
+          y: triggerRect.top - contentHeight - 8,
+        },
+        {
+          placement: 'right' as const,
+          space: availableSpace.right,
+          fits: availableSpace.right >= contentWidth + 8,
+          x: triggerRect.right + 8,
+          y:
+            align === 'start'
+              ? triggerRect.top
+              : align === 'end'
+              ? triggerRect.bottom - contentHeight
+              : triggerRect.top + triggerRect.height / 2 - contentHeight / 2,
+        },
+        {
+          placement: 'left' as const,
+          space: availableSpace.left,
+          fits: availableSpace.left >= contentWidth + 8,
+          x: triggerRect.left - contentWidth - 8,
+          y:
+            align === 'start'
+              ? triggerRect.top
+              : align === 'end'
+              ? triggerRect.bottom - contentHeight
+              : triggerRect.top + triggerRect.height / 2 - contentHeight / 2,
+        },
+      ];
+
+      // First try the preferred side if it fits
+      const preferredPlacement = placements.find(
+        (p) => p.placement === side && p.fits
+      );
+      if (preferredPlacement) {
+        setOptimalPosition({
+          x: preferredPlacement.x,
+          y: preferredPlacement.y,
+          placement: preferredPlacement.placement,
+        });
+        return;
+      }
+
+      // Otherwise, find the best fitting placement
+      const fittingPlacement = placements.find((p) => p.fits);
+      if (fittingPlacement) {
+        setOptimalPosition({
+          x: fittingPlacement.x,
+          y: fittingPlacement.y,
+          placement: fittingPlacement.placement,
+        });
+        return;
+      }
+
+      // If nothing fits, choose the placement with the most space
+      const bestPlacement = placements.reduce((best, current) =>
+        current.space > best.space ? current : best
+      );
+
+      // Ensure the content stays within viewport bounds
+      let finalX = bestPlacement.x;
+      let finalY = bestPlacement.y;
+
+      if (finalX + contentWidth > viewportWidth) {
+        finalX = viewportWidth - contentWidth - 8;
+      }
+      if (finalX < 8) {
+        finalX = 8;
+      }
+      if (finalY + contentHeight > viewportHeight) {
+        finalY = viewportHeight - contentHeight - 8;
+      }
+      if (finalY < 8) {
+        finalY = 8;
+      }
+
+      setOptimalPosition({
+        x: finalX,
+        y: finalY,
+        placement: bestPlacement.placement,
+      });
+    }
+  }, [isOpen, side, align, triggerRef]);
 
   if (!isOpen) {
     return null;
   }
 
+  // Create intelligent positioning styles
+  const positionStyles: React.CSSProperties = {
+    position: 'fixed', // Use fixed positioning since we calculated viewport coordinates
+    left: optimalPosition.x,
+    top: optimalPosition.y,
+    zIndex: 1000,
+  };
+
   return (
     <View
+      ref={contentRef}
       id="dropdown-menu"
-      position="absolute"
-      zIndex={1000}
       borderRadius={4}
       boxShadow="0px 2px 8px rgba(0, 0, 0, 0.15)"
       overflow="hidden"
-      {...getDropdownPosition(side, align)}
+      style={positionStyles}
       {...DropdownMenuVariants[variant]}
       {...views?.menu}
       {...props}
@@ -118,6 +264,12 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
 
         return <DropdownMenuItem key={item.id} item={item} views={views} />;
       })}
+      {/* Debug info - can be removed in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{ fontSize: '10px', opacity: 0.7, padding: '4px' }}>
+          Placement: {optimalPosition.placement}
+        </div>
+      )}
     </View>
   );
 };

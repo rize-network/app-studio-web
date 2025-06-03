@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   DropdownMenuProps,
   DropdownMenuType,
@@ -30,6 +30,8 @@ const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
   const { isOpen, setIsOpen, activeSubmenuId, setActiveSubmenuId } =
     useDropdownMenuState(defaultOpen);
 
+  const triggerRef = useRef<HTMLElement>(null);
+
   return (
     <DropdownMenuProvider
       value={{
@@ -39,6 +41,7 @@ const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
         setActiveSubmenuId,
         size,
         variant,
+        triggerRef,
       }}
     >
       <DropdownMenuView

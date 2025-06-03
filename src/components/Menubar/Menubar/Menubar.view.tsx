@@ -1,4 +1,10 @@
-import React, { createContext, useContext } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { View, ViewProps } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
@@ -22,7 +28,6 @@ import {
   MenubarVariants,
   MenubarOrientations,
   MenubarItemStates,
-  getMenubarContentPosition,
 } from './Menubar.style';
 
 // Create context for the Menubar
@@ -36,6 +41,7 @@ const MenubarContext = createContext<MenubarContextType>({
   orientation: 'horizontal',
   size: 'md',
   variant: 'default',
+  triggerRefs: { current: {} },
 });
 
 // Hook to use the Menubar context
@@ -115,11 +121,30 @@ export const MenubarTrigger: React.FC<MenubarTriggerProps> = ({
   disabled = false,
   views,
 }) => {
-  const { activeMenuId, setActiveMenuId, toggleMenu, isMenuOpen, size } =
-    useMenubarContext();
+  const {
+    activeMenuId,
+    setActiveMenuId,
+    toggleMenu,
+    isMenuOpen,
+    size,
+    triggerRefs,
+  } = useMenubarContext();
 
+  const triggerRef = useRef<HTMLDivElement>(null);
   const isActive = activeMenuId === menuId;
   const isOpen = isMenuOpen(menuId);
+
+  // Store the trigger ref in the context
+  useEffect(() => {
+    if (triggerRef.current && menuId) {
+      triggerRefs.current[menuId] = triggerRef.current;
+    }
+    return () => {
+      if (menuId) {
+        delete triggerRefs.current[menuId];
+      }
+    };
+  }, [menuId, triggerRefs]);
 
   const handleClick = () => {
     if (disabled) return;
@@ -130,6 +155,7 @@ export const MenubarTrigger: React.FC<MenubarTriggerProps> = ({
 
   return (
     <View
+      ref={triggerRef}
       id="menubar-trigger"
       role="menuitem"
       aria-haspopup="true"
@@ -156,29 +182,178 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
   menuId,
   views,
 }) => {
-  const { isMenuOpen, orientation } = useMenubarContext();
+  const { isMenuOpen, orientation, triggerRefs } = useMenubarContext();
+
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [optimalPosition, setOptimalPosition] = useState({
+    x: 0,
+    y: 0,
+    placement: orientation === 'horizontal' ? 'bottom' : 'right',
+  });
 
   const isOpen = isMenuOpen(menuId);
+
+  // Calculate optimal position when the menu opens
+  useEffect(() => {
+    if (isOpen && contentRef.current && menuId && triggerRefs.current[menuId]) {
+      const contentRect = contentRef.current.getBoundingClientRect();
+      const triggerRect = triggerRefs.current[menuId]!.getBoundingClientRect();
+
+      // Get content dimensions
+      const contentWidth = Math.max(contentRect.width || 200, 200);
+      const contentHeight = Math.max(contentRect.height || 150, 150);
+
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate available space on all sides from the trigger
+      const availableSpace = {
+        top: triggerRect.top,
+        right: viewportWidth - triggerRect.right,
+        bottom: viewportHeight - triggerRect.bottom,
+        left: triggerRect.left,
+      };
+
+      // Determine optimal placement based on orientation and available space
+      const placements =
+        orientation === 'horizontal'
+          ? [
+              // For horizontal menubar, prefer bottom placement
+              {
+                placement: 'bottom' as const,
+                space: availableSpace.bottom,
+                fits: availableSpace.bottom >= contentHeight + 8,
+                x: triggerRect.left,
+                y: triggerRect.bottom + 8,
+              },
+              {
+                placement: 'top' as const,
+                space: availableSpace.top,
+                fits: availableSpace.top >= contentHeight + 8,
+                x: triggerRect.left,
+                y: triggerRect.top - contentHeight - 8,
+              },
+              {
+                placement: 'right' as const,
+                space: availableSpace.right,
+                fits: availableSpace.right >= contentWidth + 8,
+                x: triggerRect.right + 8,
+                y: triggerRect.top,
+              },
+              {
+                placement: 'left' as const,
+                space: availableSpace.left,
+                fits: availableSpace.left >= contentWidth + 8,
+                x: triggerRect.left - contentWidth - 8,
+                y: triggerRect.top,
+              },
+            ]
+          : [
+              // For vertical menubar, prefer right placement
+              {
+                placement: 'right' as const,
+                space: availableSpace.right,
+                fits: availableSpace.right >= contentWidth + 8,
+                x: triggerRect.right + 8,
+                y: triggerRect.top,
+              },
+              {
+                placement: 'left' as const,
+                space: availableSpace.left,
+                fits: availableSpace.left >= contentWidth + 8,
+                x: triggerRect.left - contentWidth - 8,
+                y: triggerRect.top,
+              },
+              {
+                placement: 'bottom' as const,
+                space: availableSpace.bottom,
+                fits: availableSpace.bottom >= contentHeight + 8,
+                x: triggerRect.left,
+                y: triggerRect.bottom + 8,
+              },
+              {
+                placement: 'top' as const,
+                space: availableSpace.top,
+                fits: availableSpace.top >= contentHeight + 8,
+                x: triggerRect.left,
+                y: triggerRect.top - contentHeight - 8,
+              },
+            ];
+
+      // Find the best fitting placement
+      const fittingPlacement = placements.find((p) => p.fits);
+      if (fittingPlacement) {
+        setOptimalPosition({
+          x: fittingPlacement.x,
+          y: fittingPlacement.y,
+          placement: fittingPlacement.placement,
+        });
+        return;
+      }
+
+      // If nothing fits, choose the placement with the most space
+      const bestPlacement = placements.reduce((best, current) =>
+        current.space > best.space ? current : best
+      );
+
+      // Ensure the content stays within viewport bounds
+      let finalX = bestPlacement.x;
+      let finalY = bestPlacement.y;
+
+      if (finalX + contentWidth > viewportWidth) {
+        finalX = viewportWidth - contentWidth - 8;
+      }
+      if (finalX < 8) {
+        finalX = 8;
+      }
+      if (finalY + contentHeight > viewportHeight) {
+        finalY = viewportHeight - contentHeight - 8;
+      }
+      if (finalY < 8) {
+        finalY = 8;
+      }
+
+      setOptimalPosition({
+        x: finalX,
+        y: finalY,
+        placement: bestPlacement.placement,
+      });
+    }
+  }, [isOpen, orientation, menuId, triggerRefs]);
 
   if (!isOpen) {
     return null;
   }
 
+  // Create intelligent positioning styles
+  const positionStyles: React.CSSProperties = {
+    position: 'fixed', // Use fixed positioning since we calculated viewport coordinates
+    left: optimalPosition.x,
+    top: optimalPosition.y,
+    zIndex: 1000,
+  };
+
   return (
     <View
+      ref={contentRef}
       id="menubar-content"
       role="menu"
-      position="absolute"
-      zIndex={1000}
       minWidth="200px"
       backgroundColor="color.white"
       borderRadius={4}
       boxShadow="0px 2px 8px rgba(0, 0, 0, 0.15)"
       overflow="hidden"
-      {...getMenubarContentPosition(orientation)}
+      style={positionStyles}
       {...views?.content}
     >
       {children}
+      {/* Debug info - can be removed in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}>
+          Placement: {optimalPosition.placement}
+        </div>
+      )}
     </View>
   );
 };

@@ -118,6 +118,31 @@ export interface ChatInputProps extends ViewProps {
   onPromptExampleSelect?: (example: PromptExample) => void;
 
   /**
+   * Data for mention auto-completion
+   */
+  mentionData?: Array<{
+    id: string;
+    name: string;
+    avatar?: string;
+    description?: string;
+  }>;
+
+  /**
+   * Trigger character for mentions (default: '@')
+   */
+  mentionTrigger?: string;
+
+  /**
+   * Callback function when a mention is selected
+   */
+  onMentionSelect?: (mention: {
+    id: string;
+    name: string;
+    avatar?: string;
+    description?: string;
+  }) => void;
+
+  /**
    * Whether to show the reference image button
    */
   showReferenceImageButton?: boolean;
@@ -186,6 +211,9 @@ export interface ChatInputViewProps extends ChatInputProps {
    * Whether files are being uploaded
    */
   isUploading: boolean;
+
+  leftButtons?: React.ReactNode;
+  rightButtons?: React.ReactNode;
 
   /**
    * Whether the user is dragging files over the input

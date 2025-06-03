@@ -10,7 +10,7 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 /**
  * Shape options for the ChatInput component
  */
-export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'default' | 'sharp' | 'rounded';
 
 /**
  * Variant options for the ChatInput component

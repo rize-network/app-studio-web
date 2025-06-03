@@ -3,6 +3,7 @@ export * from './FormikColorInput';
 export * from './FormikComboBox';
 export * from './FormikCountryPicker';
 export * from './FormikDatePicker';
+export * from './FormikKeywordsInput';
 export * from './FormikOTPInput';
 export * from './FormikPassword';
 export * from './FormikSelect';

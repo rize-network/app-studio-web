@@ -4,15 +4,15 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
+  useState,
+  useEffect,
 } from 'react';
-import { View } from 'app-studio';
+import { View, useElementPosition } from 'app-studio';
 import { HoverCardContextType } from './HoverCard.type';
 import {
   HoverCardContentProps,
   HoverCardTriggerProps,
 } from './HoverCard.props';
-import { getContentPositionStyles } from './HoverCard.style';
-import { useRect } from '../../../hooks/useRect';
 
 // Create context for the HoverCard
 const HoverCardContext = createContext<HoverCardContextType>({
@@ -112,16 +112,119 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
     triggerId,
   } = useHoverCardContext();
 
-  // Use hook to measure trigger for positioning
-  const triggerRect = useRect(triggerRef);
+  const [optimalPosition, setOptimalPosition] = useState({
+    x: 0,
+    y: 0,
+    placement: side,
+  });
 
-  // Calculate position based on trigger dimensions and side prop
-  const positionStyles = getContentPositionStyles(
-    triggerRect,
-    side,
-    align,
-    sideOffset
-  );
+  // Calculate optimal position when the card opens or content dimensions change
+  useEffect(() => {
+    if (isOpen && contentRef?.current && triggerRef?.current) {
+      const contentRect = contentRef.current.getBoundingClientRect();
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+
+      // Get content dimensions
+      const contentWidth = Math.max(contentRect.width || 200, 200);
+      const contentHeight = Math.max(contentRect.height || 100, 100);
+
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate available space on all sides from the trigger
+      const availableSpace = {
+        top: triggerRect.top,
+        right: viewportWidth - triggerRect.right,
+        bottom: viewportHeight - triggerRect.bottom,
+        left: triggerRect.left,
+      };
+
+      // Determine optimal placement based on available space and preferred side
+      const placements = [
+        {
+          placement: 'bottom' as const,
+          space: availableSpace.bottom,
+          fits: availableSpace.bottom >= contentHeight + sideOffset,
+          x: triggerRect.left + triggerRect.width / 2 - contentWidth / 2,
+          y: triggerRect.bottom + sideOffset,
+        },
+        {
+          placement: 'top' as const,
+          space: availableSpace.top,
+          fits: availableSpace.top >= contentHeight + sideOffset,
+          x: triggerRect.left + triggerRect.width / 2 - contentWidth / 2,
+          y: triggerRect.top - contentHeight - sideOffset,
+        },
+        {
+          placement: 'right' as const,
+          space: availableSpace.right,
+          fits: availableSpace.right >= contentWidth + sideOffset,
+          x: triggerRect.right + sideOffset,
+          y: triggerRect.top + triggerRect.height / 2 - contentHeight / 2,
+        },
+        {
+          placement: 'left' as const,
+          space: availableSpace.left,
+          fits: availableSpace.left >= contentWidth + sideOffset,
+          x: triggerRect.left - contentWidth - sideOffset,
+          y: triggerRect.top + triggerRect.height / 2 - contentHeight / 2,
+        },
+      ];
+
+      // First try the preferred side if it fits
+      const preferredPlacement = placements.find(
+        (p) => p.placement === side && p.fits
+      );
+      if (preferredPlacement) {
+        setOptimalPosition({
+          x: preferredPlacement.x,
+          y: preferredPlacement.y,
+          placement: preferredPlacement.placement,
+        });
+        return;
+      }
+
+      // Otherwise, find the best fitting placement
+      const fittingPlacement = placements.find((p) => p.fits);
+      if (fittingPlacement) {
+        setOptimalPosition({
+          x: fittingPlacement.x,
+          y: fittingPlacement.y,
+          placement: fittingPlacement.placement,
+        });
+        return;
+      }
+
+      // If nothing fits, choose the placement with the most space
+      const bestPlacement = placements.reduce((best, current) =>
+        current.space > best.space ? current : best
+      );
+
+      // Ensure the content stays within viewport bounds
+      let finalX = bestPlacement.x;
+      let finalY = bestPlacement.y;
+
+      if (finalX + contentWidth > viewportWidth) {
+        finalX = viewportWidth - contentWidth - 8;
+      }
+      if (finalX < 8) {
+        finalX = 8;
+      }
+      if (finalY + contentHeight > viewportHeight) {
+        finalY = viewportHeight - contentHeight - 8;
+      }
+      if (finalY < 8) {
+        finalY = 8;
+      }
+
+      setOptimalPosition({
+        x: finalX,
+        y: finalY,
+        placement: bestPlacement.placement,
+      });
+    }
+  }, [isOpen, side, sideOffset, contentRef, triggerRef]);
 
   const handleMouseEnter = () => cancelCloseTimer(); // Keep card open if mouse enters content
   const handleMouseLeave = () => closeCard();
@@ -129,6 +232,14 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
   if (!isOpen) {
     return null; // Don't render content if not open
   }
+
+  // Create intelligent positioning styles
+  const positionStyles: React.CSSProperties = {
+    position: 'fixed', // Use fixed positioning since we calculated viewport coordinates
+    left: optimalPosition.x,
+    top: optimalPosition.y,
+    zIndex: 1000,
+  };
 
   return (
     <View
@@ -144,8 +255,7 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
       padding={padding}
       minWidth={minWidth}
       maxWidth={maxWidth}
-      zIndex={1000}
-      // Combine calculated position styles with user styles
+      // Combine intelligent position styles with user styles
       style={{
         ...positionStyles,
         ...userStyle, // Allow user override
@@ -154,6 +264,12 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
       {...props}
     >
       {children}
+      {/* Debug info - can be removed in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{ fontSize: '10px', opacity: 0.7, marginTop: '4px' }}>
+          Placement: {optimalPosition.placement}
+        </div>
+      )}
     </View>
   );
 };

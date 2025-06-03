@@ -6,9 +6,9 @@ import { TitleSize, HighlightStyle } from './Title.type';
  */
 export const TitleSizes = {
   xs: 16,
-  sm: 20,
-  md: 32,
-  lg: 48,
+  sm: 24,
+  md: 40,
+  lg: 56,
   xl: 72,
 };
 
@@ -16,10 +16,10 @@ export const TitleSizes = {
  * Line heights for different title sizes
  */
 export const LineHeights: Record<TitleSize, number> = {
-  xs: 24,
-  sm: 28,
-  md: 40,
-  lg: 56,
+  xs: 20,
+  sm: 32,
+  md: 48,
+  lg: 64,
   xl: 80,
 };
 

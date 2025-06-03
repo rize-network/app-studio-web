@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { View, ViewProps } from 'app-studio';
+import { View, ViewProps, useElementPosition } from 'app-studio';
 import {
   ContextMenuContextType,
   Size,
@@ -23,7 +23,6 @@ import {
   ContextMenuSizes,
   ContextMenuVariants,
   ContextMenuItemStates,
-  calculateMenuPosition,
 } from './ContextMenu.style';
 import { ChevronIcon } from '../../Icon/Icon';
 
@@ -139,33 +138,101 @@ export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
   } = useContextMenuContext();
 
   const menuRef = useRef<HTMLDivElement>(null);
-  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
   // Use contentRef if provided, otherwise use local menuRef
   const ref = contentRef || menuRef;
 
-  // Calculate the position of the menu
+  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
+
+  // Calculate the position of the menu using intelligent positioning logic
   useEffect(() => {
     if (isOpen && ref.current) {
       const menuWidth = ref.current.offsetWidth;
       const menuHeight = ref.current.offsetHeight;
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-
       const pos = position || contextPosition;
 
-      const calculatedPosition = calculateMenuPosition(
-        pos.x,
-        pos.y,
-        menuWidth,
-        menuHeight,
-        windowWidth,
-        windowHeight,
-        side,
-        align
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate available space on all sides from the click position
+      const availableSpace = {
+        top: pos.y,
+        right: viewportWidth - pos.x,
+        bottom: viewportHeight - pos.y,
+        left: pos.x,
+      };
+
+      // Determine optimal placement based on available space
+      const placements = [
+        {
+          placement: 'bottom-right',
+          space: Math.min(availableSpace.bottom, availableSpace.right),
+          fits:
+            availableSpace.bottom >= menuHeight &&
+            availableSpace.right >= menuWidth,
+          x: pos.x,
+          y: pos.y,
+        },
+        {
+          placement: 'bottom-left',
+          space: Math.min(availableSpace.bottom, availableSpace.left),
+          fits:
+            availableSpace.bottom >= menuHeight &&
+            availableSpace.left >= menuWidth,
+          x: pos.x - menuWidth,
+          y: pos.y,
+        },
+        {
+          placement: 'top-right',
+          space: Math.min(availableSpace.top, availableSpace.right),
+          fits:
+            availableSpace.top >= menuHeight &&
+            availableSpace.right >= menuWidth,
+          x: pos.x,
+          y: pos.y - menuHeight,
+        },
+        {
+          placement: 'top-left',
+          space: Math.min(availableSpace.top, availableSpace.left),
+          fits:
+            availableSpace.top >= menuHeight &&
+            availableSpace.left >= menuWidth,
+          x: pos.x - menuWidth,
+          y: pos.y - menuHeight,
+        },
+      ];
+
+      // First try to find a placement that fits completely
+      const fittingPlacement = placements.find((p) => p.fits);
+      if (fittingPlacement) {
+        setMenuPosition({ x: fittingPlacement.x, y: fittingPlacement.y });
+        return;
+      }
+
+      // If nothing fits completely, choose the placement with the most space
+      const bestPlacement = placements.reduce((best, current) =>
+        current.space > best.space ? current : best
       );
 
-      setMenuPosition(calculatedPosition);
+      // Ensure the menu stays within viewport bounds
+      let finalX = bestPlacement.x;
+      let finalY = bestPlacement.y;
+
+      if (finalX + menuWidth > viewportWidth) {
+        finalX = viewportWidth - menuWidth - 8; // 8px margin
+      }
+      if (finalX < 8) {
+        finalX = 8; // 8px margin
+      }
+      if (finalY + menuHeight > viewportHeight) {
+        finalY = viewportHeight - menuHeight - 8; // 8px margin
+      }
+      if (finalY < 8) {
+        finalY = 8; // 8px margin
+      }
+
+      setMenuPosition({ x: finalX, y: finalY });
     }
   }, [isOpen, contextPosition, position, side, align, ref]);
 
@@ -173,7 +240,7 @@ export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
     return null;
   }
 
-  // Basic positioning - place top-left corner at calculated position
+  // Intelligent positioning - place at calculated optimal position
   const positionStyles: React.CSSProperties = {
     position: 'fixed', // Use fixed to position relative to viewport
     top: `${menuPosition.y}px`,
@@ -256,16 +323,31 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
       }
     };
 
-    // Calculate the position of the submenu
+    // Calculate the position of the submenu with intelligent positioning
     useEffect(() => {
       if (isSubmenuActive && itemRef.current) {
         const rect = itemRef.current.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        // Estimate submenu dimensions (will be refined when submenu renders)
+        const estimatedSubmenuWidth = 200; // Default submenu width
+        const estimatedSubmenuHeight = (item.items?.length || 1) * 40; // Estimate based on item count
+
+        // Calculate available space on both sides
+        const rightSpace = viewportWidth - rect.right;
+        const leftSpace = rect.left;
+
+        // Prefer right side, but use left if there's more space there
+        const useLeftSide =
+          rightSpace < estimatedSubmenuWidth && leftSpace > rightSpace;
+
         setSubmenuPosition({
-          x: rect.right,
+          x: useLeftSide ? rect.left - estimatedSubmenuWidth : rect.right,
           y: rect.top,
         });
       }
-    }, [isSubmenuActive]);
+    }, [isSubmenuActive, item.items]);
 
     return (
       <View

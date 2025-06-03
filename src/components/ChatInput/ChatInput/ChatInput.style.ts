@@ -115,9 +115,6 @@ export const Shapes: Record<Shape, ViewProps> = {
   rounded: {
     borderRadius: '8px',
   },
-  pillShaped: {
-    borderRadius: '9999px',
-  },
 };
 
 /**
