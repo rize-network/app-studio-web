@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { Element } from 'app-studio';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
+import { Element, useElementPosition } from 'app-studio';
 import { Typography } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
@@ -344,6 +344,38 @@ const SelectView: React.FC<SelectViewProps> = ({
   highlightedIndex,
   ...props
 }) => {
+  // Use useElementPosition for intelligent dropdown positioning
+  const { ref: triggerRef, helpers } = useElementPosition({
+    trackChanges: true,
+    useFixedPositioning: true,
+  });
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [optimalPosition, setOptimalPosition] = useState<{
+    x: number;
+    y: number;
+    placement: 'top' | 'right' | 'bottom' | 'left';
+  }>({
+    x: 0,
+    y: 0,
+    placement: 'bottom',
+  });
+
+  // Calculate optimal position when dropdown opens
+  useEffect(() => {
+    if (!hide && triggerRef.current) {
+      // Use trigger width for dropdown width
+      const triggerWidth = triggerRef.current.offsetWidth;
+      const dropdownWidth = Math.max(triggerWidth, 300);
+      const dropdownHeight = Math.min(options.length * 40 + 16, 240); // Estimate height based on options
+
+      const position = helpers.getDropdownPosition(
+        dropdownWidth,
+        dropdownHeight
+      );
+      setOptimalPosition(position);
+    }
+  }, [hide, options.length, helpers, triggerRef]);
   // close when *any* other select opens
   React.useEffect(() => {
     const handleCloseAll = () => setHide(true);
@@ -431,6 +463,7 @@ const SelectView: React.FC<SelectViewProps> = ({
       }}
     >
       <FieldContent
+        ref={triggerRef}
         label={label}
         size={size}
         error={error}
@@ -505,13 +538,15 @@ const SelectView: React.FC<SelectViewProps> = ({
       </FieldContent>
       {!hide && options.length > 0 && (
         <Element
+          ref={dropdownRef}
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
           style={{
-            position: 'absolute',
-            top: 'calc(100% + 4px)',
-            left: 0,
-            right: 0,
-            zIndex: 1000,
+            position: 'fixed',
+            left: optimalPosition.x,
+            top: optimalPosition.y,
+            zIndex: 10000,
+            width: triggerRef.current?.offsetWidth || 300,
+            minWidth: 300,
           }}
         >
           <DropDown

@@ -1,5 +1,5 @@
 import { ViewProps } from 'app-studio';
-import { Size, Variant, Position, Alignment } from './ContextMenu.type';
+import { Size, Variant } from './ContextMenu.type';
 
 export const ContextMenuSizes: Record<Size, ViewProps> = {
   sm: {

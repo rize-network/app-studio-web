@@ -9,4 +9,3 @@ export * from './TextArea/TextArea';
 export * from './TextField/TextField';
 export * from './Password/Password';
 export * from './ComboBox/ComboBox';
-export * from './KeywordsInput/KeywordsInput';

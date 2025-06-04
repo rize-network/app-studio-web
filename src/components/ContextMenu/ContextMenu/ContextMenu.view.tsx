@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { View, ViewProps, useElementPosition } from 'app-studio';
+import { View, ViewProps } from 'app-studio';
 import {
   ContextMenuContextType,
   Size,

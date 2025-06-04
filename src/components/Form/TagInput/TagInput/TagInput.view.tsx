@@ -1,7 +1,7 @@
 /**
- * KeywordsInput View Component
+ * TagInput View Component
  *
- * Renders a keywords/tags input field with chips for each keyword
+ * Renders a tags input field with chips for each tag
  * according to the design guidelines.
  */
 
@@ -19,29 +19,21 @@ import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 import { CloseIcon } from '../../../Icon/Icon';
-import { KeywordsInputViewProps } from './KeywordsInput.props';
+import { TagInputViewProps } from './TagInput.props';
 import { Shapes, InputVariants } from '../../../Input/Input.style';
 
 /**
- * Individual keyword chip component
+ * Individual tag chip component
  */
-const KeywordChip: React.FC<{
-  keyword: string;
+const TagChip: React.FC<{
+  tag: string;
   onRemove: () => void;
   isRemovable: boolean;
   size: string;
   views: any;
   isDisabled: boolean;
   isReadOnly: boolean;
-}> = ({
-  keyword,
-  onRemove,
-  isRemovable,
-  size,
-  views,
-  isDisabled,
-  isReadOnly,
-}) => {
+}> = ({ tag, onRemove, isRemovable, size, views, isDisabled, isReadOnly }) => {
   const { getColor } = useTheme();
 
   const chipSize = {
@@ -71,16 +63,16 @@ const KeywordChip: React.FC<{
             }
           : {}
       }
-      {...views?.keyword}
+      {...views?.tag}
     >
       <Text
         fontSize={chipSize.fontSize}
         color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
         fontWeight="500"
         whiteSpace="nowrap"
-        {...views?.keywordText}
+        {...views?.tagText}
       >
-        {keyword}
+        {tag}
       </Text>
 
       {isRemovable && !isDisabled && !isReadOnly && (
@@ -93,7 +85,7 @@ const KeywordChip: React.FC<{
             backgroundColor: 'color.gray.300',
           }}
           onClick={onRemove}
-          {...views?.keywordRemove}
+          {...views?.tagRemove}
         >
           <CloseIcon widthHeight={chipSize.iconSize} color="color.gray.500" />
         </View>
@@ -103,17 +95,17 @@ const KeywordChip: React.FC<{
 };
 
 /**
- * Main KeywordsInput view component
+ * Main TagInput view component
  */
-const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
+const TagInputView: React.FC<TagInputViewProps> = ({
   id,
   name,
   label,
-  placeholder = 'Type and press Enter to add keywords...',
+  placeholder = 'Type and press Enter to add tags...',
   helperText,
   error = false,
   inputValue = '',
-  keywords = [],
+  tags = [],
   left,
   right,
   shadow = {},
@@ -127,12 +119,12 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
   isRemovable = true,
   isFocused = false,
   isHovered = false,
-  maxKeywords,
+  maxTags,
   handleInputChange,
   handleKeyDown,
   handleFocus,
   handleBlur,
-  removeKeyword,
+  removeTag,
   setIsHovered,
   onClick,
   ...props
@@ -141,11 +133,11 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
 
   // Determine if we should show the label
   const showLabel = Boolean(
-    label && (isFocused || keywords.length > 0 || inputValue)
+    label && (isFocused || tags.length > 0 || inputValue)
   );
 
-  // Calculate if max keywords reached
-  const isMaxReached = maxKeywords && keywords.length >= maxKeywords;
+  // Calculate if max tags reached
+  const isMaxReached = maxTags && tags.length >= maxTags;
 
   // Container styles
   const containerStyles = {
@@ -176,7 +168,7 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
       <FieldContent
         label={label}
         shadow={shadow}
-        value={keywords.length > 0 || inputValue ? 'has-content' : ''}
+        value={tags.length > 0 || inputValue ? 'has-content' : ''}
         size={size}
         shape={shape}
         variant={variant}
@@ -202,7 +194,7 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
             </FieldLabel>
           )}
 
-          {/* Keywords and Input Container */}
+          {/* Tags and Input Container */}
           <Horizontal
             alignItems="center"
             gap={4}
@@ -210,14 +202,14 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
             width="100%"
             minHeight={Typography.fontSizes[size]}
             padding="8px 0"
-            {...views?.keywordsContainer}
+            {...views?.tagsContainer}
           >
-            {/* Existing Keywords */}
-            {keywords.map((keyword, index) => (
-              <KeywordChip
-                key={keyword.id}
-                keyword={keyword.value}
-                onRemove={() => removeKeyword?.(index)}
+            {/* Existing Tags */}
+            {tags.map((tag, index) => (
+              <TagChip
+                key={tag.id}
+                tag={tag.value}
+                onRemove={() => removeTag?.(index)}
                 isRemovable={isRemovable}
                 size={size}
                 views={views}
@@ -233,7 +225,7 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
                 name={name}
                 type="text"
                 value={inputValue}
-                placeholder={keywords.length === 0 ? placeholder : ''}
+                placeholder={tags.length === 0 ? placeholder : ''}
                 disabled={isDisabled}
                 readOnly={isReadOnly}
                 autoFocus={isAutoFocus}
@@ -246,7 +238,7 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
               />
             )}
 
-            {/* Max keywords reached message */}
+            {/* Max tags reached message */}
             {isMaxReached && (
               <Text
                 fontSize={Typography.fontSizes[size]}
@@ -254,7 +246,7 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
                 fontStyle="italic"
                 {...views?.placeholder}
               >
-                Maximum {maxKeywords} keywords reached
+                Maximum {maxTags} tags reached
               </Text>
             )}
           </Horizontal>
@@ -266,4 +258,4 @@ const KeywordsInputView: React.FC<KeywordsInputViewProps> = ({
   );
 };
 
-export default KeywordsInputView;
+export default TagInputView;

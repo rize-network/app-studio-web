@@ -71,6 +71,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
     const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
     const [showPlaceholder, setShowPlaceholder] = useState(!value);
     const containerRef = useRef<HTMLDivElement>(null);
+    const [isFocused, setIsFocused] = useState(false);
 
     // Mention-specific state
     const [showMentions, setShowMentions] = useState(false);
@@ -78,6 +79,15 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
     const [mentionStartPos, setMentionStartPos] = useState(-1);
     const [selectedMentionIndex, setSelectedMentionIndex] = useState(-1);
     const [filteredMentions, setFilteredMentions] = useState<MentionData[]>([]);
+
+    // Positioning state for dropdowns
+    const [mentionPosition, setMentionPosition] = useState({ x: 0, y: 0 });
+    const [suggestionPosition, setSuggestionPosition] = useState({
+      x: 0,
+      y: 0,
+    });
+
+    // Note: Using custom positioning logic for better control over dropdown placement
 
     // Update the content of the editable div when the value prop changes
     useEffect(() => {
@@ -133,6 +143,10 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             setFilteredMentions(filtered);
             setShowMentions(filtered.length > 0);
             setSelectedMentionIndex(0);
+
+            // Calculate position for mentions dropdown
+            const position = calculateDropdownPosition();
+            setMentionPosition(position);
             return;
           }
         }
@@ -144,6 +158,54 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       },
       [mentionData, mentionTrigger]
     );
+
+    // Calculate optimal position for dropdowns
+    const calculateDropdownPosition = useCallback(
+      (dropdownHeight: number = 200) => {
+        if (!containerRef.current) return { x: 0, y: 0 };
+
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const viewportWidth = window.innerWidth;
+
+        // Calculate available space
+        const availableSpace = {
+          top: containerRect.top,
+          bottom: viewportHeight - containerRect.bottom,
+          left: containerRect.left,
+          right: viewportWidth - containerRect.right,
+        };
+
+        // Prefer bottom placement, but use top if not enough space
+        const useTopPlacement =
+          availableSpace.bottom < dropdownHeight + 8 &&
+          availableSpace.top > availableSpace.bottom;
+
+        return {
+          x: containerRect.left,
+          y: useTopPlacement
+            ? containerRect.top - dropdownHeight - 8
+            : containerRect.bottom + 8,
+        };
+      },
+      []
+    );
+
+    // Handle focus events
+    const handleFocus = useCallback(() => {
+      setIsFocused(true);
+      // Calculate position for suggestions when focused
+      const position = calculateDropdownPosition();
+      setSuggestionPosition(position);
+    }, [calculateDropdownPosition]);
+
+    const handleBlur = useCallback(() => {
+      // Delay hiding to allow for dropdown interactions
+      setTimeout(() => {
+        setIsFocused(false);
+        setSelectedSuggestionIndex(-1);
+      }, 150);
+    }, []);
 
     // Handle input events
     const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
@@ -333,6 +395,8 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             suppressContentEditableWarning={true}
             onInput={handleInput}
             onKeyDown={handleKeyDown}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             role="textbox"
             aria-multiline="true"
             aria-placeholder={placeholder}
@@ -353,10 +417,10 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
         {/* Mentions Dropdown */}
         {showMentions && filteredMentions.length > 0 && (
           <View
-            position="absolute"
-            top="calc(100% + 4px)"
-            left="0"
-            right="0"
+            position="fixed"
+            left={mentionPosition.x}
+            top={mentionPosition.y}
+            width={containerRef.current?.offsetWidth || 300}
             backgroundColor="color.white"
             border="2px solid"
             borderColor="color.blue.300"
@@ -408,70 +472,88 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                   </Vertical>
                 </View>
               ))}
+              {/* Debug info - can be removed in production */}
+              {process.env.NODE_ENV === 'development' && (
+                <div style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}>
+                  Mentions (Trigger: {mentionTrigger})
+                </div>
+              )}
             </Vertical>
           </View>
         )}
 
-        {/* Suggestions Dropdown */}
-        {showSuggestions && suggestions.length > 0 && !showMentions && (
-          <View
-            position="absolute"
-            top="calc(100% + 4px)"
-            left="0"
-            right="0"
-            backgroundColor="color.white"
-            border="2px solid"
-            borderColor="color.green.300"
-            borderRadius="8px"
-            boxShadow="0 8px 24px rgba(0, 0, 0, 0.15)"
-            zIndex={9998}
-            maxHeight="200px"
-            overflowY="auto"
-            {...views?.suggestionsContainer}
-          >
-            <Vertical gap={0}>
-              {suggestions.map((suggestion, index) => (
-                <View
-                  key={suggestion.id}
-                  as="button"
-                  type="button"
-                  width="100%"
-                  padding="12px 16px"
-                  backgroundColor={
-                    index === selectedSuggestionIndex
-                      ? 'color.blue.50'
-                      : 'transparent'
-                  }
-                  border="none"
-                  cursor="pointer"
-                  textAlign="left"
-                  transition="background-color 0.2s ease"
-                  onClick={() => handleSuggestionSelect(suggestion)}
-                  onMouseEnter={() => setSelectedSuggestionIndex(index)}
-                  _hover={{
-                    backgroundColor: 'color.blue.50',
-                  }}
-                  {...views?.suggestionItem}
-                >
-                  <Vertical gap={4}>
-                    <Text
-                      fontSize="14px"
-                      color="color.gray.900"
-                      fontWeight="medium"
-                    >
-                      {suggestion.text}
-                    </Text>
-                    {suggestion.description && (
-                      <Text fontSize="12px" color="color.gray.600">
-                        {suggestion.description}
+        {/* Suggestions Dropdown - Only show on focus and when no value */}
+        {showSuggestions &&
+          suggestions.length > 0 &&
+          !showMentions &&
+          isFocused &&
+          !value && (
+            <View
+              position="fixed"
+              left={suggestionPosition.x}
+              top={suggestionPosition.y}
+              width={containerRef.current?.offsetWidth || 300}
+              backgroundColor="color.white"
+              border="2px solid"
+              borderColor="color.green.300"
+              borderRadius="8px"
+              boxShadow="0 8px 24px rgba(0, 0, 0, 0.15)"
+              zIndex={9998}
+              maxHeight="200px"
+              overflowY="auto"
+              {...views?.suggestionsContainer}
+            >
+              <Vertical gap={0}>
+                {suggestions.map((suggestion, index) => (
+                  <View
+                    key={suggestion.id}
+                    as="button"
+                    type="button"
+                    width="100%"
+                    padding="12px 16px"
+                    backgroundColor={
+                      index === selectedSuggestionIndex
+                        ? 'color.blue.50'
+                        : 'transparent'
+                    }
+                    border="none"
+                    cursor="pointer"
+                    textAlign="left"
+                    transition="background-color 0.2s ease"
+                    onClick={() => handleSuggestionSelect(suggestion)}
+                    onMouseEnter={() => setSelectedSuggestionIndex(index)}
+                    _hover={{
+                      backgroundColor: 'color.blue.50',
+                    }}
+                    {...views?.suggestionItem}
+                  >
+                    <Vertical gap={4}>
+                      <Text
+                        fontSize="14px"
+                        color="color.gray.900"
+                        fontWeight="medium"
+                      >
+                        {suggestion.text}
                       </Text>
-                    )}
-                  </Vertical>
-                </View>
-              ))}
-            </Vertical>
-          </View>
-        )}
+                      {suggestion.description && (
+                        <Text fontSize="12px" color="color.gray.600">
+                          {suggestion.description}
+                        </Text>
+                      )}
+                    </Vertical>
+                  </View>
+                ))}
+                {/* Debug info - can be removed in production */}
+                {process.env.NODE_ENV === 'development' && (
+                  <div
+                    style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}
+                  >
+                    Suggestions (Focus-triggered)
+                  </div>
+                )}
+              </Vertical>
+            </View>
+          )}
       </View>
     );
   }

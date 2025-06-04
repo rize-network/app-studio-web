@@ -4,19 +4,19 @@ import { Elevation } from '../../../../utils/elevation';
 import {
   Shape,
   Size,
-  KeywordsInputStyles,
+  TagInputStyles,
   Variant,
-  Keyword,
-  KeywordSeparator,
-} from './KeywordsInput.type';
+  Tag,
+  TagSeparator,
+} from './TagInput.type';
 
 /**
- * Props interface for the KeywordsInput component
+ * Props interface for the TagInput component
  */
-export interface KeywordsInputProps
+export interface TagInputProps
   extends Omit<InputProps, 'size' | 'value' | 'onChange'> {
   /**
-   * Unique identifier for the KeywordsInput
+   * Unique identifier for the TagInput
    */
   id?: string;
 
@@ -46,54 +46,54 @@ export interface KeywordsInputProps
   placeholder?: string;
 
   /**
-   * Array of keywords/tags
+   * Array of tags
    */
-  value?: string[];
+  tags?: string[];
 
   /**
-   * Default value for uncontrolled component
+   * Default tags for uncontrolled component
    */
-  defaultValue?: string[];
+  defaultTags?: string[];
 
   /**
-   * Callback fired when keywords change
+   * Callback fired when tags change
    */
-  onChange?: (keywords: string[]) => void;
+  onTagsChange?: (tags: string[]) => void;
 
   /**
-   * Callback fired when a keyword is added
+   * Callback fired when a tag is added
    */
-  onAdd?: (keyword: string) => void;
+  onTagAdd?: (tag: string) => void;
 
   /**
-   * Callback fired when a keyword is removed
+   * Callback fired when a tag is removed
    */
-  onRemove?: (keyword: string, index: number) => void;
+  onTagRemove?: (tag: string, index: number) => void;
 
   /**
-   * Maximum number of keywords allowed
+   * Maximum number of tags allowed
    */
-  maxKeywords?: number;
+  maxTags?: number;
 
   /**
-   * Minimum length for each keyword
+   * Minimum length for each tag
    */
-  minKeywordLength?: number;
+  minTagLength?: number;
 
   /**
-   * Maximum length for each keyword
+   * Maximum length for each tag
    */
-  maxKeywordLength?: number;
+  maxTagLength?: number;
 
   /**
-   * Whether to allow duplicate keywords
+   * Whether to allow duplicate tags
    */
   allowDuplicates?: boolean;
 
   /**
-   * Characters that trigger keyword creation
+   * Characters that trigger tag creation
    */
-  separators?: KeywordSeparator[];
+  separators?: TagSeparator[];
 
   /**
    * Whether the input is disabled
@@ -111,7 +111,7 @@ export interface KeywordsInputProps
   isAutoFocus?: boolean;
 
   /**
-   * Whether keywords can be removed
+   * Whether tags can be removed
    */
   isRemovable?: boolean;
 
@@ -138,7 +138,7 @@ export interface KeywordsInputProps
   /**
    * Custom styling for different parts of the component
    */
-  views?: KeywordsInputStyles;
+  views?: TagInputStyles;
 
   /**
    * React node to render on the left side
@@ -167,11 +167,11 @@ export interface KeywordsInputProps
 }
 
 /**
- * Props interface for the KeywordsInput view component
+ * Props interface for the TagInput view component
  */
-export interface KeywordsInputViewProps extends KeywordsInputProps {
+export interface TagInputViewProps extends Omit<TagInputProps, 'tags'> {
   /**
-   * Current input value for new keyword
+   * Current input value for new tag
    */
   inputValue?: string;
 
@@ -181,14 +181,14 @@ export interface KeywordsInputViewProps extends KeywordsInputProps {
   setInputValue?: (value: string) => void;
 
   /**
-   * Array of keyword objects
+   * Array of tag objects (internal representation)
    */
-  keywords?: Keyword[];
+  tags?: Tag[];
 
   /**
-   * Function to set keywords
+   * Function to set tags
    */
-  setKeywords?: (keywords: Keyword[]) => void;
+  setTags?: (tags: Tag[]) => void;
 
   /**
    * Whether the input is currently focused
@@ -211,14 +211,14 @@ export interface KeywordsInputViewProps extends KeywordsInputProps {
   setIsHovered?: (hovered: boolean) => void;
 
   /**
-   * Function to add a keyword
+   * Function to add a tag
    */
-  addKeyword?: (keyword: string) => void;
+  addTag?: (tag: string) => void;
 
   /**
-   * Function to remove a keyword
+   * Function to remove a tag
    */
-  removeKeyword?: (index: number) => void;
+  removeTag?: (index: number) => void;
 
   /**
    * Function to handle input key events

@@ -35,6 +35,7 @@ const HoverCardPage = lazy(() => import('src/pages/hoverCard.page'));
 const LinkPage = lazy(() => import('src/pages/link.page'));
 const LoaderPage = lazy(() => import('src/pages/loader.page'));
 const IconPage = lazy(() => import('src/pages/icon.page'));
+const TagsPage = lazy(() => import('src/pages/tags.page'));
 const MessagePage = lazy(() => import('src/pages/message.page'));
 const MenubarPage = lazy(() => import('src/pages/menubar.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
@@ -99,6 +100,11 @@ export const componentList = [
   { name: 'Link', path: '/link', element: <LinkPage /> },
   { name: 'Loader', path: '/loader', element: <LoaderPage /> },
   { name: 'Icon', path: '/icon', element: <IconPage /> },
+  {
+    name: 'TagInput',
+    path: '/tagInput',
+    element: <TagsPage />,
+  },
   { name: 'Drag and Drop', path: '/dragAndDrop', element: <DragAndDropPage /> },
 
   { name: 'Message', path: '/message', element: <MessagePage /> },

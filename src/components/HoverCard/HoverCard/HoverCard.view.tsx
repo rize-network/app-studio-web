@@ -7,7 +7,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import { View, useElementPosition } from 'app-studio';
+import { View } from 'app-studio';
 import { HoverCardContextType } from './HoverCard.type';
 import {
   HoverCardContentProps,
