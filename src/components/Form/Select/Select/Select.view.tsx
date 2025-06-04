@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState, useEffect } from 'react';
-import { Element, useElementPosition } from 'app-studio';
+import { Element } from 'app-studio';
 import { Typography } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
@@ -344,38 +344,28 @@ const SelectView: React.FC<SelectViewProps> = ({
   highlightedIndex,
   ...props
 }) => {
-  // Use useElementPosition for intelligent dropdown positioning
-  const { ref: triggerRef, helpers } = useElementPosition({
-    trackChanges: true,
-    useFixedPositioning: true,
-  });
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [optimalPosition, setOptimalPosition] = useState<{
-    x: number;
-    y: number;
-    placement: 'top' | 'right' | 'bottom' | 'left';
-  }>({
-    x: 0,
-    y: 0,
-    placement: 'bottom',
-  });
+  const [showAbove, setShowAbove] = useState(false);
 
-  // Calculate optimal position when dropdown opens
+  // Simple positioning logic
   useEffect(() => {
     if (!hide && triggerRef.current) {
-      // Use trigger width for dropdown width
-      const triggerWidth = triggerRef.current.offsetWidth;
-      const dropdownWidth = Math.max(triggerWidth, 300);
-      const dropdownHeight = Math.min(options.length * 40 + 16, 240); // Estimate height based on options
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const spaceBelow = viewportHeight - triggerRect.bottom;
+      const spaceAbove = triggerRect.top;
 
-      const position = helpers.getDropdownPosition(
-        dropdownWidth,
-        dropdownHeight
-      );
-      setOptimalPosition(position);
+      // Estimate dropdown height
+      const dropdownHeight = Math.min(options.length * 40 + 16, 240);
+
+      // Simple decision: if not enough space below and more space above, show on top
+      const shouldShowAbove =
+        spaceBelow < dropdownHeight && spaceAbove > spaceBelow;
+      setShowAbove(shouldShowAbove);
     }
-  }, [hide, options.length, helpers, triggerRef]);
+  }, [hide, options.length]);
   // close when *any* other select opens
   React.useEffect(() => {
     const handleCloseAll = () => setHide(true);
@@ -541,12 +531,13 @@ const SelectView: React.FC<SelectViewProps> = ({
           ref={dropdownRef}
           onClick={(e: React.MouseEvent) => e.stopPropagation()}
           style={{
-            position: 'fixed',
-            left: optimalPosition.x,
-            top: optimalPosition.y,
+            position: 'absolute',
+            left: 0,
+            right: 0,
             zIndex: 10000,
-            width: triggerRef.current?.offsetWidth || 300,
-            minWidth: 300,
+            ...(showAbove
+              ? { bottom: '100%', marginBottom: '8px' }
+              : { top: '100%', marginTop: '8px' }),
           }}
         >
           <DropDown

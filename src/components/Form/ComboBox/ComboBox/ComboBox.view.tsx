@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Horizontal, useElementPosition } from 'app-studio';
+import { View, Horizontal } from 'app-studio';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
@@ -29,49 +29,32 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   // Collects all further props not destructured explicitly.
   ...props
 }) => {
-  // Use useElementPosition for intelligent dropdown positioning
-  const { ref: triggerRef, helpers } = useElementPosition({
-    trackChanges: true,
-    useFixedPositioning: true,
-  });
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [optimalPosition, setOptimalPosition] = useState<{
-    x: number;
-    y: number;
-    placement: 'top' | 'right' | 'bottom' | 'left';
-  }>({
-    x: 0,
-    y: 0,
-    placement: 'bottom',
-  });
+  const [showAbove, setShowAbove] = useState(false);
 
-  // Calculate optimal position when dropdown opens
+  // Simple positioning logic
   useEffect(() => {
     if (isDropdownVisible && triggerRef.current) {
-      // Use trigger width for dropdown width
-      const triggerWidth = triggerRef.current.offsetWidth;
-      const dropdownWidth = Math.max(triggerWidth, 300);
-      // Estimate height based on filtered items + search field if enabled
-      const itemHeight = 48; // padding + text height
-      const searchHeight = searchEnabled ? 48 : 0;
-      const maxItems = 6; // Maximum visible items before scrolling
-      const visibleItems = Math.min(filteredItems.length, maxItems);
-      const dropdownHeight = searchHeight + visibleItems * itemHeight + 16; // 16px for padding
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const spaceBelow = viewportHeight - triggerRect.bottom;
+      const spaceAbove = triggerRect.top;
 
-      const position = helpers.getDropdownPosition(
-        dropdownWidth,
-        dropdownHeight
-      );
-      setOptimalPosition(position);
+      // Estimate dropdown height
+      const itemHeight = 48;
+      const searchHeight = searchEnabled ? 48 : 0;
+      const maxItems = 6;
+      const visibleItems = Math.min(filteredItems.length, maxItems);
+      const estimatedHeight = searchHeight + visibleItems * itemHeight + 16;
+
+      // Simple decision: if not enough space below and more space above, show on top
+      const shouldShowAbove =
+        spaceBelow < estimatedHeight && spaceAbove > spaceBelow;
+      setShowAbove(shouldShowAbove);
     }
-  }, [
-    isDropdownVisible,
-    filteredItems.length,
-    searchEnabled,
-    helpers,
-    triggerRef,
-  ]);
+  }, [isDropdownVisible, filteredItems.length, searchEnabled]);
 
   // Sets up an effect to handle clicking outside the dropdown to close it.
   useEffect(() => {
@@ -156,81 +139,82 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           </Horizontal>
           {right}
         </Horizontal>
+        {isDropdownVisible && (
+          <View
+            ref={dropdownRef}
+            id="combobox-dropdown"
+            backgroundColor="color.white"
+            boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
+            overflowY="auto"
+            borderRadius="4px"
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              zIndex: 10000,
+              maxHeight: '240px',
+              ...(showAbove
+                ? { bottom: '100%', marginBottom: '8px' }
+                : { top: '100%', marginTop: '8px' }),
+            }}
+            {...views?.dropdown}
+          >
+            {searchEnabled && (
+              <TextField
+                id={props.id}
+                name={props.name}
+                width="100%"
+                type="search"
+                value={searchQuery}
+                onChange={(value) => handleSearch(value)}
+                hint={placeholder}
+                isClearable={false}
+                left={<SearchIcon widthHeight={16} />}
+                views={{
+                  container: {
+                    width: '100%',
+                    padding: '6px 12px',
+                    borderBottom:
+                      filteredItems.length > 0
+                        ? '1px solid #ccc'
+                        : '1px solid transparent',
+                    ...views?.text,
+                  },
+                }}
+              />
+            )}
+            {filteredItems.length > 0 && (
+              <View margin={0} padding={4}>
+                {filteredItems.map((item, index) => (
+                  <Horizontal
+                    justifyContent="space-between"
+                    key={item.value}
+                    padding="12px"
+                    cursor="pointer"
+                    borderRadius={4}
+                    backgroundColor={
+                      index === highlightedIndex
+                        ? 'color.gray.100'
+                        : 'transparent'
+                    }
+                    onMouseEnter={() => setHighlightedIndex(index)}
+                    onClick={() => handleSelect(item)}
+                    {...views?.item}
+                  >
+                    <Text>{item.label}</Text>
+                    <>
+                      {item.icon && item.icon}
+                      {item.value === selectedItem.value &&
+                        showTick &&
+                        !item.icon && <TickIcon widthHeight={20} />}
+                    </>
+                  </Horizontal>
+                ))}
+              </View>
+            )}
+          </View>
+        )}
       </View>
-      {isDropdownVisible && (
-        <View
-          ref={dropdownRef}
-          id="combobox-dropdown"
-          backgroundColor="color.white"
-          boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
-          overflowY="auto"
-          borderRadius="4px"
-          style={{
-            position: 'fixed',
-            left: optimalPosition.x,
-            top: optimalPosition.y,
-            zIndex: 10000,
-            maxHeight: '240px',
-            width: triggerRef.current?.offsetWidth || 300,
-            minWidth: 300,
-          }}
-          {...views?.dropdown}
-        >
-          {searchEnabled && (
-            <TextField
-              id={props.id}
-              name={props.name}
-              width="100%"
-              type="search"
-              value={searchQuery}
-              onChange={(value) => handleSearch(value)}
-              hint={placeholder}
-              isClearable={false}
-              left={<SearchIcon widthHeight={16} />}
-              views={{
-                container: {
-                  width: '100%',
-                  padding: '6px 12px',
-                  borderBottom:
-                    filteredItems.length > 0
-                      ? '1px solid #ccc'
-                      : '1px solid transparent',
-                  ...views?.text,
-                },
-              }}
-            />
-          )}
-          {filteredItems.length > 0 && (
-            <View margin={0} padding={4}>
-              {filteredItems.map((item, index) => (
-                <Horizontal
-                  justifyContent="space-between"
-                  key={item.value}
-                  padding="12px"
-                  cursor="pointer"
-                  borderRadius={4}
-                  backgroundColor={
-                    index === highlightedIndex
-                      ? 'color.gray.100'
-                      : 'transparent'
-                  }
-                  onMouseEnter={() => setHighlightedIndex(index)}
-                  onClick={() => handleSelect(item)}
-                  {...views?.item}
-                >
-                  <Text>{item.label}</Text>
-                  <>
-                    {item.icon && item.icon}
-                    {item.value === selectedItem.value &&
-                      showTick &&
-                      !item.icon && <TickIcon widthHeight={20} />}
-                  </>
-                </Horizontal>
-              ))}
-            </View>
-          )}
-        </View>
-      )}
     </Horizontal>
   );
 };
