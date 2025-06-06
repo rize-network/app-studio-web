@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, Horizontal } from 'app-studio';
+import React, { useEffect, useRef } from 'react';
+import { View, Horizontal, useElementPosition } from 'app-studio';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
@@ -29,32 +29,48 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   // Collects all further props not destructured explicitly.
   ...props
 }) => {
-  const triggerRef = useRef<HTMLDivElement>(null);
+  const { ref: triggerRef, relation } = useElementPosition();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [showAbove, setShowAbove] = useState(false);
 
-  // Simple positioning logic
-  useEffect(() => {
-    if (isDropdownVisible && triggerRef.current) {
-      const triggerRect = triggerRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const spaceBelow = viewportHeight - triggerRect.bottom;
-      const spaceAbove = triggerRect.top;
-
-      // Estimate dropdown height
-      const itemHeight = 48;
-      const searchHeight = searchEnabled ? 48 : 0;
-      const maxItems = 6;
-      const visibleItems = Math.min(filteredItems.length, maxItems);
-      const estimatedHeight = searchHeight + visibleItems * itemHeight + 16;
-
-      // Simple decision: if not enough space below and more space above, show on top
-      const shouldShowAbove =
-        spaceBelow < estimatedHeight && spaceAbove > spaceBelow;
-      setShowAbove(shouldShowAbove);
+  // Get optimal positioning style based on available space
+  const getDropdownStyle = () => {
+    if (!relation) {
+      // Default positioning when relation is not available
+      return {
+        position: 'absolute' as const,
+        top: '100%',
+        marginTop: '8px',
+        left: 0,
+        right: 0,
+        zIndex: 10000,
+        maxHeight: '240px',
+      };
     }
-  }, [isDropdownVisible, filteredItems.length, searchEnabled]);
+
+    const baseStyle = {
+      position: 'absolute' as const,
+      left: 0,
+      right: 0,
+      zIndex: 10000,
+      maxHeight: '240px',
+    };
+
+    // Place dropdown where there's more space vertically
+    if (relation.space.vertical === 'top') {
+      return {
+        ...baseStyle,
+        bottom: '100%',
+        marginBottom: '8px',
+      };
+    } else {
+      return {
+        ...baseStyle,
+        top: '100%',
+        marginTop: '8px',
+      };
+    }
+  };
 
   // Sets up an effect to handle clicking outside the dropdown to close it.
   useEffect(() => {
@@ -147,16 +163,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
             overflowY="auto"
             borderRadius="4px"
-            style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              zIndex: 10000,
-              maxHeight: '240px',
-              ...(showAbove
-                ? { bottom: '100%', marginBottom: '8px' }
-                : { top: '100%', marginTop: '8px' }),
-            }}
+            style={getDropdownStyle()}
             {...views?.dropdown}
           >
             {searchEnabled && (

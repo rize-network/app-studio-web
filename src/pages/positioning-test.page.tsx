@@ -106,7 +106,9 @@ const PositioningTestPage = () => {
               items={comboBoxItems}
               placeholder="Select an option..."
               searchPlaceholder="Search options..."
-              onSelect={(item) => console.log('ComboBox middle selected:', item)}
+              onSelect={(item) =>
+                console.log('ComboBox middle selected:', item)
+              }
             />
           </View>
 
