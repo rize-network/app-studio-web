@@ -17,7 +17,7 @@ export const TitleSizes = {
  */
 export const LineHeights: Record<TitleSize, number> = {
   xs: 32,
-  sm: 40,
+  sm: 48,
   md: 56,
   lg: 72,
   xl: 80,

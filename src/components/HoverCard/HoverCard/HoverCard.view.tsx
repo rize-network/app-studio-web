@@ -265,11 +265,11 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
     >
       {children}
       {/* Debug info - can be removed in production */}
-      {process.env.NODE_ENV === 'development' && (
+      {/* {process.env.NODE_ENV === 'development' && (
         <div style={{ fontSize: '10px', opacity: 0.7, marginTop: '4px' }}>
           Placement: {optimalPosition.placement}
         </div>
-      )}
+      )} */}
     </View>
   );
 };

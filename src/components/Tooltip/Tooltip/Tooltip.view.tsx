@@ -302,11 +302,11 @@ export const TooltipView: React.FC<
           {showArrow && <View {...arrowStyles} {...views?.arrow} />}
 
           {/* Debug info - can be removed in production */}
-          {process.env.NODE_ENV === 'development' && (
+          {/* {process.env.NODE_ENV === 'development' && (
             <div style={{ fontSize: '8px', opacity: 0.7, marginTop: '2px' }}>
               Placement: {optimalPosition.placement}
             </div>
-          )}
+          )} */}
         </View>
       )}
     </View>

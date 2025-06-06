@@ -349,11 +349,11 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
     >
       {children}
       {/* Debug info - can be removed in production */}
-      {process.env.NODE_ENV === 'development' && (
+      {/* {process.env.NODE_ENV === 'development' && (
         <div style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}>
           Placement: {optimalPosition.placement}
         </div>
-      )}
+      )} */}
     </View>
   );
 };
