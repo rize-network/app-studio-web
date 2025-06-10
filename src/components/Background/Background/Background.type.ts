@@ -6,6 +6,12 @@ import { ViewProps } from 'app-studio';
 export type BackgroundEffect =
   | 'aurora'
   | 'meteors'
+  | 'particles'
+  | 'grid'
+  | 'ripples'
+  | 'wall'
+  | 'image'
+  | 'gradient'
   | 'borderMoving'
   | 'animatedStroke';
 
@@ -41,6 +47,54 @@ export type StrokeAnimationStyles = {
   rect?: ViewProps;
   text?: ViewProps;
 };
+
+/**
+ * Background image sizing options
+ */
+export type BackgroundSize = 'auto' | 'cover' | 'contain' | string;
+
+/**
+ * Background image positioning options
+ */
+export type BackgroundPosition =
+  | 'center'
+  | 'top'
+  | 'right'
+  | 'bottom'
+  | 'left'
+  | 'top-right'
+  | 'top-left'
+  | 'bottom-right'
+  | 'bottom-left'
+  | string;
+
+/**
+ * Background image repeat options
+ */
+export type BackgroundRepeat =
+  | 'repeat'
+  | 'repeat-x'
+  | 'repeat-y'
+  | 'no-repeat'
+  | 'space'
+  | 'round';
+
+/**
+ * CSS blend mode options for overlays
+ */
+export type BlendMode =
+  | 'normal'
+  | 'multiply'
+  | 'screen'
+  | 'overlay'
+  | 'darken'
+  | 'lighten'
+  | 'color-dodge'
+  | 'color-burn'
+  | 'hard-light'
+  | 'soft-light'
+  | 'difference'
+  | 'exclusion';
 
 /**
  * Background context type for compound components

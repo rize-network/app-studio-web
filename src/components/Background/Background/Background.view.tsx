@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { View, Horizontal } from 'app-studio';
+import { View, Horizontal, useTheme } from 'app-studio';
 import {
   BackgroundProps,
   AuroraBackgroundProps,
@@ -8,9 +8,16 @@ import {
   ParticlesProps,
   GridProps,
   RipplesProps,
+  BackgroundImageProps,
+  BackgroundGradientProps,
 } from './Background.props';
-import { DefaultBackgroundStyles, AuroraStyles } from './Background.style';
+import {
+  DefaultBackgroundStyles,
+  AuroraStyles,
+  BackgroundImageStyles,
+} from './Background.style';
 import { BackgroundContextType } from './Background.type';
+import { Gradient } from '../../Gradient/Gradient';
 
 // Background Context
 const BackgroundContext = createContext<BackgroundContextType>({});
@@ -490,6 +497,70 @@ const Ripples: React.FC<RipplesProps> = ({
 };
 
 /**
+ * Background Image Component
+ */
+const BackgroundImage: React.FC<BackgroundImageProps> = ({
+  children,
+  src,
+  backgroundSize = 'cover',
+  backgroundPosition = 'center',
+  backgroundRepeat = 'no-repeat',
+  backgroundAttachment = 'scroll',
+  imageOpacity = 1,
+  overlay,
+  blendMode = 'normal',
+  views,
+  themeMode: elementMode,
+  ...props
+}) => {
+  const { getColor } = useTheme();
+
+  const imageStyle: React.CSSProperties = {
+    ...BackgroundImageStyles.image,
+    backgroundImage: `url(${src})`,
+    backgroundSize,
+    backgroundPosition,
+    backgroundRepeat,
+    backgroundAttachment,
+    opacity: imageOpacity,
+  };
+
+  const overlayStyle: React.CSSProperties = overlay
+    ? {
+        ...BackgroundImageStyles.overlay,
+        backgroundColor: getColor(
+          overlay,
+          elementMode ? { themeMode: elementMode } : undefined
+        ),
+        mixBlendMode: blendMode as any,
+      }
+    : {};
+
+  return (
+    <View {...BackgroundImageStyles.container} {...views?.container} {...props}>
+      <View style={imageStyle} {...views?.image} />
+      {overlay && <View style={overlayStyle} />}
+      {children && (
+        <View {...BackgroundImageStyles.content} {...views?.content}>
+          {children}
+        </View>
+      )}
+    </View>
+  );
+};
+
+/**
+ * Background Gradient Component
+ * Uses the existing Gradient component as a background
+ */
+const BackgroundGradient: React.FC<BackgroundGradientProps> = ({
+  children,
+  ...gradientProps
+}) => {
+  return <Gradient {...gradientProps}>{children}</Gradient>;
+};
+
+/**
  * Main Background View Component with compound pattern
  */
 interface BackgroundViewComponent extends React.FC<BackgroundProps> {
@@ -499,6 +570,8 @@ interface BackgroundViewComponent extends React.FC<BackgroundProps> {
   Particles: React.FC<ParticlesProps>;
   Grid: React.FC<GridProps>;
   Ripples: React.FC<RipplesProps>;
+  Image: React.FC<BackgroundImageProps>;
+  Gradient: React.FC<BackgroundGradientProps>;
 }
 
 const BackgroundViewBase: React.FC<BackgroundProps> = ({
@@ -529,3 +602,5 @@ BackgroundView.Wall = Wall;
 BackgroundView.Particles = Particles;
 BackgroundView.Grid = Grid;
 BackgroundView.Ripples = Ripples;
+BackgroundView.Image = BackgroundImage;
+BackgroundView.Gradient = BackgroundGradient;

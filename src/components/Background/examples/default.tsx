@@ -58,5 +58,60 @@ export const DefaultDemo = () => (
       </Text>
       <Background.Ripples rippleCount={4} maxSize={150} frequency={2} />
     </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color.gray.600">
+        Background Image
+      </Text>
+      <Background.Image
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+        height="200px"
+        backgroundSize="cover"
+        overlay="rgba(0,0,0,0.3)"
+        blendMode="multiply"
+      >
+        <Text color="white" fontSize={18} fontWeight="500">
+          Image Background with Overlay
+        </Text>
+      </Background.Image>
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color.gray.600">
+        Background Gradient
+      </Text>
+      <Background.Gradient
+        from="color.blue.500"
+        to="color.purple.500"
+        height="200px"
+        animate={true}
+        animationDuration={4}
+      >
+        <Text color="white" fontSize={18} fontWeight="500">
+          Animated Gradient Background
+        </Text>
+      </Background.Gradient>
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color.gray.600">
+        Multi-color Gradient
+      </Text>
+      <Background.Gradient
+        type="radial"
+        colors={[
+          { color: 'color.red.500', position: '0%' },
+          { color: 'color.orange.500', position: '50%' },
+          { color: 'color.yellow.500', position: '100%' },
+        ]}
+        height="200px"
+        shape="ellipse"
+        position="top-left"
+      >
+        <Text color="white" fontSize={18} fontWeight="500">
+          Radial Multi-color Gradient
+        </Text>
+      </Background.Gradient>
+    </Vertical>
   </Vertical>
 );

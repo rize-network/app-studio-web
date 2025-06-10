@@ -103,6 +103,64 @@ const BackgroundTestPage = () => {
 
       <Vertical gap={24}>
         <Text fontSize={18} fontWeight="500">
+          Background Image
+        </Text>
+        <Background.Image
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+          height={300}
+          width={400}
+          backgroundSize="cover"
+          overlay="rgba(0,0,0,0.4)"
+          blendMode="multiply"
+        >
+          <Text color="white" fontSize={20} fontWeight="600">
+            Image Background with Overlay
+          </Text>
+        </Background.Image>
+      </Vertical>
+
+      <Vertical gap={24}>
+        <Text fontSize={18} fontWeight="500">
+          Background Gradient
+        </Text>
+        <Background.Gradient
+          from="color.blue.500"
+          to="color.purple.500"
+          height={300}
+          width={400}
+          animate={true}
+          animationDuration={4}
+        >
+          <Text color="white" fontSize={20} fontWeight="600">
+            Animated Gradient Background
+          </Text>
+        </Background.Gradient>
+      </Vertical>
+
+      <Vertical gap={24}>
+        <Text fontSize={18} fontWeight="500">
+          Multi-color Radial Gradient
+        </Text>
+        <Background.Gradient
+          type="radial"
+          colors={[
+            { color: 'color.red.500', position: '0%' },
+            { color: 'color.orange.500', position: '50%' },
+            { color: 'color.yellow.500', position: '100%' },
+          ]}
+          height={300}
+          width={400}
+          shape="ellipse"
+          position="top-left"
+        >
+          <Text color="white" fontSize={20} fontWeight="600">
+            Radial Multi-color Gradient
+          </Text>
+        </Background.Gradient>
+      </Vertical>
+
+      <Vertical gap={24}>
+        <Text fontSize={18} fontWeight="500">
           Mixed Effects Showcase
         </Text>
         <Horizontal gap={16} flexWrap="wrap">

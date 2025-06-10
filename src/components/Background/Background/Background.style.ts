@@ -43,6 +43,46 @@ export const AuroraStyles = {
 };
 
 /**
+ * Background Image styles
+ */
+export const BackgroundImageStyles = {
+  container: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  } as ViewProps,
+
+  image: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'scroll',
+  } as ViewProps,
+
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    pointerEvents: 'none',
+  } as ViewProps,
+
+  content: {
+    position: 'relative',
+    zIndex: 2,
+  } as ViewProps,
+};
+
+/**
  * Meteors effect styles
  */
 export const MeteorsStyles = {

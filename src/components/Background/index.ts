@@ -7,6 +7,8 @@ export type {
   ParticlesProps,
   GridProps,
   RipplesProps,
+  BackgroundImageProps,
+  BackgroundGradientProps,
   BackgroundStyles,
 } from './Background/Background.props';
 export type {
@@ -16,4 +18,8 @@ export type {
   BorderAnimationStyles,
   StrokeAnimationStyles,
   BackgroundContextType,
+  BackgroundSize,
+  BackgroundPosition,
+  BackgroundRepeat,
+  BlendMode,
 } from './Background/Background.type';

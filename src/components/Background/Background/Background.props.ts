@@ -1,5 +1,12 @@
 import { ReactNode } from 'react';
 import { ViewProps } from 'app-studio';
+import { GradientProps } from '../../Gradient/Gradient/Gradient.props';
+import {
+  BackgroundSize,
+  BackgroundPosition,
+  BackgroundRepeat,
+  BlendMode,
+} from './Background.type';
 
 /**
  * Base Background component props
@@ -67,6 +74,76 @@ export interface RipplesProps extends Omit<ViewProps, 'colors'> {
 }
 
 /**
+ * Background Image component props
+ */
+export interface BackgroundImageProps
+  extends Omit<BackgroundProps, 'position'> {
+  /**
+   * Image source URL
+   */
+  src: string;
+
+  /**
+   * Background size
+   * @default 'cover'
+   */
+  backgroundSize?: BackgroundSize;
+
+  /**
+   * Background position
+   * @default 'center'
+   */
+  backgroundPosition?: BackgroundPosition;
+
+  /**
+   * Background repeat
+   * @default 'no-repeat'
+   */
+  backgroundRepeat?: BackgroundRepeat;
+
+  /**
+   * Background attachment
+   * @default 'scroll'
+   */
+  backgroundAttachment?: 'scroll' | 'fixed' | 'local';
+
+  /**
+   * Image opacity
+   * @default 1
+   */
+  imageOpacity?: number;
+
+  /**
+   * Overlay color to blend with image
+   */
+  overlay?: string;
+
+  /**
+   * Blend mode for overlay
+   * @default 'normal'
+   */
+  blendMode?: BlendMode;
+
+  /**
+   * Custom views for styling
+   */
+  views?: {
+    container?: ViewProps;
+    content?: ViewProps;
+    image?: ViewProps;
+    overlay?: ViewProps;
+  };
+}
+
+/**
+ * Background Gradient component props
+ * Extends GradientProps and adds Background-specific functionality
+ */
+export interface BackgroundGradientProps extends GradientProps {
+  // All gradient props are inherited from GradientProps
+}
+
+/**
  * Background styles for customization
  */
 export interface BackgroundStyles {
@@ -74,4 +151,6 @@ export interface BackgroundStyles {
   content?: ViewProps;
   aurora?: ViewProps;
   meteors?: ViewProps;
+  image?: ViewProps;
+  gradient?: ViewProps;
 }

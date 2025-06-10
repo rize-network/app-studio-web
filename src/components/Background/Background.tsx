@@ -1,8 +1,10 @@
 /**
  * Background Component
  *
- * A collection of animated background effects including Aurora, Meteors,
- * and animated border effects following the design system guidelines.
+ * A comprehensive collection of background effects including animated backgrounds
+ * (Aurora, Meteors, Particles, Grid, Ripples, Wall), background images with overlays,
+ * and gradient backgrounds. All components follow the design system guidelines and
+ * integrate seamlessly with the app-studio theme system.
  */
 
 import React from 'react';
@@ -37,6 +39,18 @@ import { BackgroundView } from './Background/Background.view';
  * @example
  * // Ripples effect
  * <Background.Ripples rippleCount={5} maxSize={200} frequency={3} />
+ *
+ * @example
+ * // Background Image
+ * <Background.Image src="/path/to/image.jpg" size="cover" overlay="rgba(0,0,0,0.5)">
+ *   <Text color="white">Content over image</Text>
+ * </Background.Image>
+ *
+ * @example
+ * // Background Gradient
+ * <Background.Gradient from="blue.500" to="purple.500" animate={true}>
+ *   <Text color="white">Content over gradient</Text>
+ * </Background.Gradient>
  */
 const BackgroundComponent = React.forwardRef<HTMLDivElement, BackgroundProps>(
   (props, ref) => <BackgroundView {...props} ref={ref} />
@@ -51,6 +65,8 @@ export const Background = Object.assign(BackgroundComponent, {
   Particles: BackgroundView.Particles,
   Grid: BackgroundView.Grid,
   Ripples: BackgroundView.Ripples,
+  Image: BackgroundView.Image,
+  Gradient: BackgroundView.Gradient,
 });
 
 Background.displayName = 'Background';

@@ -1,6 +1,6 @@
 # Background
 
-A collection of animated background effects including Aurora, Meteors, and animated border effects.
+A comprehensive collection of background effects including animated backgrounds (Aurora, Meteors, Particles), background images with overlays, and gradient backgrounds. Perfect for creating engaging visual experiences in your applications.
 
 ### **Import**
 ```tsx
@@ -95,6 +95,91 @@ export const RipplesDemo = () => (
 );
 ```
 
+### **Background Image**
+Display images as backgrounds with overlay support and blend modes.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Text } from '../../Text/Text';
+
+export const BackgroundImageDemo = () => (
+  <Background.Image
+    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+    height="300px"
+    backgroundSize="cover"
+    overlay="rgba(0,0,0,0.4)"
+    blendMode="multiply"
+  >
+    <Text color="white" fontSize={20} fontWeight="600">
+      Beautiful Image Background
+    </Text>
+  </Background.Image>
+);
+```
+
+### **Background Gradient**
+Create beautiful gradient backgrounds with animation support.
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Text } from '../../Text/Text';
+
+// Simple two-color gradient
+export const SimpleGradientDemo = () => (
+  <Background.Gradient
+    from="color.blue.500"
+    to="color.purple.500"
+    height="300px"
+    animate={true}
+    animationDuration={4}
+  >
+    <Text color="white" fontSize={20} fontWeight="600">
+      Animated Gradient
+    </Text>
+  </Background.Gradient>
+);
+
+// Multi-color radial gradient
+export const RadialGradientDemo = () => (
+  <Background.Gradient
+    type="radial"
+    colors={[
+      { color: 'color.red.500', position: '0%' },
+      { color: 'color.orange.500', position: '50%' },
+      { color: 'color.yellow.500', position: '100%' },
+    ]}
+    height="300px"
+    shape="ellipse"
+    position="center"
+  >
+    <Text color="white" fontSize={20} fontWeight="600">
+      Radial Multi-color Gradient
+    </Text>
+  </Background.Gradient>
+);
+
+// Conic gradient
+export const ConicGradientDemo = () => (
+  <Background.Gradient
+    type="conic"
+    colors={[
+      { color: 'color.blue.500', position: '0deg' },
+      { color: 'color.green.500', position: '120deg' },
+      { color: 'color.red.500', position: '240deg' },
+      { color: 'color.blue.500', position: '360deg' },
+    ]}
+    height="300px"
+    animate={true}
+  >
+    <Text color="white" fontSize={20} fontWeight="600">
+      Animated Conic Gradient
+    </Text>
+  </Background.Gradient>
+);
+```
+
 ### **Border Moving Button**
 Button with animated moving gradient border.
 
@@ -141,7 +226,8 @@ import { Background } from '../Background';
 import { Text } from '../../Text/Text';
 import { Vertical, Horizontal } from 'app-studio';
 
-export const CombinedDemo = () => (
+// Aurora with content
+export const CombinedAuroraDemo = () => (
   <Background.Aurora height="400px" showRadialGradient={true}>
     <Vertical alignItems="center" gap={24}>
       <Text color="white" fontSize={24} fontWeight="600">
@@ -161,6 +247,50 @@ export const CombinedDemo = () => (
       </Horizontal>
     </Vertical>
   </Background.Aurora>
+);
+
+// Image with gradient overlay
+export const ImageGradientOverlayDemo = () => (
+  <Background.Image
+    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+    height="400px"
+    backgroundSize="cover"
+    overlay="linear-gradient(45deg, rgba(59, 130, 246, 0.8), rgba(147, 51, 234, 0.8))"
+    blendMode="overlay"
+  >
+    <Vertical alignItems="center" gap={24}>
+      <Text color="white" fontSize={28} fontWeight="700">
+        Stunning Visuals
+      </Text>
+      <Text color="white" fontSize={16} textAlign="center" maxWidth="400px">
+        Combine beautiful images with gradient overlays for captivating designs
+      </Text>
+    </Vertical>
+  </Background.Image>
+);
+
+// Layered backgrounds
+export const LayeredBackgroundDemo = () => (
+  <Background.Gradient
+    from="color.indigo.900"
+    to="color.purple.900"
+    height="400px"
+  >
+    <Background.Particles
+      count={30}
+      speed="slow"
+      shapes={['circle']}
+      colors={['rgba(255,255,255,0.3)', 'rgba(147,51,234,0.5)']}
+    />
+    <Vertical alignItems="center" gap={24} style={{ position: 'relative', zIndex: 2 }}>
+      <Text color="white" fontSize={24} fontWeight="600">
+        Layered Effects
+      </Text>
+      <Text color="white" fontSize={16} textAlign="center">
+        Gradient background with floating particles
+      </Text>
+    </Vertical>
+  </Background.Gradient>
 );
 ```
 
@@ -207,6 +337,43 @@ export const CombinedDemo = () => (
 - `width?: number` - Container width
 - `height?: number` - Container height
 
+### Background Image Props
+- `src: string` - **Required.** Image source URL
+- `backgroundSize?: string` - How the image should be sized ('cover', 'contain', 'auto', or custom) (default: 'cover')
+- `backgroundPosition?: string` - Image position ('center', 'top', 'bottom', 'left', 'right', or custom) (default: 'center')
+- `backgroundRepeat?: string` - Image repeat behavior ('no-repeat', 'repeat', 'repeat-x', 'repeat-y', 'space', 'round') (default: 'no-repeat')
+- `backgroundAttachment?: string` - Scroll behavior ('scroll', 'fixed', 'local') (default: 'scroll')
+- `imageOpacity?: number` - Image opacity (0-1) (default: 1)
+- `overlay?: string` - Overlay color or gradient to blend with image
+- `blendMode?: string` - CSS blend mode for overlay ('normal', 'multiply', 'screen', 'overlay', etc.) (default: 'normal')
+- `children?: ReactNode` - Content to display over the image
+- `width?: number` - Container width
+- `height?: number` - Container height
+
+### Background Gradient Props
+*Inherits all props from the Gradient component:*
+
+- `type?: 'linear' | 'radial' | 'conic'` - Type of gradient (default: 'linear')
+- `direction?: string` - Direction for linear gradients ('to-right', 'to-left', 'to-bottom', 'to-top', or custom angle) (default: 'to-right')
+- `shape?: 'circle' | 'ellipse'` - Shape for radial gradients (default: 'circle')
+- `position?: string` - Position for radial/conic gradients ('center', 'top', 'bottom', etc.) (default: 'center')
+- `from?: string` - Starting color for simple two-color gradients
+- `to?: string` - Ending color for simple two-color gradients
+- `colors?: ColorStop[]` - Array of color stops for multi-color gradients (takes precedence over from/to)
+- `animate?: boolean` - Whether to animate the gradient (default: false)
+- `animationDuration?: number` - Animation duration in seconds (default: 3)
+- `children?: ReactNode` - Content to display over the gradient
+- `width?: number` - Container width
+- `height?: number` - Container height
+
+#### ColorStop Interface
+```tsx
+interface ColorStop {
+  color: string;        // Color value (supports theme colors like 'color.blue.500')
+  position?: string;    // Position as percentage ('0%', '50%', '100%') or angle for conic
+}
+```
+
 ### Border Moving Button Props
 - `children: ReactNode` - Button content
 - `duration?: number` - Animation duration in seconds (default: 2)
@@ -223,3 +390,128 @@ export const CombinedDemo = () => (
 - `textColor?: string` - Text color (default: "#333333")
 - `href?: string` - Link URL
 - `onClick?: () => void` - Click handler
+
+## Usage Guide
+
+### **Theme Integration**
+All Background components integrate seamlessly with the app-studio theme system:
+
+```tsx
+// Use theme colors
+<Background.Gradient
+  from="color.blue.500"
+  to="color.purple.500"
+  animate={true}
+/>
+
+// Use theme colors in overlays
+<Background.Image
+  src="/hero-image.jpg"
+  overlay="color.gray.900"
+  imageOpacity={0.8}
+/>
+```
+
+### **Responsive Design**
+Background components work well with responsive layouts:
+
+```tsx
+// Responsive sizing
+<Background.Image
+  src="/hero-image.jpg"
+  height={{ base: "300px", md: "400px", lg: "500px" }}
+  backgroundPosition={{ base: "center", md: "top" }}
+/>
+
+// Adaptive content
+<Background.Gradient from="color.blue.500" to="color.purple.500">
+  <Vertical gap={{ base: 16, md: 24 }} alignItems="center">
+    <Text fontSize={{ base: 20, md: 24, lg: 28 }} color="white">
+      Responsive Content
+    </Text>
+  </Vertical>
+</Background.Gradient>
+```
+
+### **Performance Considerations**
+- Use appropriate image sizes and formats for Background.Image
+- Consider using `loading="lazy"` for images below the fold
+- Limit the number of animated particles for better performance
+- Use CSS transforms for animations when possible
+
+### **Accessibility**
+- Ensure sufficient color contrast for text over backgrounds
+- Provide alternative text or descriptions for decorative backgrounds
+- Consider reduced motion preferences for animations
+- Test with screen readers
+
+```tsx
+// Good contrast example
+<Background.Image
+  src="/hero-image.jpg"
+  overlay="rgba(0,0,0,0.6)"  // Dark overlay for better text contrast
+>
+  <Text color="white" fontSize={24}>
+    High Contrast Text
+  </Text>
+</Background.Image>
+```
+
+### **Common Patterns**
+
+#### Hero Sections
+```tsx
+<Background.Image
+  src="/hero-background.jpg"
+  height="100vh"
+  backgroundSize="cover"
+  backgroundPosition="center"
+  overlay="rgba(0,0,0,0.4)"
+>
+  <Vertical alignItems="center" gap={24}>
+    <Text fontSize={48} fontWeight="bold" color="white" textAlign="center">
+      Welcome to Our Platform
+    </Text>
+    <Text fontSize={18} color="white" textAlign="center" maxWidth="600px">
+      Create amazing experiences with our background components
+    </Text>
+    <Button variant="filled" size="lg">
+      Get Started
+    </Button>
+  </Vertical>
+</Background.Image>
+```
+
+#### Card Backgrounds
+```tsx
+<Background.Gradient
+  from="color.blue.50"
+  to="color.indigo.100"
+  borderRadius={12}
+  padding={24}
+>
+  <Vertical gap={16}>
+    <Text fontSize={20} fontWeight="600">
+      Feature Card
+    </Text>
+    <Text color="color.gray.600">
+      Beautiful gradient background for cards and sections
+    </Text>
+  </Vertical>
+</Background.Gradient>
+```
+
+#### Loading States
+```tsx
+<Background.Particles
+  count={20}
+  speed="medium"
+  shapes={['circle']}
+  colors={['color.blue.400', 'color.purple.400']}
+>
+  <Vertical alignItems="center" gap={16}>
+    <Spinner size="lg" />
+    <Text>Loading...</Text>
+  </Vertical>
+</Background.Particles>
+```
