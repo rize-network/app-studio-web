@@ -4,7 +4,7 @@ Formik integration components for form state management and validation.
 
 ### **Import**
   ```tsx
-  import { FormikForm, FormikTextField, FormikCheckbox, FormikColorInput, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider } from '@app-studio/web';
+  import { FormikForm, FormikTextField, FormikCheckbox, FormikChatInput, FormikColorInput, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider } from '@app-studio/web';
   ```
 
 ### **Basic Form**
@@ -188,6 +188,93 @@ export const FormikCheckboxExample = () => {
           <Button type="submit" onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **FormikChatInput**
+Chat input with file upload, mentions, and auto-completion integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm } from '../Formik.Form';
+import { FormikChatInput } from '../Formik.ChatInput';
+import { Button, Vertical, Text } from 'app-studio';
+
+export const FormikChatInputExample = () => {
+  const mentionData = [
+    { id: '1', name: 'John Doe', avatar: '', email: 'john@example.com' },
+    { id: '2', name: 'Jane Smith', avatar: '', email: 'jane@example.com' },
+  ];
+
+  const promptExamples = [
+    { id: '1', text: 'Hello, how can I help you today?' },
+    { id: '2', text: 'What would you like to know about our product?' },
+  ];
+
+  return (
+    <Formik
+      initialValues={{
+        message: '',
+        chatHistory: [] as string[]
+      }}
+      validationSchema={Yup.object({
+        message: Yup.string().required('Message is required'),
+      })}
+      onSubmit={(values, { setFieldValue }) => {
+        console.log('Message submitted:', values.message);
+        // Add to chat history and clear input
+        const newHistory = [...values.chatHistory, values.message];
+        setFieldValue('chatHistory', newHistory);
+        setFieldValue('message', '');
+      }}
+    >
+      {({ handleSubmit, values }) => (
+        <FormikForm>
+          <Vertical gap={16}>
+            {/* Display chat history */}
+            {values.chatHistory.length > 0 && (
+              <Vertical gap={8}>
+                <Text fontSize="md" fontWeight="semibold">Chat History:</Text>
+                {values.chatHistory.map((msg: string, index: number) => (
+                  <Text
+                    key={index}
+                    padding={8}
+                    backgroundColor="color.gray.100"
+                    borderRadius={8}
+                  >
+                    {msg}
+                  </Text>
+                ))}
+              </Vertical>
+            )}
+
+            <FormikChatInput
+              name="message"
+              placeholder="Type your message here... Use @ to mention someone"
+              mentionData={mentionData}
+              mentionTrigger="@"
+              promptExamples={promptExamples}
+              autoFocus={true}
+              hideAttachments={false}
+              onMentionSelect={(mention) => {
+                console.log('Mention selected:', mention);
+              }}
+            />
+
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              disabled={!values.message?.trim()}
+            >
+              Send Message
+            </Button>
+          </Vertical>
         </FormikForm>
       )}
     </Formik>

@@ -1,9 +1,11 @@
 export { FormikCheckbox } from './Formik.Checkbox';
+export { FormikChatInput } from './Formik.ChatInput';
 export { FormikColorInput } from './Formik.ColorInput';
 export { FormikDatePicker } from './Formik.DatePicker';
 export { FormikCountryPicker } from './Formik.CountryPicker';
 export { FormikSelect } from './Formik.Select';
 export { FormikSwitch } from './Formik.Switch';
+export { FormikTagInput } from './Formik.TagInput';
 export { FormikTextArea } from './Formik.TextArea';
 export { FormikTextField } from './Formik.TextField';
 export { FormikPassword } from './Formik.Password';

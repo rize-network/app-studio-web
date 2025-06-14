@@ -1,4 +1,5 @@
 export * from './FormikCheckbox';
+export * from './FormikChatInput';
 export * from './FormikColorInput';
 export * from './FormikComboBox';
 export * from './FormikCountryPicker';
