@@ -96,10 +96,10 @@ The Title component supports animations through the `animate` prop, which accept
       from: { opacity: 0 },
       to: { opacity: 1 },
       duration: '1.5s',
-      iterationCount: '1',
     }}
+    animationLoop={1}
   >
-    Fade In Animation
+    Fade In Animation (Once)
   </Title>
 
   <Title
@@ -107,21 +107,83 @@ The Title component supports animations through the `animate` prop, which accept
       from: { transform: 'translateX(-100%)' },
       to: { transform: 'translateX(0)' },
       duration: '1s',
-      iterationCount: '1',
     }}
+    animationLoop={3}
   >
-    Slide In From Left
+    Slide In From Left (3 Times)
   </Title>
 
   <Title
     animate={{
-      from: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' },
-      to: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
-      duration: '1.5s',
-      iterationCount: '1',
+      from: { transform: 'translateX(-10px)' },
+      to: { transform: 'translateX(10px)' },
+      duration: '2s',
+      direction: 'alternate',
     }}
+    animationLoop="infinite"
   >
-    Reveal Animation
+    Infinite Wiggle Animation
+  </Title>
+</Vertical>
+```
+
+## Animation Loop Control
+
+You can control how many times animations repeat using the `animationLoop` and `highlightAnimationLoop` props.
+
+```jsx
+<Vertical gap={32}>
+  {/* Animation plays once (default) */}
+  <Title
+    animate={{
+      from: { opacity: 0, transform: 'translateY(-20px)' },
+      to: { opacity: 1, transform: 'translateY(0)' },
+      duration: '1s',
+    }}
+    animationLoop={1}
+  >
+    Animation Plays Once
+  </Title>
+
+  {/* Animation plays 3 times */}
+  <Title
+    animate={{
+      from: { transform: 'scale(0.8)' },
+      to: { transform: 'scale(1)' },
+      duration: '0.8s',
+    }}
+    animationLoop={3}
+  >
+    Animation Plays Three Times
+  </Title>
+
+  {/* Infinite animation loop */}
+  <Title
+    animate={{
+      from: { transform: 'translateX(-10px)' },
+      to: { transform: 'translateX(10px)' },
+      duration: '2s',
+      direction: 'alternate',
+    }}
+    animationLoop="infinite"
+  >
+    Animation Loops Infinitely
+  </Title>
+
+  {/* Highlight animation with infinite loop */}
+  <Title
+    highlightAnimate={{
+      from: { transform: 'rotate(-5deg)' },
+      to: { transform: 'rotate(5deg)' },
+      duration: '1s',
+      direction: 'alternate',
+    }}
+    highlightAnimationLoop="infinite"
+    highlightText="Wiggling"
+    highlightStyle="outline"
+    highlightColor="theme.warning"
+  >
+    Title with Wiggling Highlight
   </Title>
 </Vertical>
 ```
@@ -186,7 +248,55 @@ You can add a typewriter effect to the highlighted text using the `highlightType
 
 ## Responsive
 
-You can make the title responsive using the `media` prop.
+You can make the title responsive in two ways:
+
+### Using the `responsive` prop (Recommended)
+
+The `responsive` prop automatically applies responsive sizing based on the current `size` prop using a predefined typography scale:
+
+```jsx
+<Title
+  size="xl"
+  responsive={true}
+  highlightText="Responsive"
+  highlightStyle="background"
+  highlightColor="theme.primary"
+>
+  Responsive XL Title (H1 scale)
+</Title>
+
+<Title
+  size="lg"
+  responsive={true}
+  highlightText="Responsive"
+  highlightStyle="gradient"
+  highlightColor="theme.primary"
+  highlightSecondaryColor="theme.secondary"
+>
+  Responsive LG Title (H2 scale)
+</Title>
+
+<Title
+  size="md"
+  responsive={true}
+  highlightText="Responsive"
+  highlightStyle="underline"
+  highlightColor="theme.accent"
+>
+  Responsive MD Title (H3 scale)
+</Title>
+```
+
+The responsive prop maps sizes to typography scales:
+- `xl` → H1 scale (46px mobile, 52px tablet, 58px desktop)
+- `lg` → H2 scale (28px mobile, 36px tablet, 48px desktop)
+- `md` → H3 scale (28px mobile, 34px tablet, 40px desktop)
+- `sm` → T1 scale (24px mobile, 28px tablet, 32px desktop)
+- `xs` → S1 scale (16px mobile, 18px tablet, 20px desktop)
+
+### Using the `media` prop (Manual)
+
+For custom responsive behavior, you can use the `media` prop:
 
 ```jsx
 <Title
@@ -208,7 +318,7 @@ You can make the title responsive using the `media` prop.
   highlightStyle="background"
   highlightColor="theme.primary"
 >
-  Responsive Title Example
+  Manual Responsive Title
 </Title>
 ```
 
@@ -346,10 +456,29 @@ export interface TitleProps extends ViewProps {
   animate?: AnimationProps | AnimationProps[];
 
   /**
+   * Controls the animation loop behavior for the title animation
+   * @default 1 (play once)
+   */
+  animationLoop?: number | 'infinite';
+
+  /**
+   * Controls the animation loop behavior for the highlight animation
+   * @default 1 (play once)
+   */
+  highlightAnimationLoop?: number | 'infinite';
+
+  /**
    * Size of the title
    * @default 'xl'
    */
   size?: TitleSize;
+
+  /**
+   * Whether to enable responsive sizing based on breakpoints
+   * When true, the title will automatically adapt its size across mobile/tablet/desktop
+   * @default false
+   */
+  responsive?: boolean;
 
   /**
    * Whether to center the title
@@ -397,6 +526,9 @@ The Title component:
 - Use the Title component for main headings and important text that needs emphasis
 - Choose highlight styles that maintain good contrast with the background
 - Use animations sparingly to avoid distracting users
+- Use `animationLoop` and `highlightAnimationLoop` to control animation repetition
+- Prefer finite loop counts over infinite animations for better user experience
+- Use the `responsive` prop for automatic responsive sizing based on predefined typography scales
 - Consider using responsive sizing for different screen sizes
 - Limit the use of alternating text to avoid confusion
 - Ensure that any animations respect user preferences for reduced motion

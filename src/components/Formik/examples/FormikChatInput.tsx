@@ -24,7 +24,7 @@ export const FormikChatInputExample = () => {
 
   const handleSubmit = (values: any, { setFieldValue }: any) => {
     console.log('Form submitted with values:', values);
-    
+
     // Add message to chat history
     if (values.message.trim()) {
       const newHistory = [...values.chatHistory, values.message];
@@ -43,7 +43,7 @@ export const FormikChatInputExample = () => {
       <Text fontSize="lg" fontWeight="bold">
         Formik ChatInput Example
       </Text>
-      
+
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {(formikProps: any) => (
           <FormikForm
@@ -58,16 +58,18 @@ export const FormikChatInputExample = () => {
                   <Text fontSize="md" fontWeight="semibold">
                     Chat History:
                   </Text>
-                  {formikProps.values.chatHistory.map((msg: string, index: number) => (
-                    <Text 
-                      key={index} 
-                      padding={8} 
-                      backgroundColor="color.gray.100" 
-                      borderRadius={8}
-                    >
-                      {msg}
-                    </Text>
-                  ))}
+                  {formikProps.values.chatHistory.map(
+                    (msg: string, index: number) => (
+                      <Text
+                        key={index}
+                        padding={8}
+                        backgroundColor="color.gray.100"
+                        borderRadius={8}
+                      >
+                        {msg}
+                      </Text>
+                    )
+                  )}
                 </Vertical>
               )}
 
@@ -86,8 +88,8 @@ export const FormikChatInputExample = () => {
                 }}
               />
 
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 onClick={formikProps.handleSubmit}
                 disabled={!formikProps.values.message?.trim()}
               >
@@ -111,9 +113,9 @@ export const FormikChatInputSimpleExample = () => {
       <Text fontSize="lg" fontWeight="bold">
         Simple Formik ChatInput Example
       </Text>
-      
-      <Formik 
-        initialValues={initialValues} 
+
+      <Formik
+        initialValues={initialValues}
         onSubmit={(values) => console.log('Simple form submitted:', values)}
       >
         {(props: any) => (
@@ -126,7 +128,7 @@ export const FormikChatInputSimpleExample = () => {
                 size="sm"
                 shape="rounded"
               />
-              
+
               <Button type="submit" onClick={props.handleSubmit}>
                 Submit Feedback
               </Button>
