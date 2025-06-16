@@ -7,7 +7,7 @@ import React, {
   useState,
   useCallback,
 } from 'react';
-import { View, Text, Vertical } from 'app-studio';
+import { View, Text, Vertical, useElementPosition } from 'app-studio';
 
 interface Suggestion {
   id: string;
@@ -80,14 +80,20 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
     const [selectedMentionIndex, setSelectedMentionIndex] = useState(-1);
     const [filteredMentions, setFilteredMentions] = useState<MentionData[]>([]);
 
+    // Use useElementPosition for intelligent dropdown positioning
+    const { ref: positionRef, relation } = useElementPosition({
+      trackChanges: true,
+      trackOnHover: true,
+      trackOnScroll: true,
+      trackOnResize: true,
+    });
+
     // Positioning state for dropdowns
     const [mentionPosition, setMentionPosition] = useState({ x: 0, y: 0 });
     const [suggestionPosition, setSuggestionPosition] = useState({
       x: 0,
       y: 0,
     });
-
-    // Note: Using custom positioning logic for better control over dropdown placement
 
     // Update the content of the editable div when the value prop changes
     useEffect(() => {
@@ -159,24 +165,38 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       [mentionData, mentionTrigger]
     );
 
-    // Calculate optimal position for dropdowns
+    // Sync the position ref with the container ref for positioning calculations
+    useEffect(() => {
+      if (containerRef.current && positionRef) {
+        (positionRef as any).current = containerRef.current;
+      }
+    }, [containerRef, positionRef]);
+
+    // Calculate optimal position for dropdowns using useElementPosition
     const calculateDropdownPosition = useCallback(
       (dropdownHeight: number = 200) => {
         if (!containerRef.current) return { x: 0, y: 0 };
 
         const containerRect = containerRef.current.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const viewportWidth = window.innerWidth;
 
-        // Calculate available space
+        // Use relation data for intelligent positioning if available
+        if (relation) {
+          const useTopPlacement = relation.space.vertical === 'top';
+          return {
+            x: containerRect.left,
+            y: useTopPlacement
+              ? containerRect.top - dropdownHeight - 8
+              : containerRect.bottom + 8,
+          };
+        }
+
+        // Fallback to manual calculation if relation data is not available
+        const viewportHeight = window.innerHeight;
         const availableSpace = {
           top: containerRect.top,
           bottom: viewportHeight - containerRect.bottom,
-          left: containerRect.left,
-          right: viewportWidth - containerRect.right,
         };
 
-        // Prefer bottom placement, but use top if not enough space
         const useTopPlacement =
           availableSpace.bottom < dropdownHeight + 8 &&
           availableSpace.top > availableSpace.bottom;
@@ -188,7 +208,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             : containerRect.bottom + 8,
         };
       },
-      []
+      [relation]
     );
 
     // Handle focus events
@@ -476,6 +496,13 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
               {process.env.NODE_ENV === 'development' && (
                 <div style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}>
                   Mentions (Trigger: {mentionTrigger})
+                  {relation && (
+                    <>
+                      <br />
+                      Space: {relation.space.vertical}-
+                      {relation.space.horizontal}
+                    </>
+                  )}
                 </div>
               )}
             </Vertical>
@@ -549,6 +576,13 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                     style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}
                   >
                     Suggestions (Focus-triggered)
+                    {relation && (
+                      <>
+                        <br />
+                        Space: {relation.space.vertical}-
+                        {relation.space.horizontal}
+                      </>
+                    )}
                   </div>
                 )}
               </Vertical>

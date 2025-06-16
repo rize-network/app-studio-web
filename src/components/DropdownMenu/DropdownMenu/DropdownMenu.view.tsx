@@ -5,7 +5,7 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import { View, ViewProps } from 'app-studio';
+import { View, ViewProps, useElementPosition } from 'app-studio';
 import {
   DropdownMenuContextType,
   DropdownMenuItem as DropdownMenuItemType,
@@ -99,151 +99,122 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   const { isOpen, variant, triggerRef } = useDropdownMenuContext();
 
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Use useElementPosition for intelligent positioning
+  const { ref: positionRef, relation } = useElementPosition({
+    trackChanges: true,
+    trackOnHover: true,
+    trackOnScroll: true,
+    trackOnResize: true,
+  });
+
   const [optimalPosition, setOptimalPosition] = useState({
     x: 0,
     y: 0,
     placement: side,
   });
 
-  // Calculate optimal position when the dropdown opens
+  // Sync the position ref with the trigger ref for positioning calculations
+  useEffect(() => {
+    if (triggerRef.current && positionRef) {
+      (positionRef as any).current = triggerRef.current;
+    }
+  }, [triggerRef, positionRef, isOpen]);
+
+  // Calculate optimal position using useElementPosition when the dropdown opens
   useEffect(() => {
     if (isOpen && contentRef.current && triggerRef.current) {
-      const contentRect = contentRef.current.getBoundingClientRect();
       const triggerRect = triggerRef.current.getBoundingClientRect();
+      let placement = side;
 
-      // Get content dimensions
-      const contentWidth = Math.max(contentRect.width || 180, 180);
-      const contentHeight = Math.max(contentRect.height || 100, 100);
+      // Use relation data to determine optimal placement
+      if (relation) {
+        // If preferred side doesn't have enough space, use the side with more space
+        if (side === 'bottom' && relation.space.vertical === 'top') {
+          placement = 'top';
+        } else if (side === 'top' && relation.space.vertical === 'bottom') {
+          placement = 'bottom';
+        } else if (side === 'right' && relation.space.horizontal === 'left') {
+          placement = 'left';
+        } else if (side === 'left' && relation.space.horizontal === 'right') {
+          placement = 'right';
+        }
+      }
 
-      // Get viewport dimensions
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
+      // Calculate position based on optimal placement and alignment
+      let x = 0;
+      let y = 0;
 
-      // Calculate available space on all sides from the trigger
-      const availableSpace = {
-        top: triggerRect.top,
-        right: viewportWidth - triggerRect.right,
-        bottom: viewportHeight - triggerRect.bottom,
-        left: triggerRect.left,
-      };
-
-      // Determine optimal placement based on available space and preferred side
-      const placements = [
-        {
-          placement: 'bottom' as const,
-          space: availableSpace.bottom,
-          fits: availableSpace.bottom >= contentHeight + 8,
-          x:
+      switch (placement) {
+        case 'bottom':
+          x =
             align === 'start'
               ? triggerRect.left
               : align === 'end'
-              ? triggerRect.right - contentWidth
-              : triggerRect.left + triggerRect.width / 2 - contentWidth / 2,
-          y: triggerRect.bottom + 8,
-        },
-        {
-          placement: 'top' as const,
-          space: availableSpace.top,
-          fits: availableSpace.top >= contentHeight + 8,
-          x:
+              ? triggerRect.right - 180 // Estimated content width
+              : triggerRect.left + triggerRect.width / 2 - 90; // Half of estimated width
+          y = triggerRect.bottom + 8;
+          break;
+        case 'top':
+          x =
             align === 'start'
               ? triggerRect.left
               : align === 'end'
-              ? triggerRect.right - contentWidth
-              : triggerRect.left + triggerRect.width / 2 - contentWidth / 2,
-          y: triggerRect.top - contentHeight - 8,
-        },
-        {
-          placement: 'right' as const,
-          space: availableSpace.right,
-          fits: availableSpace.right >= contentWidth + 8,
-          x: triggerRect.right + 8,
-          y:
+              ? triggerRect.right - 180
+              : triggerRect.left + triggerRect.width / 2 - 90;
+          y = triggerRect.top - 8; // Will be adjusted with transform
+          break;
+        case 'right':
+          x = triggerRect.right + 8;
+          y =
             align === 'start'
               ? triggerRect.top
               : align === 'end'
-              ? triggerRect.bottom - contentHeight
-              : triggerRect.top + triggerRect.height / 2 - contentHeight / 2,
-        },
-        {
-          placement: 'left' as const,
-          space: availableSpace.left,
-          fits: availableSpace.left >= contentWidth + 8,
-          x: triggerRect.left - contentWidth - 8,
-          y:
+              ? triggerRect.bottom - 100 // Estimated content height
+              : triggerRect.top + triggerRect.height / 2 - 50; // Half of estimated height
+          break;
+        case 'left':
+          x = triggerRect.left - 8; // Will be adjusted with transform
+          y =
             align === 'start'
               ? triggerRect.top
               : align === 'end'
-              ? triggerRect.bottom - contentHeight
-              : triggerRect.top + triggerRect.height / 2 - contentHeight / 2,
-        },
-      ];
-
-      // First try the preferred side if it fits
-      const preferredPlacement = placements.find(
-        (p) => p.placement === side && p.fits
-      );
-      if (preferredPlacement) {
-        setOptimalPosition({
-          x: preferredPlacement.x,
-          y: preferredPlacement.y,
-          placement: preferredPlacement.placement,
-        });
-        return;
+              ? triggerRect.bottom - 100
+              : triggerRect.top + triggerRect.height / 2 - 50;
+          break;
       }
 
-      // Otherwise, find the best fitting placement
-      const fittingPlacement = placements.find((p) => p.fits);
-      if (fittingPlacement) {
-        setOptimalPosition({
-          x: fittingPlacement.x,
-          y: fittingPlacement.y,
-          placement: fittingPlacement.placement,
-        });
-        return;
-      }
-
-      // If nothing fits, choose the placement with the most space
-      const bestPlacement = placements.reduce((best, current) =>
-        current.space > best.space ? current : best
-      );
-
-      // Ensure the content stays within viewport bounds
-      let finalX = bestPlacement.x;
-      let finalY = bestPlacement.y;
-
-      if (finalX + contentWidth > viewportWidth) {
-        finalX = viewportWidth - contentWidth - 8;
-      }
-      if (finalX < 8) {
-        finalX = 8;
-      }
-      if (finalY + contentHeight > viewportHeight) {
-        finalY = viewportHeight - contentHeight - 8;
-      }
-      if (finalY < 8) {
-        finalY = 8;
-      }
-
-      setOptimalPosition({
-        x: finalX,
-        y: finalY,
-        placement: bestPlacement.placement,
-      });
+      setOptimalPosition({ x, y, placement });
     }
-  }, [isOpen, side, align, triggerRef]);
+  }, [isOpen, side, align, triggerRef, relation]);
 
   if (!isOpen) {
     return null;
   }
 
-  // Create intelligent positioning styles
-  const positionStyles: React.CSSProperties = {
-    position: 'fixed', // Use fixed positioning since we calculated viewport coordinates
-    left: optimalPosition.x,
-    top: optimalPosition.y,
-    zIndex: 1000,
+  // Create intelligent positioning styles with transform for better placement
+  const getPositionStyles = (): React.CSSProperties => {
+    const baseStyles: React.CSSProperties = {
+      position: 'fixed',
+      left: optimalPosition.x,
+      top: optimalPosition.y,
+      zIndex: 1000,
+    };
+
+    // Add transform based on placement for better positioning
+    switch (optimalPosition.placement) {
+      case 'top':
+        return { ...baseStyles, transform: 'translateY(-100%)' };
+      case 'left':
+        return { ...baseStyles, transform: 'translateX(-100%)' };
+      case 'bottom':
+      case 'right':
+      default:
+        return baseStyles;
+    }
   };
+
+  const positionStyles = getPositionStyles();
 
   return (
     <View
@@ -265,11 +236,17 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
         return <DropdownMenuItem key={item.id} item={item} views={views} />;
       })}
       {/* Debug info - can be removed in production */}
-      {/* {process.env.NODE_ENV === 'development' && (
+      {process.env.NODE_ENV === 'development' && (
         <div style={{ fontSize: '10px', opacity: 0.7, padding: '4px' }}>
           Placement: {optimalPosition.placement}
+          {relation && (
+            <>
+              <br />
+              Space: {relation.space.vertical}-{relation.space.horizontal}
+            </>
+          )}
         </div>
-      )} */}
+      )}
     </View>
   );
 };
