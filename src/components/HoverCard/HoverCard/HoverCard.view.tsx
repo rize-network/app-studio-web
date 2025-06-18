@@ -236,14 +236,6 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
       {...props}
     >
       {children}
-      {/* Debug info - can be removed in production */}
-      {process.env.NODE_ENV === 'development' && relation && (
-        <div style={{ fontSize: '10px', opacity: 0.7, marginTop: '4px' }}>
-          Position: {relation.position.vertical}-{relation.position.horizontal}
-          <br />
-          More space: {relation.space.vertical}-{relation.space.horizontal}
-        </div>
-      )}
     </View>
   );
 };
