@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.9.16",
+  "version": "0.9.17",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
@@ -44,7 +44,8 @@
     "create-indices": "ts-node scripts/create-indices.ts",
     "create-example": "ts-node scripts/create-example.ts",
     "page-imports": "ts-node scripts/generate-page-imports.ts",
-    "create-pages": "npm run create-indices && ts-node scripts/create-pages.ts && npm run page-imports"
+    "create-pages": "npm run create-indices && ts-node scripts/create-pages.ts && npm run page-imports",
+    "api:local": "react-api  --useUnionTypes --input http://localhost:3000/docs/swagger.json --output ./src/services/api  && prettier --write ./src/services/api"
   },
   "eslintConfig": {
     "extends": [
@@ -75,7 +76,6 @@
     ]
   },
   "dependencies": {
-    "@babel/standalone": "^7.27.3",
     "contrast": "^1.0.1",
     "date-fns": "^2.30.0",
     "formik": "^2.4.6",
@@ -83,7 +83,10 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "@babel/standalone": "^7.27.3",
     "@anthropic-ai/sdk": "^0.39.0",
+    "@app-studio/react-api": "^0.15.28",
+    "@app-studio/react-request": "^0.1.3",
     "@babel/cli": "^7.25.9",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",

@@ -55,7 +55,7 @@ export const StylesTabs = () => {
   return (
     <Tabs
       tabs={tabs}
-      initialTabValue="playground" // Example initial tab
+      defaultValue="playground" // Example initial tab
       views={{
         container: {
           backgroundColor: 'black',

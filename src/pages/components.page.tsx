@@ -10,6 +10,14 @@ const DragAndDropPage = lazy(() => import('src/pages/dragAndDrop.page'));
 const UploadPage = lazy(() => import('src/pages/upload.page'));
 // const AIChatPage = lazy(() => import('src/pages/chat.page'));
 
+const ADKComponentsPage = lazy(
+  () => import('src/pages/adk/adkComponents.page')
+);
+const AgentChatPage = lazy(() => import('src/pages/adk/agentChat.page'));
+const AdkIntegrationPage = lazy(
+  () => import('src/pages/adk/adkIntegration.page')
+);
+
 // Lazy-loaded imports
 const AccordionPage = lazy(() => import('src/pages/accordion.page'));
 const AlertPage = lazy(() => import('src/pages/alert.page'));
@@ -66,6 +74,17 @@ const BackgroundPage = lazy(() => import('src/pages/background.page'));
 export const componentList = [
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
   { name: 'Chat', path: '/chat', element: <ChatInputDemo /> },
+  { name: 'Agent Chat', path: '/agent-chat', element: <AgentChatPage /> },
+  {
+    name: 'ADK Components',
+    path: '/adk-components',
+    element: <ADKComponentsPage />,
+  },
+  {
+    name: 'ADK Integration',
+    path: '/adk-integration',
+    element: <AdkIntegrationPage />,
+  },
   { name: 'Gradient', path: '/gradient', element: <GradientPage /> },
 
   { name: 'Alert', path: '/alert', element: <AlertPage /> },

@@ -76,7 +76,7 @@ export const Default = () => (
       },
     ]}
     // Optionally set the initially active tab
-    initialTabValue="services"
+    defaultValue="Services"
     // Optionally listen for tab changes
     onTabChange={(activeTab) => console.log('Active Tab:', activeTab.title)}
   />

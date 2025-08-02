@@ -1,0 +1,32 @@
+/* istanbul ignore file */
+/* tslint:disable */
+/* eslint-disable */
+import type { ApiRequestOptions } from './ApiRequestOptions';
+
+type Resolver<T> = (options: ApiRequestOptions) => Promise<T>;
+type Headers = Record<string, any>;
+
+type Config = {
+  BASE: string;
+  CORS?: 'no-cors' | 'cors';
+  VERSION: string;
+  WITH_CREDENTIALS: boolean;
+  CREDENTIALS: 'include' | 'omit' | 'same-origin';
+  TOKEN?: string | Resolver<string>;
+  USERNAME?: string | Resolver<string>;
+  PASSWORD?: string | Resolver<string>;
+  HEADERS?: Headers | Resolver<Headers>;
+  ENCODE_PATH?: (path: string) => string;
+};
+
+export const OpenAPI: Config = {
+  BASE: '',
+  VERSION: '0.0.5',
+  WITH_CREDENTIALS: false,
+  CREDENTIALS: 'include',
+  TOKEN: undefined,
+  USERNAME: undefined,
+  PASSWORD: undefined,
+  HEADERS: undefined,
+  ENCODE_PATH: undefined,
+};

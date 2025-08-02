@@ -1,15 +1,474 @@
 # Center
 
-Centers children horizontally and vertically within its bounds
+A layout component that centers its children both horizontally and vertically within its bounds using CSS Flexbox. Perfect for creating loading states, empty states, modal content, hero sections, and any content that needs perfect centering.
 
 ### **Import**
   ```tsx
   import { Center } from '@app-studio/web';
+  // or from app-studio
+  import { Center } from 'app-studio';
   ```
 
-## Props
+### **Basic Usage**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { Text } from 'app-studio';
 
-| Prop      | Type          | Description                                      | Default |
-| --------- | ------------- | ------------------------------------------------ | ------- |
-| children  | React.ReactNode | The content to be centered.                       |         |
-| styles | CSSProperties    | Optional custom styles for the center container. |         |
+export const BasicCenter = () => (
+  <Center height={200} backgroundColor="color.gray.100">
+    <Text fontSize={18} fontWeight="bold">
+      Centered Content
+    </Text>
+  </Center>
+);
+```
+
+### **Loading State Example**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { Loader } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+
+export const LoadingCenter = () => (
+  <Center height="100vh" backgroundColor="color.white">
+    <Vertical gap={16} alignItems="center">
+      <Loader size="lg" />
+      <Text color="color.gray.600">Loading...</Text>
+    </Vertical>
+  </Center>
+);
+```
+
+### **Empty State Example**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { Button } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+import { EmptyIcon } from '@app-studio/web';
+
+export const EmptyStateCenter = () => (
+  <Center height={400} backgroundColor="color.gray.50" borderRadius={12}>
+    <Vertical gap={20} alignItems="center" textAlign="center">
+      <EmptyIcon widthHeight={64} color="color.gray.400" />
+      <Vertical gap={8} alignItems="center">
+        <Text fontSize={20} fontWeight="bold" color="color.gray.700">
+          No items found
+        </Text>
+        <Text color="color.gray.500" maxWidth={300}>
+          There are no items to display. Create your first item to get started.
+        </Text>
+      </Vertical>
+      <Button variant="filled" colorScheme="theme.primary">
+        Create Item
+      </Button>
+    </Vertical>
+  </Center>
+);
+```
+
+### **Modal Content Example**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { Modal, Button } from '@app-studio/web';
+import { Text, Vertical, Horizontal } from 'app-studio';
+
+export const ModalCenter = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>
+        Open Modal
+      </Button>
+
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Center padding={40}>
+          <Vertical gap={24} alignItems="center" textAlign="center">
+            <Text fontSize={24} fontWeight="bold">
+              Confirm Action
+            </Text>
+            <Text color="color.gray.600" maxWidth={300}>
+              Are you sure you want to delete this item? This action cannot be undone.
+            </Text>
+            <Horizontal gap={12}>
+              <Button
+                variant="outline"
+                onClick={() => setIsOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="filled"
+                colorScheme="theme.error"
+                onClick={() => setIsOpen(false)}
+              >
+                Delete
+              </Button>
+            </Horizontal>
+          </Vertical>
+        </Center>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **Hero Section Example**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { Button } from '@app-studio/web';
+import { Text, Vertical, Horizontal } from 'app-studio';
+
+export const HeroCenter = () => (
+  <Center
+    height="100vh"
+    backgroundImage="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+    color="color.white"
+  >
+    <Vertical gap={32} alignItems="center" textAlign="center" maxWidth={600}>
+      <Vertical gap={16} alignItems="center">
+        <Text fontSize={48} fontWeight="bold" lineHeight={1.2}>
+          Build Amazing Apps
+        </Text>
+        <Text fontSize={20} opacity={0.9} lineHeight={1.6}>
+          Create beautiful, responsive applications with our comprehensive
+          component library and design system.
+        </Text>
+      </Vertical>
+
+      <Horizontal gap={16}>
+        <Button
+          variant="filled"
+          size="lg"
+          backgroundColor="color.white"
+          color="color.gray.900"
+        >
+          Get Started
+        </Button>
+        <Button
+          variant="outline"
+          size="lg"
+          borderColor="color.white"
+          color="color.white"
+        >
+          Learn More
+        </Button>
+      </Horizontal>
+    </Vertical>
+  </Center>
+);
+```
+
+### **Card Center Example**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { View, Text, Vertical } from 'app-studio';
+import { StarIcon } from '@app-studio/web';
+
+export const CardCenter = () => (
+  <View
+    width={300}
+    height={200}
+    border="1px solid"
+    borderColor="color.gray.200"
+    borderRadius={12}
+    backgroundColor="color.white"
+    boxShadow="0 4px 12px rgba(0,0,0,0.1)"
+  >
+    <Center height="100%">
+      <Vertical gap={12} alignItems="center">
+        <StarIcon widthHeight={32} color="color.yellow.500" filled />
+        <Text fontSize={18} fontWeight="bold">
+          Premium Feature
+        </Text>
+        <Text color="color.gray.600" textAlign="center" fontSize={14}>
+          Unlock advanced features with our premium plan
+        </Text>
+      </Vertical>
+    </Center>
+  </View>
+);
+```
+
+### **Props**
+
+The Center component extends ViewProps from app-studio, inheriting all standard view properties:
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| children | React.ReactNode | undefined | Content to be centered |
+| gap | number \| string | 0 | Space between child elements (if multiple) |
+
+**Inherited ViewProps:**
+- `width`, `height`, `minWidth`, `maxWidth`, `minHeight`, `maxHeight`
+- `padding`, `margin`, `paddingTop`, `paddingBottom`, etc.
+- `backgroundColor`, `border`, `borderRadius`, `boxShadow`
+- `position`, `top`, `left`, `right`, `bottom`, `zIndex`
+- `overflow`, `cursor`, `opacity`, `transform`
+- All CSS properties and responsive breakpoint props
+
+### **Responsive Centering**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { Text, Vertical } from 'app-studio';
+
+export const ResponsiveCenter = () => (
+  <Center
+    height={{ mobile: '50vh', tablet: '60vh', desktop: '100vh' }}
+    padding={{ mobile: 16, tablet: 24, desktop: 32 }}
+  >
+    <Vertical
+      gap={16}
+      alignItems="center"
+      textAlign="center"
+      maxWidth={{ mobile: 300, tablet: 400, desktop: 500 }}
+    >
+      <Text
+        fontSize={{ mobile: 24, tablet: 32, desktop: 40 }}
+        fontWeight="bold"
+      >
+        Responsive Title
+      </Text>
+      <Text
+        fontSize={{ mobile: 14, tablet: 16, desktop: 18 }}
+        color="color.gray.600"
+      >
+        This content adapts to different screen sizes
+      </Text>
+    </Vertical>
+  </Center>
+);
+```
+
+### **Multiple Children with Gap**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { View } from 'app-studio';
+
+export const CenterWithGap = () => (
+  <Center height={300} gap={16}>
+    <View
+      width={60}
+      height={60}
+      backgroundColor="color.red.400"
+      borderRadius={8}
+    />
+    <View
+      width={60}
+      height={60}
+      backgroundColor="color.blue.400"
+      borderRadius={8}
+    />
+    <View
+      width={60}
+      height={60}
+      backgroundColor="color.green.400"
+      borderRadius={8}
+    />
+  </Center>
+);
+```
+
+### **Error State Example**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { Button } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+import { ErrorIcon } from '@app-studio/web';
+
+export const ErrorStateCenter = () => (
+  <Center
+    height={400}
+    backgroundColor="color.red.50"
+    borderRadius={12}
+    border="1px solid"
+    borderColor="color.red.200"
+  >
+    <Vertical gap={20} alignItems="center" textAlign="center">
+      <ErrorIcon widthHeight={48} color="color.red.500" />
+      <Vertical gap={8} alignItems="center">
+        <Text fontSize={18} fontWeight="bold" color="color.red.700">
+          Something went wrong
+        </Text>
+        <Text color="color.red.600" maxWidth={300}>
+          We encountered an error while processing your request.
+          Please try again or contact support.
+        </Text>
+      </Vertical>
+      <Button
+        variant="filled"
+        colorScheme="theme.error"
+        onClick={() => window.location.reload()}
+      >
+        Try Again
+      </Button>
+    </Vertical>
+  </Center>
+);
+```
+
+### **Image Placeholder Example**
+```tsx
+import React from 'react';
+import { Center } from 'app-studio';
+import { Text } from 'app-studio';
+import { ImageIcon } from '@app-studio/web';
+
+export const ImagePlaceholder = () => (
+  <Center
+    width={300}
+    height={200}
+    backgroundColor="color.gray.100"
+    border="2px dashed"
+    borderColor="color.gray.300"
+    borderRadius={8}
+    cursor="pointer"
+    _hover={{
+      backgroundColor: 'color.gray.200',
+      borderColor: 'color.gray.400',
+    }}
+  >
+    <Vertical gap={8} alignItems="center">
+      <ImageIcon widthHeight={32} color="color.gray.500" />
+      <Text color="color.gray.600" fontSize={14}>
+        Click to upload image
+      </Text>
+    </Vertical>
+  </Center>
+);
+```
+
+### **Best Practices**
+
+**When to Use Center:**
+- Loading states and spinners
+- Empty states and placeholders
+- Modal and dialog content
+- Hero sections and landing pages
+- Error states and messages
+- Single-item displays (icons, logos, etc.)
+
+**Layout Considerations:**
+- Always specify a height for proper centering
+- Use appropriate container sizes for content
+- Consider responsive behavior across devices
+- Ensure content doesn't overflow on small screens
+
+**Accessibility:**
+- Ensure centered content is keyboard accessible
+- Use proper heading hierarchy
+- Provide alternative text for images
+- Consider screen reader navigation
+
+**Performance:**
+- Avoid unnecessary nesting of Center components
+- Use CSS transforms for animations instead of changing layout
+- Consider using CSS Grid for complex centered layouts
+
+### **Common Patterns**
+
+**Splash Screen:**
+```tsx
+<Center height="100vh" backgroundColor="theme.primary">
+  <Vertical gap={24} alignItems="center">
+    <Logo size="lg" />
+    <Loader color="color.white" />
+  </Vertical>
+</Center>
+```
+
+**Feature Highlight:**
+```tsx
+<Center height={300} backgroundColor="color.blue.50">
+  <Vertical gap={16} alignItems="center" textAlign="center">
+    <FeatureIcon widthHeight={48} />
+    <Text fontSize={20} fontWeight="bold">Feature Name</Text>
+    <Text color="color.gray.600">Feature description</Text>
+  </Vertical>
+</Center>
+```
+
+**Call to Action:**
+```tsx
+<Center padding={40} backgroundColor="color.gray.900" color="color.white">
+  <Vertical gap={20} alignItems="center" textAlign="center">
+    <Text fontSize={24} fontWeight="bold">Ready to get started?</Text>
+    <Button variant="filled" size="lg">Get Started Now</Button>
+  </Vertical>
+</Center>
+```
+
+### **Integration with Other Components**
+
+The Center component works well with other layout components:
+
+```tsx
+import { Center, Vertical, Horizontal } from 'app-studio';
+
+// Centered content within a larger layout
+<Vertical height="100vh">
+  <Header />
+  <Center flex={1}>
+    <MainContent />
+  </Center>
+  <Footer />
+</Vertical>
+
+// Horizontally centered, vertically stacked
+<Horizontal height="100vh">
+  <Sidebar />
+  <Center flex={1}>
+    <Vertical gap={20}>
+      <Title />
+      <Content />
+      <Actions />
+    </Vertical>
+  </Center>
+</Horizontal>
+```
+
+### **Advanced Usage**
+
+**Custom Centering Logic:**
+```tsx
+// For more complex centering needs, you can extend Center
+const CustomCenter = ({ children, ...props }) => (
+  <Center
+    position="relative"
+    {...props}
+  >
+    <View
+      position="absolute"
+      top="50%"
+      left="50%"
+      transform="translate(-50%, -50%)"
+    >
+      {children}
+    </View>
+  </Center>
+);
+```
+
+**Animated Center:**
+```tsx
+const AnimatedCenter = ({ children, ...props }) => (
+  <Center
+    transition="all 0.3s ease"
+    _hover={{
+      transform: 'scale(1.05)',
+    }}
+    {...props}
+  >
+    {children}
+  </Center>
+);
+```

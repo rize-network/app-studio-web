@@ -56,6 +56,10 @@ export * from './Tree/Tree';
 export * from './Flow/Flow';
 export * from './ChatInput/ChatInput';
 export * from './Background/Background';
+export { default as AgentChat } from './adk/AgentChat/AgentChat';
+export { default as AgentSession } from './adk/AgentSession/AgentSession';
+export { default as AgentTrace } from './adk/AgentTrace/AgentTrace';
+export { default as AgentEval } from './adk/AgentEval/AgentEval';
 
 export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';
@@ -108,3 +112,28 @@ export * from './Tree/Tree/Tree.props';
 export * from './Flow/Flow/Flow.props';
 export * from './ChatInput/ChatInput/ChatInput.props';
 export * from './Background/Background/Background.props';
+export type {
+  AgentRunRequest,
+  MessagePart,
+  AgentMessage,
+  MessageAttachment,
+  AgentChatViews,
+  AgentChatEventHandlers,
+  AgentChatProps,
+} from './adk/AgentChat/AgentChat/AgentChat.props';
+export type {
+  AgentSession as AgentSessionType,
+  AgentEvent,
+  SessionSummary,
+  AgentSessionViews,
+  AgentSessionEventHandlers,
+  SessionFilters,
+  SessionSortOptions,
+  AgentSessionProps,
+  SessionAction,
+  SessionStatus,
+  SessionExportData,
+  SessionImportOptions,
+} from './adk/AgentSession/AgentSession/AgentSession.props';
+export * from './adk/AgentTrace/AgentTrace/AgentTrace.props';
+export * from './adk/AgentEval/AgentEval/AgentEval.props';

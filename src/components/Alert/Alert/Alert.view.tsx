@@ -18,11 +18,12 @@ import { getThemes } from './Alert.style';
  */
 export const AlertView = ({
   icon,
-  title,
+  title = '',
   views,
-  description,
+  description = '',
   variant = 'default',
   themeMode: elementMode,
+  children,
   ...props
 }: AlertProps) => {
   const { themeMode } = useTheme();
@@ -100,7 +101,7 @@ export const AlertView = ({
           color={themes[variant].content.color}
           {...views?.description}
         >
-          {description}
+          {description || children}
         </Text>
       </Vertical>
     </Horizontal>

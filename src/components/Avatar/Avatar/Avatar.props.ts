@@ -3,7 +3,7 @@ import { AvatarStyles, Size } from './Avatar.type';
 // Defines the properties for the Avatar component.
 export interface AvatarProps {
   // Source URL for the avatar image.
-  src: string;
+  src?: string;
   // Optional size of the avatar, predefined in 'Size' type.
   size?: Size;
   // URL or path for the fallback image if the source fails to load.
@@ -12,6 +12,7 @@ export interface AvatarProps {
   views?: AvatarStyles;
   //Optional onClick handler
   onClick?: Function;
+  children?: React.ReactNode;
 }
 // Extends 'AvatarProps' with additional view-related properties.
 export interface AvatarViewProps extends AvatarProps {

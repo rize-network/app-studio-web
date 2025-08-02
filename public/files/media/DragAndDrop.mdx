@@ -1,8 +1,539 @@
 # DragAndDrop
 
-Drag and Drop component.
+A powerful drag and drop component for reordering lists and items with smooth animations, touch support, and customizable rendering. Perfect for creating sortable lists, kanban boards, and interactive interfaces.
 
 ### **Import**
-  \`\`\`tsx
+  ```tsx
   import { DragAndDrop } from '@app-studio/web';
-  \`\`\`
+  ```
+
+### **Basic Usage**
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { View, Text } from 'app-studio';
+
+export const BasicDragAndDrop = () => {
+  const [items, setItems] = useState([
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4'
+  ]);
+
+  const handleItemsChange = (newItems: string[]) => {
+    console.log('Items reordered:', newItems);
+    setItems(newItems);
+  };
+
+  return (
+    <DragAndDrop
+      items={items}
+      onChange={handleItemsChange}
+      containerProps={{
+        padding: 16,
+        backgroundColor: 'color.gray.50',
+        borderRadius: 8,
+      }}
+      itemProps={{
+        marginBottom: 8,
+        padding: 12,
+        backgroundColor: 'color.white',
+        borderRadius: 4,
+        border: '1px solid',
+        borderColor: 'color.gray.200',
+      }}
+    />
+  );
+};
+```
+
+### **Custom Item Rendering**
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { View, Text, Horizontal } from 'app-studio';
+import { DragHandleIcon, EditIcon, DeleteIcon } from '@app-studio/web';
+
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  priority: 'low' | 'medium' | 'high';
+  completed: boolean;
+}
+
+export const TaskDragAndDrop = () => {
+  const [tasks, setTasks] = useState<Task[]>([
+    {
+      id: '1',
+      title: 'Design Homepage',
+      description: 'Create wireframes and mockups',
+      priority: 'high',
+      completed: false,
+    },
+    {
+      id: '2',
+      title: 'Implement Authentication',
+      description: 'Set up user login and registration',
+      priority: 'medium',
+      completed: false,
+    },
+    {
+      id: '3',
+      title: 'Write Documentation',
+      description: 'Document API endpoints',
+      priority: 'low',
+      completed: true,
+    },
+  ]);
+
+  const handleTasksChange = (newTasks: Task[]) => {
+    setTasks(newTasks);
+  };
+
+  const renderTask = (task: Task, index: number) => {
+    const priorityColors = {
+      low: 'color.green.500',
+      medium: 'color.yellow.500',
+      high: 'color.red.500',
+    };
+
+    return (
+      <View
+        padding={16}
+        backgroundColor={task.completed ? 'color.gray.50' : 'color.white'}
+        border="1px solid"
+        borderColor="color.gray.200"
+        borderRadius={8}
+        marginBottom={8}
+      >
+        <Horizontal justifyContent="space-between" alignItems="flex-start">
+          <View flex={1}>
+            <Horizontal alignItems="center" marginBottom={8}>
+              <View
+                width={8}
+                height={8}
+                borderRadius="50%"
+                backgroundColor={priorityColors[task.priority]}
+                marginRight={8}
+              />
+              <Text
+                fontWeight="semibold"
+                textDecoration={task.completed ? 'line-through' : 'none'}
+                color={task.completed ? 'color.gray.500' : 'color.gray.900'}
+              >
+                {task.title}
+              </Text>
+            </Horizontal>
+            <Text
+              fontSize={14}
+              color="color.gray.600"
+              textDecoration={task.completed ? 'line-through' : 'none'}
+            >
+              {task.description}
+            </Text>
+          </View>
+
+          <Horizontal gap={8} alignItems="center">
+            <EditIcon widthHeight={16} color="color.gray.400" />
+            <DeleteIcon widthHeight={16} color="color.gray.400" />
+            <DragHandleIcon widthHeight={16} color="color.gray.400" />
+          </Horizontal>
+        </Horizontal>
+      </View>
+    );
+  };
+
+  return (
+    <View width="100%" maxWidth={500}>
+      <Text fontSize={18} fontWeight="bold" marginBottom={16}>
+        Task List (Drag to Reorder)
+      </Text>
+      <DragAndDrop
+        items={tasks}
+        onChange={handleTasksChange}
+        renderItem={renderTask}
+        containerProps={{
+          padding: 16,
+          backgroundColor: 'color.gray.50',
+          borderRadius: 12,
+          minHeight: 200,
+        }}
+      />
+    </View>
+  );
+};
+```
+
+### **Kanban Board Example**
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { View, Text, Horizontal, Vertical } from 'app-studio';
+
+interface KanbanItem {
+  id: string;
+  title: string;
+  assignee: string;
+  tags: string[];
+}
+
+interface KanbanColumn {
+  id: string;
+  title: string;
+  items: KanbanItem[];
+}
+
+export const KanbanBoard = () => {
+  const [columns, setColumns] = useState<KanbanColumn[]>([
+    {
+      id: 'todo',
+      title: 'To Do',
+      items: [
+        { id: '1', title: 'Design System', assignee: 'John', tags: ['Design'] },
+        { id: '2', title: 'API Integration', assignee: 'Jane', tags: ['Backend'] },
+      ],
+    },
+    {
+      id: 'inprogress',
+      title: 'In Progress',
+      items: [
+        { id: '3', title: 'User Dashboard', assignee: 'Bob', tags: ['Frontend'] },
+      ],
+    },
+    {
+      id: 'done',
+      title: 'Done',
+      items: [
+        { id: '4', title: 'Project Setup', assignee: 'Alice', tags: ['DevOps'] },
+      ],
+    },
+  ]);
+
+  const handleColumnItemsChange = (columnId: string, newItems: KanbanItem[]) => {
+    setColumns(prev =>
+      prev.map(col =>
+        col.id === columnId
+          ? { ...col, items: newItems }
+          : col
+      )
+    );
+  };
+
+  const renderKanbanItem = (item: KanbanItem) => (
+    <View
+      padding={12}
+      backgroundColor="color.white"
+      border="1px solid"
+      borderColor="color.gray.200"
+      borderRadius={6}
+      marginBottom={8}
+      boxShadow="0 1px 3px rgba(0,0,0,0.1)"
+    >
+      <Text fontWeight="medium" marginBottom={8}>
+        {item.title}
+      </Text>
+      <Horizontal justifyContent="space-between" alignItems="center">
+        <Text fontSize={12} color="color.gray.600">
+          {item.assignee}
+        </Text>
+        <Horizontal gap={4}>
+          {item.tags.map(tag => (
+            <View
+              key={tag}
+              padding="2px 6px"
+              backgroundColor="color.blue.100"
+              borderRadius={4}
+            >
+              <Text fontSize={10} color="color.blue.700">
+                {tag}
+              </Text>
+            </View>
+          ))}
+        </Horizontal>
+      </Horizontal>
+    </View>
+  );
+
+  return (
+    <Horizontal gap={16} alignItems="flex-start">
+      {columns.map(column => (
+        <View
+          key={column.id}
+          width={250}
+          backgroundColor="color.gray.100"
+          borderRadius={8}
+          padding={16}
+        >
+          <Text fontWeight="bold" marginBottom={16}>
+            {column.title} ({column.items.length})
+          </Text>
+          <DragAndDrop
+            items={column.items}
+            onChange={(newItems) => handleColumnItemsChange(column.id, newItems)}
+            renderItem={renderKanbanItem}
+            containerProps={{
+              minHeight: 300,
+            }}
+          />
+        </View>
+      ))}
+    </Horizontal>
+  );
+};
+```
+
+### **Props**
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| items | any[] | required | Array of items to be rendered and reordered |
+| onChange | `(items: any[]) => void` | undefined | Callback function called when items are reordered |
+| renderItem | `(item: any, index: number) => React.ReactNode` | undefined | Custom render function for each item |
+| containerProps | ViewProps | undefined | Props to apply to the container element |
+| itemProps | ViewProps | undefined | Props to apply to each item wrapper |
+
+### **Advanced Features**
+
+**Touch Support:**
+The component automatically supports touch devices for mobile drag and drop:
+
+```tsx
+// Touch events are handled automatically
+<DragAndDrop
+  items={items}
+  onChange={handleChange}
+  // Works on both desktop and mobile
+/>
+```
+
+**Visual Feedback:**
+Items provide visual feedback during drag operations:
+
+```tsx
+<DragAndDrop
+  items={items}
+  onChange={handleChange}
+  itemProps={{
+    // Styling applied to all items
+    transition: 'transform 0.2s ease',
+    cursor: 'grab',
+  }}
+  views={{
+    item: {
+      // Additional styling for dragged items
+      '&:hover': {
+        backgroundColor: 'color.gray.50',
+      },
+    },
+  }}
+/>
+```
+
+### **Integration with Other Components**
+
+**With Tree Component:**
+```tsx
+import { Tree } from '@app-studio/web';
+
+// Tree component has built-in drag and drop
+<Tree
+  items={treeItems}
+  allowDragAndDrop={true}
+  onItemsReorder={handleTreeReorder}
+  dragHandleIcon={<DragHandleIcon />}
+/>
+```
+
+**With Flow Component:**
+```tsx
+import { Flow } from '@app-studio/web';
+
+// Flow component supports node dragging
+<Flow
+  nodes={flowNodes}
+  allowDraggingNodes={true}
+  onNodeDragEnd={handleNodeDragEnd}
+/>
+```
+
+### **Styling and Customization**
+
+**Custom Drag Handle:**
+```tsx
+import { DragHandleIcon } from '@app-studio/web';
+
+const renderItemWithHandle = (item, index) => (
+  <Horizontal alignItems="center" padding={12}>
+    <DragHandleIcon
+      widthHeight={16}
+      color="color.gray.400"
+      marginRight={8}
+    />
+    <Text>{item.name}</Text>
+  </Horizontal>
+);
+
+<DragAndDrop
+  items={items}
+  onChange={handleChange}
+  renderItem={renderItemWithHandle}
+/>
+```
+
+**Conditional Dragging:**
+```tsx
+const renderConditionalItem = (item, index) => (
+  <View
+    padding={12}
+    backgroundColor={item.locked ? 'color.gray.100' : 'color.white'}
+    cursor={item.locked ? 'not-allowed' : 'grab'}
+    opacity={item.locked ? 0.6 : 1}
+  >
+    <Text>{item.name}</Text>
+    {item.locked && <Text fontSize={12} color="color.gray.500">Locked</Text>}
+  </View>
+);
+```
+
+### **Performance Considerations**
+
+**Large Lists:**
+For large lists, consider implementing virtualization:
+
+```tsx
+import { FixedSizeList as List } from 'react-window';
+
+// For very large datasets, combine with virtualization
+const VirtualizedDragAndDrop = ({ items }) => {
+  return (
+    <List
+      height={400}
+      itemCount={items.length}
+      itemSize={60}
+    >
+      {({ index, style }) => (
+        <div style={style}>
+          <DragAndDrop
+            items={[items[index]]}
+            // Handle single item drag
+          />
+        </div>
+      )}
+    </List>
+  );
+};
+```
+
+**Memory Management:**
+```tsx
+// Clean up event listeners and references
+useEffect(() => {
+  return () => {
+    // Component handles cleanup automatically
+  };
+}, []);
+```
+
+### **Accessibility**
+
+The DragAndDrop component includes accessibility features:
+
+- **Keyboard Navigation**: Support for keyboard-based reordering
+- **Screen Reader Support**: ARIA attributes for assistive technologies
+- **Focus Management**: Proper focus handling during drag operations
+
+```tsx
+<DragAndDrop
+  items={items}
+  onChange={handleChange}
+  containerProps={{
+    role: 'list',
+    'aria-label': 'Reorderable task list',
+  }}
+  itemProps={{
+    role: 'listitem',
+    tabIndex: 0,
+    'aria-grabbed': false, // Dynamically updated during drag
+  }}
+/>
+```
+
+### **Best Practices**
+
+**State Management:**
+- Keep the items state in a parent component
+- Use unique IDs for items when possible
+- Handle state updates immutably
+
+**User Experience:**
+- Provide visual feedback during drag operations
+- Use appropriate cursor styles
+- Consider adding drag handles for complex items
+- Test on both desktop and mobile devices
+
+**Performance:**
+- Avoid heavy computations in renderItem
+- Use React.memo for complex item components
+- Consider virtualization for large lists
+
+**Accessibility:**
+- Provide keyboard alternatives
+- Use semantic HTML structure
+- Include proper ARIA labels
+- Test with screen readers
+
+### **Common Patterns**
+
+**Sortable Table Rows:**
+```tsx
+const SortableTable = ({ data }) => (
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <DragAndDrop
+        items={data}
+        onChange={setData}
+        renderItem={(item) => (
+          <tr>
+            <td>{item.name}</td>
+            <td>{item.status}</td>
+            <td>
+              <DragHandleIcon widthHeight={16} />
+            </td>
+          </tr>
+        )}
+      />
+    </tbody>
+  </table>
+);
+```
+
+**Nested Drag and Drop:**
+```tsx
+const NestedDragAndDrop = ({ categories }) => (
+  <DragAndDrop
+    items={categories}
+    onChange={setCategories}
+    renderItem={(category) => (
+      <View>
+        <Text fontWeight="bold">{category.name}</Text>
+        <DragAndDrop
+          items={category.items}
+          onChange={(newItems) =>
+            updateCategoryItems(category.id, newItems)
+          }
+          renderItem={(item) => <Text>{item.name}</Text>}
+        />
+      </View>
+    )}
+  />
+);
+```

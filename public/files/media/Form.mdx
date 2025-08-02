@@ -1,8 +1,681 @@
 # Form
 
-Form component.
+A comprehensive form system with Formik integration, providing powerful form state management, validation, and a complete set of form components. Includes support for complex forms, real-time validation, and seamless user experience.
 
 ### **Import**
-  \`\`\`tsx
-  import { Form } from '@app-studio/web';
-  \`\`\`
+  ```tsx
+  // Form components
+  import {
+    FormikForm,
+    FormikTextField,
+    FormikTextArea,
+    FormikCheckbox,
+    FormikSwitch,
+    FormikSelect,
+    FormikDatePicker,
+    FormikCountryPicker,
+    FormikColorInput,
+    FormikPassword,
+    FormikComboBox,
+    FormikSlider,
+    FormikChatInput,
+    FormikTagInput
+  } from '@app-studio/web';
+
+  // Individual form components
+  import {
+    TextField,
+    TextArea,
+    Checkbox,
+    Switch,
+    Select,
+    DatePicker,
+    CountryPicker,
+    ColorInput,
+    Password,
+    ComboBox,
+    Slider,
+    Label
+  } from '@app-studio/web';
+  ```
+
+### **Basic Form with Formik**
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm, FormikTextField, FormikCheckbox } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const BasicForm = () => {
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    agreeToTerms: false,
+  };
+
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required('First name is required'),
+    lastName: Yup.string().required('Last name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    agreeToTerms: Yup.boolean().oneOf([true], 'You must agree to the terms'),
+  });
+
+  const handleSubmit = (values: any, { setSubmitting }: any) => {
+    console.log('Form values:', values);
+    setTimeout(() => {
+      alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+    }, 1000);
+  };
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ handleSubmit, isSubmitting }) => (
+        <FormikForm>
+          <Vertical gap={16} width="100%" maxWidth={400}>
+            <FormikTextField
+              name="firstName"
+              label="First Name"
+              placeholder="Enter your first name"
+            />
+            <FormikTextField
+              name="lastName"
+              label="Last Name"
+              placeholder="Enter your last name"
+            />
+            <FormikTextField
+              name="email"
+              label="Email"
+              placeholder="Enter your email"
+              type="email"
+            />
+            <FormikCheckbox
+              name="agreeToTerms"
+              label="I agree to the terms and conditions"
+            />
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              isLoading={isSubmitting}
+              disabled={isSubmitting}
+            >
+              Submit
+            </Button>
+          </Vertical>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **Advanced Form with Multiple Field Types**
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import {
+  FormikForm,
+  FormikTextField,
+  FormikTextArea,
+  FormikSelect,
+  FormikDatePicker,
+  FormikCountryPicker,
+  FormikColorInput,
+  FormikSlider,
+  FormikSwitch,
+  FormikTagInput
+} from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const AdvancedForm = () => {
+  const initialValues = {
+    title: '',
+    description: '',
+    category: '',
+    publishDate: null,
+    country: '',
+    themeColor: '#3B82F6',
+    priority: 5,
+    isPublished: false,
+    tags: ['react', 'typescript'],
+  };
+
+  const validationSchema = Yup.object().shape({
+    title: Yup.string().required('Title is required'),
+    description: Yup.string().min(10, 'Description must be at least 10 characters'),
+    category: Yup.string().required('Category is required'),
+    publishDate: Yup.date().required('Publish date is required'),
+    country: Yup.string().required('Country is required'),
+    priority: Yup.number().min(1).max(10),
+    tags: Yup.array().min(1, 'At least one tag is required'),
+  });
+
+  const categoryOptions = [
+    { label: 'Technology', value: 'tech' },
+    { label: 'Design', value: 'design' },
+    { label: 'Business', value: 'business' },
+    { label: 'Marketing', value: 'marketing' },
+  ];
+
+  const handleSubmit = (values: any) => {
+    console.log('Advanced form values:', values);
+    alert(JSON.stringify(values, null, 2));
+  };
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <Vertical gap={20} width="100%" maxWidth={500}>
+            <FormikTextField
+              name="title"
+              label="Title"
+              placeholder="Enter article title"
+            />
+
+            <FormikTextArea
+              name="description"
+              label="Description"
+              placeholder="Enter article description"
+              maxRows={4}
+            />
+
+            <FormikSelect
+              name="category"
+              label="Category"
+              placeholder="Select a category"
+              options={categoryOptions}
+            />
+
+            <FormikDatePicker
+              name="publishDate"
+              label="Publish Date"
+              placeholder="Select publish date"
+            />
+
+            <FormikCountryPicker
+              name="country"
+              label="Target Country"
+              placeholder="Select target country"
+            />
+
+            <FormikColorInput
+              name="themeColor"
+              label="Theme Color"
+            />
+
+            <FormikSlider
+              name="priority"
+              label="Priority (1-10)"
+              min={1}
+              max={10}
+              step={1}
+            />
+
+            <FormikTagInput
+              name="tags"
+              label="Tags"
+              placeholder="Add tags..."
+            />
+
+            <FormikSwitch
+              name="isPublished"
+              label="Publish immediately"
+            />
+
+            <Button type="submit" onClick={handleSubmit}>
+              Create Article
+            </Button>
+          </Vertical>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **Form Validation Examples**
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm, FormikTextField, FormikPassword } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const ValidationForm = () => {
+  const initialValues = {
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  };
+
+  const validationSchema = Yup.object().shape({
+    username: Yup.string()
+      .min(3, 'Username must be at least 3 characters')
+      .max(20, 'Username must be less than 20 characters')
+      .matches(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores')
+      .required('Username is required'),
+    email: Yup.string()
+      .email('Invalid email format')
+      .required('Email is required'),
+    password: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'Password must contain uppercase, lowercase, and number')
+      .required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], 'Passwords must match')
+      .required('Please confirm your password'),
+  });
+
+  const handleSubmit = (values: any) => {
+    console.log('Registration values:', values);
+  };
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ handleSubmit, errors, touched }) => (
+        <FormikForm>
+          <Vertical gap={16} width="100%" maxWidth={400}>
+            <FormikTextField
+              name="username"
+              label="Username"
+              placeholder="Enter username"
+              error={touched.username && errors.username}
+            />
+
+            <FormikTextField
+              name="email"
+              label="Email"
+              type="email"
+              placeholder="Enter email"
+              error={touched.email && errors.email}
+            />
+
+            <FormikPassword
+              name="password"
+              label="Password"
+              placeholder="Enter password"
+              error={touched.password && errors.password}
+            />
+
+            <FormikPassword
+              name="confirmPassword"
+              label="Confirm Password"
+              placeholder="Confirm password"
+              error={touched.confirmPassword && errors.confirmPassword}
+            />
+
+            <Button type="submit" onClick={handleSubmit}>
+              Register
+            </Button>
+          </Vertical>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **Dynamic Form Fields**
+```tsx
+import React from 'react';
+import { Formik, FieldArray } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm, FormikTextField } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { Vertical, Horizontal } from 'app-studio';
+import { PlusIcon, MinusIcon } from '@app-studio/web';
+
+export const DynamicForm = () => {
+  const initialValues = {
+    projectName: '',
+    tasks: [{ name: '', description: '' }],
+  };
+
+  const validationSchema = Yup.object().shape({
+    projectName: Yup.string().required('Project name is required'),
+    tasks: Yup.array().of(
+      Yup.object().shape({
+        name: Yup.string().required('Task name is required'),
+        description: Yup.string().required('Task description is required'),
+      })
+    ).min(1, 'At least one task is required'),
+  });
+
+  const handleSubmit = (values: any) => {
+    console.log('Project values:', values);
+  };
+
+  return (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ handleSubmit, values }) => (
+        <FormikForm>
+          <Vertical gap={20} width="100%" maxWidth={600}>
+            <FormikTextField
+              name="projectName"
+              label="Project Name"
+              placeholder="Enter project name"
+            />
+
+            <FieldArray name="tasks">
+              {({ push, remove }) => (
+                <Vertical gap={16}>
+                  <Horizontal justifyContent="space-between" alignItems="center">
+                    <h3>Tasks</h3>
+                    <Button
+                      type="button"
+                      icon={<PlusIcon widthHeight={16} />}
+                      onClick={() => push({ name: '', description: '' })}
+                      variant="outline"
+                      size="sm"
+                    >
+                      Add Task
+                    </Button>
+                  </Horizontal>
+
+                  {values.tasks.map((task, index) => (
+                    <Vertical
+                      key={index}
+                      gap={12}
+                      padding={16}
+                      border="1px solid"
+                      borderColor="color.gray.200"
+                      borderRadius={8}
+                    >
+                      <Horizontal justifyContent="space-between" alignItems="center">
+                        <h4>Task {index + 1}</h4>
+                        {values.tasks.length > 1 && (
+                          <Button
+                            type="button"
+                            icon={<MinusIcon widthHeight={16} />}
+                            onClick={() => remove(index)}
+                            variant="ghost"
+                            size="sm"
+                            colorScheme="theme.error"
+                          >
+                            Remove
+                          </Button>
+                        )}
+                      </Horizontal>
+
+                      <FormikTextField
+                        name={`tasks.${index}.name`}
+                        label="Task Name"
+                        placeholder="Enter task name"
+                      />
+
+                      <FormikTextField
+                        name={`tasks.${index}.description`}
+                        label="Task Description"
+                        placeholder="Enter task description"
+                      />
+                    </Vertical>
+                  ))}
+                </Vertical>
+              )}
+            </FieldArray>
+
+            <Button type="submit" onClick={handleSubmit}>
+              Create Project
+            </Button>
+          </Vertical>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+};
+```
+
+### **Form Components**
+
+**FormikForm**
+- Main form wrapper with Formik integration
+- Provides form context and state management
+- Supports auto-focus and form navigation
+
+**FormikTextField**
+- Single-line text input with validation
+- Supports various input types (text, email, password, etc.)
+- Built-in error display and styling
+
+**FormikTextArea**
+- Multi-line text input
+- Configurable rows and columns
+- Auto-resize functionality
+
+**FormikCheckbox**
+- Boolean input for yes/no choices
+- Custom styling and label positioning
+- Indeterminate state support
+
+**FormikSwitch**
+- Toggle switch for boolean values
+- Smooth animations and transitions
+- Customizable colors and sizes
+
+**FormikSelect**
+- Dropdown selection component
+- Single and multi-select support
+- Search and filter capabilities
+
+**FormikDatePicker**
+- Date selection with calendar popup
+- Date range selection
+- Customizable date formats
+
+**FormikCountryPicker**
+- Country selection with flags
+- Search functionality
+- Localized country names
+
+**FormikColorInput**
+- Color picker with preview
+- Hex, RGB, and HSL support
+- Predefined color palettes
+
+**FormikPassword**
+- Password input with visibility toggle
+- Strength indicator
+- Custom validation rules
+
+**FormikComboBox**
+- Searchable dropdown with custom options
+- Multi-select capabilities
+- Tag-style selection display
+
+**FormikSlider**
+- Range input with visual feedback
+- Step configuration
+- Min/max value constraints
+
+**FormikTagInput**
+- Tag-based input for multiple values
+- Auto-completion support
+- Custom tag validation
+
+### **Props Reference**
+
+**Common Formik Props (inherited by all Formik components):**
+
+| Prop | Type | Description |
+| ---- | ---- | ----------- |
+| name | string | Field name for Formik state management |
+| label | string | Field label text |
+| placeholder | string | Placeholder text |
+| error | string \| boolean | Error message or error state |
+| disabled | boolean | Whether the field is disabled |
+| required | boolean | Whether the field is required |
+
+**FormikForm Props:**
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| autoFocus | boolean | false | Auto-focus first field |
+| initFocus | string | undefined | Specific field to focus initially |
+| onChange | function | undefined | Callback when form values change |
+
+### **Validation Patterns**
+
+**Email Validation:**
+```tsx
+email: Yup.string()
+  .email('Invalid email format')
+  .required('Email is required')
+```
+
+**Password Validation:**
+```tsx
+password: Yup.string()
+  .min(8, 'Password must be at least 8 characters')
+  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'Password must contain uppercase, lowercase, and number')
+  .required('Password is required')
+```
+
+**Phone Number Validation:**
+```tsx
+phone: Yup.string()
+  .matches(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number')
+  .required('Phone number is required')
+```
+
+**URL Validation:**
+```tsx
+website: Yup.string()
+  .url('Invalid URL format')
+  .required('Website URL is required')
+```
+
+### **Form State Management**
+
+**Accessing Form State:**
+```tsx
+import { useFormikContext } from 'formik';
+
+const FormStatus = () => {
+  const { values, errors, touched, isSubmitting, isValid } = useFormikContext();
+
+  return (
+    <div>
+      <p>Form Valid: {isValid ? 'Yes' : 'No'}</p>
+      <p>Submitting: {isSubmitting ? 'Yes' : 'No'}</p>
+      <p>Values: {JSON.stringify(values)}</p>
+    </div>
+  );
+};
+```
+
+**Custom Field Component:**
+```tsx
+import { useFormikInput } from '@app-studio/web';
+
+const CustomFormikField = (props) => {
+  const formProps = useFormikInput(props);
+
+  return (
+    <input
+      {...formProps}
+      style={{
+        border: formProps.error ? '1px solid red' : '1px solid gray',
+      }}
+    />
+  );
+};
+```
+
+### **Best Practices**
+
+**Form Structure:**
+- Use semantic HTML structure
+- Group related fields logically
+- Provide clear labels and instructions
+- Use appropriate field types for data
+
+**Validation:**
+- Validate on both client and server side
+- Provide real-time feedback
+- Use clear, actionable error messages
+- Validate on blur for better UX
+
+**Accessibility:**
+- Use proper labels and ARIA attributes
+- Ensure keyboard navigation works
+- Provide error announcements
+- Maintain focus management
+
+**Performance:**
+- Use field-level validation for complex forms
+- Debounce validation for expensive operations
+- Minimize re-renders with proper state management
+- Use lazy validation when appropriate
+
+### **Integration Examples**
+
+**With API Calls:**
+```tsx
+const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
+  try {
+    setSubmitting(true);
+    const response = await api.createUser(values);
+    console.log('User created:', response);
+    // Handle success
+  } catch (error) {
+    if (error.field) {
+      setFieldError(error.field, error.message);
+    }
+    // Handle error
+  } finally {
+    setSubmitting(false);
+  }
+};
+```
+
+**With File Uploads:**
+```tsx
+import { FormikForm, FormikTextField } from '@app-studio/web';
+import { Uploader } from '@app-studio/web';
+
+const FormWithUpload = () => {
+  const [uploadedFile, setUploadedFile] = useState(null);
+
+  return (
+    <Formik
+      initialValues={{ name: '', file: null }}
+      onSubmit={(values) => {
+        const formData = new FormData();
+        formData.append('name', values.name);
+        formData.append('file', uploadedFile);
+        // Submit form data
+      }}
+    >
+      <FormikForm>
+        <FormikTextField name="name" label="Name" />
+        <Uploader onFileSelect={setUploadedFile} />
+        <Button type="submit">Submit</Button>
+      </FormikForm>
+    </Formik>
+  );
+};
+```

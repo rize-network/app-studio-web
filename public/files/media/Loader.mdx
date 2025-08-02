@@ -1,18 +1,527 @@
 # Loader
 
-Provides configurable loading indicators with optional text.
+A versatile loading indicator component with multiple animation types, customizable sizes, colors, and text positioning. Perfect for showing loading states, progress indicators, and providing visual feedback during asynchronous operations.
 
 ### **Import**
   ```tsx
   import { Loader } from '@app-studio/web';
   ```
 
-## Props
+### **Basic Usage**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
 
-| Prop      | Type          | Description                                            | Default  |
-| --------- | ------------- | ------------------------------------------------------ | -------- |
-| type      | string        | The type of loader ('spinner', 'dots', 'bar', etc.).    | 'spinner' |
-| size      | Size          | The size of the loader ('xs', 'sm', 'md', 'lg', 'xl'). | 'md'     |
-| text      | string        | Optional text to display alongside the loader.          |          |
-| styles    | CSSProperties | Optional custom styles for the loader.                 |          |
-| className | string        | Optional className for the loader container.           |          |
+export const BasicLoader = () => (
+  <Loader>Loading...</Loader>
+);
+```
+
+### **Loader Types**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Vertical, Horizontal } from 'app-studio';
+
+export const LoaderTypes = () => (
+  <Vertical gap={24}>
+    <Horizontal gap={32} alignItems="center">
+      <Loader type="default">Default Spinner</Loader>
+      <Loader type="dotted">Dotted Loader</Loader>
+      <Loader type="quarter">Quarter Loader</Loader>
+    </Horizontal>
+  </Vertical>
+);
+```
+
+### **Loader Sizes**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const LoaderSizes = () => (
+  <Horizontal gap={24} alignItems="center">
+    <Loader size="xs">XS</Loader>
+    <Loader size="sm">Small</Loader>
+    <Loader size="md">Medium</Loader>
+    <Loader size="lg">Large</Loader>
+    <Loader size="xl">XL</Loader>
+  </Horizontal>
+);
+```
+
+### **Custom Sizes**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const CustomSizes = () => (
+  <Horizontal gap={24} alignItems="center">
+    <Loader size={16}>16px</Loader>
+    <Loader size={32}>32px</Loader>
+    <Loader size={48}>48px</Loader>
+    <Loader size={64}>64px</Loader>
+  </Horizontal>
+);
+```
+
+### **Text Positioning**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const TextPositioning = () => (
+  <Vertical gap={32}>
+    <Loader textPosition="right">Loading (Right)</Loader>
+    <Loader textPosition="left">Loading (Left)</Loader>
+    <Loader textPosition="top">Loading (Top)</Loader>
+    <Loader textPosition="bottom">Loading (Bottom)</Loader>
+  </Vertical>
+);
+```
+
+### **Colors and Theming**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const ColoredLoaders = () => (
+  <Vertical gap={20}>
+    <Loader
+      loaderColor="color.blue.500"
+      textColor="color.blue.700"
+    >
+      Blue Loader
+    </Loader>
+
+    <Loader
+      loaderColor="color.green.500"
+      textColor="color.green.700"
+    >
+      Green Loader
+    </Loader>
+
+    <Loader
+      loaderColor="color.red.500"
+      textColor="color.red.700"
+    >
+      Red Loader
+    </Loader>
+
+    <Loader
+      loaderColor="theme.primary"
+      textColor="theme.primary"
+    >
+      Theme Primary
+    </Loader>
+  </Vertical>
+);
+```
+
+### **Animation Speeds**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const AnimationSpeeds = () => (
+  <Horizontal gap={32} alignItems="center">
+    <Loader speed="slow">Slow</Loader>
+    <Loader speed="normal">Normal</Loader>
+    <Loader speed="fast">Fast</Loader>
+  </Horizontal>
+);
+```
+
+### **Loading States in Components**
+```tsx
+import React, { useState } from 'react';
+import { Loader } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { View, Text, Vertical } from 'app-studio';
+
+export const LoadingStates = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
+
+  const handleLoad = async () => {
+    setIsLoading(true);
+    // Simulate API call
+    setTimeout(() => {
+      setData('Data loaded successfully!');
+      setIsLoading(false);
+    }, 2000);
+  };
+
+  return (
+    <Vertical gap={20} alignItems="center">
+      <Button onClick={handleLoad} disabled={isLoading}>
+        Load Data
+      </Button>
+
+      <View
+        height={100}
+        width={300}
+        border="1px solid"
+        borderColor="color.gray.200"
+        borderRadius={8}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        {isLoading ? (
+          <Loader loaderColor="theme.primary">
+            Loading data...
+          </Loader>
+        ) : data ? (
+          <Text color="color.green.600">{data}</Text>
+        ) : (
+          <Text color="color.gray.500">No data loaded</Text>
+        )}
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Props**
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| children | React.ReactNode | undefined | Text to display alongside the loader |
+| type | `'default' \| 'dotted' \| 'quarter'` | 'default' | Type of loading animation |
+| size | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| number` | 'md' | Size of the loader |
+| speed | `'slow' \| 'normal' \| 'fast'` | 'normal' | Animation speed |
+| loaderColor | string | 'currentColor' | Color of the loader animation |
+| textColor | string | 'currentColor' | Color of the text |
+| textPosition | `'left' \| 'right' \| 'top' \| 'bottom'` | 'right' | Position of text relative to loader |
+
+**Inherited ViewProps:**
+- All standard view properties like `margin`, `padding`, `width`, `height`
+- Layout properties like `display`, `position`, `flex`
+- Styling properties like `backgroundColor`, `borderRadius`
+
+### **Full Page Loading**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Center } from 'app-studio';
+
+export const FullPageLoader = () => (
+  <Center
+    position="fixed"
+    top={0}
+    left={0}
+    right={0}
+    bottom={0}
+    backgroundColor="rgba(255, 255, 255, 0.9)"
+    zIndex={9999}
+  >
+    <Loader
+      size="lg"
+      loaderColor="theme.primary"
+      textColor="theme.primary"
+    >
+      Loading application...
+    </Loader>
+  </Center>
+);
+```
+
+### **Inline Loading**
+```tsx
+import React, { useState } from 'react';
+import { Loader } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { Horizontal, Text } from 'app-studio';
+
+export const InlineLoader = () => {
+  const [saving, setSaving] = useState(false);
+
+  const handleSave = () => {
+    setSaving(true);
+    setTimeout(() => setSaving(false), 2000);
+  };
+
+  return (
+    <Horizontal gap={16} alignItems="center">
+      <Button onClick={handleSave} disabled={saving}>
+        Save Changes
+      </Button>
+
+      {saving && (
+        <Loader size="sm" loaderColor="color.blue.500">
+          Saving...
+        </Loader>
+      )}
+
+      {!saving && (
+        <Text color="color.green.600" fontSize={14}>
+          All changes saved
+        </Text>
+      )}
+    </Horizontal>
+  );
+};
+```
+
+### **Card Loading State**
+```tsx
+import React, { useState, useEffect } from 'react';
+import { Loader } from '@app-studio/web';
+import { View, Text, Vertical } from 'app-studio';
+
+export const CardLoader = () => {
+  const [loading, setLoading] = useState(true);
+  const [content, setContent] = useState(null);
+
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      setContent({
+        title: 'Card Title',
+        description: 'This is the card content that was loaded.',
+      });
+      setLoading(false);
+    }, 3000);
+  }, []);
+
+  return (
+    <View
+      width={300}
+      height={200}
+      border="1px solid"
+      borderColor="color.gray.200"
+      borderRadius={12}
+      padding={20}
+      backgroundColor="color.white"
+    >
+      {loading ? (
+        <Center height="100%">
+          <Loader
+            type="dotted"
+            loaderColor="color.gray.400"
+            textColor="color.gray.600"
+          >
+            Loading content...
+          </Loader>
+        </Center>
+      ) : (
+        <Vertical gap={12}>
+          <Text fontSize={18} fontWeight="bold">
+            {content.title}
+          </Text>
+          <Text color="color.gray.600">
+            {content.description}
+          </Text>
+        </Vertical>
+      )}
+    </View>
+  );
+};
+```
+
+### **Button Loading States**
+```tsx
+import React, { useState } from 'react';
+import { Loader } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const ButtonLoaders = () => {
+  const [loading1, setLoading1] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+
+  return (
+    <Horizontal gap={16}>
+      <Button
+        onClick={() => {
+          setLoading1(true);
+          setTimeout(() => setLoading1(false), 2000);
+        }}
+        disabled={loading1}
+        icon={loading1 ? <Loader size={16} loaderColor="currentColor" /> : undefined}
+      >
+        {loading1 ? 'Submitting...' : 'Submit'}
+      </Button>
+
+      <Button
+        variant="outline"
+        onClick={() => {
+          setLoading2(true);
+          setTimeout(() => setLoading2(false), 2000);
+        }}
+        disabled={loading2}
+      >
+        {loading2 ? (
+          <Loader size={16} loaderColor="currentColor">
+            Processing
+          </Loader>
+        ) : (
+          'Process'
+        )}
+      </Button>
+    </Horizontal>
+  );
+};
+```
+
+### **Custom Loader Styling**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { View } from 'app-studio';
+
+export const CustomLoader = () => (
+  <View
+    padding={24}
+    backgroundColor="color.gray.900"
+    borderRadius={12}
+  >
+    <Loader
+      type="quarter"
+      size={48}
+      loaderColor="color.white"
+      textColor="color.white"
+      textPosition="bottom"
+      views={{
+        container: {
+          gap: 16,
+        },
+        text: {
+          fontWeight: 'medium',
+          fontSize: 16,
+        },
+      }}
+    >
+      Loading...
+    </Loader>
+  </View>
+);
+```
+
+### **Best Practices**
+
+**When to Use:**
+- During API calls and data fetching
+- File uploads and downloads
+- Form submissions
+- Page transitions
+- Long-running operations
+
+**User Experience:**
+- Show loaders for operations taking longer than 200ms
+- Provide meaningful loading text when possible
+- Use appropriate sizes for the context
+- Consider skeleton screens for content loading
+- Ensure loaders are accessible to screen readers
+
+**Performance:**
+- Use CSS animations instead of JavaScript when possible
+- Avoid showing loaders for very quick operations
+- Consider lazy loading for better perceived performance
+- Use appropriate animation speeds (not too fast or slow)
+
+**Accessibility:**
+- Include descriptive text for screen readers
+- Use `aria-live` regions for dynamic loading states
+- Ensure sufficient color contrast
+- Provide alternative feedback for users who can't see animations
+
+### **Integration Examples**
+
+**With Forms:**
+```tsx
+import { FormikForm, FormikTextField } from '@app-studio/web';
+
+const FormWithLoader = () => {
+  const [submitting, setSubmitting] = useState(false);
+
+  return (
+    <FormikForm>
+      <FormikTextField name="email" label="Email" />
+      <Button
+        type="submit"
+        disabled={submitting}
+        icon={submitting ? <Loader size={16} /> : undefined}
+      >
+        {submitting ? 'Submitting...' : 'Submit'}
+      </Button>
+    </FormikForm>
+  );
+};
+```
+
+**With Data Tables:**
+```tsx
+const DataTable = ({ data, loading }) => (
+  <View>
+    {loading ? (
+      <Center height={200}>
+        <Loader>Loading table data...</Loader>
+      </Center>
+    ) : (
+      <Table data={data} />
+    )}
+  </View>
+);
+```
+
+**With Image Loading:**
+```tsx
+const ImageWithLoader = ({ src, alt }) => {
+  const [loading, setLoading] = useState(true);
+
+  return (
+    <View position="relative">
+      {loading && (
+        <Center
+          position="absolute"
+          top={0}
+          left={0}
+          right={0}
+          bottom={0}
+          backgroundColor="color.gray.100"
+        >
+          <Loader size="sm">Loading image...</Loader>
+        </Center>
+      )}
+      <img
+        src={src}
+        alt={alt}
+        onLoad={() => setLoading(false)}
+        style={{ opacity: loading ? 0 : 1 }}
+      />
+    </View>
+  );
+};
+```
+
+### **Advanced Patterns**
+
+**Progress Loader:**
+```tsx
+const ProgressLoader = ({ progress }) => (
+  <Vertical gap={8} alignItems="center">
+    <Loader size="lg" />
+    <Text fontSize={14} color="color.gray.600">
+      {progress}% complete
+    </Text>
+  </Vertical>
+);
+```
+
+**Conditional Loader:**
+```tsx
+const ConditionalLoader = ({ condition, children }) => (
+  condition ? (
+    <Loader>Loading...</Loader>
+  ) : (
+    children
+  )
+);
+```
