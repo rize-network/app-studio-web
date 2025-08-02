@@ -1,10 +1,11 @@
 {
   "name": "@app-studio/web",
-  "version": "0.9.18",
+  "version": "0.9.19",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "docs"
   ],
   "engines": {
     "node": ">=10"
