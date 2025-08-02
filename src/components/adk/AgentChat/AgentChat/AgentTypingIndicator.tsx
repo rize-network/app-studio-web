@@ -4,7 +4,7 @@ import {
   DefaultAgentChatStyles,
   TypingAnimationStyles,
 } from './AgentChat.style';
-import { Avatar } from 'src/components/Avatar/Avatar';
+import { Avatar } from '../../../Avatar/Avatar';
 
 /**
  * AgentTypingIndicator Component

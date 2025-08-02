@@ -105,14 +105,16 @@ export interface SessionSortOptions {
 /**
  * Main AgentSession Props Interface
  */
-export interface AgentSessionProps extends ViewProps, AgentSessionEventHandlers {
+export interface AgentSessionProps
+  extends ViewProps,
+    AgentSessionEventHandlers {
   // Required props
   appName: string;
   userId: string;
 
   // Optional configuration
   apiBaseUrl?: string;
-  
+
   // Feature toggles
   showSessionHistory?: boolean;
   enableSessionImport?: boolean;
@@ -120,34 +122,34 @@ export interface AgentSessionProps extends ViewProps, AgentSessionEventHandlers 
   enableSessionDelete?: boolean;
   enableSessionSearch?: boolean;
   enableAutoRefresh?: boolean;
-  
+
   // Limits and constraints
   maxSessions?: number;
   refreshInterval?: number; // in milliseconds
-  
+
   // UI customization
   showSessionInfo?: boolean;
   showSessionActions?: boolean;
   showCreateButton?: boolean;
   showRefreshButton?: boolean;
   compactMode?: boolean;
-  
+
   // Styling
   views?: AgentSessionViews;
-  
+
   // Initial state
   initialSessions?: AgentSession[];
   selectedSessionId?: string;
-  
+
   // Filtering and sorting
   defaultFilters?: SessionFilters;
   defaultSort?: SessionSortOptions;
-  
+
   // Advanced features
   enableSessionTags?: boolean;
   enableSessionMetadata?: boolean;
   enableBulkOperations?: boolean;
-  
+
   // Accessibility
   ariaLabel?: string;
   ariaDescribedBy?: string;
@@ -156,7 +158,7 @@ export interface AgentSessionProps extends ViewProps, AgentSessionEventHandlers 
 /**
  * Session Action Types
  */
-export type SessionAction = 
+export type SessionAction =
   | 'create'
   | 'select'
   | 'delete'
@@ -170,11 +172,7 @@ export type SessionAction =
 /**
  * Session Status Types
  */
-export type SessionStatus = 
-  | 'active'
-  | 'inactive'
-  | 'archived'
-  | 'error';
+export type SessionStatus = 'active' | 'inactive' | 'archived' | 'error';
 
 /**
  * Session Import/Export Format

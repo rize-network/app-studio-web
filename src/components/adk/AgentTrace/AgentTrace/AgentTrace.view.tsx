@@ -8,10 +8,10 @@ import { TraceEventList } from './TraceEventList';
 import { TraceMetrics } from './TraceMetrics';
 import { TraceFilters } from './TraceFilters';
 import { TraceVisualization } from './TraceVisualization';
-import { Alert } from 'src/components/Alert/Alert';
-import { Tabs } from 'src/components/Tabs/Tabs';
-import { Loader } from 'src/components/Loader/Loader';
-import { TextField } from 'src/components/Form/Form';
+import { Alert } from '../../../Alert/Alert';
+import { Tabs } from '../../../Tabs/Tabs';
+import { Loader } from '../../../Loader/Loader';
+import { TextField } from '../../../Form/Form';
 
 export interface AgentTraceViewProps
   extends Omit<AgentTraceProps, 'filter'>,

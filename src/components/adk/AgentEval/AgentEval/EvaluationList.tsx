@@ -21,7 +21,7 @@ export interface EvaluationListProps {
 
 /**
  * EvaluationList Component
- * 
+ *
  * Renders a list of evaluations with status, progress, and actions
  */
 export const EvaluationList: React.FC<EvaluationListProps> = ({
@@ -40,7 +40,7 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
    */
   const getStatusStyle = (status: string) => {
     const baseStyle = DefaultAgentEvalStyles.statusBadge;
-    
+
     switch (status) {
       case 'pending':
         return { ...baseStyle, ...DefaultAgentEvalStyles.statusPending };
@@ -83,9 +83,15 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
       <Vertical gap={compactMode ? 8 : 12}>
         {evaluations.map((evaluation) => {
           const isSelected = selectedEvaluation?.id === evaluation.id;
-          const containerStyle = isSelected 
-            ? { ...DefaultAgentEvalStyles.activeEvaluationItem, ...views.activeEvaluationItem }
-            : { ...DefaultAgentEvalStyles.evaluationItem, ...views.evaluationItem };
+          const containerStyle = isSelected
+            ? {
+                ...DefaultAgentEvalStyles.activeEvaluationItem,
+                ...views.activeEvaluationItem,
+              }
+            : {
+                ...DefaultAgentEvalStyles.evaluationItem,
+                ...views.evaluationItem,
+              };
 
           return (
             <View
@@ -95,7 +101,10 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
             >
               <Vertical gap={compactMode ? 8 : 12}>
                 {/* Evaluation Header */}
-                <Horizontal justifyContent="space-between" alignItems="flex-start">
+                <Horizontal
+                  justifyContent="space-between"
+                  alignItems="flex-start"
+                >
                   <Vertical gap={4}>
                     <Text {...DefaultAgentEvalStyles.evaluationTitle}>
                       {evaluation.name}
@@ -105,7 +114,8 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
                         <Text>{evaluation.status}</Text>
                       </View>
                       <Text {...DefaultAgentEvalStyles.evaluationMeta}>
-                        {evaluation.testCases.length} test{evaluation.testCases.length !== 1 ? 's' : ''}
+                        {evaluation.testCases.length} test
+                        {evaluation.testCases.length !== 1 ? 's' : ''}
                       </Text>
                       <Text {...DefaultAgentEvalStyles.evaluationMeta}>
                         {formatTimestamp(evaluation.startTime)}
@@ -122,7 +132,11 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
                 {/* Progress Bar */}
                 {showProgressIndicators && evaluation.status === 'running' && (
                   <View>
-                    <Horizontal justifyContent="space-between" alignItems="center" marginBottom={4}>
+                    <Horizontal
+                      justifyContent="space-between"
+                      alignItems="center"
+                      marginBottom={4}
+                    >
                       <Text fontSize="xs" color="color.gray.600">
                         Progress
                       </Text>
@@ -131,7 +145,7 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
                       </Text>
                     </Horizontal>
                     <View {...DefaultAgentEvalStyles.progressBar}>
-                      <View 
+                      <View
                         {...DefaultAgentEvalStyles.progressFill}
                         style={{ width: `${evaluation.progress}%` }}
                       />
@@ -154,16 +168,17 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
                       Avg Score: {evaluation.summary.averageScore.toFixed(1)}
                     </Text>
                     <Text fontSize="sm" color="color.gray.600">
-                      Pass Rate: {(evaluation.summary.passRate * 100).toFixed(1)}%
+                      Pass Rate:{' '}
+                      {(evaluation.summary.passRate * 100).toFixed(1)}%
                     </Text>
                   </Horizontal>
                 )}
 
                 {/* Error Message */}
                 {evaluation.error && (
-                  <View 
-                    padding={8} 
-                    backgroundColor="color.red.50" 
+                  <View
+                    padding={8}
+                    backgroundColor="color.red.50"
                     borderRadius="4px"
                     border="1px solid"
                     borderColor="color.red.200"
@@ -190,7 +205,7 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
                         ▶️ Start
                       </Button>
                     )}
-                    
+
                     {evaluation.status === 'running' && (
                       <Button
                         {...DefaultAgentEvalStyles.actionButton}
@@ -204,8 +219,10 @@ export const EvaluationList: React.FC<EvaluationListProps> = ({
                         ⏹️ Cancel
                       </Button>
                     )}
-                    
-                    {(evaluation.status === 'completed' || evaluation.status === 'failed' || evaluation.status === 'cancelled') && (
+
+                    {(evaluation.status === 'completed' ||
+                      evaluation.status === 'failed' ||
+                      evaluation.status === 'cancelled') && (
                       <Button
                         {...DefaultAgentEvalStyles.actionButton}
                         {...DefaultAgentEvalStyles.deleteButton}

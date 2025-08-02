@@ -68,7 +68,7 @@ interface AdkProviderProps {
 
 /**
  * ADK Provider Component
- * 
+ *
  * Provides ADK functionality using the existing API services and auth store
  */
 export const AdkProvider: React.FC<AdkProviderProps> = ({ children }) => {
@@ -79,16 +79,15 @@ export const AdkProvider: React.FC<AdkProviderProps> = ({ children }) => {
     ...adkHook,
     // Add compatibility properties
     isConnected: adkHook.isAuthenticated && !adkHook.healthError,
-    error: adkHook.healthError?.message || 
-           adkHook.createSessionError?.message || 
-           adkHook.runAgentError?.message || 
-           null,
+    error:
+      adkHook.healthError?.message ||
+      adkHook.createSessionError?.message ||
+      adkHook.runAgentError?.message ||
+      null,
   };
 
   return (
-    <AdkContext.Provider value={contextValue}>
-      {children}
-    </AdkContext.Provider>
+    <AdkContext.Provider value={contextValue}>{children}</AdkContext.Provider>
   );
 };
 
@@ -97,11 +96,11 @@ export const AdkProvider: React.FC<AdkProviderProps> = ({ children }) => {
  */
 export const useAdkContext = (): AdkContextType => {
   const context = useContext(AdkContext);
-  
+
   if (context === undefined) {
     throw new Error('useAdkContext must be used within an AdkProvider');
   }
-  
+
   return context;
 };
 
@@ -110,7 +109,7 @@ export const useAdkContext = (): AdkContextType => {
  */
 export const useAgentService = () => {
   const context = useAdkContext();
-  
+
   return {
     isConnected: context.isConnected,
     error: context.error,

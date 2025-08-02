@@ -14,7 +14,7 @@ export interface TraceMetricsProps {
 
 /**
  * TraceMetrics Component
- * 
+ *
  * Displays performance metrics and statistics for trace events
  */
 export const TraceMetrics: React.FC<TraceMetricsProps> = ({
@@ -59,22 +59,21 @@ export const TraceMetrics: React.FC<TraceMetricsProps> = ({
             <Text {...DefaultAgentTraceStyles.metricValue}>
               {metrics.totalEvents.toLocaleString()}
             </Text>
-            <Text {...DefaultAgentTraceStyles.metricLabel}>
-              Total Events
-            </Text>
+            <Text {...DefaultAgentTraceStyles.metricLabel}>Total Events</Text>
           </View>
 
           {/* Success Rate */}
           <View {...DefaultAgentTraceStyles.metricCard}>
-            <Text 
+            <Text
               {...DefaultAgentTraceStyles.metricValue}
-              color={getSuccessRateColor(metrics.successCount, metrics.totalEvents)}
+              color={getSuccessRateColor(
+                metrics.successCount,
+                metrics.totalEvents
+              )}
             >
               {formatPercentage(metrics.successCount, metrics.totalEvents)}
             </Text>
-            <Text {...DefaultAgentTraceStyles.metricLabel}>
-              Success Rate
-            </Text>
+            <Text {...DefaultAgentTraceStyles.metricLabel}>Success Rate</Text>
           </View>
 
           {/* Average Response Time */}
@@ -82,9 +81,7 @@ export const TraceMetrics: React.FC<TraceMetricsProps> = ({
             <Text {...DefaultAgentTraceStyles.metricValue}>
               {formatDuration(metrics.averageResponseTime)}
             </Text>
-            <Text {...DefaultAgentTraceStyles.metricLabel}>
-              Avg Response
-            </Text>
+            <Text {...DefaultAgentTraceStyles.metricLabel}>Avg Response</Text>
           </View>
 
           {/* Total Duration */}
@@ -92,23 +89,19 @@ export const TraceMetrics: React.FC<TraceMetricsProps> = ({
             <Text {...DefaultAgentTraceStyles.metricValue}>
               {formatDuration(metrics.totalDuration)}
             </Text>
-            <Text {...DefaultAgentTraceStyles.metricLabel}>
-              Total Duration
-            </Text>
+            <Text {...DefaultAgentTraceStyles.metricLabel}>Total Duration</Text>
           </View>
 
           {/* Error Count */}
           {metrics.errorCount > 0 && (
             <View {...DefaultAgentTraceStyles.metricCard}>
-              <Text 
+              <Text
                 {...DefaultAgentTraceStyles.metricValue}
                 color="color.red.600"
               >
                 {metrics.errorCount}
               </Text>
-              <Text {...DefaultAgentTraceStyles.metricLabel}>
-                Errors
-              </Text>
+              <Text {...DefaultAgentTraceStyles.metricLabel}>Errors</Text>
             </View>
           )}
 
@@ -130,9 +123,7 @@ export const TraceMetrics: React.FC<TraceMetricsProps> = ({
               <Text {...DefaultAgentTraceStyles.metricValue}>
                 {metrics.llmRequestCount}
               </Text>
-              <Text {...DefaultAgentTraceStyles.metricLabel}>
-                LLM Requests
-              </Text>
+              <Text {...DefaultAgentTraceStyles.metricLabel}>LLM Requests</Text>
             </View>
           )}
         </View>
@@ -140,7 +131,12 @@ export const TraceMetrics: React.FC<TraceMetricsProps> = ({
         {/* Performance Metrics */}
         {showPerformanceMetrics && !compactMode && (
           <View>
-            <Text fontSize="sm" fontWeight="600" color="color.gray.700" marginBottom={12}>
+            <Text
+              fontSize="sm"
+              fontWeight="600"
+              color="color.gray.700"
+              marginBottom={12}
+            >
               Response Time Percentiles
             </Text>
             <Horizontal gap={16}>
@@ -148,33 +144,25 @@ export const TraceMetrics: React.FC<TraceMetricsProps> = ({
                 <Text {...DefaultAgentTraceStyles.metricValue} fontSize="16px">
                   {formatDuration(metrics.performanceMetrics.p50)}
                 </Text>
-                <Text {...DefaultAgentTraceStyles.metricLabel}>
-                  P50
-                </Text>
+                <Text {...DefaultAgentTraceStyles.metricLabel}>P50</Text>
               </View>
               <View {...DefaultAgentTraceStyles.metricCard} flex={1}>
                 <Text {...DefaultAgentTraceStyles.metricValue} fontSize="16px">
                   {formatDuration(metrics.performanceMetrics.p90)}
                 </Text>
-                <Text {...DefaultAgentTraceStyles.metricLabel}>
-                  P90
-                </Text>
+                <Text {...DefaultAgentTraceStyles.metricLabel}>P90</Text>
               </View>
               <View {...DefaultAgentTraceStyles.metricCard} flex={1}>
                 <Text {...DefaultAgentTraceStyles.metricValue} fontSize="16px">
                   {formatDuration(metrics.performanceMetrics.p95)}
                 </Text>
-                <Text {...DefaultAgentTraceStyles.metricLabel}>
-                  P95
-                </Text>
+                <Text {...DefaultAgentTraceStyles.metricLabel}>P95</Text>
               </View>
               <View {...DefaultAgentTraceStyles.metricCard} flex={1}>
                 <Text {...DefaultAgentTraceStyles.metricValue} fontSize="16px">
                   {formatDuration(metrics.performanceMetrics.p99)}
                 </Text>
-                <Text {...DefaultAgentTraceStyles.metricLabel}>
-                  P99
-                </Text>
+                <Text {...DefaultAgentTraceStyles.metricLabel}>P99</Text>
               </View>
             </Horizontal>
           </View>
@@ -183,12 +171,17 @@ export const TraceMetrics: React.FC<TraceMetricsProps> = ({
         {/* Event Type Breakdown */}
         {!compactMode && Object.keys(metrics.eventsByType).length > 0 && (
           <View>
-            <Text fontSize="sm" fontWeight="600" color="color.gray.700" marginBottom={12}>
+            <Text
+              fontSize="sm"
+              fontWeight="600"
+              color="color.gray.700"
+              marginBottom={12}
+            >
               Events by Type
             </Text>
             <Horizontal gap={8} flexWrap="wrap">
               {Object.entries(metrics.eventsByType).map(([type, count]) => (
-                <View 
+                <View
                   key={type}
                   padding="6px 12px"
                   backgroundColor="color.blue.50"

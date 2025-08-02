@@ -5,10 +5,10 @@ import { useAgentSession } from './AgentSession/AgentSession.state';
 
 /**
  * AgentSession Component
- * 
+ *
  * A comprehensive session management component for ADK agents.
  * Handles session creation, listing, selection, deletion, and state management.
- * 
+ *
  * @example
  * ```tsx
  * <AgentSession
@@ -18,7 +18,7 @@ import { useAgentSession } from './AgentSession/AgentSession.state';
  *   onSessionCreate={(session) => console.log('Created:', session)}
  * />
  * ```
- * 
+ *
  * @example
  * ```tsx
  * // With custom styling and features

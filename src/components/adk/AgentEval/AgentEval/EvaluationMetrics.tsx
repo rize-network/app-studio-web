@@ -13,7 +13,7 @@ export interface EvaluationMetricsProps {
 
 /**
  * EvaluationMetrics Component
- * 
+ *
  * Displays aggregated metrics and comparisons across evaluations
  */
 export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
@@ -25,18 +25,40 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
    * Calculate overall metrics
    */
   const calculateOverallMetrics = () => {
-    const completedEvaluations = evaluations.filter(e => e.status === 'completed' && e.summary);
-    
+    const completedEvaluations = evaluations.filter(
+      (e) => e.status === 'completed' && e.summary
+    );
+
     if (completedEvaluations.length === 0) {
       return null;
     }
 
-    const totalTests = completedEvaluations.reduce((sum, e) => sum + (e.summary?.totalTests || 0), 0);
-    const totalPassed = completedEvaluations.reduce((sum, e) => sum + (e.summary?.passedTests || 0), 0);
-    const totalFailed = completedEvaluations.reduce((sum, e) => sum + (e.summary?.failedTests || 0), 0);
-    const avgScore = completedEvaluations.reduce((sum, e) => sum + (e.summary?.averageScore || 0), 0) / completedEvaluations.length;
-    const avgPassRate = completedEvaluations.reduce((sum, e) => sum + (e.summary?.passRate || 0), 0) / completedEvaluations.length;
-    const totalDuration = completedEvaluations.reduce((sum, e) => sum + (e.summary?.totalDuration || 0), 0);
+    const totalTests = completedEvaluations.reduce(
+      (sum, e) => sum + (e.summary?.totalTests || 0),
+      0
+    );
+    const totalPassed = completedEvaluations.reduce(
+      (sum, e) => sum + (e.summary?.passedTests || 0),
+      0
+    );
+    const totalFailed = completedEvaluations.reduce(
+      (sum, e) => sum + (e.summary?.failedTests || 0),
+      0
+    );
+    const avgScore =
+      completedEvaluations.reduce(
+        (sum, e) => sum + (e.summary?.averageScore || 0),
+        0
+      ) / completedEvaluations.length;
+    const avgPassRate =
+      completedEvaluations.reduce(
+        (sum, e) => sum + (e.summary?.passRate || 0),
+        0
+      ) / completedEvaluations.length;
+    const totalDuration = completedEvaluations.reduce(
+      (sum, e) => sum + (e.summary?.totalDuration || 0),
+      0
+    );
 
     return {
       totalEvaluations: completedEvaluations.length,
@@ -54,7 +76,7 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
    */
   const getRecentEvaluations = (count = 5) => {
     return evaluations
-      .filter(e => e.status === 'completed' && e.summary)
+      .filter((e) => e.status === 'completed' && e.summary)
       .sort((a, b) => b.startTime - a.startTime)
       .slice(0, count);
   };
@@ -80,7 +102,7 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
             <Text fontSize="lg" fontWeight="600" marginBottom={16}>
               Overall Performance
             </Text>
-            
+
             <View {...DefaultAgentEvalStyles.metricsGrid}>
               <View {...DefaultAgentEvalStyles.metricCard}>
                 <Text {...DefaultAgentEvalStyles.metricTitle}>
@@ -90,16 +112,14 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
                   {overallMetrics.totalEvaluations}
                 </Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.metricCard}>
-                <Text {...DefaultAgentEvalStyles.metricTitle}>
-                  Total Tests
-                </Text>
+                <Text {...DefaultAgentEvalStyles.metricTitle}>Total Tests</Text>
                 <Text {...DefaultAgentEvalStyles.metricValue}>
                   {overallMetrics.totalTests}
                 </Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.metricCard}>
                 <Text {...DefaultAgentEvalStyles.metricTitle}>
                   Average Score
@@ -108,29 +128,29 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
                   {overallMetrics.avgScore.toFixed(1)}
                 </Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.metricCard}>
-                <Text {...DefaultAgentEvalStyles.metricTitle}>
-                  Pass Rate
-                </Text>
+                <Text {...DefaultAgentEvalStyles.metricTitle}>Pass Rate</Text>
                 <Text {...DefaultAgentEvalStyles.metricValue}>
                   {(overallMetrics.avgPassRate * 100).toFixed(1)}%
                 </Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.metricCard}>
                 <Text {...DefaultAgentEvalStyles.metricTitle}>
                   Success Rate
                 </Text>
                 <Text {...DefaultAgentEvalStyles.metricValue}>
-                  {((overallMetrics.totalPassed / overallMetrics.totalTests) * 100).toFixed(1)}%
+                  {(
+                    (overallMetrics.totalPassed / overallMetrics.totalTests) *
+                    100
+                  ).toFixed(1)}
+                  %
                 </Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.metricCard}>
-                <Text {...DefaultAgentEvalStyles.metricTitle}>
-                  Total Time
-                </Text>
+                <Text {...DefaultAgentEvalStyles.metricTitle}>Total Time</Text>
                 <Text {...DefaultAgentEvalStyles.metricValue}>
                   {formatDuration(overallMetrics.totalDuration)}
                 </Text>
@@ -145,17 +165,21 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
             <Text fontSize="lg" fontWeight="600" marginBottom={16}>
               Recent Performance Trend
             </Text>
-            
-            <View 
-              padding={16} 
-              backgroundColor="color.gray.50" 
+
+            <View
+              padding={16}
+              backgroundColor="color.gray.50"
               borderRadius="8px"
               border="1px solid"
               borderColor="color.gray.200"
             >
               <Vertical gap={12}>
                 {recentEvaluations.map((evaluation, index) => (
-                  <Horizontal key={evaluation.id} justifyContent="space-between" alignItems="center">
+                  <Horizontal
+                    key={evaluation.id}
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
                     <Vertical gap={2}>
                       <Text fontSize="sm" fontWeight="600">
                         {evaluation.name}
@@ -164,7 +188,7 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
                         {new Date(evaluation.startTime).toLocaleDateString()}
                       </Text>
                     </Vertical>
-                    
+
                     <Horizontal gap={16} alignItems="center">
                       <Text fontSize="sm" color="color.green.700">
                         {evaluation.summary?.passedTests || 0} passed
@@ -176,7 +200,8 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
                         {evaluation.summary?.averageScore.toFixed(1) || 0} avg
                       </Text>
                       <Text fontSize="sm" color="color.gray.600">
-                        {((evaluation.summary?.passRate || 0) * 100).toFixed(1)}%
+                        {((evaluation.summary?.passRate || 0) * 100).toFixed(1)}
+                        %
                       </Text>
                     </Horizontal>
                   </Horizontal>
@@ -191,26 +216,34 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
           <Text fontSize="lg" fontWeight="600" marginBottom={16}>
             Evaluation Status
           </Text>
-          
+
           <View {...DefaultAgentEvalStyles.metricsGrid}>
-            {['completed', 'running', 'failed', 'cancelled', 'pending'].map(status => {
-              const count = evaluations.filter(e => e.status === status).length;
-              const percentage = evaluations.length > 0 ? (count / evaluations.length) * 100 : 0;
-              
-              return (
-                <View key={status} {...DefaultAgentEvalStyles.metricCard}>
-                  <Text {...DefaultAgentEvalStyles.metricTitle} textTransform="capitalize">
-                    {status}
-                  </Text>
-                  <Text {...DefaultAgentEvalStyles.metricValue}>
-                    {count}
-                  </Text>
-                  <Text fontSize="xs" color="color.gray.600">
-                    {percentage.toFixed(1)}%
-                  </Text>
-                </View>
-              );
-            })}
+            {['completed', 'running', 'failed', 'cancelled', 'pending'].map(
+              (status) => {
+                const count = evaluations.filter(
+                  (e) => e.status === status
+                ).length;
+                const percentage =
+                  evaluations.length > 0
+                    ? (count / evaluations.length) * 100
+                    : 0;
+
+                return (
+                  <View key={status} {...DefaultAgentEvalStyles.metricCard}>
+                    <Text
+                      {...DefaultAgentEvalStyles.metricTitle}
+                      textTransform="capitalize"
+                    >
+                      {status}
+                    </Text>
+                    <Text {...DefaultAgentEvalStyles.metricValue}>{count}</Text>
+                    <Text fontSize="xs" color="color.gray.600">
+                      {percentage.toFixed(1)}%
+                    </Text>
+                  </View>
+                );
+              }
+            )}
           </View>
         </View>
 
@@ -220,10 +253,10 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
             <Text fontSize="lg" fontWeight="600" marginBottom={16}>
               Performance Insights
             </Text>
-            
-            <View 
-              padding={16} 
-              backgroundColor="color.blue.50" 
+
+            <View
+              padding={16}
+              backgroundColor="color.blue.50"
               borderRadius="8px"
               border="1px solid"
               borderColor="color.blue.200"
@@ -232,28 +265,34 @@ export const EvaluationMetrics: React.FC<EvaluationMetricsProps> = ({
                 <Text fontSize="sm" fontWeight="600" color="color.blue.800">
                   📊 Key Insights
                 </Text>
-                
+
                 {overallMetrics.avgPassRate > 0.9 && (
                   <Text fontSize="sm" color="color.green.700">
-                    ✅ Excellent performance with {(overallMetrics.avgPassRate * 100).toFixed(1)}% average pass rate
+                    ✅ Excellent performance with{' '}
+                    {(overallMetrics.avgPassRate * 100).toFixed(1)}% average
+                    pass rate
                   </Text>
                 )}
-                
+
                 {overallMetrics.avgPassRate < 0.7 && (
                   <Text fontSize="sm" color="color.red.700">
-                    ⚠️ Consider reviewing test cases or agent configuration (pass rate: {(overallMetrics.avgPassRate * 100).toFixed(1)}%)
+                    ⚠️ Consider reviewing test cases or agent configuration
+                    (pass rate: {(overallMetrics.avgPassRate * 100).toFixed(1)}
+                    %)
                   </Text>
                 )}
-                
+
                 {overallMetrics.totalEvaluations >= 10 && (
                   <Text fontSize="sm" color="color.blue.700">
-                    📈 Good evaluation coverage with {overallMetrics.totalEvaluations} completed evaluations
+                    📈 Good evaluation coverage with{' '}
+                    {overallMetrics.totalEvaluations} completed evaluations
                   </Text>
                 )}
-                
+
                 {overallMetrics.totalEvaluations < 5 && (
                   <Text fontSize="sm" color="color.yellow.700">
-                    💡 Consider running more evaluations for better performance insights
+                    💡 Consider running more evaluations for better performance
+                    insights
                   </Text>
                 )}
               </Vertical>

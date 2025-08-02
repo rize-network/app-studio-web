@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Select, TextArea, TextField } from 'src/components/Form/Form';
+import { Select, TextArea, TextField } from '../../../Form/Form';
 
 import { View, Vertical, Horizontal, Text, Button } from 'app-studio';
 import {

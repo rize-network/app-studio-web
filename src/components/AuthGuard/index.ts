@@ -1,1 +1,6 @@
-export { AuthGuard, withAuthGuard, RouteAuthGuard, AuthStatus } from './AuthGuard';
+export {
+  AuthGuard,
+  withAuthGuard,
+  RouteAuthGuard,
+  AuthStatus,
+} from './AuthGuard';

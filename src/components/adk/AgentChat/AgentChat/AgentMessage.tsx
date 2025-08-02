@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Horizontal, Vertical, Text } from 'app-studio';
 import { AgentMessage as AgentMessageType } from './AgentChat.props';
 import { DefaultAgentChatStyles } from './AgentChat.style';
-import { Loader } from 'src/components/Loader/Loader';
-import { Avatar } from 'src/components/Avatar/Avatar';
+import { Loader } from '../../../Loader/Loader';
+import { Avatar } from '../../../Avatar/Avatar';
 
 export interface AgentMessageProps {
   message: AgentMessageType;

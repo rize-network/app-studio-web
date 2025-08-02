@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Horizontal, Vertical, Text } from 'app-studio';
 import { TraceFilter } from './AgentTrace.props';
 import { DefaultAgentTraceStyles } from './AgentTrace.style';
-import { Checkbox, TextField } from 'src/components/Form/Form';
+import { Checkbox, TextField } from '../../../Form/Form';
 
 export interface TraceFiltersProps {
   filter: TraceFilter;

@@ -5,7 +5,7 @@ import {
   SessionSortOptions,
 } from './AgentSession.props';
 import { DefaultAgentSessionStyles } from './AgentSession.style';
-import { Select, TextField } from 'src/components/Form/Form';
+import { Select, TextField } from '../../../Form/Form';
 
 export interface SessionFiltersProps {
   filters: SessionFiltersType;

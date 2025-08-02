@@ -18,7 +18,7 @@ export interface SessionActionsProps {
 
 /**
  * SessionActions Component
- * 
+ *
  * Renders action buttons for session management (import, export, etc.)
  */
 export const SessionActions: React.FC<SessionActionsProps> = ({
@@ -49,7 +49,7 @@ export const SessionActions: React.FC<SessionActionsProps> = ({
             📥 Import
           </Button>
         )}
-        
+
         {enableExport && (
           <Button
             {...DefaultAgentSessionStyles.exportButton}

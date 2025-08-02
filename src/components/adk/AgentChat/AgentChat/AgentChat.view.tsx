@@ -7,8 +7,8 @@ import { DefaultAgentChatStyles } from './AgentChat.style';
 import { AgentMessage } from './AgentMessage';
 import { AgentTypingIndicator } from './AgentTypingIndicator';
 import { MessageAttachmentPreview } from './MessageAttachmentPreview';
-import { Loader } from 'src/components/Loader/Loader';
-import { Alert } from 'src/components/Alert/Alert';
+import { Loader } from '../../../Loader/Loader';
+import { Alert } from '../../../Alert/Alert';
 
 export interface AgentChatViewProps
   extends Omit<AgentChatProps, 'sessionId'>,

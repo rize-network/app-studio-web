@@ -5,7 +5,12 @@ import { read } from './localstorage';
 import { isBrowser } from 'src/utils/env';
 import { OpenAPI } from 'src/services/api';
 
-async function checkStatus(response: any, url: string, params: any, options = { silent: false }) {
+async function checkStatus(
+  response: any,
+  url: string,
+  params: any,
+  options = { silent: false }
+) {
   if (response) {
     const json = await response.json();
 
@@ -33,7 +38,9 @@ async function checkStatus(response: any, url: string, params: any, options = { 
     }
 
     if (json) {
-      const error = json.message ? new Error(json.message) : new Error(`Erreur ${response.status}`);
+      const error = json.message
+        ? new Error(json.message)
+        : new Error(`Erreur ${response.status}`);
 
       // console.table(error);
 
@@ -82,7 +89,12 @@ interface RequestProps {
   options?: any;
 }
 
-export function request({ url, method = 'GET', params = {}, options = {} }: RequestProps) {
+export function request({
+  url,
+  method = 'GET',
+  params = {},
+  options = {},
+}: RequestProps) {
   let body;
   const headers: any = {};
   headers.locale = getLocale();
@@ -177,7 +189,13 @@ interface UploadRequestProps {
   onFailure?: Function;
 }
 
-export const upload = async ({ file, url, onProgress, onSuccess, onFailure }: UploadRequestProps) => {
+export const upload = async ({
+  file,
+  url,
+  onProgress,
+  onSuccess,
+  onFailure,
+}: UploadRequestProps) => {
   if (isBrowser()) {
     let xhr = new XMLHttpRequest();
 

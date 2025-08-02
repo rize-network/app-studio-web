@@ -1,9 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { AgentService, AgentServiceConfig, createAgentService } from './AgentService';
+import {
+  AgentService,
+  AgentServiceConfig,
+  createAgentService,
+} from './AgentService';
 
 /**
  * Agent Service Context
- * 
+ *
  * Provides the Agent Service instance throughout the React component tree
  */
 interface AgentServiceContextType {
@@ -32,7 +36,7 @@ export interface AgentServiceProviderProps {
 
 /**
  * Agent Service Provider Component
- * 
+ *
  * Provides the Agent Service instance to all child components
  * and manages connection state and error handling.
  */
@@ -57,7 +61,8 @@ export const AgentServiceProvider: React.FC<AgentServiceProviderProps> = ({
       setError(null);
       onConnectionChange?.(true);
     } catch (err) {
-      const error = err instanceof Error ? err : new Error('Failed to initialize service');
+      const error =
+        err instanceof Error ? err : new Error('Failed to initialize service');
       setError(error.message);
       setIsConnected(false);
       onError?.(error);
@@ -88,7 +93,8 @@ export const AgentServiceProvider: React.FC<AgentServiceProviderProps> = ({
       setError(null);
       onConnectionChange?.(true);
     } catch (err) {
-      const error = err instanceof Error ? err : new Error('Connection test failed');
+      const error =
+        err instanceof Error ? err : new Error('Connection test failed');
       setError(error.message);
       setIsConnected(false);
       onError?.(error);
@@ -138,22 +144,24 @@ export const AgentServiceProvider: React.FC<AgentServiceProviderProps> = ({
 
 /**
  * Hook to use the Agent Service
- * 
+ *
  * Provides access to the Agent Service instance and connection state
  */
 export const useAgentService = (): AgentServiceContextType => {
   const context = useContext(AgentServiceContext);
-  
+
   if (!context) {
-    throw new Error('useAgentService must be used within an AgentServiceProvider');
+    throw new Error(
+      'useAgentService must be used within an AgentServiceProvider'
+    );
   }
-  
+
   return context;
 };
 
 /**
  * Hook for Agent Service Operations
- * 
+ *
  * Provides common operations with built-in error handling and loading states
  */
 export const useAgentOperations = () => {
@@ -199,13 +207,13 @@ export const useAgentOperations = () => {
   const sessionOperations = {
     create: (appName: string, userId: string, metadata?: any) =>
       executeOperation(() => service!.createSession(appName, userId, metadata)),
-    
+
     get: (sessionId: string) =>
       executeOperation(() => service!.getSession(sessionId)),
-    
+
     list: (userId: string, appName?: string, limit?: number) =>
       executeOperation(() => service!.listSessions(userId, appName, limit)),
-    
+
     delete: (sessionId: string) =>
       executeOperation(() => service!.deleteSession(sessionId)),
   };
@@ -216,16 +224,16 @@ export const useAgentOperations = () => {
   const messageOperations = {
     send: (request: any) =>
       executeOperation(() => service!.sendMessage(request)),
-    
+
     sendStreaming: (
       request: any,
       onMessage: (message: any) => void,
       onComplete?: () => void
     ) =>
-      executeOperation(() => 
+      executeOperation(() =>
         service!.sendMessageStreaming(request, onMessage, undefined, onComplete)
       ),
-    
+
     cancelStreaming: (sessionId: string) => {
       service?.cancelStreaming(sessionId);
     },
@@ -237,13 +245,13 @@ export const useAgentOperations = () => {
   const traceOperations = {
     getEvents: (sessionId: string, filters?: any) =>
       executeOperation(() => service!.getTraceEvents(sessionId, filters)),
-    
+
     getSpans: (sessionId: string) =>
       executeOperation(() => service!.getTraceSpans(sessionId)),
-    
+
     getMetrics: (sessionId: string) =>
       executeOperation(() => service!.getTraceMetrics(sessionId)),
-    
+
     subscribe: (sessionId: string, onUpdate: (update: any) => void) => {
       service?.subscribeToTraceUpdates(sessionId, onUpdate);
     },
@@ -253,24 +261,40 @@ export const useAgentOperations = () => {
    * Evaluation operations
    */
   const evaluationOperations = {
-    create: (name: string, appName: string, userId: string, testCases: any[], metrics: any[], config?: any) =>
-      executeOperation(() => service!.createEvaluation(name, appName, userId, testCases, metrics, config)),
-    
+    create: (
+      name: string,
+      appName: string,
+      userId: string,
+      testCases: any[],
+      metrics: any[],
+      config?: any
+    ) =>
+      executeOperation(() =>
+        service!.createEvaluation(
+          name,
+          appName,
+          userId,
+          testCases,
+          metrics,
+          config
+        )
+      ),
+
     start: (evaluationId: string) =>
       executeOperation(() => service!.startEvaluation(evaluationId)),
-    
+
     cancel: (evaluationId: string) =>
       executeOperation(() => service!.cancelEvaluation(evaluationId)),
-    
+
     get: (evaluationId: string) =>
       executeOperation(() => service!.getEvaluation(evaluationId)),
-    
+
     list: (appName: string, userId: string, limit?: number) =>
       executeOperation(() => service!.listEvaluations(appName, userId, limit)),
-    
+
     delete: (evaluationId: string) =>
       executeOperation(() => service!.deleteEvaluation(evaluationId)),
-    
+
     subscribe: (userId: string, onUpdate: (update: any) => void) => {
       service?.subscribeToEvaluationUpdates(userId, onUpdate);
     },
@@ -290,7 +314,7 @@ export const useAgentOperations = () => {
 
 /**
  * Connection Status Component
- * 
+ *
  * Displays the current connection status of the Agent Service
  */
 export interface ConnectionStatusProps {
@@ -311,17 +335,19 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
 
   if (isConnected) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: '8px',
-        padding: '8px 12px',
-        backgroundColor: '#f0f9ff',
-        border: '1px solid #0ea5e9',
-        borderRadius: '6px',
-        fontSize: '14px',
-        color: '#0369a1',
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          padding: '8px 12px',
+          backgroundColor: '#f0f9ff',
+          border: '1px solid #0ea5e9',
+          borderRadius: '6px',
+          fontSize: '14px',
+          color: '#0369a1',
+        }}
+      >
         <span style={{ color: '#059669' }}>●</span>
         <span>Connected</span>
         {showDetails && (
@@ -334,23 +360,23 @@ export const ConnectionStatus: React.FC<ConnectionStatusProps> = ({
   }
 
   return (
-    <div style={{ 
-      display: 'flex', 
-      alignItems: 'center', 
-      gap: '8px',
-      padding: '8px 12px',
-      backgroundColor: '#fef2f2',
-      border: '1px solid #f87171',
-      borderRadius: '6px',
-      fontSize: '14px',
-      color: '#dc2626',
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        padding: '8px 12px',
+        backgroundColor: '#fef2f2',
+        border: '1px solid #f87171',
+        borderRadius: '6px',
+        fontSize: '14px',
+        color: '#dc2626',
+      }}
+    >
       <span style={{ color: '#dc2626' }}>●</span>
       <span>Disconnected</span>
       {showDetails && error && (
-        <span style={{ fontSize: '12px', opacity: 0.8 }}>
-          {error}
-        </span>
+        <span style={{ fontSize: '12px', opacity: 0.8 }}>{error}</span>
       )}
       <button
         onClick={handleReconnect}

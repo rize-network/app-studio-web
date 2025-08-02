@@ -6,9 +6,9 @@ import { DefaultAgentSessionStyles } from './AgentSession.style';
 import { SessionListItem } from './SessionListItem';
 import { SessionActions } from './SessionActions';
 import { SessionFilters } from './SessionFilters';
-import { Alert } from 'src/components/Alert/Alert';
-import { Loader } from 'src/components/Loader/Loader';
-import { TextField } from 'src/components/Form/Form';
+import { Alert } from '../../../Alert/Alert';
+import { Loader } from '../../../Loader/Loader';
+import { TextField } from '../../../Form/Form';
 
 export interface AgentSessionViewProps
   extends AgentSessionProps,

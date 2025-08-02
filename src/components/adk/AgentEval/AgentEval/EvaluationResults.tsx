@@ -17,7 +17,7 @@ export interface EvaluationResultsProps {
 
 /**
  * EvaluationResults Component
- * 
+ *
  * Displays evaluation results with summary and detailed test case results
  */
 export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
@@ -32,7 +32,7 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
    */
   const getTestCaseStatusStyle = (status: string) => {
     const baseStyle = DefaultAgentEvalStyles.testCaseStatus;
-    
+
     switch (status) {
       case 'pass':
         return { ...baseStyle, ...DefaultAgentEvalStyles.testCasePass };
@@ -82,7 +82,7 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
             <Text fontSize="lg" fontWeight="600" marginBottom={16}>
               Evaluation Summary
             </Text>
-            
+
             <View {...DefaultAgentEvalStyles.summaryGrid}>
               <View {...DefaultAgentEvalStyles.summaryCard}>
                 <Text {...DefaultAgentEvalStyles.summaryValue}>
@@ -92,56 +92,46 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
                   Total Tests
                 </Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.summaryCard}>
-                <Text 
+                <Text
                   {...DefaultAgentEvalStyles.summaryValue}
                   color="color.green.600"
                 >
                   {evaluation.summary.passedTests}
                 </Text>
-                <Text {...DefaultAgentEvalStyles.summaryLabel}>
-                  Passed
-                </Text>
+                <Text {...DefaultAgentEvalStyles.summaryLabel}>Passed</Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.summaryCard}>
-                <Text 
+                <Text
                   {...DefaultAgentEvalStyles.summaryValue}
                   color="color.red.600"
                 >
                   {evaluation.summary.failedTests}
                 </Text>
-                <Text {...DefaultAgentEvalStyles.summaryLabel}>
-                  Failed
-                </Text>
+                <Text {...DefaultAgentEvalStyles.summaryLabel}>Failed</Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.summaryCard}>
                 <Text {...DefaultAgentEvalStyles.summaryValue}>
                   {evaluation.summary.averageScore.toFixed(1)}
                 </Text>
-                <Text {...DefaultAgentEvalStyles.summaryLabel}>
-                  Avg Score
-                </Text>
+                <Text {...DefaultAgentEvalStyles.summaryLabel}>Avg Score</Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.summaryCard}>
                 <Text {...DefaultAgentEvalStyles.summaryValue}>
                   {(evaluation.summary.passRate * 100).toFixed(1)}%
                 </Text>
-                <Text {...DefaultAgentEvalStyles.summaryLabel}>
-                  Pass Rate
-                </Text>
+                <Text {...DefaultAgentEvalStyles.summaryLabel}>Pass Rate</Text>
               </View>
-              
+
               <View {...DefaultAgentEvalStyles.summaryCard}>
                 <Text {...DefaultAgentEvalStyles.summaryValue}>
                   {formatDuration(evaluation.summary.totalDuration)}
                 </Text>
-                <Text {...DefaultAgentEvalStyles.summaryLabel}>
-                  Total Time
-                </Text>
+                <Text {...DefaultAgentEvalStyles.summaryLabel}>Total Time</Text>
               </View>
             </View>
           </View>
@@ -152,13 +142,18 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
           <Text fontSize="lg" fontWeight="600" marginBottom={16}>
             Test Case Results
           </Text>
-          
-          <View {...DefaultAgentEvalStyles.testCaseList} {...views.testCaseList}>
+
+          <View
+            {...DefaultAgentEvalStyles.testCaseList}
+            {...views.testCaseList}
+          >
             <Vertical gap={8}>
               {evaluation.testCases.map((testCase) => {
-                const result = evaluation.results?.find(r => r.testCaseId === testCase.id);
+                const result = evaluation.results?.find(
+                  (r) => r.testCaseId === testCase.id
+                );
                 const isSelected = selectedResult?.testCaseId === testCase.id;
-                
+
                 return (
                   <View
                     key={testCase.id}
@@ -172,7 +167,10 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
                   >
                     <Vertical gap={8}>
                       {/* Test Case Header */}
-                      <Horizontal justifyContent="space-between" alignItems="center">
+                      <Horizontal
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
                         <Horizontal gap={8} alignItems="center">
                           <Text fontSize="16px">
                             {result ? getStatusIcon(result.status) : '⏳'}
@@ -186,10 +184,14 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
                             </Text>
                           )}
                         </Horizontal>
-                        
+
                         <Horizontal gap={12} alignItems="center">
                           {result?.score !== undefined && (
-                            <Text fontSize="sm" fontWeight="600" color="color.gray.700">
+                            <Text
+                              fontSize="sm"
+                              fontWeight="600"
+                              color="color.gray.700"
+                            >
                               Score: {result.score.toFixed(2)}
                             </Text>
                           )}
@@ -230,9 +232,9 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
 
                       {/* Error Message */}
                       {result?.error && (
-                        <View 
-                          padding={8} 
-                          backgroundColor="color.red.50" 
+                        <View
+                          padding={8}
+                          backgroundColor="color.red.50"
                           borderRadius="4px"
                           border="1px solid"
                           borderColor="color.red.200"
@@ -245,30 +247,42 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
 
                       {/* Detailed Results (when selected) */}
                       {isSelected && result && showTestCaseDetails && (
-                        <View 
-                          padding={12} 
-                          backgroundColor="color.gray.50" 
+                        <View
+                          padding={12}
+                          backgroundColor="color.gray.50"
                           borderRadius="6px"
                           marginTop={8}
                         >
                           <Vertical gap={12}>
-                            <Text fontSize="sm" fontWeight="600" color="color.gray.700">
+                            <Text
+                              fontSize="sm"
+                              fontWeight="600"
+                              color="color.gray.700"
+                            >
                               Test Case Details
                             </Text>
-                            
+
                             {/* Input */}
                             <View>
-                              <Text fontSize="xs" fontWeight="600" color="color.gray.700" marginBottom={4}>
+                              <Text
+                                fontSize="xs"
+                                fontWeight="600"
+                                color="color.gray.700"
+                                marginBottom={4}
+                              >
                                 Input
                               </Text>
-                              <View 
-                                padding={8} 
-                                backgroundColor="color.white" 
+                              <View
+                                padding={8}
+                                backgroundColor="color.white"
                                 borderRadius="4px"
                                 border="1px solid"
                                 borderColor="color.gray.200"
                               >
-                                <Text fontSize="xs" fontFamily="Monaco, Consolas, monospace">
+                                <Text
+                                  fontSize="xs"
+                                  fontFamily="Monaco, Consolas, monospace"
+                                >
                                   {JSON.stringify(testCase.input, null, 2)}
                                 </Text>
                               </View>
@@ -277,18 +291,30 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
                             {/* Expected Output */}
                             {testCase.expectedOutput && (
                               <View>
-                                <Text fontSize="xs" fontWeight="600" color="color.gray.700" marginBottom={4}>
+                                <Text
+                                  fontSize="xs"
+                                  fontWeight="600"
+                                  color="color.gray.700"
+                                  marginBottom={4}
+                                >
                                   Expected Output
                                 </Text>
-                                <View 
-                                  padding={8} 
-                                  backgroundColor="color.white" 
+                                <View
+                                  padding={8}
+                                  backgroundColor="color.white"
                                   borderRadius="4px"
                                   border="1px solid"
                                   borderColor="color.gray.200"
                                 >
-                                  <Text fontSize="xs" fontFamily="Monaco, Consolas, monospace">
-                                    {JSON.stringify(testCase.expectedOutput, null, 2)}
+                                  <Text
+                                    fontSize="xs"
+                                    fontFamily="Monaco, Consolas, monospace"
+                                  >
+                                    {JSON.stringify(
+                                      testCase.expectedOutput,
+                                      null,
+                                      2
+                                    )}
                                   </Text>
                                 </View>
                               </View>
@@ -297,18 +323,30 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
                             {/* Actual Output */}
                             {result.actualOutput && (
                               <View>
-                                <Text fontSize="xs" fontWeight="600" color="color.gray.700" marginBottom={4}>
+                                <Text
+                                  fontSize="xs"
+                                  fontWeight="600"
+                                  color="color.gray.700"
+                                  marginBottom={4}
+                                >
                                   Actual Output
                                 </Text>
-                                <View 
-                                  padding={8} 
-                                  backgroundColor="color.white" 
+                                <View
+                                  padding={8}
+                                  backgroundColor="color.white"
                                   borderRadius="4px"
                                   border="1px solid"
                                   borderColor="color.gray.200"
                                 >
-                                  <Text fontSize="xs" fontFamily="Monaco, Consolas, monospace">
-                                    {JSON.stringify(result.actualOutput, null, 2)}
+                                  <Text
+                                    fontSize="xs"
+                                    fontFamily="Monaco, Consolas, monospace"
+                                  >
+                                    {JSON.stringify(
+                                      result.actualOutput,
+                                      null,
+                                      2
+                                    )}
                                   </Text>
                                 </View>
                               </View>
@@ -317,24 +355,34 @@ export const EvaluationResults: React.FC<EvaluationResultsProps> = ({
                             {/* Metrics */}
                             {Object.keys(result.metrics).length > 0 && (
                               <View>
-                                <Text fontSize="xs" fontWeight="600" color="color.gray.700" marginBottom={4}>
+                                <Text
+                                  fontSize="xs"
+                                  fontWeight="600"
+                                  color="color.gray.700"
+                                  marginBottom={4}
+                                >
                                   Metrics
                                 </Text>
                                 <Horizontal gap={8} flexWrap="wrap">
-                                  {Object.entries(result.metrics).map(([metric, value]) => (
-                                    <View
-                                      key={metric}
-                                      padding="4px 8px"
-                                      backgroundColor="color.blue.50"
-                                      borderRadius="4px"
-                                      border="1px solid"
-                                      borderColor="color.blue.200"
-                                    >
-                                      <Text fontSize="xs" color="color.blue.800">
-                                        {metric}: {value.toFixed(3)}
-                                      </Text>
-                                    </View>
-                                  ))}
+                                  {Object.entries(result.metrics).map(
+                                    ([metric, value]) => (
+                                      <View
+                                        key={metric}
+                                        padding="4px 8px"
+                                        backgroundColor="color.blue.50"
+                                        borderRadius="4px"
+                                        border="1px solid"
+                                        borderColor="color.blue.200"
+                                      >
+                                        <Text
+                                          fontSize="xs"
+                                          color="color.blue.800"
+                                        >
+                                          {metric}: {value.toFixed(3)}
+                                        </Text>
+                                      </View>
+                                    )
+                                  )}
                                 </Horizontal>
                               </View>
                             )}

@@ -24,7 +24,7 @@ export interface SessionListItemProps {
 
 /**
  * SessionListItem Component
- * 
+ *
  * Renders individual session items in the session list
  */
 export const SessionListItem: React.FC<SessionListItemProps> = ({
@@ -50,18 +50,14 @@ export const SessionListItem: React.FC<SessionListItemProps> = ({
     onExport();
   };
 
-  const containerStyles = compactMode 
-    ? DefaultAgentSessionStyles.compactSessionItem 
-    : isSelected 
-      ? DefaultAgentSessionStyles.activeSessionItem 
-      : DefaultAgentSessionStyles.sessionItem;
+  const containerStyles = compactMode
+    ? DefaultAgentSessionStyles.compactSessionItem
+    : isSelected
+    ? DefaultAgentSessionStyles.activeSessionItem
+    : DefaultAgentSessionStyles.sessionItem;
 
   return (
-    <View
-      {...containerStyles}
-      {...views.container}
-      onClick={onSelect}
-    >
+    <View {...containerStyles} {...views.container} onClick={onSelect}>
       <Horizontal gap={12} alignItems="flex-start">
         {/* Status Indicator */}
         <View
@@ -88,14 +84,18 @@ export const SessionListItem: React.FC<SessionListItemProps> = ({
             {/* Tags */}
             {session.metadata?.tags && session.metadata.tags.length > 0 && (
               <View {...DefaultAgentSessionStyles.tagContainer}>
-                {session.metadata.tags.slice(0, compactMode ? 2 : 5).map((tag, index) => (
-                  <View key={index} {...DefaultAgentSessionStyles.tag}>
-                    <Text fontSize="10px">{tag}</Text>
-                  </View>
-                ))}
+                {session.metadata.tags
+                  .slice(0, compactMode ? 2 : 5)
+                  .map((tag, index) => (
+                    <View key={index} {...DefaultAgentSessionStyles.tag}>
+                      <Text fontSize="10px">{tag}</Text>
+                    </View>
+                  ))}
                 {session.metadata.tags.length > (compactMode ? 2 : 5) && (
                   <View {...DefaultAgentSessionStyles.tag}>
-                    <Text fontSize="10px">+{session.metadata.tags.length - (compactMode ? 2 : 5)}</Text>
+                    <Text fontSize="10px">
+                      +{session.metadata.tags.length - (compactMode ? 2 : 5)}
+                    </Text>
                   </View>
                 )}
               </View>
@@ -109,7 +109,8 @@ export const SessionListItem: React.FC<SessionListItemProps> = ({
                 </Text>
                 {session.metadata?.messageCount !== undefined && (
                   <Text {...DefaultAgentSessionStyles.sessionMeta}>
-                    {session.metadata.messageCount} message{session.metadata.messageCount !== 1 ? 's' : ''}
+                    {session.metadata.messageCount} message
+                    {session.metadata.messageCount !== 1 ? 's' : ''}
                   </Text>
                 )}
                 <Text {...DefaultAgentSessionStyles.sessionMeta}>
@@ -133,7 +134,7 @@ export const SessionListItem: React.FC<SessionListItemProps> = ({
               📤
             </Button>
           )}
-          
+
           {enableDelete && (
             <Button
               {...DefaultAgentSessionStyles.deleteButton}

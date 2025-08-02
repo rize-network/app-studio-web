@@ -5,10 +5,10 @@ import { useAgentTrace } from './AgentTrace/AgentTrace.state';
 
 /**
  * AgentTrace Component
- * 
+ *
  * A comprehensive trace visualization component for ADK agents.
  * Displays execution traces, events, and performance metrics in an interactive format.
- * 
+ *
  * @example
  * ```tsx
  * <AgentTrace
@@ -18,7 +18,7 @@ import { useAgentTrace } from './AgentTrace/AgentTrace.state';
  *   onEventSelect={(event) => console.log('Event selected:', event)}
  * />
  * ```
- * 
+ *
  * @example
  * ```tsx
  * // With custom visualization and filtering

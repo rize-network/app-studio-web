@@ -7,8 +7,8 @@ import { EvaluationList } from './EvaluationList';
 import { EvaluationCreator } from './EvaluationCreator';
 import { EvaluationResults } from './EvaluationResults';
 import { EvaluationMetrics } from './EvaluationMetrics';
-import { Loader } from 'src/components/Loader/Loader';
-import { TextField } from 'src/components/Form/Form';
+import { Loader } from '../../../Loader/Loader';
+import { TextField } from '../../../Form/Form';
 
 export interface AgentEvalViewProps
   extends AgentEvalProps,

@@ -10,7 +10,11 @@ import {
   useAdkControllerGetServiceInfoService,
 } from '../services/api/services/AdkService';
 import { useAuthStore } from '../stores/AuthStore';
-import type { CreateSessionParams, AgentRunRequest, SessionResponse } from '../services/api';
+import type {
+  CreateSessionParams,
+  AgentRunRequest,
+  SessionResponse,
+} from '../services/api';
 
 /**
  * Custom hook for ADK operations
@@ -123,54 +127,72 @@ export const useAdk = () => {
   }, [isAuthentificated, user]);
 
   // Helper functions
-  const createSession = useCallback((params: CreateSessionParams) => {
-    if (!isAuthentificated) {
-      console.error('User must be authenticated to create session');
-      return;
-    }
-    createSessionService.run(params);
-  }, [isAuthentificated, createSessionService]);
+  const createSession = useCallback(
+    (params: CreateSessionParams) => {
+      if (!isAuthentificated) {
+        console.error('User must be authenticated to create session');
+        return;
+      }
+      createSessionService.run(params);
+    },
+    [isAuthentificated, createSessionService]
+  );
 
-  const loadSessions = useCallback((appName?: string) => {
-    if (!isAuthentificated) {
-      console.error('User must be authenticated to load sessions');
-      return;
-    }
-    listSessionsService.run(appName);
-  }, [isAuthentificated, listSessionsService]);
+  const loadSessions = useCallback(
+    (appName?: string) => {
+      if (!isAuthentificated) {
+        console.error('User must be authenticated to load sessions');
+        return;
+      }
+      listSessionsService.run(appName);
+    },
+    [isAuthentificated, listSessionsService]
+  );
 
-  const loadSession = useCallback((sessionId: string) => {
-    if (!isAuthentificated) {
-      console.error('User must be authenticated to load session');
-      return;
-    }
-    getSessionService.run(sessionId);
-    setCurrentSessionId(sessionId);
-  }, [isAuthentificated, getSessionService]);
+  const loadSession = useCallback(
+    (sessionId: string) => {
+      if (!isAuthentificated) {
+        console.error('User must be authenticated to load session');
+        return;
+      }
+      getSessionService.run(sessionId);
+      setCurrentSessionId(sessionId);
+    },
+    [isAuthentificated, getSessionService]
+  );
 
-  const deleteSession = useCallback((sessionId: string) => {
-    if (!isAuthentificated) {
-      console.error('User must be authenticated to delete session');
-      return;
-    }
-    deleteSessionService.run(sessionId);
-  }, [isAuthentificated, deleteSessionService]);
+  const deleteSession = useCallback(
+    (sessionId: string) => {
+      if (!isAuthentificated) {
+        console.error('User must be authenticated to delete session');
+        return;
+      }
+      deleteSessionService.run(sessionId);
+    },
+    [isAuthentificated, deleteSessionService]
+  );
 
-  const runAgent = useCallback((request: AgentRunRequest) => {
-    if (!isAuthentificated) {
-      console.error('User must be authenticated to run agent');
-      return;
-    }
-    runAgentService.run(request);
-  }, [isAuthentificated, runAgentService]);
+  const runAgent = useCallback(
+    (request: AgentRunRequest) => {
+      if (!isAuthentificated) {
+        console.error('User must be authenticated to run agent');
+        return;
+      }
+      runAgentService.run(request);
+    },
+    [isAuthentificated, runAgentService]
+  );
 
-  const runAgentStreaming = useCallback((request: AgentRunRequest) => {
-    if (!isAuthentificated) {
-      console.error('User must be authenticated to run agent streaming');
-      return;
-    }
-    runAgentStreamingService.run(request);
-  }, [isAuthentificated, runAgentStreamingService]);
+  const runAgentStreaming = useCallback(
+    (request: AgentRunRequest) => {
+      if (!isAuthentificated) {
+        console.error('User must be authenticated to run agent streaming');
+        return;
+      }
+      runAgentStreamingService.run(request);
+    },
+    [isAuthentificated, runAgentStreamingService]
+  );
 
   const checkHealth = useCallback(() => {
     healthCheckService.run();
