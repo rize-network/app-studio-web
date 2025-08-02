@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Horizontal, Vertical, Text } from 'app-studio';
 import { TraceEvent, TraceSpan, VisualizationType } from './AgentTrace.props';
 import { DefaultAgentTraceStyles } from './AgentTrace.style';
-import { Select } from 'src/components';
+import { Select } from '../../../Form/Form';
 
 export interface TraceVisualizationProps {
   events: TraceEvent[];
