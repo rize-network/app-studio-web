@@ -30,6 +30,10 @@ const AgentChatView: React.FC<AgentChatViewProps> = ({
   enableAudioRecording = false,
   enableVideoRecording = false,
   views,
+  containerProps,
+  colorScheme = 'blue',
+  compact = false,
+  rounded = true,
   ariaLabel = 'Agent Chat',
   ariaDescribedBy,
 
@@ -66,7 +70,7 @@ const AgentChatView: React.FC<AgentChatViewProps> = ({
    */
   const handleSubmit = async (
     message: string,
-    options?: { model_name?: string; enable_thinking?: boolean }
+    _options?: { model_name?: string; enable_thinking?: boolean }
   ) => {
     if (message.trim() || selectedFiles.length > 0) {
       await sendMessage(message, selectedFiles);
@@ -88,9 +92,35 @@ const AgentChatView: React.FC<AgentChatViewProps> = ({
     setSelectedFiles([]);
   };
 
+  /**
+   * Get dynamic styles based on theme props
+   */
+  const getThemeStyles = () => {
+    const baseStyles = {
+      borderRadius: rounded ? '12px' : '4px',
+      padding: compact ? '8px' : '16px',
+    };
+
+    const colorStyles = {
+      blue: { borderColor: 'color.blue.200' },
+      purple: { borderColor: 'color.purple.200' },
+      green: { borderColor: 'color.green.200' },
+      orange: { borderColor: 'color.orange.200' },
+      red: { borderColor: 'color.red.200' },
+      gray: { borderColor: 'color.gray.200' },
+    };
+
+    return {
+      ...baseStyles,
+      ...colorStyles[colorScheme],
+    };
+  };
+
   return (
     <View
       {...DefaultAgentChatStyles.container}
+      {...getThemeStyles()}
+      {...containerProps}
       {...views?.container}
       {...props}
       aria-label={ariaLabel}

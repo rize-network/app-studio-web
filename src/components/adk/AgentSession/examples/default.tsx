@@ -194,6 +194,154 @@ export const CustomizedDemo = () => {
 };
 
 /**
+ * Enhanced Customization Example
+ *
+ * Shows comprehensive customization using enhanced views prop and container props
+ */
+export const EnhancedCustomizationDemo = () => {
+  return (
+    <Vertical gap={16} padding={20}>
+      <Text fontSize={18} fontWeight="600">
+        Enhanced AgentSession Customization
+      </Text>
+
+      <Text color="color.gray.600" fontSize={14}>
+        Demonstrates comprehensive customization using the enhanced views prop
+        and container props for complete control over session management UI.
+      </Text>
+
+      <View
+        height="500px"
+        border="1px solid"
+        borderColor="color.green.200"
+        borderRadius="12px"
+      >
+        <AgentSession
+          appName="enhanced-agent"
+          userId="user123"
+          showSessionHistory={true}
+          enableSessionImport={true}
+          enableSessionExport={true}
+          enableSessionDelete={true}
+          enableSessionSearch={true}
+          enableBulkOperations={true}
+          enableSessionTags={true}
+          enableSessionMetadata={true}
+          compactMode={false}
+          colorScheme="green"
+          layout="list"
+          showPreviews={true}
+          containerProps={{
+            backgroundColor: 'color.green.25',
+            border: '2px solid',
+            borderColor: 'color.green.300',
+          }}
+          views={{
+            // Main areas
+            container: {
+              backgroundColor: 'color.green.25',
+            },
+            header: {
+              backgroundColor: 'color.green.500',
+              color: 'white',
+              padding: '16px',
+              borderRadius: '12px 12px 0 0',
+            },
+            toolbar: {
+              backgroundColor: 'color.green.50',
+              padding: '12px',
+              borderBottom: '1px solid',
+              borderBottomColor: 'color.green.200',
+            },
+            sessionList: {
+              backgroundColor: 'color.white',
+              padding: '16px',
+            },
+
+            // Session items
+            sessionItem: {
+              backgroundColor: 'color.green.50',
+              borderRadius: '8px',
+              margin: '4px 0',
+              padding: '12px',
+              border: '1px solid',
+              borderColor: 'color.green.200',
+            },
+            activeSessionItem: {
+              backgroundColor: 'color.green.100',
+              borderColor: 'color.green.500',
+              borderWidth: '2px',
+            },
+            sessionTitle: {
+              fontWeight: '600',
+              color: 'color.green.900',
+              fontSize: '16px',
+            },
+            sessionDescription: {
+              color: 'color.green.700',
+              fontSize: '14px',
+            },
+            sessionTimestamp: {
+              color: 'color.green.600',
+              fontSize: '12px',
+            },
+            sessionStats: {
+              backgroundColor: 'color.green.100',
+              borderRadius: '4px',
+              padding: '4px 8px',
+              fontSize: '12px',
+              color: 'color.green.800',
+            },
+
+            // Action buttons
+            createButton: {
+              backgroundColor: 'color.green.500',
+              color: 'white',
+              borderRadius: '8px',
+              padding: '8px 16px',
+              fontWeight: '600',
+            },
+            deleteButton: {
+              backgroundColor: 'color.red.500',
+              color: 'white',
+              borderRadius: '6px',
+              padding: '6px 12px',
+            },
+            exportButton: {
+              backgroundColor: 'color.blue.500',
+              color: 'white',
+              borderRadius: '6px',
+              padding: '6px 12px',
+            },
+
+            // Search and filters
+            searchInput: {
+              borderRadius: '20px',
+              border: '2px solid',
+              borderColor: 'color.green.200',
+              backgroundColor: 'white',
+              padding: '8px 16px',
+            },
+
+            // State displays
+            emptyState: {
+              textAlign: 'center',
+              padding: '40px',
+              color: 'color.green.600',
+            },
+            loadingState: {
+              textAlign: 'center',
+              padding: '40px',
+              color: 'color.green.500',
+            },
+          }}
+        />
+      </View>
+    </Vertical>
+  );
+};
+
+/**
  * Session with Mock Data Example
  *
  * Demonstrates the component with initial session data
