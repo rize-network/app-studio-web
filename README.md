@@ -7,9 +7,25 @@
 
 A comprehensive, accessible, and customizable React component library built with TypeScript and App Studio. This library provides a wide range of UI components designed to help you build beautiful and functional web applications quickly and efficiently.
 
-## Features
+## 🚀 What's Included
+
+- **40+ UI Components**: Complete component library for modern web applications
+- **ADK Agent Components**: Specialized components for Agent Development Kit integration
+- **Full TypeScript Support**: Complete type definitions and IntelliSense
+- **Production Ready**: Battle-tested components used in real applications
+
+## 📚 Documentation
+
+- **[Getting Started](./docs/getting-started/introduction.md)** - Quick introduction and setup
+- **[Component Library](./docs/README.md)** - Complete component documentation
+- **[ADK Components](./README-ADK.md)** - Agent Development Kit integration
+- **[API Integration](./docs/api-integration.md)** - Backend integration guide
+- **[Development Guide](./docs/component-development/guide.md)** - Contributing and development
+
+## ✨ Features
 
 - **40+ UI Components**: From basic elements to complex interactive components
+- **ADK Agent Integration**: Complete Agent Development Kit compatibility
 - **Fully Typed**: Built with TypeScript for better developer experience
 - **Accessible**: Follows WCAG guidelines for accessibility
 - **Customizable**: Easily theme and style components to match your brand

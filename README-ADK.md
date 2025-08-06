@@ -20,6 +20,12 @@ A comprehensive React component library for building applications with the Agent
 - **📱 Responsive Design**: Works seamlessly across all device sizes
 - **🔒 TypeScript Support**: Complete type definitions included
 
+## 📚 Documentation
+
+- **[Main Documentation](./docs/README.md)** - Complete component library docs
+- **[Getting Started](./docs/getting-started/introduction.md)** - Library setup and basics
+- **[API Integration](./docs/api-integration.md)** - Backend integration patterns
+
 ## 📦 Installation
 
 ```bash
@@ -210,12 +216,11 @@ GET /trace/events          # Get trace events (optional)
 POST /evaluations          # Create evaluation (optional)
 ```
 
-## 📖 Documentation
+## 📖 Additional Resources
 
-- **[Complete Documentation](./docs/adk-components.md)** - Comprehensive guide
+- **[Complete ADK Documentation](./docs/adk-components.md)** - Comprehensive component guide
 - **[Quick Start Guide](./docs/adk-quick-start.md)** - Get started in minutes
 - **[Demo Page](./src/pages/adkComponents.page.tsx)** - Interactive examples
-- **Component Examples** - Available in each component's `examples/` directory
 
 ## 🔍 Examples
 
@@ -268,43 +273,12 @@ function AgentInterface() {
 </AgentServiceProvider>
 ```
 
-## 🧪 Development
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm start
-
-# Run tests
-npm test
-
-# Build for production
-npm run build
-```
-
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/)
-- Styled with [app-studio](https://github.com/your-org/app-studio) design system
-- Compatible with [ADK](https://github.com/your-org/adk) ecosystem
+See the main [README.md](./README.md) for development setup and contribution guidelines.
 
 ## 📞 Support
 
-- 📚 [Documentation](./docs/adk-components.md)
-- 🐛 [Issue Tracker](https://github.com/your-org/adk-components/issues)
-- 💬 [Discussions](https://github.com/your-org/adk-components/discussions)
-- 📧 [Email Support](mailto:support@your-org.com)
+- 📚 [Main Documentation](./docs/README.md)
+- 📖 [ADK Documentation](./docs/adk-components.md)
+- 🚀 [Quick Start Guide](./docs/adk-quick-start.md)
