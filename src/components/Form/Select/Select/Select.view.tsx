@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { Element } from 'app-studio';
+import React, { useCallback, useRef } from 'react';
+import { Element, useElementPosition } from 'app-studio';
 import { Typography } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Text } from '../../../Text/Text';
@@ -344,6 +344,53 @@ const SelectView: React.FC<SelectViewProps> = ({
   highlightedIndex,
   ...props
 }) => {
+  const {
+    ref: triggerRef,
+    relation,
+    updateRelation,
+  } = useElementPosition({
+    trackChanges: true,
+    throttleMs: 100,
+  });
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Get optimal positioning style based on available space
+  const getDropdownStyle = () => {
+    if (!relation) {
+      // Default positioning when relation is not available
+      return {
+        position: 'absolute' as const,
+        top: '100%',
+        marginTop: '8px',
+        left: 0,
+        right: 0,
+        zIndex: 10000,
+      };
+    }
+
+    const baseStyle = {
+      position: 'absolute' as const,
+      left: 0,
+      right: 0,
+      zIndex: 10000,
+    };
+
+    // Place dropdown where there's more space vertically
+    if (relation.space.vertical === 'top') {
+      return {
+        ...baseStyle,
+        bottom: '100%',
+        marginBottom: '8px',
+      };
+    } else {
+      return {
+        ...baseStyle,
+        top: '100%',
+        marginTop: '8px',
+      };
+    }
+  };
   // close when *any* other select opens
   React.useEffect(() => {
     const handleCloseAll = () => setHide(true);
@@ -414,7 +461,10 @@ const SelectView: React.FC<SelectViewProps> = ({
   };
   return (
     <FieldContainer
-      style={{ position: 'relative', width: '100%', display: 'inline-block' }}
+      ref={triggerRef as React.RefObject<HTMLDivElement>}
+      position="relative"
+      width="100%"
+      display="inline-block"
       id={id}
       role="SelectBox"
       helperText={helperText}
@@ -447,6 +497,7 @@ const SelectView: React.FC<SelectViewProps> = ({
         showLabel={showLabel}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
+        position="relative"
       >
         <FieldWrapper>
           {showLabel && (
@@ -502,38 +553,33 @@ const SelectView: React.FC<SelectViewProps> = ({
             </>
           )}
         </FieldIcons>
+        {!hide && options.length > 0 && (
+          <Element
+            ref={dropdownRef}
+            onClick={(e: React.MouseEvent) => e.stopPropagation()}
+            style={getDropdownStyle()}
+          >
+            <DropDown
+              size={size}
+              views={{
+                ...views,
+                dropDown: {
+                  borderRadius: '6px',
+                  border: '1px solid color.gray.200',
+                  boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+                  padding: '8px',
+                  maxHeight: '240px',
+                  overflowY: 'auto',
+                },
+              }}
+              options={options}
+              callback={handleCallback}
+              highlightedIndex={highlightedIndex}
+              setHighlightedIndex={setHighlightedIndex}
+            />
+          </Element>
+        )}
       </FieldContent>
-      {!hide && options.length > 0 && (
-        <Element
-          onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          style={{
-            position: 'absolute',
-            top: 'calc(100% + 4px)',
-            left: 0,
-            right: 0,
-            zIndex: 1000,
-          }}
-        >
-          <DropDown
-            size={size}
-            views={{
-              ...views,
-              dropDown: {
-                borderRadius: '6px',
-                border: '1px solid color.gray.200',
-                boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
-                padding: '8px',
-                maxHeight: '240px',
-                overflowY: 'auto',
-              },
-            }}
-            options={options}
-            callback={handleCallback}
-            highlightedIndex={highlightedIndex}
-            setHighlightedIndex={setHighlightedIndex}
-          />
-        </Element>
-      )}
     </FieldContainer>
   );
 };

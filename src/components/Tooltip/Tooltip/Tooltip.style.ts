@@ -43,6 +43,11 @@ export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
 // For backward compatibility
 export const TooltipVariants = getTooltip('light');
 
+// Note: Static positioning logic has been replaced with intelligent viewport-aware
+// positioning in the Tooltip component that automatically chooses optimal placement
+// based on available space and prevents content from going off-screen.
+
+// Legacy positioning function - kept for backward compatibility if needed
 export const getTooltipPositionStyles = (
   position: Position,
   align: Alignment

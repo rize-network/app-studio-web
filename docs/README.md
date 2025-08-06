@@ -1,24 +1,31 @@
 # App Studio Web Component Library Documentation
 
-Welcome to the documentation for the App Studio Web Component Library. This documentation provides comprehensive guides, API references, and examples to help you build high-quality components and applications using our library.
+Welcome to the comprehensive documentation for the App Studio Web Component Library. This documentation provides guides, API references, and examples to help you build high-quality components and applications.
 
-## Documentation Structure
+## 📖 Documentation Structure
 
-- **Getting Started**: Quick start guides to help you begin using the library
-- **Component Development**: Detailed guides for building components
-- **Design System**: Information about the design system, theming, and styling
-- **API Reference**: Detailed API documentation for all components
-- **Tutorials**: Step-by-step tutorials for common tasks
-- **Contributing**: Guidelines for contributing to the library
+### Core Documentation
+- **[Getting Started](./getting-started/introduction.md)** - Quick introduction and setup
+- **[Component Development](./component-development/guide.md)** - Building and contributing components
+- **[API Integration](./api-integration.md)** - Backend integration patterns
+- **[Design System](./design-system/theming.md)** - Theming and styling guidelines
 
-## Using This Documentation
+### Specialized Documentation
+- **[ADK Components](../README-ADK.md)** - Agent Development Kit integration
+- **[API Reference](./api-reference/README.md)** - Detailed component APIs
+- **[Tutorials](./tutorials/README.md)** - Step-by-step guides
+- **[Contributing](./contributing/documentation.md)** - Contribution guidelines
 
-The documentation is organized to support different learning styles and needs:
+## 🚀 Quick Navigation
 
-- If you're new to the library, start with the [Getting Started](./getting-started/introduction.md) guide
-- If you're building components, refer to the [Component Development Guide](./component-development/guide.md)
-- If you need detailed API information, check the [API Reference](./api-reference/README.md)
-- If you want to learn through examples, explore the [Tutorials](./tutorials/README.md)
+### For New Users
+Start with the [Getting Started Guide](./getting-started/introduction.md) to understand the library basics and setup process.
+
+### For Developers
+Refer to the [Component Development Guide](./component-development/guide.md) for building and customizing components.
+
+### For ADK Integration
+Check the [ADK Components documentation](../README-ADK.md) for agent-specific functionality.
 
 ## Documentation Tools
 

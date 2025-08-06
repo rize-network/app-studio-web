@@ -69,7 +69,6 @@ export const DesignSystemTable = () => {
         borderRadius="4px"
         paddingLeft="8px"
         paddingTop="2px"
-        fontSize="12px"
         fontWeight="500"
         content={status}
       >
@@ -86,9 +85,7 @@ export const DesignSystemTable = () => {
       render: (name: string, row: any) => (
         <View>
           <Text fontWeight="600">{name}</Text>
-          <Text fontSize="12px" color="color.gray.500">
-            {row.email}
-          </Text>
+          <Text color="color.gray.500">{row.email}</Text>
         </View>
       ),
     },

@@ -151,7 +151,7 @@ export const CodeEditorLayout = () => {
                 borderRadius="4px"
                 backgroundColor="color.white"
               >
-                <Text fontWeight="bold" fontSize="12px" color="color.gray.500">
+                <Text fontWeight="bold" color="color.gray.500">
                   COMPONENT
                 </Text>
                 <Text>Resizable</Text>
@@ -161,7 +161,7 @@ export const CodeEditorLayout = () => {
                 borderRadius="4px"
                 backgroundColor="color.white"
               >
-                <Text fontWeight="bold" fontSize="12px" color="color.gray.500">
+                <Text fontWeight="bold" color="color.gray.500">
                   ORIENTATION
                 </Text>
                 <Text>horizontal</Text>
@@ -171,7 +171,7 @@ export const CodeEditorLayout = () => {
                 borderRadius="4px"
                 backgroundColor="color.white"
               >
-                <Text fontWeight="bold" fontSize="12px" color="color.gray.500">
+                <Text fontWeight="bold" color="color.gray.500">
                   SIZE
                 </Text>
                 <Text>md</Text>
@@ -181,7 +181,7 @@ export const CodeEditorLayout = () => {
                 borderRadius="4px"
                 backgroundColor="color.white"
               >
-                <Text fontWeight="bold" fontSize="12px" color="color.gray.500">
+                <Text fontWeight="bold" color="color.gray.500">
                   VARIANT
                 </Text>
                 <Text>default</Text>

@@ -12,7 +12,7 @@ import {
 export const CompoundNavigationMenu = () => {
   return (
     <View padding={4} maxWidth={600}>
-      <Text marginBottom={4} fontSize="lg" fontWeight="bold">
+      <Text marginBottom={4} fontWeight="bold">
         Compound Component Pattern
       </Text>
       <View border="1px solid #e2e8f0" borderRadius={8} padding={2}>
@@ -100,7 +100,7 @@ export const CompoundNavigationMenu = () => {
           borderRadius={4}
         >
           <Text>Content area</Text>
-          <Text color="color.gray.600" fontSize="sm">
+          <Text color="color.gray.600">
             The navigation menu on the left uses the compound component pattern.
           </Text>
         </View>

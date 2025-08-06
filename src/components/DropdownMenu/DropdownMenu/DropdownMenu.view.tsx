@@ -1,5 +1,11 @@
-import React, { createContext, useContext, useRef, useState } from 'react';
-import { View, ViewProps } from 'app-studio';
+import React, {
+  createContext,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
+import { View, ViewProps, useElementPosition } from 'app-studio';
 import {
   DropdownMenuContextType,
   DropdownMenuItem as DropdownMenuItemType,
@@ -16,8 +22,8 @@ import {
   DropdownMenuSizes,
   DropdownMenuVariants,
   DropdownMenuItemStates,
-  getDropdownPosition,
 } from './DropdownMenu.style';
+import { ChevronIcon } from '../../Icon/Icon';
 
 // Create context for the DropdownMenu
 const DropdownMenuContext = createContext<DropdownMenuContextType>({
@@ -27,6 +33,7 @@ const DropdownMenuContext = createContext<DropdownMenuContextType>({
   setActiveSubmenuId: () => {},
   size: 'md',
   variant: 'default',
+  triggerRef: { current: null },
 });
 
 // Provider component for the DropdownMenu context
@@ -58,7 +65,7 @@ export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
   views,
   ...props
 }) => {
-  const { isOpen, setIsOpen } = useDropdownMenuContext();
+  const { isOpen, setIsOpen, triggerRef } = useDropdownMenuContext();
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -67,6 +74,7 @@ export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
 
   return (
     <View
+      ref={triggerRef}
       id="dropdown-trigger"
       onClick={handleClick}
       cursor="pointer"
@@ -88,24 +96,134 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   views,
   ...props
 }) => {
-  const {
-    isOpen, //activeSubmenuId, setActiveSubmenuId, size,
-    variant,
-  } = useDropdownMenuContext();
+  const { isOpen, variant, triggerRef } = useDropdownMenuContext();
+
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Use useElementPosition for intelligent positioning
+  const { ref: positionRef, relation } = useElementPosition({
+    trackChanges: true,
+    trackOnHover: true,
+    trackOnScroll: true,
+    trackOnResize: true,
+  });
+
+  const [optimalPosition, setOptimalPosition] = useState({
+    x: 0,
+    y: 0,
+    placement: side,
+  });
+
+  // Sync the position ref with the trigger ref for positioning calculations
+  useEffect(() => {
+    if (triggerRef.current && positionRef) {
+      (positionRef as any).current = triggerRef.current;
+    }
+  }, [triggerRef, positionRef, isOpen]);
+
+  // Calculate optimal position using useElementPosition when the dropdown opens
+  useEffect(() => {
+    if (isOpen && contentRef.current && triggerRef.current) {
+      const triggerRect = triggerRef.current.getBoundingClientRect();
+      let placement = side;
+
+      // Use relation data to determine optimal placement
+      if (relation) {
+        // If preferred side doesn't have enough space, use the side with more space
+        if (side === 'bottom' && relation.space.vertical === 'top') {
+          placement = 'top';
+        } else if (side === 'top' && relation.space.vertical === 'bottom') {
+          placement = 'bottom';
+        } else if (side === 'right' && relation.space.horizontal === 'left') {
+          placement = 'left';
+        } else if (side === 'left' && relation.space.horizontal === 'right') {
+          placement = 'right';
+        }
+      }
+
+      // Calculate position based on optimal placement and alignment
+      let x = 0;
+      let y = 0;
+
+      switch (placement) {
+        case 'bottom':
+          x =
+            align === 'start'
+              ? triggerRect.left
+              : align === 'end'
+              ? triggerRect.right - 180 // Estimated content width
+              : triggerRect.left + triggerRect.width / 2 - 90; // Half of estimated width
+          y = triggerRect.bottom + 8;
+          break;
+        case 'top':
+          x =
+            align === 'start'
+              ? triggerRect.left
+              : align === 'end'
+              ? triggerRect.right - 180
+              : triggerRect.left + triggerRect.width / 2 - 90;
+          y = triggerRect.top - 8; // Will be adjusted with transform
+          break;
+        case 'right':
+          x = triggerRect.right + 8;
+          y =
+            align === 'start'
+              ? triggerRect.top
+              : align === 'end'
+              ? triggerRect.bottom - 100 // Estimated content height
+              : triggerRect.top + triggerRect.height / 2 - 50; // Half of estimated height
+          break;
+        case 'left':
+          x = triggerRect.left - 8; // Will be adjusted with transform
+          y =
+            align === 'start'
+              ? triggerRect.top
+              : align === 'end'
+              ? triggerRect.bottom - 100
+              : triggerRect.top + triggerRect.height / 2 - 50;
+          break;
+      }
+
+      setOptimalPosition({ x, y, placement });
+    }
+  }, [isOpen, side, align, triggerRef, relation]);
 
   if (!isOpen) {
     return null;
   }
 
+  // Create intelligent positioning styles with transform for better placement
+  const getPositionStyles = (): React.CSSProperties => {
+    const baseStyles: React.CSSProperties = {
+      position: 'fixed',
+      left: optimalPosition.x,
+      top: optimalPosition.y,
+      zIndex: 1000,
+    };
+
+    // Add transform based on placement for better positioning
+    switch (optimalPosition.placement) {
+      case 'top':
+        return { ...baseStyles, transform: 'translateY(-100%)' };
+      case 'left':
+        return { ...baseStyles, transform: 'translateX(-100%)' };
+      case 'bottom':
+      case 'right':
+      default:
+        return baseStyles;
+    }
+  };
+
+  const positionStyles = getPositionStyles();
+
   return (
     <View
+      ref={contentRef}
       id="dropdown-menu"
-      position="absolute"
-      zIndex={1000}
       borderRadius={4}
       boxShadow="0px 2px 8px rgba(0, 0, 0, 0.15)"
       overflow="hidden"
-      {...getDropdownPosition(side, align)}
+      style={positionStyles}
       {...DropdownMenuVariants[variant]}
       {...views?.menu}
       {...props}
@@ -117,6 +235,18 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
 
         return <DropdownMenuItem key={item.id} item={item} views={views} />;
       })}
+      {/* Debug info - can be removed in production */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{ fontSize: '10px', opacity: 0.7, padding: '4px' }}>
+          Placement: {optimalPosition.placement}
+          {relation && (
+            <>
+              <br />
+              Space: {relation.space.vertical}-{relation.space.horizontal}
+            </>
+          )}
+        </div>
+      )}
     </View>
   );
 };
@@ -190,18 +320,12 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
 
       {hasSubmenu && (
         <View marginLeft={8} {...views?.submenuIndicator}>
-          <svg
-            width="16px"
-            height="16px"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z"
-              fill="currentColor"
-            />
-          </svg>
+          <ChevronIcon
+            orientation="right"
+            widthHeight={16}
+            color="currentColor"
+            filled={true}
+          />
         </View>
       )}
 

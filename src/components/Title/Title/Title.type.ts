@@ -13,17 +13,7 @@ export type HighlightStyle =
 /**
  * Title size options
  */
-export type TitleSize =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | '2xl'
-  | '3xl'
-  | '4xl'
-  | '5xl'
-  | '6xl';
+export type TitleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 /**
  * Title styles for customization

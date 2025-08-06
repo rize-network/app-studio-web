@@ -72,10 +72,29 @@ export interface TitleProps extends ViewProps {
   animate?: AnimationProps | AnimationProps[];
 
   /**
+   * Controls the animation loop behavior for the title animation
+   * @default '1' (play once)
+   */
+  animationLoop?: number | 'infinite';
+
+  /**
+   * Controls the animation loop behavior for the highlight animation
+   * @default '1' (play once)
+   */
+  highlightAnimationLoop?: number | 'infinite';
+
+  /**
    * Size of the title
    * @default 'xl'
    */
   size?: TitleSize;
+
+  /**
+   * Whether to enable responsive sizing based on breakpoints
+   * When true, the title will automatically adapt its size across mobile/tablet/desktop
+   * @default false
+   */
+  responsive?: boolean;
 
   /**
    * Whether to center the title

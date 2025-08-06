@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Horizontal } from 'app-studio';
+import React, { useEffect, useRef } from 'react';
+import { View, Horizontal, useElementPosition } from 'app-studio';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from '../../../Text/Text';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
@@ -29,6 +29,49 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   // Collects all further props not destructured explicitly.
   ...props
 }) => {
+  const { ref: triggerRef, relation } = useElementPosition();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Get optimal positioning style based on available space
+  const getDropdownStyle = () => {
+    if (!relation) {
+      // Default positioning when relation is not available
+      return {
+        position: 'absolute' as const,
+        top: '100%',
+        marginTop: '8px',
+        left: 0,
+        right: 0,
+        zIndex: 10000,
+        maxHeight: '240px',
+      };
+    }
+
+    const baseStyle = {
+      position: 'absolute' as const,
+      left: 0,
+      right: 0,
+      zIndex: 10000,
+      maxHeight: '240px',
+    };
+
+    // Place dropdown where there's more space vertically
+    if (relation.space.vertical === 'top') {
+      return {
+        ...baseStyle,
+        bottom: '100%',
+        marginBottom: '8px',
+      };
+    } else {
+      return {
+        ...baseStyle,
+        top: '100%',
+        marginTop: '8px',
+      };
+    }
+  };
+
   // Sets up an effect to handle clicking outside the dropdown to close it.
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -79,6 +122,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
       )}
       <View position="relative">
         <Horizontal
+          ref={triggerRef}
           cursor="pointer"
           backgroundColor="color.white"
           boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
@@ -110,78 +154,73 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             </Text>
           </Horizontal>
           {right}
-          {isDropdownVisible && (
-            <View
-              id="combobox-dropdown"
-              position="absolute"
-              backgroundColor="color.white"
-              boxShadow="rgba(0, 0 ,0 ,0.16) 0px 1px 4px"
-              width="100%"
-              overflowY="auto"
-              zIndex={10000}
-              bottom={-8}
-              left={0}
-              transform="translateY(100%)"
-              marginTop="4px"
-              borderRadius="4px"
-              {...views?.dropdown}
-            >
-              {searchEnabled && (
-                <TextField
-                  id={props.id}
-                  name={props.name}
-                  width="100%"
-                  type="search"
-                  value={searchQuery}
-                  onChange={(value) => handleSearch(value)}
-                  hint={placeholder}
-                  isClearable={false}
-                  left={<SearchIcon widthHeight={16} />}
-                  views={{
-                    container: {
-                      width: '100%',
-                      padding: '6px 12px',
-                      borderBottom:
-                        filteredItems.length > 0
-                          ? '1px solid #ccc'
-                          : '1px solid transparent',
-                      ...views?.text,
-                    },
-                  }}
-                />
-              )}
-              {filteredItems.length > 0 && (
-                <View margin={0} padding={4}>
-                  {filteredItems.map((item, index) => (
-                    <Horizontal
-                      justifyContent="space-between"
-                      key={item.value}
-                      padding="12px"
-                      cursor="pointer"
-                      borderRadius={4}
-                      backgroundColor={
-                        index === highlightedIndex
-                          ? 'color.gray.100'
-                          : 'transparent'
-                      }
-                      onMouseEnter={() => setHighlightedIndex(index)}
-                      onClick={() => handleSelect(item)}
-                      {...views?.item}
-                    >
-                      <Text>{item.label}</Text>
-                      <>
-                        {item.icon && item.icon}
-                        {item.value === selectedItem.value &&
-                          showTick &&
-                          !item.icon && <TickIcon widthHeight={20} />}
-                      </>
-                    </Horizontal>
-                  ))}
-                </View>
-              )}
-            </View>
-          )}
         </Horizontal>
+        {isDropdownVisible && (
+          <View
+            ref={dropdownRef}
+            id="combobox-dropdown"
+            backgroundColor="color.white"
+            boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
+            overflowY="auto"
+            borderRadius="4px"
+            style={getDropdownStyle()}
+            {...views?.dropdown}
+          >
+            {searchEnabled && (
+              <TextField
+                id={props.id}
+                name={props.name}
+                width="100%"
+                type="search"
+                value={searchQuery}
+                onChange={(value) => handleSearch(value)}
+                hint={placeholder}
+                isClearable={false}
+                left={<SearchIcon widthHeight={16} />}
+                views={{
+                  container: {
+                    width: '100%',
+                    padding: '6px 12px',
+                    borderBottom:
+                      filteredItems.length > 0
+                        ? '1px solid #ccc'
+                        : '1px solid transparent',
+                    ...views?.text,
+                  },
+                }}
+              />
+            )}
+            {filteredItems.length > 0 && (
+              <View margin={0} padding={4}>
+                {filteredItems.map((item, index) => (
+                  <Horizontal
+                    justifyContent="space-between"
+                    key={item.value}
+                    padding="12px"
+                    cursor="pointer"
+                    borderRadius={4}
+                    backgroundColor={
+                      index === highlightedIndex
+                        ? 'color.gray.100'
+                        : 'transparent'
+                    }
+                    onMouseEnter={() => setHighlightedIndex(index)}
+                    onClick={() => handleSelect(item)}
+                    {...views?.item}
+                  >
+                    <Text>{item.label}</Text>
+                    <>
+                      {item.icon && item.icon}
+                      {item.value === selectedItem.value &&
+                        showTick &&
+                        !item.icon && <TickIcon widthHeight={20} />}
+                    </>
+                  </Horizontal>
+                ))}
+              </View>
+            )}
+          </View>
+        )}
       </View>
     </Horizontal>
   );

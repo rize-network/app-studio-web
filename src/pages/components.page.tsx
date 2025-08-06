@@ -1,11 +1,22 @@
 import React, { Suspense, useState, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { View, Text, Horizontal } from 'app-studio';
+import TreePage from './tree.page';
+import FlowPage from './flow.page';
+import ChatInputDemo from './chat.page';
 
 const GradientPage = lazy(() => import('src/pages/gradient.page'));
 const DragAndDropPage = lazy(() => import('src/pages/dragAndDrop.page'));
 const UploadPage = lazy(() => import('src/pages/upload.page'));
-const AIChatPage = lazy(() => import('src/pages/chat.page'));
+// const AIChatPage = lazy(() => import('src/pages/chat.page'));
+
+const ADKComponentsPage = lazy(
+  () => import('src/pages/adk/adkComponents.page')
+);
+const AgentChatPage = lazy(() => import('src/pages/adk/agentChat.page'));
+const AdkIntegrationPage = lazy(
+  () => import('src/pages/adk/adkIntegration.page')
+);
 
 // Lazy-loaded imports
 const AccordionPage = lazy(() => import('src/pages/accordion.page'));
@@ -18,18 +29,21 @@ const CardPage = lazy(() => import('src/pages/card.page'));
 const CarouselPage = lazy(() => import('src/pages/carousel.page'));
 const ChartPage = lazy(() => import('src/pages/chart.page'));
 const CheckboxPage = lazy(() => import('src/pages/checkbox.page'));
+const ColorPickerPage = lazy(() => import('src/pages/colorPicker.page'));
 const ComboBoxPage = lazy(() => import('src/pages/comboBox.page'));
 const CommandPage = lazy(() => import('src/pages/command.page'));
 const ContextMenuPage = lazy(() => import('src/pages/contextMenu.page'));
 const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
 const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
 const DropdownMenuPage = lazy(() => import('src/pages/dropdownMenu.page'));
+const EmojiPickerPage = lazy(() => import('src/pages/emojiPicker.page'));
 const FormikPage = lazy(() => import('src/pages/formik.page'));
 const HomePage = lazy(() => import('src/pages/home.page'));
 const HoverCardPage = lazy(() => import('src/pages/hoverCard.page'));
 const LinkPage = lazy(() => import('src/pages/link.page'));
 const LoaderPage = lazy(() => import('src/pages/loader.page'));
 const IconPage = lazy(() => import('src/pages/icon.page'));
+const TagsPage = lazy(() => import('src/pages/tags.page'));
 const MessagePage = lazy(() => import('src/pages/message.page'));
 const MenubarPage = lazy(() => import('src/pages/menubar.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
@@ -55,20 +69,35 @@ const TooltipPage = lazy(() => import('src/pages/tooltip.page'));
 const TogglePage = lazy(() => import('src/pages/toggle.page'));
 const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 
+const BackgroundPage = lazy(() => import('src/pages/background.page'));
+
 export const componentList = [
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
-  { name: 'Chat', path: '/chat', element: <AIChatPage /> },
+  { name: 'Chat', path: '/chat', element: <ChatInputDemo /> },
+  { name: 'Agent Chat', path: '/agent-chat', element: <AgentChatPage /> },
+  {
+    name: 'ADK Components',
+    path: '/adk-components',
+    element: <ADKComponentsPage />,
+  },
+  {
+    name: 'ADK Integration',
+    path: '/adk-integration',
+    element: <AdkIntegrationPage />,
+  },
   { name: 'Gradient', path: '/gradient', element: <GradientPage /> },
 
   { name: 'Alert', path: '/alert', element: <AlertPage /> },
   { name: 'AspectRatio', path: '/aspectratio', element: <AspectRatioPage /> },
   { name: 'Avatar', path: '/avatar', element: <AvatarPage /> },
+  { name: 'Background', path: '/background', element: <BackgroundPage /> },
   { name: 'Badge', path: '/badge', element: <BadgePage /> },
   { name: 'Button', path: '/button', element: <ButtonPage /> },
   { name: 'Card', path: '/card', element: <CardPage /> },
   { name: 'Carousel', path: '/carousel', element: <CarouselPage /> },
   { name: 'Chart', path: '/chart', element: <ChartPage /> },
   { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
+  { name: 'ColorPicker', path: '/colorpicker', element: <ColorPickerPage /> },
   { name: 'Command', path: '/command', element: <CommandPage /> },
   { name: 'ComboBox', path: '/combobox', element: <ComboBoxPage /> },
   { name: 'ContextMenu', path: '/contextmenu', element: <ContextMenuPage /> },
@@ -83,12 +112,18 @@ export const componentList = [
     path: '/dropdownmenu',
     element: <DropdownMenuPage />,
   },
+  { name: 'EmojiPicker', path: '/emojipicker', element: <EmojiPickerPage /> },
   { name: 'Formik', path: '/formik', element: <FormikPage /> },
   { name: 'Home', path: '/home', element: <HomePage /> },
   { name: 'HoverCard', path: '/hovercard', element: <HoverCardPage /> },
   { name: 'Link', path: '/link', element: <LinkPage /> },
   { name: 'Loader', path: '/loader', element: <LoaderPage /> },
   { name: 'Icon', path: '/icon', element: <IconPage /> },
+  {
+    name: 'TagInput',
+    path: '/tagInput',
+    element: <TagsPage />,
+  },
   { name: 'Drag and Drop', path: '/dragAndDrop', element: <DragAndDropPage /> },
 
   { name: 'Message', path: '/message', element: <MessagePage /> },
@@ -125,6 +160,8 @@ export const componentList = [
   { name: 'Toggle', path: '/toggle', element: <TogglePage /> },
   { name: 'ToggleGroup', path: '/togglegroup', element: <ToggleGroupPage /> },
   { name: 'Upload', path: '/upload', element: <UploadPage /> },
+  { name: 'Tree', path: '/tree', element: <TreePage /> },
+  { name: 'Flow', path: '/flow', element: <FlowPage /> },
 ];
 
 const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (

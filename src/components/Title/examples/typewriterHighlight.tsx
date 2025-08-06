@@ -36,7 +36,7 @@ export const TypewriterHighlightDemo = () => {
         highlightColor="theme.primary"
         highlightTypewriter={true}
         highlightTypewriterDuration={1500}
-        size="2xl"
+        size="xl"
       >
         This text has a typewriter effect on the highlighted word
       </Title>
@@ -49,7 +49,7 @@ export const TypewriterHighlightDemo = () => {
         highlightColor="theme.primary"
         highlightTypewriter={true}
         highlightTypewriterDuration={2500}
-        size="2xl"
+        size="xl"
       >
         This text has multiple highlighted words with typewriter effect
       </Title>
@@ -63,7 +63,7 @@ export const TypewriterHighlightDemo = () => {
         highlightSecondaryColor="color.purple.500"
         highlightTypewriter={true}
         highlightTypewriterDuration={1000}
-        size="2xl"
+        size="xl"
       >
         This text has a gradient highlight with typewriter effect
       </Title>
@@ -76,7 +76,7 @@ export const TypewriterHighlightDemo = () => {
         highlightSecondaryColor="color.purple.500"
         highlightTypewriter={true}
         highlightTypewriterDuration={3000}
-        size="2xl"
+        size="xl"
       >
         This entire title has a gradient with typewriter effect
       </Title>
@@ -95,7 +95,7 @@ export const TypewriterHighlightDemo = () => {
           duration: '0.5s',
           delay: '1.5s', // Start animation after typewriter completes
         }}
-        size="2xl"
+        size="xl"
       >
         This highlight has typewriter followed by animation
       </Title>
@@ -116,7 +116,7 @@ export const TypewriterHighlightDemo = () => {
         highlightColor="theme.primary"
         highlightTypewriter={true}
         highlightTypewriterDuration={1000}
-        size="2xl"
+        size="xl"
       >
         Our changing solution for your business
       </Title>

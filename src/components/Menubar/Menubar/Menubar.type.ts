@@ -25,6 +25,7 @@ export interface MenubarContextType {
   orientation: Orientation;
   size: Size;
   variant: Variant;
+  triggerRefs: React.MutableRefObject<Record<string, HTMLElement | null>>;
 }
 
 export interface MenubarStyles {

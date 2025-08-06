@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Background Snapshots Aurora background to match snapshot 1`] = `
+<div
+  className="pn-relative dy-flex fdn-column ht-100vh ais-center jct-center"
+>
+  <div
+    style={
+      Object {
+        "animation": "aurora 4s ease infinite",
+        "backgroundImage": "
+      repeating-linear-gradient(100deg, rgb(59, 130, 246), rgb(196, 181, 253), rgb(147, 197, 253), rgb(221, 214, 254), rgb(96, 165, 250)),
+      repeating-linear-gradient(100deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 7%, rgba(255,255,255,0) 10%, rgba(255,255,255,0) 12%, rgba(255,255,255,1) 16%)
+    ",
+        "backgroundPosition": "50% 50%, 50% 50%",
+        "backgroundSize": "300% 200%",
+        "filter": "blur(10px)",
+        "inset": "-10px",
+        "maskImage": "radial-gradient(ellipse at 100% 0%, black 10%, transparent 70%)",
+        "opacity": 0.5,
+        "pointerEvents": "none",
+        "position": "absolute",
+      }
+    }
+  />
+  Aurora Content
+  <style>
+    
+          @keyframes aurora {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+        
+  </style>
+</div>
+`;
+
+exports[`Background Snapshots Meteors background to match snapshot 1`] = `
+<div
+  className="wh-300px ht-300px wht-300 bcr- pn-relative"
+>
+  <div
+    className="wh-2px ht-2px animation-name-animation-15 animation-duration-1500ms animation-timing-function-linear animation-delay-360p7849773885239ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-forwards animation-play-state-running pn-absolute tp-0px lt--63px wh-2px ht-2px brs-9999px bcr- bsw-0-0-0-1px-rgba255-255-255-0p1 tm-rotate215deg"
+  >
+    <div
+      className="wh-1px ht-1px pn-absolute tp--1px lt--1px wh-1px ht-1px brs-9999px bcr- bsw-0-10px-0-1px-rgba255-255-255-0p1"
+    />
+  </div>
+  <div
+    className="wh-2px ht-2px animation-name-animation-3 animation-duration-2500ms animation-timing-function-linear animation-delay-446p10529346519803ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-forwards animation-play-state-running pn-absolute tp-0px lt--37px wh-2px ht-2px brs-9999px bcr- bsw-0-0-0-1px-rgba255-255-255-0p1 tm-rotate215deg"
+  >
+    <div
+      className="wh-1px ht-1px pn-absolute tp--1px lt--1px wh-1px ht-1px brs-9999px bcr- bsw-0-10px-0-1px-rgba255-255-255-0p1"
+    />
+  </div>
+  <div
+    className="wh-2px ht-2px animation-name-animation-6 animation-duration-1s animation-timing-function-linear animation-delay-513p0741086063239ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-forwards animation-play-state-running pn-absolute tp-0px lt-87px wh-2px ht-2px brs-9999px bcr- bsw-0-0-0-1px-rgba255-255-255-0p1 tm-rotate215deg"
+  >
+    <div
+      className="wh-1px ht-1px pn-absolute tp--1px lt--1px wh-1px ht-1px brs-9999px bcr- bsw-0-10px-0-1px-rgba255-255-255-0p1"
+    />
+  </div>
+</div>
+`;
+
+exports[`Background Snapshots Wall background to match snapshot 1`] = `
+<div
+  className="wh-300px ht-300px pg-16px wht-300 zix-0 tm-skewX-48deg-skewY14deg-scale0p675-rotate0deg-translateZ0"
+>
+  <div
+    className="dy-flex fdn-row"
+  >
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+  </div>
+  <div
+    className="dy-flex fdn-row"
+  >
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+  </div>
+  <div
+    className="dy-flex fdn-row"
+  >
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+    <div
+      className="ht-6p666666666666667px wh-20px bsee-solid bcrr- bwh-0p5px bcr---hover"
+    />
+  </div>
+</div>
+`;

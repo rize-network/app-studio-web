@@ -20,6 +20,7 @@ export const AvatarView = ({
   imageError,
   setImageError,
   onClick = () => {},
+  children,
 }: AvatarViewProps) => {
   // Determines the size of the avatar by mapping the size prop to the predefined AvatarSizeMap.
   const avatarSize = AvatarSizeMap[size];
@@ -39,7 +40,7 @@ export const AvatarView = ({
       onClick={onClick}
       {...views?.container}
     >
-      {!imageError ? (
+      {!imageError && src ? (
         <Image
           alt="IM"
           src={src}
@@ -57,6 +58,7 @@ export const AvatarView = ({
           {fallback}
         </Text>
       )}
+      {children}
     </Center>
   );
 };

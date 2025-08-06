@@ -4,15 +4,14 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
+  useEffect,
 } from 'react';
-import { View } from 'app-studio';
+import { View, useElementPosition } from 'app-studio';
 import { HoverCardContextType } from './HoverCard.type';
 import {
   HoverCardContentProps,
   HoverCardTriggerProps,
 } from './HoverCard.props';
-import { getContentPositionStyles } from './HoverCard.style';
-import { useRect } from '../../../hooks/useRect';
 
 // Create context for the HoverCard
 const HoverCardContext = createContext<HoverCardContextType>({
@@ -98,7 +97,7 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
   borderRadius = '4px',
   boxShadow = '0px 2px 8px rgba(0, 0, 0, 0.15)',
   padding = '12px',
-  minWidth = '200px',
+  minWidth = '50px',
   maxWidth = '300px',
   ...props
 }) => {
@@ -112,16 +111,23 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
     triggerId,
   } = useHoverCardContext();
 
-  // Use hook to measure trigger for positioning
-  const triggerRect = useRect(triggerRef);
+  // Use useElementPosition for intelligent positioning
+  const { ref: positionRef, relation } = useElementPosition({
+    trackChanges: true,
+    trackOnHover: true,
+    trackOnScroll: true,
+    trackOnResize: true,
+  });
 
-  // Calculate position based on trigger dimensions and side prop
-  const positionStyles = getContentPositionStyles(
-    triggerRect,
-    side,
-    align,
-    sideOffset
-  );
+  // Sync the position ref with the trigger ref for positioning calculations
+  useEffect(() => {
+    if (triggerRef?.current && positionRef?.current !== triggerRef.current) {
+      // Update the position tracking to use the trigger element
+      if (positionRef) {
+        (positionRef as any).current = triggerRef.current;
+      }
+    }
+  }, [triggerRef, positionRef, isOpen]);
 
   const handleMouseEnter = () => cancelCloseTimer(); // Keep card open if mouse enters content
   const handleMouseLeave = () => closeCard();
@@ -129,6 +135,83 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
   if (!isOpen) {
     return null; // Don't render content if not open
   }
+
+  // Create intelligent positioning styles based on useElementPosition relation data
+  const getPositionStyles = (): React.CSSProperties => {
+    if (!relation || !triggerRef?.current) {
+      // Fallback positioning if relation data is not available
+      return {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        zIndex: 1000,
+      };
+    }
+
+    const triggerRect = triggerRef.current.getBoundingClientRect();
+    let placement = side;
+
+    // Use relation data to determine optimal placement
+    // If preferred side doesn't have enough space, use the side with more space
+    if (side === 'bottom' && relation.space.vertical === 'top') {
+      placement = 'top';
+    } else if (side === 'top' && relation.space.vertical === 'bottom') {
+      placement = 'bottom';
+    } else if (side === 'right' && relation.space.horizontal === 'left') {
+      placement = 'left';
+    } else if (side === 'left' && relation.space.horizontal === 'right') {
+      placement = 'right';
+    }
+
+    // Calculate position based on optimal placement
+    let x = 0;
+    let y = 0;
+
+    switch (placement) {
+      case 'bottom':
+        x = triggerRect.left + triggerRect.width / 2;
+        y = triggerRect.bottom + sideOffset;
+        break;
+      case 'top':
+        x = triggerRect.left + triggerRect.width / 2;
+        y = triggerRect.top - sideOffset;
+        break;
+      case 'right':
+        x = triggerRect.right + sideOffset;
+        y = triggerRect.top + triggerRect.height / 2;
+        break;
+      case 'left':
+        x = triggerRect.left - sideOffset;
+        y = triggerRect.top + triggerRect.height / 2;
+        break;
+    }
+
+    return {
+      position: 'fixed',
+      left: x,
+      top: y,
+      zIndex: 1000,
+      transform: getTransformOrigin(placement),
+    };
+  };
+
+  // Helper function to set transform origin for better positioning
+  const getTransformOrigin = (placement: string): string => {
+    switch (placement) {
+      case 'bottom':
+        return 'translate(-50%, 0)';
+      case 'top':
+        return 'translate(-50%, -100%)';
+      case 'right':
+        return 'translate(0, -50%)';
+      case 'left':
+        return 'translate(-100%, -50%)';
+      default:
+        return 'translate(-50%, 0)';
+    }
+  };
+
+  const positionStyles = getPositionStyles();
 
   return (
     <View
@@ -144,8 +227,7 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
       padding={padding}
       minWidth={minWidth}
       maxWidth={maxWidth}
-      zIndex={1000}
-      // Combine calculated position styles with user styles
+      // Combine intelligent position styles with user styles
       style={{
         ...positionStyles,
         ...userStyle, // Allow user override

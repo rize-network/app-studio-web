@@ -25,6 +25,7 @@ This section provides detailed API documentation for all components in the App S
 ## Form Components
 
 - [Checkbox](./form/checkbox.md) - Checkbox input
+- [ChatInput](./form/chat-input.md) - Chat input with file uploads and prompt examples
 - [Radio](./form/radio.md) - Radio input
 - [Select](./form/select.md) - Select dropdown
 - [Switch](./form/switch.md) - Toggle switch
@@ -55,6 +56,8 @@ This section provides detailed API documentation for all components in the App S
 - [Card](./data-display/card.md) - Content container
 - [Table](./data-display/table.md) - Tabular data
 - [Chart](./data-display/chart.md) - Data visualization
+- [Flow](./data-display/flow.md) - Interactive workflow diagrams and flowcharts
+- [Tree](./data-display/tree.md) - Hierarchical tree structure
 
 ## Utility Components
 

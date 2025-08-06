@@ -5,32 +5,96 @@ import { TitleSize, HighlightStyle } from './Title.type';
  * Font sizes for different title sizes
  */
 export const TitleSizes = {
-  xs: 16,
-  sm: 20,
-  md: 24,
-  lg: 32,
-  xl: 40,
-  '2xl': 48,
-  '3xl': 56,
-  '4xl': 64,
-  '5xl': 72,
-  '6xl': 80,
+  xs: 24,
+  sm: 36,
+  md: 48,
+  lg: 64,
+  xl: 72,
 };
 
 /**
  * Line heights for different title sizes
  */
 export const LineHeights: Record<TitleSize, number> = {
-  xs: 24,
-  sm: 28,
-  md: 32,
-  lg: 40,
-  xl: 48,
-  '2xl': 56,
-  '3xl': 64,
-  '4xl': 72,
-  '5xl': 80,
-  '6xl': 88,
+  xs: 32,
+  sm: 48,
+  md: 56,
+  lg: 72,
+  xl: 80,
+};
+
+/**
+ * Responsive typography system that maps title sizes to responsive breakpoints
+ * Based on the Typography system with dynamic breakpoint sizing
+ */
+export const ResponsiveTypography: Record<
+  TitleSize,
+  {
+    lineHeight: string;
+    fontWeight: number;
+    marginBottom?: number;
+    letterSpacing?: number;
+    media: {
+      mobile: { fontSize: number; width?: string; minWidth?: string };
+      tablet: { fontSize: number; width?: string; minWidth?: string };
+      desktop: { fontSize: number; width?: string; minWidth?: string };
+    };
+  }
+> = {
+  // xl maps to H1 - Largest heading
+  xl: {
+    lineHeight: '120%',
+    fontWeight: 500,
+    marginBottom: 20,
+    letterSpacing: 1.25,
+    media: {
+      mobile: { fontSize: 42, width: '100%' },
+      tablet: { fontSize: 50, width: '100%' },
+      desktop: { fontSize: 58, minWidth: '60%' },
+    },
+  },
+  // lg maps to H2 - Large heading
+  lg: {
+    lineHeight: '100%',
+    fontWeight: 500,
+    media: {
+      mobile: { fontSize: 32 },
+      tablet: { fontSize: 40 },
+      desktop: { fontSize: 48 },
+    },
+  },
+  // md maps to H3 - Medium heading
+  md: {
+    lineHeight: '100%',
+    fontWeight: 500,
+    media: {
+      mobile: { fontSize: 20 },
+      tablet: { fontSize: 30 },
+      desktop: { fontSize: 40 },
+    },
+  },
+  // sm maps to T1 - Title text
+  sm: {
+    lineHeight: '100%',
+    fontWeight: 400,
+    letterSpacing: -0.2,
+    media: {
+      mobile: { fontSize: 16 },
+      tablet: { fontSize: 28 },
+      desktop: { fontSize: 32 },
+    },
+  },
+  // xs maps to S1 - Subtitle text
+  xs: {
+    lineHeight: '120%',
+    fontWeight: 400,
+    letterSpacing: -0.2,
+    media: {
+      mobile: { fontSize: 12 },
+      tablet: { fontSize: 18 },
+      desktop: { fontSize: 24 },
+    },
+  },
 };
 
 /**

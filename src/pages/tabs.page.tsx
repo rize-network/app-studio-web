@@ -1,6 +1,10 @@
 import React from 'react';
 import { View } from 'app-studio';
-import { Default, StylesTabs } from 'src/components/Tabs/examples';
+import {
+  Default,
+  StylesTabs,
+  CompoundTabs,
+} from 'src/components/Tabs/examples';
 
 export const TabsPage = () => {
   return (
@@ -22,6 +26,12 @@ export const TabsPage = () => {
             <td>styles</td>
             <td>
               <StylesTabs />
+            </td>
+          </tr>
+          <tr>
+            <td>compound</td>
+            <td>
+              <CompoundTabs />
             </td>
           </tr>
         </tbody>

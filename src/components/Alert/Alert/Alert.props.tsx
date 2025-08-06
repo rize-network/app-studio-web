@@ -6,9 +6,11 @@ export interface AlertProps extends ViewProps {
   // Optional icon property, expecting a React node element
   icon?: React.ReactNode;
   // Mandatory title property, must be a string
-  title: string;
+  title?: string;
   // Mandatory description property, must be a string
-  description: string | React.ReactNode;
+  description?: string | React.ReactNode;
+
+  children?: React.ReactNode;
   // Optional variant property to determine the style of the alert
   variant?: Variant;
   // Optional styles property to apply custom styles to the alert component

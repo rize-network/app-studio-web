@@ -13,7 +13,7 @@ export const CompoundDemo = () => {
 
   return (
     <View height="300px" width="100%">
-      <Text fontSize="lg" fontWeight="bold" marginBottom={2}>
+      <Text fontWeight="bold" marginBottom={2}>
         Compound Component Pattern
       </Text>
       <Carousel
@@ -61,7 +61,7 @@ export const CustomCompoundDemo = () => {
 
   return (
     <View height="300px" width="100%" marginTop={8}>
-      <Text fontSize="lg" fontWeight="bold" marginBottom={2}>
+      <Text fontWeight="bold" marginBottom={2}>
         Custom Compound Components
       </Text>
       <Carousel

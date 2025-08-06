@@ -57,6 +57,11 @@ export const MenubarItemStates = {
   },
 };
 
+// Note: Basic positioning logic has been replaced with intelligent viewport-aware
+// positioning in the Menubar component that automatically chooses optimal placement
+// based on available space and orientation preferences.
+
+// Legacy positioning function - kept for backward compatibility if needed
 export const getMenubarContentPosition = (
   orientation: Orientation
 ): ViewProps => {

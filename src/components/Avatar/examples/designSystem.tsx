@@ -38,9 +38,7 @@ export const DesignSystemAvatars = () => {
           {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
             <Vertical key={size} alignItems="center" gap={8}>
               <Avatar src={sampleImages[0]} size={size as any} />
-              <Text fontSize="12px" color="color.gray.500">
-                {size}
-              </Text>
+              <Text color="color.gray.500">{size}</Text>
             </Vertical>
           ))}
         </Horizontal>
@@ -87,9 +85,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text fontSize="12px" color="color.gray.500">
-              Border
-            </Text>
+            <Text color="color.gray.500">Border</Text>
           </Vertical>
 
           {/* Shadow */}
@@ -102,9 +98,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text fontSize="12px" color="color.gray.500">
-              Shadow
-            </Text>
+            <Text color="color.gray.500">Shadow</Text>
           </Vertical>
 
           {/* Custom Fallback */}
@@ -122,9 +116,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text fontSize="12px" color="color.gray.500">
-              Custom Fallback
-            </Text>
+            <Text color="color.gray.500">Custom Fallback</Text>
           </Vertical>
 
           {/* Gradient */}
@@ -144,9 +136,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text fontSize="12px" color="color.gray.500">
-              Gradient
-            </Text>
+            <Text color="color.gray.500">Gradient</Text>
           </Vertical>
         </Horizontal>
       </View>

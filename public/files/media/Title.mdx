@@ -2,56 +2,47 @@
 
 A component for rendering animated and highlighted titles in hero sections.
 
-### **Import**
+## Import
 
-```tsx
+```jsx
 import { Title } from "@app-studio/web";
 ```
 
-### **Default**
+## Default
 
-```tsx
+```jsx
 <Title>Simple Hero Title</Title>
 ```
 
-### **Sizes**
+## Sizes
 
-"**_size_**" changes the title size. It has a type "TitleSize" with default value "xl".
+The `size` prop changes the title size. It has a type `TitleSize` with default value `"xl"`.
 
-```tsx
-import { Vertical } from "app-studio";
-
+```jsx
 <Vertical gap={32}>
   <Title size="xs">Extra Small Title</Title>
   <Title size="sm">Small Title</Title>
   <Title size="md">Medium Title</Title>
   <Title size="lg">Large Title</Title>
   <Title size="xl">Extra Large Title</Title>
-  <Title size="2xl">2XL Title</Title>
-  <Title size="3xl">3XL Title</Title>
-  <Title size="4xl">4XL Title</Title>
-  <Title size="5xl">5XL Title</Title>
-  <Title size="6xl">6XL Title</Title>
 </Vertical>
 ```
 
-### **Highlight Text**
+## Highlight Text
 
-"**_highlightText_**" specifies which part of the text should be highlighted. You can provide a string or an array of strings.
+The `highlightText` prop specifies which part of the text should be highlighted. You can provide a string or an array of strings.
 
-```tsx
+```jsx
 <Title highlightText="highlighted" highlightStyle="background" highlightColor="theme.primary">
   Text with highlighted words
 </Title>
 ```
 
-### **Highlight Styles**
+## Highlight Styles
 
-"**_highlightStyle_**" determines how the highlighted text is styled. Options include 'background', 'underline', 'gradient', 'outline', and 'glow'.
+The `highlightStyle` prop determines how the highlighted text is styled. Options include `'background'`, `'underline'`, `'gradient'`, `'outline'`, and `'glow'`.
 
-```tsx
-import { Vertical } from "app-studio";
-
+```jsx
 <Vertical gap={32}>
   <Title highlightText="background" highlightStyle="background" highlightColor="theme.primary">
     Text with background highlight
@@ -80,11 +71,11 @@ import { Vertical } from "app-studio";
 </Vertical>
 ```
 
-### **Multiple Highlights**
+## Multiple Highlights
 
 You can highlight multiple parts of the text by providing an array of strings.
 
-```tsx
+```jsx
 <Title
   highlightText={["multiple", "highlights"]}
   highlightStyle="background"
@@ -94,23 +85,21 @@ You can highlight multiple parts of the text by providing an array of strings.
 </Title>
 ```
 
-### **Animations**
+## Animations
 
 The Title component supports animations through the `animate` prop, which accepts an animation object with properties like `from`, `to`, `duration`, etc.
 
-```tsx
-import { Vertical } from "app-studio";
-
+```jsx
 <Vertical gap={48}>
   <Title
     animate={{
       from: { opacity: 0 },
       to: { opacity: 1 },
       duration: '1.5s',
-      iterationCount: '1',
     }}
+    animationLoop={1}
   >
-    Fade In Animation
+    Fade In Animation (Once)
   </Title>
 
   <Title
@@ -118,30 +107,92 @@ import { Vertical } from "app-studio";
       from: { transform: 'translateX(-100%)' },
       to: { transform: 'translateX(0)' },
       duration: '1s',
-      iterationCount: '1',
     }}
+    animationLoop={3}
   >
-    Slide In From Left
+    Slide In From Left (3 Times)
   </Title>
 
   <Title
     animate={{
-      from: { clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)' },
-      to: { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)' },
-      duration: '1.5s',
-      iterationCount: '1',
+      from: { transform: 'translateX(-10px)' },
+      to: { transform: 'translateX(10px)' },
+      duration: '2s',
+      direction: 'alternate',
     }}
+    animationLoop="infinite"
   >
-    Reveal Animation
+    Infinite Wiggle Animation
   </Title>
 </Vertical>
 ```
 
-### **Highlight Animations**
+## Animation Loop Control
+
+You can control how many times animations repeat using the `animationLoop` and `highlightAnimationLoop` props.
+
+```jsx
+<Vertical gap={32}>
+  {/* Animation plays once (default) */}
+  <Title
+    animate={{
+      from: { opacity: 0, transform: 'translateY(-20px)' },
+      to: { opacity: 1, transform: 'translateY(0)' },
+      duration: '1s',
+    }}
+    animationLoop={1}
+  >
+    Animation Plays Once
+  </Title>
+
+  {/* Animation plays 3 times */}
+  <Title
+    animate={{
+      from: { transform: 'scale(0.8)' },
+      to: { transform: 'scale(1)' },
+      duration: '0.8s',
+    }}
+    animationLoop={3}
+  >
+    Animation Plays Three Times
+  </Title>
+
+  {/* Infinite animation loop */}
+  <Title
+    animate={{
+      from: { transform: 'translateX(-10px)' },
+      to: { transform: 'translateX(10px)' },
+      duration: '2s',
+      direction: 'alternate',
+    }}
+    animationLoop="infinite"
+  >
+    Animation Loops Infinitely
+  </Title>
+
+  {/* Highlight animation with infinite loop */}
+  <Title
+    highlightAnimate={{
+      from: { transform: 'rotate(-5deg)' },
+      to: { transform: 'rotate(5deg)' },
+      duration: '1s',
+      direction: 'alternate',
+    }}
+    highlightAnimationLoop="infinite"
+    highlightText="Wiggling"
+    highlightStyle="outline"
+    highlightColor="theme.warning"
+  >
+    Title with Wiggling Highlight
+  </Title>
+</Vertical>
+```
+
+## Highlight Animations
 
 You can animate just the highlighted text using the `highlightAnimate` prop.
 
-```tsx
+```jsx
 <Title
   highlightText="animated highlight"
   highlightStyle="background"
@@ -157,11 +208,11 @@ You can animate just the highlighted text using the `highlightAnimate` prop.
 </Title>
 ```
 
-### **Alternating Text**
+## Alternating Text
 
 The Title component can cycle through different words in place of the highlighted text using the `alternateHighlightText` and `alternateAnimation` props.
 
-```tsx
+```jsx
 <Title
   highlightText="changing"
   alternateHighlightText={[
@@ -179,11 +230,11 @@ The Title component can cycle through different words in place of the highlighte
 </Title>
 ```
 
-### **Typewriter Effect**
+## Typewriter Effect
 
 You can add a typewriter effect to the highlighted text using the `highlightTypewriter` prop.
 
-```tsx
+```jsx
 <Title
   highlightText="typewriter"
   highlightStyle="background"
@@ -195,11 +246,59 @@ You can add a typewriter effect to the highlighted text using the `highlightType
 </Title>
 ```
 
-### **Responsive**
+## Responsive
 
-You can make the title responsive using the `media` prop.
+You can make the title responsive in two ways:
 
-```tsx
+### Using the `responsive` prop (Recommended)
+
+The `responsive` prop automatically applies responsive sizing based on the current `size` prop using a predefined typography scale:
+
+```jsx
+<Title
+  size="xl"
+  responsive={true}
+  highlightText="Responsive"
+  highlightStyle="background"
+  highlightColor="theme.primary"
+>
+  Responsive XL Title (H1 scale)
+</Title>
+
+<Title
+  size="lg"
+  responsive={true}
+  highlightText="Responsive"
+  highlightStyle="gradient"
+  highlightColor="theme.primary"
+  highlightSecondaryColor="theme.secondary"
+>
+  Responsive LG Title (H2 scale)
+</Title>
+
+<Title
+  size="md"
+  responsive={true}
+  highlightText="Responsive"
+  highlightStyle="underline"
+  highlightColor="theme.accent"
+>
+  Responsive MD Title (H3 scale)
+</Title>
+```
+
+The responsive prop maps sizes to typography scales:
+- `xl` → H1 scale (46px mobile, 52px tablet, 58px desktop)
+- `lg` → H2 scale (28px mobile, 36px tablet, 48px desktop)
+- `md` → H3 scale (28px mobile, 34px tablet, 40px desktop)
+- `sm` → T1 scale (24px mobile, 28px tablet, 32px desktop)
+- `xs` → S1 scale (16px mobile, 18px tablet, 20px desktop)
+
+### Using the `media` prop (Manual)
+
+For custom responsive behavior, you can use the `media` prop:
+
+```jsx
 <Title
   media={{
     mobile: {
@@ -219,15 +318,15 @@ You can make the title responsive using the `media` prop.
   highlightStyle="background"
   highlightColor="theme.primary"
 >
-  Responsive Title Example
+  Manual Responsive Title
 </Title>
 ```
 
-### **Custom Styling**
+## Custom Styling
 
 You can customize the title using the `views` prop.
 
-```tsx
+```jsx
 <Title
   views={{
     container: {
@@ -248,12 +347,9 @@ You can customize the title using the `views` prop.
 </Title>
 ```
 
-### **Hero Section Example**
+## Hero Section Example
 
-```tsx
-import { Button, Text } from "@app-studio/web";
-import { Vertical, Horizontal, View } from "app-studio";
-
+```jsx
 <View
   backgroundColor="color.gray.50"
   padding={48}
@@ -262,7 +358,7 @@ import { Vertical, Horizontal, View } from "app-studio";
 >
   <Vertical gap={24} maxWidth={800} marginX="auto">
     <Title
-      size="4xl"
+      size="xl"
       animate={{
         from: { opacity: 0 },
         to: { opacity: 1 },
@@ -299,9 +395,9 @@ import { Vertical, Horizontal, View } from "app-studio";
 </View>
 ```
 
-## **Types**
+## Types
 
-```tsx
+```typescript
 export type HighlightStyle =
   | 'underline'   // Underline the text
   | 'background'  // Background color highlight
@@ -314,12 +410,7 @@ export type TitleSize =
   | 'sm'
   | 'md'
   | 'lg'
-  | 'xl'
-  | '2xl'
-  | '3xl'
-  | '4xl'
-  | '5xl'
-  | '6xl';
+  | 'xl';
 
 export interface TitleProps extends ViewProps {
   /**
@@ -365,10 +456,29 @@ export interface TitleProps extends ViewProps {
   animate?: AnimationProps | AnimationProps[];
 
   /**
+   * Controls the animation loop behavior for the title animation
+   * @default 1 (play once)
+   */
+  animationLoop?: number | 'infinite';
+
+  /**
+   * Controls the animation loop behavior for the highlight animation
+   * @default 1 (play once)
+   */
+  highlightAnimationLoop?: number | 'infinite';
+
+  /**
    * Size of the title
    * @default 'xl'
    */
   size?: TitleSize;
+
+  /**
+   * Whether to enable responsive sizing based on breakpoints
+   * When true, the title will automatically adapt its size across mobile/tablet/desktop
+   * @default false
+   */
+  responsive?: boolean;
 
   /**
    * Whether to center the title
@@ -416,6 +526,9 @@ The Title component:
 - Use the Title component for main headings and important text that needs emphasis
 - Choose highlight styles that maintain good contrast with the background
 - Use animations sparingly to avoid distracting users
+- Use `animationLoop` and `highlightAnimationLoop` to control animation repetition
+- Prefer finite loop counts over infinite animations for better user experience
+- Use the `responsive` prop for automatic responsive sizing based on predefined typography scales
 - Consider using responsive sizing for different screen sizes
 - Limit the use of alternating text to avoid confusion
 - Ensure that any animations respect user preferences for reduced motion

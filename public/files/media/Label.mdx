@@ -1,18 +1,438 @@
 # Label
 
-Stylable text element supporting various typographic options
+A semantic text element designed for form labels and descriptive text with comprehensive typography options, accessibility features, and flexible styling. Perfect for form fields, section headers, and any text that needs semantic meaning.
 
 ### **Import**
   ```tsx
   import { Label } from '@app-studio/web';
   ```
 
-## Props
+### **Basic Usage**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+import { TextField } from '@app-studio/web';
+import { Vertical } from 'app-studio';
 
-The `Label` component inherits all props from the [`Text`](./Text.mdx) component.
+export const BasicLabel = () => (
+  <Vertical gap={8}>
+    <Label>Email Address</Label>
+    <TextField placeholder="Enter your email" />
+  </Vertical>
+);
+```
 
-| Prop      | Type          | Description                                      | Default |
-| --------- | ------------- | ------------------------------------------------ | ------- |
-| children  | React.ReactNode | The text content of the label.                   |         |
-| styles    | CSSProperties | Optional custom styles for the label.            |         |
-| className | string        | Optional className for the label.               |         |
+### **Label Sizes**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const LabelSizes = () => (
+  <Vertical gap={16}>
+    <Label size="xs">Extra Small Label</Label>
+    <Label size="sm">Small Label</Label>
+    <Label size="md">Medium Label (Default)</Label>
+    <Label size="lg">Large Label</Label>
+    <Label size="xl">Extra Large Label</Label>
+  </Vertical>
+);
+```
+
+### **Label Weights**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const LabelWeights = () => (
+  <Vertical gap={12}>
+    <Label weight="light">Light Weight Label</Label>
+    <Label weight="normal">Normal Weight Label</Label>
+    <Label weight="medium">Medium Weight Label</Label>
+    <Label weight="semibold">Semibold Weight Label</Label>
+    <Label weight="bold">Bold Weight Label</Label>
+  </Vertical>
+);
+```
+
+### **Heading Labels**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const HeadingLabels = () => (
+  <Vertical gap={16}>
+    <Label heading="h1">Heading 1 Label</Label>
+    <Label heading="h2">Heading 2 Label</Label>
+    <Label heading="h3">Heading 3 Label</Label>
+    <Label heading="h4">Heading 4 Label</Label>
+    <Label heading="h5">Heading 5 Label</Label>
+    <Label heading="h6">Heading 6 Label</Label>
+  </Vertical>
+);
+```
+
+### **Text Decorations**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const TextDecorations = () => (
+  <Vertical gap={12}>
+    <Label>Normal Text</Label>
+    <Label isItalic>Italic Text</Label>
+    <Label isUnderlined>Underlined Text</Label>
+    <Label isStriked>Strikethrough Text</Label>
+    <Label isItalic isUnderlined weight="bold">
+      Combined Styles
+    </Label>
+  </Vertical>
+);
+```
+
+### **Form Labels with Required Indicators**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+import { TextField, TextArea } from '@app-studio/web';
+import { Vertical, Horizontal } from 'app-studio';
+
+export const FormLabels = () => (
+  <Vertical gap={20}>
+    <Vertical gap={8}>
+      <Horizontal alignItems="center" gap={4}>
+        <Label weight="medium">Full Name</Label>
+        <Label color="color.red.500" size="sm">*</Label>
+      </Horizontal>
+      <TextField placeholder="Enter your full name" required />
+    </Vertical>
+
+    <Vertical gap={8}>
+      <Horizontal alignItems="center" gap={4}>
+        <Label weight="medium">Email Address</Label>
+        <Label color="color.red.500" size="sm">*</Label>
+      </Horizontal>
+      <TextField type="email" placeholder="Enter your email" required />
+    </Vertical>
+
+    <Vertical gap={8}>
+      <Label weight="medium">Additional Comments</Label>
+      <Label size="sm" color="color.gray.600">Optional</Label>
+      <TextArea placeholder="Enter any additional comments" rows={3} />
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Section Headers**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+import { View, Vertical } from 'app-studio';
+
+export const SectionHeaders = () => (
+  <Vertical gap={24}>
+    <View>
+      <Label heading="h2" weight="bold" marginBottom={8}>
+        Personal Information
+      </Label>
+      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
+      <Label color="color.gray.600">
+        Please provide your personal details below.
+      </Label>
+    </View>
+
+    <View>
+      <Label heading="h2" weight="bold" marginBottom={8}>
+        Contact Details
+      </Label>
+      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
+      <Label color="color.gray.600">
+        How can we reach you?
+      </Label>
+    </View>
+
+    <View>
+      <Label heading="h2" weight="bold" marginBottom={8}>
+        Preferences
+      </Label>
+      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
+      <Label color="color.gray.600">
+        Customize your experience.
+      </Label>
+    </View>
+  </Vertical>
+);
+```
+
+### **Colored Labels**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const ColoredLabels = () => (
+  <Vertical gap={12}>
+    <Label color="color.blue.600">Primary Label</Label>
+    <Label color="color.green.600">Success Label</Label>
+    <Label color="color.yellow.600">Warning Label</Label>
+    <Label color="color.red.600">Error Label</Label>
+    <Label color="color.gray.600">Muted Label</Label>
+    <Label color="theme.primary">Theme Primary</Label>
+    <Label color="theme.secondary">Theme Secondary</Label>
+  </Vertical>
+);
+```
+
+### **Props**
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| children | React.ReactNode | required | The text content of the label |
+| heading | `'h1' \| 'h2' \| 'h3' \| 'h4' \| 'h5' \| 'h6'` | undefined | Renders as a heading element with appropriate styling |
+| size | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | 'sm' | Font size of the label |
+| weight | `'light' \| 'normal' \| 'medium' \| 'semibold' \| 'bold'` | 'normal' | Font weight of the label |
+| isItalic | boolean | false | Whether the text should be italic |
+| isUnderlined | boolean | false | Whether the text should be underlined |
+| isStriked | boolean | false | Whether the text should have strikethrough |
+| color | string | undefined | Text color (supports theme colors) |
+| className | string | undefined | CSS class name |
+
+**Inherited ViewProps:**
+- All standard view properties like `margin`, `padding`, `width`, `height`
+- Color properties like `backgroundColor`, `borderColor`
+- Layout properties like `display`, `position`, `flex`
+- Responsive breakpoint props
+
+### **Accessibility Features**
+
+**Semantic HTML:**
+```tsx
+// Renders as <label> element by default
+<Label htmlFor="email-input">Email Address</Label>
+<input id="email-input" type="email" />
+
+// Renders as heading elements when heading prop is used
+<Label heading="h2">Section Title</Label> // renders as <h2>
+```
+
+**Screen Reader Support:**
+```tsx
+<Label
+  aria-label="Required field"
+  aria-describedby="email-help"
+>
+  Email Address *
+</Label>
+<input
+  id="email-input"
+  type="email"
+  aria-describedby="email-help"
+/>
+<Label id="email-help" size="sm" color="color.gray.600">
+  We'll never share your email with anyone else.
+</Label>
+```
+
+### **Advanced Usage**
+
+**Custom Styling:**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+
+export const CustomStyledLabel = () => (
+  <Label
+    weight="bold"
+    color="color.blue.600"
+    textTransform="uppercase"
+    letterSpacing="0.05em"
+    borderBottom="2px solid"
+    borderColor="color.blue.600"
+    paddingBottom={4}
+    display="inline-block"
+  >
+    Custom Styled Label
+  </Label>
+);
+```
+
+**Responsive Labels:**
+```tsx
+import React from 'react';
+import { Label } from '@app-studio/web';
+
+export const ResponsiveLabel = () => (
+  <Label
+    size={{ mobile: 'sm', tablet: 'md', desktop: 'lg' }}
+    weight={{ mobile: 'normal', desktop: 'bold' }}
+    color={{ mobile: 'color.gray.700', desktop: 'color.blue.600' }}
+  >
+    Responsive Label
+  </Label>
+);
+```
+
+**Interactive Labels:**
+```tsx
+import React, { useState } from 'react';
+import { Label } from '@app-studio/web';
+
+export const InteractiveLabel = () => {
+  const [isActive, setIsActive] = useState(false);
+
+  return (
+    <Label
+      cursor="pointer"
+      color={isActive ? 'color.blue.600' : 'color.gray.700'}
+      weight={isActive ? 'bold' : 'normal'}
+      onClick={() => setIsActive(!isActive)}
+      transition="all 0.2s ease"
+      _hover={{
+        color: 'color.blue.600',
+      }}
+    >
+      Click me to toggle
+    </Label>
+  );
+};
+```
+
+### **Best Practices**
+
+**Form Labels:**
+- Always associate labels with form controls using `htmlFor` or by wrapping
+- Use clear, descriptive text
+- Indicate required fields consistently
+- Provide helpful context when needed
+
+**Typography:**
+- Use consistent sizing throughout your application
+- Maintain proper heading hierarchy (h1 → h2 → h3, etc.)
+- Choose appropriate font weights for emphasis
+- Ensure sufficient color contrast for accessibility
+
+**Semantic Usage:**
+- Use heading props for actual section headings
+- Use regular labels for form fields and descriptions
+- Consider the document outline and screen reader experience
+
+### **Common Patterns**
+
+**Field Group Label:**
+```tsx
+<Vertical gap={16}>
+  <Label heading="h3" weight="bold">
+    Billing Address
+  </Label>
+  <Vertical gap={12}>
+    <Vertical gap={4}>
+      <Label>Street Address</Label>
+      <TextField />
+    </Vertical>
+    <Horizontal gap={12}>
+      <Vertical gap={4} flex={1}>
+        <Label>City</Label>
+        <TextField />
+      </Vertical>
+      <Vertical gap={4} flex={1}>
+        <Label>ZIP Code</Label>
+        <TextField />
+      </Vertical>
+    </Horizontal>
+  </Vertical>
+</Vertical>
+```
+
+**Status Labels:**
+```tsx
+const StatusLabel = ({ status, children }) => {
+  const colors = {
+    active: 'color.green.600',
+    pending: 'color.yellow.600',
+    inactive: 'color.red.600',
+  };
+
+  return (
+    <Label
+      color={colors[status]}
+      weight="medium"
+      textTransform="uppercase"
+      fontSize="xs"
+    >
+      {children}
+    </Label>
+  );
+};
+```
+
+**Help Text:**
+```tsx
+<Vertical gap={4}>
+  <Label weight="medium">Password</Label>
+  <TextField type="password" />
+  <Label size="sm" color="color.gray.600">
+    Must be at least 8 characters with uppercase, lowercase, and numbers
+  </Label>
+</Vertical>
+```
+
+### **Integration Examples**
+
+**With Form Components:**
+```tsx
+import { FormikForm, FormikTextField } from '@app-studio/web';
+
+<FormikForm>
+  <Vertical gap={16}>
+    <Vertical gap={4}>
+      <Label htmlFor="username">Username</Label>
+      <FormikTextField
+        id="username"
+        name="username"
+        placeholder="Enter username"
+      />
+    </Vertical>
+  </Vertical>
+</FormikForm>
+```
+
+**With Card Components:**
+```tsx
+import { Card } from '@app-studio/web';
+
+<Card>
+  <Card.Header>
+    <Label heading="h3" weight="bold">
+      Card Title
+    </Label>
+  </Card.Header>
+  <Card.Body>
+    <Label color="color.gray.600">
+      Card description text
+    </Label>
+  </Card.Body>
+</Card>
+```
+
+**With Navigation:**
+```tsx
+import { NavigationMenu } from '@app-studio/web';
+
+<NavigationMenu>
+  <NavigationMenu.Section>
+    <Label
+      size="xs"
+      weight="bold"
+      color="color.gray.500"
+      textTransform="uppercase"
+      letterSpacing="0.05em"
+    >
+      Main Navigation
+    </Label>
+  </NavigationMenu.Section>
+</NavigationMenu>
+```

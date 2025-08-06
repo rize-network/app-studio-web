@@ -1,4 +1,5 @@
 import { ViewProps } from 'app-studio';
+import React from 'react';
 
 /**
  * Defines the structure for a single tab.
@@ -11,6 +12,20 @@ export type Tab = {
   /** The content to display when this tab is active. Can be any renderable React node. */
   content?: React.ReactNode; // Use React.ReactNode instead of any
 };
+
+/**
+ * Context type for managing tab state in compound components
+ */
+export interface TabsContextType {
+  /** Currently active tab value */
+  activeValue: string | number | null;
+  /** Function to set the active tab */
+  setActiveValue: (value: string | number) => void;
+  /** Default value for initial tab */
+  defaultValue?: string | number;
+  /** Callback when tab changes */
+  onValueChange?: (value: string | number) => void;
+}
 
 /**
  * Defines the structure for applying custom styles to various parts of the Tabs component.

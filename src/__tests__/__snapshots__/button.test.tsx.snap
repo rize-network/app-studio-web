@@ -8,7 +8,7 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
   disabled={false}
   display="flex"
   filter="brightness(1)"
-  fontSize="md"
+  
   fontWeight={600}
   letterSpacing={1.25}
   onClick={[Function]}
@@ -35,7 +35,7 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
   disabled={false}
   display="flex"
   filter="brightness(1)"
-  fontSize="md"
+  
   fontWeight={600}
   letterSpacing={1.25}
   onClick={[Function]}
@@ -95,7 +95,7 @@ exports[`Button with an icon on the right to match snapshot 1`] = `
   disabled={false}
   display="flex"
   filter="brightness(1)"
-  fontSize="md"
+  
   fontWeight={600}
   letterSpacing={1.25}
   onClick={[Function]}

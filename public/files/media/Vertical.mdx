@@ -1,25 +1,566 @@
 # Vertical
 
-A container that arranges its children in a vertical stack.
+A flexible layout component that arranges its children in a vertical stack using CSS Flexbox. Perfect for creating column layouts, forms, navigation menus, and any vertical arrangement of elements with powerful spacing and alignment options.
 
 ### **Import**
   ```tsx
   import { Vertical } from '@app-studio/web';
+  // or from app-studio
+  import { Vertical } from 'app-studio';
   ```
 
-### **Default**
+### **Basic Usage**
 ```tsx
 import React from 'react';
 import { Vertical } from 'app-studio';
-import { View } from 'app-studio';
+import { View, Text } from 'app-studio';
 
-export const DefaultVertical = () => (
+export const BasicVertical = () => (
   <Vertical>
     <View height={50} backgroundColor="theme.primary" />
     <View height={50} backgroundColor="theme.secondary" />
     <View height={50} backgroundColor="theme.warning" />
   </Vertical>
 );
+```
 
+### **With Gap Spacing**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { View, Text } from 'app-studio';
+
+export const VerticalWithGap = () => (
+  <Vertical gap={16}>
+    <View padding={16} backgroundColor="color.blue.100" borderRadius={8}>
+      <Text>First Item</Text>
+    </View>
+    <View padding={16} backgroundColor="color.green.100" borderRadius={8}>
+      <Text>Second Item</Text>
+    </View>
+    <View padding={16} backgroundColor="color.purple.100" borderRadius={8}>
+      <Text>Third Item</Text>
+    </View>
+  </Vertical>
+);
+```
+
+### **Alignment Options**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { View, Text } from 'app-studio';
+
+export const VerticalAlignment = () => (
+  <Vertical gap={20}>
+    {/* Left aligned (default) */}
+    <Vertical alignItems="flex-start" gap={8}>
+      <Text fontWeight="bold">Left Aligned</Text>
+      <View width={100} height={40} backgroundColor="color.red.200" />
+      <View width={150} height={40} backgroundColor="color.red.300" />
+      <View width={80} height={40} backgroundColor="color.red.400" />
+    </Vertical>
+
+    {/* Center aligned */}
+    <Vertical alignItems="center" gap={8}>
+      <Text fontWeight="bold">Center Aligned</Text>
+      <View width={100} height={40} backgroundColor="color.blue.200" />
+      <View width={150} height={40} backgroundColor="color.blue.300" />
+      <View width={80} height={40} backgroundColor="color.blue.400" />
+    </Vertical>
+
+    {/* Right aligned */}
+    <Vertical alignItems="flex-end" gap={8}>
+      <Text fontWeight="bold">Right Aligned</Text>
+      <View width={100} height={40} backgroundColor="color.green.200" />
+      <View width={150} height={40} backgroundColor="color.green.300" />
+      <View width={80} height={40} backgroundColor="color.green.400" />
+    </Vertical>
+
+    {/* Stretched */}
+    <Vertical alignItems="stretch" gap={8} width={200}>
+      <Text fontWeight="bold">Stretched</Text>
+      <View height={40} backgroundColor="color.purple.200" />
+      <View height={40} backgroundColor="color.purple.300" />
+      <View height={40} backgroundColor="color.purple.400" />
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Justification Options**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { View, Text } from 'app-studio';
+
+export const VerticalJustification = () => (
+  <Vertical gap={20}>
+    {/* Start justified (default) */}
+    <View height={200} border="1px solid" borderColor="color.gray.300">
+      <Vertical justifyContent="flex-start" height="100%">
+        <Text>Start Justified</Text>
+        <View width={100} height={30} backgroundColor="color.red.300" />
+        <View width={100} height={30} backgroundColor="color.red.400" />
+      </Vertical>
+    </View>
+
+    {/* Center justified */}
+    <View height={200} border="1px solid" borderColor="color.gray.300">
+      <Vertical justifyContent="center" height="100%">
+        <Text>Center Justified</Text>
+        <View width={100} height={30} backgroundColor="color.blue.300" />
+        <View width={100} height={30} backgroundColor="color.blue.400" />
+      </Vertical>
+    </View>
+
+    {/* End justified */}
+    <View height={200} border="1px solid" borderColor="color.gray.300">
+      <Vertical justifyContent="flex-end" height="100%">
+        <Text>End Justified</Text>
+        <View width={100} height={30} backgroundColor="color.green.300" />
+        <View width={100} height={30} backgroundColor="color.green.400" />
+      </Vertical>
+    </View>
+
+    {/* Space between */}
+    <View height={200} border="1px solid" borderColor="color.gray.300">
+      <Vertical justifyContent="space-between" height="100%">
+        <Text>Space Between</Text>
+        <View width={100} height={30} backgroundColor="color.purple.300" />
+        <View width={100} height={30} backgroundColor="color.purple.400" />
+      </Vertical>
+    </View>
+  </Vertical>
+);
+```
+
+### **Form Layout Example**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { TextField, Button, Checkbox } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const FormLayout = () => (
+  <Vertical gap={20} width="100%" maxWidth={400} padding={24}>
+    <Text fontSize={24} fontWeight="bold">
+      Contact Form
+    </Text>
+
+    <Vertical gap={16}>
+      <TextField
+        label="Full Name"
+        placeholder="Enter your full name"
+      />
+
+      <TextField
+        label="Email"
+        type="email"
+        placeholder="Enter your email"
+      />
+
+      <TextField
+        label="Phone"
+        type="tel"
+        placeholder="Enter your phone number"
+      />
+
+      <TextField
+        label="Message"
+        multiline
+        rows={4}
+        placeholder="Enter your message"
+      />
+
+      <Checkbox
+        label="I agree to the terms and conditions"
+      />
+
+      <Button variant="filled" colorScheme="theme.primary">
+        Send Message
+      </Button>
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Navigation Menu Example**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { View, Text, Horizontal } from 'app-studio';
+import { HomeIcon, UserIcon, SettingsIcon, LogoutIcon } from '@app-studio/web';
+
+export const NavigationMenu = () => (
+  <Vertical
+    width={250}
+    height="100vh"
+    backgroundColor="color.gray.900"
+    padding={16}
+    gap={8}
+  >
+    <Text
+      color="color.white"
+      fontSize={20}
+      fontWeight="bold"
+      marginBottom={24}
+    >
+      Dashboard
+    </Text>
+
+    <Vertical gap={4}>
+      {[
+        { icon: HomeIcon, label: 'Home', active: true },
+        { icon: UserIcon, label: 'Profile', active: false },
+        { icon: SettingsIcon, label: 'Settings', active: false },
+      ].map((item, index) => (
+        <Horizontal
+          key={index}
+          alignItems="center"
+          gap={12}
+          padding={12}
+          borderRadius={8}
+          backgroundColor={item.active ? 'color.blue.600' : 'transparent'}
+          cursor="pointer"
+          _hover={{
+            backgroundColor: item.active ? 'color.blue.600' : 'color.gray.800'
+          }}
+        >
+          <item.icon
+            widthHeight={20}
+            color={item.active ? 'color.white' : 'color.gray.300'}
+          />
+          <Text
+            color={item.active ? 'color.white' : 'color.gray.300'}
+            fontWeight={item.active ? 'medium' : 'normal'}
+          >
+            {item.label}
+          </Text>
+        </Horizontal>
+      ))}
+    </Vertical>
+
+    <View flex={1} />
+
+    <Horizontal
+      alignItems="center"
+      gap={12}
+      padding={12}
+      borderRadius={8}
+      cursor="pointer"
+      _hover={{ backgroundColor: 'color.gray.800' }}
+    >
+      <LogoutIcon widthHeight={20} color="color.gray.300" />
+      <Text color="color.gray.300">Logout</Text>
+    </Horizontal>
+  </Vertical>
+);
+```
+
+### **Card Layout Example**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { View, Text, Horizontal } from 'app-studio';
+import { Button } from '@app-studio/web';
+import { StarIcon, HeartIcon, ShareIcon } from '@app-studio/web';
+
+export const CardLayout = () => (
+  <Vertical gap={24} padding={24}>
+    {[1, 2, 3].map((item) => (
+      <View
+        key={item}
+        border="1px solid"
+        borderColor="color.gray.200"
+        borderRadius={12}
+        overflow="hidden"
+        backgroundColor="color.white"
+        boxShadow="0 2px 8px rgba(0,0,0,0.1)"
+      >
+        <View
+          height={200}
+          backgroundColor="color.blue.100"
+          backgroundImage={`url(https://picsum.photos/400/200?random=${item})`}
+          backgroundSize="cover"
+          backgroundPosition="center"
+        />
+
+        <Vertical gap={16} padding={20}>
+          <Vertical gap={8}>
+            <Text fontSize={20} fontWeight="bold">
+              Article Title {item}
+            </Text>
+            <Text color="color.gray.600" lineHeight={1.6}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </Text>
+          </Vertical>
+
+          <Horizontal justifyContent="space-between" alignItems="center">
+            <Horizontal gap={16}>
+              <Horizontal alignItems="center" gap={4}>
+                <StarIcon widthHeight={16} color="color.yellow.500" />
+                <Text fontSize={14} color="color.gray.600">4.5</Text>
+              </Horizontal>
+              <Horizontal alignItems="center" gap={4}>
+                <HeartIcon widthHeight={16} color="color.red.500" />
+                <Text fontSize={14} color="color.gray.600">24</Text>
+              </Horizontal>
+              <ShareIcon widthHeight={16} color="color.gray.400" />
+            </Horizontal>
+
+            <Button variant="outline" size="sm">
+              Read More
+            </Button>
+          </Horizontal>
+        </Vertical>
+      </View>
+    ))}
+  </Vertical>
+);
+```
+
+### **Props**
+
+The Vertical component extends ViewProps from app-studio, inheriting all standard view properties:
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| gap | number \| string | 0 | Space between child elements |
+| alignItems | FlexAlign | 'stretch' | Cross-axis alignment of children |
+| justifyContent | FlexJustify | 'flex-start' | Main-axis alignment of children |
+| wrap | FlexWrap | 'nowrap' | Whether children should wrap |
+| children | React.ReactNode | undefined | Child elements to arrange vertically |
+
+**Inherited ViewProps:**
+- `width`, `height`, `minWidth`, `maxWidth`, `minHeight`, `maxHeight`
+- `padding`, `margin`, `paddingTop`, `paddingBottom`, etc.
+- `backgroundColor`, `border`, `borderRadius`, `boxShadow`
+- `position`, `top`, `left`, `right`, `bottom`, `zIndex`
+- `overflow`, `cursor`, `opacity`, `transform`
+- All CSS properties and responsive breakpoint props
+
+### **Responsive Design**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { View, Text } from 'app-studio';
+
+export const ResponsiveVertical = () => (
+  <Vertical
+    gap={{ mobile: 8, tablet: 16, desktop: 24 }}
+    padding={{ mobile: 16, tablet: 24, desktop: 32 }}
+    alignItems={{ mobile: 'stretch', desktop: 'center' }}
+  >
+    <View
+      width={{ mobile: '100%', tablet: '80%', desktop: '60%' }}
+      height={100}
+      backgroundColor="color.blue.200"
+    />
+    <View
+      width={{ mobile: '100%', tablet: '80%', desktop: '60%' }}
+      height={100}
+      backgroundColor="color.green.200"
+    />
+    <View
+      width={{ mobile: '100%', tablet: '80%', desktop: '60%' }}
+      height={100}
+      backgroundColor="color.purple.200"
+    />
+  </Vertical>
+);
+```
+
+### **Advanced Layout Patterns**
+
+**Sticky Header with Scrollable Content:**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { View, Text } from 'app-studio';
+
+export const StickyHeaderLayout = () => (
+  <Vertical height="100vh">
+    {/* Sticky Header */}
+    <View
+      padding={16}
+      backgroundColor="color.white"
+      borderBottom="1px solid"
+      borderColor="color.gray.200"
+      position="sticky"
+      top={0}
+      zIndex={10}
+    >
+      <Text fontSize={20} fontWeight="bold">
+        Header
+      </Text>
+    </View>
+
+    {/* Scrollable Content */}
+    <Vertical flex={1} overflow="auto" padding={16} gap={16}>
+      {Array.from({ length: 50 }, (_, i) => (
+        <View
+          key={i}
+          padding={16}
+          backgroundColor="color.gray.50"
+          borderRadius={8}
+        >
+          <Text>Content Item {i + 1}</Text>
+        </View>
+      ))}
+    </Vertical>
+  </Vertical>
+);
+```
+
+**Split Layout:**
+```tsx
+import React from 'react';
+import { Vertical, Horizontal } from 'app-studio';
+import { View, Text } from 'app-studio';
+
+export const SplitLayout = () => (
+  <Horizontal height="100vh">
+    {/* Sidebar */}
+    <Vertical
+      width={250}
+      backgroundColor="color.gray.100"
+      padding={16}
+      gap={8}
+    >
+      <Text fontWeight="bold">Sidebar</Text>
+      {['Item 1', 'Item 2', 'Item 3'].map((item) => (
+        <View key={item} padding={8}>
+          <Text>{item}</Text>
+        </View>
+      ))}
+    </Vertical>
+
+    {/* Main Content */}
+    <Vertical flex={1} padding={24} gap={16}>
+      <Text fontSize={24} fontWeight="bold">
+        Main Content
+      </Text>
+      <View
+        flex={1}
+        backgroundColor="color.white"
+        border="1px solid"
+        borderColor="color.gray.200"
+        borderRadius={8}
+        padding={24}
+      >
+        <Text>Content area</Text>
+      </View>
+    </Vertical>
+  </Horizontal>
+);
+```
+
+### **Best Practices**
+
+**Spacing:**
+- Use consistent gap values throughout your application
+- Consider using a spacing scale (4, 8, 12, 16, 20, 24, 32, 40, 48, 64)
+- Use responsive gap values for different screen sizes
+
+**Alignment:**
+- Use `alignItems="stretch"` for full-width children
+- Use `alignItems="center"` for centered content
+- Use `justifyContent="space-between"` for distributed spacing
+
+**Performance:**
+- Avoid deeply nested Vertical components when possible
+- Use CSS Grid for complex layouts instead of multiple nested flex containers
+- Consider virtualization for long lists
+
+**Accessibility:**
+- Use semantic HTML elements when appropriate
+- Ensure proper heading hierarchy in vertical layouts
+- Maintain logical tab order for keyboard navigation
+
+### **Common Patterns**
+
+**Form Section:**
+```tsx
+<Vertical gap={24}>
+  <Text fontSize={18} fontWeight="bold">Personal Information</Text>
+  <Vertical gap={16}>
+    <TextField label="First Name" />
+    <TextField label="Last Name" />
+    <TextField label="Email" />
+  </Vertical>
+</Vertical>
+```
+
+**Feature List:**
+```tsx
+<Vertical gap={16}>
+  {features.map((feature) => (
+    <Horizontal key={feature.id} gap={12} alignItems="flex-start">
+      <CheckIcon widthHeight={20} color="color.green.500" />
+      <Vertical gap={4}>
+        <Text fontWeight="medium">{feature.title}</Text>
+        <Text color="color.gray.600">{feature.description}</Text>
+      </Vertical>
+    </Horizontal>
+  ))}
+</Vertical>
+```
+
+**Timeline:**
+```tsx
+<Vertical gap={24}>
+  {timelineItems.map((item, index) => (
+    <Horizontal key={item.id} gap={16}>
+      <Vertical alignItems="center">
+        <View
+          width={12}
+          height={12}
+          borderRadius="50%"
+          backgroundColor="color.blue.500"
+        />
+        {index < timelineItems.length - 1 && (
+          <View
+            width={2}
+            height={40}
+            backgroundColor="color.gray.300"
+            marginTop={8}
+          />
+        )}
+      </Vertical>
+      <Vertical gap={4} flex={1}>
+        <Text fontWeight="medium">{item.title}</Text>
+        <Text color="color.gray.600">{item.description}</Text>
+        <Text fontSize={12} color="color.gray.500">{item.date}</Text>
+      </Vertical>
+    </Horizontal>
+  ))}
+</Vertical>
+```
+
+### **Integration with Other Components**
+
+The Vertical component works seamlessly with other layout components:
+
+```tsx
+import { Vertical, Horizontal, Center } from 'app-studio';
+
+// Nested layouts
+<Vertical gap={20}>
+  <Horizontal justifyContent="space-between">
+    <Text>Header</Text>
+    <Button>Action</Button>
+  </Horizontal>
+
+  <Center height={200}>
+    <Text>Centered Content</Text>
+  </Center>
+
+  <Horizontal gap={12}>
+    <Button variant="outline">Cancel</Button>
+    <Button variant="filled">Save</Button>
+  </Horizontal>
+</Vertical>
 ```
 

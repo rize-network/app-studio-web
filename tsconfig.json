@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "module": "CommonJS",
+    "module": "esnext",
     "lib": ["dom", "dom.iterable", "esnext", "es2018.promise", "es2020.bigint", "es2020.string", "es2020.symbol.wellknown"],
     "allowJs": true,
     "importHelpers": true,
@@ -27,8 +27,11 @@
     // error out if import and file system have a casing mismatch. Recommended by TS
     "forceConsistentCasingInFileNames": true,
     // `tsdx build` ignores this option, but it is commonly used when type-checking separately with `tsc`
-    "noEmit": true,
+
     "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+
     "types": ["react-scripts"],
     "baseUrl": "./",
     "rootDir": "./",
@@ -37,12 +40,6 @@
     },
     "strict": true,
     "noImplicitAny": false,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true
   },
   "noEmit": false,
   "include": ["./src", "./src/types/*.d.ts"]

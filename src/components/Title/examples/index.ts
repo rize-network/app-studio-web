@@ -1,6 +1,7 @@
 export * from './default';
 export * from './highlighted';
 export * from './animated';
+export * from './animationLoop';
 export * from './hero';
 export * from './responsive';
 export * from './custom';

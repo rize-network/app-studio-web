@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { View, ViewProps } from 'app-studio';
+import { View, ViewProps, useElementPosition } from 'app-studio';
 import {
   ContextMenuContextType,
   Size,
@@ -23,8 +23,8 @@ import {
   ContextMenuSizes,
   ContextMenuVariants,
   ContextMenuItemStates,
-  calculateMenuPosition,
 } from './ContextMenu.style';
+import { ChevronIcon } from '../../Icon/Icon';
 
 // Create context for the ContextMenu
 const ContextMenuContext = createContext<ContextMenuContextType>({
@@ -138,41 +138,75 @@ export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
   } = useContextMenuContext();
 
   const menuRef = useRef<HTMLDivElement>(null);
-  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
 
   // Use contentRef if provided, otherwise use local menuRef
   const ref = contentRef || menuRef;
 
-  // Calculate the position of the menu
+  // Use useElementPosition for intelligent positioning
+  const { ref: positionRef, relation } = useElementPosition({
+    // trackChanges: true,
+    // trackOnHover: false,
+    // trackOnScroll: true,
+    // trackOnResize: true,
+    // throttleMs: 50,
+  });
+
+  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
+
+  // Calculate the position of the menu using useElementPosition
   useEffect(() => {
     if (isOpen && ref.current) {
+      const pos = position || contextPosition;
       const menuWidth = ref.current.offsetWidth;
       const menuHeight = ref.current.offsetHeight;
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
 
-      const pos = position || contextPosition;
+      // Get viewport dimensions for boundary checking
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
 
-      const calculatedPosition = calculateMenuPosition(
-        pos.x,
-        pos.y,
-        menuWidth,
-        menuHeight,
-        windowWidth,
-        windowHeight,
-        side,
-        align
-      );
+      // Calculate optimal position based on available space
+      let finalX = pos.x;
+      let finalY = pos.y;
 
-      setMenuPosition(calculatedPosition);
+      // Use relation data if available for smarter positioning
+      if (relation) {
+        // Position based on where there's more space
+        if (relation.space.horizontal === 'left') {
+          finalX = pos.x - menuWidth;
+        } else {
+          finalX = pos.x;
+        }
+
+        if (relation.space.vertical === 'top') {
+          finalY = pos.y - menuHeight;
+        } else {
+          finalY = pos.y;
+        }
+      }
+
+      // Ensure the menu stays within viewport bounds
+      if (finalX + menuWidth > viewportWidth) {
+        finalX = viewportWidth - menuWidth - 8; // 8px margin
+      }
+      if (finalX < 8) {
+        finalX = 8; // 8px margin
+      }
+      if (finalY + menuHeight > viewportHeight) {
+        finalY = viewportHeight - menuHeight - 8; // 8px margin
+      }
+      if (finalY < 8) {
+        finalY = 8; // 8px margin
+      }
+
+      setMenuPosition({ x: finalX, y: finalY });
     }
-  }, [isOpen, contextPosition, position, side, align, ref]);
+  }, [isOpen, contextPosition, position, side, align, ref, relation]);
 
   if (!isOpen) {
     return null;
   }
 
-  // Basic positioning - place top-left corner at calculated position
+  // Intelligent positioning - place at calculated optimal position
   const positionStyles: React.CSSProperties = {
     position: 'fixed', // Use fixed to position relative to viewport
     top: `${menuPosition.y}px`,
@@ -229,7 +263,6 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
     const [isHovered, setIsHovered] = useState(false);
     const hasSubmenu = item.items && item.items.length > 0;
     const isSubmenuActive = activeSubmenuId === item.id;
-    const itemRef = useRef<HTMLDivElement>(null);
     const [submenuPosition, setSubmenuPosition] = useState({ x: 0, y: 0 });
     const disabled = item.disabled || isDisabled;
 
@@ -255,16 +288,42 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
       }
     };
 
-    // Calculate the position of the submenu
+    // Use useElementPosition for submenu positioning
+    const { ref: itemRef, relation: submenuRelation } = useElementPosition({
+      // trackChanges: true,
+      // trackOnHover: false,
+      // trackOnScroll: true,
+      // trackOnResize: true,
+      // throttleMs: 50,
+    });
+
+    // Calculate the position of the submenu with intelligent positioning
     useEffect(() => {
       if (isSubmenuActive && itemRef.current) {
         const rect = itemRef.current.getBoundingClientRect();
+        const viewportWidth = window.innerWidth;
+
+        // Estimate submenu dimensions (will be refined when submenu renders)
+        const estimatedSubmenuWidth = 200; // Default submenu width
+
+        // Use relation data for smarter positioning if available
+        let useLeftSide = false;
+        if (submenuRelation) {
+          useLeftSide = submenuRelation.space.horizontal === 'left';
+        } else {
+          // Fallback to manual calculation
+          const rightSpace = viewportWidth - rect.right;
+          const leftSpace = rect.left;
+          useLeftSide =
+            rightSpace < estimatedSubmenuWidth && leftSpace > rightSpace;
+        }
+
         setSubmenuPosition({
-          x: rect.right,
+          x: useLeftSide ? rect.left - estimatedSubmenuWidth : rect.right,
           y: rect.top,
         });
       }
-    }, [isSubmenuActive]);
+    }, [isSubmenuActive, item.items, submenuRelation]);
 
     return (
       <View
@@ -298,18 +357,12 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
 
         {hasSubmenu && (
           <View marginLeft={8} {...views?.submenuIndicator}>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8.59 16.59L13.17 12L8.59 7.41L10 6L16 12L10 18L8.59 16.59Z"
-                fill="currentColor"
-              />
-            </svg>
+            <ChevronIcon
+              orientation="right"
+              widthHeight={16}
+              color="currentColor"
+              filled={true}
+            />
           </View>
         )}
 

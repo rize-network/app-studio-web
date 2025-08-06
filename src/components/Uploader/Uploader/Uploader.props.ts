@@ -6,14 +6,17 @@ export interface UseUploadProps {
   accept?: string;
   maxSize?: number;
   onFileSelect?: (file: File) => void;
+  onMultipleFileSelect?: (files: File[]) => void;
   validateFile?: (file: File) => string | null;
   onError?: (error: string) => void;
   thumbnail?: string;
+  multiple?: boolean;
 }
 
 export interface UploadStateProps {
   handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   selectedFile: File | null;
+  selectedFiles: File[];
   fileInputRef: React.RefObject<HTMLInputElement>;
   videoRef: React.RefObject<HTMLVideoElement>;
 }
@@ -47,7 +50,9 @@ export interface UploadViewProps {
   fileType?: 'video' | 'image' | 'file';
   handleClick?: () => void;
   onFileSelect?: (file: File) => void;
+  onMultipleFileSelect?: (files: File[]) => void;
   validateFile?: (file: File) => string | null;
+  multiple?: boolean;
   views?: {
     container?: ViewProps;
     view?: ViewProps;

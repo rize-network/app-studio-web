@@ -1,4 +1,5 @@
 export * from './Checkbox/Checkbox';
+export * from './ColorInput/ColorInput';
 export * from './DatePicker/DatePicker';
 export * from './Label/Label';
 export * from './CountryPicker/CountryPicker';

@@ -1,12 +1,16 @@
-import React from 'react';
-import { ViewProps } from 'app-studio';
+import React, { useMemo } from 'react';
+import { ViewProps, Center, useTheme } from 'app-studio';
 import { ToggleViewProps } from './Toggle.props';
-import { Center } from 'app-studio';
+import { ToggleShapes, getToggleVariants } from './Toggle.style';
+import contrast from 'contrast';
 
 interface Props extends ToggleViewProps {
   views?: {
     container?: ViewProps;
   };
+  backgroundColor?: string; // primary candidate for main color
+  color?: string; // 2nd candidate for main color
+  themeMode?: 'light' | 'dark';
 }
 
 const ToggleView: React.FC<Props> = ({
@@ -20,24 +24,30 @@ const ToggleView: React.FC<Props> = ({
   setIsToggled,
   onToggle,
   views,
+  backgroundColor, // primary candidate for main color
+  color, // 2nd candidate for main color
+  themeMode: elementMode,
   ...props
 }) => {
-  const toggleColor = !isDisabled ? 'color.trueGray.400' : 'theme.disabled';
+  /* theme helpers */
+  const { getColor, themeMode } = useTheme();
+  const mode = elementMode ?? themeMode;
+
+  /* MAIN COLOR – determines the entire palette */
+  const mainColorKey = backgroundColor ?? color ?? 'theme.primary';
+  const mainTone = getColor(isDisabled ? 'theme.disabled' : mainColorKey, {
+    themeMode: mode,
+  });
+  const tone = contrast(mainTone);
+
+  /* variant palette */
+  const palette = useMemo(
+    () => getToggleVariants(mainTone, tone === 'light'),
+    [mainTone, tone]
+  );
+  const base = palette[variant];
+
   const isActive = !!(isToggle || isHovered);
-  const toggleVariants: { [key: string]: ViewProps } = {
-    outline: {
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: 'color.trueGray.400',
-    },
-    link: {
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: isActive ? toggleColor : 'transparent',
-      textDecoration: 'underline',
-    },
-    ghost: {},
-  };
 
   const handleHover = () => setIsHovered(!isHovered);
 
@@ -58,14 +68,18 @@ const ToggleView: React.FC<Props> = ({
       role="Toggle"
       padding={shape === 'pillShaped' ? '10px 12px' : '8px'}
       width="fit-content"
-      color={isActive ? 'color.white' : toggleColor}
-      backgroundColor={isActive ? toggleColor : 'transparent'}
+      cursor={isDisabled ? 'not-allowed' : 'pointer'}
+      borderRadius={ToggleShapes[shape]}
+      onClick={handleToggle}
       onMouseEnter={handleHover}
       onMouseLeave={() => setIsHovered(false)}
-      cursor={isDisabled ? 'not-allowed' : 'pointer'}
-      borderRadius={shape === 'pillShaped' ? '50px' : '8px'}
-      onClick={handleToggle}
-      {...toggleVariants[variant]}
+      /* Apply base variant styles */
+      {...base}
+      /* Override with active state if toggled */
+      {...(isActive && {
+        backgroundColor: mainTone,
+        color: tone === 'light' ? 'color.black' : 'color.white',
+      })}
       {...props}
       {...views?.container}
     >

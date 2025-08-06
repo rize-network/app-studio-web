@@ -29,7 +29,7 @@ import TitleView from './Title/Title.view';
  * <Title
  *   animation="fadeIn"
  *   animationDuration="1.5s"
- *   size="2xl"
+ *   size="xl"
  * >
  *   Animated Title
  * </Title>

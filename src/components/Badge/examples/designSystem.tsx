@@ -80,7 +80,6 @@ export const DesignSystemBadges = () => (
                 top="50%"
                 left="50%"
                 transform="translate(-50%, -50%)"
-                fontSize="12px"
                 color="color.gray.500"
               >
                 {position}

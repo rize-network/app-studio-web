@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import { View, Horizontal, Vertical } from 'app-studio';
-import { TabsViewProps } from './Tabs.props';
+import {
+  TabsViewProps,
+  TabsListProps,
+  TabsTriggerProps,
+  TabsContentProps,
+} from './Tabs.props';
+import { TabsContextType } from './Tabs.type';
 import { TabHeader } from './TabHeader';
 
 /**
@@ -68,5 +74,86 @@ export const TabsView: React.FC<TabsViewProps> = ({
             activeTab.content}
       </View>
     </Vertical>
+  );
+};
+
+// Context for compound components
+export const TabsContext = createContext<TabsContextType | null>(null);
+
+// Hook to use the Tabs context
+export const useTabsContext = () => {
+  const context = useContext(TabsContext);
+  if (!context) {
+    throw new Error('useTabsContext must be used within a Tabs component');
+  }
+  return context;
+};
+
+// TabsList compound component
+export const TabsList: React.FC<TabsListProps> = ({ children, views }) => {
+  return (
+    <Horizontal
+      width="100%"
+      borderBottom="1px solid"
+      borderBottomColor="color.gray.200"
+      {...views?.container}
+    >
+      {children}
+    </Horizontal>
+  );
+};
+
+// TabsTrigger compound component
+export const TabsTrigger: React.FC<TabsTriggerProps> = ({
+  value,
+  children,
+  disabled = false,
+  views,
+}) => {
+  const { activeValue, setActiveValue } = useTabsContext();
+  const isActive = activeValue === value;
+
+  const handleClick = () => {
+    if (!disabled) {
+      setActiveValue(value);
+    }
+  };
+
+  return (
+    <View
+      cursor={disabled ? 'not-allowed' : 'pointer'}
+      opacity={disabled ? 0.6 : 1}
+      padding="12px 16px"
+      borderBottom="2px solid"
+      borderBottomColor={isActive ? 'theme.primary' : 'transparent'}
+      color={isActive ? 'theme.primary' : 'color.gray.600'}
+      fontWeight={isActive ? '600' : '400'}
+      transition="all 0.2s ease"
+      _hover={!disabled ? { color: 'theme.primary' } : {}}
+      onClick={handleClick}
+      {...views?.trigger}
+      {...(isActive ? views?.activeState : {})}
+    >
+      {children}
+    </View>
+  );
+};
+
+// TabsContent compound component
+export const TabsContent: React.FC<TabsContentProps> = ({
+  value,
+  children,
+  views,
+}) => {
+  const { activeValue } = useTabsContext();
+
+  if (activeValue !== value) {
+    return null;
+  }
+
+  return (
+    <View width="100%" padding="24px" {...views?.content}>
+      {children}
+    </View>
   );
 };

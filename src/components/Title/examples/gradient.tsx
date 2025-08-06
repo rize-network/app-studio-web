@@ -17,7 +17,7 @@ export const GradientTest = () => {
         highlightStyle="gradient"
         highlightColor="theme.primary"
         highlightSecondaryColor="theme.secondary"
-        size="2xl"
+        size="xl"
       >
         Gradient from primary to secondary
       </Title>
@@ -27,7 +27,7 @@ export const GradientTest = () => {
         highlightStyle="gradient"
         highlightColor="#3b82f6"
         highlightSecondaryColor="#a855f7"
-        size="2xl"
+        size="xl"
       >
         Gradient with specific hex colors #3b82f6 to #a855f7
       </Title>
@@ -37,7 +37,7 @@ export const GradientTest = () => {
         highlightStyle="gradient"
         highlightColor="color.blue.500"
         highlightSecondaryColor="color.purple.500"
-        size="2xl"
+        size="xl"
       >
         Gradient from blue to purple
       </Title>
@@ -47,7 +47,7 @@ export const GradientTest = () => {
         highlightStyle="gradient"
         highlightColor="color.orange.500"
         highlightSecondaryColor="color.red.500"
-        size="2xl"
+        size="xl"
       >
         Gradient from orange to red
       </Title>
@@ -57,7 +57,7 @@ export const GradientTest = () => {
         highlightStyle="gradient"
         highlightColor="color.green.500"
         highlightSecondaryColor="color.teal.500"
-        size="2xl"
+        size="xl"
       >
         Gradient from green to teal
       </Title>
@@ -66,7 +66,7 @@ export const GradientTest = () => {
         highlightStyle="gradient"
         highlightColor="color.purple.500"
         highlightSecondaryColor="color.pink.500"
-        size="2xl"
+        size="xl"
       >
         This entire title has a gradient with no specific highlight
       </Title>

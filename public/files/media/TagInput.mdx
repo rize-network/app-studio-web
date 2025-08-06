@@ -1,0 +1,528 @@
+# TagInput
+
+A form input component for managing a list of tags. Users can add tags by typing and pressing Enter or comma, and remove them by clicking the X button or using backspace.
+
+### **Import**
+  ```tsx
+  import { TagInput } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { Vertical, Text } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const DefaultTagInput = () => {
+  const [tags, setTags] = useState<string[]>([]);
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        label="Tags"
+        placeholder="Type tags and press Enter..."
+        tags={tags}
+        onTagsChange={setTags}
+        helperText="Add relevant tags for your content"
+      />
+      <Text fontSize={14} color="color.gray.600">
+        Current tags: {Array.isArray(tags) ? tags.join(', ') : 'None'}
+      </Text>
+    </Vertical>
+  );
+};
+```
+
+### **separators**
+Characters that trigger tag creation. Supports 'enter', 'comma', 'space', and 'tab'.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const CustomSeparatorsTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['react', 'typescript']);
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        name="customTags"
+        label="Skills"
+        placeholder="Use Enter, comma, or space to add skills..."
+        tags={tags}
+        onTagsChange={setTags}
+        separators={['enter', 'comma', 'space']}
+        variant="outline"
+        shape="rounded"
+        size="lg"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **maxTags**
+Maximum number of tags allowed.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const LimitedTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['javascript', 'web']);
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        name="limitedTags"
+        label="Technologies"
+        placeholder="Add up to 5 technologies..."
+        tags={tags}
+        onTagsChange={setTags}
+        maxTags={5}
+        variant="outline"
+        helperText={`${tags.length}/5 tags used`}
+      />
+    </Vertical>
+  );
+};
+```
+
+### **minTagLength & maxTagLength**
+Validation constraints for tag length.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const ValidatedTagInput = () => {
+  const [tags, setTags] = useState<string[]>([]);
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        name="validatedTags"
+        label="Categories"
+        placeholder="Add categories..."
+        tags={tags}
+        onTagsChange={setTags}
+        minTagLength={3}
+        maxTagLength={20}
+        allowDuplicates={false}
+        variant="outline"
+        shape="pillShaped"
+        helperText="Tags must be 3-20 characters long"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **allowDuplicates**
+Whether to allow duplicate tags.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const NoDuplicatesTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['unique']);
+
+  return (
+    <TagInput
+      label="Unique Tags Only"
+      placeholder="Try adding 'unique' again..."
+      tags={tags}
+      onTagsChange={setTags}
+      allowDuplicates={false}
+      helperText="Duplicate tags will be rejected"
+    />
+  );
+};
+```
+
+### **defaultTags**
+Default tags for uncontrolled component usage.
+
+```tsx
+import React from 'react';
+import { TagInput } from '../TagInput';
+
+export const UncontrolledTagInput = () => {
+  return (
+    <TagInput
+      name="uncontrolledTags"
+      label="Default Tags"
+      placeholder="Add more tags..."
+      defaultTags={['default', 'example']}
+      onTagsChange={(tags) => console.log('Tags changed:', tags)}
+      helperText="This component manages its own state"
+    />
+  );
+};
+```
+
+### **isDisabled & isReadOnly**
+Disabled and read-only states.
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const DisabledTagInput = () => {
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        name="disabledTags"
+        label="Disabled Tags"
+        tags={['disabled', 'example']}
+        isDisabled={true}
+        helperText="This input is disabled"
+      />
+      <TagInput
+        name="readonlyTags"
+        label="Read-Only Tags"
+        tags={['readonly', 'example']}
+        isReadOnly={true}
+        isRemovable={false}
+        helperText="This input is read-only"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **variant**
+Visual variant of the component: 'outline', 'default', or 'none'.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const VariantTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['example']);
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        label="Default Variant"
+        tags={tags}
+        onTagsChange={setTags}
+        variant="default"
+      />
+      <TagInput
+        label="Outline Variant"
+        tags={tags}
+        onTagsChange={setTags}
+        variant="outline"
+      />
+      <TagInput
+        label="None Variant"
+        tags={tags}
+        onTagsChange={setTags}
+        variant="none"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **size**
+Size of the component: 'xs', 'sm', 'md', 'lg', or 'xl'.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const SizeTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['tag']);
+
+  return (
+    <Vertical gap={15}>
+      {['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
+        <TagInput
+          key={size}
+          label={`Size: ${size}`}
+          tags={tags}
+          onTagsChange={setTags}
+          size={size as any}
+          variant="outline"
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **shape**
+Shape/border radius: 'default', 'sharp', 'rounded', or 'pillShaped'.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const ShapeTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['shaped']);
+
+  return (
+    <Vertical gap={15}>
+      {['default', 'sharp', 'rounded', 'pillShaped'].map((shape) => (
+        <TagInput
+          key={shape}
+          label={`Shape: ${shape}`}
+          tags={tags}
+          onTagsChange={setTags}
+          shape={shape as any}
+          variant="outline"
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **left & right**
+React nodes to render on the left and right sides of the input.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+import { SearchIcon, TagIcon } from '../../../Icon';
+
+export const IconTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['search']);
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        label="With Left Icon"
+        placeholder="Search tags..."
+        tags={tags}
+        onTagsChange={setTags}
+        left={<SearchIcon size={16} />}
+        variant="outline"
+      />
+      <TagInput
+        label="With Right Icon"
+        placeholder="Add tags..."
+        tags={tags}
+        onTagsChange={setTags}
+        right={<TagIcon size={16} />}
+        variant="outline"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **views**
+Custom styling for different parts of the component.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const StyledTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['design', 'ui']);
+
+  return (
+    <TagInput
+      name="styledTags"
+      label="Custom Styled"
+      placeholder="Add design-related tags..."
+      tags={tags}
+      onTagsChange={setTags}
+      variant="none"
+      shape="rounded"
+      shadow={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px' }}
+      views={{
+        inputContainer: {
+          borderColor: 'theme.primary',
+          borderWidth: '2px',
+          backgroundColor: 'color.blue.50',
+        },
+        tag: {
+          backgroundColor: 'theme.primary',
+          borderColor: 'theme.primary',
+        },
+        tagText: {
+          color: 'color.white',
+        },
+        tagRemove: {
+          _hover: {
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          },
+        },
+        label: {
+          color: 'theme.primary',
+          fontWeight: 'bold',
+        },
+      }}
+    />
+  );
+};
+```
+
+### **onTagAdd & onTagRemove**
+Callbacks for individual tag operations.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical, Text } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const CallbackTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['initial']);
+  const [lastAction, setLastAction] = useState<string>('');
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        label="Tag Operations"
+        placeholder="Add or remove tags..."
+        tags={tags}
+        onTagsChange={setTags}
+        onTagAdd={(tag) => setLastAction(`Added: ${tag}`)}
+        onTagRemove={(tag, index) => setLastAction(`Removed: ${tag} at index ${index}`)}
+        variant="outline"
+      />
+      <Text fontSize={14} color="color.gray.600">
+        Last action: {lastAction || 'None'}
+      </Text>
+    </Vertical>
+  );
+};
+```
+
+### **isRemovable**
+Whether tags can be removed by clicking the X button.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const NonRemovableTagInput = () => {
+  const [tags, setTags] = useState<string[]>(['permanent', 'fixed']);
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        label="Removable Tags (Default)"
+        tags={tags}
+        onTagsChange={setTags}
+        isRemovable={true}
+        helperText="Click X to remove tags"
+      />
+      <TagInput
+        label="Non-Removable Tags"
+        tags={['permanent', 'fixed']}
+        isRemovable={false}
+        helperText="Tags cannot be removed"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **Form Integration**
+TagInput works seamlessly with forms and form libraries.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical, Button } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const FormTagInput = () => {
+  const [formData, setFormData] = useState({
+    skills: ['react', 'typescript'],
+    interests: []
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    alert(`Skills: ${formData.skills.join(', ')}\nInterests: ${formData.interests.join(', ')}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Vertical gap={20}>
+        <TagInput
+          name="skills"
+          label="Technical Skills"
+          placeholder="Add your skills..."
+          tags={formData.skills}
+          onTagsChange={(tags) => setFormData(prev => ({ ...prev, skills: tags }))}
+          maxTags={10}
+          variant="outline"
+          helperText="Add up to 10 technical skills"
+        />
+        <TagInput
+          name="interests"
+          label="Interests"
+          placeholder="Add your interests..."
+          tags={formData.interests}
+          onTagsChange={(tags) => setFormData(prev => ({ ...prev, interests: tags }))}
+          separators={['enter', 'comma', 'space']}
+          variant="outline"
+        />
+        <Button type="submit" variant="filled">
+          Submit Form
+        </Button>
+      </Vertical>
+    </form>
+  );
+};
+```
+
+### **Error Handling**
+Display validation errors and helper messages.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { TagInput } from '../TagInput';
+
+export const ErrorTagInput = () => {
+  const [tags, setTags] = useState<string[]>([]);
+  const [error, setError] = useState<string>('');
+
+  const handleTagsChange = (newTags: string[]) => {
+    setTags(newTags);
+
+    // Validation logic
+    if (newTags.length === 0) {
+      setError('At least one tag is required');
+    } else if (newTags.length > 5) {
+      setError('Maximum 5 tags allowed');
+    } else {
+      setError('');
+    }
+  };
+
+  return (
+    <Vertical gap={20}>
+      <TagInput
+        label="Required Tags"
+        placeholder="Add at least one tag..."
+        tags={tags}
+        onTagsChange={handleTagsChange}
+        error={error}
+        variant="outline"
+        helperText={error || "Add 1-5 tags"}
+      />
+    </Vertical>
+  );
+};
+```

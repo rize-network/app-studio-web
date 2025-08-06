@@ -1,8 +1,426 @@
 # Uploader
 
-Uploader component.
+A versatile file upload component with support for single and multiple file uploads, drag & drop functionality, file validation, preview capabilities, and progress tracking. Perfect for handling images, videos, documents, and any file type with built-in error handling and customizable UI.
 
 ### **Import**
-  \`\`\`tsx
+  ```tsx
   import { Uploader } from '@app-studio/web';
-  \`\`\`
+  ```
+
+### **Basic Usage**
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+import { UploadIcon } from '@app-studio/web';
+
+export const BasicUploader = () => {
+  const handleFileSelect = (file: File) => {
+    console.log('Selected file:', file);
+    // Handle the uploaded file
+  };
+
+  return (
+    <Uploader
+      icon={<UploadIcon widthHeight={32} />}
+      text="Click to upload a file"
+      onFileSelect={handleFileSelect}
+      maxSize={10 * 1024 * 1024} // 10MB limit
+    />
+  );
+};
+```
+
+### **Multiple File Upload**
+```tsx
+import React, { useState } from 'react';
+import { Uploader } from '@app-studio/web';
+import { UploadIcon } from '@app-studio/web';
+
+export const MultipleFileUploader = () => {
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+
+  const handleMultipleFileSelect = (files: File[]) => {
+    console.log('Selected files:', files);
+    setSelectedFiles(files);
+  };
+
+  return (
+    <Uploader
+      icon={<UploadIcon widthHeight={32} />}
+      text="Click to upload multiple files"
+      multiple={true}
+      onMultipleFileSelect={handleMultipleFileSelect}
+      maxSize={50 * 1024 * 1024} // 50MB limit per file
+      accept="image/*,video/*,.pdf,.doc,.docx"
+    />
+  );
+};
+```
+
+### **Image Upload with Preview**
+```tsx
+import React, { useState } from 'react';
+import { Uploader } from '@app-studio/web';
+import { ImageIcon } from '@app-studio/web';
+
+export const ImageUploader = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleImageSelect = (file: File) => {
+    console.log('Selected image:', file);
+
+    // Simulate upload progress
+    setIsLoading(true);
+    setProgress(0);
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsLoading(false);
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 200);
+  };
+
+  return (
+    <Uploader
+      accept="image/*"
+      icon={<ImageIcon widthHeight={32} />}
+      text="Upload Image"
+      onFileSelect={handleImageSelect}
+      isLoading={isLoading}
+      progress={progress}
+      fileType="image"
+      maxSize={5 * 1024 * 1024} // 5MB limit
+      containerProps={{
+        height: progress === 100 ? '200px' : 'auto',
+        minHeight: '120px'
+      }}
+    />
+  );
+};
+```
+
+### **Video Upload with Thumbnail**
+```tsx
+import React, { useState } from 'react';
+import { Uploader } from '@app-studio/web';
+import { VideoIcon } from '@app-studio/web';
+
+export const VideoUploader = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const handleVideoSelect = (file: File) => {
+    console.log('Selected video:', file);
+
+    // Simulate upload progress
+    setIsLoading(true);
+    setProgress(0);
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setIsLoading(false);
+          return 100;
+        }
+        return prev + 5;
+      });
+    }, 300);
+  };
+
+  return (
+    <Uploader
+      accept="video/*"
+      icon={<VideoIcon widthHeight={32} />}
+      text="Upload Video"
+      onFileSelect={handleVideoSelect}
+      isLoading={isLoading}
+      progress={progress}
+      fileType="video"
+      maxSize={100 * 1024 * 1024} // 100MB limit
+      containerProps={{
+        height: progress === 100 ? '200px' : 'auto',
+        minHeight: '120px'
+      }}
+    />
+  );
+};
+```
+
+### **File Validation**
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+import { UploadIcon } from '@app-studio/web';
+
+export const ValidatedUploader = () => {
+  const validateFile = (file: File): string | null => {
+    // Custom validation logic
+    if (file.size > 10 * 1024 * 1024) {
+      return 'File size must be less than 10MB';
+    }
+
+    if (!file.type.startsWith('image/')) {
+      return 'Only image files are allowed';
+    }
+
+    if (file.name.length > 50) {
+      return 'File name must be less than 50 characters';
+    }
+
+    return null; // No validation errors
+  };
+
+  const handleFileSelect = (file: File) => {
+    console.log('Valid file selected:', file);
+  };
+
+  const handleError = (error: string) => {
+    console.error('Upload error:', error);
+    // Show error message to user
+  };
+
+  return (
+    <Uploader
+      icon={<UploadIcon widthHeight={32} />}
+      text="Upload Image (Max 10MB)"
+      accept="image/*"
+      onFileSelect={handleFileSelect}
+      validateFile={validateFile}
+      onError={handleError}
+      maxSize={10 * 1024 * 1024}
+    />
+  );
+};
+```
+
+### **Custom Rendering**
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+import { View, Text } from 'app-studio';
+import { CheckIcon, ErrorIcon } from '@app-studio/web';
+
+export const CustomUploader = () => {
+  const handleFileSelect = (file: File) => {
+    console.log('File selected:', file);
+  };
+
+  const customErrorRenderer = ({ errorMessage }: any) => (
+    <View
+      padding={8}
+      backgroundColor="color.red.50"
+      borderRadius={4}
+      marginTop={8}
+    >
+      <Text color="color.red.600" fontSize={12}>
+        <ErrorIcon widthHeight={16} /> {errorMessage}
+      </Text>
+    </View>
+  );
+
+  const customFileRenderer = ({ selectedFile }: any) => (
+    <View
+      padding={12}
+      backgroundColor="color.green.50"
+      borderRadius={4}
+      marginTop={8}
+    >
+      <Text color="color.green.700" fontSize={14}>
+        <CheckIcon widthHeight={16} /> {selectedFile.name}
+      </Text>
+      <Text color="color.green.600" fontSize={12}>
+        Size: {Math.round(selectedFile.size / 1024)} KB
+      </Text>
+    </View>
+  );
+
+  return (
+    <Uploader
+      text="Drop your file here or click to browse"
+      onFileSelect={handleFileSelect}
+      renderError={customErrorRenderer}
+      renderFile={customFileRenderer}
+      views={{
+        container: {
+          border: '2px dashed',
+          borderColor: 'color.blue.300',
+          backgroundColor: 'color.blue.50',
+          borderRadius: 12,
+          padding: 24,
+        },
+        text: {
+          color: 'color.blue.700',
+          fontWeight: 'medium',
+        },
+      }}
+    />
+  );
+};
+```
+
+### **Integration with ChatInput**
+The Uploader component is seamlessly integrated into the ChatInput component for file attachments:
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { View } from 'app-studio';
+
+export const ChatWithFileUpload = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = (message: string, options?: any) => {
+    console.log('Message with files:', message);
+    console.log('Upload options:', options);
+    setInputValue('');
+  };
+
+  return (
+    <View width="100%">
+      <ChatInput
+        onSubmit={handleSubmit}
+        value={inputValue}
+        onChange={setInputValue}
+        placeholder="Type a message or upload files..."
+        hideAttachments={false} // Enable file upload button
+      />
+    </View>
+  );
+};
+```
+
+### **Props**
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| accept | string | '*/*' | File types to accept (MIME types) |
+| icon | React.ReactNode | undefined | Icon to display in the upload area |
+| text | string | undefined | Text to display in the upload area |
+| maxSize | number | 100MB | Maximum file size in bytes |
+| onFileSelect | `(file: File) => void` | undefined | Callback when a single file is selected |
+| onMultipleFileSelect | `(files: File[]) => void` | undefined | Callback when multiple files are selected |
+| validateFile | `(file: File) => string \| null` | undefined | Custom validation function |
+| isLoading | boolean | false | Whether the uploader is in loading state |
+| progress | number | 0 | Upload progress (0-100) |
+| fileType | `'video' \| 'image' \| 'file'` | undefined | Type of file for preview rendering |
+| multiple | boolean | false | Allow multiple file selection |
+| onError | `(error: string) => void` | undefined | Error callback function |
+| thumbnail | string | undefined | Thumbnail URL for preview |
+
+### **Custom Rendering Props**
+
+| Prop | Type | Description |
+| ---- | ---- | ----------- |
+| renderVideo | `(props: any) => React.ReactNode` | Custom video preview renderer |
+| renderText | `(props: any) => React.ReactNode` | Custom text renderer |
+| renderImage | `(props: any) => React.ReactNode` | Custom image preview renderer |
+| renderError | `(props: any) => React.ReactNode` | Custom error message renderer |
+| renderFile | `(props: any) => React.ReactNode` | Custom file info renderer |
+| renderProgress | `(props: any) => React.ReactNode` | Custom progress indicator renderer |
+
+### **View Customization**
+
+The `views` prop allows you to customize different parts of the component:
+
+```tsx
+<Uploader
+  // ...other props
+  views={{
+    container: { /* styles for the main container */ },
+    view: { /* styles for the content wrapper */ },
+    image: { /* styles for image preview */ },
+    horizontal: { /* styles for horizontal layout */ },
+    text: { /* styles for text elements */ },
+  }}
+/>
+```
+
+### **File Type Detection**
+
+The Uploader automatically detects file types and renders appropriate previews:
+
+- **Images**: Shows image preview with proper scaling
+- **Videos**: Generates thumbnail and shows video preview
+- **Files**: Displays file name and size information
+
+### **Error Handling**
+
+The component provides comprehensive error handling:
+
+- **File size validation**: Automatic validation against `maxSize` prop
+- **Custom validation**: Use `validateFile` prop for custom rules
+- **Error callbacks**: Handle errors with `onError` callback
+- **Visual feedback**: Error messages displayed in the UI
+
+### **Best Practices**
+
+**File Size Limits:**
+- Set appropriate `maxSize` limits based on your use case
+- Consider server-side validation as well
+- Provide clear feedback about size limits to users
+
+**File Type Restrictions:**
+- Use the `accept` prop to limit file types
+- Implement additional validation in `validateFile` if needed
+- Consider security implications of allowed file types
+
+**User Experience:**
+- Provide clear instructions with the `text` prop
+- Use appropriate icons to indicate file types
+- Show progress feedback for large uploads
+- Handle errors gracefully with user-friendly messages
+
+**Performance:**
+- Consider lazy loading for large file previews
+- Implement proper cleanup for object URLs
+- Use appropriate file size limits to prevent memory issues
+
+### **Accessibility**
+
+The Uploader component includes built-in accessibility features:
+
+- Keyboard navigation support
+- ARIA attributes for screen readers
+- Focus management
+- Proper contrast for visual elements
+
+### **Integration Examples**
+
+**With Form Libraries:**
+```tsx
+// Integration with Formik
+import { useFormikContext } from 'formik';
+
+const FormikUploader = ({ name, ...props }) => {
+  const { setFieldValue } = useFormikContext();
+
+  return (
+    <Uploader
+      onFileSelect={(file) => setFieldValue(name, file)}
+      {...props}
+    />
+  );
+};
+```
+
+**With State Management:**
+```tsx
+// Integration with Redux or other state management
+const ConnectedUploader = () => {
+  const dispatch = useDispatch();
+
+  return (
+    <Uploader
+      onFileSelect={(file) => dispatch(uploadFile(file))}
+      onMultipleFileSelect={(files) => dispatch(uploadMultipleFiles(files))}
+    />
+  );
+};
+```

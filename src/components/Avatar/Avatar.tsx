@@ -10,6 +10,7 @@ const AvatarComponent = ({
   views,
   fallback,
   onClick,
+  children,
 }: AvatarProps) => {
   // Uses custom hook useAvatarState to manage the avatar image loading error state.
   const { imageError, setImageError } = useAvatarState();
@@ -23,7 +24,9 @@ const AvatarComponent = ({
       imageError={imageError}
       setImageError={setImageError}
       onClick={onClick}
-    />
+    >
+      {children}
+    </AvatarView>
   );
   // AvatarComponent is a functional component that wraps the AvatarView with added state logic.
 };

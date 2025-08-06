@@ -1,8 +1,14 @@
 import React from 'react';
 import { Element, Text, useInView, useTheme } from 'app-studio';
+import { AnimationProps } from 'app-studio/dist/utils/constants';
 import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
-import { HighlightStyles, LineHeights, TitleSizes } from './Title.style';
+import {
+  HighlightStyles,
+  LineHeights,
+  TitleSizes,
+  ResponsiveTypography,
+} from './Title.style';
 import TypewriterEffect from './TypewriterEffect';
 
 function escapeRegExp(string: string): string {
@@ -15,11 +21,14 @@ const TitleView: React.FC<TitleProps> = ({
   highlightStyle = 'background',
   highlightColor = 'theme.primary',
   highlightSecondaryColor,
-  size = 'xl',
+  size = 'lg',
+  responsive = true,
   centered = false,
   views,
   highlightAnimate,
   animate,
+  animationLoop = 1,
+  highlightAnimationLoop = 1,
   highlightTypewriter: propHighlightTypewriter = false,
   highlightTypewriterDuration = 3000,
   ...props
@@ -53,8 +62,41 @@ const TitleView: React.FC<TitleProps> = ({
       ...props,
     });
 
+  // Determine if we should use responsive sizing or static sizing
+  const useResponsive = responsive && !props.media; // Don't override if media prop is already provided
+
   const fontSize = TitleSizes[size];
   const lineHeight = LineHeights[size];
+
+  // Get responsive styles if responsive prop is true
+  const responsiveStyles = useResponsive ? ResponsiveTypography[size] : null;
+
+  // Helper function to apply loop control to animations
+  const applyAnimationLoop = (
+    animation: AnimationProps | AnimationProps[] | undefined,
+    loopControl: number | 'infinite'
+  ): AnimationProps | AnimationProps[] | undefined => {
+    if (!animation) return animation;
+
+    if (Array.isArray(animation)) {
+      return animation.map((anim) => ({
+        ...anim,
+        iterationCount: loopControl.toString(),
+      }));
+    }
+
+    return {
+      ...animation,
+      iterationCount: loopControl.toString(),
+    };
+  };
+
+  // Apply loop control to animations
+  const controlledAnimate = applyAnimationLoop(animate, animationLoop);
+  const controlledHighlightAnimate = applyAnimationLoop(
+    highlightAnimate,
+    highlightAnimationLoop
+  );
 
   // Get the text to display
   const text =
@@ -93,11 +135,20 @@ const TitleView: React.FC<TitleProps> = ({
       <Element
         ref={ref}
         as="h1"
-        fontSize={fontSize}
-        lineHeight={`${lineHeight}px`}
-        fontWeight="bold"
+        fontSize={useResponsive ? undefined : fontSize}
+        lineHeight={
+          useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
+        }
+        fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
+        letterSpacing={
+          useResponsive ? responsiveStyles?.letterSpacing : undefined
+        }
+        marginBottom={
+          useResponsive ? responsiveStyles?.marginBottom : undefined
+        }
         textAlign={centered ? 'center' : 'left'}
-        animate={inView ? animate : undefined}
+        animate={inView ? controlledAnimate : undefined}
+        media={useResponsive ? responsiveStyles?.media : undefined}
         {...views?.container}
         {...props}
       >
@@ -109,7 +160,7 @@ const TitleView: React.FC<TitleProps> = ({
               key={`${part.text}-${idx}`}
               as="span"
               display="inline"
-              animate={inView ? highlightAnimate : undefined}
+              animate={inView ? controlledHighlightAnimate : undefined}
               {...HighlightStyles[highlightStyle](
                 resolvedColor,
                 resolvedSecondary
@@ -142,18 +193,27 @@ const TitleView: React.FC<TitleProps> = ({
       <Element
         ref={ref}
         as="h1"
-        fontSize={fontSize}
-        lineHeight={`${lineHeight}px`}
-        fontWeight="bold"
+        fontSize={useResponsive ? undefined : fontSize}
+        lineHeight={
+          useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
+        }
+        fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
+        letterSpacing={
+          useResponsive ? responsiveStyles?.letterSpacing : undefined
+        }
+        marginBottom={
+          useResponsive ? responsiveStyles?.marginBottom : undefined
+        }
         textAlign={centered ? 'center' : 'left'}
-        animate={inView ? animate : undefined}
+        animate={inView ? controlledAnimate : undefined}
+        media={useResponsive ? responsiveStyles?.media : undefined}
         {...views?.container}
         {...props}
       >
         <Text
           as="span"
           display="inline"
-          animate={inView ? highlightAnimate : undefined}
+          animate={inView ? controlledHighlightAnimate : undefined}
           {...HighlightStyles[highlightStyle](resolvedColor, resolvedSecondary)}
           {...views?.highlight}
         >
@@ -180,11 +240,18 @@ const TitleView: React.FC<TitleProps> = ({
     <Element
       ref={ref}
       as="h1"
-      fontSize={fontSize}
-      lineHeight={`${lineHeight}px`}
-      fontWeight="bold"
+      fontSize={useResponsive ? undefined : fontSize}
+      lineHeight={
+        useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
+      }
+      fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
+      letterSpacing={
+        useResponsive ? responsiveStyles?.letterSpacing : undefined
+      }
+      marginBottom={useResponsive ? responsiveStyles?.marginBottom : undefined}
       textAlign={centered ? 'center' : 'left'}
-      animate={inView ? animate : undefined}
+      animate={inView ? controlledAnimate : undefined}
+      media={useResponsive ? responsiveStyles?.media : undefined}
       {...views?.container}
       {...props}
     >

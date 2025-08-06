@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { MenubarProps, MenubarType } from './Menubar/Menubar.props';
 import { useMenubarState } from './Menubar/Menubar.state';
 import {
@@ -34,6 +34,8 @@ const MenubarComponent: React.FC<MenubarProps> = ({
     toggleMenu,
   } = useMenubarState(defaultActiveMenuId, defaultOpenMenuId);
 
+  const triggerRefs = useRef<Record<string, HTMLElement | null>>({});
+
   return (
     <MenubarProvider
       value={{
@@ -46,6 +48,7 @@ const MenubarComponent: React.FC<MenubarProps> = ({
         orientation,
         size,
         variant,
+        triggerRefs,
       }}
     >
       <MenubarView
