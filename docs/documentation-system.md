@@ -104,8 +104,50 @@ To update component documentation:
 2. Review the generated documentation
 3. Make any necessary manual adjustments
 
+## Documentation Maintenance Rules
+
+### Rule 1: Single Source of Truth
+- Each topic should have ONE authoritative documentation file
+- Avoid duplicating content across multiple files
+- Use cross-references instead of copying content
+- **Prohibited**: Creating multiple files covering the same topic
+
+### Rule 2: Clear File Responsibilities
+- **README.md**: Project overview, quick start, navigation to specialized docs
+- **README-ADK.md**: ADK-specific functionality ONLY
+- **docs/README.md**: Documentation hub and navigation
+- **docs/api-integration.md**: Backend integration patterns
+- **Component docs**: Individual component usage and APIs
+
+### Rule 3: Content Validation Checklist
+Before adding/updating documentation:
+- ✅ Check for existing content on the same topic
+- ✅ Verify all code examples work
+- ✅ Ensure links are valid and up-to-date
+- ✅ Follow consistent markdown formatting
+- ✅ Update related files if needed
+- ✅ Remove outdated information
+
+### Rule 4: Mandatory Updates
+Documentation MUST be updated when:
+- Adding new components or features
+- Changing component APIs or props
+- Modifying integration patterns
+- Updating dependencies or requirements
+- Changing project structure
+
+### Rule 5: Quality Standards
+- Use clear, concise language
+- Include practical, working examples
+- Follow consistent formatting and terminology
+- Link related documentation appropriately
+- Test all code examples before publishing
+- Include accessibility information where relevant
+- Document best practices and common pitfalls
+
 ## Documentation Best Practices
 
+### Content Organization
 - Keep documentation up-to-date with code changes
 - Include examples for all components and features
 - Use consistent formatting and terminology
@@ -113,6 +155,45 @@ To update component documentation:
 - Test all code examples
 - Include accessibility information
 - Document best practices and common pitfalls
+
+### File Naming Conventions
+- Use kebab-case for file names: `component-development.md`
+- Use descriptive names that clearly indicate content
+- Avoid generic names like `guide.md` or `docs.md`
+
+## Documentation Maintenance Workflow
+
+### Before Making Changes
+1. **Audit existing documentation**:
+   ```bash
+   # Check for duplicate content
+   grep -r "your-search-term" docs/
+
+   # Find broken links
+   find docs/ -name "*.md" -exec grep -l "broken-link" {} \;
+   ```
+
+2. **Validate current structure**:
+   - Ensure no topic is covered in multiple files
+   - Check that all links work
+   - Verify code examples are current
+
+### After Making Changes
+1. **Update related documentation**:
+   - Update cross-references
+   - Check for outdated information
+   - Ensure consistency across files
+
+2. **Run documentation tools**:
+   ```bash
+   npm run create-docs
+   npm run bot-doc -- ComponentName src/components/ComponentName
+   ```
+
+### Regular Maintenance Tasks
+- **Weekly**: Check for broken links and outdated examples
+- **Monthly**: Review documentation structure for redundancies
+- **Per Release**: Update all version-specific information
 
 ## Troubleshooting
 
@@ -141,3 +222,12 @@ If MDX files are not rendering correctly:
 1. Check the MDX syntax
 2. Ensure the MDX file is in the correct location
 3. Check for errors in the console
+
+### Duplicate Content Issues
+
+If you find duplicate content:
+
+1. Identify the authoritative source
+2. Remove duplicate content
+3. Add cross-references to the authoritative source
+4. Update any links pointing to removed content

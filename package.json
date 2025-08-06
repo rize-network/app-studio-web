@@ -46,6 +46,7 @@
     "create-example": "ts-node scripts/create-example.ts",
     "page-imports": "ts-node scripts/generate-page-imports.ts",
     "create-pages": "npm run create-indices && ts-node scripts/create-pages.ts && npm run page-imports",
+    "validate-docs": "node scripts/validate-docs.js",
     "api:local": "react-api  --useUnionTypes --input http://localhost:3000/docs/swagger.json --output ./src/services/api  && prettier --write ./src/services/api"
   },
   "eslintConfig": {
