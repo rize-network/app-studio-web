@@ -1,9 +1,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { CreateComponentRevisionParams } from '../models/CreateComponentRevisionParams';
 import type { FixComponentParams } from '../models/FixComponentParams';
 import type { UpdateComponentParams } from '../models/UpdateComponentParams';
-import type { UpdateComponentPropsParams } from '../models/UpdateComponentPropsParams';
 import type { UpdateImagePropsParams } from '../models/UpdateImagePropsParams';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { request as __request, upload } from '../core/request';
@@ -12,6 +12,24 @@ import {
   UseRequestOption,
   UseRequestProperties,
 } from '@app-studio/react-request';
+
+/**
+ * As an admin, I want to get all components
+ * @param pageId
+ * @returns any All components fetched
+ * @throws ApiError
+ */
+export const componentControllerReadAll = (
+  pageId: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'GET',
+    path: `/component/project/${pageId}`,
+    errors: {
+      404: `Components does not exists`,
+    },
+  });
+};
 
 /**
  * As a user, i want to read an component
@@ -24,25 +42,6 @@ export const componentControllerRead = (id: string): CancelablePromise<any> => {
     method: 'GET',
     path: `/component/${id}`,
     errors: {
-      404: `Exemple doesn't exists`,
-    },
-  });
-};
-
-/**
- * As a user, i want to delete an component
- * @param id
- * @returns any Exemple delete
- * @throws ApiError
- */
-export const componentControllerDelete = (
-  id: string
-): CancelablePromise<any> => {
-  return __request({
-    method: 'DELETE',
-    path: `/component/${id}`,
-    errors: {
-      403: `Incorrect credentials`,
       404: `Exemple doesn't exists`,
     },
   });
@@ -90,24 +89,6 @@ export const componentControllerRefreshImage = (
 };
 
 /**
- * As an admin, I want to get all components
- * @param pageId
- * @returns any All components fetched
- * @throws ApiError
- */
-export const componentControllerReadAll = (
-  pageId: string
-): CancelablePromise<any> => {
-  return __request({
-    method: 'GET',
-    path: `/component/project/${pageId}`,
-    errors: {
-      404: `Components does not exists`,
-    },
-  });
-};
-
-/**
  * As a user, i want to generate a new code for my component
  * @param id
  * @param requestBody
@@ -130,47 +111,48 @@ export const componentControllerFix = (
 };
 
 /**
- * As a user, i want to update my text props
- * @param id
+ * As a user, i want to create a componentRevision
  * @param requestBody
- * @returns any Image fetched successfully
+ * @returns any ComponentRevision created
  * @throws ApiError
  */
-export const componentControllerUpdateProps = (
-  id: string,
-  requestBody: UpdateComponentPropsParams
+export const componentControllerCreateRevision = (
+  requestBody: CreateComponentRevisionParams
 ): CancelablePromise<any> => {
   return __request({
     method: 'POST',
-    path: `/component/${id}/update/props`,
+    path: `/component/revision`,
     body: requestBody,
     mediaType: 'application/json',
+    errors: {
+      401: `Incorrect credentials`,
+    },
   });
 };
 
 /**
- * Update an exemple picture. Only image files are supported (mime type image/*).
- * @param formData
- * @returns any Picture Upload Succeed
+ * As a user, i want to find by componentRevision based on a componentRevision identifier
+ * @param id
+ * @returns any ComponentRevision fetched successfully
  * @throws ApiError
  */
-export const componentUploadControllerPicture = (
-  formData: {
-    file?: Blob;
-  },
-  onProgress
+export const componentControllerGetComponentFromRevision = (
+  id: string
 ): CancelablePromise<any> => {
-  return upload({
-    onProgress,
-    method: 'POST',
-    path: `/component/upload/picture`,
-    formData: formData,
-    mediaType: 'multipart/form-data',
-    errors: {
-      400: `Required picture is empty or the file type is not an image.`,
-      403: `Forbidden. You do not have the rights.`,
-    },
+  return __request({
+    method: 'GET',
+    path: `/component/revision/${id}`,
   });
+};
+
+export const useComponentControllerReadAllService = ({
+  method = 'GET',
+  ...options
+}: UseRequestOption = {}): {
+  run: (pageId: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(componentControllerReadAll, { method, ...options });
 };
 
 export const useComponentControllerReadService = ({
@@ -181,16 +163,6 @@ export const useComponentControllerReadService = ({
   data: any;
 } & UseRequestProperties => {
   return useRequest(componentControllerRead, { method, ...options });
-};
-
-export const useComponentControllerDeleteService = ({
-  method = 'DELETE',
-  ...options
-}: UseRequestOption = {}): {
-  run: (id: string) => void;
-  data: any;
-} & UseRequestProperties => {
-  return useRequest(componentControllerDelete, { method, ...options });
 };
 
 export const useComponentControllerUpdateService = ({
@@ -213,16 +185,6 @@ export const useComponentControllerRefreshImageService = ({
   return useRequest(componentControllerRefreshImage, { method, ...options });
 };
 
-export const useComponentControllerReadAllService = ({
-  method = 'GET',
-  ...options
-}: UseRequestOption = {}): {
-  run: (pageId: string) => void;
-  data: any;
-} & UseRequestProperties => {
-  return useRequest(componentControllerReadAll, { method, ...options });
-};
-
 export const useComponentControllerFixService = ({
   method = 'POST',
   ...options
@@ -233,22 +195,25 @@ export const useComponentControllerFixService = ({
   return useRequest(componentControllerFix, { method, ...options });
 };
 
-export const useComponentControllerUpdatePropsService = ({
+export const useComponentControllerCreateRevisionService = ({
   method = 'POST',
   ...options
 }: UseRequestOption = {}): {
-  run: (id: string, requestBody: UpdateComponentPropsParams) => void;
+  run: (requestBody: CreateComponentRevisionParams) => void;
   data: any;
 } & UseRequestProperties => {
-  return useRequest(componentControllerUpdateProps, { method, ...options });
+  return useRequest(componentControllerCreateRevision, { method, ...options });
 };
 
-export const useComponentUploadControllerPictureService = ({
-  method = 'POST',
+export const useComponentControllerGetComponentFromRevisionService = ({
+  method = 'GET',
   ...options
 }: UseRequestOption = {}): {
-  run: (formData: { file?: Blob }) => void;
+  run: (id: string) => void;
   data: any;
 } & UseRequestProperties => {
-  return useRequest(componentUploadControllerPicture, { method, ...options });
+  return useRequest(componentControllerGetComponentFromRevision, {
+    method,
+    ...options,
+  });
 };

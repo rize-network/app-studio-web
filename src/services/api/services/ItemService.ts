@@ -36,6 +36,28 @@ export const itemControllerCreate = (
 };
 
 /**
+ * Get all items for a specific owner
+ * @param skill
+ * @param ownerType
+ * @param ownerId
+ * @returns any Items retrieved successfully
+ * @throws ApiError
+ */
+export const itemControllerList = (
+  skill: string,
+  ownerType: string,
+  ownerId: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'GET',
+    path: `/item/list/${skill}/${ownerType}/${ownerId}`,
+    errors: {
+      404: `No items found`,
+    },
+  });
+};
+
+/**
  * I want to read a item
  * @param ownerType
  * @param ownerId
@@ -109,6 +131,16 @@ export const useItemControllerCreateService = ({
   data: any;
 } & UseRequestProperties => {
   return useRequest(itemControllerCreate, { method, ...options });
+};
+
+export const useItemControllerListService = ({
+  method = 'GET',
+  ...options
+}: UseRequestOption = {}): {
+  run: (skill: string, ownerType: string, ownerId: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(itemControllerList, { method, ...options });
 };
 
 export const useItemControllerGetService = ({

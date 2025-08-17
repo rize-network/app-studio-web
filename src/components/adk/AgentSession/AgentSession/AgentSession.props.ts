@@ -1,4 +1,3 @@
-import React from 'react';
 import { ViewProps } from 'app-studio';
 
 /**
@@ -48,22 +47,51 @@ export interface SessionSummary {
  * Component View Customization
  */
 export interface AgentSessionViews {
+  // Main container areas
   container?: ViewProps;
   header?: ViewProps;
+  toolbar?: ViewProps;
   sessionList?: ViewProps;
+  sessionActions?: ViewProps;
+  filtersPanel?: ViewProps;
+
+  // Session list items
   sessionItem?: ViewProps;
   activeSessionItem?: ViewProps;
   sessionInfo?: ViewProps;
-  sessionActions?: ViewProps;
+  sessionTitle?: ViewProps;
+  sessionDescription?: ViewProps;
+  sessionMetadata?: ViewProps;
+  sessionTimestamp?: ViewProps;
+  sessionTags?: ViewProps;
+  sessionStats?: ViewProps;
+
+  // Action buttons
   createButton?: ViewProps;
   deleteButton?: ViewProps;
   exportButton?: ViewProps;
   importButton?: ViewProps;
   refreshButton?: ViewProps;
+  selectButton?: ViewProps;
+  duplicateButton?: ViewProps;
+
+  // Search and filters
   searchInput?: ViewProps;
+  filterDropdown?: ViewProps;
+  sortDropdown?: ViewProps;
+  dateRangePicker?: ViewProps;
+  tagFilter?: ViewProps;
+
+  // State displays
   emptyState?: ViewProps;
   loadingState?: ViewProps;
   errorState?: ViewProps;
+
+  // Bulk operations
+  bulkActions?: ViewProps;
+  selectAllCheckbox?: ViewProps;
+  bulkDeleteButton?: ViewProps;
+  bulkExportButton?: ViewProps;
 }
 
 /**
@@ -134,8 +162,9 @@ export interface AgentSessionProps
   showRefreshButton?: boolean;
   compactMode?: boolean;
 
-  // Styling
+  // Styling and customization
   views?: AgentSessionViews;
+  containerProps?: ViewProps;
 
   // Initial state
   initialSessions?: AgentSession[];
@@ -149,6 +178,11 @@ export interface AgentSessionProps
   enableSessionTags?: boolean;
   enableSessionMetadata?: boolean;
   enableBulkOperations?: boolean;
+
+  // Theme and appearance
+  colorScheme?: 'blue' | 'purple' | 'green' | 'orange' | 'red' | 'gray';
+  layout?: 'list' | 'grid' | 'compact';
+  showPreviews?: boolean;
 
   // Accessibility
   ariaLabel?: string;

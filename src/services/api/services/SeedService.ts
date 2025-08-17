@@ -80,10 +80,10 @@ export const seedControllerSeed = (
     | 'analyticToUpdate'
     | 'notificationToRead'
     | 'projectToGenerate'
-    | 'pageToCreate'
     | 'userToUpdate'
     | 'itemToRead'
     | 'itemTextToUpdate'
+    | 'pageToCreate'
 ): CancelablePromise<any> => {
   return __request({
     method: 'GET',
@@ -165,10 +165,10 @@ export const seedControllerGet = (
     | 'analyticToUpdate'
     | 'notificationToRead'
     | 'projectToGenerate'
-    | 'pageToCreate'
     | 'userToUpdate'
     | 'itemToRead'
     | 'itemTextToUpdate'
+    | 'pageToCreate'
 ): CancelablePromise<any> => {
   return __request({
     method: 'GET',
@@ -248,10 +248,10 @@ export const useSeedControllerSeedService = ({
       | 'analyticToUpdate'
       | 'notificationToRead'
       | 'projectToGenerate'
-      | 'pageToCreate'
       | 'userToUpdate'
       | 'itemToRead'
       | 'itemTextToUpdate'
+      | 'pageToCreate'
   ) => void;
   data: any;
 } & UseRequestProperties => {
@@ -327,10 +327,10 @@ export const useSeedControllerGetService = ({
       | 'analyticToUpdate'
       | 'notificationToRead'
       | 'projectToGenerate'
-      | 'pageToCreate'
       | 'userToUpdate'
       | 'itemToRead'
       | 'itemTextToUpdate'
+      | 'pageToCreate'
   ) => void;
   data: any;
 } & UseRequestProperties => {

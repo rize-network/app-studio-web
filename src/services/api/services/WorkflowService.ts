@@ -1,12 +1,12 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { CreateApplicationParams } from '../models/CreateApplicationParams';
 import type { createPageComponentParams } from '../models/createPageComponentParams';
 import type { CreatePageParams } from '../models/CreatePageParams';
 import type { DeployPageParams } from '../models/DeployPageParams';
 import type { DomainPageParams } from '../models/DomainPageParams';
 import type { EditComponentsParams } from '../models/EditComponentsParams';
+import type { EditPageStreamParams } from '../models/EditPageStreamParams';
 import type { GenerateProjectParams } from '../models/GenerateProjectParams';
 import type { RequestTask } from '../models/RequestTask';
 import type { ResetTaskParams } from '../models/ResetTaskParams';
@@ -126,10 +126,7 @@ export const workflowControllerGetTask = (
 ): CancelablePromise<any> => {
   return __request({
     method: 'GET',
-    path: `/workflow/task`,
-    query: {
-      taskId: taskId,
-    },
+    path: `/workflow/task/${taskId}`,
   });
 };
 
@@ -144,10 +141,7 @@ export const workflowControllerGetTasks = (
 ): CancelablePromise<any> => {
   return __request({
     method: 'GET',
-    path: `/workflow/tasks`,
-    query: {
-      workflowId: workflowId,
-    },
+    path: `/workflow/tasks/${workflowId}`,
   });
 };
 
@@ -197,26 +191,6 @@ export const workflowControllerUpdateTaskStatus = (
   return __request({
     method: 'PATCH',
     path: `/workflow/task/status`,
-    body: requestBody,
-    mediaType: 'application/json',
-    errors: {
-      401: `Incorrect credentials`,
-    },
-  });
-};
-
-/**
- * As a admin, i want to generate the project details
- * @param requestBody
- * @returns any Project Details generated successfully
- * @throws ApiError
- */
-export const projectWorkflowControllerCreate = (
-  requestBody: GenerateProjectParams
-): CancelablePromise<any> => {
-  return __request({
-    method: 'POST',
-    path: `/workflow/project/create`,
     body: requestBody,
     mediaType: 'application/json',
     errors: {
@@ -323,21 +297,41 @@ export const pageWorkflowControllerEditComponents = (
 };
 
 /**
- * Validate grant
- * @param grantId
- * @param stepId
- * @returns any Workflow created
+ * Edit page via agent (streaming)
+ * @param pageId
+ * @param requestBody
+ * @returns any Streaming response started
  * @throws ApiError
  */
-export const grantWorkflowControllerValidateUploadGrantFiles = (
-  grantId: string,
-  stepId: string,
-  onProgress
+export const pageWorkflowControllerEditPageStream = (
+  pageId: string,
+  requestBody: EditPageStreamParams
 ): CancelablePromise<any> => {
-  return upload({
-    onProgress,
+  return __request({
     method: 'POST',
-    path: `/workflow/grant/${grantId}/validate/${stepId}`,
+    path: `/page/workflow/edit-stream/${pageId}`,
+    body: requestBody,
+    mediaType: 'application/json',
+    errors: {
+      401: `Unauthorized`,
+    },
+  });
+};
+
+/**
+ * As a admin, i want to generate the project details
+ * @param requestBody
+ * @returns any Project Details generated successfully
+ * @throws ApiError
+ */
+export const projectWorkflowControllerCreate = (
+  requestBody: GenerateProjectParams
+): CancelablePromise<any> => {
+  return __request({
+    method: 'POST',
+    path: `/workflow/project/create`,
+    body: requestBody,
+    mediaType: 'application/json',
     errors: {
       401: `Incorrect credentials`,
     },
@@ -345,19 +339,17 @@ export const grantWorkflowControllerValidateUploadGrantFiles = (
 };
 
 /**
- * Validate application
- * @param stepId
+ * As a admin, i want to generate the project details
  * @param requestBody
- * @returns any Workflow created
+ * @returns any Project Details generated successfully
  * @throws ApiError
  */
-export const applicationWorkflowControllerFillApplication = (
-  stepId: string,
-  requestBody: CreateApplicationParams
+export const projectWorkflowControllerGenerate = (
+  requestBody: GenerateProjectParams
 ): CancelablePromise<any> => {
   return __request({
     method: 'POST',
-    path: `/workflow/application/process/${stepId}`,
+    path: `/workflow/project/generate`,
     body: requestBody,
     mediaType: 'application/json',
     errors: {
@@ -480,16 +472,6 @@ export const useWorkflowControllerUpdateTaskStatusService = ({
   return useRequest(workflowControllerUpdateTaskStatus, { method, ...options });
 };
 
-export const useProjectWorkflowControllerCreateService = ({
-  method = 'POST',
-  ...options
-}: UseRequestOption = {}): {
-  run: (requestBody: GenerateProjectParams) => void;
-  data: any;
-} & UseRequestProperties => {
-  return useRequest(projectWorkflowControllerCreate, { method, ...options });
-};
-
 export const usePageWorkflowControllerCreateComponentTaskService = ({
   method = 'POST',
   ...options
@@ -546,28 +528,35 @@ export const usePageWorkflowControllerEditComponentsService = ({
   });
 };
 
-export const useGrantWorkflowControllerValidateUploadGrantFilesService = ({
+export const usePageWorkflowControllerEditPageStreamService = ({
   method = 'POST',
   ...options
 }: UseRequestOption = {}): {
-  run: (grantId: string, stepId: string) => void;
+  run: (pageId: string, requestBody: EditPageStreamParams) => void;
   data: any;
 } & UseRequestProperties => {
-  return useRequest(grantWorkflowControllerValidateUploadGrantFiles, {
+  return useRequest(pageWorkflowControllerEditPageStream, {
     method,
     ...options,
   });
 };
 
-export const useApplicationWorkflowControllerFillApplicationService = ({
+export const useProjectWorkflowControllerCreateService = ({
   method = 'POST',
   ...options
 }: UseRequestOption = {}): {
-  run: (stepId: string, requestBody: CreateApplicationParams) => void;
+  run: (requestBody: GenerateProjectParams) => void;
   data: any;
 } & UseRequestProperties => {
-  return useRequest(applicationWorkflowControllerFillApplication, {
-    method,
-    ...options,
-  });
+  return useRequest(projectWorkflowControllerCreate, { method, ...options });
+};
+
+export const useProjectWorkflowControllerGenerateService = ({
+  method = 'POST',
+  ...options
+}: UseRequestOption = {}): {
+  run: (requestBody: GenerateProjectParams) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(projectWorkflowControllerGenerate, { method, ...options });
 };

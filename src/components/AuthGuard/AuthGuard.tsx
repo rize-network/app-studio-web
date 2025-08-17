@@ -15,7 +15,7 @@ interface AuthGuardProps {
 /**
  * Auto-login function for ADK pages using the existing auth store
  */
-const performAutoLogin = () => {
+const performAutoLogin = (onComplete: () => void, onError: () => void) => {
   try {
     const { login } = useAuthStore.getState();
 
@@ -28,13 +28,13 @@ const performAutoLogin = () => {
     login(loginParams, () => {
       console.log('Auto-login successful');
       // The auth store will handle token storage and API configuration
-      // Reload the page to update auth state
-      window.location.reload();
+      onComplete();
     });
   } catch (error) {
     console.error('Auto-login failed:', error);
     // Show error message instead of redirect since there's no login page
     console.warn('Auto-login failed, but no login page available');
+    onError();
   }
 };
 
@@ -49,19 +49,52 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
   requireAuth = true,
   autoLogin = true,
 }) => {
-  const { isAuthentificated } = useAuthStore();
+  const { isAuthentificated, isInitialized } = useAuthStore();
   const [isAutoLogging, setIsAutoLogging] = useState(false);
+  const [autoLoginAttempted, setAutoLoginAttempted] = useState(false);
 
   useEffect(() => {
-    // Auto-login for ADK pages if not authenticated
-    if (requireAuth && !isAuthentificated && autoLogin && !isAutoLogging) {
+    // Auto-login for ADK pages if not authenticated, but only after auth store is initialized
+    if (
+      requireAuth &&
+      isInitialized &&
+      !isAuthentificated &&
+      autoLogin &&
+      !isAutoLogging &&
+      !autoLoginAttempted
+    ) {
       setIsAutoLogging(true);
-      performAutoLogin();
+      performAutoLogin(
+        () => {
+          // Success callback - authentication state will update automatically
+          setIsAutoLogging(false);
+          setAutoLoginAttempted(true);
+        },
+        () => {
+          // Error callback
+          setIsAutoLogging(false);
+          setAutoLoginAttempted(true);
+        }
+      );
     }
-  }, [requireAuth, isAuthentificated, autoLogin, isAutoLogging]);
+  }, [
+    requireAuth,
+    isInitialized,
+    isAuthentificated,
+    autoLogin,
+    isAutoLogging,
+    autoLoginAttempted,
+  ]);
 
-  // Show loading state while auto-logging in
-  if (isAutoLogging) {
+  // Reset auto-login state when authentication changes
+  useEffect(() => {
+    if (isAuthentificated && isAutoLogging) {
+      setIsAutoLogging(false);
+    }
+  }, [isAuthentificated, isAutoLogging]);
+
+  // Show loading state while auth store is initializing or auto-logging in
+  if (!isInitialized || isAutoLogging) {
     return (
       <View
         height="100vh"
@@ -82,7 +115,7 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
             }}
           />
           <Text fontSize="md" color="color.gray.600">
-            Signing you in...
+            {!isInitialized ? 'Initializing...' : 'Signing you in...'}
           </Text>
         </Vertical>
       </View>
@@ -95,7 +128,14 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
       return <>{fallback}</>;
     }
 
-    // Show a message while redirecting
+    // Show different messages based on auto-login state
+    const title = autoLoginAttempted
+      ? 'Authentication Failed'
+      : 'Authentication Required';
+    const message = autoLoginAttempted
+      ? 'Auto-login failed. Please try again or contact support if the issue persists.'
+      : 'You need to sign in to access ADK components. Auto-login will be attempted automatically.';
+
     return (
       <View
         height="100vh"
@@ -106,13 +146,18 @@ export const AuthGuard: React.FC<AuthGuardProps> = ({
       >
         <Vertical gap={24} alignItems="center" maxWidth="400px" padding={32}>
           <Text fontSize="xl" fontWeight="600" textAlign="center">
-            Authentication Required
+            {title}
           </Text>
           <Text fontSize="md" color="color.gray.600" textAlign="center">
-            You need to sign in to access ADK components. Auto-login will be
-            attempted automatically.
+            {message}
           </Text>
-          <Button variant="filled" onClick={() => window.location.reload()}>
+          <Button
+            variant="filled"
+            onClick={() => {
+              setAutoLoginAttempted(false);
+              setIsAutoLogging(false);
+            }}
+          >
             Retry Auto-Login
           </Button>
         </Vertical>

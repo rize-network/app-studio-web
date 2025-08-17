@@ -10,6 +10,7 @@ import {
   UploadedFile,
   Variant,
 } from './ChatInput.type';
+import { Suggestion } from '../EditableInput';
 
 /**
  * Props for the ChatInput component
@@ -111,6 +112,11 @@ export interface ChatInputProps extends ViewProps {
    * List of prompt examples
    */
   promptExamples?: PromptExample[];
+
+  /**
+   * List of suggestions for auto-completion
+   */
+  suggestions?: Suggestion[];
 
   /**
    * Callback function when a prompt example is selected
@@ -319,4 +325,9 @@ export interface ChatInputViewProps extends ChatInputProps {
    * Callback function to set a file as reference image
    */
   setFileAsReference: (fileIndex: number) => void;
+
+  /**
+   * List of suggestions for auto-completion
+   */
+  suggestions?: Suggestion[];
 }

@@ -13,7 +13,7 @@ export type CreateReportParams = {
   content?: any;
   objectId: string;
   /**
-   * objectType :profile,news,comment,feature,feedback
+   * objectType :profile,news,comment,feature,feedback,project,action,page,component,grant,application,survey
    */
   objectType: string;
 };

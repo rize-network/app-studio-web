@@ -74,7 +74,6 @@ export * from './CookieConsent/CookieConsent/CookieConsent.props';
 export * from './ContextMenu/ContextMenu/ContextMenu.props';
 export * from './Form/Select/Select/Select.props';
 export * from './Form/Switch/Switch/Switch.props';
-export * from './Form/Switch/Switch/Switch.props';
 export * from './Form/TextArea/TextArea/TextArea.props';
 export * from './Form/TextField/TextField/TextField.props';
 export * from './Form/Checkbox/Checkbox/Checkbox.props';

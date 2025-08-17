@@ -1,6 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
+import type { ActionListParam } from '../models/ActionListParam';
 import type { CreateActionParams } from '../models/CreateActionParams';
 import type { UpdateActionParams } from '../models/UpdateActionParams';
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -12,107 +13,73 @@ import {
 } from '@app-studio/react-request';
 
 /**
- * As an admin, I want to create a action
+ * Create a product and its generation action
+ * @param objectType ObjectType: profile,news,comment,feature,feedback,project,action,page,component,grant,application,survey
  * @param requestBody
- * @returns any action created
+ * @returns any
  * @throws ApiError
  */
 export const actionControllerCreate = (
+  objectType:
+    | 'profile'
+    | 'news'
+    | 'comment'
+    | 'feature'
+    | 'feedback'
+    | 'project'
+    | 'action'
+    | 'page'
+    | 'component'
+    | 'grant'
+    | 'application'
+    | 'survey',
   requestBody: CreateActionParams
 ): CancelablePromise<any> => {
   return __request({
     method: 'POST',
-    path: `/action`,
+    path: `/action/create/${objectType}`,
     body: requestBody,
     mediaType: 'application/json',
-    errors: {
-      401: `Incorrect credentials`,
-    },
   });
 };
 
 /**
  * As a user, I want to find a specific action by criteria
- * @param skill Skill
- * @param projectId Project id
+ * @param requestBody
  * @returns any Action found
  * @throws ApiError
  */
 export const actionControllerList = (
-  skill?:
-    | 'project'
-    | 'finance'
-    | 'dev'
-    | 'brand'
-    | 'growth'
-    | 'community'
-    | 'design'
-    | 'ads'
-    | 'product',
-  projectId?: string
+  requestBody: ActionListParam
 ): CancelablePromise<any> => {
   return __request({
     method: 'POST',
-    path: `/action/project/${projectId}/skill/${skill}`,
-    query: {
-      skill: skill,
-      projectId: projectId,
-    },
-  });
-};
-
-/**
- * As a user, I want to read a specific action
- * @param id
- * @returns any action details fetched
- * @throws ApiError
- */
-export const actionControllerRead = (id: string): CancelablePromise<any> => {
-  return __request({
-    method: 'GET',
-    path: `/action/${id}`,
-    errors: {
-      404: `action not found`,
-    },
-  });
-};
-
-/**
- * As an admin, I want to delete a action
- * @param id
- * @returns any action deleted
- * @throws ApiError
- */
-export const actionControllerDelete = (id: string): CancelablePromise<any> => {
-  return __request({
-    method: 'DELETE',
-    path: `/action/${id}`,
-    errors: {
-      403: `Incorrect credentials`,
-      404: `action not found`,
-    },
+    path: `/action/list`,
+    body: requestBody,
+    mediaType: 'application/json',
   });
 };
 
 /**
  * As an admin, I want to update a action
- * @param id
+ * @param actionId
+ * @param stepId
  * @param requestBody
  * @returns any action updated
  * @throws ApiError
  */
-export const actionControllerUpdate = (
-  id: string,
+export const actionControllerUpdateStepResult = (
+  actionId: string,
+  stepId: string,
   requestBody: UpdateActionParams
 ): CancelablePromise<any> => {
   return __request({
     method: 'PATCH',
-    path: `/action/${id}`,
+    path: `/action/step/${actionId}/${stepId}`,
     body: requestBody,
     mediaType: 'application/json',
     errors: {
       401: `Incorrect credentials`,
-      404: `action not found`,
     },
   });
 };
@@ -128,7 +95,7 @@ export const actionControllerUpdateStepStatus = (
 ): CancelablePromise<any> => {
   return __request({
     method: 'PATCH',
-    path: `/action/${stepId}/status`,
+    path: `/action/status/${stepId}`,
     errors: {
       401: `Incorrect credentials`,
       404: `action not found`,
@@ -136,11 +103,153 @@ export const actionControllerUpdateStepStatus = (
   });
 };
 
+/**
+ * @param actionId
+ * @returns any
+ * @throws ApiError
+ */
+export const actionControllerAnalyze = (
+  actionId: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'POST',
+    path: `/action/next/${actionId}`,
+  });
+};
+
+/**
+ * Restart a failed workflow step
+ * @param actionId
+ * @param stepId
+ * @returns any Step restarted successfully
+ * @throws ApiError
+ */
+export const actionControllerRestartStep = (
+  actionId: string,
+  stepId: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'POST',
+    path: `/action/restart-step/${actionId}/${stepId}`,
+    errors: {
+      404: `Action or step not found`,
+    },
+  });
+};
+
+/**
+ * As a user, I want to read a specific action
+ * @param actionId
+ * @returns any action details fetched
+ * @throws ApiError
+ */
+export const actionControllerGet = (
+  actionId: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'GET',
+    path: `/action/details/${actionId}`,
+    errors: {
+      404: `action not found`,
+    },
+  });
+};
+
+/**
+ * Get action configuration for a specific object type
+ * @param objectType
+ * @returns any Action configuration retrieved successfully
+ * @throws ApiError
+ */
+export const actionControllerGetActionConfig = (
+  objectType: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'GET',
+    path: `/action/config/${objectType}`,
+    errors: {
+      404: `Action configuration not found for the specified object type`,
+    },
+  });
+};
+
+/**
+ * Get form configuration for a step by action ID and step name
+ * @param actionId
+ * @param stepName
+ * @returns any Form configuration retrieved successfully
+ * @throws ApiError
+ */
+export const actionControllerGetFormConfigByStepName = (
+  actionId: string,
+  stepName: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'GET',
+    path: `/action/form-config/${actionId}/${stepName}`,
+    errors: {
+      404: `Action or step not found, or step is not a form step`,
+    },
+  });
+};
+
+/**
+ * Get workflow steps configuration for a step by action ID and step name
+ * @param actionId
+ * @param stepName
+ * @returns any Workflow steps configuration retrieved successfully
+ * @throws ApiError
+ */
+export const actionControllerGetWorkflowStepsByStepName = (
+  actionId: string,
+  stepName: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'GET',
+    path: `/action/workflow-steps/${actionId}/${stepName}`,
+    errors: {
+      404: `Action or step not found`,
+    },
+  });
+};
+
+/**
+ * Generate product content based on analysis
+ * @param actionId
+ * @param stepId
+ * @returns any
+ * @throws ApiError
+ */
+export const actionControllerGenerate = (
+  actionId: string,
+  stepId: string
+): CancelablePromise<any> => {
+  return __request({
+    method: 'POST',
+    path: `/action/start/${actionId}/${stepId}`,
+  });
+};
+
 export const useActionControllerCreateService = ({
   method = 'POST',
   ...options
 }: UseRequestOption = {}): {
-  run: (requestBody: CreateActionParams) => void;
+  run: (
+    objectType:
+      | 'profile'
+      | 'news'
+      | 'comment'
+      | 'feature'
+      | 'feedback'
+      | 'project'
+      | 'action'
+      | 'page'
+      | 'component'
+      | 'grant'
+      | 'application'
+      | 'survey',
+    requestBody: CreateActionParams
+  ) => void;
   data: any;
 } & UseRequestProperties => {
   return useRequest(actionControllerCreate, { method, ...options });
@@ -150,52 +259,24 @@ export const useActionControllerListService = ({
   method = 'POST',
   ...options
 }: UseRequestOption = {}): {
-  run: (
-    skill?:
-      | 'project'
-      | 'finance'
-      | 'dev'
-      | 'brand'
-      | 'growth'
-      | 'community'
-      | 'design'
-      | 'ads'
-      | 'product',
-    projectId?: string
-  ) => void;
+  run: (requestBody: ActionListParam) => void;
   data: any;
 } & UseRequestProperties => {
   return useRequest(actionControllerList, { method, ...options });
 };
 
-export const useActionControllerReadService = ({
-  method = 'GET',
-  ...options
-}: UseRequestOption = {}): {
-  run: (id: string) => void;
-  data: any;
-} & UseRequestProperties => {
-  return useRequest(actionControllerRead, { method, ...options });
-};
-
-export const useActionControllerDeleteService = ({
-  method = 'DELETE',
-  ...options
-}: UseRequestOption = {}): {
-  run: (id: string) => void;
-  data: any;
-} & UseRequestProperties => {
-  return useRequest(actionControllerDelete, { method, ...options });
-};
-
-export const useActionControllerUpdateService = ({
+export const useActionControllerUpdateStepResultService = ({
   method = 'PATCH',
   ...options
 }: UseRequestOption = {}): {
-  run: (id: string, requestBody: UpdateActionParams) => void;
+  run: (
+    actionId: string,
+    stepId: string,
+    requestBody: UpdateActionParams
+  ) => void;
   data: any;
 } & UseRequestProperties => {
-  return useRequest(actionControllerUpdate, { method, ...options });
+  return useRequest(actionControllerUpdateStepResult, { method, ...options });
 };
 
 export const useActionControllerUpdateStepStatusService = ({
@@ -206,4 +287,80 @@ export const useActionControllerUpdateStepStatusService = ({
   data: any;
 } & UseRequestProperties => {
   return useRequest(actionControllerUpdateStepStatus, { method, ...options });
+};
+
+export const useActionControllerAnalyzeService = ({
+  method = 'POST',
+  ...options
+}: UseRequestOption = {}): {
+  run: (actionId: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(actionControllerAnalyze, { method, ...options });
+};
+
+export const useActionControllerRestartStepService = ({
+  method = 'POST',
+  ...options
+}: UseRequestOption = {}): {
+  run: (actionId: string, stepId: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(actionControllerRestartStep, { method, ...options });
+};
+
+export const useActionControllerGetService = ({
+  method = 'GET',
+  ...options
+}: UseRequestOption = {}): {
+  run: (actionId: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(actionControllerGet, { method, ...options });
+};
+
+export const useActionControllerGetActionConfigService = ({
+  method = 'GET',
+  ...options
+}: UseRequestOption = {}): {
+  run: (objectType: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(actionControllerGetActionConfig, { method, ...options });
+};
+
+export const useActionControllerGetFormConfigByStepNameService = ({
+  method = 'GET',
+  ...options
+}: UseRequestOption = {}): {
+  run: (actionId: string, stepName: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(actionControllerGetFormConfigByStepName, {
+    method,
+    ...options,
+  });
+};
+
+export const useActionControllerGetWorkflowStepsByStepNameService = ({
+  method = 'GET',
+  ...options
+}: UseRequestOption = {}): {
+  run: (actionId: string, stepName: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(actionControllerGetWorkflowStepsByStepName, {
+    method,
+    ...options,
+  });
+};
+
+export const useActionControllerGenerateService = ({
+  method = 'POST',
+  ...options
+}: UseRequestOption = {}): {
+  run: (actionId: string, stepId: string) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(actionControllerGenerate, { method, ...options });
 };

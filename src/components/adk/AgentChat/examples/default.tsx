@@ -207,13 +207,18 @@ export const MinimalDemo = () => {
 /**
  * Customized AgentChat Example
  *
- * Shows advanced customization options
+ * Shows advanced customization options with enhanced views prop
  */
 export const CustomizedDemo = () => {
   return (
     <Vertical gap={16} padding={20}>
       <Text fontSize={18} fontWeight="600">
-        Customized AgentChat Example
+        Customized AgentChat Example - Enhanced Views
+      </Text>
+
+      <Text color="color.gray.600" fontSize={14}>
+        Demonstrates comprehensive customization using the enhanced views prop
+        and container props for complete control over appearance.
       </Text>
 
       <View
@@ -229,26 +234,127 @@ export const CustomizedDemo = () => {
           enableFileUpload={true}
           enableThoughts={true}
           showAvatars={true}
+          colorScheme="purple"
+          compact={false}
+          rounded={true}
+          containerProps={{
+            backgroundColor: 'color.purple.25',
+            border: '2px solid',
+            borderColor: 'color.purple.300',
+          }}
           views={{
+            // Main areas
             container: {
               backgroundColor: 'color.purple.25',
             },
             header: {
               backgroundColor: 'color.purple.500',
               color: 'white',
+              padding: '16px',
+              borderRadius: '12px 12px 0 0',
             },
             messageList: {
               backgroundColor: 'color.white',
+              padding: '20px',
             },
+            inputArea: {
+              backgroundColor: 'color.purple.50',
+              padding: '16px',
+              borderRadius: '0 0 12px 12px',
+            },
+
+            // Message styling
             userMessage: {
               backgroundColor: 'color.purple.500',
+              color: 'white',
+              borderRadius: '18px 18px 4px 18px',
+              padding: '12px 16px',
+              marginLeft: '40px',
             },
             botMessage: {
               backgroundColor: 'color.purple.100',
               color: 'color.purple.900',
+              borderRadius: '18px 18px 18px 4px',
+              padding: '12px 16px',
+              marginRight: '40px',
             },
-            inputArea: {
+            messageTimestamp: {
+              color: 'color.purple.600',
+              fontSize: '12px',
+            },
+            messageAvatar: {
+              borderRadius: '50%',
+              border: '2px solid',
+              borderColor: 'color.purple.300',
+            },
+
+            // Input components
+            inputField: {
+              borderRadius: '24px',
+              border: '2px solid',
+              borderColor: 'color.purple.200',
+              backgroundColor: 'white',
+            },
+            sendButton: {
+              backgroundColor: 'color.purple.500',
+              borderRadius: '50%',
+              padding: '12px',
+            },
+            attachButton: {
+              color: 'color.purple.500',
+              borderRadius: '8px',
+            },
+
+            // State indicators
+            typingIndicator: {
+              color: 'color.purple.600',
+              backgroundColor: 'color.purple.100',
+              borderRadius: '16px',
+              padding: '8px 12px',
+            },
+            loadingIndicator: {
+              color: 'color.purple.500',
+            },
+
+            // Attachment components
+            attachmentArea: {
               backgroundColor: 'color.purple.50',
+              borderRadius: '8px',
+              padding: '12px',
+              border: '1px dashed',
+              borderColor: 'color.purple.300',
+            },
+            attachmentPreview: {
+              borderRadius: '8px',
+              border: '1px solid',
+              borderColor: 'color.purple.200',
+            },
+
+            // Function call components
+            functionCall: {
+              backgroundColor: 'color.purple.50',
+              border: '1px solid',
+              borderColor: 'color.purple.200',
+              borderRadius: '8px',
+              padding: '12px',
+            },
+
+            // Code components
+            codeBlock: {
+              backgroundColor: 'color.gray.900',
+              color: 'color.gray.100',
+              borderRadius: '8px',
+              padding: '16px',
+            },
+
+            // Thought components
+            thoughtBubble: {
+              backgroundColor: 'color.purple.25',
+              border: '1px dashed',
+              borderColor: 'color.purple.300',
+              borderRadius: '12px',
+              padding: '12px',
+              fontStyle: 'italic',
             },
           }}
         />

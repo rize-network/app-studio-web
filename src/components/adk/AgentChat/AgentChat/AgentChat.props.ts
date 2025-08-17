@@ -99,19 +99,53 @@ export interface AgentEvent {
  * Component View Customization
  */
 export interface AgentChatViews {
+  // Main container areas
   container?: ViewProps;
   header?: ViewProps;
   messageList?: ViewProps;
+  inputArea?: ViewProps;
+  attachmentArea?: ViewProps;
+
+  // Message components
   message?: ViewProps;
   userMessage?: ViewProps;
   botMessage?: ViewProps;
-  inputArea?: ViewProps;
+  systemMessage?: ViewProps;
+  messageContent?: ViewProps;
+  messageTimestamp?: ViewProps;
+  messageAvatar?: ViewProps;
+  messageActions?: ViewProps;
+
+  // Input components
   inputField?: ViewProps;
   sendButton?: ViewProps;
-  attachmentArea?: ViewProps;
+  attachButton?: ViewProps;
+  recordButton?: ViewProps;
+  inputToolbar?: ViewProps;
+
+  // State indicators
   loadingIndicator?: ViewProps;
-  errorMessage?: ViewProps;
   typingIndicator?: ViewProps;
+  errorMessage?: ViewProps;
+  emptyState?: ViewProps;
+
+  // Function call components
+  functionCall?: ViewProps;
+  functionResponse?: ViewProps;
+  functionArgs?: ViewProps;
+
+  // Code execution components
+  codeBlock?: ViewProps;
+  codeOutput?: ViewProps;
+
+  // File attachment components
+  attachmentPreview?: ViewProps;
+  attachmentItem?: ViewProps;
+  attachmentRemoveButton?: ViewProps;
+
+  // Thought components (for thinking mode)
+  thoughtBubble?: ViewProps;
+  thoughtContent?: ViewProps;
 }
 
 /**
@@ -165,8 +199,9 @@ export interface AgentChatProps extends ViewProps, AgentChatEventHandlers {
   showTypingIndicator?: boolean;
   autoScroll?: boolean;
 
-  // Styling
+  // Styling and customization
   views?: AgentChatViews;
+  containerProps?: ViewProps;
 
   // Initial state
   initialMessages?: AgentMessage[];
@@ -176,6 +211,11 @@ export interface AgentChatProps extends ViewProps, AgentChatEventHandlers {
   enableFunctionCalls?: boolean;
   enableCodeExecution?: boolean;
   enableEvaluation?: boolean;
+
+  // Theme and appearance
+  colorScheme?: 'blue' | 'purple' | 'green' | 'orange' | 'red' | 'gray';
+  compact?: boolean;
+  rounded?: boolean;
 
   // Accessibility
   ariaLabel?: string;

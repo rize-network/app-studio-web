@@ -4,10 +4,6 @@
 
 export type GenerateProjectParams = {
   /**
-   * The name of the project to be created.
-   */
-  name: string;
-  /**
    * The description of the project to be created.
    */
   description: string;

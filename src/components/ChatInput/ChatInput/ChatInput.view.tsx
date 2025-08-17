@@ -39,6 +39,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   hideAttachments = false,
   attachmentText = '',
   promptExamples = [],
+  suggestions = [],
   showReferenceImageButton = false,
   errorMessage,
   size = 'md',
@@ -276,16 +277,8 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             placeholder={placeholder}
             disabled={disabled && !isAgentRunning}
             autoFocus={autoFocus}
-            suggestions={
-              promptExamples?.map((example) => ({
-                id: example.id,
-                text: example.text,
-                description: undefined,
-              })) || []
-            }
-            showSuggestions={
-              promptExamples && promptExamples.length > 0 && !value
-            }
+            suggestions={suggestions || []}
+            showSuggestions={suggestions && suggestions.length > 0 && !value}
             onSuggestionSelect={(suggestion) => {
               handleChange(suggestion.text);
             }}

@@ -32,6 +32,10 @@ const AgentSessionView: React.FC<AgentSessionViewProps> = ({
   showRefreshButton = true,
   compactMode = false,
   views,
+  containerProps,
+  colorScheme = 'blue',
+  layout = 'list',
+  showPreviews = true,
   ariaLabel = 'Agent Session Manager',
   ariaDescribedBy,
 
@@ -112,9 +116,36 @@ const AgentSessionView: React.FC<AgentSessionViewProps> = ({
     });
   };
 
+  /**
+   * Get dynamic styles based on theme props
+   */
+  const getThemeStyles = () => {
+    const colorStyles = {
+      blue: { borderColor: 'color.blue.200' },
+      purple: { borderColor: 'color.purple.200' },
+      green: { borderColor: 'color.green.200' },
+      orange: { borderColor: 'color.orange.200' },
+      red: { borderColor: 'color.red.200' },
+      gray: { borderColor: 'color.gray.200' },
+    };
+
+    const layoutStyles = {
+      list: { flexDirection: 'column' as const },
+      grid: { flexDirection: 'row' as const, flexWrap: 'wrap' as const },
+      compact: { padding: '8px' },
+    };
+
+    return {
+      ...colorStyles[colorScheme],
+      ...layoutStyles[layout],
+    };
+  };
+
   return (
     <View
       {...DefaultAgentSessionStyles.container}
+      {...getThemeStyles()}
+      {...containerProps}
       {...views?.container}
       {...props}
       aria-label={ariaLabel}

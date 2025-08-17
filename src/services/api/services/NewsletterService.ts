@@ -155,9 +155,9 @@ export const newsletterControllerCreateSource = (
 };
 
 /**
- * As a admin, i want to delete a history
+ * As a admin, i want to delete a source
  * @param id
- * @returns any history delete
+ * @returns any source delete
  * @throws ApiError
  */
 export const newsletterControllerDeleteSource = (
@@ -168,7 +168,7 @@ export const newsletterControllerDeleteSource = (
     path: `/newsletter/source/${id}`,
     errors: {
       403: `Incorrect credentials`,
-      404: `History does not exists`,
+      404: `Source does not exists`,
     },
   });
 };

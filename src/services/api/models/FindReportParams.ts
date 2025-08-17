@@ -4,7 +4,7 @@
 
 export type FindReportParams = {
   /**
-   * objectType :profile,news,comment,feature,feedback
+   * objectType :profile,news,comment,feature,feedback,project,action,page,component,grant,application,survey
    */
   objectType: string;
   /**

@@ -4,7 +4,7 @@
 
 export type UpdateActionParams = {
   /**
-   * The new name of the action
+   * The new data of the action
    */
-  name?: string;
+  field?: any;
 };

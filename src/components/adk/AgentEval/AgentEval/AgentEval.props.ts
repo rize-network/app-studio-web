@@ -80,25 +80,67 @@ export interface EvaluationConfig {
  * Component View Customization
  */
 export interface AgentEvalViews {
+  // Main container areas
   container?: ViewProps;
   header?: ViewProps;
+  toolbar?: ViewProps;
   evaluationList?: ViewProps;
-  evaluationItem?: ViewProps;
-  activeEvaluationItem?: ViewProps;
   createPanel?: ViewProps;
   resultsPanel?: ViewProps;
   metricsPanel?: ViewProps;
+  configPanel?: ViewProps;
+
+  // Evaluation list items
+  evaluationItem?: ViewProps;
+  activeEvaluationItem?: ViewProps;
+  evaluationTitle?: ViewProps;
+  evaluationDescription?: ViewProps;
+  evaluationStatus?: ViewProps;
+  evaluationProgress?: ViewProps;
+  evaluationMetrics?: ViewProps;
+  evaluationTimestamp?: ViewProps;
+
+  // Test case components
   testCaseList?: ViewProps;
   testCaseItem?: ViewProps;
+  testCaseInput?: ViewProps;
+  testCaseOutput?: ViewProps;
+  testCaseExpected?: ViewProps;
+  testCaseResult?: ViewProps;
+  testCaseMetrics?: ViewProps;
+
+  // Progress and status
   progressBar?: ViewProps;
   statusIndicator?: ViewProps;
+  statusBadge?: ViewProps;
+  scoreDisplay?: ViewProps;
+  durationDisplay?: ViewProps;
+
+  // Action buttons
   actionButtons?: ViewProps;
+  runButton?: ViewProps;
+  stopButton?: ViewProps;
   exportButton?: ViewProps;
   refreshButton?: ViewProps;
+  deleteButton?: ViewProps;
+  duplicateButton?: ViewProps;
+
+  // Search and filters
   searchInput?: ViewProps;
+  filterDropdown?: ViewProps;
+  sortDropdown?: ViewProps;
+  statusFilter?: ViewProps;
+
+  // State displays
   emptyState?: ViewProps;
   loadingState?: ViewProps;
   errorState?: ViewProps;
+
+  // Results visualization
+  chartContainer?: ViewProps;
+  metricsChart?: ViewProps;
+  resultsTable?: ViewProps;
+  summaryCard?: ViewProps;
 }
 
 /**
@@ -171,8 +213,9 @@ export interface AgentEvalProps extends ViewProps, AgentEvalEventHandlers {
   showProgressIndicators?: boolean;
   compactMode?: boolean;
 
-  // Styling
+  // Styling and customization
   views?: AgentEvalViews;
+  containerProps?: ViewProps;
 
   // Initial state
   initialEvaluations?: EvaluationRun[];
@@ -183,6 +226,11 @@ export interface AgentEvalProps extends ViewProps, AgentEvalEventHandlers {
   enableRealTimeUpdates?: boolean;
   enableResultCaching?: boolean;
   enableCustomMetrics?: boolean;
+
+  // Theme and appearance
+  colorScheme?: 'blue' | 'purple' | 'green' | 'orange' | 'red' | 'gray';
+  layout?: 'list' | 'grid' | 'dashboard';
+  showCharts?: boolean;
 
   // Accessibility
   ariaLabel?: string;

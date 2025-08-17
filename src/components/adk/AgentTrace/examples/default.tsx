@@ -360,7 +360,7 @@ export const CustomizedDemo = () => {
             eventList: {
               backgroundColor: 'color.white',
             },
-            metrics: {
+            metricsPanel: {
               backgroundColor: 'color.orange.50',
             },
           }}

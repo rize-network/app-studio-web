@@ -76,18 +76,64 @@ export interface TraceFilter {
  * Component View Customization
  */
 export interface AgentTraceViews {
+  // Main container areas
   container?: ViewProps;
   header?: ViewProps;
+  toolbar?: ViewProps;
   timeline?: ViewProps;
   eventList?: ViewProps;
+  detailsPanel?: ViewProps;
+  metricsPanel?: ViewProps;
+  filtersPanel?: ViewProps;
+
+  // Event components
   eventItem?: ViewProps;
   selectedEventItem?: ViewProps;
-  metrics?: ViewProps;
-  filters?: ViewProps;
+  eventHeader?: ViewProps;
+  eventContent?: ViewProps;
+  eventMetadata?: ViewProps;
+  eventTimestamp?: ViewProps;
+  eventDuration?: ViewProps;
+  eventType?: ViewProps;
+  eventLevel?: ViewProps;
+  eventTags?: ViewProps;
+
+  // Timeline components
+  timelineContainer?: ViewProps;
+  timelineAxis?: ViewProps;
+  timelineEvent?: ViewProps;
+  timelineSpan?: ViewProps;
+  timelineMarker?: ViewProps;
+
+  // Metrics components
+  metricsCard?: ViewProps;
+  performanceChart?: ViewProps;
+  errorRateChart?: ViewProps;
+  latencyChart?: ViewProps;
+  throughputChart?: ViewProps;
+
+  // Visualization components
   visualization?: ViewProps;
+  flowDiagram?: ViewProps;
+  dependencyGraph?: ViewProps;
+  heatmap?: ViewProps;
+
+  // Filter components
+  searchInput?: ViewProps;
+  typeFilter?: ViewProps;
+  levelFilter?: ViewProps;
+  timeRangeFilter?: ViewProps;
+  tagFilter?: ViewProps;
+  durationFilter?: ViewProps;
+
+  // Action buttons
   exportButton?: ViewProps;
   refreshButton?: ViewProps;
-  searchInput?: ViewProps;
+  clearButton?: ViewProps;
+  expandAllButton?: ViewProps;
+  collapseAllButton?: ViewProps;
+
+  // State displays
   emptyState?: ViewProps;
   loadingState?: ViewProps;
   errorState?: ViewProps;
@@ -160,8 +206,9 @@ export interface AgentTraceProps extends ViewProps, AgentTraceEventHandlers {
   showPerformanceMetrics?: boolean;
   compactMode?: boolean;
 
-  // Styling
+  // Styling and customization
   views?: AgentTraceViews;
+  containerProps?: ViewProps;
 
   // Initial state
   initialEvents?: TraceEvent[];
@@ -172,6 +219,11 @@ export interface AgentTraceProps extends ViewProps, AgentTraceEventHandlers {
   enableRealTimeUpdates?: boolean;
   enableEventGrouping?: boolean;
   enableSpanVisualization?: boolean;
+
+  // Theme and appearance
+  colorScheme?: 'blue' | 'purple' | 'green' | 'orange' | 'red' | 'gray';
+  layout?: 'timeline' | 'tree' | 'table' | 'graph';
+  showMinimap?: boolean;
 
   // Accessibility
   ariaLabel?: string;
