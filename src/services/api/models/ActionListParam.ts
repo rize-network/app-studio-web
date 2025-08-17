@@ -2,25 +2,21 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type CreateAnalyticParams = {
-  /**
-   * Analytic Type :view,click,track
-   */
-  event?: string;
-  /**
-   * Analytic Name
-   */
-  name?: string;
+export type ActionListParam = {
   /**
    * ObjectType :profile,news,comment,feature,feedback,project,action,page,component,grant,application,survey
    */
-  objectType?: string;
+  objectType: string;
   /**
    * Object Id
    */
-  objectId?: string;
+  objectId: string;
   /**
-   * Device Id
+   * Skill :project,finance,dev,brand,growth,community,design,ads,product
    */
-  deviceId?: string;
+  skill: string;
+  /**
+   * Project id
+   */
+  projectId: string;
 };

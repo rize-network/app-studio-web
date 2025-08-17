@@ -6,7 +6,7 @@ export type CreateCommentParams = {
   text: string;
   objectId: string;
   /**
-   * ObjectType :profile,news,comment,feature,feedback
+   * ObjectType :profile,news,comment,feature,feedback,project,action,page,component,grant,application,survey
    */
   objectType: string;
 };

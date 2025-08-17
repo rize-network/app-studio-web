@@ -9,7 +9,7 @@ import React, {
 } from 'react';
 import { View, Text, Vertical, useElementPosition } from 'app-studio';
 
-interface Suggestion {
+export interface Suggestion {
   id: string;
   text: string;
   description?: string;

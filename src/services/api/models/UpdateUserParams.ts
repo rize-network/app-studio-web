@@ -22,27 +22,35 @@ export type UpdateUserParams = {
    */
   textLanguage?: string;
   /**
-   * image Model
+   * Image Model
    */
   imageModel?: string;
   /**
-   * image Provider
+   * Image Provider
    */
   imageProvider?: string;
   /**
-   * image Temperature
+   * Image Temperature
    */
   imageTemp?: number;
   /**
-   * video Model
+   * Image Edit Model
+   */
+  imageEditModel?: string;
+  /**
+   * Image Edit Provider
+   */
+  imageEditProvider?: string;
+  /**
+   * Video Model
    */
   videoModel?: string;
   /**
-   * video Provider
+   * Video Provider
    */
   videoProvider?: string;
   /**
-   * video Temperature
+   * Video Temperature
    */
   videoTemp?: number;
 };

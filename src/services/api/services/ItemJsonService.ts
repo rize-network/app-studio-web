@@ -18,7 +18,7 @@ import {
 export const itemJsonControllerCreate = (): CancelablePromise<any> => {
   return __request({
     method: 'POST',
-    path: `/sectio/json`,
+    path: `/section/json`,
     errors: {
       401: `Incorrect credentials`,
     },
@@ -34,7 +34,7 @@ export const itemJsonControllerCreate = (): CancelablePromise<any> => {
 export const itemJsonControllerGet = (id: string): CancelablePromise<any> => {
   return __request({
     method: 'GET',
-    path: `/sectio/json/${id}`,
+    path: `/section/json/${id}`,
     errors: {
       404: `Data does not exists`,
     },
@@ -54,7 +54,7 @@ export const itemJsonControllerUpdate = (
 ): CancelablePromise<any> => {
   return __request({
     method: 'PATCH',
-    path: `/sectio/json/${id}`,
+    path: `/section/json/${id}`,
     body: requestBody,
     mediaType: 'application/json',
     errors: {
@@ -75,7 +75,7 @@ export const itemJsonControllerRemove = (
 ): CancelablePromise<boolean> => {
   return __request({
     method: 'DELETE',
-    path: `/sectio/json/${id}`,
+    path: `/section/json/${id}`,
     errors: {
       403: `Incorrect credentials`,
       404: `Data does not exists`,
@@ -94,7 +94,7 @@ export const itemJsonControllerToggleLock = (
 ): CancelablePromise<any> => {
   return __request({
     method: 'PATCH',
-    path: `/sectio/json/${id}/toggle-lock`,
+    path: `/section/json/${id}/toggle-lock`,
     errors: {
       403: `Incorrect credentials`,
       404: `ItemJson doesn't exist`,

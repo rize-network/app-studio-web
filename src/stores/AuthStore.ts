@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import * as AsyncStorage from 'src/utils/localstorage';
-import { AuthService, OpenAPI } from 'src/services/api';
+import { AuthService } from 'src/services/api';
 import { setToken } from 'src/utils/request';
+import { setApiToken, clearApiToken } from 'src/utils/apiConfig';
 
 type User = {
   id: string;
@@ -27,6 +28,7 @@ type AuthState = {
   location: string;
   device: boolean;
   user: null | User;
+  isInitialized: boolean;
   setLocation: (location: any) => void;
   account: any;
   setAccount: (account: any) => void;
@@ -41,6 +43,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   device: false,
   user: null,
   account: null,
+  isInitialized: false,
   setAccount: (account) => set({ account }),
   location: '/',
   setLocation: (location) => set({ location }),
@@ -48,16 +51,16 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   setToken: async (token, me, onSuccess) => {
     try {
       if (token) {
+        // Set token in both the utility function and OpenAPI directly
         setToken(token);
         await AsyncStorage.write('@token', token);
-        //   await AsyncStorage.write('@email', email);
 
         const storedToken = await AsyncStorage.read('@token');
 
         try {
-          OpenAPI.HEADERS = {
-            Authorization: `Bearer ${storedToken}`,
-          };
+          // Set the token in OpenAPI configuration for API requests
+          setApiToken(storedToken);
+
           if (me) {
             await set({
               token: storedToken,
@@ -89,6 +92,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         }
       } else {
         await AsyncStorage.remove('@token');
+        clearApiToken();
         set({ token: false });
       }
     } catch (error) {
@@ -112,7 +116,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   logout: async (location = '/') => {
     set({ isAuthentificated: false, token: false, user: null, location });
-    OpenAPI.HEADERS = {};
+    // Clear the token from OpenAPI configuration
+    clearApiToken();
     await AsyncStorage.remove('@token');
     await AsyncStorage.remove('@email');
 
@@ -131,8 +136,11 @@ export const isAuthentificated = () => {
   const token = await AsyncStorage.read('@token');
   const email = await AsyncStorage.read('@email');
   if (typeof token == 'string') {
-    useAuthStore.getState().setToken(token);
+    useAuthStore.getState().setToken(token, undefined, () => {
+      useAuthStore.setState({ isInitialized: true });
+    });
   } else {
     useAuthStore.getState().logout();
+    useAuthStore.setState({ isInitialized: true });
   }
 })();

@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { EditImageParams } from '../models/EditImageParams';
+import type { EditLogoParams } from '../models/EditLogoParams';
 import type { EditTextParams } from '../models/EditTextParams';
 import type { GenerateAssistantParams } from '../models/GenerateAssistantParams';
 import type { GenerateJsonAssistantParams } from '../models/GenerateJsonAssistantParams';
@@ -74,6 +75,26 @@ export const assistantControllerEditImage = (
 };
 
 /**
+ * As a user, I want to edit an image using AI
+ * @param requestBody
+ * @returns any Image edited successfully
+ * @throws ApiError
+ */
+export const assistantControllerEditLogo = (
+  requestBody: EditLogoParams
+): CancelablePromise<any> => {
+  return __request({
+    method: 'PATCH',
+    path: `/assistant/logo/edit`,
+    body: requestBody,
+    mediaType: 'application/json',
+    errors: {
+      401: `Incorrect credentials`,
+    },
+  });
+};
+
+/**
  * As a user, I want to edit text using AI
  * @param requestBody
  * @returns any Text edited successfully
@@ -127,6 +148,16 @@ export const useAssistantControllerEditImageService = ({
   data: any;
 } & UseRequestProperties => {
   return useRequest(assistantControllerEditImage, { method, ...options });
+};
+
+export const useAssistantControllerEditLogoService = ({
+  method = 'PATCH',
+  ...options
+}: UseRequestOption = {}): {
+  run: (requestBody: EditLogoParams) => void;
+  data: any;
+} & UseRequestProperties => {
+  return useRequest(assistantControllerEditLogo, { method, ...options });
 };
 
 export const useAssistantControllerEditTextService = ({

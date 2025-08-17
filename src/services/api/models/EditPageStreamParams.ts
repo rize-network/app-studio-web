@@ -2,13 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type UpdateComponentPropsParams = {
+export type EditPageStreamParams = {
   /**
-   * Prompt
+   * Prompt for editing the page using AI agent
    */
   prompt: string;
-  /**
-   * Json Content
-   */
-  json: any;
 };

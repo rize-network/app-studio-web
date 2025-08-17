@@ -27,6 +27,8 @@ export type FindUserParams = {
     | 'imageModel'
     | 'imageProvider'
     | 'imageTemp'
+    | 'imageEditModel'
+    | 'imageEditProvider'
     | 'videoModel'
     | 'videoProvider'
     | 'videoTemp'
