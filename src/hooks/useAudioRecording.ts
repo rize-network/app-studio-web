@@ -17,6 +17,8 @@ export function useAudioRecording() {
   const chunksRef = useRef<Blob[]>([]);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const MIME_TYPE = 'audio/webm;codecs=opus';
+
   const cleanup = useCallback(() => {
     if (mediaRecorderRef.current) {
       if (mediaRecorderRef.current.state !== 'inactive') {
@@ -52,7 +54,7 @@ export function useAudioRecording() {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       streamRef.current = stream;
       const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'audio/webm',
+        mimeType: MIME_TYPE,
       });
       mediaRecorderRef.current = mediaRecorder;
       const audioContext = new (window.AudioContext ||
@@ -71,7 +73,7 @@ export function useAudioRecording() {
         }
       };
       mediaRecorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: 'audio/webm' });
+        const blob = new Blob(chunksRef.current, { type: MIME_TYPE });
         setAudioBlob(blob);
       };
       mediaRecorder.start();
