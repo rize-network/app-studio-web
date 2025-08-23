@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import store from 'store';
+import * as store from 'store';
 import * as AsyncStorage from 'src/utils/localstorage';
 
 export default {

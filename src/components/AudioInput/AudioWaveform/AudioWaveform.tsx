@@ -1,22 +1,17 @@
 'use client';
 
-import { useEffect, useRef, useState, startTransition } from 'react';
-import { clsx } from 'clsx';
+import React, { useEffect, useRef, useState, startTransition } from 'react';
+import { AudioWaveformProps } from './AudioWaveform.props';
+import { AudioWaveformView } from './AudioWaveform.view';
 
-function clamp(value: number, min: number, max: number): number {
-  return Math.min(Math.max(value, min), max);
-}
-
-interface AudioWaveformProps {
-  analyserNode: AnalyserNode | null;
-  isPaused: boolean;
-}
-
-export function AudioWaveform({ analyserNode, isPaused }: AudioWaveformProps) {
+export const AudioWaveform: React.FC<AudioWaveformProps> = ({
+  analyserNode,
+  isPaused,
+  ...viewProps
+}) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const MAX_BARS = 60;
   const resolution = 32; // ms
-  const scalingFactor = 300;
   const [bars, setBars] = useState<number[]>([]);
 
   useEffect(() => {
@@ -56,22 +51,5 @@ export function AudioWaveform({ analyserNode, isPaused }: AudioWaveformProps) {
     };
   }, [analyserNode]);
 
-  return (
-    <div className="mt-4 flex h-8 items-center gap-[1px] md:mt-5 max-w-[200px] w-full">
-      {bars.map((amplitude, index) => (
-        <div
-          key={index}
-          className={clsx(
-            'w-[2px]',
-            isPaused
-              ? 'bg-gray-100'
-              : amplitude >= 0
-              ? 'bg-gray-600'
-              : 'bg-gray-200'
-          )}
-          style={{ height: `${clamp(amplitude * scalingFactor, 2, 32)}px` }}
-        />
-      ))}
-    </div>
-  );
-}
+  return <AudioWaveformView bars={bars} isPaused={isPaused} {...viewProps} />;
+};

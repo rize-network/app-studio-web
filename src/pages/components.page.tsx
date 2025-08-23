@@ -68,6 +68,7 @@ const ToastPage = lazy(() => import('src/pages/toast.page'));
 const TooltipPage = lazy(() => import('src/pages/tooltip.page'));
 const TogglePage = lazy(() => import('src/pages/toggle.page'));
 const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
+const AudioInputPage = lazy(() => import('src/pages/audioInput.page'));
 
 const BackgroundPage = lazy(() => import('src/pages/background.page'));
 
@@ -162,6 +163,7 @@ export const componentList = [
   { name: 'Upload', path: '/upload', element: <UploadPage /> },
   { name: 'Tree', path: '/tree', element: <TreePage /> },
   { name: 'Flow', path: '/flow', element: <FlowPage /> },
+  { name: 'Audio Input', path: '/audio-input', element: <AudioInputPage /> },
 ];
 
 const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (

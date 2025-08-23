@@ -84,7 +84,11 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
 /**
  * Meteors Component
  */
-const Meteors: React.FC<MeteorsProps> = ({ number = 20, children, ...props }) => {
+const Meteors: React.FC<MeteorsProps> = ({
+  number = 20,
+  children,
+  ...props
+}) => {
   const meteors = Array.from({ length: number }, (_, i) => i);
 
   return (
@@ -97,7 +101,7 @@ const Meteors: React.FC<MeteorsProps> = ({ number = 20, children, ...props }) =>
       {...props}
     >
       {meteors.map((idx) => {
-        const leftValue = ((idx * 37) % 200 - 100) + 'px';
+        const leftValue = ((idx * 37) % 200) - 100 + 'px';
         const delaySec = 0.2 + ((idx * 13) % 6) * 0.1 + 's';
         const durSec = (1 + ((idx * 7) % 9)) / 2 + 's';
         const target = 300 + ((idx * 17) % 100) + 'px';

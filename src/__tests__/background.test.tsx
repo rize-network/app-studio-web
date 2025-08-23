@@ -24,7 +24,7 @@ describe('Background Component', () => {
     render(
       <Background.Meteors data-testid="meteors-background" number={5}>
         <div>Meteor Content</div>
-      </Background.Meteors>,
+      </Background.Meteors>
     );
     const meteorsElement = screen.getByTestId('meteors-background');
     expect(meteorsElement).toBeInTheDocument();
