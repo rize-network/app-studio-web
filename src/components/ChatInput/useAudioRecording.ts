@@ -75,6 +75,7 @@ export function useAudioRecording() {
       mediaRecorder.onstop = () => {
         const blob = new Blob(chunksRef.current, { type: MIME_TYPE });
         setAudioBlob(blob);
+        cleanup();
       };
       mediaRecorder.start();
       setRecording(true);
