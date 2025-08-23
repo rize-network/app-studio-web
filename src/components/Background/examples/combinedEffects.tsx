@@ -52,31 +52,21 @@ export const CombinedEffectsDemo = () => (
       <Text fontSize={14} color="color.gray.600">
         Meteors with Content Overlay
       </Text>
-      <div style={{ position: 'relative' }}>
-        <Background.Meteors number={25} width={600} height={300} />
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 10,
-          }}
+      <Background.Meteors number={25} width={600} height={300}>
+        <Vertical
+          alignItems="center"
+          justifyContent="center"
+          gap={16}
+          height="100%"
         >
-          <Vertical alignItems="center" gap={16}>
-            <Text color="white" fontSize={20} fontWeight="600">
-              Shooting Stars
-            </Text>
-            <Button variant="borderMoving" borderMovingDuration={3}>
-              Explore
-            </Button>
-          </Vertical>
-        </div>
-      </div>
+          <Text color="white" fontSize={20} fontWeight="600">
+            Shooting Stars
+          </Text>
+          <Button variant="borderMoving" borderMovingDuration={3}>
+            Explore
+          </Button>
+        </Vertical>
+      </Background.Meteors>
     </Vertical>
 
     <Vertical gap={24}>
