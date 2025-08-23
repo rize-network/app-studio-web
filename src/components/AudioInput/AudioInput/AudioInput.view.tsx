@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AudioWaveform } from '../AudioWaveform/AudioWaveform';
 import { AudioInputViewProps } from './AudioInput.props';
 import { View, Horizontal, Button } from 'app-studio'; // Assuming these are from app-studio
@@ -19,10 +19,23 @@ export function AudioInputView({
   handleFileChange,
   ...viewProps
 }: AudioInputViewProps) {
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (audioBlob) {
+      const url = URL.createObjectURL(audioBlob);
+      setAudioUrl(url);
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    }
+    setAudioUrl(null);
+  }, [audioBlob]);
+
   return (
     <View {...viewProps} gap="2">
       <input type="file" accept="audio/*" onChange={handleFileChange} />
-      {recording && (
+      {recording && analyserNode && (
         <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
       )}
       <Horizontal gap="2">
@@ -48,8 +61,8 @@ export function AudioInputView({
           </>
         )}
       </Horizontal>
-      {audioBlob && !recording && (
-        <audio controls src={URL.createObjectURL(audioBlob)} className="mt-2" />
+      {audioUrl && !recording && (
+        <audio controls src={audioUrl} className="mt-2" />
       )}
     </View>
   );

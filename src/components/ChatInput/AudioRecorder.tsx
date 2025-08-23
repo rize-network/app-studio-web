@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Horizontal, View } from 'app-studio';
 import { MicrophoneIcon, StopIcon } from '../Icon/Icon';
 import { AudioWaveform } from './AudioWaveform';
@@ -25,6 +25,19 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
     startRecording,
     stopRecording,
   } = useAudioRecording();
+
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (audioBlob) {
+      const url = URL.createObjectURL(audioBlob);
+      setAudioUrl(url);
+      return () => {
+        URL.revokeObjectURL(url);
+      };
+    }
+    setAudioUrl(null);
+  }, [audioBlob]);
 
   useEffect(() => {
     if (audioBlob) {
@@ -71,9 +84,10 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
           />
         )}
       </View>
-      {recording && (
+      {recording && analyserNode && (
         <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
       )}
+      {!recording && audioUrl && <audio controls src={audioUrl} />}
     </Horizontal>
   );
 };
