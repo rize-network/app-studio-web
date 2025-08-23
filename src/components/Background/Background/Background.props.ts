@@ -32,6 +32,7 @@ export interface AuroraBackgroundProps extends BackgroundProps {
  */
 export interface MeteorsProps extends ViewProps {
   number?: number;
+  children?: ReactNode;
 }
 
 /**

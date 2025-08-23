@@ -84,21 +84,23 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
 /**
  * Meteors Component
  */
-const Meteors: React.FC<MeteorsProps> = ({ number = 20, ...props }) => {
+const Meteors: React.FC<MeteorsProps> = ({ number = 20, children, ...props }) => {
   const meteors = Array.from({ length: number }, (_, i) => i);
 
   return (
     <View
-      widthHeight={300}
+      width="100%"
+      height="100%"
       backgroundColor="black"
       position="relative"
+      overflow="hidden"
       {...props}
     >
       {meteors.map((idx) => {
-        const leftValue = Math.floor(Math.random() * 300 - 100) + 'px';
-        const delaySec = Math.random() * (0.8 - 0.2) + 0.2 + 's';
-        const durSec = Math.floor(Math.random() * (10 - 2) + 1) / 2 + 's';
-        const target = 300 + Math.floor(Math.random() * 100) + 'px';
+        const leftValue = ((idx * 37) % 200 - 100) + 'px';
+        const delaySec = 0.2 + ((idx * 13) % 6) * 0.1 + 's';
+        const durSec = (1 + ((idx * 7) % 9)) / 2 + 's';
+        const target = 300 + ((idx * 17) % 100) + 'px';
 
         return (
           <View
@@ -112,6 +114,7 @@ const Meteors: React.FC<MeteorsProps> = ({ number = 20, ...props }) => {
             backgroundColor="white"
             boxShadow="0 0 0 1px rgba(255, 255, 255, 0.1)"
             transform="rotate(215deg)"
+            zIndex={0}
             animate={{
               from: { transform: 'translateX(-100%) translateY(-100%)' },
               to: { transform: `translateX(${target}) translateY(${target})` },
@@ -135,6 +138,11 @@ const Meteors: React.FC<MeteorsProps> = ({ number = 20, ...props }) => {
           </View>
         );
       })}
+      {children && (
+        <View position="relative" zIndex={1} width="100%" height="100%">
+          {children}
+        </View>
+      )}
     </View>
   );
 };
