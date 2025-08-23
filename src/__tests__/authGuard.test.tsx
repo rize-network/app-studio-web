@@ -5,15 +5,31 @@ import { useAuthStore } from '../stores/AuthStore';
 
 // Mock the auth store
 jest.mock('../stores/AuthStore');
-const mockUseAuthStore = useAuthStore as jest.MockedFunction<typeof useAuthStore>;
+const mockUseAuthStore = useAuthStore as jest.MockedFunction<
+  typeof useAuthStore
+>;
 
 // Mock app-studio components
 jest.mock('app-studio', () => ({
-  View: ({ children, ...props }: any) => <div data-testid="view" {...props}>{children}</div>,
-  Text: ({ children, ...props }: any) => <span data-testid="text" {...props}>{children}</span>,
-  Vertical: ({ children, ...props }: any) => <div data-testid="vertical" {...props}>{children}</div>,
+  View: ({ children, ...props }: any) => (
+    <div data-testid="view" {...props}>
+      {children}
+    </div>
+  ),
+  Text: ({ children, ...props }: any) => (
+    <span data-testid="text" {...props}>
+      {children}
+    </span>
+  ),
+  Vertical: ({ children, ...props }: any) => (
+    <div data-testid="vertical" {...props}>
+      {children}
+    </div>
+  ),
   Button: ({ children, onClick, ...props }: any) => (
-    <button data-testid="button" onClick={onClick} {...props}>{children}</button>
+    <button data-testid="button" onClick={onClick} {...props}>
+      {children}
+    </button>
   ),
 }));
 
