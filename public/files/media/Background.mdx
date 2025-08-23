@@ -30,9 +30,14 @@ Animated falling meteors effect with customizable count.
 ```tsx
 import React from 'react';
 import { Background } from '../Background';
+import { Text } from '../../Text/Text';
 
 export const MeteorsDemo = () => (
-  <Background.Meteors number={20} />
+  <Background.Meteors number={20} height="300px">
+    <Text color="white" fontSize={20}>
+      Meteors Effect Background
+    </Text>
+  </Background.Meteors>
 );
 ```
 

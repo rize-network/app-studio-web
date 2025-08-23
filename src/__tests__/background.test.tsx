@@ -20,10 +20,15 @@ describe('Background Component', () => {
     expect(auroraElement).toHaveTextContent('Aurora Content');
   });
 
-  test('renders Meteors background without crashing', () => {
-    render(<Background.Meteors data-testid="meteors-background" number={5} />);
+  test('renders Meteors background with children', () => {
+    render(
+      <Background.Meteors data-testid="meteors-background" number={5}>
+        <div>Meteor Content</div>
+      </Background.Meteors>,
+    );
     const meteorsElement = screen.getByTestId('meteors-background');
     expect(meteorsElement).toBeInTheDocument();
+    expect(meteorsElement).toHaveTextContent('Meteor Content');
   });
 
   test('renders Wall background without crashing', () => {
