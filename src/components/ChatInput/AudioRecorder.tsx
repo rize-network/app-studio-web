@@ -29,7 +29,7 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
   useEffect(() => {
     if (audioBlob) {
       const file = new File([audioBlob], `recording-${Date.now()}.webm`, {
-        type: 'audio/webm',
+        type: audioBlob.type || 'audio/webm;codecs=opus',
       });
       onRecordingComplete(file);
     }

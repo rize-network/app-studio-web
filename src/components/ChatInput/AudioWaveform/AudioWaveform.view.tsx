@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Element } from 'app-studio';
+import { View } from 'app-studio';
 import { AudioWaveformViewProps } from './AudioWaveform.props';
 
 export function clamp(value: number, min: number, max: number): number {
@@ -26,7 +26,7 @@ export const AudioWaveformView: React.FC<AudioWaveformViewProps> = ({
       {...viewProps}
     >
       {bars.map((amplitude, index) => (
-        <Element
+        <View
           key={index}
           width={2} // Equivalent to w-[2px]
           backgroundColor={

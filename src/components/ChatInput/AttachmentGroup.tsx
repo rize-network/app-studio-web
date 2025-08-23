@@ -97,6 +97,14 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
             )}
           </Text>
 
+          {showPreviews && file.type.startsWith('audio/') && (
+            <audio
+              controls
+              src={file.localUrl || file.path}
+              style={{ maxWidth: '200px' }}
+            />
+          )}
+
           {/* Reference button for image files */}
           {onSetAsReference && file.type.startsWith('image/') && (
             <View
