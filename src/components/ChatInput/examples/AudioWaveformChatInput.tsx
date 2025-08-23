@@ -7,10 +7,7 @@ export const AudioWaveformChatInputDemo = () => {
   const [inputValue, setInputValue] = useState('');
   const [submittedMessage, setSubmittedMessage] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
-  const [isRecording, setIsRecording] = useState(false);
-  const [analyserNode, setAnalyserNode] = useState<AnalyserNode | null>(null);
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const mediaStreamSourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
+  // Audio recording is handled internally by ChatInput's AudioRecorder.
 
   const handleSubmit = () => {
     if (inputValue.trim() || uploadedFiles.length > 0) {
@@ -18,36 +15,6 @@ export const AudioWaveformChatInputDemo = () => {
       setInputValue('');
       setUploadedFiles([]);
     }
-  };
-
-  const handleAudioRecordingStart = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      audioContextRef.current = new (window.AudioContext ||
-        (window as any).webkitAudioContext)();
-      mediaStreamSourceRef.current =
-        audioContextRef.current.createMediaStreamSource(stream);
-      const newAnalyserNode = audioContextRef.current.createAnalyser();
-      mediaStreamSourceRef.current.connect(newAnalyserNode);
-      setAnalyserNode(newAnalyserNode);
-      setIsRecording(true);
-    } catch (error) {
-      console.error('Error starting audio recording:', error);
-    }
-  };
-
-  const handleAudioRecordingStop = () => {
-    if (mediaStreamSourceRef.current) {
-      mediaStreamSourceRef.current.disconnect();
-      mediaStreamSourceRef.current.mediaStream
-        .getTracks()
-        .forEach((track) => track.stop());
-    }
-    if (audioContextRef.current) {
-      audioContextRef.current.close();
-    }
-    setAnalyserNode(null);
-    setIsRecording(false);
   };
 
   return (
@@ -84,8 +51,6 @@ export const AudioWaveformChatInputDemo = () => {
             }}
             setPendingFiles={() => {}} // Mock function
             setIsUploading={() => {}} // Mock function
-            onAudioRecordingStart={handleAudioRecordingStart}
-            onAudioRecordingStop={handleAudioRecordingStop}
             getPendingFiles={() => []}
             clearPendingFiles={() => {}}
             onSubmit={handleSubmit}
