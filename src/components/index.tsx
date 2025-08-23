@@ -1,6 +1,7 @@
 export * from './Accordion/Accordion';
 export * from './Alert/Alert';
 export * from './AspectRatio/AspectRatio';
+export * from './AudioInput/AudioInput';
 export * from './Avatar/Avatar';
 export * from './Badge/Badge';
 export * from './Button/Button';
@@ -64,6 +65,7 @@ export { default as AgentEval } from './adk/AgentEval/AgentEval';
 export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';
 export * from './AspectRatio/AspectRatio/AspectRatio.props';
+export * from './AudioInput/AudioInput/AudioInput.props';
 export * from './Avatar/Avatar/Avatar.props';
 export * from './Badge/Badge/Badge.props';
 export * from './Button/Button/Button.props';
