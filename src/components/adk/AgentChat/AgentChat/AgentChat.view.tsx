@@ -245,6 +245,9 @@ const AgentChatView: React.FC<AgentChatViewProps> = ({
           loading={isLoading}
           disabled={isLoading}
           hideAttachments={!enableFileUpload}
+          enableAudioRecording={enableAudioRecording}
+          onAudioRecordingStart={props.onAudioRecordingStart}
+          onAudioRecordingStop={props.onAudioRecordingStop}
           views={{
             container: views?.inputField,
           }}

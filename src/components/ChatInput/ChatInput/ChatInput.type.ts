@@ -72,6 +72,7 @@ export interface ChatInputStyles {
   referenceButton?: ViewProps;
   submitButton?: ViewProps;
   fileButton?: ViewProps;
+  recordButton?: ViewProps;
   modelSelector?: ViewProps;
   loadingIndicator?: ViewProps;
   bottomTip?: ViewProps;

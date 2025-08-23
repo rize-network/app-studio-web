@@ -22,6 +22,8 @@ import {
   LoadingSpinnerIcon,
   AttachmentIcon,
 } from '../../Icon/Icon';
+import { AudioRecorder } from '../AudioRecorder';
+import { UploadedFile } from './ChatInput.type';
 
 const ChatInputView: React.FC<ChatInputViewProps> = ({
   // Props from parent
@@ -30,6 +32,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   loading = false,
   disabled = false,
   isAgentRunning = false,
+  enableAudioRecording = false,
   leftButtons,
   rightButtons,
   onStopAgent,
@@ -49,6 +52,8 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   mentionData = [],
   mentionTrigger = '@',
   onMentionSelect,
+  onAudioRecordingStart,
+  onAudioRecordingStop,
 
   // Props from state
   value,
@@ -298,6 +303,26 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             marginTop="8px"
           >
             <Horizontal gap={8} alignItems="center">
+              {/* Audio Recorder */}
+              {enableAudioRecording && (
+                <AudioRecorder
+                  onRecordingStart={onAudioRecordingStart}
+                  onRecordingComplete={(file) => {
+                    setPendingFiles((prev) => [...prev, file]);
+                    const uploaded: UploadedFile = {
+                      name: file.name,
+                      path: `/workspace/${file.name}`,
+                      size: file.size,
+                      type: file.type || 'audio/webm',
+                      localUrl: URL.createObjectURL(file),
+                    };
+                    setUploadedFiles((prev) => [...prev, uploaded]);
+                    onAudioRecordingStop?.(file);
+                  }}
+                  views={{ button: views?.recordButton }}
+                />
+              )}
+
               {/* File Upload Button */}
               {!hideAttachments && (
                 <Uploader
