@@ -89,6 +89,21 @@ export interface ChatInputProps extends ViewProps {
   hideAttachments?: boolean;
 
   /**
+   * Enable audio recording button
+   */
+  enableAudioRecording?: boolean;
+
+  /**
+   * Callback when audio recording starts
+   */
+  onAudioRecordingStart?: () => void;
+
+  /**
+   * Callback when audio recording stops
+   */
+  onAudioRecordingStop?: (audio: Blob) => void;
+
+  /**
    * Title for the chat input
    */
   title?: string;
