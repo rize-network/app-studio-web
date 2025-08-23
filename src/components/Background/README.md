@@ -38,6 +38,11 @@ import { Background } from '@app-studio/web';
 >
   <Text color="white">Gradient Background</Text>
 </Background.Gradient>
+
+// Meteors background with content
+<Background.Meteors number={20} height="300px">
+  <Text color="white">Meteors Background</Text>
+</Background.Meteors>
 ```
 
 ## Available Components

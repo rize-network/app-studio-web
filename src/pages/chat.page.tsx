@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, Vertical, Horizontal, Button } from 'app-studio';
 import { ChatInput } from '../components/ChatInput';
 import { PromptExample } from '../components/ChatInput/ChatInput/ChatInput.type';
+import { AudioWaveformChatInputDemo } from '../components/ChatInput/examples/AudioWaveformChatInput';
 
 const ChatInputDemo = () => {
   const chatInputRef = useRef<any>(null);
@@ -545,6 +546,13 @@ const ChatInputDemo = () => {
               • Customizable mention data and trigger character
             </Text>
           </View>
+        </View>
+
+        <View gap={24}>
+          <Text fontSize="16px" fontWeight="bold">
+            Audio Waveform Chat Input Example
+          </Text>
+          <AudioWaveformChatInputDemo />
         </View>
       </Vertical>
     </View>

@@ -8,19 +8,19 @@ import { API_URL } from 'src/configs/AppConfig';
 export function initializeApiConfig() {
   // Set the base URL for all API requests
   OpenAPI.BASE = API_URL;
-  
+
   // Enable CORS for cross-origin requests
   OpenAPI.CORS = 'cors';
-  
+
   // Set credentials to include for authentication
   OpenAPI.WITH_CREDENTIALS = false;
   OpenAPI.CREDENTIALS = 'same-origin';
-  
+
   console.log('OpenAPI configuration initialized:', {
     BASE: OpenAPI.BASE,
     CORS: OpenAPI.CORS,
     WITH_CREDENTIALS: OpenAPI.WITH_CREDENTIALS,
-    CREDENTIALS: OpenAPI.CREDENTIALS
+    CREDENTIALS: OpenAPI.CREDENTIALS,
   });
 }
 
@@ -50,6 +50,6 @@ export function getApiConfig() {
     CORS: OpenAPI.CORS,
     WITH_CREDENTIALS: OpenAPI.WITH_CREDENTIALS,
     CREDENTIALS: OpenAPI.CREDENTIALS,
-    HEADERS: OpenAPI.HEADERS
+    HEADERS: OpenAPI.HEADERS,
   };
 }
