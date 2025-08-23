@@ -20,7 +20,7 @@ export function useAudioInputState(props: AudioInputProps) {
   useEffect(() => {
     if (audioBlob && onAudio) {
       const file = new File([audioBlob], 'recording.webm', {
-        type: audioBlob.type,
+        type: audioBlob.type || 'audio/webm;codecs=opus',
       });
       onAudio(file);
     }
