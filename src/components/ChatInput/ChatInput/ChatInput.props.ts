@@ -7,7 +7,6 @@ import {
   PromptExample,
   Shape,
   Size,
-  UploadedFile,
   Variant,
 } from './ChatInput.type';
 import { Suggestion } from '../EditableInput';
@@ -244,7 +243,7 @@ export interface ChatInputViewProps extends ChatInputProps {
   /**
    * List of uploaded files
    */
-  uploadedFiles: UploadedFile[];
+  uploadedFiles: File[];
 
   /**
    * Callback function to remove an uploaded file
@@ -259,7 +258,7 @@ export interface ChatInputViewProps extends ChatInputProps {
   /**
    * Callback function to set uploaded files
    */
-  setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>;
+  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>;
 
   /**
    * Callback function to set whether files are being uploaded

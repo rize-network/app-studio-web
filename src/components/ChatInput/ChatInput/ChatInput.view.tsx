@@ -23,8 +23,6 @@ import {
   AttachmentIcon,
 } from '../../Icon/Icon';
 import { AudioRecorder } from '../AudioRecorder';
-import { UploadedFile } from './ChatInput.type';
-import { getFileCategory } from '../../../utils/file'; // Import the helper function
 
 const ChatInputView: React.FC<ChatInputViewProps> = ({
   // Props from parent
@@ -113,14 +111,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
     (file: File) => {
       setPendingFiles((prev) => [...prev, file]);
 
-      const uploaded: UploadedFile = {
-        name: file.name,
-        path: `/workspace/${file.name}`,
-        size: file.size,
-        type: getFileCategory(file.type), // Use helper to determine category
-        localUrl: URL.createObjectURL(file),
-      };
-      setUploadedFiles((prev) => [...prev, uploaded]);
+      setUploadedFiles((prev) => [...prev, file]);
       onAudioRecordingStop?.(file);
     },
     [setPendingFiles, setUploadedFiles, onAudioRecordingStop]
@@ -142,18 +133,8 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
         // Add files to pending files
         setPendingFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
 
-        // Create uploaded file objects
-        const newUploadedFiles = filteredFiles.map((file: File) => ({
-          name: file.name,
-          path: `/workspace/${file.name}`,
-          size: file.size,
-          type: getFileCategory(file.type), // Use helper to determine category
-          localUrl: URL.createObjectURL(file),
-          isReferenceImage: false,
-        }));
-
         // Add files to uploaded files
-        setUploadedFiles((prev) => [...prev, ...newUploadedFiles]);
+        setUploadedFiles((prev) => [...prev, ...filteredFiles]);
       }
     },
     [setPendingFiles, setUploadedFiles]

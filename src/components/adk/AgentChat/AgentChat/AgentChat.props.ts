@@ -1,5 +1,4 @@
 import { ViewProps } from 'app-studio';
-import { UploadedFile } from '../../../ChatInput/ChatInput/ChatInput.type';
 
 /**
  * Core ADK Agent Types
@@ -72,9 +71,9 @@ export interface AgentMessage {
 }
 
 export interface MessageAttachment {
-  file: UploadedFile | File;
+  file: File;
   url: string;
-  type: 'image' | 'video' | 'audio' | 'document' | 'application/octet-stream';
+  type: string;
 }
 
 export interface AgentSession {

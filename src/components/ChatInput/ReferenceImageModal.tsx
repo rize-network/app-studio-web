@@ -3,12 +3,11 @@
 import React, { useRef } from 'react';
 import { Text, View, Horizontal } from 'app-studio';
 import { CloseIcon, UploadIcon, TrashIcon } from '../Icon/Icon';
-import { UploadedFile } from './ChatInput/ChatInput.type';
 
 interface ReferenceImageModalProps {
   isOpen: boolean;
   onClose: () => void;
-  referenceImages: UploadedFile[];
+  referenceImages: File[];
   onReferenceImageUpload: (files: File[]) => void;
   onRemoveReferenceImage: () => void;
   views?: {
@@ -141,7 +140,7 @@ export const ReferenceImageModal: React.FC<ReferenceImageModalProps> = ({
             >
               <View
                 as="img"
-                src={currentImage.localUrl}
+                src={URL.createObjectURL(currentImage)}
                 alt={currentImage.name}
                 width="100%"
                 height="100%"

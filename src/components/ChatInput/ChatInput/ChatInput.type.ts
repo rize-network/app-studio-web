@@ -18,18 +18,6 @@ export type Shape = 'default' | 'sharp' | 'rounded';
 export type Variant = 'default' | 'outline' | 'none';
 
 /**
- * Uploaded file interface
- */
-export interface UploadedFile {
-  name: string;
-  path: string;
-  size: number;
-  type: 'image' | 'video' | 'audio' | 'document' | 'application/octet-stream'; // Added 'application/octet-stream' for generic files
-  localUrl?: string;
-  isReferenceImage?: boolean;
-}
-
-/**
  * Prompt example interface
  */
 export interface PromptExample {
