@@ -8,6 +8,8 @@ import {
   MessagePart,
 } from './AgentChat.props';
 import { generateId } from '../../../../utils/generateId';
+import { getFileCategory } from '../../../../utils/file'; // Import the helper function
+import { UploadedFile } from '../../../ChatInput/ChatInput/ChatInput.type'; // Import UploadedFile type
 
 /**
  * Custom hook for managing AgentChat state and interactions
@@ -125,11 +127,16 @@ export const useAgentChat = (props: AgentChatProps) => {
         // Add file attachments
         for (const attachment of attachments) {
           const fileData = await readFileAsBase64(attachment.file);
+          // Ensure mimeType is compatible with MessagePart's inlineData
+          const mimeType =
+            typeof attachment.file.type === 'string'
+              ? attachment.file.type
+              : 'application/octet-stream'; // Fallback if type is not a string
           parts.push({
             inlineData: {
               displayName: attachment.file.name,
               data: fileData,
-              mimeType: attachment.file.type,
+              mimeType: mimeType,
             },
           });
         }
@@ -384,7 +391,7 @@ export const useAgentChat = (props: AgentChatProps) => {
         const attachment: MessageAttachment = {
           file,
           url: URL.createObjectURL(file),
-          type: getFileType(file.type),
+          type: getFileCategory(file.type), // Use the shared helper function
         };
 
         validFiles.push(attachment);
@@ -392,7 +399,14 @@ export const useAgentChat = (props: AgentChatProps) => {
 
       if (validFiles.length > 0) {
         setSelectedFiles((prev) => [...prev, ...validFiles]);
-        onFileUpload?.(validFiles.map((f) => f.file));
+        // onFileUpload expects File[], so map UploadedFile back to File if necessary
+        onFileUpload?.(
+          validFiles.map((f) =>
+            f.file instanceof File
+              ? f.file
+              : new File([], f.file.name, { type: f.file.type })
+          )
+        );
       }
     },
     [
@@ -418,30 +432,40 @@ export const useAgentChat = (props: AgentChatProps) => {
 
   /**
    * Utility function to read file as base64
+   * Handles both File and UploadedFile types.
    */
-  const readFileAsBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        const base64Data = result.split(',')[1];
-        resolve(base64Data);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
-
-  /**
-   * Get file type category
-   */
-  const getFileType = (
-    mimeType: string
-  ): 'image' | 'video' | 'audio' | 'document' => {
-    if (mimeType.startsWith('image/')) return 'image';
-    if (mimeType.startsWith('video/')) return 'video';
-    if (mimeType.startsWith('audio/')) return 'audio';
-    return 'document';
+  const readFileAsBase64 = async (
+    file: File | UploadedFile
+  ): Promise<string> => {
+    if (file instanceof File) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const result = e.target?.result as string;
+          const base64Data = result.split(',')[1];
+          resolve(base64Data);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    } else if (file.localUrl) {
+      // If it's an UploadedFile with a localUrl, fetch it
+      const response = await fetch(file.localUrl);
+      const blob = await response.blob();
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const result = e.target?.result as string;
+          const base64Data = result.split(',')[1];
+          resolve(base64Data);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob);
+      });
+    }
+    throw new Error(
+      'Cannot read file: neither File nor UploadedFile with localUrl'
+    );
   };
 
   /**

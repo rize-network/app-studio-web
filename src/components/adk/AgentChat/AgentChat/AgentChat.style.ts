@@ -154,7 +154,7 @@ export const DefaultAgentChatStyles = {
     width: '20px',
     height: '20px',
     borderRadius: '50%',
-    backgroundColor: 'color.red.500',
+    backgroundColor: 'color.black.900',
     color: 'white',
     border: 'none',
     cursor: 'pointer',

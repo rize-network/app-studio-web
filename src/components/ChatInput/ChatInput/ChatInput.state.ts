@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChatInputProps } from './ChatInput.props';
 import { ModelOption, PromptExample, UploadedFile } from './ChatInput.type';
+import { getFileCategory } from 'src/utils/file'; // Import the helper function
 
 /**
  * Custom hook for managing ChatInput state
@@ -237,7 +238,7 @@ export const useChatInputState = (props: ChatInputProps) => {
       name: imageFiles[0].name,
       path: `/workspace/${imageFiles[0].name}`,
       size: imageFiles[0].size,
-      type: imageFiles[0].type,
+      type: getFileCategory(imageFiles[0].type), // Use helper to determine category
       localUrl: URL.createObjectURL(imageFiles[0]),
       isReferenceImage: true,
     };

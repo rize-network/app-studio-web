@@ -1,11 +1,10 @@
 'use client';
 
 import React, { useCallback } from 'react';
-import { Horizontal, Text, View } from 'app-studio';
+import { Horizontal, Text, Vertical, View, Image, Center } from 'app-studio';
 import { UploadedFile } from './ChatInput/ChatInput.type';
-import { ImageIcon, TrashIcon } from '../Icon/Icon';
-import { MediaPreview } from '../MediaPreview';
-import { Button } from '../Button/Button';
+import { ImageIcon, FileIcon, AudioIcon } from '../Icon/Icon';
+import { HoverCard } from '../HoverCard/HoverCard';
 
 interface AttachmentGroupProps {
   files: UploadedFile[];
@@ -58,11 +57,11 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
       {files.map((file, index) => {
         const previewUrl = file.localUrl || file.path;
         const isImage = file.type.startsWith('image/');
-
-        const handleOpen = () => window.open(previewUrl, '_blank');
+        const isVideo = file.type.startsWith('video/');
+        const isAudio = file.type.startsWith('audio/');
 
         return (
-          <Horizontal
+          <Vertical
             key={index}
             alignItems="center"
             gap="6px"
@@ -76,39 +75,73 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
             animationDuration={0.2}
             {...views?.item}
           >
-            <Text
-              fontWeight="500"
-              color="color.gray.700"
-              maxWidth="120px"
-              textOverflow="ellipsis"
-              whiteSpace="nowrap"
-              overflow="hidden"
-              {...views?.name}
-            >
-              {file.name}
-            </Text>
-
-            <Text
-              fontSize="10px"
-              color="color.gray.500"
-              flexShrink={0}
-              {...views?.size}
-            >
-              ({formatFileSize(file.size)})
-              {!sandboxId && (
-                <Text as="span" marginLeft="4px" color="theme.primary">
-                  (pending)
-                </Text>
-              )}
-            </Text>
+            <Horizontal>
+              {/* {!sandboxId && (
+                  <Text as="span" marginLeft="4px" color="theme.primary">
+                    (pending)
+                  </Text>
+                )} */}
+            </Horizontal>
 
             {showPreviews && (
-              <MediaPreview
-                url={previewUrl}
-                type={file.type}
-                name={file.name}
-                onOpen={handleOpen}
-              />
+              <HoverCard>
+                <HoverCard.Trigger>
+                  {isImage && (
+                    <Image
+                      src={previewUrl}
+                      alt={file.name}
+                      width="60px"
+                      height="60px"
+                      objectFit="cover"
+                    />
+                  )}
+                  {isVideo && (
+                    <View
+                      as="video"
+                      src={previewUrl}
+                      width="60px"
+                      height="60px"
+                      style={{ objectFit: 'cover' }}
+                      muted
+                    />
+                  )}
+                  {isAudio && (
+                    <Center
+                      width="60px"
+                      height="60px"
+                      backgroundColor="color.gray.200"
+                    >
+                      <AudioIcon widthHeight={24} color="color.gray.600" />
+                    </Center>
+                  )}
+                  {!isImage && !isVideo && !isAudio && (
+                    <Center
+                      width="60px"
+                      height="60px"
+                      backgroundColor="color.gray.200"
+                    >
+                      <FileIcon widthHeight={24} color="color.gray.600" />
+                    </Center>
+                  )}
+                </HoverCard.Trigger>
+                <HoverCard.Content>
+                  {isImage && (
+                    <Image src={previewUrl} alt={file.name} maxWidth="300px" />
+                  )}
+                  {isVideo && (
+                    <View
+                      as="video"
+                      src={previewUrl}
+                      controls
+                      style={{ maxWidth: '300px' }}
+                    />
+                  )}
+                  {isAudio && <View as="audio" src={previewUrl} controls />}
+                  <Text marginTop="4px">
+                    {file.name} ({formatFileSize(file.size)})
+                  </Text>
+                </HoverCard.Content>
+              </HoverCard>
             )}
 
             {/* Reference button for image files */}
@@ -152,13 +185,13 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
               </View>
             )}
 
-            <Button
-              variant="ghost"
-              size="sm"
-              icon={<TrashIcon widthHeight={12} />}
-              onClick={() => onRemove(index)}
-            />
-          </Horizontal>
+            {/* <Button
+                variant="ghost"
+                size="sm"
+                icon={<TrashIcon widthHeight={12} />}
+                onClick={() => onRemove(index)}
+              /> */}
+          </Vertical>
         );
       })}
     </View>
