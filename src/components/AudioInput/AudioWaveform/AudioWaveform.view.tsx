@@ -15,8 +15,8 @@ export const AudioWaveformView: React.FC<AudioWaveformViewProps> = ({
 
   return (
     <Horizontal
-      flexDirection="row"
       alignItems="center"
+      minWidth={100}
       gap={1}
       height={32} // Fixed height for the waveform container
       maxWidth={200}
