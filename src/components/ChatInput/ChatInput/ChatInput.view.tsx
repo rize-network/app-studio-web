@@ -111,11 +111,11 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   const handleRecordingComplete = React.useCallback(
     (file: File) => {
       setPendingFiles((prev) => {
-          const nonAudio = prev.filter(
-            (f) => !(f.type || '').startsWith('audio/')
-          );
-          return [...nonAudio, file];
-        });
+        const nonAudio = prev.filter(
+          (f) => !(f.type || '').startsWith('audio/')
+        );
+        return [...nonAudio, file];
+      });
       const uploaded: UploadedFile = {
         name: file.name,
         path: `/workspace/${file.name}`,
@@ -133,7 +133,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
     },
     [setPendingFiles, setUploadedFiles, onAudioRecordingStop]
   );
- 
+
   // Handle multiple file uploads for the Uploader component
   const handleMultipleFileUpload = (files: File[]) => {
     // Filter files that exceed size limit (50MB)
