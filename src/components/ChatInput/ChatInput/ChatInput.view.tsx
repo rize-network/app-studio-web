@@ -24,6 +24,7 @@ import {
 } from '../../Icon/Icon';
 import { AudioRecorder } from '../AudioRecorder';
 import { UploadedFile } from './ChatInput.type';
+import { getFileCategory } from '../../../utils/file'; // Import the helper function
 
 const ChatInputView: React.FC<ChatInputViewProps> = ({
   // Props from parent
@@ -116,7 +117,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
         name: file.name,
         path: `/workspace/${file.name}`,
         size: file.size,
-        type: file.type || 'audio/webm;codecs=opus',
+        type: getFileCategory(file.type), // Use helper to determine category
         localUrl: URL.createObjectURL(file),
       };
       setUploadedFiles((prev) => [...prev, uploaded]);
@@ -146,7 +147,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
           name: file.name,
           path: `/workspace/${file.name}`,
           size: file.size,
-          type: file.type || 'application/octet-stream',
+          type: getFileCategory(file.type), // Use helper to determine category
           localUrl: URL.createObjectURL(file),
           isReferenceImage: false,
         }));

@@ -5,6 +5,7 @@ import { Button, Horizontal } from 'app-studio';
 import { useUpload } from '../Uploader/Uploader/Uploader.state';
 import { UploadedFile } from './ChatInput/ChatInput.type';
 import { AttachmentIcon, LoadingSpinnerIcon } from '../Icon/Icon';
+import { getFileCategory } from '../../utils/file'; // Import the helper function
 
 interface ChatUploaderProps {
   loading: boolean;
@@ -49,7 +50,7 @@ const handleLocalFiles = (
     name: file.name,
     path: `/workspace/${file.name}`,
     size: file.size,
-    type: file.type || 'application/octet-stream',
+    type: getFileCategory(file.type), // Use helper to determine category
     localUrl: URL.createObjectURL(file),
   }));
 

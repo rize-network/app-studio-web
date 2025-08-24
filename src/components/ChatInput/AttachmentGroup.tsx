@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useCallback } from 'react';
-import { Horizontal, Text, View } from 'app-studio';
+import { View } from 'app-studio';
 import { UploadedFile } from './ChatInput/ChatInput.type';
-import { ImageIcon, TrashIcon } from '../Icon/Icon';
-import { Button } from '../Button/Button';
+import { MessageAttachmentPreview } from '../adk/AgentChat/AgentChat/MessageAttachmentPreview';
 
 interface AttachmentGroupProps {
   files: UploadedFile[];
@@ -55,100 +54,11 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
       {...views?.container}
     >
       {files.map((file, index) => (
-        <Horizontal
+        <MessageAttachmentPreview
           key={index}
-          alignItems="center"
-          gap="6px"
-          padding="4px 8px"
-          borderRadius="6px"
-          backgroundColor="color.gray.100"
-          animate={{
-            from: { opacity: 0, scale: 0.9 },
-            to: { opacity: 1, scale: 1 },
-          }}
-          animationDuration={0.2}
-          {...views?.item}
-        >
-          <Text
-            fontWeight="500"
-            color="color.gray.700"
-            maxWidth="120px"
-            textOverflow="ellipsis"
-            whiteSpace="nowrap"
-            overflow="hidden"
-            {...views?.name}
-          >
-            {file.name}
-          </Text>
-
-          <Text
-            fontSize="10px"
-            color="color.gray.500"
-            flexShrink={0}
-            {...views?.size}
-          >
-            ({formatFileSize(file.size)})
-            {!sandboxId && (
-              <Text as="span" marginLeft="4px" color="theme.primary">
-                (pending)
-              </Text>
-            )}
-          </Text>
-
-          {showPreviews && file.type.startsWith('audio/') && (
-            <audio
-              controls
-              src={file.localUrl || file.path}
-              style={{ maxWidth: '200px' }}
-            />
-          )}
-
-          {/* Reference button for image files */}
-          {onSetAsReference && file.type.startsWith('image/') && (
-            <View
-              as="button"
-              type="button"
-              width="16px"
-              height="16px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              borderRadius="50%"
-              backgroundColor={
-                file.isReferenceImage ? 'theme.primary' : 'transparent'
-              }
-              color={file.isReferenceImage ? 'color.white' : 'color.gray.500'}
-              cursor="pointer"
-              transition="all 0.2s ease"
-              onClick={() => onSetAsReference(index)}
-              title={
-                file.isReferenceImage
-                  ? 'Reference image'
-                  : 'Set as reference image'
-              }
-              _hover={{
-                backgroundColor: file.isReferenceImage
-                  ? 'color.blue.600'
-                  : 'color.blue.100',
-                color: file.isReferenceImage ? 'color.white' : 'theme.primary',
-              }}
-              {...views?.referenceButton}
-            >
-              <ImageIcon
-                widthHeight={20}
-                color="currentColor"
-                filled={file.isReferenceImage}
-              />
-            </View>
-          )}
-
-          <Button
-            variant="ghost"
-            size="sm"
-            icon={<TrashIcon widthHeight={12} />}
-            onClick={() => onRemove(index)}
-          />
-        </Horizontal>
+          attachment={{ file, url: file.path, type: file.type as any }}
+          onRemove={() => onRemove(index)}
+        />
       ))}
     </View>
   );
