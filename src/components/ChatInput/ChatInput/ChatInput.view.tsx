@@ -264,6 +264,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             sandboxId={sandboxId}
             onRemove={removeUploadedFile}
             onSetAsReference={setFileAsReference}
+            showPreviews={true}
             views={{
               container: views?.attachments,
               item: views?.attachmentItem,
@@ -313,7 +314,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                       name: file.name,
                       path: `/workspace/${file.name}`,
                       size: file.size,
-                      type: file.type || 'audio/webm',
+                      type: file.type || 'audio/webm;codecs=opus',
                       localUrl: URL.createObjectURL(file),
                     };
                     setUploadedFiles((prev) => [...prev, uploaded]);
