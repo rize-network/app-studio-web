@@ -13,8 +13,6 @@ import { AttachmentGroup } from '../AttachmentGroup';
 import { EditableInput } from '../EditableInput';
 import { Uploader } from '../../Uploader/Uploader';
 import { PromptExamples } from '../PromptExamples';
-// import { ReferenceImageButton } from '../ReferenceImageButton';
-// import { ReferenceImageModal } from '../ReferenceImageModal';
 import { Loader } from '../../Loader/Loader';
 import {
   StopIcon,
@@ -42,7 +40,6 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   attachmentText = '',
   promptExamples = [],
   suggestions = [],
-  showReferenceImageButton = false,
   errorMessage,
   size = 'md',
   shape = 'rounded',
@@ -74,14 +71,9 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   canAccessModel,
   isGuideTipShown,
   hideGuideTip,
-  isReferenceImageModalShown,
-  toggleReferenceImageModal,
   handlePromptExampleSelect,
   handleDragOver,
   handleDragLeave,
-  handleReferenceImageUpload,
-  removeReferenceImage,
-  setFileAsReference,
 
   // Other props
   ...props
@@ -140,6 +132,15 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
     [setPendingFiles, setUploadedFiles]
   );
 
+  // Combine mention data with uploaded files
+  const combinedMentionData = [
+    ...(mentionData || []),
+    ...uploadedFiles.map((file, index) => ({
+      id: `file-${index}`,
+      name: file.name,
+    })),
+  ];
+
   return (
     <View
       display="flex"
@@ -157,19 +158,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
 
         if (e.dataTransfer.files.length > 0) {
           const files = Array.from(e.dataTransfer.files) as File[];
-
-          // Separate image files from other files
-          const imageFiles = files.filter((file) =>
-            file.type.startsWith('image/')
-          );
-
-          // Handle image files as reference images if reference image modal is open
-          if (isReferenceImageModalShown && imageFiles.length > 0) {
-            handleReferenceImageUpload(imageFiles);
-          } else {
-            // Use the same file handling logic as the Uploader component
-            handleMultipleFileUpload(files);
-          }
+          handleMultipleFileUpload(files);
         }
       }}
     >
@@ -209,40 +198,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
         </Horizontal>
       )}
 
-      {/* Header */}
-      {/* <Horizontal
-        justifyContent="space-between"
-        alignItems="center"
-        {...views?.header}
-      >
-        {showReferenceImageButton && (
-          <ReferenceImageButton
-            onClick={toggleReferenceImageModal}
-            hasReferenceImage={uploadedFiles.some(
-              (file) => file.isReferenceImage
-            )}
-            views={{
-              button: views?.referenceImageButton,
-            }}
-          />
-        )}
-      </Horizontal> */}
-
-      {/* Reference Image Modal */}
       <View position="relative" width="100%" overflow="visible">
-        {/* <ReferenceImageModal
-          isOpen={isReferenceImageModalShown}
-          onClose={toggleReferenceImageModal}
-          referenceImages={uploadedFiles.filter(
-            (file) => file.isReferenceImage
-          )}
-          onReferenceImageUpload={handleReferenceImageUpload}
-          onRemoveReferenceImage={removeReferenceImage}
-          views={{
-            container: views?.referenceImageModal,
-          }}
-        /> */}
-
         {/* Input Area */}
         <View
           as="form"
@@ -265,7 +221,6 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             files={uploadedFiles}
             sandboxId={sandboxId}
             onRemove={removeUploadedFile}
-            onSetAsReference={setFileAsReference}
             showPreviews={true}
             views={{
               container: views?.attachments,
@@ -273,7 +228,6 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
               name: views?.attachmentName,
               size: views?.attachmentSize,
               removeButton: views?.attachmentRemove,
-              referenceButton: views?.referenceButton,
             }}
           />
 
@@ -290,7 +244,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             onSuggestionSelect={(suggestion) => {
               handleChange(suggestion.text);
             }}
-            mentionData={mentionData}
+            mentionData={combinedMentionData}
             mentionTrigger={mentionTrigger}
             onMentionSelect={onMentionSelect}
             views={{

@@ -17,7 +17,6 @@ const ChatInputDemo = () => {
 
   // State for features
   const [showGuideTip, setShowGuideTip] = useState(false);
-  const [showReferenceImage, setShowReferenceImage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   // State for upload simulation
@@ -177,11 +176,9 @@ const ChatInputDemo = () => {
   };
 
   // Toggle feature buttons
-  const toggleFeature = (feature: 'guide' | 'reference' | 'error') => {
+  const toggleFeature = (feature: 'guide' | 'error') => {
     if (feature === 'guide') {
       setShowGuideTip(!showGuideTip);
-    } else if (feature === 'reference') {
-      setShowReferenceImage(!showReferenceImage);
     } else if (feature === 'error') {
       setErrorMessage(
         errorMessage ? '' : 'Something went wrong. Please try again.'
@@ -250,9 +247,6 @@ const ChatInputDemo = () => {
         <Button onClick={() => toggleFeature('guide')}>
           {showGuideTip ? 'Hide Guide' : 'Show Guide'}
         </Button>
-        <Button onClick={() => toggleFeature('reference')}>
-          {showReferenceImage ? 'Hide Reference' : 'Show Reference'}
-        </Button>
         <Button onClick={() => toggleFeature('error')}>
           {errorMessage ? 'Clear Error' : 'Show Error'}
         </Button>
@@ -310,7 +304,6 @@ const ChatInputDemo = () => {
             onGuideClose={() => setShowGuideTip(false)}
             guideVideoUrl="https://example.com/guide-video.mp4"
             promptExamples={promptExamples}
-            showReferenceImageButton={showReferenceImage}
             errorMessage={errorMessage}
             title="Chat Demo"
             mentionData={mentionData}

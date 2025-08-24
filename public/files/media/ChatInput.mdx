@@ -1,6 +1,5 @@
 # ChatInput
 
-A powerful chat input component with comprehensive file upload support, reference images, drag & drop functionality, and multiple interaction modes. Built with the integrated Uploader component for seamless file handling and attachment management.
 
 ### **Import**
   ```tsx
@@ -72,45 +71,6 @@ export const ChatInputWithFileUploads = () => {
 - **File Size Validation**: 50MB maximum file size with automatic validation
 - **File Type Support**: All file types supported (images, documents, videos, etc.)
 - **Preview & Management**: View uploaded files and remove them before sending
-- **Reference Images**: Set image files as reference images for context
-
-### **Reference Images**
-
-Reference images provide visual context for your messages:
-
-```tsx
-import React, { useState } from 'react';
-import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
-
-export const ChatInputWithReferenceImages = () => {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleSubmit = (message, options) => {
-    console.log('Message with reference images:', message);
-    // Reference images are automatically included in the message
-  };
-
-  return (
-    <View width="100%">
-      <ChatInput
-        onSubmit={handleSubmit}
-        value={inputValue}
-        onChange={setInputValue}
-        showReferenceImageButton={true} // Enable reference image button
-        onReferenceImageClick={() => console.log('Reference image clicked')}
-      />
-    </View>
-  );
-};
-```
-
-**Reference Image Features:**
-- **Upload via Modal**: Click the reference image button to open upload modal
-- **Set from Attachments**: Convert any uploaded image to a reference image
-- **Visual Indicators**: Reference images are highlighted in the attachment list
-- **Automatic Integration**: Reference images are included in message submission
-
 ### **With Prompt Examples**
 ```tsx
 import React, { useState } from 'react';
@@ -186,7 +146,6 @@ export const ChatInputWithDragDrop = () => {
 - **Visual Feedback**: Input area highlights when files are dragged over
 - **Multiple Files**: Drop multiple files at once for batch upload
 - **File Validation**: Automatic size and type validation during drop
-- **Reference Image Integration**: Images dropped while reference modal is open become reference images
 - **Error Handling**: Clear feedback for invalid files or size limits
 
 ### **Custom Styling**
@@ -285,8 +244,6 @@ export const ChatInputWithAgent = () => {
 | onGuideClose | `() => void` | undefined | Callback function when the guide tip is closed |
 | promptExamples | `PromptExample[]` | [] | List of prompt examples |
 | onPromptExampleSelect | `(example: PromptExample) => void` | undefined | Callback function when a prompt example is selected |
-| showReferenceImageButton | boolean | false | Whether to show the reference image button |
-| onReferenceImageClick | `() => void` | undefined | Callback function when the reference image button is clicked |
 | size | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | 'md' | Size of the chat input |
 | shape | `'default' \| 'sharp' \| 'rounded' \| 'pillShaped'` | 'rounded' | Shape of the chat input |
 | variant | `'default' \| 'outline' \| 'none'` | 'default' | Visual variant of the chat input |
@@ -299,7 +256,6 @@ The ChatInput component integrates seamlessly with the Uploader component:
 - **Automatic File Processing**: Files are automatically processed and added to the message
 - **File Size Validation**: 50MB maximum file size with clear error messages
 - **Multiple File Support**: Upload multiple files simultaneously
-- **Reference Image Support**: Convert uploaded images to reference images
 - **Drag & Drop Integration**: Full drag and drop support with visual feedback
 
 ### **Customization**
@@ -318,14 +274,11 @@ The ChatInput component can be customized using the `views` prop:
     guideTip: { /* styles for the guide tip */ },
     promptExamples: { /* styles for the prompt examples container */ },
     promptExampleItem: { /* styles for each prompt example item */ },
-    referenceImageButton: { /* styles for the reference image button */ },
-    referenceImageModal: { /* styles for the reference image modal */ },
     attachments: { /* styles for the attachments container */ },
     attachmentItem: { /* styles for each attachment item */ },
     attachmentName: { /* styles for attachment file names */ },
     attachmentSize: { /* styles for attachment file sizes */ },
     attachmentRemove: { /* styles for attachment remove buttons */ },
-    referenceButton: { /* styles for reference image toggle buttons */ },
     submitButton: { /* styles for the submit button */ },
     fileButton: { /* styles for the file upload button */ },
   }}
@@ -354,17 +307,10 @@ The ChatInput component implements the following accessibility features:
 - Validate file types and sizes on both client and server
 - Provide clear feedback for file upload errors
 - Consider implementing file preview functionality
-- Use reference images for visual context when appropriate
 
-**Reference Image Guidelines:**
-- Use reference images to provide visual context for messages
-- Limit to one reference image per message for clarity
-- Ensure reference images are relevant to the message content
-- Provide clear visual indicators when reference images are active
 
 **Accessibility Considerations:**
 - Ensure file upload buttons are keyboard accessible
-- Provide alternative text for reference images
 - Use proper ARIA labels for interactive elements
 - Test with screen readers for file upload functionality
 
@@ -414,7 +360,6 @@ export const ChatInputDemo = () => {
 
       <ChatInput
         onSubmit={(message) => console.log('Message:', message)}
-        placeholder="Test file uploads and reference images..."
       />
     </>
   );
