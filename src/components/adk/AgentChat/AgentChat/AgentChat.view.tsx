@@ -250,6 +250,16 @@ const AgentChatView: React.FC<AgentChatViewProps> = ({
           }}
         />
       </View>
+
+      {/* Fullscreen Loading Overlay */}
+      {isTyping && (
+        <View {...DefaultAgentChatStyles.loadingOverlay}>
+          <Horizontal gap={8} alignItems="center">
+            <Loader size="md" />
+            <Text color="color.gray.700">Thinking...</Text>
+          </Horizontal>
+        </View>
+      )}
     </View>
   );
 };

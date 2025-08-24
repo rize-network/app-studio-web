@@ -15,6 +15,7 @@ export const DefaultAgentChatStyles = {
     borderColor: 'color.gray.200',
     overflow: 'hidden',
     fontFamily: 'Inter, system-ui, sans-serif',
+    position: 'relative',
   } as ViewProps,
 
   header: {
@@ -223,6 +224,19 @@ export const DefaultAgentChatStyles = {
     borderRadius: '8px',
     padding: '12px',
     margin: '8px 16px',
+  } as ViewProps,
+
+  loadingOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10,
   } as ViewProps,
 };
 
