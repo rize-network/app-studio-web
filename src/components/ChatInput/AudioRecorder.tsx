@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Horizontal, View } from 'app-studio';
 import { MicrophoneIcon, StopIcon } from '../Icon/Icon';
-import { useAudioRecording } from './useAudioRecording';
 import { AudioWaveform } from '../AudioInput/AudioWaveform/AudioWaveform';
+import { useAudioRecording } from '../../hooks/useAudioRecording';
 
 interface AudioRecorderProps {
   onRecordingComplete: (file: File) => void;
@@ -33,12 +33,12 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
       });
       onRecordingComplete(file);
     }
-  }, [audioBlob, onRecordingComplete]);
+  }, [audioBlob]);
 
-  const handleStart = () => {
+  const handleStart = useCallback(() => {
     startRecording();
     onRecordingStart?.();
-  };
+  }, []);
 
   return (
     <Horizontal alignItems="center" gap={4}>

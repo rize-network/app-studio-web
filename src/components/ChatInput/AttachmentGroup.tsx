@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { Horizontal, Text, View, useTheme } from 'app-studio';
+import React, { useCallback } from 'react';
+import { Horizontal, Text, View } from 'app-studio';
 import { UploadedFile } from './ChatInput/ChatInput.type';
 import { ImageIcon, TrashIcon } from '../Icon/Icon';
 import { Button } from '../Button/Button';
@@ -34,17 +34,15 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
   showPreviews = false,
   views = {},
 }) => {
-  const { getColor } = useTheme();
-
   if (files.length === 0) {
     return null;
   }
 
-  const formatFileSize = (bytes: number): string => {
+  const formatFileSize = useCallback((bytes: number): string => {
     if (bytes < 1024) return `${bytes} B`;
     if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-  };
+  }, []);
 
   return (
     <View

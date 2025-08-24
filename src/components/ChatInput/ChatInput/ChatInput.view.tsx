@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Horizontal, Text, View, useTheme } from 'app-studio';
 import { ChatInputViewProps } from './ChatInput.props';
 import {
@@ -108,14 +108,10 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   // Determine if the submit button should be enabled
   const hasText = (value?.trim().length ?? 0) > 0 || uploadedFiles.length > 0;
 
-  const handleRecordingComplete = React.useCallback(
+  const handleRecordingComplete = useCallback(
     (file: File) => {
-      setPendingFiles((prev) => {
-        const nonAudio = prev.filter(
-          (f) => !(f.type || '').startsWith('audio/')
-        );
-        return [...nonAudio, file];
-      });
+      setPendingFiles((prev) => [...prev, file]);
+
       const uploaded: UploadedFile = {
         name: file.name,
         path: `/workspace/${file.name}`,
@@ -123,46 +119,44 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
         type: file.type || 'audio/webm;codecs=opus',
         localUrl: URL.createObjectURL(file),
       };
-      setUploadedFiles((prev) => {
-        const nonAudio = prev.filter(
-          (f) => !(f.type || '').startsWith('audio/')
-        );
-        return [...nonAudio, uploaded];
-      });
+      setUploadedFiles((prev) => [...prev, uploaded]);
       onAudioRecordingStop?.(file);
     },
     [setPendingFiles, setUploadedFiles, onAudioRecordingStop]
   );
 
   // Handle multiple file uploads for the Uploader component
-  const handleMultipleFileUpload = (files: File[]) => {
-    // Filter files that exceed size limit (50MB)
-    const filteredFiles = files.filter((file) => {
-      if (file.size > 50 * 1024 * 1024) {
-        console.error(`File size exceeds 50MB limit: ${file.name}`);
-        return false;
+  const handleMultipleFileUpload = useCallback(
+    (files: File[]) => {
+      // Filter files that exceed size limit (50MB)
+      const filteredFiles = files.filter((file) => {
+        if (file.size > 50 * 1024 * 1024) {
+          console.error(`File size exceeds 50MB limit: ${file.name}`);
+          return false;
+        }
+        return true;
+      });
+
+      if (filteredFiles.length > 0) {
+        // Add files to pending files
+        setPendingFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
+
+        // Create uploaded file objects
+        const newUploadedFiles = filteredFiles.map((file: File) => ({
+          name: file.name,
+          path: `/workspace/${file.name}`,
+          size: file.size,
+          type: file.type || 'application/octet-stream',
+          localUrl: URL.createObjectURL(file),
+          isReferenceImage: false,
+        }));
+
+        // Add files to uploaded files
+        setUploadedFiles((prev) => [...prev, ...newUploadedFiles]);
       }
-      return true;
-    });
-
-    if (filteredFiles.length > 0) {
-      // Add files to pending files
-      setPendingFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
-
-      // Create uploaded file objects
-      const newUploadedFiles = filteredFiles.map((file: File) => ({
-        name: file.name,
-        path: `/workspace/${file.name}`,
-        size: file.size,
-        type: file.type || 'application/octet-stream',
-        localUrl: URL.createObjectURL(file),
-        isReferenceImage: false,
-      }));
-
-      // Add files to uploaded files
-      setUploadedFiles((prev) => [...prev, ...newUploadedFiles]);
-    }
-  };
+    },
+    [setPendingFiles, setUploadedFiles]
+  );
 
   return (
     <View
