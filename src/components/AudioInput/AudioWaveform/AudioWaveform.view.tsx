@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'app-studio';
+import { Horizontal, View } from 'app-studio';
 import { AudioWaveformViewProps } from './AudioWaveform.props';
 
 export function clamp(value: number, min: number, max: number): number {
@@ -14,7 +14,7 @@ export const AudioWaveformView: React.FC<AudioWaveformViewProps> = ({
   const scalingFactor = 300; // This should ideally be a constant or prop if it needs to be configurable
 
   return (
-    <View
+    <Horizontal
       flexDirection="row"
       alignItems="center"
       gap={1}
@@ -22,7 +22,6 @@ export const AudioWaveformView: React.FC<AudioWaveformViewProps> = ({
       maxWidth={200}
       width="100%"
       marginTop={4} // Equivalent to mt-4
-      md={{ marginTop: 5 }} // Equivalent to md:mt-5
       {...viewProps}
     >
       {bars.map((amplitude, index) => (
@@ -31,14 +30,14 @@ export const AudioWaveformView: React.FC<AudioWaveformViewProps> = ({
           width={2} // Equivalent to w-[2px]
           backgroundColor={
             isPaused
-              ? 'color.gray.100'
+              ? 'color.gray.300'
               : amplitude >= 0
-              ? 'color.gray.600'
-              : 'color.gray.200'
+              ? 'color.gray.900'
+              : 'color.gray.500'
           }
           style={{ height: `${clamp(amplitude * scalingFactor, 2, 32)}px` }}
         />
       ))}
-    </View>
+    </Horizontal>
   );
 };

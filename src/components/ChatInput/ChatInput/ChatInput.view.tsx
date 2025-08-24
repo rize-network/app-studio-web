@@ -355,6 +355,35 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
 
             {/* Submit Button */}
             <Horizontal gap={8} alignItems="center">
+              {/* Audio Recorder */}
+              {enableAudioRecording && (
+                <AudioRecorder
+                  onRecordingStart={onAudioRecordingStart}
+                  onRecordingComplete={(file) => {
+                    setPendingFiles((prev) => {
+                      const nonAudio = prev.filter(
+                        (f) => !(f.type || '').startsWith('audio/')
+                      );
+                      return [...nonAudio, file];
+                    });
+                    const uploaded: UploadedFile = {
+                      name: file.name,
+                      path: `/workspace/${file.name}`,
+                      size: file.size,
+                      type: file.type || 'audio/webm;codecs=opus',
+                      localUrl: URL.createObjectURL(file),
+                    };
+                    setUploadedFiles((prev) => {
+                      const nonAudio = prev.filter(
+                        (f) => !(f.type || '').startsWith('audio/')
+                      );
+                      return [...nonAudio, uploaded];
+                    });
+                    onAudioRecordingStop?.(file);
+                  }}
+                  views={{ button: views?.recordButton }}
+                />
+              )}
               <View
                 as="button"
                 type="button"
@@ -402,35 +431,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                   />
                 )}
               </View>
-              {/* Audio Recorder */}
-              {enableAudioRecording && (
-                <AudioRecorder
-                  onRecordingStart={onAudioRecordingStart}
-                  onRecordingComplete={(file) => {
-                    setPendingFiles((prev) => {
-                      const nonAudio = prev.filter(
-                        (f) => !(f.type || '').startsWith('audio/')
-                      );
-                      return [...nonAudio, file];
-                    });
-                    const uploaded: UploadedFile = {
-                      name: file.name,
-                      path: `/workspace/${file.name}`,
-                      size: file.size,
-                      type: file.type || 'audio/webm;codecs=opus',
-                      localUrl: URL.createObjectURL(file),
-                    };
-                    setUploadedFiles((prev) => {
-                      const nonAudio = prev.filter(
-                        (f) => !(f.type || '').startsWith('audio/')
-                      );
-                      return [...nonAudio, uploaded];
-                    });
-                    onAudioRecordingStop?.(file);
-                  }}
-                  views={{ button: views?.recordButton }}
-                />
-              )}
+
               {rightButtons}
             </Horizontal>
           </Horizontal>

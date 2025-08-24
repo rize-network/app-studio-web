@@ -26,7 +26,6 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
     stopRecording,
   } = useAudioRecording();
 
-
   useEffect(() => {
     if (audioBlob) {
       const file = new File([audioBlob], `recording-${Date.now()}.webm`, {
@@ -43,6 +42,9 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
 
   return (
     <Horizontal alignItems="center" gap={4}>
+      {recording && analyserNode && (
+        <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
+      )}
       <View
         as="button"
         type="button"
@@ -72,9 +74,6 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
           />
         )}
       </View>
-      {recording && analyserNode && (
-        <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
-      )}
     </Horizontal>
   );
 };
