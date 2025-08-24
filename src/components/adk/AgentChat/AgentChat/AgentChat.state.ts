@@ -97,6 +97,8 @@ export const useAgentChat = (props: AgentChatProps) => {
       try {
         setIsLoading(true);
         setError(null);
+        setIsTyping(true);
+        onTypingStart?.();
 
         // Ensure we have a session
         let session = currentSession;
@@ -160,6 +162,8 @@ export const useAgentChat = (props: AgentChatProps) => {
         onError?.(error);
       } finally {
         setIsLoading(false);
+        setIsTyping(false);
+        onTypingStop?.();
       }
     },
     [
@@ -170,6 +174,8 @@ export const useAgentChat = (props: AgentChatProps) => {
       enableStreaming,
       onMessageSent,
       onError,
+      onTypingStart,
+      onTypingStop,
     ]
   );
 
@@ -202,6 +208,7 @@ export const useAgentChat = (props: AgentChatProps) => {
 
             if (data.content?.parts) {
               for (const part of data.content.parts) {
+                // Handle streaming text responses
                 if (part.text) {
                   if (!streamingMessage) {
                     streamingMessage = {
@@ -225,6 +232,58 @@ export const useAgentChat = (props: AgentChatProps) => {
                     );
                   }
                 }
+
+                // Handle function calls
+                if (part.functionCall) {
+                  const functionCallMessage: AgentMessage = {
+                    id: generateId(),
+                    role: 'bot',
+                    timestamp: Date.now(),
+                    eventId: data.id,
+                    functionCall: part.functionCall,
+                  };
+                  setMessages((prev) => [...prev, functionCallMessage]);
+                  onMessageReceived?.(functionCallMessage);
+                }
+
+                // Handle function responses
+                if (part.functionResponse) {
+                  const functionResponseMessage: AgentMessage = {
+                    id: generateId(),
+                    role: 'bot',
+                    timestamp: Date.now(),
+                    eventId: data.id,
+                    functionResponse: part.functionResponse,
+                  };
+                  setMessages((prev) => [...prev, functionResponseMessage]);
+                  onMessageReceived?.(functionResponseMessage);
+                }
+
+                // Handle executable code blocks
+                if (part.executableCode) {
+                  const codeMessage: AgentMessage = {
+                    id: generateId(),
+                    role: 'bot',
+                    timestamp: Date.now(),
+                    eventId: data.id,
+                    executableCode: part.executableCode,
+                  };
+                  setMessages((prev) => [...prev, codeMessage]);
+                  onMessageReceived?.(codeMessage);
+                }
+
+                // Handle code execution results
+                if (part.codeExecutionResult) {
+                  const resultMessage: AgentMessage = {
+                    id: generateId(),
+                    role: 'bot',
+                    timestamp: Date.now(),
+                    eventId: data.id,
+                    codeExecutionResult: part.codeExecutionResult,
+                  };
+                  setMessages((prev) => [...prev, resultMessage]);
+                  onMessageReceived?.(resultMessage);
+                }
               }
             }
           } catch (err) {
@@ -243,7 +302,7 @@ export const useAgentChat = (props: AgentChatProps) => {
         });
       });
     },
-    [apiBaseUrl]
+    [apiBaseUrl, onMessageReceived]
   );
 
   /**
