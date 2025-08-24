@@ -53,9 +53,14 @@ export function useAudioRecording() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       streamRef.current = stream;
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: MIME_TYPE,
-      });
+
+      const mimeType = MediaRecorder.isTypeSupported(MIME_TYPE)
+        ? MIME_TYPE
+        : undefined;
+      const mediaRecorder = new MediaRecorder(
+        stream,
+        mimeType ? { mimeType } : undefined
+      );
       mediaRecorderRef.current = mediaRecorder;
       const audioContext = new (window.AudioContext ||
         (window as any).webkitAudioContext)();
@@ -73,7 +78,9 @@ export function useAudioRecording() {
         }
       };
       mediaRecorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: MIME_TYPE });
+        const blob = new Blob(chunksRef.current, {
+          type: mediaRecorder.mimeType || MIME_TYPE,
+        });
         setAudioBlob(blob);
         cleanup();
       };

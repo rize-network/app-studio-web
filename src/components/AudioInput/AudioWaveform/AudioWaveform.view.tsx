@@ -30,7 +30,11 @@ export const AudioWaveformView: React.FC<AudioWaveformViewProps> = ({
           key={index}
           width={2} // Equivalent to w-[2px]
           backgroundColor={
-            isPaused ? 'gray.100' : amplitude >= 0 ? 'gray.600' : 'gray.200'
+            isPaused
+              ? 'color.gray.100'
+              : amplitude >= 0
+              ? 'color.gray.600'
+              : 'color.gray.200'
           }
           style={{ height: `${clamp(amplitude * scalingFactor, 2, 32)}px` }}
         />
