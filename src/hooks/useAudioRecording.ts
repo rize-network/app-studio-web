@@ -17,7 +17,13 @@ export function useAudioRecording() {
   const chunksRef = useRef<Blob[]>([]);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const MIME_TYPE = 'audio/webm;codecs=opus';
+  // Determine a supported MIME type for the recorder. Some browsers do not
+  // support Opus in a WebM container which would cause the recorder to fail
+  // silently. By falling back to a more widely supported type we ensure that
+  // audio input works across environments.
+  const MIME_TYPE = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+    ? 'audio/webm;codecs=opus'
+    : 'audio/webm';
 
   const cleanup = useCallback(() => {
     if (mediaRecorderRef.current) {
