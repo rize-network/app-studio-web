@@ -31,7 +31,7 @@ export const DefaultChatInputStyles = {
     fontSize: '14px',
     lineHeight: '1.5',
     color: 'color.gray.900',
-    backgroundColor: 'transparent',
+    backgroundColor: 'color.white',
     border: 'none',
     outline: 'none',
     resize: 'none',
