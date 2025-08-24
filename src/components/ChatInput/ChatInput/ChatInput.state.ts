@@ -184,7 +184,6 @@ export const useChatInputState = (props: ChatInputProps) => {
     }
   };
 
-
   return {
     value,
     handleChange,

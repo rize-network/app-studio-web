@@ -305,7 +305,6 @@ export interface ChatInputViewProps extends ChatInputProps {
    */
   handleDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
 
-
   /**
    * List of suggestions for auto-completion
    */
