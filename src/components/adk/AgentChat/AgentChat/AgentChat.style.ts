@@ -137,17 +137,20 @@ export const DefaultAgentChatStyles = {
   attachmentPreview: {
     position: 'relative',
     display: 'inline-block',
-    padding: '8px',
+    width: '80px',
+    height: '80px',
     backgroundColor: 'color.gray.100',
     borderRadius: '8px',
     border: '1px solid',
     borderColor: 'color.gray.200',
+    overflow: 'hidden',
+    cursor: 'pointer',
   } as ViewProps,
 
   attachmentRemove: {
     position: 'absolute',
-    top: '-4px',
-    right: '-4px',
+    top: '2px',
+    right: '2px',
     width: '20px',
     height: '20px',
     borderRadius: '50%',
@@ -159,6 +162,7 @@ export const DefaultAgentChatStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: '12px',
+    zIndex: 1,
   } as ViewProps,
 
   typingIndicator: {
