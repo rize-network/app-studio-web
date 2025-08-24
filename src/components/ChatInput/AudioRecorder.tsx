@@ -37,6 +37,7 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
       };
     }
     setAudioUrl(null);
+    return () => {};
   }, [audioBlob]);
 
   useEffect(() => {
