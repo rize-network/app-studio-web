@@ -30,14 +30,14 @@ export function AudioInputView({
       };
     }
     setAudioUrl(null);
+    return () => {};
   }, [audioBlob]);
 
   return (
     <View {...viewProps} gap="2">
       <input type="file" accept="audio/*" onChange={handleFileChange} />
-      {recording && analyserNode && (
-        <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
-      )}
+      <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
+
       <Horizontal gap="2">
         {!recording && (
           <Button type="button" onClick={startRecording}>
@@ -61,9 +61,7 @@ export function AudioInputView({
           </>
         )}
       </Horizontal>
-      {audioUrl && !recording && (
-        <audio controls src={audioUrl} className="mt-2" />
-      )}
+      {audioUrl && !recording && <audio controls src={audioUrl} />}
     </View>
   );
 }

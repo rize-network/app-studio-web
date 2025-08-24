@@ -26,6 +26,7 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
     stopRecording,
   } = useAudioRecording();
 
+
   useEffect(() => {
     if (audioBlob) {
       const file = new File([audioBlob], `recording-${Date.now()}.webm`, {
