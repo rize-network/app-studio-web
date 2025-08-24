@@ -11,7 +11,7 @@ export const DefaultChatInputStyles = {
     width: '100%',
     maxWidth: '100%',
     borderRadius: '12px',
-    backgroundColor: 'color.gray.50',
+    backgroundColor: 'color.white',
     transition: 'all 0.2s ease',
   },
   content: {
