@@ -34,8 +34,6 @@ export const useChatInputState = (props: ChatInputProps) => {
   const [isUploading, setIsUploading] = useState(false);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-  // Reference images are now tracked within uploadedFiles using isReferenceImage flag
-
   // State for model selection
   const [selectedModel, setSelectedModel] = useState('gpt-4');
   const [modelOptions] = useState<ModelOption[]>([
@@ -53,8 +51,6 @@ export const useChatInputState = (props: ChatInputProps) => {
   const [isGuideTipShown, setIsGuideTipShown] = useState(
     props.showGuideTip || false
   );
-  const [isReferenceImageModalShown, setIsReferenceImageModalShown] =
-    useState(false);
 
   // Focus the editable div on mount if autoFocus is true
   useEffect(() => {
@@ -130,7 +126,7 @@ export const useChatInputState = (props: ChatInputProps) => {
       setUncontrolledValue('');
     }
 
-    // Clear uploaded files (including reference images)
+    // Clear uploaded files
     setUploadedFiles([]);
   };
 
@@ -170,14 +166,6 @@ export const useChatInputState = (props: ChatInputProps) => {
     }
   };
 
-  // Handle reference image modal toggle
-  const toggleReferenceImageModal = () => {
-    setIsReferenceImageModalShown(!isReferenceImageModalShown);
-    if (props.onReferenceImageClick) {
-      props.onReferenceImageClick();
-    }
-  };
-
   // Handle prompt example selection
   const handlePromptExampleSelect = (example: PromptExample) => {
     if (isControlled && controlledOnChange) {
@@ -196,56 +184,6 @@ export const useChatInputState = (props: ChatInputProps) => {
     }
   };
 
-  // Handle reference image upload
-  const handleReferenceImageUpload = (files: File[]) => {
-    const imageFiles = files.filter((file) => file.type.startsWith('image/'));
-
-    if (imageFiles.length === 0) {
-      console.error('Only image files are allowed as reference images');
-      return;
-    }
-
-    // Clear existing reference images first
-    const updatedFiles = uploadedFiles.map((file) => ({
-      ...file,
-    }));
-
-    // Create reference image objects (only take the first one)
-
-    // Add to pending files
-    setPendingFiles((prevFiles) => [...prevFiles, imageFiles[0]]);
-
-    // Add the reference image to uploaded files
-    setUploadedFiles([...updatedFiles, imageFiles[0]]);
-  };
-
-  // Remove reference image
-  const removeReferenceImage = () => {
-    // Clear reference image flag from all uploaded files
-    const updatedFiles = uploadedFiles.map((file) => ({
-      ...file,
-      isReferenceImage: false,
-    }));
-    setUploadedFiles(updatedFiles);
-  };
-
-  // Set an uploaded file as reference image
-  const setFileAsReference = (fileIndex: number) => {
-    const file = uploadedFiles[fileIndex];
-
-    if (!file || !file.type.startsWith('image/')) {
-      console.error('Only image files can be set as reference images');
-      return;
-    }
-
-    // Update the files to mark only the selected one as reference image
-    const updatedFiles = uploadedFiles.map((f, index) => ({
-      ...f,
-      isReferenceImage: index === fileIndex,
-    }));
-
-    setUploadedFiles(updatedFiles);
-  };
 
   return {
     value,
@@ -270,11 +208,6 @@ export const useChatInputState = (props: ChatInputProps) => {
     handleDragLeave,
     isGuideTipShown,
     hideGuideTip,
-    isReferenceImageModalShown,
-    toggleReferenceImageModal,
     handlePromptExampleSelect,
-    handleReferenceImageUpload,
-    removeReferenceImage,
-    setFileAsReference,
   };
 };
