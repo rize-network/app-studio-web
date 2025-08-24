@@ -238,6 +238,13 @@ export const DefaultAgentChatStyles = {
     justifyContent: 'center',
     zIndex: 10,
   } as ViewProps,
+
+  runProgress: {
+    padding: '12px 16px',
+    borderBottom: '1px solid',
+    borderBottomColor: 'color.gray.200',
+    backgroundColor: 'color.gray.50',
+  } as ViewProps,
 };
 
 /**

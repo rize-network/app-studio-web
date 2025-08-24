@@ -9,6 +9,7 @@ import { AgentTypingIndicator } from './AgentTypingIndicator';
 import { MessageAttachmentPreview } from './MessageAttachmentPreview';
 import { Loader } from '../../../Loader/Loader';
 import { Alert } from '../../../Alert/Alert';
+import { AgentRunProgress } from './AgentRunProgress';
 
 export interface AgentChatViewProps
   extends Omit<AgentChatProps, 'sessionId'>,
@@ -150,6 +151,9 @@ const AgentChatView: React.FC<AgentChatViewProps> = ({
           )}
         </Horizontal>
       </View>
+
+      {/* Progress of agent run */}
+      <AgentRunProgress messages={messages} isTyping={isTyping} />
 
       {/* Error Display */}
       {error && (
