@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useCallback } from 'react';
-import { Horizontal, Text, Vertical, View } from 'app-studio';
+import { Horizontal, Text, Vertical, View, Image, Center } from 'app-studio';
 import { UploadedFile } from './ChatInput/ChatInput.type';
-import { ImageIcon } from '../Icon/Icon';
-import { MediaPreview } from '../MediaPreview';
+import { ImageIcon, FileIcon, AudioIcon } from '../Icon/Icon';
 import { HoverCard } from '../HoverCard/HoverCard';
 
 interface AttachmentGroupProps {
@@ -58,8 +57,8 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
       {files.map((file, index) => {
         const previewUrl = file.localUrl || file.path;
         const isImage = file.type.startsWith('image/');
-
-        const handleOpen = () => window.open(previewUrl, '_blank');
+        const isVideo = file.type.startsWith('video/');
+        const isAudio = file.type.startsWith('audio/');
 
         return (
           <Vertical
@@ -87,15 +86,58 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
             {showPreviews && (
               <HoverCard>
                 <HoverCard.Trigger>
-                  <MediaPreview
-                    url={previewUrl}
-                    type={file.type}
-                    name={file.name}
-                    onOpen={handleOpen}
-                  />
+                  {isImage && (
+                    <Image
+                      src={previewUrl}
+                      alt={file.name}
+                      width="60px"
+                      height="60px"
+                      objectFit="cover"
+                    />
+                  )}
+                  {isVideo && (
+                    <View
+                      as="video"
+                      src={previewUrl}
+                      width="60px"
+                      height="60px"
+                      style={{ objectFit: 'cover' }}
+                      muted
+                    />
+                  )}
+                  {isAudio && (
+                    <Center
+                      width="60px"
+                      height="60px"
+                      backgroundColor="color.gray.200"
+                    >
+                      <AudioIcon widthHeight={24} color="color.gray.600" />
+                    </Center>
+                  )}
+                  {!isImage && !isVideo && !isAudio && (
+                    <Center
+                      width="60px"
+                      height="60px"
+                      backgroundColor="color.gray.200"
+                    >
+                      <FileIcon widthHeight={24} color="color.gray.600" />
+                    </Center>
+                  )}
                 </HoverCard.Trigger>
                 <HoverCard.Content>
-                  <Text>
+                  {isImage && (
+                    <Image src={previewUrl} alt={file.name} maxWidth="300px" />
+                  )}
+                  {isVideo && (
+                    <View
+                      as="video"
+                      src={previewUrl}
+                      controls
+                      style={{ maxWidth: '300px' }}
+                    />
+                  )}
+                  {isAudio && <View as="audio" src={previewUrl} controls />}
+                  <Text marginTop="4px">
                     {file.name} ({formatFileSize(file.size)})
                   </Text>
                 </HoverCard.Content>

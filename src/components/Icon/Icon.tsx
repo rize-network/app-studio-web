@@ -293,6 +293,36 @@ export const ImageIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
+// Audio/Speaker Icon Component
+export const AudioIcon: React.FC<IconProps> = ({
+  widthHeight = 24,
+  color = 'currentColor',
+  filled = true,
+  strokeWidth = 1,
+  ...props
+}) => (
+  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M11 5l-5 5H2v4h4l5 5V5z"
+        {...getSvgProps(filled, color, strokeWidth)}
+      />
+      <path
+        d="M15.54 8.46a5 5 0 0 1 0 7.07"
+        {...getSvgProps(false, color, strokeWidth)}
+      />
+      <path
+        d="M18.07 5.93a8 8 0 0 1 0 12.14"
+        {...getSvgProps(false, color, strokeWidth)}
+      />
+    </svg>
+  </IconWrapper>
+);
+
 export const TwitterIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',
