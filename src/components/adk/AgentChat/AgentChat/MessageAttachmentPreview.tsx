@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, Button } from 'app-studio';
+import { View, Button } from 'app-studio';
 import { MessageAttachment } from './AgentChat.props';
 import { DefaultAgentChatStyles } from './AgentChat.style';
+import { MediaPreview } from '../../../MediaPreview';
 
 export interface MessageAttachmentPreviewProps {
   attachment: MessageAttachment;
@@ -23,14 +24,8 @@ export const MessageAttachmentPreview: React.FC<
     window.open(url, '_blank');
   };
 
-  // Icon for non-image files
-  const getFileIcon = () => {
-    if (type === 'audio' || type === 'video') return '▶️';
-    return '📄';
-  };
-
   return (
-    <View {...DefaultAgentChatStyles.attachmentPreview} onClick={handleOpen}>
+    <View {...DefaultAgentChatStyles.attachmentPreview}>
       {onRemove && (
         <Button
           {...DefaultAgentChatStyles.attachmentRemove}
@@ -44,24 +39,12 @@ export const MessageAttachmentPreview: React.FC<
         </Button>
       )}
 
-      {type === 'image' ? (
-        <img
-          src={url}
-          alt={file.name}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        />
-      ) : (
-        <View
-          width="100%"
-          height="100%"
-          backgroundColor="color.gray.200"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Text fontSize="24px">{getFileIcon()}</Text>
-        </View>
-      )}
+      <MediaPreview
+        url={url}
+        type={type}
+        name={file.name}
+        onOpen={handleOpen}
+      />
     </View>
   );
 };

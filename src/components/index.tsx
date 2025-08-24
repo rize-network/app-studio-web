@@ -34,6 +34,7 @@ export * from './Link/Link';
 export * from './Loader/Loader';
 export * from './Uploader/Uploader';
 export * from './Message/Message';
+export * from './MediaPreview';
 export * from './Modal/Modal';
 export * from './NavigationMenu/NavigationMenu';
 export * from './Table/Table';
