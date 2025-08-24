@@ -3,9 +3,7 @@
 import React, { forwardRef, useEffect } from 'react';
 import { Button, Horizontal } from 'app-studio';
 import { useUpload } from '../Uploader/Uploader/Uploader.state';
-import { UploadedFile } from './ChatInput/ChatInput.type';
 import { AttachmentIcon, LoadingSpinnerIcon } from '../Icon/Icon';
-import { getFileCategory } from '../../utils/file'; // Import the helper function
 
 interface ChatUploaderProps {
   loading: boolean;
@@ -15,7 +13,7 @@ interface ChatUploaderProps {
   hideAttachments?: boolean;
   sandboxId?: string;
   setPendingFiles: React.Dispatch<React.SetStateAction<File[]>>;
-  setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>;
+  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>;
   setIsUploading: React.Dispatch<React.SetStateAction<boolean>>;
   views?: {
     button?: any;
@@ -31,7 +29,7 @@ interface ChatUploaderProps {
 const handleLocalFiles = (
   files: File[],
   setPendingFiles: React.Dispatch<React.SetStateAction<File[]>>,
-  setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>
+  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>
 ) => {
   // Filter files that exceed size limit
   const filteredFiles = files.filter((file) => {
@@ -45,17 +43,8 @@ const handleLocalFiles = (
   // Add files to pending files
   setPendingFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
 
-  // Create uploaded file objects
-  const newUploadedFiles: UploadedFile[] = filteredFiles.map((file) => ({
-    name: file.name,
-    path: `/workspace/${file.name}`,
-    size: file.size,
-    type: getFileCategory(file.type), // Use helper to determine category
-    localUrl: URL.createObjectURL(file),
-  }));
-
   // Add files to uploaded files
-  setUploadedFiles((prev) => [...prev, ...newUploadedFiles]);
+  setUploadedFiles((prev) => [...prev, ...filteredFiles]);
 };
 
 /**
@@ -65,7 +54,7 @@ const handleFiles = async (
   files: File[],
   sandboxId: string | undefined,
   setPendingFiles: React.Dispatch<React.SetStateAction<File[]>>,
-  setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>,
+  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>,
   setIsUploading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   // If no sandboxId, just handle files locally
@@ -120,11 +109,11 @@ export const ChatUploader = forwardRef<HTMLInputElement, ChatUploaderProps>(
     useEffect(() => {
       return () => {
         setUploadedFiles((prev) => {
-          prev.forEach((file) => {
-            if (file.localUrl) {
-              URL.revokeObjectURL(file.localUrl);
-            }
-          });
+          // prev.forEach((file) => {
+          //   if (file) {
+          //     URL.revokeObjectURL(file);
+          //   }
+          // });
           return prev;
         });
       };

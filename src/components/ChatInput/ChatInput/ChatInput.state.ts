@@ -2,8 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { ChatInputProps } from './ChatInput.props';
-import { ModelOption, PromptExample, UploadedFile } from './ChatInput.type';
-import { getFileCategory } from 'src/utils/file'; // Import the helper function
+import { ModelOption, PromptExample } from './ChatInput.type';
 
 /**
  * Custom hook for managing ChatInput state
@@ -30,7 +29,7 @@ export const useChatInputState = (props: ChatInputProps) => {
   const value = isControlled ? controlledValue : uncontrolledValue;
 
   // State for file uploads
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
@@ -68,9 +67,9 @@ export const useChatInputState = (props: ChatInputProps) => {
   useEffect(() => {
     return () => {
       uploadedFiles.forEach((file) => {
-        if (file.localUrl) {
-          URL.revokeObjectURL(file.localUrl);
-        }
+        // if (file.localUrl) {
+        //   URL.revokeObjectURL(file);
+        // }
       });
     };
   }, [uploadedFiles]);
@@ -103,26 +102,10 @@ export const useChatInputState = (props: ChatInputProps) => {
 
     let message = value;
 
-    // Separate reference images from regular files
-    const referenceFiles = uploadedFiles.filter(
-      (file) => file.isReferenceImage
-    );
-    const regularFiles = uploadedFiles.filter((file) => !file.isReferenceImage);
-
-    // Add reference image information to the message if reference images are uploaded
-    if (referenceFiles.length > 0) {
-      const referenceImageInfo = referenceFiles
-        .map((image) => `[Reference Image: ${image.path}]`)
-        .join('\n');
-      message = message
-        ? `${referenceImageInfo}\n\n${message}`
-        : referenceImageInfo;
-    }
-
     // Add file information to the message if files are uploaded
-    if (regularFiles.length > 0) {
-      const fileInfo = regularFiles
-        .map((file) => `[Uploaded File: ${file.path}]`)
+    if (uploadedFiles.length > 0) {
+      const fileInfo = uploadedFiles
+        .map((file) => `[Uploaded File: ${URL.createObjectURL(file)}}]`)
         .join('\n');
       message = message ? `${message}\n\n${fileInfo}` : fileInfo;
     }
@@ -153,11 +136,6 @@ export const useChatInputState = (props: ChatInputProps) => {
 
   // Handle removing an uploaded file
   const removeUploadedFile = (index: number) => {
-    const fileToRemove = uploadedFiles[index];
-    if (fileToRemove.localUrl) {
-      URL.revokeObjectURL(fileToRemove.localUrl);
-    }
-
     setUploadedFiles((prev) => prev.filter((_, i) => i !== index));
 
     if (!sandboxId && pendingFiles.length > index) {
@@ -230,24 +208,15 @@ export const useChatInputState = (props: ChatInputProps) => {
     // Clear existing reference images first
     const updatedFiles = uploadedFiles.map((file) => ({
       ...file,
-      isReferenceImage: false,
     }));
 
     // Create reference image objects (only take the first one)
-    const newReferenceImage: UploadedFile = {
-      name: imageFiles[0].name,
-      path: `/workspace/${imageFiles[0].name}`,
-      size: imageFiles[0].size,
-      type: getFileCategory(imageFiles[0].type), // Use helper to determine category
-      localUrl: URL.createObjectURL(imageFiles[0]),
-      isReferenceImage: true,
-    };
 
     // Add to pending files
     setPendingFiles((prevFiles) => [...prevFiles, imageFiles[0]]);
 
     // Add the reference image to uploaded files
-    setUploadedFiles([...updatedFiles, newReferenceImage]);
+    setUploadedFiles([...updatedFiles, imageFiles[0]]);
   };
 
   // Remove reference image

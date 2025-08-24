@@ -8,8 +8,6 @@ import {
   MessagePart,
 } from './AgentChat.props';
 import { generateId } from '../../../../utils/generateId';
-import { getFileCategory } from '../../../../utils/file'; // Import the helper function
-import { UploadedFile } from '../../../ChatInput/ChatInput/ChatInput.type'; // Import UploadedFile type
 
 /**
  * Custom hook for managing AgentChat state and interactions
@@ -391,7 +389,7 @@ export const useAgentChat = (props: AgentChatProps) => {
         const attachment: MessageAttachment = {
           file,
           url: URL.createObjectURL(file),
-          type: getFileCategory(file.type), // Use the shared helper function
+          type: file.type, // Use the shared helper function
         };
 
         validFiles.push(attachment);
@@ -400,13 +398,7 @@ export const useAgentChat = (props: AgentChatProps) => {
       if (validFiles.length > 0) {
         setSelectedFiles((prev) => [...prev, ...validFiles]);
         // onFileUpload expects File[], so map UploadedFile back to File if necessary
-        onFileUpload?.(
-          validFiles.map((f) =>
-            f.file instanceof File
-              ? f.file
-              : new File([], f.file.name, { type: f.file.type })
-          )
-        );
+        onFileUpload?.(validFiles.map((f) => f.file));
       }
     },
     [
@@ -434,9 +426,7 @@ export const useAgentChat = (props: AgentChatProps) => {
    * Utility function to read file as base64
    * Handles both File and UploadedFile types.
    */
-  const readFileAsBase64 = async (
-    file: File | UploadedFile
-  ): Promise<string> => {
+  const readFileAsBase64 = async (file: File): Promise<string> => {
     if (file instanceof File) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -448,9 +438,10 @@ export const useAgentChat = (props: AgentChatProps) => {
         reader.onerror = reject;
         reader.readAsDataURL(file);
       });
-    } else if (file.localUrl) {
+    } else if (file) {
+      const localUrl = URL.createObjectURL(file);
       // If it's an UploadedFile with a localUrl, fetch it
-      const response = await fetch(file.localUrl);
+      const response = await fetch(localUrl);
       const blob = await response.blob();
       return new Promise((resolve, reject) => {
         const reader = new FileReader();

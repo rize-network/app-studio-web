@@ -1,9 +1,7 @@
-import { UploadedFile } from '../components/ChatInput/ChatInput/ChatInput.type';
-
 /**
  * Helper function to determine file category from MIME type
  */
-export const getFileCategory = (mimeType: string): UploadedFile['type'] => {
+export const getFileCategory = (mimeType: string): string => {
   if (mimeType.startsWith('image/')) return 'image';
   if (mimeType.startsWith('video/')) return 'video';
   if (mimeType.startsWith('audio/')) return 'audio';

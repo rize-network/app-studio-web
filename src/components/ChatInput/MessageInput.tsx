@@ -3,7 +3,7 @@
 import React, { forwardRef } from 'react';
 import { Button, Element, Horizontal, View, useTheme } from 'app-studio';
 import { ChatUploader } from './ChatUploader';
-import { ModelOption, UploadedFile } from './ChatInput/ChatInput.type';
+import { ModelOption } from './ChatInput/ChatInput.type';
 
 interface MessageInputProps {
   value: string;
@@ -15,13 +15,13 @@ interface MessageInputProps {
   isAgentRunning?: boolean;
   onStopAgent?: () => void;
   isDraggingOver?: boolean;
-  uploadedFiles: UploadedFile[];
+  uploadedFiles: File[];
 
   fileInputRef: React.RefObject<HTMLInputElement>;
   isUploading: boolean;
   sandboxId?: string;
   setPendingFiles: React.Dispatch<React.SetStateAction<File[]>>;
-  setUploadedFiles: React.Dispatch<React.SetStateAction<UploadedFile[]>>;
+  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>;
   setIsUploading: React.Dispatch<React.SetStateAction<boolean>>;
   hideAttachments?: boolean;
 

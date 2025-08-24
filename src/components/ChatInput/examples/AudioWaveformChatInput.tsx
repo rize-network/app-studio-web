@@ -1,12 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { View, Vertical, Text } from 'app-studio';
 import ChatInputView from '../ChatInput/ChatInput.view';
-import { UploadedFile } from '../ChatInput/ChatInput.type';
 
 export const AudioWaveformChatInputDemo = () => {
   const [inputValue, setInputValue] = useState('');
   const [submittedMessage, setSubmittedMessage] = useState('');
-  const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   // Audio recording is handled internally by ChatInput's AudioRecorder.
 
   const handleSubmit = () => {

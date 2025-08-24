@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useCallback } from 'react';
-import { Horizontal, Text, Vertical, View, Image, Center } from 'app-studio';
-import { UploadedFile } from './ChatInput/ChatInput.type';
-import { ImageIcon, FileIcon, AudioIcon } from '../Icon/Icon';
+import { Vertical, View, Image, Center, Button } from 'app-studio';
+import { FileIcon, AudioIcon } from '../Icon/Icon';
 import { HoverCard } from '../HoverCard/HoverCard';
+import { DefaultAgentChatStyles } from '../adk/AgentChat/AgentChat/AgentChat.style';
+import { Text } from '../Text/Text';
 
 interface AttachmentGroupProps {
-  files: UploadedFile[];
+  files: File[];
   sandboxId?: string;
   onRemove: (index: number) => void;
   onSetAsReference?: (index: number) => void;
@@ -55,11 +56,14 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
       {...views?.container}
     >
       {files.map((file, index) => {
-        const previewUrl = file.localUrl || file.path;
+        const previewUrl =
+          URL.createObjectURL(file) ||
+          (file as any)?.path ||
+          (file as any)?.url ||
+          '';
         const isImage = file.type.startsWith('image/');
         const isVideo = file.type.startsWith('video/');
         const isAudio = file.type.startsWith('audio/');
-
         return (
           <Vertical
             key={index}
@@ -75,14 +79,6 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
             animationDuration={0.2}
             {...views?.item}
           >
-            <Horizontal>
-              {/* {!sandboxId && (
-                  <Text as="span" marginLeft="4px" color="theme.primary">
-                    (pending)
-                  </Text>
-                )} */}
-            </Horizontal>
-
             {showPreviews && (
               <HoverCard>
                 <HoverCard.Trigger>
@@ -99,10 +95,12 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
                     <View
                       as="video"
                       src={previewUrl}
+                      alt={file.name}
+                      controls={false}
+                      muted={true}
                       width="60px"
                       height="60px"
-                      style={{ objectFit: 'cover' }}
-                      muted
+                      objectFit="cover"
                     />
                   )}
                   {isAudio && (
@@ -111,7 +109,7 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
                       height="60px"
                       backgroundColor="color.gray.200"
                     >
-                      <AudioIcon widthHeight={24} color="color.gray.600" />
+                      <AudioIcon widthHeight={24} color="color.black" />
                     </Center>
                   )}
                   {!isImage && !isVideo && !isAudio && (
@@ -120,77 +118,51 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
                       height="60px"
                       backgroundColor="color.gray.200"
                     >
-                      <FileIcon widthHeight={24} color="color.gray.600" />
+                      <FileIcon widthHeight={24} color="color.black" />
                     </Center>
+                  )}
+
+                  {onRemove && (
+                    <Button
+                      {...DefaultAgentChatStyles.attachmentRemove}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onRemove(index);
+                      }}
+                      aria-label={`Remove ${file.name}`}
+                    >
+                      ×
+                    </Button>
                   )}
                 </HoverCard.Trigger>
                 <HoverCard.Content>
                   {isImage && (
-                    <Image src={previewUrl} alt={file.name} maxWidth="300px" />
+                    <Image src={previewUrl} alt={file.name} maxWidth="100%" />
                   )}
                   {isVideo && (
                     <View
                       as="video"
                       src={previewUrl}
                       controls
-                      style={{ maxWidth: '300px' }}
+                      maxWidth="100%"
                     />
                   )}
-                  {isAudio && <View as="audio" src={previewUrl} controls />}
-                  <Text marginTop="4px">
+                  {isAudio && (
+                    <View as="audio" src={previewUrl} controls width={'100%'} />
+                  )}
+                  <Text
+                    marginTop="4px"
+                    truncateText={true}
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                    width={'100%'}
+                    {...views?.name}
+                  >
                     {file.name} ({formatFileSize(file.size)})
                   </Text>
                 </HoverCard.Content>
               </HoverCard>
             )}
-
-            {/* Reference button for image files */}
-            {onSetAsReference && isImage && (
-              <View
-                as="button"
-                type="button"
-                width="16px"
-                height="16px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                borderRadius="50%"
-                backgroundColor={
-                  file.isReferenceImage ? 'theme.primary' : 'transparent'
-                }
-                color={file.isReferenceImage ? 'color.white' : 'color.gray.500'}
-                cursor="pointer"
-                transition="all 0.2s ease"
-                onClick={() => onSetAsReference(index)}
-                title={
-                  file.isReferenceImage
-                    ? 'Reference image'
-                    : 'Set as reference image'
-                }
-                _hover={{
-                  backgroundColor: file.isReferenceImage
-                    ? 'color.blue.600'
-                    : 'color.blue.100',
-                  color: file.isReferenceImage
-                    ? 'color.white'
-                    : 'theme.primary',
-                }}
-                {...views?.referenceButton}
-              >
-                <ImageIcon
-                  widthHeight={20}
-                  color="currentColor"
-                  filled={file.isReferenceImage}
-                />
-              </View>
-            )}
-
-            {/* <Button
-                variant="ghost"
-                size="sm"
-                icon={<TrashIcon widthHeight={12} />}
-                onClick={() => onRemove(index)}
-              /> */}
           </Vertical>
         );
       })}
