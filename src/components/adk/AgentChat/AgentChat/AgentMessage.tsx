@@ -4,6 +4,7 @@ import { AgentMessage as AgentMessageType } from './AgentChat.props';
 import { DefaultAgentChatStyles } from './AgentChat.style';
 import { Loader } from '../../../Loader/Loader';
 import { Avatar } from '../../../Avatar/Avatar';
+import { MessageAttachmentPreview } from './MessageAttachmentPreview';
 
 export interface AgentMessageProps {
   message: AgentMessageType;
@@ -124,37 +125,7 @@ export const AgentMessage: React.FC<AgentMessageProps> = ({
         {message.attachments && message.attachments.length > 0 && (
           <Horizontal gap={8} flexWrap="wrap">
             {message.attachments.map((attachment, index) => (
-              <View key={index} {...DefaultAgentChatStyles.attachmentPreview}>
-                {attachment.type === 'image' ? (
-                  <img
-                    src={attachment.url}
-                    alt={attachment.file.name}
-                    style={{
-                      width: '60px',
-                      height: '60px',
-                      objectFit: 'cover',
-                      borderRadius: '4px',
-                    }}
-                  />
-                ) : (
-                  <View
-                    width="60px"
-                    height="60px"
-                    backgroundColor="color.gray.200"
-                    borderRadius="4px"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    <Text fontSize="xs">📄</Text>
-                  </View>
-                )}
-                <Text fontSize="xs" marginTop={4} textAlign="center">
-                  {attachment.file.name.length > 10
-                    ? attachment.file.name.substring(0, 10) + '...'
-                    : attachment.file.name}
-                </Text>
-              </View>
+              <MessageAttachmentPreview key={index} attachment={attachment} />
             ))}
           </Horizontal>
         )}
