@@ -137,8 +137,8 @@ export const DefaultAgentChatStyles = {
   attachmentPreview: {
     position: 'relative',
     display: 'inline-block',
-    width: '80px',
-    height: '80px',
+    width: '60px',
+    height: '60px',
     backgroundColor: 'color.gray.100',
     borderRadius: '8px',
     border: '1px solid',
