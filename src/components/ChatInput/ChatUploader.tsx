@@ -1,5 +1,3 @@
-'use client';
-
 import React, { forwardRef, useEffect } from 'react';
 import { Button, Horizontal } from 'app-studio';
 import { useUpload } from '../Uploader/Uploader/Uploader.state';

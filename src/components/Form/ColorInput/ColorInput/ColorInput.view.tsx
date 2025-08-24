@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { View, Vertical, Horizontal, Text, useTheme } from 'app-studio';
 import { ColorInputViewProps } from './ColorInput.props';

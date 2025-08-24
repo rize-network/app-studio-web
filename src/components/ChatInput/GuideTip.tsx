@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Text, View } from 'app-studio';
 import { CloseIcon } from '../Icon/Icon';

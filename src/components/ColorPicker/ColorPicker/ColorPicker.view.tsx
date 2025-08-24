@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { View, Horizontal, Text, useTheme } from 'app-studio';
 import { ColorPickerViewProps } from './ColorPicker.props';

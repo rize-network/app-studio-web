@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useRef, useEffect } from 'react';
 import { ChatInputProps } from './ChatInput.props';
 import { ModelOption, PromptExample } from './ChatInput.type';

@@ -1,5 +1,3 @@
-'use client';
-
 import { ViewProps } from 'app-studio';
 import { Shape, Size, Variant } from './ChatInput.type';
 

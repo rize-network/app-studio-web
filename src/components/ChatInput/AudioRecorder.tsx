@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useCallback, useEffect } from 'react';
 import { Horizontal, View } from 'app-studio';
 import { MicrophoneIcon, StopIcon } from '../Icon/Icon';

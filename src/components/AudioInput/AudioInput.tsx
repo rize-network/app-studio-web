@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { AudioInputView } from './AudioInput/AudioInput.view';
 import { useAudioInputState } from './AudioInput/AudioInput.state';

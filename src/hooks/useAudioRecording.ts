@@ -1,5 +1,3 @@
-'use client';
-
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useAudioRecording() {
@@ -21,9 +19,11 @@ export function useAudioRecording() {
   // support Opus in a WebM container which would cause the recorder to fail
   // silently. By falling back to a more widely supported type we ensure that
   // audio input works across environments.
-  const MIME_TYPE = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
-    ? 'audio/webm;codecs=opus'
-    : 'audio/webm';
+  const MIME_TYPE =
+    typeof MediaRecorder !== 'undefined' &&
+    MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+      ? 'audio/webm;codecs=opus'
+      : 'audio/webm';
 
   const cleanup = useCallback(() => {
     if (mediaRecorderRef.current) {

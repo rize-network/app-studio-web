@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { Horizontal, Text, View, useTheme } from 'app-studio';
 import { PromptExample } from './ChatInput/ChatInput.type';
