@@ -336,6 +336,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                   isLoading={isUploading}
                   text={attachmentText}
                   fileType="file"
+                  renderError={({ errorMessage }) => null}
                   views={{
                     container: {
                       height: '36px',
