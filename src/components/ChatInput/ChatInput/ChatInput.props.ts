@@ -1,5 +1,3 @@
-'use client';
-
 import { ViewProps } from 'app-studio';
 import {
   ChatInputStyles,
@@ -304,7 +302,6 @@ export interface ChatInputViewProps extends ChatInputProps {
    * Callback function to handle drag leave events
    */
   handleDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
-
 
   /**
    * List of suggestions for auto-completion

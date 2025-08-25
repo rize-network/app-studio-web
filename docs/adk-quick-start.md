@@ -19,26 +19,13 @@ import {
   AgentChat, 
   AgentSession, 
   AgentTrace, 
-  AgentEval,
-  AgentServiceProvider 
+  AgentEval 
 } from '@app-studio/web';
 ```
 
-### 2. Wrap with Service Provider
+### 2. Use Components
 
-```tsx
-import { AgentServiceProvider } from '@app-studio/web';
-
-function App() {
-  return (
-    <AgentServiceProvider config={{ baseUrl: 'https://your-adk-api.com' }}>
-      <YourApp />
-    </AgentServiceProvider>
-  );
-}
-```
-
-### 3. Use Components
+The ADK components are self-contained and handle their own API communications. Simply add them to your application and provide the necessary props.
 
 ```tsx
 function YourApp() {
@@ -49,6 +36,7 @@ function YourApp() {
         <AgentSession
           appName="my-agent"
           userId="user123"
+          apiBaseUrl="https://your-adk-api.com"
         />
       </div>
       
@@ -57,6 +45,7 @@ function YourApp() {
         <AgentChat
           appName="my-agent"
           userId="user123"
+          apiBaseUrl="https://your-adk-api.com"
           enableFileUpload={true}
           enableStreaming={true}
         />
@@ -70,13 +59,14 @@ function YourApp() {
 
 ### AgentChat
 **Purpose**: Real-time chat interface with ADK agents
-**Key Features**: File uploads, streaming, function calls, code execution
+**Key Features**: File uploads, audio recording, streaming, function calls, code execution
 
 ```tsx
 <AgentChat
   appName="my-agent"
   userId="user123"
   enableFileUpload={true}
+  enableAudioRecording={true}
   enableStreaming={true}
   enableThoughts={true}
   onMessageSent={(message) => console.log(message)}
@@ -173,7 +163,7 @@ function AgentInterface() {
     container: { backgroundColor: 'color.blue.50' },
     userMessage: { backgroundColor: 'color.blue.500' },
     botMessage: { backgroundColor: 'color.green.100' },
-    input: { borderColor: 'color.blue.300' },
+    inputField: { borderColor: 'color.blue.300' },
   }}
 />
 ```
@@ -259,25 +249,9 @@ import type {
 
 ### Common Issues
 
-1. **Components not rendering**: Ensure you've wrapped your app with `AgentServiceProvider`
-2. **API errors**: Check your backend URL and API endpoints
-3. **Styling issues**: Verify you're using the app-studio color system
-4. **TypeScript errors**: Import types from the correct package
-
-### Debug Mode
-
-Enable debug logging:
-
-```tsx
-<AgentServiceProvider 
-  config={{ 
-    baseUrl: 'https://api.example.com',
-    enableLogging: true 
-  }}
->
-  <App />
-</AgentServiceProvider>
-```
+1.  **API errors**: Check the `apiBaseUrl` prop and ensure your backend URL and API endpoints are correct.
+2.  **Styling issues**: Verify you're using the app-studio color system.
+3.  **TypeScript errors**: Import types from the correct package.
 
 ## Next Steps
 

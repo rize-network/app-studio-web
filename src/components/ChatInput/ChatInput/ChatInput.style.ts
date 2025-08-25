@@ -1,5 +1,3 @@
-'use client';
-
 import { ViewProps } from 'app-studio';
 import { Shape, Size, Variant } from './ChatInput.type';
 
@@ -11,7 +9,7 @@ export const DefaultChatInputStyles = {
     width: '100%',
     maxWidth: '100%',
     borderRadius: '12px',
-    backgroundColor: 'color.gray.50',
+    backgroundColor: 'color.white',
     transition: 'all 0.2s ease',
   },
   content: {
@@ -31,7 +29,7 @@ export const DefaultChatInputStyles = {
     fontSize: '14px',
     lineHeight: '1.5',
     color: 'color.gray.900',
-    backgroundColor: 'transparent',
+    backgroundColor: 'color.white',
     border: 'none',
     outline: 'none',
     resize: 'none',

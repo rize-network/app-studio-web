@@ -1,5 +1,3 @@
-'use client';
-
 import React, { forwardRef } from 'react';
 import { ChatInputProps } from './ChatInput/ChatInput.props';
 import { useChatInputState } from './ChatInput/ChatInput.state';

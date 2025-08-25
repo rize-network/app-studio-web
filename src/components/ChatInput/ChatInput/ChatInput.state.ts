@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useRef, useEffect } from 'react';
 import { ChatInputProps } from './ChatInput.props';
 import { ModelOption, PromptExample } from './ChatInput.type';
@@ -183,7 +181,6 @@ export const useChatInputState = (props: ChatInputProps) => {
       editableRef.current.focus();
     }
   };
-
 
   return {
     value,

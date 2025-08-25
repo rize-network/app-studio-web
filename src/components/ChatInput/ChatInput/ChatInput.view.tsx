@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useCallback } from 'react';
 import { Horizontal, Text, View, useTheme } from 'app-studio';
 import { ChatInputViewProps } from './ChatInput.props';

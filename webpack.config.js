@@ -6,6 +6,14 @@ module.exports = {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
   },
+  externals: {
+    'app-studio': 'appStudio',
+    'react-router-dom': 'reactRouterDom',
+    contrast: 'contrast',
+    'date-fns/format': 'format',
+    formik: 'formik',
+    zustand: 'zustand',
+  },
   plugins: [
     new CompressionPlugin({
       filename: '[path].gz[query]',

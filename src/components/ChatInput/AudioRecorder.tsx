@@ -1,10 +1,8 @@
-'use client';
-
 import React, { useCallback, useEffect } from 'react';
 import { Horizontal, View } from 'app-studio';
 import { MicrophoneIcon, StopIcon } from '../Icon/Icon';
 import { AudioWaveform } from '../AudioInput/AudioWaveform/AudioWaveform';
-import { useAudioRecording } from '../../hooks/useAudioRecording';
+import { useAudioRecording } from '../AudioInput/useAudioRecording';
 
 interface AudioRecorderProps {
   onRecordingComplete: (file: File) => void;

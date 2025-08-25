@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useEffect, useRef, useState, startTransition } from 'react';
 import { AudioWaveformProps } from './AudioWaveform.props';
 import { AudioWaveformView } from './AudioWaveform.view';

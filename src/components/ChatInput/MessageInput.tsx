@@ -1,5 +1,3 @@
-'use client';
-
 import React, { forwardRef } from 'react';
 import { Button, Element, Horizontal, View, useTheme } from 'app-studio';
 import { ChatUploader } from './ChatUploader';
