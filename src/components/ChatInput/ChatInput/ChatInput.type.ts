@@ -50,14 +50,11 @@ export interface ChatInputStyles {
   guideTipClose?: ViewProps;
   promptExamples?: ViewProps;
   promptExampleItem?: ViewProps;
-  referenceImageButton?: ViewProps;
-  referenceImageModal?: ViewProps;
   attachments?: ViewProps;
   attachmentItem?: ViewProps;
   attachmentName?: ViewProps;
   attachmentSize?: ViewProps;
   attachmentRemove?: ViewProps;
-  referenceButton?: ViewProps;
   submitButton?: ViewProps;
   fileButton?: ViewProps;
   recordButton?: ViewProps;

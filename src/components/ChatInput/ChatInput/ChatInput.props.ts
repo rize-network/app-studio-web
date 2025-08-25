@@ -163,16 +163,6 @@ export interface ChatInputProps extends ViewProps {
   }) => void;
 
   /**
-   * Whether to show the reference image button
-   */
-  showReferenceImageButton?: boolean;
-
-  /**
-   * Callback function when the reference image button is clicked
-   */
-  onReferenceImageClick?: () => void;
-
-  /**
    * Error message to display at the bottom
    */
   errorMessage?: string;
@@ -301,16 +291,6 @@ export interface ChatInputViewProps extends ChatInputProps {
   hideGuideTip: () => void;
 
   /**
-   * Whether the reference image modal is shown
-   */
-  isReferenceImageModalShown: boolean;
-
-  /**
-   * Callback function to toggle the reference image modal
-   */
-  toggleReferenceImageModal: () => void;
-
-  /**
    * Callback function to handle prompt example selection
    */
   handlePromptExampleSelect: (example: PromptExample) => void;
@@ -324,21 +304,6 @@ export interface ChatInputViewProps extends ChatInputProps {
    * Callback function to handle drag leave events
    */
   handleDragLeave: (e: React.DragEvent<HTMLDivElement>) => void;
-
-  /**
-   * Callback function to handle reference image upload
-   */
-  handleReferenceImageUpload: (files: File[]) => void;
-
-  /**
-   * Callback function to remove reference image
-   */
-  removeReferenceImage: () => void;
-
-  /**
-   * Callback function to set a file as reference image
-   */
-  setFileAsReference: (fileIndex: number) => void;
 
   /**
    * List of suggestions for auto-completion

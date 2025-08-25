@@ -11,7 +11,6 @@ interface AttachmentGroupProps {
   files: File[];
   sandboxId?: string;
   onRemove: (index: number) => void;
-  onSetAsReference?: (index: number) => void;
   layout?: 'inline' | 'grid';
   maxHeight?: string;
   showPreviews?: boolean;
@@ -21,7 +20,6 @@ interface AttachmentGroupProps {
     name?: any;
     size?: any;
     removeButton?: any;
-    referenceButton?: any;
   };
 }
 
@@ -29,7 +27,6 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
   files,
   sandboxId,
   onRemove,
-  onSetAsReference,
   layout = 'inline',
   maxHeight = '120px',
   showPreviews = false,
