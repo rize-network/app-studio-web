@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar with value 50 should match snapshot 1`] = `
+<div
+  aria-valuemax={100}
+  aria-valuemin={0}
+  aria-valuenow={50}
+  className="wh-100 ht-8px brs-4px ow-hidden"
+  role="progressbar"
+>
+  <div
+    className="wh-50 ht-100 brs-4px"
+  />
+</div>
+`;
