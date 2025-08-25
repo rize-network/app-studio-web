@@ -4,19 +4,20 @@ This document provides an overview of the React components created for compatibi
 
 ## Overview
 
-The ADK Agent Components are a collection of React components designed to work seamlessly with ADK agents, following the same patterns and protocols used in the original adk-web Angular application. These components provide a complete interface for agent interaction, session management, and more.
+The ADK Agent Components are a collection of React components designed to work seamlessly with ADK agents. These components are self-contained, handling their own state and API communications, providing a complete interface for agent interaction, session management, and more.
 
 ## Components
 
 ### 1. AgentChat Component
 
-**Location**: `src/components/AgentChat/`
+**Location**: `src/components/adk/AgentChat/`
 
 A comprehensive chat interface for interacting with ADK agents.
 
 #### Key Features:
 - ✅ Real-time messaging via Server-Sent Events (SSE)
 - ✅ File upload support (images, videos, audio, documents)
+- ✅ Audio recording with live waveform visualization
 - ✅ Function call visualization and execution
 - ✅ Code execution and result display
 - ✅ Agent thought process visualization
@@ -32,7 +33,9 @@ import { AgentChat } from '@app-studio/web';
 <AgentChat
   appName="my-agent"
   userId="user123"
+  apiBaseUrl="https://your-adk-api.com"
   enableFileUpload={true}
+  enableAudioRecording={true}
   enableStreaming={true}
   enableThoughts={true}
   onSessionCreate={(session) => console.log('Session created:', session)}
@@ -41,18 +44,19 @@ import { AgentChat } from '@app-studio/web';
 ```
 
 #### Props:
-- `appName` (required): Name of the ADK agent application
-- `userId` (required): Unique identifier for the user
-- `sessionId`: Existing session ID to resume
-- `apiBaseUrl`: Base URL for ADK API endpoints
-- `enableFileUpload`: Enable file attachment functionality
-- `enableStreaming`: Enable real-time streaming responses
-- `enableThoughts`: Show agent thought processes
-- `views`: Custom styling options
+- `appName` (required): Name of the ADK agent application.
+- `userId` (required): Unique identifier for the user.
+- `sessionId`: Existing session ID to resume.
+- `apiBaseUrl`: Base URL for ADK API endpoints.
+- `enableFileUpload`: Enable file attachment functionality.
+- `enableAudioRecording`: Enable audio recording from the microphone.
+- `enableStreaming`: Enable real-time streaming responses.
+- `enableThoughts`: Show agent thought processes.
+- `views`: Custom styling options.
 
 ### 2. AgentSession Component
 
-**Location**: `src/components/AgentSession/`
+**Location**: `src/components/adk/AgentSession/`
 
 A comprehensive session management component for ADK agents.
 
@@ -73,6 +77,7 @@ import { AgentSession } from '@app-studio/web';
 <AgentSession
   appName="my-agent"
   userId="user123"
+  apiBaseUrl="https://your-adk-api.com"
   showSessionHistory={true}
   enableSessionImport={true}
   enableSessionExport={true}
@@ -82,14 +87,15 @@ import { AgentSession } from '@app-studio/web';
 ```
 
 #### Props:
-- `appName` (required): Name of the ADK agent application
-- `userId` (required): Unique identifier for the user
-- `showSessionHistory`: Show session history list
-- `enableSessionImport`: Enable session import from JSON
-- `enableSessionExport`: Enable session export to JSON
-- `enableSessionSearch`: Enable search functionality
-- `maxSessions`: Maximum number of sessions to display
-- `views`: Custom styling options
+- `appName` (required): Name of the ADK agent application.
+- `userId` (required): Unique identifier for the user.
+- `apiBaseUrl`: Base URL for ADK API endpoints.
+- `showSessionHistory`: Show session history list.
+- `enableSessionImport`: Enable session import from JSON.
+- `enableSessionExport`: Enable session export to JSON.
+- `enableSessionSearch`: Enable search functionality.
+- `maxSessions`: Maximum number of sessions to display.
+- `views`: Custom styling options.
 
 ## Architecture
 
@@ -112,7 +118,7 @@ ComponentName/
 
 ### ADK Integration
 
-The components are designed to integrate with the ADK backend using the same API patterns as the original adk-web application:
+The components are self-contained and integrate directly with an ADK backend using `fetch`. You can specify the backend URL via the `apiBaseUrl` prop.
 
 #### Required Backend Endpoints:
 - `POST /sessions` - Create new agent session
@@ -136,6 +142,17 @@ interface AgentRunRequest {
   };
   streaming?: boolean;
 }
+```
+
+### Direct API Interaction (`useAdk` Hook)
+For developers who need to interact with the ADK API without using the pre-built UI components, a `useAdk` hook is available. This hook provides functions for all core ADK operations like creating sessions, running agents, and managing responses.
+
+**Location**: `src/components/adk/useAdk.ts`
+
+```tsx
+import { useAdk } from '@app-studio/web';
+
+const { createSession, runAgent, sessions, isLoadingSessions } = useAdk();
 ```
 
 ### Design System Compliance
@@ -204,6 +221,7 @@ const MyAgentApp = () => {
           <AgentSession
             appName="my-agent"
             userId="user123"
+            apiBaseUrl="https://api.example.com"
           />
         </View>
         
@@ -212,6 +230,7 @@ const MyAgentApp = () => {
           <AgentChat
             appName="my-agent"
             userId="user123"
+            apiBaseUrl="https://api.example.com"
           />
         </View>
       </Horizontal>
@@ -276,22 +295,6 @@ All planned components have been successfully implemented:
 - **Real-time updates** via WebSocket and SSE
 - **Error handling and retry logic**
 - **Connection status monitoring**
-
-## Service Integration
-
-The ADK components include a comprehensive service layer:
-
-```tsx
-import { AgentServiceProvider, useAgentService } from '@app-studio/web';
-
-// Wrap your app with the service provider
-<AgentServiceProvider config={{ baseUrl: 'https://api.example.com' }}>
-  <MyApp />
-</AgentServiceProvider>
-
-// Use the service in components
-const { service, isConnected } = useAgentService();
-```
 
 ## Demo Page
 

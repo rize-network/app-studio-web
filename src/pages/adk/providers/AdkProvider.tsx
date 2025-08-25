@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { useAdk } from '../../../hooks/useAdk';
+import { useAdk } from '../../../components/adk/useAdk';
 
 /**
  * ADK Context Type

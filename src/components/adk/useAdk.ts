@@ -8,13 +8,13 @@ import {
   useAdkControllerRunAgentStreamingService,
   useAdkControllerHealthCheckService,
   useAdkControllerGetServiceInfoService,
-} from '../services/api/services/AdkService';
-import { useAuthStore } from '../stores/AuthStore';
+} from '../../services/api/services/AdkService';
+import { useAuthStore } from '../../stores/AuthStore';
 import type {
   CreateSessionParams,
   AgentRunRequest,
   SessionResponse,
-} from '../services/api';
+} from '../../services/api';
 
 /**
  * Custom hook for ADK operations
