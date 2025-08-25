@@ -50,8 +50,6 @@ export const AudioWaveformChatInputDemo = () => {
             }}
             setPendingFiles={() => {}} // Mock function
             setIsUploading={() => {}} // Mock function
-            getPendingFiles={() => []}
-            clearPendingFiles={() => {}}
             onSubmit={handleSubmit}
             editableRef={useRef<HTMLDivElement>(null)}
             fileInputRef={useRef<HTMLInputElement>(null)}
@@ -63,14 +61,9 @@ export const AudioWaveformChatInputDemo = () => {
             canAccessModel={() => true}
             isGuideTipShown={false}
             hideGuideTip={() => {}}
-            isReferenceImageModalShown={false}
-            toggleReferenceImageModal={() => {}}
             handlePromptExampleSelect={() => {}}
             handleDragOver={() => {}}
             handleDragLeave={() => {}}
-            handleReferenceImageUpload={() => {}}
-            removeReferenceImage={() => {}}
-            setFileAsReference={() => {}}
             views={{
               editableInput: {
                 minHeight: '60px',

@@ -1,6 +1,6 @@
 # ChatInput
 
-The ChatInput component is a customizable chat input field with support for file uploads, prompt examples, and reference images.
+The ChatInput component is a customizable chat input field with support for file uploads and prompt examples.
 
 ## Import
 
@@ -30,8 +30,6 @@ import { ChatInput } from '@app-studio/web';
 | onGuideClose | () => void | undefined | Callback function when the guide tip is closed |
 | promptExamples | PromptExample[] | [] | List of prompt examples |
 | onPromptExampleSelect | (example: PromptExample) => void | undefined | Callback function when a prompt example is selected |
-| showReferenceImageButton | boolean | false | Whether to show the reference image button |
-| onReferenceImageClick | () => void | undefined | Callback function when the reference image button is clicked |
 | size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' | 'md' | Size of the chat input |
 | shape | 'default' \| 'sharp' \| 'rounded' \| 'pillShaped' | 'rounded' | Shape of the chat input |
 | variant | 'default' \| 'outline' \| 'none' | 'default' | Visual variant of the chat input |
@@ -182,8 +180,6 @@ The ChatInput component can be customized using the `views` prop:
     guideTip: { /* styles for the guide tip */ },
     promptExamples: { /* styles for the prompt examples container */ },
     promptExampleItem: { /* styles for each prompt example item */ },
-    referenceImageButton: { /* styles for the reference image button */ },
-    referenceImageModal: { /* styles for the reference image modal */ },
     attachments: { /* styles for the attachments container */ },
     attachmentItem: { /* styles for each attachment item */ },
     submitButton: { /* styles for the submit button */ },
