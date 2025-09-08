@@ -51,12 +51,16 @@ const NavigationMenuPage = lazy(() => import('src/pages/navigationMenu.page'));
 const OTPInputPage = lazy(() => import('src/pages/otpInput.page'));
 const PaginationPage = lazy(() => import('src/pages/pagination.page'));
 const PasswordPage = lazy(() => import('src/pages/password.page'));
+const ProgressBarPage = lazy(() => import('src/pages/progressBar.page'));
 const SelectPage = lazy(() => import('src/pages/select.page'));
 const SeparatorPage = lazy(() => import('src/pages/separator.page'));
 const ResizablePage = lazy(() => import('src/pages/resizable.page'));
 const SidebarPage = lazy(() => import('src/pages/sidebar.page'));
 const SliderPage = lazy(() => import('src/pages/slider.page'));
 const SwitchPage = lazy(() => import('src/pages/switch.page'));
+const StatusIndicatorPage = lazy(
+  () => import('src/pages/statusIndicator.page')
+);
 const TablePage = lazy(() => import('src/pages/table.page'));
 const TabsPage = lazy(() => import('src/pages/tabs.page'));
 const TextPage = lazy(() => import('src/pages/text.page'));
@@ -138,11 +142,17 @@ export const componentList = [
   { name: 'OTP Input', path: '/otpinput', element: <OTPInputPage /> },
   { name: 'Pagination', path: '/pagination', element: <PaginationPage /> },
   { name: 'Password', path: '/password', element: <PasswordPage /> },
+  { name: 'ProgressBar', path: '/progress-bar', element: <ProgressBarPage /> },
   { name: 'Resizable', path: '/resizable', element: <ResizablePage /> },
   { name: 'Select', path: '/select', element: <SelectPage /> },
   { name: 'Separator', path: '/separator', element: <SeparatorPage /> },
   { name: 'Sidebar', path: '/sidebar', element: <SidebarPage /> },
   { name: 'Slider', path: '/slider', element: <SliderPage /> },
+  {
+    name: 'StatusIndicator',
+    path: '/status-indicator',
+    element: <StatusIndicatorPage />,
+  },
 
   { name: 'Switch', path: '/switch', element: <SwitchPage /> },
   { name: 'Table', path: '/table', element: <TablePage /> },
