@@ -6,6 +6,7 @@ A comprehensive collection of background effects for creating engaging visual ex
 
 - **Animated Effects**: Aurora, Meteors, Particles, Grid, Ripples, Wall
 - **Background Images**: Support for images with overlays and blend modes
+- **Background Videos**: Play videos as immersive backgrounds
 - **Gradient Backgrounds**: Linear, radial, and conic gradients with animation
 - **Theme Integration**: Full support for app-studio color system
 - **Responsive Design**: Works seamlessly with responsive layouts
@@ -29,6 +30,11 @@ import { Background } from '@app-studio/web';
 >
   <Text color="white">Image Background</Text>
 </Background.Image>
+
+// Background video with overlay
+<Background.Video src="/hero-video.mp4" overlay="rgba(0,0,0,0.4)">
+  <Text color="white">Video Background</Text>
+</Background.Video>
 
 // Animated gradient
 <Background.Gradient
@@ -57,6 +63,7 @@ import { Background } from '@app-studio/web';
 
 ### Background Types
 - `Background.Image` - Image backgrounds with overlay support
+- `Background.Video` - Video backgrounds with overlay support
 - `Background.Gradient` - Gradient backgrounds with animation
 
 ### Interactive Elements
@@ -68,6 +75,12 @@ import { Background } from '@app-studio/web';
 ### Background.Image
 - `src` - Image source URL (required)
 - `backgroundSize` - Image sizing ('cover', 'contain', etc.)
+- `overlay` - Color or gradient overlay
+- `blendMode` - CSS blend mode for overlay
+
+### Background.Video
+- `src` - Video source URL (required)
+- `autoPlay/loop/muted` - Video playback controls
 - `overlay` - Color or gradient overlay
 - `blendMode` - CSS blend mode for overlay
 

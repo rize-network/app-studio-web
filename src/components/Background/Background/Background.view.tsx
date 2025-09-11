@@ -9,12 +9,14 @@ import {
   GridProps,
   RipplesProps,
   BackgroundImageProps,
+  BackgroundVideoProps,
   BackgroundGradientProps,
 } from './Background.props';
 import {
   DefaultBackgroundStyles,
   AuroraStyles,
   BackgroundImageStyles,
+  BackgroundVideoStyles,
 } from './Background.style';
 import { BackgroundContextType } from './Background.type';
 import { Gradient } from '../../Gradient/Gradient';
@@ -562,6 +564,57 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
 };
 
 /**
+ * Background Video Component
+ */
+const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
+  children,
+  src,
+  autoPlay = true,
+  loop = true,
+  muted = true,
+  playsInline = true,
+  overlay,
+  blendMode = 'normal',
+  views,
+  themeMode: elementMode,
+  ...props
+}) => {
+  const { getColor } = useTheme();
+
+  const overlayStyle: React.CSSProperties = overlay
+    ? {
+        ...BackgroundVideoStyles.overlay,
+        backgroundColor: getColor(
+          overlay,
+          elementMode ? { themeMode: elementMode } : undefined
+        ),
+        mixBlendMode: blendMode as any,
+      }
+    : {};
+
+  return (
+    <View {...BackgroundVideoStyles.container} {...views?.container} {...props}>
+      <View
+        as="video"
+        src={src}
+        autoPlay={autoPlay}
+        loop={loop}
+        muted={muted}
+        playsInline={playsInline}
+        style={BackgroundVideoStyles.video as React.CSSProperties}
+        {...views?.video}
+      />
+      {overlay && <View style={overlayStyle} {...views?.overlay} />}
+      {children && (
+        <View {...BackgroundVideoStyles.content} {...views?.content}>
+          {children}
+        </View>
+      )}
+    </View>
+  );
+};
+
+/**
  * Background Gradient Component
  * Uses the existing Gradient component as a background
  */
@@ -583,6 +636,7 @@ interface BackgroundViewComponent extends React.FC<BackgroundProps> {
   Grid: React.FC<GridProps>;
   Ripples: React.FC<RipplesProps>;
   Image: React.FC<BackgroundImageProps>;
+  Video: React.FC<BackgroundVideoProps>;
   Gradient: React.FC<BackgroundGradientProps>;
 }
 
@@ -615,4 +669,5 @@ BackgroundView.Particles = Particles;
 BackgroundView.Grid = Grid;
 BackgroundView.Ripples = Ripples;
 BackgroundView.Image = BackgroundImage;
+BackgroundView.Video = BackgroundVideo;
 BackgroundView.Gradient = BackgroundGradient;
