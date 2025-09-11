@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAudioRecording } from '../../../hooks/useAudioRecording';
+import { useAudioRecording } from '../useAudioRecording';
 import { AudioInputProps } from './AudioInput.props';
 
 export function useAudioInputState(props: AudioInputProps) {
