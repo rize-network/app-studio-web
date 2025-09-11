@@ -137,6 +137,62 @@ export interface BackgroundImageProps
 }
 
 /**
+ * Background Video component props
+ */
+export interface BackgroundVideoProps
+  extends Omit<BackgroundProps, 'position'> {
+  /**
+   * Video source URL
+   */
+  src: string;
+
+  /**
+   * Whether the video should autoplay
+   * @default true
+   */
+  autoPlay?: boolean;
+
+  /**
+   * Whether the video should loop
+   * @default true
+   */
+  loop?: boolean;
+
+  /**
+   * Whether the video should be muted
+   * @default true
+   */
+  muted?: boolean;
+
+  /**
+   * Use inline playback on mobile
+   * @default true
+   */
+  playsInline?: boolean;
+
+  /**
+   * Overlay color to blend with video
+   */
+  overlay?: string;
+
+  /**
+   * Blend mode for overlay
+   * @default 'normal'
+   */
+  blendMode?: BlendMode;
+
+  /**
+   * Custom views for styling
+   */
+  views?: {
+    container?: ViewProps;
+    content?: ViewProps;
+    video?: ViewProps;
+    overlay?: ViewProps;
+  };
+}
+
+/**
  * Background Gradient component props
  * Extends GradientProps and adds Background-specific functionality
  */
@@ -153,5 +209,7 @@ export interface BackgroundStyles {
   aurora?: ViewProps;
   meteors?: ViewProps;
   image?: ViewProps;
+  video?: ViewProps;
+  overlay?: ViewProps;
   gradient?: ViewProps;
 }

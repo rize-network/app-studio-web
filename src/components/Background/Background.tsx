@@ -47,6 +47,12 @@ import { BackgroundView } from './Background/Background.view';
  * </Background.Image>
  *
  * @example
+ * // Background Video
+ * <Background.Video src="/path/to/video.mp4" overlay="rgba(0,0,0,0.5)">
+ *   <Text color="white">Content over video</Text>
+ * </Background.Video>
+ *
+ * @example
  * // Background Gradient
  * <Background.Gradient from="blue.500" to="purple.500" animate={true}>
  *   <Text color="white">Content over gradient</Text>
@@ -66,6 +72,7 @@ export const Background = Object.assign(BackgroundComponent, {
   Grid: BackgroundView.Grid,
   Ripples: BackgroundView.Ripples,
   Image: BackgroundView.Image,
+  Video: BackgroundView.Video,
   Gradient: BackgroundView.Gradient,
 });
 

@@ -8,6 +8,7 @@ export type {
   GridProps,
   RipplesProps,
   BackgroundImageProps,
+  BackgroundVideoProps,
   BackgroundGradientProps,
   BackgroundStyles,
 } from './Background/Background.props';

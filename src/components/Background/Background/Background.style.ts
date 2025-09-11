@@ -83,6 +83,43 @@ export const BackgroundImageStyles = {
 };
 
 /**
+ * Background Video styles
+ */
+export const BackgroundVideoStyles = {
+  container: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  } as ViewProps,
+
+  video: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  } as ViewProps,
+
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    pointerEvents: 'none',
+  } as ViewProps,
+
+  content: {
+    position: 'relative',
+    zIndex: 2,
+  } as ViewProps,
+};
+
+/**
  * Meteors effect styles
  */
 export const MeteorsStyles = {

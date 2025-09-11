@@ -6,3 +6,4 @@ export { ParticlesDemo } from './particles';
 export { GridDemo } from './grid';
 export { RipplesDemo } from './ripples';
 export { CombinedEffectsDemo } from './combinedEffects';
+export { VideoDemo } from './video';
