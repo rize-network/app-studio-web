@@ -121,6 +121,22 @@ const BackgroundTestPage = () => {
 
       <Vertical gap={24}>
         <Text fontSize={18} fontWeight="500">
+          Background Video
+        </Text>
+        <Background.Video
+          src="https://www.w3schools.com/html/mov_bbb.mp4"
+          height={300}
+          width={400}
+          overlay="rgba(0,0,0,0.4)"
+        >
+          <Text color="white" fontSize={20} fontWeight="600">
+            Video Background
+          </Text>
+        </Background.Video>
+      </Vertical>
+
+      <Vertical gap={24}>
+        <Text fontSize={18} fontWeight="500">
           Background Gradient
         </Text>
         <Background.Gradient
