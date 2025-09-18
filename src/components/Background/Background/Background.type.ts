@@ -11,6 +11,7 @@ export type BackgroundEffect =
   | 'ripples'
   | 'wall'
   | 'image'
+  | 'video'
   | 'gradient'
   | 'borderMoving'
   | 'animatedStroke';

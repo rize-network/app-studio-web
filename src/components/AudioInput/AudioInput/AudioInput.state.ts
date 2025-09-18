@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useAudioRecording } from '../../../hooks/useAudioRecording';
 import { AudioInputProps } from './AudioInput.props';
+import { useAudioRecording } from '../useAudioRecording';
 
 export function useAudioInputState(props: AudioInputProps) {
   const { onAudio } = props;

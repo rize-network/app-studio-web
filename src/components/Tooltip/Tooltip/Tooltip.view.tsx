@@ -276,19 +276,6 @@ export const TooltipView: React.FC<
 
           {/* Arrow */}
           {showArrow && <View {...arrowStyles} {...views?.arrow} />}
-
-          {/* Debug info - can be removed in production */}
-          {process.env.NODE_ENV === 'development' && (
-            <div style={{ fontSize: '8px', opacity: 0.7, marginTop: '2px' }}>
-              Placement: {optimalPosition.placement}
-              {relation && (
-                <>
-                  <br />
-                  Space: {relation.space.vertical}-{relation.space.horizontal}
-                </>
-              )}
-            </div>
-          )}
         </View>
       )}
     </View>
