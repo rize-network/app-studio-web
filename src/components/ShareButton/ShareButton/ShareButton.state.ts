@@ -9,9 +9,9 @@ const canShareData = (nav: Navigator | undefined, data: NavigatorShareData) => {
     return false;
   }
 
-  if (typeof nav.canShare === 'function') {
+  if (typeof (nav as any).canShare === 'function') {
     try {
-      return nav.canShare(data);
+      return (nav as any).canShare(data);
     } catch {
       return false;
     }
@@ -60,9 +60,9 @@ export const useShareButton = (props: ShareButtonProps) => {
         return;
       }
 
-      if (typeof nav.canShare === 'function') {
+      if (typeof (nav as any).canShare === 'function') {
         try {
-          if (!nav.canShare(shareData)) {
+          if (!(nav as any).canShare(shareData)) {
             onUnsupported?.();
             return;
           }
