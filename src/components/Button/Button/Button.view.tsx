@@ -277,6 +277,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       >
         <View
           as="svg"
+          display="block"
           height={numericHeight}
           width={numericWidth}
           xmlns="http://www.w3.org/2000/svg"
@@ -299,12 +300,23 @@ const ButtonView: React.FC<ButtonProps> = ({
         </View>
 
         <View
+          position="absolute"
+          top={0}
+          right={0}
+          bottom={0}
+          left={0}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          paddingX={16}
+          paddingY={8}
           fontSize="22px"
-          lineHeight="32px"
+          lineHeight="1.3"
           letterSpacing="0.3rem"
-          position="relative"
-          top="-48px"
+          textAlign="center"
           textTransform="uppercase"
+          whiteSpace="normal"
+          wordBreak="break-word"
           pointerEvents="none"
           userSelect="none"
           color={resolvedTextColor}
