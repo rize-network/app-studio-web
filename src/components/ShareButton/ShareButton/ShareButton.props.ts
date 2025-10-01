@@ -1,6 +1,7 @@
 import React from 'react';
 import { ButtonProps } from '../../Button/Button/Button.props';
 
+export type NavigatorShareData = Parameters<Navigator['share']>[0];
 /**
  * Properties for the ShareButton component.
  * Extends the design-system Button while wiring the Web Share API workflow.

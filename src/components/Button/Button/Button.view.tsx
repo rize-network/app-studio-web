@@ -160,12 +160,17 @@ const ButtonView: React.FC<ButtonProps> = ({
       numericBorderRadius as number
     );
 
+    // Determine background color from props or use mainTone
+    const containerBg = mainTone;
+    // Calculate text color with proper contrast
+    const borderMovingTextColor = tone === 'light' ? '#000000' : '#FFFFFF';
+
     return (
       <View
         width={numericWidth}
         height={numericHeight}
         position="relative"
-        backgroundColor="black"
+        backgroundColor={containerBg}
         overflow="hidden"
         borderRadius={ButtonShapes[shape]}
         cursor={isDisabled ? 'default' : 'pointer'}
@@ -176,7 +181,7 @@ const ButtonView: React.FC<ButtonProps> = ({
         <svg
           width={numericWidth}
           height={numericHeight}
-          style={{ position: 'absolute', top: 0, left: 0 }}
+          style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
         >
           <defs>
             <linearGradient
@@ -204,23 +209,25 @@ const ButtonView: React.FC<ButtonProps> = ({
 
         <View
           position="absolute"
-          backgroundColor="black"
+          backgroundColor={containerBg}
           borderRadius={Math.max(0, numericBorderRadius - 1)}
           top={borderWidth}
           bottom={borderWidth}
           left={borderWidth}
           right={borderWidth}
+          zIndex={2}
         />
 
         <View
+          position="relative"
           width="100%"
           height="100%"
-          backgroundColor="rgba(15, 23, 42, 0.2)"
           display="flex"
           alignItems="center"
           justifyContent="center"
-          color="white"
+          color={borderMovingTextColor}
           fontSize={14}
+          zIndex={3}
           style={{ cursor: 'pointer' }}
         >
           {content}
@@ -270,6 +277,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       >
         <View
           as="svg"
+          display="block"
           height={numericHeight}
           width={numericWidth}
           xmlns="http://www.w3.org/2000/svg"
@@ -292,12 +300,23 @@ const ButtonView: React.FC<ButtonProps> = ({
         </View>
 
         <View
+          position="absolute"
+          top={0}
+          right={0}
+          bottom={0}
+          left={0}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          paddingX={16}
+          paddingY={8}
           fontSize="22px"
-          lineHeight="32px"
+          lineHeight="1.3"
           letterSpacing="0.3rem"
-          position="relative"
-          top="-48px"
+          textAlign="center"
           textTransform="uppercase"
+          whiteSpace="normal"
+          wordBreak="break-word"
           pointerEvents="none"
           userSelect="none"
           color={resolvedTextColor}

@@ -8,5 +8,6 @@ export * from './isAuto';
 export * from './isDisabled';
 export * from './loaderProps';
 export * from './shadow';
+export * from './shareButton';
 export * from './size';
 export * from './variant';

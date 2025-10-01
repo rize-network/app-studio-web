@@ -1,15 +1,12 @@
 import React from 'react';
 import ShareButtonView from './ShareButton/ShareButton.view';
-import {
-  ShareButtonProps,
-  ShareButtonViewProps,
-} from './ShareButton/ShareButton.props';
+import { ShareButtonProps } from './ShareButton/ShareButton.props';
 import { useShareButton } from './ShareButton/ShareButton.state';
 
 const ShareButtonComponent: React.FC<ShareButtonProps> = (props) => {
   const { isSupported, isSharing, handleShare } = useShareButton(props);
 
-  const viewProps: ShareButtonViewProps = (({
+  const {
     shareData: _shareData,
     onShareStart: _onShareStart,
     onShareSuccess: _onShareSuccess,
@@ -17,8 +14,8 @@ const ShareButtonComponent: React.FC<ShareButtonProps> = (props) => {
     onShareError: _onShareError,
     onUnsupported: _onUnsupported,
     onClick: _onClick,
-    ...rest
-  }: ShareButtonProps) => rest)(props);
+    ...viewProps
+  } = props;
 
   return (
     <ShareButtonView
