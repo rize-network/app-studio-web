@@ -8,6 +8,7 @@ import {
   LoaderButtons,
   BorderMovingButtons,
   AnimatedStrokeButtons,
+  ShareButtons,
 } from 'src/components/Button/examples';
 import { View } from 'app-studio';
 export const ButtonPage = () => {
@@ -69,6 +70,12 @@ export const ButtonPage = () => {
             <td>Animated Stroke Effect</td>
             <td>
               <AnimatedStrokeButtons />
+            </td>
+          </tr>
+          <tr>
+            <td>Share Button</td>
+            <td>
+              <ShareButtons />
             </td>
           </tr>
         </tbody>

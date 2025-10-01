@@ -191,26 +191,6 @@ export const DragHandleIcon: React.FC<IconProps> = ({
   </IconWrapper>
 );
 
-export const ShareIcon: React.FC<IconProps> = ({
-  widthHeight = 24,
-  color = 'currentColor',
-  filled = false,
-  strokeWidth = 1.5,
-  ...props
-}) => (
-  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      focusable="false"
-      {...getSvgProps(filled, color, strokeWidth)}
-    >
-      <path d="M5 11v8c0 1.1046.89543 2 2 2h10c1.1046 0 2-.8954 2-2v-8H5Z" />
-      <path d="M12 3L18 9H15V15H9V9H6L12 3Z" />
-    </svg>
-  </IconWrapper>
-);
-
 export const FileIcon: React.FC<IconProps> = ({
   widthHeight = 24,
   color = 'currentColor',

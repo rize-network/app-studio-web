@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShareButtonProps } from './ShareButton.props';
+import { NavigatorShareData, ShareButtonProps } from './ShareButton.props';
 
 const getNavigator = (): Navigator | undefined =>
   typeof navigator === 'undefined' ? undefined : navigator;
