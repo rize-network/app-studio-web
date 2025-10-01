@@ -14,6 +14,7 @@ import {
   LineHeights,
   FontWeights,
 } from './Text.style';
+import { getTextColor } from './Text.utils';
 
 interface Props extends TextProps {
   views?: {
@@ -198,6 +199,8 @@ const TextView: React.FC<Props> = ({
   isStriked = false,
   weight = 'normal',
   size = 'md',
+  backgroundColor,
+  color,
   views,
   ...props
 }) => {
@@ -212,6 +215,9 @@ const TextView: React.FC<Props> = ({
   const lineHeight = LineHeights[size];
   const fontWeight = FontWeights[weight];
 
+  const computedColor =
+    color ?? (backgroundColor ? getTextColor(backgroundColor) : undefined);
+
   return (
     <Element
       // Apply typography styles according to design guidelines
@@ -223,6 +229,7 @@ const TextView: React.FC<Props> = ({
       textDecoration={
         isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'
       }
+      color={computedColor}
       // Apply layout styles
       {...noLineBreak}
       // Apply heading styles if specified

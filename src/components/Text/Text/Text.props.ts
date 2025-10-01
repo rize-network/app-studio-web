@@ -3,6 +3,7 @@ import { Headings, Size, TextWeights } from './Text.type';
 export interface TextProps
   extends Omit<TextAppProps, 'children' | 'style' | 'pointerEvents'> {
   children?: React.ReactNode;
+  backgroundColor?: string;
   heading?: Headings;
   isItalic?: boolean;
   isStriked?: boolean;
