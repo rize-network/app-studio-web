@@ -1,0 +1,274 @@
+# Calendar
+
+A flexible calendar component with day, week, and month views for displaying and managing events. Features intelligent navigation (day-by-day, week-by-week, month-by-month), interactive hover cards for events and days, custom event rendering, and comprehensive styling customization.
+
+### **Import**
+  ```tsx
+  import { Calendar } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Calendar } from '../Calendar';
+
+export const DefaultCalendar = () => {
+  return <Calendar />;
+};
+```
+
+### **With Events**
+Display events in the calendar with customizable event objects. Hover over events to see detailed information in a popup card, and hover over day cells to see a summary of the day's events.
+
+```tsx
+import React from 'react';
+import { Calendar } from '../Calendar';
+import { CalendarEvent } from '../Calendar/Calendar.props';
+
+export const CalendarWithEvents = () => {
+  const events: CalendarEvent[] = [
+    {
+      id: 1,
+      title: 'Team Meeting',
+      start: new Date(2025, 9, 15, 10, 0),
+      end: new Date(2025, 9, 15, 11, 0),
+      description: 'Weekly team sync-up',
+    },
+    {
+      id: 2,
+      title: 'Project Deadline',
+      start: new Date(2025, 9, 18, 17, 0),
+      description: 'Submit final deliverables',
+    },
+  ];
+
+  return <Calendar events={events} />;
+};
+```
+
+**Interactive Features:**
+- **Event Hover Cards**: Hover over any event to see full details including title, date, time, and description
+- **Smart Navigation**: Navigation buttons automatically adapt to the current view (Previous/Next Day, Week, or Month)
+- **Fixed Cell Dimensions**: All day cells maintain consistent width (minimum 180px) and height for uniform layout
+- **Scrollable Content**: Events within each day cell scroll independently while maintaining cell dimensions
+
+### **Day View**
+Show a single day with all events for that day.
+
+```tsx
+import React from 'react';
+import { Calendar } from '../Calendar';
+
+export const DayViewCalendar = () => {
+  return <Calendar initialView="day" />;
+};
+```
+
+### **Week View**
+Display a full week with events across all days.
+
+```tsx
+import React from 'react';
+import { Calendar } from '../Calendar';
+
+export const WeekViewCalendar = () => {
+  return <Calendar initialView="week" />;
+};
+```
+
+### **Month View**
+Show the entire month with events distributed across days.
+
+```tsx
+import React from 'react';
+import { Calendar } from '../Calendar';
+
+export const MonthViewCalendar = () => {
+  return <Calendar initialView="month" />;
+};
+```
+
+### **Custom Event Rendering**
+Customize how events are displayed using the `renderEvent` prop.
+
+```tsx
+import React from 'react';
+import { Vertical, Horizontal } from 'app-studio';
+import { Calendar } from '../Calendar';
+import { CalendarEvent, CalendarRenderEventContext } from '../Calendar/Calendar.props';
+import { Text } from '../../Text/Text';
+
+export const CustomRenderCalendar = () => {
+  const events: CalendarEvent[] = [
+    {
+      id: 1,
+      title: 'High Priority Meeting',
+      start: new Date(2025, 9, 15, 10, 0),
+      metadata: { priority: 'high' },
+    },
+  ];
+
+  const renderEvent = (event: CalendarEvent, context: CalendarRenderEventContext) => {
+    const priority = event.metadata?.priority as string;
+    
+    return (
+      <Vertical
+        gap={8}
+        padding={12}
+        borderRadius={12}
+        backgroundColor="color.error.50"
+        borderWidth={1}
+        borderStyle="solid"
+        borderColor="color.error.200"
+      >
+        <Text fontWeight="600">{event.title}</Text>
+        <Text fontSize={12} color="color.error.600">{priority}</Text>
+      </Vertical>
+    );
+  };
+
+  return <Calendar events={events} renderEvent={renderEvent} />;
+};
+```
+
+### **Week Starts On**
+Configure which day the week starts on (0 = Sunday, 1 = Monday, etc.).
+
+```tsx
+import React from 'react';
+import { Calendar } from '../Calendar';
+
+export const WeekStartsOnMonday = () => {
+  return <Calendar weekStartsOn={1} />;
+};
+```
+
+### **Custom Styles**
+Customize the appearance of calendar elements using the `views` prop.
+
+```tsx
+import React from 'react';
+import { Calendar } from '../Calendar';
+
+export const CustomStyledCalendar = () => {
+  return (
+    <Calendar
+      views={{
+        container: {
+          backgroundColor: 'color.primary.50',
+          borderColor: 'color.primary.300',
+        },
+        headerTitle: {
+          color: 'color.primary.700',
+          fontSize: 24,
+        },
+        event: {
+          backgroundColor: 'color.primary.100',
+          borderColor: 'color.primary.400',
+        },
+      }}
+    />
+  );
+};
+```
+
+### **Fixed Height with Scrolling**
+Set a fixed height for the calendar with scrollable content areas.
+
+```tsx
+import React from 'react';
+import { Calendar } from '../Calendar';
+
+export const FixedHeightCalendar = () => {
+  const events = [
+    {
+      id: 1,
+      title: 'Team Meeting',
+      start: new Date(2025, 9, 15, 10, 0),
+      end: new Date(2025, 9, 15, 11, 0),
+    },
+    // ... more events
+  ];
+
+  return <Calendar events={events} height="600px" initialView="week" />;
+};
+```
+
+## Props
+
+| Prop           | Type                    | Description                                                    | Default     |
+| -------------- | ----------------------- | -------------------------------------------------------------- | ----------- |
+| events         | CalendarEvent[]         | Array of events to display in the calendar.                   | []          |
+| initialDate    | Date \| string          | Starting date displayed in the calendar.                       | new Date()  |
+| initialView    | 'day' \| 'week' \| 'month' | Initial visible view.                                       | 'month'     |
+| weekStartsOn   | 0-6                     | First day of the week (0 = Sunday, 1 = Monday, etc.).         | 0           |
+| height         | string \| number        | Height of the calendar container (enables scrolling).          | '800px'     |
+| renderEvent    | function                | Custom render method for events.                               | -           |
+| onDateChange   | function                | Callback when the visible anchor date changes.                 | -           |
+| onViewChange   | function                | Callback when the active view changes.                         | -           |
+| views          | CalendarViews           | Customize styling of calendar areas.                           | -           |
+
+## CalendarEvent Interface
+
+| Property    | Type                  | Description                                      |
+| ----------- | --------------------- | ------------------------------------------------ |
+| id          | string \| number      | Unique identifier for the event.                 |
+| title       | string                | Event title shown in the calendar cell.          |
+| start       | Date \| string        | Start date/time of the event.                    |
+| end         | Date \| string        | Optional end date/time of the event.             |
+| description | string                | Optional description or supporting information.  |
+| metadata    | Record<string, unknown> | Additional metadata for the event.             |
+
+## CalendarViews Interface
+
+Customize the appearance of different calendar elements. All elements support the `views` prop for complete customization:
+
+### Container & Layout
+- `container` - Main calendar container (ViewProps)
+- `header` - Header section (ViewProps)
+- `grid` - Calendar grid container (ViewProps)
+
+### Header Elements
+- `headerTitle` - Title text in header (TextProps)
+- `navigation` - Navigation buttons container (ViewProps)
+- `navigationButton` - Navigation button props (ButtonProps)
+- `viewSwitcher` - View switcher buttons container (ViewProps)
+- `viewButton` - View button props (ButtonProps)
+
+### Weekday Header
+- `weekdayRow` - Weekday row container (ViewProps)
+- `weekdayHeader` - Individual weekday header cell (ViewProps)
+- `weekdayLabel` - Weekday label text (TextProps)
+
+### Week & Day Structure
+- `weekRow` - Week row container (ViewProps)
+- `dayColumn` - Individual day column/cell (ViewProps)
+- `dayHeader` - Day header within cell (ViewProps)
+- `dayNumber` - Day number text (TextProps)
+- `dayMeta` - Day metadata text (TextProps)
+
+### Events
+- `events` - Events container within day (ViewProps)
+- `event` - Individual event container (ViewProps)
+- `eventTitle` - Event title text (TextProps)
+- `eventTime` - Event time text (TextProps)
+- `emptyState` - Empty state text when no events (TextProps)
+
+### Example: Complete Customization
+
+```tsx
+<Calendar
+  events={events}
+  views={{
+    container: { backgroundColor: 'color.gray.50', padding: 32 },
+    headerTitle: { fontSize: 24, color: 'color.primary.700' },
+    weekdayRow: { backgroundColor: 'color.primary.50', borderRadius: 8 },
+    weekdayLabel: { fontSize: 16, fontWeight: '700' },
+    dayColumn: { padding: 20, borderRadius: 16, borderWidth: 2 },
+    dayNumber: { fontSize: 20, color: 'color.primary.700' },
+    event: { padding: 16, backgroundColor: 'color.primary.100' },
+    eventTitle: { fontSize: 16, fontWeight: '700' },
+  }}
+/>
+```
+

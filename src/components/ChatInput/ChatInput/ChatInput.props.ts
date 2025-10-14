@@ -220,6 +220,11 @@ export interface ChatInputViewProps extends ChatInputProps {
    */
   isUploading: boolean;
 
+  /**
+   * Current upload progress (0-100)
+   */
+  uploadProgress?: number;
+
   leftButtons?: React.ReactNode;
   rightButtons?: React.ReactNode;
 
@@ -252,6 +257,11 @@ export interface ChatInputViewProps extends ChatInputProps {
    * Callback function to set whether files are being uploaded
    */
   setIsUploading: React.Dispatch<React.SetStateAction<boolean>>;
+
+  /**
+   * Start uploading newly added files
+   */
+  startUpload: (files: File[]) => void;
 
   /**
    * Currently selected model

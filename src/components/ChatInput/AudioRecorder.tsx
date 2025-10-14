@@ -40,9 +40,11 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
 
   return (
     <Horizontal alignItems="center" gap={4}>
-      {recording && analyserNode && (
-        <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
-      )}
+      <View minWidth={90}>
+        {recording && analyserNode && (
+          <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
+        )}
+      </View>
       <View
         as="button"
         type="button"
