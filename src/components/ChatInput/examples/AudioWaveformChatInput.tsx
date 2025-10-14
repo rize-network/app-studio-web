@@ -6,6 +6,7 @@ export const AudioWaveformChatInputDemo = () => {
   const [inputValue, setInputValue] = useState('');
   const [submittedMessage, setSubmittedMessage] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
   // Audio recording is handled internally by ChatInput's AudioRecorder.
 
   const handleSubmit = () => {
@@ -14,6 +15,15 @@ export const AudioWaveformChatInputDemo = () => {
       setInputValue('');
       setUploadedFiles([]);
     }
+  };
+
+  const startUpload = (files: File[]) => {
+    if (!files || files.length === 0) return;
+    // Demo: just add to local preview list; no server upload
+    setIsUploading(true);
+    setUploadedFiles((prev) => [...prev, ...files]);
+    // Simulate quick completion
+    setTimeout(() => setIsUploading(false), 300);
   };
 
   return (
@@ -49,13 +59,14 @@ export const AudioWaveformChatInputDemo = () => {
               );
             }}
             setPendingFiles={() => {}} // Mock function
-            setIsUploading={() => {}} // Mock function
+            setIsUploading={setIsUploading}
+            startUpload={startUpload}
             getPendingFiles={() => []}
             clearPendingFiles={() => {}}
             onSubmit={handleSubmit}
             editableRef={useRef<HTMLDivElement>(null)}
             fileInputRef={useRef<HTMLInputElement>(null)}
-            isUploading={false}
+            isUploading={isUploading}
             isDraggingOver={false}
             selectedModel={''}
             handleModelChange={() => {}}

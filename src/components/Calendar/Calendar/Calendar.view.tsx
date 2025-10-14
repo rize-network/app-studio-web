@@ -4,6 +4,7 @@ import { format, isSameDay, isSameMonth } from 'date-fns';
 
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
+import { HoverCard } from '../../HoverCard/HoverCard';
 import {
   CalendarEvent,
   CalendarRenderEventContext,
@@ -28,6 +29,7 @@ interface CalendarViewProps {
     context: CalendarRenderEventContext
   ) => React.ReactNode;
   views?: CalendarViews;
+  height?: string | number;
 }
 
 const VIEW_OPTIONS: { label: string; value: CalendarView }[] = [
@@ -50,30 +52,84 @@ const renderDefaultEvent = (
       ? ` – ${format(event.endDate, 'p')}`
       : '');
 
-  return (
+  const eventCard = (
     <Vertical
-      key={key}
-      gap={4}
+      gap={6}
       padding={12}
-      borderRadius={12}
+      borderRadius={8}
       backgroundColor={context.isToday ? 'color.primary.50' : 'color.gray.100'}
       borderWidth={1}
       borderStyle="solid"
       borderColor={context.isToday ? 'color.primary.200' : 'color.gray.200'}
+      flexShrink={0}
+      cursor="pointer"
       {...views?.event}
     >
-      <Text fontWeight="600" fontSize={14} {...views?.eventTitle}>
+      <Text fontWeight="600" fontSize={14} maxLines={2} {...views?.eventTitle}>
         {event.title}
       </Text>
-      <Text fontSize={12} color="color.gray.600" {...views?.eventTime}>
+      <Text
+        fontSize={12}
+        color="color.gray.600"
+        maxLines={1}
+        {...views?.eventTime}
+      >
         {timeRange}
       </Text>
       {event.description && context.view !== 'month' && (
-        <Text fontSize={12} color="color.gray.700">
+        <Text fontSize={12} color="color.gray.700" maxLines={2}>
           {event.description}
         </Text>
       )}
     </Vertical>
+  );
+
+  return (
+    <HoverCard key={key} openDelay={100} closeDelay={200}>
+      <HoverCard.Trigger asChild>{eventCard}</HoverCard.Trigger>
+      <HoverCard.Content
+        side="top"
+        align="start"
+        maxWidth="350px"
+        backgroundColor="color.white"
+        padding={16}
+        boxShadow="0px 4px 12px rgba(0, 0, 0, 0.15)"
+      >
+        <Vertical gap={12}>
+          <Text fontWeight="700" fontSize={16} color="color.gray.900">
+            {event.title}
+          </Text>
+          <Vertical gap={6}>
+            <Horizontal gap={8} alignItems="center">
+              <Text fontSize={12} fontWeight="600" color="color.gray.600">
+                📅
+              </Text>
+              <Text fontSize={13} color="color.gray.700">
+                {format(event.startDate, 'EEEE, MMMM d, yyyy')}
+              </Text>
+            </Horizontal>
+            <Horizontal gap={8} alignItems="center">
+              <Text fontSize={12} fontWeight="600" color="color.gray.600">
+                🕐
+              </Text>
+              <Text fontSize={13} color="color.gray.700">
+                {timeRange}
+              </Text>
+            </Horizontal>
+          </Vertical>
+          {event.description && (
+            <Vertical gap={4}>
+              <Text fontSize={12} fontWeight="600" color="color.gray.600">
+                Description
+              </Text>
+              <Text fontSize={13} color="color.gray.700">
+                {event.description}
+              </Text>
+            </Vertical>
+          )}
+        </Vertical>
+      </HoverCard.Content>
+    </HoverCard>
   );
 };
 
@@ -90,20 +146,33 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   onViewChange,
   renderEvent,
   views,
+  height = '800px',
 }) => {
+  // Use same grid configuration for both header and days
+  const columnCount = weekdayLabels.length;
+
   const weekdayRow = (
     <View
       display="grid"
-      gridTemplateColumns={`repeat(${weekdayLabels.length}, minmax(0, 1fr))`}
+      gridTemplateColumns={`repeat(${columnCount}, 1fr)`}
       gap={12}
+      padding="8px 0"
+      {...views?.weekdayRow}
     >
       {weekdayLabels.map((weekday) => (
         <Vertical
           key={formatDayKey(weekday)}
           alignItems="center"
-          {...views?.dayHeader}
+          padding={8}
+          {...views?.weekdayHeader}
         >
-          <Text fontWeight="600" color="color.gray.600" {...views?.dayMeta}>
+          <Text
+            fontWeight="600"
+            fontSize={14}
+            color="color.gray.600"
+            {...views?.weekdayLabel}
+            maxLines={1}
+          >
             {format(weekday, 'EEE')}
           </Text>
         </Vertical>
@@ -120,10 +189,19 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
       borderRadius={16}
       padding={24}
       backgroundColor="color.white"
+      height={height}
+      maxHeight="90vh"
+      maxWidth={'100%'}
+      display="flex"
+      flexDirection="column"
       {...views?.container}
     >
-      <Vertical gap={16} {...views?.header}>
-        <Horizontal justifyContent="space-between" alignItems="center">
+      <Vertical gap={16} flexShrink={0} {...views?.header}>
+        <Horizontal
+          justifyContent="space-between"
+          alignItems="center"
+          maxWidth={'100%'}
+        >
           <Text fontSize={20} fontWeight="700" {...views?.headerTitle}>
             {label}
           </Text>
@@ -147,7 +225,8 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
             onClick={onPrevious}
             {...views?.navigationButton}
           >
-            Previous
+            ← Previous{' '}
+            {view === 'day' ? 'Day' : view === 'week' ? 'Week' : 'Month'}
           </Button>
           <Button
             variant="ghost"
@@ -157,20 +236,24 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
             Today
           </Button>
           <Button variant="ghost" onClick={onNext} {...views?.navigationButton}>
-            Next
+            Next {view === 'day' ? 'Day' : view === 'week' ? 'Week' : 'Month'} →
           </Button>
         </Horizontal>
       </Vertical>
 
-      {view !== 'day' && weekdayRow}
+      {view !== 'day' && <View flexShrink={0}>{weekdayRow}</View>}
 
-      <Vertical gap={12} {...views?.grid}>
+      <Vertical gap={12} flex={1} overflow="auto" {...views?.grid}>
         {weeks.map((week, index) => (
           <View
             key={`${view}-week-${index}`}
             display="grid"
-            gridTemplateColumns={`repeat(${week.length}, minmax(0, 1fr))`}
+            gridTemplateColumns={`repeat(${week.length}, 1fr)`}
             gap={12}
+            height={
+              view === 'month' ? '180px' : view === 'week' ? '100%' : 'auto'
+            }
+            minHeight={view === 'week' ? '300px' : 'auto'}
             {...views?.weekRow}
           >
             {week.map((day) => {
@@ -197,18 +280,24 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                   borderRadius={12}
                   backgroundColor="color.gray.50"
                   opacity={shouldDim ? 0.6 : 1}
+                  display="flex"
+                  flexDirection="column"
+                  height="100%"
+                  minHeight={view === 'month' ? '180px' : '300px'}
                   {...views?.dayColumn}
                 >
                   <Horizontal
                     justifyContent="space-between"
                     alignItems="center"
+                    flexShrink={0}
+                    {...views?.dayHeader}
                   >
-                    <Text fontWeight="600" {...views?.dayNumber}>
+                    <Text fontWeight="600" fontSize={16} {...views?.dayNumber}>
                       {format(day, 'd')}
                     </Text>
                     {view !== 'month' && (
                       <Text
-                        fontSize={12}
+                        fontSize={14}
                         color="color.gray.600"
                         {...views?.dayMeta}
                       >
@@ -216,7 +305,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                       </Text>
                     )}
                   </Horizontal>
-                  <Vertical gap={8} {...views?.events}>
+                  <Vertical gap={8} flex={1} overflow="auto" {...views?.events}>
                     {events.length > 0
                       ? events.map((event) => {
                           const key = `${formatDayKey(day)}-${

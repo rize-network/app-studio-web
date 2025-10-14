@@ -36,6 +36,9 @@ export interface CalendarViews {
   navigation?: ViewProps;
   viewSwitcher?: ViewProps;
   grid?: ViewProps;
+  weekdayRow?: ViewProps;
+  weekdayHeader?: ViewProps;
+  weekdayLabel?: TextProps;
   weekRow?: ViewProps;
   dayColumn?: ViewProps;
   dayHeader?: ViewProps;
@@ -59,6 +62,8 @@ export interface CalendarProps {
   initialView?: CalendarView;
   /** First day of the week, defaults to Sunday. */
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  /** Height of the calendar container. */
+  height?: string | number;
   /** Optional custom render method for events. */
   renderEvent?: (
     event: CalendarEvent,

@@ -57,21 +57,28 @@ const normalizeEvents = (events: CalendarEvent[]): CalendarEventInternal[] =>
 
 const CalendarComponent: React.FC<CalendarProps> = ({
   events = [],
-  initialDate = new Date(),
+  initialDate,
   initialView = 'month',
   weekStartsOn = 0,
+  height = '800px',
   renderEvent,
   onDateChange,
   onViewChange,
   views,
 }) => {
-  const parsedInitialDate = useMemo(() => toDate(initialDate), [initialDate]);
+  const parsedInitialDate = useMemo(
+    () => (initialDate ? toDate(initialDate) : new Date()),
+    [initialDate]
+  );
   const [currentDate, setCurrentDate] = useState<Date>(parsedInitialDate);
   const [view, setView] = useState<CalendarViewType>(initialView);
 
+  // Only update currentDate if initialDate prop is explicitly provided and changes
   useEffect(() => {
-    setCurrentDate(parsedInitialDate);
-  }, [parsedInitialDate]);
+    if (initialDate !== undefined) {
+      setCurrentDate(parsedInitialDate);
+    }
+  }, [initialDate, parsedInitialDate]);
 
   useEffect(() => {
     setView(initialView);
@@ -176,6 +183,7 @@ const CalendarComponent: React.FC<CalendarProps> = ({
       onViewChange={handleViewChange}
       renderEvent={renderEvent}
       views={views}
+      height={height}
     />
   );
 };
