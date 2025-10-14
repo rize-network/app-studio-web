@@ -167,7 +167,7 @@ export const useChatInputState = (props: ChatInputProps) => {
       currentUploadRef.current = null;
       setUploadProgress(0);
       // If queue emptied, stop uploading state
-      setIsUploading((prev) => (uploadQueue.length - 1) > 0 || false);
+      setIsUploading((prev) => uploadQueue.length - 1 > 0 || false);
     },
     onError: (_err: any) => {
       // Remove the failed file from queue and continue
@@ -176,7 +176,7 @@ export const useChatInputState = (props: ChatInputProps) => {
       currentUploadRef.current = null;
       setUploadProgress(0);
       // If queue emptied, stop uploading state
-      setIsUploading((prev) => (uploadQueue.length - 1) > 0 || false);
+      setIsUploading((prev) => uploadQueue.length - 1 > 0 || false);
     },
   } as any);
 
@@ -214,12 +214,23 @@ export const useChatInputState = (props: ChatInputProps) => {
       setIsUploading(false);
       setUploadProgress(0);
     }
-  }, [uploadQueue, isProcessingQueue, uploadFileRequest.loading, uploadFileRequest, isUploading]);
+  }, [
+    uploadQueue,
+    isProcessingQueue,
+    uploadFileRequest.loading,
+    uploadFileRequest,
+    isUploading,
+  ]);
 
   // Effect: process whenever queue or request/loading changes
   useEffect(() => {
     processUploadQueue();
-  }, [uploadQueue, isProcessingQueue, uploadFileRequest.loading, processUploadQueue]);
+  }, [
+    uploadQueue,
+    isProcessingQueue,
+    uploadFileRequest.loading,
+    processUploadQueue,
+  ]);
 
   // Mock function for subscription status
   const subscriptionStatus = 'active';

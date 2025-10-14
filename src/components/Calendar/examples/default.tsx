@@ -4,4 +4,3 @@ import { Calendar } from '../Calendar';
 export const DefaultCalendar = () => {
   return <Calendar />;
 };
-

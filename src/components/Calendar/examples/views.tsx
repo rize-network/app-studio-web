@@ -43,4 +43,3 @@ export const CalendarViewSwitcher = () => {
     </Vertical>
   );
 };
-

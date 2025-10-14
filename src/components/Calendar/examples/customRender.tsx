@@ -1,7 +1,10 @@
 import React from 'react';
 import { Vertical, Horizontal } from 'app-studio';
 import { Calendar } from '../Calendar';
-import { CalendarEvent, CalendarRenderEventContext } from '../Calendar/Calendar.props';
+import {
+  CalendarEvent,
+  CalendarRenderEventContext,
+} from '../Calendar/Calendar.props';
 import { Text } from '../../Text/Text';
 
 export const CustomRenderCalendar = () => {
@@ -28,7 +31,10 @@ export const CustomRenderCalendar = () => {
     },
   ];
 
-  const renderEvent = (event: CalendarEvent, context: CalendarRenderEventContext) => {
+  const renderEvent = (
+    event: CalendarEvent,
+    context: CalendarRenderEventContext
+  ) => {
     const priority = event.metadata?.priority as string;
     const type = event.metadata?.type as string;
 
@@ -55,10 +61,15 @@ export const CustomRenderCalendar = () => {
         gap={8}
         padding={12}
         borderRadius={12}
-        backgroundColor={backgroundColor[priority as keyof typeof backgroundColor] || 'color.gray.100'}
+        backgroundColor={
+          backgroundColor[priority as keyof typeof backgroundColor] ||
+          'color.gray.100'
+        }
         borderWidth={1}
         borderStyle="solid"
-        borderColor={borderColor[priority as keyof typeof borderColor] || 'color.gray.200'}
+        borderColor={
+          borderColor[priority as keyof typeof borderColor] || 'color.gray.200'
+        }
       >
         <Horizontal justifyContent="space-between" alignItems="center">
           <Text fontWeight="600" fontSize={14}>
@@ -67,7 +78,10 @@ export const CustomRenderCalendar = () => {
           <Text
             fontSize={10}
             fontWeight="600"
-            color={priorityColors[priority as keyof typeof priorityColors] || 'color.gray.600'}
+            color={
+              priorityColors[priority as keyof typeof priorityColors] ||
+              'color.gray.600'
+            }
             textTransform="uppercase"
           >
             {priority}
@@ -82,4 +96,3 @@ export const CustomRenderCalendar = () => {
 
   return <Calendar events={events} renderEvent={renderEvent} />;
 };
-
