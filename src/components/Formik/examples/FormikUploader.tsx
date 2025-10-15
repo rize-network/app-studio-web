@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, FormikProps } from 'formik';
 import { Vertical, Text } from 'app-studio';
 
 import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 import { FormikUploader, UploadFileHandler } from '../Formik.Uploader';
+import { AttachmentPreview } from '../AttachmentPreview';
 
 interface FormValues {
   attachments: Array<Record<string, unknown>>;
+}
+
+interface FileWithPreview {
+  name: string;
+  size: number;
+  type: string;
+  url?: string;
+  lastModified: number;
 }
 
 const mockUpload: UploadFileHandler = async (file, onProgress) => {
@@ -21,11 +30,14 @@ const mockUpload: UploadFileHandler = async (file, onProgress) => {
 
       if (currentStep >= totalSteps) {
         clearInterval(interval);
+        // Create a preview URL for the file
+        const previewUrl = URL.createObjectURL(file);
         resolve({
           name: file.name,
           size: file.size,
           type: file.type,
           lastModified: file.lastModified,
+          url: previewUrl,
         });
       }
     }, 150);
@@ -33,6 +45,22 @@ const mockUpload: UploadFileHandler = async (file, onProgress) => {
 };
 
 export const FormikUploaderExample = () => {
+  const [uploadedFiles, setUploadedFiles] = useState<FileWithPreview[]>([]);
+
+  const handleRemoveFile = (
+    index: number,
+    setFieldValue: (field: string, value: any) => void,
+    currentValues: Array<Record<string, unknown>>
+  ) => {
+    // Remove from preview state
+    const newFiles = uploadedFiles.filter((_, i) => i !== index);
+    setUploadedFiles(newFiles);
+
+    // Remove from Formik values
+    const newValues = currentValues.filter((_, i) => i !== index);
+    setFieldValue('attachments', newValues);
+  };
+
   return (
     <Formik<FormValues>
       initialValues={{ attachments: [] }}
@@ -47,13 +75,32 @@ export const FormikUploaderExample = () => {
               multiple
               uploadFile={mockUpload}
               accept="image/*,application/pdf"
-              onUploadSuccess={(file) =>
-                console.log(`Uploaded ${file.name} successfully`)
-              }
+              onUploadSuccess={(file, response) => {
+                console.log(`Uploaded ${file.name} successfully`);
+                // Add to preview state
+                setUploadedFiles((prev) => [
+                  ...prev,
+                  response as FileWithPreview,
+                ]);
+              }}
             />
 
-            <Text fontSize={12}>
-              Stored value: {JSON.stringify(props.values.attachments, null, 2)}
+            {/* Attachment Preview */}
+            {uploadedFiles.length > 0 && (
+              <AttachmentPreview
+                files={uploadedFiles}
+                onRemove={(index) =>
+                  handleRemoveFile(
+                    index,
+                    props.setFieldValue,
+                    props.values.attachments
+                  )
+                }
+              />
+            )}
+
+            <Text fontSize={12} color="color.gray.600">
+              Uploaded {uploadedFiles.length} file(s)
             </Text>
 
             <Button
