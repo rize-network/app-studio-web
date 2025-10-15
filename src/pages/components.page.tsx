@@ -75,7 +75,7 @@ const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 const AudioInputPage = lazy(() => import('src/pages/audioInput.page'));
 
 const BackgroundPage = lazy(() => import('src/pages/background.page'));
-const CardBoardPage = lazy(() => import('src/pages/cardBoard.page'));
+const KanbanBoardPage = lazy(() => import('src/pages/kanbanBoard.page'));
 
 export const componentList = [
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
@@ -100,7 +100,7 @@ export const componentList = [
   { name: 'Badge', path: '/badge', element: <BadgePage /> },
   { name: 'Button', path: '/button', element: <ButtonPage /> },
   { name: 'Card', path: '/card', element: <CardPage /> },
-  { name: 'CardBoard', path: '/cardboard', element: <CardBoardPage /> },
+  { name: 'KanbanBoard', path: '/kanbanboard', element: <KanbanBoardPage /> },
   { name: 'Carousel', path: '/carousel', element: <CarouselPage /> },
   { name: 'Chart', path: '/chart', element: <ChartPage /> },
   { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },

@@ -1,18 +1,18 @@
 import type React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { CardBoardProps } from './CardBoard.props';
+import { KanbanBoardProps } from './KanbanBoard.props';
 
 interface DragState {
   columnId: string;
   cardId: string;
 }
 
-export const useCardBoardState = ({
+export const useKanbanBoardState = ({
   columns: initialColumns,
   onChange,
-}: CardBoardProps) => {
+}: KanbanBoardProps) => {
   const [columns, setColumns] =
-    useState<CardBoardProps['columns']>(initialColumns);
+    useState<KanbanBoardProps['columns']>(initialColumns);
   const [draggedCardId, setDraggedCardId] = useState<string | null>(null);
   const dragStateRef = useRef<DragState | null>(null);
 

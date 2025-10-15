@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
-import { CardBoardViewProps } from './CardBoard.props';
+import { KanbanBoardViewProps } from './KanbanBoard.props';
 
-export const CardBoardView: React.FC<CardBoardViewProps> = ({
+export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   columns,
   renderCard,
   renderColumnHeader,
@@ -18,7 +18,7 @@ export const CardBoardView: React.FC<CardBoardViewProps> = ({
   onCardDrop,
 }) => {
   const renderDefaultCard = React.useCallback(
-    (card: CardBoardViewProps['columns'][number]['cards'][number]) => (
+    (card: KanbanBoardViewProps['columns'][number]['cards'][number]) => (
       <Vertical gap={4} alignItems="flex-start" {...views?.cardContent}>
         <Text weight="semiBold" size="sm">
           {card.title}

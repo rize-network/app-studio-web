@@ -2,7 +2,7 @@ import React from 'react';
 import { ViewProps } from 'app-studio';
 import { TextProps } from '../../Text/Text/Text.props';
 
-export interface CardBoardCard {
+export interface KanbanBoardCard {
   id: string;
   title: string;
   description?: string;
@@ -10,24 +10,24 @@ export interface CardBoardCard {
   [key: string]: unknown;
 }
 
-export interface CardBoardColumn {
+export interface KanbanBoardColumn {
   id: string;
   title: string;
-  cards: CardBoardCard[];
+  cards: KanbanBoardCard[];
   footer?: React.ReactNode;
   metadata?: Record<string, unknown>;
   [key: string]: unknown;
 }
 
-export interface CardBoardProps {
-  columns: CardBoardColumn[];
-  onChange?: (columns: CardBoardColumn[]) => void;
+export interface KanbanBoardProps {
+  columns: KanbanBoardColumn[];
+  onChange?: (columns: KanbanBoardColumn[]) => void;
   renderCard?: (
-    card: CardBoardCard,
-    column: CardBoardColumn
+    card: KanbanBoardCard,
+    column: KanbanBoardColumn
   ) => React.ReactNode;
-  renderColumnHeader?: (column: CardBoardColumn) => React.ReactNode;
-  renderEmptyState?: (column: CardBoardColumn) => React.ReactNode;
+  renderColumnHeader?: (column: KanbanBoardColumn) => React.ReactNode;
+  renderEmptyState?: (column: KanbanBoardColumn) => React.ReactNode;
   views?: {
     board?: ViewProps;
     column?: ViewProps;
@@ -41,8 +41,8 @@ export interface CardBoardProps {
   };
 }
 
-export interface CardBoardViewProps extends CardBoardProps {
-  columns: CardBoardColumn[];
+export interface KanbanBoardViewProps extends KanbanBoardProps {
+  columns: KanbanBoardColumn[];
   draggedCardId: string | null;
   onCardDragStart: (
     columnId: string,

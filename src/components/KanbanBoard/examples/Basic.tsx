@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { CardBoard } from '../CardBoard';
-import { CardBoardColumn } from '../CardBoard/CardBoard.props';
+import { KanbanBoard } from '../KanbanBoard';
+import { KanbanBoardColumn } from '../KanbanBoard/KanbanBoard.props';
 
-const initialColumns: CardBoardColumn[] = [
+const initialColumns: KanbanBoardColumn[] = [
   {
     id: 'backlog',
     title: 'Backlog',
@@ -49,10 +49,10 @@ const initialColumns: CardBoardColumn[] = [
   },
 ];
 
-const BasicCardBoardExample = () => {
-  const [columns, setColumns] = useState<CardBoardColumn[]>(initialColumns);
+const BasicKanbanBoardExample = () => {
+  const [columns, setColumns] = useState<KanbanBoardColumn[]>(initialColumns);
 
-  return <CardBoard columns={columns} onChange={setColumns} />;
+  return <KanbanBoard columns={columns} onChange={setColumns} />;
 };
 
-export default BasicCardBoardExample;
+export default BasicKanbanBoardExample;

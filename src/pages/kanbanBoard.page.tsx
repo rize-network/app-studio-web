@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'app-studio';
-import BasicCardBoardExample from 'src/components/CardBoard/examples/Basic';
+import BasicKanbanBoardExample from 'src/components/KanbanBoard/examples/Basic';
 
-const CardBoardPage = () => {
+const KanbanBoardPage = () => {
   return (
     <View>
       <table>
@@ -15,7 +15,7 @@ const CardBoardPage = () => {
           <tr>
             <td>Basic</td>
             <td>
-              <BasicCardBoardExample />
+              <BasicKanbanBoardExample />
             </td>
           </tr>
         </tbody>
@@ -24,5 +24,4 @@ const CardBoardPage = () => {
   );
 };
 
-export default CardBoardPage;
-
+export default KanbanBoardPage;
