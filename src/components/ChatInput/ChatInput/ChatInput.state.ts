@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { ChatInputProps } from './ChatInput.props';
 import { ModelOption, PromptExample } from './ChatInput.type';
+import { UploadService } from 'src/services/api';
 
 /**
  * Custom hook for managing ChatInput state
@@ -30,6 +31,10 @@ export const useChatInputState = (props: ChatInputProps) => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [pendingFiles, setPendingFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
+  const [uploadQueue, setUploadQueue] = useState<File[]>([]);
+  const [isProcessingQueue, setIsProcessingQueue] = useState(false);
+  const currentUploadRef = useRef<File | null>(null);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
   // State for model selection
@@ -126,6 +131,8 @@ export const useChatInputState = (props: ChatInputProps) => {
 
     // Clear uploaded files
     setUploadedFiles([]);
+    // Also clear pending files that were staged for sending
+    setPendingFiles([]);
   };
 
   // Handle removing an uploaded file
@@ -149,6 +156,81 @@ export const useChatInputState = (props: ChatInputProps) => {
     e.stopPropagation();
     setIsDraggingOver(false);
   };
+
+  // Upload service hook (single file at a time)
+  const uploadFileRequest = UploadService.useUploadControllerFileService({
+    onProgress: (p: number) => setUploadProgress(p || 0),
+    onSuccess: () => {
+      // Advance the queue
+      setUploadQueue((prev) => prev.slice(1));
+      setIsProcessingQueue(false);
+      currentUploadRef.current = null;
+      setUploadProgress(0);
+      // If queue emptied, stop uploading state
+      setIsUploading((prev) => uploadQueue.length - 1 > 0 || false);
+    },
+    onError: (_err: any) => {
+      // Remove the failed file from queue and continue
+      setUploadQueue((prev) => prev.slice(1));
+      setIsProcessingQueue(false);
+      currentUploadRef.current = null;
+      setUploadProgress(0);
+      // If queue emptied, stop uploading state
+      setIsUploading((prev) => uploadQueue.length - 1 > 0 || false);
+    },
+  } as any);
+
+  // Start uploading a batch of files (enqueue and process)
+  const startUpload = useCallback(
+    (files: File[]) => {
+      if (!files || files.length === 0) return;
+
+      // Add files to local states immediately for UI
+      setPendingFiles((prevFiles) => [...prevFiles, ...files]);
+      setUploadedFiles((prev) => [...prev, ...files]);
+
+      // Enqueue and kick the processor
+      setUploadQueue((prev) => [...prev, ...files]);
+      setIsUploading(true);
+    },
+    [setPendingFiles, setUploadedFiles]
+  );
+
+  // Process upload queue sequentially
+  const processUploadQueue = useCallback(() => {
+    if (
+      uploadQueue.length > 0 &&
+      !isProcessingQueue &&
+      !uploadFileRequest.loading
+    ) {
+      setIsProcessingQueue(true);
+      const nextFile = uploadQueue[0];
+      currentUploadRef.current = nextFile;
+      setUploadProgress(0);
+      // Fire upload
+      uploadFileRequest.run({ file: nextFile });
+    } else if (uploadQueue.length === 0 && isUploading) {
+      // Nothing left to upload
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
+  }, [
+    uploadQueue,
+    isProcessingQueue,
+    uploadFileRequest.loading,
+    uploadFileRequest,
+    isUploading,
+  ]);
+
+  // Effect: process whenever queue or request/loading changes
+  useEffect(() => {
+    processUploadQueue();
+  }, [
+    uploadQueue,
+    isProcessingQueue,
+    uploadFileRequest.loading,
+    processUploadQueue,
+  ]);
 
   // Mock function for subscription status
   const subscriptionStatus = 'active';
@@ -189,6 +271,7 @@ export const useChatInputState = (props: ChatInputProps) => {
     editableRef,
     fileInputRef,
     isUploading,
+    uploadProgress,
     isDraggingOver,
     uploadedFiles,
     pendingFiles,
@@ -196,6 +279,7 @@ export const useChatInputState = (props: ChatInputProps) => {
     setPendingFiles,
     setUploadedFiles,
     setIsUploading,
+    startUpload,
     selectedModel,
     handleModelChange: setSelectedModel,
     modelOptions,
