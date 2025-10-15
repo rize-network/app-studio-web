@@ -1,10 +1,14 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { Vertical, Text } from 'app-studio';
 
 import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 import { FormikUploader, UploadFileHandler } from '../Formik.Uploader';
+
+interface FormValues {
+  attachments: Array<Record<string, unknown>>;
+}
 
 const mockUpload: UploadFileHandler = async (file, onProgress) => {
   return new Promise((resolve) => {
@@ -30,11 +34,11 @@ const mockUpload: UploadFileHandler = async (file, onProgress) => {
 
 export const FormikUploaderExample = () => {
   return (
-    <Formik
-      initialValues={{ attachments: [] as Array<Record<string, unknown>> }}
+    <Formik<FormValues>
+      initialValues={{ attachments: [] }}
       onSubmit={console.log}
     >
-      {(props) => (
+      {(props: FormikProps<FormValues>) => (
         <FormikForm gap={16}>
           <Vertical gap={12}>
             <FormikUploader
