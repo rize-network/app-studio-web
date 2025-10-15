@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CardBoard, CardBoardColumn } from '../CardBoard';
+import { CardBoard } from '../CardBoard';
+import { CardBoardColumn } from '../CardBoard/CardBoard.props';
 
 const initialColumns: CardBoardColumn[] = [
   {
