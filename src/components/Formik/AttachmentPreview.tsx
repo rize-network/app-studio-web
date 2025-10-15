@@ -47,7 +47,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
         const isImage = file.type.startsWith('image/');
         const isVideo = file.type.startsWith('video/');
         const isAudio = file.type.startsWith('audio/');
-        
+
         return (
           <Vertical
             key={index}
@@ -150,12 +150,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                   <Image src={previewUrl} alt={file.name} maxWidth="300px" />
                 )}
                 {isVideo && previewUrl && (
-                  <View
-                    as="video"
-                    src={previewUrl}
-                    controls
-                    maxWidth="300px"
-                  />
+                  <View as="video" src={previewUrl} controls maxWidth="300px" />
                 )}
                 {isAudio && previewUrl && (
                   <View as="audio" src={previewUrl} controls width={'100%'} />
@@ -179,4 +174,3 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
     </View>
   );
 };
-
