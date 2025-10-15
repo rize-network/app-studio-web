@@ -56,12 +56,14 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   editableRef,
   fileInputRef,
   isUploading,
+  uploadProgress,
   isDraggingOver,
   uploadedFiles,
   removeUploadedFile,
   setPendingFiles,
   setUploadedFiles,
   setIsUploading,
+  startUpload,
   selectedModel,
   handleModelChange,
   modelOptions,
@@ -99,12 +101,11 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
 
   const handleRecordingComplete = useCallback(
     (file: File) => {
-      setPendingFiles((prev) => [...prev, file]);
-
-      setUploadedFiles((prev) => [...prev, file]);
+      // Enqueue and upload the recorded file
+      startUpload([file]);
       onAudioRecordingStop?.(file);
     },
-    [setPendingFiles, setUploadedFiles, onAudioRecordingStop]
+    [startUpload, onAudioRecordingStop]
   );
 
   // Handle multiple file uploads for the Uploader component
@@ -120,14 +121,11 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
       });
 
       if (filteredFiles.length > 0) {
-        // Add files to pending files
-        setPendingFiles((prevFiles) => [...prevFiles, ...filteredFiles]);
-
-        // Add files to uploaded files
-        setUploadedFiles((prev) => [...prev, ...filteredFiles]);
+        // Enqueue and start upload for the batch
+        startUpload(filteredFiles);
       }
     },
-    [setPendingFiles, setUploadedFiles]
+    [startUpload]
   );
 
   // Combine mention data with uploaded files
@@ -267,6 +265,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                   multiple={true}
                   onMultipleFileSelect={handleMultipleFileUpload}
                   isLoading={isUploading}
+                  progress={uploadProgress || 0}
                   text={attachmentText}
                   fileType="file"
                   renderError={({ errorMessage }) => null}
