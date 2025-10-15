@@ -62,6 +62,7 @@ export * from './Tree/Tree';
 export * from './Flow/Flow';
 export * from './ChatInput/ChatInput';
 export * from './Background/Background';
+export * from './KanbanBoard/KanbanBoard';
 export { default as AgentChat } from './adk/AgentChat/AgentChat';
 export { default as AgentSession } from './adk/AgentSession/AgentSession';
 export { default as AgentTrace } from './adk/AgentTrace/AgentTrace';
@@ -121,6 +122,7 @@ export * from './Tree/Tree/Tree.props';
 export * from './Flow/Flow/Flow.props';
 export * from './ChatInput/ChatInput/ChatInput.props';
 export * from './Background/Background/Background.props';
+export * from './KanbanBoard/KanbanBoard/KanbanBoard.props';
 export type {
   AgentRunRequest,
   MessagePart,
