@@ -32,7 +32,7 @@ export interface KanbanDragLocation {
   cardIndex: number;
 }
 
-export interface KanbanBoardProps extends ViewProps {
+export interface KanbanBoardProps extends Omit<ViewProps, 'columns'> {
   columns: KanbanColumn[];
   onChange?: (columns: KanbanColumn[]) => void;
   renderCard?: (card: KanbanCard, column: KanbanColumn) => React.ReactNode;
@@ -48,7 +48,7 @@ export interface KanbanBoardViewProps extends KanbanBoardProps {
   registerCardRef: (
     columnId: string,
     index: number,
-    node: HTMLDivElement | null
+    node: HTMLElement | null
   ) => void;
   handleCardDragStart: (
     columnId: string,

@@ -30,14 +30,14 @@ export const useKanbanBoardState = ({
   const [dropPreview, setDropPreview] = useState<KanbanDropPreview | null>(
     null
   );
-  const cardRefs = useRef<Record<string, (HTMLDivElement | null)[]>>({});
+  const cardRefs = useRef<Record<string, (HTMLElement | null)[]>>({});
 
   useEffect(() => {
     setColumns(initialColumns);
   }, [initialColumns]);
 
   const registerCardRef = useCallback(
-    (columnId: string, index: number, node: HTMLDivElement | null) => {
+    (columnId: string, index: number, node: HTMLElement | null) => {
       if (!cardRefs.current[columnId]) {
         cardRefs.current[columnId] = [];
       }

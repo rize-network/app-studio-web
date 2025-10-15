@@ -1,5 +1,9 @@
 import React from 'react';
-import { KanbanBoardProps } from './KanbanBoard/KanbanBoard.props';
+import {
+  KanbanBoardProps,
+  KanbanColumn,
+  KanbanCard,
+} from './KanbanBoard/KanbanBoard.props';
 import { useKanbanBoardState } from './KanbanBoard/KanbanBoard.state';
 import { KanbanBoardView } from './KanbanBoard/KanbanBoard.view';
 
@@ -10,3 +14,6 @@ export const KanbanBoardComponent: React.FC<KanbanBoardProps> = (props) => {
 };
 
 export const KanbanBoard = KanbanBoardComponent;
+
+// Export types
+export type { KanbanColumn, KanbanCard, KanbanBoardProps };
