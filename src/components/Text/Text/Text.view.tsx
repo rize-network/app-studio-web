@@ -20,6 +20,7 @@ interface Props extends TextProps {
   views?: {
     container?: ViewProps;
   };
+  bgColor?: string;
 }
 
 interface ContentProps extends React.HTMLAttributes<HTMLElement> {
@@ -199,7 +200,7 @@ const TextView: React.FC<Props> = ({
   isStriked = false,
   weight = 'normal',
   size = 'md',
-  backgroundColor,
+  bgColor,
   color,
   views,
   ...props
@@ -215,8 +216,7 @@ const TextView: React.FC<Props> = ({
   const lineHeight = LineHeights[size];
   const fontWeight = FontWeights[weight];
 
-  const computedColor =
-    color ?? (backgroundColor ? getTextColor(backgroundColor) : undefined);
+  const computedColor = color ?? (bgColor ? getTextColor(bgColor) : undefined);
 
   return (
     <Element
