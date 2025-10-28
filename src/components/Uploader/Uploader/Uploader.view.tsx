@@ -184,9 +184,11 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
         renderFile({ selectedFile, textProps })}
       {progress < 100 &&
         (icon || <UploadIcon widthHeight={32} {...iconProps} />)}
-      {!selectedFile && text && renderText({ text, textProps })}
+      {!isLoading && !selectedFile && text && renderText({ text, textProps })}
       {isLoading && renderProgress({ progress, progressProps })}
-      {errorMessage && renderError({ errorMessage, errorMessageProps })}
+      {!isLoading &&
+        errorMessage &&
+        renderError({ errorMessage, errorMessageProps })}
       <View
         as="input"
         type="file"

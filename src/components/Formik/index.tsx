@@ -14,3 +14,4 @@ export { FormikComboBox } from './Formik.ComboBox';
 export { FormikSlider } from './Formik.Slider';
 export { FormikOTPInput } from './Formik.OTPInput';
 export { FormikUploader } from './Formik.Uploader';
+export { AttachmentPreview } from './AttachmentPreview';
