@@ -17,13 +17,19 @@ import { TableViewStyles } from './Table.type';
 export const DefaultTableStyles: TableViewStyles = {
   table: {
     width: '100%',
-
     borderRadius: '8px', // 2 × 4px grid
     overflow: 'hidden',
     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
     border: '1px solid',
     borderColor: 'color.gray.200',
     transition: 'all 0.2s ease',
+    media: {
+      mobile: {
+        overflowX: 'auto', // Enable horizontal scroll on mobile
+        display: 'block',
+        borderRadius: '4px',
+      },
+    },
   },
   thead: {
     backgroundColor: 'color.gray.50',
@@ -36,12 +42,24 @@ export const DefaultTableStyles: TableViewStyles = {
     fontSize: '14px',
     color: 'color.gray.700',
     textAlign: 'left',
+    media: {
+      mobile: {
+        padding: '8px 12px', // Smaller padding on mobile
+        fontSize: '12px',
+      },
+    },
   },
   td: {
     padding: '12px 16px', // 3 × 4px and 4 × 4px grid
     fontSize: '14px',
     borderBottom: '1px solid',
     borderBottomColor: 'color.gray.100',
+    media: {
+      mobile: {
+        padding: '8px 12px', // Smaller padding on mobile
+        fontSize: '12px',
+      },
+    },
   },
   tr: {
     transition: 'background-color 0.2s ease',
@@ -60,6 +78,11 @@ export const DefaultTableStyles: TableViewStyles = {
     color: 'color.gray.600',
     fontSize: '14px',
     fontStyle: 'italic',
+    media: {
+      mobile: {
+        fontSize: '12px',
+      },
+    },
   },
 };
 

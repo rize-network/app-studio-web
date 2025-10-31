@@ -88,6 +88,11 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
       borderRadius: '8px', // Consistent with design system
       overflow: 'hidden',
       transition: 'all 0.2s ease',
+      media: {
+        mobile: {
+          borderRadius: '4px', // Smaller radius on mobile
+        },
+      },
     },
     header: {
       padding: '16px', // 4 × 4px grid
@@ -95,16 +100,31 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
       borderBottomStyle: 'solid',
       borderBottomColor: 'color.gray.200',
       color: 'color.black',
+      media: {
+        mobile: {
+          padding: '12px', // Smaller padding on mobile
+        },
+      },
     },
     content: {
       padding: '16px', // 4 × 4px grid
       color: 'color.black',
+      media: {
+        mobile: {
+          padding: '12px', // Smaller padding on mobile
+        },
+      },
     },
     footer: {
       padding: '16px', // 4 × 4px grid
       borderTopWidth: '1px',
       borderTopStyle: 'solid',
       borderTopColor: 'color.gray.200',
+      media: {
+        mobile: {
+          padding: '12px', // Smaller padding on mobile
+        },
+      },
     },
   };
 };

@@ -11,6 +11,11 @@ export const DefaultChatInputStyles = {
     borderRadius: '12px',
     backgroundColor: 'color.white',
     transition: 'all 0.2s ease',
+    media: {
+      mobile: {
+        borderRadius: '8px',
+      },
+    },
   },
   content: {
     width: '100%',
@@ -20,6 +25,12 @@ export const DefaultChatInputStyles = {
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color.gray.200',
+    media: {
+      mobile: {
+        padding: '10px',
+        borderRadius: '8px',
+      },
+    },
   },
   textarea: {
     width: '100%',
@@ -34,6 +45,13 @@ export const DefaultChatInputStyles = {
     outline: 'none',
     resize: 'none',
     overflow: 'auto',
+    media: {
+      mobile: {
+        padding: '6px 10px',
+        fontSize: '13px',
+        minHeight: '36px',
+      },
+    },
   },
   attachments: {
     display: 'flex',
@@ -74,6 +92,13 @@ export const DefaultChatInputStyles = {
     backgroundColor: 'theme.primary',
     color: 'color.white',
     transition: 'all 0.2s ease',
+    media: {
+      mobile: {
+        height: '32px',
+        minWidth: '32px',
+        padding: '0 10px',
+      },
+    },
   },
   fileButton: {
     height: '36px',
@@ -82,6 +107,12 @@ export const DefaultChatInputStyles = {
     backgroundColor: 'transparent',
     color: 'color.gray.500',
     transition: 'all 0.2s ease',
+    media: {
+      mobile: {
+        height: '32px',
+        padding: '0 10px',
+      },
+    },
   },
   modelSelector: {
     height: '36px',
