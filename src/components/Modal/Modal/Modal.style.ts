@@ -57,17 +57,41 @@ export const HeaderIconSizes: Record<Size, number> = {
 
 /**
  * Animation configurations for the Modal component
+ * Subtle and smooth, matching shadcn/ui patterns
  */
 export const ModalAnimations = {
   enter: {
     opacity: [0, 1],
     transform: ['scale(0.95)', 'scale(1)'],
-    transition: 'all 0.3s ease-out',
+    transition: 'opacity 0.2s ease-out, transform 0.2s ease-out',
   },
   exit: {
     opacity: [1, 0],
     transform: ['scale(1)', 'scale(0.95)'],
-    transition: 'all 0.2s ease-in',
+    transition: 'opacity 0.15s ease-in, transform 0.15s ease-in',
+  },
+};
+
+/**
+ * Overlay styles for the Modal component
+ */
+export const OverlayStyles: ViewProps = {
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  transition: 'background-color 0.2s ease',
+};
+
+/**
+ * Container base styles for the Modal component
+ */
+export const ContainerBaseStyles: ViewProps = {
+  backgroundColor: 'color.white',
+  boxShadow:
+    '0px 10px 25px rgba(0, 0, 0, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.08)',
+  transition: 'box-shadow 0.2s ease',
+  _focusVisible: {
+    outline: 'none',
+    boxShadow:
+      '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 10px 25px rgba(0, 0, 0, 0.1)',
   },
 };
 

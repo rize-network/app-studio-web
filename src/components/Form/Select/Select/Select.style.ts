@@ -53,10 +53,29 @@ export const dropdownStyles: ViewProps = {
   borderStyle: 'solid',
   borderColor: 'color.gray.200',
 
-  // Shadow
-  boxShadow:
-    '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+  // Shadow - more subtle, matching shadcn/ui
+  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.05), 0px 2px 4px rgba(0, 0, 0, 0.03)',
 
-  // Animation
-  transition: 'all 0.2s ease',
+  // Animation - specific properties only
+  transition: 'opacity 0.2s ease, transform 0.2s ease',
+};
+
+/**
+ * Option item styles for the Select component
+ */
+export const optionStyles: ViewProps = {
+  padding: '8px 12px', // 2 × 4px and 3 × 4px grid
+  cursor: 'pointer',
+  transition: 'background-color 0.15s ease, color 0.15s ease',
+  _hover: {
+    backgroundColor: 'color.gray.100',
+  },
+  _focus: {
+    backgroundColor: 'color.gray.100',
+    outline: 'none',
+  },
+  _selected: {
+    backgroundColor: 'theme.primary',
+    color: 'color.white',
+  },
 };
