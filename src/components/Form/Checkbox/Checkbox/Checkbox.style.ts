@@ -46,7 +46,8 @@ export const VariantStyles: Record<Variant, ViewProps> = {
     borderWidth: '2px',
     borderStyle: 'solid',
     color: 'color.white',
-    transition: 'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
   unselected: {
     backgroundColor: 'color.white',
@@ -54,7 +55,8 @@ export const VariantStyles: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color.gray.300',
     color: 'color.black',
-    transition: 'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
   indeterminate: {
     backgroundColor: 'theme.primary',
@@ -62,7 +64,8 @@ export const VariantStyles: Record<Variant, ViewProps> = {
     borderWidth: '2px',
     borderStyle: 'solid',
     color: 'color.white',
-    transition: 'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
 };
 
@@ -85,15 +88,18 @@ export const StateStyles = {
   focus: {
     selected: {
       outline: 'none',
-      boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
     },
     unselected: {
       outline: 'none',
-      boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
     },
     indeterminate: {
       outline: 'none',
-      boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
     },
   },
   disabled: {

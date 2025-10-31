@@ -85,11 +85,13 @@ export const OverlayStyles: ViewProps = {
  */
 export const ContainerBaseStyles: ViewProps = {
   backgroundColor: 'color.white',
-  boxShadow: '0px 10px 25px rgba(0, 0, 0, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.08)',
+  boxShadow:
+    '0px 10px 25px rgba(0, 0, 0, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.08)',
   transition: 'box-shadow 0.2s ease',
   _focusVisible: {
     outline: 'none',
-    boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 10px 25px rgba(0, 0, 0, 0.1)',
+    boxShadow:
+      '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 10px 25px rgba(0, 0, 0, 0.1)',
   },
 };
 

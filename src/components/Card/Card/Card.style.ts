@@ -60,20 +60,24 @@ export const getCardVariants = (
       },
       _focusVisible: {
         outline: 'none',
-        boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1)',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1)',
       },
     },
     elevated: {
       backgroundColor: 'color.white',
-      boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.06)',
+      boxShadow:
+        '0px 1px 3px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.06)',
       border: 'none',
       transition: 'box-shadow 0.2s ease',
       _hover: {
-        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06)',
+        boxShadow:
+          '0px 4px 6px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06)',
       },
       _focusVisible: {
         outline: 'none',
-        boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.08)',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.08)',
       },
     },
   };

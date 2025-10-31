@@ -54,8 +54,7 @@ export const dropdownStyles: ViewProps = {
   borderColor: 'color.gray.200',
 
   // Shadow - more subtle, matching shadcn/ui
-  boxShadow:
-    '0px 4px 6px rgba(0, 0, 0, 0.05), 0px 2px 4px rgba(0, 0, 0, 0.03)',
+  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.05), 0px 2px 4px rgba(0, 0, 0, 0.03)',
 
   // Animation - specific properties only
   transition: 'opacity 0.2s ease, transform 0.2s ease',

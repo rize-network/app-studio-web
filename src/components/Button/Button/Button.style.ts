@@ -154,7 +154,8 @@ export const getButtonVariants = (
       outline: 'none',
       boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
     },
-    transition: 'background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease',
+    transition:
+      'background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease',
   },
   ghost: {
     backgroundColor: 'transparent',
@@ -207,7 +208,8 @@ export const getButtonVariants = (
     borderColor: 'transparent',
     _focusVisible: {
       outline: 'none',
-      boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.8)',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.8)',
     },
     transition: 'opacity 0.2s ease',
   },

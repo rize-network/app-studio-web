@@ -57,12 +57,14 @@ export const InputVariants: Record<Variant, ViewProps> = {
     _focus: {
       borderColor: 'theme.primary',
       outline: 'none',
-      boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
     },
     _focusVisible: {
       borderColor: 'theme.primary',
       outline: 'none',
-      boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
     },
   },
   default: {
