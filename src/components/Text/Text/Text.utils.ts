@@ -1,6 +1,37 @@
+const normalizeHexColor = (backgroundColor: string) => {
+  if (!backgroundColor) {
+    return null;
+  }
+
+  const trimmed = backgroundColor.trim();
+  const withoutHash = trimmed.startsWith('#') ? trimmed.slice(1) : trimmed;
+
+  if (withoutHash.length === 3) {
+    if (!/^[0-9a-fA-F]{3}$/.test(withoutHash)) {
+      return null;
+    }
+    return `#${withoutHash
+      .split('')
+      .map((char) => char + char)
+      .join('')}`;
+  }
+
+  if (!/^[0-9a-fA-F]{6}$/.test(withoutHash)) {
+    return null;
+  }
+
+  return `#${withoutHash.toLowerCase()}`;
+};
+
 export const getTextColorHex = (backgroundColor: string) => {
+  const normalized = normalizeHexColor(backgroundColor);
+
+  if (!normalized) {
+    return 'black';
+  }
+
   // Simple luminance calculation to determine text color contrast
-  const color = backgroundColor.replace('#', '');
+  const color = normalized.replace('#', '');
   const r = parseInt(color.substring(0, 2), 16);
   const g = parseInt(color.substring(2, 4), 16);
   const b = parseInt(color.substring(4, 6), 16);
@@ -8,18 +39,5 @@ export const getTextColorHex = (backgroundColor: string) => {
   return luminance > 0.4 ? 'black' : 'white';
 };
 
-export const getTextColor = (backgroundColor: string) => {
-  // Use complementary color for better contrast and return as hex
-  const color = backgroundColor.replace('#', '');
-  const r = parseInt(color.substring(0, 2), 16);
-  const g = parseInt(color.substring(2, 4), 16);
-  const b = parseInt(color.substring(4, 6), 16);
-
-  // Calculate the complementary color
-  const complementR = (255 - r).toString(16).padStart(2, '0');
-  const complementG = (255 - g).toString(16).padStart(2, '0');
-  const complementB = (255 - b).toString(16).padStart(2, '0');
-
-  // Return the color in hex format
-  return getTextColorHex(`#${complementR}${complementG}${complementB}`);
-};
+export const getTextColor = (backgroundColor: string) =>
+  getTextColorHex(backgroundColor);

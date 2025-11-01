@@ -201,6 +201,7 @@ const TextView: React.FC<Props> = ({
   weight = 'normal',
   size = 'md',
   bgColor,
+  backgroundColor,
   color,
   views,
   ...props
@@ -216,7 +217,9 @@ const TextView: React.FC<Props> = ({
   const lineHeight = LineHeights[size];
   const fontWeight = FontWeights[weight];
 
-  const computedColor = color ?? (bgColor ? getTextColor(bgColor) : undefined);
+  const background = bgColor ?? backgroundColor;
+  const computedColor =
+    color ?? (background ? getTextColor(background) : undefined);
 
   return (
     <Element
@@ -230,6 +233,7 @@ const TextView: React.FC<Props> = ({
         isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'
       }
       color={computedColor}
+      backgroundColor={background}
       // Apply layout styles
       {...noLineBreak}
       // Apply heading styles if specified
