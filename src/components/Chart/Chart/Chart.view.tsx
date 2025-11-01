@@ -185,16 +185,16 @@ export const ChartView: React.FC<ChartProps> = ({
     const tooltipHeight = 40; // Approximate tooltip height
     const offset = 10; // Offset from cursor
 
-    let left = tooltip.x + offset;
+    let left = tooltip.x - tooltipWidth / 2;
     let top = tooltip.y - tooltipHeight - offset;
 
     // Check right boundary
-    if (left + tooltipWidth > window.innerWidth) {
-      left = tooltip.x - tooltipWidth - offset;
+    if (left + tooltipWidth > window.innerWidth - offset) {
+      left = window.innerWidth - tooltipWidth - offset;
     }
 
     // Check left boundary
-    if (left < 0) {
+    if (left < offset) {
       left = offset;
     }
 
