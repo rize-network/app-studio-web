@@ -16,6 +16,7 @@ export const useKanbanBoardState = ({
   const [draggedCardId, setDraggedCardId] = useState<string | null>(null);
   const [hoveredColumnId, setHoveredColumnId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+  const [dropPosition, setDropPosition] = useState<'top' | 'bottom' | null>(null);
   const dragStateRef = useRef<DragState | null>(null);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ export const useKanbanBoardState = ({
   }, [initialColumns]);
 
   const commitMove = useCallback(
-    (targetColumnId: string, targetCardId: string | null) => {
+    (targetColumnId: string, targetCardId: string | null, position: 'top' | 'bottom' | null = null) => {
       const dragState = dragStateRef.current;
       if (!dragState) return;
 
@@ -73,10 +74,12 @@ export const useKanbanBoardState = ({
           );
 
           if (foundIndex !== -1) {
-            targetIndex = foundIndex;
+            // Insert before or after based on position
+            targetIndex = position === 'bottom' ? foundIndex + 1 : foundIndex;
 
+            // Adjust for same column moves
             if (targetColumnId === sourceColumnId && foundIndex > sourceIndex) {
-              targetIndex = foundIndex - 1;
+              targetIndex = position === 'bottom' ? foundIndex : foundIndex - 1;
             }
           }
         }
@@ -97,6 +100,7 @@ export const useKanbanBoardState = ({
       setDraggedCardId(null);
       setHoveredColumnId(null);
       setHoveredCardId(null);
+      setDropPosition(null);
     },
     [onChange]
   );
@@ -127,6 +131,7 @@ export const useKanbanBoardState = ({
     setDraggedCardId(null);
     setHoveredColumnId(null);
     setHoveredCardId(null);
+    setDropPosition(null);
   }, []);
 
   const handleColumnDragOver = useCallback(
@@ -153,6 +158,14 @@ export const useKanbanBoardState = ({
       }
       setHoveredColumnId(columnId);
       setHoveredCardId(cardId);
+
+      // Determine if hovering over top or bottom half of the card
+      if (cardId && event.currentTarget) {
+        const rect = event.currentTarget.getBoundingClientRect();
+        const midpoint = rect.top + rect.height / 2;
+        const position = event.clientY < midpoint ? 'top' : 'bottom';
+        setDropPosition(position);
+      }
     },
     []
   );
@@ -173,7 +186,16 @@ export const useKanbanBoardState = ({
     ) => {
       event.preventDefault();
       event.stopPropagation();
-      commitMove(columnId, cardId);
+
+      // Determine drop position based on mouse position
+      let position: 'top' | 'bottom' = 'top';
+      if (cardId && event.currentTarget) {
+        const rect = event.currentTarget.getBoundingClientRect();
+        const midpoint = rect.top + rect.height / 2;
+        position = event.clientY < midpoint ? 'top' : 'bottom';
+      }
+
+      commitMove(columnId, cardId, position);
     },
     [commitMove]
   );
@@ -183,6 +205,7 @@ export const useKanbanBoardState = ({
     draggedCardId,
     hoveredColumnId,
     hoveredCardId,
+    dropPosition,
     onCardDragStart: handleCardDragStart,
     onCardDragEnd: handleCardDragEnd,
     onColumnDragOver: handleColumnDragOver,

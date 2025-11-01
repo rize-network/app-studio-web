@@ -12,6 +12,7 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   draggedCardId,
   hoveredColumnId,
   hoveredCardId,
+  dropPosition,
   onCardDragStart,
   onCardDragEnd,
   onColumnDragOver,
@@ -127,20 +128,23 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
               </View>
             )}
 
-            {column.cards.map((card) => (
+            {column.cards.map((card, index) => (
               <View key={card.id} position="relative">
+                {/* Drop indicator at the top */}
                 {draggedCardId &&
                   hoveredCardId === card.id &&
-                  draggedCardId !== card.id && (
+                  draggedCardId !== card.id &&
+                  dropPosition === 'top' && (
                     <View
                       position="absolute"
                       top={-6}
                       left={0}
                       right={0}
-                      height={3}
+                      height={4}
                       backgroundColor="#7F56D9"
                       borderRadius={2}
                       zIndex={10}
+                      boxShadow="0 0 8px rgba(127, 86, 217, 0.6)"
                     />
                   )}
                 <View
@@ -165,6 +169,23 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                     ? renderCard(card, column)
                     : renderDefaultCard(card)}
                 </View>
+                {/* Drop indicator at the bottom */}
+                {draggedCardId &&
+                  hoveredCardId === card.id &&
+                  draggedCardId !== card.id &&
+                  dropPosition === 'bottom' && (
+                    <View
+                      position="absolute"
+                      bottom={-6}
+                      left={0}
+                      right={0}
+                      height={4}
+                      backgroundColor="#7F56D9"
+                      borderRadius={2}
+                      zIndex={10}
+                      boxShadow="0 0 8px rgba(127, 86, 217, 0.6)"
+                    />
+                  )}
               </View>
             ))}
           </Vertical>
