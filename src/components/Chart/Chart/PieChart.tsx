@@ -150,7 +150,12 @@ export const PieChart: React.FC<PieChartProps> = ({
   ]);
 
   return (
-    <svg ref={chartRef} width={width} height={height}>
+    <svg
+      ref={chartRef}
+      width={width}
+      height={height}
+      style={{ overflow: 'visible' }}
+    >
       {/* Pie slices */}
       {slices.map((slice, index) => {
         const handleMouseEnter = (e: React.MouseEvent) => {
