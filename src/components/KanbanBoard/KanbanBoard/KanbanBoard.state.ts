@@ -16,6 +16,8 @@ export const useKanbanBoardState = ({
   const [draggedCardId, setDraggedCardId] = useState<string | null>(null);
   const [hoveredColumnId, setHoveredColumnId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+  const [hoveredCardPosition, setHoveredCardPosition] =
+    useState<'above' | 'below' | null>(null);
   const dragStateRef = useRef<DragState | null>(null);
 
   useEffect(() => {
@@ -23,18 +25,22 @@ export const useKanbanBoardState = ({
   }, [initialColumns]);
 
   const commitMove = useCallback(
-    (targetColumnId: string, targetCardId: string | null) => {
+    (
+      targetColumnId: string,
+      targetCardId: string | null,
+      position: 'above' | 'below'
+    ) => {
       const dragState = dragStateRef.current;
       if (!dragState) return;
 
       const { columnId: sourceColumnId, cardId } = dragState;
 
-      if (
-        targetColumnId === sourceColumnId &&
-        (targetCardId === null || targetCardId === cardId)
-      ) {
+      if (targetColumnId === sourceColumnId && targetCardId === cardId) {
         dragStateRef.current = null;
         setDraggedCardId(null);
+        setHoveredColumnId(null);
+        setHoveredCardId(null);
+        setHoveredCardPosition(null);
         return;
       }
 
@@ -63,22 +69,30 @@ export const useKanbanBoardState = ({
           return prevColumns;
         }
 
+        const targetIndexBeforeRemoval = targetCardId
+          ? targetColumn.cards.findIndex((item) => item.id === targetCardId)
+          : -1;
+
         const [card] = sourceColumn.cards.splice(sourceIndex, 1);
 
         let targetIndex = targetColumn.cards.length;
 
-        if (targetCardId) {
-          const foundIndex = targetColumn.cards.findIndex(
-            (item) => item.id === targetCardId
-          );
+        if (targetCardId && targetIndexBeforeRemoval !== -1) {
+          targetIndex =
+            position === 'above'
+              ? targetIndexBeforeRemoval
+              : targetIndexBeforeRemoval + 1;
 
-          if (foundIndex !== -1) {
-            targetIndex = foundIndex;
-
-            if (targetColumnId === sourceColumnId && foundIndex > sourceIndex) {
-              targetIndex = foundIndex - 1;
-            }
+          if (
+            targetColumnId === sourceColumnId &&
+            targetIndexBeforeRemoval > sourceIndex
+          ) {
+            targetIndex -= 1;
           }
+        } else if (targetCardId && targetIndexBeforeRemoval === -1) {
+          targetIndex = targetColumn.cards.length;
+        } else if (!targetCardId) {
+          targetIndex = position === 'above' ? 0 : targetColumn.cards.length;
         }
 
         targetColumn.cards.splice(targetIndex, 0, card);
@@ -97,6 +111,7 @@ export const useKanbanBoardState = ({
       setDraggedCardId(null);
       setHoveredColumnId(null);
       setHoveredCardId(null);
+      setHoveredCardPosition(null);
     },
     [onChange]
   );
@@ -127,6 +142,7 @@ export const useKanbanBoardState = ({
     setDraggedCardId(null);
     setHoveredColumnId(null);
     setHoveredCardId(null);
+    setHoveredCardPosition(null);
   }, []);
 
   const handleColumnDragOver = useCallback(
@@ -137,6 +153,7 @@ export const useKanbanBoardState = ({
       }
       setHoveredColumnId(columnId);
       setHoveredCardId(null);
+      setHoveredCardPosition(null);
     },
     []
   );
@@ -153,6 +170,14 @@ export const useKanbanBoardState = ({
       }
       setHoveredColumnId(columnId);
       setHoveredCardId(cardId);
+      if (cardId) {
+        const bounds = (event.currentTarget as HTMLDivElement).getBoundingClientRect();
+        const offsetY = event.clientY - bounds.top;
+        const newPosition = offsetY < bounds.height / 2 ? 'above' : 'below';
+        setHoveredCardPosition(newPosition);
+      } else {
+        setHoveredCardPosition(null);
+      }
     },
     []
   );
@@ -160,7 +185,7 @@ export const useKanbanBoardState = ({
   const handleColumnDrop = useCallback(
     (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
-      commitMove(columnId, null);
+      commitMove(columnId, null, 'below');
     },
     [commitMove]
   );
@@ -173,7 +198,15 @@ export const useKanbanBoardState = ({
     ) => {
       event.preventDefault();
       event.stopPropagation();
-      commitMove(columnId, cardId);
+      let position: 'above' | 'below' = 'below';
+
+      if (cardId) {
+        const bounds = (event.currentTarget as HTMLDivElement).getBoundingClientRect();
+        const offsetY = event.clientY - bounds.top;
+        position = offsetY < bounds.height / 2 ? 'above' : 'below';
+      }
+
+      commitMove(columnId, cardId, position);
     },
     [commitMove]
   );
@@ -183,6 +216,7 @@ export const useKanbanBoardState = ({
     draggedCardId,
     hoveredColumnId,
     hoveredCardId,
+    hoveredCardPosition,
     onCardDragStart: handleCardDragStart,
     onCardDragEnd: handleCardDragEnd,
     onColumnDragOver: handleColumnDragOver,
