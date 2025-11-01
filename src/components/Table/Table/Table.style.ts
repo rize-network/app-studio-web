@@ -25,6 +25,13 @@ export const DefaultTableStyles: TableViewStyles = {
     border: '1px solid',
     borderColor: 'color.gray.200',
     transition: 'box-shadow 0.2s ease',
+    media: {
+      mobile: {
+        overflowX: 'auto', // Enable horizontal scroll on mobile
+        display: 'block',
+        borderRadius: '4px',
+      },
+    },
   },
   thead: {
     backgroundColor: 'color.gray.50',
@@ -37,6 +44,12 @@ export const DefaultTableStyles: TableViewStyles = {
     fontSize: '14px',
     color: 'color.gray.700',
     textAlign: 'left',
+    media: {
+      mobile: {
+        padding: '8px 12px', // Smaller padding on mobile
+        fontSize: '12px',
+      },
+    },
   },
   td: {
     padding: '12px 16px', // 3 × 4px and 4 × 4px grid
@@ -44,6 +57,12 @@ export const DefaultTableStyles: TableViewStyles = {
     borderBottom: '1px solid',
     borderBottomColor: 'color.gray.100',
     color: 'color.gray.900',
+    media: {
+      mobile: {
+        padding: '8px 12px', // Smaller padding on mobile
+        fontSize: '12px',
+      },
+    },
   },
   tr: {
     transition: 'background-color 0.15s ease',
@@ -66,6 +85,11 @@ export const DefaultTableStyles: TableViewStyles = {
     color: 'color.gray.600',
     fontSize: '14px',
     fontStyle: 'italic',
+    media: {
+      mobile: {
+        fontSize: '12px',
+      },
+    },
   },
 };
 

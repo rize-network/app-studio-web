@@ -20,20 +20,35 @@ export const NavigationMenuSizes: Record<Size, ViewProps> = {
   sm: {
     padding: '8px 12px', // 2×4px and 3×4px grid
     fontSize: '12px', // Harmonized font size
-
     fontWeight: '500', // Medium weight for better readability
+    media: {
+      mobile: {
+        padding: '6px 10px',
+        fontSize: '11px',
+      },
+    },
   },
   md: {
     padding: '12px 16px', // 3×4px and 4×4px grid
     fontSize: '14px', // Harmonized font size
-
     fontWeight: '500', // Medium weight for better readability
+    media: {
+      mobile: {
+        padding: '10px 14px',
+        fontSize: '13px',
+      },
+    },
   },
   lg: {
     padding: '16px 20px', // 4×4px and 5×4px grid
     fontSize: '16px', // Harmonized font size
-
     fontWeight: '500', // Medium weight for better readability
+    media: {
+      mobile: {
+        padding: '12px 16px',
+        fontSize: '14px',
+      },
+    },
   },
 };
 
@@ -68,6 +83,12 @@ export const NavigationMenuOrientations: Record<Orientation, ViewProps> = {
   horizontal: {
     flexDirection: 'row',
     gap: '8px', // 2×4px grid
+    media: {
+      mobile: {
+        flexDirection: 'column', // Stack vertically on mobile
+        gap: '4px',
+      },
+    },
   },
   vertical: {
     flexDirection: 'column',

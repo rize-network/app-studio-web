@@ -9,7 +9,20 @@ interface WrapperProps {
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   return (
     <ThemeProvider mode="light">
-      <ResponsiveProvider>
+      <ResponsiveProvider
+        breakpoints={{
+          xs: 0,
+          sm: 340,
+          md: 560,
+          lg: 1080,
+          xl: 1300,
+        }}
+        devices={{
+          mobile: ['xs', 'sm'],
+          tablet: ['md', 'lg'],
+          desktop: ['lg', 'xl'],
+        }}
+      >
         <RouterProvider>{children}</RouterProvider>
       </ResponsiveProvider>
     </ThemeProvider>

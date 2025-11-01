@@ -7,18 +7,42 @@ export const PaginationSizes: Record<Size, ViewProps> = {
     padding: '4px 8px',
     minWidth: '28px',
     height: '28px',
+    media: {
+      mobile: {
+        fontSize: '11px',
+        padding: '3px 6px',
+        minWidth: '24px',
+        height: '24px',
+      },
+    },
   },
   md: {
     fontSize: '14px',
     padding: '6px 12px',
     minWidth: '36px',
     height: '36px',
+    media: {
+      mobile: {
+        fontSize: '12px',
+        padding: '4px 8px',
+        minWidth: '28px',
+        height: '28px',
+      },
+    },
   },
   lg: {
     fontSize: '16px',
     padding: '8px 16px',
     minWidth: '44px',
     height: '44px',
+    media: {
+      mobile: {
+        fontSize: '14px',
+        padding: '6px 12px',
+        minWidth: '36px',
+        height: '36px',
+      },
+    },
   },
 };
 
