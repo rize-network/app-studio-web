@@ -52,6 +52,17 @@ const TitleView: React.FC<TitleProps> = ({
     ? resolveColorValue(highlightSecondaryColor)
     : undefined;
 
+  const baseHighlightProps = HighlightStyles[highlightStyle](
+    resolvedColor,
+    resolvedSecondary
+  );
+  const highlightViewProps =
+    highlightStyle === 'background'
+      ? { ...baseHighlightProps, color: undefined }
+      : baseHighlightProps;
+  const highlightBackgroundOverrides =
+    highlightStyle === 'background' ? { bgColor: resolvedColor } : {};
+
   const { finalDisplayedText, activeHighlightTarget, highlightTypewriter } =
     useTitleState({
       children,
@@ -161,10 +172,8 @@ const TitleView: React.FC<TitleProps> = ({
               as="span"
               display="inline"
               animate={inView ? controlledHighlightAnimate : undefined}
-              {...HighlightStyles[highlightStyle](
-                resolvedColor,
-                resolvedSecondary
-              )}
+              {...highlightViewProps}
+              {...highlightBackgroundOverrides}
               {...views?.highlight}
             >
               {highlightTypewriter ? (
@@ -214,7 +223,8 @@ const TitleView: React.FC<TitleProps> = ({
           as="span"
           display="inline"
           animate={inView ? controlledHighlightAnimate : undefined}
-          {...HighlightStyles[highlightStyle](resolvedColor, resolvedSecondary)}
+          {...highlightViewProps}
+          {...highlightBackgroundOverrides}
           {...views?.highlight}
         >
           {highlightTypewriter ? (

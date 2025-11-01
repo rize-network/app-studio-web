@@ -36,6 +36,7 @@ const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
     expandedItemIds,
     toggleExpandedItem,
     isItemExpanded,
+    triggerRefs,
   } = useNavigationMenuState(defaultActiveItemId, defaultExpandedItemIds);
 
   return (
@@ -50,6 +51,7 @@ const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
         size,
         variant,
         onItemActivate,
+        triggerRefs,
       }}
     >
       {items ? (

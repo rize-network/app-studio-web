@@ -46,6 +46,7 @@ export interface KanbanBoardViewProps extends KanbanBoardProps {
   draggedCardId: string | null;
   hoveredColumnId: string | null;
   hoveredCardId: string | null;
+  hoveredCardPosition: 'before' | 'after' | null;
   onCardDragStart: (
     columnId: string,
     cardId: string,
