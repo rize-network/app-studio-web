@@ -19,6 +19,8 @@ export interface KanbanBoardColumn {
   [key: string]: unknown;
 }
 
+export type KanbanCardDropPosition = 'before' | 'after';
+
 export interface KanbanBoardProps {
   columns: KanbanBoardColumn[];
   onChange?: (columns: KanbanBoardColumn[]) => void;
@@ -46,6 +48,7 @@ export interface KanbanBoardViewProps extends KanbanBoardProps {
   draggedCardId: string | null;
   hoveredColumnId: string | null;
   hoveredCardId: string | null;
+  hoveredCardPosition: KanbanCardDropPosition | null;
   onCardDragStart: (
     columnId: string,
     cardId: string,
@@ -55,6 +58,7 @@ export interface KanbanBoardViewProps extends KanbanBoardProps {
   onCardDrop: (
     columnId: string,
     cardId: string | null,
+    position: KanbanCardDropPosition,
     event: React.DragEvent<HTMLDivElement>
   ) => void;
   onColumnDrop: (
@@ -64,6 +68,7 @@ export interface KanbanBoardViewProps extends KanbanBoardProps {
   onCardDragOver: (
     columnId: string,
     cardId: string | null,
+    position: KanbanCardDropPosition,
     event: React.DragEvent<HTMLDivElement>
   ) => void;
   onColumnDragOver: (
