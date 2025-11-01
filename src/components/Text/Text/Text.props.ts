@@ -4,6 +4,10 @@ export interface TextProps
   extends Omit<TextAppProps, 'children' | 'style' | 'pointerEvents'> {
   children?: React.ReactNode;
   backgroundColor?: string;
+  /**
+   * Background color used to automatically compute a readable text color
+   */
+  bgColor?: string;
   heading?: Headings;
   isItalic?: boolean;
   isStriked?: boolean;
