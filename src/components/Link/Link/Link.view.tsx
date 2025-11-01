@@ -24,9 +24,21 @@ const LinkView: React.FC<LinkViewProps> = ({
   ...props
 }) => {
   // Function to handle mouse enter/leave events to toggle hover state.
-  const handleHover = () => {
+  const handleMouseEnter = () => {
     if (underline === 'hover') setIsHovered(true);
   };
+
+  const handleMouseLeave = () => {
+    if (underline === 'hover') setIsHovered(false);
+  };
+
+  // Determine text decoration based on underline prop and hover state
+  const getTextDecoration = () => {
+    if (underline === 'underline') return 'underline';
+    if (underline === 'hover' && isHovered) return 'underline';
+    return 'none';
+  };
+
   return (
     <ReactRouterLink
       to={to}
@@ -34,12 +46,12 @@ const LinkView: React.FC<LinkViewProps> = ({
       style={{ textDecoration: 'inherit', color: 'inherit' }}
     >
       <Horizontal
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         gap={3}
         alignItems="center"
         flexWrap="nowrap"
-        textDecoration={'none'}
+        textDecoration={getTextDecoration()}
         {...views.text}
         {...props}
       >
