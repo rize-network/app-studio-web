@@ -52,15 +52,22 @@ export const SeparatorThicknesses: Record<Thickness, string> = {
 
 /**
  * Default styles for the Separator component
+ * Matching shadcn/ui patterns with subtle colors
  */
 export const DefaultSeparatorStyles = {
   container: {
-    transition: 'all 0.2s ease',
+    transition: 'opacity 0.15s ease',
+  },
+  line: {
+    backgroundColor: 'color.gray.200',
+    transition: 'background-color 0.15s ease',
   },
   label: {
     fontSize: '14px',
-    color: 'color.gray.500',
+    fontWeight: '500',
+    color: 'color.gray.600',
     paddingHorizontal: '8px', // 2 × 4px grid
-    transition: 'all 0.2s ease',
+    backgroundColor: 'color.white',
+    transition: 'color 0.15s ease',
   },
 };

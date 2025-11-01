@@ -13,17 +13,18 @@ import { TableViewStyles } from './Table.type';
 
 /**
  * Default table styles following the design system
+ * Matching shadcn/ui patterns with subtle shadows and transitions
  */
 export const DefaultTableStyles: TableViewStyles = {
   table: {
     width: '100%',
-
     borderRadius: '8px', // 2 × 4px grid
     overflow: 'hidden',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+    boxShadow:
+      '0px 1px 3px rgba(0, 0, 0, 0.06), 0px 1px 2px rgba(0, 0, 0, 0.04)',
     border: '1px solid',
     borderColor: 'color.gray.200',
-    transition: 'all 0.2s ease',
+    transition: 'box-shadow 0.2s ease',
   },
   thead: {
     backgroundColor: 'color.gray.50',
@@ -42,11 +43,16 @@ export const DefaultTableStyles: TableViewStyles = {
     fontSize: '14px',
     borderBottom: '1px solid',
     borderBottomColor: 'color.gray.100',
+    color: 'color.gray.900',
   },
   tr: {
-    transition: 'background-color 0.2s ease',
+    transition: 'background-color 0.15s ease',
     _hover: {
       backgroundColor: 'color.gray.50',
+    },
+    _focus: {
+      outline: 'none',
+      backgroundColor: 'color.gray.100',
     },
   },
   tfoot: {

@@ -69,18 +69,31 @@ export const Themes: ThemesType = {
 
 /**
  * Animation configurations for the Toast component
+ * Subtle and smooth, matching shadcn/ui patterns
  */
 export const ToastAnimations = {
   enter: {
     opacity: [0, 1],
-    transform: ['scale(0.95)', 'scale(1)'],
-    transition: 'all 0.3s ease-out',
+    transform: ['translateY(8px)', 'translateY(0)'],
+    transition: 'opacity 0.2s ease-out, transform 0.2s ease-out',
   },
   exit: {
     opacity: [1, 0],
-    transform: ['scale(1)', 'scale(0.95)'],
-    transition: 'all 0.2s ease-in',
+    transform: ['translateY(0)', 'translateY(8px)'],
+    transition: 'opacity 0.15s ease-in, transform 0.15s ease-in',
   },
+};
+
+/**
+ * Base container styles for the Toast component
+ */
+export const BaseContainerStyles: ViewProps = {
+  borderRadius: '8px',
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  padding: '12px 16px', // 3 × 4px and 4 × 4px grid
+  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.05), 0px 2px 4px rgba(0, 0, 0, 0.03)',
+  transition: 'box-shadow 0.2s ease, background-color 0.2s ease',
 };
 
 /**

@@ -43,7 +43,11 @@ export const VariantStyles: Record<Variant, ViewProps> = {
   selected: {
     backgroundColor: 'theme.primary',
     borderColor: 'theme.primary',
+    borderWidth: '2px',
+    borderStyle: 'solid',
     color: 'color.white',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
   unselected: {
     backgroundColor: 'color.white',
@@ -51,11 +55,17 @@ export const VariantStyles: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color.gray.300',
     color: 'color.black',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
   indeterminate: {
     backgroundColor: 'theme.primary',
     borderColor: 'theme.primary',
+    borderWidth: '2px',
+    borderStyle: 'solid',
     color: 'color.white',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
 };
 
@@ -65,31 +75,50 @@ export const VariantStyles: Record<Variant, ViewProps> = {
 export const StateStyles = {
   hover: {
     selected: {
-      backgroundColor: 'color.blue.600',
-      borderColor: 'color.blue.600',
+      opacity: 0.9,
     },
     unselected: {
       borderColor: 'color.gray.400',
+      backgroundColor: 'color.gray.50',
     },
     indeterminate: {
-      backgroundColor: 'color.blue.600',
-      borderColor: 'color.blue.600',
+      opacity: 0.9,
+    },
+  },
+  focus: {
+    selected: {
+      outline: 'none',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+    },
+    unselected: {
+      outline: 'none',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+    },
+    indeterminate: {
+      outline: 'none',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
     },
   },
   disabled: {
     selected: {
       backgroundColor: 'color.gray.300',
       borderColor: 'color.gray.300',
-      opacity: 0.6,
+      opacity: 0.5,
+      cursor: 'not-allowed',
     },
     unselected: {
       borderColor: 'color.gray.300',
-      opacity: 0.6,
+      opacity: 0.5,
+      cursor: 'not-allowed',
     },
     indeterminate: {
       backgroundColor: 'color.gray.300',
       borderColor: 'color.gray.300',
-      opacity: 0.6,
+      opacity: 0.5,
+      cursor: 'not-allowed',
     },
   },
   error: {

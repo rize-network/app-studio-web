@@ -123,18 +123,16 @@ export const getButtonVariants = (
     borderStyle: 'solid',
     borderColor: 'transparent',
     _hover: {
-      transform: 'translateY(-1px)',
-      textDecoration: 'underline',
-      textUnderlineOffset: '1px',
-      textDecorationThickness: '1px',
+      opacity: 0.9,
     },
     _active: {
-      transform: 'translateY(-1px)',
-      textDecoration: 'underline',
-      textUnderlineOffset: '1px',
-      textDecorationThickness: '1px',
+      opacity: 0.95,
     },
-    transition: 'all 0.2s ease',
+    _focusVisible: {
+      outline: 'none',
+      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    },
+    transition: 'background-color 0.2s ease, opacity 0.2s ease',
   },
   outline: {
     backgroundColor: 'transparent',
@@ -144,21 +142,20 @@ export const getButtonVariants = (
     borderColor: color,
     _hover: {
       backgroundColor: color,
-      color: isLight ? 'light.black' : 'light.white',
-      transform: 'translateY(-1px)',
-      textDecoration: 'underline',
-      textUnderlineOffset: '1px',
-      textDecorationThickness: '1px',
+      color: isLight ? 'color.black' : 'color.white',
+      opacity: 0.9,
     },
     _active: {
       backgroundColor: color,
-      color: isLight ? 'light.black' : 'light.white',
-      transform: 'translateY(0)',
-      textDecoration: 'underline',
-      textUnderlineOffset: '1px',
-      textDecorationThickness: '1px',
+      color: isLight ? 'color.black' : 'color.white',
+      opacity: 0.95,
     },
-    transition: 'all 0.2s ease',
+    _focusVisible: {
+      outline: 'none',
+      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    },
+    transition:
+      'background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease',
   },
   ghost: {
     backgroundColor: 'transparent',
@@ -167,37 +164,39 @@ export const getButtonVariants = (
     borderStyle: 'none',
     borderColor: 'transparent',
     _hover: {
-      backgroundColor: color,
-      color: isLight ? 'light.black' : 'light.white',
-      transform: 'translateY(-1px)',
-      textDecoration: 'underline',
-      textUnderlineOffset: '1px',
-      textDecorationThickness: '1px',
+      backgroundColor: isLight ? 'color.gray.100' : 'color.gray.800',
+      opacity: 0.9,
     },
     _active: {
-      backgroundColor: color,
-      color: isLight ? 'light.black' : 'light.white',
-      transform: 'translateY(0)',
-      textDecoration: 'underline',
-      textUnderlineOffset: '1px',
-      textDecorationThickness: '1px',
+      backgroundColor: isLight ? 'color.gray.200' : 'color.gray.700',
+      opacity: 0.95,
     },
-    transition: 'all 0.2s ease',
+    _focusVisible: {
+      outline: 'none',
+      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    },
+    transition: 'background-color 0.2s ease, opacity 0.2s ease',
   },
   link: {
     backgroundColor: 'transparent',
-    color: isLight ? color : 'light.black',
+    color: isLight ? color : 'color.black',
     borderWidth: 0,
     borderStyle: 'none',
     borderColor: 'transparent',
     textDecoration: 'underline',
-    textUnderlineOffset: '1px',
+    textUnderlineOffset: '2px',
     textDecorationThickness: '1px',
     _hover: {
-      textDecorationThickness: '2px',
+      opacity: 0.8,
     },
-    _active: { textDecorationThickness: '2px' },
-    transition: 'all 0.2s ease',
+    _active: {
+      opacity: 0.9,
+    },
+    _focusVisible: {
+      outline: 'none',
+      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    },
+    transition: 'opacity 0.2s ease',
   },
   borderMoving: {
     position: 'relative',
@@ -207,6 +206,12 @@ export const getButtonVariants = (
     borderWidth: 0,
     borderStyle: 'none',
     borderColor: 'transparent',
+    _focusVisible: {
+      outline: 'none',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.8)',
+    },
+    transition: 'opacity 0.2s ease',
   },
   animatedStroke: {
     display: 'inline-block',
@@ -220,6 +225,11 @@ export const getButtonVariants = (
     borderWidth: 0,
     borderStyle: 'none',
     borderColor: 'transparent',
+    _focusVisible: {
+      outline: 'none',
+      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    },
+    transition: 'opacity 0.2s ease',
   },
 });
 
