@@ -18,12 +18,22 @@ import { Shape, Size, Variant } from './Input.type';
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: '8px', // Consistent with design system (rounded-md)
+    media: {
+      mobile: {
+        borderRadius: '6px',
+      },
+    },
   },
   sharp: {
     borderRadius: 0,
   },
   rounded: {
     borderRadius: '8px', // Consistent with design system (rounded-md)
+    media: {
+      mobile: {
+        borderRadius: '6px',
+      },
+    },
   },
   pillShaped: {
     borderRadius: '9999px', // Full rounded for pill shape
@@ -50,13 +60,21 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color.gray.200',
     backgroundColor: 'color.white',
-    transition: 'all 0.2s ease',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
     _hover: {
       borderColor: 'color.gray.300',
     },
     _focus: {
       borderColor: 'theme.primary',
-      boxShadow: '0 0 0 1px rgba(66, 153, 225, 0.2)',
+      outline: 'none',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
+    },
+    _focusVisible: {
+      borderColor: 'theme.primary',
+      outline: 'none',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
     },
   },
   default: {
@@ -66,18 +84,29 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderBottomColor: 'color.gray.200',
     borderRadius: 0,
     backgroundColor: 'color.white',
-    transition: 'all 0.2s ease',
+    transition: 'border-color 0.2s ease',
     _hover: {
       borderBottomColor: 'color.gray.300',
     },
     _focus: {
       borderBottomColor: 'theme.primary',
+      outline: 'none',
+    },
+    _focusVisible: {
+      borderBottomColor: 'theme.primary',
+      outline: 'none',
     },
   },
   none: {
     border: 'none',
     backgroundColor: 'transparent',
-    transition: 'all 0.2s ease',
+    transition: 'background-color 0.2s ease',
+    _focus: {
+      outline: 'none',
+    },
+    _focusVisible: {
+      outline: 'none',
+    },
   },
 };
 
@@ -89,6 +118,14 @@ export const PadddingWithLabel = {
   paddingBottom: '8px', // 2 × 4px grid
   paddingLeft: '16px', // 4 × 4px grid
   paddingRight: '16px', // 4 × 4px grid
+  media: {
+    mobile: {
+      paddingTop: '12px', // Smaller padding on mobile
+      paddingBottom: '6px',
+      paddingLeft: '12px',
+      paddingRight: '12px',
+    },
+  },
 };
 
 /**
@@ -99,4 +136,12 @@ export const PaddingWithoutLabel = {
   paddingBottom: '12px', // 3 × 4px grid
   paddingLeft: '16px', // 4 × 4px grid
   paddingRight: '16px', // 4 × 4px grid
+  media: {
+    mobile: {
+      paddingTop: '10px', // Smaller padding on mobile
+      paddingBottom: '10px',
+      paddingLeft: '12px',
+      paddingRight: '12px',
+    },
+  },
 };

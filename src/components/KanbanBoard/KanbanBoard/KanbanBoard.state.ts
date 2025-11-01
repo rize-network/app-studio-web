@@ -14,6 +14,8 @@ export const useKanbanBoardState = ({
   const [columns, setColumns] =
     useState<KanbanBoardProps['columns']>(initialColumns);
   const [draggedCardId, setDraggedCardId] = useState<string | null>(null);
+  const [hoveredColumnId, setHoveredColumnId] = useState<string | null>(null);
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
   const dragStateRef = useRef<DragState | null>(null);
 
   useEffect(() => {
@@ -93,6 +95,8 @@ export const useKanbanBoardState = ({
 
       dragStateRef.current = null;
       setDraggedCardId(null);
+      setHoveredColumnId(null);
+      setHoveredCardId(null);
     },
     [onChange]
   );
@@ -121,28 +125,34 @@ export const useKanbanBoardState = ({
   const handleCardDragEnd = useCallback(() => {
     dragStateRef.current = null;
     setDraggedCardId(null);
+    setHoveredColumnId(null);
+    setHoveredCardId(null);
   }, []);
 
   const handleColumnDragOver = useCallback(
-    (_columnId: string, event: React.DragEvent<HTMLDivElement>) => {
+    (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
       if (event.dataTransfer) {
         event.dataTransfer.dropEffect = 'move';
       }
+      setHoveredColumnId(columnId);
+      setHoveredCardId(null);
     },
     []
   );
 
   const handleCardDragOver = useCallback(
     (
-      _columnId: string,
-      _cardId: string | null,
+      columnId: string,
+      cardId: string | null,
       event: React.DragEvent<HTMLDivElement>
     ) => {
       event.preventDefault();
       if (event.dataTransfer) {
         event.dataTransfer.dropEffect = 'move';
       }
+      setHoveredColumnId(columnId);
+      setHoveredCardId(cardId);
     },
     []
   );
@@ -171,6 +181,8 @@ export const useKanbanBoardState = ({
   return {
     columns,
     draggedCardId,
+    hoveredColumnId,
+    hoveredCardId,
     onCardDragStart: handleCardDragStart,
     onCardDragEnd: handleCardDragEnd,
     onColumnDragOver: handleColumnDragOver,
