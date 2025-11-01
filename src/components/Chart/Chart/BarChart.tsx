@@ -1,5 +1,8 @@
 import React, { useMemo } from 'react';
 import { useTheme } from 'app-studio';
+import { View } from 'app-studio';
+import { Text } from '../../Text/Text';
+import { HoverCard } from '../../HoverCard/HoverCard';
 import { ChartData } from './Chart.type';
 import {
   BarStyles,
@@ -69,61 +72,39 @@ export const BarChart: React.FC<BarChartProps> = ({
   }, [maxValue]);
 
   return (
-    <svg width={width} height={height}>
-      {/* X-axis */}
-      <line
-        x1={padding.left}
-        y1={height - padding.bottom}
-        x2={width - padding.right}
-        y2={height - padding.bottom}
-        {...AxisStyles}
-        {...views?.axis}
-      />
+    <View position="relative" width={`${width}px`} height={`${height}px`}>
+      <svg width={width} height={height}>
+        {/* X-axis */}
+        <line
+          x1={padding.left}
+          y1={height - padding.bottom}
+          x2={width - padding.right}
+          y2={height - padding.bottom}
+          {...AxisStyles}
+          {...views?.axis}
+        />
 
-      {/* Y-axis */}
-      <line
-        x1={padding.left}
-        y1={padding.top}
-        x2={padding.left}
-        y2={height - padding.bottom}
-        {...AxisStyles}
-        {...views?.axis}
-      />
+        {/* Y-axis */}
+        <line
+          x1={padding.left}
+          y1={padding.top}
+          x2={padding.left}
+          y2={height - padding.bottom}
+          {...AxisStyles}
+          {...views?.axis}
+        />
 
-      {/* X-axis labels */}
-      {data.labels.map((label, index) => {
-        const x = padding.left + (index + 0.5) * groupWidth;
-        const y = height - padding.bottom + 20;
+        {/* X-axis labels */}
+        {data.labels.map((label, index) => {
+          const x = padding.left + (index + 0.5) * groupWidth;
+          const y = height - padding.bottom + 20;
 
-        return (
-          <text
-            key={`x-label-${index}`}
-            x={x}
-            y={y}
-            textAnchor="middle"
-            {...AxisLabelStyles}
-            {...views?.axisLabel}
-            style={{
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-              filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
-            }}
-          >
-            {label}
-          </text>
-        );
-      })}
-
-      {/* Y-axis labels and grid lines */}
-      {yAxisTicks.map((tick, index) => {
-        const y = height - padding.bottom - (tick / maxValue) * chartHeight;
-
-        return (
-          <React.Fragment key={`y-tick-${index}`}>
+          return (
             <text
-              x={padding.left - 10}
+              key={`x-label-${index}`}
+              x={x}
               y={y}
-              textAnchor="end"
-              dominantBaseline="middle"
+              textAnchor="middle"
               {...AxisLabelStyles}
               {...views?.axisLabel}
               style={{
@@ -131,26 +112,81 @@ export const BarChart: React.FC<BarChartProps> = ({
                 filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
               }}
             >
-              {tick.toFixed(0)}
+              {label}
             </text>
+          );
+        })}
 
-            {showGrid && (
-              <line
-                x1={padding.left}
-                y1={y}
-                x2={width - padding.right}
-                y2={y}
-                {...GridStyles}
-                {...views?.grid}
-              />
-            )}
+        {/* Y-axis labels and grid lines */}
+        {yAxisTicks.map((tick, index) => {
+          const y = height - padding.bottom - (tick / maxValue) * chartHeight;
+
+          return (
+            <React.Fragment key={`y-tick-${index}`}>
+              <text
+                x={padding.left - 10}
+                y={y}
+                textAnchor="end"
+                dominantBaseline="middle"
+                {...AxisLabelStyles}
+                {...views?.axisLabel}
+                style={{
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+                  filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
+                }}
+              >
+                {tick.toFixed(0)}
+              </text>
+
+              {showGrid && (
+                <line
+                  x1={padding.left}
+                  y1={y}
+                  x2={width - padding.right}
+                  y2={y}
+                  {...GridStyles}
+                  {...views?.grid}
+                />
+              )}
+            </React.Fragment>
+          );
+        })}
+
+        {/* Bars */}
+        {data.series.map((series, seriesIndex) => (
+          <React.Fragment key={`series-${seriesIndex}`}>
+            {series.data.map((value, dataIndex) => {
+              const barHeight =
+                (value / maxValue) * chartHeight * animationProgress;
+              const x =
+                padding.left +
+                dataIndex * groupWidth +
+                barSpacing * (seriesIndex + 1) +
+                barWidth * seriesIndex;
+              const y = height - padding.bottom - barHeight;
+
+              return (
+                <rect
+                  key={`bar-${seriesIndex}-${dataIndex}`}
+                  x={x}
+                  y={y}
+                  width={barWidth}
+                  height={barHeight}
+                  fill={series.color ? getColor(series.color) : 'black'}
+                  onClick={() => onBarClick && onBarClick(series.name, dataIndex)}
+                  {...BarStyles}
+                  {...views?.bar}
+                  style={{ pointerEvents: 'none' }}
+                />
+              );
+            })}
           </React.Fragment>
-        );
-      })}
+        ))}
+      </svg>
 
-      {/* Bars */}
+      {/* HoverCard overlays for each bar */}
       {data.series.map((series, seriesIndex) => (
-        <React.Fragment key={`series-${seriesIndex}`}>
+        <React.Fragment key={`hover-series-${seriesIndex}`}>
           {series.data.map((value, dataIndex) => {
             const barHeight =
               (value / maxValue) * chartHeight * animationProgress;
@@ -161,35 +197,34 @@ export const BarChart: React.FC<BarChartProps> = ({
               barWidth * seriesIndex;
             const y = height - padding.bottom - barHeight;
 
-            const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
-              showTooltip(e.clientX, e.clientY, tooltipContent);
-            };
-
-            const handleClick = () => {
-              if (onBarClick) {
-                onBarClick(series.name, dataIndex);
-              }
-            };
-
             return (
-              <rect
-                key={`bar-${seriesIndex}-${dataIndex}`}
-                x={x}
-                y={y}
-                width={barWidth}
-                height={barHeight}
-                fill={series.color ? getColor(series.color) : 'black'}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={hideTooltip}
-                onClick={handleClick}
-                {...BarStyles}
-                {...views?.bar}
-              />
+              <HoverCard key={`hover-${seriesIndex}-${dataIndex}`}>
+                <HoverCard.Trigger asChild>
+                  <View
+                    position="absolute"
+                    left={`${x}px`}
+                    top={`${y}px`}
+                    width={`${barWidth}px`}
+                    height={`${barHeight}px`}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => onBarClick && onBarClick(series.name, dataIndex)}
+                  />
+                </HoverCard.Trigger>
+                <HoverCard.Content side="top" align="center">
+                  <View>
+                    <Text fontWeight="bold" marginBottom="4px">
+                      {data.labels[dataIndex]}
+                    </Text>
+                    <Text fontSize="14px">
+                      {series.name}: {value}
+                    </Text>
+                  </View>
+                </HoverCard.Content>
+              </HoverCard>
             );
           })}
         </React.Fragment>
       ))}
-    </svg>
+    </View>
   );
 };
