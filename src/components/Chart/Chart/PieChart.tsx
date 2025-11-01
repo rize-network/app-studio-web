@@ -1,5 +1,7 @@
-import React, { useMemo, useRef, useEffect } from 'react';
-import { useTheme, useElementPosition } from 'app-studio';
+import React, { useMemo } from 'react';
+import { View, useTheme } from 'app-studio';
+import { Text } from '../../Text/Text';
+import { HoverCard } from '../../HoverCard/HoverCard';
 import { ChartDataPoint } from './Chart.type';
 import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
 
@@ -28,24 +30,6 @@ export const PieChart: React.FC<PieChartProps> = ({
 }) => {
   // Get theme color function
   const { getColor } = useTheme();
-
-  // Use useElementPosition for intelligent tooltip positioning
-  const { ref: positionRef, relation } = useElementPosition({
-    trackChanges: true,
-    trackOnHover: true,
-    trackOnScroll: true,
-    trackOnResize: true,
-  });
-
-  // Create a separate ref for the SVG element
-  const chartRef = useRef<SVGSVGElement>(null);
-
-  // Sync the position ref with the chart ref for positioning calculations
-  useEffect(() => {
-    if (chartRef.current && positionRef) {
-      (positionRef as any).current = chartRef.current;
-    }
-  }, [chartRef, positionRef]);
   // Calculate chart dimensions
   const size = Math.min(width, height);
   const radius = (size / 2) * 0.8;
@@ -150,94 +134,98 @@ export const PieChart: React.FC<PieChartProps> = ({
   ]);
 
   return (
-    <svg
-      ref={chartRef}
-      width={width}
-      height={height}
-      style={{ overflow: 'visible' }}
-    >
-      {/* Center circle for donut chart (rendered beneath slices so labels remain visible) */}
-      {isDonut && (
-        <circle
-          cx={centerX}
-          cy={centerY}
-          r={donutRadius}
-          fill="white"
-          pointerEvents="none"
-        />
-      )}
+    <View position="relative" width={`${width}px`} height={`${height}px`}>
+      <svg
+        width={width}
+        height={height}
+        style={{ overflow: 'visible' }}
+      >
+        {/* Center circle for donut chart (rendered beneath slices so labels remain visible) */}
+        {isDonut && (
+          <circle
+            cx={centerX}
+            cy={centerY}
+            r={donutRadius}
+            fill="white"
+            pointerEvents="none"
+          />
+        )}
 
-      {/* Pie slices */}
+        {/* Pie slices */}
+        {slices.map((slice, index) => {
+          return (
+            <g key={`slice-${index}`}>
+              <path
+                d={slice.path}
+                fill={slice.color}
+                onClick={() => onSliceClick && onSliceClick(dataPoints[slice.index], slice.index)}
+                {...PieSliceStyles}
+                {...views?.pie}
+                style={{ pointerEvents: 'none' }}
+              />
+
+              {/* Only show labels for slices that are big enough */}
+              {slice.endAngle - slice.startAngle > 0.2 && (
+                <text
+                  x={slice.labelX}
+                  y={slice.labelY}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fill="white"
+                  fontWeight="bold"
+                  pointerEvents="none"
+                  style={{
+                    textShadow:
+                      '0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3)',
+                    filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
+                  }}
+                >
+                  {slice.percentage}
+                </text>
+              )}
+            </g>
+          );
+        })}
+      </svg>
+
+      {/* HoverCard overlays for each slice */}
       {slices.map((slice, index) => {
-        const handleMouseEnter = (e: React.MouseEvent) => {
-          const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
-
-          // Use intelligent positioning based on useElementPosition relation data
-          let x = e.clientX;
-          let y = e.clientY;
-
-          if (relation && chartRef.current) {
-            const chartRect = chartRef.current.getBoundingClientRect();
-            const relativeX = e.clientX - chartRect.left;
-            const relativeY = e.clientY - chartRect.top;
-
-            // Adjust tooltip position based on available space
-            if (relation.space.horizontal === 'left') {
-              x = e.clientX - 100; // Offset tooltip to the left
-            } else {
-              x = e.clientX + 10; // Offset tooltip to the right
-            }
-
-            if (relation.space.vertical === 'top') {
-              y = e.clientY - 30; // Offset tooltip above
-            } else {
-              y = e.clientY + 10; // Offset tooltip below
-            }
-          }
-
-          showTooltip(x, y, tooltipContent);
-        };
-
-        const handleClick = () => {
-          if (onSliceClick) {
-            onSliceClick(dataPoints[slice.index], slice.index);
-          }
-        };
+        // Calculate the middle angle and a point on the slice for the trigger position
+        const midAngle = (slice.startAngle + slice.endAngle) / 2;
+        const triggerRadius = isDonut ? (radius + donutRadius) / 2 : radius * 0.65;
+        const triggerX = centerX + Math.cos(midAngle) * triggerRadius;
+        const triggerY = centerY + Math.sin(midAngle) * triggerRadius;
+        const triggerSize = 40; // Size of the hover trigger area
 
         return (
-          <g key={`slice-${index}`}>
-            <path
-              d={slice.path}
-              fill={slice.color}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={hideTooltip}
-              onClick={handleClick}
-              {...PieSliceStyles}
-              {...views?.pie}
-            />
-
-            {/* Only show labels for slices that are big enough */}
-            {slice.endAngle - slice.startAngle > 0.2 && (
-              <text
-                x={slice.labelX}
-                y={slice.labelY}
-                textAnchor="middle"
-                dominantBaseline="middle"
-                fill="white"
-                fontWeight="bold"
-                pointerEvents="none"
-                style={{
-                  textShadow:
-                    '0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3)',
-                  filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
-                }}
-              >
-                {slice.percentage}
-              </text>
-            )}
-          </g>
+          <HoverCard key={`hover-${index}`}>
+            <HoverCard.Trigger asChild>
+              <View
+                position="absolute"
+                left={`${triggerX - triggerSize / 2}px`}
+                top={`${triggerY - triggerSize / 2}px`}
+                width={`${triggerSize}px`}
+                height={`${triggerSize}px`}
+                style={{ cursor: 'pointer' }}
+                onClick={() => onSliceClick && onSliceClick(dataPoints[slice.index], slice.index)}
+              />
+            </HoverCard.Trigger>
+            <HoverCard.Content side="top" align="center">
+              <View>
+                <Text fontWeight="bold" marginBottom="4px">
+                  {slice.label}
+                </Text>
+                <Text fontSize="14px">
+                  Value: {slice.value}
+                </Text>
+                <Text fontSize="14px" color="gray">
+                  {slice.percentage}
+                </Text>
+              </View>
+            </HoverCard.Content>
+          </HoverCard>
         );
       })}
-    </svg>
+    </View>
   );
 };

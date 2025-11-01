@@ -1,4 +1,7 @@
 import React, { useMemo } from 'react';
+import { View, useTheme } from 'app-studio';
+import { Text } from '../../Text/Text';
+import { HoverCard } from '../../HoverCard/HoverCard';
 import { ChartData } from './Chart.type';
 import {
   LineStyles,
@@ -7,7 +10,6 @@ import {
   AxisLabelStyles,
   GridStyles,
 } from './Chart.style';
-import { useTheme } from 'app-studio';
 
 interface LineChartProps {
   data: ChartData;
@@ -96,62 +98,40 @@ export const LineChart: React.FC<LineChartProps> = ({
   };
 
   return (
-    <svg width={width} height={height}>
-      {/* X-axis */}
-      <line
-        x1={padding.left}
-        y1={height - padding.bottom}
-        x2={width - padding.right}
-        y2={height - padding.bottom}
-        {...AxisStyles}
-        {...views?.axis}
-      />
+    <View position="relative" width={`${width}px`} height={`${height}px`}>
+      <svg width={width} height={height}>
+        {/* X-axis */}
+        <line
+          x1={padding.left}
+          y1={height - padding.bottom}
+          x2={width - padding.right}
+          y2={height - padding.bottom}
+          {...AxisStyles}
+          {...views?.axis}
+        />
 
-      {/* Y-axis */}
-      <line
-        x1={padding.left}
-        y1={padding.top}
-        x2={padding.left}
-        y2={height - padding.bottom}
-        {...AxisStyles}
-        {...views?.axis}
-      />
+        {/* Y-axis */}
+        <line
+          x1={padding.left}
+          y1={padding.top}
+          x2={padding.left}
+          y2={height - padding.bottom}
+          {...AxisStyles}
+          {...views?.axis}
+        />
 
-      {/* X-axis labels */}
-      {data.labels.map((label, index) => {
-        const x =
-          padding.left + (index / (data.labels.length - 1)) * chartWidth;
-        const y = height - padding.bottom + 20;
+        {/* X-axis labels */}
+        {data.labels.map((label, index) => {
+          const x =
+            padding.left + (index / (data.labels.length - 1)) * chartWidth;
+          const y = height - padding.bottom + 20;
 
-        return (
-          <text
-            key={`x-label-${index}`}
-            x={x}
-            y={y}
-            textAnchor="middle"
-            {...AxisLabelStyles}
-            {...views?.axisLabel}
-            style={{
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-              filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
-            }}
-          >
-            {label}
-          </text>
-        );
-      })}
-
-      {/* Y-axis labels and grid lines */}
-      {yAxisTicks.map((tick, index) => {
-        const y = height - padding.bottom - (tick / maxValue) * chartHeight;
-
-        return (
-          <React.Fragment key={`y-tick-${index}`}>
+          return (
             <text
-              x={padding.left - 10}
+              key={`x-label-${index}`}
+              x={x}
               y={y}
-              textAnchor="end"
-              dominantBaseline="middle"
+              textAnchor="middle"
               {...AxisLabelStyles}
               {...views?.axisLabel}
               style={{
@@ -159,43 +139,95 @@ export const LineChart: React.FC<LineChartProps> = ({
                 filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
               }}
             >
-              {tick.toFixed(0)}
+              {label}
             </text>
+          );
+        })}
 
-            {showGrid && (
-              <line
-                x1={padding.left}
-                y1={y}
-                x2={width - padding.right}
-                y2={y}
-                {...GridStyles}
-                {...views?.grid}
-              />
-            )}
+        {/* Y-axis labels and grid lines */}
+        {yAxisTicks.map((tick, index) => {
+          const y = height - padding.bottom - (tick / maxValue) * chartHeight;
+
+          return (
+            <React.Fragment key={`y-tick-${index}`}>
+              <text
+                x={padding.left - 10}
+                y={y}
+                textAnchor="end"
+                dominantBaseline="middle"
+                {...AxisLabelStyles}
+                {...views?.axisLabel}
+                style={{
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+                  filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
+                }}
+              >
+                {tick.toFixed(0)}
+              </text>
+
+              {showGrid && (
+                <line
+                  x1={padding.left}
+                  y1={y}
+                  x2={width - padding.right}
+                  y2={y}
+                  {...GridStyles}
+                  {...views?.grid}
+                />
+              )}
+            </React.Fragment>
+          );
+        })}
+
+        {/* Lines and points */}
+        {data.series.map((series, seriesIndex) => (
+          <React.Fragment key={`series-${seriesIndex}`}>
+            {/* Area fill (if needed) */}
+            <path
+              d={generateAreaPath(series.data)}
+              fill={series.color ? getColor(series.color) : 'black'}
+              opacity={0.1}
+              {...views?.area}
+            />
+
+            {/* Line */}
+            <path
+              d={generatePath(series.data)}
+              stroke={series.color ? getColor(series.color) : 'black'}
+              {...LineStyles}
+              {...views?.line}
+            />
+
+            {/* Points */}
+            {series.data.map((value, dataIndex) => {
+              const x =
+                padding.left +
+                (dataIndex / (data.labels.length - 1)) * chartWidth;
+              const y =
+                height -
+                padding.bottom -
+                (value / maxValue) * chartHeight * animationProgress;
+
+              return (
+                <circle
+                  key={`point-${seriesIndex}-${dataIndex}`}
+                  cx={x}
+                  cy={y}
+                  fill={series.color}
+                  onClick={() => onPointClick && onPointClick(series.name, dataIndex)}
+                  {...PointStyles}
+                  {...views?.point}
+                  style={{ pointerEvents: 'none' }}
+                />
+              );
+            })}
           </React.Fragment>
-        );
-      })}
+        ))}
+      </svg>
 
-      {/* Lines and points */}
+      {/* HoverCard overlays for each point */}
       {data.series.map((series, seriesIndex) => (
-        <React.Fragment key={`series-${seriesIndex}`}>
-          {/* Area fill (if needed) */}
-          <path
-            d={generateAreaPath(series.data)}
-            fill={series.color ? getColor(series.color) : 'black'}
-            opacity={0.1}
-            {...views?.area}
-          />
-
-          {/* Line */}
-          <path
-            d={generatePath(series.data)}
-            stroke={series.color ? getColor(series.color) : 'black'}
-            {...LineStyles}
-            {...views?.line}
-          />
-
-          {/* Points */}
+        <React.Fragment key={`hover-series-${seriesIndex}`}>
           {series.data.map((value, dataIndex) => {
             const x =
               padding.left +
@@ -205,33 +237,38 @@ export const LineChart: React.FC<LineChartProps> = ({
               padding.bottom -
               (value / maxValue) * chartHeight * animationProgress;
 
-            const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
-              showTooltip(e.clientX, e.clientY, tooltipContent);
-            };
-
-            const handleClick = () => {
-              if (onPointClick) {
-                onPointClick(series.name, dataIndex);
-              }
-            };
+            // Get the point radius from PointStyles (default is 4)
+            const pointRadius = PointStyles.r || 4;
+            const triggerSize = pointRadius * 3; // Make trigger area larger for easier hovering
 
             return (
-              <circle
-                key={`point-${seriesIndex}-${dataIndex}`}
-                cx={x}
-                cy={y}
-                fill={series.color}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={hideTooltip}
-                onClick={handleClick}
-                {...PointStyles}
-                {...views?.point}
-              />
+              <HoverCard key={`hover-${seriesIndex}-${dataIndex}`}>
+                <HoverCard.Trigger asChild>
+                  <View
+                    position="absolute"
+                    left={`${x - triggerSize}px`}
+                    top={`${y - triggerSize}px`}
+                    width={`${triggerSize * 2}px`}
+                    height={`${triggerSize * 2}px`}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => onPointClick && onPointClick(series.name, dataIndex)}
+                  />
+                </HoverCard.Trigger>
+                <HoverCard.Content side="top" align="center">
+                  <View>
+                    <Text fontWeight="bold" marginBottom="4px">
+                      {data.labels[dataIndex]}
+                    </Text>
+                    <Text fontSize="14px">
+                      {series.name}: {value}
+                    </Text>
+                  </View>
+                </HoverCard.Content>
+              </HoverCard>
             );
           })}
         </React.Fragment>
       ))}
-    </svg>
+    </View>
   );
 };
