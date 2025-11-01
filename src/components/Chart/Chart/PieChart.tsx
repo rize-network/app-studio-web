@@ -210,6 +210,11 @@ export const PieChart: React.FC<PieChartProps> = ({
                 fill="white"
                 fontWeight="bold"
                 pointerEvents="none"
+                style={{
+                  textShadow:
+                    '0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3)',
+                  filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
+                }}
               >
                 {slice.percentage}
               </text>

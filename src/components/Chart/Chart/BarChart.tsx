@@ -103,6 +103,10 @@ export const BarChart: React.FC<BarChartProps> = ({
             textAnchor="middle"
             {...AxisLabelStyles}
             {...views?.axisLabel}
+            style={{
+              textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+              filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
+            }}
           >
             {label}
           </text>
@@ -122,6 +126,10 @@ export const BarChart: React.FC<BarChartProps> = ({
               dominantBaseline="middle"
               {...AxisLabelStyles}
               {...views?.axisLabel}
+              style={{
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+                filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
+              }}
             >
               {tick.toFixed(0)}
             </text>

@@ -180,11 +180,39 @@ export const ChartView: React.FC<ChartProps> = ({
   const renderTooltip = () => {
     if (!showTooltips || !tooltip.visible) return null;
 
+    // Calculate tooltip position with boundary checking
+    const tooltipWidth = 200; // Approximate tooltip width
+    const tooltipHeight = 40; // Approximate tooltip height
+    const offset = 10; // Offset from cursor
+
+    let left = tooltip.x + offset;
+    let top = tooltip.y - tooltipHeight - offset;
+
+    // Check right boundary
+    if (left + tooltipWidth > window.innerWidth) {
+      left = tooltip.x - tooltipWidth - offset;
+    }
+
+    // Check left boundary
+    if (left < 0) {
+      left = offset;
+    }
+
+    // Check top boundary
+    if (top < 0) {
+      top = tooltip.y + offset;
+    }
+
+    // Check bottom boundary
+    if (top + tooltipHeight > window.innerHeight) {
+      top = window.innerHeight - tooltipHeight - offset;
+    }
+
     return (
       <View
         position="fixed"
-        left={`${tooltip.x}px`}
-        top={`${tooltip.y - 40}px`}
+        left={`${left}px`}
+        top={`${top}px`}
         {...TooltipStyles}
         {...views?.tooltip}
       >
