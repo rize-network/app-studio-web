@@ -161,8 +161,13 @@ export const BarChart: React.FC<BarChartProps> = ({
               barWidth * seriesIndex;
             const y = height - padding.bottom - barHeight;
 
+            const tooltipContent = `${series.name}: ${value}`;
+
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
+              showTooltip(e.clientX, e.clientY, tooltipContent);
+            };
+
+            const handleMouseMove = (e: React.MouseEvent) => {
               showTooltip(e.clientX, e.clientY, tooltipContent);
             };
 
@@ -182,6 +187,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                 fill={series.color ? getColor(series.color) : 'black'}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={hideTooltip}
+                onMouseMove={handleMouseMove}
                 onClick={handleClick}
                 {...BarStyles}
                 {...views?.bar}

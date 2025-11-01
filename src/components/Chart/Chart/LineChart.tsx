@@ -205,8 +205,13 @@ export const LineChart: React.FC<LineChartProps> = ({
               padding.bottom -
               (value / maxValue) * chartHeight * animationProgress;
 
+            const tooltipContent = `${series.name}: ${value}`;
+
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
+              showTooltip(e.clientX, e.clientY, tooltipContent);
+            };
+
+            const handleMouseMove = (e: React.MouseEvent) => {
               showTooltip(e.clientX, e.clientY, tooltipContent);
             };
 
@@ -224,6 +229,7 @@ export const LineChart: React.FC<LineChartProps> = ({
                 fill={series.color}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={hideTooltip}
+                onMouseMove={handleMouseMove}
                 onClick={handleClick}
                 {...PointStyles}
                 {...views?.point}

@@ -1,5 +1,5 @@
-import React, { useMemo, useRef, useEffect } from 'react';
-import { useTheme, useElementPosition } from 'app-studio';
+import React, { useMemo } from 'react';
+import { useTheme } from 'app-studio';
 import { ChartDataPoint } from './Chart.type';
 import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
 
@@ -29,23 +29,6 @@ export const PieChart: React.FC<PieChartProps> = ({
   // Get theme color function
   const { getColor } = useTheme();
 
-  // Use useElementPosition for intelligent tooltip positioning
-  const { ref: positionRef, relation } = useElementPosition({
-    trackChanges: true,
-    trackOnHover: true,
-    trackOnScroll: true,
-    trackOnResize: true,
-  });
-
-  // Create a separate ref for the SVG element
-  const chartRef = useRef<SVGSVGElement>(null);
-
-  // Sync the position ref with the chart ref for positioning calculations
-  useEffect(() => {
-    if (chartRef.current && positionRef) {
-      (positionRef as any).current = chartRef.current;
-    }
-  }, [chartRef, positionRef]);
   // Calculate chart dimensions
   const size = Math.min(width, height);
   const radius = (size / 2) * 0.8;
@@ -150,36 +133,17 @@ export const PieChart: React.FC<PieChartProps> = ({
   ]);
 
   return (
-    <svg ref={chartRef} width={width} height={height}>
+    <svg width={width} height={height} style={{ overflow: 'visible' }}>
       {/* Pie slices */}
       {slices.map((slice, index) => {
+        const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
+
         const handleMouseEnter = (e: React.MouseEvent) => {
-          const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
+          showTooltip(e.clientX, e.clientY, tooltipContent);
+        };
 
-          // Use intelligent positioning based on useElementPosition relation data
-          let x = e.clientX;
-          let y = e.clientY;
-
-          if (relation && chartRef.current) {
-            const chartRect = chartRef.current.getBoundingClientRect();
-            const relativeX = e.clientX - chartRect.left;
-            const relativeY = e.clientY - chartRect.top;
-
-            // Adjust tooltip position based on available space
-            if (relation.space.horizontal === 'left') {
-              x = e.clientX - 100; // Offset tooltip to the left
-            } else {
-              x = e.clientX + 10; // Offset tooltip to the right
-            }
-
-            if (relation.space.vertical === 'top') {
-              y = e.clientY - 30; // Offset tooltip above
-            } else {
-              y = e.clientY + 10; // Offset tooltip below
-            }
-          }
-
-          showTooltip(x, y, tooltipContent);
+        const handleMouseMove = (e: React.MouseEvent) => {
+          showTooltip(e.clientX, e.clientY, tooltipContent);
         };
 
         const handleClick = () => {
@@ -195,6 +159,7 @@ export const PieChart: React.FC<PieChartProps> = ({
               fill={slice.color}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={hideTooltip}
+              onMouseMove={handleMouseMove}
               onClick={handleClick}
               {...PieSliceStyles}
               {...views?.pie}
