@@ -10,6 +10,8 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   renderEmptyState,
   views,
   draggedCardId,
+  hoveredColumnId,
+  hoveredCardId,
   onCardDragStart,
   onCardDragEnd,
   onColumnDragOver,
@@ -75,6 +77,31 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
             minHeight={40}
             onDragOver={(event) => onColumnDragOver(column.id, event)}
             onDrop={(event) => onColumnDrop(column.id, event)}
+            borderWidth={
+              draggedCardId && hoveredColumnId === column.id ? '2px' : undefined
+            }
+            borderStyle={
+              draggedCardId && hoveredColumnId === column.id
+                ? 'dashed'
+                : undefined
+            }
+            borderColor={
+              draggedCardId && hoveredColumnId === column.id
+                ? '#7F56D9'
+                : undefined
+            }
+            borderRadius={
+              draggedCardId && hoveredColumnId === column.id ? 8 : undefined
+            }
+            backgroundColor={
+              draggedCardId && hoveredColumnId === column.id
+                ? 'rgba(127, 86, 217, 0.05)'
+                : undefined
+            }
+            padding={
+              draggedCardId && hoveredColumnId === column.id ? 8 : undefined
+            }
+            transition="all 0.15s ease-in-out"
             {...views?.columnBody}
           >
             {column.cards.length === 0 && (
@@ -101,28 +128,43 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
             )}
 
             {column.cards.map((card) => (
-              <View
-                key={card.id}
-                draggable
-                cursor="grab"
-                backgroundColor="#ffffff"
-                borderRadius={10}
-                padding="12px"
-                boxShadow="0 1px 2px 0 rgba(16, 24, 40, 0.08)"
-                opacity={draggedCardId === card.id ? 0.6 : 1}
-                onDragStart={(event) =>
-                  onCardDragStart(column.id, card.id, event)
-                }
-                onDragEnd={onCardDragEnd}
-                onDragOver={(event) =>
-                  onCardDragOver(column.id, card.id, event)
-                }
-                onDrop={(event) => onCardDrop(column.id, card.id, event)}
-                {...views?.card}
-              >
-                {renderCard
-                  ? renderCard(card, column)
-                  : renderDefaultCard(card)}
+              <View key={card.id} position="relative">
+                {draggedCardId &&
+                  hoveredCardId === card.id &&
+                  draggedCardId !== card.id && (
+                    <View
+                      position="absolute"
+                      top={-6}
+                      left={0}
+                      right={0}
+                      height={3}
+                      backgroundColor="#7F56D9"
+                      borderRadius={2}
+                      zIndex={10}
+                    />
+                  )}
+                <View
+                  draggable
+                  cursor="grab"
+                  backgroundColor="#ffffff"
+                  borderRadius={10}
+                  padding="12px"
+                  boxShadow="0 1px 2px 0 rgba(16, 24, 40, 0.08)"
+                  opacity={draggedCardId === card.id ? 0.6 : 1}
+                  onDragStart={(event) =>
+                    onCardDragStart(column.id, card.id, event)
+                  }
+                  onDragEnd={onCardDragEnd}
+                  onDragOver={(event) =>
+                    onCardDragOver(column.id, card.id, event)
+                  }
+                  onDrop={(event) => onCardDrop(column.id, card.id, event)}
+                  {...views?.card}
+                >
+                  {renderCard
+                    ? renderCard(card, column)
+                    : renderDefaultCard(card)}
+                </View>
               </View>
             ))}
           </Vertical>
