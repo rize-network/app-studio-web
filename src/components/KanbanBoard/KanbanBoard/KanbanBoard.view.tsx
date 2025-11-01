@@ -12,6 +12,7 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   draggedCardId,
   hoveredColumnId,
   hoveredCardId,
+  hoveredCardPosition,
   onCardDragStart,
   onCardDragEnd,
   onColumnDragOver,
@@ -127,46 +128,77 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
               </View>
             )}
 
-            {column.cards.map((card) => (
-              <View key={card.id} position="relative">
-                {draggedCardId &&
-                  hoveredCardId === card.id &&
-                  draggedCardId !== card.id && (
+            {column.cards.map((card) => {
+              const isCardDropTarget =
+                Boolean(draggedCardId) &&
+                hoveredCardId === card.id &&
+                draggedCardId !== card.id;
+              const showTopIndicator =
+                isCardDropTarget && hoveredCardPosition === 'above';
+              const showBottomIndicator =
+                isCardDropTarget && hoveredCardPosition === 'below';
+
+              return (
+                <View key={card.id}>
+                  {showTopIndicator && (
                     <View
-                      position="absolute"
-                      top={-6}
-                      left={0}
-                      right={0}
-                      height={3}
+                      height={4}
+                      borderRadius={9999}
                       backgroundColor="#7F56D9"
-                      borderRadius={2}
-                      zIndex={10}
+                      marginBottom={8}
+                      boxShadow="0 0 0 1px rgba(127, 86, 217, 0.35)"
                     />
                   )}
-                <View
-                  draggable
-                  cursor="grab"
-                  backgroundColor="#ffffff"
-                  borderRadius={10}
-                  padding="12px"
-                  boxShadow="0 1px 2px 0 rgba(16, 24, 40, 0.08)"
-                  opacity={draggedCardId === card.id ? 0.6 : 1}
-                  onDragStart={(event) =>
-                    onCardDragStart(column.id, card.id, event)
-                  }
-                  onDragEnd={onCardDragEnd}
-                  onDragOver={(event) =>
-                    onCardDragOver(column.id, card.id, event)
-                  }
-                  onDrop={(event) => onCardDrop(column.id, card.id, event)}
-                  {...views?.card}
-                >
-                  {renderCard
-                    ? renderCard(card, column)
-                    : renderDefaultCard(card)}
+                  <View
+                    draggable
+                    cursor="grab"
+                    backgroundColor="#ffffff"
+                    borderRadius={10}
+                    padding="12px"
+                    boxShadow={
+                      isCardDropTarget
+                        ? '0 0 0 2px rgba(127, 86, 217, 0.35), 0 1px 4px rgba(15, 23, 42, 0.12)'
+                        : '0 1px 2px 0 rgba(16, 24, 40, 0.08)'
+                    }
+                    opacity={draggedCardId === card.id ? 0.6 : 1}
+                    transition="box-shadow 0.15s ease-in-out"
+                    onDragStart={(event) =>
+                      onCardDragStart(column.id, card.id, event)
+                    }
+                    onDragEnd={onCardDragEnd}
+                    onDragOver={(event) =>
+                      onCardDragOver(column.id, card.id, event)
+                    }
+                    onDrop={(event) => onCardDrop(column.id, card.id, event)}
+                    {...views?.card}
+                  >
+                    {renderCard
+                      ? renderCard(card, column)
+                      : renderDefaultCard(card)}
+                  </View>
+                  {showBottomIndicator && (
+                    <View
+                      height={4}
+                      borderRadius={9999}
+                      backgroundColor="#7F56D9"
+                      marginTop={8}
+                      boxShadow="0 0 0 1px rgba(127, 86, 217, 0.35)"
+                    />
+                  )}
                 </View>
-              </View>
-            ))}
+              );
+            })}
+
+            {draggedCardId &&
+              hoveredColumnId === column.id &&
+              hoveredCardId === null && (
+                <View
+                  height={4}
+                  borderRadius={9999}
+                  backgroundColor="#7F56D9"
+                  boxShadow="0 0 0 1px rgba(127, 86, 217, 0.35)"
+                />
+              )}
           </Vertical>
 
           {column.footer && (

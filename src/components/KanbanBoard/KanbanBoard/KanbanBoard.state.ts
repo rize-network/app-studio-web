@@ -16,6 +16,9 @@ export const useKanbanBoardState = ({
   const [draggedCardId, setDraggedCardId] = useState<string | null>(null);
   const [hoveredColumnId, setHoveredColumnId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+  const [hoveredCardPosition, setHoveredCardPosition] = useState<
+    'above' | 'below' | null
+  >(null);
   const dragStateRef = useRef<DragState | null>(null);
 
   useEffect(() => {
@@ -23,7 +26,11 @@ export const useKanbanBoardState = ({
   }, [initialColumns]);
 
   const commitMove = useCallback(
-    (targetColumnId: string, targetCardId: string | null) => {
+    (
+      targetColumnId: string,
+      targetCardId: string | null,
+      position: 'above' | 'below' | null
+    ) => {
       const dragState = dragStateRef.current;
       if (!dragState) return;
 
@@ -35,6 +42,9 @@ export const useKanbanBoardState = ({
       ) {
         dragStateRef.current = null;
         setDraggedCardId(null);
+        setHoveredColumnId(null);
+        setHoveredCardId(null);
+        setHoveredCardPosition(null);
         return;
       }
 
@@ -67,17 +77,19 @@ export const useKanbanBoardState = ({
 
         let targetIndex = targetColumn.cards.length;
 
+        let effectivePosition: 'above' | 'below' | null = position;
+        if (targetCardId && !effectivePosition) {
+          effectivePosition = 'below';
+        }
+
         if (targetCardId) {
           const foundIndex = targetColumn.cards.findIndex(
             (item) => item.id === targetCardId
           );
 
           if (foundIndex !== -1) {
-            targetIndex = foundIndex;
-
-            if (targetColumnId === sourceColumnId && foundIndex > sourceIndex) {
-              targetIndex = foundIndex - 1;
-            }
+            targetIndex =
+              effectivePosition === 'below' ? foundIndex + 1 : foundIndex;
           }
         }
 
@@ -97,6 +109,7 @@ export const useKanbanBoardState = ({
       setDraggedCardId(null);
       setHoveredColumnId(null);
       setHoveredCardId(null);
+      setHoveredCardPosition(null);
     },
     [onChange]
   );
@@ -127,6 +140,7 @@ export const useKanbanBoardState = ({
     setDraggedCardId(null);
     setHoveredColumnId(null);
     setHoveredCardId(null);
+    setHoveredCardPosition(null);
   }, []);
 
   const handleColumnDragOver = useCallback(
@@ -137,6 +151,7 @@ export const useKanbanBoardState = ({
       }
       setHoveredColumnId(columnId);
       setHoveredCardId(null);
+      setHoveredCardPosition(null);
     },
     []
   );
@@ -153,6 +168,15 @@ export const useKanbanBoardState = ({
       }
       setHoveredColumnId(columnId);
       setHoveredCardId(cardId);
+
+      if (cardId) {
+        const boundingRect = event.currentTarget.getBoundingClientRect();
+        const offsetY = event.clientY - boundingRect.top;
+        const position = offsetY < boundingRect.height / 2 ? 'above' : 'below';
+        setHoveredCardPosition(position);
+      } else {
+        setHoveredCardPosition(null);
+      }
     },
     []
   );
@@ -160,7 +184,7 @@ export const useKanbanBoardState = ({
   const handleColumnDrop = useCallback(
     (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
-      commitMove(columnId, null);
+      commitMove(columnId, null, null);
     },
     [commitMove]
   );
@@ -173,9 +197,18 @@ export const useKanbanBoardState = ({
     ) => {
       event.preventDefault();
       event.stopPropagation();
-      commitMove(columnId, cardId);
+
+      let dropPosition: 'above' | 'below' | null = hoveredCardPosition;
+
+      if (cardId) {
+        const boundingRect = event.currentTarget.getBoundingClientRect();
+        const offsetY = event.clientY - boundingRect.top;
+        dropPosition = offsetY < boundingRect.height / 2 ? 'above' : 'below';
+      }
+
+      commitMove(columnId, cardId, dropPosition);
     },
-    [commitMove]
+    [commitMove, hoveredCardPosition]
   );
 
   return {
@@ -183,6 +216,7 @@ export const useKanbanBoardState = ({
     draggedCardId,
     hoveredColumnId,
     hoveredCardId,
+    hoveredCardPosition,
     onCardDragStart: handleCardDragStart,
     onCardDragEnd: handleCardDragEnd,
     onColumnDragOver: handleColumnDragOver,
