@@ -78,29 +78,11 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
             minHeight={40}
             onDragOver={(event) => onColumnDragOver(column.id, event)}
             onDrop={(event) => onColumnDrop(column.id, event)}
-            borderWidth={
-              draggedCardId && hoveredColumnId === column.id ? '2px' : undefined
-            }
-            borderStyle={
-              draggedCardId && hoveredColumnId === column.id
-                ? 'dashed'
-                : undefined
-            }
-            borderColor={
-              draggedCardId && hoveredColumnId === column.id
-                ? '#7F56D9'
-                : undefined
-            }
-            borderRadius={
-              draggedCardId && hoveredColumnId === column.id ? 8 : undefined
-            }
-            backgroundColor={
-              draggedCardId && hoveredColumnId === column.id
-                ? 'rgba(127, 86, 217, 0.05)'
-                : undefined
+            opacity={
+              draggedCardId && hoveredColumnId === column.id ? 0.8 : undefined
             }
             padding={
-              draggedCardId && hoveredColumnId === column.id ? 8 : undefined
+              draggedCardId && hoveredColumnId === column.id ? 4 : undefined
             }
             position="relative"
             transition="all 0.15s ease-in-out"
@@ -115,7 +97,7 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                   left={-8}
                   right={-8}
                   height={3}
-                  backgroundColor="#7F56D9"
+                  backgroundColor="theme.primary"
                   borderRadius={2}
                   top={hoveredCardPosition === 'before' ? -6 : undefined}
                   bottom={hoveredCardPosition === 'after' ? -6 : undefined}
@@ -156,7 +138,7 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                       left={-8}
                       right={-8}
                       height={3}
-                      backgroundColor="#7F56D9"
+                      backgroundColor="theme.primary"
                       borderRadius={2}
                       zIndex={10}
                       top={hoveredCardPosition === 'before' ? -6 : undefined}
