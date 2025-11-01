@@ -59,6 +59,7 @@ const BadgeView: React.FC<BadgeProps> = ({
         textAlign="center"
         {...views?.text}
         color={combinedStyles.color}
+        bgColor={combinedStyles.backgroundColor}
       >
         {content || ''}
       </Text>

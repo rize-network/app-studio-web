@@ -89,6 +89,7 @@ export const AlertView = ({
           fontWeight="600" // Semi-bold
           lineHeight="24px"
           color={themes[variant].content.color}
+          bgColor={themes[variant].container.backgroundColor}
           {...views?.title}
         >
           {title}
@@ -99,6 +100,7 @@ export const AlertView = ({
           fontWeight="400" // Regular
           lineHeight="20px"
           color={themes[variant].content.color}
+          bgColor={themes[variant].container.backgroundColor}
           {...views?.description}
         >
           {description || children}

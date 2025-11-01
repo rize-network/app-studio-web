@@ -104,6 +104,7 @@ export const ToastView: React.FC<ToastProps> = ({
           fontWeight="600" // Semi-bold for better readability
           color={Theme[variant].content.color}
           lineHeight="1.4"
+          bgColor={Theme[variant].container.backgroundColor}
           {...views?.title}
         >
           {title}
@@ -115,6 +116,7 @@ export const ToastView: React.FC<ToastProps> = ({
             color={Theme[variant].content.color}
             fontWeight="400" // Regular weight
             lineHeight="1.5"
+            bgColor={Theme[variant].container.backgroundColor}
             {...views?.description}
           >
             {description}
@@ -128,6 +130,7 @@ export const ToastView: React.FC<ToastProps> = ({
             marginTop="8px" // 2 × 4px grid
             cursor="pointer"
             color={Theme[variant].content.color}
+            bgColor={Theme[variant].container.backgroundColor}
             onClick={(e: React.MouseEvent) => {
               e.stopPropagation();
               action();
