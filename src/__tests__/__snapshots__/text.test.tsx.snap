@@ -2,26 +2,21 @@
 
 exports[`should render a subscript text to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU FxXNY"
-  fontSize={14}
+  className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none"
   fontStyle="normal"
-  fontWeight={400}
   role="text"
-  textDecoration="none"
 >
   H
   <div
-    className="sc-bdfCDU hVEnQK"
-    display="inline"
-    fontSize={14}
+    className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none dy-inline"
     fontStyle="normal"
-    fontWeight={400}
     role="text"
-    textDecoration="none"
   >
-    <sup>
+    <sub
+      className="fse-75 lht-0 pn-relative bm--0p25em"
+    >
       2
-    </sup>
+    </sub>
   </div>
   O
 </div>
@@ -29,24 +24,19 @@ exports[`should render a subscript text to match snapshot 1`] = `
 
 exports[`should render a superscript text to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU FxXNY"
-  fontSize={14}
+  className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none"
   fontStyle="normal"
-  fontWeight={400}
   role="text"
-  textDecoration="none"
 >
   H
   <div
-    className="sc-bdfCDU hVEnQK"
-    display="inline"
-    fontSize={14}
+    className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none dy-inline"
     fontStyle="normal"
-    fontWeight={400}
     role="text"
-    textDecoration="none"
   >
-    <sup>
+    <sup
+      className="fse-75 lht-0 pn-relative tp--0p5em"
+    >
       2
     </sup>
   </div>
@@ -56,28 +46,23 @@ exports[`should render a superscript text to match snapshot 1`] = `
 
 exports[`should render one truncated text line to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU hXOWac"
-  fontSize={14}
+  className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-underline"
   fontStyle="normal"
-  fontWeight={400}
   role="text"
-  textDecoration="underline"
 >
-  <div>
+  <span
+    className="ow-hidden"
+  >
     Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-  </div>
+  </span>
 </div>
 `;
 
 exports[`text to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU dxpfnQ"
-  fontSize={96}
+  className="fse-36px lht-40px fwt-700 lsg--0p02em tdn-line-through cr- mbm-24px tn-color-0p15s-ease"
   fontStyle="normal"
-  fontWeight={700}
-  letterSpacing={-1.5}
   role="text"
-  textDecoration="line-through"
 >
   Some text here
 </div>

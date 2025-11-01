@@ -95,11 +95,20 @@ export const MessageView = ({
     >
       {isShowIcon && iconComponent}
       <Vertical gap={8} width="100%">
-        <Text size="md" weight="semiBold" {...views?.title}>
+        <Text
+          size="md"
+          weight="semiBold"
+          bgColor={Theme[variant].container.backgroundColor}
+          {...views?.title}
+        >
           {title}
         </Text>
         {subtitle && (
-          <Text size="sm" {...views?.subtitle}>
+          <Text
+            size="sm"
+            bgColor={Theme[variant].container.backgroundColor}
+            {...views?.subtitle}
+          >
             {subtitle}
           </Text>
         )}
@@ -110,6 +119,7 @@ export const MessageView = ({
           onClick={action}
           padding="6px 10px"
           whiteSpace="nowrap"
+          bgColor={Theme[variant].container.backgroundColor}
           {...containerStyle}
           {...views?.actionText}
         >

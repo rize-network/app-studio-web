@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Element, Text, View, ViewProps } from 'app-studio';
+import { Element, Text, View, ViewProps, useTheme } from 'app-studio';
 
 import { TextProps } from './Text.props';
 import {
@@ -202,9 +202,15 @@ const TextView: React.FC<Props> = ({
   size = 'md',
   bgColor,
   color,
+  backgroundColor,
+  themeMode: elementMode,
   views,
+  role,
   ...props
 }) => {
+  const { getColor, themeMode: contextThemeMode } = useTheme();
+  const currentThemeMode = elementMode || contextThemeMode;
+
   // Apply heading styles if a heading is specified
   const headingStyles = heading ? HeadingSizes[heading] : {};
 
@@ -216,7 +222,32 @@ const TextView: React.FC<Props> = ({
   const lineHeight = LineHeights[size];
   const fontWeight = FontWeights[weight];
 
-  const computedColor = color ?? (bgColor ? getTextColor(bgColor) : undefined);
+  const viewBackgroundColor =
+    typeof views?.container?.backgroundColor === 'string'
+      ? (views.container.backgroundColor as string)
+      : undefined;
+
+  const effectiveBackgroundToken =
+    bgColor ?? backgroundColor ?? viewBackgroundColor;
+
+  let resolvedBackgroundColor: string | undefined;
+
+  if (effectiveBackgroundToken) {
+    const themedColor = getColor(effectiveBackgroundToken, {
+      themeMode: currentThemeMode,
+    });
+
+    resolvedBackgroundColor =
+      typeof themedColor === 'string' && themedColor
+        ? themedColor
+        : effectiveBackgroundToken;
+  }
+
+  const computedColor =
+    color ??
+    (resolvedBackgroundColor
+      ? getTextColor(resolvedBackgroundColor)
+      : undefined);
 
   return (
     <Element
@@ -230,6 +261,8 @@ const TextView: React.FC<Props> = ({
         isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'
       }
       color={computedColor}
+      backgroundColor={backgroundColor ?? bgColor}
+      role={role ?? 'text'}
       // Apply layout styles
       {...noLineBreak}
       // Apply heading styles if specified
