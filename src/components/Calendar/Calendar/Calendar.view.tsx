@@ -65,11 +65,11 @@ const renderDefaultEvent = (
       cursor="pointer"
       {...views?.event}
     >
-      <Text fontWeight="600" fontSize={14} maxLines={2} {...views?.eventTitle}>
+      <Text fontWeight="600" fontSize={12} maxLines={2} {...views?.eventTitle}>
         {event.title}
       </Text>
       <Text
-        fontSize={12}
+        fontSize={11}
         color="color.gray.600"
         maxLines={1}
         {...views?.eventTime}
@@ -77,7 +77,7 @@ const renderDefaultEvent = (
         {timeRange}
       </Text>
       {event.description && context.view !== 'month' && (
-        <Text fontSize={12} color="color.gray.700" maxLines={2}>
+        <Text fontSize={11} color="color.gray.700" maxLines={2}>
           {event.description}
         </Text>
       )}
@@ -96,33 +96,33 @@ const renderDefaultEvent = (
         boxShadow="0px 4px 12px rgba(0, 0, 0, 0.15)"
       >
         <Vertical gap={12}>
-          <Text fontWeight="700" fontSize={16} color="color.gray.900">
+          <Text fontWeight="700" fontSize={14} color="color.gray.900">
             {event.title}
           </Text>
           <Vertical gap={6}>
             <Horizontal gap={8} alignItems="center">
-              <Text fontSize={12} fontWeight="600" color="color.gray.600">
+              <Text fontSize={11} fontWeight="600" color="color.gray.600">
                 📅
               </Text>
-              <Text fontSize={13} color="color.gray.700">
+              <Text fontSize={12} color="color.gray.700">
                 {format(event.startDate, 'EEEE, MMMM d, yyyy')}
               </Text>
             </Horizontal>
             <Horizontal gap={8} alignItems="center">
-              <Text fontSize={12} fontWeight="600" color="color.gray.600">
+              <Text fontSize={11} fontWeight="600" color="color.gray.600">
                 🕐
               </Text>
-              <Text fontSize={13} color="color.gray.700">
+              <Text fontSize={12} color="color.gray.700">
                 {timeRange}
               </Text>
             </Horizontal>
           </Vertical>
           {event.description && (
             <Vertical gap={4}>
-              <Text fontSize={12} fontWeight="600" color="color.gray.600">
+              <Text fontSize={11} fontWeight="600" color="color.gray.600">
                 Description
               </Text>
-              <Text fontSize={13} color="color.gray.700">
+              <Text fontSize={12} color="color.gray.700">
                 {event.description}
               </Text>
             </Vertical>
@@ -168,7 +168,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
         >
           <Text
             fontWeight="600"
-            fontSize={14}
+            fontSize={12}
             color="color.gray.600"
             {...views?.weekdayLabel}
             maxLines={1}
@@ -202,7 +202,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
           alignItems="center"
           maxWidth={'100%'}
         >
-          <Text fontSize={20} fontWeight="700" {...views?.headerTitle}>
+          <Text fontSize={18} fontWeight="700" {...views?.headerTitle}>
             {label}
           </Text>
           <Horizontal gap={8} {...views?.viewSwitcher}>
@@ -292,12 +292,12 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                     flexShrink={0}
                     {...views?.dayHeader}
                   >
-                    <Text fontWeight="600" fontSize={16} {...views?.dayNumber}>
+                    <Text fontWeight="600" fontSize={14} {...views?.dayNumber}>
                       {format(day, 'd')}
                     </Text>
                     {view !== 'month' && (
                       <Text
-                        fontSize={14}
+                        fontSize={12}
                         color="color.gray.600"
                         {...views?.dayMeta}
                       >
@@ -330,7 +330,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                         })
                       : view === 'day' && (
                           <Text
-                            fontSize={12}
+                            fontSize={11}
                             color="color.gray.600"
                             fontStyle="italic"
                             {...views?.emptyState}
