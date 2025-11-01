@@ -18,12 +18,22 @@ import { Shape, Size, Variant } from './Input.type';
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: '8px', // Consistent with design system (rounded-md)
+    media: {
+      mobile: {
+        borderRadius: '6px',
+      },
+    },
   },
   sharp: {
     borderRadius: 0,
   },
   rounded: {
     borderRadius: '8px', // Consistent with design system (rounded-md)
+    media: {
+      mobile: {
+        borderRadius: '6px',
+      },
+    },
   },
   pillShaped: {
     borderRadius: '9999px', // Full rounded for pill shape
@@ -108,6 +118,14 @@ export const PadddingWithLabel = {
   paddingBottom: '8px', // 2 × 4px grid
   paddingLeft: '16px', // 4 × 4px grid
   paddingRight: '16px', // 4 × 4px grid
+  media: {
+    mobile: {
+      paddingTop: '12px', // Smaller padding on mobile
+      paddingBottom: '6px',
+      paddingLeft: '12px',
+      paddingRight: '12px',
+    },
+  },
 };
 
 /**
@@ -118,4 +136,12 @@ export const PaddingWithoutLabel = {
   paddingBottom: '12px', // 3 × 4px grid
   paddingLeft: '16px', // 4 × 4px grid
   paddingRight: '16px', // 4 × 4px grid
+  media: {
+    mobile: {
+      paddingTop: '10px', // Smaller padding on mobile
+      paddingBottom: '10px',
+      paddingLeft: '12px',
+      paddingRight: '12px',
+    },
+  },
 };

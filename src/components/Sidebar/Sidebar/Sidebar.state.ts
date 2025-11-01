@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useResponsive } from 'app-studio';
 
 export const useSidebarState = (
   defaultExpanded: boolean = true,
@@ -6,11 +7,11 @@ export const useSidebarState = (
   onExpandedChange?: (expanded: boolean) => void,
   breakpoint?: number
 ) => {
+  const { on } = useResponsive();
+  const isMobile = on('mobile');
+
   const [isExpanded, setIsExpanded] = useState<boolean>(
     expanded !== undefined ? expanded : defaultExpanded
-  );
-  const [isMobile, setIsMobile] = useState<boolean>(
-    breakpoint ? window.innerWidth < breakpoint : false
   );
 
   // Handle controlled expanded state
@@ -19,23 +20,6 @@ export const useSidebarState = (
       setIsExpanded(expanded);
     }
   }, [expanded]);
-
-  // Handle window resize for responsive behavior
-  useEffect(() => {
-    if (!breakpoint) return;
-
-    const handleResize = () => {
-      const newIsMobile = window.innerWidth < breakpoint;
-      setIsMobile(newIsMobile);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Initial check
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [breakpoint]);
 
   const toggleExpanded = () => {
     const newExpanded = !isExpanded;

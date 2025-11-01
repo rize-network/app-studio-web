@@ -121,6 +121,13 @@ export const ModalContainer: React.FC<ContainerProps> = ({
       transition="all 0.3s ease"
       {...(shadow ? shadow : defaultShadow)}
       {...ContainerShapes[shape]}
+      media={{
+        mobile: {
+          width: '90%',
+          maxWidth: '100%',
+          margin: '16px',
+        },
+      }}
       {...props}
       {...views?.container}
     >
@@ -154,6 +161,12 @@ export const ModalHeader: React.FC<HeaderProps> = ({
       borderBottomWidth="1px"
       borderBottomStyle="solid"
       borderBottomColor="color.gray.200"
+      media={{
+        mobile: {
+          paddingVertical: 12, // Smaller padding on mobile
+          paddingHorizontal: 16,
+        },
+      }}
       {...props}
       {...views?.header}
     >
@@ -177,6 +190,13 @@ export const ModalBody: React.FC<BodyProps> = ({
       fontWeight={ModalTypography.body.fontWeight}
       lineHeight={ModalTypography.body.lineHeight}
       color={ModalTypography.body.color}
+      media={{
+        mobile: {
+          paddingVertical: 12, // Smaller padding on mobile
+          paddingHorizontal: 16,
+          fontSize: '14px',
+        },
+      }}
       {...props}
       {...views?.view}
     >
@@ -201,6 +221,13 @@ export const ModalFooter: React.FC<FooterProps> = ({
       borderTopStyle="solid"
       borderTopColor="color.gray.200"
       gap={12} // 3×4px grid
+      media={{
+        mobile: {
+          paddingVertical: 12, // Smaller padding on mobile
+          paddingHorizontal: 16,
+          gap: 8,
+        },
+      }}
       {...props}
       {...views?.container}
     >
