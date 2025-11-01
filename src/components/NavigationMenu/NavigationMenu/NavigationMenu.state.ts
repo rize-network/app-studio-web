@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export const useNavigationMenuState = (
   defaultActiveItemId: string | null = null,
@@ -10,6 +10,7 @@ export const useNavigationMenuState = (
   const [expandedItemIds, setExpandedItemIds] = useState<string[]>(
     defaultExpandedItemIds
   );
+  const triggerRefs = useRef<Record<string, HTMLDivElement>>({});
 
   const toggleExpandedItem = (itemId: string) => {
     setExpandedItemIds((prevExpandedItemIds) => {
@@ -36,5 +37,6 @@ export const useNavigationMenuState = (
     expandedItemIds,
     toggleExpandedItem,
     isItemExpanded,
+    triggerRefs,
   };
 };

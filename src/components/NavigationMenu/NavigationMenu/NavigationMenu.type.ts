@@ -24,6 +24,7 @@ export interface NavigationMenuContextType {
   orientation: Orientation;
   size: Size;
   variant: Variant;
+  triggerRefs: React.MutableRefObject<Record<string, HTMLDivElement>>;
 }
 
 export interface NavigationMenuStyles {
