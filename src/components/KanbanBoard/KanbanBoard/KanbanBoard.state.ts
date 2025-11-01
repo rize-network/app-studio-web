@@ -16,14 +16,39 @@ export const useKanbanBoardState = ({
   const [draggedCardId, setDraggedCardId] = useState<string | null>(null);
   const [hoveredColumnId, setHoveredColumnId] = useState<string | null>(null);
   const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
+  const [hoveredCardPosition, setHoveredCardPosition] = useState<
+    'before' | 'after' | null
+  >(null);
   const dragStateRef = useRef<DragState | null>(null);
+  const hoverPositionRef = useRef<'before' | 'after' | null>(null);
+
+  const updateHoverPosition = useCallback(
+    (position: 'before' | 'after' | null) => {
+      hoverPositionRef.current = position;
+      setHoveredCardPosition(position);
+    },
+    []
+  );
+
+  const getRelativeDropPosition = useCallback(
+    (event: React.DragEvent<HTMLDivElement>): 'before' | 'after' => {
+      const rect = event.currentTarget.getBoundingClientRect();
+      const offset = event.clientY - rect.top;
+      return offset < rect.height / 2 ? 'before' : 'after';
+    },
+    []
+  );
 
   useEffect(() => {
     setColumns(initialColumns);
   }, [initialColumns]);
 
   const commitMove = useCallback(
-    (targetColumnId: string, targetCardId: string | null) => {
+    (
+      targetColumnId: string,
+      targetCardId: string | null,
+      position: 'before' | 'after' | null
+    ) => {
       const dragState = dragStateRef.current;
       if (!dragState) return;
 
@@ -35,6 +60,7 @@ export const useKanbanBoardState = ({
       ) {
         dragStateRef.current = null;
         setDraggedCardId(null);
+        updateHoverPosition(null);
         return;
       }
 
@@ -63,9 +89,15 @@ export const useKanbanBoardState = ({
           return prevColumns;
         }
 
+        if (targetColumnId === sourceColumnId && targetCardId === cardId) {
+          return prevColumns;
+        }
+
         const [card] = sourceColumn.cards.splice(sourceIndex, 1);
 
-        let targetIndex = targetColumn.cards.length;
+        const dropPosition = position ?? 'after';
+
+        let targetIndex: number;
 
         if (targetCardId) {
           const foundIndex = targetColumn.cards.findIndex(
@@ -73,12 +105,14 @@ export const useKanbanBoardState = ({
           );
 
           if (foundIndex !== -1) {
-            targetIndex = foundIndex;
-
-            if (targetColumnId === sourceColumnId && foundIndex > sourceIndex) {
-              targetIndex = foundIndex - 1;
-            }
+            targetIndex =
+              dropPosition === 'before' ? foundIndex : foundIndex + 1;
+          } else {
+            targetIndex = targetColumn.cards.length;
           }
+        } else {
+          targetIndex =
+            dropPosition === 'before' ? 0 : targetColumn.cards.length;
         }
 
         targetColumn.cards.splice(targetIndex, 0, card);
@@ -97,8 +131,9 @@ export const useKanbanBoardState = ({
       setDraggedCardId(null);
       setHoveredColumnId(null);
       setHoveredCardId(null);
+      updateHoverPosition(null);
     },
-    [onChange]
+    [onChange, updateHoverPosition]
   );
 
   const handleCardDragStart = useCallback(
@@ -127,7 +162,8 @@ export const useKanbanBoardState = ({
     setDraggedCardId(null);
     setHoveredColumnId(null);
     setHoveredCardId(null);
-  }, []);
+    updateHoverPosition(null);
+  }, [updateHoverPosition]);
 
   const handleColumnDragOver = useCallback(
     (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
@@ -137,8 +173,9 @@ export const useKanbanBoardState = ({
       }
       setHoveredColumnId(columnId);
       setHoveredCardId(null);
+      updateHoverPosition(getRelativeDropPosition(event));
     },
-    []
+    [getRelativeDropPosition, updateHoverPosition]
   );
 
   const handleCardDragOver = useCallback(
@@ -153,16 +190,19 @@ export const useKanbanBoardState = ({
       }
       setHoveredColumnId(columnId);
       setHoveredCardId(cardId);
+      updateHoverPosition(getRelativeDropPosition(event));
     },
-    []
+    [getRelativeDropPosition, updateHoverPosition]
   );
 
   const handleColumnDrop = useCallback(
     (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
-      commitMove(columnId, null);
+      const position =
+        hoverPositionRef.current ?? getRelativeDropPosition(event);
+      commitMove(columnId, null, position);
     },
-    [commitMove]
+    [commitMove, getRelativeDropPosition]
   );
 
   const handleCardDrop = useCallback(
@@ -173,9 +213,10 @@ export const useKanbanBoardState = ({
     ) => {
       event.preventDefault();
       event.stopPropagation();
-      commitMove(columnId, cardId);
+      const position = getRelativeDropPosition(event);
+      commitMove(columnId, cardId, position);
     },
-    [commitMove]
+    [commitMove, getRelativeDropPosition]
   );
 
   return {
@@ -183,6 +224,7 @@ export const useKanbanBoardState = ({
     draggedCardId,
     hoveredColumnId,
     hoveredCardId,
+    hoveredCardPosition,
     onCardDragStart: handleCardDragStart,
     onCardDragEnd: handleCardDragEnd,
     onColumnDragOver: handleColumnDragOver,
