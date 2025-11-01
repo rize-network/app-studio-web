@@ -76,13 +76,36 @@ export const ColorSchemes = {
   // State-specific colors
   states: {
     hover: {
-      active: 'color.blue.600',
-      inactive: 'color.gray.400',
+      active: {
+        opacity: 0.9,
+      },
+      inactive: {
+        backgroundColor: 'color.gray.400',
+      },
     },
     focus: {
-      active: 'color.blue.600',
-      inactive: 'color.gray.400',
-      outline: 'rgba(66, 153, 225, 0.6)',
+      active: {
+        outline: 'none',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+      },
+      inactive: {
+        outline: 'none',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1)',
+      },
     },
+  },
+};
+
+/**
+ * Transition styles for the Switch component
+ */
+export const TransitionStyles = {
+  slider: {
+    transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
+  },
+  knob: {
+    transition: 'transform 0.2s ease',
   },
 };

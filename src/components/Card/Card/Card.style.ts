@@ -46,26 +46,38 @@ export const getCardVariants = (
     default: {
       backgroundColor: 'color.white',
       border: 'none',
-      transition: 'all 0.2s ease',
+      transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
     },
     outlined: {
       backgroundColor: 'color.white',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'color.gray.200',
-      transition: 'all 0.2s ease',
+      transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
       _hover: {
         borderColor: 'color.gray.300',
+        boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.05)',
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1)',
       },
     },
     elevated: {
       backgroundColor: 'color.white',
-      boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.08)',
+      boxShadow:
+        '0px 1px 3px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.06)',
       border: 'none',
-      transition: 'all 0.2s ease',
+      transition: 'box-shadow 0.2s ease',
       _hover: {
-        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.12)',
-        transform: 'translateY(-2px)',
+        boxShadow:
+          '0px 4px 6px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06)',
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.08)',
       },
     },
   };
@@ -88,6 +100,11 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
       borderRadius: '8px', // Consistent with design system
       overflow: 'hidden',
       transition: 'all 0.2s ease',
+      media: {
+        mobile: {
+          borderRadius: '4px', // Smaller radius on mobile
+        },
+      },
     },
     header: {
       padding: '16px', // 4 × 4px grid
@@ -95,16 +112,31 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
       borderBottomStyle: 'solid',
       borderBottomColor: 'color.gray.200',
       color: 'color.black',
+      media: {
+        mobile: {
+          padding: '12px', // Smaller padding on mobile
+        },
+      },
     },
     content: {
       padding: '16px', // 4 × 4px grid
       color: 'color.black',
+      media: {
+        mobile: {
+          padding: '12px', // Smaller padding on mobile
+        },
+      },
     },
     footer: {
       padding: '16px', // 4 × 4px grid
       borderTopWidth: '1px',
       borderTopStyle: 'solid',
       borderTopColor: 'color.gray.200',
+      media: {
+        mobile: {
+          padding: '12px', // Smaller padding on mobile
+        },
+      },
     },
   };
 };
