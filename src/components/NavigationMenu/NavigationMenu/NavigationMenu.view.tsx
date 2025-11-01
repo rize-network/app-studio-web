@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useRef, useState, useEffect } from 'react';
 import { View, Horizontal, Vertical, ViewProps } from 'app-studio';
 import {
   NavigationMenuContextType,
@@ -31,6 +31,7 @@ const NavigationMenuContext = createContext<NavigationMenuContextType>({
   orientation: 'vertical',
   size: 'md',
   variant: 'default',
+  triggerRefs: { current: {} },
 });
 
 // Provider component for the NavigationMenu context
@@ -229,11 +230,24 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
   disabled,
   views,
 }) => {
-  const { activeItemId, toggleExpandedItem, isItemExpanded, size, variant } =
+  const { activeItemId, toggleExpandedItem, isItemExpanded, size, variant, triggerRefs } =
     useNavigationMenuContext();
 
+  const triggerRef = useRef<HTMLDivElement>(null);
   const isActive = activeItemId === itemId;
   const isExpanded = isItemExpanded(itemId);
+
+  // Store the trigger ref in the context
+  useEffect(() => {
+    if (triggerRef.current && itemId) {
+      triggerRefs.current[itemId] = triggerRef.current;
+    }
+    return () => {
+      if (itemId) {
+        delete triggerRefs.current[itemId];
+      }
+    };
+  }, [itemId, triggerRefs]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -243,6 +257,7 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
 
   return (
     <View
+      ref={triggerRef}
       onClick={handleClick}
       cursor={disabled ? 'not-allowed' : 'pointer'}
       opacity={disabled ? 0.5 : 1}
@@ -283,27 +298,183 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
   itemId,
   views,
 }) => {
-  const { isItemExpanded, orientation } = useNavigationMenuContext();
+  const { isItemExpanded, orientation, triggerRefs } = useNavigationMenuContext();
+
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [optimalPosition, setOptimalPosition] = useState({
+    x: 0,
+    y: 0,
+    placement: orientation === 'horizontal' ? 'bottom' : 'right',
+  });
 
   const isExpanded = isItemExpanded(itemId);
+
+  // Calculate optimal position when the menu expands
+  useEffect(() => {
+    if (isExpanded && contentRef.current && itemId && triggerRefs.current[itemId] && orientation === 'horizontal') {
+      const contentRect = contentRef.current.getBoundingClientRect();
+      const triggerRect = triggerRefs.current[itemId]!.getBoundingClientRect();
+
+      // Get content dimensions
+      const contentWidth = Math.max(contentRect.width || 200, 200);
+      const contentHeight = Math.max(contentRect.height || 150, 150);
+
+      // Get viewport dimensions
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate available space on all sides from the trigger
+      const availableSpace = {
+        top: triggerRect.top,
+        right: viewportWidth - triggerRect.right,
+        bottom: viewportHeight - triggerRect.bottom,
+        left: triggerRect.left,
+      };
+
+      // Determine optimal placement based on orientation and available space
+      const placements =
+        orientation === 'horizontal'
+          ? [
+              // For horizontal navigation menu, prefer bottom placement
+              {
+                placement: 'bottom' as const,
+                space: availableSpace.bottom,
+                fits: availableSpace.bottom >= contentHeight + 8,
+                x: triggerRect.left,
+                y: triggerRect.bottom + 8,
+              },
+              {
+                placement: 'top' as const,
+                space: availableSpace.top,
+                fits: availableSpace.top >= contentHeight + 8,
+                x: triggerRect.left,
+                y: triggerRect.top - contentHeight - 8,
+              },
+              {
+                placement: 'right' as const,
+                space: availableSpace.right,
+                fits: availableSpace.right >= contentWidth + 8,
+                x: triggerRect.right + 8,
+                y: triggerRect.top,
+              },
+              {
+                placement: 'left' as const,
+                space: availableSpace.left,
+                fits: availableSpace.left >= contentWidth + 8,
+                x: triggerRect.left - contentWidth - 8,
+                y: triggerRect.top,
+              },
+            ]
+          : [
+              // For vertical navigation menu, prefer right placement
+              {
+                placement: 'right' as const,
+                space: availableSpace.right,
+                fits: availableSpace.right >= contentWidth + 8,
+                x: triggerRect.right + 8,
+                y: triggerRect.top,
+              },
+              {
+                placement: 'left' as const,
+                space: availableSpace.left,
+                fits: availableSpace.left >= contentWidth + 8,
+                x: triggerRect.left - contentWidth - 8,
+                y: triggerRect.top,
+              },
+              {
+                placement: 'bottom' as const,
+                space: availableSpace.bottom,
+                fits: availableSpace.bottom >= contentHeight + 8,
+                x: triggerRect.left,
+                y: triggerRect.bottom + 8,
+              },
+              {
+                placement: 'top' as const,
+                space: availableSpace.top,
+                fits: availableSpace.top >= contentHeight + 8,
+                x: triggerRect.left,
+                y: triggerRect.top - contentHeight - 8,
+              },
+            ];
+
+      // Find the best fitting placement
+      const fittingPlacement = placements.find((p) => p.fits);
+      if (fittingPlacement) {
+        setOptimalPosition({
+          x: fittingPlacement.x,
+          y: fittingPlacement.y,
+          placement: fittingPlacement.placement,
+        });
+        return;
+      }
+
+      // If nothing fits, choose the placement with the most space
+      const bestPlacement = placements.reduce((best, current) =>
+        current.space > best.space ? current : best
+      );
+
+      // Ensure the content stays within viewport bounds
+      let finalX = bestPlacement.x;
+      let finalY = bestPlacement.y;
+
+      if (finalX + contentWidth > viewportWidth) {
+        finalX = viewportWidth - contentWidth - 8;
+      }
+      if (finalX < 8) {
+        finalX = 8;
+      }
+      if (finalY + contentHeight > viewportHeight) {
+        finalY = viewportHeight - contentHeight - 8;
+      }
+      if (finalY < 8) {
+        finalY = 8;
+      }
+
+      setOptimalPosition({
+        x: finalX,
+        y: finalY,
+        placement: bestPlacement.placement,
+      });
+    }
+  }, [isExpanded, orientation, itemId, triggerRefs]);
 
   if (!isExpanded) {
     return null;
   }
 
+  // For vertical orientation, keep the original relative positioning
+  if (orientation === 'vertical') {
+    return (
+      <View
+        paddingLeft={16}
+        width="100%"
+        position="relative"
+        backgroundColor="transparent"
+        {...views?.container}
+      >
+        {children}
+      </View>
+    );
+  }
+
+  // For horizontal orientation, use fixed positioning with intelligent placement
+  const positionStyles: React.CSSProperties = {
+    position: 'fixed',
+    left: optimalPosition.x,
+    top: optimalPosition.y,
+    zIndex: 1000,
+  };
+
   return (
     <View
-      paddingLeft={orientation === 'vertical' ? 16 : 0}
-      paddingTop={orientation === 'horizontal' ? 8 : 0}
+      ref={contentRef}
+      role="menu"
+      minWidth="200px"
+      backgroundColor="color.white"
+      borderRadius={4}
+      boxShadow="0px 2px 8px rgba(0, 0, 0, 0.15)"
       overflow="hidden"
-      width="100%"
-      position={orientation === 'horizontal' ? 'absolute' : 'relative'}
-      backgroundColor={orientation === 'horizontal' ? 'white' : 'transparent'}
-      boxShadow={
-        orientation === 'horizontal' ? '0 4px 6px rgba(0, 0, 0, 0.1)' : 'none'
-      }
-      borderRadius={orientation === 'horizontal' ? '4px' : '0'}
-      zIndex={orientation === 'horizontal' ? 10 : 1}
+      style={positionStyles}
       {...views?.container}
     >
       {children}
