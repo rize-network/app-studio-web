@@ -150,7 +150,23 @@ export const PieChart: React.FC<PieChartProps> = ({
   ]);
 
   return (
-    <svg ref={chartRef} width={width} height={height}>
+    <svg
+      ref={chartRef}
+      width={width}
+      height={height}
+      style={{ overflow: 'visible' }}
+    >
+      {/* Center circle for donut chart (rendered beneath slices so labels remain visible) */}
+      {isDonut && (
+        <circle
+          cx={centerX}
+          cy={centerY}
+          r={donutRadius}
+          fill="white"
+          pointerEvents="none"
+        />
+      )}
+
       {/* Pie slices */}
       {slices.map((slice, index) => {
         const handleMouseEnter = (e: React.MouseEvent) => {
@@ -222,11 +238,6 @@ export const PieChart: React.FC<PieChartProps> = ({
           </g>
         );
       })}
-
-      {/* Center circle for donut chart */}
-      {isDonut && (
-        <circle cx={centerX} cy={centerY} r={donutRadius} fill="white" />
-      )}
     </svg>
   );
 };
