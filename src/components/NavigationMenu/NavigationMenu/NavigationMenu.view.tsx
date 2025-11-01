@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useRef, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { View, Horizontal, Vertical, ViewProps } from 'app-studio';
 import {
   NavigationMenuContextType,
@@ -230,8 +236,14 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
   disabled,
   views,
 }) => {
-  const { activeItemId, toggleExpandedItem, isItemExpanded, size, variant, triggerRefs } =
-    useNavigationMenuContext();
+  const {
+    activeItemId,
+    toggleExpandedItem,
+    isItemExpanded,
+    size,
+    variant,
+    triggerRefs,
+  } = useNavigationMenuContext();
 
   const triggerRef = useRef<HTMLDivElement>(null);
   const isActive = activeItemId === itemId;
@@ -298,7 +310,8 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
   itemId,
   views,
 }) => {
-  const { isItemExpanded, orientation, triggerRefs } = useNavigationMenuContext();
+  const { isItemExpanded, orientation, triggerRefs } =
+    useNavigationMenuContext();
 
   const contentRef = useRef<HTMLDivElement>(null);
   const [optimalPosition, setOptimalPosition] = useState({
@@ -311,7 +324,13 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
 
   // Calculate optimal position when the menu expands
   useEffect(() => {
-    if (isExpanded && contentRef.current && itemId && triggerRefs.current[itemId] && orientation === 'horizontal') {
+    if (
+      isExpanded &&
+      contentRef.current &&
+      itemId &&
+      triggerRefs.current[itemId] &&
+      orientation === 'horizontal'
+    ) {
       const contentRect = contentRef.current.getBoundingClientRect();
       const triggerRect = triggerRefs.current[itemId]!.getBoundingClientRect();
 
