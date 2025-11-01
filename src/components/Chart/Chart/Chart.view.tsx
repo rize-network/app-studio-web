@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Horizontal } from 'app-studio';
@@ -70,6 +70,21 @@ export const ChartView: React.FC<ChartProps> = ({
 
   // Get processed data
   const chartData = processedData();
+
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const [tooltipSize, setTooltipSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (!tooltip.visible) {
+      setTooltipSize({ width: 0, height: 0 });
+      return;
+    }
+
+    if (tooltipRef.current) {
+      const rect = tooltipRef.current.getBoundingClientRect();
+      setTooltipSize({ width: rect.width, height: rect.height });
+    }
+  }, [tooltip]);
 
   // Calculate dimensions
   const { width: containerWidth, height: containerHeight } =
@@ -181,30 +196,26 @@ export const ChartView: React.FC<ChartProps> = ({
     if (!showTooltips || !tooltip.visible) return null;
 
     // Calculate tooltip position with boundary checking
-    const tooltipWidth = 200; // Approximate tooltip width
-    const tooltipHeight = 40; // Approximate tooltip height
+    const tooltipWidth = tooltipSize.width || 200;
+    const tooltipHeight = tooltipSize.height || 40;
     const offset = 10; // Offset from cursor
 
-    let left = tooltip.x + offset;
+    let left = tooltip.x - tooltipWidth / 2;
     let top = tooltip.y - tooltipHeight - offset;
 
-    // Check right boundary
-    if (left + tooltipWidth > window.innerWidth) {
-      left = tooltip.x - tooltipWidth - offset;
+    if (left + tooltipWidth + offset > window.innerWidth) {
+      left = window.innerWidth - tooltipWidth - offset;
     }
 
-    // Check left boundary
-    if (left < 0) {
+    if (left < offset) {
       left = offset;
     }
 
-    // Check top boundary
-    if (top < 0) {
+    if (top < offset) {
       top = tooltip.y + offset;
     }
 
-    // Check bottom boundary
-    if (top + tooltipHeight > window.innerHeight) {
+    if (top + tooltipHeight + offset > window.innerHeight) {
       top = window.innerHeight - tooltipHeight - offset;
     }
 
@@ -213,6 +224,7 @@ export const ChartView: React.FC<ChartProps> = ({
         position="fixed"
         left={`${left}px`}
         top={`${top}px`}
+        ref={tooltipRef}
         {...TooltipStyles}
         {...views?.tooltip}
       >

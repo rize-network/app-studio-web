@@ -150,36 +150,40 @@ export const PieChart: React.FC<PieChartProps> = ({
   ]);
 
   return (
-    <svg ref={chartRef} width={width} height={height}>
+    <svg
+      ref={chartRef}
+      width={width}
+      height={height}
+      style={{ overflow: 'visible' }}
+    >
       {/* Pie slices */}
       {slices.map((slice, index) => {
-        const handleMouseEnter = (e: React.MouseEvent) => {
-          const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
+        const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
 
-          // Use intelligent positioning based on useElementPosition relation data
+        const resolveTooltipPosition = (e: React.MouseEvent) => {
           let x = e.clientX;
           let y = e.clientY;
 
-          if (relation && chartRef.current) {
-            const chartRect = chartRef.current.getBoundingClientRect();
-            const relativeX = e.clientX - chartRect.left;
-            const relativeY = e.clientY - chartRect.top;
-
-            // Adjust tooltip position based on available space
+          if (relation) {
             if (relation.space.horizontal === 'left') {
-              x = e.clientX - 100; // Offset tooltip to the left
+              x = e.clientX - 100;
             } else {
-              x = e.clientX + 10; // Offset tooltip to the right
+              x = e.clientX + 10;
             }
 
             if (relation.space.vertical === 'top') {
-              y = e.clientY - 30; // Offset tooltip above
+              y = e.clientY - 30;
             } else {
-              y = e.clientY + 10; // Offset tooltip below
+              y = e.clientY + 10;
             }
           }
 
-          showTooltip(x, y, tooltipContent);
+          return { x, y };
+        };
+
+        const handleMouseMove = (e: React.MouseEvent) => {
+          const position = resolveTooltipPosition(e);
+          showTooltip(position.x, position.y, tooltipContent);
         };
 
         const handleClick = () => {
@@ -193,7 +197,8 @@ export const PieChart: React.FC<PieChartProps> = ({
             <path
               d={slice.path}
               fill={slice.color}
-              onMouseEnter={handleMouseEnter}
+              onMouseEnter={handleMouseMove}
+              onMouseMove={handleMouseMove}
               onMouseLeave={hideTooltip}
               onClick={handleClick}
               {...PieSliceStyles}
