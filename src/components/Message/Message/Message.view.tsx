@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Vertical } from 'app-studio';
+import { Vertical, useTheme } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
@@ -12,6 +12,7 @@ import {
   ErrorIcon,
   InfoIcon,
 } from '../../Icon/Icon';
+import contrast from 'contrast';
 
 export const MessageView = ({
   variant,
@@ -24,8 +25,11 @@ export const MessageView = ({
   showIcon = false,
   isClosable = false,
   timeout = 3000,
+  bgColor,
   views,
 }: MessageProps) => {
+  const { getColor } = useTheme();
+
   useEffect(() => {
     if (timeout && !isClosable) {
       const timeId = setTimeout(() => {
@@ -44,19 +48,38 @@ export const MessageView = ({
   const Theme = theme ?? Themes;
   const showAction = !!(action && actionText);
 
-  const containerStyle = {
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderRadius: 8,
-    borderColor: `${Theme[variant].container.border}`,
-  };
-
-  const iconColor = {
+  // Calculate colors based on bgColor if provided
+  let backgroundColor = `${Theme[variant].container.backgroundColor}`;
+  let textColor = `${Theme[variant].content.color}`;
+  let borderColor = `${Theme[variant].container.border}`;
+  let calculatedIconColor = {
     info: '#3b82f6',
     success: '#4ade80',
     warning: '#f97316',
     error: '#ef4444',
   }[variant];
+
+  if (bgColor) {
+    backgroundColor = bgColor;
+
+    // Get the actual color value and determine if it's light or dark
+    const actualBgColor = getColor(bgColor);
+    const tone = contrast(actualBgColor);
+
+    // Set appropriate text and icon colors based on background luminance
+    textColor = tone === 'light' ? '#000000' : '#ffffff';
+    calculatedIconColor = textColor;
+    borderColor = tone === 'light' ? '#d1d5db' : '#6b7280';
+  }
+
+  const containerStyle = {
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 8,
+    borderColor,
+  };
+
+  const iconColor = calculatedIconColor;
 
   const iconComponent = {
     info: <InfoIcon widthHeight={24} color={iconColor} {...views?.icon} />,
@@ -81,8 +104,8 @@ export const MessageView = ({
       position={'relative'}
       alignItems="center"
       padding="14px 24px 14px 14px"
-      color={`${Theme[variant].content.color}`}
-      backgroundColor={`${Theme[variant].container.backgroundColor}`}
+      color={textColor}
+      backgroundColor={backgroundColor}
       onClick={
         isClosable
           ? () => {}

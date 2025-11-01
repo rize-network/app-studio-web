@@ -13,6 +13,8 @@ export interface AlertProps extends ViewProps {
   children?: React.ReactNode;
   // Optional variant property to determine the style of the alert
   variant?: Variant;
+  // Optional background color - automatically determines text color for visibility
+  bgColor?: string;
   // Optional styles property to apply custom styles to the alert component
   views?: AlertStyles;
   /**

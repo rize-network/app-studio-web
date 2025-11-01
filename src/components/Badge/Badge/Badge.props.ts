@@ -8,5 +8,6 @@ export interface BadgeProps extends Omit<ViewProps, 'content'> {
   position?: Position;
   size?: Size;
   shape?: Shape;
+  bgColor?: string;
   views?: BadgeStyles;
 }

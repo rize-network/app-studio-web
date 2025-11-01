@@ -14,6 +14,7 @@ import {
 } from './Badge.style';
 import { Center, useTheme } from 'app-studio';
 import { Text } from '../../Text/Text';
+import contrast from 'contrast';
 // No need to import ViewProps as it's not used directly
 /**
  * Badge View Component
@@ -24,13 +25,31 @@ const BadgeView: React.FC<BadgeProps> = ({
   shape = 'pillShaped',
   variant = 'filled',
   size = 'md',
+  bgColor,
   views,
   themeMode: elementMode,
   ...props
 }) => {
-  const { themeMode } = useTheme();
+  const { themeMode, getColor } = useTheme();
   const currentThemeMode = elementMode || themeMode;
   const variantStyles = getBadgeVariants(currentThemeMode)[variant];
+
+  // Calculate text color based on bgColor if provided
+  let textColor = variantStyles.color;
+  let backgroundColor = variantStyles.backgroundColor || 'color.black';
+
+  if (bgColor) {
+    // Use bgColor as the background
+    backgroundColor = bgColor;
+
+    // Get the actual color value and determine if it's light or dark
+    const actualBgColor = getColor(bgColor, { themeMode: currentThemeMode });
+    const tone = contrast(actualBgColor);
+
+    // Set appropriate text color based on background luminance
+    textColor = tone === 'light' ? 'color.black' : 'color.white';
+  }
+
   // Combine styles for the badge
   const combinedStyles: Record<string, any> = {
     // Base styles
@@ -38,12 +57,15 @@ const BadgeView: React.FC<BadgeProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'color.black',
+    backgroundColor,
 
     // Apply shape, size, and variant styles
     borderRadius: BadgeShapes[shape],
     ...BadgeSizes[size],
     ...variantStyles,
+
+    // Override color if bgColor is provided
+    ...(bgColor ? { backgroundColor, color: textColor } : {}),
 
     // Apply position styles if provided
     ...(position ? PositionStyles[position] : {}),

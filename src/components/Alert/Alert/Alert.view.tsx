@@ -12,6 +12,7 @@ import { Horizontal } from 'app-studio';
 import { WarningIcon, InfoIcon, ErrorIcon, SuccessIcon } from '../../Icon/Icon';
 import { AlertProps } from './Alert.props';
 import { getThemes } from './Alert.style';
+import contrast from 'contrast';
 
 /**
  * Alert component that displays important messages to users
@@ -22,23 +23,46 @@ export const AlertView = ({
   views,
   description = '',
   variant = 'default',
+  bgColor,
   themeMode: elementMode,
   children,
   ...props
 }: AlertProps) => {
-  const { themeMode } = useTheme();
+  const { themeMode, getColor } = useTheme();
   const currentThemeMode = elementMode || themeMode;
   const themes = getThemes(currentThemeMode);
+
+  // Calculate colors based on bgColor if provided
+  let backgroundColor = themes[variant].container.backgroundColor;
+  let textColor = themes[variant].content.color;
+  let iconColor = themes[variant].icon.color;
+  let borderColor = themes[variant].container.borderColor;
+
+  if (bgColor) {
+    backgroundColor = bgColor;
+
+    // Get the actual color value and determine if it's light or dark
+    const actualBgColor = getColor(bgColor, { themeMode: currentThemeMode });
+    const tone = contrast(actualBgColor);
+
+    // Set appropriate text and icon colors based on background luminance
+    textColor = tone === 'light' ? 'color.black' : 'color.white';
+    iconColor = textColor;
+
+    // For border, use a slightly darker/lighter version of the text color
+    borderColor = tone === 'light' ? 'color.gray.300' : 'color.gray.600';
+  }
+
   // Select the appropriate icon based on the variant
   const getIcon = () => {
     if (icon) return icon;
 
-    // Use the theme color directly from themes
-    const iconColor = views?.icon?.color ?? themes[variant].icon.color;
+    // Use the calculated icon color or custom color from views
+    const finalIconColor = views?.icon?.color ?? iconColor;
 
     const iconProps = {
       size: 20,
-      color: iconColor,
+      color: finalIconColor,
     };
 
     switch (variant) {
@@ -65,8 +89,8 @@ export const AlertView = ({
       borderRadius="8px" // Consistent with design system (rounded-md)
       borderWidth="1px"
       borderStyle="solid"
-      borderColor={themes[variant].container.borderColor}
-      backgroundColor={themes[variant].container.backgroundColor}
+      borderColor={borderColor}
+      backgroundColor={backgroundColor}
       boxShadow={themes[variant].container.boxShadow}
       // Animation
       transition="all 0.2s ease"
@@ -88,7 +112,7 @@ export const AlertView = ({
           fontSize="16px"
           fontWeight="600" // Semi-bold
           lineHeight="24px"
-          color={themes[variant].content.color}
+          color={textColor}
           {...views?.title}
         >
           {title}
@@ -98,7 +122,7 @@ export const AlertView = ({
           fontSize="14px"
           fontWeight="400" // Regular
           lineHeight="20px"
-          color={themes[variant].content.color}
+          color={textColor}
           {...views?.description}
         >
           {description || children}

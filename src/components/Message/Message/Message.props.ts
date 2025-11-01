@@ -26,6 +26,7 @@ export interface MessageProps extends ShowMessageProps {
   hide: Function;
   title: string;
   theme?: ThemesType;
+  bgColor?: string;
 }
 
 export interface MessageState {
