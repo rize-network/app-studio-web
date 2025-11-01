@@ -12,6 +12,7 @@ import { ViewProps } from 'app-studio';
 
 /**
  * Heading sizes following typography guidelines
+ * Matching shadcn/ui typography patterns
  */
 export const HeadingSizes: Record<Headings, ViewProps> = {
   h1: {
@@ -20,6 +21,8 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '700', // Bold
     letterSpacing: '-0.02em',
     marginBottom: '24px', // 6 × 4px grid
+    color: 'color.gray.900',
+    transition: 'color 0.15s ease',
   },
   h2: {
     fontSize: '30px', // 1.875rem
@@ -27,6 +30,8 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '700', // Bold
     letterSpacing: '-0.02em',
     marginBottom: '20px', // 5 × 4px grid
+    color: 'color.gray.900',
+    transition: 'color 0.15s ease',
   },
   h3: {
     fontSize: '24px', // 1.5rem
@@ -34,6 +39,8 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '600', // Semi-bold
     letterSpacing: '-0.01em',
     marginBottom: '16px', // 4 × 4px grid
+    color: 'color.gray.900',
+    transition: 'color 0.15s ease',
   },
   h4: {
     fontSize: '20px', // 1.25rem
@@ -41,6 +48,8 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '600', // Semi-bold
     letterSpacing: '-0.01em',
     marginBottom: '16px', // 4 × 4px grid
+    color: 'color.gray.900',
+    transition: 'color 0.15s ease',
   },
   h5: {
     fontSize: '18px', // 1.125rem
@@ -48,6 +57,8 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '600', // Semi-bold
     letterSpacing: '-0.01em',
     marginBottom: '12px', // 3 × 4px grid
+    color: 'color.gray.900',
+    transition: 'color 0.15s ease',
   },
   h6: {
     fontSize: '16px', // 1rem
@@ -55,6 +66,8 @@ export const HeadingSizes: Record<Headings, ViewProps> = {
     fontWeight: '600', // Semi-bold
     letterSpacing: '-0.01em',
     marginBottom: '8px', // 2 × 4px grid
+    color: 'color.gray.900',
+    transition: 'color 0.15s ease',
   },
 };
 

@@ -46,26 +46,38 @@ export const getCardVariants = (
     default: {
       backgroundColor: 'color.white',
       border: 'none',
-      transition: 'all 0.2s ease',
+      transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
     },
     outlined: {
       backgroundColor: 'color.white',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'color.gray.200',
-      transition: 'all 0.2s ease',
+      transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
       _hover: {
         borderColor: 'color.gray.300',
+        boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.05)',
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1)',
       },
     },
     elevated: {
       backgroundColor: 'color.white',
-      boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.08)',
+      boxShadow:
+        '0px 1px 3px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.06)',
       border: 'none',
-      transition: 'all 0.2s ease',
+      transition: 'box-shadow 0.2s ease',
       _hover: {
-        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.12)',
-        transform: 'translateY(-2px)',
+        boxShadow:
+          '0px 4px 6px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06)',
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.08)',
       },
     },
   };
