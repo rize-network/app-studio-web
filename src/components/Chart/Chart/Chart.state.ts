@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ChartData, ChartDataPoint } from './Chart.type';
+import React from 'react';
+import { ChartData, ChartDataPoint, TooltipData } from './Chart.type';
 import { DEFAULT_COLORS } from './Chart.style';
 
 export interface ChartStateProps {
@@ -8,6 +9,8 @@ export interface ChartStateProps {
   animated?: boolean;
   animationDuration?: number;
   showTooltips?: boolean;
+  tooltipOpenDelay?: number;
+  tooltipCloseDelay?: number;
 }
 
 export const useChartState = ({
@@ -16,6 +19,8 @@ export const useChartState = ({
   animated = true,
   animationDuration = 500,
   showTooltips = true,
+  tooltipOpenDelay = 100,
+  tooltipCloseDelay = 100,
 }: ChartStateProps) => {
   // State for animation progress (0 to 1)
   const [animationProgress, setAnimationProgress] = useState(animated ? 0 : 1);
@@ -25,12 +30,14 @@ export const useChartState = ({
     visible: boolean;
     x: number;
     y: number;
-    content: string;
+    content: React.ReactNode;
+    data: TooltipData | null;
   }>({
     visible: false,
     x: 0,
     y: 0,
-    content: '',
+    content: null,
+    data: null,
   });
 
   // Reference to animation frame
@@ -38,6 +45,10 @@ export const useChartState = ({
 
   // Reference to chart container
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // References for tooltip timers (similar to HoverCard)
+  const openTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Handle animation
   useEffect(() => {
@@ -68,6 +79,18 @@ export const useChartState = ({
     };
   }, [animated, animationDuration]);
 
+  // Cleanup timers on unmount
+  useEffect(() => {
+    return () => {
+      if (openTimerRef.current) {
+        clearTimeout(openTimerRef.current);
+      }
+      if (closeTimerRef.current) {
+        clearTimeout(closeTimerRef.current);
+      }
+    };
+  }, []);
+
   // Process data for charts
   const processedData = useCallback(() => {
     if (data) {
@@ -90,28 +113,57 @@ export const useChartState = ({
     return null;
   }, [data, dataPoints]);
 
-  // Handle tooltip show
+  // Handle tooltip show with delay (similar to HoverCard)
   const showTooltip = useCallback(
-    (x: number, y: number, content: string) => {
+    (x: number, y: number, content: React.ReactNode, tooltipData: TooltipData) => {
       if (!showTooltips) return;
 
-      setTooltip({
-        visible: true,
-        x,
-        y,
-        content,
-      });
+      // Clear any pending close timer
+      if (closeTimerRef.current) {
+        clearTimeout(closeTimerRef.current);
+        closeTimerRef.current = null;
+      }
+
+      // Clear any pending open timer
+      if (openTimerRef.current) {
+        clearTimeout(openTimerRef.current);
+      }
+
+      // Set timer to show tooltip after delay
+      openTimerRef.current = setTimeout(() => {
+        setTooltip({
+          visible: true,
+          x,
+          y,
+          content,
+          data: tooltipData,
+        });
+      }, tooltipOpenDelay);
     },
-    [showTooltips]
+    [showTooltips, tooltipOpenDelay]
   );
 
-  // Handle tooltip hide
+  // Handle tooltip hide with delay (similar to HoverCard)
   const hideTooltip = useCallback(() => {
-    setTooltip((prev) => ({
-      ...prev,
-      visible: false,
-    }));
-  }, []);
+    // Clear any pending open timer
+    if (openTimerRef.current) {
+      clearTimeout(openTimerRef.current);
+      openTimerRef.current = null;
+    }
+
+    // Clear any pending close timer
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+    }
+
+    // Set timer to hide tooltip after delay
+    closeTimerRef.current = setTimeout(() => {
+      setTooltip((prev) => ({
+        ...prev,
+        visible: false,
+      }));
+    }, tooltipCloseDelay);
+  }, [tooltipCloseDelay]);
 
   // Calculate chart dimensions
   const getChartDimensions = useCallback(() => {

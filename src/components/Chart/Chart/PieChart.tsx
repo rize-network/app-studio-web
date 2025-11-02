@@ -1,6 +1,9 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import { useTheme, useElementPosition } from 'app-studio';
-import { ChartDataPoint } from './Chart.type';
+import { ChartDataPoint, TooltipData } from './Chart.type';
+import { Text } from '../../Text/Text';
+import { View } from 'app-studio';
+import { Vertical } from 'app-studio';
 import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
 
 interface PieChartProps {
@@ -10,8 +13,14 @@ interface PieChartProps {
   animationProgress: number;
   isDonut?: boolean;
   onSliceClick?: (dataPoint: ChartDataPoint, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (
+    x: number,
+    y: number,
+    content: React.ReactNode,
+    data: TooltipData
+  ) => void;
   hideTooltip: () => void;
+  renderTooltip?: (data: TooltipData) => React.ReactNode;
   views?: any;
 }
 
@@ -24,6 +33,7 @@ export const PieChart: React.FC<PieChartProps> = ({
   onSliceClick,
   showTooltip,
   hideTooltip,
+  renderTooltip,
   views,
 }) => {
   // Get theme color function
@@ -170,7 +180,39 @@ export const PieChart: React.FC<PieChartProps> = ({
       {/* Pie slices */}
       {slices.map((slice, index) => {
         const handleMouseEnter = (e: React.MouseEvent) => {
-          const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
+          // Create tooltip data object with rich information
+          const tooltipData: TooltipData = {
+            name: slice.label,
+            value: slice.value,
+            label: slice.label,
+            percentage: slice.percentage,
+            index: slice.index,
+            color: slice.color,
+            metadata: dataPoints[slice.index]?.metadata,
+          };
+
+          // Generate tooltip content - use custom renderer if provided
+          const tooltipContent = renderTooltip ? (
+            renderTooltip(tooltipData)
+          ) : (
+            <Vertical gap={4}>
+              <Text fontWeight="bold" fontSize="14px">
+                {slice.label}
+              </Text>
+              <Text fontSize="14px">
+                Value: {slice.value} ({slice.percentage})
+              </Text>
+              {tooltipData.metadata && (
+                <View marginTop={4}>
+                  {Object.entries(tooltipData.metadata).map(([key, val]) => (
+                    <Text key={key} fontSize="12px" color="color.gray.600">
+                      {key}: {String(val)}
+                    </Text>
+                  ))}
+                </View>
+              )}
+            </Vertical>
+          );
 
           // Use intelligent positioning based on useElementPosition relation data
           let x = e.clientX;
@@ -195,7 +237,7 @@ export const PieChart: React.FC<PieChartProps> = ({
             }
           }
 
-          showTooltip(x, y, tooltipContent);
+          showTooltip(x, y, tooltipContent, tooltipData);
         };
 
         const handleClick = () => {

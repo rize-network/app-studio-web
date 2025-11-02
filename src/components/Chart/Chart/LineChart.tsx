@@ -1,5 +1,8 @@
 import React, { useMemo } from 'react';
-import { ChartData } from './Chart.type';
+import { ChartData, TooltipData } from './Chart.type';
+import { Text } from '../../Text/Text';
+import { View } from 'app-studio';
+import { Vertical } from 'app-studio';
 import {
   LineStyles,
   PointStyles,
@@ -16,8 +19,14 @@ interface LineChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onPointClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (
+    x: number,
+    y: number,
+    content: React.ReactNode,
+    data: TooltipData
+  ) => void;
   hideTooltip: () => void;
+  renderTooltip?: (data: TooltipData) => React.ReactNode;
   views?: any;
 }
 
@@ -30,6 +39,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   onPointClick,
   showTooltip,
   hideTooltip,
+  renderTooltip,
   views,
 }) => {
   // Calculate chart dimensions
@@ -206,8 +216,39 @@ export const LineChart: React.FC<LineChartProps> = ({
               (value / maxValue) * chartHeight * animationProgress;
 
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
-              showTooltip(e.clientX, e.clientY, tooltipContent);
+              // Create tooltip data object with rich information
+              const tooltipData: TooltipData = {
+                name: series.name,
+                value: value,
+                index: dataIndex,
+                color: series.color,
+                metadata: series.metadata,
+              };
+
+              // Generate tooltip content - use custom renderer if provided
+              const tooltipContent = renderTooltip ? (
+                renderTooltip(tooltipData)
+              ) : (
+                <Vertical gap={4}>
+                  <Text fontWeight="bold" fontSize="14px">
+                    {series.name}
+                  </Text>
+                  <Text fontSize="14px">Value: {value}</Text>
+                  {tooltipData.metadata && (
+                    <View marginTop={4}>
+                      {Object.entries(tooltipData.metadata).map(
+                        ([key, val]) => (
+                          <Text key={key} fontSize="12px" color="color.gray.600">
+                            {key}: {String(val)}
+                          </Text>
+                        )
+                      )}
+                    </View>
+                  )}
+                </Vertical>
+              );
+
+              showTooltip(e.clientX, e.clientY, tooltipContent, tooltipData);
             };
 
             const handleClick = () => {
