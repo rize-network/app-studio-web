@@ -9,16 +9,9 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   renderColumnHeader,
   renderEmptyState,
   views,
-  draggedCardId,
-  hoveredColumnId,
-  hoveredCardId,
-  hoveredCardPosition,
-  onCardDragStart,
-  onCardDragEnd,
-  onColumnDragOver,
-  onCardDragOver,
-  onColumnDrop,
-  onCardDrop,
+  draggedCard,
+  cardRefsRef,
+  onCardMouseDown,
 }) => {
   const renderDefaultCard = React.useCallback(
     (card: KanbanBoardViewProps['columns'][number]['cards'][number]) => (
@@ -76,34 +69,9 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
           <Vertical
             gap={12}
             minHeight={40}
-            onDragOver={(event) => onColumnDragOver(column.id, event)}
-            onDrop={(event) => onColumnDrop(column.id, event)}
-            opacity={
-              draggedCardId && hoveredColumnId === column.id ? 0.8 : undefined
-            }
-            padding={
-              draggedCardId && hoveredColumnId === column.id ? 4 : undefined
-            }
             position="relative"
-            transition="all 0.15s ease-in-out"
             {...views?.columnBody}
           >
-            {draggedCardId &&
-              hoveredColumnId === column.id &&
-              hoveredCardId === null &&
-              hoveredCardPosition && (
-                <View
-                  position="absolute"
-                  left={-8}
-                  right={-8}
-                  height={3}
-                  backgroundColor="theme.primary"
-                  borderRadius={2}
-                  top={hoveredCardPosition === 'before' ? -6 : undefined}
-                  bottom={hoveredCardPosition === 'after' ? -6 : undefined}
-                  pointerEvents="none"
-                />
-              )}
             {column.cards.length === 0 && (
               <View
                 padding={12}
@@ -127,51 +95,34 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
               </View>
             )}
 
-            {column.cards.map((card) => (
-              <View key={card.id} position="relative">
-                {draggedCardId &&
-                  hoveredCardId === card.id &&
-                  draggedCardId !== card.id &&
-                  hoveredCardPosition && (
-                    <View
-                      position="absolute"
-                      left={-8}
-                      right={-8}
-                      height={3}
-                      backgroundColor="theme.primary"
-                      borderRadius={2}
-                      zIndex={10}
-                      top={hoveredCardPosition === 'before' ? -6 : undefined}
-                      bottom={hoveredCardPosition === 'after' ? -6 : undefined}
-                      pointerEvents="none"
-                    />
-                  )}
-                <View
-                  draggable
-                  cursor="grab"
-                  backgroundColor="#ffffff"
-                  borderRadius={10}
-                  padding="12px"
-                  boxShadow="0 1px 2px 0 rgba(16, 24, 40, 0.08)"
-                  opacity={draggedCardId === card.id ? 0.6 : 1}
-                  onDragStart={(event) =>
-                    onCardDragStart(column.id, card.id, event)
+            {column.cards.map((card, cardIndex) => (
+              <View
+                key={card.id}
+                ref={(el) => {
+                  if (el) {
+                    cardRefsRef.current.set(`${column.id}-${card.id}`, el as HTMLDivElement);
+                  } else {
+                    cardRefsRef.current.delete(`${column.id}-${card.id}`);
                   }
-                  onDragEnd={onCardDragEnd}
-                  onDragOver={(event) => {
-                    event.stopPropagation();
-                    onCardDragOver(column.id, card.id, event);
-                  }}
-                  onDrop={(event) => {
-                    event.stopPropagation();
-                    onCardDrop(column.id, card.id, event);
-                  }}
-                  {...views?.card}
-                >
-                  {renderCard
-                    ? renderCard(card, column)
-                    : renderDefaultCard(card)}
-                </View>
+                }}
+                cursor="grab"
+                backgroundColor="#ffffff"
+                borderRadius={10}
+                padding="12px"
+                boxShadow="0 1px 2px 0 rgba(16, 24, 40, 0.08)"
+                opacity={
+                  draggedCard?.cardId === card.id ? 0.5 : 1
+                }
+                transition="transform 0.2s, opacity 0.2s"
+                onMouseDown={(event) =>
+                  onCardMouseDown(column.id, card.id, cardIndex, event)
+                }
+                onTouchStart={(event) =>
+                  onCardMouseDown(column.id, card.id, cardIndex, event)
+                }
+                {...views?.card}
+              >
+                {renderCard ? renderCard(card, column) : renderDefaultCard(card)}
               </View>
             ))}
           </Vertical>
