@@ -55,8 +55,10 @@ export const useKanbanBoardState = ({
     (event: MouseEvent | TouchEvent) => {
       if (!draggedCard) return;
 
-      const clientX = 'touches' in event ? event.touches[0].clientX : event.clientX;
-      const clientY = 'touches' in event ? event.touches[0].clientY : event.clientY;
+      const clientX =
+        'touches' in event ? event.touches[0].clientX : event.clientX;
+      const clientY =
+        'touches' in event ? event.touches[0].clientY : event.clientY;
 
       const draggedElement = cardRefsRef.current.get(
         `${draggedCard.columnId}-${draggedCard.cardId}`
@@ -78,11 +80,14 @@ export const useKanbanBoardState = ({
       for (const column of columns) {
         for (let i = 0; i < column.cards.length; i++) {
           const card = column.cards[i];
-          const cardElement = cardRefsRef.current.get(`${column.id}-${card.id}`);
+          const cardElement = cardRefsRef.current.get(
+            `${column.id}-${card.id}`
+          );
 
           if (
             !cardElement ||
-            (column.id === draggedCard.columnId && card.id === draggedCard.cardId)
+            (column.id === draggedCard.columnId &&
+              card.id === draggedCard.cardId)
           ) {
             continue;
           }
@@ -125,9 +130,7 @@ export const useKanbanBoardState = ({
           const sourceColumn = newColumns.find(
             (col) => col.id === draggedCard.columnId
           );
-          const targetColumn = newColumns.find(
-            (col) => col.id === targetColId
-          );
+          const targetColumn = newColumns.find((col) => col.id === targetColId);
 
           if (!sourceColumn || !targetColumn) return prevColumns;
 

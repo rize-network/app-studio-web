@@ -100,7 +100,10 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                 key={card.id}
                 ref={(el) => {
                   if (el) {
-                    cardRefsRef.current.set(`${column.id}-${card.id}`, el as HTMLDivElement);
+                    cardRefsRef.current.set(
+                      `${column.id}-${card.id}`,
+                      el as HTMLDivElement
+                    );
                   } else {
                     cardRefsRef.current.delete(`${column.id}-${card.id}`);
                   }
@@ -110,9 +113,7 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                 borderRadius={10}
                 padding="12px"
                 boxShadow="0 1px 2px 0 rgba(16, 24, 40, 0.08)"
-                opacity={
-                  draggedCard?.cardId === card.id ? 0.5 : 1
-                }
+                opacity={draggedCard?.cardId === card.id ? 0.5 : 1}
                 transition="transform 0.2s, opacity 0.2s"
                 onMouseDown={(event) =>
                   onCardMouseDown(column.id, card.id, cardIndex, event)
@@ -122,7 +123,9 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                 }
                 {...views?.card}
               >
-                {renderCard ? renderCard(card, column) : renderDefaultCard(card)}
+                {renderCard
+                  ? renderCard(card, column)
+                  : renderDefaultCard(card)}
               </View>
             ))}
           </Vertical>
