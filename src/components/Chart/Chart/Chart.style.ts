@@ -50,16 +50,18 @@ export const LegendTextStyles: ViewProps = {
   fontSize: '14px',
 };
 
-// Default styles for tooltip
+// Default styles for tooltip (enhanced to match HoverCard styling)
 export const TooltipStyles: ViewProps = {
   position: 'absolute',
   backgroundColor: 'color.white',
-  padding: '8px 12px',
-  borderRadius: '4px',
-  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+  padding: '12px 16px',
+  borderRadius: '8px',
+  boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
   fontSize: '14px',
   pointerEvents: 'none',
-  zIndex: 10,
+  zIndex: 1000,
+  minWidth: '120px',
+  maxWidth: '300px',
 };
 
 // Default styles for chart grid

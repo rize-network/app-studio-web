@@ -31,6 +31,9 @@ export const ChartView: React.FC<ChartProps> = ({
   legendPosition = 'bottom',
   showGrid = true,
   showTooltips = true,
+  tooltipOpenDelay = 100,
+  tooltipCloseDelay = 100,
+  renderTooltip,
   animated = true,
   animationDuration = 500,
   responsive = true,
@@ -66,6 +69,8 @@ export const ChartView: React.FC<ChartProps> = ({
     animated,
     animationDuration,
     showTooltips,
+    tooltipOpenDelay,
+    tooltipCloseDelay,
   });
 
   // Get processed data
@@ -138,6 +143,7 @@ export const ChartView: React.FC<ChartProps> = ({
             onBarClick={onSeriesClick}
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
+            renderTooltip={renderTooltip}
             views={views}
           />
         );
@@ -153,6 +159,7 @@ export const ChartView: React.FC<ChartProps> = ({
             onPointClick={onSeriesClick}
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
+            renderTooltip={renderTooltip}
             views={views}
           />
         );
@@ -168,6 +175,7 @@ export const ChartView: React.FC<ChartProps> = ({
             onSliceClick={onDataPointClick}
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
+            renderTooltip={renderTooltip}
             views={views}
           />
         );
@@ -176,13 +184,13 @@ export const ChartView: React.FC<ChartProps> = ({
     }
   };
 
-  // Render tooltip
-  const renderTooltip = () => {
+  // Render tooltip with rich content support
+  const renderTooltipElement = () => {
     if (!showTooltips || !tooltip.visible) return null;
 
     // Calculate tooltip position with boundary checking
-    const tooltipWidth = 200; // Approximate tooltip width
-    const tooltipHeight = 40; // Approximate tooltip height
+    const tooltipWidth = 250; // Approximate tooltip width (increased for rich content)
+    const tooltipHeight = 100; // Approximate tooltip height (increased for rich content)
     const offset = 10; // Offset from cursor
 
     let left = tooltip.x - tooltipWidth / 2;
@@ -212,10 +220,11 @@ export const ChartView: React.FC<ChartProps> = ({
         position="fixed"
         left={`${left}px`}
         top={`${top}px`}
+        role="tooltip"
         {...TooltipStyles}
         {...views?.tooltip}
       >
-        {tooltip.content}
+        <View {...views?.tooltipContent}>{tooltip.content}</View>
       </View>
     );
   };
@@ -299,7 +308,7 @@ export const ChartView: React.FC<ChartProps> = ({
       {/* Only show legend when chart content is visible */}
       {showChartContent && legendPosition === 'bottom' && renderLegend()}
 
-      {renderTooltip()}
+      {renderTooltipElement()}
     </View>
   );
 };

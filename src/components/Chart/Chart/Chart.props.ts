@@ -1,9 +1,11 @@
 import { ViewProps } from 'app-studio';
+import React from 'react';
 import {
   ChartType,
   ChartData,
   ChartDataPoint,
   ChartStyles,
+  TooltipData,
 } from './Chart.type';
 
 export interface ChartProps extends Omit<ViewProps, 'animationDuration'> {
@@ -46,6 +48,24 @@ export interface ChartProps extends Omit<ViewProps, 'animationDuration'> {
    * Whether to show tooltips on hover
    */
   showTooltips?: boolean;
+
+  /**
+   * Delay in milliseconds before showing the tooltip (similar to HoverCard)
+   * @default 100
+   */
+  tooltipOpenDelay?: number;
+
+  /**
+   * Delay in milliseconds before hiding the tooltip (similar to HoverCard)
+   * @default 100
+   */
+  tooltipCloseDelay?: number;
+
+  /**
+   * Custom tooltip renderer function for advanced tooltip content
+   * Receives tooltip data and returns custom React content
+   */
+  renderTooltip?: (data: TooltipData) => React.ReactNode;
 
   /**
    * Whether the chart is animated
