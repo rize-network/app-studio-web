@@ -43,32 +43,16 @@ export interface KanbanBoardProps {
 
 export interface KanbanBoardViewProps extends KanbanBoardProps {
   columns: KanbanBoardColumn[];
-  draggedCardId: string | null;
-  hoveredColumnId: string | null;
-  hoveredCardId: string | null;
-  hoveredCardPosition: 'before' | 'after' | null;
-  onCardDragStart: (
+  draggedCard: {
+    columnId: string;
+    cardId: string;
+    cardIndex: number;
+  } | null;
+  cardRefsRef: React.MutableRefObject<Map<string, HTMLDivElement>>;
+  onCardMouseDown: (
     columnId: string,
     cardId: string,
-    event: React.DragEvent<HTMLDivElement>
-  ) => void;
-  onCardDragEnd: () => void;
-  onCardDrop: (
-    columnId: string,
-    cardId: string | null,
-    event: React.DragEvent<HTMLDivElement>
-  ) => void;
-  onColumnDrop: (
-    columnId: string,
-    event: React.DragEvent<HTMLDivElement>
-  ) => void;
-  onCardDragOver: (
-    columnId: string,
-    cardId: string | null,
-    event: React.DragEvent<HTMLDivElement>
-  ) => void;
-  onColumnDragOver: (
-    columnId: string,
-    event: React.DragEvent<HTMLDivElement>
+    cardIndex: number,
+    event: React.MouseEvent | React.TouchEvent
   ) => void;
 }
