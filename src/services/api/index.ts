@@ -111,6 +111,19 @@ export type { UpdateTaskStatus } from './models/UpdateTaskStatus';
 export type { UpdateUserCountParams } from './models/UpdateUserCountParams';
 export type { UpdateUserParams } from './models/UpdateUserParams';
 
+export type { KnowledgeGraphNode } from './models/KnowledgeGraphNode';
+export type { CreateNodeParams } from './models/KnowledgeGraphNode';
+export type { UpdateNodeParams } from './models/KnowledgeGraphNode';
+export type { KnowledgeGraphRelationship } from './models/KnowledgeGraphRelationship';
+export type { CreateRelationshipParams } from './models/KnowledgeGraphRelationship';
+export type { UpdateRelationshipParams } from './models/KnowledgeGraphRelationship';
+export type { FindNodesParams } from './models/KnowledgeGraphQuery';
+export type { FindRelationshipsParams } from './models/KnowledgeGraphQuery';
+export type { FindPathParams } from './models/KnowledgeGraphQuery';
+export type { PathResult } from './models/KnowledgeGraphQuery';
+export type { TraverseParams } from './models/KnowledgeGraphQuery';
+export type { TraverseResult } from './models/KnowledgeGraphQuery';
+
 export * as AccountService from './services/AccountService';
 export * as ActionService from './services/ActionService';
 export * as AdkService from './services/AdkService';
@@ -124,6 +137,7 @@ export * as AuthService from './services/AuthService';
 export * as CommentService from './services/CommentService';
 export * as ComponentService from './services/ComponentService';
 export * as ContentService from './services/ContentService';
+export * as EnterpriseKnowledgeGraphService from './services/EnterpriseKnowledgeGraphService';
 export * as CronService from './services/CronService';
 export * as ExempleService from './services/ExempleService';
 export * as FeedbackService from './services/FeedbackService';
