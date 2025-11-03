@@ -54,10 +54,13 @@ export const LegendTextStyles: ViewProps = {
 export const TooltipStyles: ViewProps = {
   position: 'absolute',
   backgroundColor: 'color.white',
-  padding: '8px 12px',
-  borderRadius: '4px',
-  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+  padding: '12px 16px',
+  borderRadius: '8px',
+  boxShadow: '0px 12px 24px rgba(15, 23, 42, 0.18)',
+  border: '1px solid color.gray.200',
   fontSize: '14px',
+  display: 'flex',
+  flexDirection: 'column',
   pointerEvents: 'none',
   zIndex: 10,
 };
