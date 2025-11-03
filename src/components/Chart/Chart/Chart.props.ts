@@ -4,6 +4,7 @@ import {
   ChartData,
   ChartDataPoint,
   ChartStyles,
+  ChartTooltipFormatter,
 } from './Chart.type';
 
 export interface ChartProps extends Omit<ViewProps, 'animationDuration'> {
@@ -126,4 +127,10 @@ export interface ChartProps extends Omit<ViewProps, 'animationDuration'> {
    * Aria-label for the chart region. Defaults to the title if provided.
    */
   'aria-label'?: string;
+
+  /**
+   * Custom formatter for tooltip content. Receives contextual chart data and
+   * should return a React node to be rendered inside the tooltip.
+   */
+  tooltipFormatter?: ChartTooltipFormatter;
 }

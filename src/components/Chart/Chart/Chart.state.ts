@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { ReactNode } from 'react';
 import { ChartData, ChartDataPoint } from './Chart.type';
 import { DEFAULT_COLORS } from './Chart.style';
 
@@ -25,12 +26,12 @@ export const useChartState = ({
     visible: boolean;
     x: number;
     y: number;
-    content: string;
+    content: ReactNode;
   }>({
     visible: false,
     x: 0,
     y: 0,
-    content: '',
+    content: null,
   });
 
   // Reference to animation frame
@@ -92,7 +93,7 @@ export const useChartState = ({
 
   // Handle tooltip show
   const showTooltip = useCallback(
-    (x: number, y: number, content: string) => {
+    (x: number, y: number, content: ReactNode) => {
       if (!showTooltips) return;
 
       setTooltip({
