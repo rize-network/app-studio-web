@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useTheme } from 'app-studio';
-import { ChartData } from './Chart.type';
+import { ChartData, ChartTooltipContext } from './Chart.type';
 import {
   BarStyles,
   AxisStyles,
@@ -15,9 +15,10 @@ interface BarChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onBarClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
+  getTooltipContent: (context: ChartTooltipContext) => React.ReactNode;
 }
 
 export const BarChart: React.FC<BarChartProps> = ({
@@ -30,6 +31,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   showTooltip,
   hideTooltip,
   views,
+  getTooltipContent,
 }) => {
   const { getColor } = useTheme();
   // Calculate chart dimensions
@@ -162,7 +164,21 @@ export const BarChart: React.FC<BarChartProps> = ({
             const y = height - padding.bottom - barHeight;
 
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
+              const context: ChartTooltipContext = {
+                type: 'bar',
+                label: data.labels[dataIndex],
+                value,
+                seriesName: series.name,
+                seriesIndex,
+                dataIndex,
+                dataPoint: {
+                  label: data.labels[dataIndex],
+                  value,
+                  color: series.color,
+                },
+              };
+
+              const tooltipContent = getTooltipContent(context);
               showTooltip(e.clientX, e.clientY, tooltipContent);
             };
 

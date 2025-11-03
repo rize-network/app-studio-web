@@ -4,6 +4,7 @@ import {
   ChartData,
   ChartDataPoint,
   ChartStyles,
+  ChartTooltipFormatter,
 } from './Chart.type';
 
 export interface ChartProps extends Omit<ViewProps, 'animationDuration'> {
@@ -46,6 +47,12 @@ export interface ChartProps extends Omit<ViewProps, 'animationDuration'> {
    * Whether to show tooltips on hover
    */
   showTooltips?: boolean;
+
+  /**
+   * Custom formatter for tooltip content. Receives contextual information about the hovered data point
+   * and should return React content to be rendered inside the tooltip.
+   */
+  tooltipFormatter?: ChartTooltipFormatter;
 
   /**
    * Whether the chart is animated

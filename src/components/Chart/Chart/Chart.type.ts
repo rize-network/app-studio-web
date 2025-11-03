@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { ViewProps } from 'app-studio';
 
 export type ChartType = 'bar' | 'line' | 'pie' | 'donut' | 'area';
@@ -18,6 +19,40 @@ export interface ChartData {
   labels: string[];
   series: ChartSeries[];
 }
+
+export interface ChartTooltipContext {
+  type: ChartType;
+  /**
+   * Label associated with the data point (typically the x-axis label)
+   */
+  label: string;
+  /**
+   * Value of the hovered data point
+   */
+  value: number;
+  /**
+   * Index of the hovered data point within its series/data set
+   */
+  dataIndex?: number;
+  /**
+   * Name of the series (for multi-series charts)
+   */
+  seriesName?: string;
+  /**
+   * Index of the series (for multi-series charts)
+   */
+  seriesIndex?: number;
+  /**
+   * Percentage representation (for pie/donut charts)
+   */
+  percentage?: number;
+  /**
+   * Raw data point reference (useful for pie/donut charts)
+   */
+  dataPoint?: ChartDataPoint;
+}
+
+export type ChartTooltipFormatter = (context: ChartTooltipContext) => ReactNode;
 
 export interface ChartStyles {
   container?: ViewProps;
