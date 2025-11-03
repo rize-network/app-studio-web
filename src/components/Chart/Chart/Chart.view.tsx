@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Horizontal } from 'app-studio';
@@ -49,6 +49,7 @@ export const ChartView: React.FC<ChartProps> = ({
   'aria-label': ariaLabel,
 
   themeMode: elementMode,
+  tooltipFormatter,
   ...props
 }) => {
   // Use chart state hook
@@ -139,6 +140,7 @@ export const ChartView: React.FC<ChartProps> = ({
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
             views={views}
+            tooltipFormatter={tooltipFormatter}
           />
         );
       case 'line':
@@ -154,6 +156,8 @@ export const ChartView: React.FC<ChartProps> = ({
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
             views={views}
+            chartType={type}
+            tooltipFormatter={tooltipFormatter}
           />
         );
       case 'pie':
@@ -169,6 +173,7 @@ export const ChartView: React.FC<ChartProps> = ({
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
             views={views}
+            tooltipFormatter={tooltipFormatter}
           />
         );
       default:
@@ -176,13 +181,30 @@ export const ChartView: React.FC<ChartProps> = ({
     }
   };
 
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
+  const [tooltipSize, setTooltipSize] = useState({ width: 200, height: 40 });
+
+  useEffect(() => {
+    if (tooltip.visible && tooltipRef.current) {
+      const rect = tooltipRef.current.getBoundingClientRect();
+      const nextSize = { width: rect.width, height: rect.height };
+
+      if (
+        Math.abs(nextSize.width - tooltipSize.width) > 1 ||
+        Math.abs(nextSize.height - tooltipSize.height) > 1
+      ) {
+        setTooltipSize(nextSize);
+      }
+    }
+  }, [tooltip.visible, tooltip.content, tooltipSize.height, tooltipSize.width]);
+
   // Render tooltip
   const renderTooltip = () => {
     if (!showTooltips || !tooltip.visible) return null;
 
     // Calculate tooltip position with boundary checking
-    const tooltipWidth = 200; // Approximate tooltip width
-    const tooltipHeight = 40; // Approximate tooltip height
+    const tooltipWidth = tooltipSize.width || 200;
+    const tooltipHeight = tooltipSize.height || 40;
     const offset = 10; // Offset from cursor
 
     let left = tooltip.x - tooltipWidth / 2;
@@ -212,6 +234,7 @@ export const ChartView: React.FC<ChartProps> = ({
         position="fixed"
         left={`${left}px`}
         top={`${top}px`}
+        ref={tooltipRef}
         {...TooltipStyles}
         {...views?.tooltip}
       >

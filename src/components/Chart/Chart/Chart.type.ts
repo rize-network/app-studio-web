@@ -1,4 +1,5 @@
 import { ViewProps } from 'app-studio';
+import { ReactNode } from 'react';
 
 export type ChartType = 'bar' | 'line' | 'pie' | 'donut' | 'area';
 
@@ -17,6 +18,17 @@ export interface ChartSeries {
 export interface ChartData {
   labels: string[];
   series: ChartSeries[];
+}
+
+export interface ChartTooltipPayload {
+  type: ChartType;
+  label?: string;
+  value: number;
+  seriesName?: string;
+  dataIndex: number;
+  seriesIndex?: number;
+  percentage?: number;
+  dataPoint?: ChartDataPoint;
 }
 
 export interface ChartStyles {
@@ -39,3 +51,5 @@ export interface ChartStyles {
   errorOverlay?: ViewProps;
   noDataOverlay?: ViewProps;
 }
+
+export type ChartTooltipFormatter = (payload: ChartTooltipPayload) => ReactNode;

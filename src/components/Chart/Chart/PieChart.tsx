@@ -1,7 +1,8 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import { useTheme, useElementPosition } from 'app-studio';
-import { ChartDataPoint } from './Chart.type';
+import { ChartDataPoint, ChartTooltipFormatter } from './Chart.type';
 import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
+import { ChartTooltipContent } from './ChartTooltipContent';
 
 interface PieChartProps {
   dataPoints: ChartDataPoint[];
@@ -10,9 +11,10 @@ interface PieChartProps {
   animationProgress: number;
   isDonut?: boolean;
   onSliceClick?: (dataPoint: ChartDataPoint, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
+  tooltipFormatter?: ChartTooltipFormatter;
 }
 
 export const PieChart: React.FC<PieChartProps> = ({
@@ -25,6 +27,7 @@ export const PieChart: React.FC<PieChartProps> = ({
   showTooltip,
   hideTooltip,
   views,
+  tooltipFormatter,
 }) => {
   // Get theme color function
   const { getColor } = useTheme();
@@ -127,6 +130,7 @@ export const PieChart: React.FC<PieChartProps> = ({
         label: dataPoints[i].label,
         value: dataPoints[i].value,
         percentage: percentageText,
+        percentageValue: percentage,
         labelX,
         labelY,
         startAngle,
@@ -170,7 +174,14 @@ export const PieChart: React.FC<PieChartProps> = ({
       {/* Pie slices */}
       {slices.map((slice, index) => {
         const handleMouseEnter = (e: React.MouseEvent) => {
-          const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
+          const defaultContent = (
+            <ChartTooltipContent
+              seriesName={slice.label}
+              value={slice.value}
+              percentage={slice.percentageValue}
+              color={slice.color}
+            />
+          );
 
           // Use intelligent positioning based on useElementPosition relation data
           let x = e.clientX;
@@ -195,7 +206,21 @@ export const PieChart: React.FC<PieChartProps> = ({
             }
           }
 
-          showTooltip(x, y, tooltipContent);
+          const payload = {
+            type: (isDonut ? 'donut' : 'pie') as const,
+            label: slice.label,
+            value: slice.value,
+            seriesName: slice.label,
+            dataIndex: slice.index,
+            percentage: slice.percentageValue,
+            dataPoint: dataPoints[slice.index],
+          };
+
+          const formattedContent = tooltipFormatter
+            ? tooltipFormatter(payload)
+            : undefined;
+
+          showTooltip(x, y, formattedContent ?? defaultContent);
         };
 
         const handleClick = () => {

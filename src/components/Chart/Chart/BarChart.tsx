@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 import { useTheme } from 'app-studio';
-import { ChartData } from './Chart.type';
+import { ChartData, ChartTooltipFormatter } from './Chart.type';
 import {
   BarStyles,
   AxisStyles,
   AxisLabelStyles,
   GridStyles,
 } from './Chart.style';
+import { ChartTooltipContent } from './ChartTooltipContent';
 
 interface BarChartProps {
   data: ChartData;
@@ -15,9 +16,10 @@ interface BarChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onBarClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
+  tooltipFormatter?: ChartTooltipFormatter;
 }
 
 export const BarChart: React.FC<BarChartProps> = ({
@@ -30,6 +32,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   showTooltip,
   hideTooltip,
   views,
+  tooltipFormatter,
 }) => {
   const { getColor } = useTheme();
   // Calculate chart dimensions
@@ -162,8 +165,38 @@ export const BarChart: React.FC<BarChartProps> = ({
             const y = height - padding.bottom - barHeight;
 
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
-              showTooltip(e.clientX, e.clientY, tooltipContent);
+              const label = data.labels[dataIndex];
+              const resolvedColor = series.color
+                ? getColor(series.color)
+                : undefined;
+
+              const defaultContent = (
+                <ChartTooltipContent
+                  seriesName={series.name}
+                  label={label}
+                  value={value}
+                  color={resolvedColor}
+                />
+              );
+
+              const payload = {
+                type: 'bar' as const,
+                label,
+                value,
+                seriesName: series.name,
+                dataIndex,
+                seriesIndex,
+              };
+
+              const formattedContent = tooltipFormatter
+                ? tooltipFormatter(payload)
+                : undefined;
+
+              showTooltip(
+                e.clientX,
+                e.clientY,
+                formattedContent ?? defaultContent
+              );
             };
 
             const handleClick = () => {

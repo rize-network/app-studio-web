@@ -1,6 +1,7 @@
 import React from 'react';
 import { Chart } from '../Chart';
 import { View } from 'app-studio';
+import { Text } from '../../Text/Text';
 import { CHART_COLORS } from '../Chart/ChartColors';
 
 export const CustomChartDemo = () => {
@@ -27,6 +28,26 @@ export const CustomChartDemo = () => {
         data={data}
         title="Quarterly Sales"
         animated
+        tooltipFormatter={({ seriesName, label, value }) => (
+          <View display="flex" flexDirection="column" gap="6px">
+            {seriesName && (
+              <Text fontWeight="semibold" fontSize="14px">
+                {seriesName}
+              </Text>
+            )}
+            {label && (
+              <Text fontSize="12px" color="color.gray.600">
+                Quarter: {label}
+              </Text>
+            )}
+            <Text fontWeight="bold" fontSize="16px">
+              ${value.toLocaleString()}
+            </Text>
+            <Text fontSize="12px" color="color.gray.600">
+              Compared against plan with hover card style insights.
+            </Text>
+          </View>
+        )}
         views={{
           container: {
             backgroundColor: 'color.gray.50',

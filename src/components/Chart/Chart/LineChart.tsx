@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { ChartData } from './Chart.type';
+import { ChartData, ChartTooltipFormatter } from './Chart.type';
 import {
   LineStyles,
   PointStyles,
@@ -8,6 +8,7 @@ import {
   GridStyles,
 } from './Chart.style';
 import { useTheme } from 'app-studio';
+import { ChartTooltipContent } from './ChartTooltipContent';
 
 interface LineChartProps {
   data: ChartData;
@@ -16,9 +17,11 @@ interface LineChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onPointClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
+  tooltipFormatter?: ChartTooltipFormatter;
+  chartType: 'line' | 'area';
 }
 
 export const LineChart: React.FC<LineChartProps> = ({
@@ -31,6 +34,8 @@ export const LineChart: React.FC<LineChartProps> = ({
   showTooltip,
   hideTooltip,
   views,
+  tooltipFormatter,
+  chartType,
 }) => {
   // Calculate chart dimensions
   const { getColor } = useTheme();
@@ -205,9 +210,39 @@ export const LineChart: React.FC<LineChartProps> = ({
               padding.bottom -
               (value / maxValue) * chartHeight * animationProgress;
 
+            const label = data.labels[dataIndex];
+            const resolvedColor = series.color
+              ? getColor(series.color)
+              : undefined;
+
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
-              showTooltip(e.clientX, e.clientY, tooltipContent);
+              const defaultContent = (
+                <ChartTooltipContent
+                  seriesName={series.name}
+                  label={label}
+                  value={value}
+                  color={resolvedColor}
+                />
+              );
+
+              const payload = {
+                type: chartType,
+                label,
+                value,
+                seriesName: series.name,
+                dataIndex,
+                seriesIndex,
+              };
+
+              const formattedContent = tooltipFormatter
+                ? tooltipFormatter(payload)
+                : undefined;
+
+              showTooltip(
+                e.clientX,
+                e.clientY,
+                formattedContent ?? defaultContent
+              );
             };
 
             const handleClick = () => {
