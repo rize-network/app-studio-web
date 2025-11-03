@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import { useTheme, useElementPosition } from 'app-studio';
-import { ChartDataPoint } from './Chart.type';
+import { ChartDataPoint, ChartTooltipContext } from './Chart.type';
 import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
 
 interface PieChartProps {
@@ -10,9 +10,10 @@ interface PieChartProps {
   animationProgress: number;
   isDonut?: boolean;
   onSliceClick?: (dataPoint: ChartDataPoint, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
+  getTooltipContent: (context: ChartTooltipContext) => React.ReactNode;
 }
 
 export const PieChart: React.FC<PieChartProps> = ({
@@ -25,6 +26,7 @@ export const PieChart: React.FC<PieChartProps> = ({
   showTooltip,
   hideTooltip,
   views,
+  getTooltipContent,
 }) => {
   // Get theme color function
   const { getColor } = useTheme();
@@ -127,11 +129,16 @@ export const PieChart: React.FC<PieChartProps> = ({
         label: dataPoints[i].label,
         value: dataPoints[i].value,
         percentage: percentageText,
+        percentageValue: percentage * 100,
         labelX,
         labelY,
         startAngle,
         endAngle,
         index: i,
+        dataPoint: {
+          ...dataPoints[i],
+          color: dataPoints[i].color ?? colorValue,
+        },
       });
 
       startAngle = endAngle;
@@ -170,7 +177,16 @@ export const PieChart: React.FC<PieChartProps> = ({
       {/* Pie slices */}
       {slices.map((slice, index) => {
         const handleMouseEnter = (e: React.MouseEvent) => {
-          const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
+          const context: ChartTooltipContext = {
+            type: isDonut ? 'donut' : 'pie',
+            label: slice.label,
+            value: slice.value,
+            dataIndex: slice.index,
+            percentage: slice.percentageValue,
+            dataPoint: slice.dataPoint,
+          };
+
+          const tooltipContent = getTooltipContent(context);
 
           // Use intelligent positioning based on useElementPosition relation data
           let x = e.clientX;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { Horizontal } from 'app-studio';
@@ -6,6 +6,7 @@ import { Center } from 'app-studio';
 import { Loader } from '../../Loader/Loader';
 import { ChartProps } from './Chart.props';
 import { useChartState } from './Chart.state';
+import type { ChartTooltipContext } from './Chart.type';
 import {
   ChartContainerStyles,
   ChartTitleStyles,
@@ -38,6 +39,7 @@ export const ChartView: React.FC<ChartProps> = ({
   width: propWidth = 200,
   height: propHeight = 200,
   views,
+  tooltipFormatter,
   onDataPointClick,
   onSeriesClick,
   isLoading = false,
@@ -77,6 +79,53 @@ export const ChartView: React.FC<ChartProps> = ({
   const width = propWidth || containerWidth;
   const height =
     propHeight || (responsive ? containerWidth / aspectRatio : containerHeight);
+
+  const defaultTooltipFormatter = useCallback(
+    (context: ChartTooltipContext) => {
+      const { label, seriesName, value, percentage } = context;
+      const title = seriesName ?? label;
+      const subtitle = seriesName ? label : undefined;
+
+      return (
+        <View minWidth="160px">
+          {title ? (
+            <Text fontWeight="semibold" marginBottom={subtitle ? '4px' : '8px'}>
+              {title}
+            </Text>
+          ) : null}
+          {subtitle ? (
+            <Text fontSize="12px" color="color.gray.500" marginBottom="8px">
+              {subtitle}
+            </Text>
+          ) : null}
+          <Horizontal alignItems="baseline" gap="8px">
+            <Text fontWeight="bold" fontSize="18px">
+              {value}
+            </Text>
+            {typeof percentage === 'number' && Number.isFinite(percentage) ? (
+              <Text fontSize="12px" color="color.gray.500">
+                {percentage.toFixed(1)}%
+              </Text>
+            ) : null}
+          </Horizontal>
+        </View>
+      );
+    },
+    []
+  );
+
+  const getTooltipContent = useCallback(
+    (context: ChartTooltipContext) => {
+      const customContent = tooltipFormatter?.(context);
+
+      if (customContent !== undefined && customContent !== null) {
+        return customContent;
+      }
+
+      return defaultTooltipFormatter(context);
+    },
+    [defaultTooltipFormatter, tooltipFormatter]
+  );
 
   // Render legend
   const renderLegend = () => {
@@ -139,6 +188,7 @@ export const ChartView: React.FC<ChartProps> = ({
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
             views={views}
+            getTooltipContent={getTooltipContent}
           />
         );
       case 'line':
@@ -154,6 +204,8 @@ export const ChartView: React.FC<ChartProps> = ({
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
             views={views}
+            chartType={type}
+            getTooltipContent={getTooltipContent}
           />
         );
       case 'pie':
@@ -169,6 +221,7 @@ export const ChartView: React.FC<ChartProps> = ({
             showTooltip={showTooltipState}
             hideTooltip={hideTooltipState}
             views={views}
+            getTooltipContent={getTooltipContent}
           />
         );
       default:
@@ -181,8 +234,8 @@ export const ChartView: React.FC<ChartProps> = ({
     if (!showTooltips || !tooltip.visible) return null;
 
     // Calculate tooltip position with boundary checking
-    const tooltipWidth = 200; // Approximate tooltip width
-    const tooltipHeight = 40; // Approximate tooltip height
+    const tooltipWidth = 220; // Approximate tooltip width to accommodate richer content
+    const tooltipHeight = 80; // Approximate tooltip height for multi-line tooltips
     const offset = 10; // Offset from cursor
 
     let left = tooltip.x - tooltipWidth / 2;

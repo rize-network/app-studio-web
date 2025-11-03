@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { ChartData } from './Chart.type';
+import { ChartData, ChartTooltipContext, ChartType } from './Chart.type';
 import {
   LineStyles,
   PointStyles,
@@ -16,9 +16,11 @@ interface LineChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onPointClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
+  chartType: Extract<ChartType, 'line' | 'area'>;
+  getTooltipContent: (context: ChartTooltipContext) => React.ReactNode;
 }
 
 export const LineChart: React.FC<LineChartProps> = ({
@@ -31,6 +33,8 @@ export const LineChart: React.FC<LineChartProps> = ({
   showTooltip,
   hideTooltip,
   views,
+  chartType,
+  getTooltipContent,
 }) => {
   // Calculate chart dimensions
   const { getColor } = useTheme();
@@ -205,8 +209,22 @@ export const LineChart: React.FC<LineChartProps> = ({
               padding.bottom -
               (value / maxValue) * chartHeight * animationProgress;
 
+            const context: ChartTooltipContext = {
+              type: chartType,
+              label: data.labels[dataIndex],
+              value,
+              seriesName: series.name,
+              seriesIndex,
+              dataIndex,
+              dataPoint: {
+                label: data.labels[dataIndex],
+                value,
+                color: series.color,
+              },
+            };
+
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
+              const tooltipContent = getTooltipContent(context);
               showTooltip(e.clientX, e.clientY, tooltipContent);
             };
 
