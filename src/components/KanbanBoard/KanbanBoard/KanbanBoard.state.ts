@@ -7,6 +7,12 @@ interface DragState {
   cardId: string;
 }
 
+interface PreviewState {
+  columnId: string;
+  cardId: string | null;
+  position: 'before' | 'after';
+}
+
 export const useKanbanBoardState = ({
   columns: initialColumns,
   onChange,
@@ -20,11 +26,10 @@ export const useKanbanBoardState = ({
     'before' | 'after' | null
   >(null);
   const dragStateRef = useRef<DragState | null>(null);
-  const hoverPositionRef = useRef<'before' | 'after' | null>(null);
+  const lastPreviewRef = useRef<PreviewState | null>(null);
 
   const updateHoverPosition = useCallback(
     (position: 'before' | 'after' | null) => {
-      hoverPositionRef.current = position;
       setHoveredCardPosition(position);
     },
     []
@@ -43,99 +48,6 @@ export const useKanbanBoardState = ({
     setColumns(initialColumns);
   }, [initialColumns]);
 
-  const commitMove = useCallback(
-    (
-      targetColumnId: string,
-      targetCardId: string | null,
-      position: 'before' | 'after' | null
-    ) => {
-      const dragState = dragStateRef.current;
-      if (!dragState) return;
-
-      const { columnId: sourceColumnId, cardId } = dragState;
-
-      if (
-        targetColumnId === sourceColumnId &&
-        (targetCardId === null || targetCardId === cardId)
-      ) {
-        dragStateRef.current = null;
-        setDraggedCardId(null);
-        updateHoverPosition(null);
-        return;
-      }
-
-      setColumns((prevColumns) => {
-        const workingColumns = prevColumns.map((column) => ({
-          ...column,
-          cards: [...column.cards],
-        }));
-
-        const sourceColumn = workingColumns.find(
-          (column) => column.id === sourceColumnId
-        );
-        const targetColumn = workingColumns.find(
-          (column) => column.id === targetColumnId
-        );
-
-        if (!sourceColumn || !targetColumn) {
-          return prevColumns;
-        }
-
-        const sourceIndex = sourceColumn.cards.findIndex(
-          (card) => card.id === cardId
-        );
-
-        if (sourceIndex === -1) {
-          return prevColumns;
-        }
-
-        if (targetColumnId === sourceColumnId && targetCardId === cardId) {
-          return prevColumns;
-        }
-
-        const [card] = sourceColumn.cards.splice(sourceIndex, 1);
-
-        const dropPosition = position ?? 'after';
-
-        let targetIndex: number;
-
-        if (targetCardId) {
-          const foundIndex = targetColumn.cards.findIndex(
-            (item) => item.id === targetCardId
-          );
-
-          if (foundIndex !== -1) {
-            targetIndex =
-              dropPosition === 'before' ? foundIndex : foundIndex + 1;
-          } else {
-            targetIndex = targetColumn.cards.length;
-          }
-        } else {
-          targetIndex =
-            dropPosition === 'before' ? 0 : targetColumn.cards.length;
-        }
-
-        targetColumn.cards.splice(targetIndex, 0, card);
-
-        const updatedColumns = workingColumns.map((column) => ({
-          ...column,
-          cards: [...column.cards],
-        }));
-
-        onChange?.(updatedColumns);
-
-        return updatedColumns;
-      });
-
-      dragStateRef.current = null;
-      setDraggedCardId(null);
-      setHoveredColumnId(null);
-      setHoveredCardId(null);
-      updateHoverPosition(null);
-    },
-    [onChange, updateHoverPosition]
-  );
-
   const handleCardDragStart = useCallback(
     (
       columnId: string,
@@ -144,6 +56,7 @@ export const useKanbanBoardState = ({
     ) => {
       dragStateRef.current = { columnId, cardId };
       setDraggedCardId(cardId);
+      lastPreviewRef.current = null;
 
       if (event.dataTransfer) {
         event.dataTransfer.effectAllowed = 'move';
@@ -159,11 +72,131 @@ export const useKanbanBoardState = ({
 
   const handleCardDragEnd = useCallback(() => {
     dragStateRef.current = null;
+    lastPreviewRef.current = null;
     setDraggedCardId(null);
     setHoveredColumnId(null);
     setHoveredCardId(null);
     updateHoverPosition(null);
   }, [updateHoverPosition]);
+
+  const applyPreviewMove = useCallback(
+    (
+      targetColumnId: string,
+      targetCardId: string | null,
+      position: 'before' | 'after'
+    ) => {
+      const dragState = dragStateRef.current;
+      if (!dragState) return;
+
+      const { cardId } = dragState;
+      const lastPreview = lastPreviewRef.current;
+
+      if (
+        lastPreview &&
+        lastPreview.columnId === targetColumnId &&
+        lastPreview.cardId === targetCardId &&
+        lastPreview.position === position
+      ) {
+        return;
+      }
+
+      setColumns((prevColumns) => {
+        const workingColumns = prevColumns.map((column) => ({
+          ...column,
+          cards: [...column.cards],
+        }));
+
+        const sourceColumn = workingColumns.find((column) =>
+          column.cards.some((card) => card.id === cardId)
+        );
+
+        if (!sourceColumn) {
+          return prevColumns;
+        }
+
+        const sourceColumnId = sourceColumn.id;
+        const targetColumn = workingColumns.find(
+          (column) => column.id === targetColumnId
+        );
+
+        if (!targetColumn) {
+          return prevColumns;
+        }
+
+        const currentIndex = sourceColumn.cards.findIndex(
+          (card) => card.id === cardId
+        );
+
+        if (currentIndex === -1) {
+          return prevColumns;
+        }
+
+        const isSameColumn = targetColumnId === sourceColumnId;
+
+        if (isSameColumn) {
+          if (targetCardId === cardId) {
+            lastPreviewRef.current = {
+              columnId: targetColumnId,
+              cardId: targetCardId,
+              position,
+            };
+            return prevColumns;
+          }
+
+          if (targetCardId === null) {
+            const lastIndex = sourceColumn.cards.length - 1;
+            if (
+              (position === 'before' && currentIndex === 0) ||
+              (position === 'after' && currentIndex === lastIndex)
+            ) {
+              lastPreviewRef.current = {
+                columnId: targetColumnId,
+                cardId: targetCardId,
+                position,
+              };
+              return prevColumns;
+            }
+          }
+        }
+
+        const [card] = sourceColumn.cards.splice(currentIndex, 1);
+
+        let targetIndex: number;
+
+        if (targetCardId) {
+          const foundIndex = targetColumn.cards.findIndex(
+            (item) => item.id === targetCardId
+          );
+
+          if (foundIndex !== -1) {
+            targetIndex = position === 'before' ? foundIndex : foundIndex + 1;
+          } else {
+            targetIndex = targetColumn.cards.length;
+          }
+        } else {
+          targetIndex = position === 'before' ? 0 : targetColumn.cards.length;
+        }
+
+        targetColumn.cards.splice(targetIndex, 0, card);
+
+        lastPreviewRef.current = {
+          columnId: targetColumnId,
+          cardId: targetCardId,
+          position,
+        };
+        dragStateRef.current = { columnId: targetColumnId, cardId };
+
+        onChange?.(workingColumns);
+
+        return workingColumns;
+      });
+
+      setHoveredColumnId(targetColumnId);
+      setHoveredCardId(targetCardId);
+      updateHoverPosition(position);
+    },
+    [onChange, updateHoverPosition]
+  );
 
   const handleColumnDragOver = useCallback(
     (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
@@ -171,11 +204,10 @@ export const useKanbanBoardState = ({
       if (event.dataTransfer) {
         event.dataTransfer.dropEffect = 'move';
       }
-      setHoveredColumnId(columnId);
-      setHoveredCardId(null);
-      updateHoverPosition(getRelativeDropPosition(event));
+      const position = getRelativeDropPosition(event);
+      applyPreviewMove(columnId, null, position);
     },
-    [getRelativeDropPosition, updateHoverPosition]
+    [applyPreviewMove, getRelativeDropPosition]
   );
 
   const handleCardDragOver = useCallback(
@@ -188,21 +220,20 @@ export const useKanbanBoardState = ({
       if (event.dataTransfer) {
         event.dataTransfer.dropEffect = 'move';
       }
-      setHoveredColumnId(columnId);
-      setHoveredCardId(cardId);
-      updateHoverPosition(getRelativeDropPosition(event));
+      const position = getRelativeDropPosition(event);
+      applyPreviewMove(columnId, cardId, position);
     },
-    [getRelativeDropPosition, updateHoverPosition]
+    [applyPreviewMove, getRelativeDropPosition]
   );
 
   const handleColumnDrop = useCallback(
     (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
-      const position =
-        hoverPositionRef.current ?? getRelativeDropPosition(event);
-      commitMove(columnId, null, position);
+      const position = getRelativeDropPosition(event);
+      applyPreviewMove(columnId, null, position);
+      handleCardDragEnd();
     },
-    [commitMove, getRelativeDropPosition]
+    [applyPreviewMove, getRelativeDropPosition, handleCardDragEnd]
   );
 
   const handleCardDrop = useCallback(
@@ -214,9 +245,10 @@ export const useKanbanBoardState = ({
       event.preventDefault();
       event.stopPropagation();
       const position = getRelativeDropPosition(event);
-      commitMove(columnId, cardId, position);
+      applyPreviewMove(columnId, cardId, position);
+      handleCardDragEnd();
     },
-    [commitMove, getRelativeDropPosition]
+    [applyPreviewMove, getRelativeDropPosition, handleCardDragEnd]
   );
 
   return {
