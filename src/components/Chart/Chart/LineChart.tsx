@@ -7,7 +7,9 @@ import {
   AxisLabelStyles,
   GridStyles,
 } from './Chart.style';
-import { useTheme } from 'app-studio';
+import { useTheme, View } from 'app-studio';
+import { Text } from '../../Text/Text';
+import type { ReactNode } from 'react';
 
 interface LineChartProps {
   data: ChartData;
@@ -16,7 +18,7 @@ interface LineChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onPointClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
 }
@@ -206,7 +208,35 @@ export const LineChart: React.FC<LineChartProps> = ({
               (value / maxValue) * chartHeight * animationProgress;
 
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
+              const previousValue =
+                dataIndex > 0 ? series.data[dataIndex - 1] : undefined;
+              const delta =
+                previousValue !== undefined ? value - previousValue : undefined;
+
+              const tooltipContent = (
+                <View>
+                  <Text fontWeight="medium">{series.name}</Text>
+                  <Text fontSize="sm" color="color.gray.600">
+                    Point: {data.labels[dataIndex]}
+                  </Text>
+                  <Text fontSize="sm">Value: {value}</Text>
+                  <Text
+                    fontSize="sm"
+                    color={
+                      delta === undefined
+                        ? 'color.gray.600'
+                        : delta >= 0
+                        ? 'color.green.600'
+                        : 'color.red.600'
+                    }
+                  >
+                    {delta === undefined
+                      ? 'Change: N/A'
+                      : `Change: ${delta >= 0 ? '+' : ''}${delta}`}
+                  </Text>
+                </View>
+              );
+
               showTooltip(e.clientX, e.clientY, tooltipContent);
             };
 

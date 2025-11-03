@@ -59,6 +59,8 @@ export const ChartView: React.FC<ChartProps> = ({
     processedData,
     showTooltip: showTooltipState,
     hideTooltip: hideTooltipState,
+    hideTooltipImmediate,
+    cancelHideTooltip,
     getChartDimensions,
   } = useChartState({
     data,
@@ -212,6 +214,8 @@ export const ChartView: React.FC<ChartProps> = ({
         position="fixed"
         left={`${left}px`}
         top={`${top}px`}
+        onMouseEnter={cancelHideTooltip}
+        onMouseLeave={hideTooltipImmediate}
         {...TooltipStyles}
         {...views?.tooltip}
       >

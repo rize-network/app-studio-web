@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import type { ReactNode } from 'react';
 import { ChartData, ChartDataPoint } from './Chart.type';
 import { DEFAULT_COLORS } from './Chart.style';
 
@@ -25,7 +26,7 @@ export const useChartState = ({
     visible: boolean;
     x: number;
     y: number;
-    content: string;
+    content: ReactNode;
   }>({
     visible: false,
     x: 0,
@@ -38,6 +39,16 @@ export const useChartState = ({
 
   // Reference to chart container
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Reference to delayed tooltip hide timer
+  const hideTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const clearHideTimer = useCallback(() => {
+    if (hideTimerRef.current) {
+      clearTimeout(hideTimerRef.current);
+      hideTimerRef.current = null;
+    }
+  }, []);
 
   // Handle animation
   useEffect(() => {
@@ -68,6 +79,12 @@ export const useChartState = ({
     };
   }, [animated, animationDuration]);
 
+  useEffect(() => {
+    return () => {
+      clearHideTimer();
+    };
+  }, [clearHideTimer]);
+
   // Process data for charts
   const processedData = useCallback(() => {
     if (data) {
@@ -92,9 +109,10 @@ export const useChartState = ({
 
   // Handle tooltip show
   const showTooltip = useCallback(
-    (x: number, y: number, content: string) => {
+    (x: number, y: number, content: ReactNode) => {
       if (!showTooltips) return;
 
+      clearHideTimer();
       setTooltip({
         visible: true,
         x,
@@ -102,16 +120,32 @@ export const useChartState = ({
         content,
       });
     },
-    [showTooltips]
+    [showTooltips, clearHideTimer]
   );
 
   // Handle tooltip hide
   const hideTooltip = useCallback(() => {
+    clearHideTimer();
+    hideTimerRef.current = setTimeout(() => {
+      setTooltip((prev) => ({
+        ...prev,
+        visible: false,
+      }));
+      hideTimerRef.current = null;
+    }, 150);
+  }, [clearHideTimer]);
+
+  const hideTooltipImmediate = useCallback(() => {
+    clearHideTimer();
     setTooltip((prev) => ({
       ...prev,
       visible: false,
     }));
-  }, []);
+  }, [clearHideTimer]);
+
+  const cancelHideTooltip = useCallback(() => {
+    clearHideTimer();
+  }, [clearHideTimer]);
 
   // Calculate chart dimensions
   const getChartDimensions = useCallback(() => {
@@ -130,6 +164,8 @@ export const useChartState = ({
     processedData,
     showTooltip,
     hideTooltip,
+    hideTooltipImmediate,
+    cancelHideTooltip,
     getChartDimensions,
   };
 };
