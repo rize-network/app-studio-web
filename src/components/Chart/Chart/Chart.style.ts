@@ -58,7 +58,7 @@ export const TooltipStyles: ViewProps = {
   borderRadius: '4px',
   boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
   fontSize: '14px',
-  pointerEvents: 'none',
+  pointerEvents: 'auto',
   zIndex: 10,
 };
 

@@ -1,7 +1,9 @@
 import React, { useMemo, useRef, useEffect } from 'react';
-import { useTheme, useElementPosition } from 'app-studio';
+import { useTheme, useElementPosition, View } from 'app-studio';
 import { ChartDataPoint } from './Chart.type';
 import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
+import { Text } from '../../Text/Text';
+import type { ReactNode } from 'react';
 
 interface PieChartProps {
   dataPoints: ChartDataPoint[];
@@ -10,7 +12,7 @@ interface PieChartProps {
   animationProgress: number;
   isDonut?: boolean;
   onSliceClick?: (dataPoint: ChartDataPoint, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
 }
@@ -170,7 +172,15 @@ export const PieChart: React.FC<PieChartProps> = ({
       {/* Pie slices */}
       {slices.map((slice, index) => {
         const handleMouseEnter = (e: React.MouseEvent) => {
-          const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
+          const tooltipContent = (
+            <View>
+              <Text fontWeight="medium">{slice.label}</Text>
+              <Text fontSize="sm">Value: {slice.value}</Text>
+              <Text fontSize="sm" color="color.gray.600">
+                Share: {slice.percentage}
+              </Text>
+            </View>
+          );
 
           // Use intelligent positioning based on useElementPosition relation data
           let x = e.clientX;

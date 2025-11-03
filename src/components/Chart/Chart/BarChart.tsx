@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
-import { useTheme } from 'app-studio';
+import { useTheme, View } from 'app-studio';
+import { Text } from '../../Text/Text';
+import type { ReactNode } from 'react';
 import { ChartData } from './Chart.type';
 import {
   BarStyles,
@@ -15,7 +17,7 @@ interface BarChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onBarClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
 }
@@ -162,7 +164,16 @@ export const BarChart: React.FC<BarChartProps> = ({
             const y = height - padding.bottom - barHeight;
 
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
+              const tooltipContent = (
+                <View>
+                  <Text fontWeight="medium">{series.name}</Text>
+                  <Text fontSize="sm" color="color.gray.600">
+                    Category: {data.labels[dataIndex]}
+                  </Text>
+                  <Text fontSize="sm">Value: {value}</Text>
+                </View>
+              );
+
               showTooltip(e.clientX, e.clientY, tooltipContent);
             };
 
