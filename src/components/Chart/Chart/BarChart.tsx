@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { useTheme } from 'app-studio';
+import { View, useTheme } from 'app-studio';
+import { Text } from '../../Text/Text';
 import { ChartData } from './Chart.type';
 import {
   BarStyles,
@@ -15,7 +16,7 @@ interface BarChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onBarClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
 }
@@ -161,8 +162,65 @@ export const BarChart: React.FC<BarChartProps> = ({
               barWidth * seriesIndex;
             const y = height - padding.bottom - barHeight;
 
+            const categoryLabel = data.labels[dataIndex];
+            const categoryTotal = data.series.reduce((sum, currentSeries) => {
+              const seriesValue = currentSeries.data[dataIndex];
+              return sum + (typeof seriesValue === 'number' ? seriesValue : 0);
+            }, 0);
+            const sharePercentage =
+              categoryTotal > 0
+                ? ((value / categoryTotal) * 100).toFixed(1)
+                : null;
+            const fillColor = series.color ? getColor(series.color) : 'black';
+
             const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
+              const tooltipContent = (
+                <View display="flex" flexDirection="column" minWidth="180px">
+                  <View
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Text fontWeight="semibold">{series.name}</Text>
+                    <View
+                      width="12px"
+                      height="12px"
+                      borderRadius="2px"
+                      backgroundColor={fillColor}
+                    />
+                  </View>
+                  <Text marginTop="4px" color="color.gray.500" fontSize="12px">
+                    {categoryLabel}
+                  </Text>
+                  <View marginTop="8px" display="flex" flexDirection="column">
+                    <View display="flex" justifyContent="space-between">
+                      <Text color="color.gray.500">Value</Text>
+                      <Text fontWeight="medium">{value.toLocaleString()}</Text>
+                    </View>
+                    {sharePercentage !== null && (
+                      <View
+                        marginTop="4px"
+                        display="flex"
+                        justifyContent="space-between"
+                      >
+                        <Text color="color.gray.500">Share</Text>
+                        <Text fontWeight="medium">{`${sharePercentage}%`}</Text>
+                      </View>
+                    )}
+                    <View
+                      marginTop="4px"
+                      display="flex"
+                      justifyContent="space-between"
+                    >
+                      <Text color="color.gray.500">Category total</Text>
+                      <Text fontWeight="medium">
+                        {categoryTotal.toLocaleString()}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              );
+
               showTooltip(e.clientX, e.clientY, tooltipContent);
             };
 
@@ -179,7 +237,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                 y={y}
                 width={barWidth}
                 height={barHeight}
-                fill={series.color ? getColor(series.color) : 'black'}
+                fill={fillColor}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={hideTooltip}
                 onClick={handleClick}

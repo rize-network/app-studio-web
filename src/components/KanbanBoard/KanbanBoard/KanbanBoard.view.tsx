@@ -11,8 +11,6 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   views,
   draggedCardId,
   hoveredColumnId,
-  hoveredCardId,
-  hoveredCardPosition,
   onCardDragStart,
   onCardDragEnd,
   onColumnDragOver,
@@ -79,31 +77,11 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
             onDragOver={(event) => onColumnDragOver(column.id, event)}
             onDrop={(event) => onColumnDrop(column.id, event)}
             opacity={
-              draggedCardId && hoveredColumnId === column.id ? 0.8 : undefined
+              draggedCardId && hoveredColumnId === column.id ? 0.9 : undefined
             }
-            padding={
-              draggedCardId && hoveredColumnId === column.id ? 4 : undefined
-            }
-            position="relative"
             transition="all 0.15s ease-in-out"
             {...views?.columnBody}
           >
-            {draggedCardId &&
-              hoveredColumnId === column.id &&
-              hoveredCardId === null &&
-              hoveredCardPosition && (
-                <View
-                  position="absolute"
-                  left={-8}
-                  right={-8}
-                  height={3}
-                  backgroundColor="theme.primary"
-                  borderRadius={2}
-                  top={hoveredCardPosition === 'before' ? -6 : undefined}
-                  bottom={hoveredCardPosition === 'after' ? -6 : undefined}
-                  pointerEvents="none"
-                />
-              )}
             {column.cards.length === 0 && (
               <View
                 padding={12}
@@ -129,23 +107,6 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
 
             {column.cards.map((card) => (
               <View key={card.id} position="relative">
-                {draggedCardId &&
-                  hoveredCardId === card.id &&
-                  draggedCardId !== card.id &&
-                  hoveredCardPosition && (
-                    <View
-                      position="absolute"
-                      left={-8}
-                      right={-8}
-                      height={3}
-                      backgroundColor="theme.primary"
-                      borderRadius={2}
-                      zIndex={10}
-                      top={hoveredCardPosition === 'before' ? -6 : undefined}
-                      bottom={hoveredCardPosition === 'after' ? -6 : undefined}
-                      pointerEvents="none"
-                    />
-                  )}
                 <View
                   draggable
                   cursor="grab"

@@ -1,4 +1,6 @@
 import React, { useMemo } from 'react';
+import { View, useTheme } from 'app-studio';
+import { Text } from '../../Text/Text';
 import { ChartData } from './Chart.type';
 import {
   LineStyles,
@@ -7,8 +9,6 @@ import {
   AxisLabelStyles,
   GridStyles,
 } from './Chart.style';
-import { useTheme } from 'app-studio';
-
 interface LineChartProps {
   data: ChartData;
   width: number;
@@ -16,7 +16,7 @@ interface LineChartProps {
   animationProgress: number;
   showGrid?: boolean;
   onPointClick?: (seriesName: string, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
 }
@@ -177,61 +177,153 @@ export const LineChart: React.FC<LineChartProps> = ({
       })}
 
       {/* Lines and points */}
-      {data.series.map((series, seriesIndex) => (
-        <React.Fragment key={`series-${seriesIndex}`}>
-          {/* Area fill (if needed) */}
-          <path
-            d={generateAreaPath(series.data)}
-            fill={series.color ? getColor(series.color) : 'black'}
-            opacity={0.1}
-            {...views?.area}
-          />
+      {data.series.map((series, seriesIndex) => {
+        const lineColor = series.color ? getColor(series.color) : 'black';
 
-          {/* Line */}
-          <path
-            d={generatePath(series.data)}
-            stroke={series.color ? getColor(series.color) : 'black'}
-            {...LineStyles}
-            {...views?.line}
-          />
+        return (
+          <React.Fragment key={`series-${seriesIndex}`}>
+            {/* Area fill (if needed) */}
+            <path
+              d={generateAreaPath(series.data)}
+              fill={lineColor}
+              opacity={0.1}
+              {...views?.area}
+            />
 
-          {/* Points */}
-          {series.data.map((value, dataIndex) => {
-            const x =
-              padding.left +
-              (dataIndex / (data.labels.length - 1)) * chartWidth;
-            const y =
-              height -
-              padding.bottom -
-              (value / maxValue) * chartHeight * animationProgress;
+            {/* Line */}
+            <path
+              d={generatePath(series.data)}
+              stroke={lineColor}
+              {...LineStyles}
+              {...views?.line}
+            />
 
-            const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = `${series.name}: ${value}`;
-              showTooltip(e.clientX, e.clientY, tooltipContent);
-            };
+            {/* Points */}
+            {series.data.map((value, dataIndex) => {
+              const x =
+                padding.left +
+                (dataIndex / (data.labels.length - 1)) * chartWidth;
+              const y =
+                height -
+                padding.bottom -
+                (value / maxValue) * chartHeight * animationProgress;
 
-            const handleClick = () => {
-              if (onPointClick) {
-                onPointClick(series.name, dataIndex);
-              }
-            };
+              const categoryLabel = data.labels[dataIndex];
+              const categoryTotal = data.series.reduce((sum, currentSeries) => {
+                const seriesValue = currentSeries.data[dataIndex];
+                return (
+                  sum + (typeof seriesValue === 'number' ? seriesValue : 0)
+                );
+              }, 0);
+              const sharePercentage =
+                categoryTotal > 0
+                  ? ((value / categoryTotal) * 100).toFixed(1)
+                  : null;
+              const previousValue =
+                dataIndex > 0 && typeof series.data[dataIndex - 1] === 'number'
+                  ? series.data[dataIndex - 1]
+                  : null;
+              const deltaValue =
+                typeof previousValue === 'number'
+                  ? value - previousValue
+                  : null;
+              const formattedDelta =
+                typeof deltaValue === 'number'
+                  ? `${
+                      deltaValue >= 0 ? '+' : ''
+                    }${deltaValue.toLocaleString()}`
+                  : null;
 
-            return (
-              <circle
-                key={`point-${seriesIndex}-${dataIndex}`}
-                cx={x}
-                cy={y}
-                fill={series.color}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={hideTooltip}
-                onClick={handleClick}
-                {...PointStyles}
-                {...views?.point}
-              />
-            );
-          })}
-        </React.Fragment>
-      ))}
+              const handleMouseEnter = (e: React.MouseEvent) => {
+                const tooltipContent = (
+                  <View display="flex" flexDirection="column" minWidth="200px">
+                    <View
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <Text fontWeight="semibold">{series.name}</Text>
+                      <View
+                        width="12px"
+                        height="12px"
+                        borderRadius="2px"
+                        backgroundColor={lineColor}
+                      />
+                    </View>
+                    <Text
+                      marginTop="4px"
+                      color="color.gray.500"
+                      fontSize="12px"
+                    >
+                      {categoryLabel}
+                    </Text>
+                    <View marginTop="8px" display="flex" flexDirection="column">
+                      <View display="flex" justifyContent="space-between">
+                        <Text color="color.gray.500">Value</Text>
+                        <Text fontWeight="medium">
+                          {value.toLocaleString()}
+                        </Text>
+                      </View>
+                      {formattedDelta !== null && (
+                        <View
+                          marginTop="4px"
+                          display="flex"
+                          justifyContent="space-between"
+                        >
+                          <Text color="color.gray.500">Change</Text>
+                          <Text fontWeight="medium">{formattedDelta}</Text>
+                        </View>
+                      )}
+                      {sharePercentage !== null && (
+                        <View
+                          marginTop="4px"
+                          display="flex"
+                          justifyContent="space-between"
+                        >
+                          <Text color="color.gray.500">Share</Text>
+                          <Text fontWeight="medium">{`${sharePercentage}%`}</Text>
+                        </View>
+                      )}
+                      <View
+                        marginTop="4px"
+                        display="flex"
+                        justifyContent="space-between"
+                      >
+                        <Text color="color.gray.500">Category total</Text>
+                        <Text fontWeight="medium">
+                          {categoryTotal.toLocaleString()}
+                        </Text>
+                      </View>
+                    </View>
+                  </View>
+                );
+
+                showTooltip(e.clientX, e.clientY, tooltipContent);
+              };
+
+              const handleClick = () => {
+                if (onPointClick) {
+                  onPointClick(series.name, dataIndex);
+                }
+              };
+
+              return (
+                <circle
+                  key={`point-${seriesIndex}-${dataIndex}`}
+                  cx={x}
+                  cy={y}
+                  fill={lineColor}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={hideTooltip}
+                  onClick={handleClick}
+                  {...PointStyles}
+                  {...views?.point}
+                />
+              );
+            })}
+          </React.Fragment>
+        );
+      })}
     </svg>
   );
 };

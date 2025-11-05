@@ -7,6 +7,14 @@ interface DragState {
   cardId: string;
 }
 
+const cloneColumns = (
+  inputColumns: KanbanBoardProps['columns']
+): KanbanBoardProps['columns'] =>
+  inputColumns.map((column) => ({
+    ...column,
+    cards: [...column.cards],
+  }));
+
 export const useKanbanBoardState = ({
   columns: initialColumns,
   onChange,
@@ -15,20 +23,9 @@ export const useKanbanBoardState = ({
     useState<KanbanBoardProps['columns']>(initialColumns);
   const [draggedCardId, setDraggedCardId] = useState<string | null>(null);
   const [hoveredColumnId, setHoveredColumnId] = useState<string | null>(null);
-  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
-  const [hoveredCardPosition, setHoveredCardPosition] = useState<
-    'before' | 'after' | null
-  >(null);
   const dragStateRef = useRef<DragState | null>(null);
-  const hoverPositionRef = useRef<'before' | 'after' | null>(null);
-
-  const updateHoverPosition = useCallback(
-    (position: 'before' | 'after' | null) => {
-      hoverPositionRef.current = position;
-      setHoveredCardPosition(position);
-    },
-    []
-  );
+  const originalColumnsRef = useRef<KanbanBoardProps['columns'] | null>(null);
+  const dropCommittedRef = useRef(false);
 
   const getRelativeDropPosition = useCallback(
     (event: React.DragEvent<HTMLDivElement>): 'before' | 'after' => {
@@ -43,24 +40,19 @@ export const useKanbanBoardState = ({
     setColumns(initialColumns);
   }, [initialColumns]);
 
-  const commitMove = useCallback(
+  const applyMove = useCallback(
     (
       targetColumnId: string,
       targetCardId: string | null,
-      position: 'before' | 'after' | null
+      position: 'before' | 'after' | null,
+      options?: { shouldCommit?: boolean }
     ) => {
       const dragState = dragStateRef.current;
       if (!dragState) return;
 
       const { columnId: sourceColumnId, cardId } = dragState;
 
-      if (
-        targetColumnId === sourceColumnId &&
-        (targetCardId === null || targetCardId === cardId)
-      ) {
-        dragStateRef.current = null;
-        setDraggedCardId(null);
-        updateHoverPosition(null);
+      if (targetColumnId === sourceColumnId && targetCardId === cardId) {
         return;
       }
 
@@ -82,14 +74,10 @@ export const useKanbanBoardState = ({
         }
 
         const sourceIndex = sourceColumn.cards.findIndex(
-          (card) => card.id === cardId
+          (cardItem) => cardItem.id === cardId
         );
 
         if (sourceIndex === -1) {
-          return prevColumns;
-        }
-
-        if (targetColumnId === sourceColumnId && targetCardId === cardId) {
           return prevColumns;
         }
 
@@ -117,23 +105,41 @@ export const useKanbanBoardState = ({
 
         targetColumn.cards.splice(targetIndex, 0, card);
 
+        const hasChanged = workingColumns.some((column, columnIndex) => {
+          const previousColumn = prevColumns[columnIndex];
+          if (!previousColumn) {
+            return true;
+          }
+
+          if (column.cards.length !== previousColumn.cards.length) {
+            return true;
+          }
+
+          return column.cards.some(
+            (currentCard, cardIndex) =>
+              currentCard.id !== previousColumn.cards[cardIndex]?.id
+          );
+        });
+
+        if (!hasChanged) {
+          return prevColumns;
+        }
+
         const updatedColumns = workingColumns.map((column) => ({
           ...column,
           cards: [...column.cards],
         }));
 
-        onChange?.(updatedColumns);
+        dragStateRef.current = { columnId: targetColumnId, cardId };
+
+        if (options?.shouldCommit) {
+          onChange?.(updatedColumns);
+        }
 
         return updatedColumns;
       });
-
-      dragStateRef.current = null;
-      setDraggedCardId(null);
-      setHoveredColumnId(null);
-      setHoveredCardId(null);
-      updateHoverPosition(null);
     },
-    [onChange, updateHoverPosition]
+    [onChange]
   );
 
   const handleCardDragStart = useCallback(
@@ -143,6 +149,8 @@ export const useKanbanBoardState = ({
       event: React.DragEvent<HTMLDivElement>
     ) => {
       dragStateRef.current = { columnId, cardId };
+      originalColumnsRef.current = cloneColumns(columns);
+      dropCommittedRef.current = false;
       setDraggedCardId(cardId);
 
       if (event.dataTransfer) {
@@ -154,16 +162,20 @@ export const useKanbanBoardState = ({
         }
       }
     },
-    []
+    [columns]
   );
 
   const handleCardDragEnd = useCallback(() => {
+    if (!dropCommittedRef.current && originalColumnsRef.current) {
+      setColumns(cloneColumns(originalColumnsRef.current));
+    }
+
     dragStateRef.current = null;
+    originalColumnsRef.current = null;
+    dropCommittedRef.current = false;
     setDraggedCardId(null);
     setHoveredColumnId(null);
-    setHoveredCardId(null);
-    updateHoverPosition(null);
-  }, [updateHoverPosition]);
+  }, []);
 
   const handleColumnDragOver = useCallback(
     (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
@@ -172,10 +184,9 @@ export const useKanbanBoardState = ({
         event.dataTransfer.dropEffect = 'move';
       }
       setHoveredColumnId(columnId);
-      setHoveredCardId(null);
-      updateHoverPosition(getRelativeDropPosition(event));
+      applyMove(columnId, null, getRelativeDropPosition(event));
     },
-    [getRelativeDropPosition, updateHoverPosition]
+    [applyMove, getRelativeDropPosition]
   );
 
   const handleCardDragOver = useCallback(
@@ -189,20 +200,20 @@ export const useKanbanBoardState = ({
         event.dataTransfer.dropEffect = 'move';
       }
       setHoveredColumnId(columnId);
-      setHoveredCardId(cardId);
-      updateHoverPosition(getRelativeDropPosition(event));
+      applyMove(columnId, cardId, getRelativeDropPosition(event));
     },
-    [getRelativeDropPosition, updateHoverPosition]
+    [applyMove, getRelativeDropPosition]
   );
 
   const handleColumnDrop = useCallback(
     (columnId: string, event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
-      const position =
-        hoverPositionRef.current ?? getRelativeDropPosition(event);
-      commitMove(columnId, null, position);
+      dropCommittedRef.current = true;
+      applyMove(columnId, null, getRelativeDropPosition(event), {
+        shouldCommit: true,
+      });
     },
-    [commitMove, getRelativeDropPosition]
+    [applyMove, getRelativeDropPosition]
   );
 
   const handleCardDrop = useCallback(
@@ -213,18 +224,18 @@ export const useKanbanBoardState = ({
     ) => {
       event.preventDefault();
       event.stopPropagation();
-      const position = getRelativeDropPosition(event);
-      commitMove(columnId, cardId, position);
+      dropCommittedRef.current = true;
+      applyMove(columnId, cardId, getRelativeDropPosition(event), {
+        shouldCommit: true,
+      });
     },
-    [commitMove, getRelativeDropPosition]
+    [applyMove, getRelativeDropPosition]
   );
 
   return {
     columns,
     draggedCardId,
     hoveredColumnId,
-    hoveredCardId,
-    hoveredCardPosition,
     onCardDragStart: handleCardDragStart,
     onCardDragEnd: handleCardDragEnd,
     onColumnDragOver: handleColumnDragOver,
