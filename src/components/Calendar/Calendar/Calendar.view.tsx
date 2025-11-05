@@ -150,9 +150,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   // Resize handler
   const handleResizeStart = useCallback(
     (
-      event: CalendarEventInternal,
-      direction: 'start' | 'end' | 'top' | 'bottom'
-    ) =>
+        event: CalendarEventInternal,
+        direction: 'start' | 'end' | 'top' | 'bottom'
+      ) =>
       (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
@@ -190,10 +190,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
             const hour = getTimeFromPosition(moveEvent.clientY);
 
             if (direction === 'top') {
-              const newStart = setHours(
-                setMinutes(event.startDate, 0),
-                hour
-              );
+              const newStart = setHours(setMinutes(event.startDate, 0), hour);
               if (newStart < event.endDate) {
                 onEventResize(event, newStart, event.endDate);
               }
@@ -524,7 +521,10 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                         return (
                           <View
                             key={`${event.id}-${event.startDate.getTime()}`}
-                            gridColumn={`${columnStart} / span ${Math.min(span, week.length - columnStart + 1)}`}
+                            gridColumn={`${columnStart} / span ${Math.min(
+                              span,
+                              week.length - columnStart + 1
+                            )}`}
                             gridRow={rowIndex + 1}
                             paddingLeft={4}
                             paddingRight={4}
@@ -628,7 +628,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
             const hourEvents = events.filter((event) => {
               const eventHour = getHours(event.startDate);
               const eventEndHour = getHours(event.endDate);
-              return eventHour === hour || (eventHour < hour && eventEndHour > hour);
+              return (
+                eventHour === hour || (eventHour < hour && eventEndHour > hour)
+              );
             });
 
             return (
