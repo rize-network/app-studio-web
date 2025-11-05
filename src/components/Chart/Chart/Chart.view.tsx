@@ -13,7 +13,6 @@ import {
   LegendItemStyles,
   LegendColorStyles,
   LegendTextStyles,
-  TooltipStyles,
   LoadingOverlayStyles,
   ErrorOverlayStyles,
   NoDataOverlayStyles,
@@ -21,6 +20,7 @@ import {
 import { BarChart } from './BarChart';
 import { LineChart } from './LineChart';
 import { PieChart } from './PieChart';
+import { ChartTooltip } from './ChartTooltip';
 
 export const ChartView: React.FC<ChartProps> = ({
   type,
@@ -176,52 +176,6 @@ export const ChartView: React.FC<ChartProps> = ({
     }
   };
 
-  // Render tooltip
-  const renderTooltip = () => {
-    if (!showTooltips || !tooltip.visible) return null;
-
-    // Calculate tooltip position with boundary checking
-    const tooltipWidth = 240; // Approximate tooltip width for card layout
-    const tooltipHeight = 120; // Approximate tooltip height for enriched content
-    const maxDistance = 100; // Maximum distance from cursor on any axis
-    const viewportOffset = 10; // Offset from viewport edges
-    const cursorOffset = 15; // Small offset from cursor position
-
-    // Position tooltip to the top-left of cursor with small offset
-    let left = tooltip.x - cursorOffset;
-    let top = tooltip.y - cursorOffset;
-
-    // Clamp position to stay within maxDistance from cursor
-    // For left positioning: tooltip right edge should be close to cursor
-    // So left edge should be at least (cursor.x - maxDistance)
-    const minLeft = Math.max(viewportOffset, tooltip.x - maxDistance);
-    const maxLeft = Math.min(
-      window.innerWidth - tooltipWidth - viewportOffset,
-      tooltip.x - cursorOffset
-    );
-    left = Math.max(minLeft, Math.min(left, maxLeft));
-
-    // For top positioning: tooltip bottom edge should be close to cursor
-    // So top edge should be at least (cursor.y - maxDistance)
-    const minTop = Math.max(viewportOffset, tooltip.y - maxDistance);
-    const maxTop = Math.min(
-      window.innerHeight - tooltipHeight - viewportOffset,
-      tooltip.y - cursorOffset
-    );
-    top = Math.max(minTop, Math.min(top, maxTop));
-
-    return (
-      <View
-        position="fixed"
-        left={`${left}px`}
-        top={`${top}px`}
-        {...TooltipStyles}
-        {...views?.tooltip}
-      >
-        {tooltip.content}
-      </View>
-    );
-  };
 
   // Default loading indicator
   const renderLoadingIndicator = () => {
@@ -302,7 +256,14 @@ export const ChartView: React.FC<ChartProps> = ({
       {/* Only show legend when chart content is visible */}
       {showChartContent && legendPosition === 'bottom' && renderLegend()}
 
-      {renderTooltip()}
+      <ChartTooltip
+        visible={showTooltips && tooltip.visible}
+        x={tooltip.x}
+        y={tooltip.y}
+        content={tooltip.content}
+        maxDistance={100}
+        views={views}
+      />
     </View>
   );
 };
