@@ -76,12 +76,27 @@ export const CalendarMultiDayDragDrop = () => {
     );
   };
 
+  const handleEventCreate = (start: Date, end: Date) => {
+    console.log('Creating new event:', start, end);
+
+    const newEvent: CalendarEvent = {
+      id: events.length + 1,
+      title: 'New Event',
+      start,
+      end,
+      description: 'Double-click to create an event',
+    };
+
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
+  };
+
   return (
     <Calendar
       events={events}
       onEventDrop={handleEventDrop}
       onEventResize={handleEventResize}
-      initialView="month"
+      onEventCreate={handleEventCreate}
+      initialView="week"
     />
   );
 };
