@@ -22,6 +22,7 @@ import {
   formatDayKey,
   getEventSpanInfo,
   isMultiDayEvent,
+  calculateEventSpan,
 } from './Calendar.utils';
 
 interface CalendarViewProps {
@@ -83,39 +84,44 @@ const renderDefaultEvent = (
       position="relative"
       draggable
       onDragStart={onDragStart}
+      width="100%"
       {...views?.event}
     >
       <Vertical
         gap={6}
-        padding={12}
-        borderRadius={8}
+        padding={isMultiDay && context.view !== 'day' ? 8 : 12}
+        borderRadius={isMultiDay && context.view !== 'day' ? 6 : 8}
         backgroundColor={
-          context.isToday ? 'color.primary.50' : 'color.gray.100'
+          context.isToday ? 'color.primary.100' : 'color.blue.100'
         }
         borderWidth={1}
         borderStyle="solid"
-        borderColor={context.isToday ? 'color.primary.200' : 'color.gray.200'}
+        borderColor={context.isToday ? 'color.primary.300' : 'color.blue.300'}
         flexShrink={0}
         cursor="grab"
         position="relative"
+        width="100%"
       >
         {/* Resize handle - Start */}
-        {onResizeStart && (
+        {onResizeStart && isMultiDay && context.view !== 'day' && (
           <View
             position="absolute"
             left={0}
             top={0}
             bottom={0}
-            width="8px"
+            width="12px"
             cursor="col-resize"
             onMouseDown={(e) => {
               e.stopPropagation();
               onResizeStart(e, 'start');
             }}
             backgroundColor="transparent"
+            borderLeftWidth={3}
+            borderLeftStyle="solid"
+            borderLeftColor="transparent"
             on={{
               _hover: {
-                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                borderLeftColor: 'color.blue.500',
               },
             }}
           />
@@ -123,43 +129,48 @@ const renderDefaultEvent = (
 
         <Text
           fontWeight="600"
-          fontSize={12}
-          maxLines={2}
+          fontSize={isMultiDay && context.view !== 'day' ? 11 : 12}
+          maxLines={1}
           {...views?.eventTitle}
         >
           {event.title}
         </Text>
-        <Text
-          fontSize={11}
-          color="color.gray.600"
-          maxLines={1}
-          {...views?.eventTime}
-        >
-          {timeRange}
-        </Text>
-        {event.description && context.view !== 'month' && (
+        {context.view !== 'month' && !isMultiDay && (
+          <Text
+            fontSize={11}
+            color="color.gray.600"
+            maxLines={1}
+            {...views?.eventTime}
+          >
+            {timeRange}
+          </Text>
+        )}
+        {event.description && context.view !== 'month' && !isMultiDay && (
           <Text fontSize={11} color="color.gray.700" maxLines={2}>
             {event.description}
           </Text>
         )}
 
         {/* Resize handle - End */}
-        {onResizeStart && (
+        {onResizeStart && isMultiDay && context.view !== 'day' && (
           <View
             position="absolute"
             right={0}
             top={0}
             bottom={0}
-            width="8px"
+            width="12px"
             cursor="col-resize"
             onMouseDown={(e) => {
               e.stopPropagation();
               onResizeStart(e, 'end');
             }}
             backgroundColor="transparent"
+            borderRightWidth={3}
+            borderRightStyle="solid"
+            borderRightColor="transparent"
             on={{
               _hover: {
-                backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                borderRightColor: 'color.blue.500',
               },
             }}
           />
@@ -256,6 +267,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   // Use same grid configuration for both header and days
   const columnCount = weekdayLabels.length;
 
+  // Get all visible days for span calculation
+  const allVisibleDays = weeks.flat();
+
   // Drag and Drop Handlers
   const handleDragStart =
     (event: CalendarEventInternal) => (e: React.DragEvent<HTMLDivElement>) => {
@@ -337,7 +351,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
     <View
       display="grid"
       gridTemplateColumns={`repeat(${columnCount}, 1fr)`}
-      gap={12}
+      gap={0}
       padding="8px 0"
       {...views?.weekdayRow}
     >
@@ -346,6 +360,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
           key={formatDayKey(weekday)}
           alignItems="center"
           padding={8}
+          borderRightWidth={1}
+          borderRightStyle="solid"
+          borderRightColor="color.gray.200"
           {...views?.weekdayHeader}
         >
           <Text
@@ -425,144 +442,243 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
 
       {view !== 'day' && <View flexShrink={0}>{weekdayRow}</View>}
 
-      <Vertical gap={12} flex={1} overflow="auto" {...views?.grid}>
-        {weeks.map((week, index) => (
-          <View
-            key={`${view}-week-${index}`}
-            display="grid"
-            gridTemplateColumns={`repeat(${week.length}, 1fr)`}
-            gap={12}
-            height={
-              view === 'month' ? '180px' : view === 'week' ? '100%' : 'auto'
-            }
-            minHeight={view === 'week' ? '300px' : 'auto'}
-            {...views?.weekRow}
-          >
-            {week.map((day) => {
-              const dayKey = formatDayKey(day);
-              const isToday = isSameDay(day, today);
-              const events = eventsByDay.get(dayKey) ?? [];
-              const context: CalendarRenderEventContext = {
-                day,
-                isToday,
-                view,
-              };
+      <Vertical gap={0} flex={1} overflow="auto" {...views?.grid}>
+        {weeks.map((week, weekIndex) => {
+          // Collect all multi-day events for this week
+          const multiDayEvents: Array<{
+            event: CalendarEventInternal;
+            day: Date;
+            span: number;
+            columnStart: number;
+          }> = [];
 
-              const shouldDim =
-                view === 'month' && !isSameMonth(day, currentDate);
+          week.forEach((day, dayIndex) => {
+            const dayKey = formatDayKey(day);
+            const events = eventsByDay.get(dayKey) ?? [];
+            events.forEach((event) => {
+              const spanInfo = getEventSpanInfo(event, day);
+              if (
+                isMultiDayEvent(event) &&
+                spanInfo?.isFirst &&
+                view !== 'day'
+              ) {
+                const span = calculateEventSpan(event, day, week);
+                multiDayEvents.push({
+                  event,
+                  day,
+                  span,
+                  columnStart: dayIndex + 1,
+                });
+              }
+            });
+          });
 
-              return (
-                <Vertical
-                  key={dayKey}
-                  gap={12}
-                  padding={16}
-                  borderWidth={1}
-                  borderStyle="solid"
-                  borderColor={isToday ? 'color.primary.200' : 'color.gray.200'}
-                  borderRadius={12}
-                  backgroundColor="color.gray.50"
-                  opacity={shouldDim ? 0.6 : 1}
-                  display="flex"
-                  flexDirection="column"
-                  height="100%"
-                  minHeight={view === 'month' ? '180px' : '300px'}
-                  onDragOver={handleDragOver}
-                  onDrop={handleDrop(day)}
-                  onMouseEnter={() => handleDayMouseEnter(day)}
-                  {...views?.dayColumn}
+          return (
+            <Vertical key={`${view}-week-${weekIndex}`} gap={0}>
+              {/* Multi-day events section */}
+              {multiDayEvents.length > 0 && view !== 'day' && (
+                <View
+                  display="grid"
+                  gridTemplateColumns={`repeat(${week.length}, 1fr)`}
+                  gap={0}
+                  paddingTop={8}
+                  paddingBottom={8}
+                  backgroundColor="color.white"
+                  borderTopWidth={weekIndex === 0 ? 1 : 0}
+                  borderTopStyle="solid"
+                  borderTopColor="color.gray.200"
+                  borderBottomWidth={1}
+                  borderBottomStyle="solid"
+                  borderBottomColor="color.gray.300"
                 >
-                  <Horizontal
-                    justifyContent="space-between"
-                    alignItems="center"
-                    flexShrink={0}
-                    {...views?.dayHeader}
-                  >
-                    <Text fontWeight="600" fontSize={14} {...views?.dayNumber}>
-                      {format(day, 'd')}
-                    </Text>
-                    {view !== 'month' && (
-                      <Text
-                        fontSize={12}
-                        color="color.gray.600"
-                        {...views?.dayMeta}
+                  {multiDayEvents.map(
+                    ({ event, day, span, columnStart }, idx) => {
+                      const context: CalendarRenderEventContext = {
+                        day,
+                        isToday: isSameDay(day, today),
+                        view,
+                      };
+                      const key = `multi-${weekIndex}-${
+                        event.id ?? event.title
+                      }-${event.startDate.getTime()}-${idx}`;
+
+                      return (
+                        <View
+                          key={key}
+                          gridColumn={`${columnStart} / span ${span}`}
+                          paddingLeft={4}
+                          paddingRight={4}
+                          paddingTop={2}
+                          paddingBottom={2}
+                        >
+                          {renderEvent
+                            ? renderEvent(event, context)
+                            : renderDefaultEvent(
+                                event,
+                                context,
+                                views,
+                                key,
+                                onEventDrop
+                                  ? handleDragStart(event)
+                                  : undefined,
+                                onEventResize
+                                  ? (e, direction) =>
+                                      handleResizeStart(event, direction)(e)
+                                  : undefined
+                              )}
+                        </View>
+                      );
+                    }
+                  )}
+                </View>
+              )}
+
+              {/* Day grid */}
+              <View
+                display="grid"
+                gridTemplateColumns={`repeat(${week.length}, 1fr)`}
+                gap={0}
+                height={
+                  view === 'month' ? '180px' : view === 'week' ? '100%' : 'auto'
+                }
+                minHeight={view === 'week' ? '300px' : 'auto'}
+                {...views?.weekRow}
+              >
+                {week.map((day) => {
+                  const dayKey = formatDayKey(day);
+                  const isToday = isSameDay(day, today);
+                  const allEvents = eventsByDay.get(dayKey) ?? [];
+
+                  // Filter out multi-day events for day view, keep them in day view
+                  const events =
+                    view === 'day'
+                      ? allEvents
+                      : allEvents.filter((event) => !isMultiDayEvent(event));
+
+                  const context: CalendarRenderEventContext = {
+                    day,
+                    isToday,
+                    view,
+                  };
+
+                  const shouldDim =
+                    view === 'month' && !isSameMonth(day, currentDate);
+
+                  return (
+                    <Vertical
+                      key={dayKey}
+                      gap={8}
+                      padding={12}
+                      borderRightWidth={1}
+                      borderRightStyle="solid"
+                      borderRightColor="color.gray.200"
+                      borderBottomWidth={1}
+                      borderBottomStyle="solid"
+                      borderBottomColor="color.gray.200"
+                      backgroundColor={
+                        isToday ? 'color.primary.50' : 'color.white'
+                      }
+                      opacity={shouldDim ? 0.6 : 1}
+                      display="flex"
+                      flexDirection="column"
+                      height="100%"
+                      minHeight={view === 'month' ? '180px' : '300px'}
+                      onDragOver={handleDragOver}
+                      onDrop={handleDrop(day)}
+                      onMouseEnter={() => handleDayMouseEnter(day)}
+                      {...views?.dayColumn}
+                    >
+                      <Horizontal
+                        justifyContent="space-between"
+                        alignItems="center"
+                        flexShrink={0}
+                        {...views?.dayHeader}
                       >
-                        {format(day, 'EEEE')}
-                      </Text>
-                    )}
-                  </Horizontal>
-                  <Vertical gap={8} flex={1} overflow="auto" {...views?.events}>
-                    {events.length > 0
-                      ? events.map((event) => {
-                          const key = `${formatDayKey(day)}-${
-                            event.id ?? event.title
-                          }-${event.startDate.getTime()}`;
-
-                          // Skip rendering multi-day events on non-first days
-                          const spanInfo = getEventSpanInfo(event, day);
-                          const isMultiDay = isMultiDayEvent(event);
-                          if (
-                            isMultiDay &&
-                            spanInfo &&
-                            !spanInfo.isFirst &&
-                            view !== 'day'
-                          ) {
-                            return null;
-                          }
-
-                          if (renderEvent) {
-                            const rendered = renderEvent(event, context);
-
-                            if (isValidElement(rendered)) {
-                              return (
-                                <View
-                                  key={key}
-                                  draggable={true}
-                                  onDragStart={
-                                    onEventDrop
-                                      ? handleDragStart(event)
-                                      : undefined
-                                  }
-                                >
-                                  {rendered}
-                                </View>
-                              );
-                            }
-
-                            return (
-                              <React.Fragment key={key}>
-                                {rendered}
-                              </React.Fragment>
-                            );
-                          }
-
-                          return renderDefaultEvent(
-                            event,
-                            context,
-                            views,
-                            key,
-                            onEventDrop ? handleDragStart(event) : undefined,
-                            onEventResize
-                              ? (e, direction) =>
-                                  handleResizeStart(event, direction)(e)
-                              : undefined
-                          );
-                        })
-                      : view === 'day' && (
+                        <Text
+                          fontWeight="600"
+                          fontSize={14}
+                          {...views?.dayNumber}
+                        >
+                          {format(day, 'd')}
+                        </Text>
+                        {view !== 'month' && (
                           <Text
-                            fontSize={11}
+                            fontSize={12}
                             color="color.gray.600"
-                            fontStyle="italic"
-                            {...views?.emptyState}
+                            {...views?.dayMeta}
                           >
-                            No events scheduled
+                            {format(day, 'EEEE')}
                           </Text>
                         )}
-                  </Vertical>
-                </Vertical>
-              );
-            })}
-          </View>
-        ))}
+                      </Horizontal>
+                      <Vertical
+                        gap={8}
+                        flex={1}
+                        overflow="auto"
+                        {...views?.events}
+                      >
+                        {events.length > 0
+                          ? events.map((event) => {
+                              const key = `${formatDayKey(day)}-${
+                                event.id ?? event.title
+                              }-${event.startDate.getTime()}`;
+
+                              if (renderEvent) {
+                                const rendered = renderEvent(event, context);
+
+                                if (isValidElement(rendered)) {
+                                  return (
+                                    <View
+                                      key={key}
+                                      draggable={true}
+                                      onDragStart={
+                                        onEventDrop
+                                          ? handleDragStart(event)
+                                          : undefined
+                                      }
+                                    >
+                                      {rendered}
+                                    </View>
+                                  );
+                                }
+
+                                return (
+                                  <React.Fragment key={key}>
+                                    {rendered}
+                                  </React.Fragment>
+                                );
+                              }
+
+                              return renderDefaultEvent(
+                                event,
+                                context,
+                                views,
+                                key,
+                                onEventDrop ? handleDragStart(event) : undefined,
+                                onEventResize
+                                  ? (e, direction) =>
+                                      handleResizeStart(event, direction)(e)
+                                  : undefined
+                              );
+                            })
+                          : view === 'day' && (
+                              <Text
+                                fontSize={11}
+                                color="color.gray.600"
+                                fontStyle="italic"
+                                {...views?.emptyState}
+                              >
+                                No events scheduled
+                              </Text>
+                            )}
+                      </Vertical>
+                    </Vertical>
+                  );
+                })}
+              </View>
+            </Vertical>
+          );
+        })}
       </Vertical>
     </Vertical>
   );
