@@ -183,28 +183,39 @@ export const ChartView: React.FC<ChartProps> = ({
     // Calculate tooltip position with boundary checking
     const tooltipWidth = 240; // Approximate tooltip width for card layout
     const tooltipHeight = 120; // Approximate tooltip height for enriched content
-    const offset = 10; // Offset from cursor
+    const maxDistance = 100; // Maximum distance from cursor on any axis
+    const viewportOffset = 10; // Offset from viewport edges
 
-    let left = tooltip.x - tooltipWidth / 2;
-    let top = tooltip.y - tooltipHeight - offset;
+    // Position tooltip to the top-left of cursor
+    let left = tooltip.x - tooltipWidth;
+    let top = tooltip.y - tooltipHeight;
 
-    // Check top boundary; if there's not enough space above, show below the cursor
-    if (top < offset) {
-      top = tooltip.y + offset;
+    // Ensure tooltip is not more than 100px away from cursor on x-axis
+    if (tooltip.x - left > maxDistance) {
+      left = tooltip.x - maxDistance;
+    }
+
+    // Ensure tooltip is not more than 100px away from cursor on y-axis
+    if (tooltip.y - top > maxDistance) {
+      top = tooltip.y - maxDistance;
     }
 
     // Ensure tooltip stays within the viewport horizontally
-    if (left + tooltipWidth > window.innerWidth - offset) {
-      left = window.innerWidth - tooltipWidth - offset;
+    if (left + tooltipWidth > window.innerWidth - viewportOffset) {
+      left = window.innerWidth - tooltipWidth - viewportOffset;
     }
 
-    if (left < offset) {
-      left = offset;
+    if (left < viewportOffset) {
+      left = viewportOffset;
     }
 
-    // Ensure tooltip stays within the viewport vertically when shown below
-    if (top + tooltipHeight > window.innerHeight - offset) {
-      top = window.innerHeight - tooltipHeight - offset;
+    // Ensure tooltip stays within the viewport vertically
+    if (top + tooltipHeight > window.innerHeight - viewportOffset) {
+      top = window.innerHeight - tooltipHeight - viewportOffset;
+    }
+
+    if (top < viewportOffset) {
+      top = viewportOffset;
     }
 
     return (
