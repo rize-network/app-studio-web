@@ -77,6 +77,8 @@ export interface CalendarProps {
   onEventDrop?: (event: CalendarEvent, newStart: Date, newEnd: Date) => void;
   /** Called when an event is resized to a new duration. */
   onEventResize?: (event: CalendarEvent, newStart: Date, newEnd: Date) => void;
+  /** Called when user double-clicks on a day/time slot to create a new event. */
+  onEventCreate?: (start: Date, end: Date) => void;
   /** Customise styling of calendar areas. */
   views?: CalendarViews;
 }

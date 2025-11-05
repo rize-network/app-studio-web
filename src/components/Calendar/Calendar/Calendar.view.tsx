@@ -238,7 +238,11 @@ const renderDefaultEvent = (
   );
 };
 
-const CalendarViewComponent: React.FC<CalendarViewProps> = ({
+interface CalendarViewPropsExtended extends CalendarViewProps {
+  onEventCreate?: (start: Date, end: Date) => void;
+}
+
+const CalendarViewComponent: React.FC<CalendarViewPropsExtended> = ({
   currentDate,
   view,
   label,
@@ -252,6 +256,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   renderEvent,
   onEventDrop,
   onEventResize,
+  onEventCreate,
   views,
   height = '800px',
 }) => {
@@ -263,6 +268,12 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
     originalStart: Date;
     originalEnd: Date;
   } | null>(null);
+
+  // Ref to store the grid container for coordinate calculations
+  const gridRef = React.useRef<HTMLDivElement>(null);
+
+  // Store day cell refs for position calculations
+  const dayCellRefs = React.useRef<Map<string, HTMLDivElement>>(new Map());
 
   // Use same grid configuration for both header and days
   const columnCount = weekdayLabels.length;
