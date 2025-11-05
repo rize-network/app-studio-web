@@ -1,4 +1,11 @@
-import { format, isWithinInterval, startOfDay, endOfDay, differenceInDays, addDays, isSameDay } from 'date-fns';
+import {
+  format,
+  isWithinInterval,
+  startOfDay,
+  endOfDay,
+  differenceInDays,
+  isSameDay,
+} from 'date-fns';
 import { CalendarEvent } from './Calendar.props';
 
 export interface CalendarEventInternal extends CalendarEvent {
@@ -125,7 +132,7 @@ export const calculateEventSpan = (
   }
 
   const eventEndDay = startOfDay(event.endDate);
-  const dayIndex = visibleDays.findIndex(d => isSameDay(d, day));
+  const dayIndex = visibleDays.findIndex((d) => isSameDay(d, day));
 
   if (dayIndex === -1) {
     return 1;

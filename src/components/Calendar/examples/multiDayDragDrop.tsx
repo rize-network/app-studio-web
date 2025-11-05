@@ -57,9 +57,7 @@ export const CalendarMultiDayDragDrop = () => {
 
     setEvents((prevEvents) =>
       prevEvents.map((e) =>
-        e.id === event.id
-          ? { ...e, start: newStart, end: newEnd }
-          : e
+        e.id === event.id ? { ...e, start: newStart, end: newEnd } : e
       )
     );
   };
@@ -73,9 +71,7 @@ export const CalendarMultiDayDragDrop = () => {
 
     setEvents((prevEvents) =>
       prevEvents.map((e) =>
-        e.id === event.id
-          ? { ...e, start: newStart, end: newEnd }
-          : e
+        e.id === event.id ? { ...e, start: newStart, end: newEnd } : e
       )
     );
   };

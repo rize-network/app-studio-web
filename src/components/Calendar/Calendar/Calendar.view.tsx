@@ -1,6 +1,12 @@
-import React, { cloneElement, isValidElement, useState } from 'react';
+import React, { isValidElement, useState } from 'react';
 import { Horizontal, Vertical, View } from 'app-studio';
-import { format, isSameDay, isSameMonth, addDays, addHours, differenceInDays, differenceInHours } from 'date-fns';
+import {
+  format,
+  isSameDay,
+  isSameMonth,
+  addDays,
+  differenceInDays,
+} from 'date-fns';
 
 import { Button } from '../../Button/Button';
 import { Text } from '../../Text/Text';
@@ -11,7 +17,12 @@ import {
   CalendarView,
   CalendarViews,
 } from './Calendar.props';
-import { CalendarEventInternal, formatDayKey, getEventSpanInfo, isMultiDayEvent } from './Calendar.utils';
+import {
+  CalendarEventInternal,
+  formatDayKey,
+  getEventSpanInfo,
+  isMultiDayEvent,
+} from './Calendar.utils';
 
 interface CalendarViewProps {
   currentDate: Date;
@@ -28,16 +39,8 @@ interface CalendarViewProps {
     event: CalendarEvent,
     context: CalendarRenderEventContext
   ) => React.ReactNode;
-  onEventDrop?: (
-    event: CalendarEvent,
-    newStart: Date,
-    newEnd: Date
-  ) => void;
-  onEventResize?: (
-    event: CalendarEvent,
-    newStart: Date,
-    newEnd: Date
-  ) => void;
+  onEventDrop?: (event: CalendarEvent, newStart: Date, newEnd: Date) => void;
+  onEventResize?: (event: CalendarEvent, newStart: Date, newEnd: Date) => void;
   views?: CalendarViews;
   height?: string | number;
 }
@@ -56,7 +59,10 @@ const renderDefaultEvent = (
   views: CalendarViews | undefined,
   key: string,
   onDragStart?: (e: React.DragEvent<HTMLDivElement>) => void,
-  onResizeStart?: (e: React.MouseEvent<HTMLDivElement>, direction: 'start' | 'end') => void
+  onResizeStart?: (
+    e: React.MouseEvent<HTMLDivElement>,
+    direction: 'start' | 'end'
+  ) => void
 ) => {
   const timeRange =
     format(event.startDate, 'p') +
@@ -83,7 +89,9 @@ const renderDefaultEvent = (
         gap={6}
         padding={12}
         borderRadius={8}
-        backgroundColor={context.isToday ? 'color.primary.50' : 'color.gray.100'}
+        backgroundColor={
+          context.isToday ? 'color.primary.50' : 'color.gray.100'
+        }
         borderWidth={1}
         borderStyle="solid"
         borderColor={context.isToday ? 'color.primary.200' : 'color.gray.200'}
@@ -105,15 +113,20 @@ const renderDefaultEvent = (
               onResizeStart(e, 'start');
             }}
             backgroundColor="transparent"
-            style={{
-              '&:hover': {
+            on={{
+              _hover: {
                 backgroundColor: 'rgba(0, 0, 0, 0.1)',
               },
             }}
           />
         )}
 
-        <Text fontWeight="600" fontSize={12} maxLines={2} {...views?.eventTitle}>
+        <Text
+          fontWeight="600"
+          fontSize={12}
+          maxLines={2}
+          {...views?.eventTitle}
+        >
           {event.title}
         </Text>
         <Text
@@ -144,8 +157,8 @@ const renderDefaultEvent = (
               onResizeStart(e, 'end');
             }}
             backgroundColor="transparent"
-            style={{
-              '&:hover': {
+            on={{
+              _hover: {
                 backgroundColor: 'rgba(0, 0, 0, 0.1)',
               },
             }}
@@ -231,7 +244,8 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   views,
   height = '800px',
 }) => {
-  const [draggedEvent, setDraggedEvent] = useState<CalendarEventInternal | null>(null);
+  const [draggedEvent, setDraggedEvent] =
+    useState<CalendarEventInternal | null>(null);
   const [resizingEvent, setResizingEvent] = useState<{
     event: CalendarEventInternal;
     direction: 'start' | 'end';
@@ -243,57 +257,61 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   const columnCount = weekdayLabels.length;
 
   // Drag and Drop Handlers
-  const handleDragStart = (event: CalendarEventInternal) => (e: React.DragEvent<HTMLDivElement>) => {
-    setDraggedEvent(event);
-    e.dataTransfer.effectAllowed = 'move';
-  };
+  const handleDragStart =
+    (event: CalendarEventInternal) => (e: React.DragEvent<HTMLDivElement>) => {
+      setDraggedEvent(event);
+      e.dataTransfer.effectAllowed = 'move';
+    };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
   };
 
-  const handleDrop = (targetDay: Date) => (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    if (!draggedEvent || !onEventDrop) return;
+  const handleDrop =
+    (targetDay: Date) => (e: React.DragEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      if (!draggedEvent || !onEventDrop) return;
 
-    // Calculate the difference in days
-    const originalStart = draggedEvent.startDate;
-    const daysDiff = differenceInDays(targetDay, originalStart);
+      // Calculate the difference in days
+      const originalStart = draggedEvent.startDate;
+      const daysDiff = differenceInDays(targetDay, originalStart);
 
-    // Calculate new dates
-    const newStart = addDays(originalStart, daysDiff);
-    const newEnd = addDays(draggedEvent.endDate, daysDiff);
+      // Calculate new dates
+      const newStart = addDays(originalStart, daysDiff);
+      const newEnd = addDays(draggedEvent.endDate, daysDiff);
 
-    onEventDrop(draggedEvent, newStart, newEnd);
-    setDraggedEvent(null);
-  };
+      onEventDrop(draggedEvent, newStart, newEnd);
+      setDraggedEvent(null);
+    };
 
   // Resize Handlers
-  const handleResizeStart = (event: CalendarEventInternal, direction: 'start' | 'end') => (e: React.MouseEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setResizingEvent({
-      event,
-      direction,
-      originalStart: event.startDate,
-      originalEnd: event.endDate,
-    });
+  const handleResizeStart =
+    (event: CalendarEventInternal, direction: 'start' | 'end') =>
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setResizingEvent({
+        event,
+        direction,
+        originalStart: event.startDate,
+        originalEnd: event.endDate,
+      });
 
-    const handleMouseMove = (moveEvent: MouseEvent) => {
-      // This would need more complex logic to detect which day the mouse is over
-      // For simplicity, we'll handle this in the mouse up event
+      const handleMouseMove = (moveEvent: MouseEvent) => {
+        // This would need more complex logic to detect which day the mouse is over
+        // For simplicity, we'll handle this in the mouse up event
+      };
+
+      const handleMouseUp = () => {
+        setResizingEvent(null);
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
     };
-
-    const handleMouseUp = () => {
-      setResizingEvent(null);
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
 
   const handleDayMouseEnter = (day: Date) => {
     if (resizingEvent && onEventResize) {
@@ -482,7 +500,12 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                           // Skip rendering multi-day events on non-first days
                           const spanInfo = getEventSpanInfo(event, day);
                           const isMultiDay = isMultiDayEvent(event);
-                          if (isMultiDay && spanInfo && !spanInfo.isFirst && view !== 'day') {
+                          if (
+                            isMultiDay &&
+                            spanInfo &&
+                            !spanInfo.isFirst &&
+                            view !== 'day'
+                          ) {
                             return null;
                           }
 
@@ -490,11 +513,19 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                             const rendered = renderEvent(event, context);
 
                             if (isValidElement(rendered)) {
-                              return cloneElement(rendered, {
-                                key,
-                                draggable: true,
-                                onDragStart: onEventDrop ? handleDragStart(event) : undefined,
-                              });
+                              return (
+                                <View
+                                  key={key}
+                                  draggable={true}
+                                  onDragStart={
+                                    onEventDrop
+                                      ? handleDragStart(event)
+                                      : undefined
+                                  }
+                                >
+                                  {rendered}
+                                </View>
+                              );
                             }
 
                             return (
@@ -510,7 +541,10 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                             views,
                             key,
                             onEventDrop ? handleDragStart(event) : undefined,
-                            onEventResize ? (e, direction) => handleResizeStart(event, direction)(e) : undefined
+                            onEventResize
+                              ? (e, direction) =>
+                                  handleResizeStart(event, direction)(e)
+                              : undefined
                           );
                         })
                       : view === 'day' && (
