@@ -654,7 +654,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                                 context,
                                 views,
                                 key,
-                                onEventDrop ? handleDragStart(event) : undefined,
+                                onEventDrop
+                                  ? handleDragStart(event)
+                                  : undefined,
                                 onEventResize
                                   ? (e, direction) =>
                                       handleResizeStart(event, direction)(e)
