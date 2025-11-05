@@ -13,6 +13,7 @@ import {
   CustomStyledCalendar,
   FixedHeightCalendar,
   AllViewsCustomization,
+  CalendarMultiDayDragDrop,
 } from 'src/components/Calendar/examples';
 
 const CalendarPage = () => {
@@ -106,6 +107,19 @@ const CalendarPage = () => {
             <td>All Views Customization</td>
             <td>
               <AllViewsCustomization />
+            </td>
+          </tr>
+          <tr>
+            <td>Fixed Height with Scrolling</td>
+            <td>
+              <FixedHeightCalendar />
+            </td>
+          </tr>
+
+          <tr>
+            <td>multi Day Drag Drop</td>
+            <td>
+              <CalendarMultiDayDragDrop />
             </td>
           </tr>
         </tbody>
