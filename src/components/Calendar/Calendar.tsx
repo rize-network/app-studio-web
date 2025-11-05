@@ -64,6 +64,8 @@ const CalendarComponent: React.FC<CalendarProps> = ({
   renderEvent,
   onDateChange,
   onViewChange,
+  onEventDrop,
+  onEventResize,
   views,
 }) => {
   const parsedInitialDate = useMemo(
@@ -182,6 +184,8 @@ const CalendarComponent: React.FC<CalendarProps> = ({
       onToday={handleToday}
       onViewChange={handleViewChange}
       renderEvent={renderEvent}
+      onEventDrop={onEventDrop}
+      onEventResize={onEventResize}
       views={views}
       height={height}
     />
