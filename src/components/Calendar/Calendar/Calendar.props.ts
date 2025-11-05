@@ -73,6 +73,18 @@ export interface CalendarProps {
   onDateChange?: (date: Date) => void;
   /** Called when the active view changes. */
   onViewChange?: (view: CalendarView) => void;
+  /** Called when an event is moved to a new date/time via drag and drop. */
+  onEventDrop?: (
+    event: CalendarEvent,
+    newStart: Date,
+    newEnd: Date
+  ) => void;
+  /** Called when an event is resized to a new duration. */
+  onEventResize?: (
+    event: CalendarEvent,
+    newStart: Date,
+    newEnd: Date
+  ) => void;
   /** Customise styling of calendar areas. */
   views?: CalendarViews;
 }

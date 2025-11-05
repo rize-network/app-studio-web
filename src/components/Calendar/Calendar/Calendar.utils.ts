@@ -1,4 +1,4 @@
-import { format, isWithinInterval, startOfDay, endOfDay } from 'date-fns';
+import { format, isWithinInterval, startOfDay, endOfDay, differenceInDays, addDays, isSameDay } from 'date-fns';
 import { CalendarEvent } from './Calendar.props';
 
 export interface CalendarEventInternal extends CalendarEvent {
@@ -66,4 +66,80 @@ export const chunk = <T>(items: T[], size: number): T[][] => {
   }
 
   return result;
+};
+
+/**
+ * Checks if an event spans multiple days
+ */
+export const isMultiDayEvent = (event: CalendarEventInternal): boolean => {
+  const startDay = startOfDay(event.startDate);
+  const endDay = startOfDay(event.endDate);
+  return differenceInDays(endDay, startDay) > 0;
+};
+
+/**
+ * Gets the span information for an event on a specific day
+ */
+export interface EventSpanInfo {
+  isFirst: boolean; // Is this the first day of the event?
+  isLast: boolean; // Is this the last day of the event?
+  totalDays: number; // Total number of days the event spans
+  dayIndex: number; // Which day index is this (0-based)
+}
+
+export const getEventSpanInfo = (
+  event: CalendarEventInternal,
+  day: Date
+): EventSpanInfo | null => {
+  const eventStartDay = startOfDay(event.startDate);
+  const eventEndDay = startOfDay(event.endDate);
+  const currentDay = startOfDay(day);
+
+  if (currentDay < eventStartDay || currentDay > eventEndDay) {
+    return null;
+  }
+
+  const totalDays = differenceInDays(eventEndDay, eventStartDay) + 1;
+  const dayIndex = differenceInDays(currentDay, eventStartDay);
+
+  return {
+    isFirst: isSameDay(currentDay, eventStartDay),
+    isLast: isSameDay(currentDay, eventEndDay),
+    totalDays,
+    dayIndex,
+  };
+};
+
+/**
+ * Calculate the visual span for multi-day events in week/month view
+ * Returns the number of cells the event should span starting from the given day
+ */
+export const calculateEventSpan = (
+  event: CalendarEventInternal,
+  day: Date,
+  visibleDays: Date[]
+): number => {
+  const spanInfo = getEventSpanInfo(event, day);
+  if (!spanInfo || !spanInfo.isFirst) {
+    return 0; // Only render on the first day
+  }
+
+  const eventEndDay = startOfDay(event.endDate);
+  const dayIndex = visibleDays.findIndex(d => isSameDay(d, day));
+
+  if (dayIndex === -1) {
+    return 1;
+  }
+
+  let span = 1;
+  for (let i = dayIndex + 1; i < visibleDays.length; i++) {
+    const nextDay = startOfDay(visibleDays[i]);
+    if (nextDay <= eventEndDay) {
+      span++;
+    } else {
+      break;
+    }
+  }
+
+  return span;
 };
