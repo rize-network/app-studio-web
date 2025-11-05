@@ -185,38 +185,30 @@ export const ChartView: React.FC<ChartProps> = ({
     const tooltipHeight = 120; // Approximate tooltip height for enriched content
     const maxDistance = 100; // Maximum distance from cursor on any axis
     const viewportOffset = 10; // Offset from viewport edges
+    const cursorOffset = 15; // Small offset from cursor position
 
-    // Position tooltip to the top-left of cursor
-    let left = tooltip.x - tooltipWidth;
-    let top = tooltip.y - tooltipHeight;
+    // Position tooltip to the top-left of cursor with small offset
+    let left = tooltip.x - cursorOffset;
+    let top = tooltip.y - cursorOffset;
 
-    // Ensure tooltip is not more than 100px away from cursor on x-axis
-    if (tooltip.x - left > maxDistance) {
-      left = tooltip.x - maxDistance;
-    }
+    // Clamp position to stay within maxDistance from cursor
+    // For left positioning: tooltip right edge should be close to cursor
+    // So left edge should be at least (cursor.x - maxDistance)
+    const minLeft = Math.max(viewportOffset, tooltip.x - maxDistance);
+    const maxLeft = Math.min(
+      window.innerWidth - tooltipWidth - viewportOffset,
+      tooltip.x - cursorOffset
+    );
+    left = Math.max(minLeft, Math.min(left, maxLeft));
 
-    // Ensure tooltip is not more than 100px away from cursor on y-axis
-    if (tooltip.y - top > maxDistance) {
-      top = tooltip.y - maxDistance;
-    }
-
-    // Ensure tooltip stays within the viewport horizontally
-    if (left + tooltipWidth > window.innerWidth - viewportOffset) {
-      left = window.innerWidth - tooltipWidth - viewportOffset;
-    }
-
-    if (left < viewportOffset) {
-      left = viewportOffset;
-    }
-
-    // Ensure tooltip stays within the viewport vertically
-    if (top + tooltipHeight > window.innerHeight - viewportOffset) {
-      top = window.innerHeight - tooltipHeight - viewportOffset;
-    }
-
-    if (top < viewportOffset) {
-      top = viewportOffset;
-    }
+    // For top positioning: tooltip bottom edge should be close to cursor
+    // So top edge should be at least (cursor.y - maxDistance)
+    const minTop = Math.max(viewportOffset, tooltip.y - maxDistance);
+    const maxTop = Math.min(
+      window.innerHeight - tooltipHeight - viewportOffset,
+      tooltip.y - cursorOffset
+    );
+    top = Math.max(minTop, Math.min(top, maxTop));
 
     return (
       <View
