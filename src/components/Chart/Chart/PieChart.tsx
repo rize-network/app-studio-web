@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useEffect } from 'react';
-import { useTheme, useElementPosition } from 'app-studio';
+import { useTheme, useElementPosition, View } from 'app-studio';
+import { Text } from '../../Text/Text';
 import { ChartDataPoint } from './Chart.type';
 import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
 
@@ -10,7 +11,7 @@ interface PieChartProps {
   animationProgress: number;
   isDonut?: boolean;
   onSliceClick?: (dataPoint: ChartDataPoint, index: number) => void;
-  showTooltip: (x: number, y: number, content: string) => void;
+  showTooltip: (x: number, y: number, content: React.ReactNode) => void;
   hideTooltip: () => void;
   views?: any;
 }
@@ -170,7 +171,65 @@ export const PieChart: React.FC<PieChartProps> = ({
       {/* Pie slices */}
       {slices.map((slice, index) => {
         const handleMouseEnter = (e: React.MouseEvent) => {
-          const tooltipContent = `${slice.label}: ${slice.value} (${slice.percentage})`;
+          const numericShare = total > 0 ? (slice.value / total) * 100 : 0;
+          const remainingShare =
+            total > 0 ? Math.max(0, 100 - numericShare) : null;
+          const tooltipContent = (
+            <View display="flex" flexDirection="column" minWidth="200px">
+              <View
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Text fontWeight="semibold">{slice.label}</Text>
+                <View
+                  width="12px"
+                  height="12px"
+                  borderRadius="2px"
+                  backgroundColor={slice.color}
+                />
+              </View>
+              <Text marginTop="4px" color="color.gray.500" fontSize="12px">
+                Slice {slice.index + 1} of {dataPoints.length}
+              </Text>
+              <View marginTop="8px" display="flex" flexDirection="column">
+                <View display="flex" justifyContent="space-between">
+                  <Text color="color.gray.500">Value</Text>
+                  <Text fontWeight="medium">
+                    {slice.value.toLocaleString()}
+                  </Text>
+                </View>
+                <View
+                  marginTop="4px"
+                  display="flex"
+                  justifyContent="space-between"
+                >
+                  <Text color="color.gray.500">Share</Text>
+                  <Text fontWeight="medium">{slice.percentage}</Text>
+                </View>
+                <View
+                  marginTop="4px"
+                  display="flex"
+                  justifyContent="space-between"
+                >
+                  <Text color="color.gray.500">Total</Text>
+                  <Text fontWeight="medium">{total.toLocaleString()}</Text>
+                </View>
+                {remainingShare !== null && (
+                  <View
+                    marginTop="4px"
+                    display="flex"
+                    justifyContent="space-between"
+                  >
+                    <Text color="color.gray.500">Remaining</Text>
+                    <Text fontWeight="medium">
+                      {`${remainingShare.toFixed(1)}%`}
+                    </Text>
+                  </View>
+                )}
+              </View>
+            </View>
+          );
 
           // Use intelligent positioning based on useElementPosition relation data
           let x = e.clientX;

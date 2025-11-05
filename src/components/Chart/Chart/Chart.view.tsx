@@ -181,8 +181,8 @@ export const ChartView: React.FC<ChartProps> = ({
     if (!showTooltips || !tooltip.visible) return null;
 
     // Calculate tooltip position with boundary checking
-    const tooltipWidth = 200; // Approximate tooltip width
-    const tooltipHeight = 40; // Approximate tooltip height
+    const tooltipWidth = 240; // Approximate tooltip width for card layout
+    const tooltipHeight = 120; // Approximate tooltip height for enriched content
     const offset = 10; // Offset from cursor
 
     let left = tooltip.x - tooltipWidth / 2;
