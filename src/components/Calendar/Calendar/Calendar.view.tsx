@@ -305,6 +305,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
     (e: React.MouseEvent<HTMLDivElement>) => {
       e.preventDefault();
       e.stopPropagation();
+
+      if (!onEventResize) return;
+
       setResizingEvent({
         event,
         direction,
@@ -312,13 +315,59 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
         originalEnd: event.endDate,
       });
 
+      let lastTargetDay: Date | null = null;
+
+      // Set cursor style for better UX
+      document.body.style.cursor = 'col-resize';
+
       const handleMouseMove = (moveEvent: MouseEvent) => {
-        // This would need more complex logic to detect which day the mouse is over
-        // For simplicity, we'll handle this in the mouse up event
+        // Find the day cell element under the cursor
+        const elementUnderCursor = document.elementFromPoint(
+          moveEvent.clientX,
+          moveEvent.clientY
+        );
+
+        if (!elementUnderCursor) return;
+
+        // Find the closest day cell container
+        const dayCell = elementUnderCursor.closest('[data-day-key]');
+        if (!dayCell) return;
+
+        const dayKey = dayCell.getAttribute('data-day-key');
+        if (!dayKey) return;
+
+        // Find the date from visible days
+        const targetDay = allVisibleDays.find(
+          (d) => formatDayKey(d) === dayKey
+        );
+        if (!targetDay) return;
+
+        // Only update if we moved to a different day
+        if (lastTargetDay && isSameDay(lastTargetDay, targetDay)) return;
+        lastTargetDay = targetDay;
+
+        // Calculate new dates based on resize direction
+        if (direction === 'start') {
+          // Resizing from the start - update start date
+          const newStart = targetDay;
+          const originalEnd = event.endDate;
+          if (newStart < originalEnd) {
+            onEventResize(event, newStart, originalEnd);
+          }
+        } else {
+          // Resizing from the end - update end date
+          // End date should be end of the target day
+          const newEnd = addDays(targetDay, 1);
+          const originalStart = event.startDate;
+          if (newEnd > originalStart) {
+            onEventResize(event, originalStart, newEnd);
+          }
+        }
       };
 
       const handleMouseUp = () => {
         setResizingEvent(null);
+        document.body.style.cursor = '';
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
       };
@@ -326,26 +375,6 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     };
-
-  const handleDayMouseEnter = (day: Date) => {
-    if (resizingEvent && onEventResize) {
-      const { event, direction, originalStart, originalEnd } = resizingEvent;
-
-      if (direction === 'start') {
-        // Resizing from the start
-        const newStart = day;
-        if (newStart < originalEnd) {
-          onEventResize(event, newStart, originalEnd);
-        }
-      } else {
-        // Resizing from the end
-        const newEnd = addDays(day, 1);
-        if (newEnd > originalStart) {
-          onEventResize(event, originalStart, newEnd);
-        }
-      }
-    }
-  };
 
   const weekdayRow = (
     <View
@@ -567,6 +596,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                   return (
                     <Vertical
                       key={dayKey}
+                      data-day-key={dayKey}
                       gap={8}
                       padding={12}
                       borderRightWidth={1}
@@ -585,7 +615,6 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                       minHeight={view === 'month' ? '180px' : '300px'}
                       onDragOver={handleDragOver}
                       onDrop={handleDrop(day)}
-                      onMouseEnter={() => handleDayMouseEnter(day)}
                       {...views?.dayColumn}
                     >
                       <Horizontal
