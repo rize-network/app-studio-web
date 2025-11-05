@@ -13,7 +13,6 @@ import {
   LegendItemStyles,
   LegendColorStyles,
   LegendTextStyles,
-  TooltipStyles,
   LoadingOverlayStyles,
   ErrorOverlayStyles,
   NoDataOverlayStyles,
@@ -21,6 +20,7 @@ import {
 import { BarChart } from './BarChart';
 import { LineChart } from './LineChart';
 import { PieChart } from './PieChart';
+import { ChartTooltip } from './ChartTooltip';
 
 export const ChartView: React.FC<ChartProps> = ({
   type,
@@ -176,49 +176,6 @@ export const ChartView: React.FC<ChartProps> = ({
     }
   };
 
-  // Render tooltip
-  const renderTooltip = () => {
-    if (!showTooltips || !tooltip.visible) return null;
-
-    // Calculate tooltip position with boundary checking
-    const tooltipWidth = 240; // Approximate tooltip width for card layout
-    const tooltipHeight = 120; // Approximate tooltip height for enriched content
-    const offset = 10; // Offset from cursor
-
-    let left = tooltip.x - tooltipWidth / 2;
-    let top = tooltip.y - tooltipHeight - offset;
-
-    // Check top boundary; if there's not enough space above, show below the cursor
-    if (top < offset) {
-      top = tooltip.y + offset;
-    }
-
-    // Ensure tooltip stays within the viewport horizontally
-    if (left + tooltipWidth > window.innerWidth - offset) {
-      left = window.innerWidth - tooltipWidth - offset;
-    }
-
-    if (left < offset) {
-      left = offset;
-    }
-
-    // Ensure tooltip stays within the viewport vertically when shown below
-    if (top + tooltipHeight > window.innerHeight - offset) {
-      top = window.innerHeight - tooltipHeight - offset;
-    }
-
-    return (
-      <View
-        position="fixed"
-        left={`${left}px`}
-        top={`${top}px`}
-        {...TooltipStyles}
-        {...views?.tooltip}
-      >
-        {tooltip.content}
-      </View>
-    );
-  };
 
   // Default loading indicator
   const renderLoadingIndicator = () => {
@@ -299,7 +256,14 @@ export const ChartView: React.FC<ChartProps> = ({
       {/* Only show legend when chart content is visible */}
       {showChartContent && legendPosition === 'bottom' && renderLegend()}
 
-      {renderTooltip()}
+      <ChartTooltip
+        visible={showTooltips && tooltip.visible}
+        x={tooltip.x}
+        y={tooltip.y}
+        content={tooltip.content}
+        maxDistance={100}
+        views={views}
+      />
     </View>
   );
 };
