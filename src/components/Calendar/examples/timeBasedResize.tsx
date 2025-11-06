@@ -37,7 +37,7 @@ export const CalendarTimeBasedResize = () => {
       title: 'Code Review',
       start: new Date(2025, 10, 6, 16, 15), // 4:15 PM
       end: new Date(2025, 10, 6, 17, 0), // 5:00 PM
-      description: 'Review PRs',
+      description: 'Review PR',
     },
     // Week view events
     {
@@ -119,44 +119,13 @@ export const CalendarTimeBasedResize = () => {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Calendrier avec Resize et Drag & Drop</h1>
-      <p>
-        Ce calendrier démontre les fonctionnalités de resize et déplacement:
-      </p>
-      <ul>
-        <li>✅ Grille temporelle avec lignes fines (slots d'1 heure)</li>
-        <li>✅ <strong>Resize vertical</strong> (haut/bas) pour ajuster les horaires</li>
-        <li>✅ <strong>Resize horizontal</strong> (gauche/droite) pour événements multi-jours</li>
-        <li>✅ <strong>Drag & drop</strong> pour déplacer les événements entre jours/heures</li>
-        <li>✅ <strong>Double-click</strong> sur un créneau pour créer un événement</li>
-        <li>✅ <strong>Visual spanning</strong> - événements multi-jours s'étendent horizontalement</li>
-        <li>✅ Snap automatique aux intervalles de 15 minutes</li>
-        <li>✅ Tooltip en temps réel pendant le resize</li>
-        <li>✅ Détection de collision avec feedback visuel</li>
-        <li>✅ Pas d'espace entre jours - layout serré comme Google Calendar</li>
-        <li>✅ Durée min: 15 min, max: 24 heures</li>
-      </ul>
-      <p>
-        <strong>Mode d'emploi:</strong>
-      </p>
-      <ul>
-        <li><strong>Resize vertical:</strong> Survolez le haut ou le bas d'un événement et glissez</li>
-        <li><strong>Resize horizontal:</strong> Survolez le bord gauche/droite d'un événement multi-jours et glissez</li>
-        <li><strong>Déplacer:</strong> Cliquez sur un événement et glissez vers une nouvelle position</li>
-        <li><strong>Créer:</strong> Double-cliquez sur un créneau horaire vide</li>
-        <li><strong>Multi-jours:</strong> Regardez "Conference" qui s'étend sur 3 jours en week view</li>
-      </ul>
-
-      <Calendar
-        events={events}
-        onEventResize={handleEventResize}
-        onEventDrop={handleEventDrop}
-        onEventCreate={handleEventCreate}
-        initialView="week"
-        initialDate={new Date(2025, 10, 6)}
-        height="800px"
-      />
-    </div>
+    <Calendar
+      events={events}
+      onEventResize={handleEventResize}
+      onEventDrop={handleEventDrop}
+      initialView="week"
+      initialDate={new Date(2025, 10, 6)}
+      height="800px"
+    />
   );
 };
