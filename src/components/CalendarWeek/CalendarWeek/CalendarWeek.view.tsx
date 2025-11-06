@@ -42,6 +42,33 @@ interface DragState {
   originalEnd: string | null;
 }
 
+interface ResizeHandleProps {
+  direction: 'left' | 'right';
+  onMouseDown: (e: React.MouseEvent) => void;
+}
+
+const ResizeHandle: React.FC<ResizeHandleProps> = ({ direction, onMouseDown }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <View
+      position="absolute"
+      top={0}
+      bottom={0}
+      width={8}
+      opacity={isHovered ? 1 : 0}
+      transition="opacity 0.2s"
+      cursor={direction === 'left' ? 'w-resize' : 'e-resize'}
+      zIndex={10}
+      backgroundColor={isHovered ? 'rgba(0,0,0,0.1)' : 'transparent'}
+      {...(direction === 'left' ? { left: 0 } : { right: 0 })}
+      onMouseDown={onMouseDown}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    />
+  );
+};
+
 export const CalendarWeek: React.FC<CalendarWeekProps> = ({
   startDate,
   events = [],
@@ -266,7 +293,14 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
       maxWidth={maxWidth}
       {...views.container}
     >
-      <div ref={weekGridRef} style={{ ...weekGridStyles, display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', position: 'relative' }}>
+      <View
+        ref={weekGridRef}
+        display="grid"
+        gridTemplateColumns="repeat(7, 1fr)"
+        position="relative"
+        width="100%"
+        {...views.weekGrid}
+      >
         {/* Day columns */}
         {Array.from({ length: 7 }).map((_, dayIdx) => {
           const dateISO = getDateForDay(startDate, dayIdx);
@@ -307,7 +341,14 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
         })}
 
         {/* Events layer */}
-        <div style={{ ...eventsLayerStyles, position: 'absolute', top: 60, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+        <View
+          position="absolute"
+          top={60}
+          left={0}
+          right={0}
+          bottom={0}
+          pointerEvents="none"
+        >
           {positionedEvents.map((event) => {
             const colorConfig = EVENT_COLORS[event.color || 'blue'];
             const positionStyles = getEventPositionStyles(
@@ -324,66 +365,62 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
               dragStateRef.current.event?.id === event.id;
 
             return (
-              <div
+              <View
                 key={event.id}
-                style={{
-                  ...positionStyles,
-                  height: 22,
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '0 8px',
-                  borderRadius: 4,
-                  backgroundColor: getColor(colorConfig.background),
-                  borderLeft: `3px solid ${getColor(colorConfig.border)}`,
-                  color: getColor(colorConfig.text),
-                  fontSize: 12,
-                  fontWeight: 500,
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                  cursor: isDragging ? 'grabbing' : 'grab',
-                  opacity: isDragging || isResizing ? 0.7 : 1,
-                  boxShadow:
-                    isDragging || isResizing
-                      ? '0 4px 12px rgba(0,0,0,0.3)'
-                      : '0 1px 2px rgba(0,0,0,0.1)',
-                  transition: isDragging || isResizing ? 'none' : 'box-shadow 0.2s',
-                  pointerEvents: 'auto',
-                  userSelect: 'none',
-                  position: 'relative',
-                }}
+                position="absolute"
+                height={22}
+                display="flex"
+                alignItems="center"
+                padding={8}
+                paddingLeft={8}
+                paddingRight={8}
+                borderRadius={4}
+                backgroundColor={colorConfig.background}
+                borderLeft={`3px solid`}
+                borderLeftColor={colorConfig.border}
+                color={colorConfig.text}
+                fontSize={12}
+                fontWeight={500}
+                overflow="hidden"
+                cursor={isDragging ? 'grabbing' : 'grab'}
+                opacity={isDragging || isResizing ? 0.7 : 1}
+                boxShadow={
+                  isDragging || isResizing
+                    ? '0 4px 12px rgba(0,0,0,0.3)'
+                    : '0 1px 2px rgba(0,0,0,0.1)'
+                }
+                transition={isDragging || isResizing ? 'none' : 'box-shadow 0.2s'}
+                pointerEvents="auto"
+                userSelect="none"
+                left={positionStyles.left}
+                width={positionStyles.width}
+                top={positionStyles.top}
                 onMouseDown={(e) => handleEventMouseDown(e, event)}
+                {...views.event}
               >
-                {event.title}
+                <View
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  whiteSpace="nowrap"
+                  width="100%"
+                >
+                  {event.title}
+                </View>
 
                 {/* Resize handles */}
-                <div
-                  style={{
-                    ...leftResizeHandleStyles,
-                  }}
+                <ResizeHandle
+                  direction="left"
                   onMouseDown={(e) => handleResizeMouseDown(e, event, 'left')}
-                  className="resize-handle-left"
                 />
-                <div
-                  style={{
-                    ...rightResizeHandleStyles,
-                  }}
+                <ResizeHandle
+                  direction="right"
                   onMouseDown={(e) => handleResizeMouseDown(e, event, 'right')}
-                  className="resize-handle-right"
                 />
-              </div>
+              </View>
             );
           })}
-        </div>
-      </div>
-
-      <style>{`
-        .resize-handle-left:hover,
-        .resize-handle-right:hover {
-          opacity: 1 !important;
-          background: rgba(0,0,0,0.1);
-        }
-      `}</style>
+        </View>
+      </View>
     </View>
   );
 };
