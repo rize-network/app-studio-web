@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback, useMemo } from 'react';
-import { View, Vertical, Horizontal, useTheme } from 'app-studio';
+import { View, useTheme } from 'app-studio';
 import { CalendarWeekProps, CalendarWeekEvent } from './CalendarWeek.props';
 import {
   layoutEvents,
@@ -9,7 +9,6 @@ import {
   getDayOfWeek,
   getDateNumber,
   addDateDays,
-  daysBetweenUTC,
 } from './CalendarWeek.utils';
 import {
   containerStyles,
@@ -22,7 +21,6 @@ import {
   selectedDateStyles,
   eventsAreaStyles,
   eventsLayerStyles,
-  eventStyles,
   EVENT_COLORS,
   getEventPositionStyles,
   dropTargetStyles,
@@ -121,7 +119,11 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
 
   // Handle mouse down on resize handle
   const handleResizeMouseDown = useCallback(
-    (e: React.MouseEvent, event: PositionedEvent, direction: 'left' | 'right') => {
+    (
+      e: React.MouseEvent,
+      event: PositionedEvent,
+      direction: 'left' | 'right'
+    ) => {
       e.preventDefault();
       e.stopPropagation();
       dragStateRef.current = {
@@ -143,7 +145,8 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       const dragState = dragStateRef.current;
-      if (!dragState.event || (!dragState.isDragging && !dragState.isResizing)) return;
+      if (!dragState.event || (!dragState.isDragging && !dragState.isResizing))
+        return;
       if (!weekGridRef.current) return;
 
       const rect = weekGridRef.current.getBoundingClientRect();
@@ -153,7 +156,10 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
 
       if (dragState.isDragging) {
         // Calculate new position
-        const newStartDay = Math.max(0, Math.min(6, dragState.startDay + daysDelta));
+        const newStartDay = Math.max(
+          0,
+          Math.min(6, dragState.startDay + daysDelta)
+        );
         const duration = dragState.event.duration;
         const newEndDay = Math.min(6, newStartDay + duration - 1);
 
@@ -169,8 +175,14 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
           ev.id === dragState.event!.id
             ? {
                 ...ev,
-                start: addDateDays(dragState.originalStart!, newStartDay - dragState.startDay),
-                end: addDateDays(dragState.originalEnd!, newStartDay - dragState.startDay),
+                start: addDateDays(
+                  dragState.originalStart!,
+                  newStartDay - dragState.startDay
+                ),
+                end: addDateDays(
+                  dragState.originalEnd!,
+                  newStartDay - dragState.startDay
+                ),
               }
             : ev
         );
@@ -186,7 +198,10 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
             ev.id === dragState.event!.id
               ? {
                   ...ev,
-                  end: addDateDays(dragState.originalStart!, actualDuration - 1),
+                  end: addDateDays(
+                    dragState.originalStart!,
+                    actualDuration - 1
+                  ),
                 }
               : ev
           );
@@ -194,15 +209,22 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
         } else if (dragState.resizeDirection === 'left') {
           const newStartDay = Math.max(
             0,
-            Math.min(dragState.startDay + dragState.startDuration - 1, dragState.startDay + daysDelta)
+            Math.min(
+              dragState.startDay + dragState.startDuration - 1,
+              dragState.startDay + daysDelta
+            )
           );
-          const newDuration = dragState.startDay + dragState.startDuration - newStartDay;
+          const newDuration =
+            dragState.startDay + dragState.startDuration - newStartDay;
 
           const updatedEvents = localEvents.map((ev) =>
             ev.id === dragState.event!.id
               ? {
                   ...ev,
-                  start: addDateDays(dragState.originalStart!, newStartDay - dragState.startDay),
+                  start: addDateDays(
+                    dragState.originalStart!,
+                    newStartDay - dragState.startDay
+                  ),
                 }
               : ev
           );
@@ -217,12 +239,15 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
   const handleMouseUp = useCallback(
     (e: MouseEvent) => {
       const dragState = dragStateRef.current;
-      if (!dragState.event || (!dragState.isDragging && !dragState.isResizing)) return;
+      if (!dragState.event || (!dragState.isDragging && !dragState.isResizing))
+        return;
 
       setDropTargetDays([]);
 
       // Find the updated event
-      const updatedEvent = localEvents.find((ev) => ev.id === dragState.event!.id);
+      const updatedEvent = localEvents.find(
+        (ev) => ev.id === dragState.event!.id
+      );
       if (!updatedEvent) return;
 
       // Call appropriate callback
@@ -266,7 +291,15 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
       maxWidth={maxWidth}
       {...views.container}
     >
-      <div ref={weekGridRef} style={{ ...weekGridStyles, display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', position: 'relative' }}>
+      <div
+        ref={weekGridRef}
+        style={{
+          ...weekGridStyles,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(7, 1fr)',
+          position: 'relative',
+        }}
+      >
         {/* Day columns */}
         {Array.from({ length: 7 }).map((_, dayIdx) => {
           const dateISO = getDateForDay(startDate, dayIdx);
@@ -307,7 +340,17 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
         })}
 
         {/* Events layer */}
-        <div style={{ ...eventsLayerStyles, position: 'absolute', top: 60, left: 0, right: 0, bottom: 0, pointerEvents: 'none' }}>
+        <div
+          style={{
+            ...eventsLayerStyles,
+            position: 'absolute',
+            top: 60,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            pointerEvents: 'none',
+          }}
+        >
           {positionedEvents.map((event) => {
             const colorConfig = EVENT_COLORS[event.color || 'blue'];
             const positionStyles = getEventPositionStyles(
@@ -347,7 +390,8 @@ export const CalendarWeek: React.FC<CalendarWeekProps> = ({
                     isDragging || isResizing
                       ? '0 4px 12px rgba(0,0,0,0.3)'
                       : '0 1px 2px rgba(0,0,0,0.1)',
-                  transition: isDragging || isResizing ? 'none' : 'box-shadow 0.2s',
+                  transition:
+                    isDragging || isResizing ? 'none' : 'box-shadow 0.2s',
                   pointerEvents: 'auto',
                   userSelect: 'none',
                   position: 'relative',

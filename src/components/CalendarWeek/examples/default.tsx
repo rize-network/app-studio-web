@@ -50,16 +50,12 @@ export const CalendarWeekDefault = () => {
 
   const handleEventDrop = (event: CalendarWeekEvent) => {
     console.log('Event dropped:', event);
-    setEvents((prev) =>
-      prev.map((e) => (e.id === event.id ? event : e))
-    );
+    setEvents((prev) => prev.map((e) => (e.id === event.id ? event : e)));
   };
 
   const handleEventResize = (event: CalendarWeekEvent) => {
     console.log('Event resized:', event);
-    setEvents((prev) =>
-      prev.map((e) => (e.id === event.id ? event : e))
-    );
+    setEvents((prev) => prev.map((e) => (e.id === event.id ? event : e)));
   };
 
   const handleDateClick = (date: string) => {
