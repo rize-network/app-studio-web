@@ -83,7 +83,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   const gridRef = useRef<HTMLDivElement>(null);
   const [draggedEvent, setDraggedEvent] =
     useState<CalendarEventInternal | null>(null);
-  const [resizingEvent, setResizingEvent] = useState<{
+  const resizingEventRef = useRef<{
     event: CalendarEventInternal;
     direction: 'start' | 'end' | 'top' | 'bottom';
     initialX: number;
@@ -159,15 +159,15 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
 
         if (!onEventResize) return;
 
-        setResizingEvent({
+        resizingEventRef.current = {
           event,
           direction,
           initialX: e.clientX,
           initialY: e.clientY,
-        });
+        };
 
         const handleMouseMove = (moveEvent: MouseEvent) => {
-          if (!resizingEvent) return;
+          if (!resizingEventRef.current) return;
 
           if (direction === 'start' || direction === 'end') {
             // Horizontal resize (for multi-day events)
@@ -204,10 +204,11 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
         };
 
         const handleMouseUp = () => {
-          setResizingEvent(null);
+          resizingEventRef.current = null;
           document.removeEventListener('mousemove', handleMouseMove);
           document.removeEventListener('mouseup', handleMouseUp);
           document.body.style.cursor = '';
+          document.body.style.userSelect = '';
         };
 
         document.addEventListener('mousemove', handleMouseMove);
@@ -216,8 +217,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
           direction === 'start' || direction === 'end'
             ? 'col-resize'
             : 'row-resize';
+        document.body.style.userSelect = 'none';
       },
-    [onEventResize, getDayFromPosition, getTimeFromPosition, resizingEvent]
+    [onEventResize, getDayFromPosition, getTimeFromPosition]
   );
 
   // Drag and drop handlers
