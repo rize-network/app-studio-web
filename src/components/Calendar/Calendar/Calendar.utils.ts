@@ -1,152 +1,246 @@
-import {
-  format,
-  isWithinInterval,
-  startOfDay,
-  endOfDay,
-  differenceInDays,
-  isSameDay,
-} from 'date-fns';
 import { CalendarEvent } from './Calendar.props';
 
-export interface CalendarEventInternal extends CalendarEvent {
-  startDate: Date;
-  endDate: Date;
+export interface PositionedEvent extends CalendarEvent {
+  /** Starting day index (0-41, representing 6 weeks * 7 days) */
+  startDay: number;
+  /** Ending day index (0-41) */
+  endDay: number;
+  /** Number of days the event spans */
+  duration: number;
+  /** Row index for vertical positioning (to avoid overlaps) */
+  row: number;
+  /** Week index (0-5) */
+  weekIndex: number;
+  /** Day of week (0-6) */
+  dayOfWeek: number;
 }
 
-export const toDate = (value: Date | string): Date => {
-  if (value instanceof Date) {
-    return value;
-  }
-
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) {
-    throw new Error(`Invalid date value provided to Calendar: ${value}`);
-  }
-
-  return parsed;
+/**
+ * Convert an ISO date string to a UTC Date object
+ */
+export const dateUTC = (iso: string): Date => {
+  return new Date(iso + (iso.includes('T') ? '' : 'T00:00:00Z'));
 };
 
-export const normalizeEvent = (event: CalendarEvent): CalendarEventInternal => {
-  const startDate = toDate(event.start);
-  const rawEndDate = event.end ? toDate(event.end) : startDate;
-  const [earlier, later] =
-    rawEndDate.getTime() >= startDate.getTime()
-      ? [startDate, rawEndDate]
-      : [rawEndDate, startDate];
-
-  return {
-    ...event,
-    startDate: earlier,
-    endDate: later,
-  };
+/**
+ * Calculate the number of days between two ISO date strings
+ */
+export const daysBetweenUTC = (a: string, b: string): number => {
+  return Math.floor((dateUTC(a).getTime() - dateUTC(b).getTime()) / 86400000);
 };
 
-export const formatDayKey = (date: Date): string => format(date, 'yyyy-MM-dd');
+/**
+ * Add a number of days to an ISO date string
+ */
+export const addDateDays = (dateISO: string, days: number): string => {
+  const d = new Date(dateISO + 'T00:00:00Z');
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+};
 
-export const getEventsForDay = (
-  events: CalendarEventInternal[],
-  day: Date
-): CalendarEventInternal[] => {
-  const dayInterval = { start: startOfDay(day), end: endOfDay(day) };
+/**
+ * Get the day of the week (0-6) from an ISO date string
+ */
+export const getDayOfWeek = (dateISO: string): number => {
+  return dateUTC(dateISO).getUTCDay();
+};
 
-  return events
-    .filter((event) => {
-      const { startDate, endDate } = event;
+/**
+ * Get the date number (1-31) from an ISO date string
+ */
+export const getDateNumber = (dateISO: string): number => {
+  return dateUTC(dateISO).getUTCDate();
+};
 
-      if (isWithinInterval(startDate, dayInterval)) {
-        return true;
-      }
+/**
+ * Get the month (0-11) from an ISO date string
+ */
+export const getMonth = (dateISO: string): number => {
+  return dateUTC(dateISO).getUTCMonth();
+};
 
-      if (isWithinInterval(endDate, dayInterval)) {
-        return true;
-      }
+/**
+ * Get the year from an ISO date string
+ */
+export const getYear = (dateISO: string): number => {
+  return dateUTC(dateISO).getUTCFullYear();
+};
 
-      return startDate <= dayInterval.start && endDate >= dayInterval.end;
+/**
+ * Get the first day of the month for a given date
+ */
+export const getFirstDayOfMonth = (dateISO: string): string => {
+  const d = dateUTC(dateISO);
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 1))
+    .toISOString()
+    .slice(0, 10);
+};
+
+/**
+ * Get the last day of the month for a given date
+ */
+export const getLastDayOfMonth = (dateISO: string): string => {
+  const d = dateUTC(dateISO);
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0))
+    .toISOString()
+    .slice(0, 10);
+};
+
+/**
+ * Get the start date of the calendar grid (may be in previous month)
+ */
+export const getCalendarStartDate = (
+  monthDateISO: string,
+  weekStartsOn: number = 0
+): string => {
+  const firstDay = getFirstDayOfMonth(monthDateISO);
+  const firstDayOfWeek = getDayOfWeek(firstDay);
+  const daysToSubtract = (firstDayOfWeek - weekStartsOn + 7) % 7;
+  return addDateDays(firstDay, -daysToSubtract);
+};
+
+/**
+ * Generate array of dates for the calendar grid (42 days = 6 weeks)
+ */
+export const getCalendarDates = (
+  monthDateISO: string,
+  weekStartsOn: number = 0
+): string[] => {
+  const startDate = getCalendarStartDate(monthDateISO, weekStartsOn);
+  const dates: string[] = [];
+  for (let i = 0; i < 42; i++) {
+    dates.push(addDateDays(startDate, i));
+  }
+  return dates;
+};
+
+/**
+ * Get month name from date
+ */
+export const getMonthName = (dateISO: string): string => {
+  return dateUTC(dateISO).toLocaleDateString('en-US', {
+    month: 'long',
+    timeZone: 'UTC',
+  });
+};
+
+/**
+ * Get the previous month date
+ */
+export const getPreviousMonth = (dateISO: string): string => {
+  const d = dateUTC(dateISO);
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() - 1, 1))
+    .toISOString()
+    .slice(0, 10);
+};
+
+/**
+ * Get the next month date
+ */
+export const getNextMonth = (dateISO: string): string => {
+  const d = dateUTC(dateISO);
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1))
+    .toISOString()
+    .slice(0, 10);
+};
+
+/**
+ * Day names array (Sunday to Saturday)
+ */
+export const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+/**
+ * Get day names starting from specified day
+ */
+export const getDayNames = (weekStartsOn: number = 0): string[] => {
+  const names = [...DAY_NAMES];
+  return [...names.slice(weekStartsOn), ...names.slice(0, weekStartsOn)];
+};
+
+/**
+ * Layout events with proper positioning to avoid overlaps
+ * Returns positioned events for each week
+ */
+export const layoutEvents = (
+  events: CalendarEvent[],
+  calendarDates: string[]
+): { items: PositionedEvent[]; rowCountByWeek: number[] } => {
+  const calendarStart = calendarDates[0];
+
+  // Convert events to positioned items with day indices
+  const items: PositionedEvent[] = events
+    .map((ev) => {
+      const startIdx = daysBetweenUTC(ev.start, calendarStart);
+      const endIdx = daysBetweenUTC(ev.end, calendarStart);
+
+      // Clamp to calendar boundaries (0-41 for 6 weeks)
+      const clampedStart = Math.max(0, Math.min(41, startIdx));
+      const clampedEnd = Math.max(0, Math.min(41, endIdx));
+
+      // Skip if completely outside calendar
+      if (endIdx < 0 || startIdx > 41) return null;
+
+      const duration = clampedEnd - clampedStart + 1;
+      const weekIndex = Math.floor(clampedStart / 7);
+      const dayOfWeek = clampedStart % 7;
+
+      return {
+        ...ev,
+        startDay: clampedStart,
+        endDay: clampedEnd,
+        duration: duration,
+        row: 0, // Will be assigned below
+        weekIndex,
+        dayOfWeek,
+      };
     })
-    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
-};
+    .filter((item): item is PositionedEvent => item !== null);
 
-export const chunk = <T>(items: T[], size: number): T[][] => {
-  const result: T[][] = [];
-  for (let index = 0; index < items.length; index += size) {
-    result.push(items.slice(index, index + size));
-  }
+  // Sort by start day, then by duration (longer first)
+  items.sort((a, b) => {
+    if (a.startDay !== b.startDay) return a.startDay - b.startDay;
+    return b.duration - a.duration;
+  });
 
-  return result;
-};
+  // Assign rows per week using greedy algorithm to prevent overlaps
+  const rowsByWeek: PositionedEvent[][][] = Array.from({ length: 6 }, () => []);
+  const rowCountByWeek: number[] = Array.from({ length: 6 }, () => 0);
 
-/**
- * Checks if an event spans multiple days
- */
-export const isMultiDayEvent = (event: CalendarEventInternal): boolean => {
-  const startDay = startOfDay(event.startDate);
-  const endDay = startOfDay(event.endDate);
-  return differenceInDays(endDay, startDay) > 0;
-};
+  items.forEach((item) => {
+    const weekIdx = item.weekIndex;
+    const rows = rowsByWeek[weekIdx];
 
-/**
- * Gets the span information for an event on a specific day
- */
-export interface EventSpanInfo {
-  isFirst: boolean; // Is this the first day of the event?
-  isLast: boolean; // Is this the last day of the event?
-  totalDays: number; // Total number of days the event spans
-  dayIndex: number; // Which day index is this (0-based)
-}
-
-export const getEventSpanInfo = (
-  event: CalendarEventInternal,
-  day: Date
-): EventSpanInfo | null => {
-  const eventStartDay = startOfDay(event.startDate);
-  const eventEndDay = startOfDay(event.endDate);
-  const currentDay = startOfDay(day);
-
-  if (currentDay < eventStartDay || currentDay > eventEndDay) {
-    return null;
-  }
-
-  const totalDays = differenceInDays(eventEndDay, eventStartDay) + 1;
-  const dayIndex = differenceInDays(currentDay, eventStartDay);
-
-  return {
-    isFirst: isSameDay(currentDay, eventStartDay),
-    isLast: isSameDay(currentDay, eventEndDay),
-    totalDays,
-    dayIndex,
-  };
-};
-
-/**
- * Calculate the visual span for multi-day events in week/month view
- * Returns the number of cells the event should span starting from the given day
- */
-export const calculateEventSpan = (
-  event: CalendarEventInternal,
-  day: Date,
-  visibleDays: Date[]
-): number => {
-  const spanInfo = getEventSpanInfo(event, day);
-  if (!spanInfo || !spanInfo.isFirst) {
-    return 0; // Only render on the first day
-  }
-
-  const eventEndDay = startOfDay(event.endDate);
-  const dayIndex = visibleDays.findIndex((d) => isSameDay(d, day));
-
-  if (dayIndex === -1) {
-    return 1;
-  }
-
-  let span = 1;
-  for (let i = dayIndex + 1; i < visibleDays.length; i++) {
-    const nextDay = startOfDay(visibleDays[i]);
-    if (nextDay <= eventEndDay) {
-      span++;
-    } else {
-      break;
+    let placed = false;
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const hasConflict = row.some(
+        (existing) =>
+          !(item.startDay > existing.endDay || item.endDay < existing.startDay)
+      );
+      if (!hasConflict) {
+        row.push(item);
+        item.row = i;
+        placed = true;
+        break;
+      }
     }
-  }
+    if (!placed) {
+      item.row = rows.length;
+      rows.push([item]);
+    }
 
-  return span;
+    rowCountByWeek[weekIdx] = rows.length;
+  });
+
+  return { items, rowCountByWeek };
+};
+
+/**
+ * Check if a date is in the current month
+ */
+export const isInMonth = (dateISO: string, monthDateISO: string): boolean => {
+  return (
+    getMonth(dateISO) === getMonth(monthDateISO) &&
+    getYear(dateISO) === getYear(monthDateISO)
+  );
 };
