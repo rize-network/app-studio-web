@@ -152,12 +152,13 @@ const renderDefaultEvent = (
       <View
         position="absolute"
         top={`${topPosition}px`}
-        left="60px" // Offset for time labels
-        right="8px"
+        left="54px" // Offset for time labels (50px + 4px padding)
+        right="4px"
         height={`${Math.max(height, minHeight)}px`}
         draggable
         onDragStart={onDragStart}
         zIndex={isResizing ? 1000 : 1}
+        pointerEvents="auto"
         {...views?.event}
       >
         <Vertical
@@ -704,6 +705,40 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
     }
   };
 
+  // Time-based drag handler for day/week views
+  const handleTimeDragStart =
+    (event: CalendarEventInternal) => (e: React.DragEvent<HTMLDivElement>) => {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', JSON.stringify({
+        eventId: event.id,
+        startTime: event.startDate.toISOString(),
+        endTime: event.endDate.toISOString(),
+      }));
+      setDraggedEvent(event);
+    };
+
+  const handleTimeGridDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleTimeGridDrop =
+    (day: Date) => (e: React.DragEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      if (!draggedEvent || !onEventDrop) return;
+
+      const gridRect = e.currentTarget.getBoundingClientRect();
+      const relativeY = e.clientY - gridRect.top;
+
+      // Calculate new start time based on drop position
+      const newStartTime = getTimeFromPosition(relativeY, day);
+      const duration = differenceInMinutes(draggedEvent.endDate, draggedEvent.startDate);
+      const newEndTime = addMinutes(newStartTime, duration);
+
+      onEventDrop(draggedEvent, newStartTime, newEndTime);
+      setDraggedEvent(null);
+    };
+
   // Time grid component for day/week views
   const renderTimeGrid = () => {
     const hours = Array.from({ length: HOURS_IN_DAY }, (_, i) => i);
@@ -714,32 +749,32 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
           <Horizontal
             key={hour}
             height={`${HOUR_HEIGHT}px`}
-            borderTopWidth={1}
+            borderTopWidth={hour === 0 ? 0 : 0.5}
             borderStyle="solid"
-            borderColor="color.gray.200"
+            borderColor="color.gray.300"
             alignItems="flex-start"
             position="relative"
           >
             <View
-              width="60px"
-              paddingTop={4}
-              paddingRight={8}
+              width="50px"
+              paddingTop={0}
+              paddingRight={4}
               flexShrink={0}
             >
               <Text
-                fontSize={11}
-                color="color.gray.600"
+                fontSize={10}
+                color="color.gray.500"
                 textAlign="right"
               >
-                {format(setHours(new Date(), hour), 'h a')}
+                {format(setHours(new Date(), hour), 'HH:mm')}
               </Text>
             </View>
             <View
               flex={1}
               height="100%"
-              borderLeftWidth={1}
+              borderLeftWidth={0.5}
               borderStyle="solid"
-              borderColor="color.gray.200"
+              borderColor="color.gray.300"
             />
           </Horizontal>
         ))}
@@ -891,11 +926,11 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
 
       {/* Render time-based grid for day/week views */}
       {(view === 'day' || view === 'week') ? (
-        <Vertical gap={12} flex={1} overflow="auto" ref={timeGridRef} {...views?.grid}>
+        <Vertical gap={0} flex={1} overflow="auto" ref={timeGridRef} {...views?.grid}>
           <View
             display="grid"
             gridTemplateColumns={view === 'day' ? '1fr' : `repeat(${weekdayLabels.length}, 1fr)`}
-            gap={view === 'day' ? 0 : 12}
+            gap={view === 'day' ? 0 : 2}
             position="relative"
             minHeight={`${HOURS_IN_DAY * HOUR_HEIGHT}px`}
           >
@@ -913,37 +948,40 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                 <View
                   key={dayKey}
                   position="relative"
-                  borderWidth={1}
+                  borderWidth={0.5}
                   borderStyle="solid"
-                  borderColor={isToday ? COLORS.primaryBlue : 'color.gray.200'}
-                  borderRadius={12}
-                  backgroundColor="color.gray.50"
-                  overflow="hidden"
+                  borderColor={isToday ? COLORS.primaryBlue : 'color.gray.300'}
+                  backgroundColor="color.white"
+                  overflow="visible"
                 >
                   {/* Day header */}
                   <Horizontal
                     justifyContent="space-between"
                     alignItems="center"
-                    padding={12}
+                    padding="6px 8px"
                     backgroundColor="color.white"
-                    borderBottomWidth={1}
+                    borderBottomWidth={0.5}
                     borderStyle="solid"
-                    borderColor="color.gray.200"
+                    borderColor="color.gray.300"
                     position="sticky"
                     top={0}
                     zIndex={10}
                   >
-                    <Text fontWeight="600" fontSize={14}>
+                    <Text fontWeight="600" fontSize={12}>
                       {format(day, view === 'day' ? 'EEEE, MMMM d' : 'EEE d')}
                     </Text>
                   </Horizontal>
 
-                  {/* Time grid */}
-                  <View position="relative">
+                  {/* Time grid - droppable area */}
+                  <View
+                    position="relative"
+                    onDragOver={handleTimeGridDragOver}
+                    onDrop={handleTimeGridDrop(day)}
+                  >
                     {renderTimeGrid()}
 
                     {/* Events positioned absolutely based on time */}
-                    <View position="relative">
+                    <View position="absolute" top={0} left={0} right={0} bottom={0} pointerEvents="none">
                       {events.length > 0 &&
                         events.map((event) => {
                           const key = `${formatDayKey(day)}-${
@@ -964,7 +1002,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                             context,
                             views,
                             key,
-                            onEventDrop ? handleDragStart(event) : undefined,
+                            onEventDrop ? handleTimeDragStart(event) : undefined,
                             onEventResize
                               ? (e, direction) =>
                                   handleTimeBasedResizeStart(event, direction, day)(e)

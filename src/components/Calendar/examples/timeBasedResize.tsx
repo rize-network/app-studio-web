@@ -56,10 +56,10 @@ export const CalendarTimeBasedResize = () => {
     },
     {
       id: 8,
-      title: 'Team Retrospective',
-      start: new Date(2025, 10, 8, 16, 0), // Friday 4:00 PM
-      end: new Date(2025, 10, 8, 17, 0), // Friday 5:00 PM
-      description: 'End of week retrospective',
+      title: 'Conference (Multi-day)',
+      start: new Date(2025, 10, 6, 8, 0), // Wednesday 8:00 AM
+      end: new Date(2025, 10, 8, 18, 0), // Friday 6:00 PM
+      description: '3-day tech conference',
     },
   ]);
 
@@ -103,30 +103,34 @@ export const CalendarTimeBasedResize = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Time-Based Calendar with Resize Feature</h1>
+      <h1>Calendrier avec Resize et Drag & Drop</h1>
       <p>
-        This example demonstrates the new time-based calendar with vertical
-        resize functionality:
+        Ce calendrier démontre les fonctionnalités de resize et déplacement:
       </p>
       <ul>
-        <li>✅ Time grid with hourly slots (60px per hour)</li>
-        <li>✅ Vertical resize handles (top/bottom) for adjusting event times</li>
-        <li>✅ Snap to 15-minute intervals</li>
-        <li>✅ Real-time tooltip showing time range during resize</li>
-        <li>✅ Collision detection with visual feedback</li>
-        <li>✅ Blue color scheme with gradient backgrounds</li>
-        <li>✅ Minimum 15 minutes, maximum 24 hours duration</li>
+        <li>✅ Grille temporelle avec lignes fines (slots d'1 heure)</li>
+        <li>✅ Resize vertical (haut/bas) pour ajuster les horaires</li>
+        <li>✅ Drag & drop pour déplacer les événements</li>
+        <li>✅ Snap automatique aux intervalles de 15 minutes</li>
+        <li>✅ Tooltip en temps réel pendant le resize</li>
+        <li>✅ Détection de collision avec feedback visuel</li>
+        <li>✅ Support événements multi-jours</li>
+        <li>✅ Durée min: 15 min, max: 24 heures</li>
       </ul>
       <p>
-        <strong>Try it:</strong> Hover over the top or bottom edge of an event
-        and drag to resize it!
+        <strong>Mode d'emploi:</strong>
       </p>
+      <ul>
+        <li><strong>Resize:</strong> Survolez le haut ou le bas d'un événement et glissez</li>
+        <li><strong>Déplacer:</strong> Cliquez sur un événement et glissez vers une nouvelle heure</li>
+        <li><strong>Vues:</strong> Testez en Day, Week et Month view</li>
+      </ul>
 
       <Calendar
         events={events}
         onEventResize={handleEventResize}
         onEventDrop={handleEventDrop}
-        initialView="day"
+        initialView="week"
         initialDate={new Date(2025, 10, 6)}
         height="800px"
       />
