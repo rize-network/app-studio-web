@@ -1,47 +1,63 @@
 import React from 'react';
 import { Calendar } from '../Calendar';
-import { CalendarEvent } from '../Calendar/Calendar.props';
+import { CalendarViews } from '../Calendar/Calendar.props';
 
-export const CustomStyledCalendar = () => {
-  const events: CalendarEvent[] = [
-    {
-      id: 1,
-      title: 'Important Meeting',
-      start: new Date(2025, 9, 15, 10, 0),
-      end: new Date(2025, 9, 15, 11, 0),
+export const CalendarCustomStyles = () => {
+  const customViews: CalendarViews = {
+    container: {
+      borderRadius: 12,
+      boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
     },
-  ];
+    header: {
+      backgroundColor: 'color.primary.50',
+      padding: 20,
+    },
+    monthTitle: {
+      fontSize: 24,
+      fontWeight: 600,
+      color: 'color.primary.700',
+    },
+    weekdayHeader: {
+      backgroundColor: 'color.primary.100',
+    },
+    weekdayLabel: {
+      fontSize: 12,
+      fontWeight: 600,
+      color: 'color.primary.700',
+    },
+    dayCell: {
+      minHeight: 120,
+    },
+  };
 
   return (
     <Calendar
-      events={events}
-      views={{
-        container: {
-          backgroundColor: 'color.primary.50',
-          borderColor: 'color.primary.300',
+      initialDate="2025-11-01"
+      events={[
+        {
+          id: '1',
+          title: 'Quarterly Review',
+          start: '2025-11-10',
+          end: '2025-11-12',
+          color: 'blue',
         },
-        headerTitle: {
-          color: 'color.primary.700',
-          fontSize: 24,
+        {
+          id: '2',
+          title: 'Team Building',
+          start: '2025-11-18',
+          end: '2025-11-19',
+          color: 'purple',
         },
-        navigationButton: {
-          variant: 'outline',
+        {
+          id: '3',
+          title: 'Product Launch',
+          start: '2025-11-25',
+          end: '2025-11-25',
+          color: 'red',
         },
-        viewButton: {
-          variant: 'filled',
-        },
-        dayColumn: {
-          backgroundColor: 'color.white',
-          borderColor: 'color.primary.200',
-        },
-        event: {
-          backgroundColor: 'color.primary.100',
-          borderColor: 'color.primary.400',
-        },
-        eventTitle: {
-          color: 'color.primary.900',
-        },
-      }}
+      ]}
+      views={customViews}
+      weekStartsOn={1}
     />
   );
 };

@@ -5,29 +5,29 @@ import { ViewProps } from 'app-studio';
  */
 export const EVENT_COLORS = {
   blue: {
-    background: 'color.primary.50',
-    border: 'color.primary.500',
-    text: 'color.primary.700',
+    background: 'color.blue.50',
+    border: 'color.blue.500',
+    text: 'color.blue.700',
   },
   red: {
-    background: 'color.error.50',
-    border: 'color.error.500',
-    text: 'color.error.700',
+    background: 'color.red.50',
+    border: 'color.red.500',
+    text: 'color.red.700',
   },
   green: {
-    background: 'color.success.50',
-    border: 'color.success.500',
-    text: 'color.success.700',
+    background: 'color.green.50',
+    border: 'color.green.500',
+    text: 'color.green.700',
   },
   purple: {
-    background: 'color.secondary.50',
-    border: 'color.secondary.500',
-    text: 'color.secondary.700',
+    background: 'color.purple.50',
+    border: 'color.purple.500',
+    text: 'color.purple.700',
   },
   orange: {
-    background: 'color.warning.50',
-    border: 'color.warning.500',
-    text: 'color.warning.700',
+    background: 'color.orange.50',
+    border: 'color.orange.500',
+    text: 'color.orange.700',
   },
 } as const;
 
@@ -151,7 +151,7 @@ export const dayNumberStyles: ViewProps = {
  * Today day number styles
  */
 export const todayDayNumberStyles: ViewProps = {
-  backgroundColor: 'color.primary.500',
+  backgroundColor: 'color.blue.500',
   color: 'color.white',
   fontWeight: 500,
 };
@@ -160,8 +160,8 @@ export const todayDayNumberStyles: ViewProps = {
  * Selected day number styles
  */
 export const selectedDayNumberStyles: ViewProps = {
-  backgroundColor: 'color.primary.50',
-  color: 'color.primary.700',
+  backgroundColor: 'color.blue.50',
+  color: 'color.blue.700',
   fontWeight: 500,
 };
 

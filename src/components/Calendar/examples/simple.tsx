@@ -1,9 +1,9 @@
 import React from 'react';
-import { CalendarMonth } from '../CalendarMonth';
+import { Calendar } from '../Calendar';
 
-export const CalendarMonthSimple = () => {
+export const CalendarSimple = () => {
   return (
-    <CalendarMonth
+    <Calendar
       initialDate="2025-11-01"
       events={[
         {

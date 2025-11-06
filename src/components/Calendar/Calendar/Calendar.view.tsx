@@ -1,571 +1,928 @@
-import React, { isValidElement, useState } from 'react';
-import { Horizontal, Vertical, View } from 'app-studio';
+import React, { useState, useCallback, useMemo, useRef } from 'react';
+import { View, Horizontal, useTheme } from 'app-studio';
+import { CalendarProps, CalendarEvent, CalendarView } from './Calendar.props';
 import {
-  format,
-  isSameDay,
-  isSameMonth,
-  addDays,
-  differenceInDays,
-} from 'date-fns';
-
-import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
-import { HoverCard } from '../../HoverCard/HoverCard';
-import {
-  CalendarEvent,
-  CalendarRenderEventContext,
-  CalendarView,
-  CalendarViews,
-} from './Calendar.props';
-import {
-  CalendarEventInternal,
-  formatDayKey,
-  getEventSpanInfo,
-  isMultiDayEvent,
+  layoutEvents,
+  PositionedEvent,
+  DAY_NAMES,
+  getDayNames,
+  getCalendarDates,
+  getDateNumber,
+  getMonthName,
+  getYear,
+  getPreviousMonth,
+  getNextMonth,
+  addDateDays,
+  daysBetweenUTC,
+  isInMonth,
+  getFirstDayOfMonth,
+  getDayOfWeek,
 } from './Calendar.utils';
+import {
+  containerStyles,
+  headerStyles,
+  monthTitleStyles,
+  monthGridStyles,
+  weekdayHeaderStyles,
+  weekdayLabelStyles,
+  dayCellStyles,
+  otherMonthDayCellStyles,
+  dayNumberStyles,
+  todayDayNumberStyles,
+  selectedDayNumberStyles,
+  eventsAreaStyles,
+  eventStyles,
+  EVENT_COLORS,
+  dropTargetStyles,
+  buttonStyles,
+  iconButtonStyles,
+} from './Calendar.style';
+import { dayDateStyles } from 'src/components/CalendarWeek/CalendarWeek/CalendarWeek.style';
 
-interface CalendarViewProps {
-  currentDate: Date;
-  view: CalendarView;
-  label: string;
-  weeks: Date[][];
-  weekdayLabels: Date[];
-  eventsByDay: Map<string, CalendarEventInternal[]>;
-  onPrevious: () => void;
-  onNext: () => void;
-  onToday: () => void;
-  onViewChange: (view: CalendarView) => void;
-  renderEvent?: (
-    event: CalendarEvent,
-    context: CalendarRenderEventContext
-  ) => React.ReactNode;
-  onEventDrop?: (event: CalendarEvent, newStart: Date, newEnd: Date) => void;
-  onEventResize?: (event: CalendarEvent, newStart: Date, newEnd: Date) => void;
-  views?: CalendarViews;
-  height?: string | number;
+interface DragState {
+  isDragging: boolean;
+  isResizing: boolean;
+  resizeDirection: 'left' | 'right' | null;
+  event: PositionedEvent | null;
+  startX: number;
+  startDay: number;
+  startDuration: number;
+  originalStart: string | null;
+  originalEnd: string | null;
 }
 
-const VIEW_OPTIONS: { label: string; value: CalendarView }[] = [
-  { label: 'Day', value: 'day' },
-  { label: 'Week', value: 'week' },
-  { label: 'Month', value: 'month' },
-];
+interface ResizeHandleProps {
+  direction: 'left' | 'right';
+  onMouseDown: (e: React.MouseEvent) => void;
+}
 
-const today = new Date();
-
-const renderDefaultEvent = (
-  event: CalendarEventInternal,
-  context: CalendarRenderEventContext,
-  views: CalendarViews | undefined,
-  key: string,
-  onDragStart?: (e: React.DragEvent<HTMLDivElement>) => void,
-  onResizeStart?: (
-    e: React.MouseEvent<HTMLDivElement>,
-    direction: 'start' | 'end'
-  ) => void
-) => {
-  const timeRange =
-    format(event.startDate, 'p') +
-    (event.endDate.getTime() !== event.startDate.getTime()
-      ? ` – ${format(event.endDate, 'p')}`
-      : '');
-
-  const spanInfo = getEventSpanInfo(event, context.day);
-  const isMultiDay = isMultiDayEvent(event);
-
-  // Don't render if this is not the first day of a multi-day event
-  if (isMultiDay && spanInfo && !spanInfo.isFirst && context.view !== 'day') {
-    return null;
-  }
-
-  const eventCard = (
-    <View
-      position="relative"
-      draggable
-      onDragStart={onDragStart}
-      {...views?.event}
-    >
-      <Vertical
-        gap={6}
-        padding={12}
-        borderRadius={8}
-        backgroundColor={
-          context.isToday ? 'color.primary.50' : 'color.gray.100'
-        }
-        borderWidth={1}
-        borderStyle="solid"
-        borderColor={context.isToday ? 'color.primary.200' : 'color.gray.200'}
-        flexShrink={0}
-        cursor="grab"
-        position="relative"
-      >
-        {/* Resize handle - Start */}
-        {onResizeStart && (
-          <View
-            position="absolute"
-            left={0}
-            top={0}
-            bottom={0}
-            width="8px"
-            cursor="col-resize"
-            onMouseDown={(e) => {
-              e.stopPropagation();
-              onResizeStart(e, 'start');
-            }}
-            backgroundColor="transparent"
-            on={{
-              _hover: {
-                backgroundColor: 'rgba(0, 0, 0, 0.1)',
-              },
-            }}
-          />
-        )}
-
-        <Text
-          fontWeight="600"
-          fontSize={12}
-          maxLines={2}
-          {...views?.eventTitle}
-        >
-          {event.title}
-        </Text>
-        <Text
-          fontSize={11}
-          color="color.gray.600"
-          maxLines={1}
-          {...views?.eventTime}
-        >
-          {timeRange}
-        </Text>
-        {event.description && context.view !== 'month' && (
-          <Text fontSize={11} color="color.gray.700" maxLines={2}>
-            {event.description}
-          </Text>
-        )}
-
-        {/* Resize handle - End */}
-        {onResizeStart && (
-          <View
-            position="absolute"
-            right={0}
-            top={0}
-            bottom={0}
-            width="8px"
-            cursor="col-resize"
-            onMouseDown={(e) => {
-              e.stopPropagation();
-              onResizeStart(e, 'end');
-            }}
-            backgroundColor="transparent"
-            on={{
-              _hover: {
-                backgroundColor: 'rgba(0, 0, 0, 0.1)',
-              },
-            }}
-          />
-        )}
-      </Vertical>
-    </View>
-  );
+const ResizeHandle: React.FC<ResizeHandleProps> = ({
+  direction,
+  onMouseDown,
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <HoverCard key={key} openDelay={100} closeDelay={200}>
-      <HoverCard.Trigger asChild>{eventCard}</HoverCard.Trigger>
-      <HoverCard.Content
-        side="top"
-        align="start"
-        maxWidth="350px"
-        backgroundColor="color.white"
-        padding={16}
-        boxShadow="0px 4px 12px rgba(0, 0, 0, 0.15)"
-      >
-        <Vertical gap={12}>
-          <Text fontWeight="700" fontSize={14} color="color.gray.900">
-            {event.title}
-          </Text>
-          <Vertical gap={6}>
-            <Horizontal gap={8} alignItems="center">
-              <Text fontSize={11} fontWeight="600" color="color.gray.600">
-                📅
-              </Text>
-              <Text fontSize={12} color="color.gray.700">
-                {format(event.startDate, 'EEEE, MMMM d, yyyy')}
-              </Text>
-            </Horizontal>
-            <Horizontal gap={8} alignItems="center">
-              <Text fontSize={11} fontWeight="600" color="color.gray.600">
-                🕐
-              </Text>
-              <Text fontSize={12} color="color.gray.700">
-                {timeRange}
-              </Text>
-            </Horizontal>
-          </Vertical>
-          {event.description && (
-            <Vertical gap={4}>
-              <Text fontSize={11} fontWeight="600" color="color.gray.600">
-                Description
-              </Text>
-              <Text fontSize={12} color="color.gray.700">
-                {event.description}
-              </Text>
-            </Vertical>
-          )}
-          {isMultiDay && spanInfo && (
-            <Vertical gap={4}>
-              <Text fontSize={11} fontWeight="600" color="color.gray.600">
-                Duration
-              </Text>
-              <Text fontSize={12} color="color.gray.700">
-                {spanInfo.totalDays} day{spanInfo.totalDays > 1 ? 's' : ''}
-              </Text>
-            </Vertical>
-          )}
-        </Vertical>
-      </HoverCard.Content>
-    </HoverCard>
+    <View
+      position="absolute"
+      top={0}
+      bottom={0}
+      width={8}
+      opacity={isHovered ? 1 : 0}
+      transition="opacity 0.2s"
+      cursor={direction === 'left' ? 'w-resize' : 'e-resize'}
+      zIndex={10}
+      backgroundColor={isHovered ? 'rgba(0,0,0,0.1)' : 'transparent'}
+      {...(direction === 'left' ? { left: 0 } : { right: 0 })}
+      onMouseDown={onMouseDown}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    />
   );
 };
 
-const CalendarViewComponent: React.FC<CalendarViewProps> = ({
-  currentDate,
-  view,
-  label,
-  weeks,
-  weekdayLabels,
-  eventsByDay,
-  onPrevious,
-  onNext,
-  onToday,
-  onViewChange,
-  renderEvent,
+export const Calendar: React.FC<CalendarProps> = ({
+  initialDate = new Date(),
+  initialView = 'month',
+  events = [],
+  today = new Date().toISOString().slice(0, 10),
   onEventDrop,
   onEventResize,
-  views,
-  height = '800px',
+  onDateClick,
+  onDateChange,
+  onViewChange,
+  onEventAdd,
+  views = {},
+  width = '100%',
+  maxWidth = 1200,
+  weekStartsOn = 0,
 }) => {
-  const [draggedEvent, setDraggedEvent] =
-    useState<CalendarEventInternal | null>(null);
-  const [resizingEvent, setResizingEvent] = useState<{
-    event: CalendarEventInternal;
-    direction: 'start' | 'end';
-    originalStart: Date;
-    originalEnd: Date;
-  } | null>(null);
+  const { getColor } = useTheme();
+  const gridRef = useRef<HTMLDivElement>(null);
 
-  // Use same grid configuration for both header and days
-  const columnCount = weekdayLabels.length;
+  // Convert initialDate to ISO string if it's a Date object
+  const initialDateISO =
+    typeof initialDate === 'string'
+      ? initialDate
+      : initialDate.toISOString().slice(0, 10);
 
-  // Drag and Drop Handlers
-  const handleDragStart =
-    (event: CalendarEventInternal) => (e: React.DragEvent<HTMLDivElement>) => {
-      setDraggedEvent(event);
+  const [currentDate, setCurrentDate] = useState<string>(initialDateISO);
+  const [currentView, setCurrentView] = useState<CalendarView>(initialView);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [localEvents, setLocalEvents] = useState<CalendarEvent[]>(events);
+  const [dropTargetDays, setDropTargetDays] = useState<number[]>([]);
+
+  const dragStateRef = useRef<DragState>({
+    isDragging: false,
+    isResizing: false,
+    resizeDirection: null,
+    event: null,
+    startX: 0,
+    startDay: 0,
+    startDuration: 0,
+    originalStart: null,
+    originalEnd: null,
+  });
+
+  // Update local events when props change
+  React.useEffect(() => {
+    setLocalEvents(events);
+  }, [events]);
+
+  // Get the month start for current date
+  const currentMonth = useMemo(
+    () => getFirstDayOfMonth(currentDate),
+    [currentDate]
+  );
+
+  // Generate calendar dates based on view
+  const calendarDates = useMemo(() => {
+    if (currentView === 'month') {
+      return getCalendarDates(currentMonth, weekStartsOn);
+    } else if (currentView === 'week') {
+      // Get week starting from current date
+      const dayOfWeek = getDayOfWeek(currentDate);
+      const weekStart = addDateDays(
+        currentDate,
+        -((dayOfWeek - weekStartsOn + 7) % 7)
+      );
+      const dates: string[] = [];
+      for (let i = 0; i < 7; i++) {
+        dates.push(addDateDays(weekStart, i));
+      }
+      return dates;
+    } else {
+      // Day view - just current date
+      return [currentDate];
+    }
+  }, [currentDate, currentView, currentMonth, weekStartsOn]);
+
+  // Layout events
+  const { items: positionedEvents } = useMemo(
+    () => layoutEvents(localEvents, calendarDates),
+    [localEvents, calendarDates]
+  );
+
+  // Get day names
+  const dayNames = useMemo(() => getDayNames(weekStartsOn), [weekStartsOn]);
+
+  // Handle navigation
+  const handlePrevious = useCallback(() => {
+    let newDate: string;
+    if (currentView === 'month') {
+      newDate = getPreviousMonth(currentDate);
+    } else if (currentView === 'week') {
+      newDate = addDateDays(currentDate, -7);
+    } else {
+      newDate = addDateDays(currentDate, -1);
+    }
+    setCurrentDate(newDate);
+    onDateChange?.(new Date(newDate + 'T00:00:00Z'));
+  }, [currentDate, currentView, onDateChange]);
+
+  const handleNext = useCallback(() => {
+    let newDate: string;
+    if (currentView === 'month') {
+      newDate = getNextMonth(currentDate);
+    } else if (currentView === 'week') {
+      newDate = addDateDays(currentDate, 7);
+    } else {
+      newDate = addDateDays(currentDate, 1);
+    }
+    setCurrentDate(newDate);
+    onDateChange?.(new Date(newDate + 'T00:00:00Z'));
+  }, [currentDate, currentView, onDateChange]);
+
+  const handleToday = useCallback(() => {
+    setCurrentDate(today);
+    onDateChange?.(new Date(today + 'T00:00:00Z'));
+  }, [today, onDateChange]);
+
+  // Handle view change
+  const handleViewChange = useCallback(
+    (view: CalendarView) => {
+      setCurrentView(view);
+      onViewChange?.(view);
+    },
+    [onViewChange]
+  );
+
+  // Handle date click
+  const handleDateClick = useCallback(
+    (dateISO: string) => {
+      setSelectedDate(dateISO);
+      onDateClick?.(dateISO);
+    },
+    [onDateClick]
+  );
+
+  // Handle double-click to add event
+  const handleDateDoubleClick = useCallback(
+    (dateISO: string, hour?: number) => {
+      if (onEventAdd) {
+        let start: string;
+        let end: string;
+
+        if (hour !== undefined) {
+          // Day view with time
+          const hourStr = hour.toString().padStart(2, '0');
+          start = `${dateISO}T${hourStr}:00`;
+          end = `${dateISO}T${(hour + 1).toString().padStart(2, '0')}:00`;
+        } else {
+          // Month/week view
+          start = dateISO;
+          end = dateISO;
+        }
+
+        onEventAdd(start, end);
+      }
+    },
+    [onEventAdd]
+  );
+
+  // Handle event drag start
+  const handleEventDragStart = useCallback(
+    (e: React.DragEvent, event: PositionedEvent) => {
       e.dataTransfer.effectAllowed = 'move';
-    };
+      e.dataTransfer.setData('eventId', event.id);
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+      dragStateRef.current = {
+        isDragging: true,
+        isResizing: false,
+        resizeDirection: null,
+        event,
+        startX: e.clientX,
+        startDay: event.startDay,
+        startDuration: event.duration,
+        originalStart: event.start,
+        originalEnd: event.end,
+      };
+    },
+    []
+  );
+
+  // Handle drag over day cell
+  const handleDragOver = useCallback((e: React.DragEvent, dayIndex: number) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
-  };
+    setDropTargetDays([dayIndex]);
+  }, []);
 
-  const handleDrop =
-    (targetDay: Date) => (e: React.DragEvent<HTMLDivElement>) => {
+  // Handle drag leave
+  const handleDragLeave = useCallback(() => {
+    setDropTargetDays([]);
+  }, []);
+
+  // Handle drop on day cell
+  const handleDrop = useCallback(
+    (e: React.DragEvent, dayIndex: number) => {
       e.preventDefault();
-      if (!draggedEvent || !onEventDrop) return;
+      setDropTargetDays([]);
 
-      // Calculate the difference in days
-      const originalStart = draggedEvent.startDate;
-      const daysDiff = differenceInDays(targetDay, originalStart);
+      const dragState = dragStateRef.current;
+      if (
+        !dragState.event ||
+        !dragState.originalStart ||
+        !dragState.originalEnd
+      )
+        return;
 
-      // Calculate new dates
-      const newStart = addDays(originalStart, daysDiff);
-      const newEnd = addDays(draggedEvent.endDate, daysDiff);
+      // Calculate date difference
+      const targetDate = calendarDates[dayIndex];
+      if (!targetDate) return;
 
-      onEventDrop(draggedEvent, newStart, newEnd);
-      setDraggedEvent(null);
-    };
+      const daysDiff = daysBetweenUTC(
+        targetDate,
+        dragState.originalStart.slice(0, 10)
+      );
 
-  // Resize Handlers
-  const handleResizeStart =
-    (event: CalendarEventInternal, direction: 'start' | 'end') =>
-    (e: React.MouseEvent<HTMLDivElement>) => {
+      // Update event dates
+      const newStart = addDateDays(
+        dragState.originalStart.slice(0, 10),
+        daysDiff
+      );
+      const newEnd = addDateDays(dragState.originalEnd.slice(0, 10), daysDiff);
+
+      const updatedEvent: CalendarEvent = {
+        ...dragState.event,
+        start: newStart,
+        end: newEnd,
+      };
+
+      // Update local events
+      const updatedEvents = localEvents.map((ev) =>
+        ev.id === dragState.event!.id ? updatedEvent : ev
+      );
+      setLocalEvents(updatedEvents);
+
+      // Call callback
+      onEventDrop?.(updatedEvent);
+
+      // Reset drag state
+      dragStateRef.current = {
+        isDragging: false,
+        isResizing: false,
+        resizeDirection: null,
+        event: null,
+        startX: 0,
+        startDay: 0,
+        startDuration: 0,
+        originalStart: null,
+        originalEnd: null,
+      };
+    },
+    [localEvents, calendarDates, onEventDrop]
+  );
+
+  // Handle resize start (FIXED - using pixel-based approach like CalendarWeek)
+  const handleResizeStart = useCallback(
+    (
+      e: React.MouseEvent,
+      event: PositionedEvent,
+      direction: 'left' | 'right'
+    ) => {
       e.preventDefault();
       e.stopPropagation();
-      setResizingEvent({
+
+      dragStateRef.current = {
+        isDragging: false,
+        isResizing: true,
+        resizeDirection: direction,
         event,
-        direction,
-        originalStart: event.startDate,
-        originalEnd: event.endDate,
-      });
-
-      const handleMouseMove = (moveEvent: MouseEvent) => {
-        // This would need more complex logic to detect which day the mouse is over
-        // For simplicity, we'll handle this in the mouse up event
+        startX: e.clientX,
+        startDay: event.startDay,
+        startDuration: event.duration,
+        originalStart: event.start,
+        originalEnd: event.end,
       };
+    },
+    []
+  );
 
-      const handleMouseUp = () => {
-        setResizingEvent(null);
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
+  // Handle mouse move during resize (FIXED - using pixel-based calculation)
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      const dragState = dragStateRef.current;
+      if (!dragState.event || (!dragState.isDragging && !dragState.isResizing))
+        return;
+      if (!gridRef.current) return;
 
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    };
+      const rect = gridRef.current.getBoundingClientRect();
+      const deltaX = e.clientX - dragState.startX;
 
-  const handleDayMouseEnter = (day: Date) => {
-    if (resizingEvent && onEventResize) {
-      const { event, direction, originalStart, originalEnd } = resizingEvent;
-
-      if (direction === 'start') {
-        // Resizing from the start
-        const newStart = day;
-        if (newStart < originalEnd) {
-          onEventResize(event, newStart, originalEnd);
-        }
+      // Calculate day delta based on pixel movement
+      let daysDelta: number;
+      if (currentView === 'month') {
+        const dayWidth = rect.width / 7;
+        daysDelta = Math.round(deltaX / dayWidth);
+      } else if (currentView === 'week') {
+        const dayWidth = rect.width / 7;
+        daysDelta = Math.round(deltaX / dayWidth);
       } else {
-        // Resizing from the end
-        const newEnd = addDays(day, 1);
-        if (newEnd > originalStart) {
-          onEventResize(event, originalStart, newEnd);
+        // Day view - no horizontal resize
+        return;
+      }
+
+      if (dragState.isDragging) {
+        // Dragging - move the event
+        const maxDays = calendarDates.length - 1;
+        const newStartDay = Math.max(
+          0,
+          Math.min(maxDays, dragState.startDay + daysDelta)
+        );
+        const duration = dragState.event.duration;
+        const newEndDay = Math.min(maxDays, newStartDay + duration - 1);
+
+        // Update drop target indicators
+        const targetDays: number[] = [];
+        for (let i = newStartDay; i <= newEndDay; i++) {
+          targetDays.push(i);
+        }
+        setDropTargetDays(targetDays);
+
+        // Update event position immediately for smooth dragging
+        const updatedEvents = localEvents.map((ev) =>
+          ev.id === dragState.event!.id
+            ? {
+                ...ev,
+                start: addDateDays(
+                  dragState.originalStart!,
+                  newStartDay - dragState.startDay
+                ),
+                end: addDateDays(
+                  dragState.originalEnd!,
+                  newStartDay - dragState.startDay
+                ),
+              }
+            : ev
+        );
+        setLocalEvents(updatedEvents);
+      } else if (dragState.isResizing) {
+        // Resizing
+        if (dragState.resizeDirection === 'right') {
+          // Resize from right
+          const newDuration = Math.max(1, dragState.startDuration + daysDelta);
+          const maxDays = calendarDates.length - 1;
+          const newEndDay = Math.min(
+            maxDays,
+            dragState.startDay + newDuration - 1
+          );
+          const actualDuration = newEndDay - dragState.startDay + 1;
+
+          const updatedEvents = localEvents.map((ev) =>
+            ev.id === dragState.event!.id
+              ? {
+                  ...ev,
+                  end: addDateDays(
+                    dragState.originalStart!,
+                    actualDuration - 1
+                  ),
+                }
+              : ev
+          );
+          setLocalEvents(updatedEvents);
+        } else if (dragState.resizeDirection === 'left') {
+          // Resize from left
+          const newStartDay = Math.max(
+            0,
+            Math.min(
+              dragState.startDay + dragState.startDuration - 1,
+              dragState.startDay + daysDelta
+            )
+          );
+          const newDuration =
+            dragState.startDay + dragState.startDuration - newStartDay;
+
+          const updatedEvents = localEvents.map((ev) =>
+            ev.id === dragState.event!.id
+              ? {
+                  ...ev,
+                  start: addDateDays(
+                    dragState.originalStart!,
+                    newStartDay - dragState.startDay
+                  ),
+                }
+              : ev
+          );
+          setLocalEvents(updatedEvents);
         }
       }
-    }
-  };
-
-  const weekdayRow = (
-    <View
-      display="grid"
-      gridTemplateColumns={`repeat(${columnCount}, 1fr)`}
-      gap={12}
-      padding="8px 0"
-      {...views?.weekdayRow}
-    >
-      {weekdayLabels.map((weekday) => (
-        <Vertical
-          key={formatDayKey(weekday)}
-          alignItems="center"
-          padding={8}
-          {...views?.weekdayHeader}
-        >
-          <Text
-            fontWeight="600"
-            fontSize={12}
-            color="color.gray.600"
-            {...views?.weekdayLabel}
-            maxLines={1}
-          >
-            {format(weekday, 'EEE')}
-          </Text>
-        </Vertical>
-      ))}
-    </View>
+    },
+    [localEvents, calendarDates, currentView]
   );
 
-  return (
-    <Vertical
-      gap={16}
-      borderWidth={1}
-      borderStyle="solid"
-      borderColor="color.gray.200"
-      borderRadius={16}
-      padding={24}
-      backgroundColor="color.white"
-      height={height}
-      maxHeight="90vh"
-      maxWidth={'100%'}
-      display="flex"
-      flexDirection="column"
-      {...views?.container}
-    >
-      <Vertical gap={16} flexShrink={0} {...views?.header}>
-        <Horizontal
-          justifyContent="space-between"
-          alignItems="center"
-          maxWidth={'100%'}
-        >
-          <Text fontSize={18} fontWeight="700" {...views?.headerTitle}>
-            {label}
-          </Text>
-          <Horizontal gap={8} {...views?.viewSwitcher}>
-            {VIEW_OPTIONS.map((option) => (
-              <Button
-                key={option.value}
-                variant={view === option.value ? 'filled' : 'ghost'}
-                isDisabled={view === option.value}
-                onClick={() => onViewChange(option.value)}
-                {...views?.viewButton}
-              >
-                {option.label}
-              </Button>
-            ))}
-          </Horizontal>
-        </Horizontal>
-        <Horizontal gap={8} alignItems="center" {...views?.navigation}>
-          <Button
-            variant="ghost"
-            onClick={onPrevious}
-            {...views?.navigationButton}
-          >
-            ← Previous{' '}
-            {view === 'day' ? 'Day' : view === 'week' ? 'Week' : 'Month'}
-          </Button>
-          <Button
-            variant="ghost"
-            onClick={onToday}
-            {...views?.navigationButton}
-          >
-            Today
-          </Button>
-          <Button variant="ghost" onClick={onNext} {...views?.navigationButton}>
-            Next {view === 'day' ? 'Day' : view === 'week' ? 'Week' : 'Month'} →
-          </Button>
-        </Horizontal>
-      </Vertical>
+  // Handle mouse up - finish resize/drag
+  const handleMouseUp = useCallback(
+    (e: MouseEvent) => {
+      const dragState = dragStateRef.current;
+      if (!dragState.event || (!dragState.isDragging && !dragState.isResizing))
+        return;
 
-      {view !== 'day' && <View flexShrink={0}>{weekdayRow}</View>}
+      setDropTargetDays([]);
 
-      <Vertical gap={12} flex={1} overflow="auto" {...views?.grid}>
-        {weeks.map((week, index) => (
-          <View
-            key={`${view}-week-${index}`}
-            display="grid"
-            gridTemplateColumns={`repeat(${week.length}, 1fr)`}
-            gap={12}
-            height={
-              view === 'month' ? '180px' : view === 'week' ? '100%' : 'auto'
-            }
-            minHeight={view === 'week' ? '300px' : 'auto'}
-            {...views?.weekRow}
-          >
-            {week.map((day) => {
-              const dayKey = formatDayKey(day);
-              const isToday = isSameDay(day, today);
-              const events = eventsByDay.get(dayKey) ?? [];
-              const context: CalendarRenderEventContext = {
-                day,
-                isToday,
-                view,
-              };
+      // Find the updated event
+      const updatedEvent = localEvents.find(
+        (ev) => ev.id === dragState.event!.id
+      );
+      if (!updatedEvent) return;
 
-              const shouldDim =
-                view === 'month' && !isSameMonth(day, currentDate);
+      // Call appropriate callback
+      if (dragState.isDragging) {
+        onEventDrop?.(updatedEvent);
+      } else if (dragState.isResizing) {
+        onEventResize?.(updatedEvent);
+      }
 
-              return (
-                <Vertical
-                  key={dayKey}
-                  gap={12}
-                  padding={16}
-                  borderWidth={1}
-                  borderStyle="solid"
-                  borderColor={isToday ? 'color.primary.200' : 'color.gray.200'}
-                  borderRadius={12}
-                  backgroundColor="color.gray.50"
-                  opacity={shouldDim ? 0.6 : 1}
-                  display="flex"
-                  flexDirection="column"
-                  height="100%"
-                  minHeight={view === 'month' ? '180px' : '300px'}
-                  onDragOver={handleDragOver}
-                  onDrop={handleDrop(day)}
-                  onMouseEnter={() => handleDayMouseEnter(day)}
-                  {...views?.dayColumn}
-                >
-                  <Horizontal
-                    justifyContent="space-between"
-                    alignItems="center"
-                    flexShrink={0}
-                    {...views?.dayHeader}
-                  >
-                    <Text fontWeight="600" fontSize={14} {...views?.dayNumber}>
-                      {format(day, 'd')}
-                    </Text>
-                    {view !== 'month' && (
-                      <Text
-                        fontSize={12}
-                        color="color.gray.600"
-                        {...views?.dayMeta}
-                      >
-                        {format(day, 'EEEE')}
-                      </Text>
-                    )}
-                  </Horizontal>
-                  <Vertical gap={8} flex={1} overflow="auto" {...views?.events}>
-                    {events.length > 0
-                      ? events.map((event) => {
-                          const key = `${formatDayKey(day)}-${
-                            event.id ?? event.title
-                          }-${event.startDate.getTime()}`;
+      // Reset drag state
+      dragStateRef.current = {
+        isDragging: false,
+        isResizing: false,
+        resizeDirection: null,
+        event: null,
+        startX: 0,
+        startDay: 0,
+        startDuration: 0,
+        originalStart: null,
+        originalEnd: null,
+      };
+    },
+    [localEvents, onEventDrop, onEventResize]
+  );
 
-                          // Skip rendering multi-day events on non-first days
-                          const spanInfo = getEventSpanInfo(event, day);
-                          const isMultiDay = isMultiDayEvent(event);
-                          if (
-                            isMultiDay &&
-                            spanInfo &&
-                            !spanInfo.isFirst &&
-                            view !== 'day'
-                          ) {
-                            return null;
-                          }
+  // Set up global mouse event listeners
+  React.useEffect(() => {
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
 
-                          if (renderEvent) {
-                            const rendered = renderEvent(event, context);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [handleMouseMove, handleMouseUp]);
 
-                            if (isValidElement(rendered)) {
-                              return (
-                                <View
-                                  key={key}
-                                  draggable={true}
-                                  onDragStart={
-                                    onEventDrop
-                                      ? handleDragStart(event)
-                                      : undefined
-                                  }
-                                >
-                                  {rendered}
-                                </View>
-                              );
-                            }
+  // Group events by date for rendering
+  const eventsByDate = useMemo(() => {
+    const grouped: Record<string, PositionedEvent[]> = {};
+    calendarDates.forEach((date) => {
+      grouped[date] = [];
+    });
 
-                            return (
-                              <React.Fragment key={key}>
-                                {rendered}
-                              </React.Fragment>
-                            );
-                          }
+    positionedEvents.forEach((event) => {
+      // For multi-day events, show on each day it spans
+      const startIdx = event.startDay;
+      const endIdx = event.endDay;
 
-                          return renderDefaultEvent(
-                            event,
-                            context,
-                            views,
-                            key,
-                            onEventDrop ? handleDragStart(event) : undefined,
-                            onEventResize
-                              ? (e, direction) =>
-                                  handleResizeStart(event, direction)(e)
-                              : undefined
-                          );
-                        })
-                      : view === 'day' && (
-                          <Text
-                            fontSize={11}
-                            color="color.gray.600"
-                            fontStyle="italic"
-                            {...views?.emptyState}
-                          >
-                            No events scheduled
-                          </Text>
-                        )}
-                  </Vertical>
-                </Vertical>
-              );
-            })}
+      for (let i = startIdx; i <= endIdx && i < calendarDates.length; i++) {
+        const date = calendarDates[i];
+        if (date && grouped[date]) {
+          const isFirstDay = i === startIdx;
+          grouped[date].push({
+            ...event,
+            isFirstDay,
+          } as any);
+        }
+      }
+    });
+
+    return grouped;
+  }, [positionedEvents, calendarDates]);
+
+  // Render month view
+  const renderMonthView = () => (
+    <>
+      {/* Weekday headers */}
+      <View {...weekdayHeaderStyles} {...views.weekdayHeader}>
+        {dayNames.map((dayName, index) => (
+          <View key={index} {...weekdayLabelStyles} {...views.weekdayLabel}>
+            {dayName}
           </View>
         ))}
-      </Vertical>
-    </Vertical>
+      </View>
+
+      {/* Month grid */}
+      <View ref={gridRef} {...monthGridStyles} {...views.monthGrid}>
+        {calendarDates.map((dateISO, index) => {
+          const dateNum = getDateNumber(dateISO);
+          const isToday = dateISO === today;
+          const isSelected = dateISO === selectedDate;
+          const isCurrentMonth = isInMonth(dateISO, currentMonth);
+          const isDropTarget = dropTargetDays.includes(index);
+          const dayEvents = eventsByDate[dateISO] || [];
+
+          return (
+            <View
+              key={dateISO}
+              data-date={dateISO}
+              {...dayCellStyles}
+              {...(!isCurrentMonth && otherMonthDayCellStyles)}
+              {...(isDropTarget && dropTargetStyles)}
+              onClick={() => handleDateClick(dateISO)}
+              onDoubleClick={() => handleDateDoubleClick(dateISO)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDragLeave={handleDragLeave}
+              onDrop={(e) => handleDrop(e, index)}
+              {...views.dayCell}
+            >
+              <View
+                {...dayNumberStyles}
+                {...(isToday && todayDayNumberStyles)}
+                {...(isSelected && !isToday && selectedDayNumberStyles)}
+                style={{ cursor: 'pointer' }}
+                {...views.dayNumber}
+              >
+                {dateNum}
+              </View>
+
+              <View {...eventsAreaStyles} {...views.eventsArea}>
+                {dayEvents.map((event: any) => {
+                  const colorConfig = EVENT_COLORS[event.color || 'blue'];
+                  const isMultiDay = event.duration > 1;
+                  const isFirstDay = event.isFirstDay !== false;
+
+                  if (!isFirstDay) return null;
+
+                  return (
+                    <View
+                      key={event.id}
+                      position="relative"
+                      {...eventStyles}
+                      backgroundColor={colorConfig.background}
+                      borderLeftColor={colorConfig.border}
+                      color={colorConfig.text}
+                      draggable
+                      onDragStart={(e) => handleEventDragStart(e, event)}
+                      title={
+                        isMultiDay
+                          ? `${event.title} (${event.duration} days)`
+                          : event.title
+                      }
+                      {...views.event}
+                    >
+                      <View
+                        overflow="hidden"
+                        textOverflow="ellipsis"
+                        whiteSpace="nowrap"
+                        width="100%"
+                      >
+                        {event.title}
+                        {isMultiDay && ` (${event.duration}d)`}
+                      </View>
+
+                      <ResizeHandle
+                        direction="left"
+                        onMouseDown={(e) => handleResizeStart(e, event, 'left')}
+                      />
+                      <ResizeHandle
+                        direction="right"
+                        onMouseDown={(e) =>
+                          handleResizeStart(e, event, 'right')
+                        }
+                      />
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          );
+        })}
+      </View>
+    </>
+  );
+
+  // Render week view
+  const renderWeekView = () => (
+    <>
+      <View {...weekdayHeaderStyles} {...views.weekdayHeader}>
+        {calendarDates.map((dateISO, index) => {
+          const dayOfWeek = getDayOfWeek(dateISO);
+          const dateNum = getDateNumber(dateISO);
+          const isToday = dateISO === today;
+
+          return (
+            <View
+              key={dateISO}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              padding={8}
+              gap={4}
+              {...views.weekdayLabel}
+            >
+              <View {...weekdayLabelStyles}>{DAY_NAMES[dayOfWeek]}</View>
+              <View
+                {...dayDateStyles}
+                {...(isToday && todayDayNumberStyles)}
+                fontSize={16}
+                fontWeight={isToday ? 500 : 400}
+              >
+                {dateNum}
+              </View>
+            </View>
+          );
+        })}
+      </View>
+
+      <View
+        ref={gridRef}
+        display="grid"
+        gridTemplateColumns="repeat(7, 1fr)"
+        minHeight={400}
+      >
+        {calendarDates.map((dateISO, index) => {
+          const isDropTarget = dropTargetDays.includes(index);
+          const dayEvents = eventsByDate[dateISO] || [];
+
+          return (
+            <View
+              key={dateISO}
+              data-date={dateISO}
+              {...dayCellStyles}
+              {...(isDropTarget && dropTargetStyles)}
+              minHeight={400}
+              onClick={() => handleDateClick(dateISO)}
+              onDoubleClick={() => handleDateDoubleClick(dateISO)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDragLeave={handleDragLeave}
+              onDrop={(e) => handleDrop(e, index)}
+            >
+              <View {...eventsAreaStyles} {...views.eventsArea}>
+                {dayEvents.map((event: any) => {
+                  const colorConfig = EVENT_COLORS[event.color || 'blue'];
+                  const isFirstDay = event.isFirstDay !== false;
+
+                  if (!isFirstDay) return null;
+
+                  return (
+                    <View
+                      key={event.id}
+                      position="relative"
+                      {...eventStyles}
+                      backgroundColor={colorConfig.background}
+                      borderLeftColor={colorConfig.border}
+                      color={colorConfig.text}
+                      draggable
+                      onDragStart={(e) => handleEventDragStart(e, event)}
+                      title={event.title}
+                      {...views.event}
+                    >
+                      <View
+                        overflow="hidden"
+                        textOverflow="ellipsis"
+                        whiteSpace="nowrap"
+                        width="100%"
+                      >
+                        {event.title}
+                      </View>
+
+                      <ResizeHandle
+                        direction="left"
+                        onMouseDown={(e) => handleResizeStart(e, event, 'left')}
+                      />
+                      <ResizeHandle
+                        direction="right"
+                        onMouseDown={(e) =>
+                          handleResizeStart(e, event, 'right')
+                        }
+                      />
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+          );
+        })}
+      </View>
+    </>
+  );
+
+  // Render day view with hourly time slots
+  const renderDayView = () => {
+    const hours = Array.from({ length: 24 }, (_, i) => i);
+    const dateISO = currentDate;
+    const dayEvents = eventsByDate[dateISO] || [];
+
+    return (
+      <View display="flex" flexDirection="column" flex={1}>
+        {hours.map((hour) => {
+          const hourStr = `${hour.toString().padStart(2, '0')}:00`;
+
+          return (
+            <View
+              key={hour}
+              display="flex"
+              borderBottom="1px solid"
+              borderColor="color.gray.200"
+              minHeight={60}
+              onDoubleClick={() => handleDateDoubleClick(dateISO, hour)}
+              cursor="pointer"
+              _hover={{ backgroundColor: 'color.gray.50' }}
+            >
+              <View
+                width={80}
+                padding={8}
+                fontSize={12}
+                color="color.gray.600"
+                borderRight="1px solid"
+                borderColor="color.gray.200"
+                {...views.timeColumn}
+              >
+                {hourStr}
+              </View>
+
+              <View
+                flex={1}
+                padding={8}
+                position="relative"
+                {...views.timeSlot}
+              >
+                {/* Events for this hour would go here */}
+                {dayEvents
+                  .filter((event: any) => {
+                    // Simple check if event starts in this hour
+                    if (event.start.includes('T')) {
+                      const eventHour = parseInt(
+                        event.start.split('T')[1].split(':')[0]
+                      );
+                      return eventHour === hour;
+                    }
+                    return false;
+                  })
+                  .map((event: any) => {
+                    const colorConfig = EVENT_COLORS[event.color || 'blue'];
+
+                    return (
+                      <View
+                        key={event.id}
+                        {...eventStyles}
+                        backgroundColor={colorConfig.background}
+                        borderLeftColor={colorConfig.border}
+                        color={colorConfig.text}
+                        marginBottom={4}
+                        {...views.event}
+                      >
+                        {event.title}
+                      </View>
+                    );
+                  })}
+              </View>
+            </View>
+          );
+        })}
+      </View>
+    );
+  };
+
+  return (
+    <View
+      {...containerStyles}
+      width={width}
+      maxWidth={maxWidth}
+      {...views.container}
+    >
+      {/* Header with navigation and view switcher */}
+      <Horizontal {...headerStyles} {...views.header}>
+        <View {...monthTitleStyles} {...views.monthTitle}>
+          {getMonthName(currentMonth)} {getYear(currentMonth)}
+        </View>
+
+        <Horizontal gap={8}>
+          {/* View switcher */}
+          <Horizontal gap={4} {...views.viewSwitcher}>
+            <View
+              {...buttonStyles}
+              backgroundColor={
+                currentView === 'month' ? 'color.primary.100' : 'color.white'
+              }
+              color={
+                currentView === 'month' ? 'color.primary.700' : 'color.gray.700'
+              }
+              onClick={() => handleViewChange('month')}
+              style={{ cursor: 'pointer' }}
+            >
+              Month
+            </View>
+            <View
+              {...buttonStyles}
+              backgroundColor={
+                currentView === 'week' ? 'color.primary.100' : 'color.white'
+              }
+              color={
+                currentView === 'week' ? 'color.primary.700' : 'color.gray.700'
+              }
+              onClick={() => handleViewChange('week')}
+              style={{ cursor: 'pointer' }}
+            >
+              Week
+            </View>
+            <View
+              {...buttonStyles}
+              backgroundColor={
+                currentView === 'day' ? 'color.primary.100' : 'color.white'
+              }
+              color={
+                currentView === 'day' ? 'color.primary.700' : 'color.gray.700'
+              }
+              onClick={() => handleViewChange('day')}
+              style={{ cursor: 'pointer' }}
+            >
+              Day
+            </View>
+          </Horizontal>
+
+          <View
+            {...buttonStyles}
+            onClick={handleToday}
+            style={{ cursor: 'pointer' }}
+            {...views.navButton}
+          >
+            Today
+          </View>
+
+          <Horizontal gap={4}>
+            <View
+              {...iconButtonStyles}
+              onClick={handlePrevious}
+              style={{ cursor: 'pointer' }}
+              {...views.navButton}
+            >
+              ‹
+            </View>
+            <View
+              {...iconButtonStyles}
+              onClick={handleNext}
+              style={{ cursor: 'pointer' }}
+              {...views.navButton}
+            >
+              ›
+            </View>
+          </Horizontal>
+        </Horizontal>
+      </Horizontal>
+
+      {/* Render appropriate view */}
+      {currentView === 'month' && renderMonthView()}
+      {currentView === 'week' && renderWeekView()}
+      {currentView === 'day' && renderDayView()}
+    </View>
   );
 };
-
-export default CalendarViewComponent;
