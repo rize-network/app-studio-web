@@ -1,13 +1,15 @@
 import { ViewProps } from 'app-studio';
 
+export type CalendarView = 'month' | 'week' | 'day';
+
 export interface CalendarMonthEvent {
   /** Unique identifier for the event */
   id: string;
   /** Event title/label */
   title: string;
-  /** Start date in ISO format (YYYY-MM-DD) */
+  /** Start date in ISO format (YYYY-MM-DD) or datetime (YYYY-MM-DDTHH:MM) */
   start: string;
-  /** End date in ISO format (YYYY-MM-DD) */
+  /** End date in ISO format (YYYY-MM-DD) or datetime (YYYY-MM-DDTHH:MM) */
   end: string;
   /** Color variant for the event */
   color?: 'blue' | 'red' | 'green' | 'purple' | 'orange';
@@ -22,6 +24,8 @@ export interface CalendarMonthViews {
   monthTitle?: ViewProps;
   /** Style overrides for navigation buttons */
   navButton?: ViewProps;
+  /** Style overrides for view switcher buttons */
+  viewSwitcher?: ViewProps;
   /** Style overrides for the month grid */
   monthGrid?: ViewProps;
   /** Style overrides for weekday header row */
@@ -36,11 +40,17 @@ export interface CalendarMonthViews {
   eventsArea?: ViewProps;
   /** Style overrides for individual events */
   event?: ViewProps;
+  /** Style overrides for time column (day view) */
+  timeColumn?: ViewProps;
+  /** Style overrides for time slot */
+  timeSlot?: ViewProps;
 }
 
 export interface CalendarMonthProps {
-  /** Initial month to display in ISO format (YYYY-MM-DD) or Date object */
+  /** Initial date to display in ISO format (YYYY-MM-DD) or Date object */
   initialDate?: string | Date;
+  /** Initial view to display */
+  initialView?: CalendarView;
   /** Array of events to display */
   events?: CalendarMonthEvent[];
   /** Today's date in ISO format (defaults to current date) */
@@ -51,8 +61,12 @@ export interface CalendarMonthProps {
   onEventResize?: (event: CalendarMonthEvent) => void;
   /** Callback when a date is clicked */
   onDateClick?: (date: string) => void;
-  /** Callback when month changes */
-  onMonthChange?: (date: Date) => void;
+  /** Callback when date/time changes */
+  onDateChange?: (date: Date) => void;
+  /** Callback when view changes */
+  onViewChange?: (view: CalendarView) => void;
+  /** Callback when double-clicking to add new event */
+  onEventAdd?: (start: string, end: string) => void;
   /** Style overrides for various parts of the component */
   views?: CalendarMonthViews;
   /** Width of the calendar (default: '100%') */

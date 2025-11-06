@@ -92,7 +92,9 @@ export const CalendarMonthDefault = () => {
 
   const handleEventDrop = (event: CalendarMonthEvent) => {
     console.log('Event dropped:', event);
-    setEvents((prev) => prev.map((e) => (e.id === event.id ? event : e)));
+    setEvents((prev) =>
+      prev.map((e) => (e.id === event.id ? event : e))
+    );
   };
 
   const handleEventResize = (event: CalendarMonthEvent) => {
@@ -106,18 +108,38 @@ export const CalendarMonthDefault = () => {
     console.log('Date clicked:', date);
   };
 
-  const handleMonthChange = (date: Date) => {
-    console.log('Month changed:', date);
+  const handleDateChange = (date: Date) => {
+    console.log('Date changed:', date);
+  };
+
+  const handleViewChange = (view: 'month' | 'week' | 'day') => {
+    console.log('View changed:', view);
+  };
+
+  const handleEventAdd = (start: string, end: string) => {
+    // Create a new event when user double-clicks
+    const newEvent: CalendarMonthEvent = {
+      id: `new-${Date.now()}`,
+      title: 'New Event',
+      start,
+      end,
+      color: 'blue',
+    };
+    console.log('Adding new event:', newEvent);
+    setEvents((prev) => [...prev, newEvent]);
   };
 
   return (
     <CalendarMonth
       initialDate="2025-11-01"
+      initialView="month"
       events={events}
       onEventDrop={handleEventDrop}
       onEventResize={handleEventResize}
       onDateClick={handleDateClick}
-      onMonthChange={handleMonthChange}
+      onDateChange={handleDateChange}
+      onViewChange={handleViewChange}
+      onEventAdd={handleEventAdd}
     />
   );
 };
