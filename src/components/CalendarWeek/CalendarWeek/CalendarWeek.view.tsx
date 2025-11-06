@@ -12,7 +12,6 @@ import {
 } from './CalendarWeek.utils';
 import {
   containerStyles,
-  weekGridStyles,
   dayColumnStyles,
   dayHeaderStyles,
   dayNameStyles,
@@ -20,12 +19,9 @@ import {
   todayDateStyles,
   selectedDateStyles,
   eventsAreaStyles,
-  eventsLayerStyles,
   EVENT_COLORS,
   getEventPositionStyles,
   dropTargetStyles,
-  leftResizeHandleStyles,
-  rightResizeHandleStyles,
 } from './CalendarWeek.style';
 
 interface DragState {
