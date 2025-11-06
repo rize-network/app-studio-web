@@ -1,4 +1,4 @@
-import React, { isValidElement, useState, useRef, useEffect } from 'react';
+import React, { isValidElement, useState, useRef } from 'react';
 import { Horizontal, Vertical, View } from 'app-studio';
 import {
   format,
@@ -990,10 +990,8 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
             display="grid"
             gridTemplateColumns={`repeat(${week.length}, 1fr)`}
             gap={12}
-            height={
-              view === 'month' ? '180px' : view === 'week' ? '100%' : 'auto'
-            }
-            minHeight={view === 'week' ? '300px' : 'auto'}
+            height="180px"
+            minHeight="auto"
             {...views?.weekRow}
           >
             {week.map((day) => {
@@ -1006,8 +1004,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                 view,
               };
 
-              const shouldDim =
-                view === 'month' && !isSameMonth(day, currentDate);
+              const shouldDim = !isSameMonth(day, currentDate);
 
               return (
                 <Vertical
@@ -1023,7 +1020,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                   display="flex"
                   flexDirection="column"
                   height="100%"
-                  minHeight={view === 'month' ? '180px' : '300px'}
+                  minHeight="180px"
                   onDragOver={handleDragOver}
                   onDrop={handleDrop(day)}
                   onMouseEnter={() => handleDayMouseEnter(day)}
@@ -1038,15 +1035,6 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                     <Text fontWeight="600" fontSize={14} {...views?.dayNumber}>
                       {format(day, 'd')}
                     </Text>
-                    {view !== 'month' && (
-                      <Text
-                        fontSize={12}
-                        color="color.gray.600"
-                        {...views?.dayMeta}
-                      >
-                        {format(day, 'EEEE')}
-                      </Text>
-                    )}
                   </Horizontal>
                   <Vertical gap={8} flex={1} overflow="auto" {...views?.events}>
                     {events.length > 0
@@ -1055,14 +1043,13 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                             event.id ?? event.title
                           }-${event.startDate.getTime()}`;
 
-                          // Skip rendering multi-day events on non-first days
+                          // Skip rendering multi-day events on non-first days in month view
                           const spanInfo = getEventSpanInfo(event, day);
                           const isMultiDay = isMultiDayEvent(event);
                           if (
                             isMultiDay &&
                             spanInfo &&
-                            !spanInfo.isFirst &&
-                            view !== 'day'
+                            !spanInfo.isFirst
                           ) {
                             return null;
                           }
@@ -1108,16 +1095,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                             false  // showCollisionError
                           );
                         })
-                      : view === 'day' && (
-                          <Text
-                            fontSize={11}
-                            color="color.gray.600"
-                            fontStyle="italic"
-                            {...views?.emptyState}
-                          >
-                            No events scheduled
-                          </Text>
-                        )}
+                      : null}
                   </Vertical>
                 </Vertical>
               );
