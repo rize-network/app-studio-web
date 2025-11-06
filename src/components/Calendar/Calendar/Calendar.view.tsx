@@ -592,6 +592,74 @@ const renderDefaultEvent = (
   );
 };
 
+// Helper to calculate day index in week
+const getDayIndexInWeek = (day: Date, weekDays: Date[]): number => {
+  return weekDays.findIndex(weekDay => isSameDay(weekDay, day));
+};
+
+// Row-based layout algorithm for overlapping events
+interface EventWithRow extends CalendarEventInternal {
+  row: number;
+  startDayIndex: number;
+  endDayIndex: number;
+  duration: number;
+}
+
+const layoutEventsInRows = (
+  events: CalendarEventInternal[],
+  weekDays: Date[]
+): { events: EventWithRow[]; rowCount: number } => {
+  // Convert events to items with day indices
+  const items: EventWithRow[] = events.map((event) => {
+    const startIdx = getDayIndexInWeek(event.startDate, weekDays);
+    const endIdx = getDayIndexInWeek(event.endDate, weekDays);
+
+    // Clamp to week boundaries
+    const clampedStart = Math.max(0, Math.min(weekDays.length - 1, startIdx >= 0 ? startIdx : 0));
+    const clampedEnd = Math.max(0, Math.min(weekDays.length - 1, endIdx >= 0 ? endIdx : weekDays.length - 1));
+
+    const duration = clampedEnd - clampedStart + 1;
+
+    return {
+      ...event,
+      row: 0,
+      startDayIndex: clampedStart,
+      endDayIndex: clampedEnd,
+      duration: duration,
+    };
+  });
+
+  // Sort by start day, then by duration (longer first)
+  items.sort((a, b) => {
+    if (a.startDayIndex !== b.startDayIndex) return a.startDayIndex - b.startDayIndex;
+    return b.duration - a.duration;
+  });
+
+  // Assign rows using greedy algorithm to prevent overlaps
+  const rows: EventWithRow[][] = [];
+  items.forEach((item) => {
+    let placed = false;
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const hasConflict = row.some((existing) =>
+        !(item.startDayIndex > existing.endDayIndex || item.endDayIndex < existing.startDayIndex)
+      );
+      if (!hasConflict) {
+        row.push(item);
+        item.row = i;
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) {
+      item.row = rows.length;
+      rows.push([item]);
+    }
+  });
+
+  return { events: items, rowCount: rows.length };
+};
+
 const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   currentDate,
   view,
@@ -626,6 +694,8 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
     x: number;
     y: number;
   } | null>(null);
+  const [dropTargetDays, setDropTargetDays] = useState<Set<string>>(new Set());
+  const [isDragging, setIsDragging] = useState(false);
   const timeGridRef = useRef<HTMLDivElement>(null);
 
   // Use same grid configuration for both header and days
@@ -635,12 +705,36 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   const handleDragStart =
     (event: CalendarEventInternal) => (e: React.DragEvent<HTMLDivElement>) => {
       setDraggedEvent(event);
+      setIsDragging(true);
       e.dataTransfer.effectAllowed = 'move';
     };
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
+  };
+
+  const handleDragOverDay = (day: Date) => (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+
+    // Highlight drop target(s)
+    if (draggedEvent && isMultiDayEvent(draggedEvent)) {
+      // For multi-day events, highlight all days it would span
+      const duration = differenceInDays(draggedEvent.endDate, draggedEvent.startDate);
+      const targets = new Set<string>();
+      for (let i = 0; i <= duration; i++) {
+        targets.add(formatDayKey(addDays(day, i)));
+      }
+      setDropTargetDays(targets);
+    } else {
+      // Single day event
+      setDropTargetDays(new Set([formatDayKey(day)]));
+    }
+  };
+
+  const handleDragLeave = () => {
+    setDropTargetDays(new Set());
   };
 
   const handleDrop =
@@ -658,6 +752,8 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
 
       onEventDrop(draggedEvent, newStart, newEnd);
       setDraggedEvent(null);
+      setIsDragging(false);
+      setDropTargetDays(new Set());
     };
 
   // Resize Handlers for time-based resizing (day/week views)
@@ -912,11 +1008,24 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
         endTime: event.endDate.toISOString(),
       }));
       setDraggedEvent(event);
+      setIsDragging(true);
     };
 
-  const handleTimeGridDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleTimeGridDragOver = (day: Date) => (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
+
+    // Highlight drop target
+    if (draggedEvent && isMultiDayEvent(draggedEvent)) {
+      const duration = differenceInDays(draggedEvent.endDate, draggedEvent.startDate);
+      const targets = new Set<string>();
+      for (let i = 0; i <= duration; i++) {
+        targets.add(formatDayKey(addDays(day, i)));
+      }
+      setDropTargetDays(targets);
+    } else {
+      setDropTargetDays(new Set([formatDayKey(day)]));
+    }
   };
 
   const handleTimeGridDrop =
@@ -934,6 +1043,8 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
 
       onEventDrop(draggedEvent, newStartTime, newEndTime);
       setDraggedEvent(null);
+      setIsDragging(false);
+      setDropTargetDays(new Set());
     };
 
   // Resize tooltip showing current time range
@@ -1145,6 +1256,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
             {weeks[0].map((day, dayIndex) => {
               const dayKey = formatDayKey(day);
               const isToday = isSameDay(day, today);
+              const isDropTarget = dropTargetDays.has(dayKey);
 
               return (
                 <View
@@ -1156,6 +1268,8 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                   borderColor="color.gray.300"
                   display="flex"
                   flexDirection="column"
+                  backgroundColor={isDropTarget ? 'rgba(33, 150, 243, 0.05)' : 'transparent'}
+                  transition="background-color 0.2s"
                 >
                   {/* Day header */}
                   <View
@@ -1201,7 +1315,12 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                   </View>
 
                   {/* Day time grid */}
-                  <View flex={1} position="relative">
+                  <View
+                    flex={1}
+                    position="relative"
+                    onDragOver={handleTimeGridDragOver(day)}
+                    onDragLeave={handleDragLeave}
+                  >
                     {Array.from({ length: HOURS_IN_DAY }, (_, hour) => (
                       <View
                         key={`cell-${dayKey}-${hour}`}
@@ -1211,11 +1330,27 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                         borderStyle="solid"
                         borderColor="color.gray.300"
                         backgroundColor={isToday ? 'rgba(227, 242, 253, 0.1)' : 'color.white'}
-                        onDragOver={handleTimeGridDragOver}
                         onDrop={handleTimeGridDrop(day)}
                         onDoubleClick={handleDoubleClick(day, hour)}
                       />
                     ))}
+
+                    {/* Drop target indicator */}
+                    {isDropTarget && (
+                      <View
+                        position="absolute"
+                        top={0}
+                        left={0}
+                        right={0}
+                        bottom={0}
+                        borderWidth={2}
+                        borderStyle="dashed"
+                        borderColor={COLORS.primaryBlue}
+                        borderRadius={4}
+                        pointerEvents="none"
+                        opacity={0.5}
+                      />
+                    )}
                   </View>
                 </View>
               );
@@ -1249,6 +1384,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
 
                     const key = `multi-${weekDayKey}-${event.id ?? event.title}-${event.startDate.getTime()}`;
                     const isResizingThis = resizingEvent?.event.id === event.id;
+                    const isDraggingThis = draggedEvent?.id === event.id;
                     const showCollisionError = isResizingThis && resizingEvent?.hasCollision;
 
                     // Calculate position
@@ -1270,7 +1406,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                         width={`calc(${widthPercent}% - 12px)`}
                         height={`${Math.max(height, minHeight)}px`}
                         pointerEvents="auto"
-                        zIndex={isResizingThis ? 1000 : 100}
+                        zIndex={isDraggingThis || isResizingThis ? 1000 : 100}
+                        opacity={isDraggingThis ? 0.5 : 1}
+                        transition="opacity 0.2s"
                       >
                         {renderDefaultEvent(
                           event,
@@ -1306,6 +1444,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                   .map((event) => {
                     const key = `${dayKey}-${event.id ?? event.title}-${event.startDate.getTime()}`;
                     const isResizingThis = resizingEvent?.event.id === event.id;
+                    const isDraggingThis = draggedEvent?.id === event.id;
                     const showCollisionError = isResizingThis && resizingEvent?.hasCollision;
 
                     const topPosition = getPositionFromTime(event.startDate);
@@ -1325,7 +1464,9 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                         width={`calc(${dayWidth}% - 12px)`}
                         height={`${Math.max(height, minHeight)}px`}
                         pointerEvents="auto"
-                        zIndex={isResizingThis ? 1000 : 100}
+                        zIndex={isDraggingThis || isResizingThis ? 1000 : 100}
+                        opacity={isDraggingThis ? 0.5 : 1}
+                        transition="opacity 0.2s"
                       >
                         {renderDefaultEvent(
                           event,
@@ -1364,6 +1505,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
             {week.map((day) => {
               const dayKey = formatDayKey(day);
               const isToday = isSameDay(day, today);
+              const isDropTarget = dropTargetDays.has(dayKey);
               const events = eventsByDay.get(dayKey) ?? [];
               const context: CalendarRenderEventContext = {
                 day,
@@ -1379,16 +1521,18 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                   gap={12}
                   padding={16}
                   borderWidth={1}
-                  borderStyle="solid"
-                  borderColor={isToday ? 'color.primary.200' : 'color.gray.200'}
+                  borderStyle={isDropTarget ? 'dashed' : 'solid'}
+                  borderColor={isDropTarget ? COLORS.primaryBlue : (isToday ? 'color.primary.200' : 'color.gray.200')}
                   borderRadius={12}
-                  backgroundColor="color.gray.50"
+                  backgroundColor={isDropTarget ? 'rgba(33, 150, 243, 0.05)' : 'color.gray.50'}
                   opacity={shouldDim ? 0.6 : 1}
                   display="flex"
                   flexDirection="column"
                   height="100%"
                   minHeight="180px"
-                  onDragOver={handleDragOver}
+                  transition="all 0.2s"
+                  onDragOver={handleDragOverDay(day)}
+                  onDragLeave={handleDragLeave}
                   onDrop={handleDrop(day)}
                   onMouseEnter={() => handleDayMouseEnter(day)}
                   {...views?.dayColumn}
