@@ -44,6 +44,42 @@ interface DragState {
   originalEnd: string | null;
 }
 
+interface ResizeState {
+  isResizing: boolean;
+  resizeDirection: 'left' | 'right' | null;
+  event: PositionedEvent | null;
+  originalStart: string | null;
+  originalEnd: string | null;
+  currentHoverDate: string | null;
+}
+
+interface ResizeHandleProps {
+  direction: 'left' | 'right';
+  onMouseDown: (e: React.MouseEvent) => void;
+}
+
+const ResizeHandle: React.FC<ResizeHandleProps> = ({ direction, onMouseDown }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <View
+      position="absolute"
+      top={0}
+      bottom={0}
+      width={8}
+      opacity={isHovered ? 1 : 0}
+      transition="opacity 0.2s"
+      cursor={direction === 'left' ? 'w-resize' : 'e-resize'}
+      zIndex={10}
+      backgroundColor={isHovered ? 'rgba(0,0,0,0.1)' : 'transparent'}
+      {...(direction === 'left' ? { left: 0 } : { right: 0 })}
+      onMouseDown={onMouseDown}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    />
+  );
+};
+
 export const CalendarMonth: React.FC<CalendarMonthProps> = ({
   initialDate = new Date(),
   events = [],
@@ -71,6 +107,7 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = ({
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [localEvents, setLocalEvents] = useState<CalendarMonthEvent[]>(events);
   const [dropTargetDate, setDropTargetDate] = useState<string | null>(null);
+  const [resizeHighlightDates, setResizeHighlightDates] = useState<string[]>([]);
 
   const dragStateRef = React.useRef<DragState>({
     isDragging: false,
@@ -78,6 +115,15 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = ({
     startDate: null,
     originalStart: null,
     originalEnd: null,
+  });
+
+  const resizeStateRef = React.useRef<ResizeState>({
+    isResizing: false,
+    resizeDirection: null,
+    event: null,
+    originalStart: null,
+    originalEnd: null,
+    currentHoverDate: null,
   });
 
   // Update local events when props change
@@ -205,6 +251,116 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = ({
     [localEvents, onEventDrop]
   );
 
+  // Handle resize start
+  const handleResizeStart = useCallback(
+    (e: React.MouseEvent, event: PositionedEvent, direction: 'left' | 'right') => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      resizeStateRef.current = {
+        isResizing: true,
+        resizeDirection: direction,
+        event,
+        originalStart: event.start,
+        originalEnd: event.end,
+        currentHoverDate: null,
+      };
+    },
+    []
+  );
+
+  // Handle mouse move during resize
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      const resizeState = resizeStateRef.current;
+      if (!resizeState.isResizing || !resizeState.event) return;
+
+      // Find which date cell we're hovering over
+      const target = document.elementFromPoint(e.clientX, e.clientY);
+      const dateCell = target?.closest('[data-date]');
+      if (!dateCell) return;
+
+      const hoverDate = dateCell.getAttribute('data-date');
+      if (!hoverDate || hoverDate === resizeState.currentHoverDate) return;
+
+      resizeState.currentHoverDate = hoverDate;
+
+      let newStart = resizeState.originalStart!;
+      let newEnd = resizeState.originalEnd!;
+
+      if (resizeState.resizeDirection === 'right') {
+        // Resizing from the right - change end date
+        newEnd = hoverDate;
+        // Ensure end is not before start
+        if (daysBetweenUTC(newEnd, newStart) < 0) {
+          newEnd = newStart;
+        }
+      } else {
+        // Resizing from the left - change start date
+        newStart = hoverDate;
+        // Ensure start is not after end
+        if (daysBetweenUTC(newEnd, newStart) < 0) {
+          newStart = newEnd;
+        }
+      }
+
+      // Update visual feedback
+      const daysDiff = Math.abs(daysBetweenUTC(newEnd, newStart));
+      const highlightDates: string[] = [];
+      for (let i = 0; i <= daysDiff; i++) {
+        highlightDates.push(addDateDays(newStart, i));
+      }
+      setResizeHighlightDates(highlightDates);
+
+      // Update event immediately for preview
+      const updatedEvents = localEvents.map((ev) =>
+        ev.id === resizeState.event!.id
+          ? { ...ev, start: newStart, end: newEnd }
+          : ev
+      );
+      setLocalEvents(updatedEvents);
+    },
+    [localEvents]
+  );
+
+  // Handle mouse up - finish resize
+  const handleMouseUp = useCallback(
+    (e: MouseEvent) => {
+      const resizeState = resizeStateRef.current;
+      if (!resizeState.isResizing || !resizeState.event) return;
+
+      setResizeHighlightDates([]);
+
+      // Find the updated event
+      const updatedEvent = localEvents.find((ev) => ev.id === resizeState.event!.id);
+      if (updatedEvent) {
+        onEventResize?.(updatedEvent);
+      }
+
+      // Reset resize state
+      resizeStateRef.current = {
+        isResizing: false,
+        resizeDirection: null,
+        event: null,
+        originalStart: null,
+        originalEnd: null,
+        currentHoverDate: null,
+      };
+    },
+    [localEvents, onEventResize]
+  );
+
+  // Set up global mouse event listeners for resize
+  React.useEffect(() => {
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [handleMouseMove, handleMouseUp]);
+
   // Group events by date for rendering
   const eventsByDate = useMemo(() => {
     const grouped: Record<string, PositionedEvent[]> = {};
@@ -213,10 +369,21 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = ({
     });
 
     positionedEvents.forEach((event) => {
-      // For multi-day events, only show on the first day
-      const startDate = calendarDates[event.startDay];
-      if (startDate && grouped[startDate]) {
-        grouped[startDate].push(event);
+      // For multi-day events, show on each day it spans
+      const startIdx = event.startDay;
+      const endIdx = event.endDay;
+
+      for (let i = startIdx; i <= endIdx && i < calendarDates.length; i++) {
+        const date = calendarDates[i];
+        if (date && grouped[date]) {
+          // Mark if this is the first day of the event
+          const isFirstDay = i === startIdx;
+          grouped[date].push({
+            ...event,
+            // Add a marker to know if we should show full event or continuation
+            isFirstDay,
+          } as any);
+        }
       }
     });
 
@@ -284,14 +451,17 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = ({
           const isSelected = dateISO === selectedDate;
           const isCurrentMonth = isInMonth(dateISO, currentMonth);
           const isDropTarget = dateISO === dropTargetDate;
+          const isResizeHighlight = resizeHighlightDates.includes(dateISO);
           const dayEvents = eventsByDate[dateISO] || [];
 
           return (
             <View
               key={dateISO}
+              data-date={dateISO}
               {...dayCellStyles}
               {...(!isCurrentMonth && otherMonthDayCellStyles)}
               {...(isDropTarget && dropTargetStyles)}
+              {...(isResizeHighlight && dropTargetStyles)}
               onDragOver={(e) => handleDragOver(e, dateISO)}
               onDragLeave={handleDragLeave}
               onDrop={(e) => handleDrop(e, dateISO)}
@@ -311,13 +481,18 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = ({
 
               {/* Events */}
               <View {...eventsAreaStyles} {...views.eventsArea}>
-                {dayEvents.map((event) => {
+                {dayEvents.map((event: any) => {
                   const colorConfig = EVENT_COLORS[event.color || 'blue'];
                   const isMultiDay = event.duration > 1;
+                  const isFirstDay = event.isFirstDay !== false;
+
+                  // Only show full event on first day
+                  if (!isFirstDay) return null;
 
                   return (
                     <View
                       key={event.id}
+                      position="relative"
                       {...eventStyles}
                       backgroundColor={colorConfig.background}
                       borderLeftColor={colorConfig.border}
@@ -340,6 +515,16 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = ({
                         {event.title}
                         {isMultiDay && ` (${event.duration}d)`}
                       </View>
+
+                      {/* Resize handles */}
+                      <ResizeHandle
+                        direction="left"
+                        onMouseDown={(e) => handleResizeStart(e, event, 'left')}
+                      />
+                      <ResizeHandle
+                        direction="right"
+                        onMouseDown={(e) => handleResizeStart(e, event, 'right')}
+                      />
                     </View>
                   );
                 })}

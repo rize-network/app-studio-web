@@ -60,11 +60,46 @@ export const CalendarMonthDefault = () => {
       end: '2025-11-29',
       color: 'green',
     },
+    {
+      id: '9',
+      title: 'Standup',
+      start: '2025-11-05',
+      end: '2025-11-05',
+      color: 'blue',
+    },
+    {
+      id: '10',
+      title: 'Code Review',
+      start: '2025-11-07',
+      end: '2025-11-07',
+      color: 'orange',
+    },
+    {
+      id: '11',
+      title: 'Deployment',
+      start: '2025-11-11',
+      end: '2025-11-13',
+      color: 'red',
+    },
+    {
+      id: '12',
+      title: 'Training Session',
+      start: '2025-11-19',
+      end: '2025-11-19',
+      color: 'green',
+    },
   ]);
 
   const handleEventDrop = (event: CalendarMonthEvent) => {
     console.log('Event dropped:', event);
     setEvents((prev) => prev.map((e) => (e.id === event.id ? event : e)));
+  };
+
+  const handleEventResize = (event: CalendarMonthEvent) => {
+    console.log('Event resized:', event);
+    setEvents((prev) =>
+      prev.map((e) => (e.id === event.id ? event : e))
+    );
   };
 
   const handleDateClick = (date: string) => {
@@ -80,6 +115,7 @@ export const CalendarMonthDefault = () => {
       initialDate="2025-11-01"
       events={events}
       onEventDrop={handleEventDrop}
+      onEventResize={handleEventResize}
       onDateClick={handleDateClick}
       onMonthChange={handleMonthChange}
     />
