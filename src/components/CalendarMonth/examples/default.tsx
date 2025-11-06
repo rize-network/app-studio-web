@@ -64,9 +64,7 @@ export const CalendarMonthDefault = () => {
 
   const handleEventDrop = (event: CalendarMonthEvent) => {
     console.log('Event dropped:', event);
-    setEvents((prev) =>
-      prev.map((e) => (e.id === event.id ? event : e))
-    );
+    setEvents((prev) => prev.map((e) => (e.id === event.id ? event : e)));
   };
 
   const handleDateClick = (date: string) => {

@@ -118,7 +118,10 @@ export const getCalendarDates = (
  * Get month name from date
  */
 export const getMonthName = (dateISO: string): string => {
-  return dateUTC(dateISO).toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
+  return dateUTC(dateISO).toLocaleDateString('en-US', {
+    month: 'long',
+    timeZone: 'UTC',
+  });
 };
 
 /**
@@ -236,6 +239,8 @@ export const layoutEvents = (
  * Check if a date is in the current month
  */
 export const isInMonth = (dateISO: string, monthDateISO: string): boolean => {
-  return getMonth(dateISO) === getMonth(monthDateISO) &&
-         getYear(dateISO) === getYear(monthDateISO);
+  return (
+    getMonth(dateISO) === getMonth(monthDateISO) &&
+    getYear(dateISO) === getYear(monthDateISO)
+  );
 };

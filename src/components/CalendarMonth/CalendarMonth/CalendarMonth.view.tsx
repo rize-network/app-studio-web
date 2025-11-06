@@ -167,7 +167,11 @@ export const CalendarMonth: React.FC<CalendarMonthProps> = ({
       setDropTargetDate(null);
 
       const dragState = dragStateRef.current;
-      if (!dragState.event || !dragState.originalStart || !dragState.originalEnd)
+      if (
+        !dragState.event ||
+        !dragState.originalStart ||
+        !dragState.originalEnd
+      )
         return;
 
       // Calculate date difference
