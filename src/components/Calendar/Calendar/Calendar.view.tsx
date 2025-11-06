@@ -47,6 +47,7 @@ interface CalendarViewProps {
   ) => React.ReactNode;
   onEventDrop?: (event: CalendarEvent, newStart: Date, newEnd: Date) => void;
   onEventResize?: (event: CalendarEvent, newStart: Date, newEnd: Date) => void;
+  onEventCreate?: (start: Date, end: Date) => void;
   views?: CalendarViews;
   height?: string | number;
 }
@@ -114,6 +115,33 @@ const checkEventCollision = (
   return event1Start < event2End && event2Start < event1End;
 };
 
+// Calculate grid column span for multi-day events in week view
+const getEventGridSpan = (
+  event: CalendarEventInternal,
+  weekDays: Date[]
+): { start: number; span: number } | null => {
+  const eventStart = event.startDate;
+  const eventEnd = event.endDate;
+
+  // Find which column the event starts in
+  let startColumn = -1;
+  let endColumn = -1;
+
+  weekDays.forEach((day, index) => {
+    if (isSameDay(day, eventStart) || (eventStart < day && startColumn === -1)) {
+      if (startColumn === -1) startColumn = index;
+    }
+    if (isSameDay(day, eventEnd) || eventEnd > day) {
+      endColumn = index;
+    }
+  });
+
+  if (startColumn === -1) return null;
+
+  const span = endColumn - startColumn + 1;
+  return { start: startColumn + 1, span: Math.max(1, span) }; // CSS Grid is 1-indexed
+};
+
 const renderDefaultEvent = (
   event: CalendarEventInternal,
   context: CalendarRenderEventContext,
@@ -124,9 +152,15 @@ const renderDefaultEvent = (
     e: React.MouseEvent<HTMLDivElement>,
     direction: 'start' | 'end'
   ) => void,
+  onHorizontalResizeStart?: (
+    e: React.MouseEvent<HTMLDivElement>,
+    direction: 'left' | 'right'
+  ) => void,
   useTimeBasedLayout: boolean = false,
   isResizing: boolean = false,
-  showCollisionError: boolean = false
+  showCollisionError: boolean = false,
+  weekDays?: Date[],
+  gridSpan?: { start: number; span: number } | null
 ) => {
   const timeRange =
     format(event.startDate, 'p') +
@@ -148,13 +182,27 @@ const renderDefaultEvent = (
     const height = getEventHeight(event.startDate, event.endDate);
     const minHeight = (MIN_EVENT_DURATION / 60) * HOUR_HEIGHT;
 
+    // Apply grid column span for multi-day events in week view
+    const gridStyles = gridSpan
+      ? {
+          gridColumn: `${gridSpan.start} / span ${gridSpan.span}`,
+          position: 'relative' as const,
+          top: `${topPosition}px`,
+          height: `${Math.max(height, minHeight)}px`,
+          marginLeft: '54px', // Offset for time labels
+          marginRight: '4px',
+        }
+      : {
+          position: 'absolute' as const,
+          top: `${topPosition}px`,
+          left: '54px',
+          right: '4px',
+          height: `${Math.max(height, minHeight)}px`,
+        };
+
     const eventCard = (
       <View
-        position="absolute"
-        top={`${topPosition}px`}
-        left="54px" // Offset for time labels (50px + 4px padding)
-        right="4px"
-        height={`${Math.max(height, minHeight)}px`}
+        {...gridStyles}
         draggable
         onDragStart={onDragStart}
         zIndex={isResizing ? 1000 : 1}
@@ -270,6 +318,82 @@ const renderDefaultEvent = (
               <View
                 width="40px"
                 height="3px"
+                borderRadius={2}
+                backgroundColor={COLORS.primaryBlue}
+                opacity={0}
+                on={{
+                  _hover: {
+                    opacity: 1,
+                  },
+                }}
+              />
+            </View>
+          )}
+
+          {/* Horizontal Resize handle - Left (for multi-day events) */}
+          {onHorizontalResizeStart && isMultiDay && (
+            <View
+              position="absolute"
+              left={0}
+              top={0}
+              bottom={0}
+              width="8px"
+              cursor="ew-resize"
+              onMouseDown={(e) => {
+                e.stopPropagation();
+                onHorizontalResizeStart(e, 'left');
+              }}
+              backgroundColor="transparent"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              on={{
+                _hover: {
+                  backgroundColor: `${COLORS.primaryBlue}40`,
+                },
+              }}
+            >
+              <View
+                width="3px"
+                height="40px"
+                borderRadius={2}
+                backgroundColor={COLORS.primaryBlue}
+                opacity={0}
+                on={{
+                  _hover: {
+                    opacity: 1,
+                  },
+                }}
+              />
+            </View>
+          )}
+
+          {/* Horizontal Resize handle - Right (for multi-day events) */}
+          {onHorizontalResizeStart && isMultiDay && (
+            <View
+              position="absolute"
+              right={0}
+              top={0}
+              bottom={0}
+              width="8px"
+              cursor="ew-resize"
+              onMouseDown={(e) => {
+                e.stopPropagation();
+                onHorizontalResizeStart(e, 'right');
+              }}
+              backgroundColor="transparent"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              on={{
+                _hover: {
+                  backgroundColor: `${COLORS.primaryBlue}40`,
+                },
+              }}
+            >
+              <View
+                width="3px"
+                height="40px"
                 borderRadius={2}
                 backgroundColor={COLORS.primaryBlue}
                 opacity={0}
@@ -498,6 +622,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
   renderEvent,
   onEventDrop,
   onEventResize,
+  onEventCreate,
   views,
   height = '800px',
 }) => {
@@ -505,7 +630,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
     useState<CalendarEventInternal | null>(null);
   const [resizingEvent, setResizingEvent] = useState<{
     event: CalendarEventInternal;
-    direction: 'start' | 'end';
+    direction: 'start' | 'end' | 'left' | 'right';
     originalStart: Date;
     originalEnd: Date;
     currentStart: Date;
@@ -684,6 +809,94 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     };
+
+  // Horizontal Resize Handlers for multi-day events (adjust days, not hours)
+  const handleHorizontalResizeStart =
+    (event: CalendarEventInternal, direction: 'left' | 'right', weekDays: Date[]) =>
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      setResizingEvent({
+        event,
+        direction,
+        originalStart: event.startDate,
+        originalEnd: event.endDate,
+        currentStart: event.startDate,
+        currentEnd: event.endDate,
+        isValid: true,
+        hasCollision: false,
+      });
+
+      // Track which day column the mouse is over
+      let currentDay: Date | null = null;
+
+      const handleMouseMove = (moveEvent: MouseEvent) => {
+        // Find which day column the mouse is over
+        const hoveredDay = weekDays.find((day) => {
+          const dayElement = document.elementFromPoint(moveEvent.clientX, moveEvent.clientY);
+          if (dayElement) {
+            const dayKey = formatDayKey(day);
+            return dayElement.closest(`[data-day="${dayKey}"]`) !== null;
+          }
+          return false;
+        });
+
+        if (!hoveredDay) return;
+        currentDay = hoveredDay;
+      };
+
+      const handleMouseUp = () => {
+        if (currentDay && onEventResize) {
+          let newStart = event.startDate;
+          let newEnd = event.endDate;
+
+          if (direction === 'left') {
+            // Adjust start date, preserve time
+            newStart = setHours(setMinutes(currentDay, getMinutes(event.startDate)), getHours(event.startDate));
+            if (newStart >= event.endDate) {
+              newStart = addDays(event.endDate, -1);
+            }
+          } else {
+            // Adjust end date, preserve time
+            newEnd = setHours(setMinutes(currentDay, getMinutes(event.endDate)), getHours(event.endDate));
+            if (newEnd <= event.startDate) {
+              newEnd = addDays(event.startDate, 1);
+            }
+          }
+
+          onEventResize(event, newStart, newEnd);
+        }
+
+        setResizingEvent(null);
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    };
+
+  // Double-click handler to create events
+  const handleDoubleClick = (day: Date, time?: number) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!onEventCreate) return;
+
+    let startDate: Date;
+    let endDate: Date;
+
+    if (time !== undefined) {
+      // Time-based view (day/week) - create 1-hour event at clicked time
+      startDate = setMinutes(setHours(day, time), 0);
+      endDate = addMinutes(startDate, 60);
+    } else {
+      // Month view - create all-day event
+      startDate = setHours(setMinutes(day, 0), 9); // 9 AM
+      endDate = addMinutes(startDate, 60); // 1 hour
+    }
+
+    onEventCreate(startDate, endDate);
+  };
 
   const handleDayMouseEnter = (day: Date) => {
     if (resizingEvent && onEventResize && view === 'month') {
@@ -947,6 +1160,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
               return (
                 <View
                   key={dayKey}
+                  data-day={dayKey}
                   position="relative"
                   borderWidth={0.5}
                   borderStyle="solid"
@@ -972,46 +1186,93 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                     </Text>
                   </Horizontal>
 
-                  {/* Time grid - droppable area */}
+                  {/* Time grid - droppable area with double-click to create */}
                   <View
                     position="relative"
                     onDragOver={handleTimeGridDragOver}
                     onDrop={handleTimeGridDrop(day)}
+                    onDoubleClick={handleDoubleClick(day, 9)} // Default to 9 AM for now
                   >
                     {renderTimeGrid()}
 
-                    {/* Events positioned absolutely based on time */}
+                    {/* Events positioned based on time - may span multiple columns */}
                     <View position="absolute" top={0} left={0} right={0} bottom={0} pointerEvents="none">
+                      {/* Show multi-day events that span across this week */}
+                      {view === 'week' && weeks[0].map((weekDay) => {
+                        const weekDayKey = formatDayKey(weekDay);
+                        const weekEvents = eventsByDay.get(weekDayKey) ?? [];
+
+                        return weekEvents
+                          .filter((event) => {
+                            const isMultiDay = isMultiDayEvent(event);
+                            if (!isMultiDay) return false;
+                            // Only render once for each multi-day event
+                            const spanInfo = getEventSpanInfo(event, weekDay);
+                            return spanInfo && spanInfo.isFirst;
+                          })
+                          .map((event) => {
+                            const gridSpan = getEventGridSpan(event, weeks[0]);
+                            const key = `multi-${weekDayKey}-${event.id ?? event.title}-${event.startDate.getTime()}`;
+                            const isResizingThis = resizingEvent?.event.id === event.id;
+                            const showCollisionError = isResizingThis && resizingEvent?.hasCollision;
+
+                            return renderDefaultEvent(
+                              event,
+                              context,
+                              views,
+                              key,
+                              onEventDrop ? handleTimeDragStart(event) : undefined,
+                              onEventResize
+                                ? (e, direction) =>
+                                    handleTimeBasedResizeStart(event, direction, weekDay)(e)
+                                : undefined,
+                              onEventResize
+                                ? (e, direction) =>
+                                    handleHorizontalResizeStart(event, direction, weeks[0])(e)
+                                : undefined,
+                              true, // useTimeBasedLayout
+                              isResizingThis || false,
+                              showCollisionError || false,
+                              weeks[0],
+                              gridSpan
+                            );
+                          });
+                      })}
+
+                      {/* Regular events for this day */}
                       {events.length > 0 &&
-                        events.map((event) => {
-                          const key = `${formatDayKey(day)}-${
-                            event.id ?? event.title
-                          }-${event.startDate.getTime()}`;
+                        events
+                          .filter((event) => !isMultiDayEvent(event) || view === 'day')
+                          .map((event) => {
+                            const key = `${formatDayKey(day)}-${
+                              event.id ?? event.title
+                            }-${event.startDate.getTime()}`;
 
-                          const isResizingThis = resizingEvent?.event.id === event.id;
-                          const showCollisionError = isResizingThis && resizingEvent?.hasCollision;
+                            const isResizingThis = resizingEvent?.event.id === event.id;
+                            const showCollisionError = isResizingThis && resizingEvent?.hasCollision;
 
-                          if (renderEvent) {
-                            const rendered = renderEvent(event, context);
-                            // Custom render not supported for time-based layout
-                            // Fall back to default
-                          }
+                            if (renderEvent) {
+                              const rendered = renderEvent(event, context);
+                              // Custom render not supported for time-based layout
+                              // Fall back to default
+                            }
 
-                          return renderDefaultEvent(
-                            event,
-                            context,
-                            views,
-                            key,
-                            onEventDrop ? handleTimeDragStart(event) : undefined,
-                            onEventResize
-                              ? (e, direction) =>
-                                  handleTimeBasedResizeStart(event, direction, day)(e)
-                              : undefined,
-                            true, // useTimeBasedLayout
-                            isResizingThis || false,
-                            showCollisionError || false
-                          );
-                        })}
+                            return renderDefaultEvent(
+                              event,
+                              context,
+                              views,
+                              key,
+                              onEventDrop ? handleTimeDragStart(event) : undefined,
+                              onEventResize
+                                ? (e, direction) =>
+                                    handleTimeBasedResizeStart(event, direction, day)(e)
+                                : undefined,
+                              undefined, // No horizontal resize for single-day events
+                              true, // useTimeBasedLayout
+                              isResizingThis || false,
+                              showCollisionError || false
+                            );
+                          })}
                     </View>
                   </View>
                 </View>
