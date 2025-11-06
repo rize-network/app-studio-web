@@ -1076,76 +1076,60 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
         </Horizontal>
       </Vertical>
 
-      {/* Render time-based grid for day/week views */}
+      {/* Render time-based grid for day/week views - Google Calendar style */}
       {(view === 'day' || view === 'week') ? (
-        <Vertical gap={0} flex={1} overflow="auto" ref={timeGridRef} {...views?.grid}>
-          {/* Time-based table layout like Google Calendar */}
+        <View
+          flex={1}
+          overflow="auto"
+          position="relative"
+          ref={timeGridRef}
+          borderWidth={0.5}
+          borderStyle="solid"
+          borderColor="color.gray.300"
+          borderRadius={8}
+          {...views?.grid}
+        >
+          {/* Week grid - day columns */}
           <View
             display="grid"
-            gridTemplateColumns={view === 'day' ? '50px 1fr' : `50px repeat(${weekdayLabels.length}, 1fr)`}
-            gridTemplateRows={`auto repeat(${HOURS_IN_DAY}, ${HOUR_HEIGHT}px)`}
+            gridTemplateColumns={view === 'day' ? '60px 1fr' : `60px repeat(${weekdayLabels.length}, 1fr)`}
+            gap={0}
             position="relative"
-            borderWidth={0.5}
-            borderStyle="solid"
-            borderColor="color.gray.300"
+            minHeight={`${HOURS_IN_DAY * HOUR_HEIGHT}px`}
           >
-            {/* Header row - Day names */}
+            {/* Time labels column */}
             <View
-              gridColumn="1"
-              gridRow="1"
-              borderBottomWidth={0.5}
+              position="relative"
               borderRightWidth={0.5}
               borderStyle="solid"
               borderColor="color.gray.300"
               backgroundColor="color.white"
-              position="sticky"
-              top={0}
-              zIndex={20}
-            />
-            {weeks[0].map((day, dayIndex) => {
-              const dayKey = formatDayKey(day);
-              const isToday = isSameDay(day, today);
+            >
+              {/* Empty space for header alignment */}
+              <View
+                height="60px"
+                borderBottomWidth={0.5}
+                borderStyle="solid"
+                borderColor="color.gray.300"
+                position="sticky"
+                top={0}
+                zIndex={20}
+                backgroundColor="color.white"
+              />
 
-              return (
+              {/* Time labels */}
+              {Array.from({ length: HOURS_IN_DAY }, (_, hour) => (
                 <View
-                  key={`header-${dayKey}`}
-                  data-day={dayKey}
-                  gridColumn={dayIndex + 2}
-                  gridRow="1"
-                  padding="6px 8px"
-                  borderBottomWidth={0.5}
-                  borderRightWidth={dayIndex < weeks[0].length - 1 ? 0.5 : 0}
-                  borderStyle="solid"
-                  borderColor="color.gray.300"
-                  backgroundColor={isToday ? COLORS.lightBlue : 'color.white'}
-                  position="sticky"
-                  top={0}
-                  zIndex={20}
-                >
-                  <Text fontWeight="600" fontSize={12} color={isToday ? COLORS.darkBlue : 'color.gray.900'}>
-                    {format(day, view === 'day' ? 'EEEE, MMMM d' : 'EEE d')}
-                  </Text>
-                </View>
-              );
-            })}
-
-            {/* Time grid rows */}
-            {Array.from({ length: HOURS_IN_DAY }, (_, hour) => (
-              <React.Fragment key={`hour-${hour}`}>
-                {/* Time label column */}
-                <View
-                  gridColumn="1"
-                  gridRow={hour + 2}
-                  paddingTop={0}
-                  paddingRight={4}
-                  borderBottomWidth={0.5}
-                  borderRightWidth={0.5}
-                  borderStyle="solid"
-                  borderColor="color.gray.300"
-                  backgroundColor="color.white"
+                  key={`time-${hour}`}
+                  height={`${HOUR_HEIGHT}px`}
+                  paddingRight={8}
                   display="flex"
                   alignItems="flex-start"
                   justifyContent="flex-end"
+                  borderBottomWidth={0.5}
+                  borderStyle="solid"
+                  borderColor="color.gray.300"
+                  backgroundColor="color.white"
                   position="sticky"
                   left={0}
                   zIndex={10}
@@ -1154,42 +1138,100 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                     {format(setHours(new Date(), hour), 'HH:mm')}
                   </Text>
                 </View>
+              ))}
+            </View>
 
-                {/* Day cells */}
-                {weeks[0].map((day, dayIndex) => {
-                  const dayKey = formatDayKey(day);
-                  const isToday = isSameDay(day, today);
+            {/* Day columns */}
+            {weeks[0].map((day, dayIndex) => {
+              const dayKey = formatDayKey(day);
+              const isToday = isSameDay(day, today);
 
-                  return (
+              return (
+                <View
+                  key={`day-col-${dayKey}`}
+                  data-day={dayKey}
+                  position="relative"
+                  borderRightWidth={dayIndex < weeks[0].length - 1 ? 0.5 : 0}
+                  borderStyle="solid"
+                  borderColor="color.gray.300"
+                  display="flex"
+                  flexDirection="column"
+                >
+                  {/* Day header */}
+                  <View
+                    height="60px"
+                    padding="8px"
+                    textAlign="center"
+                    borderBottomWidth={0.5}
+                    borderStyle="solid"
+                    borderColor="color.gray.300"
+                    backgroundColor={isToday ? COLORS.lightBlue : 'color.gray.50'}
+                    position="sticky"
+                    top={0}
+                    zIndex={20}
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    gap={4}
+                  >
+                    <Text
+                      fontSize={11}
+                      fontWeight="500"
+                      color="color.gray.600"
+                      textTransform="uppercase"
+                      letterSpacing="0.5px"
+                    >
+                      {format(day, 'EEE')}
+                    </Text>
                     <View
-                      key={`cell-${dayKey}-${hour}`}
-                      data-day={dayKey}
-                      data-hour={hour}
-                      gridColumn={dayIndex + 2}
-                      gridRow={hour + 2}
-                      borderBottomWidth={0.5}
-                      borderRightWidth={dayIndex < weeks[0].length - 1 ? 0.5 : 0}
-                      borderStyle="solid"
-                      borderColor="color.gray.300"
-                      backgroundColor={isToday ? 'rgba(227, 242, 253, 0.3)' : 'color.white'}
-                      position="relative"
-                      onDragOver={handleTimeGridDragOver}
-                      onDrop={handleTimeGridDrop(day)}
-                      onDoubleClick={handleDoubleClick(day, hour)}
-                    />
-                  );
-                })}
-              </React.Fragment>
-            ))}
+                      width="36px"
+                      height="36px"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      borderRadius="50%"
+                      backgroundColor={isToday ? COLORS.primaryBlue : 'transparent'}
+                      color={isToday ? 'white' : 'color.gray.900'}
+                    >
+                      <Text fontSize={13} fontWeight={isToday ? '500' : '400'}>
+                        {format(day, 'd')}
+                      </Text>
+                    </View>
+                  </View>
 
-            {/* Events layer - positioned absolutely over the grid */}
+                  {/* Day time grid */}
+                  <View flex={1} position="relative">
+                    {Array.from({ length: HOURS_IN_DAY }, (_, hour) => (
+                      <View
+                        key={`cell-${dayKey}-${hour}`}
+                        data-hour={hour}
+                        height={`${HOUR_HEIGHT}px`}
+                        borderBottomWidth={0.5}
+                        borderStyle="solid"
+                        borderColor="color.gray.300"
+                        backgroundColor={isToday ? 'rgba(227, 242, 253, 0.1)' : 'color.white'}
+                        onDragOver={handleTimeGridDragOver}
+                        onDrop={handleTimeGridDrop(day)}
+                        onDoubleClick={handleDoubleClick(day, hour)}
+                      />
+                    ))}
+                  </View>
+                </View>
+              );
+            })}
+
+            {/* Events layer - absolutely positioned over the entire grid */}
             <View
-              gridColumn={`1 / -1`}
-              gridRow={`2 / -1`}
-              position="relative"
+              position="absolute"
+              top="60px"
+              left="60px"
+              right={0}
+              bottom={0}
               pointerEvents="none"
+              zIndex={100}
             >
-              {/* Multi-day events that span across days */}
+              {/* Multi-day events spanning across columns */}
               {view === 'week' && weeks[0].map((weekDay) => {
                 const weekDayKey = formatDayKey(weekDay);
                 const weekEvents = eventsByDay.get(weekDayKey) ?? [];
@@ -1209,21 +1251,24 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                     const isResizingThis = resizingEvent?.event.id === event.id;
                     const showCollisionError = isResizingThis && resizingEvent?.hasCollision;
 
-                    // Calculate position based on time
+                    // Calculate position
                     const topPosition = getPositionFromTime(event.startDate);
                     const height = getEventHeight(event.startDate, event.endDate);
                     const minHeight = (MIN_EVENT_DURATION / 60) * HOUR_HEIGHT;
+
+                    // Calculate horizontal position (percentage of week width)
+                    const dayWidth = 100 / weeks[0].length;
+                    const leftPercent = (gridSpan.start - 1) * dayWidth;
+                    const widthPercent = gridSpan.span * dayWidth;
 
                     return (
                       <View
                         key={key}
                         position="absolute"
                         top={`${topPosition}px`}
-                        left={`${(gridSpan.start - 1) * (100 / weeks[0].length)}%`}
-                        width={`${gridSpan.span * (100 / weeks[0].length)}%`}
+                        left={`calc(${leftPercent}% + 6px)`}
+                        width={`calc(${widthPercent}% - 12px)`}
                         height={`${Math.max(height, minHeight)}px`}
-                        paddingLeft="2px"
-                        paddingRight="2px"
                         pointerEvents="auto"
                         zIndex={isResizingThis ? 1000 : 100}
                       >
@@ -1267,16 +1312,18 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
                     const height = getEventHeight(event.startDate, event.endDate);
                     const minHeight = (MIN_EVENT_DURATION / 60) * HOUR_HEIGHT;
 
+                    // Calculate horizontal position for single day
+                    const dayWidth = 100 / weeks[0].length;
+                    const leftPercent = dayIndex * dayWidth;
+
                     return (
                       <View
                         key={key}
                         position="absolute"
                         top={`${topPosition}px`}
-                        left={`${(dayIndex / weeks[0].length) * 100}%`}
-                        width={`${(1 / weeks[0].length) * 100}%`}
+                        left={`calc(${leftPercent}% + 6px)`}
+                        width={`calc(${dayWidth}% - 12px)`}
                         height={`${Math.max(height, minHeight)}px`}
-                        paddingLeft="2px"
-                        paddingRight="2px"
                         pointerEvents="auto"
                         zIndex={isResizingThis ? 1000 : 100}
                       >
@@ -1300,7 +1347,7 @@ const CalendarViewComponent: React.FC<CalendarViewProps> = ({
               })}
             </View>
           </View>
-        </Vertical>
+        </View>
       ) : (
         // Month view - original grid layout
         <Vertical gap={12} flex={1} overflow="auto" {...views?.grid}>
