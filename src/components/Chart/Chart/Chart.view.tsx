@@ -176,7 +176,6 @@ export const ChartView: React.FC<ChartProps> = ({
     }
   };
 
-
   // Default loading indicator
   const renderLoadingIndicator = () => {
     if (!isLoading) return null;

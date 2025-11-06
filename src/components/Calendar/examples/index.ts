@@ -12,3 +12,4 @@ export { CustomStyledCalendar } from './customStyles';
 export { FixedHeightCalendar } from './fixedHeight';
 export { AllViewsCustomization } from './allViewsCustomization';
 export { CalendarMultiDayDragDrop } from './multiDayDragDrop';
+export { CalendarTimeBasedResize } from './timeBasedResize';
