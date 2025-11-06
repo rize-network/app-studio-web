@@ -84,7 +84,6 @@ export * from './Carousel/Carousel/Carousel.props';
 export * from './Chart/Chart/Chart.props';
 export * from './Calendar/Calendar/Calendar.props';
 export * from './CalendarWeek/CalendarWeek/CalendarWeek.props';
-export * from './Calendar/Calendar/Calendar.props';
 export * from './CookieConsent/CookieConsent/CookieConsent.props';
 export * from './ContextMenu/ContextMenu/ContextMenu.props';
 export * from './Form/Select/Select/Select.props';
