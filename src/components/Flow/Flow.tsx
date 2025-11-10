@@ -43,6 +43,7 @@ const FlowComponent: React.FC<FlowProps> = ({
   size = 'md',
   variant = 'default',
   direction = 'vertical',
+  graphOptions,
   showControls = true,
   allowAddingNodes = true,
   // allowDeletingNodes = true, // Prop exists, but delete functionality not fully wired in UI
@@ -74,6 +75,7 @@ const FlowComponent: React.FC<FlowProps> = ({
     onNodeSelect,
     selectedNodeId,
     direction,
+    graphOptions,
     initialViewport,
     viewport: controlledViewport,
     onViewportChange,
