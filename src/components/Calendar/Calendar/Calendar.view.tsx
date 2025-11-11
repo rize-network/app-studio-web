@@ -13,7 +13,6 @@ import {
   getPreviousMonth,
   getNextMonth,
   addDateDays,
-  daysBetweenUTC,
   isInMonth,
   getFirstDayOfMonth,
   getDayOfWeek,
@@ -36,8 +35,8 @@ import {
   dropTargetStyles,
   buttonStyles,
   iconButtonStyles,
+  dayDateStyles,
 } from './Calendar.style';
-import { dayDateStyles } from 'src/components/CalendarWeek/CalendarWeek/CalendarWeek.style';
 
 interface DragState {
   isDragging: boolean;
@@ -80,6 +79,25 @@ const ResizeHandle: React.FC<ResizeHandleProps> = ({
     />
   );
 };
+
+const MONTH_EVENT_ROW_HEIGHT = 22;
+const MONTH_EVENT_ROW_GAP = 4;
+const MONTH_EVENT_TOP_OFFSET = 32;
+
+interface MonthWeekSegment extends PositionedEvent {
+  segmentStartDay: number;
+  segmentEndDay: number;
+  segmentDuration: number;
+  segmentRow: number;
+  weekIndex: number;
+}
+
+interface MonthWeekData {
+  weekIndex: number;
+  dates: string[];
+  segments: MonthWeekSegment[];
+  rowCount: number;
+}
 
 export const Calendar: React.FC<CalendarProps> = ({
   initialDate = new Date(),
@@ -157,11 +175,86 @@ export const Calendar: React.FC<CalendarProps> = ({
     }
   }, [currentDate, currentView, currentMonth, weekStartsOn]);
 
+  const monthWeeks = useMemo(() => {
+    const chunks: string[][] = [];
+    for (let i = 0; i < calendarDates.length; i += 7) {
+      chunks.push(calendarDates.slice(i, i + 7));
+    }
+    return chunks;
+  }, [calendarDates]);
+
   // Layout events
   const { items: positionedEvents } = useMemo(
     () => layoutEvents(localEvents, calendarDates),
     [localEvents, calendarDates]
   );
+
+  const monthWeeksWithEvents = useMemo<MonthWeekData[]>(() => {
+    return monthWeeks.map((dates, weekIndex) => {
+      const weekStartIdx = weekIndex * 7;
+      const weekEndIdx = weekStartIdx + dates.length - 1;
+
+      const segments = positionedEvents
+        .filter(
+          (event) =>
+            !(event.startDay > weekEndIdx || event.endDay < weekStartIdx)
+        )
+        .map<MonthWeekSegment>((event) => {
+          const segmentStart = Math.max(event.startDay, weekStartIdx);
+          const segmentEnd = Math.min(event.endDay, weekEndIdx);
+
+          return {
+            ...event,
+            weekIndex,
+            segmentStartDay: segmentStart - weekStartIdx,
+            segmentEndDay: segmentEnd - weekStartIdx,
+            segmentDuration: segmentEnd - segmentStart + 1,
+            segmentRow: 0,
+          };
+        });
+
+      segments.sort((a, b) => {
+        if (a.segmentStartDay !== b.segmentStartDay) {
+          return a.segmentStartDay - b.segmentStartDay;
+        }
+        return b.segmentDuration - a.segmentDuration;
+      });
+
+      const rows: MonthWeekSegment[][] = [];
+      segments.forEach((segment) => {
+        let placed = false;
+        for (let rowIdx = 0; rowIdx < rows.length; rowIdx++) {
+          const row = rows[rowIdx];
+          const conflict = row.some(
+            (existing) =>
+              !(
+                segment.segmentStartDay > existing.segmentEndDay ||
+                segment.segmentEndDay < existing.segmentStartDay
+              )
+          );
+
+          if (!conflict) {
+            segment.segmentRow = rowIdx;
+            row.push(segment);
+            placed = true;
+            break;
+          }
+        }
+
+        if (!placed) {
+          segment.segmentRow = rows.length;
+          rows.push([segment]);
+        }
+      });
+
+      return {
+        weekIndex,
+        dates,
+        segments,
+        rowCount: rows.length,
+      };
+    });
+  }, [monthWeeks, positionedEvents]);
 
   // Get day names
   const dayNames = useMemo(() => getDayNames(weekStartsOn), [weekStartsOn]);
@@ -240,12 +333,10 @@ export const Calendar: React.FC<CalendarProps> = ({
     [onEventAdd]
   );
 
-  // Handle event drag start
-  const handleEventDragStart = useCallback(
-    (e: React.DragEvent, event: PositionedEvent) => {
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('eventId', event.id);
-
+  // Handle mouse down on event (start dragging)
+  const handleEventMouseDown = useCallback(
+    (e: React.MouseEvent, event: PositionedEvent) => {
+      e.preventDefault();
       dragStateRef.current = {
         isDragging: true,
         isResizing: false,
@@ -261,80 +352,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     []
   );
 
-  // Handle drag over day cell
-  const handleDragOver = useCallback((e: React.DragEvent, dayIndex: number) => {
-    e.preventDefault();
-    e.dataTransfer.dropEffect = 'move';
-    setDropTargetDays([dayIndex]);
-  }, []);
-
-  // Handle drag leave
-  const handleDragLeave = useCallback(() => {
-    setDropTargetDays([]);
-  }, []);
-
-  // Handle drop on day cell
-  const handleDrop = useCallback(
-    (e: React.DragEvent, dayIndex: number) => {
-      e.preventDefault();
-      setDropTargetDays([]);
-
-      const dragState = dragStateRef.current;
-      if (
-        !dragState.event ||
-        !dragState.originalStart ||
-        !dragState.originalEnd
-      )
-        return;
-
-      // Calculate date difference
-      const targetDate = calendarDates[dayIndex];
-      if (!targetDate) return;
-
-      const daysDiff = daysBetweenUTC(
-        targetDate,
-        dragState.originalStart.slice(0, 10)
-      );
-
-      // Update event dates
-      const newStart = addDateDays(
-        dragState.originalStart.slice(0, 10),
-        daysDiff
-      );
-      const newEnd = addDateDays(dragState.originalEnd.slice(0, 10), daysDiff);
-
-      const updatedEvent: CalendarEvent = {
-        ...dragState.event,
-        start: newStart,
-        end: newEnd,
-      };
-
-      // Update local events
-      const updatedEvents = localEvents.map((ev) =>
-        ev.id === dragState.event!.id ? updatedEvent : ev
-      );
-      setLocalEvents(updatedEvents);
-
-      // Call callback
-      onEventDrop?.(updatedEvent);
-
-      // Reset drag state
-      dragStateRef.current = {
-        isDragging: false,
-        isResizing: false,
-        resizeDirection: null,
-        event: null,
-        startX: 0,
-        startDay: 0,
-        startDuration: 0,
-        originalStart: null,
-        originalEnd: null,
-      };
-    },
-    [localEvents, calendarDates, onEventDrop]
-  );
-
-  // Handle resize start (FIXED - using pixel-based approach like CalendarWeek)
+  // Handle resize start
   const handleResizeStart = useCallback(
     (
       e: React.MouseEvent,
@@ -359,7 +377,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     []
   );
 
-  // Handle mouse move during resize (FIXED - using pixel-based calculation)
+  // Handle mouse move during resize or drag
   const handleMouseMove = useCallback(
     (e: MouseEvent) => {
       const dragState = dragStateRef.current;
@@ -561,87 +579,145 @@ export const Calendar: React.FC<CalendarProps> = ({
 
       {/* Month grid */}
       <View ref={gridRef} {...monthGridStyles} {...views.monthGrid}>
-        {calendarDates.map((dateISO, index) => {
-          const dateNum = getDateNumber(dateISO);
-          const isToday = dateISO === today;
-          const isSelected = dateISO === selectedDate;
-          const isCurrentMonth = isInMonth(dateISO, currentMonth);
-          const isDropTarget = dropTargetDays.includes(index);
-          const dayEvents = eventsByDate[dateISO] || [];
+        {monthWeeksWithEvents.map((week) => {
+          const weekStartIdx = week.weekIndex * 7;
+          const weekEndIdx = weekStartIdx + week.dates.length - 1;
 
           return (
-            <View
-              key={dateISO}
-              data-date={dateISO}
-              {...dayCellStyles}
-              {...(!isCurrentMonth && otherMonthDayCellStyles)}
-              {...(isDropTarget && dropTargetStyles)}
-              onClick={() => handleDateClick(dateISO)}
-              onDoubleClick={() => handleDateDoubleClick(dateISO)}
-              onDragOver={(e) => handleDragOver(e, index)}
-              onDragLeave={handleDragLeave}
-              onDrop={(e) => handleDrop(e, index)}
-              {...views.dayCell}
-            >
-              <View
-                {...dayNumberStyles}
-                {...(isToday && todayDayNumberStyles)}
-                {...(isSelected && !isToday && selectedDayNumberStyles)}
-                style={{ cursor: 'pointer' }}
-                {...views.dayNumber}
-              >
-                {dateNum}
-              </View>
-
-              <View {...eventsAreaStyles} {...views.eventsArea}>
-                {dayEvents.map((event: any) => {
-                  const colorConfig = EVENT_COLORS[event.color || 'blue'];
-                  const isMultiDay = event.duration > 1;
-                  const isFirstDay = event.isFirstDay !== false;
-
-                  if (!isFirstDay) return null;
+            <View key={`week-${week.weekIndex}`} position="relative">
+              <View display="grid" gridTemplateColumns="repeat(7, 1fr)">
+                {week.dates.map((dateISO, dayOffset) => {
+                  const dateNum = getDateNumber(dateISO);
+                  const isToday = dateISO === today;
+                  const isSelected = dateISO === selectedDate;
+                  const isCurrentMonth = isInMonth(dateISO, currentMonth);
+                  const dayIndex = weekStartIdx + dayOffset;
+                  const isDropTarget = dropTargetDays.includes(dayIndex);
 
                   return (
                     <View
-                      key={event.id}
-                      position="relative"
-                      {...eventStyles}
-                      backgroundColor={colorConfig.background}
-                      borderLeftColor={colorConfig.border}
-                      color={colorConfig.text}
-                      draggable
-                      onDragStart={(e) => handleEventDragStart(e, event)}
-                      title={
-                        isMultiDay
-                          ? `${event.title} (${event.duration} days)`
-                          : event.title
-                      }
-                      {...views.event}
+                      key={dateISO}
+                      data-date={dateISO}
+                      {...dayCellStyles}
+                      {...(!isCurrentMonth && otherMonthDayCellStyles)}
+                      {...(isDropTarget && dropTargetStyles)}
+                      onClick={() => handleDateClick(dateISO)}
+                      onDoubleClick={() => handleDateDoubleClick(dateISO)}
+                      {...views.dayCell}
                     >
                       <View
-                        overflow="hidden"
-                        textOverflow="ellipsis"
-                        whiteSpace="nowrap"
-                        width="100%"
+                        {...dayNumberStyles}
+                        {...(isToday && todayDayNumberStyles)}
+                        {...(isSelected && !isToday && selectedDayNumberStyles)}
+                        style={{ cursor: 'pointer' }}
+                        {...views.dayNumber}
                       >
-                        {event.title}
-                        {isMultiDay && ` (${event.duration}d)`}
+                        {dateNum}
                       </View>
-
-                      <ResizeHandle
-                        direction="left"
-                        onMouseDown={(e) => handleResizeStart(e, event, 'left')}
-                      />
-                      <ResizeHandle
-                        direction="right"
-                        onMouseDown={(e) =>
-                          handleResizeStart(e, event, 'right')
-                        }
-                      />
                     </View>
                   );
                 })}
               </View>
+
+              {week.segments.length > 0 && (
+                <View
+                  position="absolute"
+                  left={0}
+                  right={0}
+                  top={MONTH_EVENT_TOP_OFFSET}
+                  pointerEvents="none"
+                >
+                  {week.segments.map((event) => {
+                    const colorConfig = EVENT_COLORS[event.color || 'blue'];
+                    const dayWidth = 100 / week.dates.length;
+                    const left = event.segmentStartDay * dayWidth;
+                    const width = event.segmentDuration * dayWidth;
+
+                    const isDragging =
+                      dragStateRef.current.isDragging &&
+                      dragStateRef.current.event?.id === event.id;
+                    const isResizing =
+                      dragStateRef.current.isResizing &&
+                      dragStateRef.current.event?.id === event.id;
+
+                    const showLeftHandle =
+                      event.startDay >= weekStartIdx &&
+                      event.startDay <= weekEndIdx &&
+                      event.segmentStartDay === event.startDay - weekStartIdx;
+                    const showRightHandle =
+                      event.endDay >= weekStartIdx &&
+                      event.endDay <= weekEndIdx &&
+                      event.segmentEndDay === event.endDay - weekStartIdx;
+
+                    return (
+                      <View
+                        key={`${event.id}-${event.weekIndex}-${event.segmentStartDay}`}
+                        position="absolute"
+                        height={MONTH_EVENT_ROW_HEIGHT}
+                        display="flex"
+                        alignItems="center"
+                        paddingLeft={8}
+                        paddingRight={8}
+                        borderRadius={4}
+                        backgroundColor={colorConfig.background}
+                        borderLeft="3px solid"
+                        borderLeftColor={colorConfig.border}
+                        color={colorConfig.text}
+                        fontSize={11}
+                        fontWeight={500}
+                        overflow="hidden"
+                        cursor={isDragging ? 'grabbing' : 'grab'}
+                        opacity={isDragging || isResizing ? 0.7 : 1}
+                        boxShadow={
+                          isDragging || isResizing
+                            ? '0 4px 12px rgba(0,0,0,0.3)'
+                            : '0 1px 2px rgba(0,0,0,0.1)'
+                        }
+                        transition={
+                          isDragging || isResizing ? 'none' : 'box-shadow 0.2s'
+                        }
+                        pointerEvents="auto"
+                        userSelect="none"
+                        left={`calc(${left}% + 4px)`}
+                        width={`calc(${width}% - 8px)`}
+                        top={`${
+                          event.segmentRow *
+                          (MONTH_EVENT_ROW_HEIGHT + MONTH_EVENT_ROW_GAP)
+                        }px`}
+                        onMouseDown={(e) => handleEventMouseDown(e, event)}
+                        title={event.title}
+                        {...views.event}
+                      >
+                        <View
+                          overflow="hidden"
+                          textOverflow="ellipsis"
+                          whiteSpace="nowrap"
+                          width="100%"
+                        >
+                          {event.title}
+                        </View>
+
+                        {showLeftHandle && (
+                          <ResizeHandle
+                            direction="left"
+                            onMouseDown={(e) =>
+                              handleResizeStart(e, event, 'left')
+                            }
+                          />
+                        )}
+                        {showRightHandle && (
+                          <ResizeHandle
+                            direction="right"
+                            onMouseDown={(e) =>
+                              handleResizeStart(e, event, 'right')
+                            }
+                          />
+                        )}
+                      </View>
+                    );
+                  })}
+                </View>
+              )}
             </View>
           );
         })}
@@ -701,9 +777,6 @@ export const Calendar: React.FC<CalendarProps> = ({
               minHeight={400}
               onClick={() => handleDateClick(dateISO)}
               onDoubleClick={() => handleDateDoubleClick(dateISO)}
-              onDragOver={(e) => handleDragOver(e, index)}
-              onDragLeave={handleDragLeave}
-              onDrop={(e) => handleDrop(e, index)}
             >
               <View {...eventsAreaStyles} {...views.eventsArea}>
                 {dayEvents.map((event: any) => {
@@ -711,6 +784,13 @@ export const Calendar: React.FC<CalendarProps> = ({
                   const isFirstDay = event.isFirstDay !== false;
 
                   if (!isFirstDay) return null;
+
+                  const isDragging =
+                    dragStateRef.current.isDragging &&
+                    dragStateRef.current.event?.id === event.id;
+                  const isResizing =
+                    dragStateRef.current.isResizing &&
+                    dragStateRef.current.event?.id === event.id;
 
                   return (
                     <View
@@ -720,8 +800,18 @@ export const Calendar: React.FC<CalendarProps> = ({
                       backgroundColor={colorConfig.background}
                       borderLeftColor={colorConfig.border}
                       color={colorConfig.text}
-                      draggable
-                      onDragStart={(e) => handleEventDragStart(e, event)}
+                      cursor={isDragging ? 'grabbing' : 'grab'}
+                      opacity={isDragging || isResizing ? 0.7 : 1}
+                      boxShadow={
+                        isDragging || isResizing
+                          ? '0 4px 12px rgba(0,0,0,0.3)'
+                          : '0 1px 2px rgba(0,0,0,0.1)'
+                      }
+                      transition={
+                        isDragging || isResizing ? 'none' : 'box-shadow 0.2s'
+                      }
+                      userSelect="none"
+                      onMouseDown={(e) => handleEventMouseDown(e, event)}
                       title={event.title}
                       {...views.event}
                     >
