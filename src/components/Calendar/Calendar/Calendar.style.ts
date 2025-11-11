@@ -80,8 +80,8 @@ export const navButtonStyles: ViewProps = {
  * Month grid styles (7 columns for days)
  */
 export const monthGridStyles: ViewProps = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(7, 1fr)',
+  display: 'flex',
+  flexDirection: 'column',
   backgroundColor: 'color.white',
 };
 
@@ -114,14 +114,32 @@ export const weekdayLabelStyles: ViewProps = {
  */
 export const dayCellStyles: ViewProps = {
   border: '1px solid',
-  borderColor: 'color.gray.200',
-  minHeight: 100,
-  padding: 8,
-  paddingTop: 4,
+  borderColor: 'color.gray.100',
+  minHeight: 120,
+  padding: 4,
+  paddingTop: 2,
   backgroundColor: 'color.white',
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
+};
+
+/**
+ * Day date styles (the circular number)
+ */
+export const dayDateStyles: ViewProps = {
+  width: 36,
+  height: 36,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '50%',
+  fontSize: 13,
+  fontWeight: 400,
+  color: 'color.gray.900',
+  cursor: 'pointer',
+  transition: 'all 0.2s',
+  border: '2px solid transparent',
 };
 
 /**

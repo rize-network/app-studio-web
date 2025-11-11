@@ -1,0 +1,156 @@
+# KanbanBoard
+
+A flexible Kanban board component for managing tasks and workflows. Features drag-and-drop functionality for cards between columns, customizable card and column rendering, and comprehensive styling options.
+
+### **Import**
+  ```tsx
+  import { KanbanBoard } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { KanbanBoard } from '../KanbanBoard';
+import { KanbanBoardColumn } from '../KanbanBoard/KanbanBoard.props';
+
+export const DefaultKanbanBoard = () => {
+  const [columns, setColumns] = useState<KanbanBoardColumn[]>([
+    {
+      id: 'todo',
+      title: 'To Do',
+      cards: [
+        { id: '1', title: 'Design System', description: 'Create a new design system.' },
+        { id: '2', title: 'API Integration', description: 'Integrate with the new API.' },
+      ],
+    },
+    {
+      id: 'inprogress',
+      title: 'In Progress',
+      cards: [
+        { id: '3', title: 'User Dashboard', description: 'Develop the main user dashboard.' },
+      ],
+    },
+    {
+      id: 'done',
+      title: 'Done',
+      cards: [
+        { id: '4', title: 'Project Setup', description: 'Initial project setup and configuration.' },
+      ],
+    },
+  ]);
+
+  return <KanbanBoard columns={columns} onChange={setColumns} />;
+};
+```
+
+### **Custom Card Rendering**
+Customize how cards are displayed using the `renderCard` prop.
+
+```tsx
+import React, { useState } from 'react';
+import { KanbanBoard } from '../KanbanBoard';
+import { KanbanBoardColumn, KanbanBoardCard } from '../KanbanBoard/KanbanBoard.props';
+import { View, Text, Horizontal } from 'app-studio';
+
+export const CustomRenderKanbanBoard = () => {
+  const [columns, setColumns] = useState<KanbanBoardColumn[]>([
+        {
+      id: 'todo',
+      title: 'To Do',
+      cards: [
+        { id: '1', title: 'Design System', description: 'Create a new design system.', metadata: { priority: 'high' } },
+        { id: '2', title: 'API Integration', description: 'Integrate with the new API.', metadata: { priority: 'low' } },
+      ],
+    },
+    {
+      id: 'inprogress',
+      title: 'In Progress',
+      cards: [
+        { id: '3', title: 'User Dashboard', description: 'Develop the main user dashboard.', metadata: { priority: 'medium' } },
+      ],
+    },
+    {
+      id: 'done',
+      title: 'Done',
+      cards: [
+        { id: '4', title: 'Project Setup', description: 'Initial project setup and configuration.', metadata: { priority: 'low' } },
+      ],
+    },
+  ]);
+
+  const renderCard = (card: KanbanBoardCard, column: KanbanBoardColumn) => {
+    const priority = card.metadata?.priority as string;
+    const priorityColors = {
+      low: 'color.green.500',
+      medium: 'color.yellow.500',
+      high: 'color.red.500',
+    };
+
+    return (
+      <View>
+        <Horizontal alignItems="center" marginBottom={8}>
+          <View
+            width={8}
+            height={8}
+            borderRadius="50%"
+            backgroundColor={priorityColors[priority]}
+            marginRight={8}
+          />
+          <Text fontWeight="semibold">{card.title}</Text>
+        </Horizontal>
+        <Text fontSize={14} color="color.gray.600">
+          {card.description}
+        </Text>
+      </View>
+    );
+  };
+
+  return <KanbanBoard columns={columns} onChange={setColumns} renderCard={renderCard} />;
+};
+```
+
+## Props
+
+| Prop | Type | Description | Default |
+| --- | --- | --- | --- |
+| `columns` | `KanbanBoardColumn[]` | Array of columns to display. | `[]` |
+| `onChange` | `(columns: KanbanBoardColumn[]) => void` | Callback when columns or cards are changed. | - |
+| `renderCard` | `(card: KanbanBoardCard, column: KanbanBoardColumn) => React.ReactNode` | Custom render method for cards. | - |
+| `renderColumnHeader` | `(column: KanbanBoardColumn) => React.ReactNode` | Custom render method for column headers. | - |
+| `renderEmptyState` | `(column: KanbanBoardColumn) => React.ReactNode` | Custom render method for empty column state. | - |
+| `views` | `KanbanBoardViews` | Style overrides for various parts of the component. | `{}` |
+
+## KanbanBoardColumn Interface
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Unique identifier for the column. |
+| `title` | `string` | Column title shown in the header. |
+| `cards` | `KanbanBoardCard[]` | Array of cards within the column. |
+| `footer` | `React.ReactNode` | Optional footer content for the column. |
+| `metadata` | `Record<string, unknown>` | Additional metadata for the column. |
+
+## KanbanBoardCard Interface
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `id` | `string` | Unique identifier for the card. |
+| `title` | `string` | Card title. |
+| `description` | `string` | Optional card description. |
+| `metadata` | `Record<string, unknown>` | Additional metadata for the card. |
+
+## KanbanBoardViews Interface
+
+Customize the appearance of different Kanban board elements.
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `board` | `ViewProps` | Main board container. |
+| `column` | `ViewProps` | Individual column container. |
+| `columnHeader` | `ViewProps` | Column header container. |
+| `columnTitle` | `TextProps` | Column title text. |
+| `columnBody` | `ViewProps` | Column body container (wraps cards). |
+| `columnFooter` | `ViewProps` | Column footer container. |
+| `card` | `ViewProps` | Individual card container. |
+| `cardContent` | `ViewProps` | Content wrapper inside the card. |
+| `emptyState` | `ViewProps` | Empty state container in a column. |

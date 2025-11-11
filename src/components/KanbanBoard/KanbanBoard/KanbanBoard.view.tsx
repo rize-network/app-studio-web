@@ -114,7 +114,6 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                   borderRadius={10}
                   padding="12px"
                   boxShadow="0 1px 2px 0 rgba(16, 24, 40, 0.08)"
-                  opacity={draggedCardId === card.id ? 0.6 : 1}
                   onDragStart={(event) =>
                     onCardDragStart(column.id, card.id, event)
                   }

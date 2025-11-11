@@ -88,49 +88,6 @@ export const MonthViewCalendar = () => {
 };
 ```
 
-### **Custom Event Rendering**
-Customize how events are displayed using the `renderEvent` prop.
-
-```tsx
-import React from 'react';
-import { Vertical, Horizontal } from 'app-studio';
-import { Calendar } from '../Calendar';
-import { CalendarEvent, CalendarRenderEventContext } from '../Calendar/Calendar.props';
-import { Text } from '../../Text/Text';
-
-export const CustomRenderCalendar = () => {
-  const events: CalendarEvent[] = [
-    {
-      id: 1,
-      title: 'High Priority Meeting',
-      start: new Date(2025, 9, 15, 10, 0),
-      metadata: { priority: 'high' },
-    },
-  ];
-
-  const renderEvent = (event: CalendarEvent, context: CalendarRenderEventContext) => {
-    const priority = event.metadata?.priority as string;
-    
-    return (
-      <Vertical
-        gap={8}
-        padding={12}
-        borderRadius={12}
-        backgroundColor="color.error.50"
-        borderWidth={1}
-        borderStyle="solid"
-        borderColor="color.error.200"
-      >
-        <Text fontWeight="600">{event.title}</Text>
-        <Text fontSize={12} color="color.error.600">{priority}</Text>
-      </Vertical>
-    );
-  };
-
-  return <Calendar events={events} renderEvent={renderEvent} />;
-};
-```
-
 ### **Week Starts On**
 Configure which day the week starts on (0 = Sunday, 1 = Monday, etc.).
 
@@ -146,78 +103,33 @@ export const WeekStartsOnMonday = () => {
 ### **Custom Styles**
 Customize the appearance of calendar elements using the `views` prop.
 
-```tsx
-import React from 'react';
-import { Calendar } from '../Calendar';
-
-export const CustomStyledCalendar = () => {
-  return (
-    <Calendar
-      views={{
-        container: {
-          backgroundColor: 'color.primary.50',
-          borderColor: 'color.primary.300',
-        },
-        headerTitle: {
-          color: 'color.primary.700',
-          fontSize: 24,
-        },
-        event: {
-          backgroundColor: 'color.primary.100',
-          borderColor: 'color.primary.400',
-        },
-      }}
-    />
-  );
-};
-```
-
-### **Fixed Height with Scrolling**
-Set a fixed height for the calendar with scrollable content areas.
-
-```tsx
-import React from 'react';
-import { Calendar } from '../Calendar';
-
-export const FixedHeightCalendar = () => {
-  const events = [
-    {
-      id: 1,
-      title: 'Team Meeting',
-      start: new Date(2025, 9, 15, 10, 0),
-      end: new Date(2025, 9, 15, 11, 0),
-    },
-    // ... more events
-  ];
-
-  return <Calendar events={events} height="600px" initialView="week" />;
-};
-```
-
 ## Props
 
-| Prop           | Type                    | Description                                                    | Default     |
-| -------------- | ----------------------- | -------------------------------------------------------------- | ----------- |
-| events         | CalendarEvent[]         | Array of events to display in the calendar.                   | []          |
-| initialDate    | Date \| string          | Starting date displayed in the calendar.                       | new Date()  |
-| initialView    | 'day' \| 'week' \| 'month' | Initial visible view.                                       | 'month'     |
-| weekStartsOn   | 0-6                     | First day of the week (0 = Sunday, 1 = Monday, etc.).         | 0           |
-| height         | string \| number        | Height of the calendar container (enables scrolling).          | '800px'     |
-| renderEvent    | function                | Custom render method for events.                               | -           |
-| onDateChange   | function                | Callback when the visible anchor date changes.                 | -           |
-| onViewChange   | function                | Callback when the active view changes.                         | -           |
-| views          | CalendarViews           | Customize styling of calendar areas.                           | -           |
+| Prop | Type | Description | Default |
+| --- | --- | --- | --- |
+| `events` | `CalendarEvent[]` | Array of events to display. | `[]` |
+| `initialDate` | `Date \| string` | Initial date to display (ISO string or Date object). | `new Date()` |
+| `initialView` | `'day' \| 'week' \| 'month'` | Initial view to display. | `'month'` |
+| `weekStartsOn` | `0-6` | Day the week starts on (0 = Sunday, 1 = Monday). | `0` |
+| `onEventDrop` | `(event: CalendarEvent) => void` | Callback when an event is moved to a new date. | - |
+| `onEventResize` | `(event: CalendarEvent) => void` | Callback when an event is resized. | - |
+| `onEventAdd` | `(start: string, end: string) => void` | Callback when a date is double-clicked to add an event. | - |
+| `onDateClick` | `(date: string) => void` | Callback when a date is clicked. | - |
+| `onDateChange` | `(date: Date) => void` | Callback when the visible date range changes. | - |
+| `onViewChange` | `(view: CalendarView) => void` | Callback when the active view changes. | - |
+| `views` | `CalendarViews` | Style overrides for various parts of the component. | `{}` |
 
 ## CalendarEvent Interface
 
-| Property    | Type                  | Description                                      |
-| ----------- | --------------------- | ------------------------------------------------ |
-| id          | string \| number      | Unique identifier for the event.                 |
-| title       | string                | Event title shown in the calendar cell.          |
-| start       | Date \| string        | Start date/time of the event.                    |
-| end         | Date \| string        | Optional end date/time of the event.             |
-| description | string                | Optional description or supporting information.  |
-| metadata    | Record<string, unknown> | Additional metadata for the event.             |
+| Property | Type | Description |
+| --- | --- | --- |
+| `id` | `string \| number` | Unique identifier for the event. |
+| `title` | `string` | Event title shown in the calendar. |
+| `start` | `string` | Start date/time in ISO format (`YYYY-MM-DD` or `YYYY-MM-DDTHH:MM`). |
+| `end` | `string` | End date/time in ISO format (`YYYY-MM-DD` or `YYYY-MM-DDTHH:MM`). |
+| `color` | `'blue' \| 'red' \| 'green' \| 'purple' \| 'orange'` | Color variant for the event. |
+| `description` | `string` | Optional description (used for tooltips or custom rendering). |
+| `metadata` | `Record<string, unknown>` | Additional metadata for custom logic. |
 
 ## CalendarViews Interface
 
