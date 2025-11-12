@@ -1,7 +1,8 @@
 import React from 'react';
 import { OKR } from '../OKR';
+import type { OKRObjective } from '../OKR/OKR.props';
 
-const objectives = [
+const objectives: OKRObjective[] = [
   {
     id: 'obj-1',
     title: 'Launch the new onboarding experience',
