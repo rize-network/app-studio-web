@@ -77,8 +77,10 @@ const AudioInputPage = lazy(() => import('src/pages/audioInput.page'));
 const BackgroundPage = lazy(() => import('src/pages/background.page'));
 const KanbanBoardPage = lazy(() => import('src/pages/kanbanBoard.page'));
 const CalendarPage = lazy(() => import('src/pages/calendar.page'));
+const OKRPage = lazy(() => import('src/pages/okr.page'));
 
 export const componentList = [
+  { name: 'OKR', path: '/okr', element: <OKRPage /> },
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
   { name: 'Chat', path: '/chat', element: <ChatInputDemo /> },
   { name: 'Agent Chat', path: '/agent-chat', element: <AgentChatPage /> },
