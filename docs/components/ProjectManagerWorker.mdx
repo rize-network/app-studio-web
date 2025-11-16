@@ -1,0 +1,454 @@
+# ProjectManagerWorker
+
+A comprehensive project management interface that combines OKR roadmap planning with Kanban task management, intelligently assigning tasks to AI agents or team members based on task characteristics and complexity.
+
+## Features
+
+- 🎯 **Dual Board Interface**: OKR roadmap for strategic planning + Kanban board for task execution
+- 🤖 **AI Agent Builder**: Automatically generates personalized agents using enterprise knowledge
+- 📋 **Task Workflow**: Draft → To Do → In Progress → To Review → Done
+- 🔄 **Workflow Automation**: Automated task assignment and status transitions
+- 📊 **Project Analytics**: Real-time metrics and progress tracking
+- 👥 **Team Management**: Assign tasks to agents or team members
+- 📚 **Knowledge Integration**: Leverages enterprise documentation and standards
+
+## Installation
+
+```bash
+npm install @app-studio/web
+```
+
+## Basic Usage
+
+```tsx
+import { ProjectManagerWorker } from '@app-studio/web';
+
+function App() {
+  return (
+    <ProjectManagerWorker
+      projectId="proj-123"
+      projectName="My Project"
+      userId="user-123"
+      onTaskCreate={(task) => console.log('Task created:', task)}
+      onAgentAssign={(task, agent) => console.log('Agent assigned:', agent)}
+    />
+  );
+}
+```
+
+## Props
+
+### Core Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `projectId` | `string` | Yes | - | Unique project identifier |
+| `projectName` | `string` | Yes | - | Project name to display |
+| `userId` | `string` | Yes | - | Current user identifier |
+| `teamId` | `string` | No | - | Team identifier |
+
+### Data Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `objectives` | `OKRObjective[]` | No | `[]` | OKR objectives for roadmap |
+| `tasks` | `Task[]` | No | `[]` | Project tasks |
+| `teamMembers` | `TeamMember[]` | No | `[]` | Team members available for assignment |
+| `knowledgeSources` | `KnowledgeSource[]` | No | `[]` | Enterprise knowledge sources |
+| `workflowRules` | `WorkflowRule[]` | No | `[]` | Automation workflow rules |
+
+### Feature Flags
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `enableOKRBoard` | `boolean` | No | `true` | Show OKR roadmap board |
+| `enableKanbanBoard` | `boolean` | No | `true` | Show Kanban task board |
+| `enableAgentBuilder` | `boolean` | No | `true` | Enable AI agent builder |
+| `enableWorkflowAutomation` | `boolean` | No | `true` | Enable workflow automation |
+| `enableAnalytics` | `boolean` | No | `true` | Show analytics dashboard |
+
+### Event Handlers
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `onObjectiveCreate` | `(objective: OKRObjective) => void` | Called when OKR objective is created |
+| `onObjectiveUpdate` | `(objective: OKRObjective) => void` | Called when objective is updated |
+| `onObjectiveDelete` | `(objectiveId: string) => void` | Called when objective is deleted |
+| `onTaskCreate` | `(task: Task) => void` | Called when task is created |
+| `onTaskUpdate` | `(task: Task) => void` | Called when task is updated |
+| `onTaskDelete` | `(taskId: string) => void` | Called when task is deleted |
+| `onTaskStatusChange` | `(taskId: string, newStatus: TaskStatus) => void` | Called when task status changes |
+| `onAgentAssign` | `(task: Task, agent: AgentConfig) => void` | Called when agent is assigned to task |
+| `onHumanAssign` | `(task: Task, member: TeamMember) => void` | Called when human is assigned to task |
+| `onWorkflowTrigger` | `(rule: WorkflowRule, task: Task) => void` | Called when workflow rule is triggered |
+
+## Task Workflow
+
+Tasks flow through these statuses:
+
+1. **Draft**: Initial task creation, unvalidated
+2. **To Do**: Validated by user, ready for assignment
+3. **In Progress**: Agent or team member is working on it
+4. **To Review**: Work complete, awaiting user review
+5. **Done**: Reviewed and approved by user
+
+### Workflow Rules
+
+The component supports automated workflow rules:
+
+```tsx
+const workflowRules: WorkflowRule[] = [
+  {
+    id: 'rule-1',
+    name: 'Auto-assign agent on todo',
+    description: 'When task moves to todo, automatically build and assign an agent',
+    trigger: {
+      event: 'status_change',
+      condition: 'newStatus === "todo"',
+    },
+    action: {
+      type: 'create_agent',
+      config: {},
+    },
+    enabled: true,
+  },
+];
+```
+
+## AI Agent Builder
+
+The component automatically builds personalized AI agents for tasks using:
+
+- **Prompt Templates**: From `/docs/prompt-format.md` and `/docs/prompt-agent.md`
+- **Enterprise Knowledge**: Relevant documentation and standards
+- **Task Context**: Requirements, skills, acceptance criteria
+
+### Agent Types
+
+- **Generator**: Creates code, documentation, or content
+- **Analyzer**: Reviews and analyzes code or documents
+- **Reviewer**: Validates work against standards
+- **Planner**: Breaks down requirements into tasks
+- **Executor**: Performs specific technical tasks
+- **Coordinator**: Manages workflows and dependencies
+
+### Assignment Logic
+
+Tasks are assigned to agents when:
+- Well-defined acceptance criteria exist
+- No blocking dependencies
+- No requirement for creativity or strategy
+- Clear, automatable solution path
+
+Tasks are assigned to humans when:
+- Requires creativity or innovation
+- Needs business/strategic decisions
+- Ambiguous requirements
+- Novel or unprecedented problem
+- Critical priority requiring human judgment
+
+## Examples
+
+### Complete Example with All Features
+
+```tsx
+import { ProjectManagerWorker, Task, TeamMember, KnowledgeSource } from '@app-studio/web';
+
+function ProjectManager() {
+  const tasks: Task[] = [
+    {
+      id: 'task-1',
+      title: 'Implement authentication',
+      description: 'Build JWT-based authentication system',
+      status: 'todo',
+      priority: 'high',
+      assignmentType: 'unassigned',
+      skills: ['Backend', 'Security', 'JWT'],
+      dependencies: [],
+      tags: ['auth', 'security'],
+      acceptanceCriteria: [
+        'Secure token generation',
+        'Token validation middleware',
+        'Refresh token support',
+      ],
+      knowledgeSources: [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+  ];
+
+  const teamMembers: TeamMember[] = [
+    {
+      id: 'member-1',
+      name: 'Alice Johnson',
+      role: 'Senior Developer',
+      skills: ['React', 'TypeScript', 'Node.js'],
+      availability: 80,
+      currentTasks: [],
+    },
+  ];
+
+  const knowledgeSources: KnowledgeSource[] = [
+    {
+      id: 'ks-1',
+      name: 'Security Guidelines',
+      type: 'policy',
+      path: '/docs/security/guidelines.md',
+      priority: 'high',
+      summary: 'Security best practices and requirements',
+    },
+  ];
+
+  return (
+    <ProjectManagerWorker
+      projectId="proj-auth"
+      projectName="Authentication System"
+      userId="user-123"
+      tasks={tasks}
+      teamMembers={teamMembers}
+      knowledgeSources={knowledgeSources}
+      onTaskCreate={(task) => {
+        console.log('Created:', task);
+        // Save to backend
+      }}
+      onTaskStatusChange={(taskId, newStatus) => {
+        console.log('Status changed:', taskId, newStatus);
+        // Update backend
+      }}
+      onAgentAssign={(task, agent) => {
+        console.log('Agent assigned:', agent.name);
+        // Trigger agent execution
+      }}
+    />
+  );
+}
+```
+
+### Minimal Example
+
+```tsx
+import { ProjectManagerWorker } from '@app-studio/web';
+
+function MinimalProject() {
+  return (
+    <ProjectManagerWorker
+      projectId="proj-minimal"
+      projectName="Quick Start Project"
+      userId="user-123"
+    />
+  );
+}
+```
+
+### Custom Styling
+
+```tsx
+<ProjectManagerWorker
+  projectId="proj-styled"
+  projectName="Styled Project"
+  userId="user-123"
+  views={{
+    container: { backgroundColor: 'color.blue.50' },
+    header: { backgroundColor: 'color.blue.900', color: 'white' },
+    taskCard: { borderRadius: 12, boxShadow: '0 4px 8px rgba(0,0,0,0.1)' },
+  }}
+/>
+```
+
+## Type Definitions
+
+### Task
+
+```typescript
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  status: 'draft' | 'todo' | 'in_progress' | 'to_review' | 'done';
+  priority: 'critical' | 'high' | 'medium' | 'low';
+  assignmentType: 'agent' | 'human' | 'unassigned';
+  assignedTo?: string;
+  agentConfig?: AgentConfig;
+  estimatedHours?: number;
+  actualHours?: number;
+  skills: string[];
+  dependencies: string[];
+  tags: string[];
+  acceptanceCriteria: string[];
+  knowledgeSources: KnowledgeSource[];
+  createdAt: string;
+  updatedAt: string;
+  dueDate?: string;
+  completedAt?: string;
+  metadata?: Record<string, unknown>;
+}
+```
+
+### AgentConfig
+
+```typescript
+interface AgentConfig {
+  id: string;
+  name: string;
+  type: 'generator' | 'analyzer' | 'reviewer' | 'planner' | 'executor' | 'coordinator';
+  role: string;
+  specialty: string;
+  capabilities: string[];
+  knowledgeSources: KnowledgeSource[];
+  prompt: string;
+  systemPrompt?: string;
+  temperature?: number;
+  maxTokens?: number;
+}
+```
+
+### TeamMember
+
+```typescript
+interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  skills: string[];
+  availability: number; // 0-100%
+  currentTasks: string[];
+  avatar?: string;
+  email?: string;
+}
+```
+
+### KnowledgeSource
+
+```typescript
+interface KnowledgeSource {
+  id: string;
+  name: string;
+  type: 'documentation' | 'code' | 'policy' | 'standard' | 'pattern';
+  path: string;
+  priority: 'high' | 'medium' | 'low';
+  summary?: string;
+}
+```
+
+## Best Practices
+
+### 1. Define Clear Acceptance Criteria
+
+```tsx
+const task = {
+  title: 'Build login form',
+  acceptanceCriteria: [
+    'Email validation',
+    'Password strength check',
+    'Error handling',
+    'Loading states',
+    'Accessibility compliance',
+  ],
+};
+```
+
+### 2. Provide Knowledge Sources
+
+```tsx
+const knowledgeSources = [
+  {
+    id: 'coding-standards',
+    name: 'Coding Standards',
+    type: 'standard',
+    path: '/docs/standards.md',
+    priority: 'high',
+  },
+];
+```
+
+### 3. Use Workflow Automation
+
+```tsx
+const workflowRules = [
+  {
+    id: 'auto-test',
+    name: 'Auto-assign testing',
+    trigger: { event: 'status_change' },
+    action: { type: 'create_agent', config: { agentType: 'tester' } },
+    enabled: true,
+  },
+];
+```
+
+### 4. Monitor Agent Performance
+
+```tsx
+<ProjectManagerWorker
+  enableAnalytics={true}
+  onAgentAssign={(task, agent) => {
+    trackEvent('agent_assigned', {
+      taskId: task.id,
+      agentType: agent.type,
+    });
+  }}
+/>
+```
+
+## Integration with Backend
+
+```tsx
+import { ProjectManagerWorker } from '@app-studio/web';
+import { useQuery, useMutation } from 'react-query';
+
+function BackendIntegratedProject() {
+  const { data: tasks } = useQuery('tasks', fetchTasks);
+  const createTaskMutation = useMutation(createTask);
+  const updateTaskMutation = useMutation(updateTask);
+
+  return (
+    <ProjectManagerWorker
+      projectId="proj-backend"
+      projectName="Backend Integrated"
+      userId="user-123"
+      tasks={tasks}
+      onTaskCreate={(task) => createTaskMutation.mutate(task)}
+      onTaskUpdate={(task) => updateTaskMutation.mutate(task)}
+    />
+  );
+}
+```
+
+## Related Components
+
+- [OKR](/components/okr) - OKR objectives and key results
+- [KanbanBoard](/components/kanban-board) - Kanban board for task management
+- [AgentChat](/components/agent-chat) - AI agent interaction interface
+
+## Resources
+
+- [Prompt Format Guide](/docs/prompt-format.md)
+- [Prompt Agent Guide](/docs/prompt-agent.md)
+- [Component Development Guide](/docs/component-development/guide.md)
+
+## Accessibility
+
+The ProjectManagerWorker component is fully accessible:
+
+- ✓ Keyboard navigation support
+- ✓ ARIA labels and roles
+- ✓ Screen reader compatible
+- ✓ Focus management
+- ✓ Color contrast compliance
+
+## Performance
+
+- Optimized rendering with React memo
+- Efficient state management
+- Lazy loading of agent configurations
+- Debounced analytics calculations
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## License
+
+MIT
