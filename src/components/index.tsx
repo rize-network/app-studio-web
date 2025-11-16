@@ -63,6 +63,7 @@ export * from './Command/Command';
 export * from './Tooltip/Tooltip';
 export * from './Tree/Tree';
 export * from './Flow/Flow';
+export * from './OKR/OKR';
 export * from './ChatInput/ChatInput';
 export * from './Background/Background';
 export { default as AgentChat } from './adk/AgentChat/AgentChat';
@@ -125,6 +126,7 @@ export * from './Command/Command/Command.props';
 export * from './Tooltip/Tooltip/Tooltip.props';
 export * from './Tree/Tree/Tree.props';
 export * from './Flow/Flow/Flow.props';
+export * from './OKR/OKR/OKR.props';
 export * from './ChatInput/ChatInput/ChatInput.props';
 export * from './Background/Background/Background.props';
 export type {
