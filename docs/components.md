@@ -129,6 +129,30 @@ const TextExamples = () => (
 );
 ```
 
+### Title
+
+A component for rendering animated and highlighted titles in hero sections and other prominent areas of the UI.
+
+**Example:**
+```tsx
+import { Title } from '@app-studio/web';
+
+const HeroTitle = () => (
+  <Title
+    size="xl"
+    highlightText="Platform"
+    highlightStyle="gradient"
+    highlightColor="theme.primary"
+    highlightSecondaryColor="theme.secondary"
+    centered
+  >
+    Welcome to Our Platform
+  </Title>
+);
+```
+
+For detailed documentation, see [Title Component](./components/Title.mdx).
+
 ## III. Form Components
 
 ### TextField
@@ -171,6 +195,37 @@ const MyForm = () => (
   </Formik>
 );
 ```
+
+### ChatInput
+
+A customizable chat input field with support for file uploads, prompt examples, and agent controls.
+
+**Example:**
+```tsx
+import { ChatInput } from '@app-studio/web';
+import { useState } from 'react';
+
+const ChatExample = () => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = (message) => {
+    console.log('Message submitted:', message);
+    setInputValue('');
+  };
+
+  return (
+    <ChatInput
+      onSubmit={handleSubmit}
+      value={inputValue}
+      onChange={setInputValue}
+      placeholder="Type your message here..."
+      hideAttachments={false}
+    />
+  );
+};
+```
+
+For detailed documentation, see [ChatInput Component](./components/ChatInput.mdx).
 
 ## IV. Feedback Components
 
@@ -283,3 +338,126 @@ const KanbanCardExample = () => (
   />
 );
 ```
+
+### Tree
+
+A component for displaying hierarchical data with expandable/collapsible nodes. Supports both a compound component pattern and a data-driven approach.
+
+**Example:**
+```tsx
+import { Tree } from '@app-studio/web';
+import { FolderIcon, FileIcon } from '@app-studio/web';
+
+const FileTreeExample = () => {
+  const treeData = [
+    {
+      id: 'root',
+      label: 'Project',
+      icon: <FolderIcon size={16} />,
+      children: [
+        {
+          id: 'src',
+          label: 'src',
+          icon: <FolderIcon size={16} />,
+          children: [
+            { id: 'components', label: 'components', icon: <FileIcon size={16} /> },
+            { id: 'utils', label: 'utils', icon: <FileIcon size={16} /> },
+          ],
+        },
+      ],
+    },
+  ];
+
+  return (
+    <Tree
+      items={treeData}
+      defaultExpandedItems={['root', 'src']}
+      onItemSelect={(itemId) => console.log(`Selected: ${itemId}`)}
+    />
+  );
+};
+```
+
+For detailed documentation, see [Tree Component](./components/Tree.mdx).
+
+### Flow
+
+A component for creating interactive workflow diagrams and flowcharts with support for node connections, drag-and-drop functionality, and viewport controls.
+
+**Example:**
+```tsx
+import { Flow } from '@app-studio/web';
+import { useState } from 'react';
+
+const FlowExample = () => {
+  const [nodes, setNodes] = useState([
+    {
+      id: 'node-1',
+      position: { x: 50, y: 50 },
+      data: { label: 'Start Node', subtitle: 'Begin here' },
+    },
+    {
+      id: 'node-2',
+      position: { x: 50, y: 200 },
+      data: { label: 'Process Node', subtitle: 'Do something' },
+    },
+  ]);
+
+  const [edges, setEdges] = useState([
+    { id: 'edge-1-2', source: 'node-1', target: 'node-2' },
+  ]);
+
+  return (
+    <Flow
+      nodes={nodes}
+      edges={edges}
+      onNodesChange={setNodes}
+      onEdgesChange={setEdges}
+    />
+  );
+};
+```
+
+For detailed documentation, see [Flow Component](./components/Flow.mdx).
+
+### OKR
+
+A component for displaying and tracking Objectives and Key Results (OKRs). Provides a comprehensive view of progress, status, and ownership for strategic goals.
+
+**Example:**
+```tsx
+import { OKR } from '@app-studio/web';
+
+const OKRExample = () => {
+  const objectives = [
+    {
+      id: '1',
+      title: 'Launch New Feature',
+      description: 'Successfully launch the new feature to all users.',
+      owner: 'John Doe',
+      timeframe: 'Q4 2025',
+      tags: ['new-feature', 'launch'],
+      progress: 50,
+      status: 'onTrack',
+      keyResults: [
+        {
+          id: '1.1',
+          title: 'Complete development',
+          progress: 80,
+          status: 'onTrack',
+        },
+        {
+          id: '1.2',
+          title: 'Complete QA testing',
+          progress: 40,
+          status: 'atRisk',
+        },
+      ],
+    },
+  ];
+
+  return <OKR objectives={objectives} />;
+};
+```
+
+For detailed documentation, see [OKR Component](./components/OKR.mdx).
