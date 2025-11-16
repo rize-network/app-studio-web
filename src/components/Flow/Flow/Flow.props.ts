@@ -8,6 +8,7 @@ import {
   FlowViewport,
   NodePosition,
 } from './Flow.type';
+import { FlowGraphOptions } from './Flow.graph';
 
 /**
  * Props for the Flow component
@@ -47,6 +48,11 @@ export interface FlowProps extends Omit<ViewProps, 'position'> {
    * @default 'vertical'
    */
   direction?: 'vertical' | 'horizontal';
+
+  /**
+   * Options for configuring the underlying FlowGraph implementation
+   */
+  graphOptions?: FlowGraphOptions;
 
   /**
    * Whether to show the controls (zoom, etc.)
