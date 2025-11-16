@@ -57,6 +57,7 @@ This section provides detailed API documentation for all components in the App S
 - [Table](./data-display/table.md) - Tabular data
 - [Chart](./data-display/chart.md) - Data visualization
 - [Flow](./data-display/flow.md) - Interactive workflow diagrams and flowcharts
+- [OKR](./data-display/okr.md) - Objectives and Key Results tracking
 - [Tree](./data-display/tree.md) - Hierarchical tree structure
 
 ## Utility Components
