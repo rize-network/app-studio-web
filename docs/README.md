@@ -12,7 +12,8 @@ Welcome to the comprehensive documentation for the App Studio Web Component Libr
 
 ### Specialized Documentation
 - **[ADK Components](../README-ADK.md)** - Agent Development Kit integration
-- **[API Reference](./api-reference/README.md)** - Detailed component APIs
+- **[Compoments Reference](./components.md)** - Summary of all component APIs
+- **[Detailed Copoments](./components/)** - Detailed component APIs
 - **[Tutorials](./tutorials/README.md)** - Step-by-step guides
 - **[Contributing](./contributing/documentation.md)** - Contribution guidelines
 
