@@ -1,6 +1,10 @@
 import type React from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { KanbanBoardProps } from './KanbanBoard.props';
+import {
+  KanbanBoardCard,
+  KanbanBoardColumn,
+  KanbanBoardProps,
+} from './KanbanBoard.props';
 
 interface DragState {
   columnId: string;
@@ -18,6 +22,11 @@ const cloneColumns = (
 export const useKanbanBoardState = ({
   columns: initialColumns,
   onChange,
+  onCardMove,
+  onCardCreate: onCardCreateProp,
+  onCardDelete: onCardDeleteProp,
+  onCardTitleChange: onCardTitleChangeProp,
+  onCardDescriptionChange: onCardDescriptionChangeProp,
 }: KanbanBoardProps) => {
   const [columns, setColumns] =
     useState<KanbanBoardProps['columns']>(initialColumns);
@@ -133,13 +142,27 @@ export const useKanbanBoardState = ({
         dragStateRef.current = { columnId: targetColumnId, cardId };
 
         if (options?.shouldCommit) {
+          const originalSourceColumn = prevColumns.find(
+            (c) => c.id === sourceColumnId
+          );
+          const originalTargetColumn = prevColumns.find(
+            (c) => c.id === targetColumnId
+          );
+
+          if (card && originalSourceColumn && originalTargetColumn) {
+            onCardMove?.(
+              card,
+              originalSourceColumn as KanbanBoardColumn,
+              originalTargetColumn as KanbanBoardColumn
+            );
+          }
           onChange?.(updatedColumns);
         }
 
         return updatedColumns;
       });
     },
-    [onChange]
+    [onChange, onCardMove]
   );
 
   const handleCardDragStart = useCallback(
@@ -232,6 +255,98 @@ export const useKanbanBoardState = ({
     [applyMove, getRelativeDropPosition]
   );
 
+  const handleCardCreate = useCallback(
+    (card: KanbanBoardCard, column: KanbanBoardColumn) => {
+      if (onCardCreateProp) {
+        onCardCreateProp(card, column);
+        return;
+      }
+
+      setColumns((prevColumns) => {
+        const updatedColumns = prevColumns.map((col) =>
+          col.id === column.id ? { ...col, cards: [...col.cards, card] } : col
+        );
+        onChange?.(updatedColumns);
+        return updatedColumns;
+      });
+    },
+    [onChange, onCardCreateProp]
+  );
+
+  const handleCardDelete = useCallback(
+    (card: KanbanBoardCard, column: KanbanBoardColumn) => {
+      if (onCardDeleteProp) {
+        onCardDeleteProp(card, column);
+        return;
+      }
+
+      setColumns((prevColumns) => {
+        const updatedColumns = prevColumns.map((col) =>
+          col.id === column.id
+            ? { ...col, cards: col.cards.filter((c) => c.id !== card.id) }
+            : col
+        );
+        onChange?.(updatedColumns);
+        return updatedColumns;
+      });
+    },
+    [onChange, onCardDeleteProp]
+  );
+
+  const handleCardTitleChange = useCallback(
+    (card: KanbanBoardCard, column: KanbanBoardColumn, newTitle: string) => {
+      if (onCardTitleChangeProp) {
+        onCardTitleChangeProp(card, column, newTitle);
+        return;
+      }
+
+      setColumns((prevColumns) => {
+        const updatedColumns = prevColumns.map((col) =>
+          col.id === column.id
+            ? {
+                ...col,
+                cards: col.cards.map((c) =>
+                  c.id === card.id ? { ...c, title: newTitle } : c
+                ),
+              }
+            : col
+        );
+        onChange?.(updatedColumns);
+        return updatedColumns;
+      });
+    },
+    [onChange, onCardTitleChangeProp]
+  );
+
+  const handleCardDescriptionChange = useCallback(
+    (
+      card: KanbanBoardCard,
+      column: KanbanBoardColumn,
+      newDescription: string
+    ) => {
+      if (onCardDescriptionChangeProp) {
+        onCardDescriptionChangeProp(card, column, newDescription);
+        return;
+      }
+
+      setColumns((prevColumns) => {
+        const updatedColumns = prevColumns.map((col) =>
+          col.id === column.id
+            ? {
+                ...col,
+                cards: col.cards.map((c) =>
+                  c.id === card.id ? { ...c, description: newDescription } : c
+                ),
+              }
+            : col
+        );
+        onChange?.(updatedColumns);
+        return updatedColumns;
+      });
+    },
+    [onChange, onCardDescriptionChangeProp]
+  );
+
   return {
     columns,
     draggedCardId,
@@ -242,5 +357,9 @@ export const useKanbanBoardState = ({
     onCardDragOver: handleCardDragOver,
     onColumnDrop: handleColumnDrop,
     onCardDrop: handleCardDrop,
+    onCardCreate: handleCardCreate,
+    onCardDelete: handleCardDelete,
+    onCardTitleChange: handleCardTitleChange,
+    onCardDescriptionChange: handleCardDescriptionChange,
   };
 };

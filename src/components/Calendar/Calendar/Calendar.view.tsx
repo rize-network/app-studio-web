@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo, useRef } from 'react';
-import { View, Horizontal, useTheme } from 'app-studio';
+import { View, Horizontal, useTheme, Text, Center } from 'app-studio';
+import { TrashIcon } from '../../Icon/Icon';
 import { CalendarProps, CalendarEvent, CalendarView } from './Calendar.props';
 import {
   layoutEvents,
@@ -37,6 +38,151 @@ import {
   iconButtonStyles,
   dayDateStyles,
 } from './Calendar.style';
+
+interface EventContentProps {
+  event: CalendarEvent;
+  onTitleChange: (event: CalendarEvent, newTitle: string) => void;
+  onDescriptionChange: (event: CalendarEvent, newDescription: string) => void;
+  onEventDelete: (event: CalendarEvent) => void;
+}
+
+const EventContent: React.FC<EventContentProps> = ({
+  event,
+  onTitleChange,
+  onDescriptionChange,
+  onEventDelete,
+}) => {
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(event.title);
+  const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const [editedDescription, setEditedDescription] = useState(
+    event.description || ''
+  );
+
+  const handleTitleClick = useCallback(() => {
+    setIsEditingTitle(true);
+    setEditedTitle(event.title);
+  }, [event.title]);
+
+  const handleDescriptionClick = useCallback(() => {
+    setIsEditingDescription(true);
+    setEditedDescription(event.description || '');
+  }, [event.description]);
+
+  const handleTitleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEditedTitle(e.target.value);
+    },
+    []
+  );
+
+  const handleDescriptionChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setEditedDescription(e.target.value);
+    },
+    []
+  );
+
+  const handleTitleBlur = useCallback(() => {
+    if (isEditingTitle) {
+      onTitleChange(event, editedTitle);
+      setIsEditingTitle(false);
+    }
+  }, [isEditingTitle, onTitleChange, event, editedTitle]);
+
+  const handleDescriptionBlur = useCallback(() => {
+    if (isEditingDescription) {
+      onDescriptionChange(event, editedDescription);
+      setIsEditingDescription(false);
+    }
+  }, [isEditingDescription, onDescriptionChange, event, editedDescription]);
+
+  const handleTitleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+        handleTitleBlur();
+      }
+    },
+    [handleTitleBlur]
+  );
+
+  const handleDescriptionKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleDescriptionBlur();
+      }
+    },
+    [handleDescriptionBlur]
+  );
+
+  return (
+    <Horizontal
+      overflow="hidden"
+      textOverflow="ellipsis"
+      whiteSpace="nowrap"
+      width="100%"
+      justifyContent="space-between"
+    >
+      {isEditingTitle ? (
+        <input
+          type="text"
+          value={editedTitle}
+          onChange={handleTitleChange}
+          onBlur={handleTitleBlur}
+          onKeyDown={handleTitleKeyDown}
+          autoFocus
+          style={{
+            border: '1px solid #d0d5dd',
+            borderRadius: '4px',
+            padding: '2px 4px',
+            fontSize: '11px',
+            fontWeight: '500',
+            width: '100%',
+          }}
+        />
+      ) : (
+        <Text fontSize={11} fontWeight={500} onClick={handleTitleClick}>
+          {event.title}
+        </Text>
+      )}
+      {event.description &&
+        (isEditingDescription ? (
+          <textarea
+            value={editedDescription}
+            onChange={handleDescriptionChange}
+            onBlur={handleDescriptionBlur}
+            onKeyDown={handleDescriptionKeyDown}
+            autoFocus
+            style={{
+              border: '1px solid #d0d5dd',
+              borderRadius: '4px',
+              padding: '2px 4px',
+              fontSize: '11px',
+              width: '100%',
+              minHeight: '40px',
+              marginTop: '4px',
+            }}
+          />
+        ) : (
+          <Text
+            fontSize={11}
+            color="color.gray.600"
+            onClick={handleDescriptionClick}
+          >
+            {event.description}
+          </Text>
+        ))}
+      <Center
+        onClick={() => onEventDelete(event)}
+        cursor="pointer"
+        marginLeft={4}
+      >
+        <TrashIcon widthHeight={12} />
+      </Center>
+    </Horizontal>
+  );
+};
 
 interface DragState {
   isDragging: boolean;
@@ -110,6 +256,9 @@ export const Calendar: React.FC<CalendarProps> = ({
   onDateChange,
   onViewChange,
   onEventAdd,
+  onEventTitleChange,
+  onEventDescriptionChange,
+  onEventDelete,
   views = {},
   width = '100%',
   maxWidth = 1200,
@@ -146,6 +295,49 @@ export const Calendar: React.FC<CalendarProps> = ({
   React.useEffect(() => {
     setLocalEvents(events);
   }, [events]);
+
+  const handleEventTitleChange = useCallback(
+    (event: CalendarEvent, newTitle: string) => {
+      if (onEventTitleChange) {
+        onEventTitleChange(event, newTitle);
+        return;
+      }
+      setLocalEvents((prevEvents) =>
+        prevEvents.map((ev) =>
+          ev.id === event.id ? { ...ev, title: newTitle } : ev
+        )
+      );
+    },
+    [onEventTitleChange]
+  );
+
+  const handleEventDescriptionChange = useCallback(
+    (event: CalendarEvent, newDescription: string) => {
+      if (onEventDescriptionChange) {
+        onEventDescriptionChange(event, newDescription);
+        return;
+      }
+      setLocalEvents((prevEvents) =>
+        prevEvents.map((ev) =>
+          ev.id === event.id ? { ...ev, description: newDescription } : ev
+        )
+      );
+    },
+    [onEventDescriptionChange]
+  );
+
+  const handleEventDelete = useCallback(
+    (event: CalendarEvent) => {
+      if (onEventDelete) {
+        onEventDelete(event);
+        return;
+      }
+      setLocalEvents((prevEvents) =>
+        prevEvents.filter((ev) => ev.id !== event.id)
+      );
+    },
+    [onEventDelete]
+  );
 
   // Get the month start for current date
   const currentMonth = useMemo(
@@ -688,14 +880,12 @@ export const Calendar: React.FC<CalendarProps> = ({
                         title={event.title}
                         {...views.event}
                       >
-                        <View
-                          overflow="hidden"
-                          textOverflow="ellipsis"
-                          whiteSpace="nowrap"
-                          width="100%"
-                        >
-                          {event.title}
-                        </View>
+                        <EventContent
+                          event={event}
+                          onTitleChange={handleEventTitleChange}
+                          onDescriptionChange={handleEventDescriptionChange}
+                          onEventDelete={handleEventDelete}
+                        />
 
                         {showLeftHandle && (
                           <ResizeHandle
@@ -815,14 +1005,12 @@ export const Calendar: React.FC<CalendarProps> = ({
                       title={event.title}
                       {...views.event}
                     >
-                      <View
-                        overflow="hidden"
-                        textOverflow="ellipsis"
-                        whiteSpace="nowrap"
-                        width="100%"
-                      >
-                        {event.title}
-                      </View>
+                      <EventContent
+                        event={event}
+                        onTitleChange={handleEventTitleChange}
+                        onDescriptionChange={handleEventDescriptionChange}
+                        onEventDelete={handleEventDelete}
+                      />
 
                       <ResizeHandle
                         direction="left"
@@ -891,7 +1079,7 @@ export const Calendar: React.FC<CalendarProps> = ({
                     // Simple check if event starts in this hour
                     if (event.start.includes('T')) {
                       const eventHour = parseInt(
-                        event.start.split('T')[1].split(':')[0]
+                        event.start.split('T').split(':')
                       );
                       return eventHour === hour;
                     }
@@ -910,7 +1098,12 @@ export const Calendar: React.FC<CalendarProps> = ({
                         marginBottom={4}
                         {...views.event}
                       >
-                        {event.title}
+                        <EventContent
+                          event={event}
+                          onTitleChange={handleEventTitleChange}
+                          onDescriptionChange={handleEventDescriptionChange}
+                          onEventDelete={handleEventDelete}
+                        />
                       </View>
                     );
                   })}

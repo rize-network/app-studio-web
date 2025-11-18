@@ -22,6 +22,23 @@ export interface KanbanBoardColumn {
 export interface KanbanBoardProps {
   columns: KanbanBoardColumn[];
   onChange?: (columns: KanbanBoardColumn[]) => void;
+  onCardMove?: (
+    card: KanbanBoardCard,
+    fromColumn: KanbanBoardColumn,
+    toColumn: KanbanBoardColumn
+  ) => void;
+  onCardCreate?: (card: KanbanBoardCard, column: KanbanBoardColumn) => void;
+  onCardDelete?: (card: KanbanBoardCard, column: KanbanBoardColumn) => void;
+  onCardTitleChange?: (
+    card: KanbanBoardCard,
+    column: KanbanBoardColumn,
+    newTitle: string
+  ) => void;
+  onCardDescriptionChange?: (
+    card: KanbanBoardCard,
+    column: KanbanBoardColumn,
+    newDescription: string
+  ) => void;
   renderCard?: (
     card: KanbanBoardCard,
     column: KanbanBoardColumn
