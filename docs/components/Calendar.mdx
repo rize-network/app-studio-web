@@ -114,6 +114,9 @@ Customize the appearance of calendar elements using the `views` prop.
 | `onEventDrop` | `(event: CalendarEvent) => void` | Callback when an event is moved to a new date. | - |
 | `onEventResize` | `(event: CalendarEvent) => void` | Callback when an event is resized. | - |
 | `onEventAdd` | `(start: string, end: string) => void` | Callback when a date is double-clicked to add an event. | - |
+| `onEventTitleChange` | `(event: CalendarEvent, newTitle: string) => void` | Callback when an event's title is changed. | - |
+| `onEventDescriptionChange` | `(event: CalendarEvent, newDescription: string) => void` | Callback when an event's description is changed. | - |
+| `onEventDelete` | `(event: CalendarEvent) => void` | Callback when an event is deleted. | - |
 | `onDateClick` | `(date: string) => void` | Callback when a date is clicked. | - |
 | `onDateChange` | `(date: Date) => void` | Callback when the visible date range changes. | - |
 | `onViewChange` | `(view: CalendarView) => void` | Callback when the active view changes. | - |

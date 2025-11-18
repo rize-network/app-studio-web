@@ -7,6 +7,8 @@ export interface CalendarEvent {
   id: string;
   /** Event title/label */
   title: string;
+  /** Event description */
+  description?: string;
   /** Start date in ISO format (YYYY-MM-DD) or datetime (YYYY-MM-DDTHH:MM) */
   start: string;
   /** End date in ISO format (YYYY-MM-DD) or datetime (YYYY-MM-DDTHH:MM) */
@@ -67,6 +69,15 @@ export interface CalendarProps {
   onViewChange?: (view: CalendarView) => void;
   /** Callback when double-clicking to add new event */
   onEventAdd?: (start: string, end: string) => void;
+  /** Callback when an event's title changes */
+  onEventTitleChange?: (event: CalendarEvent, newTitle: string) => void;
+  /** Callback when an event's description changes */
+  onEventDescriptionChange?: (
+    event: CalendarEvent,
+    newDescription: string
+  ) => void;
+  /** Callback when an event is deleted */
+  onEventDelete?: (event: CalendarEvent) => void;
   /** Style overrides for various parts of the component */
   views?: CalendarViews;
   /** Width of the calendar (default: '100%') */

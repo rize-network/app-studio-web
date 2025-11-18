@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Vertical } from 'app-studio';
 import { Text } from '../../Text/Text';
 import { KanbanBoardViewProps } from './KanbanBoard.props';
+import { PlusIcon, TrashIcon } from '../../Icon/Icon';
 
 export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   columns,
@@ -17,21 +18,177 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   onCardDragOver,
   onColumnDrop,
   onCardDrop,
+  onCardCreate,
+  onCardDelete,
+  onCardTitleChange,
+  onCardDescriptionChange,
 }) => {
+  const [editingCardId, setEditingCardId] = React.useState<string | null>(null);
+  const [editingDescriptionCardId, setEditingDescriptionCardId] =
+    React.useState<string | null>(null);
+  const [editedTitle, setEditedTitle] = React.useState<string>('');
+  const [editedDescription, setEditedDescription] = React.useState<string>('');
+
+  const handleTitleClick = React.useCallback(
+    (card: KanbanBoardViewProps['columns'][number]['cards'][number]) => {
+      setEditingCardId(card.id);
+      setEditedTitle(card.title);
+    },
+    []
+  );
+
+  const handleDescriptionClick = React.useCallback(
+    (card: KanbanBoardViewProps['columns'][number]['cards'][number]) => {
+      setEditingDescriptionCardId(card.id);
+      setEditedDescription(card.description || '');
+    },
+    []
+  );
+
+  const handleTitleChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setEditedTitle(event.target.value);
+    },
+    []
+  );
+
+  const handleDescriptionChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setEditedDescription(event.target.value);
+    },
+    []
+  );
+
+  const handleTitleBlur = React.useCallback(
+    (
+      card: KanbanBoardViewProps['columns'][number]['cards'][number],
+      column: KanbanBoardViewProps['columns'][number]
+    ) => {
+      if (editingCardId === card.id) {
+        onCardTitleChange?.(card, column, editedTitle);
+        setEditingCardId(null);
+      }
+    },
+    [editingCardId, editedTitle, onCardTitleChange]
+  );
+
+  const handleDescriptionBlur = React.useCallback(
+    (
+      card: KanbanBoardViewProps['columns'][number]['cards'][number],
+      column: KanbanBoardViewProps['columns'][number]
+    ) => {
+      if (editingDescriptionCardId === card.id) {
+        onCardDescriptionChange?.(card, column, editedDescription);
+        setEditingDescriptionCardId(null);
+      }
+    },
+    [editingDescriptionCardId, editedDescription, onCardDescriptionChange]
+  );
+
+  const handleTitleKeyDown = React.useCallback(
+    (
+      event: React.KeyboardEvent<HTMLInputElement>,
+      card: KanbanBoardViewProps['columns'][number]['cards'][number],
+      column: KanbanBoardViewProps['columns'][number]
+    ) => {
+      if (event.key === 'Enter') {
+        handleTitleBlur(card, column);
+      }
+    },
+    [handleTitleBlur]
+  );
+
+  const handleDescriptionKeyDown = React.useCallback(
+    (
+      event: React.KeyboardEvent<HTMLTextAreaElement>,
+      card: KanbanBoardViewProps['columns'][number]['cards'][number],
+      column: KanbanBoardViewProps['columns'][number]
+    ) => {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        handleDescriptionBlur(card, column);
+      }
+    },
+    [handleDescriptionBlur]
+  );
+
   const renderDefaultCard = React.useCallback(
-    (card: KanbanBoardViewProps['columns'][number]['cards'][number]) => (
+    (
+      card: KanbanBoardViewProps['columns'][number]['cards'][number],
+      column: KanbanBoardViewProps['columns'][number]
+    ) => (
       <Vertical gap={4} alignItems="flex-start" {...views?.cardContent}>
-        <Text weight="semiBold" size="sm">
-          {card.title}
-        </Text>
-        {card.description && (
-          <Text size="sm" color="#475467">
-            {card.description}
+        {editingCardId === card.id ? (
+          <input
+            type="text"
+            value={editedTitle}
+            onChange={handleTitleChange}
+            onBlur={() => handleTitleBlur(card, column)}
+            onKeyDown={(event) => handleTitleKeyDown(event, card, column)}
+            autoFocus
+            style={{
+              border: '1px solid #d0d5dd',
+              borderRadius: '4px',
+              padding: '4px 8px',
+              fontSize: '14px',
+              fontWeight: '600',
+              width: '100%',
+            }}
+          />
+        ) : (
+          <Text
+            weight="semiBold"
+            size="sm"
+            onClick={() => handleTitleClick(card)}
+          >
+            {card.title}
           </Text>
         )}
+        {card.description &&
+          (editingDescriptionCardId === card.id ? (
+            <textarea
+              value={editedDescription}
+              onChange={handleDescriptionChange}
+              onBlur={() => handleDescriptionBlur(card, column)}
+              onKeyDown={(event) =>
+                handleDescriptionKeyDown(event, card, column)
+              }
+              autoFocus
+              style={{
+                border: '1px solid #d0d5dd',
+                borderRadius: '4px',
+                padding: '4px 8px',
+                fontSize: '14px',
+                width: '100%',
+                minHeight: '60px',
+              }}
+            />
+          ) : (
+            <Text
+              size="sm"
+              color="#475467"
+              onClick={() => handleDescriptionClick(card)}
+            >
+              {card.description}
+            </Text>
+          ))}
       </Vertical>
     ),
-    [views?.cardContent]
+    [
+      views?.cardContent,
+      editingCardId,
+      editedTitle,
+      editingDescriptionCardId,
+      editedDescription,
+      handleTitleBlur,
+      handleTitleChange,
+      handleTitleClick,
+      handleTitleKeyDown,
+      handleDescriptionBlur,
+      handleDescriptionChange,
+      handleDescriptionClick,
+      handleDescriptionKeyDown,
+    ]
   );
 
   return (
@@ -69,6 +226,16 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                 {column.title}
               </Text>
             )}
+            <View
+              onClick={() =>
+                onCardCreate?.(
+                  { id: `new-card-${Date.now()}`, title: 'Nouvelle carte' },
+                  column
+                )
+              }
+            >
+              <PlusIcon widthHeight={16} />
+            </View>
           </View>
 
           <Vertical
@@ -82,29 +249,6 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
             transition="all 0.15s ease-in-out"
             {...views?.columnBody}
           >
-            {column.cards.length === 0 && (
-              <View
-                padding={12}
-                borderWidth="1px"
-                borderStyle="dashed"
-                borderColor="#d0d5dd"
-                borderRadius={8}
-                backgroundColor="rgba(255, 255, 255, 0.6)"
-                textAlign="center"
-                color="#667085"
-                fontSize="14px"
-                {...views?.emptyState}
-              >
-                {renderEmptyState ? (
-                  renderEmptyState(column)
-                ) : (
-                  <Text size="sm" color="#667085">
-                    Drop cards here
-                  </Text>
-                )}
-              </View>
-            )}
-
             {column.cards.map((card) => (
               <View key={card.id} position="relative">
                 <View
@@ -128,12 +272,49 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                   }}
                   {...views?.card}
                 >
-                  {renderCard
-                    ? renderCard(card, column)
-                    : renderDefaultCard(card)}
+                  <View
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="flex-start"
+                  >
+                    <View flexGrow={1}>
+                      {renderCard
+                        ? renderCard(card, column)
+                        : renderDefaultCard(card, column)}
+                    </View>
+                    <View onClick={() => onCardDelete?.(card, column)}>
+                      <TrashIcon widthHeight={16} />
+                    </View>
+                  </View>
                 </View>
               </View>
             ))}
+            <View
+              padding={12}
+              borderWidth="1px"
+              borderStyle="dashed"
+              borderColor="#d0d5dd"
+              borderRadius={8}
+              backgroundColor="rgba(255, 255, 255, 0.6)"
+              textAlign="center"
+              color="#667085"
+              fontSize="14px"
+              {...views?.emptyState}
+              onClick={() =>
+                onCardCreate?.(
+                  { id: `new-card-${Date.now()}`, title: 'Nouvelle carte' },
+                  column
+                )
+              }
+            >
+              {renderEmptyState ? (
+                renderEmptyState(column)
+              ) : (
+                <Text size="sm" color="#667085">
+                  Create a new card
+                </Text>
+              )}
+            </View>
           </Vertical>
 
           {column.footer && (

@@ -115,6 +115,10 @@ export const CustomRenderKanbanBoard = () => {
 | --- | --- | --- | --- |
 | `columns` | `KanbanBoardColumn[]` | Array of columns to display. | `[]` |
 | `onChange` | `(columns: KanbanBoardColumn[]) => void` | Callback when columns or cards are changed. | - |
+| `onCardCreate` | `(card: KanbanBoardCard, column: KanbanBoardColumn) => void` | Callback when a card is created. | - |
+| `onCardDelete` | `(card: KanbanBoardCard, column: KanbanBoardColumn) => void` | Callback when a card is deleted. | - |
+| `onCardTitleChange` | `(card: KanbanBoardCard, column: KanbanBoardColumn, newTitle: string) => void` | Callback when a card's title is changed. | - |
+| `onCardDescriptionChange` | `(card: KanbanBoardCard, column: KanbanBoardColumn, newDescription: string) => void` | Callback when a card's description is changed. | - |
 | `renderCard` | `(card: KanbanBoardCard, column: KanbanBoardColumn) => React.ReactNode` | Custom render method for cards. | - |
 | `renderColumnHeader` | `(column: KanbanBoardColumn) => React.ReactNode` | Custom render method for column headers. | - |
 | `renderEmptyState` | `(column: KanbanBoardColumn) => React.ReactNode` | Custom render method for empty column state. | - |
