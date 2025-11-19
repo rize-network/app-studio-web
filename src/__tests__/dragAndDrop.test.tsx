@@ -23,8 +23,10 @@ test('DragAndDrop with multiple items', () => {
 
 test('DragAndDrop matches snapshot', () => {
   const items = ['Item 1', 'Item 2'];
-  const tree = renderer.create(
-    <DragAndDrop items={items} renderItem={(item) => <div>{item}</div>} />
-  ).toJSON();
+  const tree = renderer
+    .create(
+      <DragAndDrop items={items} renderItem={(item) => <div>{item}</div>} />
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

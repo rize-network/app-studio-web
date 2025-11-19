@@ -22,9 +22,7 @@ test('renders Accordion with items', () => {
 });
 
 test('Accordion expands item on click', () => {
-  const items = [
-    { value: 'item1', title: 'Item 1', content: 'Content 1' },
-  ];
+  const items = [{ value: 'item1', title: 'Item 1', content: 'Content 1' }];
   render(<Accordion items={items} />);
   const trigger = screen.getByText('Item 1');
   fireEvent.click(trigger);
@@ -32,16 +30,12 @@ test('Accordion expands item on click', () => {
 
 test('Accordion calls onValueChange callback', () => {
   const handleValueChange = jest.fn();
-  const items = [
-    { value: 'item1', title: 'Item 1', content: 'Content 1' },
-  ];
+  const items = [{ value: 'item1', title: 'Item 1', content: 'Content 1' }];
   render(<Accordion items={items} onValueChange={handleValueChange} />);
 });
 
 test('Accordion matches snapshot', () => {
-  const items = [
-    { value: 'item1', title: 'Item 1', content: 'Content 1' },
-  ];
+  const items = [{ value: 'item1', title: 'Item 1', content: 'Content 1' }];
   const tree = renderer.create(<Accordion items={items} />).toJSON();
   expect(tree).toMatchSnapshot();
 });

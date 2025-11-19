@@ -32,8 +32,8 @@ test('renders Toast with error variant', () => {
 });
 
 test('Toast matches snapshot', () => {
-  const tree = renderer.create(
-    <Toast title="Test" description="Description" />
-  ).toJSON();
+  const tree = renderer
+    .create(<Toast title="Test" description="Description" />)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

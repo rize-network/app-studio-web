@@ -11,6 +11,8 @@ test('renders Slider component', () => {
 });
 
 test('Slider matches snapshot', () => {
-  const tree = renderer.create(<input type="range" min="0" max="100" />).toJSON();
+  const tree = renderer
+    .create(<input type="range" min="0" max="100" />)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

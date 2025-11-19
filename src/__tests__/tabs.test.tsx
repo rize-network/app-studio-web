@@ -114,6 +114,8 @@ test('Tabs with custom views matches snapshot', () => {
     { value: 'tab2', label: 'Tab 2', content: 'Content 2' },
   ];
   const customViews = { container: { backgroundColor: '#f5f5f5' } };
-  const tree = renderer.create(<Tabs tabs={tabs} views={customViews} />).toJSON();
+  const tree = renderer
+    .create(<Tabs tabs={tabs} views={customViews} />)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

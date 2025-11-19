@@ -48,21 +48,39 @@ test('renders Alert with error variant', () => {
 });
 
 test('Alert with warning variant matches snapshot', () => {
-  const tree = renderer.create(<Alert title="Warning" description="This is a warning" variant="warning" />).toJSON();
+  const tree = renderer
+    .create(
+      <Alert
+        title="Warning"
+        description="This is a warning"
+        variant="warning"
+      />
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test('Alert with info variant matches snapshot', () => {
-  const tree = renderer.create(<Alert title="Info" description="This is info" variant="info" />).toJSON();
+  const tree = renderer
+    .create(<Alert title="Info" description="This is info" variant="info" />)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test('Alert with success variant matches snapshot', () => {
-  const tree = renderer.create(<Alert title="Success" description="This is success" variant="success" />).toJSON();
+  const tree = renderer
+    .create(
+      <Alert title="Success" description="This is success" variant="success" />
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test('Alert with error variant matches snapshot', () => {
-  const tree = renderer.create(<Alert title="Error" description="This is an error" variant="error" />).toJSON();
+  const tree = renderer
+    .create(
+      <Alert title="Error" description="This is an error" variant="error" />
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

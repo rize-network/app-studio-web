@@ -20,11 +20,13 @@ test('renders Tree with children', () => {
 });
 
 test('Tree matches snapshot', () => {
-  const tree = renderer.create(
-    <Tree>
-      <div>Item 1</div>
-      <div>Item 2</div>
-    </Tree>
-  ).toJSON();
+  const tree = renderer
+    .create(
+      <Tree>
+        <div>Item 1</div>
+        <div>Item 2</div>
+      </Tree>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

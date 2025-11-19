@@ -11,6 +11,8 @@ test('renders ChatInput component', () => {
 });
 
 test('ChatInput matches snapshot', () => {
-  const tree = renderer.create(<input type="text" placeholder="Message" />).toJSON();
+  const tree = renderer
+    .create(<input type="text" placeholder="Message" />)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

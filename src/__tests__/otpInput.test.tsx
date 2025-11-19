@@ -11,6 +11,8 @@ test('renders OTPInput component', () => {
 });
 
 test('OTPInput matches snapshot', () => {
-  const tree = renderer.create(<input type="number" placeholder="OTP" />).toJSON();
+  const tree = renderer
+    .create(<input type="number" placeholder="OTP" />)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

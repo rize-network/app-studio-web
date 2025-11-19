@@ -104,22 +104,26 @@ test('Card with default props matches snapshot', () => {
 });
 
 test('Card with compound components matches snapshot', () => {
-  const tree = renderer.create(
-    <Card>
-      <Card.Header>Header</Card.Header>
-      <Card.Content>Content</Card.Content>
-      <Card.Footer>Footer</Card.Footer>
-    </Card>
-  ).toJSON();
+  const tree = renderer
+    .create(
+      <Card>
+        <Card.Header>Header</Card.Header>
+        <Card.Content>Content</Card.Content>
+        <Card.Footer>Footer</Card.Footer>
+      </Card>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 test('Card with header and footer matches snapshot', () => {
-  const tree = renderer.create(
-    <Card header={<div>Header</div>} footer={<div>Footer</div>}>
-      Content
-    </Card>
-  ).toJSON();
+  const tree = renderer
+    .create(
+      <Card header={<div>Header</div>} footer={<div>Footer</div>}>
+        Content
+      </Card>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -128,10 +132,12 @@ test('Card with custom views matches snapshot', () => {
     container: { backgroundColor: '#f5f5f5' },
     header: { paddingBottom: '16px' },
   };
-  const tree = renderer.create(
-    <Card views={customViews} header={<div>Header</div>}>
-      Content
-    </Card>
-  ).toJSON();
+  const tree = renderer
+    .create(
+      <Card views={customViews} header={<div>Header</div>}>
+        Content
+      </Card>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

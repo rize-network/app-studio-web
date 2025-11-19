@@ -47,11 +47,13 @@ test('renders Form with various input types', () => {
 });
 
 test('Form matches snapshot', () => {
-  const tree = renderer.create(
-    <Form>
-      <input type="text" placeholder="Name" />
-      <button type="submit">Submit</button>
-    </Form>
-  ).toJSON();
+  const tree = renderer
+    .create(
+      <Form>
+        <input type="text" placeholder="Name" />
+        <button type="submit">Submit</button>
+      </Form>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

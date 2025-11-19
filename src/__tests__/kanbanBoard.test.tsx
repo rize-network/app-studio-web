@@ -8,9 +8,7 @@ afterEach(() => {
 });
 
 test('renders KanbanBoard component', () => {
-  const columns = [
-    { id: 'col1', title: 'Column 1', cards: [] },
-  ];
+  const columns = [{ id: 'col1', title: 'Column 1', cards: [] }];
   render(<KanbanBoard columns={columns} />);
 });
 
@@ -23,11 +21,7 @@ test('KanbanBoard with multiple columns', () => {
 });
 
 test('KanbanBoard matches snapshot', () => {
-  const columns = [
-    { id: 'col1', title: 'Column 1', cards: [] },
-  ];
-  const tree = renderer.create(
-    <KanbanBoard columns={columns} />
-  ).toJSON();
+  const columns = [{ id: 'col1', title: 'Column 1', cards: [] }];
+  const tree = renderer.create(<KanbanBoard columns={columns} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
