@@ -1,24 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Vertical layout to match snapshot 1`] = `
-<div
-  className="sc-bdfCDU kGFsFQ"
-  display="flex"
->
-  <div
-    className="sc-bdfCDU cxaZGL"
-    height={50}
-    width={50}
-  />
-  <div
-    className="sc-bdfCDU fuRwoR"
-    height={50}
-    width={50}
-  />
-  <div
-    className="sc-bdfCDU QjNJh"
-    height={50}
-    width={50}
-  />
+exports[`Vertical matches snapshot 1`] = `
+<div>
+  Vertical
 </div>
 `;

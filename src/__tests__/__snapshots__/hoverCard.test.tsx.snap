@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HoverCard matches snapshot 1`] = `
+<div>
+  Hover Card
+</div>
+`;

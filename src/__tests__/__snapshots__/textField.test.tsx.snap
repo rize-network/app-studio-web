@@ -2,120 +2,55 @@
 
 exports[`TextField to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU bQLfgH"
-  display="flex"
+  className="dy-flex fdn-column gp-8px pn-relative wh-100 bcr-"
 >
   <div
-    className="sc-bdfCDU gBoRhg"
-    color="theme.primary"
-    cursor="pointer"
-    display="flex"
-    fontSize={20}
+    className="dy-flex fdn-row gp-8px wh-100 fwp-nowrap ais-center jct-space-between mbm-2px bsee-solid bcrr- bcr- fse-20px cror-text oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease ptp-12px pbm-12px plt-16px prt-16px mobile--brs-6px brs-8px bwh-1px cr- bcrr---hover bcrr---focus outline-none--focus bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus bcrr---focus-visible outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus-visible"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    width="100%"
   >
     <div
-      className="sc-bdfCDU bStJnL"
-      display="flex"
-      height="12px"
-      width="12px"
+      className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
+      size={12}
     >
       <svg
-        fill="#000000"
-        height="12px"
-        version="1.1"
-        viewBox="0 0 20 20"
-        width="12px"
-        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="false"
+        fill=""
+        focusable="false"
+        stroke="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1}
+        viewBox="0 0 24 24"
       >
-        <g
-          id="SVGRepo_bgCarrier"
-          strokeWidth="0"
+        <path
+          d="M12 13c-2.67 0-8 1.34-8 4v2c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-2c0-2.66-5.33-4-8-4zm0-9c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z M12 2C9.79 2 8 3.79 8 6s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z M12 13c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
+          fill="currentColor"
         />
-        <g
-          id="SVGRepo_tracerCarrier"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <g
-          id="SVGRepo_iconCarrier"
-        >
-          <title>
-            profile_round [#1342]
-          </title>
-           
-          <desc>
-            Created with Sketch.
-          </desc>
-          <defs>
-             
-          </defs>
-          <g
-            fill="none"
-            fillRule="evenodd"
-            id="Page-1"
-            stroke="none"
-            strokeWidth="1"
-          >
-            <g
-              fill="white"
-              id="Dribbble-Light-Preview"
-              transform="translate(-140.000000, -2159.000000)"
-            >
-              <g
-                id="icons"
-                transform="translate(56.000000, 160.000000)"
-              >
-                <path
-                  d="M100.562548,2016.99998 L87.4381713,2016.99998 C86.7317804,2016.99998 86.2101535,2016.30298 86.4765813,2015.66198 C87.7127655,2012.69798 90.6169306,2010.99998 93.9998492,2010.99998 C97.3837885,2010.99998 100.287954,2012.69798 101.524138,2015.66198 C101.790566,2016.30298 101.268939,2016.99998 100.562548,2016.99998 M89.9166645,2004.99998 C89.9166645,2002.79398 91.7489936,2000.99998 93.9998492,2000.99998 C96.2517256,2000.99998 98.0830339,2002.79398 98.0830339,2004.99998 C98.0830339,2007.20598 96.2517256,2008.99998 93.9998492,2008.99998 C91.7489936,2008.99998 89.9166645,2007.20598 89.9166645,2004.99998 M103.955674,2016.63598 C103.213556,2013.27698 100.892265,2010.79798 97.837022,2009.67298 C99.4560048,2008.39598 100.400241,2006.33098 100.053171,2004.06998 C99.6509769,2001.44698 97.4235996,1999.34798 94.7348224,1999.04198 C91.0232075,1998.61898 87.8750721,2001.44898 87.8750721,2004.99998 C87.8750721,2006.88998 88.7692896,2008.57398 90.1636971,2009.67298 C87.1074334,2010.79798 84.7871636,2013.27698 84.044024,2016.63598 C83.7745338,2017.85698 84.7789973,2018.99998 86.0539717,2018.99998 L101.945727,2018.99998 C103.221722,2018.99998 104.226185,2017.85698 103.955674,2016.63598"
-                  id="profile_round-[#1342]"
-                />
-              </g>
-            </g>
-          </g>
-        </g>
+         
       </svg>
     </div>
     <div
-      className="sc-bdfCDU gFyoGC"
-      display="flex"
-      width="100%"
+      className="dy-flex fdn-column wh-100 mwhh-100 pn-relative"
     >
       <input
         autoComplete="off"
         autoFocus={true}
-        className="sc-bdfCDU kWxYva"
-        color="color.blueGray.700"
-        cursor="auto"
+        className="wh-100 ht-100 plt-0px prt-0px ptp-4px pbm-4px mn-0px pvl-4 phl-0 wh-100 ht-100 br-none outline-none--focus fse-20px lht-20px lsg--0p01em bcr- cr- cror-text tn-all-0p2s-ease"
         disabled={false}
-        fontSize={20}
         name="name"
-        on={
-          Object {
-            "focus": Object {
-              "outline": "none",
-            },
-          }
-        }
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
         placeholder="Name"
         readOnly={false}
         type="text"
-        width="100%"
       />
     </div>
   </div>
   <div
-    className="sc-bdfCDU kpEGz"
-    color="theme.error"
-    fontSize={10}
+    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
     fontStyle="normal"
-    fontWeight={400}
-    role="text"
-    textDecoration="none"
   />
 </div>
 `;

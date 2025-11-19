@@ -2,8 +2,10 @@
 
 exports[`Modal footer to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU jmYYGs"
-  display="flex"
+  borderTopColor="color.gray.200"
+  borderTopStyle="solid"
+  borderTopWidth="1px"
+  className="plt-24px prt-24px ptp-16px pbm-16px dy-flex fdn-row mtp-auto ais-center jct-flex-end pvl-16 phl-24 gp-12px mobile--pvl-12 mobile--phl-16 mobile--gp-8px"
 >
   Modal Content
 </div>

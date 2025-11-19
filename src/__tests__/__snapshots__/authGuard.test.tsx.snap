@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthGuard matches snapshot 1`] = `
+<div>
+  AuthGuard
+</div>
+`;

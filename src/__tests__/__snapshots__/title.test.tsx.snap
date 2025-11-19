@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Title Component Title with animation loop should match snapshot 1`] = `
+<h1
+  className="lht-100 fwt-500 tan-left mobile--fse-32px tablet--fse-40px desktop--fse-48px"
+>
+  Animation 
+  <span
+    bgColor=""
+    className="dy-inline pg-0-8px brs-4px"
+  >
+    Loop
+  </span>
+   Test
+</h1>
+`;
+
+exports[`Title Component Title with manual media queries should match snapshot 1`] = `
+<h1
+  className="fse-64px lht-72px fwt-bold tan-left mobile--fse-24px tablet--fse-32px desktop--fse-40px"
+>
+  <span
+    bgColor=""
+    className="dy-inline pg-0-8px brs-4px"
+  >
+    Manual Media Title
+  </span>
+</h1>
+`;
+
+exports[`Title Component Title with responsive prop should match snapshot 1`] = `
+<h1
+  className="lht-100 fwt-500 tan-left mobile--fse-32px tablet--fse-40px desktop--fse-48px"
+>
+  <span
+    bgColor=""
+    className="dy-inline pg-0-8px brs-4px"
+  >
+    Responsive
+  </span>
+   Title Test
+</h1>
+`;

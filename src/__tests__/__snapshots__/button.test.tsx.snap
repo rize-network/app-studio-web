@@ -2,25 +2,13 @@
 
 exports[`Button will a pillShaped shape to match snapshot 1`] = `
 <button
-  className="sc-bdfCDU eMuXTf"
-  color="color.white"
-  cursor="pointer"
+  className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-999px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
   disabled={false}
-  display="flex"
-  filter="brightness(1)"
-  
-  fontWeight={600}
-  letterSpacing={1.25}
-  onClick={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  role="button"
-  transform=""
-  width="fit-content"
+  isHovered={false}
+  type="button"
 >
   <div
-    className="sc-bdfCDU dpBfNq"
-    display="flex"
+    className="dy-flex fdn-row gp-8px ais-center jct-center cr- mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em cr---hover"
   >
     Pill Shape
   </div>
@@ -29,58 +17,36 @@ exports[`Button will a pillShaped shape to match snapshot 1`] = `
 
 exports[`Button with an icon on the left to match snapshot 1`] = `
 <button
-  className="sc-bdfCDU eSlpEH"
-  color="color.white"
-  cursor="pointer"
+  className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-999px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
   disabled={false}
-  display="flex"
-  filter="brightness(1)"
-  
-  fontWeight={600}
-  letterSpacing={1.25}
-  onClick={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  role="button"
-  transform=""
-  width={144}
+  isHovered={false}
+  type="button"
 >
   <div
-    className="sc-bdfCDU dpBfNq"
-    display="flex"
+    className="dy-flex fdn-row gp-8px ais-center jct-center cr- mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em cr---hover"
   >
     <div
-      className="sc-bdfCDU dMZcpT"
-      display="flex"
-      height="24px"
-      width="24px"
+      className="cr- cr---hover"
     >
-      <svg
-        fill="#ffffff"
-        height="24px"
-        id="Capa_1"
-        version="1.1"
-        viewBox="0 0 197.516 197.516"
-        width="24px"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
+        size={24}
       >
-        <g
-          id="SVGRepo_bgCarrier"
-          strokeWidth="0"
-        />
-        <g
-          id="SVGRepo_tracerCarrier"
+        <svg
+          aria-hidden="false"
+          fill="none"
+          focusable="false"
+          stroke=""
           strokeLinecap="round"
           strokeLinejoin="round"
-        />
-        <g
-          id="SVGRepo_iconCarrier"
+          strokeWidth={1}
+          viewBox="0 0 24 24"
         >
           <path
-            d="M68.758,170.083V72.649h15v97.434H68.758z M128.758,72.649h-15v97.434h15V72.649z M140.539,0v12.631h34.885v47.746h-10.525 v137.139H32.617V60.377H22.092V12.631h34.883V0H140.539z M149.898,60.377H47.617v122.139h102.281V60.377z M125.539,27.631V15H71.975 v12.631H37.092v17.585h123.332V27.631H125.539z"
+            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
           />
-        </g>
-      </svg>
+        </svg>
+      </div>
     </div>
     Delete
   </div>
@@ -89,59 +55,37 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
 
 exports[`Button with an icon on the right to match snapshot 1`] = `
 <button
-  className="sc-bdfCDU eSlpEH"
-  color="color.white"
-  cursor="pointer"
+  className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-999px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
   disabled={false}
-  display="flex"
-  filter="brightness(1)"
-  
-  fontWeight={600}
-  letterSpacing={1.25}
-  onClick={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  role="button"
-  transform=""
-  width={144}
+  isHovered={false}
+  type="button"
 >
   <div
-    className="sc-bdfCDU dpBfNq"
-    display="flex"
+    className="dy-flex fdn-row gp-8px ais-center jct-center cr- mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em cr---hover"
   >
     Delete
     <div
-      className="sc-bdfCDU dMZcpT"
-      display="flex"
-      height="24px"
-      width="24px"
+      className="cr- cr---hover"
     >
-      <svg
-        fill="#ffffff"
-        height="24px"
-        id="Capa_1"
-        version="1.1"
-        viewBox="0 0 197.516 197.516"
-        width="24px"
-        xmlns="http://www.w3.org/2000/svg"
+      <div
+        className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
+        size={24}
       >
-        <g
-          id="SVGRepo_bgCarrier"
-          strokeWidth="0"
-        />
-        <g
-          id="SVGRepo_tracerCarrier"
+        <svg
+          aria-hidden="false"
+          fill="none"
+          focusable="false"
+          stroke=""
           strokeLinecap="round"
           strokeLinejoin="round"
-        />
-        <g
-          id="SVGRepo_iconCarrier"
+          strokeWidth={1}
+          viewBox="0 0 24 24"
         >
           <path
-            d="M68.758,170.083V72.649h15v97.434H68.758z M128.758,72.649h-15v97.434h15V72.649z M140.539,0v12.631h34.885v47.746h-10.525 v137.139H32.617V60.377H22.092V12.631h34.883V0H140.539z M149.898,60.377H47.617v122.139h102.281V60.377z M125.539,27.631V15H71.975 v12.631H37.092v17.585h123.332V27.631H125.539z"
+            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
           />
-        </g>
-      </svg>
+        </svg>
+      </div>
     </div>
   </div>
 </button>

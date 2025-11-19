@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gradient matches snapshot 1`] = `
+<div
+  style={
+    Object {
+      "background": "linear-gradient(to right, red, blue)",
+    }
+  }
+>
+  Gradient
+</div>
+`;

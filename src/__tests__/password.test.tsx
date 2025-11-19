@@ -1,9 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { Password } from 'src/components';
-import { CloseEyeIcon } from 'src/components/Icon/CloseEye';
-import { OpenEyeIcon } from 'src/components/Icon/OpenEye';
-
 import { cleanup, render, screen } from '@testing-library/react';
 
 afterEach(() => {
@@ -43,8 +40,6 @@ test('Password to match snapshot', () => {
         variant="outline"
         placeholder="Name"
         helperText={'required'}
-        visibleIcon={<OpenEyeIcon size={14} />}
-        hiddenIcon={<CloseEyeIcon size={14} />}
         size="xl"
         views={{
           container: {

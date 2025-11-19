@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DragAndDrop matches snapshot 1`] = `
+<div
+  className="ow-hidden pn-relative"
+>
+  <div
+    className="pn-relative cror-grab tn-transform-0p2s bcr-"
+    onMouseDown={[Function]}
+    onTouchStart={[Function]}
+  >
+    <div>
+      Item 1
+    </div>
+  </div>
+  <div
+    className="pn-relative cror-grab tn-transform-0p2s bcr-"
+    onMouseDown={[Function]}
+    onTouchStart={[Function]}
+  >
+    <div>
+      Item 2
+    </div>
+  </div>
+</div>
+`;

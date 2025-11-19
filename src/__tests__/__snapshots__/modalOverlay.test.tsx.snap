@@ -2,28 +2,16 @@
 
 exports[`Modal Overlay to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU ePQxSx"
-  display="flex"
-  height="100%"
+  className="wh-100 ht-100 dy-flex jct-center ais-center pn-fixed tp-0px lt-0px wh-100 ht-100 zix-1000 vy-visible tn-all-0p3s-ease cror-pointer"
   onClick={[Function]}
-  visibility="visible"
-  width="100%"
 >
   <div
-    className="sc-bdfCDU ihGwMi"
-    display="flex"
-    height="100vh"
+    className="pn-absolute tp-0px lt-0px zix-1000 wh-100vw ht-100vh dy-flex bcr- bfr-blur5px tn-all-0p3s-ease jct-center ais-flex-start cror-pointer"
     onClick={[Function]}
-    width="100vw"
   >
     <div
-      className="sc-bdfCDU kVoWxR"
-      cursor="default"
-      display="flex"
-      height="fit-content"
+      className="dy-flex fdn-column cror-default bcr- wh-600px ht-fit-content tn-all-0p3s-ease bsw-0px-4px-16px-rgba0-0-0-0p15 brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px"
       onClick={[Function]}
-      overflow="hidden"
-      width={600}
     >
       Modal Content
     </div>

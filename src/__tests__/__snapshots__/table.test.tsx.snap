@@ -2,69 +2,68 @@
 
 exports[`Table to match snapshot 1`] = `
 <table
-  className="sc-bdfCDU fvLDyq"
+  borderCollapse="collapse"
+  className="wh-100 brs-8px ow-hidden bsw-0px-1px-3px-rgba0-0-0-0p06-0px-1px-2px-rgba0-0-0-0p04 br-1px-solid bcrr- tn-box-shadow-0p2s-ease mobile--ox-auto mobile--dy-block mobile--brs-4px"
   role="Table"
 >
   <thead
-    className="sc-bdfCDU gxlqWj"
-    color="color.gray.400"
+    borderBottomColor="color.gray.200"
+    className="tan-left bcr- bbm-1px-solid"
   >
     <tr
-      className="sc-bdfCDU cYBAia"
+      className="tn-background-color-0p15s-ease bcr---hover outline-none--focus bcr---focus"
     >
       <th
-        className="sc-bdfCDU frJuHz"
-        fontWeight="500"
+        className="wse-nowrap pg-12px-16px fwt-600 fse-14px cr- tan-left mobile--pg-8px-12px mobile--fse-12px"
       >
         Invoice
       </th>
       <th
-        className="sc-bdfCDU frJuHz"
-        fontWeight="500"
+        className="wse-nowrap pg-12px-16px fwt-600 fse-14px cr- tan-left mobile--pg-8px-12px mobile--fse-12px"
       >
         Payment Status
       </th>
       <th
-        className="sc-bdfCDU frJuHz"
-        fontWeight="500"
+        className="wse-nowrap pg-12px-16px fwt-600 fse-14px cr- tan-left mobile--pg-8px-12px mobile--fse-12px"
       >
         Total Amount
       </th>
       <th
-        className="sc-bdfCDU frJuHz"
-        fontWeight="500"
+        className="wse-nowrap pg-12px-16px fwt-600 fse-14px cr- tan-left mobile--pg-8px-12px mobile--fse-12px"
       >
         Payment Method
       </th>
     </tr>
   </thead>
-  <tbody
-    className="sc-bdfCDU cYBAia"
-  >
+  <tbody>
     <tr
-      className="sc-bdfCDU cYBAia"
+      className="tn-background-color-0p15s-ease bcr---hover outline-none--focus bcr---focus"
     >
       <td
-        className="sc-bdfCDU jpUhUe"
-        fontWeight="400"
+        borderBottomColor="color.gray.100"
+        className="wse-nowrap fwt-500 pg-12px-16px fse-14px bbm-1px-solid cr- mobile--pg-8px-12px mobile--fse-12px"
+        isFirstColumn={true}
       >
         INV001
       </td>
       <td
-        className="sc-bdfCDU fPWZcZ"
-        fontWeight="300"
+        borderBottomColor="color.gray.100"
+        className="wse-nowrap fwt-400 pg-12px-16px fse-14px bbm-1px-solid cr- mobile--pg-8px-12px mobile--fse-12px"
+        isFirstColumn={false}
       >
         Paid
       </td>
       <td
-        className="sc-bdfCDU fPWZcZ"
-        fontWeight="300"
+        borderBottomColor="color.gray.100"
+        className="wse-nowrap fwt-400 pg-12px-16px fse-14px bbm-1px-solid cr- mobile--pg-8px-12px mobile--fse-12px"
+        isFirstColumn={false}
       >
         $250.00
       </td>
       <td
-        className="sc-bdfCDU fPWZcZ"
-        fontWeight="300"
+        borderBottomColor="color.gray.100"
+        className="wse-nowrap fwt-400 pg-12px-16px fse-14px bbm-1px-solid cr- mobile--pg-8px-12px mobile--fse-12px"
+        isFirstColumn={false}
       >
         Credit Card
       </td>

@@ -2,42 +2,25 @@
 
 exports[`Switch to match snapshot 1`] = `
 <label
-  className="sc-bdfCDU gNCvrc"
-  cursor="default"
-  display="flex"
-  
+  className="wh-fit-content ht-fit-content wh-fit-content fse-sm fwt-400 tdn-none gp-12px dy-flex ht-fit-content ais-center cror-default oy-1 tn-all-0p2s-ease"
   fontStyle="normal"
-  fontWeight={400}
-  height="fit-content"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  textDecoration="none"
-  width="fit-content"
 >
   <input
     checked={false}
-    className="sc-bdfCDU Ttntf"
+    className="wh-0px ht-0px oy-0 wh-0px ht-0px"
     disabled={false}
-    height={0}
     name="name"
     onChange={[Function]}
-    opacity={0}
     readOnly={true}
     type="checkbox"
-    width={0}
   />
   <div
-    className="sc-bdfCDU crvySG"
-    cursor="pointer"
-    display="flex"
-    filter="brightness(1)"
-    height={32}
-    width={60}
+    className="plt-4px prt-4px ptp-4px pbm-4px dy-flex ais-center jct-flex-start mbm-4px brs-9999px bcr- ow-hidden cror-pointer tn-all-0p3s-cubic-bezier0p4-0-0p2-1 bsw-rgb249-115-22-0px-4px-14px-0px pvl-4 phl-4 ht-32px wh-68px"
   >
     <div
-      className="sc-bdfCDU bUUORK"
-      height={18}
-      width={18}
+      className="wh-24px ht-24px brs-50 bcr- bsw-0-1px-2px-rgba0-0-0-0p1 tn-all-0p3s-cubic-bezier0p4-0-0p2-1 zix-1 ht-24px wh-24px"
     />
   </div>
 </label>

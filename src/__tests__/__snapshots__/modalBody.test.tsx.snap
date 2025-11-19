@@ -2,7 +2,8 @@
 
 exports[`Modal body to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU kSFsWD"
+  buttonColor="black"
+  className="plt-24px prt-24px ptp-16px pbm-16px pvl-16 phl-24 fse-16px fwt-400 lht-24px cr- mobile--pvl-12 mobile--phl-16 mobile--fse-14px"
 >
   Modal Content
 </div>

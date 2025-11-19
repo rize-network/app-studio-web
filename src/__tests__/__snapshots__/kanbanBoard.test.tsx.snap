@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KanbanBoard matches snapshot 1`] = `
+<div
+  className="dy-flex ais-flex-start gp-16px wh-100 ox-auto pg-16px"
+>
+  <div
+    className="dy-flex fdn-column gp-12px wh-280px fsk-0 bcr- brs-12px pg-16px bsw-0-1px-2px-0-rgba16-24-40-0p08"
+  >
+    <div
+      className="dy-flex ais-center jct-space-between"
+    >
+      <div
+        className="fse-14px lht-20px fwt-600 lsg--0p01em tdn-none"
+        fontStyle="normal"
+      >
+        Column 1
+      </div>
+      <div
+        className="cror-pointer"
+        onClick={[Function]}
+      >
+        <div
+          className="wh-16px ht-16px dy-flex jct-center ais-center wht-16 lht-16px cr- tm-rotate0deg"
+        >
+          <svg
+            aria-hidden="false"
+            fill="none"
+            focusable="false"
+            stroke=""
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1}
+            viewBox="0 0 24 24"
+          >
+            <line
+              stroke="currentColor"
+              x1="12"
+              x2="12"
+              y1="5"
+              y2="19"
+            />
+            <line
+              stroke="currentColor"
+              x1="5"
+              x2="19"
+              y1="12"
+              y2="12"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      className="dy-flex fdn-column gp-12px mht-40px on-drag-over-event--onColumnDragOvercolumnpid-event tn-all-0p15s-ease-in-out"
+      onDragOver={[Function]}
+      onDrop={[Function]}
+    >
+      <div
+        className="pg-12px bwh-1px bsee-dashed bcrr- brs-8px bcr- tan-center cr- fse-14px cror-pointer"
+        onClick={[Function]}
+      >
+        <div
+          className="fse-12px lht-16px fwt-400 lsg--0p01em tdn-none cr-"
+          fontStyle="normal"
+        >
+          Create a new card
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

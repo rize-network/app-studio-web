@@ -2,40 +2,23 @@
 
 exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU dWkXMr"
-  display="flex"
+  className="dy-flex fdn-column gp-8px pn-relative wh-100 cror-pointer"
   onClick={[Function]}
 >
   <div
-    className="sc-bdfCDU etESBx"
-    color="theme.primary"
-    cursor="pointer"
-    display="flex"
-    fontSize={20}
+    className="dy-flex fdn-row gp-8px wh-100 fwp-nowrap ais-center jct-space-between mbm-2px bsee-solid bcrr- bcr- fse-20px cror-text oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease ptp-12px pbm-12px plt-16px prt-16px mobile--ptp-10px mobile--pbm-10px mobile--plt-12px mobile--prt-12px brs-9999px bwh-1px cr- bcrr---hover bcrr---focus outline-none--focus bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus bcrr---focus-visible outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus-visible"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    width="100%"
   >
     <div
-      className="sc-bdfCDU gFyoGC"
-      display="flex"
-      width="100%"
+      className="dy-flex fdn-column wh-100 mwhh-100 pn-relative"
     >
       <input
         autoFocus={true}
-        className="sc-bdfCDU fXGfns"
-        color="color.blueGray.700"
-        cursor="auto"
+        className="plt-0px prt-0px ptp-8px pbm-8px mn-0px pvl-8 phl-0 wh-100 br-none outline-none--focus fse-20px bcr- cr- cror-pointer"
         disabled={false}
-        fontSize={20}
+        heigth="100%"
         name="name"
-        on={
-          Object {
-            "focus": Object {
-              "outline": "none",
-            },
-          }
-        }
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
@@ -43,87 +26,40 @@ exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
         readOnly={false}
         type="country"
         value="Name"
-        width="100%"
       />
     </div>
     <div
-      className="sc-bdfCDU dBLlLe"
-      display="flex"
+      className="dy-flex jct-center ais-center gp-10px rt-10px zix-500 fwp-nowrap"
     >
       <div
-        className="sc-bdfCDU dDpRWj"
-        display="flex"
-        height="16px"
-        width="16px"
+        className="wh-16px ht-16px dy-flex jct-center ais-center wht-16 lht-16px tm-rotate180deg"
+        style={
+          Object {
+            "width": 0.2,
+          }
+        }
       >
         <svg
-          fill="#000000"
-          style={
-            Object {
-              "width": 0.2,
-            }
-          }
-          version="1.1"
-          viewBox="0 -4.5 20 20"
+          aria-hidden="true"
+          fill=""
+          focusable="false"
+          stroke="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1}
+          viewBox="0 0 24 24"
         >
-          <g
-            id="SVGRepo_bgCarrier"
-            strokeWidth="0"
+          <path
+            d="M7.41 15.41L12 10.83L16.59 15.41L18 14L12 8L6 14L7.41 15.41Z"
+            fill="currentColor"
           />
-          <g
-            id="SVGRepo_tracerCarrier"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <g
-            id="SVGRepo_iconCarrier"
-          >
-            <title>
-              arrow_down [#338]
-            </title>
-             
-            <desc>
-              Created with Sketch.
-            </desc>
-            <defs>
-               
-            </defs>
-            <g
-              fill="none"
-              fillRule="evenodd"
-              id="Page-1"
-              stroke="none"
-              strokeWidth="1"
-            >
-              <g
-                fill="#000000"
-                id="Dribbble-Light-Preview"
-                transform="translate(-220.000000, -6684.000000)"
-              >
-                <g
-                  id="icons"
-                  transform="translate(56.000000, 160.000000)"
-                >
-                  <path
-                    d="M164.292308,6524.36583 L164.292308,6524.36583 C163.902564,6524.77071 163.902564,6525.42619 164.292308,6525.83004 L172.555873,6534.39267 C173.33636,6535.20244 174.602528,6535.20244 175.383014,6534.39267 L183.70754,6525.76791 C184.093286,6525.36716 184.098283,6524.71997 183.717533,6524.31405 C183.328789,6523.89985 182.68821,6523.89467 182.29347,6524.30266 L174.676479,6532.19636 C174.285736,6532.60124 173.653152,6532.60124 173.262409,6532.19636 L165.705379,6524.36583 C165.315635,6523.96094 164.683051,6523.96094 164.292308,6524.36583"
-                    id="arrow_down-[#338]"
-                  />
-                </g>
-              </g>
-            </g>
-          </g>
         </svg>
       </div>
     </div>
   </div>
   <div
-    className="sc-bdfCDU kpEGz"
-    color="theme.error"
-    fontSize={10}
+    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
     fontStyle="normal"
-    fontWeight={400}
-    role="text"
-    textDecoration="none"
   />
 </div>
 `;

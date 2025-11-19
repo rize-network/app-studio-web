@@ -2,35 +2,28 @@
 
 exports[`Checkbox to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU eCPOuS"
-  color="blue"
-  cursor="default"
-  display="flex"
-  fontSize={20}
+  className="wh-fit-content ht-fit-content wh-fit-content fse-20px fwt-400 tdn-none gp-8px dy-flex ht-fit-content fdn-column cr- cror-default oy-1 tn-all-0p2s-ease"
   fontStyle="normal"
-  fontWeight={400}
-  height="fit-content"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  textDecoration="none"
-  width="fit-content"
 >
   <div
-    className="sc-bdfCDU fZelUa"
-    display="flex"
+    className="dy-flex fdn-column gp-8px"
   >
+     
     <div
-      className="sc-bdfCDU kVOtgy"
-      display="flex"
+      className="dy-flex fdn-row gp-12px ais-center"
     >
+       
       <div
-        className="sc-bdfCDU edAivK"
-        display="flex"
-        height={30}
-        width={30}
+        className="wh-28px ht-28px dy-flex jct-center ais-center bcr- bwh-2px bsee-solid bcrr- cr- tn-all-0p2s-ease brs-4px ht-28px wh-28px bsw-rgb249-115-22-0px-4px-14px-0px"
       />
     </div>
   </div>
+  <div
+    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
+    fontStyle="normal"
+  />
 </div>
 `;

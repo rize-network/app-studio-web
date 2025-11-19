@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldLabel with custom color matches snapshot 1`] = `
+<label
+  className="wh-100 fse-16px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-16px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
+  fontStyle="normal"
+>
+  Custom Color Label
+</label>
+`;
+
+exports[`FieldLabel with custom views matches snapshot 1`] = `
+<label
+  className="wh-100 fse-18px fwt-bold tdn-none tp-0px zix--10 pn-absolute lht-16px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease ttm-uppercase"
+  fontStyle="normal"
+>
+  Styled Label
+</label>
+`;
+
+exports[`FieldLabel with default props matches snapshot 1`] = `
+<label
+  className="wh-100 fse-16px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-16px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
+  fontStyle="normal"
+>
+  Default Label
+</label>
+`;
+
+exports[`FieldLabel with error state matches snapshot 1`] = `
+<label
+  className="wh-100 fse-16px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-16px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
+  fontStyle="normal"
+>
+  Error State Label
+</label>
+`;
+
+exports[`FieldLabel with large size matches snapshot 1`] = `
+<label
+  className="wh-100 fse-18px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-18px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
+  fontStyle="normal"
+>
+  Large Size Label
+</label>
+`;
+
+exports[`FieldLabel with small size matches snapshot 1`] = `
+<label
+  className="wh-100 fse-14px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-14px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
+  fontStyle="normal"
+>
+  Small Size Label
+</label>
+`;
