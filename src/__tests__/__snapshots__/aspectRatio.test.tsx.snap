@@ -1,19 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AspectRatio to match snapshot 1`] = `
-<div
-  className="sc-bdfCDU xaxf"
-  display="flex"
-  overflow="hidden"
-  width="100%"
->
-  <div
-    className="sc-bdfCDU dRiktu"
-  >
-    <div
-      className="sc-bdfCDU fyIxcV"
-      height="100px"
-    />
-  </div>
+exports[`AspectRatio matches snapshot 1`] = `
+<div>
+  AspectRatio
 </div>
 `;

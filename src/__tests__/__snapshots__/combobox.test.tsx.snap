@@ -2,33 +2,23 @@
 
 exports[`Checkbox to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU foBlXZ"
-  display="flex"
+  className="dy-flex fdn-row fwp-nowrap gp-15px ais-center wh-100"
   id="combo"
   role="combobox"
-  width="100%"
 >
   <div
-    className="sc-bdfCDU dRoCvi"
+    className="pn-relative"
   >
     <div
-      className="sc-bdfCDU eTWVak"
-      cursor="pointer"
-      display="flex"
+      className="dy-flex fdn-row cror-pointer bcr- bsw-rgba0-0-0-0p16-0px-1px-4px pg-12px ais-center brs-4px jct-space-between mwh-300px fwp-nowrap"
     >
       <div
-        className="sc-bdfCDU jwEnfw"
-        display="flex"
+        className="dy-flex fdn-row gp-15px ais-center pn-relative wh-100 cror-pointer"
         onClick={[Function]}
-        width="100%"
       >
         <div
-          className="sc-bdfCDU gVoSlS"
-          fontSize={14}
+          className="fse-14px lht-20px fwt-500 lsg--0p01em tdn-none cr- fgw-1"
           fontStyle="normal"
-          fontWeight={500}
-          role="text"
-          textDecoration="none"
         >
           Option 1
         </div>

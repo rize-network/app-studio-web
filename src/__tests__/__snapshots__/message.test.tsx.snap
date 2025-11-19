@@ -1,32 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AspectRatio to match snapshot 1`] = `
-<div
-  className="sc-bdfCDU cYBAia"
->
-  <button
-    className="sc-bdfCDU bjTbpr"
-    color="color.white"
-    cursor="pointer"
-    disabled={false}
-    display="flex"
-    filter="brightness(1)"
-    
-    fontWeight={600}
-    letterSpacing={1.25}
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    role="button"
-    transform=""
-    width={144}
-  >
-    <div
-      className="sc-bdfCDU dpBfNq"
-      display="flex"
-    >
-      Show Toast
-    </div>
-  </button>
+exports[`Message to match snapshot 1`] = `
+<div>
+  <p>
+    This is a message
+  </p>
 </div>
 `;
