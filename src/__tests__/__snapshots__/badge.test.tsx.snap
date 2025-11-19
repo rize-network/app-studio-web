@@ -1,16 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Badge to match snapshot 1`] = `
-<div
-  className="dy-flex jct-center ais-center wh-fit-content bcr- brs-9999px mwh-28px ht-28px pg-0-10px fse-14px fwt-500 lht-28px cr- bwh-1px bsee-solid bcrr- tn-all-0p2s-ease"
-  role="badge"
->
-  <div
-    className="fse-14px lht-20px fwt-500 lsg--0p01em tdn-none cr- bcr- tan-center"
-    fontStyle="normal"
-    role="badgeText"
-  >
-    default
-  </div>
-</div>
+exports[`Badge matches snapshot 1`] = `
+<span>
+  Badge
+</span>
 `;

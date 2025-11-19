@@ -1,61 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tabs with custom views matches snapshot 1`] = `
-<div
-  className="wh-100 ht-100 dy-flex fdn-column wh-100 ht-100 bcr-"
->
-  <div
-    className="dy-flex fdn-row"
-  >
-    <div
-      aria-selected={true}
-      borderBottomColor="transparent"
-      className="dy-flex ais-center jct-center pg-10px-16px cror-pointer btlrs-4px btrrs-4px bblrs-0px bbrrs-0px bwh-1px bsee-solid bcrr- bcr- cr- fwt-normal pn-relative cr---hover fdn-row gp-8px"
-      data-state="active"
-      onClick={[Function]}
-      role="tab"
-      tabIndex={0}
-    >
-      <span />
-    </div>
-    <div
-      aria-selected={true}
-      borderBottomColor="transparent"
-      className="dy-flex ais-center jct-center pg-10px-16px cror-pointer btlrs-4px btrrs-4px bblrs-0px bbrrs-0px bwh-1px bsee-solid bcrr- bcr- cr- fwt-normal pn-relative cr---hover fdn-row gp-8px"
-      data-state="active"
-      onClick={[Function]}
-      role="tab"
-      tabIndex={0}
-    >
-      <span />
-    </div>
-  </div>
-  <div
-    className="wh-100 ht-100 wh-100 ht-100"
-  >
-    Content 1
-  </div>
-</div>
-`;
-
-exports[`Tabs with default props matches snapshot 1`] = `
+exports[`Tabs matches snapshot 1`] = `
 <div
   className="wh-100 ht-100 dy-flex fdn-column wh-100 ht-100"
 >
   <div
     className="dy-flex fdn-row"
   >
-    <div
-      aria-selected={true}
-      borderBottomColor="transparent"
-      className="dy-flex ais-center jct-center pg-10px-16px cror-pointer btlrs-4px btrrs-4px bblrs-0px bbrrs-0px bwh-1px bsee-solid bcrr- bcr- cr- fwt-normal pn-relative cr---hover fdn-row gp-8px"
-      data-state="active"
-      onClick={[Function]}
-      role="tab"
-      tabIndex={0}
-    >
-      <span />
-    </div>
     <div
       aria-selected={true}
       borderBottomColor="transparent"

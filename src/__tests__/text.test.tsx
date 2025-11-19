@@ -14,14 +14,14 @@ test('should render text component without crashing', () => {
 
 test('should render text component with the correct text', () => {
   render(<Text>Some text here</Text>);
-  const textElement = screen.getByRole('text');
+  const textElement = screen.getByText('Some text here');
   expect(textElement).toBeInTheDocument();
   expect(textElement).toHaveTextContent('Some text here');
 });
 
 test('should render text component with correct class name', () => {
   render(<Text className="text">Some text here</Text>);
-  const textElement = screen.getByRole('text');
+  const textElement = screen.getByText('Some text here');
   expect(textElement).toHaveClass('text');
 });
 

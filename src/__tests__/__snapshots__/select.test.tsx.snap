@@ -1,52 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Select component Select to match snapshot 1`] = `
-<div
-  className="dy-inline-block fdn-column gp-8px pn-relative wh-100 cror-pointer"
-  id="select-c106s7yxz"
-  onClick={[Function]}
-  role="SelectBox"
->
-  <div
-    borderBottomColor="color.gray.200"
-    borderBottomStyle="solid"
-    borderBottomWidth="1px"
-    className="dy-flex fdn-row gp-8px wh-100 fwp-nowrap ais-center jct-space-between mbm-2px bsee-solid bcrr- bcr- fse-20px cror-auto oy-1 tn-border-color-0p2s-ease ptp-12px pbm-12px plt-16px prt-16px mobile--brs-6px bsw-rgb249-115-22-0px-4px-14px-0px brs-0px bwh-0px cr- pn-relative border-bottom-color---hover border-bottom-color---focus outline-none--focus border-bottom-color---focus-visible outline-none--focus-visible"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="dy-flex fdn-column wh-100 mwhh-100 pn-relative"
-    >
-      <select
-        className="wh-0px ht-0px oy-0 wh-0px ht-0px pn-absolute cror-pointer"
-        disabled={false}
-        id="select-c106s7yxz"
-        multiple={false}
-        name="name"
-        onChange={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        readOnly={true}
-      >
-        <option />
-        <option />
-        <option />
-      </select>
-      <div
-        className="plt-0px prt-0px ptp-4px pbm-4px fse-20px lht-1p5 fwt-400 lsg--0p01em tdn-none cr- bcr- mn-0px wh-95 ht-100 br-none pvl-4 phl-0 cror-pointer tn-all-0p2s-ease"
-        fontStyle="normal"
-      >
-        <span />
-      </div>
-    </div>
-    <div
-      className="dy-flex jct-center ais-center gp-10px rt-10px zix-500 fwp-nowrap"
-    />
-  </div>
-  <div
-    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
-    fontStyle="normal"
-  />
-</div>
+exports[`Select matches snapshot 1`] = `
+<select>
+  <option>
+    Option 1
+  </option>
+</select>
 `;

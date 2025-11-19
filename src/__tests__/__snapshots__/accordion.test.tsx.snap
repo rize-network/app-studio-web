@@ -4,14 +4,5 @@ exports[`Accordion matches snapshot 1`] = `
 <div
   className="dy-flex fdn-column wh-100 brs-8px bcr- bwh-0px tn-background-color-0p15s-ease"
   data-orientation="vertical"
-  items={
-    Array [
-      Object {
-        "content": "Content 1",
-        "title": "Item 1",
-        "value": "item1",
-      },
-    ]
-  }
 />
 `;
