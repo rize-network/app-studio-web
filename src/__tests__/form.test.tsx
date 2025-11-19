@@ -7,11 +7,21 @@ afterEach(() => {
 });
 
 test('renders Form component', () => {
-  const { container } = render(<form><input type="text" /></form>);
+  const { container } = render(
+    <form>
+      <input type="text" />
+    </form>
+  );
   expect(container).toBeInTheDocument();
 });
 
 test('Form matches snapshot', () => {
-  const tree = renderer.create(<form><input type="text" /></form>).toJSON();
+  const tree = renderer
+    .create(
+      <form>
+        <input type="text" />
+      </form>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

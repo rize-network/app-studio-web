@@ -16,10 +16,12 @@ test('renders Select component', () => {
 });
 
 test('Select matches snapshot', () => {
-  const tree = renderer.create(
-    <select>
-      <option>Option 1</option>
-    </select>
-  ).toJSON();
+  const tree = renderer
+    .create(
+      <select>
+        <option>Option 1</option>
+      </select>
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });
