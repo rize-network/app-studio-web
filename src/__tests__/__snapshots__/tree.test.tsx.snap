@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tree matches snapshot 1`] = `
+<ul
+  aria-label="Tree"
+  className="dy-flex fdn-column wh-100"
+  id="tree-laaocnj"
+  role="tree"
+>
+  <div>
+    Item 1
+  </div>
+  <div>
+    Item 2
+  </div>
+</ul>
+`;

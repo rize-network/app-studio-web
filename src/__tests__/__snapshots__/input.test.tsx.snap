@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input field matches snapshot 1`] = `
+<input
+  placeholder="test"
+  type="text"
+/>
+`;

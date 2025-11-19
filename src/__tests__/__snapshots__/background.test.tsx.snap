@@ -1087,102 +1087,102 @@ exports[`Background Snapshots Particles background to match snapshot 1`] = `
   className="wh-400px ht-300px pn-relative ow-hidden bcr-"
 >
   <div
-    className="wh-7p8994378449134395px ht-7p8994378449134395px animation-name-animation-33 animation-duration-9815p297532971008ms animation-timing-function-ease-in-out animation-delay-4941p492860319807ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-7p8994378449134395px ht-7p8994378449134395px bcr- oy-0p7"
+    className="wh-4p604376275285434px ht-4p604376275285434px animation-name-animation-33 animation-duration-5250p939066086124ms animation-timing-function-ease-in-out animation-delay-3492p6609595798154ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-4p604376275285434px ht-4p604376275285434px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 305.54920945657517,
-        "top": 81.40418448434272,
+        "left": 106.68181319705124,
+        "top": 198.62852074652793,
       }
     }
   />
   <div
-    className="wh-5p607533607835409px ht-5p607533607835409px animation-name-animation-34 animation-duration-9873p974932056148ms animation-timing-function-ease-in-out animation-delay-1636p1195440865217ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-5p607533607835409px ht-5p607533607835409px bcr- oy-0p7"
+    className="wh-5p242053729996794px ht-5p242053729996794px animation-name-animation-34 animation-duration-13893p631756168601ms animation-timing-function-ease-in-out animation-delay-2455p8628010035422ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-5p242053729996794px ht-5p242053729996794px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 217.18461925612695,
-        "top": 271.696914500077,
+        "left": 391.29831679562665,
+        "top": 65.58987789205695,
       }
     }
   />
   <div
-    className="wh-8p783586569538981px ht-8p783586569538981px animation-name-animation-35 animation-duration-8953p032490817133ms animation-timing-function-ease-in-out animation-delay-742p360006004158ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-8p783586569538981px ht-8p783586569538981px bcr- oy-0p7"
+    className="wh-10p579759408061335px ht-10p579759408061335px animation-name-animation-35 animation-duration-13098p105200230324ms animation-timing-function-ease-in-out animation-delay-548p5692997645042ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-10p579759408061335px ht-10p579759408061335px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 99.71841358203903,
-        "top": 26.108611447759067,
+        "left": 59.79042018852461,
+        "top": 283.4699399554026,
       }
     }
   />
   <div
-    className="wh-10p547970359060477px ht-10p547970359060477px animation-name-animation-36 animation-duration-12508p057125694238ms animation-timing-function-ease-in-out animation-delay-922p5884602107182ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-10p547970359060477px ht-10p547970359060477px bcr- oy-0p7"
+    className="wh-5p498325088792988px ht-5p498325088792988px animation-name-animation-36 animation-duration-8372p067135743622ms animation-timing-function-ease-in-out animation-delay-1771p2354934566577ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-5p498325088792988px ht-5p498325088792988px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 234.2826958652882,
-        "top": 154.03267541448312,
+        "left": 288.8433316658707,
+        "top": 17.67220239558163,
       }
     }
   />
   <div
-    className="wh-8p74450208679338px ht-8p74450208679338px animation-name-animation-37 animation-duration-14365p026140705368ms animation-timing-function-ease-in-out animation-delay-4016p7409443304737ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-8p74450208679338px ht-8p74450208679338px bcr- oy-0p7"
+    className="wh-11p79001760950806px ht-11p79001760950806px animation-name-animation-37 animation-duration-14260p816363215286ms animation-timing-function-ease-in-out animation-delay-3762p724343716025ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-11p79001760950806px ht-11p79001760950806px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 61.56117173158107,
-        "top": 210.86336421175014,
+        "left": 388.3672020125843,
+        "top": 120.69391261842242,
       }
     }
   />
   <div
-    className="wh-9p928284538784299px ht-9p928284538784299px animation-name-animation-38 animation-duration-7888p925047687431ms animation-timing-function-ease-in-out animation-delay-3546p688650685468ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-9p928284538784299px ht-9p928284538784299px bcr- oy-0p7"
+    className="wh-6p861706602602544px ht-6p861706602602544px animation-name-animation-38 animation-duration-12761p089746662588ms animation-timing-function-ease-in-out animation-delay-329p0411427934192ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-6p861706602602544px ht-6p861706602602544px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 121.56693850224487,
-        "top": 26.413111377339927,
+        "left": 389.064719615034,
+        "top": 128.77006819633513,
       }
     }
   />
   <div
-    className="wh-7p841076825842745px ht-7p841076825842745px animation-name-animation-39 animation-duration-11920p473604482195ms animation-timing-function-ease-in-out animation-delay-4834p194404362523ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-7p841076825842745px ht-7p841076825842745px bcr- oy-0p7"
+    className="wh-6p0376533503443195px ht-6p0376533503443195px animation-name-animation-39 animation-duration-11809p141591655027ms animation-timing-function-ease-in-out animation-delay-2912p443490372636ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-6p0376533503443195px ht-6p0376533503443195px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 294.24475014604405,
-        "top": 181.47165873691208,
+        "left": 359.71602045296163,
+        "top": 242.53086139851686,
       }
     }
   />
   <div
-    className="wh-8p095133349825813px ht-8p095133349825813px animation-name-animation-40 animation-duration-11298p92850583273ms animation-timing-function-ease-in-out animation-delay-2635p1676162005015ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-8p095133349825813px ht-8p095133349825813px bcr- oy-0p7"
+    className="wh-10p925991662755857px ht-10p925991662755857px animation-name-animation-40 animation-duration-7331p222221131766ms animation-timing-function-ease-in-out animation-delay-3582p934199132385ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-10p925991662755857px ht-10p925991662755857px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 85.21930007386169,
-        "top": 119.32535697544382,
+        "left": 319.4036666543276,
+        "top": 240.24817451663745,
       }
     }
   />
   <div
-    className="wh-4p843150453377737px ht-4p843150453377737px animation-name-animation-41 animation-duration-5610p934752719761ms animation-timing-function-ease-in-out animation-delay-4488p168126423039ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-4p843150453377737px ht-4p843150453377737px bcr- oy-0p7"
+    className="wh-7p913523532195292px ht-7p913523532195292px animation-name-animation-41 animation-duration-12609p131820976718ms animation-timing-function-ease-in-out animation-delay-4684p2468038763345ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-7p913523532195292px ht-7p913523532195292px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 124.19221070643252,
-        "top": 76.67298609333642,
+        "left": 265.33340521206964,
+        "top": 97.83666835981802,
       }
     }
   />
   <div
-    className="wh-8p012297143602824px ht-8p012297143602824px animation-name-animation-42 animation-duration-9396p547103991144ms animation-timing-function-ease-in-out animation-delay-1139p6532515349456ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-8p012297143602824px ht-8p012297143602824px bcr- oy-0p7"
+    className="wh-6p396048974909041px ht-6p396048974909041px animation-name-animation-42 animation-duration-11180p694334303162ms animation-timing-function-ease-in-out animation-delay-3848p146329628648ms animation-iteration-count-infinite animation-direction-alternate animation-fill-mode-none animation-play-state-running pn-absolute wh-6p396048974909041px ht-6p396048974909041px bcr- oy-0p7"
     style={
       Object {
         "borderRadius": "50%",
-        "left": 380.5920933223588,
-        "top": 18.517523478763476,
+        "left": 31.08458723994314,
+        "top": 37.40073153328996,
       }
     }
   />
@@ -1194,65 +1194,65 @@ exports[`Background Snapshots Ripples background to match snapshot 1`] = `
   className="wh-400px ht-300px pn-relative ow-hidden bcr-"
 >
   <div
-    className="wh-20px ht-20px animation-name-animation-43 animation-duration-4929p599005326445ms animation-timing-function-ease-out animation-delay-0ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-20px ht-20px brs-50"
+    className="wh-20px ht-20px animation-name-animation-43 animation-duration-4817p623599647216ms animation-timing-function-ease-out animation-delay-0ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-20px ht-20px brs-50"
     style={
       Object {
         "backgroundColor": "transparent",
         "border": "2px solid rgba(59, 130, 246, 0.6)",
-        "left": 161.17646628841464,
-        "top": 75.40892263610536,
+        "left": 163.16802250527735,
+        "top": 113.40941937238713,
       }
     }
   />
   <div
-    className="wh-20px ht-20px animation-name-animation-43 animation-duration-4898p57408088305ms animation-timing-function-ease-out animation-delay-666p6666666666666ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-20px ht-20px brs-50"
+    className="wh-20px ht-20px animation-name-animation-43 animation-duration-3171p3766847818056ms animation-timing-function-ease-out animation-delay-666p6666666666666ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-20px ht-20px brs-50"
     style={
       Object {
         "backgroundColor": "transparent",
         "border": "2px solid rgba(147, 51, 234, 0.6)",
-        "left": 56.78765204480497,
-        "top": -3.988102108584437,
+        "left": 30.718107652949165,
+        "top": 259.50961677263814,
       }
     }
   />
   <div
-    className="wh-20px ht-20px animation-name-animation-43 animation-duration-4747p320889563022ms animation-timing-function-ease-out animation-delay-1333p3333333333333ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-20px ht-20px brs-50"
+    className="wh-20px ht-20px animation-name-animation-43 animation-duration-3007p328942180874ms animation-timing-function-ease-out animation-delay-1333p3333333333333ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-20px ht-20px brs-50"
     style={
       Object {
         "backgroundColor": "transparent",
         "border": "2px solid rgba(236, 72, 153, 0.6)",
-        "left": 267.8872624013265,
-        "top": 160.37830926649735,
+        "left": 112.26608960520062,
+        "top": 141.238710427997,
       }
     }
   />
   <div
-    className="wh-10px ht-10px animation-name-animation-44 animation-duration-5915p518806391733ms animation-timing-function-ease-out animation-delay-500ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-10px ht-10px brs-50"
+    className="wh-10px ht-10px animation-name-animation-44 animation-duration-5781p148319576659ms animation-timing-function-ease-out animation-delay-500ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-10px ht-10px brs-50"
     style={
       Object {
         "backgroundColor": "rgba(59, 130, 246, 0.6)",
-        "left": 166.17646628841464,
-        "top": 80.40892263610536,
+        "left": 168.16802250527735,
+        "top": 118.40941937238713,
       }
     }
   />
   <div
-    className="wh-10px ht-10px animation-name-animation-44 animation-duration-5878p288897059659ms animation-timing-function-ease-out animation-delay-1166p6666666666665ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-10px ht-10px brs-50"
+    className="wh-10px ht-10px animation-name-animation-44 animation-duration-3805p6520217381662ms animation-timing-function-ease-out animation-delay-1166p6666666666665ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-10px ht-10px brs-50"
     style={
       Object {
         "backgroundColor": "rgba(147, 51, 234, 0.6)",
-        "left": 61.78765204480497,
-        "top": 1.011897891415563,
+        "left": 35.718107652949165,
+        "top": 264.50961677263814,
       }
     }
   />
   <div
-    className="wh-10px ht-10px animation-name-animation-44 animation-duration-5696p785067475627ms animation-timing-function-ease-out animation-delay-1833p3333333333333ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-10px ht-10px brs-50"
+    className="wh-10px ht-10px animation-name-animation-44 animation-duration-3608p7947306170486ms animation-timing-function-ease-out animation-delay-1833p3333333333333ms animation-iteration-count-infinite animation-direction-normal animation-fill-mode-none animation-play-state-running pn-absolute wh-10px ht-10px brs-50"
     style={
       Object {
         "backgroundColor": "rgba(236, 72, 153, 0.6)",
-        "left": 272.8872624013265,
-        "top": 165.37830926649735,
+        "left": 117.26608960520062,
+        "top": 146.238710427997,
       }
     }
   />

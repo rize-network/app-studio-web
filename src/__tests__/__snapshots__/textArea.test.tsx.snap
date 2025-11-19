@@ -2,40 +2,24 @@
 
 exports[`TextArea to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU bQLfgH"
-  display="flex"
+  className="dy-flex fdn-column gp-8px pn-relative wh-100 bcr-"
 >
   <div
-    className="sc-bdfCDU gBoRhg"
-    color="theme.primary"
-    cursor="pointer"
-    display="flex"
-    fontSize={20}
+    className="dy-flex fdn-row gp-8px wh-100 fwp-nowrap ais-center jct-space-between mbm-2px bsee-solid bcrr- bcr- fse-20px cror-text oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease ptp-12px pbm-12px plt-16px prt-16px mobile--brs-6px brs-8px bwh-1px cr- bcrr---hover bcrr---focus outline-none--focus bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus bcrr---focus-visible outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus-visible"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
-    width="100%"
   >
     <div
-      className="sc-bdfCDU gFyoGC"
-      display="flex"
-      width="100%"
+      className="dy-flex fdn-column wh-100 mwhh-100 pn-relative"
     >
       <textarea
         autoFocus={false}
-        className="sc-bdfCDU bcwFXV"
-        color="color.blueGray.700"
+        className="plt-2px prt-2px ptp-2px pbm-2px mn-0px pvl-2 phl-2 wh-100 mhtt-calc100vh---100px ht-calc5em br-none re-vertical outline-none--focus fse-20px lht-30px lsg--0p01em bcr- cr- cror-text tn-all-0p2s-ease"
         cols={35}
-        cursor="auto"
         disabled={false}
-        fontSize={20}
+        editable="true"
+        multiline="true"
         name="name"
-        on={
-          Object {
-            "focus": Object {
-              "outline": "none",
-            },
-          }
-        }
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
@@ -43,18 +27,12 @@ exports[`TextArea to match snapshot 1`] = `
         readOnly={false}
         rows={3}
         value=""
-        width="100%"
       />
     </div>
   </div>
   <div
-    className="sc-bdfCDU kpEGz"
-    color="theme.error"
-    fontSize={10}
+    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
     fontStyle="normal"
-    fontWeight={400}
-    role="text"
-    textDecoration="none"
   />
 </div>
 `;

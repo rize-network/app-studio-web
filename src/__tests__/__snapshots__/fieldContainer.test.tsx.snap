@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldContainer with custom views matches snapshot 1`] = `
+<div
+  className="dy-flex fdn-column gp-8px pn-relative wh-100 bcr- pg-16px"
+>
+  <input
+    type="text"
+  />
+  <div
+    className="mlt-0px mrt-0px mtp-0px mbm-0px fse-10px lht-16px fwt-400 lsg--0p01em tdn-none cr- mvl-0 mhl-0 tn-all-0p2s-ease mtp-4px"
+    fontStyle="normal"
+  >
+    Custom styled helper
+  </div>
+</div>
+`;
+
+exports[`FieldContainer with error matches snapshot 1`] = `
+<div
+  className="dy-flex fdn-column gp-8px pn-relative wh-100"
+>
+  <input
+    name="required-field"
+    type="text"
+  />
+  <div
+    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
+    fontStyle="normal"
+  >
+    This field is required
+  </div>
+</div>
+`;
+
+exports[`FieldContainer with helperText matches snapshot 1`] = `
+<div
+  className="dy-flex fdn-column gp-8px pn-relative wh-100"
+>
+  <input
+    name="name"
+    type="text"
+  />
+  <div
+    className="mlt-0px mrt-0px mtp-0px mbm-0px fse-10px lht-16px fwt-400 lsg--0p01em tdn-none cr- mvl-0 mhl-0 tn-all-0p2s-ease mtp-4px"
+    fontStyle="normal"
+  >
+    Please enter your name
+  </div>
+</div>
+`;

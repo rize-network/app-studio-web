@@ -2,13 +2,12 @@
 
 exports[`Loader with an a size xl where width equals to 30px should match snapshot 1`] = `
 <div
-  className="sc-bdfCDU deAZJE"
-  display="flex"
+  className="dy-flex jct-center ais-center gp-10px fdn-row"
 >
   <svg
     fill="none"
     height="30px"
-    stroke="theme.loading"
+    stroke=""
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1"
@@ -38,9 +37,7 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
       />
     </g>
   </svg>
-  <div
-    className="sc-bdfCDU cYBAia"
-  >
+  <div>
     Delete
   </div>
 </div>
@@ -48,13 +45,12 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
 
 exports[`Loader with loader color equals to theme.primary should match snapshot 1`] = `
 <div
-  className="sc-bdfCDU deAZJE"
-  display="flex"
+  className="dy-flex jct-center ais-center gp-10px fdn-row"
 >
   <svg
     fill="none"
     height="22px"
-    stroke="theme.primary"
+    stroke=""
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1"
@@ -84,9 +80,7 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
       />
     </g>
   </svg>
-  <div
-    className="sc-bdfCDU cYBAia"
-  >
+  <div>
     Loader
   </div>
 </div>
@@ -94,13 +88,12 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
 
 exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
 <div
-  className="sc-bdfCDU deAZJE"
-  display="flex"
+  className="dy-flex jct-center ais-center gp-10px fdn-row"
 >
   <svg
     fill="none"
     height="22px"
-    stroke="theme.loading"
+    stroke=""
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1"
@@ -131,8 +124,7 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
     </g>
   </svg>
   <div
-    className="sc-bdfCDU jjOcgx"
-    color="theme.primary"
+    className="cr-"
   >
     Loader
   </div>
@@ -141,13 +133,12 @@ exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) s
 
 exports[`Loader with text position bottom should match snapshot 1`] = `
 <div
-  className="sc-bdfCDU gcSHdQ"
-  display="flex"
+  className="dy-flex jct-center ais-center gp-10px fdn-column"
 >
   <svg
     fill="none"
     height="22px"
-    stroke="theme.loading"
+    stroke=""
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1"
@@ -177,9 +168,7 @@ exports[`Loader with text position bottom should match snapshot 1`] = `
       />
     </g>
   </svg>
-  <div
-    className="sc-bdfCDU cYBAia"
-  >
+  <div>
     Loader
   </div>
 </div>

@@ -2,120 +2,82 @@
 
 exports[`Modal to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU ePQxSx"
-  display="flex"
-  height="100%"
+  className="wh-100 ht-100 dy-flex jct-center ais-center pn-fixed tp-0px lt-0px wh-100 ht-100 zix-1000 vy-visible tn-all-0p3s-ease cror-pointer"
   onClick={[Function]}
-  visibility="visible"
-  width="100%"
 >
   <div
-    className="sc-bdfCDU hRvVii"
-    display="flex"
-    height="100vh"
+    className="pn-absolute tp-0px lt-0px zix-1000 wh-100vw ht-100vh dy-flex bcr- bfr-blur10px tn-all-0p3s-ease jct-flex-start ais-center cror-pointer"
+    isFullScreen={true}
     onClick={[Function]}
-    width="100vw"
   >
     <div
-      className="sc-bdfCDU gdfEff"
-      cursor="default"
-      display="flex"
-      height="fit-content"
+      className="dy-flex fdn-column cror-default bcr- wh-600px ht-fit-content tn-all-0p3s-ease bsw-none brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px"
+      isClosePrevented={true}
       onClick={[Function]}
-      overflow="hidden"
-      width={600}
+      variant="sharp"
     >
       <div
-        className="sc-bdfCDU MMgKI"
-        display="flex"
+        borderBottomColor="color.gray.200"
+        borderBottomStyle="solid"
+        borderBottomWidth="1px"
+        buttonSize="xl"
+        className="plt-24px prt-24px ptp-16px pbm-16px dy-flex fdn-row jct-space-between ais-center pvl-16 phl-24 mobile--pvl-12 mobile--phl-16"
       >
-        <button
-          className="sc-bdfCDU dXOPYQ"
-          color="color.white"
-          cursor="pointer"
-          disabled={false}
-          display="flex"
-          filter="none"
-          
-          fontWeight={600}
-          letterSpacing={1.25}
+        <div
+          className="cror-pointer"
           onClick={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          role="button"
-          transform=""
-          width="fit-content"
         >
           <div
-            className="sc-bdfCDU dpBfNq"
-            display="flex"
+            className="wh-20px ht-20px dy-flex jct-center ais-center wht-20 lht-20px cr- tm-rotate0deg"
           >
-            <div
-              className="sc-bdfCDU cccTHv"
-              display="flex"
-              height="20px"
-              width="20px"
+            <svg
+              aria-hidden="true"
+              fill="none"
+              focusable="false"
+              stroke=""
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
             >
-              <svg
-                fill="#000000"
-                height="20px"
-                viewBox="0 0 1024 1024"
-                width="20px"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g
-                  id="SVGRepo_bgCarrier"
-                  strokeWidth="0"
-                />
-                <g
-                  id="SVGRepo_tracerCarrier"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <g
-                  id="SVGRepo_iconCarrier"
-                >
-                  <path
-                    d="M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z"
-                    fill="theme.primary"
-                  />
-                </g>
-              </svg>
-            </div>
+              <line
+                stroke="theme.primary"
+                x1="18"
+                x2="6"
+                y1="6"
+                y2="18"
+              />
+              <line
+                stroke="theme.primary"
+                x1="6"
+                x2="18"
+                y1="6"
+                y2="18"
+              />
+            </svg>
           </div>
-        </button>
+        </div>
         Modal Container
       </div>
       <div
-        className="sc-bdfCDU csgvYH"
-        height="200px"
+        className="plt-24px prt-24px ptp-16px pbm-16px pvl-16 phl-24 fse-16px fwt-400 lht-24px cr- mobile--pvl-12 mobile--phl-16 mobile--fse-14px ht-200px"
       >
         Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum. Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.
       </div>
       <div
-        className="sc-bdfCDU jmYYGs"
-        display="flex"
+        borderTopColor="color.gray.200"
+        borderTopStyle="solid"
+        borderTopWidth="1px"
+        className="plt-24px prt-24px ptp-16px pbm-16px dy-flex fdn-row mtp-auto ais-center jct-flex-end pvl-16 phl-24 gp-12px mobile--pvl-12 mobile--phl-16 mobile--gp-8px"
       >
         <button
-          className="sc-bdfCDU bjTbpr"
-          color="color.white"
-          cursor="pointer"
+          className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-8px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
           disabled={false}
-          display="flex"
-          filter="brightness(1)"
-          
-          fontWeight={600}
-          letterSpacing={1.25}
-          onClick={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-          role="button"
-          transform=""
-          width={144}
+          isHovered={false}
+          type="button"
         >
           <div
-            className="sc-bdfCDU dpBfNq"
-            display="flex"
+            className="dy-flex fdn-row gp-8px ais-center jct-center cr- mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em cr---hover"
           >
             Cancel
           </div>

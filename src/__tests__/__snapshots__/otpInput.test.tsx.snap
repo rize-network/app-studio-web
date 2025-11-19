@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OTPInput matches snapshot 1`] = `
+<input
+  placeholder="OTP"
+  type="number"
+/>
+`;

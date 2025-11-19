@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel matches snapshot 1`] = `
+<div
+  className="wh-100 ht-100 pn-relative wh-100 ht-100 ow-hidden"
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onMouseMove={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+>
+  <div
+    className="wh-100 ht-100 wh-100 ht-100 pn-relative"
+  >
+    <div
+      className="wh-100 ht-100 fsk-0 wh-100 ht-100 dy-block"
+      index={0}
+    >
+      <div>
+        Slide 1
+      </div>
+    </div>
+    <div
+      className="wh-100 ht-100 fsk-0 wh-100 ht-100 dy-none"
+      index={1}
+    >
+      <div>
+        Slide 2
+      </div>
+    </div>
+  </div>
+  <div
+    className="pn-absolute tp-50 tm-translateY-50 lt-10px cror-pointer oy-1"
+    onClick={[Function]}
+  >
+    <button
+      aria-label="Previous slide"
+      className="wh-40px ht-40px wh-40px ht-40px brs-50 bcr- cr- dy-flex ais-center jct-center cror-pointer bsw-0-2px-5px-rgba0-0-0-0p1 zix-1 tn-background-color-0p3s-ease bcr---hover"
+    >
+      ❮
+    </button>
+  </div>
+  <div
+    className="pn-absolute tp-50 tm-translateY-50 rt-10px cror-pointer oy-1"
+    onClick={[Function]}
+  >
+    <button
+      aria-label="Next slide"
+      className="wh-40px ht-40px wh-40px ht-40px brs-50 bcr- cr- dy-flex ais-center jct-center cror-pointer bsw-0-2px-5px-rgba0-0-0-0p1 zix-1 tn-background-color-0p3s-ease bcr---hover"
+    >
+      ❯
+    </button>
+  </div>
+  <div
+    className="dy-flex fdn-row pn-absolute lt-0 rt-0 jct-center bm-10px"
+  >
+    <div
+      className="wh-10px ht-10px cror-pointer wh-10px ht-10px brs-50 bcr- mn-0-4px tn-background-color-0p3s-ease"
+      onClick={[Function]}
+    />
+    <div
+      className="wh-10px ht-10px cror-pointer wh-10px ht-10px brs-50 bcr- mn-0-4px tn-background-color-0p3s-ease"
+      onClick={[Function]}
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon matches snapshot 1`] = `
+<div
+  className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
+  size={24}
+>
+  <svg
+    aria-hidden="false"
+    fill="none"
+    focusable="false"
+    stroke=""
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth={1}
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M10.29 3.86l-6.6 11.4c-.78 1.36.2 3.1 1.71 3.1h13.2c1.51 0 2.49-1.74 1.71-3.1l-6.6-11.4a2 2 0 0 0-3.42 0z"
+    />
+    <line
+      stroke="currentColor"
+      x1="12"
+      x2="12"
+      y1="6"
+      y2="13"
+    />
+    <line
+      stroke="currentColor"
+      x1="12"
+      x2="12"
+      y1="15"
+      y2="15"
+    />
+  </svg>
+</div>
+`;

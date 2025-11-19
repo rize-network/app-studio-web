@@ -2,14 +2,9 @@
 
 exports[`Modal Container to match snapshot 1`] = `
 <div
-  className="sc-bdfCDU kErhm"
-  cursor="default"
-  display="flex"
-  height="100%"
+  className="wh-100 ht-100 dy-flex fdn-column cror-default bcr- wh-100 ht-100 tn-all-0p3s-ease bsw-none brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px"
   onClick={[Function]}
-  overflow="hidden"
   role="container"
-  width="100%"
 >
   <div>
     Modal Content
