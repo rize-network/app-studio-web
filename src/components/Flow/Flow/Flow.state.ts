@@ -1,10 +1,11 @@
-import { useState, useCallback, useMemo, useRef } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import {
   FlowNode,
   NodeConnection,
   FlowViewport,
   NodePosition,
 } from './Flow.type';
+import { FlowGraph, FlowGraphOptions } from './Flow.graph';
 
 interface UseFlowStateProps {
   /**
@@ -51,6 +52,11 @@ interface UseFlowStateProps {
    * Direction of the flow
    */
   direction?: 'vertical' | 'horizontal';
+
+  /**
+   * Configuration for the FlowGraph that manages connections
+   */
+  graphOptions?: FlowGraphOptions;
 
   /**
    * Initial viewport state (zoom, pan)
@@ -108,6 +114,7 @@ export const useFlowState = ({
   onNodeSelect,
   selectedNodeId: controlledSelectedNodeId,
   direction = 'vertical',
+  graphOptions,
   initialViewport = { zoom: 1, x: 0, y: 0 },
   viewport: controlledViewport,
   onViewportChange,
@@ -169,6 +176,33 @@ export const useFlowState = ({
     ? controlledViewport
     : uncontrolledViewport;
 
+  const mergedGraphOptions = useMemo<FlowGraphOptions>(
+    () => ({
+      directed: true,
+      multigraph: false,
+      allowSelfLoops: false,
+      ...graphOptions,
+    }),
+    [graphOptions]
+  );
+
+  const graphRef = useRef<FlowGraph>(
+    FlowGraph.from(initialNodes, initialEdges, mergedGraphOptions)
+  );
+
+  useEffect(() => {
+    graphRef.current = FlowGraph.from(
+      currentNodes,
+      currentEdges,
+      mergedGraphOptions
+    );
+  }, [currentNodes, currentEdges, mergedGraphOptions]);
+
+  type GraphMutationOptions = {
+    updateNodes?: boolean;
+    updateEdges?: boolean;
+  };
+
   // Function to update nodes
   const updateNodes = useCallback(
     (newNodes: FlowNode[]) => {
@@ -195,6 +229,37 @@ export const useFlowState = ({
     [isEdgesControlled, onEdgesChange]
   );
 
+  const applyGraphMutation = useCallback(
+    (
+      mutator: (graph: FlowGraph) => void,
+      options: GraphMutationOptions = {}
+    ) => {
+      const {
+        updateNodes: shouldUpdateNodes = true,
+        updateEdges: shouldUpdateEdges = true,
+      } = options;
+
+      const graph = graphRef.current;
+      mutator(graph);
+
+      let nodes: FlowNode[] | undefined;
+      let edges: NodeConnection[] | undefined;
+
+      if (shouldUpdateNodes) {
+        nodes = graph.getNodes();
+        updateNodes(nodes);
+      }
+
+      if (shouldUpdateEdges) {
+        edges = graph.getEdges();
+        updateEdges(edges);
+      }
+
+      return { nodes, edges, graph };
+    },
+    [updateNodes, updateEdges]
+  );
+
   // Function to select a node
   const selectNode = useCallback(
     (nodeId: string) => {
@@ -211,12 +276,16 @@ export const useFlowState = ({
   // Function to add a node (simple append, not typically used directly by UI)
   const addNode = useCallback(
     (node: FlowNode) => {
-      const newNodes = [...(currentNodes as FlowNode[]), node];
-      updateNodes(newNodes);
+      applyGraphMutation(
+        (graph) => {
+          graph.setNode(node);
+        },
+        { updateEdges: false }
+      );
       // Note: This simpler addNode doesn't create edges.
       // onNodeAdd prop from FlowProps is typically called with node from addNodeAfter.
     },
-    [currentNodes, updateNodes]
+    [applyGraphMutation]
   );
 
   const addNodeAfter = useCallback(
@@ -225,6 +294,9 @@ export const useFlowState = ({
       newNodeData: Omit<FlowNode, 'position'>,
       position?: 'top' | 'bottom' | 'right' | 'left'
     ): FlowNode => {
+      const snapshotNodes = graphRef.current.getNodes();
+      const snapshotEdges = graphRef.current.getEdges();
+
       // Handle adding the first node if afterNodeId is null or a specific marker
       if (afterNodeId === null || afterNodeId === '') {
         // Determine a default position for the first node
@@ -235,23 +307,36 @@ export const useFlowState = ({
           ...newNodeData,
           position: firstNodePosition,
         };
-        updateNodes([...(currentNodes as FlowNode[]), positionedNewNode]);
+        applyGraphMutation(
+          (graph) => {
+            graph.setNode(positionedNewNode);
+          },
+          { updateEdges: false }
+        );
         // No edge is created for the first node by default
         return positionedNewNode;
       }
 
-      const afterNode = currentNodes?.find((node) => node.id === afterNodeId);
+      const afterNode = snapshotNodes.find((node) => node.id === afterNodeId);
       if (!afterNode) {
         console.warn(
           `addNodeAfter: Could not find node with id ${afterNodeId}. Adding node at default position.`
         );
         // Fallback: add node at a default position if afterNode is not found
-        const fallbackPosition = { x: 100, y: currentNodes.length * 100 + 100 };
+        const fallbackPosition = {
+          x: 100,
+          y: snapshotNodes.length * 100 + 100,
+        };
         const positionedNewNode = {
           ...newNodeData,
           position: fallbackPosition,
         } as FlowNode;
-        updateNodes([...currentNodes, positionedNewNode]);
+        applyGraphMutation(
+          (graph) => {
+            graph.setNode(positionedNewNode);
+          },
+          { updateEdges: false }
+        );
         return positionedNewNode;
       }
 
@@ -286,8 +371,8 @@ export const useFlowState = ({
             : -HORIZONTAL_SPACING_PARENT_CHILD);
 
         // Find existing direct children of afterNode that are already in this target "side column"
-        const sideColumnSiblings = currentNodes.filter((node) =>
-          currentEdges.some(
+        const sideColumnSiblings = snapshotNodes.filter((node) =>
+          snapshotEdges.some(
             (edge) =>
               edge.source === afterNodeId &&
               edge.target === node.id &&
@@ -317,8 +402,8 @@ export const useFlowState = ({
             ? VERTICAL_SPACING_PARENT_CHILD
             : -VERTICAL_SPACING_PARENT_CHILD);
 
-        const horizontalRowSiblings = currentNodes.filter((node) =>
-          currentEdges.some(
+        const horizontalRowSiblings = snapshotNodes.filter((node) =>
+          snapshotEdges.some(
             (edge) =>
               edge.source === afterNodeId &&
               edge.target === node.id &&
@@ -352,53 +437,85 @@ export const useFlowState = ({
         position: newPosition,
       };
 
-      const newNodes = [...currentNodes, nodeWithPosition];
-      updateNodes(newNodes);
-
       const newEdge: NodeConnection = {
         id: `edge-${afterNodeId}-${nodeWithPosition.id}`, // afterNodeId will be valid here
         source: afterNodeId,
         target: nodeWithPosition.id,
       };
-      const newEdges = [...currentEdges, newEdge];
-      updateEdges(newEdges);
+      applyGraphMutation((graph) => {
+        graph.setNode(nodeWithPosition);
+        if (!graph.hasEdge(newEdge.id)) {
+          if (
+            !graph.isMultigraph() &&
+            graph.hasEdgeBetween(newEdge.source, newEdge.target)
+          ) {
+            return;
+          }
+        }
+        graph.setEdge(newEdge);
+      });
       return nodeWithPosition;
     },
-    [currentNodes, currentEdges, updateNodes, updateEdges, direction]
+    [applyGraphMutation, direction]
   );
 
   // Function to delete a node
   const deleteNode = useCallback(
     (nodeId: string) => {
-      const newNodes = currentNodes.filter((node) => node.id !== nodeId);
-      updateNodes(newNodes);
+      if (!graphRef.current.hasNode(nodeId)) {
+        return;
+      }
 
-      const newEdges = currentEdges.filter(
-        (edge) => edge.source !== nodeId && edge.target !== nodeId
-      );
-      updateEdges(newEdges);
+      applyGraphMutation((graph) => {
+        graph.removeNode(nodeId);
+      });
 
       if (currentSelectedNodeId === nodeId && !isSelectedNodeControlled) {
         setUncontrolledSelectedNodeId(undefined);
       }
     },
     [
-      currentNodes,
-      currentEdges,
-      updateNodes,
-      updateEdges,
+      applyGraphMutation,
       currentSelectedNodeId,
       isSelectedNodeControlled,
+      setUncontrolledSelectedNodeId,
     ]
   );
 
   // Function to connect two nodes
   const connectNodes = useCallback(
     (connection: NodeConnection) => {
-      const newEdges = [...currentEdges, connection];
-      updateEdges(newEdges);
+      const { source, target, id } = connection;
+
+      if (
+        !graphRef.current.hasNode(source) ||
+        !graphRef.current.hasNode(target)
+      ) {
+        console.warn(
+          `connectNodes: Cannot connect nodes without both source (${source}) and target (${target}) present.`
+        );
+        return;
+      }
+
+      if (graphRef.current.hasEdge(id)) {
+        applyGraphMutation((graph) => {
+          graph.setEdge(connection);
+        });
+        return;
+      }
+
+      if (
+        !graphRef.current.isMultigraph() &&
+        graphRef.current.hasEdgeBetween(source, target)
+      ) {
+        return;
+      }
+
+      applyGraphMutation((graph) => {
+        graph.setEdge(connection);
+      });
     },
-    [currentEdges, updateEdges]
+    [applyGraphMutation]
   );
 
   // Function to update viewport
@@ -444,7 +561,7 @@ export const useFlowState = ({
 
       setDraggedNodeId(nodeId);
 
-      const node = currentNodes.find((n) => n.id === nodeId);
+      const node = graphRef.current.getNode(nodeId);
       if (!node) return;
 
       // Store the initial node position
@@ -467,7 +584,7 @@ export const useFlowState = ({
         onNodeDragStart(nodeId, event);
       }
     },
-    [allowDraggingNodes, currentNodes, onNodeDragStart]
+    [allowDraggingNodes, onNodeDragStart]
   );
 
   // Function to update node position during drag
@@ -479,6 +596,10 @@ export const useFlowState = ({
         !nodePositionRef.current
       )
         return;
+
+      if (!graphRef.current.hasNode(draggedNodeId)) {
+        return;
+      }
 
       // Get the current cursor position
       const clientX =
@@ -496,47 +617,43 @@ export const useFlowState = ({
         y: dragStartPositionRef.current.y + offsetY / currentViewport.zoom,
       };
 
-      // Update the node position in the state
-      const newNodes = currentNodes.map((node) => {
-        if (node.id === draggedNodeId) {
-          return {
-            ...node,
+      applyGraphMutation(
+        (graph) => {
+          graph.updateNode(draggedNodeId, {
             position: newPosition,
             isDragging: true,
-          };
-        }
-        return node;
-      });
-
-      updateNodes(newNodes);
+          });
+        },
+        { updateEdges: false }
+      );
 
       // Call the external callback if provided
       if (onNodeDrag) {
         onNodeDrag(draggedNodeId, newPosition, event);
       }
     },
-    [draggedNodeId, currentNodes, updateNodes, onNodeDrag, currentViewport.zoom]
+    [draggedNodeId, applyGraphMutation, onNodeDrag, currentViewport.zoom]
   );
 
   // Function to end node dragging
   const endNodeDrag = useCallback(() => {
     if (!draggedNodeId) return;
 
-    // Update the node to remove the dragging state
-    const newNodes = currentNodes.map((node) => {
-      if (node.id === draggedNodeId) {
-        return {
-          ...node,
-          isDragging: false,
-        };
-      }
-      return node;
-    });
+    if (!graphRef.current.hasNode(draggedNodeId)) {
+      setDraggedNodeId(null);
+      dragStartPositionRef.current = null;
+      nodePositionRef.current = null;
+      return;
+    }
 
-    updateNodes(newNodes);
+    const { graph } = applyGraphMutation(
+      (mutableGraph) => {
+        mutableGraph.updateNode(draggedNodeId, { isDragging: false });
+      },
+      { updateEdges: false }
+    );
 
-    // Get the final position of the node
-    const node = newNodes.find((n) => n.id === draggedNodeId);
+    const node = graph.getNode(draggedNodeId);
     if (node && onNodeDragEnd) {
       onNodeDragEnd(draggedNodeId, node.position);
     }
@@ -545,7 +662,7 @@ export const useFlowState = ({
     setDraggedNodeId(null);
     dragStartPositionRef.current = null;
     nodePositionRef.current = null;
-  }, [draggedNodeId, currentNodes, updateNodes, onNodeDragEnd]);
+  }, [draggedNodeId, applyGraphMutation, onNodeDragEnd]);
 
   return {
     baseId,
