@@ -47,6 +47,7 @@ const TagsPage = lazy(() => import('src/pages/tags.page'));
 const MessagePage = lazy(() => import('src/pages/message.page'));
 const MenubarPage = lazy(() => import('src/pages/menubar.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
+const DrawerPage = lazy(() => import('src/pages/drawer.page'));
 const NavigationMenuPage = lazy(() => import('src/pages/navigationMenu.page'));
 const OTPInputPage = lazy(() => import('src/pages/otpInput.page'));
 const PaginationPage = lazy(() => import('src/pages/pagination.page'));
@@ -140,6 +141,7 @@ export const componentList = [
   { name: 'Message', path: '/message', element: <MessagePage /> },
   { name: 'Menubar', path: '/menubar', element: <MenubarPage /> },
   { name: 'Modal', path: '/modal', element: <ModalPage /> },
+  { name: 'Drawer', path: '/drawer', element: <DrawerPage /> },
   {
     name: 'NavigationMenu',
     path: '/navigationmenu',
