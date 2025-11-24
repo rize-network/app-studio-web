@@ -77,6 +77,7 @@ export interface OKRProps {
   themeMode?: 'light' | 'dark';
   views?: OKRViews;
   onKeyResultClick?: (keyResult: OKRKeyResult, objective: OKRObjective) => void;
+  onObjectiveClick?: (objective: OKRObjective) => void;
   renderObjectiveFooter?: (objective: OKRObjective) => ReactNode;
   renderKeyResultFooter?: (
     keyResult: OKRKeyResult,
