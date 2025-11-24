@@ -20,6 +20,8 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   onCardDrop,
   onCardCreate,
   onCardDelete,
+  onCardClick,
+  onCardDoubleClick,
   onCardTitleChange,
   onCardDescriptionChange,
 }) => {
@@ -29,16 +31,24 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
   const [editedTitle, setEditedTitle] = React.useState<string>('');
   const [editedDescription, setEditedDescription] = React.useState<string>('');
 
-  const handleTitleClick = React.useCallback(
-    (card: KanbanBoardViewProps['columns'][number]['cards'][number]) => {
+  const handleTitleDoubleClick = React.useCallback(
+    (
+      event: React.MouseEvent,
+      card: KanbanBoardViewProps['columns'][number]['cards'][number]
+    ) => {
+      event.stopPropagation();
       setEditingCardId(card.id);
       setEditedTitle(card.title);
     },
     []
   );
 
-  const handleDescriptionClick = React.useCallback(
-    (card: KanbanBoardViewProps['columns'][number]['cards'][number]) => {
+  const handleDescriptionDoubleClick = React.useCallback(
+    (
+      event: React.MouseEvent,
+      card: KanbanBoardViewProps['columns'][number]['cards'][number]
+    ) => {
+      event.stopPropagation();
       setEditingDescriptionCardId(card.id);
       setEditedDescription(card.description || '');
     },
@@ -139,7 +149,7 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
           <Text
             weight="semiBold"
             size="sm"
-            onClick={() => handleTitleClick(card)}
+            onDoubleClick={(event) => handleTitleDoubleClick(event, card)}
           >
             {card.title}
           </Text>
@@ -167,7 +177,7 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
             <Text
               size="sm"
               color="#475467"
-              onClick={() => handleDescriptionClick(card)}
+              onDoubleClick={(event) => handleDescriptionDoubleClick(event, card)}
             >
               {card.description}
             </Text>
@@ -182,11 +192,11 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
       editedDescription,
       handleTitleBlur,
       handleTitleChange,
-      handleTitleClick,
+      handleTitleDoubleClick,
       handleTitleKeyDown,
       handleDescriptionBlur,
       handleDescriptionChange,
-      handleDescriptionClick,
+      handleDescriptionDoubleClick,
       handleDescriptionKeyDown,
     ]
   );
@@ -270,6 +280,8 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                     event.stopPropagation();
                     onCardDrop(column.id, card.id, event);
                   }}
+                  onClick={() => onCardClick?.(card, column)}
+                  onDoubleClick={() => onCardDoubleClick?.(card, column)}
                   {...views?.card}
                 >
                   <View
@@ -282,7 +294,12 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
                         ? renderCard(card, column)
                         : renderDefaultCard(card, column)}
                     </View>
-                    <View onClick={() => onCardDelete?.(card, column)}>
+                    <View
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onCardDelete?.(card, column);
+                      }}
+                    >
                       <TrashIcon widthHeight={16} />
                     </View>
                   </View>

@@ -61,6 +61,7 @@ const OKRView: React.FC<OKRProps> = ({
   themeMode: elementMode,
   views,
   onKeyResultClick,
+  onObjectiveClick,
   renderObjectiveFooter,
   renderKeyResultFooter,
 }) => {
@@ -85,6 +86,13 @@ const OKRView: React.FC<OKRProps> = ({
         return (
           <Vertical
             key={objective.id}
+            role={onObjectiveClick ? 'button' : undefined}
+            cursor={onObjectiveClick ? 'pointer' : undefined}
+            onClick={
+              onObjectiveClick
+                ? () => onObjectiveClick(objective)
+                : undefined
+            }
             {...theme.objectiveCard}
             {...views?.objectiveCard}
           >
@@ -208,7 +216,10 @@ const OKRView: React.FC<OKRProps> = ({
                       cursor={onKeyResultClick ? 'pointer' : undefined}
                       onClick={
                         onKeyResultClick
-                          ? () => onKeyResultClick(keyResult, objective)
+                          ? (e) => {
+                              e.stopPropagation();
+                              onKeyResultClick(keyResult, objective);
+                            }
                           : undefined
                       }
                       {...theme.keyResultItem}
