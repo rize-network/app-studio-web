@@ -29,6 +29,11 @@ export interface KanbanBoardProps {
   ) => void;
   onCardCreate?: (card: KanbanBoardCard, column: KanbanBoardColumn) => void;
   onCardDelete?: (card: KanbanBoardCard, column: KanbanBoardColumn) => void;
+  onCardClick?: (card: KanbanBoardCard, column: KanbanBoardColumn) => void;
+  onCardDoubleClick?: (
+    card: KanbanBoardCard,
+    column: KanbanBoardColumn
+  ) => void;
   onCardTitleChange?: (
     card: KanbanBoardCard,
     column: KanbanBoardColumn,
