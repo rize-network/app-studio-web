@@ -6,12 +6,12 @@ import React, {
   useState,
 } from "react"
 import { View, useTheme } from "app-studio"
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "../../ui/textarea"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip"
+} from "../../ui/tooltip"
 
 type PromptInputContextType = {
   isLoading: boolean
@@ -46,7 +46,9 @@ export type PromptInputProps = {
   children: React.ReactNode
   className?: string
   disabled?: boolean
-} & React.ComponentProps<"div">
+  onClick?: React.MouseEventHandler<HTMLDivElement>
+  style?: React.CSSProperties
+}
 
 export function PromptInput({
   className,
@@ -58,6 +60,7 @@ export function PromptInput({
   children,
   disabled = false,
   onClick,
+  style,
   ...props
 }: PromptInputProps) {
   const [internalValue, setInternalValue] = useState(value || "")
@@ -73,10 +76,8 @@ export function PromptInput({
     onClick?.(e)
   }
 
-  // Style mapping for "border-input bg-background cursor-text rounded-3xl border p-2 shadow-xs"
-  // and "disabled && cursor-not-allowed opacity-60"
-
-  const { theme } = useTheme();
+  const themeContext = useTheme();
+  const borderColor = themeContext.colors?.palette?.gray?.[200] || '#e2e8f0';
 
   return (
     <PromptInputContext.Provider
@@ -92,12 +93,13 @@ export function PromptInput({
     >
       <View
         onClick={handleClick}
-        border={`1px solid ${theme.colors?.border || '#e2e8f0'}`}
-        backgroundColor="color.white" // Assuming background
+        border={`1px solid ${borderColor}`}
+        backgroundColor="white"
         borderRadius="24px" // rounded-3xl
         padding="8px"
         cursor={disabled ? "not-allowed" : "text"}
         opacity={disabled ? 0.6 : 1}
+        style={style}
         {...props}
       >
         {children}
@@ -179,7 +181,8 @@ export function PromptInputTextarea({
         outline: 'none',
         minHeight: '44px',
         width: '100%',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        ...props.style
       }}
       rows={1}
       disabled={disabled}
@@ -193,10 +196,11 @@ export type PromptInputActionsProps = React.HTMLAttributes<HTMLDivElement>
 export function PromptInputActions({
   children,
   className,
+  style,
   ...props
 }: PromptInputActionsProps) {
   return (
-    <View display="flex" flexDirection="row" alignItems="center" gap={8} {...props}>
+    <View display="flex" flexDirection="row" alignItems="center" gap={8} style={style} {...props}>
       {children}
     </View>
   )

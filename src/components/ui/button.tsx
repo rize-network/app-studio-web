@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button as AppStudioButton, ButtonProps as AppStudioButtonProps, useTheme } from 'app-studio';
 
-export interface ButtonProps extends AppStudioButtonProps {
+export interface ButtonProps extends Omit<AppStudioButtonProps, 'variant' | 'size'> {
   variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
   size?: 'default' | 'sm' | 'lg' | 'icon';
   asChild?: boolean;
@@ -10,12 +10,15 @@ export interface ButtonProps extends AppStudioButtonProps {
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = 'default', size = 'default', children, ...props }, ref) => {
-    const { theme } = useTheme();
+    const themeContext = useTheme();
+    // Safely access colors. theme object in types might not have it directly if strict,
+    // but useTheme returns colors: Colors object.
+    const colors = themeContext.colors;
 
     // Map size to padding/height
-    let height = '36px'; // h-9
+    let height: string | number = '36px'; // h-9
     let padding = '0 16px';
-    let width = undefined;
+    let width: string | number | undefined = undefined;
 
     switch (size) {
       case 'sm':
@@ -34,34 +37,41 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     // Map variant to colors/borders
-    let backgroundColor = 'theme.primary';
-    let color = 'color.white'; // Assuming primary foreground is white
+    let backgroundColor = themeContext.theme.primary || colors?.main?.primary || 'blue';
+    let color = 'white'; // Assuming primary foreground is white
     let border = undefined;
-    let hoverBackgroundColor = undefined;
+
+    // Fallback colors if theme values are missing
+    const destructiveColor = themeContext.theme.error || colors?.main?.error || 'red';
+    const secondaryColor = themeContext.theme.secondary || colors?.main?.secondary || 'gray';
+    const foregroundColor = 'black'; // simplified
 
     switch (variant) {
       case 'destructive':
-        backgroundColor = 'color.red.500'; // Approximate
+        backgroundColor = destructiveColor;
         break;
       case 'outline':
         backgroundColor = 'transparent';
-        color = 'theme.foreground'; // Approximate
-        border = `1px solid ${theme.colors?.border || '#e2e8f0'}`;
+        color = foregroundColor;
+        border = `1px solid ${colors?.palette?.gray?.[300] || '#e2e8f0'}`;
         break;
       case 'secondary':
-        backgroundColor = 'theme.secondary';
-        color = 'theme.secondaryForeground';
+        backgroundColor = secondaryColor;
+        color = foregroundColor;
         break;
       case 'ghost':
         backgroundColor = 'transparent';
-        color = 'theme.foreground';
+        color = foregroundColor;
         break;
       case 'link':
         backgroundColor = 'transparent';
-        color = 'theme.primary';
+        color = themeContext.theme.primary || colors?.main?.primary || 'blue';
         // underline handled via style or Text child usually
         break;
     }
+
+    // Cast height/width to any if type mismatch persists, or ensure they match AppStudio expectations.
+    // In many cases AppStudio accepts string | number.
 
     return (
       <AppStudioButton

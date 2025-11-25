@@ -1,10 +1,8 @@
 import React, { createContext, useContext, useState, useMemo } from 'react';
 import { View, Text, Vertical, Horizontal, useTheme, Button as AppStudioButton } from 'app-studio';
 import { PanelLeftIcon } from "lucide-react";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
-
-// Sidebar context to manage state (expanded/collapsed, mobile, etc.)
-// For this conversion, I will simplify it.
+// Simplified Tooltip since I simplified the component
+import { Tooltip, TooltipTrigger, TooltipContent } from "./tooltip";
 
 type SidebarContextProps = {
   state: "expanded" | "collapsed";
@@ -26,12 +24,12 @@ export function useSidebar() {
 
 export function SidebarProvider({ children, defaultOpen = true, ...props }: any) {
   const [open, setOpen] = useState(defaultOpen);
-  const isMobile = false; // Mock for now, use hooks/useResponsive if needed
+  const isMobile = false; // Mock for now
 
   const toggleSidebar = () => setOpen(!open);
-  const state = open ? "expanded" : "collapsed";
+  const state: "expanded" | "collapsed" = open ? "expanded" : "collapsed";
 
-  const value = useMemo(() => ({
+  const value = useMemo<SidebarContextProps>(() => ({
     state,
     open,
     setOpen,
@@ -50,7 +48,8 @@ export function SidebarProvider({ children, defaultOpen = true, ...props }: any)
 
 export function Sidebar({ children, side = 'left', ...props }: any) {
     const { open } = useSidebar();
-    const { theme } = useTheme();
+    const themeContext = useTheme();
+    const borderColor = themeContext.colors?.palette?.gray?.[200] || '#e2e8f0';
 
     if (!open) {
         return null;
@@ -60,8 +59,8 @@ export function Sidebar({ children, side = 'left', ...props }: any) {
         <View
             width="250px"
             height="100%"
-            borderRight={`1px solid ${theme.colors?.border || '#e2e8f0'}`}
-            backgroundColor="color.gray.50"
+            borderRight={`1px solid ${borderColor}`}
+            backgroundColor="white"
             display="flex"
             flexDirection="column"
             {...props}
@@ -96,8 +95,10 @@ export function SidebarGroup({ children, ...props }: any) {
 }
 
 export function SidebarGroupLabel({ children, ...props }: any) {
+    const themeContext = useTheme();
+    const color = themeContext.colors?.palette?.gray?.[500] || '#64748b';
     return (
-        <Text fontSize="12px" fontWeight="bold" color="color.gray.500" marginBottom="8px" padding="0 8px" {...props}>
+        <Text fontSize="12px" fontWeight="bold" color={color} marginBottom="8px" padding="0 8px" {...props}>
             {children}
         </Text>
     )
@@ -116,16 +117,17 @@ export function SidebarMenuItem({ children, ...props }: any) {
 }
 
 export function SidebarMenuButton({ children, isActive, onClick, ...props }: any) {
-    const { theme } = useTheme();
+    const themeContext = useTheme();
+    const activeBg = themeContext.colors?.palette?.gray?.[200] || '#e2e8f0';
+
     return (
         <View
             onClick={onClick}
             padding="8px"
             borderRadius="6px"
-            backgroundColor={isActive ? "color.gray.200" : "transparent"}
+            backgroundColor={isActive ? activeBg : "transparent"}
             cursor="pointer"
             {...props}
-            // Hover handled via app-studio usually, or assume simpler interaction
         >
             <Horizontal gap={8} alignItems="center">
                 {children}
@@ -155,7 +157,7 @@ export function SidebarTrigger({ ...props }: any) {
 export function SidebarFooter({ children }: any) { return <View padding="16px">{children}</View> }
 export function SidebarRail() { return null; }
 export function SidebarInput(props: any) { return null; } // Use normal input
-export function SidebarSeparator() { return <View height="1px" backgroundColor="color.gray.200" margin="8px 0" /> }
+export function SidebarSeparator() { return <View height="1px" backgroundColor="#e2e8f0" margin="8px 0" /> }
 export function SidebarGroupAction() { return null; }
 export function SidebarGroupContent({ children }: any) { return <View>{children}</View> }
 export function SidebarMenuAction() { return null; }

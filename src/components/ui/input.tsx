@@ -7,7 +7,8 @@ export interface InputProps extends AppStudioInputProps {
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {
-    const { theme } = useTheme();
+    const themeContext = useTheme();
+    const borderColor = themeContext.colors?.palette?.gray?.[200] || '#e2e8f0';
 
     return (
       <AppStudioInput
@@ -16,7 +17,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         width="100%"
         padding="4px 12px" // py-1 px-3
         borderRadius="6px" // rounded-md
-        border={`1px solid ${theme.colors?.border || '#e2e8f0'}`}
+        border={`1px solid ${borderColor}`}
         backgroundColor="transparent"
         fontSize="14px"
         {...props}

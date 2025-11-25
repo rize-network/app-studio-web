@@ -1,25 +1,25 @@
 "use client"
 
 import React, { useRef, useState } from "react"
-import { View, Text, Vertical, Horizontal, Scroll, useTheme } from "app-studio"
+import { View, Text, Vertical, Horizontal, useTheme } from "app-studio"
 import {
   ChatContainerContent,
   ChatContainerRoot,
-} from "@/components/chat/prompt-kit/chat-container"
+} from "../prompt-kit/chat-container"
 import {
   Message,
   MessageAction,
   MessageActions,
   MessageContent,
-} from "@/components/chat/prompt-kit/message"
+} from "../prompt-kit/message"
 import {
   PromptInput,
   PromptInputAction,
   PromptInputActions,
   PromptInputTextarea,
-} from "@/components/chat/prompt-kit/prompt-input"
-import { ScrollButton } from "@/components/chat/prompt-kit/scroll-button"
-import { Button } from "@/components/ui/button"
+} from "../prompt-kit/prompt-input"
+import { ScrollButton } from "../prompt-kit/scroll-button"
+import { Button } from "../../ui/button"
 import {
   Sidebar,
   SidebarContent,
@@ -31,7 +31,7 @@ import {
   SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from "../../ui/sidebar"
 
 import {
   ArrowUp,
@@ -40,12 +40,12 @@ import {
   Mic,
   MoreHorizontal,
   Pencil,
-  Plus,
   PlusIcon,
   Search,
   ThumbsDown,
   ThumbsUp,
   Trash,
+  Plus
 } from "lucide-react"
 
 // Initial conversation history
@@ -161,15 +161,16 @@ const initialMessages = [
 ]
 
 function ChatSidebar() {
-  const { theme } = useTheme();
+  const themeContext = useTheme();
+  const primaryColor = themeContext.theme.primary || themeContext.colors?.main?.primary || 'blue';
 
   return (
     <Sidebar>
       <SidebarHeader>
         <Horizontal alignItems="center" justifyContent="space-between" gap={8} padding="0 8px">
           <Horizontal alignItems="center" gap={8} padding="0 8px">
-            <View width="32px" height="32px" borderRadius="6px" backgroundColor={theme.colors?.primary + '1A'} />
-            <Text fontSize="16px" fontWeight="medium" color="theme.primary" letterSpacing="-0.025em">
+            <View width="32px" height="32px" borderRadius="6px" backgroundColor={primaryColor} opacity={0.1} />
+            <Text fontSize="16px" fontWeight="medium" color={primaryColor} letterSpacing="-0.025em">
               zola.chat
             </Text>
           </Horizontal>
@@ -210,7 +211,8 @@ function ChatContent() {
   const [isLoading, setIsLoading] = useState(false)
   const [chatMessages, setChatMessages] = useState(initialMessages)
   const chatContainerRef = useRef<HTMLDivElement>(null)
-  const { theme } = useTheme();
+  const themeContext = useTheme();
+  const borderColor = themeContext.colors?.palette?.gray?.[200] || '#e2e8f0';
 
   const handleSubmit = () => {
     if (!prompt.trim()) return
@@ -247,13 +249,13 @@ function ChatContent() {
         width="100%"
         alignItems="center"
         gap={8}
-        borderBottom={`1px solid ${theme.colors?.border || '#e2e8f0'}`}
+        borderBottom={`1px solid ${borderColor}`}
         padding="0 16px"
-        backgroundColor="color.white"
+        backgroundColor="white"
         zIndex={10}
       >
         <SidebarTrigger style={{ marginLeft: '-4px' }} />
-        <Text color="theme.foreground">Project roadmap discussion</Text>
+        <Text color={themeContext.theme.primary}>Project roadmap discussion</Text>
       </Horizontal>
 
       <View ref={chatContainerRef} flex={1} overflowY="auto" position="relative">
@@ -327,8 +329,8 @@ function ChatContent() {
                             maxWidth: '85%', // sm:max-w-[75%]
                             borderRadius: '24px',
                             padding: '10px 20px',
-                            backgroundColor: theme.colors?.gray?.[100] || '#f1f5f9',
-                            color: theme.colors?.primary || '#000'
+                            backgroundColor: themeContext.colors?.palette?.gray?.[100] || '#f1f5f9',
+                            color: themeContext.theme.primary || '#000'
                         }}
                       >
                         {message.content}
@@ -384,7 +386,7 @@ function ChatContent() {
         </ChatContainerRoot>
       </View>
 
-      <View backgroundColor="color.white" zIndex={10} padding="0 12px 12px 12px">
+      <View backgroundColor="white" zIndex={10} padding="0 12px 12px 12px">
         <View margin="0 auto" maxWidth="800px">
           <PromptInput
             isLoading={isLoading}
@@ -396,9 +398,9 @@ function ChatContent() {
                 zIndex: 10,
                 width: '100%',
                 borderRadius: '24px',
-                border: `1px solid ${theme.colors?.border || '#e2e8f0'}`,
+                border: `1px solid ${borderColor}`,
                 padding: '4px',
-                backgroundColor: theme.colors?.white || '#fff', // bg-popover
+                backgroundColor: 'white', // bg-popover
                 boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
             }}
           >
@@ -463,7 +465,7 @@ function ChatContent() {
                     {!isLoading ? (
                       <ArrowUp size={18} />
                     ) : (
-                      <View width="12px" height="12px" borderRadius="2px" backgroundColor="color.white" />
+                      <View width="12px" height="12px" borderRadius="2px" backgroundColor="white" />
                     )}
                   </Button>
                 </Horizontal>

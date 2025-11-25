@@ -3,8 +3,8 @@ import { View, useTheme } from 'app-studio';
 
 export const Separator = React.forwardRef<HTMLDivElement, any>(
   ({ className, orientation = 'horizontal', decorative = true, ...props }, ref) => {
-    const { theme } = useTheme();
-    const borderColor = theme.colors?.border || '#e2e8f0';
+    const themeContext = useTheme();
+    const borderColor = themeContext.colors?.palette?.gray?.[200] || '#e2e8f0';
 
     return (
       <View

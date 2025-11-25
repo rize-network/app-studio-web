@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, useTheme } from 'app-studio';
+import { useTheme } from 'app-studio';
 
 // app-studio doesn't export a Textarea component directly, so we use a styled native textarea wrapped in View?
 // Or we can just return a styled textarea since app-studio components render to DOM elements.
@@ -13,7 +13,8 @@ export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextArea
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, style, ...props }, ref) => {
-    const { theme } = useTheme();
+    const themeContext = useTheme();
+    const borderColor = themeContext.colors?.palette?.gray?.[200] || '#e2e8f0';
 
     return (
       <textarea
@@ -23,7 +24,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           minHeight: '60px',
           padding: '8px 12px',
           borderRadius: '6px',
-          border: `1px solid ${theme.colors?.border || '#e2e8f0'}`,
+          border: `1px solid ${borderColor}`,
           backgroundColor: 'transparent',
           fontSize: '14px',
           fontFamily: 'inherit',
