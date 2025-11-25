@@ -1,9 +1,9 @@
-export * from './action';
-export * from './default';
-export * from './isClosable';
-export * from './showIcon';
-export * from './styles';
-export * from './subtitle';
-export * from './timeout';
-export * from './title';
-export * from './variant';
+export { ActionDemo } from './action';
+export { DefaultDemo } from './default';
+export { IsClosableDemo } from './isClosable';
+export { ShowIconDemo } from './showIcon';
+export { SubtitleDemo } from './subtitle';
+export { TimeoutDemo } from './timeout';
+export { TitleDemo } from './title';
+export { VariantDemo } from './variant';
+export { StylesDemo } from './styles';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Horizontal, Vertical, Center } from 'app-studio';
+import { View, Horizontal, Vertical } from 'app-studio';
 import { CloseIcon } from '../../Icon/Icon';
 import {
   DrawerOverlayProps,

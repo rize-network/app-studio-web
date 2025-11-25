@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Drawer, Text, Horizontal, Vertical } from 'src/components';
+import { Button, Drawer, Text } from 'src/components';
+import { Horizontal, Vertical } from 'app-studio';
 import { Placement } from '../Drawer/Drawer.type';
 
 export const DrawerPlacements = () => {
