@@ -89,9 +89,7 @@ const OKRView: React.FC<OKRProps> = ({
             role={onObjectiveClick ? 'button' : undefined}
             cursor={onObjectiveClick ? 'pointer' : undefined}
             onClick={
-              onObjectiveClick
-                ? () => onObjectiveClick(objective)
-                : undefined
+              onObjectiveClick ? () => onObjectiveClick(objective) : undefined
             }
             {...theme.objectiveCard}
             {...views?.objectiveCard}

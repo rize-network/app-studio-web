@@ -177,7 +177,9 @@ export const KanbanBoardView: React.FC<KanbanBoardViewProps> = ({
             <Text
               size="sm"
               color="#475467"
-              onDoubleClick={(event) => handleDescriptionDoubleClick(event, card)}
+              onDoubleClick={(event) =>
+                handleDescriptionDoubleClick(event, card)
+              }
             >
               {card.description}
             </Text>
