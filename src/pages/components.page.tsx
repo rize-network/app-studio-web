@@ -1,22 +1,13 @@
 import React, { Suspense, useState, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { View, Text, Horizontal } from 'app-studio';
-import TreePage from './tree.page';
-import FlowPage from './flow.page';
+
 import ChatInputDemo from './chat.page';
 
 const GradientPage = lazy(() => import('src/pages/gradient.page'));
 const DragAndDropPage = lazy(() => import('src/pages/dragAndDrop.page'));
 const UploadPage = lazy(() => import('src/pages/upload.page'));
 // const AIChatPage = lazy(() => import('src/pages/chat.page'));
-
-const ADKComponentsPage = lazy(
-  () => import('src/pages/adk/adkComponents.page')
-);
-const AgentChatPage = lazy(() => import('src/pages/adk/agentChat.page'));
-const AdkIntegrationPage = lazy(
-  () => import('src/pages/adk/adkIntegration.page')
-);
 
 // Lazy-loaded imports
 const AccordionPage = lazy(() => import('src/pages/accordion.page'));
@@ -76,25 +67,10 @@ const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 const AudioInputPage = lazy(() => import('src/pages/audioInput.page'));
 
 const BackgroundPage = lazy(() => import('src/pages/background.page'));
-const KanbanBoardPage = lazy(() => import('src/pages/kanbanBoard.page'));
-const CalendarPage = lazy(() => import('src/pages/calendar.page'));
-const OKRPage = lazy(() => import('src/pages/okr.page'));
 
 export const componentList = [
-  { name: 'OKR', path: '/okr', element: <OKRPage /> },
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
   { name: 'Chat', path: '/chat', element: <ChatInputDemo /> },
-  { name: 'Agent Chat', path: '/agent-chat', element: <AgentChatPage /> },
-  {
-    name: 'ADK Components',
-    path: '/adk-components',
-    element: <ADKComponentsPage />,
-  },
-  {
-    name: 'ADK Integration',
-    path: '/adk-integration',
-    element: <AdkIntegrationPage />,
-  },
   { name: 'Gradient', path: '/gradient', element: <GradientPage /> },
 
   { name: 'Alert', path: '/alert', element: <AlertPage /> },
@@ -104,8 +80,6 @@ export const componentList = [
   { name: 'Badge', path: '/badge', element: <BadgePage /> },
   { name: 'Button', path: '/button', element: <ButtonPage /> },
   { name: 'Card', path: '/card', element: <CardPage /> },
-  { name: 'KanbanBoard', path: '/kanbanboard', element: <KanbanBoardPage /> },
-  { name: 'Calendar', path: '/calendar', element: <CalendarPage /> },
   { name: 'Carousel', path: '/carousel', element: <CarouselPage /> },
   { name: 'Chart', path: '/chart', element: <ChartPage /> },
   { name: 'Checkbox', path: '/checkbox', element: <CheckboxPage /> },
@@ -179,8 +153,6 @@ export const componentList = [
   { name: 'Toggle', path: '/toggle', element: <TogglePage /> },
   { name: 'ToggleGroup', path: '/togglegroup', element: <ToggleGroupPage /> },
   { name: 'Upload', path: '/upload', element: <UploadPage /> },
-  { name: 'Tree', path: '/tree', element: <TreePage /> },
-  { name: 'Flow', path: '/flow', element: <FlowPage /> },
   { name: 'Audio Input', path: '/audio-input', element: <AudioInputPage /> },
 ];
 
