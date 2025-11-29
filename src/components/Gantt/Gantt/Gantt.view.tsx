@@ -156,7 +156,11 @@ export const Gantt: React.FC<GanttProps> = ({
 
   // Handle task checkbox
   const handleTaskCheck = useCallback(
-    (task: GanttTask, milestone: GanttMilestone, e: React.ChangeEvent<HTMLInputElement>) => {
+    (
+      task: GanttTask,
+      milestone: GanttMilestone,
+      e: React.ChangeEvent<HTMLInputElement>
+    ) => {
       e.stopPropagation();
       onTaskCheck?.(task, e.target.checked, milestone);
     },
@@ -183,7 +187,9 @@ export const Gantt: React.FC<GanttProps> = ({
         <button
           key={view}
           onClick={() => handleViewChange(view)}
-          style={currentView === view ? filterButtonActiveStyles : filterButtonStyles}
+          style={
+            currentView === view ? filterButtonActiveStyles : filterButtonStyles
+          }
         >
           {view.charAt(0).toUpperCase() + view.slice(1)}
         </button>
@@ -193,7 +199,10 @@ export const Gantt: React.FC<GanttProps> = ({
 
   // Render left panel header
   const renderLeftPanelHeader = () => (
-    <View {...leftPanelHeaderStyles} style={{ height: currentView === 'day' ? 64 : 40 }}>
+    <View
+      {...leftPanelHeaderStyles}
+      style={{ height: currentView === 'day' ? 64 : 40 }}
+    >
       Tasks
     </View>
   );
@@ -216,14 +225,18 @@ export const Gantt: React.FC<GanttProps> = ({
         {allowCollapse && (
           <Text
             {...milestoneToggleStyles}
-            style={{ transform: isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)' }}
+            style={{
+              transform: isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)',
+            }}
           >
             ▼
           </Text>
         )}
         {milestone.icon && (
           <Text style={{ marginRight: 8, fontSize: 14 }}>
-            {typeof milestone.icon === 'string' ? milestone.icon : milestone.icon}
+            {typeof milestone.icon === 'string'
+              ? milestone.icon
+              : milestone.icon}
           </Text>
         )}
         <Text>{milestone.title}</Text>
@@ -310,7 +323,9 @@ export const Gantt: React.FC<GanttProps> = ({
                   {...cellStyle}
                   style={{ width: cellWidth, flexShrink: 0 }}
                 >
-                  <Text style={{ fontSize: 10, color: 'var(--color-gray-400)' }}>
+                  <Text
+                    style={{ fontSize: 10, color: 'var(--color-gray-400)' }}
+                  >
                     {getDayLabel(date)}
                   </Text>
                   <Text>{formatDateHeader(date, currentView)}</Text>
@@ -357,16 +372,18 @@ export const Gantt: React.FC<GanttProps> = ({
           />
         ))}
         {/* Milestone bar if it has dates */}
-        {milestone.startDate && milestone.endDate && renderTaskBar(
-          {
-            id: milestone.id,
-            title: milestone.title,
-            startDate: milestone.startDate,
-            endDate: milestone.endDate,
-            color: milestone.color,
-          },
-          true
-        )}
+        {milestone.startDate &&
+          milestone.endDate &&
+          renderTaskBar(
+            {
+              id: milestone.id,
+              title: milestone.title,
+              startDate: milestone.startDate,
+              endDate: milestone.endDate,
+              color: milestone.color,
+            },
+            true
+          )}
       </View>
     );
   };
@@ -460,11 +477,7 @@ export const Gantt: React.FC<GanttProps> = ({
   }
 
   return (
-    <View
-      {...containerStyles}
-      {...views?.container}
-      style={{ width, height }}
-    >
+    <View {...containerStyles} {...views?.container} style={{ width, height }}>
       {/* Header with filters */}
       <Horizontal {...headerStyles} {...views?.header}>
         <Text style={{ fontWeight: 600, fontSize: 14 }}>Project Timeline</Text>

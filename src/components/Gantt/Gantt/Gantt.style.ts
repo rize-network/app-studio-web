@@ -242,7 +242,7 @@ export const timelineCellStyles: ViewProps = {
 
 export const timelineCellWeekendStyles: ViewProps = {
   ...timelineCellStyles,
-  backgroundColor: 'color.gray.25',
+  backgroundColor: 'color.gray.100',
 };
 
 // Task bar styles

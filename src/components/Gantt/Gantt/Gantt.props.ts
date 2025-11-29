@@ -69,12 +69,21 @@ export interface GanttProps {
   // Callbacks
   onTaskClick?: (task: GanttTask, milestone: GanttMilestone) => void;
   onTaskDoubleClick?: (task: GanttTask, milestone: GanttMilestone) => void;
-  onTaskCheck?: (task: GanttTask, checked: boolean, milestone: GanttMilestone) => void;
+  onTaskCheck?: (
+    task: GanttTask,
+    checked: boolean,
+    milestone: GanttMilestone
+  ) => void;
   onMilestoneClick?: (milestone: GanttMilestone) => void;
   onMilestoneToggle?: (milestone: GanttMilestone, collapsed: boolean) => void;
   onViewChange?: (view: GanttViewType) => void;
   onDateRangeChange?: (startDate: string, endDate: string) => void;
-  onTaskDrag?: (task: GanttTask, newStartDate: string, newEndDate: string, milestone: GanttMilestone) => void;
+  onTaskDrag?: (
+    task: GanttTask,
+    newStartDate: string,
+    newEndDate: string,
+    milestone: GanttMilestone
+  ) => void;
 
   // Sizing
   width?: number | string;

@@ -151,7 +151,13 @@ export const DefaultGantt = () => {
       initialView="day"
       height={500}
       onTaskClick={(task, milestone) => {
-        console.log('Task clicked:', task.id, task.title, 'in', milestone.title);
+        console.log(
+          'Task clicked:',
+          task.id,
+          task.title,
+          'in',
+          milestone.title
+        );
       }}
       onTaskCheck={(task, checked, milestone) => {
         console.log('Task checked:', task.id, checked, 'in', milestone.title);

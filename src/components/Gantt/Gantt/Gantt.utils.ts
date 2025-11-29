@@ -1,6 +1,5 @@
 import {
   startOfDay,
-  endOfDay,
   startOfWeek,
   endOfWeek,
   startOfMonth,
@@ -9,7 +8,6 @@ import {
   addWeeks,
   addMonths,
   differenceInDays,
-  differenceInWeeks,
   differenceInMonths,
   format,
   isWeekend,
@@ -128,7 +126,10 @@ export const generateTimelineDates = (
 };
 
 // Format date for display in timeline header
-export const formatDateHeader = (dateISO: string, view: GanttViewType): string => {
+export const formatDateHeader = (
+  dateISO: string,
+  view: GanttViewType
+): string => {
   const date = parseDate(dateISO);
 
   if (view === 'day') {
@@ -224,13 +225,20 @@ export const calculateTodayPosition = (
     if (monthsDiff < 0) return null;
     // Approximate position within month
     const dayOfMonth = todayDate.getDate();
-    const daysInMonth = new Date(todayDate.getFullYear(), todayDate.getMonth() + 1, 0).getDate();
+    const daysInMonth = new Date(
+      todayDate.getFullYear(),
+      todayDate.getMonth() + 1,
+      0
+    ).getDate();
     return (monthsDiff + dayOfMonth / daysInMonth) * cellWidth;
   }
 };
 
 // Calculate total timeline width
-export const calculateTimelineWidth = (dates: string[], view: GanttViewType): number => {
+export const calculateTimelineWidth = (
+  dates: string[],
+  view: GanttViewType
+): number => {
   return dates.length * CELL_WIDTHS[view];
 };
 
@@ -276,7 +284,9 @@ export const flattenMilestones = (milestones: GanttMilestone[]): FlatRow[] => {
 };
 
 // Group dates by month for header rendering
-export const groupDatesByMonth = (dates: string[]): { month: string; dates: string[] }[] => {
+export const groupDatesByMonth = (
+  dates: string[]
+): { month: string; dates: string[] }[] => {
   const groups: { month: string; dates: string[] }[] = [];
   let currentMonth = '';
   let currentGroup: string[] = [];
