@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Center } from 'app-studio';
 import { Image } from 'app-studio';
 import { AvatarViewProps } from './Avatar.props';

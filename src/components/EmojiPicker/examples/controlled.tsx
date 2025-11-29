@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Vertical, Horizontal } from 'app-studio';
 import { EmojiPicker } from '../EmojiPicker';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const ControlledEmojiPicker = () => {
   const [isOpen, setIsOpen] = useState(false);

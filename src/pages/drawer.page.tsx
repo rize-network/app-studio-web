@@ -1,6 +1,5 @@
-import { Vertical } from 'app-studio';
+import { Vertical, Text } from 'app-studio';
 import React from 'react';
-import { Text } from 'src/components';
 import {
   DefaultDrawer,
   DrawerPlacements,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Vertical, Horizontal } from 'app-studio';
 import { Background } from '../components/Background/Background';
-import { Text } from '../components/Text/Text';
+import { Text } from 'app-studio';
 
 const BackgroundTestPage = () => {
   return (

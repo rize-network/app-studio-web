@@ -9,7 +9,7 @@ import React from 'react';
 import { Input } from 'app-studio';
 import { Label } from '../../../Form/Label/Label';
 import { View } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { SwitchViewProps } from './Switch.props';
 import {
   KnobSizes,

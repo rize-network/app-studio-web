@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Drawer, Text } from '../../../components';
-import { Vertical } from 'app-studio';
+import { Button, Drawer } from '../../../components';
+import { Vertical, Text } from 'app-studio';
 
 export const DefaultDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);

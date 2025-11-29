@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Resizable } from '../Resizable';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Button } from '../../Button/Button';
 import { Horizontal } from 'app-studio';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Background } from '../Background';
 import { Vertical, Center } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Button } from '../../Button/Button';
 
 export const AuroraDemo = () => (

@@ -10,7 +10,7 @@ import {
   ResponsiveTypography,
 } from './Title.style';
 import TypewriterEffect from './TypewriterEffect';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\\]\\/g, '\\$&');
@@ -148,9 +148,6 @@ const TitleView: React.FC<TitleProps> = ({
         ref={ref}
         as="h1"
         fontSize={useResponsive ? undefined : fontSize}
-        lineHeight={
-          useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
-        }
         fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
         letterSpacing={
           useResponsive ? responsiveStyles?.letterSpacing : undefined
@@ -205,9 +202,6 @@ const TitleView: React.FC<TitleProps> = ({
         ref={ref}
         as="h1"
         fontSize={useResponsive ? undefined : fontSize}
-        lineHeight={
-          useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
-        }
         fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
         letterSpacing={
           useResponsive ? responsiveStyles?.letterSpacing : undefined
@@ -254,9 +248,6 @@ const TitleView: React.FC<TitleProps> = ({
       ref={ref}
       as="h1"
       fontSize={fontSize}
-      lineHeight={
-        useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
-      }
       fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
       letterSpacing={
         useResponsive ? responsiveStyles?.letterSpacing : undefined

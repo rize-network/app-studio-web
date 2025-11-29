@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { Element, useElementPosition } from 'app-studio';
 import { Typography } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';

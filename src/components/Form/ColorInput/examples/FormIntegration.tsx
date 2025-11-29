@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Vertical, Horizontal } from 'app-studio';
 import { ColorInput } from '../ColorInput';
 import { Button } from '../../../Button/Button';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 
 export const FormIntegrationColorInput = () => {
   const [backgroundColor, setBackgroundColor] = useState('color.blue.500');

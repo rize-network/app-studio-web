@@ -10,7 +10,7 @@ import React from 'react';
 import { HelperText } from '../HelperText/HelperText';
 
 import { ContainerProps } from './FieldContainer/FieldContainer.props';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 export const FieldContainer = React.forwardRef<HTMLDivElement, ContainerProps>(

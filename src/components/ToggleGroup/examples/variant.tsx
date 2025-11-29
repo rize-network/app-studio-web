@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { ToggleGroup } from '../ToggleGroup';
 import { Variant } from '../ToggleGroup/ToggleGroup.type';
 import { Vertical } from 'app-studio';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Drawer, Text } from '../../../components';
+import { Button, Drawer } from '../../../components';
 import { Placement } from '../Drawer/Drawer.type';
-import { Horizontal, Vertical } from 'app-studio';
+import { Horizontal, Vertical, Text } from 'app-studio';
 
 export const DrawerPlacements = () => {
   const [isOpen, setIsOpen] = useState(false);

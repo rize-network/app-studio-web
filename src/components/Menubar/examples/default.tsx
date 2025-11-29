@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menubar } from '../Menubar';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { EditIcon } from '../../Icon/Icon';
 
 export const DefaultMenubar = () => {

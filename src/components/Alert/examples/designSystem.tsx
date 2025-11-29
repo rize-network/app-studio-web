@@ -12,7 +12,7 @@
 import React from 'react';
 import { Alert } from '../Alert';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 import { EditIcon } from '../../Icon/Icon';
 

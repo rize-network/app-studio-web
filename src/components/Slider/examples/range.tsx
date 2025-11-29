@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Slider } from '../Slider';
 
 export const RangeDemo = () => {

@@ -55,7 +55,6 @@ const StatusIndicatorPage = lazy(
 );
 const TablePage = lazy(() => import('src/pages/table.page'));
 const TabsPage = lazy(() => import('src/pages/tabs.page'));
-const TextPage = lazy(() => import('src/pages/text.page'));
 const TextAreaPage = lazy(() => import('src/pages/textArea.page'));
 const TextfieldPage = lazy(() => import('src/pages/textfield.page'));
 const TitlePage = lazy(() => import('src/pages/title.page'));
@@ -139,7 +138,6 @@ export const componentList = [
   { name: 'Switch', path: '/switch', element: <SwitchPage /> },
   { name: 'Table', path: '/table', element: <TablePage /> },
   { name: 'Tabs', path: '/tabs', element: <TabsPage /> },
-  { name: 'Text', path: '/text', element: <TextPage /> },
   { name: 'TextArea', path: '/textarea', element: <TextAreaPage /> },
   { name: 'Textfield', path: '/textfield', element: <TextfieldPage /> },
   { name: 'Title', path: '/title', element: <TitlePage /> },

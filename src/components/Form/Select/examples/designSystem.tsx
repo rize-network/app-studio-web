@@ -12,7 +12,7 @@
 import React from 'react';
 import { Select } from '../Select';
 import { Vertical } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 
 // Sample options for all examples

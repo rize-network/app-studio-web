@@ -65,15 +65,15 @@ export const ResponsiveTitle = () => {
         media={{
           mobile: {
             fontSize: 32,
-            lineHeight: '40px',
+            lineHeight: '100%',
           },
           tablet: {
             fontSize: 48,
-            lineHeight: '56px',
+            lineHeight: '110%',
           },
           desktop: {
             fontSize: 64,
-            lineHeight: '72px',
+            lineHeight: '120%',
           },
         }}
         highlightText="Manual"

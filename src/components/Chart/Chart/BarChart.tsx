@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, useTheme } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { ChartData } from './Chart.type';
 import {
   BarStyles,

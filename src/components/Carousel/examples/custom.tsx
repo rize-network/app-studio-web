@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from '../Carousel';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Card } from '../../Card/Card';
 import { Horizontal } from 'app-studio';
 

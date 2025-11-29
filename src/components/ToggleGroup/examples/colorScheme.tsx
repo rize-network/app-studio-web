@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToggleGroup } from '../ToggleGroup';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const ColorSchemeDemo = () => {
   const items = [

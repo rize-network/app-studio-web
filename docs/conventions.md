@@ -61,7 +61,7 @@ import * as Yup from 'yup';
 import { View, Horizontal, Vertical, useTheme } from 'app-studio';
 
 // Internal component imports
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Button } from '../../Button/Button';
 
 // Type imports

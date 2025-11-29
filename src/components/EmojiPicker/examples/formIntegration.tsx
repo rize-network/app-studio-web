@@ -3,7 +3,7 @@ import { Vertical, Horizontal } from 'app-studio';
 import { EmojiPicker } from '../EmojiPicker';
 import { TextField } from '../../Form/TextField/TextField';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const FormIntegrationEmojiPicker = () => {
   const [title, setTitle] = useState('');
