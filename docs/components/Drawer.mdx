@@ -1,0 +1,164 @@
+# Drawer
+
+A drawer is a panel that slides out from the edge of the screen. It can be useful when you need users to complete a task or view some details without leaving the current page.
+
+### **Import**
+```tsx
+import { Drawer } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '../Drawer';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+
+export const DefaultDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Drawer</Button>
+      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Drawer.Header>Drawer Title</Drawer.Header>
+        <Drawer.Body>
+          <p>This is the content of the drawer.</p>
+        </Drawer.Body>
+        <Drawer.Footer>
+          <Button onClick={() => setIsOpen(false)}>Close</Button>
+        </Drawer.Footer>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **Placement**
+The `placement` prop determines which side of the screen the drawer will appear from. It can be `top`, `right`, `bottom`, or `left`.
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '../Drawer';
+import { Button } from '../Button';
+import { Horizontal } from 'app-studio';
+
+export const PlacementDrawer = () => {
+  const [placement, setPlacement] = useState('right');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openDrawer = (p) => {
+    setPlacement(p);
+    setIsOpen(true);
+  };
+
+  return (
+    <Horizontal gap={10}>
+      <Button onClick={() => openDrawer('top')}>Top</Button>
+      <Button onClick={() => openDrawer('right')}>Right</Button>
+      <Button onClick={() => openDrawer('bottom')}>Bottom</Button>
+      <Button onClick={() => openDrawer('left')}>Left</Button>
+      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} placement={placement}>
+        <Drawer.Header>Drawer Title</Drawer.Header>
+        <Drawer.Body>
+          <p>This is the content of the drawer.</p>
+        </Drawer.Body>
+      </Drawer>
+    </Horizontal>
+  );
+};
+```
+
+### **Size**
+The `size` prop controls the width or height of the drawer, depending on the placement.
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '../Drawer';
+import { Button } from '../Button';
+import { Horizontal } from 'app-studio';
+
+export const SizeDrawer = () => {
+  const [size, setSize] = useState('md');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openDrawer = (s) => {
+    setSize(s);
+    setIsOpen(true);
+  };
+
+  return (
+    <Horizontal gap={10}>
+      <Button onClick={() => openDrawer('xs')}>xs</Button>
+      <Button onClick={() => openDrawer('sm')}>sm</Button>
+      <Button onClick={() => openDrawer('md')}>md</Button>
+      <Button onClick={() => openDrawer('lg')}>lg</Button>
+      <Button onClick={() => openDrawer('xl')}>xl</Button>
+      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} size={size}>
+        <Drawer.Header>Drawer Title</Drawer.Header>
+        <Drawer.Body>
+          <p>This is the content of the drawer.</p>
+        </Drawer.Body>
+      </Drawer>
+    </Horizontal>
+  );
+};
+```
+
+### **Prevent Closing**
+The `isClosePrevented` prop prevents the drawer from closing when the overlay is clicked.
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '../Drawer';
+import { Button } from '../Button';
+
+export const PreventCloseDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Drawer</Button>
+      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} isClosePrevented>
+        <Drawer.Header>Drawer Title</Drawer.Header>
+        <Drawer.Body>
+          <p>This drawer cannot be closed by clicking the overlay.</p>
+        </Drawer.Body>
+        <Drawer.Footer>
+          <Button onClick={() => setIsOpen(false)}>Close</Button>
+        </Drawer.Footer>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **Props**
+
+#### **Drawer**
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `placement` | `top` \| `right` \| `bottom` \| `left` | `right` | The placement of the drawer. |
+| `size` | `xs` \| `sm` \| `md` \| `lg` \| `xl` | `md` | The size of the drawer. |
+| `isOpen` | `boolean` | - | If `true`, the drawer will be open. |
+| `onClose` | `() => void` | - | Callback fired when the drawer closes. |
+| `isClosePrevented` | `boolean` | `false` | If `true`, the drawer will not close when clicking the overlay. |
+| `children` | `React.ReactNode` | - | The children of the drawer. |
+
+#### **Drawer.Header**
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `onClose` | `() => void` | - | Callback fired when the close button is clicked. |
+| `buttonPosition` | `left` \| `right` | `right` | The position of the close button. |
+| `children` | `React.ReactNode` | - | The content of the drawer header. |
+
+#### **Drawer.Body**
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `React.ReactNode` | - | The content of the drawer body. |
+
+#### **Drawer.Footer**
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `React.ReactNode` | - | The content of the drawer footer. |
+

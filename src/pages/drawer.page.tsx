@@ -1,13 +1,25 @@
+import { Vertical } from 'app-studio';
 import React from 'react';
-import { Vertical, Text } from 'src/components';
+import { Text } from 'src/components';
 import {
   DefaultDrawer,
   DrawerPlacements,
   DrawerSizes,
 } from 'src/components/Drawer/Examples';
 
-const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <Vertical gap={8} paddingBottom={24} borderBottomWidth="1px" borderBottomColor="color.gray.200">
+const Section = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <Vertical
+    gap={8}
+    paddingBottom={24}
+    borderBottomWidth="1px"
+    borderBottomColor="color.gray.200"
+  >
     <Text as="h3" fontWeight="bold" fontSize="lg">
       {title}
     </Text>

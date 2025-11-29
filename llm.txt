@@ -1,0 +1,433 @@
+# App Studio Web Component Library
+
+A comprehensive, accessible, and customizable React component library built with TypeScript and App Studio. This library provides 60+ production-ready UI components designed for building modern web applications with full type safety, accessibility support, and seamless form integration.
+
+## Overview
+
+App Studio Web is a complete React component library featuring:
+- **TypeScript-first**: Built with TypeScript 4.9+ for complete type safety and IntelliSense support
+- **40+ Core UI Components**: Comprehensive set of layout, form, navigation, feedback, and data display components
+- **ADK Integration**: Specialized components for Agent Development Kit (ADK) integration
+- **Formik Integration**: Seamless form handling with dedicated Formik wrapper components
+- **Accessible**: WCAG-compliant components with proper ARIA attributes and keyboard navigation
+- **Themeable**: Flexible theming system with light/dark mode support and customizable design tokens
+- **Production Ready**: Battle-tested components used in real-world applications
+- **Open Source**: MIT licensed and ready for AI-assisted development
+
+### Core Documentation
+- [Introduction](./docs/getting-started/introduction.md) - Core principles, features, and quick start guide
+- [Component Development Guide](./docs/component-development/guide.md) - Comprehensive guide for building and contributing components
+- [App Studio Rules](./docs/app-studio.md) - Design patterns, coding standards, and best practices
+- [Theming Guide](./docs/design-system/theming.md) - Theming system, color palette, typography, and customization
+- [API Integration](./docs/api-integration.md) - Backend integration patterns using OpenAPI-generated services
+
+### ADK Documentation
+- [ADK Components](./README-ADK.md) - Agent Development Kit integration and specialized components
+- [ADK Quick Start](./docs/adk-quick-start.md) - Getting started with ADK components
+
+## Installation
+
+### NPM
+```bash
+npm install @app-studio/web
+# or
+yarn add @app-studio/web
+```
+
+### Manual Installation
+```bash
+# Clone the repository
+git clone https://github.com/your-org/app-studio-web.git
+cd app-studio-web
+
+# Install dependencies
+npm install
+
+# Build the library
+npm run build
+```
+
+## Supported Frameworks
+
+- **React 18.x**: Primary framework with full support for hooks and concurrent features
+- **TypeScript 4.9+**: Complete type definitions and IntelliSense support
+- **App Studio**: Built on top of the App Studio design system
+- **Formik**: Seamless integration with Formik for form handling
+- **Zustand**: Built-in state management for global component state
+
+## Components
+
+### Layout Components
+
+Layout components provide flexible and consistent spacing, alignment, and structure using CSS Flexbox abstractions.
+
+- **View** - Base container component for building layouts ([docs](./docs/components.md#view))
+- **Horizontal** - Horizontal flex container for arranging children in a row ([docs](./docs/components.md#horizontal))
+- **Vertical** - Vertical flex container for stacking children in a column ([docs](./docs/components.md#vertical))
+- **Center** - Centers children both horizontally and vertically ([docs](./docs/components.md#center))
+- **AspectRatio** - Maintains a specific aspect ratio for content ([docs](./docs/components/AspectRatio.mdx))
+- **Separator** - Visual divider for separating content ([docs](./docs/components/Separator.mdx))
+- **Resizable** - Resizable container with drag handles ([docs](./docs/components/Resizable.mdx))
+
+### Form Components
+
+Form components provide comprehensive form building capabilities with validation and accessibility support.
+
+#### Input Components
+- **TextField** - Complete text input with label, helper text, and error handling ([docs](./docs/components/TextField.mdx))
+- **TextArea** - Multi-line text input component ([docs](./docs/components/TextArea.mdx))
+- **Password** - Password input with visibility toggle ([docs](./docs/components/Password.mdx))
+- **Checkbox** - Checkbox input for boolean values ([docs](./docs/components/Checkbox.mdx))
+- **Switch** - Toggle switch for on/off states ([docs](./docs/components/Switch.mdx))
+- **Select** - Dropdown select component ([docs](./docs/components/Select.mdx))
+- **ComboBox** - Searchable dropdown with autocomplete ([docs](./docs/components/ComboBox.mdx))
+- **OTPInput** - One-time password input with multiple fields ([docs](./docs/components.md))
+- **Slider** - Range slider for numeric input ([docs](./docs/components/Slider.mdx))
+- **TagInput** - Input for creating and managing tags ([docs](./docs/components/TagInput.mdx))
+
+#### Specialized Inputs
+- **ColorInput** - Color picker input ([docs](./docs/components/ColorInput.mdx))
+- **ColorPicker** - Advanced color picker component ([docs](./docs/components.md))
+- **DatePicker** - Date selection component ([docs](./docs/components/DatePicker.mdx))
+- **Calendar** - Calendar component for date selection ([docs](./docs/components/Calendar.mdx))
+- **CountryPicker** - Country selection dropdown ([docs](./docs/components/CountryPicker.mdx))
+- **File** - File input component ([docs](./docs/components/File.mdx))
+- **Uploader** - File upload with drag-and-drop ([docs](./docs/components/Uploader.mdx))
+- **ChatInput** - Chat message input with attachments and agent controls ([docs](./docs/components/ChatInput.mdx))
+- **EmojiPicker** - Emoji selection component ([docs](./docs/components.md))
+
+#### Form Management
+- **Form** - Form container with validation support ([docs](./docs/components/Form.mdx))
+- **Label** - Form label component ([docs](./docs/components/Label.mdx))
+- **Formik** - Formik integration wrapper components ([docs](./docs/components/Formik.mdx))
+
+### Navigation Components
+
+Components for creating intuitive navigation experiences.
+
+- **NavigationMenu** - Horizontal navigation menu with dropdowns ([docs](./docs/components/NavigationMenu.mdx))
+- **Menubar** - Menu bar with dropdown menus ([docs](./docs/components/Menubar.mdx))
+- **DropdownMenu** - Dropdown menu component ([docs](./docs/components/DropdownMenu.mdx))
+- **ContextMenu** - Right-click context menu ([docs](./docs/components/ContextMenu.mdx))
+- **Accordion** - Collapsible content sections ([docs](./docs/components/Accordion.mdx))
+- **Tabs** - Tabbed interface for content organization ([docs](./docs/components/Tabs.mdx))
+- **Sidebar** - Collapsible sidebar navigation ([docs](./docs/components/Sidebar.mdx))
+- **Pagination** - Pagination controls for data lists ([docs](./docs/components/Pagination.mdx))
+- **Command** - Command palette for keyboard shortcuts ([docs](./docs/components/Command.mdx))
+
+### Feedback Components
+
+Components for providing user feedback and displaying messages.
+
+- **Alert** - Alert messages for important information ([docs](./docs/components/Alert.mdx))
+- **Toast** - Temporary notification messages ([docs](./docs/components/Toast.mdx))
+- **Modal** - Dialog window overlay ([docs](./docs/components/Modal.mdx))
+- **Drawer** - Slide-out panel component ([docs](./docs/components/Drawer.mdx))
+- **Tooltip** - Hover tooltip for additional information ([docs](./docs/components/Tooltip.mdx))
+- **HoverCard** - Rich hover card with content preview ([docs](./docs/components/HoverCard.mdx))
+- **Message** - Message display component ([docs](./docs/components/Message.mdx))
+- **Loader** - Loading indicator with multiple styles ([docs](./docs/components/Loader.mdx))
+- **ProgressBar** - Progress indicator ([docs](./docs/components.md))
+- **StatusIndicator** - Visual status indicator ([docs](./docs/components.md))
+- **CookieConsent** - Cookie consent banner ([docs](./docs/components.md))
+
+### Data Display Components
+
+Components for displaying and visualizing data.
+
+- **Table** - Data table with sorting and filtering ([docs](./docs/components/Table.mdx))
+- **Card** - Container for grouping related content ([docs](./docs/components/Card.mdx))
+- **Avatar** - User avatar with fallback ([docs](./docs/components/Avatar.mdx))
+- **Badge** - Small count or status indicator ([docs](./docs/components/Badge.mdx))
+- **Chart** - Data visualization charts ([docs](./docs/components/Chart.mdx))
+- **Tree** - Hierarchical tree view with expand/collapse ([docs](./docs/components/Tree.mdx))
+- **Flow** - Interactive workflow diagrams and flowcharts ([docs](./docs/components/Flow.mdx))
+- **KanbanBoard** - Kanban board with drag-and-drop ([docs](./docs/components/KanbanBoard.mdx))
+- **OKR** - Objectives and Key Results display ([docs](./docs/components/OKR.mdx))
+
+### Interactive Components
+
+Components for interactive user experiences.
+
+- **Button** - Customizable button with multiple variants ([docs](./docs/components/Button.mdx))
+- **Toggle** - Toggle button component ([docs](./docs/components/Toggle.mdx))
+- **ToggleGroup** - Group of toggle buttons ([docs](./docs/components/ToggleGroup.mdx))
+- **Carousel** - Image/content carousel with navigation ([docs](./docs/components/Carousel.mdx))
+- **DragAndDrop** - Drag and drop container ([docs](./docs/components/DragAndDrop.mdx))
+
+### Typography Components
+
+Components for text display and formatting.
+
+- **Text** - Text component with consistent typography ([docs](./docs/components/Text.mdx))
+- **Title** - Animated and highlighted title component ([docs](./docs/components/Title.mdx))
+- **Link** - Navigation link component ([docs](./docs/components/Link.mdx))
+
+### Utility Components
+
+Specialized utility components for common use cases.
+
+- **Icon** - SVG icon component with extensive icon library ([docs](./docs/components/Icon.mdx))
+- **Gradient** - Gradient background component ([docs](./docs/components/Gradient.mdx))
+- **Background** - Background component with patterns ([docs](./docs/components/Background.mdx))
+- **AuthGuard** - Route protection component ([docs](./docs/components.md))
+- **MediaPreview** - Media preview component ([docs](./docs/components.md))
+- **ShareButton** - Social sharing button ([docs](./docs/components.md))
+- **AudioInput** - Audio recording input ([docs](./docs/components.md))
+
+## Theming and Customization
+
+### Dark Mode
+App Studio Web includes built-in support for light and dark themes:
+
+```tsx
+import { ThemeProvider } from 'app-studio';
+
+function App() {
+  return (
+    <ThemeProvider theme={{ mode: 'dark' }}>
+      {/* Your app */}
+    </ThemeProvider>
+  );
+}
+```
+
+Individual components can override the theme mode:
+```tsx
+<Button themeMode="dark">Dark Button</Button>
+```
+
+### Theme System
+
+The library uses a comprehensive theme system with:
+
+#### Color Palette
+- **Semantic Colors**: `theme.primary`, `theme.secondary`, `theme.success`, `theme.warning`, `theme.error`, `theme.info`, `theme.disabled`
+- **Neutral Colors**: `color.white`, `color.black`, `color.gray.50` through `color.gray.900`
+- **Color Scales**: `color.blue`, `color.green`, `color.red`, `color.yellow`, `color.purple` (50-900)
+
+#### Typography
+- **Font Family**: Inter/Geist
+- **Font Sizes**: 12px to 48px
+- **Font Weights**: 400 (regular) to 700 (bold)
+- **Line Heights**: 1.2 to 1.8
+
+#### Spacing
+Uses a 4px grid system:
+- 4px (extra small)
+- 8px (small)
+- 16px (medium)
+- 24px (large)
+- 32px (extra large)
+
+#### Shapes
+- `sharp`: No border radius (0px)
+- `rounded`: Small border radius (4px)
+- `pillShaped`: Pill shape (9999px)
+
+#### Shadows
+- `shadow.sm`: Small shadow
+- `shadow.md`: Medium shadow
+- `shadow.lg`: Large shadow
+- `shadow.xl`: Extra large shadow
+
+### Custom Styling
+
+All components support style customization through the `views` prop:
+
+```tsx
+<Button
+  views={{
+    container: {
+      backgroundColor: '#6200ee',
+      borderRadius: 8,
+    },
+  }}
+>
+  Custom Button
+</Button>
+```
+
+## Forms and Validation
+
+### Formik Integration
+
+The library provides dedicated Formik wrapper components for seamless form handling:
+
+```tsx
+import { Formik, Form } from 'formik';
+import { FormikTextField, FormikCheckbox } from '@app-studio/web';
+import * as Yup from 'yup';
+
+const schema = Yup.object({
+  email: Yup.string().email().required(),
+  terms: Yup.boolean().oneOf([true]).required(),
+});
+
+function MyForm() {
+  return (
+    <Formik
+      initialValues={{ email: '', terms: false }}
+      validationSchema={schema}
+      onSubmit={(values) => console.log(values)}
+    >
+      <Form>
+        <FormikTextField name="email" label="Email" type="email" />
+        <FormikCheckbox name="terms" label="I accept the terms" />
+      </Form>
+    </Formik>
+  );
+}
+```
+
+### Form Components
+
+Available Formik wrapper components:
+- `FormikTextField`
+- `FormikTextArea`
+- `FormikCheckbox`
+- `FormikSwitch`
+- `FormikSelect`
+- `FormikComboBox`
+- And more...
+
+## State Management
+
+Components use a combination of local and global state management:
+
+### Local State
+- Component-specific state managed via custom `useComponentNameState` hooks
+- Encapsulates state logic and event handlers
+
+### Global State (Zustand)
+- `useModalStore`: Global modal state
+- `useMessageStore`: Global message queue
+- Used for state that needs to be shared across distant components
+
+## API Integration
+
+The library includes comprehensive API integration support with OpenAPI-generated services:
+
+### Generated API Hooks
+```tsx
+import { UserService } from 'src/services/api';
+
+function UserProfile({ userId }) {
+  const getUserRequest = UserService.useUserControllerReadService({
+    onSuccess: (data) => {
+      console.log('User loaded:', data);
+    },
+    onError: (error) => {
+      console.error('Error:', error);
+    },
+  });
+
+  useEffect(() => {
+    getUserRequest.run(userId);
+  }, [userId]);
+
+  return (
+    <div>
+      {getUserRequest.loading && <Loader />}
+      {getUserRequest.data && <div>{getUserRequest.data.name}</div>}
+    </div>
+  );
+}
+```
+
+See [API Integration Guide](./docs/api-integration.md) for complete documentation.
+
+## Component Development
+
+### File Structure
+Each component follows a consistent structure:
+
+```
+ComponentName/
+├── ComponentName.tsx                 # Main component file
+├── ComponentName/                    # Inner folder
+│   ├── ComponentName.props.ts        # Props interface
+│   ├── ComponentName.state.ts        # State hook
+│   ├── ComponentName.view.tsx        # Presentational component
+│   ├── ComponentName.style.ts        # Style constants
+│   └── ComponentName.type.ts         # Type definitions
+└── examples/                         # Usage examples
+    ├── default.tsx
+    ├── variant.tsx
+    └── index.ts
+```
+
+### Creating New Components
+
+Use the provided script to scaffold new components:
+
+```bash
+npm run create-structure -- ComponentName
+```
+
+See [Component Development Guide](./docs/component-development/guide.md) for complete documentation.
+
+## Accessibility
+
+All components are built with accessibility in mind:
+
+- **ARIA Attributes**: Proper ARIA labels and roles
+- **Keyboard Navigation**: Full keyboard support
+- **Screen Reader Support**: Semantic HTML and descriptive labels
+- **Focus Management**: Visible focus states and proper tab order
+- **Color Contrast**: WCAG-compliant color combinations
+
+## Browser Support
+
+- Chrome (latest 2 versions)
+- Firefox (latest 2 versions)
+- Safari (latest 2 versions)
+- Edge (latest 2 versions)
+- Mobile browsers (iOS Safari, Chrome Android)
+
+## TypeScript Support
+
+Full TypeScript support with:
+- Complete type definitions for all components
+- Exported prop interfaces
+- Type-safe theme system
+- IntelliSense support in modern editors
+
+## Resources
+
+### Documentation
+- [GitHub Repository](https://github.com/rize-network/app-studio-web)
+- [Component Documentation](./docs/components.md)
+- [Contributing Guidelines](./docs/contributing/documentation.md)
+- [Tutorials](./docs/tutorials/README.md)
+
+### Design System
+- [Theming Guide](./docs/design-system/theming.md)
+- [Component Development](./docs/component-development/guide.md)
+- [App Studio Rules](./docs/app-studio.md)
+
+### Examples
+- Each component includes live examples in the `examples/` directory
+- Interactive examples demonstrate all props and variants
+- TypeScript examples for type safety
+
+## License
+
+MIT License - Open source and free to use in commercial and personal projects.
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](./docs/contributing/documentation.md) for details on:
+- Code of conduct
+- Development setup
+- Pull request process
+- Documentation standards
+
+## AI-Ready
+
+This library is optimized for AI-assisted development:
+- Comprehensive TypeScript types for intelligent code completion
+- Consistent component API patterns for predictable usage
+- Extensive documentation with examples
+- Clear prop descriptions and default values
+- Type-safe theme system for customization

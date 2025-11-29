@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { Vertical, View, Image, Center, Button } from 'app-studio';
 import { FileIcon, AudioIcon } from '../Icon/Icon';
 import { HoverCard } from '../HoverCard/HoverCard';
-import { DefaultAgentChatStyles } from '../adk/AgentChat/AgentChat/AgentChat.style';
 import { Text } from '../Text/Text';
+import { DefaultAgentChatStyles } from './ChatInput/ChatInput.style';
 
 interface AttachmentGroupProps {
   files: File[];

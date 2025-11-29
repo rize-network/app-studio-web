@@ -84,12 +84,6 @@ export function AudioInputView({
           }}
         />
 
-        <View minWidth={90}>
-          {recording && (
-            <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
-          )}
-        </View>
-
         {/* Recording controls styled like ChatInput */}
         {!recording ? (
           <View
@@ -166,6 +160,12 @@ export function AudioInputView({
               _hover={{ backgroundColor: 'color.red.600' }}
             >
               <StopIcon widthHeight={16} color="currentColor" filled={false} />
+            </View>
+
+            <View minWidth={90}>
+              {recording && (
+                <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
+              )}
             </View>
           </Horizontal>
         )}
