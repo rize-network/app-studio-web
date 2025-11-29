@@ -13,7 +13,7 @@ Creates a beautiful animated aurora gradient background effect.
 ```tsx
 import React from 'react';
 import { Background } from '../Background';
-import { Text } from 'app-studio';
+import { Text } from '@app-studio/web';
 
 export const AuroraDemo = () => (
   <Background.Aurora height="300px" showRadialGradient={true}>
@@ -30,7 +30,7 @@ Animated falling meteors effect with customizable count.
 ```tsx
 import React from 'react';
 import { Background } from '../Background';
-import { Text } from 'app-studio';
+import { Text } from '@app-studio/web';
 
 export const MeteorsDemo = () => (
   <Background.Meteors number={20} height="300px">
@@ -106,7 +106,7 @@ Display images as backgrounds with overlay support and blend modes.
 ```tsx
 import React from 'react';
 import { Background } from '../Background';
-import { Text } from 'app-studio';
+import { Text } from '@app-studio/web';
 
 export const BackgroundImageDemo = () => (
   <Background.Image
@@ -129,7 +129,7 @@ Create beautiful gradient backgrounds with animation support.
 ```tsx
 import React from 'react';
 import { Background } from '../Background';
-import { Text } from 'app-studio';
+import { Text } from '@app-studio/web';
 
 // Simple two-color gradient
 export const SimpleGradientDemo = () => (
@@ -228,8 +228,8 @@ Multiple background effects can be combined for rich visual experiences.
 ```tsx
 import React from 'react';
 import { Background } from '../Background';
-import { Text } from 'app-studio';
-import { Vertical, Horizontal } from 'app-studio';
+import { Text } from '@app-studio/web';
+import { Vertical, Horizontal } from '@app-studio/web';
 
 // Aurora with content
 export const CombinedAuroraDemo = () => (

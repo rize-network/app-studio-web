@@ -31,8 +31,8 @@ import React from 'react';
 import { DustBinIcon } from '../../Icon';
 import { ToggleGroup } from '../ToggleGroup';
 import { Shape } from '../ToggleGroup/ToggleGroup.type';
-import { Horizontal } from 'app-studio';
-import { View } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
+import { View } from '@app-studio/web';
 
 export const ShapeDemo = () => {
   const items = [
@@ -61,7 +61,7 @@ Mandatory array of items defining each toggle in the group.
 ```tsx
 import React from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Text } from 'app-studio';
+import { Text } from '@app-studio/web';
 
 export const ItemsDemo = () => {
   const items = [
@@ -79,10 +79,10 @@ Optional variant prop to specify the visual style of the toggle group.
 
 ```tsx
 import React from 'react';
-import { Text } from 'app-studio';
+import { Text } from '@app-studio/web';
 import { ToggleGroup } from '../ToggleGroup';
 import { Variant } from '../ToggleGroup/ToggleGroup.type';
-import { Vertical } from 'app-studio';
+import { Vertical } from '@app-studio/web';
 
 export const VariantDemo = () => {
   const items = [
@@ -107,8 +107,8 @@ Optional colorScheme prop for theming the toggle group.
 ```tsx
 import React from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Vertical } from 'app-studio';
-import { Text } from 'app-studio';
+import { Vertical } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 
 export const ColorSchemeDemo = () => {
   const items = [
@@ -139,8 +139,8 @@ Optional callback function that fires when the active toggle changes, providing 
 ```tsx
 import React, { useState } from 'react';
 import { ToggleGroup } from '../ToggleGroup';
-import { Text } from 'app-studio';
-import { Vertical } from 'app-studio';
+import { Text } from '@app-studio/web';
+import { Vertical } from '@app-studio/web';
 
 export const OnToggleChangeDemo = () => {
   const [newItems, setNewItems] = useState<any>([]);

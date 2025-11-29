@@ -63,7 +63,7 @@ Customize how cards are displayed using the `renderCard` prop. This is useful fo
 import React, { useState } from 'react';
 import { KanbanBoard } from '../KanbanBoard';
 import { KanbanBoardColumn, KanbanBoardCard } from '../KanbanBoard/KanbanBoard.props';
-import { View, Text, Horizontal } from 'app-studio';
+import { View, Text, Horizontal } from '@app-studio/web';
 
 export const CustomRenderKanbanBoard = () => {
   const [columns, setColumns] = useState<KanbanBoardColumn[]>([
@@ -132,7 +132,7 @@ import React, { useState } from 'react';
 import { KanbanBoard } from '../KanbanBoard';
 import { Button } from '../Button';
 import { KanbanBoardColumn, KanbanBoardCard } from '../KanbanBoard/KanbanBoard.props';
-import { View, Text, Horizontal } from 'app-studio';
+import { View, Text, Horizontal } from '@app-studio/web';
 
 export const CustomHeaderKanbanBoard = () => {
   const [columns, setColumns] = useState<KanbanBoardColumn[]>([
@@ -176,7 +176,7 @@ You can implement inline editing of card titles by using the `onCardTitleChange`
 import React, { useState } from 'react';
 import { KanbanBoard } from '../KanbanBoard';
 import { KanbanBoardColumn, KanbanBoardCard } from '../KanbanBoard/KanbanBoard.props';
-import { Input, Text } from 'app-studio';
+import { Input, Text } from '@app-studio/web';
 
 export const EditableKanbanBoard = () => {
   const [columns, setColumns] = useState<KanbanBoardColumn[]>([

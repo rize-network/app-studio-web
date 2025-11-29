@@ -34,7 +34,7 @@ Different visual styles for the color input.
 
 ```tsx
 import React from 'react';
-import { Vertical } from 'app-studio';
+import { Vertical } from '@app-studio/web';
 import { ColorInput } from '../ColorInput';
 
 export const ColorInputVariants = () => {
@@ -67,7 +67,7 @@ Different sizes for the color input.
 
 ```tsx
 import React from 'react';
-import { Vertical } from 'app-studio';
+import { Vertical } from '@app-studio/web';
 import { ColorInput } from '../ColorInput';
 
 export const ColorInputSizes = () => {
@@ -119,10 +119,10 @@ Color input integrated with form handling.
 
 ```tsx
 import React, { useState } from 'react';
-import { Vertical, Horizontal } from 'app-studio';
+import { Vertical, Horizontal } from '@app-studio/web';
 import { ColorInput } from '../ColorInput';
 import { Button } from '../../Button/Button';
-import { Text } from 'app-studio';
+import { Text } from '@app-studio/web';
 
 export const ColorInputForm = () => {
   const [backgroundColor, setBackgroundColor] = useState('color.blue.500');

@@ -11,7 +11,7 @@ A powerful drag and drop component for reordering lists and items with smooth an
 ```tsx
 import React, { useState } from 'react';
 import { DragAndDrop } from '@app-studio/web';
-import { View, Text } from 'app-studio';
+import { View, Text } from '@app-studio/web';
 
 export const BasicDragAndDrop = () => {
   const [items, setItems] = useState([
@@ -52,7 +52,7 @@ export const BasicDragAndDrop = () => {
 ```tsx
 import React, { useState } from 'react';
 import { DragAndDrop } from '@app-studio/web';
-import { View, Text, Horizontal } from 'app-studio';
+import { View, Text, Horizontal } from '@app-studio/web';
 import { DragHandleIcon, EditIcon, DeleteIcon } from '@app-studio/web';
 
 interface Task {
@@ -170,7 +170,7 @@ export const TaskDragAndDrop = () => {
 ```tsx
 import React, { useState } from 'react';
 import { DragAndDrop } from '@app-studio/web';
-import { View, Text, Horizontal, Vertical } from 'app-studio';
+import { View, Text, Horizontal, Vertical } from '@app-studio/web';
 
 interface KanbanItem {
   id: string;

@@ -10,7 +10,7 @@
 ```tsx
 import React, { useState } from 'react';
 import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 
 export const BasicChatInput = () => {
   const [inputValue, setInputValue] = useState('');
@@ -40,7 +40,7 @@ The ChatInput component uses the integrated Uploader component for seamless file
 ```tsx
 import React, { useState } from 'react';
 import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 
 export const ChatInputWithFileUploads = () => {
   const [inputValue, setInputValue] = useState('');
@@ -75,7 +75,7 @@ export const ChatInputWithFileUploads = () => {
 ```tsx
 import React, { useState } from 'react';
 import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 import { PromptExample } from '@app-studio/web';
 
 export const ChatInputWithPromptExamples = () => {
@@ -119,7 +119,7 @@ The ChatInput supports drag & drop functionality for easy file uploads:
 ```tsx
 import React, { useState } from 'react';
 import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 
 export const ChatInputWithDragDrop = () => {
   const [inputValue, setInputValue] = useState('');
@@ -152,7 +152,7 @@ export const ChatInputWithDragDrop = () => {
 ```tsx
 import React from 'react';
 import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 
 export const StyledChatInput = () => {
   const handleSubmit = (message) => {
@@ -187,7 +187,7 @@ export const StyledChatInput = () => {
 ```tsx
 import React, { useState } from 'react';
 import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 
 export const ChatInputWithAgent = () => {
   const [isAgentRunning, setIsAgentRunning] = useState(false);
@@ -322,7 +322,7 @@ The ChatInput component includes a demo page with simulate upload functionality 
 // Available in src/pages/chat.page.tsx
 import React, { useState } from 'react';
 import { ChatInput } from '@app-studio/web';
-import { Button } from 'app-studio';
+import { Button } from '@app-studio/web';
 
 export const ChatInputDemo = () => {
   const [isSimulatingUpload, setIsSimulatingUpload] = useState(false);

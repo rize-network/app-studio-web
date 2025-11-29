@@ -6,14 +6,14 @@ A layout component that centers its children both horizontally and vertically wi
   ```tsx
   import { Center } from '@app-studio/web';
   // or from app-studio
-  import { Center } from 'app-studio';
+  import { Center } from '@app-studio/web';
   ```
 
 ### **Basic Usage**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
-import { Text } from 'app-studio';
+import { Center } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 
 export const BasicCenter = () => (
   <Center height={200} backgroundColor="color.gray.100">
@@ -27,9 +27,9 @@ export const BasicCenter = () => (
 ### **Loading State Example**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
+import { Center } from '@app-studio/web';
 import { Loader } from '@app-studio/web';
-import { Text, Vertical } from 'app-studio';
+import { Text, Vertical } from '@app-studio/web';
 
 export const LoadingCenter = () => (
   <Center height="100vh" backgroundColor="color.white">
@@ -44,9 +44,9 @@ export const LoadingCenter = () => (
 ### **Empty State Example**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
+import { Center } from '@app-studio/web';
 import { Button } from '@app-studio/web';
-import { Text, Vertical } from 'app-studio';
+import { Text, Vertical } from '@app-studio/web';
 import { EmptyIcon } from '@app-studio/web';
 
 export const EmptyStateCenter = () => (
@@ -72,9 +72,9 @@ export const EmptyStateCenter = () => (
 ### **Modal Content Example**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
+import { Center } from '@app-studio/web';
 import { Modal, Button } from '@app-studio/web';
-import { Text, Vertical, Horizontal } from 'app-studio';
+import { Text, Vertical, Horizontal } from '@app-studio/web';
 
 export const ModalCenter = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -120,9 +120,9 @@ export const ModalCenter = () => {
 ### **Hero Section Example**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
+import { Center } from '@app-studio/web';
 import { Button } from '@app-studio/web';
-import { Text, Vertical, Horizontal } from 'app-studio';
+import { Text, Vertical, Horizontal } from '@app-studio/web';
 
 export const HeroCenter = () => (
   <Center
@@ -167,8 +167,8 @@ export const HeroCenter = () => (
 ### **Card Center Example**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
-import { View, Text, Vertical } from 'app-studio';
+import { Center } from '@app-studio/web';
+import { View, Text, Vertical } from '@app-studio/web';
 import { StarIcon } from '@app-studio/web';
 
 export const CardCenter = () => (
@@ -216,8 +216,8 @@ The Center component extends ViewProps from app-studio, inheriting all standard 
 ### **Responsive Centering**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
-import { Text, Vertical } from 'app-studio';
+import { Center } from '@app-studio/web';
+import { Text, Vertical } from '@app-studio/web';
 
 export const ResponsiveCenter = () => (
   <Center
@@ -250,8 +250,8 @@ export const ResponsiveCenter = () => (
 ### **Multiple Children with Gap**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
-import { View } from 'app-studio';
+import { Center } from '@app-studio/web';
+import { View } from '@app-studio/web';
 
 export const CenterWithGap = () => (
   <Center height={300} gap={16}>
@@ -280,9 +280,9 @@ export const CenterWithGap = () => (
 ### **Error State Example**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
+import { Center } from '@app-studio/web';
 import { Button } from '@app-studio/web';
-import { Text, Vertical } from 'app-studio';
+import { Text, Vertical } from '@app-studio/web';
 import { ErrorIcon } from '@app-studio/web';
 
 export const ErrorStateCenter = () => (
@@ -319,8 +319,8 @@ export const ErrorStateCenter = () => (
 ### **Image Placeholder Example**
 ```tsx
 import React from 'react';
-import { Center } from 'app-studio';
-import { Text } from 'app-studio';
+import { Center } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 import { ImageIcon } from '@app-studio/web';
 
 export const ImagePlaceholder = () => (
@@ -412,7 +412,7 @@ export const ImagePlaceholder = () => (
 The Center component works well with other layout components:
 
 ```tsx
-import { Center, Vertical, Horizontal } from 'app-studio';
+import { Center, Vertical, Horizontal } from '@app-studio/web';
 
 // Centered content within a larger layout
 <Vertical height="100vh">

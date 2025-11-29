@@ -32,11 +32,11 @@ Determines the Badge's style variant.
 
 ```tsx
 import React from 'react';
-import { Vertical } from 'app-studio';
+import { Vertical } from '@app-studio/web';
 
 import { Badge } from '../Badge';
 import { Variant } from '../Badge/Badge.type';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 export const VariantDemo = () => (
   <Vertical gap={15}>
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
@@ -59,7 +59,7 @@ Specifies a custom color scheme for the Badge.
 ```tsx
 import React from 'react';
 import { Badge } from '../Badge';
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
 
 export const ColorSchemeDemo = () => (
   <Horizontal gap={10}>
@@ -83,8 +83,8 @@ Defines the position of the Badge relative to its container.
 ```tsx
 import React from 'react';
 import { Badge } from '../Badge';
-import { View } from 'app-studio';
-import { Horizontal } from 'app-studio';
+import { View } from '@app-studio/web';
+import { Horizontal } from '@app-studio/web';
 import { Position } from '../Badge/Badge.type';
 
 export const PositionDemo = () => (
@@ -112,11 +112,11 @@ Determines the size of the Badge.
 
 ```tsx
 import React from 'react';
-import { Vertical } from 'app-studio';
+import { Vertical } from '@app-studio/web';
 
 import { Badge } from '../Badge';
 import { Size } from '../Badge/Badge.type';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 export const SizeDemo = () => (
   <Vertical gap={10}>
     {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
@@ -134,10 +134,10 @@ Specifies the shape of the Badge.
 
 ```tsx
 import React from 'react';
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
 import { Badge } from '../Badge';
 import { Shape } from '../Badge/Badge.type';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
     {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
@@ -181,8 +181,8 @@ The Badge component supports both light and dark themes through the `themeMode` 
 ```tsx
 import React from 'react';
 import { Badge } from '../Badge';
-import { Vertical, Horizontal } from 'app-studio';
-import { Text } from 'app-studio';
+import { Vertical, Horizontal } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 import { Variant } from '../Badge/Badge.type';
 
 export const DarkModeDemo = () => {

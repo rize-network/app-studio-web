@@ -14,8 +14,8 @@ A component for displaying a series of content items that can be navigated throu
 ```tsx
 import React from 'react';
 import { Carousel } from '../Carousel';
-import { View } from 'app-studio';
-import { Text } from 'app-studio';
+import { View } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 
 export const DefaultDemo = () => {
   // Create an array of slides with different background colors
@@ -55,8 +55,8 @@ Use the compound component pattern for more flexibility and control over the car
 ```tsx
 import React from 'react';
 import { Carousel } from '../Carousel';
-import { View } from 'app-studio';
-import { Text } from 'app-studio';
+import { View } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 
 export const CompoundDemo = () => {
   const slides = [
@@ -129,7 +129,7 @@ Restrict navigation to specific slide indices using the `stepIndices` prop.
 ```tsx
 import React, { useState } from 'react';
 import { Carousel } from '../Carousel';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 import { Button } from '../../Button/Button';
 
 export const StepIndicesDemo = () => {
@@ -181,8 +181,8 @@ Automatically advance through slides with customizable interval.
 ```tsx
 import React from 'react';
 import { Carousel } from '../Carousel';
-import { View } from 'app-studio';
-import { Text } from 'app-studio';
+import { View } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 
 export const AutoPlayDemo = () => {
   const slides = [
@@ -225,8 +225,8 @@ Different styles of indicators to show the current slide position.
 ```tsx
 import React from 'react';
 import { Carousel } from '../Carousel';
-import { View } from 'app-studio';
-import { Text } from 'app-studio';
+import { View } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 
 export const IndicatorsDemo = () => {
   const slides = [
@@ -268,8 +268,8 @@ Customize the navigation controls.
 ```tsx
 import React from 'react';
 import { Carousel } from '../Carousel';
-import { View } from 'app-studio';
-import { Text } from 'app-studio';
+import { View } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 import { Button } from '../../Button/Button';
 
 export const NavigationDemo = () => {
@@ -321,8 +321,8 @@ Customize the appearance of the carousel.
 ```tsx
 import React from 'react';
 import { Carousel } from '../Carousel';
-import { View } from 'app-studio';
-import { Text } from 'app-studio';
+import { View } from '@app-studio/web';
+import { Text } from '@app-studio/web';
 import { Card } from '../../Card/Card';
 
 export const CustomDemo = () => {

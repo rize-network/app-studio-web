@@ -23,10 +23,10 @@ Optional property to determine the shape of the toggle component.
 
 ```tsx
 import React from 'react';
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
 import { Toggle } from '../Toggle';
 import { Shape } from '../Toggle/Toggle.type';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
     {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
@@ -75,7 +75,7 @@ Optional property to style the toggle component with predefined sets of visual t
 ```tsx
 import React from 'react';
 import { Toggle } from '../Toggle';
-import { Vertical } from 'app-studio';
+import { Vertical } from '@app-studio/web';
 import { Variant } from '../Toggle/Toggle.type';
 
 export const VariantDemo = () => (
@@ -96,7 +96,7 @@ Optional string to set the color scheme for the toggle component's appearance.
 ```tsx
 import React from 'react';
 import { Toggle } from '../Toggle';
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
 
 export const ColorSchemeDemo = () => (
   <Horizontal gap={10}>

@@ -20,7 +20,7 @@ A comprehensive collection of SVG icons with consistent styling, customizable co
 ```tsx
 import React from 'react';
 import { UploadIcon, EditIcon, DeleteIcon } from '@app-studio/web';
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
 
 export const BasicIcons = () => (
   <Horizontal gap={16}>
@@ -35,7 +35,7 @@ export const BasicIcons = () => (
 ```tsx
 import React from 'react';
 import { StarIcon } from '@app-studio/web';
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
 
 export const IconSizes = () => (
   <Horizontal gap={16} alignItems="center">
@@ -52,7 +52,7 @@ export const IconSizes = () => (
 ```tsx
 import React from 'react';
 import { HeartIcon } from '@app-studio/web';
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
 
 export const IconColors = () => (
   <Horizontal gap={16}>
@@ -69,7 +69,7 @@ export const IconColors = () => (
 ```tsx
 import React from 'react';
 import { StarIcon, HeartIcon, BookmarkIcon } from '@app-studio/web';
-import { Horizontal, Vertical, Text } from 'app-studio';
+import { Horizontal, Vertical, Text } from '@app-studio/web';
 
 export const IconVariants = () => (
   <Vertical gap={16}>
@@ -94,7 +94,7 @@ export const IconVariants = () => (
 ```tsx
 import React from 'react';
 import { ArrowIcon } from '@app-studio/web';
-import { Horizontal, Text } from 'app-studio';
+import { Horizontal, Text } from '@app-studio/web';
 
 export const IconOrientations = () => (
   <Horizontal gap={24} alignItems="center">
@@ -181,7 +181,7 @@ The icon library includes a comprehensive set of icons organized by category:
 import React from 'react';
 import { Button } from '@app-studio/web';
 import { EditIcon, DeleteIcon, SaveIcon } from '@app-studio/web';
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/web';
 
 export const IconButtons = () => (
   <Horizontal gap={12}>
@@ -213,7 +213,7 @@ export const IconButtons = () => (
 ```tsx
 import React from 'react';
 import { StarIcon } from '@app-studio/web';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 
 export const CustomStyledIcon = () => (
   <View>
@@ -265,7 +265,7 @@ All icons inherit from the base `IconWrapper` component which extends `ViewProps
 ```tsx
 import React from 'react';
 import { MenuIcon } from '@app-studio/web';
-import { useBreakpoint } from 'app-studio';
+import { useBreakpoint } from '@app-studio/web';
 
 export const ResponsiveIcon = () => {
   const { isMobile, isTablet, isDesktop } = useBreakpoint();
@@ -302,7 +302,7 @@ export const IconWithTooltip = () => (
 ```tsx
 import React, { useState } from 'react';
 import { HeartIcon } from '@app-studio/web';
-import { View } from 'app-studio';
+import { View } from '@app-studio/web';
 
 export const AnimatedIcon = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -330,7 +330,7 @@ export const AnimatedIcon = () => {
 ```tsx
 import React from 'react';
 import * as Icons from '@app-studio/web';
-import { View, Text } from 'app-studio';
+import { View, Text } from '@app-studio/web';
 
 export const IconGrid = () => {
   const iconNames = Object.keys(Icons).filter(name =>
