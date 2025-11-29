@@ -13,7 +13,7 @@ import React from 'react';
 import { Table } from '../Table';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 import { Button } from '../../Button/Button';
 import { Badge } from '../../Badge/Badge';

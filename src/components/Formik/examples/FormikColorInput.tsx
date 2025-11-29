@@ -5,7 +5,7 @@ import { Vertical, Horizontal } from 'app-studio';
 import { FormikForm } from '../Formik.Form';
 import { FormikColorInput } from '../Formik.ColorInput';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 const validationSchema = Yup.object({
   backgroundColor: Yup.string().required('Background color is required'),

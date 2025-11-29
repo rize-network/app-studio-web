@@ -12,7 +12,7 @@
 import React from 'react';
 import { Checkbox } from '../Checkbox';
 import { Vertical } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 
 export const DesignSystemCheckboxes = () => (

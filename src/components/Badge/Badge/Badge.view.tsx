@@ -13,7 +13,7 @@ import {
   getBadgeVariants,
 } from './Badge.style';
 import { Center, useTheme } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 // No need to import ViewProps as it's not used directly
 /**
  * Badge View Component

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Horizontal, useElementPosition } from 'app-studio';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
 import { SearchIcon, TickIcon } from '../../../Icon/Icon';
 

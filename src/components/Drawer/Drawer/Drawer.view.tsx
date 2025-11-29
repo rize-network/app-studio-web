@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Horizontal, Vertical, Center } from 'app-studio';
+import { View, Horizontal, Vertical } from 'app-studio';
 import { CloseIcon } from '../../Icon/Icon';
 import {
   DrawerOverlayProps,
@@ -74,8 +74,14 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
 
   const isVertical = placement === 'top' || placement === 'bottom';
   const dimensionProps = isVertical
-    ? { height: size === 'full' ? '100vh' : DrawerSizes[size] || size, maxHeight: '100vh' }
-    : { width: size === 'full' ? '100vw' : DrawerSizes[size] || size, maxWidth: '100vw' };
+    ? {
+        height: size === 'full' ? '100vh' : DrawerSizes[size] || size,
+        maxHeight: '100vh',
+      }
+    : {
+        width: size === 'full' ? '100vw' : DrawerSizes[size] || size,
+        maxWidth: '100vw',
+      };
 
   return (
     <Vertical
@@ -121,20 +127,21 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
   );
 };
 
-export const DrawerBody: React.FC<DrawerBodyProps> = ({ children, ...props }) => {
+export const DrawerBody: React.FC<DrawerBodyProps> = ({
+  children,
+  ...props
+}) => {
   return (
-    <Vertical
-      padding={24}
-      flex={1}
-      overflowY="auto"
-      {...props}
-    >
+    <Vertical padding={24} flex={1} overflowY="auto" {...props}>
       {children}
     </Vertical>
   );
 };
 
-export const DrawerFooter: React.FC<DrawerFooterProps> = ({ children, ...props }) => {
+export const DrawerFooter: React.FC<DrawerFooterProps> = ({
+  children,
+  ...props
+}) => {
   return (
     <Horizontal
       paddingHorizontal={24}

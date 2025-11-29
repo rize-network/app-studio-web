@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../../Button/Button';
 import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { useToast } from '../Toast';
 
 export const HookUsageDemo = () => {

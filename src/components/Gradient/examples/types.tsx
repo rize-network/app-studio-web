@@ -1,7 +1,7 @@
 import React from 'react';
 import { Gradient } from '../Gradient';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const TypesDemo = () => (
   <Vertical gap={16}>

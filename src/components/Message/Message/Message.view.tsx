@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Themes } from './Message.style';
 import { MessageProps } from './Message.props';
 import {

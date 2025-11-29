@@ -1,5 +1,5 @@
 import React from 'react';
-import { Element, Text, useInView, useTheme } from 'app-studio';
+import { Element, useInView, useTheme } from 'app-studio';
 import { AnimationProps } from 'app-studio/dist/utils/constants';
 import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
@@ -10,6 +10,7 @@ import {
   ResponsiveTypography,
 } from './Title.style';
 import TypewriterEffect from './TypewriterEffect';
+import { Text } from 'app-studio';
 
 function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\\]\\/g, '\\$&');
@@ -147,9 +148,6 @@ const TitleView: React.FC<TitleProps> = ({
         ref={ref}
         as="h1"
         fontSize={useResponsive ? undefined : fontSize}
-        lineHeight={
-          useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
-        }
         fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
         letterSpacing={
           useResponsive ? responsiveStyles?.letterSpacing : undefined
@@ -172,6 +170,7 @@ const TitleView: React.FC<TitleProps> = ({
               as="span"
               display="inline"
               animate={inView ? controlledHighlightAnimate : undefined}
+              fontSize={fontSize}
               {...highlightViewProps}
               {...highlightBackgroundOverrides}
               {...views?.highlight}
@@ -203,9 +202,6 @@ const TitleView: React.FC<TitleProps> = ({
         ref={ref}
         as="h1"
         fontSize={useResponsive ? undefined : fontSize}
-        lineHeight={
-          useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
-        }
         fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
         letterSpacing={
           useResponsive ? responsiveStyles?.letterSpacing : undefined
@@ -221,6 +217,7 @@ const TitleView: React.FC<TitleProps> = ({
       >
         <Text
           as="span"
+          fontSize={fontSize}
           display="inline"
           animate={inView ? controlledHighlightAnimate : undefined}
           {...highlightViewProps}
@@ -247,13 +244,10 @@ const TitleView: React.FC<TitleProps> = ({
 
   // Default case - no highlighting
   return (
-    <Element
+    <Text
       ref={ref}
       as="h1"
-      fontSize={useResponsive ? undefined : fontSize}
-      lineHeight={
-        useResponsive ? responsiveStyles?.lineHeight : `${lineHeight}px`
-      }
+      fontSize={fontSize}
       fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
       letterSpacing={
         useResponsive ? responsiveStyles?.letterSpacing : undefined
@@ -266,7 +260,7 @@ const TitleView: React.FC<TitleProps> = ({
       {...props}
     >
       {text}
-    </Element>
+    </Text>
   );
 };
 

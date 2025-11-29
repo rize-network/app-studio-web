@@ -1,6 +1,6 @@
 import React from 'react';
 import { Horizontal, View, useTheme } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { StatusIndicatorProps } from './StatusIndicator.props';
 import { getThemes } from './StatusIndicator.style';
 

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 import { HelperTextProps } from './HelperText.props';
 

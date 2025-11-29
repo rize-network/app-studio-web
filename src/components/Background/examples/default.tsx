@@ -1,7 +1,7 @@
 import React from 'react';
 import { Background } from '../Background';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const DefaultDemo = () => (
   <Vertical gap={32}>

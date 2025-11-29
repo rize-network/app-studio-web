@@ -1,6 +1,6 @@
 import React from 'react';
 import { Separator } from '../Separator';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Card } from '../../Card/Card';
 import { Vertical } from 'app-studio';
 

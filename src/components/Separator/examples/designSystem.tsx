@@ -13,7 +13,7 @@ import React from 'react';
 import { Separator } from '../Separator';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 import { Card } from '../../Card/Card';
 

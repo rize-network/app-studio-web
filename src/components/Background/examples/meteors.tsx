@@ -1,7 +1,7 @@
 import React from 'react';
 import { Background } from '../Background';
 import { Vertical, Horizontal } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const MeteorsDemo = () => (
   <Vertical gap={32}>

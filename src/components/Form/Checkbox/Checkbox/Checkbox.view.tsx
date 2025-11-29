@@ -14,7 +14,7 @@ import { TickIcon, MinusIcon } from '../../../Icon/Icon';
 
 import { CheckboxViewProps } from './Checkbox.props';
 import { IconSizes, Sizes, VariantStyles, StateStyles } from './Checkbox.style';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
 

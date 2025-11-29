@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerType } from './Drawer/Drawer.props';
+import { DrawerProps, DrawerType } from './Drawer/Drawer.props';
 import {
   DrawerOverlay,
   DrawerContainer,
@@ -12,7 +12,7 @@ import {
  * A drawer is a panel that slides out from the edge of the screen.
  * It can be useful when you need users to complete a task or view some details without leaving the current page.
  */
-export const Drawer: DrawerType = ({
+const DrawerComponent: React.FC<DrawerProps> = ({
   isOpen,
   onClose,
   placement = 'right',
@@ -21,8 +21,14 @@ export const Drawer: DrawerType = ({
   children,
   ...props
 }) => {
-
-  const transformStyle = isOpen ? {} : { transform:  placement === 'left' || placement === 'right' ? `translateX(${placement === 'left' ? '-100%' : '100%'})` : `translateY(${placement === 'top' ? '-100%' : '100%'})` };
+  const transformStyle = isOpen
+    ? {}
+    : {
+        transform:
+          placement === 'left' || placement === 'right'
+            ? `translateX(${placement === 'left' ? '-100%' : '100%'})`
+            : `translateY(${placement === 'top' ? '-100%' : '100%'})`,
+      };
 
   return (
     <DrawerOverlay
@@ -37,6 +43,8 @@ export const Drawer: DrawerType = ({
     </DrawerOverlay>
   );
 };
+
+export const Drawer = DrawerComponent as DrawerType;
 
 Drawer.Overlay = DrawerOverlay;
 Drawer.Container = DrawerContainer;

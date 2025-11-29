@@ -13,7 +13,7 @@ import React from 'react';
 import { Switch } from '../Switch';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 
 export const DesignSystemSwitches = () => (

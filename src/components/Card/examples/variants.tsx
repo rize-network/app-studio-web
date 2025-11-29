@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '../Card';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 export const VariantsDemo = () => {

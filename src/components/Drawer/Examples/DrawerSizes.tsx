@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Drawer, Text, Horizontal, Vertical } from 'src/components';
+import { Button, Drawer } from '../../../components';
 import { Size } from '../Drawer/Drawer.type';
+import { Horizontal, Vertical, Text } from 'app-studio';
 
 export const DrawerSizes = () => {
   const [isOpen, setIsOpen] = useState(false);

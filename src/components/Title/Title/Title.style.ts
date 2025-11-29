@@ -30,7 +30,6 @@ export const LineHeights: Record<TitleSize, number> = {
 export const ResponsiveTypography: Record<
   TitleSize,
   {
-    lineHeight: string;
     fontWeight: number;
     marginBottom?: number;
     letterSpacing?: number;
@@ -43,7 +42,6 @@ export const ResponsiveTypography: Record<
 > = {
   // xl maps to H1 - Largest heading
   xl: {
-    lineHeight: '120%',
     fontWeight: 500,
     marginBottom: 20,
     letterSpacing: 1.25,
@@ -55,7 +53,6 @@ export const ResponsiveTypography: Record<
   },
   // lg maps to H2 - Large heading
   lg: {
-    lineHeight: '100%',
     fontWeight: 500,
     media: {
       mobile: { fontSize: 32 },
@@ -65,7 +62,6 @@ export const ResponsiveTypography: Record<
   },
   // md maps to H3 - Medium heading
   md: {
-    lineHeight: '100%',
     fontWeight: 500,
     media: {
       mobile: { fontSize: 20 },
@@ -75,7 +71,6 @@ export const ResponsiveTypography: Record<
   },
   // sm maps to T1 - Title text
   sm: {
-    lineHeight: '100%',
     fontWeight: 400,
     letterSpacing: -0.2,
     media: {
@@ -86,7 +81,6 @@ export const ResponsiveTypography: Record<
   },
   // xs maps to S1 - Subtitle text
   xs: {
-    lineHeight: '120%',
     fontWeight: 400,
     letterSpacing: -0.2,
     media: {

@@ -1,8 +1,15 @@
 
-
 # OKR
 
 The OKR (Objectives and Key Results) component is used for displaying and tracking organizational objectives and their associated key results. It provides a comprehensive view of progress, status, and ownership for strategic goals.
+
+## When to use
+
+Use the OKR component when you need to:
+- Display strategic goals and their progress in a clear, hierarchical manner.
+- Track the status and ownership of objectives and key results.
+- Provide a centralized view of team or company-wide goals.
+- Visualize progress towards specific targets.
 
 ## Import
 
@@ -16,7 +23,8 @@ import { OKR } from '@app-studio/web';
 | ---- | ---- | ------- | ----------- |
 | objectives | OKRObjective[] | **required** | Array of objectives to display |
 | themeMode | 'light' \| 'dark' | 'light' | Theme mode for the component |
-| views | OKRViews | undefined | Custom styling for different parts of the component |
+| views | OKRViews | undefined | Custom styling for different parts of the component. See the `OKRViews` type definition for all available options. |
+| onObjectiveClick | (objective: OKRObjective) => void | undefined | Callback when an objective is clicked |
 | onKeyResultClick | (keyResult: OKRKeyResult, objective: OKRObjective) => void | undefined | Callback when a key result is clicked |
 | renderObjectiveFooter | (objective: OKRObjective) => ReactNode | undefined | Custom footer renderer for objectives |
 | renderKeyResultFooter | (keyResult: OKRKeyResult, objective: OKRObjective) => ReactNode | undefined | Custom footer renderer for key results |
@@ -73,6 +81,10 @@ interface OKRKeyResult {
 
 ### Basic Usage
 
+This example shows a basic OKR with one objective and three key results with different statuses.
+
+![Basic OKR](https://placehold.co/800x400)
+
 ```jsx
 import React from 'react';
 import { OKR } from '@app-studio/web';
@@ -116,6 +128,10 @@ export const BasicOKR = () => {
 ```
 
 ### With Detailed Key Results
+
+This example shows a more detailed view of key results, including metrics, targets, and confidence levels. It also demonstrates the dark theme.
+
+![Detailed OKR](https://placehold.co/800x450)
 
 ```jsx
 import React from 'react';
@@ -169,6 +185,10 @@ export const DetailedOKR = () => {
 
 ### With Click Handlers
 
+You can use the `onObjectiveClick` and `onKeyResultClick` props to handle user interactions, for example to navigate to a detailed view.
+
+![Interactive OKR](https://placehold.co/800x250)
+
 ```jsx
 import React from 'react';
 import { OKR } from '@app-studio/web';
@@ -192,6 +212,10 @@ export const InteractiveOKR = () => {
     },
   ];
 
+  const handleObjectiveClick = (objective) => {
+    console.log('Clicked objective:', objective.title);
+  };
+
   const handleKeyResultClick = (keyResult, objective) => {
     console.log('Clicked key result:', keyResult.title);
     console.log('From objective:', objective.title);
@@ -201,6 +225,7 @@ export const InteractiveOKR = () => {
   return (
     <OKR
       objectives={objectives}
+      onObjectiveClick={handleObjectiveClick}
       onKeyResultClick={handleKeyResultClick}
     />
   );
@@ -208,6 +233,10 @@ export const InteractiveOKR = () => {
 ```
 
 ### With Custom Footers
+
+The `renderObjectiveFooter` and `renderKeyResultFooter` props allow you to add custom actions or information to each objective and key result.
+
+![OKR with footers](https://placehold.co/800x300)
 
 ```jsx
 import React from 'react';
@@ -252,7 +281,9 @@ export const OKRWithFooters = () => {
 
 ### Auto-calculated Progress
 
-If you don't specify an objective's progress, it will be automatically calculated as the average of its key results:
+If an objective's `progress` is not provided, it is automatically calculated as the average progress of its key results.
+
+![Auto-progress OKR](https://placehold.co/800x350)
 
 ```jsx
 import React from 'react';
@@ -279,57 +310,9 @@ export const AutoProgressOKR = () => {
 
 ## Customization
 
-The OKR component can be extensively customized using the `views` prop:
+The OKR component can be extensively customized using the `views` prop. See the `OKRViews` type definition for all available options.
 
-```jsx
-<OKR
-  objectives={objectives}
-  views={{
-    // Main container
-    container: { /* ViewProps */ },
-
-    // Objective card styling
-    objectiveCard: { /* ViewProps */ },
-    objectiveHeader: { /* ViewProps */ },
-    objectiveTitle: { /* TextProps */ },
-    objectiveDescription: { /* TextProps */ },
-    objectiveMeta: { /* ViewProps */ },
-    objectiveOwner: { /* TextProps */ },
-    objectiveTimeframe: { /* TextProps */ },
-    objectiveTags: { /* ViewProps */ },
-    objectiveProgressSection: { /* ViewProps */ },
-    objectiveProgressLabel: { /* TextProps */ },
-    objectiveProgressValue: { /* TextProps */ },
-    objectiveProgressBar: { /* ProgressBarStyles */ },
-    objectiveStatus: { /* StatusIndicatorStyles */ },
-
-    // Tag styling
-    tag: { /* ViewProps */ },
-    tagText: { /* TextProps */ },
-
-    // Key result styling
-    keyResultList: { /* ViewProps */ },
-    keyResultItem: { /* ViewProps */ },
-    keyResultHeader: { /* ViewProps */ },
-    keyResultTitle: { /* TextProps */ },
-    keyResultDescription: { /* TextProps */ },
-    keyResultMeta: { /* ViewProps */ },
-    keyResultOwner: { /* TextProps */ },
-    keyResultStatus: { /* StatusIndicatorStyles */ },
-    keyResultTags: { /* ViewProps */ },
-    keyResultTag: { /* ViewProps */ },
-    keyResultTagText: { /* TextProps */ },
-    keyResultProgressSection: { /* ViewProps */ },
-    keyResultProgressValue: { /* TextProps */ },
-    keyResultProgressBar: { /* ProgressBarStyles */ },
-
-    // Footer styling
-    footer: { /* ViewProps */ },
-  }}
-/>
-```
-
-### Custom Styling Example
+![Custom styled OKR](https://placehold.co/800x250)
 
 ```jsx
 import React from 'react';
@@ -369,6 +352,9 @@ export const CustomStyledOKR = () => {
 };
 ```
 
+## Live Demo
+A live demo of the OKR component with all its features is available [here](https://app-studio-web.vercel.app/components/okr).
+
 ## Status Derivation
 
 If a status is not explicitly provided, it will be automatically derived from the progress value:
@@ -395,7 +381,7 @@ Each status is displayed with a corresponding visual indicator:
 
 ## Theme Support
 
-The OKR component fully supports both light and dark themes:
+The OKR component fully supports both light and dark themes.
 
 ```jsx
 // Light theme (default)
@@ -464,12 +450,3 @@ The OKR component implements the following accessibility features:
 - [StatusIndicator](../feedback/status-indicator.md) - Used internally for status display
 - [Card](./card.md) - Similar container component for content display
 - [Badge](./badge.md) - Can be used in custom footers for additional metadata
-
-## Common Use Cases
-
-- Strategic planning and goal tracking
-- Team performance dashboards
-- Product roadmap visualization
-- Project milestone tracking
-- KPI monitoring and reporting
-- Quarterly business reviews (QBRs)

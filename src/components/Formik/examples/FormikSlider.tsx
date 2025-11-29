@@ -5,7 +5,7 @@ import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 import { FormikSlider } from '../Formik.Slider';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const FormikSliderExample = () => {
   // Define initial values

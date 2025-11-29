@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from '../Carousel';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const DefaultDemo = () => {
   // Create an array of slides with different background colors

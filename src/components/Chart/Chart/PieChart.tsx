@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import { useTheme, useElementPosition, View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { ChartDataPoint } from './Chart.type';
 import { PieSliceStyles, DEFAULT_COLORS } from './Chart.style';
 

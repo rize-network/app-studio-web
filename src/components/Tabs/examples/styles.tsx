@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '../../Text/Text'; // Adjust path as needed
+import { Text } from 'app-studio'; // Adjust path as needed
 import { Tabs } from '../../Tabs/Tabs'; // Adjust path as needed
 
 // Example demonstrating how to style the Tabs component using the 'styles' prop.

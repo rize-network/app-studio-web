@@ -19,7 +19,7 @@ import {
   DotStyles,
   DotStateStyles,
 } from './Radio.style';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { View } from 'app-studio';

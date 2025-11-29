@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from '../Badge';
 import { Vertical, Horizontal } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Variant } from '../Badge/Badge.type';
 
 export const DarkModeDemo = () => {

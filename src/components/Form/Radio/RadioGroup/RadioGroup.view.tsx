@@ -10,7 +10,7 @@ import { RadioGroupViewProps } from './RadioGroup.props';
 import { RadioProps } from '../Radio/Radio.props';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 
 const RadioGroupView: React.FC<RadioGroupViewProps> = ({
   children,
