@@ -1,0 +1,455 @@
+{
+  "BackgroundProps": {
+    "componentDescription": "Defines base properties for a generic background container component.",
+    "children": {
+      "type": "ReactNode",
+      "typeValues": [],
+      "description": "Optional React nodes to be rendered within the background component.",
+      "defaultValue": "undefined"
+    },
+    "views": {
+      "type": "{ container?: ViewProps; content?: ViewProps; }",
+      "typeValues": [],
+      "description": "Optional styling properties for specific sub-components (container and content) within the background.",
+      "defaultValue": "undefined"
+    },
+    "views.container": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the main container element of the background.",
+      "defaultValue": "undefined"
+    },
+    "views.content": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the content wrapper element within the background.",
+      "defaultValue": "undefined"
+    },
+    "themeMode": {
+      "type": "'light' | 'dark'",
+      "typeValues": [
+        "light",
+        "dark"
+      ],
+      "description": "Determines the theme mode ('light' or 'dark') for background styling.",
+      "defaultValue": "undefined"
+    }
+  },
+  "AuroraBackgroundProps": {
+    "componentDescription": "Defines properties specific to an animated Aurora-style background.",
+    "children": {
+      "type": "ReactNode",
+      "typeValues": [],
+      "description": "Optional React nodes to be rendered within the background component.",
+      "defaultValue": "undefined"
+    },
+    "views": {
+      "type": "{ container?: ViewProps; content?: ViewProps; }",
+      "typeValues": [],
+      "description": "Optional styling properties for specific sub-components (container and content) within the background.",
+      "defaultValue": "undefined"
+    },
+    "views.container": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the main container element of the background.",
+      "defaultValue": "undefined"
+    },
+    "views.content": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the content wrapper element within the background.",
+      "defaultValue": "undefined"
+    },
+    "themeMode": {
+      "type": "'light' | 'dark'",
+      "typeValues": [
+        "light",
+        "dark"
+      ],
+      "description": "Determines the theme mode ('light' or 'dark') for background styling.",
+      "defaultValue": "undefined"
+    },
+    "showRadialGradient": {
+      "type": "boolean",
+      "typeValues": [],
+      "description": "Controls the visibility of the radial gradient effect in the Aurora background.",
+      "defaultValue": "true"
+    }
+  },
+  "MeteorsProps": {
+    "componentDescription": "Defines properties for a dynamic Meteors-style background effect.",
+    "number": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Specifies the number of meteor elements to render.",
+      "defaultValue": "20"
+    },
+    "children": {
+      "type": "ReactNode",
+      "typeValues": [],
+      "description": "Optional React nodes to be rendered within the Meteors component.",
+      "defaultValue": "undefined"
+    }
+  },
+  "WallProps": {
+    "componentDescription": "Defines properties for a static Wall-style grid background.",
+    "rows": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Determines the number of rows in the wall grid.",
+      "defaultValue": "15"
+    },
+    "cols": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Determines the number of columns in the wall grid.",
+      "defaultValue": "10"
+    },
+    "squareSize": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Specifies the size of each square cell in the wall grid.",
+      "defaultValue": "40"
+    }
+  },
+  "ParticlesProps": {
+    "componentDescription": "Defines properties for an animated Particles-style background effect.",
+    "count": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Specifies the number of particles to display.",
+      "defaultValue": "50"
+    },
+    "colors": {
+      "type": "string[]",
+      "typeValues": [],
+      "description": "An array of colors to be used for the particles.",
+      "defaultValue": "['rgb(59, 130, 246)', 'rgb(147, 51, 234)', 'rgb(236, 72, 153)', 'rgb(34, 197, 94)', 'rgb(251, 146, 60)', 'rgb(168, 85, 247)']"
+    },
+    "speed": {
+      "type": "'slow' | 'medium' | 'fast'",
+      "typeValues": [
+        "slow",
+        "medium",
+        "fast"
+      ],
+      "description": "Sets the animation speed for the particles ('slow', 'medium', or 'fast').",
+      "defaultValue": "medium"
+    },
+    "shapes": {
+      "type": "('circle' | 'square' | 'triangle')[]",
+      "typeValues": [
+        "circle",
+        "square",
+        "triangle"
+      ],
+      "description": "An array of shapes ('circle', 'square', or 'triangle') that particles can take.",
+      "defaultValue": "['circle']"
+    }
+  },
+  "GridProps": {
+    "componentDescription": "Defines properties for an animated Grid-style background.",
+    "gridSize": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Specifies the size of the grid cells.",
+      "defaultValue": "30"
+    },
+    "lineColor": {
+      "type": "string",
+      "typeValues": [],
+      "description": "Sets the color of the grid lines.",
+      "defaultValue": "rgba(59, 130, 246, 0.3)"
+    },
+    "pulseColor": {
+      "type": "string",
+      "typeValues": [],
+      "description": "Sets the color for the pulsing effect on grid lines.",
+      "defaultValue": "rgba(59, 130, 246, 0.8)"
+    },
+    "animationSpeed": {
+      "type": "'slow' | 'medium' | 'fast'",
+      "typeValues": [
+        "slow",
+        "medium",
+        "fast"
+      ],
+      "description": "Determines the speed of the grid animation ('slow', 'medium', or 'fast').",
+      "defaultValue": "medium"
+    }
+  },
+  "RipplesProps": {
+    "componentDescription": "Defines properties for an animated Ripples-style background effect.",
+    "rippleCount": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Specifies the number of ripple effects to display.",
+      "defaultValue": "5"
+    },
+    "colors": {
+      "type": "string[]",
+      "typeValues": [],
+      "description": "An array of colors to be used for the ripples.",
+      "defaultValue": "['rgba(59, 130, 246, 0.6)', 'rgba(147, 51, 234, 0.6)', 'rgba(236, 72, 153, 0.6)', 'rgba(34, 197, 94, 0.6)']"
+    },
+    "maxSize": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Sets the maximum size a ripple can expand to.",
+      "defaultValue": "200"
+    },
+    "frequency": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Determines how often new ripples are generated.",
+      "defaultValue": "3"
+    }
+  },
+  "BackgroundImageProps": {
+    "componentDescription": "Defines properties for a background component using an image.",
+    "children": {
+      "type": "ReactNode",
+      "typeValues": [],
+      "description": "Optional React nodes to be rendered within the background component.",
+      "defaultValue": "undefined"
+    },
+    "views": {
+      "type": "{ container?: ViewProps; content?: ViewProps; image?: ViewProps; overlay?: ViewProps; }",
+      "typeValues": [],
+      "description": "Optional styling properties for specific sub-components (container, content, image, overlay) within the background image component.",
+      "defaultValue": "undefined"
+    },
+    "views.container": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the main container element of the background image.",
+      "defaultValue": "undefined"
+    },
+    "views.content": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the content wrapper element within the background image.",
+      "defaultValue": "undefined"
+    },
+    "views.image": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the actual image element.",
+      "defaultValue": "undefined"
+    },
+    "views.overlay": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the overlay element positioned over the image.",
+      "defaultValue": "undefined"
+    },
+    "themeMode": {
+      "type": "'light' | 'dark'",
+      "typeValues": [
+        "light",
+        "dark"
+      ],
+      "description": "Determines the theme mode ('light' or 'dark') for background styling.",
+      "defaultValue": "undefined"
+    },
+    "src": {
+      "type": "string",
+      "typeValues": [],
+      "description": "The URL or path to the background image source.",
+      "defaultValue": "undefined"
+    },
+    "backgroundSize": {
+      "type": "BackgroundSize",
+      "typeValues": [
+        "auto",
+        "cover",
+        "contain"
+      ],
+      "description": "Specifies how the background image should be sized relative to its container.",
+      "defaultValue": "cover"
+    },
+    "backgroundPosition": {
+      "type": "BackgroundPosition",
+      "typeValues": [
+        "center",
+        "top",
+        "right",
+        "bottom",
+        "left",
+        "top-right",
+        "top-left",
+        "bottom-right",
+        "bottom-left"
+      ],
+      "description": "Defines the initial position of the background image.",
+      "defaultValue": "center"
+    },
+    "backgroundRepeat": {
+      "type": "BackgroundRepeat",
+      "typeValues": [
+        "repeat",
+        "repeat-x",
+        "repeat-y",
+        "no-repeat",
+        "space",
+        "round"
+      ],
+      "description": "Controls how the background image repeats (e.g., no-repeat, repeat-x, repeat-y).",
+      "defaultValue": "no-repeat"
+    },
+    "backgroundAttachment": {
+      "type": "'scroll' | 'fixed' | 'local'",
+      "typeValues": [
+        "scroll",
+        "fixed",
+        "local"
+      ],
+      "description": "Determines whether the background image scrolls with the content or is fixed.",
+      "defaultValue": "scroll"
+    },
+    "imageOpacity": {
+      "type": "number",
+      "typeValues": [],
+      "description": "Sets the opacity level of the background image.",
+      "defaultValue": "1"
+    },
+    "overlay": {
+      "type": "string",
+      "typeValues": [],
+      "description": "A color or gradient string to apply as an overlay on top of the image.",
+      "defaultValue": "undefined"
+    },
+    "blendMode": {
+      "type": "BlendMode",
+      "typeValues": [
+        "normal",
+        "multiply",
+        "screen",
+        "overlay",
+        "darken",
+        "lighten",
+        "color-dodge",
+        "color-burn",
+        "hard-light",
+        "soft-light",
+        "difference",
+        "exclusion"
+      ],
+      "description": "Specifies how the overlay color should blend with the background image.",
+      "defaultValue": "normal"
+    }
+  },
+  "BackgroundVideoProps": {
+    "componentDescription": "Defines properties for a background component using a video.",
+    "children": {
+      "type": "ReactNode",
+      "typeValues": [],
+      "description": "Optional React nodes to be rendered within the background component.",
+      "defaultValue": "undefined"
+    },
+    "views": {
+      "type": "{ container?: ViewProps; content?: ViewProps; video?: ViewProps; overlay?: ViewProps; }",
+      "typeValues": [],
+      "description": "Optional styling properties for specific sub-components (container, content, video, overlay) within the background video component.",
+      "defaultValue": "undefined"
+    },
+    "views.container": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the main container element of the background video.",
+      "defaultValue": "undefined"
+    },
+    "views.content": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the content wrapper element within the background video.",
+      "defaultValue": "undefined"
+    },
+    "views.video": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the actual video element.",
+      "defaultValue": "undefined"
+    },
+    "views.overlay": {
+      "type": "ViewProps",
+      "typeValues": [],
+      "description": "Optional ViewProps for the overlay element positioned over the video.",
+      "defaultValue": "undefined"
+    },
+    "themeMode": {
+      "type": "'light' | 'dark'",
+      "typeValues": [
+        "light",
+        "dark"
+      ],
+      "description": "Determines the theme mode ('light' or 'dark') for background styling.",
+      "defaultValue": "undefined"
+    },
+    "src": {
+      "type": "string",
+      "typeValues": [],
+      "description": "The URL or path to the background video source.",
+      "defaultValue": "undefined"
+    },
+    "autoPlay": {
+      "type": "boolean",
+      "typeValues": [],
+      "description": "Controls whether the video should start playing automatically.",
+      "defaultValue": "true"
+    },
+    "loop": {
+      "type": "boolean",
+      "typeValues": [],
+      "description": "Controls whether the video should loop once it reaches the end.",
+      "defaultValue": "true"
+    },
+    "muted": {
+      "type": "boolean",
+      "typeValues": [],
+      "description": "Controls whether the video's audio should be muted.",
+      "defaultValue": "true"
+    },
+    "playsInline": {
+      "type": "boolean",
+      "typeValues": [],
+      "description": "Ensures the video plays inline on iOS devices, rather than fullscreen.",
+      "defaultValue": "true"
+    },
+    "overlay": {
+      "type": "string",
+      "typeValues": [],
+      "description": "A color or gradient string to apply as an overlay on top of the video.",
+      "defaultValue": "undefined"
+    },
+    "blendMode": {
+      "type": "BlendMode",
+      "typeValues": [
+        "normal",
+        "multiply",
+        "screen",
+        "overlay",
+        "darken",
+        "lighten",
+        "color-dodge",
+        "color-burn",
+        "hard-light",
+        "soft-light",
+        "difference",
+        "exclusion"
+      ],
+      "description": "Specifies how the overlay color should blend with the background video.",
+      "defaultValue": "normal"
+    }
+  },
+  "BackgroundGradientProps": {
+    "componentDescription": "Defines properties for a background component using a gradient.",
+    "children": {
+      "type": "ReactNode",
+      "typeValues": [],
+      "description": "Optional React nodes to be rendered within the gradient background component.",
+      "defaultValue": "undefined"
+    }
+  }
+}

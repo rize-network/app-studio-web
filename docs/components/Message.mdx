@@ -1,571 +1,256 @@
-### **Import**
+# Message
 
+Displays various types of messages with customizable content, icons, actions, and closing behavior.
+
+### **Import**
 ```tsx
 import { Message } from '@app-studio/web';
 ```
 
 ### **Default**
-
-It uses the isOpen and onClose properties to display the message.
-
 ```tsx
-import { Button } from '../Button/Button';
-import { useState } from 'react';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)} isAuto>
-    Open Message
-  </Button>
-  <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
-    <Message.Container>
-      <Message.Header>Title</Message.Header>
-      <Message.Body>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-        nisl consectetur et.
-      </Message.Body>
-      <Message.Footer>
-        <Button onClick={() => setShow(false)}>Cancel</Button>
-      </Message.Footer>
-    </Message.Container>
-  </Message.Overlay>
-</>;
-```
-
-## **Message Overlay**
-
-It represents the overlay or backdrop that appears behind the message content when the message is displayed.
-
-### **Props**
-
-| Prop             | Type          | Description                                                                                                                               | Default |
-| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| isOpen           | boolean       | Whether the message overlay is open.                                                                                                       | false   |
-| onClose          | function      | Callback function to close the message.                                                                                                     |         |
-| position         | Position      | Positions the message overlay ('top', 'left', 'right', 'bottom', 'center').                                                                 | 'center' |
-| blur             | number        | Adds a blur effect on the message overlay.                                                                                                |         |
-| isClosePrevented | boolean       | Prevents the user from closing the message when clicking outside of it.                                                                   | false   |
-| styles           | CSSProperties | Optional custom styles for the MessageOverlay.                                                                                              |         |
-| className        | string        | Optional className for the MessageOverlay container.                                                                                        |         |
-
-### **FullScreen**
-
-“**is*fullScreen***” property changes the width and height of the message so that it fits the entire screen.
-
-```tsx
-import { Button } from '../Button/Button';
-import { useState } from 'react';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)} isAuto>
-    Full Screen
-  </Button>
-  <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
-    <Message.Container isFullScreen>
-      <Message.Header>Title</Message.Header>
-      <Message.Body>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-        nisl consectetur et.
-      </Message.Body>
-      <Message.Footer>
-        <Button onClick={() => setShow(false)}>Cancel</Button>
-      </Message.Footer>
-    </Message.Container>
-  </Message.Overlay>
-</>;
-```
-
-### **Position**
-
-“**_position_**” places the message in the specified direction. It has a default positioning of “center”.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
-
-const [showTop, setShowTop] = useState(false);
-const [showBottom, setShowBottom] = useState(false);
-const [showRight, setShowRight] = useState(false);
-const [showLeft, setShowLeft] = useState(false);
-const [showCenter, setShowCenter] = useState(false);
-
-<>
-  <Horizontal gap={10} flexWrap="nowrap">
-    <Button onClick={() => setShowTop(true)}>Top</Button>
-    <Button onClick={() => setShowBottom(true)}>Bottom</Button>
-    <Button onClick={() => setShowRight(true)}>Right</Button>
-    <Button onClick={() => setShowLeft(true)}>Left</Button>
-    <Button onClick={() => setShowCenter(true)}>Center</Button>
-  </Horizontal>
-
-  {showBottom && (
-    <Message.Overlay isOpen={showBottom} onClose={() => setShowBottom(false)} position="bottom">
-      <Message.Container>
-        <Message.Header>Title</Message.Header>
-        <Message.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShowBottom(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-  {showTop && (
-    <Message.Overlay isOpen={showTop} onClose={() => setShowTop(false)} position="top">
-      <Message.Container>
-        <Message.Header>Title</Message.Header>
-        <Message.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShowTop(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-  {showLeft && (
-    <Message.Overlay isOpen={showLeft} onClose={() => setShowLeft(false)} position="left">
-      <Message.Container>
-        <Message.Header>Title</Message.Header>
-        <Message.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShowLeft(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-  {showRight && (
-    <Message.Overlay isOpen={showRight} onClose={() => setShowRight(false)} position="right">
-      <Message.Container>
-        <Message.Header>Title</Message.Header>
-        <Message.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShowRight(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-  {showCenter && (
-    <Message.Overlay isOpen={showCenter} onClose={() => setShowCenter(false)} position="center">
-      <Message.Container>
-        <Message.Header>Title</Message.Header>
-        <Message.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShowCenter(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-</>;
-```
-
-### **Blur**
-
-“**_blur_**” adds a blur effect on the message overlay.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Blur Overlay</Button>
-  <Message.Overlay isOpen={show} onClose={() => setShow(false)} blur={10}>
-    <Message.Container>
-      <Message.Header>Title</Message.Header>
-      <Message.Body>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-        nisl consectetur et.
-      </Message.Body>
-      <Message.Footer>
-        <Button onClick={() => setShow(false)}>Cancel</Button>
-      </Message.Footer>
-    </Message.Container>
-  </Message.Overlay>
-</>;
-```
-
-### **Prevent Close**
-
-“**_isClosePrevented_**” prevents the user from closing the message when clicking outside of it.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Blur Overlay</Button>
-  <Message.Overlay isOpen={show} onClose={() => setShow(false)} isClosePrevented>
-    <Message.Container>
-      <Message.Header>Title</Message.Header>
-      <Message.Body>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-        nisl consectetur et.
-      </Message.Body>
-      <Message.Footer>
-        <Button onClick={() => setShow(false)}>Cancel</Button>
-      </Message.Footer>
-    </Message.Container>
-  </Message.Overlay>
-</>;
-```
-
-## **Message Container**
-
-It represents the main container or wrapper that holds all the content and components of a message.
-
-### **Props**
-| Prop | Type | Description | Default |
-| ----------- | ----------- | ----------- | ----------- |
-| isFullScreen      | boolean      |  Changes the width and height of the message so that it fits the entire screen.       |    false         |
-| variant     | 'sharp' \| 'rounded'      |  Gives a sharp or rounded edges to the message container.               | 'rounded'     |
-| shadow | object | Adds a shadow effect on the message container. | |
-| styles    | CSSProperties | Optional custom styles for the MessageContainer.                 |          |
-| className | string        | Optional className for the MessageContainer.           |          |
-
-### **Shapes**
-
-“**_shape_**” gives a sharp or rounded edges to the message container.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Text } from '@app-studio/web';
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
-
-const [showSharp, setShowSharp] = useState(false);
-const [showRounded, setShowRounded] = useState(false);
-
-<>
-  <Horizontal gap={10}>
-    <Button onClick={() => setShowSharp(true)}>Sharp</Button>
-    <Button onClick={() => setShowRounded(true)}>Rounded</Button>
-  </Horizontal>
-
-  {showSharp && (
-    <Message.Overlay isOpen={showSharp} onClose={() => setShowSharp(false)}>
-      <Message.Container variant="sharp">
-        <Message.Body>
-          <Text  maxLines={2}>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
-            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et.
-          </Text>
-        </Message.Body>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-  {showRounded && (
-    <Message.Overlay isOpen={showRounded} onClose={() => setShowRounded(false)}>
-      <Message.Container variant="rounded">
-        <Message.Body>
-          <Text  maxLines={2}>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
-            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et.
-          </Text>
-        </Message.Body>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-</>;
-```
-
-### **Shadow**
-
-“**_shadow_**” adds a shadow effect on the message container.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Text } from '@app-studio/web';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Shadow</Button>
-  {show && (
-    <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
-      <Message.Container shadow={{ boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.6)' }}>
-        <Message.Body>
-          <Text  maxLines={2}>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
-            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et.
-          </Text>
-        </Message.Body>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-</>;
-```
-
-## **Message Header**
-
-It represents the header section of a message, which typically contains a title or heading and optionally other elements such as a close button or additional controls.
-
-### **Close Button Alignment**
-
-“**_buttonPosition_**” places the closing button found in the header message in the specified direction. It has a default position of “**right**”.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
-
-const [showRight, setShowRight] = useState(false);
-const [showWithout, setShowWithout] = useState(false);
-const [showLeft, setShowLeft] = useState(false);
-
-<>
-  <Horizontal gap={10}>
-    <Button onClick={() => setShowRight(true)}>Right</Button>
-    <Button onClick={() => setShowWithout(true)}>Without</Button>
-    <Button onClick={() => setShowLeft(true)}>Left</Button>
-  </Horizontal>
-  {showRight && (
-    <Message.Overlay isOpen={showRight} onClose={() => setShowRight(false)}>
-      <Message.Container>
-        <Message.Header> Right</Message.Header>
-        <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShowRight(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-  {showWithout && (
-    <Message.Overlay isOpen={showWithout} onClose={() => setShowWithout(false)}>
-      <Message.Container>
-        <Message.Header buttonPosition="none"> Without</Message.Header>
-        <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShowWithout(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-  {showLeft && (
-    <Message.Overlay isOpen={showLeft} onClose={() => setShowLeft(false)}>
-      <Message.Container>
-        <Message.Header buttonPosition="left">Left</Message.Header>
-        <Message.Body>Cras mattis consectetur purus sit amet fermentum.</Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShowLeft(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-</>;
-```
-
-## **Message Body**
-
-It represents the main content area of a message, where the primary information or user interaction elements are displayed.
-
-### **LargeContent**
-
-A vertical scroll is displayed, if the content height exceed the body height.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Text } from '@app-studio/web';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Scroll</Button>
-  {show && (
-    <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
-      <Message.Container>
-        <Message.Header buttonPosition="none">
-          <Text size="lg" weight="semibold">
-            Title
-          </Text>
-        </Message.Header>
-        <Message.Body height="200px">
-          Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
-          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
-          purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit
-          amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras
-          mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
-          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
-          purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit
-          amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet
-          fermentum.Cras mattis consectetur purus sit amet fermentum.
-        </Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShow(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-</>;
-```
-
-## **Message Footer**
-
-It represents the footer section of a message, where the primary information or user interaction elements are displayed.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Text } from '@app-studio/web';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Footer</Button>
-  {show && (
-    <Message.Overlay isOpen={show} onClose={() => setShow(false)}>
-      <Message.Container>
-        <Message.Header buttonPosition="none">
-          <Text size="lg" weight="semibold">
-            Title
-          </Text>
-        </Message.Header>
-        <Message.Body height="200px">
-          Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
-          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
-          purus sit amet fermentum.
-        </Message.Body>
-        <Message.Footer>
-          <Button onClick={() => setShow(false)}>Cancel</Button>
-        </Message.Footer>
-      </Message.Container>
-    </Message.Overlay>
-  )}
-</>;
-```
-
-## **Types**
-
-```tsx
-type Position = 'top' | 'left' | 'right' | 'bottom' | 'center';
-```
-
-```tsx
-type Shape = 'sharp' | 'rounded';
-```
-
-```tsx
-type CloseButtonPosition = 'left' | 'right' | 'none';
-```
-
-```tsx
-type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-```
-
-## **Default Styles**
-
-#### **OverlayAlignments**
-
-```tsx
-const OverlayAlignments: Record<Position, CSSProperties> = {
-  center: { justifyContent: 'center', alignItems: 'center' },
-  top: { justifyContent: 'center' },
-  right: { justifyContent: 'flex-end', alignItems: 'center' },
-  bottom: { justifyContent: 'center', alignItems: 'flex-end' },
-  left: { alignItems: 'center' },
+import React from 'react';
+import { Button } from '@app-studio/web';
+import { showMessage } from '@app-studio/web';
+// This is a functional component named 'DefaultDemo' that renders a Button component from the '../../Button/Button' path.
+export const DefaultDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'success',
+          'Scheduled: Catch up',
+          'Friday, February 10, 2023 at 5:57 PM'
+        )
+      }
+    >
+      Show Toast
+    </Button>
+  );
 };
 ```
 
-#### **ContainerShapes**
+### **subtitle**
+The secondary text content of the message.
+
+- **Type:** `string`
+- **Default:** `undefined`
+- **Possible Values:** ``
 
 ```tsx
-const ContainerShapes: Record<Shape, CSSProperties> = {
-  sharp: { borderRadius: 0 },
-  rounded: { borderRadius: 4 },
+import React from 'react';
+import { Button } from '@app-studio/web';
+
+import { showMessage } from '@app-studio/web';
+
+export const SubtitleDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'error',
+          'Error Message',
+          'An error occurred while processing your request.'
+        )
+      }
+    >
+      Show Toast
+    </Button>
+  );
 };
 ```
 
-#### **HeaderIconSizes**
+### **variant**
+The type or category of the message, influencing its styling.
+
+- **Type:** `MessageType`
+- **Default:** `undefined`
+- **Possible Values:** `info, warning, error, success`
 
 ```tsx
-const HeaderIconSizes: Record<Size, number> = {
-  xs: 12,
-  sm: 16,
-  md: 20,
-  lg: 24,
-  xl: 28,
+import React from 'react';
+import { Button } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+import { showMessage } from '@app-studio/web';
+import { MessageType } from '@app-studio/web';
+
+export const VariantDemo = () => {
+  return (
+    <Horizontal gap={10}>
+      {['info', 'error', 'warning', 'success'].map((variant, index) => (
+        <Button
+          key={index}
+          onClick={() =>
+            showMessage(
+              variant as MessageType,
+              `${variant.toUpperCase()} toast here!`
+            )
+          }
+          isAuto
+        >
+          Show {variant}
+        </Button>
+      ))}
+    </Horizontal>
+  );
 };
 ```
 
-</file_content>
+### **title**
+The main title or heading of the message.
 
-Try again with fewer/more precise SEARCH blocks.
-(If you run into this error two times in a row, you may use the write_to_file tool as a fallback.)
-</error><environment_details>
-# VSCode Visible Files
-public/files/media/Message.mdx
+- **Type:** `string`
+- **Default:** `undefined`
+- **Possible Values:** ``
 
-# VSCode Open Tabs
-src/components/Form/CountryPicker/CountryPicker/CountryPicker.view.tsx
-src/components/DragAndDrop/DragAndDrop.tsx
-public/files/media/DragAndDrop.mdx
-public/files/media/File.mdx
-public/files/media/Form.mdx
-public/files/media/Formik.mdx
-public/files/media/Icon.mdx
-public/files/media/Uploader.mdx
-public/files/media/Alert.mdx
-public/files/media/AspectRatio.mdx
-public/files/media/Avatar.mdx
-public/files/media/Badge.mdx
-public/files/media/Button.mdx
-public/files/media/Center.mdx
-public/files/media/Checkbox.mdx
-public/files/media/ComboBox.mdx
-public/files/media/CountryPicker.mdx
-public/files/media/DatePicker.mdx
-public/files/media/Horizontal.mdx
-public/files/media/Label.mdx
-public/files/media/Link.mdx
-public/files/media/Loader.mdx
-public/files/media/Message.mdx
-src/components/Button/Button/Button.view.tsx
-src/utils/componentsPageImports.tsx
-src/components/Uploader/Uploader.tsx
-src/components/Uploader/Uploader.props.ts
-src/pages/upload.page.tsx
-src/components/index.tsx
-src/components/Text/Text.tsx
-src/components/Text/Text/Text.view.tsx
-package.json
-src/components/Button/examples/effect.tsx
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/web';
 
-# Current Time
-22/03/2025 9:02:50 PM (Africa/Dar_es_Salaam, UTC+3:00)
+import { showMessage } from '@app-studio/web';
 
-# Current Mode
-ACT MODE
-</environment_details>
+export const TitleDemo = () => {
+  return (
+    <Button
+      onClick={() => showMessage('info', 'Here is some important information.')}
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+
+### **isClosable**
+Determines if the message can be manually closed by the user.
+
+- **Type:** `boolean`
+- **Default:** `false`
+- **Possible Values:** `true, false`
+
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+import { showMessage } from '@app-studio/web';
+
+export const IsClosableDemo = () => {
+  return (
+    <>
+      <Horizontal gap={10} position="relative">
+        <Button
+          onClick={() =>
+            showMessage(
+              'success',
+              'Scheduled: Catch up',
+              'Friday, February 10, 2023 at 5:57 PM',
+              {
+                isClosable: true,
+              }
+            )
+          }
+        >
+          Close Button
+        </Button>
+      </Horizontal>
+    </>
+  );
+};
+```
+
+### **action**
+A callback function to execute when the action button is clicked.
+
+- **Type:** `Function`
+- **Default:** `undefined`
+- **Possible Values:** ``
+
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/web';
+import { showMessage } from '@app-studio/web';
+// Defines the `ActionDemo` functional component that encapsulates the button interaction logic.
+export const ActionDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'success',
+          'Scheduled: Catch up',
+          'Friday, February 10, 2023 at 5:57 PM'
+        )
+      }
+      isAuto
+    >
+      Add Calendar
+    </Button>
+  );
+};
+```
+
+### **showIcon**
+Determines if an icon corresponding to the message variant should be displayed.
+
+- **Type:** `boolean`
+- **Default:** `false`
+- **Possible Values:** `true, false`
+
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/web';
+
+import { showMessage } from '@app-studio/web';
+
+export const ShowIconDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'warning',
+          'Scheduled: Catch up',
+          'Friday, February 10, 2023 at 5:57 PM',
+          {
+            showIcon: true,
+          }
+        )
+      }
+    >
+      Add Calendar
+    </Button>
+  );
+};
+```
+
+### **timeout**
+The duration in milliseconds after which the message automatically hides.
+
+- **Type:** `number`
+- **Default:** `3000`
+- **Possible Values:** ``
+
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/web';
+
+import { showMessage } from '@app-studio/web';
+
+export const TimeoutDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'info',
+          'Info Message',
+          'Here is some important information.',
+          {
+            timeout: 1000,
+          }
+        )
+      }
+    >
+      Add Calendar
+    </Button>
+  );
+};
+```
+

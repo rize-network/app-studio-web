@@ -1,0 +1,89 @@
+{
+  "componentDescription": "Displays various types of messages with customizable content, icons, actions, and closing behavior.",
+  "subtitle": {
+    "type": "string",
+    "typeValues": [],
+    "description": "The secondary text content of the message.",
+    "defaultValue": "undefined"
+  },
+  "variant": {
+    "type": "MessageType",
+    "typeValues": [
+      "info",
+      "warning",
+      "error",
+      "success"
+    ],
+    "description": "The type or category of the message, influencing its styling.",
+    "defaultValue": "undefined"
+  },
+  "show": {
+    "type": "boolean",
+    "typeValues": [
+      "true",
+      "false"
+    ],
+    "description": "Controls the visibility of the message.",
+    "defaultValue": "undefined"
+  },
+  "hide": {
+    "type": "Function",
+    "typeValues": [],
+    "description": "A function to call to dismiss or hide the message.",
+    "defaultValue": "undefined"
+  },
+  "title": {
+    "type": "string",
+    "typeValues": [],
+    "description": "The main title or heading of the message.",
+    "defaultValue": "undefined"
+  },
+  "theme": {
+    "type": "ThemesType",
+    "typeValues": [],
+    "description": "Custom theme object to override default message styles.",
+    "defaultValue": "Themes"
+  },
+  "isClosable": {
+    "type": "boolean",
+    "typeValues": [
+      "true",
+      "false"
+    ],
+    "description": "Determines if the message can be manually closed by the user.",
+    "defaultValue": "false"
+  },
+  "views": {
+    "type": "MessageViewStyles",
+    "typeValues": [],
+    "description": "Custom styles for various parts of the message component.",
+    "defaultValue": "undefined"
+  },
+  "action": {
+    "type": "Function",
+    "typeValues": [],
+    "description": "A callback function to execute when the action button is clicked.",
+    "defaultValue": "undefined"
+  },
+  "actionText": {
+    "type": "string",
+    "typeValues": [],
+    "description": "The text displayed on the action button.",
+    "defaultValue": "undefined"
+  },
+  "showIcon": {
+    "type": "boolean",
+    "typeValues": [
+      "true",
+      "false"
+    ],
+    "description": "Determines if an icon corresponding to the message variant should be displayed.",
+    "defaultValue": "false"
+  },
+  "timeout": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The duration in milliseconds after which the message automatically hides.",
+    "defaultValue": "3000"
+  }
+}

@@ -4,14 +4,13 @@ A component for visualizing data in various chart formats.
 
 ### **Import**
   ```tsx
-  import { Chart } from '@app-studio/web';
+  import { Chart, CHART_COLORS } from '@app-studio/web';
   ```
 
 ### **Bar Chart**
 ```tsx
 import React from 'react';
-import { Chart } from '../Chart';
-import { View } from '@app-studio/web';
+import { Chart, CHART_COLORS, View } from '@app-studio/web';
 
 export const BarChartDemo = () => {
   const data = {
@@ -20,12 +19,17 @@ export const BarChartDemo = () => {
       {
         name: 'Revenue',
         data: [30, 40, 35, 50, 49, 60],
-        color: 'color.blue.500',
+        color: CHART_COLORS.blue,
       },
       {
         name: 'Expenses',
         data: [20, 25, 30, 35, 30, 40],
-        color: 'color.red.500',
+        color: CHART_COLORS.green,
+      },
+      {
+        name: 'Profit',
+        data: [10, 15, 5, 15, 19, 20],
+        color: CHART_COLORS.purple,
       },
     ],
   };
@@ -38,6 +42,9 @@ export const BarChartDemo = () => {
         title="Monthly Revenue vs Expenses"
         showGrid
         animated
+        onSeriesClick={(seriesName, index) => {
+          console.log(`Clicked on ${seriesName} at index ${index}`);
+        }}
       />
     </View>
   );
@@ -47,8 +54,7 @@ export const BarChartDemo = () => {
 ### **Line Chart**
 ```tsx
 import React from 'react';
-import { Chart } from '../Chart';
-import { View } from '@app-studio/web';
+import { Chart, CHART_COLORS, View } from '@app-studio/web';
 
 export const LineChartDemo = () => {
   const data = {
@@ -57,12 +63,12 @@ export const LineChartDemo = () => {
       {
         name: 'Users',
         data: [500, 800, 1200, 1800, 2500, 3000],
-        color: 'color.purple.500',
+        color: CHART_COLORS.purple,
       },
       {
         name: 'Sessions',
         data: [1000, 1600, 2400, 3600, 5000, 6000],
-        color: 'color.teal.500',
+        color: CHART_COLORS.teal,
       },
     ],
   };
@@ -85,8 +91,7 @@ export const LineChartDemo = () => {
 ### **Area Chart**
 ```tsx
 import React from 'react';
-import { Chart } from '../Chart';
-import { View } from '@app-studio/web';
+import { Chart, CHART_COLORS, View } from '@app-studio/web';
 
 export const AreaChartDemo = () => {
   const data = {
@@ -95,12 +100,12 @@ export const AreaChartDemo = () => {
       {
         name: 'This Week',
         data: [10, 15, 12, 20, 18, 25, 22],
-        color: 'color.green.500',
+        color: CHART_COLORS.green,
       },
       {
         name: 'Last Week',
         data: [8, 12, 10, 15, 14, 20, 17],
-        color: 'color.blue.500',
+        color: CHART_COLORS.blue,
       },
     ],
   };
@@ -122,15 +127,14 @@ export const AreaChartDemo = () => {
 ### **Pie Chart**
 ```tsx
 import React from 'react';
-import { Chart } from '../Chart';
-import { View } from '@app-studio/web';
+import { Chart, CHART_COLORS, View } from '@app-studio/web';
 
 export const PieChartDemo = () => {
   const dataPoints = [
-    { label: 'Mobile', value: 45, color: 'color.blue.500' },
-    { label: 'Desktop', value: 30, color: 'color.green.500' },
-    { label: 'Tablet', value: 15, color: 'color.purple.500' },
-    { label: 'Other', value: 10, color: 'color.orange.500' },
+    { label: 'Mobile', value: 45, color: CHART_COLORS.blue },
+    { label: 'Desktop', value: 30, color: CHART_COLORS.green },
+    { label: 'Tablet', value: 15, color: CHART_COLORS.purple },
+    { label: 'Other', value: 10, color: CHART_COLORS.orange },
   ];
 
   return (
@@ -140,6 +144,9 @@ export const PieChartDemo = () => {
         dataPoints={dataPoints}
         title="Device Distribution"
         animated
+        onDataPointClick={(dataPoint, index) => {
+          console.log(`Clicked on ${dataPoint?.label} at index ${index}`);
+        }}
       />
     </View>
   );
@@ -149,14 +156,13 @@ export const PieChartDemo = () => {
 ### **Donut Chart**
 ```tsx
 import React from 'react';
-import { Chart } from '../Chart';
-import { View } from '@app-studio/web';
+import { Chart, CHART_COLORS, View } from '@app-studio/web';
 
 export const DonutChartDemo = () => {
   const dataPoints = [
-    { label: 'Completed', value: 65, color: 'color.green.500' },
-    { label: 'In Progress', value: 25, color: 'color.blue.500' },
-    { label: 'Pending', value: 10, color: 'color.orange.500' },
+    { label: 'Completed', value: 65, color: CHART_COLORS.green },
+    { label: 'In Progress', value: 25, color: CHART_COLORS.blue },
+    { label: 'Pending', value: 10, color: CHART_COLORS.orange },
   ];
 
   return (
@@ -175,8 +181,7 @@ export const DonutChartDemo = () => {
 ### **Custom Styling**
 ```tsx
 import React from 'react';
-import { Chart } from '../Chart';
-import { View } from '@app-studio/web';
+import { Chart, CHART_COLORS, View } from '@app-studio/web';
 
 export const CustomChartDemo = () => {
   const data = {
@@ -185,6 +190,7 @@ export const CustomChartDemo = () => {
       {
         name: 'Sales',
         data: [120, 180, 150, 210],
+        color: CHART_COLORS.blue,
       },
     ],
   };
@@ -229,4 +235,143 @@ export const CustomChartDemo = () => {
     </View>
   );
 };
+```
+
+### **Chart States**
+
+The Chart component supports loading, error, and no data states:
+
+```tsx
+import React, { useState } from 'react';
+import { Chart, CHART_COLORS, View, Button, Horizontal } from '@app-studio/web';
+
+export const ChartStatesDemo = () => {
+  const [state, setState] = useState<'normal' | 'loading' | 'error' | 'noData'>('normal');
+
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Revenue',
+        data: [30, 40, 35, 50, 49, 60],
+        color: CHART_COLORS.blue,
+      },
+    ],
+  };
+
+  return (
+    <View>
+      <Horizontal gap="8px" marginBottom="16px">
+        <Button onClick={() => setState('normal')}>Normal</Button>
+        <Button onClick={() => setState('loading')}>Loading</Button>
+        <Button onClick={() => setState('error')}>Error</Button>
+        <Button onClick={() => setState('noData')}>No Data</Button>
+      </Horizontal>
+
+      <View height="300px" width="100%">
+        <Chart
+          type="bar"
+          data={data}
+          title="Revenue Chart"
+          showGrid
+          animated
+          isLoading={state === 'loading'}
+          error={state === 'error' ? 'Failed to load chart data' : undefined}
+          noData={state === 'noData'}
+        />
+      </View>
+    </View>
+  );
+};
+```
+
+### **Available Colors**
+
+The Chart component provides a set of predefined colors through `CHART_COLORS`:
+
+```tsx
+import { CHART_COLORS } from '@app-studio/web';
+
+// Available colors:
+CHART_COLORS.blue      // 'color.blue.500'
+CHART_COLORS.green     // 'color.green.500'
+CHART_COLORS.purple    // 'color.purple.500'
+CHART_COLORS.orange    // 'color.orange.500'
+CHART_COLORS.red       // 'color.red.500'
+CHART_COLORS.teal      // 'color.teal.500'
+CHART_COLORS.pink      // 'color.pink.500'
+CHART_COLORS.indigo    // 'color.indigo.500'
+CHART_COLORS.yellow    // 'color.yellow.500'
+CHART_COLORS.cyan      // 'color.cyan.500'
+```
+
+### **Props Reference**
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `type` | `'bar' \| 'line' \| 'area' \| 'pie' \| 'donut'` | **Required** | The type of chart to render |
+| `data` | `ChartData` | - | Data for multi-series charts (bar, line, area) |
+| `dataPoints` | `ChartDataPoint[]` | - | Data points for single series charts (pie, donut) |
+| `title` | `string` | - | The title of the chart |
+| `showLegend` | `boolean` | `true` | Whether to show the legend |
+| `legendPosition` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'bottom'` | Position of the legend |
+| `showGrid` | `boolean` | `true` | Whether to show grid lines |
+| `showTooltips` | `boolean` | `true` | Whether to show tooltips on hover |
+| `animated` | `boolean` | `true` | Whether the chart is animated |
+| `animationDuration` | `number` | `500` | Duration of the animation in milliseconds |
+| `responsive` | `boolean` | `true` | Whether the chart is responsive |
+| `aspectRatio` | `number` | `16/9` | The aspect ratio of the chart (width/height) |
+| `width` | `number \| string` | `200` | The width of the chart |
+| `height` | `number \| string` | `200` | The height of the chart |
+| `views` | `ChartStyles` | - | Custom styles for different parts of the chart |
+| `onDataPointClick` | `(dataPoint, index) => void` | - | Callback when a data point is clicked (pie/donut) |
+| `onSeriesClick` | `(seriesName, index) => void` | - | Callback when a series is clicked (bar/line/area) |
+| `isLoading` | `boolean` | `false` | If true, displays a loading indicator overlay |
+| `error` | `React.ReactNode` | - | If provided, displays an error message overlay |
+| `noData` | `boolean \| React.ReactNode` | - | If true, displays a "no data" message |
+| `loadingIndicator` | `React.ReactNode` | - | Custom placeholder for the loading state |
+| `errorIndicator` | `React.ReactNode` | - | Custom placeholder for the error state |
+| `noDataIndicator` | `React.ReactNode` | - | Custom placeholder for the no data state |
+| `aria-label` | `string` | - | Aria-label for the chart region (defaults to title) |
+
+### **Type Definitions**
+
+```tsx
+interface ChartData {
+  labels: string[];
+  series: ChartSeries[];
+}
+
+interface ChartSeries {
+  name: string;
+  data: number[];
+  color?: string;
+}
+
+interface ChartDataPoint {
+  label: string;
+  value: number;
+  color?: string;
+}
+
+interface ChartStyles {
+  container?: ViewProps;
+  chart?: ViewProps;
+  legend?: ViewProps;
+  legendItem?: ViewProps;
+  tooltip?: ViewProps;
+  axis?: ViewProps;
+  grid?: ViewProps;
+  bar?: ViewProps;
+  line?: ViewProps;
+  point?: ViewProps;
+  pie?: ViewProps;
+  area?: ViewProps;
+  axisLabel?: ViewProps;
+  axisLine?: ViewProps;
+  axisTick?: ViewProps;
+  loadingOverlay?: ViewProps;
+  errorOverlay?: ViewProps;
+  noDataOverlay?: ViewProps;
+}
 ```

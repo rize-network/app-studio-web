@@ -1,140 +1,72 @@
 # HoverCard
 
-A floating card that appears when hovering over a trigger element. Supports configurable open and close delays for a smoother user experience.
+Displays rich content on hover, with customizable trigger and content presentation.
 
 ### **Import**
-  ```tsx
-  import { HoverCard } from '@app-studio/web';
-  ```
+```tsx
+import { HoverCard } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { HoverCard } from '../HoverCard';
-import { Button } from '../../Button/Button';
-import { Text } from '@app-studio/web';
+import { HoverCard } from '@app-studio/web';
+import { Text, Vertical, View } from 'app-studio';
+import { Button } from '@app-studio/web';
 
 export const DefaultHoverCard = () => {
   return (
-    <HoverCard>
-      <HoverCard.Trigger>
-        <Button>Hover Me</Button>
-      </HoverCard.Trigger>
-      <HoverCard.Content>
-        <Text>
-          The React Framework – created and maintained by @vercel.
-        </Text>
-      </HoverCard.Content>
-    </HoverCard>
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <View>
+        <Text marginBottom={10}>Default HoverCard</Text>
+        <HoverCard>
+          <HoverCard.Trigger>
+            <Button>Hover Me</Button>
+          </HoverCard.Trigger>
+          <HoverCard.Content>
+            <Text>
+              The React Framework – created and maintained by @vercel.
+            </Text>
+          </HoverCard.Content>
+        </HoverCard>
+      </View>
+
+      <View>
+        <Text marginBottom={10}>HoverCard with different positions</Text>
+        <HoverCard>
+          <HoverCard.Trigger>
+            <Button>Hover for Top Position</Button>
+          </HoverCard.Trigger>
+          <HoverCard.Content side="top">
+            <Text>This content appears above the trigger.</Text>
+          </HoverCard.Content>
+        </HoverCard>
+      </View>
+
+      <View>
+        <Text marginBottom={10}>HoverCard with custom styling</Text>
+        <HoverCard>
+          <HoverCard.Trigger>
+            <Button variant="outline">Custom Styled HoverCard</Button>
+          </HoverCard.Trigger>
+          <HoverCard.Content
+            views={{
+              container: {
+                backgroundColor: 'color.blue',
+                color: 'color.white',
+                borderRadius: '8px',
+                padding: '16px',
+              },
+            }}
+          >
+            <Text color="white">
+              This HoverCard has custom styling with a primary background color.
+            </Text>
+          </HoverCard.Content>
+        </HoverCard>
+      </View>
+    </Vertical>
   );
 };
 ```
 
-### **Positioning**
-You can control the position of the HoverCard content using the `side` and `align` props.
-
-```tsx
-import React from 'react';
-import { HoverCard } from '../HoverCard';
-import { Button } from '../../Button/Button';
-import { Text } from '@app-studio/web';
-
-export const PositionedHoverCard = () => {
-  return (
-    <HoverCard>
-      <HoverCard.Trigger>
-        <Button>Hover Me</Button>
-      </HoverCard.Trigger>
-      <HoverCard.Content side="top" align="center">
-        <Text>
-          This content appears above the trigger.
-        </Text>
-      </HoverCard.Content>
-    </HoverCard>
-  );
-};
-```
-
-### **Custom Styling**
-You can customize the appearance of the HoverCard using the `views` prop.
-
-```tsx
-import React from 'react';
-import { HoverCard } from '../HoverCard';
-import { Button } from '../../Button/Button';
-import { Text } from '@app-studio/web';
-
-export const StyledHoverCard = () => {
-  return (
-    <HoverCard>
-      <HoverCard.Trigger>
-        <Button variant="outline">Custom Styled HoverCard</Button>
-      </HoverCard.Trigger>
-      <HoverCard.Content
-        views={{
-          container: {
-            backgroundColor: 'color.blue',
-            color: 'color.white',
-            borderRadius: '8px',
-            padding: '16px',
-          },
-        }}
-      >
-        <Text color="white">
-          This HoverCard has custom styling with a primary background color.
-        </Text>
-      </HoverCard.Content>
-    </HoverCard>
-  );
-};
-```
-
-### **Delay Options**
-You can control the timing of when the HoverCard opens and closes using the `openDelay` and `closeDelay` props.
-
-```tsx
-import React from 'react';
-import { HoverCard } from '../HoverCard';
-import { Button } from '../../Button/Button';
-import { Text } from '@app-studio/web';
-
-export const DelayedHoverCard = () => {
-  return (
-    <HoverCard openDelay={100} closeDelay={1000}>
-      <HoverCard.Trigger>
-        <Button>Hover Me</Button>
-      </HoverCard.Trigger>
-      <HoverCard.Content>
-        <Text>
-          This card opens quickly (100ms) but stays open longer (1000ms) after you move away.
-        </Text>
-      </HoverCard.Content>
-    </HoverCard>
-  );
-};
-```
-
-### **Using with Other Components**
-You can use the `asChild` prop on the Trigger to apply hover behavior directly to another component.
-
-```tsx
-import React from 'react';
-import { HoverCard } from '../HoverCard';
-import { Link } from '../../Link/Link';
-import { Text } from '@app-studio/web';
-
-export const LinkHoverCard = () => {
-  return (
-    <HoverCard>
-      <HoverCard.Trigger asChild>
-        <Link to="https://example.com">example.com</Link>
-      </HoverCard.Trigger>
-      <HoverCard.Content>
-        <Text>
-          This card uses the asChild prop to apply hover behavior directly to the Link component.
-        </Text>
-      </HoverCard.Content>
-    </HoverCard>
-  );
-};
-```

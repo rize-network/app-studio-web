@@ -1,0 +1,69 @@
+{
+  "componentDescription": "Displays an interactive list where users can reorder items by dragging and dropping them.",
+  "items": {
+    "type": "any[]",
+    "typeValues": [],
+    "description": "An array of items to be displayed and managed by the drag-and-drop component.",
+    "defaultValue": null
+  },
+  "onChange": {
+    "type": "(items: any[]) => void",
+    "typeValues": [],
+    "description": "Optional callback function invoked when the order of items changes after a drag-and-drop operation.",
+    "defaultValue": null
+  },
+  "renderItem": {
+    "type": "(item: any, index: number) => React.ReactNode",
+    "typeValues": [],
+    "description": "Optional render prop for custom item rendering, potentially overriding the one from DragAndDropProps for the view component.",
+    "defaultValue": null
+  },
+  "containerProps": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Optional props to be applied to the main container element of the drag-and-drop component.",
+    "defaultValue": null
+  },
+  "itemProps": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Optional props to be applied to each individual draggable item element.",
+    "defaultValue": null
+  },
+  "draggedIndex": {
+    "type": "number | null",
+    "typeValues": [],
+    "description": "The index of the item currently being dragged, or null if no item is being dragged.",
+    "defaultValue": null
+  },
+  "itemRefs": {
+    "type": "React.MutableRefObject<(HTMLDivElement | null)[]>",
+    "typeValues": [],
+    "description": "A mutable ref object holding references to the DOM elements of each draggable item.",
+    "defaultValue": null
+  },
+  "handleDragStart": {
+    "type": "(e: React.MouseEvent | React.TouchEvent, index: number) => void",
+    "typeValues": [],
+    "description": "Function to handle the start of a drag operation, taking the event and the item's index as parameters.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "{ container?: ViewProps; item?: ViewProps; }",
+    "typeValues": [],
+    "description": "Optional property to pass specific props to various sub-components (container, item) within the view.",
+    "defaultValue": null
+  },
+  "views.container": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Optional props specifically for the container view component.",
+    "defaultValue": null
+  },
+  "views.item": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Optional props specifically for each individual item view component.",
+    "defaultValue": null
+  }
+}

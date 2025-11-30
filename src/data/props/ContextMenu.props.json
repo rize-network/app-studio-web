@@ -1,0 +1,170 @@
+{
+  "componentDescription": "A floating menu that appears upon user interaction, typically a right-click or long-press.",
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Defines the content that the ContextMenu will render, typically the element that triggers the context menu.",
+    "defaultValue": null
+  },
+  "items": {
+    "type": "ContextMenuItem[]",
+    "typeValues": null,
+    "description": "An optional array of items to be displayed in the context menu.",
+    "defaultValue": null
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Specifies the predefined size of the context menu.",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "filled",
+      "outline"
+    ],
+    "description": "Determines the visual variant or style of the context menu.",
+    "defaultValue": "default"
+  },
+  "disableNativeContextMenu": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, prevents the browser's native context menu from appearing when right-clicking.",
+    "defaultValue": "true"
+  },
+  "onOpenChange": {
+    "type": "(isOpen: boolean) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the open state of the context menu changes.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "ContextMenuStyles",
+    "typeValues": null,
+    "description": "Allows for custom styling of different parts of the context menu component. This includes container, menu, content, item, activeItem, divider, separator, icon, submenuIndicator, and submenu styles.",
+    "defaultValue": null
+  },
+  "triggerChildren": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "The element that serves as the trigger for opening the context menu.",
+    "defaultValue": null
+  },
+  "triggerDisableNativeContextMenu": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, disables the default browser context menu for the trigger element.",
+    "defaultValue": "true"
+  },
+  "asChild": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "When true, the trigger will render its child as-is, passing props to it.",
+    "defaultValue": "false"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, the context menu trigger will be visually and functionally disabled.",
+    "defaultValue": "false"
+  },
+  "triggerViews": {
+    "type": "{ container?: ViewProps; }",
+    "typeValues": null,
+    "description": "Custom styles for various sub-elements of the ContextMenuTrigger, specifically for the trigger's container.",
+    "defaultValue": null
+  },
+  "contentItems": {
+    "type": "ContextMenuItem[]",
+    "typeValues": null,
+    "description": "An optional array of items to render within the context menu content.",
+    "defaultValue": null
+  },
+  "contentChildren": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Content to be rendered inside the context menu, typically ContextMenuItem or ContextMenuSeparator components.",
+    "defaultValue": null
+  },
+  "position": {
+    "type": "{ x: number; y: number }",
+    "typeValues": null,
+    "description": "Explicitly sets the x and y coordinates for positioning the context menu.",
+    "defaultValue": null
+  },
+  "side": {
+    "type": "Position",
+    "typeValues": [
+      "top",
+      "right",
+      "bottom",
+      "left"
+    ],
+    "description": "Specifies the preferred side where the context menu content will open relative to its trigger.",
+    "defaultValue": "right"
+  },
+  "align": {
+    "type": "Alignment",
+    "typeValues": [
+      "start",
+      "center",
+      "end"
+    ],
+    "description": "Determines the alignment of the context menu content relative to the trigger along the specified side.",
+    "defaultValue": "start"
+  },
+  "contentViews": {
+    "type": "{ menu?: ViewProps; content?: ViewProps; item?: ViewProps; divider?: ViewProps; separator?: ViewProps; icon?: ViewProps; submenuIndicator?: ViewProps; }",
+    "typeValues": null,
+    "description": "Custom styles for various sub-elements of the ContextMenuContent, including the main menu container, overall content wrapper, individual context menu items, visual divider, separator element, icons within menu items, and the submenu indicator icon.",
+    "defaultValue": null
+  },
+  "item": {
+    "type": "ContextMenuItem",
+    "typeValues": null,
+    "description": "The data object for the individual context menu item.",
+    "defaultValue": null
+  },
+  "itemChildren": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Content to be rendered inside the menu item, typically text or an icon.",
+    "defaultValue": null
+  },
+  "onSelect": {
+    "type": "(event: React.MouseEvent<HTMLButtonElement>) => void",
+    "typeValues": null,
+    "description": "Callback function invoked when the menu item is selected or clicked.",
+    "defaultValue": null
+  },
+  "itemIsDisabled": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, the menu item will be visually and functionally disabled.",
+    "defaultValue": "false"
+  },
+  "itemViews": {
+    "type": "{ item?: ViewProps; icon?: ViewProps; submenuIndicator?: ViewProps; }",
+    "typeValues": null,
+    "description": "Custom styles for various sub-elements of the ContextMenuItem, including the individual menu item container, icon within the menu item, and the submenu indicator icon.",
+    "defaultValue": null
+  },
+  "dividerViews": {
+    "type": "{ divider?: ViewProps; }",
+    "typeValues": null,
+    "description": "Custom styles for various sub-elements of the ContextMenuDivider, specifically for the divider element itself.",
+    "defaultValue": null
+  },
+  "separatorViews": {
+    "type": "{ separator?: ViewProps; }",
+    "typeValues": null,
+    "description": "Custom styles for various sub-elements of the ContextMenuSeparator, specifically for the separator element itself.",
+    "defaultValue": null
+  }
+}

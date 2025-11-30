@@ -7,11 +7,23 @@ extractKeyValuePairs : Extrait des paires clé-valeur d'une réponse. Cette fonc
 // import cheerio from 'cheerio';
 
 export function extractJsonCode(response: string) {
-  const jsonCodeRegex = /```json\n([\s\S]*?)```/;
+  const jsonCodeRegex = /```json\s*([\s\S]*?)```/; // Allow optional newline after json
   const match = response.match(jsonCodeRegex);
   if (match) {
-    const cleanedJsonString = match[1].trim().replace(/\/\/.*$/gm, ''); // Remove comments
-    return JSON.parse(cleanedJsonString);
+    const jsonString = match[1].trim();
+    try {
+      return JSON.parse(jsonString);
+    } catch (error) {
+      // If direct parsing fails, try removing comments
+      try {
+        // Naive comment removal - still risky for URLs but better than nothing as fallback
+        const cleanedJsonString = jsonString.replace(/\/\/.*$/gm, '');
+        return JSON.parse(cleanedJsonString);
+      } catch (error2) {
+        console.error('Error parsing JSON from code block:', error2);
+        return null;
+      }
+    }
   }
   return null;
 }

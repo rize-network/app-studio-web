@@ -21,8 +21,8 @@ A basic Kanban board with three columns and some cards.
 
 ```tsx
 import React, { useState } from 'react';
-import { KanbanBoard } from '../KanbanBoard';
-import { KanbanBoardColumn } from '../KanbanBoard/KanbanBoard.props';
+import { KanbanBoard } from '@app-studio/web';
+import { KanbanBoardColumn } from '@app-studio/web';
 
 export const DefaultKanbanBoard = () => {
   const [columns, setColumns] = useState<KanbanBoardColumn[]>([
@@ -61,8 +61,8 @@ Customize how cards are displayed using the `renderCard` prop. This is useful fo
 
 ```tsx
 import React, { useState } from 'react';
-import { KanbanBoard } from '../KanbanBoard';
-import { KanbanBoardColumn, KanbanBoardCard } from '../KanbanBoard/KanbanBoard.props';
+import { KanbanBoard } from '@app-studio/web';
+import { KanbanBoardColumn, KanbanBoardCard } from '@app-studio/web';
 import { View, Text, Horizontal } from '@app-studio/web';
 
 export const CustomRenderKanbanBoard = () => {
@@ -129,9 +129,9 @@ Use `renderColumnHeader` to create a custom header, for example to add an "Add C
 
 ```tsx
 import React, { useState } from 'react';
-import { KanbanBoard } from '../KanbanBoard';
-import { Button } from '../Button';
-import { KanbanBoardColumn, KanbanBoardCard } from '../KanbanBoard/KanbanBoard.props';
+import { KanbanBoard } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { KanbanBoardColumn, KanbanBoardCard } from '@app-studio/web';
 import { View, Text, Horizontal } from '@app-studio/web';
 
 export const CustomHeaderKanbanBoard = () => {
@@ -174,8 +174,8 @@ You can implement inline editing of card titles by using the `onCardTitleChange`
 
 ```tsx
 import React, { useState } from 'react';
-import { KanbanBoard } from '../KanbanBoard';
-import { KanbanBoardColumn, KanbanBoardCard } from '../KanbanBoard/KanbanBoard.props';
+import { KanbanBoard } from '@app-studio/web';
+import { KanbanBoardColumn, KanbanBoardCard } from '@app-studio/web';
 import { Input, Text } from '@app-studio/web';
 
 export const EditableKanbanBoard = () => {

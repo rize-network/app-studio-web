@@ -1,147 +1,86 @@
 # Sidebar
 
-A composable, themeable and customizable sidebar component for navigation and content organization.
+A versatile layout component for navigation or content, typically positioned at the screen edges.
 
 ### **Import**
-  ```tsx
-  import { Sidebar } from '@app-studio/web';
-  ```
+```tsx
+import { Sidebar } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
 import { Sidebar } from '@app-studio/web';
-import { Text } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
-import { HomeIcon, UserIcon, SettingsIcon } from '@app-studio/web';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { HomeIcon,
+  SettingsIcon,
+  UserIcon,
+  NotificationIcon,
+  HelpIcon, } from '@app-studio/web';
+import { SideBarNavItem } from '@app-studio/web';
 
 export const DefaultSidebar = () => {
   return (
-    <Sidebar defaultExpanded={true}>
-      <Sidebar.Header>
-        <Text fontWeight="bold" size="lg">App Name</Text>
-      </Sidebar.Header>
-      <Sidebar.Content>
-        <Vertical gap={8}>
-          <NavItem icon={<HomeIcon widthHeight={20} />} label="Home" isActive />
-          <NavItem icon={<UserIcon widthHeight={20} />} label="Profile" />
-          <NavItem icon={<SettingsIcon widthHeight={20} />} label="Settings" />
-        </Vertical>
-      </Sidebar.Content>
-      <Sidebar.Footer>
-        <Text size="sm" color="color.gray.500">© 2023 App Studio</Text>
-      </Sidebar.Footer>
-    </Sidebar>
+    <View
+      height="500px"
+      position="relative"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Horizontal width="100%" height="100%">
+        <Sidebar defaultExpanded={true} fixed={false}>
+          <Sidebar.Header>
+            <Text fontWeight="bold" size="lg">
+              App Name
+            </Text>
+          </Sidebar.Header>
+          <Sidebar.Content>
+            <Vertical gap={8}>
+              <SideBarNavItem
+                icon={<HomeIcon widthHeight={20} />}
+                label="Home"
+                isActive
+              />
+              <SideBarNavItem
+                icon={<UserIcon widthHeight={20} />}
+                label="Profile"
+              />
+              <SideBarNavItem
+                icon={<NotificationIcon widthHeight={20} />}
+                label="Notifications"
+              />
+              <SideBarNavItem
+                icon={<SettingsIcon widthHeight={20} />}
+                label="Settings"
+              />
+              <SideBarNavItem
+                icon={<HelpIcon widthHeight={20} />}
+                label="Help"
+              />
+            </Vertical>
+          </Sidebar.Content>
+          <Sidebar.Footer>
+            <Text size="sm" color="color.gray.500">
+              © 2023 App Studio
+            </Text>
+          </Sidebar.Footer>
+        </Sidebar>
+        <View flex="1" padding="16px" backgroundColor="color.gray.50">
+          <Text fontWeight="bold" size="xl" marginBottom="16px">
+            Main Content
+          </Text>
+          <Text>
+            This is the main content area. It will adjust based on the sidebar
+            state.
+          </Text>
+        </View>
+      </Horizontal>
+    </View>
   );
 };
-
-const NavItem = ({ icon, label, isActive = false }) => (
-  <Horizontal
-    alignItems="center"
-    gap={12}
-    padding="8px 12px"
-    borderRadius="4px"
-    backgroundColor={isActive ? 'color.blue.50' : 'transparent'}
-    color={isActive ? 'color.blue.600' : 'color.gray.700'}
-    fontWeight={isActive ? 'bold' : 'normal'}
-    cursor="pointer"
-    _hover={{ backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100' }}
-  >
-    {icon}
-    <Text>{label}</Text>
-  </Horizontal>
-);
 ```
 
-### **Variants**
-The Sidebar component supports different visual variants:
-
-```tsx
-<Sidebar variant="default" />
-<Sidebar variant="filled" />
-<Sidebar variant="outline" />
-```
-
-### **Positions**
-The Sidebar component can be positioned on either side:
-
-```tsx
-<Sidebar position="left" />
-<Sidebar position="right" />
-```
-
-### **Sizes**
-The Sidebar component supports different sizes:
-
-```tsx
-<Sidebar size="sm" />
-<Sidebar size="md" />
-<Sidebar size="lg" />
-```
-
-### **Controlled Expansion**
-The Sidebar component can be controlled externally:
-
-```tsx
-const [isExpanded, setIsExpanded] = useState(true);
-
-<Button onClick={() => setIsExpanded(!isExpanded)}>
-  {isExpanded ? 'Collapse' : 'Expand'} Sidebar
-</Button>
-
-<Sidebar 
-  expanded={isExpanded} 
-  onExpandedChange={setIsExpanded}
->
-  {/* Sidebar content */}
-</Sidebar>
-```
-
-### **Customization**
-The Sidebar component can be customized with the views prop:
-
-```tsx
-<Sidebar
-  views={{
-    container: {
-      backgroundColor: 'color.blue.800',
-      color: 'color.white',
-    },
-    header: {
-      borderBottomColor: 'color.blue.700',
-      backgroundColor: 'color.blue.900',
-    },
-    content: {
-      padding: '20px',
-    },
-    footer: {
-      borderTopColor: 'color.blue.700',
-      backgroundColor: 'color.blue.900',
-    },
-    toggleButton: {
-      backgroundColor: 'color.blue.700',
-      _hover: { backgroundColor: 'color.blue.600' },
-    },
-  }}
->
-  {/* Sidebar content */}
-</Sidebar>
-```
-
-### **Responsive Behavior**
-The Sidebar component can adapt to different screen sizes:
-
-```tsx
-<Sidebar
-  breakpoint={768}
-  breakpointBehavior="overlay"
-  hasBackdrop={true}
->
-  {/* Sidebar content */}
-</Sidebar>
-```
-
-Available breakpoint behaviors:
-- `collapse`: Automatically collapses the sidebar below the breakpoint
-- `overlay`: Converts the sidebar to an overlay below the breakpoint
-- `hide`: Hides the sidebar completely below the breakpoint

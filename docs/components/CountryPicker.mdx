@@ -10,7 +10,7 @@ Enables users to select a country from a dropdown list with various styling opti
 ### **Default**
 ```tsx
 import React from 'react';
-import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+import { CountryPicker } from '@app-studio/web';
 
 export const DefaultCountryPicker = () => <CountryPicker label="Country" />;
 
@@ -21,7 +21,7 @@ Optional error flag to indicate validation state
 
 ```tsx
 import React from 'react';
-import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+import { CountryPicker } from '@app-studio/web';
 
 export const ErrorCountryPicker = () => (
   <CountryPicker id="error" label="Country" error />
@@ -35,7 +35,7 @@ Optional helper text for guiding the user
 ```tsx
 import React from 'react';
 
-import { CountryPicker } from '../CountryPicker';
+import { CountryPicker } from '@app-studio/web';
 
 export const HelperTextCountryPicker = () => (
   <CountryPicker helperText="CountryPicker one item!" error />
@@ -62,11 +62,11 @@ Optional shape of the CountryPicker for visual styles
 
 ```tsx
 import React from 'react';
-import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+import { CountryPicker } from '@app-studio/web';
 
 import { Vertical } from '@app-studio/web';
 
-import { Shape } from '../CountryPicker/CountryPicker.type';
+import { Shape } from '@app-studio/web';
 
 export const ShapeCountryPicker = () => (
   <Vertical gap={10}>
@@ -88,11 +88,11 @@ Variant for different visual types of CountryPicker
 
 ```tsx
 import React from 'react';
-import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+import { CountryPicker } from '@app-studio/web';
 
 import { Vertical } from '@app-studio/web';
 
-import { Variant } from '../CountryPicker/CountryPicker.type';
+import { Variant } from '@app-studio/web';
 
 export const VariantCountryPicker = () => (
   <Vertical gap={10}>
@@ -114,7 +114,7 @@ Shadow or Elevation styles for visual depth and perspective
 
 ```tsx
 import React from 'react';
-import { CountryPicker } from '../../../Form/CountryPicker/CountryPicker';
+import { CountryPicker } from '@app-studio/web';
 
 export const ShadowCountryPicker = () => (
   <CountryPicker shadow={{ boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px' }} />

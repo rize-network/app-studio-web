@@ -11,7 +11,7 @@ A form input component for managing a list of tags. Users can add tags by typing
 ```tsx
 import React, { useState } from 'react';
 import { Vertical, Text } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const DefaultTagInput = () => {
   const [tags, setTags] = useState<string[]>([]);
@@ -39,7 +39,7 @@ Characters that trigger tag creation. Supports 'enter', 'comma', 'space', and 't
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const CustomSeparatorsTagInput = () => {
   const [tags, setTags] = useState<string[]>(['react', 'typescript']);
@@ -68,7 +68,7 @@ Maximum number of tags allowed.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const LimitedTagInput = () => {
   const [tags, setTags] = useState<string[]>(['javascript', 'web']);
@@ -96,7 +96,7 @@ Validation constraints for tag length.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const ValidatedTagInput = () => {
   const [tags, setTags] = useState<string[]>([]);
@@ -127,7 +127,7 @@ Whether to allow duplicate tags.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const NoDuplicatesTagInput = () => {
   const [tags, setTags] = useState<string[]>(['unique']);
@@ -150,7 +150,7 @@ Default tags for uncontrolled component usage.
 
 ```tsx
 import React from 'react';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const UncontrolledTagInput = () => {
   return (
@@ -172,7 +172,7 @@ Disabled and read-only states.
 ```tsx
 import React from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const DisabledTagInput = () => {
   return (
@@ -203,7 +203,7 @@ Visual variant of the component: 'outline', 'default', or 'none'.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const VariantTagInput = () => {
   const [tags, setTags] = useState<string[]>(['example']);
@@ -239,7 +239,7 @@ Size of the component: 'xs', 'sm', 'md', 'lg', or 'xl'.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const SizeTagInput = () => {
   const [tags, setTags] = useState<string[]>(['tag']);
@@ -267,7 +267,7 @@ Shape/border radius: 'default', 'sharp', 'rounded', or 'pillShaped'.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const ShapeTagInput = () => {
   const [tags, setTags] = useState<string[]>(['shaped']);
@@ -295,8 +295,8 @@ React nodes to render on the left and right sides of the input.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
-import { SearchIcon, TagIcon } from '../../../Icon';
+import { TagInput } from '@app-studio/web';
+import { SearchIcon, TagIcon } from '@app-studio/web';
 
 export const IconTagInput = () => {
   const [tags, setTags] = useState<string[]>(['search']);
@@ -330,7 +330,7 @@ Custom styling for different parts of the component.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const StyledTagInput = () => {
   const [tags, setTags] = useState<string[]>(['design', 'ui']);
@@ -379,7 +379,7 @@ Callbacks for individual tag operations.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical, Text } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const CallbackTagInput = () => {
   const [tags, setTags] = useState<string[]>(['initial']);
@@ -410,7 +410,7 @@ Whether tags can be removed by clicking the X button.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const NonRemovableTagInput = () => {
   const [tags, setTags] = useState<string[]>(['permanent', 'fixed']);
@@ -441,7 +441,7 @@ TagInput works seamlessly with forms and form libraries.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical, Button } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const FormTagInput = () => {
   const [formData, setFormData] = useState({
@@ -492,7 +492,7 @@ Display validation errors and helper messages.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical } from '@app-studio/web';
-import { TagInput } from '../TagInput';
+import { TagInput } from '@app-studio/web';
 
 export const ErrorTagInput = () => {
   const [tags, setTags] = useState<string[]>([]);

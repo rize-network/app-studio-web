@@ -1,0 +1,189 @@
+{
+  "componentDescription": "A component to securely input one-time passwords or verification codes digit by digit.",
+  "id": {
+    "type": "string",
+    "typeValues": [],
+    "description": "An optional unique identifier for the OTPInput component.",
+    "defaultValue": "undefined"
+  },
+  "error": {
+    "type": "any",
+    "typeValues": [],
+    "description": "An optional property to display an error state or message associated with the OTPInput.",
+    "defaultValue": "false"
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Optional text to provide additional information or guidance to the user, displayed below the input.",
+    "defaultValue": "undefined"
+  },
+  "name": {
+    "type": "string",
+    "typeValues": [],
+    "description": "An optional name attribute for the input, useful for form submission.",
+    "defaultValue": "undefined"
+  },
+  "label": {
+    "type": "string",
+    "typeValues": [],
+    "description": "An optional label to describe the purpose of the OTPInput field to the user.",
+    "defaultValue": "undefined"
+  },
+  "length": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The expected number of digits/characters for the OTP.",
+    "defaultValue": "6"
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Optional placeholder text to display within each individual OTP input field.",
+    "defaultValue": "''"
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean indicating whether the OTPInput fields are read-only and cannot be modified by the user.",
+    "defaultValue": "false"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean indicating whether the OTPInput fields are disabled and non-interactive.",
+    "defaultValue": "false"
+  },
+  "isAutoFocus": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean that, if true, automatically focuses the first OTP input field upon component mount.",
+    "defaultValue": "false"
+  },
+  "type": {
+    "type": "OTPInputType",
+    "typeValues": [
+      "text",
+      "password",
+      "number"
+    ],
+    "description": "Specifies the type of input expected in the OTP fields (e.g., numeric, alphanumeric).",
+    "defaultValue": "text"
+  },
+  "onComplete": {
+    "type": "(value: string) => void",
+    "typeValues": [],
+    "description": "Callback function triggered when all OTP fields have been filled, providing the complete OTP value.",
+    "defaultValue": "undefined"
+  },
+  "onChange": {
+    "type": "(value: string) => void",
+    "typeValues": [],
+    "description": "Callback function triggered whenever the overall OTP input value changes.",
+    "defaultValue": "undefined"
+  },
+  "onChangeText": {
+    "type": "(value: string) => void",
+    "typeValues": [],
+    "description": "Callback function triggered when the text value within the OTP input changes.",
+    "defaultValue": "undefined"
+  },
+  "onBlur": {
+    "type": "(value: any) => void",
+    "typeValues": [],
+    "description": "Callback function triggered when the OTPInput component loses focus.",
+    "defaultValue": "() => {}"
+  },
+  "onKeyPress": {
+    "type": "(e: React.KeyboardEvent<HTMLInputElement>) => void",
+    "typeValues": [],
+    "description": "Callback function triggered on a keyboard key press event within the OTPInput.",
+    "defaultValue": "undefined"
+  },
+  "onKeyDown": {
+    "type": "(e: React.KeyboardEvent<HTMLInputElement>) => void",
+    "typeValues": [],
+    "description": "Callback function triggered on a keyboard key down event within the OTPInput.",
+    "defaultValue": "undefined"
+  },
+  "onClick": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Callback function triggered when the OTPInput component is clicked.",
+    "defaultValue": "() => {}"
+  },
+  "onFocus": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Callback function triggered when the OTPInput component gains focus.",
+    "defaultValue": "() => {}"
+  },
+  "pattern": {
+    "type": "RegExp | string",
+    "typeValues": [],
+    "description": "An optional regular expression or string pattern to validate each digit/character entered.",
+    "defaultValue": "\"[0-9]*\""
+  },
+  "pasteTransformer": {
+    "type": "(pasted: string) => string",
+    "typeValues": [],
+    "description": "A function to transform pasted text before it is inserted into the OTP fields.",
+    "defaultValue": "undefined"
+  },
+  "stepValues": {
+    "type": "number[]",
+    "typeValues": [],
+    "description": "An array of numbers that defines specific allowed values for each OTP input field, often used for custom pin pads.",
+    "defaultValue": "undefined"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Defines the visual size of the individual OTP input fields.",
+    "defaultValue": "md"
+  },
+  "shadow": {
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": [],
+    "description": "Configures the shadow styling for the OTPInput component.",
+    "defaultValue": "undefined"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "rounded",
+      "square",
+      "circle"
+    ],
+    "description": "Defines the visual shape of the individual OTP input fields (e.g., square, rounded).",
+    "defaultValue": "rounded"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "outline",
+      "filled",
+      "ghost"
+    ],
+    "description": "Defines the visual variant of the OTP input fields (e.g., filled, outlined).",
+    "defaultValue": "outline"
+  },
+  "gap": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The spacing, in pixels, between the individual OTP input fields.",
+    "defaultValue": "8"
+  },
+  "views": {
+    "type": "OTPInputStyles",
+    "typeValues": [],
+    "description": "An object to apply custom styles to different parts or states of the OTPInput component.",
+    "defaultValue": "{}"
+  }
+}

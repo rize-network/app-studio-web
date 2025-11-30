@@ -1,0 +1,69 @@
+{
+  "componentDescription": "Provides a user interface for recording, playing, and uploading audio content.",
+  "onAudio": {
+    "type": "(file: File) => void",
+    "typeValues": [],
+    "description": "Callback function triggered when an audio file is successfully processed or recorded, providing the audio file.",
+    "defaultValue": "undefined"
+  },
+  "recording": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the audio recording is currently active.",
+    "defaultValue": "undefined"
+  },
+  "paused": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the audio recording is currently paused.",
+    "defaultValue": "undefined"
+  },
+  "audioBlob": {
+    "type": "Blob | null",
+    "typeValues": [],
+    "description": "Stores the recorded audio data as a Blob, or null if no audio has been recorded.",
+    "defaultValue": "undefined"
+  },
+  "analyserNode": {
+    "type": "AnalyserNode | null",
+    "typeValues": [],
+    "description": "Provides access to an AnalyserNode for audio visualization, or null if not initialized.",
+    "defaultValue": "undefined"
+  },
+  "startRecording": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Function to initiate the audio recording process.",
+    "defaultValue": "undefined"
+  },
+  "stopRecording": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Function to terminate the audio recording and finalize the audio file.",
+    "defaultValue": "undefined"
+  },
+  "pauseRecording": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Function to temporarily suspend the active audio recording.",
+    "defaultValue": "undefined"
+  },
+  "resumeRecording": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Function to resume a previously paused audio recording.",
+    "defaultValue": "undefined"
+  },
+  "resetRecording": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Function to clear any recorded audio and reset the recording state.",
+    "defaultValue": "undefined"
+  },
+  "handleFileChange": {
+    "type": "(e: React.ChangeEvent<HTMLInputElement>) => void",
+    "typeValues": [],
+    "description": "Event handler for file input changes, typically used for uploading audio files.",
+    "defaultValue": "undefined"
+  }
+}

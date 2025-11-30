@@ -1,117 +1,170 @@
 {
-  "componentDescription": "Customizable button for user interaction",
+  "componentDescription": "A versatile button component for user interaction with various styles, sizes, and interactive effects.",
   "children": {
-    "type": ["React.ReactNode"],
+    "type": "React.ReactNode",
     "typeValues": [],
     "description": "Optional React node(s) to be displayed as the button's content.",
-    "defaultValue": []
-  },
-  "colorScheme": {
-    "type": ["any"],
-    "typeValues": [],
-    "description": "Optional string to define the color scheme of the button.",
-    "defaultValue": ["theme.primary"]
+    "defaultValue": null
   },
   "to": {
-    "type": ["string"],
+    "type": "string",
     "typeValues": [],
-    "description": "Optional string for an external hyperlink that the button will redirect to when clicked.",
-    "defaultValue": []
+    "description": "Optional string for the navigation target URL, making the button act as a link.",
+    "defaultValue": null
   },
   "isLoading": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
-    "description": "Optional boolean to control the display of a loader animation over the button.",
-    "defaultValue": ["false"]
+    "description": "Optional boolean to indicate if the button is currently in a loading state.",
+    "defaultValue": false
   },
   "loaderProps": {
-    "type": ["LoaderProps"],
+    "type": "LoaderProps",
     "typeValues": [],
     "description": "Optional LoaderProps object to configure the appearance and behavior of the loader animation.",
-    "defaultValue": ["{}"]
+    "defaultValue": null
   },
   "loaderPosition": {
-    "type": ["LoaderPosition"],
-    "typeValues": ["left", "right"],
+    "type": "LoaderPosition",
+    "typeValues": [
+      "left",
+      "right"
+    ],
     "description": "Optional LoaderPosition to determine the location of the loader animation relative to the button content.",
-    "defaultValue": ["left"]
+    "defaultValue": "left"
   },
   "icon": {
-    "type": ["React.ReactNode"],
+    "type": "React.ReactNode",
     "typeValues": [],
     "description": "Optional React node(s) defining the icon to be displayed within the button.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "iconPosition": {
-    "type": ["IconPosition"],
-    "typeValues": ["left", "right"],
+    "type": "IconPosition",
+    "typeValues": [
+      "left",
+      "right",
+      "top",
+      "bottom"
+    ],
     "description": "Optional IconPosition to specify the icon placement inside the button relative to text.",
-    "defaultValue": ["left"]
+    "defaultValue": "left"
   },
   "isDisabled": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
     "description": "Optional boolean to indicate if the button is non-interactive/disabled.",
-    "defaultValue": ["false"]
+    "defaultValue": false
   },
   "isFilled": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
     "description": "Optional boolean to control the fill property of the button, affecting its style.",
-    "defaultValue": ["false"]
+    "defaultValue": false
   },
   "isAuto": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
     "description": "Optional boolean indicating if the button size should automatically adjust to its content.",
-    "defaultValue": ["false"]
+    "defaultValue": false
   },
   "isIconRounded": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
     "description": "Optional boolean that adds a rounded style to the icon if present.",
-    "defaultValue": ["false"]
+    "defaultValue": false
   },
   "onClick": {
-    "type": ["Function"],
+    "type": "Function",
     "typeValues": [],
     "description": "Optional function that will be called when the button is clicked.",
-    "defaultValue": ["() => {}"]
+    "defaultValue": null
   },
   "size": {
-    "type": ["Size"],
-    "typeValues": ["xs", "sm", "md", "lg", "xl"],
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
     "description": "Optional Size to specify the size of the button.",
-    "defaultValue": ["md"]
+    "defaultValue": "md"
   },
   "shadow": {
-    "type": ["Shadow", "Elevation", "CSSProperties"],
+    "type": "Shadow | Elevation | ViewProps",
     "typeValues": [],
     "description": "Optional shadow property that can be a predefined Shadow, Elevation value or custom CSSProperties to apply shadow effects to the button.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "shape": {
-    "type": ["Shape"],
-    "typeValues": ["sharp", "rounded", "pillShaped"],
+    "type": "Shape",
+    "typeValues": [
+      "sharp",
+      "rounded",
+      "pillShaped"
+    ],
     "description": "Optional Shape to specify the shape of the button (e.g., rounded or square edges).",
-    "defaultValue": ["rounded"]
+    "defaultValue": "rounded"
   },
   "ariaLabel": {
-    "type": ["string"],
+    "type": "string",
     "typeValues": [],
     "description": "Optional string used as an accessible label for screen readers.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "variant": {
-    "type": ["Variant"],
-    "typeValues": ["filled", "outline", "link", "ghost"],
-    "description": "Optional Variant to define the stylistic variation of the button.",
-    "defaultValue": ["filled"]
+    "type": "Variant",
+    "typeValues": [
+      "filled",
+      "outline",
+      "link",
+      "ghost",
+      "borderMoving",
+      "animatedStroke"
+    ],
+    "description": "Variant to define the stylistic variation of the button.",
+    "defaultValue": "filled"
   },
-  "effect": {
-    "type": ["Effects"],
-    "typeValues": ["hover", "default", "reverse"],
-    "description": "Optional effect to apply interactive effects (e.g., ripple) to the button.",
-    "defaultValue": ["default"]
+  "color": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Optional color scheme for the button.",
+    "defaultValue": null
+  },
+  "borderMovingDuration": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Duration in seconds for the border animation in the 'borderMoving' variant.",
+    "defaultValue": 2
+  },
+  "borderMovingGradientColors": {
+    "type": "string[]",
+    "typeValues": [],
+    "description": "Array of colors for the gradient in the 'borderMoving' variant's border animation.",
+    "defaultValue": [
+      "#705CFF",
+      "#FF5C97",
+      "#FFC75C"
+    ]
+  },
+  "animatedStrokeAccentColor": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Accent color for the animated stroke effect in the 'animatedStroke' variant.",
+    "defaultValue": "#705CFF"
+  },
+  "animatedStrokeTextColor": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Text color for the 'animatedStroke' variant.",
+    "defaultValue": "#333333"
+  },
+  "views": {
+    "type": "{ container?: ViewProps; content?: ViewProps; loader?: ViewProps; icon?: ViewProps; link?: ViewProps; }",
+    "typeValues": [],
+    "description": "Optional ViewProps objects to customize the styling of internal sub-components like the container, content, loader, icon, or link.",
+    "defaultValue": {}
   }
 }

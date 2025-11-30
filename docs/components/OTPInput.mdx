@@ -1,0 +1,194 @@
+# OTPInput
+
+A component to securely input one-time passwords or verification codes digit by digit.
+
+### **Import**
+```tsx
+import { OTPInput } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { Button } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+import { OTPInput } from '@app-studio/web';
+
+export const DefaultOTPInput = () => {
+  const [otp, setOtp] = useState('');
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    alert(`Entered OTP: ${otp}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Vertical gap={20}>
+        <Text>Enter verification code:</Text>
+        <OTPInput name="otp" value={otp} onChange={setOtp} isAutoFocus />
+        <Button type="submit" isAuto>
+          Verify
+        </Button>
+      </Vertical>
+    </form>
+  );
+};
+
+export const CustomizedOTPInput = () => {
+  const [otp, setOtp] = useState('');
+
+  return (
+    <Vertical gap={20}>
+      <Text>Custom OTP Input:</Text>
+      <OTPInput
+        name="customOtp"
+        value={otp}
+        onChange={setOtp}
+        length={4}
+        shape="pillShaped"
+        variant="outline"
+        size="lg"
+        gap={12}
+        shadow={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px' }}
+        views={{
+          container: {
+            borderColor: 'theme.primary',
+            backgroundColor: 'color.gray.50',
+          },
+          input: {
+            color: 'theme.primary',
+            fontWeight: 'bold',
+          },
+        }}
+      />
+    </Vertical>
+  );
+};
+
+export const OTPInputWithLabel = () => {
+  const [otp, setOtp] = useState('');
+
+  return (
+    <Vertical gap={20}>
+      <OTPInput
+        name="labeledOtp"
+        label="Verification Code"
+        helperText="Enter the 6-digit code sent to your phone"
+        value={otp}
+        onChange={setOtp}
+      />
+    </Vertical>
+  );
+};
+```
+
+### **onComplete**
+Callback function triggered when all OTP fields have been filled, providing the complete OTP value.
+
+- **Type:** `(value: string) => void`
+- **Default:** `undefined`
+- **Possible Values:** ``
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+import { OTPInput } from '@app-studio/web';
+
+export const OnCompleteDemo = () => {
+  const [otp, setOtp] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleComplete = (value: string) => {
+    setMessage(`OTP completed: ${value}`);
+  };
+
+  return (
+    <Vertical gap={20}>
+      <Text>Enter OTP (auto-submits when complete):</Text>
+      <OTPInput
+        name="completeOtp"
+        value={otp}
+        onChange={setOtp}
+        onComplete={handleComplete}
+        isAutoFocus
+      />
+      {message && (
+        <Text color="theme.success" fontWeight="medium">
+          {message}
+        </Text>
+      )}
+    </Vertical>
+  );
+};
+```
+
+### **stepValues**
+An array of numbers that defines specific allowed values for each OTP input field, often used for custom pin pads.
+
+- **Type:** `number[]`
+- **Default:** `undefined`
+- **Possible Values:** ``
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Text } from 'app-studio';
+import { OTPInput } from '@app-studio/web';
+
+export const StepValuesOTPInput = () => {
+  const [otp, setOtp] = useState('');
+
+  // Define specific values that the OTP can take
+  const stepValues = [1234, 2468, 3579, 5678, 9876];
+
+  return (
+    <Vertical gap={20}>
+      <Text>Step-based OTP Input:</Text>
+      <OTPInput
+        name="stepOtp"
+        value={otp}
+        onChange={setOtp}
+        length={4}
+        stepValues={stepValues}
+        shape="rounded"
+        variant="outline"
+        size="lg"
+        gap={12}
+        views={{
+          container: {
+            borderColor: 'theme.primary',
+            backgroundColor: 'color.gray.50',
+          },
+          input: {
+            color: 'theme.primary',
+            fontWeight: 'bold',
+          },
+        }}
+      />
+
+      <Horizontal justifyContent="space-between" width="100%">
+        {stepValues.map((step) => (
+          <Text key={step} fontSize={14} color="color.blueGray.500">
+            {step}
+          </Text>
+        ))}
+      </Horizontal>
+
+      <Text fontSize={14} color="color.gray.600">
+        This OTP input will snap to the closest value from:{' '}
+        {stepValues.join(', ')}
+      </Text>
+    </Vertical>
+  );
+};
+
+export const FormikStepValuesOTPInput = () => {
+  // This would be implemented in the Formik examples file
+  return null;
+};
+```
+

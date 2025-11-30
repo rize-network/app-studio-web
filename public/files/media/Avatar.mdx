@@ -1,0 +1,60 @@
+# Avatar
+
+Displays a user's avatar, which can be an image or initials, with customizable size and styles.
+
+### **Import**
+```tsx
+import { Avatar } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Avatar } from '../Avatar';
+
+export const DefaultDemo = () => (
+  <Avatar src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg" />
+);
+```
+
+### **size**
+Optional size of the avatar, predefined in 'Size' type.
+
+- **Type:** `Size`
+- **Default:** `md`
+- **Possible Values:** `xs, sm, md, lg, xl`
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Avatar } from '../Avatar';
+import { Size } from '../Avatar/Avatar.type';
+
+export const SizeDemo = () => {
+  return (
+    <Vertical gap={10}>
+      {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
+        <Avatar
+          key={index}
+          src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg"
+          size={size as Size}
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **fallback**
+URL or path for the fallback image if the source fails to load.
+
+- **Type:** `string`
+- **Default:** `IM`
+
+```tsx
+import React from 'react';
+import { Avatar } from '../Avatar';
+
+export const FallbackDemo = () => <Avatar src="" fallback="ML" />;
+```
+

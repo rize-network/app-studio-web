@@ -1,0 +1,36 @@
+{
+  "componentDescription": "Defines the main functional component responsible for rendering a status indicator.",
+  "label": {
+    "type": "string",
+    "typeValues": [],
+    "description": "An optional text label to display alongside the status indicator.",
+    "defaultValue": "undefined"
+  },
+  "status": {
+    "type": "Status",
+    "typeValues": [
+      "default",
+      "info",
+      "success",
+      "warning",
+      "error"
+    ],
+    "description": "The current status of the indicator, determining its visual appearance (e.g., 'success', 'warning', 'error').",
+    "defaultValue": "default"
+  },
+  "views": {
+    "type": "StatusIndicatorStyles",
+    "typeValues": [],
+    "description": "Custom styles to apply to different parts of the StatusIndicator component, allowing for theme overrides.",
+    "defaultValue": "undefined"
+  },
+  "themeMode": {
+    "type": "'light' | 'dark'",
+    "typeValues": [
+      "light",
+      "dark"
+    ],
+    "description": "Specifies the visual theme mode for the component, either 'light' or 'dark'.",
+    "defaultValue": "undefined"
+  }
+}

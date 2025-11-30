@@ -1,0 +1,75 @@
+{
+  "componentDescription": "A tooltip component that displays supplementary information on hover or focus for any element.",
+  "content": {
+    "type": "React.ReactNode",
+    "typeValues": "N/A",
+    "description": "Defines the content to be displayed inside the tooltip when it is open.",
+    "defaultValue": "N/A"
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": "N/A",
+    "description": "The element that triggers the tooltip to appear or disappear.",
+    "defaultValue": "N/A"
+  },
+  "position": {
+    "type": "Position",
+    "typeValues": "'top' | 'right' | 'bottom' | 'left'",
+    "description": "Specifies the preferred position of the tooltip relative to its trigger, e.g., 'top', 'bottom', 'left', 'right'.",
+    "defaultValue": "'top'"
+  },
+  "align": {
+    "type": "Alignment",
+    "typeValues": "'start' | 'center' | 'end'",
+    "description": "Sets the alignment of the tooltip content along its primary axis, such as 'start', 'center', or 'end'.",
+    "defaultValue": "'center'"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": "'sm' | 'md' | 'lg'",
+    "description": "Determines the visual size of the tooltip component, e.g., 'small', 'medium', 'large'.",
+    "defaultValue": "'md'"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": "'default' | 'light' | 'dark'",
+    "description": "Applies a specific visual style or variant to the tooltip, such as 'default' or 'error'.",
+    "defaultValue": "'default'"
+  },
+  "openDelay": {
+    "type": "number",
+    "typeValues": "N/A",
+    "description": "The delay in milliseconds before the tooltip appears after the trigger interaction (e.g., hover, focus) begins.",
+    "defaultValue": "N/A"
+  },
+  "closeDelay": {
+    "type": "number",
+    "typeValues": "N/A",
+    "description": "The delay in milliseconds before the tooltip hides after the trigger interaction ends.",
+    "defaultValue": "N/A"
+  },
+  "showArrow": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "A boolean indicating whether an arrow pointing to the trigger should be displayed on the tooltip content.",
+    "defaultValue": "true"
+  },
+  "defaultOpen": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "defaultOpen?: boolean;",
+    "defaultValue": "N/A"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "If true, prevents the tooltip from being opened or interacted with.",
+    "defaultValue": "N/A"
+  },
+  "views": {
+    "type": "TooltipStyles",
+    "typeValues": "N/A",
+    "description": "Allows custom styling to be applied to different parts of the tooltip component based on its internal structure.",
+    "defaultValue": "N/A"
+  }
+}

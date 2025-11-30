@@ -10,7 +10,7 @@ A flexible calendar component with day, week, and month views for displaying and
 ### **Default**
 ```tsx
 import React from 'react';
-import { Calendar } from '../Calendar';
+import { Calendar } from '@app-studio/web';
 
 export const DefaultCalendar = () => {
   return <Calendar />;
@@ -22,8 +22,8 @@ Display events in the calendar with customizable event objects. Hover over event
 
 ```tsx
 import React from 'react';
-import { Calendar } from '../Calendar';
-import { CalendarEvent } from '../Calendar/Calendar.props';
+import { Calendar } from '@app-studio/web';
+import { CalendarEvent } from '@app-studio/web';
 
 export const CalendarWithEvents = () => {
   const events: CalendarEvent[] = [
@@ -57,7 +57,7 @@ Show a single day with all events for that day.
 
 ```tsx
 import React from 'react';
-import { Calendar } from '../Calendar';
+import { Calendar } from '@app-studio/web';
 
 export const DayViewCalendar = () => {
   return <Calendar initialView="day" />;
@@ -69,7 +69,7 @@ Display a full week with events across all days.
 
 ```tsx
 import React from 'react';
-import { Calendar } from '../Calendar';
+import { Calendar } from '@app-studio/web';
 
 export const WeekViewCalendar = () => {
   return <Calendar initialView="week" />;
@@ -81,7 +81,7 @@ Show the entire month with events distributed across days.
 
 ```tsx
 import React from 'react';
-import { Calendar } from '../Calendar';
+import { Calendar } from '@app-studio/web';
 
 export const MonthViewCalendar = () => {
   return <Calendar initialView="month" />;
@@ -93,7 +93,7 @@ Configure which day the week starts on (0 = Sunday, 1 = Monday, etc.).
 
 ```tsx
 import React from 'react';
-import { Calendar } from '../Calendar';
+import { Calendar } from '@app-studio/web';
 
 export const WeekStartsOnMonday = () => {
   return <Calendar weekStartsOn={1} />;

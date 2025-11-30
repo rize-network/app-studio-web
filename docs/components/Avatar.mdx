@@ -1,31 +1,34 @@
 # Avatar
 
-Displays a circular avatar with image fallback and custom styling options.
+Displays a user's avatar, which can be an image or initials, with customizable size and styles.
 
 ### **Import**
-  ```tsx
-  import { Avatar } from '@app-studio/web';
-  ```
+```tsx
+import { Avatar } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Avatar } from '../Avatar';
+import { Avatar } from '@app-studio/web';
 
 export const DefaultDemo = () => (
   <Avatar src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg" />
 );
-
 ```
 
 ### **size**
-Optional property to specify the size of the avatar, from predefined Size options.
+Optional size of the avatar, predefined in 'Size' type.
+
+- **Type:** `Size`
+- **Default:** `md`
+- **Possible Values:** `xs, sm, md, lg, xl`
 
 ```tsx
 import React from 'react';
-import { Vertical } from '@app-studio/web';
-import { Avatar } from '../Avatar';
-import { Size } from '../Avatar/Avatar.type';
+import { Vertical } from 'app-studio';
+import { Avatar } from '@app-studio/web';
+import { Size } from '@app-studio/web';
 
 export const SizeDemo = () => {
   return (
@@ -40,46 +43,18 @@ export const SizeDemo = () => {
     </Vertical>
   );
 };
-
 ```
 
 ### **fallback**
-Optional string for an image URL to use if the primary 'src' fails to load.
+URL or path for the fallback image if the source fails to load.
+
+- **Type:** `string`
+- **Default:** `IM`
 
 ```tsx
 import React from 'react';
-import { Avatar } from '../Avatar';
+import { Avatar } from '@app-studio/web';
 
 export const FallbackDemo = () => <Avatar src="" fallback="ML" />;
-
-```
-
-### **styles**
-Optional object to apply custom styles to the avatar component.
-
-```tsx
-import React from 'react';
-import { Avatar } from '../Avatar';
-
-export const StylesDemo = () => {
-  return (
-    <Avatar
-      src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg"
-      views={{
-        container: {
-          boxShadow: 'none', // Add shadow effect
-        },
-        fallback: {
-          color: 'theme.secondary',
-        },
-        image: {
-          objectFit: 'fill',
-        },
-      }}
-      onClick={() => console.log('hello')}
-    />
-  );
-};
-
 ```
 

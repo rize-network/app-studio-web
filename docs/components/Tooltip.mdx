@@ -1,191 +1,31 @@
 # Tooltip
 
-A component that displays informative text when users hover over, focus on, or tap an element.
+A tooltip component that displays supplementary information on hover or focus for any element.
 
 ### **Import**
-  ```tsx
-  import { Tooltip } from '@app-studio/web';
-  ```
+```tsx
+import { Tooltip } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Tooltip } from '../Tooltip';
-import { Button } from '../../Button/Button';
+import { Tooltip } from '@app-studio/web';
+import { Button } from '@app-studio/web';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
 
 export const DefaultTooltip = () => {
   return (
-    <Tooltip content="This is a tooltip">
-      <Button>Hover Me</Button>
-    </Tooltip>
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <Text marginBottom={10}>
+        <Tooltip content="This is a tooltip">
+          <Button>Hover Me</Button>
+        </Tooltip>
+        Default Tooltip
+      </Text>
+    </Vertical>
   );
 };
 ```
 
-### **Positions**
-Tooltips can be positioned relative to the trigger element.
-
-```tsx
-import React from 'react';
-import { Tooltip } from '../Tooltip';
-import { Button } from '../../Button/Button';
-import { Horizontal } from '@app-studio/web';
-
-export const TooltipPositionsExample = () => {
-  return (
-    <Horizontal gap={20}>
-      <Tooltip content="Tooltip on top" position="top">
-        <Button>Top</Button>
-      </Tooltip>
-      
-      <Tooltip content="Tooltip on right" position="right">
-        <Button>Right</Button>
-      </Tooltip>
-      
-      <Tooltip content="Tooltip on bottom" position="bottom">
-        <Button>Bottom</Button>
-      </Tooltip>
-      
-      <Tooltip content="Tooltip on left" position="left">
-        <Button>Left</Button>
-      </Tooltip>
-    </Horizontal>
-  );
-};
-```
-
-### **Variants**
-Different visual styles for tooltips.
-
-```tsx
-import React from 'react';
-import { Tooltip } from '../Tooltip';
-import { Button } from '../../Button/Button';
-import { Horizontal } from '@app-studio/web';
-
-export const TooltipVariantsExample = () => {
-  return (
-    <Horizontal gap={20}>
-      <Tooltip content="Default tooltip style" variant="default">
-        <Button>Default</Button>
-      </Tooltip>
-      
-      <Tooltip content="Light tooltip style" variant="light">
-        <Button>Light</Button>
-      </Tooltip>
-      
-      <Tooltip content="Dark tooltip style" variant="dark">
-        <Button>Dark</Button>
-      </Tooltip>
-    </Horizontal>
-  );
-};
-```
-
-### **Sizes**
-Tooltips come in different sizes.
-
-```tsx
-import React from 'react';
-import { Tooltip } from '../Tooltip';
-import { Button } from '../../Button/Button';
-import { Horizontal } from '@app-studio/web';
-
-export const TooltipSizesExample = () => {
-  return (
-    <Horizontal gap={20}>
-      <Tooltip content="Small tooltip" size="sm">
-        <Button>Small</Button>
-      </Tooltip>
-      
-      <Tooltip content="Medium tooltip" size="md">
-        <Button>Medium</Button>
-      </Tooltip>
-      
-      <Tooltip content="Large tooltip with more content" size="lg">
-        <Button>Large</Button>
-      </Tooltip>
-    </Horizontal>
-  );
-};
-```
-
-### **Custom Content**
-Tooltips can contain rich content, not just text.
-
-```tsx
-import React from 'react';
-import { Tooltip } from '../Tooltip';
-import { Button } from '../../Button/Button';
-import { Text } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
-
-export const CustomContentTooltip = () => {
-  return (
-    <Tooltip
-      content={
-        <Vertical padding={5}>
-          <Text fontWeight="bold">Custom Tooltip</Text>
-          <Text fontSize="12px">With rich content and styling</Text>
-        </Vertical>
-      }
-      views={{
-        content: {
-          backgroundColor: 'theme.primary',
-          color: 'color.white',
-          borderRadius: '8px',
-        },
-        arrow: {
-          backgroundColor: 'theme.primary',
-        },
-      }}
-    >
-      <Button variant="outline">Hover for Custom Tooltip</Button>
-    </Tooltip>
-  );
-};
-```
-
-### **Compound Component Pattern**
-For more control, you can use the compound component pattern.
-
-```tsx
-import React from 'react';
-import { Tooltip } from '../Tooltip';
-import { Button } from '../../Button/Button';
-import { Text } from '@app-studio/web';
-
-export const CompoundTooltip = () => {
-  return (
-    <Tooltip>
-      <Tooltip.Trigger>
-        <Button>Hover Me</Button>
-      </Tooltip.Trigger>
-      <Tooltip.Content>
-        <Text>This is a tooltip using compound components</Text>
-      </Tooltip.Content>
-    </Tooltip>
-  );
-};
-```
-
-### **Integration with Other Components**
-Tooltips can be easily integrated with other components.
-
-```tsx
-import React from 'react';
-import { Tooltip } from '../Tooltip';
-import { Button } from '../../Button/Button';
-import { Icon } from '../../Icon/Icon';
-
-export const IntegratedTooltip = () => {
-  return (
-    <Button>
-      Save
-      <Tooltip content="Save your changes">
-        <Icon name="info-circle" marginLeft={5} />
-      </Tooltip>
-    </Button>
-  );
-};
-```

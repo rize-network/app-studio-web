@@ -1,45 +1,59 @@
 {
-  "componentDescription": "Displays a visual badge for labeling or highlighting items",
+  "componentDescription": "Renders a badge with various styles and states according to the design guidelines.",
   "content": {
-    "type": ["string", "number"],
-    "typeValues": "",
-    "description": "The content displayed in the Badge component.",
-    "defaultValue": ""
+    "type": "string | number",
+    "typeValues": null,
+    "description": "The content to be displayed within the badge.",
+    "defaultValue": null
   },
   "variant": {
-    "type": ["Variant"],
-    "typeValues": ["'filled'", "'outline'", "'link'", "'ghost'"],
-    "description": "Determines the Badge's style variant.",
-    "defaultValue": "'filled'"
-  },
-  "colorScheme": {
-    "type": ["string"],
-    "typeValues": "",
-    "description": "Specifies a custom color scheme for the Badge.",
-    "defaultValue": "'theme.primary'"
+    "type": "Variant",
+    "typeValues": [
+      "filled",
+      "outline",
+      "link",
+      "ghost"
+    ],
+    "description": "Determines the styling variants a UI component can have, which could include filled, outlined, or ghost styles among others.",
+    "defaultValue": "filled"
   },
   "position": {
-    "type": ["Position"],
-    "typeValues": "",
-    "description": "Defines the position of the Badge relative to its container.",
-    "defaultValue": ""
+    "type": "Position",
+    "typeValues": [
+      "top-right",
+      "top-left",
+      "bottom-right",
+      "bottom-left"
+    ],
+    "description": "Lists possible positions for UI elements that can be placed in one of the corners of a container, like notification badges.",
+    "defaultValue": null
   },
   "size": {
-    "type": ["Size"],
-    "typeValues": ["'sm'", "'md'", "'lg'"],
-    "description": "Determines the size of the Badge.",
-    "defaultValue": "'md'"
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Specifies available sizes for UI elements, catering to a range of scalability from extra small to extra large.",
+    "defaultValue": "md"
   },
   "shape": {
-    "type": ["Shape"],
-    "typeValues": ["'circle'", "'square'", "'pillShaped'"],
-    "description": "Specifies the shape of the Badge.",
-    "defaultValue": "'pillShaped'"
+    "type": "Shape",
+    "typeValues": [
+      "sharp",
+      "rounded",
+      "pillShaped"
+    ],
+    "description": "Defines possible values for the shape of a UI component such as buttons or badges.",
+    "defaultValue": "pillShaped"
   },
-  "styles": {
-    "type": ["BadgeStyles"],
-    "typeValues": "",
-    "description": "Custom styling that overrides default views.",
-    "defaultValue": ""
+  "views": {
+    "type": "BadgeStyles",
+    "typeValues": null,
+    "description": "Describes the style properties available for badge components, where container styles the outer part and text styles the inner content.",
+    "defaultValue": null
   }
 }

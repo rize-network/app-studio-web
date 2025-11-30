@@ -1,0 +1,23 @@
+# ColorPicker
+
+A component for selecting colors, providing predefined options, custom input, and recent color history.
+
+### **Import**
+```tsx
+import { ColorPicker } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { ColorPicker } from '../ColorPicker';
+
+export const DefaultColorPicker = () => (
+  <ColorPicker
+    label="Choose a color"
+    placeholder="Select a color"
+    onChange={(color) => console.log('Selected color:', color)}
+  />
+);
+```
+

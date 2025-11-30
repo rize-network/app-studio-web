@@ -41,6 +41,11 @@
     "strict": true,
     "noImplicitAny": false,
   },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
   "noEmit": false,
-  "include": ["./src", "./src/types/*.d.ts"]
+  "include": ["./src", "./src/types/*.d.ts", "./bot"]
 }

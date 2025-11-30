@@ -1,16 +1,16 @@
 # ToggleGroup
 
-Enables selection from a group of toggle switches.
+A group of toggle buttons allowing users to select one or more options.
 
 ### **Import**
-  ```tsx
-  import { ToggleGroup } from '@app-studio/web';
-  ```
+```tsx
+import { ToggleGroup } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { ToggleGroup } from '../ToggleGroup';
+import { ToggleGroup } from '@app-studio/web';
 
 export const DefaultDemo = () => {
   const items = [
@@ -20,25 +20,28 @@ export const DefaultDemo = () => {
   ];
   return <ToggleGroup items={items} />;
 };
-
 ```
 
 ### **shape**
 Optional shape prop to define the shape of toggle elements.
 
+- **Type:** `string`
+- **Default:** `rounded`
+- **Possible Values:** `sharp, rounded, pillShaped`
+
 ```tsx
 import React from 'react';
-import { DustBinIcon } from '../../Icon';
-import { ToggleGroup } from '../ToggleGroup';
-import { Shape } from '../ToggleGroup/ToggleGroup.type';
-import { Horizontal } from '@app-studio/web';
-import { View } from '@app-studio/web';
+import { DustBinIcon } from '@app-studio/web';
+import { ToggleGroup } from '@app-studio/web';
+import { Shape } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
 
 export const ShapeDemo = () => {
   const items = [
     {
       id: 'item',
-      value: <DustBinIcon size={18} />,
+      value: <DustBinIcon widthHeight={18} />,
       isActive: true,
     },
   ];
@@ -52,16 +55,19 @@ export const ShapeDemo = () => {
     </Horizontal>
   );
 };
-
 ```
 
 ### **items**
 Mandatory array of items defining each toggle in the group.
 
+- **Type:** `array`
+- **Default:** `undefined`
+- **Possible Values:** `ToggleItem[]`
+
 ```tsx
 import React from 'react';
-import { ToggleGroup } from '../ToggleGroup';
-import { Text } from '@app-studio/web';
+import { ToggleGroup } from '@app-studio/web';
+import { Text } from 'app-studio';
 
 export const ItemsDemo = () => {
   const items = [
@@ -71,18 +77,21 @@ export const ItemsDemo = () => {
   ];
   return <ToggleGroup items={items} />;
 };
-
 ```
 
 ### **variant**
 Optional variant prop to specify the visual style of the toggle group.
 
+- **Type:** `string`
+- **Default:** `ghost`
+- **Possible Values:** `outline, link, ghost`
+
 ```tsx
 import React from 'react';
-import { Text } from '@app-studio/web';
-import { ToggleGroup } from '../ToggleGroup';
-import { Variant } from '../ToggleGroup/ToggleGroup.type';
-import { Vertical } from '@app-studio/web';
+import { Text } from 'app-studio';
+import { ToggleGroup } from '@app-studio/web';
+import { Variant } from '@app-studio/web';
+import { Vertical } from 'app-studio';
 
 export const VariantDemo = () => {
   const items = [
@@ -98,49 +107,20 @@ export const VariantDemo = () => {
     </Vertical>
   );
 };
-
-```
-
-### **colorScheme**
-Optional colorScheme prop for theming the toggle group.
-
-```tsx
-import React from 'react';
-import { ToggleGroup } from '../ToggleGroup';
-import { Vertical } from '@app-studio/web';
-import { Text } from '@app-studio/web';
-
-export const ColorSchemeDemo = () => {
-  const items = [
-    { id: 'B', value: <Text>B</Text> },
-    { id: 'C', value: <Text>C</Text>, isActive: true },
-    { id: 'D', value: <Text>D</Text>, isDisabled: true },
-  ];
-  return (
-    <Vertical gap={10}>
-      {[
-        'theme.primary',
-        'theme.secondary',
-        'theme.warning',
-        'theme.success',
-        'theme.error',
-      ].map((color, index) => (
-        <ToggleGroup key={index} items={items} colorScheme={color} />
-      ))}
-    </Vertical>
-  );
-};
-
 ```
 
 ### **onToggleChange**
 Optional callback function that fires when the active toggle changes, providing the IDs of active toggles.
 
+- **Type:** `function`
+- **Default:** `undefined`
+- **Possible Values:** `(activeIds: string[]) => void`
+
 ```tsx
 import React, { useState } from 'react';
-import { ToggleGroup } from '../ToggleGroup';
-import { Text } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { ToggleGroup } from '@app-studio/web';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
 
 export const OnToggleChangeDemo = () => {
   const [newItems, setNewItems] = useState<any>([]);
@@ -160,6 +140,5 @@ export const OnToggleChangeDemo = () => {
     </Vertical>
   );
 };
-
 ```
 

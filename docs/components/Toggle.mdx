@@ -1,32 +1,35 @@
 # Toggle
 
-A user-interface element for toggling between on/off states.
+A versatile control allowing users to switch between two states, enabling or disabling features.
 
 ### **Import**
-  ```tsx
-  import { Toggle } from '@app-studio/web';
-  ```
+```tsx
+import { Toggle } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Toggle } from '../Toggle';
+import { Toggle } from '@app-studio/web';
 
 export const DefaultDemo = () => {
   return <Toggle>Default</Toggle>;
 };
-
 ```
 
 ### **shape**
-Optional property to determine the shape of the toggle component.
+Optional 'shape' property to determine the shape of the toggle component.
+
+- **Type:** `string`
+- **Default:** `rounded`
+- **Possible Values:** `sharp, rounded, pillShaped`
 
 ```tsx
 import React from 'react';
-import { Horizontal } from '@app-studio/web';
-import { Toggle } from '../Toggle';
-import { Shape } from '../Toggle/Toggle.type';
-import { View } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+import { Toggle } from '@app-studio/web';
+import { Shape } from '@app-studio/web';
+import { View } from 'app-studio';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
     {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
@@ -36,15 +39,18 @@ export const ShapeDemo = () => (
     ))}
   </Horizontal>
 );
-
 ```
 
 ### **isToggled**
 Optional boolean to define the initial toggle state.
 
+- **Type:** `boolean`
+- **Default:** `undefined`
+- **Possible Values:** `true, false`
+
 ```tsx
 import React from 'react';
-import { Toggle } from '../Toggle';
+import { Toggle } from '@app-studio/web';
 
 export const IsToggledDemo = () => {
   return (
@@ -53,30 +59,36 @@ export const IsToggledDemo = () => {
     </Toggle>
   );
 };
-
 ```
 
 ### **isDisabled**
 Optional boolean to set the toggle component as disabled or not.
 
+- **Type:** `boolean`
+- **Default:** `undefined`
+- **Possible Values:** `true, false`
+
 ```tsx
 import React from 'react';
-import { Toggle } from '../Toggle';
+import { Toggle } from '@app-studio/web';
 
 export const IsDisabledDemo = () => {
   return <Toggle isDisabled>IsDisabled</Toggle>;
 };
-
 ```
 
 ### **variant**
-Optional property to style the toggle component with predefined sets of visual types.
+Optional 'variant' to style the toggle component with predefined sets of visual types.
+
+- **Type:** `string`
+- **Default:** `ghost`
+- **Possible Values:** `outline, link, ghost`
 
 ```tsx
 import React from 'react';
-import { Toggle } from '../Toggle';
-import { Vertical } from '@app-studio/web';
-import { Variant } from '../Toggle/Toggle.type';
+import { Toggle } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+import { Variant } from '@app-studio/web';
 
 export const VariantDemo = () => (
   <Vertical gap={15}>
@@ -87,42 +99,19 @@ export const VariantDemo = () => (
     ))}
   </Vertical>
 );
-
-```
-
-### **colorScheme**
-Optional string to set the color scheme for the toggle component's appearance.
-
-```tsx
-import React from 'react';
-import { Toggle } from '../Toggle';
-import { Horizontal } from '@app-studio/web';
-
-export const ColorSchemeDemo = () => (
-  <Horizontal gap={10}>
-    {[
-      'theme.primary',
-      'theme.secondary',
-      'theme.warning',
-      'theme.success',
-      'theme.error',
-    ].map((color, index) => (
-      <Toggle key={index} colorScheme={color}>
-        {color}
-      </Toggle>
-    ))}
-  </Horizontal>
-);
-
 ```
 
 ### **onToggle**
 Optional function that triggers when the toggle state changes, receives the new state as an argument.
 
+- **Type:** `(isToggled: boolean) => void`
+- **Default:** `undefined`
+- **Possible Values:** `N/A`
+
 ```tsx
 import React from 'react';
 import { useState } from 'react';
-import { Toggle } from '../Toggle';
+import { Toggle } from '@app-studio/web';
 
 export const OnToggleDemo = () => {
   const [isToggle, setIsToggled] = useState(false);
@@ -136,6 +125,5 @@ export const OnToggleDemo = () => {
     </Toggle>
   );
 };
-
 ```
 

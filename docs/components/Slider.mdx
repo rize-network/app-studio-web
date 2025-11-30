@@ -1,18 +1,19 @@
 # Slider
 
-A component that allows users to select a value from a range by moving a handle.
+The Slider component allows users to select a single value from a predefined range by dragging a thumb.
 
 ### **Import**
-  ```tsx
-  import { Slider } from '@app-studio/web';
-  ```
+```tsx
+import { Slider } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React, { useState } from 'react';
-import { Slider } from '../Slider';
+import { Vertical } from 'app-studio';
+import { Slider } from '@app-studio/web';
 
-export const DefaultSlider = () => {
+export const DefaultDemo = () => {
   const [value, setValue] = useState(50);
 
   const handleChange = (newValue: number) => {
@@ -20,213 +21,126 @@ export const DefaultSlider = () => {
   };
 
   return (
-    <Slider
-      label="Default Slider"
-      value={value}
-      onChange={handleChange}
-      showValue
-      helperText="Drag the slider to change the value"
-    />
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <Slider
+        label="Default Slider"
+        value={value}
+        onChange={handleChange}
+        showValue
+        helperText="Drag the slider to change the value"
+      />
+    </Vertical>
   );
 };
 ```
 
-### **Range**
-Customize the min, max, and step values.
+### **stepValues**
+An optional array of specific values the slider thumb should snap to.
+
+- **Type:** `number[]`
+- **Possible Values:** ``
 
 ```tsx
 import React, { useState } from 'react';
-import { Slider } from '../Slider';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Text } from 'app-studio';
+import { Slider } from '@app-studio/web';
 
-export const RangeSlider = () => {
+export const StepValuesDemo = () => {
   const [value, setValue] = useState(25);
 
-  return (
-    <Slider
-      label="Custom Range"
-      value={value}
-      onChange={setValue}
-      min={0}
-      max={200}
-      step={5}
-      showValue
-      helperText="Range from 0 to 200 with steps of 5"
-    />
-  );
-};
-```
-
-### **Step Values**
-Use specific step values instead of a continuous range.
-
-```tsx
-import React, { useState } from 'react';
-import { Slider } from '../Slider';
-
-export const StepValuesSlider = () => {
-  const [value, setValue] = useState(40);
-  const stepValues = [0, 20, 40, 60, 80, 100];
+  // Define specific values that the slider can take
+  const stepValues = [0, 25, 50, 75, 100];
 
   return (
-    <Slider
-      label="Step Values Slider"
-      value={value}
-      onChange={setValue}
-      min={0}
-      max={100}
-      stepValues={stepValues}
-      showValue
-      helperText="This slider only allows specific values"
-    />
-  );
-};
-```
-
-### **Orientation**
-Change the orientation of the slider.
-
-```tsx
-import React, { useState } from 'react';
-import { Slider } from '../Slider';
-import { View } from '@app-studio/web';
-
-export const VerticalSlider = () => {
-  const [value, setValue] = useState(50);
-
-  return (
-    <View height={250}>
+    <Vertical gap={20} width="100%" maxWidth={400}>
       <Slider
-        orientation="vertical"
+        label="Slider with Specific Steps"
         value={value}
         onChange={setValue}
         min={0}
         max={100}
-        step={1}
-        showTooltip
-        ariaLabel="Vertical slider"
+        stepValues={stepValues}
+        showValue
+        helperText="This slider only allows values: 0, 25, 50, 75, 100"
       />
-    </View>
+
+      <Horizontal justifyContent="space-between" width="100%">
+        {stepValues.map((step) => (
+          <Text key={step} fontSize={12} color="color.blueGray.500">
+            {step}
+          </Text>
+        ))}
+      </Horizontal>
+    </Vertical>
   );
 };
-```
 
-### **Tooltip**
-Show a tooltip when dragging the slider.
+export const PricingTiersDemo = () => {
+  const [value, setValue] = useState(19.99);
 
-```tsx
-import React, { useState } from 'react';
-import { Slider } from '../Slider';
-
-export const TooltipSlider = () => {
-  const [value, setValue] = useState(50);
+  // Define pricing tiers
+  const pricingTiers = [9.99, 19.99, 29.99, 49.99, 99.99];
 
   return (
-    <Slider
-      label="Slider with Tooltip"
-      value={value}
-      onChange={setValue}
-      showTooltip
-      helperText="Drag to see the tooltip"
-    />
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <Text fontSize={16} fontWeight={500}>
+        Select Your Pricing Plan
+      </Text>
+
+      <Slider
+        value={value}
+        onChange={setValue}
+        min={0}
+        max={100}
+        stepValues={pricingTiers}
+        showValue
+        views={{
+          track: {
+            backgroundColor: 'color.green.100',
+            height: 8,
+          },
+          progress: {
+            backgroundColor: 'color.green.500',
+          },
+          thumb: {
+            backgroundColor: 'color.white',
+            border: '2px solid color.green.500',
+          },
+          valueLabel: {
+            backgroundColor: 'color.green.500',
+            color: 'color.white',
+            padding: '2px 8px',
+            borderRadius: 4,
+            fontWeight: 600,
+          },
+          stepMarks: {
+            width: 6,
+            height: 6,
+            backgroundColor: 'color.green.700',
+          },
+        }}
+      />
+
+      <Horizontal justifyContent="space-between" width="100%">
+        {pricingTiers.map((price) => (
+          <Text
+            key={price}
+            fontSize={12}
+            color="color.green.700"
+            fontWeight={500}
+          >
+            ${price}
+          </Text>
+        ))}
+      </Horizontal>
+
+      <Text fontSize={14} color="color.blueGray.600" textAlign="center">
+        Selected Plan: ${value}/month
+      </Text>
+    </Vertical>
   );
 };
 ```
 
-### **Disabled**
-Disable the slider to prevent interaction.
-
-```tsx
-import React from 'react';
-import { Slider } from '../Slider';
-
-export const DisabledSlider = () => {
-  return (
-    <Slider
-      label="Disabled Slider"
-      value={30}
-      isDisabled
-      helperText="This slider cannot be interacted with"
-    />
-  );
-};
-```
-
-### **Custom Styling**
-Customize the appearance of the slider.
-
-```tsx
-import React, { useState } from 'react';
-import { Slider } from '../Slider';
-
-export const CustomStyledSlider = () => {
-  const [value, setValue] = useState(60);
-
-  return (
-    <Slider
-      label="Custom Styled Slider"
-      value={value}
-      onChange={setValue}
-      showValue
-      colorScheme="theme.secondary"
-      views={{
-        track: {
-          backgroundColor: 'color.gray.200',
-          height: 8,
-          borderRadius: 4,
-        },
-        progress: {
-          backgroundColor: 'color.blue.500',
-        },
-        thumb: {
-          backgroundColor: 'color.white',
-          border: '2px solid color.blue.500',
-          width: 20,
-          height: 20,
-        },
-        valueLabel: {
-          color: 'color.blue.500',
-          fontWeight: 'bold',
-        },
-      }}
-    />
-  );
-};
-```
-
-### **Formik Integration**
-Use the slider with Formik for form state management.
-
-```tsx
-import React from 'react';
-import { Formik, Form } from 'formik';
-import { FormikSlider } from '../../Formik/Formik.Slider';
-import { Button } from '../../Button/Button';
-
-export const FormikSliderExample = () => {
-  return (
-    <Formik
-      initialValues={{ slider: 50 }}
-      onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
-      }}
-    >
-      {({ handleSubmit }) => (
-        <Form>
-          <FormikSlider
-            name="slider"
-            label="Formik Slider"
-            min={0}
-            max={100}
-            step={1}
-            showValue
-            helperText="This slider is connected to Formik"
-          />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
-            Submit
-          </Button>
-        </Form>
-      )}
-    </Formik>
-  );
-};
-```

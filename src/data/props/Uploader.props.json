@@ -1,0 +1,235 @@
+{
+  "componentDescription": "An interactive component allowing users to select and preview files, with options for validation and progress display.",
+  "accept": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Defines the file types accepted by the uploader (e.g., 'image/*', '.pdf').",
+    "defaultValue": "undefined"
+  },
+  "maxSize": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Specifies the maximum allowed size for uploaded files in bytes.",
+    "defaultValue": "undefined"
+  },
+  "onFileSelect": {
+    "type": "(file: File) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when a single file is successfully selected.",
+    "defaultValue": "undefined"
+  },
+  "onMultipleFileSelect": {
+    "type": "(files: File[]) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when multiple files are successfully selected.",
+    "defaultValue": "undefined"
+  },
+  "validateFile": {
+    "type": "(file: File) => string | null",
+    "typeValues": [],
+    "description": "A function to provide custom validation logic for a selected file, returning an error message or null.",
+    "defaultValue": "undefined"
+  },
+  "onError": {
+    "type": "(error: string) => void",
+    "typeValues": [],
+    "description": "Callback function triggered when an error occurs during file selection or validation.",
+    "defaultValue": "undefined"
+  },
+  "thumbnail": {
+    "type": "string",
+    "typeValues": [],
+    "description": "URL for a default thumbnail image to display.",
+    "defaultValue": "undefined"
+  },
+  "multiple": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the uploader allows selecting multiple files.",
+    "defaultValue": "false"
+  },
+  "containerProps": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Props to be passed to the main container View component of the Uploader.",
+    "defaultValue": "undefined"
+  },
+  "errorMessageProps": {
+    "type": "TextProps",
+    "typeValues": [],
+    "description": "Props to be passed to the Text component displaying error messages.",
+    "defaultValue": "undefined"
+  },
+  "thumbnailContainerProps": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Props to be passed to the container View component specifically for the thumbnail.",
+    "defaultValue": "undefined"
+  },
+  "loadingProps": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Props to be passed to the View component representing a loading state.",
+    "defaultValue": "undefined"
+  },
+  "progressProps": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Props to be passed to the View component displaying upload progress.",
+    "defaultValue": "undefined"
+  },
+  "videoProps": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Props to be passed to the View component used for video previews.",
+    "defaultValue": "undefined"
+  },
+  "imageProps": {
+    "type": "ImageProps",
+    "typeValues": [],
+    "description": "Props to be passed to the Image component used for image previews.",
+    "defaultValue": "undefined"
+  },
+  "iconProps": {
+    "type": "IconProps",
+    "typeValues": [],
+    "description": "Props to be passed to the Icon component displayed within the uploader.",
+    "defaultValue": "undefined"
+  },
+  "textProps": {
+    "type": "TextProps",
+    "typeValues": [],
+    "description": "Props to be passed to the Text component displayed within the uploader.",
+    "defaultValue": "undefined"
+  },
+  "renderVideo": {
+    "type": "(props: any) => React.ReactNode",
+    "typeValues": [],
+    "description": "A render prop function to provide a custom video display component.",
+    "defaultValue": "Renders a <View as=\"video\"> element showing a preview of the selected video file."
+  },
+  "renderText": {
+    "type": "(props: any) => React.ReactNode",
+    "typeValues": [],
+    "description": "A render prop function to provide a custom text display component.",
+    "defaultValue": "Renders a <Text> component with optional top margin."
+  },
+  "renderImage": {
+    "type": "(props: any) => React.ReactNode",
+    "typeValues": [],
+    "description": "A render prop function to provide a custom image display component.",
+    "defaultValue": "Renders an <Image> component showing a preview of the selected image."
+  },
+  "renderError": {
+    "type": "(props: any) => React.ReactNode",
+    "typeValues": [],
+    "description": "A render prop function to provide a custom error message display component.",
+    "defaultValue": "Renders a <Text> component displaying the errorMessage in red, font size 12, with top margin."
+  },
+  "renderFile": {
+    "type": "(props: any) => React.ReactNode",
+    "typeValues": [],
+    "description": "A render prop function to provide a custom file display component.",
+    "defaultValue": "Renders the selected file's name and size in KB using <Text> components, centered vertically."
+  },
+  "renderProgress": {
+    "type": "(props: any) => React.ReactNode",
+    "typeValues": [],
+    "description": "A render prop function to provide a custom progress display component.",
+    "defaultValue": "Renders a horizontal progress bar with percentage text."
+  },
+  "previewUrl": {
+    "type": "string | null",
+    "typeValues": [],
+    "description": "The URL for the file preview, typically an image or video source.",
+    "defaultValue": "undefined"
+  },
+  "thumbnailUrl": {
+    "type": "string | null",
+    "typeValues": [],
+    "description": "The URL for the thumbnail image, used for visual representation of the file.",
+    "defaultValue": "undefined"
+  },
+  "errorMessage": {
+    "type": "string | null",
+    "typeValues": [],
+    "description": "The error message to be displayed to the user.",
+    "defaultValue": "undefined"
+  },
+  "isLoading": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Boolean indicating if the uploader is currently in a loading state.",
+    "defaultValue": "false"
+  },
+  "icon": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "A React node to be rendered as an icon within the uploader.",
+    "defaultValue": "<UploadIcon widthHeight={32} />"
+  },
+  "text": {
+    "type": "string",
+    "typeValues": [],
+    "description": "The primary text content displayed within the uploader component.",
+    "defaultValue": "undefined"
+  },
+  "progress": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The current progress percentage of an ongoing upload.",
+    "defaultValue": "0"
+  },
+  "fileType": {
+    "type": "'video' | 'image' | 'file'",
+    "typeValues": [
+      "video",
+      "image",
+      "file"
+    ],
+    "description": "The detected or specified type of the file being handled ('video', 'image', or 'file').",
+    "defaultValue": "undefined"
+  },
+  "handleClick": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Function to handle click events on the uploader component.",
+    "defaultValue": "undefined"
+  },
+  "views": {
+    "type": "{ container?: ViewProps; view?: ViewProps; image?: ImageProps; horizontal?: ViewProps; text?: ViewProps; }",
+    "typeValues": [],
+    "description": "An object containing specific prop sets for different internal view components.",
+    "defaultValue": "{}"
+  },
+  "views.container": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Props for the main container View within the 'views' object.",
+    "defaultValue": "undefined"
+  },
+  "views.view": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "General ViewProps for a generic view within the 'views' object.",
+    "defaultValue": "undefined"
+  },
+  "views.image": {
+    "type": "ImageProps",
+    "typeValues": [],
+    "description": "ImageProps for an Image component within the 'views' object.",
+    "defaultValue": "undefined"
+  },
+  "views.horizontal": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Props for a horizontal layout View component within the 'views' object.",
+    "defaultValue": "undefined"
+  },
+  "views.text": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Props for a text-related View component within the 'views' object.",
+    "defaultValue": "undefined"
+  }
+}

@@ -1,88 +1,53 @@
 # ContextMenu
 
-A context menu component that appears when right-clicking on an element.
+A floating menu that appears upon user interaction, typically a right-click or long-press.
 
 ### **Import**
-  ```tsx
-  import { ContextMenu } from '@app-studio/web';
-  ```
+```tsx
+import { ContextMenu } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { ContextMenu } from '../ContextMenu';
-import { View, Text } from '@app-studio/web';
-import { CopyIcon, EditIcon, DeleteIcon } from '../../Icon/Icon';
+import { ContextMenu } from '@app-studio/web';
+import { Text, Vertical, View } from 'app-studio';
+import { CopyIcon,
+  EditIcon,
+  DeleteIcon,
+  DownloadIcon,
+  ShareIcon, } from '@app-studio/web';
+import { ContextMenuItem } from '@app-studio/web';
 
 export const DefaultContextMenu = () => {
-  const items = [
+  const handleCopy = () => alert('Copy clicked');
+  const handleEdit = () => alert('Edit clicked');
+  const handleDelete = () => alert('Delete clicked');
+  const handleDownload = () => alert('Download clicked');
+  const handleShare = () => alert('Share clicked');
+
+  const items: ContextMenuItem[] = [
     {
       id: 'copy',
       label: 'Copy',
       icon: <CopyIcon widthHeight={16} />,
-      onClick: () => alert('Copy clicked')
+      onClick: handleCopy,
     },
     {
       id: 'edit',
       label: 'Edit',
       icon: <EditIcon widthHeight={16} />,
-      onClick: () => alert('Edit clicked')
+      onClick: handleEdit,
     },
-    {
-      id: 'divider-1',
-      divider: true
-    },
+    // {
+    //   id: 'divider-1',
+    //   divider: true
+    // },
     {
       id: 'delete',
       label: 'Delete',
       icon: <DeleteIcon widthHeight={16} />,
-      onClick: () => alert('Delete clicked')
-    }
-  ];
-
-  return (
-    <ContextMenu items={items}>
-      <View
-        padding={20}
-        backgroundColor="color.gray.100"
-        borderRadius={8}
-        textAlign="center"
-        cursor="context-menu"
-      >
-        <Text>Right-click here to open the context menu</Text>
-      </View>
-    </ContextMenu>
-  );
-};
-```
-
-### **Submenu**
-Create nested context menus with submenus.
-
-```tsx
-import React from 'react';
-import { ContextMenu } from '../ContextMenu';
-import { View, Text } from '@app-studio/web';
-import { 
-  CopyIcon, 
-  EditIcon, 
-  DownloadIcon, 
-  ShareIcon 
-} from '../../Icon/Icon';
-
-export const SubmenuContextMenu = () => {
-  const items = [
-    {
-      id: 'copy',
-      label: 'Copy',
-      icon: <CopyIcon widthHeight={16} />,
-      onClick: () => alert('Copy clicked')
-    },
-    {
-      id: 'edit',
-      label: 'Edit',
-      icon: <EditIcon widthHeight={16} />,
-      onClick: () => alert('Edit clicked')
+      onClick: handleDelete,
     },
     {
       id: 'more',
@@ -92,128 +57,39 @@ export const SubmenuContextMenu = () => {
           id: 'download',
           label: 'Download',
           icon: <DownloadIcon widthHeight={16} />,
-          onClick: () => alert('Download clicked')
+          onClick: handleDownload,
         },
         {
           id: 'share',
           label: 'Share',
           icon: <ShareIcon widthHeight={16} />,
-          onClick: () => alert('Share clicked')
-        }
-      ]
-    }
-  ];
-
-  return (
-    <ContextMenu items={items}>
-      <View
-        padding={20}
-        backgroundColor="color.gray.100"
-        borderRadius={8}
-        textAlign="center"
-        cursor="context-menu"
-      >
-        <Text>Right-click here to open the context menu with submenu</Text>
-      </View>
-    </ContextMenu>
-  );
-};
-```
-
-### **Variants**
-Different visual styles for the context menu.
-
-```tsx
-import React from 'react';
-import { ContextMenu } from '../ContextMenu';
-import { View, Text } from '@app-studio/web';
-import { CopyIcon, EditIcon } from '../../Icon/Icon';
-
-export const ContextMenuVariants = () => {
-  const items = [
-    {
-      id: 'copy',
-      label: 'Copy',
-      icon: <CopyIcon widthHeight={16} />,
-      onClick: () => alert('Copy clicked')
-    },
-    {
-      id: 'edit',
-      label: 'Edit',
-      icon: <EditIcon widthHeight={16} />,
-      onClick: () => alert('Edit clicked')
-    }
-  ];
-
-  return (
-    <>
-      <ContextMenu items={items} variant="default">
-        <Text>Default Variant</Text>
-      </ContextMenu>
-      
-      <ContextMenu items={items} variant="filled">
-        <Text>Filled Variant</Text>
-      </ContextMenu>
-      
-      <ContextMenu items={items} variant="outline">
-        <Text>Outline Variant</Text>
-      </ContextMenu>
-    </>
-  );
-};
-```
-
-### **Custom Styling**
-Customize the appearance of the context menu.
-
-```tsx
-import React from 'react';
-import { ContextMenu } from '../ContextMenu';
-import { View, Text } from '@app-studio/web';
-import { CopyIcon, EditIcon } from '../../Icon/Icon';
-
-export const CustomContextMenu = () => {
-  const items = [
-    {
-      id: 'copy',
-      label: 'Copy',
-      icon: <CopyIcon widthHeight={16} />,
-      onClick: () => alert('Copy clicked')
-    },
-    {
-      id: 'edit',
-      label: 'Edit',
-      icon: <EditIcon widthHeight={16} />,
-      onClick: () => alert('Edit clicked')
-    }
-  ];
-
-  return (
-    <ContextMenu 
-      items={items}
-      views={{
-        menu: {
-          backgroundColor: 'color.blue',
-          color: 'color.white',
-          borderRadius: '8px',
+          onClick: handleShare,
         },
-        item: {
-          _hover: {
-            backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          }
-        }
-      }}
-    >
-      <View
-        padding={20}
-        backgroundColor="color.blue.100"
-        borderRadius={8}
-        textAlign="center"
-        cursor="context-menu"
-      >
-        <Text>Right-click here for custom styled menu</Text>
-      </View>
-    </ContextMenu>
+      ],
+    },
+    {
+      id: 'disabled',
+      label: 'Disabled Option',
+      disabled: true,
+    },
+  ];
+
+  return (
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <Text marginBottom={10}>Default Context Menu</Text>
+      <ContextMenu items={items}>
+        <View
+          padding={20}
+          backgroundColor="color.gray.100"
+          borderRadius={8}
+          textAlign="center"
+          cursor="context-menu"
+        >
+          <Text>Right-click here to open the context menu</Text>
+        </View>
+      </ContextMenu>
+    </Vertical>
   );
 };
 ```
+

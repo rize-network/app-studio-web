@@ -1,53 +1,39 @@
 {
-  "componentDescription": "Renders a customizable data table with optional footer and caption.",
+  "componentDescription": "Renders a tabular display for presenting structured data with customizable styles.",
   "data": {
-    "type": [
-      "any[]"
-    ],
-    "typeValues": [
-      "array"
-    ],
-    "description": "Array of data objects to be displayed in the table rows.",
-    "defaultValue": []
+    "type": "any[]",
+    "typeValues": "any[]",
+    "description": "An array of data objects to be displayed in the table rows.",
+    "defaultValue": "None"
   },
   "columns": {
-    "type": [
-      "Column[]"
-    ],
-    "typeValues": [
-      "array of objects with at least field and title as string properties"
-    ],
-    "description": "Configurations for each column in the table, including header titles.",
-    "defaultValue": []
+    "type": "Column[]",
+    "typeValues": "Array<{ title: string; field: string; }>",
+    "description": "An array defining the table columns, including title and data field.",
+    "defaultValue": "None"
   },
   "footer": {
-    "type": [
-      "FooterCell[]"
-    ],
-    "typeValues": [
-      "array of objects with at least value as a string and props as an optional object"
-    ],
-    "description": "Optional array of footer cells to add at the bottom of the table.",
-    "defaultValue": "undefined"
+    "type": "FooterCell[]",
+    "typeValues": "Array<{ value: string; props?: ViewProps; }>",
+    "description": "An optional array of footer cells to display at the bottom of the table.",
+    "defaultValue": "None"
   },
   "caption": {
-    "type": [
-      "React.ReactNode"
-    ],
-    "typeValues": [
-      "React node"
-    ],
-    "description": "Optional table caption as a React node.",
-    "defaultValue": "undefined"
+    "type": "React.ReactNode",
+    "typeValues": "React.ReactNode",
+    "description": "An optional caption for the table, providing a brief title or explanation.",
+    "defaultValue": "None"
   },
-  "styles": {
-    "type": [
-      "TableViewStyles"
-    ],
-    "typeValues": [
-      "object with optional style properties for table, thead, tbody, tr, th, td"
-    ],
-    "description": "Optional custom styles to apply to the table and its elements.",
-    "defaultValue": "undefined"
+  "views": {
+    "type": "TableViewStyles",
+    "typeValues": "{ table?: ViewProps; thead?: ViewProps; tfoot?: ViewProps; tbody?: ViewProps; tr?: ViewProps; td?: ViewProps; th?: ViewProps; caption?: ViewProps; }",
+    "description": "Custom styles to apply to different parts of the table structure, overriding default styles.",
+    "defaultValue": "None"
+  },
+  "themeMode": {
+    "type": "ViewProps['themeMode']",
+    "typeValues": "ViewProps['themeMode']",
+    "description": "The theme mode (e.g., light or dark) to apply to the component, inherited from 'app-studio' ViewProps.",
+    "defaultValue": "None"
   }
 }

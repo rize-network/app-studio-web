@@ -14,10 +14,10 @@ A basic form with Formik integration.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikTextField } from '../Formik.TextField';
-import { FormikCheckbox } from '../Formik.Checkbox';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikTextField } from '@app-studio/web';
+import { FormikCheckbox } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 import { Vertical } from '@app-studio/web';
 
 export const BasicFormExample = () => {
@@ -90,9 +90,9 @@ Text input field integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikTextField } from '../Formik.TextField';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikTextField } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikTextFieldExample = () => {
   return (
@@ -128,9 +128,9 @@ Multi-line text input integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikTextArea } from '../Formik.TextArea';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikTextArea } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikTextAreaExample = () => {
   return (
@@ -166,9 +166,9 @@ Checkbox input integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikCheckbox } from '../Formik.Checkbox';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikCheckbox } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikCheckboxExample = () => {
   return (
@@ -202,8 +202,8 @@ Chat input with file upload, mentions, and auto-completion integrated with Formi
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikChatInput } from '../Formik.ChatInput';
+import { FormikForm } from '@app-studio/web';
+import { FormikChatInput } from '@app-studio/web';
 import { Button, Vertical, Text } from '@app-studio/web';
 
 export const FormikChatInputExample = () => {
@@ -289,9 +289,9 @@ Color picker input integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikColorInput } from '../Formik.ColorInput';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikColorInput } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikColorInputExample = () => {
   return (
@@ -349,9 +349,9 @@ Select dropdown integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikSelect } from '../Formik.Select';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikSelect } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikSelectExample = () => {
   const options = [
@@ -392,9 +392,9 @@ Toggle switch integrated with Formik.
 ```tsx
 import React from 'react';
 import { Formik } from 'formik';
-import { FormikForm } from '../Formik.Form';
-import { FormikSwitch } from '../Formik.Switch';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikSwitch } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikSwitchExample = () => {
   return (
@@ -425,9 +425,9 @@ Date picker integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikDatePicker } from '../Formik.DatePicker';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikDatePicker } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikDatePickerExample = () => {
   return (
@@ -462,9 +462,9 @@ Country selection dropdown integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikCountryPicker } from '../Formik.CountryPicker';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikCountryPicker } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikCountryPickerExample = () => {
   return (
@@ -499,9 +499,9 @@ Password input with show/hide toggle integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikPassword } from '../Formik.Password';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikPassword } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikPasswordExample = () => {
   return (
@@ -538,9 +538,9 @@ Combobox with search functionality integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikComboBox } from '../Formik.ComboBox';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikComboBox } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikComboBoxExample = () => {
   const items = [
@@ -583,9 +583,9 @@ Slider component integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikSlider } from '../Formik.Slider';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/web';
+import { FormikSlider } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 
 export const FormikSliderExample = () => {
   return (

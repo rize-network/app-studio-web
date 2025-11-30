@@ -1,536 +1,278 @@
 # Title
 
-A component for rendering animated and highlighted titles in hero sections.
+Displays customizable titles with highlighting, responsive sizing, and animation effects.
 
-## Import
-
-```jsx
-import { Title } from "@app-studio/web";
+### **Import**
+```tsx
+import { Title } from '@app-studio/web';
 ```
 
-## Default
+### **Default**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Title } from '@app-studio/web';
 
-```jsx
-<Title>Simple Hero Title</Title>
+/**
+ * Default Title examples showing different sizes
+ */
+export const DefaultTitle = () => {
+  return (
+    <Vertical gap={32}>
+      <Title size="xs">Extra Small Title (xs)</Title>
+      <Title size="sm">Small Title (sm)</Title>
+      <Title size="md">Medium Title (md)</Title>
+      <Title size="lg">Large Title (lg)</Title>
+      <Title size="xl">Extra Large Title</Title>
+    </Vertical>
+  );
+};
 ```
 
-## Sizes
+### **animationLoop**
+Determines how many times the component's animation should repeat, or if it should loop infinitely.
 
-The `size` prop changes the title size. It has a type `TitleSize` with default value `"xl"`.
+- **Type:** `number | 'infinite'`
+- **Default:** `1`
 
-```jsx
-<Vertical gap={32}>
-  <Title size="xs">Extra Small Title</Title>
-  <Title size="sm">Small Title</Title>
-  <Title size="md">Medium Title</Title>
-  <Title size="lg">Large Title</Title>
-  <Title size="xl">Extra Large Title</Title>
-</Vertical>
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Title } from '@app-studio/web';
+
+/**
+ * Examples of Title with different animation loop controls
+ */
+export const AnimationLoopTitle = () => {
+  return (
+    <Vertical gap={48}>
+      {/* Title with single play animation (default) */}
+      <Title
+        animate={{
+          from: { opacity: 0, transform: 'translateY(-20px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+          duration: '1s',
+          timingFunction: 'ease-out',
+        }}
+        animationLoop={1}
+        highlightText="Once"
+        highlightStyle="background"
+        highlightColor="theme.primary"
+      >
+        Animation Plays Once (Default)
+      </Title>
+
+      {/* Title with animation that plays 3 times */}
+      <Title
+        animate={{
+          from: { transform: 'scale(0.8)' },
+          to: { transform: 'scale(1)' },
+          duration: '0.8s',
+          timingFunction: 'ease-in-out',
+        }}
+        animationLoop={3}
+        highlightText="Three"
+        highlightStyle="gradient"
+        highlightColor="theme.primary"
+        highlightSecondaryColor="theme.secondary"
+      >
+        Animation Plays Three Times
+      </Title>
+
+      {/* Title with infinite animation loop */}
+      <Title
+        animate={{
+          from: { transform: 'translateX(-10px)' },
+          to: { transform: 'translateX(10px)' },
+          duration: '2s',
+          timingFunction: 'ease-in-out',
+          direction: 'alternate',
+        }}
+        animationLoop="infinite"
+        highlightText="Infinite"
+        highlightStyle="glow"
+        highlightColor="theme.accent"
+      >
+        Animation Loops Infinitely
+      </Title>
+
+      {/* Highlight animation with different loop control */}
+      <Title
+        highlightAnimate={{
+          from: { transform: 'rotate(-5deg)' },
+          to: { transform: 'rotate(5deg)' },
+          duration: '1s',
+          timingFunction: 'ease-in-out',
+          direction: 'alternate',
+        }}
+        highlightAnimationLoop="infinite"
+        highlightText="Wiggling"
+        highlightStyle="outline"
+        highlightColor="theme.warning"
+      >
+        Title with Wiggling Highlight
+      </Title>
+
+      {/* Both title and highlight with different loop controls */}
+      <Title
+        animate={{
+          from: { opacity: 0.5 },
+          to: { opacity: 1 },
+          duration: '2s',
+          timingFunction: 'ease-in-out',
+          direction: 'alternate',
+        }}
+        animationLoop="infinite"
+        highlightAnimate={{
+          from: { backgroundColor: 'theme.primary' },
+          to: { backgroundColor: 'theme.secondary' },
+          duration: '1.5s',
+          timingFunction: 'ease-in-out',
+          direction: 'alternate',
+        }}
+        highlightAnimationLoop="infinite"
+        highlightText="Pulsing"
+        highlightStyle="background"
+      >
+        Title with Pulsing Background and Highlight
+      </Title>
+
+      {/* Bounce animation with limited loops */}
+      <Title
+        animate={{
+          from: { transform: 'translateY(0)' },
+          '20%': { transform: 'translateY(-30px)' },
+          '40%': { transform: 'translateY(0)' },
+          '60%': { transform: 'translateY(-15px)' },
+          '80%': { transform: 'translateY(0)' },
+          to: { transform: 'translateY(0)' },
+          duration: '2s',
+          timingFunction: 'ease-in-out',
+        }}
+        animationLoop={2}
+        highlightText="Bounce"
+        highlightStyle="background"
+        highlightColor="theme.success"
+      >
+        Bounce Animation (2 Times)
+      </Title>
+
+      {/* Typewriter with infinite highlight animation */}
+      <Title
+        highlightAnimate={{
+          from: { textShadow: '0 0 5px theme.primary' },
+          to: { textShadow: '0 0 20px theme.primary' },
+          duration: '1.5s',
+          timingFunction: 'ease-in-out',
+          direction: 'alternate',
+        }}
+        highlightAnimationLoop="infinite"
+        highlightText="glowing"
+        highlightStyle="glow"
+        highlightColor="theme.primary"
+        highlightTypewriter={true}
+        highlightTypewriterDuration={2000}
+      >
+        Typewriter with glowing highlight
+      </Title>
+    </Vertical>
+  );
+};
 ```
 
-## Highlight Text
+### **responsive**
+Enables responsive behavior for the title component, adjusting its display based on screen size.
 
-The `highlightText` prop specifies which part of the text should be highlighted. You can provide a string or an array of strings.
+- **Type:** `boolean`
+- **Default:** `true`
 
-```jsx
-<Title highlightText="highlighted" highlightStyle="background" highlightColor="theme.primary">
-  Text with highlighted words
-</Title>
+```tsx
+import React from 'react';
+import { Title } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+/**
+ * Example of responsive Title using the new responsive prop
+ */
+export const ResponsiveTitle = () => {
+  return (
+    <Vertical gap={32}>
+      {/* Using the new responsive prop - automatically adapts based on size */}
+      <Title
+        size="xl"
+        responsive={true}
+        highlightText="Responsive"
+        highlightStyle="background"
+        highlightColor="theme.primary"
+      >
+        Responsive XL Title (H1 scale)
+      </Title>
+
+      <Title
+        size="lg"
+        responsive={true}
+        highlightText="Responsive"
+        highlightStyle="gradient"
+        highlightColor="theme.primary"
+        highlightSecondaryColor="theme.secondary"
+      >
+        Responsive LG Title (H2 scale)
+      </Title>
+
+      <Title
+        size="md"
+        responsive={true}
+        highlightText="Responsive"
+        highlightStyle="underline"
+        highlightColor="theme.accent"
+      >
+        Responsive MD Title (H3 scale)
+      </Title>
+
+      <Title
+        size="sm"
+        responsive={true}
+        highlightText="Responsive"
+        highlightStyle="glow"
+        highlightColor="theme.primary"
+      >
+        Responsive SM Title (T1 scale)
+      </Title>
+
+      <Title
+        size="xs"
+        responsive={true}
+        highlightText="Responsive"
+        highlightStyle="outline"
+        highlightColor="theme.secondary"
+      >
+        Responsive XS Title (S1 scale)
+      </Title>
+
+      {/* Legacy example using manual media queries */}
+      <Title
+        media={{
+          mobile: {
+            fontSize: 32,
+            lineHeight: '100%',
+          },
+          tablet: {
+            fontSize: 48,
+            lineHeight: '110%',
+          },
+          desktop: {
+            fontSize: 64,
+            lineHeight: '120%',
+          },
+        }}
+        highlightText="Manual"
+        highlightStyle="background"
+        highlightColor="theme.primary"
+      >
+        Manual Media Queries Title
+      </Title>
+    </Vertical>
+  );
+};
 ```
-
-## Highlight Styles
-
-The `highlightStyle` prop determines how the highlighted text is styled. Options include `'background'`, `'underline'`, `'gradient'`, `'outline'`, and `'glow'`.
-
-```jsx
-<Vertical gap={32}>
-  <Title highlightText="background" highlightStyle="background" highlightColor="theme.primary">
-    Text with background highlight
-  </Title>
-
-  <Title highlightText="underlined" highlightStyle="underline" highlightColor="theme.secondary">
-    Text with underlined highlight
-  </Title>
-
-  <Title
-    highlightText="gradient"
-    highlightStyle="gradient"
-    highlightColor="theme.primary"
-    highlightSecondaryColor="theme.secondary"
-  >
-    Text with gradient highlight
-  </Title>
-
-  <Title highlightText="outline" highlightStyle="outline" highlightColor="theme.primary">
-    Text with outline highlight
-  </Title>
-
-  <Title highlightText="glow" highlightStyle="glow" highlightColor="theme.primary">
-    Text with glow highlight
-  </Title>
-</Vertical>
-```
-
-## Multiple Highlights
-
-You can highlight multiple parts of the text by providing an array of strings.
-
-```jsx
-<Title
-  highlightText={["multiple", "highlights"]}
-  highlightStyle="background"
-  highlightColor="theme.primary"
->
-  Text with multiple highlights in the same sentence
-</Title>
-```
-
-## Animations
-
-The Title component supports animations through the `animate` prop, which accepts an animation object with properties like `from`, `to`, `duration`, etc.
-
-```jsx
-<Vertical gap={48}>
-  <Title
-    animate={{
-      from: { opacity: 0 },
-      to: { opacity: 1 },
-      duration: '1.5s',
-    }}
-    animationLoop={1}
-  >
-    Fade In Animation (Once)
-  </Title>
-
-  <Title
-    animate={{
-      from: { transform: 'translateX(-100%)' },
-      to: { transform: 'translateX(0)' },
-      duration: '1s',
-    }}
-    animationLoop={3}
-  >
-    Slide In From Left (3 Times)
-  </Title>
-
-  <Title
-    animate={{
-      from: { transform: 'translateX(-10px)' },
-      to: { transform: 'translateX(10px)' },
-      duration: '2s',
-      direction: 'alternate',
-    }}
-    animationLoop="infinite"
-  >
-    Infinite Wiggle Animation
-  </Title>
-</Vertical>
-```
-
-## Animation Loop Control
-
-You can control how many times animations repeat using the `animationLoop` and `highlightAnimationLoop` props.
-
-```jsx
-<Vertical gap={32}>
-  {/* Animation plays once (default) */}
-  <Title
-    animate={{
-      from: { opacity: 0, transform: 'translateY(-20px)' },
-      to: { opacity: 1, transform: 'translateY(0)' },
-      duration: '1s',
-    }}
-    animationLoop={1}
-  >
-    Animation Plays Once
-  </Title>
-
-  {/* Animation plays 3 times */}
-  <Title
-    animate={{
-      from: { transform: 'scale(0.8)' },
-      to: { transform: 'scale(1)' },
-      duration: '0.8s',
-    }}
-    animationLoop={3}
-  >
-    Animation Plays Three Times
-  </Title>
-
-  {/* Infinite animation loop */}
-  <Title
-    animate={{
-      from: { transform: 'translateX(-10px)' },
-      to: { transform: 'translateX(10px)' },
-      duration: '2s',
-      direction: 'alternate',
-    }}
-    animationLoop="infinite"
-  >
-    Animation Loops Infinitely
-  </Title>
-
-  {/* Highlight animation with infinite loop */}
-  <Title
-    highlightAnimate={{
-      from: { transform: 'rotate(-5deg)' },
-      to: { transform: 'rotate(5deg)' },
-      duration: '1s',
-      direction: 'alternate',
-    }}
-    highlightAnimationLoop="infinite"
-    highlightText="Wiggling"
-    highlightStyle="outline"
-    highlightColor="theme.warning"
-  >
-    Title with Wiggling Highlight
-  </Title>
-</Vertical>
-```
-
-## Highlight Animations
-
-You can animate just the highlighted text using the `highlightAnimate` prop.
-
-```jsx
-<Title
-  highlightText="animated highlight"
-  highlightStyle="background"
-  highlightColor="theme.primary"
-  highlightAnimate={{
-    from: { opacity: 0, transform: 'scale(0.9)' },
-    to: { opacity: 1, transform: 'scale(1)' },
-    duration: '0.5s',
-    delay: '0.2s',
-  }}
->
-  Text with animated highlight
-</Title>
-```
-
-## Alternating Text
-
-The Title component can cycle through different words in place of the highlighted text using the `alternateHighlightText` and `alternateAnimation` props.
-
-```jsx
-<Title
-  highlightText="changing"
-  alternateHighlightText={[
-    'innovative',
-    'powerful',
-    'flexible',
-    'intuitive',
-  ]}
-  alternateAnimation={true}
-  alternateDuration={2000}
-  highlightStyle="background"
-  highlightColor="theme.primary"
->
-  Our changing solution for your business
-</Title>
-```
-
-## Typewriter Effect
-
-You can add a typewriter effect to the highlighted text using the `highlightTypewriter` prop.
-
-```jsx
-<Title
-  highlightText="typewriter"
-  highlightStyle="background"
-  highlightColor="theme.primary"
-  highlightTypewriter={true}
-  highlightTypewriterDuration={1500}
->
-  This text has a typewriter effect on the highlighted word
-</Title>
-```
-
-## Responsive
-
-You can make the title responsive in two ways:
-
-### Using the `responsive` prop (Recommended)
-
-The `responsive` prop automatically applies responsive sizing based on the current `size` prop using a predefined typography scale:
-
-```jsx
-<Title
-  size="xl"
-  responsive={true}
-  highlightText="Responsive"
-  highlightStyle="background"
-  highlightColor="theme.primary"
->
-  Responsive XL Title (H1 scale)
-</Title>
-
-<Title
-  size="lg"
-  responsive={true}
-  highlightText="Responsive"
-  highlightStyle="gradient"
-  highlightColor="theme.primary"
-  highlightSecondaryColor="theme.secondary"
->
-  Responsive LG Title (H2 scale)
-</Title>
-
-<Title
-  size="md"
-  responsive={true}
-  highlightText="Responsive"
-  highlightStyle="underline"
-  highlightColor="theme.accent"
->
-  Responsive MD Title (H3 scale)
-</Title>
-```
-
-The responsive prop maps sizes to typography scales:
-- `xl` → H1 scale (46px mobile, 52px tablet, 58px desktop)
-- `lg` → H2 scale (28px mobile, 36px tablet, 48px desktop)
-- `md` → H3 scale (28px mobile, 34px tablet, 40px desktop)
-- `sm` → T1 scale (24px mobile, 28px tablet, 32px desktop)
-- `xs` → S1 scale (16px mobile, 18px tablet, 20px desktop)
-
-### Using the `media` prop (Manual)
-
-For custom responsive behavior, you can use the `media` prop:
-
-```jsx
-<Title
-  media={{
-    mobile: {
-      fontSize: 32,
-      lineHeight: '40px',
-    },
-    tablet: {
-      fontSize: 48,
-      lineHeight: '56px',
-    },
-    desktop: {
-      fontSize: 64,
-      lineHeight: '72px',
-    },
-  }}
-  highlightText="Responsive"
-  highlightStyle="background"
-  highlightColor="theme.primary"
->
-  Manual Responsive Title
-</Title>
-```
-
-## Custom Styling
-
-You can customize the title using the `views` prop.
-
-```jsx
-<Title
-  views={{
-    container: {
-      fontFamily: 'Georgia, serif',
-      letterSpacing: '0.05em',
-      textTransform: 'uppercase',
-    },
-    highlight: {
-      borderRadius: '8px',
-      padding: '0 12px',
-    },
-  }}
-  highlightText="Custom"
-  highlightStyle="background"
-  highlightColor="color.purple.500"
->
-  Title with Custom Styling
-</Title>
-```
-
-## Hero Section Example
-
-```jsx
-<View
-  backgroundColor="color.gray.50"
-  padding={48}
-  borderRadius={8}
-  width="100%"
->
-  <Vertical gap={24} maxWidth={800} marginX="auto">
-    <Title
-      size="xl"
-      animate={{
-        from: { opacity: 0 },
-        to: { opacity: 1 },
-        duration: '1s',
-        iterationCount: '1',
-      }}
-      highlightText="Platform"
-      highlightStyle="gradient"
-      highlightColor="theme.primary"
-      highlightSecondaryColor="theme.secondary"
-      centered
-    >
-      Welcome to Our Platform
-    </Title>
-
-    <Text
-      textAlign="center"
-      color="color.gray.600"
-      fontSize={20}
-      lineHeight={28}
-    >
-      Build beautiful, responsive, and interactive user interfaces with our powerful component library.
-    </Text>
-
-    <Horizontal gap={16} justifyContent="center" marginTop={16}>
-      <Button variant="primary" size="lg">
-        Get Started
-      </Button>
-      <Button variant="outline" size="lg">
-        Learn More
-      </Button>
-    </Horizontal>
-  </Vertical>
-</View>
-```
-
-## Types
-
-```typescript
-export type HighlightStyle =
-  | 'underline'   // Underline the text
-  | 'background'  // Background color highlight
-  | 'gradient'    // Gradient background
-  | 'outline'     // Text with outline
-  | 'glow';       // Text with glow effect
-
-export type TitleSize =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl';
-
-export interface TitleProps extends ViewProps {
-  /**
-   * The main text content of the title
-   */
-  children: React.ReactNode;
-
-  /**
-   * Text to be highlighted within the title
-   */
-  highlightText?: string | string[];
-
-  /**
-   * Array of strings to cycle through, replacing the text specified in highlightText
-   */
-  alternateHighlightText?: string[];
-
-  /**
-   * The visual style of the highlighted text
-   * @default 'background'
-   */
-  highlightStyle?: HighlightStyle;
-
-  /**
-   * The color of the highlighted text or background
-   * @default 'theme.primary'
-   */
-  highlightColor?: string;
-
-  /**
-   * The secondary color for gradient highlights
-   */
-  highlightSecondaryColor?: string;
-
-  /**
-   * Animation for the highlighted text
-   */
-  highlightAnimate?: AnimationProps | AnimationProps[];
-
-  /**
-   * Animation for the title
-   */
-  animate?: AnimationProps | AnimationProps[];
-
-  /**
-   * Controls the animation loop behavior for the title animation
-   * @default 1 (play once)
-   */
-  animationLoop?: number | 'infinite';
-
-  /**
-   * Controls the animation loop behavior for the highlight animation
-   * @default 1 (play once)
-   */
-  highlightAnimationLoop?: number | 'infinite';
-
-  /**
-   * Size of the title
-   * @default 'xl'
-   */
-  size?: TitleSize;
-
-  /**
-   * Whether to enable responsive sizing based on breakpoints
-   * When true, the title will automatically adapt its size across mobile/tablet/desktop
-   * @default false
-   */
-  responsive?: boolean;
-
-  /**
-   * Whether to center the title
-   * @default false
-   */
-  centered?: boolean;
-
-  /**
-   * Whether to animate the alternating highlight text
-   * @default false
-   */
-  alternateAnimation?: boolean;
-
-  /**
-   * Duration in milliseconds for each alternating highlight text
-   * @default 3000
-   */
-  alternateDuration?: number;
-
-  /**
-   * Whether to apply a typewriter effect to the highlighted text
-   * @default false
-   */
-  highlightTypewriter?: boolean;
-
-  /**
-   * Duration in milliseconds for the typewriter effect
-   * @default 3000
-   */
-  highlightTypewriterDuration?: number;
-}
-```
-
-## **Accessibility**
-
-The Title component:
-
-- Uses semantic heading elements (`<h1>`) for proper document structure
-- Maintains proper color contrast for highlighted text
-- Supports keyboard navigation and focus management
-- Works with screen readers by using appropriate ARIA attributes
-
-## **Best Practices**
-
-- Use the Title component for main headings and important text that needs emphasis
-- Choose highlight styles that maintain good contrast with the background
-- Use animations sparingly to avoid distracting users
-- Use `animationLoop` and `highlightAnimationLoop` to control animation repetition
-- Prefer finite loop counts over infinite animations for better user experience
-- Use the `responsive` prop for automatic responsive sizing based on predefined typography scales
-- Consider using responsive sizing for different screen sizes
-- Limit the use of alternating text to avoid confusion
-- Ensure that any animations respect user preferences for reduced motion
-- Use semantic colors from the theme system rather than hardcoded values
 

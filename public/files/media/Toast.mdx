@@ -1,0 +1,88 @@
+# Toast
+
+Displays temporary, dismissible messages to inform users about actions, status, or events.
+
+### **Import**
+```tsx
+import { Toast } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+import { Toast } from '../Toast';
+
+export const DefaultToast = () => {
+  return (
+    <Horizontal gap={10}>
+      <Button
+        onClick={() =>
+          Toast.success('Success', 'Your action was completed successfully.')
+        }
+      >
+        Show Success Toast
+      </Button>
+    </Horizontal>
+  );
+};
+```
+
+### **duration**
+The time in milliseconds before the toast automatically closes. Default is usually 5000ms.
+
+- **Type:** `number`
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+import { Toast } from '../Toast';
+
+export const ToastDurations = () => {
+  return (
+    <Horizontal gap={10}>
+      <Button
+        onClick={() =>
+          Toast.info(
+            'Short Duration',
+            'This toast will disappear in 2 seconds.',
+            {
+              duration: 2000,
+            }
+          )
+        }
+      >
+        2 Seconds
+      </Button>
+
+      <Button
+        onClick={() =>
+          Toast.info(
+            'Default Duration',
+            'This toast will disappear in 5 seconds.'
+          )
+        }
+      >
+        5 Seconds (Default)
+      </Button>
+
+      <Button
+        onClick={() =>
+          Toast.info(
+            'Long Duration',
+            'This toast will disappear in 10 seconds.',
+            {
+              duration: 10000,
+            }
+          )
+        }
+      >
+        10 Seconds
+      </Button>
+    </Horizontal>
+  );
+};
+```
+

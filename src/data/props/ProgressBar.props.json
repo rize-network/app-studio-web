@@ -1,0 +1,45 @@
+{
+  "componentDescription": "A visual indicator displaying the progress of an operation, customizable in appearance.",
+  "value": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Represents the current progress value of the bar.",
+    "defaultValue": 0
+  },
+  "max": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Specifies the maximum possible value for the progress bar.",
+    "defaultValue": 100
+  },
+  "color": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Sets the color of the progress bar's filled portion.",
+    "defaultValue": "theme.primary"
+  },
+  "backgroundColor": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Sets the background color of the progress bar's track.",
+    "defaultValue": "color.gray.200"
+  },
+  "height": {
+    "type": "number | string",
+    "typeValues": [],
+    "description": "Defines the height of the progress bar.",
+    "defaultValue": 8
+  },
+  "radius": {
+    "type": "number | string",
+    "typeValues": [],
+    "description": "Sets the border-radius for the progress bar.",
+    "defaultValue": 4
+  },
+  "views": {
+    "type": "ProgressBarStyles",
+    "typeValues": [],
+    "description": "Provides an object to customize the styles of internal components (container and bar).",
+    "defaultValue": null
+  }
+}

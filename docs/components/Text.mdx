@@ -15,7 +15,7 @@ import { Text } from "@app-studio/web";
 “**_size_**” changes the text-size. It has a type "Sizes" with default value “md”.
 
 ```tsx
-import { Vertical } from "../Layout/Vertical/Vertical";
+import { Vertical, Text } from "@app-studio/web";
 
 <Vertical gap={5} alignItems="center">
   {["xs", "sm", "md", "lg", "xl", "xl", "xl", "xl", "xl", "6xl"].map(
@@ -33,7 +33,7 @@ import { Vertical } from "../Layout/Vertical/Vertical";
 “**_heading_**” renders a specific heading html tag. “h1” indicates the most important heading and “h6” the least important heading.
 
 ```tsx
-import { Vertical } from "../Layout/Vertical/Vertical";
+import { Vertical, Text } from "@app-studio/web";
 <Vertical gap={2}>
   <Text heading="h1">Heading 1</Text>
   <Text heading="h2">Heading 2</Text>
@@ -79,7 +79,7 @@ import { Vertical } from "../Layout/Vertical/Vertical";
 “**_weight_**” changes the font weight of the text. It have a default value of “medium”.
 
 ```tsx
-import { Vertical } from "../Layout/Vertical/Vertical";
+import { Vertical, Text } from "@app-studio/web";
 
 <Vertical gap={5} alignItems="center">
   {[

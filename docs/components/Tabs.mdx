@@ -1,39 +1,35 @@
 # Tabs
 
-Provides an interactive tab interface for content organization
-
-## Props
-
-| Prop      | Type          | Description                                                                                                                               | Default |
-| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| tabs             | {title: string; value: string; content: ReactNode;}[] | An array of tab objects, each defining a title, value, and content.                                                                                                     |         |
-| styles           | TabsStyles    | Allows for optional styling to be applied to the tabs via a TabsStyles object.                                                                                              |         |
-| className        | string        | Optional className for the tabs.                                                                                                          |         |
+A versatile component for organizing and displaying content in separate, selectable sections.
 
 ### **Import**
-  ```tsx
-  import { Tabs } from '@app-studio/web';
-  ```
+```tsx
+import { Tabs } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Tabs, View, Text } from '../..';
+import { MoonIcon,
+  ShareIcon,
+  PanelIcon,
+  SaveIcon,
+  PauseIcon, } from '@app-studio/web'; // Assuming components are exported from index
+import { Text, View } from 'app-studio';
+import { Tabs } from '@app-studio/web';
 
+// Example demonstrating basic usage of the Tabs component.
 export const Default = () => (
   <Tabs
+    // Add a unique 'value' to each tab
     tabs={[
       {
         title: 'Product',
-        value: 'product',
+        icon: <MoonIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Product Tab
+              Product Tab Content
             </Text>
             <DummyContent />
           </View>
@@ -41,15 +37,11 @@ export const Default = () => (
       },
       {
         title: 'Services',
-        value: 'services',
+        icon: <ShareIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Services tab
+              Services Tab Content
             </Text>
             <DummyContent />
           </View>
@@ -57,15 +49,11 @@ export const Default = () => (
       },
       {
         title: 'Playground',
-        value: 'playground',
+        icon: <PanelIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Playground tab
+              Playground Tab Content
             </Text>
             <DummyContent />
           </View>
@@ -73,15 +61,11 @@ export const Default = () => (
       },
       {
         title: 'Content',
-        value: 'content',
+        icon: <SaveIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Content tab
+              Content Tab Content
             </Text>
             <DummyContent />
           </View>
@@ -89,24 +73,25 @@ export const Default = () => (
       },
       {
         title: 'Random',
-        value: 'random',
+        icon: <PauseIcon />,
         content: (
-          <View
-            backgroundColor={'purple'}
-            borderRadius={10}
-            padding="20px 20px 0"
-          >
+          <View backgroundColor={'purple'} padding="20px 20px 0">
             <Text heading="h5" color="white">
-              Random tab
+              Random Tab Content
             </Text>
             <DummyContent />
           </View>
         ),
       },
     ]}
+    // Optionally set the initially active tab
+    defaultValue="Services"
+    // Optionally listen for tab changes
+    onTabChange={(activeTab) => console.log('Active Tab:', activeTab.title)}
   />
 );
 
+// Simple placeholder content component
 const DummyContent = () => {
   return (
     <View
@@ -114,102 +99,14 @@ const DummyContent = () => {
       borderRadius="8px"
       height="300px"
       backgroundColor={'black'}
-    ></View>
+      // Added content for visibility
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <Text color="grey">Dummy Content Area</Text>
+    </View>
   );
 };
-
 ```
 
-### **styles**
-Allows for optional styling to be applied to the tabs via a TabsStyles object.
-
-```tsx
-import React from 'react';
-import { Text } from '@app-studio/web';
-import { Tabs } from '../../Tabs/Tabs';
-
-export const StylesTabs = () => {
-  const tabs = [
-    {
-      title: 'Product',
-      value: 'product',
-      content: (
-        <Text heading="h5" color="white">
-          Product Tab
-        </Text>
-      ),
-    },
-    {
-      title: 'Services',
-      value: 'services',
-      content: (
-        <Text heading="h5" color="white">
-          Services tab
-        </Text>
-      ),
-    },
-    {
-      title: 'Playground',
-      value: 'playground',
-      content: (
-        <Text heading="h5" color="white">
-          Playground tab
-        </Text>
-      ),
-    },
-    {
-      title: 'Content',
-      value: 'content',
-      content: (
-        <Text heading="h5" color="white">
-          Content tab
-        </Text>
-      ),
-    },
-    {
-      title: 'Random',
-      value: 'random',
-      content: (
-        <Text heading="h5" color="white">
-          Random tab
-        </Text>
-      ),
-    },
-  ];
-  return (
-    <Tabs
-      tabs={tabs}
-      views={{
-        container: { backgroundColor: 'black', borderRadius: '20px' },
-        headerTabs: {
-          backgroundColor: 'purple',
-          width: '100%',
-          borderRadius: '20px 20px 0 0',
-          padding: '10px 0',
-        },
-        tab: {
-          shape: 'rounded',
-        },
-        title: {
-          color: 'color.white',
-        },
-        content: {
-          height: '300px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
-        activeTab: {
-          variant: 'ghost',
-        },
-        activeText: {
-          weight: 'bold',
-          size: 'lg',
-        },
-      }}
-    />
-  );
-};
-
-```

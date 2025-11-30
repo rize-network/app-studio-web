@@ -1,91 +1,69 @@
 # Badge
 
-Displays a visual badge for labeling or highlighting items
+Renders a badge with various styles and states according to the design guidelines.
 
 ### **Import**
-  ```tsx
-  import { Badge } from '@app-studio/web';
-  ```
+```tsx
+import { Badge } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Badge } from '../Badge';
+import { Badge } from '@app-studio/web';
 
 export const DefaultDemo = () => <Badge content="default" />;
-
 ```
 
 ### **content**
-The content displayed in the Badge component.
+The content to be displayed within the badge.
+
+- **Type:** `string | number`
 
 ```tsx
 import React from 'react';
-import { Badge } from '../Badge';
+import { Badge } from '@app-studio/web';
 
 export const ContentDemo = () => <Badge content="content" />;
-
 ```
 
 ### **variant**
-Determines the Badge's style variant.
+Determines the styling variants a UI component can have, which could include filled, outlined, or ghost styles among others.
+
+- **Type:** `Variant`
+- **Default:** `filled`
+- **Possible Values:** `filled, outline, link, ghost`
 
 ```tsx
 import React from 'react';
-import { Vertical } from '@app-studio/web';
+import { Vertical } from 'app-studio';
 
-import { Badge } from '../Badge';
-import { Variant } from '../Badge/Badge.type';
-import { View } from '@app-studio/web';
+import { Badge } from '@app-studio/web';
+import { Variant } from '@app-studio/web';
+import { View } from 'app-studio';
 export const VariantDemo = () => (
   <Vertical gap={15}>
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
       <View position={'relative'} key={index}>
-        <Badge
-          content={variant}
-          variant={variant as Variant}
-          colorScheme="theme.primary"
-        />
+        <Badge content={variant} variant={variant as Variant} />
       </View>
     ))}
   </Vertical>
 );
-
-```
-
-### **colorScheme**
-Specifies a custom color scheme for the Badge.
-
-```tsx
-import React from 'react';
-import { Badge } from '../Badge';
-import { Horizontal } from '@app-studio/web';
-
-export const ColorSchemeDemo = () => (
-  <Horizontal gap={10}>
-    {[
-      'theme.primary',
-      'theme.secondary',
-      'theme.warning',
-      'theme.success',
-      'theme.error',
-    ].map((color, index) => (
-      <Badge key={index} colorScheme={color} isAuto content={color} />
-    ))}
-  </Horizontal>
-);
-
 ```
 
 ### **position**
-Defines the position of the Badge relative to its container.
+Lists possible positions for UI elements that can be placed in one of the corners of a container, like notification badges.
+
+- **Type:** `Position`
+- **Possible Values:** `top-right, top-left, bottom-right, bottom-left`
 
 ```tsx
 import React from 'react';
-import { Badge } from '../Badge';
-import { View } from '@app-studio/web';
-import { Horizontal } from '@app-studio/web';
-import { Position } from '../Badge/Badge.type';
+import { Badge } from '@app-studio/web';
+import { View } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Position } from '@app-studio/web';
 
 export const PositionDemo = () => (
   <Horizontal gap={10}>
@@ -104,19 +82,22 @@ export const PositionDemo = () => (
     )}
   </Horizontal>
 );
-
 ```
 
 ### **size**
-Determines the size of the Badge.
+Specifies available sizes for UI elements, catering to a range of scalability from extra small to extra large.
+
+- **Type:** `Size`
+- **Default:** `md`
+- **Possible Values:** `xs, sm, md, lg, xl`
 
 ```tsx
 import React from 'react';
-import { Vertical } from '@app-studio/web';
+import { Vertical } from 'app-studio';
 
-import { Badge } from '../Badge';
-import { Size } from '../Badge/Badge.type';
-import { View } from '@app-studio/web';
+import { Badge } from '@app-studio/web';
+import { Size } from '@app-studio/web';
+import { View } from 'app-studio';
 export const SizeDemo = () => (
   <Vertical gap={10}>
     {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
@@ -126,18 +107,21 @@ export const SizeDemo = () => (
     ))}
   </Vertical>
 );
-
 ```
 
 ### **shape**
-Specifies the shape of the Badge.
+Defines possible values for the shape of a UI component such as buttons or badges.
+
+- **Type:** `Shape`
+- **Default:** `pillShaped`
+- **Possible Values:** `sharp, rounded, pillShaped`
 
 ```tsx
 import React from 'react';
-import { Horizontal } from '@app-studio/web';
-import { Badge } from '../Badge';
-import { Shape } from '../Badge/Badge.type';
-import { View } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+import { Badge } from '@app-studio/web';
+import { Shape } from '@app-studio/web';
+import { View } from 'app-studio';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
     {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
@@ -147,74 +131,5 @@ export const ShapeDemo = () => (
     ))}
   </Horizontal>
 );
-
-```
-
-### **styles**
-Custom styling that overrides default views.
-
-```tsx
-import React from 'react';
-import { Badge } from '../Badge';
-
-export const StylesDemo = () => {
-  return (
-    <Badge
-      content="styles"
-      views={{
-        container: {
-          backgroundColor: 'transparent',
-        },
-        text: {
-          color: 'purple',
-        },
-      }}
-    />
-  );
-};
-
-```
-
-### **Theme Mode Support**
-The Badge component supports both light and dark themes through the `themeMode` prop.
-
-```tsx
-import React from 'react';
-import { Badge } from '../Badge';
-import { Vertical, Horizontal } from '@app-studio/web';
-import { Text } from '@app-studio/web';
-import { Variant } from '../Badge/Badge.type';
-
-export const DarkModeDemo = () => {
-  const variants: Variant[] = ['filled', 'outline', 'link', 'ghost'];
-
-  return (
-    <Vertical gap={24}>
-      <Text fontSize={20} fontWeight="bold">Light Mode Badges</Text>
-      <Horizontal gap={16} alignItems="center">
-        {variants.map((variant) => (
-          <Badge
-            key={variant}
-            content={variant}
-            variant={variant}
-            themeMode="light"
-          />
-        ))}
-      </Horizontal>
-
-      <Text fontSize={20} fontWeight="bold" marginTop={40}>Dark Mode Badges</Text>
-      <Horizontal gap={16} alignItems="center">
-        {variants.map((variant) => (
-          <Badge
-            key={variant}
-            content={variant}
-            variant={variant}
-            themeMode="dark"
-          />
-        ))}
-      </Horizontal>
-    </Vertical>
-  );
-};
 ```
 

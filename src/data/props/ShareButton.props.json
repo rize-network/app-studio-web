@@ -1,0 +1,60 @@
+{
+  "componentDescription": "A button that allows users to share content from the web application using the device's native sharing capabilities.",
+  "shareData": {
+    "type": "NavigatorShareData",
+    "typeValues": [],
+    "description": "Specifies the data to be shared, conforming to the NavigatorShareData type.",
+    "defaultValue": ""
+  },
+  "label": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Optional content to display inside the share button.",
+    "defaultValue": "Share (if children also not provided)"
+  },
+  "onShareStart": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Callback function triggered when the share process is initiated.",
+    "defaultValue": ""
+  },
+  "onShareSuccess": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Callback function invoked upon successful completion of the sharing action.",
+    "defaultValue": ""
+  },
+  "onShareCancel": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Callback function executed if the user cancels the sharing operation.",
+    "defaultValue": ""
+  },
+  "onShareError": {
+    "type": "(error: unknown) => void",
+    "typeValues": [],
+    "description": "Callback function called if an error occurs during the sharing process.",
+    "defaultValue": ""
+  },
+  "onUnsupported": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Callback function invoked if the Web Share API is not supported by the browser.",
+    "defaultValue": ""
+  },
+  "disableWhenUnsupported": {
+    "type": "boolean",
+    "typeValues": [
+      true,
+      false
+    ],
+    "description": "If true, the button will be disabled when the Web Share API is not supported.",
+    "defaultValue": true
+  },
+  "onClick": {
+    "type": "ButtonProps['onClick']",
+    "typeValues": [],
+    "description": "Optional click handler for the button, in addition to or instead of the default share behavior.",
+    "defaultValue": ""
+  }
+}

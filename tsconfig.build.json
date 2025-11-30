@@ -54,6 +54,6 @@
       "resolveFullPaths": true
     },
     "noEmit": false,
-    "include": ["./src"],
+    "include": ["./src", "./bot"],
     "exclude": ["./src/**/examples"]
   }

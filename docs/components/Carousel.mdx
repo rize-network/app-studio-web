@@ -1,21 +1,18 @@
 # Carousel
 
-A component for displaying a series of content items that can be navigated through. The Carousel can be used in two ways:
-
-1. **Traditional approach**: Direct children as slides
-2. **Compound component pattern**: Using `Carousel.Content`, `Carousel.Item`, `Carousel.Previous`, and `Carousel.Next`
+A versatile component for displaying a collection of content in a rotating sequence with navigation.
 
 ### **Import**
-  ```tsx
-  import { Carousel } from '@app-studio/web';
-  ```
+```tsx
+import { Carousel } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Carousel } from '../Carousel';
-import { View } from '@app-studio/web';
-import { Text } from '@app-studio/web';
+import { Carousel } from '@app-studio/web';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
 
 export const DefaultDemo = () => {
   // Create an array of slides with different background colors
@@ -23,6 +20,7 @@ export const DefaultDemo = () => {
     { color: 'color.blue.500', text: 'Slide 1' },
     { color: 'color.green.500', text: 'Slide 2' },
     { color: 'color.purple.500', text: 'Slide 3' },
+    { color: 'color.orange.500', text: 'Slide 4' },
   ];
 
   return (
@@ -49,116 +47,125 @@ export const DefaultDemo = () => {
 };
 ```
 
-### **Compound Component Pattern**
-Use the compound component pattern for more flexibility and control over the carousel structure.
+### **autoPlay**
+Enables or disables automatic slide progression.
+
+- **Type:** `boolean`
+- **Default:** `false`
+- **Possible Values:** ``
 
 ```tsx
 import React from 'react';
-import { Carousel } from '../Carousel';
-import { View } from '@app-studio/web';
-import { Text } from '@app-studio/web';
+import { Carousel } from '@app-studio/web';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
 
-export const CompoundDemo = () => {
+export const AutoPlayDemo = () => {
+  // Create an array of slides with different background colors
   const slides = [
-    { color: 'color.blue.500', text: 'Slide 1' },
-    { color: 'color.green.500', text: 'Slide 2' },
-    { color: 'color.purple.500', text: 'Slide 3' },
+    { color: 'color.red.500', text: 'Auto-play Slide 1' },
+    { color: 'color.yellow.500', text: 'Auto-play Slide 2' },
+    { color: 'color.teal.500', text: 'Auto-play Slide 3' },
+    { color: 'color.pink.500', text: 'Auto-play Slide 4' },
   ];
 
   return (
     <View height="300px" width="100%">
-      <Carousel
-        aria-label="Compound Carousel Example"
-        views={{
-          container: {
-            borderRadius: '8px',
-            overflow: 'hidden',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-          },
-        }}
-      >
-        <Carousel.Content>
-          {slides.map((slide, index) => (
-            <Carousel.Item key={index}>
-              <View
-                backgroundColor={slide.color}
-                width="100%"
-                height="100%"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Text color="white" fontSize="24px" fontWeight="bold">
-                  {slide.text}
-                </Text>
-              </View>
-            </Carousel.Item>
-          ))}
-        </Carousel.Content>
-
-        <Carousel.Previous />
-        <Carousel.Next />
+      <Carousel autoPlay autoPlayInterval={2000} pauseOnHover>
+        {slides.map((slide, index) => (
+          <Vertical
+            key={index}
+            backgroundColor={slide.color}
+            width="100%"
+            height="100%"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Text color="white" fontSize="24px" fontWeight="bold">
+              {slide.text}
+            </Text>
+            <Text color="white" fontSize="16px" marginTop="10px">
+              Auto-advances every 2 seconds. Hover to pause.
+            </Text>
+          </Vertical>
+        ))}
       </Carousel>
     </View>
   );
 };
 ```
 
-### **Custom Navigation**
-Customize the navigation buttons with your own content.
+### **stepIndices**
+An optional array of indices that define specific steps or points in the carousel navigation.
 
-```tsx
-<Carousel>
-  <Carousel.Content>
-    {/* Slides here */}
-  </Carousel.Content>
-
-  <Carousel.Previous>
-    Previous
-  </Carousel.Previous>
-
-  <Carousel.Next>
-    Next
-  </Carousel.Next>
-</Carousel>
-```
-
-### **Step Navigation**
-Restrict navigation to specific slide indices using the `stepIndices` prop.
+- **Type:** `number[]`
+- **Possible Values:** ``
 
 ```tsx
 import React, { useState } from 'react';
-import { Carousel } from '../Carousel';
-import { View } from '@app-studio/web';
-import { Button } from '../../Button/Button';
+import { Carousel } from '@app-studio/web';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Button } from '@app-studio/web';
 
 export const StepIndicesDemo = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Create an array of slides
   const slides = [
-    { text: 'Introduction', id: 0 },
-    { text: 'Step 1', id: 1 },
-    { text: 'Step 2', id: 2 },
-    { text: 'Step 3', id: 3 },
-    { text: 'Step 4', id: 4 },
-    { text: 'Summary', id: 5 },
+    { color: 'color.blue.500', text: 'Introduction', id: 0 },
+    { color: 'color.gray.400', text: 'Step 1', id: 1 },
+    { color: 'color.gray.400', text: 'Step 2', id: 2 },
+    { color: 'color.gray.400', text: 'Step 3', id: 3 },
+    { color: 'color.gray.400', text: 'Step 4', id: 4 },
+    { color: 'color.green.500', text: 'Summary', id: 5 },
   ];
 
-  // Only allow navigation to specific slides
+  // Only allow navigation to specific slides (introduction, steps 2 & 4, summary)
   const stepIndices = [0, 2, 4, 5];
 
   return (
-    <View height="300px" width="100%">
-      <Carousel
-        activeIndex={activeIndex}
-        onChange={setActiveIndex}
-        stepIndices={stepIndices}
-      >
-        {/* Slides here */}
-      </Carousel>
+    <View>
+      <Text fontWeight="bold" marginBottom={2}>
+        Step Navigation (Only specific slides)
+      </Text>
+      <View height="300px" width="100%">
+        <Carousel
+          activeIndex={activeIndex}
+          onChange={setActiveIndex}
+          stepIndices={stepIndices}
+          showIndicators={false}
+        >
+          {slides.map((slide, index) => (
+            <View
+              key={index}
+              backgroundColor={
+                stepIndices.includes(index) ? slide.color : 'color.gray.400'
+              }
+              width="100%"
+              height="100%"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              flexDirection="column"
+              gap={4}
+            >
+              <Text color="white" fontSize="24px" fontWeight="bold">
+                {slide.text}
+              </Text>
+              <Text color="white" fontSize="16px">
+                {stepIndices.includes(index)
+                  ? 'This is an allowed step'
+                  : 'This slide is skipped in navigation'}
+              </Text>
+            </View>
+          ))}
+        </Carousel>
+      </View>
 
-      {/* External navigation */}
       <Horizontal justifyContent="center" gap={4} marginTop={4}>
         {stepIndices.map((index) => (
           <Button
@@ -175,237 +182,3 @@ export const StepIndicesDemo = () => {
 };
 ```
 
-### **Auto-Play**
-Automatically advance through slides with customizable interval.
-
-```tsx
-import React from 'react';
-import { Carousel } from '../Carousel';
-import { View } from '@app-studio/web';
-import { Text } from '@app-studio/web';
-
-export const AutoPlayDemo = () => {
-  const slides = [
-    { color: 'color.red.500', text: 'Auto-play Slide 1' },
-    { color: 'color.yellow.500', text: 'Auto-play Slide 2' },
-    { color: 'color.teal.500', text: 'Auto-play Slide 3' },
-  ];
-
-  return (
-    <View height="300px" width="100%">
-      <Carousel
-        autoPlay
-        autoPlayInterval={2000}
-        pauseOnHover
-      >
-        {slides.map((slide, index) => (
-          <View
-            key={index}
-            backgroundColor={slide.color}
-            width="100%"
-            height="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="white" fontSize="24px" fontWeight="bold">
-              {slide.text}
-            </Text>
-          </View>
-        ))}
-      </Carousel>
-    </View>
-  );
-};
-```
-
-### **Indicators**
-Different styles of indicators to show the current slide position.
-
-```tsx
-import React from 'react';
-import { Carousel } from '../Carousel';
-import { View } from '@app-studio/web';
-import { Text } from '@app-studio/web';
-
-export const IndicatorsDemo = () => {
-  const slides = [
-    { color: 'color.indigo.500', text: 'Slide 1' },
-    { color: 'color.cyan.500', text: 'Slide 2' },
-    { color: 'color.amber.500', text: 'Slide 3' },
-  ];
-
-  return (
-    <View height="300px" width="100%">
-      <Carousel
-        indicatorVariant="dot" // Options: 'dot', 'line', 'number'
-        indicatorPosition="bottom" // Options: 'top', 'bottom'
-      >
-        {slides.map((slide, index) => (
-          <View
-            key={index}
-            backgroundColor={slide.color}
-            width="100%"
-            height="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="white" fontSize="24px" fontWeight="bold">
-              {slide.text}
-            </Text>
-          </View>
-        ))}
-      </Carousel>
-    </View>
-  );
-};
-```
-
-### **Navigation**
-Customize the navigation controls.
-
-```tsx
-import React from 'react';
-import { Carousel } from '../Carousel';
-import { View } from '@app-studio/web';
-import { Text } from '@app-studio/web';
-import { Button } from '../../Button/Button';
-
-export const NavigationDemo = () => {
-  const slides = [
-    { color: 'color.blue.500', text: 'Slide 1' },
-    { color: 'color.green.500', text: 'Slide 2' },
-    { color: 'color.purple.500', text: 'Slide 3' },
-  ];
-
-  return (
-    <View height="300px" width="100%">
-      <Carousel
-        navigationPosition="inside" // Options: 'inside', 'outside'
-        prevButton={
-          <Button size="sm" variant="outline">
-            Previous
-          </Button>
-        }
-        nextButton={
-          <Button size="sm" variant="outline">
-            Next
-          </Button>
-        }
-      >
-        {slides.map((slide, index) => (
-          <View
-            key={index}
-            backgroundColor={slide.color}
-            width="100%"
-            height="100%"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text color="white" fontSize="24px" fontWeight="bold">
-              {slide.text}
-            </Text>
-          </View>
-        ))}
-      </Carousel>
-    </View>
-  );
-};
-```
-
-### **Custom Styling**
-Customize the appearance of the carousel.
-
-```tsx
-import React from 'react';
-import { Carousel } from '../Carousel';
-import { View } from '@app-studio/web';
-import { Text } from '@app-studio/web';
-import { Card } from '../../Card/Card';
-
-export const CustomDemo = () => {
-  const cards = [
-    {
-      title: 'Mountain Retreat',
-      description: 'Peaceful mountain cabin with stunning views.',
-    },
-    {
-      title: 'Beach Paradise',
-      description: 'Relax on white sandy beaches with crystal clear water.',
-    },
-    {
-      title: 'City Adventure',
-      description: 'Explore the vibrant streets and culture of the city.',
-    },
-  ];
-
-  return (
-    <View height="300px" width="100%">
-      <Carousel
-        views={{
-          container: {
-            borderRadius: '16px',
-            overflow: 'hidden',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-          },
-          indicators: {
-            bottom: '20px',
-          },
-          indicator: {
-            width: '30px',
-            height: '4px',
-            borderRadius: '2px',
-            backgroundColor: 'color.gray.200',
-          },
-          activeIndicator: {
-            backgroundColor: 'color.blue.500',
-            width: '40px',
-          },
-          prevButton: {
-            backgroundColor: 'color.blue.500',
-            color: 'color.white',
-          },
-          nextButton: {
-            backgroundColor: 'color.blue.500',
-            color: 'color.white',
-          },
-        }}
-        indicatorVariant="line"
-      >
-        {cards.map((card, index) => (
-          <View
-            key={index}
-            width="100%"
-            height="100%"
-            padding="20px"
-            backgroundColor="color.blue.50"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Card
-              variant="elevated"
-              width="80%"
-              maxWidth="500px"
-              padding="20px"
-            >
-              <Card.Header>
-                <Text fontSize="24px" fontWeight="bold">
-                  {card.title}
-                </Text>
-              </Card.Header>
-              <Card.Content>
-                <Text fontSize="16px">
-                  {card.description}
-                </Text>
-              </Card.Content>
-            </Card>
-          </View>
-        ))}
-      </Carousel>
-    </View>
-  );
-};
-```

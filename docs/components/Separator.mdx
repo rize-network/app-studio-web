@@ -1,121 +1,34 @@
 # Separator
 
-A flexible separator component for visually or semantically separating content.
+A visual element used to divide or group content on a user interface.
 
 ### **Import**
-  ```tsx
-  import { Separator } from '@app-studio/web';
-  ```
+```tsx
+import { Separator } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
 import { Separator } from '@app-studio/web';
-import { Text } from '@app-studio/web';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
 
 export const DefaultSeparator = () => {
   return (
-    <>
+    <Vertical width="100%" gap={16}>
+      <Text>Default Separator</Text>
       <Text>
         This is some text above the separator. The separator helps to visually
         divide content sections.
       </Text>
       <Separator />
       <Text>
-        This is some text below the separator. Notice how the separator creates a
-        clear visual distinction between content areas.
+        This is some text below the separator. Notice how the separator creates
+        a clear visual distinction between content areas.
       </Text>
-    </>
+    </Vertical>
   );
 };
 ```
 
-### **Variants**
-The Separator component supports different visual variants:
-
-```tsx
-<Separator variant="solid" />
-<Separator variant="dashed" />
-<Separator variant="dotted" />
-```
-
-### **Thicknesses**
-The Separator component supports different thicknesses:
-
-```tsx
-<Separator thickness="thin" />
-<Separator thickness="medium" />
-<Separator thickness="thick" />
-```
-
-### **Orientations**
-The Separator component supports horizontal and vertical orientations:
-
-```tsx
-<Separator orientation="horizontal" />
-
-<Horizontal height={100} alignItems="center">
-  <Text>Left Content</Text>
-  <Separator orientation="vertical" />
-  <Text>Right Content</Text>
-</Horizontal>
-```
-
-### **Colors**
-The Separator component can be customized with different colors:
-
-```tsx
-<Separator color="color.gray.200" />
-<Separator color="color.blue.500" />
-<Separator color="color.green.500" />
-<Separator color="color.red.500" />
-```
-
-### **With Label**
-The Separator component can include a label in the middle:
-
-```tsx
-<Separator label="OR" />
-
-<Separator 
-  label="SECTION DIVIDER" 
-  views={{
-    label: {
-      fontWeight: 'bold',
-      color: 'color.blue.500',
-      textTransform: 'uppercase',
-    }
-  }}
-/>
-```
-
-### **In Card**
-The Separator component can be used within cards to separate content sections:
-
-```tsx
-<Card variant="outlined" shape="rounded">
-  <Card.Header>
-    <Text fontWeight="bold" size="lg">Card Title</Text>
-  </Card.Header>
-  <Card.Content>
-    <Text>
-      This is the first section of content in the card.
-    </Text>
-    <Separator spacing="8px" />
-    <Text>
-      This is the second section of content.
-    </Text>
-    <Separator label="ADDITIONAL INFORMATION" spacing="8px" />
-    <Text>
-      This is the third section with additional information.
-    </Text>
-  </Card.Content>
-</Card>
-```
-
-### **Accessibility**
-By default, the Separator component has a semantic role of `separator`. If the separator is purely decorative, you can set the `decorative` prop to `true` to hide it from screen readers:
-
-```tsx
-<Separator decorative={true} />
-```

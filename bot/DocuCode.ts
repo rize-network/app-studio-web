@@ -119,12 +119,13 @@ export class DocuCode {
     // Read the content of the file
     let content: string = this.fileHandler.readFile(filePath);
 
-    // Regular expression to match single line, multi-line, and JSDoc comments
-    const singleLineCommentsPattern = /\/\/.*/g;
+    // Regular expression to match single line comments, avoiding URLs (://)
+    // We capture the character before // to ensure it's not a colon, and restore it.
+    const singleLineCommentsPattern = /(^|[^:])\/\/.*$/gm;
     const multiLineAndJSDocCommentsPattern = /\/\*[\s\S]*?\*\//g;
 
     // Remove single-line comments
-    content = content.replace(singleLineCommentsPattern, '');
+    content = content.replace(singleLineCommentsPattern, '$1');
 
     // Remove multi-line and JSDoc comments
     content = content.replace(multiLineAndJSDocCommentsPattern, '');
@@ -235,7 +236,11 @@ export class DocuCode {
         if (commentData && !inBlock) {
           const { comment, codeSnippet } = commentData;
           if (line.includes(codeSnippet)) {
-            return `// ${comment}\n${line}`;
+            const commentedComment = comment
+              .split('\n')
+              .map((c) => `// ${c}`)
+              .join('\n');
+            return `${commentedComment}\n${line}`;
           } else {
             console.warn(
               `Code snippet '${codeSnippet}' does not match the start of line ${lineNum}: '${line.trim()}'`

@@ -12,7 +12,7 @@ A simple color input with default settings.
 
 ```tsx
 import React, { useState } from 'react';
-import { ColorInput } from '../ColorInput';
+import { ColorInput } from '@app-studio/web';
 
 export const BasicColorInput = () => {
   const [color, setColor] = useState('color.blue.500');
@@ -35,7 +35,7 @@ Different visual styles for the color input.
 ```tsx
 import React from 'react';
 import { Vertical } from '@app-studio/web';
-import { ColorInput } from '../ColorInput';
+import { ColorInput } from '@app-studio/web';
 
 export const ColorInputVariants = () => {
   return (
@@ -68,7 +68,7 @@ Different sizes for the color input.
 ```tsx
 import React from 'react';
 import { Vertical } from '@app-studio/web';
-import { ColorInput } from '../ColorInput';
+import { ColorInput } from '@app-studio/web';
 
 export const ColorInputSizes = () => {
   return (
@@ -88,7 +88,7 @@ Color input with custom color palette and options.
 
 ```tsx
 import React, { useState } from 'react';
-import { ColorInput } from '../ColorInput';
+import { ColorInput } from '@app-studio/web';
 
 export const CustomColorInput = () => {
   const [color, setColor] = useState('');
@@ -120,8 +120,8 @@ Color input integrated with form handling.
 ```tsx
 import React, { useState } from 'react';
 import { Vertical, Horizontal } from '@app-studio/web';
-import { ColorInput } from '../ColorInput';
-import { Button } from '../../Button/Button';
+import { ColorInput } from '@app-studio/web';
+import { Button } from '@app-studio/web';
 import { Text } from '@app-studio/web';
 
 export const ColorInputForm = () => {

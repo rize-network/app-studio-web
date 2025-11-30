@@ -1,0 +1,133 @@
+{
+  "componentDescription": "Displays customizable titles with highlighting, responsive sizing, and animation effects.",
+  "_isInView": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines if the component is currently visible within the viewport.",
+    "defaultValue": null
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "The primary content to be rendered within the Title component.",
+    "defaultValue": null
+  },
+  "highlightText": {
+    "type": "string | string[]",
+    "typeValues": null,
+    "description": "Specifies text (or an array of texts) to be highlighted within the title.",
+    "defaultValue": null
+  },
+  "alternateHighlightText": {
+    "type": "string[]",
+    "typeValues": null,
+    "description": "Provides an array of alternative texts to highlight, potentially used for cycling or conditional rendering.",
+    "defaultValue": null
+  },
+  "highlightAnimate": {
+    "type": "AnimationProps | AnimationProps[]",
+    "typeValues": null,
+    "description": "Defines animation properties for the highlighted text, supporting single or multiple animations.",
+    "defaultValue": null
+  },
+  "highlightTypewriter": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Enables a typewriter effect animation for the highlighted text.",
+    "defaultValue": false
+  },
+  "highlightTypewriterDuration": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Sets the duration (in milliseconds) for the typewriter animation of the highlighted text.",
+    "defaultValue": 3000
+  },
+  "highlightStyle": {
+    "type": "HighlightStyle",
+    "typeValues": [
+      "underline",
+      "background",
+      "gradient",
+      "outline",
+      "glow"
+    ],
+    "description": "Applies a predefined style to the highlighted text, such as underline or background.",
+    "defaultValue": "background"
+  },
+  "highlightColor": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Specifies the primary color for the highlighted text.",
+    "defaultValue": "theme.primary"
+  },
+  "highlightSecondaryColor": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Defines a secondary color for the highlighted text, often used for gradients or alternate states.",
+    "defaultValue": null
+  },
+  "animate": {
+    "type": "AnimationProps | AnimationProps[]",
+    "typeValues": null,
+    "description": "Applies animation properties to the entire Title component.",
+    "defaultValue": null
+  },
+  "animationLoop": {
+    "type": "number | 'infinite'",
+    "typeValues": null,
+    "description": "Determines how many times the component's animation should repeat, or if it should loop infinitely.",
+    "defaultValue": 1
+  },
+  "highlightAnimationLoop": {
+    "type": "number | 'infinite'",
+    "typeValues": null,
+    "description": "Controls the repetition count for the highlighted text's animation.",
+    "defaultValue": 1
+  },
+  "size": {
+    "type": "TitleSize",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Sets the predefined size of the title (e.g., 'small', 'medium', 'large').",
+    "defaultValue": "lg"
+  },
+  "responsive": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Enables responsive behavior for the title component, adjusting its display based on screen size.",
+    "defaultValue": true
+  },
+  "centered": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Aligns the title text to the center.",
+    "defaultValue": false
+  },
+  "views": {
+    "type": "TitleStyles",
+    "typeValues": {
+      "container": "ViewProps",
+      "text": "ViewProps",
+      "highlight": "ViewProps"
+    },
+    "description": "Allows applying custom styles to different view states or parts of the title.",
+    "defaultValue": null
+  },
+  "alternateAnimation": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Activates an alternative animation sequence for the title.",
+    "defaultValue": null
+  },
+  "alternateDuration": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Sets the duration for the alternate animation.",
+    "defaultValue": null
+  }
+}

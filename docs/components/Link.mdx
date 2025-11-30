@@ -1,42 +1,45 @@
 # Link
 
-Enables users to navigate to specified URLs or paths.
+This component provides a navigational link that can render children, manage external links, and apply various text decoration styles.
 
 ### **Import**
-  ```tsx
-  import { Link } from '@app-studio/web';
-  ```
+```tsx
+import { Link } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
 
-import { Link } from '../Link';
+import { Link } from '@app-studio/web';
 
-export const DefaultLink = () => <Link href="/">Default</Link>;
-
+export const DefaultLink = () => <Link to="/">Default</Link>;
 ```
 
 ### **underline**
 Optional prop to define the text decoration style of the link as underline views.
 
+- **Type:** `TextDecorationStyle`
+- **Default:** `default`
+- **Possible Values:** `default, hover, underline`
+
 ```tsx
 import React from 'react';
-import { Text } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
 
-import { Link } from '../Link';
+import { Link } from '@app-studio/web';
 
 export const UnderlineLink = () => (
   <Vertical gap={10}>
-    <Link href={'https://www.npmjs.com/package/app-studio'} underline="default">
+    <Link to={'https://www.npmjs.com/package/app-studio'} underline="default">
       Default
     </Link>
-    <Link href={'https://www.npmjs.com/package/app-studio'} underline="hover">
+    <Link to={'https://www.npmjs.com/package/app-studio'} underline="hover">
       Hover
     </Link>
     <Link
-      href={'https://www.npmjs.com/package/app-studio'}
+      to={'https://www.npmjs.com/package/app-studio'}
       underline="underline"
       color="theme.primary"
       textDecorationColor="theme.primary"
@@ -45,39 +48,28 @@ export const UnderlineLink = () => (
     </Link>
   </Vertical>
 );
-
 ```
 
 ### **isExternal**
 Optional boolean indicating whether the link points to an external resource. Default behavior may vary based on this value.
 
+- **Type:** `boolean`
+- **Default:** `false`
+
 ```tsx
 import React from 'react';
-import { Text } from '@app-studio/web';
+import { Text } from 'app-studio';
 
-import { Link } from '../Link';
+import { Link } from '@app-studio/web';
 
 export const ExternalLink = () => (
   <Link
-    href={'https://www.npmjs.com/package/app-studio'}
+    to={'https://www.npmjs.com/package/app-studio'}
     isExternal
     iconSize="md"
   >
     <Text size="xl">External</Text>
   </Link>
 );
-
 ```
 
-## Props
-
-| Prop               | Type          | Description                                                                                                                               | Default |
-| ------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| href               | string        | The URL or path the link points to.                                                                                                       |         |
-| underline          | string        | The text decoration style of the link ('default', 'hover', 'underline').                                                                 |         |
-| isExternal         | boolean       | Whether the link points to an external resource.                                                                                          | false   |
-| iconSize           | Size          | The size of the icon if the link is external ('xs', 'sm', 'md', 'lg', 'xl').                                                              | 'md'    |
-| color              | string        | The color of the link text.                                                                                                               |         |
-| textDecorationColor | string        | The color of the text decoration (e.g., underline).                                                                                       |         |
-| styles             | CSSProperties | Optional custom styles for the link (container, text, icon).                                                                              |         |
-| children           | React.ReactNode | The content of the link (typically text or an icon).                                                                                       |         |

@@ -1,0 +1,126 @@
+{
+  "componentDescription": "Displays rich content on hover, with customizable trigger and content presentation.",
+  "HoverCard": {
+    "children": {
+      "type": "React.ReactNode",
+      "typeValues": null,
+      "description": "Optional React nodes to be rendered within the HoverCard component.",
+      "defaultValue": null
+    },
+    "views": {
+      "type": "{ container?: ViewProps; content?: ViewProps; }",
+      "typeValues": null,
+      "description": "Optional object to pass custom view properties to specific parts of the HoverCard. It includes 'container' for the main container view and 'content' for the content view, both accepting ViewProps.",
+      "defaultValue": null
+    },
+    "openDelay": {
+      "type": "number",
+      "typeValues": null,
+      "description": "The delay in milliseconds before the hover card opens after the trigger is hovered.",
+      "defaultValue": null
+    },
+    "closeDelay": {
+      "type": "number",
+      "typeValues": null,
+      "description": "The delay in milliseconds before the hover card closes after the trigger is no longer hovered.",
+      "defaultValue": null
+    }
+  },
+  "HoverCard.Trigger": {
+    "children": {
+      "type": "React.ReactNode",
+      "typeValues": null,
+      "description": "The React node that acts as the trigger for the hover card.",
+      "defaultValue": null
+    },
+    "views": {
+      "type": "{ container?: ViewProps; }",
+      "typeValues": null,
+      "description": "Optional object to pass custom view properties to specific parts of the Trigger. It includes 'container' for the container view, accepting ViewProps.",
+      "defaultValue": null
+    },
+    "asChild": {
+      "type": "boolean",
+      "typeValues": null,
+      "description": "If true, the trigger will render its child directly without an additional DOM element.",
+      "defaultValue": "false"
+    }
+  },
+  "HoverCard.Content": {
+    "children": {
+      "type": "React.ReactNode",
+      "typeValues": null,
+      "description": "The React nodes to be displayed inside the hover card content area.",
+      "defaultValue": null
+    },
+    "views": {
+      "type": "{ container?: ViewProps; }",
+      "typeValues": null,
+      "description": "Optional object to pass custom view properties to specific parts of the Content. It includes 'container' for the container view, accepting ViewProps.",
+      "defaultValue": null
+    },
+    "side": {
+      "type": "Side",
+      "typeValues": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "description": "The preferred side for the content to open relative to the trigger element.",
+      "defaultValue": "bottom"
+    },
+    "align": {
+      "type": "Alignment",
+      "typeValues": [
+        "start",
+        "center",
+        "end"
+      ],
+      "description": "The alignment of the content along the chosen side ('start', 'center', or 'end').",
+      "defaultValue": "center"
+    },
+    "sideOffset": {
+      "type": "number",
+      "typeValues": null,
+      "description": "The distance in pixels between the content and the trigger element.",
+      "defaultValue": "8"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "typeValues": null,
+      "description": "The background color of the hover card content.",
+      "defaultValue": "white"
+    },
+    "borderRadius": {
+      "type": "string",
+      "typeValues": null,
+      "description": "The border radius of the hover card content.",
+      "defaultValue": "4px"
+    },
+    "boxShadow": {
+      "type": "string",
+      "typeValues": null,
+      "description": "The box shadow applied to the hover card content.",
+      "defaultValue": "0px 2px 8px rgba(0, 0, 0, 0.15)"
+    },
+    "padding": {
+      "type": "string",
+      "typeValues": null,
+      "description": "The internal padding of the hover card content.",
+      "defaultValue": "12px"
+    },
+    "minWidth": {
+      "type": "string",
+      "typeValues": null,
+      "description": "The minimum width of the hover card content.",
+      "defaultValue": "50px"
+    },
+    "maxWidth": {
+      "type": "string",
+      "typeValues": null,
+      "description": "The maximum width of the hover card content.",
+      "defaultValue": "300px"
+    }
+  }
+}

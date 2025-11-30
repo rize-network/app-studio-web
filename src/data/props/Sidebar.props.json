@@ -1,0 +1,139 @@
+{
+  "componentDescription": "A versatile layout component for navigation or content, typically positioned at the screen edges.",
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "The content to be rendered within the sidebar component.",
+    "defaultValue": null
+  },
+  "position": {
+    "type": "Position",
+    "typeValues": [
+      "left",
+      "right"
+    ],
+    "description": "Determines the position of the sidebar on the screen (e.g., 'left', 'right').",
+    "defaultValue": "left"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Specifies the predefined size variant of the sidebar.",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "filled",
+      "outline",
+      "subtle",
+      "elevated"
+    ],
+    "description": "Defines the visual style and behavior of the sidebar (e.g., 'permanent', 'temporary', 'collapsed').",
+    "defaultValue": "default"
+  },
+  "defaultExpanded": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Sets the initial expanded state of the sidebar when it first renders.",
+    "defaultValue": null
+  },
+  "expanded": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Controls the expanded state of the sidebar, making it a controlled component.",
+    "defaultValue": null
+  },
+  "onExpandedChange": {
+    "type": "(expanded: boolean) => void",
+    "typeValues": null,
+    "description": "Callback function invoked when the sidebar's expanded state changes.",
+    "defaultValue": null
+  },
+  "fixed": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "When true, the sidebar remains fixed on the screen, not scrolling with page content.",
+    "defaultValue": false
+  },
+  "hasBackdrop": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, a backdrop overlay is shown when the sidebar is open, typically for temporary variants.",
+    "defaultValue": true
+  },
+  "showToggleButton": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether an internal toggle button for expanding/collapsing the sidebar is displayed.",
+    "defaultValue": null
+  },
+  "expandedWidth": {
+    "type": "string | number",
+    "typeValues": null,
+    "description": "Specifies the width of the sidebar when it is in the expanded state.",
+    "defaultValue": null
+  },
+  "collapsedWidth": {
+    "type": "string | number",
+    "typeValues": null,
+    "description": "Specifies the width of the sidebar when it is in the collapsed state.",
+    "defaultValue": null
+  },
+  "breakpoint": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Defines the screen width breakpoint at which the sidebar's behavior or variant might change.",
+    "defaultValue": null
+  },
+  "breakpointBehavior": {
+    "type": "BreakpointBehavior",
+    "typeValues": [
+      "collapse",
+      "overlay",
+      "hide"
+    ],
+    "description": "Specifies how the sidebar should adapt or change its behavior when the defined breakpoint is met.",
+    "defaultValue": "overlay"
+  },
+  "elevation": {
+    "type": "Elevation",
+    "typeValues": [
+      "none",
+      "low",
+      "medium",
+      "high"
+    ],
+    "description": "Controls the shadow effect or 'elevation' of the sidebar, indicating its depth relative to the surface.",
+    "defaultValue": "none"
+  },
+  "transitionPreset": {
+    "type": "TransitionPreset",
+    "typeValues": [
+      "fast",
+      "normal",
+      "slow",
+      "bounce"
+    ],
+    "description": "Defines a preset for the animation and transition effects applied to the sidebar.",
+    "defaultValue": "normal"
+  },
+  "ariaLabel": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Provides an accessible label for the sidebar component for screen readers.",
+    "defaultValue": "Sidebar navigation"
+  },
+  "views": {
+    "type": "SidebarStyles",
+    "typeValues": null,
+    "description": "Allows for overriding default styles or passing custom view props to different parts of the sidebar.",
+    "defaultValue": null
+  }
+}

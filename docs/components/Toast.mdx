@@ -1,165 +1,88 @@
 # Toast
 
-A succinct message that is displayed temporarily.
+Displays temporary, dismissible messages to inform users about actions, status, or events.
 
 ### **Import**
-  ```tsx
-  import { Toast } from '@app-studio/web';
-  ```
+```tsx
+import { Toast } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
 import { Button } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
 import { Toast } from '@app-studio/web';
 
 export const DefaultToast = () => {
   return (
-    <Button
-      onClick={() =>
-        Toast.success('Success', 'Your action was completed successfully.')
-      }
-    >
-      Show Success Toast
-    </Button>
+    <Horizontal gap={10}>
+      <Button
+        onClick={() =>
+          Toast.success('Success', 'Your action was completed successfully.')
+        }
+      >
+        Show Success Toast
+      </Button>
+    </Horizontal>
   );
 };
 ```
 
-### **Variants**
-The Toast component supports different variants:
+### **duration**
+The time in milliseconds before the toast automatically closes. Default is usually 5000ms.
+
+- **Type:** `number`
 
 ```tsx
-// Info toast
-Toast.info('Information', 'This is an informational message.');
+import React from 'react';
+import { Button } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+import { Toast } from '@app-studio/web';
 
-// Success toast
-Toast.success('Success', 'Your action was completed successfully.');
+export const ToastDurations = () => {
+  return (
+    <Horizontal gap={10}>
+      <Button
+        onClick={() =>
+          Toast.info(
+            'Short Duration',
+            'This toast will disappear in 2 seconds.',
+            {
+              duration: 2000,
+            }
+          )
+        }
+      >
+        2 Seconds
+      </Button>
 
-// Warning toast
-Toast.warning('Warning', 'Please be careful with this action.');
+      <Button
+        onClick={() =>
+          Toast.info(
+            'Default Duration',
+            'This toast will disappear in 5 seconds.'
+          )
+        }
+      >
+        5 Seconds (Default)
+      </Button>
 
-// Error toast
-Toast.error('Error', 'An error occurred while processing your request.');
+      <Button
+        onClick={() =>
+          Toast.info(
+            'Long Duration',
+            'This toast will disappear in 10 seconds.',
+            {
+              duration: 10000,
+            }
+          )
+        }
+      >
+        10 Seconds
+      </Button>
+    </Horizontal>
+  );
+};
 ```
 
-### **Positions**
-The Toast component can be positioned in different areas of the screen:
-
-```tsx
-// Top position
-Toast.info('Top Toast', 'This toast appears at the top.', { position: 'top' });
-
-// Top-right position (default)
-Toast.info('Top Right Toast', 'This toast appears at the top-right.', { position: 'top-right' });
-
-// Top-left position
-Toast.info('Top Left Toast', 'This toast appears at the top-left.', { position: 'top-left' });
-
-// Bottom position
-Toast.info('Bottom Toast', 'This toast appears at the bottom.', { position: 'bottom' });
-
-// Bottom-right position
-Toast.info('Bottom Right Toast', 'This toast appears at the bottom-right.', { position: 'bottom-right' });
-
-// Bottom-left position
-Toast.info('Bottom Left Toast', 'This toast appears at the bottom-left.', { position: 'bottom-left' });
-```
-
-### **Duration**
-The Toast component can be displayed for different durations:
-
-```tsx
-// Short duration (2 seconds)
-Toast.info('Short Duration', 'This toast will disappear in 2 seconds.', {
-  duration: 2000,
-});
-
-// Default duration (5 seconds)
-Toast.info('Default Duration', 'This toast will disappear in 5 seconds.');
-
-// Long duration (10 seconds)
-Toast.info('Long Duration', 'This toast will disappear in 10 seconds.', {
-  duration: 10000,
-});
-```
-
-### **Actions**
-The Toast component can include action buttons:
-
-```tsx
-// Toast with an undo action
-Toast.success('Item Deleted', 'The item has been successfully deleted.', {
-  action: () => {
-    // Handle undo action
-    console.log('Undo action triggered');
-  },
-  actionText: 'Undo',
-});
-
-// Toast with a retry action
-Toast.error('Failed to Save', 'There was an error saving your changes.', {
-  action: () => {
-    // Handle retry action
-    console.log('Retry action triggered');
-  },
-  actionText: 'Retry',
-});
-```
-
-### **Customization**
-The Toast component can be customized:
-
-```tsx
-// Custom styled toast
-Toast.info('Custom Styled Toast', 'This toast has custom styling.', {
-  views: {
-    container: {
-      backgroundColor: 'color.purple.50',
-      borderColor: 'color.purple.300',
-      borderRadius: '12px',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-    },
-    title: {
-      color: 'color.purple.700',
-      fontSize: '18px',
-    },
-    description: {
-      color: 'color.purple.600',
-    },
-  },
-  showIcon: false,
-});
-
-// Toast without a close button
-Toast.success('No Close Button', 'This toast does not have a close button.', {
-  isClosable: false,
-});
-
-// Toast without an icon
-Toast.warning('No Icon', 'This toast does not display an icon.', {
-  showIcon: false,
-});
-```
-
-### **Toast Container**
-The Toast component requires a container to be rendered:
-
-```tsx
-// Add this to your app's root component or layout
-<Toast.Container position="top-right" />
-```
-
-### **Programmatic Control**
-The Toast component can be controlled programmatically:
-
-```tsx
-// Show a toast and get its ID
-const toastId = Toast.info('Hello', 'This is a toast message');
-
-// Remove a specific toast
-Toast.remove(toastId);
-
-// Remove all toasts
-Toast.removeAll();
-```

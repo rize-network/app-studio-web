@@ -1,0 +1,130 @@
+{
+  "componentDescription": "A versatile component for displaying a collection of content in a rotating sequence with navigation.",
+  "children": {
+    "type": "React.ReactNode[]",
+    "typeValues": [],
+    "description": "The child elements to be displayed within the carousel, expected as an array of React nodes.",
+    "defaultValue": null
+  },
+  "defaultActiveIndex": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The initial active slide index when the carousel mounts, if not controlled.",
+    "defaultValue": 0
+  },
+  "activeIndex": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The currently active slide index, used for controlled components.",
+    "defaultValue": null
+  },
+  "onChange": {
+    "type": "(index: number) => void",
+    "typeValues": [],
+    "description": "Callback function triggered when the active slide changes, receiving the new index.",
+    "defaultValue": null
+  },
+  "showNavigation": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Determines whether navigation buttons (previous/next) should be displayed.",
+    "defaultValue": true
+  },
+  "navigationPosition": {
+    "type": "NavigationPosition",
+    "typeValues": [
+      "inside",
+      "outside"
+    ],
+    "description": "Specifies the position of the navigation buttons within the carousel.",
+    "defaultValue": "inside"
+  },
+  "prevButton": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Custom content or component for the previous navigation button.",
+    "defaultValue": null
+  },
+  "nextButton": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Custom content or component for the next navigation button.",
+    "defaultValue": null
+  },
+  "showIndicators": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Determines whether slide indicators should be displayed.",
+    "defaultValue": true
+  },
+  "indicatorPosition": {
+    "type": "IndicatorPosition",
+    "typeValues": [
+      "top",
+      "bottom"
+    ],
+    "description": "Specifies the position of the slide indicators within the carousel.",
+    "defaultValue": "bottom"
+  },
+  "indicatorVariant": {
+    "type": "IndicatorVariant",
+    "typeValues": [
+      "dot",
+      "line",
+      "number"
+    ],
+    "description": "Defines the visual style or variant of the slide indicators.",
+    "defaultValue": "dot"
+  },
+  "autoPlay": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Enables or disables automatic slide progression.",
+    "defaultValue": false
+  },
+  "autoPlayInterval": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The duration in milliseconds between automatic slide transitions.",
+    "defaultValue": 3000
+  },
+  "pauseOnHover": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Pauses auto-play when the user hovers over the carousel.",
+    "defaultValue": true
+  },
+  "infinite": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Enables infinite looping of slides, returning to the beginning after the last slide.",
+    "defaultValue": true
+  },
+  "direction": {
+    "type": "SlideDirection",
+    "typeValues": [
+      "horizontal",
+      "vertical"
+    ],
+    "description": "Specifies the direction of slide transitions (e.g., 'horizontal' or 'vertical').",
+    "defaultValue": "horizontal"
+  },
+  "transitionDuration": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The duration in milliseconds for slide transition animations.",
+    "defaultValue": 300
+  },
+  "stepIndices": {
+    "type": "number[]",
+    "typeValues": [],
+    "description": "An optional array of indices that define specific steps or points in the carousel navigation.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "CarouselStyles",
+    "typeValues": [],
+    "description": "Custom styles to apply to different parts of the carousel component.",
+    "defaultValue": null
+  }
+}

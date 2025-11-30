@@ -1,0 +1,77 @@
+{
+  "componentDescription": "A versatile component for searching, filtering, and executing commands or actions.",
+  "open": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Controls the open/closed state of the command dialog.",
+    "defaultValue": null
+  },
+  "onOpenChange": {
+    "type": "(open: boolean) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when the open state of the command dialog changes.",
+    "defaultValue": null
+  },
+  "groups": {
+    "type": "CommandGroup[]",
+    "typeValues": [],
+    "description": "An optional array of command groups to be displayed.",
+    "defaultValue": []
+  },
+  "commands": {
+    "type": "CommandItem[]",
+    "typeValues": [],
+    "description": "An optional array of individual command items to be displayed.",
+    "defaultValue": []
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Placeholder text to display in the command input field when it's empty.",
+    "defaultValue": null
+  },
+  "size": {
+    "type": "CommandSize",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Defines the predefined size of the command component.",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "CommandVariant",
+    "typeValues": [
+      "default",
+      "filled",
+      "outline"
+    ],
+    "description": "Specifies the visual variant or style of the command component.",
+    "defaultValue": "default"
+  },
+  "filter": {
+    "type": "(value: string, item: CommandItem) => boolean",
+    "typeValues": [],
+    "description": "A custom filter function to determine if a command item matches the search input.",
+    "defaultValue": null
+  },
+  "emptyState": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "React node to render when there are no command items to display (e.g., after filtering).",
+    "defaultValue": null
+  },
+  "footer": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "React node to render at the bottom of the command dialog, often for actions or information.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "CommandStyles",
+    "typeValues": [],
+    "description": "Custom styling properties for various parts of the Command component.",
+    "defaultValue": null
+  }
+}

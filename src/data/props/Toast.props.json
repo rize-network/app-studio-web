@@ -1,0 +1,99 @@
+{
+  "componentDescription": "Displays temporary, dismissible messages to inform users about actions, status, or events.",
+  "id": {
+    "type": "string",
+    "description": "An optional unique identifier for the toast."
+  },
+  "variant": {
+    "type": "ToastVariant",
+    "typeValues": [
+      "info",
+      "success",
+      "warning",
+      "error"
+    ],
+    "description": "The visual style or type of the toast (e.g., success, error, info)."
+  },
+  "title": {
+    "type": "string",
+    "description": "The main title text displayed in the toast."
+  },
+  "description": {
+    "type": "string",
+    "description": "An optional detailed description or message for the toast."
+  },
+  "onClose": {
+    "type": "() => void",
+    "description": "A callback function triggered when the toast is closed or dismissed."
+  },
+  "isClosable": {
+    "type": "boolean",
+    "description": "Determines if the toast can be manually closed by the user.",
+    "defaultValue": true
+  },
+  "action": {
+    "type": "() => void",
+    "description": "An optional callback function for an action button within the toast."
+  },
+  "actionText": {
+    "type": "string",
+    "description": "The text to display on the optional action button."
+  },
+  "showIcon": {
+    "type": "boolean",
+    "description": "Controls the visibility of the default icon associated with the toast variant.",
+    "defaultValue": true
+  },
+  "theme": {
+    "type": "ThemesType",
+    "description": "An optional theme to apply to the toast, overriding the global theme."
+  },
+  "views": {
+    "type": "ToastStyles",
+    "description": "Optional custom styles to apply to different parts of the toast component."
+  },
+  "duration": {
+    "type": "number",
+    "description": "The time in milliseconds before the toast automatically closes. Default is usually 5000ms."
+  },
+  "render": {
+    "type": "(props: { id: string; onClose: () => void }) => React.ReactNode",
+    "description": "An optional render prop to provide a custom JSX element for the toast content, receiving `id` and `onClose`."
+  },
+  "icon": {
+    "type": "React.ReactNode",
+    "description": "An optional custom React node to use as the toast's icon, overriding the default."
+  },
+  "isVisible": {
+    "type": "boolean",
+    "description": "Controls the visibility state of the toast component.",
+    "defaultValue": true
+  },
+  "position": {
+    "type": "ToastPosition",
+    "typeValues": [
+      "top",
+      "top-right",
+      "top-left",
+      "bottom",
+      "bottom-right",
+      "bottom-left"
+    ],
+    "description": "The position on the screen where the toast container will be displayed (e.g., 'top-right', 'bottom-left').",
+    "defaultValue": "top-right"
+  },
+  "gap": {
+    "type": "number",
+    "description": "The spacing in pixels between multiple toasts within the container.",
+    "defaultValue": 8
+  },
+  "limit": {
+    "type": "number",
+    "description": "The maximum number of toasts that can be displayed simultaneously in the container.",
+    "defaultValue": 5
+  },
+  "containerStyle": {
+    "type": "React.CSSProperties",
+    "description": "Optional custom CSS properties to apply directly to the toast container element."
+  }
+}

@@ -1,16 +1,16 @@
 # Alert
 
-Displays an alert with optional icon and customizable views.
+Displays important messages to users with various styles and states.
 
 ### **Import**
-  ```tsx
-  import { Alert } from '@app-studio/web';
-  ```
+```tsx
+import { Alert } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Alert } from '../Alert';
+import { Alert } from '@app-studio/web';
 
 export const DefaultDemo = () => {
   return (
@@ -20,37 +20,41 @@ export const DefaultDemo = () => {
     />
   );
 };
-
 ```
 
 ### **icon**
-Optional icon property, expecting a React node element
+Custom icon element to display in the alert, overriding the default variant-based icon.
+
+- **Type:** `ReactNode`
 
 ```tsx
 import React from 'react';
-import { EditIcon } from '../../Icon/Icon';
-import { Alert } from '../Alert';
+import { EditIcon } from '@app-studio/web';
+import { Alert } from '@app-studio/web';
 
 export const IconDemo = () => {
   return (
     <Alert
       title="Heads up!"
       description="You can add components to your app using the cli."
-      icon={<EditIcon size={24} color="black" />}
+      icon={<EditIcon widthHeight={24} color="black" />}
     />
   );
 };
-
 ```
 
 ### **variant**
-Optional variant property to determine the style of the alert
+Determines the visual style and semantic meaning of the alert.
+
+- **Type:** `string`
+- **Default:** `default`
+- **Possible Values:** `default, info, success, error, warning`
 
 ```tsx
 import React from 'react';
-import { Horizontal } from '@app-studio/web';
-import { Alert } from '../Alert';
-import { Variant } from '../Alert/Alert.type';
+import { Horizontal } from 'app-studio';
+import { Alert } from '@app-studio/web';
+import { Variant } from '@app-studio/web';
 
 export const VariantDemo = () => (
   <Horizontal gap={10}>
@@ -64,60 +68,5 @@ export const VariantDemo = () => (
     ))}
   </Horizontal>
 );
-
-```
-
-### **styles**
-Optional styles property to apply custom styles to the alert component
-
-```tsx
-import React from 'react';
-import { Alert } from '../Alert';
-
-export const StylesDemo = () => (
-  <Alert
-    title={'Heads Up!'}
-    description={'You can add components to your app using the cli.'}
-    views={{
-      container: { backgroundColor: 'black' },
-      title: { color: 'white' },
-      description: { color: 'white' },
-      icon: { color: 'white' },
-    }}
-  />
-);
-
-```
-
-### **Theme Mode Support**
-The Alert component supports both light and dark themes through the `themeMode` prop.
-
-```tsx
-import React from 'react';
-import { Alert } from '../Alert';
-import { Vertical } from '@app-studio/web';
-import { Text } from '@app-studio/web';
-
-export const DarkModeDemo = () => {
-  return (
-    <Vertical gap={24}>
-      <Text fontSize={20} fontWeight="bold">Light Mode Alerts</Text>
-      <Alert
-        themeMode="light"
-        variant="info"
-        title="Info Alert (Light)"
-        description="This is an info alert in light mode."
-      />
-
-      <Text fontSize={20} fontWeight="bold" marginTop={40}>Dark Mode Alerts</Text>
-      <Alert
-        themeMode="dark"
-        variant="info"
-        title="Info Alert (Dark)"
-        description="This is an info alert in dark mode."
-      />
-    </Vertical>
-  );
-};
 ```
 

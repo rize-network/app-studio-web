@@ -1,17 +1,17 @@
 # AspectRatio
 
-Maintains a set aspect ratio for child content
+This component ensures its content maintains a specified aspect ratio, adjusting its size responsively while preserving visual proportions.
 
 ### **Import**
-  ```tsx
-  import { AspectRatio } from '@app-studio/web';
-  ```
+```tsx
+import { AspectRatio } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Image } from '@app-studio/web';
-import { AspectRatio } from '../AspectRatio';
+import { Image } from 'app-studio';
+import { AspectRatio } from '@app-studio/web';
 
 export const DefaultDemo = () => {
   return (
@@ -26,16 +26,19 @@ export const DefaultDemo = () => {
     </AspectRatio>
   );
 };
-
 ```
 
 ### **ratio**
-specifying the aspect ratio
+Set a default aspect ratio of 16:9 if no ratio is provided as a prop.
+
+- **Type:** `number`
+- **Default:** `16 / 9`
+- **Possible Values:** ``
 
 ```tsx
 import React from 'react';
-import { Image } from '@app-studio/web';
-import { AspectRatio } from '../AspectRatio';
+import { Image } from 'app-studio';
+import { AspectRatio } from '@app-studio/web';
 
 export const RatioDemo = () => {
   return (
@@ -50,6 +53,5 @@ export const RatioDemo = () => {
     </AspectRatio>
   );
 };
-
 ```
 

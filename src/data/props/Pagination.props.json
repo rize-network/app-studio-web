@@ -1,0 +1,116 @@
+{
+  "componentDescription": "A user interface component for navigating through a sequence of pages.",
+  "currentPage": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Specifies the currently active page number.",
+    "defaultValue": null
+  },
+  "totalPages": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Indicates the total number of available pages.",
+    "defaultValue": null
+  },
+  "onPageChange": {
+    "type": "(page: number) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when the current page changes.",
+    "defaultValue": null
+  },
+  "pageSize": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Optional property to set the number of items displayed per page.",
+    "defaultValue": 10
+  },
+  "pageSizeOptions": {
+    "type": "PageSizeOption[]",
+    "typeValues": [],
+    "description": "Optional array defining the available page size options for the selector.",
+    "defaultValue": [
+      {
+        "label": "10 / page",
+        "value": 10
+      },
+      {
+        "label": "20 / page",
+        "value": 20
+      },
+      {
+        "label": "50 / page",
+        "value": 50
+      },
+      {
+        "label": "100 / page",
+        "value": 100
+      }
+    ]
+  },
+  "onPageSizeChange": {
+    "type": "(pageSize: number) => void",
+    "typeValues": [],
+    "description": "Optional callback function invoked when the page size changes.",
+    "defaultValue": null
+  },
+  "showPageSizeSelector": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Optional flag to control the visibility of the page size selection dropdown.",
+    "defaultValue": false
+  },
+  "showPageInfo": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Optional flag to control the visibility of information about the current page and total pages.",
+    "defaultValue": true
+  },
+  "maxPageButtons": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Optional property limiting the maximum number of visible page buttons displayed at once.",
+    "defaultValue": 5
+  },
+  "showFirstLastButtons": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Optional flag to control the visibility of buttons for navigating to the first and last pages.",
+    "defaultValue": false
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Optional property to define the size of the pagination component (e.g., small, medium, large).",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "filled",
+      "outline"
+    ],
+    "description": "Optional property to define the visual variant of the pagination component.",
+    "defaultValue": "default"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "rounded",
+      "square",
+      "circular"
+    ],
+    "description": "Optional property to define the shape of the pagination buttons.",
+    "defaultValue": "rounded"
+  },
+  "views": {
+    "type": "PaginationStyles",
+    "typeValues": [],
+    "description": "Optional property for applying custom styles to different parts of the pagination component.",
+    "defaultValue": null
+  }
+}

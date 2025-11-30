@@ -11,7 +11,7 @@ A customizable checkbox form element with optional label and various views.
 ```tsx
 import React from 'react';
 
-import { Checkbox } from '../Checkbox';
+import { Checkbox } from '@app-studio/web';
 
 export const DefaultCheckbox = () => <Checkbox label="option" />;
 
@@ -22,9 +22,7 @@ Optional color scheme string that might allow customization of the checkbox's ap
 
 ```tsx
 import React from 'react';
-import { Vertical } from '@app-studio/web';
-
-import { Checkbox } from '../Checkbox';
+import { Vertical, Checkbox } from '@app-studio/web';
 
 export const ColorCheckbox = () => (
   <Vertical gap={15}>
@@ -52,7 +50,7 @@ An optional shadow or elevation effect that can be applied to the Checkbox compo
 
 ```tsx
 import React from 'react';
-import { Checkbox } from '../../../Form/Checkbox/Checkbox';
+import { Checkbox } from '@app-studio/web';
 
 export const ShadowCheckbox = () => (
   <Checkbox

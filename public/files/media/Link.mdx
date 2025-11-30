@@ -1,0 +1,75 @@
+# Link
+
+This component provides a navigational link that can render children, manage external links, and apply various text decoration styles.
+
+### **Import**
+```tsx
+import { Link } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+
+import { Link } from '../Link';
+
+export const DefaultLink = () => <Link to="/">Default</Link>;
+```
+
+### **underline**
+Optional prop to define the text decoration style of the link as underline views.
+
+- **Type:** `TextDecorationStyle`
+- **Default:** `default`
+- **Possible Values:** `default, hover, underline`
+
+```tsx
+import React from 'react';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+import { Link } from '../Link';
+
+export const UnderlineLink = () => (
+  <Vertical gap={10}>
+    <Link to={'https://www.npmjs.com/package/app-studio'} underline="default">
+      Default
+    </Link>
+    <Link to={'https://www.npmjs.com/package/app-studio'} underline="hover">
+      Hover
+    </Link>
+    <Link
+      to={'https://www.npmjs.com/package/app-studio'}
+      underline="underline"
+      color="theme.primary"
+      textDecorationColor="theme.primary"
+    >
+      <Text>Underline</Text>
+    </Link>
+  </Vertical>
+);
+```
+
+### **isExternal**
+Optional boolean indicating whether the link points to an external resource. Default behavior may vary based on this value.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Text } from 'app-studio';
+
+import { Link } from '../Link';
+
+export const ExternalLink = () => (
+  <Link
+    to={'https://www.npmjs.com/package/app-studio'}
+    isExternal
+    iconSize="md"
+  >
+    <Text size="xl">External</Text>
+  </Link>
+);
+```
+

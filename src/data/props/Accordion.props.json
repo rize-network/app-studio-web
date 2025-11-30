@@ -1,0 +1,67 @@
+{
+  "componentDescription": "Organizes content into collapsible sections for efficient space management.",
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Specifies the React nodes that will be rendered inside the Accordion component, typically Accordion.Item components.",
+    "defaultValue": null
+  },
+  "type": {
+    "type": "AccordionType",
+    "typeValues": [
+      "single",
+      "multiple"
+    ],
+    "description": "Determines the behavior of the Accordion, such as allowing single or multiple items to be open simultaneously.",
+    "defaultValue": "single"
+  },
+  "defaultValue": {
+    "type": "string | string[]",
+    "typeValues": null,
+    "description": "Sets the initial open state of accordion items for an uncontrolled component. Can be a single string or an array of strings representing item values.",
+    "defaultValue": null
+  },
+  "value": {
+    "type": "string | string[]",
+    "typeValues": null,
+    "description": "Controls the open state of accordion items for a controlled component. Can be a single string or an array of strings representing item values.",
+    "defaultValue": null
+  },
+  "onValueChange": {
+    "type": "(value: string | string[] | undefined) => void",
+    "typeValues": null,
+    "description": "A callback function invoked when the open state of accordion items changes, providing the new value(s).",
+    "defaultValue": null
+  },
+  "collapsible": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, allows all accordion items to be collapsed, meaning no item has to be open.",
+    "defaultValue": false
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "sharp",
+      "rounded"
+    ],
+    "description": "Defines the visual shape style of the Accordion component, affecting its corners or borders.",
+    "defaultValue": "rounded"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "outline",
+      "filled"
+    ],
+    "description": "Defines the visual variant style of the Accordion component, affecting its overall appearance.",
+    "defaultValue": "default"
+  },
+  "views": {
+    "type": "AccordionStyles",
+    "typeValues": null,
+    "description": "Provides an object to apply custom styles to different sub-components of the Accordion.",
+    "defaultValue": null
+  }
+}

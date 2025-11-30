@@ -1,33 +1,54 @@
 {
-  "componentDescription": "Displays an alert with optional icon and customizable views.",
+  "componentDescription": "Displays important messages to users with various styles and states.",
   "icon": {
-    "type": ["React.ReactNode"],
-    "typeValues": [],
-    "description": "Optional icon property, expecting a React node element",
-    "defaultValue": "<WarningIcon widthHeight={24} color={Themes[variant].content.color} />"
+    "type": "ReactNode",
+    "typeValues": null,
+    "description": "Custom icon element to display in the alert, overriding the default variant-based icon.",
+    "defaultValue": null
   },
   "title": {
-    "type": ["string"],
-    "typeValues": [],
-    "description": "Mandatory title property, must be a string",
+    "type": "string",
+    "typeValues": null,
+    "description": "The main title or heading of the alert.",
     "defaultValue": ""
   },
+  "views": {
+    "type": "{ container?: object, icon?: object, title?: object, description?: object }",
+    "typeValues": null,
+    "description": "Allows overriding default styles for specific internal elements like the container, icon, title, or description.",
+    "defaultValue": null
+  },
   "description": {
-    "type": ["string"],
-    "typeValues": [],
-    "description": "Mandatory description property, must be a string",
+    "type": "string",
+    "typeValues": null,
+    "description": "The detailed description or message content of the alert.",
     "defaultValue": ""
   },
   "variant": {
-    "type": ["Variant"],
-    "typeValues": ["'default'", "...other possible variants"],
-    "description": "Optional variant property to determine the style of the alert",
-    "defaultValue": "'default'"
+    "type": "string",
+    "typeValues": [
+      "default",
+      "info",
+      "success",
+      "error",
+      "warning"
+    ],
+    "description": "Determines the visual style and semantic meaning of the alert.",
+    "defaultValue": "default"
   },
-  "styles": {
-    "type": ["AlertStyles"],
-    "typeValues": [],
-    "description": "Optional styles property to apply custom styles to the alert component",
-    "defaultValue": "{}"
+  "themeMode": {
+    "type": "string",
+    "typeValues": [
+      "light",
+      "dark"
+    ],
+    "description": "Overrides the global theme mode for this specific alert component, affecting its appearance.",
+    "defaultValue": null
+  },
+  "children": {
+    "type": "ReactNode",
+    "typeValues": null,
+    "description": "Content to be rendered as the alert's description, alternative to the 'description' prop.",
+    "defaultValue": null
   }
 }

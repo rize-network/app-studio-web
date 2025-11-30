@@ -1,0 +1,88 @@
+{
+  "componentDescription": "Renders a modal dialog with various styles and states according to the design guidelines.",
+  "buttonColor": {
+    "type": "string",
+    "typeValues": [],
+    "description": "The color of the close button in the header.",
+    "defaultValue": "theme.primary"
+  },
+  "iconSize": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "The size of the close button in the header.",
+    "defaultValue": "md"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "sharp",
+      "rounded"
+    ],
+    "description": "Determines whether the modal should have sharp or rounded edges.",
+    "defaultValue": "rounded"
+  },
+  "isFullScreen": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "If set to true, the modal will occupy the full width and height of the screen.",
+    "defaultValue": false
+  },
+  "buttonPosition": {
+    "type": "CloseButtonPosition",
+    "typeValues": [
+      "left",
+      "right",
+      "none"
+    ],
+    "description": "Indicates the presence of a close button and its position within the header.",
+    "defaultValue": "right"
+  },
+  "onClose": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "The callback function to be executed when the close button is clicked or pressed.",
+    "defaultValue": "() => {}"
+  },
+  "blur": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The degree of blurriness applied to the overlay.",
+    "defaultValue": "undefined"
+  },
+  "isOpen": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "If set to true, the modal will be visible.",
+    "defaultValue": false
+  },
+  "isClosePrevented": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "If set to true, the modal will remain open when the overlay is clicked.",
+    "defaultValue": false
+  },
+  "position": {
+    "type": "Position",
+    "typeValues": [
+      "top",
+      "left",
+      "right",
+      "bottom",
+      "center"
+    ],
+    "description": "The positioning of the modal container.",
+    "defaultValue": "center"
+  },
+  "shadow": {
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": [],
+    "description": "Applies a shadow effect to the button.",
+    "defaultValue": "undefined"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "componentDescription": "A versatile component for building navigation structures, offering customizable orientation, size, and visual styles.",
+  "items": {
+    "type": "array",
+    "typeValues": "NavigationItem[]",
+    "description": "Defines an optional array of navigation items to be displayed in the menu.",
+    "defaultValue": "undefined"
+  },
+  "children": {
+    "type": "ReactNode",
+    "typeValues": "undefined",
+    "description": "Represents the child elements to be rendered within the navigation menu.",
+    "defaultValue": "undefined"
+  },
+  "orientation": {
+    "type": "string",
+    "typeValues": "'horizontal' | 'vertical'",
+    "description": "Specifies the layout orientation of the navigation menu (e.g., horizontal or vertical).",
+    "defaultValue": "'vertical'"
+  },
+  "size": {
+    "type": "string",
+    "typeValues": "'sm' | 'md' | 'lg'",
+    "description": "Determines the predefined size of the navigation menu components.",
+    "defaultValue": "'md'"
+  },
+  "variant": {
+    "type": "string",
+    "typeValues": "'default' | 'filled' | 'outline'",
+    "description": "Defines the visual style or variant of the navigation menu.",
+    "defaultValue": "'default'"
+  },
+  "defaultActiveItemId": {
+    "type": "string",
+    "typeValues": "undefined",
+    "description": "The ID of the item that should be active by default when the menu initializes.",
+    "defaultValue": "null"
+  },
+  "defaultExpandedItemIds": {
+    "type": "array",
+    "typeValues": "string[]",
+    "description": "An array of item IDs that should be expanded by default when the menu initializes.",
+    "defaultValue": "[]"
+  },
+  "onItemActivate": {
+    "type": "function",
+    "typeValues": "undefined",
+    "description": "Callback function triggered when a navigation item is activated, receiving the item's ID.",
+    "defaultValue": "undefined"
+  },
+  "views": {
+    "type": "object",
+    "typeValues": "NavigationMenuStyles",
+    "description": "Custom styles to apply to different parts of the navigation menu.",
+    "defaultValue": "undefined"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "componentDescription": "A visual element used to divide or group content on a user interface.",
+  "orientation": {
+    "type": "Orientation",
+    "typeValues": [
+      "horizontal",
+      "vertical"
+    ],
+    "description": "Specifies the orientation of the separator, either horizontal or vertical.",
+    "defaultValue": "horizontal"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "solid",
+      "dashed",
+      "dotted"
+    ],
+    "description": "Determines the visual style or type of the separator (e.g., solid, dashed).",
+    "defaultValue": "solid"
+  },
+  "thickness": {
+    "type": "Thickness",
+    "typeValues": [
+      "thin",
+      "medium",
+      "thick"
+    ],
+    "description": "Sets the thickness or width of the separator line.",
+    "defaultValue": "thin"
+  },
+  "color": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Defines the color of the separator line.",
+    "defaultValue": "color.gray.200"
+  },
+  "spacing": {
+    "type": "number | string",
+    "typeValues": [],
+    "description": "Controls the spacing or margin around the separator.",
+    "defaultValue": "0px"
+  },
+  "label": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Provides content to display within or alongside the separator, such as text or an icon.",
+    "defaultValue": "undefined"
+  },
+  "decorative": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the separator is purely decorative (true) or conveys semantic meaning (false).",
+    "defaultValue": false
+  },
+  "views": {
+    "type": "SeparatorStyles",
+    "typeValues": [],
+    "description": "Allows for custom styling of different parts of the Separator component.",
+    "defaultValue": "undefined"
+  }
+}

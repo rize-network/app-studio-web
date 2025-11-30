@@ -1,158 +1,111 @@
 # Accordion
 
-A component that displays collapsible content panels for presenting information in a limited amount of space.
+Organizes content into collapsible sections for efficient space management.
 
 ### **Import**
-  ```tsx
-  import { Accordion } from '@app-studio/web';
-  ```
+```tsx
+import { Accordion } from '@app-studio/web';
+```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Accordion } from '../Accordion';
-import { Text } from '@app-studio/web';
+import { Accordion } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
 
 export const DefaultAccordion = () => {
   return (
-    <Accordion>
-      <Accordion.Item id="item-1">
-        <Accordion.Header>
-          <Text fontWeight="bold">What is React?</Text>
-        </Accordion.Header>
-        <Accordion.Content>
-          <Text>
-            React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.
-          </Text>
-        </Accordion.Content>
-      </Accordion.Item>
-      
-      <Accordion.Item id="item-2">
-        <Accordion.Header>
-          <Text fontWeight="bold">What are React Hooks?</Text>
-        </Accordion.Header>
-        <Accordion.Content>
-          <Text>
-            Hooks are functions that let you "hook into" React state and lifecycle features from function components.
-          </Text>
-        </Accordion.Content>
-      </Accordion.Item>
-    </Accordion>
-  );
-};
-```
-
-### **Multiple**
-Allow multiple items to be expanded at once.
-
-```tsx
-import React from 'react';
-import { Accordion } from '../Accordion';
-import { Text } from '@app-studio/web';
-
-export const MultipleAccordion = () => {
-  return (
-    <Accordion allowMultiple defaultExpandedItems={['item-1']}>
-      <Accordion.Item id="item-1">
-        <Accordion.Header>
-          <Text fontWeight="bold">First Item (Initially Expanded)</Text>
-        </Accordion.Header>
-        <Accordion.Content>
-          <Text>
-            This item is initially expanded. You can expand multiple items at once in this accordion.
-          </Text>
-        </Accordion.Content>
-      </Accordion.Item>
-      
-      <Accordion.Item id="item-2">
-        <Accordion.Header>
-          <Text fontWeight="bold">Second Item</Text>
-        </Accordion.Header>
-        <Accordion.Content>
-          <Text>
-            This is the second item. Try expanding this while the first item is still open.
-          </Text>
-        </Accordion.Content>
-      </Accordion.Item>
-    </Accordion>
-  );
-};
-```
-
-### **Variants**
-Different visual styles for the accordion.
-
-```tsx
-import React from 'react';
-import { Accordion } from '../Accordion';
-import { Text } from '@app-studio/web';
-
-export const AccordionVariants = () => {
-  return (
-    <>
-      <Accordion variant="outline">
-        <Accordion.Item id="outline-1">
-          <Accordion.Header>
-            <Text fontWeight="bold">Outline Variant</Text>
-          </Accordion.Header>
+    <Vertical gap={20} width="100%" maxWidth={600}>
+      <Text marginBottom={10}>Default Accordion (Single)</Text>
+      <Accordion type="single" defaultValue="item-1">
+        <Accordion.Item value="item-1">
+          <Accordion.Trigger>
+            <Text fontWeight="bold">What is React?</Text>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
-              This is the content for the outline variant accordion.
+              React is a JavaScript library for building user interfaces. It is
+              maintained by Facebook and a community of individual developers
+              and companies. React can be used as a base in the development of
+              single-page or mobile applications.
+            </Text>
+          </Accordion.Content>
+        </Accordion.Item>
+
+        <Accordion.Item value="item-2">
+          <Accordion.Trigger>
+            <Text fontWeight="bold">What are React Hooks?</Text>
+          </Accordion.Trigger>
+          <Accordion.Content>
+            <Text>
+              Hooks are functions that let you hook into React state and
+              lifecycle features from function components. Hooks dont work
+              inside classes — they let you use React without classes.
+            </Text>
+          </Accordion.Content>
+        </Accordion.Item>
+
+        <Accordion.Item value="item-3">
+          <Accordion.Trigger>
+            <Text fontWeight="bold">What is JSX?</Text>
+          </Accordion.Trigger>
+          <Accordion.Content>
+            <Text>
+              JSX is a syntax extension for JavaScript. It was written to be
+              used with React and looks a lot like HTML. Because JSX is
+              JavaScript, you can use variables inside it.
             </Text>
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
-      
-      <Accordion variant="filled">
-        <Accordion.Item id="filled-1">
-          <Accordion.Header>
-            <Text fontWeight="bold">Filled Variant</Text>
-          </Accordion.Header>
+    </Vertical>
+  );
+};
+```
+
+### **collapsible**
+If true, allows all accordion items to be collapsed, meaning no item has to be open.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Accordion } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+
+export const CollapsibleAccordion = () => {
+  return (
+    <Vertical gap={20} width="100%" maxWidth={600}>
+      <Text marginBottom={10}>Collapsible Accordion (Single)</Text>
+      <Accordion type="single" defaultValue="item-1" collapsible>
+        <Accordion.Item value="item-1">
+          <Accordion.Trigger>
+            <Text fontWeight="bold">Question 1</Text>
+          </Accordion.Trigger>
           <Accordion.Content>
             <Text>
-              This is the content for the filled variant accordion.
+              This is the answer to question 1. Since `collapsible` is true, you
+              can click the trigger again to close this item, even though its
+              the only one.
+            </Text>
+          </Accordion.Content>
+        </Accordion.Item>
+
+        <Accordion.Item value="item-2">
+          <Accordion.Trigger>
+            <Text fontWeight="bold">Question 2</Text>
+          </Accordion.Trigger>
+          <Accordion.Content>
+            <Text>
+              This is the answer to question 2. Only one item can be open, but
+              it can be closed entirely.
             </Text>
           </Accordion.Content>
         </Accordion.Item>
       </Accordion>
-    </>
+    </Vertical>
   );
 };
 ```
 
-### **Disabled**
-Disable specific accordion items.
-
-```tsx
-import React from 'react';
-import { Accordion } from '../Accordion';
-import { Text } from '@app-studio/web';
-
-export const DisabledAccordion = () => {
-  return (
-    <Accordion>
-      <Accordion.Item id="regular-1">
-        <Accordion.Header>
-          <Text fontWeight="bold">Regular Item</Text>
-        </Accordion.Header>
-        <Accordion.Content>
-          <Text>
-            This is a regular accordion item that can be expanded and collapsed.
-          </Text>
-        </Accordion.Content>
-      </Accordion.Item>
-      
-      <Accordion.Item id="disabled-1" isDisabled>
-        <Accordion.Header>
-          <Text fontWeight="bold">Disabled Item</Text>
-        </Accordion.Header>
-        <Accordion.Content>
-          <Text>
-            This content won't be accessible because the item is disabled.
-          </Text>
-        </Accordion.Content>
-      </Accordion.Item>
-    </Accordion>
-  );
-};
-```

@@ -1,0 +1,63 @@
+{
+  "componentDescription": "A versatile container component to display content in a structured and visually distinct block.",
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "outlined",
+      "elevated"
+    ],
+    "description": "Specifies the visual style or theme of the card, determined by the 'Variant' type.",
+    "defaultValue": "default"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Determines the predefined dimensions or scale of the card, controlled by the 'Size' type.",
+    "defaultValue": "md"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "sharp",
+      "rounded",
+      "pillShaped"
+    ],
+    "description": "Defines the border radius or overall form of the card, based on the 'Shape' type.",
+    "defaultValue": "rounded"
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Represents the primary content to be rendered inside the card's body.",
+    "defaultValue": null
+  },
+  "header": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Optional content to be displayed in the card's header section.",
+    "defaultValue": null
+  },
+  "footer": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Optional content to be displayed in the card's footer section.",
+    "defaultValue": null
+  },
+  "isFullWidth": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean flag indicating if the card should occupy the full width of its parent container.",
+    "defaultValue": false
+  },
+  "views": {
+    "type": "CardStyles",
+    "typeValues": [],
+    "description": "Defines custom styling properties for various parts of the card, overriding default appearance.",
+    "defaultValue": null
+  }
+}
