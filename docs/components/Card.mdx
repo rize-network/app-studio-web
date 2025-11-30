@@ -1,6 +1,6 @@
 # Card
 
-A versatile container component to display content in a structured and visually distinct block.
+A versatile card component for displaying content in a contained, styled box with support for headers, content, and footers.
 
 ### **Import**
 ```tsx
@@ -13,12 +13,286 @@ import React from 'react';
 import { Card } from '@app-studio/web';
 import { Text } from 'app-studio';
 
-export const DefaultDemo = () => {
-  return (
-    <Card>
-      <Text>This is a default card with simple content.</Text>
-    </Card>
-  );
-};
+export const DefaultCard = () => (
+  <Card>
+    <Text>Card content</Text>
+  </Card>
+);
+```
+
+### **Structured Layout**
+Use Card.Header, Card.Content, and Card.Footer for organized layouts.
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text, Button } from 'app-studio';
+
+export const StructuredCard = () => (
+  <Card>
+    <Card.Header>
+      <Text fontSize={18} fontWeight="bold">Card Title</Text>
+    </Card.Header>
+    <Card.Content>
+      <Text>This is the main content of the card.</Text>
+    </Card.Content>
+    <Card.Footer>
+      <Button>Action</Button>
+    </Card.Footer>
+  </Card>
+);
+```
+
+### **variant**
+The visual style variant of the card.
+
+- **Type:** `Variant`
+- **Default:** `'default'`
+- **Possible Values:** `'default' | 'elevated' | 'outlined' | 'filled'`
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+
+export const VariantCards = () => (
+  <Vertical gap={15}>
+    {['default', 'elevated', 'outlined', 'filled'].map((variant) => (
+      <Card key={variant} variant={variant as any}>
+        <Card.Content>
+          <Text>{variant} variant</Text>
+        </Card.Content>
+      </Card>
+    ))}
+  </Vertical>
+);
+```
+
+### **size**
+The size of the card, affecting padding.
+
+- **Type:** `Size`
+- **Default:** `'md'`
+- **Possible Values:** `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+
+export const SizedCards = () => (
+  <Vertical gap={15}>
+    {['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
+      <Card key={size} size={size as any}>
+        <Card.Content>
+          <Text>Size: {size}</Text>
+        </Card.Content>
+      </Card>
+    ))}
+  </Vertical>
+);
+```
+
+### **shape**
+The shape of the card's corners.
+
+- **Type:** `Shape`
+- **Default:** `'rounded'`
+- **Possible Values:** `'sharp' | 'rounded' | 'pillShaped'`
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text, Horizontal } from 'app-studio';
+
+export const ShapedCards = () => (
+  <Horizontal gap={15}>
+    {['sharp', 'rounded', 'pillShaped'].map((shape) => (
+      <Card key={shape} shape={shape as any}>
+        <Card.Content>
+          <Text>{shape}</Text>
+        </Card.Content>
+      </Card>
+    ))}
+  </Horizontal>
+);
+```
+
+### **isFullWidth**
+Whether the card should take up the full width of its container.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const FullWidthCard = () => (
+  <Card isFullWidth>
+    <Card.Content>
+      <Text>This card spans the full width</Text>
+    </Card.Content>
+  </Card>
+);
+```
+
+### **header**
+Optional header content for the card (alternative to Card.Header).
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const HeaderPropCard = () => (
+  <Card 
+    header={<Text fontWeight="bold">Header via prop</Text>}
+  >
+    <Text>Card content</Text>
+  </Card>
+);
+```
+
+### **footer**
+Optional footer content for the card (alternative to Card.Footer).
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text, Button } from 'app-studio';
+
+export const FooterPropCard = () => (
+  <Card 
+    footer={<Button>Action</Button>}
+  >
+    <Text>Card content</Text>
+  </Card>
+);
+```
+
+### **views**
+Custom styles for different parts of the card.
+
+- **Type:** `CardStyles`
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const StyledCard = () => (
+  <Card 
+    views={{
+      container: {
+        backgroundColor: '#f0f9ff',
+        borderColor: '#3b82f6',
+        borderWidth: 2,
+      },
+      header: {
+        backgroundColor: '#dbeafe',
+        padding: 15,
+      },
+      content: {
+        padding: 20,
+      },
+      footer: {
+        backgroundColor: '#eff6ff',
+        padding: 15,
+      }
+    }}
+  >
+    <Card.Header>
+      <Text>Styled Header</Text>
+    </Card.Header>
+    <Card.Content>
+      <Text>Styled Content</Text>
+    </Card.Content>
+    <Card.Footer>
+      <Text>Styled Footer</Text>
+    </Card.Footer>
+  </Card>
+);
+```
+
+### **Complex Example**
+A complete card with all features.
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text, Button, Horizontal, Vertical, Image } from 'app-studio';
+
+export const ComplexCard = () => (
+  <Card 
+    variant="elevated" 
+    size="lg" 
+    shape="rounded"
+    isFullWidth
+  >
+    <Card.Header>
+      <Horizontal justifyContent="space-between" alignItems="center">
+        <Text fontSize={20} fontWeight="bold">Product Card</Text>
+        <Text color="primary">$99.99</Text>
+      </Horizontal>
+    </Card.Header>
+    
+    <Card.Content>
+      <Vertical gap={15}>
+        <Image 
+          src="/product.jpg" 
+          width="100%" 
+          height={200}
+          borderRadius={8}
+        />
+        <Text>
+          This is a detailed description of the product with all
+          its amazing features and benefits.
+        </Text>
+      </Vertical>
+    </Card.Content>
+    
+    <Card.Footer>
+      <Horizontal gap={10} justifyContent="flex-end">
+        <Button variant="outline">Learn More</Button>
+        <Button variant="filled">Add to Cart</Button>
+      </Horizontal>
+    </Card.Footer>
+  </Card>
+);
+```
+
+### **Interactive Card**
+Card with hover effects and click handling.
+
+```tsx
+import React from 'react';
+import { Card } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const InteractiveCard = () => (
+  <Card 
+    onClick={() => console.log('Card clicked')}
+    cursor="pointer"
+    views={{
+      container: {
+        transition: 'all 0.3s ease',
+        hover: {
+          transform: 'translateY(-4px)',
+          boxShadow: '0 12px 24px rgba(0,0,0,0.15)',
+        }
+      }
+    }}
+  >
+    <Card.Content>
+      <Text>Click me!</Text>
+    </Card.Content>
+  </Card>
+);
 ```
 

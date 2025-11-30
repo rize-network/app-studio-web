@@ -1,6 +1,6 @@
 # ColorPicker
 
-A component for selecting colors, providing predefined options, custom input, and recent color history.
+A customizable color picker component with predefined colors, custom input, recent colors, and various color formats.
 
 ### **Import**
 ```tsx
@@ -13,11 +13,440 @@ import React from 'react';
 import { ColorPicker } from '@app-studio/web';
 
 export const DefaultColorPicker = () => (
-  <ColorPicker
-    label="Choose a color"
-    placeholder="Select a color"
+  <ColorPicker 
     onChange={(color) => console.log('Selected color:', color)}
   />
 );
+```
+
+### **value & onChange**
+Controlled color value.
+
+- **Type:** `string` & `(color: string) => void`
+
+```tsx
+import React, { useState } from 'react';
+import { ColorPicker } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+
+export const ControlledColorPicker = () => {
+  const [color, setColor] = useState('#3b82f6');
+  
+  return (
+    <Vertical gap={10}>
+      <ColorPicker value={color} onChange={setColor} />
+      <Text>Selected: {color}</Text>
+    </Vertical>
+  );
+};
+```
+
+### **defaultValue**
+Default color value.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const DefaultValueColorPicker = () => (
+  <ColorPicker 
+    defaultValue="#10b981"
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **predefinedColors**
+Array of predefined colors to display.
+
+- **Type:** `PredefinedColor[]`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const PredefinedColorPicker = () => {
+  const colors = [
+    { color: '#ef4444', label: 'Red' },
+    { color: '#3b82f6', label: 'Blue' },
+    { color: '#10b981', label: 'Green' },
+    { color: '#f59e0b', label: 'Orange' },
+    { color: '#8b5cf6', label: 'Purple' },
+  ];
+  
+  return (
+    <ColorPicker 
+      predefinedColors={colors}
+      onChange={(color) => console.log(color)}
+    />
+  );
+};
+```
+
+### **showCustomInput**
+Whether to show the custom color input field.
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const NoCustomInputColorPicker = () => (
+  <ColorPicker 
+    showCustomInput={false}
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **showRecentColors**
+Whether to show recently selected colors.
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const NoRecentColorsColorPicker = () => (
+  <ColorPicker 
+    showRecentColors={false}
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **maxRecentColors**
+Maximum number of recent colors to store.
+
+- **Type:** `number`
+- **Default:** `6`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const MaxRecentColorPicker = () => (
+  <ColorPicker 
+    maxRecentColors={10}
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **colorFormat**
+Format for the color value.
+
+- **Type:** `ColorFormat`
+- **Default:** `'hex'`
+- **Possible Values:** `'hex' | 'rgb' | 'hsl'`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const ColorFormatPickers = () => (
+  <Vertical gap={15}>
+    <ColorPicker 
+      colorFormat="hex"
+      onChange={(color) => console.log('HEX:', color)}
+    />
+    <ColorPicker 
+      colorFormat="rgb"
+      onChange={(color) => console.log('RGB:', color)}
+    />
+    <ColorPicker 
+      colorFormat="hsl"
+      onChange={(color) => console.log('HSL:', color)}
+    />
+  </Vertical>
+);
+```
+
+### **closeOnSelect**
+Whether to close the dropdown after selecting a color.
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const StayOpenColorPicker = () => (
+  <ColorPicker 
+    closeOnSelect={false}
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **isDisabled**
+Whether the color picker is disabled.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const DisabledColorPicker = () => (
+  <ColorPicker 
+    isDisabled
+    value="#3b82f6"
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **isReadOnly**
+Whether the color picker is read-only.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const ReadOnlyColorPicker = () => (
+  <ColorPicker 
+    isReadOnly
+    value="#3b82f6"
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **size**
+Size of the color picker.
+
+- **Type:** `Size`
+- **Default:** `'md'`
+- **Possible Values:** `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const SizedColorPickers = () => (
+  <Horizontal gap={15}>
+    {['sm', 'md', 'lg'].map((size) => (
+      <ColorPicker 
+        key={size}
+        size={size as any}
+        onChange={(color) => console.log(color)}
+      />
+    ))}
+  </Horizontal>
+);
+```
+
+### **shape**
+Shape of the color picker trigger.
+
+- **Type:** `Shape`
+- **Default:** `'rounded'`
+- **Possible Values:** `'sharp' | 'rounded' | 'pillShaped'`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const ShapedColorPickers = () => (
+  <Horizontal gap={15}>
+    {['sharp', 'rounded', 'pillShaped'].map((shape) => (
+      <ColorPicker 
+        key={shape}
+        shape={shape as any}
+        onChange={(color) => console.log(color)}
+      />
+    ))}
+  </Horizontal>
+);
+```
+
+### **variant**
+Visual style variant.
+
+- **Type:** `Variant`
+- **Possible Values:** `'default' | 'outlined' | 'filled'`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const VariantColorPickers = () => (
+  <Horizontal gap={15}>
+    {['default', 'outlined', 'filled'].map((variant) => (
+      <ColorPicker 
+        key={variant}
+        variant={variant as any}
+        onChange={(color) => console.log(color)}
+      />
+    ))}
+  </Horizontal>
+);
+```
+
+### **label**
+Label for the color picker.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const LabeledColorPicker = () => (
+  <ColorPicker 
+    label="Choose a color"
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **helperText**
+Helper text to display below the color picker.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const HelperTextColorPicker = () => (
+  <ColorPicker 
+    label="Brand Color"
+    helperText="Select your primary brand color"
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **error**
+Whether the color picker is in an error state.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const ErrorColorPicker = () => (
+  <ColorPicker 
+    error
+    helperText="Please select a valid color"
+    onChange={(color) => console.log(color)}
+  />
+);
+```
+
+### **onChangeComplete**
+Callback when color selection is complete.
+
+- **Type:** `(color: string) => void`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const CompleteCallbackColorPicker = () => (
+  <ColorPicker 
+    onChange={(color) => console.log('Changing:', color)}
+    onChangeComplete={(color) => console.log('Complete:', color)}
+  />
+);
+```
+
+### **views**
+Custom styles for different parts of the color picker.
+
+- **Type:** `ColorPickerStyles`
+
+```tsx
+import React from 'react';
+import { ColorPicker } from '@app-studio/web';
+
+export const StyledColorPicker = () => (
+  <ColorPicker 
+    onChange={(color) => console.log(color)}
+    views={{
+      trigger: {
+        borderWidth: 2,
+        borderColor: '#3b82f6',
+      },
+      dropdown: {
+        backgroundColor: '#f9fafb',
+        padding: 20,
+      },
+      colorSwatch: {
+        borderRadius: 8,
+      }
+    }}
+  />
+);
+```
+
+### **Complete Example**
+A fully featured color picker with all options.
+
+```tsx
+import React, { useState } from 'react';
+import { ColorPicker } from '@app-studio/web';
+import { Vertical, Text } from 'app-studio';
+
+export const CompleteColorPicker = () => {
+  const [color, setColor] = useState('#3b82f6');
+  
+  const predefinedColors = [
+    { color: '#ef4444', label: 'Red' },
+    { color: '#3b82f6', label: 'Blue' },
+    { color: '#10b981', label: 'Green' },
+    { color: '#f59e0b', label: 'Orange' },
+    { color: '#8b5cf6', label: 'Purple' },
+    { color: '#ec4899', label: 'Pink' },
+  ];
+  
+  return (
+    <Vertical gap={15}>
+      <ColorPicker 
+        label="Theme Color"
+        helperText="Choose your theme color"
+        value={color}
+        onChange={setColor}
+        onChangeComplete={(c) => console.log('Final color:', c)}
+        predefinedColors={predefinedColors}
+        showCustomInput
+        showRecentColors
+        maxRecentColors={8}
+        colorFormat="hex"
+        size="md"
+        shape="rounded"
+        variant="outlined"
+      />
+      <Text>Selected Color: {color}</Text>
+      <div 
+        style={{ 
+          width: 100, 
+          height: 100, 
+          backgroundColor: color,
+          borderRadius: 8 
+        }} 
+      />
+    </Vertical>
+  );
+};
 ```
 

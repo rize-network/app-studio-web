@@ -1,6 +1,6 @@
 # Tooltip
 
-A tooltip component that displays supplementary information on hover or focus for any element.
+A tooltip component for displaying contextual information on hover or focus, with customizable positioning, styling, and behavior.
 
 ### **Import**
 ```tsx
@@ -11,21 +11,544 @@ import { Tooltip } from '@app-studio/web';
 ```tsx
 import React from 'react';
 import { Tooltip } from '@app-studio/web';
-import { Button } from '@app-studio/web';
-import { Text } from 'app-studio';
-import { Vertical } from 'app-studio';
+import { Button } from 'app-studio';
 
-export const DefaultTooltip = () => {
-  return (
-    <Vertical gap={20} width="100%" maxWidth={400}>
-      <Text marginBottom={10}>
-        <Tooltip content="This is a tooltip">
-          <Button>Hover Me</Button>
+export const DefaultTooltip = () => (
+  <Tooltip content="This is a tooltip">
+    <Button>Hover me</Button>
+  </Tooltip>
+);
+```
+
+### **content**
+The content to display in the tooltip.
+
+- **Type:** `React.ReactNode`
+- **Required:** `true`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Text, Vertical } from 'app-studio';
+
+export const TooltipContent = () => (
+  <Tooltip 
+    content={
+      <Vertical gap={5}>
+        <Text fontWeight="bold">Tooltip Title</Text>
+        <Text fontSize={12}>This is detailed tooltip content</Text>
+      </Vertical>
+    }
+  >
+    <Button>Hover for details</Button>
+  </Tooltip>
+);
+```
+
+### **position**
+The preferred position of the tooltip.
+
+- **Type:** `Position`
+- **Default:** `'top'`
+- **Possible Values:** `'top' | 'bottom' | 'left' | 'right'`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Horizontal } from 'app-studio';
+
+export const TooltipPositions = () => (
+  <Horizontal gap={15}>
+    <Tooltip content="Top tooltip" position="top">
+      <Button>Top</Button>
+    </Tooltip>
+    <Tooltip content="Bottom tooltip" position="bottom">
+      <Button>Bottom</Button>
+    </Tooltip>
+    <Tooltip content="Left tooltip" position="left">
+      <Button>Left</Button>
+    </Tooltip>
+    <Tooltip content="Right tooltip" position="right">
+      <Button>Right</Button>
+    </Tooltip>
+  </Horizontal>
+);
+```
+
+### **align**
+The alignment of the tooltip relative to the trigger.
+
+- **Type:** `Alignment`
+- **Default:** `'center'`
+- **Possible Values:** `'start' | 'center' | 'end'`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Vertical } from 'app-studio';
+
+export const TooltipAlignments = () => (
+  <Vertical gap={15}>
+    <Tooltip content="Start aligned" position="top" align="start">
+      <Button>Start</Button>
+    </Tooltip>
+    <Tooltip content="Center aligned" position="top" align="center">
+      <Button>Center</Button>
+    </Tooltip>
+    <Tooltip content="End aligned" position="top" align="end">
+      <Button>End</Button>
+    </Tooltip>
+  </Vertical>
+);
+```
+
+### **size**
+The size of the tooltip.
+
+- **Type:** `Size`
+- **Default:** `'md'`
+- **Possible Values:** `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Horizontal } from 'app-studio';
+
+export const TooltipSizes = () => (
+  <Horizontal gap={15}>
+    <Tooltip content="Extra small" size="xs">
+      <Button>XS</Button>
+    </Tooltip>
+    <Tooltip content="Small tooltip" size="sm">
+      <Button>SM</Button>
+    </Tooltip>
+    <Tooltip content="Medium tooltip" size="md">
+      <Button>MD</Button>
+    </Tooltip>
+    <Tooltip content="Large tooltip" size="lg">
+      <Button>LG</Button>
+    </Tooltip>
+  </Horizontal>
+);
+```
+
+### **variant**
+The visual style variant of the tooltip.
+
+- **Type:** `Variant`
+- **Default:** `'default'`
+- **Possible Values:** `'default' | 'dark' | 'light' | 'primary' | 'success' | 'error' | 'warning'`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Horizontal } from 'app-studio';
+
+export const TooltipVariants = () => (
+  <Horizontal gap={15}>
+    <Tooltip content="Default variant" variant="default">
+      <Button>Default</Button>
+    </Tooltip>
+    <Tooltip content="Dark variant" variant="dark">
+      <Button>Dark</Button>
+    </Tooltip>
+    <Tooltip content="Primary variant" variant="primary">
+      <Button>Primary</Button>
+    </Tooltip>
+    <Tooltip content="Success variant" variant="success">
+      <Button>Success</Button>
+    </Tooltip>
+    <Tooltip content="Error variant" variant="error">
+      <Button>Error</Button>
+    </Tooltip>
+  </Horizontal>
+);
+```
+
+### **openDelay**
+Delay in milliseconds before the tooltip opens on hover.
+
+- **Type:** `number`
+- **Default:** `200`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button } from 'app-studio';
+
+export const DelayedTooltip = () => (
+  <Tooltip content="Opens after 1 second" openDelay={1000}>
+    <Button>Hover and wait</Button>
+  </Tooltip>
+);
+```
+
+### **closeDelay**
+Delay in milliseconds before the tooltip closes after hover stops.
+
+- **Type:** `number`
+- **Default:** `200`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button } from 'app-studio';
+
+export const CloseDelayTooltip = () => (
+  <Tooltip content="Stays open longer" closeDelay={1000}>
+    <Button>Hover me</Button>
+  </Tooltip>
+);
+```
+
+### **showArrow**
+Whether to show an arrow pointing to the trigger.
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Horizontal } from 'app-studio';
+
+export const TooltipArrows = () => (
+  <Horizontal gap={15}>
+    <Tooltip content="With arrow" showArrow>
+      <Button>With Arrow</Button>
+    </Tooltip>
+    <Tooltip content="Without arrow" showArrow={false}>
+      <Button>No Arrow</Button>
+    </Tooltip>
+  </Horizontal>
+);
+```
+
+### **defaultOpen**
+Whether the tooltip is initially open.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button } from 'app-studio';
+
+export const DefaultOpenTooltip = () => (
+  <Tooltip content="Initially visible" defaultOpen>
+    <Button>Default Open</Button>
+  </Tooltip>
+);
+```
+
+### **isDisabled**
+Whether the tooltip is disabled.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button } from 'app-studio';
+
+export const DisabledTooltip = () => (
+  <Tooltip content="This won't show" isDisabled>
+    <Button>Disabled Tooltip</Button>
+  </Tooltip>
+);
+```
+
+### **views**
+Custom styles for different parts of the tooltip.
+
+- **Type:** `TooltipStyles`
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button } from 'app-studio';
+
+export const StyledTooltip = () => (
+  <Tooltip 
+    content="Custom styled tooltip"
+    views={{
+      container: {
+        backgroundColor: '#3b82f6',
+        color: '#ffffff',
+        borderRadius: 8,
+        padding: 12,
+        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+      },
+      arrow: {
+        fill: '#3b82f6',
+      }
+    }}
+  >
+    <Button>Custom Style</Button>
+  </Tooltip>
+);
+```
+
+### **Icon Tooltips**
+Tooltips on icons for additional information.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { InfoIcon } from '@app-studio/web';
+import { Horizontal, Text } from 'app-studio';
+
+export const IconTooltips = () => (
+  <Horizontal gap={10} alignItems="center">
+    <Text>Username</Text>
+    <Tooltip content="Your unique identifier">
+      <InfoIcon widthHeight={16} />
+    </Tooltip>
+  </Horizontal>
+);
+```
+
+### **Form Field Tooltips**
+Tooltips for form field help text.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { TextField } from '@app-studio/web';
+import { Vertical, Horizontal, Text } from 'app-studio';
+import { InfoIcon } from '@app-studio/web';
+
+export const FormFieldTooltips = () => (
+  <Vertical gap={15}>
+    <Vertical gap={5}>
+      <Horizontal gap={5} alignItems="center">
+        <Text>Password</Text>
+        <Tooltip 
+          content="Must be at least 8 characters with uppercase, lowercase, and numbers"
+          position="right"
+        >
+          <InfoIcon widthHeight={14} />
         </Tooltip>
-        Default Tooltip
-      </Text>
+      </Horizontal>
+      <TextField type="password" />
     </Vertical>
+  </Vertical>
+);
+```
+
+### **Action Tooltips**
+Tooltips for action buttons.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Horizontal } from 'app-studio';
+import { EditIcon, DeleteIcon, ShareIcon } from '@app-studio/web';
+
+export const ActionTooltips = () => (
+  <Horizontal gap={10}>
+    <Tooltip content="Edit">
+      <Button isIconRounded icon={<EditIcon widthHeight={16} />} />
+    </Tooltip>
+    <Tooltip content="Delete">
+      <Button isIconRounded icon={<DeleteIcon widthHeight={16} />} />
+    </Tooltip>
+    <Tooltip content="Share">
+      <Button isIconRounded icon={<ShareIcon widthHeight={16} />} />
+    </Tooltip>
+  </Horizontal>
+);
+```
+
+### **Rich Content Tooltips**
+Tooltips with rich formatted content.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Vertical, Text, Horizontal } from 'app-studio';
+
+export const RichContentTooltip = () => (
+  <Tooltip 
+    content={
+      <Vertical gap={10}>
+        <Text fontSize={14} fontWeight="bold">Keyboard Shortcuts</Text>
+        <Vertical gap={5}>
+          <Horizontal gap={10}>
+            <Text fontSize={12} fontWeight="bold">Ctrl+S</Text>
+            <Text fontSize={12}>Save</Text>
+          </Horizontal>
+          <Horizontal gap={10}>
+            <Text fontSize={12} fontWeight="bold">Ctrl+Z</Text>
+            <Text fontSize={12}>Undo</Text>
+          </Horizontal>
+          <Horizontal gap={10}>
+            <Text fontSize={12} fontWeight="bold">Ctrl+Y</Text>
+            <Text fontSize={12}>Redo</Text>
+          </Horizontal>
+        </Vertical>
+      </Vertical>
+    }
+    size="lg"
+  >
+    <Button>Shortcuts</Button>
+  </Tooltip>
+);
+```
+
+### **Status Tooltips**
+Tooltips showing status information.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical, Text } from 'app-studio';
+
+export const StatusTooltip = () => (
+  <Tooltip 
+    content={
+      <Vertical gap={5}>
+        <Text fontSize={12} fontWeight="bold">Server Status</Text>
+        <Text fontSize={12}>Last checked: 2 minutes ago</Text>
+        <Text fontSize={12}>Uptime: 99.9%</Text>
+      </Vertical>
+    }
+  >
+    <StatusIndicator status="active" label="Online" />
+  </Tooltip>
+);
+```
+
+### **Truncated Text Tooltips**
+Tooltips for truncated text.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const TruncatedTextTooltip = () => {
+  const longText = "This is a very long text that will be truncated in the UI but shown in full in the tooltip";
+  
+  return (
+    <Tooltip content={longText}>
+      <Text 
+        maxWidth={200} 
+        overflow="hidden" 
+        textOverflow="ellipsis" 
+        whiteSpace="nowrap"
+      >
+        {longText}
+      </Text>
+    </Tooltip>
   );
 };
+```
+
+### **Disabled Element Tooltips**
+Tooltips on disabled elements.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button } from 'app-studio';
+
+export const DisabledElementTooltip = () => (
+  <Tooltip content="This action is not available">
+    <span>
+      <Button isDisabled>Disabled Action</Button>
+    </span>
+  </Tooltip>
+);
+```
+
+### **Interactive Tooltips**
+Tooltips with interactive content.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Vertical, Text } from 'app-studio';
+
+export const InteractiveTooltip = () => (
+  <Tooltip 
+    content={
+      <Vertical gap={10}>
+        <Text fontSize={14}>Are you sure?</Text>
+        <Button size="sm" onClick={() => console.log('Confirmed')}>
+          Confirm
+        </Button>
+      </Vertical>
+    }
+    closeDelay={0}
+  >
+    <Button>Delete</Button>
+  </Tooltip>
+);
+```
+
+### **Complete Example**
+A comprehensive tooltip showcase.
+
+```tsx
+import React from 'react';
+import { Tooltip } from '@app-studio/web';
+import { Button, Vertical, Horizontal, Text, Card } from 'app-studio';
+
+export const CompleteTooltipExample = () => (
+  <Card padding={30}>
+    <Vertical gap={30}>
+      <Vertical gap={10}>
+        <Text fontSize={18} fontWeight="bold">Tooltip Positions</Text>
+        <Horizontal gap={15}>
+          {['top', 'bottom', 'left', 'right'].map((position) => (
+            <Tooltip 
+              key={position}
+              content={`${position} tooltip`}
+              position={position as any}
+            >
+              <Button>{position}</Button>
+            </Tooltip>
+          ))}
+        </Horizontal>
+      </Vertical>
+      
+      <Vertical gap={10}>
+        <Text fontSize={18} fontWeight="bold">Tooltip Variants</Text>
+        <Horizontal gap={15}>
+          {['default', 'primary', 'success', 'error'].map((variant) => (
+            <Tooltip 
+              key={variant}
+              content={`${variant} variant`}
+              variant={variant as any}
+            >
+              <Button>{variant}</Button>
+            </Tooltip>
+          ))}
+        </Horizontal>
+      </Vertical>
+      
+      <Vertical gap={10}>
+        <Text fontSize={18} fontWeight="bold">Rich Content</Text>
+        <Tooltip 
+          content={
+            <Vertical gap={8}>
+              <Text fontSize={14} fontWeight="bold">User Information</Text>
+              <Text fontSize={12}>Name: John Doe</Text>
+              <Text fontSize={12}>Email: john@example.com</Text>
+              <Text fontSize={12}>Role: Administrator</Text>
+            </Vertical>
+          }
+          size="lg"
+        >
+          <Button>View Details</Button>
+        </Tooltip>
+      </Vertical>
+    </Vertical>
+  </Card>
+);
 ```
 

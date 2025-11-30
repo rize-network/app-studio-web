@@ -1,9 +1,465 @@
 # Drawer
 
-A panel that slides in from the screen edge, showing content or controls without navigating away.
+A slide-out panel component that appears from the edge of the screen, with support for different placements, sizes, and content sections.
 
 ### **Import**
 ```tsx
 import { Drawer } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const DefaultDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Drawer</Button>
+      
+      <Drawer>
+        <Drawer.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Drawer.Container>
+            <Drawer.Header onClose={() => setIsOpen(false)}>
+              <Text>Drawer Title</Text>
+            </Drawer.Header>
+            <Drawer.Body>
+              <Text>Drawer content goes here</Text>
+            </Drawer.Body>
+            <Drawer.Footer>
+              <Button onClick={() => setIsOpen(false)}>Close</Button>
+            </Drawer.Footer>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **isOpen**
+Controls the visibility of the drawer.
+
+- **Type:** `boolean`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const ControlledDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Drawer>
+        <Drawer.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Drawer.Container>
+            <Drawer.Body>
+              <Text>Controlled Drawer</Text>
+            </Drawer.Body>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **onClose**
+Callback function executed when the drawer closes.
+
+- **Type:** `() => void`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const CloseCallbackDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Drawer>
+        <Drawer.Overlay 
+          isOpen={isOpen} 
+          onClose={() => {
+            console.log('Drawer closing');
+            setIsOpen(false);
+          }}
+        >
+          <Drawer.Container>
+            <Drawer.Body>
+              <Text>Click outside to close</Text>
+            </Drawer.Body>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **placement**
+The placement of the drawer.
+
+- **Type:** `Placement`
+- **Default:** `'right'`
+- **Possible Values:** `'left' | 'right' | 'top' | 'bottom'`
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text, Horizontal } from 'app-studio';
+
+export const PlacementDrawers = () => {
+  const [placement, setPlacement] = useState<string | null>(null);
+  
+  return (
+    <>
+      <Horizontal gap={10}>
+        {['left', 'right', 'top', 'bottom'].map((pos) => (
+          <Button key={pos} onClick={() => setPlacement(pos)}>
+            {pos}
+          </Button>
+        ))}
+      </Horizontal>
+      
+      <Drawer>
+        <Drawer.Overlay 
+          isOpen={!!placement} 
+          onClose={() => setPlacement(null)}
+        >
+          <Drawer.Container placement={placement as any}>
+            <Drawer.Header onClose={() => setPlacement(null)}>
+              <Text>Drawer from {placement}</Text>
+            </Drawer.Header>
+            <Drawer.Body>
+              <Text>Content</Text>
+            </Drawer.Body>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **size**
+The size of the drawer.
+
+- **Type:** `Size`
+- **Default:** `'md'`
+- **Possible Values:** `'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'full'`
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text, Horizontal } from 'app-studio';
+
+export const SizedDrawers = () => {
+  const [size, setSize] = useState<string | null>(null);
+  
+  return (
+    <>
+      <Horizontal gap={10}>
+        {['sm', 'md', 'lg', 'xl', 'full'].map((s) => (
+          <Button key={s} onClick={() => setSize(s)}>
+            {s}
+          </Button>
+        ))}
+      </Horizontal>
+      
+      <Drawer>
+        <Drawer.Overlay isOpen={!!size} onClose={() => setSize(null)}>
+          <Drawer.Container size={size as any}>
+            <Drawer.Header onClose={() => setSize(null)}>
+              <Text>Size: {size}</Text>
+            </Drawer.Header>
+            <Drawer.Body>
+              <Text>Drawer content</Text>
+            </Drawer.Body>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **isClosePrevented**
+Prevents the drawer from closing when clicking the overlay.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const PreventCloseDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Drawer>
+        <Drawer.Overlay 
+          isOpen={isOpen} 
+          onClose={() => setIsOpen(false)}
+          isClosePrevented
+        >
+          <Drawer.Container>
+            <Drawer.Header onClose={() => setIsOpen(false)}>
+              <Text>Must use close button</Text>
+            </Drawer.Header>
+            <Drawer.Body>
+              <Text>Click outside won't close this drawer</Text>
+            </Drawer.Body>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **blur**
+The degree of blurriness applied to the overlay.
+
+- **Type:** `number`
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const BlurredDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Blurred Drawer</Button>
+      <Drawer>
+        <Drawer.Overlay 
+          isOpen={isOpen} 
+          onClose={() => setIsOpen(false)}
+          blur={10}
+        >
+          <Drawer.Container>
+            <Drawer.Body>
+              <Text>Background is blurred</Text>
+            </Drawer.Body>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **buttonPosition**
+Position of the close button in the header.
+
+- **Type:** `CloseButtonPosition`
+- **Possible Values:** `'left' | 'right' | 'none'`
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const ButtonPositionDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Drawer>
+        <Drawer.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Drawer.Container>
+            <Drawer.Header 
+              onClose={() => setIsOpen(false)}
+              buttonPosition="left"
+            >
+              <Text>Close button on left</Text>
+            </Drawer.Header>
+            <Drawer.Body>
+              <Text>Drawer content</Text>
+            </Drawer.Body>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **Navigation Drawer**
+A common use case for navigation menus.
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text, Vertical } from 'app-studio';
+
+export const NavigationDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  const menuItems = [
+    'Dashboard',
+    'Profile',
+    'Settings',
+    'Analytics',
+    'Help',
+  ];
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>☰ Menu</Button>
+      <Drawer>
+        <Drawer.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Drawer.Container placement="left" size="sm">
+            <Drawer.Header onClose={() => setIsOpen(false)}>
+              <Text fontSize={20} fontWeight="bold">Menu</Text>
+            </Drawer.Header>
+            <Drawer.Body>
+              <Vertical gap={0}>
+                {menuItems.map((item) => (
+                  <Button
+                    key={item}
+                    variant="ghost"
+                    onClick={() => {
+                      console.log('Navigate to:', item);
+                      setIsOpen(false);
+                    }}
+                  >
+                    {item}
+                  </Button>
+                ))}
+              </Vertical>
+            </Drawer.Body>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **Form Drawer**
+Using drawer for forms and data entry.
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text, Vertical } from 'app-studio';
+import { TextField } from '@app-studio/web';
+
+export const FormDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Add User</Button>
+      <Drawer>
+        <Drawer.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Drawer.Container placement="right" size="md">
+            <Drawer.Header onClose={() => setIsOpen(false)}>
+              <Text fontSize={18} fontWeight="bold">Add New User</Text>
+            </Drawer.Header>
+            <Drawer.Body>
+              <Vertical gap={15}>
+                <TextField label="Name" placeholder="Enter name" />
+                <TextField label="Email" placeholder="Enter email" />
+                <TextField label="Role" placeholder="Enter role" />
+              </Vertical>
+            </Drawer.Body>
+            <Drawer.Footer>
+              <Horizontal gap={10} justifyContent="flex-end">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setIsOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button 
+                  variant="filled"
+                  onClick={() => {
+                    console.log('Save user');
+                    setIsOpen(false);
+                  }}
+                >
+                  Save
+                </Button>
+              </Horizontal>
+            </Drawer.Footer>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
+```
+
+### **Details Drawer**
+Showing detailed information in a drawer.
+
+```tsx
+import React, { useState } from 'react';
+import { Drawer } from '@app-studio/web';
+import { Button, Text, Vertical, Horizontal } from 'app-studio';
+
+export const DetailsDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>View Details</Button>
+      <Drawer>
+        <Drawer.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Drawer.Container placement="right" size="lg">
+            <Drawer.Header onClose={() => setIsOpen(false)}>
+              <Text fontSize={20} fontWeight="bold">Product Details</Text>
+            </Drawer.Header>
+            <Drawer.Body>
+              <Vertical gap={20}>
+                <div>
+                  <Text fontSize={14} color="#6b7280">Name</Text>
+                  <Text fontSize={16}>Premium Widget</Text>
+                </div>
+                <div>
+                  <Text fontSize={14} color="#6b7280">Price</Text>
+                  <Text fontSize={16}>$99.99</Text>
+                </div>
+                <div>
+                  <Text fontSize={14} color="#6b7280">Description</Text>
+                  <Text fontSize={16}>
+                    A high-quality widget with advanced features
+                    and premium materials.
+                  </Text>
+                </div>
+              </Vertical>
+            </Drawer.Body>
+            <Drawer.Footer>
+              <Button onClick={() => setIsOpen(false)}>
+                Add to Cart
+              </Button>
+            </Drawer.Footer>
+          </Drawer.Container>
+        </Drawer.Overlay>
+      </Drawer>
+    </>
+  );
+};
 ```
 

@@ -1,6 +1,6 @@
 # Gradient
 
-Renders a customizable gradient background with various styles and animation options.
+A versatile gradient component supporting linear, radial, and conic gradients with animation capabilities.
 
 ### **Import**
 ```tsx
@@ -12,13 +12,437 @@ import { Gradient } from '@app-studio/web';
 import React from 'react';
 import { Gradient } from '@app-studio/web';
 
-export const DefaultDemo = () => (
-  <Gradient
-    from="color.blue.500"
-    to="color.purple.500"
-    height="100px"
-    width="100%"
+export const DefaultGradient = () => (
+  <Gradient 
+    from="#3b82f6" 
+    to="#8b5cf6" 
+    width={300} 
+    height={200} 
   />
+);
+```
+
+### **type**
+Type of gradient.
+
+- **Type:** `GradientType`
+- **Default:** `'linear'`
+- **Possible Values:** `'linear' | 'radial' | 'conic'`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const GradientTypes = () => (
+  <Vertical gap={15}>
+    <Gradient 
+      type="linear" 
+      from="#3b82f6" 
+      to="#8b5cf6" 
+      width={300} 
+      height={100} 
+    />
+    <Gradient 
+      type="radial" 
+      from="#3b82f6" 
+      to="#8b5cf6" 
+      width={300} 
+      height={100} 
+    />
+    <Gradient 
+      type="conic" 
+      from="#3b82f6" 
+      to="#8b5cf6" 
+      width={300} 
+      height={100} 
+    />
+  </Vertical>
+);
+```
+
+### **from & to**
+Starting and ending colors for simple two-color gradients.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const SimpleGradients = () => (
+  <Vertical gap={15}>
+    <Gradient from="#ef4444" to="#f59e0b" width={300} height={100} />
+    <Gradient from="#10b981" to="#3b82f6" width={300} height={100} />
+    <Gradient from="#8b5cf6" to="#ec4899" width={300} height={100} />
+  </Vertical>
+);
+```
+
+### **colors**
+Array of color stops for multi-color gradients.
+
+- **Type:** `ColorStop[]`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+
+export const MultiColorGradient = () => (
+  <Gradient 
+    colors={[
+      { color: '#ef4444', position: 0 },
+      { color: '#f59e0b', position: 25 },
+      { color: '#10b981', position: 50 },
+      { color: '#3b82f6', position: 75 },
+      { color: '#8b5cf6', position: 100 },
+    ]}
+    width={300} 
+    height={100} 
+  />
+);
+```
+
+### **direction**
+Direction for linear gradients.
+
+- **Type:** `LinearDirection`
+- **Default:** `'to-right'`
+- **Possible Values:** `'to-top' | 'to-bottom' | 'to-left' | 'to-right' | 'to-top-right' | 'to-top-left' | 'to-bottom-right' | 'to-bottom-left'`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const DirectionalGradients = () => (
+  <Vertical gap={15}>
+    {[
+      'to-right',
+      'to-bottom',
+      'to-top-right',
+      'to-bottom-left',
+    ].map((direction) => (
+      <Gradient 
+        key={direction}
+        direction={direction as any}
+        from="#3b82f6" 
+        to="#8b5cf6" 
+        width={300} 
+        height={100} 
+      />
+    ))}
+  </Vertical>
+);
+```
+
+### **shape**
+Shape for radial gradients.
+
+- **Type:** `RadialShape`
+- **Default:** `'circle'`
+- **Possible Values:** `'circle' | 'ellipse'`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const RadialShapes = () => (
+  <Horizontal gap={15}>
+    <Gradient 
+      type="radial"
+      shape="circle"
+      from="#3b82f6" 
+      to="#8b5cf6" 
+      width={200} 
+      height={200} 
+    />
+    <Gradient 
+      type="radial"
+      shape="ellipse"
+      from="#3b82f6" 
+      to="#8b5cf6" 
+      width={300} 
+      height={200} 
+    />
+  </Horizontal>
+);
+```
+
+### **position**
+Position for radial gradients.
+
+- **Type:** `RadialPosition`
+- **Default:** `'center'`
+- **Possible Values:** `'center' | 'top' | 'bottom' | 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const RadialPositions = () => (
+  <Vertical gap={15}>
+    {[
+      'center',
+      'top-left',
+      'top-right',
+      'bottom-left',
+    ].map((position) => (
+      <Gradient 
+        key={position}
+        type="radial"
+        position={position as any}
+        from="#3b82f6" 
+        to="#8b5cf6" 
+        width={300} 
+        height={100} 
+      />
+    ))}
+  </Vertical>
+);
+```
+
+### **animate**
+Whether to animate the gradient.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+
+export const AnimatedGradient = () => (
+  <Gradient 
+    from="#3b82f6" 
+    to="#8b5cf6" 
+    animate
+    width={300} 
+    height={200} 
+  />
+);
+```
+
+### **animationDuration**
+Animation duration in seconds.
+
+- **Type:** `number`
+- **Default:** `3`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const AnimationDurations = () => (
+  <Vertical gap={15}>
+    <Gradient 
+      from="#3b82f6" 
+      to="#8b5cf6" 
+      animate
+      animationDuration={1}
+      width={300} 
+      height={80} 
+    />
+    <Gradient 
+      from="#3b82f6" 
+      to="#8b5cf6" 
+      animate
+      animationDuration={5}
+      width={300} 
+      height={80} 
+    />
+  </Vertical>
+);
+```
+
+### **children**
+Content to render inside the gradient.
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Text, Center } from 'app-studio';
+
+export const GradientWithContent = () => (
+  <Gradient 
+    from="#3b82f6" 
+    to="#8b5cf6" 
+    width={300} 
+    height={200}
+    borderRadius={16}
+  >
+    <Center width="100%" height="100%">
+      <Text color="#ffffff" fontSize={24} fontWeight="bold">
+        Gradient Background
+      </Text>
+    </Center>
+  </Gradient>
+);
+```
+
+### **views**
+Custom styles for the gradient.
+
+- **Type:** `GradientStyles`
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+
+export const StyledGradient = () => (
+  <Gradient 
+    from="#3b82f6" 
+    to="#8b5cf6" 
+    width={300} 
+    height={200}
+    views={{
+      container: {
+        borderRadius: 20,
+        boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+        border: '2px solid #ffffff',
+      }
+    }}
+  />
+);
+```
+
+### **Complex Gradients**
+Creating sophisticated gradient effects.
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const ComplexGradients = () => (
+  <Vertical gap={20}>
+    {/* Sunset gradient */}
+    <Gradient 
+      colors={[
+        { color: '#ff6b6b', position: 0 },
+        { color: '#feca57', position: 50 },
+        { color: '#ee5a6f', position: 100 },
+      ]}
+      direction="to-bottom"
+      width={300} 
+      height={150}
+      borderRadius={12}
+    />
+    
+    {/* Ocean gradient */}
+    <Gradient 
+      type="radial"
+      colors={[
+        { color: '#667eea', position: 0 },
+        { color: '#764ba2', position: 50 },
+        { color: '#f093fb', position: 100 },
+      ]}
+      width={300} 
+      height={150}
+      borderRadius={12}
+    />
+    
+    {/* Rainbow conic */}
+    <Gradient 
+      type="conic"
+      colors={[
+        { color: '#ff0000', position: 0 },
+        { color: '#ff7f00', position: 14 },
+        { color: '#ffff00', position: 28 },
+        { color: '#00ff00', position: 42 },
+        { color: '#0000ff', position: 57 },
+        { color: '#4b0082', position: 71 },
+        { color: '#9400d3', position: 85 },
+        { color: '#ff0000', position: 100 },
+      ]}
+      width={200} 
+      height={200}
+      borderRadius="50%"
+    />
+  </Vertical>
+);
+```
+
+### **Card with Gradient Background**
+Using gradient as a card background.
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Text, Vertical, Button } from 'app-studio';
+
+export const GradientCard = () => (
+  <Gradient 
+    from="#667eea" 
+    to="#764ba2" 
+    width={350} 
+    borderRadius={16}
+    boxShadow="0 10px 40px rgba(0,0,0,0.2)"
+  >
+    <Vertical gap={20} padding={30}>
+      <Text color="#ffffff" fontSize={28} fontWeight="bold">
+        Premium Plan
+      </Text>
+      <Text color="#ffffff" fontSize={48} fontWeight="bold">
+        $99
+        <Text as="span" fontSize={20}>/month</Text>
+      </Text>
+      <Vertical gap={10}>
+        <Text color="#ffffff">✓ Unlimited projects</Text>
+        <Text color="#ffffff">✓ Priority support</Text>
+        <Text color="#ffffff">✓ Advanced analytics</Text>
+      </Vertical>
+      <Button 
+        backgroundColor="#ffffff" 
+        color="#667eea"
+        isFullWidth
+      >
+        Get Started
+      </Button>
+    </Vertical>
+  </Gradient>
+);
+```
+
+### **Animated Background**
+Creating an animated gradient background.
+
+```tsx
+import React from 'react';
+import { Gradient } from '@app-studio/web';
+import { Text, Center } from 'app-studio';
+
+export const AnimatedBackground = () => (
+  <Gradient 
+    colors={[
+      { color: '#ee7752', position: 0 },
+      { color: '#e73c7e', position: 33 },
+      { color: '#23a6d5', position: 66 },
+      { color: '#23d5ab', position: 100 },
+    ]}
+    direction="to-right"
+    animate
+    animationDuration={4}
+    width="100%"
+    height={400}
+  >
+    <Center width="100%" height="100%">
+      <Text 
+        color="#ffffff" 
+        fontSize={40} 
+        fontWeight="bold"
+        textAlign="center"
+      >
+        Animated Gradient
+      </Text>
+    </Center>
+  </Gradient>
 );
 ```
 

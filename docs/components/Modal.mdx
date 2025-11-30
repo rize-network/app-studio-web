@@ -1,9 +1,409 @@
 # Modal
 
-Renders a modal dialog with various styles and states according to the design guidelines.
+A custom content overlay that appears on top of the main screen, with support for headers, bodies, footers, and flexible positioning.
 
 ### **Import**
 ```tsx
+import { Modal, useModalStore } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
 import { Modal } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const DefaultModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
+      
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container>
+            <Modal.Header onClose={() => setIsOpen(false)}>
+              <Text>Modal Title</Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>Modal content goes here</Text>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={() => setIsOpen(false)}>Close</Button>
+            </Modal.Footer>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **Modal.Layout**
+Centralized modal management system for handling multiple modals.
+
+```tsx
+import React from 'react';
+import { Modal } from '@app-studio/web';
+import { Text, Button } from 'app-studio';
+
+const WelcomeModal = ({ onClose }) => (
+  <Modal.Container>
+    <Modal.Header onClose={onClose}>
+      <Text>Welcome</Text>
+    </Modal.Header>
+    <Modal.Body>
+      <Text>Welcome to our application!</Text>
+    </Modal.Body>
+  </Modal.Container>
+);
+
+const ConfirmModal = ({ onClose }) => (
+  <Modal.Container>
+    <Modal.Header onClose={onClose}>
+      <Text>Confirm</Text>
+    </Modal.Header>
+    <Modal.Body>
+      <Text>Are you sure?</Text>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button onClick={onClose}>Cancel</Button>
+      <Button onClick={onClose}>Confirm</Button>
+    </Modal.Footer>
+  </Modal.Container>
+);
+
+export const ModalLayoutExample = () => (
+  <Modal.Layout 
+    modals={{
+      welcome: WelcomeModal,
+      confirm: ConfirmModal,
+    }}
+  />
+);
+```
+
+### **isOpen**
+Controls the visibility of the modal.
+
+- **Type:** `boolean`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const ControlledModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container>
+            <Modal.Body>
+              <Text>Controlled Modal</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **onClose**
+Callback function executed when the modal closes.
+
+- **Type:** `() => void`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const CloseCallbackModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay 
+          isOpen={isOpen} 
+          onClose={() => {
+            console.log('Modal closing');
+            setIsOpen(false);
+          }}
+        >
+          <Modal.Container>
+            <Modal.Body>
+              <Text>Click outside to close</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **isClosePrevented**
+Prevents the modal from closing when clicking the overlay.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const PreventCloseModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay 
+          isOpen={isOpen} 
+          onClose={() => setIsOpen(false)}
+          isClosePrevented
+        >
+          <Modal.Container>
+            <Modal.Header onClose={() => setIsOpen(false)}>
+              <Text>Must use close button</Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>Click outside won't close this modal</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **position**
+Positioning of the modal container.
+
+- **Type:** `Position`
+- **Possible Values:** `'center' | 'top' | 'bottom' | 'left' | 'right'`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text, Horizontal } from 'app-studio';
+
+export const PositionedModals = () => {
+  const [position, setPosition] = useState<string | null>(null);
+  
+  return (
+    <>
+      <Horizontal gap={10}>
+        {['center', 'top', 'bottom', 'left', 'right'].map((pos) => (
+          <Button key={pos} onClick={() => setPosition(pos)}>
+            {pos}
+          </Button>
+        ))}
+      </Horizontal>
+      
+      <Modal>
+        <Modal.Overlay 
+          isOpen={!!position} 
+          onClose={() => setPosition(null)}
+          position={position as any}
+        >
+          <Modal.Container>
+            <Modal.Body>
+              <Text>Positioned at {position}</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **blur**
+The degree of blurriness applied to the overlay.
+
+- **Type:** `number`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const BlurredModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Blurred Modal</Button>
+      <Modal>
+        <Modal.Overlay 
+          isOpen={isOpen} 
+          onClose={() => setIsOpen(false)}
+          blur={10}
+        >
+          <Modal.Container>
+            <Modal.Body>
+              <Text>Background is blurred</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **shape**
+Determines whether the modal should have sharp or rounded edges.
+
+- **Type:** `Shape`
+- **Possible Values:** `'sharp' | 'rounded' | 'pillShaped'`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text, Horizontal } from 'app-studio';
+
+export const ShapedModals = () => {
+  const [shape, setShape] = useState<string | null>(null);
+  
+  return (
+    <>
+      <Horizontal gap={10}>
+        {['sharp', 'rounded', 'pillShaped'].map((s) => (
+          <Button key={s} onClick={() => setShape(s)}>
+            {s}
+          </Button>
+        ))}
+      </Horizontal>
+      
+      <Modal>
+        <Modal.Overlay isOpen={!!shape} onClose={() => setShape(null)}>
+          <Modal.Container shape={shape as any}>
+            <Modal.Body>
+              <Text>Shape: {shape}</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **isFullScreen**
+Makes the modal occupy the full width and height of the screen.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const FullScreenModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Fullscreen</Button>
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container isFullScreen>
+            <Modal.Header onClose={() => setIsOpen(false)}>
+              <Text>Fullscreen Modal</Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>This modal takes up the entire screen</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **buttonPosition**
+Position of the close button in the header.
+
+- **Type:** `CloseButtonPosition`
+- **Possible Values:** `'left' | 'right' | 'none'`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const ButtonPositionModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container>
+            <Modal.Header 
+              onClose={() => setIsOpen(false)}
+              buttonPosition="left"
+            >
+              <Text>Close button on left</Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>Modal content</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **shadow**
+Applies a shadow effect to the modal.
+
+- **Type:** `Shadow | Elevation | ViewProps`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const ShadowModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container 
+            shadow={{ boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}
+          >
+            <Modal.Body>
+              <Text>Modal with custom shadow</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
 ```
 

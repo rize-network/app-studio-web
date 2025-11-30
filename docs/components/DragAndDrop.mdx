@@ -1,9 +1,355 @@
 # DragAndDrop
 
-Displays an interactive list where users can reorder items by dragging and dropping them.
+A drag-and-drop component for reordering items with touch and mouse support.
 
 ### **Import**
 ```tsx
 import { DragAndDrop } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const DefaultDragAndDrop = () => {
+  const [items, setItems] = useState([
+    { id: 1, name: 'Item 1' },
+    { id: 2, name: 'Item 2' },
+    { id: 3, name: 'Item 3' },
+  ]);
+  
+  return (
+    <DragAndDrop 
+      items={items}
+      onChange={setItems}
+      renderItem={(item) => <Text>{item.name}</Text>}
+    />
+  );
+};
+```
+
+### **items**
+Array of items to be reordered.
+
+- **Type:** `any[]`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const ItemsDragAndDrop = () => {
+  const [tasks, setTasks] = useState([
+    { id: 1, title: 'Design mockups', priority: 'high' },
+    { id: 2, title: 'Write documentation', priority: 'medium' },
+    { id: 3, title: 'Code review', priority: 'low' },
+  ]);
+  
+  return (
+    <DragAndDrop 
+      items={tasks}
+      onChange={setTasks}
+      renderItem={(task) => (
+        <Text>{task.title} - {task.priority}</Text>
+      )}
+    />
+  );
+};
+```
+
+### **onChange**
+Callback function when items are reordered.
+
+- **Type:** `(items: any[]) => void`
+
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+
+export const OnChangeDragAndDrop = () => {
+  const [items, setItems] = useState(['First', 'Second', 'Third']);
+  
+  return (
+    <Vertical gap={10}>
+      <DragAndDrop 
+        items={items}
+        onChange={(newItems) => {
+          console.log('Order changed:', newItems);
+          setItems(newItems);
+        }}
+        renderItem={(item) => <Text>{item}</Text>}
+      />
+      <Text>Current order: {items.join(', ')}</Text>
+    </Vertical>
+  );
+};
+```
+
+### **renderItem**
+Custom render function for each item.
+
+- **Type:** `(item: any, index: number) => React.ReactNode`
+
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { View, Text, Horizontal } from 'app-studio';
+
+export const CustomRenderDragAndDrop = () => {
+  const [items, setItems] = useState([
+    { id: 1, name: 'Task 1', completed: false },
+    { id: 2, name: 'Task 2', completed: true },
+    { id: 3, name: 'Task 3', completed: false },
+  ]);
+  
+  return (
+    <DragAndDrop 
+      items={items}
+      onChange={setItems}
+      renderItem={(item, index) => (
+        <Horizontal 
+          gap={10} 
+          alignItems="center"
+          padding={12}
+          backgroundColor={item.completed ? '#d1fae5' : '#fee2e2'}
+          borderRadius={8}
+        >
+          <Text fontWeight="bold">#{index + 1}</Text>
+          <Text>{item.name}</Text>
+          {item.completed && <Text>✓</Text>}
+        </Horizontal>
+      )}
+    />
+  );
+};
+```
+
+### **containerProps**
+Props for the container element.
+
+- **Type:** `ViewProps`
+
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const ContainerPropsDragAndDrop = () => {
+  const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3']);
+  
+  return (
+    <DragAndDrop 
+      items={items}
+      onChange={setItems}
+      renderItem={(item) => <Text>{item}</Text>}
+      containerProps={{
+        backgroundColor: '#f3f4f6',
+        padding: 20,
+        borderRadius: 12,
+        gap: 10,
+      }}
+    />
+  );
+};
+```
+
+### **itemProps**
+Props for each item element.
+
+- **Type:** `ViewProps`
+
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const ItemPropsDragAndDrop = () => {
+  const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3']);
+  
+  return (
+    <DragAndDrop 
+      items={items}
+      onChange={setItems}
+      renderItem={(item) => <Text>{item}</Text>}
+      itemProps={{
+        padding: 15,
+        backgroundColor: '#ffffff',
+        borderRadius: 8,
+        cursor: 'grab',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      }}
+    />
+  );
+};
+```
+
+### **views**
+Custom styles for container and items.
+
+- **Type:** `{ container?: ViewProps; item?: ViewProps }`
+
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const StyledDragAndDrop = () => {
+  const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3']);
+  
+  return (
+    <DragAndDrop 
+      items={items}
+      onChange={setItems}
+      renderItem={(item) => <Text>{item}</Text>}
+      views={{
+        container: {
+          backgroundColor: '#1f2937',
+          padding: 20,
+          borderRadius: 16,
+        },
+        item: {
+          backgroundColor: '#374151',
+          color: '#ffffff',
+          padding: 16,
+          borderRadius: 8,
+          marginBottom: 8,
+        }
+      }}
+    />
+  );
+};
+```
+
+### **Complex Example**
+A task list with drag-and-drop reordering.
+
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { View, Text, Horizontal, Vertical } from 'app-studio';
+
+interface Task {
+  id: number;
+  title: string;
+  description: string;
+  priority: 'low' | 'medium' | 'high';
+  completed: boolean;
+}
+
+export const TaskListDragAndDrop = () => {
+  const [tasks, setTasks] = useState<Task[]>([
+    { 
+      id: 1, 
+      title: 'Design Homepage', 
+      description: 'Create mockups for the new homepage',
+      priority: 'high',
+      completed: false 
+    },
+    { 
+      id: 2, 
+      title: 'Write Tests', 
+      description: 'Add unit tests for user module',
+      priority: 'medium',
+      completed: false 
+    },
+    { 
+      id: 3, 
+      title: 'Update Documentation', 
+      description: 'Document new API endpoints',
+      priority: 'low',
+      completed: true 
+    },
+  ]);
+  
+  const priorityColors = {
+    high: '#ef4444',
+    medium: '#f59e0b',
+    low: '#10b981',
+  };
+  
+  return (
+    <DragAndDrop 
+      items={tasks}
+      onChange={setTasks}
+      renderItem={(task, index) => (
+        <View
+          padding={16}
+          backgroundColor="#ffffff"
+          borderRadius={12}
+          borderLeftWidth={4}
+          borderLeftColor={priorityColors[task.priority]}
+          boxShadow="0 2px 8px rgba(0,0,0,0.1)"
+        >
+          <Horizontal justifyContent="space-between" alignItems="center">
+            <Vertical gap={4}>
+              <Horizontal gap={8} alignItems="center">
+                <Text fontSize={16} fontWeight="bold">
+                  {task.title}
+                </Text>
+                <Text 
+                  fontSize={12} 
+                  color={priorityColors[task.priority]}
+                  textTransform="uppercase"
+                >
+                  {task.priority}
+                </Text>
+              </Horizontal>
+              <Text fontSize={14} color="#6b7280">
+                {task.description}
+              </Text>
+            </Vertical>
+            {task.completed && (
+              <Text fontSize={20}>✓</Text>
+            )}
+          </Horizontal>
+        </View>
+      )}
+      views={{
+        container: {
+          gap: 12,
+        },
+        item: {
+          cursor: 'grab',
+          transition: 'all 0.2s ease',
+          hover: {
+            transform: 'translateX(4px)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          }
+        }
+      }}
+    />
+  );
+};
+```
+
+### **Touch Support**
+The component supports both mouse and touch events for mobile devices.
+
+```tsx
+import React, { useState } from 'react';
+import { DragAndDrop } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const TouchDragAndDrop = () => {
+  const [items, setItems] = useState([
+    'Swipe to reorder',
+    'Works on mobile',
+    'Touch friendly',
+  ]);
+  
+  return (
+    <DragAndDrop 
+      items={items}
+      onChange={setItems}
+      renderItem={(item) => (
+        <Text padding={16}>{item}</Text>
+      )}
+    />
+  );
+};
 ```
 

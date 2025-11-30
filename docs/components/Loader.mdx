@@ -1,9 +1,344 @@
 # Loader
 
-Displays various loading animations with optional text positioning for user feedback.
+A loading indicator component with multiple types, sizes, speeds, and text positioning options.
 
 ### **Import**
 ```tsx
 import { Loader } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+
+export const DefaultLoader = () => (
+  <Loader />
+);
+```
+
+### **type**
+Defines the type of the loader.
+
+- **Type:** `LoaderType`
+- **Default:** `'spinner'`
+- **Possible Values:** `'spinner' | 'dotted' | 'quarter' | 'pulse' | 'bars'`
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const LoaderTypes = () => (
+  <Horizontal gap={30}>
+    <Loader type="spinner" />
+    <Loader type="dotted" />
+    <Loader type="quarter" />
+    <Loader type="pulse" />
+    <Loader type="bars" />
+  </Horizontal>
+);
+```
+
+### **size**
+Sets the size of the loader.
+
+- **Type:** `number | Size`
+- **Default:** `'md'`
+- **Possible Values:** `'xs' | 'sm' | 'md' | 'lg' | 'xl'` or pixel number
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const LoaderSizes = () => (
+  <Horizontal gap={20} alignItems="center">
+    <Loader size="xs" />
+    <Loader size="sm" />
+    <Loader size="md" />
+    <Loader size="lg" />
+    <Loader size="xl" />
+  </Horizontal>
+);
+```
+
+### **Custom Size**
+Using pixel values for custom sizes.
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const CustomSizeLoaders = () => (
+  <Horizontal gap={20} alignItems="center">
+    <Loader size={16} />
+    <Loader size={32} />
+    <Loader size={48} />
+    <Loader size={64} />
+  </Horizontal>
+);
+```
+
+### **loaderColor**
+Defines the color of the loader element.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const ColoredLoaders = () => (
+  <Horizontal gap={30}>
+    <Loader loaderColor="#3b82f6" />
+    <Loader loaderColor="#10b981" />
+    <Loader loaderColor="#ef4444" />
+    <Loader loaderColor="#f59e0b" />
+    <Loader loaderColor="#8b5cf6" />
+  </Horizontal>
+);
+```
+
+### **speed**
+Controls the speed of the loader's animation.
+
+- **Type:** `Speed`
+- **Default:** `'normal'`
+- **Possible Values:** `'slow' | 'normal' | 'fast'`
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const LoaderSpeeds = () => (
+  <Horizontal gap={30}>
+    <Loader speed="slow" />
+    <Loader speed="normal" />
+    <Loader speed="fast" />
+  </Horizontal>
+);
+```
+
+### **children**
+Text or content to display with the loader.
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+
+export const LoaderWithText = () => (
+  <Loader>Loading...</Loader>
+);
+```
+
+### **textPosition**
+Determines the position of the text relative to the loader.
+
+- **Type:** `TextPosition`
+- **Default:** `'bottom'`
+- **Possible Values:** `'top' | 'bottom' | 'left' | 'right'`
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const TextPositions = () => (
+  <Vertical gap={30}>
+    <Loader textPosition="top">Loading from top</Loader>
+    <Loader textPosition="bottom">Loading from bottom</Loader>
+    <Loader textPosition="left">Loading from left</Loader>
+    <Loader textPosition="right">Loading from right</Loader>
+  </Vertical>
+);
+```
+
+### **textColor**
+Sets the color of the text displayed with the loader.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+
+export const ColoredTextLoader = () => (
+  <Loader 
+    loaderColor="#3b82f6" 
+    textColor="#3b82f6"
+  >
+    Loading...
+  </Loader>
+);
+```
+
+### **Loading States**
+Common loading state patterns.
+
+```tsx
+import React, { useState } from 'react';
+import { Loader } from '@app-studio/web';
+import { Button, Vertical } from 'app-studio';
+
+export const LoadingStates = () => {
+  const [loading, setLoading] = useState(false);
+  
+  return (
+    <Vertical gap={20}>
+      <Button 
+        onClick={() => {
+          setLoading(true);
+          setTimeout(() => setLoading(false), 3000);
+        }}
+      >
+        Start Loading
+      </Button>
+      
+      {loading && (
+        <Loader>Please wait...</Loader>
+      )}
+    </Vertical>
+  );
+};
+```
+
+### **Inline Loader**
+Small loader for inline use.
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Text, Horizontal } from 'app-studio';
+
+export const InlineLoader = () => (
+  <Horizontal gap={10} alignItems="center">
+    <Text>Saving</Text>
+    <Loader size={16} />
+  </Horizontal>
+);
+```
+
+### **Full Page Loader**
+Centered loader for full page loading.
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Center } from 'app-studio';
+
+export const FullPageLoader = () => (
+  <Center width="100vw" height="100vh">
+    <Loader size="xl">Loading application...</Loader>
+  </Center>
+);
+```
+
+### **Card Loading**
+Loader inside a card component.
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Card } from '@app-studio/web';
+import { Center } from 'app-studio';
+
+export const CardLoader = () => (
+  <Card width={300} height={200}>
+    <Center width="100%" height="100%">
+      <Loader>Loading content...</Loader>
+    </Center>
+  </Card>
+);
+```
+
+### **Button Loading**
+Loader integrated with button.
+
+```tsx
+import React, { useState } from 'react';
+import { Loader } from '@app-studio/web';
+import { Button, Horizontal } from 'app-studio';
+
+export const ButtonLoader = () => {
+  const [loading, setLoading] = useState(false);
+  
+  return (
+    <Button 
+      onClick={() => {
+        setLoading(true);
+        setTimeout(() => setLoading(false), 2000);
+      }}
+      isDisabled={loading}
+    >
+      <Horizontal gap={10} alignItems="center">
+        {loading && <Loader size={16} loaderColor="#ffffff" />}
+        {loading ? 'Submitting...' : 'Submit'}
+      </Horizontal>
+    </Button>
+  );
+};
+```
+
+### **Different Types Showcase**
+Showcasing all loader types with customization.
+
+```tsx
+import React from 'react';
+import { Loader } from '@app-studio/web';
+import { Vertical, Horizontal, Text } from 'app-studio';
+
+export const LoaderShowcase = () => (
+  <Vertical gap={30}>
+    <Vertical gap={15}>
+      <Text fontWeight="bold">Spinner Variants</Text>
+      <Horizontal gap={20}>
+        <Loader type="spinner" size="sm" loaderColor="#3b82f6" />
+        <Loader type="spinner" size="md" loaderColor="#10b981" />
+        <Loader type="spinner" size="lg" loaderColor="#ef4444" />
+      </Horizontal>
+    </Vertical>
+    
+    <Vertical gap={15}>
+      <Text fontWeight="bold">Dotted Variants</Text>
+      <Horizontal gap={20}>
+        <Loader type="dotted" size="sm" loaderColor="#3b82f6" />
+        <Loader type="dotted" size="md" loaderColor="#10b981" />
+        <Loader type="dotted" size="lg" loaderColor="#ef4444" />
+      </Horizontal>
+    </Vertical>
+    
+    <Vertical gap={15}>
+      <Text fontWeight="bold">With Text</Text>
+      <Horizontal gap={30}>
+        <Loader type="spinner" loaderColor="#3b82f6" textColor="#3b82f6">
+          Loading...
+        </Loader>
+        <Loader 
+          type="dotted" 
+          loaderColor="#10b981" 
+          textColor="#10b981"
+          textPosition="right"
+        >
+          Processing
+        </Loader>
+      </Horizontal>
+    </Vertical>
+    
+    <Vertical gap={15}>
+      <Text fontWeight="bold">Different Speeds</Text>
+      <Horizontal gap={30}>
+        <Loader speed="slow">Slow</Loader>
+        <Loader speed="normal">Normal</Loader>
+        <Loader speed="fast">Fast</Loader>
+      </Horizontal>
+    </Vertical>
+  </Vertical>
+);
 ```
 

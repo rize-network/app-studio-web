@@ -1,9 +1,280 @@
 # Uploader
 
-An interactive component allowing users to select and preview files, with options for validation and progress display.
+A versatile file upload component with support for images, videos, and files, featuring drag-and-drop, preview, progress tracking, and validation.
 
 ### **Import**
 ```tsx
 import { Uploader } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+
+export const DefaultUploader = () => (
+  <Uploader 
+    onFileSelect={(file) => console.log('Selected:', file)}
+  />
+);
+```
+
+### **accept**
+Specifies which file types are accepted for upload.
+
+- **Type:** `string`
+- **Default:** `'*/*'`
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const FileTypeUploader = () => (
+  <Vertical gap={15}>
+    <Uploader 
+      accept="image/*" 
+      onFileSelect={(file) => console.log(file)}
+      text="Upload Images"
+    />
+    <Uploader 
+      accept="video/*" 
+      onFileSelect={(file) => console.log(file)}
+      text="Upload Videos"
+    />
+    <Uploader 
+      accept=".pdf,.doc,.docx" 
+      onFileSelect={(file) => console.log(file)}
+      text="Upload Documents"
+    />
+  </Vertical>
+);
+```
+
+### **multiple**
+Allow multiple file selection.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+
+export const MultipleUploader = () => (
+  <Uploader 
+    multiple
+    onMultipleFileSelect={(files) => {
+      console.log(`Selected ${files.length} files`);
+    }}
+    text="Upload Multiple Files"
+  />
+);
+```
+
+### **maxSize**
+Maximum file size in bytes.
+
+- **Type:** `number`
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+
+export const SizeLimitUploader = () => (
+  <Uploader 
+    maxSize={5 * 1024 * 1024} // 5MB
+    onFileSelect={(file) => console.log(file)}
+    text="Max 5MB"
+  />
+);
+```
+
+### **validateFile**
+Custom validation function for uploaded files.
+
+- **Type:** `(file: File) => string | null`
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+
+export const ValidatedUploader = () => (
+  <Uploader 
+    validateFile={(file) => {
+      if (file.size > 10 * 1024 * 1024) {
+        return 'File must be less than 10MB';
+      }
+      if (!file.type.startsWith('image/')) {
+        return 'Only images are allowed';
+      }
+      return null;
+    }}
+    onFileSelect={(file) => console.log(file)}
+  />
+);
+```
+
+### **isLoading**
+Show loading state during upload.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { Uploader } from '@app-studio/web';
+
+export const LoadingUploader = () => {
+  const [loading, setLoading] = useState(false);
+  
+  return (
+    <Uploader 
+      isLoading={loading}
+      onFileSelect={(file) => {
+        setLoading(true);
+        // Simulate upload
+        setTimeout(() => setLoading(false), 2000);
+      }}
+    />
+  );
+};
+```
+
+### **progress**
+Upload progress percentage (0-100).
+
+- **Type:** `number`
+- **Default:** `0`
+
+```tsx
+import React, { useState } from 'react';
+import { Uploader } from '@app-studio/web';
+
+export const ProgressUploader = () => {
+  const [progress, setProgress] = useState(0);
+  
+  return (
+    <Uploader 
+      isLoading={progress > 0 && progress < 100}
+      progress={progress}
+      onFileSelect={(file) => {
+        // Simulate upload progress
+        let current = 0;
+        const interval = setInterval(() => {
+          current += 10;
+          setProgress(current);
+          if (current >= 100) clearInterval(interval);
+        }, 200);
+      }}
+    />
+  );
+};
+```
+
+### **fileType**
+Explicitly set the file type for rendering.
+
+- **Type:** `'image' | 'video' | 'file'`
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const TypedUploaders = () => (
+  <Horizontal gap={15}>
+    <Uploader fileType="image" text="Image" />
+    <Uploader fileType="video" text="Video" />
+    <Uploader fileType="file" text="File" />
+  </Horizontal>
+);
+```
+
+### **icon**
+Custom icon to display in the uploader.
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+import { UploadIcon } from '@app-studio/web';
+
+export const CustomIconUploader = () => (
+  <Uploader 
+    icon={<UploadIcon widthHeight={32} />}
+    text="Click to upload"
+    onFileSelect={(file) => console.log(file)}
+  />
+);
+```
+
+### **text**
+Text to display in the uploader.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+
+export const CustomTextUploader = () => (
+  <Uploader 
+    text="Drag & drop your files here"
+    onFileSelect={(file) => console.log(file)}
+  />
+);
+```
+
+### **views**
+Custom styles for different parts of the uploader.
+
+- **Type:** `{ container?: ViewProps; view?: ViewProps; image?: ImageProps; horizontal?: ViewProps; text?: ViewProps }`
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+
+export const StyledUploader = () => (
+  <Uploader 
+    onFileSelect={(file) => console.log(file)}
+    views={{
+      container: {
+        borderRadius: 12,
+        borderColor: '#3b82f6',
+        borderWidth: 2,
+      },
+      text: {
+        color: '#3b82f6',
+        fontSize: 16,
+      }
+    }}
+  />
+);
+```
+
+### **Custom Render Functions**
+Override default rendering for different file types.
+
+```tsx
+import React from 'react';
+import { Uploader } from '@app-studio/web';
+import { Text, View } from 'app-studio';
+
+export const CustomRenderUploader = () => (
+  <Uploader 
+    onFileSelect={(file) => console.log(file)}
+    renderImage={(props) => (
+      <View>
+        <Text>Custom Image Preview</Text>
+        {/* Custom image rendering */}
+      </View>
+    )}
+    renderError={(props) => (
+      <Text color="error">{props.errorMessage}</Text>
+    )}
+  />
+);
 ```
 

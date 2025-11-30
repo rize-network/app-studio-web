@@ -1,9 +1,425 @@
 # ChatInput
 
-An interactive input field for chat interfaces, supporting text, attachments, and various AI agent features.
+A customizable chat input component with file upload support, mentions, suggestions, audio recording, and model selection.
 
 ### **Import**
 ```tsx
 import { ChatInput } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const DefaultChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      onSubmit={(message) => console.log('Message:', message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **onSubmit**
+Callback function when the form is submitted.
+
+- **Type:** `(message: string, options?: { model_name?: string; enable_thinking?: boolean }) => void`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const SubmitChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      onSubmit={(message, options) => {
+        console.log('Message:', message);
+        console.log('Model:', options?.model_name);
+        console.log('Thinking:', options?.enable_thinking);
+      }}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **placeholder**
+Placeholder text for the input.
+
+- **Type:** `string`
+- **Default:** `'Type a message...'`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const PlaceholderChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      placeholder="Ask me anything..."
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **loading**
+Whether the input is in a loading state.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const LoadingChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [loading, setLoading] = useState(false);
+  
+  return (
+    <ChatInput 
+      loading={loading}
+      onSubmit={(message) => {
+        setLoading(true);
+        setTimeout(() => setLoading(false), 2000);
+      }}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **disabled**
+Whether the input is disabled.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const DisabledChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      disabled
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **value & onChange**
+Controlled input value.
+
+- **Type:** `string` & `(value: string) => void`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const ControlledChatInput = () => {
+  const [value, setValue] = useState('');
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      value={value}
+      onChange={setValue}
+      onSubmit={(message) => {
+        console.log(message);
+        setValue('');
+      }}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **hideAttachments**
+Whether to hide the attachment button.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const NoAttachmentsChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      hideAttachments
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **enableAudioRecording**
+Enable audio recording button.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const AudioChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      enableAudioRecording
+      onAudioRecordingStart={() => console.log('Recording started')}
+      onAudioRecordingStop={(audio) => console.log('Audio blob:', audio)}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **suggestions**
+List of suggestions for auto-completion.
+
+- **Type:** `Suggestion[]`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const SuggestionsChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  const suggestions = [
+    { text: 'How do I...', value: 'how-to' },
+    { text: 'What is...', value: 'what-is' },
+    { text: 'Can you help me...', value: 'help' },
+  ];
+  
+  return (
+    <ChatInput 
+      suggestions={suggestions}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **mentionData**
+Data for mention auto-completion.
+
+- **Type:** `Array<{ id: string; name: string; avatar?: string; description?: string }>`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const MentionsChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  const mentionData = [
+    { id: '1', name: 'John Doe', avatar: '/avatars/john.jpg' },
+    { id: '2', name: 'Jane Smith', avatar: '/avatars/jane.jpg' },
+    { id: '3', name: 'Bob Johnson', description: 'Developer' },
+  ];
+  
+  return (
+    <ChatInput 
+      mentionData={mentionData}
+      mentionTrigger="@"
+      onMentionSelect={(mention) => console.log('Mentioned:', mention)}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **promptExamples**
+List of prompt examples to display.
+
+- **Type:** `PromptExample[]`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const PromptExamplesChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  const promptExamples = [
+    { title: 'Write a story', prompt: 'Write a short story about...' },
+    { title: 'Explain a concept', prompt: 'Explain quantum physics in simple terms' },
+    { title: 'Code help', prompt: 'Help me debug this code...' },
+  ];
+  
+  return (
+    <ChatInput 
+      promptExamples={promptExamples}
+      onPromptExampleSelect={(example) => console.log('Selected:', example)}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **isAgentRunning & onStopAgent**
+Agent running state and stop callback.
+
+- **Type:** `boolean` & `() => void`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const AgentChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [isRunning, setIsRunning] = useState(false);
+  
+  return (
+    <ChatInput 
+      isAgentRunning={isRunning}
+      onStopAgent={() => {
+        console.log('Stopping agent');
+        setIsRunning(false);
+      }}
+      onSubmit={(message) => {
+        console.log(message);
+        setIsRunning(true);
+      }}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **size**
+Size of the input.
+
+- **Type:** `Size`
+- **Default:** `'md'`
+- **Possible Values:** `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const SizedChatInputs = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <Vertical gap={15}>
+      {['sm', 'md', 'lg'].map((size) => (
+        <ChatInput 
+          key={size}
+          size={size as any}
+          onSubmit={(message) => console.log(message)}
+          getPendingFiles={() => files}
+          clearPendingFiles={() => setFiles([])}
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **variant**
+Variant of the input.
+
+- **Type:** `Variant`
+- **Possible Values:** `'default' | 'outlined' | 'filled'`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const VariantChatInputs = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <Vertical gap={15}>
+      {['default', 'outlined', 'filled'].map((variant) => (
+        <ChatInput 
+          key={variant}
+          variant={variant as any}
+          onSubmit={(message) => console.log(message)}
+          getPendingFiles={() => files}
+          clearPendingFiles={() => setFiles([])}
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **views**
+Custom styles for different parts of the chat input.
+
+- **Type:** `ChatInputStyles`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const StyledChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+      views={{
+        container: {
+          borderRadius: 16,
+          borderColor: '#3b82f6',
+        },
+        input: {
+          fontSize: 16,
+          padding: 12,
+        },
+        button: {
+          backgroundColor: '#3b82f6',
+        }
+      }}
+    />
+  );
+};
 ```
 

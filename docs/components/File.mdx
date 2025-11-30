@@ -1,8 +1,134 @@
 # File
 
-File component.
+A component for displaying file icons and images with customizable colors and theming support.
 
 ### **Import**
-  \`\`\`tsx
-  import { File } from '@app-studio/web';
-  \`\`\`
+```tsx
+import { FileSVG, FileImage } from '@app-studio/web';
+```
+
+### **FileSVG - Default**
+```tsx
+import React from 'react';
+import { FileSVG } from '@app-studio/web';
+
+export const DefaultFile = () => (
+  <FileSVG src="/icons/document.svg" width={48} height={48} />
+);
+```
+
+### **src**
+The source URL of the SVG or image file to display.
+
+- **Type:** `string`
+- **Required:** `true`
+
+```tsx
+import React from 'react';
+import { FileSVG } from '@app-studio/web';
+
+export const FileWithSource = () => (
+  <FileSVG 
+    src="/icons/pdf-icon.svg" 
+    width={64} 
+    height={64} 
+  />
+);
+```
+
+### **color**
+Optional color to apply to the SVG file. Uses theme-aware color system.
+
+- **Type:** `string`
+- **Default:** `undefined`
+
+```tsx
+import React from 'react';
+import { FileSVG } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const ColoredFiles = () => (
+  <Horizontal gap={15}>
+    <FileSVG src="/icons/file.svg" color="primary" width={48} height={48} />
+    <FileSVG src="/icons/file.svg" color="error" width={48} height={48} />
+    <FileSVG src="/icons/file.svg" color="success" width={48} height={48} />
+  </Horizontal>
+);
+```
+
+### **views**
+Custom styles for the container and image elements.
+
+- **Type:** `{ container?: ViewProps; image?: ImageProps }`
+
+```tsx
+import React from 'react';
+import { FileSVG } from '@app-studio/web';
+
+export const StyledFile = () => (
+  <FileSVG 
+    src="/icons/file.svg" 
+    width={64} 
+    height={64}
+    views={{
+      container: { 
+        backgroundColor: '#f0f0f0',
+        borderRadius: 8,
+        padding: 10
+      },
+      image: { 
+        opacity: 0.8 
+      }
+    }}
+  />
+);
+```
+
+### **FileImage**
+Display regular image files with standard image props.
+
+```tsx
+import React from 'react';
+import { FileImage } from '@app-studio/web';
+
+export const ImageFile = () => (
+  <FileImage 
+    path="/images/document.png" 
+    width={200} 
+    height={150}
+    borderRadius={8}
+  />
+);
+```
+
+### **themeMode**
+Override the theme mode for the file component.
+
+- **Type:** `'light' | 'dark'`
+- **Default:** Uses context theme
+
+```tsx
+import React from 'react';
+import { FileSVG } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const ThemedFiles = () => (
+  <Horizontal gap={15}>
+    <FileSVG 
+      src="/icons/file.svg" 
+      color="text" 
+      themeMode="light"
+      width={48} 
+      height={48} 
+    />
+    <FileSVG 
+      src="/icons/file.svg" 
+      color="text" 
+      themeMode="dark"
+      width={48} 
+      height={48} 
+    />
+  </Horizontal>
+);
+```
+

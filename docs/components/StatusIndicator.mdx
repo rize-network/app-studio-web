@@ -1,6 +1,6 @@
 # StatusIndicator
 
-Defines the main functional component responsible for rendering a status indicator.
+A status indicator component for displaying status states with labels and customizable styling.
 
 ### **Import**
 ```tsx
@@ -12,8 +12,362 @@ import { StatusIndicator } from '@app-studio/web';
 import React from 'react';
 import { StatusIndicator } from '@app-studio/web';
 
-export const DefaultDemo = () => (
-  <StatusIndicator label="Active" status="success" />
+export const DefaultStatusIndicator = () => (
+  <StatusIndicator status="success" />
+);
+```
+
+### **status**
+The status state to display.
+
+- **Type:** `Status`
+- **Possible Values:** `'success' | 'error' | 'warning' | 'info' | 'pending' | 'active' | 'inactive'`
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const StatusStates = () => (
+  <Vertical gap={15}>
+    <StatusIndicator status="success" />
+    <StatusIndicator status="error" />
+    <StatusIndicator status="warning" />
+    <StatusIndicator status="info" />
+    <StatusIndicator status="pending" />
+    <StatusIndicator status="active" />
+    <StatusIndicator status="inactive" />
+  </Vertical>
+);
+```
+
+### **label**
+Label text to display next to the indicator.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const LabeledStatusIndicators = () => (
+  <Vertical gap={15}>
+    <StatusIndicator status="success" label="Completed" />
+    <StatusIndicator status="error" label="Failed" />
+    <StatusIndicator status="warning" label="Warning" />
+    <StatusIndicator status="info" label="Information" />
+    <StatusIndicator status="pending" label="Pending" />
+    <StatusIndicator status="active" label="Active" />
+    <StatusIndicator status="inactive" label="Inactive" />
+  </Vertical>
+);
+```
+
+### **themeMode**
+Optional theme mode override.
+
+- **Type:** `'light' | 'dark'`
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const ThemedStatusIndicators = () => (
+  <Horizontal gap={20}>
+    <StatusIndicator 
+      status="success" 
+      label="Light Mode" 
+      themeMode="light" 
+    />
+    <StatusIndicator 
+      status="success" 
+      label="Dark Mode" 
+      themeMode="dark" 
+    />
+  </Horizontal>
+);
+```
+
+### **views**
+Custom styles for the status indicator.
+
+- **Type:** `StatusIndicatorStyles`
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+
+export const StyledStatusIndicator = () => (
+  <StatusIndicator 
+    status="success" 
+    label="Custom Styled"
+    views={{
+      container: {
+        padding: 10,
+        backgroundColor: '#f0fdf4',
+        borderRadius: 8,
+      },
+      indicator: {
+        width: 12,
+        height: 12,
+      },
+      label: {
+        fontSize: 16,
+        fontWeight: 'bold',
+      }
+    }}
+  />
+);
+```
+
+### **User Status**
+Showing online/offline status.
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Horizontal, Avatar, Vertical, Text } from 'app-studio';
+
+export const UserStatus = () => (
+  <Horizontal gap={15} alignItems="center">
+    <Avatar src="/user.jpg" size={48} />
+    <Vertical gap={5}>
+      <Text fontWeight="bold">John Doe</Text>
+      <StatusIndicator status="active" label="Online" />
+    </Vertical>
+  </Horizontal>
+);
+```
+
+### **Order Status**
+Displaying order or shipment status.
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical, Text, Card } from 'app-studio';
+
+export const OrderStatus = () => (
+  <Card padding={20}>
+    <Vertical gap={15}>
+      <Text fontSize={18} fontWeight="bold">Order #12345</Text>
+      <StatusIndicator status="success" label="Delivered" />
+      <Text fontSize={14} color="#6b7280">
+        Your order was delivered on March 15, 2024
+      </Text>
+    </Vertical>
+  </Card>
+);
+```
+
+### **System Status**
+Showing system or service status.
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical, Horizontal, Text } from 'app-studio';
+
+export const SystemStatus = () => (
+  <Vertical gap={15}>
+    <Text fontSize={20} fontWeight="bold">System Status</Text>
+    
+    <Vertical gap={10}>
+      <Horizontal justifyContent="space-between" alignItems="center">
+        <Text>API Server</Text>
+        <StatusIndicator status="active" label="Operational" />
+      </Horizontal>
+      
+      <Horizontal justifyContent="space-between" alignItems="center">
+        <Text>Database</Text>
+        <StatusIndicator status="active" label="Operational" />
+      </Horizontal>
+      
+      <Horizontal justifyContent="space-between" alignItems="center">
+        <Text>CDN</Text>
+        <StatusIndicator status="warning" label="Degraded" />
+      </Horizontal>
+      
+      <Horizontal justifyContent="space-between" alignItems="center">
+        <Text>Email Service</Text>
+        <StatusIndicator status="error" label="Down" />
+      </Horizontal>
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Task Status**
+Displaying task or project status.
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical, Horizontal, Text } from 'app-studio';
+
+export const TaskStatus = () => {
+  const tasks = [
+    { id: 1, name: 'Design mockups', status: 'success' as const, label: 'Complete' },
+    { id: 2, name: 'Develop frontend', status: 'active' as const, label: 'In Progress' },
+    { id: 3, name: 'Write tests', status: 'pending' as const, label: 'Pending' },
+    { id: 4, name: 'Deploy to production', status: 'inactive' as const, label: 'Not Started' },
+  ];
+  
+  return (
+    <Vertical gap={15}>
+      {tasks.map((task) => (
+        <Horizontal key={task.id} justifyContent="space-between" alignItems="center">
+          <Text>{task.name}</Text>
+          <StatusIndicator status={task.status} label={task.label} />
+        </Horizontal>
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **Payment Status**
+Showing payment or transaction status.
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical, Horizontal, Text, Card } from 'app-studio';
+
+export const PaymentStatus = () => (
+  <Card padding={20}>
+    <Vertical gap={15}>
+      <Horizontal justifyContent="space-between" alignItems="center">
+        <Vertical gap={5}>
+          <Text fontSize={16} fontWeight="bold">Payment to Acme Corp</Text>
+          <Text fontSize={14} color="#6b7280">$1,234.56</Text>
+        </Vertical>
+        <StatusIndicator status="success" label="Paid" />
+      </Horizontal>
+      
+      <Text fontSize={14} color="#6b7280">
+        Transaction ID: TXN-2024-03-15-001
+      </Text>
+    </Vertical>
+  </Card>
+);
+```
+
+### **Server Status Dashboard**
+A complete server status dashboard.
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical, Horizontal, Text, Card } from 'app-studio';
+
+export const ServerStatusDashboard = () => {
+  const servers = [
+    { name: 'Web Server 1', status: 'active' as const, uptime: '99.9%' },
+    { name: 'Web Server 2', status: 'active' as const, uptime: '99.8%' },
+    { name: 'Database Primary', status: 'active' as const, uptime: '100%' },
+    { name: 'Database Replica', status: 'warning' as const, uptime: '95.2%' },
+    { name: 'Cache Server', status: 'error' as const, uptime: '0%' },
+  ];
+  
+  return (
+    <Card padding={20}>
+      <Vertical gap={20}>
+        <Text fontSize={20} fontWeight="bold">Server Status</Text>
+        
+        <Vertical gap={15}>
+          {servers.map((server) => (
+            <Card key={server.name} padding={15} variant="outlined">
+              <Horizontal justifyContent="space-between" alignItems="center">
+                <Vertical gap={5}>
+                  <Text fontWeight="bold">{server.name}</Text>
+                  <Text fontSize={14} color="#6b7280">
+                    Uptime: {server.uptime}
+                  </Text>
+                </Vertical>
+                <StatusIndicator 
+                  status={server.status} 
+                  label={
+                    server.status === 'active' ? 'Online' :
+                    server.status === 'warning' ? 'Degraded' :
+                    'Offline'
+                  }
+                />
+              </Horizontal>
+            </Card>
+          ))}
+        </Vertical>
+      </Vertical>
+    </Card>
+  );
+};
+```
+
+### **Notification Status**
+Using status indicators in notifications.
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+import { Vertical, Horizontal, Text } from 'app-studio';
+
+export const NotificationStatus = () => {
+  const notifications = [
+    { 
+      id: 1, 
+      message: 'Deployment successful', 
+      status: 'success' as const,
+      time: '2 minutes ago' 
+    },
+    { 
+      id: 2, 
+      message: 'High memory usage detected', 
+      status: 'warning' as const,
+      time: '5 minutes ago' 
+    },
+    { 
+      id: 3, 
+      message: 'Build failed', 
+      status: 'error' as const,
+      time: '10 minutes ago' 
+    },
+  ];
+  
+  return (
+    <Vertical gap={10}>
+      {notifications.map((notification) => (
+        <Horizontal key={notification.id} gap={10} alignItems="flex-start">
+          <StatusIndicator status={notification.status} />
+          <Vertical gap={2}>
+            <Text>{notification.message}</Text>
+            <Text fontSize={12} color="#6b7280">{notification.time}</Text>
+          </Vertical>
+        </Horizontal>
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **Animated Status**
+Status indicator with pulse animation.
+
+```tsx
+import React from 'react';
+import { StatusIndicator } from '@app-studio/web';
+
+export const AnimatedStatusIndicator = () => (
+  <StatusIndicator 
+    status="active" 
+    label="Live"
+    views={{
+      indicator: {
+        animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      }
+    }}
+  />
 );
 ```
 

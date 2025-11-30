@@ -1,6 +1,6 @@
 # Pagination
 
-A user interface component for navigating through a sequence of pages.
+A pagination component for navigating through pages with customizable appearance, page size selection, and navigation controls.
 
 ### **Import**
 ```tsx
@@ -11,26 +11,483 @@ import { Pagination } from '@app-studio/web';
 ```tsx
 import React, { useState } from 'react';
 import { Pagination } from '@app-studio/web';
-import { View } from 'app-studio';
-import { Text } from 'app-studio';
 
 export const DefaultPagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10;
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
+  
   return (
-    <View width="100%">
-      <Text marginBottom={10}>Default Pagination</Text>
-      <Pagination
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={10}
+      onPageChange={setCurrentPage}
+    />
+  );
+};
+```
+
+### **currentPage**
+The current page number (1-based).
+
+- **Type:** `number`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+import { Text, Vertical } from 'app-studio';
+
+export const ControlledPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Vertical gap={10}>
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={10}
+        onPageChange={setCurrentPage}
+      />
+      <Text>Current Page: {currentPage}</Text>
+    </Vertical>
+  );
+};
+```
+
+### **totalPages**
+The total number of pages.
+
+- **Type:** `number`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+
+export const TotalPagesPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={50}
+      onPageChange={setCurrentPage}
+    />
+  );
+};
+```
+
+### **onPageChange**
+Callback function when page changes.
+
+- **Type:** `(page: number) => void`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+
+export const PageChangePagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={10}
+      onPageChange={(page) => {
+        console.log('Navigating to page:', page);
+        setCurrentPage(page);
+      }}
+    />
+  );
+};
+```
+
+### **pageSize**
+The number of items per page.
+
+- **Type:** `number`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+
+export const PageSizePagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  
+  return (
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={10}
+      pageSize={pageSize}
+      onPageChange={setCurrentPage}
+      onPageSizeChange={setPageSize}
+      showPageSizeSelector
+    />
+  );
+};
+```
+
+### **pageSizeOptions**
+Available page size options.
+
+- **Type:** `PageSizeOption[]`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+
+export const PageSizeOptionsPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  
+  return (
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={20}
+      pageSize={pageSize}
+      pageSizeOptions={[
+        { value: 5, label: '5 per page' },
+        { value: 10, label: '10 per page' },
+        { value: 25, label: '25 per page' },
+        { value: 50, label: '50 per page' },
+      ]}
+      onPageChange={setCurrentPage}
+      onPageSizeChange={setPageSize}
+      showPageSizeSelector
+    />
+  );
+};
+```
+
+### **showPageSizeSelector**
+Whether to show the page size selector.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+
+export const WithPageSizeSelector = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  
+  return (
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={10}
+      pageSize={pageSize}
+      showPageSizeSelector
+      onPageChange={setCurrentPage}
+      onPageSizeChange={setPageSize}
+    />
+  );
+};
+```
+
+### **showPageInfo**
+Whether to show the page information text.
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+
+export const WithPageInfo = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={10}
+      showPageInfo
+      onPageChange={setCurrentPage}
+    />
+  );
+};
+```
+
+### **maxPageButtons**
+The maximum number of page buttons to show.
+
+- **Type:** `number`
+- **Default:** `7`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const MaxPageButtons = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Vertical gap={20}>
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={20}
+        maxPageButtons={5}
+        onPageChange={setCurrentPage}
+      />
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={20}
+        maxPageButtons={10}
+        onPageChange={setCurrentPage}
+      />
+    </Vertical>
+  );
+};
+```
+
+### **showFirstLastButtons**
+Whether to show the first and last page buttons.
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+
+export const FirstLastButtons = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={10}
+      showFirstLastButtons
+      onPageChange={setCurrentPage}
+    />
+  );
+};
+```
+
+### **size**
+The size of the pagination component.
+
+- **Type:** `Size`
+- **Default:** `'md'`
+- **Possible Values:** `'xs' | 'sm' | 'md' | 'lg' | 'xl'`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const SizedPaginations = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Vertical gap={20}>
+      {['sm', 'md', 'lg'].map((size) => (
+        <Pagination 
+          key={size}
+          currentPage={currentPage}
+          totalPages={10}
+          size={size as any}
+          onPageChange={setCurrentPage}
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **variant**
+The visual style variant of the pagination component.
+
+- **Type:** `Variant`
+- **Default:** `'default'`
+- **Possible Values:** `'default' | 'outlined' | 'filled'`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const VariantPaginations = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Vertical gap={20}>
+      {['default', 'outlined', 'filled'].map((variant) => (
+        <Pagination 
+          key={variant}
+          currentPage={currentPage}
+          totalPages={10}
+          variant={variant as any}
+          onPageChange={setCurrentPage}
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **shape**
+The shape of the pagination buttons.
+
+- **Type:** `Shape`
+- **Default:** `'rounded'`
+- **Possible Values:** `'sharp' | 'rounded' | 'pillShaped'`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const ShapedPaginations = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Vertical gap={20}>
+      {['sharp', 'rounded', 'pillShaped'].map((shape) => (
+        <Pagination 
+          key={shape}
+          currentPage={currentPage}
+          totalPages={10}
+          shape={shape as any}
+          onPageChange={setCurrentPage}
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **views**
+Custom styles for different parts of the pagination component.
+
+- **Type:** `PaginationStyles`
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+
+export const StyledPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  return (
+    <Pagination 
+      currentPage={currentPage}
+      totalPages={10}
+      onPageChange={setCurrentPage}
+      views={{
+        container: {
+          gap: 8,
+        },
+        button: {
+          borderColor: '#3b82f6',
+        },
+        activeButton: {
+          backgroundColor: '#3b82f6',
+          color: '#ffffff',
+        }
+      }}
+    />
+  );
+};
+```
+
+### **Complete Example**
+A fully featured pagination with all options.
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+import { Vertical, Text } from 'app-studio';
+
+export const CompletePagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  
+  const totalItems = 250;
+  const totalPages = Math.ceil(totalItems / pageSize);
+  
+  return (
+    <Vertical gap={20}>
+      <Text>
+        Showing {(currentPage - 1) * pageSize + 1} to{' '}
+        {Math.min(currentPage * pageSize, totalItems)} of {totalItems} items
+      </Text>
+      
+      <Pagination 
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={handlePageChange}
+        pageSize={pageSize}
+        pageSizeOptions={[
+          { value: 10, label: '10' },
+          { value: 25, label: '25' },
+          { value: 50, label: '50' },
+          { value: 100, label: '100' },
+        ]}
+        onPageChange={setCurrentPage}
+        onPageSizeChange={(newSize) => {
+          setPageSize(newSize);
+          setCurrentPage(1); // Reset to first page
+        }}
+        showPageSizeSelector
+        showPageInfo
+        showFirstLastButtons
+        maxPageButtons={7}
+        size="md"
+        variant="outlined"
+        shape="rounded"
       />
-    </View>
+    </Vertical>
+  );
+};
+```
+
+### **Table Pagination**
+Common use case with a data table.
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '@app-studio/web';
+import { Vertical, Text } from 'app-studio';
+
+export const TablePagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  
+  // Simulated data
+  const allData = Array.from({ length: 100 }, (_, i) => ({
+    id: i + 1,
+    name: `Item ${i + 1}`,
+  }));
+  
+  const totalPages = Math.ceil(allData.length / pageSize);
+  const startIndex = (currentPage - 1) * pageSize;
+  const currentData = allData.slice(startIndex, startIndex + pageSize);
+  
+  return (
+    <Vertical gap={20}>
+      {/* Your table component here */}
+      <Vertical gap={5}>
+        {currentData.map((item) => (
+          <Text key={item.id}>{item.name}</Text>
+        ))}
+      </Vertical>
+      
+      <Pagination 
+        currentPage={currentPage}
+        totalPages={totalPages}
+        pageSize={pageSize}
+        onPageChange={setCurrentPage}
+        onPageSizeChange={(newSize) => {
+          setPageSize(newSize);
+          setCurrentPage(1);
+        }}
+        showPageSizeSelector
+        showPageInfo
+      />
+    </Vertical>
   );
 };
 ```
