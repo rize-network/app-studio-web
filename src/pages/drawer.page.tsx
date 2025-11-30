@@ -4,7 +4,7 @@ import {
   DefaultDrawer,
   DrawerPlacements,
   DrawerSizes,
-} from 'src/components/Drawer/Examples';
+} from 'src/components/Drawer/examples';
 
 const Section = ({
   title,
