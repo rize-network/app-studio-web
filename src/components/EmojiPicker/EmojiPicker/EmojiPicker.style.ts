@@ -21,6 +21,7 @@ export const DefaultEmojiPickerStyles = {
 
   dropdown: {
     position: 'absolute',
+    mixBlendMode: 'normal',
     top: 'calc(100% + 4px)',
     left: 0,
     right: 0,

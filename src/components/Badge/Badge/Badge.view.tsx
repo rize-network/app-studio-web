@@ -38,7 +38,6 @@ const BadgeView: React.FC<BadgeProps> = ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'color.black',
 
     // Apply shape, size, and variant styles
     borderRadius: BadgeShapes[shape],
@@ -59,7 +58,6 @@ const BadgeView: React.FC<BadgeProps> = ({
         textAlign="center"
         {...views?.text}
         color={combinedStyles.color}
-        bgColor={combinedStyles.backgroundColor}
       >
         {content || ''}
       </Text>

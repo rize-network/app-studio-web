@@ -129,9 +129,6 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
         {...triggerStyles}
       >
         <Horizontal alignItems="center" gap={8}>
-          {/* Emoji preview */}
-          <Text fontSize="20px">{selectedEmoji || '😀'}</Text>
-
           <Text
             color={selectedEmoji ? 'color.gray.800' : 'color.gray.500'}
             fontSize="inherit"
