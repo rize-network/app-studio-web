@@ -48,6 +48,30 @@ export interface TitleProps extends ViewProps {
   highlightTypewriterDuration?: number;
 
   /**
+   * Whether to apply a slide effect to the highlighted text
+   * @default false
+   */
+  highlightSlide?: boolean;
+
+  /**
+   * Duration in milliseconds for the slide effect on highlighted text
+   * @default 500
+   */
+  highlightSlideDuration?: number;
+
+  /**
+   * Delay in milliseconds between each word's animation start
+   * @default 50
+   */
+  highlightSlideStagger?: number;
+
+  /**
+   * Whether to animate the slide effect sequentially (exit all then enter all)
+   * @default true
+   */
+  highlightSlideSequential?: boolean;
+
+  /**
    * Style of the highlight effect
    * @default 'background'
    */

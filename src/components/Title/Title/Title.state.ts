@@ -14,6 +14,10 @@ export const useTitleState = (props: TitleProps) => {
     highlightText: initialHighlightText, // Renamed to avoid confusion with the dynamic target
     highlightTypewriter = false,
     highlightTypewriterDuration = 1500,
+    highlightSlide = false,
+    highlightSlideDuration = 500,
+    highlightSlideStagger = 50,
+    highlightSlideSequential = true,
   } = props;
 
   // State for the final text to be displayed (could be original children or alternating text)
@@ -84,5 +88,9 @@ export const useTitleState = (props: TitleProps) => {
     finalDisplayedText, // This is the text that TitleView should render
     activeHighlightTarget, // This is the text that TitleView should highlight
     highlightTypewriter, // Whether typewriter effect is enabled
+    highlightSlide,
+    highlightSlideDuration,
+    highlightSlideStagger,
+    highlightSlideSequential,
   };
 };

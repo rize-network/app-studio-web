@@ -13,6 +13,7 @@ import {
   AlternatingTitle,
   HighlightStylesDemo,
   TypewriterHighlightDemo,
+  SlideHighlightDemo,
 } from 'src/components/Title/examples';
 
 /**
@@ -107,6 +108,12 @@ const TitlePage = () => {
             <td>Highlight Styles</td>
             <td>
               <HighlightStylesDemo />
+            </td>
+          </tr>
+          <tr>
+            <td>Slide Highlight</td>
+            <td>
+              <SlideHighlightDemo />
             </td>
           </tr>
         </tbody>

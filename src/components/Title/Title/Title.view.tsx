@@ -10,6 +10,7 @@ import {
   ResponsiveTypography,
 } from './Title.style';
 import TypewriterEffect from './TypewriterEffect';
+import SlideEffect from './SlideEffect';
 import { Text } from 'app-studio';
 
 function escapeRegExp(string: string): string {
@@ -31,7 +32,13 @@ const TitleView: React.FC<TitleProps> = ({
   animationLoop = 1,
   highlightAnimationLoop = 1,
   highlightTypewriter: propHighlightTypewriter = false,
+
   highlightTypewriterDuration = 3000,
+  highlightSlide: propHighlightSlide = false,
+  highlightSlideDuration = 500,
+
+  highlightSlideStagger = 50,
+  highlightSlideSequential = true,
   ...props
 }) => {
   const { ref, inView } = useInView();
@@ -64,15 +71,26 @@ const TitleView: React.FC<TitleProps> = ({
   const highlightBackgroundOverrides =
     highlightStyle === 'background' ? { bgColor: resolvedColor } : {};
 
-  const { finalDisplayedText, activeHighlightTarget, highlightTypewriter } =
-    useTitleState({
-      children,
-      highlightText,
-      _isInView: inView,
-      highlightTypewriter: propHighlightTypewriter,
-      highlightTypewriterDuration,
-      ...props,
-    });
+  const {
+    finalDisplayedText,
+    activeHighlightTarget,
+    highlightTypewriter,
+    highlightSlide,
+    highlightSlideDuration: stateHighlightSlideDuration,
+    highlightSlideStagger: stateHighlightSlideStagger,
+    highlightSlideSequential: stateHighlightSlideSequential,
+  } = useTitleState({
+    children,
+    highlightText,
+    _isInView: inView,
+    highlightTypewriter: propHighlightTypewriter,
+    highlightTypewriterDuration,
+    highlightSlide: propHighlightSlide,
+    highlightSlideDuration,
+    highlightSlideStagger,
+    highlightSlideSequential,
+    ...props,
+  });
 
   // Determine if we should use responsive sizing or static sizing
   const useResponsive = responsive && !props.media; // Don't override if media prop is already provided
@@ -166,12 +184,12 @@ const TitleView: React.FC<TitleProps> = ({
             part
           ) : (
             <Text
-              key={`${part.text}-${idx}`}
+              key={`highlight-${idx}`}
               as="span"
               display="inline"
               animate={inView ? controlledHighlightAnimate : undefined}
-              fontSize={fontSize}
-              {...highlightViewProps}
+              fontSize={useResponsive ? undefined : fontSize}
+              {...(!highlightSlide ? highlightViewProps : {})}
               {...highlightBackgroundOverrides}
               {...views?.highlight}
             >
@@ -184,6 +202,19 @@ const TitleView: React.FC<TitleProps> = ({
                   )}
                   showCursor={true}
                   cursorColor="currentColor"
+                />
+              ) : highlightSlide ? (
+                <SlideEffect
+                  text={part.text}
+                  duration={stateHighlightSlideDuration}
+                  stagger={stateHighlightSlideStagger}
+                  sequential={stateHighlightSlideSequential}
+                  direction="up"
+                  fontSize={useResponsive ? undefined : fontSize}
+                  fontWeight={
+                    useResponsive ? responsiveStyles?.fontWeight : 'bold'
+                  }
+                  wordProps={highlightViewProps}
                 />
               ) : (
                 part.text
@@ -220,7 +251,7 @@ const TitleView: React.FC<TitleProps> = ({
           fontSize={fontSize}
           display="inline"
           animate={inView ? controlledHighlightAnimate : undefined}
-          {...highlightViewProps}
+          {...(!highlightSlide ? highlightViewProps : {})}
           {...highlightBackgroundOverrides}
           {...views?.highlight}
         >
@@ -233,6 +264,17 @@ const TitleView: React.FC<TitleProps> = ({
               )}
               showCursor={true}
               cursorColor="currentColor"
+            />
+          ) : highlightSlide ? (
+            <SlideEffect
+              text={text}
+              duration={stateHighlightSlideDuration}
+              stagger={stateHighlightSlideStagger}
+              sequential={stateHighlightSlideSequential}
+              direction="up"
+              fontSize={fontSize}
+              fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
+              wordProps={highlightViewProps}
             />
           ) : (
             text
