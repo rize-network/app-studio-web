@@ -70,11 +70,11 @@ import { Vertical } from 'app-studio';
 
 export const ColoredProgressBars = () => (
   <Vertical gap={15}>
-    <ProgressBar value={60} color="#3b82f6" />
-    <ProgressBar value={60} color="#10b981" />
-    <ProgressBar value={60} color="#ef4444" />
-    <ProgressBar value={60} color="#f59e0b" />
-    <ProgressBar value={60} color="#8b5cf6" />
+    <ProgressBar value={60} color="color.blue.500" />
+    <ProgressBar value={60} color="color.emerald.500" />
+    <ProgressBar value={60} color="color.red.500" />
+    <ProgressBar value={60} color="color.amber.500" />
+    <ProgressBar value={60} color="color.violet.500" />
   </Vertical>
 );
 ```
@@ -93,18 +93,18 @@ export const BackgroundColorProgressBars = () => (
   <Vertical gap={15}>
     <ProgressBar 
       value={60} 
-      color="#3b82f6" 
-      backgroundColor="#dbeafe" 
+      color="color.blue.500" 
+      backgroundColor="color.blue.100" 
     />
     <ProgressBar 
       value={60} 
-      color="#10b981" 
-      backgroundColor="#d1fae5" 
+      color="color.emerald.500" 
+      backgroundColor="color.emerald.100" 
     />
     <ProgressBar 
       value={60} 
-      color="#ef4444" 
-      backgroundColor="#fee2e2" 
+      color="color.red.500" 
+      backgroundColor="color.red.100" 
     />
   </Vertical>
 );
@@ -246,7 +246,7 @@ export const FileUploadProgress = () => {
           <Text fontSize={14}>Uploading... {progress}%</Text>
           <ProgressBar 
             value={progress} 
-            color="#10b981"
+            color="color.emerald.500"
             height={8}
           />
         </Vertical>
@@ -275,7 +275,7 @@ export const MultiStepProgress = () => {
         <Text>Step {step} of {totalSteps}</Text>
         <ProgressBar 
           value={progress} 
-          color="#3b82f6"
+          color="color.blue.500"
           height={10}
         />
       </Vertical>
@@ -430,7 +430,7 @@ export const CompleteProgressExample = () => {
           </Horizontal>
           <ProgressBar 
             value={overallProgress} 
-            color="#3b82f6"
+            color="color.blue.500"
             height={12}
             radius={6}
           />

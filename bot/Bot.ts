@@ -5,7 +5,6 @@ import { Cache } from './Cache';
 import { FileHandler } from './FileHandler';
 import { APPLICATION_SETTINGS } from './Config'; // Keep config for cache etc.
 import { extractJsonCode } from './extractors';
-// Removed ProjectPrompt as init is removed: import { ProjectPrompt } from './prompt/1-project';
 import { RespondPrompt } from './prompt/2-response';
 
 // Define default model/provider or fetch from config
@@ -122,18 +121,21 @@ export class Bot {
       try {
         propsJson = extractJsonCode(responseString);
         if (!propsJson) {
-            // Fallback: try parsing the entire string
-            try {
-                propsJson = JSON.parse(responseString);
-            } catch (e) {
-                // Fallback 2: try parsing entire string with comments removed
-                 const cleaned = responseString.replace(/\/\/.*$/gm, '');
-                 propsJson = JSON.parse(cleaned);
-            }
+          // Fallback: try parsing the entire string
+          try {
+            propsJson = JSON.parse(responseString);
+          } catch (e) {
+            // Fallback 2: try parsing entire string with comments removed
+            const cleaned = responseString.replace(/\/\/.*$/gm, '');
+            propsJson = JSON.parse(cleaned);
+          }
         }
       } catch (parseError) {
-         console.error(`Failed to parse JSON for ${componentName}. Response:`, responseString);
-         throw parseError;
+        console.error(
+          `Failed to parse JSON for ${componentName}. Response:`,
+          responseString
+        );
+        throw parseError;
       }
 
       // Validate the response structure

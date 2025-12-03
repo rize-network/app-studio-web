@@ -115,7 +115,7 @@ export const CustomRenderDragAndDrop = () => {
           gap={10} 
           alignItems="center"
           padding={12}
-          backgroundColor={item.completed ? '#d1fae5' : '#fee2e2'}
+          backgroundColor={item.completed ? 'color.emerald.100' : 'color.red.100'}
           borderRadius={8}
         >
           <Text fontWeight="bold">#{index + 1}</Text>
@@ -147,7 +147,7 @@ export const ContainerPropsDragAndDrop = () => {
       onChange={setItems}
       renderItem={(item) => <Text>{item}</Text>}
       containerProps={{
-        backgroundColor: '#f3f4f6',
+        backgroundColor: 'color.coolGray.100',
         padding: 20,
         borderRadius: 12,
         gap: 10,
@@ -177,7 +177,7 @@ export const ItemPropsDragAndDrop = () => {
       renderItem={(item) => <Text>{item}</Text>}
       itemProps={{
         padding: 15,
-        backgroundColor: '#ffffff',
+        backgroundColor: 'white',
         borderRadius: 8,
         cursor: 'grab',
         boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
@@ -207,13 +207,13 @@ export const StyledDragAndDrop = () => {
       renderItem={(item) => <Text>{item}</Text>}
       views={{
         container: {
-          backgroundColor: '#1f2937',
+          backgroundColor: 'color.coolGray.800',
           padding: 20,
           borderRadius: 16,
         },
         item: {
-          backgroundColor: '#374151',
-          color: '#ffffff',
+          backgroundColor: 'color.coolGray.700',
+          color: 'white',
           padding: 16,
           borderRadius: 8,
           marginBottom: 8,
@@ -266,9 +266,9 @@ export const TaskListDragAndDrop = () => {
   ]);
   
   const priorityColors = {
-    high: '#ef4444',
-    medium: '#f59e0b',
-    low: '#10b981',
+    high: 'color.red.500',
+    medium: 'color.amber.500',
+    low: 'color.emerald.500',
   };
   
   return (
@@ -278,7 +278,7 @@ export const TaskListDragAndDrop = () => {
       renderItem={(task, index) => (
         <View
           padding={16}
-          backgroundColor="#ffffff"
+          backgroundColor="white"
           borderRadius={12}
           borderLeftWidth={4}
           borderLeftColor={priorityColors[task.priority]}
@@ -298,7 +298,7 @@ export const TaskListDragAndDrop = () => {
                   {task.priority}
                 </Text>
               </Horizontal>
-              <Text fontSize={14} color="#6b7280">
+              <Text fontSize={14} color="color.coolGray.500">
                 {task.description}
               </Text>
             </Vertical>

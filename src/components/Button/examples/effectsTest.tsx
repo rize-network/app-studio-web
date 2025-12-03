@@ -18,15 +18,19 @@ export const EffectsTestButtons = () => (
     <Button
       variant="borderMoving"
       borderMovingDuration={1}
-      borderMovingGradientColors={['#FF0000', '#00FF00', '#0000FF']}
+      borderMovingGradientColors={[
+        'color.red.500',
+        'color.green.500',
+        'color.blue.500',
+      ]}
     >
       Fast Red/Green/Blue
     </Button>
 
     <Button
       variant="animatedStroke"
-      animatedStrokeAccentColor="#FF6B6B"
-      animatedStrokeTextColor="#FF6B6B"
+      animatedStrokeAccentColor="color.red.400"
+      animatedStrokeTextColor="color.red.400"
     >
       Red Stroke Effect
     </Button>

@@ -47,5 +47,6 @@
     }
   },
   "noEmit": false,
-  "include": ["./src", "./src/types/*.d.ts", "./bot"]
+  "include": ["./src", "./src/types/*.d.ts"],
+  "exclude": ["./bot"]
 }

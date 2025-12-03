@@ -13,7 +13,7 @@ export const PositionDemo = () => (
           position="relative"
           height="100px"
           width="200px"
-          backgroundColor="#F2EFE5"
+          backgroundColor="color.warmGray.100"
         >
           <Badge position={position as Position} content={position} />
         </View>
