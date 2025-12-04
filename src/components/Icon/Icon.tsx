@@ -3,7 +3,7 @@ import React from 'react';
 import { Center } from 'app-studio';
 
 // Base icon interface with added transform and orientation
-export interface IconProps extends ViewProps {
+export interface IconProps extends Omit<ViewProps, 'orientation'> {
   color?: string;
   filled?: boolean;
   orientation?: 'left' | 'right' | 'up' | 'down';
@@ -1977,4 +1977,8 @@ export const PowerOffIcon: React.FC<IconProps> = ({
       <path d="M6.8 6.8a8 8 0 1 0 10 0" />
     </svg>
   </IconWrapper>
+);
+
+export const BackIcon = (props) => (
+  <ChevronIcon orientation="left" {...props} />
 );
