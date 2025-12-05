@@ -16,7 +16,7 @@ import { Shape, Size, Variant } from './Button.type';
  * Button sizes following the 4px grid system
  */ export const ButtonSizes: Record<Size, ViewProps> = {
   xs: {
-    minHeight: 3 * 4, // 24px -> 12px
+    minHeight: 8 * 4, // 24px -> 12px
     paddingTop: 1,
     paddingBottom: 1,
     paddingLeft: 2,
@@ -27,7 +27,7 @@ import { Shape, Size, Variant } from './Button.type';
     letterSpacing: '-0.01em',
   },
   sm: {
-    minHeight: 4 * 4, // 32px -> 16px
+    minHeight: 10 * 4, // 32px -> 16px
     paddingTop: 4,
     paddingBottom: 4,
     paddingLeft: 8,
@@ -38,18 +38,18 @@ import { Shape, Size, Variant } from './Button.type';
     letterSpacing: '-0.01em',
   },
   md: {
-    minHeight: 6 * 4, // 40px -> 24px
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingLeft: 12,
-    paddingRight: 12,
-    fontSize: 14,
-    fontWeight: '500',
-    lineHeight: 18,
+    minHeight: 12 * 4, // 40px -> 24px
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 20,
+    paddingRight: 20,
+    fontSize: 16,
+    fontWeight: 550,
+    lineHeight: 24,
     letterSpacing: '-0.01em',
   },
   lg: {
-    minHeight: 8 * 4, // 48px -> 32px
+    minHeight: 14 * 4, // 48px -> 32px
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 16,
@@ -60,7 +60,7 @@ import { Shape, Size, Variant } from './Button.type';
     letterSpacing: '-0.01em',
   },
   xl: {
-    minHeight: 10 * 4, // 60px -> 40px
+    minHeight: 16 * 4, // 60px -> 40px
     paddingTop: 10,
     paddingBottom: 10,
     paddingLeft: 20,
@@ -115,123 +115,148 @@ export const IconSizes: Record<Size, ViewProps> = {
 export const getButtonVariants = (
   color: string,
   isLight: boolean
-): Record<Variant, ViewProps> => ({
-  filled: {
-    backgroundColor: color,
-    color: isLight ? 'color.black' : 'color.white',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'transparent',
-    _hover: {
-      opacity: 0.9,
-    },
-    _active: {
-      opacity: 0.95,
-    },
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-    },
-    transition: 'background-color 0.2s ease, opacity 0.2s ease',
-  },
-  outline: {
-    backgroundColor: 'transparent',
-    color: color,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: color,
-    _hover: {
+): Record<Variant, ViewProps> => {
+  const textColor = isLight ? '#000000' : '#FFFFFF';
+
+  return {
+    filled: {
       backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
-      opacity: 0.9,
+      color: textColor,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: 'transparent',
+      _hover: {
+        opacity: 0.9,
+        color: textColor,
+      },
+      _active: {
+        opacity: 0.95,
+        color: textColor,
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+        color: textColor,
+      },
+      transition: 'background-color 0.2s ease, opacity 0.2s ease',
     },
-    _active: {
-      backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
-      opacity: 0.95,
+    outline: {
+      backgroundColor: 'transparent',
+      color: color,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: color,
+      _hover: {
+        backgroundColor: color,
+        color: textColor,
+        opacity: 0.9,
+      },
+      _active: {
+        backgroundColor: color,
+        color: textColor,
+        opacity: 0.95,
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+      },
+      transition:
+        'background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease',
     },
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    ghost: {
+      backgroundColor: 'transparent',
+      color: color,
+      borderWidth: 0,
+      borderStyle: 'none',
+      borderColor: 'transparent',
+      _hover: {
+        backgroundColor: isLight ? 'color.gray.100' : 'color.gray.800',
+        color: color,
+        opacity: 0.9,
+      },
+      _active: {
+        backgroundColor: isLight ? 'color.gray.200' : 'color.gray.700',
+        color: color,
+        opacity: 0.95,
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+      },
+      transition: 'background-color 0.2s ease, opacity 0.2s ease',
     },
-    transition:
-      'background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease',
-  },
-  ghost: {
-    backgroundColor: 'transparent',
-    color: color,
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderColor: 'transparent',
-    _hover: {
-      backgroundColor: isLight ? 'color.gray.100' : 'color.gray.800',
-      opacity: 0.9,
+    link: {
+      backgroundColor: 'transparent',
+      color: color,
+      borderWidth: 0,
+      borderStyle: 'none',
+      borderColor: 'transparent',
+      textDecoration: 'underline',
+      textUnderlineOffset: '2px',
+      textDecorationThickness: '1px',
+      textDecorationColor: color,
+      _hover: {
+        color: color,
+        opacity: 0.8,
+      },
+      _active: {
+        color: color,
+        opacity: 0.9,
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+      },
+      transition: 'opacity 0.2s ease',
     },
-    _active: {
-      backgroundColor: isLight ? 'color.gray.200' : 'color.gray.700',
-      opacity: 0.95,
+    borderMoving: {
+      position: 'relative',
+      backgroundColor: 'black',
+      color: textColor,
+      overflow: 'hidden',
+      borderWidth: 0,
+      borderStyle: 'none',
+      borderColor: 'transparent',
+      _hover: {
+        color: textColor,
+      },
+      _active: {
+        color: textColor,
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow:
+          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.8)',
+      },
+      transition: 'opacity 0.2s ease',
     },
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    animatedStroke: {
+      display: 'inline-block',
+      maxWidth: '20rem',
+      margin: '0 auto',
+      textAlign: 'center',
+      textDecoration: 'none',
+      position: 'relative',
+      cursor: 'pointer',
+      backgroundColor: 'transparent',
+      color: color,
+      borderWidth: 0,
+      borderStyle: 'none',
+      borderColor: 'transparent',
+      _hover: {
+        color: color,
+      },
+      _active: {
+        color: color,
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+      },
+      transition: 'opacity 0.2s ease',
     },
-    transition: 'background-color 0.2s ease, opacity 0.2s ease',
-  },
-  link: {
-    backgroundColor: 'transparent',
-    color: isLight ? color : 'color.black',
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderColor: 'transparent',
-    textDecoration: 'underline',
-    textUnderlineOffset: '2px',
-    textDecorationThickness: '1px',
-    _hover: {
-      opacity: 0.8,
-    },
-    _active: {
-      opacity: 0.9,
-    },
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-    },
-    transition: 'opacity 0.2s ease',
-  },
-  borderMoving: {
-    position: 'relative',
-    backgroundColor: 'black',
-    overflow: 'hidden',
-    color: 'white',
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderColor: 'transparent',
-    _focusVisible: {
-      outline: 'none',
-      boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.8)',
-    },
-    transition: 'opacity 0.2s ease',
-  },
-  animatedStroke: {
-    display: 'inline-block',
-    maxWidth: '20rem',
-    margin: '0 auto',
-    textAlign: 'center',
-    textDecoration: 'none',
-    position: 'relative',
-    cursor: 'pointer',
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderColor: 'transparent',
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-    },
-    transition: 'opacity 0.2s ease',
-  },
-});
+  };
+};
 
 /**
  * Generate offset path for border animation

@@ -61,12 +61,18 @@ const ButtonView: React.FC<ButtonProps> = ({
   });
   const tone = contrast(mainTone);
 
+  /* text color with mixBlendMode for maximum visibility */
+  const textColor = tone === 'light' ? '#000000' : '#FFFFFF';
+  const blendMode = tone === 'light' ? 'multiply' : 'screen';
+
   /* variant palette */
   const palette = useMemo(
     () => getButtonVariants(mainTone, tone == 'light'),
     [mainTone, tone]
   );
   const base = palette[variant];
+  const resolvedTextColor = (base?.color as string) ?? textColor;
+  const resolvedBlendMode = variant === 'filled' ? blendMode : undefined;
 
   /* layout helpers */
   const Wrapper = ['left', 'right'].includes(iconPosition)
@@ -80,32 +86,21 @@ const ButtonView: React.FC<ButtonProps> = ({
       gap={8}
       alignItems="center"
       justifyContent="center"
-      color={'inherit'}
-      _hover={{
-        color: 'inherit',
-      }}
+      color={resolvedTextColor}
+      mixBlendMode={resolvedBlendMode}
       {...sizeStyles}
       {...views?.content}
     >
       {isLoading && loaderPosition === 'left' && (
         <Loader
           size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
-          color={'inherit'}
-          _hover={{
-            color: 'inherit',
-          }}
+          color={resolvedTextColor}
           {...views?.loader}
         />
       )}
 
       {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
-        <View
-          color={'inherit'}
-          _hover={{
-            color: 'inherit',
-          }}
-          {...views?.icon}
-        >
+        <View color={resolvedTextColor} {...views?.icon}>
           {icon}
         </View>
       )}
@@ -113,13 +108,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       {children}
 
       {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
-        <View
-          color={'inherit'}
-          _hover={{
-            color: 'inherit',
-          }}
-          {...views?.icon}
-        >
+        <View color={resolvedTextColor} {...views?.icon}>
           {icon}
         </View>
       )}
@@ -127,10 +116,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       {isLoading && loaderPosition === 'right' && (
         <Loader
           size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
-          color={'inherit'}
-          _hover={{
-            color: 'inherit',
-          }}
+          color={resolvedTextColor}
           {...views?.loader}
         />
       )}
@@ -167,7 +153,6 @@ const ButtonView: React.FC<ButtonProps> = ({
 
     return (
       <View
-        width={numericWidth}
         height={numericHeight}
         position="relative"
         backgroundColor={containerBg}
@@ -338,7 +323,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
-      // width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+      width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
       /* visuals */
       borderRadius={ButtonShapes[shape]}
       boxShadow={shadow}
@@ -353,9 +338,10 @@ const ButtonView: React.FC<ButtonProps> = ({
         <Link
           to={to}
           isExternal={isExternal}
-          color={'inherit'}
+          color={resolvedTextColor}
           textDecoration={'inherit'}
-          textDecorationColor={'inherit'} // Link underline color matches text color
+          textDecorationColor={resolvedTextColor}
+          _hover={{ color: resolvedTextColor }}
           {...views?.link}
         >
           {content}
