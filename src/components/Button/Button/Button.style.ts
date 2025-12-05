@@ -114,7 +114,8 @@ export const IconSizes: Record<Size, ViewProps> = {
 
 export const getButtonVariants = (
   color: string,
-  isLight: boolean
+  isLight: boolean,
+  isThemeLight: boolean = true
 ): Record<Variant, ViewProps> => {
   const textColor = isLight ? '#000000' : '#FFFFFF';
 
@@ -166,16 +167,17 @@ export const getButtonVariants = (
     ghost: {
       backgroundColor: 'transparent',
       color: color,
-      borderWidth: 0,
-      borderStyle: 'none',
+      borderWidth: 1,
+      borderStyle: 'solid',
       borderColor: 'transparent',
       _hover: {
-        backgroundColor: isLight ? 'color.gray.100' : 'color.gray.800',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: color,
         color: color,
         opacity: 0.9,
       },
       _active: {
-        backgroundColor: isLight ? 'color.gray.200' : 'color.gray.700',
         color: color,
         opacity: 0.95,
       },
@@ -232,7 +234,6 @@ export const getButtonVariants = (
     },
     animatedStroke: {
       display: 'inline-block',
-      maxWidth: '20rem',
       margin: '0 auto',
       textAlign: 'center',
       textDecoration: 'none',
