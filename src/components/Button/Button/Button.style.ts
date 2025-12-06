@@ -12,64 +12,43 @@
 import { ViewProps } from 'app-studio';
 import { Shape, Size, Variant } from './Button.type';
 
+const ButtonFontSize = {
+  xs: 10,
+  sm: 14,
+  md: 16,
+  lg: 18,
+  xl: 20,
+};
+const ButtonLineHeight = {
+  xs: 14,
+  sm: 20,
+  md: 24,
+  lg: 28,
+  xl: 32,
+};
+
+const getButtonSize = (size: Size) => {
+  return {
+    minHeight: ButtonLineHeight[size] * 2,
+    paddingHorizontal: ButtonLineHeight[size] / 2,
+    fontSize: ButtonFontSize[size],
+    fontWeight: 500,
+    lineHeight: ButtonLineHeight[size],
+    letterSpacing: '-0.01em',
+    paddingInline: ButtonLineHeight[size],
+    paddingBlock: ButtonLineHeight[size] / 2,
+    outlineWidth: 'medium',
+  };
+};
+
 /**
  * Button sizes following the 4px grid system
  */ export const ButtonSizes: Record<Size, ViewProps> = {
-  xs: {
-    minHeight: 8 * 4, // 24px -> 12px
-    paddingTop: 1,
-    paddingBottom: 1,
-    paddingLeft: 2,
-    paddingRight: 2,
-    fontSize: 10,
-    fontWeight: '500',
-    lineHeight: 14,
-    letterSpacing: '-0.01em',
-  },
-  sm: {
-    minHeight: 10 * 4, // 32px -> 16px
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 8,
-    paddingRight: 8,
-    fontSize: 12,
-    fontWeight: '500',
-    lineHeight: 16,
-    letterSpacing: '-0.01em',
-  },
-  md: {
-    minHeight: 12 * 4, // 40px -> 24px
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 20,
-    paddingRight: 20,
-    fontSize: 16,
-    fontWeight: 550,
-    lineHeight: 24,
-    letterSpacing: '-0.01em',
-  },
-  lg: {
-    minHeight: 14 * 4, // 48px -> 32px
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 16,
-    paddingRight: 16,
-    fontSize: 16,
-    fontWeight: '500',
-    lineHeight: 18,
-    letterSpacing: '-0.01em',
-  },
-  xl: {
-    minHeight: 16 * 4, // 60px -> 40px
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
-    fontSize: 20,
-    fontWeight: '500',
-    lineHeight: 22,
-    letterSpacing: '-0.01em',
-  },
+  xs: getButtonSize('xs'),
+  sm: getButtonSize('sm'),
+  md: getButtonSize('md'),
+  lg: getButtonSize('lg'),
+  xl: getButtonSize('xl'),
 };
 
 /**

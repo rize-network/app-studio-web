@@ -369,7 +369,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   loaderPosition = 'left',
   backgroundColor, // primary candidate for main color
   color, // 2nd candidate for main color (NOT text‑color)
-  isAuto,
+  isAuto = true,
   isFilled,
   isDisabled,
   isLoading,
