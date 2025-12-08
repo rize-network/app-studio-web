@@ -50,13 +50,16 @@ export const LineChart: React.FC<LineChartProps> = ({
     return max;
   }, [data]);
 
+  // Calculate effective max value
+  const effectiveMaxValue = maxValue || 10;
+
   // Generate y-axis ticks
   const yAxisTicks = useMemo(() => {
     const tickCount = 5;
     const ticks: number[] = [];
 
     for (let i = 0; i <= tickCount; i++) {
-      const value: number = (maxValue / tickCount) * i;
+      const value: number = (effectiveMaxValue / tickCount) * i;
       ticks.push(value);
     }
 
@@ -70,7 +73,7 @@ export const LineChart: React.FC<LineChartProps> = ({
       const y =
         height -
         padding.bottom -
-        (value / maxValue) * chartHeight * animationProgress;
+        (value / effectiveMaxValue) * chartHeight * animationProgress;
       return `${x},${y}`;
     });
 
@@ -88,7 +91,7 @@ export const LineChart: React.FC<LineChartProps> = ({
       const y =
         height -
         padding.bottom -
-        (value / maxValue) * chartHeight * animationProgress;
+        (value / effectiveMaxValue) * chartHeight * animationProgress;
       return `${x},${y}`;
     });
 
@@ -143,7 +146,8 @@ export const LineChart: React.FC<LineChartProps> = ({
 
       {/* Y-axis labels and grid lines */}
       {yAxisTicks.map((tick, index) => {
-        const y = height - padding.bottom - (tick / maxValue) * chartHeight;
+        const y =
+          height - padding.bottom - (tick / effectiveMaxValue) * chartHeight;
 
         return (
           <React.Fragment key={`y-tick-${index}`}>
@@ -206,7 +210,7 @@ export const LineChart: React.FC<LineChartProps> = ({
               const y =
                 height -
                 padding.bottom -
-                (value / maxValue) * chartHeight * animationProgress;
+                (value / effectiveMaxValue) * chartHeight * animationProgress;
 
               const categoryLabel = data.labels[dataIndex];
               const categoryTotal = data.series.reduce((sum, currentSeries) => {

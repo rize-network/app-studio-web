@@ -61,6 +61,46 @@ export const PieChart: React.FC<PieChartProps> = ({
 
   // Generate pie slices
   const slices = useMemo(() => {
+    if (total === 0) {
+      // Return a single placeholder slice
+      const path = isDonut
+        ? [
+            `M ${centerX} ${centerY - radius}`,
+            `A ${radius} ${radius} 0 1 1 ${centerX} ${centerY + radius}`,
+            `A ${radius} ${radius} 0 1 1 ${centerX} ${centerY - radius}`,
+            `M ${centerX} ${centerY - donutRadius}`,
+            `A ${donutRadius} ${donutRadius} 0 1 0 ${centerX} ${
+              centerY + donutRadius
+            }`,
+            `A ${donutRadius} ${donutRadius} 0 1 0 ${centerX} ${
+              centerY - donutRadius
+            }`,
+            'Z',
+          ].join(' ')
+        : [
+            `M ${centerX} ${centerY}`,
+            `M ${centerX} ${centerY - radius}`,
+            `A ${radius} ${radius} 0 1 1 ${centerX} ${centerY + radius}`,
+            `A ${radius} ${radius} 0 1 1 ${centerX} ${centerY - radius}`,
+            'Z',
+          ].join(' ');
+
+      return [
+        {
+          path,
+          color: '#E2E8F0', // Neutral light gray for placeholder
+          label: 'Total',
+          value: 0,
+          percentage: '0%',
+          labelX: centerX,
+          labelY: centerY,
+          startAngle: 0,
+          endAngle: Math.PI * 2,
+          index: -1,
+        },
+      ];
+    }
+
     const result: any[] = [];
     let startAngle = -Math.PI / 2; // Start from top (12 o'clock position)
 
@@ -258,25 +298,31 @@ export const PieChart: React.FC<PieChartProps> = ({
         };
 
         const handleClick = () => {
-          if (onSliceClick) {
+          if (slice.index !== -1 && onSliceClick) {
             onSliceClick(dataPoints[slice.index], slice.index);
           }
         };
+
+        const isPlaceholder = slice.index === -1;
 
         return (
           <g key={`slice-${index}`}>
             <path
               d={slice.path}
               fill={slice.color}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={hideTooltip}
+              onMouseEnter={!isPlaceholder ? handleMouseEnter : undefined}
+              onMouseLeave={!isPlaceholder ? hideTooltip : undefined}
               onClick={handleClick}
               {...PieSliceStyles}
+              style={{
+                ...PieSliceStyles?.style,
+                cursor: isPlaceholder ? 'default' : 'pointer',
+              }}
               {...views?.pie}
             />
 
-            {/* Only show labels for slices that are big enough */}
-            {slice.endAngle - slice.startAngle > 0.2 && (
+            {/* Only show labels for slices that are big enough and not placeholder */}
+            {!isPlaceholder && slice.endAngle - slice.startAngle > 0.2 && (
               <text
                 x={slice.labelX}
                 y={slice.labelY}

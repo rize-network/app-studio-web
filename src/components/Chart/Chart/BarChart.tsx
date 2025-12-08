@@ -56,13 +56,16 @@ export const BarChart: React.FC<BarChartProps> = ({
   const barWidth = (groupWidth * 0.8) / seriesCount;
   const barSpacing = (groupWidth * 0.2) / (seriesCount + 1);
 
+  // Calculate effective max value
+  const effectiveMaxValue = maxValue || 10;
+
   // Generate y-axis ticks
   const yAxisTicks = useMemo(() => {
     const tickCount = 5;
     const ticks: any[] = [];
 
     for (let i = 0; i <= tickCount; i++) {
-      const value = (maxValue / tickCount) * i;
+      const value = (effectiveMaxValue / tickCount) * i;
       ticks.push(value);
     }
 
@@ -116,7 +119,8 @@ export const BarChart: React.FC<BarChartProps> = ({
 
       {/* Y-axis labels and grid lines */}
       {yAxisTicks.map((tick, index) => {
-        const y = height - padding.bottom - (tick / maxValue) * chartHeight;
+        const y =
+          height - padding.bottom - (tick / effectiveMaxValue) * chartHeight;
 
         return (
           <React.Fragment key={`y-tick-${index}`}>
@@ -154,7 +158,7 @@ export const BarChart: React.FC<BarChartProps> = ({
         <React.Fragment key={`series-${seriesIndex}`}>
           {series.data.map((value, dataIndex) => {
             const barHeight =
-              (value / maxValue) * chartHeight * animationProgress;
+              (value / effectiveMaxValue) * chartHeight * animationProgress;
             const x =
               padding.left +
               dataIndex * groupWidth +

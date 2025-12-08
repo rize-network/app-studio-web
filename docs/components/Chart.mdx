@@ -285,6 +285,40 @@ export const ChartStatesDemo = () => {
 };
 ```
 
+### **Zero Values**
+
+The Chart component handles cases where all values are zero by displaying the axes with a default scale, ensuring the chart structure remains visible.
+
+```tsx
+import React from 'react';
+import { Chart, CHART_COLORS, View } from '@app-studio/web';
+
+export const ZeroValuesDemo = () => {
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Revenue',
+        data: [0, 0, 0, 0, 0, 0],
+        color: CHART_COLORS.blue,
+      },
+    ],
+  };
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="bar"
+        data={data}
+        title="Zero Revenue Chart"
+        showGrid
+        animated
+      />
+    </View>
+  );
+};
+```
+
 ### **Available Colors**
 
 The Chart component provides a set of predefined colors through `CHART_COLORS`:
