@@ -107,16 +107,27 @@ export const getButtonVariants = (
       borderColor: 'transparent',
       _hover: {
         opacity: 0.9,
-        color: textColor,
       },
       _active: {
         opacity: 0.95,
-        color: textColor,
       },
       _focusVisible: {
         outline: 'none',
         boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-        color: textColor,
+      },
+      transition: 'background-color 0.2s ease, opacity 0.2s ease',
+    },
+    reversed: {
+      backgroundColor: textColor,
+      color: color,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: textColor,
+      _hover: {
+        opacity: 0.9,
+      },
+      _active: {
+        opacity: 0.95,
       },
       transition: 'background-color 0.2s ease, opacity 0.2s ease',
     },
@@ -157,7 +168,6 @@ export const getButtonVariants = (
         opacity: 0.9,
       },
       _active: {
-        color: color,
         opacity: 0.95,
       },
       _focusVisible: {
@@ -177,11 +187,9 @@ export const getButtonVariants = (
       textDecorationThickness: '1px',
       textDecorationColor: color,
       _hover: {
-        color: color,
         opacity: 0.8,
       },
       _active: {
-        color: color,
         opacity: 0.9,
       },
       _focusVisible: {

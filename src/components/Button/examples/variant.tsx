@@ -6,15 +6,17 @@ import { Variant } from '../Button/Button.type';
 
 export const VariantButtons = () => (
   <Vertical gap={15}>
-    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-      <Button
-        key={index}
-        to="https://www.npmjs.com/package/app-studio"
-        variant={variant as Variant}
-      >
-        App Studio Link {variant}
-      </Button>
-    ))}
+    {['filled', 'outline', 'link', 'ghost', 'reversed'].map(
+      (variant, index) => (
+        <Button
+          key={index}
+          to="https://www.npmjs.com/package/app-studio"
+          variant={variant as Variant}
+        >
+          App Studio Link {variant}
+        </Button>
+      )
+    )}
     {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
       <Button key={index} variant={variant as Variant}>
         {variant}
