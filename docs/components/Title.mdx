@@ -276,3 +276,96 @@ export const ResponsiveTitle = () => {
 };
 ```
 
+### **highlightTypewriter**
+Adds a typewriter effect to the highlighted text.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Title } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const TypewriterTitle = () => (
+  <Vertical gap={32}>
+    <Title
+      size="md"
+      highlightText="Typewriter Effect"
+      highlightTypewriter={true}
+      highlightTypewriterDuration={3000}
+      highlightStyle="gradient"
+      highlightColor="theme.primary"
+      highlightSecondaryColor="theme.secondary"
+    >
+      Title with
+    </Title>
+  </Vertical>
+);
+```
+
+### **highlightSlide**
+Adds a slide entry effect to the highlighted text.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Title } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const SlideTitle = () => (
+  <Vertical gap={32}>
+    <Title
+      size="md"
+      highlightText="Slide Effect"
+      highlightSlide={true}
+      highlightSlideDuration={500}
+      highlightStyle="background"
+      highlightColor="theme.accent"
+    >
+      Title with
+    </Title>
+    
+    <Title
+        size="md"
+        highlightText={["Slide", "Effect", "Multiple"]}
+        highlightSlide={true}
+        highlightSlideSequential={true}
+        highlightSlideStagger={200}
+        highlightStyle="underline"
+        highlightColor="theme.primary"
+    >
+        Sequential
+    </Title>
+  </Vertical>
+);
+```
+
+### **alternateHighlightText**
+Cycles through an array of strings, replacing the highlighted text.
+
+- **Type:** `string[]`
+
+```tsx
+import React from 'react';
+import { Title } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const AlternateTitle = () => (
+  <Vertical gap={32}>
+    <Title
+      size="md"
+      highlightText="Amazing"
+      alternateHighlightText={['Incredible', 'Fantastic', 'Awesome']}
+      alternateAnimation={true}
+      alternateDuration={2000}
+      highlightStyle="underline"
+      highlightColor="theme.success"
+    >
+      Title with Rotating Words:
+    </Title>
+  </Vertical>
+);
+```

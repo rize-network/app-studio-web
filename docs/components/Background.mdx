@@ -106,6 +106,21 @@ export const DefaultDemo = () => (
 
     <Vertical gap={16}>
       <Text fontSize={14} color="color.gray.600">
+        Background Video
+      </Text>
+      <Background.Video
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        height="200px"
+        overlay="rgba(0,0,0,0.3)"
+      >
+        <Text color="white" fontSize={18} fontWeight="500">
+          Video Background
+        </Text>
+      </Background.Video>
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color.gray.600">
         Multi-color Gradient
       </Text>
       <Background.Gradient
