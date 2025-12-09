@@ -34,32 +34,35 @@ const TagChip: React.FC<{
   isDisabled: boolean;
   isReadOnly: boolean;
 }> = ({ tag, onRemove, isRemovable, size, views, isDisabled, isReadOnly }) => {
+  const [isRemoveHovered, setIsRemoveHovered] = React.useState(false);
   const { getColor } = useTheme();
 
   const chipSize = {
-    xs: { padding: '2px 6px', fontSize: '10px', iconSize: 10 },
-    sm: { padding: '4px 8px', fontSize: '12px', iconSize: 12 },
-    md: { padding: '6px 10px', fontSize: '14px', iconSize: 14 },
-    lg: { padding: '8px 12px', fontSize: '16px', iconSize: 16 },
-    xl: { padding: '10px 14px', fontSize: '18px', iconSize: 18 },
-  }[size] || { padding: '6px 10px', fontSize: '14px', iconSize: 14 };
+    xs: { padding: '2px 8px', fontSize: '10px', iconSize: 10 },
+    sm: { padding: '4px 10px', fontSize: '12px', iconSize: 12 },
+    md: { padding: '6px 14px', fontSize: '14px', iconSize: 14 },
+    lg: { padding: '8px 16px', fontSize: '16px', iconSize: 16 },
+    xl: { padding: '10px 18px', fontSize: '18px', iconSize: 18 },
+  }[size] || { padding: '6px 14px', fontSize: '14px', iconSize: 14 };
 
   return (
     <Horizontal
       alignItems="center"
-      gap={4}
+      gap={6}
       padding={chipSize.padding}
-      backgroundColor="color.gray.100"
+      backgroundColor="white"
       borderRadius="16px"
       border="1px solid"
-      borderColor="color.gray.200"
-      transition="all 0.2s ease"
+      borderColor="color.black.100"
+      boxShadow="0 1px 2px rgba(0,0,0,0.05)"
+      transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
       opacity={isDisabled ? 0.6 : 1}
       _hover={
         !isDisabled && !isReadOnly
           ? {
-              backgroundColor: 'color.gray.200',
               borderColor: 'color.gray.300',
+              boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+              transform: 'translateY(-1px)',
             }
           : {}
       }
@@ -81,13 +84,22 @@ const TagChip: React.FC<{
           padding="2px"
           borderRadius="50%"
           transition="all 0.2s ease"
-          _hover={{
-            backgroundColor: 'color.gray.300',
+          backgroundColor={isRemoveHovered ? 'color.red.50' : 'transparent'}
+          onMouseEnter={() => setIsRemoveHovered(true)}
+          onMouseLeave={() => setIsRemoveHovered(false)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove();
           }}
-          onClick={onRemove}
+          _hover={{
+            backgroundColor: 'color.red.50',
+          }}
           {...views?.tagRemove}
         >
-          <CloseIcon widthHeight={chipSize.iconSize} color="color.gray.500" />
+          <CloseIcon
+            widthHeight={chipSize.iconSize}
+            color={isRemoveHovered ? 'color.red.500' : 'color.gray.400'}
+          />
         </View>
       )}
     </Horizontal>
@@ -197,7 +209,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
           {/* Tags and Input Container */}
           <Horizontal
             alignItems="center"
-            gap={4}
+            gap={8}
             flexWrap="wrap"
             width="100%"
             minHeight={Typography.fontSizes[size]}

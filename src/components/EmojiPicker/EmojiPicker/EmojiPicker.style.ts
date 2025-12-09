@@ -67,6 +67,7 @@ export const DefaultEmojiPickerStyles = {
     maxHeight: '240px',
     overflowY: 'auto',
     padding: '4px',
+    color: 'color.black',
   } as ViewProps,
 
   emoji: {

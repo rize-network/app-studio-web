@@ -1,0 +1,78 @@
+# Selector
+
+A segmented control UI component for selecting from a limited list of options, typically used for toggling states or selecting mutually exclusive options like complexity or priority.
+
+## Props
+
+| Prop           | Type          | Description                                                                                                                               | Default |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| options          | { label: string; value: string; color?: string }[] | Array of options for the selector. `color` defaults to primary theme color if not specified.                                       |         |
+| label            | string        | Label for the selector group, displayed with an icon.                                                                                                                |         |
+| id               | string        | ID for the form field.                                                                                                                                    |         |
+| name             | string        | Name attribute for the form field.                                                                                                                        |         |
+| value            | string        | The currently selected value.                                                                                                                             |         |
+| onChange         | (value: any) => void | Callback function when selection changes.                                                                                                        |         |
+| views            | SelectorStyles | Custom styles for internal sub-components (container, item, etc.).                                                                                       |         |
+
+### **Import**
+  ```tsx
+  import { Selector } from '@app-studio/web';
+  ```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Selector } from '@app-studio/web';
+
+export const DefaultSelector = () => (
+  <Selector
+    options={[
+      { label: 'Option A', value: 'A' },
+      { label: 'Option B', value: 'B' },
+      { label: 'Option C', value: 'C' },
+    ]}
+    label="Standard Selection"
+  />
+);
+```
+
+### **Complexity Example (Colored Options)**
+Display options with specific semantic colors for active states, suitable for indicating status levels like Low, Medium, High.
+
+```tsx
+import React from 'react';
+import { Selector } from '@app-studio/web';
+
+export const ComplexitySelector = () => (
+  <Selector
+    label="Complexity"
+    options={[
+      { label: 'Low', value: 'Low', color: 'color.emerald.500' },
+      { label: 'Medium', value: 'Medium', color: 'color.amber.500' },
+      { label: 'High', value: 'High', color: 'color.red.500' },
+    ]}
+  />
+);
+```
+
+### **Custom Styling**
+Apply custom styles to the container or items using the `views` prop.
+
+```tsx
+import React from 'react';
+import { Selector } from '@app-studio/web';
+
+export const CustomStyleSelector = () => (
+  <Selector
+    label="Custom Styled"
+    views={{
+      container: { backgroundColor: 'color.gray.50' },
+      item: { fontSize: '14px', fontStyle: 'italic' }
+    }}
+    options={[
+      { label: 'One', value: '1' },
+      { label: 'Two', value: '2' },
+    ]}
+  />
+);
+```

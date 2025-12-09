@@ -35,7 +35,7 @@ export const ResponsiveTitle = () => {
         responsive={true}
         highlightText="Responsive"
         highlightStyle="underline"
-        highlightColor="theme.accent"
+        highlightColor="theme.primary"
       >
         Responsive MD Title (H3 scale)
       </Title>

@@ -5,12 +5,13 @@
  * It defines font sizes, line heights, and font weights according to the design guidelines.
  */
 
-import { TextSize, TextWeights } from 'app-studio';
+import { TextWeights } from '../components/Form/Label/Label/Label.type';
+import { Size } from '../components/Input/Input.type';
 
 /**
  * Font sizes following the harmonized typography guidelines
  */
-export const FontSizes: Record<TextSize, string | number> = {
+export const FontSizes: Record<Size, string | number> = {
   xs: 10, // Harmonized font size
   sm: 12, // Harmonized font size
   md: 14, // Harmonized font size
@@ -21,7 +22,7 @@ export const FontSizes: Record<TextSize, string | number> = {
 /**
  * Line heights following the harmonized typography guidelines
  */
-export const LineHeights: Record<TextSize, string | number> = {
+export const LineHeights: Record<Size, string | number> = {
   xs: '100%', // Adjusted for 10px font
   sm: '100%', // Adjusted for 12px font
   md: '110%', // Adjusted for 14px font

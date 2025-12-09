@@ -72,7 +72,8 @@ export const FieldContent: React.FC<ContentProps> = ({
       // Apply shape, variant, and custom styles
       {...Shapes[shape]}
       {...InputVariants[variant]}
-      {...views['box']}
+      {...InputVariants[variant]}
+      {...views?.container}
       {...props}
     >
       {children}

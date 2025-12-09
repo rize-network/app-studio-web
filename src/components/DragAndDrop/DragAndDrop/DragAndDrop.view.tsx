@@ -28,9 +28,6 @@ export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
         position="relative"
         cursor="grab"
         transition="transform 0.2s"
-        backgroundColor={
-          draggedIndex === index ? 'color.gray.100' : 'transparent'
-        }
         {...itemProps}
         {...views?.item}
       >

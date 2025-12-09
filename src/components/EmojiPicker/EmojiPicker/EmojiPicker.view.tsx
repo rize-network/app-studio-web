@@ -196,6 +196,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
                   _hover={{
                     backgroundColor: 'color.gray.100',
                   }}
+                  color="color.gray.800"
                   {...views?.emoji}
                 >
                   {emoji.emoji}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Element, Input, Typography, useTheme } from 'app-studio';
 import {
   FieldContainer,
@@ -33,12 +33,10 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
   callback = () => {},
   views = { text: {} },
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
   const handleOptionClick = (event: any) => {
     if (event && event.stopPropagation) event.stopPropagation();
     callback(option);
   };
-  const handleHover = () => setIsHovered(!isHovered);
   return (
     <CountryItem
       margin={0}
@@ -47,11 +45,11 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
       fontWeight="normal"
       paddingVertical={6}
       paddingHorizontal={12}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
       onClick={handleOptionClick}
       fontSize={Typography.fontSizes[size]}
-      backgroundColor={isHovered ? 'trueGray.100' : 'transparent'}
+      _hover={{
+        opacity: 0.8,
+      }}
       {...views['text']}
     >
       {option}
@@ -135,7 +133,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   const IconColor = getColor('color.blueGray.700', {
     themeMode: elementMode ? elementMode : themeMode,
   });
-  const handleHover = () => setIsHovered(!isHovered);
+
   const handleFocus = () => setIsFocused(true);
   const handleCallback = (option: string) => {
     setHide(!hide);
@@ -193,13 +191,17 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         variant={variant}
         value={value}
         color={'theme.primary'}
-        isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
+        _hover={
+          !isDisabled && !error
+            ? {
+                borderColor: 'theme.primary',
+              }
+            : undefined
+        }
       >
         <FieldWrapper>
           {showLabel && (

@@ -243,6 +243,30 @@ export const getButtonVariants = (
       },
       transition: 'opacity 0.2s ease',
     },
+    subtle: {
+      backgroundColor: 'white',
+      color: color,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: color, // Approximate matching of 'color.black.200' assuming a light border
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 6,
+      fontWeight: 500, // medium
+      _hover: {
+        backgroundColor: 'rgba(0, 0, 0, 0.05)', // Approximate 'color.black.50'
+      },
+      _active: {
+        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+      },
+      transition: 'all 0.2s ease',
+      // Override default size styles if necessary via these props, though Button component applies Size styles too.
+      // The snippet had explicit paddings which might override size styles if spread after.
+    },
   };
 };
 

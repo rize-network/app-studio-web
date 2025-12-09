@@ -11,3 +11,4 @@ export * from './shadow';
 export * from './shareButton';
 export * from './size';
 export * from './variant';
+export * from './subtle';

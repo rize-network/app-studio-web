@@ -9,6 +9,7 @@ import {
   BorderMovingButtons,
   AnimatedStrokeButtons,
   ShareButtons,
+  SubtleButtons,
 } from 'src/components/Button/examples';
 import { View } from 'app-studio';
 export const ButtonPage = () => {
@@ -76,6 +77,12 @@ export const ButtonPage = () => {
             <td>Share Button</td>
             <td>
               <ShareButtons />
+            </td>
+          </tr>
+          <tr>
+            <td>Subtle Button</td>
+            <td>
+              <SubtleButtons />
             </td>
           </tr>
         </tbody>

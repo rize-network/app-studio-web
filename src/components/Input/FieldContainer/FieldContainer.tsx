@@ -21,6 +21,7 @@ export const FieldContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
       gap={8} // 2 × 4px grid
       position="relative"
       width="100%"
+      marginVertical={4}
       // Apply custom props
       {...props}
       {...views?.container}

@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Horizontal, useElementPosition } from 'app-studio';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import { Text } from 'app-studio';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
-import { SearchIcon, TickIcon } from '../../../Icon/Icon';
+import { SearchIcon, TickIcon, ChevronIcon } from '../../../Icon/Icon';
+import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 
 // Defines the functional component 'ComboBoxView' with destructured props.
 const ComboBoxView: React.FC<ComboBoxViewProps> = ({
@@ -32,6 +33,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   const { ref: triggerRef, relation } = useElementPosition();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Get optimal positioning style based on available space
   const getDropdownStyle = () => {
@@ -79,13 +81,18 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
       const isOutside = !path.some(
         (element: any) => element?.id === 'combobox-dropdown'
       );
-      if (isOutside) {
+      if (
+        isOutside &&
+        triggerRef.current &&
+        !triggerRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownVisible(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  }, []); // triggerRef is stable
+
   // Defines 'handleSearch' to filter items based on the user's query.
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -120,75 +127,95 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           {label}
         </Text>
       )}
-      <View position="relative">
-        <Horizontal
-          ref={triggerRef}
-          cursor="pointer"
-          backgroundColor="color.white"
-          boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
-          padding="12px"
-          display="flex"
-          alignItems="center"
-          borderRadius="4px"
-          justifyContent="space-between"
-          minWidth={300}
-          flexWrap="nowrap"
-          {...views?.container}
+      <View position="relative" width="100%">
+        <div
+          ref={triggerRef as React.RefObject<HTMLDivElement>}
+          onClick={() => setIsDropdownVisible(!isDropdownVisible)}
+          style={{ width: '100%' }}
         >
-          <Horizontal
-            gap={15}
-            alignItems="center"
-            position="relative"
-            width="100%"
-            onClick={() => setIsDropdownVisible(!isDropdownVisible)}
-            {...views?.labelContainer}
+          <FieldContent
+            isHovered={isHovered}
+            isFocused={isDropdownVisible}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            cursor="pointer"
+            views={{ container: views?.container as any }}
           >
-            {left}
-            <Text
-              weight="medium"
-              flexGrow={1}
-              color="color.gray.800"
-              {...views?.label}
+            <Horizontal
+              gap={10}
+              alignItems="center"
+              width="100%"
+              {...views?.labelContainer}
             >
-              {selectedItem.label}
-            </Text>
-          </Horizontal>
-          {right}
-        </Horizontal>
+              {left}
+              {selectedItem.icon && selectedItem.label !== placeholder && (
+                <View>{selectedItem.icon}</View>
+              )}
+              <Text
+                weight="medium"
+                flexGrow={1}
+                color={
+                  selectedItem.label === placeholder
+                    ? 'color.gray.500'
+                    : 'color.gray.800'
+                }
+                style={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+                {...views?.label}
+              >
+                {selectedItem.label}
+              </Text>
+            </Horizontal>
+            <Horizontal gap={5} alignItems="center">
+              {right}
+              <ChevronIcon
+                widthHeight={16}
+                orientation={isDropdownVisible ? 'up' : 'down'}
+                color="color.gray.500"
+              />
+            </Horizontal>
+          </FieldContent>
+        </div>
         {isDropdownVisible && (
           <View
             ref={dropdownRef}
             id="combobox-dropdown"
             backgroundColor="color.white"
-            boxShadow="rgba(0, 0, 0, 0.16) 0px 1px 4px"
+            boxShadow="rgba(0, 0, 0, 0.16) 0px 4px 16px"
             overflowY="auto"
-            borderRadius="4px"
+            borderRadius="8px"
             style={getDropdownStyle()}
             {...views?.dropdown}
+            border="1px solid #eee"
           >
             {searchEnabled && (
-              <TextField
-                id={props.id}
-                name={props.name}
-                width="100%"
-                type="search"
-                value={searchQuery}
-                onChange={(value) => handleSearch(value)}
-                hint={placeholder}
-                isClearable={false}
-                left={<SearchIcon widthHeight={16} />}
-                views={{
-                  container: {
-                    width: '100%',
-                    padding: '6px 12px',
-                    borderBottom:
-                      filteredItems.length > 0
-                        ? '1px solid #ccc'
-                        : '1px solid transparent',
-                    ...views?.text,
-                  },
-                }}
-              />
+              <View padding="8px">
+                <TextField
+                  id={`${props.id}-search`}
+                  name={`${props.name}-search`}
+                  width="100%"
+                  type="search"
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(value) => handleSearch(value)}
+                  hint={placeholder || 'Search...'}
+                  isClearable={false}
+                  left={<SearchIcon widthHeight={16} color="color.gray.400" />}
+                  views={{
+                    container: {
+                      width: '100%',
+                      padding: '0',
+                      ...views?.text,
+                    },
+                    field: {
+                      fontSize: '14px',
+                    },
+                  }}
+                />
+              </View>
             )}
             {filteredItems.length > 0 && (
               <View margin={0} padding={4}>
@@ -196,7 +223,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                   <Horizontal
                     justifyContent="space-between"
                     key={item.value}
-                    padding="12px"
+                    padding="8px 12px"
                     cursor="pointer"
                     borderRadius={4}
                     backgroundColor={
@@ -206,17 +233,27 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                     }
                     onMouseEnter={() => setHighlightedIndex(index)}
                     onClick={() => handleSelect(item)}
+                    transition="background-color 0.2s"
                     {...views?.item}
                   >
-                    <Text>{item.label}</Text>
+                    <Text color="color.gray.800">{item.label}</Text>
                     <>
                       {item.icon && item.icon}
                       {item.value === selectedItem.value &&
                         showTick &&
-                        !item.icon && <TickIcon widthHeight={20} />}
+                        !item.icon && (
+                          <TickIcon widthHeight={16} color="theme.primary" />
+                        )}
                     </>
                   </Horizontal>
                 ))}
+              </View>
+            )}
+            {filteredItems.length === 0 && (
+              <View padding="12px">
+                <Text color="color.gray.500" align="center">
+                  No items found
+                </Text>
               </View>
             )}
           </View>

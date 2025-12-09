@@ -53,7 +53,7 @@ export const AnimationLoopTitle = () => {
         animationLoop="infinite"
         highlightText="Infinite"
         highlightStyle="glow"
-        highlightColor="theme.accent"
+        highlightColor="theme.primary"
       >
         Animation Loops Infinitely
       </Title>

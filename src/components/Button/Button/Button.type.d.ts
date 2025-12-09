@@ -17,5 +17,6 @@ export type Variant =
   | 'ghost'
   | 'reversed'
   | 'borderMoving'
-  | 'animatedStroke';
+  | 'animatedStroke'
+  | 'subtle';
 // Declares a type 'Variant' used for styling components where each value—'filled', 'outline', 'link', 'ghost'—likely describes a visual style or theme, and 'borderMoving', 'animatedStroke' are special effect variants.
