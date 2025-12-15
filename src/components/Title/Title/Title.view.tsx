@@ -14,7 +14,7 @@ import SlideEffect from './SlideEffect';
 import { Text } from 'app-studio';
 
 function escapeRegExp(string: string): string {
-  return string.replace(/[.*+?^${}()|[\\]\\/g, '\\$&');
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 const TitleView: React.FC<TitleProps> = ({
@@ -137,14 +137,15 @@ const TitleView: React.FC<TitleProps> = ({
       : '';
 
   if (typeof text === 'string' && activeHighlightTarget) {
-    const pattern = new RegExp(
-      `(${escapeRegExp(
-        Array.isArray(activeHighlightTarget)
-          ? activeHighlightTarget.join('|')
-          : activeHighlightTarget
-      )})`,
-      'gi'
-    );
+    const pattern = (() => {
+      if (Array.isArray(activeHighlightTarget)) {
+        const escaped = activeHighlightTarget.map((t) =>
+          escapeRegExp(String(t))
+        );
+        return new RegExp(`(${escaped.join('|')})`, 'gi');
+      }
+      return new RegExp(`(${escapeRegExp(String(activeHighlightTarget))})`, 'gi');
+    })();
 
     const parts: Array<string | { highlight: boolean; text: string }> = [];
     let lastIndex = 0;

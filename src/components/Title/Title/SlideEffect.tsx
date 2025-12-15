@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { Element, Text } from 'app-studio';
+import { Element, Text, Animation } from 'app-studio';
 
 interface SlideEffectProps {
   text: string;
@@ -12,35 +12,6 @@ interface SlideEffectProps {
   wordProps?: any;
   [key: string]: any;
 }
-
-// CSS keyframes injection - done once
-const KEYFRAMES_ID = 'slide-effect-keyframes';
-const injectKeyframes = () => {
-  if (typeof document === 'undefined') return;
-  if (document.getElementById(KEYFRAMES_ID)) return;
-
-  const style = document.createElement('style');
-  style.id = KEYFRAMES_ID;
-  style.textContent = `
-    @keyframes slideInUp {
-      from { transform: translateY(100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes slideOutUp {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-100%); opacity: 0; }
-    }
-    @keyframes slideInDown {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes slideOutDown {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(100%); opacity: 0; }
-    }
-  `;
-  document.head.appendChild(style);
-};
 
 type AnimPhase = 'entering' | 'visible' | 'exiting';
 
@@ -61,11 +32,6 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
 
   const pendingTextRef = useRef<string | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Inject keyframes once on mount
-  useEffect(() => {
-    injectKeyframes();
-  }, []);
 
   // Handle text changes
   useEffect(() => {
@@ -137,13 +103,11 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
   // Memoize word props extraction
   const { style: customWordStyle, ...restWordProps } = wordProps || {};
 
-  // Get animation names based on direction
+  // Get animation functions based on direction
   const isUp = direction === 'up';
-  const enterAnim = isUp ? 'slideInUp' : 'slideInDown';
-  const exitAnim = isUp ? 'slideOutUp' : 'slideOutDown';
 
   // Calculate delay for each word
-  const getDelay = (index: number, isExit: boolean) => {
+  const getDelay = (index: number) => {
     if (sequential) {
       // Sequential: one word at a time
       return index * (duration + stagger);
@@ -175,25 +139,60 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
     []
   );
 
-  // Determine current animation
-  const currentAnim = phase === 'exiting' ? exitAnim : enterAnim;
   const isAnimating = phase === 'entering' || phase === 'exiting';
 
   return (
     <Element as="span" style={containerStyle} {...props}>
       <span style={wordRowStyle}>
         {words.map((word, index) => {
-          const delay = getDelay(index, phase === 'exiting');
+          const delay = getDelay(index);
           const isLast = index === words.length - 1;
+
+          // Create animation based on phase and direction
+          let wordAnimation;
+          const durationStr = `${duration}ms`;
+          const delayStr = `${delay}ms`;
+
+          if (phase === 'entering') {
+            // Use app-studio animations for entering
+            wordAnimation = isUp
+              ? Animation.slideInUp({ 
+                  duration: durationStr, 
+                  delay: delayStr, 
+                  timingFunction: 'ease-out', 
+                  fillMode: 'both' 
+                })
+              : Animation.slideInDown({ 
+                  duration: durationStr, 
+                  delay: delayStr, 
+                  timingFunction: 'ease-out', 
+                  fillMode: 'both' 
+                });
+          } else if (phase === 'exiting') {
+            // Custom animation objects for exiting (slideOut not in app-studio yet)
+            wordAnimation = isUp
+              ? {
+                  from: { transform: 'translateY(0)', opacity: 1 },
+                  to: { transform: 'translateY(-100%)', opacity: 0 },
+                  duration: durationStr,
+                  delay: delayStr,
+                  timingFunction: 'ease-in',
+                  fillMode: 'both',
+                }
+              : {
+                  from: { transform: 'translateY(0)', opacity: 1 },
+                  to: { transform: 'translateY(100%)', opacity: 0 },
+                  duration: durationStr,
+                  delay: delayStr,
+                  timingFunction: 'ease-in',
+                  fillMode: 'both',
+                };
+          }
 
           const wordStyle: React.CSSProperties = {
             ...customWordStyle,
             display: 'inline-block',
             marginRight: isLast ? 0 : '0.25em',
-            willChange: isAnimating ? 'transform, opacity' : 'auto',
-            animation: isAnimating
-              ? `${currentAnim} ${duration}ms ease-out ${delay}ms both`
-              : 'none',
             transform: phase === 'visible' ? 'translateY(0)' : undefined,
             opacity: phase === 'visible' ? 1 : undefined,
           };
@@ -202,6 +201,7 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
             <Text
               key={`${animKey}-${index}`}
               as="span"
+              animate={wordAnimation}
               {...restWordProps}
               style={wordStyle}
             >

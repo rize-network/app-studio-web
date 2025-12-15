@@ -431,3 +431,822 @@ This library is optimized for AI-assisted development:
 - Extensive documentation with examples
 - Clear prop descriptions and default values
 - Type-safe theme system for customization
+
+---
+
+# Component Usage Guide for AI Agents
+
+This section provides comprehensive guidance for AI agents on how to effectively use App Studio Web components.
+
+## Core Principles
+
+### 1. Import Pattern
+Always import components from `@app-studio/web`:
+```tsx
+import { Button, Title, Card } from '@app-studio/web';
+import { Vertical, Horizontal, Center } from 'app-studio';
+```
+
+### 2. Component Composition
+Components are designed to be composed together:
+```tsx
+<Card variant="elevated" size="lg">
+  <Card.Header>
+    <Title size="lg" highlightText="Featured">Featured Product</Title>
+  </Card.Header>
+  <Card.Content>
+    <Vertical gap={16}>
+      <Text>Product description goes here</Text>
+      <Button variant="filled">Add to Cart</Button>
+    </Vertical>
+  </Card.Content>
+</Card>
+```
+
+### 3. Prop Naming Conventions
+- **Boolean props**: Prefix with `is` (e.g., `isDisabled`, `isLoading`, `isFullWidth`)
+- **Event handlers**: Prefix with `on` (e.g., `onClick`, `onChange`, `onSubmit`)
+- **Style props**: Use semantic names (e.g., `variant`, `size`, `shape`, `shadow`)
+- **Content props**: Direct names (e.g., `label`, `placeholder`, `header`, `footer`)
+
+## Common Component Patterns
+
+### Title Component
+The Title component supports advanced text animations and highlighting:
+
+**Basic Usage:**
+```tsx
+<Title size="xl">Simple Title</Title>
+```
+
+**With Highlighting:**
+```tsx
+<Title 
+  size="lg"
+  highlightText="Amazing"
+  highlightStyle="gradient"
+  highlightColor="theme.primary"
+  highlightSecondaryColor="theme.secondary"
+>
+  This is Amazing
+</Title>
+```
+
+**With Typewriter Effect:**
+```tsx
+<Title
+  highlightText="Typewriter"
+  highlightTypewriter={true}
+  highlightTypewriterDuration={2000}
+  highlightStyle="glow"
+  highlightColor="theme.primary"
+>
+  Watch the Typewriter effect
+</Title>
+```
+
+**With Slide Animation:**
+```tsx
+<Title
+  highlightText={["Slide", "Effect", "Multiple"]}
+  highlightSlide={true}
+  highlightSlideSequential={true}
+  highlightSlideStagger={200}
+  highlightStyle="underline"
+  highlightColor="theme.primary"
+>
+  Sequential Slide Effect Multiple
+</Title>
+```
+
+**With Alternating Text:**
+```tsx
+<Title
+  highlightText="Amazing"
+  alternateHighlightText={['Incredible', 'Fantastic', 'Awesome']}
+  alternateAnimation={true}
+  alternateDuration={2000}
+  highlightStyle="background"
+  highlightColor="theme.success"
+>
+  This is Amazing
+</Title>
+```
+
+**Animation Loop Control:**
+```tsx
+<Title
+  animate={{
+    from: { opacity: 0, transform: 'translateY(-20px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    duration: '1s',
+    timingFunction: 'ease-out',
+  }}
+  animationLoop="infinite"
+  highlightText="Infinite"
+  highlightStyle="glow"
+>
+  Animation Loops Infinitely
+</Title>
+```
+
+**Highlight Styles:**
+- `background`: Solid background color
+- `gradient`: Gradient background (requires `highlightSecondaryColor`)
+- `underline`: Underline decoration
+- `outline`: Text outline
+- `glow`: Glowing text effect
+
+### Button Component
+Versatile button with multiple variants and states:
+
+**Variants:**
+```tsx
+<Button variant="filled">Filled Button</Button>
+<Button variant="outline">Outline Button</Button>
+<Button variant="ghost">Ghost Button</Button>
+<Button variant="link">Link Button</Button>
+<Button variant="borderMoving">Border Moving Effect</Button>
+<Button variant="animatedStroke">Animated Stroke Effect</Button>
+```
+
+**Sizes:**
+```tsx
+{['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
+  <Button key={size} size={size}>Button {size}</Button>
+))}
+```
+
+**With Icons:**
+```tsx
+<Button icon={<DustBinIcon widthHeight={16} />} iconPosition="left">
+  Delete
+</Button>
+<Button icon={<DustBinIcon widthHeight={16} />} iconPosition="right">
+  Delete
+</Button>
+<Button icon={<DustBinIcon widthHeight={16} />} isIconRounded isAuto />
+```
+
+**Loading State:**
+```tsx
+<Button isLoading loaderPosition="left" isFilled>
+  Submitting
+</Button>
+<Button isLoading loaderPosition="right" isFilled>
+  Processing
+</Button>
+```
+
+**Shapes:**
+```tsx
+<Button shape="sharp">Sharp</Button>
+<Button shape="rounded">Rounded</Button>
+<Button shape="pillShaped">Pill Shaped</Button>
+```
+
+### Card Component
+Container for grouping related content:
+
+**Structured Layout:**
+```tsx
+<Card variant="elevated" size="lg" shape="rounded">
+  <Card.Header>
+    <Horizontal justifyContent="space-between" alignItems="center">
+      <Text fontSize={20} fontWeight="bold">Product Card</Text>
+      <Text color="primary">$99.99</Text>
+    </Horizontal>
+  </Card.Header>
+  
+  <Card.Content>
+    <Vertical gap={15}>
+      <Image src="/product.jpg" width="100%" height={200} borderRadius={8} />
+      <Text>Product description</Text>
+    </Vertical>
+  </Card.Content>
+  
+  <Card.Footer>
+    <Horizontal gap={10} justifyContent="flex-end">
+      <Button variant="outline">Learn More</Button>
+      <Button variant="filled">Add to Cart</Button>
+    </Horizontal>
+  </Card.Footer>
+</Card>
+```
+
+**Variants:**
+- `default`: Standard card
+- `elevated`: Card with shadow elevation
+- `outlined`: Card with border
+- `filled`: Card with background fill
+
+**Interactive Card:**
+```tsx
+<Card 
+  onClick={() => console.log('Card clicked')}
+  cursor="pointer"
+  views={{
+    container: {
+      transition: 'all 0.3s ease',
+      hover: {
+        transform: 'translateY(-4px)',
+        boxShadow: '0 12px 24px rgba(0,0,0,0.15)',
+      }
+    }
+  }}
+>
+  <Card.Content>
+    <Text>Click me!</Text>
+  </Card.Content>
+</Card>
+```
+
+### Background Component
+Multiple background effects for visual appeal:
+
+**Aurora Effect:**
+```tsx
+<Background.Aurora height="200px" showRadialGradient={true}>
+  <Text color="white" fontSize={18}>Aurora Effect Background</Text>
+</Background.Aurora>
+```
+
+**Meteors Effect:**
+```tsx
+<Background.Meteors number={15} />
+```
+
+**Grid Effect:**
+```tsx
+<Background.Grid gridSize={25} animationSpeed="medium" />
+```
+
+**Gradient Background:**
+```tsx
+<Background.Gradient
+  from="color.blue.500"
+  to="color.purple.500"
+  height="200px"
+  animate={true}
+  animationDuration={4}
+>
+  <Text color="white">Animated Gradient</Text>
+</Background.Gradient>
+```
+
+**Multi-color Gradient:**
+```tsx
+<Background.Gradient
+  type="radial"
+  colors={[
+    { color: 'color.red.500', position: '0%' },
+    { color: 'color.orange.500', position: '50%' },
+    { color: 'color.yellow.500', position: '100%' },
+  ]}
+  height="200px"
+  shape="ellipse"
+  position="top-left"
+/>
+```
+
+**Image Background:**
+```tsx
+<Background.Image
+  src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4"
+  height="200px"
+  backgroundSize="cover"
+  overlay="rgba(0,0,0,0.3)"
+  blendMode="multiply"
+>
+  <Text color="white">Image Background with Overlay</Text>
+</Background.Image>
+```
+
+**Video Background:**
+```tsx
+<Background.Video
+  src="https://www.w3schools.com/html/mov_bbb.mp4"
+  height="200px"
+  overlay="rgba(0,0,0,0.3)"
+>
+  <Text color="white">Video Background</Text>
+</Background.Video>
+```
+
+### Form Components with Formik
+
+**Basic Form:**
+```tsx
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { FormikForm, FormikTextField, FormikCheckbox } from '@app-studio/web';
+
+const schema = Yup.object({
+  firstName: Yup.string().required('First name is required'),
+  lastName: Yup.string().required('Last name is required'),
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  agreeToTerms: Yup.boolean().oneOf([true], 'You must agree to the terms'),
+});
+
+<Formik
+  initialValues={{ firstName: '', lastName: '', email: '', agreeToTerms: false }}
+  validationSchema={schema}
+  onSubmit={(values) => console.log(values)}
+>
+  {({ handleSubmit, isSubmitting }) => (
+    <FormikForm>
+      <Vertical gap={16} width="100%" maxWidth={400}>
+        <FormikTextField name="firstName" label="First Name" placeholder="Enter your first name" />
+        <FormikTextField name="lastName" label="Last Name" placeholder="Enter your last name" />
+        <FormikTextField name="email" label="Email" placeholder="Enter your email" type="email" />
+        <FormikCheckbox name="agreeToTerms" label="I agree to the terms and conditions" />
+        <Button type="submit" onClick={handleSubmit} isLoading={isSubmitting}>
+          Submit
+        </Button>
+      </Vertical>
+    </FormikForm>
+  )}
+</Formik>
+```
+
+**Advanced Form with Multiple Field Types:**
+```tsx
+<Formik
+  initialValues={{
+    title: '',
+    description: '',
+    category: '',
+    publishDate: null,
+    country: '',
+    themeColor: '#3B82F6',
+    priority: 5,
+    isPublished: false,
+    tags: ['react', 'typescript'],
+  }}
+  validationSchema={validationSchema}
+  onSubmit={handleSubmit}
+>
+  {({ handleSubmit }) => (
+    <FormikForm>
+      <Vertical gap={20} width="100%" maxWidth={500}>
+        <FormikTextField name="title" label="Title" placeholder="Enter article title" />
+        <FormikTextArea name="description" label="Description" placeholder="Enter description" maxRows={4} />
+        <FormikSelect name="category" label="Category" placeholder="Select a category" options={categoryOptions} />
+        <FormikDatePicker name="publishDate" label="Publish Date" placeholder="Select publish date" />
+        <FormikCountryPicker name="country" label="Target Country" placeholder="Select target country" />
+        <FormikColorInput name="themeColor" label="Theme Color" />
+        <FormikSlider name="priority" label="Priority (1-10)" min={1} max={10} step={1} />
+        <FormikTagInput name="tags" label="Tags" placeholder="Add tags..." />
+        <FormikSwitch name="isPublished" label="Publish immediately" />
+        <Button type="submit" onClick={handleSubmit}>Create Article</Button>
+      </Vertical>
+    </FormikForm>
+  )}
+</Formik>
+```
+
+**Available Formik Components:**
+- `FormikTextField` - Text input
+- `FormikTextArea` - Multi-line text
+- `FormikPassword` - Password input with visibility toggle
+- `FormikCheckbox` - Checkbox input
+- `FormikSwitch` - Toggle switch
+- `FormikSelect` - Dropdown select
+- `FormikComboBox` - Searchable dropdown
+- `FormikDatePicker` - Date picker
+- `FormikCountryPicker` - Country selector
+- `FormikColorInput` - Color picker
+- `FormikSlider` - Range slider
+- `FormikTagInput` - Tag input
+- `FormikChatInput` - Chat input with attachments
+
+**Validation Patterns:**
+```tsx
+// Email validation
+email: Yup.string().email('Invalid email format').required('Email is required')
+
+// Password validation
+password: Yup.string()
+  .min(8, 'Password must be at least 8 characters')
+  .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'Password must contain uppercase, lowercase, and number')
+  .required('Password is required')
+
+// Phone number validation
+phone: Yup.string()
+  .matches(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number')
+  .required('Phone number is required')
+
+// URL validation
+website: Yup.string().url('Invalid URL format').required('Website URL is required')
+
+// Confirm password
+confirmPassword: Yup.string()
+  .oneOf([Yup.ref('password')], 'Passwords must match')
+  .required('Please confirm your password')
+```
+
+## Layout Patterns
+
+### Vertical Stack
+```tsx
+<Vertical gap={16} padding={20} alignItems="center">
+  <Title size="xl">Welcome</Title>
+  <Text>Description text</Text>
+  <Button>Get Started</Button>
+</Vertical>
+```
+
+### Horizontal Row
+```tsx
+<Horizontal gap={12} justifyContent="space-between" alignItems="center">
+  <Text>Label</Text>
+  <Button size="sm">Action</Button>
+</Horizontal>
+```
+
+### Centered Content
+```tsx
+<Center minHeight="100vh">
+  <Card size="lg">
+    <Card.Content>
+      <Vertical gap={20} alignItems="center">
+        <Title size="xl">Centered Card</Title>
+        <Text>Content goes here</Text>
+      </Vertical>
+    </Card.Content>
+  </Card>
+</Center>
+```
+
+### Responsive Grid
+```tsx
+<Vertical gap={20}>
+  <Horizontal gap={16} flexWrap="wrap">
+    {items.map((item) => (
+      <Card key={item.id} width="calc(33.333% - 12px)" minWidth={250}>
+        <Card.Content>
+          <Text>{item.title}</Text>
+        </Card.Content>
+      </Card>
+    ))}
+  </Horizontal>
+</Vertical>
+```
+
+## Theme Usage
+
+### Using Theme Colors
+```tsx
+// Semantic colors
+<Button backgroundColor="theme.primary">Primary Button</Button>
+<Text color="theme.error">Error Message</Text>
+<Badge backgroundColor="theme.success">Success</Badge>
+
+// Color scales
+<View backgroundColor="color.blue.500">Blue Background</View>
+<Text color="color.gray.700">Gray Text</Text>
+
+// Neutral colors
+<View backgroundColor="color.white" borderColor="color.gray.200">
+  <Text color="color.black">Content</Text>
+</View>
+```
+
+### Custom Styling with Views Prop
+```tsx
+<Button
+  views={{
+    container: {
+      backgroundColor: '#6200ee',
+      borderRadius: 8,
+      padding: '12px 24px',
+      hover: {
+        backgroundColor: '#7c4dff',
+        transform: 'scale(1.05)',
+      },
+      active: {
+        transform: 'scale(0.95)',
+      }
+    },
+  }}
+>
+  Custom Styled Button
+</Button>
+```
+
+### Dark Mode Support
+```tsx
+// Component-level dark mode
+<Button themeMode="dark">Dark Button</Button>
+
+// App-level dark mode
+import { ThemeProvider } from 'app-studio';
+
+<ThemeProvider theme={{ mode: 'dark' }}>
+  {/* Your app */}
+</ThemeProvider>
+```
+
+## Animation Patterns
+
+### Fade In Animation
+```tsx
+<Title
+  animate={{
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    duration: '1s',
+    timingFunction: 'ease-in',
+  }}
+>
+  Fade In Title
+</Title>
+```
+
+### Slide Up Animation
+```tsx
+<Card
+  animate={{
+    from: { opacity: 0, transform: 'translateY(20px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+    duration: '0.5s',
+    timingFunction: 'ease-out',
+  }}
+>
+  <Card.Content>Slide Up Card</Card.Content>
+</Card>
+```
+
+### Scale Animation
+```tsx
+<Button
+  animate={{
+    from: { transform: 'scale(0.8)' },
+    to: { transform: 'scale(1)' },
+    duration: '0.3s',
+    timingFunction: 'ease-out',
+  }}
+>
+  Scale In Button
+</Button>
+```
+
+### Infinite Loop Animation
+```tsx
+<Title
+  animate={{
+    from: { transform: 'translateX(-10px)' },
+    to: { transform: 'translateX(10px)' },
+    duration: '2s',
+    timingFunction: 'ease-in-out',
+    direction: 'alternate',
+  }}
+  animationLoop="infinite"
+>
+  Infinite Animation
+</Title>
+```
+
+## Common Use Cases
+
+### Hero Section
+```tsx
+<Background.Gradient from="color.blue.600" to="color.purple.600" height="600px">
+  <Center height="100%">
+    <Vertical gap={32} alignItems="center" maxWidth={800} padding={40}>
+      <Title 
+        size="xl" 
+        responsive={true}
+        highlightText="Revolutionary"
+        highlightStyle="gradient"
+        highlightColor="color.yellow.400"
+        highlightSecondaryColor="color.orange.400"
+        textAlign="center"
+      >
+        Build Revolutionary Apps
+      </Title>
+      <Text fontSize={20} color="white" textAlign="center">
+        The most powerful component library for modern web applications
+      </Text>
+      <Horizontal gap={16}>
+        <Button variant="filled" size="lg">Get Started</Button>
+        <Button variant="outline" size="lg">Learn More</Button>
+      </Horizontal>
+    </Vertical>
+  </Center>
+</Background.Gradient>
+```
+
+### Feature Card Grid
+```tsx
+<Vertical gap={40} padding={60}>
+  <Title size="xl" textAlign="center">Features</Title>
+  <Horizontal gap={24} flexWrap="wrap" justifyContent="center">
+    {features.map((feature) => (
+      <Card 
+        key={feature.id} 
+        variant="elevated" 
+        width="calc(33.333% - 16px)"
+        minWidth={280}
+        views={{
+          container: {
+            transition: 'all 0.3s ease',
+            hover: { transform: 'translateY(-8px)' }
+          }
+        }}
+      >
+        <Card.Content>
+          <Vertical gap={16} alignItems="center" textAlign="center">
+            <Icon name={feature.icon} size={48} color="theme.primary" />
+            <Title size="md">{feature.title}</Title>
+            <Text color="color.gray.600">{feature.description}</Text>
+          </Vertical>
+        </Card.Content>
+      </Card>
+    ))}
+  </Horizontal>
+</Vertical>
+```
+
+### Contact Form
+```tsx
+<Card variant="elevated" size="lg" maxWidth={500}>
+  <Card.Header>
+    <Title size="lg">Contact Us</Title>
+  </Card.Header>
+  <Card.Content>
+    <Formik
+      initialValues={{ name: '', email: '', message: '' }}
+      validationSchema={contactSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ handleSubmit, isSubmitting }) => (
+        <FormikForm>
+          <Vertical gap={20}>
+            <FormikTextField name="name" label="Name" placeholder="Your name" />
+            <FormikTextField name="email" label="Email" type="email" placeholder="your@email.com" />
+            <FormikTextArea name="message" label="Message" placeholder="Your message" maxRows={6} />
+            <Button type="submit" onClick={handleSubmit} isLoading={isSubmitting} isFullWidth>
+              Send Message
+            </Button>
+          </Vertical>
+        </FormikForm>
+      )}
+    </Formik>
+  </Card.Content>
+</Card>
+```
+
+### Dashboard Stats
+```tsx
+<Horizontal gap={20} flexWrap="wrap">
+  {stats.map((stat) => (
+    <Card key={stat.id} variant="filled" size="md" flex={1} minWidth={200}>
+      <Card.Content>
+        <Vertical gap={8}>
+          <Text fontSize={14} color="color.gray.600">{stat.label}</Text>
+          <Title size="xl" highlightText={stat.value} highlightStyle="gradient">
+            {stat.value}
+          </Title>
+          <Horizontal gap={8} alignItems="center">
+            <Badge variant={stat.trend === 'up' ? 'success' : 'error'}>
+              {stat.change}
+            </Badge>
+            <Text fontSize={12} color="color.gray.500">vs last month</Text>
+          </Horizontal>
+        </Vertical>
+      </Card.Content>
+    </Card>
+  ))}
+</Horizontal>
+```
+
+## Best Practices for AI Agents
+
+### 1. Always Use TypeScript Types
+```tsx
+import { ButtonProps, TitleProps, CardProps } from '@app-studio/web';
+
+const MyButton: React.FC<ButtonProps> = (props) => {
+  return <Button {...props} />;
+};
+```
+
+### 2. Compose Components Logically
+Group related components together and use proper hierarchy:
+```tsx
+// Good
+<Card>
+  <Card.Header>
+    <Title>Header</Title>
+  </Card.Header>
+  <Card.Content>
+    <Vertical gap={16}>
+      <Text>Content</Text>
+      <Button>Action</Button>
+    </Vertical>
+  </Card.Content>
+</Card>
+
+// Avoid
+<Card>
+  <Title>Header</Title>
+  <Text>Content</Text>
+  <Button>Action</Button>
+</Card>
+```
+
+### 3. Use Semantic Prop Values
+```tsx
+// Good - using theme colors
+<Button backgroundColor="theme.primary" color="color.white">Submit</Button>
+
+// Avoid - using hardcoded colors
+<Button backgroundColor="#0066cc" color="#ffffff">Submit</Button>
+```
+
+### 4. Handle Loading and Error States
+```tsx
+<Formik onSubmit={handleSubmit}>
+  {({ handleSubmit, isSubmitting, errors }) => (
+    <FormikForm>
+      <FormikTextField name="email" label="Email" error={errors.email} />
+      <Button type="submit" onClick={handleSubmit} isLoading={isSubmitting} disabled={isSubmitting}>
+        {isSubmitting ? 'Submitting...' : 'Submit'}
+      </Button>
+    </FormikForm>
+  )}
+</Formik>
+```
+
+### 5. Maintain Consistent Spacing
+Use the gap prop for consistent spacing:
+```tsx
+<Vertical gap={16}>  {/* 16px spacing */}
+  <Title>Title</Title>
+  <Text>Description</Text>
+  <Button>Action</Button>
+</Vertical>
+```
+
+### 6. Responsive Design
+Use responsive props and media queries:
+```tsx
+<Title 
+  size="xl" 
+  responsive={true}  // Automatically adjusts based on screen size
+  media={{
+    mobile: { fontSize: 32 },
+    tablet: { fontSize: 48 },
+    desktop: { fontSize: 64 },
+  }}
+>
+  Responsive Title
+</Title>
+```
+
+### 7. Accessibility
+Always provide labels and ARIA attributes:
+```tsx
+<FormikTextField 
+  name="email" 
+  label="Email Address"  // Always provide labels
+  placeholder="Enter your email"
+  aria-label="Email Address"
+  required
+/>
+```
+
+## Component Reference Quick Links
+
+For detailed documentation on each component, refer to:
+- [Title Component](./docs/components/Title.mdx) - Advanced text with animations
+- [Button Component](./docs/components/Button.mdx) - Interactive buttons
+- [Card Component](./docs/components/Card.mdx) - Content containers
+- [Background Component](./docs/components/Background.mdx) - Visual backgrounds
+- [Form Components](./docs/components/Form.mdx) - Form handling with Formik
+- [All Components](./docs/components/) - Complete component library
+
+## Troubleshooting
+
+### Common Issues
+
+**Issue: Highlight animation not working**
+- Ensure `highlightText` exactly matches text in children
+- For arrays, each element must match individually
+- Check that `highlightStyle` is set
+
+**Issue: Form validation not triggering**
+- Verify Yup schema is properly defined
+- Check that field `name` prop matches schema keys
+- Ensure `validationSchema` is passed to Formik
+
+**Issue: Theme colors not applying**
+- Use correct theme token format: `theme.primary`, `color.blue.500`
+- Check ThemeProvider is wrapping your app
+- Verify color exists in theme palette
+
+**Issue: Animation not looping**
+- Set `animationLoop="infinite"` for infinite loops
+- Set `animationLoop={3}` for specific number of loops
+- Ensure `animate` prop is properly configured
