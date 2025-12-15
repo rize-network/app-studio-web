@@ -156,17 +156,17 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
           if (phase === 'entering') {
             // Use app-studio animations for entering
             wordAnimation = isUp
-              ? Animation.slideInUp({ 
-                  duration: durationStr, 
-                  delay: delayStr, 
-                  timingFunction: 'ease-out', 
-                  fillMode: 'both' 
+              ? Animation.slideInUp({
+                  duration: durationStr,
+                  delay: delayStr,
+                  timingFunction: 'ease-out',
+                  fillMode: 'both',
                 })
-              : Animation.slideInDown({ 
-                  duration: durationStr, 
-                  delay: delayStr, 
-                  timingFunction: 'ease-out', 
-                  fillMode: 'both' 
+              : Animation.slideInDown({
+                  duration: durationStr,
+                  delay: delayStr,
+                  timingFunction: 'ease-out',
+                  fillMode: 'both',
                 });
           } else if (phase === 'exiting') {
             // Custom animation objects for exiting (slideOut not in app-studio yet)
