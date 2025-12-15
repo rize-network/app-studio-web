@@ -144,7 +144,10 @@ const TitleView: React.FC<TitleProps> = ({
         );
         return new RegExp(`(${escaped.join('|')})`, 'gi');
       }
-      return new RegExp(`(${escapeRegExp(String(activeHighlightTarget))})`, 'gi');
+      return new RegExp(
+        `(${escapeRegExp(String(activeHighlightTarget))})`,
+        'gi'
+      );
     })();
 
     const parts: Array<string | { highlight: boolean; text: string }> = [];
