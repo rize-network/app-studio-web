@@ -14,7 +14,7 @@ export * from './ContextMenu/ContextMenu';
 export * from './File/File';
 export * from './Form/Select/Select';
 export * from './Form/Switch/Switch';
-export * from './Form/Switch/Switch';
+export * from './Form/Selector/Selector';
 export * from './Form/TextArea/TextArea';
 export * from './Form/TextField/TextField';
 export * from './Form/Checkbox/Checkbox';

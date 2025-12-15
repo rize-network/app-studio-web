@@ -18,6 +18,7 @@ const SelectorView: React.FC<SelectorViewProps> = ({
   name,
   label,
   value,
+  size,
   views = {},
   options = [],
   onChange = () => {},
@@ -100,7 +101,7 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               // Default fallback
               borderColor = getColor('theme.primary');
               textColor = getColor('theme.primary');
-              bgColor = getColor('color.blue.50');
+              bgColor = 'transparent';
             }
           }
 
@@ -109,8 +110,13 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               key={option.value}
               onClick={() => handleCallback(option)}
               flex={1}
-              paddingVertical={6}
-              fontSize="12px"
+              {...(size
+                ? { size }
+                : {
+                    // Legacy default: keep existing compact look when `size` isn't specified.
+                    paddingVertical: 6,
+                    fontSize: '12px',
+                  })}
               fontWeight={isSelected ? 'bold' : 'normal'}
               style={{
                 borderTop: `1px solid ${

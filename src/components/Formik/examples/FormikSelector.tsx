@@ -23,7 +23,12 @@ export const FormikSelectorExample = () => {
       {(props: any) => (
         <FormikForm>
           <Vertical gap={10}>
-            <FormikSelector id="selector" name="selector" options={options} />
+            <FormikSelector
+              id="selector"
+              name="selector"
+              options={options}
+              size="md"
+            />
             <Button
               type="submit"
               alignSelf="center"
