@@ -383,12 +383,7 @@ export const DesignSystemToast = () => {
                       <Text size="lg" fontWeight="600" color="color.purple.800">
                         Custom Design System Toast
                       </Text>
-                      <Text
-                        size="sm"
-                        color="color.purple.700"
-                        marginTop="8px"
-                        lineHeight="1.5"
-                      >
+                      <Text size="sm" color="color.purple.700" marginTop="8px">
                         This toast is completely custom rendered following the
                         design system guidelines!
                       </Text>

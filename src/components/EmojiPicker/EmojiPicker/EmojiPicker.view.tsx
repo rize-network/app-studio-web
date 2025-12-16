@@ -66,6 +66,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
   dropdownRef,
 
   // Other props
+  onChange,
   ...props
 }) => {
   const { getColor } = useTheme();

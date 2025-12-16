@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ChatInputProps } from './ChatInput.props';
 import { ModelOption, PromptExample } from './ChatInput.type';
-import { UploadService } from 'src/services/api';
 
 /**
  * Custom hook for managing ChatInput state
@@ -17,6 +16,10 @@ export const useChatInputState = (props: ChatInputProps) => {
     isAgentRunning = false,
     onStopAgent,
     sandboxId,
+    onUploadProgress,
+    onUploadSuccess,
+    onUploadError,
+    onFileUpload,
   } = props;
 
   // Determine if the component is controlled
@@ -157,29 +160,6 @@ export const useChatInputState = (props: ChatInputProps) => {
     setIsDraggingOver(false);
   };
 
-  // Upload service hook (single file at a time)
-  const uploadFileRequest = UploadService.useUploadControllerFileService({
-    onProgress: (p: number) => setUploadProgress(p || 0),
-    onSuccess: () => {
-      // Advance the queue
-      setUploadQueue((prev) => prev.slice(1));
-      setIsProcessingQueue(false);
-      currentUploadRef.current = null;
-      setUploadProgress(0);
-      // If queue emptied, stop uploading state
-      setIsUploading((prev) => uploadQueue.length - 1 > 0 || false);
-    },
-    onError: (_err: any) => {
-      // Remove the failed file from queue and continue
-      setUploadQueue((prev) => prev.slice(1));
-      setIsProcessingQueue(false);
-      currentUploadRef.current = null;
-      setUploadProgress(0);
-      // If queue emptied, stop uploading state
-      setIsUploading((prev) => uploadQueue.length - 1 > 0 || false);
-    },
-  } as any);
-
   // Start uploading a batch of files (enqueue and process)
   const startUpload = useCallback(
     (files: File[]) => {
@@ -198,17 +178,24 @@ export const useChatInputState = (props: ChatInputProps) => {
 
   // Process upload queue sequentially
   const processUploadQueue = useCallback(() => {
-    if (
-      uploadQueue.length > 0 &&
-      !isProcessingQueue &&
-      !uploadFileRequest.loading
-    ) {
+    if (uploadQueue.length > 0 && !isProcessingQueue && onFileUpload) {
       setIsProcessingQueue(true);
       const nextFile = uploadQueue[0];
       currentUploadRef.current = nextFile;
       setUploadProgress(0);
-      // Fire upload
-      uploadFileRequest.run({ file: nextFile });
+
+      // Execute user-provided upload function
+      try {
+        onFileUpload(nextFile);
+      } catch (err) {
+        // Handle synchronous errors
+        setUploadQueue((prev) => prev.slice(1));
+        setIsProcessingQueue(false);
+        currentUploadRef.current = null;
+        setUploadProgress(0);
+        setIsUploading((prev) => uploadQueue.length - 1 > 0 || false);
+        onUploadError?.(err);
+      }
     } else if (uploadQueue.length === 0 && isUploading) {
       // Nothing left to upload
       setIsUploading(false);
@@ -217,20 +204,15 @@ export const useChatInputState = (props: ChatInputProps) => {
   }, [
     uploadQueue,
     isProcessingQueue,
-    uploadFileRequest.loading,
-    uploadFileRequest,
+    onFileUpload,
     isUploading,
+    onUploadError,
   ]);
 
-  // Effect: process whenever queue or request/loading changes
+  // Effect: process whenever queue changes
   useEffect(() => {
     processUploadQueue();
-  }, [
-    uploadQueue,
-    isProcessingQueue,
-    uploadFileRequest.loading,
-    processUploadQueue,
-  ]);
+  }, [uploadQueue, isProcessingQueue, processUploadQueue]);
 
   // Mock function for subscription status
   const subscriptionStatus = 'active';

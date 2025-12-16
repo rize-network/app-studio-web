@@ -70,7 +70,7 @@ const Item: React.FC<ItemProps> = ({
         // Typography properties
         fontSize={Typography.fontSizes[size]}
         fontWeight="400" // Regular weight
-        lineHeight="1.5"
+        lineHeight="15px"
         // Apply custom styles
         {...style}
       >

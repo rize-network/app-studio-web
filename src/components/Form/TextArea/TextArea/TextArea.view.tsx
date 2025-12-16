@@ -59,7 +59,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     maxHeight: 'calc(100vh - 100px)',
     height: 'calc(5em)',
     border: 'none',
-    resize: 'vertical',
+    // resize property removed to avoid type error, added via style prop
     // Focus state
     on: {
       focus: {
@@ -160,8 +160,9 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             onBlur={handleBlur}
             onFocus={handleFocus}
             multiline={`${!!isMultiline.toString()}`}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e as any)}
             {...fieldStyles}
+            style={{ resize: 'vertical' }}
             {...views?.textarea}
           />
         </FieldWrapper>

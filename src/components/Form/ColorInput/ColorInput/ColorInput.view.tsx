@@ -58,6 +58,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
   dropdownRef,
 
   // Other props
+  onChange,
   ...props
 }) => {
   const { getColor } = useTheme();

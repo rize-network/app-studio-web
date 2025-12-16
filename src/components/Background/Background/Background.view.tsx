@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { View, Horizontal, useTheme } from 'app-studio';
+import { View, Horizontal } from 'app-studio';
 import {
   BackgroundProps,
   AuroraBackgroundProps,
@@ -11,6 +11,7 @@ import {
   BackgroundImageProps,
   BackgroundVideoProps,
   BackgroundGradientProps,
+  BackgroundOverlayProps,
 } from './Background.props';
 import {
   DefaultBackgroundStyles,
@@ -521,14 +522,12 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
   backgroundRepeat = 'no-repeat',
   backgroundAttachment = 'scroll',
   imageOpacity = 1,
-  overlay,
+  overlay = null,
   blendMode = 'normal',
   views,
   themeMode: elementMode,
   ...props
 }) => {
-  const { getColor } = useTheme();
-
   const imageStyle: React.CSSProperties = {
     ...BackgroundImageStyles.image,
     backgroundImage: `url(${src})`,
@@ -539,21 +538,10 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
     opacity: imageOpacity,
   };
 
-  const overlayStyle: React.CSSProperties = overlay
-    ? {
-        ...BackgroundImageStyles.overlay,
-        backgroundColor: getColor(
-          overlay,
-          elementMode ? { themeMode: elementMode } : undefined
-        ),
-        mixBlendMode: blendMode as any,
-      }
-    : {};
-
   return (
     <View {...BackgroundImageStyles.container} {...views?.container} {...props}>
       <View style={imageStyle} {...views?.image} />
-      {overlay && <View style={overlayStyle} />}
+      {overlay}
       {children && (
         <View {...BackgroundImageStyles.content} {...views?.content}>
           {children}
@@ -573,25 +561,12 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   loop = true,
   muted = true,
   playsInline = true,
-  overlay,
+  overlay = null,
   blendMode = 'normal',
   views,
   themeMode: elementMode,
   ...props
 }) => {
-  const { getColor } = useTheme();
-
-  const overlayStyle: React.CSSProperties = overlay
-    ? {
-        ...BackgroundVideoStyles.overlay,
-        backgroundColor: getColor(
-          overlay,
-          elementMode ? { themeMode: elementMode } : undefined
-        ),
-        mixBlendMode: blendMode as any,
-      }
-    : {};
-
   return (
     <View {...BackgroundVideoStyles.container} {...views?.container} {...props}>
       <View
@@ -604,7 +579,7 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
         style={BackgroundVideoStyles.video as React.CSSProperties}
         {...views?.video}
       />
-      {overlay && <View style={overlayStyle} {...views?.overlay} />}
+      {overlay}
       {children && (
         <View {...BackgroundVideoStyles.content} {...views?.content}>
           {children}
@@ -626,6 +601,48 @@ const BackgroundGradient: React.FC<BackgroundGradientProps> = ({
 };
 
 /**
+ * Background Overlay Component
+ */
+const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
+  contentPosition,
+  ...props
+}) => {
+  const getDefaultOverlay = () => {
+    switch (contentPosition) {
+      case 'left':
+        return 'radial-gradient(circle at 70% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%)';
+      case 'right':
+        return 'radial-gradient(circle at 30% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%)';
+      case 'top':
+        return 'radial-gradient(circle at 50% 80%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%)';
+      case 'bottom':
+        return 'radial-gradient(circle at 50% 80%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%)';
+      case 'center':
+        return 'radial-gradient(circle at 50% 90%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)';
+
+      default:
+        return 'rgba(0,0,0,0.5)';
+    }
+  };
+
+  const background = getDefaultOverlay();
+
+  return (
+    <View
+      position="absolute"
+      top={0}
+      left={0}
+      width="100%"
+      height="100%"
+      background={background}
+      pointerEvents="none"
+      zIndex={1}
+      {...props}
+    />
+  );
+};
+
+/**
  * Main Background View Component with compound pattern
  */
 interface BackgroundViewComponent extends React.FC<BackgroundProps> {
@@ -638,6 +655,7 @@ interface BackgroundViewComponent extends React.FC<BackgroundProps> {
   Image: React.FC<BackgroundImageProps>;
   Video: React.FC<BackgroundVideoProps>;
   Gradient: React.FC<BackgroundGradientProps>;
+  Overlay: React.FC<BackgroundOverlayProps>;
 }
 
 const BackgroundViewBase: React.FC<BackgroundProps> = ({
@@ -671,3 +689,4 @@ BackgroundView.Ripples = Ripples;
 BackgroundView.Image = BackgroundImage;
 BackgroundView.Video = BackgroundVideo;
 BackgroundView.Gradient = BackgroundGradient;
+BackgroundView.Overlay = BackgroundOverlay;

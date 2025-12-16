@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.9.56",
+  "version": "0.9.62",
   "main": "dist/index.js",
   "typings": "dist/components/index.d.ts",
   "files": [
@@ -46,6 +46,7 @@
     "page-imports": "ts-node scripts/generate-page-imports.ts",
     "create-pages": "npm run create-indices && ts-node scripts/create-pages.ts && npm run page-imports",
     "validate-docs": "node scripts/validate-docs.js",
+    "docs:app-studio": "rm -rf docs/app-studio && mkdir -p docs/app-studio && cp -R node_modules/app-studio/docs/* docs/app-studio",
     "api:local": "react-api  --useUnionTypes --input http://localhost:3000/docs/swagger.json --output ./src/services/api  && prettier --write ./src/services/api"
   },
   "eslintConfig": {
@@ -111,7 +112,7 @@
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
-    "app-studio": "^0.6.47",
+    "app-studio": "^0.6.53",
     "async-mutex": "^0.5.0",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",

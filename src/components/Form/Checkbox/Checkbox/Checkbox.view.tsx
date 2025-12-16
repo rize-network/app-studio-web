@@ -190,7 +190,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
             color="color.gray.500"
             size="sm"
             fontWeight="400" // Regular weight
-            lineHeight="1.5"
+            lineHeight="15"
             {...views?.infoText}
           >
             {infoText}

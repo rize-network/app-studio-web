@@ -337,7 +337,6 @@ const OTPInputView: React.FC<
     border: '0 solid transparent',
     outline: '0 solid transparent',
     boxShadow: 'none',
-    lineHeight: '1',
     letterSpacing: '-.5em',
     fontSize: 'var(--root-height)',
     fontFamily: 'monospace',

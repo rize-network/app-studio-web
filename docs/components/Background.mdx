@@ -78,7 +78,7 @@ export const DefaultDemo = () => (
         src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
         height="200px"
         backgroundSize="cover"
-        overlay="rgba(0,0,0,0.3)"
+  overlay={<Background.Overlay />}
         blendMode="multiply"
       >
         <Text color="white" fontSize={18} fontWeight="500">
@@ -111,7 +111,7 @@ export const DefaultDemo = () => (
       <Background.Video
         src="https://www.w3schools.com/html/mov_bbb.mp4"
         height="200px"
-        overlay="rgba(0,0,0,0.3)"
+  overlay={<Background.Overlay />}
       >
         <Text color="white" fontSize={18} fontWeight="500">
           Video Background

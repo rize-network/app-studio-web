@@ -11,7 +11,7 @@ export const VideoDemo = () => (
     <Background.Video
       src="https://www.w3schools.com/html/mov_bbb.mp4"
       height="200px"
-      overlay="rgba(0,0,0,0.3)"
+      overlay={<Background.Overlay />}
     >
       <Text color="white" fontSize={18} fontWeight="500">
         Video Background

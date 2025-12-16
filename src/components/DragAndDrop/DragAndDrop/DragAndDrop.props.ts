@@ -7,7 +7,9 @@ export interface DragAndDropProps {
   itemProps?: ViewProps;
 }
 
-export interface DragAndDropViewProps extends DragAndDropProps, ViewProps {
+export interface DragAndDropViewProps
+  extends DragAndDropProps,
+    Omit<ViewProps, 'onChange'> {
   draggedIndex: number | null;
   itemRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
   renderItem?: (item: any, index: number) => React.ReactNode;

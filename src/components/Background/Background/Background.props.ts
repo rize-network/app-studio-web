@@ -115,15 +115,15 @@ export interface BackgroundImageProps
   imageOpacity?: number;
 
   /**
-   * Overlay color to blend with image
-   */
-  overlay?: string;
-
-  /**
    * Blend mode for overlay
    * @default 'normal'
    */
   blendMode?: BlendMode;
+
+  /**
+   * Overlay content
+   */
+  overlay?: ReactNode;
 
   /**
    * Custom views for styling
@@ -132,7 +132,6 @@ export interface BackgroundImageProps
     container?: ViewProps;
     content?: ViewProps;
     image?: ViewProps;
-    overlay?: ViewProps;
   };
 }
 
@@ -173,7 +172,7 @@ export interface BackgroundVideoProps
   /**
    * Overlay color to blend with video
    */
-  overlay?: string;
+  overlay?: ReactNode;
 
   /**
    * Blend mode for overlay
@@ -188,7 +187,6 @@ export interface BackgroundVideoProps
     container?: ViewProps;
     content?: ViewProps;
     video?: ViewProps;
-    overlay?: ViewProps;
   };
 }
 
@@ -201,6 +199,17 @@ export interface BackgroundGradientProps extends GradientProps {
 }
 
 /**
+ * Background Overlay component props
+ */
+export interface BackgroundOverlayProps extends ViewProps {
+  /**
+   * Position of the content relative to the overlay
+   * @default 'center'
+   */
+  contentPosition?: 'left' | 'right' | 'center' | 'bottom' | 'top';
+}
+
+/**
  * Background styles for customization
  */
 export interface BackgroundStyles {
@@ -210,6 +219,5 @@ export interface BackgroundStyles {
   meteors?: ViewProps;
   image?: ViewProps;
   video?: ViewProps;
-  overlay?: ViewProps;
   gradient?: ViewProps;
 }

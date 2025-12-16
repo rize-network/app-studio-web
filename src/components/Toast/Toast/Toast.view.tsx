@@ -103,7 +103,6 @@ export const ToastView: React.FC<ToastProps> = ({
           size="md"
           fontWeight="600" // Semi-bold for better readability
           color={Theme[variant].content.color}
-          lineHeight="1.4"
           bgColor={Theme[variant].container.backgroundColor}
           {...views?.title}
         >
@@ -115,7 +114,6 @@ export const ToastView: React.FC<ToastProps> = ({
             size="sm"
             color={Theme[variant].content.color}
             fontWeight="400" // Regular weight
-            lineHeight="1.5"
             bgColor={Theme[variant].container.backgroundColor}
             {...views?.description}
           >

@@ -8,7 +8,13 @@ interface WrapperProps {
 
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   return (
-    <ThemeProvider mode="light">
+    <ThemeProvider
+      mode="light"
+      theme={{
+        primary: 'color.blue.500',
+        secondary: 'color.purple.500',
+      }}
+    >
       <ResponsiveProvider
         breakpoints={{
           xs: 0,

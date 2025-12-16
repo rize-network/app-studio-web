@@ -8,7 +8,7 @@ import {
   PredefinedColor,
 } from './ColorPicker.type';
 
-export interface ColorPickerProps extends ViewProps {
+export interface ColorPickerProps extends Omit<ViewProps, 'onChange'> {
   // Basic props
   id?: string;
   name?: string;

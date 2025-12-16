@@ -38,7 +38,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
 
   // Set appropriate ARIA attributes based on decorative prop
   const ariaProps = decorative
-    ? { 'aria-hidden': 'true' }
+    ? { 'aria-hidden': true }
     : { role: 'separator', 'aria-orientation': orientation };
 
   // If there's a label, render a horizontal separator with the label in the middle

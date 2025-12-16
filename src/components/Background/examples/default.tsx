@@ -67,8 +67,8 @@ export const DefaultDemo = () => (
         src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
         height="200px"
         backgroundSize="cover"
-        overlay="rgba(0,0,0,0.3)"
         blendMode="multiply"
+        overlay={<Background.Overlay />}
       >
         <Text color="white" fontSize={18} fontWeight="500">
           Image Background with Overlay

@@ -397,7 +397,6 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
               color="color.gray.400"
               pointerEvents="none"
               fontSize="14px"
-              lineHeight="1.5"
               zIndex={1}
               {...views?.placeholder}
             >
@@ -425,7 +424,6 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             whiteSpace="pre-wrap"
             wordBreak="break-word"
             fontSize="14px"
-            lineHeight="1.5"
             color="color.gray.900"
             backgroundColor="transparent"
             {...views?.input}

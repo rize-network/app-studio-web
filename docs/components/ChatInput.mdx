@@ -156,6 +156,139 @@ export const ControlledChatInput = () => {
 };
 ```
 
+### **onFileUpload**
+Function to execute file upload. The parent component should provide this to handle the actual file upload logic.
+
+- **Type:** `(file: File) => void`
+- **Required:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { UploadService } from 'src/services/api';
+
+export const FileUploadChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  const uploadFileRequest = UploadService.useUploadControllerFileService({
+    onProgress: (p) => console.log('Progress:', p),
+    onSuccess: (data) => console.log('Success:', data),
+    onError: (err) => console.error('Error:', err),
+  });
+  
+  return (
+    <ChatInput 
+      onFileUpload={(file) => uploadFileRequest.run({ file })}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **onUploadProgress**
+Callback when file upload progress changes.
+
+- **Type:** `(progress: number) => void`
+- **Required:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { UploadService } from 'src/services/api';
+
+export const UploadProgressChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [progress, setProgress] = useState(0);
+  
+  const uploadFileRequest = UploadService.useUploadControllerFileService({
+    onProgress: (p) => setProgress(p),
+    onSuccess: () => setProgress(0),
+    onError: () => setProgress(0),
+  });
+  
+  return (
+    <>
+      {progress > 0 && <div>Upload Progress: {progress}%</div>}
+      <ChatInput 
+        onFileUpload={(file) => uploadFileRequest.run({ file })}
+        onUploadProgress={(p) => console.log('Upload progress:', p)}
+        onSubmit={(message) => console.log(message)}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => setFiles([])}
+      />
+    </>
+  );
+};
+```
+
+### **onUploadSuccess**
+Callback when file upload succeeds.
+
+- **Type:** `(data: any) => void`
+- **Required:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { UploadService } from 'src/services/api';
+
+export const UploadSuccessChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  const uploadFileRequest = UploadService.useUploadControllerFileService({});
+  
+  return (
+    <ChatInput 
+      onFileUpload={(file) => uploadFileRequest.run({ file })}
+      onUploadSuccess={(data) => {
+        console.log('Upload successful:', data);
+        // Perform additional actions on success
+      }}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **onUploadError**
+Callback when file upload fails.
+
+- **Type:** `(error: any) => void`
+- **Required:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { UploadService } from 'src/services/api';
+
+export const UploadErrorChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [error, setError] = useState<string>('');
+  
+  const uploadFileRequest = UploadService.useUploadControllerFileService({});
+  
+  return (
+    <>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      <ChatInput 
+        onFileUpload={(file) => uploadFileRequest.run({ file })}
+        onUploadError={(err) => {
+          console.error('Upload failed:', err);
+          setError('Failed to upload file. Please try again.');
+        }}
+        onSubmit={(message) => console.log(message)}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => setFiles([])}
+      />
+    </>
+  );
+};
+```
+
 ### **hideAttachments**
 Whether to hide the attachment button.
 

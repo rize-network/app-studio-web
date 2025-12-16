@@ -112,7 +112,7 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
               width="0.1em"
               height="1em"
               backgroundColor={cursorColor}
-              style={{
+              {...{
                 animation: 'blink 1s step-end infinite',
                 verticalAlign: 'text-bottom',
                 marginLeft: '1px',

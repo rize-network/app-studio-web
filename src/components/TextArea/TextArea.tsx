@@ -45,7 +45,6 @@ export const TextArea: React.FC<TextAreaProps> = ({
         borderRadius: '4px',
         border: `1px solid ${hasError ? 'red' : '#e2e8f0'}`,
         fontSize: '14px',
-        lineHeight: '1.5',
         resize: 'vertical',
         outline: 'none',
         transition: 'border-color 0.2s ease',

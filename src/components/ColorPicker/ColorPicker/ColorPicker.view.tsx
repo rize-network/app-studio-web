@@ -52,6 +52,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
   dropdownRef,
 
   // Other props
+  onChange,
   ...props
 }) => {
   const { getColor } = useTheme();

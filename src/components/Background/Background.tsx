@@ -74,6 +74,7 @@ export const Background = Object.assign(BackgroundComponent, {
   Image: BackgroundView.Image,
   Video: BackgroundView.Video,
   Gradient: BackgroundView.Gradient,
+  Overlay: BackgroundView.Overlay,
 });
 
 Background.displayName = 'Background';

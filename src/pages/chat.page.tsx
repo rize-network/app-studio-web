@@ -3,6 +3,7 @@ import { View, Text, Vertical, Horizontal, Button } from 'app-studio';
 import { ChatInput } from '../components/ChatInput';
 import { PromptExample } from '../components/ChatInput/ChatInput/ChatInput.type';
 import { AudioWaveformChatInputDemo } from '../components/ChatInput/examples/AudioWaveformChatInput';
+import { UploadService } from '../services/api';
 
 const ChatInputDemo = () => {
   const chatInputRef = useRef<any>(null);
@@ -22,6 +23,8 @@ const ChatInputDemo = () => {
   // State for upload simulation
   const [isSimulatingUpload, setIsSimulatingUpload] = useState(false);
   const [simulationProgress, setSimulationProgress] = useState(0);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadError, setUploadError] = useState<string>('');
 
   // Example prompt examples
   const promptExamples: PromptExample[] = [
@@ -77,6 +80,23 @@ const ChatInputDemo = () => {
 
   // State for mentions
   const [selectedMentions, setSelectedMentions] = useState<any[]>([]);
+
+  // Upload service hook
+  const uploadFileRequest = UploadService.useUploadControllerFileService({
+    onProgress: (p: number) => {
+      setUploadProgress(p || 0);
+    },
+    onSuccess: (data: any) => {
+      console.log('Upload successful:', data);
+      setUploadProgress(0);
+      setUploadError('');
+    },
+    onError: (err: any) => {
+      console.error('Upload failed:', err);
+      setUploadProgress(0);
+      setUploadError('Upload failed. Please try again.');
+    },
+  });
 
   // Handle message submission
   const handleSubmit = (
@@ -310,6 +330,12 @@ const ChatInputDemo = () => {
             mentionTrigger="@"
             onMentionSelect={handleMentionSelect}
             placeholder="Type your message here... Use @ to mention team members"
+            onFileUpload={(file) => uploadFileRequest.run({ file })}
+            onUploadProgress={(p) => console.log('Progress:', p)}
+            onUploadSuccess={(data) => console.log('Upload success:', data)}
+            onUploadError={(err) => console.error('Upload error:', err)}
+            getPendingFiles={() => []}
+            clearPendingFiles={() => {}}
           />
         </View>
       </View>
@@ -324,6 +350,8 @@ const ChatInputDemo = () => {
             placeholder="Rounded input..."
             shape="rounded"
             variant="default"
+            getPendingFiles={() => []}
+            clearPendingFiles={() => {}}
             views={{
               container: {
                 backgroundColor: 'color.blue.50',
@@ -345,6 +373,8 @@ const ChatInputDemo = () => {
             placeholder="Pill shaped input..."
             shape="pillShaped"
             variant="outline"
+            getPendingFiles={() => []}
+            clearPendingFiles={() => {}}
             views={{
               container: {
                 backgroundColor: 'color.purple.50',
@@ -368,6 +398,8 @@ const ChatInputDemo = () => {
             placeholder="Sharp corners input..."
             shape="sharp"
             variant="none"
+            getPendingFiles={() => []}
+            clearPendingFiles={() => {}}
             views={{
               container: {
                 backgroundColor: 'color.gray.100',
@@ -403,6 +435,12 @@ const ChatInputDemo = () => {
             placeholder="Upload multiple files and send a message..."
             shape="rounded"
             variant="outline"
+            onFileUpload={(file) => uploadFileRequest.run({ file })}
+            onUploadProgress={(p) => console.log('Upload progress:', p)}
+            onUploadSuccess={(data) => console.log('Upload success:', data)}
+            onUploadError={(err) => console.error('Upload error:', err)}
+            getPendingFiles={() => []}
+            clearPendingFiles={() => {}}
             views={{
               container: {
                 backgroundColor: 'color.green.50',
@@ -456,6 +494,8 @@ const ChatInputDemo = () => {
             onMentionSelect={handleMentionSelect}
             shape="rounded"
             variant="outline"
+            getPendingFiles={() => []}
+            clearPendingFiles={() => {}}
             views={{
               container: {
                 backgroundColor: 'color.purple.50',

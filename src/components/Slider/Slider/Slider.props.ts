@@ -1,7 +1,8 @@
 import { InputProps, ViewProps } from 'app-studio';
 import { Orientation, Shape, Size, SliderStyles, Variant } from './Slider.type';
 
-export interface SliderProps extends Omit<InputProps, 'size' | 'onChange'> {
+export interface SliderProps
+  extends Omit<InputProps, 'size' | 'onChange' | 'onDrag'> {
   /**
    * The minimum value of the slider
    */

@@ -8,7 +8,7 @@ import {
   Emoji,
 } from './EmojiPicker.type';
 
-export interface EmojiPickerProps extends ViewProps {
+export interface EmojiPickerProps extends Omit<ViewProps, 'onChange'> {
   // Basic props
   id?: string;
   name?: string;

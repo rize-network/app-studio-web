@@ -12,7 +12,7 @@ import { Suggestion } from '../EditableInput';
 /**
  * Props for the ChatInput component
  */
-export interface ChatInputProps extends ViewProps {
+export interface ChatInputProps extends Omit<ViewProps, 'onChange'> {
   /**
    * Get the pending files
    */
@@ -79,6 +79,27 @@ export interface ChatInputProps extends ViewProps {
    * ID of the sandbox
    */
   sandboxId?: string;
+
+  /**
+   * Callback when file upload progress changes
+   */
+  onUploadProgress?: (progress: number) => void;
+
+  /**
+   * Callback when file upload succeeds
+   */
+  onUploadSuccess?: (data: any) => void;
+
+  /**
+   * Callback when file upload fails
+   */
+  onUploadError?: (error: any) => void;
+
+  /**
+   * Function to execute file upload. Parent should provide this.
+   * Should return an object with a loading property.
+   */
+  onFileUpload?: (file: File) => void;
 
   /**
    * Whether to hide the attachment button

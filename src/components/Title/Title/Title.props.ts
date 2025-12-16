@@ -121,12 +121,6 @@ export interface TitleProps extends ViewProps {
   responsive?: boolean;
 
   /**
-   * Whether to center the title
-   * @default false
-   */
-  centered?: boolean;
-
-  /**
    * Custom styles for different parts of the component
    */
   views?: TitleStyles;

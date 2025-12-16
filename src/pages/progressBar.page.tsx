@@ -1,6 +1,11 @@
 import React from 'react';
 import { View } from 'app-studio';
-import { DefaultDemo, StyleDemo } from 'src/components/ProgressBar/examples';
+import {
+  DefaultDemo,
+  StyleDemo,
+  CircularDemo,
+  AnimatedDemo,
+} from 'src/components/ProgressBar/examples';
 
 const ProgressBarPage = () => {
   return (
@@ -18,9 +23,20 @@ const ProgressBarPage = () => {
             </td>
           </tr>
           <tr>
-            <td>Styles</td>
             <td>
               <StyleDemo />
+            </td>
+          </tr>
+          <tr>
+            <td>Circular</td>
+            <td>
+              <CircularDemo />
+            </td>
+          </tr>
+          <tr>
+            <td>Animation</td>
+            <td>
+              <AnimatedDemo />
             </td>
           </tr>
         </tbody>

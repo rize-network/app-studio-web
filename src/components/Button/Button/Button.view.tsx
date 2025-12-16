@@ -158,7 +158,7 @@ const BorderMovingButton: React.FC<
       borderRadius={ButtonShapes[shape]}
       cursor={isDisabled ? 'default' : 'pointer'}
       onClick={onClick}
-      boxShadow={shadow}
+      boxShadow={shadow as any}
       padding={borderWidth}
       background={`linear-gradient(90deg, ${borderMovingGradientColors[0]}, ${borderMovingGradientColors[1]}, ${borderMovingGradientColors[2]}, ${borderMovingGradientColors[0]})`}
       backgroundSize="200% 100%"
@@ -241,7 +241,7 @@ const AnimatedStrokeButton: React.FC<
       textDecoration="none"
       position="relative"
       cursor="pointer"
-      boxShadow={shadow}
+      boxShadow={shadow as any}
       {...views?.container}
       {...props}
     >

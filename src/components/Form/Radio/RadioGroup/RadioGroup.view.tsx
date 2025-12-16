@@ -25,6 +25,7 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
   isDisabled = false,
   isReadOnly = false,
   views = { container: {}, label: {}, helperText: {} },
+  onChange,
   ...props
 }) => {
   // Container component based on direction

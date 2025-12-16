@@ -74,6 +74,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
   handlePromptExampleSelect,
   handleDragOver,
   handleDragLeave,
+  onChange,
 
   // Other props
   ...props

@@ -1,123 +1,249 @@
 import React from 'react';
-import { View } from 'app-studio';
-import {
-  DefaultTitle,
-  HighlightedTitle,
-  AnimatedTitle,
-  HeroTitle,
-  ResponsiveTitle,
-  CustomTitle,
-  DirectAnimationExample,
-  GradientTest,
-  HighlightTest,
-  AlternatingTitle,
-  HighlightStylesDemo,
-  TypewriterHighlightDemo,
-  SlideHighlightDemo,
-} from 'src/components/Title/examples';
+import { View, Vertical, Text } from 'app-studio';
+import { Title } from 'src/components/Title';
+import { Separator } from 'src/components';
 
-/**
- * Title component showcase page
- */
+const Section = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <Vertical gap={24} marginBottom={48}>
+    <Text as="h2" fontSize={28} fontWeight={600} color="color.gray.900">
+      {title}
+    </Text>
+    <Separator color="color.gray.200" />
+    <Vertical gap={24} paddingLeft={16}>
+      {children}
+    </Vertical>
+  </Vertical>
+);
+
+const UsageLabel = ({ children }: { children: React.ReactNode }) => (
+  <Text fontSize={14} color="color.gray.500" marginBottom={8}>
+    {children}
+  </Text>
+);
+
 const TitlePage = () => {
   return (
-    <View padding={32}>
-      <table>
-        <tbody>
-          <tr>
-            <th>Property</th>
-            <th>App-Studio</th>
-          </tr>
+    <View
+      padding={48}
+      paddingBottom={100}
+      overflow="auto"
+      height="100vh"
+      backgroundColor="color.white"
+    >
+      <Title size="xl" marginBottom={48}>
+        Title Component Showcase
+      </Title>
 
-          <tr>
-            <td>Default</td>
-            <td>
-              <DefaultTitle />
-            </td>
-          </tr>
+      {/* 1. Basic Sizes */}
+      <Section title="1. Sizes">
+        <View>
+          <UsageLabel>Size: xs</UsageLabel>
+          <Title size="xs">Extra Small (xs)</Title>
+        </View>
+        <View>
+          <UsageLabel>Size: sm</UsageLabel>
+          <Title size="sm">Small (sm)</Title>
+        </View>
+        <View>
+          <UsageLabel>Size: md</UsageLabel>
+          <Title size="md">Medium (md)</Title>
+        </View>
+        <View>
+          <UsageLabel>Size: lg</UsageLabel>
+          <Title size="lg">Large (lg)</Title>
+        </View>
+        <View>
+          <UsageLabel>Size: xl</UsageLabel>
+          <Title size="xl">Extra Large (xl)</Title>
+        </View>
+      </Section>
 
-          <tr>
-            <td>Highlighted</td>
-            <td>
-              <HighlightedTitle />
-            </td>
-          </tr>
+      {/* 2. Highlight Styles */}
+      <Section title="2. Highlight Styles (Targeted)">
+        <View>
+          <UsageLabel>Style: background</UsageLabel>
+          <Title
+            highlightText="Background"
+            highlightStyle="background"
+            highlightColor="color.blue.500"
+          >
+            This has a Background highlight.
+          </Title>
+        </View>
 
-          <tr>
-            <td>Animated</td>
-            <td>
-              <AnimatedTitle />
-            </td>
-          </tr>
+        <View>
+          <UsageLabel>Style: gradient</UsageLabel>
+          <Title
+            highlightText="Gradient"
+            highlightStyle="gradient"
+            highlightColor="color.pink.500"
+            highlightSecondaryColor="color.purple.600"
+          >
+            This has a Gradient highlight.
+          </Title>
+        </View>
 
-          <tr>
-            <td>Hero Example</td>
-            <td>
-              <HeroTitle />
-            </td>
-          </tr>
+        <View>
+          <UsageLabel>Style: underline</UsageLabel>
+          <Title
+            highlightText="Underline"
+            highlightStyle="underline"
+            highlightColor="color.blue.500"
+          >
+            This has an Underline highlight.
+          </Title>
+        </View>
 
-          <tr>
-            <td>Responsive</td>
-            <td>
-              <ResponsiveTitle />
-            </td>
-          </tr>
+        <View>
+          <UsageLabel>Style: outline</UsageLabel>
+          <Title
+            highlightText="Outline"
+            highlightStyle="outline"
+            highlightColor="color.blue.500"
+          >
+            This has an Outline highlight.
+          </Title>
+        </View>
 
-          <tr>
-            <td>Custom Styling</td>
-            <td>
-              <CustomTitle />
-            </td>
-          </tr>
+        <View>
+          <UsageLabel>Style: glow</UsageLabel>
+          <Title
+            highlightText="Glow"
+            highlightStyle="glow"
+            highlightColor="color.green.500"
+          >
+            This has a Glow highlight.
+          </Title>
+        </View>
+      </Section>
 
-          <tr>
-            <td>Direct Animation</td>
-            <td>
-              <DirectAnimationExample />
-            </td>
-          </tr>
+      {/* 3. Full Title Highlights */}
+      <Section title="3. Full Title Highlights">
+        <View>
+          <UsageLabel>Full Background</UsageLabel>
+          <Title highlightStyle="background" highlightColor="theme.primary">
+            Full Background Highlight
+          </Title>
+        </View>
 
-          <tr>
-            <td>Gradient Test</td>
-            <td>
-              <GradientTest />
-            </td>
-          </tr>
+        <View>
+          <UsageLabel>Full Gradient</UsageLabel>
+          <Title
+            highlightStyle="gradient"
+            highlightColor="theme.primary"
+            highlightSecondaryColor="theme.secondary"
+          >
+            Full Gradient Highlight
+          </Title>
+        </View>
 
-          <tr>
-            <td>Highlight Test</td>
-            <td>
-              <HighlightTest />
-            </td>
-          </tr>
+        <View>
+          <UsageLabel>Full Outline</UsageLabel>
+          <Title highlightStyle="outline" highlightColor="theme.primary">
+            Full Outline Highlight
+          </Title>
+        </View>
+      </Section>
 
-          <tr>
-            <td>Alternating Highlight</td>
-            <td>
-              <AlternatingTitle />
-            </td>
-          </tr>
-          <tr>
-            <td>Typewriter Highlight</td>
-            <td>
-              <TypewriterHighlightDemo />
-            </td>
-          </tr>
-          <tr>
-            <td>Highlight Styles</td>
-            <td>
-              <HighlightStylesDemo />
-            </td>
-          </tr>
-          <tr>
-            <td>Slide Highlight</td>
-            <td>
-              <SlideHighlightDemo />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      {/* 4. Animations */}
+      <Section title="4. Animations">
+        <View>
+          <UsageLabel>Typewriter Effect</UsageLabel>
+          <Title
+            highlightText="typewriter"
+            highlightTypewriter={true}
+            highlightTypewriterDuration={2000}
+            highlightStyle="background"
+            highlightColor="theme.primary"
+          >
+            Here is a typewriter effect.
+          </Title>
+        </View>
+
+        <View>
+          <UsageLabel>Slide Effect</UsageLabel>
+          <Title
+            highlightText="sliding in"
+            highlightSlide={true}
+            highlightSlideDuration={800}
+            highlightStyle="background"
+            highlightColor="theme.primary"
+          >
+            Here is text sliding in nicely.
+          </Title>
+        </View>
+      </Section>
+
+      {/* 5. Alternating Text */}
+      <Section title="5. Alternating Text">
+        <View>
+          <UsageLabel>Alternating with Slide Effect</UsageLabel>
+          <Title
+            highlightText="Amazing"
+            alternateHighlightText={['Incredible', 'Fantastic', 'Awesome']}
+            alternateAnimation={true}
+            highlightStyle="gradient"
+            highlightColor="theme.primary"
+            highlightSecondaryColor="theme.secondary"
+            highlightSlide={true}
+          >
+            We build Amazing products.
+          </Title>
+        </View>
+
+        <View marginTop={24}>
+          <UsageLabel>Alternating with Typewriter</UsageLabel>
+          <Title
+            highlightText="Design"
+            alternateHighlightText={['Code', 'Build', 'Ship']}
+            alternateAnimation={true}
+            highlightStyle="background"
+            highlightColor="theme.primary"
+            highlightTypewriter={true}
+            highlightTypewriterDuration={1500}
+            alternateDuration={2000}
+          >
+            We love to Design.
+          </Title>
+        </View>
+
+        <View marginTop={24}>
+          <UsageLabel>Alternating without Animation (Instant)</UsageLabel>
+          <Title
+            highlightText="Fast"
+            alternateHighlightText={['Quick', 'Rapid', 'Instant']}
+            alternateAnimation={true}
+            highlightStyle="outline"
+            highlightColor="theme.primary"
+            alternateDuration={1500}
+          >
+            It is Fast and efficient.
+          </Title>
+        </View>
+      </Section>
+
+      {/* 6. Debug Case */}
+      <Section title="6. Debug Case">
+        <View>
+          <UsageLabel>User Reported Issue</UsageLabel>
+          <Title
+            highlightText="Fast"
+            alternateHighlightText={['Quick', 'Rapid', 'Instant']}
+            alternateAnimation={true}
+            highlightStyle="outline"
+            highlightColor="theme.primary"
+            alternateDuration={1500}
+          >
+            It is Fast and efficient.
+          </Title>
+        </View>
+      </Section>
     </View>
   );
 };

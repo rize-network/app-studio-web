@@ -55,7 +55,12 @@ export const useTitleState = (props: TitleProps) => {
     const updateAlternatingState = (index: number) => {
       const currentWordToHighlight = alternateHighlightText[index];
       // Replace the placeholder in the baseText with the current alternating word
-      const regex = new RegExp(placeholder, 'gi');
+      // Escape regex special characters in placeholder to prevent errors
+      const escapedPlaceholder = placeholder.replace(
+        /[.*+?^${}()|[\]\\]/g,
+        '\\$&'
+      );
+      const regex = new RegExp(escapedPlaceholder, 'gi');
       const newContent = baseText.replace(regex, currentWordToHighlight);
 
       setFinalDisplayedText(newContent);

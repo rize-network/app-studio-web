@@ -50,6 +50,8 @@ export const SliderView: React.FC<SliderViewProps> = ({
     stepMarks: {},
     tooltip: {},
   },
+  onChange,
+  onDrag,
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();

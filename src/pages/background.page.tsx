@@ -110,7 +110,7 @@ const BackgroundTestPage = () => {
           height={300}
           width={400}
           backgroundSize="cover"
-          overlay="rgba(0,0,0,0.4)"
+          overlay={<Background.Overlay />}
           blendMode="multiply"
         >
           <Text color="white" fontSize={20} fontWeight="600">
@@ -127,7 +127,7 @@ const BackgroundTestPage = () => {
           src="https://www.w3schools.com/html/mov_bbb.mp4"
           height={300}
           width={400}
-          overlay="rgba(0,0,0,0.4)"
+          overlay={<Background.Overlay />}
         >
           <Text color="white" fontSize={20} fontWeight="600">
             Video Background
@@ -173,6 +173,182 @@ const BackgroundTestPage = () => {
             Radial Multi-color Gradient
           </Text>
         </Background.Gradient>
+      </Vertical>
+
+      <Vertical gap={24}>
+        <Text fontSize={18} fontWeight="500">
+          Background Overlay Effects (Hero Example)
+        </Text>
+
+        {/* Full width example to better demonstrate gradients */}
+        <Background.Image
+          src="https://images.unsplash.com/photo-1519681393798-3828d50229fa?w=1200&h=600&fit=crop"
+          height={400}
+          width="100%"
+          backgroundSize="cover"
+          overlay={<Background.Overlay contentPosition="left" />}
+        >
+          {/* Overlay sits behind content but over image. Background.Image wraps children in a relative content div. 
+              Since Background.Overlay is absolute top=0 left=0, it will cover the content div. 
+              We ensure content div is full size by default or let it be. 
+              However, if we want Overlay to cover the IMAGE, not just content, it should be part of the image container.
+              Currently Background.Image doesn't support injecting siblings to image easily aside from 'overlay' prop.
+              
+              BUT, if we place Background.Overlay as a child, it is in the Content View.
+              If Content View is smaller than Image, Overlay is smaller.
+              To fix this visual "bug", we will use a custom composition for the advanced overlay here.
+           */}
+
+          {/* Actually, let's use the Background.Overlay as intended inside a relative container, 
+               and show a "Manual Composition" which is often safer for complex layering. */}
+
+          <Vertical
+            width="100%"
+            height="100%"
+            justifyContent="center"
+            padding={48}
+            style={{ position: 'relative', zIndex: 2 }} // Ensure text is above overlay
+          >
+            <Text color="white" fontSize={48} fontWeight="700">
+              Hero Title
+            </Text>
+            <Text
+              color="rgba(255,255,255,0.9)"
+              fontSize={20}
+              marginTop={16}
+              maxWidth={600}
+            >
+              This demonstrates the Left content position overlay. Notice how
+              the text is readable against the dark gradient on the left, while
+              the image shines through on the right.
+            </Text>
+          </Vertical>
+        </Background.Image>
+
+        {/* Comparison grid */}
+        <Horizontal gap={16} flexWrap="wrap" width="100%">
+          <Background.Image
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+            height={250}
+            width={400}
+            backgroundSize="cover"
+            overlay={<Background.Overlay contentPosition="center" />}
+          >
+            <Vertical
+              justifyContent="center"
+              height="100%"
+              padding={24}
+              style={{ position: 'relative', zIndex: 2 }}
+            >
+              <Text
+                color="white"
+                fontSize={24}
+                fontWeight="600"
+                textAlign="center"
+              >
+                Center
+              </Text>
+            </Vertical>
+          </Background.Image>
+
+          <Background.Image
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+            height={250}
+            width={400}
+            backgroundSize="cover"
+            overlay={<Background.Overlay contentPosition="top" />}
+          >
+            <Vertical
+              justifyContent="flex-start"
+              height="100%"
+              padding={24}
+              style={{ position: 'relative', zIndex: 2 }}
+            >
+              <Text
+                color="white"
+                fontSize={24}
+                fontWeight="600"
+                textAlign="center"
+              >
+                Top
+              </Text>
+            </Vertical>
+          </Background.Image>
+
+          <Background.Image
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+            height={250}
+            width={400}
+            backgroundSize="cover"
+            overlay={<Background.Overlay contentPosition="bottom" />}
+          >
+            <Vertical
+              justifyContent="flex-end"
+              height="100%"
+              padding={24}
+              style={{ position: 'relative', zIndex: 2 }}
+            >
+              <Text
+                color="white"
+                fontSize={24}
+                fontWeight="600"
+                textAlign="center"
+              >
+                Bottom
+              </Text>
+            </Vertical>
+          </Background.Image>
+
+          <Background.Image
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+            height={250}
+            width={400}
+            backgroundSize="cover"
+            overlay={<Background.Overlay contentPosition="right" />}
+          >
+            <Vertical
+              justifyContent="center"
+              alignItems="flex-end"
+              height="100%"
+              padding={24}
+              style={{ position: 'relative', zIndex: 2 }}
+            >
+              <Text
+                color="white"
+                fontSize={24}
+                fontWeight="600"
+                textAlign="right"
+              >
+                Right
+              </Text>
+            </Vertical>
+          </Background.Image>
+
+          <Background.Image
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+            height={250}
+            width={400}
+            backgroundSize="cover"
+            overlay={<Background.Overlay contentPosition="left" />}
+          >
+            <Vertical
+              justifyContent="center"
+              alignItems="flex-start"
+              height="100%"
+              padding={24}
+              style={{ position: 'relative', zIndex: 2 }}
+            >
+              <Text
+                color="white"
+                fontSize={24}
+                fontWeight="600"
+                textAlign="left"
+              >
+                Left
+              </Text>
+            </Vertical>
+          </Background.Image>
+        </Horizontal>
       </Vertical>
 
       <Vertical gap={24}>

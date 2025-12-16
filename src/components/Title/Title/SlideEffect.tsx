@@ -10,6 +10,7 @@ interface SlideEffectProps {
   textStyle?: React.CSSProperties;
   as?: React.ElementType;
   wordProps?: any;
+  bgColor?: string;
   [key: string]: any;
 }
 
@@ -203,7 +204,7 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
               as="span"
               animate={wordAnimation}
               {...restWordProps}
-              style={wordStyle}
+              {...wordStyle}
             >
               {word}
             </Text>

@@ -3,7 +3,6 @@ import { FormikValues, getIn, useFormikContext } from 'formik';
 
 import { Uploader } from '../Uploader/Uploader';
 import type { UploadProps } from '../Uploader/Uploader/Uploader.props';
-import { UploadService } from 'src/services/api';
 
 export type UploadFileHandler = (
   file: File,
@@ -22,7 +21,7 @@ export interface FormikUploaderProps
   /**
    * Custom upload handler. Defaults to the platform UploadService
    */
-  uploadFile?: UploadFileHandler;
+  uploadFile: UploadFileHandler;
   /**
    * Callback fired when a single file upload succeeds
    */
@@ -49,10 +48,6 @@ export interface FormikUploaderProps
   multiple?: boolean;
 }
 
-const defaultUploadFile: UploadFileHandler = (file, onProgress) => {
-  return UploadService.uploadControllerFile({ file }, onProgress);
-};
-
 const toArrayValue = (value: any) => {
   if (Array.isArray(value)) {
     return value;
@@ -67,7 +62,7 @@ const toArrayValue = (value: any) => {
 
 export const FormikUploader: React.FC<FormikUploaderProps> = ({
   name,
-  uploadFile = defaultUploadFile,
+  uploadFile,
   onUploadSuccess,
   onUploadError,
   transformResponse,

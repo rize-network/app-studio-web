@@ -96,7 +96,7 @@ export const DefaultAgentChatStyles = {
   } as ViewProps,
 
   messageContent: {
-    lineHeight: 1.5,
+    lineHeight: 15,
   } as ViewProps,
 
   messageFooter: {
@@ -285,7 +285,7 @@ export const DefaultChatInputStyles = {
     maxHeight: '200px',
     padding: '8px 12px',
     fontSize: '14px',
-    lineHeight: '1.5',
+    lineHeight: '15px',
     color: 'color.gray.900',
     backgroundColor: 'color.white',
     border: 'none',
