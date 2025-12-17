@@ -10,13 +10,15 @@ export type IconPosition = 'left' | 'right' | 'top' | 'bottom';
 // Specifies a TypeScript type 'IconPosition' to define the position where an icon should be placed relative to another element, with possible values 'left' or 'right'.
 export type LoaderPosition = 'left' | 'right';
 // Specifying a 'LoaderPosition' type for positioning a loader on the 'left' or 'right' side within a component where it is used.
+export type ColorScheme = 'primary' | 'secondary' | 'black' | 'white';
+
 export type Variant =
   | 'filled'
   | 'outline'
-  | 'link'
+  | 'empty'
   | 'ghost'
-  | 'reversed'
-  | 'borderMoving'
-  | 'animatedStroke'
+  | 'link'
   | 'subtle';
+
+export type Animation = 'borderMoving' | 'animatedStroke';
 // Declares a type 'Variant' used for styling components where each value—'filled', 'outline', 'link', 'ghost'—likely describes a visual style or theme, and 'borderMoving', 'animatedStroke' are special effect variants.

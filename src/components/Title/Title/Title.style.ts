@@ -43,30 +43,29 @@ export const ResponsiveTypography: Record<
   // xl maps to H1 - Largest heading
   xl: {
     fontWeight: 500,
-    marginBottom: 20,
     letterSpacing: 1.25,
     media: {
-      mobile: { fontSize: 42, width: '100%' },
-      tablet: { fontSize: 50, width: '100%' },
-      desktop: { fontSize: 58, minWidth: '60%' },
+      mobile: { fontSize: 60 },
+      tablet: { fontSize: 60 },
+      desktop: { fontSize: 96 },
     },
   },
   // lg maps to H2 - Large heading
   lg: {
     fontWeight: 500,
     media: {
-      mobile: { fontSize: 32 },
-      tablet: { fontSize: 40 },
-      desktop: { fontSize: 48 },
+      mobile: { fontSize: 48 },
+      tablet: { fontSize: 48 },
+      desktop: { fontSize: 70 },
     },
   },
   // md maps to H3 - Medium heading
   md: {
     fontWeight: 500,
     media: {
-      mobile: { fontSize: 20 },
-      tablet: { fontSize: 30 },
-      desktop: { fontSize: 40 },
+      mobile: { fontSize: 32 },
+      tablet: { fontSize: 40 },
+      desktop: { fontSize: 56 },
     },
   },
   // sm maps to T1 - Title text
@@ -74,8 +73,8 @@ export const ResponsiveTypography: Record<
     fontWeight: 400,
     letterSpacing: -0.2,
     media: {
-      mobile: { fontSize: 16 },
-      tablet: { fontSize: 28 },
+      mobile: { fontSize: 20 },
+      tablet: { fontSize: 24 },
       desktop: { fontSize: 32 },
     },
   },
@@ -84,9 +83,9 @@ export const ResponsiveTypography: Record<
     fontWeight: 400,
     letterSpacing: -0.2,
     media: {
-      mobile: { fontSize: 12 },
+      mobile: { fontSize: 14 },
       tablet: { fontSize: 18 },
-      desktop: { fontSize: 24 },
+      desktop: { fontSize: 20 },
     },
   },
 };

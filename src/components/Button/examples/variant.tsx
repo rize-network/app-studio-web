@@ -6,24 +6,48 @@ import { Variant } from '../Button/Button.type';
 
 export const VariantButtons = () => (
   <Vertical gap={15}>
-    {['filled', 'outline', 'link', 'ghost', 'reversed'].map(
-      (variant, index) => (
-        <Button
-          key={index}
-          to="https://www.npmjs.com/package/app-studio"
-          variant={variant as Variant}
-        >
-          App Studio Link {variant}
+    <Vertical gap={10}>
+      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Schemes</h3>
+      <Vertical gap={5}>
+        <Button scheme="primary">Primary Scheme</Button>
+        <Button scheme="secondary">Secondary Scheme</Button>
+        <Button scheme="black">Black Scheme</Button>
+        <Button scheme="white">White Scheme</Button>
+      </Vertical>
+    </Vertical>
+
+    <Vertical gap={10}>
+      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Variants</h3>
+      {['filled', 'outline', 'empty', 'ghost', 'link', 'subtle'].map(
+        (variant) => (
+          <Button key={variant} variant={variant as Variant}>
+            {variant.charAt(0).toUpperCase() + variant.slice(1)} Variant
+          </Button>
+        )
+      )}
+    </Vertical>
+
+    <Vertical gap={10}>
+      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Reversed</h3>
+      <div
+        style={{
+          padding: 20,
+          backgroundColor: '#333',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+        }}
+      >
+        <Button reversed variant="filled" scheme="primary">
+          Filled Reversed
         </Button>
-      )
-    )}
-    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-      <Button key={index} variant={variant as Variant}>
-        {variant}
-      </Button>
-    ))}
-    {/* Effect variants */}
-    <Button variant="borderMoving">Border Moving Effect</Button>
-    <Button variant="animatedStroke">Animated Stroke Effect</Button>
+        <Button reversed variant="outline" scheme="primary">
+          Outline Reversed
+        </Button>
+        <Button reversed variant="ghost" scheme="primary">
+          Ghost Reversed
+        </Button>
+      </div>
+    </Vertical>
   </Vertical>
 );

@@ -94,14 +94,20 @@ export const IconSizes: Record<Size, ViewProps> = {
 export const getButtonVariants = (
   color: string,
   isLight: boolean,
-  isThemeLight: boolean = true
+  isThemeLight: boolean = true,
+  reversed: boolean = false
 ): Record<Variant, ViewProps> => {
   const textColor = isLight ? '#000000' : '#FFFFFF';
 
+  // Determine effective colors based on reversed state
+  const effectiveBg = reversed ? textColor : color;
+  const effectiveContent = reversed ? color : textColor;
+  const effectiveBorder = reversed ? textColor : color;
+
   return {
     filled: {
-      backgroundColor: color,
-      color: textColor,
+      backgroundColor: effectiveBg,
+      color: effectiveContent,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'transparent',
@@ -113,58 +119,66 @@ export const getButtonVariants = (
       },
       _focusVisible: {
         outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-      },
-      transition: 'background-color 0.2s ease, opacity 0.2s ease',
-    },
-    reversed: {
-      backgroundColor: textColor,
-      color: color,
-      borderWidth: 1,
-      borderStyle: 'solid',
-      borderColor: textColor,
-      _hover: {
-        opacity: 0.9,
-      },
-      _active: {
-        opacity: 0.95,
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBg}`,
       },
       transition: 'background-color 0.2s ease, opacity 0.2s ease',
     },
     outline: {
       backgroundColor: 'transparent',
-      color: color,
+      color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: color,
+      borderColor: effectiveBorder,
       _hover: {
-        backgroundColor: color,
-        color: textColor,
+        backgroundColor: effectiveBorder,
+        color: reversed ? color : textColor, // If reversed (border is white), hover bg becomes white, text becomes color.
         opacity: 0.9,
       },
       _active: {
-        backgroundColor: color,
-        color: textColor,
+        backgroundColor: effectiveBorder,
+        color: reversed ? color : textColor,
         opacity: 0.95,
       },
       _focusVisible: {
         outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
       },
       transition:
         'background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease',
     },
+    empty: {
+      backgroundColor: 'transparent',
+      color: effectiveBorder,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: effectiveBorder,
+      _hover: {
+        backgroundColor: effectiveBorder,
+        color: reversed ? color : textColor,
+        opacity: 0.9,
+      },
+      _active: {
+        backgroundColor: effectiveBorder,
+        color: reversed ? color : textColor,
+        opacity: 0.95,
+      },
+      _focusVisible: {
+        outline: 'none',
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
+      },
+      transition: 'background-color 0.2s ease, opacity 0.2s ease',
+    },
     ghost: {
       backgroundColor: 'transparent',
-      color: color,
+      color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'transparent',
       _hover: {
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: color,
-        color: color,
+        borderColor: effectiveBorder,
+        color: effectiveBorder,
         opacity: 0.9,
       },
       _active: {
@@ -172,20 +186,20 @@ export const getButtonVariants = (
       },
       _focusVisible: {
         outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
       },
       transition: 'background-color 0.2s ease, opacity 0.2s ease',
     },
     link: {
       backgroundColor: 'transparent',
-      color: color,
+      color: effectiveBorder,
       borderWidth: 0,
       borderStyle: 'none',
       borderColor: 'transparent',
       textDecoration: 'underline',
       textUnderlineOffset: '2px',
       textDecorationThickness: '1px',
-      textDecorationColor: color,
+      textDecorationColor: effectiveBorder,
       _hover: {
         opacity: 0.8,
       },
@@ -194,78 +208,33 @@ export const getButtonVariants = (
       },
       _focusVisible: {
         outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-      },
-      transition: 'opacity 0.2s ease',
-    },
-    borderMoving: {
-      position: 'relative',
-      backgroundColor: 'black',
-      color: textColor,
-      overflow: 'hidden',
-      borderWidth: 0,
-      borderStyle: 'none',
-      borderColor: 'transparent',
-      _hover: {
-        color: textColor,
-      },
-      _active: {
-        color: textColor,
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow:
-          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.8)',
-      },
-      transition: 'opacity 0.2s ease',
-    },
-    animatedStroke: {
-      display: 'inline-block',
-      margin: '0 auto',
-      textAlign: 'center',
-      textDecoration: 'none',
-      position: 'relative',
-      cursor: 'pointer',
-      backgroundColor: 'transparent',
-      color: color,
-      borderWidth: 0,
-      borderStyle: 'none',
-      borderColor: 'transparent',
-      _hover: {
-        color: color,
-      },
-      _active: {
-        color: color,
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
       },
       transition: 'opacity 0.2s ease',
     },
     subtle: {
-      backgroundColor: 'white',
-      color: color,
+      backgroundColor: reversed
+        ? 'rgba(255, 255, 255, 0.1)'
+        : 'rgba(0, 0, 0, 0.05)',
+      color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: color, // Approximate matching of 'color.black.200' assuming a light border
-      paddingHorizontal: 12,
-      paddingVertical: 6,
-      borderRadius: 6,
-      fontWeight: 500, // medium
+      borderColor: 'transparent',
       _hover: {
-        backgroundColor: 'rgba(0, 0, 0, 0.05)', // Approximate 'color.black.50'
+        backgroundColor: reversed
+          ? 'rgba(255, 255, 255, 0.2)'
+          : 'rgba(0, 0, 0, 0.1)',
       },
       _active: {
-        backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        backgroundColor: reversed
+          ? 'rgba(255, 255, 255, 0.3)'
+          : 'rgba(0, 0, 0, 0.15)',
       },
       _focusVisible: {
         outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
       },
       transition: 'all 0.2s ease',
-      // Override default size styles if necessary via these props, though Button component applies Size styles too.
-      // The snippet had explicit paddings which might override size styles if spread after.
     },
   };
 };

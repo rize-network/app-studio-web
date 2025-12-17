@@ -11,12 +11,17 @@ export const EffectsTestButtons = () => (
     <Button variant="link">Link Button</Button>
 
     {/* New effect variants */}
-    <Button variant="borderMoving">Border Moving Button</Button>
-    <Button variant="animatedStroke">Animated Stroke Button</Button>
+    <Button animation="borderMoving" variant="filled">
+      Border Moving Button
+    </Button>
+    <Button animation="animatedStroke" variant="ghost">
+      Animated Stroke Button
+    </Button>
 
     {/* Effect variants with custom props */}
     <Button
-      variant="borderMoving"
+      animation="borderMoving"
+      variant="filled"
       borderMovingDuration={1}
       borderMovingGradientColors={[
         'color.red.500',
@@ -28,7 +33,8 @@ export const EffectsTestButtons = () => (
     </Button>
 
     <Button
-      variant="animatedStroke"
+      animation="animatedStroke"
+      variant="ghost"
       animatedStrokeAccentColor="color.red.400"
       animatedStrokeTextColor="color.red.400"
     >

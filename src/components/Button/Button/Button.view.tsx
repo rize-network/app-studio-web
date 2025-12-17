@@ -88,207 +88,7 @@ const ButtonContent: React.FC<{
   );
 };
 
-// --- Variant: Border Moving ---
-const BorderMovingButton: React.FC<
-  ButtonProps & {
-    mainTone: string;
-    tone: string;
-    borderMovingGradientColors: string[];
-    borderMovingDuration: number;
-    content: React.ReactNode;
-  }
-> = ({
-  shape = 'rounded',
-  size = 'md',
-  isDisabled,
-  onClick,
-  views,
-  mainTone,
-  tone,
-  borderMovingGradientColors,
-  borderMovingDuration,
-  content,
-  shadow,
-  ...props
-}) => {
-  const sizeStyles = ButtonSizes[size];
-  const borderWidth = 3;
-  const numericWidth =
-    typeof sizeStyles.width === 'number' ? (sizeStyles.width as number) : 300;
-  const numericHeight =
-    typeof sizeStyles.height === 'number' ? (sizeStyles.height as number) : 64;
-
-  const numericBorderRadius = (() => {
-    const shapeValue = ButtonShapes[shape];
-    if (typeof shapeValue === 'number') {
-      return shapeValue;
-    }
-    if (typeof shapeValue === 'string') {
-      return parseInt(shapeValue, 10) || 50;
-    }
-    return 50;
-  })();
-
-  const containerBg = mainTone;
-  // Use high contrast text color for this variant
-  const borderMovingTextColor = tone === 'light' ? '#000000' : '#FFFFFF';
-
-  // Create gradient string for border animation
-  const gradientColors = borderMovingGradientColors.join(', ');
-
-  // Animation sequence for the moving border effect
-  const borderAnimation = {
-    from: {
-      backgroundPosition: '0% 50%',
-    },
-    to: {
-      backgroundPosition: '200% 50%',
-    },
-    duration: `${borderMovingDuration}s`,
-    timingFunction: 'linear',
-    iterationCount: 'infinite',
-  };
-
-  return (
-    <Element
-      position="relative"
-      display="inline-flex"
-      alignItems="center"
-      justifyContent="center"
-      borderRadius={ButtonShapes[shape]}
-      cursor={isDisabled ? 'default' : 'pointer'}
-      onClick={onClick}
-      boxShadow={shadow as any}
-      padding={borderWidth}
-      background={`linear-gradient(90deg, ${borderMovingGradientColors[0]}, ${borderMovingGradientColors[1]}, ${borderMovingGradientColors[2]}, ${borderMovingGradientColors[0]})`}
-      backgroundSize="200% 100%"
-      animate={borderAnimation}
-      {...views?.container}
-      {...props}
-    >
-      <View
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor={containerBg}
-        borderRadius={Math.max(0, numericBorderRadius - borderWidth)}
-        width="100%"
-        height="100%"
-        minWidth={numericWidth - borderWidth * 2}
-        minHeight={numericHeight - borderWidth * 2}
-        color={borderMovingTextColor}
-        fontSize={14}
-        cursor="pointer"
-      >
-        {content}
-      </View>
-    </Element>
-  );
-};
-
-// --- Variant: Animated Stroke ---
-const AnimatedStrokeButton: React.FC<
-  ButtonProps & {
-    accentColor: string;
-    textColor: string;
-    getColor: (color: string) => string;
-  }
-> = ({
-  to,
-  onClick,
-  views,
-  children,
-  size = 'md',
-  accentColor,
-  textColor,
-  getColor,
-  shadow,
-  ...props
-}) => {
-  const resolvedAccentColor = getColor(accentColor);
-  const resolvedTextColor = getColor(textColor);
-  const sizeStyles = ButtonSizes[size];
-  const numericWidth =
-    typeof sizeStyles.width === 'number' ? (sizeStyles.width as number) : 300;
-  const numericHeight =
-    typeof sizeStyles.height === 'number' ? (sizeStyles.height as number) : 60;
-
-  const strokeAnimation = {
-    from: {
-      strokeWidth: '8px',
-      strokeDasharray: '0 500',
-      strokeDashoffset: -454,
-    },
-    to: {
-      strokeWidth: '3px',
-      strokeDasharray: '760',
-      strokeDashoffset: 0,
-    },
-    duration: '0.9s',
-    timingFunction: 'ease-in',
-    fillMode: 'forwards',
-  };
-
-  return (
-    <Element
-      as={to ? 'a' : 'div'}
-      href={to ? to : undefined}
-      onClick={onClick}
-      display="inline-block"
-      maxWidth="20rem"
-      margin="0 auto"
-      textAlign="center"
-      textDecoration="none"
-      position="relative"
-      cursor="pointer"
-      boxShadow={shadow as any}
-      {...views?.container}
-      {...props}
-    >
-      <View
-        as="svg"
-        display="block"
-        height={numericHeight}
-        width={numericWidth}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <View
-          as="rect"
-          height={numericHeight}
-          width={numericWidth}
-          fill="transparent"
-          stroke={resolvedAccentColor}
-          strokeWidth="8px"
-          strokeDasharray="0 500"
-          strokeDashoffset={-454}
-          on={{
-            hover: {
-              animate: strokeAnimation,
-            },
-          }}
-        />
-      </View>
-
-      <View
-        position="absolute"
-        top={0}
-        right={0}
-        bottom={0}
-        left={0}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        textAlign="center"
-        pointerEvents="none"
-        userSelect="none"
-        color={resolvedTextColor}
-        {...sizeStyles}
-      >
-        {children}
-      </View>
-    </Element>
-  );
-};
+// --- Animation Logic moved to StandardButton ---
 
 // --- Variant: Standard Button ---
 const StandardButton: React.FC<
@@ -296,11 +96,18 @@ const StandardButton: React.FC<
     baseStyles: any;
     sizeStyles: any;
     iconPad: any;
-    resolvedTextColor: string;
-    content: React.ReactNode;
+    // Extra props passed from ButtonView
+    mainTone?: string;
+    tone?: string;
+    borderMovingDuration?: number;
+    borderMovingGradientColors?: string[];
+    animatedStrokeAccentColor?: string;
+    animatedStrokeTextColor?: string;
+    getColor?: (color: string) => string;
   }
 > = ({
   variant,
+  animation,
   to,
   isDisabled,
   isLoading,
@@ -316,9 +123,186 @@ const StandardButton: React.FC<
   iconPad,
   resolvedTextColor,
   content,
-  size, // Destructure size to avoid passing it to Element
+  size,
+  mainTone,
+  tone,
+  borderMovingDuration = 2,
+  borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
+  animatedStrokeAccentColor = '#705CFF',
+  animatedStrokeTextColor = '#333333',
+  getColor = (c: string) => c,
   ...props
 }) => {
+  // --- Common Helpers ---
+  const numericBorderRadius = (() => {
+    const shapeValue = ButtonShapes[shape];
+    if (typeof shapeValue === 'number') {
+      return shapeValue;
+    }
+    if (typeof shapeValue === 'string') {
+      return parseInt(shapeValue, 10) || 0;
+    }
+    return 0;
+  })();
+
+  const linkOrContent = to ? (
+    <Link
+      to={to}
+      isExternal={isExternal}
+      color="currentColor"
+      textDecoration="inherit"
+      _hover={{ color: 'currentColor' }}
+      {...views?.link}
+    >
+      {content}
+    </Link>
+  ) : (
+    content
+  );
+
+  // --- Animation: Border Moving ---
+  if (animation === 'borderMoving' && borderMovingGradientColors) {
+    const borderWidth = 3;
+    const borderAnimation = {
+      from: { backgroundPosition: '0% 50%' },
+      to: { backgroundPosition: '200% 50%' },
+      duration: `${borderMovingDuration}s`,
+      timingFunction: 'linear',
+      iterationCount: 'infinite',
+    };
+
+    return (
+      <Element
+        as="div" // Container is div, inner can be button if needed, or container handles events
+        position="relative"
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
+        borderRadius={ButtonShapes[shape]}
+        cursor={isDisabled ? 'default' : 'pointer'}
+        onClick={onClick}
+        boxShadow={shadow as any}
+        padding={borderWidth}
+        background={`linear-gradient(90deg, ${borderMovingGradientColors[0]}, ${borderMovingGradientColors[1]}, ${borderMovingGradientColors[2]}, ${borderMovingGradientColors[0]})`}
+        backgroundSize="200% 100%"
+        animate={borderAnimation}
+        width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+        {...views?.container}
+        {...props}
+      >
+        <View
+          as={to ? 'div' : 'button'} // Inner element is the semantic button or div
+          disabled={Boolean(isDisabled || isLoading)}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          borderRadius={Math.max(0, numericBorderRadius - borderWidth)}
+          width="100%"
+          height="100%"
+          /* Merge baseStyles but ensure we override absolute sizing if necessary */
+          {...baseStyles}
+          {...sizeStyles}
+          {...iconPad}
+          // Ensure background covers the inner area
+          backgroundColor={baseStyles?.backgroundColor || mainTone}
+          color={resolvedTextColor}
+          borderWidth={0} // Handled by wrapper
+          cursor={isDisabled ? 'default' : 'pointer'}
+        >
+          {linkOrContent}
+        </View>
+      </Element>
+    );
+  }
+
+  // --- Animation: Animated Stroke ---
+  if (animation === 'animatedStroke') {
+    const resolvedAccentColor = getColor(animatedStrokeAccentColor);
+    const strokeAnimation = {
+      from: {
+        strokeWidth: '8px',
+        strokeDasharray: '0 500',
+        strokeDashoffset: -454,
+      },
+      to: {
+        strokeWidth: '3px',
+        strokeDasharray: '760',
+        strokeDashoffset: 0,
+      },
+      duration: '0.9s',
+      timingFunction: 'ease-in',
+      fillMode: 'forwards',
+    };
+
+    // We need numeric dimensions for SVG.
+    // This is a limitation: if width/height are auto, SVG might not work well.
+    // We use rough defaults or rely on View props if set.
+    const numericWidth =
+      typeof sizeStyles.width === 'number' ? sizeStyles.width : 300;
+    const numericHeight =
+      typeof sizeStyles.height === 'number' ? sizeStyles.height : 60;
+
+    return (
+      <Element
+        as={to ? 'a' : 'div'}
+        href={to ? to : undefined}
+        onClick={onClick}
+        display="inline-block"
+        maxWidth="20rem"
+        margin="0 auto"
+        textAlign="center"
+        textDecoration="none"
+        position="relative"
+        cursor="pointer"
+        boxShadow={shadow as any}
+        {...views?.container}
+        {...props}
+      >
+        <View
+          as="svg"
+          display="block"
+          height={numericHeight}
+          width={numericWidth}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <View
+            as="rect"
+            height={numericHeight}
+            width={numericWidth}
+            fill="transparent"
+            stroke={resolvedAccentColor}
+            strokeWidth="8px"
+            strokeDasharray="0 500"
+            strokeDashoffset={-454}
+            on={{
+              hover: {
+                animate: strokeAnimation,
+              },
+            }}
+          />
+        </View>
+
+        <View
+          position="absolute"
+          top={0}
+          right={0}
+          bottom={0}
+          left={0}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          {...sizeStyles}
+          {...baseStyles}
+          backgroundColor="transparent" // SVG handles background
+          borderWidth={0} // SVG handles border
+        >
+          {linkOrContent}
+        </View>
+      </Element>
+    );
+  }
+
+  // --- Default: Standard Button ---
   return (
     <Element
       as={variant === 'link' && to ? 'div' : 'button'}
@@ -341,24 +325,12 @@ const StandardButton: React.FC<
       {...views?.container}
       {...props}
     >
-      {to ? (
-        <Link
-          to={to}
-          isExternal={isExternal}
-          color="currentColor"
-          textDecoration="inherit"
-          _hover={{ color: 'currentColor' }}
-          {...views?.link}
-        >
-          {content}
-        </Link>
-      ) : (
-        content
-      )}
+      {linkOrContent}
     </Element>
   );
 };
 
+// --- Main Component ---
 // --- Main Component ---
 const ButtonView: React.FC<ButtonProps> = ({
   /* behaviour */
@@ -369,6 +341,8 @@ const ButtonView: React.FC<ButtonProps> = ({
   loaderPosition = 'left',
   backgroundColor, // primary candidate for main color
   color, // 2nd candidate for main color (NOT text‑color)
+  scheme, // New scheme prop
+  reversed = false, // New reversed prop
   isAuto = true,
   isFilled,
   isDisabled,
@@ -397,19 +371,32 @@ const ButtonView: React.FC<ButtonProps> = ({
   const mode = elementMode ?? themeMode;
 
   /* MAIN COLOR – determines the entire palette */
-  const mainColorKey = backgroundColor ?? color ?? 'theme.primary';
+  let schemeColor: string | undefined;
+  if (scheme === 'primary') schemeColor = 'theme.primary';
+  else if (scheme === 'secondary') schemeColor = 'theme.secondary';
+  else if (scheme === 'black') schemeColor = 'color.black.900';
+  else if (scheme === 'white') schemeColor = 'color.white.100';
+
+  const mainColorKey =
+    backgroundColor ?? color ?? schemeColor ?? 'theme.primary';
   const mainTone = getColor(isDisabled ? 'theme.disabled' : mainColorKey, {
     themeMode: mode,
   });
   const tone = contrast(mainTone);
 
   /* text color with mixBlendMode for maximum visibility */
-  const textColor = tone === 'light' ? '#000000' : '#FFFFFF';
+  let textColor: string;
+  if (scheme === 'white' && !color) {
+    textColor = '#000000';
+  } else {
+    textColor = tone === 'light' ? '#000000' : '#FFFFFF';
+  }
 
   /* variant palette */
   const palette = useMemo(
-    () => getButtonVariants(mainTone, tone === 'light', mode === 'light'),
-    [mainTone, tone, mode]
+    () =>
+      getButtonVariants(mainTone, tone === 'light', mode === 'light', reversed),
+    [mainTone, tone, mode, reversed]
   );
   const base = palette[variant];
   const resolvedTextColor = (base?.color as string) ?? textColor;
@@ -430,45 +417,6 @@ const ButtonView: React.FC<ButtonProps> = ({
     </ButtonContent>
   );
 
-  // Dispatch to the correct variant component
-
-  if (variant === 'borderMoving') {
-    return (
-      <BorderMovingButton
-        variant={variant}
-        shape={shape}
-        size={size}
-        isDisabled={isDisabled}
-        onClick={onClick}
-        views={views}
-        mainTone={mainTone}
-        tone={tone}
-        borderMovingGradientColors={borderMovingGradientColors}
-        borderMovingDuration={borderMovingDuration}
-        content={content}
-        {...props}
-      />
-    );
-  }
-
-  if (variant === 'animatedStroke') {
-    return (
-      <AnimatedStrokeButton
-        variant={variant}
-        to={to}
-        onClick={onClick}
-        views={views}
-        size={size}
-        accentColor={animatedStrokeAccentColor}
-        textColor={animatedStrokeTextColor}
-        getColor={getColor}
-        {...props}
-      >
-        {children}
-      </AnimatedStrokeButton>
-    );
-  }
-
   // Standard variants (filled, outline, ghost, link)
   const sizeStyles = ButtonSizes[size];
   const iconPad = isIconRounded ? IconSizes[size] : {};
@@ -476,6 +424,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   return (
     <StandardButton
       variant={variant}
+      animation={props.animation}
       to={to}
       isDisabled={isDisabled}
       isLoading={isLoading}
@@ -492,6 +441,13 @@ const ButtonView: React.FC<ButtonProps> = ({
       resolvedTextColor={resolvedTextColor}
       content={content}
       size={size}
+      mainTone={mainTone}
+      tone={tone}
+      borderMovingDuration={borderMovingDuration}
+      borderMovingGradientColors={borderMovingGradientColors}
+      animatedStrokeAccentColor={animatedStrokeAccentColor}
+      animatedStrokeTextColor={animatedStrokeTextColor}
+      getColor={getColor}
       {...props}
     />
   );

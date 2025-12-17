@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  IconButtons as IconButtons,
+  IconButtons,
   VariantButtons,
   ShadowButton,
-  ButtonSizes as ButtonSizes,
+  ButtonSizes,
   DisabledButton,
   LoaderButtons,
   BorderMovingButtons,
@@ -12,81 +12,69 @@ import {
   SubtleButtons,
 } from 'src/components/Button/examples';
 import { View } from 'app-studio';
+
 export const ButtonPage = () => {
   return (
-    <View>
-      <table>
-        <tbody>
-          <tr>
-            <th>Property</th>
-            <th>App-Studio</th>
-          </tr>
+    <View padding={20}>
+      <View marginBottom={20}>
+        <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>
+          Button Component
+        </h1>
+      </View>
 
-          <tr>
-            <td>IsDisabled</td>
-            <td>
-              <DisabledButton />
-            </td>
-          </tr>
-          <tr>
-            <td>Sizes</td>
+      <View gap={20} display="flex" flexDirection="column">
+        <View>
+          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>
+            Schemes & Variants
+          </h2>
+          <VariantButtons />
+        </View>
 
-            <td>
-              <ButtonSizes />
-            </td>
-          </tr>
+        <View>
+          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>States</h2>
+          <View display="flex" gap={10}>
+            <DisabledButton />
+          </View>
+        </View>
 
-          <tr>
-            <td>Shadow</td>
+        <View>
+          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Sizes</h2>
+          <ButtonSizes />
+        </View>
 
-            <td>
-              <ShadowButton />
-            </td>
-          </tr>
-          <tr>
-            <td>isLoader</td>
-            <td>
-              <LoaderButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Variant</td>
-            <td>
-              <VariantButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Icon</td>
-            <td>
-              <IconButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Border Moving Effect</td>
-            <td>
-              <BorderMovingButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Animated Stroke Effect</td>
-            <td>
-              <AnimatedStrokeButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Share Button</td>
-            <td>
-              <ShareButtons />
-            </td>
-          </tr>
-          <tr>
-            <td>Subtle Button</td>
-            <td>
-              <SubtleButtons />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <View>
+          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Shadows</h2>
+          <ShadowButton />
+        </View>
+
+        <View>
+          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Loaders</h2>
+          <LoaderButtons />
+        </View>
+
+        <View>
+          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Icons</h2>
+          <IconButtons />
+        </View>
+
+        <View>
+          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>Effects</h2>
+          <View display="flex" flexDirection="column" gap={10}>
+            <BorderMovingButtons />
+            <AnimatedStrokeButtons />
+          </View>
+        </View>
+
+        <View>
+          <h2 style={{ fontSize: '18px', marginBottom: '10px' }}>
+            Social & Subtle
+          </h2>
+          <View display="flex" gap={10} flexDirection="column">
+            <ShareButtons />
+            <SubtleButtons />
+          </View>
+        </View>
+      </View>
     </View>
   );
 };

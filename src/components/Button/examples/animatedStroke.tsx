@@ -4,17 +4,21 @@ import { Vertical } from 'app-studio';
 
 export const AnimatedStrokeButtons = () => (
   <Vertical gap={15}>
-    <Button variant="animatedStroke">Hover Me</Button>
+    <Button animation="animatedStroke" variant="ghost">
+      Hover Me
+    </Button>
     <Button
-      variant="animatedStroke"
+      animation="animatedStroke"
+      variant="ghost"
       animatedStrokeAccentColor="color.red.400"
       animatedStrokeTextColor="color.red.400"
     >
       Custom Red
     </Button>
     <Button
-      variant="animatedStroke"
-      animatedStrokeAccentColor="color.teal.400"
+      animation="animatedStroke"
+      variant="ghost"
+      animatedStrokeAccentColor="#2dd4bf"
       animatedStrokeTextColor="color.blueGray.800"
     >
       Teal Stroke
