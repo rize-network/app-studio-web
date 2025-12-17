@@ -218,15 +218,17 @@ const StandardButton: React.FC<
   // --- Animation: Animated Stroke ---
   if (animation === 'animatedStroke') {
     const resolvedAccentColor = getColor(animatedStrokeAccentColor);
+    const resolvedStrokeTextColor = getColor(animatedStrokeTextColor);
+    const strokePathLength = 1000;
     const strokeAnimation = {
       from: {
         strokeWidth: '8px',
-        strokeDasharray: '0 500',
-        strokeDashoffset: -454,
+        strokeDasharray: `0 ${strokePathLength}`,
+        strokeDashoffset: -Math.round(strokePathLength * 0.63),
       },
       to: {
         strokeWidth: '3px',
-        strokeDasharray: '760',
+        strokeDasharray: `${strokePathLength}`,
         strokeDashoffset: 0,
       },
       duration: '0.9s',
@@ -234,68 +236,73 @@ const StandardButton: React.FC<
       fillMode: 'forwards',
     };
 
-    // We need numeric dimensions for SVG.
-    // This is a limitation: if width/height are auto, SVG might not work well.
-    // We use rough defaults or rely on View props if set.
-    const numericWidth =
-      typeof sizeStyles.width === 'number' ? sizeStyles.width : 300;
-    const numericHeight =
-      typeof sizeStyles.height === 'number' ? sizeStyles.height : 60;
+    const mergedClassName = [
+      'group',
+      (views?.container as any)?.className,
+      (props as any)?.className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <Element
-        as={to ? 'a' : 'div'}
-        href={to ? to : undefined}
+        as={to ? 'div' : 'button'}
+        type={to ? undefined : 'button'}
+        disabled={Boolean(!to && (isDisabled || isLoading))}
         onClick={onClick}
-        display="inline-block"
-        maxWidth="20rem"
-        margin="0 auto"
-        textAlign="center"
-        textDecoration="none"
         position="relative"
-        cursor="pointer"
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
+        width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+        borderRadius={ButtonShapes[shape]}
         boxShadow={shadow as any}
+        transition="all 0.2s ease"
+        cursor={isDisabled ? 'default' : 'pointer'}
+        color={resolvedStrokeTextColor}
+        backgroundColor="transparent"
+        borderWidth={0}
         {...views?.container}
         {...props}
+        className={mergedClassName}
       >
         <View
           as="svg"
-          display="block"
-          height={numericHeight}
-          width={numericWidth}
+          position="absolute"
+          top={0}
+          right={0}
+          bottom={0}
+          left={0}
+          width="100%"
+          height="100%"
           xmlns="http://www.w3.org/2000/svg"
+          pointerEvents="none"
+          zIndex={1}
+          aria-hidden="true"
         >
           <View
             as="rect"
-            height={numericHeight}
-            width={numericWidth}
+            x="0"
+            y="0"
+            height="100%"
+            width="100%"
+            rx={numericBorderRadius}
+            ry={numericBorderRadius}
             fill="transparent"
             stroke={resolvedAccentColor}
             strokeWidth="8px"
-            strokeDasharray="0 500"
-            strokeDashoffset={-454}
+            strokeDasharray={`0 ${strokePathLength}`}
+            strokeDashoffset={-Math.round(strokePathLength * 0.63)}
+            pathLength={strokePathLength}
             on={{
-              hover: {
+              groupHover: {
                 animate: strokeAnimation,
               },
             }}
           />
         </View>
 
-        <View
-          position="absolute"
-          top={0}
-          right={0}
-          bottom={0}
-          left={0}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          {...sizeStyles}
-          {...baseStyles}
-          backgroundColor="transparent" // SVG handles background
-          borderWidth={0} // SVG handles border
-        >
+        <View position="relative" zIndex={0}>
           {linkOrContent}
         </View>
       </Element>
@@ -317,7 +324,7 @@ const StandardButton: React.FC<
       width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
       /* visuals */
       borderRadius={ButtonShapes[shape]}
-      boxShadow={shadow}
+      boxShadow={shadow as any}
       transition="all 0.2s ease"
       cursor={isDisabled ? 'default' : 'pointer'}
       onClick={onClick}
@@ -386,7 +393,7 @@ const ButtonView: React.FC<ButtonProps> = ({
 
   /* text color with mixBlendMode for maximum visibility */
   let textColor: string;
-  if (scheme === 'white' && !color) {
+  if (scheme === 'white') {
     textColor = '#000000';
   } else {
     textColor = tone === 'light' ? '#000000' : '#FFFFFF';
