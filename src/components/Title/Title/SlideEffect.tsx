@@ -129,6 +129,7 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
       overflow: 'hidden',
       verticalAlign: 'bottom',
       whiteSpace: 'nowrap',
+      lineHeight: 'normal',
       ...textStyle,
     }),
     [textStyle]

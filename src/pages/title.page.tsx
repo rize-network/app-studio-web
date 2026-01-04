@@ -303,7 +303,6 @@ const TitlePage = () => {
             alternateHighlightText={['Incredible', 'Fantastic']}
             alternateAnimation={true}
             highlightSlide={true}
-            fontSize={30}
             highlightStyle="default"
             textComponent={(props: any) => (
               <Text

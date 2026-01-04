@@ -3,11 +3,7 @@ import { Element, useInView, Text as DefaultText, useTheme } from 'app-studio';
 import { AnimationProps } from 'app-studio/dist/utils/constants';
 import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
-import {
-  HighlightStyles,
-  TitleSizes,
-  ResponsiveTypography,
-} from './Title.style';
+import { HighlightStyles, TitleSizes } from './Title.style';
 import TypewriterEffect from './TypewriterEffect';
 import SlideEffect from './SlideEffect';
 
@@ -22,7 +18,6 @@ const TitleView: React.FC<TitleProps> = ({
   highlightColor = 'theme.primary',
   highlightSecondaryColor,
   size = 'lg',
-  responsive = true,
   views,
   highlightAnimate,
   animate,
@@ -105,10 +100,7 @@ const TitleView: React.FC<TitleProps> = ({
 
   const TextComponent = textComponent || DefaultText;
 
-  // Common style calculations
-  const useResponsive = responsive && !props.media;
   const fontSize = TitleSizes[size];
-  const responsiveStyles = useResponsive ? ResponsiveTypography[size] : null;
 
   // Highlight style props
   const highlightProps = HighlightStyles[highlightStyle](
@@ -151,12 +143,7 @@ const TitleView: React.FC<TitleProps> = ({
     animate: inView ? controlledAnimate : undefined,
     ...(!textComponent && {
       as: 'h1' as const,
-      fontSize: useResponsive ? undefined : fontSize,
-      fontWeight: useResponsive ? responsiveStyles?.fontWeight : 'bold',
-      letterSpacing: useResponsive
-        ? responsiveStyles?.letterSpacing
-        : undefined,
-      media: useResponsive ? responsiveStyles?.media : undefined,
+      fontSize,
     }),
   };
 
@@ -190,8 +177,7 @@ const TitleView: React.FC<TitleProps> = ({
           stagger={stateHighlightSlideStagger}
           sequential={stateHighlightSlideSequential}
           direction="up"
-          fontSize={useResponsive ? undefined : fontSize}
-          fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
+          fontSize={fontSize}
           wordProps={highlightProps}
           textComponent={TextComponent}
         />
@@ -225,7 +211,7 @@ const TitleView: React.FC<TitleProps> = ({
 
     return (
       <Element
-        fontSize={useResponsive ? undefined : fontSize}
+        fontSize={fontSize}
         {...containerProps}
         {...views?.container}
         {...props}
