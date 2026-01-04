@@ -156,7 +156,6 @@ const TitleView: React.FC<TitleProps> = ({
       letterSpacing: useResponsive
         ? responsiveStyles?.letterSpacing
         : undefined,
-      marginBottom: useResponsive ? responsiveStyles?.marginBottom : undefined,
       media: useResponsive ? responsiveStyles?.media : undefined,
     }),
   };
