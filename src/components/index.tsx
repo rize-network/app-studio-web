@@ -39,7 +39,7 @@ export * from './Table/Table';
 export * from './Tabs/Tabs';
 export * from './Title/Title';
 export * from './Icon/Icon';
-export * as Icon from './Icon/Icon';
+
 export * from './Toggle/Toggle';
 export * from './ToggleGroup/ToggleGroup';
 export * from './DragAndDrop/DragAndDrop';

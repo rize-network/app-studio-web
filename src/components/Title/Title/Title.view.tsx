@@ -18,7 +18,7 @@ function escapeRegExp(string: string): string {
 const TitleView: React.FC<TitleProps> = ({
   children,
   highlightText,
-  highlightStyle = 'background',
+  highlightStyle = 'default',
   highlightColor = 'theme.primary',
   highlightSecondaryColor,
   size = 'lg',
@@ -148,9 +148,9 @@ const TitleView: React.FC<TitleProps> = ({
   // Common container props
   const containerProps = {
     ref,
-    as: 'h1' as const,
     animate: inView ? controlledAnimate : undefined,
     ...(!textComponent && {
+      as: 'h1' as const,
       fontSize: useResponsive ? undefined : fontSize,
       fontWeight: useResponsive ? responsiveStyles?.fontWeight : 'bold',
       letterSpacing: useResponsive
@@ -225,17 +225,23 @@ const TitleView: React.FC<TitleProps> = ({
     if (lastIndex < text.length) parts.push(text.substring(lastIndex));
 
     return (
-      <Element {...containerProps} {...views?.container} {...props}>
+      <Element
+        fontSize={useResponsive ? undefined : fontSize}
+        {...containerProps}
+        {...views?.container}
+        {...props}
+      >
         {parts.map((part, idx) =>
           typeof part === 'string' ? (
-            part
+            <TextComponent key={`text-${idx}`} as="span" display="inline">
+              {part}
+            </TextComponent>
           ) : (
             <TextComponent
               key={`highlight-${idx}`}
               as="span"
               display="inline"
               animate={inView ? controlledHighlightAnimate : undefined}
-              fontSize={useResponsive ? undefined : fontSize}
               {...(!highlightSlide ? highlightProps : {})}
               {...views?.highlight}
             >
@@ -250,10 +256,14 @@ const TitleView: React.FC<TitleProps> = ({
   // Case 2: Has highlight style but no highlight target - apply style to entire title
   if (highlightStyle && !activeHighlightTarget) {
     return (
-      <Element {...containerProps} {...views?.container} {...props}>
+      <Element
+        fontSize={fontSize}
+        {...containerProps}
+        {...props}
+        {...views?.container}
+      >
         <TextComponent
           as="span"
-          fontSize={fontSize}
           display="inline"
           animate={inView ? controlledHighlightAnimate : undefined}
           {...(!highlightSlide ? highlightProps : {})}
@@ -267,7 +277,7 @@ const TitleView: React.FC<TitleProps> = ({
 
   // Case 3: Default - no highlighting
   return (
-    <TextComponent {...containerProps} {...views?.container} {...props}>
+    <TextComponent {...containerProps} {...props} {...views?.container}>
       {text}
     </TextComponent>
   );

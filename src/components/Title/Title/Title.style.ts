@@ -128,4 +128,5 @@ export const HighlightStyles: Record<
     color: color,
     textShadow: `0 0 10px ${color}80, 0 0 20px ${color}40, 0 0 30px ${color}20`,
   }),
+  default: () => ({}),
 };

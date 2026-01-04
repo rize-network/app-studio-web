@@ -244,6 +244,81 @@ const TitlePage = () => {
           </Title>
         </View>
       </Section>
+
+      {/* 7. Text Component */}
+      <Section title="7. Text Component">
+        <View>
+          <UsageLabel>Custom Text Component</UsageLabel>
+          <Title
+            size="lg"
+            textComponent={(props: any) => (
+              <Text {...props} color="color.purple.500" fontStyle="italic" />
+            )}
+          >
+            This title uses a custom text component.
+          </Title>
+        </View>
+
+        <View marginTop={24}>
+          <UsageLabel>Custom Text with Animation</UsageLabel>
+          <Title
+            size="lg"
+            animate={{
+              from: { opacity: 0, transform: 'translateX(-50px)' },
+              to: { opacity: 1, transform: 'translateX(0px)' },
+              duration: '1000ms',
+            }}
+            textComponent={(props: any) => (
+              <Text {...props} color="color.orange.600" fontWeight={800} />
+            )}
+          >
+            Animated Custom Component
+          </Title>
+        </View>
+      </Section>
+
+      {/* 8. Text Component with Highlight Animation */}
+      <Section title="8. Text Component with Highlight Animation">
+        <View>
+          <UsageLabel>Typewriter with Custom Text</UsageLabel>
+          <Title
+            highlightText="code"
+            alternateHighlightText={['aaa', 'bbb', 'cccc']}
+            alternateAnimation={true}
+            highlightTypewriter={true}
+            highlightTypewriterDuration={2000}
+            highlightStyle="default"
+            textComponent={(props: any) => (
+              <Text {...props} fontFamily="monospace" color="color.green.500" />
+            )}
+          >
+            I love writing code.
+          </Title>
+        </View>
+
+        <View marginTop={24}>
+          <UsageLabel>Slide Effect with Custom Text</UsageLabel>
+          <Title
+            highlightText="Amazing"
+            alternateHighlightText={['Incredible', 'Fantastic']}
+            alternateAnimation={true}
+            highlightSlide={true}
+            fontSize={30}
+            highlightStyle="default"
+            textComponent={(props: any) => (
+              <Text
+                {...props}
+                color="color.blue.600"
+                fontWeight={900}
+                fontSize={24}
+                textTransform="uppercase"
+              />
+            )}
+          >
+            This is Amazing.
+          </Title>
+        </View>
+      </Section>
     </View>
   );
 };

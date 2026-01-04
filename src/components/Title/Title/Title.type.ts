@@ -8,7 +8,8 @@ export type HighlightStyle =
   | 'background' // Background color highlight
   | 'gradient' // Gradient background
   | 'outline' // Text with outline
-  | 'glow'; // Text with glow effect
+  | 'glow' // Text with glow effect
+  | 'default'; // Default style without special effects
 
 /**
  * Title size options
