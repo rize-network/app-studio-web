@@ -9,10 +9,10 @@ export const VariantButtons = () => (
     <Vertical gap={10}>
       <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Schemes</h3>
       <Vertical gap={5}>
-        <Button scheme="primary">Primary Scheme</Button>
-        <Button scheme="secondary">Secondary Scheme</Button>
-        <Button scheme="black">Black Scheme</Button>
-        <Button scheme="white">White Scheme</Button>
+        <Button scheme="theme.primary">Primary Scheme</Button>
+        <Button scheme="theme.secondary">Secondary Scheme</Button>
+        <Button scheme="color.black">Black Scheme</Button>
+        <Button scheme="color.white">White Scheme</Button>
       </Vertical>
     </Vertical>
 

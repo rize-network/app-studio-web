@@ -58,13 +58,13 @@ const ButtonContent: React.FC<{
       {isLoading && loaderPosition === 'left' && (
         <Loader
           size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
-          color={'currentColor'}
+          color={resolvedTextColor}
           {...views?.loader}
         />
       )}
 
       {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
-        <View color={'currentColor'} {...views?.icon}>
+        <View color={resolvedTextColor} {...views?.icon}>
           {icon}
         </View>
       )}
@@ -72,7 +72,7 @@ const ButtonContent: React.FC<{
       {children}
 
       {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
-        <View color={'currentColor'} {...views?.icon}>
+        <View color={resolvedTextColor} {...views?.icon}>
           {icon}
         </View>
       )}
@@ -80,7 +80,7 @@ const ButtonContent: React.FC<{
       {isLoading && loaderPosition === 'right' && (
         <Loader
           size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
-          color={'currentColor'}
+          color={resolvedTextColor}
           {...views?.loader}
         />
       )}
@@ -89,6 +89,121 @@ const ButtonContent: React.FC<{
 };
 
 // --- Animation Logic moved to StandardButton ---
+
+// --- Variant: Standard Button ---
+// --- Helpers ---
+
+// Helper to calculate numeric border radius
+const getNumericBorderRadius = (shape: string): number => {
+  const shapeValue = ButtonShapes[shape as keyof typeof ButtonShapes];
+  if (typeof shapeValue === 'number') return shapeValue;
+  if (typeof shapeValue === 'string') return parseInt(shapeValue, 10) || 0;
+  return 0;
+};
+
+// Common Inner Button Surface
+const InnerButton: React.FC<{
+  asComponent: any;
+  isDisabled?: boolean;
+  isLoading?: boolean;
+  isWrapped?: boolean;
+  borderRadius?: any;
+  width?: any;
+  height?: any;
+  baseStyles?: any;
+  sizeStyles?: any;
+  iconPad?: any;
+  mainTone?: string;
+  resolvedTextColor?: any;
+  children?: React.ReactNode;
+  borderWidth?: number;
+  [x: string]: any;
+}> = ({
+  asComponent,
+  isDisabled,
+  isLoading,
+  isWrapped = false,
+  borderRadius,
+  width,
+  height,
+  baseStyles,
+  sizeStyles,
+  iconPad,
+  mainTone,
+  resolvedTextColor,
+  children,
+  borderWidth = 0,
+  ...props
+}) => {
+  return (
+    <Element
+      as={asComponent}
+      disabled={Boolean(isDisabled || isLoading)}
+      display={isWrapped ? 'flex' : 'inline-flex'}
+      alignItems="center"
+      justifyContent="center"
+      borderRadius={borderRadius}
+      width={width}
+      height={height}
+      {...baseStyles}
+      {...sizeStyles}
+      {...iconPad}
+      // Ensure background is solid for wrapped buttons if baseStyles doesn't provide it
+      backgroundColor={
+        baseStyles?.backgroundColor || (isWrapped ? mainTone : undefined)
+      }
+      color={resolvedTextColor}
+      borderWidth={isWrapped ? 0 : undefined}
+      cursor={isDisabled ? 'default' : 'pointer'}
+      {...props}
+    >
+      {children}
+    </Element>
+  );
+};
+
+// Common Header for Border Animations
+const BorderWrapper: React.FC<{
+  shape: string;
+  isDisabled?: boolean;
+  onClick?: any;
+  shadow?: any;
+  borderWidth: number;
+  isAuto?: boolean;
+  isFilled?: boolean;
+  views?: any;
+  children: React.ReactNode;
+  [x: string]: any;
+}> = ({
+  shape,
+  isDisabled,
+  onClick,
+  shadow,
+  borderWidth,
+  isAuto,
+  isFilled,
+  views,
+  children,
+  ...props
+}) => (
+  <Element
+    as="div"
+    position="relative"
+    display="inline-flex"
+    alignItems="center"
+    justifyContent="center"
+    borderRadius={ButtonShapes[shape as keyof typeof ButtonShapes]}
+    cursor={isDisabled ? 'default' : 'pointer'}
+    onClick={onClick}
+    boxShadow={shadow}
+    padding={borderWidth}
+    width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+    {...views?.container}
+    {...props}
+  >
+    {children}
+  </Element>
+);
 
 // --- Variant: Standard Button ---
 const StandardButton: React.FC<
@@ -134,16 +249,7 @@ const StandardButton: React.FC<
   ...props
 }) => {
   // --- Common Helpers ---
-  const numericBorderRadius = (() => {
-    const shapeValue = ButtonShapes[shape];
-    if (typeof shapeValue === 'number') {
-      return shapeValue;
-    }
-    if (typeof shapeValue === 'string') {
-      return parseInt(shapeValue, 10) || 0;
-    }
-    return 0;
-  })();
+  const numericBorderRadius = getNumericBorderRadius(shape);
 
   const linkOrContent = to ? (
     <Link
@@ -160,6 +266,17 @@ const StandardButton: React.FC<
     content
   );
 
+  const innerProps = {
+    isDisabled,
+    isLoading,
+    baseStyles,
+    sizeStyles,
+    iconPad,
+    resolvedTextColor,
+    mainTone,
+    children: linkOrContent,
+  };
+
   // --- Animation: Border Moving ---
   if (animation === 'borderMoving' && borderMovingGradientColors) {
     const borderWidth = 3;
@@ -172,46 +289,29 @@ const StandardButton: React.FC<
     };
 
     return (
-      <Element
-        as="div" // Container is div, inner can be button if needed, or container handles events
-        position="relative"
-        display="inline-flex"
-        alignItems="center"
-        justifyContent="center"
-        borderRadius={ButtonShapes[shape]}
-        cursor={isDisabled ? 'default' : 'pointer'}
+      <BorderWrapper
+        shape={shape}
+        isDisabled={isDisabled}
         onClick={onClick}
-        boxShadow={shadow as any}
-        padding={borderWidth}
+        shadow={shadow}
+        borderWidth={borderWidth}
+        isAuto={isAuto}
+        isFilled={isFilled}
+        views={views}
         background={`linear-gradient(90deg, ${borderMovingGradientColors[0]}, ${borderMovingGradientColors[1]}, ${borderMovingGradientColors[2]}, ${borderMovingGradientColors[0]})`}
         backgroundSize="200% 100%"
         animate={borderAnimation}
-        width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
-        {...views?.container}
         {...props}
       >
-        <View
-          as={to ? 'div' : 'button'} // Inner element is the semantic button or div
-          disabled={Boolean(isDisabled || isLoading)}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
+        <InnerButton
+          asComponent={to ? 'div' : 'button'}
+          isWrapped={true}
           borderRadius={Math.max(0, numericBorderRadius - borderWidth)}
           width="100%"
           height="100%"
-          /* Merge baseStyles but ensure we override absolute sizing if necessary */
-          {...baseStyles}
-          {...sizeStyles}
-          {...iconPad}
-          // Ensure background covers the inner area
-          backgroundColor={baseStyles?.backgroundColor || mainTone}
-          color={resolvedTextColor}
-          borderWidth={0} // Handled by wrapper
-          cursor={isDisabled ? 'default' : 'pointer'}
-        >
-          {linkOrContent}
-        </View>
-      </Element>
+          {...innerProps}
+        />
+      </BorderWrapper>
     );
   }
 
@@ -255,7 +355,7 @@ const StandardButton: React.FC<
         alignItems="center"
         justifyContent="center"
         width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
-        borderRadius={ButtonShapes[shape]}
+        borderRadius={ButtonShapes[shape as keyof typeof ButtonShapes]}
         boxShadow={shadow as any}
         transition="all 0.2s ease"
         cursor={isDisabled ? 'default' : 'pointer'}
@@ -303,6 +403,103 @@ const StandardButton: React.FC<
         </View>
 
         <View position="relative" zIndex={0}>
+          {linkOrContent}
+        </View>
+      </Element>
+    );
+  }
+
+  // --- Animation: Border Reveal ---
+  if (animation === 'borderReveal') {
+    const borderWidth = 3;
+    // Use the first color from gradient colors or fall back to mainTone
+    const activeColor =
+      borderMovingGradientColors?.[0] || mainTone || '#000000';
+
+    // Sides duration
+    // The default duration (2s) is too slow for a hover interaction.
+    // We scale it by 0.25 to make it responsive (0.5s total).
+    const effectiveDuration = borderMovingDuration * 0.75;
+    const sideDuration = effectiveDuration / 4;
+
+    // Gradients for each side (color 50%, transparent 50%)
+    const topGrad = `linear-gradient(90deg, ${activeColor} 50%, transparent 50%)`;
+    const rightGrad = `linear-gradient(180deg, ${activeColor} 50%, transparent 50%)`;
+    const bottomGrad = `linear-gradient(270deg, ${activeColor} 50%, transparent 50%)`;
+    const leftGrad = `linear-gradient(0deg, ${activeColor} 50%, transparent 50%)`;
+
+    // Coordinates:
+    // Top (L->R): 100% 0 -> 0 0
+    // Right (T->B): 100% 100% -> 100% 0
+    // Bottom (R->L): 0 100% -> 100% 100%
+    // Left (B->T): 0 0 -> 0 100%
+    const bgPosStart = `100% 0, 100% 100%, 0 100%, 0 0`;
+    const bgPosEnd = `0 0, 100% 0, 100% 100%, 0 100%`;
+
+    // Delays:
+    // Enter (Forward): Top(0), Right(1), Bottom(2), Left(3)
+    const delayEnter = `0s, ${sideDuration}s, ${sideDuration * 2}s, ${
+      sideDuration * 2
+    }s`;
+    // Exit (Reverse): Top(3), Right(2), Bottom(1), Left(0)
+    const delayExit = `${sideDuration * 2}s, ${
+      sideDuration * 2
+    }s, ${sideDuration}s, 0s`;
+
+    // Use slightly larger gradient size to overlap with button content (avoid gaps)
+    const gradientSize = borderWidth + 1;
+
+    return (
+      <Element
+        as="div"
+        position="relative"
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
+        borderRadius={ButtonShapes[shape]}
+        cursor={isDisabled ? 'default' : 'pointer'}
+        onClick={onClick}
+        boxShadow={shadow as any}
+        padding={borderWidth}
+        background={`
+          ${topGrad} no-repeat,
+          ${rightGrad} no-repeat,
+          ${bottomGrad} no-repeat,
+          ${leftGrad} no-repeat
+        `}
+        backgroundSize={`200% ${gradientSize}px, ${gradientSize}px 200%, 200% ${gradientSize}px, ${gradientSize}px 200%`}
+        // Default State (Hidden)
+        backgroundPosition={bgPosStart}
+        transitionProperty="background-position"
+        transitionDuration={`${sideDuration}s`}
+        transitionTimingFunction="linear"
+        transitionDelay={delayExit}
+        // Hover State (Visible)
+        _hover={{
+          backgroundPosition: bgPosEnd,
+          transitionDelay: delayEnter,
+        }}
+        width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+        {...views?.container}
+        {...props}
+      >
+        <View
+          as={to ? 'div' : 'button'}
+          disabled={Boolean(isDisabled || isLoading)}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          borderRadius={Math.max(0, numericBorderRadius - borderWidth)}
+          width="100%"
+          height="100%"
+          {...baseStyles}
+          {...sizeStyles}
+          {...iconPad}
+          backgroundColor={baseStyles?.backgroundColor || mainTone}
+          color={resolvedTextColor}
+          borderWidth={0}
+          cursor={isDisabled ? 'default' : 'pointer'}
+        >
           {linkOrContent}
         </View>
       </Element>
@@ -365,7 +562,6 @@ const ButtonView: React.FC<ButtonProps> = ({
   shadow,
   onClick,
   views = {},
-  themeMode: elementMode,
   /* effect props */
   borderMovingDuration = 2,
   borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
@@ -374,36 +570,26 @@ const ButtonView: React.FC<ButtonProps> = ({
   ...props
 }) => {
   /* theme helpers */
-  const { getColor, themeMode } = useTheme();
-  const mode = elementMode ?? themeMode;
+  const { getColorHex, themeMode } = useTheme();
 
   /* MAIN COLOR – determines the entire palette */
-  let schemeColor: string | undefined;
-  if (scheme === 'primary') schemeColor = 'theme.primary';
-  else if (scheme === 'secondary') schemeColor = 'theme.secondary';
-  else if (scheme === 'black') schemeColor = 'color.black.900';
-  else if (scheme === 'white') schemeColor = 'color.white.100';
 
-  const mainColorKey =
-    backgroundColor ?? color ?? schemeColor ?? 'theme.primary';
-  const mainTone = getColor(isDisabled ? 'theme.disabled' : mainColorKey, {
-    themeMode: mode,
-  });
+  const mainColorKey = backgroundColor ?? color ?? scheme ?? 'theme.primary';
+  const mainTone = getColorHex(isDisabled ? 'theme.disabled' : mainColorKey);
   const tone = contrast(mainTone);
 
   /* text color with mixBlendMode for maximum visibility */
   let textColor: string;
-  if (scheme === 'white') {
+  if (tone === 'light') {
     textColor = '#000000';
   } else {
-    textColor = tone === 'light' ? '#000000' : '#FFFFFF';
+    textColor = '#FFFFFF';
   }
 
   /* variant palette */
   const palette = useMemo(
-    () =>
-      getButtonVariants(mainTone, tone === 'light', mode === 'light', reversed),
-    [mainTone, tone, mode, reversed]
+    () => getButtonVariants(mainTone, tone === 'light', reversed),
+    [mainTone, tone, reversed]
   );
   const base = palette[variant];
   const resolvedTextColor = (base?.color as string) ?? textColor;
@@ -454,7 +640,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       borderMovingGradientColors={borderMovingGradientColors}
       animatedStrokeAccentColor={animatedStrokeAccentColor}
       animatedStrokeTextColor={animatedStrokeTextColor}
-      getColor={getColor}
+      getColor={getColorHex}
       {...props}
     />
   );

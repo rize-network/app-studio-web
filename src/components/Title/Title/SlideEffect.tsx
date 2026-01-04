@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { Element, Text, Animation } from 'app-studio';
+import { Element, Text as DefaultText, Animation } from 'app-studio';
 
 interface SlideEffectProps {
   text: string;
@@ -10,7 +10,8 @@ interface SlideEffectProps {
   textStyle?: React.CSSProperties;
   as?: React.ElementType;
   wordProps?: any;
-  bgColor?: string;
+  backgroundColor?: string;
+  textComponent?: any;
   [key: string]: any;
 }
 
@@ -25,11 +26,14 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
   textStyle,
   as: _as,
   wordProps,
+  textComponent,
   ...props
 }) => {
   const [displayedText, setDisplayedText] = useState(text);
   const [phase, setPhase] = useState<AnimPhase>('entering');
   const [animKey, setAnimKey] = useState(0);
+
+  const TextComponent = textComponent || DefaultText;
 
   const pendingTextRef = useRef<string | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -199,7 +203,7 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
           };
 
           return (
-            <Text
+            <TextComponent
               key={`${animKey}-${index}`}
               as="span"
               animate={wordAnimation}
@@ -207,7 +211,7 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
               {...wordStyle}
             >
               {word}
-            </Text>
+            </TextComponent>
           );
         })}
       </span>

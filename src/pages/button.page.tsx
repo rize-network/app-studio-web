@@ -8,6 +8,7 @@ import {
   LoaderButtons,
   BorderMovingButtons,
   AnimatedStrokeButtons,
+  BorderRevealButtons,
   ShareButtons,
   SubtleButtons,
 } from 'src/components/Button/examples';
@@ -62,6 +63,7 @@ export const ButtonPage = () => {
           <View display="flex" flexDirection="column" gap={10}>
             <BorderMovingButtons />
             <AnimatedStrokeButtons />
+            <BorderRevealButtons />
           </View>
         </View>
 

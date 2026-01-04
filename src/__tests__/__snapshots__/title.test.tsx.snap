@@ -6,7 +6,7 @@ exports[`Title Component Title with animation loop should match snapshot 1`] = `
 >
   Animation 
   <span
-    bgColor=""
+    backgroundColor=""
     className="dy-inline pg-0-8px brs-4px"
   >
     Loop
@@ -20,7 +20,7 @@ exports[`Title Component Title with manual media queries should match snapshot 1
   className="fse-64px lht-72px fwt-bold tan-left mobile--fse-24px tablet--fse-32px desktop--fse-40px"
 >
   <span
-    bgColor=""
+    backgroundColor=""
     className="dy-inline pg-0-8px brs-4px"
   >
     Manual Media Title
@@ -33,7 +33,7 @@ exports[`Title Component Title with responsive prop should match snapshot 1`] = 
   className="lht-100 fwt-500 tan-left mobile--fse-32px tablet--fse-40px desktop--fse-48px"
 >
   <span
-    bgColor=""
+    backgroundColor=""
     className="dy-inline pg-0-8px brs-4px"
   >
     Responsive

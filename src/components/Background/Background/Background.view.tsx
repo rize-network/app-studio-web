@@ -12,6 +12,7 @@ import {
   BackgroundVideoProps,
   BackgroundGradientProps,
   BackgroundOverlayProps,
+  BackgroundLayoutProps,
 } from './Background.props';
 import {
   DefaultBackgroundStyles,
@@ -610,15 +611,15 @@ const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
   const getDefaultOverlay = () => {
     switch (contentPosition) {
       case 'left':
-        return 'radial-gradient(circle at 70% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%)';
+        return 'radial-gradient(circle at 80% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.2) 100%)';
       case 'right':
-        return 'radial-gradient(circle at 30% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%)';
+        return 'radial-gradient(circle at 20% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.2) 100%)';
       case 'top':
-        return 'radial-gradient(circle at 50% 80%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%)';
+        return 'radial-gradient(circle at 50% 80%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.1) 100%)';
       case 'bottom':
-        return 'radial-gradient(circle at 50% 80%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 100%)';
+        return 'radial-gradient(circle at 50% 80%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.1) 100%)';
       case 'center':
-        return 'radial-gradient(circle at 50% 90%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)';
+        return 'radial-gradient(circle at 50% 70%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)';
 
       default:
         return 'rgba(0,0,0,0.5)';
@@ -656,6 +657,7 @@ interface BackgroundViewComponent extends React.FC<BackgroundProps> {
   Video: React.FC<BackgroundVideoProps>;
   Gradient: React.FC<BackgroundGradientProps>;
   Overlay: React.FC<BackgroundOverlayProps>;
+  Layout: React.FC<BackgroundLayoutProps>;
 }
 
 const BackgroundViewBase: React.FC<BackgroundProps> = ({
@@ -676,6 +678,106 @@ const BackgroundViewBase: React.FC<BackgroundProps> = ({
   );
 };
 
+export const BackgroundLayout = React.forwardRef<
+  HTMLDivElement,
+  BackgroundLayoutProps
+>(
+  (
+    {
+      children,
+      designProps,
+      shape = 'rounded',
+      decorationRotation = 5,
+      decorationScale = 1,
+      decorationOpacity = 0.8,
+      views,
+      ...props
+    },
+    ref
+  ) => {
+    const getBorderRadius = (shape: string) => {
+      switch (shape) {
+        case 'square':
+          return '0px';
+        case 'pill':
+          return '9999px';
+        case 'rounded':
+        default:
+          return '16px';
+      }
+    };
+
+    const radius = getBorderRadius(shape);
+
+    // Calculate the extra space needed for the rotated/scaled decoration
+    // When rotated, corners extend beyond the original bounds
+    // Extra space ≈ sin(rotation) × dimension + (scale - 1) × dimension
+    const rotationRad = Math.abs(decorationRotation) * (Math.PI / 180);
+    const rotationOffset = Math.sin(rotationRad) * 100; // percentage-based estimate
+    const scaleOffset = ((decorationScale - 1) * 100) / 2;
+    const extraPadding = Math.ceil(rotationOffset + scaleOffset);
+
+    const backgroundColor = props.backgroundColor ?? 'theme.primary';
+
+    return (
+      <View
+        {...props}
+        ref={ref}
+        backgroundColor={'transparent'}
+        position="relative"
+        overflow="visible"
+        {...views?.container}
+      >
+        <View
+          padding={props.padding ?? `${96 + extraPadding}px ${extraPadding}px`}
+          position="relative"
+          overflow="visible"
+        >
+          <View
+            position="absolute"
+            top={extraPadding}
+            left={extraPadding}
+            right={extraPadding}
+            bottom={extraPadding}
+            backgroundColor={backgroundColor}
+            borderRadius={radius}
+            opacity={decorationOpacity / 1.5}
+            transform={`scale(${decorationScale})`}
+            pointerEvents="none"
+            zIndex={1}
+            {...views?.back}
+          />
+          <View
+            position="absolute"
+            top={extraPadding}
+            left={extraPadding}
+            right={extraPadding}
+            bottom={extraPadding}
+            transform={`rotate(${decorationRotation}deg) scale(${decorationScale})`}
+            opacity={decorationOpacity / 1.2}
+            backgroundColor={backgroundColor}
+            borderRadius={radius}
+            pointerEvents="none"
+            zIndex={2}
+            {...views?.front}
+          />
+          <View
+            margin="0 auto"
+            //width="100%"
+            position="relative"
+            zIndex={3}
+            {...views?.content}
+          >
+            {children}
+          </View>
+        </View>
+      </View>
+    );
+  }
+);
+
+BackgroundLayout.displayName = 'Background.Layout';
+
 // Create the compound component
 export const BackgroundView = BackgroundViewBase as BackgroundViewComponent;
 
@@ -690,3 +792,4 @@ BackgroundView.Image = BackgroundImage;
 BackgroundView.Video = BackgroundVideo;
 BackgroundView.Gradient = BackgroundGradient;
 BackgroundView.Overlay = BackgroundOverlay;
+BackgroundView.Layout = BackgroundLayout;

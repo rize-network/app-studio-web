@@ -98,7 +98,7 @@ export const MessageView = ({
         <Text
           size="md"
           weight="semiBold"
-          bgColor={Theme[variant].container.backgroundColor}
+          backgroundColor={Theme[variant].container.backgroundColor}
           {...views?.title}
         >
           {title}
@@ -106,7 +106,7 @@ export const MessageView = ({
         {subtitle && (
           <Text
             size="sm"
-            bgColor={Theme[variant].container.backgroundColor}
+            backgroundColor={Theme[variant].container.backgroundColor}
             {...views?.subtitle}
           >
             {subtitle}
@@ -119,7 +119,7 @@ export const MessageView = ({
           onClick={action}
           padding="6px 10px"
           whiteSpace="nowrap"
-          bgColor={Theme[variant].container.backgroundColor}
+          backgroundColor={Theme[variant].container.backgroundColor}
           {...containerStyle}
           {...views?.actionText}
         >

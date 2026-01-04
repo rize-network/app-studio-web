@@ -1,5 +1,5 @@
 import React from 'react';
-import { Vertical, Horizontal } from 'app-studio';
+import { Vertical, Horizontal, View } from 'app-studio';
 import { Background } from '../components/Background/Background';
 import { Text } from 'app-studio';
 
@@ -377,6 +377,51 @@ const BackgroundTestPage = () => {
             width={250}
           />
         </Horizontal>
+      </Vertical>
+
+      <Vertical gap={24}>
+        <Text fontSize={18} fontWeight="500">
+          Background Layout
+        </Text>
+        <Background.Layout>
+          <Vertical alignItems="center" gap={16} paddingTop={20}>
+            <Text
+              fontSize={32}
+              fontWeight="700"
+              color="#1e293b"
+              textAlign="center"
+            >
+              Background Layout
+            </Text>
+            <Text
+              fontSize={18}
+              color="#475569"
+              textAlign="center"
+              maxWidth={600}
+            >
+              This component now wraps content with a responsive container, a
+              decorative rotated styling element, and supports designProps.
+            </Text>
+            <Horizontal gap={16} marginTop={32}>
+              <View
+                backgroundColor="white"
+                padding={24}
+                borderRadius={12}
+                boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+              >
+                <Text fontWeight="600">Card 1</Text>
+              </View>
+              <View
+                backgroundColor="white"
+                padding={24}
+                borderRadius={12}
+                boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+              >
+                <Text fontWeight="600">Card 2</Text>
+              </View>
+            </Horizontal>
+          </Vertical>
+        </Background.Layout>
       </Vertical>
     </Vertical>
   );

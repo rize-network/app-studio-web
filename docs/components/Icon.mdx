@@ -1,22 +1,16 @@
 # Icon
 
-A comprehensive collection of SVG icons with consistent styling, customizable colors, sizes, and orientations. All icons are optimized for accessibility and performance, with support for filled and outlined variants.
+A comprehensive collection of SVG icons powered by [Lucide React](https://lucide.dev/), offering consistent styling, customizable colors, sizes, and orientations. All icons are optimized for accessibility and performance.
 
 ### **Import**
   ```tsx
-  import * as Icon from '@app-studio/web';
-  // Or import specific icons
-  import {
-    UploadIcon,
-    DownloadIcon,
-    EditIcon,
-    DeleteIcon,
-    CloseIcon,
-    CheckIcon
-  } from '@app-studio/web';
+  import { Icon, UploadIcon, EditIcon } from '@app-studio/web';
   ```
 
 ### **Basic Usage**
+
+You can use the named exports for common icons or the generic `Icon` component for any Lucide icon.
+
 ```tsx
 import React from 'react';
 import { UploadIcon, EditIcon, DeleteIcon } from '@app-studio/web';
@@ -28,6 +22,19 @@ export const BasicIcons = () => (
     <EditIcon widthHeight={24} />
     <DeleteIcon widthHeight={24} />
   </Horizontal>
+);
+```
+
+### **Dynamic Usage (All Lucide Icons)**
+
+Access any icon from the [Lucide library](https://lucide.dev/icons) using the `name` prop.
+
+```tsx
+import React from 'react';
+import { Icon } from '@app-studio/web';
+
+export const DynamicIcons = () => (
+  <Icon name="camera" widthHeight={24} color="color.primary.500" />
 );
 ```
 
@@ -65,26 +72,26 @@ export const IconColors = () => (
 );
 ```
 
-### **Filled vs Outlined**
+### **Icon Styles**
+Since we use Lucide, `filled` creates a solid style where applicable, but generally Lucide icons are line-art. The `filled` prop typically fills the path with the current color.
+
 ```tsx
 import React from 'react';
-import { StarIcon, HeartIcon, BookmarkIcon } from '@app-studio/web';
+import { StarIcon, HeartIcon } from '@app-studio/web';
 import { Horizontal, Vertical, Text } from '@app-studio/web';
 
 export const IconVariants = () => (
   <Vertical gap={16}>
-    <Text>Filled Icons</Text>
+    <Text>Filled Styles</Text>
     <Horizontal gap={16}>
       <StarIcon widthHeight={32} filled={true} color="color.yellow.500" />
       <HeartIcon widthHeight={32} filled={true} color="color.red.500" />
-      <BookmarkIcon widthHeight={32} filled={true} color="color.blue.500" />
     </Horizontal>
 
-    <Text>Outlined Icons</Text>
+    <Text>Line Styles</Text>
     <Horizontal gap={16}>
       <StarIcon widthHeight={32} filled={false} color="color.yellow.500" />
       <HeartIcon widthHeight={32} filled={false} color="color.red.500" />
-      <BookmarkIcon widthHeight={32} filled={false} color="color.blue.500" />
     </Horizontal>
   </Vertical>
 );
@@ -118,166 +125,121 @@ export const IconOrientations = () => (
 );
 ```
 
-### **Available Icons (complete list)**
+### **Available Pre-exported Icons**
 
-Below is the complete list of exported icons with short English descriptions. Use the "Icon Grid Display" example to preview them.
+We provide named exports for common icons for convenience and backward compatibility. For everything else, use `<Icon name="..." />`.
 
-- `ArrowIcon` — Directional arrow with orientation (up/right/down/left).
-- `AttachmentIcon` — Attach a file (paperclip).
-- `AudioIcon` — Speaker with sound waves (audio on).
-- `BatteryIcon` — Battery/energy status.
-- `BluetoothIcon` — Bluetooth logo, wireless connectivity.
-- `BoldArrowIcon` — Thick arrow for primary action.
-- `BookmarkIcon` — Bookmark / saved item.
-- `CalendarIcon` — Calendar / date / agenda.
-- `CameraIcon` — Camera / image capture.
-- `ChartIcon` — Document with lines, report/graph context.
-- `CheckIcon` — Validation / success (tick).
-- `ChevronIcon` — Chevron (navigation, expand/collapse).
-- `ClockIcon` — Clock / time / deadlines.
-- `CloseEyeIcon` — Eye-off, hide/mask content.
-- `CloseIcon` — Close / dismiss (cross).
-- `CloudIcon` — Cloud / storage / weather.
-- `CopyIcon` — Copy to clipboard.
-- `CropIcon` — Crop tool / image cropping.
-- `DeleteIcon` — Delete / trash.
-- `DocumentIcon` — Document/file with lines.
-- `DragHandleIcon` — Drag handle (grid of dots).
-- `DragHandleLinesIcon` — Drag handle (two lines).
-- `DustBinIcon` — Trash bin (alias of Delete).
-- `EditIcon` — Edit/modify (pencil).
-- `ErrorIcon` — Error / critical state.
-- `ExternalLinkIcon` — Open in new tab / external link.
-- `FacebookIcon` — Facebook social network.
-- `FileIcon` — Generic file.
-- `FilterIcon` — Filter / sort.
-- `FolderIcon` — Folder / directory.
-- `GiftIcon` — Gift / reward / promo.
-- `HeartIcon` — Like / favorite / love.
-- `HelpIcon` — Help / support / question mark.
-- `HomeIcon` — Home / main page.
-- `ImageIcon` — Image / media.
-- `InfoIcon` — Information / details.
-- `InstagramIcon` — Instagram social network.
-- `LikeIcon` — Thumbs up / like.
-- `LinkedinIcon` — LinkedIn social network.
-- `LoadingSpinnerIcon` — Loading / in progress.
-- `LocationIcon` — Location / pin.
-- `LockIcon` — Locked / secure.
-- `LogoutIcon` — Logout / sign out.
-- `MagicWandIcon` — Assistant / automation / magic.
-- `MenuIcon` — Hamburger menu.
-- `MicrophoneIcon` — Microphone / audio input.
-- `MinusIcon` — Minus / reduce / remove.
-- `MoonIcon` — Moon / dark mode / night.
-- `NotificationIcon` — Notifications / alert.
-- `OpenEyeIcon` — Eye-on, show/visibility.
-- `PanelIcon` — Layout with side panel.
-- `PauseIcon` — Pause media.
-- `PlayIcon` — Play media.
-- `PlusIcon` — Plus / add / create.
-- `PowerOffIcon` — Power / turn off.
-- `PrintIcon` — Print.
-- `ProfileIcon` — Profile / user.
-- `RefreshIcon` — Refresh / reload.
-- `RotateIcon` — Rotate / pivot.
-- `SaveIcon` — Save / persist.
-- `SearchIcon` — Search.
-- `SendIcon` — Send (paper plane).
-- `SettingsIcon` — Settings / configuration.
-- `ShapeIcon` — Shapes (rectangle/circle/polygon).
-- `ShieldIcon` — Shield / protection / security.
-- `SliderIcon` — Slider controls.
-- `SpinnerIcon` — Circular progress indicator.
-- `StarIcon` — Star / rating / favorite.
-- `StopIcon` — Stop media (square).
-- `SuccessIcon` — Success / validated (circle + tick).
-- `TextIcon` — Text / title.
-- `ThreadsIcon` — Threads social network.
-- `TickIcon` — Checkmark / validated.
-- `TrashIcon` — Trash (alias of Delete).
-- `TwitchIcon` — Twitch platform.
-- `TwitterIcon` — Twitter/X social network.
-- `UploadIcon` — Upload / send a file.
-- `UnLikeIcon` — Thumbs down / dislike.
-- `UnlockIcon` — Unlock / access.
-- `UserIcon` — User / account.
-- `VideoIcon` — Video / media.
-- `WifiIcon` — Wi‑Fi network.
-- `XIcon` — X social network.
-- `YoutubeIcon` — YouTube platform.
-- `ZoomInIcon` — Zoom in.
-- `ZoomOutIcon` — Zoom out.
-
-### **Icon Usage in Components**
-```tsx
-import React from 'react';
-import { Button } from '@app-studio/web';
-import { EditIcon, DeleteIcon, SaveIcon } from '@app-studio/web';
-import { Horizontal } from '@app-studio/web';
-
-export const IconButtons = () => (
-  <Horizontal gap={12}>
-    <Button
-      icon={<EditIcon widthHeight={16} />}
-      variant="outline"
-    >
-      Edit
-    </Button>
-    <Button
-      icon={<DeleteIcon widthHeight={16} />}
-      variant="outline"
-      colorScheme="theme.error"
-    >
-      Delete
-    </Button>
-    <Button
-      icon={<SaveIcon widthHeight={16} />}
-      variant="filled"
-      colorScheme="theme.primary"
-    >
-      Save
-    </Button>
-  </Horizontal>
-);
-```
-
-### **Custom Icon Styling**
-```tsx
-import React from 'react';
-import { StarIcon } from '@app-studio/web';
-import { View } from '@app-studio/web';
-
-export const CustomStyledIcon = () => (
-  <View>
-    <StarIcon
-      widthHeight={48}
-      color="color.yellow.400"
-      filled={true}
-      style={{
-        filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))',
-        transition: 'transform 0.2s ease',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'scale(1.1)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'scale(1)';
-      }}
-    />
-  </View>
-);
-```
+- `ArrowIcon` (arrow-up)
+- `AttachmentIcon` (paperclip)
+- `AudioIcon` (volume)
+- `BackIcon` (chevron-left)
+- `BatteryIcon` (battery)
+- `BluetoothIcon` (bluetooth)
+- `BoldArrowIcon` (arrow-right, approximate)
+- `BookmarkIcon` (bookmark)
+- `CalendarIcon` (calendar)
+- `CameraIcon` (camera)
+- `ChartIcon` (bar-chart)
+- `CheckIcon` (check)
+- `ChevronIcon` (chevron-up)
+- `ClockIcon` (clock)
+- `CloseEyeIcon` (eye-off)
+- `CloseIcon` (x)
+- `CloudIcon` (cloud)
+- `CopyIcon` (copy)
+- `CreditCardIcon` (credit-card)
+- `CropIcon` (crop)
+- `DeleteIcon` (trash)
+- `DocumentIcon` (file-text)
+- `DownloadIcon` (download)
+- `DragHandleIcon` (grip-vertical)
+- `DragHandleLinesIcon` (grip-horizontal)
+- `DustBinIcon` (trash)
+- `EditIcon` (edit)
+- `ErrorIcon` (alert-circle)
+- `ExternalLinkIcon` (external-link)
+- `FacebookIcon` (facebook)
+- `FileIcon` (file)
+- `FilterIcon` (filter)
+- `FolderIcon` (folder)
+- `GiftIcon` (gift)
+- `HeartIcon` (heart)
+- `HelpIcon` (circle-help)
+- `HomeIcon` (home)
+- `ImageIcon` (image)
+- `InfoIcon` (info)
+- `InstagramIcon` (instagram)
+- `LayoutIcon` (layout)
+- `LikeIcon` (thumbs-up)
+- `LinkIcon` (link)
+- `LinkedinIcon` (linkedin)
+- `LoadingSpinnerIcon` (loader)
+- `LocationIcon` (map-pin)
+- `LockIcon` (lock)
+- `LogoutIcon` (log-out)
+- `MagicWandIcon` (wand)
+- `MapPinIcon` (map-pin)
+- `MenuIcon` (menu)
+- `MicrophoneIcon` (mic)
+- `MinusIcon` (minus)
+- `MoonIcon` (moon)
+- `MoreHorizontalIcon` (more-horizontal)
+- `MoreVerticalIcon` (more-vertical)
+- `NotificationIcon` (bell)
+- `OpenEyeIcon` (eye)
+- `PanelIcon` (panel-left)
+- `PauseIcon` (pause)
+- `PlayIcon` (play)
+- `PlusIcon` (plus)
+- `PowerOffIcon` (power)
+- `PrintIcon` (printer)
+- `ProfileIcon` (user)
+- `RefreshIcon` (refresh-cw)
+- `RotateIcon` (rotate-cw)
+- `SaveIcon` (save)
+- `SearchIcon` (search)
+- `SendIcon` (send)
+- `SettingsIcon` (settings)
+- `ShapeIcon` (shapes)
+- `ShareIcon` (share)
+- `ShieldIcon` (shield)
+- `SliderIcon` (sliders-horizontal)
+- `SpinnerIcon` (loader)
+- `StarIcon` (star)
+- `StopIcon` (square)
+- `SuccessIcon` (check-circle)
+- `TextIcon` (type)
+- `ThreadsIcon` (at-sign)
+- `TickIcon` (check)
+- `TrashIcon` (trash)
+- `TwitchIcon` (twitch)
+- `TwitterIcon` (twitter)
+- `UnLikeIcon` (thumbs-down)
+- `UnlockIcon` (unlock)
+- `UploadIcon` (upload)
+- `UserIcon` (user)
+- `VideoIcon` (video)
+- `WarningIcon` (triangle-alert)
+- `WifiIcon` (wifi)
+- `XIcon` (x)
+- `YoutubeIcon` (youtube)
+- `ZapIcon` (zap)
+- `ZoomInIcon` (zoom-in)
+- `ZoomOutIcon` (zoom-out)
 
 ### **Props**
 
+The `Icon` component accepts the following props:
+
 | Prop | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
+| name | string | 'circle' | **Required for generic component.** The name of the Lucide icon to render (kebab-case). |
 | widthHeight | number | 24 | Size of the icon in pixels (sets both width and height) |
+| size | number | undefined | Alternative to widthHeight, consistent with Lucide props |
 | color | string | 'currentColor' | Color of the icon (supports theme colors) |
-| filled | boolean | varies by icon | Whether the icon should be filled or outlined |
-| strokeWidth | number | 1-2 | Stroke width for outlined icons |
-| orientation | `'left' \| 'right' \| 'up' \| 'down'` | 'up' | Orientation/rotation of the icon |
+| filled | boolean | false | Whether to fill the icon body with color. Note: applies to all line-art. |
+| strokeWidth | number | 1-2 | Stroke width for the icon lines |
+| orientation | `'left' \| 'right' \| 'up' \| 'down'` | 'up' | Rotates the icon |
 | transform | string | undefined | Custom CSS transform property |
 
 ### **IconWrapper Props**
@@ -289,74 +251,17 @@ All icons inherit from the base `IconWrapper` component which extends `ViewProps
 | className | string | CSS class name for styling |
 | style | CSSProperties | Inline styles |
 | onClick | function | Click event handler |
-| onMouseEnter | function | Mouse enter event handler |
-| onMouseLeave | function | Mouse leave event handler |
-| aria-label | string | Accessibility label |
-| role | string | ARIA role |
+| ... | ... | Standard HTML attributes |
 
-### **Responsive Icons**
+### **Custom Icons**
+
+You generally don't need to create custom wrappers anymore, as you can use `<Icon name="..." />` directly. However, if you want to create a named export for a generic Lucide icon:
+
 ```tsx
 import React from 'react';
-import { MenuIcon } from '@app-studio/web';
-import { useBreakpoint } from '@app-studio/web';
+import { Icon } from '@app-studio/web';
 
-export const ResponsiveIcon = () => {
-  const { isMobile, isTablet, isDesktop } = useBreakpoint();
-
-  const iconSize = isMobile ? 20 : isTablet ? 24 : 28;
-
-  return (
-    <MenuIcon
-      widthHeight={iconSize}
-      color="color.gray.700"
-    />
-  );
-};
-```
-
-### **Icon with Tooltip**
-```tsx
-import React from 'react';
-import { Tooltip } from '@app-studio/web';
-import { InfoIcon } from '@app-studio/web';
-
-export const IconWithTooltip = () => (
-  <Tooltip content="This provides additional information">
-    <InfoIcon
-      widthHeight={20}
-      color="color.blue.500"
-      style={{ cursor: 'help' }}
-    />
-  </Tooltip>
-);
-```
-
-### **Animated Icons**
-```tsx
-import React, { useState } from 'react';
-import { HeartIcon } from '@app-studio/web';
-import { View } from '@app-studio/web';
-
-export const AnimatedIcon = () => {
-  const [isLiked, setIsLiked] = useState(false);
-
-  return (
-    <View
-      onClick={() => setIsLiked(!isLiked)}
-      style={{ cursor: 'pointer' }}
-    >
-      <HeartIcon
-        widthHeight={32}
-        color={isLiked ? 'color.red.500' : 'color.gray.400'}
-        filled={isLiked}
-        style={{
-          transition: 'all 0.2s ease',
-          transform: isLiked ? 'scale(1.2)' : 'scale(1)',
-        }}
-      />
-    </View>
-  );
-};
+export const MyNewIcon = (props) => <Icon name="rocket" {...props} />;
 ```
 
 ### **Icon Grid Display**
@@ -387,7 +292,8 @@ export const IconGrid = () => {
             borderRadius={8}
             textAlign="center"
           >
-            <IconComponent widthHeight={24} color="color.gray.700" />
+            {/* Some icons might need specific props, generic render here */}
+             <IconComponent widthHeight={24} color="color.gray.700" />
             <Text fontSize={10} marginTop={4}>
               {iconName}
             </Text>
@@ -397,75 +303,4 @@ export const IconGrid = () => {
     </View>
   );
 };
-```
-
-### **Best Practices**
-
-**Sizing:**
-- Use consistent icon sizes within the same context
-- Standard sizes: 16px (small), 20px (medium), 24px (large), 32px+ (extra large)
-- Consider touch targets for interactive icons (minimum 44px)
-
-**Colors:**
-- Use semantic colors for status icons (red for errors, green for success)
-- Maintain sufficient contrast for accessibility
-- Use theme colors for consistency across your application
-
-**Accessibility:**
-- Provide `aria-label` for standalone icons
-- Use `role="img"` for decorative icons
-- Ensure icons are not the only way to convey information
-
-**Performance:**
-- Icons are SVG-based for crisp rendering at any size
-- Import only the icons you need to reduce bundle size
-- Consider icon sprites for large applications
-
-### **Customization**
-
-**Creating Custom Icons:**
-```tsx
-import React from 'react';
-import { IconWrapper, IconProps } from '@app-studio/web';
-
-export const CustomIcon: React.FC<IconProps> = ({
-  widthHeight = 24,
-  color = 'currentColor',
-  filled = true,
-  ...props
-}) => (
-  <IconWrapper widthHeight={widthHeight} color={color} {...props}>
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path
-        d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"
-        fill={filled ? color : 'none'}
-        stroke={filled ? 'none' : color}
-        strokeWidth={filled ? 0 : 2}
-      />
-    </svg>
-  </IconWrapper>
-);
-```
-
-### **Integration Examples**
-
-**With Navigation:**
-```tsx
-import React from 'react';
-import { NavigationMenu } from '@app-studio/web';
-import { HomeIcon, UserIcon, SettingsIcon } from '@app-studio/web';
-
-export const IconNavigation = () => (
-  <NavigationMenu>
-    <NavigationMenu.Item icon={<HomeIcon widthHeight={20} />}>
-      Home
-    </NavigationMenu.Item>
-    <NavigationMenu.Item icon={<UserIcon widthHeight={20} />}>
-      Profile
-    </NavigationMenu.Item>
-    <NavigationMenu.Item icon={<SettingsIcon widthHeight={20} />}>
-      Settings
-    </NavigationMenu.Item>
-  </NavigationMenu>
-);
 ```

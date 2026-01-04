@@ -65,6 +65,7 @@ const BackgroundComponent = React.forwardRef<HTMLDivElement, BackgroundProps>(
 BackgroundComponent.displayName = 'Background';
 
 export const Background = Object.assign(BackgroundComponent, {
+  Layout: BackgroundView.Layout,
   Aurora: BackgroundView.Aurora,
   Meteors: BackgroundView.Meteors,
   Wall: BackgroundView.Wall,

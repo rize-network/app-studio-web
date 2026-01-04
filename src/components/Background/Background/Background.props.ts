@@ -18,6 +18,20 @@ export interface BackgroundProps extends ViewProps {
     content?: ViewProps;
   };
   themeMode?: 'light' | 'dark';
+  shape?: 'square' | 'rounded' | 'pill';
+  decorationRotation?: number;
+  decorationScale?: number;
+  decorationOpacity?: number;
+}
+
+export interface BackgroundLayoutProps extends BackgroundProps {
+  shape?: 'square' | 'rounded' | 'pill';
+  views?: {
+    container?: ViewProps;
+    content?: ViewProps;
+    back?: ViewProps;
+    front?: ViewProps;
+  };
 }
 
 /**

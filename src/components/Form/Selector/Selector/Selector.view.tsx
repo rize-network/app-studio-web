@@ -57,7 +57,7 @@ const SelectorView: React.FC<SelectorViewProps> = ({
           const isSelected = value === option.value;
           let borderColor = getColor('color.gray.200');
           let textColor = getColor('color.gray.500');
-          let bgColor = 'transparent';
+          let backgroundColor = 'transparent';
 
           if (isSelected) {
             if (option.color) {
@@ -78,13 +78,13 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               // Simplification: if color provided, use it for border/text.
               // Background is hard to derive without more specific props.
               // Let's try to use a very light opacity of the color for background.
-              bgColor = 'rgba(0,0,0,0.05)'; // Generic active background
+              backgroundColor = 'rgba(0,0,0,0.05)'; // Generic active background
             } else {
               // Default active style
               const primary = getColor('theme.primary');
               borderColor = primary;
               textColor = primary;
-              bgColor = 'color.gray.50';
+              backgroundColor = 'color.gray.50';
             }
 
             // Specific overrides based on user request "ComplexitySelector" style
@@ -96,12 +96,12 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               // Fallback for customized options
               borderColor = getColor(option.color);
               textColor = getColor(option.color);
-              bgColor = 'transparent';
+              backgroundColor = 'transparent';
             } else {
               // Default fallback
               borderColor = getColor('theme.primary');
               textColor = getColor('theme.primary');
-              bgColor = 'transparent';
+              backgroundColor = 'transparent';
             }
           }
 
@@ -134,7 +134,7 @@ const SelectorView: React.FC<SelectorViewProps> = ({
                         isSelected ? borderColor : getColor('color.gray.200')
                       }`
                     : 'none',
-                backgroundColor: bgColor,
+                backgroundColor: backgroundColor,
                 color: textColor,
                 borderRadius:
                   index === 0

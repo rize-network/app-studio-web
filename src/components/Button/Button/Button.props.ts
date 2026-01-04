@@ -8,7 +8,6 @@ import {
   Variant,
   Animation,
   LoaderPosition,
-  ColorScheme,
   // Defines the types and structure required for the ButtonProps interface, used as a contract for Button component properties.
 } from './Button.type';
 // Optional React node(s) to be displayed as the button's content.
@@ -58,7 +57,7 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   color?: string;
 
   // Predefined color scheme for the button
-  scheme?: ColorScheme;
+  scheme?: string;
 
   // Whether to reverse the colors (useful for dark backgrounds)
   reversed?: boolean;

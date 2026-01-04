@@ -1,5 +1,5 @@
 import React from 'react';
-import { Element, useInView, Text, useTheme } from 'app-studio';
+import { Element, useInView, Text as DefaultText, useTheme } from 'app-studio';
 import { AnimationProps } from 'app-studio/dist/utils/constants';
 import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
@@ -35,6 +35,7 @@ const TitleView: React.FC<TitleProps> = ({
   highlightSlideStagger = 50,
   highlightSlideSequential = true,
   themeMode: elementMode,
+  textComponent,
   ...props
 }) => {
   const { ref, inView } = useInView();
@@ -102,6 +103,8 @@ const TitleView: React.FC<TitleProps> = ({
     ...props,
   });
 
+  const TextComponent = textComponent || DefaultText;
+
   // Common style calculations
   const useResponsive = responsive && !props.media;
   const fontSize = TitleSizes[size];
@@ -146,12 +149,16 @@ const TitleView: React.FC<TitleProps> = ({
   const containerProps = {
     ref,
     as: 'h1' as const,
-    fontSize: useResponsive ? undefined : fontSize,
-    fontWeight: useResponsive ? responsiveStyles?.fontWeight : 'bold',
-    letterSpacing: useResponsive ? responsiveStyles?.letterSpacing : undefined,
-    marginBottom: useResponsive ? responsiveStyles?.marginBottom : undefined,
     animate: inView ? controlledAnimate : undefined,
-    media: useResponsive ? responsiveStyles?.media : undefined,
+    ...(!textComponent && {
+      fontSize: useResponsive ? undefined : fontSize,
+      fontWeight: useResponsive ? responsiveStyles?.fontWeight : 'bold',
+      letterSpacing: useResponsive
+        ? responsiveStyles?.letterSpacing
+        : undefined,
+      marginBottom: useResponsive ? responsiveStyles?.marginBottom : undefined,
+      media: useResponsive ? responsiveStyles?.media : undefined,
+    }),
   };
 
   // Render highlighted text content (typewriter, slide, or plain)
@@ -170,8 +177,8 @@ const TitleView: React.FC<TitleProps> = ({
             30,
             highlightTypewriterDuration / (content.length * 10)
           )}
-          showCursor={true}
           cursorColor="currentColor"
+          textComponent={TextComponent}
           {...highlightProps}
         />
       );
@@ -187,6 +194,7 @@ const TitleView: React.FC<TitleProps> = ({
           fontSize={useResponsive ? undefined : fontSize}
           fontWeight={useResponsive ? responsiveStyles?.fontWeight : 'bold'}
           wordProps={highlightProps}
+          textComponent={TextComponent}
         />
       );
     }
@@ -222,7 +230,7 @@ const TitleView: React.FC<TitleProps> = ({
           typeof part === 'string' ? (
             part
           ) : (
-            <Text
+            <TextComponent
               key={`highlight-${idx}`}
               as="span"
               display="inline"
@@ -232,7 +240,7 @@ const TitleView: React.FC<TitleProps> = ({
               {...views?.highlight}
             >
               {renderHighlightedContent(part.text)}
-            </Text>
+            </TextComponent>
           )
         )}
       </Element>
@@ -243,7 +251,7 @@ const TitleView: React.FC<TitleProps> = ({
   if (highlightStyle && !activeHighlightTarget) {
     return (
       <Element {...containerProps} {...views?.container} {...props}>
-        <Text
+        <TextComponent
           as="span"
           fontSize={fontSize}
           display="inline"
@@ -252,16 +260,16 @@ const TitleView: React.FC<TitleProps> = ({
           {...views?.highlight}
         >
           {renderHighlightedContent(text)}
-        </Text>
+        </TextComponent>
       </Element>
     );
   }
 
   // Case 3: Default - no highlighting
   return (
-    <Text {...containerProps} {...views?.container} {...props}>
+    <TextComponent {...containerProps} {...views?.container} {...props}>
       {text}
-    </Text>
+    </TextComponent>
   );
 };
 

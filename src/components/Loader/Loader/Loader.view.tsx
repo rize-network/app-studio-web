@@ -162,6 +162,10 @@ const LoaderView: React.FC<Props> = ({
   views,
   ...props
 }) => {
+  const { getColor } = useTheme();
+  loaderColor = getColor(loaderColor || props.color || 'theme.loading');
+  textColor = getColor(textColor || props.color || 'theme.loading');
+
   const style = { size, speed, color: loaderColor };
 
   const variants = {

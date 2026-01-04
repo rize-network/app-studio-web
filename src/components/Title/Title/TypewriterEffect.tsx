@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from 'app-studio';
+import { Text as DefaultText } from 'app-studio';
 
 interface TypewriterEffectProps {
   text: string | string[];
@@ -10,6 +10,7 @@ interface TypewriterEffectProps {
   cursorColor?: string;
   textStyle?: React.CSSProperties;
   as?: React.ElementType;
+  textComponent?: any;
   [key: string]: any;
 }
 
@@ -24,9 +25,12 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
   showCursor = true,
   cursorColor = 'currentColor',
   textStyle,
+  textComponent,
   as,
   ...props
 }) => {
+  const TextComponent = textComponent || DefaultText;
+
   // Convert text to array if it's a string
   const textArray = Array.isArray(text) ? text : [text];
 
@@ -106,7 +110,7 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
         <React.Fragment key={index}>
           {text}
           {showCursor && index === currentTextIndex && !isComplete && (
-            <Text
+            <TextComponent
               as="span"
               display="inline-block"
               width="0.1em"

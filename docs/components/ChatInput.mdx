@@ -2,10 +2,34 @@
 
 A customizable chat input component with file upload support, mentions, suggestions, audio recording, and model selection.
 
-### **Import**
+## **Import**
 ```tsx
 import { ChatInput } from '@app-studio/web';
 ```
+
+## **Overview**
+
+The ChatInput component is a feature-rich, production-ready chat input with comprehensive file handling capabilities. It provides:
+
+- **File Upload Management**: Support for single and multiple file uploads with drag-and-drop
+- **Progress Tracking**: Real-time upload progress monitoring
+- **File Validation**: Built-in file size validation (50MB limit)
+- **Audio Recording**: Optional audio recording with automatic file conversion
+- **Mentions & Suggestions**: Auto-completion for mentions and suggestions
+- **Agent Integration**: Support for running agents with stop functionality
+- **Customizable Styling**: Flexible theming through the `views` prop
+- **Accessibility**: Keyboard shortcuts and screen reader support
+
+### **Key Features**
+
+1. **Automatic File Queue Management**: Files are automatically queued and uploaded sequentially
+2. **Drag-and-Drop Support**: Built-in drag-and-drop with visual feedback
+3. **File Attachments Display**: Uploaded files are displayed as removable attachments
+4. **Error Handling**: Comprehensive error handling with customizable error messages
+5. **Model Selection**: Support for AI model selection with thinking mode
+6. **Prompt Examples**: Display clickable prompt examples for quick input
+
+## **Basic Usage**
 
 ### **Default**
 ```tsx
@@ -24,6 +48,44 @@ export const DefaultChatInput = () => {
   );
 };
 ```
+
+## **Required Props**
+
+### **getPendingFiles**
+Function to retrieve the current list of pending files. This is required for the component to access files that are staged for upload.
+
+- **Type:** `() => File[]`
+- **Required:** `true`
+
+### **clearPendingFiles**
+Function to clear all pending files. This is typically called after a successful submission or when files need to be reset.
+
+- **Type:** `() => void`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const FileManagementExample = () => {
+  const [pendingFiles, setPendingFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      onSubmit={(message) => {
+        console.log('Message:', message);
+        console.log('Files:', pendingFiles);
+        // Clear files after submission
+        setPendingFiles([]);
+      }}
+      getPendingFiles={() => pendingFiles}
+      clearPendingFiles={() => setPendingFiles([])}
+    />
+  );
+};
+```
+
+## **Core Props**
 
 ### **onSubmit**
 Callback function when the form is submitted.
@@ -289,6 +351,247 @@ export const UploadErrorChatInput = () => {
 };
 ```
 
+## **File Upload Management**
+
+The ChatInput component provides comprehensive file upload capabilities with support for drag-and-drop, multiple file selection, progress tracking, and file validation. Here's how to properly manage file uploads:
+
+### **Complete File Upload Example**
+
+This example demonstrates the complete file upload workflow with all features:
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { UploadService } from 'src/services/api';
+
+export const CompleteFileUploadExample = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [error, setError] = useState<string>('');
+  
+  const uploadFileRequest = UploadService.useUploadControllerFileService({
+    onProgress: (progress) => {
+      setUploadProgress(progress);
+      console.log(`Upload progress: ${progress}%`);
+    },
+    onSuccess: (data) => {
+      console.log('Upload successful:', data);
+      setUploadProgress(0);
+      setError('');
+    },
+    onError: (err) => {
+      console.error('Upload failed:', err);
+      setError('Failed to upload file. Please try again.');
+      setUploadProgress(0);
+    },
+  });
+  
+  return (
+    <>
+      {error && <div style={{ color: 'red', marginBottom: 8 }}>{error}</div>}
+      {uploadProgress > 0 && (
+        <div style={{ marginBottom: 8 }}>
+          Upload Progress: {uploadProgress}%
+        </div>
+      )}
+      
+      <ChatInput 
+        onFileUpload={(file) => uploadFileRequest.run({ file })}
+        onUploadProgress={setUploadProgress}
+        onUploadSuccess={(data) => {
+          console.log('File uploaded:', data);
+          setError('');
+        }}
+        onUploadError={(err) => {
+          setError(err.message || 'Upload failed');
+        }}
+        onSubmit={(message) => {
+          console.log('Message:', message);
+          console.log('Attached files:', files);
+          setFiles([]);
+        }}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => setFiles([])}
+      />
+    </>
+  );
+};
+```
+
+### **Drag and Drop Support**
+
+The ChatInput component automatically supports drag-and-drop file uploads. Simply drag files over the input area:
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const DragDropExample = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      onFileUpload={(file) => {
+        console.log('File dropped:', file.name);
+        // Handle file upload
+      }}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+      // The component automatically handles drag-over visual feedback
+    />
+  );
+};
+```
+
+### **Multiple File Upload**
+
+The ChatInput supports uploading multiple files at once. Files are processed sequentially:
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const MultipleFilesExample = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  
+  const handleFileUpload = (file: File) => {
+    console.log('Uploading file:', file.name);
+    
+    // Simulate upload
+    setTimeout(() => {
+      setUploadedFiles(prev => [...prev, file]);
+      console.log('File uploaded successfully:', file.name);
+    }, 1000);
+  };
+  
+  return (
+    <div>
+      <div style={{ marginBottom: 8 }}>
+        Uploaded files: {uploadedFiles.length}
+      </div>
+      
+      <ChatInput 
+        onFileUpload={handleFileUpload}
+        onSubmit={(message) => {
+          console.log('Message:', message);
+          console.log('All files:', uploadedFiles);
+          setUploadedFiles([]);
+        }}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => setFiles([])}
+      />
+    </div>
+  );
+};
+```
+
+### **File Size Validation**
+
+The component includes built-in file size validation (50MB limit by default):
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const FileSizeValidationExample = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [error, setError] = useState<string>('');
+  
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
+  
+  return (
+    <>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      
+      <ChatInput 
+        onFileUpload={(file) => {
+          if (file.size > MAX_FILE_SIZE) {
+            setError(`File "${file.name}" exceeds 50MB limit`);
+            return;
+          }
+          
+          setError('');
+          console.log('Uploading file:', file.name);
+          // Proceed with upload
+        }}
+        onUploadError={(err) => {
+          setError('Upload failed: ' + err.message);
+        }}
+        onSubmit={(message) => console.log(message)}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => setFiles([])}
+      />
+    </>
+  );
+};
+```
+
+### **File Upload Lifecycle**
+
+Understanding the file upload lifecycle is crucial for proper implementation:
+
+1. **File Selection**: User selects files via button click or drag-and-drop
+2. **Validation**: Files are validated for size (50MB limit)
+3. **Queue**: Valid files are added to the upload queue
+4. **Upload**: Files are uploaded sequentially using `onFileUpload`
+5. **Progress**: `onUploadProgress` is called with progress updates (0-100)
+6. **Success/Error**: `onUploadSuccess` or `onUploadError` is called
+7. **Display**: Uploaded files are displayed as attachments in the input
+8. **Submission**: Files are included when the message is submitted
+9. **Cleanup**: Files are cleared using `clearPendingFiles`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const FileLifecycleExample = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploadStatus, setUploadStatus] = useState<string>('idle');
+  
+  return (
+    <>
+      <div>Status: {uploadStatus}</div>
+      
+      <ChatInput 
+        onFileUpload={(file) => {
+          setUploadStatus(`Uploading ${file.name}...`);
+          // Upload logic here
+        }}
+        onUploadProgress={(progress) => {
+          setUploadStatus(`Upload progress: ${progress}%`);
+        }}
+        onUploadSuccess={(data) => {
+          setUploadStatus('Upload complete!');
+          setTimeout(() => setUploadStatus('idle'), 2000);
+        }}
+        onUploadError={(error) => {
+          setUploadStatus(`Upload failed: ${error.message}`);
+        }}
+        onSubmit={(message) => {
+          console.log('Submitting with files:', files);
+          setFiles([]);
+          setUploadStatus('idle');
+        }}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => {
+          setFiles([]);
+          setUploadStatus('idle');
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **Removing Uploaded Files**
+
+Users can remove files before submission by clicking the remove button on each file attachment. The component handles this automatically.
+
+## **Other Props**
+
+
 ### **hideAttachments**
 Whether to hide the attachment button.
 
@@ -313,24 +616,27 @@ export const NoAttachmentsChatInput = () => {
 };
 ```
 
-### **enableAudioRecording**
-Enable audio recording button.
 
-- **Type:** `boolean`
-- **Default:** `false`
+### **sandboxId**
+ID of the sandbox environment for file uploads. Used when integrating with sandbox-based file systems.
+
+- **Type:** `string`
+- **Required:** `false`
 
 ```tsx
 import React, { useState } from 'react';
 import { ChatInput } from '@app-studio/web';
 
-export const AudioChatInput = () => {
+export const SandboxChatInput = () => {
   const [files, setFiles] = useState<File[]>([]);
   
   return (
     <ChatInput 
-      enableAudioRecording
-      onAudioRecordingStart={() => console.log('Recording started')}
-      onAudioRecordingStop={(audio) => console.log('Audio blob:', audio)}
+      sandboxId="my-sandbox-123"
+      onFileUpload={(file) => {
+        console.log('Uploading to sandbox:', file.name);
+        // File will be uploaded to the specified sandbox
+      }}
       onSubmit={(message) => console.log(message)}
       getPendingFiles={() => files}
       clearPendingFiles={() => setFiles([])}
@@ -338,6 +644,181 @@ export const AudioChatInput = () => {
   );
 };
 ```
+
+### **onFileBrowse**
+Callback function when the file browser is opened. Useful for tracking user interactions.
+
+- **Type:** `() => void`
+- **Required:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const FileBrowseChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      onFileBrowse={() => {
+        console.log('User opened file browser');
+        // Track analytics or perform other actions
+      }}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **autoFocus**
+Whether to automatically focus the input on mount.
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const AutoFocusChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <ChatInput 
+      autoFocus={false}
+      onSubmit={(message) => console.log(message)}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **errorMessage**
+Error message to display at the bottom of the input.
+
+- **Type:** `string`
+- **Required:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const ErrorMessageChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [error, setError] = useState<string>('');
+  
+  return (
+    <ChatInput 
+      errorMessage={error}
+      onSubmit={(message) => {
+        if (!message.trim()) {
+          setError('Message cannot be empty');
+          return;
+        }
+        setError('');
+        console.log(message);
+      }}
+      getPendingFiles={() => files}
+      clearPendingFiles={() => setFiles([])}
+    />
+  );
+};
+```
+
+### **shape**
+Shape of the input container.
+
+- **Type:** `Shape`
+- **Default:** `'rounded'`
+- **Possible Values:** `'rounded' | 'square'`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const ShapeChatInputs = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  
+  return (
+    <Vertical gap={15}>
+      <ChatInput 
+        shape="rounded"
+        onSubmit={(message) => console.log(message)}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => setFiles([])}
+      />
+      <ChatInput 
+        shape="square"
+        onSubmit={(message) => console.log(message)}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => setFiles([])}
+      />
+    </Vertical>
+  );
+};
+```
+
+### **enableAudioRecording**
+Enable audio recording button. When enabled, users can record audio which is automatically converted to a file and uploaded using the same file upload workflow.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+### **onAudioRecordingStart**
+Callback when audio recording starts.
+
+- **Type:** `() => void`
+- **Required:** `false`
+
+### **onAudioRecordingStop**
+Callback when audio recording stops. The recorded audio is provided as a Blob and is automatically added to the upload queue.
+
+- **Type:** `(audio: Blob) => void`
+- **Required:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/web';
+
+export const AudioChatInput = () => {
+  const [files, setFiles] = useState<File[]>([]);
+  const [isRecording, setIsRecording] = useState(false);
+  
+  return (
+    <>
+      {isRecording && <div>🎤 Recording...</div>}
+      
+      <ChatInput 
+        enableAudioRecording
+        onAudioRecordingStart={() => {
+          console.log('Recording started');
+          setIsRecording(true);
+        }}
+        onAudioRecordingStop={(audioBlob) => {
+          console.log('Recording stopped, audio blob:', audioBlob);
+          setIsRecording(false);
+          // The audio file is automatically added to the upload queue
+        }}
+        onFileUpload={(file) => {
+          console.log('Uploading file (could be audio):', file.name);
+          // Handle upload for both regular files and audio recordings
+        }}
+        onSubmit={(message) => {
+          console.log('Message:', message);
+          console.log('Files (including audio):', files);
+        }}
+        getPendingFiles={() => files}
+        clearPendingFiles={() => setFiles([])}
+      />
+    </>
+  );
+};
+```
+
 
 ### **suggestions**
 List of suggestions for auto-completion.

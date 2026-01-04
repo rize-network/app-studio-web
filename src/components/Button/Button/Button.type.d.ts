@@ -20,5 +20,5 @@ export type Variant =
   | 'link'
   | 'subtle';
 
-export type Animation = 'borderMoving' | 'animatedStroke';
+export type Animation = 'borderMoving' | 'animatedStroke' | 'borderReveal';
 // Declares a type 'Variant' used for styling components where each value—'filled', 'outline', 'link', 'ghost'—likely describes a visual style or theme, and 'borderMoving', 'animatedStroke' are special effect variants.
