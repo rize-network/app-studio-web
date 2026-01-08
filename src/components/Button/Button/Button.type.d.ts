@@ -1,7 +1,7 @@
 export type BorderWeights = 'light' | 'normal' | 'bold' | 'extrabold' | 'black';
 // Defines a TypeScript type 'BorderWeights' that allows for any of these string literal values: 'light', 'normal', 'bold', 'extrabold', or 'black' to represent the weight (thickness) of borders.
-export type Shape = 'sharp' | 'rounded' | 'pillShaped';
-// Defines a TypeScript type 'Shape' which can be one of these string literals: 'sharp', 'rounded', or 'pillShaped', likely representing the shape of UI elements like buttons.
+export type Shape = 'square' | 'rounded' | 'pill';
+// Defines a TypeScript type 'Shape' which can be one of these string literals: 'square', 'rounded', or 'pill', likely representing the shape of UI elements like buttons.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Creates a TypeScript type 'Size' for standardized size categories such as 'xs' for extra-small, 'sm' for small, 'md' for medium, 'lg' for large, or 'xl' for extra-large.
 export type Loaders = 'spinner' | 'points' | 'points-opacity';

@@ -245,76 +245,55 @@ const TitlePage = () => {
         </View>
       </Section>
 
-      {/* 7. Text Component */}
-      <Section title="7. Text Component">
+      {/* 9. Multi-line Strings */}
+      <Section title="9. Multi-line Strings">
         <View>
-          <UsageLabel>Custom Text Component</UsageLabel>
+          <UsageLabel>Using Pipe (|) for Line Breaks</UsageLabel>
           <Title
             size="lg"
-            textComponent={(props: any) => (
-              <Text {...props} color="color.purple.500" fontStyle="italic" />
-            )}
+            highlightStyle="gradient"
+            highlightColor="theme.primary"
+            highlightSecondaryColor="theme.secondary"
           >
-            This title uses a custom text component.
+            First Line | Second Line | Third Line
           </Title>
         </View>
 
         <View marginTop={24}>
-          <UsageLabel>Custom Text with Animation</UsageLabel>
+          <UsageLabel>With Highlighted Text</UsageLabel>
           <Title
-            size="lg"
-            animate={{
-              from: { opacity: 0, transform: 'translateX(-50px)' },
-              to: { opacity: 1, transform: 'translateX(0px)' },
-              duration: '1000ms',
-            }}
-            textComponent={(props: any) => (
-              <Text {...props} color="color.orange.600" fontWeight={800} />
-            )}
+            highlightText="Line"
+            highlightStyle="background"
+            highlightColor="color.orange.500"
           >
-            Animated Custom Component
+            First Line | Second Line
           </Title>
         </View>
-      </Section>
 
-      {/* 8. Text Component with Highlight Animation */}
-      <Section title="8. Text Component with Highlight Animation">
-        <View>
-          <UsageLabel>Typewriter with Custom Text</UsageLabel>
+        <View marginTop={24}>
+          <UsageLabel>With Typewriter Animation (Partial)</UsageLabel>
           <Title
-            highlightText="code"
-            alternateHighlightText={['aaa', 'bbb', 'cccc']}
-            alternateAnimation={true}
             highlightTypewriter={true}
             highlightTypewriterDuration={2000}
-            highlightStyle="default"
-            textComponent={(props: any) => (
-              <Text {...props} fontFamily="monospace" color="color.green.500" />
-            )}
+            highlightText="Second Line"
+            highlightStyle="gradient"
+            highlightColor="theme.primary"
+            highlightSecondaryColor="theme.secondary"
           >
-            I love writing code.
+            First Line | Second Line
           </Title>
         </View>
 
         <View marginTop={24}>
-          <UsageLabel>Slide Effect with Custom Text</UsageLabel>
+          <UsageLabel>With Slide Animation (Partial)</UsageLabel>
           <Title
-            highlightText="Amazing"
-            alternateHighlightText={['Incredible', 'Fantastic']}
-            alternateAnimation={true}
             highlightSlide={true}
-            highlightStyle="default"
-            textComponent={(props: any) => (
-              <Text
-                {...props}
-                color="color.blue.600"
-                fontWeight={900}
-                fontSize={24}
-                textTransform="uppercase"
-              />
-            )}
+            highlightSlideDuration={500}
+            highlightText="Second Line"
+            highlightStyle="background"
+            highlightColor="color.blue.500"
           >
-            This is Amazing.
+            First Line | Second Line
           </Title>
         </View>
       </Section>

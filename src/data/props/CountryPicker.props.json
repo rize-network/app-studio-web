@@ -46,9 +46,9 @@
     "type": "Shape",
     "typeValues": [
       "'default'",
-      "'sharp'",
+      "'square'",
       "'rounded'",
-      "'pillShaped'"
+      "'pill'"
     ],
     "description": "Optional shape of the CountryPicker for visual styles",
     "defaultValue": "'default'"

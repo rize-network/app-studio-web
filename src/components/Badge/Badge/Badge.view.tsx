@@ -21,7 +21,7 @@ import { Text } from 'app-studio';
 const BadgeView: React.FC<BadgeProps> = ({
   content,
   position,
-  shape = 'pillShaped',
+  shape = 'pill',
   variant = 'filled',
   size = 'md',
   views,

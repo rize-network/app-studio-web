@@ -1,460 +1,143 @@
 # ProgressBar
 
-A progress bar component for displaying progress or completion status with customizable colors, height, and styling.
+A progress bar component for displaying progress or completion status with customizable colors, shapes (linear or circular), and styling.
 
 ### **Import**
 ```tsx
 import { ProgressBar } from '@app-studio/web';
 ```
 
-### **Default**
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-
-export const DefaultProgressBar = () => (
-  <ProgressBar value={50} />
-);
-```
-
-### **value**
-Current progress value.
-
-- **Type:** `number`
-- **Default:** `0`
-
+### **Linear Progress (Default)**
 ```tsx
 import React from 'react';
 import { ProgressBar } from '@app-studio/web';
 import { Vertical } from 'app-studio';
 
-export const ProgressValues = () => (
-  <Vertical gap={15}>
-    <ProgressBar value={0} />
-    <ProgressBar value={25} />
-    <ProgressBar value={50} />
-    <ProgressBar value={75} />
-    <ProgressBar value={100} />
+export const LinearExamples = () => (
+  <Vertical gap={20}>
+    <ProgressBar value={30} />
+    <ProgressBar value={60} color="color.blue.500" height={8} radius={4} />
+    <ProgressBar value={90} color="color.green.500" height={12} radius={6} />
   </Vertical>
 );
 ```
 
-### **max**
-Maximum progress value.
-
-- **Type:** `number`
-- **Default:** `100`
+### **Circular Progress**
+Display progress in a circular format.
 
 ```tsx
 import React from 'react';
 import { ProgressBar } from '@app-studio/web';
-import { Vertical, Text } from 'app-studio';
+import { Horizontal } from 'app-studio';
 
-export const CustomMaxProgressBar = () => (
-  <Vertical gap={10}>
-    <Text>Progress: 30 out of 200</Text>
-    <ProgressBar value={30} max={200} />
-  </Vertical>
-);
-```
-
-### **color**
-Color of the filled portion.
-
-- **Type:** `string`
-
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-import { Vertical } from 'app-studio';
-
-export const ColoredProgressBars = () => (
-  <Vertical gap={15}>
-    <ProgressBar value={60} color="color.blue.500" />
-    <ProgressBar value={60} color="color.emerald.500" />
-    <ProgressBar value={60} color="color.red.500" />
-    <ProgressBar value={60} color="color.amber.500" />
-    <ProgressBar value={60} color="color.violet.500" />
-  </Vertical>
-);
-```
-
-### **backgroundColor**
-Background color of the track.
-
-- **Type:** `string`
-
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-import { Vertical } from 'app-studio';
-
-export const BackgroundColorProgressBars = () => (
-  <Vertical gap={15}>
+export const CircularExamples = () => (
+  <Horizontal gap={30}>
     <ProgressBar 
-      value={60} 
-      color="color.blue.500" 
-      backgroundColor="color.blue.100" 
+      shape="circle" 
+      value={45} 
+      size={60} 
     />
     <ProgressBar 
-      value={60} 
-      color="color.emerald.500" 
-      backgroundColor="color.emerald.100" 
+      shape="circle" 
+      value={75} 
+      size={80} 
+      color="color.purple.500" 
+      strokeWidth={8}
+      showLabel 
     />
     <ProgressBar 
-      value={60} 
-      color="color.red.500" 
-      backgroundColor="color.red.100" 
+      shape="circle" 
+      value={90} 
+      size={100} 
+      color="color.orange.500" 
+      strokeWidth={10} 
+      backgroundColor="color.orange.100"
+      showLabel
+      labelColor="color.orange.700"
     />
-  </Vertical>
+  </Horizontal>
 );
 ```
 
-### **height**
-Height of the progress bar.
+### **Props**
 
-- **Type:** `number | string`
+#### **Common Props**
+- **value** (`number`): Current progress value (default: 0).
+- **max** (`number`): Maximum progress value (default: 100).
+- **color** (`string`): Color of the filled portion.
+- **backgroundColor** (`string`): Background color of the track.
+- **animated** (`boolean`): Whether to animate the progress change (default: true).
+- **animationDuration** (`string`): Duration of the animation (e.g., '0.5s').
+- **views** (`ProgressBarStyles`): Custom styles object.
 
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-import { Vertical } from 'app-studio';
+#### **Linear Props**
+- **height** (`number | string`): Height of the bar.
+- **radius** (`number | string`): Border radius for rounded corners.
 
-export const HeightProgressBars = () => (
-  <Vertical gap={15}>
-    <ProgressBar value={60} height={4} />
-    <ProgressBar value={60} height={8} />
-    <ProgressBar value={60} height={12} />
-    <ProgressBar value={60} height={20} />
-  </Vertical>
-);
-```
+#### **Circular Props (shape="circle")**
+- **size** (`number`): Diameter of the circle.
+- **strokeWidth** (`number`): Width of the progress stroke.
+- **showLabel** (`boolean`): Whether to show the percentage label in the center.
+- **labelColor** (`string`): Color of the label text.
 
-### **radius**
-Border radius for rounded corners.
-
-- **Type:** `number | string`
-
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-import { Vertical } from 'app-studio';
-
-export const RadiusProgressBars = () => (
-  <Vertical gap={15}>
-    <ProgressBar value={60} height={12} radius={0} />
-    <ProgressBar value={60} height={12} radius={4} />
-    <ProgressBar value={60} height={12} radius={8} />
-    <ProgressBar value={60} height={12} radius={20} />
-  </Vertical>
-);
-```
-
-### **views**
-Custom styles for container or bar.
-
-- **Type:** `{ container?: ViewProps; bar?: ViewProps }`
-
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-
-export const StyledProgressBar = () => (
-  <ProgressBar 
-    value={60}
-    views={{
-      container: {
-        borderWidth: 2,
-        borderColor: '#3b82f6',
-        padding: 2,
-      },
-      bar: {
-        background: 'linear-gradient(90deg, #3b82f6, #8b5cf6)',
-      }
-    }}
-  />
-);
-```
-
-### **Animated Progress**
-Progress bar with smooth animation.
-
+### **Animated & Dynamic**
 ```tsx
 import React, { useState, useEffect } from 'react';
 import { ProgressBar } from '@app-studio/web';
-import { Vertical, Text } from 'app-studio';
+import { Vertical, Button, Text } from 'app-studio';
 
-export const AnimatedProgressBar = () => {
+export const DynamicProgress = () => {
   const [progress, setProgress] = useState(0);
-  
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) return 0;
-        return prev + 1;
-      });
-    }, 50);
-    
-    return () => clearInterval(interval);
+    const timer = setInterval(() => {
+      setProgress((prev) => (prev >= 100 ? 0 : prev + 10));
+    }, 800);
+    return () => clearInterval(timer);
   }, []);
-  
-  return (
-    <Vertical gap={10}>
-      <Text>{progress}%</Text>
-      <ProgressBar value={progress} />
-    </Vertical>
-  );
-};
-```
 
-### **File Upload Progress**
-Progress bar for file upload.
-
-```tsx
-import React, { useState } from 'react';
-import { ProgressBar } from '@app-studio/web';
-import { Vertical, Text, Button } from 'app-studio';
-
-export const FileUploadProgress = () => {
-  const [progress, setProgress] = useState(0);
-  const [uploading, setUploading] = useState(false);
-  
-  const simulateUpload = () => {
-    setUploading(true);
-    setProgress(0);
-    
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setUploading(false);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
-  };
-  
-  return (
-    <Vertical gap={15}>
-      <Button onClick={simulateUpload} isDisabled={uploading}>
-        Upload File
-      </Button>
-      
-      {uploading && (
-        <Vertical gap={5}>
-          <Text fontSize={14}>Uploading... {progress}%</Text>
-          <ProgressBar 
-            value={progress} 
-            color="color.emerald.500"
-            height={8}
-          />
-        </Vertical>
-      )}
-    </Vertical>
-  );
-};
-```
-
-### **Multi-Step Progress**
-Progress bar for multi-step processes.
-
-```tsx
-import React, { useState } from 'react';
-import { ProgressBar } from '@app-studio/web';
-import { Vertical, Horizontal, Text, Button } from 'app-studio';
-
-export const MultiStepProgress = () => {
-  const [step, setStep] = useState(1);
-  const totalSteps = 4;
-  const progress = (step / totalSteps) * 100;
-  
   return (
     <Vertical gap={20}>
-      <Vertical gap={10}>
-        <Text>Step {step} of {totalSteps}</Text>
-        <ProgressBar 
-          value={progress} 
-          color="color.blue.500"
-          height={10}
-        />
-      </Vertical>
+      <Text>Uploading... {progress}%</Text>
+      <ProgressBar value={progress} color="color.blue.600" animated />
       
-      <Horizontal gap={10}>
-        <Button 
-          onClick={() => setStep(Math.max(1, step - 1))}
-          isDisabled={step === 1}
-        >
-          Previous
-        </Button>
-        <Button 
-          onClick={() => setStep(Math.min(totalSteps, step + 1))}
-          isDisabled={step === totalSteps}
-        >
-          Next
-        </Button>
+      <Horizontal gap={20} marginTop={20}>
+        <ProgressBar 
+          shape="circle" 
+          value={progress} 
+          size={50} 
+          showLabel 
+          color="color.blue.600" 
+        />
       </Horizontal>
     </Vertical>
   );
 };
 ```
 
-### **Gradient Progress Bar**
-Progress bar with gradient fill.
+### **Custom Styling (Views)**
+Customize internal parts using the `views` prop.
 
 ```tsx
 import React from 'react';
 import { ProgressBar } from '@app-studio/web';
 
-export const GradientProgressBar = () => (
+export const CustomStyle = () => (
   <ProgressBar 
-    value={70}
-    height={16}
-    radius={8}
-    views={{
-      bar: {
-        background: 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
-      }
-    }}
-  />
-);
-```
-
-### **Striped Progress Bar**
-Progress bar with striped pattern.
-
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-
-export const StripedProgressBar = () => (
-  <ProgressBar 
-    value={65}
+    value={70} 
     height={20}
-    radius={10}
     views={{
-      bar: {
-        background: `
-          repeating-linear-gradient(
-            45deg,
-            #3b82f6,
-            #3b82f6 10px,
-            #60a5fa 10px,
-            #60a5fa 20px
-          )
-        `,
+      container: { 
+        borderColor: 'color.gray.300', 
+        borderWidth: 1, 
+        padding: 2, 
+        borderRadius: 12 
+      },
+      bar: { 
+        borderRadius: 10,
+        background: 'linear-gradient(90deg, #FF5C97, #705CFF)' 
       }
-    }}
+    }} 
   />
 );
 ```
-
-### **Status-Based Progress**
-Different colors based on progress value.
-
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-import { Vertical, Text } from 'app-studio';
-
-export const StatusProgressBars = () => {
-  const getColor = (value: number) => {
-    if (value < 30) return '#ef4444'; // Red
-    if (value < 70) return '#f59e0b'; // Orange
-    return '#10b981'; // Green
-  };
-  
-  return (
-    <Vertical gap={15}>
-      {[20, 50, 90].map((value) => (
-        <Vertical key={value} gap={5}>
-          <Text>{value}%</Text>
-          <ProgressBar 
-            value={value} 
-            color={getColor(value)}
-            height={10}
-          />
-        </Vertical>
-      ))}
-    </Vertical>
-  );
-};
-```
-
-### **Loading Progress**
-Indeterminate loading state.
-
-```tsx
-import React from 'react';
-import { ProgressBar } from '@app-studio/web';
-
-export const LoadingProgressBar = () => (
-  <ProgressBar 
-    value={100}
-    height={4}
-    views={{
-      bar: {
-        animation: 'progress-loading 1.5s ease-in-out infinite',
-        background: 'linear-gradient(90deg, transparent, #3b82f6, transparent)',
-      }
-    }}
-  />
-);
-```
-
-### **Complete Example**
-A comprehensive progress tracking example.
-
-```tsx
-import React, { useState, useEffect } from 'react';
-import { ProgressBar } from '@app-studio/web';
-import { Vertical, Horizontal, Text, Button, Card } from 'app-studio';
-
-export const CompleteProgressExample = () => {
-  const [tasks, setTasks] = useState([
-    { id: 1, name: 'Design', progress: 100, color: '#10b981' },
-    { id: 2, name: 'Development', progress: 65, color: '#3b82f6' },
-    { id: 3, name: 'Testing', progress: 30, color: '#f59e0b' },
-    { id: 4, name: 'Deployment', progress: 0, color: '#6b7280' },
-  ]);
-  
-  const overallProgress = tasks.reduce((sum, task) => sum + task.progress, 0) / tasks.length;
-  
-  return (
-    <Card padding={20}>
-      <Vertical gap={20}>
-        <Vertical gap={10}>
-          <Horizontal justifyContent="space-between">
-            <Text fontSize={18} fontWeight="bold">Project Progress</Text>
-            <Text fontSize={18} fontWeight="bold">{Math.round(overallProgress)}%</Text>
-          </Horizontal>
-          <ProgressBar 
-            value={overallProgress} 
-            color="color.blue.500"
-            height={12}
-            radius={6}
-          />
-        </Vertical>
-        
-        <Vertical gap={15}>
-          {tasks.map((task) => (
-            <Vertical key={task.id} gap={5}>
-              <Horizontal justifyContent="space-between">
-                <Text fontSize={14}>{task.name}</Text>
-                <Text fontSize={14}>{task.progress}%</Text>
-              </Horizontal>
-              <ProgressBar 
-                value={task.progress} 
-                color={task.color}
-                height={8}
-                radius={4}
-              />
-            </Vertical>
-          ))}
-        </Vertical>
-      </Vertical>
-    </Card>
-  );
-};
-```
-

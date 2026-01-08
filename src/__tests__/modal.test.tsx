@@ -14,7 +14,7 @@ test('Modal to match snapshot', () => {
         isFullScreen
       >
         <Modal.Container
-          variant="sharp"
+          variant="square"
           shadow={{ boxShadow: 'none' }}
           isClosePrevented
         >

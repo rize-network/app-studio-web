@@ -184,7 +184,7 @@
     "type": "string",
     "typeValues": [
       "default",
-      "sharp",
+      "square",
       "rounded"
     ],
     "description": "Shape of the input",

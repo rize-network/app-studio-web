@@ -31,6 +31,6 @@ export type Country = {
 // Defines a type for specifying size categories (e.g., for buttons or form elements).
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Defines a type for specifying shape categories (affects the border-radius of elements).
-export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'default' | 'square' | 'rounded' | 'pill';
 // Defines a type for specifying variant types (e.g., for button styles).
 export type Variant = 'default' | 'outline' | 'none';

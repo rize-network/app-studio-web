@@ -21,10 +21,10 @@
   "shape": {
     "type": "Shape",
     "typeValues": [
-      "sharp",
+      "square",
       "rounded"
     ],
-    "description": "Determines whether the modal should have sharp or rounded edges.",
+    "description": "Determines whether the modal should have square or rounded edges.",
     "defaultValue": "rounded"
   },
   "isFullScreen": {

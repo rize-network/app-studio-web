@@ -72,9 +72,9 @@ export const BadgeSizes: Record<Size, ViewProps> = {
  * Badge shapes with consistent border radius
  */
 export const BadgeShapes: Record<Shape, number | string> = {
-  sharp: 0,
+  square: 0,
   rounded: '8px', // Consistent with design system (rounded-md)
-  pillShaped: '9999px', // Full rounded for pill shape
+  pill: '9999px', // Full rounded for pill shape
 };
 
 /**

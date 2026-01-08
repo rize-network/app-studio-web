@@ -31,9 +31,9 @@ export const CardSizes: Record<Size, ViewProps> = {
  * Card shapes with consistent border radius
  */
 export const CardShapes: Record<Shape, number | string> = {
-  sharp: 0,
+  square: 0,
   rounded: '8px', // Consistent with design system (rounded-md)
-  pillShaped: '16px', // Larger radius for pill-shaped cards
+  pill: '24px', // Larger radius for pill-shaped cards
 };
 
 /**
@@ -42,101 +42,72 @@ export const CardShapes: Record<Shape, number | string> = {
 export const getCardVariants = (
   themeMode: string
 ): Record<Variant, ViewProps> => {
+  const isDark = themeMode === 'dark';
+
   return {
     default: {
-      backgroundColor: 'color.white',
+      backgroundColor: isDark ? 'color.gray.900' : 'color.white',
       border: 'none',
       transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
     },
     outlined: {
-      backgroundColor: 'color.white',
+      backgroundColor: isDark ? 'color.gray.900' : 'color.white',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'color.gray.200',
+      borderColor: isDark ? 'color.gray.700' : 'color.gray.200',
       transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
       _hover: {
-        borderColor: 'color.gray.300',
+        borderColor: isDark ? 'color.gray.600' : 'color.gray.300',
         boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.05)',
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow:
-          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1)',
       },
     },
     elevated: {
-      backgroundColor: 'color.white',
-      boxShadow:
-        '0px 1px 3px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.06)',
+      backgroundColor: isDark ? 'color.gray.900' : 'color.white',
+      boxShadow: isDark
+        ? '0px 4px 12px rgba(0, 0, 0, 0.3)'
+        : '0px 1px 3px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.06)',
       border: 'none',
       transition: 'box-shadow 0.2s ease',
       _hover: {
-        boxShadow:
-          '0px 4px 6px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06)',
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow:
-          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.08)',
+        boxShadow: isDark
+          ? '0px 8px 16px rgba(0, 0, 0, 0.4)'
+          : '0px 4px 6px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06)',
       },
     },
   };
 };
 
 /**
- * Default card variants (for backward compatibility)
- */
-export const CardVariants = getCardVariants('light');
-
-/**
  * Function to get default styles for Card components
  * @param theme - Theme object from useTheme hook
  */
 export const getDefaultCardStyles = (theme: any): CardStyles => {
+  const isDark = theme.themeMode === 'dark';
+
   return {
     container: {
-      backgroundColor: 'color.white',
-      color: 'color.black',
-      borderRadius: '8px', // Consistent with design system
+      backgroundColor: isDark ? 'color.gray.900' : 'color.white',
+      color: isDark ? 'color.white' : 'color.black',
+      borderRadius: '8px',
       overflow: 'hidden',
       transition: 'all 0.2s ease',
-      media: {
-        mobile: {
-          borderRadius: '4px', // Smaller radius on mobile
-        },
-      },
     },
     header: {
-      padding: '16px', // 4 × 4px grid
+      padding: '16px',
       borderBottomWidth: '1px',
       borderBottomStyle: 'solid',
-      borderBottomColor: 'color.gray.200',
-      color: 'color.black',
-      media: {
-        mobile: {
-          padding: '12px', // Smaller padding on mobile
-        },
-      },
+      borderBottomColor: isDark ? 'color.gray.800' : 'color.gray.100',
+      color: 'theme.primary',
     },
     content: {
-      padding: '16px', // 4 × 4px grid
-      color: 'color.black',
-      media: {
-        mobile: {
-          padding: '12px', // Smaller padding on mobile
-        },
-      },
+      padding: '16px',
+      color: isDark ? 'color.gray.300' : 'color.gray.600',
     },
     footer: {
-      padding: '16px', // 4 × 4px grid
+      padding: '16px',
       borderTopWidth: '1px',
       borderTopStyle: 'solid',
-      borderTopColor: 'color.gray.200',
-      media: {
-        mobile: {
-          padding: '12px', // Smaller padding on mobile
-        },
-      },
+      borderTopColor: isDark ? 'color.gray.800' : 'color.gray.100',
     },
   };
 };

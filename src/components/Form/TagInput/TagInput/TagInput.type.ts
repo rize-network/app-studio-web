@@ -8,7 +8,7 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 /**
  * Shape options for the TagInput component
  */
-export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'default' | 'square' | 'rounded' | 'pill';
 
 /**
  * Variant options for the TagInput component

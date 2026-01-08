@@ -2,7 +2,7 @@ import { ViewProps } from 'app-studio';
 import { Shape, Variant } from './Accordion.type';
 
 export const AccordionShapes: Record<Shape, ViewProps> = {
-  sharp: { borderRadius: 0 },
+  square: { borderRadius: 0 },
   rounded: { borderRadius: 8 },
 };
 

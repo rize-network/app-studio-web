@@ -122,7 +122,7 @@
   },
   "shape": {
     "type": "enum",
-    "typeValues": ["'default'", "'sharp'", "'rounded'", "'pillShaped'"],
+    "typeValues": ["'default'", "'square'", "'rounded'", "'pill'"],
     "description": "Optional Shape enum to specify the shape of the TextField's corners.",
     "defaultValue": "'default'"
   },

@@ -17,7 +17,7 @@ import { Shape, Size } from './Modal.type';
  * Following the 4px grid system
  */
 export const ContainerShapes: Record<Shape, ViewProps> = {
-  sharp: { borderRadius: 0 },
+  square: { borderRadius: 0 },
   rounded: { borderRadius: '8px' }, // 2 × 4px grid
 };
 /**

@@ -2,9 +2,9 @@ import { ViewProps } from 'app-studio';
 import { Shape, Variant } from './Toggle.type';
 
 export const ToggleShapes: Record<Shape, number | string> = {
-  sharp: 0,
+  square: 0,
   rounded: 4,
-  pillShaped: 24,
+  pill: 24,
 };
 
 /**

@@ -48,9 +48,9 @@ export const ThumbSizes: Record<Size, ViewProps> = {
 };
 
 export const SliderShapes: Record<Shape, number | string> = {
-  sharp: 0,
+  square: 0,
   rounded: 4,
-  pillShaped: 24,
+  pill: 24,
 };
 
 export const getSlider = (themeMode: string): Record<Variant, ViewProps> => {

@@ -42,7 +42,7 @@
   "shape": {
     "type": "Shape",
     "typeValues": [
-      "sharp",
+      "square",
       "rounded"
     ],
     "description": "Defines the visual shape style of the Accordion component, affecting its corners or borders.",

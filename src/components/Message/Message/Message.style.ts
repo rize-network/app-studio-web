@@ -2,7 +2,7 @@ import { ViewProps } from 'app-studio';
 import { MessageType, Shape, Size } from './Message.type';
 
 export const ContainerShapes: Record<Shape, ViewProps> = {
-  sharp: { borderRadius: 0 },
+  square: { borderRadius: 0 },
   rounded: { borderRadius: 4 },
 };
 

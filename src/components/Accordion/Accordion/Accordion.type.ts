@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 
-export type Shape = 'sharp' | 'rounded';
+export type Shape = 'square' | 'rounded';
 export type Variant = 'default' | 'outline' | 'filled';
 export type AccordionType = 'single' | 'multiple';
 

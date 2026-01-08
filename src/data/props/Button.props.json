@@ -101,9 +101,9 @@
   "shape": {
     "type": "Shape",
     "typeValues": [
-      "sharp",
+      "square",
       "rounded",
-      "pillShaped"
+      "pill"
     ],
     "description": "Optional Shape to specify the shape of the button (e.g., rounded or square edges).",
     "defaultValue": "rounded"

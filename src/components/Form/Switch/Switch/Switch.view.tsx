@@ -16,6 +16,7 @@ import {
   SliderPadding,
   SliderSizes,
   ColorSchemes,
+  TransitionStyles,
 } from './Switch.style';
 const SwitchContent = (props: any) => <Input type="checkbox" {...props} />;
 const SwitchView: React.FC<SwitchViewProps> = ({
@@ -49,7 +50,8 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       if (onChange) onChange(newValue);
     }
   };
-  const handleHover = () => setIsHovered(!isHovered);
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
   /**
    * Styles for the switch component
    */
@@ -78,8 +80,8 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   return (
     <Label
       htmlFor={id}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       {...switchStyle.container}
       {...props}
     >
@@ -134,11 +136,15 @@ const SwitchView: React.FC<SwitchViewProps> = ({
             ? ColorSchemes.states.hover.inactive
             : ColorSchemes.default.inactive
         }
-        overflow="hidden"
+        opacity={
+          !isDisabled && value && isHovered
+            ? ColorSchemes.states.hover.activeOpacity
+            : 1
+        }
         // State properties
         cursor="pointer"
         // Animation
-        transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+        {...TransitionStyles.slider}
         // Apply styles
         {...shadow}
         {...SliderPadding[size]}
@@ -164,8 +170,13 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         <View
           borderRadius="50%"
           backgroundColor={ColorSchemes.default.knob}
-          boxShadow="0 1px 2px rgba(0, 0, 0, 0.1)"
-          transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+          boxShadow={
+            isHovered
+              ? '0 2px 4px rgba(0, 0, 0, 0.2)'
+              : '0 1px 2px rgba(0, 0, 0, 0.1)'
+          }
+          transform={isHovered ? 'scale(1.05)' : 'scale(1)'}
+          {...TransitionStyles.knob}
           zIndex={1} // Ensure knob is above content
           {...KnobSizes[size]}
           {...views['circle']}

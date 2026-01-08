@@ -2,7 +2,7 @@ import { ViewProps } from 'app-studio';
 
 export type Position = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 
-export type Shape = 'sharp' | 'rounded';
+export type Shape = 'square' | 'rounded';
 
 export type CloseButtonPosition = 'left' | 'right' | 'none';
 

@@ -43,12 +43,12 @@
   "shape": {
     "type": "Shape",
     "typeValues": [
-      "sharp",
+      "square",
       "rounded",
-      "pillShaped"
+      "pill"
     ],
     "description": "Defines possible values for the shape of a UI component such as buttons or badges.",
-    "defaultValue": "pillShaped"
+    "defaultValue": "pill"
   },
   "views": {
     "type": "BadgeStyles",

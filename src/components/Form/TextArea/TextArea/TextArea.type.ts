@@ -2,8 +2,8 @@ import { ViewProps } from 'app-studio';
 
 // Defines the 'Variant' type for the TextArea component, indicating the visual style of the TextArea such as 'outline', 'default', or 'none'
 export type Variant = 'outline' | 'default' | 'none';
-// Defines the 'Shape' type for the TextArea component, indicating the border shape options like 'default', 'sharp', or 'rounded'
-export type Shape = 'default' | 'sharp' | 'rounded';
+// Defines the 'Shape' type for the TextArea component, indicating the border shape options like 'default', 'square', or 'rounded'
+export type Shape = 'default' | 'square' | 'rounded';
 // Defines the 'Size' type for the TextArea component, indicating the available size options including 'xs' (extra small) to 'xl' (extra large)
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Begins declaring the 'TextAreaStyles' type to specify the custom styling options for different parts of the TextArea component

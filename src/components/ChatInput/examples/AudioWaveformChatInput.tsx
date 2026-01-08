@@ -1,13 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { View, Vertical, Text } from 'app-studio';
+import { View, Vertical, Text, useTheme } from 'app-studio';
 import ChatInputView from '../ChatInput/ChatInput.view';
 
 export const AudioWaveformChatInputDemo = () => {
+  const { themeMode } = useTheme();
   const [inputValue, setInputValue] = useState('');
   const [submittedMessage, setSubmittedMessage] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
-  // Audio recording is handled internally by ChatInput's AudioRecorder.
 
   const handleSubmit = () => {
     if (inputValue.trim() || uploadedFiles.length > 0) {
@@ -19,30 +19,41 @@ export const AudioWaveformChatInputDemo = () => {
 
   const startUpload = (files: File[]) => {
     if (!files || files.length === 0) return;
-    // Demo: just add to local preview list; no server upload
     setIsUploading(true);
     setUploadedFiles((prev) => [...prev, ...files]);
-    // Simulate quick completion
     setTimeout(() => setIsUploading(false), 300);
   };
 
   return (
-    <Vertical gap={20} padding="20px" maxWidth="600px">
-      <Text fontSize="18px" fontWeight="bold">
+    <Vertical
+      gap={20}
+      padding="20px"
+      maxWidth="600px"
+      backgroundColor="transparent"
+    >
+      <Text fontSize="18px" fontWeight="bold" color="theme.primary">
         Chat Input with Audio Waveform Demo
       </Text>
 
-      <Text fontSize="14px" color="color.gray.600">
+      <Text
+        fontSize="14px"
+        color={themeMode === 'light' ? 'color.gray.600' : 'color.gray.400'}
+      >
         Features: • Audio recording with live waveform visualization • Text
         input • File attachments
       </Text>
 
       <View
-        border="1px solid"
-        borderColor="color.gray.300"
+        borderWidth="1px"
+        borderStyle="solid"
+        borderColor={
+          themeMode === 'light' ? 'color.gray.300' : 'color.gray.700'
+        }
         borderRadius="8px"
         padding="16px"
-        backgroundColor="color.white"
+        backgroundColor={
+          themeMode === 'light' ? 'color.white' : 'color.gray.800'
+        }
       >
         <Vertical gap={12}>
           <ChatInputView
@@ -58,7 +69,7 @@ export const AudioWaveformChatInputDemo = () => {
                 prevFiles.filter((_, i) => i !== index)
               );
             }}
-            setPendingFiles={() => {}} // Mock function
+            setPendingFiles={() => {}}
             setIsUploading={setIsUploading}
             startUpload={startUpload}
             getPendingFiles={() => []}
@@ -90,17 +101,30 @@ export const AudioWaveformChatInputDemo = () => {
       {submittedMessage && (
         <View
           padding="12px"
-          backgroundColor="color.green.50"
-          border="1px solid"
-          borderColor="color.green.200"
+          backgroundColor={
+            themeMode === 'light' ? 'color.green.50' : 'color.green.900'
+          }
+          borderWidth="1px"
+          borderStyle="solid"
+          borderColor={
+            themeMode === 'light' ? 'color.green.200' : 'color.green.700'
+          }
           borderRadius="6px"
         >
-          <Text fontSize="14px" fontWeight="medium" color="color.green.800">
+          <Text
+            fontSize="14px"
+            fontWeight="medium"
+            color={
+              themeMode === 'light' ? 'color.green.800' : 'color.green.100'
+            }
+          >
             Submitted Message:
           </Text>
           <Text
             fontSize="14px"
-            color="color.green.700"
+            color={
+              themeMode === 'light' ? 'color.green.700' : 'color.green.200'
+            }
             marginTop="4px"
             whiteSpace="pre-wrap"
           >

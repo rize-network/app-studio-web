@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button will a pillShaped shape to match snapshot 1`] = `
+exports[`Button will a pill shape to match snapshot 1`] = `
 <button
   className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-999px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
   disabled={false}

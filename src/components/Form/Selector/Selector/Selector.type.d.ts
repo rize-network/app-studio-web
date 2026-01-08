@@ -1,7 +1,7 @@
 // Defines a 'Size' type with predefined size options for the Selector component.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Declares a 'Shape' type with predefined shape options for the corners of the Selector component.
-export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'default' | 'square' | 'rounded' | 'pill';
 // Specifies a 'Variant' type representing the visual style variations of the Selector component.
 export type Variant = 'outline' | 'default' | 'none';
 // Initiates a 'SelectorStyles' type outlining style properties applicable to the Selector component.

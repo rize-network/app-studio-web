@@ -115,9 +115,9 @@
       "Shape"
     ],
     "typeValues": [
-      "'default' | 'sharp' | 'rounded' | 'pillShaped'"
+      "'default' | 'square' | 'rounded' | 'pill'"
     ],
-    "description": "Determines the overall shape of the select box, e.g., rounded or sharp edges",
+    "description": "Determines the overall shape of the select box, e.g., rounded or square edges",
     "defaultValue": [
       "default"
     ]

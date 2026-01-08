@@ -385,7 +385,7 @@ export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: '8px',
   },
-  sharp: {
+  square: {
     borderRadius: '0px',
   },
   rounded: {

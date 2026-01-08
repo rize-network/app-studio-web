@@ -226,7 +226,7 @@ export const AccordionContent: React.FC<
 export const AccordionView: React.FC<
   {
     children: React.ReactNode;
-    shape?: 'sharp' | 'rounded';
+    shape?: 'square' | 'rounded';
     variant?: 'default' | 'outline' | 'filled';
     views?: any;
     baseId: string;

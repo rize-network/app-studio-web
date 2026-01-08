@@ -43,7 +43,7 @@ export const DesignSystemTextAreas = () => (
       <Vertical gap={16}>
         <TextArea shape="default" placeholder="Default Shape (Rounded)" />
 
-        <TextArea shape="sharp" placeholder="Sharp Corners" />
+        <TextArea shape="square" placeholder="square Corners" />
 
         <TextArea shape="rounded" placeholder="Rounded Corners" />
       </Vertical>

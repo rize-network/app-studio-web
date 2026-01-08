@@ -36,7 +36,7 @@ export const CustomizedOTPInput = () => {
         value={otp}
         onChange={setOtp}
         length={4}
-        shape="pillShaped"
+        shape="pill"
         variant="outline"
         size="lg"
         gap={12}

@@ -16,7 +16,7 @@ export interface ModalProps extends Omit<ViewProps, 'size'> {
   iconSize?: Size;
 
   /**
-   * Determines whether the modal should have sharp or rounded edges.
+   * Determines whether the modal should have square or rounded edges.
    */
   shape?: Shape;
 
@@ -162,7 +162,7 @@ export interface ContainerProps extends Omit<ViewProps, 'size'> {
    */
   children: React.ReactNode;
   /**
-   * To give a sharp or rounded edges to the modal
+   * To give a square or rounded edges to the modal
    */
   shape?: Shape;
   /**

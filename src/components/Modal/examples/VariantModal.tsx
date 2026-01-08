@@ -11,13 +11,13 @@ export const VariantModal = () => {
     <>
       <Horizontal gap={10}>
         <Button
-          onClick={() => showModal('SharpModal', { shape: 'rounded' })}
+          onClick={() => showModal('squareModal', { shape: 'rounded' })}
           isAuto
         >
-          Sharp
+          square
         </Button>
         <Button
-          onClick={() => showModal('RoundedModal', { shape: 'sharp' })}
+          onClick={() => showModal('RoundedModal', { shape: 'square' })}
           isAuto
         >
           Rounded
@@ -25,7 +25,7 @@ export const VariantModal = () => {
       </Horizontal>
       <Modal.Layout
         modals={{
-          SharpModal: () => (
+          squareModal: () => (
             <Modal.Container>
               <Modal.Body>
                 <Text maxLines={2}>

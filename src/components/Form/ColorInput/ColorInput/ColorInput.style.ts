@@ -91,13 +91,13 @@ export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: '6px',
   },
-  sharp: {
+  square: {
     borderRadius: '0px',
   },
   rounded: {
     borderRadius: '8px',
   },
-  pillShaped: {
+  pill: {
     borderRadius: '9999px',
   },
 };

@@ -64,32 +64,32 @@ export const AccordionVariants = () => {
       </Vertical>
 
       <Vertical gap={10}>
-        <Text fontWeight="bold">Sharp Shape</Text>
+        <Text fontWeight="bold">square Shape</Text>
         <Accordion
           type="single"
-          defaultValue="sharp-1"
-          shape="sharp"
+          defaultValue="square-1"
+          shape="square"
           variant="outline"
         >
-          <Accordion.Item value="sharp-1">
+          <Accordion.Item value="square-1">
             <Accordion.Trigger>
               <Text fontWeight="bold">First Item</Text>
             </Accordion.Trigger>
             <Accordion.Content>
               <Text>
-                This is the content for the first item in the sharp shape
+                This is the content for the first item in the square shape
                 accordion.
               </Text>
             </Accordion.Content>
           </Accordion.Item>
 
-          <Accordion.Item value="sharp-2">
+          <Accordion.Item value="square-2">
             <Accordion.Trigger>
               <Text fontWeight="bold">Second Item</Text>
             </Accordion.Trigger>
             <Accordion.Content>
               <Text>
-                This is the content for the second item in the sharp shape
+                This is the content for the second item in the square shape
                 accordion.
               </Text>
             </Accordion.Content>

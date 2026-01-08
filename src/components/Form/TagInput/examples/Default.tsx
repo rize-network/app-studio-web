@@ -92,7 +92,7 @@ export const ValidatedTagInput = () => {
         maxTagLength={20}
         allowDuplicates={false}
         variant="outline"
-        shape="pillShaped"
+        shape="pill"
         helperText="Tags must be 3-20 characters long"
       />
     </Vertical>

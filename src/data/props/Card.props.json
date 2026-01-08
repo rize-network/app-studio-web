@@ -23,9 +23,9 @@
   "shape": {
     "type": "Shape",
     "typeValues": [
-      "sharp",
+      "square",
       "rounded",
-      "pillShaped"
+      "pill"
     ],
     "description": "Defines the border radius or overall form of the card, based on the 'Shape' type.",
     "defaultValue": "rounded"

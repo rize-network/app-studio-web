@@ -110,9 +110,9 @@
     ],
     "typeValues": [
       "'default'",
-      "'sharp'",
+      "'square'",
       "'rounded'",
-      "'pillShaped'"
+      "'pill'"
     ],
     "description": "The shape that changes the outlines of the field.",
     "defaultValue": "default"

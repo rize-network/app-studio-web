@@ -8,9 +8,9 @@ import { Text } from 'src/components';
 
 // Additional info (mocked for testing if not imported)
 export const ToggleGroupShapes: Record<Shape, number | string> = {
-  sharp: '0px',
+  square: '0px',
   rounded: '4px',
-  pillShaped: '24px',
+  pill: '24px',
 };
 
 const items = [

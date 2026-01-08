@@ -44,11 +44,11 @@ export const DesignSystemTextFields = () => (
       <Vertical gap={16}>
         <TextField shape="default" placeholder="Default Shape (Rounded)" />
 
-        <TextField shape="sharp" placeholder="Sharp Corners" />
+        <TextField shape="square" placeholder="square Corners" />
 
         <TextField shape="rounded" placeholder="Rounded Corners" />
 
-        <TextField shape="pillShaped" placeholder="Pill Shaped" />
+        <TextField shape="pill" placeholder="Pill Shaped" />
       </Vertical>
     </View>
 

@@ -76,12 +76,9 @@ export const ColorSchemes = {
   // State-specific colors
   states: {
     hover: {
-      active: {
-        opacity: 0.9,
-      },
-      inactive: {
-        backgroundColor: 'color.gray.400',
-      },
+      active: 'theme.primary',
+      inactive: 'color.gray.400',
+      activeOpacity: 0.9,
     },
     focus: {
       active: {
@@ -103,9 +100,9 @@ export const ColorSchemes = {
  */
 export const TransitionStyles = {
   slider: {
-    transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   },
   knob: {
-    transition: 'transform 0.2s ease',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   },
 };

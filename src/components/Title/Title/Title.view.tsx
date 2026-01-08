@@ -11,6 +11,19 @@ function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+const renderWithLineBreaks = (text: string) => {
+  if (!text || typeof text !== 'string') return text;
+  const parts = text.split('|');
+  if (parts.length === 1) return text;
+
+  return parts.map((part, index) => (
+    <React.Fragment key={index}>
+      {part}
+      {index < parts.length - 1 && <br />}
+    </React.Fragment>
+  ));
+};
+
 const TitleView: React.FC<TitleProps> = ({
   children,
   highlightText,
@@ -30,7 +43,7 @@ const TitleView: React.FC<TitleProps> = ({
   highlightSlideStagger = 50,
   highlightSlideSequential = true,
   themeMode: elementMode,
-  textComponent,
+
   ...props
 }) => {
   const { ref, inView } = useInView();
@@ -98,8 +111,6 @@ const TitleView: React.FC<TitleProps> = ({
     ...props,
   });
 
-  const TextComponent = textComponent || DefaultText;
-
   const fontSize = TitleSizes[size];
 
   // Highlight style props
@@ -141,10 +152,8 @@ const TitleView: React.FC<TitleProps> = ({
   const containerProps = {
     ref,
     animate: inView ? controlledAnimate : undefined,
-    ...(!textComponent && {
-      as: 'h1' as const,
-      fontSize,
-    }),
+    as: 'h1' as const,
+    fontSize,
   };
 
   // Render highlighted text content (typewriter, slide, or plain)
@@ -164,7 +173,6 @@ const TitleView: React.FC<TitleProps> = ({
             highlightTypewriterDuration / (content.length * 10)
           )}
           cursorColor="currentColor"
-          textComponent={TextComponent}
           {...highlightProps}
         />
       );
@@ -179,11 +187,10 @@ const TitleView: React.FC<TitleProps> = ({
           direction="up"
           fontSize={fontSize}
           wordProps={highlightProps}
-          textComponent={TextComponent}
         />
       );
     }
-    return content;
+    return renderWithLineBreaks(content);
   };
 
   // Case 1: Has highlight target - render with highlighted parts
@@ -210,19 +217,14 @@ const TitleView: React.FC<TitleProps> = ({
     if (lastIndex < text.length) parts.push(text.substring(lastIndex));
 
     return (
-      <Element
-        fontSize={fontSize}
-        {...containerProps}
-        {...views?.container}
-        {...props}
-      >
+      <Element {...containerProps} {...views?.container} {...props}>
         {parts.map((part, idx) =>
           typeof part === 'string' ? (
-            <TextComponent key={`text-${idx}`} as="span" display="inline">
-              {part}
-            </TextComponent>
+            <DefaultText key={`text-${idx}`} as="span" display="inline">
+              {renderWithLineBreaks(part)}
+            </DefaultText>
           ) : (
-            <TextComponent
+            <DefaultText
               key={`highlight-${idx}`}
               as="span"
               display="inline"
@@ -231,7 +233,7 @@ const TitleView: React.FC<TitleProps> = ({
               {...views?.highlight}
             >
               {renderHighlightedContent(part.text)}
-            </TextComponent>
+            </DefaultText>
           )
         )}
       </Element>
@@ -241,13 +243,8 @@ const TitleView: React.FC<TitleProps> = ({
   // Case 2: Has highlight style but no highlight target - apply style to entire title
   if (highlightStyle && !activeHighlightTarget) {
     return (
-      <Element
-        fontSize={fontSize}
-        {...containerProps}
-        {...props}
-        {...views?.container}
-      >
-        <TextComponent
+      <Element {...containerProps} {...props} {...views?.container}>
+        <DefaultText
           as="span"
           display="inline"
           animate={inView ? controlledHighlightAnimate : undefined}
@@ -255,16 +252,16 @@ const TitleView: React.FC<TitleProps> = ({
           {...views?.highlight}
         >
           {renderHighlightedContent(text)}
-        </TextComponent>
+        </DefaultText>
       </Element>
     );
   }
 
   // Case 3: Default - no highlighting
   return (
-    <TextComponent {...containerProps} {...props} {...views?.container}>
-      {text}
-    </TextComponent>
+    <DefaultText {...containerProps} {...props} {...views?.container}>
+      {renderWithLineBreaks(text)}
+    </DefaultText>
   );
 };
 

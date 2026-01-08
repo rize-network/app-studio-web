@@ -7,12 +7,14 @@ import { Variant } from '../Button/Button.type';
 export const VariantButtons = () => (
   <Vertical gap={15}>
     <Vertical gap={10}>
-      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Schemes</h3>
+      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Colors</h3>
       <Vertical gap={5}>
-        <Button scheme="theme.primary">Primary Scheme</Button>
-        <Button scheme="theme.secondary">Secondary Scheme</Button>
-        <Button scheme="color.black">Black Scheme</Button>
-        <Button scheme="color.white">White Scheme</Button>
+        <Button color="theme.primary">Primary</Button>
+        <Button color="theme.secondary">Secondary</Button>
+        <Button color="color.black">Black</Button>
+        <Button color="color.white" textColor="color.black">
+          White
+        </Button>
       </Vertical>
     </Vertical>
 
@@ -38,13 +40,13 @@ export const VariantButtons = () => (
           gap: 10,
         }}
       >
-        <Button reversed variant="filled" scheme="primary">
+        <Button reversed variant="filled" color="theme.primary">
           Filled Reversed
         </Button>
-        <Button reversed variant="outline" scheme="primary">
+        <Button reversed variant="outline" color="theme.primary">
           Outline Reversed
         </Button>
-        <Button reversed variant="ghost" scheme="primary">
+        <Button reversed variant="ghost" color="theme.primary">
           Ghost Reversed
         </Button>
       </div>

@@ -7,7 +7,7 @@ import { Shape } from '../CountryPicker/CountryPicker.type';
 
 export const ShapeCountryPicker = () => (
   <Vertical gap={10}>
-    {['default', 'sharp', 'rounded', 'pillShaped'].map((shape) => (
+    {['default', 'square', 'rounded', 'pill'].map((shape) => (
       <CountryPicker
         key={shape}
         label={shape}

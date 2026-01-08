@@ -25,7 +25,7 @@ export interface SelectorProps extends Omit<InputProps, 'size'> {
   isDisabled?: boolean;
   // Function that handles the change event when the selected option(s) change
   onChange?: (value: any) => void;
-  // Determines the overall shape of the select box, e.g., rounded or sharp edges
+  // Determines the overall shape of the select box, e.g., rounded or square edges
   shape?: Shape;
   // Defines the styling variant for the select component
   variant?: Variant;

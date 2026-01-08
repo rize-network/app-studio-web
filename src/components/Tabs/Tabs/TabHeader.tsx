@@ -30,31 +30,26 @@ export const TabHeader: React.FC<TabHeaderProps> = ({
   textStyles,
 }) => {
   // Base styles for the tab header
+  // Base styles for the tab header
   const baseStyles: ViewProps = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '10px 16px',
+    padding: '12px 16px',
     cursor: 'pointer',
-    borderTopLeftRadius: '4px',
-    borderTopRightRadius: '4px',
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: isActive ? 'theme.primary' : 'transparent',
-    borderBottomColor: isActive ? 'transparent' : 'color.gray.200',
-    backgroundColor: isActive ? 'color.white' : 'transparent',
+    borderBottom: '2px solid',
+    borderBottomColor: isActive ? 'theme.primary' : 'transparent',
+    backgroundColor: 'transparent',
     color: isActive ? 'theme.primary' : 'color.gray.600',
-    fontWeight: 'normal',
-    position: 'relative',
-    // If active, show a bottom border that matches the background color
-    // to create the illusion that the tab is connected to the content
+    fontWeight: isActive ? '600' : '500',
+    marginBottom: '-1px',
+    transition: 'all 0.2s ease',
 
     // Hover state
     on: {
       hover: {
         color: 'theme.primary',
+        borderBottomColor: isActive ? 'theme.primary' : 'color.gray.300',
       },
     },
   };

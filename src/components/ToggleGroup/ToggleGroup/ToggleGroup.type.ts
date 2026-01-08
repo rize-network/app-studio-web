@@ -1,5 +1,5 @@
 // Defines the possible shapes for the toggle button within the group.
-export type Shape = 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'square' | 'rounded' | 'pill';
 // Specifies the visual styles or variants the toggle button can have.
 export type Variant = 'outline' | 'link' | 'ghost';
 // Begins the definition of the data structure for each toggle item in the group.

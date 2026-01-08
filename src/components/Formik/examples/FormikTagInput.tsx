@@ -79,7 +79,7 @@ export const FormikTagInputExample = () => {
                 allowDuplicates={true}
                 separators={['enter', 'comma']}
                 variant="outline"
-                shape="pillShaped"
+                shape="pill"
                 size="md"
               />
 

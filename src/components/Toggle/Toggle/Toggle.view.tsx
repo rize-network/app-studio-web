@@ -66,7 +66,7 @@ const ToggleView: React.FC<Props> = ({
   return (
     <Center
       role="Toggle"
-      padding={shape === 'pillShaped' ? '10px 12px' : '8px'}
+      padding={shape === 'pill' ? '10px 12px' : '8px'}
       width="fit-content"
       cursor={isDisabled ? 'not-allowed' : 'pointer'}
       borderRadius={ToggleShapes[shape]}

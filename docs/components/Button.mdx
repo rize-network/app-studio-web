@@ -1,6 +1,6 @@
 # Button
 
-A versatile button component for user interaction with various styles, sizes, and interactive effects.
+A versatile button component for user interaction with various styles, sizes, shapes, and interactive effects.
 
 ### **Import**
 ```tsx
@@ -17,125 +17,33 @@ export const DefaultButton = () => (
 );
 ```
 
-### **loaderProps**
-Optional LoaderProps object to configure the appearance and behavior of the loader animation.
+### **variant**
+Variant to define the stylistic variation of the button.
 
-- **Type:** `LoaderProps`
-- **Possible Values:** ``
+- **Type:** `Variant`
+- **Default:** `filled`
+- **Possible Values:** `filled, outline, link, ghost, empty, subtle`
 
 ```tsx
 import React from 'react';
 import { Button } from '@app-studio/web';
 import { Vertical } from 'app-studio';
+import { Variant } from '@app-studio/web';
 
-export const LoaderButtons = () => (
+export const VariantButtons = () => (
   <Vertical gap={15}>
-    <Button isLoading isFilled onClick={(e) => alert('ok')}>
-      Submitting
-    </Button>
-    <Button isLoading isFilled>
-      Submitting
-    </Button>
-    <Button isLoading loaderPosition="right" isFilled>
-      Submitting
-    </Button>
-  </Vertical>
-);
-```
-
-### **icon**
-Optional React node(s) defining the icon to be displayed within the button.
-
-- **Type:** `React.ReactNode`
-- **Possible Values:** ``
-
-```tsx
-import React from 'react';
-import { Button } from '@app-studio/web';
-import { Center } from 'app-studio';
-
-import { DustBinIcon } from '@app-studio/web';
-
-import { Shape } from '@app-studio/web';
-
-export const IconButtons = () => (
-  <Center gap={15}>
-    <Button icon={<DustBinIcon widthHeight={16} />} size="md">
-      Delete
-    </Button>
-    <Button
-      size="md"
-      icon={<DustBinIcon widthHeight={16} />}
-      shape={'pillShaped' as Shape}
-      iconPosition="right"
-    >
-      Delete
-    </Button>
-    <Button icon={<DustBinIcon widthHeight={16} />} isIconRounded isAuto />
-    <Button
-      icon={<DustBinIcon widthHeight={16} />}
-      size="md"
-      iconPosition="top"
-    >
-      Delete
-    </Button>
-    <Button
-      size="md"
-      icon={<DustBinIcon widthHeight={16} />}
-      shape={'pillShaped' as Shape}
-      iconPosition="bottom"
-    >
-      Delete
-    </Button>
-  </Center>
-);
-```
-
-### **isDisabled**
-Optional boolean to indicate if the button is non-interactive/disabled.
-
-- **Type:** `boolean`
-- **Default:** `false`
-- **Possible Values:** ``
-
-```tsx
-import React from 'react';
-import { Button } from '@app-studio/web';
-
-export const DisabledButton = () => (
-  <Button
-    onClick={() => {
-      alert('Disabled');
-    }}
-    isDisabled
-  >
-    Disabled
-  </Button>
-);
-```
-
-### **isAuto**
-Optional boolean indicating if the button size should automatically adjust to its content.
-
-- **Type:** `boolean`
-- **Default:** `false`
-- **Possible Values:** ``
-
-```tsx
-import React from 'react';
-import { Button } from '@app-studio/web';
-import { Horizontal } from 'app-studio';
-
-import { Shape } from '@app-studio/web';
-
-export const BorderedButtons = () => (
-  <Horizontal gap={15}>
-    {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
-      <Button key={index} shape={border as Shape}>
-        {border}
+    {['filled', 'outline', 'link', 'ghost', 'subtle'].map((variant, index) => (
+      <Button
+        key={index}
+        variant={variant as Variant}
+      >
+        {variant}
       </Button>
     ))}
-  </Horizontal>
+    <Button variant="link" to="https://google.com" isExternal>
+      External Link
+    </Button>
+  </Vertical>
 );
 ```
 
@@ -150,7 +58,6 @@ Optional Size to specify the size of the button.
 import React from 'react';
 import { Button } from '@app-studio/web';
 import { Vertical } from 'app-studio';
-
 import { Size } from '@app-studio/web';
 
 export const ButtonSizes = () => (
@@ -164,57 +71,173 @@ export const ButtonSizes = () => (
 );
 ```
 
-### **shadow**
-Optional shadow property that can be a predefined Shadow, Elevation value or custom CSSProperties to apply shadow effects to the button.
+### **shape**
+Optional Shape to specify the border radius style of the button.
 
-- **Type:** `Shadow | Elevation | ViewProps`
-- **Possible Values:** ``
+- **Type:** `Shape`
+- **Default:** `rounded`
+- **Possible Values:** `sharp, rounded, pillShaped`
 
 ```tsx
 import React from 'react';
 import { Button } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+import { Shape } from '@app-studio/web';
 
-export const ShadowButton = () => (
-  <Button shadow={{ boxShadow: 'rgb(249, 115, 22) 0px 4px 14px 0px' }}>
-    Click Me
-  </Button>
+export const ShapeButtons = () => (
+  <Horizontal gap={15}>
+    {['sharp', 'rounded', 'pillShaped'].map((shape, index) => (
+      <Button key={index} shape={shape as Shape}>
+        {shape}
+      </Button>
+    ))}
+  </Horizontal>
 );
 ```
 
-### **variant**
-Variant to define the stylistic variation of the button.
+### **isLoading**
+Boolean to indicate if the button is in a loading state. Shows a loader and disables interactions.
 
-- **Type:** `Variant`
-- **Default:** `filled`
-- **Possible Values:** `filled, outline, link, ghost, borderMoving, animatedStroke`
+- **Type:** `boolean`
+- **Default:** `false`
+- **Related:** `loaderPosition`, `loaderProps`
 
 ```tsx
 import React from 'react';
 import { Button } from '@app-studio/web';
 import { Vertical } from 'app-studio';
 
-import { Variant } from '@app-studio/web';
-
-export const VariantButtons = () => (
+export const LoadingButtons = () => (
   <Vertical gap={15}>
-    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-      <Button
-        key={index}
-        to="https://www.npmjs.com/package/app-studio"
-        variant={variant as Variant}
-      >
-        App Studio Link {variant}
-      </Button>
-    ))}
-    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-      <Button key={index} variant={variant as Variant}>
-        {variant}
-      </Button>
-    ))}
-    {/* Effect variants */}
-    <Button variant="borderMoving">Border Moving Effect</Button>
-    <Button variant="animatedStroke">Animated Stroke Effect</Button>
+    <Button isLoading>Loading...</Button>
+    <Button isLoading loaderPosition="right">
+      Submitted
+    </Button>
+    <Button isLoading isFilled={false} variant="outline">
+      Loading Outline
+    </Button>
   </Vertical>
 );
 ```
 
+### **animation**
+Apply special animation effects to the button.
+
+- **Type:** `Animation`
+- **Possible Values:** `borderMoving, animatedStroke, borderReveal`
+
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/web';
+import { Vertical } from 'app-studio';
+
+export const AnimatedButtons = () => (
+  <Vertical gap={15}>
+    <Button 
+      animation="borderMoving" 
+      borderMovingDuration={2}
+      borderMovingGradientColors={['#705CFF', '#FF5C97', '#FFC75C']}
+    >
+      Border Moving
+    </Button>
+    
+    <Button 
+      animation="animatedStroke"
+      variant="outline"
+      animatedStrokeAccentColor="#705CFF"
+    >
+      Animated Stroke
+    </Button>
+
+    <Button 
+      animation="borderReveal"
+      variant="outline"
+    >
+      Border Reveal (Hover)
+    </Button>
+  </Vertical>
+);
+```
+
+### **color & backgroundColor**
+Override the main color of the button.
+- `backgroundColor`: Sets the primary background color (filled variant).
+- `color`: Sets the main color token used for text/borders (outline/ghost variants).
+- `textColor`: Explicitly sets the text color.
+
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const ColoredButtons = () => (
+  <Horizontal gap={15}>
+    <Button backgroundColor="#F43F5E">Custom Red</Button>
+    <Button variant="outline" color="#10B981">Custom Green</Button>
+    <Button backgroundColor="theme.primary" textColor="white">
+      Theme Primary
+    </Button>
+  </Horizontal>
+);
+```
+
+### **icon**
+Optional React node(s) defining the icon to be displayed within the button.
+
+- **Type:** `React.ReactNode`
+- **Related:** `iconPosition`, `isIconRounded`
+
+```tsx
+import React from 'react';
+import { Button, DustBinIcon } from '@app-studio/web';
+import { Center } from 'app-studio';
+
+export const IconButtons = () => (
+  <Center gap={15}>
+    <Button icon={<DustBinIcon widthHeight={16} />} size="md">
+      Delete
+    </Button>
+    <Button
+      size="md"
+      icon={<DustBinIcon widthHeight={16} />}
+      iconPosition="right"
+    >
+      Right Icon
+    </Button>
+    <Button icon={<DustBinIcon widthHeight={16} />} isIconRounded />
+  </Center>
+);
+```
+
+### **isDisabled**
+Optional boolean to indicate if the button is non-interactive/disabled.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/web';
+
+export const DisabledButton = () => (
+  <Button isDisabled onClick={() => alert('Disabled')}>
+    Disabled
+  </Button>
+);
+```
+
+### **isAuto**
+Optional boolean indicating if the button size should automatically adjust to its content (fit-content).
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+### **to**
+The destination URL or path for a link button. Renders as a `<a>` or routing link.
+
+- **Type:** `string`
+
+```tsx
+<Button to="/dashboard">Go to Dashboard</Button>
+<Button to="https://google.com" isExternal>Open Google</Button>
+```

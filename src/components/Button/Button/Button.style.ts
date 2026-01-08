@@ -55,9 +55,9 @@ const getButtonSize = (size: Size) => {
  * Button shapes with consistent border radius
  */
 export const ButtonShapes: Record<Shape, number | string> = {
-  sharp: 0,
+  square: 0,
   rounded: 8,
-  pillShaped: 999, // Full rounded for pill shape
+  pill: 999, // Full rounded for pill shape
 };
 
 /**
@@ -93,11 +93,9 @@ export const IconSizes: Record<Size, ViewProps> = {
 
 export const getButtonVariants = (
   color: string,
-  isLight: boolean,
+  textColor: string,
   reversed: boolean = false
 ): Record<Variant, ViewProps> => {
-  const textColor = isLight ? '#000000' : '#FFFFFF';
-
   // Determine effective colors based on reversed state
   const effectiveBg = reversed ? textColor : color;
   const effectiveContent = reversed ? color : textColor;

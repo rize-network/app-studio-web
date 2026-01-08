@@ -15,7 +15,6 @@ import {
   IconSizes,
   getButtonVariants,
 } from './Button.style';
-import contrast from 'contrast';
 
 // --- Helper: Button Content ---
 // Renders the inner content: Loader, Icon, and Children.
@@ -213,7 +212,6 @@ const StandardButton: React.FC<
     iconPad: any;
     // Extra props passed from ButtonView
     mainTone?: string;
-    tone?: string;
     borderMovingDuration?: number;
     borderMovingGradientColors?: string[];
     animatedStrokeAccentColor?: string;
@@ -240,7 +238,6 @@ const StandardButton: React.FC<
   content,
   size,
   mainTone,
-  tone,
   borderMovingDuration = 2,
   borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
   animatedStrokeAccentColor = '#705CFF',
@@ -543,10 +540,10 @@ const ButtonView: React.FC<ButtonProps> = ({
   shape = 'rounded',
   iconPosition = 'left',
   loaderPosition = 'left',
-  backgroundColor, // primary candidate for main color
-  color, // 2nd candidate for main color (NOT text‑color)
-  scheme, // New scheme prop
-  reversed = false, // New reversed prop
+  backgroundColor, // Primary override for main color
+  color, // Main button color (theme tokens or color palette)
+  textColor, // Explicit text color
+  reversed = false, // Reverse colors for dark backgrounds
   isAuto = true,
   isFilled,
   isDisabled,
@@ -570,29 +567,42 @@ const ButtonView: React.FC<ButtonProps> = ({
   ...props
 }) => {
   /* theme helpers */
-  const { getColorHex, themeMode } = useTheme();
+  const { getColorHex } = useTheme();
 
   /* MAIN COLOR – determines the entire palette */
+  // Priority: explicit backgroundColor/color prop -> theme.button.background -> theme.primary
+  const mainColorKey = backgroundColor ?? color ?? 'theme.button.background';
 
-  const mainColorKey = backgroundColor ?? color ?? scheme ?? 'theme.primary';
-  const mainTone = getColorHex(isDisabled ? 'theme.disabled' : mainColorKey);
-  const tone = contrast(mainTone);
+  // Decide which theme token to resolve based on state
+  const stateColorKey = isDisabled
+    ? 'theme.disabled'
+    : isLoading
+    ? 'theme.loading'
+    : mainColorKey;
 
-  /* text color with mixBlendMode for maximum visibility */
-  let textColor: string;
-  if (tone === 'light') {
-    textColor = '#000000';
-  } else {
-    textColor = '#FFFFFF';
+  // Resolve to actual hex color.
+  // If 'theme.button.background' isn't defined, it falls back to 'theme.primary'
+  let mainTone = getColorHex(stateColorKey);
+  if (mainTone === 'theme.button.background' || mainTone === 'theme.loading') {
+    mainTone = getColorHex(isLoading ? 'color.dark.500' : 'theme.primary');
+  }
+
+  /* text color - explicitly provided or default to white */
+  // Priority: explicit textColor prop -> theme.button.text -> color.white
+  let resolvedTextColorKey = textColor ?? 'theme.button.text';
+  let resolvedTextColor = getColorHex(resolvedTextColorKey);
+
+  if (resolvedTextColor === 'theme.button.text') {
+    resolvedTextColor = getColorHex('color.white');
   }
 
   /* variant palette */
   const palette = useMemo(
-    () => getButtonVariants(mainTone, tone === 'light', reversed),
-    [mainTone, tone, reversed]
+    () => getButtonVariants(mainTone, resolvedTextColor, reversed),
+    [mainTone, resolvedTextColor, reversed]
   );
   const base = palette[variant];
-  const resolvedTextColor = (base?.color as string) ?? textColor;
+  const finalContentColor = (base?.color as string) ?? resolvedTextColor;
 
   // Render content logic safely
   const content = (
@@ -602,7 +612,7 @@ const ButtonView: React.FC<ButtonProps> = ({
       iconPosition={iconPosition}
       loaderPosition={loaderPosition}
       size={size}
-      resolvedTextColor={resolvedTextColor}
+      resolvedTextColor={finalContentColor}
       isIconRounded={isIconRounded}
       views={views}
     >
@@ -631,11 +641,10 @@ const ButtonView: React.FC<ButtonProps> = ({
       baseStyles={base}
       sizeStyles={sizeStyles}
       iconPad={iconPad}
-      resolvedTextColor={resolvedTextColor}
+      resolvedTextColor={finalContentColor}
       content={content}
       size={size}
       mainTone={mainTone}
-      tone={tone}
       borderMovingDuration={borderMovingDuration}
       borderMovingGradientColors={borderMovingGradientColors}
       animatedStrokeAccentColor={animatedStrokeAccentColor}

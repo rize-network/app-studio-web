@@ -1,6 +1,6 @@
 import { ViewProps, TextProps } from 'app-studio';
 
-export type Shape = 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'square' | 'rounded' | 'pill';
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export type Variant = 'default' | 'outline';
 

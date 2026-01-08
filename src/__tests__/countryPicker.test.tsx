@@ -73,7 +73,7 @@ describe('CountryPicker component', () => {
           placeholder="Name"
           helperText={'required'}
           isAutoFocus
-          shape="pillShaped"
+          shape="pill"
           variant="outline"
           views={{
             text: { color: 'theme.primary' },

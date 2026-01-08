@@ -24,7 +24,7 @@ export const Shapes: Record<Shape, ViewProps> = {
       },
     },
   },
-  sharp: {
+  square: {
     borderRadius: 0,
   },
   rounded: {
@@ -35,7 +35,7 @@ export const Shapes: Record<Shape, ViewProps> = {
       },
     },
   },
-  pillShaped: {
+  pill: {
     borderRadius: '9999px', // Full rounded for pill shape
   },
 };

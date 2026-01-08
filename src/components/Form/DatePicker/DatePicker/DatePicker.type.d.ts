@@ -12,6 +12,6 @@ export type DatePickerStyles = {
 
 export type Position = 'top' | 'left' | 'right' | 'bottom';
 
-export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'default' | 'square' | 'rounded' | 'pill';
 
 export type Variant = 'default' | 'outline' | 'none';

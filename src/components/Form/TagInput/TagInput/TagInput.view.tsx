@@ -35,7 +35,6 @@ const TagChip: React.FC<{
   isReadOnly: boolean;
 }> = ({ tag, onRemove, isRemovable, size, views, isDisabled, isReadOnly }) => {
   const [isRemoveHovered, setIsRemoveHovered] = React.useState(false);
-  const { getColor } = useTheme();
 
   const chipSize = {
     xs: { padding: '2px 8px', fontSize: '10px', iconSize: 10 },
@@ -50,17 +49,19 @@ const TagChip: React.FC<{
       alignItems="center"
       gap={6}
       padding={chipSize.padding}
-      backgroundColor="white"
+      backgroundColor="color.gray.100.100"
       borderRadius="16px"
-      border="1px solid"
-      borderColor="color.black.100"
+      borderWidth="1px"
+      borderStyle="solid"
+      borderColor="color.gray.100"
       boxShadow="0 1px 2px rgba(0,0,0,0.05)"
       transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
       opacity={isDisabled ? 0.6 : 1}
       _hover={
         !isDisabled && !isReadOnly
           ? {
-              borderColor: 'color.gray.300',
+              backgroundColor: 'color.gray.100.200',
+              borderColor: 'color.gray.200',
               boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
               transform: 'translateY(-1px)',
             }
@@ -70,8 +71,7 @@ const TagChip: React.FC<{
     >
       <Text
         fontSize={chipSize.fontSize}
-        color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
-        fontWeight="500"
+        color={isDisabled ? 'color.gray.100' : 'theme.primary'}
         whiteSpace="nowrap"
         {...views?.tagText}
       >
@@ -84,7 +84,8 @@ const TagChip: React.FC<{
           padding="2px"
           borderRadius="50%"
           transition="all 0.2s ease"
-          backgroundColor={isRemoveHovered ? 'color.red.50' : 'transparent'}
+          backgroundColor={isRemoveHovered ? 'color.red.100' : 'transparent'}
+          opacity={isRemoveHovered ? 1 : 0.7}
           onMouseEnter={() => setIsRemoveHovered(true)}
           onMouseLeave={() => setIsRemoveHovered(false)}
           onClick={(e) => {
@@ -164,7 +165,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
     outline: 'none',
     backgroundColor: 'transparent',
     fontSize: Typography.fontSizes[size],
-    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+    color: isDisabled ? 'color.gray.400' : 'color.gray.800',
     flex: 1,
     minWidth: '120px',
     ...views?.input,

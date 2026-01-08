@@ -58,22 +58,31 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
   }, [text, displayedText, phase]);
 
   // Calculate animation durations
-  const words = useMemo(() => displayedText.split(' '), [displayedText]);
-  const wordCount = words.length;
+  const { lines, totalWordCount } = useMemo(() => {
+    const rawLines = displayedText.split('|');
+    const processedLines = rawLines.map((line) =>
+      line
+        .trim()
+        .split(/\s+/)
+        .filter((w) => w.length > 0)
+    );
+    const count = processedLines.reduce((acc, line) => acc + line.length, 0);
+    return { lines: processedLines, totalWordCount: count };
+  }, [displayedText]);
 
   const totalEnterDuration = useMemo(() => {
     if (sequential) {
-      return wordCount * (duration + stagger);
+      return totalWordCount * (duration + stagger);
     }
-    return (wordCount - 1) * stagger + duration;
-  }, [wordCount, duration, stagger, sequential]);
+    return (totalWordCount - 1) * stagger + duration;
+  }, [totalWordCount, duration, stagger, sequential]);
 
   const totalExitDuration = useMemo(() => {
     if (sequential) {
-      return wordCount * (duration + stagger);
+      return totalWordCount * (duration + stagger);
     }
-    return (wordCount - 1) * stagger + duration;
-  }, [wordCount, duration, stagger, sequential]);
+    return (totalWordCount - 1) * stagger + duration;
+  }, [totalWordCount, duration, stagger, sequential]);
 
   // Handle phase transitions
   useEffect(() => {
@@ -126,7 +135,6 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
     () => ({
       display: 'inline-block',
       position: 'relative',
-      overflow: 'hidden',
       verticalAlign: 'bottom',
       whiteSpace: 'nowrap',
       lineHeight: 'normal',
@@ -135,86 +143,99 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
     [textStyle]
   );
 
-  // Word row container style
-  const wordRowStyle = useMemo<React.CSSProperties>(
+  const linesContainerStyle = useMemo<React.CSSProperties>(
     () => ({
       display: 'inline-flex',
-      flexWrap: 'nowrap',
+      flexDirection: 'column',
+      alignItems: 'center', // Center lines relative to each other if they have different widths
+    }),
+    []
+  );
+
+  const lineStyle = useMemo<React.CSSProperties>(
+    () => ({
+      display: 'block',
       whiteSpace: 'nowrap',
     }),
     []
   );
 
   const isAnimating = phase === 'entering' || phase === 'exiting';
+  let globalWordIndex = 0;
 
   return (
     <Element as="span" style={containerStyle} {...props}>
-      <span style={wordRowStyle}>
-        {words.map((word, index) => {
-          const delay = getDelay(index);
-          const isLast = index === words.length - 1;
+      <span style={linesContainerStyle}>
+        {lines.map((lineWords, lineIndex) => (
+          <span key={`line-${lineIndex}`} style={lineStyle}>
+            {lineWords.map((word, wordIndex) => {
+              const currentGlobalIndex = globalWordIndex++;
+              const delay = getDelay(currentGlobalIndex);
+              const isLastInLine = wordIndex === lineWords.length - 1;
 
-          // Create animation based on phase and direction
-          let wordAnimation;
-          const durationStr = `${duration}ms`;
-          const delayStr = `${delay}ms`;
+              // Create animation based on phase and direction
+              let wordAnimation;
+              const durationStr = `${duration}ms`;
+              const delayStr = `${delay}ms`;
 
-          if (phase === 'entering') {
-            // Use app-studio animations for entering
-            wordAnimation = isUp
-              ? Animation.slideInUp({
-                  duration: durationStr,
-                  delay: delayStr,
-                  timingFunction: 'ease-out',
-                  fillMode: 'both',
-                })
-              : Animation.slideInDown({
-                  duration: durationStr,
-                  delay: delayStr,
-                  timingFunction: 'ease-out',
-                  fillMode: 'both',
-                });
-          } else if (phase === 'exiting') {
-            // Custom animation objects for exiting (slideOut not in app-studio yet)
-            wordAnimation = isUp
-              ? {
-                  from: { transform: 'translateY(0)', opacity: 1 },
-                  to: { transform: 'translateY(-100%)', opacity: 0 },
-                  duration: durationStr,
-                  delay: delayStr,
-                  timingFunction: 'ease-in',
-                  fillMode: 'both',
-                }
-              : {
-                  from: { transform: 'translateY(0)', opacity: 1 },
-                  to: { transform: 'translateY(100%)', opacity: 0 },
-                  duration: durationStr,
-                  delay: delayStr,
-                  timingFunction: 'ease-in',
-                  fillMode: 'both',
-                };
-          }
+              if (phase === 'entering') {
+                // Use app-studio animations for entering
+                wordAnimation = isUp
+                  ? Animation.slideInUp({
+                      duration: durationStr,
+                      delay: delayStr,
+                      timingFunction: 'ease-out',
+                      fillMode: 'both',
+                    })
+                  : Animation.slideInDown({
+                      duration: durationStr,
+                      delay: delayStr,
+                      timingFunction: 'ease-out',
+                      fillMode: 'both',
+                    });
+              } else if (phase === 'exiting') {
+                // Custom animation objects for exiting
+                wordAnimation = isUp
+                  ? {
+                      from: { transform: 'translateY(0)', opacity: 1 },
+                      to: { transform: 'translateY(-100%)', opacity: 0 },
+                      duration: durationStr,
+                      delay: delayStr,
+                      timingFunction: 'ease-in',
+                      fillMode: 'both',
+                    }
+                  : {
+                      from: { transform: 'translateY(0)', opacity: 1 },
+                      to: { transform: 'translateY(100%)', opacity: 0 },
+                      duration: durationStr,
+                      delay: delayStr,
+                      timingFunction: 'ease-in',
+                      fillMode: 'both',
+                    };
+              }
 
-          const wordStyle: React.CSSProperties = {
-            ...customWordStyle,
-            display: 'inline-block',
-            marginRight: isLast ? 0 : '0.25em',
-            transform: phase === 'visible' ? 'translateY(0)' : undefined,
-            opacity: phase === 'visible' ? 1 : undefined,
-          };
+              const wordStyle: React.CSSProperties = {
+                ...customWordStyle,
+                display: 'inline-block',
+                marginRight: isLastInLine ? 0 : '0.25em',
+                transform: phase === 'visible' ? 'translateY(0)' : undefined,
+                opacity: phase === 'visible' ? 1 : undefined,
+              };
 
-          return (
-            <TextComponent
-              key={`${animKey}-${index}`}
-              as="span"
-              animate={wordAnimation}
-              {...restWordProps}
-              {...wordStyle}
-            >
-              {word}
-            </TextComponent>
-          );
-        })}
+              return (
+                <TextComponent
+                  key={`${animKey}-${lineIndex}-${wordIndex}`}
+                  as="span"
+                  animate={wordAnimation}
+                  {...restWordProps}
+                  {...wordStyle}
+                >
+                  {word}
+                </TextComponent>
+              );
+            })}
+          </span>
+        ))}
       </span>
     </Element>
   );

@@ -11,8 +11,8 @@ export const ColoredButtons = () => (
       'theme.success',
       'theme.error',
     ].map((color, index) => (
-      <Button key={index} isAuto>
-        {color}
+      <Button key={index} color={color} isAuto>
+        {color.replace('theme.', '')}
       </Button>
     ))}
   </Horizontal>

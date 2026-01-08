@@ -32,7 +32,12 @@ export const TabsView: React.FC<TabsViewProps> = ({
     // Use Vertical layout for overall structure (tabs header above content)
     <Vertical width="100%" height={'100%'} {...views.container}>
       {/* Horizontal layout for the tab headers/buttons */}
-      <Horizontal {...views.headerTabs}>
+      <Horizontal
+        width="100%"
+        borderBottom="1px solid"
+        borderBottomColor="color.gray.200"
+        {...views.headerTabs}
+      >
         {tabs.map((tab) => {
           // Determine if the current tab in the loop is the active one
           const isActive = tab.title === activeTab.title;

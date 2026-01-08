@@ -76,9 +76,9 @@
     "type": "Shape",
     "typeValues": [
       "default",
-      "sharp",
+      "square",
       "rounded",
-      "pillShaped"
+      "pill"
     ],
     "description": "Optional shape variant for the emoji picker component.",
     "defaultValue": "default"

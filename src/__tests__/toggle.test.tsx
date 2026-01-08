@@ -7,9 +7,9 @@ import { Toggle } from 'src/components/Toggle/Toggle';
 
 // Additional info (mocked for testing if not imported)
 export const ToggleShapes: Record<Shape, number | string> = {
-  sharp: '0px',
+  square: '0px',
   rounded: '4px',
-  pillShaped: '24px',
+  pill: '24px',
 };
 
 // Test setup and teardown
@@ -27,9 +27,9 @@ describe('Toggle Component', () => {
   // Shape Variants
   describe('Shape Variants', () => {
     test.each([
-      ['sharp', '0px'],
+      ['square', '0px'],
       ['rounded', '4px'],
-      ['pillShaped', '24px'],
+      ['pill', '24px'],
     ])(
       'applies correct border-radius for shape %s',
       (shape, expectedRadius) => {

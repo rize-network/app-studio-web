@@ -104,11 +104,24 @@ export const TypewriterEffect: React.FC<TypewriterEffectProps> = ({
     typingSpeed,
   ]);
 
+  const renderWithLineBreaks = (text: string) => {
+    if (!text || typeof text !== 'string') return text;
+    const parts = text.split('|');
+    if (parts.length === 1) return text;
+
+    return parts.map((part, index) => (
+      <React.Fragment key={index}>
+        {part}
+        {index < parts.length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
   return (
     <>
       {displayedText.map((text, index) => (
         <React.Fragment key={index}>
-          {text}
+          {renderWithLineBreaks(text)}
           {showCursor && index === currentTextIndex && !isComplete && (
             <TextComponent
               as="span"

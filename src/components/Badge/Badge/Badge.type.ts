@@ -1,5 +1,5 @@
 import { ViewProps } from 'app-studio';
-export type Shape = 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'square' | 'rounded' | 'pill';
 // Defines possible values for the shape of a UI component such as buttons or badges.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Specifies available sizes for UI elements, catering to a range of scalability from extra small to extra large.

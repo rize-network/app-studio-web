@@ -76,9 +76,9 @@
     "type": "Shape",
     "typeValues": [
       "default",
-      "sharp",
+      "square",
       "rounded",
-      "pillShaped"
+      "pill"
     ],
     "description": "The shape variant of the color picker (e.g., rounded, square).",
     "defaultValue": "default"

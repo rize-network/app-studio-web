@@ -39,9 +39,9 @@
   "shape": {
     "type": "Shape",
     "typeValues": [
-      "sharp",
+      "square",
       "rounded",
-      "pillShaped"
+      "pill"
     ],
     "description": "Defines the visual shape characteristics of the slider components.",
     "defaultValue": "rounded"

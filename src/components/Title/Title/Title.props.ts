@@ -136,10 +136,4 @@ export interface TitleProps extends ViewProps {
    * @default 3000
    */
   alternateDuration?: number;
-
-  /**
-   * Component to use for rendering text content
-   * Defaults to Text from app-studio
-   */
-  textComponent?: any;
 }

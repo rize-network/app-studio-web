@@ -48,7 +48,7 @@ export const DesignSystemBadges = () => (
         Shape Variants
       </Text>
       <Horizontal gap={16} alignItems="center" flexWrap="wrap">
-        {['sharp', 'rounded', 'pillShaped'].map((shape) => (
+        {['square', 'rounded', 'pill'].map((shape) => (
           <Badge key={shape} content={shape} shape={shape as any} />
         ))}
       </Horizontal>

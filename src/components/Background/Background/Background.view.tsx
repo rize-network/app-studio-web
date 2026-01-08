@@ -606,23 +606,36 @@ const BackgroundGradient: React.FC<BackgroundGradientProps> = ({
  */
 const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
   contentPosition,
+  backgroundColor = 'color.black.900',
   ...props
 }) => {
   const getDefaultOverlay = () => {
+    let ligthBackground = `${backgroundColor}.100`;
+    let darkBackground = `${backgroundColor}.900`;
+    let midBackground = `${backgroundColor}.600`;
+    let midDarkBackground = `${backgroundColor}.400`;
+
+    if (backgroundColor.indexOf('.') === -1) {
+      ligthBackground = `color-mix(in srgb, ${backgroundColor} 10%, transparent)`;
+      darkBackground = `color-mix(in srgb, ${backgroundColor} 90%, transparent)`;
+      midBackground = `color-mix(in srgb, ${backgroundColor} 70%, transparent)`;
+      midDarkBackground = `color-mix(in srgb, ${backgroundColor} 50%, transparent)`;
+    }
+
     switch (contentPosition) {
       case 'left':
-        return 'radial-gradient(circle at 80% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.2) 100%)';
+        return `radial-gradient(circle at 70% 50%, ${ligthBackground} 0%, ${ligthBackground} 100%), linear-gradient(to right, ${darkBackground} 0%, ${midBackground} 65%, ${ligthBackground} 100%)`;
       case 'right':
-        return 'radial-gradient(circle at 20% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.2) 100%)';
+        return `radial-gradient(circle at 30% 50%, ${ligthBackground} 0%, ${ligthBackground} 100%), linear-gradient(to left, ${darkBackground} 0%, ${midBackground} 65%, ${ligthBackground} 100%)`;
       case 'top':
-        return 'radial-gradient(circle at 50% 80%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.1) 100%)';
+        return `radial-gradient(circle at 50% 40%, ${ligthBackground} 0%, ${ligthBackground} 100%), linear-gradient(to bottom, ${darkBackground} 0%, ${midBackground} 60%, ${ligthBackground} 100%)`;
       case 'bottom':
-        return 'radial-gradient(circle at 50% 80%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.1) 100%), linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.1) 100%)';
+        return `radial-gradient(circle at 50% 60%, ${ligthBackground} 0%, ${ligthBackground} 100%), linear-gradient(to top, ${darkBackground} 0%, ${midBackground} 60%, ${ligthBackground} 100%)`;
       case 'center':
-        return 'radial-gradient(circle at 50% 70%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)';
+        return `radial-gradient(circle at 50% 70%, ${darkBackground} 0%, ${ligthBackground} 100%)`;
 
       default:
-        return 'rgba(0,0,0,0.5)';
+        return midDarkBackground;
     }
   };
 

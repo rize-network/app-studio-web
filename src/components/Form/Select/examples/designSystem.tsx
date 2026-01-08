@@ -92,9 +92,9 @@ export const DesignSystemSelects = () => (
         />
 
         <Select
-          shape="sharp"
+          shape="square"
           options={sampleOptions}
-          placeholder="Sharp Corners"
+          placeholder="square Corners"
         />
 
         <Select
@@ -104,7 +104,7 @@ export const DesignSystemSelects = () => (
         />
 
         <Select
-          shape="pillShaped"
+          shape="pill"
           options={sampleOptions}
           placeholder="Pill Shaped"
         />

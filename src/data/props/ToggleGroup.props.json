@@ -3,9 +3,9 @@
   "shape": {
     "type": "string",
     "typeValues": [
-      "sharp",
+      "square",
       "rounded",
-      "pillShaped"
+      "pill"
     ],
     "description": "Optional shape prop to define the shape of toggle elements.",
     "defaultValue": "rounded"

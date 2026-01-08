@@ -1,6 +1,8 @@
 import React, { Suspense, useState, lazy } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { View, Text, Horizontal } from 'app-studio';
+import { View, Text, Horizontal, useTheme } from 'app-studio';
+import { Button } from 'src/components/Button/Button';
+import { useThemeActions } from 'src/providers';
 
 import ChatInputDemo from './chat.page';
 
@@ -157,11 +159,11 @@ export const componentList = [
 const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (
   <View
     as="li"
-    color="rgba(182, 84, 15, 1)"
+    color="theme.primary"
     cursor="pointer"
     padding={16}
     margin={0}
-    backgroundColor={isHovered ? '#f2f2f2' : 'transparent'}
+    backgroundColor={isHovered ? 'color.gray.100' : 'transparent'}
     fontWeight={isSelected ? 'bold' : 'normal'}
     {...props}
   >
@@ -176,32 +178,22 @@ const List = ({ children, ...props }: any) => (
 );
 
 const Title = ({ children, ...props }: any) => (
-  <Text
-    as="h2"
-    padding={16}
-    fontWeight="bold"
-    color="rgba(182, 84, 15, 1)"
-    textShadow="2px 2px 4px rgba(0, 0, 0, 0.1)"
-    {...props}
-  >
+  <Text as="h2" padding={16} fontWeight="bold" color="theme.primary" {...props}>
     {children}
   </Text>
 );
 
 const SubTitle = ({ children, ...props }: any) => (
-  <Text
-    as="h3"
-    fontWeight="bold"
-    color="rgba(182, 84, 15, 1)"
-    textShadow="2px 2px 4px rgba(0, 0, 0, 0.1)"
-    {...props}
-  >
+  <Text as="h3" fontWeight="bold" color="theme.primary" {...props}>
     {children}
   </Text>
 );
 
+// SubTitle helper
 export const ComponentsPage = () => {
   const navigate = useNavigate();
+  const { themeMode } = useTheme();
+  const { toggleThemeMode, mode } = useThemeActions();
   const [selected, setSelected] = useState(componentList[0]);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
@@ -226,8 +218,23 @@ export const ComponentsPage = () => {
         transition="box-shadow 0.3s ease-in-out"
         height="100vh"
         overflow="auto"
+        backgroundColor="theme.background"
       >
-        <Title onPress={() => navigate('/home')}>Navigation</Title>
+        <Horizontal
+          alignItems="center"
+          justifyContent="space-between"
+          paddingRight={16}
+        >
+          <Title onPress={() => navigate('/home')}>Navigation</Title>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={toggleThemeMode}
+            color="theme.primary"
+          >
+            {themeMode === 'light' ? '🌙' : '☀️'}
+          </Button>
+        </Horizontal>
         <List>
           {componentList.map((item, index) => (
             <ListItem
@@ -251,6 +258,7 @@ export const ComponentsPage = () => {
         gap={10}
         height="100vh"
         overflow="auto"
+        backgroundColor="theme.background"
       >
         <Suspense fallback={<View>Loading...</View>}>
           <SubTitle>{selected.name}</SubTitle>

@@ -62,7 +62,7 @@ test('button component calls onClick function when clicked', () => {
 test('Button with an icon on the left to match snapshot', () => {
   const tree = renderer
     .create(
-      <Button icon={<DustBinIcon size={24} />} shape={'pillShaped' as Shape}>
+      <Button icon={<DustBinIcon size={24} />} shape={'pill' as Shape}>
         Delete
       </Button>
     )
@@ -75,7 +75,7 @@ test('Button with an icon on the right to match snapshot', () => {
     .create(
       <Button
         icon={<DustBinIcon size={24} />}
-        shape={'pillShaped' as Shape}
+        shape={'pill' as Shape}
         iconPosition="right"
       >
         Delete
@@ -85,10 +85,10 @@ test('Button with an icon on the right to match snapshot', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('Button will a pillShaped shape to match snapshot', () => {
+test('Button will a pill shape to match snapshot', () => {
   const tree = renderer
     .create(
-      <Button shape={'pillShaped' as Shape} isAuto>
+      <Button shape={'pill' as Shape} isAuto>
         Pill Shape
       </Button>
     )

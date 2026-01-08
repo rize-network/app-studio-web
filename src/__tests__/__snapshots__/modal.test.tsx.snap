@@ -14,7 +14,7 @@ exports[`Modal to match snapshot 1`] = `
       className="dy-flex fdn-column cror-default bcr- wh-600px ht-fit-content tn-all-0p3s-ease bsw-none brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px"
       isClosePrevented={true}
       onClick={[Function]}
-      variant="sharp"
+      variant="square"
     >
       <div
         borderBottomColor="color.gray.200"
