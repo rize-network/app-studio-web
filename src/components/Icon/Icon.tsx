@@ -213,3 +213,6 @@ export const ZoomInIcon = createIcon('zoom-in', { filled: false });
 export const DragHandleLinesIcon = createIcon('grip-horizontal', {
   filled: false,
 });
+export const MousePointerIcon = createIcon('mouse-pointer-2', {
+  filled: false,
+});

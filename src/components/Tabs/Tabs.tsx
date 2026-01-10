@@ -35,7 +35,7 @@ const TabsComponent: React.FC<TabsProps> = ({
   );
 
   // For data-driven pattern
-  const dataState = useTabsState(tabs || [], defaultValue);
+  const dataState = useTabsState(tabs || [], defaultValue, value);
 
   // If using compound component pattern (children provided)
   if (children) {
@@ -50,8 +50,13 @@ const TabsComponent: React.FC<TabsProps> = ({
   if (tabs) {
     // Handler function to change the active tab and trigger the callback
     const handleTabClick = (tab: Tab) => {
+      const getTabId = (t: Tab) => (t.value !== undefined ? t.value : t.title);
+
       // Only update state and call callback if the clicked tab is different from the current one
-      if (dataState.activeTab?.title !== tab.title) {
+      if (
+        !dataState.activeTab ||
+        getTabId(dataState.activeTab) !== getTabId(tab)
+      ) {
         dataState.setActiveTab(tab);
         // Call the onTabChange callback if provided
         if (onTabChange) {

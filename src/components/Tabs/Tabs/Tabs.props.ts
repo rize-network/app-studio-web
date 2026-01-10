@@ -34,7 +34,7 @@ export interface TabsProps {
   renderContent?: (activeTab: Tab) => React.ReactNode;
 
   /** Current value for controlled compound component pattern */
-  value?: string;
+  value?: string | number;
   /** Callback when tab value changes in compound component pattern */
   onValueChange?: (value: any) => void;
   /** Children for compound component pattern */

@@ -40,7 +40,9 @@ export const TabsView: React.FC<TabsViewProps> = ({
       >
         {tabs.map((tab) => {
           // Determine if the current tab in the loop is the active one
-          const isActive = tab.title === activeTab.title;
+          const isActive =
+            (tab.value !== undefined ? tab.value : tab.title) ===
+            (activeTab.value !== undefined ? activeTab.value : activeTab.title);
           // Prepare the onClick handler for this specific tab
           const onClick = () => handleTabClick(tab);
 

@@ -5,6 +5,7 @@ import {
   StylesTabs,
   CompoundTabs,
   CustomHeaderExample,
+  ControlledTabs,
 } from 'src/components/Tabs/examples';
 
 const TabsPage = () => {
@@ -12,6 +13,7 @@ const TabsPage = () => {
 
   const sections = {
     'Default Usage': <Default />,
+    'Controlled Component': <ControlledTabs />,
     'Styled Variations': <StylesTabs />,
     'Compound Pattern': <CompoundTabs />,
     'Custom Header': <CustomHeaderExample />, // Added this since it was available but unused

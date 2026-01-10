@@ -68,6 +68,8 @@ const ToggleGroupPage = lazy(() => import('src/pages/toggleGroup.page'));
 const AudioInputPage = lazy(() => import('src/pages/audioInput.page'));
 
 const BackgroundPage = lazy(() => import('src/pages/background.page'));
+const ChatWidgetPage = lazy(() => import('src/pages/chatwidget.page'));
+const EditComponentPage = lazy(() => import('src/pages/editComponent.page'));
 
 export const componentList = [
   { name: 'Accordion', path: '/accordion', element: <AccordionPage /> },
@@ -137,6 +139,12 @@ export const componentList = [
     element: <StatusIndicatorPage />,
   },
 
+  { name: 'ChatWidget', path: '/chat-widget', element: <ChatWidgetPage /> },
+  {
+    name: 'EditComponent',
+    path: '/edit-component',
+    element: <EditComponentPage />,
+  },
   { name: 'Switch', path: '/switch', element: <SwitchPage /> },
   { name: 'Table', path: '/table', element: <TablePage /> },
   { name: 'Tabs', path: '/tabs', element: <TabsPage /> },

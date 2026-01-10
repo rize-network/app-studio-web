@@ -74,6 +74,14 @@ export const TabHeader: React.FC<TabHeaderProps> = ({
     return ['top', 'bottom'].includes(iconPosition) ? '4px' : '8px';
   };
 
+  // Clone icon to apply active styles (e.g. bold stroke) if valid
+  const iconElement =
+    tab.icon && React.isValidElement(tab.icon)
+      ? React.cloneElement(tab.icon as React.ReactElement, {
+          strokeWidth: isActive ? 2.5 : 2,
+        })
+      : tab.icon;
+
   return (
     <Element
       as="div"
@@ -87,8 +95,31 @@ export const TabHeader: React.FC<TabHeaderProps> = ({
       onClick={onClick}
       data-state={isActive ? 'active' : 'inactive'}
     >
-      {tab.icon && <Element>{tab.icon}</Element>}
-      <Text {...textStyles}>{tab.title}</Text>
+      {iconElement && <Element>{iconElement}</Element>}
+
+      {/* Grid wrapper to prevent layout shift when font weight changes */}
+      <Element display="grid" alignItems="center" justifyContent="center">
+        {/* Invisible bold text to reserve space */}
+        <Text
+          {...textStyles}
+          fontWeight="600"
+          visibility="hidden"
+          gridColumn="1"
+          gridRow="1"
+          aria-hidden="true"
+        >
+          {tab.title}
+        </Text>
+        {/* Visible text */}
+        <Text
+          {...textStyles}
+          fontWeight={isActive ? '600' : '500'}
+          gridColumn="1"
+          gridRow="1"
+        >
+          {tab.title}
+        </Text>
+      </Element>
     </Element>
   );
 };

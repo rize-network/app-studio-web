@@ -60,6 +60,8 @@ export * from './Command/Command';
 export * from './Tooltip/Tooltip';
 export * from './ChatInput/ChatInput';
 export * from './Background/Background';
+export * from './ChatWidget/ChatWidget';
+export * from './ChatWidget/Widget/ChatWidgetWidget';
 
 export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';
@@ -113,3 +115,4 @@ export * from './Command/Command/Command.props';
 export * from './Tooltip/Tooltip/Tooltip.props';
 export * from './ChatInput/ChatInput/ChatInput.props';
 export * from './Background/Background/Background.props';
+export * from './ChatWidget/ChatWidget/ChatWidget.props';

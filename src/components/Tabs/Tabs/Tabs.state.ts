@@ -9,49 +9,69 @@ import { Tab } from './Tabs.type';
  */
 export const useTabsState = (
   propTabs: Tab[],
-  defaultValue?: string | number
+  defaultValue?: string | number,
+  value?: string | number
 ) => {
+  // Helper to extract the identifier (value or title) from a tab
+  const getTabId = (tab: Tab) =>
+    tab.value !== undefined ? tab.value : tab.title;
+
   // Find the initial tab based on defaultValue, or default to the first tab.
-  // Ensure propTabs is not empty before accessing index 0.
   const findInitialTab = (): Tab | undefined => {
     if (!propTabs || propTabs.length === 0) {
-      return undefined; // No tabs, no initial active tab
+      return undefined;
     }
     if (defaultValue !== undefined) {
-      const foundTab = propTabs.find((tab) => tab.title === defaultValue);
+      const foundTab = propTabs.find((tab) => getTabId(tab) === defaultValue);
       if (foundTab) {
         return foundTab;
       }
-      // Warn if defaultValue is provided but not found
-      // console.warn(
-      //   `Tabs: defaultValue "${defaultValue}" not found in tabs. Defaulting to the first tab.`
-      // );
     }
-    return propTabs[0]; // Default to the first tab
+    return propTabs[0];
   };
 
-  const [activeTab, setActiveTab] = useState<Tab | undefined>(findInitialTab());
+  const [internalActiveTab, setInternalActiveTab] = useState<Tab | undefined>(
+    findInitialTab()
+  );
 
-  // Effect to update the active tab if the defaultValue prop changes
-  // or if the tabs array changes and the current active tab is no longer valid.
+  // Determine the effective active tab
+  // In controlled mode (value provided), find the tab matching value.
+  // In uncontrolled mode, use internal state.
+  const activeTab =
+    value !== undefined
+      ? propTabs.find((tab) => getTabId(tab) === value)
+      : internalActiveTab;
+
+  const setActiveTab = (tab: Tab) => {
+    // Only update internal state if uncontrolled
+    if (value === undefined) {
+      setInternalActiveTab(tab);
+    }
+  };
+
+  // Effect to update internal active tab if defaultValue changes or tabs change
   useEffect(() => {
-    const newInitialTab = findInitialTab();
-    // Update only if the calculated initial tab is different from the current active tab
-    // or if the current active tab is no longer in the list (and there are tabs)
-    const currentActiveTabStillValid =
-      activeTab && propTabs.some((t) => t.title === activeTab.title);
+    if (value !== undefined) return; // Skip logic if controlled
 
+    const newInitialTab = findInitialTab();
+    const currentActiveTabStillValid =
+      internalActiveTab &&
+      propTabs.some((t) => getTabId(t) === getTabId(internalActiveTab));
+
+    // If current tab is invalid, or if defaultValue changed and suggests a different tab
+    // (Note: The original logic forced reset on defaultValue change, we keep that behavior)
     if (
       newInitialTab &&
       (!currentActiveTabStillValid ||
-        (defaultValue !== undefined && activeTab?.title !== defaultValue))
+        (defaultValue !== undefined &&
+          internalActiveTab &&
+          getTabId(internalActiveTab) !== defaultValue))
     ) {
-      setActiveTab(newInitialTab);
-    } else if (!newInitialTab && activeTab) {
-      // Handle case where all tabs are removed
-      setActiveTab(undefined);
+      setInternalActiveTab(newInitialTab);
+    } else if (!newInitialTab && internalActiveTab) {
+      setInternalActiveTab(undefined);
     }
-  }, [propTabs, defaultValue]); // Rerun when tabs or initial title changes
+  }, [propTabs, defaultValue]); // Remove internalActiveTab dependency to avoid loops, though it shouldn't cause one if guarded
 
   return {
     activeTab,
