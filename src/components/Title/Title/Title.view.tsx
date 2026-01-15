@@ -220,7 +220,12 @@ const TitleView: React.FC<TitleProps> = ({
       <Element {...containerProps} {...views?.container} {...props}>
         {parts.map((part, idx) =>
           typeof part === 'string' ? (
-            <DefaultText key={`text-${idx}`} as="span" display="inline">
+            <DefaultText
+              key={`text-${idx}`}
+              as="span"
+              display="inline"
+              {...views?.text}
+            >
               {renderWithLineBreaks(part)}
             </DefaultText>
           ) : (
@@ -259,7 +264,12 @@ const TitleView: React.FC<TitleProps> = ({
 
   // Case 3: Default - no highlighting
   return (
-    <DefaultText {...containerProps} {...props} {...views?.container}>
+    <DefaultText
+      {...containerProps}
+      {...props}
+      {...views?.container}
+      {...views?.text}
+    >
       {renderWithLineBreaks(text)}
     </DefaultText>
   );

@@ -18,7 +18,8 @@ export function useChatWidgetState(props: ChatWidgetProps) {
   const isControlled = inputValue !== undefined;
 
   // Get the current input value
-  const currentInputValue = isControlled ? inputValue : internalInputValue;
+  const currentInputValue =
+    inputValue !== undefined ? inputValue : internalInputValue;
 
   // Handle input changes
   const handleInputChange = useCallback(

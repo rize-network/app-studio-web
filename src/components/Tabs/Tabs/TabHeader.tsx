@@ -95,7 +95,15 @@ export const TabHeader: React.FC<TabHeaderProps> = ({
       onClick={onClick}
       data-state={isActive ? 'active' : 'inactive'}
     >
-      {iconElement && <Element>{iconElement}</Element>}
+      {/* 
+        Force icon remount when active state changes to ensure strokeWidth prop is applied 
+        even if the Icon component doesn't handle prop updates correctly.
+      */}
+      {iconElement && (
+        <Element key={isActive ? 'active-icon' : 'inactive-icon'}>
+          {iconElement}
+        </Element>
+      )}
 
       {/* Grid wrapper to prevent layout shift when font weight changes */}
       <Element display="grid" alignItems="center" justifyContent="center">
