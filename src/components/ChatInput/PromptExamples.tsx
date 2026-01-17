@@ -38,17 +38,17 @@ export const PromptExamples: React.FC<PromptExamplesProps> = ({
           type="button"
           padding="8px 12px"
           borderRadius="4px"
-          backgroundColor="color.gray.100"
+          backgroundColor="color-gray-100"
           border="none"
           cursor="pointer"
           transition="all 0.2s ease"
           onClick={() => onSelect(example)}
           _hover={{
-            backgroundColor: 'color.gray.200',
+            backgroundColor: 'color-gray-200',
           }}
           {...views?.item}
         >
-          <Text fontSize="14px" color="color.gray.700" {...views?.text}>
+          <Text fontSize="14px" color="color-gray-700" {...views?.text}>
             {example.text}
           </Text>
         </View>

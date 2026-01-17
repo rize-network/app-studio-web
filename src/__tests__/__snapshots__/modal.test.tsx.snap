@@ -17,7 +17,7 @@ exports[`Modal to match snapshot 1`] = `
       variant="square"
     >
       <div
-        borderBottomColor="color.gray.200"
+        borderBottomColor="color-gray-200"
         borderBottomStyle="solid"
         borderBottomWidth="1px"
         buttonSize="xl"
@@ -41,14 +41,14 @@ exports[`Modal to match snapshot 1`] = `
               viewBox="0 0 24 24"
             >
               <line
-                stroke="theme.primary"
+                stroke="theme-primary"
                 x1="18"
                 x2="6"
                 y1="6"
                 y2="18"
               />
               <line
-                stroke="theme.primary"
+                stroke="theme-primary"
                 x1="6"
                 x2="18"
                 y1="6"
@@ -65,7 +65,7 @@ exports[`Modal to match snapshot 1`] = `
         Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum. Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.
       </div>
       <div
-        borderTopColor="color.gray.200"
+        borderTopColor="color-gray-200"
         borderTopStyle="solid"
         borderTopWidth="1px"
         className="plt-24px prt-24px ptp-16px pbm-16px dy-flex fdn-row mtp-auto ais-center jct-flex-end pvl-16 phl-24 gp-12px mobile--pvl-12 mobile--phl-16 mobile--gp-8px"

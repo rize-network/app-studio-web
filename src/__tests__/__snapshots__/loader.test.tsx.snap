@@ -43,7 +43,7 @@ exports[`Loader with an a size xl where width equals to 30px should match snapsh
 </div>
 `;
 
-exports[`Loader with loader color equals to theme.primary should match snapshot 1`] = `
+exports[`Loader with loader color equals to theme-primary should match snapshot 1`] = `
 <div
   className="dy-flex jct-center ais-center gp-10px fdn-row"
 >
@@ -86,7 +86,7 @@ exports[`Loader with loader color equals to theme.primary should match snapshot 
 </div>
 `;
 
-exports[`Loader with text color equals to theme.primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
+exports[`Loader with text color equals to theme-primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
 <div
   className="dy-flex jct-center ais-center gp-10px fdn-row"
 >

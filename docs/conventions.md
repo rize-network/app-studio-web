@@ -292,7 +292,7 @@ Use the theme system via `useTheme` hook:
 
 ```typescript
 const { getColor, themeMode } = useTheme();
-const colorValue = getColor('theme.primary', { themeMode });
+const colorValue = getColor('theme-primary', { themeMode });
 ```
 
 ### Style Constants

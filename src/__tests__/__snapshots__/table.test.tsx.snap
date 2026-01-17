@@ -7,7 +7,7 @@ exports[`Table to match snapshot 1`] = `
   role="Table"
 >
   <thead
-    borderBottomColor="color.gray.200"
+    borderBottomColor="color-gray-200"
     className="tan-left bcr- bbm-1px-solid"
   >
     <tr
@@ -40,28 +40,28 @@ exports[`Table to match snapshot 1`] = `
       className="tn-background-color-0p15s-ease bcr---hover outline-none--focus bcr---focus"
     >
       <td
-        borderBottomColor="color.gray.100"
+        borderBottomColor="color-gray-100"
         className="wse-nowrap fwt-500 pg-12px-16px fse-14px bbm-1px-solid cr- mobile--pg-8px-12px mobile--fse-12px"
         isFirstColumn={true}
       >
         INV001
       </td>
       <td
-        borderBottomColor="color.gray.100"
+        borderBottomColor="color-gray-100"
         className="wse-nowrap fwt-400 pg-12px-16px fse-14px bbm-1px-solid cr- mobile--pg-8px-12px mobile--fse-12px"
         isFirstColumn={false}
       >
         Paid
       </td>
       <td
-        borderBottomColor="color.gray.100"
+        borderBottomColor="color-gray-100"
         className="wse-nowrap fwt-400 pg-12px-16px fse-14px bbm-1px-solid cr- mobile--pg-8px-12px mobile--fse-12px"
         isFirstColumn={false}
       >
         $250.00
       </td>
       <td
-        borderBottomColor="color.gray.100"
+        borderBottomColor="color-gray-100"
         className="wse-nowrap fwt-400 pg-12px-16px fse-14px bbm-1px-solid cr- mobile--pg-8px-12px mobile--fse-12px"
         isFirstColumn={false}
       >

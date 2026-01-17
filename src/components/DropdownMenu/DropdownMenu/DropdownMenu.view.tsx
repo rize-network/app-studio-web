@@ -290,7 +290,7 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
       {...DropdownMenuSizes[size]}
       _hover={!item.disabled ? DropdownMenuItemStates.hover : {}}
       backgroundColor={
-        isHovered && !item.disabled ? 'color.gray.100' : 'transparent'
+        isHovered && !item.disabled ? 'color-gray-100' : 'transparent'
       }
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -337,7 +337,7 @@ export const DropdownMenuDivider: React.FC<DropdownMenuDividerProps> = ({
   return (
     <View
       height="1px"
-      backgroundColor="color.gray.200"
+      backgroundColor="color-gray-200"
       margin="4px 0"
       {...views?.divider}
       {...props}

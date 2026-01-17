@@ -83,7 +83,7 @@ export const CommandInput: React.FC<CommandInputProps> = ({
 
   return (
     <View {...CommandInputStyles} {...views?.container} {...props}>
-      <SearchIcon widthHeight={16} color="color.gray.400" marginRight="8px" />
+      <SearchIcon widthHeight={16} color="color-gray-400" marginRight="8px" />
       <View
         as="input"
         type="text"

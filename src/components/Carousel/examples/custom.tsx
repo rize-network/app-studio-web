@@ -11,22 +11,22 @@ export const CustomDemo = () => {
     {
       title: 'Mountain Retreat',
       description: 'Peaceful mountain cabin with stunning views.',
-      color: 'color.blue.100',
+      color: 'color-blue-100',
     },
     {
       title: 'Beach Paradise',
       description: 'Relax on white sandy beaches with crystal clear water.',
-      color: 'color.green.100',
+      color: 'color-green-100',
     },
     {
       title: 'City Adventure',
       description: 'Explore the vibrant streets and culture of the city.',
-      color: 'color.purple.100',
+      color: 'color-purple-100',
     },
     {
       title: 'Desert Oasis',
       description: 'Experience tranquility in the heart of the desert.',
-      color: 'color.orange.100',
+      color: 'color-orange-100',
     },
   ];
 
@@ -46,19 +46,19 @@ export const CustomDemo = () => {
             width: '30px',
             height: '4px',
             borderRadius: '2px',
-            backgroundColor: 'color.gray.200',
+            backgroundColor: 'color-gray-200',
           },
           activeIndicator: {
-            backgroundColor: 'color.blue.500',
+            backgroundColor: 'color-blue-500',
             width: '40px',
           },
           prevButton: {
-            backgroundColor: 'color.blue.500',
-            color: 'color.white',
+            backgroundColor: 'color-blue-500',
+            color: 'color-white',
           },
           nextButton: {
-            backgroundColor: 'color.blue.500',
-            color: 'color.white',
+            backgroundColor: 'color-blue-500',
+            color: 'color-white',
           },
         }}
         indicatorVariant="line"
@@ -90,7 +90,7 @@ export const CustomDemo = () => {
               </Card.Content>
               <Card.Footer>
                 <Horizontal justifyContent="flex-end">
-                  <Text fontSize="14px" color="color.gray.500">
+                  <Text fontSize="14px" color="color-gray-500">
                     Slide {index + 1} of {cards.length}
                   </Text>
                 </Horizontal>

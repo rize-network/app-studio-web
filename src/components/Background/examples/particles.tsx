@@ -10,14 +10,14 @@ export const ParticlesDemo = () => (
     </Text>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Default Particles (50 circles, medium speed)
       </Text>
       <Background.Particles />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Mixed Shapes (circles, squares, triangles)
       </Text>
       <Background.Particles
@@ -28,14 +28,14 @@ export const ParticlesDemo = () => (
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Fast Moving Circles
       </Text>
       <Background.Particles count={30} speed="fast" shapes={['circle']} />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Custom Colors & Slow Speed
       </Text>
       <Background.Particles

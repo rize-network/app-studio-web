@@ -229,12 +229,12 @@ export const PieChart: React.FC<PieChartProps> = ({
                   backgroundColor={slice.color}
                 />
               </View>
-              <Text marginTop="4px" color="color.gray.500" fontSize="12px">
+              <Text marginTop="4px" color="color-gray-500" fontSize="12px">
                 Slice {slice.index + 1} of {dataPoints.length}
               </Text>
               <View marginTop="8px" display="flex" flexDirection="column">
                 <View display="flex" justifyContent="space-between">
-                  <Text color="color.gray.500">Value</Text>
+                  <Text color="color-gray-500">Value</Text>
                   <Text fontWeight="medium">
                     {slice.value.toLocaleString()}
                   </Text>
@@ -244,7 +244,7 @@ export const PieChart: React.FC<PieChartProps> = ({
                   display="flex"
                   justifyContent="space-between"
                 >
-                  <Text color="color.gray.500">Share</Text>
+                  <Text color="color-gray-500">Share</Text>
                   <Text fontWeight="medium">{slice.percentage}</Text>
                 </View>
                 <View
@@ -252,7 +252,7 @@ export const PieChart: React.FC<PieChartProps> = ({
                   display="flex"
                   justifyContent="space-between"
                 >
-                  <Text color="color.gray.500">Total</Text>
+                  <Text color="color-gray-500">Total</Text>
                   <Text fontWeight="medium">{total.toLocaleString()}</Text>
                 </View>
                 {remainingShare !== null && (
@@ -261,7 +261,7 @@ export const PieChart: React.FC<PieChartProps> = ({
                     display="flex"
                     justifyContent="space-between"
                   >
-                    <Text color="color.gray.500">Remaining</Text>
+                    <Text color="color-gray-500">Remaining</Text>
                     <Text fontWeight="medium">
                       {`${remainingShare.toFixed(1)}%`}
                     </Text>

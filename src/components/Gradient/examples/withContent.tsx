@@ -11,8 +11,8 @@ export const WithContentDemo = () => (
 
     <Gradient
       type="linear"
-      from="color.blue.600"
-      to="color.purple.600"
+      from="color-blue-600"
+      to="color-purple-600"
       height="150px"
       width="100%"
       borderRadius="12px"
@@ -22,7 +22,7 @@ export const WithContentDemo = () => (
           <Text color="white" fontWeight="600" fontSize="24px">
             Welcome to Gradients
           </Text>
-          <Button backgroundColor="color.white" color="color.purple.600">
+          <Button backgroundColor="color-white" color="color-purple-600">
             Get Started
           </Button>
         </Vertical>

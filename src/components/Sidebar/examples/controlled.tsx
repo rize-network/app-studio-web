@@ -53,12 +53,12 @@ export const ControlledSidebar = () => {
               </Vertical>
             </Sidebar.Content>
             <Sidebar.Footer>
-              <Text size="sm" color="color.gray.500">
+              <Text size="sm" color="color-gray-500">
                 Controlled via state
               </Text>
             </Sidebar.Footer>
           </Sidebar>
-          <View flex="1" padding="16px" backgroundColor="color.gray.50">
+          <View flex="1" padding="16px" backgroundColor="color-gray-50">
             <Text>Main Content</Text>
             <Text marginTop={8}>
               The sidebar is controlled via external state. Use the buttons

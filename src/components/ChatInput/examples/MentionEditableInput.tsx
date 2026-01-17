@@ -85,7 +85,7 @@ export const MentionEditableInputDemo = () => {
         Enhanced Editable Input with @ Mentions Demo
       </Text>
 
-      <Text fontSize="14px" color="color.gray.600">
+      <Text fontSize="14px" color="color-gray-600">
         Features: • Visible placeholder text • Auto-growing height • Line breaks
         with Enter key • @ mention auto-completion • Auto-completion suggestions
         • Submit only via button (not Enter key)
@@ -93,15 +93,15 @@ export const MentionEditableInputDemo = () => {
 
       <View
         padding="12px"
-        backgroundColor="color.blue.50"
+        backgroundColor="color-blue-50"
         border="1px solid"
-        borderColor="color.blue.200"
+        borderColor="color-blue-200"
         borderRadius="6px"
       >
-        <Text fontSize="14px" fontWeight="medium" color="color.blue.800">
+        <Text fontSize="14px" fontWeight="medium" color="color-blue-800">
           Try typing "@" to see mention suggestions!
         </Text>
-        <Text fontSize="12px" color="color.blue.700" marginTop="4px">
+        <Text fontSize="12px" color="color-blue-700" marginTop="4px">
           Available users: @john_doe, @jane_smith, @mike_wilson, @sarah_jones,
           @alex_brown, @lisa_davis
         </Text>
@@ -109,10 +109,10 @@ export const MentionEditableInputDemo = () => {
 
       <View
         border="1px solid"
-        borderColor="color.gray.300"
+        borderColor="color-gray-300"
         borderRadius="8px"
         padding="16px"
-        backgroundColor="color.white"
+        backgroundColor="color-white"
         overflow="visible"
         position="relative"
       >
@@ -132,9 +132,9 @@ export const MentionEditableInputDemo = () => {
             views={{
               container: {
                 border: '1px solid',
-                borderColor: 'color.gray.300',
+                borderColor: 'color-gray-300',
                 borderRadius: '8px',
-                backgroundColor: 'color.white',
+                backgroundColor: 'color-white',
                 padding: '8px',
               },
             }}
@@ -143,7 +143,7 @@ export const MentionEditableInputDemo = () => {
           <Horizontal justifyContent="space-between" alignItems="center">
             {selectedMentions.length > 0 && (
               <View>
-                <Text fontSize="12px" color="color.gray.600" marginBottom="4px">
+                <Text fontSize="12px" color="color-gray-600" marginBottom="4px">
                   Mentioned:
                 </Text>
                 <Horizontal gap={4} flexWrap="wrap">
@@ -151,12 +151,12 @@ export const MentionEditableInputDemo = () => {
                     <View
                       key={`${mention.id}-${index}`}
                       padding="2px 6px"
-                      backgroundColor="color.blue.100"
+                      backgroundColor="color-blue-100"
                       borderRadius="4px"
                       border="1px solid"
-                      borderColor="color.blue.200"
+                      borderColor="color-blue-200"
                     >
-                      <Text fontSize="12px" color="color.blue.800">
+                      <Text fontSize="12px" color="color-blue-800">
                         @{mention.name}
                       </Text>
                     </View>
@@ -170,17 +170,17 @@ export const MentionEditableInputDemo = () => {
               onClick={handleSubmit}
               padding="8px 16px"
               backgroundColor={
-                inputValue.trim() ? 'color.blue.500' : 'color.gray.300'
+                inputValue.trim() ? 'color-blue-500' : 'color-gray-300'
               }
-              color="color.white"
+              color="color-white"
               border="none"
               borderRadius="6px"
               cursor={inputValue.trim() ? 'pointer' : 'not-allowed'}
               disabled={!inputValue.trim()}
               _hover={{
                 backgroundColor: inputValue.trim()
-                  ? 'color.blue.600'
-                  : 'color.gray.300',
+                  ? 'color-blue-600'
+                  : 'color-gray-300',
               }}
             >
               Send Message
@@ -192,17 +192,17 @@ export const MentionEditableInputDemo = () => {
       {submittedMessage && (
         <View
           padding="12px"
-          backgroundColor="color.green.50"
+          backgroundColor="color-green-50"
           border="1px solid"
-          borderColor="color.green.200"
+          borderColor="color-green-200"
           borderRadius="6px"
         >
-          <Text fontSize="14px" fontWeight="medium" color="color.green.800">
+          <Text fontSize="14px" fontWeight="medium" color="color-green-800">
             Submitted Message:
           </Text>
           <Text
             fontSize="14px"
-            color="color.green.700"
+            color="color-green-700"
             marginTop="4px"
             whiteSpace="pre-wrap"
           >

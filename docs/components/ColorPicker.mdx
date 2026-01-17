@@ -52,7 +52,7 @@ import { ColorPicker } from '@app-studio/web';
 
 export const DefaultValueColorPicker = () => (
   <ColorPicker 
-    defaultValue="color.emerald.500"
+    defaultValue="color-emerald-500"
     onChange={(color) => console.log(color)}
   />
 );
@@ -69,11 +69,11 @@ import { ColorPicker } from '@app-studio/web';
 
 export const PredefinedColorPicker = () => {
   const colors = [
-    { color: 'color.red.500', label: 'Red' },
-    { color: 'color.blue.500', label: 'Blue' },
-    { color: 'color.emerald.500', label: 'Green' },
-    { color: 'color.amber.500', label: 'Orange' },
-    { color: 'color.violet.500', label: 'Purple' },
+    { color: 'color-red-500', label: 'Red' },
+    { color: 'color-blue-500', label: 'Blue' },
+    { color: 'color-emerald-500', label: 'Green' },
+    { color: 'color-amber-500', label: 'Orange' },
+    { color: 'color-violet-500', label: 'Purple' },
   ];
   
   return (
@@ -170,7 +170,7 @@ export const ColorFormatPickers = () => (
 ```
 
 ### **closeOnSelect**
-Whether to close the dropdown after selecting a color.
+Whether to close the dropdown after selecting a color-
 
 - **Type:** `boolean`
 - **Default:** `true`
@@ -200,7 +200,7 @@ import { ColorPicker } from '@app-studio/web';
 export const DisabledColorPicker = () => (
   <ColorPicker 
     isDisabled
-    value="color.blue.500"
+    value="color-blue-500"
     onChange={(color) => console.log(color)}
   />
 );
@@ -219,7 +219,7 @@ import { ColorPicker } from '@app-studio/web';
 export const ReadOnlyColorPicker = () => (
   <ColorPicker 
     isReadOnly
-    value="color.blue.500"
+    value="color-blue-500"
     onChange={(color) => console.log(color)}
   />
 );
@@ -385,10 +385,10 @@ export const StyledColorPicker = () => (
     views={{
       trigger: {
         borderWidth: 2,
-        borderColor: 'color.blue.500',
+        borderColor: 'color-blue-500',
       },
       dropdown: {
-        backgroundColor: 'color.coolGray.50',
+        backgroundColor: 'color-coolGray-50',
         padding: 20,
       },
       colorSwatch: {
@@ -411,12 +411,12 @@ export const CompleteColorPicker = () => {
   const [color, setColor] = useState('#3b82f6');
   
   const predefinedColors = [
-    { color: 'color.red.500', label: 'Red' },
-    { color: 'color.blue.500', label: 'Blue' },
-    { color: 'color.emerald.500', label: 'Green' },
-    { color: 'color.amber.500', label: 'Orange' },
-    { color: 'color.violet.500', label: 'Purple' },
-    { color: 'color.pink.500', label: 'Pink' },
+    { color: 'color-red-500', label: 'Red' },
+    { color: 'color-blue-500', label: 'Blue' },
+    { color: 'color-emerald-500', label: 'Green' },
+    { color: 'color-amber-500', label: 'Orange' },
+    { color: 'color-violet-500', label: 'Purple' },
+    { color: 'color-pink-500', label: 'Pink' },
   ];
   
   return (

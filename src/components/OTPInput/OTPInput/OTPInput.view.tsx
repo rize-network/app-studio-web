@@ -235,7 +235,7 @@ const OTPInputView: React.FC<
             views={views}
             variant={variant}
             value={slot.char || ''}
-            color={'theme.primary'}
+            color={'theme-primary'}
             isHovered={isHovered}
             isDisabled={isDisabled}
             isReadOnly={isReadOnly}
@@ -293,7 +293,7 @@ const OTPInputView: React.FC<
                     ? '20px'
                     : '24px'
                 }
-                color="color.gray.400"
+                color="color-gray-400"
                 opacity={0.5}
                 {...views.text}
               >
@@ -305,7 +305,7 @@ const OTPInputView: React.FC<
                 position="absolute"
                 width="2px"
                 height="60%"
-                backgroundColor="theme.primary"
+                backgroundColor="theme-primary"
                 animation="blink 1s step-start infinite"
                 style={{
                   animationName: 'blink',
@@ -358,7 +358,7 @@ const OTPInputView: React.FC<
         {showLabel && (
           <FieldLabel
             htmlFor={id}
-            color={'theme.primary'}
+            color={'theme-primary'}
             error={error}
             {...views.label}
           >

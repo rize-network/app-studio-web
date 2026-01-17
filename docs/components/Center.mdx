@@ -16,7 +16,7 @@ import { Center } from '@app-studio/web';
 import { Text } from '@app-studio/web';
 
 export const BasicCenter = () => (
-  <Center height={200} backgroundColor="color.gray.100">
+  <Center height={200} backgroundColor="color-gray-100">
     <Text fontSize={18} fontWeight="bold">
       Centered Content
     </Text>
@@ -32,10 +32,10 @@ import { Loader } from '@app-studio/web';
 import { Text, Vertical } from '@app-studio/web';
 
 export const LoadingCenter = () => (
-  <Center height="100vh" backgroundColor="color.white">
+  <Center height="100vh" backgroundColor="color-white">
     <Vertical gap={16} alignItems="center">
       <Loader size="lg" />
-      <Text color="color.gray.600">Loading...</Text>
+      <Text color="color-gray-600">Loading...</Text>
     </Vertical>
   </Center>
 );
@@ -50,18 +50,18 @@ import { Text, Vertical } from '@app-studio/web';
 import { EmptyIcon } from '@app-studio/web';
 
 export const EmptyStateCenter = () => (
-  <Center height={400} backgroundColor="color.gray.50" borderRadius={12}>
+  <Center height={400} backgroundColor="color-gray-50" borderRadius={12}>
     <Vertical gap={20} alignItems="center" textAlign="center">
-      <EmptyIcon widthHeight={64} color="color.gray.400" />
+      <EmptyIcon widthHeight={64} color="color-gray-400" />
       <Vertical gap={8} alignItems="center">
-        <Text fontSize={20} fontWeight="bold" color="color.gray.700">
+        <Text fontSize={20} fontWeight="bold" color="color-gray-700">
           No items found
         </Text>
-        <Text color="color.gray.500" maxWidth={300}>
+        <Text color="color-gray-500" maxWidth={300}>
           There are no items to display. Create your first item to get started.
         </Text>
       </Vertical>
-      <Button variant="filled" colorScheme="theme.primary">
+      <Button variant="filled" colorScheme="theme-primary">
         Create Item
       </Button>
     </Vertical>
@@ -91,7 +91,7 @@ export const ModalCenter = () => {
             <Text fontSize={24} fontWeight="bold">
               Confirm Action
             </Text>
-            <Text color="color.gray.600" maxWidth={300}>
+            <Text color="color-gray-600" maxWidth={300}>
               Are you sure you want to delete this item? This action cannot be undone.
             </Text>
             <Horizontal gap={12}>
@@ -103,7 +103,7 @@ export const ModalCenter = () => {
               </Button>
               <Button
                 variant="filled"
-                colorScheme="theme.error"
+                colorScheme="theme-error"
                 onClick={() => setIsOpen(false)}
               >
                 Delete
@@ -128,7 +128,7 @@ export const HeroCenter = () => (
   <Center
     height="100vh"
     backgroundImage="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
-    color="color.white"
+    color="color-white"
   >
     <Vertical gap={32} alignItems="center" textAlign="center" maxWidth={600}>
       <Vertical gap={16} alignItems="center">
@@ -145,16 +145,16 @@ export const HeroCenter = () => (
         <Button
           variant="filled"
           size="lg"
-          backgroundColor="color.white"
-          color="color.gray.900"
+          backgroundColor="color-white"
+          color="color-gray-900"
         >
           Get Started
         </Button>
         <Button
           variant="outline"
           size="lg"
-          borderColor="color.white"
-          color="color.white"
+          borderColor="color-white"
+          color="color-white"
         >
           Learn More
         </Button>
@@ -176,18 +176,18 @@ export const CardCenter = () => (
     width={300}
     height={200}
     border="1px solid"
-    borderColor="color.gray.200"
+    borderColor="color-gray-200"
     borderRadius={12}
-    backgroundColor="color.white"
+    backgroundColor="color-white"
     boxShadow="0 4px 12px rgba(0,0,0,0.1)"
   >
     <Center height="100%">
       <Vertical gap={12} alignItems="center">
-        <StarIcon widthHeight={32} color="color.yellow.500" filled />
+        <StarIcon widthHeight={32} color="color-yellow-500" filled />
         <Text fontSize={18} fontWeight="bold">
           Premium Feature
         </Text>
-        <Text color="color.gray.600" textAlign="center" fontSize={14}>
+        <Text color="color-gray-600" textAlign="center" fontSize={14}>
           Unlock advanced features with our premium plan
         </Text>
       </Vertical>
@@ -238,7 +238,7 @@ export const ResponsiveCenter = () => (
       </Text>
       <Text
         fontSize={{ mobile: 14, tablet: 16, desktop: 18 }}
-        color="color.gray.600"
+        color="color-gray-600"
       >
         This content adapts to different screen sizes
       </Text>
@@ -258,19 +258,19 @@ export const CenterWithGap = () => (
     <View
       width={60}
       height={60}
-      backgroundColor="color.red.400"
+      backgroundColor="color-red-400"
       borderRadius={8}
     />
     <View
       width={60}
       height={60}
-      backgroundColor="color.blue.400"
+      backgroundColor="color-blue-400"
       borderRadius={8}
     />
     <View
       width={60}
       height={60}
-      backgroundColor="color.green.400"
+      backgroundColor="color-green-400"
       borderRadius={8}
     />
   </Center>
@@ -288,25 +288,25 @@ import { ErrorIcon } from '@app-studio/web';
 export const ErrorStateCenter = () => (
   <Center
     height={400}
-    backgroundColor="color.red.50"
+    backgroundColor="color-red-50"
     borderRadius={12}
     border="1px solid"
-    borderColor="color.red.200"
+    borderColor="color-red-200"
   >
     <Vertical gap={20} alignItems="center" textAlign="center">
-      <ErrorIcon widthHeight={48} color="color.red.500" />
+      <ErrorIcon widthHeight={48} color="color-red-500" />
       <Vertical gap={8} alignItems="center">
-        <Text fontSize={18} fontWeight="bold" color="color.red.700">
+        <Text fontSize={18} fontWeight="bold" color="color-red-700">
           Something went wrong
         </Text>
-        <Text color="color.red.600" maxWidth={300}>
+        <Text color="color-red-600" maxWidth={300}>
           We encountered an error while processing your request.
           Please try again or contact support.
         </Text>
       </Vertical>
       <Button
         variant="filled"
-        colorScheme="theme.error"
+        colorScheme="theme-error"
         onClick={() => window.location.reload()}
       >
         Try Again
@@ -327,19 +327,19 @@ export const ImagePlaceholder = () => (
   <Center
     width={300}
     height={200}
-    backgroundColor="color.gray.100"
+    backgroundColor="color-gray-100"
     border="2px dashed"
-    borderColor="color.gray.300"
+    borderColor="color-gray-300"
     borderRadius={8}
     cursor="pointer"
     _hover={{
-      backgroundColor: 'color.gray.200',
-      borderColor: 'color.gray.400',
+      backgroundColor: 'color-gray-200',
+      borderColor: 'color-gray-400',
     }}
   >
     <Vertical gap={8} alignItems="center">
-      <ImageIcon widthHeight={32} color="color.gray.500" />
-      <Text color="color.gray.600" fontSize={14}>
+      <ImageIcon widthHeight={32} color="color-gray-500" />
+      <Text color="color-gray-600" fontSize={14}>
         Click to upload image
       </Text>
     </Vertical>
@@ -378,28 +378,28 @@ export const ImagePlaceholder = () => (
 
 **Splash Screen:**
 ```tsx
-<Center height="100vh" backgroundColor="theme.primary">
+<Center height="100vh" backgroundColor="theme-primary">
   <Vertical gap={24} alignItems="center">
     <Logo size="lg" />
-    <Loader color="color.white" />
+    <Loader color="color-white" />
   </Vertical>
 </Center>
 ```
 
 **Feature Highlight:**
 ```tsx
-<Center height={300} backgroundColor="color.blue.50">
+<Center height={300} backgroundColor="color-blue-50">
   <Vertical gap={16} alignItems="center" textAlign="center">
     <FeatureIcon widthHeight={48} />
     <Text fontSize={20} fontWeight="bold">Feature Name</Text>
-    <Text color="color.gray.600">Feature description</Text>
+    <Text color="color-gray-600">Feature description</Text>
   </Vertical>
 </Center>
 ```
 
 **Call to Action:**
 ```tsx
-<Center padding={40} backgroundColor="color.gray.900" color="color.white">
+<Center padding={40} backgroundColor="color-gray-900" color="color-white">
   <Vertical gap={20} alignItems="center" textAlign="center">
     <Text fontSize={24} fontWeight="bold">Ready to get started?</Text>
     <Button variant="filled" size="lg">Get Started Now</Button>

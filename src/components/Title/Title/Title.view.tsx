@@ -1,5 +1,5 @@
 import React from 'react';
-import { Element, useInView, Text as DefaultText, useTheme } from 'app-studio';
+import { Element, useInView, Text as DefaultText } from 'app-studio';
 import { AnimationProps } from 'app-studio/dist/utils/constants';
 import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
@@ -27,8 +27,8 @@ const renderWithLineBreaks = (text: string) => {
 const TitleView: React.FC<TitleProps> = ({
   children,
   highlightText,
-  highlightStyle = 'default',
-  highlightColor = 'theme.primary',
+  highlightStyle = 'solid',
+  highlightColor = 'theme-primary',
   highlightSecondaryColor,
   size = 'lg',
   views,
@@ -47,48 +47,8 @@ const TitleView: React.FC<TitleProps> = ({
   ...props
 }) => {
   const { ref, inView } = useInView();
-  const { getColor, themeMode, theme } = useTheme();
 
-  const currentThemeMode = elementMode || themeMode;
-
-  let resolvedHighlightColor = getColor(highlightColor, {
-    themeMode: currentThemeMode,
-  });
-
-  // Fallback: If getColor returns the token itself (resolution failed), try manual lookup in theme object
-  if (
-    resolvedHighlightColor === highlightColor &&
-    highlightColor.startsWith('theme.') &&
-    theme
-  ) {
-    const tokenPath = highlightColor.replace('theme.', '');
-    const value = tokenPath
-      .split('.')
-      .reduce((acc: any, part) => acc && acc[part], theme);
-    if (typeof value === 'string') {
-      resolvedHighlightColor = value;
-    }
-  }
-
-  let resolvedHighlightSecondaryColor = highlightSecondaryColor
-    ? getColor(highlightSecondaryColor, { themeMode: currentThemeMode })
-    : undefined;
-
-  // Fallback for secondary color
-  if (
-    highlightSecondaryColor &&
-    resolvedHighlightSecondaryColor === highlightSecondaryColor &&
-    highlightSecondaryColor.startsWith('theme.') &&
-    theme
-  ) {
-    const tokenPath = highlightSecondaryColor.replace('theme.', '');
-    const value = tokenPath
-      .split('.')
-      .reduce((acc: any, part) => acc && acc[part], theme);
-    if (typeof value === 'string') {
-      resolvedHighlightSecondaryColor = value;
-    }
-  }
+  const currentThemeMode = elementMode;
 
   const {
     finalDisplayedText,
@@ -115,8 +75,8 @@ const TitleView: React.FC<TitleProps> = ({
 
   // Highlight style props
   const highlightProps = HighlightStyles[highlightStyle](
-    resolvedHighlightColor,
-    resolvedHighlightSecondaryColor
+    highlightColor,
+    highlightSecondaryColor
   );
 
   // Apply loop control to animations

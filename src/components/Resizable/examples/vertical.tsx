@@ -14,7 +14,7 @@ export const VerticalResizable = () => {
     >
       <Resizable orientation="vertical">
         <Resizable.Panel id="top" defaultSize="30%">
-          <View padding="16px" height="100%" backgroundColor="color.yellow.50">
+          <View padding="16px" height="100%" backgroundColor="color-yellow-50">
             <Text fontWeight="bold" marginBottom="8px">
               Top Panel
             </Text>
@@ -25,7 +25,7 @@ export const VerticalResizable = () => {
         <Resizable.Handle id="handle1" withVisualIndicator />
 
         <Resizable.Panel id="middle" defaultSize="40%">
-          <View padding="16px" height="100%" backgroundColor="color.orange.50">
+          <View padding="16px" height="100%" backgroundColor="color-orange-50">
             <Text fontWeight="bold" marginBottom="8px">
               Middle Panel
             </Text>
@@ -36,7 +36,7 @@ export const VerticalResizable = () => {
         <Resizable.Handle id="handle2" withVisualIndicator />
 
         <Resizable.Panel id="bottom" defaultSize="30%">
-          <View padding="16px" height="100%" backgroundColor="color.red.50">
+          <View padding="16px" height="100%" backgroundColor="color-red-50">
             <Text fontWeight="bold" marginBottom="8px">
               Bottom Panel
             </Text>

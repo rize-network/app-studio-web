@@ -14,7 +14,7 @@ export const ControlledTabs = () => {
           <Text fontWeight="600" marginBottom={12} fontSize={18}>
             Profile Settings
           </Text>
-          <Text color="color.gray.600">
+          <Text color="color-gray-600">
             Manage your public profile, bio, and avatar.
           </Text>
         </View>
@@ -28,7 +28,7 @@ export const ControlledTabs = () => {
           <Text fontWeight="600" marginBottom={12} fontSize={18}>
             Account Details
           </Text>
-          <Text color="color.gray.600">
+          <Text color="color-gray-600">
             Update your email, password, and security preferences.
           </Text>
         </View>
@@ -42,7 +42,7 @@ export const ControlledTabs = () => {
           <Text fontWeight="600" marginBottom={12} fontSize={18}>
             Notification Preferences
           </Text>
-          <Text color="color.gray.600">
+          <Text color="color-gray-600">
             Configure how and when you want to be notified.
           </Text>
         </View>
@@ -55,10 +55,10 @@ export const ControlledTabs = () => {
       <View
         marginBottom={20}
         padding={16}
-        backgroundColor="color.blue.50"
+        backgroundColor="color-blue-50"
         borderRadius={8}
         border="1px dashed"
-        borderColor="color.blue.200"
+        borderColor="color-blue-200"
       >
         <Text marginBottom={12}>
           Current Active Value: <strong>{activeTab}</strong>

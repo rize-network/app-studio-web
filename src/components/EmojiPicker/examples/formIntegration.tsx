@@ -50,16 +50,16 @@ export const FormIntegrationEmojiPicker = () => {
             gap={8}
             padding="16px"
             borderRadius="8px"
-            backgroundColor="color.gray.50"
+            backgroundColor="color-gray-50"
             borderWidth="1px"
             borderStyle="solid"
-            borderColor="color.gray.200"
+            borderColor="color-gray-200"
           >
             <Text fontWeight="bold">Preview</Text>
             <Text fontSize="18px" fontWeight="600">
               {emoji} {title || 'Untitled'}
             </Text>
-            {description && <Text color="color.gray.600">{description}</Text>}
+            {description && <Text color="color-gray-600">{description}</Text>}
           </Vertical>
         )}
 

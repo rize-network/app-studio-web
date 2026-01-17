@@ -35,7 +35,7 @@ export const TabsView: React.FC<TabsViewProps> = ({
       <Horizontal
         width="100%"
         borderBottom="1px solid"
-        borderBottomColor="color.gray.200"
+        borderBottomColor="color-gray-200"
         {...views.headerTabs}
       >
         {tabs.map((tab) => {
@@ -102,7 +102,7 @@ export const TabsList: React.FC<TabsListProps> = ({ children, views }) => {
     <Horizontal
       width="100%"
       borderBottom="1px solid"
-      borderBottomColor="color.gray.200"
+      borderBottomColor="color-gray-200"
       {...views?.container}
     >
       {children}
@@ -132,11 +132,11 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = ({
       opacity={disabled ? 0.6 : 1}
       padding="12px 16px"
       borderBottom="2px solid"
-      borderBottomColor={isActive ? 'theme.primary' : 'transparent'}
-      color={isActive ? 'theme.primary' : 'color.gray.600'}
+      borderBottomColor={isActive ? 'theme-primary' : 'transparent'}
+      color={isActive ? 'theme-primary' : 'color-gray-600'}
       fontWeight={isActive ? '600' : '400'}
       transition="all 0.2s ease"
-      _hover={!disabled ? { color: 'theme.primary' } : {}}
+      _hover={!disabled ? { color: 'theme-primary' } : {}}
       onClick={handleClick}
       {...views?.trigger}
       {...(isActive ? views?.activeState : {})}

@@ -58,7 +58,7 @@ export function AudioInputView({
             container: {
               height: '36px',
               cursor: 'pointer',
-              _hover: { backgroundColor: 'color.gray.100' },
+              _hover: { backgroundColor: 'color-gray-100' },
             },
           }}
           containerProps={{
@@ -71,7 +71,7 @@ export function AudioInputView({
           }}
           textProps={{
             fontSize: '14px',
-            color: 'color.gray.600',
+            color: 'color-gray-600',
           }}
           validateFile={(file: File) => {
             if (file.size > 100 * 1024 * 1024) {
@@ -95,12 +95,12 @@ export function AudioInputView({
             display="flex"
             alignItems="center"
             justifyContent="center"
-            backgroundColor={'color.gray.100'}
-            color={'color.gray.600'}
+            backgroundColor={'color-gray-100'}
+            color={'color-gray-600'}
             borderRadius={'50%'}
             border="none"
             cursor="pointer"
-            _hover={{ backgroundColor: 'color.gray.200' }}
+            _hover={{ backgroundColor: 'color-gray-200' }}
           >
             <MicrophoneIcon
               widthHeight={16}
@@ -120,12 +120,12 @@ export function AudioInputView({
               display="flex"
               alignItems="center"
               justifyContent="center"
-              backgroundColor={'color.gray.100'}
-              color={'color.gray.600'}
+              backgroundColor={'color-gray-100'}
+              color={'color-gray-600'}
               borderRadius={'50%'}
               border="none"
               cursor="pointer"
-              _hover={{ backgroundColor: 'color.gray.200' }}
+              _hover={{ backgroundColor: 'color-gray-200' }}
             >
               {paused ? (
                 <PlayIcon
@@ -152,12 +152,12 @@ export function AudioInputView({
               display="flex"
               alignItems="center"
               justifyContent="center"
-              backgroundColor={'theme.error'}
-              color={'color.white'}
+              backgroundColor={'theme-error'}
+              color={'color-white'}
               borderRadius={'50%'}
               border="none"
               cursor="pointer"
-              _hover={{ backgroundColor: 'color.red.600' }}
+              _hover={{ backgroundColor: 'color-red-600' }}
             >
               <StopIcon widthHeight={16} color="currentColor" filled={false} />
             </View>

@@ -19,7 +19,7 @@ export const AnimationLoopTitle = () => {
         animationLoop={1}
         highlightText="Once"
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Animation Plays Once (Default)
       </Title>
@@ -35,8 +35,8 @@ export const AnimationLoopTitle = () => {
         animationLoop={3}
         highlightText="Three"
         highlightStyle="gradient"
-        highlightColor="theme.primary"
-        highlightSecondaryColor="theme.secondary"
+        highlightColor="theme-primary"
+        highlightSecondaryColor="theme-secondary"
       >
         Animation Plays Three Times
       </Title>
@@ -53,7 +53,7 @@ export const AnimationLoopTitle = () => {
         animationLoop="infinite"
         highlightText="Infinite"
         highlightStyle="glow"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Animation Loops Infinitely
       </Title>
@@ -70,7 +70,7 @@ export const AnimationLoopTitle = () => {
         highlightAnimationLoop="infinite"
         highlightText="Wiggling"
         highlightStyle="outline"
-        highlightColor="theme.warning"
+        highlightColor="theme-warning"
       >
         Title with Wiggling Highlight
       </Title>
@@ -86,8 +86,8 @@ export const AnimationLoopTitle = () => {
         }}
         animationLoop="infinite"
         highlightAnimate={{
-          from: { backgroundColor: 'theme.primary' },
-          to: { backgroundColor: 'theme.secondary' },
+          from: { backgroundColor: 'theme-primary' },
+          to: { backgroundColor: 'theme-secondary' },
           duration: '1.5s',
           timingFunction: 'ease-in-out',
           direction: 'alternate',
@@ -114,7 +114,7 @@ export const AnimationLoopTitle = () => {
         animationLoop={2}
         highlightText="Bounce"
         highlightStyle="background"
-        highlightColor="theme.success"
+        highlightColor="theme-success"
       >
         Bounce Animation (2 Times)
       </Title>
@@ -122,8 +122,8 @@ export const AnimationLoopTitle = () => {
       {/* Typewriter with infinite highlight animation */}
       <Title
         highlightAnimate={{
-          from: { textShadow: '0 0 5px theme.primary' },
-          to: { textShadow: '0 0 20px theme.primary' },
+          from: { textShadow: '0 0 5px theme-primary' },
+          to: { textShadow: '0 0 20px theme-primary' },
           duration: '1.5s',
           timingFunction: 'ease-in-out',
           direction: 'alternate',
@@ -131,7 +131,7 @@ export const AnimationLoopTitle = () => {
         highlightAnimationLoop="infinite"
         highlightText="glowing"
         highlightStyle="glow"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightTypewriter={true}
         highlightTypewriterDuration={2000}
       >

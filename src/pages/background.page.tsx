@@ -8,7 +8,7 @@ const BackgroundTestPage = () => {
   const sections = {
     'Aurora Background': (
       <Background.Aurora height={300} width="100%" showRadialGradient={true}>
-        <Text color="color.white" fontSize={20} fontWeight="600">
+        <Text color="color-white" fontSize={20} fontWeight="600">
           Aurora Effect Background
         </Text>
       </Background.Aurora>
@@ -16,13 +16,13 @@ const BackgroundTestPage = () => {
     'Meteor & Wall Effects': (
       <Horizontal gap={24} flexWrap="wrap">
         <Vertical gap={12} flex={1}>
-          <Text fontSize={14} fontWeight="600" color="theme.primary">
+          <Text fontSize={14} fontWeight="600" color="theme-primary">
             Meteors
           </Text>
           <Background.Meteors number={15} height={300} width="100%" />
         </Vertical>
         <Vertical gap={12} flex={1}>
-          <Text fontSize={14} fontWeight="600" color="theme.primary">
+          <Text fontSize={14} fontWeight="600" color="theme-primary">
             Wall
           </Text>
           <Background.Wall
@@ -38,7 +38,7 @@ const BackgroundTestPage = () => {
     'Particles & Grid': (
       <Horizontal gap={24} flexWrap="wrap">
         <Vertical gap={12} flex={1}>
-          <Text fontSize={14} fontWeight="600" color="theme.primary">
+          <Text fontSize={14} fontWeight="600" color="theme-primary">
             Particles
           </Text>
           <Background.Particles
@@ -50,7 +50,7 @@ const BackgroundTestPage = () => {
           />
         </Vertical>
         <Vertical gap={12} flex={1}>
-          <Text fontSize={14} fontWeight="600" color="theme.primary">
+          <Text fontSize={14} fontWeight="600" color="theme-primary">
             Grid
           </Text>
           <Background.Grid
@@ -65,7 +65,7 @@ const BackgroundTestPage = () => {
     'Ripples & Gradients': (
       <Horizontal gap={24} flexWrap="wrap">
         <Vertical gap={12} flex={1}>
-          <Text fontSize={14} fontWeight="600" color="theme.primary">
+          <Text fontSize={14} fontWeight="600" color="theme-primary">
             Ripples
           </Text>
           <Background.Ripples
@@ -77,18 +77,18 @@ const BackgroundTestPage = () => {
           />
         </Vertical>
         <Vertical gap={12} flex={1}>
-          <Text fontSize={14} fontWeight="600" color="theme.primary">
+          <Text fontSize={14} fontWeight="600" color="theme-primary">
             Animated Gradient
           </Text>
           <Background.Gradient
-            from="color.blue.500"
-            to="color.purple.500"
+            from="color-blue-500"
+            to="color-purple-500"
             height={300}
             width="100%"
             animate={true}
             animationDuration={4}
           >
-            <Text color="color.white" fontSize={20} fontWeight="600">
+            <Text color="color-white" fontSize={20} fontWeight="600">
               Animated
             </Text>
           </Background.Gradient>
@@ -104,7 +104,7 @@ const BackgroundTestPage = () => {
           backgroundSize="cover"
           overlay={<Background.Overlay />}
         >
-          <Text color="color.white" fontSize={18} fontWeight="600">
+          <Text color="color-white" fontSize={18} fontWeight="600">
             Image + Overlay
           </Text>
         </Background.Image>
@@ -114,7 +114,7 @@ const BackgroundTestPage = () => {
           width="48%"
           overlay={<Background.Overlay />}
         >
-          <Text color="color.white" fontSize={18} fontWeight="600">
+          <Text color="color-white" fontSize={18} fontWeight="600">
             Video + Overlay
           </Text>
         </Background.Video>
@@ -126,14 +126,14 @@ const BackgroundTestPage = () => {
           <Text
             fontSize={32}
             fontWeight="700"
-            color="theme.primary"
+            color="theme-primary"
             textAlign="center"
           >
             Theme Aware Layout
           </Text>
           <Text
             fontSize={18}
-            color={themeMode === 'light' ? 'color.gray.600' : 'color.gray.400'}
+            color={themeMode === 'light' ? 'color-gray-600' : 'color-gray-400'}
             textAlign="center"
             maxWidth={600}
           >
@@ -143,33 +143,33 @@ const BackgroundTestPage = () => {
           <Horizontal gap={16} marginTop={32}>
             <View
               backgroundColor={
-                themeMode === 'light' ? 'color.white' : 'color.gray.800'
+                themeMode === 'light' ? 'color-white' : 'color-gray-800'
               }
               padding={24}
               borderRadius={12}
               boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1)"
               borderColor={
-                themeMode === 'light' ? 'color.gray.100' : 'color.gray.700'
+                themeMode === 'light' ? 'color-gray-100' : 'color-gray-700'
               }
               borderWidth={1}
             >
-              <Text fontWeight="600" color="theme.primary">
+              <Text fontWeight="600" color="theme-primary">
                 Card 1
               </Text>
             </View>
             <View
               backgroundColor={
-                themeMode === 'light' ? 'color.white' : 'color.gray.800'
+                themeMode === 'light' ? 'color-white' : 'color-gray-800'
               }
               padding={24}
               borderRadius={12}
               boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1)"
               borderColor={
-                themeMode === 'light' ? 'color.gray.100' : 'color.gray.700'
+                themeMode === 'light' ? 'color-gray-100' : 'color-gray-700'
               }
               borderWidth={1}
             >
-              <Text fontWeight="600" color="theme.primary">
+              <Text fontWeight="600" color="theme-primary">
                 Card 2
               </Text>
             </View>
@@ -180,12 +180,12 @@ const BackgroundTestPage = () => {
   };
 
   return (
-    <View padding={20} backgroundColor="theme.background" minHeight="100vh">
+    <View padding={20} backgroundColor="theme-background" minHeight="100vh">
       <Text
         fontSize={28}
         fontWeight="700"
         marginBottom={32}
-        color="theme.primary"
+        color="theme-primary"
       >
         Background Effects
       </Text>
@@ -194,33 +194,33 @@ const BackgroundTestPage = () => {
           <View
             key={title}
             backgroundColor={
-              themeMode === 'light' ? 'color.white' : 'color.gray.900'
+              themeMode === 'light' ? 'color-white' : 'color-gray-900'
             }
             padding={32}
             borderRadius={16}
             boxShadow="0 1px 3px rgba(0,0,0,0.05), 0 10px 15px -5px rgba(0,0,0,0.05)"
             borderWidth={1}
             borderColor={
-              themeMode === 'light' ? 'color.gray.100' : 'color.gray.800'
+              themeMode === 'light' ? 'color-gray-100' : 'color-gray-800'
             }
           >
             <Text
               fontSize={20}
               marginBottom={24}
               fontWeight="600"
-              color="theme.primary"
+              color="theme-primary"
             >
               {title}
             </Text>
             <View
               backgroundColor={
-                themeMode === 'light' ? 'color.gray.50' : 'color.gray.800'
+                themeMode === 'light' ? 'color-gray-50' : 'color-gray-800'
               }
               padding={24}
               borderRadius={12}
               borderWidth={1}
               borderColor={
-                themeMode === 'light' ? 'color.gray.100' : 'color.gray.700'
+                themeMode === 'light' ? 'color-gray-100' : 'color-gray-700'
               }
               borderStyle="dashed"
               overflow="hidden"

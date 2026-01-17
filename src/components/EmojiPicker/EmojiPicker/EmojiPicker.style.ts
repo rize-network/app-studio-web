@@ -26,11 +26,11 @@ export const DefaultEmojiPickerStyles = {
     left: 0,
     right: 0,
     zIndex: 1000,
-    backgroundColor: 'color.white',
+    backgroundColor: 'color-white',
     borderRadius: '8px',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
+    borderColor: 'color-gray-200',
     boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
     padding: '16px',
     minWidth: '320px',
@@ -44,7 +44,7 @@ export const DefaultEmojiPickerStyles = {
 
   categoryTabs: {
     display: 'flex',
-    borderBottom: '1px solid color.gray.200',
+    borderBottom: '1px solid color-gray-200',
     marginBottom: '12px',
     overflowX: 'auto',
   } as ViewProps,
@@ -56,7 +56,7 @@ export const DefaultEmojiPickerStyles = {
     transition: 'all 0.2s ease',
     fontSize: '14px',
     fontWeight: '500',
-    color: 'color.gray.600',
+    color: 'color-gray-600',
     whiteSpace: 'nowrap',
   } as ViewProps,
 
@@ -67,7 +67,7 @@ export const DefaultEmojiPickerStyles = {
     maxHeight: '240px',
     overflowY: 'auto',
     padding: '4px',
-    color: 'color.black',
+    color: 'color-black',
   } as ViewProps,
 
   emoji: {
@@ -83,7 +83,7 @@ export const DefaultEmojiPickerStyles = {
   } as ViewProps,
 
   recentEmojis: {
-    borderBottom: '1px solid color.gray.200',
+    borderBottom: '1px solid color-gray-200',
     marginBottom: '12px',
     paddingBottom: '12px',
   } as ViewProps,
@@ -143,25 +143,25 @@ export const Shapes: Record<Shape, ViewProps> = {
  */
 export const Variants: Record<Variant, ViewProps> = {
   default: {
-    backgroundColor: 'color.white',
+    backgroundColor: 'color-white',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.300',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-300',
+    color: 'color-gray-800',
   },
   outline: {
     backgroundColor: 'transparent',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.300',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-300',
+    color: 'color-gray-800',
   },
   filled: {
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-200',
+    color: 'color-gray-800',
   },
 };
 

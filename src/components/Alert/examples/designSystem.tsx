@@ -10,7 +10,7 @@ export const DesignSystemAlerts = () => {
     <Vertical gap={24}>
       {/* Variant Examples */}
       <View>
-        <Text marginBottom={8} fontWeight="600" color="theme.primary">
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
           Alert Variants
         </Text>
         <Vertical gap={16}>
@@ -48,20 +48,20 @@ export const DesignSystemAlerts = () => {
 
       {/* Custom Icon Example */}
       <View>
-        <Text marginBottom={8} fontWeight="600" color="theme.primary">
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
           Custom Icon
         </Text>
         <Alert
           variant="info"
           title="Custom Icon Alert"
           description="This alert uses a custom icon instead of the default one."
-          icon={<EditIcon size={20} color="color.blue.500" />}
+          icon={<EditIcon size={20} color="color-blue-500" />}
         />
       </View>
 
       {/* Custom Styling Example */}
       <View>
-        <Text marginBottom={8} fontWeight="600" color="theme.primary">
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
           Custom Styling
         </Text>
         <Alert
@@ -70,9 +70,9 @@ export const DesignSystemAlerts = () => {
           views={{
             container: {
               backgroundColor:
-                themeMode === 'light' ? 'color.purple.50' : 'color.gray.800',
+                themeMode === 'light' ? 'color-purple-50' : 'color-gray-800',
               borderColor:
-                themeMode === 'light' ? 'color.purple.200' : 'color.purple.500',
+                themeMode === 'light' ? 'color-purple-200' : 'color-purple-500',
               boxShadow:
                 themeMode === 'light'
                   ? '0 2px 8px rgba(124, 58, 237, 0.1)'
@@ -84,16 +84,16 @@ export const DesignSystemAlerts = () => {
               borderBottomWidth: '1px',
             },
             title: {
-              color: 'theme.primary',
+              color: 'theme-primary',
               fontSize: '18px',
               fontWeight: '600',
             },
             description: {
               color:
-                themeMode === 'light' ? 'color.gray.700' : 'color.gray.300',
+                themeMode === 'light' ? 'color-gray-700' : 'color-gray-300',
             },
             icon: {
-              color: 'color.purple.500',
+              color: 'color-purple-500',
             },
           }}
         />
@@ -101,7 +101,7 @@ export const DesignSystemAlerts = () => {
 
       {/* Rich Content Example */}
       <View>
-        <Text marginBottom={8} fontWeight="600" color="theme.primary">
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
           Rich Content
         </Text>
         <Alert
@@ -111,32 +111,32 @@ export const DesignSystemAlerts = () => {
             <Vertical gap={8}>
               <Text
                 color={
-                  themeMode === 'light' ? 'color.gray.700' : 'color.gray.300'
+                  themeMode === 'light' ? 'color-gray-700' : 'color-gray-300'
                 }
               >
                 This alert contains rich content with multiple paragraphs:
               </Text>
               <Text
                 color={
-                  themeMode === 'light' ? 'color.gray.700' : 'color.gray.300'
+                  themeMode === 'light' ? 'color-gray-700' : 'color-gray-300'
                 }
               >
                 • First item in the list
               </Text>
               <Text
                 color={
-                  themeMode === 'light' ? 'color.gray.700' : 'color.gray.300'
+                  themeMode === 'light' ? 'color-gray-700' : 'color-gray-300'
                 }
               >
                 • Second item in the list
               </Text>
               <Text
                 color={
-                  themeMode === 'light' ? 'color.gray.700' : 'color.gray.300'
+                  themeMode === 'light' ? 'color-gray-700' : 'color-gray-300'
                 }
               >
                 • Third item with{' '}
-                <Text as="span" fontWeight="600" color="theme.primary">
+                <Text as="span" fontWeight="600" color="theme-primary">
                   emphasized
                 </Text>{' '}
                 text

@@ -8,7 +8,7 @@ export const SideMenu = ({ docs, ...props }: any) => {
       gap={20}
       alignItems="center"
       color="black"
-      backgroundColor="color.warmGray.50"
+      backgroundColor="color-warmGray-50"
       paddingVertical={50}
       width={250}
       {...props}

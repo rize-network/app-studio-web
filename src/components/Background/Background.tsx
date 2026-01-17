@@ -54,7 +54,7 @@ import { BackgroundView } from './Background/Background.view';
  *
  * @example
  * // Background Gradient
- * <Background.Gradient from="blue.500" to="purple.500" animate={true}>
+ * <Background.Gradient from="blue-500" to="purple-500" animate={true}>
  *   <Text color="white">Content over gradient</Text>
  * </Background.Gradient>
  */

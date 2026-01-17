@@ -10,22 +10,22 @@ export const ContextStylingDemo = () => {
       views={{
         // These styles will be passed down to all child components via context
         container: {
-          backgroundColor: 'color.blue.50',
+          backgroundColor: 'color-blue-50',
           borderRadius: '12px',
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
         },
         header: {
-          backgroundColor: 'color.blue.100',
+          backgroundColor: 'color-blue-100',
           padding: '16px',
-          borderBottomColor: 'color.blue.200',
+          borderBottomColor: 'color-blue-200',
         },
         content: {
           padding: '24px',
         },
         footer: {
-          backgroundColor: 'color.blue.100',
+          backgroundColor: 'color-blue-100',
           padding: '16px',
-          borderTopColor: 'color.blue.200',
+          borderTopColor: 'color-blue-200',
         },
       }}
     >

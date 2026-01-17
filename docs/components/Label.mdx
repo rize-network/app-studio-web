@@ -105,7 +105,7 @@ export const FormLabels = () => (
     <Vertical gap={8}>
       <Horizontal alignItems="center" gap={4}>
         <Label weight="medium">Full Name</Label>
-        <Label color="color.red.500" size="sm">*</Label>
+        <Label color="color-red-500" size="sm">*</Label>
       </Horizontal>
       <TextField placeholder="Enter your full name" required />
     </Vertical>
@@ -113,14 +113,14 @@ export const FormLabels = () => (
     <Vertical gap={8}>
       <Horizontal alignItems="center" gap={4}>
         <Label weight="medium">Email Address</Label>
-        <Label color="color.red.500" size="sm">*</Label>
+        <Label color="color-red-500" size="sm">*</Label>
       </Horizontal>
       <TextField type="email" placeholder="Enter your email" required />
     </Vertical>
 
     <Vertical gap={8}>
       <Label weight="medium">Additional Comments</Label>
-      <Label size="sm" color="color.gray.600">Optional</Label>
+      <Label size="sm" color="color-gray-600">Optional</Label>
       <TextArea placeholder="Enter any additional comments" rows={3} />
     </Vertical>
   </Vertical>
@@ -139,8 +139,8 @@ export const SectionHeaders = () => (
       <Label heading="h2" weight="bold" marginBottom={8}>
         Personal Information
       </Label>
-      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
-      <Label color="color.gray.600">
+      <View height={1} backgroundColor="color-gray-200" marginBottom={16} />
+      <Label color="color-gray-600">
         Please provide your personal details below.
       </Label>
     </View>
@@ -149,8 +149,8 @@ export const SectionHeaders = () => (
       <Label heading="h2" weight="bold" marginBottom={8}>
         Contact Details
       </Label>
-      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
-      <Label color="color.gray.600">
+      <View height={1} backgroundColor="color-gray-200" marginBottom={16} />
+      <Label color="color-gray-600">
         How can we reach you?
       </Label>
     </View>
@@ -159,8 +159,8 @@ export const SectionHeaders = () => (
       <Label heading="h2" weight="bold" marginBottom={8}>
         Preferences
       </Label>
-      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
-      <Label color="color.gray.600">
+      <View height={1} backgroundColor="color-gray-200" marginBottom={16} />
+      <Label color="color-gray-600">
         Customize your experience.
       </Label>
     </View>
@@ -176,13 +176,13 @@ import { Vertical } from '@app-studio/web';
 
 export const ColoredLabels = () => (
   <Vertical gap={12}>
-    <Label color="color.blue.600">Primary Label</Label>
-    <Label color="color.green.600">Success Label</Label>
-    <Label color="color.yellow.600">Warning Label</Label>
-    <Label color="color.red.600">Error Label</Label>
-    <Label color="color.gray.600">Muted Label</Label>
-    <Label color="theme.primary">Theme Primary</Label>
-    <Label color="theme.secondary">Theme Secondary</Label>
+    <Label color="color-blue-600">Primary Label</Label>
+    <Label color="color-green-600">Success Label</Label>
+    <Label color="color-yellow-600">Warning Label</Label>
+    <Label color="color-red-600">Error Label</Label>
+    <Label color="color-gray-600">Muted Label</Label>
+    <Label color="theme-primary">Theme Primary</Label>
+    <Label color="theme-secondary">Theme Secondary</Label>
   </Vertical>
 );
 ```
@@ -232,7 +232,7 @@ export const ColoredLabels = () => (
   type="email"
   aria-describedby="email-help"
 />
-<Label id="email-help" size="sm" color="color.gray.600">
+<Label id="email-help" size="sm" color="color-gray-600">
   We'll never share your email with anyone else.
 </Label>
 ```
@@ -247,11 +247,11 @@ import { Label } from '@app-studio/web';
 export const CustomStyledLabel = () => (
   <Label
     weight="bold"
-    color="color.blue.600"
+    color="color-blue-600"
     textTransform="uppercase"
     letterSpacing="0.05em"
     borderBottom="2px solid"
-    borderColor="color.blue.600"
+    borderColor="color-blue-600"
     paddingBottom={4}
     display="inline-block"
   >
@@ -269,7 +269,7 @@ export const ResponsiveLabel = () => (
   <Label
     size={{ mobile: 'sm', tablet: 'md', desktop: 'lg' }}
     weight={{ mobile: 'normal', desktop: 'bold' }}
-    color={{ mobile: 'color.gray.700', desktop: 'color.blue.600' }}
+    color={{ mobile: 'color-gray-700', desktop: 'color-blue-600' }}
   >
     Responsive Label
   </Label>
@@ -287,12 +287,12 @@ export const InteractiveLabel = () => {
   return (
     <Label
       cursor="pointer"
-      color={isActive ? 'color.blue.600' : 'color.gray.700'}
+      color={isActive ? 'color-blue-600' : 'color-gray-700'}
       weight={isActive ? 'bold' : 'normal'}
       onClick={() => setIsActive(!isActive)}
       transition="all 0.2s ease"
       _hover={{
-        color: 'color.blue.600',
+        color: 'color-blue-600',
       }}
     >
       Click me to toggle
@@ -351,9 +351,9 @@ export const InteractiveLabel = () => {
 ```tsx
 const StatusLabel = ({ status, children }) => {
   const colors = {
-    active: 'color.green.600',
-    pending: 'color.yellow.600',
-    inactive: 'color.red.600',
+    active: 'color-green-600',
+    pending: 'color-yellow-600',
+    inactive: 'color-red-600',
   };
 
   return (
@@ -374,7 +374,7 @@ const StatusLabel = ({ status, children }) => {
 <Vertical gap={4}>
   <Label weight="medium">Password</Label>
   <TextField type="password" />
-  <Label size="sm" color="color.gray.600">
+  <Label size="sm" color="color-gray-600">
     Must be at least 8 characters with uppercase, lowercase, and numbers
   </Label>
 </Vertical>
@@ -411,7 +411,7 @@ import { Card } from '@app-studio/web';
     </Label>
   </Card.Header>
   <Card.Body>
-    <Label color="color.gray.600">
+    <Label color="color-gray-600">
       Card description text
     </Label>
   </Card.Body>
@@ -427,7 +427,7 @@ import { NavigationMenu } from '@app-studio/web';
     <Label
       size="xs"
       weight="bold"
-      color="color.gray.500"
+      color="color-gray-500"
       textTransform="uppercase"
       letterSpacing="0.05em"
     >

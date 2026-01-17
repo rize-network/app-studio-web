@@ -108,7 +108,7 @@ Start with the General Principles, then focus on the App Studio Specific Best Pr
 
 *   **Style Definitions:** Define style constants (sizes, colors, theme maps) in `.style.ts` or `.style.tsx`.
 *   **`styles` Prop:** Allow consumers to override specific parts of the component's style via the `styles` prop, which should accept an object mapping keys (e.g., `container`, `label`, `icon`) to `CSSProperties`. Define the structure of this `styles` object in `ComponentName.type.ts`.
-*   **Theme Variables:** Prefer using theme variables (e.g., `theme.primary`, `color.blueGray.700`) over hardcoded hex/rgb values to maintain theme consistency. Use `useTheme` hook if necessary to access theme values dynamically.
+*   **Theme Variables:** Prefer using theme variables (e.g., `theme-primary`, `color-blueGray-700`) over hardcoded hex/rgb values to maintain theme consistency. Use `useTheme` hook if necessary to access theme values dynamically.
 *   **Inline Styles vs. `styles` Prop:** Use inline styles within `.view.tsx` for structural layout (using layout components) and dynamic styles based on state (e.g., hover effects). Use the `styles` prop for customizable theme/appearance overrides.
 *   **CSS Files:** Limit usage. Prefer inline styles passed via props or theme-based styling. Use CSS files (like `style.css` in `TextArea` and `TextField`) only for styles that cannot be easily applied via inline styles (e.g., pseudo-elements, complex selectors).
 
@@ -133,7 +133,7 @@ Start with the General Principles, then focus on the App Studio Specific Best Pr
 *   **Do** encapsulate component state and logic in `useComponentNameState` hooks.
 *   **Do** keep `ComponentName.view.tsx` purely presentational.
 *   **Do** use `Horizontal`, `Vertical`, `Center`, `View` for layout.
-*   **Do** use theme variables (`theme.primary`) for colors.
+*   **Do** use theme variables (`theme-primary`) for colors.
 *   **Do** allow style overrides via the `styles` prop with a defined structure.
 *   **Do** create clear examples in the `examples/` directory for each component.
 *   **Do** keep `.mdx` documentation synchronized with examples and props.

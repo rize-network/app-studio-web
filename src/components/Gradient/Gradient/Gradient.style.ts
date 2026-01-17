@@ -52,19 +52,19 @@ export const PositionMap: Record<string, string> = {
  */
 export const DefaultColorStops: Record<GradientType, ColorStop[]> = {
   linear: [
-    { color: 'color.blue.500', position: '0%' },
-    { color: 'color.purple.500', position: '100%' },
+    { color: 'color-blue-500', position: '0%' },
+    { color: 'color-purple-500', position: '100%' },
   ],
   radial: [
-    { color: 'color.blue.500', position: '0%' },
-    { color: 'color.purple.500', position: '100%' },
+    { color: 'color-blue-500', position: '0%' },
+    { color: 'color-purple-500', position: '100%' },
   ],
   conic: [
-    { color: 'color.red.500', position: '0deg' },
-    { color: 'color.yellow.500', position: '90deg' },
-    { color: 'color.green.500', position: '180deg' },
-    { color: 'color.blue.500', position: '270deg' },
-    { color: 'color.red.500', position: '360deg' },
+    { color: 'color-red-500', position: '0deg' },
+    { color: 'color-yellow-500', position: '90deg' },
+    { color: 'color-green-500', position: '180deg' },
+    { color: 'color-blue-500', position: '270deg' },
+    { color: 'color-red-500', position: '360deg' },
   ],
 };
 

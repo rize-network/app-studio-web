@@ -12,7 +12,7 @@ export const ShapesDemo = () => {
       {shapes.map((shape) => (
         <Card key={shape} shape={shape} variant="outlined">
           <Text fontWeight="bold">{shape} Card</Text>
-          <Text color="color.gray.500">
+          <Text color="color-gray-500">
             This card has {shape === 'square' ? 'no' : shape} corners.
           </Text>
         </Card>

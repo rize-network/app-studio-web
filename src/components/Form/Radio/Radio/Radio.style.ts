@@ -41,7 +41,7 @@ export const DotSizes: Record<Size, ViewProps> = {
  */
 export const VariantStyles: Record<Variant, ViewProps> = {
   selected: {
-    borderColor: 'theme.primary',
+    borderColor: 'theme-primary',
     borderWidth: '2px',
     borderStyle: 'solid',
   },
@@ -49,7 +49,7 @@ export const VariantStyles: Record<Variant, ViewProps> = {
     backgroundColor: 'transparent',
     borderWidth: '2px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.300',
+    borderColor: 'color-gray-300',
   },
 };
 
@@ -58,7 +58,7 @@ export const VariantStyles: Record<Variant, ViewProps> = {
  */
 export const DotStyles: Record<Variant, ViewProps> = {
   selected: {
-    backgroundColor: 'theme.primary',
+    backgroundColor: 'theme-primary',
   },
   unselected: {
     backgroundColor: 'transparent',
@@ -71,28 +71,28 @@ export const DotStyles: Record<Variant, ViewProps> = {
 export const StateStyles = {
   hover: {
     selected: {
-      borderColor: 'color.blue.600',
+      borderColor: 'color-blue-600',
     },
     unselected: {
-      borderColor: 'color.gray.400',
+      borderColor: 'color-gray-400',
     },
   },
   disabled: {
     selected: {
-      borderColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
       opacity: 0.6,
     },
     unselected: {
-      borderColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
       opacity: 0.6,
     },
   },
   error: {
     selected: {
-      borderColor: 'color.red.500',
+      borderColor: 'color-red-500',
     },
     unselected: {
-      borderColor: 'color.red.500',
+      borderColor: 'color-red-500',
     },
   },
 };
@@ -103,7 +103,7 @@ export const StateStyles = {
 export const DotStateStyles = {
   hover: {
     selected: {
-      backgroundColor: 'color.blue.600',
+      backgroundColor: 'color-blue-600',
     },
     unselected: {
       backgroundColor: 'transparent',
@@ -111,7 +111,7 @@ export const DotStateStyles = {
   },
   disabled: {
     selected: {
-      backgroundColor: 'color.gray.300',
+      backgroundColor: 'color-gray-300',
       opacity: 0.6,
     },
     unselected: {
@@ -121,7 +121,7 @@ export const DotStateStyles = {
   },
   error: {
     selected: {
-      backgroundColor: 'color.red.500',
+      backgroundColor: 'color-red-500',
     },
     unselected: {
       backgroundColor: 'transparent',

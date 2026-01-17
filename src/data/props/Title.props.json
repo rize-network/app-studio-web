@@ -44,13 +44,7 @@
   },
   "highlightStyle": {
     "type": "HighlightStyle",
-    "typeValues": [
-      "underline",
-      "background",
-      "gradient",
-      "outline",
-      "glow"
-    ],
+    "typeValues": ["underline", "background", "gradient", "outline", "glow"],
     "description": "Applies a predefined style to the highlighted text, such as underline or background.",
     "defaultValue": "background"
   },
@@ -58,7 +52,7 @@
     "type": "string",
     "typeValues": null,
     "description": "Specifies the primary color for the highlighted text.",
-    "defaultValue": "theme.primary"
+    "defaultValue": "theme-primary"
   },
   "highlightSecondaryColor": {
     "type": "string",
@@ -86,13 +80,7 @@
   },
   "size": {
     "type": "TitleSize",
-    "typeValues": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl"
-    ],
+    "typeValues": ["xs", "sm", "md", "lg", "xl"],
     "description": "Sets the predefined size of the title (e.g., 'small', 'medium', 'large').",
     "defaultValue": "lg"
   },

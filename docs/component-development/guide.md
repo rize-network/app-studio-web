@@ -196,19 +196,19 @@ export const getComponentNameVariants = (themeMode: 'light' | 'dark') => {
   
   return {
     default: {
-      backgroundColor: isDark ? 'color.gray.800' : 'color.gray.100',
-      color: isDark ? 'color.gray.100' : 'color.gray.800',
-      borderColor: isDark ? 'color.gray.700' : 'color.gray.300',
+      backgroundColor: isDark ? 'color-gray-800' : 'color-gray-100',
+      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      borderColor: isDark ? 'color-gray-700' : 'color-gray-300',
     },
     primary: {
-      backgroundColor: 'theme.primary',
-      color: 'color.white',
-      borderColor: 'theme.primary',
+      backgroundColor: 'theme-primary',
+      color: 'color-white',
+      borderColor: 'theme-primary',
     },
     secondary: {
-      backgroundColor: 'theme.secondary',
-      color: 'color.white',
-      borderColor: 'theme.secondary',
+      backgroundColor: 'theme-secondary',
+      color: 'color-white',
+      borderColor: 'theme-secondary',
     },
   };
 };
@@ -342,7 +342,7 @@ Use the layout components from `app-studio` for consistent layout:
 Use the theme system via `useTheme` hook:
 ```typescript
 const { getColor, themeMode } = useTheme();
-const colorValue = getColor('theme.primary', { themeMode });
+const colorValue = getColor('theme-primary', { themeMode });
 ```
 
 ### Style Customization

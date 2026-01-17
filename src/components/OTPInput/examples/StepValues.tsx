@@ -25,11 +25,11 @@ export const StepValuesOTPInput = () => {
         gap={12}
         views={{
           container: {
-            borderColor: 'theme.primary',
-            backgroundColor: 'color.gray.50',
+            borderColor: 'theme-primary',
+            backgroundColor: 'color-gray-50',
           },
           input: {
-            color: 'theme.primary',
+            color: 'theme-primary',
             fontWeight: 'bold',
           },
         }}
@@ -37,13 +37,13 @@ export const StepValuesOTPInput = () => {
 
       <Horizontal justifyContent="space-between" width="100%">
         {stepValues.map((step) => (
-          <Text key={step} fontSize={14} color="color.blueGray.500">
+          <Text key={step} fontSize={14} color="color-blueGray-500">
             {step}
           </Text>
         ))}
       </Horizontal>
 
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         This OTP input will snap to the closest value from:{' '}
         {stepValues.join(', ')}
       </Text>

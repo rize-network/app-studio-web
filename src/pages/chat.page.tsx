@@ -87,14 +87,14 @@ const ChatInputDemo = () => {
     <View
       width="100%"
       padding={40}
-      backgroundColor="theme.background"
+      backgroundColor="theme-background"
       minHeight="100vh"
     >
       <Text
         fontSize={28}
         fontWeight="bold"
         marginBottom={24}
-        color="theme.primary"
+        color="theme-primary"
       >
         Chat Experience
       </Text>
@@ -102,13 +102,13 @@ const ChatInputDemo = () => {
       {/* Main Chat Container */}
       <View
         backgroundColor={
-          themeMode === 'light' ? 'color.white' : 'color.gray.900'
+          themeMode === 'light' ? 'color-white' : 'color-gray-900'
         }
         borderRadius={16}
         boxShadow="0 10px 15px -3px rgba(0, 0, 0, 0.1)"
         borderWidth={1}
         borderColor={
-          themeMode === 'light' ? 'color.gray.100' : 'color.gray.800'
+          themeMode === 'light' ? 'color-gray-100' : 'color-gray-800'
         }
         overflow="hidden"
         marginBottom={40}
@@ -116,11 +116,11 @@ const ChatInputDemo = () => {
         {/* Info Bar */}
         <View
           padding={12}
-          backgroundColor="color.blue.50"
+          backgroundColor="color-blue-50"
           borderBottomWidth={1}
-          borderColor="color.blue.100"
+          borderColor="color-blue-100"
         >
-          <Text fontSize={12} color="color.blue.700" fontWeight="500">
+          <Text fontSize={12} color="color-blue-700" fontWeight="500">
             💡 Try typing @ to see mention auto-completion! (e.g., @john_doe)
           </Text>
         </View>
@@ -132,7 +132,7 @@ const ChatInputDemo = () => {
           overflowY="auto"
           padding={24}
           backgroundColor={
-            themeMode === 'light' ? 'color.gray.50' : 'color.gray.900'
+            themeMode === 'light' ? 'color-gray-50' : 'color-gray-900'
           }
         >
           {messages.map((message, index) => (
@@ -141,17 +141,17 @@ const ChatInputDemo = () => {
               alignSelf={message.sender === 'user' ? 'flex-end' : 'flex-start'}
               backgroundColor={
                 message.sender === 'user'
-                  ? 'theme.primary'
+                  ? 'theme-primary'
                   : themeMode === 'light'
-                  ? 'color.white'
-                  : 'color.gray.800'
+                  ? 'color-white'
+                  : 'color-gray-800'
               }
               color={
                 message.sender === 'user'
-                  ? 'color.white'
+                  ? 'color-white'
                   : themeMode === 'light'
-                  ? 'color.gray.900'
-                  : 'color.gray.100'
+                  ? 'color-gray-900'
+                  : 'color-gray-100'
               }
               padding="12px 16px"
               borderRadius="12px"
@@ -162,7 +162,7 @@ const ChatInputDemo = () => {
             </View>
           ))}
           {isLoading && (
-            <Text fontSize={12} color="color.gray.500" fontStyle="italic">
+            <Text fontSize={12} color="color-gray-500" fontStyle="italic">
               AI is thinking...
             </Text>
           )}
@@ -173,7 +173,7 @@ const ChatInputDemo = () => {
           padding={24}
           borderTopWidth={1}
           borderColor={
-            themeMode === 'light' ? 'color.gray.100' : 'color.gray.800'
+            themeMode === 'light' ? 'color-gray-100' : 'color-gray-800'
           }
         >
           <Horizontal gap={8} marginBottom={16}>
@@ -226,7 +226,7 @@ const ChatInputDemo = () => {
         fontSize={20}
         fontWeight="600"
         marginBottom={24}
-        color="theme.primary"
+        color="theme-primary"
       >
         Styling Variations
       </Text>
@@ -234,20 +234,20 @@ const ChatInputDemo = () => {
       <Vertical gap={24}>
         <View
           backgroundColor={
-            themeMode === 'light' ? 'color.white' : 'color.gray.900'
+            themeMode === 'light' ? 'color-white' : 'color-gray-900'
           }
           padding={32}
           borderRadius={16}
           borderWidth={1}
           borderColor={
-            themeMode === 'light' ? 'color.gray.100' : 'color.gray.800'
+            themeMode === 'light' ? 'color-gray-100' : 'color-gray-800'
           }
         >
           <Text
             fontSize={16}
             fontWeight="bold"
             marginBottom={16}
-            color="theme.primary"
+            color="theme-primary"
           >
             Rounded & Minimal
           </Text>
@@ -260,7 +260,7 @@ const ChatInputDemo = () => {
             clearPendingFiles={() => {}}
             views={{
               container: {
-                backgroundColor: 'color.gray.50',
+                backgroundColor: 'color-gray-50',
                 borderRadius: '12px',
               },
             }}
@@ -269,20 +269,20 @@ const ChatInputDemo = () => {
 
         <View
           backgroundColor={
-            themeMode === 'light' ? 'color.white' : 'color.gray.900'
+            themeMode === 'light' ? 'color-white' : 'color-gray-900'
           }
           padding={32}
           borderRadius={16}
           borderWidth={1}
           borderColor={
-            themeMode === 'light' ? 'color.gray.100' : 'color.gray.800'
+            themeMode === 'light' ? 'color-gray-100' : 'color-gray-800'
           }
         >
           <Text
             fontSize={16}
             fontWeight="bold"
             marginBottom={16}
-            color="theme.primary"
+            color="theme-primary"
           >
             Audio Experience
           </Text>

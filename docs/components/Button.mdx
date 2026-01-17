@@ -163,7 +163,7 @@ export const AnimatedButtons = () => (
 Override the main color of the button.
 - `backgroundColor`: Sets the primary background color (filled variant).
 - `color`: Sets the main color token used for text/borders (outline/ghost variants).
-- `textColor`: Explicitly sets the text color.
+- `textColor`: Explicitly sets the text color-
 
 ```tsx
 import React from 'react';
@@ -174,7 +174,7 @@ export const ColoredButtons = () => (
   <Horizontal gap={15}>
     <Button backgroundColor="#F43F5E">Custom Red</Button>
     <Button variant="outline" color="#10B981">Custom Green</Button>
-    <Button backgroundColor="theme.primary" textColor="white">
+    <Button backgroundColor="theme-primary" textColor="white">
       Theme Primary
     </Button>
   </Horizontal>

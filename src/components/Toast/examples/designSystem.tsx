@@ -303,19 +303,19 @@ export const DesignSystemToast = () => {
                   position: 'top-right',
                   views: {
                     container: {
-                      backgroundColor: 'color.purple.50',
-                      borderColor: 'color.purple.300',
+                      backgroundColor: 'color-purple-50',
+                      borderColor: 'color-purple-300',
                       borderRadius: '12px',
                       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                     },
                     title: {
-                      color: 'color.purple.700',
+                      color: 'color-purple-700',
                       fontSize: '18px',
                       fontFamily:
                         'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
                     },
                     description: {
-                      color: 'color.purple.600',
+                      color: 'color-purple-600',
                       fontFamily:
                         'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
                     },
@@ -370,8 +370,8 @@ export const DesignSystemToast = () => {
                   position: 'top-right',
                   render: ({ onClose }) => (
                     <Vertical
-                      backgroundColor="color.purple.100"
-                      borderColor="color.purple.300"
+                      backgroundColor="color-purple-100"
+                      borderColor="color-purple-300"
                       borderWidth="1px"
                       borderStyle="solid"
                       borderRadius="8px"
@@ -380,10 +380,10 @@ export const DesignSystemToast = () => {
                       width="100%"
                       maxWidth="400px"
                     >
-                      <Text size="lg" fontWeight="600" color="color.purple.800">
+                      <Text size="lg" fontWeight="600" color="color-purple-800">
                         Custom Design System Toast
                       </Text>
-                      <Text size="sm" color="color.purple.700" marginTop="8px">
+                      <Text size="sm" color="color-purple-700" marginTop="8px">
                         This toast is completely custom rendered following the
                         design system guidelines!
                       </Text>

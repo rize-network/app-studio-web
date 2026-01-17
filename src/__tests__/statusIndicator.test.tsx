@@ -17,5 +17,5 @@ test('renders StatusIndicator component', () => {
 test('applies correct color for error status', () => {
   render(<StatusIndicator status="error" />);
   const dot = screen.getByRole('status-dot');
-  expect(dot).toHaveStyle({ backgroundColor: 'color.red.500' });
+  expect(dot).toHaveStyle({ backgroundColor: 'color-red-500' });
 });

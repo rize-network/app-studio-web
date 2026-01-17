@@ -56,14 +56,14 @@ export const SliderShapes: Record<Shape, number | string> = {
 export const getSlider = (themeMode: string): Record<Variant, ViewProps> => {
   return {
     default: {
-      backgroundColor: 'color.gray.200',
+      backgroundColor: 'color-gray-200',
       transition: 'background-color 0.15s ease',
     },
     outline: {
       backgroundColor: 'transparent',
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
       transition: 'border-color 0.15s ease',
     },
   };
@@ -77,10 +77,10 @@ export const SliderVariants = getSlider('light');
  * Thumb styles matching shadcn/ui patterns
  */
 export const ThumbStyles: ViewProps = {
-  backgroundColor: 'color.white',
+  backgroundColor: 'color-white',
   borderWidth: 2,
   borderStyle: 'solid',
-  borderColor: 'theme.primary',
+  borderColor: 'theme-primary',
   borderRadius: '50%',
   boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06)',
   transition: 'box-shadow 0.15s ease, transform 0.15s ease',
@@ -102,7 +102,7 @@ export const ThumbStyles: ViewProps = {
  * Track styles matching shadcn/ui patterns
  */
 export const TrackStyles: ViewProps = {
-  backgroundColor: 'color.gray.200',
+  backgroundColor: 'color-gray-200',
   overflow: 'hidden',
   transition: 'background-color 0.15s ease',
 };
@@ -111,7 +111,7 @@ export const TrackStyles: ViewProps = {
  * Range (filled portion) styles
  */
 export const RangeStyles: ViewProps = {
-  backgroundColor: 'theme.primary',
+  backgroundColor: 'theme-primary',
   transition: 'width 0.15s ease, height 0.15s ease',
 };
 

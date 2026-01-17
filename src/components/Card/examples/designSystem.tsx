@@ -6,19 +6,19 @@ import { Button } from '../../Button/Button';
 export const DesignSystemCards = () => {
   const { themeMode } = useTheme();
   const secondaryTextColor =
-    themeMode === 'light' ? 'color.gray.600' : 'color.gray.400';
+    themeMode === 'light' ? 'color-gray-600' : 'color-gray-400';
 
   return (
     <Vertical gap={24}>
       {/* Variant Examples */}
       <View>
-        <Text marginBottom={8} fontWeight="600" color="theme.primary">
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
           Card Variants
         </Text>
         <Horizontal gap={16} alignItems="flex-start" flexWrap="wrap">
           <Card variant="default" width="250px">
             <Card.Header>
-              <Text fontWeight="600" fontSize="18px" color="theme.primary">
+              <Text fontWeight="600" fontSize="18px" color="theme-primary">
                 Default Card
               </Text>
             </Card.Header>
@@ -34,7 +34,7 @@ export const DesignSystemCards = () => {
 
           <Card variant="outlined" width="250px">
             <Card.Header>
-              <Text fontWeight="600" fontSize="18px" color="theme.primary">
+              <Text fontWeight="600" fontSize="18px" color="theme-primary">
                 Outlined Card
               </Text>
             </Card.Header>
@@ -50,7 +50,7 @@ export const DesignSystemCards = () => {
 
           <Card variant="elevated" width="250px">
             <Card.Header>
-              <Text fontWeight="600" fontSize="18px" color="theme.primary">
+              <Text fontWeight="600" fontSize="18px" color="theme-primary">
                 Elevated Card
               </Text>
             </Card.Header>
@@ -68,13 +68,13 @@ export const DesignSystemCards = () => {
 
       {/* Size Examples */}
       <View>
-        <Text marginBottom={8} fontWeight="600" color="theme.primary">
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
           Card Sizes
         </Text>
         <Vertical gap={16}>
           {['sm', 'md', 'lg'].map((size) => (
             <Card key={size} variant="outlined" size={size as any} width="100%">
-              <Text fontWeight="600" color="theme.primary">
+              <Text fontWeight="600" color="theme-primary">
                 {size.toUpperCase()} Card
               </Text>
               <Text fontSize="14px" color={secondaryTextColor}>
@@ -87,7 +87,7 @@ export const DesignSystemCards = () => {
 
       {/* Shape Examples */}
       <View>
-        <Text marginBottom={8} fontWeight="600" color="theme.primary">
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
           Card Shapes
         </Text>
         <Horizontal gap={16} alignItems="flex-start" flexWrap="wrap">
@@ -99,7 +99,7 @@ export const DesignSystemCards = () => {
               width="250px"
             >
               <Card.Header>
-                <Text fontWeight="600" color="theme.primary">
+                <Text fontWeight="600" color="theme-primary">
                   {shape} Card
                 </Text>
               </Card.Header>
@@ -115,7 +115,7 @@ export const DesignSystemCards = () => {
 
       {/* Custom Styling */}
       <View>
-        <Text marginBottom={8} fontWeight="600" color="theme.primary">
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
           Custom Styling
         </Text>
         <Horizontal gap={16} alignItems="flex-start" flexWrap="wrap">
@@ -124,16 +124,16 @@ export const DesignSystemCards = () => {
             views={{
               container: {
                 backgroundColor:
-                  themeMode === 'light' ? 'color.blue.50' : 'color.gray.800',
+                  themeMode === 'light' ? 'color-blue-50' : 'color-gray-800',
                 borderRadius: '12px',
                 boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
                 overflow: 'hidden',
                 borderColor:
-                  themeMode === 'light' ? 'color.blue.200' : 'color.blue.500',
+                  themeMode === 'light' ? 'color-blue-200' : 'color-blue-500',
                 borderWidth: 1,
               },
               header: {
-                backgroundColor: 'theme.primary',
+                backgroundColor: 'theme-primary',
                 padding: '16px',
                 borderBottom: 'none',
               },
@@ -145,12 +145,12 @@ export const DesignSystemCards = () => {
                 borderTopOffset: 1,
                 borderTopStyle: 'solid',
                 borderTopColor:
-                  themeMode === 'light' ? 'color.blue.100' : 'color.gray.700',
+                  themeMode === 'light' ? 'color-blue-100' : 'color-gray-700',
               },
             }}
           >
             <Card.Header>
-              <Text fontWeight="600" fontSize="18px" color="color.white">
+              <Text fontWeight="600" fontSize="18px" color="color-white">
                 Custom Card
               </Text>
             </Card.Header>
@@ -158,7 +158,7 @@ export const DesignSystemCards = () => {
               <Text
                 fontSize="14px"
                 color={
-                  themeMode === 'light' ? 'color.gray.800' : 'color.gray.200'
+                  themeMode === 'light' ? 'color-gray-800' : 'color-gray-200'
                 }
               >
                 This card has custom styling applied to all its parts using the

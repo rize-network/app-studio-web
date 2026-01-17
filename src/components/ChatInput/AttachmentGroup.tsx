@@ -66,7 +66,7 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
             gap="6px"
             padding="4px 8px"
             borderRadius="6px"
-            backgroundColor="color.gray.100"
+            backgroundColor="color-gray-100"
             animate={{
               from: { opacity: 0, scale: 0.9 },
               to: { opacity: 1, scale: 1 },
@@ -102,18 +102,18 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
                     <Center
                       width="60px"
                       height="60px"
-                      backgroundColor="color.gray.200"
+                      backgroundColor="color-gray-200"
                     >
-                      <AudioIcon widthHeight={24} color="color.black" />
+                      <AudioIcon widthHeight={24} color="color-black" />
                     </Center>
                   )}
                   {!isImage && !isVideo && !isAudio && (
                     <Center
                       width="60px"
                       height="60px"
-                      backgroundColor="color.gray.200"
+                      backgroundColor="color-gray-200"
                     >
-                      <FileIcon widthHeight={24} color="color.black" />
+                      <FileIcon widthHeight={24} color="color-black" />
                     </Center>
                   )}
 

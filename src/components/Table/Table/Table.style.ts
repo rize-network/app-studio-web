@@ -23,7 +23,7 @@ export const DefaultTableStyles: TableViewStyles = {
     boxShadow:
       '0px 1px 3px rgba(0, 0, 0, 0.06), 0px 1px 2px rgba(0, 0, 0, 0.04)',
     border: '1px solid',
-    borderColor: 'color.gray.200',
+    borderColor: 'color-gray-200',
     transition: 'box-shadow 0.2s ease',
     media: {
       mobile: {
@@ -34,15 +34,15 @@ export const DefaultTableStyles: TableViewStyles = {
     },
   },
   thead: {
-    backgroundColor: 'color.gray.50',
+    backgroundColor: 'color-gray-50',
     borderBottom: '1px solid',
-    borderBottomColor: 'color.gray.200',
+    borderBottomColor: 'color-gray-200',
   },
   th: {
     padding: '12px 16px', // 3 × 4px and 4 × 4px grid
     fontWeight: '600',
     fontSize: '14px',
-    color: 'color.gray.700',
+    color: 'color-gray-700',
     textAlign: 'left',
     media: {
       mobile: {
@@ -55,8 +55,8 @@ export const DefaultTableStyles: TableViewStyles = {
     padding: '12px 16px', // 3 × 4px and 4 × 4px grid
     fontSize: '14px',
     borderBottom: '1px solid',
-    borderBottomColor: 'color.gray.100',
-    color: 'color.gray.900',
+    borderBottomColor: 'color-gray-100',
+    color: 'color-gray-900',
     media: {
       mobile: {
         padding: '8px 12px', // Smaller padding on mobile
@@ -67,22 +67,22 @@ export const DefaultTableStyles: TableViewStyles = {
   tr: {
     transition: 'background-color 0.15s ease',
     _hover: {
-      backgroundColor: 'color.gray.50',
+      backgroundColor: 'color-gray-50',
     },
     _focus: {
       outline: 'none',
-      backgroundColor: 'color.gray.100',
+      backgroundColor: 'color-gray-100',
     },
   },
   tfoot: {
-    backgroundColor: 'color.gray.50',
+    backgroundColor: 'color-gray-50',
     fontWeight: '600',
     borderTop: '2px solid',
-    borderTopColor: 'color.gray.200',
+    borderTopColor: 'color-gray-200',
   },
   caption: {
     margin: '8px 0', // 2 × 4px grid
-    color: 'color.gray.600',
+    color: 'color-gray-600',
     fontSize: '14px',
     fontStyle: 'italic',
     media: {
@@ -118,7 +118,7 @@ export const StripedTableStyles: TableViewStyles = {
   tr: {
     ...DefaultTableStyles.tr,
     _even: {
-      backgroundColor: 'color.gray.50',
+      backgroundColor: 'color-gray-50',
     },
   },
 };
@@ -131,12 +131,12 @@ export const BorderedTableStyles: TableViewStyles = {
   td: {
     ...DefaultTableStyles.td,
     borderRight: '1px solid',
-    borderRightColor: 'color.gray.100',
+    borderRightColor: 'color-gray-100',
   },
   th: {
     ...DefaultTableStyles.th,
     borderRight: '1px solid',
-    borderRightColor: 'color.gray.200',
+    borderRightColor: 'color-gray-200',
   },
 };
 
@@ -146,35 +146,35 @@ export const BorderedTableStyles: TableViewStyles = {
 export const DarkTableStyles: TableViewStyles = {
   table: {
     ...DefaultTableStyles.table,
-    backgroundColor: 'color.gray.800',
-    borderColor: 'color.gray.700',
+    backgroundColor: 'color-gray-800',
+    borderColor: 'color-gray-700',
   },
   thead: {
-    backgroundColor: 'color.gray.900',
-    borderBottomColor: 'color.gray.700',
+    backgroundColor: 'color-gray-900',
+    borderBottomColor: 'color-gray-700',
   },
   th: {
     ...DefaultTableStyles.th,
-    color: 'color.gray.100',
+    color: 'color-gray-100',
   },
   td: {
     ...DefaultTableStyles.td,
-    color: 'color.gray.300',
-    borderBottomColor: 'color.gray.700',
+    color: 'color-gray-300',
+    borderBottomColor: 'color-gray-700',
   },
   tr: {
     ...DefaultTableStyles.tr,
     _hover: {
-      backgroundColor: 'color.gray.700',
+      backgroundColor: 'color-gray-700',
     },
   },
   tfoot: {
     ...DefaultTableStyles.tfoot,
-    backgroundColor: 'color.gray.900',
-    borderTopColor: 'color.gray.700',
+    backgroundColor: 'color-gray-900',
+    borderTopColor: 'color-gray-700',
   },
   caption: {
     ...DefaultTableStyles.caption,
-    color: 'color.gray.400',
+    color: 'color-gray-400',
   },
 };

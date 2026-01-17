@@ -10,22 +10,22 @@ export const StylesTabs = () => {
   const customColors =
     themeMode === 'light'
       ? {
-          containerBg: 'color.indigo.50',
-          headerBg: 'color.indigo.100',
-          tabColor: 'color.indigo.600',
-          activeTabBg: 'color.white',
-          activeTabColor: 'color.indigo.600',
-          contentBg: 'color.white',
-          contentBorder: 'color.indigo.200',
+          containerBg: 'color-indigo-50',
+          headerBg: 'color-indigo-100',
+          tabColor: 'color-indigo-600',
+          activeTabBg: 'color-white',
+          activeTabColor: 'color-indigo-600',
+          contentBg: 'color-white',
+          contentBorder: 'color-indigo-200',
         }
       : {
-          containerBg: 'color.gray.900',
-          headerBg: 'color.gray.800',
-          tabColor: 'color.gray.400',
-          activeTabBg: 'color.gray.700',
-          activeTabColor: 'color.white',
-          contentBg: 'color.gray.800',
-          contentBorder: 'color.gray.700',
+          containerBg: 'color-gray-900',
+          headerBg: 'color-gray-800',
+          tabColor: 'color-gray-400',
+          activeTabBg: 'color-gray-700',
+          activeTabColor: 'color-white',
+          contentBg: 'color-gray-800',
+          contentBorder: 'color-gray-700',
         };
 
   const tabs = [
@@ -35,7 +35,7 @@ export const StylesTabs = () => {
       content: (
         <Text
           heading="h5"
-          color={themeMode === 'light' ? 'color.gray.800' : 'color.white'}
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
         >
           Product Tab Content
         </Text>
@@ -47,7 +47,7 @@ export const StylesTabs = () => {
       content: (
         <Text
           heading="h5"
-          color={themeMode === 'light' ? 'color.gray.800' : 'color.white'}
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
         >
           Services Tab Content
         </Text>
@@ -59,7 +59,7 @@ export const StylesTabs = () => {
       content: (
         <Text
           heading="h5"
-          color={themeMode === 'light' ? 'color.gray.800' : 'color.white'}
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
         >
           Playground Tab Content
         </Text>
@@ -71,7 +71,7 @@ export const StylesTabs = () => {
       content: (
         <Text
           heading="h5"
-          color={themeMode === 'light' ? 'color.gray.800' : 'color.white'}
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
         >
           Content Tab Content
         </Text>
@@ -83,7 +83,7 @@ export const StylesTabs = () => {
       content: (
         <Text
           heading="h5"
-          color={themeMode === 'light' ? 'color.gray.800' : 'color.white'}
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
         >
           Random Tab Content
         </Text>

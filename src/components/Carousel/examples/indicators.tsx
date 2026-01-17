@@ -8,9 +8,9 @@ import { IndicatorVariant } from '../Carousel/Carousel.type';
 export const IndicatorsDemo = () => {
   // Create an array of slides with different background colors
   const slides = [
-    { color: 'color.indigo.500', text: 'Slide 1' },
-    { color: 'color.cyan.500', text: 'Slide 2' },
-    { color: 'color.amber.500', text: 'Slide 3' },
+    { color: 'color-indigo-500', text: 'Slide 1' },
+    { color: 'color-cyan-500', text: 'Slide 2' },
+    { color: 'color-amber-500', text: 'Slide 3' },
   ];
 
   // Different indicator variants

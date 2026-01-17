@@ -47,11 +47,11 @@ export const AccessibleSidebar = () => {
               transition: 'all 0.2s ease',
             },
             navItemActive: {
-              backgroundColor: 'color.blue.50',
-              color: 'color.blue.600',
+              backgroundColor: 'color-blue-50',
+              color: 'color-blue-600',
             },
             navItemIcon: {
-              color: 'color.gray.500',
+              color: 'color-gray-500',
               marginRight: '12px',
             },
             navItemText: {
@@ -67,7 +67,7 @@ export const AccessibleSidebar = () => {
           <Sidebar.Content>
             <Vertical gap={2}>
               <Text
-                color="color.gray.500"
+                color="color-gray-500"
                 fontWeight="medium"
                 marginBottom="8px"
               >
@@ -94,7 +94,7 @@ export const AccessibleSidebar = () => {
 
               <Separator marginTop="12px" />
 
-              <Text color="color.gray.500" fontWeight="medium" marginTop="8px">
+              <Text color="color-gray-500" fontWeight="medium" marginTop="8px">
                 SETTINGS
               </Text>
 
@@ -116,12 +116,12 @@ export const AccessibleSidebar = () => {
                 width="32px"
                 height="32px"
                 borderRadius="full"
-                backgroundColor="color.blue.100"
+                backgroundColor="color-blue-100"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
               >
-                <Text fontWeight="bold" color="color.blue.600">
+                <Text fontWeight="bold" color="color-blue-600">
                   JS
                 </Text>
               </View>
@@ -129,14 +129,14 @@ export const AccessibleSidebar = () => {
                 <Text fontWeight="medium" size="sm">
                   John Smith
                 </Text>
-                <Text size="xs" color="color.gray.500">
+                <Text size="xs" color="color-gray-500">
                   john@example.com
                 </Text>
               </Vertical>
             </Horizontal>
           </Sidebar.Footer>
         </Sidebar>
-        <View flex="1" padding="24px" backgroundColor="color.gray.50">
+        <View flex="1" padding="24px" backgroundColor="color-gray-50">
           <Text fontWeight="bold" size="xl" marginBottom="16px">
             Enhanced Sidebar Example
           </Text>

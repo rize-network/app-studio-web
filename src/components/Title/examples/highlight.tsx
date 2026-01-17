@@ -11,7 +11,7 @@ export const HighlightTest = () => {
       <Title
         highlightText="animated highlight"
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightAnimate={{
           from: { opacity: 0, transform: 'scale(0.9)' },
           to: { opacity: 1, transform: 'scale(1)' },
@@ -25,7 +25,7 @@ export const HighlightTest = () => {
       <Title
         highlightText={['first', 'second', 'third']}
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightAnimate={[
           {
             from: { opacity: 0, transform: 'translateY(-10px)' },

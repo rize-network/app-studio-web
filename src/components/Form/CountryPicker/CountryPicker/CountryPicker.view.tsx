@@ -77,7 +77,7 @@ export const DropDown: React.FC<CountryPickerDropDownProps> = ({
       borderRadius={4}
       position="absolute"
       flexDirection="column"
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       boxShadow="rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px"
       {...views['dropDown']}
     >
@@ -130,7 +130,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
-  const IconColor = getColor('color.blueGray.700', {
+  const IconColor = getColor('color-blueGray-700', {
     themeMode: elementMode ? elementMode : themeMode,
   });
 
@@ -170,7 +170,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     on: { focus: { outline: 'none' } },
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
+    color: isDisabled ? 'color-trueGray-600' : 'color-blueGray-700',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
     ...views['field'],
   };
@@ -190,7 +190,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         shadow={shadow}
         variant={variant}
         value={value}
-        color={'theme.primary'}
+        color={'theme-primary'}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
@@ -198,7 +198,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
         _hover={
           !isDisabled && !error
             ? {
-                borderColor: 'theme.primary',
+                borderColor: 'theme-primary',
               }
             : undefined
         }
@@ -207,7 +207,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
           {showLabel && (
             <FieldLabel
               htmlFor={id}
-              color={'theme.primary'}
+              color={'theme-primary'}
               error={error}
               {...views}
             >

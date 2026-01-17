@@ -28,11 +28,11 @@ import { DatePicker } from '@app-studio/web';
 export const ColorDatePicker = () => (
   <Vertical gap={15}>
     {[
-      'theme.primary',
-      'theme.secondary',
-      'theme.error',
-      'theme.success',
-      'theme.warning',
+      'theme-primary',
+      'theme-secondary',
+      'theme-error',
+      'theme-success',
+      'theme-warning',
     ].map((color) => (
       <DatePicker
         key={color}
@@ -68,7 +68,7 @@ export const ShadowDatePicker = () => (
 | Prop         | Type          | Description                                                              | Default     |
 | ------------ | ------------- | ------------------------------------------------------------------------ | ----------- |
 | label        | string        | The label text for the date picker.                                     |             |
-| colorScheme  | string        | The color scheme that changes the background color.                      |             |
+| colorScheme  | string        | The color scheme that changes the background color-                      |             |
 | shadow       | Shadow/Elevation | Adds a shadow effect to the DatePicker.                                  |             |
 | styles       | CSSProperties | Optional custom styles for the DatePicker (container, input, calendar). |             |
 | className    | string        | Optional className for the DatePicker container.                         |             |

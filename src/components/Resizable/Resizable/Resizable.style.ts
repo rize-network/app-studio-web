@@ -37,28 +37,28 @@ export const getHandle = (themeMode: string): Record<Variant, ViewProps> => {
     default: {
       backgroundColor: 'transparent',
       _hover: {
-        backgroundColor: 'color.gray.200',
+        backgroundColor: 'color-gray-200',
       },
       _active: {
-        backgroundColor: 'color.gray.300',
+        backgroundColor: 'color-gray-300',
       },
     },
     subtle: {
       backgroundColor: 'transparent',
       _hover: {
-        backgroundColor: 'color.gray.100',
+        backgroundColor: 'color-gray-100',
       },
       _active: {
-        backgroundColor: 'color.gray.200',
+        backgroundColor: 'color-gray-200',
       },
     },
     prominent: {
-      backgroundColor: 'color.gray.100',
+      backgroundColor: 'color-gray-100',
       _hover: {
-        backgroundColor: 'color.gray.200',
+        backgroundColor: 'color-gray-200',
       },
       _active: {
-        backgroundColor: 'color.gray.300',
+        backgroundColor: 'color-gray-300',
       },
     },
   };
@@ -72,13 +72,13 @@ export const HandleIconStyles: Record<Orientation, ViewProps> = {
   horizontal: {
     width: '2px',
     height: '20px',
-    backgroundColor: 'color.gray.400',
+    backgroundColor: 'color-gray-400',
     margin: '0 1px',
   },
   vertical: {
     width: '20px',
     height: '2px',
-    backgroundColor: 'color.gray.400',
+    backgroundColor: 'color-gray-400',
     margin: '1px 0',
   },
 };

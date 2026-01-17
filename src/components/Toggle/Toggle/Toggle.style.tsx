@@ -23,12 +23,12 @@ export const getToggleVariants = (
     borderColor: color,
     _hover: {
       backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
+      color: isLight ? 'color-black' : 'color-white',
       transform: 'translateY(-1px)',
     },
     _active: {
       backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
+      color: isLight ? 'color-black' : 'color-white',
       transform: 'translateY(0)',
     },
     transition: 'all 0.2s ease',
@@ -41,12 +41,12 @@ export const getToggleVariants = (
     borderColor: 'transparent',
     _hover: {
       backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
+      color: isLight ? 'color-black' : 'color-white',
       transform: 'translateY(-1px)',
     },
     _active: {
       backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
+      color: isLight ? 'color-black' : 'color-white',
       transform: 'translateY(0)',
     },
     transition: 'all 0.2s ease',

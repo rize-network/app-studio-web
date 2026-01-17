@@ -11,17 +11,17 @@ export const CustomizedToast = () => {
           Toast.info('Custom Styled Toast', 'This toast has custom styling.', {
             views: {
               container: {
-                backgroundColor: 'color.purple.50',
-                borderColor: 'color.purple.300',
+                backgroundColor: 'color-purple-50',
+                borderColor: 'color-purple-300',
                 borderRadius: '12px',
                 boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
               },
               title: {
-                color: 'color.purple.700',
+                color: 'color-purple-700',
                 fontSize: '18px',
               },
               description: {
-                color: 'color.purple.600',
+                color: 'color-purple-600',
               },
             },
             showIcon: false,

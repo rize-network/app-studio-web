@@ -38,7 +38,7 @@ export const CustomHeaderExample = () => {
   ];
 
   return (
-    <View border="1px solid color.gray.200" borderRadius={4} overflow="hidden">
+    <View border="1px solid color-gray-200" borderRadius={4} overflow="hidden">
       <Tabs
         tabs={tabs}
         iconPosition="left"
@@ -47,7 +47,7 @@ export const CustomHeaderExample = () => {
             height: 300,
           },
           headerTabs: {
-            backgroundColor: 'color.gray.100',
+            backgroundColor: 'color-gray-100',
             padding: '8px 8px 0',
           },
           tab: {
@@ -55,15 +55,15 @@ export const CustomHeaderExample = () => {
             textAlign: 'center',
           },
           activeTab: {
-            backgroundColor: 'color.white',
-            borderColor: 'color.gray.200',
+            backgroundColor: 'color-white',
+            borderColor: 'color-gray-200',
           },
           activeText: {
-            color: 'theme.primary',
+            color: 'theme-primary',
             fontWeight: 'bold',
           },
           content: {
-            backgroundColor: 'color.white',
+            backgroundColor: 'color-white',
             padding: 16,
           },
         }}

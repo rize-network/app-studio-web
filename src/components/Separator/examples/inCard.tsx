@@ -32,7 +32,7 @@ export const SeparatorInCard = () => {
         </Vertical>
       </Card.Content>
       <Card.Footer>
-        <Text size="sm" color="color.gray.500">
+        <Text size="sm" color="color-gray-500">
           Card Footer
         </Text>
       </Card.Footer>

@@ -15,7 +15,7 @@ import React, { useState } from 'react';
 import { ColorInput } from '@app-studio/web';
 
 export const BasicColorInput = () => {
-  const [color, setColor] = useState('color.blue.500');
+  const [color, setColor] = useState('color-blue-500');
 
   return (
     <ColorInput
@@ -43,19 +43,19 @@ export const ColorInputVariants = () => {
       <ColorInput
         label="Default Variant"
         variant="default"
-        defaultValue="color.blue.500"
+        defaultValue="color-blue-500"
       />
       
       <ColorInput
         label="Outline Variant"
         variant="outline"
-        defaultValue="color.green.500"
+        defaultValue="color-green-500"
       />
       
       <ColorInput
         label="None Variant"
         variant="none"
-        defaultValue="color.purple.500"
+        defaultValue="color-purple-500"
       />
     </Vertical>
   );
@@ -73,11 +73,11 @@ import { ColorInput } from '@app-studio/web';
 export const ColorInputSizes = () => {
   return (
     <Vertical gap={16} width="300px">
-      <ColorInput label="Extra Small" size="xs" defaultValue="color.red.500" />
-      <ColorInput label="Small" size="sm" defaultValue="color.orange.500" />
-      <ColorInput label="Medium" size="md" defaultValue="color.yellow.500" />
-      <ColorInput label="Large" size="lg" defaultValue="color.green.500" />
-      <ColorInput label="Extra Large" size="xl" defaultValue="color.blue.500" />
+      <ColorInput label="Extra Small" size="xs" defaultValue="color-red-500" />
+      <ColorInput label="Small" size="sm" defaultValue="color-orange-500" />
+      <ColorInput label="Medium" size="md" defaultValue="color-yellow-500" />
+      <ColorInput label="Large" size="lg" defaultValue="color-green-500" />
+      <ColorInput label="Extra Large" size="xl" defaultValue="color-blue-500" />
     </Vertical>
   );
 };
@@ -125,8 +125,8 @@ import { Button } from '@app-studio/web';
 import { Text } from '@app-studio/web';
 
 export const ColorInputForm = () => {
-  const [backgroundColor, setBackgroundColor] = useState('color.blue.500');
-  const [textColor, setTextColor] = useState('color.white');
+  const [backgroundColor, setBackgroundColor] = useState('color-blue-500');
+  const [textColor, setTextColor] = useState('color-white');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -172,8 +172,8 @@ export const ColorInputForm = () => {
             type="button" 
             variant="outline"
             onClick={() => {
-              setBackgroundColor('color.blue.500');
-              setTextColor('color.white');
+              setBackgroundColor('color-blue-500');
+              setTextColor('color-white');
             }}
           >
             Reset

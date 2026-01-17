@@ -21,7 +21,7 @@ export const AnimatedDemo = () => {
           animationDuration="0.8s"
           height={12}
           radius={6}
-          color="theme.accent"
+          color="theme-accent"
         />
       </View>
 
@@ -33,7 +33,7 @@ export const AnimatedDemo = () => {
           animationDuration="0.8s"
           showLabel
           size={60}
-          color="color.purple.500"
+          color="color-purple-500"
         />
 
         {/* Entrance Animation Example */}
@@ -43,7 +43,7 @@ export const AnimatedDemo = () => {
             iterationCount: 'infinite',
           })}
           value={75}
-          color="color.orange.500"
+          color="color-orange-500"
           height={10}
         />
       </View>

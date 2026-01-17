@@ -1,6 +1,6 @@
 /**
  * ButtonView component – minimal and design‑system aligned.
- * - Chooses a **main color** with priority: `backgroundColor` → `color` → `theme.primary`.
+ * - Chooses a **main color** with priority: `backgroundColor` → `color` → `theme-primary`.
  * - Uses `getButtonVariants` to derive base/hover/active styles per variant.
  */
 
@@ -570,30 +570,30 @@ const ButtonView: React.FC<ButtonProps> = ({
   const { getColorHex } = useTheme();
 
   /* MAIN COLOR – determines the entire palette */
-  // Priority: explicit backgroundColor/color prop -> theme.button.background -> theme.primary
-  const mainColorKey = backgroundColor ?? color ?? 'theme.button.background';
+  // Priority: explicit backgroundColor/color prop -> theme-button.background -> theme-primary
+  const mainColorKey = backgroundColor ?? color ?? 'theme-button-background';
 
   // Decide which theme token to resolve based on state
   const stateColorKey = isDisabled
-    ? 'theme.disabled'
+    ? 'theme-disabled'
     : isLoading
-    ? 'theme.loading'
+    ? 'theme-loading'
     : mainColorKey;
 
-  // Resolve to actual hex color.
-  // If 'theme.button.background' isn't defined, it falls back to 'theme.primary'
+  // Resolve to actual hex color-
+  // If 'theme-button-background' isn't defined, it falls back to 'theme-primary'
   let mainTone = getColorHex(stateColorKey);
-  if (mainTone === 'theme.button.background' || mainTone === 'theme.loading') {
-    mainTone = getColorHex(isLoading ? 'color.dark.500' : 'theme.primary');
+  if (mainTone === 'theme-button-background' || mainTone === 'theme-loading') {
+    mainTone = getColorHex(isLoading ? 'color-dark-500' : 'theme-primary');
   }
 
   /* text color - explicitly provided or default to white */
-  // Priority: explicit textColor prop -> theme.button.text -> color.white
-  let resolvedTextColorKey = textColor ?? 'theme.button.text';
+  // Priority: explicit textColor prop -> theme-button.text -> color-white
+  let resolvedTextColorKey = textColor ?? 'theme-button-text';
   let resolvedTextColor = getColorHex(resolvedTextColorKey);
 
-  if (resolvedTextColor === 'theme.button.text') {
-    resolvedTextColor = getColorHex('color.white');
+  if (resolvedTextColor === 'theme-button-text') {
+    resolvedTextColor = getColorHex('color-white');
   }
 
   /* variant palette */

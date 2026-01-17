@@ -11,8 +11,8 @@ export const AnimatedDemo = () => (
       <Text fontSize="14px">Animated Linear</Text>
       <Gradient
         type="linear"
-        from="color.blue.500"
-        to="color.purple.500"
+        from="color-blue-500"
+        to="color-purple-500"
         animate={true}
         animationDuration={5}
         height="100px"
@@ -24,8 +24,8 @@ export const AnimatedDemo = () => (
       <Text fontSize="14px">Animated Radial</Text>
       <Gradient
         type="radial"
-        from="color.blue.500"
-        to="color.purple.500"
+        from="color-blue-500"
+        to="color-purple-500"
         animate={true}
         animationDuration={5}
         height="100px"
@@ -38,11 +38,11 @@ export const AnimatedDemo = () => (
       <Gradient
         type="conic"
         colors={[
-          { color: 'color.red.500', position: '0deg' },
-          { color: 'color.yellow.500', position: '90deg' },
-          { color: 'color.green.500', position: '180deg' },
-          { color: 'color.blue.500', position: '270deg' },
-          { color: 'color.red.500', position: '360deg' },
+          { color: 'color-red-500', position: '0deg' },
+          { color: 'color-yellow-500', position: '90deg' },
+          { color: 'color-green-500', position: '180deg' },
+          { color: 'color-blue-500', position: '270deg' },
+          { color: 'color-red-500', position: '360deg' },
         ]}
         animate={true}
         animationDuration={8}

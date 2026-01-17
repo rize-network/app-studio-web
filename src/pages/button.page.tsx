@@ -18,7 +18,7 @@ export const ButtonPage = () => {
   const { themeMode } = useTheme();
 
   return (
-    <View padding={20} backgroundColor="theme.background" minHeight="100vh">
+    <View padding={20} backgroundColor="theme-background" minHeight="100vh">
       <View gap={32} display="flex" flexDirection="column">
         {/* Helper for sections */}
         {Object.entries({
@@ -29,16 +29,16 @@ export const ButtonPage = () => {
                   fontSize={14}
                   marginBottom={12}
                   fontWeight="600"
-                  color="theme.primary"
+                  color="theme-primary"
                 >
                   Theme Tokens
                 </Text>
                 <Horizontal gap={12} wrap="wrap">
-                  <Button color="theme.primary">Primary</Button>
-                  <Button color="theme.secondary">Secondary</Button>
-                  <Button color="theme.success">Success</Button>
-                  <Button color="theme.warning">Warning</Button>
-                  <Button color="theme.error">Error</Button>
+                  <Button color="theme-primary">Primary</Button>
+                  <Button color="theme-secondary">Secondary</Button>
+                  <Button color="theme-success">Success</Button>
+                  <Button color="theme-warning">Warning</Button>
+                  <Button color="theme-error">Error</Button>
                 </Horizontal>
               </View>
 
@@ -47,16 +47,16 @@ export const ButtonPage = () => {
                   fontSize={14}
                   marginBottom={12}
                   fontWeight="600"
-                  color="theme.primary"
+                  color="theme-primary"
                 >
                   Color Palette
                 </Text>
                 <Horizontal gap={12} wrap="wrap">
-                  <Button color="color.blue.500">Blue 500</Button>
-                  <Button color="color.purple.500">Purple 500</Button>
-                  <Button color="color.pink.500">Pink 500</Button>
-                  <Button color="color.black">Black</Button>
-                  <Button color="color.white" textColor="color.black">
+                  <Button color="color-blue-500">Blue 500</Button>
+                  <Button color="color-purple-500">Purple 500</Button>
+                  <Button color="color-pink-500">Pink 500</Button>
+                  <Button color="color-black">Black</Button>
+                  <Button color="color-white" textColor="color-black">
                     White
                   </Button>
                 </Horizontal>
@@ -67,20 +67,20 @@ export const ButtonPage = () => {
                   fontSize={14}
                   marginBottom={12}
                   fontWeight="600"
-                  color="theme.primary"
+                  color="theme-primary"
                 >
                   Explicit Text Control
                 </Text>
                 <Horizontal gap={12} wrap="wrap">
-                  <Button color="color.yellow.400" textColor="color.black">
+                  <Button color="color-yellow-400" textColor="color-black">
                     Yellow + Black
                   </Button>
-                  <Button color="color.cyan.300" textColor="color.gray.900">
+                  <Button color="color-cyan-300" textColor="color-gray-900">
                     Cyan + Dark
                   </Button>
                   <Button
-                    backgroundColor="color.gray.100"
-                    textColor="color.gray.800"
+                    backgroundColor="color-gray-100"
+                    textColor="color-gray-800"
                   >
                     Custom Tokens
                   </Button>
@@ -91,13 +91,13 @@ export const ButtonPage = () => {
           'Variants & Schemes': <VariantButtons />,
           Shapes: (
             <Horizontal gap={12} wrap="wrap">
-              <Button shape="square" color="theme.primary">
+              <Button shape="square" color="theme-primary">
                 square edges
               </Button>
-              <Button shape="rounded" color="theme.primary">
+              <Button shape="rounded" color="theme-primary">
                 Rounded edges
               </Button>
-              <Button shape="pill" color="theme.primary">
+              <Button shape="pill" color="theme-primary">
                 Pill Shaped
               </Button>
             </Horizontal>
@@ -116,7 +116,7 @@ export const ButtonPage = () => {
                   fontSize={14}
                   marginBottom={12}
                   fontWeight="600"
-                  color="theme.primary"
+                  color="theme-primary"
                 >
                   Standard Sizes
                 </Text>
@@ -127,7 +127,7 @@ export const ButtonPage = () => {
                   fontSize={14}
                   marginBottom={12}
                   fontWeight="600"
-                  color="theme.primary"
+                  color="theme-primary"
                 >
                   States
                 </Text>
@@ -142,7 +142,7 @@ export const ButtonPage = () => {
                   fontSize={14}
                   marginBottom={12}
                   fontWeight="600"
-                  color="theme.primary"
+                  color="theme-primary"
                 >
                   Loading States
                 </Text>
@@ -153,7 +153,7 @@ export const ButtonPage = () => {
                   fontSize={14}
                   marginBottom={12}
                   fontWeight="600"
-                  color="theme.primary"
+                  color="theme-primary"
                 >
                   Icon Support
                 </Text>
@@ -171,33 +171,33 @@ export const ButtonPage = () => {
           <View
             key={title}
             backgroundColor={
-              themeMode === 'light' ? 'color.white' : 'color.gray.900'
+              themeMode === 'light' ? 'color-white' : 'color-gray-900'
             }
             padding={32}
             borderRadius={16}
             boxShadow="0 1px 3px rgba(0,0,0,0.05), 0 10px 15px -5px rgba(0,0,0,0.05)"
             borderWidth={1}
             borderColor={
-              themeMode === 'light' ? 'color.gray.100' : 'color.gray.800'
+              themeMode === 'light' ? 'color-gray-100' : 'color-gray-800'
             }
           >
             <Text
               fontSize={20}
               marginBottom={24}
               fontWeight="600"
-              color="theme.primary"
+              color="theme-primary"
             >
               {title}
             </Text>
             <View
               backgroundColor={
-                themeMode === 'light' ? 'color.gray.50' : 'color.gray.800'
+                themeMode === 'light' ? 'color-gray-50' : 'color-gray-800'
               }
               padding={24}
               borderRadius={12}
               borderWidth={1}
               borderColor={
-                themeMode === 'light' ? 'color.gray.100' : 'color.gray.700'
+                themeMode === 'light' ? 'color-gray-100' : 'color-gray-700'
               }
               borderStyle="dashed"
             >

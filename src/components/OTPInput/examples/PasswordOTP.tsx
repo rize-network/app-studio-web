@@ -32,7 +32,7 @@ export const PasswordOTPInput = () => {
         onComplete={handleComplete}
         isAutoFocus
       />
-      {isComplete && <Text color="theme.success">PIN entry complete!</Text>}
+      {isComplete && <Text color="theme-success">PIN entry complete!</Text>}
       <Horizontal gap={10}>
         <Button onClick={resetOTP} isAuto variant="outline">
           Reset

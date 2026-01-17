@@ -10,7 +10,7 @@ export const StylesDemo = () => {
           boxShadow: 'none', // Add shadow effect
         },
         fallback: {
-          color: 'theme.secondary',
+          color: 'theme-secondary',
         },
         image: {
           objectFit: 'fill',

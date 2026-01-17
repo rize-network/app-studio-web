@@ -74,13 +74,13 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
     ...Sizes[size],
     ...Shapes[shape],
     ...Variants[variant],
-    ...(error && { borderColor: 'color.red.500' }),
+    ...(error && { borderColor: 'color-red-500' }),
     ...(isDisabled && { opacity: 0.6, cursor: 'not-allowed' }),
     ...(isFocused && {
-      borderColor: 'color.blue.500',
+      borderColor: 'color-blue-500',
       boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.1)',
     }),
-    ...(isHovered && !isDisabled && { borderColor: 'color.gray.400' }),
+    ...(isHovered && !isDisabled && { borderColor: 'color-gray-400' }),
     ...views?.trigger,
     ...(shadow && shadow),
   };
@@ -101,7 +101,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
   };
 
   // Get display color for the selected color swatch
-  const displayColor = selectedColor || 'color.gray.200';
+  const displayColor = selectedColor || 'color-gray-200';
 
   return (
     <View {...containerStyles} {...props}>
@@ -144,10 +144,10 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           backgroundColor={displayColor}
           borderWidth="1px"
           borderStyle="solid"
-          borderColor="color.gray.300"
+          borderColor="color-gray-300"
         />
         {/* <Text
-            color={selectedColor ? 'color.gray.800' : 'color.gray.500'}
+            color={selectedColor ? 'color-gray-800' : 'color-gray-500'}
             fontSize="inherit"
             {...views?.text}
           >
@@ -158,7 +158,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
         {!isReadOnly && !isDisabled && (
           <ChevronIcon
             widthHeight={16}
-            color="color.gray.500"
+            color="color-gray-500"
             orientation={isOpen ? 'up' : 'down'}
           />
         )}
@@ -180,7 +180,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                 borderStyle="solid"
                 borderColor={
                   selectedColor === colorOption.value
-                    ? 'color.blue.500'
+                    ? 'color-blue-500'
                     : 'transparent'
                 }
                 cursor="pointer"
@@ -189,7 +189,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                 title={colorOption.name}
                 _hover={{
                   transform: 'scale(1.1)',
-                  borderColor: 'color.gray.400',
+                  borderColor: 'color-gray-400',
                 }}
                 {...views?.colorSwatch}
               />
@@ -199,7 +199,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           {/* Recent colors */}
           {showRecentColors && recentColors.length > 0 && (
             <Vertical gap={8} marginTop="16px">
-              <Text fontSize="12px" fontWeight="500" color="color.gray.600">
+              <Text fontSize="12px" fontWeight="500" color="color-gray-600">
                 Recent Colors
               </Text>
               <Horizontal gap={4} flexWrap="wrap" {...recentColorsStyles}>
@@ -214,8 +214,8 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                     borderStyle="solid"
                     borderColor={
                       selectedColor === color
-                        ? 'color.blue.500'
-                        : 'color.gray.300'
+                        ? 'color-blue-500'
+                        : 'color-gray-300'
                     }
                     cursor="pointer"
                     transition="all 0.2s ease"
@@ -223,7 +223,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                     title={color}
                     _hover={{
                       transform: 'scale(1.1)',
-                      borderColor: 'color.gray.400',
+                      borderColor: 'color-gray-400',
                     }}
                   />
                 ))}
@@ -234,7 +234,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           {/* Custom color input */}
           {showCustomInput && (
             <Vertical gap={8} marginTop="16px">
-              <Text fontSize="12px" fontWeight="500" color="color.gray.600">
+              <Text fontSize="12px" fontWeight="500" color="color-gray-600">
                 Custom Color
               </Text>
               <Horizontal gap={8}>
@@ -248,13 +248,13 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                 />
                 <View
                   padding="8px 12px"
-                  backgroundColor="color.blue.500"
+                  backgroundColor="color-blue-500"
                   borderRadius="4px"
                   cursor="pointer"
                   onClick={handleCustomColorSubmit}
-                  _hover={{ backgroundColor: 'color.blue.600' }}
+                  _hover={{ backgroundColor: 'color-blue-600' }}
                 >
-                  <Text color="color.white" fontSize="12px" fontWeight="500">
+                  <Text color="color-white" fontSize="12px" fontWeight="500">
                     Add
                   </Text>
                 </View>
@@ -268,7 +268,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       {helperText && (
         <Text
           fontSize="12px"
-          color={error ? 'color.red.500' : 'color.gray.600'}
+          color={error ? 'color-red-500' : 'color-gray-600'}
           marginTop="4px"
           {...views?.helperText}
         >
@@ -280,7 +280,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       {error && typeof error === 'string' && (
         <Text
           fontSize="12px"
-          color="color.red.500"
+          color="color-red-500"
           marginTop="4px"
           {...views?.error}
         >

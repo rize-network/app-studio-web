@@ -21,7 +21,7 @@ interface Props extends LoaderProps {
 const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   size = 'md',
   speed = 'normal',
-  color = 'theme.loading',
+  color = 'theme-loading',
   themeMode: elementMode,
   ...props
 }) => {
@@ -71,7 +71,7 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
 const Dotted: React.FC<DottedProps> = ({
   size = 'md',
   speed = 'normal',
-  color = 'theme.loading',
+  color = 'theme-loading',
   themeMode: elementMode,
   ...props
 }) => {
@@ -110,7 +110,7 @@ const Dotted: React.FC<DottedProps> = ({
 const Quarter: React.FC<QuarterProps> = ({
   size = 'md',
   speed = 'normal',
-  color = 'theme.loading',
+  color = 'theme-loading',
   themeMode: elementMode,
   ...props
 }) => {
@@ -163,8 +163,8 @@ const LoaderView: React.FC<Props> = ({
   ...props
 }) => {
   const { getColor } = useTheme();
-  loaderColor = getColor(loaderColor || props.color || 'theme.loading');
-  textColor = getColor(textColor || props.color || 'theme.loading');
+  loaderColor = getColor(loaderColor || props.color || 'theme-loading');
+  textColor = getColor(textColor || props.color || 'theme-loading');
 
   const style = { size, speed, color: loaderColor };
 

@@ -16,8 +16,8 @@ import { Vertical } from 'app-studio';
 export const LinearExamples = () => (
   <Vertical gap={20}>
     <ProgressBar value={30} />
-    <ProgressBar value={60} color="color.blue.500" height={8} radius={4} />
-    <ProgressBar value={90} color="color.green.500" height={12} radius={6} />
+    <ProgressBar value={60} color="color-blue-500" height={8} radius={4} />
+    <ProgressBar value={90} color="color-green-500" height={12} radius={6} />
   </Vertical>
 );
 ```
@@ -41,7 +41,7 @@ export const CircularExamples = () => (
       shape="circle" 
       value={75} 
       size={80} 
-      color="color.purple.500" 
+      color="color-purple-500" 
       strokeWidth={8}
       showLabel 
     />
@@ -49,11 +49,11 @@ export const CircularExamples = () => (
       shape="circle" 
       value={90} 
       size={100} 
-      color="color.orange.500" 
+      color="color-orange-500" 
       strokeWidth={10} 
-      backgroundColor="color.orange.100"
+      backgroundColor="color-orange-100"
       showLabel
-      labelColor="color.orange.700"
+      labelColor="color-orange-700"
     />
   </Horizontal>
 );
@@ -99,7 +99,7 @@ export const DynamicProgress = () => {
   return (
     <Vertical gap={20}>
       <Text>Uploading... {progress}%</Text>
-      <ProgressBar value={progress} color="color.blue.600" animated />
+      <ProgressBar value={progress} color="color-blue-600" animated />
       
       <Horizontal gap={20} marginTop={20}>
         <ProgressBar 
@@ -107,7 +107,7 @@ export const DynamicProgress = () => {
           value={progress} 
           size={50} 
           showLabel 
-          color="color.blue.600" 
+          color="color-blue-600" 
         />
       </Horizontal>
     </Vertical>
@@ -128,7 +128,7 @@ export const CustomStyle = () => (
     height={20}
     views={{
       container: { 
-        borderColor: 'color.gray.300', 
+        borderColor: 'color-gray-300', 
         borderWidth: 1, 
         padding: 2, 
         borderRadius: 12 

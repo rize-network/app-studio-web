@@ -22,7 +22,7 @@ export const OnCompleteDemo = () => {
         isAutoFocus
       />
       {message && (
-        <Text color="theme.success" fontWeight="medium">
+        <Text color="theme-success" fontWeight="medium">
           {message}
         </Text>
       )}

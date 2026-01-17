@@ -59,7 +59,7 @@ const Item: React.FC<ItemProps> = ({
       onMouseLeave={handleHover}
       onClick={(e: React.MouseEvent) => handleOptionClick(e, option.value)}
       // Visual properties
-      backgroundColor={isHovered ? 'color.gray.100' : 'transparent'}
+      backgroundColor={isHovered ? 'color-gray-100' : 'transparent'}
       borderRadius="4px" // Subtle rounded corners for items
       // Animation
       transition="all 0.15s ease"
@@ -114,7 +114,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
     // Visual properties
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+    color: isDisabled ? 'color-gray-400' : 'color-gray-900',
 
     // State properties
     cursor: isDisabled ? 'not-allowed' : 'pointer',
@@ -225,7 +225,7 @@ const DropDown: React.FC<DropDownProps> = ({
       width="100%"
       display="flex"
       flexDirection="column"
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       transition="all 0.2s ease"
       margin={0}
       style={{
@@ -254,7 +254,7 @@ const DropDown: React.FC<DropDownProps> = ({
             option={option}
             callback={handleCallback}
             backgroundColor={
-              index === highlightedIndex ? 'color.gray.100' : 'transparent'
+              index === highlightedIndex ? 'color-gray-100' : 'transparent'
             }
             onMouseEnter={() => setHighlightedIndex(index)}
             {...itemStates}
@@ -282,7 +282,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
       padding={8}
       alignItems="center"
       borderRadius="6px"
-      backgroundColor="color.gray.200"
+      backgroundColor="color-gray-200"
       fontSize={Typography.fontSizes[size]}
       onClick={(event: any) => event.stopPropagation()}
       transition="all 0.2s ease"
@@ -489,7 +489,7 @@ const SelectView: React.FC<SelectViewProps> = ({
         shadow={shadow}
         variant={variant}
         value={value}
-        color={'theme.primary'}
+        color={'theme-primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
@@ -503,7 +503,7 @@ const SelectView: React.FC<SelectViewProps> = ({
           {showLabel && (
             <FieldLabel
               htmlFor={id}
-              color={'theme.primary'}
+              color={'theme-primary'}
               error={error}
               {...views}
             >
@@ -565,7 +565,7 @@ const SelectView: React.FC<SelectViewProps> = ({
                 ...views,
                 dropDown: {
                   borderRadius: '6px',
-                  border: '1px solid color.gray.200',
+                  border: '1px solid color-gray-200',
                   boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
                   padding: '8px',
                   maxHeight: '240px',

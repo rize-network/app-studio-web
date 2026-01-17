@@ -78,8 +78,8 @@ import { View, useTheme } from 'app-studio';
 function ThemedComponent() {
   const { getColor, themeMode } = useTheme();
   
-  const primaryColor = getColor('theme.primary', { themeMode });
-  const textColor = getColor('theme.text', { themeMode });
+  const primaryColor = getColor('theme-primary', { themeMode });
+  const textColor = getColor('theme-text', { themeMode });
   
   return (
     <View backgroundColor={primaryColor} color={textColor}>
@@ -95,29 +95,29 @@ The theme includes the following color categories:
 
 ### Semantic Colors
 
-- `theme.primary`: Primary brand color
-- `theme.secondary`: Secondary brand color
-- `theme.success`: Success state color
-- `theme.warning`: Warning state color
-- `theme.error`: Error state color
-- `theme.info`: Information state color
-- `theme.disabled`: Disabled state color
+- `theme-primary`: Primary brand color
+- `theme-secondary`: Secondary brand color
+- `theme-success`: Success state color
+- `theme-warning`: Warning state color
+- `theme-error`: Error state color
+- `theme-info`: Information state color
+- `theme-disabled`: Disabled state color
 
 ### Neutral Colors
 
-- `color.white`: White
-- `color.black`: Black
-- `color.gray.50` to `color.gray.900`: Gray scale
+- `color-white`: White
+- `color-black`: Black
+- `color-gray.50` to `color-gray-900`: Gray scale
 
 ### Color Scales
 
 Each color has a scale from 50 (lightest) to 900 (darkest):
 
-- `color.blue.50` to `color.blue.900`
-- `color.green.50` to `color.green.900`
-- `color.red.50` to `color.red.900`
-- `color.yellow.50` to `color.yellow.900`
-- `color.purple.50` to `color.purple.900`
+- `color-blue.50` to `color-blue-900`
+- `color-green.50` to `color-green-900`
+- `color-red.50` to `color-red-900`
+- `color-yellow.50` to `color-yellow-900`
+- `color-purple.50` to `color-purple-900`
 
 ## Typography
 
@@ -165,8 +165,8 @@ function SpacingExample() {
   return (
     <View padding={16}>
       <Horizontal gap={8}>
-        <View width={50} height={50} backgroundColor="theme.primary" />
-        <View width={50} height={50} backgroundColor="theme.secondary" />
+        <View width={50} height={50} backgroundColor="theme-primary" />
+        <View width={50} height={50} backgroundColor="theme-secondary" />
       </Horizontal>
     </View>
   );

@@ -42,10 +42,10 @@ export const CustomizedCommand = () => {
       padding="24px"
       flexDirection="column"
     >
-      <Text fontSize="16px" fontWeight="bold" color="color.gray.600">
+      <Text fontSize="16px" fontWeight="bold" color="color-gray-600">
         No commands found
       </Text>
-      <Text fontSize="14px" color="color.gray.500" marginTop="8px">
+      <Text fontSize="14px" color="color-gray-500" marginTop="8px">
         Try a different search term
       </Text>
     </Horizontal>
@@ -53,9 +53,9 @@ export const CustomizedCommand = () => {
 
   const customFooter = (
     <Horizontal justifyContent="space-between" width="100%">
-      <Text color="color.gray.500">Press ↑↓ to navigate</Text>
-      <Text color="color.gray.500">Press Enter to select</Text>
-      <Text color="color.gray.500">Press Esc to close</Text>
+      <Text color="color-gray-500">Press ↑↓ to navigate</Text>
+      <Text color="color-gray-500">Press Enter to select</Text>
+      <Text color="color-gray-500">Press Esc to close</Text>
     </Horizontal>
   );
 
@@ -71,18 +71,18 @@ export const CustomizedCommand = () => {
         footer={customFooter}
         views={{
           container: {
-            backgroundColor: 'color.blue.50',
-            borderColor: 'color.blue.200',
+            backgroundColor: 'color-blue-50',
+            borderColor: 'color-blue-200',
             borderWidth: '2px',
             borderRadius: '12px',
           },
           searchInput: {
             container: {
-              backgroundColor: 'color.white',
-              borderBottomColor: 'color.blue.200',
+              backgroundColor: 'color-white',
+              borderBottomColor: 'color-blue-200',
             },
             input: {
-              color: 'color.blue.800',
+              color: 'color-blue-800',
               fontWeight: 'medium',
             },
           },
@@ -90,31 +90,31 @@ export const CustomizedCommand = () => {
             backgroundColor: 'transparent',
             borderRadius: '8px',
             _hover: {
-              backgroundColor: 'color.blue.100',
+              backgroundColor: 'color-blue-100',
             },
           },
           selectedItem: {
-            backgroundColor: 'color.blue.200',
+            backgroundColor: 'color-blue-200',
             _hover: {
-              backgroundColor: 'color.blue.300',
+              backgroundColor: 'color-blue-300',
             },
           },
           name: {
-            color: 'color.blue.800',
+            color: 'color-blue-800',
             fontWeight: 'bold',
           },
           description: {
-            color: 'color.blue.600',
+            color: 'color-blue-600',
           },
           shortcut: {
-            backgroundColor: 'color.white',
+            backgroundColor: 'color-white',
             padding: '2px 6px',
             borderRadius: '4px',
             fontWeight: 'bold',
           },
           footer: {
-            backgroundColor: 'color.white',
-            borderTopColor: 'color.blue.200',
+            backgroundColor: 'color-white',
+            borderTopColor: 'color-blue-200',
           },
         }}
       />

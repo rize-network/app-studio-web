@@ -6,7 +6,7 @@ import { Text } from 'app-studio';
 
 export const ControlledColorPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedColor, setSelectedColor] = useState('color.purple.500');
+  const [selectedColor, setSelectedColor] = useState('color-purple-500');
 
   return (
     <Vertical gap={16}>
@@ -30,20 +30,20 @@ export const ControlledColorPicker = () => {
 
         <Button
           variant="outline"
-          onClick={() => setSelectedColor('color.red.500')}
+          onClick={() => setSelectedColor('color-red-500')}
         >
           Set Red
         </Button>
 
         <Button
           variant="outline"
-          onClick={() => setSelectedColor('color.green.500')}
+          onClick={() => setSelectedColor('color-green-500')}
         >
           Set Green
         </Button>
       </Horizontal>
 
-      <Text fontSize="14px" color="color.gray.600">
+      <Text fontSize="14px" color="color-gray-600">
         Selected color: {selectedColor}
       </Text>
     </Vertical>

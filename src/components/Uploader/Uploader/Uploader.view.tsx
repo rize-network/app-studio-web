@@ -123,7 +123,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
             height={4}
             width={`${progress}%`}
             borderRadius={2}
-            backgroundColor="color.dark.50"
+            backgroundColor="color-dark-50"
             {...views?.view}
           />
         </View>

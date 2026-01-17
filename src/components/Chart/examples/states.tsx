@@ -117,7 +117,7 @@ export const ChartStatesDemo = () => {
       <View
         padding={16}
         borderWidth={1}
-        borderColor="color.gray.200"
+        borderColor="color-gray-200"
         borderRadius={8}
       >
         <Vertical gap={16}>
@@ -175,8 +175,8 @@ export const ChartStatesDemo = () => {
           isLoading={true}
           loadingIndicator={
             <Vertical alignItems="center" gap={10}>
-              <Text color="color.blue">Custom Loading...</Text>
-              <Text color="color.gray.500">
+              <Text color="color-blue">Custom Loading...</Text>
+              <Text color="color-gray-500">
                 Please wait while we prepare your data
               </Text>
             </Vertical>

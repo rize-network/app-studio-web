@@ -36,7 +36,7 @@ export const AvatarView = ({
       width={avatarSize}
       height={avatarSize}
       {...DefaultAvatarStyles.container}
-      borderColor={imageError ? 'color.gray.400' : 'transparent'}
+      borderColor={imageError ? 'color-gray-400' : 'transparent'}
       onClick={onClick}
       {...views?.container}
     >

@@ -167,11 +167,11 @@ export const componentList = [
 const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (
   <View
     as="li"
-    color="theme.primary"
+    color="theme-primary"
     cursor="pointer"
     padding={16}
     margin={0}
-    backgroundColor={isHovered ? 'color.gray.100' : 'transparent'}
+    backgroundColor={isHovered ? 'color-gray-100' : 'transparent'}
     fontWeight={isSelected ? 'bold' : 'normal'}
     {...props}
   >
@@ -186,13 +186,13 @@ const List = ({ children, ...props }: any) => (
 );
 
 const Title = ({ children, ...props }: any) => (
-  <Text as="h2" padding={16} fontWeight="bold" color="theme.primary" {...props}>
+  <Text as="h2" padding={16} fontWeight="bold" color="theme-primary" {...props}>
     {children}
   </Text>
 );
 
 const SubTitle = ({ children, ...props }: any) => (
-  <Text as="h3" fontWeight="bold" color="theme.primary" {...props}>
+  <Text as="h3" fontWeight="bold" color="theme-primary" {...props}>
     {children}
   </Text>
 );
@@ -226,7 +226,7 @@ export const ComponentsPage = () => {
         transition="box-shadow 0.3s ease-in-out"
         height="100vh"
         overflow="auto"
-        backgroundColor="theme.background"
+        backgroundColor="theme-background"
       >
         <Horizontal
           alignItems="center"
@@ -238,7 +238,7 @@ export const ComponentsPage = () => {
             variant="ghost"
             size="sm"
             onClick={toggleThemeMode}
-            color="theme.primary"
+            color="theme-primary"
           >
             {themeMode === 'light' ? '🌙' : '☀️'}
           </Button>
@@ -266,7 +266,7 @@ export const ComponentsPage = () => {
         gap={10}
         height="100vh"
         overflow="auto"
-        backgroundColor="theme.background"
+        backgroundColor="theme-background"
       >
         <Suspense fallback={<View>Loading...</View>}>
           <SubTitle>{selected.name}</SubTitle>

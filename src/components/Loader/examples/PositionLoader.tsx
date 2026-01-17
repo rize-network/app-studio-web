@@ -8,22 +8,22 @@ export const PositionLoader = () => (
       Submitting
     </Loader>
     <Loader
-      loaderColor="theme.primary"
-      textColor="theme.primary"
+      loaderColor="theme-primary"
+      textColor="theme-primary"
       textPosition="top"
     >
       Submitting
     </Loader>
     <Loader
-      loaderColor="theme.primary"
-      textColor="theme.primary"
+      loaderColor="theme-primary"
+      textColor="theme-primary"
       textPosition="bottom"
     >
       Submitting
     </Loader>
     <Loader
-      loaderColor="theme.primary"
-      textColor="theme.primary"
+      loaderColor="theme-primary"
+      textColor="theme-primary"
       textPosition="left"
     >
       Submitting

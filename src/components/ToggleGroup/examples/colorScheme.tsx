@@ -12,11 +12,11 @@ export const ColorSchemeDemo = () => {
   return (
     <Vertical gap={10}>
       {[
-        'theme.primary',
-        'theme.secondary',
-        'theme.warning',
-        'theme.success',
-        'theme.error',
+        'theme-primary',
+        'theme-secondary',
+        'theme-warning',
+        'theme-success',
+        'theme-error',
       ].map((color, index) => (
         <ToggleGroup key={index} items={items} />
       ))}

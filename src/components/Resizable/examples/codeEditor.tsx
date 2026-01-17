@@ -21,7 +21,7 @@ export const CodeEditorLayout = () => {
           minSize={150}
           maxSize={300}
         >
-          <View padding="8px" height="100%" backgroundColor="color.gray.100">
+          <View padding="8px" height="100%" backgroundColor="color-gray-100">
             <Text fontWeight="bold" marginBottom="8px">
               Explorer
             </Text>
@@ -29,7 +29,7 @@ export const CodeEditorLayout = () => {
               <View
                 padding="4px 8px"
                 borderRadius="4px"
-                backgroundColor="color.blue.100"
+                backgroundColor="color-blue-100"
               >
                 <Text>src/</Text>
               </View>
@@ -40,7 +40,7 @@ export const CodeEditorLayout = () => {
                 padding="4px 8px"
                 marginLeft="24px"
                 borderRadius="4px"
-                backgroundColor="color.blue.100"
+                backgroundColor="color-blue-100"
               >
                 <Text>Resizable/</Text>
               </View>
@@ -67,38 +67,38 @@ export const CodeEditorLayout = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.gray.900"
+                backgroundColor="color-gray-900"
                 color="white"
                 fontFamily="monospace"
               >
                 <Text
                   fontWeight="bold"
                   marginBottom="8px"
-                  color="color.gray.300"
+                  color="color-gray-300"
                 >
                   Resizable.tsx
                 </Text>
-                <Text color="color.blue.300">import</Text>
+                <Text color="color-blue-300">import</Text>
                 <Text color="white"> React </Text>
-                <Text color="color.blue.300">from</Text>
-                <Text color="color.green.300"> react</Text>
+                <Text color="color-blue-300">from</Text>
+                <Text color="color-green-300"> react</Text>
                 <Text color="white">;</Text>
                 <Text></Text>
-                <Text color="color.blue.300">import</Text>
+                <Text color="color-blue-300">import</Text>
                 <Text color="white"> {'{'} </Text>
                 <Text color="white">ResizableProps,</Text>
                 <Text color="white">ResizableType,</Text>
                 <Text color="white">{'}'} </Text>
-                <Text color="color.blue.300">from</Text>
-                <Text color="color.green.300"> </Text>
+                <Text color="color-blue-300">from</Text>
+                <Text color="color-green-300"> </Text>
                 <Text color="white">;</Text>
                 <Text></Text>
-                <Text color="color.purple.300">const</Text>
-                <Text color="color.yellow.300"> ResizableComponent</Text>
+                <Text color="color-purple-300">const</Text>
+                <Text color="color-yellow-300"> ResizableComponent</Text>
                 <Text color="white">: React.FC</Text>
-                <Text color="color.gray.300">{'<'}</Text>
-                <Text color="color.yellow.300">ResizableProps</Text>
-                <Text color="color.gray.300">{'>'}</Text>
+                <Text color="color-gray-300">{'<'}</Text>
+                <Text color="color-yellow-300">ResizableProps</Text>
+                <Text color="color-gray-300">{'>'}</Text>
                 <Text color="white">{'}'}</Text>
               </View>
             </Resizable.Panel>
@@ -110,21 +110,21 @@ export const CodeEditorLayout = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.gray.800"
+                backgroundColor="color-gray-800"
                 color="white"
                 fontFamily="monospace"
               >
                 <Text
                   fontWeight="bold"
                   marginBottom="8px"
-                  color="color.gray.300"
+                  color="color-gray-300"
                 >
                   Terminal
                 </Text>
-                <Text color="color.green.300">$ </Text>
+                <Text color="color-green-300">$ </Text>
                 <Text color="white">npm run build</Text>
-                <Text color="color.blue.300">Building project...</Text>
-                <Text color="color.green.300">
+                <Text color="color-blue-300">Building project...</Text>
+                <Text color="color-green-300">
                   Build completed successfully!
                 </Text>
               </View>
@@ -141,7 +141,7 @@ export const CodeEditorLayout = () => {
           minSize={150}
           maxSize={300}
         >
-          <View padding="16px" height="100%" backgroundColor="color.gray.100">
+          <View padding="16px" height="100%" backgroundColor="color-gray-100">
             <Text fontWeight="bold" marginBottom="8px">
               Properties
             </Text>
@@ -149,9 +149,9 @@ export const CodeEditorLayout = () => {
               <View
                 padding="8px"
                 borderRadius="4px"
-                backgroundColor="color.white"
+                backgroundColor="color-white"
               >
-                <Text fontWeight="bold" color="color.gray.500">
+                <Text fontWeight="bold" color="color-gray-500">
                   COMPONENT
                 </Text>
                 <Text>Resizable</Text>
@@ -159,9 +159,9 @@ export const CodeEditorLayout = () => {
               <View
                 padding="8px"
                 borderRadius="4px"
-                backgroundColor="color.white"
+                backgroundColor="color-white"
               >
-                <Text fontWeight="bold" color="color.gray.500">
+                <Text fontWeight="bold" color="color-gray-500">
                   ORIENTATION
                 </Text>
                 <Text>horizontal</Text>
@@ -169,9 +169,9 @@ export const CodeEditorLayout = () => {
               <View
                 padding="8px"
                 borderRadius="4px"
-                backgroundColor="color.white"
+                backgroundColor="color-white"
               >
-                <Text fontWeight="bold" color="color.gray.500">
+                <Text fontWeight="bold" color="color-gray-500">
                   SIZE
                 </Text>
                 <Text>md</Text>
@@ -179,9 +179,9 @@ export const CodeEditorLayout = () => {
               <View
                 padding="8px"
                 borderRadius="4px"
-                backgroundColor="color.white"
+                backgroundColor="color-white"
               >
-                <Text fontWeight="bold" color="color.gray.500">
+                <Text fontWeight="bold" color="color-gray-500">
                   VARIANT
                 </Text>
                 <Text>default</Text>

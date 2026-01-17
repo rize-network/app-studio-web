@@ -43,11 +43,11 @@ export const CustomizedOTPInput = () => {
         shadow={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px' }}
         views={{
           container: {
-            borderColor: 'theme.primary',
-            backgroundColor: 'color.gray.50',
+            borderColor: 'theme-primary',
+            backgroundColor: 'color-gray-50',
           },
           input: {
-            color: 'theme.primary',
+            color: 'theme-primary',
             fontWeight: 'bold',
           },
         }}

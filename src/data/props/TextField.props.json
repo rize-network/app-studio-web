@@ -34,7 +34,7 @@
     "type": "string",
     "typeValues": [],
     "description": "Optional property to specify the color scheme of the TextField.",
-    "defaultValue": "'theme.primary'"
+    "defaultValue": "'theme-primary'"
   },
   "left": {
     "type": "React.ReactNode",

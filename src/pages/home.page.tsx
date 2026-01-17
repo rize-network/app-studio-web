@@ -75,7 +75,7 @@ export const HomePage = () => {
         position="relative"
         flexWrap="nowrap"
         overflowY="scroll"
-        color="warmGray.500"
+        color="warmGray-500"
         alignItems="center"
         scroll-behavior="smooth"
         backgroundImage={`url(${LandingImage})`}
@@ -145,7 +145,7 @@ export const HomePage = () => {
                   color="white"
                   borderRadius="50%"
                   padding="10px"
-                  backgroundColor="theme.primary"
+                  backgroundColor="theme-primary"
                   media={media.icon}
                 >
                   {feature.icon}

@@ -9,13 +9,13 @@ export const CustomDemo = () => {
     <Card
       views={{
         container: {
-          backgroundColor: 'color.blue.50',
+          backgroundColor: 'color-blue-50',
           borderRadius: '16px',
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
         },
         header: {
-          backgroundColor: 'color.blue.500',
-          color: 'color.white',
+          backgroundColor: 'color-blue-500',
+          color: 'color-white',
           padding: '16px',
           borderBottomWidth: '0',
         },

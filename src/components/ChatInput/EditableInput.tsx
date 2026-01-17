@@ -394,7 +394,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
               position="absolute"
               top="8px"
               left="8px"
-              color="color.gray.400"
+              color="color-gray-400"
               pointerEvents="none"
               fontSize="14px"
               zIndex={1}
@@ -424,7 +424,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             whiteSpace="pre-wrap"
             wordBreak="break-word"
             fontSize="14px"
-            color="color.gray.900"
+            color="color-gray-900"
             backgroundColor="transparent"
             {...views?.input}
           />
@@ -437,9 +437,9 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             left={mentionPosition.x}
             top={mentionPosition.y}
             width={containerRef.current?.offsetWidth || 300}
-            backgroundColor="color.white"
+            backgroundColor="color-white"
             border="2px solid"
-            borderColor="color.blue.300"
+            borderColor="color-blue-300"
             borderRadius="8px"
             boxShadow="0 8px 24px rgba(0, 0, 0, 0.15)"
             zIndex={9999}
@@ -457,7 +457,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                   padding="12px 16px"
                   backgroundColor={
                     index === selectedMentionIndex
-                      ? 'color.blue.50'
+                      ? 'color-blue-50'
                       : 'transparent'
                   }
                   border="none"
@@ -467,21 +467,21 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                   onClick={() => handleMentionSelect(mention)}
                   onMouseEnter={() => setSelectedMentionIndex(index)}
                   _hover={{
-                    backgroundColor: 'color.blue.50',
+                    backgroundColor: 'color-blue-50',
                   }}
                   {...views?.mentionItem}
                 >
                   <Vertical gap={4}>
                     <Text
                       fontSize="14px"
-                      color="color.gray.900"
+                      color="color-gray-900"
                       fontWeight="medium"
                     >
                       {mentionTrigger}
                       {mention.name}
                     </Text>
                     {mention.description && (
-                      <Text fontSize="12px" color="color.gray.600">
+                      <Text fontSize="12px" color="color-gray-600">
                         {mention.description}
                       </Text>
                     )}
@@ -516,9 +516,9 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
               left={suggestionPosition.x}
               top={suggestionPosition.y}
               width={containerRef.current?.offsetWidth || 300}
-              backgroundColor="color.white"
+              backgroundColor="color-white"
               border="2px solid"
-              borderColor="color.green.300"
+              borderColor="color-green-300"
               borderRadius="8px"
               boxShadow="0 8px 24px rgba(0, 0, 0, 0.15)"
               zIndex={9998}
@@ -536,7 +536,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                     padding="12px 16px"
                     backgroundColor={
                       index === selectedSuggestionIndex
-                        ? 'color.blue.50'
+                        ? 'color-blue-50'
                         : 'transparent'
                     }
                     border="none"
@@ -546,20 +546,20 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                     onClick={() => handleSuggestionSelect(suggestion)}
                     onMouseEnter={() => setSelectedSuggestionIndex(index)}
                     _hover={{
-                      backgroundColor: 'color.blue.50',
+                      backgroundColor: 'color-blue-50',
                     }}
                     {...views?.suggestionItem}
                   >
                     <Vertical gap={4}>
                       <Text
                         fontSize="14px"
-                        color="color.gray.900"
+                        color="color-gray-900"
                         fontWeight="medium"
                       >
                         {suggestion.text}
                       </Text>
                       {suggestion.description && (
-                        <Text fontSize="12px" color="color.gray.600">
+                        <Text fontSize="12px" color="color-gray-600">
                           {suggestion.description}
                         </Text>
                       )}

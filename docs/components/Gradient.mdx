@@ -14,8 +14,8 @@ import { Gradient } from '@app-studio/web';
 
 export const DefaultGradient = () => (
   <Gradient 
-    from="color.blue.500" 
-    to="color.violet.500" 
+    from="color-blue-500" 
+    to="color-violet-500" 
     width={300} 
     height={200} 
   />
@@ -38,22 +38,22 @@ export const GradientTypes = () => (
   <Vertical gap={15}>
     <Gradient 
       type="linear" 
-      from="color.blue.500" 
-      to="color.violet.500" 
+      from="color-blue-500" 
+      to="color-violet-500" 
       width={300} 
       height={100} 
     />
     <Gradient 
       type="radial" 
-      from="color.blue.500" 
-      to="color.violet.500" 
+      from="color-blue-500" 
+      to="color-violet-500" 
       width={300} 
       height={100} 
     />
     <Gradient 
       type="conic" 
-      from="color.blue.500" 
-      to="color.violet.500" 
+      from="color-blue-500" 
+      to="color-violet-500" 
       width={300} 
       height={100} 
     />
@@ -73,9 +73,9 @@ import { Vertical } from 'app-studio';
 
 export const SimpleGradients = () => (
   <Vertical gap={15}>
-    <Gradient from="color.red.500" to="color.amber.500" width={300} height={100} />
-    <Gradient from="color.emerald.500" to="color.blue.500" width={300} height={100} />
-    <Gradient from="color.violet.500" to="color.pink.500" width={300} height={100} />
+    <Gradient from="color-red-500" to="color-amber-500" width={300} height={100} />
+    <Gradient from="color-emerald-500" to="color-blue-500" width={300} height={100} />
+    <Gradient from="color-violet-500" to="color-pink-500" width={300} height={100} />
   </Vertical>
 );
 ```
@@ -127,8 +127,8 @@ export const DirectionalGradients = () => (
       <Gradient 
         key={direction}
         direction={direction as any}
-        from="color.blue.500" 
-        to="color.violet.500" 
+        from="color-blue-500" 
+        to="color-violet-500" 
         width={300} 
         height={100} 
       />
@@ -154,16 +154,16 @@ export const RadialShapes = () => (
     <Gradient 
       type="radial"
       shape="circle"
-      from="color.blue.500" 
-      to="color.violet.500" 
+      from="color-blue-500" 
+      to="color-violet-500" 
       width={200} 
       height={200} 
     />
     <Gradient 
       type="radial"
       shape="ellipse"
-      from="color.blue.500" 
-      to="color.violet.500" 
+      from="color-blue-500" 
+      to="color-violet-500" 
       width={300} 
       height={200} 
     />
@@ -195,8 +195,8 @@ export const RadialPositions = () => (
         key={position}
         type="radial"
         position={position as any}
-        from="color.blue.500" 
-        to="color.violet.500" 
+        from="color-blue-500" 
+        to="color-violet-500" 
         width={300} 
         height={100} 
       />
@@ -217,8 +217,8 @@ import { Gradient } from '@app-studio/web';
 
 export const AnimatedGradient = () => (
   <Gradient 
-    from="color.blue.500" 
-    to="color.violet.500" 
+    from="color-blue-500" 
+    to="color-violet-500" 
     animate
     width={300} 
     height={200} 
@@ -240,16 +240,16 @@ import { Vertical } from 'app-studio';
 export const AnimationDurations = () => (
   <Vertical gap={15}>
     <Gradient 
-      from="color.blue.500" 
-      to="color.violet.500" 
+      from="color-blue-500" 
+      to="color-violet-500" 
       animate
       animationDuration={1}
       width={300} 
       height={80} 
     />
     <Gradient 
-      from="color.blue.500" 
-      to="color.violet.500" 
+      from="color-blue-500" 
+      to="color-violet-500" 
       animate
       animationDuration={5}
       width={300} 
@@ -271,8 +271,8 @@ import { Text, Center } from 'app-studio';
 
 export const GradientWithContent = () => (
   <Gradient 
-    from="color.blue.500" 
-    to="color.violet.500" 
+    from="color-blue-500" 
+    to="color-violet-500" 
     width={300} 
     height={200}
     borderRadius={16}
@@ -297,8 +297,8 @@ import { Gradient } from '@app-studio/web';
 
 export const StyledGradient = () => (
   <Gradient 
-    from="color.blue.500" 
-    to="color.violet.500" 
+    from="color-blue-500" 
+    to="color-violet-500" 
     width={300} 
     height={200}
     views={{
@@ -379,8 +379,8 @@ import { Text, Vertical, Button } from 'app-studio';
 
 export const GradientCard = () => (
   <Gradient 
-    from="color.indigo.400" 
-    to="color.purple.700" 
+    from="color-indigo-400" 
+    to="color-purple-700" 
     width={350} 
     borderRadius={16}
     boxShadow="0 10px 40px rgba(0,0,0,0.2)"
@@ -400,7 +400,7 @@ export const GradientCard = () => (
       </Vertical>
       <Button 
         backgroundColor="white" 
-        color="color.indigo.400"
+        color="color-indigo-400"
         isFullWidth
       >
         Get Started

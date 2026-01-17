@@ -10,14 +10,14 @@ export const SubtleButtons = () => (
     </Button>
     <Button
       variant="subtle"
-      color="color.red.600"
+      color="color-red-600"
       onClick={() => alert('Clicked Red!')}
     >
       <PlusIcon widthHeight={14} /> Remove Objective
     </Button>
     <Button
       variant="subtle"
-      color="color.blue.600"
+      color="color-blue-600"
       onClick={() => alert('Clicked Blue!')}
     >
       <PlusIcon widthHeight={14} /> Add Task

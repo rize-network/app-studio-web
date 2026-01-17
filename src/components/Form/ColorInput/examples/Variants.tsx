@@ -14,7 +14,7 @@ export const VariantsColorInput = () => {
           } Variant`}
           variant={variant}
           placeholder="Select a color"
-          defaultValue="color.blue.500"
+          defaultValue="color-blue-500"
         />
       ))}
     </Vertical>

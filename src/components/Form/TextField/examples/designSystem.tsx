@@ -109,24 +109,24 @@ export const DesignSystemTextFields = () => (
       <Vertical gap={16}>
         <TextField
           placeholder="Search..."
-          left={<SearchIcon widthHeight={20} color="color.gray.400" />}
+          left={<SearchIcon widthHeight={20} color="color-gray-400" />}
         />
 
         <TextField
           placeholder="Username"
-          left={<UserIcon widthHeight={20} color="color.gray.400" />}
+          left={<UserIcon widthHeight={20} color="color-gray-400" />}
         />
 
         <TextField
           placeholder="Password"
-          left={<LockIcon widthHeight={20} color="color.gray.400" />}
+          left={<LockIcon widthHeight={20} color="color-gray-400" />}
           type="password"
         />
 
         <TextField
           placeholder="With Left and Right Icons"
-          left={<UserIcon widthHeight={20} color="color.gray.400" />}
-          right={<SearchIcon widthHeight={20} color="color.gray.400" />}
+          left={<UserIcon widthHeight={20} color="color-gray-400" />}
+          right={<SearchIcon widthHeight={20} color="color-gray-400" />}
         />
       </Vertical>
     </View>
@@ -159,15 +159,15 @@ export const DesignSystemTextFields = () => (
           placeholder="Primary Theme"
           views={{
             container: {
-              borderColor: 'theme.primary',
+              borderColor: 'theme-primary',
               borderWidth: '2px',
             },
             label: {
-              color: 'theme.primary',
+              color: 'theme-primary',
               fontWeight: '600',
             },
             field: {
-              color: 'theme.primary',
+              color: 'theme-primary',
             },
           }}
         />
@@ -177,8 +177,8 @@ export const DesignSystemTextFields = () => (
           views={{
             container: {
               borderRadius: '16px',
-              borderColor: 'color.purple.400',
-              backgroundColor: 'color.purple.50',
+              borderColor: 'color-purple-400',
+              backgroundColor: 'color-purple-50',
             },
           }}
         />
@@ -192,7 +192,7 @@ export const DesignSystemTextFields = () => (
           views={{
             container: {
               borderRadius: '8px',
-              backgroundColor: 'color.white',
+              backgroundColor: 'color-white',
               transition: 'all 0.3s ease',
               _hover: {
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',

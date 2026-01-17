@@ -39,23 +39,24 @@ export const ToastView: React.FC<ToastProps> = ({
     }
 
     // Otherwise use the default icon based on variant
+    // Get icon color from Themes configuration
+    const iconColor = variant
+      ? Themes[variant]?.icon?.color
+      : Themes.info.icon.color;
+
     switch (variant) {
       case 'info':
-        return <InfoIcon widthHeight={20} color={Theme.info.icon.color} />;
+        return <InfoIcon widthHeight={20} color={iconColor} />;
       case 'success':
-        return <PlayIcon widthHeight={20} color={Theme.success.icon.color} />;
+        return <PlayIcon widthHeight={20} color={iconColor} />;
       case 'warning':
         return (
-          <InfoIcon
-            widthHeight={20}
-            color={Theme.warning.icon.color}
-            orientation="down"
-          />
+          <InfoIcon widthHeight={20} color={iconColor} orientation="down" />
         );
       case 'error':
-        return <DustBinIcon widthHeight={20} color={Theme.error.icon.color} />;
+        return <DustBinIcon widthHeight={20} color={iconColor} />;
       default:
-        return <InfoIcon widthHeight={20} color={Theme.info.icon.color} />;
+        return <InfoIcon widthHeight={20} color={Themes.info.icon.color} />;
     }
   };
 

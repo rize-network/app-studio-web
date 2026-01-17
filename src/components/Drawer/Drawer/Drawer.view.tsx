@@ -52,7 +52,7 @@ export const DrawerOverlay: React.FC<DrawerOverlayProps> = ({
       visibility={isOpen ? 'visible' : 'hidden'}
       onClick={handleClick}
       transition="all 0.3s ease"
-      backgroundColor={isOpen ? 'color.blackAlpha.500' : 'transparent'}
+      backgroundColor={isOpen ? 'color-blackAlpha-500' : 'transparent'}
       backdropFilter={blur ? `blur(${blur}px)` : undefined}
       pointerEvents={isOpen ? 'auto' : 'none'}
       {...props}
@@ -86,7 +86,7 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
   return (
     <Vertical
       position="absolute"
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       {...DrawerPlacements[placement]}
       {...dimensionProps}
       onClick={handleClick}
@@ -106,7 +106,7 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
 }) => {
   const closeButton = onClose && (
     <View onClick={onClose} cursor="pointer" padding={8}>
-      <CloseIcon widthHeight={20} color="color.gray.500" />
+      <CloseIcon widthHeight={20} color="color-gray-500" />
     </View>
   );
 
@@ -115,7 +115,7 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
       paddingHorizontal={24}
       paddingVertical={16}
       borderBottomWidth="1px"
-      borderBottomColor="color.gray.200"
+      borderBottomColor="color-gray-200"
       alignItems="center"
       justifyContent={buttonPosition === 'none' ? 'center' : 'space-between'}
       {...props}
@@ -147,7 +147,7 @@ export const DrawerFooter: React.FC<DrawerFooterProps> = ({
       paddingHorizontal={24}
       paddingVertical={16}
       borderTopWidth="1px"
-      borderTopColor="color.gray.200"
+      borderTopColor="color-gray-200"
       alignItems="center"
       justifyContent="flex-end"
       gap={12}

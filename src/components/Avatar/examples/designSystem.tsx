@@ -38,7 +38,7 @@ export const DesignSystemAvatars = () => {
           {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
             <Vertical key={size} alignItems="center" gap={8}>
               <Avatar src={sampleImages[0]} size={size as any} />
-              <Text color="color.gray.500">{size}</Text>
+              <Text color="color-gray-500">{size}</Text>
             </Vertical>
           ))}
         </Horizontal>
@@ -81,11 +81,11 @@ export const DesignSystemAvatars = () => {
               views={{
                 container: {
                   borderWidth: '2px',
-                  borderColor: 'color.blue.500',
+                  borderColor: 'color-blue-500',
                 },
               }}
             />
-            <Text color="color.gray.500">Border</Text>
+            <Text color="color-gray-500">Border</Text>
           </Vertical>
 
           {/* Shadow */}
@@ -98,7 +98,7 @@ export const DesignSystemAvatars = () => {
                 },
               }}
             />
-            <Text color="color.gray.500">Shadow</Text>
+            <Text color="color-gray-500">Shadow</Text>
           </Vertical>
 
           {/* Custom Fallback */}
@@ -108,15 +108,15 @@ export const DesignSystemAvatars = () => {
               fallback="AB"
               views={{
                 container: {
-                  backgroundColor: 'color.purple.100',
+                  backgroundColor: 'color-purple-100',
                 },
                 fallback: {
-                  color: 'color.purple.700',
+                  color: 'color-purple-700',
                   fontWeight: '600',
                 },
               }}
             />
-            <Text color="color.gray.500">Custom Fallback</Text>
+            <Text color="color-gray-500">Custom Fallback</Text>
           </Vertical>
 
           {/* Gradient */}
@@ -131,12 +131,12 @@ export const DesignSystemAvatars = () => {
                   borderColor: 'transparent',
                 },
                 fallback: {
-                  color: 'color.white',
+                  color: 'color-white',
                   fontWeight: '600',
                 },
               }}
             />
-            <Text color="color.gray.500">Gradient</Text>
+            <Text color="color-gray-500">Gradient</Text>
           </Vertical>
         </Horizontal>
       </View>

@@ -10,15 +10,11 @@
     "type": "string",
     "typeValues": null,
     "description": "Optional prop to define the color of the loader element.",
-    "defaultValue": "theme.loading"
+    "defaultValue": "theme-loading"
   },
   "type": {
     "type": "LoaderType",
-    "typeValues": [
-      "default",
-      "dotted",
-      "quarter"
-    ],
+    "typeValues": ["default", "dotted", "quarter"],
     "description": "Defines the type of the loader based on the LoaderType enum.",
     "defaultValue": "default"
   },
@@ -30,35 +26,19 @@
   },
   "textPosition": {
     "type": "TextPosition",
-    "typeValues": [
-      "right",
-      "left",
-      "top",
-      "bottom"
-    ],
+    "typeValues": ["right", "left", "top", "bottom"],
     "description": "Determines the position of the text relative to the loader from the TextPosition enum.",
     "defaultValue": "right"
   },
   "size": {
     "type": "number | Size",
-    "typeValues": [
-      "number",
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl"
-    ],
+    "typeValues": ["number", "xs", "sm", "md", "lg", "xl"],
     "description": "Sets the size of the loader, which can be a specific pixel number or a standard Size enum.",
     "defaultValue": "md"
   },
   "speed": {
     "type": "Speed",
-    "typeValues": [
-      "fast",
-      "normal",
-      "slow"
-    ],
+    "typeValues": ["fast", "normal", "slow"],
     "description": "Controls the speed of the loader's animation, using the values from the Speed enum.",
     "defaultValue": "normal"
   },

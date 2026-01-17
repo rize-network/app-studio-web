@@ -25,7 +25,7 @@ export const HelperText: React.FC<HelperTextProps> = ({
     marginVertical={0}
     marginHorizontal={0}
     // Color properties
-    color="color.gray.500" // Muted color for helper text
+    color="color-gray-500" // Muted color for helper text
     // Animation
     transition="all 0.2s ease"
     // Apply custom styles

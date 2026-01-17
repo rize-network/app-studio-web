@@ -41,7 +41,7 @@ export const ModalPosition = () => {
           ModalPosition: () => (
             <Modal.Container width="fit-content">
               <Modal.Body>
-                <Text color="theme.error" weight="bold">
+                <Text color="theme-error" weight="bold">
                   Unknown Error
                 </Text>
               </Modal.Body>

@@ -191,7 +191,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
             filled={false}
             style={{ animation: 'spin 1s linear infinite' }}
           />
-          <Text color="color.gray.500">{loadingText}</Text>
+          <Text color="color-gray-500">{loadingText}</Text>
         </Horizontal>
       )}
 
@@ -211,7 +211,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
           {...containerStyles}
           paddingHorizontal={16}
           paddingVertical={10}
-          backgroundColor={isDraggingOver ? 'color.blue.50' : undefined}
+          backgroundColor={isDraggingOver ? 'color-blue-50' : undefined}
         >
           {/* Attachments */}
           <AttachmentGroup
@@ -277,10 +277,10 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                       // borderRadius: '8px',
                       // backgroundColor: 'transparent',
                       // border: '1px solid',
-                      // borderColor: 'color.gray.300',
+                      // borderColor: 'color-gray-300',
                       cursor: 'pointer',
                       _hover: {
-                        backgroundColor: 'color.gray.100',
+                        backgroundColor: 'color-gray-100',
                       },
                       ...views?.fileButton,
                     },
@@ -295,7 +295,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                   }}
                   textProps={{
                     fontSize: '14px',
-                    color: 'color.gray.600',
+                    color: 'color-gray-600',
                   }}
                   validateFile={(file: File) => {
                     if (file.size > 50 * 1024 * 1024) {
@@ -328,12 +328,12 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                 justifyContent="center"
                 backgroundColor={
                   isAgentRunning
-                    ? 'theme.error'
+                    ? 'theme-error'
                     : hasText
-                    ? 'theme.primary'
-                    : 'color.gray.300'
+                    ? 'theme-primary'
+                    : 'color-gray-300'
                 }
-                color="color.white"
+                color="color-white"
                 borderRadius={shape === 'rounded' ? '50%' : 4}
                 border="none"
                 cursor={hasText ? 'pointer' : 'not-allowed'}
@@ -341,10 +341,10 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                 transition="all 0.2s ease"
                 _hover={{
                   backgroundColor: isAgentRunning
-                    ? 'color.red.600'
+                    ? 'color-red-600'
                     : hasText
-                    ? 'color.blue.600'
-                    : 'color.gray.300',
+                    ? 'color-blue-600'
+                    : 'color-gray-300',
                 }}
                 {...views?.submitButton}
               >
@@ -355,7 +355,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
                     filled={false}
                   />
                 ) : loading ? (
-                  <Loader type="quarter" size={16} color="color.white" />
+                  <Loader type="quarter" size={16} color="color-white" />
                 ) : (
                   <SendIcon
                     widthHeight={16}
@@ -373,7 +373,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
 
       {/* Bottom Tip (Error Message) */}
       {errorMessage && (
-        <Text color="theme.error" marginTop="4px" {...views?.bottomTip}>
+        <Text color="theme-error" marginTop="4px" {...views?.bottomTip}>
           {errorMessage}
         </Text>
       )}

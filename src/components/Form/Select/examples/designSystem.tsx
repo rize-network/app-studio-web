@@ -240,15 +240,15 @@ export const DesignSystemSelects = () => (
           placeholder="Primary Theme"
           views={{
             selectBox: {
-              borderColor: 'theme.primary',
+              borderColor: 'theme-primary',
               borderWidth: '2px',
             },
             label: {
-              color: 'theme.primary',
+              color: 'theme-primary',
               fontWeight: '600',
             },
             text: {
-              color: 'theme.primary',
+              color: 'theme-primary',
             },
           }}
         />
@@ -259,12 +259,12 @@ export const DesignSystemSelects = () => (
           views={{
             selectBox: {
               borderRadius: '16px',
-              borderColor: 'color.purple.400',
-              backgroundColor: 'color.purple.50',
+              borderColor: 'color-purple-400',
+              backgroundColor: 'color-purple-50',
             },
             dropDown: {
               borderRadius: '16px',
-              borderColor: 'color.purple.400',
+              borderColor: 'color-purple-400',
             },
           }}
         />
@@ -279,7 +279,7 @@ export const DesignSystemSelects = () => (
           views={{
             selectBox: {
               borderRadius: '8px',
-              backgroundColor: 'color.white',
+              backgroundColor: 'color-white',
               transition: 'all 0.3s ease',
               _hover: {
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',

@@ -8,18 +8,18 @@
 
 export const CHART_COLORS = {
   // Primary colors for all charts
-  blue: 'color.blue.500',
-  green: 'color.green.500',
-  purple: 'color.purple.500',
-  orange: 'color.orange.500',
-  red: 'color.red.500',
+  blue: 'color-blue-500',
+  green: 'color-green-500',
+  purple: 'color-purple-500',
+  orange: 'color-orange-500',
+  red: 'color-red-500',
 
   // Additional colors if needed
-  teal: 'color.teal.500',
-  pink: 'color.pink.500',
-  indigo: 'color.indigo.500',
-  yellow: 'color.yellow.500',
-  cyan: 'color.cyan.500',
+  teal: 'color-teal-500',
+  pink: 'color-pink-500',
+  indigo: 'color-indigo-500',
+  yellow: 'color-yellow-500',
+  cyan: 'color-cyan-500',
 };
 
 // Default color array for consistent ordering

@@ -70,7 +70,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     <View
       borderWidth={1}
       borderStyle="solid"
-      borderColor="color.gray.200"
+      borderColor="color-gray-200"
       marginBottom={8}
       overflow="hidden"
       opacity={isDisabled ? 0.5 : 1}
@@ -138,7 +138,7 @@ export const AccordionTrigger: React.FC<
     cursor: isDisabled ? 'not-allowed' : 'pointer',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'color.white',
+    backgroundColor: 'color-white',
     width: '100%',
     ...views?.container,
     ...props,
@@ -207,7 +207,7 @@ export const AccordionContent: React.FC<
       role="region"
       aria-labelledby={triggerId}
       padding={16}
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       maxHeight={isExpanded ? '1000px' : '0'}
       transition="max-height 0.3s ease-in-out, opacity 0.3s ease-in-out"
       opacity={1}

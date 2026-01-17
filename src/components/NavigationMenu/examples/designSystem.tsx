@@ -95,14 +95,14 @@ export const DesignSystemNavigationMenu = () => {
         <Horizontal gap={32} alignItems="flex-start">
           {/* Default Variant */}
           <Vertical gap={8} width="250px">
-            <Text fontSize="14px" color="color.gray.600">
+            <Text fontSize="14px" color="color-gray-600">
               Default Variant
             </Text>
             <View
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="color.white"
+              backgroundColor="color-white"
             >
               <NavigationMenu
                 items={items}
@@ -115,7 +115,7 @@ export const DesignSystemNavigationMenu = () => {
 
           {/* Filled Variant */}
           <Vertical gap={8} width="250px">
-            <Text fontSize="14px" color="color.gray.600">
+            <Text fontSize="14px" color="color-gray-600">
               Filled Variant
             </Text>
             <View
@@ -134,7 +134,7 @@ export const DesignSystemNavigationMenu = () => {
 
           {/* Outline Variant */}
           <Vertical gap={8} width="250px">
-            <Text fontSize="14px" color="color.gray.600">
+            <Text fontSize="14px" color="color-gray-600">
               Outline Variant
             </Text>
             <View borderRadius="8px" overflow="hidden">
@@ -156,14 +156,14 @@ export const DesignSystemNavigationMenu = () => {
         <Vertical gap={16}>
           {/* Default Variant */}
           <Vertical gap={8}>
-            <Text fontSize="14px" color="color.gray.600">
+            <Text fontSize="14px" color="color-gray-600">
               Default Variant
             </Text>
             <View
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="color.white"
+              backgroundColor="color-white"
               padding="4px"
             >
               <NavigationMenu
@@ -177,13 +177,13 @@ export const DesignSystemNavigationMenu = () => {
 
           {/* Filled Variant */}
           <Vertical gap={8}>
-            <Text fontSize="14px" color="color.gray.600">
+            <Text fontSize="14px" color="color-gray-600">
               Filled Variant
             </Text>
             <View
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               padding="4px"
             >
               <NavigationMenu
@@ -205,14 +205,14 @@ export const DesignSystemNavigationMenu = () => {
         <Horizontal gap={32} alignItems="flex-start">
           {/* Small Size */}
           <Vertical gap={8} width="250px">
-            <Text fontSize="14px" color="color.gray.600">
+            <Text fontSize="14px" color="color-gray-600">
               Small Size
             </Text>
             <View
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="color.white"
+              backgroundColor="color-white"
             >
               <NavigationMenu
                 items={items.slice(0, 4)}
@@ -224,14 +224,14 @@ export const DesignSystemNavigationMenu = () => {
 
           {/* Medium Size (Default) */}
           <Vertical gap={8} width="250px">
-            <Text fontSize="14px" color="color.gray.600">
+            <Text fontSize="14px" color="color-gray-600">
               Medium Size (Default)
             </Text>
             <View
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="color.white"
+              backgroundColor="color-white"
             >
               <NavigationMenu
                 items={items.slice(0, 4)}
@@ -243,14 +243,14 @@ export const DesignSystemNavigationMenu = () => {
 
           {/* Large Size */}
           <Vertical gap={8} width="250px">
-            <Text fontSize="14px" color="color.gray.600">
+            <Text fontSize="14px" color="color-gray-600">
               Large Size
             </Text>
             <View
               border="1px solid #e2e8f0"
               borderRadius="8px"
               overflow="hidden"
-              backgroundColor="color.white"
+              backgroundColor="color-white"
             >
               <NavigationMenu
                 items={items.slice(0, 4)}
@@ -272,7 +272,7 @@ export const DesignSystemNavigationMenu = () => {
           border="1px solid #e2e8f0"
           borderRadius="8px"
           overflow="hidden"
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           width="300px"
         >
           <NavigationMenu defaultActiveItemId="home">

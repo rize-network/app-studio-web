@@ -22,11 +22,11 @@ export const StyledSwitch = () => {
           views={{
             slider: {
               borderRadius: 8,
-              borderColor: 'theme.primary',
+              borderColor: 'theme-primary',
               borderStyle: 'solid',
               borderWidth: 1,
             },
-            circle: { backgroundColor: 'theme.primary' },
+            circle: { backgroundColor: 'theme-primary' },
           }}
         />
         <Button type="submit" height="40px" isAuto>

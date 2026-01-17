@@ -55,7 +55,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
             gap="6px"
             padding="4px 8px"
             borderRadius="6px"
-            backgroundColor="color.gray.100"
+            backgroundColor="color-gray-100"
             position="relative"
             animate={{
               from: { opacity: 0, scale: 0.9 },
@@ -94,20 +94,20 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                     <Center
                       width="60px"
                       height="60px"
-                      backgroundColor="color.gray.200"
+                      backgroundColor="color-gray-200"
                       borderRadius="4px"
                     >
-                      <AudioIcon widthHeight={24} color="color.black" />
+                      <AudioIcon widthHeight={24} color="color-black" />
                     </Center>
                   )}
                   {!isImage && !isVideo && !isAudio && (
                     <Center
                       width="60px"
                       height="60px"
-                      backgroundColor="color.gray.200"
+                      backgroundColor="color-gray-200"
                       borderRadius="4px"
                     >
-                      <FileIcon widthHeight={24} color="color.black" />
+                      <FileIcon widthHeight={24} color="color-black" />
                     </Center>
                   )}
 
@@ -121,7 +121,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       minWidth="20px"
                       minHeight="20px"
                       borderRadius="50%"
-                      backgroundColor="color.red.500"
+                      backgroundColor="color-red-500"
                       color="white"
                       fontSize={14}
                       fontWeight="bold"
@@ -132,7 +132,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       cursor="pointer"
                       border="2px solid white"
                       _hover={{
-                        backgroundColor: 'color.red.600',
+                        backgroundColor: 'color-red-600',
                       }}
                       onClick={(e) => {
                         e.stopPropagation();

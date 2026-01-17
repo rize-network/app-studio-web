@@ -40,10 +40,10 @@ export const FieldContent: React.FC<ContentProps> = ({
 
   // Set the appropriate color based on state
   const color = error
-    ? 'color.red.500'
+    ? 'color-red-500'
     : isInteractive
-    ? 'theme.primary'
-    : 'color.gray.300';
+    ? 'theme-primary'
+    : 'color-gray-300';
 
   return (
     <Horizontal
@@ -58,7 +58,7 @@ export const FieldContent: React.FC<ContentProps> = ({
       // Visual properties
       borderStyle="solid"
       borderColor={color}
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       fontSize={Typography.fontSizes[size]}
       // State properties
       cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'text'}

@@ -68,16 +68,16 @@ export const SliderPadding: Record<Size, Record<string, number>> = {
 export const ColorSchemes = {
   // Default colors
   default: {
-    active: 'theme.primary',
-    inactive: 'color.gray.300',
+    active: 'theme-primary',
+    inactive: 'color-gray-300',
     knob: 'white',
-    disabled: 'color.gray.200',
+    disabled: 'color-gray-200',
   },
   // State-specific colors
   states: {
     hover: {
-      active: 'theme.primary',
-      inactive: 'color.gray.400',
+      active: 'theme-primary',
+      inactive: 'color-gray-400',
       activeOpacity: 0.9,
     },
     focus: {

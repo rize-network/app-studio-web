@@ -14,7 +14,7 @@ export const NestedResizable = () => {
     >
       <Resizable>
         <Resizable.Panel id="left" defaultSize="30%">
-          <View padding="16px" height="100%" backgroundColor="color.blue.50">
+          <View padding="16px" height="100%" backgroundColor="color-blue-50">
             <Text fontWeight="bold" marginBottom="8px">
               Left Panel
             </Text>
@@ -31,7 +31,7 @@ export const NestedResizable = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.green.50"
+                backgroundColor="color-green-50"
               >
                 <Text fontWeight="bold" marginBottom="8px">
                   Top Right Panel
@@ -46,7 +46,7 @@ export const NestedResizable = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.purple.50"
+                backgroundColor="color-purple-50"
               >
                 <Text fontWeight="bold" marginBottom="8px">
                   Bottom Right Panel

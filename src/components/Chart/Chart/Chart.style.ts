@@ -53,11 +53,11 @@ export const LegendTextStyles: ViewProps = {
 // Default styles for tooltip
 export const TooltipStyles: ViewProps = {
   position: 'absolute',
-  backgroundColor: 'color.white',
+  backgroundColor: 'color-white',
   padding: '12px 16px',
   borderRadius: '8px',
   boxShadow: '0px 12px 24px rgba(15, 23, 42, 0.18)',
-  border: '1px solid color.gray.200',
+  border: '1px solid color-gray-200',
   fontSize: '14px',
   display: 'flex',
   flexDirection: 'column',
@@ -67,20 +67,20 @@ export const TooltipStyles: ViewProps = {
 
 // Default styles for chart grid
 export const GridStyles: ViewProps = {
-  stroke: 'color.gray.200',
+  stroke: 'color-gray-200',
   strokeWidth: '1px',
 };
 
 // Default styles for chart axis
 export const AxisStyles: ViewProps = {
-  stroke: 'color.gray.300',
+  stroke: 'color-gray-300',
   strokeWidth: '1px',
 };
 
 // Default styles for axis labels
 export const AxisLabelStyles: ViewProps = {
   fontSize: '12px',
-  fill: 'color.gray.600',
+  fill: 'color-gray-600',
 };
 
 // Default styles for bar chart bars
@@ -146,12 +146,12 @@ export const LoadingOverlayStyles: ViewProps = {
 export const ErrorOverlayStyles: ViewProps = {
   ...OverlayBaseStyles,
   backgroundColor: 'rgba(255, 235, 238, 0.9)',
-  color: 'color.red.700',
+  color: 'color-red-700',
 };
 
 // Default styles for no data overlay
 export const NoDataOverlayStyles: ViewProps = {
   ...OverlayBaseStyles,
   backgroundColor: 'rgba(245, 245, 245, 0.8)',
-  color: 'color.gray.600',
+  color: 'color-gray-600',
 };

@@ -19,7 +19,7 @@ export const DefaultTagInput = () => {
         onTagsChange={setTags}
         helperText="Add relevant tags for your content"
       />
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Current tags: {Array.isArray(tags) ? tags.join(', ') : 'None'}
       </Text>
     </Vertical>
@@ -147,16 +147,16 @@ export const StyledTagInput = () => {
         shadow={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px' }}
         views={{
           inputContainer: {
-            borderColor: 'theme.primary',
+            borderColor: 'theme-primary',
             borderWidth: '2px',
-            backgroundColor: 'color.blue.50',
+            backgroundColor: 'color-blue-50',
           },
           tag: {
-            backgroundColor: 'theme.primary',
-            borderColor: 'theme.primary',
+            backgroundColor: 'theme-primary',
+            borderColor: 'theme-primary',
           },
           tagText: {
-            color: 'color.white',
+            color: 'color-white',
           },
           tagRemove: {
             _hover: {
@@ -164,7 +164,7 @@ export const StyledTagInput = () => {
             },
           },
           label: {
-            color: 'theme.primary',
+            color: 'theme-primary',
             fontWeight: 'bold',
           },
         }}

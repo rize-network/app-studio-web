@@ -165,7 +165,7 @@ export const ChatWidgetWidget: React.FC<ChatWidgetWidgetProps> = ({
             justifyContent="space-between"
             alignItems="center"
           >
-            <Text fontWeight="bold" color="color.gray.800">
+            <Text fontWeight="bold" color="color-gray-800">
               ChatWidget Assistant
             </Text>
             <View
@@ -178,7 +178,7 @@ export const ChatWidgetWidget: React.FC<ChatWidgetWidgetProps> = ({
               backgroundColor="transparent"
               _hover={{ backgroundColor: 'rgba(0,0,0,0.05)' }}
             >
-              <CloseIcon widthHeight={16} color="color.gray.500" />
+              <CloseIcon widthHeight={16} color="color-gray-500" />
             </View>
           </View>
 
@@ -215,7 +215,7 @@ export const ChatWidgetWidget: React.FC<ChatWidgetWidgetProps> = ({
           width="56px"
           height="56px"
           borderRadius="50%"
-          backgroundColor="theme.primary"
+          backgroundColor="theme-primary"
           border="none"
           boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
           cursor="pointer"

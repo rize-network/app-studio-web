@@ -63,7 +63,7 @@ export const FormikChatInputExample = () => {
                       <Text
                         key={index}
                         padding={8}
-                        backgroundColor="color.gray.100"
+                        backgroundColor="color-gray-100"
                         borderRadius={8}
                       >
                         {msg}

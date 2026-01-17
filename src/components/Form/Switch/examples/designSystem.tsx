@@ -166,10 +166,10 @@ export const DesignSystemSwitches = () => (
         <Switch
           views={{
             slider: {
-              backgroundColor: 'color.purple.500',
+              backgroundColor: 'color-purple-500',
             },
             circle: {
-              backgroundColor: 'color.white',
+              backgroundColor: 'color-white',
             },
           }}
           isChecked
@@ -180,11 +180,11 @@ export const DesignSystemSwitches = () => (
             slider: {
               borderWidth: '2px',
               borderStyle: 'solid',
-              borderColor: 'color.gray.300',
+              borderColor: 'color-gray-300',
               backgroundColor: 'transparent',
             },
             circle: {
-              backgroundColor: 'color.gray.700',
+              backgroundColor: 'color-gray-700',
             },
           }}
         />
@@ -195,7 +195,7 @@ export const DesignSystemSwitches = () => (
           }}
           views={{
             slider: {
-              backgroundColor: 'color.blue.500',
+              backgroundColor: 'color-blue-500',
               transition: 'all 0.3s ease',
               _hover: {
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
@@ -214,11 +214,11 @@ export const DesignSystemSwitches = () => (
       </Text>
       <View
         padding={16}
-        backgroundColor="color.gray.50"
+        backgroundColor="color-gray-50"
         borderRadius="8px"
         borderWidth="1px"
         borderStyle="solid"
-        borderColor="color.gray.200"
+        borderColor="color-gray-200"
       >
         <Vertical gap={16}>
           <Text fontWeight="600">Notification Settings</Text>

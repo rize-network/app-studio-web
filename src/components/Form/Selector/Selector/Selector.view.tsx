@@ -41,7 +41,7 @@ const SelectorView: React.FC<SelectorViewProps> = ({
         <Horizontal
           fontSize="10px"
           letterSpacing="wider"
-          color="color.black.500"
+          color="color-black-500"
           fontWeight="bold"
           marginBottom={12}
           alignItems="center"
@@ -55,8 +55,8 @@ const SelectorView: React.FC<SelectorViewProps> = ({
       <Horizontal gap={0}>
         {options.map((option, index, arr) => {
           const isSelected = value === option.value;
-          let borderColor = getColor('color.gray.200');
-          let textColor = getColor('color.gray.500');
+          let borderColor = getColor('color-gray-200');
+          let textColor = getColor('color-gray-500');
           let backgroundColor = 'transparent';
 
           if (isSelected) {
@@ -69,7 +69,7 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               // OR stick to a default primary color if no specific 'complexity' logic is desired.
               // However, the user specifically asked for "Complexity" look.
               // Let's rely on option.color if present.
-              const baseColorName = option.color; // e.g., 'color.red.500'
+              const baseColorName = option.color; // e.g., 'color-red-500'
               // We need a way to get related colors (50, 500, 700 etc) from a base color if we want full fidelity.
               // But passing full style strings is easier.
               borderColor = getColor(option.color);
@@ -81,10 +81,10 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               backgroundColor = 'rgba(0,0,0,0.05)'; // Generic active background
             } else {
               // Default active style
-              const primary = getColor('theme.primary');
+              const primary = getColor('theme-primary');
               borderColor = primary;
               textColor = primary;
-              backgroundColor = 'color.gray.50';
+              backgroundColor = 'color-gray-50';
             }
 
             // Specific overrides based on user request "ComplexitySelector" style
@@ -99,8 +99,8 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               backgroundColor = 'transparent';
             } else {
               // Default fallback
-              borderColor = getColor('theme.primary');
-              textColor = getColor('theme.primary');
+              borderColor = getColor('theme-primary');
+              textColor = getColor('theme-primary');
               backgroundColor = 'transparent';
             }
           }
@@ -120,18 +120,18 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               fontWeight={isSelected ? 'bold' : 'normal'}
               style={{
                 borderTop: `1px solid ${
-                  isSelected ? borderColor : getColor('color.gray.200')
+                  isSelected ? borderColor : getColor('color-gray-200')
                 }`,
                 borderBottom: `1px solid ${
-                  isSelected ? borderColor : getColor('color.gray.200')
+                  isSelected ? borderColor : getColor('color-gray-200')
                 }`,
                 borderLeft: `1px solid ${
-                  isSelected ? borderColor : getColor('color.gray.200')
+                  isSelected ? borderColor : getColor('color-gray-200')
                 }`,
                 borderRight:
                   index === arr.length - 1 || isSelected
                     ? `1px solid ${
-                        isSelected ? borderColor : getColor('color.gray.200')
+                        isSelected ? borderColor : getColor('color-gray-200')
                       }`
                     : 'none',
                 backgroundColor: backgroundColor,

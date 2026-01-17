@@ -2,30 +2,19 @@
   "componentDescription": "A visual element used to divide or group content on a user interface.",
   "orientation": {
     "type": "Orientation",
-    "typeValues": [
-      "horizontal",
-      "vertical"
-    ],
+    "typeValues": ["horizontal", "vertical"],
     "description": "Specifies the orientation of the separator, either horizontal or vertical.",
     "defaultValue": "horizontal"
   },
   "variant": {
     "type": "Variant",
-    "typeValues": [
-      "solid",
-      "dashed",
-      "dotted"
-    ],
+    "typeValues": ["solid", "dashed", "dotted"],
     "description": "Determines the visual style or type of the separator (e.g., solid, dashed).",
     "defaultValue": "solid"
   },
   "thickness": {
     "type": "Thickness",
-    "typeValues": [
-      "thin",
-      "medium",
-      "thick"
-    ],
+    "typeValues": ["thin", "medium", "thick"],
     "description": "Sets the thickness or width of the separator line.",
     "defaultValue": "thin"
   },
@@ -33,7 +22,7 @@
     "type": "string",
     "typeValues": [],
     "description": "Defines the color of the separator line.",
-    "defaultValue": "color.gray.200"
+    "defaultValue": "color-gray-200"
   },
   "spacing": {
     "type": "number | string",

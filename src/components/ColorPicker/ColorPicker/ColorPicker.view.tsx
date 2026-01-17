@@ -68,7 +68,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
     ...Sizes[size],
     ...Shapes[shape],
     ...Variants[variant],
-    ...(error && { borderColor: 'color.red.500' }),
+    ...(error && { borderColor: 'color-red-500' }),
     ...(isDisabled && { opacity: 0.6, cursor: 'not-allowed' }),
     ...views?.trigger,
   };
@@ -89,7 +89,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
   };
 
   // Get display color for the selected color swatch
-  const displayColor = selectedColor || 'color.gray.200';
+  const displayColor = selectedColor || 'color-gray-200';
 
   return (
     <View {...containerStyles} {...props}>
@@ -97,7 +97,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
         <Text
           fontSize={size === 'xs' ? '12px' : size === 'sm' ? '14px' : '16px'}
           fontWeight="500"
-          color="color.gray.700"
+          color="color-gray-700"
           marginBottom="4px"
           {...views?.label}
         >
@@ -119,11 +119,11 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
             backgroundColor={displayColor}
             borderWidth="1px"
             borderStyle="solid"
-            borderColor="color.gray.300"
+            borderColor="color-gray-300"
           />
 
           <Text
-            color={selectedColor ? 'color.gray.800' : 'color.gray.500'}
+            color={selectedColor ? 'color-gray-800' : 'color-gray-500'}
             fontSize="inherit"
           >
             {selectedColor || placeholder}
@@ -133,7 +133,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
         {!isReadOnly && !isDisabled && (
           <ChevronIcon
             widthHeight={16}
-            color="color.gray.500"
+            color="color-gray-500"
             orientation={isOpen ? 'up' : 'down'}
           />
         )}
@@ -154,7 +154,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                 borderStyle="solid"
                 borderColor={
                   selectedColor === colorOption.value
-                    ? 'color.blue.500'
+                    ? 'color-blue-500'
                     : 'transparent'
                 }
                 cursor="pointer"
@@ -163,7 +163,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                 title={colorOption.name}
                 _hover={{
                   transform: 'scale(1.1)',
-                  borderColor: 'color.gray.400',
+                  borderColor: 'color-gray-400',
                 }}
                 {...views?.colorSwatch}
               />
@@ -196,7 +196,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                   }}
                   title="Pick a color"
                 />
-                <Text fontSize="12px" color="color.gray.600">
+                <Text fontSize="12px" color="color-gray-600">
                   Use native color picker
                 </Text>
               </Horizontal>
@@ -223,7 +223,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                       backgroundColor={customColor}
                       borderWidth="1px"
                       borderStyle="solid"
-                      borderColor="color.gray.300"
+                      borderColor="color-gray-300"
                       cursor="pointer"
                       onClick={handleCustomColorSubmit}
                     />
@@ -236,7 +236,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
           {/* Recent colors */}
           {showRecentColors && recentColors.length > 0 && (
             <View {...recentColorsStyles}>
-              <Text fontWeight="500" color="color.gray.600" marginBottom="8px">
+              <Text fontWeight="500" color="color-gray-600" marginBottom="8px">
                 Recent Colors
               </Text>
               <Horizontal gap={8} flexWrap="wrap">
@@ -249,7 +249,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                     backgroundColor={color}
                     borderWidth="1px"
                     borderStyle="solid"
-                    borderColor="color.gray.300"
+                    borderColor="color-gray-300"
                     cursor="pointer"
                     onClick={() => handleColorSelect(color)}
                     title={color}
@@ -266,7 +266,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
 
       {helperText && (
         <Text
-          color={error ? 'color.red.500' : 'color.gray.600'}
+          color={error ? 'color-red-500' : 'color-gray-600'}
           marginTop="4px"
           {...views?.helperText}
         >

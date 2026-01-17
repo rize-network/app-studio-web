@@ -35,7 +35,7 @@ export const ContextMenuSizes = () => {
           <ContextMenu items={items} size="sm">
             <View
               padding={20}
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               borderRadius={8}
               textAlign="center"
               cursor="context-menu"
@@ -52,7 +52,7 @@ export const ContextMenuSizes = () => {
           <ContextMenu items={items} size="md">
             <View
               padding={20}
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               borderRadius={8}
               textAlign="center"
               cursor="context-menu"
@@ -69,7 +69,7 @@ export const ContextMenuSizes = () => {
           <ContextMenu items={items} size="lg">
             <View
               padding={20}
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               borderRadius={8}
               textAlign="center"
               cursor="context-menu"

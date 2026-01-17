@@ -5,9 +5,9 @@ import { Button } from '../../../Button/Button';
 import { Text } from 'app-studio';
 
 export const FormIntegrationColorInput = () => {
-  const [backgroundColor, setBackgroundColor] = useState('color.blue.500');
-  const [textColor, setTextColor] = useState('color.white');
-  const [borderColor, setBorderColor] = useState('color.gray.300');
+  const [backgroundColor, setBackgroundColor] = useState('color-blue-500');
+  const [textColor, setTextColor] = useState('color-white');
+  const [borderColor, setBorderColor] = useState('color-gray-300');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,9 +63,9 @@ export const FormIntegrationColorInput = () => {
             type="button"
             variant="outline"
             onClick={() => {
-              setBackgroundColor('color.blue.500');
-              setTextColor('color.white');
-              setBorderColor('color.gray.300');
+              setBackgroundColor('color-blue-500');
+              setTextColor('color-white');
+              setBorderColor('color-gray-300');
             }}
           >
             Reset

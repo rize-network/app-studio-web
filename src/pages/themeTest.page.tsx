@@ -16,7 +16,7 @@ export const ThemeTestPage = () => {
     warning: '#f59e0b',
     disabled: '#9ca3af',
     loading: '#3b82f6',
-    background: 'color.gray.300',
+    background: 'color-gray-300',
   };
 
   return (
@@ -24,7 +24,7 @@ export const ThemeTestPage = () => {
       <View
         width="100vw"
         minHeight="100vh"
-        backgroundColor="color.black"
+        backgroundColor="color-black"
         padding={40}
       >
         <Vertical gap={40}>
@@ -47,16 +47,16 @@ export const ThemeTestPage = () => {
           </Vertical>
 
           {/* System Colors Section */}
-          <Card padding={20} backgroundColor="theme.background">
+          <Card padding={20} backgroundColor="theme-background">
             <Vertical gap={20}>
-              <Text fontSize={20} fontWeight="bold" color="color.black">
-                System Colors (color.x.y)
+              <Text fontSize={20} fontWeight="bold" color="color-black">
+                System Colors (color-x.y)
               </Text>
               <Horizontal gap={20} flexWrap="wrap">
                 <View
                   width={100}
                   height={100}
-                  backgroundColor="color.blue.500"
+                  backgroundColor="color-blue-500"
                   borderRadius={8}
                   alignItems="center"
                   justifyContent="center"
@@ -66,7 +66,7 @@ export const ThemeTestPage = () => {
                 <View
                   width={100}
                   height={100}
-                  backgroundColor="color.emerald.500"
+                  backgroundColor="color-emerald-500"
                   borderRadius={8}
                   alignItems="center"
                   justifyContent="center"
@@ -76,7 +76,7 @@ export const ThemeTestPage = () => {
                 <View
                   width={100}
                   height={100}
-                  backgroundColor="color.red.500"
+                  backgroundColor="color-red-500"
                   borderRadius={8}
                   alignItems="center"
                   justifyContent="center"
@@ -86,7 +86,7 @@ export const ThemeTestPage = () => {
                 <View
                   width={100}
                   height={100}
-                  backgroundColor="color.amber.500"
+                  backgroundColor="color-amber-500"
                   borderRadius={8}
                   alignItems="center"
                   justifyContent="center"
@@ -98,36 +98,36 @@ export const ThemeTestPage = () => {
           </Card>
 
           {/* Mode Specific Colors Section */}
-          <Card padding={20} backgroundColor="theme.background">
+          <Card padding={20} backgroundColor="theme-background">
             <Vertical gap={20}>
-              <Text fontSize={20} fontWeight="bold" color="color.black">
+              <Text fontSize={20} fontWeight="bold" color="color-black">
                 Mode Specific Colors (light.x / dark.x)
               </Text>
               <Horizontal gap={20} flexWrap="wrap">
                 <View
                   width={150}
                   height={100}
-                  backgroundColor="light.blue.100"
+                  backgroundColor="light-blue-100"
                   borderRadius={8}
                   alignItems="center"
                   justifyContent="center"
                   padding={10}
                 >
-                  <Text color="light.blue.900" textAlign="center">
-                    Always Light Blue (light.blue.100)
+                  <Text color="light-blue-900" textAlign="center">
+                    Always Light Blue (light.blue-100)
                   </Text>
                 </View>
                 <View
                   width={150}
                   height={100}
-                  backgroundColor="dark.blue.900"
+                  backgroundColor="dark-blue-900"
                   borderRadius={8}
                   alignItems="center"
                   justifyContent="center"
                   padding={10}
                 >
-                  <Text color="dark.blue.100" textAlign="center">
-                    Always Dark Blue (dark.blue.900)
+                  <Text color="dark-blue-100" textAlign="center">
+                    Always Dark Blue (dark.blue-900)
                   </Text>
                 </View>
               </Horizontal>
@@ -135,9 +135,9 @@ export const ThemeTestPage = () => {
           </Card>
 
           {/* Smart Contrast Section */}
-          <Card padding={20} backgroundColor="theme.background">
+          <Card padding={20} backgroundColor="theme-background">
             <Vertical gap={20}>
-              <Text fontSize={20} fontWeight="bold" color="color.black">
+              <Text fontSize={20} fontWeight="bold" color="color-black">
                 Smart Text Contrast
               </Text>
               <Horizontal gap={20} flexWrap="wrap">
@@ -159,14 +159,14 @@ export const ThemeTestPage = () => {
                   alignItems="center"
                   justifyContent="center"
                   borderWidth={1}
-                  borderColor="color.gray.200"
+                  borderColor="color-gray-200"
                 >
                   <Text>Visible on White</Text>
                 </View>
                 <View
                   width={150}
                   height={100}
-                  backgroundColor="color.blue.500"
+                  backgroundColor="color-blue-500"
                   borderRadius={8}
                   alignItems="center"
                   justifyContent="center"
@@ -178,10 +178,10 @@ export const ThemeTestPage = () => {
           </Card>
 
           {/* Theme Tokens Section */}
-          <Card padding={20} backgroundColor="theme.background">
+          <Card padding={20} backgroundColor="theme-background">
             <Vertical gap={20}>
-              <Text fontSize={20} fontWeight="bold" color="color.black">
-                Theme Tokens (theme.x)
+              <Text fontSize={20} fontWeight="bold" color="color-black">
+                Theme Tokens (theme-x)
               </Text>
               <Horizontal gap={20} flexWrap="wrap">
                 <Button variant="filled">Primary Button</Button>

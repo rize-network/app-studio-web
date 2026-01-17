@@ -70,19 +70,19 @@ export const FormikSliderExample = () => {
                 showTooltip
                 views={{
                   track: {
-                    backgroundColor: 'color.blue.100',
+                    backgroundColor: 'color-blue-100',
                     height: 8,
                   },
                   progress: {
-                    backgroundColor: 'color.blue.500',
+                    backgroundColor: 'color-blue-500',
                   },
                   thumb: {
-                    backgroundColor: 'color.white',
-                    border: '2px solid color.blue.500',
+                    backgroundColor: 'color-white',
+                    border: '2px solid color-blue-500',
                   },
                   tooltip: {
-                    backgroundColor: 'color.blue.500',
-                    color: 'color.white',
+                    backgroundColor: 'color-blue-500',
+                    color: 'color-white',
                   },
                 }}
               />
@@ -102,7 +102,7 @@ export const FormikSliderExample = () => {
             {/* Display current values */}
             <Vertical
               padding={16}
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               borderRadius={8}
             >
               <Text fontWeight="bold">Current Values:</Text>

@@ -85,7 +85,7 @@ export const DesignSystemTable = () => {
       render: (name: string, row: any) => (
         <View>
           <Text fontWeight="600">{name}</Text>
-          <Text color="color.gray.500">{row.email}</Text>
+          <Text color="color-gray-500">{row.email}</Text>
         </View>
       ),
     },
@@ -135,18 +135,18 @@ export const DesignSystemTable = () => {
               overflow: 'hidden',
               boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
               border: '1px solid',
-              borderColor: 'color.gray.200',
+              borderColor: 'color-gray-200',
             },
             thead: {
-              backgroundColor: 'color.gray.50',
+              backgroundColor: 'color-gray-50',
               borderBottom: '1px solid',
-              borderBottomColor: 'color.gray.200',
+              borderBottomColor: 'color-gray-200',
             },
             th: {
               padding: '12px 16px', // 3 × 4px and 4 × 4px grid
               fontWeight: '600',
               fontSize: '14px',
-              color: 'color.gray.700',
+              color: 'color-gray-700',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
             },
@@ -154,12 +154,12 @@ export const DesignSystemTable = () => {
               padding: '12px 16px', // 3 × 4px and 4 × 4px grid
               fontSize: '14px',
               borderBottom: '1px solid',
-              borderBottomColor: 'color.gray.100',
+              borderBottomColor: 'color-gray-100',
             },
             tr: {
               transition: 'background-color 0.2s ease',
               _hover: {
-                backgroundColor: 'color.gray.50',
+                backgroundColor: 'color-gray-50',
               },
             },
           }}
@@ -188,28 +188,28 @@ export const DesignSystemTable = () => {
               boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
             },
             thead: {
-              backgroundColor: 'color.blue.600',
-              color: 'color.white',
+              backgroundColor: 'color-blue-600',
+              color: 'color-white',
             },
             th: {
               padding: '12px 16px', // 3 × 4px and 4 × 4px grid
               fontWeight: '600',
               fontSize: '14px',
-              color: 'color.white',
+              color: 'color-white',
             },
             td: {
               padding: '12px 16px', // 3 × 4px and 4 × 4px grid
               fontSize: '14px',
               borderBottom: '1px solid',
-              borderBottomColor: 'color.gray.100',
+              borderBottomColor: 'color-gray-100',
             },
             tr: {
               _even: {
-                backgroundColor: 'color.gray.50',
+                backgroundColor: 'color-gray-50',
               },
               transition: 'background-color 0.2s ease',
               _hover: {
-                backgroundColor: 'color.blue.50',
+                backgroundColor: 'color-blue-50',
               },
             },
           }}
@@ -233,29 +233,29 @@ export const DesignSystemTable = () => {
               overflow: 'hidden',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
               border: '1px solid',
-              borderColor: 'color.gray.200',
+              borderColor: 'color-gray-200',
             },
             thead: {
-              backgroundColor: 'color.white',
+              backgroundColor: 'color-white',
               borderBottom: '2px solid',
-              borderBottomColor: 'color.gray.200',
+              borderBottomColor: 'color-gray-200',
             },
             th: {
               padding: '16px', // 4 × 4px grid
               fontWeight: '600',
               fontSize: '14px',
-              color: 'color.gray.700',
+              color: 'color-gray-700',
             },
             td: {
               padding: '16px', // 4 × 4px grid
               fontSize: '14px',
               borderBottom: '1px solid',
-              borderBottomColor: 'color.gray.100',
+              borderBottomColor: 'color-gray-100',
             },
             tr: {
               transition: 'background-color 0.2s ease',
               _hover: {
-                backgroundColor: 'color.gray.50',
+                backgroundColor: 'color-gray-50',
               },
             },
           }}
@@ -305,29 +305,29 @@ export const DesignSystemTable = () => {
               overflow: 'hidden',
               boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
               border: '1px solid',
-              borderColor: 'color.gray.200',
+              borderColor: 'color-gray-200',
             },
             thead: {
-              backgroundColor: 'color.gray.50',
+              backgroundColor: 'color-gray-50',
               borderBottom: '1px solid',
-              borderBottomColor: 'color.gray.200',
+              borderBottomColor: 'color-gray-200',
             },
             th: {
               padding: '8px 12px', // 2 × 4px and 3 × 4px grid
               fontWeight: '600',
               fontSize: '12px',
-              color: 'color.gray.700',
+              color: 'color-gray-700',
             },
             td: {
               padding: '8px 12px', // 2 × 4px and 3 × 4px grid
               fontSize: '12px',
               borderBottom: '1px solid',
-              borderBottomColor: 'color.gray.100',
+              borderBottomColor: 'color-gray-100',
             },
             tr: {
               transition: 'background-color 0.2s ease',
               _hover: {
-                backgroundColor: 'color.gray.50',
+                backgroundColor: 'color-gray-50',
               },
             },
           }}
@@ -351,35 +351,35 @@ export const DesignSystemTable = () => {
               overflow: 'hidden',
               boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
               border: '1px solid',
-              borderColor: 'color.gray.200',
+              borderColor: 'color-gray-200',
             },
             thead: {
-              backgroundColor: 'color.gray.50',
+              backgroundColor: 'color-gray-50',
               borderBottom: '1px solid',
-              borderBottomColor: 'color.gray.200',
+              borderBottomColor: 'color-gray-200',
             },
             th: {
               padding: '12px 16px', // 3 × 4px and 4 × 4px grid
               fontWeight: '600',
               fontSize: '14px',
-              color: 'color.gray.700',
+              color: 'color-gray-700',
             },
             td: {
               padding: '12px 16px', // 3 × 4px and 4 × 4px grid
               fontSize: '14px',
               borderBottom: '1px solid',
-              borderBottomColor: 'color.gray.100',
+              borderBottomColor: 'color-gray-100',
             },
             tfoot: {
-              backgroundColor: 'color.gray.50',
+              backgroundColor: 'color-gray-50',
               fontWeight: '600',
               borderTop: '2px solid',
-              borderTopColor: 'color.gray.200',
+              borderTopColor: 'color-gray-200',
             },
             tr: {
               transition: 'background-color 0.2s ease',
               _hover: {
-                backgroundColor: 'color.gray.50',
+                backgroundColor: 'color-gray-50',
               },
             },
           }}

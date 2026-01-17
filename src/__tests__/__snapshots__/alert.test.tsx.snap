@@ -183,14 +183,14 @@ exports[`Alert with warning variant matches snapshot 1`] = `
           d="M10.29 3.86l-6.6 11.4c-.78 1.36.2 3.1 1.71 3.1h13.2c1.51 0 2.49-1.74 1.71-3.1l-6.6-11.4a2 2 0 0 0-3.42 0z"
         />
         <line
-          stroke="color.orange.500"
+          stroke="color-orange-500"
           x1="12"
           x2="12"
           y1="6"
           y2="13"
         />
         <line
-          stroke="color.orange.500"
+          stroke="color-orange-500"
           x1="12"
           x2="12"
           y1="15"

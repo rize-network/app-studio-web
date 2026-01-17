@@ -41,29 +41,29 @@ export const IconSizes: Record<Size, number> = {
  */
 export const VariantStyles: Record<Variant, ViewProps> = {
   selected: {
-    backgroundColor: 'theme.primary',
-    borderColor: 'theme.primary',
+    backgroundColor: 'theme-primary',
+    borderColor: 'theme-primary',
     borderWidth: '2px',
     borderStyle: 'solid',
-    color: 'color.white',
+    color: 'color-white',
     transition:
       'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
   unselected: {
-    backgroundColor: 'color.white',
+    backgroundColor: 'color-white',
     borderWidth: '2px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.300',
-    color: 'color.black',
+    borderColor: 'color-gray-300',
+    color: 'color-black',
     transition:
       'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
   indeterminate: {
-    backgroundColor: 'theme.primary',
-    borderColor: 'theme.primary',
+    backgroundColor: 'theme-primary',
+    borderColor: 'theme-primary',
     borderWidth: '2px',
     borderStyle: 'solid',
-    color: 'color.white',
+    color: 'color-white',
     transition:
       'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
@@ -78,8 +78,8 @@ export const StateStyles = {
       opacity: 0.9,
     },
     unselected: {
-      borderColor: 'color.gray.400',
-      backgroundColor: 'color.gray.50',
+      borderColor: 'color-gray-400',
+      backgroundColor: 'color-gray-50',
     },
     indeterminate: {
       opacity: 0.9,
@@ -104,34 +104,34 @@ export const StateStyles = {
   },
   disabled: {
     selected: {
-      backgroundColor: 'color.gray.300',
-      borderColor: 'color.gray.300',
+      backgroundColor: 'color-gray-300',
+      borderColor: 'color-gray-300',
       opacity: 0.5,
       cursor: 'not-allowed',
     },
     unselected: {
-      borderColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
       opacity: 0.5,
       cursor: 'not-allowed',
     },
     indeterminate: {
-      backgroundColor: 'color.gray.300',
-      borderColor: 'color.gray.300',
+      backgroundColor: 'color-gray-300',
+      borderColor: 'color-gray-300',
       opacity: 0.5,
       cursor: 'not-allowed',
     },
   },
   error: {
     selected: {
-      backgroundColor: 'color.red.500',
-      borderColor: 'color.red.500',
+      backgroundColor: 'color-red-500',
+      borderColor: 'color-red-500',
     },
     unselected: {
-      borderColor: 'color.red.500',
+      borderColor: 'color-red-500',
     },
     indeterminate: {
-      backgroundColor: 'color.red.500',
-      borderColor: 'color.red.500',
+      backgroundColor: 'color-red-500',
+      borderColor: 'color-red-500',
     },
   },
 };

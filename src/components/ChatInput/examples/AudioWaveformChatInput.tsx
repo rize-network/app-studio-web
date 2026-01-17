@@ -31,13 +31,13 @@ export const AudioWaveformChatInputDemo = () => {
       maxWidth="600px"
       backgroundColor="transparent"
     >
-      <Text fontSize="18px" fontWeight="bold" color="theme.primary">
+      <Text fontSize="18px" fontWeight="bold" color="theme-primary">
         Chat Input with Audio Waveform Demo
       </Text>
 
       <Text
         fontSize="14px"
-        color={themeMode === 'light' ? 'color.gray.600' : 'color.gray.400'}
+        color={themeMode === 'light' ? 'color-gray-600' : 'color-gray-400'}
       >
         Features: • Audio recording with live waveform visualization • Text
         input • File attachments
@@ -47,12 +47,12 @@ export const AudioWaveformChatInputDemo = () => {
         borderWidth="1px"
         borderStyle="solid"
         borderColor={
-          themeMode === 'light' ? 'color.gray.300' : 'color.gray.700'
+          themeMode === 'light' ? 'color-gray-300' : 'color-gray-700'
         }
         borderRadius="8px"
         padding="16px"
         backgroundColor={
-          themeMode === 'light' ? 'color.white' : 'color.gray.800'
+          themeMode === 'light' ? 'color-white' : 'color-gray-800'
         }
       >
         <Vertical gap={12}>
@@ -102,12 +102,12 @@ export const AudioWaveformChatInputDemo = () => {
         <View
           padding="12px"
           backgroundColor={
-            themeMode === 'light' ? 'color.green.50' : 'color.green.900'
+            themeMode === 'light' ? 'color-green-50' : 'color-green-900'
           }
           borderWidth="1px"
           borderStyle="solid"
           borderColor={
-            themeMode === 'light' ? 'color.green.200' : 'color.green.700'
+            themeMode === 'light' ? 'color-green-200' : 'color-green-700'
           }
           borderRadius="6px"
         >
@@ -115,7 +115,7 @@ export const AudioWaveformChatInputDemo = () => {
             fontSize="14px"
             fontWeight="medium"
             color={
-              themeMode === 'light' ? 'color.green.800' : 'color.green.100'
+              themeMode === 'light' ? 'color-green-800' : 'color-green-100'
             }
           >
             Submitted Message:
@@ -123,7 +123,7 @@ export const AudioWaveformChatInputDemo = () => {
           <Text
             fontSize="14px"
             color={
-              themeMode === 'light' ? 'color.green.700' : 'color.green.200'
+              themeMode === 'light' ? 'color-green-700' : 'color-green-200'
             }
             marginTop="4px"
             whiteSpace="pre-wrap"

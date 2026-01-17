@@ -59,15 +59,15 @@ export const DefaultSeparatorStyles = {
     transition: 'opacity 0.15s ease',
   },
   line: {
-    backgroundColor: 'color.gray.200',
+    backgroundColor: 'color-gray-200',
     transition: 'background-color 0.15s ease',
   },
   label: {
     fontSize: '14px',
     fontWeight: '500',
-    color: 'color.gray.600',
+    color: 'color-gray-600',
     paddingHorizontal: '8px', // 2 × 4px grid
-    backgroundColor: 'color.white',
+    backgroundColor: 'color-white',
     transition: 'color 0.15s ease',
   },
 };

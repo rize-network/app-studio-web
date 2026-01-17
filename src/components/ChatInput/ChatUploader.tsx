@@ -129,10 +129,10 @@ export const ChatUploader = forwardRef<HTMLInputElement, ChatUploaderProps>(
             border={'1px solid'}
             borderRadius="8px"
             backgroundColor="transparent"
-            color="color.gray.500"
+            color="color-gray-500"
             disabled={loading || (disabled && !isAgentRunning) || isUploading}
             _hover={{
-              backgroundColor: 'color.gray.100',
+              backgroundColor: 'color-gray-100',
             }}
             {...views?.button}
           >

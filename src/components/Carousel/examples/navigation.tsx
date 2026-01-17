@@ -8,9 +8,9 @@ import { Button } from '../../Button/Button';
 export const NavigationDemo = () => {
   // Create an array of slides with different background colors
   const slides = [
-    { color: 'color.blue.500', text: 'Slide 1' },
-    { color: 'color.green.500', text: 'Slide 2' },
-    { color: 'color.purple.500', text: 'Slide 3' },
+    { color: 'color-blue-500', text: 'Slide 1' },
+    { color: 'color-green-500', text: 'Slide 2' },
+    { color: 'color-purple-500', text: 'Slide 3' },
   ];
 
   return (

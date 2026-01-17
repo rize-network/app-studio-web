@@ -50,7 +50,7 @@ export const ControlledResizable = () => {
       >
         <Resizable defaultSizes={sizes} onSizesChange={handleSizesChange}>
           <Resizable.Panel id="panel1" defaultSize={`${sizes[0]}%`}>
-            <View padding="16px" height="100%" backgroundColor="color.blue.50">
+            <View padding="16px" height="100%" backgroundColor="color-blue-50">
               <Text fontWeight="bold" marginBottom="8px">
                 Panel 1
               </Text>
@@ -61,7 +61,7 @@ export const ControlledResizable = () => {
           <Resizable.Handle id="handle1" withVisualIndicator />
 
           <Resizable.Panel id="panel2" defaultSize={`${sizes[1]}%`}>
-            <View padding="16px" height="100%" backgroundColor="color.green.50">
+            <View padding="16px" height="100%" backgroundColor="color-green-50">
               <Text fontWeight="bold" marginBottom="8px">
                 Panel 2
               </Text>
@@ -75,7 +75,7 @@ export const ControlledResizable = () => {
             <View
               padding="16px"
               height="100%"
-              backgroundColor="color.purple.50"
+              backgroundColor="color-purple-50"
             >
               <Text fontWeight="bold" marginBottom="8px">
                 Panel 3

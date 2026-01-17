@@ -73,19 +73,19 @@ export interface TitleProps extends ViewProps {
 
   /**
    * Style of the highlight effect
-   * @default 'background'
+   * @default 'solid'
    */
   highlightStyle?: HighlightStyle;
 
   /**
    * Color for the highlight effect
-   * @default 'theme.primary'
+   * @default 'theme-primary'
    */
   highlightColor?: string;
 
   /**
    * Secondary color for gradient highlights
-   * @default 'theme.secondary'
+   * @default 'theme-secondary'
    */
   highlightSecondaryColor?: string;
 

@@ -36,8 +36,8 @@ import { CookieConsentView } from './CookieConsent/CookieConsent.view';
  *   onAccept={() => console.log('Cookies accepted')}
  *   onCustomize={() => openPreferencesModal()}
  *   views={{
- *     container: { backgroundColor: 'color.blue.50' },
- *     title: { color: 'color.blue.800' }
+ *     container: { backgroundColor: 'color-blue-50' },
+ *     title: { color: 'color-blue-800' }
  *   }}
  * />
  */

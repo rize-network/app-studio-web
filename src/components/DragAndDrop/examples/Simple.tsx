@@ -10,7 +10,7 @@ export const SimpleDragAndDrop = () => {
       onChange={(newItems) => console.log('Items reordered:', newItems)}
       containerProps={{
         padding: 16,
-        backgroundColor: 'color.gray.50',
+        backgroundColor: 'color-gray-50',
       }}
       itemProps={{
         marginBottom: 8,

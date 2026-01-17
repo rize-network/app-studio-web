@@ -27,7 +27,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           padding={16}
           borderRadius="8px"
         >
@@ -50,7 +50,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           padding={16}
           borderRadius="8px"
         >
@@ -84,7 +84,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           padding={16}
           borderRadius="8px"
         >
@@ -118,7 +118,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           padding={16}
           borderRadius="8px"
         >
@@ -136,7 +136,7 @@ export const DesignSystemSeparator = () => {
             <Horizontal
               height={80}
               alignItems="center"
-              backgroundColor="color.gray.50"
+              backgroundColor="color-gray-50"
               padding={16}
               borderRadius="8px"
             >
@@ -155,7 +155,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           padding={16}
           borderRadius="8px"
         >
@@ -163,35 +163,35 @@ export const DesignSystemSeparator = () => {
             <Text marginBottom={4} fontSize="14px">
               Default (Gray)
             </Text>
-            <Separator color="color.gray.200" spacing="8px" />
+            <Separator color="color-gray-200" spacing="8px" />
           </View>
 
           <View>
             <Text marginBottom={4} fontSize="14px">
               Primary (Blue)
             </Text>
-            <Separator color="color.blue.500" spacing="8px" />
+            <Separator color="color-blue-500" spacing="8px" />
           </View>
 
           <View>
             <Text marginBottom={4} fontSize="14px">
               Success (Green)
             </Text>
-            <Separator color="color.green.500" spacing="8px" />
+            <Separator color="color-green-500" spacing="8px" />
           </View>
 
           <View>
             <Text marginBottom={4} fontSize="14px">
               Warning (Yellow)
             </Text>
-            <Separator color="color.yellow.500" spacing="8px" />
+            <Separator color="color-yellow-500" spacing="8px" />
           </View>
 
           <View>
             <Text marginBottom={4} fontSize="14px">
               Danger (Red)
             </Text>
-            <Separator color="color.red.500" spacing="8px" />
+            <Separator color="color-red-500" spacing="8px" />
           </View>
         </Vertical>
       </View>
@@ -203,7 +203,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           padding={16}
           borderRadius="8px"
         >
@@ -233,7 +233,7 @@ export const DesignSystemSeparator = () => {
               views={{
                 label: {
                   fontWeight: '600',
-                  color: 'color.blue.600',
+                  color: 'color-blue-600',
                   textTransform: 'uppercase',
                   fontSize: '12px',
                   letterSpacing: '0.05em',
@@ -241,7 +241,7 @@ export const DesignSystemSeparator = () => {
                     'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
                 },
                 container: {
-                  borderTopColor: 'color.blue.400',
+                  borderTopColor: 'color-blue-400',
                 },
               }}
             />
@@ -253,14 +253,14 @@ export const DesignSystemSeparator = () => {
             </Text>
             <Separator
               label="IMPORTANT"
-              color="color.red.400"
+              color="color-red-400"
               thickness="medium"
               spacing="16px"
               views={{
                 label: {
                   fontWeight: '600',
-                  color: 'color.red.600',
-                  backgroundColor: 'color.red.50',
+                  color: 'color-red-600',
+                  backgroundColor: 'color-red-50',
                   paddingHorizontal: '12px',
                   paddingVertical: '4px',
                   borderRadius: '4px',
@@ -304,7 +304,7 @@ export const DesignSystemSeparator = () => {
                   label: {
                     fontSize: '12px',
                     fontWeight: '600',
-                    color: 'color.gray.600',
+                    color: 'color-gray-600',
                     fontFamily:
                       'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
                   },
@@ -326,7 +326,7 @@ export const DesignSystemSeparator = () => {
         </Text>
         <Vertical
           gap={16}
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           padding={16}
           borderRadius="8px"
         >
@@ -358,11 +358,11 @@ export const DesignSystemSeparator = () => {
                 container: {
                   height: '4px',
                   borderTopWidth: '1px',
-                  borderTopColor: 'color.gray.300',
+                  borderTopColor: 'color-gray-300',
                   borderBottomWidth: '1px',
-                  borderBottomColor: 'color.gray.300',
+                  borderBottomColor: 'color-gray-300',
                   borderBottomStyle: 'solid',
-                  backgroundColor: 'color.gray.100',
+                  backgroundColor: 'color-gray-100',
                 },
               }}
             />
@@ -375,7 +375,7 @@ export const DesignSystemSeparator = () => {
             <Separator
               label={
                 <View
-                  backgroundColor="color.purple.600"
+                  backgroundColor="color-purple-600"
                   color="white"
                   paddingLeft="12px"
                   paddingTop="4px"
@@ -385,7 +385,7 @@ export const DesignSystemSeparator = () => {
                   <Text fontWeight="600">CUSTOM LABEL</Text>
                 </View>
               }
-              color="color.purple.300"
+              color="color-purple-300"
               spacing="16px"
             />
           </View>

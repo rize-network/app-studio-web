@@ -49,19 +49,19 @@ const TagChip: React.FC<{
       alignItems="center"
       gap={6}
       padding={chipSize.padding}
-      backgroundColor="color.gray.100.100"
+      backgroundColor="color-gray-100-100"
       borderRadius="16px"
       borderWidth="1px"
       borderStyle="solid"
-      borderColor="color.gray.100"
+      borderColor="color-gray-100"
       boxShadow="0 1px 2px rgba(0,0,0,0.05)"
       transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
       opacity={isDisabled ? 0.6 : 1}
       _hover={
         !isDisabled && !isReadOnly
           ? {
-              backgroundColor: 'color.gray.100.200',
-              borderColor: 'color.gray.200',
+              backgroundColor: 'color-gray-100-200',
+              borderColor: 'color-gray-200',
               boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
               transform: 'translateY(-1px)',
             }
@@ -71,7 +71,7 @@ const TagChip: React.FC<{
     >
       <Text
         fontSize={chipSize.fontSize}
-        color={isDisabled ? 'color.gray.100' : 'theme.primary'}
+        color={isDisabled ? 'color-gray-100' : 'theme-primary'}
         whiteSpace="nowrap"
         {...views?.tagText}
       >
@@ -84,7 +84,7 @@ const TagChip: React.FC<{
           padding="2px"
           borderRadius="50%"
           transition="all 0.2s ease"
-          backgroundColor={isRemoveHovered ? 'color.red.100' : 'transparent'}
+          backgroundColor={isRemoveHovered ? 'color-red-100' : 'transparent'}
           opacity={isRemoveHovered ? 1 : 0.7}
           onMouseEnter={() => setIsRemoveHovered(true)}
           onMouseLeave={() => setIsRemoveHovered(false)}
@@ -93,13 +93,13 @@ const TagChip: React.FC<{
             onRemove();
           }}
           _hover={{
-            backgroundColor: 'color.red.50',
+            backgroundColor: 'color-red-50',
           }}
           {...views?.tagRemove}
         >
           <CloseIcon
             widthHeight={chipSize.iconSize}
-            color={isRemoveHovered ? 'color.red.500' : 'color.gray.400'}
+            color={isRemoveHovered ? 'color-red-500' : 'color-gray-400'}
           />
         </View>
       )}
@@ -165,7 +165,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
     outline: 'none',
     backgroundColor: 'transparent',
     fontSize: Typography.fontSizes[size],
-    color: isDisabled ? 'color.gray.400' : 'color.gray.800',
+    color: isDisabled ? 'color-gray-400' : 'color-gray-800',
     flex: 1,
     minWidth: '120px',
     ...views?.input,
@@ -255,7 +255,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
             {isMaxReached && (
               <Text
                 fontSize={Typography.fontSizes[size]}
-                color="color.gray.500"
+                color="color-gray-500"
                 fontStyle="italic"
                 {...views?.placeholder}
               >

@@ -146,7 +146,7 @@ function ThemeComponent() {
       <Button onClick={() => setThemeMode(themeMode === 'light' ? 'dark' : 'light')}>
         Toggle Theme
       </Button>
-      <View backgroundColor={getColor('theme.primary')}>
+      <View backgroundColor={getColor('theme-primary')}>
         Themed content
       </View>
     </>
@@ -259,7 +259,7 @@ function InViewComponent() {
   });
 
   return (
-    <View ref={ref} height={200} backgroundColor="gray.100">
+    <View ref={ref} height={200} backgroundColor="gray-100">
       {inView ? 'Visible' : 'Hidden'}
     </View>
   );
@@ -324,12 +324,12 @@ function PositionAwareComponent() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         padding={20}
-        backgroundColor="gray.100"
+        backgroundColor="gray-100"
         borderRadius={8}
       >
         Hover me for tooltip
         {relation && (
-          <Text fontSize="sm" color="gray.600">
+          <Text fontSize="sm" color="gray-600">
             Position: {relation.position.vertical}-{relation.position.horizontal}
             <br />
             More space: {relation.space.vertical}-{relation.space.horizontal}
@@ -373,7 +373,7 @@ function ManualUpdateExample() {
           More space available on {relation.space.vertical} and {relation.space.horizontal}.
         </Text>
       )}
-      <View ref={ref} padding={20} backgroundColor="blue.100" marginTop={20}>
+      <View ref={ref} padding={20} backgroundColor="blue-100" marginTop={20}>
         Target Element
       </View>
     </View>
@@ -390,7 +390,7 @@ function CustomEventsExample() {
   });
 
   return (
-    <View ref={ref} padding={20} backgroundColor="green.100">
+    <View ref={ref} padding={20} backgroundColor="green-100">
       Hover, scroll, or resize to see updates
       {relation && (
         <Text fontSize="sm" marginTop={8}>

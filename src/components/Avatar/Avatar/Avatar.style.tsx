@@ -33,13 +33,13 @@ export const DefaultAvatarStyles = {
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'transparent',
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
     transition: 'all 0.2s ease',
   } as ViewProps,
   fallback: {
     fontWeight: '500', // Medium weight for better readability
-    color: 'color.gray.600',
+    color: 'color-gray-600',
   } as ViewProps,
   image: {
     objectFit: 'cover',

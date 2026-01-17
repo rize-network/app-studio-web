@@ -245,7 +245,7 @@ export const FormikChatInputExample = () => {
                   <Text
                     key={index}
                     padding={8}
-                    backgroundColor="color.gray.100"
+                    backgroundColor="color-gray-100"
                     borderRadius={8}
                   >
                     {msg}
@@ -297,8 +297,8 @@ export const FormikColorInputExample = () => {
   return (
     <Formik
       initialValues={{
-        backgroundColor: 'color.blue.500',
-        textColor: 'color.white'
+        backgroundColor: 'color-blue-500',
+        textColor: 'color-white'
       }}
       validationSchema={Yup.object({
         backgroundColor: Yup.string().required('Background color is required'),

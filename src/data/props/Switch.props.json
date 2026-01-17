@@ -10,7 +10,7 @@
     "type": "string",
     "typeValues": [],
     "description": "Defines the color theme for the switch component.",
-    "defaultValue": "theme.primary"
+    "defaultValue": "theme-primary"
   },
   "id": {
     "type": "string",

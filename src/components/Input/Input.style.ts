@@ -58,20 +58,20 @@ export const InputVariants: Record<Variant, ViewProps> = {
   outline: {
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    backgroundColor: 'color.white',
+    borderColor: 'color-gray-200',
+    backgroundColor: 'color-white',
     transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
     _hover: {
-      borderColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
     },
     _focus: {
-      borderColor: 'theme.primary',
+      borderColor: 'theme-primary',
       outline: 'none',
       boxShadow:
         '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
     },
     _focusVisible: {
-      borderColor: 'theme.primary',
+      borderColor: 'theme-primary',
       outline: 'none',
       boxShadow:
         '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
@@ -81,19 +81,19 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderWidth: 0,
     borderBottomWidth: '1px',
     borderBottomStyle: 'solid',
-    borderBottomColor: 'color.gray.200',
+    borderBottomColor: 'color-gray-200',
     borderRadius: 0,
-    backgroundColor: 'color.white',
+    backgroundColor: 'color-white',
     transition: 'border-color 0.2s ease',
     _hover: {
-      borderBottomColor: 'color.gray.300',
+      borderBottomColor: 'color-gray-300',
     },
     _focus: {
-      borderBottomColor: 'theme.primary',
+      borderBottomColor: 'theme-primary',
       outline: 'none',
     },
     _focusVisible: {
-      borderBottomColor: 'theme.primary',
+      borderBottomColor: 'theme-primary',
       outline: 'none',
     },
   },

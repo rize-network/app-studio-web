@@ -154,7 +154,7 @@ export const OrderStatus = () => (
     <Vertical gap={15}>
       <Text fontSize={18} fontWeight="bold">Order #12345</Text>
       <StatusIndicator status="success" label="Delivered" />
-      <Text fontSize={14} color="color.coolGray.500">
+      <Text fontSize={14} color="color-coolGray-500">
         Your order was delivered on March 15, 2024
       </Text>
     </Vertical>
@@ -242,12 +242,12 @@ export const PaymentStatus = () => (
       <Horizontal justifyContent="space-between" alignItems="center">
         <Vertical gap={5}>
           <Text fontSize={16} fontWeight="bold">Payment to Acme Corp</Text>
-          <Text fontSize={14} color="color.coolGray.500">$1,234.56</Text>
+          <Text fontSize={14} color="color-coolGray-500">$1,234.56</Text>
         </Vertical>
         <StatusIndicator status="success" label="Paid" />
       </Horizontal>
       
-      <Text fontSize={14} color="color.coolGray.500">
+      <Text fontSize={14} color="color-coolGray-500">
         Transaction ID: TXN-2024-03-15-001
       </Text>
     </Vertical>
@@ -283,7 +283,7 @@ export const ServerStatusDashboard = () => {
               <Horizontal justifyContent="space-between" alignItems="center">
                 <Vertical gap={5}>
                   <Text fontWeight="bold">{server.name}</Text>
-                  <Text fontSize={14} color="color.coolGray.500">
+                  <Text fontSize={14} color="color-coolGray-500">
                     Uptime: {server.uptime}
                   </Text>
                 </Vertical>
@@ -342,7 +342,7 @@ export const NotificationStatus = () => {
           <StatusIndicator status={notification.status} />
           <Vertical gap={2}>
             <Text>{notification.message}</Text>
-            <Text fontSize={12} color="color.coolGray.500">{notification.time}</Text>
+            <Text fontSize={12} color="color-coolGray-500">{notification.time}</Text>
           </Vertical>
         </Horizontal>
       ))}

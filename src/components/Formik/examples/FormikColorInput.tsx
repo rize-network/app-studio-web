@@ -17,9 +17,9 @@ export const FormikColorInputExample = () => {
   return (
     <Formik
       initialValues={{
-        backgroundColor: 'color.blue.500',
-        textColor: 'color.white',
-        accentColor: 'color.orange.500',
+        backgroundColor: 'color-blue-500',
+        textColor: 'color-white',
+        accentColor: 'color-orange-500',
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {

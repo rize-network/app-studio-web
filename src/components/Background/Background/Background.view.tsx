@@ -188,7 +188,7 @@ const Wall: React.FC<WallProps> = ({
       height={300}
       position="relative"
       overflow="hidden"
-      backgroundColor="color.gray.50"
+      backgroundColor="color-gray-50"
       zIndex={0}
       transform="skewX(-48deg) skewY(14deg) scale(0.675) rotate(0deg) translateZ(0)"
       {...props}
@@ -201,7 +201,7 @@ const Wall: React.FC<WallProps> = ({
               height={squareSize / 3}
               width={squareSize}
               borderStyle="solid"
-              borderColor="color.gray.200"
+              borderColor="color-gray-200"
               borderWidth={0.5}
               backgroundColor="transparent"
               cursor="pointer"
@@ -262,7 +262,7 @@ const Particles: React.FC<ParticlesProps> = ({
       height={300}
       position="relative"
       overflow="hidden"
-      backgroundColor="color.gray.900"
+      backgroundColor="color-gray-900"
       {...props}
     >
       {particles.map((idx) => {
@@ -354,7 +354,7 @@ const Grid: React.FC<GridProps> = ({
       height={300}
       position="relative"
       overflow="hidden"
-      backgroundColor="color.gray.900"
+      backgroundColor="color-gray-900"
       {...props}
     >
       {/* Vertical lines */}
@@ -446,7 +446,7 @@ const Ripples: React.FC<RipplesProps> = ({
       height={300}
       position="relative"
       overflow="hidden"
-      backgroundColor="color.gray.100"
+      backgroundColor="color-gray-100"
       {...props}
     >
       {ripples.map((ripple) => (
@@ -606,16 +606,16 @@ const BackgroundGradient: React.FC<BackgroundGradientProps> = ({
  */
 const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
   contentPosition,
-  backgroundColor = 'color.black.900',
+  backgroundColor = 'color-black-900',
   ...props
 }) => {
   const getDefaultOverlay = () => {
-    let ligthBackground = `${backgroundColor}.100`;
-    let darkBackground = `${backgroundColor}.900`;
-    let midBackground = `${backgroundColor}.600`;
-    let midDarkBackground = `${backgroundColor}.400`;
+    let ligthBackground = `${backgroundColor}-100`;
+    let darkBackground = `${backgroundColor}-900`;
+    let midBackground = `${backgroundColor}-600`;
+    let midDarkBackground = `${backgroundColor}-400`;
 
-    if (backgroundColor.indexOf('.') === -1) {
+    if (backgroundColor.indexOf('-') === -1) {
       ligthBackground = `color-mix(in srgb, ${backgroundColor} 10%, transparent)`;
       darkBackground = `color-mix(in srgb, ${backgroundColor} 90%, transparent)`;
       midBackground = `color-mix(in srgb, ${backgroundColor} 70%, transparent)`;
@@ -730,7 +730,7 @@ export const BackgroundLayout = React.forwardRef<
     const scaleOffset = ((decorationScale - 1) * 100) / 2;
     const extraPadding = Math.ceil(rotationOffset + scaleOffset);
 
-    const backgroundColor = props.backgroundColor ?? 'theme.primary';
+    const backgroundColor = props.backgroundColor ?? 'theme-primary';
 
     return (
       <View

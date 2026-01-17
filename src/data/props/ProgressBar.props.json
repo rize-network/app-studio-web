@@ -16,13 +16,13 @@
     "type": "string",
     "typeValues": [],
     "description": "Sets the color of the progress bar's filled portion.",
-    "defaultValue": "theme.primary"
+    "defaultValue": "theme-primary"
   },
   "backgroundColor": {
     "type": "string",
     "typeValues": [],
     "description": "Sets the background color of the progress bar's track.",
-    "defaultValue": "color.gray.200"
+    "defaultValue": "color-gray-200"
   },
   "height": {
     "type": "number | string",

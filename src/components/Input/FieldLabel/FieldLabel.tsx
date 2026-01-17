@@ -16,7 +16,7 @@ export const FieldLabel: React.FC<LabelProps> = ({
   children,
   size = 'md',
   error = false,
-  color = 'theme.primary',
+  color = 'theme-primary',
   views = { label: {} },
   helperText,
   ...props
@@ -32,7 +32,7 @@ export const FieldLabel: React.FC<LabelProps> = ({
     letterSpacing="-0.01em" // Slight negative tracking for modern look
     whiteSpace="nowrap"
     // Color properties
-    color={error ? 'color.red.500' : color}
+    color={error ? 'color-red-500' : color}
     // Animation
     transition="all 0.2s ease"
     // Apply custom styles

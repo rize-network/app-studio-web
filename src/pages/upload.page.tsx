@@ -132,14 +132,14 @@ const UploadPage = () => {
             <View
               marginTop={12}
               padding={12}
-              backgroundColor="color.gray.50"
+              backgroundColor="color-gray-50"
               borderRadius={8}
             >
               <Text fontSize={14} fontWeight={600} marginBottom={8}>
                 Selected Files ({multipleFiles.length}):
               </Text>
               {multipleFiles.map((file, index) => (
-                <Text key={index} fontSize={12} color="color.gray.600">
+                <Text key={index} fontSize={12} color="color-gray-600">
                   • {file.name} ({Math.round(file.size / 1024)}KB)
                 </Text>
               ))}
@@ -210,7 +210,7 @@ const UploadPage = () => {
           <Text fontSize={16} marginBottom={8}>
             Chat-Style Multiple Upload
           </Text>
-          <Text fontSize={14} color="color.gray.600" marginBottom={12}>
+          <Text fontSize={14} color="color-gray-600" marginBottom={12}>
             This demonstrates the same functionality used in ChatInput component
           </Text>
           <Uploader
@@ -236,10 +236,10 @@ const UploadPage = () => {
                 borderRadius: '8px',
                 backgroundColor: 'transparent',
                 border: '1px solid',
-                borderColor: 'color.gray.300',
+                borderColor: 'color-gray-300',
                 cursor: 'pointer',
                 _hover: {
-                  backgroundColor: 'color.gray.100',
+                  backgroundColor: 'color-gray-100',
                 },
               },
             }}
@@ -251,7 +251,7 @@ const UploadPage = () => {
             }}
             textProps={{
               fontSize: '14px',
-              color: 'color.gray.600',
+              color: 'color-gray-600',
             }}
           />
         </View>

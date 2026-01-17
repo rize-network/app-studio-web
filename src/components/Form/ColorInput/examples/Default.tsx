@@ -13,13 +13,13 @@ export const DefaultColorInput = () => {
 
       <ColorInput
         label="Text Color"
-        defaultValue="color.gray.800"
+        defaultValue="color-gray-800"
         helperText="Select a text color"
       />
 
       <ColorInput
         label="Accent Color"
-        defaultValue="color.blue.500"
+        defaultValue="color-blue-500"
         showCustomInput={false}
         helperText="Choose from predefined colors only"
       />

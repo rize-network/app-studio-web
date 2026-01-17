@@ -339,7 +339,7 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
         {...ContextMenuSizes[size]}
         _hover={!disabled ? ContextMenuItemStates.hover : {}}
         backgroundColor={
-          isHovered && !disabled ? 'color.gray.100' : 'transparent'
+          isHovered && !disabled ? 'color-gray-100' : 'transparent'
         }
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -414,7 +414,7 @@ export const ContextMenuDivider: React.FC<ContextMenuDividerProps> = ({
   return (
     <View
       height="1px"
-      backgroundColor="color.gray.200"
+      backgroundColor="color-gray-200"
       margin="4px 0"
       role="separator"
       aria-orientation="horizontal"
@@ -432,7 +432,7 @@ export const ContextMenuSeparator: React.FC<ContextMenuSeparatorProps> = ({
   return (
     <View
       height="1px"
-      backgroundColor="color.gray.200"
+      backgroundColor="color-gray-200"
       margin="4px 0"
       role="separator"
       aria-orientation="horizontal"

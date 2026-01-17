@@ -72,7 +72,7 @@ export const ModalOverlay: React.FC<OverlayProps & any> = ({
         width="100vw"
         height="100vh"
         display="flex"
-        backgroundColor="color.blackAlpha.500"
+        backgroundColor="color-blackAlpha-500"
         backdropFilter={blur ? `blur(${blur}px)` : undefined}
         transition="all 0.3s ease"
         onClick={handleClick}
@@ -114,7 +114,7 @@ export const ModalContainer: React.FC<ContainerProps> = ({
   return (
     <Vertical
       cursor="default"
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       width={isFullScreen ? '100%' : 600}
       height={isFullScreen ? '100%' : 'fit-content'}
       onClick={handleClick}
@@ -138,7 +138,7 @@ export const ModalContainer: React.FC<ContainerProps> = ({
 
 export const ModalHeader: React.FC<HeaderProps> = ({
   children,
-  buttonColor = 'theme.primary',
+  buttonColor = 'theme-primary',
   iconSize = 'md',
   buttonPosition = 'right',
   views,
@@ -160,7 +160,7 @@ export const ModalHeader: React.FC<HeaderProps> = ({
       paddingHorizontal={24} // 6×4px grid
       borderBottomWidth="1px"
       borderBottomStyle="solid"
-      borderBottomColor="color.gray.200"
+      borderBottomColor="color-gray-200"
       media={{
         mobile: {
           paddingVertical: 12, // Smaller padding on mobile
@@ -219,7 +219,7 @@ export const ModalFooter: React.FC<FooterProps> = ({
       paddingHorizontal={24} // 6×4px grid
       borderTopWidth="1px"
       borderTopStyle="solid"
-      borderTopColor="color.gray.200"
+      borderTopColor="color-gray-200"
       gap={12} // 3×4px grid
       media={{
         mobile: {

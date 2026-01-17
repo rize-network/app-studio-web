@@ -12,7 +12,7 @@ export const SizesDemo = () => {
       {sizes.map((size) => (
         <Card key={size} size={size} variant="outlined">
           <Text fontWeight="bold">{size.toUpperCase()} Size</Text>
-          <Text color="color.gray.500">This card has {size} padding.</Text>
+          <Text color="color-gray-500">This card has {size} padding.</Text>
         </Card>
       ))}
     </Vertical>

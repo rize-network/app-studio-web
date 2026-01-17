@@ -19,18 +19,18 @@ export const MenubarSizes: Record<Size, ViewProps> = {
 export const MenubarVariants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'transparent',
-    color: 'color.gray.800',
+    color: 'color-gray-800',
   },
   filled: {
-    backgroundColor: 'color.gray.100',
-    color: 'color.gray.800',
+    backgroundColor: 'color-gray-100',
+    color: 'color-gray-800',
   },
   outline: {
     backgroundColor: 'transparent',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-200',
+    color: 'color-gray-800',
   },
 };
 
@@ -45,11 +45,11 @@ export const MenubarOrientations: Record<Orientation, ViewProps> = {
 
 export const MenubarItemStates = {
   active: {
-    backgroundColor: 'color.gray.200',
+    backgroundColor: 'color-gray-200',
     fontWeight: 'bold',
   },
   hover: {
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
   },
   disabled: {
     opacity: 0.5,

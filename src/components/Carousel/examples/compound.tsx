@@ -6,9 +6,9 @@ import { Button } from '../../Button/Button';
 
 export const CompoundDemo = () => {
   const slides = [
-    { color: 'color.blue.500', text: 'Slide 1' },
-    { color: 'color.green.500', text: 'Slide 2' },
-    { color: 'color.purple.500', text: 'Slide 3' },
+    { color: 'color-blue-500', text: 'Slide 1' },
+    { color: 'color-green-500', text: 'Slide 2' },
+    { color: 'color-purple-500', text: 'Slide 3' },
   ];
 
   return (
@@ -54,9 +54,9 @@ export const CompoundDemo = () => {
 
 export const CustomCompoundDemo = () => {
   const slides = [
-    { color: 'color.red.500', text: 'Custom 1' },
-    { color: 'color.yellow.500', text: 'Custom 2' },
-    { color: 'color.teal.500', text: 'Custom 3' },
+    { color: 'color-red-500', text: 'Custom 1' },
+    { color: 'color-yellow-500', text: 'Custom 2' },
+    { color: 'color-teal-500', text: 'Custom 3' },
   ];
 
   return (
@@ -98,7 +98,7 @@ export const CustomCompoundDemo = () => {
                 <Button
                   size="sm"
                   variant="outline"
-                  backgroundColor="color.white"
+                  backgroundColor="color-white"
                 >
                   Learn More
                 </Button>

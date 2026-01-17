@@ -10,7 +10,7 @@ export const DefaultDemo = () => (
     </Text>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Aurora Background
       </Text>
       <Background.Aurora height="200px" showRadialGradient={true}>
@@ -21,21 +21,21 @@ export const DefaultDemo = () => (
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Meteors Effect
       </Text>
       <Background.Meteors number={15} />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Wall Effect
       </Text>
       <Background.Wall rows={15} cols={10} squareSize={40} />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Particles Effect
       </Text>
       <Background.Particles
@@ -46,21 +46,21 @@ export const DefaultDemo = () => (
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Grid Effect
       </Text>
       <Background.Grid gridSize={25} animationSpeed="medium" />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Ripples Effect
       </Text>
       <Background.Ripples rippleCount={4} maxSize={150} frequency={2} />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Background Image
       </Text>
       <Background.Image
@@ -77,12 +77,12 @@ export const DefaultDemo = () => (
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Background Gradient
       </Text>
       <Background.Gradient
-        from="color.blue.500"
-        to="color.purple.500"
+        from="color-blue-500"
+        to="color-purple-500"
         height="200px"
         animate={true}
         animationDuration={4}
@@ -94,15 +94,15 @@ export const DefaultDemo = () => (
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Multi-color Gradient
       </Text>
       <Background.Gradient
         type="radial"
         colors={[
-          { color: 'color.red.500', position: '0%' },
-          { color: 'color.orange.500', position: '50%' },
-          { color: 'color.yellow.500', position: '100%' },
+          { color: 'color-red-500', position: '0%' },
+          { color: 'color-orange-500', position: '50%' },
+          { color: 'color-yellow-500', position: '100%' },
         ]}
         height="200px"
         shape="ellipse"

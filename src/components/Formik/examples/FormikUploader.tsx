@@ -99,7 +99,7 @@ export const FormikUploaderExample = () => {
               />
             )}
 
-            <Text fontSize={12} color="color.gray.600">
+            <Text fontSize={12} color="color-gray-600">
               Uploaded {uploadedFiles.length} file(s)
             </Text>
 

@@ -8,7 +8,7 @@ interface RouterProps {
 
 export const RouterProvider: FC<RouterProps> = ({ children }) => (
   <BrowserRouter>
-    <View backgroundColor="color.white" color="color.black">
+    <View backgroundColor="color-white" color="color-black">
       {children}
     </View>
   </BrowserRouter>

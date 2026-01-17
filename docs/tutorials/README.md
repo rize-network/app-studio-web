@@ -18,7 +18,7 @@ This section provides step-by-step tutorials for common tasks using the App Stud
 ## Advanced Tutorials
 
 - [Building a Complex Form Wizard](./advanced/building-a-complex-form-wizard.md)
-- [Creating a Custom Theme](./advanced/creating-a-custom-theme.md)
+- [Creating a Custom Theme](./advanced/creating-a-custom-theme-md)
 - [Building a Responsive Dashboard](./advanced/building-a-responsive-dashboard.md)
 - [Creating Custom Components](./advanced/creating-custom-components.md)
 

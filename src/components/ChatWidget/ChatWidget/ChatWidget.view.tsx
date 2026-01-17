@@ -111,7 +111,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
             alignItems="center"
             justifyContent="center"
             flex={1}
-            color="color.gray.400"
+            color="color-gray-400"
           >
             <Text fontSize="14px">No messages yet. Start a conversation!</Text>
           </View>
@@ -152,7 +152,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
               filled={false}
               style={{ animation: 'spin 1s linear infinite' }}
             />
-            <Text color="color.gray.500" fontSize="14px">
+            <Text color="color-gray-500" fontSize="14px">
               {loadingText}
             </Text>
           </Horizontal>
@@ -180,7 +180,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
                 alignItems="center"
                 gap={6}
               >
-                <Text fontSize="12px" color="color.blue.700" fontWeight="500">
+                <Text fontSize="12px" color="color-blue-700" fontWeight="500">
                   {element.name}
                 </Text>
                 <View
@@ -193,7 +193,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
                   display="flex"
                   alignItems="center"
                 >
-                  <CloseIcon widthHeight={12} color="color.blue.700" />
+                  <CloseIcon widthHeight={12} color="color-blue-700" />
                 </View>
               </Horizontal>
             ))}
@@ -209,9 +209,9 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
               type="button"
               {...DefaultChatWidgetStyles.attachmentButton}
               {...styles.attachmentButton}
-              _hover={{ backgroundColor: 'color.gray.100' }}
+              _hover={{ backgroundColor: 'color-gray-100' }}
             >
-              <AttachmentIcon widthHeight={16} color="color.gray.600" />
+              <AttachmentIcon widthHeight={16} color="color-gray-600" />
             </View>
           )}
 
@@ -241,12 +241,12 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
                 {...DefaultChatWidgetStyles.attachmentButton}
                 {...styles.contextPickerButton}
                 _hover={{
-                  backgroundColor: 'color.gray.100',
+                  backgroundColor: 'color-gray-100',
                   ...styles.contextPickerButton?._hover,
                 }}
                 title="Select element from page"
               >
-                <MousePointerIcon widthHeight={16} color="color.gray.600" />
+                <MousePointerIcon widthHeight={16} color="color-gray-600" />
               </View>
             )}
 
@@ -256,9 +256,9 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
               type="submit"
               disabled={!hasText || disableInput || isLoading}
               {...DefaultChatWidgetStyles.sendButton}
-              backgroundColor={hasText ? 'theme.primary' : 'color.gray.300'}
+              backgroundColor={hasText ? 'theme-primary' : 'color-gray-300'}
               _hover={{
-                backgroundColor: hasText ? 'color.blue.600' : 'color.gray.300',
+                backgroundColor: hasText ? 'color-blue-600' : 'color-gray-300',
               }}
               {...styles.sendButton}
               style={{
@@ -266,7 +266,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
                 opacity: !hasText || disableInput || isLoading ? 0.6 : 1,
               }}
             >
-              <SendIcon widthHeight={16} color="color.white" filled={false} />
+              <SendIcon widthHeight={16} color="color-white" filled={false} />
             </View>
           </Vertical>
         </View>
@@ -321,8 +321,8 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
         {...styles.systemMessage}
       >
         <Horizontal gap={6} alignItems="center" opacity={0.7}>
-          <InfoIcon widthHeight={12} color="color.gray.600" />
-          <Text fontSize="12px" color="color.gray.600" fontStyle="italic">
+          <InfoIcon widthHeight={12} color="color-gray-600" />
+          <Text fontSize="12px" color="color-gray-600" fontStyle="italic">
             {message.content}
           </Text>
         </Horizontal>
@@ -349,12 +349,12 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
           width="100%"
           border="1px solid rgba(0,0,0,0.05)"
         >
-          <SettingsIcon widthHeight={14} color="color.gray.600" />
+          <SettingsIcon widthHeight={14} color="color-gray-600" />
           <Vertical gap={2}>
-            <Text fontSize="11px" fontWeight="600" color="color.gray.700">
+            <Text fontSize="11px" fontWeight="600" color="color-gray-700">
               Tool Usage
             </Text>
-            <Text fontSize="12px" color="color.gray.600" fontFamily="monospace">
+            <Text fontSize="12px" color="color-gray-600" fontFamily="monospace">
               {message.content}
             </Text>
           </Vertical>
@@ -435,13 +435,13 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
               border="none"
               padding={0}
             >
-              <Text fontSize="11px" color="color.gray.500" fontWeight="600">
+              <Text fontSize="11px" color="color-gray-500" fontWeight="600">
                 Thinking Process
               </Text>
               <ChevronIcon
                 orientation={isReasoningOpen ? 'down' : 'right'}
                 widthHeight={10}
-                color="color.gray.500"
+                color="color-gray-500"
               />
             </Horizontal>
             {isReasoningOpen && (
@@ -452,7 +452,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
                 marginTop="4px"
                 {...styles.reasoningContent}
               >
-                <Text fontSize="12px" color="color.gray.600" fontStyle="italic">
+                <Text fontSize="12px" color="color-gray-600" fontStyle="italic">
                   {message.reasoning}
                 </Text>
               </View>
@@ -500,7 +500,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
                 fontSize="11px"
                 border="1px solid rgba(37, 99, 235, 0.2)"
               >
-                <Text color="color.blue.700" fontWeight="500">
+                <Text color="color-blue-700" fontWeight="500">
                   {element.name}
                 </Text>
               </Horizontal>

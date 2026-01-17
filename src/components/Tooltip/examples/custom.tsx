@@ -17,12 +17,12 @@ export const CustomTooltip = () => {
         }
         views={{
           content: {
-            backgroundColor: 'theme.primary',
-            color: 'color.white',
+            backgroundColor: 'theme-primary',
+            color: 'color-white',
             borderRadius: '8px',
           },
           arrow: {
-            backgroundColor: 'theme.primary',
+            backgroundColor: 'theme-primary',
           },
         }}
       >

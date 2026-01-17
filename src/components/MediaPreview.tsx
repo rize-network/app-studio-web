@@ -41,7 +41,7 @@ export const MediaPreview: React.FC<MediaPreviewProps> = ({
       display="flex"
       alignItems="center"
       justifyContent="center"
-      backgroundColor="color.gray.200"
+      backgroundColor="color-gray-200"
       cursor="pointer"
       onClick={handleClick}
     >
@@ -78,7 +78,7 @@ export const MediaPreview: React.FC<MediaPreviewProps> = ({
       )}
 
       {!isImage && !isVideo && !isAudio && (
-        <FileIcon widthHeight={24} color="color.gray.600" />
+        <FileIcon widthHeight={24} color="color-gray-600" />
       )}
     </View>
   );

@@ -10,12 +10,12 @@ export const StepIndicesDemo = () => {
 
   // Create an array of slides
   const slides = [
-    { color: 'color.blue.500', text: 'Introduction', id: 0 },
-    { color: 'color.gray.400', text: 'Step 1', id: 1 },
-    { color: 'color.gray.400', text: 'Step 2', id: 2 },
-    { color: 'color.gray.400', text: 'Step 3', id: 3 },
-    { color: 'color.gray.400', text: 'Step 4', id: 4 },
-    { color: 'color.green.500', text: 'Summary', id: 5 },
+    { color: 'color-blue-500', text: 'Introduction', id: 0 },
+    { color: 'color-gray-400', text: 'Step 1', id: 1 },
+    { color: 'color-gray-400', text: 'Step 2', id: 2 },
+    { color: 'color-gray-400', text: 'Step 3', id: 3 },
+    { color: 'color-gray-400', text: 'Step 4', id: 4 },
+    { color: 'color-green-500', text: 'Summary', id: 5 },
   ];
 
   // Only allow navigation to specific slides (introduction, steps 2 & 4, summary)
@@ -37,7 +37,7 @@ export const StepIndicesDemo = () => {
             <View
               key={index}
               backgroundColor={
-                stepIndices.includes(index) ? slide.color : 'color.gray.400'
+                stepIndices.includes(index) ? slide.color : 'color-gray-400'
               }
               width="100%"
               height="100%"

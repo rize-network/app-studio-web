@@ -101,7 +101,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       {labelPosition === 'left' && label && (
         <Text
           fontWeight="500" // Medium weight for better readability
-          color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
+          color={isDisabled ? 'color-gray-400' : 'color-gray-700'}
           transition="all 0.2s ease"
         >
           {label}
@@ -202,7 +202,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       {labelPosition === 'right' && label && (
         <Text
           fontWeight="500" // Medium weight for better readability
-          color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
+          color={isDisabled ? 'color-gray-400' : 'color-gray-700'}
           transition="all 0.2s ease"
         >
           {label}

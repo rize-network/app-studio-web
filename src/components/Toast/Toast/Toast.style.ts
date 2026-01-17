@@ -19,50 +19,50 @@ import { ToastPosition, ThemesType } from './Toast.type';
 export const Themes: ThemesType = {
   info: {
     container: {
-      backgroundColor: 'color.blue.50',
-      border: 'color.blue.300',
+      backgroundColor: 'color-blue-50',
+      border: 'color-blue-300',
     },
     content: {
-      color: 'color.blue.700',
+      color: 'color-blue-700',
     },
     icon: {
-      color: 'color.blue.500',
+      color: 'color-blue-500',
     },
   },
   success: {
     container: {
-      backgroundColor: 'color.green.50',
-      border: 'color.green.300',
+      backgroundColor: 'color-green-50',
+      border: 'color-green-300',
     },
     content: {
-      color: 'color.green.700',
+      color: 'color-green-700',
     },
     icon: {
-      color: 'color.green.500',
+      color: 'color-green-500',
     },
   },
   warning: {
     container: {
-      backgroundColor: 'color.orange.50',
-      border: 'color.orange.300',
+      backgroundColor: 'color-orange-50',
+      border: 'color-orange-300',
     },
     content: {
-      color: 'color.orange.700',
+      color: 'color-orange-700',
     },
     icon: {
-      color: 'color.orange.500',
+      color: 'color-orange-500',
     },
   },
   error: {
     container: {
-      backgroundColor: 'color.red.50',
-      border: 'color.red.300',
+      backgroundColor: 'color-red-50',
+      border: 'color-red-300',
     },
     content: {
-      color: 'color.red.700',
+      color: 'color-red-700',
     },
     icon: {
-      color: 'color.red.500',
+      color: 'color-red-500',
     },
   },
 };

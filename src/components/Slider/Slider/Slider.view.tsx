@@ -24,7 +24,7 @@ export const SliderView: React.FC<SliderViewProps> = ({
   isDisabled = false,
   showValue = false,
   showTooltip = false,
-  backgroundColor = 'theme.primary',
+  backgroundColor = 'theme-primary',
   label,
   helperText,
   themeMode: elementMode,
@@ -58,7 +58,7 @@ export const SliderView: React.FC<SliderViewProps> = ({
   const themeColor = getColorHex(backgroundColor, {
     themeMode: elementMode || themeMode,
   });
-  const disabledColor = getColorHex('theme.disabled', {
+  const disabledColor = getColorHex('theme-disabled', {
     themeMode: elementMode || themeMode,
   });
   const trackColor = getColorHex(
@@ -83,7 +83,7 @@ export const SliderView: React.FC<SliderViewProps> = ({
           {showValue && (
             <Text
               fontSize={14}
-              color="color.blueGray.500"
+              color="color-blueGray-500"
               {...views.valueLabel}
             >
               {currentValue}
@@ -160,7 +160,7 @@ export const SliderView: React.FC<SliderViewProps> = ({
           top="50%"
           left={`${thumbPositionPercent}%`}
           borderRadius="50%"
-          backgroundColor="color.white"
+          backgroundColor="color-white"
           boxShadow="0 2px 4px rgba(0, 0, 0, 0.2)"
           border={`2px solid ${isDisabled ? disabledColor : themeColor}`}
           transition={isDragging ? 'none' : 'transform 0.1s ease-in-out'}
@@ -185,8 +185,8 @@ export const SliderView: React.FC<SliderViewProps> = ({
               transform="translateX(-50%)"
               marginBottom={8}
               padding="4px 8px"
-              backgroundColor="color.black"
-              color="color.white"
+              backgroundColor="color-black"
+              color="color-white"
               borderRadius={4}
               fontSize={12}
               whiteSpace="nowrap"
@@ -229,7 +229,7 @@ export const SliderView: React.FC<SliderViewProps> = ({
           {showValue && (
             <Text
               fontSize={14}
-              color="color.blueGray.500"
+              color="color-blueGray-500"
               {...views.valueLabel}
             >
               {currentValue}
@@ -318,7 +318,7 @@ export const SliderView: React.FC<SliderViewProps> = ({
           height={`${thumbSize}px`}
           borderRadius="50%"
           backgroundColor={isDisabled ? disabledColor : themeColor}
-          border={`2px solid color.white`}
+          border={`2px solid color-white`}
           boxShadow="0 1px 3px rgba(0, 0, 0, 0.2)"
           cursor={isDisabled ? 'not-allowed' : 'grab'}
           transform={isVertical ? 'translateX(-50%)' : 'translateY(-50%)'}
@@ -342,8 +342,8 @@ export const SliderView: React.FC<SliderViewProps> = ({
             <View
               position="absolute"
               padding="4px 8px"
-              backgroundColor={'color.black'}
-              color={'color.white'}
+              backgroundColor={'color-black'}
+              color={'color-white'}
               borderRadius="4px"
               whiteSpace="nowrap"
               zIndex={3}

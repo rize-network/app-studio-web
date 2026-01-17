@@ -9,6 +9,7 @@ export type HighlightStyle =
   | 'gradient' // Gradient background
   | 'outline' // Text with outline
   | 'glow' // Text with glow effect
+  | 'solid' // Solid text color
   | 'default'; // Default style without special effects
 
 /**

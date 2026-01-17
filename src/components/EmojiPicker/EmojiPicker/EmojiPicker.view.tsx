@@ -82,7 +82,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
     ...Sizes[size],
     ...Shapes[shape],
     ...Variants[variant],
-    ...(error && { borderColor: 'color.red.500' }),
+    ...(error && { borderColor: 'color-red-500' }),
     ...(isDisabled && { opacity: 0.6, cursor: 'not-allowed' }),
     ...views?.trigger,
   };
@@ -116,7 +116,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
         <Text
           fontSize={size === 'xs' ? '12px' : size === 'sm' ? '14px' : '16px'}
           fontWeight="500"
-          color="color.gray.700"
+          color="color-gray-700"
           marginBottom="4px"
           {...views?.label}
         >
@@ -131,7 +131,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
       >
         <Horizontal alignItems="center" gap={8}>
           <Text
-            color={selectedEmoji ? 'color.gray.800' : 'color.gray.500'}
+            color={selectedEmoji ? 'color-gray-800' : 'color-gray-500'}
             fontSize="inherit"
           >
             {selectedEmoji || placeholder}
@@ -141,7 +141,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
         {!isReadOnly && !isDisabled && (
           <ChevronIcon
             widthHeight={16}
-            color="color.gray.500"
+            color="color-gray-500"
             orientation={isOpen ? 'up' : 'down'}
           />
         )}
@@ -172,8 +172,8 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
                   key={category}
                   {...DefaultEmojiPickerStyles.categoryTab}
                   {...(activeCategory === category && {
-                    borderBottomColor: 'color.blue.500',
-                    color: 'color.blue.600',
+                    borderBottomColor: 'color-blue-500',
+                    color: 'color-blue-600',
                   })}
                   onClick={() => handleCategoryChange(category)}
                   title={category.charAt(0).toUpperCase() + category.slice(1)}
@@ -195,9 +195,9 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
                   onClick={() => handleEmojiSelect(emoji)}
                   title={emoji.name}
                   _hover={{
-                    backgroundColor: 'color.gray.100',
+                    backgroundColor: 'color-gray-100',
                   }}
-                  color="color.gray.800"
+                  color="color-gray-800"
                   {...views?.emoji}
                 >
                   {emoji.emoji}
@@ -208,7 +208,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
                 gridColumn="1 / -1"
                 padding="20px"
                 textAlign="center"
-                color="color.gray.500"
+                color="color-gray-500"
               >
                 <Text fontSize="14px">
                   {searchQuery
@@ -223,7 +223,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
 
       {helperText && (
         <Text
-          color={error ? 'color.red.500' : 'color.gray.600'}
+          color={error ? 'color-red-500' : 'color-gray-600'}
           marginTop="4px"
           {...views?.helperText}
         >

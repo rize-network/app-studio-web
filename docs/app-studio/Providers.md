@@ -40,8 +40,8 @@ function ThemedComponent() {
   
   return (
     <View 
-      backgroundColor={theme.colors.primary}
-      padding={theme.spacing.medium}
+      backgroundColor={theme-colors.primary}
+      padding={theme-spacing.medium}
     >
       <Button onPress={() => setMode(mode === 'light' ? 'dark' : 'light')}>
         Toggle Theme

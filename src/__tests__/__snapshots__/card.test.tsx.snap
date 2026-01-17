@@ -6,7 +6,7 @@ exports[`Card with compound components matches snapshot 1`] = `
   style={Object {}}
 >
   <div
-    borderBottomColor="color.gray.200"
+    borderBottomColor="color-gray-200"
     borderBottomStyle="solid"
     borderBottomWidth="1px"
     className="pg-16px cr- mobile--pg-12px"
@@ -21,7 +21,7 @@ exports[`Card with compound components matches snapshot 1`] = `
     Content
   </div>
   <div
-    borderTopColor="color.gray.200"
+    borderTopColor="color-gray-200"
     borderTopStyle="solid"
     borderTopWidth="1px"
     className="pg-16px mobile--pg-12px"
@@ -41,7 +41,7 @@ exports[`Card with custom views matches snapshot 1`] = `
     className="dy-flex fdn-column"
   >
     <div
-      borderBottomColor="color.gray.200"
+      borderBottomColor="color-gray-200"
       borderBottomStyle="solid"
       borderBottomWidth="1px"
       className="pg-16px cr- mobile--pg-12px pbm-16px"
@@ -88,7 +88,7 @@ exports[`Card with header and footer matches snapshot 1`] = `
     className="dy-flex fdn-column"
   >
     <div
-      borderBottomColor="color.gray.200"
+      borderBottomColor="color-gray-200"
       borderBottomStyle="solid"
       borderBottomWidth="1px"
       className="pg-16px cr- mobile--pg-12px"
@@ -105,7 +105,7 @@ exports[`Card with header and footer matches snapshot 1`] = `
       Content
     </div>
     <div
-      borderTopColor="color.gray.200"
+      borderTopColor="color-gray-200"
       borderTopStyle="solid"
       borderTopWidth="1px"
       className="pg-16px mobile--pg-12px"

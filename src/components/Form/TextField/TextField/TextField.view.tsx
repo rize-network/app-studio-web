@@ -54,7 +54,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
-  const IconColor = getColor('color.blueGray.700', {
+  const IconColor = getColor('color-blueGray-700', {
     themeMode: elementMode ? elementMode : themeMode,
   });
   const showLabel = !!(isFocused && label);
@@ -85,7 +85,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
 
     // Visual properties
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+    color: isDisabled ? 'color-gray-400' : 'color-gray-900',
 
     // State properties
     cursor: isDisabled ? 'not-allowed' : 'text',
@@ -138,7 +138,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         shadow={shadow}
         variant={variant}
         value={value}
-        color={'theme.primary'}
+        color={'theme-primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
@@ -152,7 +152,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
           {showLabel && (
             <FieldLabel
               htmlFor={id}
-              color={'theme.primary'}
+              color={'theme-primary'}
               error={error}
               {...views}
             >

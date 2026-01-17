@@ -93,11 +93,11 @@ import { Horizontal } from 'app-studio';
 
 export const ColoredLoaders = () => (
   <Horizontal gap={30}>
-    <Loader loaderColor="color.blue.500" />
-    <Loader loaderColor="color.emerald.500" />
-    <Loader loaderColor="color.red.500" />
-    <Loader loaderColor="color.amber.500" />
-    <Loader loaderColor="color.violet.500" />
+    <Loader loaderColor="color-blue-500" />
+    <Loader loaderColor="color-emerald-500" />
+    <Loader loaderColor="color-red-500" />
+    <Loader loaderColor="color-amber-500" />
+    <Loader loaderColor="color-violet-500" />
   </Horizontal>
 );
 ```
@@ -170,8 +170,8 @@ import { Loader } from '@app-studio/web';
 
 export const ColoredTextLoader = () => (
   <Loader 
-    loaderColor="color.blue.500" 
-    textColor="color.blue.500"
+    loaderColor="color-blue-500" 
+    textColor="color-blue-500"
   >
     Loading...
   </Loader>
@@ -298,31 +298,31 @@ export const LoaderShowcase = () => (
     <Vertical gap={15}>
       <Text fontWeight="bold">Spinner Variants</Text>
       <Horizontal gap={20}>
-        <Loader type="spinner" size="sm" loaderColor="color.blue.500" />
-        <Loader type="spinner" size="md" loaderColor="color.emerald.500" />
-        <Loader type="spinner" size="lg" loaderColor="color.red.500" />
+        <Loader type="spinner" size="sm" loaderColor="color-blue-500" />
+        <Loader type="spinner" size="md" loaderColor="color-emerald-500" />
+        <Loader type="spinner" size="lg" loaderColor="color-red-500" />
       </Horizontal>
     </Vertical>
     
     <Vertical gap={15}>
       <Text fontWeight="bold">Dotted Variants</Text>
       <Horizontal gap={20}>
-        <Loader type="dotted" size="sm" loaderColor="color.blue.500" />
-        <Loader type="dotted" size="md" loaderColor="color.emerald.500" />
-        <Loader type="dotted" size="lg" loaderColor="color.red.500" />
+        <Loader type="dotted" size="sm" loaderColor="color-blue-500" />
+        <Loader type="dotted" size="md" loaderColor="color-emerald-500" />
+        <Loader type="dotted" size="lg" loaderColor="color-red-500" />
       </Horizontal>
     </Vertical>
     
     <Vertical gap={15}>
       <Text fontWeight="bold">With Text</Text>
       <Horizontal gap={30}>
-        <Loader type="spinner" loaderColor="color.blue.500" textColor="color.blue.500">
+        <Loader type="spinner" loaderColor="color-blue-500" textColor="color-blue-500">
           Loading...
         </Loader>
         <Loader 
           type="dotted" 
-          loaderColor="color.emerald.500" 
-          textColor="color.emerald.500"
+          loaderColor="color-emerald-500" 
+          textColor="color-emerald-500"
           textPosition="right"
         >
           Processing

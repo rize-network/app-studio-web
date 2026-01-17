@@ -156,8 +156,8 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                 flexGrow={1}
                 color={
                   selectedItem.label === placeholder
-                    ? 'color.gray.500'
-                    : 'color.gray.800'
+                    ? 'color-gray-500'
+                    : 'color-gray-800'
                 }
                 style={{
                   whiteSpace: 'nowrap',
@@ -174,7 +174,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
               <ChevronIcon
                 widthHeight={16}
                 orientation={isDropdownVisible ? 'up' : 'down'}
-                color="color.gray.500"
+                color="color-gray-500"
               />
             </Horizontal>
           </FieldContent>
@@ -183,7 +183,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           <View
             ref={dropdownRef}
             id="combobox-dropdown"
-            backgroundColor="color.white"
+            backgroundColor="color-white"
             boxShadow="rgba(0, 0, 0, 0.16) 0px 4px 16px"
             overflowY="auto"
             borderRadius="8px"
@@ -203,7 +203,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                   onChange={(value) => handleSearch(value)}
                   hint={placeholder || 'Search...'}
                   isClearable={false}
-                  left={<SearchIcon widthHeight={16} color="color.gray.400" />}
+                  left={<SearchIcon widthHeight={16} color="color-gray-400" />}
                   views={{
                     container: {
                       width: '100%',
@@ -228,7 +228,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                     borderRadius={4}
                     backgroundColor={
                       index === highlightedIndex
-                        ? 'color.gray.100'
+                        ? 'color-gray-100'
                         : 'transparent'
                     }
                     onMouseEnter={() => setHighlightedIndex(index)}
@@ -236,13 +236,13 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                     transition="background-color 0.2s"
                     {...views?.item}
                   >
-                    <Text color="color.gray.800">{item.label}</Text>
+                    <Text color="color-gray-800">{item.label}</Text>
                     <>
                       {item.icon && item.icon}
                       {item.value === selectedItem.value &&
                         showTick &&
                         !item.icon && (
-                          <TickIcon widthHeight={16} color="theme.primary" />
+                          <TickIcon widthHeight={16} color="theme-primary" />
                         )}
                     </>
                   </Horizontal>
@@ -251,7 +251,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             )}
             {filteredItems.length === 0 && (
               <View padding="12px">
-                <Text color="color.gray.500" align="center">
+                <Text color="color-gray-500" align="center">
                   No items found
                 </Text>
               </View>

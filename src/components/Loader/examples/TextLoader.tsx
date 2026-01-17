@@ -3,9 +3,9 @@ import { Loader } from '../../Loader/Loader';
 
 export const TextLoader = () => (
   <Loader
-    textColor="theme.secondary"
+    textColor="theme-secondary"
     textPosition="left"
-    loaderColor="theme.secondary"
+    loaderColor="theme-secondary"
   >
     Loader
   </Loader>

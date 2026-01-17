@@ -71,7 +71,7 @@ export const DefaultContextMenu = () => {
       <ContextMenu items={items}>
         <View
           padding={20}
-          backgroundColor="color.gray.100"
+          backgroundColor="color-gray-100"
           borderRadius={8}
           textAlign="center"
           cursor="context-menu"

@@ -23,29 +23,29 @@ export const CustomizedSidebar = () => {
           collapsedWidth="80px"
           views={{
             container: {
-              backgroundColor: 'color.blue.800',
-              color: 'color.white',
+              backgroundColor: 'color-blue-800',
+              color: 'color-white',
               borderRight: 'none',
             },
             header: {
-              borderBottomColor: 'color.blue.700',
-              backgroundColor: 'color.blue.900',
+              borderBottomColor: 'color-blue-700',
+              backgroundColor: 'color-blue-900',
             },
             content: {
               padding: '20px',
             },
             footer: {
-              borderTopColor: 'color.blue.700',
-              backgroundColor: 'color.blue.900',
+              borderTopColor: 'color-blue-700',
+              backgroundColor: 'color-blue-900',
             },
             toggleButton: {
-              backgroundColor: 'color.blue.700',
+              backgroundColor: 'color-blue-700',
               on: {
-                hover: { backgroundColor: 'color.blue.600' },
+                hover: { backgroundColor: 'color-blue-600' },
               },
             },
             toggleButtonIcon: {
-              color: 'color.white',
+              color: 'color-white',
             },
           }}
         >
@@ -72,12 +72,12 @@ export const CustomizedSidebar = () => {
             </Vertical>
           </Sidebar.Content>
           <Sidebar.Footer>
-            <Text size="sm" color="color.blue.300">
+            <Text size="sm" color="color-blue-300">
               Custom themed sidebar
             </Text>
           </Sidebar.Footer>
         </Sidebar>
-        <View flex="1" padding="16px" backgroundColor="color.gray.50">
+        <View flex="1" padding="16px" backgroundColor="color-gray-50">
           <Text fontWeight="bold" size="xl" marginBottom="16px">
             Main Content
           </Text>

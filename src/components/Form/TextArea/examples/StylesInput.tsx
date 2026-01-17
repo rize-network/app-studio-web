@@ -22,12 +22,12 @@ export const StyledArea = () => {
             container: {
               borderRadius: 8,
               padding: 5,
-              borderColor: 'theme.primary',
+              borderColor: 'theme-primary',
               borderStyle: 'solid',
               borderWidth: 1,
             },
-            field: { color: 'theme.primary', padding: 0 },
-            label: { color: 'theme.primary' },
+            field: { color: 'theme-primary', padding: 0 },
+            label: { color: 'theme-primary' },
           }}
         />
         <Button type="submit" height="40px" isAuto>

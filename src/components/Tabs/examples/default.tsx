@@ -13,9 +13,9 @@ import { Tabs } from '../Tabs';
 export const Default = () => {
   const { themeMode } = useTheme();
 
-  const contentBg = themeMode === 'light' ? 'color.white' : 'color.gray.800';
-  const dummyBg = themeMode === 'light' ? 'color.gray.100' : 'color.gray.900';
-  const textColor = themeMode === 'light' ? 'color.gray.900' : 'color.gray.100';
+  const contentBg = themeMode === 'light' ? 'color-white' : 'color-gray-800';
+  const dummyBg = themeMode === 'light' ? 'color-gray-100' : 'color-gray-900';
+  const textColor = themeMode === 'light' ? 'color-gray-900' : 'color-gray-100';
 
   const renderContent = (title: string) => (
     <View
@@ -23,7 +23,7 @@ export const Default = () => {
       backgroundColor={contentBg}
       borderRadius={8}
       border="1px solid"
-      borderColor={themeMode === 'light' ? 'color.gray.200' : 'color.gray.700'}
+      borderColor={themeMode === 'light' ? 'color-gray-200' : 'color-gray-700'}
     >
       <Text heading="h5" color={textColor} marginBottom={16}>
         {title}
@@ -37,10 +37,10 @@ export const Default = () => {
         justifyContent="center"
         border="1px dashed"
         borderColor={
-          themeMode === 'light' ? 'color.gray.300' : 'color.gray.700'
+          themeMode === 'light' ? 'color-gray-300' : 'color-gray-700'
         }
       >
-        <Text color="color.gray.500">Dummy Content Area</Text>
+        <Text color="color-gray-500">Dummy Content Area</Text>
       </View>
     </View>
   );

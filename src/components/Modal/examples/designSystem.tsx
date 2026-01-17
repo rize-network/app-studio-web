@@ -127,7 +127,7 @@ export const DesignSystemModal = () => {
               </Text>
               <View
                 flex={1}
-                backgroundColor="color.gray.50"
+                backgroundColor="color-gray-50"
                 borderRadius="8px"
                 padding={16}
                 marginVertical={16}
@@ -255,29 +255,29 @@ export const DesignSystemModal = () => {
           onClose={() => setIsCustomModalOpen(false)}
           views={{
             container: {
-              backgroundColor: 'color.blue.50',
+              backgroundColor: 'color-blue-50',
               borderRadius: '16px',
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
             },
           }}
         >
           <Modal.Header
-            buttonColor="color.blue.600"
+            buttonColor="color-blue-600"
             views={{
               header: {
-                backgroundColor: 'color.blue.100',
-                borderBottomColor: 'color.blue.200',
+                backgroundColor: 'color-blue-100',
+                borderBottomColor: 'color-blue-200',
               },
             }}
           >
-            <Text size="xl" fontWeight="600" color="color.blue.800">
+            <Text size="xl" fontWeight="600" color="color-blue-800">
               Custom Styled Modal
             </Text>
           </Modal.Header>
           <Modal.Body
             views={{
               view: {
-                color: 'color.blue.800',
+                color: 'color-blue-800',
               },
             }}
           >
@@ -290,14 +290,14 @@ export const DesignSystemModal = () => {
           <Modal.Footer
             views={{
               container: {
-                backgroundColor: 'color.blue.100',
-                borderTopColor: 'color.blue.200',
+                backgroundColor: 'color-blue-100',
+                borderTopColor: 'color-blue-200',
               },
             }}
           >
             <Button
-              backgroundColor="color.blue.600"
-              _hover={{ backgroundColor: 'color.blue.700' }}
+              backgroundColor="color-blue-600"
+              _hover={{ backgroundColor: 'color-blue-700' }}
               onClick={() => setIsCustomModalOpen(false)}
             >
               Close

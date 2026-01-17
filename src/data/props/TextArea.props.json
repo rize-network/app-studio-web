@@ -4,7 +4,7 @@
     "type": "string",
     "typeValues": [],
     "description": "Optional color scheme for the component.",
-    "defaultValue": "theme.primary"
+    "defaultValue": "theme-primary"
   },
   "defaultValue": {
     "type": "string",

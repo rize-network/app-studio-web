@@ -17,25 +17,25 @@ export const CustomDemo = () => {
         step={5}
         views={{
           track: {
-            backgroundColor: 'color.purple.200',
+            backgroundColor: 'color-purple-200',
             height: 10,
             borderRadius: 5,
           },
           progress: {
-            backgroundColor: 'color.purple.500',
+            backgroundColor: 'color-purple-500',
           },
           thumb: {
-            backgroundColor: 'color.white',
-            border: '2px solid color.purple.500',
+            backgroundColor: 'color-white',
+            border: '2px solid color-purple-500',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
           },
           label: {
-            color: 'color.purple.700',
+            color: 'color-purple-700',
             fontWeight: 600,
           },
           valueLabel: {
-            backgroundColor: 'color.purple.500',
-            color: 'color.white',
+            backgroundColor: 'color-purple-500',
+            color: 'color-white',
             padding: '2px 8px',
             borderRadius: 4,
           },

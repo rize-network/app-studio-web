@@ -32,7 +32,7 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
   // Access theme if needed for future enhancements
   const { themeMode } = useTheme();
   // Use provided color or default from theme
-  const separatorColor = color || 'color.gray.200';
+  const separatorColor = color || 'color-gray-200';
   const borderStyle = SeparatorVariants[variant];
   const borderWidth = SeparatorThicknesses[thickness];
 

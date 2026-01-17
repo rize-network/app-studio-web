@@ -50,36 +50,36 @@ export const SidebarSizes: Record<
 export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
   return {
     default: {
-      backgroundColor: 'color.white',
-      color: 'color.gray.800',
+      backgroundColor: 'color-white',
+      color: 'color-gray-800',
 
       transition: 'all 0.2s ease',
     },
     filled: {
-      backgroundColor: 'color.gray.100',
-      color: 'color.gray.800',
+      backgroundColor: 'color-gray-100',
+      color: 'color-gray-800',
 
       transition: 'all 0.2s ease',
     },
     outline: {
-      backgroundColor: 'color.white',
+      backgroundColor: 'color-white',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'color.gray.200',
-      color: 'color.gray.800',
+      borderColor: 'color-gray-200',
+      color: 'color-gray-800',
 
       transition: 'all 0.2s ease',
     },
     subtle: {
-      backgroundColor: 'color.gray.50',
-      color: 'color.gray.800',
+      backgroundColor: 'color-gray-50',
+      color: 'color-gray-800',
 
       transition: 'all 0.2s ease',
     },
     elevated: {
-      backgroundColor: 'color.white',
+      backgroundColor: 'color-white',
       boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-      color: 'color.gray.800',
+      color: 'color-gray-800',
 
       transition: 'all 0.2s ease',
     },
@@ -98,13 +98,13 @@ export const SidebarPositions: Record<Position, ViewProps> = {
     left: 0,
     borderRightWidth: '1px',
     borderRightStyle: 'solid',
-    borderRightColor: 'color.gray.200',
+    borderRightColor: 'color-gray-200',
   },
   right: {
     right: 0,
     borderLeftWidth: '1px',
     borderLeftStyle: 'solid',
-    borderLeftColor: 'color.gray.200',
+    borderLeftColor: 'color-gray-200',
   },
 };
 
@@ -139,18 +139,18 @@ export const SidebarTransitions: Record<TransitionPreset, string> = {
  * Active item styles for the Sidebar navigation items
  */
 export const SidebarItemActive: ViewProps = {
-  backgroundColor: 'color.blue.50',
-  color: 'color.blue.700',
+  backgroundColor: 'color-blue-50',
+  color: 'color-blue-700',
   fontWeight: '600', // Semi-bold for active items
   borderLeftWidth: '3px',
   borderLeftStyle: 'solid',
-  borderLeftColor: 'color.blue.600',
+  borderLeftColor: 'color-blue-600',
 };
 
 /**
  * Hover styles for the Sidebar navigation items
  */
 export const SidebarItemHover: ViewProps = {
-  backgroundColor: 'color.gray.100',
+  backgroundColor: 'color-gray-100',
   transition: 'background-color 0.2s ease',
 };

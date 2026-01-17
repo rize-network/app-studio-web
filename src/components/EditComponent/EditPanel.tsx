@@ -41,7 +41,7 @@ export const EditPanel: React.FC<EditPanelProps> = ({
   const renderFontsForm = () => (
     <Vertical gap={16}>
       <Vertical gap={8}>
-        <Text fontSize="12px" color="color.gray.500" fontWeight="600">
+        <Text fontSize="12px" color="color-gray-500" fontWeight="600">
           TITLE
         </Text>
         <MockSelect
@@ -52,7 +52,7 @@ export const EditPanel: React.FC<EditPanelProps> = ({
       </Vertical>
 
       <Vertical gap={8}>
-        <Text fontSize="12px" color="color.gray.500" fontWeight="600">
+        <Text fontSize="12px" color="color-gray-500" fontWeight="600">
           LABEL
         </Text>
         <MockSelect
@@ -66,7 +66,7 @@ export const EditPanel: React.FC<EditPanelProps> = ({
       </Vertical>
 
       <Vertical gap={8}>
-        <Text fontSize="12px" color="color.gray.500" fontWeight="600">
+        <Text fontSize="12px" color="color-gray-500" fontWeight="600">
           DESCRIPTION
         </Text>
         <MockSelect

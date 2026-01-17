@@ -202,9 +202,9 @@ Individual components can override the theme mode:
 The library uses a comprehensive theme system with:
 
 #### Color Palette
-- **Semantic Colors**: `theme.primary`, `theme.secondary`, `theme.success`, `theme.warning`, `theme.error`, `theme.info`, `theme.disabled`
-- **Neutral Colors**: `color.white`, `color.black`, `color.gray.50` through `color.gray.900`
-- **Color Scales**: `color.blue`, `color.green`, `color.red`, `color.yellow`, `color.purple` (50-900)
+- **Semantic Colors**: `theme-primary`, `theme-secondary`, `theme-success`, `theme-warning`, `theme-error`, `theme-info`, `theme-disabled`
+- **Neutral Colors**: `color-white`, `color-black`, `color-gray.50` through `color-gray-900`
+- **Color Scales**: `color-blue`, `color-green`, `color-red`, `color-yellow`, `color-purple` (50-900)
 
 #### Typography
 - **Font Family**: Inter/Geist
@@ -485,8 +485,8 @@ The Title component supports advanced text animations and highlighting:
   size="lg"
   highlightText="Amazing"
   highlightStyle="gradient"
-  highlightColor="theme.primary"
-  highlightSecondaryColor="theme.secondary"
+  highlightColor="theme-primary"
+  highlightSecondaryColor="theme-secondary"
 >
   This is Amazing
 </Title>
@@ -499,7 +499,7 @@ The Title component supports advanced text animations and highlighting:
   highlightTypewriter={true}
   highlightTypewriterDuration={2000}
   highlightStyle="glow"
-  highlightColor="theme.primary"
+  highlightColor="theme-primary"
 >
   Watch the Typewriter effect
 </Title>
@@ -513,7 +513,7 @@ The Title component supports advanced text animations and highlighting:
   highlightSlideSequential={true}
   highlightSlideStagger={200}
   highlightStyle="underline"
-  highlightColor="theme.primary"
+  highlightColor="theme-primary"
 >
   Sequential Slide Effect Multiple
 </Title>
@@ -527,7 +527,7 @@ The Title component supports advanced text animations and highlighting:
   alternateAnimation={true}
   alternateDuration={2000}
   highlightStyle="background"
-  highlightColor="theme.success"
+  highlightColor="theme-success"
 >
   This is Amazing
 </Title>
@@ -684,8 +684,8 @@ Multiple background effects for visual appeal:
 **Gradient Background:**
 ```tsx
 <Background.Gradient
-  from="color.blue.500"
-  to="color.purple.500"
+  from="color-blue-500"
+  to="color-purple-500"
   height="200px"
   animate={true}
   animationDuration={4}
@@ -699,9 +699,9 @@ Multiple background effects for visual appeal:
 <Background.Gradient
   type="radial"
   colors={[
-    { color: 'color.red.500', position: '0%' },
-    { color: 'color.orange.500', position: '50%' },
-    { color: 'color.yellow.500', position: '100%' },
+    { color: 'color-red-500', position: '0%' },
+    { color: 'color-orange-500', position: '50%' },
+    { color: 'color-yellow-500', position: '100%' },
   ]}
   height="200px"
   shape="ellipse"
@@ -898,17 +898,17 @@ confirmPassword: Yup.string()
 ### Using Theme Colors
 ```tsx
 // Semantic colors
-<Button backgroundColor="theme.primary">Primary Button</Button>
-<Text color="theme.error">Error Message</Text>
-<Badge backgroundColor="theme.success">Success</Badge>
+<Button backgroundColor="theme-primary">Primary Button</Button>
+<Text color="theme-error">Error Message</Text>
+<Badge backgroundColor="theme-success">Success</Badge>
 
 // Color scales
-<View backgroundColor="color.blue.500">Blue Background</View>
-<Text color="color.gray.700">Gray Text</Text>
+<View backgroundColor="color-blue-500">Blue Background</View>
+<Text color="color-gray-700">Gray Text</Text>
 
 // Neutral colors
-<View backgroundColor="color.white" borderColor="color.gray.200">
-  <Text color="color.black">Content</Text>
+<View backgroundColor="color-white" borderColor="color-gray-200">
+  <Text color="color-black">Content</Text>
 </View>
 ```
 
@@ -1011,7 +1011,7 @@ import { ThemeProvider } from 'app-studio';
 
 ### Hero Section
 ```tsx
-<Background.Gradient from="color.blue.600" to="color.purple.600" height="600px">
+<Background.Gradient from="color-blue-600" to="color-purple-600" height="600px">
   <Center height="100%">
     <Vertical gap={32} alignItems="center" maxWidth={800} padding={40}>
       <Title 
@@ -1019,8 +1019,8 @@ import { ThemeProvider } from 'app-studio';
         responsive={true}
         highlightText="Revolutionary"
         highlightStyle="gradient"
-        highlightColor="color.yellow.400"
-        highlightSecondaryColor="color.orange.400"
+        highlightColor="color-yellow-400"
+        highlightSecondaryColor="color-orange-400"
         textAlign="center"
       >
         Build Revolutionary Apps
@@ -1057,9 +1057,9 @@ import { ThemeProvider } from 'app-studio';
       >
         <Card.Content>
           <Vertical gap={16} alignItems="center" textAlign="center">
-            <Icon name={feature.icon} size={48} color="theme.primary" />
+            <Icon name={feature.icon} size={48} color="theme-primary" />
             <Title size="md">{feature.title}</Title>
-            <Text color="color.gray.600">{feature.description}</Text>
+            <Text color="color-gray-600">{feature.description}</Text>
           </Vertical>
         </Card.Content>
       </Card>
@@ -1104,7 +1104,7 @@ import { ThemeProvider } from 'app-studio';
     <Card key={stat.id} variant="filled" size="md" flex={1} minWidth={200}>
       <Card.Content>
         <Vertical gap={8}>
-          <Text fontSize={14} color="color.gray.600">{stat.label}</Text>
+          <Text fontSize={14} color="color-gray-600">{stat.label}</Text>
           <Title size="xl" highlightText={stat.value} highlightStyle="gradient">
             {stat.value}
           </Title>
@@ -1112,7 +1112,7 @@ import { ThemeProvider } from 'app-studio';
             <Badge variant={stat.trend === 'up' ? 'success' : 'error'}>
               {stat.change}
             </Badge>
-            <Text fontSize={12} color="color.gray.500">vs last month</Text>
+            <Text fontSize={12} color="color-gray-500">vs last month</Text>
           </Horizontal>
         </Vertical>
       </Card.Content>
@@ -1159,7 +1159,7 @@ Group related components together and use proper hierarchy:
 ### 3. Use Semantic Prop Values
 ```tsx
 // Good - using theme colors
-<Button backgroundColor="theme.primary" color="color.white">Submit</Button>
+<Button backgroundColor="theme-primary" color="color-white">Submit</Button>
 
 // Avoid - using hardcoded colors
 <Button backgroundColor="#0066cc" color="#ffffff">Submit</Button>
@@ -1242,7 +1242,7 @@ For detailed documentation on each component, refer to:
 - Ensure `validationSchema` is passed to Formik
 
 **Issue: Theme colors not applying**
-- Use correct theme token format: `theme.primary`, `color.blue.500`
+- Use correct theme token format: `theme-primary`, `color-blue-500`
 - Check ThemeProvider is wrapping your app
 - Verify color exists in theme palette
 

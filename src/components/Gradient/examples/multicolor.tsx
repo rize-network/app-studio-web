@@ -12,9 +12,9 @@ export const MulticolorDemo = () => (
       <Gradient
         type="linear"
         colors={[
-          { color: 'color.blue.500', position: '0%' },
-          { color: 'color.purple.500', position: '50%' },
-          { color: 'color.pink.500', position: '100%' },
+          { color: 'color-blue-500', position: '0%' },
+          { color: 'color-purple-500', position: '50%' },
+          { color: 'color-pink-500', position: '100%' },
         ]}
         height="100px"
         width="100%"
@@ -26,13 +26,13 @@ export const MulticolorDemo = () => (
       <Gradient
         type="linear"
         colors={[
-          { color: 'color.red.500', position: '0%' },
-          { color: 'color.orange.500', position: '16.67%' },
-          { color: 'color.yellow.500', position: '33.33%' },
-          { color: 'color.green.500', position: '50%' },
-          { color: 'color.blue.500', position: '66.67%' },
-          { color: 'color.indigo.500', position: '83.33%' },
-          { color: 'color.purple.500', position: '100%' },
+          { color: 'color-red-500', position: '0%' },
+          { color: 'color-orange-500', position: '16.67%' },
+          { color: 'color-yellow-500', position: '33.33%' },
+          { color: 'color-green-500', position: '50%' },
+          { color: 'color-blue-500', position: '66.67%' },
+          { color: 'color-indigo-500', position: '83.33%' },
+          { color: 'color-purple-500', position: '100%' },
         ]}
         height="100px"
         width="100%"
@@ -44,9 +44,9 @@ export const MulticolorDemo = () => (
       <Gradient
         type="radial"
         colors={[
-          { color: 'color.yellow.300', position: '0%' },
-          { color: 'color.orange.500', position: '50%' },
-          { color: 'color.red.600', position: '100%' },
+          { color: 'color-yellow-300', position: '0%' },
+          { color: 'color-orange-500', position: '50%' },
+          { color: 'color-red-600', position: '100%' },
         ]}
         height="100px"
         width="100%"

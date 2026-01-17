@@ -25,7 +25,7 @@ export const StepValuesDemo = () => {
 
       <Horizontal justifyContent="space-between" width="100%">
         {stepValues.map((step) => (
-          <Text key={step} fontSize={12} color="color.blueGray.500">
+          <Text key={step} fontSize={12} color="color-blueGray-500">
             {step}
           </Text>
         ))}
@@ -55,19 +55,19 @@ export const PricingTiersDemo = () => {
         showValue
         views={{
           track: {
-            backgroundColor: 'color.green.100',
+            backgroundColor: 'color-green-100',
             height: 8,
           },
           progress: {
-            backgroundColor: 'color.green.500',
+            backgroundColor: 'color-green-500',
           },
           thumb: {
-            backgroundColor: 'color.white',
-            border: '2px solid color.green.500',
+            backgroundColor: 'color-white',
+            border: '2px solid color-green-500',
           },
           valueLabel: {
-            backgroundColor: 'color.green.500',
-            color: 'color.white',
+            backgroundColor: 'color-green-500',
+            color: 'color-white',
             padding: '2px 8px',
             borderRadius: 4,
             fontWeight: 600,
@@ -75,7 +75,7 @@ export const PricingTiersDemo = () => {
           stepMarks: {
             width: 6,
             height: 6,
-            backgroundColor: 'color.green.700',
+            backgroundColor: 'color-green-700',
           },
         }}
       />
@@ -85,7 +85,7 @@ export const PricingTiersDemo = () => {
           <Text
             key={price}
             fontSize={12}
-            color="color.green.700"
+            color="color-green-700"
             fontWeight={500}
           >
             ${price}
@@ -93,7 +93,7 @@ export const PricingTiersDemo = () => {
         ))}
       </Horizontal>
 
-      <Text fontSize={14} color="color.blueGray.600" textAlign="center">
+      <Text fontSize={14} color="color-blueGray-600" textAlign="center">
         Selected Plan: ${value}/month
       </Text>
     </Vertical>

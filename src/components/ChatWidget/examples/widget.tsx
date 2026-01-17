@@ -17,11 +17,11 @@ export function WidgetDemo() {
         <Text fontSize="18px" fontWeight="bold">
           Interactive Widget Demo
         </Text>
-        <Text color="color.gray.600">
+        <Text color="color-gray-600">
           The widget is fixed to the bottom-right of this container (visually
           simulating a page). Click the floating action button to open the chat.
         </Text>
-        <Text color="color.gray.600">
+        <Text color="color-gray-600">
           Try the &quot;Plus&quot; icon in the chat input to enter &quot;Context
           Selection Mode&quot; and pick elements on this page.
         </Text>
@@ -34,7 +34,7 @@ export function WidgetDemo() {
         <View display="flex" gap="16px" flexWrap="wrap" marginTop="24px">
           <View
             padding="16px"
-            backgroundColor="color.blue.100"
+            backgroundColor="color-blue-100"
             borderRadius="8px"
             id="box-1"
           >
@@ -42,7 +42,7 @@ export function WidgetDemo() {
           </View>
           <View
             padding="16px"
-            backgroundColor="color.green.100"
+            backgroundColor="color-green-100"
             borderRadius="8px"
             id="box-2"
           >
@@ -50,7 +50,7 @@ export function WidgetDemo() {
           </View>
           <View
             padding="16px"
-            backgroundColor="color.purple.100"
+            backgroundColor="color-purple-100"
             borderRadius="8px"
             id="text-element"
           >

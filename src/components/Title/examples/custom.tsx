@@ -20,7 +20,7 @@ export const CustomTitle = () => {
       }}
       highlightText="Custom"
       highlightStyle="background"
-      highlightColor="color.purple.500"
+      highlightColor="color-purple-500"
     >
       Title with Custom Styling
     </Title>

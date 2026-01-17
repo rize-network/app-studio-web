@@ -22,7 +22,7 @@ export const IconPage = () => {
           <Text fontSize={32} fontWeight={700}>
             Icon Library
           </Text>
-          <Text color="theme.text.dim">
+          <Text color="theme-text">
             Explore the comprehensive set of icons available in App Studio.
           </Text>
         </Vertical>
@@ -33,9 +33,9 @@ export const IconPage = () => {
           padding={12}
           borderRadius={8}
           border="1px solid"
-          borderColor="theme.border"
-          backgroundColor="theme.input"
-          color="theme.text"
+          borderColor="theme-border"
+          backgroundColor="theme-input"
+          color="theme-text"
           outline="none"
           maxWidth={400}
           value={search}
@@ -50,7 +50,7 @@ export const IconPage = () => {
             <Icons.Icon name="activity" widthHeight={32} color="red" />
             <Icons.Icon name="aperture" widthHeight={32} color="green" />
             <Icons.Icon name="anchor" widthHeight={32} color="blue" />
-            <Text color="theme.text.dim">
+            <Text color="theme-text">
               {`<Icon name="..." /> can render any Lucide icon dynamically.`}
             </Text>
           </Horizontal>
@@ -73,14 +73,14 @@ export const IconPage = () => {
                   padding={16}
                   borderRadius={12}
                   border="1px solid"
-                  borderColor="theme.primary"
+                  borderColor="theme-primary"
                   alignItems="center"
                   justifyContent="center"
                   gap={12}
                   display="flex"
                   flexDirection="column"
                   hoverStyle={{
-                    borderColor: 'theme.primary',
+                    borderColor: 'theme-primary',
                     transform: 'translateY(-2px)',
                     boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
                   }}

@@ -179,7 +179,7 @@ export const PaginationView: React.FC<PaginationProps> = ({
 
       {/* Page information */}
       {showPageInfo && (
-        <Text marginLeft={16} color="color.gray.600" {...views?.pageInfo}>
+        <Text marginLeft={16} color="color-gray-600" {...views?.pageInfo}>
           Page {currentPage} of {totalPages}
         </Text>
       )}
@@ -193,8 +193,8 @@ export const PaginationView: React.FC<PaginationProps> = ({
           borderRadius="4px"
           borderWidth="1px"
           borderStyle="solid"
-          borderColor="color.gray.200"
-          backgroundColor="color.white"
+          borderColor="color-gray-200"
+          backgroundColor="color-white"
           cursor="pointer"
           value={pageSize}
           onChange={handlePageSizeChange}

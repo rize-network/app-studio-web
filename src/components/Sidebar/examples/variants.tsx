@@ -44,7 +44,7 @@ export const SidebarVariants = () => {
                 </Vertical>
               </Sidebar.Content>
             </Sidebar>
-            <View flex="1" padding="16px" backgroundColor="color.gray.50">
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
               <Text>Main Content</Text>
             </View>
           </Horizontal>
@@ -85,7 +85,7 @@ export const SidebarVariants = () => {
                 </Vertical>
               </Sidebar.Content>
             </Sidebar>
-            <View flex="1" padding="16px" backgroundColor="color.gray.50">
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
               <Text>Main Content</Text>
             </View>
           </Horizontal>
@@ -126,7 +126,7 @@ export const SidebarVariants = () => {
                 </Vertical>
               </Sidebar.Content>
             </Sidebar>
-            <View flex="1" padding="16px" backgroundColor="color.gray.50">
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
               <Text>Main Content</Text>
             </View>
           </Horizontal>

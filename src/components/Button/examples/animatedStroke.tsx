@@ -10,8 +10,8 @@ export const AnimatedStrokeButtons = () => (
     <Button
       animation="animatedStroke"
       variant="ghost"
-      animatedStrokeAccentColor="color.red.400"
-      animatedStrokeTextColor="color.red.400"
+      animatedStrokeAccentColor="color-red-400"
+      animatedStrokeTextColor="color-red-400"
     >
       Custom Red
     </Button>
@@ -19,7 +19,7 @@ export const AnimatedStrokeButtons = () => (
       animation="animatedStroke"
       variant="ghost"
       animatedStrokeAccentColor="#2dd4bf"
-      animatedStrokeTextColor="color.blueGray.800"
+      animatedStrokeTextColor="color-blueGray-800"
     >
       Teal Stroke
     </Button>

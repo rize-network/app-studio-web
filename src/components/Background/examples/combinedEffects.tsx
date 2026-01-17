@@ -11,7 +11,7 @@ export const CombinedEffectsDemo = () => (
     </Text>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Aurora with Interactive Elements
       </Text>
       <Background.Aurora height="400px" showRadialGradient={true}>
@@ -54,7 +54,7 @@ export const CombinedEffectsDemo = () => (
     </Vertical>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Meteors with Content Overlay
       </Text>
       <Background.Meteors number={25} width={600} height={300}>
@@ -79,7 +79,7 @@ export const CombinedEffectsDemo = () => (
     </Vertical>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Multiple Interactive Elements
       </Text>
       <Horizontal gap={16} flexWrap="wrap" justifyContent="center">
@@ -95,8 +95,8 @@ export const CombinedEffectsDemo = () => (
         <Button
           animation="animatedStroke"
           variant="ghost"
-          animatedStrokeAccentColor="color.purple.500"
-          animatedStrokeTextColor="color.purple.700"
+          animatedStrokeAccentColor="color-purple-500"
+          animatedStrokeTextColor="color-purple-700"
         >
           Hover Effect
         </Button>

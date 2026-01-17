@@ -76,10 +76,10 @@ describe('CountryPicker component', () => {
           shape="pill"
           variant="outline"
           views={{
-            text: { color: 'theme.primary' },
+            text: { color: 'theme-primary' },
             icon: { width: 0.2 },
             label: { fontSize: 15 },
-            dropDown: { backgroundColor: 'theme.primary' },
+            dropDown: { backgroundColor: 'theme-primary' },
             helperText: { color: 'red' },
           }}
         />
@@ -200,11 +200,11 @@ describe('DropDown component', () => {
     //   const optionElement = screen.getByText(option);
     //   fireEvent.mouseEnter(optionElement);
 
-    //   expect(optionElement).toHaveStyle('background-color: color.trueGray.100');
+    //   expect(optionElement).toHaveStyle('background-color: color-trueGray-100');
 
     //   fireEvent.mouseLeave(optionElement);
 
-    //   expect(optionElement).not.toHaveStyle('background-color: color.trueGray.100');
+    //   expect(optionElement).not.toHaveStyle('background-color: color-trueGray-100');
     // });
 
     // test('renders DropDownItem component with provided size', () => {

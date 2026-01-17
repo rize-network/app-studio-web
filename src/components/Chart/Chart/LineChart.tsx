@@ -256,14 +256,14 @@ export const LineChart: React.FC<LineChartProps> = ({
                     </View>
                     <Text
                       marginTop="4px"
-                      color="color.gray.500"
+                      color="color-gray-500"
                       fontSize="12px"
                     >
                       {categoryLabel}
                     </Text>
                     <View marginTop="8px" display="flex" flexDirection="column">
                       <View display="flex" justifyContent="space-between">
-                        <Text color="color.gray.500">Value</Text>
+                        <Text color="color-gray-500">Value</Text>
                         <Text fontWeight="medium">
                           {value.toLocaleString()}
                         </Text>
@@ -274,7 +274,7 @@ export const LineChart: React.FC<LineChartProps> = ({
                           display="flex"
                           justifyContent="space-between"
                         >
-                          <Text color="color.gray.500">Change</Text>
+                          <Text color="color-gray-500">Change</Text>
                           <Text fontWeight="medium">{formattedDelta}</Text>
                         </View>
                       )}
@@ -284,7 +284,7 @@ export const LineChart: React.FC<LineChartProps> = ({
                           display="flex"
                           justifyContent="space-between"
                         >
-                          <Text color="color.gray.500">Share</Text>
+                          <Text color="color-gray-500">Share</Text>
                           <Text fontWeight="medium">{`${sharePercentage}%`}</Text>
                         </View>
                       )}
@@ -293,7 +293,7 @@ export const LineChart: React.FC<LineChartProps> = ({
                         display="flex"
                         justifyContent="space-between"
                       >
-                        <Text color="color.gray.500">Category total</Text>
+                        <Text color="color-gray-500">Category total</Text>
                         <Text fontWeight="medium">
                           {categoryTotal.toLocaleString()}
                         </Text>

@@ -193,12 +193,12 @@ export const BarChart: React.FC<BarChartProps> = ({
                       backgroundColor={fillColor}
                     />
                   </View>
-                  <Text marginTop="4px" color="color.gray.500" fontSize="12px">
+                  <Text marginTop="4px" color="color-gray-500" fontSize="12px">
                     {categoryLabel}
                   </Text>
                   <View marginTop="8px" display="flex" flexDirection="column">
                     <View display="flex" justifyContent="space-between">
-                      <Text color="color.gray.500">Value</Text>
+                      <Text color="color-gray-500">Value</Text>
                       <Text fontWeight="medium">{value.toLocaleString()}</Text>
                     </View>
                     {sharePercentage !== null && (
@@ -207,7 +207,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                         display="flex"
                         justifyContent="space-between"
                       >
-                        <Text color="color.gray.500">Share</Text>
+                        <Text color="color-gray-500">Share</Text>
                         <Text fontWeight="medium">{`${sharePercentage}%`}</Text>
                       </View>
                     )}
@@ -216,7 +216,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                       display="flex"
                       justifyContent="space-between"
                     >
-                      <Text color="color.gray.500">Category total</Text>
+                      <Text color="color-gray-500">Category total</Text>
                       <Text fontWeight="medium">
                         {categoryTotal.toLocaleString()}
                       </Text>

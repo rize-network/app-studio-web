@@ -21,24 +21,24 @@ export const getCommand = (
 ): Record<CommandVariant, ViewProps> => {
   return {
     default: {
-      backgroundColor: 'color.white',
+      backgroundColor: 'color-white',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'color.gray.200',
+      borderColor: 'color-gray-200',
       boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
     },
     filled: {
-      backgroundColor: 'color.gray.50',
+      backgroundColor: 'color-gray-50',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'color.gray.200',
+      borderColor: 'color-gray-200',
       boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
     },
     outline: {
-      backgroundColor: 'color.white',
+      backgroundColor: 'color-white',
       borderWidth: '2px',
       borderStyle: 'solid',
-      borderColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
       boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
     },
   };
@@ -54,7 +54,7 @@ export const CommandInputStyles: ViewProps = {
   padding: '12px 16px',
   borderBottomWidth: '1px',
   borderBottomStyle: 'solid',
-  borderBottomColor: 'color.gray.200',
+  borderBottomColor: 'color-gray-200',
 };
 
 export const CommandListStyles: ViewProps = {
@@ -70,7 +70,7 @@ export const CommandGroupHeadingStyles: ViewProps = {
   padding: '8px 16px',
   fontSize: '12px',
   fontWeight: 'bold',
-  color: 'color.gray.500',
+  color: 'color-gray-500',
   textTransform: 'uppercase',
 };
 
@@ -83,14 +83,14 @@ export const CommandItemStyles: ViewProps = {
   borderRadius: '4px',
   margin: '0 8px',
   _hover: {
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
   },
 };
 
 export const CommandItemSelectedStyles: ViewProps = {
-  backgroundColor: 'color.blue.50',
+  backgroundColor: 'color-blue-50',
   _hover: {
-    backgroundColor: 'color.blue.100',
+    backgroundColor: 'color-blue-100',
   },
 };
 
@@ -107,7 +107,7 @@ export const CommandItemIconStyles: ViewProps = {
   alignItems: 'center',
   justifyContent: 'center',
   marginRight: '12px',
-  color: 'color.gray.500',
+  color: 'color-gray-500',
 };
 
 export const CommandItemContentStyles: ViewProps = {
@@ -123,7 +123,7 @@ export const CommandItemNameStyles: ViewProps = {
 
 export const CommandItemDescriptionStyles: ViewProps = {
   fontSize: '12px',
-  color: 'color.gray.500',
+  color: 'color-gray-500',
   marginTop: '2px',
 };
 
@@ -132,7 +132,7 @@ export const CommandItemShortcutStyles: ViewProps = {
   alignItems: 'center',
   marginLeft: '12px',
   fontSize: '12px',
-  color: 'color.gray.500',
+  color: 'color-gray-500',
 };
 
 export const CommandEmptyStyles: ViewProps = {
@@ -140,7 +140,7 @@ export const CommandEmptyStyles: ViewProps = {
   alignItems: 'center',
   justifyContent: 'center',
   padding: '16px',
-  color: 'color.gray.500',
+  color: 'color-gray-500',
   textAlign: 'center',
 };
 
@@ -151,7 +151,7 @@ export const CommandFooterStyles: ViewProps = {
   padding: '8px 16px',
   borderTopWidth: '1px',
   borderTopStyle: 'solid',
-  borderTopColor: 'color.gray.200',
+  borderTopColor: 'color-gray-200',
   fontSize: '12px',
-  color: 'color.gray.500',
+  color: 'color-gray-500',
 };

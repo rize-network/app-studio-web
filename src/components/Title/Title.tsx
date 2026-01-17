@@ -20,7 +20,7 @@ import TitleView from './Title/Title.view';
  *
  * @example
  * // With highlighting
- * <Title highlightText="Platform" highlightStyle="background" highlightColor="theme.primary">
+ * <Title highlightText="Platform" highlightStyle="background" highlightColor="theme-primary">
  *   Welcome to Our Platform
  * </Title>
  *
@@ -39,8 +39,8 @@ import TitleView from './Title/Title.view';
  * <Title
  *   highlightText={["Amazing", "Features"]}
  *   highlightStyle="gradient"
- *   highlightColor="theme.primary"
- *   highlightSecondaryColor="theme.secondary"
+ *   highlightColor="theme-primary"
+ *   highlightSecondaryColor="theme-secondary"
  * >
  *   Discover our Amazing Product with Great Features
  * </Title>

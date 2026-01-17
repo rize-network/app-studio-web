@@ -1,143 +1,91 @@
 {
   "componentDescription": "A customizable UI component for selecting from a list of options.",
   "id": {
-    "type": [
-      "string"
-    ],
+    "type": ["string"],
     "typeValues": [],
     "description": "Optional string identifier for the select element",
     "defaultValue": []
   },
   "error": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "typeValues": [],
     "description": "Flag to indicate if the select has an error state",
-    "defaultValue": [
-      "false"
-    ]
+    "defaultValue": ["false"]
   },
   "name": {
-    "type": [
-      "string"
-    ],
+    "type": ["string"],
     "typeValues": [],
     "description": "Name attribute for the select element, useful for form submission",
     "defaultValue": []
   },
   "label": {
-    "type": [
-      "string"
-    ],
+    "type": ["string"],
     "typeValues": [],
     "description": "Label text associated with the select element",
     "defaultValue": []
   },
   "colorScheme": {
-    "type": [
-      "string"
-    ],
+    "type": ["string"],
     "typeValues": [],
     "description": "Defines the color scheme for the select component",
-    "defaultValue": [
-      "theme.primary"
-    ]
+    "defaultValue": ["theme-primary"]
   },
   "helperText": {
-    "type": [
-      "string"
-    ],
+    "type": ["string"],
     "typeValues": [],
     "description": "Helper text that appears below the select box",
     "defaultValue": []
   },
   "placeholder": {
-    "type": [
-      "string"
-    ],
+    "type": ["string"],
     "typeValues": [],
     "description": "Placeholder text shown when the select is empty",
     "defaultValue": []
   },
   "options": {
-    "type": [
-      "Option[]"
-    ],
-    "typeValues": [
-      "{ label: string, value: string }"
-    ],
+    "type": ["Option[]"],
+    "typeValues": ["{ label: string, value: string }"],
     "description": "Array of options that the user can choose from",
     "defaultValue": []
   },
   "isMulti": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "typeValues": [],
     "description": "Boolean to allow multi-selection",
-    "defaultValue": [
-      "false"
-    ]
+    "defaultValue": ["false"]
   },
   "isReadOnly": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "typeValues": [],
     "description": "Boolean to set the select as read-only, preventing user modification",
-    "defaultValue": [
-      "false"
-    ]
+    "defaultValue": ["false"]
   },
   "isDisabled": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "typeValues": [],
     "description": "Boolean to disable the select element",
-    "defaultValue": [
-      "false"
-    ]
+    "defaultValue": ["false"]
   },
   "onChange": {
-    "type": [
-      "Function"
-    ],
-    "typeValues": [
-      "(value: any) => void"
-    ],
+    "type": ["Function"],
+    "typeValues": ["(value: any) => void"],
     "description": "Function that handles the change event when the selected option(s) change",
     "defaultValue": []
   },
   "shape": {
-    "type": [
-      "Shape"
-    ],
-    "typeValues": [
-      "'default' | 'square' | 'rounded' | 'pill'"
-    ],
+    "type": ["Shape"],
+    "typeValues": ["'default' | 'square' | 'rounded' | 'pill'"],
     "description": "Determines the overall shape of the select box, e.g., rounded or square edges",
-    "defaultValue": [
-      "default"
-    ]
+    "defaultValue": ["default"]
   },
   "variant": {
-    "type": [
-      "Variant"
-    ],
-    "typeValues": [
-      "'outline' | 'default' | 'none'"
-    ],
+    "type": ["Variant"],
+    "typeValues": ["'outline' | 'default' | 'none'"],
     "description": "Defines the styling variant for the select component",
-    "defaultValue": [
-      "default"
-    ]
+    "defaultValue": ["default"]
   },
   "styles": {
-    "type": [
-      "SelectStyles"
-    ],
+    "type": ["SelectStyles"],
     "typeValues": [
       "{ text?: CSSProperties; icon?: CSSProperties; dropDown?: CSSProperties; selectBox?: CSSProperties; label?: CSSProperties; helperText?: CSSProperties; field?: CSSProperties; }"
     ],
@@ -145,21 +93,13 @@
     "defaultValue": []
   },
   "size": {
-    "type": [
-      "Size"
-    ],
-    "typeValues": [
-      "'xs' | 'sm' | 'md' | 'lg' | 'xl'"
-    ],
+    "type": ["Size"],
+    "typeValues": ["'xs' | 'sm' | 'md' | 'lg' | 'xl'"],
     "description": "Defines the size of the component",
-    "defaultValue": [
-      "md"
-    ]
+    "defaultValue": ["md"]
   },
   "shadow": {
-    "type": [
-      "Shadow | Elevation | CSSProperties"
-    ],
+    "type": ["Shadow | Elevation | CSSProperties"],
     "typeValues": [],
     "description": "Determines the shadow property of the select component",
     "defaultValue": [
@@ -169,88 +109,56 @@
     ]
   },
   "isScrollable": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "typeValues": [],
     "description": "Boolean to control whether the select options are scrollable",
     "defaultValue": []
   },
   "value": {
-    "type": [
-      "string | Array<string>"
-    ],
+    "type": ["string | Array<string>"],
     "typeValues": [],
     "description": "The current value of the select, either a single string or an array of strings for multi-select",
     "defaultValue": []
   },
   "setValue": {
-    "type": [
-      "Function"
-    ],
-    "typeValues": [
-      "Function"
-    ],
+    "type": ["Function"],
+    "typeValues": ["Function"],
     "description": "Function to update the value of the select",
     "defaultValue": []
   },
   "hide": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "typeValues": [],
     "description": "Boolean to control the visibility of dropdown options",
-    "defaultValue": [
-      "false"
-    ]
+    "defaultValue": ["false"]
   },
   "setHide": {
-    "type": [
-      "Function"
-    ],
-    "typeValues": [
-      "Function"
-    ],
+    "type": ["Function"],
+    "typeValues": ["Function"],
     "description": "Function to toggle the visibility of dropdown options",
     "defaultValue": []
   },
   "isHovered": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "typeValues": [],
     "description": "Boolean to indicate if the select component is hovered",
-    "defaultValue": [
-      "false"
-    ]
+    "defaultValue": ["false"]
   },
   "setIsHovered": {
-    "type": [
-      "Function"
-    ],
-    "typeValues": [
-      "Function"
-    ],
+    "type": ["Function"],
+    "typeValues": ["Function"],
     "description": "Function to update the hover state of the component",
     "defaultValue": []
   },
   "isFocused": {
-    "type": [
-      "boolean"
-    ],
+    "type": ["boolean"],
     "typeValues": [],
     "description": "Boolean to indicate if the select component is focused",
-    "defaultValue": [
-      "false"
-    ]
+    "defaultValue": ["false"]
   },
   "setIsFocused": {
-    "type": [
-      "Function"
-    ],
-    "typeValues": [
-      "Function"
-    ],
+    "type": ["Function"],
+    "typeValues": ["Function"],
     "description": "Function to update the focus state of the component",
     "defaultValue": []
   }

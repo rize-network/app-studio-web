@@ -96,11 +96,11 @@ export const CompoundNavigationMenu = () => {
         <View
           flex={1}
           padding={4}
-          backgroundColor="color.gray.50"
+          backgroundColor="color-gray-50"
           borderRadius={4}
         >
           <Text>Content area</Text>
-          <Text color="color.gray.600">
+          <Text color="color-gray-600">
             The navigation menu on the left uses the compound component pattern.
           </Text>
         </View>

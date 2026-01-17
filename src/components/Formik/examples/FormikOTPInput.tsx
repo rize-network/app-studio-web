@@ -82,11 +82,11 @@ export const FormikCustomOTPInputExample = () => {
               shadow={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px' }}
               views={{
                 container: {
-                  borderColor: 'theme.primary',
-                  backgroundColor: 'color.gray.50',
+                  borderColor: 'theme-primary',
+                  backgroundColor: 'color-gray-50',
                 },
                 input: {
-                  color: 'theme.primary',
+                  color: 'theme-primary',
                   fontWeight: 'bold',
                 },
               }}
@@ -181,11 +181,11 @@ export const FormikStepValuesOTPExample = () => {
               gap={12}
               views={{
                 container: {
-                  borderColor: 'theme.primary',
-                  backgroundColor: 'color.gray.50',
+                  borderColor: 'theme-primary',
+                  backgroundColor: 'color-gray-50',
                 },
                 input: {
-                  color: 'theme.primary',
+                  color: 'theme-primary',
                   fontWeight: 'bold',
                 },
               }}
@@ -193,13 +193,13 @@ export const FormikStepValuesOTPExample = () => {
 
             <Horizontal justifyContent="space-between" width="100%">
               {stepValues.map((step) => (
-                <Text key={step} fontSize={14} color="color.blueGray.500">
+                <Text key={step} fontSize={14} color="color-blueGray-500">
                   {step}
                 </Text>
               ))}
             </Horizontal>
 
-            <Text fontSize={14} color="color.gray.600">
+            <Text fontSize={14} color="color-gray-600">
               This PIN input will snap to the closest value from the predefined
               set
             </Text>

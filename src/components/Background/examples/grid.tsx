@@ -10,28 +10,28 @@ export const GridDemo = () => (
     </Text>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Default Grid (30px cells, medium speed)
       </Text>
       <Background.Grid />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Large Grid (fast animation)
       </Text>
       <Background.Grid gridSize={50} animationSpeed="fast" />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Small Grid (slow animation)
       </Text>
       <Background.Grid gridSize={20} animationSpeed="slow" />
     </Vertical>
 
     <Vertical gap={16}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Custom Colors
       </Text>
       <Background.Grid

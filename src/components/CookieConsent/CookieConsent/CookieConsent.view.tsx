@@ -81,7 +81,7 @@ export const CookieConsentView: React.FC<CookieConsentProps> = ({
           <Text
             fontWeight="bold"
             fontSize={18}
-            color="color.black"
+            color="color-black"
             {...views?.title}
           >
             {title}
@@ -89,7 +89,7 @@ export const CookieConsentView: React.FC<CookieConsentProps> = ({
         )}
 
         {description && (
-          <Text fontSize={14} color="color.black" {...views?.description}>
+          <Text fontSize={14} color="color-black" {...views?.description}>
             {typeof description === 'string' ? description : description}
           </Text>
         )}

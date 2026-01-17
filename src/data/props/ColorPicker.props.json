@@ -45,7 +45,7 @@
   "onChange": {
     "type": "(color: string) => void",
     "typeValues": [],
-    "description": "Callback function triggered when the color value changes, providing the new color.",
+    "description": "Callback function triggered when the color value changes, providing the new color-",
     "defaultValue": "undefined"
   },
   "onChangeComplete": {
@@ -62,34 +62,19 @@
   },
   "size": {
     "type": "Size",
-    "typeValues": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl"
-    ],
+    "typeValues": ["xs", "sm", "md", "lg", "xl"],
     "description": "The size variant of the color picker (e.g., small, medium, large).",
     "defaultValue": "md"
   },
   "shape": {
     "type": "Shape",
-    "typeValues": [
-      "default",
-      "square",
-      "rounded",
-      "pill"
-    ],
+    "typeValues": ["default", "square", "rounded", "pill"],
     "description": "The shape variant of the color picker (e.g., rounded, square).",
     "defaultValue": "default"
   },
   "variant": {
     "type": "Variant",
-    "typeValues": [
-      "outline",
-      "default",
-      "filled"
-    ],
+    "typeValues": ["outline", "default", "filled"],
     "description": "The visual style variant of the color picker (e.g., filled, outlined).",
     "defaultValue": "default"
   },
@@ -131,11 +116,7 @@
   },
   "colorFormat": {
     "type": "ColorFormat",
-    "typeValues": [
-      "hex",
-      "rgb",
-      "hsl"
-    ],
+    "typeValues": ["hex", "rgb", "hsl"],
     "description": "Specifies the preferred format for color values (e.g., HEX, RGB, HSL).",
     "defaultValue": "undefined"
   },

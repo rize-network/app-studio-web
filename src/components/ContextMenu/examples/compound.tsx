@@ -19,8 +19,8 @@ export const CompoundContextMenu = () => {
         <ContextMenu.Trigger>
           <View
             padding={8}
-            bg="color.blue.100"
-            color="color.blue.800"
+            bg="color-blue-100"
+            color="color-blue-800"
             borderRadius="sm"
             cursor="context-menu"
           >

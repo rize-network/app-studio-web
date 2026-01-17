@@ -9,7 +9,7 @@ import { Button } from '../../Button/Button';
 export const HeroTitle = () => {
   return (
     <View
-      backgroundColor="color.gray.50"
+      backgroundColor="color-gray-50"
       padding={48}
       borderRadius={8}
       width="100%"
@@ -25,8 +25,8 @@ export const HeroTitle = () => {
           }}
           highlightText="Platform"
           highlightStyle="gradient"
-          highlightColor="theme.primary"
-          highlightSecondaryColor="theme.secondary"
+          highlightColor="theme-primary"
+          highlightSecondaryColor="theme-secondary"
           centered
         >
           Welcome to Our Platform
@@ -34,7 +34,7 @@ export const HeroTitle = () => {
 
         <Text
           textAlign="center"
-          color="color.gray.600"
+          color="color-gray-600"
           fontSize={20}
           lineHeight={28}
         >

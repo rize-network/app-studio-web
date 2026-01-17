@@ -58,20 +58,20 @@ export const NavigationMenuSizes: Record<Size, ViewProps> = {
 export const NavigationMenuVariants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'transparent',
-    color: 'color.gray.800',
+    color: 'color-gray-800',
     transition: 'all 0.2s ease',
   },
   filled: {
-    backgroundColor: 'color.gray.100',
-    color: 'color.gray.800',
+    backgroundColor: 'color-gray-100',
+    color: 'color-gray-800',
     transition: 'all 0.2s ease',
   },
   outline: {
     backgroundColor: 'transparent',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-200',
+    color: 'color-gray-800',
     transition: 'all 0.2s ease',
   },
 };
@@ -101,15 +101,15 @@ export const NavigationMenuOrientations: Record<Orientation, ViewProps> = {
  */
 export const NavigationMenuItemStates = {
   active: {
-    backgroundColor: 'color.blue.50',
-    color: 'color.blue.700',
+    backgroundColor: 'color-blue-50',
+    color: 'color-blue-700',
     fontWeight: '600', // Semi-bold for active items
     borderLeftWidth: 3,
     borderLeftStyle: 'solid' as const,
-    borderLeftColor: 'color.blue.600',
+    borderLeftColor: 'color-blue-600',
   },
   hover: {
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
     transition: 'background-color 0.2s ease',
   },
   disabled: {
@@ -123,11 +123,11 @@ export const NavigationMenuItemStates = {
  */
 export const NavigationMenuIconStyles = {
   default: {
-    color: 'color.gray.500',
+    color: 'color-gray-500',
     transition: 'color 0.2s ease',
   },
   active: {
-    color: 'color.blue.600',
+    color: 'color-blue-600',
     transition: 'color 0.2s ease',
   },
 };

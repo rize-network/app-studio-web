@@ -95,8 +95,8 @@ export const getBadgeVariants = (
 ): Record<Variant, ViewProps> => {
   return {
     filled: {
-      backgroundColor: 'theme.primary',
-      color: 'color.white',
+      backgroundColor: 'theme-primary',
+      color: 'color-white',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'transparent',
@@ -106,8 +106,8 @@ export const getBadgeVariants = (
       backgroundColor: 'transparent',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'theme.primary',
-      color: 'theme.primary',
+      borderColor: 'theme-primary',
+      color: 'theme-primary',
       transition: 'all 0.2s ease',
     },
     link: {
@@ -115,14 +115,14 @@ export const getBadgeVariants = (
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'transparent',
-      color: 'theme.primary',
+      color: 'theme-primary',
       textDecoration: 'underline',
       textUnderlineOffset: '2px',
       transition: 'all 0.2s ease',
     },
     ghost: {
       backgroundColor: 'transparent',
-      color: 'color.gray.500',
+      color: 'color-gray-500',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'transparent',

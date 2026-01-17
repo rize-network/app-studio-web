@@ -86,7 +86,7 @@ export const DesignSystemCharts = () => {
                     overflow: 'hidden',
                     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
                     border: '1px solid',
-                    borderColor: 'color.gray.200',
+                    borderColor: 'color-gray-200',
                     padding: '16px', // 4 × 4px grid
                   },
                   bar: {
@@ -130,7 +130,7 @@ export const DesignSystemCharts = () => {
                     overflow: 'hidden',
                     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
                     border: '1px solid',
-                    borderColor: 'color.gray.200',
+                    borderColor: 'color-gray-200',
                     padding: '16px', // 4 × 4px grid
                   },
                   axisLabel: {
@@ -170,7 +170,7 @@ export const DesignSystemCharts = () => {
                     overflow: 'hidden',
                     boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
                     border: '1px solid',
-                    borderColor: 'color.gray.200',
+                    borderColor: 'color-gray-200',
                     padding: '16px', // 4 × 4px grid
                   },
                   axisLabel: {
@@ -210,7 +210,7 @@ export const DesignSystemCharts = () => {
                       overflow: 'hidden',
                       boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
                       border: '1px solid',
-                      borderColor: 'color.gray.200',
+                      borderColor: 'color-gray-200',
                       padding: '16px', // 4 × 4px grid
                     },
                     legend: {
@@ -243,7 +243,7 @@ export const DesignSystemCharts = () => {
                       overflow: 'hidden',
                       boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
                       border: '1px solid',
-                      borderColor: 'color.gray.200',
+                      borderColor: 'color-gray-200',
                       padding: '16px', // 4 × 4px grid
                     },
                     legend: {

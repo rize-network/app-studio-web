@@ -7,14 +7,14 @@ Theming is an essential part of any application. It allows you to maintain a con
 App-Studio provides an extensive color system with three types of colors:
 
 ### 1. Singleton Colors (Basic Colors)
-These are simple named colors accessible via `color.{name}`:
+These are simple named colors accessible via `color-{name}`:
 
 - **Basic Colors**: `white`, `black`, `red`, `green`, `blue`, `yellow`, `cyan`, `magenta`, `grey`, `orange`, `brown`, `purple`, `pink`, `lime`, `teal`, `navy`, `olive`, `maroon`, `gold`, `silver`, `indigo`, `violet`, `beige`, `turquoise`, `coral`, `chocolate`, `skyBlue`, `plum`, `darkGreen`, `salmon`
 
-**Usage**: `color.white`, `color.gold`, `color.turquoise`
+**Usage**: `color-white`, `color-gold`, `color-turquoise`
 
 ### 2. Color Palettes (Shaded Colors)
-Each palette has 9 shades (50, 100, 200, 300, 400, 500, 600, 700, 800, 900) accessible via `color.{palette}.{shade}`:
+Each palette has 9 shades (50, 100, 200, 300, 400, 500, 600, 700, 800, 900) accessible via `color-{palette}-{shade}`:
 
 **Available Palettes**:
 - **Alpha Channels**: `whiteAlpha`, `blackAlpha` - RGBA colors with varying opacity
@@ -25,21 +25,22 @@ Each palette has 9 shades (50, 100, 200, 300, 400, 500, 600, 700, 800, 900) acce
 - **Greens**: `teal`, `emerald`, `green`, `lime`
 - **Yellows & Oranges**: `yellow`, `amber`, `orange`
 
-**Usage**: `color.blue.500`, `color.rose.200`, `color.gray.800`
+**Usage**: `color-blue-500`, `color-rose-200`, `color-gray-800`
 
 ### 3. Theme Colors
-Custom theme colors defined in your theme configuration, accessible via `theme.{path}`:
+Custom theme colors defined in your theme configuration, accessible via `theme-{path}`:
 
 **Default Theme Colors**:
-- `theme.primary` - Main brand color (default: black)
-- `theme.secondary` - Secondary brand color (default: blue)
-- `theme.success` - Success state color (default: green.500)
-- `theme.error` - Error state color (default: red.500)
-- `theme.warning` - Warning state color (default: orange.500)
-- `theme.disabled` - Disabled state color (default: gray.500)
-- `theme.loading` - Loading state color (default: dark.500)
+- `theme-primary` - Main brand color (default: black)
+- `theme-secondary` - Secondary brand color (default: blue)
+- `theme-success` - Success state color (default: green-500)
+- `theme-error` - Error state color (default: red-500)
+- `theme-warning` - Warning state color (default: orange-500)
+- `theme-info` - Info state color (default: blue-500)
+- `theme-disabled` - Disabled state color (default: gray-500)
+- `theme-loading` - Loading state color (default: dark-500)
 
-You can extend these with custom theme paths like `theme.button.background` or `theme.header.text`.
+You can extend these with custom theme paths like `theme-button-background` or `theme-header-text`.
 
 ### 4. Mode-Specific Colors
 Access light or dark mode colors directly, regardless of current theme:
@@ -47,25 +48,25 @@ Access light or dark mode colors directly, regardless of current theme:
 - **Light Mode**: `light.{colorName}` or `light.{palette}.{shade}`
 - **Dark Mode**: `dark.{colorName}` or `dark.{palette}.{shade}`
 
-**Usage**: `light.white`, `dark.blue.500`, `light.gray.100`
+**Usage**: `light.white`, `dark.blue-500`, `light.gray-100`
 
 ### Color System Hierarchy
 ```
-color.*           → Direct color access (current theme mode)
-  ├─ color.white  → Singleton colors
-  └─ color.blue.500 → Palette colors with shades
+color-*           → Direct color access (current theme mode)
+  ├─ color-white  → Singleton colors
+  └─ color-blue-500 → Palette colors with shades
 
-theme.*           → Custom theme configuration
-  ├─ theme.primary
-  └─ theme.button.background
+theme-*           → Custom theme configuration
+  ├─ theme-primary
+  └─ theme-button-background
 
 light.*           → Always use light mode colors
   ├─ light.white
-  └─ light.blue.500
+  └─ light.blue-500
 
 dark.*            → Always use dark mode colors
   ├─ dark.white
-  └─ dark.red.200
+  └─ dark.red-200
 ```
 
 ## Setting up the Theme Object
@@ -134,10 +135,10 @@ Now that the theme is available, you can use it in your components. All color re
 App-Studio supports multiple ways to reference colors:
 
 1. **Direct Color Values**: `"#fff"`, `"rgb(255,0,0)"`, `"transparent"`
-2. **Singleton Colors**: `"color.white"`, `"color.gold"`, `"color.turquoise"`
-3. **Palette Colors**: `"color.blue.500"`, `"color.rose.200"`, `"color.gray.800"`
-4. **Theme Colors**: `"theme.primary"`, `"theme.button.background"`
-5. **Mode-Specific Colors**: `"light.white"`, `"dark.blue.500"`
+2. **Singleton Colors**: `"color-white"`, `"color-gold"`, `"color-turquoise"`
+3. **Palette Colors**: `"color-blue-500"`, `"color-rose-200"`, `"color-gray-800"`
+4. **Theme Colors**: `"theme-primary"`, `"theme-button-background"`
+5. **Mode-Specific Colors**: `"light.white"`, `"dark.blue-500"`
 
 ### Examples
 
@@ -147,23 +148,23 @@ import { Button } from '@app-studio/web';
 
 function Example() {
   return (
-    <View backgroundColor="color.blue">
+    <View backgroundColor="color-blue">
        {/* Using palette colors with shades */}
-       <View backgroundColor="color.blueGray.500">
-        <Text color="theme.primary">Hello</Text>
+       <View backgroundColor="color-blueGray-500">
+        <Text color="theme-primary">Hello</Text>
        </View>
        
        {/* Using theme colors */}
-       <Button backgroundColor="theme.button.background">Hello</Button>
+       <Button backgroundColor="theme-button-background">Hello</Button>
        
        {/* Using singleton colors */}
-       <View backgroundColor="color.turquoise" padding={10}>
-         <Text color="color.white">Turquoise Background</Text>
+       <View backgroundColor="color-turquoise" padding={10}>
+         <Text color="color-white">Turquoise Background</Text>
        </View>
        
        {/* Using alpha colors for transparency */}
-       <View backgroundColor="color.blackAlpha.500">
-         <Text color="color.whiteAlpha.900">Semi-transparent</Text>
+       <View backgroundColor="color-blackAlpha-500">
+         <Text color="color-whiteAlpha-900">Semi-transparent</Text>
        </View>
     </View>
   );
@@ -175,46 +176,46 @@ function Example() {
 Each palette below has shades: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
 
 **Alpha Transparency**:
-- `color.whiteAlpha.{shade}` - White with alpha (rgba)
-- `color.blackAlpha.{shade}` - Black with alpha (rgba)
+- `color-whiteAlpha-{shade}` - White with alpha (rgba)
+- `color-blackAlpha-{shade}` - Black with alpha (rgba)
 
 **Neutral Colors**:
-- `color.white.{shade}` - White to light gray scale
-- `color.black.{shade}` - Black to dark gray scale
-- `color.gray.{shade}` - True gray scale
-- `color.dark.{shade}` - Dark neutral scale
-- `color.light.{shade}` - Light neutral scale
-- `color.warmGray.{shade}` - Warm gray tones
-- `color.trueGray.{shade}` - True neutral gray
-- `color.coolGray.{shade}` - Cool gray tones
-- `color.blueGray.{shade}` - Blue-tinted gray
+- `color-white-{shade}` - White to light gray scale
+- `color-black-{shade}` - Black to dark gray scale
+- `color-gray-{shade}` - True gray scale
+- `color-dark-{shade}` - Dark neutral scale
+- `color-light-{shade}` - Light neutral scale
+- `color-warmGray-{shade}` - Warm gray tones
+- `color-trueGray-{shade}` - True neutral gray
+- `color-coolGray-{shade}` - Cool gray tones
+- `color-blueGray-{shade}` - Blue-tinted gray
 
 **Red & Pink Family**:
-- `color.rose.{shade}` - Rose pink tones
-- `color.pink.{shade}` - Pink tones
-- `color.red.{shade}` - Red tones
+- `color-rose-{shade}` - Rose pink tones
+- `color-pink-{shade}` - Pink tones
+- `color-red-{shade}` - Red tones
 
 **Purple Family**:
-- `color.fuchsia.{shade}` - Bright purple-pink
-- `color.purple.{shade}` - Purple tones
-- `color.violet.{shade}` - Violet tones
+- `color-fuchsia-{shade}` - Bright purple-pink
+- `color-purple-{shade}` - Purple tones
+- `color-violet-{shade}` - Violet tones
 
 **Blue Family**:
-- `color.indigo.{shade}` - Deep blue-purple
-- `color.blue.{shade}` - Blue tones
-- `color.lightBlue.{shade}` - Light blue tones
-- `color.cyan.{shade}` - Cyan tones
+- `color-indigo-{shade}` - Deep blue-purple
+- `color-blue-{shade}` - Blue tones
+- `color-lightBlue-{shade}` - Light blue tones
+- `color-cyan-{shade}` - Cyan tones
 
 **Green Family**:
-- `color.teal.{shade}` - Teal (blue-green)
-- `color.emerald.{shade}` - Emerald green
-- `color.green.{shade}` - Green tones
-- `color.lime.{shade}` - Lime green
+- `color-teal-{shade}` - Teal (blue-green)
+- `color-emerald-{shade}` - Emerald green
+- `color-green-{shade}` - Green tones
+- `color-lime-{shade}` - Lime green
 
 **Yellow & Orange Family**:
-- `color.yellow.{shade}` - Yellow tones
-- `color.amber.{shade}` - Amber (orange-yellow)
-- `color.orange.{shade}` - Orange tones
+- `color-yellow-{shade}` - Yellow tones
+- `color-amber-{shade}` - Amber (orange-yellow)
+- `color-orange-{shade}` - Orange tones
 
 ### Accessing Specific Theme Mode Colors
 
@@ -229,9 +230,9 @@ function Example() {
       {/* Always use light mode white color regardless of current theme mode */}
       <Text color="light.white">Always light mode white</Text>
 
-      {/* Always use dark mode red.200 color regardless of current theme mode */}
-      <View backgroundColor="dark.red.200">
-        <Text>Always dark mode red.200 background</Text>
+      {/* Always use dark mode red-200 color regardless of current theme mode */}
+      <View backgroundColor="dark.red-200">
+        <Text>Always dark mode red-200 background</Text>
       </View>
     </View>
   );
@@ -252,20 +253,20 @@ function Example() {
     <View>
       {/* Access light theme colors directly */}
       <Text color="light.white">White text in light mode</Text>
-      <View backgroundColor="light.blue.500">
+      <View backgroundColor="light.blue-500">
         <Text>Light blue background</Text>
       </View>
 
       {/* Access dark theme colors directly */}
       <Text color="dark.white">White text in dark mode</Text>
-      <View backgroundColor="dark.red.200">
+      <View backgroundColor="dark.red-200">
         <Text>Dark red background</Text>
       </View>
 
       {/* Mix and match in the same component */}
       <View
-        backgroundColor="light.gray.100"
-        borderColor="dark.gray.800"
+        backgroundColor="light.gray-100"
+        borderColor="dark.gray-800"
         borderWidth={1}
       >
         <Text>Mixed theme colors</Text>
@@ -275,7 +276,7 @@ function Example() {
 }
 ```
 
-This direct access syntax works with all color-related properties and can be used with both singleton colors (like `white`, `black`) and palette colors (like `red.200`, `blue.500`). It provides a convenient way to reference specific theme colors without having to use the `getColor` function from the `useTheme` hook.
+This direct access syntax works with all color-related properties and can be used with both singleton colors (like `white`, `black`) and palette colors (like `red-200`, `blue-500`). It provides a convenient way to reference specific theme colors without having to use the `getColor` function from the `useTheme` hook.
 
 ### Smart Text Contrast
 
@@ -341,19 +342,19 @@ import { ThemeProvider, View, Text, Button } from 'app-studio';
 // Custom theme configuration
 const theme = {
   main: {
-    primary: 'color.blue.600',      // References a palette color
-    secondary: 'color.purple.500',
-    accent: 'color.orange.400'
+    primary: 'color-blue-600',      // References a palette color
+    secondary: 'color-purple-500',
+    accent: 'color-orange-400'
   },
   components: {
     button: {
-      background: 'color.emerald.500',
-      text: 'color.white',
-      disabled: 'color.gray.400'
+      background: 'color-emerald-500',
+      text: 'color-white',
+      disabled: 'color-gray-400'
     },
     card: {
-      background: 'color.white',
-      border: 'color.gray.200'
+      background: 'color-white',
+      border: 'color-gray-200'
     }
   }
 };
@@ -385,40 +386,40 @@ function Example() {
   return (
     <ThemeProvider theme={theme} colors={customColors} mode="light">
       {/* Using theme colors */}
-      <View backgroundColor="theme.components.card.background" padding={20}>
-        <Text color="theme.main.primary" fontSize={24}>
+      <View backgroundColor="theme-components-card-background" padding={20}>
+        <Text color="theme-main-primary" fontSize={24}>
           Primary Theme Color
         </Text>
-        
+
         {/* Using palette colors directly */}
-        <View backgroundColor="color.rose.100" padding={10} marginTop={10}>
-          <Text color="color.rose.900">Rose palette color</Text>
+        <View backgroundColor="color-rose-100" padding={10} marginTop={10}>
+          <Text color="color-rose-900">Rose palette color</Text>
         </View>
-        
+
         {/* Using singleton colors */}
-        <View backgroundColor="color.turquoise" padding={10} marginTop={10}>
-          <Text color="color.white">Turquoise singleton</Text>
+        <View backgroundColor="color-turquoise" padding={10} marginTop={10}>
+          <Text color="color-white">Turquoise singleton</Text>
         </View>
-        
+
         {/* Using custom colors */}
-        <View backgroundColor="color.brand" padding={10} marginTop={10}>
-          <Text color="color.white">Custom brand color</Text>
+        <View backgroundColor="color-brand" padding={10} marginTop={10}>
+          <Text color="color-white">Custom brand color</Text>
         </View>
-        
+
         {/* Using mode-specific colors */}
-        <View backgroundColor="light.gray.100" padding={10} marginTop={10}>
-          <Text color="dark.gray.900">Always light background, dark text</Text>
+        <View backgroundColor="light.gray-100" padding={10} marginTop={10}>
+          <Text color="dark.gray-900">Always light background, dark text</Text>
         </View>
-        
+
         {/* Using alpha transparency */}
-        <View backgroundColor="color.blackAlpha.500" padding={10} marginTop={10}>
-          <Text color="color.whiteAlpha.900">Semi-transparent overlay</Text>
+        <View backgroundColor="color-blackAlpha-500" padding={10} marginTop={10}>
+          <Text color="color-whiteAlpha-900">Semi-transparent overlay</Text>
         </View>
-        
+
         {/* Button using theme */}
-        <Button 
-          backgroundColor="theme.components.button.background"
-          color="theme.components.button.text"
+        <Button
+          backgroundColor="theme-components-button-background"
+          color="theme-components-button-text"
         >
           Themed Button
         </Button>
@@ -434,27 +435,27 @@ When working with colors in App-Studio, use these patterns:
 
 ### Color Access Patterns
 ```javascript
-// Pattern: color.{name}
-"color.white"           // → "#FFFFFF" (in light mode) or "#000000" (in dark mode)
-"color.gold"            // → "#FFD700"
-"color.turquoise"       // → "#40E0D0"
+// Pattern: color-{name}
+"color-white"           // → "#FFFFFF" (in light mode) or "#000000" (in dark mode)
+"color-gold"            // → "#FFD700"
+"color-turquoise"       // → "#40E0D0"
 
-// Pattern: color.{palette}.{shade}
-"color.blue.500"        // → "#3b82f6" (light) or "#60a5fa" (dark)
-"color.rose.200"        // → "#fecdd3" (light) or "#6b112f" (dark)
-"color.gray.800"        // → "#27272a" (light) or "#f4f4f5" (dark)
+// Pattern: color-{palette}-{shade}
+"color-blue-500"        // → "#3b82f6" (light) or "#60a5fa" (dark)
+"color-rose-200"        // → "#fecdd3" (light) or "#6b112f" (dark)
+"color-gray-800"        // → "#27272a" (light) or "#f4f4f5" (dark)
 
-// Pattern: theme.{path}
-"theme.primary"         // → Resolves to your theme's primary color
-"theme.button.background" // → Resolves to nested theme path
+// Pattern: theme-{path}
+"theme-primary"         // → Resolves to your theme's primary color
+"theme-button-background" // → Resolves to nested theme path
 
 // Pattern: light.{name} or light.{palette}.{shade}
 "light.white"           // → Always "#FFFFFF" (light mode)
-"light.blue.500"        // → Always "#3b82f6" (light mode value)
+"light.blue-500"        // → Always "#3b82f6" (light mode value)
 
 // Pattern: dark.{name} or dark.{palette}.{shade}
 "dark.white"            // → Always "#000000" (dark mode white)
-"dark.red.200"          // → Always "#6b112f" (dark mode value)
+"dark.red-200"          // → Always "#6b112f" (dark mode value)
 
 // Direct values (unchanged)
 "#ff0000"               // → "#ff0000"
@@ -485,4 +486,4 @@ Each palette has these shades: `50, 100, 200, 300, 400, 500, 600, 700, 800, 900`
 - **Light Mode**: Uses `defaultLightPalette` and `defaultLightColors`
 - **Dark Mode**: Uses `defaultDarkPalette` and `defaultDarkColors`
 - Colors automatically switch based on `themeMode` unless using `light.*` or `dark.*` prefix
-- Color values are inverted for dark mode (e.g., `color.white` becomes black in dark mode)
+- Color values are inverted for dark mode (e.g., `color-white` becomes black in dark mode)

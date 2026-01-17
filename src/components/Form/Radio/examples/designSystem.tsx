@@ -98,10 +98,10 @@ export const DesignSystemRadios = () => (
           label="Primary Theme"
           views={{
             radio: {
-              borderColor: 'theme.primary',
+              borderColor: 'theme-primary',
             },
             label: {
-              color: 'theme.primary',
+              color: 'theme-primary',
               fontWeight: '600',
             },
           }}
@@ -113,10 +113,10 @@ export const DesignSystemRadios = () => (
           views={{
             radio: {
               borderWidth: '3px',
-              borderColor: 'color.purple.400',
+              borderColor: 'color-purple-400',
             },
             label: {
-              color: 'color.purple.700',
+              color: 'color-purple-700',
             },
           }}
           defaultIsSelected
@@ -129,7 +129,7 @@ export const DesignSystemRadios = () => (
           }}
           views={{
             radio: {
-              borderColor: 'color.blue.500',
+              borderColor: 'color-blue-500',
               transition: 'all 0.3s ease',
               _hover: {
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
@@ -220,15 +220,15 @@ export const DesignSystemRadios = () => (
         defaultValue="intermediate"
         views={{
           container: {
-            backgroundColor: 'color.gray.50',
+            backgroundColor: 'color-gray-50',
             padding: 16,
             borderRadius: 8,
             borderWidth: '1px',
             borderStyle: 'solid',
-            borderColor: 'color.gray.200',
+            borderColor: 'color-gray-200',
           },
           label: {
-            color: 'theme.primary',
+            color: 'theme-primary',
             fontSize: '18px',
             fontWeight: '700',
           },

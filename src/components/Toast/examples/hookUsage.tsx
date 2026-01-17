@@ -13,8 +13,8 @@ export const HookUsageDemo = () => {
     toast.success('Custom Render', 'This toast uses a custom render function', {
       render: ({ onClose }) => (
         <Vertical
-          backgroundColor="color.purple.100"
-          borderColor="color.purple.300"
+          backgroundColor="color-purple-100"
+          borderColor="color-purple-300"
           borderWidth="1px"
           borderStyle="solid"
           borderRadius="8px"
@@ -23,10 +23,10 @@ export const HookUsageDemo = () => {
           width="100%"
           maxWidth="400px"
         >
-          <Text size="lg" weight="bold" color="color.purple.800">
+          <Text size="lg" weight="bold" color="color-purple-800">
             Custom Render Toast
           </Text>
-          <Text size="sm" color="color.purple.700" marginTop="4px">
+          <Text size="sm" color="color-purple-700" marginTop="4px">
             This toast is completely custom rendered!
           </Text>
           <Horizontal justifyContent="flex-end" marginTop="8px">

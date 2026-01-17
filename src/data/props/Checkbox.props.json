@@ -34,7 +34,7 @@
     "type": ["string"],
     "typeValues": [],
     "description": "Optional color scheme string that might allow customization of the checkbox's appearance.",
-    "defaultValue": ["theme.primary"]
+    "defaultValue": ["theme-primary"]
   },
   "isChecked": {
     "type": ["boolean"],

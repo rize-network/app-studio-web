@@ -102,7 +102,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
       <View
         width="100%"
         position="relative"
-        backgroundColor={isDraggingOver ? 'color.blue.50' : undefined}
+        backgroundColor={isDraggingOver ? 'color-blue-50' : undefined}
         transition="background-color 0.2s ease"
         {...views?.container}
       >
@@ -120,7 +120,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
           padding="8px 12px"
           fontSize="14px"
           lineHeight="1.5"
-          color="color.gray.900"
+          color="color-gray-900"
           backgroundColor="transparent"
           border="none"
           outline="none"
@@ -160,13 +160,13 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               padding="0 12px"
               borderRadius="8px"
               backgroundColor="transparent"
-              color="color.gray.500"
+              color="color-gray-500"
               border="none"
               outline="none"
               cursor="pointer"
               transition="all 0.2s ease"
               _hover={{
-                backgroundColor: 'color.gray.100',
+                backgroundColor: 'color-gray-100',
               }}
               {...views?.modelSelector}
             >
@@ -185,8 +185,8 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
             minWidth="36px"
             padding="0 12px"
             borderRadius="8px"
-            backgroundColor={isAgentRunning ? 'theme.error' : 'theme.primary'}
-            color="color.white"
+            backgroundColor={isAgentRunning ? 'theme-error' : 'theme-primary'}
+            color="color-white"
             disabled={
               (!value.trim() && uploadedFiles.length === 0) ||
               loading ||
@@ -194,8 +194,8 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
             }
             _hover={{
               backgroundColor: isAgentRunning
-                ? 'color.red.600'
-                : 'color.blue.600',
+                ? 'color-red-600'
+                : 'color-blue-600',
             }}
             {...views?.submitButton}
           >

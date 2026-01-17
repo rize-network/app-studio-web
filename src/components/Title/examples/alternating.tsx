@@ -19,7 +19,7 @@ export const AlternatingTitle = () => {
         alternateAnimation={true}
         alternateDuration={2000}
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         size="xl"
       >
         Our changing solution for your business
@@ -27,7 +27,7 @@ export const AlternatingTitle = () => {
 
       <Text
         fontSize={14}
-        color="color.gray.500"
+        color="color-gray-500"
         marginTop={8}
         marginBottom={24}
       >
@@ -42,8 +42,8 @@ export const AlternatingTitle = () => {
         alternateAnimation={true}
         alternateDuration={1500}
         highlightStyle="gradient"
-        highlightColor="theme.primary"
-        highlightSecondaryColor="theme.secondary"
+        highlightColor="theme-primary"
+        highlightSecondaryColor="theme-secondary"
         highlightAnimate={{
           from: { opacity: 0 },
           to: { opacity: 1 },
@@ -56,7 +56,7 @@ export const AlternatingTitle = () => {
 
       <Text
         fontSize={14}
-        color="color.gray.500"
+        color="color-gray-500"
         marginTop={8}
         marginBottom={24}
       >
@@ -70,13 +70,13 @@ export const AlternatingTitle = () => {
         alternateAnimation={true}
         alternateDuration={3000}
         highlightStyle="glow"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         size="xl"
       >
         Our platform is cycling and built for performance
       </Title>
 
-      <Text fontSize={14} color="color.gray.500" marginTop={8}>
+      <Text fontSize={14} color="color-gray-500" marginTop={8}>
         The word &quot;cycling&quot; will cycle through attributes with a glow
         effect every 3 seconds
       </Text>

@@ -49,26 +49,26 @@ export const PaginationSizes: Record<Size, ViewProps> = {
 export const PaginationVariants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'transparent',
-    color: 'color.gray.800',
+    color: 'color-gray-800',
     _hover: {
-      backgroundColor: 'color.gray.100',
+      backgroundColor: 'color-gray-100',
     },
   },
   filled: {
-    backgroundColor: 'color.gray.100',
-    color: 'color.gray.800',
+    backgroundColor: 'color-gray-100',
+    color: 'color-gray-800',
     _hover: {
-      backgroundColor: 'color.gray.200',
+      backgroundColor: 'color-gray-200',
     },
   },
   outline: {
     backgroundColor: 'transparent',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-200',
+    color: 'color-gray-800',
     _hover: {
-      backgroundColor: 'color.gray.100',
+      backgroundColor: 'color-gray-100',
     },
   },
 };
@@ -86,10 +86,10 @@ export const PaginationShapes: Record<Shape, ViewProps> = {
 };
 
 export const ActivePageButtonStyles: ViewProps = {
-  backgroundColor: 'color.blue.500',
-  color: 'color.white',
+  backgroundColor: 'color-blue-500',
+  color: 'color-white',
   _hover: {
-    backgroundColor: 'color.blue.600',
+    backgroundColor: 'color-blue-600',
   },
 };
 

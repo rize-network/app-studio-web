@@ -105,7 +105,7 @@ const IconExamples = () => {
   return (
     <Horizontal gap={16} alignItems="center">
       <Icon name="Home" size={24} />
-      <Icon name="User" size={24} color={theme.primary} />
+      <Icon name="User" size={24} color={theme-primary} />
       <Icon name="CheckCircle" size={24} color="green" filled />
     </Horizontal>
   );
@@ -114,7 +114,7 @@ const IconExamples = () => {
 
 ### Text
 
-A component for rendering text with consistent typography based on the theme.
+A component for rendering text with consistent typography based on the theme-
 
 **Example:**
 ```tsx
@@ -142,8 +142,8 @@ const HeroTitle = () => (
     size="xl"
     highlightText="Platform"
     highlightStyle="gradient"
-    highlightColor="theme.primary"
-    highlightSecondaryColor="theme.secondary"
+    highlightColor="theme-primary"
+    highlightSecondaryColor="theme-secondary"
     centered
   >
     Welcome to Our Platform

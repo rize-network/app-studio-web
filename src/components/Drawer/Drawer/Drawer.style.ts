@@ -18,7 +18,7 @@ export const DrawerPlacements: Record<Placement, ViewProps> = {
     height: '100vh',
     borderRightWidth: '1px',
     borderRightStyle: 'solid',
-    borderRightColor: 'color.gray.200',
+    borderRightColor: 'color-gray-200',
   },
   right: {
     top: 0,
@@ -27,7 +27,7 @@ export const DrawerPlacements: Record<Placement, ViewProps> = {
     height: '100vh',
     borderLeftWidth: '1px',
     borderLeftStyle: 'solid',
-    borderLeftColor: 'color.gray.200',
+    borderLeftColor: 'color-gray-200',
   },
   top: {
     top: 0,
@@ -36,7 +36,7 @@ export const DrawerPlacements: Record<Placement, ViewProps> = {
     width: '100vw',
     borderBottomWidth: '1px',
     borderBottomStyle: 'solid',
-    borderBottomColor: 'color.gray.200',
+    borderBottomColor: 'color-gray-200',
   },
   bottom: {
     bottom: 0,
@@ -45,6 +45,6 @@ export const DrawerPlacements: Record<Placement, ViewProps> = {
     width: '100vw',
     borderTopWidth: '1px',
     borderTopStyle: 'solid',
-    borderTopColor: 'color.gray.200',
+    borderTopColor: 'color-gray-200',
   },
 };

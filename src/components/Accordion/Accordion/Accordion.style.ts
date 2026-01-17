@@ -15,17 +15,17 @@ export const AccordionVariants: Record<Variant, ViewProps> = {
   outline: {
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
+    borderColor: 'color-gray-200',
     transition: 'border-color 0.15s ease, background-color 0.15s ease',
     _hover: {
-      borderColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
     },
   },
   filled: {
-    backgroundColor: 'color.gray.50',
+    backgroundColor: 'color-gray-50',
     transition: 'background-color 0.15s ease',
     _hover: {
-      backgroundColor: 'color.gray.100',
+      backgroundColor: 'color-gray-100',
     },
   },
 };
@@ -36,11 +36,11 @@ export const AccordionVariants: Record<Variant, ViewProps> = {
 export const AccordionTriggerStyles: ViewProps = {
   transition: 'background-color 0.15s ease, color 0.15s ease',
   _hover: {
-    backgroundColor: 'color.gray.50',
+    backgroundColor: 'color-gray-50',
   },
   _focus: {
     outline: 'none',
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
   },
   _focusVisible: {
     outline: 'none',

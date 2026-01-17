@@ -14,7 +14,7 @@ export const ResponsiveTitle = () => {
         responsive={true}
         highlightText="Responsive"
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Responsive XL Title (H1 scale)
       </Title>
@@ -24,8 +24,8 @@ export const ResponsiveTitle = () => {
         responsive={true}
         highlightText="Responsive"
         highlightStyle="gradient"
-        highlightColor="theme.primary"
-        highlightSecondaryColor="theme.secondary"
+        highlightColor="theme-primary"
+        highlightSecondaryColor="theme-secondary"
       >
         Responsive LG Title (H2 scale)
       </Title>
@@ -35,7 +35,7 @@ export const ResponsiveTitle = () => {
         responsive={true}
         highlightText="Responsive"
         highlightStyle="underline"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Responsive MD Title (H3 scale)
       </Title>
@@ -45,7 +45,7 @@ export const ResponsiveTitle = () => {
         responsive={true}
         highlightText="Responsive"
         highlightStyle="glow"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Responsive SM Title (T1 scale)
       </Title>
@@ -55,7 +55,7 @@ export const ResponsiveTitle = () => {
         responsive={true}
         highlightText="Responsive"
         highlightStyle="outline"
-        highlightColor="theme.secondary"
+        highlightColor="theme-secondary"
       >
         Responsive XS Title (S1 scale)
       </Title>
@@ -78,7 +78,7 @@ export const ResponsiveTitle = () => {
         }}
         highlightText="Manual"
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Manual Media Queries Title
       </Title>

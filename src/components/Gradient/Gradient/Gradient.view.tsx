@@ -7,7 +7,6 @@
 
 import React, { useMemo } from 'react';
 import { View } from 'app-studio';
-import { useTheme } from 'app-studio';
 import { GradientProps } from './Gradient.props';
 import {
   DefaultColorStops,
@@ -31,7 +30,6 @@ export const GradientView: React.FC<GradientProps> = ({
   themeMode: elementMode,
   ...props
 }) => {
-  const { getColor, themeMode } = useTheme();
   // Determine color stops to use
   const colorStops = useMemo(() => {
     // If colors array is provided, use it
@@ -56,10 +54,7 @@ export const GradientView: React.FC<GradientProps> = ({
     // Process color stops to resolve theme colors
     const processedColorStops = colorStops.map((stop) => ({
       ...stop,
-      color: getColor(
-        stop.color,
-        elementMode ? { themeMode: elementMode } : undefined
-      ),
+      color: stop.color,
     }));
     return generateGradientString(
       type,
@@ -68,16 +63,7 @@ export const GradientView: React.FC<GradientProps> = ({
       shape,
       position
     );
-  }, [
-    type,
-    colorStops,
-    direction,
-    shape,
-    position,
-    getColor,
-    themeMode,
-    elementMode,
-  ]);
+  }, [type, colorStops, direction, shape, position]);
 
   // Prepare animation styles if animation is enabled
   const animationStyles = useMemo(() => {

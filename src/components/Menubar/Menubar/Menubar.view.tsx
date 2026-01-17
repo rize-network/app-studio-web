@@ -340,7 +340,7 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
       id="menubar-content"
       role="menu"
       minWidth="200px"
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       borderRadius={4}
       boxShadow="0px 2px 8px rgba(0, 0, 0, 0.15)"
       overflow="hidden"
@@ -405,7 +405,7 @@ export const MenubarSeparator: React.FC<MenubarSeparatorProps> = ({
     <View
       role="separator"
       height="1px"
-      backgroundColor="color.gray.200"
+      backgroundColor="color-gray-200"
       margin="4px 0"
       {...views?.separator}
     />

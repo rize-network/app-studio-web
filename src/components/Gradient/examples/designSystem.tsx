@@ -33,8 +33,8 @@ export const DesignSystemGradients = () => {
               <Text fontSize="14px">Linear Gradient</Text>
               <Gradient
                 type="linear"
-                from="color.blue.500"
-                to="color.purple.500"
+                from="color-blue-500"
+                to="color-purple-500"
                 height="100px"
                 width="100%"
                 borderRadius="8px" // 2 × 4px grid
@@ -45,8 +45,8 @@ export const DesignSystemGradients = () => {
               <Text fontSize="14px">Radial Gradient</Text>
               <Gradient
                 type="radial"
-                from="color.blue.500"
-                to="color.purple.500"
+                from="color-blue-500"
+                to="color-purple-500"
                 height="100px"
                 width="100%"
                 borderRadius="8px" // 2 × 4px grid
@@ -58,11 +58,11 @@ export const DesignSystemGradients = () => {
               <Gradient
                 type="conic"
                 colors={[
-                  { color: 'color.red.500', position: '0deg' },
-                  { color: 'color.yellow.500', position: '90deg' },
-                  { color: 'color.green.500', position: '180deg' },
-                  { color: 'color.blue.500', position: '270deg' },
-                  { color: 'color.red.500', position: '360deg' },
+                  { color: 'color-red-500', position: '0deg' },
+                  { color: 'color-yellow-500', position: '90deg' },
+                  { color: 'color-green-500', position: '180deg' },
+                  { color: 'color-blue-500', position: '270deg' },
+                  { color: 'color-red-500', position: '360deg' },
                 ]}
                 height="100px"
                 width="100%"
@@ -86,8 +86,8 @@ export const DesignSystemGradients = () => {
                 <Gradient
                   type="linear"
                   direction={direction}
-                  from="color.blue.500"
-                  to="color.purple.500"
+                  from="color-blue-500"
+                  to="color-purple-500"
                   height="100px"
                   width="100%"
                   borderRadius="8px" // 2 × 4px grid
@@ -109,9 +109,9 @@ export const DesignSystemGradients = () => {
             <Gradient
               type="linear"
               colors={[
-                { color: 'color.blue.500', position: '0%' },
-                { color: 'color.purple.500', position: '50%' },
-                { color: 'color.pink.500', position: '100%' },
+                { color: 'color-blue-500', position: '0%' },
+                { color: 'color-purple-500', position: '50%' },
+                { color: 'color-pink-500', position: '100%' },
               ]}
               height="100px"
               width="100%"
@@ -124,13 +124,13 @@ export const DesignSystemGradients = () => {
             <Gradient
               type="linear"
               colors={[
-                { color: 'color.red.500', position: '0%' },
-                { color: 'color.orange.500', position: '16.67%' },
-                { color: 'color.yellow.500', position: '33.33%' },
-                { color: 'color.green.500', position: '50%' },
-                { color: 'color.blue.500', position: '66.67%' },
-                { color: 'color.indigo.500', position: '83.33%' },
-                { color: 'color.purple.500', position: '100%' },
+                { color: 'color-red-500', position: '0%' },
+                { color: 'color-orange-500', position: '16.67%' },
+                { color: 'color-yellow-500', position: '33.33%' },
+                { color: 'color-green-500', position: '50%' },
+                { color: 'color-blue-500', position: '66.67%' },
+                { color: 'color-indigo-500', position: '83.33%' },
+                { color: 'color-purple-500', position: '100%' },
               ]}
               height="100px"
               width="100%"
@@ -150,8 +150,8 @@ export const DesignSystemGradients = () => {
             <Text fontSize="14px">Animated Linear</Text>
             <Gradient
               type="linear"
-              from="color.blue.500"
-              to="color.purple.500"
+              from="color-blue-500"
+              to="color-purple-500"
               animate={true}
               animationDuration={5}
               height="100px"
@@ -164,8 +164,8 @@ export const DesignSystemGradients = () => {
             <Text fontSize="14px">Animated Radial</Text>
             <Gradient
               type="radial"
-              from="color.blue.500"
-              to="color.purple.500"
+              from="color-blue-500"
+              to="color-purple-500"
               animate={true}
               animationDuration={5}
               height="100px"
@@ -179,11 +179,11 @@ export const DesignSystemGradients = () => {
             <Gradient
               type="conic"
               colors={[
-                { color: 'color.red.500', position: '0deg' },
-                { color: 'color.yellow.500', position: '90deg' },
-                { color: 'color.green.500', position: '180deg' },
-                { color: 'color.blue.500', position: '270deg' },
-                { color: 'color.red.500', position: '360deg' },
+                { color: 'color-red-500', position: '0deg' },
+                { color: 'color-yellow-500', position: '90deg' },
+                { color: 'color-green-500', position: '180deg' },
+                { color: 'color-blue-500', position: '270deg' },
+                { color: 'color-red-500', position: '360deg' },
               ]}
               animate={true}
               animationDuration={8}
@@ -204,8 +204,8 @@ export const DesignSystemGradients = () => {
           {/* Hero Section */}
           <Gradient
             type="linear"
-            from="color.blue.600"
-            to="color.purple.600"
+            from="color-blue-600"
+            to="color-purple-600"
             height="200px"
             width="100%"
             borderRadius="12px" // 3 × 4px grid
@@ -216,8 +216,8 @@ export const DesignSystemGradients = () => {
                   Welcome to Gradients
                 </Text>
                 <Button
-                  backgroundColor="color.white"
-                  color="color.purple.600"
+                  backgroundColor="color-white"
+                  color="color-purple-600"
                   borderRadius="8px" // 2 × 4px grid
                   paddingLeft="16px" // 4 × 4px grid
                   paddingTop="8px" // 2 × 4px grid
@@ -232,8 +232,8 @@ export const DesignSystemGradients = () => {
           <Card variant="outlined" shape="rounded" isFullWidth>
             <Gradient
               type="linear"
-              from="color.purple.500"
-              to="color.pink.500"
+              from="color-purple-500"
+              to="color-pink-500"
               height="80px"
               borderTopLeftRadius="8px" // 2 × 4px grid
               borderTopRightRadius="8px" // 2 × 4px grid

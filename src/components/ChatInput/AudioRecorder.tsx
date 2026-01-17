@@ -54,13 +54,13 @@ export const AudioRecorder: React.FC<AudioRecorderProps> = ({
         display="flex"
         alignItems="center"
         justifyContent="center"
-        backgroundColor={recording ? 'theme.error' : 'color.gray.100'}
-        color={recording ? 'color.white' : 'color.gray.600'}
+        backgroundColor={recording ? 'theme-error' : 'color-gray-100'}
+        color={recording ? 'color-white' : 'color-gray-600'}
         borderRadius="50%"
         border="none"
         cursor="pointer"
         _hover={{
-          backgroundColor: recording ? 'color.red.600' : 'color.gray.200',
+          backgroundColor: recording ? 'color-red-600' : 'color-gray-200',
         }}
         {...views.button}
       >

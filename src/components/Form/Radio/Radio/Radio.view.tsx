@@ -102,10 +102,10 @@ const RadioView: React.FC<RadioViewProps> = ({
 
       // Visual properties
       color: error
-        ? 'color.red.600'
+        ? 'color-red-600'
         : isDisabled
-        ? 'color.gray.400'
-        : 'color.gray.700',
+        ? 'color-gray-400'
+        : 'color-gray-700',
 
       // State properties
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
@@ -126,7 +126,7 @@ const RadioView: React.FC<RadioViewProps> = ({
 
       // Visual properties
       borderRadius: '50%', // Always circular for radio buttons
-      backgroundColor: 'color.white',
+      backgroundColor: 'color-white',
 
       // Size properties
       ...Sizes[size],
@@ -202,7 +202,7 @@ const RadioView: React.FC<RadioViewProps> = ({
         {infoText && (
           <Text
             marginLeft={labelPosition === 'left' ? 0 : 36} // 9 × 4px grid
-            color="color.gray.500"
+            color="color-gray-500"
             size="sm"
             fontWeight="400" // Regular weight
             lineHeight="15px"
@@ -219,7 +219,7 @@ const RadioView: React.FC<RadioViewProps> = ({
           size="xs"
           marginTop={4} // 1 × 4px grid
           marginHorizontal={0}
-          color="color.red.500"
+          color="color-red-500"
           fontWeight="500" // Medium weight for better readability
           transition="all 0.2s ease"
         >

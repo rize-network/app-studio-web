@@ -11,7 +11,7 @@ export const HighlightedTitle = () => {
       <Title
         highlightText="background"
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Text with background highlight
       </Title>
@@ -19,7 +19,7 @@ export const HighlightedTitle = () => {
       <Title
         highlightText="underlined"
         highlightStyle="underline"
-        highlightColor="theme.secondary"
+        highlightColor="theme-secondary"
       >
         Text with underlined highlight
       </Title>
@@ -27,8 +27,8 @@ export const HighlightedTitle = () => {
       <Title
         highlightText="gradient"
         highlightStyle="gradient"
-        highlightColor="theme.primary"
-        highlightSecondaryColor="theme.secondary"
+        highlightColor="theme-primary"
+        highlightSecondaryColor="theme-secondary"
       >
         Text with gradient highlight
       </Title>
@@ -36,7 +36,7 @@ export const HighlightedTitle = () => {
       <Title
         highlightText="outline"
         highlightStyle="outline"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Text with outline highlight
       </Title>
@@ -44,7 +44,7 @@ export const HighlightedTitle = () => {
       <Title
         highlightText="glow"
         highlightStyle="glow"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Text with glow highlight
       </Title>
@@ -52,7 +52,7 @@ export const HighlightedTitle = () => {
       <Title
         highlightText={['multiple', 'highlights']}
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
       >
         Text with multiple highlights in the same sentence
       </Title>

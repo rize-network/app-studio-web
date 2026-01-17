@@ -15,7 +15,7 @@ export const DirectAnimationExample = () => {
       }}
       highlightText="animated"
       highlightStyle="background"
-      highlightColor="theme.primary"
+      highlightColor="theme-primary"
       highlightAnimate={{
         from: { opacity: 0 },
         to: { opacity: 1 },

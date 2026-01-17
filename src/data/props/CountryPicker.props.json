@@ -28,7 +28,7 @@
     "type": "string",
     "typeValues": [],
     "description": "Optional color scheme for styling",
-    "defaultValue": "'theme.primary'"
+    "defaultValue": "'theme-primary'"
   },
   "helperText": {
     "type": "string",
@@ -44,12 +44,7 @@
   },
   "shape": {
     "type": "Shape",
-    "typeValues": [
-      "'default'",
-      "'square'",
-      "'rounded'",
-      "'pill'"
-    ],
+    "typeValues": ["'default'", "'square'", "'rounded'", "'pill'"],
     "description": "Optional shape of the CountryPicker for visual styles",
     "defaultValue": "'default'"
   },
@@ -91,41 +86,24 @@
   },
   "size": {
     "type": "Size",
-    "typeValues": [
-      "'xs'",
-      "'sm'",
-      "'md'",
-      "'lg'",
-      "'xl'"
-    ],
+    "typeValues": ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
     "description": "Optional size of the CountryPicker for visual styles",
     "defaultValue": "'md'"
   },
   "value": {
-    "type": [
-      "string",
-      "number"
-    ],
+    "type": ["string", "number"],
     "typeValues": [],
     "description": "Value to be used as the current selection",
     "defaultValue": []
   },
   "variant": {
     "type": "Variant",
-    "typeValues": [
-      "'default'",
-      "'outline'",
-      "'none'"
-    ],
+    "typeValues": ["'default'", "'outline'", "'none'"],
     "description": "Variant for different visual types of CountryPicker",
     "defaultValue": "'default'"
   },
   "shadow": {
-    "type": [
-      "Shadow",
-      "Elevation",
-      "CSSProperties"
-    ],
+    "type": ["Shadow", "Elevation", "CSSProperties"],
     "typeValues": [],
     "description": "Shadow or Elevation styles for visual depth and perspective",
     "defaultValue": []
@@ -180,9 +158,7 @@
   },
   "newOptions": {
     "type": "array",
-    "typeValues": [
-      "Country"
-    ],
+    "typeValues": ["Country"],
     "description": "Array of new options for dropdown list",
     "defaultValue": []
   },
@@ -200,9 +176,7 @@
   },
   "options": {
     "type": "array",
-    "typeValues": [
-      "Country"
-    ],
+    "typeValues": ["Country"],
     "description": "Options array to populate the dropdown",
     "defaultValue": []
   },

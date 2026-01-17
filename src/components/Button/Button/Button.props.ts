@@ -53,7 +53,7 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional animation to apply to the button
   animation?: Animation;
 
-  // Main color for the button (accepts theme tokens like 'theme.primary' or color palette like 'color.blue.600')
+  // Main color for the button (accepts theme tokens like 'theme-primary' or color palette like 'color-blue-600')
   color?: string;
 
   // Explicit text color (overrides auto-calculated color)

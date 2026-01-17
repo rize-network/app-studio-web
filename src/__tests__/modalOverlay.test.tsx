@@ -29,7 +29,7 @@ test('Modal Overlay renders without errors when isOpen prop is true', () => {
 
 // test('Modal Overlay applies custom styles using props spread', () => {
 //   render(
-//     <Modal.Overlay isOpen={true} onClose={() => {}} color="color.red">
+//     <Modal.Overlay isOpen={true} onClose={() => {}} color="color-red">
 //       Modal Content
 //     </Modal.Overlay>
 //   );

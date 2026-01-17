@@ -94,7 +94,7 @@ export const HighlightStyles: Record<
   }),
   background: (color) => ({
     backgroundColor: color,
-    color: 'color.white',
+    color: 'color-white',
     padding: '0 8px',
     borderRadius: '4px',
   }),
@@ -116,6 +116,9 @@ export const HighlightStyles: Record<
   glow: (color) => ({
     color: color,
     textShadow: `0 0 10px ${color}80, 0 0 20px ${color}40, 0 0 30px ${color}20`,
+  }),
+  solid: (color) => ({
+    color: color,
   }),
   default: () => ({}),
 };

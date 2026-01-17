@@ -100,11 +100,11 @@ export const DesignSystemCheckboxes = () => (
           label="Primary Theme"
           views={{
             checkbox: {
-              backgroundColor: 'theme.primary',
-              borderColor: 'theme.primary',
+              backgroundColor: 'theme-primary',
+              borderColor: 'theme-primary',
             },
             label: {
-              color: 'theme.primary',
+              color: 'theme-primary',
               fontWeight: '600',
             },
           }}
@@ -116,11 +116,11 @@ export const DesignSystemCheckboxes = () => (
           views={{
             checkbox: {
               borderRadius: '50%',
-              borderColor: 'color.purple.400',
-              backgroundColor: 'color.purple.500',
+              borderColor: 'color-purple-400',
+              backgroundColor: 'color-purple-500',
             },
             label: {
-              color: 'color.purple.700',
+              color: 'color-purple-700',
             },
           }}
           defaultIsSelected
@@ -134,7 +134,7 @@ export const DesignSystemCheckboxes = () => (
           views={{
             checkbox: {
               borderRadius: '8px',
-              backgroundColor: 'color.blue.500',
+              backgroundColor: 'color-blue-500',
               transition: 'all 0.3s ease',
               _hover: {
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
@@ -155,7 +155,7 @@ export const DesignSystemCheckboxes = () => (
       <Vertical
         gap={8}
         padding={16}
-        backgroundColor="color.gray.50"
+        backgroundColor="color-gray-50"
         borderRadius="8px"
       >
         <Text fontWeight="600" marginBottom={8}>

@@ -66,7 +66,7 @@ export const DesignSystemBadges = () => (
               key={position}
               width="100px"
               height="100px"
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               position="relative"
               borderRadius="8px"
             >
@@ -80,7 +80,7 @@ export const DesignSystemBadges = () => (
                 top="50%"
                 left="50%"
                 transform="translate(-50%, -50%)"
-                color="color.gray.500"
+                color="color-gray-500"
               >
                 {position}
               </Text>
@@ -96,16 +96,16 @@ export const DesignSystemBadges = () => (
         Custom Styling
       </Text>
       <Horizontal gap={16} alignItems="center" flexWrap="wrap">
-        <Badge content="New" backgroundColor="color.blue.500" color="white" />
+        <Badge content="New" backgroundColor="color-blue-500" color="white" />
         <Badge
           content="Sale"
-          backgroundColor="color.green.500"
+          backgroundColor="color-green-500"
           color="white"
           borderRadius="16px"
         />
         <Badge
           content="Hot"
-          backgroundColor="color.red.500"
+          backgroundColor="color-red-500"
           color="white"
           fontWeight="bold"
         />
@@ -114,7 +114,7 @@ export const DesignSystemBadges = () => (
           views={{
             container: {
               background: 'linear-gradient(90deg, #4F46E5 0%, #9333EA 100%)',
-              color: 'color.white',
+              color: 'color-white',
               boxShadow: '0 2px 8px rgba(99, 102, 241, 0.3)',
             },
             text: {

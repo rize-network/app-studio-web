@@ -20,7 +20,7 @@ export const TypewriterHighlightDemo = () => {
         alignItems="center"
         marginBottom={16}
       >
-        <Text fontSize={14} color="color.gray.500">
+        <Text fontSize={14} color="color-gray-500">
           Typewriter effect on highlighted text
         </Text>
         <Button variant="outline" size="sm" onClick={resetTypewriters}>
@@ -33,7 +33,7 @@ export const TypewriterHighlightDemo = () => {
         key={`single-${resetKey}`}
         highlightText="typewriter"
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightTypewriter={true}
         highlightTypewriterDuration={1500}
         size="xl"
@@ -46,7 +46,7 @@ export const TypewriterHighlightDemo = () => {
         key={`multiple-${resetKey}`}
         highlightText={['multiple', 'highlighted', 'words']}
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightTypewriter={true}
         highlightTypewriterDuration={2500}
         size="xl"
@@ -59,8 +59,8 @@ export const TypewriterHighlightDemo = () => {
         key={`gradient-${resetKey}`}
         highlightText="gradient"
         highlightStyle="gradient"
-        highlightColor="color.blue.500"
-        highlightSecondaryColor="color.purple.500"
+        highlightColor="color-blue-500"
+        highlightSecondaryColor="color-purple-500"
         highlightTypewriter={true}
         highlightTypewriterDuration={1000}
         size="xl"
@@ -72,8 +72,8 @@ export const TypewriterHighlightDemo = () => {
       <Title
         key={`full-${resetKey}`}
         highlightStyle="gradient"
-        highlightColor="color.blue.500"
-        highlightSecondaryColor="color.purple.500"
+        highlightColor="color-blue-500"
+        highlightSecondaryColor="color-purple-500"
         highlightTypewriter={true}
         highlightTypewriterDuration={3000}
         size="xl"
@@ -86,7 +86,7 @@ export const TypewriterHighlightDemo = () => {
         key={`animated-${resetKey}`}
         highlightText="animated"
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightTypewriter={true}
         highlightTypewriterDuration={1500}
         highlightAnimate={{
@@ -113,7 +113,7 @@ export const TypewriterHighlightDemo = () => {
         alternateAnimation={true}
         alternateDuration={3000}
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightTypewriter={true}
         highlightTypewriterDuration={1000}
         size="xl"
@@ -121,7 +121,7 @@ export const TypewriterHighlightDemo = () => {
         Our changing solution for your business
       </Title>
 
-      <Text fontSize={14} color="color.gray.500" marginTop={8}>
+      <Text fontSize={14} color="color-gray-500" marginTop={8}>
         The typewriter effect adds a blinking cursor while typing and has a
         natural typing rhythm. This implementation is based on a more robust
         TypewriterEffect component that handles the animation directly in the

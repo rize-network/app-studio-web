@@ -84,7 +84,7 @@ export const OverlayStyles: ViewProps = {
  * Container base styles for the Modal component
  */
 export const ContainerBaseStyles: ViewProps = {
-  backgroundColor: 'color.white',
+  backgroundColor: 'color-white',
   boxShadow:
     '0px 10px 25px rgba(0, 0, 0, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.08)',
   transition: 'box-shadow 0.2s ease',
@@ -103,12 +103,12 @@ export const ModalTypography = {
     fontSize: '18px', // 4.5 × 4px grid
     fontWeight: '600', // Semi-bold
     lineHeight: '24px', // 6 × 4px grid
-    color: 'color.gray.900',
+    color: 'color-gray-900',
   },
   body: {
     fontSize: '16px', // 4 × 4px grid
     fontWeight: '400', // Regular
     lineHeight: '24px', // 6 × 4px grid
-    color: 'color.gray.700',
+    color: 'color-gray-700',
   },
 };

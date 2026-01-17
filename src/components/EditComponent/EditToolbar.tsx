@@ -49,21 +49,21 @@ export const EditToolbar: React.FC<EditToolbarProps> = ({
             backgroundColor={
               isActive
                 ? isSpecial
-                  ? 'color.gray.800'
-                  : 'color.gray.100'
+                  ? 'color-gray-800'
+                  : 'color-gray-100'
                 : 'transparent'
             }
             hoverStyle={{
               backgroundColor: isActive
                 ? isSpecial
-                  ? 'color.gray.800'
-                  : 'color.gray.100'
-                : 'color.gray.100',
+                  ? 'color-gray-800'
+                  : 'color-gray-100'
+                : 'color-gray-100',
             }}
           >
             <Icon
               name={item.icon as any}
-              color={isActive && isSpecial ? 'white' : 'color.gray.500'}
+              color={isActive && isSpecial ? 'white' : 'color-gray-500'}
               size={20}
             />
           </View>

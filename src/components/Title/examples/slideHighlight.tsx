@@ -8,7 +8,7 @@ import { Title } from '../Title';
 export const SlideHighlightDemo = () => {
   return (
     <Vertical gap={32}>
-      <Text fontSize={14} color="color.gray.500">
+      <Text fontSize={14} color="color-gray-500">
         Slide effect on highlighted text
       </Text>
 
@@ -16,7 +16,7 @@ export const SlideHighlightDemo = () => {
       <Title
         highlightText="slide"
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightSlide={true}
         highlightSlideDuration={500}
         highlightSlideStagger={500}
@@ -38,7 +38,7 @@ export const SlideHighlightDemo = () => {
         alternateAnimation={true}
         alternateDuration={6000}
         highlightStyle="background"
-        highlightColor="theme.primary"
+        highlightColor="theme-primary"
         highlightSlide={true}
         highlightSlideDuration={500}
         highlightSlideStagger={500}
@@ -55,8 +55,8 @@ export const SlideHighlightDemo = () => {
         alternateAnimation={true}
         alternateDuration={2000}
         highlightStyle="gradient"
-        highlightColor="color.blue.500"
-        highlightSecondaryColor="color.purple.500"
+        highlightColor="color-blue-500"
+        highlightSecondaryColor="color-purple-500"
         highlightSlide={true}
         highlightSlideDuration={500}
         size="xl"

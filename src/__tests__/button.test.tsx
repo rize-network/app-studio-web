@@ -45,10 +45,10 @@ test('should render button component with correct class name', () => {
 //   expect(buttonElement).toHaveStyle({ width: '100%' });
 // });
 
-// test('should render a button with backgroundColor theme.secondary', () => {
+// test('should render a button with backgroundColor theme-secondary', () => {
 //   render(<Button >Button</Button>);
 //   const buttonElement = screen.getByRole('button');
-//   expect(buttonElement).toHaveStyle({ backgroundColor: 'theme.secondary' });
+//   expect(buttonElement).toHaveStyle({ backgroundColor: 'theme-secondary' });
 // });
 
 test('button component calls onClick function when clicked', () => {

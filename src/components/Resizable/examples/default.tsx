@@ -14,7 +14,7 @@ export const DefaultResizable = () => {
     >
       <Resizable>
         <Resizable.Panel id="panel1" defaultSize="30%">
-          <View padding="16px" height="100%" backgroundColor="color.blue.50">
+          <View padding="16px" height="100%" backgroundColor="color-blue-50">
             <Text fontWeight="bold" marginBottom="8px">
               Panel 1
             </Text>
@@ -25,7 +25,7 @@ export const DefaultResizable = () => {
         <Resizable.Handle id="handle1" withVisualIndicator />
 
         <Resizable.Panel id="panel2" defaultSize="40%">
-          <View padding="16px" height="100%" backgroundColor="color.green.50">
+          <View padding="16px" height="100%" backgroundColor="color-green-50">
             <Text fontWeight="bold" marginBottom="8px">
               Panel 2
             </Text>
@@ -36,7 +36,7 @@ export const DefaultResizable = () => {
         <Resizable.Handle id="handle2" withVisualIndicator />
 
         <Resizable.Panel id="panel3" defaultSize="30%">
-          <View padding="16px" height="100%" backgroundColor="color.purple.50">
+          <View padding="16px" height="100%" backgroundColor="color-purple-50">
             <Text fontWeight="bold" marginBottom="8px">
               Panel 3
             </Text>

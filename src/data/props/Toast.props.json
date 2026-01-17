@@ -6,12 +6,7 @@
   },
   "variant": {
     "type": "ToastVariant",
-    "typeValues": [
-      "info",
-      "success",
-      "warning",
-      "error"
-    ],
+    "typeValues": ["info", "success", "warning", "error"],
     "description": "The visual style or type of the toast (e.g., success, error, info)."
   },
   "title": {
@@ -46,7 +41,7 @@
   },
   "theme": {
     "type": "ThemesType",
-    "description": "An optional theme to apply to the toast, overriding the global theme."
+    "description": "An optional theme to apply to the toast, overriding the global theme-"
   },
   "views": {
     "type": "ToastStyles",

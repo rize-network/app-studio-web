@@ -59,7 +59,7 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
       padding="16px"
       borderBottomWidth="1px"
       borderBottomStyle="solid"
-      borderBottomColor="color.gray.200"
+      borderBottomColor="color-gray-200"
       alignItems="center"
       justifyContent="space-between"
       {...views?.header}
@@ -83,7 +83,7 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
               borderRadius="4px"
               backgroundColor="transparent"
               cursor="pointer"
-              _hover={{ backgroundColor: 'color.gray.100' }}
+              _hover={{ backgroundColor: 'color-gray-100' }}
               onClick={toggleExpanded}
               aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
               {...views?.toggleButton}
@@ -114,7 +114,7 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
               borderRadius="4px"
               backgroundColor="transparent"
               cursor="pointer"
-              _hover={{ backgroundColor: 'color.gray.100' }}
+              _hover={{ backgroundColor: 'color-gray-100' }}
               onClick={toggleExpanded}
               aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
               {...views?.toggleButton}
@@ -169,7 +169,7 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
       padding="16px"
       borderTopWidth="1px"
       borderTopStyle="solid"
-      borderTopColor="color.gray.200"
+      borderTopColor="color-gray-200"
       {...views?.footer}
       {...props}
     >
@@ -232,7 +232,7 @@ export const SidebarView: React.FC<SidebarProps> = ({
           left={0}
           width="100vw"
           height="100vh"
-          backgroundColor="color.blackAlpha.500"
+          backgroundColor="color-blackAlpha-500"
           zIndex={998}
           onClick={collapse}
           {...views?.backdrop}
@@ -296,14 +296,14 @@ export const SideBarNavItem = ({
       gap={12}
       padding="8px 12px"
       borderRadius="4px"
-      backgroundColor={isActive ? 'color.blue.50' : 'transparent'}
-      color={isActive ? 'color.blue.600' : 'color.gray.700'}
+      backgroundColor={isActive ? 'color-blue-50' : 'transparent'}
+      color={isActive ? 'color-blue-600' : 'color-gray-700'}
       fontWeight={isActive ? 'bold' : 'normal'}
       cursor="pointer"
       aria-label={ariaLabel}
       on={{
         hover: {
-          backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100',
+          backgroundColor: isActive ? 'color-blue-50' : 'color-gray-100',
         },
       }}
       {...props}

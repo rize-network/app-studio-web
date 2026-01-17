@@ -4,26 +4,17 @@
     "type": "string",
     "typeValues": [],
     "description": "The color of the close button in the header.",
-    "defaultValue": "theme.primary"
+    "defaultValue": "theme-primary"
   },
   "iconSize": {
     "type": "Size",
-    "typeValues": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl"
-    ],
+    "typeValues": ["xs", "sm", "md", "lg", "xl"],
     "description": "The size of the close button in the header.",
     "defaultValue": "md"
   },
   "shape": {
     "type": "Shape",
-    "typeValues": [
-      "square",
-      "rounded"
-    ],
+    "typeValues": ["square", "rounded"],
     "description": "Determines whether the modal should have square or rounded edges.",
     "defaultValue": "rounded"
   },
@@ -35,11 +26,7 @@
   },
   "buttonPosition": {
     "type": "CloseButtonPosition",
-    "typeValues": [
-      "left",
-      "right",
-      "none"
-    ],
+    "typeValues": ["left", "right", "none"],
     "description": "Indicates the presence of a close button and its position within the header.",
     "defaultValue": "right"
   },
@@ -69,13 +56,7 @@
   },
   "position": {
     "type": "Position",
-    "typeValues": [
-      "top",
-      "left",
-      "right",
-      "bottom",
-      "center"
-    ],
+    "typeValues": ["top", "left", "right", "bottom", "center"],
     "description": "The positioning of the modal container.",
     "defaultValue": "center"
   },

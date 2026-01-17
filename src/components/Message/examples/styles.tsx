@@ -22,7 +22,7 @@ export const StylesDemo = () => {
               },
               title: { color: 'black' },
               subtitle: { color: 'black' },
-              actionText: { color: 'color.black', borderColor: 'black' },
+              actionText: { color: 'color-black', borderColor: 'black' },
             },
           }
         )

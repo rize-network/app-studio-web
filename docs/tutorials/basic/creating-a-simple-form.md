@@ -497,9 +497,9 @@ function ContactForm() {
   };
 
   return (
-    <View padding={20} maxWidth={500} margin="0 auto" backgroundColor="color.white" borderRadius={8} boxShadow="0 2px 8px rgba(0, 0, 0, 0.1)">
+    <View padding={20} maxWidth={500} margin="0 auto" backgroundColor="color-white" borderRadius={8} boxShadow="0 2px 8px rgba(0, 0, 0, 0.1)">
       <Vertical gap={20}>
-        <Text fontSize={24} fontWeight="bold" color="theme.primary">Contact Us</Text>
+        <Text fontSize={24} fontWeight="bold" color="theme-primary">Contact Us</Text>
         
         <Formik
           initialValues={{ name: '', email: '', message: '' }}

@@ -47,11 +47,11 @@ export const dropdownStyles: ViewProps = {
   zIndex: 1000,
 
   // Visual properties
-  backgroundColor: 'color.white',
+  backgroundColor: 'color-white',
   borderRadius: '8px', // Consistent with design system (rounded-md)
   borderWidth: '1px',
   borderStyle: 'solid',
-  borderColor: 'color.gray.200',
+  borderColor: 'color-gray-200',
 
   // Shadow - more subtle, matching shadcn/ui
   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.05), 0px 2px 4px rgba(0, 0, 0, 0.03)',
@@ -68,14 +68,14 @@ export const optionStyles: ViewProps = {
   cursor: 'pointer',
   transition: 'background-color 0.15s ease, color 0.15s ease',
   _hover: {
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
   },
   _focus: {
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
     outline: 'none',
   },
   _selected: {
-    backgroundColor: 'theme.primary',
-    color: 'color.white',
+    backgroundColor: 'theme-primary',
+    color: 'color-white',
   },
 };

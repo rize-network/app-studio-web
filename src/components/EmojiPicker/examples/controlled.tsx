@@ -41,7 +41,7 @@ export const ControlledEmojiPicker = () => {
         </Button>
       </Horizontal>
 
-      <Text fontSize="14px" color="color.gray.600">
+      <Text fontSize="14px" color="color-gray-600">
         Selected emoji: {selectedEmoji}
       </Text>
     </Vertical>

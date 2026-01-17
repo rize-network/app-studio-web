@@ -34,8 +34,8 @@ const ToggleView: React.FC<Props> = ({
   const mode = elementMode ?? themeMode;
 
   /* MAIN COLOR – determines the entire palette */
-  const mainColorKey = backgroundColor ?? color ?? 'theme.primary';
-  const mainTone = getColor(isDisabled ? 'theme.disabled' : mainColorKey, {
+  const mainColorKey = backgroundColor ?? color ?? 'theme-primary';
+  const mainTone = getColor(isDisabled ? 'theme-disabled' : mainColorKey, {
     themeMode: mode,
   });
   const tone = contrast(mainTone);
@@ -78,7 +78,7 @@ const ToggleView: React.FC<Props> = ({
       /* Override with active state if toggled */
       {...(isActive && {
         backgroundColor: mainTone,
-        color: tone === 'light' ? 'color.black' : 'color.white',
+        color: tone === 'light' ? 'color-black' : 'color-white',
       })}
       {...props}
       {...views?.container}

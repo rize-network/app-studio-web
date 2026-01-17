@@ -17,9 +17,9 @@ import { View, Text } from '@app-studio/web';
 
 export const BasicVertical = () => (
   <Vertical>
-    <View height={50} backgroundColor="theme.primary" />
-    <View height={50} backgroundColor="theme.secondary" />
-    <View height={50} backgroundColor="theme.warning" />
+    <View height={50} backgroundColor="theme-primary" />
+    <View height={50} backgroundColor="theme-secondary" />
+    <View height={50} backgroundColor="theme-warning" />
   </Vertical>
 );
 ```
@@ -32,13 +32,13 @@ import { View, Text } from '@app-studio/web';
 
 export const VerticalWithGap = () => (
   <Vertical gap={16}>
-    <View padding={16} backgroundColor="color.blue.100" borderRadius={8}>
+    <View padding={16} backgroundColor="color-blue-100" borderRadius={8}>
       <Text>First Item</Text>
     </View>
-    <View padding={16} backgroundColor="color.green.100" borderRadius={8}>
+    <View padding={16} backgroundColor="color-green-100" borderRadius={8}>
       <Text>Second Item</Text>
     </View>
-    <View padding={16} backgroundColor="color.purple.100" borderRadius={8}>
+    <View padding={16} backgroundColor="color-purple-100" borderRadius={8}>
       <Text>Third Item</Text>
     </View>
   </Vertical>
@@ -56,33 +56,33 @@ export const VerticalAlignment = () => (
     {/* Left aligned (default) */}
     <Vertical alignItems="flex-start" gap={8}>
       <Text fontWeight="bold">Left Aligned</Text>
-      <View width={100} height={40} backgroundColor="color.red.200" />
-      <View width={150} height={40} backgroundColor="color.red.300" />
-      <View width={80} height={40} backgroundColor="color.red.400" />
+      <View width={100} height={40} backgroundColor="color-red-200" />
+      <View width={150} height={40} backgroundColor="color-red-300" />
+      <View width={80} height={40} backgroundColor="color-red-400" />
     </Vertical>
 
     {/* Center aligned */}
     <Vertical alignItems="center" gap={8}>
       <Text fontWeight="bold">Center Aligned</Text>
-      <View width={100} height={40} backgroundColor="color.blue.200" />
-      <View width={150} height={40} backgroundColor="color.blue.300" />
-      <View width={80} height={40} backgroundColor="color.blue.400" />
+      <View width={100} height={40} backgroundColor="color-blue-200" />
+      <View width={150} height={40} backgroundColor="color-blue-300" />
+      <View width={80} height={40} backgroundColor="color-blue-400" />
     </Vertical>
 
     {/* Right aligned */}
     <Vertical alignItems="flex-end" gap={8}>
       <Text fontWeight="bold">Right Aligned</Text>
-      <View width={100} height={40} backgroundColor="color.green.200" />
-      <View width={150} height={40} backgroundColor="color.green.300" />
-      <View width={80} height={40} backgroundColor="color.green.400" />
+      <View width={100} height={40} backgroundColor="color-green-200" />
+      <View width={150} height={40} backgroundColor="color-green-300" />
+      <View width={80} height={40} backgroundColor="color-green-400" />
     </Vertical>
 
     {/* Stretched */}
     <Vertical alignItems="stretch" gap={8} width={200}>
       <Text fontWeight="bold">Stretched</Text>
-      <View height={40} backgroundColor="color.purple.200" />
-      <View height={40} backgroundColor="color.purple.300" />
-      <View height={40} backgroundColor="color.purple.400" />
+      <View height={40} backgroundColor="color-purple-200" />
+      <View height={40} backgroundColor="color-purple-300" />
+      <View height={40} backgroundColor="color-purple-400" />
     </Vertical>
   </Vertical>
 );
@@ -97,38 +97,38 @@ import { View, Text } from '@app-studio/web';
 export const VerticalJustification = () => (
   <Vertical gap={20}>
     {/* Start justified (default) */}
-    <View height={200} border="1px solid" borderColor="color.gray.300">
+    <View height={200} border="1px solid" borderColor="color-gray-300">
       <Vertical justifyContent="flex-start" height="100%">
         <Text>Start Justified</Text>
-        <View width={100} height={30} backgroundColor="color.red.300" />
-        <View width={100} height={30} backgroundColor="color.red.400" />
+        <View width={100} height={30} backgroundColor="color-red-300" />
+        <View width={100} height={30} backgroundColor="color-red-400" />
       </Vertical>
     </View>
 
     {/* Center justified */}
-    <View height={200} border="1px solid" borderColor="color.gray.300">
+    <View height={200} border="1px solid" borderColor="color-gray-300">
       <Vertical justifyContent="center" height="100%">
         <Text>Center Justified</Text>
-        <View width={100} height={30} backgroundColor="color.blue.300" />
-        <View width={100} height={30} backgroundColor="color.blue.400" />
+        <View width={100} height={30} backgroundColor="color-blue-300" />
+        <View width={100} height={30} backgroundColor="color-blue-400" />
       </Vertical>
     </View>
 
     {/* End justified */}
-    <View height={200} border="1px solid" borderColor="color.gray.300">
+    <View height={200} border="1px solid" borderColor="color-gray-300">
       <Vertical justifyContent="flex-end" height="100%">
         <Text>End Justified</Text>
-        <View width={100} height={30} backgroundColor="color.green.300" />
-        <View width={100} height={30} backgroundColor="color.green.400" />
+        <View width={100} height={30} backgroundColor="color-green-300" />
+        <View width={100} height={30} backgroundColor="color-green-400" />
       </Vertical>
     </View>
 
     {/* Space between */}
-    <View height={200} border="1px solid" borderColor="color.gray.300">
+    <View height={200} border="1px solid" borderColor="color-gray-300">
       <Vertical justifyContent="space-between" height="100%">
         <Text>Space Between</Text>
-        <View width={100} height={30} backgroundColor="color.purple.300" />
-        <View width={100} height={30} backgroundColor="color.purple.400" />
+        <View width={100} height={30} backgroundColor="color-purple-300" />
+        <View width={100} height={30} backgroundColor="color-purple-400" />
       </Vertical>
     </View>
   </Vertical>
@@ -177,7 +177,7 @@ export const FormLayout = () => (
         label="I agree to the terms and conditions"
       />
 
-      <Button variant="filled" colorScheme="theme.primary">
+      <Button variant="filled" colorScheme="theme-primary">
         Send Message
       </Button>
     </Vertical>
@@ -196,12 +196,12 @@ export const NavigationMenu = () => (
   <Vertical
     width={250}
     height="100vh"
-    backgroundColor="color.gray.900"
+    backgroundColor="color-gray-900"
     padding={16}
     gap={8}
   >
     <Text
-      color="color.white"
+      color="color-white"
       fontSize={20}
       fontWeight="bold"
       marginBottom={24}
@@ -221,18 +221,18 @@ export const NavigationMenu = () => (
           gap={12}
           padding={12}
           borderRadius={8}
-          backgroundColor={item.active ? 'color.blue.600' : 'transparent'}
+          backgroundColor={item.active ? 'color-blue-600' : 'transparent'}
           cursor="pointer"
           _hover={{
-            backgroundColor: item.active ? 'color.blue.600' : 'color.gray.800'
+            backgroundColor: item.active ? 'color-blue-600' : 'color-gray-800'
           }}
         >
           <item.icon
             widthHeight={20}
-            color={item.active ? 'color.white' : 'color.gray.300'}
+            color={item.active ? 'color-white' : 'color-gray-300'}
           />
           <Text
-            color={item.active ? 'color.white' : 'color.gray.300'}
+            color={item.active ? 'color-white' : 'color-gray-300'}
             fontWeight={item.active ? 'medium' : 'normal'}
           >
             {item.label}
@@ -249,10 +249,10 @@ export const NavigationMenu = () => (
       padding={12}
       borderRadius={8}
       cursor="pointer"
-      _hover={{ backgroundColor: 'color.gray.800' }}
+      _hover={{ backgroundColor: 'color-gray-800' }}
     >
-      <LogoutIcon widthHeight={20} color="color.gray.300" />
-      <Text color="color.gray.300">Logout</Text>
+      <LogoutIcon widthHeight={20} color="color-gray-300" />
+      <Text color="color-gray-300">Logout</Text>
     </Horizontal>
   </Vertical>
 );
@@ -272,15 +272,15 @@ export const CardLayout = () => (
       <View
         key={item}
         border="1px solid"
-        borderColor="color.gray.200"
+        borderColor="color-gray-200"
         borderRadius={12}
         overflow="hidden"
-        backgroundColor="color.white"
+        backgroundColor="color-white"
         boxShadow="0 2px 8px rgba(0,0,0,0.1)"
       >
         <View
           height={200}
-          backgroundColor="color.blue.100"
+          backgroundColor="color-blue-100"
           backgroundImage={`url(https://picsum.photos/400/200?random=${item})`}
           backgroundSize="cover"
           backgroundPosition="center"
@@ -291,7 +291,7 @@ export const CardLayout = () => (
             <Text fontSize={20} fontWeight="bold">
               Article Title {item}
             </Text>
-            <Text color="color.gray.600" >
+            <Text color="color-gray-600" >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </Text>
@@ -300,14 +300,14 @@ export const CardLayout = () => (
           <Horizontal justifyContent="space-between" alignItems="center">
             <Horizontal gap={16}>
               <Horizontal alignItems="center" gap={4}>
-                <StarIcon widthHeight={16} color="color.yellow.500" />
-                <Text fontSize={14} color="color.gray.600">4.5</Text>
+                <StarIcon widthHeight={16} color="color-yellow-500" />
+                <Text fontSize={14} color="color-gray-600">4.5</Text>
               </Horizontal>
               <Horizontal alignItems="center" gap={4}>
-                <HeartIcon widthHeight={16} color="color.red.500" />
-                <Text fontSize={14} color="color.gray.600">24</Text>
+                <HeartIcon widthHeight={16} color="color-red-500" />
+                <Text fontSize={14} color="color-gray-600">24</Text>
               </Horizontal>
-              <ShareIcon widthHeight={16} color="color.gray.400" />
+              <ShareIcon widthHeight={16} color="color-gray-400" />
             </Horizontal>
 
             <Button variant="outline" size="sm">
@@ -356,17 +356,17 @@ export const ResponsiveVertical = () => (
     <View
       width={{ mobile: '100%', tablet: '80%', desktop: '60%' }}
       height={100}
-      backgroundColor="color.blue.200"
+      backgroundColor="color-blue-200"
     />
     <View
       width={{ mobile: '100%', tablet: '80%', desktop: '60%' }}
       height={100}
-      backgroundColor="color.green.200"
+      backgroundColor="color-green-200"
     />
     <View
       width={{ mobile: '100%', tablet: '80%', desktop: '60%' }}
       height={100}
-      backgroundColor="color.purple.200"
+      backgroundColor="color-purple-200"
     />
   </Vertical>
 );
@@ -385,9 +385,9 @@ export const StickyHeaderLayout = () => (
     {/* Sticky Header */}
     <View
       padding={16}
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       borderBottom="1px solid"
-      borderColor="color.gray.200"
+      borderColor="color-gray-200"
       position="sticky"
       top={0}
       zIndex={10}
@@ -403,7 +403,7 @@ export const StickyHeaderLayout = () => (
         <View
           key={i}
           padding={16}
-          backgroundColor="color.gray.50"
+          backgroundColor="color-gray-50"
           borderRadius={8}
         >
           <Text>Content Item {i + 1}</Text>
@@ -425,7 +425,7 @@ export const SplitLayout = () => (
     {/* Sidebar */}
     <Vertical
       width={250}
-      backgroundColor="color.gray.100"
+      backgroundColor="color-gray-100"
       padding={16}
       gap={8}
     >
@@ -444,9 +444,9 @@ export const SplitLayout = () => (
       </Text>
       <View
         flex={1}
-        backgroundColor="color.white"
+        backgroundColor="color-white"
         border="1px solid"
-        borderColor="color.gray.200"
+        borderColor="color-gray-200"
         borderRadius={8}
         padding={24}
       >
@@ -498,10 +498,10 @@ export const SplitLayout = () => (
 <Vertical gap={16}>
   {features.map((feature) => (
     <Horizontal key={feature.id} gap={12} alignItems="flex-start">
-      <CheckIcon widthHeight={20} color="color.green.500" />
+      <CheckIcon widthHeight={20} color="color-green-500" />
       <Vertical gap={4}>
         <Text fontWeight="medium">{feature.title}</Text>
-        <Text color="color.gray.600">{feature.description}</Text>
+        <Text color="color-gray-600">{feature.description}</Text>
       </Vertical>
     </Horizontal>
   ))}
@@ -518,21 +518,21 @@ export const SplitLayout = () => (
           width={12}
           height={12}
           borderRadius="50%"
-          backgroundColor="color.blue.500"
+          backgroundColor="color-blue-500"
         />
         {index < timelineItems.length - 1 && (
           <View
             width={2}
             height={40}
-            backgroundColor="color.gray.300"
+            backgroundColor="color-gray-300"
             marginTop={8}
           />
         )}
       </Vertical>
       <Vertical gap={4} flex={1}>
         <Text fontWeight="medium">{item.title}</Text>
-        <Text color="color.gray.600">{item.description}</Text>
-        <Text fontSize={12} color="color.gray.500">{item.date}</Text>
+        <Text color="color-gray-600">{item.description}</Text>
+        <Text fontSize={12} color="color-gray-500">{item.date}</Text>
       </Vertical>
     </Horizontal>
   ))}

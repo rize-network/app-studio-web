@@ -117,7 +117,7 @@ export const ResizablePanel: React.FC<ResizablePanelProps> = ({
         flex="0 0 auto"
         width={orientation === 'horizontal' ? '10px' : '100%'}
         height={orientation === 'vertical' ? '10px' : '100%'}
-        backgroundColor="color.gray.200"
+        backgroundColor="color-gray-200"
         cursor="pointer"
         onClick={() => togglePanelCollapse(id)}
         aria-label={`Expand panel ${id}`}
@@ -273,9 +273,9 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
           width="16px"
           height="16px"
           borderRadius="full"
-          backgroundColor="color.gray.100"
+          backgroundColor="color-gray-100"
           border="1px solid"
-          borderColor="color.gray.300"
+          borderColor="color-gray-300"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -290,7 +290,7 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
           role="button"
           tabIndex={0}
           pointerEvents="auto"
-          _hover={{ backgroundColor: 'color.gray.200' }}
+          _hover={{ backgroundColor: 'color-gray-200' }}
           {...views?.collapseIcon}
         >
           {/* Collapse/expand icon */}
@@ -307,18 +307,18 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
                 <View
                   width="6px"
                   height="2px"
-                  backgroundColor="color.gray.600"
+                  backgroundColor="color-gray-600"
                 />
                 <View
                   width="2px"
                   height="6px"
-                  backgroundColor="color.gray.600"
+                  backgroundColor="color-gray-600"
                   position="absolute"
                 />
               </Horizontal>
             ) : (
               /* Collapse icon (minus) */
-              <View width="6px" height="2px" backgroundColor="color.gray.600" />
+              <View width="6px" height="2px" backgroundColor="color-gray-600" />
             )}
           </View>
         </View>

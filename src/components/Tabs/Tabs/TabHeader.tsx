@@ -38,9 +38,9 @@ export const TabHeader: React.FC<TabHeaderProps> = ({
     padding: '12px 16px',
     cursor: 'pointer',
     borderBottom: '2px solid',
-    borderBottomColor: isActive ? 'theme.primary' : 'transparent',
+    borderBottomColor: isActive ? 'theme-primary' : 'transparent',
     backgroundColor: 'transparent',
-    color: isActive ? 'theme.primary' : 'color.gray.600',
+    color: isActive ? 'theme-primary' : 'color-gray-600',
     fontWeight: isActive ? '600' : '500',
     marginBottom: '-1px',
     transition: 'all 0.2s ease',
@@ -48,8 +48,8 @@ export const TabHeader: React.FC<TabHeaderProps> = ({
     // Hover state
     on: {
       hover: {
-        color: 'theme.primary',
-        borderBottomColor: isActive ? 'theme.primary' : 'color.gray.300',
+        color: 'theme-primary',
+        borderBottomColor: isActive ? 'theme-primary' : 'color-gray-300',
       },
     },
   };

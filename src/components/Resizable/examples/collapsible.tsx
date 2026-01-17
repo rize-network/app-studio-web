@@ -24,7 +24,7 @@ export const CollapsibleResizable = () => {
           minSize={100}
           maxSize={300}
         >
-          <View padding="16px" height="100%" backgroundColor="color.blue.50">
+          <View padding="16px" height="100%" backgroundColor="color-blue-50">
             <Text fontWeight="bold" marginBottom="8px">
               Collapsible Panel
             </Text>
@@ -38,7 +38,7 @@ export const CollapsibleResizable = () => {
         <Resizable.Handle id="handle1" withVisualIndicator withCollapseButton />
 
         <Resizable.Panel id="panel2" defaultSize="50%">
-          <View padding="16px" height="100%" backgroundColor="color.green.50">
+          <View padding="16px" height="100%" backgroundColor="color-green-50">
             <Text fontWeight="bold" marginBottom="8px">
               Main Panel
             </Text>
@@ -62,7 +62,7 @@ export const CollapsibleResizable = () => {
           collapsible={true}
           defaultCollapsed={true}
         >
-          <View padding="16px" height="100%" backgroundColor="color.purple.50">
+          <View padding="16px" height="100%" backgroundColor="color-purple-50">
             <Text fontWeight="bold" marginBottom="8px">
               Initially Collapsed Panel
             </Text>

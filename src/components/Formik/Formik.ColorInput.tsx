@@ -13,6 +13,6 @@ const ColorInputComponent: React.FC<ColorInputProps> = (props) => {
 };
 
 /**
- * Color input allows users to select a color from a predefined palette or enter a custom color.
+ * Color input allows users to select a color from a predefined palette or enter a custom color-
  */
 export const FormikColorInput = ColorInputComponent;
