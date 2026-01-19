@@ -109,12 +109,67 @@ export const SizeDemo = () => (
 );
 ```
 
+### **children**
+Renders children content inside the badge, allowing for custom compositions.
+
+```tsx
+import React from 'react';
+import { Badge } from '@app-studio/web';
+import { Text } from 'app-studio';
+
+export const ChildrenDemo = () => (
+  <Badge>
+    <Text color="color-white">Custom Children</Text>
+  </Badge>
+);
+```
+
+### **icon**
+Displays an icon within the badge layout.
+
+```tsx
+import React from 'react';
+import { Badge } from '@app-studio/web';
+import { View } from 'app-studio';
+
+const Icon = () => (
+  <View width="12px" height="12px" backgroundColor="currentColor" borderRadius="50%" />
+);
+
+export const IconDemo = () => (
+    <Horizontal gap={10}>
+        <Badge icon={<Icon />} content="With Icon" />
+    </Horizontal>
+);
+```
+
+### **pastil**
+Shows a status dot (pastil) inside the badge. Can be a boolean or a specific status color string.
+
+- **Type:** `boolean | string`
+- **Possible Values:** `true, default, info, success, warning, error` or any color string
+
+```tsx
+import React from 'react';
+import { Badge } from '@app-studio/web';
+import { Horizontal } from 'app-studio';
+
+export const PastilDemo = () => (
+  <Horizontal gap={10}>
+    <Badge pastil={true} content="Active" />
+    <Badge pastil="success" content="Success" />
+    <Badge pastil="warning" content="Warning" />
+    <Badge pastil="error" content="Error" />
+  </Horizontal>
+);
+```
+
 ### **shape**
 Defines possible values for the shape of a UI component such as buttons or badges.
 
 - **Type:** `Shape`
-- **Default:** `pillShaped`
-- **Possible Values:** `sharp, rounded, pillShaped`
+- **Default:** `pill`
+- **Possible Values:** `square, rounded, pill`
 
 ```tsx
 import React from 'react';
@@ -124,9 +179,9 @@ import { Shape } from '@app-studio/web';
 import { View } from 'app-studio';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
-    {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
+    {['square', 'rounded', 'pill'].map((shape, index) => (
       <View position="relative" key={index}>
-        <Badge content={border} shape={border as Shape} />
+        <Badge content={shape} shape={shape as Shape} />
       </View>
     ))}
   </Horizontal>

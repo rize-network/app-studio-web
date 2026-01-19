@@ -164,6 +164,16 @@ export interface TagInputProps
    * Callback fired when input is clicked
    */
   onClick?: () => void;
+
+  /**
+   * List of items to display in the dropdown menu
+   */
+  menuItems?: string[];
+
+  /**
+   * Callback fired when a menu item is selected
+   */
+  onMenuItemSelect?: (item: string) => void;
 }
 
 /**
@@ -239,4 +249,24 @@ export interface TagInputViewProps extends Omit<TagInputProps, 'tags'> {
    * Function to handle input blur
    */
   handleBlur?: () => void;
+
+  /**
+   * List of filtered items to display in the dropdown
+   */
+  filteredItems?: string[];
+
+  /**
+   * Index of the currently active/highlighted menu item
+   */
+  activeItemIndex?: number;
+
+  /**
+   * Whether the dropdown menu is open
+   */
+  isMenuOpen?: boolean;
+
+  /**
+   * Function to handle menu item selection
+   */
+  handleMenuItemSelect?: (item: string) => void;
 }

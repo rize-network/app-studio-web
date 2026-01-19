@@ -120,6 +120,93 @@ const BackgroundTestPage = () => {
         </Background.Video>
       </Horizontal>
     ),
+    'Overlay Content Positioning': (
+      <Vertical gap={24}>
+        <Background.Image
+          src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=400&fit=crop"
+          height={300}
+          width="100%"
+          overlay={<Background.Overlay contentPosition="left" />}
+          views={{
+            content: {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              paddingLeft: 40,
+            },
+          }}
+        >
+          <Vertical gap={8} maxWidth={400}>
+            <Text color="color-white" fontSize={32} fontWeight="700">
+              Left Aligned
+            </Text>
+            <Text color="color-gray-200" fontSize={16}>
+              The overlay gradient focuses seamlessly on the content placed on the
+              left side.
+            </Text>
+          </Vertical>
+        </Background.Image>
+
+        <Background.Image
+          src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=800&h=400&fit=crop"
+          height={300}
+          width="100%"
+          overlay={<Background.Overlay contentPosition="right" />}
+          views={{
+            content: {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              paddingRight: 40,
+            },
+          }}
+        >
+          <Vertical gap={8} maxWidth={400} alignItems="flex-end">
+            <Text
+              color="color-white"
+              fontSize={32}
+              fontWeight="700"
+              textAlign="right"
+            >
+              Right Aligned
+            </Text>
+            <Text color="color-gray-200" fontSize={16} textAlign="right">
+              Content pushed to the right with a matching generic gradient
+              overlay.
+            </Text>
+          </Vertical>
+        </Background.Image>
+
+        <Background.Image
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop"
+          height={300}
+          width="100%"
+          overlay={<Background.Overlay contentPosition="bottom" />}
+          views={{
+            content: {
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+              paddingBottom: 40,
+            },
+          }}
+        >
+          <Vertical gap={8} maxWidth={600} alignItems="center">
+            <Text
+              color="color-white"
+              fontSize={32}
+              fontWeight="700"
+              textAlign="center"
+            >
+              Bottom Aligned
+            </Text>
+            <Text color="color-gray-200" fontSize={16} textAlign="center">
+              Perfect for hero sections where the focus is on the bottom area.
+            </Text>
+          </Vertical>
+        </Background.Image>
+      </Vertical>
+    ),
     'Layout Concept': (
       <Background.Layout>
         <Vertical alignItems="center" gap={16} paddingVertical={40}>

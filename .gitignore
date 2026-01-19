@@ -27,3 +27,5 @@ dist
 .env
 /openweb
 /cache
+/.claude
+/.github

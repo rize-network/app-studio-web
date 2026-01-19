@@ -93,4 +93,19 @@ export type TagInputStyles = {
    * Styles for placeholder text
    */
   placeholder?: ViewProps;
+
+  /**
+   * Styles for the dropdown menu container
+   */
+  menu?: ViewProps;
+
+  /**
+   * Styles for individual menu items
+   */
+  menuItem?: ViewProps;
+
+  /**
+   * Styles for the active/highlighted menu item
+   */
+  menuItemActive?: ViewProps;
 };

@@ -15,4 +15,6 @@ export type Position =
 export type BadgeStyles = {
   container?: ViewProps;
   text?: ViewProps;
+  icon?: ViewProps;
+  pastil?: ViewProps;
 };
