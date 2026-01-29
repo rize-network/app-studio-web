@@ -549,6 +549,7 @@ const ButtonView: React.FC<ButtonProps> = ({
   isDisabled,
   isLoading,
   isIconRounded,
+  isHovered,
   /* content */
   icon,
   children,

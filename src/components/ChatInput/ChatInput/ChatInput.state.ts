@@ -3,9 +3,17 @@ import { ChatInputProps } from './ChatInput.props';
 import { ModelOption, PromptExample } from './ChatInput.type';
 
 /**
+ * Props accepted by useChatInputState (excludes props the hook provides)
+ */
+type UseChatInputStateProps = Omit<
+  ChatInputProps,
+  'getPendingFiles' | 'clearPendingFiles'
+>;
+
+/**
  * Custom hook for managing ChatInput state
  */
-export const useChatInputState = (props: ChatInputProps) => {
+export const useChatInputState = (props: UseChatInputStateProps) => {
   const {
     value: controlledValue,
     onChange: controlledOnChange,
@@ -246,7 +254,14 @@ export const useChatInputState = (props: ChatInputProps) => {
     }
   };
 
+  // Provide getPendingFiles and clearPendingFiles for ChatInputViewProps
+  const getPendingFiles = useCallback(() => pendingFiles, [pendingFiles]);
+  const clearPendingFiles = useCallback(() => setPendingFiles([]), []);
+
   return {
+    onSubmit,
+    getPendingFiles,
+    clearPendingFiles,
     value,
     handleChange,
     handleSubmit,

@@ -53,6 +53,10 @@ export const LabelSizes: Record<Size, string> = {
 
 /**
  * Input variants with consistent styling
+ * Design tokens:
+ * - Transitions: 200ms ease-out for smooth, natural feel
+ * - Focus ring: 3px offset with 15% opacity primary color
+ * - Hover: Subtle background tint for better affordance
  */
 export const InputVariants: Record<Variant, ViewProps> = {
   outline: {
@@ -60,52 +64,67 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
     backgroundColor: 'color-white',
-    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+    transition:
+      'border-color 200ms ease-out, box-shadow 200ms ease-out, background-color 200ms ease-out',
     _hover: {
       borderColor: 'color-gray-300',
+      backgroundColor: 'color-gray-50',
     },
     _focus: {
       borderColor: 'theme-primary',
+      backgroundColor: 'color-white',
       outline: 'none',
       boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
+        '0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.05)',
     },
     _focusVisible: {
       borderColor: 'theme-primary',
+      backgroundColor: 'color-white',
       outline: 'none',
       boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
+        '0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.05)',
     },
   },
   default: {
     borderWidth: 0,
-    borderBottomWidth: '1px',
+    borderBottomWidth: '1.5px',
     borderBottomStyle: 'solid',
     borderBottomColor: 'color-gray-200',
     borderRadius: 0,
-    backgroundColor: 'color-white',
-    transition: 'border-color 0.2s ease',
+    backgroundColor: 'transparent',
+    transition:
+      'border-color 200ms ease-out, background-color 200ms ease-out, box-shadow 200ms ease-out',
     _hover: {
-      borderBottomColor: 'color-gray-300',
+      borderBottomColor: 'color-gray-400',
+      backgroundColor: 'color-gray-50',
     },
     _focus: {
       borderBottomColor: 'theme-primary',
+      borderBottomWidth: '2px',
+      backgroundColor: 'transparent',
       outline: 'none',
     },
     _focusVisible: {
       borderBottomColor: 'theme-primary',
+      borderBottomWidth: '2px',
+      backgroundColor: 'transparent',
       outline: 'none',
     },
   },
   none: {
     border: 'none',
     backgroundColor: 'transparent',
-    transition: 'background-color 0.2s ease',
+    transition: 'background-color 200ms ease-out',
+    _hover: {
+      backgroundColor: 'color-gray-50',
+    },
     _focus: {
       outline: 'none',
+      backgroundColor: 'color-gray-100',
     },
     _focusVisible: {
       outline: 'none',
+      backgroundColor: 'color-gray-100',
     },
   },
 };

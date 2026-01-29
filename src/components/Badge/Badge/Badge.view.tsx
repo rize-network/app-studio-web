@@ -63,14 +63,14 @@ const BadgeView: React.FC<BadgeProps> = ({
   let pastilColor = 'currentColor';
   if (typeof pastil === 'string') {
     if (pastil in statusThemes) {
-        pastilColor = (statusThemes as any)[pastil].indicator.backgroundColor;
+      pastilColor = (statusThemes as any)[pastil].indicator.backgroundColor;
     } else {
-        pastilColor = pastil;
+      pastilColor = pastil;
     }
   } else if (pastil === true) {
-     // Default pastil color if simply true
-     pastilColor = 'color-green-500'; // Example default or inherit
-     if (variant === 'filled') pastilColor = 'color-white';
+    // Default pastil color if simply true
+    pastilColor = 'color-green-500'; // Example default or inherit
+    if (variant === 'filled') pastilColor = 'color-white';
   }
 
   return (
@@ -80,7 +80,7 @@ const BadgeView: React.FC<BadgeProps> = ({
           {icon}
         </View>
       )}
-      
+
       {pastil && (
         <View
           role="badge-pastil"

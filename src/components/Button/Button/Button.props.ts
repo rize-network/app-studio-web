@@ -66,6 +66,9 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   borderMovingDuration?: number;
   borderMovingGradientColors?: string[];
 
+  // Internal hover state
+  isHovered?: boolean;
+
   // Props for animatedStroke variant
   animatedStrokeAccentColor?: string;
   animatedStrokeTextColor?: string;

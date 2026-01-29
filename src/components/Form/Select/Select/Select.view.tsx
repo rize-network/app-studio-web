@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import { Portal } from '../../../Portal/Portal';
 import { Element, useElementPosition } from 'app-studio';
 import { Typography } from 'app-studio';
 import { Horizontal } from 'app-studio';
@@ -17,23 +18,32 @@ import {
   SelectBoxProps,
   SelectViewProps,
 } from './Select.props';
-import { useItemState } from './Select.state';
-import { IconSizes } from './Select.style';
+import {
+  IconSizes,
+  dropdownStyles,
+  dropdownAnimation,
+  optionStyles,
+  optionStateStyles,
+  chevronAnimation,
+  chipStyles,
+  scrollbarStyles,
+} from './Select.style';
 /**
  * Item Component
  *
  * Renders an individual option item in the select dropdown
  */
-const Item: React.FC<ItemProps> = ({
+const Item: React.FC<ItemProps & { isSelected?: boolean }> = ({
   isHovered,
   setIsHovered,
   option,
   size = 'md',
   callback = () => {},
   style,
+  isSelected = false,
   ...props
 }) => {
-  // Handles the click event on an option by invoking the callback with the selected option's value
+  // Handles the click event on an option
   const handleOptionClick = (e: React.MouseEvent, option: string) => {
     e.stopPropagation();
     e.preventDefault();
@@ -45,37 +55,54 @@ const Item: React.FC<ItemProps> = ({
   // Toggles the hover state on the item
   const handleHover = () => setIsHovered(!isHovered);
 
+  // Get background color based on state priority
+  const getStateStyle = () => {
+    if (isSelected && isHovered) return optionStateStyles.selectedHighlighted;
+    if (isSelected) return optionStateStyles.selected;
+    if (isHovered) return optionStateStyles.highlighted;
+    return optionStateStyles.default;
+  };
+
   return (
     <Element
       as="li"
-      // Layout properties
-      margin={0}
-      paddingVertical={8} // 2 × 4px grid
-      paddingHorizontal={8} // 2 × 4px grid
+      // Layout - improved touch targets
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
       listStyleType="none"
-      cursor="pointer"
+      // Apply option styles from design tokens
+      {...optionStyles}
+      {...getStateStyle()}
       // Event handlers
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       onClick={(e: React.MouseEvent) => handleOptionClick(e, option.value)}
-      // Visual properties
-      backgroundColor={isHovered ? 'color-gray-100' : 'transparent'}
-      borderRadius="4px" // Subtle rounded corners for items
-      // Animation
-      transition="all 0.15s ease"
       // Apply custom props
       {...props}
     >
       <Text
-        // Typography properties
         fontSize={Typography.fontSizes[size]}
-        fontWeight="400" // Regular weight
-        lineHeight="15px"
-        // Apply custom styles
+        fontWeight={isSelected ? '500' : '400'}
+        lineHeight="1.4"
+        color={isSelected ? 'color-gray-900' : 'color-gray-700'}
         {...style}
       >
         {option.label}
       </Text>
+      {/* Selected indicator */}
+      {isSelected && (
+        <Element
+          as="span"
+          color="theme-primary"
+          fontSize="14px"
+          marginLeft={8}
+          display="flex"
+          alignItems="center"
+        >
+          ✓
+        </Element>
+      )}
     </Element>
   );
 };
@@ -205,43 +232,37 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
  *
  * Renders the dropdown list of options for the select component
  */
-const DropDown: React.FC<DropDownProps> = ({
+const DropDown: React.FC<
+  DropDownProps & { selectedValue?: string | string[] }
+> = ({
   size,
   views = {},
   options,
   callback = () => {},
   highlightedIndex,
   setHighlightedIndex,
+  selectedValue,
 }) => {
-  const itemStates = useItemState();
   const handleCallback = (option: string) => callback(option);
 
-  // Shadow styles for the dropdown - now applied directly in the Element
+  // Check if an option is selected
+  const isOptionSelected = (optionValue: string) => {
+    if (Array.isArray(selectedValue)) {
+      return selectedValue.includes(optionValue);
+    }
+    return selectedValue === optionValue;
+  };
 
   return (
     <Element
       as="ul"
-      role="dropdown"
-      width="100%"
+      role="listbox"
       display="flex"
       flexDirection="column"
-      backgroundColor="color-white"
-      transition="all 0.2s ease"
       margin={0}
-      style={{
-        scrollbarWidth: 'thin',
-        scrollbarColor: 'rgba(0, 0, 0, 0.2) transparent',
-        '&::-webkit-scrollbar': {
-          width: '4px',
-        },
-        '&::-webkit-scrollbar-track': {
-          background: 'transparent',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          background: 'rgba(0, 0, 0, 0.2)',
-          borderRadius: '4px',
-        },
-      }}
+      padding="4px"
+      {...dropdownStyles}
+      style={scrollbarStyles}
       {...views?.dropDown}
     >
       {options &&
@@ -253,11 +274,10 @@ const DropDown: React.FC<DropDownProps> = ({
             style={views['text']}
             option={option}
             callback={handleCallback}
-            backgroundColor={
-              index === highlightedIndex ? 'color-gray-100' : 'transparent'
-            }
+            isSelected={isOptionSelected(option.value)}
+            isHovered={index === highlightedIndex}
+            setIsHovered={() => {}}
             onMouseEnter={() => setHighlightedIndex(index)}
-            {...itemStates}
           />
         ))}
     </Element>
@@ -278,31 +298,32 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 
   return (
     <Horizontal
-      gap={8}
-      padding={8}
+      gap={6}
       alignItems="center"
-      borderRadius="6px"
-      backgroundColor="color-gray-200"
-      fontSize={Typography.fontSizes[size]}
       onClick={(event: any) => event.stopPropagation()}
-      transition="all 0.2s ease"
+      {...chipStyles}
+      _hover={{
+        backgroundColor: 'color-gray-200',
+      }}
       {...props}
     >
       <Text
-        size={size}
-        fontWeight="500" // Medium weight
+        fontSize={Typography.fontSizes[size]}
+        fontWeight="500"
+        color="color-gray-700"
       >
         {option}
       </Text>
 
       <CloseIcon
         role="close-button"
-        color="inherit"
+        color="color-gray-500"
         widthHeight={IconSizes[size]}
         onClick={handleClick}
-        transition="all 0.2s ease"
+        cursor="pointer"
+        transition="color 0.15s ease"
         _hover={{
-          opacity: 0.7,
+          color: 'color-gray-700',
         }}
       />
     </Horizontal>
@@ -350,44 +371,38 @@ const SelectView: React.FC<SelectViewProps> = ({
     updateRelation,
   } = useElementPosition({
     trackChanges: true,
-    throttleMs: 100,
+    trackOnScroll: true,
+    trackOnResize: true,
+    throttleMs: 10,
   });
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Get optimal positioning style based on available space
+  // Get optimal positioning style based on available space
   const getDropdownStyle = () => {
-    if (!relation) {
-      // Default positioning when relation is not available
-      return {
-        position: 'absolute' as const,
-        top: '100%',
-        marginTop: '8px',
-        left: 0,
-        right: 0,
-        zIndex: 10000,
-      };
-    }
+    if (!triggerRef.current) return {};
 
-    const baseStyle = {
-      position: 'absolute' as const,
-      left: 0,
-      right: 0,
+    const rect = triggerRef.current.getBoundingClientRect();
+    const baseStyle: React.CSSProperties = {
+      position: 'fixed',
+      left: rect.left,
+      width: rect.width,
       zIndex: 10000,
     };
 
-    // Place dropdown where there's more space vertically
-    if (relation.space.vertical === 'top') {
+    // Use relation to determine vertical placement if available, otherwise default to bottom
+    const isTop = relation?.space?.vertical === 'top';
+
+    if (isTop) {
       return {
         ...baseStyle,
-        bottom: '100%',
-        marginBottom: '8px',
+        bottom: window.innerHeight - rect.top + 8, // 8px gap
       };
     } else {
       return {
         ...baseStyle,
-        top: '100%',
-        marginTop: '8px',
+        top: rect.bottom + 8, // 8px gap
       };
     }
   };
@@ -534,50 +549,42 @@ const SelectView: React.FC<SelectViewProps> = ({
         </FieldWrapper>
         <FieldIcons>
           {!isReadOnly && !isDisabled && (
-            <>
-              {hide ? (
-                <ChevronIcon
-                  color="inherit"
-                  widthHeight={IconSizes[size]}
-                  style={views.icon}
-                  orientation="down"
-                />
-              ) : (
-                <ChevronIcon
-                  color="inherit"
-                  orientation="up"
-                  widthHeight={IconSizes[size]}
-                  style={views.icon}
-                />
-              )}
-            </>
+            <Element
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              style={hide ? chevronAnimation.closed : chevronAnimation.open}
+            >
+              <ChevronIcon
+                color="inherit"
+                widthHeight={IconSizes[size]}
+                style={views.icon}
+                orientation="down"
+              />
+            </Element>
           )}
         </FieldIcons>
         {!hide && options.length > 0 && (
-          <Element
-            ref={dropdownRef}
-            onClick={(e: React.MouseEvent) => e.stopPropagation()}
-            style={getDropdownStyle()}
-          >
-            <DropDown
-              size={size}
-              views={{
-                ...views,
-                dropDown: {
-                  borderRadius: '6px',
-                  border: '1px solid color-gray-200',
-                  boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
-                  padding: '8px',
-                  maxHeight: '240px',
-                  overflowY: 'auto',
-                },
+          <Portal>
+            <Element
+              ref={dropdownRef}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              style={{
+                ...getDropdownStyle(),
+                ...dropdownAnimation.enter,
               }}
-              options={options}
-              callback={handleCallback}
-              highlightedIndex={highlightedIndex}
-              setHighlightedIndex={setHighlightedIndex}
-            />
-          </Element>
+            >
+              <DropDown
+                size={size}
+                views={views}
+                options={options}
+                callback={handleCallback}
+                highlightedIndex={highlightedIndex}
+                setHighlightedIndex={setHighlightedIndex}
+                selectedValue={value}
+              />
+            </Element>
+          </Portal>
         )}
       </FieldContent>
     </FieldContainer>

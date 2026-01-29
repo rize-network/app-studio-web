@@ -60,6 +60,11 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   const showLabel = !!(isFocused && label);
   /**
    * Styles for the input field
+   * Design tokens:
+   * - Typography: -0.01em letter-spacing for modern feel
+   * - Colors: Gray-900 for text, Gray-400 for disabled, Gray-500 for placeholder
+   * - Transitions: 200ms ease-out for smooth feedback
+   * - Line height: 1.4x font size for optimal readability
    */
   const fieldStyles = {
     // Layout properties
@@ -79,9 +84,9 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
 
     // Typography properties
     fontSize: Typography.fontSizes[size],
-    lineHeight: Typography.fontSizes[size],
-
+    lineHeight: `${Math.round(Typography.fontSizes[size] * 1.4)}px`, // 1.4x for better readability
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
+    fontWeight: 400,
 
     // Visual properties
     backgroundColor: 'transparent',
@@ -89,9 +94,10 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
 
     // State properties
     cursor: isDisabled ? 'not-allowed' : 'text',
+    opacity: isDisabled ? 0.7 : 1,
 
-    // Animation
-    transition: 'all 0.2s ease',
+    // Animation - smooth transitions for all interactive states
+    transition: 'color 200ms ease-out, opacity 200ms ease-out',
 
     // Apply custom field styles
     ...views['field'],
@@ -178,9 +184,19 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         {isClearable && value && !isReadOnly && !isDisabled && (
           <FieldIcons>
             <CloseIcon
-              widthHeight={Typography.fontSizes[size]}
+              size={20}
               color={IconColor}
               onClick={handleClear}
+              cursor="pointer"
+              borderRadius="50%"
+              transition="background-color 150ms ease-out, transform 150ms ease-out"
+              _hover={{
+                backgroundColor: 'color-gray-100',
+                transform: 'scale(1.05)',
+              }}
+              _active={{
+                transform: 'scale(0.95)',
+              }}
             />
           </FieldIcons>
         )}

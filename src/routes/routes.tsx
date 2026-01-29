@@ -1,12 +1,22 @@
 import React from 'react';
-import { ComponentsPage } from 'src/pages/components.page';
+import { Navigate } from 'react-router-dom';
+import AppLayout from 'src/layouts/AppLayout';
 import DocsPage from 'src/pages/docs/docs.page';
 import { HomePage } from 'src/pages/home.page';
 import { ThemeTestPage } from 'src/pages/themeTest.page';
+import { componentList } from 'src/configs/componentList';
 
 export const ComponentRouter = [
-  { name: 'home', path: '/', element: <ComponentsPage /> },
-  { name: 'home', path: '/home', element: <HomePage /> },
-  { name: 'doc', path: '/docs/:componentName?', element: <DocsPage /> },
-  { name: 'theme-test', path: '/theme-test', element: <ThemeTestPage /> },
+  {
+    element: <AppLayout />,
+    children: [
+      { path: '/', element: <HomePage /> },
+      { path: '/home', element: <Navigate to="/" replace /> },
+      { path: '/components', element: <Navigate to="/accordion" replace /> },
+      { path: '/docs/:componentName?', element: <DocsPage /> },
+      { path: '/docs', element: <DocsPage /> },
+      { path: '/theme-test', element: <ThemeTestPage /> },
+      ...componentList.filter((item) => item.name !== 'Home'), // Home is handled separately
+    ],
+  },
 ];

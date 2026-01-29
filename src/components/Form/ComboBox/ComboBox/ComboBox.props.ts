@@ -10,7 +10,7 @@ export interface ComboBoxProps extends Omit<InputProps, 'size'> {
   // Array of ComboBox items that the user can select from.
   items: ComboBoxItem[];
   // Optional callback function triggered when an item is selected.
-  onSelect?: (item: ComboBoxItem) => void;
+  onSelect?: (item: ComboBoxItem | ComboBoxItem[]) => void;
   // Flag to enable search functionality within the ComboBox.
   searchEnabled?: boolean;
   // Optional element to display on the left side of the ComboBox.
@@ -27,6 +27,8 @@ export interface ComboBoxProps extends Omit<InputProps, 'size'> {
   views?: ComboBoxStyles;
   // Placeholder text for the search input when search is enabled.
   searchPlaceholder?: string;
+  // Flag to enable multi-select mode.
+  isMulti?: boolean;
 }
 // Defines the shape of an item within the ComboBox.
 export interface ComboBoxItem {
@@ -43,10 +45,14 @@ export interface ComboBoxStateActions {
   filteredItems: ComboBoxItem[];
   // Function to update the state of filtered ComboBox items.
   setFilteredItems: Dispatch<SetStateAction<ComboBoxItem[]>>;
-  // The currently selected item in the ComboBox.
+  // The currently selected item in the ComboBox (single select mode).
   selectedItem: ComboBoxItem;
   // Function to set the currently selected item in the ComboBox.
   setSelectedItem: Dispatch<SetStateAction<ComboBoxItem>>;
+  // Array of selected items (multi-select mode).
+  selectedItems: ComboBoxItem[];
+  // Function to set the selected items array.
+  setSelectedItems: Dispatch<SetStateAction<ComboBoxItem[]>>;
   // Index of the item that is currently highlighted for keyboard navigation.
   highlightedIndex: number;
   // Function to set the index of the highlighted item.

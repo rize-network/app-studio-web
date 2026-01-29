@@ -23,7 +23,7 @@ export const FieldLabel: React.FC<LabelProps> = ({
 }) => (
   <Label
     // Position properties
-    top={0} // 2 × 4px grid
+    top={0}
     zIndex={-10}
     position="absolute"
     // Typography properties
@@ -31,10 +31,11 @@ export const FieldLabel: React.FC<LabelProps> = ({
     lineHeight={LabelSizes[size]}
     letterSpacing="-0.01em" // Slight negative tracking for modern look
     whiteSpace="nowrap"
+    fontWeight={500} // Medium weight for better visibility
     // Color properties
     color={error ? 'color-red-500' : color}
     // Animation
-    transition="all 0.2s ease"
+    transition="color 200ms ease-out"
     // Apply custom styles
     {...views['label']}
     {...props}

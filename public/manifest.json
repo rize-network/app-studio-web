@@ -6,9 +6,10 @@
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon",
-      "purpose":"maskable"
-    },    {
-      "src": "public/aseets/maskable_icon.png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "public/assets/maskable_icon.png",
       "sizes": "1024x1024",
       "type": "image/png",
       "purpose": "any maskable"

@@ -12,6 +12,8 @@ export const useComboBoxState = (
   const [selectedItem, setSelectedItem] = useState<ComboBoxItem>(
     placeholder ? { value: placeholder, label: placeholder } : items[0]
   );
+  // State hook for multi-select mode: array of selected items.
+  const [selectedItems, setSelectedItems] = useState<ComboBoxItem[]>([]);
   // State hook for highlighted index in the dropdown list, initialized to 0.
   const [highlightedIndex, setHighlightedIndex] = useState<number>(0);
   // State hook for search query with an initial state based on the searchPlaceholder or empty string.
@@ -26,6 +28,8 @@ export const useComboBoxState = (
     setFilteredItems,
     selectedItem,
     setSelectedItem,
+    selectedItems,
+    setSelectedItems,
     highlightedIndex,
     setHighlightedIndex,
     searchQuery,

@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { ViewProps, Center, useTheme } from 'app-studio';
 import { ToggleViewProps } from './Toggle.props';
 import { ToggleShapes, getToggleVariants } from './Toggle.style';
-import contrast from 'contrast';
 
 interface Props extends ToggleViewProps {
   views?: {
@@ -38,13 +37,10 @@ const ToggleView: React.FC<Props> = ({
   const mainTone = getColor(isDisabled ? 'theme-disabled' : mainColorKey, {
     themeMode: mode,
   });
-  const tone = contrast(mainTone);
 
   /* variant palette */
-  const palette = useMemo(
-    () => getToggleVariants(mainTone, tone === 'light'),
-    [mainTone, tone]
-  );
+  const palette = getToggleVariants(mainTone, mode === 'light');
+
   const base = palette[variant];
 
   const isActive = !!(isToggle || isHovered);
@@ -78,7 +74,7 @@ const ToggleView: React.FC<Props> = ({
       /* Override with active state if toggled */
       {...(isActive && {
         backgroundColor: mainTone,
-        color: tone === 'light' ? 'color-black' : 'color-white',
+        color: mode === 'light' ? 'color-black' : 'color-white',
       })}
       {...props}
       {...views?.container}

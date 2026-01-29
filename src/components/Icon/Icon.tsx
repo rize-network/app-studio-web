@@ -1,16 +1,20 @@
 import { useTheme, ViewProps, Center } from 'app-studio';
-import React from 'react';
-// @ts-ignore
-import { DynamicIcon, DynamicIconComponentProps } from 'lucide-react/dynamic';
+import React, { lazy, Suspense } from 'react';
+import { LucideProps } from 'lucide-react';
+import dynamicIconImports from 'lucide-react/dynamicIconImports';
+
+// Type for valid Lucide icon names with autocomplete support
+export type IconName = keyof typeof dynamicIconImports;
 
 // Base icon interface with added transform and orientation
 export interface IconProps extends Omit<ViewProps, 'orientation'> {
   color?: string;
   filled?: boolean;
   orientation?: 'left' | 'right' | 'up' | 'down';
-  name?: DynamicIconComponentProps['name'];
+  name?: IconName;
   strokeWidth?: number | string;
   size?: number | string;
+  fallback?: React.ReactNode;
 }
 
 // Default wrapper component for consistent sizing and styling
@@ -71,6 +75,7 @@ export const Icon: React.FC<IconProps> = ({
   strokeWidth = 1,
   size,
   children,
+  fallback,
   ...props
 }) => {
   // Use size if provided, otherwise fallback to widthHeight (numeric part if possible)
@@ -84,19 +89,31 @@ export const Icon: React.FC<IconProps> = ({
     );
   }
 
-  // // @ts-ignore
-  // const LucideIcon = LucideIcon[name] || LucideIcon[name.charAt(0).toUpperCase() + name.slice(1)];
+  // Normalize icon name (convert to kebab-case if needed)
+  const iconName = name
+    .toLowerCase()
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .toLowerCase();
 
-  // if (!LucideIcon) {
-  //   console.warn(`Icon "${name}" not found in lucide-dream`);
-  //   return null;
-  // }
+  // Check if icon exists in dynamic imports
+  if (!(iconName in dynamicIconImports)) {
+    return (
+      <IconWrapper widthHeight={iconSize} color={color} {...props}>
+        {fallback || children}
+      </IconWrapper>
+    );
+  }
 
+  const LucideIcon = lazy(
+    dynamicIconImports[iconName as keyof typeof dynamicIconImports]
+  );
   const svgProps = getSvgProps(filled, color, strokeWidth);
 
   return (
-    <IconWrapper widthHeight={widthHeight} color={color} {...props}>
-      <DynamicIcon name={name} size={iconSize} {...svgProps} />
+    <IconWrapper widthHeight={iconSize} color={color} {...props}>
+      <Suspense fallback={fallback || null}>
+        <LucideIcon size={iconSize} {...svgProps} />
+      </Suspense>
     </IconWrapper>
   );
 };
@@ -104,7 +121,7 @@ export const Icon: React.FC<IconProps> = ({
 // Re-export specific icons for backward compatibility mapping to Lucide names
 // We use 'Icon' component with 'name' prop.
 
-const createIcon = (name: string, defaultProps: Partial<IconProps> = {}) => {
+const createIcon = (name: IconName, defaultProps: Partial<IconProps> = {}) => {
   const IconComponent = (props: IconProps) => (
     <Icon name={name} {...defaultProps} {...props} />
   );

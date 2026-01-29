@@ -49,17 +49,23 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   const showLabel = !!(isFocused && label);
   /**
    * Styles for the textarea field
+   * Design tokens:
+   * - Typography: -0.01em letter-spacing for modern feel
+   * - Colors: Gray-900 for text, Gray-400 for disabled
+   * - Transitions: 200ms ease-out for smooth feedback
+   * - Line height: 1.5x font size for multi-line readability
+   * - Min height: 5em for comfortable editing area
    */
   const fieldStyles = {
     // Layout properties
     margin: 0,
-    paddingVertical: 2, // 3 × 4px grid
-    paddingHorizontal: 2,
+    paddingVertical: 4, // 1 × 4px grid - matched with TextField
+    paddingHorizontal: 0,
     width: '100%',
+    minHeight: '5em', // Use minHeight instead of fixed height for flexibility
     maxHeight: 'calc(100vh - 100px)',
-    height: 'calc(5em)',
     border: 'none',
-    // resize property removed to avoid type error, added via style prop
+
     // Focus state
     on: {
       focus: {
@@ -69,9 +75,9 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
 
     // Typography properties
     fontSize: Typography.fontSizes[size],
-    lineHeight: Typography.fontSizes[size] * 1.5, // 1.5 × font size for better readability in multi-line text
-
+    lineHeight: `${Math.round(Typography.fontSizes[size] * 1.5)}px`, // 1.5x for multi-line readability
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
+    fontWeight: 400,
 
     // Visual properties
     backgroundColor: 'transparent',
@@ -79,11 +85,10 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
 
     // State properties
     cursor: isDisabled ? 'not-allowed' : 'text',
+    opacity: isDisabled ? 0.7 : 1,
 
-    // Animation
-    transition: 'all 0.2s ease',
-
-    // // Dark mode support
+    // Animation - smooth transitions for all interactive states
+    transition: 'color 200ms ease-out, opacity 200ms ease-out',
 
     // Apply custom field styles
     ...views['field'],
@@ -162,7 +167,9 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             multiline={`${!!isMultiline.toString()}`}
             onChange={(e) => handleChange(e as any)}
             {...fieldStyles}
-            style={{ resize: 'vertical' }}
+            style={{
+              resize: isDisabled || isReadOnly ? 'none' : 'vertical',
+            }}
             {...views?.textarea}
           />
         </FieldWrapper>

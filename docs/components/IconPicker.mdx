@@ -1,0 +1,106 @@
+# IconPicker
+
+A dropdown component for selecting icons from a predefined list (Lucide icons).
+
+### **Import**
+```tsx
+import { IconPicker } from '@app-studio/web';
+```
+
+### **Basic Usage**
+```tsx
+import React, { useState } from 'react';
+import { IconPicker } from '@app-studio/web';
+
+export const BasicUsage = () => {
+  const [icon, setIcon] = useState('user');
+
+  return (
+    <IconPicker
+      label="Select Icon"
+      value={icon}
+      onChange={setIcon}
+      placeholder="Choose an icon"
+    />
+  );
+};
+```
+
+### **Size**
+The `size` prop controls the size of the trigger and the icons.
+- **Type:** `Size`
+- **Default:** `md`
+- **Possible Values:** `xs, sm, md, lg`
+
+```tsx
+import React from 'react';
+import { IconPicker, Vertical } from '@app-studio/web';
+
+export const SizeDemo = () => (
+  <Vertical gap={10}>
+    <IconPicker size="sm" placeholder="Small (sm)" />
+    <IconPicker size="md" placeholder="Medium (md)" />
+    <IconPicker size="lg" placeholder="Large (lg)" />
+  </Vertical>
+);
+```
+
+### **Variant**
+The `variant` prop controls the visual style of the trigger.
+- **Type:** `Variant`
+- **Default:** `default`
+- **Possible Values:** `default, outline, filled`
+
+```tsx
+import React from 'react';
+import { IconPicker, Vertical } from '@app-studio/web';
+
+export const VariantDemo = () => (
+  <Vertical gap={10}>
+    <IconPicker variant="default" placeholder="Default" />
+    <IconPicker variant="outline" placeholder="Outline" />
+    <IconPicker variant="filled" placeholder="Filled" />
+  </Vertical>
+);
+```
+
+### **Shape**
+The `shape` prop controls the border radius of the trigger.
+- **Type:** `Shape`
+- **Default:** `default`
+- **Possible Values:** `default, rounded, square, pill`
+
+```tsx
+import React from 'react';
+import { IconPicker, Vertical } from '@app-studio/web';
+
+export const ShapeDemo = () => (
+  <Vertical gap={10}>
+    <IconPicker shape="default" placeholder="Default" />
+    <IconPicker shape="rounded" placeholder="Rounded" />
+    <IconPicker shape="square" placeholder="Square" />
+    <IconPicker shape="pill" placeholder="Pill" />
+  </Vertical>
+);
+```
+
+### **States**
+The component supports various states like `disabled`, `readOnly`, and `error`.
+
+```tsx
+import React from 'react';
+import { IconPicker, Vertical } from '@app-studio/web';
+
+export const StatesDemo = () => (
+  <Vertical gap={10}>
+    <IconPicker label="Disabled" isDisabled placeholder="Disabled" />
+    <IconPicker label="Read Only" isReadOnly value="lock" />
+    <IconPicker label="Error" error helperText="This field has an error" />
+  </Vertical>
+);
+```
+
+### **Props**
+
+| Prop | Type | Default | Description |
+|Data to come here|

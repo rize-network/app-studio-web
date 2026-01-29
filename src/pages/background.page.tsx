@@ -141,8 +141,8 @@ const BackgroundTestPage = () => {
               Left Aligned
             </Text>
             <Text color="color-gray-200" fontSize={16}>
-              The overlay gradient focuses seamlessly on the content placed on the
-              left side.
+              The overlay gradient focuses seamlessly on the content placed on
+              the left side.
             </Text>
           </Vertical>
         </Background.Image>

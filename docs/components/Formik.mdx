@@ -4,7 +4,7 @@ Formik integration components for form state management and validation.
 
 ### **Import**
   ```tsx
-  import { FormikForm, FormikTextField, FormikCheckbox, FormikChatInput, FormikColorInput, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider } from '@app-studio/web';
+  import { FormikForm, FormikTextField, FormikCheckbox, FormikChatInput, FormikColorInput, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider, FormikIconPicker, FormikEmojiPicker, FormikOTPInput, FormikRadio, FormikSelector, FormikTagInput, FormikToggle, FormikToggleGroup, FormikUploader } from '@app-studio/web';
   ```
 
 ### **Basic Form**
@@ -618,4 +618,273 @@ export const FormikSliderExample = () => {
     </Formik>
   );
 };
+```
+
+### **FormikIconPicker**
+Icon picker integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikIconPicker, Button } from '@app-studio/web';
+
+export const FormikIconPickerExample = () => (
+  <Formik
+    initialValues={{ icon: 'user' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikIconPicker
+          name="icon"
+          label="Select Icon"
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikEmojiPicker**
+Emoji picker integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikEmojiPicker, Button } from '@app-studio/web';
+
+export const FormikEmojiPickerExample = () => (
+  <Formik
+    initialValues={{ emoji: '👍' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikEmojiPicker
+          name="emoji"
+          label="Select Emoji"
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikOTPInput**
+OTP input integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikOTPInput, Button } from '@app-studio/web';
+
+export const FormikOTPInputExample = () => (
+  <Formik
+    initialValues={{ otp: '' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikOTPInput
+          name="otp"
+          label="Verification Code"
+          length={6}
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Verify
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikRadio**
+Radio button group integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikRadio, Button } from '@app-studio/web';
+
+export const FormikRadioExample = () => (
+  <Formik
+    initialValues={{ gender: '' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikRadio
+          name="gender"
+          label="Gender"
+          options={[
+            { label: 'Male', value: 'male' },
+            { label: 'Female', value: 'female' },
+            { label: 'Other', value: 'other' },
+          ]}
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikSelector**
+Selector component integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikSelector, Button } from '@app-studio/web';
+
+export const FormikSelectorExample = () => (
+  <Formik
+    initialValues={{ plan: 'basic' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikSelector
+          name="plan"
+          label="Subscription Plan"
+          options={[
+            { label: 'Basic', value: 'basic', description: 'Basic plan description' },
+            { label: 'Pro', value: 'pro', description: 'Pro plan description' },
+          ]}
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikTagInput**
+Tag input integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikTagInput, Button } from '@app-studio/web';
+
+export const FormikTagInputExample = () => (
+  <Formik
+    initialValues={{ tags: [] }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikTagInput
+          name="tags"
+          label="Tags"
+          placeholder="Type and press enter..."
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikToggle**
+Toggle switch integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikToggle, Button } from '@app-studio/web';
+
+export const FormikToggleExample = () => (
+  <Formik
+    initialValues={{ notifications: true }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikToggle
+          name="notifications"
+          label="Enable Notifications"
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikToggleGroup**
+Group of toggles integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikToggleGroup, Button } from '@app-studio/web';
+
+export const FormikToggleGroupExample = () => (
+  <Formik
+    initialValues={{ alignment: 'left' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikToggleGroup
+          name="alignment"
+          label="Text Alignment"
+          options={[
+            { label: 'Left', value: 'left' },
+            { label: 'Center', value: 'center' },
+            { label: 'Right', value: 'right' },
+          ]}
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikUploader**
+File uploader integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikUploader, Button } from '@app-studio/web';
+
+export const FormikUploaderExample = () => (
+  <Formik
+    initialValues={{ files: [] }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikUploader
+          name="files"
+          label="Upload Files"
+          multiple
+        />
+        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
 ```

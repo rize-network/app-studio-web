@@ -1,7 +1,51 @@
+/**
+ * TextField Component Styles
+ *
+ * Design tokens:
+ * - Placeholder color: Gray-400 for subtle visibility
+ * - Transition: 200ms for consistent feel
+ * - Selection: Theme primary with 20% opacity
+ */
+
+/* Hide Safari autofill button */
 input::-webkit-contacts-auto-fill-button {
   visibility: hidden;
   display: none !important;
   pointer-events: none;
   position: absolute;
   right: 0;
+}
+
+/* Placeholder styling */
+input::placeholder {
+  color: #9ca3af; /* color-gray-400 */
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+}
+
+input:focus::placeholder {
+  opacity: 0.7;
+}
+
+/* Selection styling */
+input::selection {
+  background-color: rgba(59, 130, 246, 0.2); /* theme-primary with 20% opacity */
+}
+
+/* Autofill styling to prevent browser default yellow background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px white inset;
+  box-shadow: 0 0 0 1000px white inset;
+  -webkit-text-fill-color: #111827; /* color-gray-900 */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  input,
+  input::placeholder {
+    transition: none;
+  }
 }

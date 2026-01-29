@@ -62,16 +62,15 @@ export const FieldContent: React.FC<ContentProps> = ({
       fontSize={Typography.fontSizes[size]}
       // State properties
       cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'text'}
-      opacity={isDisabled ? 0.6 : 1}
-      // Animation
-      transition="all 0.2s ease"
+      opacity={isDisabled ? 0.7 : 1}
+      // Animation - unified 200ms timing for consistent feel
+      transition="border-color 200ms ease-out, background-color 200ms ease-out, box-shadow 200ms ease-out, opacity 200ms ease-out"
       // Apply conditional padding based on label presence
       {...(showLabel ? PadddingWithLabel : PaddingWithoutLabel)}
       // Apply shadow if provided
       {...shadow}
       // Apply shape, variant, and custom styles
       {...Shapes[shape]}
-      {...InputVariants[variant]}
       {...InputVariants[variant]}
       {...views?.container}
       {...props}
