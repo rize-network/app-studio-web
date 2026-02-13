@@ -43,6 +43,12 @@ const TitleView: React.FC<TitleProps> = ({
   highlightSlideStagger = 50,
   highlightSlideSequential = true,
   themeMode: elementMode,
+  // Filter custom props to prevent them from being passed to the DOM element
+  responsive: _responsive,
+  alternateHighlightText: _alternateHighlightText,
+  alternateAnimation: _alternateAnimation,
+  alternateDuration: _alternateDuration,
+  _isInView,
 
   ...props
 }) => {
@@ -68,6 +74,9 @@ const TitleView: React.FC<TitleProps> = ({
     highlightSlideDuration,
     highlightSlideStagger,
     highlightSlideSequential,
+    alternateHighlightText: _alternateHighlightText,
+    alternateAnimation: _alternateAnimation,
+    alternateDuration: _alternateDuration,
     ...props,
   });
 

@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.9.91",
+  "version": "0.9.92",
   "main": "dist/web.cjs.js",
   "typings": "dist/index.d.ts",
   "files": [
