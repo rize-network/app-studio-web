@@ -8,7 +8,7 @@ import { componentList } from 'src/configs/componentList';
 const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (
   <View
     as="li"
-    color="theme-primary"
+    color={isSelected ? 'color-blue-800' : 'color-gray-800'}
     cursor="pointer"
     padding={16}
     margin={0}
@@ -33,20 +33,28 @@ const List = ({ children, ...props }: any) => (
 );
 
 const Title = ({ children, ...props }: any) => (
-  <Text as="h2" padding={16} fontWeight="bold" color="theme-primary" {...props}>
+  <Text
+    as="h1"
+    padding={16}
+    fontWeight="bold"
+    fontSize={20}
+    color="theme-primary"
+    {...props}
+  >
     {children}
   </Text>
 );
 
 const SubTitle = ({ children, ...props }: any) => (
-  <Text as="h3" fontWeight="bold" color="theme-primary" {...props}>
+  <Text as="h2" fontWeight="bold" color="theme-primary" {...props}>
     {children}
   </Text>
 );
 
 const ListSectionHeader = ({ children, ...props }: any) => (
-  <Text
-    as="h4"
+  <View
+    as="li"
+    role="presentation"
     fontSize={12}
     fontWeight="600"
     color="color-gray-500"
@@ -54,10 +62,11 @@ const ListSectionHeader = ({ children, ...props }: any) => (
     paddingTop={16}
     paddingBottom={8}
     textTransform="uppercase"
+    listStyleType="none"
     {...props}
   >
     {children}
-  </Text>
+  </View>
 );
 
 const CATEGORY_ORDER = [
@@ -123,95 +132,70 @@ export const AppLayout = () => {
     }
   }, [location.pathname]);
 
+  const isHomePage = location.pathname === '/';
+
   return (
     <Horizontal flexDirection="row" height="100%" flexWrap="nowrap">
-      <View
-        flexDirection="column"
-        flex={1}
-        boxShadow="0 2px 5px rgba(0, 0, 0, 0.2)"
-        transition="box-shadow 0.3s ease-in-out"
-        height="100vh"
-        overflow="auto"
-        backgroundColor="theme-background"
-        minWidth="250px"
-        maxWidth="300px"
-      >
-        <Horizontal
-          alignItems="center"
-          justifyContent="space-between"
-          paddingRight={16}
+      {!isHomePage && (
+        <View
+          flexDirection="column"
+          flex={1}
+          boxShadow="0 2px 5px rgba(0, 0, 0, 0.2)"
+          transition="box-shadow 0.3s ease-in-out"
+          height="100vh"
+          overflow="auto"
+          backgroundColor="theme-background"
+          minWidth="250px"
+          maxWidth="300px"
         >
-          <Title onPress={() => navigate('/')}>App Studio</Title>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={toggleThemeMode}
-            color="theme-primary"
+          <Horizontal
+            alignItems="center"
+            justifyContent="space-between"
+            paddingRight={16}
           >
-            {themeMode === 'light' ? '🌙' : '☀️'}
-          </Button>
-        </Horizontal>
+            <Title onPress={() => navigate('/')}>App Studio</Title>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleThemeMode}
+              color="theme-primary"
+            >
+              {themeMode === 'light' ? '🌙' : '☀️'}
+            </Button>
+          </Horizontal>
 
-        <List>
-          {/* Main App Menu */}
-          <ListSectionHeader>Main</ListSectionHeader>
-          {appMenuItems.map((item, index) => {
-            const isSelected =
-              location.pathname === item.path ||
-              (item.path !== '/' && location.pathname.startsWith(item.path));
-            return (
-              <ListItem
-                key={`app-${index}`}
-                isHovered={`app-${index}` === hoveredIndex}
-                isSelected={isSelected}
-                onPress={() => navigate(item.path)}
-                onMouseEnter={() => handleMouseEnter(`app-${index}`)}
-                onMouseLeave={handleMouseLeave}
-              >
-                {item.name}
-              </ListItem>
-            );
-          })}
+          <List>
+            {/* Main App Menu */}
+            <ListSectionHeader>Main</ListSectionHeader>
+            {appMenuItems.map((item, index) => {
+              const isSelected =
+                location.pathname === item.path ||
+                (item.path !== '/' && location.pathname.startsWith(item.path));
+              return (
+                <ListItem
+                  key={`app-${index}`}
+                  isHovered={`app-${index}` === hoveredIndex}
+                  isSelected={isSelected}
+                  onPress={() => navigate(item.path)}
+                  onMouseEnter={() => handleMouseEnter(`app-${index}`)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {item.name}
+                </ListItem>
+              );
+            })}
 
-          {/* Categorized Components */}
-          {CATEGORY_ORDER.map((category) => {
-            const components = groupedComponents[category];
-            if (!components || components.length === 0) return null;
-
-            return (
-              <React.Fragment key={category}>
-                <ListSectionHeader>{category}</ListSectionHeader>
-                {components.map((item, index) => {
-                  const isSelected = location.pathname === item.path;
-                  // Unique key combination
-                  const itemKey = `${category}-${index}`;
-                  return (
-                    <ListItem
-                      key={itemKey}
-                      isHovered={itemKey === hoveredIndex}
-                      isSelected={isSelected}
-                      onPress={() => navigate(item.path)}
-                      onMouseEnter={() => handleMouseEnter(itemKey)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {item.name}
-                    </ListItem>
-                  );
-                })}
-              </React.Fragment>
-            );
-          })}
-
-          {/* Catch-all for any categories not in the explicit order list (e.g. if we add 'Utility' later but forget to add to order) */}
-          {Object.keys(groupedComponents)
-            .filter((cat) => !CATEGORY_ORDER.includes(cat) && cat !== 'Hidden')
-            .map((category) => {
+            {/* Categorized Components */}
+            {CATEGORY_ORDER.map((category) => {
               const components = groupedComponents[category];
+              if (!components || components.length === 0) return null;
+
               return (
                 <React.Fragment key={category}>
                   <ListSectionHeader>{category}</ListSectionHeader>
                   {components.map((item, index) => {
                     const isSelected = location.pathname === item.path;
+                    // Unique key combination
                     const itemKey = `${category}-${index}`;
                     return (
                       <ListItem
@@ -229,21 +213,52 @@ export const AppLayout = () => {
                 </React.Fragment>
               );
             })}
-        </List>
-      </View>
+
+            {/* Catch-all for any categories not in the explicit order list (e.g. if we add 'Utility' later but forget to add to order) */}
+            {Object.keys(groupedComponents)
+              .filter(
+                (cat) => !CATEGORY_ORDER.includes(cat) && cat !== 'Hidden'
+              )
+              .map((category) => {
+                const components = groupedComponents[category];
+                return (
+                  <React.Fragment key={category}>
+                    <ListSectionHeader>{category}</ListSectionHeader>
+                    {components.map((item, index) => {
+                      const isSelected = location.pathname === item.path;
+                      const itemKey = `${category}-${index}`;
+                      return (
+                        <ListItem
+                          key={itemKey}
+                          isHovered={itemKey === hoveredIndex}
+                          isSelected={isSelected}
+                          onPress={() => navigate(item.path)}
+                          onMouseEnter={() => handleMouseEnter(itemKey)}
+                          onMouseLeave={handleMouseLeave}
+                        >
+                          {item.name}
+                        </ListItem>
+                      );
+                    })}
+                  </React.Fragment>
+                );
+              })}
+          </List>
+        </View>
+      )}
       <View
         flexDirection="column"
-        flex={4}
-        paddingHorizontal={32}
-        paddingVertical={16}
-        gap={10}
+        flex={isHomePage ? 1 : 4}
+        paddingHorizontal={isHomePage ? 0 : 32}
+        paddingVertical={isHomePage ? 0 : 16}
+        gap={isHomePage ? 0 : 10}
         height="100vh"
         overflow="auto"
         backgroundColor="theme-background"
         id="main-content"
       >
         {/* We only show SubTitle for components to avoid double titles on standalone pages */}
-        {location.pathname !== '/' &&
+        {!isHomePage &&
           location.pathname !== '/docs' &&
           location.pathname !== '/theme-test' && (
             <SubTitle>{currentItem?.name}</SubTitle>

@@ -3,7 +3,7 @@ import queryString, { stringify } from 'qs';
 import { API_URL, DEFAULT_LANGUAGE } from 'src/configs/AppConfig';
 import { read } from './localstorage';
 import { isBrowser } from 'src/utils/env';
-import { OpenAPI } from 'src/services/api';
+import { OpenAPI } from 'src/services/api/core/OpenAPI';
 
 async function checkStatus(
   response: any,

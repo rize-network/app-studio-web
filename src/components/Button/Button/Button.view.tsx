@@ -356,7 +356,7 @@ const StandardButton: React.FC<
         width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
         borderRadius={ButtonShapes[shape as keyof typeof ButtonShapes]}
         boxShadow={shadow as any}
-        transition="all 0.2s ease"
+        transition="background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease"
         cursor={isDisabled ? 'default' : 'pointer'}
         color={resolvedStrokeTextColor}
         backgroundColor="transparent"
@@ -521,7 +521,7 @@ const StandardButton: React.FC<
       /* visuals */
       borderRadius={ButtonShapes[shape]}
       boxShadow={shadow as any}
-      transition="all 0.2s ease"
+      transition="background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease"
       cursor={isDisabled ? 'default' : 'pointer'}
       onClick={onClick}
       {...baseStyles}
@@ -538,6 +538,7 @@ const ButtonView: React.FC<ButtonProps> = React.memo(
   ({
     /* behaviour */
     variant = 'filled',
+    animation,
     size = 'md',
     shape = 'rounded',
     iconPosition = 'left',
@@ -633,7 +634,7 @@ const ButtonView: React.FC<ButtonProps> = React.memo(
     return (
       <StandardButton
         variant={variant}
-        animation={props.animation}
+        animation={animation}
         to={to}
         isDisabled={isDisabled}
         isLoading={isLoading}
