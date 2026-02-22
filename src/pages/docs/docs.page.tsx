@@ -14,8 +14,6 @@ import { evaluate } from '@mdx-js/mdx';
 import { SideMenu } from './components/docs.elements';
 import CustomLiveCode from './components/CustomLiveCode.component';
 
-import '@mdxeditor/editor/style.css';
-
 const DocsPage = () => {
   const { componentName } = useParams<{ componentName: string }>();
 

@@ -9,6 +9,8 @@
   <meta name="description" content="App Studio Web Components" />
   <link rel="apple-touch-icon" href="/assets/apple-logo.png">
   <link rel="manifest" href="/manifest.json" />
+  <!-- DNS prefetch for CDN domains to reduce connection latency -->
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <style>
     * {
       box-sizing: border-box;
@@ -21,6 +23,11 @@
 
     td {
       min-width: 200px;
+    }
+
+    /* Inline critical loading styles to avoid layout shift */
+    #root {
+      min-height: 100vh;
     }
   </style>
   <title>App Studio</title>

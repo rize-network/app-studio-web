@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import AppLayout from 'src/layouts/AppLayout';
-import DocsPage from 'src/pages/docs/docs.page';
-import { HomePage } from 'src/pages/home.page';
-import { ThemeTestPage } from 'src/pages/themeTest.page';
 import { componentList } from 'src/configs/componentList';
+
+// Lazy-load heavy page components to reduce initial bundle size
+const DocsPage = lazy(() => import('src/pages/docs/docs.page'));
+const HomePage = lazy(() => import('src/pages/home.page'));
+const ThemeTestPage = lazy(() => import('src/pages/themeTest.page'));
 
 export const ComponentRouter = [
   {
