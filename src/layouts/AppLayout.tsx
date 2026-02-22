@@ -27,26 +27,27 @@ const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (
 );
 
 const List = ({ children, ...props }: any) => (
-  <View as="ul" listStyleType="none" padding={0} margin={0} {...props}>
+  <View as="ul" listStyleType="none" padding={0} margin={0} role="list" {...props}>
     {children}
   </View>
 );
 
 const Title = ({ children, ...props }: any) => (
-  <Text as="h2" padding={16} fontWeight="bold" color="theme-primary" {...props}>
+  <Text as="h1" padding={16} fontWeight="bold" fontSize={24} color="theme-primary" {...props}>
     {children}
   </Text>
 );
 
 const SubTitle = ({ children, ...props }: any) => (
-  <Text as="h3" fontWeight="bold" color="theme-primary" {...props}>
+  <Text as="h2" fontWeight="bold" color="theme-primary" {...props}>
     {children}
   </Text>
 );
 
 const ListSectionHeader = ({ children, ...props }: any) => (
   <Text
-    as="h4"
+    as="span"
+    display="block"
     fontSize={12}
     fontWeight="600"
     color="color-gray-500"
@@ -152,26 +153,28 @@ export const AppLayout = () => {
           </Button>
         </Horizontal>
 
-        <List>
+        <View as="nav" aria-label="Sidebar navigation">
           {/* Main App Menu */}
           <ListSectionHeader>Main</ListSectionHeader>
-          {appMenuItems.map((item, index) => {
-            const isSelected =
-              location.pathname === item.path ||
-              (item.path !== '/' && location.pathname.startsWith(item.path));
-            return (
-              <ListItem
-                key={`app-${index}`}
-                isHovered={`app-${index}` === hoveredIndex}
-                isSelected={isSelected}
-                onPress={() => navigate(item.path)}
-                onMouseEnter={() => handleMouseEnter(`app-${index}`)}
-                onMouseLeave={handleMouseLeave}
-              >
-                {item.name}
-              </ListItem>
-            );
-          })}
+          <List>
+            {appMenuItems.map((item, index) => {
+              const isSelected =
+                location.pathname === item.path ||
+                (item.path !== '/' && location.pathname.startsWith(item.path));
+              return (
+                <ListItem
+                  key={`app-${index}`}
+                  isHovered={`app-${index}` === hoveredIndex}
+                  isSelected={isSelected}
+                  onPress={() => navigate(item.path)}
+                  onMouseEnter={() => handleMouseEnter(`app-${index}`)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  {item.name}
+                </ListItem>
+              );
+            })}
+          </List>
 
           {/* Categorized Components */}
           {CATEGORY_ORDER.map((category) => {
@@ -181,35 +184,7 @@ export const AppLayout = () => {
             return (
               <React.Fragment key={category}>
                 <ListSectionHeader>{category}</ListSectionHeader>
-                {components.map((item, index) => {
-                  const isSelected = location.pathname === item.path;
-                  // Unique key combination
-                  const itemKey = `${category}-${index}`;
-                  return (
-                    <ListItem
-                      key={itemKey}
-                      isHovered={itemKey === hoveredIndex}
-                      isSelected={isSelected}
-                      onPress={() => navigate(item.path)}
-                      onMouseEnter={() => handleMouseEnter(itemKey)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {item.name}
-                    </ListItem>
-                  );
-                })}
-              </React.Fragment>
-            );
-          })}
-
-          {/* Catch-all for any categories not in the explicit order list (e.g. if we add 'Utility' later but forget to add to order) */}
-          {Object.keys(groupedComponents)
-            .filter((cat) => !CATEGORY_ORDER.includes(cat) && cat !== 'Hidden')
-            .map((category) => {
-              const components = groupedComponents[category];
-              return (
-                <React.Fragment key={category}>
-                  <ListSectionHeader>{category}</ListSectionHeader>
+                <List>
                   {components.map((item, index) => {
                     const isSelected = location.pathname === item.path;
                     const itemKey = `${category}-${index}`;
@@ -226,10 +201,41 @@ export const AppLayout = () => {
                       </ListItem>
                     );
                   })}
+                </List>
+              </React.Fragment>
+            );
+          })}
+
+          {/* Catch-all for any categories not in the explicit order list */}
+          {Object.keys(groupedComponents)
+            .filter((cat) => !CATEGORY_ORDER.includes(cat) && cat !== 'Hidden')
+            .map((category) => {
+              const components = groupedComponents[category];
+              return (
+                <React.Fragment key={category}>
+                  <ListSectionHeader>{category}</ListSectionHeader>
+                  <List>
+                    {components.map((item, index) => {
+                      const isSelected = location.pathname === item.path;
+                      const itemKey = `${category}-${index}`;
+                      return (
+                        <ListItem
+                          key={itemKey}
+                          isHovered={itemKey === hoveredIndex}
+                          isSelected={isSelected}
+                          onPress={() => navigate(item.path)}
+                          onMouseEnter={() => handleMouseEnter(itemKey)}
+                          onMouseLeave={handleMouseLeave}
+                        >
+                          {item.name}
+                        </ListItem>
+                      );
+                    })}
+                  </List>
                 </React.Fragment>
               );
             })}
-        </List>
+        </View>
       </View>
       <View
         flexDirection="column"

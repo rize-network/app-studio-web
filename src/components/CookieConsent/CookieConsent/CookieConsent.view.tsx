@@ -69,14 +69,15 @@ export const CookieConsentView: React.FC<CookieConsentProps> = ({
       borderStyle="solid"
       borderRadius={8}
       maxWidth="800px"
-      marginX="auto"
+      marginLeft="auto"
+      marginRight="auto"
       // boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
       {...(position === 'bottom' ? { bottom: 16 } : { top: 16 })}
       {...themeStyles.container}
       {...views?.container}
       {...props}
     >
-      <Vertical gap={12} maxWidth={1200} marginX="auto">
+      <Vertical gap={12} maxWidth={1200} marginLeft="auto" marginRight="auto">
         {title && (
           <Text
             fontWeight="bold"

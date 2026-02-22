@@ -212,6 +212,7 @@ const StandardButton: React.FC<
     baseStyles: any;
     sizeStyles: any;
     iconPad: any;
+    containerRef?: React.Ref<HTMLElement>;
     // Extra props passed from ButtonView
     mainTone?: string;
     borderMovingDuration?: number;
@@ -236,6 +237,7 @@ const StandardButton: React.FC<
   baseStyles,
   sizeStyles,
   iconPad,
+  containerRef,
   resolvedTextColor,
   content,
   size,
@@ -345,6 +347,7 @@ const StandardButton: React.FC<
 
     return (
       <Element
+        ref={containerRef}
         as={to ? 'div' : 'button'}
         type={to ? undefined : 'button'}
         disabled={Boolean(!to && (isDisabled || isLoading))}
@@ -450,6 +453,7 @@ const StandardButton: React.FC<
 
     return (
       <Element
+        ref={containerRef}
         as="div"
         position="relative"
         display="inline-flex"
@@ -508,6 +512,7 @@ const StandardButton: React.FC<
   // --- Default: Standard Button ---
   return (
     <Element
+      ref={containerRef}
       as={variant === 'link' && to ? 'div' : 'button'}
       type={variant === 'link' && to ? undefined : 'button'}
       disabled={Boolean(isDisabled || isLoading)}
@@ -534,8 +539,8 @@ const StandardButton: React.FC<
 };
 
 // --- Main Component ---
-const ButtonView: React.FC<ButtonProps> = React.memo(
-  ({
+const ButtonView = React.memo(
+  React.forwardRef<HTMLElement, ButtonProps>(({
     /* behaviour */
     variant = 'filled',
     size = 'md',
@@ -568,7 +573,7 @@ const ButtonView: React.FC<ButtonProps> = React.memo(
     animatedStrokeAccentColor = '#705CFF',
     animatedStrokeTextColor = '#333333',
     ...props
-  }) => {
+  }, ref) => {
     /* theme helpers */
     const { getColorHex } = useTheme();
 
@@ -656,10 +661,11 @@ const ButtonView: React.FC<ButtonProps> = React.memo(
         animatedStrokeAccentColor={animatedStrokeAccentColor}
         animatedStrokeTextColor={animatedStrokeTextColor}
         getColor={getColorHex}
+        containerRef={ref}
         {...props}
       />
     );
-  }
+  })
 );
 
 export default ButtonView;

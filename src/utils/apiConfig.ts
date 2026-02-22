@@ -1,4 +1,4 @@
-import { OpenAPI } from 'src/services/api';
+import { OpenAPI } from 'src/services/api/core/OpenAPI';
 import { API_URL } from 'src/configs/AppConfig';
 
 /**

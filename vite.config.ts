@@ -2,9 +2,18 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
+import compression from 'compression';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'compression',
+      configureServer(server) {
+        server.middlewares.use(compression() as any);
+      },
+    },
+  ],
   resolve: {
     alias: {
       src: resolve(__dirname, 'src'),
@@ -24,6 +33,7 @@ export default defineConfig({
     sourcemap: false,
     cssCodeSplit: true,
     chunkSizeWarningLimit: 700,
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {

@@ -45,7 +45,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
       <ThemeProvider
         mode={mode}
         theme={{
-          primary: 'color-blue-500',
+          primary: 'color-blue-700',
           secondary: 'color-purple-500',
         }}
       >

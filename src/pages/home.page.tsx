@@ -109,10 +109,10 @@ export const HomePage = () => {
             media={{ mobile: { gap: 10 } }}
             flexWrap="nowrap"
           >
-            <Button onClick={handleClick} {...buttonStyle} isAuto>
+            <Button onClick={handleClick} {...buttonStyle} width="fit-content">
               Get Started
             </Button>
-            <Button variant="outline" {...buttonStyle} isAuto>
+            <Button variant="outline" {...buttonStyle} width="fit-content">
               Deploy Now
             </Button>
           </Center>
