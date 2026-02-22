@@ -27,13 +27,27 @@ const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (
 );
 
 const List = ({ children, ...props }: any) => (
-  <View as="ul" listStyleType="none" padding={0} margin={0} role="list" {...props}>
+  <View
+    as="ul"
+    listStyleType="none"
+    padding={0}
+    margin={0}
+    role="list"
+    {...props}
+  >
     {children}
   </View>
 );
 
 const Title = ({ children, ...props }: any) => (
-  <Text as="h1" padding={16} fontWeight="bold" fontSize={24} color="theme-primary" {...props}>
+  <Text
+    as="h1"
+    padding={16}
+    fontWeight="bold"
+    fontSize={24}
+    color="theme-primary"
+    {...props}
+  >
     {children}
   </Text>
 );

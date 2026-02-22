@@ -540,132 +540,138 @@ const StandardButton: React.FC<
 
 // --- Main Component ---
 const ButtonView = React.memo(
-  React.forwardRef<HTMLElement, ButtonProps>(({
-    /* behaviour */
-    variant = 'filled',
-    size = 'md',
-    shape = 'rounded',
-    iconPosition = 'left',
-    loaderPosition = 'left',
-    backgroundColor, // Primary override for main color
-    color, // Main button color (theme tokens or color palette)
-    textColor, // Explicit text color
-    reversed = false, // Reverse colors for dark backgrounds
-    isAuto = true,
-    isFilled,
-    isDisabled,
-    isLoading,
-    isIconRounded,
-    isHovered,
-    /* content */
-    icon,
-    children,
-    /* nav */
-    to,
-    isExternal,
-    /* misc */
-    shadow,
-    onClick,
-    views = {},
-    /* effect props */
-    borderMovingDuration = 2,
-    borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
-    animatedStrokeAccentColor = '#705CFF',
-    animatedStrokeTextColor = '#333333',
-    ...props
-  }, ref) => {
-    /* theme helpers */
-    const { getColorHex } = useTheme();
+  React.forwardRef<HTMLElement, ButtonProps>(
+    (
+      {
+        /* behaviour */
+        variant = 'filled',
+        size = 'md',
+        shape = 'rounded',
+        iconPosition = 'left',
+        loaderPosition = 'left',
+        backgroundColor, // Primary override for main color
+        color, // Main button color (theme tokens or color palette)
+        textColor, // Explicit text color
+        reversed = false, // Reverse colors for dark backgrounds
+        isAuto = true,
+        isFilled,
+        isDisabled,
+        isLoading,
+        isIconRounded,
+        isHovered,
+        /* content */
+        icon,
+        children,
+        /* nav */
+        to,
+        isExternal,
+        /* misc */
+        shadow,
+        onClick,
+        views = {},
+        /* effect props */
+        borderMovingDuration = 2,
+        borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
+        animatedStrokeAccentColor = '#705CFF',
+        animatedStrokeTextColor = '#333333',
+        ...props
+      },
+      ref
+    ) => {
+      /* theme helpers */
+      const { getColorHex } = useTheme();
 
-    /* MAIN COLOR – determines the entire palette */
-    // Priority: explicit backgroundColor/color prop -> theme-button.background -> theme-primary
-    const mainColorKey = backgroundColor ?? color ?? 'theme-button-background';
+      /* MAIN COLOR – determines the entire palette */
+      // Priority: explicit backgroundColor/color prop -> theme-button.background -> theme-primary
+      const mainColorKey =
+        backgroundColor ?? color ?? 'theme-button-background';
 
-    // Decide which theme token to resolve based on state
-    const stateColorKey = isDisabled
-      ? 'theme-disabled'
-      : isLoading
-      ? 'theme-loading'
-      : mainColorKey;
+      // Decide which theme token to resolve based on state
+      const stateColorKey = isDisabled
+        ? 'theme-disabled'
+        : isLoading
+        ? 'theme-loading'
+        : mainColorKey;
 
-    // Resolve to actual hex color-
-    // If 'theme-button-background' isn't defined, it falls back to 'theme-primary'
-    let mainTone = getColorHex(stateColorKey);
-    if (
-      mainTone === 'theme-button-background' ||
-      mainTone === 'theme-loading'
-    ) {
-      mainTone = getColorHex(isLoading ? 'color-dark-500' : 'theme-primary');
+      // Resolve to actual hex color-
+      // If 'theme-button-background' isn't defined, it falls back to 'theme-primary'
+      let mainTone = getColorHex(stateColorKey);
+      if (
+        mainTone === 'theme-button-background' ||
+        mainTone === 'theme-loading'
+      ) {
+        mainTone = getColorHex(isLoading ? 'color-dark-500' : 'theme-primary');
+      }
+
+      /* text color - explicitly provided or default to white */
+      // Priority: explicit textColor prop -> theme-button.text -> color-white
+      let resolvedTextColorKey = textColor ?? 'theme-button-text';
+      let resolvedTextColor = getColorHex(resolvedTextColorKey);
+
+      if (resolvedTextColor === 'theme-button-text') {
+        resolvedTextColor = getColorHex('color-white');
+      }
+
+      /* variant palette */
+      const palette = useMemo(
+        () => getButtonVariants(mainTone, resolvedTextColor, reversed),
+        [mainTone, resolvedTextColor, reversed]
+      );
+      const base = palette[variant];
+      const finalContentColor = (base?.color as string) ?? resolvedTextColor;
+
+      // Render content logic safely
+      const content = (
+        <ButtonContent
+          icon={icon}
+          isLoading={isLoading}
+          iconPosition={iconPosition}
+          loaderPosition={loaderPosition}
+          size={size}
+          resolvedTextColor={finalContentColor}
+          isIconRounded={isIconRounded}
+          views={views}
+        >
+          {children}
+        </ButtonContent>
+      );
+
+      // Standard variants (filled, outline, ghost, link)
+      const sizeStyles = ButtonSizes[size];
+      const iconPad = isIconRounded ? IconSizes[size] : {};
+
+      return (
+        <StandardButton
+          variant={variant}
+          animation={props.animation}
+          to={to}
+          isDisabled={isDisabled}
+          isLoading={isLoading}
+          isAuto={isAuto}
+          isFilled={isFilled}
+          isExternal={isExternal}
+          shape={shape}
+          shadow={shadow}
+          onClick={onClick}
+          views={views}
+          baseStyles={base}
+          sizeStyles={sizeStyles}
+          iconPad={iconPad}
+          resolvedTextColor={finalContentColor}
+          content={content}
+          size={size}
+          mainTone={mainTone}
+          borderMovingDuration={borderMovingDuration}
+          borderMovingGradientColors={borderMovingGradientColors}
+          animatedStrokeAccentColor={animatedStrokeAccentColor}
+          animatedStrokeTextColor={animatedStrokeTextColor}
+          getColor={getColorHex}
+          containerRef={ref}
+          {...props}
+        />
+      );
     }
-
-    /* text color - explicitly provided or default to white */
-    // Priority: explicit textColor prop -> theme-button.text -> color-white
-    let resolvedTextColorKey = textColor ?? 'theme-button-text';
-    let resolvedTextColor = getColorHex(resolvedTextColorKey);
-
-    if (resolvedTextColor === 'theme-button-text') {
-      resolvedTextColor = getColorHex('color-white');
-    }
-
-    /* variant palette */
-    const palette = useMemo(
-      () => getButtonVariants(mainTone, resolvedTextColor, reversed),
-      [mainTone, resolvedTextColor, reversed]
-    );
-    const base = palette[variant];
-    const finalContentColor = (base?.color as string) ?? resolvedTextColor;
-
-    // Render content logic safely
-    const content = (
-      <ButtonContent
-        icon={icon}
-        isLoading={isLoading}
-        iconPosition={iconPosition}
-        loaderPosition={loaderPosition}
-        size={size}
-        resolvedTextColor={finalContentColor}
-        isIconRounded={isIconRounded}
-        views={views}
-      >
-        {children}
-      </ButtonContent>
-    );
-
-    // Standard variants (filled, outline, ghost, link)
-    const sizeStyles = ButtonSizes[size];
-    const iconPad = isIconRounded ? IconSizes[size] : {};
-
-    return (
-      <StandardButton
-        variant={variant}
-        animation={props.animation}
-        to={to}
-        isDisabled={isDisabled}
-        isLoading={isLoading}
-        isAuto={isAuto}
-        isFilled={isFilled}
-        isExternal={isExternal}
-        shape={shape}
-        shadow={shadow}
-        onClick={onClick}
-        views={views}
-        baseStyles={base}
-        sizeStyles={sizeStyles}
-        iconPad={iconPad}
-        resolvedTextColor={finalContentColor}
-        content={content}
-        size={size}
-        mainTone={mainTone}
-        borderMovingDuration={borderMovingDuration}
-        borderMovingGradientColors={borderMovingGradientColors}
-        animatedStrokeAccentColor={animatedStrokeAccentColor}
-        animatedStrokeTextColor={animatedStrokeTextColor}
-        getColor={getColorHex}
-        containerRef={ref}
-        {...props}
-      />
-    );
-  })
+  )
 );
 
 export default ButtonView;
