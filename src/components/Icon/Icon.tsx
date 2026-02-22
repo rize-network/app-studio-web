@@ -1,7 +1,23 @@
 import { useTheme, ViewProps, Center } from 'app-studio';
-import React, { lazy, Suspense } from 'react';
-import { LucideProps } from 'lucide-react';
+import React, { lazy, Suspense, useMemo } from 'react';
+import type { LucideProps } from 'lucide-react';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
+
+// Cache for lazy-loaded icon components to avoid recreating them on every render
+const iconCache = new Map<
+  string,
+  React.LazyExoticComponent<React.ComponentType<LucideProps>>
+>();
+
+const getLazyIcon = (iconName: string) => {
+  if (!iconCache.has(iconName)) {
+    iconCache.set(
+      iconName,
+      lazy(dynamicIconImports[iconName as keyof typeof dynamicIconImports])
+    );
+  }
+  return iconCache.get(iconName)!;
+};
 
 // Type for valid Lucide icon names with autocomplete support
 export type IconName = keyof typeof dynamicIconImports;
@@ -18,105 +34,104 @@ export interface IconProps extends Omit<ViewProps, 'orientation'> {
 }
 
 // Default wrapper component for consistent sizing and styling
-const IconWrapper: React.FC<IconProps> = ({
-  widthHeight,
-  color = 'currentColor',
-  transform,
-  orientation = 'up',
-  children,
-  ...rest
-}) => (
-  <Center
-    widthHeight={widthHeight}
-    lineHeight={widthHeight}
-    color={color}
-    display="flex"
-    transform={
-      transform
-        ? transform
-        : orientation === 'left'
-        ? 'rotate(-90deg)'
-        : orientation === 'right'
-        ? 'rotate(90deg)'
-        : orientation === 'up'
-        ? 'rotate(0deg)'
-        : orientation === 'down'
-        ? 'rotate(180deg)'
-        : 'none'
-    }
-    {...rest}
-  >
-    {children}
-  </Center>
+const IconWrapper: React.FC<IconProps> = React.memo(
+  ({
+    widthHeight,
+    color = 'currentColor',
+    transform,
+    orientation = 'up',
+    children,
+    ...rest
+  }) => (
+    <Center
+      widthHeight={widthHeight}
+      lineHeight={widthHeight}
+      color={color}
+      display="flex"
+      transform={
+        transform
+          ? transform
+          : orientation === 'left'
+          ? 'rotate(-90deg)'
+          : orientation === 'right'
+          ? 'rotate(90deg)'
+          : orientation === 'up'
+          ? 'rotate(0deg)'
+          : orientation === 'down'
+          ? 'rotate(180deg)'
+          : 'none'
+      }
+      {...rest}
+    >
+      {children}
+    </Center>
+  )
 );
 
-// Utility function to handle fill and stroke based on 'filled' prop
-const getSvgProps = (
-  filled: boolean,
-  color: string,
-  strokeWidth: number | string
-) => {
-  const { getColor } = useTheme();
-  const themeColor = getColor(color);
-  return {
-    fill: filled ? themeColor : 'none',
-    stroke: themeColor,
-    strokeWidth,
-    strokeLinecap: 'round' as const,
-    strokeLinejoin: 'round' as const,
-  };
-};
+export const Icon: React.FC<IconProps> = React.memo(
+  ({
+    name = 'circle',
+    widthHeight = 24,
+    color = 'currentColor',
+    filled = false,
+    strokeWidth = 1,
+    size,
+    children,
+    fallback,
+    ...props
+  }) => {
+    const { getColor } = useTheme();
 
-export const Icon: React.FC<IconProps> = ({
-  name = 'circle',
-  widthHeight = 24,
-  color = 'currentColor',
-  filled = false,
-  strokeWidth = 1,
-  size,
-  children,
-  fallback,
-  ...props
-}) => {
-  // Use size if provided, otherwise fallback to widthHeight (numeric part if possible)
-  const iconSize = size || widthHeight;
+    // Use size if provided, otherwise fallback to widthHeight (numeric part if possible)
+    const iconSize = size || widthHeight;
 
-  if (!name) {
-    return (
-      <IconWrapper widthHeight={widthHeight} color={color} {...props}>
-        {children}
-      </IconWrapper>
-    );
-  }
+    // Memoize SVG props to avoid creating new objects on every render
+    const svgProps = useMemo(() => {
+      const themeColor = getColor(color);
+      return {
+        fill: filled ? themeColor : 'none',
+        stroke: themeColor,
+        strokeWidth,
+        strokeLinecap: 'round' as const,
+        strokeLinejoin: 'round' as const,
+      };
+    }, [filled, color, strokeWidth, getColor]);
 
-  // Normalize icon name (convert to kebab-case if needed)
-  const iconName = name
-    .toLowerCase()
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .toLowerCase();
+    if (!name) {
+      return (
+        <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+          {children}
+        </IconWrapper>
+      );
+    }
 
-  // Check if icon exists in dynamic imports
-  if (!(iconName in dynamicIconImports)) {
+    // Normalize icon name (convert to kebab-case if needed)
+    const iconName = name
+      .toLowerCase()
+      .replace(/([a-z])([A-Z])/g, '$1-$2')
+      .toLowerCase();
+
+    // Check if icon exists in dynamic imports
+    if (!(iconName in dynamicIconImports)) {
+      return (
+        <IconWrapper widthHeight={iconSize} color={color} {...props}>
+          {fallback || children}
+        </IconWrapper>
+      );
+    }
+
+    // Use cached lazy component instead of creating a new one each render
+    const LucideIcon = getLazyIcon(iconName);
+
     return (
       <IconWrapper widthHeight={iconSize} color={color} {...props}>
-        {fallback || children}
+        <Suspense fallback={fallback || null}>
+          <LucideIcon size={iconSize} {...svgProps} />
+        </Suspense>
       </IconWrapper>
     );
   }
-
-  const LucideIcon = lazy(
-    dynamicIconImports[iconName as keyof typeof dynamicIconImports]
-  );
-  const svgProps = getSvgProps(filled, color, strokeWidth);
-
-  return (
-    <IconWrapper widthHeight={iconSize} color={color} {...props}>
-      <Suspense fallback={fallback || null}>
-        <LucideIcon size={iconSize} {...svgProps} />
-      </Suspense>
-    </IconWrapper>
-  );
-};
+);
 
 // Re-export specific icons for backward compatibility mapping to Lucide names
 // We use 'Icon' component with 'name' prop.

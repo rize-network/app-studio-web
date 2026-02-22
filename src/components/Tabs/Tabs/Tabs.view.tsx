@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useCallback, useContext, useMemo } from 'react';
 import { View, Horizontal, Vertical } from 'app-studio';
 import {
   TabsViewProps,
@@ -97,70 +97,67 @@ export const useTabsContext = () => {
 };
 
 // TabsList compound component
-export const TabsList: React.FC<TabsListProps> = ({ children, views }) => {
-  return (
-    <Horizontal
-      width="100%"
-      borderBottom="1px solid"
-      borderBottomColor="color-gray-200"
-      {...views?.container}
-    >
-      {children}
-    </Horizontal>
-  );
-};
+export const TabsList: React.FC<TabsListProps> = React.memo(
+  ({ children, views }) => {
+    return (
+      <Horizontal
+        width="100%"
+        borderBottom="1px solid"
+        borderBottomColor="color-gray-200"
+        {...views?.container}
+      >
+        {children}
+      </Horizontal>
+    );
+  }
+);
 
 // TabsTrigger compound component
-export const TabsTrigger: React.FC<TabsTriggerProps> = ({
-  value,
-  children,
-  disabled = false,
-  views,
-}) => {
-  const { activeValue, setActiveValue } = useTabsContext();
-  const isActive = activeValue === value;
+export const TabsTrigger: React.FC<TabsTriggerProps> = React.memo(
+  ({ value, children, disabled = false, views }) => {
+    const { activeValue, setActiveValue } = useTabsContext();
+    const isActive = activeValue === value;
 
-  const handleClick = () => {
-    if (!disabled) {
-      setActiveValue(value);
-    }
-  };
+    const handleClick = useCallback(() => {
+      if (!disabled) {
+        setActiveValue(value);
+      }
+    }, [disabled, value, setActiveValue]);
 
-  return (
-    <View
-      cursor={disabled ? 'not-allowed' : 'pointer'}
-      opacity={disabled ? 0.6 : 1}
-      padding="12px 16px"
-      borderBottom="2px solid"
-      borderBottomColor={isActive ? 'theme-primary' : 'transparent'}
-      color={isActive ? 'theme-primary' : 'color-gray-600'}
-      fontWeight={isActive ? '600' : '400'}
-      transition="all 0.2s ease"
-      _hover={!disabled ? { color: 'theme-primary' } : {}}
-      onClick={handleClick}
-      {...views?.trigger}
-      {...(isActive ? views?.activeState : {})}
-    >
-      {children}
-    </View>
-  );
-};
+    return (
+      <View
+        cursor={disabled ? 'not-allowed' : 'pointer'}
+        opacity={disabled ? 0.6 : 1}
+        padding="12px 16px"
+        borderBottom="2px solid"
+        borderBottomColor={isActive ? 'theme-primary' : 'transparent'}
+        color={isActive ? 'theme-primary' : 'color-gray-600'}
+        fontWeight={isActive ? '600' : '400'}
+        transition="all 0.2s ease"
+        _hover={!disabled ? { color: 'theme-primary' } : {}}
+        onClick={handleClick}
+        {...views?.trigger}
+        {...(isActive ? views?.activeState : {})}
+      >
+        {children}
+      </View>
+    );
+  }
+);
 
 // TabsContent compound component
-export const TabsContent: React.FC<TabsContentProps> = ({
-  value,
-  children,
-  views,
-}) => {
-  const { activeValue } = useTabsContext();
+export const TabsContent: React.FC<TabsContentProps> = React.memo(
+  ({ value, children, views }) => {
+    const { activeValue } = useTabsContext();
 
-  if (activeValue !== value) {
-    return null;
+    if (activeValue !== value) {
+      return null;
+    }
+
+    return (
+      <View width="100%" padding="24px" {...views?.content}>
+        {children}
+      </View>
+    );
   }
-
-  return (
-    <View width="100%" padding="24px" {...views?.content}>
-      {children}
-    </View>
-  );
-};
+);
