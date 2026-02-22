@@ -8,9 +8,9 @@ export default defineConfig({
   plugins: [
     react(),
     {
-      name: 'dev-compression',
+      name: 'compression',
       configureServer(server) {
-        server.middlewares.use(compression());
+        server.middlewares.use(compression() as any);
       },
     },
   ],
@@ -33,6 +33,7 @@ export default defineConfig({
     sourcemap: false,
     cssCodeSplit: true,
     chunkSizeWarningLimit: 700,
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {

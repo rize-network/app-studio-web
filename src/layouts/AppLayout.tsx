@@ -27,7 +27,14 @@ const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (
 );
 
 const List = ({ children, ...props }: any) => (
-  <View as="ul" listStyleType="none" padding={0} margin={0} {...props}>
+  <View
+    as="ul"
+    listStyleType="none"
+    padding={0}
+    margin={0}
+    role="list"
+    {...props}
+  >
     {children}
   </View>
 );
@@ -37,7 +44,7 @@ const Title = ({ children, ...props }: any) => (
     as="h1"
     padding={16}
     fontWeight="bold"
-    fontSize={20}
+    fontSize={24}
     color="theme-primary"
     {...props}
   >
@@ -52,9 +59,9 @@ const SubTitle = ({ children, ...props }: any) => (
 );
 
 const ListSectionHeader = ({ children, ...props }: any) => (
-  <View
-    as="li"
-    role="presentation"
+  <Text
+    as="span"
+    display="block"
     fontSize={12}
     fontWeight="600"
     color="color-gray-500"
@@ -66,7 +73,7 @@ const ListSectionHeader = ({ children, ...props }: any) => (
     {...props}
   >
     {children}
-  </View>
+  </Text>
 );
 
 const CATEGORY_ORDER = [
@@ -164,9 +171,10 @@ export const AppLayout = () => {
             </Button>
           </Horizontal>
 
+        <View as="nav" aria-label="Sidebar navigation">
+          {/* Main App Menu */}
+          <ListSectionHeader>Main</ListSectionHeader>
           <List>
-            {/* Main App Menu */}
-            <ListSectionHeader>Main</ListSectionHeader>
             {appMenuItems.map((item, index) => {
               const isSelected =
                 location.pathname === item.path ||
@@ -184,15 +192,17 @@ export const AppLayout = () => {
                 </ListItem>
               );
             })}
+          </List>
 
-            {/* Categorized Components */}
-            {CATEGORY_ORDER.map((category) => {
-              const components = groupedComponents[category];
-              if (!components || components.length === 0) return null;
+          {/* Categorized Components */}
+          {CATEGORY_ORDER.map((category) => {
+            const components = groupedComponents[category];
+            if (!components || components.length === 0) return null;
 
-              return (
-                <React.Fragment key={category}>
-                  <ListSectionHeader>{category}</ListSectionHeader>
+            return (
+              <React.Fragment key={category}>
+                <ListSectionHeader>{category}</ListSectionHeader>
+                <List>
                   {components.map((item, index) => {
                     const isSelected = location.pathname === item.path;
                     // Unique key combination
@@ -210,20 +220,20 @@ export const AppLayout = () => {
                       </ListItem>
                     );
                   })}
-                </React.Fragment>
-              );
-            })}
+                </List>
+              </React.Fragment>
+            );
+          })}
 
-            {/* Catch-all for any categories not in the explicit order list (e.g. if we add 'Utility' later but forget to add to order) */}
-            {Object.keys(groupedComponents)
-              .filter(
-                (cat) => !CATEGORY_ORDER.includes(cat) && cat !== 'Hidden'
-              )
-              .map((category) => {
-                const components = groupedComponents[category];
-                return (
-                  <React.Fragment key={category}>
-                    <ListSectionHeader>{category}</ListSectionHeader>
+          {/* Catch-all for any categories not in the explicit order list */}
+          {Object.keys(groupedComponents)
+            .filter((cat) => !CATEGORY_ORDER.includes(cat) && cat !== 'Hidden')
+            .map((category) => {
+              const components = groupedComponents[category];
+              return (
+                <React.Fragment key={category}>
+                  <ListSectionHeader>{category}</ListSectionHeader>
+                  <List>
                     {components.map((item, index) => {
                       const isSelected = location.pathname === item.path;
                       const itemKey = `${category}-${index}`;
@@ -240,11 +250,12 @@ export const AppLayout = () => {
                         </ListItem>
                       );
                     })}
-                  </React.Fragment>
-                );
-              })}
-          </List>
+                  </List>
+                </React.Fragment>
+              );
+            })}
         </View>
+      </View>
       )}
       <View
         flexDirection="column"
