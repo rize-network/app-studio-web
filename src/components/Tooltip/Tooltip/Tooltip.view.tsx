@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+} from 'react';
 import { View, Text, ViewProps, useElementPosition } from 'app-studio';
 import { TooltipContextType, Position, Alignment } from './Tooltip.type';
 import { TooltipTriggerProps, TooltipContentProps } from './Tooltip.props';
@@ -29,70 +36,65 @@ export const TooltipProvider: React.FC<{
 };
 
 // Tooltip Trigger component
-export const TooltipTrigger: React.FC<TooltipTriggerProps> = ({
-  children,
-  views,
-  asChild = false,
-  ...props
-}) => {
-  const { openTooltip, closeTooltip, triggerRef, contentId, triggerId } =
-    useTooltipContext();
+export const TooltipTrigger: React.FC<TooltipTriggerProps> = React.memo(
+  ({ children, views, asChild = false, ...props }) => {
+    const { openTooltip, closeTooltip, triggerRef, contentId, triggerId } =
+      useTooltipContext();
 
-  const handleMouseEnter = () => openTooltip();
-  const handleMouseLeave = () => closeTooltip();
-  const handleFocus = () => openTooltip(); // For keyboard accessibility
-  const handleBlur = () => closeTooltip(); // For keyboard accessibility
+    const handleMouseEnter = useCallback(() => openTooltip(), [openTooltip]);
+    const handleMouseLeave = useCallback(() => closeTooltip(), [closeTooltip]);
+    const handleFocus = useCallback(() => openTooltip(), [openTooltip]);
+    const handleBlur = useCallback(() => closeTooltip(), [closeTooltip]);
 
-  const triggerProps = {
-    ref: triggerRef,
-    onMouseEnter: handleMouseEnter,
-    onMouseLeave: handleMouseLeave,
-    onFocus: handleFocus,
-    onBlur: handleBlur,
-    id: triggerId,
-    'aria-describedby': contentId, // Link trigger to content for screen readers
-    ...views?.container,
-    ...props,
-  };
+    const triggerProps = {
+      ref: triggerRef,
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      onFocus: handleFocus,
+      onBlur: handleBlur,
+      id: triggerId,
+      'aria-describedby': contentId, // Link trigger to content for screen readers
+      ...views?.container,
+      ...props,
+    };
 
-  // If asChild is true, clone the child element and pass the props
-  if (asChild && React.isValidElement(children)) {
-    return React.cloneElement(children, triggerProps);
+    // If asChild is true, clone the child element and pass the props
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children, triggerProps);
+    }
+
+    // Otherwise, wrap the children in a View component
+    return (
+      <View display="inline-block" {...triggerProps}>
+        {children}
+      </View>
+    );
   }
-
-  // Otherwise, wrap the children in a View component
-  return (
-    <View display="inline-block" {...triggerProps}>
-      {children}
-    </View>
-  );
-};
+);
 
 // Tooltip Content component
-export const TooltipContent: React.FC<TooltipContentProps> = ({
-  children,
-  views,
-  ...props
-}) => {
-  const { isOpen, contentRef, contentId, triggerId } = useTooltipContext();
+export const TooltipContent: React.FC<TooltipContentProps> = React.memo(
+  ({ children, views, ...props }) => {
+    const { isOpen, contentRef, contentId, triggerId } = useTooltipContext();
 
-  if (!isOpen) {
-    return null; // Don't render content if not open
+    if (!isOpen) {
+      return null; // Don't render content if not open
+    }
+
+    return (
+      <View
+        ref={contentRef}
+        id={contentId}
+        role="tooltip" // Use tooltip role for accessibility
+        aria-labelledby={triggerId} // Associate content with trigger
+        {...views?.container}
+        {...props}
+      >
+        {children}
+      </View>
+    );
   }
-
-  return (
-    <View
-      ref={contentRef}
-      id={contentId}
-      role="tooltip" // Use tooltip role for accessibility
-      aria-labelledby={triggerId} // Associate content with trigger
-      {...views?.container}
-      {...props}
-    >
-      {children}
-    </View>
-  );
-};
+);
 
 // Main Tooltip View component
 export const TooltipView: React.FC<
@@ -215,13 +217,15 @@ export const TooltipView: React.FC<
     }
   }, [isOpen, position, align, triggerRef, contentRef, relation]);
 
-  // Get arrow styles based on optimal placement
-  const arrowStyles = showArrow
-    ? getArrowStyles(optimalPosition.placement as Position)
-    : {};
+  // Get arrow styles based on optimal placement (memoized)
+  const arrowStyles = useMemo(
+    () =>
+      showArrow ? getArrowStyles(optimalPosition.placement as Position) : {},
+    [showArrow, optimalPosition.placement]
+  );
 
-  // Create intelligent positioning styles with transform for better placement
-  const getPositionStyles = (): React.CSSProperties => {
+  // Create intelligent positioning styles with transform for better placement (memoized)
+  const positionStyles = useMemo((): React.CSSProperties => {
     const baseStyles: React.CSSProperties = {
       position: 'fixed',
       left: optimalPosition.x,
@@ -240,9 +244,7 @@ export const TooltipView: React.FC<
       default:
         return baseStyles;
     }
-  };
-
-  const positionStyles = getPositionStyles();
+  }, [optimalPosition.x, optimalPosition.y, optimalPosition.placement]);
 
   return (
     <View
