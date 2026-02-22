@@ -1,7 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import LandingImage from 'src/assets/orange.webp';
-import { Button, Center, Horizontal, Text, Vertical } from 'app-studio';
+// Image moved to public/orange.webp for stable preloading
+const LandingImage = '/orange.webp';
+import {
+  Button,
+  Center,
+  Horizontal,
+  Text,
+  Vertical,
+  View,
+  ImageBackground,
+} from 'app-studio';
 import { Features } from 'src/features';
 import { CookieConsent } from 'src/components/CookieConsent/CookieConsent';
 
@@ -75,14 +84,21 @@ export const HomePage = () => {
         position="relative"
         flexWrap="nowrap"
         overflowY="scroll"
+        minHeight="100vh"
         color="warmGray-500"
         alignItems="center"
         scroll-behavior="smooth"
-        backgroundImage={`url(${LandingImage})`}
-        backgroundRepeat="no-repeat"
-        backgroundPosition="top"
         media={media.container}
       >
+        <ImageBackground
+          src={LandingImage}
+          position="absolute"
+          top={0}
+          left={0}
+          width="100%"
+          height="100%"
+          zIndex={-1}
+        />
         <Vertical gap={60} alignItems="center" media={{ mobile: { gap: 20 } }}>
           <Text
             width="100%"
@@ -95,7 +111,12 @@ export const HomePage = () => {
           >
             App-Studio
           </Text>
-          <Text textAlign="center" media={media.paragraph}>
+          <Text
+            textAlign="center"
+            color="black"
+            textShadow="0px 1px 3px rgba(255,255,255,0.8)"
+            media={media.paragraph}
+          >
             Pellentesque habitant morbi tristique senectus et netus et malesuada
             fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae,
             ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
@@ -109,10 +130,10 @@ export const HomePage = () => {
             media={{ mobile: { gap: 10 } }}
             flexWrap="nowrap"
           >
-            <Button onClick={handleClick} {...buttonStyle} isAuto>
+            <Button onClick={handleClick} {...buttonStyle} width="fit-content">
               Get Started
             </Button>
-            <Button variant="outline" {...buttonStyle} isAuto>
+            <Button variant="outline" {...buttonStyle} width="fit-content">
               Deploy Now
             </Button>
           </Center>

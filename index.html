@@ -4,11 +4,21 @@
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap"></noscript>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#F97316" />
   <meta name="description" content="App Studio Web Components" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' ws: wss: http: https:; worker-src 'self' blob:;" />
   <link rel="apple-touch-icon" href="/assets/apple-logo.png">
+  <link rel="preload" as="image" href="/orange.webp" fetchpriority="high" />
   <link rel="manifest" href="/manifest.json" />
+  <!-- Preload LCP image to improve Largest Contentful Paint -->
+  <link rel="preload" as="image" href="/src/assets/orange.webp" type="image/webp" />
+  <!-- DNS prefetch for CDN domains to reduce connection latency -->
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <style>
     * {
       box-sizing: border-box;
@@ -21,6 +31,11 @@
 
     td {
       min-width: 200px;
+    }
+
+    /* Inline critical loading styles to avoid layout shift */
+    #root {
+      min-height: 100vh;
     }
   </style>
   <title>App Studio</title>

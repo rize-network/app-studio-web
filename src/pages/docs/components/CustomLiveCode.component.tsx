@@ -1,13 +1,17 @@
 // File: src/pages/docs/components/CustomLiveCode.component.tsx
-import React, { useState, useEffect, Fragment } from 'react';
-import {
-  transform,
-  BabelFileResult,
-  TransformOptions,
-} from '@babel/standalone';
-// Assuming View and Text are general layout components from your app-studio library
-// If not, replace with appropriate div/span or other layout components.
+import React, { useState, useEffect, useRef, Fragment } from 'react';
+import type { BabelFileResult, TransformOptions } from '@babel/standalone';
 import { View, Text } from 'app-studio';
+
+// Lazy-load @babel/standalone to keep it out of the main bundle (~534KB)
+let cachedTransform: typeof import('@babel/standalone').transform | null = null;
+const loadBabel = async () => {
+  if (!cachedTransform) {
+    const babel = await import('@babel/standalone');
+    cachedTransform = babel.transform;
+  }
+  return cachedTransform;
+};
 
 interface CustomLiveCodeProps {
   code: string; // The processed code to be transpiled and run
@@ -26,6 +30,7 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
 }) => {
   const [renderedElement, setRenderedElement] = useState<React.ReactNode>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isLoadingBabel, setIsLoadingBabel] = useState(false);
 
   useEffect(() => {
     if (!code || typeof code !== 'string' || !code.trim()) {
@@ -34,46 +39,55 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
       return;
     }
 
-    let transpiledCode: string | null | undefined = '';
-    try {
-      const babelOptions: TransformOptions = {
-        presets: [
-          'react',
-          ['typescript', { allExtensions: true, isTSX: true }],
-        ],
-        filename: 'live-code.tsx', // Helps Babel provide better error messages
-      };
+    let cancelled = false;
 
-      const babelResult: BabelFileResult | null = transform(code, babelOptions);
-      transpiledCode = babelResult?.code;
+    const transpileAndRun = async () => {
+      let transpiledCode: string | null | undefined = '';
+      try {
+        setIsLoadingBabel(true);
+        const transform = await loadBabel();
+        if (cancelled) return;
+        setIsLoadingBabel(false);
 
-      if (!transpiledCode) {
-        throw new Error('Babel transpilation resulted in empty or null code.');
-      }
+        const babelOptions: TransformOptions = {
+          presets: [
+            'react',
+            ['typescript', { allExtensions: true, isTSX: true }],
+          ],
+          filename: 'live-code.tsx',
+        };
 
-      const completeScope = {
-        React,
-        Fragment,
-        ...scope,
-      };
-      const scopeKeys = Object.keys(completeScope);
-      const scopeValues = scopeKeys.map((key) => completeScope[key]);
+        const babelResult: BabelFileResult | null = transform(
+          code,
+          babelOptions
+        );
+        transpiledCode = babelResult?.code;
 
-      let executionBody: string;
-      if (mainComponentName) {
-        // If a main component name is provided, define everything in the code,
-        // then explicitly return that named component.
-        executionBody = `
+        if (!transpiledCode) {
+          throw new Error(
+            'Babel transpilation resulted in empty or null code.'
+          );
+        }
+
+        const completeScope = {
+          React,
+          Fragment,
+          ...scope,
+        };
+        const scopeKeys = Object.keys(completeScope);
+        const scopeValues = scopeKeys.map((key) => completeScope[key]);
+
+        let executionBody: string;
+        if (mainComponentName) {
+          executionBody = `
           ${transpiledCode};
           if (typeof ${mainComponentName} !== 'undefined') {
             return ${mainComponentName};
           } else {
-            // Attempt to find any function if the main one isn't found by its exact name
-            const allDefined = this; // 'this' will be the global scope of the new Function
+            const allDefined = this;
             if (allDefined && typeof allDefined['${mainComponentName}'] !== 'undefined') {
                 return allDefined['${mainComponentName}'];
             }
-            // Last resort: find the first function defined if mainComponentName is somehow lost
             for (const key in allDefined) {
                 if (typeof allDefined[key] === 'function' && key !== 'React' && key !== 'Fragment' && !scopeKeys.includes(key)) {
                     console.warn("Fallback: Rendering first available function found in code: ", key);
@@ -83,66 +97,72 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
             throw new Error("Component '${mainComponentName}' was not defined or found in the provided code.");
           }
         `;
-      } else {
-        // If no main component name, assume the code itself is an expression
-        // (e.g., <Button />) or an anonymous function (e.g., () => <Button />)
-        // that should be returned directly.
-        executionBody = `return (${transpiledCode});`;
-      }
+        } else {
+          executionBody = `return (${transpiledCode});`;
+        }
 
-      const evaluatedFunc = new Function(...scopeKeys, executionBody);
-      const result = evaluatedFunc.apply({}, scopeValues); // Use .apply({}, ...) to set 'this' context if needed
+        const evaluatedFunc = new Function(...scopeKeys, executionBody);
+        const result = evaluatedFunc.apply({}, scopeValues);
 
-      if (typeof result === 'function') {
-        // If the result is a function, assume it's a React component type
-        setRenderedElement(React.createElement(result as React.ComponentType));
-      } else if (React.isValidElement(result)) {
-        // If the result is already a React element
-        setRenderedElement(result);
-      } else if (
-        result === null ||
-        result === undefined ||
-        typeof result === 'string' ||
-        typeof result === 'number' ||
-        typeof result === 'boolean'
-      ) {
-        // If the result is a primitive type that React can render
-        setRenderedElement(result as React.ReactNode);
-      } else {
-        throw new Error(
-          'The evaluated code did not return a renderable React component, element, or primitive value.'
-        );
-      }
-      setError(null);
-    } catch (e: any) {
-      console.error('Error in CustomLiveCode:', e);
-      let errorMessage = `Error: ${e.message}`;
-      if (e.loc) {
-        errorMessage += ` (Line: ${e.loc.line}, Column: ${e.loc.column})`;
-      }
-      if (e.stack) {
-        errorMessage += `\nStack: ${e.stack.substring(0, 500)}...`;
-      }
+        if (cancelled) return;
 
-      errorMessage += `\n\n--- Original Code (from MDX) ---\n${originalCode.substring(
-        0,
-        500
-      )}...`;
-      if (code !== originalCode) {
-        errorMessage += `\n\n--- Processed Code (passed to Babel) ---\n${code.substring(
+        if (typeof result === 'function') {
+          setRenderedElement(
+            React.createElement(result as React.ComponentType)
+          );
+        } else if (React.isValidElement(result)) {
+          setRenderedElement(result);
+        } else if (
+          result === null ||
+          result === undefined ||
+          typeof result === 'string' ||
+          typeof result === 'number' ||
+          typeof result === 'boolean'
+        ) {
+          setRenderedElement(result as React.ReactNode);
+        } else {
+          throw new Error(
+            'The evaluated code did not return a renderable React component, element, or primitive value.'
+          );
+        }
+        setError(null);
+      } catch (e: any) {
+        if (cancelled) return;
+        console.error('Error in CustomLiveCode:', e);
+        let errorMessage = `Error: ${e.message}`;
+        if (e.loc) {
+          errorMessage += ` (Line: ${e.loc.line}, Column: ${e.loc.column})`;
+        }
+        if (e.stack) {
+          errorMessage += `\nStack: ${e.stack.substring(0, 500)}...`;
+        }
+
+        errorMessage += `\n\n--- Original Code (from MDX) ---\n${originalCode.substring(
           0,
           500
         )}...`;
+        if (code !== originalCode) {
+          errorMessage += `\n\n--- Processed Code (passed to Babel) ---\n${code.substring(
+            0,
+            500
+          )}...`;
+        }
+        if (transpiledCode) {
+          errorMessage += `\n\n--- Transpiled Code (Babel output) ---\n${transpiledCode.substring(
+            0,
+            500
+          )}...`;
+        }
+        setError(errorMessage);
+        setRenderedElement(null);
       }
-      if (transpiledCode) {
-        errorMessage += `\n\n--- Transpiled Code (Babel output) ---\n${transpiledCode.substring(
-          0,
-          500
-        )}...`;
-      }
-      setError(errorMessage);
-      setRenderedElement(null);
-    }
+    };
+
+    transpileAndRun();
+
+    return () => {
+      cancelled = true;
+    };
   }, [code, originalCode, scope, mainComponentName]);
 
   // Basic styling for the component parts. Customize as needed.
@@ -215,7 +235,15 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
         </pre>
       </View>
       <View style={previewStyle}>
-        {error ? <pre style={errorStyle}>{error}</pre> : renderedElement}
+        {isLoadingBabel ? (
+          <Text style={{ color: '#666', fontStyle: 'italic' }}>
+            Loading transpiler...
+          </Text>
+        ) : error ? (
+          <pre style={errorStyle}>{error}</pre>
+        ) : (
+          renderedElement
+        )}
       </View>
     </View>
   );

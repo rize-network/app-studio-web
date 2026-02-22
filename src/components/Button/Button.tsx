@@ -7,11 +7,6 @@ import { useHover } from 'app-studio';
 const ButtonComponent: React.FC<ButtonProps> = (props: any) => {
   const [ref, hover] = useHover<HTMLDivElement>();
 
-  // Destructuring the state and state update function from the custom hook for button state management.
-  return (
-    // Defines a function to toggle the hover state of the button.
-    <ButtonView ref={ref} isHovered={hover} {...props} />
-  );
-  // Exports the Button component for use in other parts of the application.
+  return <ButtonView isHovered={hover} {...props} />;
 };
 export const Button = ButtonComponent;

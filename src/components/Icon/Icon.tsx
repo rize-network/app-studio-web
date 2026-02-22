@@ -1,7 +1,7 @@
 import { useTheme, ViewProps, Center } from 'app-studio';
 import React, { lazy, Suspense, useMemo } from 'react';
 import type { LucideProps } from 'lucide-react';
-import dynamicIconImports from 'lucide-react/dynamicIconImports';
+import type dynamicIconImportsType from 'lucide-react/dynamicIconImports';
 
 // Cache for lazy-loaded icon components to avoid recreating them on every render
 const iconCache = new Map<
@@ -9,18 +9,31 @@ const iconCache = new Map<
   React.LazyExoticComponent<React.ComponentType<LucideProps>>
 >();
 
-const getLazyIcon = (iconName: string) => {
+const getLazyIcon = (
+  iconName: string,
+  fallback?: React.ReactNode,
+  children?: React.ReactNode
+) => {
   if (!iconCache.has(iconName)) {
     iconCache.set(
       iconName,
-      lazy(dynamicIconImports[iconName as keyof typeof dynamicIconImports])
+      lazy(() =>
+        import('lucide-react/dynamicIconImports').then((m) => {
+          const importFn = m.default[iconName as keyof typeof m.default];
+          if (importFn) {
+            return importFn();
+          }
+          // Fallback if icon doesn't exist
+          return { default: () => <>{fallback || children}</> } as any;
+        })
+      )
     );
   }
   return iconCache.get(iconName)!;
 };
 
 // Type for valid Lucide icon names with autocomplete support
-export type IconName = keyof typeof dynamicIconImports;
+export type IconName = keyof typeof dynamicIconImportsType;
 
 // Base icon interface with added transform and orientation
 export interface IconProps extends Omit<ViewProps, 'orientation'> {
@@ -111,17 +124,8 @@ export const Icon: React.FC<IconProps> = React.memo(
       .replace(/([a-z])([A-Z])/g, '$1-$2')
       .toLowerCase();
 
-    // Check if icon exists in dynamic imports
-    if (!(iconName in dynamicIconImports)) {
-      return (
-        <IconWrapper widthHeight={iconSize} color={color} {...props}>
-          {fallback || children}
-        </IconWrapper>
-      );
-    }
-
     // Use cached lazy component instead of creating a new one each render
-    const LucideIcon = getLazyIcon(iconName);
+    const LucideIcon = getLazyIcon(iconName, fallback, children);
 
     return (
       <IconWrapper widthHeight={iconSize} color={color} {...props}>

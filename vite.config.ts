@@ -1,10 +1,19 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import compression from 'compression';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: 'compression',
+      configureServer(server) {
+        server.middlewares.use(compression() as any);
+      },
+    },
+  ],
   resolve: {
     alias: {
       src: resolve(__dirname, 'src'),
@@ -21,7 +30,24 @@ export default defineConfig({
   },
   build: {
     outDir: 'build',
-    sourcemap: true,
+    sourcemap: false,
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 700,
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Core React runtime - loaded on every page
+          react: ['react', 'react-dom', 'react-router-dom'],
+          // App Studio components - very large and used across many routes
+          'app-studio': ['app-studio'],
+          // Babel standalone - only needed for docs live code (~534KB)
+          babel: ['@babel/standalone'],
+          // MDX processing - only needed for docs page
+          mdx: ['@mdx-js/mdx', '@mdx-js/react'],
+        },
+      },
+    },
   },
   publicDir: 'public',
   test: {
