@@ -114,11 +114,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     }
   };
   return (
-    <FieldContainer
-      helperText={helperText}
-      error={error}
-      views={views}
-    >
+    <FieldContainer helperText={helperText} error={error} views={views}>
       <FieldContent
         label={label}
         size={size}
