@@ -114,12 +114,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     }
   };
   return (
-    <FieldContainer
-      helperText={helperText}
-      error={error}
-      views={views}
-      {...props}
-    >
+    <FieldContainer helperText={helperText} error={error} views={views}>
       <FieldContent
         label={label}
         size={size}
@@ -160,13 +155,12 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
-            editable={`${!!isEditable.toString()}`}
             placeholder={hint}
             onBlur={handleBlur}
             onFocus={handleFocus}
-            multiline={`${!!isMultiline.toString()}`}
             onChange={(e) => handleChange(e as any)}
             {...fieldStyles}
+            {...props}
             style={{
               resize: isDisabled || isReadOnly ? 'none' : 'vertical',
             }}
