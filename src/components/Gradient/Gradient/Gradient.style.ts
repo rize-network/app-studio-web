@@ -127,7 +127,8 @@ export const GradientAnimations = {
   },
   radial: {
     backgroundSize: '100% 100%',
-    transition: 'all 3s ease-in-out',
+    transition:
+      'background-position 3s ease-in-out, background-size 3s ease-in-out',
     animate: {
       from: { backgroundPosition: 'center', backgroundSize: '100% 100%' },
       '50%': { backgroundSize: '120% 120%' },
@@ -151,7 +152,7 @@ export const DefaultGradientStyles = {
     position: 'relative',
     overflow: 'hidden',
     borderRadius: '8px', // 2 × 4px grid
-    transition: 'all 0.2s ease',
+    transition: 'border-radius 0.2s ease, opacity 0.2s ease',
   } as ViewProps,
   content: {
     position: 'relative',

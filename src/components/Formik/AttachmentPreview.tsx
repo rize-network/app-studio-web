@@ -36,7 +36,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
     <View
       display="flex"
       flexWrap="wrap"
-      gap="6px"
+      gap="8px"
       padding="8px 0"
       maxHeight={maxHeight}
       overflowY="auto"
@@ -53,9 +53,10 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
             key={index}
             alignItems="center"
             gap="6px"
-            padding="4px 8px"
-            borderRadius="6px"
-            backgroundColor="color-gray-100"
+            padding="6px 10px"
+            borderRadius="8px"
+            border="1px solid #E2E8F0"
+            backgroundColor="color-white"
             position="relative"
             animate={{
               from: { opacity: 0, scale: 0.9 },
@@ -74,7 +75,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       width="60px"
                       height="60px"
                       objectFit="cover"
-                      borderRadius="4px"
+                      borderRadius="8px"
                     />
                   )}
                   {isVideo && previewUrl && (
@@ -87,15 +88,15 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       width="60px"
                       height="60px"
                       objectFit="cover"
-                      borderRadius="4px"
+                      borderRadius="8px"
                     />
                   )}
                   {isAudio && (
                     <Center
                       width="60px"
                       height="60px"
-                      backgroundColor="color-gray-200"
-                      borderRadius="4px"
+                      backgroundColor="color-gray-100"
+                      borderRadius="8px"
                     >
                       <AudioIcon widthHeight={24} color="color-black" />
                     </Center>
@@ -104,8 +105,8 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                     <Center
                       width="60px"
                       height="60px"
-                      backgroundColor="color-gray-200"
-                      borderRadius="4px"
+                      backgroundColor="color-gray-100"
+                      borderRadius="8px"
                     >
                       <FileIcon widthHeight={24} color="color-black" />
                     </Center>
@@ -131,8 +132,9 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       justifyContent="center"
                       cursor="pointer"
                       border="2px solid white"
+                      transition="background-color 0.2s ease, opacity 0.2s ease"
                       _hover={{
-                        backgroundColor: 'color-red-600',
+                        backgroundColor: '#DC2626',
                       }}
                       onClick={(e) => {
                         e.stopPropagation();

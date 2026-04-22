@@ -47,12 +47,9 @@ const ToggleView: React.FC<Props> = React.memo(
 
     const base = palette[variant];
 
-    const isActive = !!(isToggle || isHovered);
+    const isActive = !!isToggle;
 
-    const handleHover = useCallback(
-      () => setIsHovered(!isHovered),
-      [isHovered, setIsHovered]
-    );
+    const handleHover = useCallback(() => setIsHovered(true), [setIsHovered]);
 
     const handleToggle = useCallback(() => {
       if (!isDisabled) {
@@ -69,7 +66,7 @@ const ToggleView: React.FC<Props> = React.memo(
     return (
       <Center
         role="Toggle"
-        padding={shape === 'pill' ? '10px 12px' : '8px'}
+        padding={shape === 'pill' ? '8px 12px' : '8px'}
         width="fit-content"
         cursor={isDisabled ? 'not-allowed' : 'pointer'}
         borderRadius={ToggleShapes[shape]}
@@ -80,8 +77,18 @@ const ToggleView: React.FC<Props> = React.memo(
         {...base}
         /* Override with active state if toggled */
         {...(isActive && {
-          backgroundColor: mainTone,
-          color: mode === 'light' ? 'color-black' : 'color-white',
+          ...(variant === 'link'
+            ? {
+                backgroundColor: 'transparent',
+              }
+            : {
+                backgroundColor:
+                  mode === 'light' ? '#EFF6FF' : 'rgba(29, 78, 216, 0.18)',
+                borderWidth: 1,
+                borderStyle: 'solid',
+                borderColor: mode === 'light' ? '#BFDBFE' : mainTone,
+              }),
+          color: mainTone,
         })}
         {...props}
         {...views?.container}

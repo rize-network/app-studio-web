@@ -12,9 +12,9 @@ export const ComponentRouter = [
   {
     element: <AppLayout />,
     children: [
-      { path: '/', element: <HomePage /> },
-      { path: '/home', element: <Navigate to="/" replace /> },
-      { path: '/components', element: <Navigate to="/accordion" replace /> },
+      // { path: '/', element: <HomePage /> },
+      // { path: '/home', element: <Navigate to="/" replace /> },
+      { path: '/', element: <Navigate to="/accordion" replace /> },
       { path: '/docs/:componentName?', element: <DocsPage /> },
       { path: '/docs', element: <DocsPage /> },
       { path: '/theme-test', element: <ThemeTestPage /> },

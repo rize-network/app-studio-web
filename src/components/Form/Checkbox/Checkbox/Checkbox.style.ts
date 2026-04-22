@@ -55,8 +55,7 @@ export const VariantStyles: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color-gray-300',
     color: 'color-black',
-    transition:
-      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+    transition: 'all 0.2s ease-in-out',
   },
   indeterminate: {
     backgroundColor: 'theme-primary',
@@ -88,18 +87,15 @@ export const StateStyles = {
   focus: {
     selected: {
       outline: 'none',
-      boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
     },
     unselected: {
       outline: 'none',
-      boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
     },
     indeterminate: {
       outline: 'none',
-      boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
     },
   },
   disabled: {

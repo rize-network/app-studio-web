@@ -3,7 +3,7 @@ import { MessageType, Shape, Size } from './Message.type';
 
 export const ContainerShapes: Record<Shape, ViewProps> = {
   square: { borderRadius: 0 },
-  rounded: { borderRadius: 4 },
+  rounded: { borderRadius: 12 },
 };
 
 export const HeaderIconSizes: Record<Size, number> = {
@@ -17,69 +17,69 @@ export const HeaderIconSizes: Record<Size, number> = {
 export const Themes: Record<MessageType, any> = {
   info: {
     container: {
-      backgroundColor: 'color-blue-200',
-      border: 'color-blue-400',
+      backgroundColor: 'color-white',
+      border: 'rgba(191, 219, 254, 0.95)',
     },
     icon: {
-      color: 'color-blue-500',
+      color: 'theme-primary',
       name: 'InformationIcon',
     },
     content: {
-      color: 'color-blue-500',
+      color: 'color-gray-900',
     },
     close: {
-      color: 'color-blue-500',
+      color: 'color-gray-500',
       name: 'CloseIcon',
     },
   },
   success: {
     container: {
-      backgroundColor: 'color-green-200',
-      border: 'color-green-400',
+      backgroundColor: '#F0FDF4',
+      border: '#BBF7D0',
     },
     icon: {
-      color: 'color-green-500',
+      color: '#16A34A',
       name: 'SuccessIcon',
     },
     content: {
-      color: 'color-green-500',
+      color: '#14532D',
     },
     close: {
-      color: 'color-green-500',
+      color: '#15803D',
       name: 'CloseIcon',
     },
   },
   error: {
     container: {
-      backgroundColor: 'color-red-200',
-      border: 'color-red-400',
+      backgroundColor: '#FEF2F2',
+      border: '#FECACA',
     },
     icon: {
-      color: 'color-red-500',
-      name: 'ErrrorIcon',
+      color: '#DC2626',
+      name: 'ErrorIcon',
     },
     content: {
-      color: 'color-red-500',
+      color: '#7F1D1D',
     },
     close: {
-      color: 'color-red-500',
+      color: '#B91C1C',
       name: 'CloseIcon',
     },
   },
   warning: {
     container: {
-      backgroundColor: 'color-orange-200',
-      border: 'color-orange-400',
+      backgroundColor: '#FFF7ED',
+      border: '#FED7AA',
     },
     icon: {
-      color: 'color-orange-500',
-      name: 'ErrrorIcon',
+      color: '#EA580C',
+      name: 'WarningIcon',
     },
     content: {
-      color: 'color-orange-500',
+      color: '#9A3412',
     },
     close: {
-      color: 'color-orange-500',
+      color: '#C2410C',
       name: 'CloseIcon',
     },
   },

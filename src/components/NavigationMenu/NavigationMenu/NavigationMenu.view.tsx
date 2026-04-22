@@ -76,8 +76,8 @@ export const NavigationMenuList: React.FC<NavigationMenuListProps> = ({
     <Container
       width="100%"
       {...NavigationMenuOrientations[orientation]}
-      transition="all 0.2s ease"
-      borderRadius="4px"
+      transition="background-color 0.2s ease, border-color 0.2s ease"
+      borderRadius="8px"
       {...views?.container}
     >
       {children}
@@ -148,8 +148,8 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
           width="100%"
           cursor={disabled ? 'not-allowed' : 'pointer'}
           opacity={disabled ? 0.6 : 1}
-          borderRadius="4px"
-          transition="all 0.2s ease"
+          borderRadius="8px"
+          transition="background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease"
           {...NavigationMenuSizes[size]}
           {...NavigationMenuVariants[variant]}
           {...(isActive ? NavigationMenuItemStates.active : {})}
@@ -207,8 +207,8 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
         width="100%"
         display="flex"
         alignItems="center"
-        borderRadius="4px"
-        transition="all 0.2s ease"
+        borderRadius="8px"
+        transition="background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease"
         gap="8px"
         {...NavigationMenuSizes[size]}
         {...NavigationMenuVariants[variant]}
@@ -277,7 +277,7 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      borderRadius={4}
+      borderRadius={8}
       transition="background-color 0.2s ease"
       {...NavigationMenuSizes[size]}
       {...NavigationMenuVariants[variant]}

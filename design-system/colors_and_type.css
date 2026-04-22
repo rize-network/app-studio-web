@@ -1,0 +1,166 @@
+/* =====================================================================
+   App Studio Design System — colors_and_type.css
+   Derived from rize-network/app-studio-web (theme + button/card styles).
+   Mode-aware via [data-theme="light" | "dark"]. Light is default.
+   ===================================================================== */
+
+/* ----- Font: Mulish (used in the app shell) ----- */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap');
+/* NOTE: The component styles (Button.style.ts, Card.style.ts) reference
+   "Inter/Geist" in their JSDoc comments, but the actual shipping app loads
+   ONLY Mulish. We follow the shipping app here. Inter and Geist are kept as
+   documented fallbacks. */
+
+:root,
+[data-theme="light"] {
+  /* ----- Brand ----- */
+  --brand-orange:        #F97316;  /* theme-color from index.html */
+  --brand-orange-hover:  #EA6A0D;
+  --brand-orange-press:  #C2580B;
+  --brand-orange-soft:   #FFEDD5;  /* color-orange-100 */
+
+  /* ----- Theme semantic tokens (mirror app-studio ThemeProvider) ----- */
+  --theme-primary:       #1D4ED8;  /* color-blue-700 — default provider primary */
+  --theme-secondary:     #A855F7;  /* color-purple-500 */
+  --theme-background:    #FFFFFF;
+  --theme-surface:       #FFFFFF;
+  --theme-text:          #0A0A0A;
+  --theme-text-muted:    #4B5563;  /* color-gray-600 */
+  --theme-border:        #E5E7EB;  /* color-gray-200 */
+  --theme-border-strong: #D1D5DB;  /* color-gray-300 */
+  --theme-disabled:      #E5E7EB;
+
+  /* ----- Neutrals (Tailwind-ish gray scale used in components) ----- */
+  --gray-50:  #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+
+  /* Warm gray — used as hero body color */
+  --warmGray-500: #78716C;
+
+  /* ----- Palette hues referenced by code (color-<hue>-<step>) ----- */
+  --color-blue-50:   #EFF6FF;
+  --color-blue-100:  #DBEAFE;
+  --color-blue-500:  #3B82F6;
+  --color-blue-700:  #1D4ED8;
+  --color-blue-900:  #1E3A8A;
+
+  --color-indigo-500:#6366F1;
+  --color-purple-500:#A855F7;
+  --color-purple-600:#9333EA;
+  --color-pink-500:  #EC4899;
+  --color-red-500:   #EF4444;
+  --color-amber-500: #F59E0B;
+  --color-emerald-500:#10B981;
+  --color-green-500: #22C55E;
+  --color-orange-500:#F97316;
+
+  --color-dark-500:  #1F2937; /* loader fallback */
+
+  /* ----- Shadows (from Card.style.ts elevated variant) ----- */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-lg: 0 4px 6px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.06);
+  --shadow-xl: 0 10px 15px -3px rgba(0,0,0,.10);
+
+  /* ----- Radii (from Button/Card Shapes) ----- */
+  --radius-square: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;   /* default "rounded" */
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+
+  /* ----- Spacing — app-studio uses a 4px grid ----- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px;
+
+  /* ----- Focus ring (Button.style.ts _focusVisible pattern) ----- */
+  --focus-ring-inner: rgba(255,255,255,1);
+  --focus-ring-outer: var(--theme-primary);
+
+  /* ----- Type ----- */
+  --font-sans: 'Mulish', system-ui, -apple-system, 'Segoe UI', Roboto,
+               'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
+               Consolas, 'Liberation Mono', monospace;
+
+  /* Body scale — mirrors Button ButtonFontSize/LineHeight */
+  --fs-xs: 10px;  --lh-xs: 12px;
+  --fs-sm: 12px;  --lh-sm: 16px;
+  --fs-md: 14px;  --lh-md: 20px;  /* body default */
+  --fs-lg: 16px;  --lh-lg: 24px;
+  --fs-xl: 20px;  --lh-xl: 28px;
+
+  /* Display / heading scale — from home.page.tsx desktop media queries */
+  --fs-display-xl: 110px; --lh-display-xl: 112px; --ls-display-xl: -1.5px;
+  --fs-display-lg: 96px;  --lh-display-lg: 112px; --ls-display-lg: -1.5px;
+  --fs-display-md: 48px;  --lh-display-md: 57px;
+  --fs-h1: 32px;  --lh-h1: 38px;
+  --fs-h2: 28px;  --lh-h2: 34px;
+  --fs-h3: 24px;  --lh-h3: 30px;
+  --fs-h4: 20px;  --lh-h4: 26px;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:600;
+  --fw-bold:    700;
+  --fw-extrabold:800;
+}
+
+[data-theme="dark"] {
+  --theme-background: #0B0B0E;
+  --theme-surface:    #111827;   /* color-gray-900 */
+  --theme-text:       #F9FAFB;
+  --theme-text-muted: #D1D5DB;
+  --theme-border:     #374151;   /* color-gray-700 */
+  --theme-border-strong: #4B5563;
+  --theme-disabled:   #374151;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
+  --shadow-md: 0 4px 12px rgba(0,0,0,.30);
+  --shadow-lg: 0 8px 16px rgba(0,0,0,.40);
+}
+
+/* ----- Base typography ----- */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: var(--lh-md);
+  color: var(--theme-text);
+  background: var(--theme-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Semantic element styles */
+h1, .h1 { font-size: var(--fs-h1); line-height: var(--lh-h1); font-weight: var(--fw-bold); letter-spacing: -0.01em; margin: 0; }
+h2, .h2 { font-size: var(--fs-h2); line-height: var(--lh-h2); font-weight: var(--fw-semibold); letter-spacing: -0.01em; margin: 0; }
+h3, .h3 { font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: var(--fw-semibold); margin: 0; }
+h4, .h4 { font-size: var(--fs-h4); line-height: var(--lh-h4); font-weight: var(--fw-semibold); margin: 0; }
+
+.display-xl { font-size: var(--fs-display-xl); line-height: var(--lh-display-xl); letter-spacing: var(--ls-display-xl); font-weight: var(--fw-bold); }
+.display-lg { font-size: var(--fs-display-lg); line-height: var(--lh-display-lg); letter-spacing: var(--ls-display-lg); font-weight: var(--fw-bold); }
+.display-md { font-size: var(--fs-display-md); line-height: var(--lh-display-md); font-weight: var(--fw-bold); }
+
+p  { margin: 0 0 var(--sp-3); }
+small, .small { font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--theme-text-muted); }
+code, pre, kbd, samp { font-family: var(--font-mono); font-size: 0.95em; }
+
+a { color: var(--theme-primary); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a:hover { opacity: .8; }
+
+hr { border: 0; border-top: 1px solid var(--theme-border); margin: var(--sp-6) 0; }

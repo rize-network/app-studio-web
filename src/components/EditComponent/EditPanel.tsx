@@ -11,13 +11,14 @@ const MockSelect = ({ label, value, options }: any) => (
     <Horizontal
       justifyContent="space-between"
       width="100%"
-      padding="8px"
-      border="1px solid #E2E8F0"
-      borderRadius="6px"
+      padding="10px 12px"
+      border="1px solid rgba(203, 213, 225, 0.95)"
+      borderRadius="8px"
       alignItems="center"
       backgroundColor="white"
+      transition="border-color 0.2s ease, background-color 0.2s ease"
     >
-      <Text>{value || options[0]?.label}</Text>
+      <Text color="color-gray-900">{value || options[0]?.label}</Text>
       <Icon name="chevron-down" size={16} />
     </Horizontal>
   </View>
@@ -96,7 +97,8 @@ export const EditPanel: React.FC<EditPanelProps> = ({
       backgroundColor="white"
       borderRadius="12px"
       padding="16px"
-      boxShadow="0px 4px 12px rgba(0,0,0,0.1)"
+      border="1px solid rgba(226, 232, 240, 0.95)"
+      boxShadow="0 12px 32px rgba(15, 23, 42, 0.12)"
       height="fit-content"
     >
       {/* Header */}

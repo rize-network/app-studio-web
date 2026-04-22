@@ -20,6 +20,15 @@ const PasswordComponent: React.FC<PasswordProps> = ({
       isClearable={false}
       right={
         <View
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          width="20px"
+          height="20px"
+          minWidth="20px"
+          color="color-gray-500"
+          cursor={props.isDisabled ? 'not-allowed' : 'pointer'}
+          transition="all 0.2s ease-in-out"
           onClick={() => {
             if (!props.isDisabled) {
               setIsVisible(!isVisible);

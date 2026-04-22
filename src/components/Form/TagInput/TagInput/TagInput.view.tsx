@@ -49,21 +49,18 @@ const TagChip: React.FC<{
       alignItems="center"
       gap={6}
       padding={chipSize.padding}
-      backgroundColor="color-gray-100-100"
-      borderRadius="16px"
+      backgroundColor="rgba(var(--theme-primary-rgb), 0.1)"
+      borderRadius="9999px"
       borderWidth="1px"
       borderStyle="solid"
-      borderColor="color-gray-100"
-      boxShadow="0 1px 2px rgba(0,0,0,0.05)"
-      transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
+      borderColor="rgba(var(--theme-primary-rgb), 0.2)"
+      transition="all 0.15s ease-in-out"
       opacity={isDisabled ? 0.6 : 1}
       _hover={
         !isDisabled && !isReadOnly
           ? {
-              backgroundColor: 'color-gray-100-200',
-              borderColor: 'color-gray-200',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
-              transform: 'translateY(-1px)',
+              backgroundColor: 'rgba(var(--theme-primary-rgb), 0.2)',
+              borderColor: 'rgba(var(--theme-primary-rgb), 0.3)',
             }
           : {}
       }
@@ -71,7 +68,7 @@ const TagChip: React.FC<{
     >
       <Text
         fontSize={chipSize.fontSize}
-        color={isDisabled ? 'color-gray-100' : 'theme-primary'}
+        color={isDisabled ? 'color-gray-400' : 'theme-primary'}
         whiteSpace="nowrap"
         {...views?.tagText}
       >
@@ -83,7 +80,7 @@ const TagChip: React.FC<{
           cursor="pointer"
           padding="2px"
           borderRadius="50%"
-          transition="all 0.2s ease"
+          transition="all 0.15s ease-in-out"
           backgroundColor={isRemoveHovered ? 'color-red-100' : 'transparent'}
           opacity={isRemoveHovered ? 1 : 0.7}
           onMouseEnter={() => setIsRemoveHovered(true)}
@@ -93,7 +90,7 @@ const TagChip: React.FC<{
             onRemove();
           }}
           _hover={{
-            backgroundColor: 'color-red-50',
+            backgroundColor: 'color-red-100',
           }}
           {...views?.tagRemove}
         >
@@ -168,6 +165,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
     color: isDisabled ? 'color-gray-400' : 'color-gray-800',
     flex: 1,
     minWidth: '120px',
+    transition: 'all 0.2s ease-in-out',
     ...views?.input,
   };
 

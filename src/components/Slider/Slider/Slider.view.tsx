@@ -88,11 +88,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
               {label}
             </Text>
             {showValue && (
-              <Text
-                fontSize={14}
-                color="color-blueGray-500"
-                {...views.valueLabel}
-              >
+              <Text fontSize={14} color="color-gray-500" {...views.valueLabel}>
                 {currentValue}
               </Text>
             )}
@@ -234,11 +230,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
               {label}
             </Text>
             {showValue && (
-              <Text
-                fontSize={14}
-                color="color-blueGray-500"
-                {...views.valueLabel}
-              >
+              <Text fontSize={14} color="color-gray-500" {...views.valueLabel}>
                 {currentValue}
               </Text>
             )}

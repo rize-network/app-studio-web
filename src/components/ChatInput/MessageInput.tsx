@@ -119,7 +119,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
           maxHeight="200px"
           padding="8px 12px"
           fontSize="14px"
-          lineHeight="1.5"
+          lineHeight="15px"
           color="color-gray-900"
           backgroundColor="transparent"
           border="none"
@@ -164,9 +164,9 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               border="none"
               outline="none"
               cursor="pointer"
-              transition="all 0.2s ease"
+              transition="background-color 0.2s ease, color 0.2s ease"
               _hover={{
-                backgroundColor: 'color-gray-100',
+                backgroundColor: '#F8FAFC',
               }}
               {...views?.modelSelector}
             >
@@ -193,9 +193,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               (disabled && !isAgentRunning)
             }
             _hover={{
-              backgroundColor: isAgentRunning
-                ? 'color-red-600'
-                : 'color-blue-600',
+              backgroundColor: isAgentRunning ? 'color-red-600' : '#1D4ED8',
             }}
             {...views?.submitButton}
           >

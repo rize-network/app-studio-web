@@ -11,7 +11,7 @@ export const DefaultAgentChatStyles = {
     border: '1px solid',
     borderColor: 'color-gray-200',
     overflow: 'hidden',
-    fontFamily: 'Inter, system-ui, sans-serif',
+    fontFamily: 'Mulish, Inter, Geist, system-ui, sans-serif',
     position: 'relative',
   } as ViewProps,
 
@@ -96,7 +96,7 @@ export const DefaultAgentChatStyles = {
   } as ViewProps,
 
   messageContent: {
-    lineHeight: 15,
+    lineHeight: '20px',
   } as ViewProps,
 
   messageFooter: {
@@ -257,12 +257,7 @@ export const DefaultChatInputStyles = {
     maxWidth: '100%',
     borderRadius: '12px',
     backgroundColor: 'color-white',
-    transition: 'all 0.2s ease',
-    media: {
-      mobile: {
-        borderRadius: '8px',
-      },
-    },
+    transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
   },
   content: {
     width: '100%',
@@ -272,12 +267,8 @@ export const DefaultChatInputStyles = {
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
-    media: {
-      mobile: {
-        padding: '10px',
-        borderRadius: '8px',
-      },
-    },
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
   textarea: {
     width: '100%',
@@ -285,7 +276,7 @@ export const DefaultChatInputStyles = {
     maxHeight: '200px',
     padding: '8px 12px',
     fontSize: '14px',
-    lineHeight: '15px',
+    lineHeight: '20px',
     color: 'color-gray-900',
     backgroundColor: 'color-white',
     border: 'none',
@@ -311,7 +302,7 @@ export const DefaultChatInputStyles = {
     alignItems: 'center',
     gap: '6px',
     padding: '4px 8px',
-    borderRadius: '6px',
+    borderRadius: '8px',
     backgroundColor: 'color-gray-100',
   },
   attachmentName: {
@@ -329,7 +320,8 @@ export const DefaultChatInputStyles = {
     cursor: 'pointer',
     color: 'color-gray-500',
     backgroundColor: 'transparent',
-    transition: 'all 0.2s ease',
+    transition:
+      'background-color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease',
   },
   submitButton: {
     height: '36px',
@@ -338,7 +330,7 @@ export const DefaultChatInputStyles = {
     borderRadius: '8px',
     backgroundColor: 'theme-primary',
     color: 'color-white',
-    transition: 'all 0.2s ease',
+    transition: 'background-color 0.2s ease, opacity 0.2s ease',
     media: {
       mobile: {
         height: '32px',
@@ -353,7 +345,7 @@ export const DefaultChatInputStyles = {
     borderRadius: '8px',
     backgroundColor: 'transparent',
     color: 'color-gray-500',
-    transition: 'all 0.2s ease',
+    transition: 'background-color 0.2s ease, opacity 0.2s ease',
     media: {
       mobile: {
         height: '32px',
@@ -367,7 +359,7 @@ export const DefaultChatInputStyles = {
     borderRadius: '8px',
     backgroundColor: 'transparent',
     color: 'color-gray-500',
-    transition: 'all 0.2s ease',
+    transition: 'background-color 0.2s ease, opacity 0.2s ease',
   },
   loadingIndicator: {
     display: 'flex',

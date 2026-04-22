@@ -17,54 +17,49 @@ import { Shape, Size, Variant } from './Badge.type';
  */
 export const BadgeSizes: Record<Size, ViewProps> = {
   xs: {
-    // Height: 20px (5 × 4px)
     minWidth: '20px',
     height: '20px',
     padding: '0 6px',
-    // Typography
-    fontSize: '10px', // Harmonized font size
-    fontWeight: '500', // Medium weight for better readability
-    lineHeight: '20px', // Match height for vertical centering
+    fontSize: '10px',
+    fontWeight: '600',
+    lineHeight: '12px',
+    letterSpacing: '-0.01em',
   },
   sm: {
-    // Height: 24px (6 × 4px)
     minWidth: '24px',
     height: '24px',
     padding: '0 8px',
-    // Typography
-    fontSize: '12px', // Harmonized font size
-    fontWeight: '500', // Medium weight
-    lineHeight: '24px',
+    fontSize: '12px',
+    fontWeight: '600',
+    lineHeight: '16px',
+    letterSpacing: '-0.01em',
   },
   md: {
-    // Height: 28px (7 × 4px)
     minWidth: '28px',
     height: '28px',
     padding: '0 10px',
-    // Typography
-    fontSize: '14px', // Harmonized font size
-    fontWeight: '500', // Medium weight
-    lineHeight: '28px',
+    fontSize: '14px',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '-0.01em',
   },
   lg: {
-    // Height: 32px (8 × 4px)
     minWidth: '32px',
     height: '32px',
     padding: '0 12px',
-    // Typography
-    fontSize: '16px', // Harmonized font size
-    fontWeight: '500', // Medium weight
-    lineHeight: '32px',
+    fontSize: '16px',
+    fontWeight: '600',
+    lineHeight: '24px',
+    letterSpacing: '-0.01em',
   },
   xl: {
-    // Height: 36px (9 × 4px)
     minWidth: '36px',
     height: '36px',
     padding: '0 14px',
-    // Typography
-    fontSize: '20px', // Harmonized font size
-    fontWeight: '500', // Medium weight
-    lineHeight: '36px',
+    fontSize: '20px',
+    fontWeight: '600',
+    lineHeight: '28px',
+    letterSpacing: '-0.01em',
   },
 };
 
@@ -93,6 +88,8 @@ export const PositionStyles: { [key: string]: React.CSSProperties } = {
 export const getBadgeVariants = (
   themeMode: string
 ): Record<Variant, ViewProps> => {
+  const isDark = themeMode === 'dark';
+
   return {
     filled: {
       backgroundColor: 'theme-primary',
@@ -100,7 +97,13 @@ export const getBadgeVariants = (
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'transparent',
-      transition: 'all 0.2s ease',
+      transition: 'background-color 0.2s ease, opacity 0.2s ease',
+      _hover: {
+        opacity: 0.9,
+      },
+      _active: {
+        opacity: 0.95,
+      },
     },
     outline: {
       backgroundColor: 'transparent',
@@ -108,25 +111,38 @@ export const getBadgeVariants = (
       borderStyle: 'solid',
       borderColor: 'theme-primary',
       color: 'theme-primary',
-      transition: 'all 0.2s ease',
+      transition: 'border-color 0.2s ease, opacity 0.2s ease',
+      _hover: {
+        opacity: 0.9,
+      },
+      _active: {
+        opacity: 0.95,
+      },
     },
     link: {
       backgroundColor: 'transparent',
-      borderWidth: '1px',
-      borderStyle: 'solid',
+      borderWidth: 0,
+      borderStyle: 'none',
       borderColor: 'transparent',
       color: 'theme-primary',
       textDecoration: 'underline',
       textUnderlineOffset: '2px',
-      transition: 'all 0.2s ease',
+      textDecorationThickness: '1px',
+      transition: 'opacity 0.2s ease',
+      _hover: {
+        opacity: 0.8,
+      },
     },
     ghost: {
       backgroundColor: 'transparent',
-      color: 'color-gray-500',
+      color: isDark ? 'color-gray-300' : 'color-gray-500',
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'transparent',
-      transition: 'all 0.2s ease',
+      transition: 'background-color 0.2s ease, color 0.2s ease',
+      _hover: {
+        backgroundColor: isDark ? 'color-gray-800' : 'color-gray-100',
+      },
     },
   };
 };

@@ -60,6 +60,7 @@ export const ChartView: React.FC<ChartProps> = ({
     showTooltip: showTooltipState,
     hideTooltip: hideTooltipState,
     getChartDimensions,
+    toggleSeries,
   } = useChartState({
     data,
     dataPoints,
@@ -102,22 +103,38 @@ export const ChartView: React.FC<ChartProps> = ({
     return (
       <Horizontal
         flexWrap="wrap"
-        justifyContent="center"
+        justifyContent="flex-start"
         marginTop={legendPosition === 'bottom' ? '16px' : 0}
         marginBottom={legendPosition === 'top' ? '16px' : 0}
         {...ChartLegendStyles}
         {...views?.legend}
       >
-        {items.map((item: any, index: number) => (
-          <View
-            key={`legend-${index}`}
-            {...LegendItemStyles}
-            {...views?.legendItem}
-          >
-            <View backgroundColor={item.color} {...LegendColorStyles} />
-            <Text {...LegendTextStyles}>{item.name || item.label}</Text>
-          </View>
-        ))}
+        {items.map((item: any, index: number) => {
+          const isHidden = item.hidden;
+          const label = item.name || item.label;
+
+          return (
+            <View
+              key={`legend-${index}`}
+              {...LegendItemStyles}
+              onClick={() => toggleSeries(label)}
+              opacity={isHidden ? 0.4 : 1}
+              {...views?.legendItem}
+            >
+              <View
+                backgroundColor={item.color}
+                {...LegendColorStyles}
+                opacity={isHidden ? 0.3 : 1}
+              />
+              <Text
+                {...LegendTextStyles}
+                textDecoration={isHidden ? 'line-through' : 'none'}
+              >
+                {label}
+              </Text>
+            </View>
+          );
+        })}
       </Horizontal>
     );
   };

@@ -16,7 +16,7 @@ export const DefaultEmojiPickerStyles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     cursor: 'pointer',
-    transition: 'all 0.2s ease',
+    transition: 'all 0.2s ease-in-out',
   } as ViewProps,
 
   dropdown: {
@@ -27,11 +27,11 @@ export const DefaultEmojiPickerStyles = {
     right: 0,
     zIndex: 1000,
     backgroundColor: 'color-white',
-    borderRadius: '8px',
+    borderRadius: 12, // radius-lg
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
-    boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
     padding: '16px',
     minWidth: '320px',
     maxHeight: '400px',
@@ -44,7 +44,7 @@ export const DefaultEmojiPickerStyles = {
 
   categoryTabs: {
     display: 'flex',
-    borderBottom: '1px solid color-gray-200',
+    borderBottom: '1px solid color-gray-100',
     marginBottom: '12px',
     overflowX: 'auto',
   } as ViewProps,
@@ -53,11 +53,12 @@ export const DefaultEmojiPickerStyles = {
     padding: '8px 12px',
     cursor: 'pointer',
     borderBottom: '2px solid transparent',
-    transition: 'all 0.2s ease',
+    transition: 'all 0.2s ease-in-out',
     fontSize: '14px',
     fontWeight: '500',
     color: 'color-gray-600',
     whiteSpace: 'nowrap',
+    borderRadius: '8px 8px 0 0',
   } as ViewProps,
 
   emojiGrid: {
@@ -77,13 +78,13 @@ export const DefaultEmojiPickerStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    borderRadius: '4px',
+    borderRadius: 6, // radius-sm
     fontSize: '20px',
-    transition: 'all 0.2s ease',
+    transition: 'all 0.2s ease-in-out',
   } as ViewProps,
 
   recentEmojis: {
-    borderBottom: '1px solid color-gray-200',
+    borderBottom: '1px solid color-gray-100',
     marginBottom: '12px',
     paddingBottom: '12px',
   } as ViewProps,
@@ -100,23 +101,23 @@ export const Sizes: Record<Size, ViewProps> = {
   },
   sm: {
     height: '32px',
-    fontSize: '14px',
+    fontSize: '12px',
     padding: '6px 10px',
   },
   md: {
     height: '40px',
-    fontSize: '16px',
+    fontSize: '14px',
     padding: '8px 12px',
   },
   lg: {
     height: '48px',
-    fontSize: '18px',
-    padding: '10px 16px',
+    fontSize: '14px',
+    padding: '10px 14px',
   },
   xl: {
     height: '56px',
-    fontSize: '20px',
-    padding: '12px 20px',
+    fontSize: '16px',
+    padding: '12px 16px',
   },
 };
 
@@ -125,16 +126,16 @@ export const Sizes: Record<Size, ViewProps> = {
  */
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
-    borderRadius: '8px',
+    borderRadius: 8,
   },
   square: {
     borderRadius: 0,
   },
   rounded: {
-    borderRadius: '8px',
+    borderRadius: 8,
   },
   pill: {
-    borderRadius: '9999px',
+    borderRadius: 9999,
   },
 };
 
@@ -146,18 +147,18 @@ export const Variants: Record<Variant, ViewProps> = {
     backgroundColor: 'color-white',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color-gray-300',
+    borderColor: 'color-gray-200',
     color: 'color-gray-800',
   },
   outline: {
     backgroundColor: 'transparent',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color-gray-300',
+    borderColor: 'color-gray-200',
     color: 'color-gray-800',
   },
   filled: {
-    backgroundColor: 'color-gray-100',
+    backgroundColor: 'color-gray-50',
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-200',

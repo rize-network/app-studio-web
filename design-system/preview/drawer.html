@@ -1,0 +1,17 @@
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"/><title>Drawer</title><link rel="stylesheet" href="_card.css"/></head><body>
+<div class="card" style="padding:0;height:240px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:rgba(15,23,42,0.5);"></div>
+  <div style="position:absolute;top:0;right:0;bottom:0;width:260px;background:#fff;padding:18px;box-shadow:var(--shadow-xl);display:flex;flex-direction:column;gap:12px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-weight:600;font-size:15px;">Filters</div>
+      <i data-lucide="x" style="width:16px;height:16px;color:var(--gray-500);"></i>
+    </div>
+    <div class="col" style="gap:10px;font-size:13px;">
+      <label style="display:flex;gap:8px;"><input type="checkbox" checked/> Active only</label>
+      <label style="display:flex;gap:8px;"><input type="checkbox"/> Archived</label>
+      <div style="border-top:1px solid var(--theme-border);padding-top:10px;">Sort by</div>
+      <select style="padding:6px 8px;border-radius:6px;border:1px solid var(--theme-border);font-size:12px;"><option>Most recent</option></select>
+    </div>
+    <button style="margin-top:auto;padding:10px;background:#1D4ED8;color:#fff;border:0;border-radius:8px;font-weight:500;font-size:13px;">Apply</button>
+  </div>
+</div><script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script><script>lucide.createIcons();</script></body></html>

@@ -24,8 +24,11 @@ export const GuideTip: React.FC<GuideTipProps> = ({
       position="relative"
       width="100%"
       padding="16px"
-      backgroundColor="color-blue-50"
-      borderRadius="8px"
+      backgroundColor="#EFF6FF"
+      borderWidth="1px"
+      borderStyle="solid"
+      borderColor="#BFDBFE"
+      borderRadius="12px"
       marginBottom="16px"
       animate={{
         from: { opacity: 0, transform: 'translateX(-20px)' },
@@ -34,7 +37,12 @@ export const GuideTip: React.FC<GuideTipProps> = ({
       animationDuration={0.3}
       {...views?.container}
     >
-      <Text fontSize="14px" color="color-blue-700" marginBottom="8px">
+      <Text
+        fontSize="14px"
+        color="#1E3A8A"
+        marginBottom="8px"
+        lineHeight="20px"
+      >
         Need help? Watch this quick guide to get started.
       </Text>
 
@@ -45,7 +53,7 @@ export const GuideTip: React.FC<GuideTipProps> = ({
           controls
           width="100%"
           height="auto"
-          borderRadius="4px"
+          borderRadius="8px"
           {...views?.video}
         />
       )}
@@ -65,10 +73,10 @@ export const GuideTip: React.FC<GuideTipProps> = ({
         backgroundColor="transparent"
         border="none"
         cursor="pointer"
-        transition="all 0.2s ease"
+        transition="background-color 0.2s ease, opacity 0.2s ease"
         onClick={onClose}
         _hover={{
-          backgroundColor: 'color-blue-100',
+          backgroundColor: '#DBEAFE',
         }}
         {...views?.closeButton}
       >

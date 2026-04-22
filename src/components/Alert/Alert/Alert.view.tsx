@@ -61,8 +61,8 @@ export const AlertView = React.memo(
     return (
       <Horizontal
         // Layout properties
-        gap={12} // 3 × 4px grid
-        padding="16px" // 4 × 4px grid
+        gap={12}
+        padding="12px 16px"
         flexWrap="nowrap"
         alignItems="flex-start"
         // Visual properties
@@ -73,7 +73,7 @@ export const AlertView = React.memo(
         backgroundColor={themes[variant].container.backgroundColor}
         boxShadow={themes[variant].container.boxShadow}
         // Animation
-        transition="all 0.2s ease"
+        transition="background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease"
         // Apply custom container styles and any other props
         {...views?.container}
         {...props}
@@ -84,25 +84,23 @@ export const AlertView = React.memo(
         </View>
 
         {/* Content */}
-        <Vertical gap={8}>
-          {' '}
-          {/* 2 × 4px grid */}
-          {/* Title */}
+        <Vertical gap={4}>
+          {title ? (
+            <Text
+              fontSize="14px"
+              fontWeight="600"
+              lineHeight="20px"
+              color={themes[variant].content.color}
+              backgroundColor={themes[variant].container.backgroundColor}
+              {...views?.title}
+            >
+              {title}
+            </Text>
+          ) : null}
           <Text
-            fontSize="16px"
-            fontWeight="600" // Semi-bold
-            lineHeight="24px"
-            color={themes[variant].content.color}
-            backgroundColor={themes[variant].container.backgroundColor}
-            {...views?.title}
-          >
-            {title}
-          </Text>
-          {/* Description */}
-          <Text
-            fontSize="14px"
-            fontWeight="400" // Regular
-            lineHeight="20px"
+            fontSize="12px"
+            fontWeight="400"
+            lineHeight="16px"
             color={themes[variant].content.color}
             backgroundColor={themes[variant].container.backgroundColor}
             {...views?.description}

@@ -16,12 +16,13 @@ export const DefaultColorInputStyles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     cursor: 'pointer',
-    transition: 'all 0.2s ease',
+    transition: 'all 0.2s ease-in-out',
     backgroundColor: 'color-white',
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-300',
     padding: '8px 12px',
+    borderRadius: 8, // radius-md
   } as ViewProps,
 
   dropdown: {
@@ -31,11 +32,11 @@ export const DefaultColorInputStyles = {
     right: 0,
     zIndex: 1000,
     backgroundColor: 'color-white',
-    borderRadius: '8px',
+    borderRadius: 12, // radius-lg
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
-    boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
     padding: '16px',
     minWidth: '280px',
   } as ViewProps,
@@ -89,16 +90,16 @@ export const Sizes: Record<Size, ViewProps> = {
  */
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
-    borderRadius: '6px',
+    borderRadius: 8,
   },
   square: {
-    borderRadius: '0px',
+    borderRadius: 0,
   },
   rounded: {
-    borderRadius: '8px',
+    borderRadius: 8,
   },
   pill: {
-    borderRadius: '9999px',
+    borderRadius: 9999,
   },
 };
 

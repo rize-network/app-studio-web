@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Typography } from 'app-studio';
+import { Input, Typography, useTheme } from 'app-studio';
 import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
@@ -34,6 +34,8 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
   onChangeText,
   ...props
 }) => {
+  const { themeMode } = useTheme();
+  const isDark = themeMode === 'dark';
   const showLabel = !!(isFocused && label);
 
   const handleHover = () => setIsHovered(!isHovered);
@@ -62,9 +64,16 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
         backgroundColor: 'transparent',
       },
     },
+    transition: 'all 0.2s ease-in-out',
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color-trueGray-600' : 'color-blueGray-700',
+    color: isDisabled
+      ? isDark
+        ? 'color-gray-500'
+        : 'color-gray-400'
+      : isDark
+      ? 'color-gray-100'
+      : 'color-gray-900',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
     ...views['field'],
   };

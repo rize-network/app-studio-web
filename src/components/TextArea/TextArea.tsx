@@ -41,20 +41,29 @@ export const TextArea: React.FC<TextAreaProps> = ({
       className={className}
       style={{
         width: '100%',
-        padding: '8px 12px',
-        borderRadius: '4px',
-        border: `1px solid ${hasError ? 'red' : '#e2e8f0'}`,
+        padding: '12px 16px',
+        borderRadius: '8px',
+        border: `1px solid ${hasError ? 'color-red-500' : 'color-gray-200'}`,
         fontSize: '14px',
+        lineHeight: '20px',
         resize: 'vertical',
         outline: 'none',
-        transition: 'border-color 0.2s ease',
-        backgroundColor: isDisabled ? '#f7fafc' : 'white',
-        color: isDisabled ? '#a0aec0' : 'inherit',
+        transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+        backgroundColor: isDisabled ? 'color-gray-50' : 'color-white',
+        color: isDisabled ? 'color-gray-400' : 'inherit',
         ...style,
       }}
       _focus={{
-        borderColor: hasError ? 'red' : '#3182ce',
-        boxShadow: `0 0 0 1px ${hasError ? 'red' : '#3182ce'}`,
+        borderColor: hasError ? 'color-red-500' : 'theme-primary',
+        boxShadow: `0 0 0 2px white, 0 0 0 4px ${
+          hasError ? 'color-red-500' : 'theme-primary'
+        }`,
+      }}
+      _focusVisible={{
+        borderColor: hasError ? 'color-red-500' : 'theme-primary',
+        boxShadow: `0 0 0 2px white, 0 0 0 4px ${
+          hasError ? 'color-red-500' : 'theme-primary'
+        }`,
       }}
       {...props}
     />

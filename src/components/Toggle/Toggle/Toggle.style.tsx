@@ -3,8 +3,8 @@ import { Shape, Variant } from './Toggle.type';
 
 export const ToggleShapes: Record<Shape, number | string> = {
   square: 0,
-  rounded: 4,
-  pill: 24,
+  rounded: 8,
+  pill: 999,
 };
 
 /**
@@ -16,22 +16,26 @@ export const getToggleVariants = (
   isLight: boolean
 ): Record<Variant, ViewProps> => ({
   outline: {
-    backgroundColor: 'transparent',
+    backgroundColor: isLight ? 'color-white' : 'rgba(15, 23, 42, 0.92)',
     color: color,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: color,
+    borderColor: isLight
+      ? 'rgba(226, 232, 240, 0.95)'
+      : 'rgba(71, 85, 105, 0.9)',
     _hover: {
-      backgroundColor: color,
-      color: isLight ? 'color-black' : 'color-white',
-      transform: 'translateY(-1px)',
+      backgroundColor: isLight
+        ? 'rgba(248, 250, 252, 0.96)'
+        : 'rgba(30, 41, 59, 0.95)',
+      borderColor: isLight ? '#CBD5E1' : '#64748B',
     },
     _active: {
-      backgroundColor: color,
-      color: isLight ? 'color-black' : 'color-white',
-      transform: 'translateY(0)',
+      backgroundColor: isLight
+        ? 'rgba(241, 245, 249, 1)'
+        : 'rgba(30, 41, 59, 1)',
     },
-    transition: 'all 0.2s ease',
+    transition:
+      'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
   },
   ghost: {
     backgroundColor: 'transparent',
@@ -40,16 +44,16 @@ export const getToggleVariants = (
     borderStyle: 'none',
     borderColor: 'transparent',
     _hover: {
-      backgroundColor: color,
-      color: isLight ? 'color-black' : 'color-white',
-      transform: 'translateY(-1px)',
+      backgroundColor: isLight
+        ? 'rgba(248, 250, 252, 0.96)'
+        : 'rgba(30, 41, 59, 0.85)',
     },
     _active: {
-      backgroundColor: color,
-      color: isLight ? 'color-black' : 'color-white',
-      transform: 'translateY(0)',
+      backgroundColor: isLight
+        ? 'rgba(241, 245, 249, 1)'
+        : 'rgba(30, 41, 59, 1)',
     },
-    transition: 'all 0.2s ease',
+    transition: 'background-color 0.2s ease, color 0.2s ease',
   },
   link: {
     backgroundColor: 'transparent',
@@ -61,15 +65,11 @@ export const getToggleVariants = (
     textUnderlineOffset: '1px',
     textDecorationThickness: '1px',
     _hover: {
-      borderColor: color,
-      textDecorationThickness: '2px',
-      transform: 'translateY(-1px)',
+      opacity: 0.8,
     },
     _active: {
-      borderColor: color,
-      textDecorationThickness: '2px',
-      transform: 'translateY(0)',
+      opacity: 0.9,
     },
-    transition: 'all 0.2s ease',
+    transition: 'opacity 0.2s ease',
   },
 });

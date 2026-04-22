@@ -68,6 +68,22 @@ export const useChartState = ({
     };
   }, [animated, animationDuration]);
 
+  // State for hidden series
+  const [hiddenSeries, setHiddenSeries] = useState<Set<string>>(new Set());
+
+  // Toggle series visibility
+  const toggleSeries = useCallback((seriesName: string) => {
+    setHiddenSeries((prev) => {
+      const next = new Set(prev);
+      if (next.has(seriesName)) {
+        next.delete(seriesName);
+      } else {
+        next.add(seriesName);
+      }
+      return next;
+    });
+  }, []);
+
   // Process data for charts
   const processedData = useCallback(() => {
     if (data) {
@@ -76,6 +92,7 @@ export const useChartState = ({
         series: data.series.map((series, index) => ({
           ...series,
           color: series.color || DEFAULT_COLORS[index % DEFAULT_COLORS.length],
+          hidden: hiddenSeries.has(series.name),
         })),
       };
     }
@@ -84,11 +101,12 @@ export const useChartState = ({
       return dataPoints.map((point, index) => ({
         ...point,
         color: point.color || DEFAULT_COLORS[index % DEFAULT_COLORS.length],
+        hidden: hiddenSeries.has(point.label),
       }));
     }
 
     return null;
-  }, [data, dataPoints]);
+  }, [data, dataPoints, hiddenSeries]);
 
   // Handle tooltip show
   const showTooltip = useCallback(
@@ -131,5 +149,6 @@ export const useChartState = ({
     showTooltip,
     hideTooltip,
     getChartDimensions,
+    toggleSeries,
   };
 };

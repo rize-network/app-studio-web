@@ -21,6 +21,7 @@ const TabsComponent: React.FC<TabsProps> = ({
   onTabChange,
   renderTab,
   renderContent,
+  variant = 'underline',
   iconPosition = 'left',
 
   value,
@@ -40,7 +41,7 @@ const TabsComponent: React.FC<TabsProps> = ({
   // If using compound component pattern (children provided)
   if (children) {
     return (
-      <TabsContext.Provider value={compoundState}>
+      <TabsContext.Provider value={{ ...compoundState, variant }}>
         {children}
       </TabsContext.Provider>
     );
@@ -74,6 +75,7 @@ const TabsComponent: React.FC<TabsProps> = ({
         handleTabClick={handleTabClick} // Pass the click handler
         renderTab={renderTab}
         renderContent={renderContent}
+        variant={variant}
         iconPosition={iconPosition}
       />
     );

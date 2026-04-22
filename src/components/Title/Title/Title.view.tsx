@@ -3,7 +3,12 @@ import { Element, useInView, Text as DefaultText } from 'app-studio';
 import { AnimationProps } from 'app-studio/dist/utils/constants';
 import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
-import { HighlightStyles, TitleSizes } from './Title.style';
+import {
+  HighlightStyles,
+  LineHeights,
+  ResponsiveTypography,
+  TitleSizes,
+} from './Title.style';
 import TypewriterEffect from './TypewriterEffect';
 import SlideEffect from './SlideEffect';
 
@@ -42,7 +47,7 @@ const TitleView: React.FC<TitleProps> = ({
   highlightSlideDuration = 500,
   highlightSlideStagger = 50,
   highlightSlideSequential = true,
-  themeMode: elementMode,
+  themeMode: _elementMode,
   // Filter custom props to prevent them from being passed to the DOM element
   responsive: _responsive,
   alternateHighlightText: _alternateHighlightText,
@@ -53,8 +58,6 @@ const TitleView: React.FC<TitleProps> = ({
   ...props
 }) => {
   const { ref, inView } = useInView();
-
-  const currentThemeMode = elementMode;
 
   const {
     finalDisplayedText,
@@ -81,6 +84,12 @@ const TitleView: React.FC<TitleProps> = ({
   });
 
   const fontSize = TitleSizes[size];
+  const baseTextStyles = {
+    fontFamily: 'Mulish, Inter, Geist, system-ui, sans-serif',
+    fontWeight: size === 'xl' ? 700 : 600,
+    lineHeight: LineHeights[size],
+    letterSpacing: size === 'xl' ? '-1.5px' : '-0.01em',
+  };
 
   // Highlight style props
   const highlightProps = HighlightStyles[highlightStyle](
@@ -123,6 +132,8 @@ const TitleView: React.FC<TitleProps> = ({
     animate: inView ? controlledAnimate : undefined,
     as: 'h1' as const,
     fontSize,
+    ...(_responsive ? ResponsiveTypography[size] : {}),
+    ...baseTextStyles,
   };
 
   // Render highlighted text content (typewriter, slide, or plain)

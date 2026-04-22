@@ -32,17 +32,18 @@ export const DefaultAvatarStyles = {
     overflow: 'hidden',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'transparent',
-    backgroundColor: 'color-gray-100',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-    transition: 'all 0.2s ease',
+    borderColor: 'color-gray-200',
+    backgroundColor: 'theme-primary',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease',
   } as ViewProps,
   fallback: {
-    fontWeight: '500', // Medium weight for better readability
-    color: 'color-gray-600',
+    fontWeight: '600',
+    color: 'color-white',
+    letterSpacing: '-0.02em',
   } as ViewProps,
   image: {
     objectFit: 'cover',
-    transition: 'all 0.2s ease',
+    transition: 'opacity 0.2s ease',
   } as ViewProps,
 };

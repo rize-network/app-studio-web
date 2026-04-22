@@ -6,21 +6,21 @@ import { TitleSize, HighlightStyle } from './Title.type';
  */
 export const TitleSizes = {
   xs: 24,
-  sm: 36,
+  sm: 32,
   md: 48,
-  lg: 64,
-  xl: 72,
+  lg: 96,
+  xl: 110,
 };
 
 /**
  * Line heights for different title sizes
  */
 export const LineHeights: Record<TitleSize, number> = {
-  xs: 32,
-  sm: 48,
-  md: 56,
-  lg: 72,
-  xl: 80,
+  xs: 30,
+  sm: 38,
+  md: 57,
+  lg: 112,
+  xl: 112,
 };
 
 /**
@@ -40,9 +40,9 @@ export const ResponsiveTypography: Record<
   // xl maps to H1 - Largest heading
   xl: {
     media: {
-      mobile: { fontSize: 60 },
-      tablet: { fontSize: 60 },
-      desktop: { fontSize: 96 },
+      mobile: { fontSize: 48 },
+      tablet: { fontSize: 96 },
+      desktop: { fontSize: 110 },
     },
   },
   // lg maps to H2 - Large heading

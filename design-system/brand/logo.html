@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>App Studio — Logo Concepts</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&family=Fraunces:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  :root { --ink:#111827; --blue:#1D4ED8; --blue-deep:#1E3A8A; --purple:#A855F7; --purple-deep:#7E22CE; }
+  body { margin:0; font-family: var(--font-sans); }
+  .lockup { display:flex; align-items:center; gap:16px; }
+  .wm { font-family:'Mulish', sans-serif; font-weight:800; letter-spacing:-0.035em; line-height:1; }
+  svg { overflow:visible; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const BLUE = '#1D4ED8';
+const BLUE_DEEP = '#1E3A8A';
+const PURPLE = '#A855F7';
+const PURPLE_DEEP = '#7E22CE';
+const INK = '#111827';
+
+// Wordmark — accent defaults to theme-primary (blue)
+const WM = ({ size=44, accent=BLUE, color=INK, sep='‑' }) => (
+  <span className="wm" style={{fontSize:size, color}}>
+    App<span style={{color:accent}}>{sep}</span>Studio
+  </span>
+);
+
+// ────── MARKS ──────
+
+// 1. Monogram "AS" — indigo tile, white letterforms, diagonal rule
+const TileAS = ({ size=96, bg=BLUE, accent=PURPLE }) => (
+  <svg width={size} height={size} viewBox="0 0 96 96">
+    <rect x="0" y="0" width="96" height="96" rx="20" fill={bg}/>
+    <text x="22" y="52" fontFamily="Mulish" fontWeight="900" fontSize="42" fill="#fff" letterSpacing="-2.5">A</text>
+    <text x="48" y="78" fontFamily="Mulish" fontWeight="900" fontSize="42" fill={accent} letterSpacing="-2.5">S</text>
+    <line x1="14" y1="62" x2="82" y2="40" stroke="#fff" strokeOpacity="0.18" strokeWidth="1.5"/>
+  </svg>
+);
+
+// 2. Code bracket + node — [•]
+const Bracket = ({ size=96, color=BLUE, accent=PURPLE }) => (
+  <svg width={size} height={size} viewBox="0 0 96 96">
+    <path d="M34 18 L16 48 L34 78" fill="none" stroke={color} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M62 18 L80 48 L62 78" fill="none" stroke={color} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="48" cy="48" r="7" fill={accent}/>
+  </svg>
+);
+
+// 3. Layers — three stacked rects (compose/build)
+const Layers = ({ size=96 }) => (
+  <svg width={size} height={size} viewBox="0 0 96 96">
+    <rect x="12" y="30" width="48" height="48" rx="8" fill={INK}/>
+    <rect x="28" y="20" width="48" height="48" rx="8" fill={BLUE}/>
+    <rect x="44" y="10" width="48" height="48" rx="8" fill={PURPLE} opacity="0.9"/>
+  </svg>
+);
+
+// 4. Overlap circles — blue + purple (theme primary + secondary)
+const TwoCircles = ({ size=96 }) => (
+  <svg width={size} height={size} viewBox="0 0 96 96">
+    <circle cx="36" cy="48" r="26" fill={BLUE}/>
+    <circle cx="60" cy="48" r="26" fill={PURPLE} style={{mixBlendMode:'multiply'}}/>
+  </svg>
+);
+
+// 5. Cursor "A" — Pac-Man-ish A-counter hints at a text cursor / editor
+const CursorA = ({ size=96 }) => (
+  <svg width={size} height={size} viewBox="0 0 96 96">
+    <rect x="6" y="6" width="84" height="84" rx="18" fill="#fff" stroke={INK} strokeWidth="2"/>
+    <path d="M28 72 L48 20 L68 72 M36 56 L60 56" fill="none" stroke={BLUE} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="72" y="30" width="3" height="36" fill={PURPLE}>
+      <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+    </rect>
+  </svg>
+);
+
+// 6. Aperture — studio lens
+const Aperture = ({ size=96 }) => {
+  const r = 34, cx=48, cy=48;
+  const petal = (i) => {
+    const a = (i * 60 - 30) * Math.PI / 180;
+    const x = cx + Math.cos(a) * r * 0.35;
+    const y = cy + Math.sin(a) * r * 0.35;
+    return <rect key={i} x={x-4} y={cy-r+4} width="8" height={r*0.9} rx="2"
+      transform={`rotate(${i*60} ${cx} ${cy})`}
+      fill={i%2===0?BLUE:PURPLE}/>;
+  };
+  return (
+    <svg width={size} height={size} viewBox="0 0 96 96">
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke={INK} strokeWidth="3"/>
+      {[0,1,2,3,4,5].map(petal)}
+      <circle cx={cx} cy={cy} r="6" fill="#fff"/>
+    </svg>
+  );
+};
+
+// 7. Grid-A — a geometric A built on a 4-col grid (developer/system vibe)
+const GridA = ({ size=96 }) => (
+  <svg width={size} height={size} viewBox="0 0 96 96">
+    <rect x="0" y="0" width="96" height="96" rx="20" fill={INK}/>
+    {/* Left leg */}
+    <rect x="20" y="20" width="12" height="56" fill="#fff"/>
+    {/* Right leg */}
+    <rect x="64" y="20" width="12" height="56" fill={PURPLE}/>
+    {/* Apex bar */}
+    <rect x="20" y="20" width="56" height="12" fill={BLUE}/>
+    {/* Crossbar */}
+    <rect x="32" y="46" width="32" height="8" fill="#fff"/>
+  </svg>
+);
+
+// 8. Arc-A — open circle with A inside (echoes earlier brush-circle without raster)
+const ArcA = ({ size=96, color=BLUE, accent=PURPLE }) => (
+  <svg width={size} height={size} viewBox="0 0 96 96">
+    <circle cx="48" cy="48" r="38" fill="none" stroke={color} strokeWidth="6" strokeLinecap="round" strokeDasharray="210 40" transform="rotate(-30 48 48)"/>
+    <path d="M32 70 L48 26 L64 70 M38 56 L58 56" fill="none" stroke={accent} strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+// 9. Pure hyphenated wordmark
+// 10. Editorial serif
+const Editorial = ({ size=44 }) => (
+  <span style={{display:'inline-flex', alignItems:'baseline', gap: size*0.24}}>
+    <span style={{fontFamily:'Fraunces', fontStyle:'italic', fontWeight:700, fontSize:size*1.25, color:BLUE, lineHeight:1}}>A.</span>
+    <span style={{fontFamily:'Mulish', fontWeight:500, fontSize:size*0.68, color:INK, letterSpacing:'0.14em', textTransform:'uppercase'}}>STUDIO</span>
+  </span>
+);
+
+// Parens
+const Parens = ({ size=44 }) => (
+  <span style={{display:'inline-flex', alignItems:'baseline', gap: size*0.1, fontFamily:'Mulish', fontWeight:800, fontSize:size, letterSpacing:'-0.035em', color:INK}}>
+    <span style={{color:BLUE, fontWeight:600}}>(</span>
+    App Studio
+    <span style={{color:BLUE, fontWeight:600}}>)</span>
+  </span>
+);
+
+// Slash
+const Slash = ({ size=44 }) => (
+  <span className="wm" style={{fontSize:size, color:INK}}>
+    App<span style={{color:PURPLE}}>/</span>Studio
+  </span>
+);
+
+function App() {
+  return (
+    <DesignCanvas>
+      <DCSection
+        title="1 — Primary lockup options"
+        subtitle="Mark + wordmark pairs. All wordmarks are Mulish 800 · −0.035em. Accent colors use theme-primary (blue #1D4ED8) with occasional theme-secondary (purple #A855F7) for highlights.">
+        <DCArtboard label="A · Tile AS monogram" width={480} height={200}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',padding:24,boxSizing:'border-box'}}>
+            <div className="lockup"><TileAS size={96}/><WM size={44}/></div>
+          </div>
+        </DCArtboard>
+        <DCArtboard label="B · Bracket + node" width={480} height={200}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',padding:24,boxSizing:'border-box'}}>
+            <div className="lockup"><Bracket size={96}/><WM size={44}/></div>
+          </div>
+        </DCArtboard>
+        <DCArtboard label="C · Arc-A" width={480} height={200}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',padding:24,boxSizing:'border-box'}}>
+            <div className="lockup"><ArcA size={96}/><WM size={44}/></div>
+          </div>
+        </DCArtboard>
+        <DCArtboard label="D · Grid-A" width={480} height={200}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',padding:24,boxSizing:'border-box'}}>
+            <div className="lockup"><GridA size={96}/><WM size={44}/></div>
+          </div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection title="2 — Mark-only" subtitle="Avatars, favicons, app-icons — always on a 1:1 tile. Swapping the background helps with dark / light contexts.">
+        <DCArtboard label="A · Tile AS" width={180} height={180}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'#fff'}}><TileAS size={124}/></div>
+        </DCArtboard>
+        <DCArtboard label="B · Bracket" width={180} height={180}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'#fff'}}><Bracket size={124}/></div>
+        </DCArtboard>
+        <DCArtboard label="C · Arc-A" width={180} height={180}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'#fff'}}><ArcA size={124}/></div>
+        </DCArtboard>
+        <DCArtboard label="D · Grid-A" width={180} height={180}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'#fff'}}><GridA size={124}/></div>
+        </DCArtboard>
+        <DCArtboard label="E · Layers" width={180} height={180}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'#fff'}}><Layers size={124}/></div>
+        </DCArtboard>
+        <DCArtboard label="F · Two circles" width={180} height={180}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'#fff'}}><TwoCircles size={124}/></div>
+        </DCArtboard>
+        <DCArtboard label="G · Cursor-A" width={180} height={180}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'#fff'}}><CursorA size={124}/></div>
+        </DCArtboard>
+        <DCArtboard label="H · Aperture" width={180} height={180}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center',background:'#fff'}}><Aperture size={124}/></div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection title="3 — Wordmark-only" subtitle="For places the mark can't fit — headers, footers, docs.">
+        <DCArtboard label="A · Hyphenated (canonical)" width={380} height={120}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}><WM size={40}/></div>
+        </DCArtboard>
+        <DCArtboard label="B · Dot" width={380} height={120}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}><WM size={40} sep="•"/></div>
+        </DCArtboard>
+        <DCArtboard label="C · Slash (purple)" width={380} height={120}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}><Slash size={40}/></div>
+        </DCArtboard>
+        <DCArtboard label="D · Parens" width={380} height={120}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}><Parens size={36}/></div>
+        </DCArtboard>
+        <DCArtboard label="E · Editorial serif" width={380} height={120}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}><Editorial size={40}/></div>
+        </DCArtboard>
+        <DCArtboard label="F · Reversed (dark)" width={380} height={120}>
+          <div style={{width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'center', background:INK}}><WM size={40} color="#fff" accent={PURPLE}/></div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection title="4 — In context" subtitle="Sanity-checking the shortlist at real sizes and surfaces.">
+        <DCArtboard label="Browser tab · 16px favicon" width={340} height={160}>
+          <div style={{padding:'18px 20px'}}>
+            <div style={{background:'#F3F4F6', borderTopLeftRadius:10, borderTopRightRadius:10, padding:'8px 10px', width:220, display:'flex', gap:8, alignItems:'center', fontSize:11, color:'#374151'}}>
+              <div style={{width:16, height:16}}>
+                <TileAS size={16}/>
+              </div>
+              <span>App Studio — Components</span>
+              <span style={{marginLeft:'auto', color:'#9CA3AF'}}>×</span>
+            </div>
+            <div style={{background:'#fff', height:42, width:220, borderBottomLeftRadius:10, borderBottomRightRadius:10, borderTop:'1px solid #E5E7EB', display:'flex', alignItems:'center', padding:'0 10px', gap:6, fontSize:11, color:'#6B7280'}}>
+              <span>🔒</span><span>app-studio.dev</span>
+            </div>
+          </div>
+        </DCArtboard>
+        <DCArtboard label="iOS app icon · 120×120" width={220} height={220}>
+          <div style={{width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', background:'#F3F4F6'}}>
+            <div style={{width:160, height:160, borderRadius:36, overflow:'hidden', boxShadow:'0 8px 24px rgba(0,0,0,.18)'}}>
+              <TileAS size={160}/>
+            </div>
+          </div>
+        </DCArtboard>
+        <DCArtboard label="Dark app top-bar" width={520} height={160}>
+          <div style={{width:'100%', height:'100%', background:'#0F172A', padding:'22px 28px', color:'#fff', display:'flex', alignItems:'center', gap:14}}>
+            <TileAS size={40}/>
+            <span className="wm" style={{fontSize:22, color:'#fff'}}>App<span style={{color:PURPLE}}>‑</span>Studio</span>
+            <div style={{marginLeft:'auto', display:'flex', gap:18, fontSize:12, color:'#94A3B8'}}>
+              <span>Docs</span><span>Components</span><span>GitHub</span>
+            </div>
+          </div>
+        </DCArtboard>
+        <DCArtboard label="Light header" width={520} height={160}>
+          <div style={{width:'100%', height:'100%', background:'#fff', padding:'22px 28px', display:'flex', alignItems:'center', gap:14, borderBottom:'1px solid #E5E7EB'}}>
+            <Bracket size={36}/>
+            <WM size={24}/>
+            <div style={{marginLeft:'auto', display:'flex', gap:18, fontSize:12, color:'#6B7280'}}>
+              <span>Docs</span><span>Components</span>
+              <span style={{background:BLUE, color:'#fff', padding:'6px 12px', borderRadius:8, fontWeight:500}}>Get Started</span>
+            </div>
+          </div>
+        </DCArtboard>
+        <DCArtboard label="Business card · front" width={340} height={200}>
+          <div style={{width:'100%', height:'100%', background:'#fff', padding:24, display:'flex', flexDirection:'column', justifyContent:'space-between', boxSizing:'border-box'}}>
+            <TileAS size={48}/>
+            <div style={{display:'flex', flexDirection:'column', gap:2}}>
+              <span style={{fontFamily:'Mulish', fontWeight:700, fontSize:14}}>Your Name</span>
+              <span style={{fontFamily:'var(--font-mono)', fontSize:11, color:'#6B7280'}}>Design Engineer · App Studio</span>
+            </div>
+          </div>
+        </DCArtboard>
+        <DCArtboard label="Business card · back (filled)" width={340} height={200}>
+          <div style={{width:'100%', height:'100%', background:BLUE, padding:24, display:'flex', alignItems:'center', justifyContent:'center', boxSizing:'border-box'}}>
+            <span className="wm" style={{fontSize:34, color:'#fff'}}>App<span style={{color:PURPLE}}>‑</span>Studio</span>
+          </div>
+        </DCArtboard>
+      </DCSection>
+
+      <DCPostIt top={40} left={40} rotate={-3} width={220}>
+        Primary: indigo <b>#1D4ED8</b>. Secondary: purple <b>#A855F7</b>. Ink: <b>#111827</b>. Orange lives in imagery only, not the logo.
+      </DCPostIt>
+
+      <DCPostIt top={40} right={40} rotate={2} width={210}>
+        My picks: <b>1-A (Tile AS)</b> for lockup + app icon, <b>1-B (Bracket)</b> as a lighter alt for docs, <b>3-A</b> as the text-only fallback.
+      </DCPostIt>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

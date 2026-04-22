@@ -1,6 +1,5 @@
 import React from 'react';
-import { useTheme, Image, ViewProps, ImageProps } from 'app-studio';
-import { Center } from 'app-studio';
+import { useTheme, Image, ViewProps, ImageProps, View } from 'app-studio';
 
 export interface FileProps extends ViewProps {
   src: string;
@@ -28,7 +27,13 @@ export const FileSVG = ({
     : {};
 
   return (
-    <Center {...props} {...views?.container}>
+    <View
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      {...props}
+      {...views?.container}
+    >
       <Image
         {...Colorprops}
         content={'url("' + src + '")'}
@@ -36,7 +41,7 @@ export const FileSVG = ({
         height="100%"
         {...views?.image}
       />
-    </Center>
+    </View>
   );
 };
 

@@ -74,6 +74,25 @@ export const BarChart: React.FC<BarChartProps> = ({
 
   return (
     <svg width={width} height={height}>
+      <defs>
+        {data.series.map((series, index) => {
+          const color = series.color ? getColor(series.color) : 'black';
+          return (
+            <linearGradient
+              key={`bar-gradient-${index}`}
+              id={`bar-gradient-${index}`}
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor={color} stopOpacity={1} />
+              <stop offset="100%" stopColor={color} stopOpacity={0.7} />
+            </linearGradient>
+          );
+        })}
+      </defs>
+
       {/* X-axis */}
       <line
         x1={padding.left}
@@ -107,10 +126,6 @@ export const BarChart: React.FC<BarChartProps> = ({
             textAnchor="middle"
             {...AxisLabelStyles}
             {...views?.axisLabel}
-            style={{
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-              filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
-            }}
           >
             {label}
           </text>
@@ -131,10 +146,6 @@ export const BarChart: React.FC<BarChartProps> = ({
               dominantBaseline="middle"
               {...AxisLabelStyles}
               {...views?.axisLabel}
-              style={{
-                textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-                filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
-              }}
             >
               {tick.toFixed(0)}
             </text>
@@ -154,104 +165,115 @@ export const BarChart: React.FC<BarChartProps> = ({
       })}
 
       {/* Bars */}
-      {data.series.map((series, seriesIndex) => (
-        <React.Fragment key={`series-${seriesIndex}`}>
-          {series.data.map((value, dataIndex) => {
-            const barHeight =
-              (value / effectiveMaxValue) * chartHeight * animationProgress;
-            const x =
-              padding.left +
-              dataIndex * groupWidth +
-              barSpacing * (seriesIndex + 1) +
-              barWidth * seriesIndex;
-            const y = height - padding.bottom - barHeight;
+      {data.series.map((series, seriesIndex) => {
+        if ((series as any).hidden) return null;
+        return (
+          <React.Fragment key={`series-${seriesIndex}`}>
+            {series.data.map((value, dataIndex) => {
+              const barHeight =
+                (value / effectiveMaxValue) * chartHeight * animationProgress;
+              const x =
+                padding.left +
+                dataIndex * groupWidth +
+                barSpacing * (seriesIndex + 1) +
+                barWidth * seriesIndex;
+              const y = height - padding.bottom - barHeight;
 
-            const categoryLabel = data.labels[dataIndex];
-            const categoryTotal = data.series.reduce((sum, currentSeries) => {
-              const seriesValue = currentSeries.data[dataIndex];
-              return sum + (typeof seriesValue === 'number' ? seriesValue : 0);
-            }, 0);
-            const sharePercentage =
-              categoryTotal > 0
-                ? ((value / categoryTotal) * 100).toFixed(1)
-                : null;
-            const fillColor = series.color ? getColor(series.color) : 'black';
+              const categoryLabel = data.labels[dataIndex];
+              const categoryTotal = data.series.reduce((sum, currentSeries) => {
+                const seriesValue = currentSeries.data[dataIndex];
+                return (
+                  sum + (typeof seriesValue === 'number' ? seriesValue : 0)
+                );
+              }, 0);
+              const sharePercentage =
+                categoryTotal > 0
+                  ? ((value / categoryTotal) * 100).toFixed(1)
+                  : null;
+              const fillColor = series.color ? getColor(series.color) : 'black';
 
-            const handleMouseEnter = (e: React.MouseEvent) => {
-              const tooltipContent = (
-                <View display="flex" flexDirection="column" minWidth="180px">
-                  <View
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <Text fontWeight="semibold">{series.name}</Text>
+              const handleMouseEnter = (e: React.MouseEvent) => {
+                const tooltipContent = (
+                  <View display="flex" flexDirection="column" minWidth="180px">
                     <View
-                      width="12px"
-                      height="12px"
-                      borderRadius="2px"
-                      backgroundColor={fillColor}
-                    />
-                  </View>
-                  <Text marginTop="4px" color="color-gray-500" fontSize="12px">
-                    {categoryLabel}
-                  </Text>
-                  <View marginTop="8px" display="flex" flexDirection="column">
-                    <View display="flex" justifyContent="space-between">
-                      <Text color="color-gray-500">Value</Text>
-                      <Text fontWeight="medium">{value.toLocaleString()}</Text>
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <Text fontWeight="semibold">{series.name}</Text>
+                      <View
+                        width="12px"
+                        height="12px"
+                        borderRadius="2px"
+                        backgroundColor={fillColor}
+                      />
                     </View>
-                    {sharePercentage !== null && (
+                    <Text
+                      marginTop="4px"
+                      color="color-gray-500"
+                      fontSize="12px"
+                    >
+                      {categoryLabel}
+                    </Text>
+                    <View marginTop="8px" display="flex" flexDirection="column">
+                      <View display="flex" justifyContent="space-between">
+                        <Text color="color-gray-500">Value</Text>
+                        <Text fontWeight="medium">
+                          {value.toLocaleString()}
+                        </Text>
+                      </View>
+                      {sharePercentage !== null && (
+                        <View
+                          marginTop="4px"
+                          display="flex"
+                          justifyContent="space-between"
+                        >
+                          <Text color="color-gray-500">Share</Text>
+                          <Text fontWeight="medium">{`${sharePercentage}%`}</Text>
+                        </View>
+                      )}
                       <View
                         marginTop="4px"
                         display="flex"
                         justifyContent="space-between"
                       >
-                        <Text color="color-gray-500">Share</Text>
-                        <Text fontWeight="medium">{`${sharePercentage}%`}</Text>
+                        <Text color="color-gray-500">Category total</Text>
+                        <Text fontWeight="medium">
+                          {categoryTotal.toLocaleString()}
+                        </Text>
                       </View>
-                    )}
-                    <View
-                      marginTop="4px"
-                      display="flex"
-                      justifyContent="space-between"
-                    >
-                      <Text color="color-gray-500">Category total</Text>
-                      <Text fontWeight="medium">
-                        {categoryTotal.toLocaleString()}
-                      </Text>
                     </View>
                   </View>
-                </View>
+                );
+
+                showTooltip(e.clientX, e.clientY, tooltipContent);
+              };
+
+              const handleClick = () => {
+                if (onBarClick) {
+                  onBarClick(series.name, dataIndex);
+                }
+              };
+
+              return (
+                <rect
+                  key={`bar-${seriesIndex}-${dataIndex}`}
+                  x={x}
+                  y={y}
+                  width={barWidth}
+                  height={barHeight}
+                  fill={`url(#bar-gradient-${seriesIndex})`}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={hideTooltip}
+                  onClick={handleClick}
+                  {...BarStyles}
+                  {...views?.bar}
+                />
               );
-
-              showTooltip(e.clientX, e.clientY, tooltipContent);
-            };
-
-            const handleClick = () => {
-              if (onBarClick) {
-                onBarClick(series.name, dataIndex);
-              }
-            };
-
-            return (
-              <rect
-                key={`bar-${seriesIndex}-${dataIndex}`}
-                x={x}
-                y={y}
-                width={barWidth}
-                height={barHeight}
-                fill={fillColor}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={hideTooltip}
-                onClick={handleClick}
-                {...BarStyles}
-                {...views?.bar}
-              />
-            );
-          })}
-        </React.Fragment>
-      ))}
+            })}
+          </React.Fragment>
+        );
+      })}
     </svg>
   );
 };

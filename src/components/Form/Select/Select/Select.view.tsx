@@ -84,7 +84,7 @@ const Item: React.FC<ItemProps & { isSelected?: boolean }> = ({
       <Text
         fontSize={Typography.fontSizes[size]}
         fontWeight={isSelected ? '500' : '400'}
-        lineHeight="1.4"
+        lineHeight="14px"
         color={isSelected ? 'color-gray-900' : 'color-gray-700'}
         {...style}
       >
@@ -136,7 +136,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     fontSize: Typography.fontSizes[size],
 
     fontWeight: '400', // Regular weight
-    lineHeight: '1.5',
+    lineHeight: '20px',
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
 
     // Visual properties
@@ -147,7 +147,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     cursor: isDisabled ? 'not-allowed' : 'pointer',
 
     // Animation
-    transition: 'all 0.2s ease',
+    transition: 'all 0.2s ease-in-out',
 
     // Apply custom styles
     ...views['field'],
@@ -325,7 +325,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
         widthHeight={IconSizes[size]}
         onClick={handleClick}
         cursor="pointer"
-        transition="color 0.15s ease"
+        transition="all 0.2s ease-in-out"
         _hover={{
           color: 'color-gray-700',
         }}

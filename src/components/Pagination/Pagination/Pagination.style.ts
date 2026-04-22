@@ -18,7 +18,21 @@ export const PaginationSizes: Record<Size, ViewProps> = {
   },
   md: {
     fontSize: '14px',
-    padding: '6px 12px',
+    padding: '6px 10px',
+    minWidth: '32px',
+    height: '32px',
+    media: {
+      mobile: {
+        fontSize: '12px',
+        padding: '4px 8px',
+        minWidth: '28px',
+        height: '28px',
+      },
+    },
+  },
+  lg: {
+    fontSize: '14px',
+    padding: '8px 12px',
     minWidth: '36px',
     height: '36px',
     media: {
@@ -30,26 +44,15 @@ export const PaginationSizes: Record<Size, ViewProps> = {
       },
     },
   },
-  lg: {
-    fontSize: '16px',
-    padding: '8px 16px',
-    minWidth: '44px',
-    height: '44px',
-    media: {
-      mobile: {
-        fontSize: '14px',
-        padding: '6px 12px',
-        minWidth: '36px',
-        height: '36px',
-      },
-    },
-  },
 };
 
 export const PaginationVariants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'transparent',
     color: 'color-gray-800',
+    borderWidth: '0px',
+    borderStyle: 'none',
+    transition: 'all 0.2s ease-in-out',
     _hover: {
       backgroundColor: 'color-gray-100',
     },
@@ -57,6 +60,9 @@ export const PaginationVariants: Record<Variant, ViewProps> = {
   filled: {
     backgroundColor: 'color-gray-100',
     color: 'color-gray-800',
+    borderWidth: '0px',
+    borderStyle: 'none',
+    transition: 'all 0.2s ease-in-out',
     _hover: {
       backgroundColor: 'color-gray-200',
     },
@@ -67,6 +73,7 @@ export const PaginationVariants: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
     color: 'color-gray-800',
+    transition: 'all 0.2s ease-in-out',
     _hover: {
       backgroundColor: 'color-gray-100',
     },
@@ -75,7 +82,7 @@ export const PaginationVariants: Record<Variant, ViewProps> = {
 
 export const PaginationShapes: Record<Shape, ViewProps> = {
   rounded: {
-    borderRadius: '4px',
+    borderRadius: 8, // radius-md
   },
   square: {
     borderRadius: '0px',
@@ -86,16 +93,19 @@ export const PaginationShapes: Record<Shape, ViewProps> = {
 };
 
 export const ActivePageButtonStyles: ViewProps = {
-  backgroundColor: 'color-blue-500',
+  backgroundColor: 'theme-primary',
   color: 'color-white',
+  transition: 'all 0.2s ease-in-out',
   _hover: {
-    backgroundColor: 'color-blue-600',
+    backgroundColor: 'theme-primary',
+    opacity: 0.9,
   },
 };
 
 export const DisabledButtonStyles: ViewProps = {
   opacity: 0.5,
   cursor: 'not-allowed',
+  transition: 'all 0.2s ease-in-out',
   _hover: {
     backgroundColor: 'transparent',
   },

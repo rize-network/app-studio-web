@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Typography } from 'app-studio';
+import { Typography, useTheme } from 'app-studio';
 
 import {
   InputVariants,
@@ -35,6 +35,9 @@ export const FieldContent: React.FC<ContentProps> = ({
   views = { pickerBox: {} },
   ...props
 }) => {
+  const { themeMode } = useTheme();
+  const isDark = themeMode === 'dark';
+
   // Determine if the field is in an interactive state
   const isInteractive = (isHovered || isFocused) && !isDisabled;
 
@@ -43,7 +46,9 @@ export const FieldContent: React.FC<ContentProps> = ({
     ? 'color-red-500'
     : isInteractive
     ? 'theme-primary'
-    : 'color-gray-300';
+    : isDark
+    ? 'color-gray-700'
+    : 'color-gray-200';
 
   return (
     <Horizontal
@@ -54,17 +59,16 @@ export const FieldContent: React.FC<ContentProps> = ({
       flexWrap="nowrap"
       alignItems="center"
       justifyContent="space-between"
-      marginBottom={2} // 2 × 4px grid
       // Visual properties
       borderStyle="solid"
       borderColor={color}
-      backgroundColor="color-white"
+      backgroundColor={isDark ? 'color-gray-900' : 'color-white'}
       fontSize={Typography.fontSizes[size]}
       // State properties
       cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'text'}
       opacity={isDisabled ? 0.7 : 1}
       // Animation - unified 200ms timing for consistent feel
-      transition="border-color 200ms ease-out, background-color 200ms ease-out, box-shadow 200ms ease-out, opacity 200ms ease-out"
+      transition="border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease"
       // Apply conditional padding based on label presence
       {...(showLabel ? PadddingWithLabel : PaddingWithoutLabel)}
       // Apply shadow if provided

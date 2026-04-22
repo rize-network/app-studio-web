@@ -40,7 +40,13 @@ export const ToggleGroupView = ({
     [onToggleChange, setActiveToggles]
   );
   return (
-    <Horizontal role="ToggleGroup" display="flex" gap={5} {...views?.container}>
+    <Horizontal
+      role="ToggleGroup"
+      display="flex"
+      gap={8}
+      flexWrap="wrap"
+      {...views?.container}
+    >
       {items.map((item: any) => (
         <Toggle
           role={`toggle-${item.id}`}

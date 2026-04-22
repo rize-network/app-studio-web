@@ -54,10 +54,15 @@ export const PieChart: React.FC<PieChartProps> = ({
   const centerY = height / 2;
   const donutRadius = isDonut ? radius * 0.6 : 0;
 
+  // Filter visible points
+  const visibleDataPoints = useMemo(() => {
+    return dataPoints.filter((p) => !(p as any).hidden);
+  }, [dataPoints]);
+
   // Calculate total value
   const total = useMemo(() => {
-    return dataPoints.reduce((sum, point) => sum + point.value, 0);
-  }, [dataPoints]);
+    return visibleDataPoints.reduce((sum, point) => sum + point.value, 0);
+  }, [visibleDataPoints]);
 
   // Generate pie slices
   const slices = useMemo(() => {
@@ -104,32 +109,35 @@ export const PieChart: React.FC<PieChartProps> = ({
     const result: any[] = [];
     let startAngle = -Math.PI / 2; // Start from top (12 o'clock position)
 
-    for (let i = 0; i < dataPoints.length; i++) {
-      const value = dataPoints[i].value;
+    for (let i = 0; i < visibleDataPoints.length; i++) {
+      const value = visibleDataPoints[i].value;
       const percentage = value / total;
       const angle = percentage * 2 * Math.PI * animationProgress;
-      const endAngle = startAngle + angle;
+      // Calculate angle with gap (0.02 radians gap)
+      const gapAngle = 0.02;
+      const effectiveAngle = Math.max(0, angle - gapAngle);
+      const currentEndAngle = startAngle + effectiveAngle;
 
       // Calculate path
       const startX = centerX + Math.cos(startAngle) * radius;
       const startY = centerY + Math.sin(startAngle) * radius;
-      const endX = centerX + Math.cos(endAngle) * radius;
-      const endY = centerY + Math.sin(endAngle) * radius;
+      const endX = centerX + Math.cos(currentEndAngle) * radius;
+      const endY = centerY + Math.sin(currentEndAngle) * radius;
 
       // For donut chart
       const innerStartX = centerX + Math.cos(startAngle) * donutRadius;
       const innerStartY = centerY + Math.sin(startAngle) * donutRadius;
-      const innerEndX = centerX + Math.cos(endAngle) * donutRadius;
-      const innerEndY = centerY + Math.sin(endAngle) * donutRadius;
+      const innerEndX = centerX + Math.cos(currentEndAngle) * donutRadius;
+      const innerEndY = centerY + Math.sin(currentEndAngle) * donutRadius;
 
       // Create arc flag
-      const largeArcFlag = angle > Math.PI ? 1 : 0;
+      const largeArcFlag = effectiveAngle > Math.PI ? 1 : 0;
 
       // Create path
       let path;
 
       if (isDonut) {
-        // Donut slice path
+        // Donut slice path with rounded corners (simulated via path)
         path = [
           `M ${startX} ${startY}`,
           `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${endX} ${endY}`,
@@ -148,8 +156,9 @@ export const PieChart: React.FC<PieChartProps> = ({
       }
 
       // Calculate label position
-      const labelAngle = startAngle + angle / 2;
-      const labelRadius = radius * 0.7;
+      const labelAngle = startAngle + effectiveAngle / 2;
+      const labelRadius = isDonut ? (radius + donutRadius) / 2 : radius * 0.7;
+
       const labelX = centerX + Math.cos(labelAngle) * labelRadius;
       const labelY = centerY + Math.sin(labelAngle) * labelRadius;
 
@@ -158,29 +167,32 @@ export const PieChart: React.FC<PieChartProps> = ({
 
       // Get color from dataPoint, DEFAULT_COLORS, or generate a random one
       const colorValue =
-        dataPoints[i].color || DEFAULT_COLORS[i % DEFAULT_COLORS.length];
+        visibleDataPoints[i].color || DEFAULT_COLORS[i % DEFAULT_COLORS.length];
       // Resolve the color through the theme system
       const resolvedColor = getColor(colorValue);
 
       result.push({
         path,
         color: resolvedColor,
-        label: dataPoints[i].label,
-        value: dataPoints[i].value,
+        label: visibleDataPoints[i].label,
+        value: visibleDataPoints[i].value,
         percentage: percentageText,
         labelX,
         labelY,
         startAngle,
-        endAngle,
+        endAngle: currentEndAngle,
         index: i,
+        originalIndex: dataPoints.findIndex(
+          (p) => p.label === visibleDataPoints[i].label
+        ),
       });
 
-      startAngle = endAngle;
+      startAngle = currentEndAngle;
     }
 
     return result;
   }, [
-    dataPoints,
+    visibleDataPoints,
     total,
     radius,
     centerX,
@@ -188,6 +200,7 @@ export const PieChart: React.FC<PieChartProps> = ({
     donutRadius,
     animationProgress,
     isDonut,
+    dataPoints,
   ]);
 
   return (
@@ -197,15 +210,33 @@ export const PieChart: React.FC<PieChartProps> = ({
       height={height}
       style={{ overflow: 'visible' }}
     >
-      {/* Center circle for donut chart (rendered beneath slices so labels remain visible) */}
+      {/* Center content for donut chart */}
       {isDonut && (
-        <circle
-          cx={centerX}
-          cy={centerY}
-          r={donutRadius}
-          fill="white"
-          pointerEvents="none"
-        />
+        <g pointerEvents="none">
+          <circle cx={centerX} cy={centerY} r={donutRadius} fill="white" />
+          <text
+            x={centerX}
+            y={centerY - 8}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize="14px"
+            fontWeight="500"
+            fill="color-gray-500"
+          >
+            Total
+          </text>
+          <text
+            x={centerX}
+            y={centerY + 12}
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fontSize="20px"
+            fontWeight="800"
+            fill="color-gray-900"
+          >
+            {total.toLocaleString()}
+          </text>
+        </g>
       )}
 
       {/* Pie slices */}
@@ -230,8 +261,9 @@ export const PieChart: React.FC<PieChartProps> = ({
                 />
               </View>
               <Text marginTop="4px" color="color-gray-500" fontSize="12px">
-                Slice {slice.index + 1} of {dataPoints.length}
+                Slice {slice.index + 1} of {visibleDataPoints.length}
               </Text>
+
               <View marginTop="8px" display="flex" flexDirection="column">
                 <View display="flex" justifyContent="space-between">
                   <Text color="color-gray-500">Value</Text>
@@ -322,20 +354,19 @@ export const PieChart: React.FC<PieChartProps> = ({
             />
 
             {/* Only show labels for slices that are big enough and not placeholder */}
-            {!isPlaceholder && slice.endAngle - slice.startAngle > 0.2 && (
+            {!isPlaceholder && slice.endAngle - slice.startAngle > 0.25 && (
               <text
                 x={slice.labelX}
                 y={slice.labelY}
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fill="white"
-                fontWeight="bold"
+                fontSize="11px"
+                fontWeight="800"
                 pointerEvents="none"
-                style={{
-                  textShadow:
-                    '0 2px 4px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3)',
-                  filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5))',
-                }}
+                paintOrder="stroke"
+                stroke="rgba(0,0,0,0.2)"
+                strokeWidth="2px"
               >
                 {slice.percentage}
               </text>

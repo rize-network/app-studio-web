@@ -27,7 +27,7 @@ export const HelperText: React.FC<HelperTextProps> = ({
     // Color properties
     color="color-gray-500" // Muted color for helper text
     // Animation
-    transition="all 0.2s ease"
+    transition="color 0.2s ease, opacity 0.2s ease"
     // Apply custom styles
     {...(views['helperText'] as any)}
     {...props}

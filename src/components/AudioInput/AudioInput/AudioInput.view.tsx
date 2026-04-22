@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AudioWaveform } from '../AudioWaveform/AudioWaveform';
 import { AudioInputViewProps } from './AudioInput.props';
-import { View, Horizontal } from 'app-studio'; // Assuming these are from app-studio
+import { View, Horizontal, Vertical, Text } from 'app-studio';
 import { Uploader } from '../../Uploader/Uploader';
 import {
   AttachmentIcon,
@@ -40,12 +40,15 @@ export function AudioInputView({
   }, [audioBlob]);
 
   return (
-    <View gap="8px" {...viewProps}>
-      {/* Waveform (visible while recording) */}
-
-      {/* Controls row with attachment + audio controls (matching ChatInput style) */}
-      <Horizontal gap={8} alignItems="center" margin={10}>
-        {/* Attachment-style button for selecting audio files */}
+    <Vertical
+      gap="10px"
+      padding="8px"
+      border="1px solid #E2E8F0"
+      borderRadius="12px"
+      backgroundColor="color-white"
+      {...viewProps}
+    >
+      <Horizontal gap={8} alignItems="center">
         <Uploader
           accept="audio/*"
           icon={<AttachmentIcon widthHeight={16} />}
@@ -56,9 +59,12 @@ export function AudioInputView({
           renderError={({ errorMessage }) => null}
           views={{
             container: {
-              height: '36px',
+              height: '40px',
               cursor: 'pointer',
-              _hover: { backgroundColor: 'color-gray-100' },
+              border: '1px solid #E2E8F0',
+              borderRadius: '10px',
+              backgroundColor: 'color-white',
+              _hover: { backgroundColor: '#F8FAFC', borderColor: '#CBD5E1' },
             },
           }}
           containerProps={{
@@ -66,11 +72,11 @@ export function AudioInputView({
             alignItems: 'center',
             justifyContent: 'center',
             gap: 4,
-            borderRadius: '50%',
-            padding: 10,
+            borderRadius: '10px',
+            padding: 8,
           }}
           textProps={{
-            fontSize: '14px',
+            fontSize: '13px',
             color: 'color-gray-600',
           }}
           validateFile={(file: File) => {
@@ -95,12 +101,13 @@ export function AudioInputView({
             display="flex"
             alignItems="center"
             justifyContent="center"
-            backgroundColor={'color-gray-100'}
-            color={'color-gray-600'}
-            borderRadius={'50%'}
-            border="none"
+            backgroundColor="color-white"
+            color="color-gray-600"
+            borderRadius="10px"
+            border="1px solid #E2E8F0"
             cursor="pointer"
-            _hover={{ backgroundColor: 'color-gray-200' }}
+            transition="background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease"
+            _hover={{ backgroundColor: '#F8FAFC', borderColor: '#CBD5E1' }}
           >
             <MicrophoneIcon
               widthHeight={16}
@@ -120,12 +127,13 @@ export function AudioInputView({
               display="flex"
               alignItems="center"
               justifyContent="center"
-              backgroundColor={'color-gray-100'}
-              color={'color-gray-600'}
-              borderRadius={'50%'}
-              border="none"
+              backgroundColor="color-white"
+              color="color-gray-600"
+              borderRadius="10px"
+              border="1px solid #E2E8F0"
               cursor="pointer"
-              _hover={{ backgroundColor: 'color-gray-200' }}
+              transition="background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease"
+              _hover={{ backgroundColor: '#F8FAFC', borderColor: '#CBD5E1' }}
             >
               {paused ? (
                 <PlayIcon
@@ -152,17 +160,26 @@ export function AudioInputView({
               display="flex"
               alignItems="center"
               justifyContent="center"
-              backgroundColor={'theme-error'}
-              color={'color-white'}
-              borderRadius={'50%'}
-              border="none"
+              backgroundColor="theme-primary"
+              color="color-white"
+              borderRadius="10px"
+              border="1px solid theme-primary"
               cursor="pointer"
-              _hover={{ backgroundColor: 'color-red-600' }}
+              transition="background-color 0.2s ease, border-color 0.2s ease"
+              _hover={{ backgroundColor: '#1D4ED8', borderColor: '#1D4ED8' }}
             >
               <StopIcon widthHeight={16} color="currentColor" filled={false} />
             </View>
 
-            <View minWidth={90}>
+            <View
+              minWidth={120}
+              flex={1}
+              minHeight="40px"
+              padding="4px 10px"
+              border="1px solid #E2E8F0"
+              borderRadius="10px"
+              backgroundColor="#F8FAFC"
+            >
               {recording && (
                 <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
               )}
@@ -171,9 +188,21 @@ export function AudioInputView({
         )}
       </Horizontal>
 
-      {/* Playback when not recording */}
-      {audioUrl && !recording && <audio controls src={audioUrl} />}
-    </View>
+      {audioUrl && !recording && (
+        <Vertical gap="8px" paddingTop="10px" borderTop="1px solid #E2E8F0">
+          <Text fontSize="12px" lineHeight="16px" color="color-gray-500">
+            Recorded audio
+          </Text>
+          <View
+            as="audio"
+            controls
+            src={audioUrl}
+            width="100%"
+            borderRadius="10px"
+          />
+        </Vertical>
+      )}
+    </Vertical>
   );
 }
 

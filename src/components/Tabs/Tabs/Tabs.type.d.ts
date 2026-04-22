@@ -1,6 +1,8 @@
 import { ViewProps } from 'app-studio';
 import React from 'react';
 
+export type TabsVariant = 'underline' | 'segmented' | 'pill';
+
 /**
  * Defines the structure for a single tab.
  */
@@ -23,6 +25,8 @@ export interface TabsContextType {
   activeValue: string | number | null;
   /** Function to set the active tab */
   setActiveValue: (value: string | number) => void;
+  /** Visual variant for the tabs */
+  variant?: TabsVariant;
   /** Default value for initial tab */
   defaultValue?: string | number;
   /** Callback when tab changes */

@@ -62,7 +62,8 @@ export const ModalOverlay: React.FC<OverlayProps & any> = React.memo(
         zIndex={1000}
         onClick={handleClick}
         visibility={isOpen ? 'visible' : 'hidden'}
-        transition="all 0.3s ease"
+        opacity={isOpen ? 1 : 0}
+        transition="opacity 0.2s ease, visibility 0.2s ease"
         {...views?.container}
       >
         <View
@@ -75,7 +76,7 @@ export const ModalOverlay: React.FC<OverlayProps & any> = React.memo(
           display="flex"
           backgroundColor="color-blackAlpha-500"
           backdropFilter={blur ? `blur(${blur}px)` : undefined}
-          transition="all 0.3s ease"
+          transition="background-color 0.2s ease, backdrop-filter 0.2s ease"
           onClick={handleClick}
           {...OverlayAlignments[position]}
           {...props}
@@ -123,7 +124,9 @@ export const ModalContainer: React.FC<ContainerProps> = React.memo(
         width={isFullScreen ? '100%' : 600}
         height={isFullScreen ? '100%' : 'fit-content'}
         onClick={handleClick}
-        transition="all 0.3s ease"
+        transition="opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease"
+        opacity={isOpen ? 1 : 0}
+        transform={isOpen ? 'translateY(0)' : 'translateY(8px)'}
         {...(shadow ? shadow : defaultShadow)}
         {...ContainerShapes[shape]}
         media={{
@@ -170,7 +173,7 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
         paddingHorizontal={24} // 6×4px grid
         borderBottomWidth="1px"
         borderBottomStyle="solid"
-        borderBottomColor="color-gray-200"
+        borderBottomColor="rgba(226, 232, 240, 0.9)"
         media={{
           mobile: {
             paddingVertical: 12, // Smaller padding on mobile
@@ -225,7 +228,7 @@ export const ModalFooter: React.FC<FooterProps> = React.memo(
         paddingHorizontal={24} // 6×4px grid
         borderTopWidth="1px"
         borderTopStyle="solid"
-        borderTopColor="color-gray-200"
+        borderTopColor="rgba(226, 232, 240, 0.9)"
         gap={12} // 3×4px grid
         media={{
           mobile: {

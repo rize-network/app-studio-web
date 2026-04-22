@@ -42,6 +42,11 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   views = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
+  const checked = typeof isChecked === 'boolean' ? isChecked : value;
+  const knobOffset = `${SliderPadding[size].paddingHorizontal}px`;
+  const contentSpace = `${SliderPadding[size].paddingHorizontal + 2}px`;
+  const contentInset = `calc(${KnobSizes[size].width} + ${SliderPadding[size].paddingHorizontal}px + 4px)`;
+
   const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!isReadOnly && !isDisabled) {
       const newValue = event.target.checked;
@@ -71,7 +76,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       opacity: isDisabled ? 0.6 : 1,
 
       // Animation
-      transition: 'all 0.2s ease',
+      transition: 'all 0.2s ease-in-out',
 
       // Apply custom styles
       ...views.label,
@@ -91,7 +96,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         opacity={0}
         width={0}
         height={0}
-        checked={value}
+        checked={checked}
         onChange={handleToggle}
         disabled={isDisabled}
         readOnly={isReadOnly}
@@ -102,7 +107,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         <Text
           fontWeight="500" // Medium weight for better readability
           color={isDisabled ? 'color-gray-400' : 'color-gray-700'}
-          transition="all 0.2s ease"
+          transition="color 0.2s ease, opacity 0.2s ease"
         >
           {label}
         </Text>
@@ -113,22 +118,15 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         // Layout properties
         display="flex"
         alignItems="center"
-        justifyContent={
-          value
-            ? activeChild
-              ? 'space-between'
-              : 'flex-end'
-            : inActiveChild
-            ? 'space-between'
-            : 'flex-start'
-        }
+        justifyContent="center"
+        position="relative"
         marginBottom={4} // 1 × 4px grid
         // Visual properties
         borderRadius="9999px" // Full rounded for pill shape
         backgroundColor={
           isDisabled
             ? ColorSchemes.default.disabled
-            : value
+            : checked
             ? isHovered
               ? ColorSchemes.states.hover.active
               : ColorSchemes.default.active
@@ -137,7 +135,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
             : ColorSchemes.default.inactive
         }
         opacity={
-          !isDisabled && value && isHovered
+          !isDisabled && checked && isHovered
             ? ColorSchemes.states.hover.activeOpacity
             : 1
         }
@@ -152,15 +150,17 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         {...views['slider']}
       >
         {/* Active content */}
-        {activeChild && value && (
+        {activeChild && checked && (
           <View
-            marginLeft={8} // 2 × 4px grid
-            marginRight={4} // 1 × 4px grid
-            transition="all 0.3s ease"
+            marginLeft={contentSpace}
+            marginRight={contentInset}
+            transition="all 0.2s ease-in-out"
             display="flex"
             alignItems="center"
             justifyContent="center"
             height="100%"
+            width="100%"
+            overflow="hidden"
           >
             {activeChild}
           </View>
@@ -168,14 +168,20 @@ const SwitchView: React.FC<SwitchViewProps> = ({
 
         {/* Knob */}
         <View
+          position="absolute"
+          top="50%"
+          left={checked ? undefined : knobOffset}
+          right={checked ? knobOffset : undefined}
           borderRadius="50%"
           backgroundColor={ColorSchemes.default.knob}
           boxShadow={
             isHovered
-              ? '0 2px 4px rgba(0, 0, 0, 0.2)'
-              : '0 1px 2px rgba(0, 0, 0, 0.1)'
+              ? '0 4px 10px rgba(15, 23, 42, 0.18)'
+              : '0 1px 3px rgba(15, 23, 42, 0.18)'
           }
-          transform={isHovered ? 'scale(1.05)' : 'scale(1)'}
+          transform={`translateY(-50%) ${
+            isHovered ? 'scale(1.05)' : 'scale(1)'
+          }`}
           {...TransitionStyles.knob}
           zIndex={1} // Ensure knob is above content
           {...KnobSizes[size]}
@@ -183,15 +189,17 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         />
 
         {/* Inactive content */}
-        {inActiveChild && !value && (
+        {inActiveChild && !checked && (
           <View
-            marginRight={8} // 2 × 4px grid
-            marginLeft={4} // 1 × 4px grid
-            transition="all 0.3s ease"
+            marginLeft={contentInset}
+            marginRight={contentSpace}
+            transition="all 0.2s ease-in-out"
             display="flex"
             alignItems="center"
             justifyContent="center"
             height="100%"
+            width="100%"
+            overflow="hidden"
           >
             {inActiveChild}
           </View>
@@ -203,7 +211,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         <Text
           fontWeight="500" // Medium weight for better readability
           color={isDisabled ? 'color-gray-400' : 'color-gray-700'}
-          transition="all 0.2s ease"
+          transition="all 0.2s ease-in-out"
         >
           {label}
         </Text>

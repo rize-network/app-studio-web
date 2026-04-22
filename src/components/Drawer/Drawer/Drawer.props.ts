@@ -55,6 +55,7 @@ export interface DrawerOverlayProps extends ViewProps {
 export interface DrawerContainerProps extends ViewProps {
   placement?: Placement;
   size?: Size;
+  isOpen?: boolean;
   children?: React.ReactNode;
 }
 

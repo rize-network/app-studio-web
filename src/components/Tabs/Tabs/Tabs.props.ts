@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabsStyles, Tab } from './Tabs.type';
+import { TabsStyles, TabsVariant, Tab } from './Tabs.type';
 import { ViewProps } from 'app-studio';
 
 /**
@@ -15,6 +15,8 @@ export interface TabsProps {
   onTabChange?: (activeTab: Tab) => void;
   /** Optional styles object to customize the appearance of the tabs container, headers, text, and content area. */
   views?: TabsStyles;
+  /** Visual presentation style for the tab list. */
+  variant?: TabsVariant;
   /** Optional position of the icon relative to the text in tab headers. */
   iconPosition?: 'left' | 'right' | 'top' | 'bottom';
   /**
@@ -46,6 +48,7 @@ export interface TabsProps {
  * These props are derived or passed down from the main Tabs component.
  */
 export interface TabsViewProps {
+  variant?: TabsVariant;
   iconPosition?: 'left' | 'right' | 'bottom' | 'top'; // Added iconPosition prop
   /** The original array of tab objects. */
   tabs: Tab[];

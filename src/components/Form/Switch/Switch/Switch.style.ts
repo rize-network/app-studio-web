@@ -16,11 +16,11 @@ import { Size } from './Switch.type';
  * Following the 4px grid system - dimensions réduites
  */
 export const KnobSizes: Record<Size, ViewProps> = {
-  xs: { height: '8px', width: '8px' }, // 2 × 4px grid
-  sm: { height: '12px', width: '12px' }, // 3 × 4px grid
-  md: { height: '16px', width: '16px' }, // 4 × 4px grid
-  lg: { height: '20px', width: '20px' }, // 5 × 4px grid
-  xl: { height: '24px', width: '24px' }, // 6 × 4px grid
+  xs: { height: '10px', width: '10px' },
+  sm: { height: '14px', width: '14px' },
+  md: { height: '18px', width: '18px' },
+  lg: { height: '22px', width: '22px' },
+  xl: { height: '26px', width: '26px' },
 };
 
 /**
@@ -29,24 +29,24 @@ export const KnobSizes: Record<Size, ViewProps> = {
  */
 export const SliderSizes: Record<Size, ViewProps> = {
   xs: {
-    height: '16px', // 4 × 4px grid
-    width: '36px', // 9 × 4px grid - increased for content
+    height: '20px',
+    width: '40px',
   },
   sm: {
-    height: '20px', // 5 × 4px grid
-    width: '44px', // 11 × 4px grid - increased for content
+    height: '24px',
+    width: '48px',
   },
   md: {
-    height: '24px', // 6 × 4px grid
-    width: '52px', // 13 × 4px grid - increased for content
+    height: '28px',
+    width: '56px',
   },
   lg: {
-    height: '28px', // 7 × 4px grid
-    width: '60px', // 15 × 4px grid - increased for content
+    height: '32px',
+    width: '64px',
   },
   xl: {
-    height: '32px', // 8 × 4px grid
-    width: '68px', // 17 × 4px grid - increased for content
+    height: '36px',
+    width: '72px',
   },
 };
 
@@ -55,11 +55,11 @@ export const SliderSizes: Record<Size, ViewProps> = {
  * Following the 4px grid system
  */
 export const SliderPadding: Record<Size, Record<string, number>> = {
-  xs: { paddingVertical: 4, paddingHorizontal: 2 }, // 0.5 × 4px grid horizontalement
-  sm: { paddingVertical: 4, paddingHorizontal: 2 }, // 0.5 × 4px grid horizontalement
-  md: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
-  lg: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
-  xl: { paddingVertical: 4, paddingHorizontal: 4 }, // 1 × 4px grid
+  xs: { paddingVertical: 5, paddingHorizontal: 3 },
+  sm: { paddingVertical: 5, paddingHorizontal: 3 },
+  md: { paddingVertical: 5, paddingHorizontal: 5 },
+  lg: { paddingVertical: 5, paddingHorizontal: 5 },
+  xl: { paddingVertical: 5, paddingHorizontal: 5 },
 };
 
 /**
@@ -83,13 +83,11 @@ export const ColorSchemes = {
     focus: {
       active: {
         outline: 'none',
-        boxShadow:
-          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.3)',
+        boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
       },
       inactive: {
         outline: 'none',
-        boxShadow:
-          '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 0 0 2px white, 0 0 0 4px color-gray-200',
       },
     },
   },
@@ -100,9 +98,9 @@ export const ColorSchemes = {
  */
 export const TransitionStyles = {
   slider: {
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: 'all 0.2s ease-in-out',
   },
   knob: {
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: 'all 0.2s ease-in-out',
   },
 };

@@ -48,7 +48,8 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
       onClick={handleOptionClick}
       fontSize={Typography.fontSizes[size]}
       _hover={{
-        opacity: 0.8,
+        backgroundColor: 'color-gray-100',
+        transition: 'all 0.15s ease-in-out',
       }}
       {...views['text']}
     >
@@ -74,11 +75,14 @@ export const DropDown: React.FC<CountryPickerDropDownProps> = ({
       zIndex={1000}
       overflow="auto"
       maxHeight="300px"
-      borderRadius={4}
+      borderRadius={12} // radius-lg
       position="absolute"
       flexDirection="column"
       backgroundColor="color-white"
-      boxShadow="rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px"
+      borderWidth="1px"
+      borderStyle="solid"
+      borderColor="color-gray-200"
+      boxShadow="0 4px 12px rgba(0, 0, 0, 0.1)"
       {...views['dropDown']}
     >
       {options.map((option: Country) => (
@@ -130,7 +134,8 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
-  const IconColor = getColor('color-blueGray-700', {
+  const isDark = (elementMode || themeMode) === 'dark';
+  const IconColor = getColor(isDark ? 'color-gray-400' : 'color-gray-500', {
     themeMode: elementMode ? elementMode : themeMode,
   });
 
@@ -168,9 +173,16 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     heigth: '100%',
     border: 'none',
     on: { focus: { outline: 'none' } },
+    transition: 'all 0.2s ease-in-out',
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color-trueGray-600' : 'color-blueGray-700',
+    color: isDisabled
+      ? isDark
+        ? 'color-gray-500'
+        : 'color-gray-400'
+      : isDark
+      ? 'color-gray-100'
+      : 'color-gray-900',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
     ...views['field'],
   };

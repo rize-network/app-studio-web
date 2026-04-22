@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { ModalState, hideModal, useModalStore } from './Modal.store';
 import { ModalOverlay } from './Modal.view';
 import { ModalLayoutProps } from './Modal.props';
@@ -10,13 +10,17 @@ export const ModalLayout = ({
 }: ModalLayoutProps) => {
   const activeModals = useModalStore((state: ModalState) => state.modals);
 
-  if (onShow) {
-    useModalStore.getState().setOnShow(onShow);
-  }
+  useEffect(() => {
+    if (onShow) {
+      useModalStore.getState().setOnShow(onShow);
+    }
+  }, [onShow]);
 
-  if (onHide) {
-    useModalStore.getState().setOnHide(onHide);
-  }
+  useEffect(() => {
+    if (onHide) {
+      useModalStore.getState().setOnHide(onHide);
+    }
+  }, [onHide]);
 
   if (activeModals.length === 0) {
     return null;

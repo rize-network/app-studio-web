@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<title>Buttons with icons</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="stylesheet" href="_card.css"/>
+</head>
+<body>
+<div class="card">
+  <div class="row">
+    <button style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-sans);font-weight:500;padding:10px 18px;font-size:14px;background:#1D4ED8;color:#fff;border:0;border-radius:8px;">
+      <i data-lucide="send" style="width:16px;height:16px;"></i> Send
+    </button>
+    <button style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-sans);font-weight:500;padding:10px 18px;font-size:14px;background:transparent;color:#1D4ED8;border:1px solid #1D4ED8;border-radius:8px;">
+      Continue <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+    </button>
+    <button style="display:inline-flex;align-items:center;justify-content:center;padding:10px;background:#fff;color:#374151;border:1px solid var(--theme-border);border-radius:8px;">
+      <i data-lucide="settings" style="width:20px;height:20px;"></i>
+    </button>
+    <button style="display:inline-flex;align-items:center;justify-content:center;padding:10px;background:#F97316;color:#fff;border:0;border-radius:999px;">
+      <i data-lucide="plus" style="width:20px;height:20px;"></i>
+    </button>
+  </div>
+</div>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script></body></html>

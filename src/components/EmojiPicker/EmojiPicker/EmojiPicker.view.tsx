@@ -84,6 +84,12 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
     ...Variants[variant],
     ...(error && { borderColor: 'color-red-500' }),
     ...(isDisabled && { opacity: 0.6, cursor: 'not-allowed' }),
+    ...(!isDisabled &&
+      !isReadOnly && {
+        _hover: {
+          borderColor: 'rgba(148, 163, 184, 0.9)',
+        },
+      }),
     ...views?.trigger,
   };
 
@@ -172,8 +178,9 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
                   key={category}
                   {...DefaultEmojiPickerStyles.categoryTab}
                   {...(activeCategory === category && {
-                    borderBottomColor: 'color-blue-500',
-                    color: 'color-blue-600',
+                    borderBottomColor: 'theme-primary',
+                    color: 'theme-primary',
+                    backgroundColor: '#EFF6FF',
                   })}
                   onClick={() => handleCategoryChange(category)}
                   title={category.charAt(0).toUpperCase() + category.slice(1)}
@@ -195,7 +202,8 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
                   onClick={() => handleEmojiSelect(emoji)}
                   title={emoji.name}
                   _hover={{
-                    backgroundColor: 'color-gray-100',
+                    backgroundColor: '#F8FAFC',
+                    transform: 'scale(1.05)',
                   }}
                   color="color-gray-800"
                   {...views?.emoji}

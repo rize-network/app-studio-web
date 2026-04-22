@@ -32,9 +32,9 @@ export const DropZoneView: React.FC<DropZoneProps & DropZoneStateProps> = ({
       height={selectedFiles && selectedFiles.length > 0 ? 'auto' : '200px'}
       borderWidth={2}
       borderStyle="dashed"
-      borderColor={isDragActive ? 'primary' : 'rgba(0,0,0,0.1)'}
+      borderColor={isDragActive ? 'theme-primary' : 'rgba(203, 213, 225, 0.95)'}
       borderRadius={12}
-      backgroundColor={isDragActive ? 'rgba(0,0,0,0.02)' : 'transparent'}
+      backgroundColor={isDragActive ? '#EFF6FF' : '#F8FAFC'}
       flexDirection="column"
       cursor={disabled ? 'not-allowed' : 'pointer'}
       opacity={disabled ? 0.6 : 1}
@@ -43,7 +43,7 @@ export const DropZoneView: React.FC<DropZoneProps & DropZoneStateProps> = ({
       onDragLeave={handleDragLeave}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      transition="all 0.2s ease-in-out"
+      transition="background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease"
       overflow="hidden"
       position="relative"
       padding={16}
@@ -95,11 +95,15 @@ export const DropZoneView: React.FC<DropZoneProps & DropZoneStateProps> = ({
             <View flexDirection="column" alignItems="center" width="100%">
               <UploadIcon
                 widthHeight={40}
-                color={isDragActive ? 'primary' : 'rgba(0,0,0,0.4)'}
+                color={
+                  isDragActive ? 'theme-primary' : 'rgba(100, 116, 139, 0.9)'
+                }
               />
               <Text
                 marginTop={16}
-                color={isDragActive ? 'primary' : 'rgba(0,0,0,0.6)'}
+                color={
+                  isDragActive ? 'theme-primary' : 'rgba(71, 85, 105, 0.95)'
+                }
                 fontWeight={500}
                 textAlign="center"
                 {...textProps}

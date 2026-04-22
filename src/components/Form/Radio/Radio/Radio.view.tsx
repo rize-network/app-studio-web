@@ -101,6 +101,9 @@ const RadioView: React.FC<RadioViewProps> = ({
       // Typography properties
 
       // Visual properties
+      selected: {
+        borderColor: 'theme-primary',
+      },
       color: error
         ? 'color-red-600'
         : isDisabled
@@ -112,7 +115,7 @@ const RadioView: React.FC<RadioViewProps> = ({
       opacity: isDisabled ? 0.6 : 1,
 
       // Animation
-      transition: 'all 0.2s ease',
+      transition: 'all 0.2s ease-in-out',
 
       // Apply custom styles
       ...views['label'],
@@ -126,13 +129,16 @@ const RadioView: React.FC<RadioViewProps> = ({
 
       // Visual properties
       borderRadius: '50%', // Always circular for radio buttons
+      selected: {
+        backgroundColor: 'theme-primary',
+      },
       backgroundColor: 'color-white',
 
       // Size properties
       ...Sizes[size],
 
       // Animation
-      transition: 'all 0.2s ease',
+      transition: 'all 0.2s ease-in-out',
 
       // Apply shadow and custom styles
       ...shadow,
@@ -152,7 +158,7 @@ const RadioView: React.FC<RadioViewProps> = ({
       ...DotSizes[size],
 
       // Animation
-      transition: 'all 0.2s ease',
+      transition: 'all 0.2s ease-in-out',
     },
   };
 
@@ -205,7 +211,7 @@ const RadioView: React.FC<RadioViewProps> = ({
             color="color-gray-500"
             size="sm"
             fontWeight="400" // Regular weight
-            lineHeight="15px"
+            lineHeight="20px"
             {...views?.infoText}
           >
             {infoText}
@@ -221,7 +227,7 @@ const RadioView: React.FC<RadioViewProps> = ({
           marginHorizontal={0}
           color="color-red-500"
           fontWeight="500" // Medium weight for better readability
-          transition="all 0.2s ease"
+          transition="color 0.2s ease, opacity 0.2s ease"
         >
           {error}
         </Text>

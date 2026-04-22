@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Input, Typography, useTheme } from 'app-studio';
+import { Input, useTheme } from 'app-studio';
 import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';
@@ -54,10 +54,47 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
-  const IconColor = getColor('color-blueGray-700', {
+  const IconColor = getColor(isDisabled ? 'color-gray-400' : 'color-gray-500', {
     themeMode: elementMode ? elementMode : themeMode,
   });
   const showLabel = !!(isFocused && label);
+  const fieldSizeStyles = {
+    xs: {
+      minHeight: 28,
+      shellPaddingX: 10,
+      fontSize: 12,
+      lineHeight: '16px',
+      paddingY: 6,
+    },
+    sm: {
+      minHeight: 32,
+      shellPaddingX: 10,
+      fontSize: 13,
+      lineHeight: '18px',
+      paddingY: 7,
+    },
+    md: {
+      minHeight: 40,
+      shellPaddingX: 12,
+      fontSize: 14,
+      lineHeight: '20px',
+      paddingY: 10,
+    },
+    lg: {
+      minHeight: 48,
+      shellPaddingX: 14,
+      fontSize: 14,
+      lineHeight: '20px',
+      paddingY: 14,
+    },
+    xl: {
+      minHeight: 56,
+      shellPaddingX: 16,
+      fontSize: 16,
+      lineHeight: '24px',
+      paddingY: 16,
+    },
+  } as const;
   /**
    * Styles for the input field
    * Design tokens:
@@ -69,10 +106,10 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   const fieldStyles = {
     // Layout properties
     margin: 0,
-    paddingVertical: 4, // 2 × 4px grid
+    paddingVertical: fieldSizeStyles[size].paddingY,
     paddingHorizontal: 0,
     width: '100%',
-    height: '100%',
+    minHeight: `${fieldSizeStyles[size].minHeight}px`,
     border: 'none',
 
     // Focus state
@@ -83,8 +120,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     },
 
     // Typography properties
-    fontSize: Typography.fontSizes[size],
-    lineHeight: `${Math.round(Typography.fontSizes[size] * 1.4)}px`, // 1.4x for better readability
+    fontSize: fieldSizeStyles[size].fontSize,
+    lineHeight: fieldSizeStyles[size].lineHeight,
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
     fontWeight: 400,
 
@@ -97,7 +134,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     opacity: isDisabled ? 0.7 : 1,
 
     // Animation - smooth transitions for all interactive states
-    transition: 'color 200ms ease-out, opacity 200ms ease-out',
+    transition: 'all 0.2s ease-in-out',
 
     // Apply custom field styles
     ...views['field'],
@@ -106,7 +143,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     setIsFocused(true);
     if (onFocus) onFocus();
   };
-  const handleHover = () => setIsHovered(!isHovered);
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
   const handleBlur = (event: any) => {
     if (onBlur) onBlur(event);
     setIsFocused(false);
@@ -150,8 +188,13 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
+        minHeight={`${fieldSizeStyles[size].minHeight}px`}
+        paddingTop={0}
+        paddingBottom={0}
+        paddingLeft={fieldSizeStyles[size].shellPaddingX}
+        paddingRight={fieldSizeStyles[size].shellPaddingX}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {left}
         <FieldWrapper>
@@ -171,7 +214,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
-            placeholder={hint}
+            placeholder={placeholder || hint}
             onFocus={handleFocus}
             onBlur={handleBlur}
             autoComplete="off"
@@ -189,7 +232,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
               onClick={handleClear}
               cursor="pointer"
               borderRadius="50%"
-              transition="background-color 150ms ease-out, transform 150ms ease-out"
+              transition="all 0.2s ease-in-out"
               _hover={{
                 backgroundColor: 'color-gray-100',
                 transform: 'scale(1.05)',

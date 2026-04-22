@@ -145,12 +145,13 @@ export function ContextOverlay({
         left: element.rect.left,
         width: element.rect.width,
         height: element.rect.height,
-        border: '2px solid #2563eb',
-        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+        border: '2px solid #1D4ED8',
+        backgroundColor: 'rgba(29, 78, 216, 0.08)',
         pointerEvents: 'none',
         zIndex: 99999,
-        transition: 'all 0.1s ease-out',
-        borderRadius: '4px',
+        transition:
+          'top 0.1s ease-out, left 0.1s ease-out, width 0.1s ease-out, height 0.1s ease-out',
+        borderRadius: '8px',
       }}
     >
       <div
@@ -158,10 +159,10 @@ export function ContextOverlay({
           position: 'absolute',
           top: '-24px',
           left: '0',
-          backgroundColor: '#2563eb',
+          backgroundColor: '#1D4ED8',
           color: 'white',
           padding: '2px 8px',
-          borderRadius: '4px',
+          borderRadius: '9999px',
           fontSize: '12px',
           fontWeight: 'bold',
           whiteSpace: 'nowrap',

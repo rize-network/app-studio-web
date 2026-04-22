@@ -60,7 +60,7 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
       {label && (
         <Text
           fontWeight="600" // Semi-bold for better readability
-          fontSize="16px" // 4 × 4px grid
+          fontSize="14px"
           color={error ? 'color-red-600' : 'color-gray-700'}
           marginBottom={4} // 1 × 4px grid
           {...views.label}
@@ -80,7 +80,7 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
           lineHeight="20px" // 5 × 4px grid
           color={error ? 'color-red-500' : 'color-gray-500'}
           marginTop={4} // 1 × 4px grid
-          transition="all 0.2s ease"
+          transition="color 0.2s ease, opacity 0.2s ease"
           {...views.helperText}
         >
           {error || helperText}

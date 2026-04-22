@@ -58,6 +58,12 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
     ...Variants[variant],
     ...(error && { borderColor: 'color-red-500' }),
     ...(isDisabled && { opacity: 0.6, cursor: 'not-allowed' }),
+    ...(!isDisabled &&
+      !isReadOnly && {
+        _hover: {
+          borderColor: 'rgba(148, 163, 184, 0.9)',
+        },
+      }),
     ...views?.trigger,
   };
 
@@ -149,10 +155,16 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
                   onClick={() => handleIconSelect(iconName)}
                   title={iconName}
                   _hover={{
-                    backgroundColor: 'color-gray-100',
+                    backgroundColor: '#F8FAFC',
+                    transform: 'scale(1.05)',
                   }}
                   backgroundColor={
-                    selectedIcon === iconName ? 'color-blue-100' : 'transparent'
+                    selectedIcon === iconName ? '#EFF6FF' : 'transparent'
+                  }
+                  borderWidth={selectedIcon === iconName ? '1px' : '0px'}
+                  borderStyle="solid"
+                  borderColor={
+                    selectedIcon === iconName ? '#BFDBFE' : 'transparent'
                   }
                   {...views?.iconItem}
                 >

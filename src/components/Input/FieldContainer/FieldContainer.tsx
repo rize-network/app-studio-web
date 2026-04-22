@@ -47,7 +47,7 @@ export const FieldContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
           marginHorizontal={0}
           fontWeight="500" // Medium weight for better readability
           color="color-red-500"
-          transition="all 0.2s ease"
+          transition="color 0.2s ease, opacity 0.2s ease"
           {...views?.error}
         >
           {error}

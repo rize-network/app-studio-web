@@ -105,8 +105,9 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
         {(content || children) && (
           <Text
             role="badgeText"
-            fontWeight="500" // Medium weight for better readability
+            fontWeight="600"
             textAlign="center"
+            letterSpacing="0.02em"
             {...views?.text}
             color={combinedStyles.color}
           >

@@ -75,7 +75,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
 
     // Typography properties
     fontSize: Typography.fontSizes[size],
-    lineHeight: `${Math.round(Typography.fontSizes[size] * 1.5)}px`, // 1.5x for multi-line readability
+    lineHeight: '1.5',
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
     fontWeight: 400,
 
@@ -88,7 +88,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     opacity: isDisabled ? 0.7 : 1,
 
     // Animation - smooth transitions for all interactive states
-    transition: 'color 200ms ease-out, opacity 200ms ease-out',
+    transition: 'color 0.2s ease, opacity 0.2s ease',
 
     // Apply custom field styles
     ...views['field'],
@@ -130,8 +130,8 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         {...views?.content}
       >
         <FieldWrapper {...views?.warper}>
@@ -155,7 +155,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
-            placeholder={hint}
+            placeholder={placeholder || hint}
             onBlur={handleBlur}
             onFocus={handleFocus}
             onChange={(e) => handleChange(e as any)}

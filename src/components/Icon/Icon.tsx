@@ -1,4 +1,4 @@
-import { useTheme, ViewProps, Center } from 'app-studio';
+import { useTheme, ViewProps, View } from 'app-studio';
 import React, { lazy, Suspense, useMemo } from 'react';
 import type { LucideProps } from 'lucide-react';
 import type dynamicIconImportsType from 'lucide-react/dynamicIconImports';
@@ -56,11 +56,12 @@ const IconWrapper: React.FC<IconProps> = React.memo(
     children,
     ...rest
   }) => (
-    <Center
+    <View
       widthHeight={widthHeight}
-      lineHeight={widthHeight}
       color={color}
       display="flex"
+      alignItems="center"
+      justifyContent="center"
       transform={
         transform
           ? transform
@@ -77,7 +78,7 @@ const IconWrapper: React.FC<IconProps> = React.memo(
       {...rest}
     >
       {children}
-    </Center>
+    </View>
   )
 );
 

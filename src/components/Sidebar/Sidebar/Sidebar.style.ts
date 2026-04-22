@@ -48,43 +48,42 @@ export const SidebarSizes: Record<
  * Variant styles for the Sidebar component
  */
 export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
+  const isDark = themeMode === 'dark';
+
   return {
     default: {
-      backgroundColor: 'color-white',
-      color: 'color-gray-800',
-
-      transition: 'all 0.2s ease',
+      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
+      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      transition:
+        'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
     },
     filled: {
-      backgroundColor: 'color-gray-100',
-      color: 'color-gray-800',
-
-      transition: 'all 0.2s ease',
+      backgroundColor: isDark ? 'color-gray-800' : 'color-gray-100',
+      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      transition:
+        'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
     },
     outline: {
-      backgroundColor: 'color-white',
+      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'color-gray-200',
-      color: 'color-gray-800',
-
-      transition: 'all 0.2s ease',
+      borderColor: isDark ? 'color-gray-700' : 'color-gray-200',
+      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      transition:
+        'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
     },
     subtle: {
-      backgroundColor: 'color-gray-50',
-      color: 'color-gray-800',
-
-      transition: 'all 0.2s ease',
+      backgroundColor: isDark ? 'color-gray-800' : 'color-gray-50',
+      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      transition: 'background-color 0.2s ease, color 0.2s ease',
     },
     elevated: {
-      backgroundColor: 'color-white',
-      boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-      color: 'color-gray-800',
-
-      transition: 'all 0.2s ease',
+      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      transition: 'all 0.2s ease-in-out',
     },
   };
-  // Add dark mode conditional styling here
 };
 
 // For backward compatibility
@@ -114,13 +113,13 @@ export const SidebarPositions: Record<Position, ViewProps> = {
 export const SidebarElevations: Record<Elevation, ViewProps> = {
   none: {},
   low: {
-    boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
   },
   medium: {
-    boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.12)',
   },
   high: {
-    boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
   },
 };
 
@@ -128,23 +127,22 @@ export const SidebarElevations: Record<Elevation, ViewProps> = {
  * Transition presets for the Sidebar component
  */
 export const SidebarTransitions: Record<TransitionPreset, string> = {
-  fast: 'width 0.2s ease, transform 0.2s ease',
-  normal: 'width 0.3s ease, transform 0.3s ease',
-  slow: 'width 0.5s ease, transform 0.5s ease',
-  bounce:
-    'width 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55)',
+  fast: 'all 0.2s ease-in-out',
+  normal: 'all 0.3s ease-in-out',
+  slow: 'all 0.5s ease-in-out',
+  bounce: 'all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55)',
 };
 
 /**
  * Active item styles for the Sidebar navigation items
  */
 export const SidebarItemActive: ViewProps = {
-  backgroundColor: 'color-blue-50',
-  color: 'color-blue-700',
-  fontWeight: '600', // Semi-bold for active items
-  borderLeftWidth: '3px',
+  backgroundColor: 'rgba(var(--theme-primary-rgb), 0.1)',
+  color: 'theme-primary',
+  fontWeight: '600',
+  borderLeftWidth: '2px',
   borderLeftStyle: 'solid',
-  borderLeftColor: 'color-blue-600',
+  borderLeftColor: 'theme-primary',
 };
 
 /**
@@ -152,5 +150,5 @@ export const SidebarItemActive: ViewProps = {
  */
 export const SidebarItemHover: ViewProps = {
   backgroundColor: 'color-gray-100',
-  transition: 'background-color 0.2s ease',
+  transition: 'all 0.2s ease-in-out',
 };

@@ -51,7 +51,8 @@ export const DrawerOverlay: React.FC<DrawerOverlayProps> = ({
       zIndex={1000}
       visibility={isOpen ? 'visible' : 'hidden'}
       onClick={handleClick}
-      transition="all 0.3s ease"
+      opacity={isOpen ? 1 : 0}
+      transition="opacity 0.2s ease, visibility 0.2s ease, background-color 0.2s ease"
       backgroundColor={isOpen ? 'color-blackAlpha-500' : 'transparent'}
       backdropFilter={blur ? `blur(${blur}px)` : undefined}
       pointerEvents={isOpen ? 'auto' : 'none'}
@@ -65,6 +66,7 @@ export const DrawerOverlay: React.FC<DrawerOverlayProps> = ({
 export const DrawerContainer: React.FC<DrawerContainerProps> = ({
   placement = 'right',
   size = 'md',
+  isOpen = false,
   children,
   ...props
 }) => {
@@ -83,14 +85,37 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
         maxWidth: '100vw',
       };
 
+  const borderRadius =
+    placement === 'left'
+      ? '0 12px 12px 0'
+      : placement === 'right'
+      ? '12px 0 0 12px'
+      : placement === 'top'
+      ? '0 0 12px 12px'
+      : '12px 12px 0 0';
+
+  const transform = isOpen
+    ? 'translate3d(0, 0, 0)'
+    : placement === 'left'
+    ? 'translate3d(-100%, 0, 0)'
+    : placement === 'right'
+    ? 'translate3d(100%, 0, 0)'
+    : placement === 'top'
+    ? 'translate3d(0, -100%, 0)'
+    : 'translate3d(0, 100%, 0)';
+
   return (
     <Vertical
       position="absolute"
       backgroundColor="color-white"
+      borderRadius={borderRadius}
       {...DrawerPlacements[placement]}
       {...dimensionProps}
       onClick={handleClick}
-      transition="transform 0.3s ease"
+      transform={transform}
+      willChange="transform"
+      transition="transform 0.24s ease, box-shadow 0.2s ease"
+      boxShadow="0 12px 32px rgba(15, 23, 42, 0.12)"
       {...props}
     >
       {children}
@@ -115,7 +140,7 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
       paddingHorizontal={24}
       paddingVertical={16}
       borderBottomWidth="1px"
-      borderBottomColor="color-gray-200"
+      borderBottomColor="rgba(226, 232, 240, 0.9)"
       alignItems="center"
       justifyContent={buttonPosition === 'none' ? 'center' : 'space-between'}
       {...props}
@@ -147,7 +172,7 @@ export const DrawerFooter: React.FC<DrawerFooterProps> = ({
       paddingHorizontal={24}
       paddingVertical={16}
       borderTopWidth="1px"
-      borderTopColor="color-gray-200"
+      borderTopColor="rgba(226, 232, 240, 0.9)"
       alignItems="center"
       justifyContent="flex-end"
       gap={12}

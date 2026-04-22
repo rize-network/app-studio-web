@@ -18,7 +18,7 @@ import { Shape, Size } from './Modal.type';
  */
 export const ContainerShapes: Record<Shape, ViewProps> = {
   square: { borderRadius: 0 },
-  rounded: { borderRadius: '8px' }, // 2 × 4px grid
+  rounded: { borderRadius: 8 }, // radius-md
 };
 /**
  * Overlay alignment configurations for the Modal component
@@ -76,7 +76,7 @@ export const ModalAnimations = {
  * Overlay styles for the Modal component
  */
 export const OverlayStyles: ViewProps = {
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  backgroundColor: 'rgba(0, 0, 0, 0.4)',
   transition: 'background-color 0.2s ease',
 };
 
@@ -85,13 +85,11 @@ export const OverlayStyles: ViewProps = {
  */
 export const ContainerBaseStyles: ViewProps = {
   backgroundColor: 'color-white',
-  boxShadow:
-    '0px 10px 25px rgba(0, 0, 0, 0.1), 0px 4px 10px rgba(0, 0, 0, 0.08)',
+  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.12)',
   transition: 'box-shadow 0.2s ease',
   _focusVisible: {
     outline: 'none',
-    boxShadow:
-      '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1), 0px 10px 25px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
   },
 };
 
@@ -100,15 +98,15 @@ export const ContainerBaseStyles: ViewProps = {
  */
 export const ModalTypography = {
   title: {
-    fontSize: '18px', // 4.5 × 4px grid
-    fontWeight: '600', // Semi-bold
-    lineHeight: '24px', // 6 × 4px grid
+    fontSize: '20px', // xl
+    fontWeight: '600',
+    lineHeight: '28px',
     color: 'color-gray-900',
   },
   body: {
-    fontSize: '16px', // 4 × 4px grid
-    fontWeight: '400', // Regular
-    lineHeight: '24px', // 6 × 4px grid
+    fontSize: '16px', // lg
+    fontWeight: '400',
+    lineHeight: '24px',
     color: 'color-gray-700',
   },
 };

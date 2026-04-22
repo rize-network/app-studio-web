@@ -21,15 +21,6 @@ const DrawerComponent: React.FC<DrawerProps> = ({
   children,
   ...props
 }) => {
-  const transformStyle = isOpen
-    ? {}
-    : {
-        transform:
-          placement === 'left' || placement === 'right'
-            ? `translateX(${placement === 'left' ? '-100%' : '100%'})`
-            : `translateY(${placement === 'top' ? '-100%' : '100%'})`,
-      };
-
   return (
     <DrawerOverlay
       isOpen={isOpen}
@@ -37,7 +28,7 @@ const DrawerComponent: React.FC<DrawerProps> = ({
       isClosePrevented={isClosePrevented}
       {...props}
     >
-      <DrawerContainer placement={placement} size={size} style={transformStyle}>
+      <DrawerContainer placement={placement} size={size} isOpen={isOpen}>
         {children}
       </DrawerContainer>
     </DrawerOverlay>

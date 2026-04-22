@@ -18,22 +18,12 @@ import { Shape, Size, Variant } from './Input.type';
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: '8px', // Consistent with design system (rounded-md)
-    media: {
-      mobile: {
-        borderRadius: '6px',
-      },
-    },
   },
   square: {
     borderRadius: 0,
   },
   rounded: {
     borderRadius: '8px', // Consistent with design system (rounded-md)
-    media: {
-      mobile: {
-        borderRadius: '6px',
-      },
-    },
   },
   pill: {
     borderRadius: '9999px', // Full rounded for pill shape
@@ -44,11 +34,11 @@ export const Shapes: Record<Shape, ViewProps> = {
  * Label sizes following the 4px grid system
  */
 export const LabelSizes: Record<Size, string> = {
-  xs: '12px', // 3 × 4px grid
-  sm: '14px', // 3.5 × 4px grid
-  md: '16px', // 4 × 4px grid
-  lg: '18px', // 4.5 × 4px grid
-  xl: '20px', // 5 × 4px grid
+  xs: '10px',
+  sm: '12px',
+  md: '12px',
+  lg: '14px',
+  xl: '14px',
 };
 
 /**
@@ -65,24 +55,21 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderColor: 'color-gray-200',
     backgroundColor: 'color-white',
     transition:
-      'border-color 200ms ease-out, box-shadow 200ms ease-out, background-color 200ms ease-out',
+      'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
       borderColor: 'color-gray-300',
-      backgroundColor: 'color-gray-50',
     },
     _focus: {
       borderColor: 'theme-primary',
       backgroundColor: 'color-white',
       outline: 'none',
-      boxShadow:
-        '0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
     },
     _focusVisible: {
       borderColor: 'theme-primary',
       backgroundColor: 'color-white',
       outline: 'none',
-      boxShadow:
-        '0 0 0 3px rgba(59, 130, 246, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
     },
   },
   default: {
@@ -93,10 +80,9 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderRadius: 0,
     backgroundColor: 'transparent',
     transition:
-      'border-color 200ms ease-out, background-color 200ms ease-out, box-shadow 200ms ease-out',
+      'border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease',
     _hover: {
       borderBottomColor: 'color-gray-400',
-      backgroundColor: 'color-gray-50',
     },
     _focus: {
       borderBottomColor: 'theme-primary',
@@ -114,7 +100,7 @@ export const InputVariants: Record<Variant, ViewProps> = {
   none: {
     border: 'none',
     backgroundColor: 'transparent',
-    transition: 'background-color 200ms ease-out',
+    transition: 'background-color 0.2s ease',
     _hover: {
       backgroundColor: 'color-gray-50',
     },

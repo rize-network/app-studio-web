@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, ViewProps } from 'app-studio';
+import { TooltipStyles } from './Chart.style';
 
 interface ChartTooltipProps {
   visible: boolean;
@@ -91,16 +92,7 @@ export const ChartTooltip: React.FC<ChartTooltipProps> = ({
       position="fixed"
       left={`${position.left}px`}
       top={`${position.top}px`}
-      backgroundColor="color-white"
-      padding="12px 16px"
-      borderRadius="8px"
-      boxShadow="0px 12px 24px rgba(15, 23, 42, 0.18)"
-      border="1px solid color-gray-200"
-      fontSize="14px"
-      display="flex"
-      flexDirection="column"
-      pointerEvents="none"
-      zIndex={10}
+      {...TooltipStyles}
       {...views?.tooltip}
     >
       {content}

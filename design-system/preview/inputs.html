@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<title>Inputs</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="stylesheet" href="_card.css"/>
+</head>
+<body>
+<div class="card">
+  <div class="col" style="gap:10px;">
+    <div class="col" style="gap:4px;">
+      <label class="label">Email</label>
+      <input type="email" placeholder="you@app-studio.dev" style="font-family:var(--font-sans);font-size:14px;padding:10px 12px;border:1px solid var(--theme-border);border-radius:8px;outline:none;"/>
+    </div>
+    <div class="col" style="gap:4px;">
+      <label class="label">Password</label>
+      <div style="display:flex;align-items:center;border:1px solid var(--theme-border);border-radius:8px;padding:0 12px;">
+        <input type="password" value="••••••••" style="flex:1;font-family:var(--font-sans);font-size:14px;padding:10px 0;border:0;outline:none;background:transparent;"/>
+        <i data-lucide="eye" style="width:16px;height:16px;color:var(--gray-500);"></i>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script></body></html>

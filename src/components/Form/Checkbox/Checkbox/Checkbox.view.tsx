@@ -99,7 +99,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       opacity: isDisabled ? 0.6 : 1,
 
       // Animation
-      transition: 'all 0.2s ease',
+      transition: 'all 0.2s ease-in-out',
 
       // Apply custom styles
       ...views['label'],
@@ -112,13 +112,13 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
       ...stateStyle,
 
       // Visual properties
-      borderRadius: '4px', // Consistent with design system
+      borderRadius: 6, // radius-sm
 
       // Size properties
       ...Sizes[size],
 
       // Animation
-      transition: 'all 0.2s ease',
+      transition: 'all 0.2s ease-in-out',
 
       // Apply shadow and custom styles
       ...shadow,
@@ -159,7 +159,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
               <MinusIcon
                 widthHeight={IconSizes[size]}
                 color="white"
-                transition="all 0.2s ease"
+                transition="opacity 0.2s ease"
               />
             ) : (
               (isChecked || isSelected) &&
@@ -167,7 +167,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
                 <TickIcon
                   widthHeight={IconSizes[size]}
                   color="white"
-                  transition="all 0.2s ease"
+                  transition="opacity 0.2s ease"
                 />
               ))
             )}
@@ -190,7 +190,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
             color="color-gray-500"
             size="sm"
             fontWeight="400" // Regular weight
-            lineHeight="15"
+            lineHeight="20px"
             {...views?.infoText}
           >
             {infoText}
@@ -206,7 +206,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           marginHorizontal={0}
           color="color-red-500"
           fontWeight="500" // Medium weight for better readability
-          transition="all 0.2s ease"
+          transition="all 0.2s ease-in-out"
         >
           {error}
         </Text>

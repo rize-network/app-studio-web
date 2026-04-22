@@ -18,9 +18,9 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export const Sizes: Record<Size, ViewProps> = {
   xs: { minHeight: '28px', fontSize: '12px', padding: '4px 8px' },
-  sm: { minHeight: '32px', fontSize: '13px', padding: '6px 10px' },
+  sm: { minHeight: '32px', fontSize: '12px', padding: '6px 10px' },
   md: { minHeight: '40px', fontSize: '14px', padding: '8px 12px' },
-  lg: { minHeight: '48px', fontSize: '15px', padding: '10px 14px' },
+  lg: { minHeight: '48px', fontSize: '14px', padding: '10px 14px' },
   xl: { minHeight: '56px', fontSize: '16px', padding: '12px 16px' },
 };
 
@@ -47,13 +47,12 @@ export const dropdownStyles: ViewProps = {
   overflowY: 'auto',
   zIndex: 1000,
   backgroundColor: 'color-white',
-  borderRadius: '10px',
+  borderRadius: 12, // radius-lg
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'color-gray-200',
-  // Subtle, layered shadow for depth
-  boxShadow:
-    '0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02)',
+  // Standard elevation shadow
+  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
 };
 
 /**
@@ -63,8 +62,7 @@ export const dropdownAnimation = {
   enter: {
     opacity: 1,
     transform: 'translateY(0) scale(1)',
-    transition:
-      'opacity 0.2s ease-out, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+    transition: 'all 0.2s ease-in-out',
   },
   exit: {
     opacity: 0,
@@ -85,8 +83,8 @@ export const searchContainerStyles: ViewProps = {
   borderBottomStyle: 'solid',
   borderBottomColor: 'color-gray-100',
   backgroundColor: 'color-gray-50',
-  borderTopLeftRadius: '10px',
-  borderTopRightRadius: '10px',
+  borderTopLeftRadius: 10,
+  borderTopRightRadius: 10,
 };
 
 /**
@@ -95,9 +93,9 @@ export const searchContainerStyles: ViewProps = {
 export const optionStyles: ViewProps = {
   padding: '8px 10px',
   cursor: 'pointer',
-  borderRadius: '6px',
+  borderRadius: 8, // radius-md
   margin: '1px 4px',
-  transition: 'background-color 0.15s ease',
+  transition: 'all 0.15s ease-in-out',
 };
 
 /**
@@ -114,10 +112,10 @@ export const optionStateStyles = {
     backgroundColor: 'color-gray-100',
   },
   selected: {
-    backgroundColor: 'rgba(var(--color-primary-rgb), 0.08)',
+    backgroundColor: 'rgba(var(--theme-primary-rgb), 0.1)',
   },
   selectedHighlighted: {
-    backgroundColor: 'rgba(var(--color-primary-rgb), 0.12)',
+    backgroundColor: 'rgba(var(--theme-primary-rgb), 0.15)',
   },
 };
 
@@ -137,7 +135,7 @@ export const emptyStateStyles: ViewProps = {
  */
 export const triggerStyles: ViewProps = {
   cursor: 'pointer',
-  transition: 'border-color 0.15s ease, box-shadow 0.15s ease',
+  transition: 'all 0.15s ease-in-out',
 };
 
 /**
@@ -146,11 +144,11 @@ export const triggerStyles: ViewProps = {
 export const chevronAnimation = {
   open: {
     transform: 'rotate(180deg)',
-    transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+    transition: 'all 0.2s ease-in-out',
   },
   closed: {
     transform: 'rotate(0deg)',
-    transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+    transition: 'all 0.2s ease-in-out',
   },
 };
 
@@ -182,9 +180,9 @@ export const chipStyles: ViewProps = {
   gap: '4px',
   padding: '2px 8px',
   backgroundColor: 'color-gray-100',
-  borderRadius: '4px',
-  fontSize: '13px',
+  borderRadius: 8, // radius-md
+  fontSize: '12px',
   fontWeight: '500',
   color: 'color-gray-700',
-  transition: 'background-color 0.15s ease',
+  transition: 'all 0.15s ease-in-out',
 };

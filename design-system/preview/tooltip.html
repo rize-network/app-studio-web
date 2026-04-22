@@ -1,0 +1,13 @@
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"/><title>Tooltip</title><link rel="stylesheet" href="_card.css"/></head><body>
+<div class="card">
+  <div class="row" style="gap:30px;">
+    <div style="position:relative;display:inline-flex;">
+      <button style="padding:8px 14px;border:1px solid var(--theme-border);background:#fff;border-radius:8px;font-size:13px;">Hover me</button>
+      <div style="position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);padding:5px 10px;background:#111827;color:#fff;font-size:11px;white-space:nowrap;border-radius:6px;">Helpful hint<span style="position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:#111827;"></span></div>
+    </div>
+    <div style="position:relative;display:inline-flex;">
+      <button style="width:34px;height:34px;border-radius:50%;border:1px solid var(--theme-border);background:#fff;"><i data-lucide="info" style="width:15px;height:15px;color:var(--gray-500);"></i></button>
+      <div style="position:absolute;top:50%;left:calc(100% + 8px);transform:translateY(-50%);padding:8px 12px;background:#fff;border:1px solid var(--theme-border);border-radius:8px;box-shadow:var(--shadow-md);font-size:12px;width:200px;line-height:1.4;">Pass <code style="background:var(--gray-100);padding:1px 4px;border-radius:3px;font-family:var(--font-mono);">color</code> to change the theme on a per-instance basis.</div>
+    </div>
+  </div>
+</div><script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script><script>lucide.createIcons();</script></body></html>

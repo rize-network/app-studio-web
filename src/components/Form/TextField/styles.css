@@ -18,7 +18,7 @@ input::-webkit-contacts-auto-fill-button {
 
 /* Placeholder styling */
 input::placeholder {
-  color: #9ca3af; /* color-gray-400 */
+  color: var(--color-gray-400);
   opacity: 1;
   transition: opacity 200ms ease-out;
 }
@@ -29,16 +29,16 @@ input:focus::placeholder {
 
 /* Selection styling */
 input::selection {
-  background-color: rgba(59, 130, 246, 0.2); /* theme-primary with 20% opacity */
+  background-color: color-mix(in srgb, var(--theme-primary) 20%, transparent);
 }
 
 /* Autofill styling to prevent browser default yellow background */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px white inset;
-  box-shadow: 0 0 0 1000px white inset;
-  -webkit-text-fill-color: #111827; /* color-gray-900 */
+  -webkit-box-shadow: 0 0 0 1000px var(--theme-background) inset;
+  box-shadow: 0 0 0 1000px var(--theme-background) inset;
+  -webkit-text-fill-color: var(--theme-text);
   transition: background-color 5000s ease-in-out 0s;
 }
 

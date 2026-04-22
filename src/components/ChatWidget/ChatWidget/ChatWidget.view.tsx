@@ -111,9 +111,9 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
             alignItems="center"
             justifyContent="center"
             flex={1}
-            color="color-gray-400"
+            color="color-gray-500"
           >
-            <Text fontSize="14px">No messages yet. Start a conversation!</Text>
+            <Text fontSize="14px">No messages yet. Start a conversation.</Text>
           </View>
         ) : (
           messages.map((message) => (
@@ -167,16 +167,16 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
             gap={8}
             marginBottom="8px"
             flexWrap="wrap"
-            paddingHorizontal="20px"
+            padding="0 12px 8px"
             {...styles.contextChipsContainer}
           >
             {selectedContextElements.map((element) => (
               <Horizontal
                 key={element.id}
-                backgroundColor="rgba(37, 99, 235, 0.1)"
-                border="1px solid rgba(37, 99, 235, 0.2)"
-                borderRadius="6px"
-                padding="4px 8px"
+                backgroundColor="#EFF6FF"
+                border="1px solid #BFDBFE"
+                borderRadius="9999px"
+                padding="6px 10px"
                 alignItems="center"
                 gap={6}
               >
@@ -241,7 +241,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
                 {...DefaultChatWidgetStyles.attachmentButton}
                 {...styles.contextPickerButton}
                 _hover={{
-                  backgroundColor: 'color-gray-100',
+                  backgroundColor: '#F1F5F9',
                   ...styles.contextPickerButton?._hover,
                 }}
                 title="Select element from page"
@@ -258,7 +258,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
               {...DefaultChatWidgetStyles.sendButton}
               backgroundColor={hasText ? 'theme-primary' : 'color-gray-300'}
               _hover={{
-                backgroundColor: hasText ? 'color-blue-600' : 'color-gray-300',
+                backgroundColor: hasText ? '#1D4ED8' : 'color-gray-300',
               }}
               {...styles.sendButton}
               style={{
@@ -343,11 +343,11 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
         <Horizontal
           gap={8}
           alignItems="center"
-          backgroundColor="rgba(0,0,0,0.03)"
-          padding="8px"
+          backgroundColor="#F8FAFC"
+          padding="8px 10px"
           borderRadius="8px"
           width="100%"
-          border="1px solid rgba(0,0,0,0.05)"
+          border="1px solid #E2E8F0"
         >
           <SettingsIcon widthHeight={14} color="color-gray-600" />
           <Vertical gap={2}>
@@ -371,8 +371,8 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
     // Error styles overrides
     ...(isError
       ? {
-          backgroundColor: 'rgba(239, 68, 68, 0.1)',
-          border: '1px solid rgba(239, 68, 68, 0.2)',
+          backgroundColor: '#FEF2F2',
+          border: '1px solid #FECACA',
           color: '#b91c1c',
         }
       : {}),
@@ -421,7 +421,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
         {message.reasoning && (
           <View
             marginBottom="8px"
-            borderBottom="1px solid rgba(0,0,0,0.05)"
+            borderBottom="1px solid #E2E8F0"
             paddingBottom="8px"
             {...styles.reasoningContainer}
           >
@@ -447,9 +447,10 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
             {isReasoningOpen && (
               <View
                 padding="8px"
-                backgroundColor="rgba(0,0,0,0.03)"
+                backgroundColor="#F8FAFC"
                 borderRadius="8px"
                 marginTop="4px"
+                border="1px solid #E2E8F0"
                 {...styles.reasoningContent}
               >
                 <Text fontSize="12px" color="color-gray-600" fontStyle="italic">
@@ -473,9 +474,10 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
                 key={attachment.id}
                 gap={6}
                 padding="6px 8px"
-                backgroundColor="rgba(0, 0, 0, 0.05)"
+                backgroundColor="#F8FAFC"
                 borderRadius="8px"
                 fontSize="12px"
+                border="1px solid #E2E8F0"
               >
                 <AttachmentIcon widthHeight={14} />
                 <Text>{attachment.name}</Text>
@@ -494,11 +496,11 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
               <Horizontal
                 key={element.id}
                 gap={6}
-                padding="4px 8px"
-                backgroundColor="rgba(37, 99, 235, 0.1)"
-                borderRadius="6px"
+                padding="6px 10px"
+                backgroundColor="#EFF6FF"
+                borderRadius="9999px"
                 fontSize="11px"
-                border="1px solid rgba(37, 99, 235, 0.2)"
+                border="1px solid #BFDBFE"
               >
                 <Text color="color-blue-700" fontWeight="500">
                   {element.name}

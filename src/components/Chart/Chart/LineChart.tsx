@@ -66,40 +66,71 @@ export const LineChart: React.FC<LineChartProps> = ({
     return ticks;
   }, [maxValue]);
 
-  // Generate path for each series
+  // Generate path for each series with smooth curves (Cubic Bezier)
   const generatePath = (series: number[]) => {
-    const points = series.map((value, index) => {
-      const x = padding.left + (index / (data.labels.length - 1)) * chartWidth;
-      const y =
+    if (series.length < 2) return '';
+
+    const points = series.map((value, index) => ({
+      x: padding.left + (index / (data.labels.length - 1)) * chartWidth,
+      y:
         height -
         padding.bottom -
-        (value / effectiveMaxValue) * chartHeight * animationProgress;
-      return `${x},${y}`;
-    });
+        (value / effectiveMaxValue) * chartHeight * animationProgress,
+    }));
 
-    return `M ${points.join(' L ')}`;
+    let path = `M ${points[0].x},${points[0].y}`;
+
+    for (let i = 0; i < points.length - 1; i++) {
+      const p0 = points[i === 0 ? i : i - 1];
+      const p1 = points[i];
+      const p2 = points[i + 1];
+      const p3 = points[i + 2 === points.length ? i + 1 : i + 2];
+
+      // Catmull-Rom to Cubic Bezier conversion
+      const cp1x = p1.x + (p2.x - p0.x) / 6;
+      const cp1y = p1.y + (p2.y - p0.y) / 6;
+      const cp2x = p2.x - (p3.x - p1.x) / 6;
+      const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+      path += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`;
+    }
+
+    return path;
   };
 
   // Generate area path for each series (for area charts)
   const generateAreaPath = (series: number[]) => {
+    if (series.length < 2) return '';
+
+    const linePath = generatePath(series);
     const startX = padding.left;
     const endX = padding.left + chartWidth;
     const baseY = height - padding.bottom;
 
-    const points = series.map((value, index) => {
-      const x = padding.left + (index / (data.labels.length - 1)) * chartWidth;
-      const y =
-        height -
-        padding.bottom -
-        (value / effectiveMaxValue) * chartHeight * animationProgress;
-      return `${x},${y}`;
-    });
-
-    return `M ${startX},${baseY} L ${points.join(' L ')} L ${endX},${baseY} Z`;
+    return `${linePath} L ${endX},${baseY} L ${startX},${baseY} Z`;
   };
 
   return (
     <svg width={width} height={height}>
+      <defs>
+        {data.series.map((series, index) => {
+          const color = series.color ? getColor(series.color) : 'black';
+          return (
+            <linearGradient
+              key={`gradient-${index}`}
+              id={`gradient-${index}`}
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor={color} stopOpacity={0.3} />
+              <stop offset="100%" stopColor={color} stopOpacity={0} />
+            </linearGradient>
+          );
+        })}
+      </defs>
+
       {/* X-axis */}
       <line
         x1={padding.left}
@@ -134,10 +165,6 @@ export const LineChart: React.FC<LineChartProps> = ({
             textAnchor="middle"
             {...AxisLabelStyles}
             {...views?.axisLabel}
-            style={{
-              textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-              filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
-            }}
           >
             {label}
           </text>
@@ -158,10 +185,6 @@ export const LineChart: React.FC<LineChartProps> = ({
               dominantBaseline="middle"
               {...AxisLabelStyles}
               {...views?.axisLabel}
-              style={{
-                textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-                filter: 'drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2))',
-              }}
             >
               {tick.toFixed(0)}
             </text>
@@ -182,15 +205,16 @@ export const LineChart: React.FC<LineChartProps> = ({
 
       {/* Lines and points */}
       {data.series.map((series, seriesIndex) => {
+        if ((series as any).hidden) return null;
+
         const lineColor = series.color ? getColor(series.color) : 'black';
 
         return (
           <React.Fragment key={`series-${seriesIndex}`}>
-            {/* Area fill (if needed) */}
+            {/* Area fill with gradient */}
             <path
               d={generateAreaPath(series.data)}
-              fill={lineColor}
-              opacity={0.1}
+              fill={`url(#gradient-${seriesIndex})`}
               {...views?.area}
             />
 

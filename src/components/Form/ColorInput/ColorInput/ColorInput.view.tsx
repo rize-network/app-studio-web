@@ -77,10 +77,12 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
     ...(error && { borderColor: 'color-red-500' }),
     ...(isDisabled && { opacity: 0.6, cursor: 'not-allowed' }),
     ...(isFocused && {
-      borderColor: 'color-blue-500',
-      boxShadow: '0 0 0 3px rgba(59, 130, 246, 0.1)',
+      borderColor: 'theme-primary',
+      boxShadow:
+        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(29, 78, 216, 0.16)',
     }),
-    ...(isHovered && !isDisabled && { borderColor: 'color-gray-400' }),
+    ...(isHovered &&
+      !isDisabled && { borderColor: 'rgba(148, 163, 184, 0.9)' }),
     ...views?.trigger,
     ...(shadow && shadow),
   };
@@ -122,8 +124,8 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       <View
         ref={triggerRef}
         onClick={isDisabled || isReadOnly ? undefined : handleToggle}
-        onMouseEnter={() => setIsFocused(true)}
-        onMouseLeave={() => setIsFocused(false)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         tabIndex={isDisabled ? -1 : 0}
@@ -174,22 +176,22 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                 key={index}
                 width="24px"
                 height="24px"
-                borderRadius="4px"
+                borderRadius="8px"
                 backgroundColor={colorOption.value}
                 borderWidth="2px"
                 borderStyle="solid"
                 borderColor={
                   selectedColor === colorOption.value
-                    ? 'color-blue-500'
+                    ? 'theme-primary'
                     : 'transparent'
                 }
                 cursor="pointer"
-                transition="all 0.2s ease"
+                transition="transform 0.2s ease, border-color 0.2s ease"
                 onClick={() => handleColorSelect(colorOption.value)}
                 title={colorOption.name}
                 _hover={{
-                  transform: 'scale(1.1)',
-                  borderColor: 'color-gray-400',
+                  transform: 'scale(1.05)',
+                  borderColor: 'rgba(148, 163, 184, 0.9)',
                 }}
                 {...views?.colorSwatch}
               />
@@ -208,22 +210,22 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                     key={index}
                     width="20px"
                     height="20px"
-                    borderRadius="4px"
+                    borderRadius="8px"
                     backgroundColor={color}
                     borderWidth="1px"
                     borderStyle="solid"
                     borderColor={
                       selectedColor === color
-                        ? 'color-blue-500'
-                        : 'color-gray-300'
+                        ? 'theme-primary'
+                        : 'rgba(203, 213, 225, 0.95)'
                     }
                     cursor="pointer"
-                    transition="all 0.2s ease"
+                    transition="transform 0.2s ease, border-color 0.2s ease"
                     onClick={() => handleColorSelect(color)}
                     title={color}
                     _hover={{
-                      transform: 'scale(1.1)',
-                      borderColor: 'color-gray-400',
+                      transform: 'scale(1.05)',
+                      borderColor: 'rgba(148, 163, 184, 0.9)',
                     }}
                   />
                 ))}
@@ -248,11 +250,12 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                 />
                 <View
                   padding="8px 12px"
-                  backgroundColor="color-blue-500"
-                  borderRadius="4px"
+                  backgroundColor="theme-primary"
+                  borderRadius="8px"
                   cursor="pointer"
                   onClick={handleCustomColorSubmit}
-                  _hover={{ backgroundColor: 'color-blue-600' }}
+                  transition="background-color 0.2s ease, opacity 0.2s ease"
+                  _hover={{ backgroundColor: '#1D4ED8' }}
                 >
                   <Text color="color-white" fontSize="12px" fontWeight="500">
                     Add

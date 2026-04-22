@@ -78,19 +78,19 @@ export const ToastView: React.FC<ToastProps> = ({
       data-state={isVisible ? 'open' : 'closed'}
       gap={12}
       width="100%"
-      maxWidth="400px"
+      maxWidth="380px"
       borderWidth="1px"
       borderStyle="solid"
-      borderRadius="8px" // 2 × 4px grid
-      padding="12px 16px" // 3 × 4px grid and 4 × 4px grid
+      borderRadius="12px"
+      padding="12px 14px"
       alignItems="flex-start"
       position="relative"
       backgroundColor={Theme[variant].container.backgroundColor}
       borderColor={Theme[variant].container.border}
-      boxShadow="0 4px 12px rgba(0, 0, 0, 0.08)" // Subtle shadow
+      boxShadow="0 12px 32px rgba(15, 23, 42, 0.12)"
       opacity={isVisible ? 1 : 0}
-      transform={isVisible ? 'scale(1)' : 'scale(0.95)'}
-      transition="all 0.3s ease"
+      transform={isVisible ? 'translateY(0)' : 'translateY(4px)'}
+      transition="opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease"
       {...views?.container}
     >
       {showIcon && (
@@ -101,7 +101,8 @@ export const ToastView: React.FC<ToastProps> = ({
 
       <Vertical gap={4} flex="1">
         <Text
-          size="md"
+          size="sm"
+          lineHeight="20px"
           fontWeight="600" // Semi-bold for better readability
           color={Theme[variant].content.color}
           backgroundColor={Theme[variant].container.backgroundColor}
@@ -112,7 +113,8 @@ export const ToastView: React.FC<ToastProps> = ({
 
         {description && (
           <Text
-            size="sm"
+            size="xs"
+            lineHeight="18px"
             color={Theme[variant].content.color}
             fontWeight="400" // Regular weight
             backgroundColor={Theme[variant].container.backgroundColor}
@@ -126,7 +128,7 @@ export const ToastView: React.FC<ToastProps> = ({
           <Text
             size="sm"
             fontWeight="600" // Semi-bold for better readability
-            marginTop="8px" // 2 × 4px grid
+            marginTop="6px"
             cursor="pointer"
             color={Theme[variant].content.color}
             backgroundColor={Theme[variant].container.backgroundColor}
@@ -135,7 +137,7 @@ export const ToastView: React.FC<ToastProps> = ({
               action();
             }}
             _hover={{ textDecoration: 'underline' }}
-            transition="all 0.2s ease"
+            transition="opacity 0.2s ease, color 0.2s ease"
             {...views?.actionButton}
           >
             {actionText}
@@ -151,16 +153,16 @@ export const ToastView: React.FC<ToastProps> = ({
           border="none"
           cursor="pointer"
           padding="4px" // 1 × 4px grid
-          marginLeft="8px" // 2 × 4px grid
-          marginTop="-4px" // 1 × 4px grid
-          marginRight="-8px" // 2 × 4px grid
-          borderRadius="4px" // 1 × 4px grid
+          marginLeft="8px"
+          marginTop="-2px"
+          marginRight="-4px"
+          borderRadius="9999px"
           onClick={(e: React.MouseEvent) => {
             e.stopPropagation();
             onClose();
           }}
-          _hover={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
-          transition="all 0.2s ease"
+          _hover={{ backgroundColor: 'rgba(15, 23, 42, 0.06)' }}
+          transition="background-color 0.2s ease, opacity 0.2s ease"
           {...views?.closeButton}
         >
           <CloseIcon widthHeight={16} color={Theme[variant].content.color} />

@@ -18,9 +18,9 @@ import { Orientation, Size, Variant } from './NavigationMenu.type';
  */
 export const NavigationMenuSizes: Record<Size, ViewProps> = {
   sm: {
-    padding: '8px 12px', // 2×4px and 3×4px grid
-    fontSize: '12px', // Harmonized font size
-    fontWeight: '500', // Medium weight for better readability
+    padding: '8px 12px',
+    fontSize: '12px',
+    fontWeight: '500',
     media: {
       mobile: {
         padding: '6px 10px',
@@ -29,24 +29,24 @@ export const NavigationMenuSizes: Record<Size, ViewProps> = {
     },
   },
   md: {
-    padding: '12px 16px', // 3×4px and 4×4px grid
-    fontSize: '14px', // Harmonized font size
-    fontWeight: '500', // Medium weight for better readability
+    padding: '10px 14px',
+    fontSize: '14px',
+    fontWeight: '500',
     media: {
       mobile: {
-        padding: '10px 14px',
-        fontSize: '13px',
+        padding: '8px 12px',
+        fontSize: '12px',
       },
     },
   },
   lg: {
-    padding: '16px 20px', // 4×4px and 5×4px grid
-    fontSize: '16px', // Harmonized font size
-    fontWeight: '500', // Medium weight for better readability
+    padding: '12px 16px',
+    fontSize: '14px',
+    fontWeight: '600',
     media: {
       mobile: {
-        padding: '12px 16px',
-        fontSize: '14px',
+        padding: '10px 14px',
+        fontSize: '12px',
       },
     },
   },
@@ -59,12 +59,14 @@ export const NavigationMenuVariants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'transparent',
     color: 'color-gray-800',
-    transition: 'all 0.2s ease',
+    transition:
+      'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
   },
   filled: {
     backgroundColor: 'color-gray-100',
     color: 'color-gray-800',
-    transition: 'all 0.2s ease',
+    transition:
+      'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
   },
   outline: {
     backgroundColor: 'transparent',
@@ -72,7 +74,8 @@ export const NavigationMenuVariants: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
     color: 'color-gray-800',
-    transition: 'all 0.2s ease',
+    transition:
+      'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
   },
 };
 

@@ -30,8 +30,8 @@ export const IconSizes: Record<Size, number> = {
   xs: 12,
   sm: 14,
   md: 16,
-  lg: 20,
-  xl: 24,
+  lg: 18,
+  xl: 20,
 };
 
 /**
@@ -45,13 +45,12 @@ export const dropdownStyles: ViewProps = {
   overflowY: 'auto',
   zIndex: 1000,
   backgroundColor: 'color-white',
-  borderRadius: '10px',
+  borderRadius: 12,
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'color-gray-200',
   // Subtle, layered shadow for depth
-  boxShadow:
-    '0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02)',
+  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
 };
 
 /**
@@ -61,8 +60,7 @@ export const dropdownAnimation = {
   enter: {
     opacity: 1,
     transform: 'translateY(0) scale(1)',
-    transition:
-      'opacity 0.2s ease-out, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+    transition: 'all 0.2s ease-in-out',
   },
   exit: {
     opacity: 0,
@@ -80,9 +78,9 @@ export const dropdownAnimation = {
 export const optionStyles: ViewProps = {
   padding: '10px 12px',
   cursor: 'pointer',
-  borderRadius: '6px',
+  borderRadius: 8, // radius-md
   margin: '2px 4px',
-  transition: 'background-color 0.15s ease',
+  transition: 'all 0.15s ease-in-out',
 };
 
 /**
@@ -112,11 +110,11 @@ export const optionStateStyles = {
 export const chevronAnimation = {
   open: {
     transform: 'rotate(180deg)',
-    transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+    transition: 'all 0.2s ease-in-out',
   },
   closed: {
     transform: 'rotate(0deg)',
-    transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+    transition: 'all 0.2s ease-in-out',
   },
 };
 
@@ -125,12 +123,12 @@ export const chevronAnimation = {
  */
 export const chipStyles: ViewProps = {
   padding: '4px 8px',
-  borderRadius: '6px',
+  borderRadius: 8, // radius-md
   backgroundColor: 'color-gray-100',
-  fontSize: '13px',
+  fontSize: '12px',
   fontWeight: '500',
   color: 'color-gray-700',
-  transition: 'background-color 0.15s ease',
+  transition: 'all 0.15s ease-in-out',
 };
 
 /**

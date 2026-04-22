@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<title>Alerts</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link rel="stylesheet" href="_card.css"/>
+</head>
+<body>
+<div class="card">
+  <div class="col" style="gap:8px;">
+    <div style="display:flex;gap:10px;padding:10px 14px;border-radius:8px;background:#EFF6FF;border:1px solid #DBEAFE;">
+      <i data-lucide="info" style="width:18px;height:18px;color:#1D4ED8;flex:none;margin-top:2px;"></i>
+      <div><div style="font-weight:600;font-size:13px;color:#1E3A8A;">Info</div><div style="font-size:12px;color:#1E40AF;">Heads up — nothing breaks.</div></div>
+    </div>
+    <div style="display:flex;gap:10px;padding:10px 14px;border-radius:8px;background:#F0FDF4;border:1px solid #BBF7D0;">
+      <i data-lucide="check-circle" style="width:18px;height:18px;color:#16A34A;flex:none;margin-top:2px;"></i>
+      <div><div style="font-weight:600;font-size:13px;color:#14532D;">Success</div><div style="font-size:12px;color:#166534;">Your changes were saved.</div></div>
+    </div>
+    <div style="display:flex;gap:10px;padding:10px 14px;border-radius:8px;background:#FEF2F2;border:1px solid #FECACA;">
+      <i data-lucide="alert-circle" style="width:18px;height:18px;color:#DC2626;flex:none;margin-top:2px;"></i>
+      <div><div style="font-weight:600;font-size:13px;color:#7F1D1D;">Danger</div><div style="font-size:12px;color:#991B1B;">Something went wrong. Try again.</div></div>
+    </div>
+  </div>
+</div>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>lucide.createIcons();</script></body></html>

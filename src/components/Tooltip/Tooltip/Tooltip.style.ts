@@ -24,7 +24,7 @@ export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
     default: {
       backgroundColor: 'color-gray-900',
       color: 'color-white',
-      borderRadius: '6px',
+      borderRadius: '8px',
       boxShadow:
         '0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.06)',
       transition: 'opacity 0.15s ease',
@@ -35,7 +35,7 @@ export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
       borderWidth: '1px',
       borderStyle: 'solid',
       borderColor: 'color-gray-200',
-      borderRadius: '6px',
+      borderRadius: '8px',
       boxShadow:
         '0px 4px 6px rgba(0, 0, 0, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.04)',
       transition: 'opacity 0.15s ease',
@@ -43,7 +43,7 @@ export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
     dark: {
       backgroundColor: 'color-gray-950',
       color: 'color-white',
-      borderRadius: '6px',
+      borderRadius: '8px',
       boxShadow:
         '0px 4px 6px rgba(0, 0, 0, 0.2), 0px 2px 4px rgba(0, 0, 0, 0.12)',
       transition: 'opacity 0.15s ease',

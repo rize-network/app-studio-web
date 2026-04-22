@@ -24,7 +24,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
   ({
     // Props from parent
     onSubmit,
-    placeholder = 'Say what you want and Kimmy will surprise you',
+    placeholder = 'Type your message… use @ to mention',
     loading = false,
     disabled = false,
     isAgentRunning = false,
@@ -355,13 +355,16 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
                   disabled={
                     !hasText || loading || (disabled && !isAgentRunning)
                   }
-                  transition="all 0.2s ease"
+                  transition="background-color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease"
                   _hover={{
-                    backgroundColor: isAgentRunning
-                      ? 'color-red-600'
-                      : hasText
-                      ? 'color-blue-600'
-                      : 'color-gray-300',
+                    opacity: hasText || isAgentRunning ? 0.9 : 1,
+                  }}
+                  _active={{
+                    opacity: hasText || isAgentRunning ? 0.95 : 1,
+                  }}
+                  _focusVisible={{
+                    outline: 'none',
+                    boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
                   }}
                   {...views?.submitButton}
                 >
