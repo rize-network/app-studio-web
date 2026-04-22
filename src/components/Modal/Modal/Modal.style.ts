@@ -76,7 +76,7 @@ export const ModalAnimations = {
  * Overlay styles for the Modal component
  */
 export const OverlayStyles: ViewProps = {
-  backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  backgroundColor: 'color-blackAlpha-400',
   transition: 'background-color 0.2s ease',
 };
 

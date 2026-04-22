@@ -173,7 +173,7 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
         paddingHorizontal={24} // 6×4px grid
         borderBottomWidth="1px"
         borderBottomStyle="solid"
-        borderBottomColor="rgba(226, 232, 240, 0.9)"
+        borderBottomColor="color-gray-200"
         media={{
           mobile: {
             paddingVertical: 12, // Smaller padding on mobile
@@ -228,7 +228,7 @@ export const ModalFooter: React.FC<FooterProps> = React.memo(
         paddingHorizontal={24} // 6×4px grid
         borderTopWidth="1px"
         borderTopStyle="solid"
-        borderTopColor="rgba(226, 232, 240, 0.9)"
+        borderTopColor="color-gray-200"
         gap={12} // 3×4px grid
         media={{
           mobile: {

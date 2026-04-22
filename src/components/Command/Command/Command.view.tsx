@@ -277,7 +277,7 @@ export const CommandView: React.FC<
       display="flex"
       alignItems="center"
       justifyContent="center"
-      backgroundColor="rgba(0, 0, 0, 0.4)"
+      backgroundColor="color-blackAlpha-400"
       zIndex={9999}
       onClick={handleBackdropClick}
       {...props}

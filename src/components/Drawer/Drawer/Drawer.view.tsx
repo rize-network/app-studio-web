@@ -140,7 +140,7 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
       paddingHorizontal={24}
       paddingVertical={16}
       borderBottomWidth="1px"
-      borderBottomColor="rgba(226, 232, 240, 0.9)"
+      borderBottomColor="color-gray-200"
       alignItems="center"
       justifyContent={buttonPosition === 'none' ? 'center' : 'space-between'}
       {...props}
@@ -172,7 +172,7 @@ export const DrawerFooter: React.FC<DrawerFooterProps> = ({
       paddingHorizontal={24}
       paddingVertical={16}
       borderTopWidth="1px"
-      borderTopColor="rgba(226, 232, 240, 0.9)"
+      borderTopColor="color-gray-200"
       alignItems="center"
       justifyContent="flex-end"
       gap={12}

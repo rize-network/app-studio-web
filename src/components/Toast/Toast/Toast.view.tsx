@@ -161,7 +161,7 @@ export const ToastView: React.FC<ToastProps> = ({
             e.stopPropagation();
             onClose();
           }}
-          _hover={{ backgroundColor: 'rgba(15, 23, 42, 0.06)' }}
+          _hover={{ backgroundColor: 'color-blackAlpha-100' }}
           transition="background-color 0.2s ease, opacity 0.2s ease"
           {...views?.closeButton}
         >

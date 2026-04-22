@@ -12,7 +12,7 @@ const MockSelect = ({ label, value, options }: any) => (
       justifyContent="space-between"
       width="100%"
       padding="10px 12px"
-      border="1px solid rgba(203, 213, 225, 0.95)"
+      border="1px solid color-gray-300"
       borderRadius="8px"
       alignItems="center"
       backgroundColor="white"
@@ -97,7 +97,7 @@ export const EditPanel: React.FC<EditPanelProps> = ({
       backgroundColor="white"
       borderRadius="12px"
       padding="16px"
-      border="1px solid rgba(226, 232, 240, 0.95)"
+      border="1px solid color-gray-200"
       boxShadow="0 12px 32px rgba(15, 23, 42, 0.12)"
       height="fit-content"
     >
