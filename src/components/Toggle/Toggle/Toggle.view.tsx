@@ -83,10 +83,10 @@ const ToggleView: React.FC<Props> = React.memo(
               }
             : {
                 backgroundColor:
-                  mode === 'light' ? '#EFF6FF' : 'rgba(29, 78, 216, 0.18)',
+                  mode === 'light' ? 'color-blue-50' : 'color-blue-100',
                 borderWidth: 1,
                 borderStyle: 'solid',
-                borderColor: mode === 'light' ? '#BFDBFE' : mainTone,
+                borderColor: mode === 'light' ? 'color-blue-200' : mainTone,
               }),
           color: mainTone,
         })}

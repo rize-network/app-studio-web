@@ -7,68 +7,68 @@ export const getThemes = (themeMode: 'light' | 'dark') => {
   return {
     default: {
       container: {
-        backgroundColor: isDark ? '#1f2937' : '#ffffff',
-        borderColor: isDark ? '#374151' : '#e5e7eb',
+        backgroundColor: isDark ? 'color-gray-800' : 'color-white',
+        borderColor: isDark ? 'color-gray-700' : 'color-gray-200',
         boxShadow:
           '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
       },
       content: {
-        color: isDark ? '#e5e7eb' : '#1f2937',
+        color: isDark ? 'color-gray-200' : 'color-gray-800',
       },
       acceptButton: {
-        backgroundColor: '#3b82f6',
-        color: '#ffffff',
-        hoverBackgroundColor: '#2563eb',
+        backgroundColor: 'color-blue-500',
+        color: 'color-white',
+        hoverBackgroundColor: 'color-blue-600',
       },
       customizeButton: {
         backgroundColor: 'transparent',
-        color: isDark ? '#e5e7eb' : '#4b5563',
-        borderColor: isDark ? '#4b5563' : '#d1d5db',
-        hoverBackgroundColor: isDark ? '#374151' : '#f3f4f6',
+        color: isDark ? 'color-gray-200' : 'color-gray-600',
+        borderColor: isDark ? 'color-gray-600' : 'color-gray-300',
+        hoverBackgroundColor: isDark ? 'color-gray-700' : 'color-gray-100',
       },
     },
     info: {
       container: {
-        backgroundColor: isDark ? '#1e3a8a' : '#eff6ff',
-        borderColor: isDark ? '#1e40af' : '#bfdbfe',
+        backgroundColor: isDark ? 'color-blue-900' : 'color-blue-50',
+        borderColor: isDark ? 'color-blue-800' : 'color-blue-200',
         boxShadow:
           '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
       },
       content: {
-        color: isDark ? '#bfdbfe' : '#1e40af',
+        color: isDark ? 'color-blue-200' : 'color-blue-800',
       },
       acceptButton: {
-        backgroundColor: '#3b82f6',
-        color: '#ffffff',
-        hoverBackgroundColor: '#2563eb',
+        backgroundColor: 'color-blue-500',
+        color: 'color-white',
+        hoverBackgroundColor: 'color-blue-600',
       },
       customizeButton: {
         backgroundColor: 'transparent',
-        color: isDark ? '#bfdbfe' : '#1e40af',
-        borderColor: isDark ? '#3b82f6' : '#93c5fd',
-        hoverBackgroundColor: isDark ? '#1e40af' : '#dbeafe',
+        color: isDark ? 'color-blue-200' : 'color-blue-800',
+        borderColor: isDark ? 'color-blue-500' : 'color-blue-300',
+        hoverBackgroundColor: isDark ? 'color-blue-800' : 'color-blue-100',
       },
     },
     primary: {
       container: {
-        backgroundColor: isDark ? '#0c4a6e' : '#f0f9ff',
-        borderColor: isDark ? '#0369a1' : '#bae6fd',
+        backgroundColor: isDark ? 'color-lightBlue-900' : 'color-lightBlue-50',
+        borderColor: isDark ? 'color-lightBlue-700' : 'color-lightBlue-200',
         boxShadow:
           '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
       },
       content: {
-        color: isDark ? '#bae6fd' : '#0369a1',
+        color: isDark ? 'color-lightBlue-200' : 'color-lightBlue-700',
       },
       acceptButton: {
-        backgroundColor: '#0ea5e9',
-        color: '#ffffff',
-        hoverBackgroundColor: '#0284c7',
+        backgroundColor: 'color-lightBlue-500',
+        color: 'color-white',
+        hoverBackgroundColor: 'color-lightBlue-600',
       },
       customizeButton: {
         backgroundColor: 'transparent',
-        color: isDark ? '#bae6fd' : '#0369a1',
-        borderColor: isDark ? '#0ea5e9' : '#7dd3fc',
-        hoverBackgroundColor: isDark ? '#0369a1' : '#e0f2fe',
+        color: isDark ? 'color-lightBlue-200' : 'color-lightBlue-700',
+        borderColor: isDark ? 'color-lightBlue-500' : 'color-lightBlue-300',
+        hoverBackgroundColor: isDark ? 'color-lightBlue-700' : 'color-lightBlue-100',
       },
     },
   };

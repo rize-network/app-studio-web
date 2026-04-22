@@ -16,23 +16,17 @@ export const getToggleVariants = (
   isLight: boolean
 ): Record<Variant, ViewProps> => ({
   outline: {
-    backgroundColor: isLight ? 'color-white' : 'rgba(15, 23, 42, 0.92)',
+    backgroundColor: isLight ? 'color-white' : 'color-gray-900',
     color: color,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: isLight
-      ? 'rgba(226, 232, 240, 0.95)'
-      : 'rgba(71, 85, 105, 0.9)',
+    borderColor: isLight ? 'color-gray-200' : 'color-gray-600',
     _hover: {
-      backgroundColor: isLight
-        ? 'rgba(248, 250, 252, 0.96)'
-        : 'rgba(30, 41, 59, 0.95)',
-      borderColor: isLight ? '#CBD5E1' : '#64748B',
+      backgroundColor: isLight ? 'color-gray-50' : 'color-gray-800',
+      borderColor: isLight ? 'color-gray-300' : 'color-gray-500',
     },
     _active: {
-      backgroundColor: isLight
-        ? 'rgba(241, 245, 249, 1)'
-        : 'rgba(30, 41, 59, 1)',
+      backgroundColor: isLight ? 'color-gray-100' : 'color-gray-800',
     },
     transition:
       'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
@@ -44,14 +38,10 @@ export const getToggleVariants = (
     borderStyle: 'none',
     borderColor: 'transparent',
     _hover: {
-      backgroundColor: isLight
-        ? 'rgba(248, 250, 252, 0.96)'
-        : 'rgba(30, 41, 59, 0.85)',
+      backgroundColor: isLight ? 'color-gray-50' : 'color-gray-800',
     },
     _active: {
-      backgroundColor: isLight
-        ? 'rgba(241, 245, 249, 1)'
-        : 'rgba(30, 41, 59, 1)',
+      backgroundColor: isLight ? 'color-gray-100' : 'color-gray-800',
     },
     transition: 'background-color 0.2s ease, color 0.2s ease',
   },
