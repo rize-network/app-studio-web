@@ -362,9 +362,9 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                         {...optionStyles}
                         backgroundColor={
                           isSelected && isHighlighted
-                            ? 'rgba(59, 130, 246, 0.12)'
+                            ? 'color-blue-100'
                             : isSelected
-                            ? 'rgba(59, 130, 246, 0.08)'
+                            ? 'color-blue-50'
                             : isHighlighted
                             ? 'color-gray-100'
                             : 'transparent'

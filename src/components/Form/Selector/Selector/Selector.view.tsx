@@ -78,7 +78,7 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               // Simplification: if color provided, use it for border/text.
               // Background is hard to derive without more specific props.
               // Let's try to use a very light opacity of the color for background.
-              backgroundColor = 'rgba(0,0,0,0.05)'; // Generic active background
+              backgroundColor = 'color-blackAlpha-200'; // Generic active background
             } else {
               // Default active style
               const primary = getColor('theme-primary');

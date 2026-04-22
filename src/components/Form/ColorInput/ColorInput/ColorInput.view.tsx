@@ -82,7 +82,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
         '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(29, 78, 216, 0.16)',
     }),
     ...(isHovered &&
-      !isDisabled && { borderColor: 'rgba(148, 163, 184, 0.9)' }),
+      !isDisabled && { borderColor: 'color-gray-400' }),
     ...views?.trigger,
     ...(shadow && shadow),
   };
@@ -191,7 +191,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                 title={colorOption.name}
                 _hover={{
                   transform: 'scale(1.05)',
-                  borderColor: 'rgba(148, 163, 184, 0.9)',
+                  borderColor: 'color-gray-400',
                 }}
                 {...views?.colorSwatch}
               />
@@ -217,7 +217,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                     borderColor={
                       selectedColor === color
                         ? 'theme-primary'
-                        : 'rgba(203, 213, 225, 0.95)'
+                        : 'color-gray-300'
                     }
                     cursor="pointer"
                     transition="transform 0.2s ease, border-color 0.2s ease"
@@ -225,7 +225,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                     title={color}
                     _hover={{
                       transform: 'scale(1.05)',
-                      borderColor: 'rgba(148, 163, 184, 0.9)',
+                      borderColor: 'color-gray-400',
                     }}
                   />
                 ))}
@@ -255,7 +255,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                   cursor="pointer"
                   onClick={handleCustomColorSubmit}
                   transition="background-color 0.2s ease, opacity 0.2s ease"
-                  _hover={{ backgroundColor: '#1D4ED8' }}
+                  _hover={{ backgroundColor: 'color-blue-700' }}
                 >
                   <Text color="color-white" fontSize="12px" fontWeight="500">
                     Add
