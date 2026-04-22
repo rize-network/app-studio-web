@@ -68,7 +68,9 @@ export const getThemes = (themeMode: 'light' | 'dark') => {
         backgroundColor: 'transparent',
         color: isDark ? 'color-lightBlue-200' : 'color-lightBlue-700',
         borderColor: isDark ? 'color-lightBlue-500' : 'color-lightBlue-300',
-        hoverBackgroundColor: isDark ? 'color-lightBlue-700' : 'color-lightBlue-100',
+        hoverBackgroundColor: isDark
+          ? 'color-lightBlue-700'
+          : 'color-lightBlue-100',
       },
     },
   };
