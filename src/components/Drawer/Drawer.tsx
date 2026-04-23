@@ -7,6 +7,7 @@ import {
   DrawerBody,
   DrawerFooter,
 } from './Drawer/Drawer.view';
+import { DrawerLayout } from './Drawer/Drawer.layout';
 
 /**
  * A drawer is a panel that slides out from the edge of the screen.
@@ -42,3 +43,4 @@ Drawer.Container = DrawerContainer;
 Drawer.Header = DrawerHeader;
 Drawer.Body = DrawerBody;
 Drawer.Footer = DrawerFooter;
+Drawer.Layout = DrawerLayout;

@@ -36,12 +36,19 @@ export interface DrawerProps extends ViewProps {
   children?: React.ReactNode;
 }
 
+export interface DrawerLayoutProps extends ViewProps {
+  drawers: { [key: string]: React.ComponentType<any> };
+  onShow?: (name: string, props?: any) => void;
+  onHide?: (name?: string) => void;
+}
+
 export interface DrawerType extends React.FC<DrawerProps> {
   Overlay: React.FC<DrawerOverlayProps>;
   Container: React.FC<DrawerContainerProps>;
   Header: React.FC<DrawerHeaderProps>;
   Body: React.FC<DrawerBodyProps>;
   Footer: React.FC<DrawerFooterProps>;
+  Layout: React.FC<DrawerLayoutProps>;
 }
 
 export interface DrawerOverlayProps extends ViewProps {

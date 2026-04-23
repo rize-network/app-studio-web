@@ -411,6 +411,114 @@ export const FormDrawer = () => {
 };
 ```
 
+### **Drawer.Layout (Store API)**
+The `Drawer.Layout` component enables an imperative store-based API for opening and closing drawers from anywhere in your app — the same pattern used by `Modal.Layout`. Register your drawers once with `Drawer.Layout`, then call `showDrawer(name, props)` / `hideDrawer(name?)` to control them without managing `isOpen` state manually.
+
+**`DrawerLayoutProps`**
+
+- **`drawers`** — `{ [name: string]: React.ComponentType<any> }` — Map of drawer names to the React components that render their content. Required.
+- **`onShow`** — `(name: string, props?: any) => void` — Optional callback fired when a drawer is shown.
+- **`onHide`** — `(name?: string) => void` — Optional callback fired when a drawer is hidden.
+
+**Store helpers**
+
+- **`showDrawer(name, drawerProps?, overlayProps?)`** — Opens a registered drawer. `drawerProps` can include `placement`, `size`, `isClosePrevented`, `blur`, `containerProps`, plus any props passed through to your drawer content.
+- **`hideDrawer(name?)`** — Closes a specific drawer by name, or all drawers when called without arguments.
+
+```tsx
+import React from 'react';
+import { Drawer } from '@app-studio/web';
+import { showDrawer, hideDrawer } from '@app-studio/web';
+import { Button, Text } from 'app-studio';
+
+export const StoreDrawer = () => {
+  return (
+    <>
+      <Button
+        onClick={() =>
+          showDrawer('StoreDrawer', { placement: 'right', size: 'md' })
+        }
+      >
+        Open Store Drawer
+      </Button>
+
+      <Drawer.Layout
+        drawers={{
+          StoreDrawer: () => (
+            <>
+              <Drawer.Header>
+                <Text size="lg" weight="semiBold">
+                  Store Drawer
+                </Text>
+              </Drawer.Header>
+              <Drawer.Body>
+                <Text>
+                  This drawer is opened via the store API, the same way the
+                  Modal works. Call showDrawer('StoreDrawer') to open it and
+                  hideDrawer() to close it.
+                </Text>
+              </Drawer.Body>
+              <Drawer.Footer>
+                <Button variant="outline" onClick={() => hideDrawer()}>
+                  Cancel
+                </Button>
+                <Button onClick={() => hideDrawer()}>Save</Button>
+              </Drawer.Footer>
+            </>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **Store Placements**
+Reuse a single registered drawer and vary its placement dynamically by passing `placement` into `showDrawer`.
+
+```tsx
+import React from 'react';
+import { Drawer } from '@app-studio/web';
+import { showDrawer } from '@app-studio/web';
+import { Button, Horizontal, Vertical, Text } from 'app-studio';
+
+export const StorePlacements = () => {
+  const openDrawer = (placement: 'left' | 'right' | 'top' | 'bottom') => {
+    showDrawer('StorePlacementDrawer', { placement, size: 'md' });
+  };
+
+  return (
+    <Vertical gap={10}>
+      <Horizontal gap={10}>
+        <Button onClick={() => openDrawer('left')}>Left</Button>
+        <Button onClick={() => openDrawer('right')}>Right</Button>
+        <Button onClick={() => openDrawer('top')}>Top</Button>
+        <Button onClick={() => openDrawer('bottom')}>Bottom</Button>
+      </Horizontal>
+
+      <Drawer.Layout
+        drawers={{
+          StorePlacementDrawer: () => (
+            <>
+              <Drawer.Header>
+                <Text fontWeight="bold">Store Drawer</Text>
+              </Drawer.Header>
+              <Drawer.Body>
+                <Text>
+                  This drawer is opened via the store with different
+                  placements using showDrawer('StorePlacementDrawer',
+                  {'{'} placement, size {'}'}).
+                </Text>
+              </Drawer.Body>
+            </>
+          ),
+        }}
+      />
+    </Vertical>
+  );
+};
+```
+
 ### **Details Drawer**
 Showing detailed information in a drawer.
 

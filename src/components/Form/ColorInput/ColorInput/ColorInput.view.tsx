@@ -81,8 +81,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       boxShadow:
         '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(29, 78, 216, 0.16)',
     }),
-    ...(isHovered &&
-      !isDisabled && { borderColor: 'color-gray-400' }),
+    ...(isHovered && !isDisabled && { borderColor: 'color-gray-400' }),
     ...views?.trigger,
     ...(shadow && shadow),
   };
