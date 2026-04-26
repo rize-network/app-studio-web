@@ -29,8 +29,7 @@ import {
   MenubarOrientations,
   MenubarItemStates,
 } from './Menubar.style';
-
-// Create context for the Menubar
+// Initializes the MenubarContext with default values, providing a central place to manage the state and actions for menubar items.
 const MenubarContext = createContext<MenubarContextType>({
   activeMenuId: null,
   setActiveMenuId: () => {},
@@ -43,11 +42,9 @@ const MenubarContext = createContext<MenubarContextType>({
   variant: 'default',
   triggerRefs: { current: {} },
 });
-
-// Hook to use the Menubar context
+// A custom hook to conveniently access the current context values from the MenubarContext, allowing components to interact with menubar state.
 export const useMenubarContext = () => useContext(MenubarContext);
-
-// Provider component for the Menubar context
+// Provides the menubar context to its child components, making menubar-related state and functions available throughout the menubar's sub-components.
 export const MenubarProvider: React.FC<{
   value: MenubarContextType;
   children: React.ReactNode;
@@ -56,8 +53,7 @@ export const MenubarProvider: React.FC<{
     <MenubarContext.Provider value={value}>{children}</MenubarContext.Provider>
   );
 };
-
-// Menubar Root component
+// The root component for the menubar, responsible for defining the overall orientation, size, and variant, and rendering its children within a flexible container.
 export const MenubarRoot: React.FC<MenubarRootProps> = ({
   children,
   orientation = 'horizontal',
@@ -66,8 +62,8 @@ export const MenubarRoot: React.FC<MenubarRootProps> = ({
   views,
   ...props
 }) => {
+  // Dynamically selects the layout container (Horizontal or Vertical) based on the menubar's specified orientation.
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
-
   return (
     <Container
       role="menubar"
@@ -81,8 +77,6 @@ export const MenubarRoot: React.FC<MenubarRootProps> = ({
     </Container>
   );
 };
-
-// Menubar Menu component
 export const MenubarMenu: React.FC<MenubarMenuProps> = ({
   children,
   id,
@@ -91,7 +85,6 @@ export const MenubarMenu: React.FC<MenubarMenuProps> = ({
 }) => {
   const { orientation } = useMenubarContext();
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
-
   return (
     <Container
       role="none"
@@ -102,7 +95,6 @@ export const MenubarMenu: React.FC<MenubarMenuProps> = ({
     >
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          // Pass the menuId to MenubarTrigger and MenubarContent
           return React.cloneElement(child, {
             ...child.props,
             menuId: id,
@@ -113,8 +105,6 @@ export const MenubarMenu: React.FC<MenubarMenuProps> = ({
     </Container>
   );
 };
-
-// Menubar Trigger component
 export const MenubarTrigger: React.FC<MenubarTriggerProps> = ({
   children,
   menuId,
@@ -129,12 +119,9 @@ export const MenubarTrigger: React.FC<MenubarTriggerProps> = ({
     size,
     triggerRefs,
   } = useMenubarContext();
-
   const triggerRef = useRef<HTMLDivElement>(null);
   const isActive = activeMenuId === menuId;
   const isOpen = isMenuOpen(menuId);
-
-  // Store the trigger ref in the context
   useEffect(() => {
     if (triggerRef.current && menuId) {
       triggerRefs.current[menuId] = triggerRef.current;
@@ -145,14 +132,11 @@ export const MenubarTrigger: React.FC<MenubarTriggerProps> = ({
       }
     };
   }, [menuId, triggerRefs]);
-
   const handleClick = () => {
     if (disabled) return;
-
     setActiveMenuId(menuId);
     toggleMenu(menuId);
   };
-
   return (
     <View
       ref={triggerRef}
@@ -175,51 +159,36 @@ export const MenubarTrigger: React.FC<MenubarTriggerProps> = ({
     </View>
   );
 };
-
-// Menubar Content component
 export const MenubarContent: React.FC<MenubarContentProps> = ({
   children,
   menuId,
   views,
 }) => {
   const { isMenuOpen, orientation, triggerRefs } = useMenubarContext();
-
   const contentRef = useRef<HTMLDivElement>(null);
   const [optimalPosition, setOptimalPosition] = useState({
     x: 0,
     y: 0,
     placement: orientation === 'horizontal' ? 'bottom' : 'right',
   });
-
   const isOpen = isMenuOpen(menuId);
-
-  // Calculate optimal position when the menu opens
   useEffect(() => {
     if (isOpen && contentRef.current && menuId && triggerRefs.current[menuId]) {
       const contentRect = contentRef.current.getBoundingClientRect();
       const triggerRect = triggerRefs.current[menuId]!.getBoundingClientRect();
-
-      // Get content dimensions
       const contentWidth = Math.max(contentRect.width || 200, 200);
       const contentHeight = Math.max(contentRect.height || 150, 150);
-
-      // Get viewport dimensions
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-
-      // Calculate available space on all sides from the trigger
       const availableSpace = {
         top: triggerRect.top,
         right: viewportWidth - triggerRect.right,
         bottom: viewportHeight - triggerRect.bottom,
         left: triggerRect.left,
       };
-
-      // Determine optimal placement based on orientation and available space
       const placements =
         orientation === 'horizontal'
           ? [
-              // For horizontal menubar, prefer bottom placement
               {
                 placement: 'bottom' as const,
                 space: availableSpace.bottom,
@@ -250,7 +219,6 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
               },
             ]
           : [
-              // For vertical menubar, prefer right placement
               {
                 placement: 'right' as const,
                 space: availableSpace.right,
@@ -280,8 +248,6 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
                 y: triggerRect.top - contentHeight - 8,
               },
             ];
-
-      // Find the best fitting placement
       const fittingPlacement = placements.find((p) => p.fits);
       if (fittingPlacement) {
         setOptimalPosition({
@@ -291,16 +257,11 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
         });
         return;
       }
-
-      // If nothing fits, choose the placement with the most space
       const bestPlacement = placements.reduce((best, current) =>
         current.space > best.space ? current : best
       );
-
-      // Ensure the content stays within viewport bounds
       let finalX = bestPlacement.x;
       let finalY = bestPlacement.y;
-
       if (finalX + contentWidth > viewportWidth) {
         finalX = viewportWidth - contentWidth - 8;
       }
@@ -313,7 +274,6 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
       if (finalY < 8) {
         finalY = 8;
       }
-
       setOptimalPosition({
         x: finalX,
         y: finalY,
@@ -321,19 +281,15 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
       });
     }
   }, [isOpen, orientation, menuId, triggerRefs]);
-
   if (!isOpen) {
     return null;
   }
-
-  // Create intelligent positioning styles
   const positionStyles: React.CSSProperties = {
-    position: 'fixed', // Use fixed positioning since we calculated viewport coordinates
+    position: 'fixed',
     left: optimalPosition.x,
     top: optimalPosition.y,
     zIndex: 1000,
   };
-
   return (
     <View
       ref={contentRef}
@@ -348,32 +304,23 @@ export const MenubarContent: React.FC<MenubarContentProps> = ({
       {...views?.content}
     >
       {children}
-      {/* Debug info - can be removed in production */}
-      {/* {process.env.NODE_ENV === 'development' && (
-        <div style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}>
-          Placement: {optimalPosition.placement}
-        </div>
-      )} */}
+      {}
+      {}
     </View>
   );
 };
-
-// Menubar Item component
 export const MenubarItem: React.FC<MenubarItemProps> = ({
   children,
-  // id,
   icon,
   disabled = false,
   onClick,
   views,
 }) => {
   const { size } = useMenubarContext();
-
   const handleClick = () => {
     if (disabled || !onClick) return;
     onClick();
   };
-
   return (
     <View
       role="menuitem"
@@ -396,8 +343,6 @@ export const MenubarItem: React.FC<MenubarItemProps> = ({
     </View>
   );
 };
-
-// Menubar Separator component
 export const MenubarSeparator: React.FC<MenubarSeparatorProps> = ({
   views,
 }) => {
@@ -411,8 +356,6 @@ export const MenubarSeparator: React.FC<MenubarSeparatorProps> = ({
     />
   );
 };
-
-// Main Menubar View component
 export const MenubarView: React.FC<
   {
     items: MenubarItemType[];
@@ -444,7 +387,6 @@ export const MenubarView: React.FC<
             )}
             {item.label}
           </MenubarTrigger>
-
           {item.items && item.items.length > 0 && (
             <MenubarContent menuId={item.id} views={views}>
               {item.items.map((subItem, index) => {
@@ -456,7 +398,6 @@ export const MenubarView: React.FC<
                     />
                   );
                 }
-
                 return (
                   <MenubarItem
                     key={subItem.id}

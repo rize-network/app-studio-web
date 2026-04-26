@@ -2,177 +2,77 @@ import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../utils/elevation';
 import { Shape, Size, Variant } from '../../Input/Input.type';
 import { OTPInputStyles, OTPInputType } from './OTPInput.type';
-
+// Defines the core properties for the OTPInput component, extending standard input properties while omitting 'size' to use a custom one.
 export interface OTPInputProps extends Omit<InputProps, 'size'> {
-  /**
-   * Unique identifier for the OTP input
-   */
+  // A unique identifier for the OTP input field.
   id?: string;
-
-  /**
-   * Error state for validation
-   */
+  // An error object or message to display for validation feedback.
   error?: any;
-
-  /**
-   * Helper text displayed below the input
-   */
+  // Supplemental text to guide the user or provide additional information.
   helperText?: string;
-
-  /**
-   * Name attribute for form submission
-   */
+  // The name attribute for the input field, useful for form submission.
   name?: string;
-
-  /**
-   * Label text for the input
-   */
+  // A descriptive label for the OTP input component.
   label?: string;
-
-  /**
-   * Number of OTP input fields
-   */
+  // The total number of digits/characters expected in the OTP.
   length?: number;
-
-  /**
-   * Placeholder text for each input field
-   */
+  // Placeholder text displayed when the input field is empty.
   placeholder?: string;
-
-  /**
-   * Whether the input is read-only
-   */
+  // Indicates whether the input field should be read-only.
   isReadOnly?: boolean;
-
-  /**
-   * Whether the input is disabled
-   */
+  // Indicates whether the input field should be disabled.
   isDisabled?: boolean;
-
-  /**
-   * Whether the first input should be auto-focused
-   */
+  // Determines if the input field should automatically gain focus on component mount.
   isAutoFocus?: boolean;
-
-  /**
-   * The type of input to display
-   * - 'text': Regular text input (default)
-   * - 'password': Masked input for secure entry
-   * - 'number': Numeric input (uses text with inputMode="numeric" for better UX)
-   */
+  // Specifies the type of OTP input (e.g., numeric, alphanumeric).
   type?: OTPInputType;
-
-  /**
-   * Callback fired when all input boxes have been filled
-   * Receives the complete OTP string
-   */
+  // Callback function invoked when all OTP digits have been entered.
   onComplete?: (value: string) => void;
-
-  /**
-   * Callback when the OTP value changes
-   */
+  // Callback function invoked when the value of the input changes.
   onChange?: (value: string) => void;
-
-  /**
-   * Callback when the OTP text changes
-   */
+  // Callback function invoked when the text content of the input changes.
   onChangeText?: (value: string) => void;
-
-  /**
-   * Callback when an input field loses focus
-   */
+  // Callback function invoked when the input field loses focus.
   onBlur?: (value: any) => void;
-
+  // Callback function invoked when a key is pressed down and then released.
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-
+  // Callback function invoked when a key is pressed down.
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-
-  /**
-   * Callback when an input field is clicked
-   */
+  // Callback function invoked when the input field is clicked.
   onClick?: () => void;
-
-  /**
-   * Callback when an input field gains focus
-   */
+  // Callback function invoked when the input field gains focus.
   onFocus?: () => void;
-
-  /**
-   * Pattern for input validation
-   * Can be a RegExp or a string pattern
-   */
+  // A regular expression or string pattern to validate the input.
   pattern?: RegExp | string;
-
-  /**
-   * Function to transform pasted content
-   */
+  // A function to transform pasted content before it's processed by the input.
   pasteTransformer?: (pasted: string) => string;
-
-  /**
-   * Specific values that the OTP input can take
-   * Used for step-based OTP input
-   */
+  // An array of numbers used for specific stepping behavior, if applicable.
   stepValues?: number[];
-
-  /**
-   * Size of the input fields
-   */
+  // Determines the visual size of the OTP input component.
   size?: Size;
-
-  /**
-   * Shadow effect for the input fields
-   */
+  // Applies shadow styling to the OTP input, supporting various shadow types.
   shadow?: Shadow | Elevation | ViewProps;
-
-  /**
-   * Shape of the input fields
-   */
+  // Defines the visual shape of the OTP input fields (e.g., rounded, square).
   shape?: Shape;
-
-  /**
-   * Variant of the input fields
-   */
+  // Specifies the visual variant of the OTP input (e.g., filled, outlined).
   variant?: Variant;
-
-  /**
-   * Gap between input fields
-   */
+  // The spacing in pixels between individual OTP digit input fields.
   gap?: number;
-
-  /**
-   * Custom styling for the component
-   */
+  // Custom styles to be applied to different parts of the OTP input component.
   views?: OTPInputStyles;
 }
-
+// Extends OTPInputProps with additional properties specific to the view component's internal state and handlers.
 export interface OTPInputViewProps extends OTPInputProps {
-  /**
-   * Current OTP value
-   */
+  // The current string value of the OTP input.
   value: string;
-
-  /**
-   * Whether the input is focused
-   */
+  // A boolean indicating whether the OTP input currently has focus.
   isFocused: boolean;
-
-  /**
-   * Whether the input is hovered
-   */
+  // A boolean indicating whether the mouse cursor is currently hovering over the OTP input.
   isHovered: boolean;
-
-  /**
-   * Setter for the OTP value
-   */
+  // A function to update the OTP input's value.
   setValue: (value: string) => void;
-
-  /**
-   * Setter for the focused state
-   */
+  // A function to set the focus state of the OTP input.
   setIsFocused: (isFocused: boolean) => void;
-
-  /**
-   * Setter for the hovered state
-   */
+  // A function to set the hover state of the OTP input.
   setIsHovered: (isHovered: boolean) => void;
 }

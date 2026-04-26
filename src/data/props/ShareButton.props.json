@@ -1,60 +1,102 @@
 {
-  "componentDescription": "A button that allows users to share content from the web application using the device's native sharing capabilities.",
+  "componentDescription": "Enables sharing content via the Web Share API with a customizable button.",
   "shareData": {
     "type": "NavigatorShareData",
     "typeValues": [],
-    "description": "Specifies the data to be shared, conforming to the NavigatorShareData type.",
-    "defaultValue": ""
+    "description": "Specifies the data (e.g., URL, text, title) to be shared using the Web Share API.",
+    "defaultValue": "undefined"
   },
   "label": {
     "type": "React.ReactNode",
     "typeValues": [],
-    "description": "Optional content to display inside the share button.",
-    "defaultValue": "Share (if children also not provided)"
+    "description": "Defines the content displayed within the share button, which can be any React node.",
+    "defaultValue": "\"Share\""
   },
   "onShareStart": {
     "type": "() => void",
     "typeValues": [],
-    "description": "Callback function triggered when the share process is initiated.",
-    "defaultValue": ""
+    "description": "A callback function executed just before the sharing process is initiated.",
+    "defaultValue": "undefined"
   },
   "onShareSuccess": {
     "type": "() => void",
     "typeValues": [],
-    "description": "Callback function invoked upon successful completion of the sharing action.",
-    "defaultValue": ""
+    "description": "A callback function executed when the sharing operation successfully completes.",
+    "defaultValue": "undefined"
   },
   "onShareCancel": {
     "type": "() => void",
     "typeValues": [],
-    "description": "Callback function executed if the user cancels the sharing operation.",
-    "defaultValue": ""
+    "description": "A callback function executed if the user cancels the sharing dialog.",
+    "defaultValue": "undefined"
   },
   "onShareError": {
     "type": "(error: unknown) => void",
     "typeValues": [],
-    "description": "Callback function called if an error occurs during the sharing process.",
-    "defaultValue": ""
+    "description": "A callback function executed if an error occurs during the sharing process, providing the error object.",
+    "defaultValue": "undefined"
   },
   "onUnsupported": {
     "type": "() => void",
     "typeValues": [],
-    "description": "Callback function invoked if the Web Share API is not supported by the browser.",
-    "defaultValue": ""
+    "description": "A callback function executed if the Web Share API is not supported by the user's browser.",
+    "defaultValue": "undefined"
   },
   "disableWhenUnsupported": {
     "type": "boolean",
-    "typeValues": [
-      true,
-      false
-    ],
-    "description": "If true, the button will be disabled when the Web Share API is not supported.",
-    "defaultValue": true
+    "typeValues": [],
+    "description": "A boolean property that determines whether the share button should be disabled if the Web Share API is unsupported.",
+    "defaultValue": "true"
   },
   "onClick": {
-    "type": "ButtonProps['onClick']",
+    "type": "React.MouseEventHandler<HTMLButtonElement>",
     "typeValues": [],
-    "description": "Optional click handler for the button, in addition to or instead of the default share behavior.",
-    "defaultValue": ""
+    "description": "An optional click handler for the button, overriding the default `onClick` from `ButtonProps`.",
+    "defaultValue": "undefined"
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "React children to be rendered inside the button, providing a flexible way to add content and overriding the 'label' prop.",
+    "defaultValue": "\"Share\""
+  },
+  "icon": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "A custom icon component to render within the button. If not provided, a default ShareIcon will be used.",
+    "defaultValue": "ShareIcon component"
+  },
+  "size": {
+    "type": "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Specifies the predefined size of the button and its default icon.",
+    "defaultValue": "'md'"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean prop that explicitly disables the button, preventing user interaction.",
+    "defaultValue": "false"
+  },
+  "isLoading": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean prop that, when true, displays a loading spinner within the button.",
+    "defaultValue": "false"
+  },
+  "iconPosition": {
+    "type": "'left' | 'right'",
+    "typeValues": [
+      "left",
+      "right"
+    ],
+    "description": "Determines the placement of the icon relative to the button's text.",
+    "defaultValue": "'left'"
   }
 }

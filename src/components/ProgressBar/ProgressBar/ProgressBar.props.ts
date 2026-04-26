@@ -1,80 +1,43 @@
 import { ViewProps } from 'app-studio';
-
 export interface ProgressBarStyles {
+  // Defines styles for the main container of the progress bar.
   container?: ViewProps;
+  // Defines styles for the progress bar's actual filling element.
   bar?: ViewProps;
-  // Circular specific styles
+  // Defines SVG attributes for the progress bar's track (the background path for circular progress).
   track?: React.SVGAttributes<SVGCircleElement>;
+  // Defines SVG attributes for the progress bar's indicator element (e.g., a circle at the end of a circular bar).
   indicator?: React.SVGAttributes<SVGCircleElement>;
+  // Defines styles for the text label displayed on the progress bar.
   text?: ViewProps;
 }
-
 export interface ProgressBarProps extends ViewProps {
-  /**
-   * The shape of the progress bar
-   * @default 'linear'
-   */
+  // Specifies the visual shape of the progress bar, either linear or circular.
   shape?: 'linear' | 'circle';
-
-  /**
-   * Current progress value
-   */
+  // Represents the current progress value of the bar.
   value?: number;
-  /**
-   * Maximum progress value
-   */
+  // Defines the maximum possible value for the progress bar.
   max?: number;
-  /**
-   * Color of the filled portion
-   */
+  // Sets the color of the progress bar's filling portion.
   color?: string;
-  /**
-   * Background color of the track
-   */
+  // Sets the background color of the progress bar's track.
   backgroundColor?: string;
-  /**
-   * Height of the progress bar (linear) or size (circle)
-   */
+  // Specifies the height of a linear progress bar.
   height?: number | string;
-
-  /**
-   * Diameter of the circle (alias for height/width when shape is circle)
-   */
+  // Defines the overall size (diameter) for a circular progress bar.
   size?: number;
-
-  /**
-   * Border radius for rounded corners (linear only)
-   */
+  // Specifies the radius of a circular progress bar.
   radius?: number | string;
-
-  /**
-   * Width of the stroke (circle only)
-   */
+  // Determines the thickness of the circular progress bar's stroke.
   strokeWidth?: number;
-
-  /**
-   * Whether to show the percentage label in the center (circle only)
-   */
+  // Controls the visibility of the progress percentage label.
   showLabel?: boolean;
-
-  /**
-   * Color of the label text (circle only)
-   */
+  // Sets the color of the progress percentage label.
   labelColor?: string;
-
-  /**
-   * Whether to animate the progress change smoothly
-   * @default true
-   */
+  // Enables or disables animation for the progress bar's changes.
   animated?: boolean;
-
-  /**
-   * Duration of the animation
-   */
+  // Specifies the duration of the animation for progress changes.
   animationDuration?: string;
-
-  /**
-   * Custom styles for container or bar
-   */
+  // Provides custom style overrides for different sub-components of the progress bar.
   views?: ProgressBarStyles;
 }

@@ -1,0 +1,314 @@
+# EmojiPicker
+
+A component for selecting emojis from a categorized list, including search and recent options.
+
+### **Import**
+```tsx
+import { EmojiPicker } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { EmojiPicker } from '../EmojiPicker';
+
+export const DefaultEmojiPicker = () => (
+  <EmojiPicker
+    label="Choose an emoji"
+    placeholder="Select an emoji"
+    onChange={(emoji) => console.log('Selected emoji:', emoji)}
+    onEmojiSelect={(emoji) => console.log('Selected emoji object:', emoji)}
+  />
+);
+```
+
+### **customEmojis**
+An array of custom Emoji objects to be included in the picker.
+
+- **Type:** `Emoji[]`
+
+```tsx
+import React from 'react';
+import { EmojiPicker } from '../EmojiPicker';
+
+export const CustomEmojisEmojiPicker = () => (
+  <EmojiPicker
+    label="Custom emoji set"
+    customEmojis={[
+      {
+        emoji: '🚀',
+        name: 'rocket',
+        category: 'objects',
+        keywords: ['rocket', 'space', 'launch'],
+      },
+      {
+        emoji: '⭐',
+        name: 'star',
+        category: 'symbols',
+        keywords: ['star', 'favorite', 'rating'],
+      },
+      {
+        emoji: '🎯',
+        name: 'target',
+        category: 'activities',
+        keywords: ['target', 'goal', 'aim'],
+      },
+      {
+        emoji: '💎',
+        name: 'diamond',
+        category: 'objects',
+        keywords: ['diamond', 'gem', 'precious'],
+      },
+      {
+        emoji: '🔥',
+        name: 'fire',
+        category: 'symbols',
+        keywords: ['fire', 'hot', 'trending'],
+      },
+      {
+        emoji: '⚡',
+        name: 'lightning',
+        category: 'symbols',
+        keywords: ['lightning', 'fast', 'energy'],
+      },
+    ]}
+    enabledCategories={['recent', 'objects', 'symbols', 'activities']}
+    showSearch={true}
+    showRecentEmojis={true}
+    placeholder="Choose from custom emojis"
+    onChange={(emoji) => console.log('Selected custom emoji:', emoji)}
+  />
+);
+```
+
+### **Controlled**
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical, Horizontal } from 'app-studio';
+import { EmojiPicker } from '../EmojiPicker';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+
+export const ControlledEmojiPicker = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedEmoji, setSelectedEmoji] = useState('🎉');
+
+  return (
+    <Vertical gap={16}>
+      <Text fontWeight="bold">Controlled EmojiPicker</Text>
+
+      <EmojiPicker
+        label="Controlled Emoji Picker"
+        value={selectedEmoji}
+        isOpen={isOpen}
+        onChange={setSelectedEmoji}
+        onOpen={() => setIsOpen(true)}
+        onClose={() => setIsOpen(false)}
+        closeOnSelect={false}
+        placeholder="Controlled picker"
+      />
+
+      <Horizontal gap={8}>
+        <Button variant="outline" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? 'Close' : 'Open'} Picker
+        </Button>
+
+        <Button variant="outline" onClick={() => setSelectedEmoji('😀')}>
+          Set Happy
+        </Button>
+
+        <Button variant="outline" onClick={() => setSelectedEmoji('❤️')}>
+          Set Heart
+        </Button>
+
+        <Button variant="outline" onClick={() => setSelectedEmoji('🚀')}>
+          Set Rocket
+        </Button>
+      </Horizontal>
+
+      <Text fontSize="14px" color="color-gray-600">
+        Selected emoji: {selectedEmoji}
+      </Text>
+    </Vertical>
+  );
+};
+```
+
+### **FormIntegration**
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical, Horizontal } from 'app-studio';
+import { EmojiPicker } from '../EmojiPicker';
+import { TextField } from '../../Form/TextField/TextField';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+
+export const FormIntegrationEmojiPicker = () => {
+  const [title, setTitle] = useState('');
+  const [emoji, setEmoji] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(`Title: ${emoji} ${title}\nDescription: ${description}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Vertical gap={16} width="400px">
+        <Horizontal gap={12} alignItems="end">
+          <EmojiPicker
+            label="Icon"
+            value={emoji}
+            onChange={setEmoji}
+            size="md"
+            placeholder="Pick an icon"
+          />
+
+          <TextField
+            label="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter title"
+            style={{ flex: 1 }}
+          />
+        </Horizontal>
+
+        <TextField
+          label="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Enter description"
+          helperText="Add a description for your item"
+        />
+
+        {/* Preview */}
+        {(emoji || title || description) && (
+          <Vertical
+            gap={8}
+            padding="16px"
+            borderRadius="8px"
+            backgroundColor="color-gray-50"
+            borderWidth="1px"
+            borderStyle="solid"
+            borderColor="color-gray-200"
+          >
+            <Text fontWeight="bold">Preview</Text>
+            <Text fontSize="18px" fontWeight="600">
+              {emoji} {title || 'Untitled'}
+            </Text>
+            {description && <Text color="color-gray-600">{description}</Text>}
+          </Vertical>
+        )}
+
+        <Horizontal gap={8}>
+          <Button type="submit" variant="filled">
+            Create Item
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              setTitle('');
+              setEmoji('');
+              setDescription('');
+            }}
+          >
+            Clear
+          </Button>
+        </Horizontal>
+      </Vertical>
+    </form>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './variants';
+export * from './sizes';
+export * from './shapes';
+export * from './customEmojis';
+export * from './formIntegration';
+export * from './controlled';
+```
+
+### **Shapes**
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { EmojiPicker } from '../EmojiPicker';
+
+export const EmojiPickerShapes = () => (
+  <Vertical gap={16}>
+    <EmojiPicker
+      label="Default shape"
+      shape="default"
+      placeholder="Default corners"
+    />
+    <EmojiPicker
+      label="square shape"
+      shape="square"
+      placeholder="square corners"
+    />
+    <EmojiPicker
+      label="Rounded shape"
+      shape="rounded"
+      placeholder="Rounded corners"
+    />
+    <EmojiPicker label="Pill shaped" shape="pill" placeholder="Pill shaped" />
+  </Vertical>
+);
+```
+
+### **Sizes**
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { EmojiPicker } from '../EmojiPicker';
+
+export const EmojiPickerSizes = () => (
+  <Vertical gap={16}>
+    <EmojiPicker label="Extra small" size="xs" placeholder="XS size" />
+    <EmojiPicker label="Small" size="sm" placeholder="SM size" />
+    <EmojiPicker label="Medium" size="md" placeholder="MD size" />
+    <EmojiPicker label="Large" size="lg" placeholder="LG size" />
+    <EmojiPicker label="Extra large" size="xl" placeholder="XL size" />
+  </Vertical>
+);
+```
+
+### **Variants**
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { EmojiPicker } from '../EmojiPicker';
+
+export const EmojiPickerVariants = () => (
+  <Vertical gap={16}>
+    <EmojiPicker
+      label="Default variant"
+      variant="default"
+      placeholder="Default style"
+    />
+    <EmojiPicker
+      label="Outline variant"
+      variant="outline"
+      placeholder="Outline style"
+    />
+    <EmojiPicker
+      label="Filled variant"
+      variant="filled"
+      placeholder="Filled style"
+    />
+  </Vertical>
+);
+```
+

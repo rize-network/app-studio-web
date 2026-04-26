@@ -1,7 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { Variant, Size } from './ChatWidget.type';
-
-/** Size mappings for the ChatWidget component */
+// Defines a map of CSS properties for various standard sizes (small, medium, large) used across the chat widget components.
 export const Sizes: Record<Size, CSSProperties> = {
   sm: {
     fontSize: '12px',
@@ -16,8 +15,7 @@ export const Sizes: Record<Size, CSSProperties> = {
     padding: '12px',
   },
 };
-
-/** Variant mappings for the ChatWidget component */
+// Defines a map of CSS properties for different visual variants of the chat widget, such as default, glassy, and minimal designs.
 export const Variants: Record<Variant, CSSProperties> = {
   default: {
     backgroundColor: '#ffffff',
@@ -38,8 +36,7 @@ export const Variants: Record<Variant, CSSProperties> = {
     borderRadius: '12px',
   },
 };
-
-/** Bubble size mappings */
+// Specifies a collection of CSS properties tailored for different sizes of chat message bubbles.
 export const BubbleSizes: Record<Size, CSSProperties> = {
   sm: {
     fontSize: '12px',
@@ -57,16 +54,14 @@ export const BubbleSizes: Record<Size, CSSProperties> = {
     borderRadius: '14px',
   },
 };
-
-/** User bubble styles (blue, aligned right) */
+// Defines the default CSS properties for chat bubbles sent by the user, including background, text color, and alignment.
 export const UserBubbleStyles: CSSProperties = {
   backgroundColor: '#1D4ED8',
   color: '#ffffff',
   alignSelf: 'flex-end',
   borderBottomRightRadius: '4px',
 };
-
-/** Assistant bubble styles (gray, aligned left) */
+// Defines the default CSS properties for chat bubbles sent by the assistant, including background, text color, alignment, and border.
 export const AssistantBubbleStyles: CSSProperties = {
   backgroundColor: '#ffffff',
   color: '#0F172A',
@@ -74,8 +69,7 @@ export const AssistantBubbleStyles: CSSProperties = {
   borderBottomLeftRadius: '4px',
   border: '1px solid #E2E8F0',
 };
-
-/** Input container styles with glassmorphic effect */
+// Defines the CSS properties for the container that holds the chat input field and related controls.
 export const InputContainerStyles: CSSProperties = {
   position: 'relative',
   backgroundColor: '#ffffff',
@@ -86,8 +80,7 @@ export const InputContainerStyles: CSSProperties = {
   gap: '8px',
   transition: 'background-color 0.2s ease, border-color 0.2s ease',
 };
-
-/** Default ChatWidget component styles */
+// An comprehensive object containing the default CSS properties for various sub-components of the ChatWidget, including the main container, message area, input, bubbles, timestamps, and buttons.
 export const DefaultChatWidgetStyles = {
   container: {
     display: 'flex',
@@ -111,7 +104,6 @@ export const DefaultChatWidgetStyles = {
     position: 'relative' as const,
     wordWrap: 'break-word' as const,
     animation: 'chatBubbleAppear 0.25s ease-out',
-    // lineHeight: '1.5',
   },
   timestamp: {
     position: 'absolute' as const,

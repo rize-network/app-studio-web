@@ -9,264 +9,110 @@ import {
   Tag,
   TagSeparator,
 } from './TagInput.type';
-
-/**
- * Props interface for the TagInput component
- */
+// Defines the public interface for the TagInput component, extending standard InputProps while omitting certain properties.
 export interface TagInputProps
   extends Omit<InputProps, 'size' | 'value' | 'onChange'> {
-  /**
-   * Unique identifier for the TagInput
-   */
+  // A unique identifier for the input element.
   id?: string;
-
-  /**
-   * Name attribute for form submission
-   */
+  // The name attribute for the input element, useful for form submissions.
   name?: string;
-
-  /**
-   * Label text for the input field
-   */
+  // The text label displayed above or alongside the input field.
   label?: string;
-
-  /**
-   * Helper text displayed below the input
-   */
+  // Text displayed below the input field to provide additional guidance or information.
   helperText?: string;
-
-  /**
-   * Error message or boolean indicating error state
-   */
+  // An error message or a boolean indicating that the input is in an error state.
   error?: string | boolean;
-
-  /**
-   * Placeholder text shown when input is empty
-   */
+  // Placeholder text displayed inside the input field when it is empty.
   placeholder?: string;
-
-  /**
-   * Array of tags
-   */
+  // An array of strings representing the controlled tags within the input.
   tags?: string[];
-
-  /**
-   * Default tags for uncontrolled component
-   */
+  // An array of strings representing the initial uncontrolled tags for the input.
   defaultTags?: string[];
-
-  /**
-   * Callback fired when tags change
-   */
+  // Callback function invoked when the array of tags changes, providing the updated tags.
   onTagsChange?: (tags: string[]) => void;
-
-  /**
-   * Callback fired when a tag is added
-   */
+  // Callback function invoked when a new tag is successfully added to the input.
   onTagAdd?: (tag: string) => void;
-
-  /**
-   * Callback fired when a tag is removed
-   */
+  // Callback function invoked when a tag is removed, providing the tag content and its index.
   onTagRemove?: (tag: string, index: number) => void;
-
-  /**
-   * Maximum number of tags allowed
-   */
+  // The maximum number of tags allowed in the input field.
   maxTags?: number;
-
-  /**
-   * Minimum length for each tag
-   */
+  // The minimum character length required for a tag to be valid.
   minTagLength?: number;
-
-  /**
-   * Maximum length for each tag
-   */
+  // The maximum character length allowed for a tag.
   maxTagLength?: number;
-
-  /**
-   * Whether to allow duplicate tags
-   */
+  // Boolean indicating whether duplicate tags are allowed to be added.
   allowDuplicates?: boolean;
-
-  /**
-   * Characters that trigger tag creation
-   */
+  // An array of characters or keys that trigger the creation of a new tag.
   separators?: TagSeparator[];
-
-  /**
-   * Whether the input is disabled
-   */
+  // Boolean indicating whether the input and tags are disabled.
   isDisabled?: boolean;
-
-  /**
-   * Whether the input is read-only
-   */
+  // Boolean indicating whether the input field is read-only.
   isReadOnly?: boolean;
-
-  /**
-   * Whether to auto-focus the input
-   */
+  // Boolean indicating whether the input field should automatically gain focus on mount.
   isAutoFocus?: boolean;
-
-  /**
-   * Whether tags can be removed
-   */
+  // Boolean indicating whether individual tags can be removed by the user.
   isRemovable?: boolean;
-
-  /**
-   * Size of the component
-   */
+  // Defines the visual size of the TagInput component.
   size?: Size;
-
-  /**
-   * Shape/border radius of the component
-   */
+  // Defines the visual shape (e.g., rounded corners) of the TagInput component.
   shape?: Shape;
-
-  /**
-   * Visual variant of the component
-   */
+  // Defines the visual variant or style of the TagInput component.
   variant?: Variant;
-
-  /**
-   * Shadow properties
-   */
+  // Defines the shadow style applied to the TagInput component.
   shadow?: Shadow | Elevation | ViewProps;
-
-  /**
-   * Custom styling for different parts of the component
-   */
+  // Custom styles applied to different parts of the TagInput component.
   views?: TagInputStyles;
-
-  /**
-   * React node to render on the left side
-   */
+  // A React node to be rendered on the left side of the input field.
   left?: React.ReactNode;
-
-  /**
-   * React node to render on the right side
-   */
+  // A React node to be rendered on the right side of the input field.
   right?: React.ReactNode;
-
-  /**
-   * Callback fired when input gains focus
-   */
+  // Callback function invoked when the input field receives focus.
   onFocus?: () => void;
-
-  /**
-   * Callback fired when input loses focus
-   */
+  // Callback function invoked when the input field loses focus.
   onBlur?: () => void;
-
-  /**
-   * Callback fired when input is clicked
-   */
+  // Callback function invoked when the input field is clicked.
   onClick?: () => void;
-
-  /**
-   * List of items to display in the dropdown menu
-   */
+  // An array of strings to be displayed as selectable suggestions in a menu.
   menuItems?: string[];
-
-  /**
-   * Callback fired when a menu item is selected
-   */
+  // Callback function invoked when an item from the suggestion menu is selected.
   onMenuItemSelect?: (item: string) => void;
 }
-
-/**
- * Props interface for the TagInput view component
- */
+// Defines the internal properties for the TagInput's view component, extending TagInputProps with view-specific state and handlers.
 export interface TagInputViewProps extends Omit<TagInputProps, 'tags'> {
-  /**
-   * Current input value for new tag
-   */
+  // The current value of the internal text input field.
   inputValue?: string;
-
-  /**
-   * Function to set input value
-   */
+  // Function to update the internal text input's value.
   setInputValue?: (value: string) => void;
-
-  /**
-   * Array of tag objects (internal representation)
-   */
+  // An array of `Tag` objects, representing the internal state of tags.
   tags?: Tag[];
-
-  /**
-   * Function to set tags
-   */
+  // Function to update the internal array of `Tag` objects.
   setTags?: (tags: Tag[]) => void;
-
-  /**
-   * Whether the input is currently focused
-   */
+  // Boolean indicating whether the input field is currently focused.
   isFocused?: boolean;
-
-  /**
-   * Function to set focus state
-   */
+  // Function to set the focus state of the input field.
   setIsFocused?: (focused: boolean) => void;
-
-  /**
-   * Whether the input is currently hovered
-   */
+  // Boolean indicating whether the input field is currently hovered.
   isHovered?: boolean;
-
-  /**
-   * Function to set hover state
-   */
+  // Function to set the hover state of the input field.
   setIsHovered?: (hovered: boolean) => void;
-
-  /**
-   * Function to add a tag
-   */
+  // Function to programmatically add a new tag.
   addTag?: (tag: string) => void;
-
-  /**
-   * Function to remove a tag
-   */
+  // Function to programmatically remove a tag by its index.
   removeTag?: (index: number) => void;
-
-  /**
-   * Function to handle input key events
-   */
+  // Event handler for keyboard key down events on the input element.
   handleKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-
-  /**
-   * Function to handle input change
-   */
+  // Event handler for changes in the input field's value.
   handleInputChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-
-  /**
-   * Function to handle input focus
-   */
+  // Event handler for when the input field gains focus.
   handleFocus?: () => void;
-
-  /**
-   * Function to handle input blur
-   */
+  // Event handler for when the input field loses focus.
   handleBlur?: () => void;
-
-  /**
-   * List of filtered items to display in the dropdown
-   */
+  // An array of suggested items filtered based on the current input value.
   filteredItems?: string[];
-
-  /**
-   * Index of the currently active/highlighted menu item
-   */
+  // The index of the currently active (e.g., highlighted) item in the suggestion menu.
   activeItemIndex?: number;
-
-  /**
-   * Whether the dropdown menu is open
-   */
+  // Boolean indicating whether the suggestion menu is currently open.
   isMenuOpen?: boolean;
-
-  /**
-   * Function to handle menu item selection
-   */
+  // Event handler for when an item from the suggestion menu is selected.
   handleMenuItemSelect?: (item: string) => void;
 }

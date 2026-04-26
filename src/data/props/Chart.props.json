@@ -1,0 +1,158 @@
+{
+  "componentDescription": "Renders various types of charts with customizable data, legends, and status indicators.",
+  "type": {
+    "type": "ChartType",
+    "typeValues": [
+      "bar",
+      "line",
+      "pie",
+      "donut",
+      "area"
+    ],
+    "description": "Specifies the type of chart to be rendered (e.g., bar, line, pie).",
+    "defaultValue": null
+  },
+  "data": {
+    "type": "ChartData",
+    "typeValues": null,
+    "description": "Optional primary data structure for the chart, typically used for simpler charts.",
+    "defaultValue": null
+  },
+  "dataPoints": {
+    "type": "ChartDataPoint[]",
+    "typeValues": null,
+    "description": "Optional array of individual data points for the chart, offering more granular data representation.",
+    "defaultValue": null
+  },
+  "title": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional title to display above the chart.",
+    "defaultValue": null
+  },
+  "showLegend": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether the chart legend should be visible.",
+    "defaultValue": true
+  },
+  "legendPosition": {
+    "type": "'top' | 'right' | 'bottom' | 'left'",
+    "typeValues": [
+      "top",
+      "right",
+      "bottom",
+      "left"
+    ],
+    "description": "Specifies the position of the chart legend when `showLegend` is true.",
+    "defaultValue": "bottom"
+  },
+  "showGrid": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether grid lines should be displayed on the chart.",
+    "defaultValue": true
+  },
+  "showTooltips": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether interactive tooltips should appear on hover.",
+    "defaultValue": true
+  },
+  "animated": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Enables or disables animation for the chart's rendering or updates.",
+    "defaultValue": true
+  },
+  "animationDuration": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Sets the duration of chart animations in milliseconds.",
+    "defaultValue": 500
+  },
+  "responsive": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines if the chart should resize automatically to fit its container.",
+    "defaultValue": true
+  },
+  "aspectRatio": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Defines the aspect ratio (width / height) of the chart when `responsive` is true.",
+    "defaultValue": 1.7777777777777777
+  },
+  "width": {
+    "type": "number | string",
+    "typeValues": null,
+    "description": "Specifies the fixed width of the chart. Can be a number (pixels) or a string (e.g., '100%').",
+    "defaultValue": 200
+  },
+  "height": {
+    "type": "number | string",
+    "typeValues": null,
+    "description": "Specifies the fixed height of the chart. Can be a number (pixels) or a string (e.g., '100%').",
+    "defaultValue": 200
+  },
+  "views": {
+    "type": "ChartStyles",
+    "typeValues": null,
+    "description": "Optional styles object to customize the appearance of different chart elements.",
+    "defaultValue": null
+  },
+  "onDataPointClick": {
+    "type": "(dataPoint: ChartDataPoint | null, index: number) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when a data point on the chart is clicked.",
+    "defaultValue": null
+  },
+  "onSeriesClick": {
+    "type": "(seriesName: string, index: number) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when a data series (e.g., a line in a line chart) is clicked.",
+    "defaultValue": null
+  },
+  "isLoading": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Indicates if the chart is currently loading data.",
+    "defaultValue": false
+  },
+  "error": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Optional error message or component to display when an error occurs.",
+    "defaultValue": null
+  },
+  "noData": {
+    "type": "boolean | React.ReactNode",
+    "typeValues": null,
+    "description": "Determines if a 'no data' message should be shown, or provides a custom component for it.",
+    "defaultValue": null
+  },
+  "loadingIndicator": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Optional custom component to display as a loading indicator.",
+    "defaultValue": null
+  },
+  "errorIndicator": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Optional custom component to display when an error occurs.",
+    "defaultValue": null
+  },
+  "noDataIndicator": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Optional custom component to display when there is no data.",
+    "defaultValue": null
+  },
+  "aria-label": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Provides an accessible label for the chart component, used by screen readers.",
+    "defaultValue": null
+  }
+}

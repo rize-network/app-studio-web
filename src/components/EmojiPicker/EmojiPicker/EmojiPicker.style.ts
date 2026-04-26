@@ -1,16 +1,12 @@
 import { ViewProps } from 'app-studio';
 import { Size, Variant, Shape, EmojiCategory, Emoji } from './EmojiPicker.type';
-
-/**
- * Default styles for the EmojiPicker component
- */
+// Defines a collection of default styles for various components within the EmojiPicker, organizing common UI elements for consistent presentation.
 export const DefaultEmojiPickerStyles = {
   container: {
     position: 'relative',
     display: 'inline-block',
     width: '100%',
   } as ViewProps,
-
   trigger: {
     display: 'flex',
     alignItems: 'center',
@@ -18,7 +14,6 @@ export const DefaultEmojiPickerStyles = {
     cursor: 'pointer',
     transition: 'all 0.2s ease-in-out',
   } as ViewProps,
-
   dropdown: {
     position: 'absolute',
     mixBlendMode: 'normal',
@@ -27,7 +22,7 @@ export const DefaultEmojiPickerStyles = {
     right: 0,
     zIndex: 1000,
     backgroundColor: 'color-white',
-    borderRadius: 12, // radius-lg
+    borderRadius: 12,
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
@@ -37,18 +32,15 @@ export const DefaultEmojiPickerStyles = {
     maxHeight: '400px',
     overflow: 'hidden',
   } as ViewProps,
-
   searchInput: {
     marginBottom: '12px',
   } as ViewProps,
-
   categoryTabs: {
     display: 'flex',
     borderBottom: '1px solid color-gray-100',
     marginBottom: '12px',
     overflowX: 'auto',
   } as ViewProps,
-
   categoryTab: {
     padding: '8px 12px',
     cursor: 'pointer',
@@ -60,7 +52,6 @@ export const DefaultEmojiPickerStyles = {
     whiteSpace: 'nowrap',
     borderRadius: '8px 8px 0 0',
   } as ViewProps,
-
   emojiGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(8, 1fr)',
@@ -70,7 +61,6 @@ export const DefaultEmojiPickerStyles = {
     padding: '4px',
     color: 'color-black',
   } as ViewProps,
-
   emoji: {
     width: '32px',
     height: '32px',
@@ -78,21 +68,17 @@ export const DefaultEmojiPickerStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    borderRadius: 6, // radius-sm
+    borderRadius: 6,
     fontSize: '20px',
     transition: 'all 0.2s ease-in-out',
   } as ViewProps,
-
   recentEmojis: {
     borderBottom: '1px solid color-gray-100',
     marginBottom: '12px',
     paddingBottom: '12px',
   } as ViewProps,
 };
-
-/**
- * Size styles for the EmojiPicker component
- */
+// Maps predefined size options (e.g., 'xs', 'sm', 'md') to specific style properties, providing standardized sizing for interactive elements.
 export const Sizes: Record<Size, ViewProps> = {
   xs: {
     height: '28px',
@@ -120,10 +106,7 @@ export const Sizes: Record<Size, ViewProps> = {
     padding: '12px 16px',
   },
 };
-
-/**
- * Shape styles for the EmojiPicker component
- */
+// Maps predefined shape options (e.g., 'default', 'square', 'pill') to specific border radius styles, enabling consistent visual forms.
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: 8,
@@ -138,10 +121,7 @@ export const Shapes: Record<Shape, ViewProps> = {
     borderRadius: 9999,
   },
 };
-
-/**
- * Variant styles for the EmojiPicker component
- */
+// Maps predefined visual variants (e.g., 'default', 'outline', 'filled') to specific style properties, offering different aesthetic treatments for components.
 export const Variants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'color-white',
@@ -165,10 +145,7 @@ export const Variants: Record<Variant, ViewProps> = {
     color: 'color-gray-800',
   },
 };
-
-/**
- * Category labels for display
- */
+// Assigns a representative emoji label to each predefined emoji category, enhancing visual navigation and identification.
 export const CategoryLabels: Record<EmojiCategory, string> = {
   recent: '🕒',
   smileys: '😀',
@@ -181,12 +158,8 @@ export const CategoryLabels: Record<EmojiCategory, string> = {
   symbols: '❤️',
   flags: '🏁',
 };
-
-/**
- * Default emoji data - a subset of popular emojis
- */
+// Provides a comprehensive array of emoji objects, each containing the emoji character, its name, category, and relevant keywords for search and display.
 export const DefaultEmojiData: Emoji[] = [
-  // Smileys & Emotion
   {
     emoji: '😀',
     name: 'grinning face',
@@ -607,8 +580,6 @@ export const DefaultEmojiData: Emoji[] = [
     category: 'smileys',
     keywords: ['monocle', 'fancy', 'inspection'],
   },
-
-  // People & Body
   {
     emoji: '👋',
     name: 'waving hand',
@@ -993,8 +964,6 @@ export const DefaultEmojiData: Emoji[] = [
     category: 'people',
     keywords: ['old', 'woman', 'elderly'],
   },
-
-  // Animals & Nature
   {
     emoji: '🐶',
     name: 'dog face',
@@ -1517,8 +1486,6 @@ export const DefaultEmojiData: Emoji[] = [
     category: 'animals',
     keywords: ['cactus', 'desert', 'spiky'],
   },
-
-  // Food & Drink
   {
     emoji: '🍎',
     name: 'red apple',
@@ -2221,8 +2188,6 @@ export const DefaultEmojiData: Emoji[] = [
     category: 'food',
     keywords: ['ice', 'cold', 'cube'],
   },
-
-  // Activities
   {
     emoji: '⚽',
     name: 'soccer ball',
@@ -2259,8 +2224,6 @@ export const DefaultEmojiData: Emoji[] = [
     category: 'activities',
     keywords: ['tennis', 'sport'],
   },
-
-  // Travel & Places
   {
     emoji: '🚗',
     name: 'automobile',
@@ -2292,8 +2255,6 @@ export const DefaultEmojiData: Emoji[] = [
     category: 'travel',
     keywords: ['race', 'car', 'fast'],
   },
-
-  // Objects
   {
     emoji: '💡',
     name: 'light bulb',
@@ -2330,8 +2291,6 @@ export const DefaultEmojiData: Emoji[] = [
     category: 'objects',
     keywords: ['phone', 'telephone'],
   },
-
-  // Symbols
   {
     emoji: '❤️',
     name: 'red heart',
@@ -2380,8 +2339,6 @@ export const DefaultEmojiData: Emoji[] = [
     category: 'symbols',
     keywords: ['love', 'heart'],
   },
-
-  // Flags
   {
     emoji: '🏁',
     name: 'chequered flag',

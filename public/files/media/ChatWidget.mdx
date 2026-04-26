@@ -1,0 +1,403 @@
+# ChatWidget
+
+A versatile chat interface for displaying messages, handling user input, and managing conversation context.
+
+### **Import**
+```tsx
+import { ChatWidget } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { ChatWidget } from '../ChatWidget';
+import type { Message } from '../ChatWidget/ChatWidget.type';
+
+const sampleMessages: Message[] = [
+  {
+    id: '1',
+    role: 'user',
+    content: 'Hello! Can you help me with something?',
+    timestamp: new Date(Date.now() - 300000), // 5 minutes ago
+  },
+  {
+    id: '2',
+    role: 'assistant',
+    content:
+      "Of course! I'd be happy to help. What do you need assistance with?",
+    timestamp: new Date(Date.now() - 240000), // 4 minutes ago
+  },
+  {
+    id: '3',
+    role: 'user',
+    content: 'I need to create a new component for my project.',
+    timestamp: new Date(Date.now() - 180000), // 3 minutes ago
+  },
+  {
+    id: '4',
+    role: 'assistant',
+    content:
+      'Great! I can help you with that. What kind of component do you want to create? Please provide some details about its purpose and functionality.',
+    timestamp: new Date(Date.now() - 120000), // 2 minutes ago
+  },
+];
+
+export function DefaultDemo() {
+  const [messages, setMessages] = React.useState<Message[]>(sampleMessages);
+
+  const handleSubmit = (message: string) => {
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: message,
+      timestamp: new Date(),
+    };
+
+    setMessages([...messages, newMessage]);
+
+    // Simulate assistant response
+    setTimeout(() => {
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        role: 'assistant',
+        content:
+          'I received your message. In a real application, this would be processed by an AI assistant.',
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, assistantMessage]);
+    }, 1000);
+  };
+
+  return (
+    <ChatWidget
+      messages={messages}
+      onSubmit={handleSubmit}
+      maxHeight="500px"
+      inputPlaceholder="Type your message..."
+    />
+  );
+}
+```
+
+### **variant**
+Specifies the visual variant or style of the chat widget.
+
+- **Type:** `Variant`
+- **Default:** `default`
+- **Possible Values:** `default, glassy, minimal`
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Title } from '../../Title/Title';
+import { ChatWidget } from '../ChatWidget';
+import type { Message } from '../ChatWidget/ChatWidget.type';
+
+const sampleMessages: Message[] = [
+  {
+    id: '1',
+    role: 'user',
+    content: 'Show me the different variants',
+    timestamp: new Date(),
+  },
+  {
+    id: '2',
+    role: 'assistant',
+    content: 'Here are the available variants: default, glassy, and minimal.',
+    timestamp: new Date(),
+  },
+];
+
+export function VariantDemo() {
+  return (
+    <Vertical gap={32}>
+      <Vertical gap={8}>
+        <Title level={3}>Default Variant</Title>
+        <ChatWidget
+          messages={sampleMessages}
+          variant="default"
+          maxHeight="300px"
+        />
+      </Vertical>
+
+      <Vertical gap={8}>
+        <Title level={3}>Glassy Variant</Title>
+        <ChatWidget
+          messages={sampleMessages}
+          variant="glassy"
+          maxHeight="300px"
+        />
+      </Vertical>
+
+      <Vertical gap={8}>
+        <Title level={3}>Minimal Variant</Title>
+        <ChatWidget
+          messages={sampleMessages}
+          variant="minimal"
+          maxHeight="300px"
+        />
+      </Vertical>
+    </Vertical>
+  );
+}
+```
+
+### **size**
+Specifies the size of the chat widget (e.g., small, medium, large).
+
+- **Type:** `Size`
+- **Default:** `md`
+- **Possible Values:** `sm, md, lg`
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { Title } from '../../Title/Title';
+import { ChatWidget } from '../ChatWidget';
+import type { Message } from '../ChatWidget/ChatWidget.type';
+
+const sampleMessages: Message[] = [
+  {
+    id: '1',
+    role: 'user',
+    content: 'What sizes are available?',
+    timestamp: new Date(),
+  },
+  {
+    id: '2',
+    role: 'assistant',
+    content: 'You can choose from small, medium, and large sizes!',
+    timestamp: new Date(),
+  },
+];
+
+export function SizeDemo() {
+  return (
+    <Vertical gap={32}>
+      <Vertical gap={8}>
+        <Title level={3}>Small Size</Title>
+        <ChatWidget
+          messages={sampleMessages}
+          size="sm"
+          variant="glassy"
+          maxHeight="250px"
+        />
+      </Vertical>
+
+      <Vertical gap={8}>
+        <Title level={3}>Medium Size (Default)</Title>
+        <ChatWidget
+          messages={sampleMessages}
+          size="md"
+          variant="glassy"
+          maxHeight="300px"
+        />
+      </Vertical>
+
+      <Vertical gap={8}>
+        <Title level={3}>Large Size</Title>
+        <ChatWidget
+          messages={sampleMessages}
+          size="lg"
+          variant="glassy"
+          maxHeight="350px"
+        />
+      </Vertical>
+    </Vertical>
+  );
+}
+```
+
+### **CustomStyling**
+
+```tsx
+import React from 'react';
+import { ChatWidget } from '../ChatWidget';
+import type { Message } from '../ChatWidget/ChatWidget.type';
+
+const messagesWithAttachments: Message[] = [
+  {
+    id: '1',
+    role: 'user',
+    content: 'I have some files to share',
+    timestamp: new Date(Date.now() - 120000),
+    attachments: [
+      {
+        id: 'att1',
+        name: 'document.pdf',
+        size: 1024000,
+        type: 'application/pdf',
+      },
+      {
+        id: 'att2',
+        name: 'image.png',
+        size: 512000,
+        type: 'image/png',
+      },
+    ],
+  },
+  {
+    id: '2',
+    role: 'assistant',
+    content:
+      "I can see you've shared some files. How can I help you with them?",
+    timestamp: new Date(Date.now() - 60000),
+  },
+];
+
+export function CustomStylingDemo() {
+  return (
+    <ChatWidget
+      messages={messagesWithAttachments}
+      variant="glassy"
+      maxHeight="400px"
+      enableAttachments
+      styles={{
+        container: {
+          borderRadius: '24px',
+          border: '2px solid #3b82f6',
+        },
+        userBubble: {
+          backgroundColor: '#10b981',
+        },
+        assistantBubble: {
+          backgroundColor: '#f59e0b20',
+          border: '1px solid #f59e0b',
+        },
+        sendButton: {
+          backgroundColor: '#10b981',
+        },
+      }}
+      inputPlaceholder="Custom styled chat..."
+    />
+  );
+}
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './variant';
+export * from './size';
+export * from './customStyling';
+export * from './widget';
+```
+
+### **Widget**
+
+```tsx
+import React, { useState } from 'react';
+import { View, Button, Text, Vertical } from 'app-studio';
+import { ChatWidgetWidget } from '../Widget/ChatWidgetWidget';
+
+export function WidgetDemo() {
+  const [showWidget, setShowWidget] = useState(true);
+
+  return (
+    <View
+      height="400px"
+      position="relative"
+      border="1px dashed #ccc"
+      borderRadius="12px"
+      padding="24px"
+    >
+      <Vertical gap={16}>
+        <Text fontSize="18px" fontWeight="bold">
+          Interactive Widget Demo
+        </Text>
+        <Text color="color-gray-600">
+          The widget is fixed to the bottom-right of this container (visually
+          simulating a page). Click the floating action button to open the chat.
+        </Text>
+        <Text color="color-gray-600">
+          Try the &quot;Plus&quot; icon in the chat input to enter &quot;Context
+          Selection Mode&quot; and pick elements on this page.
+        </Text>
+
+        <Button onClick={() => setShowWidget(!showWidget)} width="fit-content">
+          {showWidget ? 'Hide Widget' : 'Show Widget'}
+        </Button>
+
+        {/* Dummy elements to pick */}
+        <View display="flex" gap="16px" flexWrap="wrap" marginTop="24px">
+          <View
+            padding="16px"
+            backgroundColor="color-blue-100"
+            borderRadius="8px"
+            id="box-1"
+          >
+            Pick me (Box 1)
+          </View>
+          <View
+            padding="16px"
+            backgroundColor="color-green-100"
+            borderRadius="8px"
+            id="box-2"
+          >
+            Pick me (Box 2)
+          </View>
+          <View
+            padding="16px"
+            backgroundColor="color-purple-100"
+            borderRadius="8px"
+            id="text-element"
+          >
+            <Text>Text Element</Text>
+          </View>
+        </View>
+      </Vertical>
+
+      {/* Render widget inside this relative container for demo purposes (usually it's fixed to body) */}
+      {showWidget && (
+        <View
+          position="absolute"
+          bottom={0}
+          right={0}
+          width="100%"
+          height="100%"
+          pointerEvents="none"
+        >
+          <View pointerEvents="auto">
+            <ChatWidgetWidget
+              bubbleSize="md"
+              initialMessages={[
+                {
+                  id: 'welcome',
+                  role: 'assistant',
+                  content:
+                    'Hi! Click the + button to select an element from the page.',
+                  timestamp: new Date(),
+                },
+                {
+                  id: 'system-msg',
+                  role: 'assistant',
+                  messageType: 'system',
+                  content: 'System: Context selection mode enabled',
+                  timestamp: new Date(),
+                },
+                {
+                  id: 'reasoning-demo',
+                  role: 'assistant',
+                  content: 'I can also show my thinking process!',
+                  reasoning:
+                    'The user might want to know about internal logic. I should demonstrate the reasoning block.',
+                  timestamp: new Date(),
+                },
+                {
+                  id: 'tool-call',
+                  role: 'assistant',
+                  messageType: 'tool',
+                  content: 'Called function: getElementById("box-1")',
+                  timestamp: new Date(),
+                },
+              ]}
+            />
+          </View>
+        </View>
+      )}
+    </View>
+  );
+}
+```
+

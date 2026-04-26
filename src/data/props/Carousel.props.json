@@ -1,21 +1,21 @@
 {
-  "componentDescription": "A versatile component for displaying a collection of content in a rotating sequence with navigation.",
+  "componentDescription": "A versatile component for displaying a series of content slides, supporting navigation, indicators, and autoplay.",
   "children": {
     "type": "React.ReactNode[]",
     "typeValues": [],
-    "description": "The child elements to be displayed within the carousel, expected as an array of React nodes.",
+    "description": "An array of React nodes to be rendered as slides within the carousel.",
     "defaultValue": null
   },
   "defaultActiveIndex": {
     "type": "number",
     "typeValues": [],
-    "description": "The initial active slide index when the carousel mounts, if not controlled.",
+    "description": "The initial active slide index when the carousel is uncontrolled.",
     "defaultValue": 0
   },
   "activeIndex": {
     "type": "number",
     "typeValues": [],
-    "description": "The currently active slide index, used for controlled components.",
+    "description": "The controlled active slide index. Use with 'onChange' for controlled component behavior.",
     "defaultValue": null
   },
   "onChange": {
@@ -27,7 +27,7 @@
   "showNavigation": {
     "type": "boolean",
     "typeValues": [],
-    "description": "Determines whether navigation buttons (previous/next) should be displayed.",
+    "description": "Determines whether navigation buttons (previous/next) are displayed.",
     "defaultValue": true
   },
   "navigationPosition": {
@@ -36,25 +36,25 @@
       "inside",
       "outside"
     ],
-    "description": "Specifies the position of the navigation buttons within the carousel.",
+    "description": "Specifies the position of the navigation buttons relative to the carousel.",
     "defaultValue": "inside"
   },
   "prevButton": {
     "type": "React.ReactNode",
     "typeValues": [],
-    "description": "Custom content or component for the previous navigation button.",
+    "description": "Custom React node to use for the 'previous' navigation button.",
     "defaultValue": null
   },
   "nextButton": {
     "type": "React.ReactNode",
     "typeValues": [],
-    "description": "Custom content or component for the next navigation button.",
+    "description": "Custom React node to use for the 'next' navigation button.",
     "defaultValue": null
   },
   "showIndicators": {
     "type": "boolean",
     "typeValues": [],
-    "description": "Determines whether slide indicators should be displayed.",
+    "description": "Determines whether slide indicators (dots) are displayed.",
     "defaultValue": true
   },
   "indicatorPosition": {
@@ -63,7 +63,7 @@
       "top",
       "bottom"
     ],
-    "description": "Specifies the position of the slide indicators within the carousel.",
+    "description": "Specifies the position of the slide indicators relative to the carousel.",
     "defaultValue": "bottom"
   },
   "indicatorVariant": {
@@ -73,7 +73,7 @@
       "line",
       "number"
     ],
-    "description": "Defines the visual style or variant of the slide indicators.",
+    "description": "Defines the visual style variant for the slide indicators.",
     "defaultValue": "dot"
   },
   "autoPlay": {
@@ -85,7 +85,7 @@
   "autoPlayInterval": {
     "type": "number",
     "typeValues": [],
-    "description": "The duration in milliseconds between automatic slide transitions.",
+    "description": "The duration in milliseconds between automatic slide transitions when autoPlay is enabled.",
     "defaultValue": 3000
   },
   "pauseOnHover": {
@@ -97,7 +97,7 @@
   "infinite": {
     "type": "boolean",
     "typeValues": [],
-    "description": "Enables infinite looping of slides, returning to the beginning after the last slide.",
+    "description": "Enables or disables infinite looping of the carousel slides.",
     "defaultValue": true
   },
   "direction": {
@@ -106,25 +106,25 @@
       "horizontal",
       "vertical"
     ],
-    "description": "Specifies the direction of slide transitions (e.g., 'horizontal' or 'vertical').",
+    "description": "Specifies the direction of slide transitions (e.g., 'left', 'right').",
     "defaultValue": "horizontal"
   },
   "transitionDuration": {
     "type": "number",
     "typeValues": [],
-    "description": "The duration in milliseconds for slide transition animations.",
+    "description": "The duration of the slide transition animation in milliseconds.",
     "defaultValue": 300
   },
   "stepIndices": {
     "type": "number[]",
     "typeValues": [],
-    "description": "An optional array of indices that define specific steps or points in the carousel navigation.",
+    "description": "An array of indices defining specific steps or accessible slides within the carousel.",
     "defaultValue": null
   },
   "views": {
     "type": "CarouselStyles",
     "typeValues": [],
-    "description": "Custom styles to apply to different parts of the carousel component.",
+    "description": "Styling properties for various parts of the carousel component.",
     "defaultValue": null
   }
 }

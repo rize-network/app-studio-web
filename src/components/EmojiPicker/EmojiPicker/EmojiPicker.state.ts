@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { EmojiPickerProps } from './EmojiPicker.props';
 import { Emoji, EmojiCategory } from './EmojiPicker.type';
 import { DefaultEmojiData } from './EmojiPicker.style';
-
+// This file defines the `useEmojiPickerState` custom hook, which encapsulates all local state management, derived states, and associated logic for the EmojiPicker component, including handling open/close, emoji selection, search, category management, recent emojis, and side effects like persistence and event listeners.
 export const useEmojiPickerState = (props: EmojiPickerProps) => {
   const {
     value,
@@ -29,36 +29,24 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
     ],
     customEmojis = [],
   } = props;
-
-  // State management
   const [isOpen, setIsOpen] = useState(controlledIsOpen ?? false);
   const [selectedEmoji, setSelectedEmoji] = useState(value ?? defaultValue);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] =
     useState<EmojiCategory>('smileys');
   const [recentEmojis, setRecentEmojis] = useState<Emoji[]>([]);
-
-  // Refs
   const triggerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Combine default emojis with custom emojis
   const allEmojis = useMemo(() => {
     return [...DefaultEmojiData, ...customEmojis];
   }, [customEmojis]);
-
-  // Filter emojis based on search query and active category
   const filteredEmojis = useMemo(() => {
     let emojis = allEmojis;
-
-    // Filter by category
     if (activeCategory !== 'recent') {
       emojis = emojis.filter((emoji) => emoji.category === activeCategory);
     } else {
       emojis = recentEmojis;
     }
-
-    // Filter by search query
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       emojis = emojis.filter(
@@ -69,39 +57,28 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
           )
       );
     }
-
     return emojis;
   }, [allEmojis, activeCategory, recentEmojis, searchQuery]);
-
-  // Sync with controlled value
   useEffect(() => {
     if (value !== undefined) {
       setSelectedEmoji(value);
     }
   }, [value]);
-
-  // Sync with controlled isOpen
   useEffect(() => {
     if (controlledIsOpen !== undefined) {
       setIsOpen(controlledIsOpen);
     }
   }, [controlledIsOpen]);
-
-  // Load recent emojis from localStorage
   useEffect(() => {
     if (showRecentEmojis) {
       const stored = localStorage.getItem('emojiPicker-recentEmojis');
       if (stored) {
         try {
           setRecentEmojis(JSON.parse(stored));
-        } catch (e) {
-          // Ignore invalid JSON
-        }
+        } catch (e) {}
       }
     }
   }, [showRecentEmojis]);
-
-  // Handle outside click to close dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -114,42 +91,30 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
         handleClose();
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
-
-  // Add emoji to recent emojis
   const addToRecentEmojis = useCallback(
     (emoji: Emoji) => {
       if (!showRecentEmojis) return;
-
       setRecentEmojis((prev) => {
         const filtered = prev.filter((e) => e.emoji !== emoji.emoji);
         const newRecent = [emoji, ...filtered].slice(0, maxRecentEmojis);
-
-        // Save to localStorage
         localStorage.setItem(
           'emojiPicker-recentEmojis',
           JSON.stringify(newRecent)
         );
-
         return newRecent;
       });
     },
     [showRecentEmojis, maxRecentEmojis]
   );
-
-  // Handlers
   const handleToggle = useCallback(() => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
-
     if (newIsOpen) {
       onOpen?.();
-      // Reset search when opening
       setSearchQuery('');
-      // Set active category to recent if we have recent emojis, otherwise smileys
       if (showRecentEmojis && recentEmojis.length > 0) {
         setActiveCategory('recent');
       } else {
@@ -159,15 +124,12 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
       onClose?.();
     }
   }, [isOpen, onOpen, onClose, showRecentEmojis, recentEmojis.length]);
-
   const handleEmojiSelect = useCallback(
     (emoji: Emoji) => {
       setSelectedEmoji(emoji.emoji);
       addToRecentEmojis(emoji);
-
       onChange?.(emoji.emoji);
       onEmojiSelect?.(emoji);
-
       if (closeOnSelect) {
         setIsOpen(false);
         onClose?.();
@@ -175,45 +137,35 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
     },
     [onChange, onEmojiSelect, closeOnSelect, onClose, addToRecentEmojis]
   );
-
   const handleSearchChange = useCallback(
     (query: string) => {
       setSearchQuery(query);
-      // When searching, show all categories
       if (query && activeCategory === 'recent') {
         setActiveCategory('smileys');
       }
     },
     [activeCategory]
   );
-
   const handleCategoryChange = useCallback((category: EmojiCategory) => {
     setActiveCategory(category);
-    setSearchQuery(''); // Clear search when changing category
+    setSearchQuery('');
   }, []);
-
   const handleClose = useCallback(() => {
     setIsOpen(false);
     onClose?.();
   }, [onClose]);
-
   return {
-    // State
     isOpen,
     selectedEmoji,
     recentEmojis,
     searchQuery,
     activeCategory,
     filteredEmojis,
-
-    // Handlers
     handleToggle,
     handleEmojiSelect,
     handleSearchChange,
     handleCategoryChange,
     handleClose,
-
-    // Refs
     triggerRef,
     dropdownRef,
   };

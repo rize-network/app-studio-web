@@ -8,11 +8,7 @@ import {
   DrawerFooter,
 } from './Drawer/Drawer.view';
 import { DrawerLayout } from './Drawer/Drawer.layout';
-
-/**
- * A drawer is a panel that slides out from the edge of the screen.
- * It can be useful when you need users to complete a task or view some details without leaving the current page.
- */
+// This file defines the main Drawer component, orchestrating various sub-components (Overlay, Container, Header, Body, Footer, Layout) to create a complete and functional drawer UI. It handles core properties like visibility, close actions, placement, and size.
 const DrawerComponent: React.FC<DrawerProps> = ({
   isOpen,
   onClose,
@@ -35,9 +31,7 @@ const DrawerComponent: React.FC<DrawerProps> = ({
     </DrawerOverlay>
   );
 };
-
 export const Drawer = DrawerComponent as DrawerType;
-
 Drawer.Overlay = DrawerOverlay;
 Drawer.Container = DrawerContainer;
 Drawer.Header = DrawerHeader;

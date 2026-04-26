@@ -1,111 +1,47 @@
 import { ViewProps } from 'app-studio';
-
-/**
- * Size options for the TagInput component
- */
+// Defines a union type for common component sizes: extra-small, small, medium, large, and extra-large.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-/**
- * Shape options for the TagInput component
- */
+// Defines a union type for the visual shape of tags within the input, including default, square, rounded, and pill.
 export type Shape = 'default' | 'square' | 'rounded' | 'pill';
-
-/**
- * Variant options for the TagInput component
- */
+// Defines a union type for the visual variant of the tags, such as outline, default filled, or no specific variant.
 export type Variant = 'outline' | 'default' | 'none';
-
-/**
- * Tag separator options
- */
+// Defines a union type for characters or actions that can trigger the creation of a new tag, like 'enter', 'comma', 'space', or 'tab'.
 export type TagSeparator = 'enter' | 'comma' | 'space' | 'tab';
-
-/**
- * Individual tag object
- */
+// Defines the structure of a single tag object.
 export interface Tag {
-  /**
-   * Unique identifier for the tag
-   */
+  // Unique identifier for the tag.
   id: string;
-
-  /**
-   * The tag value/text
-   */
+  // The display value or text content of the tag.
   value: string;
 }
-
-/**
- * Styles for different parts of the TagInput component
- */
+// Defines an object type for custom styling of various parts of the TagInput component.
 export type TagInputStyles = {
-  /**
-   * Styles for the main input container
-   */
+  // Styles applied to the main container wrapper for the input field itself.
   inputContainer?: ViewProps;
-
-  /**
-   * Styles for the tags container
-   */
+  // Styles applied to the container holding all the displayed tags.
   tagsContainer?: ViewProps;
-
-  /**
-   * Styles for individual tag chips
-   */
+  // Styles applied to individual tag components.
   tag?: ViewProps;
-
-  /**
-   * Styles for tag text
-   */
+  // Styles applied to the text content within each tag.
   tagText?: ViewProps;
-
-  /**
-   * Styles for tag remove button
-   */
+  // Styles applied to the remove button or icon within each tag.
   tagRemove?: ViewProps;
-
-  /**
-   * Styles for the input field
-   */
+  // Styles applied directly to the text input field where new tags are typed.
   input?: ViewProps;
-
-  /**
-   * Styles for the label
-   */
+  // Styles applied to the label associated with the TagInput component.
   label?: ViewProps;
-
-  /**
-   * Styles for helper text
-   */
+  // Styles applied to any helper text displayed below the input.
   helperText?: ViewProps;
-
-  /**
-   * Styles for error text
-   */
+  // Styles applied to error messages or indicators.
   error?: ViewProps;
-
-  /**
-   * Styles for the container
-   */
+  // Styles applied to the outermost container of the entire TagInput component.
   container?: ViewProps;
-
-  /**
-   * Styles for placeholder text
-   */
+  // Styles for the placeholder text of the input field.
   placeholder?: ViewProps;
-
-  /**
-   * Styles for the dropdown menu container
-   */
+  // Styles applied to the dropdown menu (e.g., for suggestions).
   menu?: ViewProps;
-
-  /**
-   * Styles for individual menu items
-   */
+  // Styles applied to individual items within the dropdown menu.
   menuItem?: ViewProps;
-
-  /**
-   * Styles for the active/highlighted menu item
-   */
+  // Styles applied to the currently active or highlighted item in the dropdown menu.
   menuItemActive?: ViewProps;
 };

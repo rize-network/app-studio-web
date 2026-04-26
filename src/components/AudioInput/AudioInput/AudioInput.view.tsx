@@ -9,13 +9,37 @@ import {
   MicrophoneIcon,
   StopIcon,
 } from '../../Icon/Icon';
-
+// Helper function to format a duration in seconds into a 'MM:SS' string.
+//
+// Parameters:
+// - `duration`: The time in seconds to format.
+//
+// Steps:
+// 1. Calculates minutes by dividing duration by 60 and flooring the result.
+// 2. Calculates remaining seconds using the modulo operator.
+// 3. Formats the output string, padding seconds with a leading zero if necessary.
 function formatDuration(duration: number) {
   const minutes = Math.floor(duration / 60);
   const seconds = duration % 60;
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
-
+// React functional component responsible for rendering the UI for audio input, including recording controls, file upload, waveform display, and audio playback preview.
+//
+// Parameters (props):
+// - `onAudio`: Callback function triggered when an audio file is selected or a recording is completed.
+// - `recording`: Boolean indicating if recording is currently active.
+// - `paused`: Boolean indicating if recording is currently paused.
+// - `audioBlob`: The recorded audio data as a Blob object.
+// - `analyserNode`: An AnalyserNode from the Web Audio API, used for visualizing audio waveforms during recording.
+// - `duration`: The current duration of the recording or selected audio.
+// - `error`: An error message to display if an issue occurs.
+// - `startRecording`: Function to initiate audio recording.
+// - `stopRecording`: Function to stop audio recording.
+// - `pauseRecording`: Function to pause audio recording.
+// - `resumeRecording`: Function to resume a paused recording.
+// - `resetRecording`: Function to clear the current recording and reset its state.
+// - `handleFileChange`: Function to handle changes from an input file element (used if file upload mechanism directly uses an input element).
+// - `...viewProps`: Rest of the props passed down to the root `Vertical` container.
 export function AudioInputView({
   onAudio,
   recording,
@@ -32,10 +56,19 @@ export function AudioInputView({
   handleFileChange,
   ...viewProps
 }: AudioInputViewProps) {
+  // State variable to store information about the audio preview, including its URL and label, for playback or display.
   const [preview, setPreview] = useState<{ url: string; label: string } | null>(
     null
   );
-
+  // Effect hook that creates a temporary URL for the `audioBlob` when it changes, allowing for local playback or display. It also cleans up the URL when the component unmounts or `audioBlob` changes.
+  //
+  // Steps:
+  // 1. Checks if `audioBlob` exists.
+  // 2. If so, creates an object URL from the `audioBlob`.
+  // 3. Sets the `preview` state with the new URL and a generated label.
+  // 4. Returns a cleanup function to revoke the object URL, preventing memory leaks.
+  //
+  // Dependencies: `audioBlob`
   useEffect(() => {
     if (audioBlob) {
       const url = URL.createObjectURL(audioBlob);
@@ -49,7 +82,12 @@ export function AudioInputView({
     }
     return () => {};
   }, [audioBlob]);
-
+  // Function to clear the audio preview, revoke its object URL if it exists, and reset the recording state.
+  //
+  // Steps:
+  // 1. Checks if a `preview` URL exists and revokes it to release resources.
+  // 2. Sets the `preview` state back to `null`.
+  // 3. Calls `resetRecording` to clear the current recording.
   const clearPreview = () => {
     if (preview?.url) {
       URL.revokeObjectURL(preview.url);
@@ -57,7 +95,15 @@ export function AudioInputView({
     setPreview(null);
     resetRecording();
   };
-
+  // Handler function for when a user selects an audio file via the `Uploader` component.
+  //
+  // Parameters:
+  // - `file`: The selected `File` object.
+  //
+  // Steps:
+  // 1. Calls the `onAudio` prop with the selected file.
+  // 2. If a previous `preview` URL exists, it revokes it.
+  // 3. Creates a new object URL for the selected file and sets the `preview` state with it and the file's name.
   const handleAudioFileSelect = (file: File) => {
     onAudio(file);
     if (preview?.url) {
@@ -68,7 +114,6 @@ export function AudioInputView({
       label: file.name,
     });
   };
-
   return (
     <Vertical gap="10px" width="100%" {...viewProps}>
       <Horizontal
@@ -118,7 +163,6 @@ export function AudioInputView({
             return null;
           }}
         />
-
         <View
           as="button"
           type="button"
@@ -147,14 +191,12 @@ export function AudioInputView({
             />
           )}
         </View>
-
         <View flex={1} minWidth={120}>
           <AudioWaveform
             analyserNode={recording ? analyserNode : null}
             isPaused={!recording || paused}
           />
         </View>
-
         <Text
           fontSize="12px"
           lineHeight="16px"
@@ -164,7 +206,6 @@ export function AudioInputView({
           {formatDuration(duration)}
         </Text>
       </Horizontal>
-
       {preview && !recording && (
         <Vertical
           gap="8px"
@@ -201,7 +242,6 @@ export function AudioInputView({
           <View as="audio" controls src={preview.url} width="100%" />
         </Vertical>
       )}
-
       {error && (
         <Text fontSize="11px" lineHeight="16px" color="color-red-500">
           {error}
@@ -210,5 +250,4 @@ export function AudioInputView({
     </Vertical>
   );
 }
-
 export default AudioInputView;

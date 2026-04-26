@@ -1,5 +1,5 @@
 {
-  "componentDescription": "A component for selecting colors, providing predefined options, custom input, and recent color history.",
+  "componentDescription": "A UI component for selecting colors from a palette, with options for custom input and recent selections.",
   "id": {
     "type": "string",
     "typeValues": [],
@@ -9,73 +9,88 @@
   "name": {
     "type": "string",
     "typeValues": [],
-    "description": "The name attribute for the input element, useful for form submissions.",
+    "description": "An optional name attribute for the component, useful for form submissions.",
     "defaultValue": "undefined"
   },
   "label": {
     "type": "string",
     "typeValues": [],
-    "description": "The label text to display for the color picker.",
+    "description": "An optional label to display alongside the color picker.",
     "defaultValue": "undefined"
   },
   "placeholder": {
     "type": "string",
     "typeValues": [],
-    "description": "Placeholder text displayed when no color is selected.",
+    "description": "An optional placeholder text to display when no color is selected.",
     "defaultValue": "Select a color"
   },
   "helperText": {
     "type": "string",
     "typeValues": [],
-    "description": "Helper text displayed below the color picker.",
+    "description": "An optional helper text to provide additional context or instructions.",
     "defaultValue": "undefined"
   },
   "value": {
     "type": "string",
     "typeValues": [],
-    "description": "The controlled color value of the picker.",
+    "description": "The current controlled color value of the picker in string format (e.g., '#RRGGBB').",
     "defaultValue": "undefined"
   },
   "defaultValue": {
     "type": "string",
     "typeValues": [],
-    "description": "The initial color value when the component is uncontrolled.",
+    "description": "The initial uncontrolled color value of the picker in string format.",
     "defaultValue": "undefined"
   },
   "onChange": {
     "type": "(color: string) => void",
     "typeValues": [],
-    "description": "Callback function triggered when the color value changes, providing the new color-",
+    "description": "Callback function triggered when the color value changes, receiving the new color string.",
     "defaultValue": "undefined"
   },
   "onChangeComplete": {
     "type": "(color: string) => void",
     "typeValues": [],
-    "description": "Callback function triggered when the color selection is complete (e.g., mouse up after drag).",
+    "description": "Callback function triggered when the color selection process is complete (e.g., mouse up after drag), receiving the final color string.",
     "defaultValue": "undefined"
   },
   "views": {
-    "type": "ColorPickerStyles",
+    "type": "object",
     "typeValues": [],
-    "description": "Custom styles to apply to different parts of the ColorPicker.",
-    "defaultValue": "{}"
+    "description": "Custom styles to apply to different parts of the color picker component.",
+    "defaultValue": {}
   },
   "size": {
-    "type": "Size",
-    "typeValues": ["xs", "sm", "md", "lg", "xl"],
-    "description": "The size variant of the color picker (e.g., small, medium, large).",
+    "type": "string",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Defines the size of the color picker component (e.g., 'small', 'medium', 'large').",
     "defaultValue": "md"
   },
   "shape": {
-    "type": "Shape",
-    "typeValues": ["default", "square", "rounded", "pill"],
-    "description": "The shape variant of the color picker (e.g., rounded, square).",
+    "type": "string",
+    "typeValues": [
+      "default",
+      "square",
+      "rounded",
+      "pill"
+    ],
+    "description": "Defines the shape of the color picker component (e.g., 'square', 'rounded', 'circle').",
     "defaultValue": "default"
   },
   "variant": {
-    "type": "Variant",
-    "typeValues": ["outline", "default", "filled"],
-    "description": "The visual style variant of the color picker (e.g., filled, outlined).",
+    "type": "string",
+    "typeValues": [
+      "outline",
+      "default",
+      "filled"
+    ],
+    "description": "Defines the visual variant of the color picker component (e.g., 'outline', 'filled').",
     "defaultValue": "default"
   },
   "error": {
@@ -87,37 +102,43 @@
   "isDisabled": {
     "type": "boolean",
     "typeValues": [],
-    "description": "If true, the color picker will be disabled and non-interactive.",
+    "description": "Indicates if the color picker is disabled and cannot be interacted with.",
     "defaultValue": "false"
   },
   "isReadOnly": {
     "type": "boolean",
     "typeValues": [],
-    "description": "If true, the color picker will be read-only and its value cannot be changed by the user.",
+    "description": "Indicates if the color picker is read-only, allowing selection but not modification.",
     "defaultValue": "false"
   },
   "predefinedColors": {
-    "type": "PredefinedColor[]",
-    "typeValues": [],
-    "description": "An array of predefined color objects for quick selection.",
+    "type": "array",
+    "typeValues": [
+      "{ name: string; value: string; category?: string; }"
+    ],
+    "description": "An array of predefined colors for quick selection.",
     "defaultValue": "DefaultColorPalette"
   },
   "showCustomInput": {
     "type": "boolean",
     "typeValues": [],
-    "description": "If true, displays an input field for users to enter custom color values.",
+    "description": "Determines whether to display a custom input field for color values.",
     "defaultValue": "true"
   },
   "showRecentColors": {
     "type": "boolean",
     "typeValues": [],
-    "description": "If true, displays a section for recently selected colors.",
+    "description": "Determines whether to display a section for recently selected colors.",
     "defaultValue": "true"
   },
   "colorFormat": {
-    "type": "ColorFormat",
-    "typeValues": ["hex", "rgb", "hsl"],
-    "description": "Specifies the preferred format for color values (e.g., HEX, RGB, HSL).",
+    "type": "string",
+    "typeValues": [
+      "hex",
+      "rgb",
+      "hsl"
+    ],
+    "description": "Specifies the format for color values (e.g., 'hex', 'rgb', 'hsl').",
     "defaultValue": "undefined"
   },
   "maxRecentColors": {
@@ -147,19 +168,19 @@
   "closeOnSelect": {
     "type": "boolean",
     "typeValues": [],
-    "description": "If true, the dropdown will close automatically after a color is selected.",
+    "description": "Determines if the dropdown should automatically close after a color is selected.",
     "defaultValue": "undefined"
   },
   "aria-label": {
     "type": "string",
     "typeValues": [],
-    "description": "Defines a string value that labels the current element for accessibility purposes.",
+    "description": "ARIA label for accessibility, providing a descriptive name for the component.",
     "defaultValue": "undefined"
   },
   "aria-describedby": {
     "type": "string",
     "typeValues": [],
-    "description": "Identifies the element (or elements) that describes the object for accessibility purposes.",
+    "description": "ARIA property to associate the component with an element that describes it.",
     "defaultValue": "undefined"
   }
 }

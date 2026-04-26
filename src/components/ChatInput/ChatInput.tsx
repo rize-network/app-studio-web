@@ -1,25 +1,12 @@
+// This file defines the main ChatInput functional component. It uses `forwardRef` to enable ref forwarding, integrates a custom state management hook (`useChatInputState`) for its logic, and delegates the actual rendering to a separate `ChatInputView` component, thereby separating concerns.
 import React, { forwardRef } from 'react';
 import { ChatInputProps } from './ChatInput/ChatInput.props';
 import { useChatInputState } from './ChatInput/ChatInput.state';
 import ChatInputView from './ChatInput/ChatInput.view';
-
-/**
- * Interface for the ChatInput component's imperative handle
- */
-
-/**
- * ChatInput component
- *
- * A customizable chat input component with file upload support
- */
 export const ChatInput = forwardRef<HTMLElement, ChatInputProps>(
   (props, ref) => {
-    // Get state from custom hook
     const state = useChatInputState(props);
-
-    // Render the view component with props and state
     return <ChatInputView {...props} {...state} />;
   }
 );
-
 ChatInput.displayName = 'ChatInput';

@@ -1,34 +1,34 @@
 {
-  "componentDescription": "A versatile component for searching, filtering, and executing commands or actions.",
+  "componentDescription": "A searchable command palette for quickly finding and executing actions or navigating.",
   "open": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Controls the open/closed state of the command dialog.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Determines whether the Command component dropdown is currently open.",
+    "defaultValue": "N/A"
   },
   "onOpenChange": {
     "type": "(open: boolean) => void",
-    "typeValues": [],
-    "description": "Callback function invoked when the open state of the command dialog changes.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Callback function triggered when the open state of the Command component changes.",
+    "defaultValue": "N/A"
   },
   "groups": {
     "type": "CommandGroup[]",
-    "typeValues": [],
-    "description": "An optional array of command groups to be displayed.",
-    "defaultValue": []
+    "typeValues": "N/A",
+    "description": "Optional array of command groups to display within the component.",
+    "defaultValue": "[]"
   },
   "commands": {
     "type": "CommandItem[]",
-    "typeValues": [],
-    "description": "An optional array of individual command items to be displayed.",
-    "defaultValue": []
+    "typeValues": "N/A",
+    "description": "Optional array of individual command items to display.",
+    "defaultValue": "[]"
   },
   "placeholder": {
     "type": "string",
-    "typeValues": [],
-    "description": "Placeholder text to display in the command input field when it's empty.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Placeholder text for the command input field.",
+    "defaultValue": "Type a command or search..."
   },
   "size": {
     "type": "CommandSize",
@@ -37,7 +37,7 @@
       "md",
       "lg"
     ],
-    "description": "Defines the predefined size of the command component.",
+    "description": "Specifies the visual size of the Command component.",
     "defaultValue": "md"
   },
   "variant": {
@@ -47,31 +47,31 @@
       "filled",
       "outline"
     ],
-    "description": "Specifies the visual variant or style of the command component.",
+    "description": "Defines the visual variant or style of the Command component.",
     "defaultValue": "default"
   },
   "filter": {
     "type": "(value: string, item: CommandItem) => boolean",
-    "typeValues": [],
-    "description": "A custom filter function to determine if a command item matches the search input.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Custom filter function to apply to command items based on the input value.",
+    "defaultValue": "N/A"
   },
   "emptyState": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "React node to render when there are no command items to display (e.g., after filtering).",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Content to display when there are no command results.",
+    "defaultValue": "N/A"
   },
   "footer": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "React node to render at the bottom of the command dialog, often for actions or information.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Content to display at the bottom of the Command component, typically for actions or information.",
+    "defaultValue": "N/A"
   },
   "views": {
     "type": "CommandStyles",
-    "typeValues": [],
-    "description": "Custom styling properties for various parts of the Command component.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Customizable styling options for various parts of the Command component.",
+    "defaultValue": "N/A"
   }
 }

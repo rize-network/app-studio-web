@@ -1,28 +1,31 @@
 import React from 'react';
 import { Horizontal, Text, View, useTheme } from 'app-studio';
 import { PromptExample } from './ChatInput/ChatInput.type';
-
+// Defines the properties expected by the PromptExamples component.
 interface PromptExamplesProps {
+  // An array of prompt examples to be displayed.
   examples: PromptExample[];
+  // A callback function invoked when a prompt example is selected.
   onSelect: (example: PromptExample) => void;
+  // Optional custom component overrides for different parts of the PromptExamples component.
   views?: {
     container?: any;
     item?: any;
     text?: any;
   };
 }
-
+// Defines the PromptExamples functional component, which displays a list of clickable prompt examples.
 export const PromptExamples: React.FC<PromptExamplesProps> = ({
   examples,
   onSelect,
   views = {},
 }) => {
+  // Retrieves the `getColor` utility function from the current theme context for consistent styling.
   const { getColor } = useTheme();
-
+  // Conditionally renders nothing if no examples are provided or if the examples array is empty.
   if (!examples || examples.length === 0) {
     return null;
   }
-
   return (
     <Horizontal
       gap={8}

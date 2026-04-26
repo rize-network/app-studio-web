@@ -1,0 +1,560 @@
+# Card
+
+A versatile container component designed to group and display content with various visual styles and structures.
+
+### **Import**
+```tsx
+import { Card } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from 'app-studio';
+
+export const DefaultDemo = () => {
+  return (
+    <Card>
+      <Text>This is a default card with simple content.</Text>
+    </Card>
+  );
+};
+```
+
+### **ContextStyling**
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from 'app-studio';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+
+export const ContextStylingDemo = () => {
+  return (
+    <Card
+      views={{
+        // These styles will be passed down to all child components via context
+        container: {
+          backgroundColor: 'color-blue-50',
+          borderRadius: '12px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        },
+        header: {
+          backgroundColor: 'color-blue-100',
+          padding: '16px',
+          borderBottomColor: 'color-blue-200',
+        },
+        content: {
+          padding: '24px',
+        },
+        footer: {
+          backgroundColor: 'color-blue-100',
+          padding: '16px',
+          borderTopColor: 'color-blue-200',
+        },
+      }}
+    >
+      <Card.Header>
+        <Text fontWeight="bold" fontSize={18}>
+          Context-Based Styling
+        </Text>
+      </Card.Header>
+
+      <Card.Content>
+        <Text>
+          This card demonstrates the improved context-based styling system. The
+          styles defined in the Cards views prop are automatically passed down
+          to the Header, Content, and Footer components.
+        </Text>
+      </Card.Content>
+
+      <Card.Footer>
+        <Horizontal justifyContent="flex-end" gap={10}>
+          <Button variant="outline">Cancel</Button>
+          <Button>Submit</Button>
+        </Horizontal>
+      </Card.Footer>
+    </Card>
+  );
+};
+```
+
+### **Custom**
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Button } from '../../Button/Button';
+
+export const CustomDemo = () => {
+  return (
+    <Card
+      views={{
+        container: {
+          backgroundColor: 'color-blue-50',
+          borderRadius: '16px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        },
+        header: {
+          backgroundColor: 'color-blue-500',
+          color: 'color-white',
+          padding: '16px',
+          borderBottomWidth: '0',
+        },
+        content: {
+          padding: '24px',
+        },
+        footer: {
+          padding: '16px',
+          borderTopWidth: '0',
+        },
+      }}
+    >
+      <Card.Header>
+        <Text fontWeight="bold" fontSize={18} color="white">
+          Custom Styled Card
+        </Text>
+      </Card.Header>
+
+      <Card.Content>
+        <Text>
+          This card has custom styling applied to all its parts. You can
+          customize the container, header, content, and footer.
+        </Text>
+      </Card.Content>
+
+      <Card.Footer>
+        <Horizontal justifyContent="flex-end" gap={10}>
+          <Button variant="outline">Cancel</Button>
+          <Button>Submit</Button>
+        </Horizontal>
+      </Card.Footer>
+    </Card>
+  );
+};
+```
+
+### **DarkModeExample**
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from 'app-studio';
+import { Horizontal, Vertical } from 'app-studio';
+import { Button } from '../../Button/Button';
+
+export const DarkModeExample = () => {
+  return (
+    <Vertical gap={20}>
+      <Text fontSize={20} fontWeight="bold">
+        Light Mode Cards
+      </Text>
+      <Horizontal gap={20} alignItems="flex-start">
+        <Card variant="default" themeMode="light">
+          <Card.Header>
+            <Text fontWeight="bold">Default Card (Light)</Text>
+          </Card.Header>
+          <Card.Content>
+            <Text>This card uses light mode styling.</Text>
+          </Card.Content>
+          <Card.Footer>
+            <Button size="sm">Action</Button>
+          </Card.Footer>
+        </Card>
+
+        <Card variant="outlined" themeMode="light">
+          <Card.Header>
+            <Text fontWeight="bold">Outlined Card (Light)</Text>
+          </Card.Header>
+          <Card.Content>
+            <Text>This card uses light mode styling with an outline.</Text>
+          </Card.Content>
+          <Card.Footer>
+            <Button size="sm">Action</Button>
+          </Card.Footer>
+        </Card>
+
+        <Card variant="elevated" themeMode="light">
+          <Card.Header>
+            <Text fontWeight="bold">Elevated Card (Light)</Text>
+          </Card.Header>
+          <Card.Content>
+            <Text>This card uses light mode styling with elevation.</Text>
+          </Card.Content>
+          <Card.Footer>
+            <Button size="sm">Action</Button>
+          </Card.Footer>
+        </Card>
+      </Horizontal>
+
+      <Text fontSize={20} fontWeight="bold" marginTop={40}>
+        Dark Mode Cards
+      </Text>
+      <Horizontal gap={20} alignItems="flex-start">
+        <Card variant="default" themeMode="dark">
+          <Card.Header>
+            <Text fontWeight="bold">Default Card (Dark)</Text>
+          </Card.Header>
+          <Card.Content>
+            <Text>This card uses dark mode styling.</Text>
+          </Card.Content>
+          <Card.Footer>
+            <Button size="sm">Action</Button>
+          </Card.Footer>
+        </Card>
+
+        <Card variant="outlined" themeMode="dark">
+          <Card.Header>
+            <Text fontWeight="bold">Outlined Card (Dark)</Text>
+          </Card.Header>
+          <Card.Content>
+            <Text>This card uses dark mode styling with an outline.</Text>
+          </Card.Content>
+          <Card.Footer>
+            <Button size="sm">Action</Button>
+          </Card.Footer>
+        </Card>
+
+        <Card variant="elevated" themeMode="dark">
+          <Card.Header>
+            <Text fontWeight="bold">Elevated Card (Dark)</Text>
+          </Card.Header>
+          <Card.Content>
+            <Text>This card uses dark mode styling with elevation.</Text>
+          </Card.Content>
+          <Card.Footer>
+            <Button size="sm">Action</Button>
+          </Card.Footer>
+        </Card>
+      </Horizontal>
+    </Vertical>
+  );
+};
+```
+
+### **DesignSystem**
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Vertical, Horizontal, Text, View, useTheme } from 'app-studio';
+import { Button } from '../../Button/Button';
+
+export const DesignSystemCards = () => {
+  const { themeMode } = useTheme();
+  const secondaryTextColor =
+    themeMode === 'light' ? 'color-gray-600' : 'color-gray-400';
+
+  return (
+    <Vertical gap={24}>
+      {/* Variant Examples */}
+      <View>
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
+          Card Variants
+        </Text>
+        <Horizontal gap={16} alignItems="flex-start" flexWrap="wrap">
+          <Card variant="default" width="250px">
+            <Card.Header>
+              <Text fontWeight="600" fontSize="18px" color="theme-primary">
+                Default Card
+              </Text>
+            </Card.Header>
+            <Card.Content>
+              <Text fontSize="14px" color={secondaryTextColor}>
+                This is a default card with no border or shadow.
+              </Text>
+            </Card.Content>
+            <Card.Footer>
+              <Button size="sm">Action</Button>
+            </Card.Footer>
+          </Card>
+
+          <Card variant="outlined" width="250px">
+            <Card.Header>
+              <Text fontWeight="600" fontSize="18px" color="theme-primary">
+                Outlined Card
+              </Text>
+            </Card.Header>
+            <Card.Content>
+              <Text fontSize="14px" color={secondaryTextColor}>
+                This card has a subtle border to define its boundaries.
+              </Text>
+            </Card.Content>
+            <Card.Footer>
+              <Button size="sm">Action</Button>
+            </Card.Footer>
+          </Card>
+
+          <Card variant="elevated" width="250px">
+            <Card.Header>
+              <Text fontWeight="600" fontSize="18px" color="theme-primary">
+                Elevated Card
+              </Text>
+            </Card.Header>
+            <Card.Content>
+              <Text fontSize="14px" color={secondaryTextColor}>
+                This card has a shadow to give it an elevated appearance.
+              </Text>
+            </Card.Content>
+            <Card.Footer>
+              <Button size="sm">Action</Button>
+            </Card.Footer>
+          </Card>
+        </Horizontal>
+      </View>
+
+      {/* Size Examples */}
+      <View>
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
+          Card Sizes
+        </Text>
+        <Vertical gap={16}>
+          {['sm', 'md', 'lg'].map((size) => (
+            <Card key={size} variant="outlined" size={size as any} width="100%">
+              <Text fontWeight="600" color="theme-primary">
+                {size.toUpperCase()} Card
+              </Text>
+              <Text fontSize="14px" color={secondaryTextColor}>
+                This card uses the {size} size, which affects its padding.
+              </Text>
+            </Card>
+          ))}
+        </Vertical>
+      </View>
+
+      {/* Shape Examples */}
+      <View>
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
+          Card Shapes
+        </Text>
+        <Horizontal gap={16} alignItems="flex-start" flexWrap="wrap">
+          {['square', 'rounded', 'pill'].map((shape) => (
+            <Card
+              key={shape}
+              variant="outlined"
+              shape={shape as any}
+              width="250px"
+            >
+              <Card.Header>
+                <Text fontWeight="600" color="theme-primary">
+                  {shape} Card
+                </Text>
+              </Card.Header>
+              <Card.Content>
+                <Text fontSize="14px" color={secondaryTextColor}>
+                  This card has {shape === 'square' ? 'no' : shape} corners.
+                </Text>
+              </Card.Content>
+            </Card>
+          ))}
+        </Horizontal>
+      </View>
+
+      {/* Custom Styling */}
+      <View>
+        <Text marginBottom={8} fontWeight="600" color="theme-primary">
+          Custom Styling
+        </Text>
+        <Horizontal gap={16} alignItems="flex-start" flexWrap="wrap">
+          <Card
+            width="300px"
+            views={{
+              container: {
+                backgroundColor:
+                  themeMode === 'light' ? 'color-blue-50' : 'color-gray-800',
+                borderRadius: '12px',
+                boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
+                overflow: 'hidden',
+                borderColor:
+                  themeMode === 'light' ? 'color-blue-200' : 'color-blue-500',
+                borderWidth: 1,
+              },
+              header: {
+                backgroundColor: 'theme-primary',
+                padding: '16px',
+                borderBottom: 'none',
+              },
+              content: {
+                padding: '20px',
+              },
+              footer: {
+                padding: '16px',
+                borderTopOffset: 1,
+                borderTopStyle: 'solid',
+                borderTopColor:
+                  themeMode === 'light' ? 'color-blue-100' : 'color-gray-700',
+              },
+            }}
+          >
+            <Card.Header>
+              <Text fontWeight="600" fontSize="18px" color="color-white">
+                Custom Card
+              </Text>
+            </Card.Header>
+            <Card.Content>
+              <Text
+                fontSize="14px"
+                color={
+                  themeMode === 'light' ? 'color-gray-800' : 'color-gray-200'
+                }
+              >
+                This card has custom styling applied to all its parts using the
+                views prop.
+              </Text>
+            </Card.Content>
+            <Card.Footer>
+              <Horizontal justifyContent="flex-end" gap={8}>
+                <Button variant="outline" size="sm">
+                  Cancel
+                </Button>
+                <Button size="sm">Submit</Button>
+              </Horizontal>
+            </Card.Footer>
+          </Card>
+        </Horizontal>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './designSystem'; // New design system example
+export * from './variants';
+export * from './structured';
+export * from './shapes';
+export * from './sizes';
+export * from './custom';
+export * from './contextStyling';
+```
+
+### **Shapes**
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Shape } from '../Card/Card.type';
+
+export const ShapesDemo = () => {
+  const shapes: Shape[] = ['square', 'rounded', 'pill'];
+
+  return (
+    <Vertical gap={20}>
+      {shapes.map((shape) => (
+        <Card key={shape} shape={shape} variant="outlined">
+          <Text fontWeight="bold">{shape} Card</Text>
+          <Text color="color-gray-500">
+            This card has {shape === 'square' ? 'no' : shape} corners.
+          </Text>
+        </Card>
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **Sizes**
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Size } from '../Card/Card.type';
+
+export const SizesDemo = () => {
+  const sizes: Size[] = ['sm', 'md', 'lg'];
+
+  return (
+    <Vertical gap={20}>
+      {sizes.map((size) => (
+        <Card key={size} size={size} variant="outlined">
+          <Text fontWeight="bold">{size.toUpperCase()} Size</Text>
+          <Text color="color-gray-500">This card has {size} padding.</Text>
+        </Card>
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **Structured**
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Button } from '../../Button/Button';
+
+export const StructuredDemo = () => {
+  return (
+    <Card>
+      <Card.Header>
+        <Text fontWeight="bold" fontSize={18}>
+          Card Title
+        </Text>
+      </Card.Header>
+
+      <Card.Content>
+        <Text>
+          This card uses the structured layout with separate header, content,
+          and footer sections. The content area is where the main information
+          goes.
+        </Text>
+      </Card.Content>
+
+      <Card.Footer>
+        <Horizontal justifyContent="flex-end" gap={10}>
+          <Button variant="outline">Cancel</Button>
+          <Button>Submit</Button>
+        </Horizontal>
+      </Card.Footer>
+    </Card>
+  );
+};
+```
+
+### **Variants**
+
+```tsx
+import React from 'react';
+import { Card } from '../Card';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const VariantsDemo = () => {
+  return (
+    <Vertical gap={20}>
+      <Card variant="default">
+        <Text>Default Card</Text>
+        <Text color="color-gray-500">
+          This is a card with the default variant.
+        </Text>
+      </Card>
+
+      <Card variant="outlined">
+        <Text>Outlined Card</Text>
+        <Text color="color-gray-500">This card has a border around it.</Text>
+      </Card>
+
+      <Card variant="elevated">
+        <Text>Elevated Card</Text>
+        <Text color="color-gray-500">
+          This card has a shadow to give it an elevated appearance.
+        </Text>
+      </Card>
+    </Vertical>
+  );
+};
+```
+

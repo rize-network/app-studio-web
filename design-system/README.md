@@ -181,6 +181,6 @@ The hosted app loads **Mulish** from Google Fonts and no local TTFs ship in the 
 
 1. **Link the CSS once:** `<link rel="stylesheet" href="colors_and_type.css">`
 2. **Set mode:** `<html data-theme="light">` (or `"dark"`).
-3. **Use the token vars:** `background: var(--theme-background); color: var(--theme-text); border-radius: var(--radius-md); box-shadow: var(--shadow-md);`
+3. **Use the token vars:** `background: var(--color-white); color: var(--theme-text); border-radius: var(--radius-md); box-shadow: var(--shadow-md);`
 4. **For components, pull from `ui_kits/app_studio_web/components.jsx`** — these are simplified JSX recreations of Button, Card, Input, Badge, Alert, Chat Input, etc. with the same visual behavior as the library.
 5. **For icons, load Lucide from CDN** and reference by name.

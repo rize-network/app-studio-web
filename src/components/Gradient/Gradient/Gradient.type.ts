@@ -1,20 +1,7 @@
-/**
- * Gradient Types
- *
- * Defines the types for the Gradient component following the design guidelines.
- */
-
 import { ViewProps } from 'app-studio';
-
-/**
- * Gradient type - linear or radial
- */
+// Defines the possible types of gradients, including linear, radial, and conic.
 export type GradientType = 'linear' | 'radial' | 'conic';
-
-/**
- * Direction for linear gradients
- * Can be a predefined direction or a custom angle in degrees
- */
+// Specifies the allowed directions for a linear gradient, ranging from standard compass points to custom string values.
 export type LinearDirection =
   | 'to-right'
   | 'to-left'
@@ -24,16 +11,10 @@ export type LinearDirection =
   | 'to-top-left'
   | 'to-bottom-right'
   | 'to-bottom-left'
-  | string; // For custom angles like '45deg'
-
-/**
- * Shape for radial gradients
- */
+  | string;
+// Defines the possible shapes for a radial gradient, either a circle or an ellipse.
 export type RadialShape = 'circle' | 'ellipse';
-
-/**
- * Position for radial gradients
- */
+// Specifies the starting position for a radial gradient, using keywords or custom string values.
 export type RadialPosition =
   | 'center'
   | 'top'
@@ -44,20 +25,18 @@ export type RadialPosition =
   | 'top-left'
   | 'bottom-right'
   | 'bottom-left'
-  | string; // For custom positions like '20% 30%'
-
-/**
- * Color stop for gradients
- */
+  | string;
+// Defines an individual color stop in a gradient, combining a color value and an optional position.
 export interface ColorStop {
+  // The color value for this specific stop in the gradient.
   color: string;
-  position?: string | number; // Percentage or absolute value
+  // The optional position of the color stop, defining where the color transition occurs.
+  position?: string | number;
 }
-
-/**
- * Styles for the Gradient component
- */
+// Defines custom styles for various parts of the Gradient component, leveraging standard ViewProps.
 export interface GradientStyles {
+  // Optional style properties for the main container element of the gradient.
   container?: ViewProps;
+  // Optional style properties for the content area within the gradient component.
   content?: ViewProps;
 }

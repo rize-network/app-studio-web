@@ -1,99 +1,124 @@
 {
-  "componentDescription": "A toggle switch for user interactions like turning settings on or off.",
+  "componentDescription": "A versatile switch toggle component with customizable styles and states for user interaction.",
   "activeChild": {
     "type": "React.ReactNode",
-    "typeValues": [],
+    "typeValues": null,
     "description": "The content to be displayed when the switch is in an active state.",
-    "defaultValue": ""
-  },
-  "colorScheme": {
-    "type": "string",
-    "typeValues": [],
-    "description": "Defines the color theme for the switch component.",
-    "defaultValue": "theme-primary"
+    "defaultValue": "undefined"
   },
   "id": {
     "type": "string",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Unique identifier for the switch component.",
-    "defaultValue": ""
+    "defaultValue": "undefined"
   },
   "isDisabled": {
     "type": "boolean",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Determines if the switch is disabled.",
     "defaultValue": "false"
   },
   "isReadOnly": {
     "type": "boolean",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Determines if the switch is read-only.",
     "defaultValue": "false"
   },
+  "isChecked": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines if the switch is checked (on).",
+    "defaultValue": "undefined"
+  },
   "onChange": {
-    "type": "Function",
-    "typeValues": [],
+    "type": "(checked: boolean) => void",
+    "typeValues": null,
     "description": "Callback function to handle the change event.",
-    "defaultValue": ""
+    "defaultValue": "undefined"
   },
   "name": {
     "type": "string",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Name attribute for the switch component, useful for form submission.",
-    "defaultValue": ""
+    "defaultValue": "undefined"
   },
   "inActiveChild": {
     "type": "React.ReactNode",
-    "typeValues": [],
+    "typeValues": null,
     "description": "The content to be displayed when the switch is in an inactive state.",
-    "defaultValue": ""
+    "defaultValue": "undefined"
   },
-  "styles": {
+  "views": {
     "type": "SwitchStyles",
-    "typeValues": ["CSSProperties"],
+    "typeValues": null,
     "description": "Custom styles to apply to the switch component.",
-    "defaultValue": "{ slider: {}, circle: {}, label: {} }"
+    "defaultValue": {
+      "slider": {},
+      "circle": {},
+      "label": {}
+    }
   },
   "shadow": {
-    "type": ["Shadow", "Elevation", "CSSProperties"],
-    "typeValues": [],
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": null,
     "description": "Defines the shadow appearance of the switch using predefined Shadow or Elevation, or a custom CSSProperties object.",
-    "defaultValue": "{}"
+    "defaultValue": {}
   },
   "size": {
     "type": "Size",
-    "typeValues": ["xs", "sm", "md", "lg", "xl"],
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
     "description": "Specifies the size of the switch component.",
     "defaultValue": "sm"
   },
   "labelPosition": {
-    "type": "string",
-    "typeValues": ["left", "right"],
+    "type": "'left' | 'right'",
+    "typeValues": [
+      "left",
+      "right"
+    ],
     "description": "The position of the label relative to the switch, either 'left' or 'right'.",
     "defaultValue": "right"
   },
   "isHovered": {
     "type": "boolean",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Denotes if the switch component is currently hovered by the cursor.",
     "defaultValue": "false"
   },
   "setIsHovered": {
     "type": "Function",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Function to set the hover state of the switch component.",
-    "defaultValue": ""
+    "defaultValue": "() => {}"
   },
   "value": {
     "type": "boolean",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Controls the value or state of the switch (on/off).",
     "defaultValue": "false"
   },
   "setValue": {
     "type": "Function",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Function to update the value of the switch.",
     "defaultValue": "() => {}"
+  },
+  "label": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "The label content for the switch.",
+    "defaultValue": "undefined"
+  },
+  "helperText": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Helper text to display below the switch component.",
+    "defaultValue": "undefined"
   }
 }

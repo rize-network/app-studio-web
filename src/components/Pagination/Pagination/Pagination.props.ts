@@ -6,80 +6,33 @@ import {
   Variant,
   Shape,
 } from './Pagination.type';
-
 export interface PaginationProps extends ViewProps {
-  /**
-   * The current page number (1-based)
-   */
+  // The current active page number.
   currentPage: number;
-
-  /**
-   * The total number of pages
-   */
+  // The total number of pages available for navigation.
   totalPages: number;
-
-  /**
-   * Callback function when page changes
-   */
+  // Callback function invoked when the current page changes.
   onPageChange: (page: number) => void;
-
-  /**
-   * The number of items per page
-   */
+  // The number of items to display per page. Optional.
   pageSize?: number;
-
-  /**
-   * Available page size options
-   */
+  // An array of available page size options for the selector. Optional.
   pageSizeOptions?: PageSizeOption[];
-
-  /**
-   * Callback function when page size changes
-   */
+  // Callback function invoked when the page size changes. Optional.
   onPageSizeChange?: (pageSize: number) => void;
-
-  /**
-   * Whether to show the page size selector
-   */
+  // Determines whether to display the page size selector. Optional.
   showPageSizeSelector?: boolean;
-
-  /**
-   * Whether to show the page information text (e.g., "Page 1 of 10")
-   */
+  // Determines whether to display information about the current page and total pages. Optional.
   showPageInfo?: boolean;
-
-  /**
-   * The maximum number of page buttons to show
-   */
+  // The maximum number of page buttons to display in the pagination control. Optional.
   maxPageButtons?: number;
-
-  /**
-   * Whether to show the first and last page buttons
-   */
+  // Determines whether to display buttons to navigate to the first and last pages. Optional.
   showFirstLastButtons?: boolean;
-
-  /**
-   * The size of the pagination component
-   */
+  // Defines the size of the pagination component (e.g., small, medium, large). Optional.
   size?: Size;
-
-  /**
-   * The visual style variant of the pagination component
-   */
+  // Defines the visual variant of the pagination component (e.g., outlined, contained). Optional.
   variant?: Variant;
-
-  /**
-   * The shape of the pagination buttons
-   */
+  // Defines the shape of the pagination buttons (e.g., rounded, square). Optional.
   shape?: Shape;
-
-  /**
-   * Custom styles for different parts of the pagination component
-   */
+  // Custom styling options for the pagination component. Optional.
   views?: PaginationStyles;
-
-  /**
-   * Optional theme mode override ('light' or 'dark')
-   * If not provided, the component will use the theme mode from context
-   */
 }

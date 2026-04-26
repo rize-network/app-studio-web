@@ -1,0 +1,78 @@
+# AudioInput
+
+Renders a UI for audio input, offering recording controls, file upload, waveform display, and playback preview.
+
+### **Import**
+```tsx
+import { AudioInput } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { AudioInput } from '../AudioInput';
+import { View, Text, Button } from 'app-studio';
+
+export const Default = () => {
+  const [audioFile, setAudioFile] = useState<File | null>(null);
+
+  const handleAudio = (file: File) => {
+    setAudioFile(file);
+  };
+
+  return (
+    <View flexDirection="column" gap={4} padding={4} alignItems="flex-start">
+      <Text variant="heading" size="lg">
+        Audio Input Example
+      </Text>
+      <AudioInput onAudio={handleAudio} />
+      {audioFile && (
+        <View flexDirection="column" gap={2}>
+          <Text>
+            Recorded Audio: <strong>{audioFile.name}</strong> (
+            {(audioFile.size / 1024).toFixed(2)} KB)
+          </Text>
+          <audio controls src={URL.createObjectURL(audioFile)} />
+          <Button onPress={() => setAudioFile(null)}>Clear Audio</Button>
+        </View>
+      )}
+    </View>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './minimal';
+```
+
+### **Minimal**
+
+```tsx
+import React from 'react';
+import { AudioInput } from '../AudioInput';
+import { View, Text } from 'app-studio';
+
+export const Minimal = () => {
+  const handleAudio = (file: File) => {
+    console.log('Audio recorded:', file.name, file.size);
+    // In a real application, you would upload this file or process it further
+  };
+
+  return (
+    <View flexDirection="column" gap={4} padding={4} alignItems="flex-start">
+      <Text variant="heading" size="lg">
+        Minimal Audio Input Example
+      </Text>
+      <AudioInput onAudio={handleAudio} />
+      <Text variant="body">
+        This example demonstrates a minimal integration of the AudioInput
+        component. Check the console for recorded audio file details.
+      </Text>
+    </View>
+  );
+};
+```
+

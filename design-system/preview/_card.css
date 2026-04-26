@@ -3,9 +3,6 @@
 
 html, body {
   margin: 0;
-  background: var(--theme-background);
-  color: var(--theme-text);
-  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 .card {

@@ -1,9 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { TitleSize, HighlightStyle } from './Title.type';
-
-/**
- * Font sizes for different title sizes
- */
+// Defines a mapping of abstract title sizes (xs, sm, md, lg, xl) to their corresponding fixed pixel values for consistent sizing across the component.
 export const TitleSizes = {
   xs: 24,
   sm: 32,
@@ -11,11 +8,7 @@ export const TitleSizes = {
   lg: 96,
   xl: 110,
 };
-
-/**
- * Responsive typography system that maps title sizes to responsive breakpoints
- * Based on the Typography system with dynamic breakpoint sizing
- */
+// Provides a comprehensive set of responsive typography settings. It maps each defined `TitleSize` to specific font sizes and optional width constraints tailored for various device breakpoints (mobile, tablet, desktop).
 export const ResponsiveTypography: Record<
   TitleSize,
   {
@@ -26,7 +19,6 @@ export const ResponsiveTypography: Record<
     };
   }
 > = {
-  // xl maps to H1 - Largest heading
   xl: {
     media: {
       mobile: { fontSize: 48 },
@@ -34,7 +26,6 @@ export const ResponsiveTypography: Record<
       desktop: { fontSize: 110 },
     },
   },
-  // lg maps to H2 - Large heading
   lg: {
     media: {
       mobile: { fontSize: 48 },
@@ -42,7 +33,6 @@ export const ResponsiveTypography: Record<
       desktop: { fontSize: 70 },
     },
   },
-  // md maps to H3 - Medium heading
   md: {
     media: {
       mobile: { fontSize: 32 },
@@ -50,7 +40,6 @@ export const ResponsiveTypography: Record<
       desktop: { fontSize: 56 },
     },
   },
-  // sm maps to T1 - Title text
   sm: {
     media: {
       mobile: { fontSize: 20 },
@@ -58,7 +47,6 @@ export const ResponsiveTypography: Record<
       desktop: { fontSize: 32 },
     },
   },
-  // xs maps to S1 - Subtitle text
   xs: {
     media: {
       mobile: { fontSize: 14 },
@@ -67,10 +55,7 @@ export const ResponsiveTypography: Record<
     },
   },
 };
-
-/**
- * Default styles for different highlight types
- */
+// Contains a collection of functions, each representing a distinct text highlight style. These functions accept primary and optional secondary color parameters and return `ViewProps` objects with the necessary CSS-like properties to apply the chosen highlight effect.
 export const HighlightStyles: Record<
   HighlightStyle,
   (color: string, secondaryColor?: string) => ViewProps

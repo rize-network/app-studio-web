@@ -1,0 +1,217 @@
+# DatePicker
+
+A component for selecting a date, allowing users to input and manage date values easily.
+
+### **Import**
+```tsx
+import { DatePicker } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { DatePicker } from '../../../Form/DatePicker/DatePicker';
+
+export const DefaultDatePicker = () => <DatePicker label="Select a date" />;
+```
+
+### **shadow**
+Adds a shadow effect to the DatePicker.
+
+- **Type:** `Shadow | Elevation | ViewProps`
+- **Default:** `[object Object]`
+
+```tsx
+import React from 'react';
+import { DatePicker } from '../../../Form/DatePicker/DatePicker';
+
+export const ShadowDatePicker = () => (
+  <DatePicker
+    shadow={{
+      boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px',
+    }}
+  />
+);
+```
+
+### **ColorScheme**
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+
+import { DatePicker } from '../DatePicker';
+
+export const ColorDatePicker = () => (
+  <Vertical gap={15}>
+    {[
+      'theme-primary',
+      'theme-secondary',
+      'theme-error',
+      'theme-success',
+      'theme-warning',
+    ].map((color) => (
+      <DatePicker key={color} name="name" label="Select a date:" />
+    ))}
+  </Vertical>
+);
+```
+
+### **Default**
+
+```tsx
+import React from 'react';
+import { DatePicker } from '../../../Form/DatePicker/DatePicker';
+
+export const DefaultDatePicker = () => <DatePicker label="Select a date" />;
+```
+
+### **DisabledInput**
+
+```tsx
+import React from 'react';
+
+import { DatePicker } from '../DatePicker';
+
+export const DisabledDatePicker = () => (
+  <DatePicker name="disabled" isDisabled />
+);
+```
+
+### **ErrorDatePicker**
+
+```tsx
+import React from 'react';
+import { DatePicker } from '../DatePicker';
+
+export const ErrorDatePicker = () => (
+  <DatePicker id="error" name="error" error />
+);
+```
+
+### **FormDatePicker**
+
+```tsx
+import React from 'react';
+import { Button } from '../../../Button/Button';
+
+import { Horizontal } from 'app-studio';
+
+import { DatePicker } from '../DatePicker';
+
+export const FormDatePicker = () => {
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    alert(`You selected: ${formData.getAll('datePicker')}`);
+  };
+  return (
+    <form onSubmit={handleSubmit}>
+      <Horizontal gap={10}>
+        <DatePicker id="date" name="datePicker" />
+        <Button type="submit" marginTop={10}>
+          Submit
+        </Button>
+      </Horizontal>
+    </form>
+  );
+};
+```
+
+### **ReadOnlyInput**
+
+```tsx
+import React from 'react';
+
+import { DatePicker } from '../DatePicker';
+
+export const ReadOnlyDatePicker = () => (
+  <DatePicker name="disabled" isReadOnly />
+);
+```
+
+### **Shadow**
+
+```tsx
+import React from 'react';
+import { DatePicker } from '../../../Form/DatePicker/DatePicker';
+
+export const ShadowDatePicker = () => (
+  <DatePicker
+    shadow={{
+      boxShadow: 'rgba(0, 0, 0, 0.20) 0px 3px 8px',
+    }}
+  />
+);
+```
+
+### **SizeInput**
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+
+import { DatePicker } from '../DatePicker';
+
+export const SizeDatePicker = () => {
+  return (
+    <Vertical gap={10}>
+      <DatePicker name="xs" size="xs" />
+      <DatePicker name="sm" size="sm" />
+      <DatePicker name="md" size="md" />
+      <DatePicker name="lg" size="lg" />
+      <DatePicker name="xl" size="xl" />
+    </Vertical>
+  );
+};
+```
+
+### **StylesInput**
+
+```tsx
+import React from 'react';
+
+import { DatePicker } from '../DatePicker';
+
+export const StyledDatePicker = () => (
+  <DatePicker
+    shadow={{ boxShadow: 'rgba(93, 37, 85, 0.3) 0px 3px 8px' }}
+    views={{
+      container: { borderRadius: 10, borderColor: 'theme-primary' },
+      label: { color: 'theme-primary' },
+    }}
+  />
+);
+```
+
+### **HelperTextDatePicker**
+
+```tsx
+import React from 'react';
+import { DatePicker } from '../../../Form/DatePicker/DatePicker';
+
+export const HelperTextDatePicker = () => (
+  <DatePicker
+    id="error"
+    name="error"
+    error
+    helperText="Please select another date"
+  />
+);
+```
+
+### **Index**
+
+```tsx
+export * from './ColorScheme';
+export * from './Default';
+export * from './DisabledInput';
+export * from './ErrorDatePicker';
+export * from './FormDatePicker';
+export * from './ReadOnlyInput';
+export * from './Shadow';
+export * from './SizeInput';
+export * from './StylesInput';
+export * from './helperTextDatePicker';
+```
+

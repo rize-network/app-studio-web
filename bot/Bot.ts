@@ -35,7 +35,12 @@ export class Bot {
     model: string = DEFAULT_MODEL,
     provider: ProviderType = DEFAULT_PROVIDER
   ): Promise<any> {
-    const componentPath = `${componentFolder}/${componentName}`;
+    const nestedPath = `${componentFolder}/${componentName}`;
+    const componentPath =
+      this.fileHandler.pathExists(nestedPath) &&
+      this.fileHandler.readFiles(nestedPath).length > 0
+        ? nestedPath
+        : componentFolder;
     const cachePath = `${this.cacheKey}/${componentName}/props`; // More specific cache key
 
     const cachedResponse = this.cache.getJsonFromCache(cachePath);

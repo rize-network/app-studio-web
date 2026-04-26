@@ -1,134 +1,68 @@
 import { ViewProps } from 'app-studio';
 import React from 'react';
-
+// Defines the available size options for the Command component.
 export type CommandSize = 'sm' | 'md' | 'lg';
+// Defines the available visual variants for the Command component.
 export type CommandVariant = 'default' | 'filled' | 'outline';
-
+// Interface for an individual command item within the Command palette.
 export interface CommandItem {
-  /**
-   * Unique identifier for the command
-   */
+  // A unique identifier for the command item.
   id: string;
-
-  /**
-   * Display name for the command
-   */
+  // The display name of the command item.
   name: string;
-
-  /**
-   * Optional description for the command
-   */
+  // Optional descriptive text for the command item.
   description?: string;
-
-  /**
-   * Optional icon to display with the command
-   */
+  // Optional React node to display as an icon next to the command item.
   icon?: React.ReactNode;
-
-  /**
-   * Optional keyboard shortcut for the command (e.g., "⌘K", "Ctrl+P")
-   */
+  // Optional string representing a keyboard shortcut for the command item.
   shortcut?: string;
-
-  /**
-   * Function to execute when the command is selected
-   */
+  // A callback function to be executed when the command item is selected.
   onSelect: () => void;
-
-  /**
-   * Optional keywords for improved search
-   */
+  // Optional array of keywords to aid in searching and filtering command items.
   keywords?: string[];
-
-  /**
-   * Optional disabled state
-   */
+  // A boolean indicating whether the command item is disabled.
   disabled?: boolean;
 }
-
+// Interface for a group of related command items.
 export interface CommandGroup {
-  /**
-   * Unique identifier for the group
-   */
+  // A unique identifier for the command group.
   id: string;
-
-  /**
-   * Display name for the group
-   */
+  // The display name of the command group.
   name: string;
-
-  /**
-   * Commands in this group
-   */
+  // An array of `CommandItem` objects belonging to this group.
   commands: CommandItem[];
 }
-
+// Interface for customizing the visual styles of various sub-components within the Command component.
 export interface CommandStyles {
-  /**
-   * Styles for the command dialog container
-   */
+  // Styles for the main container of the Command component.
   container?: ViewProps;
-
-  /**
-   * Styles for the search input
-   */
+  // Styles for the search input section.
   searchInput?: {
+    // Styles for the container of the search input.
     container?: ViewProps;
+    // Styles for the search input field itself.
     input?: ViewProps;
   };
-
-  /**
-   * Styles for the command list container
-   */
+  // Styles for the list container that holds command items.
   list?: ViewProps;
-
-  /**
-   * Styles for the command group heading
-   */
+  // Styles for the heading of a command group.
   groupHeading?: { container?: ViewProps; heading?: ViewProps };
-
-  /**
-   * Styles for each command item
-   */
+  // Styles for an individual command item.
   item?: ViewProps;
-
-  /**
-   * Styles for the selected command item
-   */
+  // Styles for a command item when it is selected or active.
   selectedItem?: ViewProps;
-
-  /**
-   * Styles for the command item icon
-   */
+  // Styles for the icon displayed within a command item.
   icon?: ViewProps;
-
-  /**
-   * Styles for the command item content (name and description)
-   */
+  // Styles for the content area of a command item (e.g., name and description).
   content?: ViewProps;
-
-  /**
-   * Styles for the command item name
-   */
+  // Styles for the name text within a command item.
   name?: ViewProps;
-
-  /**
-   * Styles for the command item description
-   */
+  // Styles for the description text within a command item.
   description?: ViewProps;
-
-  /**
-   * Styles for the command item shortcut
-   */
+  // Styles for the shortcut text within a command item.
   shortcut?: ViewProps;
-
-  /**
-   * Styles for the empty state
-   */
+  // Styles for the container displayed when no search results are found.
   empty?: { container?: ViewProps };
-
-  /**
-   * Styles for the footer
-   */
+  // Styles for the footer section of the Command component.
   footer?: ViewProps;
 }

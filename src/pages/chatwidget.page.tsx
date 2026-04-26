@@ -10,6 +10,8 @@ import {
 } from '../components/ChatWidget/examples';
 
 export function ChatWidgetPage() {
+  // App-studio inverts color-gray-* in dark mode automatically
+  // (see defaultLightPalette / defaultDarkPalette in app-studio).
   return (
     <Vertical
       gap={48}

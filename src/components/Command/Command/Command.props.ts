@@ -7,147 +7,72 @@ import {
   CommandStyles,
   CommandVariant,
 } from './Command.type';
-
 export interface CommandProps {
-  /**
-   * Whether the command palette is open
-   */
+  // Determines whether the Command component dropdown is currently open.
   open: boolean;
-
-  /**
-   * Callback when the open state changes
-   */
+  // Callback function triggered when the open state of the Command component changes.
   onOpenChange: (open: boolean) => void;
-
-  /**
-   * Command groups to display
-   */
+  // Optional array of command groups to display within the component.
   groups?: CommandGroup[];
-
-  /**
-   * Flat list of commands (alternative to groups)
-   */
+  // Optional array of individual command items to display.
   commands?: CommandItem[];
-
-  /**
-   * Placeholder text for the search input
-   */
+  // Placeholder text for the command input field.
   placeholder?: string;
-
-  /**
-   * Size of the command palette
-   */
+  // Specifies the visual size of the Command component.
   size?: CommandSize;
-
-  /**
-   * Visual variant of the command palette
-   */
+  // Defines the visual variant or style of the Command component.
   variant?: CommandVariant;
-
-  /**
-   * Custom filter function for searching commands
-   */
+  // Custom filter function to apply to command items based on the input value.
   filter?: (value: string, item: CommandItem) => boolean;
-
-  /**
-   * Custom empty state when no commands match the search
-   */
+  // Content to display when there are no command results.
   emptyState?: React.ReactNode;
-
-  /**
-   * Custom footer content
-   */
+  // Content to display at the bottom of the Command component, typically for actions or information.
   footer?: React.ReactNode;
-
-  /**
-   * Custom styles for different parts of the command palette
-   */
+  // Customizable styling options for various parts of the Command component.
   views?: CommandStyles;
-
-  /**
-   * Additional props to be spread to the container element
-   */
+  // Allows for additional, flexible properties to be passed to the component.
   [key: string]: any;
 }
-
 export interface CommandInputProps {
-  /**
-   * Value of the search input
-   */
+  // The current value of the input field.
   value: string;
-
-  /**
-   * Callback when the value changes
-   */
+  // Callback function triggered when the input value changes.
   onValueChange: (value: string) => void;
-
-  /**
-   * Placeholder text for the search input
-   */
+  // Placeholder text for the command input.
   placeholder?: string;
-
-  /**
-   * Custom styles for the input
-   */
+  // Customizable styling options for the input container and input element.
   views?: {
     container?: ViewProps;
     input?: ViewProps;
   };
 }
-
 export interface CommandListProps {
-  /**
-   * Children to render in the list
-   */
+  // React nodes to be rendered inside the command list.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the list
-   */
+  // Customizable styling options for the list container.
   views?: {
     container?: ViewProps;
   };
 }
-
 export interface CommandGroupProps {
-  /**
-   * Heading for the group
-   */
+  // The heading text for the command group.
   heading: string;
-
-  /**
-   * Children to render in the group
-   */
+  // React nodes to be rendered inside the command group, typically CommandItem components.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the group
-   */
+  // Customizable styling options for the group container and heading element.
   views?: {
     container?: ViewProps;
     heading?: ViewProps;
   };
 }
-
 export interface CommandItemProps {
-  /**
-   * Command item data
-   */
+  // The command item data object to be displayed.
   item: CommandItem;
-
-  /**
-   * Whether the item is selected
-   */
+  // Indicates whether the command item is currently selected.
   selected?: boolean;
-
-  /**
-   * Callback when the item is selected
-   */
+  // Callback function triggered when the command item is selected.
   onSelect?: () => void;
-
-  /**
-   * Custom styles for the item
-   */
+  // Customizable styling options for the item container, icon, content, name, description, and shortcut elements.
   views?: {
     container?: ViewProps;
     icon?: ViewProps;
@@ -157,44 +82,23 @@ export interface CommandItemProps {
     shortcut?: ViewProps;
   };
 }
-
 export interface CommandEmptyProps {
-  /**
-   * Children to render in the empty state
-   */
+  // React nodes to be displayed as the empty state content.
   children?: React.ReactNode;
-
-  /**
-   * Custom styles for the empty state
-   */
+  // Customizable styling options for the empty state container.
   views?: {
     container?: ViewProps;
   };
 }
-
 export interface CommandType extends React.FC<CommandProps> {
-  /**
-   * Input component for the command palette
-   */
+  // The Input subcomponent of the Command component.
   Input: React.FC<CommandInputProps>;
-
-  /**
-   * List component for the command palette
-   */
+  // The List subcomponent of the Command component.
   List: React.FC<CommandListProps>;
-
-  /**
-   * Group component for the command palette
-   */
+  // The Group subcomponent of the Command component.
   Group: React.FC<CommandGroupProps>;
-
-  /**
-   * Item component for the command palette
-   */
+  // The Item subcomponent of the Command component.
   Item: React.FC<CommandItemProps>;
-
-  /**
-   * Empty component for the command palette
-   */
+  // The Empty subcomponent of the Command component.
   Empty: React.FC<CommandEmptyProps>;
 }

@@ -16,8 +16,7 @@ import {
   AccordionItemProps,
 } from './Accordion.props';
 import { AccordionShapes, AccordionVariants } from './Accordion.style';
-
-// Create context for the Accordion
+// Initializes the Accordion context with default values, providing a centralized store for managing accordion state and functionality across all related components.
 const AccordionContext = createContext<AccordionContextType>({
   expandedItems: [],
   toggleItem: () => {},
@@ -26,8 +25,7 @@ const AccordionContext = createContext<AccordionContextType>({
   collapsible: false,
   baseId: '',
 });
-
-// Provider component for the Accordion context
+// The AccordionProvider component makes the Accordion context available to its children, encapsulating the state and logic for accordion behavior.
 export const AccordionProvider: React.FC<{
   children: React.ReactNode;
   value: AccordionContextType;
@@ -38,8 +36,6 @@ export const AccordionProvider: React.FC<{
     </AccordionContext.Provider>
   );
 };
-
-// Hook to use the Accordion context
 export const useAccordionContext = () => {
   const context = useContext(AccordionContext);
   if (!context) {
@@ -49,8 +45,6 @@ export const useAccordionContext = () => {
   }
   return context;
 };
-
-// Accordion Item component
 export const AccordionItem: React.FC<AccordionItemProps> = ({
   value,
   children,
@@ -58,17 +52,10 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   views,
   ...props
 }) => {
-  const {
-    isItemExpanded,
-    baseId,
-    //toggleItem
-  } = useAccordionContext();
+  const { isItemExpanded, baseId } = useAccordionContext();
   const isExpanded = isItemExpanded(value);
-
-  // Generate unique IDs for ARIA attributes
   const triggerId = `${baseId}-trigger-${value}`;
   const contentId = `${baseId}-content-${value}`;
-
   return (
     <View
       borderWidth={1}
@@ -85,7 +72,6 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     >
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          // Pass the necessary props to AccordionTrigger and AccordionContent
           return React.cloneElement(child, {
             ...child.props,
             value,
@@ -100,8 +86,6 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     </View>
   );
 };
-
-// Accordion Trigger component
 export const AccordionTrigger: React.FC<
   AccordionTriggerProps & {
     value?: string;
@@ -122,13 +106,11 @@ export const AccordionTrigger: React.FC<
   ...props
 }) => {
   const { toggleItem } = useAccordionContext();
-
   const handleClick = () => {
     if (value && !isDisabled) {
       toggleItem(value);
     }
   };
-
   const triggerProps = {
     id: triggerId,
     'aria-expanded': isExpanded,
@@ -146,13 +128,10 @@ export const AccordionTrigger: React.FC<
     ...views?.container,
     ...props,
   };
-
-  // If asChild is true, clone the child element and merge props
   if (asChild && isValidElement(children)) {
     const child = Children.only(children);
     return cloneElement(child, { ...triggerProps, ...child.props });
   }
-
   return (
     <Horizontal {...triggerProps}>
       {children}
@@ -182,8 +161,6 @@ export const AccordionTrigger: React.FC<
     </Horizontal>
   );
 };
-
-// Accordion Content component
 export const AccordionContent: React.FC<
   AccordionContentProps & {
     isExpanded?: boolean;
@@ -206,7 +183,6 @@ export const AccordionContent: React.FC<
   const [shouldRender, setShouldRender] = useState(Boolean(isExpanded));
   const [maxHeight, setMaxHeight] = useState(isExpanded ? 'none' : '0px');
   const [opacity, setOpacity] = useState(isExpanded ? 1 : 0);
-
   useEffect(() => {
     return () => {
       if (closeTimeoutRef.current) {
@@ -214,50 +190,39 @@ export const AccordionContent: React.FC<
       }
     };
   }, []);
-
   useEffect(() => {
     if (closeTimeoutRef.current) {
       clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
-
     if (isExpanded) {
       setShouldRender(true);
-
       requestAnimationFrame(() => {
         const nextHeight = contentRef.current?.scrollHeight ?? 0;
         setMaxHeight(`${nextHeight}px`);
         setOpacity(1);
       });
-
       return;
     }
-
     const currentHeight = contentRef.current?.scrollHeight ?? 0;
     setMaxHeight(`${currentHeight}px`);
     setOpacity(1);
-
     requestAnimationFrame(() => {
       setMaxHeight('0px');
       setOpacity(0);
     });
-
     closeTimeoutRef.current = setTimeout(() => {
       setShouldRender(false);
     }, transitionMs);
   }, [isExpanded, children]);
-
   useEffect(() => {
     if (!isExpanded || !shouldRender) return;
-
     const nextHeight = contentRef.current?.scrollHeight ?? 0;
     setMaxHeight(`${nextHeight}px`);
   }, [children, isExpanded, shouldRender]);
-
   if (!shouldRender) {
     return null;
   }
-
   return (
     <View
       id={contentId}
@@ -279,8 +244,6 @@ export const AccordionContent: React.FC<
     </View>
   );
 };
-
-// Main Accordion View component
 export const AccordionView: React.FC<
   {
     children: React.ReactNode;

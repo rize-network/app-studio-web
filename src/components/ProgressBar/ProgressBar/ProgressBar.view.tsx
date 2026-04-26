@@ -1,47 +1,70 @@
 import React, { useMemo } from 'react';
 import { View, Text, useTheme } from 'app-studio';
 import { ProgressBarProps } from './ProgressBar.props';
-
+// Defines the ProgressBarView functional component, wrapped in React.memo for performance optimization, ensuring it only re-renders when its props change. It receives props defined by ProgressBarProps.
 const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
   ({
+    // Sets the shape of the progress bar, defaulting to 'linear'.
     shape = 'linear',
+    // Sets the current progress value, defaulting to 0.
     value = 0,
+    // Sets the maximum possible value for the progress bar, defaulting to 100.
     max = 100,
+    // Sets the color of the progress indicator, defaulting to 'theme-primary'.
     color = 'theme-primary',
+    // Sets the background color of the progress bar track, defaulting to 'color-gray-200'.
     backgroundColor = 'color-gray-200',
+    // Defines the height of the linear progress bar.
     height,
+    // Defines the size (width and height) for the circular progress bar.
     size,
+    // Sets the border radius for the linear progress bar, defaulting to 4.
     radius = 4,
+    // Sets the thickness of the stroke for the circular progress bar, defaulting to 10.
     strokeWidth = 10,
+    // Determines whether to display the progress percentage label, defaulting to false.
     showLabel = false,
+    // Sets the color of the progress label, defaulting to 'theme-text-primary'.
     labelColor = 'theme-text-primary',
+    // Enables or disables animation for progress transitions, defaulting to true.
     animated = true,
+    // Sets the duration of the animation for progress transitions, defaulting to '0.5s'.
     animationDuration = '0.5s',
+    // Allows overriding default styles for specific internal view components.
     views,
+    // Overrides the theme mode for this specific component instance.
     themeMode: elementMode,
+    // Captures any other remaining props passed to the component.
     ...props
   }) => {
+    // Utilizes the useTheme hook to access theme-related utilities like getColor for resolving theme-aware colors and the current global themeMode.
     const { getColor, themeMode } = useTheme();
+    // Determines the active theme mode for the component, prioritizing a specific elementMode prop if provided, otherwise falling back to the global themeMode.
     const currentMode = elementMode ? elementMode : themeMode;
-
+    // Calculates a validated progress value, ensuring it stays within the acceptable range of 0 to max to prevent invalid display states.
     const validValue = Math.min(max, Math.max(0, value));
+    // Calculates the progress as a percentage based on the validated value and the maximum value.
     const percentage = (validValue / max) * 100;
-
+    // Memoizes the calculation of the track's background color, resolving it using the theme's getColor utility and the current theme mode. This prevents unnecessary recalculations on re-renders.
     const trackColor = useMemo(
       () => getColor(backgroundColor, { themeMode: currentMode }),
       [getColor, backgroundColor, currentMode]
     );
+    // Memoizes the calculation of the progress bar's fill color, resolving it using the theme's getColor utility and the current theme mode. This prevents unnecessary recalculations on re-renders.
     const barColor = useMemo(
       () => getColor(color, { themeMode: currentMode }),
       [getColor, color, currentMode]
     );
-
+    // Checks if the progress bar should be rendered as a 'circle' shape.
     if (shape === 'circle') {
+      // Determines the overall size of the circular progress bar, prioritizing the 'size' prop, then 'height' if it's a number, otherwise defaulting to 100px.
       const circleSize = size || (typeof height === 'number' ? height : 100);
+      // Calculates the radius of the SVG circles, accounting for the strokeWidth to ensure the progress bar fits within the defined circleSize.
       const radiusCalc = (circleSize - strokeWidth) / 2;
+      // Calculates the circumference of the circle, which is essential for managing the strokeDasharray and strokeDashoffset properties to display progress.
       const circumference = 2 * Math.PI * radiusCalc;
+      // Calculates the strokeDashoffset value, which determines how much of the circular progress bar is filled based on the current percentage.
       const offset = circumference - (percentage / 100) * circumference;
-
       return (
         <View
           width={circleSize}
@@ -59,7 +82,7 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
             viewBox={`0 0 ${circleSize} ${circleSize}`}
             style={{ transform: 'rotate(-90deg)' }}
           >
-            {/* Track */}
+            {}
             <circle
               cx={circleSize / 2}
               cy={circleSize / 2}
@@ -69,7 +92,7 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
               fill="transparent"
               {...views?.track}
             />
-            {/* Indicator */}
+            {}
             <circle
               cx={circleSize / 2}
               cy={circleSize / 2}
@@ -113,10 +136,7 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
         </View>
       );
     }
-
-    // Linear Progress Bar
     const linearHeight = height || 8;
-
     return (
       <View
         role="progressbar"
@@ -171,5 +191,4 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
     );
   }
 );
-
 export default ProgressBarView;

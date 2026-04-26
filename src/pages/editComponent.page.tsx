@@ -38,7 +38,9 @@ export const EditComponentPage = () => {
           e.stopPropagation();
           handleSelect(id, e.currentTarget as HTMLElement);
         }}
-        border={isSelected ? '3px solid #000' : '3px solid transparent'}
+        borderWidth={3}
+        borderStyle="solid"
+        borderColor={isSelected ? 'color-black' : 'transparent'}
         boxShadow={isSelected ? '0 4px 20px rgba(0,0,0,0.15)' : 'none'}
         cursor="pointer"
         transition="all 0.2s"
@@ -101,7 +103,8 @@ export const EditComponentPage = () => {
     <Vertical
       width="100%"
       minHeight="100vh"
-      backgroundColor="#F8FAFC"
+      backgroundColor="color-gray-50"
+      color="color-black"
       padding="60px"
       onClick={handleClose}
       gap={60}
@@ -111,7 +114,7 @@ export const EditComponentPage = () => {
         <Text fontSize="48px" fontWeight="800" letterSpacing="-1px">
           EditComponent Configuration
         </Text>
-        <Text color="#64748B" fontSize="20px">
+        <Text color="color-gray-500" fontSize="20px">
           Explore different modes and configurations. Click any element to see
           the behavior.
         </Text>
@@ -119,7 +122,7 @@ export const EditComponentPage = () => {
 
       {/* SECTION 1: FLOATING */}
       <Vertical gap={24}>
-        <Text fontSize="24px" fontWeight="bold" color="#334155">
+        <Text fontSize="24px" fontWeight="bold">
           1. Floating Context (Default)
         </Text>
         <Horizontal gap={40} flexWrap="wrap" alignItems="flex-start">
@@ -152,7 +155,7 @@ export const EditComponentPage = () => {
 
       {/* SECTION 2: OVERLAY */}
       <Vertical gap={24}>
-        <Text fontSize="24px" fontWeight="bold" color="#334155">
+        <Text fontSize="24px" fontWeight="bold">
           2. Overlay Context (Inside)
         </Text>
         <Horizontal gap={40} flexWrap="wrap" alignItems="flex-start">

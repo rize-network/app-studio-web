@@ -1,0 +1,195 @@
+{
+  "componentDescription": "Manages a list of interactive tags, allowing users to add, remove, and display them.",
+  "id": {
+    "type": "string",
+    "typeValues": "n/a",
+    "description": "A unique identifier for the input element.",
+    "defaultValue": "undefined"
+  },
+  "name": {
+    "type": "string",
+    "typeValues": "n/a",
+    "description": "The name attribute for the input element, useful for form submissions.",
+    "defaultValue": "undefined"
+  },
+  "label": {
+    "type": "string",
+    "typeValues": "n/a",
+    "description": "The text label displayed above or alongside the input field.",
+    "defaultValue": "undefined"
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": "n/a",
+    "description": "Text displayed below the input field to provide additional guidance or information.",
+    "defaultValue": "undefined"
+  },
+  "error": {
+    "type": "string | boolean",
+    "typeValues": "n/a",
+    "description": "An error message or a boolean indicating that the input is in an error state.",
+    "defaultValue": "false"
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": "n/a",
+    "description": "Placeholder text displayed inside the input field when it is empty.",
+    "defaultValue": "'Type and press Enter to add tags...'"
+  },
+  "tags": {
+    "type": "string[]",
+    "typeValues": "n/a",
+    "description": "An array of strings representing the controlled tags within the input.",
+    "defaultValue": "undefined"
+  },
+  "defaultTags": {
+    "type": "string[]",
+    "typeValues": "n/a",
+    "description": "An array of strings representing the initial uncontrolled tags for the input.",
+    "defaultValue": "undefined"
+  },
+  "onTagsChange": {
+    "type": "(tags: string[]) => void",
+    "typeValues": "n/a",
+    "description": "Callback function invoked when the array of tags changes, providing the updated tags.",
+    "defaultValue": "undefined"
+  },
+  "onTagAdd": {
+    "type": "(tag: string) => void",
+    "typeValues": "n/a",
+    "description": "Callback function invoked when a new tag is successfully added to the input.",
+    "defaultValue": "undefined"
+  },
+  "onTagRemove": {
+    "type": "(tag: string, index: number) => void",
+    "typeValues": "n/a",
+    "description": "Callback function invoked when a tag is removed, providing the tag content and its index.",
+    "defaultValue": "undefined"
+  },
+  "maxTags": {
+    "type": "number",
+    "typeValues": "n/a",
+    "description": "The maximum number of tags allowed in the input field.",
+    "defaultValue": "undefined"
+  },
+  "minTagLength": {
+    "type": "number",
+    "typeValues": "n/a",
+    "description": "The minimum character length required for a tag to be valid.",
+    "defaultValue": "undefined"
+  },
+  "maxTagLength": {
+    "type": "number",
+    "typeValues": "n/a",
+    "description": "The maximum character length allowed for a tag.",
+    "defaultValue": "undefined"
+  },
+  "allowDuplicates": {
+    "type": "boolean",
+    "typeValues": "n/a",
+    "description": "Boolean indicating whether duplicate tags are allowed to be added.",
+    "defaultValue": "undefined"
+  },
+  "separators": {
+    "type": "TagSeparator[]",
+    "typeValues": "'enter' | 'comma' | 'space' | 'tab'",
+    "description": "An array of characters or keys that trigger the creation of a new tag.",
+    "defaultValue": "undefined"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": "n/a",
+    "description": "Boolean indicating whether the input and tags are disabled.",
+    "defaultValue": "false"
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": "n/a",
+    "description": "Boolean indicating whether the input field is read-only.",
+    "defaultValue": "false"
+  },
+  "isAutoFocus": {
+    "type": "boolean",
+    "typeValues": "n/a",
+    "description": "Boolean indicating whether the input field should automatically gain focus on mount.",
+    "defaultValue": "false"
+  },
+  "isRemovable": {
+    "type": "boolean",
+    "typeValues": "n/a",
+    "description": "Boolean indicating whether individual tags can be removed by the user.",
+    "defaultValue": "true"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+    "description": "Defines the visual size of the TagInput component.",
+    "defaultValue": "'md'"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": "'default' | 'square' | 'rounded' | 'pill'",
+    "description": "Defines the visual shape (e.g., rounded corners) of the TagInput component.",
+    "defaultValue": "'default'"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": "'outline' | 'default' | 'none'",
+    "description": "Defines the visual variant or style of the TagInput component.",
+    "defaultValue": "'default'"
+  },
+  "shadow": {
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": "n/a",
+    "description": "Defines the shadow style applied to the TagInput component.",
+    "defaultValue": "{}"
+  },
+  "views": {
+    "type": "TagInputStyles",
+    "typeValues": "n/a",
+    "description": "Custom styles applied to different parts of the TagInput component.",
+    "defaultValue": "{}"
+  },
+  "left": {
+    "type": "React.ReactNode",
+    "typeValues": "n/a",
+    "description": "A React node to be rendered on the left side of the input field.",
+    "defaultValue": "undefined"
+  },
+  "right": {
+    "type": "React.ReactNode",
+    "typeValues": "n/a",
+    "description": "A React node to be rendered on the right side of the input field.",
+    "defaultValue": "undefined"
+  },
+  "onFocus": {
+    "type": "() => void",
+    "typeValues": "n/a",
+    "description": "Callback function invoked when the input field receives focus.",
+    "defaultValue": "undefined"
+  },
+  "onBlur": {
+    "type": "() => void",
+    "typeValues": "n/a",
+    "description": "Callback function invoked when the input field loses focus.",
+    "defaultValue": "undefined"
+  },
+  "onClick": {
+    "type": "() => void",
+    "typeValues": "n/a",
+    "description": "Callback function invoked when the input field is clicked.",
+    "defaultValue": "undefined"
+  },
+  "menuItems": {
+    "type": "string[]",
+    "typeValues": "n/a",
+    "description": "An array of strings to be displayed as selectable suggestions in a menu.",
+    "defaultValue": "undefined"
+  },
+  "onMenuItemSelect": {
+    "type": "(item: string) => void",
+    "typeValues": "n/a",
+    "description": "Callback function invoked when an item from the suggestion menu is selected.",
+    "defaultValue": "undefined"
+  }
+}

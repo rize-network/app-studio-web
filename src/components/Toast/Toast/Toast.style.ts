@@ -1,21 +1,6 @@
-/**
- * Toast Styles
- *
- * Defines the styles for the Toast component following the design guidelines:
- * - Typography: Inter/Geist font, specific sizes/weights
- * - Spacing: 4px grid system
- * - Colors: Neutral palette with semantic colors
- * - Rounded corners: Consistent border radius
- * - Transitions: Subtle animations
- */
-
 import { ViewProps } from 'app-studio';
 import { ToastPosition, ThemesType } from './Toast.type';
-
-/**
- * Theme configurations for the Toast component
- * Following the design system color palette
- */
+// Defines the various visual themes (e.g., info, success, warning, error) for the Toast component, including specific background, border, content, and icon colors for each theme.
 export const Themes: ThemesType = {
   info: {
     container: {
@@ -66,11 +51,7 @@ export const Themes: ThemesType = {
     },
   },
 };
-
-/**
- * Animation configurations for the Toast component
- * Subtle and smooth, matching shadcn/ui patterns
- */
+// Specifies the entry and exit animations for the Toast component, controlling how it appears and disappears from the screen with properties like opacity and transform.
 export const ToastAnimations = {
   enter: {
     opacity: [0, 1],
@@ -83,48 +64,41 @@ export const ToastAnimations = {
     transition: 'opacity 0.15s ease-in, transform 0.15s ease-in',
   },
 };
-
-/**
- * Base container styles for the Toast component
- */
+// Establishes the foundational styling properties for the Toast container, such as border-radius, border, padding, and box-shadow, applied universally to all toasts.
 export const BaseContainerStyles: ViewProps = {
   borderRadius: '8px',
   borderWidth: '1px',
   borderStyle: 'solid',
-  padding: '12px 16px', // 3 × 4px and 4 × 4px grid
+  padding: '12px 16px',
   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.05), 0px 2px 4px rgba(0, 0, 0, 0.03)',
   transition: 'box-shadow 0.2s ease, background-color 0.2s ease',
 };
-
-/**
- * Position configurations for the Toast component
- * Following the 4px grid system
- */
+// Maps predefined positions (e.g., top, bottom-right) to specific CSS-in-JS styling rules, determining where the Toast component will render on the screen.
 export const ToastPositions: Record<ToastPosition, ViewProps> = {
   top: {
-    top: '16px', // 4 × 4px grid
+    top: '16px',
     left: '50%',
     transform: 'translateX(-50%)',
   },
   'top-right': {
-    top: '16px', // 4 × 4px grid
-    right: '16px', // 4 × 4px grid
+    top: '16px',
+    right: '16px',
   },
   'top-left': {
-    top: '16px', // 4 × 4px grid
-    left: '16px', // 4 × 4px grid
+    top: '16px',
+    left: '16px',
   },
   bottom: {
-    bottom: '16px', // 4 × 4px grid
+    bottom: '16px',
     left: '50%',
     transform: 'translateX(-50%)',
   },
   'bottom-right': {
-    bottom: '16px', // 4 × 4px grid
-    right: '16px', // 4 × 4px grid
+    bottom: '16px',
+    right: '16px',
   },
   'bottom-left': {
-    bottom: '16px', // 4 × 4px grid
-    left: '16px', // 4 × 4px grid
+    bottom: '16px',
+    left: '16px',
   },
 };

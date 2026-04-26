@@ -41,7 +41,7 @@ const MessagePage = () => {
   };
 
   return (
-    <View padding={20} backgroundColor="theme-background" minHeight="100vh">
+    <View padding={20} backgroundColor="color-white" minHeight="100vh">
       <View gap={32} display="flex" flexDirection="column">
         {Object.entries(sections).map(([title, content]) => (
           <View

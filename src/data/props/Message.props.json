@@ -1,10 +1,10 @@
 {
-  "componentDescription": "Displays various types of messages with customizable content, icons, actions, and closing behavior.",
+  "componentDescription": "Displays various types of messages to users with customizable content, actions, and automatic dismissal.",
   "subtitle": {
     "type": "string",
-    "typeValues": [],
-    "description": "The secondary text content of the message.",
-    "defaultValue": "undefined"
+    "typeValues": null,
+    "description": "The secondary text content displayed below the title.",
+    "defaultValue": null
   },
   "variant": {
     "type": "MessageType",
@@ -14,76 +14,61 @@
       "error",
       "success"
     ],
-    "description": "The type or category of the message, influencing its styling.",
-    "defaultValue": "undefined"
-  },
-  "show": {
-    "type": "boolean",
-    "typeValues": [
-      "true",
-      "false"
-    ],
-    "description": "Controls the visibility of the message.",
-    "defaultValue": "undefined"
+    "description": "The type of message, dictating its visual style and associated icon.",
+    "defaultValue": null
   },
   "hide": {
     "type": "Function",
-    "typeValues": [],
-    "description": "A function to call to dismiss or hide the message.",
-    "defaultValue": "undefined"
+    "typeValues": null,
+    "description": "A callback function to trigger the dismissal or hiding of the message.",
+    "defaultValue": null
   },
   "title": {
     "type": "string",
-    "typeValues": [],
+    "typeValues": null,
     "description": "The main title or heading of the message.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "theme": {
     "type": "ThemesType",
-    "typeValues": [],
-    "description": "Custom theme object to override default message styles.",
-    "defaultValue": "Themes"
+    "typeValues": null,
+    "description": "Custom theme styles to override the default appearance for different message variants.",
+    "defaultValue": "Themes (from './Message.style')"
   },
   "isClosable": {
     "type": "boolean",
-    "typeValues": [
-      "true",
-      "false"
-    ],
-    "description": "Determines if the message can be manually closed by the user.",
-    "defaultValue": "false"
+    "typeValues": null,
+    "description": "Determines if a close button is shown, allowing the user to manually dismiss the message.",
+    "defaultValue": false
   },
   "views": {
     "type": "MessageViewStyles",
-    "typeValues": [],
-    "description": "Custom styles for various parts of the message component.",
-    "defaultValue": "undefined"
+    "typeValues": null,
+    "description": "An object containing custom styling properties for various parts of the message component.",
+    "defaultValue": null
   },
   "action": {
     "type": "Function",
-    "typeValues": [],
-    "description": "A callback function to execute when the action button is clicked.",
-    "defaultValue": "undefined"
+    "typeValues": null,
+    "description": "A callback function to be executed when the message's action button is clicked.",
+    "defaultValue": null
   },
   "actionText": {
     "type": "string",
-    "typeValues": [],
-    "description": "The text displayed on the action button.",
-    "defaultValue": "undefined"
+    "typeValues": null,
+    "description": "The text label displayed on the interactive action button.",
+    "defaultValue": null
   },
   "showIcon": {
     "type": "boolean",
-    "typeValues": [
-      "true",
-      "false"
-    ],
-    "description": "Determines if an icon corresponding to the message variant should be displayed.",
-    "defaultValue": "false"
+    "typeValues": null,
+    "description": "Controls the visibility of the predefined icon associated with the message variant.",
+    "defaultValue": false
   },
   "timeout": {
     "type": "number",
-    "typeValues": [],
-    "description": "The duration in milliseconds after which the message automatically hides.",
-    "defaultValue": "3000"
+    "typeValues": null,
+    "description": "The duration in milliseconds after which the message automatically hides itself (if not closable).",
+    "defaultValue": 3000
   }
 }

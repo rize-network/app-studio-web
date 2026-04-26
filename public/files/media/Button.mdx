@@ -1,0 +1,688 @@
+# Button
+
+A customizable interactive element used to trigger actions or navigate users.
+
+### **Import**
+```tsx
+import { Button } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+
+export const DefaultButton = () => (
+  <Button onClick={() => alert('Hello, World!')}>Default</Button>
+);
+```
+
+### **loaderProps**
+Optional React node(s) defining the icon to be displayed within the button.
+
+- **Type:** `LoaderProps`
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+
+export const LoaderButtons = () => (
+  <Vertical gap={15}>
+    <Button isLoading isFilled onClick={(e) => alert('ok')}>
+      Submitting
+    </Button>
+    <Button isLoading isFilled>
+      Submitting
+    </Button>
+    <Button isLoading loaderPosition="right" isFilled>
+      Submitting
+    </Button>
+  </Vertical>
+);
+```
+
+### **icon**
+Optional boolean to indicate if the button is non-interactive/disabled.
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Center } from 'app-studio';
+
+import { DustBinIcon } from '../../Icon/Icon';
+
+import { Shape } from '../Button/Button.type';
+
+export const IconButtons = () => (
+  <Center gap={15}>
+    <Button icon={<DustBinIcon widthHeight={16} />} size="md">
+      Delete
+    </Button>
+    <Button
+      size="md"
+      icon={<DustBinIcon widthHeight={16} />}
+      shape={'pill' as Shape}
+      iconPosition="right"
+    >
+      Delete
+    </Button>
+    <Button icon={<DustBinIcon widthHeight={16} />} isIconRounded isAuto />
+    <Button
+      icon={<DustBinIcon widthHeight={16} />}
+      size="md"
+      iconPosition="top"
+    >
+      Delete
+    </Button>
+    <Button
+      size="md"
+      icon={<DustBinIcon widthHeight={16} />}
+      shape={'pill' as Shape}
+      iconPosition="bottom"
+    >
+      Delete
+    </Button>
+  </Center>
+);
+```
+
+### **isDisabled**
+Optional boolean indicating if the button size should automatically adjust to its content.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+
+export const DisabledButton = () => (
+  <Button
+    onClick={() => {
+      alert('Disabled');
+    }}
+    isDisabled
+  >
+    Disabled
+  </Button>
+);
+```
+
+### **isAuto**
+Optional function that will be called when the button is clicked.
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Horizontal } from 'app-studio';
+
+import { Shape } from '../Button/Button.type';
+
+export const BorderedButtons = () => (
+  <Horizontal gap={15}>
+    {['square', 'rounded', 'pill'].map((border, index) => (
+      <Button key={index} shape={border as Shape}>
+        {border}
+      </Button>
+    ))}
+  </Horizontal>
+);
+```
+
+### **size**
+Optional Shape to specify the shape of the button (e.g., rounded or square edges).
+
+- **Type:** `Size`
+- **Default:** `md`
+- **Possible Values:** `xs, sm, md, lg, xl`
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+
+import { Size } from '../Button/Button.type';
+
+export const ButtonSizes = () => (
+  <Vertical gap={10}>
+    {['xs', 'sm', 'md', 'lg', 'xl'].map((size, index) => (
+      <Button key={index} size={size as Size}>
+        Button {size.toUpperCase()}
+      </Button>
+    ))}
+  </Vertical>
+);
+```
+
+### **shadow**
+Optional string used as an accessible label for screen readers.
+
+- **Type:** `Shadow | Elevation | ViewProps`
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+
+export const ShadowButton = () => (
+  <Button shadow={{ boxShadow: 'rgb(249, 115, 22) 0px 4px 14px 0px' }}>
+    Click Me
+  </Button>
+);
+```
+
+### **variant**
+Variant to define the stylistic variation of the button.
+
+- **Type:** `Variant`
+- **Default:** `filled`
+- **Possible Values:** `filled, outline, empty, ghost, link, subtle`
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+
+import { Variant } from '../Button/Button.type';
+
+export const VariantButtons = () => (
+  <Vertical gap={15}>
+    <Vertical gap={10}>
+      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Colors</h3>
+      <Vertical gap={5}>
+        <Button color="theme-primary">Primary</Button>
+        <Button color="theme-secondary">Secondary</Button>
+        <Button color="color-black">Black</Button>
+        <Button color="color-white" textColor="color-black">
+          White
+        </Button>
+      </Vertical>
+    </Vertical>
+
+    <Vertical gap={10}>
+      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Variants</h3>
+      {['filled', 'outline', 'empty', 'ghost', 'link', 'subtle'].map(
+        (variant) => (
+          <Button key={variant} variant={variant as Variant}>
+            {variant.charAt(0).toUpperCase() + variant.slice(1)} Variant
+          </Button>
+        )
+      )}
+    </Vertical>
+
+    <Vertical gap={10}>
+      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Reversed</h3>
+      <div
+        style={{
+          padding: 20,
+          backgroundColor: '#333',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 10,
+        }}
+      >
+        <Button reversed variant="filled" color="theme-primary">
+          Filled Reversed
+        </Button>
+        <Button reversed variant="outline" color="theme-primary">
+          Outline Reversed
+        </Button>
+        <Button reversed variant="ghost" color="theme-primary">
+          Ghost Reversed
+        </Button>
+      </div>
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **AnimatedStroke**
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+
+export const AnimatedStrokeButtons = () => (
+  <Vertical gap={15}>
+    <Button animation="animatedStroke" variant="ghost">
+      Hover Me
+    </Button>
+    <Button
+      animation="animatedStroke"
+      variant="ghost"
+      animatedStrokeAccentColor="color-red-400"
+      animatedStrokeTextColor="color-red-400"
+    >
+      Custom Red
+    </Button>
+    <Button
+      animation="animatedStroke"
+      variant="ghost"
+      animatedStrokeAccentColor="color-teal-400"
+      animatedStrokeTextColor="color-blueGray-800"
+    >
+      Teal Stroke
+    </Button>
+  </Vertical>
+);
+```
+
+### **Autofocus**
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Horizontal } from 'app-studio';
+
+export const ExternalButton = () => (
+  <Horizontal gap={10}>
+    <Button type="button" autofocus>
+      Button
+    </Button>
+    <Button type="submit">Button</Button>
+  </Horizontal>
+);
+```
+
+### **BorderMoving**
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+
+export const BorderMovingButtons = () => (
+  <Vertical gap={15}>
+    <Button animation="borderMoving" variant="filled">
+      Border Moving Effect
+    </Button>
+    <Button
+      animation="borderMoving"
+      variant="filled"
+      borderMovingDuration={3}
+      borderMovingGradientColors={['#FF6B6B', '#4ECDC4', '#45B7D1']}
+    >
+      Custom Colors & Speed
+    </Button>
+    <Button
+      animation="borderMoving"
+      variant="filled"
+      borderMovingDuration={1}
+      borderMovingGradientColors={['#FFA726', '#FF7043', '#EC407A']}
+    >
+      Fast Animation
+    </Button>
+  </Vertical>
+);
+```
+
+### **BorderReveal**
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+
+export const BorderRevealButtons = () => (
+  <Vertical gap={15}>
+    <Button animation="borderReveal" variant="filled">
+      Border Reveal Default
+    </Button>
+    <Button
+      animation="borderReveal"
+      variant="filled"
+      borderMovingDuration={1}
+      borderMovingGradientColors={['#705CFF']} // Single color for solid fill
+    >
+      Fast Reveal (Blue)
+    </Button>
+    <Button
+      animation="borderReveal"
+      variant="filled"
+      borderMovingDuration={2}
+      borderMovingGradientColors={['#FF5C97']}
+    >
+      Pink Reveal (Normal)
+    </Button>
+    <Button
+      animation="borderReveal"
+      variant="outline"
+      borderMovingGradientColors={['#000000']}
+    >
+      Black Reveal (Outline)
+    </Button>
+  </Vertical>
+);
+```
+
+### **ColorScheme**
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Horizontal } from 'app-studio';
+
+export const ColoredButtons = () => (
+  <Horizontal gap={10}>
+    {[
+      'theme-primary',
+      'theme-secondary',
+      'theme-warning',
+      'theme-success',
+      'theme-error',
+    ].map((color, index) => (
+      <Button key={index} color={color} isAuto>
+        {color.replace('theme-', '')}
+      </Button>
+    ))}
+  </Horizontal>
+);
+```
+
+### **DesignSystem**
+
+```tsx
+/**
+ * Button Examples - Design System
+ *
+ * Showcases the Button component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
+
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Text } from 'app-studio';
+import { View } from 'app-studio';
+
+export const DesignSystemButtons = () => (
+  <Vertical gap={24}>
+    {/* Size Variants */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Size Variants
+      </Text>
+      <Horizontal gap={16} alignItems="center" flexWrap="wrap">
+        {['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
+          <Button key={size} size={size as any}>
+            {size.toUpperCase()}
+          </Button>
+        ))}
+      </Horizontal>
+    </View>
+
+    {/* Style Variants */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Style Variants
+      </Text>
+      <Horizontal gap={16} alignItems="center" flexWrap="wrap">
+        {['filled', 'outline', 'ghost', 'link'].map((variant) => (
+          <Button key={variant} variant={variant as any}>
+            {variant}
+          </Button>
+        ))}
+      </Horizontal>
+    </View>
+
+    {/* Shape Variants */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Shape Variants
+      </Text>
+      <Horizontal gap={16} alignItems="center" flexWrap="wrap">
+        {['square', 'rounded', 'pill'].map((shape) => (
+          <Button key={shape} shape={shape as any}>
+            {shape}
+          </Button>
+        ))}
+      </Horizontal>
+    </View>
+
+    {/* With Icons */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        With Icons
+      </Text>
+      <Horizontal gap={16} alignItems="center" flexWrap="wrap">
+        <Button icon={<span>→</span>} iconPosition="right">
+          Right Icon
+        </Button>
+        <Button icon={<span>←</span>} iconPosition="left">
+          Left Icon
+        </Button>
+        <Button icon={<span>↑</span>} iconPosition="top">
+          Top Icon
+        </Button>
+        <Button icon={<span>↓</span>} iconPosition="bottom">
+          Bottom Icon
+        </Button>
+      </Horizontal>
+    </View>
+
+    {/* States */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        States
+      </Text>
+      <Horizontal gap={16} alignItems="center" flexWrap="wrap">
+        <Button>Default</Button>
+        <Button isDisabled>Disabled</Button>
+        <Button isLoading>Loading</Button>
+        <Button isLoading loaderPosition="right">
+          Loading Right
+        </Button>
+      </Horizontal>
+    </View>
+
+    {/* Custom Styling */}
+    <View>
+      <Text marginBottom={8} fontWeight="600">
+        Custom Styling
+      </Text>
+      <Horizontal gap={16} alignItems="center" flexWrap="wrap">
+        <Button
+          views={{
+            container: {
+              backgroundColor: 'color-blue-500',
+              color: 'color-white',
+              on: {
+                hover: {
+                  backgroundColor: 'color-blue-600',
+                },
+              },
+            },
+          }}
+        >
+          Custom Color
+        </Button>
+        <Button
+          views={{
+            container: {
+              backgroundColor: 'color-green-500',
+              color: 'color-white',
+              borderRadius: '16px',
+              boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
+            },
+          }}
+        >
+          Custom Shape
+        </Button>
+        <Button
+          views={{
+            container: {
+              backgroundColor: 'color-purple-500',
+              color: 'color-white',
+              paddingLeft: '32px',
+              paddingRight: '32px',
+              fontSize: '20px',
+              fontWeight: 'bold',
+            },
+          }}
+        >
+          Custom Text
+        </Button>
+      </Horizontal>
+    </View>
+  </Vertical>
+);
+```
+
+### **EffectsTest**
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Vertical } from 'app-studio';
+
+export const EffectsTestButtons = () => (
+  <Vertical gap={20}>
+    {/* Standard variants */}
+    <Button variant="filled">Filled Button</Button>
+    <Button variant="outline">Outline Button</Button>
+    <Button variant="ghost">Ghost Button</Button>
+    <Button variant="link">Link Button</Button>
+
+    {/* New effect variants */}
+    <Button animation="borderMoving" variant="filled">
+      Border Moving Button
+    </Button>
+    <Button animation="animatedStroke" variant="ghost">
+      Animated Stroke Button
+    </Button>
+
+    {/* Effect variants with custom props */}
+    <Button
+      animation="borderMoving"
+      variant="filled"
+      borderMovingDuration={1}
+      borderMovingGradientColors={[
+        'color-red-500',
+        'color-green-500',
+        'color-blue-500',
+      ]}
+    >
+      Fast Red/Green/Blue
+    </Button>
+
+    <Button
+      animation="animatedStroke"
+      variant="ghost"
+      animatedStrokeAccentColor="color-red-400"
+      animatedStrokeTextColor="color-red-400"
+    >
+      Red Stroke Effect
+    </Button>
+  </Vertical>
+);
+```
+
+### **Index**
+
+```tsx
+export * from './animatedStroke';
+export * from './autofocus';
+export * from './borderMoving';
+export * from './default';
+export * from './designSystem'; // New design system example
+export * from './icon';
+export * from './isAuto';
+export * from './isDisabled';
+export * from './loaderProps';
+export * from './shadow';
+export * from './shareButton';
+export * from './size';
+export * from './variant';
+export * from './subtle';
+export * from './borderReveal';
+```
+
+### **ShareButton**
+
+```tsx
+import React from 'react';
+import { ShareButton } from '../../ShareButton/ShareButton';
+import { Vertical } from 'app-studio';
+
+export const ShareButtons = () => (
+  <Vertical gap={15}>
+    <ShareButton
+      label="Share this page"
+      shareData={{
+        title: 'App Studio',
+        text: 'Check out App Studio components.',
+        url: window.location.href,
+      }}
+      onUnsupported={() =>
+        alert('Native sharing is unavailable on this browser.')
+      }
+    />
+    <ShareButton
+      variant="outline"
+      shareData={{
+        title: 'App Studio',
+        text: 'Check out App Studio components.',
+        url: window.location.href,
+      }}
+      onUnsupported={() =>
+        alert('Native sharing is unavailable on this browser.')
+      }
+    />
+    <ShareButton
+      variant="ghost"
+      size="sm"
+      shareData={{
+        title: 'App Studio',
+        text: 'Check out App Studio components.',
+        url: window.location.href,
+      }}
+      onUnsupported={() =>
+        alert('Native sharing is unavailable on this browser.')
+      }
+    />
+  </Vertical>
+);
+```
+
+### **Subtle**
+
+```tsx
+import React from 'react';
+import { Button } from '../Button';
+import { Center } from 'app-studio';
+import { PlusIcon } from '../../Icon/Icon';
+
+export const SubtleButtons = () => (
+  <Center gap={15}>
+    <Button variant="subtle" onClick={() => alert('Clicked!')}>
+      <PlusIcon widthHeight={14} /> Manual Objective
+    </Button>
+    <Button
+      variant="subtle"
+      color="color-red-600"
+      onClick={() => alert('Clicked Red!')}
+    >
+      <PlusIcon widthHeight={14} /> Remove Objective
+    </Button>
+    <Button
+      variant="subtle"
+      color="color-blue-600"
+      onClick={() => alert('Clicked Blue!')}
+    >
+      <PlusIcon widthHeight={14} /> Add Task
+    </Button>
+  </Center>
+);
+```
+

@@ -1,10 +1,8 @@
 import { ViewProps } from 'app-studio';
 import { DEFAULT_CHART_COLORS } from './ChartColors';
-
-// Default colors for chart series
+// Exports the default color palette used for chart visualization.
 export const DEFAULT_COLORS = DEFAULT_CHART_COLORS;
-
-// Default styles for chart container
+// Defines the base styles for the main chart container, ensuring it fills its parent and establishes a flex column layout.
 export const ChartContainerStyles: ViewProps = {
   width: '100%',
   height: '100%',
@@ -12,8 +10,7 @@ export const ChartContainerStyles: ViewProps = {
   display: 'flex',
   flexDirection: 'column',
 };
-
-// Default styles for chart title
+// Specifies styles for the chart's main title, including font size, weight, and alignment.
 export const ChartTitleStyles: ViewProps = {
   fontSize: '18px',
   fontWeight: '700',
@@ -21,8 +18,7 @@ export const ChartTitleStyles: ViewProps = {
   textAlign: 'center',
   color: 'color-gray-900',
 };
-
-// Default styles for chart legend
+// Sets the display properties for the chart's legend, managing item layout and spacing.
 export const ChartLegendStyles: ViewProps = {
   display: 'flex',
   flexWrap: 'wrap',
@@ -30,8 +26,7 @@ export const ChartLegendStyles: ViewProps = {
   marginTop: '16px',
   gap: '12px',
 };
-
-// Default styles for legend items
+// Defines styles for individual items within the chart legend, including layout, padding, and hover effects.
 export const LegendItemStyles: ViewProps = {
   display: 'flex',
   alignItems: 'center',
@@ -43,23 +38,20 @@ export const LegendItemStyles: ViewProps = {
     backgroundColor: 'color-gray-50',
   },
 };
-
-// Default styles for legend color indicator
+// Specifies styles for the colored indicator preceding each legend item.
 export const LegendColorStyles: ViewProps = {
   width: '10px',
   height: '10px',
   borderRadius: '50%',
   marginRight: '8px',
 };
-
-// Default styles for legend text
+// Defines the textual styles for legend item labels.
 export const LegendTextStyles: ViewProps = {
   fontSize: '13px',
   fontWeight: '500',
   color: 'color-gray-600',
 };
-
-// Default styles for tooltip
+// Provides styling for the interactive tooltips displayed on hover, including positioning, background, and shadow.
 export const TooltipStyles: ViewProps = {
   position: 'absolute',
   backgroundColor: 'color-white',
@@ -73,28 +65,24 @@ export const TooltipStyles: ViewProps = {
   pointerEvents: 'none',
   zIndex: 100,
 };
-
-// Default styles for chart grid
+// Defines styles for the grid lines within the chart, such as stroke color and pattern.
 export const GridStyles: ViewProps = {
   stroke: 'color-gray-100',
   strokeWidth: '1px',
   strokeDasharray: '4 4',
 };
-
-// Default styles for chart axis
+// Specifies styles for the chart's axes lines.
 export const AxisStyles: ViewProps = {
   stroke: 'color-gray-200',
   strokeWidth: '1px',
 };
-
-// Default styles for axis labels
+// Defines styles for the labels displayed along the chart's axes.
 export const AxisLabelStyles: ViewProps = {
   fontSize: '12px',
   fill: 'color-gray-500',
   fontWeight: '500',
 };
-
-// Default styles for bar chart bars
+// Sets the visual styles for individual bars in a bar chart, including rounded corners and hover effects.
 export const BarStyles: ViewProps = {
   rx: '4px',
   ry: '4px',
@@ -104,8 +92,7 @@ export const BarStyles: ViewProps = {
     filter: 'brightness(1.1)',
   },
 };
-
-// Default styles for line chart lines
+// Defines the visual properties for lines in a line chart, such as thickness and line caps.
 export const LineStyles: ViewProps = {
   strokeWidth: '3px',
   fill: 'none',
@@ -113,8 +100,7 @@ export const LineStyles: ViewProps = {
   strokeLinejoin: 'round',
   transition: 'stroke-width 0.2s ease',
 };
-
-// Default styles for line chart points
+// Specifies styles for data points on a line or scatter chart, including size, stroke, and hover animations.
 export const PointStyles: ViewProps = {
   r: '5px',
   strokeWidth: '2.5px',
@@ -125,8 +111,7 @@ export const PointStyles: ViewProps = {
     r: '7px',
   },
 };
-
-// Default styles for pie chart slices
+// Defines styles for individual slices in a pie chart, including borders and hover transformation.
 export const PieSliceStyles: ViewProps = {
   strokeWidth: '2px',
   stroke: 'white',
@@ -136,8 +121,7 @@ export const PieSliceStyles: ViewProps = {
     transform: 'scale(1.02)',
   },
 };
-
-// Default styles for overlay base (shared by loading, error, no data)
+// Establishes a common base style for various chart overlays, providing positioning, background, and alignment.
 export const OverlayBaseStyles: ViewProps = {
   position: 'absolute',
   top: 0,
@@ -153,20 +137,17 @@ export const OverlayBaseStyles: ViewProps = {
   padding: '24px',
   textAlign: 'center',
 };
-
-// Default styles for loading overlay
+// Applies styles for a loading indicator overlay, inheriting from `OverlayBaseStyles`.
 export const LoadingOverlayStyles: ViewProps = {
   ...OverlayBaseStyles,
 };
-
-// Default styles for error overlay
+// Defines styles for an error message overlay, inheriting from `OverlayBaseStyles` and customizing colors for error display.
 export const ErrorOverlayStyles: ViewProps = {
   ...OverlayBaseStyles,
   backgroundColor: 'rgba(254, 242, 242, 0.8)',
   color: 'color-red-600',
 };
-
-// Default styles for no data overlay
+// Specifies styles for a 'no data' message overlay, inheriting from `OverlayBaseStyles` and customizing colors.
 export const NoDataOverlayStyles: ViewProps = {
   ...OverlayBaseStyles,
   backgroundColor: 'rgba(249, 250, 251, 0.8)',

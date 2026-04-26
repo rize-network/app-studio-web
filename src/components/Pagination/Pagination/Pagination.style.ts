@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { Size, Variant, Shape } from './Pagination.type';
-
+// Defines a set of predefined sizes (small, medium, large) for the Pagination component, mapping each size to a specific set of styling properties including font size, padding, minimum width, and height, with responsive adjustments for mobile devices.
 export const PaginationSizes: Record<Size, ViewProps> = {
   sm: {
     fontSize: '12px',
@@ -45,7 +45,7 @@ export const PaginationSizes: Record<Size, ViewProps> = {
     },
   },
 };
-
+// Defines different visual variants (default, filled, outline) for the Pagination component, each specifying distinct background colors, text colors, border styles, and hover effects.
 export const PaginationVariants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'transparent',
@@ -79,10 +79,10 @@ export const PaginationVariants: Record<Variant, ViewProps> = {
     },
   },
 };
-
+// Defines various border radius shapes (rounded, square, circular) that can be applied to the Pagination component buttons.
 export const PaginationShapes: Record<Shape, ViewProps> = {
   rounded: {
-    borderRadius: 8, // radius-md
+    borderRadius: 8,
   },
   square: {
     borderRadius: '0px',
@@ -91,7 +91,7 @@ export const PaginationShapes: Record<Shape, ViewProps> = {
     borderRadius: '50%',
   },
 };
-
+// Specifies the styling properties for the active page button within the Pagination component, including background color, text color, and hover effects to indicate the currently selected page.
 export const ActivePageButtonStyles: ViewProps = {
   backgroundColor: 'theme-primary',
   color: 'color-white',
@@ -101,7 +101,7 @@ export const ActivePageButtonStyles: ViewProps = {
     opacity: 0.9,
   },
 };
-
+// Defines the styling for disabled pagination buttons, reducing their opacity and changing the cursor to indicate they are not interactive.
 export const DisabledButtonStyles: ViewProps = {
   opacity: 0.5,
   cursor: 'not-allowed',

@@ -10,8 +10,7 @@ import { View, Text, ViewProps, useElementPosition } from 'app-studio';
 import { TooltipContextType, Position, Alignment } from './Tooltip.type';
 import { TooltipTriggerProps, TooltipContentProps } from './Tooltip.props';
 import { TooltipSizes, TooltipVariants, getArrowStyles } from './Tooltip.style';
-
-// Create context for the Tooltip
+// Initializes the React Context for the Tooltip, providing a way to share the tooltip's state and functions (open/close, refs, IDs) across its child components.
 const TooltipContext = createContext<TooltipContextType>({
   isOpen: false,
   openTooltip: () => {},
@@ -21,11 +20,9 @@ const TooltipContext = createContext<TooltipContextType>({
   contentId: '',
   triggerId: '',
 });
-
-// Hook to use the Tooltip context
+// A custom hook to easily access the Tooltip context, allowing child components to consume the shared tooltip state and actions.
 export const useTooltipContext = () => useContext(TooltipContext);
-
-// Provider component for the Tooltip context
+// The provider component for the TooltipContext, responsible for making the tooltip's state and functions available to all nested components.
 export const TooltipProvider: React.FC<{
   value: TooltipContextType;
   children: React.ReactNode;
@@ -34,18 +31,20 @@ export const TooltipProvider: React.FC<{
     <TooltipContext.Provider value={value}>{children}</TooltipContext.Provider>
   );
 };
-
-// Tooltip Trigger component
+// The component that triggers the tooltip's visibility. It wraps the element that, when interacted with, will show or hide the tooltip content.
 export const TooltipTrigger: React.FC<TooltipTriggerProps> = React.memo(
   ({ children, views, asChild = false, ...props }) => {
     const { openTooltip, closeTooltip, triggerRef, contentId, triggerId } =
       useTooltipContext();
-
+    // Memoized callback function to open the tooltip when the trigger element's mouseEnter event occurs.
     const handleMouseEnter = useCallback(() => openTooltip(), [openTooltip]);
+    // Memoized callback function to close the tooltip when the trigger element's mouseLeave event occurs.
     const handleMouseLeave = useCallback(() => closeTooltip(), [closeTooltip]);
+    // Memoized callback function to open the tooltip when the trigger element receives focus.
     const handleFocus = useCallback(() => openTooltip(), [openTooltip]);
+    // Memoized callback function to close the tooltip when the trigger element loses focus.
     const handleBlur = useCallback(() => closeTooltip(), [closeTooltip]);
-
+    // Collects all necessary properties and event handlers for the tooltip trigger element, including accessibility attributes and custom views.
     const triggerProps = {
       ref: triggerRef,
       onMouseEnter: handleMouseEnter,
@@ -53,17 +52,13 @@ export const TooltipTrigger: React.FC<TooltipTriggerProps> = React.memo(
       onFocus: handleFocus,
       onBlur: handleBlur,
       id: triggerId,
-      'aria-describedby': contentId, // Link trigger to content for screen readers
+      'aria-describedby': contentId,
       ...views?.container,
       ...props,
     };
-
-    // If asChild is true, clone the child element and pass the props
     if (asChild && React.isValidElement(children)) {
       return React.cloneElement(children, triggerProps);
     }
-
-    // Otherwise, wrap the children in a View component
     return (
       <View display="inline-block" {...triggerProps}>
         {children}
@@ -71,22 +66,18 @@ export const TooltipTrigger: React.FC<TooltipTriggerProps> = React.memo(
     );
   }
 );
-
-// Tooltip Content component
 export const TooltipContent: React.FC<TooltipContentProps> = React.memo(
   ({ children, views, ...props }) => {
     const { isOpen, contentRef, contentId, triggerId } = useTooltipContext();
-
     if (!isOpen) {
-      return null; // Don't render content if not open
+      return null;
     }
-
     return (
       <View
         ref={contentRef}
         id={contentId}
-        role="tooltip" // Use tooltip role for accessibility
-        aria-labelledby={triggerId} // Associate content with trigger
+        role="tooltip"
+        aria-labelledby={triggerId}
         {...views?.container}
         {...props}
       >
@@ -95,8 +86,6 @@ export const TooltipContent: React.FC<TooltipContentProps> = React.memo(
     );
   }
 );
-
-// Main Tooltip View component
 export const TooltipView: React.FC<
   {
     content: React.ReactNode;
@@ -122,37 +111,27 @@ export const TooltipView: React.FC<
 }) => {
   const { isOpen, triggerRef, contentRef, contentId, triggerId } =
     useTooltipContext();
-
-  // Use useElementPosition for intelligent positioning
   const { ref: positionRef, relation } = useElementPosition({
     trackChanges: true,
     trackOnHover: true,
     trackOnScroll: true,
     trackOnResize: true,
   });
-
   const [optimalPosition, setOptimalPosition] = useState({
     x: 0,
     y: 0,
     placement: position,
   });
-
-  // Sync the position ref with the trigger ref for positioning calculations
   useEffect(() => {
     if (triggerRef?.current && positionRef) {
       (positionRef as any).current = triggerRef.current;
     }
   }, [triggerRef, positionRef, isOpen]);
-
-  // Calculate optimal position using useElementPosition when the tooltip opens
   useEffect(() => {
     if (isOpen && contentRef?.current && triggerRef?.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       let placement = position;
-
-      // Use relation data to determine optimal placement
       if (relation) {
-        // If preferred position doesn't have enough space, use the position with more space
         if (position === 'top' && relation.space.vertical === 'bottom') {
           placement = 'bottom';
         } else if (position === 'bottom' && relation.space.vertical === 'top') {
@@ -169,19 +148,16 @@ export const TooltipView: React.FC<
           placement = 'right';
         }
       }
-
-      // Calculate position based on optimal placement and alignment
       let x = 0;
       let y = 0;
-
       switch (placement) {
         case 'top':
           x =
             align === 'start'
               ? triggerRect.left
               : align === 'end'
-              ? triggerRect.right - 120 // Estimated content width
-              : triggerRect.left + triggerRect.width / 2 - 60; // Half of estimated width
+              ? triggerRect.right - 120
+              : triggerRect.left + triggerRect.width / 2 - 60;
           y = triggerRect.top - 8;
           break;
         case 'bottom':
@@ -199,8 +175,8 @@ export const TooltipView: React.FC<
             align === 'start'
               ? triggerRect.top
               : align === 'end'
-              ? triggerRect.bottom - 32 // Estimated content height
-              : triggerRect.top + triggerRect.height / 2 - 16; // Half of estimated height
+              ? triggerRect.bottom - 32
+              : triggerRect.top + triggerRect.height / 2 - 16;
           break;
         case 'left':
           x = triggerRect.left - 8;
@@ -212,19 +188,14 @@ export const TooltipView: React.FC<
               : triggerRect.top + triggerRect.height / 2 - 16;
           break;
       }
-
       setOptimalPosition({ x, y, placement });
     }
   }, [isOpen, position, align, triggerRef, contentRef, relation]);
-
-  // Get arrow styles based on optimal placement (memoized)
   const arrowStyles = useMemo(
     () =>
       showArrow ? getArrowStyles(optimalPosition.placement as Position) : {},
     [showArrow, optimalPosition.placement]
   );
-
-  // Create intelligent positioning styles with transform for better placement (memoized)
   const positionStyles = useMemo((): React.CSSProperties => {
     const baseStyles: React.CSSProperties = {
       position: 'fixed',
@@ -232,8 +203,6 @@ export const TooltipView: React.FC<
       top: optimalPosition.y,
       zIndex: 1000,
     };
-
-    // Add transform based on placement for better positioning
     switch (optimalPosition.placement) {
       case 'top':
         return { ...baseStyles, transform: 'translateY(-100%)' };
@@ -245,7 +214,6 @@ export const TooltipView: React.FC<
         return baseStyles;
     }
   }, [optimalPosition.x, optimalPosition.y, optimalPosition.placement]);
-
   return (
     <View
       position="relative"
@@ -253,10 +221,9 @@ export const TooltipView: React.FC<
       {...views?.container}
       {...props}
     >
-      {/* Trigger */}
+      {}
       <TooltipTrigger>{children}</TooltipTrigger>
-
-      {/* Content */}
+      {}
       {isOpen && (
         <View
           ref={contentRef}
@@ -275,8 +242,7 @@ export const TooltipView: React.FC<
           ) : (
             content
           )}
-
-          {/* Arrow */}
+          {}
           {showArrow && <View {...arrowStyles} {...views?.arrow} />}
         </View>
       )}

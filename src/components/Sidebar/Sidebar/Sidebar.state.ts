@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useResponsive } from 'app-studio';
-
+// This file defines the `useSidebarState` custom hook, which encapsulates the logic for managing the expanded state of a sidebar component, including state initialization, controlled component synchronization via props, and methods to toggle, expand, or collapse the sidebar, alongside responsive behavior for mobile devices.
 export const useSidebarState = (
   defaultExpanded: boolean = true,
   expanded?: boolean,
@@ -9,18 +9,14 @@ export const useSidebarState = (
 ) => {
   const { on } = useResponsive();
   const isMobile = on('mobile');
-
   const [isExpanded, setIsExpanded] = useState<boolean>(
     expanded !== undefined ? expanded : defaultExpanded
   );
-
-  // Handle controlled expanded state
   useEffect(() => {
     if (expanded !== undefined) {
       setIsExpanded(expanded);
     }
   }, [expanded]);
-
   const toggleExpanded = () => {
     const newExpanded = !isExpanded;
     setIsExpanded(newExpanded);
@@ -28,7 +24,6 @@ export const useSidebarState = (
       onExpandedChange(newExpanded);
     }
   };
-
   const expand = () => {
     if (!isExpanded) {
       setIsExpanded(true);
@@ -37,7 +32,6 @@ export const useSidebarState = (
       }
     }
   };
-
   const collapse = () => {
     if (isExpanded) {
       setIsExpanded(false);
@@ -46,7 +40,6 @@ export const useSidebarState = (
       }
     }
   };
-
   return {
     isExpanded,
     toggleExpanded,

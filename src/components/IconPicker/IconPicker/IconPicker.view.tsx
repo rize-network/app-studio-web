@@ -9,9 +9,7 @@ import {
 } from './IconPicker.style';
 import { TextField } from '../../Form/TextField/TextField';
 import { Icon, ChevronIcon } from '../../Icon/Icon';
-
 const IconPickerView: React.FC<IconPickerViewProps> = ({
-  // Props
   label,
   placeholder = 'Select an icon',
   helperText,
@@ -23,34 +21,24 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
   isDisabled = false,
   isReadOnly = false,
   showSearch = true,
-
-  // State
   isOpen,
   selectedIcon,
   searchQuery,
   filteredIcons,
-
-  // Handlers
   handleToggle,
   handleIconSelect,
   handleSearchChange,
-
-  // Refs
   triggerRef,
   dropdownRef,
-
-  // Other
   handleClose,
   onChange,
   ...props
 }) => {
   const { getColor } = useTheme();
-
   const containerStyles = {
     ...DefaultIconPickerStyles.container,
     ...views?.container,
   };
-
   const triggerStyles = {
     ...DefaultIconPickerStyles.trigger,
     ...Sizes[size],
@@ -66,17 +54,14 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
       }),
     ...views?.trigger,
   };
-
   const dropdownStyles = {
     ...DefaultIconPickerStyles.dropdown,
     ...views?.dropdown,
   };
-
   const iconGridStyles = {
     ...DefaultIconPickerStyles.iconGrid,
     ...views?.iconGrid,
   };
-
   return (
     <View {...containerStyles} {...props}>
       {label && (
@@ -90,7 +75,6 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
           {label}
         </Text>
       )}
-
       <View
         ref={triggerRef}
         onClick={isDisabled || isReadOnly ? undefined : handleToggle}
@@ -119,7 +103,6 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
             </Text>
           )}
         </Horizontal>
-
         {!isReadOnly && !isDisabled && (
           <ChevronIcon
             widthHeight={16}
@@ -128,7 +111,6 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
           />
         )}
       </View>
-
       {isOpen && (
         <View ref={dropdownRef} {...dropdownStyles}>
           {showSearch && (
@@ -145,7 +127,6 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
               />
             </View>
           )}
-
           <View {...iconGridStyles}>
             {filteredIcons.length > 0 ? (
               filteredIcons.map((iconName) => (
@@ -184,7 +165,6 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
           </View>
         </View>
       )}
-
       {helperText && (
         <Text
           color={error ? 'color-red-500' : 'color-gray-600'}
@@ -197,5 +177,4 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
     </View>
   );
 };
-
 export default IconPickerView;

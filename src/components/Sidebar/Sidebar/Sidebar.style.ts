@@ -1,14 +1,3 @@
-/**
- * Sidebar Styles
- *
- * Defines the styles for the Sidebar component following the design guidelines:
- * - Typography: Inter/Geist font, specific sizes/weights
- * - Spacing: 4px grid system
- * - Colors: Neutral palette with semantic colors
- * - Rounded corners: Consistent border radius
- * - Transitions: Subtle animations
- */
-
 import { ViewProps } from 'app-studio';
 import {
   Position,
@@ -17,39 +6,31 @@ import {
   Elevation,
   TransitionPreset,
 } from './Sidebar.type';
-
-/**
- * Size configurations for the Sidebar component
- * Following the 4px grid system
- */
+// Defines a map for various sidebar sizes (sm, md, lg, xl), specifying their `expandedWidth` and `collapsedWidth` properties.
 export const SidebarSizes: Record<
   Size,
   { expandedWidth: string; collapsedWidth: string }
 > = {
   sm: {
-    expandedWidth: '240px', // 60 × 4px grid
-    collapsedWidth: '64px', // 16 × 4px grid
+    expandedWidth: '240px',
+    collapsedWidth: '64px',
   },
   md: {
-    expandedWidth: '280px', // 70 × 4px grid
-    collapsedWidth: '72px', // 18 × 4px grid
+    expandedWidth: '280px',
+    collapsedWidth: '72px',
   },
   lg: {
-    expandedWidth: '320px', // 80 × 4px grid
-    collapsedWidth: '80px', // 20 × 4px grid
+    expandedWidth: '320px',
+    collapsedWidth: '80px',
   },
   xl: {
-    expandedWidth: '360px', // 90 × 4px grid
-    collapsedWidth: '88px', // 22 × 4px grid
+    expandedWidth: '360px',
+    collapsedWidth: '88px',
   },
 };
-
-/**
- * Variant styles for the Sidebar component
- */
+// Generates a set of `ViewProps` for the sidebar based on its `Variant` (default, filled, outline, subtle, elevated) and the current `themeMode` (light/dark).
 export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
   const isDark = themeMode === 'dark';
-
   return {
     default: {
       backgroundColor: isDark ? 'color-gray-900' : 'color-white',
@@ -85,13 +66,9 @@ export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
     },
   };
 };
-
-// For backward compatibility
+// Exports the default sidebar variants, pre-configured using the `getSidebar` function for a 'light' theme.
 export const SidebarVariants = getSidebar('light');
-
-/**
- * Position styles for the Sidebar component
- */
+// Defines styling configurations for the sidebar based on its `Position` (left or right), including border styles.
 export const SidebarPositions: Record<Position, ViewProps> = {
   left: {
     left: 0,
@@ -106,10 +83,7 @@ export const SidebarPositions: Record<Position, ViewProps> = {
     borderLeftColor: 'color-gray-200',
   },
 };
-
-/**
- * Elevation styles for the Sidebar component
- */
+// Specifies shadow properties for different `Elevation` levels (none, low, medium, high) to be applied to the sidebar.
 export const SidebarElevations: Record<Elevation, ViewProps> = {
   none: {},
   low: {
@@ -122,20 +96,14 @@ export const SidebarElevations: Record<Elevation, ViewProps> = {
     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
   },
 };
-
-/**
- * Transition presets for the Sidebar component
- */
+// Provides predefined CSS transition strings for various animation speed `TransitionPreset` options (fast, normal, slow, bounce).
 export const SidebarTransitions: Record<TransitionPreset, string> = {
   fast: 'all 0.2s ease-in-out',
   normal: 'all 0.3s ease-in-out',
   slow: 'all 0.5s ease-in-out',
   bounce: 'all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55)',
 };
-
-/**
- * Active item styles for the Sidebar navigation items
- */
+// Defines the visual styles to apply when a sidebar item is in an active state, including background color, text color, font weight, and a left border.
 export const SidebarItemActive: ViewProps = {
   backgroundColor: 'rgba(var(--theme-primary-rgb), 0.1)',
   color: 'theme-primary',
@@ -144,10 +112,7 @@ export const SidebarItemActive: ViewProps = {
   borderLeftStyle: 'solid',
   borderLeftColor: 'theme-primary',
 };
-
-/**
- * Hover styles for the Sidebar navigation items
- */
+// Specifies the visual styles to apply when a user hovers over a sidebar item, primarily changing the background color with a transition.
 export const SidebarItemHover: ViewProps = {
   backgroundColor: 'color-gray-100',
   transition: 'all 0.2s ease-in-out',

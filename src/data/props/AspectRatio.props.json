@@ -1,27 +1,21 @@
 {
-  "componentDescription": "This component ensures its content maintains a specified aspect ratio, adjusting its size responsively while preserving visual proportions.",
+  "componentDescription": "A utility component to render content while maintaining a specific aspect ratio.",
   "ratio": {
     "type": "number",
-    "typeValues": [],
-    "description": "Set a default aspect ratio of 16:9 if no ratio is provided as a prop.",
+    "typeValues": "N/A",
+    "description": "Sets the aspect ratio for the content. For example, 16/9 for a widescreen format.",
     "defaultValue": "16 / 9"
   },
   "children": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "children prop used to render enclosed components.",
-    "defaultValue": "undefined"
+    "typeValues": "N/A",
+    "description": "The content to be rendered within the aspect ratio container.",
+    "defaultValue": "N/A"
   },
   "views": {
     "type": "object",
-    "typeValues": [],
-    "description": "An object to customize the props of the internal 'Center' and 'View' components, e.g., { center?: CenterProps, view?: ViewProps }.",
-    "defaultValue": "undefined"
-  },
-  "props": {
-    "type": "object",
-    "typeValues": [],
-    "description": "Spread the rest of the props to inherit additional properties for the root 'Center' component from 'app-studio'.",
-    "defaultValue": "undefined"
+    "typeValues": "{ center?: object; view?: object; }",
+    "description": "Allows customizing props for the internal wrapper View (center) and content View (view) components.",
+    "defaultValue": "N/A"
   }
 }

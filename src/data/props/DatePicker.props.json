@@ -1,77 +1,71 @@
 {
-  "componentDescription": "A customizable date selection input for user interfaces.",
+  "componentDescription": "A component for selecting a date, allowing users to input and manage date values easily.",
   "id": {
-    "type": ["string"],
-    "typeValues": [],
-    "description": "Unique identifier for the DatePicker component.",
-    "defaultValue": []
+    "type": "string",
+    "typeValues": null,
+    "description": "The unique identifier for the DatePicker.",
+    "defaultValue": null
   },
   "icon": {
-    "type": ["React.ReactNode"],
-    "typeValues": [],
+    "type": "React.ReactNode",
+    "typeValues": null,
     "description": "Custom icon to display when the DatePicker is checked.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "error": {
-    "type": ["boolean"],
-    "typeValues": [],
+    "type": "boolean",
+    "typeValues": null,
     "description": "Indicates whether the DatePicker has an error.",
-    "defaultValue": []
+    "defaultValue": false
   },
   "helperText": {
-    "type": ["string"],
-    "typeValues": [],
+    "type": "string",
+    "typeValues": null,
     "description": "Additional helper text that provides information about the field.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "name": {
-    "type": ["string"],
-    "typeValues": [],
+    "type": "string",
+    "typeValues": null,
     "description": "The name of the toggle.",
-    "defaultValue": []
-  },
-  "colorScheme": {
-    "type": ["string"],
-    "typeValues": [],
-    "description": "The color scheme that changes the background color of the DatePicker.",
-    "defaultValue": "theme-primary"
+    "defaultValue": null
   },
   "isReadOnly": {
-    "type": ["boolean"],
-    "typeValues": [],
+    "type": "boolean",
+    "typeValues": null,
     "description": "If true, the DatePicker cannot be selected.",
-    "defaultValue": []
+    "defaultValue": false
   },
   "isDisabled": {
-    "type": ["boolean"],
-    "typeValues": [],
+    "type": "boolean",
+    "typeValues": null,
     "description": "If true, the DatePicker will be unusable.",
-    "defaultValue": []
+    "defaultValue": false
   },
   "label": {
-    "type": ["string"],
-    "typeValues": [],
+    "type": "string",
+    "typeValues": null,
     "description": "The label text for the field.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "onChange": {
-    "type": ["function"],
-    "typeValues": [],
+    "type": "(value: any) => void",
+    "typeValues": null,
     "description": "Callback function triggered when the DatePicker value changes.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "onChangeText": {
-    "type": ["function"],
-    "typeValues": [],
+    "type": "(text: string) => void",
+    "typeValues": null,
     "description": "Callback function triggered when the DatePicker value changes for IOS and Android.",
-    "defaultValue": []
+    "defaultValue": null
   },
-  "styles": {
-    "type": ["DatePickerStyles"],
-    "typeValues": ["object"],
+  "views": {
+    "type": "DatePickerStyles",
+    "typeValues": null,
     "description": "CSS styles for the DatePicker container and label.",
     "defaultValue": {
-      "box": {},
+      "container": {},
       "label": {},
       "helperText": {},
       "text": {},
@@ -79,63 +73,27 @@
     }
   },
   "shape": {
-    "type": ["Shape"],
-    "typeValues": ["'default'", "'square'", "'rounded'", "'pill'"],
+    "type": "Shape",
+    "typeValues": "'default' | 'square' | 'rounded' | 'pill'",
     "description": "The shape that changes the outlines of the field.",
     "defaultValue": "default"
   },
   "variant": {
-    "type": ["Variant"],
-    "typeValues": ["'default'", "'outline'", "'none'"],
+    "type": "Variant",
+    "typeValues": "'default' | 'outline' | 'none'",
     "description": "Changes the style of the field.",
     "defaultValue": "default"
   },
   "size": {
-    "type": ["Size"],
-    "typeValues": ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
+    "type": "Size",
+    "typeValues": "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
     "description": "The size that sets the height and width of the DatePicker.",
     "defaultValue": "md"
   },
   "shadow": {
-    "type": ["Shadow", "Elevation", "CSSProperties"],
-    "typeValues": [],
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": null,
     "description": "Adds a shadow effect to the DatePicker.",
     "defaultValue": {}
-  },
-  "date": {
-    "type": ["string"],
-    "typeValues": [],
-    "description": "The selected date value as a string.",
-    "defaultValue": []
-  },
-  "setDate": {
-    "type": ["function"],
-    "typeValues": [],
-    "description": "A function to set the selected date value.",
-    "defaultValue": []
-  },
-  "isHovered": {
-    "type": ["boolean"],
-    "typeValues": [],
-    "description": "Flag indicating if the date picker is currently being hovered.",
-    "defaultValue": []
-  },
-  "setIsHovered": {
-    "type": ["function"],
-    "typeValues": [],
-    "description": "A function to set the hovered state of the date picker.",
-    "defaultValue": []
-  },
-  "isFocused": {
-    "type": ["boolean"],
-    "typeValues": [],
-    "description": "Flag indicating if the date picker is currently focused.",
-    "defaultValue": []
-  },
-  "setIsFocused": {
-    "type": ["function"],
-    "typeValues": [],
-    "description": "A function to set the focus state of the date picker.",
-    "defaultValue": []
   }
 }

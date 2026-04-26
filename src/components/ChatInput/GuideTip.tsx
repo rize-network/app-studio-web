@@ -1,24 +1,28 @@
 import React from 'react';
 import { Text, View } from 'app-studio';
 import { CloseIcon } from '../Icon/Icon';
-
+// Defines the properties expected by the GuideTip component.
 interface GuideTipProps {
+  // Optional URL for a video guide to be displayed within the tip.
   videoUrl?: string;
+  // A callback function to be executed when the tip's close button is clicked.
   onClose: () => void;
+  // Optional object to provide custom styles or properties for specific internal view components.
   views?: {
+    // Custom properties to apply to the main container View component of the tip.
     container?: any;
+    // Custom properties to apply to the video element if `videoUrl` is provided.
     video?: any;
+    // Custom properties to apply to the close button element.
     closeButton?: any;
   };
 }
-
+// Defines the GuideTip functional component, which displays a helpful tip, potentially with a video, and a close button.
 export const GuideTip: React.FC<GuideTipProps> = ({
   videoUrl,
   onClose,
   views = {},
 }) => {
-  // Using theme context for potential future styling
-
   return (
     <View
       position="relative"
@@ -45,7 +49,6 @@ export const GuideTip: React.FC<GuideTipProps> = ({
       >
         Need help? Watch this quick guide to get started.
       </Text>
-
       {videoUrl && (
         <View
           as="video"
@@ -57,7 +60,6 @@ export const GuideTip: React.FC<GuideTipProps> = ({
           {...views?.video}
         />
       )}
-
       <View
         as="button"
         type="button"

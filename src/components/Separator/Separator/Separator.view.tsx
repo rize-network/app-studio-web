@@ -1,10 +1,3 @@
-/**
- * Separator View Component
- *
- * Renders a separator with various styles and states
- * according to the design guidelines.
- */
-
 import React from 'react';
 import { View } from 'app-studio';
 import { Horizontal } from 'app-studio';
@@ -16,7 +9,7 @@ import {
   SeparatorThicknesses,
   DefaultSeparatorStyles,
 } from './Separator.style';
-
+// Defines the `SeparatorView` functional component, responsible for rendering a visual separator with various styles and orientations.
 export const SeparatorView: React.FC<SeparatorProps> = ({
   orientation = 'horizontal',
   variant = 'solid',
@@ -29,19 +22,19 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
   themeMode: elementMode,
   ...props
 }) => {
-  // Access theme if needed for future enhancements
+  // Retrieves the current theme mode from the application's theme context.
   const { themeMode } = useTheme();
-  // Use provided color or default from theme
+  // Determines the color of the separator, defaulting to 'color-gray-200' if no specific color is provided via props.
   const separatorColor = color || 'color-gray-200';
+  // Selects the appropriate border style (e.g., solid, dashed) for the separator based on the `variant` prop.
   const borderStyle = SeparatorVariants[variant];
+  // Sets the thickness of the separator line based on the `thickness` prop.
   const borderWidth = SeparatorThicknesses[thickness];
-
-  // Set appropriate ARIA attributes based on decorative prop
+  // Prepares ARIA accessibility attributes: if `decorative` is true, the separator is hidden from accessibility trees; otherwise, it's assigned a 'separator' role and `aria-orientation`.
   const ariaProps = decorative
     ? { 'aria-hidden': true }
     : { role: 'separator', 'aria-orientation': orientation };
-
-  // If there's a label, render a horizontal separator with the label in the middle
+  // Conditional rendering block for a horizontal separator that includes a text label.
   if (label && orientation === 'horizontal') {
     return (
       <Horizontal
@@ -76,8 +69,6 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
       </Horizontal>
     );
   }
-
-  // For horizontal separator without label
   if (orientation === 'horizontal') {
     return (
       <View
@@ -94,8 +85,6 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
       />
     );
   }
-
-  // For vertical separator
   return (
     <View
       width="0px"

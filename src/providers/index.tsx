@@ -50,6 +50,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
             primary: 'color-blue-700',
             secondary: 'color-purple-500',
           }}
+          data-theme={mode}
         >
           <ResponsiveProvider
             breakpoints={{

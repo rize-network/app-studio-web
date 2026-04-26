@@ -9,10 +9,7 @@ import {
   SidebarView,
   useSidebarContext,
 } from './Sidebar/Sidebar.view';
-
-/**
- * Sidebar component for creating collapsible, themeable and customizable sidebars.
- */
+// This component serves as the main entry point for the Sidebar, orchestrating its various parts (state, view, context) to provide a complete and customizable sidebar solution with properties for appearance, behavior, and responsiveness.
 const SidebarComponent: React.FC<SidebarProps> = ({
   children,
   position = 'left',
@@ -33,7 +30,6 @@ const SidebarComponent: React.FC<SidebarProps> = ({
 }) => {
   const { isExpanded, toggleExpanded, expand, collapse, isMobile } =
     useSidebarState(defaultExpanded, expanded, onExpandedChange, breakpoint);
-
   return (
     <SidebarProvider
       value={{
@@ -71,13 +67,8 @@ const SidebarComponent: React.FC<SidebarProps> = ({
     </SidebarProvider>
   );
 };
-
 export const Sidebar = SidebarComponent as SidebarType;
-
-// Assign the sub-components to the main component
 Sidebar.Header = SidebarHeader;
 Sidebar.Content = SidebarContent;
 Sidebar.Footer = SidebarFooter;
-
-// Expose the context hook for custom components
 Sidebar.useContext = useSidebarContext;

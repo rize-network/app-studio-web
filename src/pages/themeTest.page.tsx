@@ -11,7 +11,7 @@ export const ThemeTestPage = () => {
     <View
       width="100%"
       minHeight="100vh"
-      backgroundColor="theme-background"
+      backgroundColor="color-white"
       padding={40}
     >
       <Vertical gap={40}>
@@ -34,7 +34,7 @@ export const ThemeTestPage = () => {
         </Vertical>
 
         {/* System Colors Section */}
-        <Card padding={20} backgroundColor="theme-background">
+        <Card padding={20} backgroundColor="color-white">
           <Vertical gap={20}>
             <Text fontSize={20} fontWeight="bold" color="theme-primary">
               System Colors (color-x.y)
@@ -85,7 +85,7 @@ export const ThemeTestPage = () => {
         </Card>
 
         {/* Mode Specific Colors Section */}
-        <Card padding={20} backgroundColor="theme-background">
+        <Card padding={20} backgroundColor="color-white">
           <Vertical gap={20}>
             <Text fontSize={20} fontWeight="bold" color="theme-primary">
               Mode Specific Colors (light.x / dark.x)
@@ -122,7 +122,7 @@ export const ThemeTestPage = () => {
         </Card>
 
         {/* Smart Contrast Section */}
-        <Card padding={20} backgroundColor="theme-background">
+        <Card padding={20} backgroundColor="color-white">
           <Vertical gap={20}>
             <Text fontSize={20} fontWeight="bold" color="theme-primary">
               Smart Text Contrast
@@ -165,7 +165,7 @@ export const ThemeTestPage = () => {
         </Card>
 
         {/* Theme Tokens Section */}
-        <Card padding={20} backgroundColor="theme-background">
+        <Card padding={20} backgroundColor="color-white">
           <Vertical gap={20}>
             <Text fontSize={20} fontWeight="bold" color="theme-primary">
               Theme Tokens (theme-x)

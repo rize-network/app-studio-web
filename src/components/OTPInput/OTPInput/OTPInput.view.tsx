@@ -6,8 +6,7 @@ import { FieldLabel } from '../../Input/FieldLabel/FieldLabel';
 import { Horizontal } from 'app-studio';
 import { View } from 'app-studio';
 import { OTPInputViewProps } from './OTPInput.props';
-
-// Create a context for OTP input slots
+// Defines the React Context for managing the OTP input's internal state, including individual slot data, focus, and hover states. This context allows child components to consume and react to changes in the OTP input's state without prop drilling.
 export const OTPInputContext = createContext<{
   slots: Array<{
     char: string | null;
@@ -18,18 +17,14 @@ export const OTPInputContext = createContext<{
   isFocused: boolean;
   isHovering: boolean;
 }>({ slots: [], isFocused: false, isHovering: false });
-
-// CSS for noscript fallback
 const NOSCRIPT_CSS_FALLBACK = `
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
-
 [data-input-otp] {
   --nojs-bg: white !important;
   --nojs-fg: black !important;
-
   background-color: var(--nojs-bg) !important;
   color: var(--nojs-fg) !important;
   caret-color: var(--nojs-fg) !important;
@@ -40,8 +35,7 @@ const NOSCRIPT_CSS_FALLBACK = `
   width: 100% !important;
 }
 `;
-
-// Helper function to safely insert CSS rules
+// Utility function designed to safely insert CSS rules into a given stylesheet. It includes error handling to prevent the application from crashing if a rule insertion fails, logging an error instead.
 function safeInsertRule(sheet: CSSStyleSheet, rule: string) {
   try {
     sheet.insertRule(rule);
@@ -49,7 +43,7 @@ function safeInsertRule(sheet: CSSStyleSheet, rule: string) {
     console.error('input-otp could not insert CSS rule:', rule);
   }
 }
-
+// Declares the main functional component `OTPInputView`, responsible for rendering the visual representation of the OTP input. It accepts extended props, including handlers for various input events and references to the underlying native input and container elements.
 const OTPInputView: React.FC<
   OTPInputViewProps & {
     setInputRef: (ref: HTMLInputElement | null) => void;
@@ -113,15 +107,16 @@ const OTPInputView: React.FC<
   onBlur = () => {},
   onClick = () => {},
   onFocus = () => {},
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ...props
 }) => {
-  useTheme(); // Initialize theme context
+  // Initializes the `useTheme` hook, providing access to the application's theme context for styling purposes.
+  useTheme();
+  // A computed variable that determines whether the input field's label should be displayed, based on the presence of the `label` prop.
   const showLabel = !!label;
-
-  // Create context value for slots
+  // Memoizes the context value for the `OTPInputContext` to optimize performance. It calculates the state of each individual OTP slot, including character, placeholder, active status, and fake caret visibility.
   const contextValue = React.useMemo(() => {
     return {
+      // Generates an array of slot objects, each representing a single digit position in the OTP input. This mapping iterates over the `length` prop and calculates specific properties for each slot.
       slots: Array.from({ length }).map((_, slotIdx) => {
         const isActive =
           isFocused &&
@@ -130,15 +125,15 @@ const OTPInputView: React.FC<
           ((mirrorSelectionStart === mirrorSelectionEnd &&
             slotIdx === mirrorSelectionStart) ||
             (slotIdx >= mirrorSelectionStart && slotIdx < mirrorSelectionEnd));
-
+        // Extracts the character for the current slot from the input's `value` prop. If no character exists at the slot's index, it defaults to `null`.
         const char = value[slotIdx] !== undefined ? value[slotIdx] : null;
         const placeholderChar =
           value[0] !== undefined ? null : placeholder?.[slotIdx] ?? null;
-
         return {
           char,
           placeholderChar,
           isActive,
+          // Calculates if a fake blinking caret should be displayed for the current slot, which occurs when the slot is active (focused) and currently empty.
           hasFakeCaret: isActive && char === null,
         };
       }),
@@ -155,31 +150,25 @@ const OTPInputView: React.FC<
     placeholder,
     value,
   ]);
-
-  // Auto-focus the input on mount
+  // An effect hook that manages the autofocus behavior. If `isAutoFocus` is true and `inputRef` is available, it programmatically focuses the native input element.
   useEffect(() => {
     if (isAutoFocus && inputRef.current) {
       inputRef.current.focus();
     }
   }, [isAutoFocus, inputRef]);
-
-  // Add CSS styles for OTP input
+  // An effect hook responsible for dynamically injecting crucial CSS rules into the document's head on component mount. These rules handle visual aspects like blink animations for the caret, transparent autofill styles, and specific adjustments for iOS devices to ensure consistent appearance.
   useEffect(() => {
     if (!document.getElementById('input-otp-style')) {
       const styleEl = document.createElement('style');
       styleEl.id = 'input-otp-style';
       document.head.appendChild(styleEl);
-
       if (styleEl.sheet) {
         const autofillStyles =
           'background: transparent !important; color: transparent !important; border-color: transparent !important; opacity: 0 !important; box-shadow: none !important; -webkit-box-shadow: none !important; -webkit-text-fill-color: transparent !important;';
-
-        // Add blink animation
         safeInsertRule(
           styleEl.sheet,
           `@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }`
         );
-
         safeInsertRule(
           styleEl.sheet,
           '[data-input-otp]::selection { background: transparent !important; color: transparent !important; }'
@@ -192,12 +181,10 @@ const OTPInputView: React.FC<
           styleEl.sheet,
           `[data-input-otp]:-webkit-autofill { ${autofillStyles} }`
         );
-        // iOS
         safeInsertRule(
           styleEl.sheet,
           `@supports (-webkit-touch-callout: none) { [data-input-otp] { letter-spacing: -.6em !important; font-weight: 100 !important; font-stretch: ultra-condensed; font-optical-sizing: none !important; left: -1px !important; right: 1px !important; } }`
         );
-        // PWM badges
         safeInsertRule(
           styleEl.sheet,
           `[data-input-otp] + * { pointer-events: all !important; }`
@@ -205,8 +192,7 @@ const OTPInputView: React.FC<
       }
     }
   }, []);
-
-  // Render the OTP input slots
+  // A helper function that renders the visual grid of OTP input slots. It maps over the `contextValue.slots` to create a `FieldContent` component for each slot, displaying the character or placeholder and handling interactive states.
   const renderSlots = () => {
     return (
       <Horizontal
@@ -320,8 +306,6 @@ const OTPInputView: React.FC<
       </Horizontal>
     );
   };
-
-  // Input style for the hidden input
   const inputStyle: React.CSSProperties = {
     position: 'absolute',
     inset: 0,
@@ -342,13 +326,11 @@ const OTPInputView: React.FC<
     fontFamily: 'monospace',
     fontVariantNumeric: 'tabular-nums',
   };
-
   return (
     <>
       <noscript>
         <style>{NOSCRIPT_CSS_FALLBACK}</style>
       </noscript>
-
       <FieldContainer
         helperText={helperText}
         error={error}
@@ -365,7 +347,6 @@ const OTPInputView: React.FC<
             {label}
           </FieldLabel>
         )}
-
         <View
           ref={containerRef}
           data-input-otp-container
@@ -377,7 +358,6 @@ const OTPInputView: React.FC<
           <OTPInputContext.Provider value={contextValue}>
             {renderSlots()}
           </OTPInputContext.Provider>
-
           <View position="absolute" inset={0} pointerEvents="none">
             <Input
               ref={(ref) => setInputRef(ref as any)}
@@ -414,5 +394,4 @@ const OTPInputView: React.FC<
     </>
   );
 };
-
 export default OTPInputView;

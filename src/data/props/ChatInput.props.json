@@ -1,175 +1,199 @@
 {
-  "componentDescription": "An interactive input field for chat interfaces, supporting text, attachments, and various AI agent features.",
+  "componentDescription": "A versatile input field for chat interfaces, supporting text, file attachments, and agent interactions.",
   "getPendingFiles": {
-    "type": "function",
-    "typeValues": "() => File[]",
+    "type": "() => File[]",
+    "typeValues": [],
     "description": "Get the pending files",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "clearPendingFiles": {
-    "type": "function",
-    "typeValues": "() => void",
+    "type": "() => void",
+    "typeValues": [],
     "description": "Clear the pending files",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "onSubmit": {
-    "type": "function",
-    "typeValues": "(message: string, options?: { model_name?: string; enable_thinking?: boolean }) => void",
+    "type": "(message: string, options?: { model_name?: string; enable_thinking?: boolean }) => void",
+    "typeValues": [],
     "description": "Callback function when the form is submitted",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "placeholder": {
     "type": "string",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Placeholder text for the input",
-    "defaultValue": "Say what you want and Kimmy will surprise you"
+    "defaultValue": "Type your message… use @ to mention"
   },
   "loading": {
     "type": "boolean",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Whether the input is in a loading state",
-    "defaultValue": false
+    "defaultValue": "false"
   },
   "disabled": {
     "type": "boolean",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Whether the input is disabled",
-    "defaultValue": false
+    "defaultValue": "false"
   },
   "isAgentRunning": {
     "type": "boolean",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Whether an agent is currently running",
-    "defaultValue": false
+    "defaultValue": "false"
   },
   "onStopAgent": {
-    "type": "function",
-    "typeValues": "() => void",
+    "type": "() => void",
+    "typeValues": [],
     "description": "Callback function to stop the agent",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "autoFocus": {
     "type": "boolean",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Whether to auto focus the input",
-    "defaultValue": true
+    "defaultValue": "true"
   },
   "value": {
     "type": "string",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Controlled value for the input",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "onChange": {
-    "type": "function",
-    "typeValues": "(value: string) => void",
+    "type": "(value: string) => void",
+    "typeValues": [],
     "description": "Callback function when the input value changes",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "onFileBrowse": {
-    "type": "function",
-    "typeValues": "() => void",
+    "type": "() => void",
+    "typeValues": [],
     "description": "Callback function when the file browser is opened",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "sandboxId": {
     "type": "string",
-    "typeValues": null,
+    "typeValues": [],
     "description": "ID of the sandbox",
-    "defaultValue": null
+    "defaultValue": "undefined"
+  },
+  "onUploadProgress": {
+    "type": "(progress: number) => void",
+    "typeValues": [],
+    "description": "Callback when file upload progress changes",
+    "defaultValue": "undefined"
+  },
+  "onUploadSuccess": {
+    "type": "(data: any) => void",
+    "typeValues": [],
+    "description": "Callback when file upload succeeds",
+    "defaultValue": "undefined"
+  },
+  "onUploadError": {
+    "type": "(error: any) => void",
+    "typeValues": [],
+    "description": "Callback when file upload fails",
+    "defaultValue": "undefined"
+  },
+  "onFileUpload": {
+    "type": "(file: File) => void",
+    "typeValues": [],
+    "description": "Function to execute file upload. Parent should provide this. Should return an object with a loading property.",
+    "defaultValue": "undefined"
   },
   "hideAttachments": {
     "type": "boolean",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Whether to hide the attachment button",
-    "defaultValue": false
+    "defaultValue": "false"
   },
   "enableAudioRecording": {
     "type": "boolean",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Enable audio recording button",
-    "defaultValue": false
+    "defaultValue": "false"
   },
   "onAudioRecordingStart": {
-    "type": "function",
-    "typeValues": "() => void",
+    "type": "() => void",
+    "typeValues": [],
     "description": "Callback when audio recording starts",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "onAudioRecordingStop": {
-    "type": "function",
-    "typeValues": "(audio: Blob) => void",
+    "type": "(audio: Blob) => void",
+    "typeValues": [],
     "description": "Callback when audio recording stops",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "title": {
     "type": "string",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Title for the chat input",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "showGuideTip": {
     "type": "boolean",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Whether to show the guide tip",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "guideVideoUrl": {
     "type": "string",
-    "typeValues": null,
+    "typeValues": [],
     "description": "URL for the guide video",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "onGuideClose": {
-    "type": "function",
-    "typeValues": "() => void",
+    "type": "() => void",
+    "typeValues": [],
     "description": "Callback function when the guide tip is closed",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "promptExamples": {
-    "type": "array",
-    "typeValues": "Array<{ id: string; text: string; }>",
+    "type": "PromptExample[]",
+    "typeValues": [],
     "description": "List of prompt examples",
-    "defaultValue": []
+    "defaultValue": "[]"
   },
   "suggestions": {
-    "type": "array",
-    "typeValues": "Array<object>",
+    "type": "Suggestion[]",
+    "typeValues": [],
     "description": "List of suggestions for auto-completion",
-    "defaultValue": []
+    "defaultValue": "[]"
   },
   "onPromptExampleSelect": {
-    "type": "function",
-    "typeValues": "(example: PromptExample) => void",
+    "type": "(example: PromptExample) => void",
+    "typeValues": [],
     "description": "Callback function when a prompt example is selected",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "mentionData": {
-    "type": "array",
-    "typeValues": "Array<{ id: string; name: string; avatar?: string; description?: string; }>",
+    "type": "Array<{ id: string; name: string; avatar?: string; description?: string; }>",
+    "typeValues": [],
     "description": "Data for mention auto-completion",
-    "defaultValue": []
+    "defaultValue": "[]"
   },
   "mentionTrigger": {
     "type": "string",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Trigger character for mentions (default: '@')",
     "defaultValue": "@"
   },
   "onMentionSelect": {
-    "type": "function",
-    "typeValues": "(mention: { id: string; name: string; avatar?: string; description?: string; }) => void",
+    "type": "(mention: { id: string; name: string; avatar?: string; description?: string; }) => void",
+    "typeValues": [],
     "description": "Callback function when a mention is selected",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "errorMessage": {
     "type": "string",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Error message to display at the bottom",
-    "defaultValue": null
+    "defaultValue": "undefined"
   },
   "size": {
-    "type": "string",
+    "type": "Size",
     "typeValues": [
       "xs",
       "sm",
@@ -181,7 +205,7 @@
     "defaultValue": "md"
   },
   "shape": {
-    "type": "string",
+    "type": "Shape",
     "typeValues": [
       "default",
       "square",
@@ -191,7 +215,7 @@
     "defaultValue": "rounded"
   },
   "variant": {
-    "type": "string",
+    "type": "Variant",
     "typeValues": [
       "default",
       "outline",
@@ -201,9 +225,9 @@
     "defaultValue": "default"
   },
   "views": {
-    "type": "object",
-    "typeValues": "ChatInputStyles",
+    "type": "ChatInputStyles",
+    "typeValues": [],
     "description": "Style customization",
-    "defaultValue": {}
+    "defaultValue": "{}"
   }
 }

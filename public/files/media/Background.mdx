@@ -1,0 +1,610 @@
+# Background
+
+A container component that provides a visually distinct background with customizable layers and decorative elements.
+
+### **Import**
+```tsx
+import { Background } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const DefaultDemo = () => (
+  <Vertical gap={32}>
+    <Text fontSize={16} fontWeight="600">
+      Background Component Examples
+    </Text>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Aurora Background
+      </Text>
+      <Background.Aurora height="200px" showRadialGradient={true}>
+        <Text color="white" fontSize={18} fontWeight="500">
+          Aurora Effect Background
+        </Text>
+      </Background.Aurora>
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Meteors Effect
+      </Text>
+      <Background.Meteors number={15} />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Wall Effect
+      </Text>
+      <Background.Wall rows={15} cols={10} squareSize={40} />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Particles Effect
+      </Text>
+      <Background.Particles
+        count={30}
+        speed="medium"
+        shapes={['circle', 'square']}
+      />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Grid Effect
+      </Text>
+      <Background.Grid gridSize={25} animationSpeed="medium" />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Ripples Effect
+      </Text>
+      <Background.Ripples rippleCount={4} maxSize={150} frequency={2} />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Background Image
+      </Text>
+      <Background.Image
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+        height="200px"
+        backgroundSize="cover"
+        blendMode="multiply"
+        overlay={<Background.Overlay />}
+      >
+        <Text color="white" fontSize={18} fontWeight="500">
+          Image Background with Overlay
+        </Text>
+      </Background.Image>
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Background Gradient
+      </Text>
+      <Background.Gradient
+        from="color-blue-500"
+        to="color-purple-500"
+        height="200px"
+        animate={true}
+        animationDuration={4}
+      >
+        <Text color="white" fontSize={18} fontWeight="500">
+          Animated Gradient Background
+        </Text>
+      </Background.Gradient>
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Multi-color Gradient
+      </Text>
+      <Background.Gradient
+        type="radial"
+        colors={[
+          { color: 'color-red-500', position: '0%' },
+          { color: 'color-orange-500', position: '50%' },
+          { color: 'color-yellow-500', position: '100%' },
+        ]}
+        height="200px"
+        shape="ellipse"
+        position="top-left"
+      >
+        <Text color="white" fontSize={18} fontWeight="500">
+          Radial Multi-color Gradient
+        </Text>
+      </Background.Gradient>
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Aurora**
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Vertical, Center } from 'app-studio';
+import { Text } from 'app-studio';
+import { Button } from '../../Button/Button';
+
+export const AuroraDemo = () => (
+  <Vertical gap={32}>
+    <Text fontSize={16} fontWeight="600">
+      Aurora Background Variations
+    </Text>
+
+    <Vertical gap={24}>
+      <Text fontSize={14} color="color-gray-600">
+        With Radial Gradient
+      </Text>
+      <Background.Aurora height="300px" showRadialGradient={true}>
+        <Center height="100%">
+          <Vertical alignItems="center" gap={16}>
+            <Text color="white" fontSize={24} fontWeight="600">
+              Aurora Background
+            </Text>
+            <Text color="white" fontSize={16} textAlign="center">
+              Beautiful animated gradient effect
+            </Text>
+            <Button backgroundColor="color-white" color="color-blue-600">
+              Get Started
+            </Button>
+          </Vertical>
+        </Center>
+      </Background.Aurora>
+    </Vertical>
+
+    <Vertical gap={24}>
+      <Text fontSize={14} color="color-gray-600">
+        Without Radial Gradient
+      </Text>
+      <Background.Aurora height="200px" showRadialGradient={false}>
+        <Center height="100%">
+          <Text color="white" fontSize={20} fontWeight="500">
+            Full Aurora Effect
+          </Text>
+        </Center>
+      </Background.Aurora>
+    </Vertical>
+
+    <Vertical gap={24}>
+      <Text fontSize={14} color="color-gray-600">
+        Custom Height
+      </Text>
+      <Background.Aurora height="150px" showRadialGradient={true}>
+        <Center height="100%">
+          <Text color="white" fontSize={16}>
+            Compact Aurora
+          </Text>
+        </Center>
+      </Background.Aurora>
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **CombinedEffects**
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Button } from '../../Button/Button';
+import { Vertical, Center, Horizontal } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const CombinedEffectsDemo = () => (
+  <Vertical gap={32}>
+    <Text fontSize={16} fontWeight="600">
+      Combined Background Effects
+    </Text>
+
+    <Vertical gap={24}>
+      <Text fontSize={14} color="color-gray-600">
+        Aurora with Interactive Elements
+      </Text>
+      <Background.Aurora height="400px" showRadialGradient={true}>
+        <Center height="100%">
+          <Vertical alignItems="center" gap={24}>
+            <Text color="white" fontSize={28} fontWeight="600">
+              Welcome to the Future
+            </Text>
+            <Text
+              color="white"
+              fontSize={16}
+              textAlign="center"
+              maxWidth="400px"
+            >
+              Experience the next generation of web interfaces with beautiful
+              animated backgrounds
+            </Text>
+
+            <Horizontal gap={16} flexWrap="wrap">
+              <Button
+                animation="borderMoving"
+                variant="filled"
+                borderMovingDuration={2}
+              >
+                Get Started
+              </Button>
+
+              <Button
+                animation="animatedStroke"
+                variant="ghost"
+                animatedStrokeAccentColor="white"
+                animatedStrokeTextColor="white"
+              >
+                Learn More
+              </Button>
+            </Horizontal>
+          </Vertical>
+        </Center>
+      </Background.Aurora>
+    </Vertical>
+
+    <Vertical gap={24}>
+      <Text fontSize={14} color="color-gray-600">
+        Meteors with Content Overlay
+      </Text>
+      <Background.Meteors number={25} width={600} height={300}>
+        <Vertical
+          alignItems="center"
+          justifyContent="center"
+          gap={16}
+          height="100%"
+        >
+          <Text color="white" fontSize={20} fontWeight="600">
+            Shooting Stars
+          </Text>
+          <Button
+            animation="borderMoving"
+            variant="filled"
+            borderMovingDuration={3}
+          >
+            Explore
+          </Button>
+        </Vertical>
+      </Background.Meteors>
+    </Vertical>
+
+    <Vertical gap={24}>
+      <Text fontSize={14} color="color-gray-600">
+        Multiple Interactive Elements
+      </Text>
+      <Horizontal gap={16} flexWrap="wrap" justifyContent="center">
+        <Button
+          animation="borderMoving"
+          variant="filled"
+          borderMovingDuration={1.5}
+          borderMovingGradientColors={['#FF6B6B', '#4ECDC4', '#45B7D1']}
+        >
+          Fast Animation
+        </Button>
+
+        <Button
+          animation="animatedStroke"
+          variant="ghost"
+          animatedStrokeAccentColor="color-purple-500"
+          animatedStrokeTextColor="color-purple-700"
+        >
+          Hover Effect
+        </Button>
+
+        <Button
+          animation="borderMoving"
+          variant="filled"
+          borderMovingDuration={3}
+          borderMovingGradientColors={['#FFD93D', '#6BCF7F', '#4D96FF']}
+        >
+          Slow Animation
+        </Button>
+      </Horizontal>
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Grid**
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const GridDemo = () => (
+  <Vertical gap={16}>
+    <Text fontSize={16} fontWeight="600">
+      Grid Background Effect
+    </Text>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Default Grid (30px cells, medium speed)
+      </Text>
+      <Background.Grid />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Large Grid (fast animation)
+      </Text>
+      <Background.Grid gridSize={50} animationSpeed="fast" />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Small Grid (slow animation)
+      </Text>
+      <Background.Grid gridSize={20} animationSpeed="slow" />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Custom Colors
+      </Text>
+      <Background.Grid
+        gridSize={25}
+        lineColor="rgba(255, 99, 132, 0.3)"
+        pulseColor="rgba(255, 99, 132, 0.8)"
+        animationSpeed="medium"
+      />
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Index**
+
+```tsx
+export { DefaultDemo } from './default';
+export { AuroraDemo } from './aurora';
+export { MeteorsDemo } from './meteors';
+export { WallDemo } from './wall';
+export { ParticlesDemo } from './particles';
+export { GridDemo } from './grid';
+export { RipplesDemo } from './ripples';
+export { CombinedEffectsDemo } from './combinedEffects';
+export { VideoDemo } from './video';
+```
+
+### **Meteors**
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Vertical, Horizontal } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const MeteorsDemo = () => (
+  <Vertical gap={32}>
+    <Text fontSize={16} fontWeight="600">
+      Meteors Effect Variations
+    </Text>
+
+    <Horizontal gap={24} flexWrap="wrap">
+      <Vertical gap={16}>
+        <Text fontSize={14} color="color-gray-600">
+          Light Meteors (10)
+        </Text>
+        <Background.Meteors number={10} />
+      </Vertical>
+
+      <Vertical gap={16}>
+        <Text fontSize={14} color="color-gray-600">
+          Medium Meteors (20)
+        </Text>
+        <Background.Meteors number={20} />
+      </Vertical>
+
+      <Vertical gap={16}>
+        <Text fontSize={14} color="color-gray-600">
+          Heavy Meteors (30)
+        </Text>
+        <Background.Meteors number={30} />
+      </Vertical>
+    </Horizontal>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Custom Size Meteors
+      </Text>
+      <Background.Meteors
+        number={15}
+        width={600}
+        height={300}
+        backgroundColor="color-gray-900"
+      />
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Particles**
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const ParticlesDemo = () => (
+  <Vertical gap={16}>
+    <Text fontSize={16} fontWeight="600">
+      Particles Background Effect
+    </Text>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Default Particles (50 circles, medium speed)
+      </Text>
+      <Background.Particles />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Mixed Shapes (circles, squares, triangles)
+      </Text>
+      <Background.Particles
+        count={40}
+        speed="medium"
+        shapes={['circle', 'square', 'triangle']}
+      />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Fast Moving Circles
+      </Text>
+      <Background.Particles count={30} speed="fast" shapes={['circle']} />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Custom Colors & Slow Speed
+      </Text>
+      <Background.Particles
+        count={25}
+        speed="slow"
+        shapes={['square']}
+        colors={[
+          'rgb(255, 99, 132)', // red
+          'rgb(54, 162, 235)', // blue
+          'rgb(255, 205, 86)', // yellow
+          'rgb(75, 192, 192)', // teal
+        ]}
+      />
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Ripples**
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const RipplesDemo = () => (
+  <Vertical gap={16}>
+    <Text fontSize={16} fontWeight="600">
+      Ripples Background Effect
+    </Text>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Default Ripples (5 ripples, medium size)
+      </Text>
+      <Background.Ripples />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Large Ripples (slow frequency)
+      </Text>
+      <Background.Ripples rippleCount={3} maxSize={300} frequency={2} />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Many Small Ripples (fast frequency)
+      </Text>
+      <Background.Ripples rippleCount={8} maxSize={100} frequency={5} />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Custom Colors
+      </Text>
+      <Background.Ripples
+        rippleCount={4}
+        maxSize={180}
+        frequency={3}
+        colors={[
+          'rgba(255, 99, 132, 0.6)', // red
+          'rgba(54, 162, 235, 0.6)', // blue
+          'rgba(255, 205, 86, 0.6)', // yellow
+        ]}
+      />
+    </Vertical>
+  </Vertical>
+);
+```
+
+### **Video**
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const VideoDemo = () => (
+  <Vertical gap={16}>
+    <Text fontSize={16} fontWeight="600">
+      Video Background
+    </Text>
+    <Background.Video
+      src="https://www.w3schools.com/html/mov_bbb.mp4"
+      height="200px"
+      overlay={<Background.Overlay />}
+    >
+      <Text color="white" fontSize={18} fontWeight="500">
+        Video Background
+      </Text>
+    </Background.Video>
+  </Vertical>
+);
+
+export default VideoDemo;
+```
+
+### **Wall**
+
+```tsx
+import React from 'react';
+import { Background } from '../Background';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const WallDemo = () => (
+  <Vertical gap={16}>
+    <Text fontSize={16} fontWeight="600">
+      Wall Background Effect
+    </Text>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Default Wall (15x10 grid)
+      </Text>
+      <Background.Wall />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Custom Wall (8x6 grid, larger squares)
+      </Text>
+      <Background.Wall rows={8} cols={6} squareSize={50} />
+    </Vertical>
+
+    <Vertical gap={16}>
+      <Text fontSize={14} color="color-gray-600">
+        Small Wall (12x8 grid, smaller squares)
+      </Text>
+      <Background.Wall rows={12} cols={8} squareSize={25} />
+    </Vertical>
+  </Vertical>
+);
+```
+

@@ -9,6 +9,7 @@ export * from './Button/Button';
 export * from './Card/Card';
 export * from './Carousel/Carousel';
 export * from './Chart/Chart';
+export * from './Chart/Chart/ChartColors';
 export * from './CookieConsent/CookieConsent';
 export * from './ContextMenu/ContextMenu';
 export * from './File/File';

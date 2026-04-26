@@ -1,39 +1,39 @@
 {
-  "componentDescription": "The Slider component allows users to select a single value from a predefined range by dragging a thumb.",
+  "componentDescription": "A versatile UI component for selecting a single value or range from a predefined set by dragging a thumb.",
   "min": {
     "type": "number",
-    "typeValues": [],
-    "description": "Specifies the minimum possible value the slider can reach.",
+    "typeValues": null,
+    "description": "Defines the minimum allowed value for the slider.",
     "defaultValue": 0
   },
   "max": {
     "type": "number",
-    "typeValues": [],
-    "description": "Specifies the maximum possible value the slider can reach.",
+    "typeValues": null,
+    "description": "Defines the maximum allowed value for the slider.",
     "defaultValue": 100
   },
   "value": {
     "type": "number",
-    "typeValues": [],
+    "typeValues": null,
     "description": "The current controlled value of the slider.",
     "defaultValue": null
   },
   "defaultValue": {
     "type": "number",
-    "typeValues": [],
+    "typeValues": null,
     "description": "The initial uncontrolled value of the slider.",
     "defaultValue": null
   },
   "step": {
     "type": "number",
-    "typeValues": [],
-    "description": "The interval by which the slider's value changes when adjusted.",
+    "typeValues": null,
+    "description": "The step increment for the slider's value.",
     "defaultValue": 1
   },
   "stepValues": {
     "type": "number[]",
-    "typeValues": [],
-    "description": "An optional array of specific values the slider thumb should snap to.",
+    "typeValues": null,
+    "description": "An array of specific values the slider can snap to.",
     "defaultValue": null
   },
   "shape": {
@@ -43,7 +43,7 @@
       "rounded",
       "pill"
     ],
-    "description": "Defines the visual shape characteristics of the slider components.",
+    "description": "Defines the visual shape of the slider's elements (e.g., round, square).",
     "defaultValue": "rounded"
   },
   "size": {
@@ -55,7 +55,7 @@
       "lg",
       "xl"
     ],
-    "description": "Determines the overall size of the slider component.",
+    "description": "Defines the overall size of the slider component.",
     "defaultValue": "md"
   },
   "variant": {
@@ -64,7 +64,7 @@
       "default",
       "outline"
     ],
-    "description": "Specifies the visual style variant of the slider.",
+    "description": "Specifies the visual style or variant of the slider.",
     "defaultValue": "default"
   },
   "orientation": {
@@ -73,55 +73,55 @@
       "horizontal",
       "vertical"
     ],
-    "description": "Sets the orientation of the slider, either horizontal or vertical.",
+    "description": "Defines whether the slider is horizontal or vertical.",
     "defaultValue": "horizontal"
   },
   "isDisabled": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "If true, the slider will be disabled and users cannot interact with it.",
+    "typeValues": null,
+    "description": "Indicates if the slider is disabled and non-interactive.",
     "defaultValue": false
   },
   "showValue": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "If true, the slider's current value will be visibly displayed.",
+    "typeValues": null,
+    "description": "Determines whether the current slider value should be displayed.",
     "defaultValue": false
   },
   "showTooltip": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "If true, a tooltip will appear on hover or drag displaying the current value.",
+    "typeValues": null,
+    "description": "Determines whether a tooltip showing the value appears on hover/drag.",
     "defaultValue": false
   },
   "label": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "A react node to use as a label for the slider component.",
+    "typeValues": null,
+    "description": "A label to associate with the slider.",
     "defaultValue": null
   },
   "helperText": {
     "type": "string",
-    "typeValues": [],
-    "description": "Supplementary text displayed below the slider to provide additional context or instructions.",
+    "typeValues": null,
+    "description": "Supplementary text to provide additional context or guidance.",
     "defaultValue": null
   },
   "onChange": {
     "type": "(value: number) => void",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Callback function invoked when the slider's value changes.",
     "defaultValue": null
   },
   "onDrag": {
     "type": "(value: number) => void",
-    "typeValues": [],
-    "description": "Callback function invoked continuously while the slider thumb is being dragged.",
+    "typeValues": null,
+    "description": "Callback function invoked during a slider drag operation.",
     "defaultValue": null
   },
   "views": {
     "type": "SliderStyles",
-    "typeValues": [],
-    "description": "Custom styles that can be applied to different parts of the slider component.",
+    "typeValues": null,
+    "description": "Custom styles for different parts of the slider component.",
     "defaultValue": {
       "container": {},
       "track": {},
@@ -136,14 +136,14 @@
   },
   "shadow": {
     "type": "ViewProps",
-    "typeValues": [],
-    "description": "Properties to control the shadow appearance of the slider component.",
+    "typeValues": null,
+    "description": "Props for rendering a shadow effect for the slider.",
     "defaultValue": {}
   },
   "ariaLabel": {
     "type": "string",
-    "typeValues": [],
-    "description": "An accessible label for the slider, used by screen readers.",
+    "typeValues": null,
+    "description": "An ARIA label for accessibility purposes.",
     "defaultValue": "Slider"
   }
 }

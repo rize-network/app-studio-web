@@ -1,15 +1,7 @@
-/**
- * Modal View Component
- *
- * Renders a modal dialog with various styles and states
- * according to the design guidelines.
- */
-
 import React, { useCallback, useMemo } from 'react';
 import { View, Horizontal, ViewProps, Vertical, Center } from 'app-studio';
 import { CloseIcon } from '../../Icon/Icon';
 import { hideModal } from './Modal.store';
-
 import {
   BodyProps,
   ContainerProps,
@@ -23,20 +15,27 @@ import {
   ModalTypography,
 } from '../Modal/Modal.style';
 import { Position } from './Modal.type';
-
+// Defines the properties available for configuring the ModalOverlay component, enabling customization of its appearance and behavior.
 export interface OverlayProps {
+  // Specifies custom style properties for the modal's internal container and view elements, allowing for granular visual adjustments.
   views?: {
     container?: ViewProps;
     view?: ViewProps;
   };
+  // Sets the blur radius for the backdrop effect behind the modal, enhancing visual distinction and focus on the modal content.
   blur?: number;
+  // Determines the visibility state of the modal overlay. When true, the modal is shown; when false, it is hidden.
   isOpen?: boolean;
+  // A flag indicating whether clicking the overlay outside the modal content should trigger the onClose event, preventing accidental closures.
   isClosePrevented?: boolean;
+  // A callback function that executes when the modal is requested to close, typically due to user interaction or internal logic.
   onClose?: () => void;
+  // Dictates the alignment of the modal content within the overlay, such as 'center', 'top-left', etc.
   position?: Position;
+  // The React nodes that will be rendered as the main content inside the modal overlay.
   children?: React.ReactNode;
 }
-
+// The ModalOverlay component serves as the backdrop and container for any modal content, managing its visibility and global positioning. It applies a customizable blur effect and handles close interactions.
 export const ModalOverlay: React.FC<OverlayProps & any> = React.memo(
   ({
     children,
@@ -48,10 +47,10 @@ export const ModalOverlay: React.FC<OverlayProps & any> = React.memo(
     views,
     ...props
   }) => {
+    // Handles clicks on the modal overlay. If closing is not prevented, it triggers the onClose callback to hide the modal. This ensures the modal closes only when intended.
     const handleClick = useCallback(() => {
       if (!isClosePrevented) onClose();
     }, [isClosePrevented, onClose]);
-
     return (
       <Center
         position="fixed"
@@ -88,8 +87,6 @@ export const ModalOverlay: React.FC<OverlayProps & any> = React.memo(
     );
   }
 );
-
-// Stable shadow objects extracted to module level to avoid recreation on every render
 const webShadow = {
   boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.15)',
 };
@@ -100,7 +97,6 @@ const nativeShadow = {
   shadowOpacity: 1,
   shadowRadius: 16,
 };
-
 export const ModalContainer: React.FC<ContainerProps> = React.memo(
   ({
     children,
@@ -113,7 +109,6 @@ export const ModalContainer: React.FC<ContainerProps> = React.memo(
   }) => {
     const defaultShadow =
       typeof document !== undefined ? webShadow : nativeShadow;
-
     const handleClick = useCallback((event: any) => {
       if (event && event.stopPropagation) event.stopPropagation();
     }, []);
@@ -144,7 +139,6 @@ export const ModalContainer: React.FC<ContainerProps> = React.memo(
     );
   }
 );
-
 export const ModalHeader: React.FC<HeaderProps> = React.memo(
   ({
     children,
@@ -155,7 +149,6 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
     ...props
   }) => {
     const onClose = props.onClose ? props.onClose : hideModal;
-
     const buttonIcon = (
       <View onClick={onClose}>
         <CloseIcon
@@ -164,19 +157,18 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
         />
       </View>
     );
-
     return (
       <Horizontal
         justifyContent={buttonPosition === 'none' ? 'center' : 'space-between'}
         alignItems="center"
-        paddingVertical={16} // 4×4px grid
-        paddingHorizontal={24} // 6×4px grid
+        paddingVertical={16}
+        paddingHorizontal={24}
         borderBottomWidth="1px"
         borderBottomStyle="solid"
         borderBottomColor="color-gray-200"
         media={{
           mobile: {
-            paddingVertical: 12, // Smaller padding on mobile
+            paddingVertical: 12,
             paddingHorizontal: 16,
           },
         }}
@@ -190,19 +182,18 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
     );
   }
 );
-
 export const ModalBody: React.FC<BodyProps> = React.memo(
   ({ children, views, ...props }) => {
     return (
       <View
-        paddingVertical={16} // 4×4px grid
-        paddingHorizontal={24} // 6×4px grid
+        paddingVertical={16}
+        paddingHorizontal={24}
         fontSize={ModalTypography.body.fontSize}
         fontWeight={ModalTypography.body.fontWeight}
         color={ModalTypography.body.color}
         media={{
           mobile: {
-            paddingVertical: 12, // Smaller padding on mobile
+            paddingVertical: 12,
             paddingHorizontal: 16,
             fontSize: '14px',
           },
@@ -215,7 +206,6 @@ export const ModalBody: React.FC<BodyProps> = React.memo(
     );
   }
 );
-
 export const ModalFooter: React.FC<FooterProps> = React.memo(
   ({ children, views, ...props }) => {
     return (
@@ -223,15 +213,15 @@ export const ModalFooter: React.FC<FooterProps> = React.memo(
         marginTop="auto"
         alignItems="center"
         justifyContent="flex-end"
-        paddingVertical={16} // 4×4px grid
-        paddingHorizontal={24} // 6×4px grid
+        paddingVertical={16}
+        paddingHorizontal={24}
         borderTopWidth="1px"
         borderTopStyle="solid"
         borderTopColor="color-gray-200"
-        gap={12} // 3×4px grid
+        gap={12}
         media={{
           mobile: {
-            paddingVertical: 12, // Smaller padding on mobile
+            paddingVertical: 12,
             paddingHorizontal: 16,
             gap: 8,
           },

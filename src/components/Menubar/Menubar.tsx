@@ -11,10 +11,7 @@ import {
   MenubarSeparator,
   MenubarView,
 } from './Menubar/Menubar.view';
-
-/**
- * Menubar component for creating horizontal or vertical menu bars with dropdown menus.
- */
+// This file defines the main Menubar component, which orchestrates the menubar's state management (active/open menus) using `useMenubarState`, provides this state and essential props via `MenubarProvider`, and renders the actual UI structure through `MenubarView`. It also attaches various sub-components (Root, Menu, Trigger, etc.) to the main Menubar object for easy composition and usage, facilitating a compound component pattern.
 const MenubarComponent: React.FC<MenubarProps> = ({
   items,
   orientation = 'horizontal',
@@ -33,9 +30,7 @@ const MenubarComponent: React.FC<MenubarProps> = ({
     isMenuOpen,
     toggleMenu,
   } = useMenubarState(defaultActiveMenuId, defaultOpenMenuId);
-
   const triggerRefs = useRef<Record<string, HTMLElement | null>>({});
-
   return (
     <MenubarProvider
       value={{
@@ -62,10 +57,7 @@ const MenubarComponent: React.FC<MenubarProps> = ({
     </MenubarProvider>
   );
 };
-
 export const Menubar = MenubarComponent as MenubarType;
-
-// Assign the sub-components to the main component
 Menubar.Root = MenubarRoot;
 Menubar.Menu = MenubarMenu;
 Menubar.Trigger = MenubarTrigger;

@@ -1,139 +1,50 @@
 import { ViewProps } from 'app-studio';
 import { HighlightStyle, TitleSize, TitleStyles } from './Title.type';
 import { AnimationProps } from 'app-studio/dist/utils/constants';
-
-/**
- * Props for the Title component
- */
+// Defines the properties for the Title component, extending standard view properties.
 export interface TitleProps extends ViewProps {
-  /**
-   * Internal prop to indicate if the component is in view
-   * @internal
-   */
+  // Indicates whether the title component is currently visible within the viewport, often used for scroll-triggered animations.
   _isInView?: boolean;
-  /**
-   * The main text content of the title
-   */
+  // The content to be rendered inside the Title component, typically text.
   children: React.ReactNode;
-
-  /**
-   * Text to be highlighted within the title
-   * If not provided, no highlighting will be applied
-   */
+  // Specifies text (or an array of texts) to be visually highlighted within the title's children.
   highlightText?: string | string[];
-
-  /**
-   * Array of strings to cycle through, replacing the text specified in highlightText
-   * Used with alternateAnimation to create an infinite loop of changing words
-   */
+  // Provides an array of alternative texts to cycle through for highlighting, creating a dynamic effect.
   alternateHighlightText?: string[];
-
-  /**
-   * Animation for the highlighted text
-   * This can be a single animation object or an array of animation objects
-   * for multiple highlighted words
-   */
+  // Defines animation properties for the highlighted text, allowing for custom motion effects.
   highlightAnimate?: AnimationProps | AnimationProps[];
-
-  /**
-   * Whether to apply a typewriter effect to the highlighted text
-   * @default false
-   */
+  // Enables a typewriter effect for the highlighted text, revealing it character by character.
   highlightTypewriter?: boolean;
-
-  /**
-   * Duration in milliseconds for the typewriter effect on highlighted text
-   * @default 1500
-   */
+  // Sets the duration (in milliseconds) for the typewriter animation effect.
   highlightTypewriterDuration?: number;
-
-  /**
-   * Whether to apply a slide effect to the highlighted text
-   * @default false
-   */
+  // Enables a slide-in effect for the highlighted text.
   highlightSlide?: boolean;
-
-  /**
-   * Duration in milliseconds for the slide effect on highlighted text
-   * @default 500
-   */
+  // Sets the duration (in milliseconds) for the slide-in animation effect.
   highlightSlideDuration?: number;
-
-  /**
-   * Delay in milliseconds between each word's animation start
-   * @default 50
-   */
+  // Specifies a stagger delay (in milliseconds) for each character or word in the slide-in animation.
   highlightSlideStagger?: number;
-
-  /**
-   * Whether to animate the slide effect sequentially (exit all then enter all)
-   * @default true
-   */
+  // Determines if highlighted slides appear one after another sequentially, rather than all at once.
   highlightSlideSequential?: boolean;
-
-  /**
-   * Style of the highlight effect
-   * @default 'solid'
-   */
+  // Defines the visual style for the highlighted text (e.g., underline, background fill).
   highlightStyle?: HighlightStyle;
-
-  /**
-   * Color for the highlight effect
-   * @default 'theme-primary'
-   */
+  // Sets the primary color for the highlight effect.
   highlightColor?: string;
-
-  /**
-   * Secondary color for gradient highlights
-   * @default 'theme-secondary'
-   */
+  // Sets a secondary color for complex highlight styles that may involve gradients or dual-color effects.
   highlightSecondaryColor?: string;
-
-  /**
-   * Animation for the title
-   * This should be an animation object with properties like from, to, duration, etc.
-   */
+  // Defines general animation properties for the entire title component, not just the highlighted parts.
   animate?: AnimationProps | AnimationProps[];
-
-  /**
-   * Controls the animation loop behavior for the title animation
-   * @default '1' (play once)
-   */
+  // Controls how many times the main animation should loop, or 'infinite' for continuous looping.
   animationLoop?: number | 'infinite';
-
-  /**
-   * Controls the animation loop behavior for the highlight animation
-   * @default '1' (play once)
-   */
+  // Controls how many times the highlight animation should loop, or 'infinite' for continuous looping.
   highlightAnimationLoop?: number | 'infinite';
-
-  /**
-   * Size of the title
-   * @default 'xl'
-   */
+  // Specifies the predefined size of the title (e.g., 'small', 'medium', 'large').
   size?: TitleSize;
-
-  /**
-   * Whether to enable responsive sizing based on breakpoints
-   * When true, the title will automatically adapt its size across mobile/tablet/desktop
-   * @default false
-   */
+  // Enables or disables responsive behavior for the title, adapting its appearance to different screen sizes.
   responsive?: boolean;
-
-  /**
-   * Custom styles for different parts of the component
-   */
+  // Allows custom styling to be applied to different parts or states of the title component.
   views?: TitleStyles;
-
-  /**
-   * Whether to animate the alternating highlight text
-   * @default false
-   */
+  // Enables an alternative animation sequence or style for the component.
   alternateAnimation?: boolean;
-
-  /**
-   * Duration in milliseconds for each alternating highlight text
-   * @default 3000
-   */
+  // Sets the duration (in milliseconds) for the alternate animation effect.
   alternateDuration?: number;
 }

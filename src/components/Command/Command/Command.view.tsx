@@ -31,8 +31,7 @@ import {
   CommandFooterStyles,
 } from './Command.style';
 import { CommandItem as CommandItemInterface } from './Command.type';
-
-// Create context for the Command component
+// Defines the shape of the context object, specifying the types for search state, selected index, filtered commands, and the item selection handler.
 interface CommandContextType {
   search: string;
   setSearch: (value: string) => void;
@@ -41,7 +40,7 @@ interface CommandContextType {
   filteredCommands: CommandItemInterface[];
   onSelect: (item: CommandItemInterface) => void;
 }
-
+// Initializes the React context for the Command component, providing default values for search state, selected index, filtered commands, and selection handler.
 const CommandContext = createContext<CommandContextType>({
   search: '',
   setSearch: () => {},
@@ -50,11 +49,9 @@ const CommandContext = createContext<CommandContextType>({
   filteredCommands: [],
   onSelect: () => {},
 });
-
-// Hook to use the Command context
+// A custom hook that allows child components to easily access the values provided by the CommandContext.
 export const useCommandContext = () => useContext(CommandContext);
-
-// Provider component for the Command context
+// Provides the CommandContext to its children, making the search state, selected index, filtered commands, and item selection logic available throughout the command UI hierarchy.
 export const CommandProvider: React.FC<{
   value: CommandContextType;
   children: React.ReactNode;
@@ -63,8 +60,7 @@ export const CommandProvider: React.FC<{
     <CommandContext.Provider value={value}>{children}</CommandContext.Provider>
   );
 };
-
-// Command Input component
+// Renders the input field for searching commands. It manages its own focus on mount and handles value changes.
 export const CommandInput: React.FC<CommandInputProps> = ({
   value,
   onValueChange,
@@ -72,15 +68,14 @@ export const CommandInput: React.FC<CommandInputProps> = ({
   views,
   ...props
 }) => {
+  // Creates a ref to directly access the underlying HTML input element, primarily used for focusing the input.
   const inputRef = useRef<HTMLInputElement>(null);
-
-  // Focus input when component mounts
+  // A React effect hook that automatically focuses the input field when the component mounts.
   React.useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-
   return (
     <View {...CommandInputStyles} {...views?.container} {...props}>
       <SearchIcon widthHeight={16} color="color-gray-400" marginRight="8px" />
@@ -103,8 +98,6 @@ export const CommandInput: React.FC<CommandInputProps> = ({
     </View>
   );
 };
-
-// Command List component
 export const CommandList: React.FC<CommandListProps> = ({
   children,
   views,
@@ -116,8 +109,6 @@ export const CommandList: React.FC<CommandListProps> = ({
     </View>
   );
 };
-
-// Command Group component
 export const CommandGroup: React.FC<CommandGroupProps> = ({
   heading,
   children,
@@ -133,8 +124,6 @@ export const CommandGroup: React.FC<CommandGroupProps> = ({
     </View>
   );
 };
-
-// Command Item component
 export const CommandItem: React.FC<CommandItemProps> = ({
   item,
   selected = false,
@@ -147,7 +136,6 @@ export const CommandItem: React.FC<CommandItemProps> = ({
       onSelect();
     }
   };
-
   return (
     <Horizontal
       {...CommandItemStyles}
@@ -180,8 +168,6 @@ export const CommandItem: React.FC<CommandItemProps> = ({
     </Horizontal>
   );
 };
-
-// Command Empty component
 export const CommandEmpty: React.FC<CommandEmptyProps> = ({
   children = 'No results found.',
   views,
@@ -193,8 +179,6 @@ export const CommandEmpty: React.FC<CommandEmptyProps> = ({
     </View>
   );
 };
-
-// Main Command View component
 export const CommandView: React.FC<
   CommandProps & {
     search: string;
@@ -227,7 +211,6 @@ export const CommandView: React.FC<
   ...props
 }) => {
   if (!open) return null;
-
   const handleItemSelect = React.useCallback(
     (item: CommandItemInterface) => {
       if (item.disabled) return;
@@ -237,13 +220,11 @@ export const CommandView: React.FC<
     },
     [onOpenChange, setSearch]
   );
-
   const handleBackdropClick = React.useCallback(
     (e: React.MouseEvent) =>
       e.target === e.currentTarget && onOpenChange(false),
     [onOpenChange]
   );
-
   const contextValue = React.useMemo(
     () => ({
       search,
@@ -262,11 +243,8 @@ export const CommandView: React.FC<
       setSelectedIndex,
     ]
   );
-
   const hasGroups = groups.length > 0;
-  // const hasCommands = commands.length > 0;
   const isEmpty = filteredCommands.length === 0;
-
   return (
     <View
       position="fixed"
@@ -299,7 +277,6 @@ export const CommandView: React.FC<
             placeholder={placeholder}
             views={views?.searchInput}
           />
-
           <View ref={listRef} flex={1} overflow="auto" {...views?.list}>
             {isEmpty ? (
               emptyState ? (
@@ -358,7 +335,6 @@ export const CommandView: React.FC<
               ))
             )}
           </View>
-
           {footer && (
             <View {...CommandFooterStyles} {...views?.footer}>
               {footer}

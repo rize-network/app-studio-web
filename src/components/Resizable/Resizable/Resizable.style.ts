@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { Orientation, Size, Variant } from './Resizable.type';
-
+// Defines the CSS flex direction for the resizable container based on the specified orientation.
 export const ResizableOrientations: Record<Orientation, ViewProps> = {
   horizontal: {
     flexDirection: 'row',
@@ -9,9 +9,11 @@ export const ResizableOrientations: Record<Orientation, ViewProps> = {
     flexDirection: 'column',
   },
 };
-
+// Calculates and returns the appropriate width and height styles for the resizable handle based on the provided size and orientation.
 export const getHandleSizeStyles = (
+  // Parameter: Specifies the desired size (e.g., 'sm', 'md', 'lg') for the handle.
   size: Size,
+  // Parameter: Determines if the component is arranged 'horizontal' or 'vertical', affecting handle dimensions.
   orientation: Orientation
 ): ViewProps => {
   const sizes = {
@@ -28,10 +30,9 @@ export const getHandleSizeStyles = (
       height: orientation === 'vertical' ? '8px' : '100%',
     },
   };
-
   return sizes[size];
 };
-
+// Parameter: The current theme mode (e.g., 'light', 'dark') which might influence the returned styles.
 export const getHandle = (themeMode: string): Record<Variant, ViewProps> => {
   return {
     default: {
@@ -62,12 +63,10 @@ export const getHandle = (themeMode: string): Record<Variant, ViewProps> => {
       },
     },
   };
-  // Add dark mode conditional styling here
 };
-
-// For backward compatibility
+// Initializes `HandleVariants` by calling `getHandle` with 'light' theme mode, providing a set of default handle styles.
 export const HandleVariants = getHandle('light');
-
+// Defines the static styles for the icon element within the resizable handle, varying based on the component's orientation.
 export const HandleIconStyles: Record<Orientation, ViewProps> = {
   horizontal: {
     width: '2px',

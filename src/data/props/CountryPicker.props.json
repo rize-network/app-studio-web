@@ -1,10 +1,10 @@
 {
-  "componentDescription": "Enables users to select a country from a dropdown list with various styling options.",
+  "componentDescription": "A customizable input field for selecting countries from a list.",
   "id": {
     "type": "string",
     "typeValues": [],
     "description": "Optional ID for the CountryPicker input",
-    "defaultValue": []
+    "defaultValue": "undefined"
   },
   "error": {
     "type": "boolean",
@@ -16,37 +16,36 @@
     "type": "string",
     "typeValues": [],
     "description": "Optional name attribute for the CountryPicker input",
-    "defaultValue": []
+    "defaultValue": "undefined"
   },
   "label": {
     "type": "string",
     "typeValues": [],
     "description": "Optional label text for the CountryPicker input",
-    "defaultValue": []
-  },
-  "colorScheme": {
-    "type": "string",
-    "typeValues": [],
-    "description": "Optional color scheme for styling",
-    "defaultValue": "'theme-primary'"
+    "defaultValue": "undefined"
   },
   "helperText": {
     "type": "string",
     "typeValues": [],
     "description": "Optional helper text for guiding the user",
-    "defaultValue": []
+    "defaultValue": "undefined"
   },
   "placeholder": {
     "type": "string",
     "typeValues": [],
     "description": "Optional placeholder text for the CountryPicker input",
-    "defaultValue": []
+    "defaultValue": "undefined"
   },
   "shape": {
     "type": "Shape",
-    "typeValues": ["'default'", "'square'", "'rounded'", "'pill'"],
+    "typeValues": [
+      "default",
+      "square",
+      "rounded",
+      "pill"
+    ],
     "description": "Optional shape of the CountryPicker for visual styles",
-    "defaultValue": "'default'"
+    "defaultValue": "default"
   },
   "isAutoFocus": {
     "type": "boolean",
@@ -67,123 +66,55 @@
     "defaultValue": "false"
   },
   "onBlur": {
-    "type": "function",
+    "type": "(value: any) => void",
     "typeValues": [],
     "description": "Optional blur handler function",
     "defaultValue": "() => {}"
   },
   "onChange": {
-    "type": "function",
+    "type": "(value: any) => void",
     "typeValues": [],
     "description": "Optional change handler function",
-    "defaultValue": []
+    "defaultValue": "undefined"
   },
-  "styles": {
+  "views": {
     "type": "CountryPickerStyles",
     "typeValues": [],
     "description": "Optional styles object specific to CountryPicker",
-    "defaultValue": []
+    "defaultValue": "{ text: {}, icon: {}, label: {}, dropDown: {}, helperText: {} }"
   },
   "size": {
     "type": "Size",
-    "typeValues": ["'xs'", "'sm'", "'md'", "'lg'", "'xl'"],
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
     "description": "Optional size of the CountryPicker for visual styles",
-    "defaultValue": "'md'"
+    "defaultValue": "md"
   },
   "value": {
-    "type": ["string", "number"],
+    "type": "string | number",
     "typeValues": [],
     "description": "Value to be used as the current selection",
-    "defaultValue": []
+    "defaultValue": "undefined"
   },
   "variant": {
     "type": "Variant",
-    "typeValues": ["'default'", "'outline'", "'none'"],
+    "typeValues": [
+      "default",
+      "outline",
+      "none"
+    ],
     "description": "Variant for different visual types of CountryPicker",
-    "defaultValue": "'default'"
+    "defaultValue": "default"
   },
   "shadow": {
-    "type": ["Shadow", "Elevation", "CSSProperties"],
+    "type": "Shadow | Elevation | ViewProps",
     "typeValues": [],
     "description": "Shadow or Elevation styles for visual depth and perspective",
-    "defaultValue": []
-  },
-  "isHovered": {
-    "type": "boolean",
-    "typeValues": [],
-    "description": "Flag for hover state",
-    "defaultValue": "false"
-  },
-  "setIsHovered": {
-    "type": "function",
-    "typeValues": [],
-    "description": "Setter function for hover state",
-    "defaultValue": []
-  },
-  "isFocused": {
-    "type": "boolean",
-    "typeValues": [],
-    "description": "Flag for focus state",
-    "defaultValue": "false"
-  },
-  "setIsFocused": {
-    "type": "function",
-    "typeValues": [],
-    "description": "Setter function for focus state",
-    "defaultValue": []
-  },
-  "selected": {
-    "type": "string",
-    "typeValues": [],
-    "description": "Selected item's value",
-    "defaultValue": []
-  },
-  "setSelected": {
-    "type": "function",
-    "typeValues": [],
-    "description": "Setter function for selected item",
-    "defaultValue": []
-  },
-  "hide": {
-    "type": "boolean",
-    "typeValues": [],
-    "description": "Flag for toggling visibility",
-    "defaultValue": "false"
-  },
-  "setHide": {
-    "type": "function",
-    "typeValues": [],
-    "description": "Setter function for visibility",
-    "defaultValue": []
-  },
-  "newOptions": {
-    "type": "array",
-    "typeValues": ["Country"],
-    "description": "Array of new options for dropdown list",
-    "defaultValue": []
-  },
-  "setNewOptions": {
-    "type": "function",
-    "typeValues": [],
-    "description": "Setter function for new options",
-    "defaultValue": []
-  },
-  "callback": {
-    "type": "function",
-    "typeValues": [],
-    "description": "Callback function for dropdown actions",
-    "defaultValue": "() => {}"
-  },
-  "options": {
-    "type": "array",
-    "typeValues": ["Country"],
-    "description": "Options array to populate the dropdown",
-    "defaultValue": []
-  },
-  "option": {
-    "type": "string",
-    "typeValues": [],
-    "description": "The option value for the dropdown item",
-    "defaultValue": []
+    "defaultValue": "{}"
   }
 }

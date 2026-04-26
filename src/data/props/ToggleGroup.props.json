@@ -1,7 +1,7 @@
 {
-  "componentDescription": "A group of toggle buttons allowing users to select one or more options.",
+  "componentDescription": "Manages a group of interactive toggle buttons, allowing users to select one or more options.",
   "shape": {
-    "type": "string",
+    "type": "Shape",
     "typeValues": [
       "square",
       "rounded",
@@ -11,13 +11,13 @@
     "defaultValue": "rounded"
   },
   "items": {
-    "type": "array",
-    "typeValues": "ToggleItem[]",
+    "type": "ToggleItem[]",
+    "typeValues": null,
     "description": "Mandatory array of items defining each toggle in the group.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "variant": {
-    "type": "string",
+    "type": "Variant",
     "typeValues": [
       "outline",
       "link",
@@ -27,9 +27,9 @@
     "defaultValue": "ghost"
   },
   "onToggleChange": {
-    "type": "function",
-    "typeValues": "(activeIds: string[]) => void",
+    "type": "(activeIds: string[]) => void",
+    "typeValues": null,
     "description": "Optional callback function that fires when the active toggle changes, providing the IDs of active toggles.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   }
 }

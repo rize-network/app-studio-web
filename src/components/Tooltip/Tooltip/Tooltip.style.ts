@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { Size, Variant, Position, Alignment } from './Tooltip.type';
-
+// Defines a mapping of tooltip sizes (small, medium, large) to their respective CSS properties, such as padding, font size, and maximum width.
 export const TooltipSizes: Record<Size, ViewProps> = {
   sm: {
     padding: '4px 8px',
@@ -18,7 +18,7 @@ export const TooltipSizes: Record<Size, ViewProps> = {
     maxWidth: '300px',
   },
 };
-
+// A factory function that generates a record of tooltip variant styles (e.g., default, light, dark) based on the provided theme mode, applying specific background colors, text colors, border radii, and box shadows.
 export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
   return {
     default: {
@@ -49,27 +49,20 @@ export const getTooltip = (themeMode: string): Record<Variant, ViewProps> => {
       transition: 'opacity 0.15s ease',
     },
   };
-  // Add dark mode conditional styling here
 };
-
-// For backward compatibility
+// Exports a set of tooltip variant styles, initialized by calling `getTooltip` with the 'light' theme mode to establish a default appearance.
 export const TooltipVariants = getTooltip('light');
-
-// Note: Static positioning logic has been replaced with intelligent viewport-aware
-// positioning in the Tooltip component that automatically chooses optimal placement
-// based on available space and prevents content from going off-screen.
-
-// Legacy positioning function - kept for backward compatibility if needed
+// Calculates and returns the CSS styles necessary to position the tooltip accurately relative to its trigger element, taking into account its desired `position` and `alignment`.
 export const getTooltipPositionStyles = (
+  // Parameter: `position` specifies the primary direction (e.g., 'top', 'bottom', 'left', 'right') where the tooltip should appear.
   position: Position,
+  // Parameter: `align` defines the secondary alignment of the tooltip along its specified `position` (e.g., 'start', 'end', 'center').
   align: Alignment
 ): ViewProps => {
   const baseStyles: ViewProps = {
     position: 'absolute',
     zIndex: 1000,
   };
-
-  // Position styles
   switch (position) {
     case 'top':
       return {
@@ -119,7 +112,7 @@ export const getTooltipPositionStyles = (
       return baseStyles;
   }
 };
-
+// Determines and returns the CSS styles for the small triangular arrow that points from the tooltip towards its trigger element, adjusting its orientation based on the tooltip's `position`.
 export const getArrowStyles = (position: Position): ViewProps => {
   const baseStyles: ViewProps = {
     position: 'absolute',
@@ -131,7 +124,6 @@ export const getArrowStyles = (position: Position): ViewProps => {
     borderColor: 'inherit',
     transform: 'rotate(45deg)',
   };
-
   switch (position) {
     case 'top':
       return {

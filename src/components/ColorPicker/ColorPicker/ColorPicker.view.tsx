@@ -10,56 +10,42 @@ import {
 } from './ColorPicker.style';
 import { TextField } from '../../Form/TextField/TextField';
 import { ChevronIcon } from '../../Icon/Icon';
-
+// Defines the `ColorPickerView` functional component, responsible for rendering the UI of the color picker based on provided props.
 const ColorPickerView: React.FC<ColorPickerViewProps> = ({
-  // Basic props
   id,
   name,
   label,
   placeholder = 'Select a color',
   helperText,
-
-  // Styling
   views = {},
   size = 'md',
   shape = 'default',
   variant = 'default',
-
-  // State
   error = false,
   isDisabled = false,
   isReadOnly = false,
-
-  // Color options
   predefinedColors = DefaultColorPalette,
   showCustomInput = true,
   showRecentColors = true,
-
-  // State from hook
   isOpen,
   selectedColor,
   recentColors,
   customColor,
-
-  // Handlers from hook
   handleToggle,
   handleColorSelect,
   handleCustomColorChange,
   handleCustomColorSubmit,
-
-  // Refs
   triggerRef,
   dropdownRef,
-
-  // Other props
   onChange,
   ...props
 }) => {
+  // Merges default container styles with any custom styles provided through props for the main component wrapper.
   const containerStyles = {
     ...DefaultColorPickerStyles.container,
     ...views?.container,
   };
-
+  // Defines the styles for the color picker's trigger element, incorporating base styles, size, shape, variant, error, and disabled states.
   const triggerStyles = {
     ...DefaultColorPickerStyles.trigger,
     ...Sizes[size],
@@ -75,25 +61,23 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
       }),
     ...views?.trigger,
   };
-
+  // Defines the styles for the dropdown panel that appears when the color picker is open.
   const dropdownStyles = {
     ...DefaultColorPickerStyles.dropdown,
     ...views?.dropdown,
   };
-
+  // Defines the styles for the grid layout displaying predefined color options.
   const colorGridStyles = {
     ...DefaultColorPickerStyles.colorGrid,
     ...views?.colorGrid,
   };
-
+  // Defines the styles for the section displaying recently selected colors within the dropdown.
   const recentColorsStyles = {
     ...DefaultColorPickerStyles.recentColors,
     ...views?.recentColors,
   };
-
-  // Get display color for the selected color swatch
+  // Determines the color to be visually displayed in the trigger, using the `selectedColor` or a default gray if none is selected.
   const displayColor = selectedColor || 'color-gray-200';
-
   return (
     <View {...containerStyles} {...props}>
       {label && (
@@ -108,7 +92,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
           {label}
         </Text>
       )}
-
       <View
         ref={triggerRef}
         onClick={isDisabled || isReadOnly ? undefined : handleToggle}
@@ -124,7 +107,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
             borderStyle="solid"
             borderColor="color-gray-200"
           />
-
           <Text
             color={selectedColor ? 'color-gray-900' : 'color-gray-500'}
             fontSize="inherit"
@@ -132,7 +114,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
             {selectedColor || placeholder}
           </Text>
         </Horizontal>
-
         {!isReadOnly && !isDisabled && (
           <ChevronIcon
             widthHeight={16}
@@ -141,7 +122,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
           />
         )}
       </View>
-
       {isOpen && (
         <View ref={dropdownRef} {...dropdownStyles}>
           <View {...colorGridStyles}>
@@ -170,7 +150,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
               />
             ))}
           </View>
-
           {showCustomInput && (
             <View
               {...DefaultColorPickerStyles.customInput}
@@ -199,7 +178,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                   HEX
                 </Text>
               </Horizontal>
-
               <TextField
                 placeholder="#1D4ED8"
                 value={customColor}
@@ -230,7 +208,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
               />
             </View>
           )}
-
           {showRecentColors && recentColors.length > 0 && (
             <View {...recentColorsStyles}>
               <Text
@@ -268,7 +245,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
           )}
         </View>
       )}
-
       {helperText && (
         <Text
           fontSize="11px"
@@ -283,5 +259,4 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
     </View>
   );
 };
-
 export default ColorPickerView;

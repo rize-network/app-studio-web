@@ -1,10 +1,10 @@
 {
-  "componentDescription": "A versatile component for structured navigation, displaying a list of interactive items and their sub-menus.",
+  "componentDescription": "A navigation component that displays a horizontal or vertical list of menus and their items.",
   "items": {
     "type": "MenubarItem[]",
-    "typeValues": "An array of objects conforming to the MenubarItem interface.",
-    "description": "An array of `MenubarItem` objects, representing the list of items to be displayed in the menubar.",
-    "defaultValue": "Required"
+    "typeValues": [],
+    "description": "An array of menu items to be rendered. Each item follows the 'MenubarItem' type definition.",
+    "defaultValue": null
   },
   "orientation": {
     "type": "Orientation",
@@ -12,7 +12,7 @@
       "horizontal",
       "vertical"
     ],
-    "description": "Specifies the visual orientation of the menubar, either horizontal or vertical.",
+    "description": "Specifies the layout orientation of the menubar, either horizontal or vertical. Defaults to horizontal if not provided.",
     "defaultValue": "horizontal"
   },
   "size": {
@@ -22,7 +22,7 @@
       "md",
       "lg"
     ],
-    "description": "Defines the predefined size variant for the menubar, such as 'small', 'medium', or 'large'.",
+    "description": "Determines the predefined size of the menubar, affecting its dimensions and internal spacing.",
     "defaultValue": "md"
   },
   "variant": {
@@ -32,25 +32,25 @@
       "filled",
       "outline"
     ],
-    "description": "Determines the visual style or theme variant of the menubar.",
+    "description": "Defines the visual style or variant of the menubar, such as 'primary', 'secondary', etc.",
     "defaultValue": "default"
   },
   "defaultActiveMenuId": {
     "type": "string | null",
-    "typeValues": null,
-    "description": "The ID of the menu that should be active by default.",
-    "defaultValue": "null"
+    "typeValues": [],
+    "description": "The ID of the menu item that is active by default.",
+    "defaultValue": null
   },
   "defaultOpenMenuId": {
     "type": "string | null",
-    "typeValues": null,
-    "description": "The ID of the menu that should be open by default.",
-    "defaultValue": "null"
+    "typeValues": [],
+    "description": "The ID of the menu that is open by default.",
+    "defaultValue": null
   },
   "views": {
     "type": "MenubarStyles",
-    "typeValues": null,
-    "description": "Optional custom styling properties for various sub-components of the Menubar.",
+    "typeValues": [],
+    "description": "Provides custom styling for various parts of the menubar, allowing for granular visual customization.",
     "defaultValue": null
   }
 }

@@ -5,78 +5,55 @@ import type {
   Message,
   ChatWidgetStyles,
 } from './ChatWidget.type';
-
-/** Props for the ChatWidget component */
+// Defines the public properties available for the ChatWidget component, extending from ViewProps and omitting its 'size' property.
 export interface ChatWidgetProps extends Omit<ViewProps, 'size'> {
-  /** Array of messages to display */
+  // An optional array of message objects to be displayed within the chat widget.
   messages?: Message[];
-
-  /** Current input value (for controlled component) */
+  // An optional controlled value for the chat input field.
   inputValue?: string;
-
-  /** Callback when input value changes */
+  // Callback function triggered when the value of the chat input field changes.
   onInputChange?: (value: string) => void;
-
-  /** Callback when a message is submitted */
+  // Callback function triggered when a message is submitted via the chat input.
   onSubmit?: (message: string) => void;
-
-  /** Placeholder text for the input field */
+  // Optional placeholder text to display in the chat input field when it's empty.
   inputPlaceholder?: string;
-
-  /** Disable the input field */
+  // A boolean flag to disable the chat input field, preventing user interaction.
   disableInput?: boolean;
-
-  /** Visual variant of the component */
+  // Specifies the visual variant or style of the chat widget.
   variant?: Variant;
-
-  /** Size of the component */
+  // Specifies the size of the chat widget (e.g., small, medium, large).
   size?: Size;
-
-  /** Show timestamps on messages */
+  // A boolean flag to determine whether timestamps should be displayed with each message.
   showTimestamps?: boolean;
-
-  /** Enable attachment button (visual only) */
+  // A boolean flag to enable or disable the attachment functionality within the chat.
   enableAttachments?: boolean;
-
-  /** Enable context picker button */
+  // A boolean flag to enable or disable the context picker functionality.
   enableContextPicker?: boolean;
-
-  /** Selected context elements to display in input area */
+  // An array of selected context elements, where each element has an ID and a name.
   selectedContextElements?: Array<{ id: string; name: string }>;
-
-  /** Callback when context picker is requested */
+  // Callback function triggered when the context picker button is clicked.
   onContextPickerClick?: () => void;
-
-  /** Callback when a context element is removed from input */
+  // Callback function triggered when a context element is to be removed by its ID.
   onRemoveContextElement?: (id: string) => void;
-
-  /** Loading state */
+  // A boolean flag indicating if the chat widget is currently in a loading state.
   isLoading?: boolean;
-
-  /** Loading text to display */
+  // Optional text to display when the chat widget is in a loading state.
   loadingText?: string;
-
-  /** Custom styles for different parts of the component */
+  // Optional custom styles to apply to various parts of the chat widget.
   styles?: ChatWidgetStyles;
-
-  /** Maximum height for the messages container */
+  // Specifies the maximum height of the chat widget.
   maxHeight?: string | number;
 }
-
-/** Props for the ChatWidget view component (includes state) */
+// Defines the internal properties for the ChatWidget's view component, extending from ChatWidgetProps with additional internal state and handlers.
 export interface ChatWidgetViewProps extends ChatWidgetProps {
-  /** Internal input value from state */
+  // The internal state variable for the input field's current value.
   internalInputValue: string;
-
-  /** Handler for input changes */
+  // Internal handler function to manage changes in the input field's value.
   handleInputChange: (value: string) => void;
-
-  /** Handler for message submission */
+  // Internal handler function to manage the submission of a chat message.
   handleSubmit: (e?: React.FormEvent) => void;
-
-  /** Ref for the input element */
+  // A React ref object to directly access the HTMLTextAreaElement of the input field.
   inputRef: React.RefObject<HTMLTextAreaElement>;
-
-  /** Ref for the messages container */
+  // A React ref object to directly access the HTMLDivElement containing the chat messages, often used for scrolling.
   messagesRef: React.RefObject<HTMLDivElement>;
 }

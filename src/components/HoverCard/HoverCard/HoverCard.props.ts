@@ -1,90 +1,57 @@
 import React from 'react';
 import { ViewProps } from 'app-studio';
-
+// Defines the props interface for the main HoverCard component, detailing its configurable properties.
 export interface HoverCardProps {
-  /**
-   * The content of the HoverCard
-   */
+  // Specifies the children (React elements) that will be rendered inside the HoverCard component.
   children?: React.ReactNode;
-  /**
-   * Custom styles for different parts of the HoverCard
-   */
+  // Allows for custom styling or view properties to be applied to different sub-components of the HoverCard.
   views?: {
+    // Defines view-specific properties for the main container of the HoverCard.
     container?: ViewProps;
+    // Defines view-specific properties for the content wrapper within the HoverCard.
     content?: ViewProps;
   };
-  /**
-   * Delay in milliseconds before the card opens on hover
-   * @default 200
-   */
+  // Sets the delay in milliseconds before the HoverCard opens after the trigger is hovered.
   openDelay?: number;
-  /**
-   * Delay in milliseconds before the card closes after hover stops
-   * @default 300
-   */
+  // Sets the delay in milliseconds before the HoverCard closes after the trigger is unhovered.
   closeDelay?: number;
 }
-
+// Defines the props interface for the HoverCard.Trigger sub-component, which activates the HoverCard.
 export interface HoverCardTriggerProps {
-  /**
-   * The element that triggers the hover card
-   */
+  // Specifies the children (React elements) that serve as the trigger for the HoverCard's visibility.
   children: React.ReactNode;
-  /**
-   * Custom styles for the trigger element
-   */
+  // Allows for custom styling or view properties to be applied to different parts of the trigger.
   views?: {
+    // Defines view-specific properties for the trigger's container element.
     container?: ViewProps;
   };
-  /**
-   * When true, the trigger will be rendered as a child element instead of a wrapper
-   * Child must accept forwarded ref and spread props
-   * @default false
-   */
+  // When true, it renders the 'children' as a direct child of the component without wrapping it in an additional DOM element.
   asChild?: boolean;
-  /**
-   * Additional props to be spread to the trigger element
-   */
+  // Allows any additional, arbitrary props to be passed through to the component's underlying DOM element.
   [key: string]: any;
 }
-
+// Defines the props interface for the HoverCard.Content sub-component, which displays the actual content.
 export interface HoverCardContentProps {
-  /**
-   * The content to be displayed in the hover card
-   */
+  // Specifies the children (React elements) that will be displayed within the HoverCard when it is open.
   children: React.ReactNode;
-  /**
-   * Custom styles for the content container
-   */
+  // Allows for custom styling or view properties to be applied to different parts of the content.
   views?: {
+    // Defines view-specific properties for the content's container element.
     container?: ViewProps;
   };
-  /**
-   * The side of the trigger to render the content
-   */
+  // Determines the preferred side ('top', 'right', 'bottom', or 'left') of the trigger to render the content.
   side?: 'top' | 'right' | 'bottom' | 'left';
-  /**
-   * The alignment of the content relative to the trigger
-   */
+  // Specifies the alignment ('start', 'center', or 'end') of the content relative to the trigger along its chosen side.
   align?: 'start' | 'center' | 'end';
-  /**
-   * Distance in pixels between the trigger and the content
-   * @default 8
-   */
+  // Sets the distance in pixels between the content and the trigger.
   sideOffset?: number;
-  /**
-   * Additional props to be spread to the content element
-   */
+  // Allows any additional, arbitrary props to be passed through to the component's underlying DOM element.
   [key: string]: any;
 }
-
+// Defines the structure of the main HoverCard component, including its sub-components (Trigger and Content).
 export interface HoverCardType extends React.FC<HoverCardProps> {
-  /**
-   * The trigger element that will show the hover card on hover
-   */
+  // Represents the sub-component responsible for the HoverCard's trigger element.
   Trigger: React.FC<HoverCardTriggerProps>;
-  /**
-   * The content that will be displayed when hovering over the trigger
-   */
+  // Represents the sub-component responsible for displaying the HoverCard's content.
   Content: React.FC<HoverCardContentProps>;
 }

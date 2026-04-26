@@ -1,111 +1,117 @@
 {
-  "componentDescription": "A customizable checkbox form element with optional label and various views.",
+  "componentDescription": "A customizable checkbox input for selecting options with various states and styling.",
   "id": {
-    "type": ["string"],
+    "type": "string",
     "typeValues": [],
-    "description": "Optional identifier for the checkbox element, useful for accessibility.",
-    "defaultValue": []
+    "description": "Unique identifier for the checkbox.",
+    "defaultValue": null
   },
   "icon": {
-    "type": ["React.ReactNode"],
+    "type": "React.ReactNode",
     "typeValues": [],
-    "description": "An optional ReactNode (element) to set an icon for the checkbox.",
-    "defaultValue": []
+    "description": "Custom icon to display when the checkbox is in a checked state.",
+    "defaultValue": null
   },
   "error": {
-    "type": ["boolean"],
+    "type": "any",
     "typeValues": [],
-    "description": "Optional boolean to indicate an error state for the checkbox.",
-    "defaultValue": ["false"]
+    "description": "Indicates an error state or provides an error message for the checkbox.",
+    "defaultValue": false
   },
   "name": {
-    "type": ["string"],
+    "type": "string",
     "typeValues": [],
-    "description": "Optional name attribute for the checkbox, important for form submission.",
-    "defaultValue": []
+    "description": "Name attribute for the checkbox input.",
+    "defaultValue": null
   },
   "label": {
-    "type": ["string"],
+    "type": "string",
     "typeValues": [],
-    "description": "The text label associated with the checkbox component.",
-    "defaultValue": []
-  },
-  "colorScheme": {
-    "type": ["string"],
-    "typeValues": [],
-    "description": "Optional color scheme string that might allow customization of the checkbox's appearance.",
-    "defaultValue": ["theme-primary"]
+    "description": "Text label associated with the checkbox.",
+    "defaultValue": null
   },
   "isChecked": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
-    "description": "Boolean to control the checked state of the checkbox.",
-    "defaultValue": []
+    "description": "Controls the checked state of the checkbox.",
+    "defaultValue": null
   },
   "defaultIsSelected": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
-    "description": "Boolean to set the default selected state of the checkbox when the component first mounts.",
-    "defaultValue": ["false"]
+    "description": "Specifies the initial selected state of the checkbox.",
+    "defaultValue": false
   },
   "isReadOnly": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
-    "description": "Flag to set the checkbox as readonly, preventing user modifications.",
-    "defaultValue": ["false"]
+    "description": "If true, the checkbox state cannot be changed by user interaction.",
+    "defaultValue": false
   },
   "isDisabled": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
-    "description": "Boolean that disables the checkbox when true, preventing user interaction.",
-    "defaultValue": ["false"]
+    "description": "If true, the checkbox is disabled and unclickable.",
+    "defaultValue": false
   },
   "isIndeterminate": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
-    "description": "Flag that indicates whether the checkbox appears in an indeterminate state, often used in tree structures.",
-    "defaultValue": ["false"]
+    "description": "If true, the checkbox displays an indeterminate state icon.",
+    "defaultValue": false
   },
   "labelPosition": {
-    "type": ["'left'", "'right'"],
-    "typeValues": [],
-    "description": "Controls the label position relative to the checkbox, can be 'left' or 'right'.",
-    "defaultValue": ["right"]
+    "type": "string",
+    "typeValues": [
+      "left",
+      "right"
+    ],
+    "description": "Position of the label relative to the checkbox.",
+    "defaultValue": "right"
   },
   "onChange": {
-    "type": ["Function"],
+    "type": "Function",
     "typeValues": [],
-    "description": "A callback function that fires when the checkbox state changes.",
-    "defaultValue": []
+    "description": "Callback function triggered when the checkbox state changes.",
+    "defaultValue": null
   },
   "onValueChange": {
-    "type": ["Function"],
+    "type": "Function",
     "typeValues": [],
-    "description": "A callback function that fires with the new value when the checkbox state changes.",
-    "defaultValue": []
+    "description": "Callback function triggered when the checkbox value changes.",
+    "defaultValue": null
   },
-  "styles": {
-    "type": ["CheckboxStyles"],
-    "typeValues": {
-      "checkbox": "CSSProperties",
-      "label": "CSSProperties"
-    },
-    "description": "Optional styling properties specific to the Checkbox component.",
+  "views": {
+    "type": "CheckboxStyles",
+    "typeValues": [],
+    "description": "Custom styles for different parts of the checkbox component (checkbox, label, infoText).",
     "defaultValue": {
       "checkbox": {},
       "label": {}
     }
   },
   "size": {
-    "type": ["Size"],
-    "typeValues": ["xs", "sm", "md", "lg", "xl"],
-    "description": "Optional size property to define the size of the checkbox, based on a predefined set of sizes.",
-    "defaultValue": ["md"]
+    "type": "string",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Defines the size of the checkbox component.",
+    "defaultValue": "md"
   },
   "shadow": {
-    "type": ["Shadow", "Elevation", "CSSProperties"],
+    "type": "Shadow | Elevation | ViewProps",
     "typeValues": [],
-    "description": "An optional shadow or elevation effect that can be applied to the Checkbox component, accepting either a Shadow, Elevation, or generic CSSProperties object.",
-    "defaultValue": ["{}"]
+    "description": "Shadow or elevation styling for the checkbox.",
+    "defaultValue": {}
+  },
+  "infoText": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Supplementary text displayed below the label.",
+    "defaultValue": null
   }
 }

@@ -1,193 +1,120 @@
 import React from 'react';
 import { Elevation } from '../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
-
 import { CloseButtonPosition, Position, Shape, Size } from './Modal.type';
-
+// Defines the properties available for the Modal component, extending `ViewProps` but omitting its `size` property.
 export interface ModalProps extends Omit<ViewProps, 'size'> {
-  /**
-   * The color of the close button in the header.
-   */
+  // Specifies the color of the close button.
   buttonColor?: string;
-
-  /**
-   * The size of the close button in the header.
-   */
+  // Determines the size of the close button icon.
   iconSize?: Size;
-
-  /**
-   * Determines whether the modal should have square or rounded edges.
-   */
+  // Defines the overall shape style of the modal container.
   shape?: Shape;
-
-  /**
-   * If set to true, the modal will occupy the full width and height of the screen.
-   */
+  // Indicates whether the modal should occupy the full screen.
   isFullScreen?: boolean;
-
-  /**
-   * Indicates the presence of a close button and its position within the header.
-   */
+  // Sets the position of the close button within the modal.
   buttonPosition?: CloseButtonPosition;
-
-  /**
-   * The callback function to be executed when the close button is clicked or pressed.
-   */
+  // Callback function triggered when the modal is requested to close.
   onClose?: () => void;
-
-  /**
-   * The degree of blurriness applied to the overlay.
-   */
+  // Applies a blur effect to the modal's background overlay.
   blur?: number;
-
-  /**
-   * If set to true, the modal will be visible.
-   */
+  // Controls the visibility state of the modal.
   isOpen?: boolean;
-
-  /**
-   * If set to true, the modal will remain open when the overlay is clicked.
-   */
+  // If true, prevents the modal from closing when clicking outside or pressing escape.
   isClosePrevented?: boolean;
-
-  /**
-   * The positioning of the modal container.
-   */
+  // Specifies the position of the modal on the screen.
   position?: Position;
-
-  /**
-   * Applies a shadow effect to the button.
-   */
+  // Defines the shadow style or elevation applied to the modal container.
   shadow?: Shadow | Elevation | ViewProps;
 }
-
+// Describes the structure of the Modal component, including its sub-components.
 export interface ModalType extends React.FunctionComponent<ModalProps> {
-  /**
-   * The overlay component of the modal.
-   */
+  // Represents the modal overlay component.
   Overlay: React.FC<OverlayProps>;
-
-  /**
-   * The container component of the modal.
-   */
+  // Represents the modal content container component.
   Container: React.FC<ContainerProps>;
-
-  /**
-   * The header component of the modal.
-   */
+  // Represents the modal header component.
   Header: React.FC<HeaderProps>;
-
-  /**
-   * The body component of the modal.
-   */
+  // Represents the modal body component.
   Body: React.FC<BodyProps>;
-
-  /**
-   * The footer component of the modal.
-   */
+  // Represents the modal footer component.
   Footer: React.FC<FooterProps>;
-
-  /**
-   * The header component of the modal.
-   */
+  // Represents the modal layout management component.
   Layout: React.FC<ModalLayoutProps>;
 }
-
+// Defines the properties for the modal's overlay component.
 export interface OverlayProps extends Omit<ViewProps, 'position' | 'isOpen'> {
-  /**
-   * The content of the Overlay
-   */
+  // Content to be rendered inside the overlay.
   children?: React.ReactNode;
-  /**
-   * The value of how much to blur the overlay
-   */
+  // Applies a blur effect to the overlay background.
   blur?: number;
-  /**
-   * If true, the modal will be visible
-   */
+  // Determines if the overlay is visible.
   isOpen: boolean;
-  /**
-   * If true, the modal will not closed when the overlay is clicked
-   */
+  // If true, prevents the overlay from closing the modal on click.
   isClosePrevented?: boolean;
-  /**
-   * To position the modal container
-   */
+  // Specifies the positioning strategy for the overlay.
   position?: Position;
-  /**
-   * Action to be handled when the button close is clicked or pressed
-   */
+  // Callback function to be executed when the overlay should trigger a close action.
   onClose: () => void;
 }
-
+// Defines the properties for the modal's header component.
 export interface HeaderProps extends Omit<ViewProps, 'size'> {
+  // Optional styling properties for nested view components within the header.
   views?: {
+    // Styling properties for the header's container view.
     container?: ViewProps;
+    // Styling properties for the header's main view.
     header?: ViewProps;
   };
-  /**
-   * The content of the header
-   */
+  // Specifies the color of the close button in the header.
   buttonColor?: string;
-  /**
-   * To set the close button size
-   */
+  // Determines the size of the close button icon in the header.
   iconSize?: Size;
-  /**
-   * The content of the header
-   */
+  // Content to be rendered inside the header.
   children?: React.ReactNode;
-  /**
-   * Indicates if there is a button and where to position it
-   */
+  // Sets the position of the close button within the header.
   buttonPosition?: CloseButtonPosition;
-  /**
-   * Action to be handled when the button close is clicked or pressed
-   */
+  // Callback function triggered when the header's close button is activated.
   onClose?: () => void;
 }
-
+// Defines properties for managing modal layouts and their visibility.
 export interface ModalLayoutProps {
+  // A map of modal names to their corresponding React functional components.
   modals: { [x: string]: React.FC<any> };
+  // Callback function invoked when a modal is requested to be shown.
   onShow?: (name: string, props?: any) => void;
+  // Callback function invoked when a modal is requested to be hidden.
   onHide?: (name?: string, props?: any) => void;
 }
-
+// Defines the properties for the modal's main content container.
 export interface ContainerProps extends Omit<ViewProps, 'size'> {
+  // Optional styling properties for nested view components within the container.
   views?: {
+    // Styling properties for the container's main view.
     container?: ViewProps;
   };
-  /**
-   * The content of the modal container
-   */
+  // Content to be rendered inside the container.
   children: React.ReactNode;
-  /**
-   * To give a square or rounded edges to the modal
-   */
+  // Defines the shape style of the container.
   shape?: Shape;
-  /**
-   * If true, the modal will take the full width and height
-   */
+  // Indicates whether the container should expand to full screen.
   isFullScreen?: boolean;
-  /**
-   * Set a shadow effect on the button.
-   */
+  // Defines the shadow style or elevation applied to the container.
   shadow?: Shadow | Elevation | ViewProps;
 }
-
+// Defines the properties for the modal's body content area.
 export interface BodyProps extends ViewProps {
+  // Optional styling properties for nested view components within the body.
   views?: {
+    // Styling properties for the body's main view.
     view?: ViewProps;
-
-    /**
-     * Optional theme mode override ('light' or 'dark')
-     * If not provided, the component will use the theme mode from context
-     */
   };
 }
-
+// Defines the properties for the modal's footer component.
 export interface FooterProps extends ViewProps {
+  // Optional styling properties for nested view components within the footer.
   views?: {
+    // Styling properties for the footer's container view.
     container?: ViewProps;
   };
 }

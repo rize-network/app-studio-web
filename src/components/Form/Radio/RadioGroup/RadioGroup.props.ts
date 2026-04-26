@@ -1,94 +1,39 @@
-/**
- * RadioGroup Props
- *
- * Defines the props for the RadioGroup component following the design guidelines.
- */
-
 import React from 'react';
 import { ViewProps } from 'app-studio';
 import { Direction, RadioGroupStyles } from './RadioGroup.type';
-
-/**
- * Props for the RadioGroup component
- */
+// Defines the properties accepted by the RadioGroup component, extending ViewProps while omitting its 'direction' property.
 export interface RadioGroupProps extends Omit<ViewProps, 'direction'> {
-  /**
-   * Children components (Radio buttons)
-   */
+  // Specifies the children elements to be rendered within the RadioGroup, typically Radio components.
   children: React.ReactNode;
-
-  /**
-   * Optional name attribute for all radio buttons in the group
-   */
+  // An optional name for the radio group, used to group related radio buttons together.
   name?: string;
-
-  /**
-   * Optional label for the radio group
-   */
+  // An optional label displayed for the radio group, providing context to the user.
   label?: string;
-
-  /**
-   * Optional helper text for the radio group
-   */
+  // Optional helper text displayed below the radio group, offering additional guidance or information.
   helperText?: string;
-
-  /**
-   * Optional error message or state
-   */
+  // An optional error message or state to indicate validation issues.
   error?: any;
-
-  /**
-   * Optional value for the selected radio button
-   */
+  // The currently selected value of the radio group, making it a controlled component.
   value?: string;
-
-  /**
-   * Optional default value for the selected radio button
-   */
+  // The initial selected value of the radio group when it is uncontrolled.
   defaultValue?: string;
-
-  /**
-   * Optional callback for change events
-   */
+  // A callback function triggered when the selected radio button changes, receiving the new value.
   onChange?: (value: string) => void;
-
-  /**
-   * Optional direction for the radio group layout
-   */
+  // Specifies the layout direction of the radio buttons within the group (e.g., row or column).
   direction?: Direction;
-
-  /**
-   * Optional spacing between radio buttons
-   */
+  // An optional number representing the spacing between individual radio buttons.
   spacing?: number;
-
-  /**
-   * Optional disabled state for all radio buttons in the group
-   */
+  // A boolean flag to disable all radio buttons within the group, preventing user interaction.
   isDisabled?: boolean;
-
-  /**
-   * Optional read-only state for all radio buttons in the group
-   */
+  // A boolean flag to make all radio buttons within the group read-only, allowing selection but preventing changes.
   isReadOnly?: boolean;
-
-  /**
-   * Optional custom styles for the radio group
-   */
+  // Optional styles object to customize the visual appearance of different parts of the RadioGroup.
   views?: RadioGroupStyles;
 }
-
-/**
- * Props for the RadioGroup view component
- */
+// Defines properties specifically for the view component of the RadioGroup, extending the base RadioGroupProps.
 export interface RadioGroupViewProps extends RadioGroupProps {
-  /**
-   * Selected value
-   */
+  // The currently selected value, passed down to the view component for rendering.
   selectedValue: string;
-
-  /**
-   * Setter for the selected value
-   */
+  // A function to update the selected value, typically handled by the state management of the parent RadioGroup component.
   setSelectedValue: (value: string) => void;
 }

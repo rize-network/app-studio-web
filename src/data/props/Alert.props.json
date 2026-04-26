@@ -1,54 +1,60 @@
 {
-  "componentDescription": "Displays important messages to users with various styles and states.",
+  "componentDescription": "Renders an alert with various styles and states to display important messages to users.",
   "icon": {
-    "type": "ReactNode",
-    "typeValues": null,
-    "description": "Custom icon element to display in the alert, overriding the default variant-based icon.",
+    "type": "React.ReactNode",
+    "typeVa;ues": [],
+    "description": "Custom icon to display in the alert, overriding the default icon for the chosen variant.",
     "defaultValue": null
   },
   "title": {
     "type": "string",
-    "typeValues": null,
-    "description": "The main title or heading of the alert.",
+    "typeVa;ues": [],
+    "description": "The bold title text for the alert, displayed above the description.",
     "defaultValue": ""
   },
   "views": {
-    "type": "{ container?: object, icon?: object, title?: object, description?: object }",
-    "typeValues": null,
-    "description": "Allows overriding default styles for specific internal elements like the container, icon, title, or description.",
+    "type": "object",
+    "typeVa;ues": [],
+    "description": "Custom styling properties for different sub-components of the alert (e.g., container, icon, title, description).",
     "defaultValue": null
   },
   "description": {
     "type": "string",
-    "typeValues": null,
-    "description": "The detailed description or message content of the alert.",
+    "typeVa;ues": [],
+    "description": "The main descriptive text content of the alert, rendered if no children are provided.",
     "defaultValue": ""
   },
   "variant": {
     "type": "string",
-    "typeValues": [
+    "typeVa;ues": [
       "default",
       "info",
       "success",
       "error",
       "warning"
     ],
-    "description": "Determines the visual style and semantic meaning of the alert.",
+    "description": "Defines the visual style and semantic meaning of the alert, affecting colors and default icon.",
     "defaultValue": "default"
   },
   "themeMode": {
     "type": "string",
-    "typeValues": [
+    "typeVa;ues": [
       "light",
       "dark"
     ],
-    "description": "Overrides the global theme mode for this specific alert component, affecting its appearance.",
+    "description": "Overrides the global theme mode for this specific alert component (e.g., 'light' or 'dark').",
     "defaultValue": null
   },
   "children": {
-    "type": "ReactNode",
-    "typeValues": null,
-    "description": "Content to be rendered as the alert's description, alternative to the 'description' prop.",
+    "type": "React.ReactNode",
+    "typeVa;ues": [],
+    "description": "Content to display as the main description, used if the 'description' prop is empty.",
+    "defaultValue": null
+  },
+  "props": {
+    "type": "object",
+    "typeVa;ues": [],
+    "description": "Additional properties to pass directly to the root Horizontal container component of the alert.",
     "defaultValue": null
   }
 }

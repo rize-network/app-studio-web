@@ -1,0 +1,871 @@
+# Chart
+
+Renders various types of charts with customizable data, legends, and status indicators.
+
+### **Import**
+```tsx
+import { Chart } from '@app-studio/web';
+```
+
+### **Area**
+
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
+
+export const AreaChartDemo = () => {
+  const data = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    series: [
+      {
+        name: 'This Week',
+        data: [10, 15, 12, 20, 18, 25, 22],
+        color: CHART_COLORS.blue,
+      },
+      {
+        name: 'Last Week',
+        data: [8, 12, 10, 15, 14, 20, 17],
+        color: CHART_COLORS.green,
+      },
+      {
+        name: 'Two Weeks Ago',
+        data: [6, 10, 8, 12, 10, 16, 14],
+        color: CHART_COLORS.purple,
+      },
+    ],
+  };
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="area"
+        data={data}
+        title="Weekly Performance"
+        showGrid
+        animated
+      />
+    </View>
+  );
+};
+```
+
+### **Bar**
+
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
+
+export const BarChartDemo = () => {
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Revenue',
+        data: [30, 40, 35, 50, 49, 60],
+        color: CHART_COLORS.blue,
+      },
+      {
+        name: 'Expenses',
+        data: [20, 25, 30, 35, 30, 40],
+        color: CHART_COLORS.green,
+      },
+      {
+        name: 'Profit',
+        data: [10, 15, 5, 15, 19, 20],
+        color: CHART_COLORS.purple,
+      },
+    ],
+  };
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="bar"
+        data={data}
+        title="Monthly Revenue vs Expenses"
+        showGrid
+        animated
+        onSeriesClick={(seriesName, index) => {
+          console.log(`Clicked on ${seriesName} at index ${index}`);
+        }}
+      />
+    </View>
+  );
+};
+```
+
+### **Custom**
+
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
+
+export const CustomChartDemo = () => {
+  const data = {
+    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+    series: [
+      {
+        name: 'Sales',
+        data: [120, 180, 150, 210],
+        color: CHART_COLORS.blue,
+      },
+      {
+        name: 'Costs',
+        data: [80, 100, 90, 120],
+        color: CHART_COLORS.green,
+      },
+    ],
+  };
+
+  return (
+    <View height="400px" width="100%">
+      <Chart
+        type="bar"
+        data={data}
+        title="Quarterly Sales"
+        animated
+        views={{
+          container: {
+            backgroundColor: 'color-gray-50',
+            padding: '16px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+          },
+          chart: {
+            margin: '16px 0',
+          },
+          bar: {
+            rx: '4px',
+            ry: '4px',
+            // Using series colors instead of a fixed color
+          },
+          grid: {
+            stroke: 'color-gray-300',
+            strokeDasharray: '4',
+          },
+          axis: {
+            stroke: 'color-gray-400',
+            strokeWidth: '2px',
+          },
+          axisLabel: {
+            fill: 'color-gray-700',
+            fontWeight: 'bold',
+          },
+          legend: {
+            backgroundColor: 'color-white',
+            padding: '8px',
+            borderRadius: '4px',
+          },
+          legendItem: {
+            padding: '4px 8px',
+          },
+          tooltip: {
+            backgroundColor: 'color-blue',
+            color: 'color-white',
+            fontWeight: 'bold',
+          },
+        }}
+      />
+    </View>
+  );
+};
+```
+
+### **DesignSystem**
+
+```tsx
+/**
+ * Chart Examples - Design System
+ *
+ * Showcases the Chart component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
+
+import React from 'react';
+import { Chart } from '../Chart';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Text } from 'app-studio';
+import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
+
+export const DesignSystemCharts = () => {
+  // Use the consistent color palette from ChartColors
+  const colors = CHART_COLORS;
+
+  // Sample data for bar and line charts
+  const timeSeriesData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Series 1',
+        data: [30, 40, 35, 50, 49, 60],
+        color: colors.blue,
+      },
+      {
+        name: 'Series 2',
+        data: [20, 25, 30, 35, 30, 40],
+        color: colors.green,
+      },
+      {
+        name: 'Series 3',
+        data: [10, 15, 20, 25, 20, 30],
+        color: colors.purple,
+      },
+    ],
+  };
+
+  // Sample data for pie and donut charts
+  const pieData = [
+    { label: 'Category A', value: 40, color: colors.blue },
+    { label: 'Category B', value: 30, color: colors.green },
+    { label: 'Category C', value: 20, color: colors.purple },
+    { label: 'Category D', value: 10, color: colors.orange },
+  ];
+
+  return (
+    <Vertical gap={32}>
+      {/* Chart Types */}
+      <View>
+        <Text
+          marginBottom={8}
+          fontWeight="600"
+          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+        >
+          Chart Types with Consistent Colors
+        </Text>
+        <Vertical gap={24}>
+          {/* Bar Chart */}
+          <Vertical gap={8}>
+            <Text
+              fontSize="14px"
+              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+            >
+              Bar Chart
+            </Text>
+            <View height="250px" width="100%">
+              <Chart
+                type="bar"
+                data={timeSeriesData}
+                title="Bar Chart Example"
+                showGrid
+                animated
+                views={{
+                  container: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                    borderRadius: '8px', // 2 × 4px grid
+                    overflow: 'hidden',
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                    border: '1px solid',
+                    borderColor: 'color-gray-200',
+                    padding: '16px', // 4 × 4px grid
+                  },
+                  bar: {
+                    rx: '4px', // 1 × 4px grid
+                    ry: '4px', // 1 × 4px grid
+                  },
+                  axisLabel: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                    fontSize: '12px',
+                  },
+                  legend: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                  },
+                }}
+              />
+            </View>
+          </Vertical>
+
+          {/* Line Chart */}
+          <Vertical gap={8}>
+            <Text
+              fontSize="14px"
+              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+            >
+              Line Chart
+            </Text>
+            <View height="250px" width="100%">
+              <Chart
+                type="line"
+                data={timeSeriesData}
+                title="Line Chart Example"
+                showGrid
+                animated
+                views={{
+                  container: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                    borderRadius: '8px', // 2 × 4px grid
+                    overflow: 'hidden',
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                    border: '1px solid',
+                    borderColor: 'color-gray-200',
+                    padding: '16px', // 4 × 4px grid
+                  },
+                  axisLabel: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                    fontSize: '12px',
+                  },
+                  legend: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                  },
+                }}
+              />
+            </View>
+          </Vertical>
+
+          {/* Area Chart */}
+          <Vertical gap={8}>
+            <Text
+              fontSize="14px"
+              fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+            >
+              Area Chart
+            </Text>
+            <View height="250px" width="100%">
+              <Chart
+                type="area"
+                data={timeSeriesData}
+                title="Area Chart Example"
+                showGrid
+                animated
+                views={{
+                  container: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                    borderRadius: '8px', // 2 × 4px grid
+                    overflow: 'hidden',
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                    border: '1px solid',
+                    borderColor: 'color-gray-200',
+                    padding: '16px', // 4 × 4px grid
+                  },
+                  axisLabel: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                    fontSize: '12px',
+                  },
+                  legend: {
+                    fontFamily:
+                      'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                  },
+                }}
+              />
+            </View>
+          </Vertical>
+
+          {/* Pie and Donut Charts */}
+          <Horizontal gap={16} flexWrap="wrap">
+            <Vertical gap={8} flex={1} minWidth="300px">
+              <Text
+                fontSize="14px"
+                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+              >
+                Pie Chart
+              </Text>
+              <View height="250px" width="100%">
+                <Chart
+                  type="pie"
+                  dataPoints={pieData}
+                  title="Pie Chart Example"
+                  animated
+                  views={{
+                    container: {
+                      fontFamily:
+                        'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                      borderRadius: '8px', // 2 × 4px grid
+                      overflow: 'hidden',
+                      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                      border: '1px solid',
+                      borderColor: 'color-gray-200',
+                      padding: '16px', // 4 × 4px grid
+                    },
+                    legend: {
+                      fontFamily:
+                        'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                    },
+                  }}
+                />
+              </View>
+            </Vertical>
+
+            <Vertical gap={8} flex={1} minWidth="300px">
+              <Text
+                fontSize="14px"
+                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+              >
+                Donut Chart
+              </Text>
+              <View height="250px" width="100%">
+                <Chart
+                  type="donut"
+                  dataPoints={pieData}
+                  title="Donut Chart Example"
+                  animated
+                  views={{
+                    container: {
+                      fontFamily:
+                        'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                      borderRadius: '8px', // 2 × 4px grid
+                      overflow: 'hidden',
+                      boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
+                      border: '1px solid',
+                      borderColor: 'color-gray-200',
+                      padding: '16px', // 4 × 4px grid
+                    },
+                    legend: {
+                      fontFamily:
+                        'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+                    },
+                  }}
+                />
+              </View>
+            </Vertical>
+          </Horizontal>
+        </Vertical>
+      </View>
+
+      {/* Color Consistency Showcase */}
+      <View>
+        <Text
+          marginBottom={8}
+          fontWeight="600"
+          fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+        >
+          Color Consistency Across Chart Types
+        </Text>
+        <Horizontal gap={16} flexWrap="wrap">
+          {Object.entries(colors).map(([name, color]) => (
+            <View
+              key={name}
+              backgroundColor={color}
+              width="80px"
+              height="80px"
+              borderRadius="8px" // 2 × 4px grid
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              boxShadow="0 2px 4px rgba(0, 0, 0, 0.1)"
+            >
+              <Text
+                color="white"
+                fontWeight="600"
+                fontFamily="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+              >
+                {name}
+              </Text>
+            </View>
+          ))}
+        </Horizontal>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Donut**
+
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
+
+export const DonutChartDemo = () => {
+  const dataPoints = [
+    { label: 'Completed', value: 65, color: CHART_COLORS.green },
+    { label: 'In Progress', value: 25, color: CHART_COLORS.blue },
+    { label: 'Pending', value: 10, color: CHART_COLORS.orange },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="donut"
+        dataPoints={dataPoints}
+        title="Task Status"
+        animated
+      />
+    </View>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './bar';
+export * from './line';
+export * from './area';
+export * from './pie';
+export * from './donut';
+export * from './custom';
+export * from './states';
+export * from './designSystem';
+export * from './zeroValues';
+```
+
+### **Line**
+
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
+
+export const LineChartDemo = () => {
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Users',
+        data: [500, 800, 1200, 1800, 2500, 3000],
+        color: CHART_COLORS.blue,
+      },
+      {
+        name: 'Sessions',
+        data: [1000, 1600, 2400, 3600, 5000, 6000],
+        color: CHART_COLORS.green,
+      },
+      {
+        name: 'Page Views',
+        data: [1500, 2400, 3600, 5400, 7500, 9000],
+        color: CHART_COLORS.purple,
+      },
+      {
+        name: 'Conversions',
+        data: [50, 80, 120, 180, 250, 300],
+        color: CHART_COLORS.orange,
+      },
+    ],
+  };
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="line"
+        data={data}
+        title="Website Traffic"
+        showGrid
+        animated
+        legendPosition="top"
+      />
+    </View>
+  );
+};
+```
+
+### **Pie**
+
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { View } from 'app-studio';
+import { CHART_COLORS } from '../Chart/ChartColors';
+
+export const PieChartDemo = () => {
+  const dataPoints = [
+    { label: 'Mobile', value: 45, color: CHART_COLORS.blue },
+    { label: 'Desktop', value: 30, color: CHART_COLORS.green },
+    { label: 'Tablet', value: 15, color: CHART_COLORS.purple },
+    { label: 'Other', value: 10, color: CHART_COLORS.orange },
+  ];
+
+  return (
+    <View height="300px" width="100%">
+      <Chart
+        type="pie"
+        dataPoints={dataPoints}
+        title="Device Distribution"
+        animated
+        onDataPointClick={(dataPoint, index) => {
+          console.log(`Clicked on ${dataPoint?.label} at index ${index}`);
+        }}
+      />
+    </View>
+  );
+};
+```
+
+### **States**
+
+```tsx
+import React, { useState, useEffect } from 'react';
+import { Chart } from '../Chart';
+import { View } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Text } from 'app-studio';
+import { Button } from '../../Button/Button';
+import { CHART_COLORS } from '../Chart/ChartColors';
+
+export const ChartStatesDemo = () => {
+  // State for loading example
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<any>(null);
+  const [hasError, setHasError] = useState(false);
+  const [showNoData, setShowNoData] = useState(false);
+
+  // Sample data
+  const sampleData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Revenue',
+        data: [30, 40, 35, 50, 49, 60],
+        color: CHART_COLORS.blue,
+      },
+      {
+        name: 'Expenses',
+        data: [20, 25, 30, 35, 30, 40],
+        color: CHART_COLORS.green,
+      },
+    ],
+  };
+
+  // Empty data for no-data state
+  const emptyData = {
+    labels: [],
+    series: [],
+  };
+
+  // Simulate loading data
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      setData(sampleData);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Toggle error state
+  const toggleError = () => {
+    setHasError(!hasError);
+    setShowNoData(false);
+    // Make sure data is available when not in error state
+    if (hasError) {
+      setData(sampleData);
+    }
+  };
+
+  // Toggle no data state
+  const toggleNoData = () => {
+    setShowNoData(!showNoData);
+    setHasError(false);
+    // Make sure data is available when not in no-data state
+    if (showNoData) {
+      setData(sampleData);
+    } else {
+      setData(emptyData);
+    }
+  };
+
+  // Reset to normal state
+  const resetChart = () => {
+    setHasError(false);
+    setShowNoData(false);
+    setData(sampleData);
+  };
+
+  return (
+    <Vertical gap={20}>
+      <Horizontal gap={20} alignItems="flex-start">
+        {/* Loading State */}
+        <View width="300px" height="300px">
+          <Chart
+            type="bar"
+            data={sampleData}
+            title="Loading Example"
+            isLoading={true}
+            aria-label="Loading chart example"
+          />
+        </View>
+
+        {/* Error State */}
+        <View width="300px" height="300px">
+          <Chart
+            type="line"
+            data={sampleData}
+            title="Error Example"
+            error="Failed to load chart data"
+            aria-label="Error chart example"
+          />
+        </View>
+
+        {/* No Data State */}
+        <View width="300px" height="300px">
+          <Chart
+            type="bar"
+            data={emptyData}
+            title="No Data Example"
+            noData="No data available for this time period"
+            aria-label="No data chart example"
+          />
+        </View>
+      </Horizontal>
+
+      {/* Interactive Example */}
+      <View
+        padding={16}
+        borderWidth={1}
+        borderColor="color-gray-200"
+        borderRadius={8}
+      >
+        <Vertical gap={16}>
+          <Text fontWeight="bold">Interactive State Example</Text>
+
+          <Horizontal gap={10}>
+            <Button
+              onClick={toggleError}
+              variant={hasError ? 'filled' : 'outline'}
+            >
+              {hasError ? 'Hide Error' : 'Show Error'}
+            </Button>
+            <Button
+              onClick={toggleNoData}
+              variant={showNoData ? 'filled' : 'outline'}
+            >
+              {showNoData ? 'Hide No Data' : 'Show No Data'}
+            </Button>
+            <Button onClick={resetChart} variant="outline">
+              Reset
+            </Button>
+          </Horizontal>
+
+          <View height="300px">
+            <Chart
+              type="bar"
+              data={data}
+              title="Interactive State Demo"
+              isLoading={isLoading}
+              error={
+                hasError ? 'An error occurred while fetching data' : undefined
+              }
+              noData={
+                showNoData
+                  ? 'No data available for the selected period'
+                  : undefined
+              }
+              showGrid
+              animated
+            />
+          </View>
+        </Vertical>
+      </View>
+
+      {/* Custom Indicators Example */}
+      <View width="300px" height="300px">
+        <Chart
+          type="pie"
+          dataPoints={[
+            { label: 'A', value: 30, color: CHART_COLORS.blue },
+            { label: 'B', value: 40, color: CHART_COLORS.green },
+            { label: 'C', value: 30, color: CHART_COLORS.purple },
+          ]}
+          title="Custom Loading Indicator"
+          isLoading={true}
+          loadingIndicator={
+            <Vertical alignItems="center" gap={10}>
+              <Text color="color-blue">Custom Loading...</Text>
+              <Text color="color-gray-500">
+                Please wait while we prepare your data
+              </Text>
+            </Vertical>
+          }
+        />
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **ZeroValues**
+
+```tsx
+import React from 'react';
+import { Chart } from '../Chart';
+import { CHART_COLORS } from '../Chart/ChartColors';
+import { View } from 'app-studio';
+
+export const ZeroStateDemo = () => {
+  const barData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    series: [
+      {
+        name: 'Revenue',
+        data: [0, 0, 0, 0, 0, 0],
+        color: CHART_COLORS.blue,
+      },
+    ],
+  };
+
+  const pieDataPoints = [
+    { label: 'Mobile', value: 0, color: CHART_COLORS.blue },
+    { label: 'Desktop', value: 0, color: CHART_COLORS.green },
+    { label: 'Tablet', value: 0, color: CHART_COLORS.purple },
+  ];
+
+  const progressData = [
+    { label: 'Progress', value: 0, color: CHART_COLORS.blue },
+  ];
+
+  const commonStyles = {
+    container: {
+      border: '1px solid #E2E8F0',
+      borderRadius: '8px',
+      padding: '16px',
+      backgroundColor: 'white',
+    },
+  };
+
+  return (
+    <View display="flex" flexDirection="column" gap="16px">
+      <View height="300px" width="100%">
+        <Chart
+          type="bar"
+          data={barData}
+          title="Zero Revenue (Bar)"
+          showGrid
+          animated
+          views={commonStyles}
+        />
+      </View>
+      <View height="300px" width="100%">
+        <Chart
+          type="pie"
+          dataPoints={pieDataPoints}
+          title="Zero Traffic (Pie)"
+          animated
+          views={commonStyles}
+        />
+      </View>
+      <View height="300px" width="100%">
+        <Chart
+          type="donut"
+          dataPoints={progressData}
+          title="Zero Progress (Donut)"
+          animated
+          views={commonStyles}
+        />
+      </View>
+    </View>
+  );
+};
+```
+

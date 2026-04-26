@@ -1,10 +1,10 @@
 {
-  "componentDescription": "This component provides a navigational link that can render children, manage external links, and apply various text decoration styles.",
+  "componentDescription": "A component for navigation, displaying content that links to internal or external resources with optional styling.",
   "children": {
     "type": "React.ReactNode",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Represents the content within the Link component which can be any valid React node.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "underline": {
     "type": "TextDecorationStyle",
@@ -18,7 +18,7 @@
   },
   "isExternal": {
     "type": "boolean",
-    "typeValues": null,
+    "typeValues": [],
     "description": "Optional boolean indicating whether the link points to an external resource. Default behavior may vary based on this value.",
     "defaultValue": false
   },
@@ -36,29 +36,17 @@
   },
   "to": {
     "type": "string",
-    "typeValues": null,
+    "typeValues": [],
     "description": "The href attribute specifying the URL the link points to.",
     "defaultValue": "/"
   },
   "views": {
     "type": "Styles",
-    "typeValues": "{ icon?: ViewProps; text?: ViewProps; }",
-    "description": "Optional styles object to customize the appearance using predefined style types.",
+    "typeValues": [],
+    "description": "Optional styles object to customize the appearance using predefined style types. It can include 'icon' and 'text' properties, both of type 'ViewProps'.",
     "defaultValue": {
       "icon": {},
       "text": {}
     }
-  },
-  "isHovered": {
-    "type": "boolean",
-    "typeValues": null,
-    "description": "Indicates whether the link is under a hover state, which may adjust the link's style.",
-    "defaultValue": false
-  },
-  "setIsHovered": {
-    "type": "Function",
-    "typeValues": null,
-    "description": "A function to update the hover state of the link.",
-    "defaultValue": "() => {}"
   }
 }

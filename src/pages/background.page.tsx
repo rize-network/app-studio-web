@@ -267,7 +267,7 @@ const BackgroundTestPage = () => {
   };
 
   return (
-    <View padding={20} backgroundColor="theme-background" minHeight="100vh">
+    <View padding={20} backgroundColor="color-white" minHeight="100vh">
       <Text
         fontSize={28}
         fontWeight="700"

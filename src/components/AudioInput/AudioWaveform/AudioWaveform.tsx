@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, startTransition } from 'react';
 import { AudioWaveformProps } from './AudioWaveform.props';
 import { AudioWaveformView } from './AudioWaveform.view';
-
+// This component analyzes audio data from an AnalyserNode to generate and display a real-time waveform visualization, managing amplitude capture, state updates, and rendering through AudioWaveformView.
 export const AudioWaveform: React.FC<AudioWaveformProps> = ({
   analyserNode,
   isPaused,
@@ -9,9 +9,8 @@ export const AudioWaveform: React.FC<AudioWaveformProps> = ({
 }) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const MAX_BARS = 60;
-  const resolution = 32; // ms
+  const resolution = 32;
   const [bars, setBars] = useState<number[]>([]);
-
   useEffect(() => {
     if (!analyserNode) {
       setBars(Array(MAX_BARS).fill(-1));
@@ -19,7 +18,6 @@ export const AudioWaveform: React.FC<AudioWaveformProps> = ({
     }
     const bufferLength = analyserNode.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
-
     const captureAmplitude = () => {
       analyserNode.getByteTimeDomainData(dataArray);
       let sum = 0;
@@ -42,12 +40,10 @@ export const AudioWaveform: React.FC<AudioWaveformProps> = ({
         });
       });
     };
-
     intervalRef.current = setInterval(captureAmplitude, resolution);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [analyserNode]);
-
   return <AudioWaveformView bars={bars} isPaused={isPaused} {...viewProps} />;
 };

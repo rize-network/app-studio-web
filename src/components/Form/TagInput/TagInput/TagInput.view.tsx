@@ -1,10 +1,3 @@
-/**
- * TagInput View Component
- *
- * Renders a tags input field with chips for each tag
- * according to the design guidelines.
- */
-
 import React from 'react';
 import {
   Input,
@@ -21,10 +14,7 @@ import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 import { CloseIcon } from '../../../Icon/Icon';
 import { TagInputViewProps } from './TagInput.props';
 import { Shapes, InputVariants } from '../../../Input/Input.style';
-
-/**
- * Individual tag chip component
- */
+// Defines the TagChip functional component, which renders an individual tag with a customizable removal option. It accepts properties for the tag value, removal handler, removability status, size, custom view overrides, and disabled/read-only states.
 const TagChip: React.FC<{
   tag: string;
   onRemove: () => void;
@@ -34,8 +24,9 @@ const TagChip: React.FC<{
   isDisabled: boolean;
   isReadOnly: boolean;
 }> = ({ tag, onRemove, isRemovable, size, views, isDisabled, isReadOnly }) => {
+  // Manages the hover state for the remove icon within a tag chip, allowing for visual feedback when the user hovers over it.
   const [isRemoveHovered, setIsRemoveHovered] = React.useState(false);
-
+  // Calculates dynamic styling properties (padding, font size, icon size) for the tag chip based on the `size` prop, with a default for 'md'.
   const chipSize = {
     xs: { padding: '2px 8px', fontSize: '10px', iconSize: 10 },
     sm: { padding: '4px 10px', fontSize: '12px', iconSize: 12 },
@@ -43,7 +34,6 @@ const TagChip: React.FC<{
     lg: { padding: '8px 16px', fontSize: '16px', iconSize: 16 },
     xl: { padding: '10px 18px', fontSize: '18px', iconSize: 18 },
   }[size] || { padding: '6px 14px', fontSize: '14px', iconSize: 14 };
-
   return (
     <Horizontal
       alignItems="center"
@@ -74,7 +64,6 @@ const TagChip: React.FC<{
       >
         {tag}
       </Text>
-
       {isRemovable && !isDisabled && !isReadOnly && (
         <View
           cursor="pointer"
@@ -103,10 +92,6 @@ const TagChip: React.FC<{
     </Horizontal>
   );
 };
-
-/**
- * Main TagInput view component
- */
 const TagInputView: React.FC<TagInputViewProps> = ({
   id,
   name,
@@ -140,23 +125,15 @@ const TagInputView: React.FC<TagInputViewProps> = ({
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
-
-  // Determine if we should show the label
   const showLabel = Boolean(
     label && (isFocused || tags.length > 0 || inputValue)
   );
-
-  // Calculate if max tags reached
   const isMaxReached = maxTags && tags.length >= maxTags;
-
-  // Container styles
   const containerStyles = {
     ...Shapes[shape],
     ...InputVariants[variant],
     ...views?.inputContainer,
   };
-
-  // Input styles
   const inputStyles = {
     border: 'none',
     outline: 'none',
@@ -168,7 +145,6 @@ const TagInputView: React.FC<TagInputViewProps> = ({
     transition: 'all 0.2s ease-in-out',
     ...views?.input,
   };
-
   return (
     <FieldContainer
       error={!!error}
@@ -196,16 +172,14 @@ const TagInputView: React.FC<TagInputViewProps> = ({
         {...containerStyles}
       >
         {left}
-
         <FieldWrapper>
-          {/* Label */}
+          {}
           {label && (
             <FieldLabel size={size} error={!!error} views={views}>
               {label}
             </FieldLabel>
           )}
-
-          {/* Tags and Input Container */}
+          {}
           <Horizontal
             alignItems="center"
             gap={8}
@@ -215,7 +189,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
             padding="8px 0"
             {...views?.tagsContainer}
           >
-            {/* Existing Tags */}
+            {}
             {tags.map((tag, index) => (
               <TagChip
                 key={tag.id}
@@ -228,8 +202,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
                 isReadOnly={isReadOnly}
               />
             ))}
-
-            {/* Input Field */}
+            {}
             {!isMaxReached && (
               <Input
                 id={id}
@@ -248,8 +221,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
                 {...inputStyles}
               />
             )}
-
-            {/* Max tags reached message */}
+            {}
             {isMaxReached && (
               <Text
                 fontSize={Typography.fontSizes[size]}
@@ -262,11 +234,9 @@ const TagInputView: React.FC<TagInputViewProps> = ({
             )}
           </Horizontal>
         </FieldWrapper>
-
         {right}
       </FieldContent>
     </FieldContainer>
   );
 };
-
 export default TagInputView;

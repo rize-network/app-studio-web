@@ -1,0 +1,217 @@
+# ColorInput
+
+An input component for selecting colors, featuring a picker with predefined, recent, and custom color options.
+
+### **Import**
+```tsx
+import { ColorInput } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { ColorInput } from '../ColorInput';
+
+export const DefaultColorInput = () => {
+  return (
+    <Vertical gap={16} width="300px">
+      <ColorInput
+        label="Background Color"
+        placeholder="Choose a color"
+        helperText="Select a background color for your theme"
+      />
+
+      <ColorInput
+        label="Text Color"
+        defaultValue="color-gray-800"
+        helperText="Select a text color"
+      />
+
+      <ColorInput
+        label="Accent Color"
+        defaultValue="color-blue-500"
+        showCustomInput={false}
+        helperText="Choose from predefined colors only"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **Default**
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { ColorInput } from '../ColorInput';
+
+export const DefaultColorInput = () => {
+  return (
+    <Vertical gap={16} width="300px">
+      <ColorInput
+        label="Background Color"
+        placeholder="Choose a color"
+        helperText="Select a background color for your theme"
+      />
+
+      <ColorInput
+        label="Text Color"
+        defaultValue="color-gray-800"
+        helperText="Select a text color"
+      />
+
+      <ColorInput
+        label="Accent Color"
+        defaultValue="color-blue-500"
+        showCustomInput={false}
+        helperText="Choose from predefined colors only"
+      />
+    </Vertical>
+  );
+};
+```
+
+### **FormIntegration**
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical, Horizontal } from 'app-studio';
+import { ColorInput } from '../ColorInput';
+import { Button } from '../../../Button/Button';
+import { Text } from 'app-studio';
+
+export const FormIntegrationColorInput = () => {
+  const [backgroundColor, setBackgroundColor] = useState('color-blue-500');
+  const [textColor, setTextColor] = useState('color-white');
+  const [borderColor, setBorderColor] = useState('color-gray-300');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(
+      `Background: ${backgroundColor}, Text: ${textColor}, Border: ${borderColor}`
+    );
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Vertical gap={16} width="400px">
+        <ColorInput
+          label="Background Color"
+          value={backgroundColor}
+          onChange={setBackgroundColor}
+          helperText="Choose the background color for your theme"
+        />
+
+        <ColorInput
+          label="Text Color"
+          value={textColor}
+          onChange={setTextColor}
+          helperText="Choose the text color"
+        />
+
+        <ColorInput
+          label="Border Color"
+          value={borderColor}
+          onChange={setBorderColor}
+          helperText="Choose the border color"
+        />
+
+        {/* Preview */}
+        <Vertical
+          gap={8}
+          padding="16px"
+          borderRadius="8px"
+          backgroundColor={backgroundColor}
+          color={textColor}
+          borderWidth="2px"
+          borderStyle="solid"
+          borderColor={borderColor}
+        >
+          <Text fontWeight="bold">Preview</Text>
+          <Text>This is how your theme will look with the selected colors</Text>
+        </Vertical>
+
+        <Horizontal gap={8}>
+          <Button type="submit" variant="filled">
+            Apply Theme
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              setBackgroundColor('color-blue-500');
+              setTextColor('color-white');
+              setBorderColor('color-gray-300');
+            }}
+          >
+            Reset
+          </Button>
+        </Horizontal>
+      </Vertical>
+    </form>
+  );
+};
+```
+
+### **Sizes**
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { ColorInput } from '../ColorInput';
+import { Size } from '../ColorInput/ColorInput.type';
+
+export const SizesColorInput = () => {
+  return (
+    <Vertical gap={16} width="300px">
+      {(['xs', 'sm', 'md', 'lg', 'xl'] as Size[]).map((size) => (
+        <ColorInput
+          key={size}
+          label={`Size ${size.toUpperCase()}`}
+          size={size}
+          placeholder="Select a color"
+          defaultValue="color-green-500"
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **Variants**
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { ColorInput } from '../ColorInput';
+import { Variant } from '../ColorInput/ColorInput.type';
+
+export const VariantsColorInput = () => {
+  return (
+    <Vertical gap={16} width="300px">
+      {(['default', 'outline', 'none'] as Variant[]).map((variant) => (
+        <ColorInput
+          key={variant}
+          label={`${
+            variant.charAt(0).toUpperCase() + variant.slice(1)
+          } Variant`}
+          variant={variant}
+          placeholder="Select a color"
+          defaultValue="color-blue-500"
+        />
+      ))}
+    </Vertical>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './Default';
+export * from './Variants';
+export * from './Sizes';
+export * from './FormIntegration';
+```
+

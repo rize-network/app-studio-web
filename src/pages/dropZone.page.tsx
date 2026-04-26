@@ -4,6 +4,9 @@ import { DropZone } from 'src/components/DropZone/DropZone';
 import { ImageIcon } from 'src/components/Icon/Icon';
 
 const DropZonePage = () => {
+  // App-studio inverts `color-black`/`color-white` (and their alpha shades) in
+  // dark mode automatically — `color-black-600` is 64% black on light bg, 64%
+  // white on dark bg. No theme branching needed.
   const [singleFile, setSingleFile] = useState<File[]>([]);
   const [multiFiles, setMultiFiles] = useState<File[]>([]);
   const [lastEvent, setLastEvent] = useState<string>('No interaction yet');
@@ -34,7 +37,7 @@ const DropZonePage = () => {
         <Text fontSize={18} fontWeight={600}>
           1. Basic DropZone (Image Preview)
         </Text>
-        <Text color="rgba(0,0,0,0.6)">
+        <Text color="color-black-600">
           Default styling, accepts images, shows preview.
         </Text>
         <DropZone
@@ -48,7 +51,7 @@ const DropZonePage = () => {
         <Text fontSize={18} fontWeight={600}>
           2. Multiple Files Support (with AttachmentGroup)
         </Text>
-        <Text color="rgba(0,0,0,0.6)">
+        <Text color="color-black-600">
           Accepts multiple files and uses AttachmentGroup to display them.
         </Text>
         <DropZone
@@ -64,7 +67,7 @@ const DropZonePage = () => {
         <Text fontSize={18} fontWeight={600}>
           3. Custom Children
         </Text>
-        <Text color="rgba(0,0,0,0.6)">Fully customizable content inside.</Text>
+        <Text color="color-black-600">Fully customizable content inside.</Text>
         <DropZone
           onFileSelect={handleSingleFileSelect}
           containerProps={{
@@ -93,7 +96,7 @@ const DropZonePage = () => {
         <DropZone disabled text="This dropzone is disabled" />
       </View>
 
-      <View padding={16} backgroundColor="rgba(0,0,0,0.05)" borderRadius={8}>
+      <View padding={16} backgroundColor="color-black-50" borderRadius={8}>
         <Text fontWeight={600}>Interaction Log:</Text>
         <Text marginTop={8} fontFamily="monospace">
           {lastEvent}
@@ -104,7 +107,7 @@ const DropZonePage = () => {
             Multi-File State:
           </Text>
           {multiFiles.length === 0 && (
-            <Text fontSize={12} color="gray">
+            <Text fontSize={12} color="color-gray-500">
               No files selected
             </Text>
           )}

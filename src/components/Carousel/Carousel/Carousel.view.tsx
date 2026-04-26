@@ -19,7 +19,7 @@ import {
   getDefaultCarouselStyles,
 } from './Carousel.style';
 import { CarouselContext, useCarouselContext } from './Carousel.context';
-
+// Defines the individual slide component within the carousel, responsible for rendering its content and managing its active state.
 export const CarouselSlide: React.FC<CarouselSlideProps> = ({
   children,
   isActive,
@@ -39,14 +39,10 @@ export const CarouselSlide: React.FC<CarouselSlideProps> = ({
     </View>
   );
 };
-
-// --- New Compound Components ---
-
-// CarouselPrevious component
 export const CarouselPreviousComponent: React.FC<CarouselPreviousProps> = ({
   views,
-  children, // Allow custom content/icon
-  ...props // Spread remaining ButtonProps
+  children,
+  ...props
 }) => {
   const {
     goToPrevious,
@@ -59,21 +55,18 @@ export const CarouselPreviousComponent: React.FC<CarouselPreviousProps> = ({
     ...globalStyles?.prevButton,
     ...views?.prevButton,
   };
-
   return (
     <Button
       aria-label="Previous slide"
       onClick={() => goToPrevious()}
       isDisabled={!canGoPrevious}
-      {...(mergedStyles as any)} // Apply styles
-      {...props} // Spread user props
+      {...(mergedStyles as any)}
+      {...props}
     >
       {children ?? <ChevronIcon orientation="left" widthHeight={16} />}
     </Button>
   );
 };
-
-// CarouselNext component
 export const CarouselNextComponent: React.FC<CarouselNextProps> = ({
   views,
   children,
@@ -86,7 +79,6 @@ export const CarouselNextComponent: React.FC<CarouselNextProps> = ({
     ...globalStyles?.nextButton,
     ...views?.nextButton,
   };
-
   return (
     <Button
       aria-label="Next slide"
@@ -99,8 +91,6 @@ export const CarouselNextComponent: React.FC<CarouselNextProps> = ({
     </Button>
   );
 };
-
-// CarouselItem component
 export const CarouselItemComponent: React.FC<CarouselItemProps> = ({
   children,
   views,
@@ -112,8 +102,6 @@ export const CarouselItemComponent: React.FC<CarouselItemProps> = ({
     styles: globalStyles,
   } = useCarouselContext();
   const slideIdRef = useRef<number | null>(null);
-
-  // Register/unregister slide on mount/unmount
   useEffect(() => {
     const id = registerSlide();
     slideIdRef.current = id;
@@ -123,14 +111,12 @@ export const CarouselItemComponent: React.FC<CarouselItemProps> = ({
       }
     };
   }, [registerSlide, unregisterSlide]);
-
   const defaultStyles = getDefaultCarouselStyles().item;
   const mergedStyles = {
     ...defaultStyles,
     ...globalStyles?.item,
     ...views?.item,
   };
-
   return (
     <View
       role="group"
@@ -142,13 +128,11 @@ export const CarouselItemComponent: React.FC<CarouselItemProps> = ({
     </View>
   );
 };
-
-// CarouselContent component
 export const CarouselContentComponent: React.FC<CarouselContentProps> = ({
   children,
   views,
-  style, // User style for outer container
-  ...props // User props for outer container
+  style,
+  ...props
 }) => {
   const {
     currentIndex,
@@ -156,7 +140,6 @@ export const CarouselContentComponent: React.FC<CarouselContentProps> = ({
     contentId,
   } = useCarouselContext();
   const defaultStyles = getDefaultCarouselStyles();
-
   const mergedContentStyles = {
     ...defaultStyles.content,
     ...globalStyles?.content,
@@ -167,20 +150,16 @@ export const CarouselContentComponent: React.FC<CarouselContentProps> = ({
     ...globalStyles?.innerContainer,
     ...views?.innerContainer,
   };
-
-  // Calculate the translation based on the current index
   const translateX = `-${currentIndex * 100}%`;
-
   return (
-    // Outer container for overflow: hidden
     <View
       {...mergedContentStyles}
-      {...props} // Spread user props onto outer container
+      {...props}
       style={{ ...mergedContentStyles?.style, ...style }}
       id={contentId}
-      aria-live="polite" // Announce slide changes politely
+      aria-live="polite"
     >
-      {/* Inner container that moves */}
+      {}
       <View
         {...mergedInnerStyles}
         style={{
@@ -193,9 +172,6 @@ export const CarouselContentComponent: React.FC<CarouselContentProps> = ({
     </View>
   );
 };
-
-// --- Legacy View Component ---
-
 export const CarouselView: React.FC<CarouselProps> = ({
   children,
   defaultActiveIndex = 0,
@@ -219,12 +195,9 @@ export const CarouselView: React.FC<CarouselProps> = ({
   themeMode: elementMode,
   ...props
 }) => {
-  // Convert children to array if it's not already
   const slides = useMemo(() => {
     return React.Children.toArray(children);
   }, [children]);
-
-  // Use carousel state hook
   const carouselState = useCarouselState({
     defaultActiveIndex,
     activeIndex: controlledActiveIndex,
@@ -235,7 +208,6 @@ export const CarouselView: React.FC<CarouselProps> = ({
     infinite,
     totalSlides: slides.length,
   });
-
   const {
     activeIndex,
     totalSlides,
@@ -248,14 +220,8 @@ export const CarouselView: React.FC<CarouselProps> = ({
     handleDragMove,
     handleDragEnd,
   } = carouselState;
-
-  // Prepare base styles for context
-  // const baseStyles = getDefaultCarouselStyles();
-
-  // Render navigation buttons
   const renderNavigation = () => {
     if (!showNavigation) return null;
-
     const prevButtonElement = prevButton || (
       <View
         as="button"
@@ -266,7 +232,6 @@ export const CarouselView: React.FC<CarouselProps> = ({
         &#10094;
       </View>
     );
-
     const nextButtonElement = nextButton || (
       <View
         as="button"
@@ -277,7 +242,6 @@ export const CarouselView: React.FC<CarouselProps> = ({
         &#10095;
       </View>
     );
-
     return (
       <>
         <View
@@ -309,11 +273,8 @@ export const CarouselView: React.FC<CarouselProps> = ({
       </>
     );
   };
-
-  // Render indicators
   const renderIndicators = () => {
     if (!showIndicators) return null;
-
     return (
       <Horizontal
         position="absolute"
@@ -343,8 +304,6 @@ export const CarouselView: React.FC<CarouselProps> = ({
       </Horizontal>
     );
   };
-
-  // Check if children are using the compound component pattern
   const hasCompoundComponents = useMemo(() => {
     return React.Children.toArray(children).some(
       (child) =>
@@ -355,8 +314,6 @@ export const CarouselView: React.FC<CarouselProps> = ({
           child.type === CarouselNextComponent)
     );
   }, [children]);
-
-  // If using compound components, render with context provider
   if (hasCompoundComponents) {
     return (
       <CarouselContext.Provider
@@ -394,8 +351,6 @@ export const CarouselView: React.FC<CarouselProps> = ({
       </CarouselContext.Provider>
     );
   }
-
-  // Legacy rendering
   return (
     <View
       position="relative"
@@ -430,7 +385,6 @@ export const CarouselView: React.FC<CarouselProps> = ({
           </CarouselSlide>
         ))}
       </View>
-
       {renderNavigation()}
       {renderIndicators()}
     </View>

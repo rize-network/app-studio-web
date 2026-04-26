@@ -1,38 +1,32 @@
+// This file encapsulates the state management logic and utility functions for the Uploader component, including file selection, validation, preview generation, and thumbnail creation for media files.
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 import { UseUploadProps } from '../Uploader/Uploader.props';
 import { showMessage } from '../../Message/Message';
-
 export const generateThumbnail = (
   videoFile: File,
   setThumbnailUrl: (url: string) => void
 ) => {
   const video = document.createElement('video');
   video.preload = 'metadata';
-
   video.onloadedmetadata = () => {
     video.currentTime = 1;
   };
-
   video.oncanplay = () => {
     const canvas = document.createElement('canvas');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-
     const ctx = canvas.getContext('2d');
     if (ctx) {
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       const thumbnailDataUrl = canvas.toDataURL('image/jpeg');
       setThumbnailUrl(thumbnailDataUrl);
     }
-
     URL.revokeObjectURL(video.src);
   };
-
   video.src = URL.createObjectURL(videoFile);
 };
-
 export const useUpload = ({
-  maxSize = 100 * 1024 * 1024, // 100MB default
+  maxSize = 100 * 1024 * 1024,
   onFileSelect,
   onMultipleFileSelect,
   validateFile,
@@ -51,23 +45,18 @@ export const useUpload = ({
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(
     thumbnail || null
   );
-
   const handleFileChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const files = event.target.files;
       setErrorMessage(null);
-
       if (!files || files.length === 0) {
         onError('No file selected');
         setErrorMessage('No file selected');
         return;
       }
-
       if (multiple) {
-        // Handle multiple files
         const fileArray = Array.from(files);
         const validFiles: File[] = [];
-
         for (const file of fileArray) {
           if (file.size > maxSize) {
             onError(
@@ -82,7 +71,6 @@ export const useUpload = ({
             );
             continue;
           }
-
           if (validateFile) {
             const validationError = validateFile(file);
             if (validationError) {
@@ -91,10 +79,8 @@ export const useUpload = ({
               continue;
             }
           }
-
           validFiles.push(file);
         }
-
         if (validFiles.length > 0) {
           setSelectedFiles(validFiles);
           if (onMultipleFileSelect) {
@@ -102,9 +88,7 @@ export const useUpload = ({
           }
         }
       } else {
-        // Handle single file (existing logic)
         const file = files[0];
-
         if (file.size > maxSize) {
           onError(`File exceeds ${Math.round(maxSize / (1024 * 1024))}MB.`);
           setErrorMessage(
@@ -112,7 +96,6 @@ export const useUpload = ({
           );
           return;
         }
-
         if (validateFile) {
           const validationError = validateFile(file);
           if (validationError) {
@@ -121,13 +104,10 @@ export const useUpload = ({
             return;
           }
         }
-
         setPreviewUrl(URL.createObjectURL(file));
-
         if (file.type.startsWith('video/')) {
           generateThumbnail(file, setThumbnailUrl);
         }
-
         if (onFileSelect) {
           setSelectedFile(file);
           onFileSelect(file);
@@ -136,16 +116,13 @@ export const useUpload = ({
     },
     [maxSize, onFileSelect, onMultipleFileSelect, validateFile, multiple]
   );
-
   const handleClick = () => fileInputRef.current?.click();
-
   useEffect(() => {
     return () => {
       if (previewUrl) URL.revokeObjectURL(previewUrl);
       if (thumbnailUrl) URL.revokeObjectURL(thumbnailUrl);
     };
   }, [previewUrl, thumbnailUrl]);
-
   return {
     previewUrl,
     thumbnailUrl,

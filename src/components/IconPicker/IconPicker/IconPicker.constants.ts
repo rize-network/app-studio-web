@@ -1,5 +1,5 @@
 import { IconName } from '../../Icon/Icon';
-
+// Defines a comprehensive list of all available icon names used throughout the application, primarily for the IconPicker component. This array ensures consistent and valid icon references.
 export const ICON_LIST: IconName[] = [
   'zoom-out',
   'zoom-in',

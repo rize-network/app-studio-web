@@ -11,7 +11,7 @@ import {
   ActivePageButtonStyles,
   DisabledButtonStyles,
 } from './Pagination.style';
-
+// Defines the PaginationView functional component, which is responsible for rendering the visual structure and interactive elements of the pagination UI. It accepts various props to configure its behavior and appearance.
 export const PaginationView: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
@@ -35,19 +35,20 @@ export const PaginationView: React.FC<PaginationProps> = ({
   views,
   ...props
 }) => {
+  // Handles the event when a page number is clicked. It validates if the requested page is within the valid range (1 to totalPages) and not the current active page. If valid, it invokes the 'onPageChange' callback to update the current page.
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages || page === currentPage) {
       return;
     }
     onPageChange(page);
   };
-
+  // Handles the event when the page size selection changes. It checks if the 'onPageSizeChange' callback is provided and, if so, converts the selected value from the dropdown to a number before calling the callback to update the page size.
   const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (onPageSizeChange) {
       onPageSizeChange(Number(e.target.value));
     }
   };
-
+  // A utility function that conditionally renders either an ellipsis ('...') or a clickable page number button. It applies different styles based on whether the page is the current active page and sets an onClick handler for page navigation.
   const renderPageButton = (pageNumber: number | string, index: number) => {
     if (pageNumber === '...') {
       return (
@@ -63,9 +64,7 @@ export const PaginationView: React.FC<PaginationProps> = ({
         </View>
       );
     }
-
     const isCurrentPage = pageNumber === currentPage;
-
     return (
       <View
         key={`page-${pageNumber}`}
@@ -87,10 +86,9 @@ export const PaginationView: React.FC<PaginationProps> = ({
       </View>
     );
   };
-
   return (
     <Horizontal alignItems="center" gap={8} {...views?.container} {...props}>
-      {/* First page button */}
+      {}
       {showFirstLastButtons && (
         <View
           as="button"
@@ -111,8 +109,7 @@ export const PaginationView: React.FC<PaginationProps> = ({
           <ChevronIcon orientation="left" widthHeight={16} marginLeft="-8px" />
         </View>
       )}
-
-      {/* Previous page button */}
+      {}
       <View
         as="button"
         display="flex"
@@ -130,13 +127,11 @@ export const PaginationView: React.FC<PaginationProps> = ({
       >
         <ChevronIcon orientation="left" widthHeight={16} />
       </View>
-
-      {/* Page buttons */}
+      {}
       {visiblePageNumbers.map((pageNumber: number, index: number) =>
         renderPageButton(pageNumber, index)
       )}
-
-      {/* Next page button */}
+      {}
       <View
         as="button"
         display="flex"
@@ -154,8 +149,7 @@ export const PaginationView: React.FC<PaginationProps> = ({
       >
         <ChevronIcon orientation="right" widthHeight={16} />
       </View>
-
-      {/* Last page button */}
+      {}
       {showFirstLastButtons && (
         <View
           as="button"
@@ -176,15 +170,13 @@ export const PaginationView: React.FC<PaginationProps> = ({
           <ChevronIcon orientation="right" widthHeight={16} marginLeft="-8px" />
         </View>
       )}
-
-      {/* Page information */}
+      {}
       {showPageInfo && (
         <Text marginLeft={16} color="color-gray-600" {...views?.pageInfo}>
           Page {currentPage} of {totalPages}
         </Text>
       )}
-
-      {/* Page size selector */}
+      {}
       {showPageSizeSelector && onPageSizeChange && (
         <View
           as="select"

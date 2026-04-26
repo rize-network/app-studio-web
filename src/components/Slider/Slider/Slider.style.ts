@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { Orientation, Shape, Size, Variant } from './Slider.type';
-
+// Defines the specific dimensions (height and width) for the slider track across various predefined sizes (xs, sm, md, lg, xl).
 export const SliderSizes: Record<Size, ViewProps> = {
   xs: {
     height: 4,
@@ -23,7 +23,7 @@ export const SliderSizes: Record<Size, ViewProps> = {
     width: '100%',
   },
 };
-
+// Specifies the dimensions (width and height) for the slider's interactive thumb component across different predefined sizes.
 export const ThumbSizes: Record<Size, ViewProps> = {
   xs: {
     width: 12,
@@ -46,13 +46,13 @@ export const ThumbSizes: Record<Size, ViewProps> = {
     height: 28,
   },
 };
-
+// Maps named shapes (square, rounded, pill) to corresponding border-radius values, determining the visual curvature of the slider elements.
 export const SliderShapes: Record<Shape, number | string> = {
   square: 0,
   rounded: 4,
   pill: 24,
 };
-
+// A factory function that returns a set of slider styles based on the provided theme mode and variant, supporting 'default' and 'outline' appearances.
 export const getSlider = (themeMode: string): Record<Variant, ViewProps> => {
   return {
     default: {
@@ -67,15 +67,10 @@ export const getSlider = (themeMode: string): Record<Variant, ViewProps> => {
       transition: 'border-color 0.15s ease',
     },
   };
-  // Add dark mode conditional styling here
 };
-
-// For backward compatibility
+// Applies the default slider styles by invoking the 'getSlider' function with the 'light' theme mode.
 export const SliderVariants = getSlider('light');
-
-/**
- * Thumb styles matching shadcn/ui patterns
- */
+// Defines the comprehensive styling for the slider's thumb, including its appearance, borders, shadow, and interactive states like hover, focus, and active.
 export const ThumbStyles: ViewProps = {
   backgroundColor: 'color-white',
   borderWidth: 2,
@@ -97,25 +92,18 @@ export const ThumbStyles: ViewProps = {
     transform: 'scale(1.1)',
   },
 };
-
-/**
- * Track styles matching shadcn/ui patterns
- */
+// Specifies the default visual styles for the slider's track, which is the inactive background path for the thumb.
 export const TrackStyles: ViewProps = {
   backgroundColor: 'color-gray-200',
   overflow: 'hidden',
   transition: 'background-color 0.15s ease',
 };
-
-/**
- * Range (filled portion) styles
- */
+// Defines the styles for the active range of the slider, representing the filled portion of the track that indicates the current value.
 export const RangeStyles: ViewProps = {
   backgroundColor: 'theme-primary',
   transition: 'width 0.15s ease, height 0.15s ease',
 };
-
-// Maps Size enum to track height/width and thumb size for the new implementation
+// Provides a comprehensive mapping of slider sizes to their corresponding track cross-axis dimensions and thumb sizes, useful for responsive styling.
 export const EnhancedSliderSizes: Record<
   Size,
   { trackCrossAxisSize: number; thumbSize: number }
@@ -126,21 +114,20 @@ export const EnhancedSliderSizes: Record<
   lg: { trackCrossAxisSize: 10, thumbSize: 24 },
   xl: { trackCrossAxisSize: 12, thumbSize: 28 },
 };
-
-// Basic styles for horizontal and vertical orientation
+// Contains the base styling properties that configure the slider's layout and appearance depending on its orientation (horizontal or vertical).
 export const OrientationStyles: Record<Orientation, ViewProps> = {
   horizontal: {
     width: '100%',
-    minWidth: '120px', // Ensure a minimum clickable area
-    height: 'auto', // Height determined by track/thumb size + padding
+    minWidth: '120px',
+    height: 'auto',
     flexDirection: 'row',
-    paddingVertical: 8, // Add padding for easier thumb interaction
+    paddingVertical: 8,
   },
   vertical: {
     height: '100%',
-    minHeight: '120px', // Ensure a minimum clickable area
-    width: 'auto', // Width determined by track/thumb size + padding
-    flexDirection: 'column-reverse', // Place track visually bottom-to-top
-    paddingHorizontal: 8, // Add padding for easier thumb interaction
+    minHeight: '120px',
+    width: 'auto',
+    flexDirection: 'column-reverse',
+    paddingHorizontal: 8,
   },
 };

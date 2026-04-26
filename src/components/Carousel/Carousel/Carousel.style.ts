@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { IndicatorVariant, CarouselStyles } from './Carousel.type';
-
+// Defines the base styles for different visual variants of carousel indicators, such as dots, lines, or numbers.
 export const IndicatorStyles: Record<IndicatorVariant, ViewProps> = {
   dot: {
     width: '10px',
@@ -34,7 +34,7 @@ export const IndicatorStyles: Record<IndicatorVariant, ViewProps> = {
     transition: 'background-color 0.3s ease',
   },
 };
-
+// Specifies the distinct styles applied to an active (currently selected) carousel indicator, varying by its visual type.
 export const ActiveIndicatorStyles: Record<IndicatorVariant, ViewProps> = {
   dot: {
     backgroundColor: 'theme-primary',
@@ -47,7 +47,7 @@ export const ActiveIndicatorStyles: Record<IndicatorVariant, ViewProps> = {
     color: 'color-white',
   },
 };
-
+// Provides a set of common styling properties for the carousel's navigation buttons, ensuring a consistent appearance.
 export const NavigationButtonStyles: ViewProps = {
   width: '40px',
   height: '40px',
@@ -65,45 +65,43 @@ export const NavigationButtonStyles: ViewProps = {
     backgroundColor: 'color-gray-100',
   },
 };
-
-// Default styles for the compound component pattern
+// A factory function that returns a comprehensive object containing the default CSS-in-JS styles for all major parts of the Carousel component, including the container, content, individual items, and navigation buttons.
 export const getDefaultCarouselStyles = (): CarouselStyles => ({
   container: {
-    position: 'relative', // Needed for absolute positioning of controls
-    overflow: 'hidden', // Clip the content
+    position: 'relative',
+    overflow: 'hidden',
   },
   content: {
-    overflow: 'hidden', // Outer container clips the inner flex container
+    overflow: 'hidden',
     width: '100%',
     height: '100%',
   },
   innerContainer: {
     display: 'flex',
-    // Basic transition for the slide effect
     transitionProperty: 'transform',
-    transitionDuration: '300ms', // Adjust duration as needed
+    transitionDuration: '300ms',
     transitionTimingFunction: 'ease-in-out',
     height: '100%',
   },
   item: {
-    flex: '0 0 100%', // Each item takes full width of the content container
-    minWidth: 0, // Prevent flex items from expanding based on content
-    position: 'relative', // For potential content positioning within the slide
+    flex: '0 0 100%',
+    minWidth: 0,
+    position: 'relative',
     height: '100%',
   },
   prevButton: {
     position: 'absolute',
     top: '50%',
-    left: '16px', // Position from left edge
-    transform: 'translateY(-50%)', // Vertically center
-    zIndex: 10, // Ensure button is above slides
+    left: '16px',
+    transform: 'translateY(-50%)',
+    zIndex: 10,
     ...NavigationButtonStyles,
   },
   nextButton: {
     position: 'absolute',
     top: '50%',
-    right: '16px', // Position from right edge
-    transform: 'translateY(-50%)', // Vertically center
+    right: '16px',
+    transform: 'translateY(-50%)',
     zIndex: 10,
     ...NavigationButtonStyles,
   },

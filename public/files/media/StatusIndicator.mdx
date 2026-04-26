@@ -1,0 +1,43 @@
+# StatusIndicator
+
+A visual component to display an item's status with an optional label and customizable appearance.
+
+### **Import**
+```tsx
+import { StatusIndicator } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { StatusIndicator } from '../StatusIndicator';
+
+export const DefaultDemo = () => (
+  <StatusIndicator label="Active" status="success" />
+);
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './statuses';
+```
+
+### **Statuses**
+
+```tsx
+import React from 'react';
+import { View } from 'app-studio';
+import { StatusIndicator } from '../StatusIndicator';
+
+export const StatusVariants = () => (
+  <View gap={8}>
+    <StatusIndicator label="Info" status="info" />
+    <StatusIndicator label="Success" status="success" />
+    <StatusIndicator label="Warning" status="warning" />
+    <StatusIndicator label="Error" status="error" />
+  </View>
+);
+```
+

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ColorInputProps } from './ColorInput.props';
-
+// This file defines the useColorInputState custom hook, centralizing all state management and core logic for the ColorInput component, including dropdown visibility, color selection, custom color input, recent color persistence via localStorage, and external event handling.
 export const useColorInputState = (props: ColorInputProps) => {
   const {
     value,
@@ -14,27 +14,19 @@ export const useColorInputState = (props: ColorInputProps) => {
     showRecentColors = true,
     isAutoFocus = false,
   } = props;
-
-  // State management
   const [isOpen, setIsOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(value ?? defaultValue);
   const [customColor, setCustomColor] = useState('');
   const [recentColors, setRecentColors] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
-  // Refs
   const triggerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Sync with controlled value
   useEffect(() => {
     if (value !== undefined) {
       setSelectedColor(value);
     }
   }, [value]);
-
-  // Load recent colors from localStorage on mount
   useEffect(() => {
     if (showRecentColors) {
       try {
@@ -47,15 +39,11 @@ export const useColorInputState = (props: ColorInputProps) => {
       }
     }
   }, [showRecentColors]);
-
-  // Auto focus
   useEffect(() => {
     if (isAutoFocus && triggerRef.current) {
       triggerRef.current.focus();
     }
   }, [isAutoFocus]);
-
-  // Click outside to close
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -68,21 +56,15 @@ export const useColorInputState = (props: ColorInputProps) => {
         handleClose();
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
-
-  // Add color to recent colors
   const addToRecentColors = useCallback(
     (color: string) => {
       if (!showRecentColors) return;
-
       setRecentColors((prev) => {
         const filtered = prev.filter((c) => c !== color);
         const newRecent = [color, ...filtered].slice(0, maxRecentColors);
-
-        // Save to localStorage
         try {
           localStorage.setItem(
             'colorInput-recentColors',
@@ -91,33 +73,26 @@ export const useColorInputState = (props: ColorInputProps) => {
         } catch (error) {
           console.warn('Failed to save recent colors to localStorage:', error);
         }
-
         return newRecent;
       });
     },
     [showRecentColors, maxRecentColors]
   );
-
-  // Handlers
   const handleToggle = useCallback(() => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
-
     if (newIsOpen) {
       onOpen?.();
     } else {
       onClose?.();
     }
   }, [isOpen, onOpen, onClose]);
-
   const handleColorSelect = useCallback(
     (color: string) => {
       setSelectedColor(color);
       addToRecentColors(color);
-
       onChange?.(color);
       onChangeComplete?.(color);
-
       if (closeOnSelect) {
         setIsOpen(false);
         onClose?.();
@@ -125,23 +100,19 @@ export const useColorInputState = (props: ColorInputProps) => {
     },
     [onChange, onChangeComplete, closeOnSelect, onClose, addToRecentColors]
   );
-
   const handleCustomColorChange = useCallback((color: string) => {
     setCustomColor(color);
   }, []);
-
   const handleCustomColorSubmit = useCallback(() => {
     if (customColor) {
       handleColorSelect(customColor);
       setCustomColor('');
     }
   }, [customColor, handleColorSelect]);
-
   const handleClose = useCallback(() => {
     setIsOpen(false);
     onClose?.();
   }, [onClose]);
-
   const setValue = useCallback(
     (newValue: string) => {
       setSelectedColor(newValue);
@@ -149,17 +120,13 @@ export const useColorInputState = (props: ColorInputProps) => {
     },
     [onChange]
   );
-
   return {
-    // State
     isOpen,
     selectedColor,
     recentColors,
     customColor,
     isFocused,
     isHovered,
-
-    // Handlers
     handleToggle,
     handleColorSelect,
     handleCustomColorChange,
@@ -168,8 +135,6 @@ export const useColorInputState = (props: ColorInputProps) => {
     setIsFocused,
     setIsHovered,
     setValue,
-
-    // Refs
     triggerRef,
     dropdownRef,
   };

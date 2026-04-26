@@ -8,19 +8,28 @@ import {
   AxisLabelStyles,
   GridStyles,
 } from './Chart.style';
-
+// Defines the shape of props accepted by the BarChart component.
 interface BarChartProps {
+  // The chart's data, including series values and labels.
   data: ChartData;
+  // The overall width of the SVG container for the chart.
   width: number;
+  // The overall height of the SVG container for the chart.
   height: number;
+  // A value (0-1) representing the animation progress, used to animate bar heights.
   animationProgress: number;
+  // Optional flag to determine if the horizontal grid lines should be displayed.
   showGrid?: boolean;
+  // Optional callback function triggered when a bar is clicked, providing series name and data index.
   onBarClick?: (seriesName: string, index: number) => void;
+  // Function to display a custom tooltip at given screen coordinates with specified content.
   showTooltip: (x: number, y: number, content: React.ReactNode) => void;
+  // Function to hide the currently active tooltip.
   hideTooltip: () => void;
+  // Optional object to provide custom styles or overrides for different chart elements.
   views?: any;
 }
-
+// The BarChart functional component, responsible for rendering a bar chart using SVG elements.
 export const BarChart: React.FC<BarChartProps> = ({
   data,
   width,
@@ -32,13 +41,15 @@ export const BarChart: React.FC<BarChartProps> = ({
   hideTooltip,
   views,
 }) => {
+  // Hook to access theme-related utilities, specifically a function to retrieve colors.
   const { getColor } = useTheme();
-  // Calculate chart dimensions
+  // Defines the internal padding for the chart area within the SVG canvas.
   const padding = { top: 20, right: 20, bottom: 40, left: 50 };
+  // Calculates the effective width available for drawing the chart bars and axes, considering padding.
   const chartWidth = width - padding.left - padding.right;
+  // Calculates the effective height available for drawing the chart bars and axes, considering padding.
   const chartHeight = height - padding.top - padding.bottom;
-
-  // Find the maximum value in the data
+  // Memoized calculation of the maximum data value across all series, used for Y-axis scaling.
   const maxValue = useMemo(() => {
     let max = 0;
     data.series.forEach((series) => {
@@ -48,30 +59,28 @@ export const BarChart: React.FC<BarChartProps> = ({
     });
     return max;
   }, [data]);
-
-  // Calculate bar width and spacing
+  // Determines the total number of categories (bar groups) based on the provided labels.
   const barCount = data.labels.length;
+  // Determines the total number of data series to be displayed in the chart.
   const seriesCount = data.series.length;
+  // Calculates the width allocated for each group of bars (one for each label on the X-axis).
   const groupWidth = chartWidth / barCount;
+  // Calculates the width of an individual bar within a bar group.
   const barWidth = (groupWidth * 0.8) / seriesCount;
+  // Calculates the spacing between individual bars within a single bar group.
   const barSpacing = (groupWidth * 0.2) / (seriesCount + 1);
-
-  // Calculate effective max value
+  // Ensures the maximum value for scaling is at least 10, preventing issues with zero or very small data ranges.
   const effectiveMaxValue = maxValue || 10;
-
-  // Generate y-axis ticks
+  // Memoized calculation of the values for Y-axis tick marks.
   const yAxisTicks = useMemo(() => {
     const tickCount = 5;
     const ticks: any[] = [];
-
     for (let i = 0; i <= tickCount; i++) {
       const value = (effectiveMaxValue / tickCount) * i;
       ticks.push(value);
     }
-
     return ticks;
   }, [maxValue]);
-
   return (
     <svg width={width} height={height}>
       <defs>
@@ -92,8 +101,7 @@ export const BarChart: React.FC<BarChartProps> = ({
           );
         })}
       </defs>
-
-      {/* X-axis */}
+      {}
       <line
         x1={padding.left}
         y1={height - padding.bottom}
@@ -102,8 +110,7 @@ export const BarChart: React.FC<BarChartProps> = ({
         {...AxisStyles}
         {...views?.axis}
       />
-
-      {/* Y-axis */}
+      {}
       <line
         x1={padding.left}
         y1={padding.top}
@@ -112,12 +119,10 @@ export const BarChart: React.FC<BarChartProps> = ({
         {...AxisStyles}
         {...views?.axis}
       />
-
-      {/* X-axis labels */}
+      {}
       {data.labels.map((label, index) => {
         const x = padding.left + (index + 0.5) * groupWidth;
         const y = height - padding.bottom + 20;
-
         return (
           <text
             key={`x-label-${index}`}
@@ -131,12 +136,10 @@ export const BarChart: React.FC<BarChartProps> = ({
           </text>
         );
       })}
-
-      {/* Y-axis labels and grid lines */}
+      {}
       {yAxisTicks.map((tick, index) => {
         const y =
           height - padding.bottom - (tick / effectiveMaxValue) * chartHeight;
-
         return (
           <React.Fragment key={`y-tick-${index}`}>
             <text
@@ -149,7 +152,6 @@ export const BarChart: React.FC<BarChartProps> = ({
             >
               {tick.toFixed(0)}
             </text>
-
             {showGrid && (
               <line
                 x1={padding.left}
@@ -163,8 +165,7 @@ export const BarChart: React.FC<BarChartProps> = ({
           </React.Fragment>
         );
       })}
-
-      {/* Bars */}
+      {}
       {data.series.map((series, seriesIndex) => {
         if ((series as any).hidden) return null;
         return (
@@ -178,7 +179,6 @@ export const BarChart: React.FC<BarChartProps> = ({
                 barSpacing * (seriesIndex + 1) +
                 barWidth * seriesIndex;
               const y = height - padding.bottom - barHeight;
-
               const categoryLabel = data.labels[dataIndex];
               const categoryTotal = data.series.reduce((sum, currentSeries) => {
                 const seriesValue = currentSeries.data[dataIndex];
@@ -191,7 +191,6 @@ export const BarChart: React.FC<BarChartProps> = ({
                   ? ((value / categoryTotal) * 100).toFixed(1)
                   : null;
               const fillColor = series.color ? getColor(series.color) : 'black';
-
               const handleMouseMove = (e: React.MouseEvent) => {
                 const tooltipContent = (
                   <View display="flex" flexDirection="column" minWidth="180px">
@@ -245,22 +244,18 @@ export const BarChart: React.FC<BarChartProps> = ({
                     </View>
                   </View>
                 );
-
                 const rect = (
                   e.currentTarget as SVGElement
                 ).getBoundingClientRect();
                 const screenX = rect.left + rect.width / 2;
                 const screenY = rect.top;
-
                 showTooltip(screenX, screenY, tooltipContent);
               };
-
               const handleClick = () => {
                 if (onBarClick) {
                   onBarClick(series.name, dataIndex);
                 }
               };
-
               return (
                 <rect
                   key={`bar-${seriesIndex}-${dataIndex}`}

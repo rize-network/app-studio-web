@@ -1,18 +1,18 @@
 {
-  "componentDescription": "A panel that slides in from the screen edge, showing content or controls without navigating away.",
+  "componentDescription": "A temporary side panel that slides in from the edge of the screen to display content.",
   "placement": {
-    "type": "Placement",
+    "type": "string",
     "typeValues": [
       "left",
       "right",
       "top",
       "bottom"
     ],
-    "description": "Defines the position from which the drawer will appear (e.g., 'left', 'right', 'top', 'bottom').",
+    "description": "Defines the position where the drawer will appear (e.g., 'left', 'right', 'top', 'bottom').",
     "defaultValue": "right"
   },
   "size": {
-    "type": "Size",
+    "type": "string",
     "typeValues": [
       "xs",
       "sm",
@@ -21,37 +21,31 @@
       "xl",
       "full"
     ],
-    "description": "Specifies the width or height of the drawer, depending on its placement.",
+    "description": "Specifies the size of the drawer.",
     "defaultValue": "md"
   },
   "isOpen": {
     "type": "boolean",
-    "typeValues": [
-      true,
-      false
-    ],
-    "description": "Controls the visibility state of the drawer; `true` for open, `false` for closed.",
-    "defaultValue": "undefined"
+    "typeValues": [],
+    "description": "Indicates whether the drawer is currently open or closed.",
+    "defaultValue": false
   },
   "onClose": {
-    "type": "() => void",
-    "typeValues": "undefined",
-    "description": "Callback function invoked when the drawer is requested to close, typically by clicking the overlay or a close button.",
-    "defaultValue": "undefined"
+    "type": "function",
+    "typeValues": [],
+    "description": "Callback function triggered when the drawer is requested to close.",
+    "defaultValue": null
   },
   "isClosePrevented": {
     "type": "boolean",
-    "typeValues": [
-      true,
-      false
-    ],
-    "description": "If `true`, prevents the drawer from closing when the overlay is clicked or the escape key is pressed.",
-    "defaultValue": false
+    "typeValues": [],
+    "description": "Prevents the drawer from closing when an overlay click or escape key is pressed.",
+    "defaultValue": null
   },
   "children": {
     "type": "React.ReactNode",
-    "typeValues": "undefined",
-    "description": "The content to be rendered inside the drawer component.",
-    "defaultValue": "undefined"
+    "typeValues": [],
+    "description": "The content to be rendered inside the drawer.",
+    "defaultValue": null
   }
 }

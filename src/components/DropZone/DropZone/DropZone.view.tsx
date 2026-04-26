@@ -3,7 +3,22 @@ import { Text, Center, Image, View } from 'app-studio';
 import { DropZoneProps, DropZoneStateProps } from './DropZone.props';
 import { UploadIcon } from '../../Icon/Icon';
 import { AttachmentGroup } from '../../AttachmentGroup/AttachmentGroup';
-
+// Renders the visual representation of the DropZone component, handling file drag-and-drop and click-to-upload interactions. It displays different UI states based on drag activity, file selections, and preview modes.
+// Parameters:
+// - `children`: Custom content to render inside the drop zone.
+// - `text`: The default instructional text for the drop zone.
+// - `textProps`: Props to apply to the instructional text component.
+// - `containerProps`: Props to apply to the main container component.
+// - `disabled`: Boolean to disable interactions with the drop zone.
+// - `accept`: String specifying allowed file types (e.g., 'image/*').
+// - `multiple`: Boolean indicating if multiple files can be selected.
+// - `isDragActive`: Boolean reflecting if a file is currently being dragged over the zone.
+// - `handleDragEnter`, `handleDragLeave`, `handleDragOver`, `handleDrop`, `handleClick`, `handleFileChange`: Event handler functions for various user interactions (dragging, dropping, clicking, file selection).
+// - `inputRef`: A ref object linked to the hidden file input element.
+// - `preview`: A URL string for displaying a single file preview (e.g., an image thumbnail).
+// - `imageProps`: Props to apply to the image preview component.
+// - `selectedFiles`: An array of currently selected files, used for displaying multiple attachments.
+// - `onRemove`: A callback function triggered when a file is to be removed from the selected files list.
 export const DropZoneView: React.FC<DropZoneProps & DropZoneStateProps> = ({
   children,
   text = 'Drop files here or click to upload',
@@ -28,7 +43,7 @@ export const DropZoneView: React.FC<DropZoneProps & DropZoneStateProps> = ({
   return (
     <Center
       width="100%"
-      minHeight="200px" // changed to minHeight to accommodate content
+      minHeight="200px"
       height={selectedFiles && selectedFiles.length > 0 ? 'auto' : '200px'}
       borderWidth={2}
       borderStyle="dashed"
@@ -58,8 +73,7 @@ export const DropZoneView: React.FC<DropZoneProps & DropZoneStateProps> = ({
         style={{ display: 'none' }}
         disabled={disabled}
       />
-
-      {/* Single File Image Preview */}
+      {}
       {preview && !multiple ? (
         <View width="100%" height="200px" position="relative">
           <Image
@@ -70,7 +84,7 @@ export const DropZoneView: React.FC<DropZoneProps & DropZoneStateProps> = ({
             objectFit="contain"
             {...imageProps}
           />
-          {/* Overlay */}
+          {}
           <Center
             position="absolute"
             top={0}
@@ -112,8 +126,7 @@ export const DropZoneView: React.FC<DropZoneProps & DropZoneStateProps> = ({
               </Text>
             </View>
           )}
-
-          {/* Multiple Files Preview using AttachmentGroup */}
+          {}
           {multiple && selectedFiles && selectedFiles.length > 0 && (
             <View marginTop={16} width="100%">
               <AttachmentGroup

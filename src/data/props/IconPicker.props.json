@@ -1,0 +1,138 @@
+{
+  "componentDescription": "Enables users to select an icon from a predefined list, offering various styling and interaction options.",
+  "id": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "Unique identifier for the IconPicker component.",
+    "defaultValue": "N/A"
+  },
+  "name": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "The name attribute for the input element, used for form submission.",
+    "defaultValue": "N/A"
+  },
+  "label": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "The label displayed for the IconPicker.",
+    "defaultValue": "N/A"
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "Placeholder text displayed when no icon is selected.",
+    "defaultValue": "Select an icon"
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "Supplementary text displayed below the IconPicker for guidance.",
+    "defaultValue": "N/A"
+  },
+  "value": {
+    "type": "IconName",
+    "typeValues": "N/A",
+    "description": "The currently selected icon's name (controlled component prop).",
+    "defaultValue": "N/A"
+  },
+  "defaultValue": {
+    "type": "IconName",
+    "typeValues": "N/A",
+    "description": "The initial selected icon's name (uncontrolled component prop).",
+    "defaultValue": "N/A"
+  },
+  "onChange": {
+    "type": "(iconName: IconName) => void",
+    "typeValues": "N/A",
+    "description": "Callback function triggered when an icon is selected or the value changes.",
+    "defaultValue": "N/A"
+  },
+  "views": {
+    "type": "IconPickerStyles",
+    "typeValues": "N/A",
+    "description": "Custom styles to apply to different parts of the IconPicker component.",
+    "defaultValue": {}
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Defines the overall size of the IconPicker component.",
+    "defaultValue": "md"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "default",
+      "square",
+      "rounded",
+      "pill"
+    ],
+    "description": "Defines the shape of the IconPicker's visual elements.",
+    "defaultValue": "default"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "outline",
+      "default",
+      "filled"
+    ],
+    "description": "Defines the visual variant (e.g., filled, outlined) of the IconPicker.",
+    "defaultValue": "default"
+  },
+  "error": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Indicates if the IconPicker is in an error state, triggering error styling.",
+    "defaultValue": false
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "If true, the IconPicker will be disabled and non-interactive.",
+    "defaultValue": false
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "If true, the IconPicker will be read-only, preventing user input but allowing selection.",
+    "defaultValue": false
+  },
+  "showSearch": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Determines whether the search input field is displayed within the dropdown.",
+    "defaultValue": true
+  },
+  "isOpen": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Controls the open/closed state of the icon picker dropdown (controlled component prop).",
+    "defaultValue": "N/A"
+  },
+  "onOpen": {
+    "type": "() => void",
+    "typeValues": "N/A",
+    "description": "Callback function triggered when the icon picker dropdown is opened.",
+    "defaultValue": "N/A"
+  },
+  "onClose": {
+    "type": "() => void",
+    "typeValues": "N/A",
+    "description": "Callback function triggered when the icon picker dropdown is closed.",
+    "defaultValue": "N/A"
+  },
+  "closeOnSelect": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "If true, the dropdown will close automatically after an icon is selected.",
+    "defaultValue": "N/A"
+  }
+}

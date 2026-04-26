@@ -12,8 +12,7 @@ import {
   HoverCardContentProps,
   HoverCardTriggerProps,
 } from './HoverCard.props';
-
-// Create context for the HoverCard
+// Initializes the React context for the HoverCard component, providing default values for its state and functions. This context will be used to manage the HoverCard's open/close state, references, and unique IDs.
 const HoverCardContext = createContext<HoverCardContextType>({
   isOpen: false,
   openCard: () => {},
@@ -24,7 +23,7 @@ const HoverCardContext = createContext<HoverCardContextType>({
   contentId: '',
   triggerId: '',
 });
-
+// Defines the HoverCardProvider component, which makes the HoverCard context available to all its child components. It receives children to render and a 'value' prop containing the context's current state and functions.
 export const HoverCardProvider: React.FC<{
   children: React.ReactNode;
   value: HoverCardContextType;
@@ -35,7 +34,6 @@ export const HoverCardProvider: React.FC<{
     </HoverCardContext.Provider>
   );
 };
-
 export const useHoverCardContext = () => {
   const context = useContext(HoverCardContext);
   if (!context) {
@@ -45,7 +43,6 @@ export const useHoverCardContext = () => {
   }
   return context;
 };
-
 export const HoverCardTrigger: React.FC<HoverCardTriggerProps> = ({
   children,
   views,
@@ -54,12 +51,10 @@ export const HoverCardTrigger: React.FC<HoverCardTriggerProps> = ({
 }) => {
   const { openCard, closeCard, triggerRef, contentId, triggerId } =
     useHoverCardContext();
-
   const handleMouseEnter = () => openCard();
   const handleMouseLeave = () => closeCard();
-  const handleFocus = () => openCard(); // For keyboard accessibility
-  const handleBlur = () => closeCard(); // For keyboard accessibility
-
+  const handleFocus = () => openCard();
+  const handleBlur = () => closeCard();
   const triggerProps = {
     ref: triggerRef,
     onMouseEnter: handleMouseEnter,
@@ -67,32 +62,27 @@ export const HoverCardTrigger: React.FC<HoverCardTriggerProps> = ({
     onFocus: handleFocus,
     onBlur: handleBlur,
     id: triggerId,
-    'aria-describedby': contentId, // Link trigger to content for screen readers
+    'aria-describedby': contentId,
     ...views?.container,
     ...props,
   };
-
   if (asChild && isValidElement(children)) {
-    // Clone the child element and merge props
     const child = Children.only(children);
     return cloneElement(child, { ...triggerProps, ...child.props });
   }
-
-  // Default: wrap children in a View
   return (
     <View position="relative" display="inline-block" {...triggerProps}>
       {children}
     </View>
   );
 };
-
 export const HoverCardContent: React.FC<HoverCardContentProps> = ({
   children,
   views,
   side = 'bottom',
   align = 'center',
   sideOffset = 8,
-  style: userStyle, // User provided style override
+  style: userStyle,
   backgroundColor = 'white',
   borderRadius = '4px',
   boxShadow = '0px 2px 8px rgba(0, 0, 0, 0.15)',
@@ -110,36 +100,26 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
     contentId,
     triggerId,
   } = useHoverCardContext();
-
-  // Use useElementPosition for intelligent positioning
   const { ref: positionRef, relation } = useElementPosition({
     trackChanges: true,
     trackOnHover: true,
     trackOnScroll: true,
     trackOnResize: true,
   });
-
-  // Sync the position ref with the trigger ref for positioning calculations
   useEffect(() => {
     if (triggerRef?.current && positionRef?.current !== triggerRef.current) {
-      // Update the position tracking to use the trigger element
       if (positionRef) {
         (positionRef as any).current = triggerRef.current;
       }
     }
   }, [triggerRef, positionRef, isOpen]);
-
-  const handleMouseEnter = () => cancelCloseTimer(); // Keep card open if mouse enters content
+  const handleMouseEnter = () => cancelCloseTimer();
   const handleMouseLeave = () => closeCard();
-
   if (!isOpen) {
-    return null; // Don't render content if not open
+    return null;
   }
-
-  // Create intelligent positioning styles based on useElementPosition relation data
   const getPositionStyles = (): React.CSSProperties => {
     if (!relation || !triggerRef?.current) {
-      // Fallback positioning if relation data is not available
       return {
         position: 'absolute',
         top: 0,
@@ -147,12 +127,8 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
         zIndex: 1000,
       };
     }
-
     const triggerRect = triggerRef.current.getBoundingClientRect();
     let placement = side;
-
-    // Use relation data to determine optimal placement
-    // If preferred side doesn't have enough space, use the side with more space
     if (side === 'bottom' && relation.space.vertical === 'top') {
       placement = 'top';
     } else if (side === 'top' && relation.space.vertical === 'bottom') {
@@ -162,11 +138,8 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
     } else if (side === 'left' && relation.space.horizontal === 'right') {
       placement = 'right';
     }
-
-    // Calculate position based on optimal placement
     let x = 0;
     let y = 0;
-
     switch (placement) {
       case 'bottom':
         x = triggerRect.left + triggerRect.width / 2;
@@ -185,7 +158,6 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
         y = triggerRect.top + triggerRect.height / 2;
         break;
     }
-
     return {
       position: 'fixed',
       left: x,
@@ -194,8 +166,6 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
       transform: getTransformOrigin(placement),
     };
   };
-
-  // Helper function to set transform origin for better positioning
   const getTransformOrigin = (placement: string): string => {
     switch (placement) {
       case 'bottom':
@@ -210,15 +180,13 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
         return 'translate(-50%, 0)';
     }
   };
-
   const positionStyles = getPositionStyles();
-
   return (
     <View
       ref={contentRef}
       id={contentId}
-      role="tooltip" // Use tooltip role for accessibility
-      aria-labelledby={triggerId} // Associate content with trigger
+      role="tooltip"
+      aria-labelledby={triggerId}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       backgroundColor={backgroundColor}
@@ -227,10 +195,9 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
       padding={padding}
       minWidth={minWidth}
       maxWidth={maxWidth}
-      // Combine intelligent position styles with user styles
       style={{
         ...positionStyles,
-        ...userStyle, // Allow user override
+        ...userStyle,
       }}
       {...views?.container}
       {...props}

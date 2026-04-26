@@ -7,193 +7,122 @@ import {
   Size,
   Variant,
 } from './Menubar.type';
-
+// Defines the public properties available for the main Menubar component.
 export interface MenubarProps {
-  /**
-   * The items to display in the menubar
-   */
+  // An array of menu items to be rendered. Each item follows the 'MenubarItem' type definition.
   items: MenubarItem[];
-  /**
-   * The orientation of the menubar
-   */
+  // Specifies the layout orientation of the menubar, either horizontal or vertical. Defaults to horizontal if not provided.
   orientation?: Orientation;
-  /**
-   * The size of the menubar items
-   */
+  // Determines the predefined size of the menubar, affecting its dimensions and internal spacing.
   size?: Size;
-  /**
-   * The visual style variant of the menubar
-   */
+  // Defines the visual style or variant of the menubar, such as 'primary', 'secondary', etc.
   variant?: Variant;
-  /**
-   * The ID of the initially active menu
-   */
   defaultActiveMenuId?: string | null;
-  /**
-   * The ID of the initially open menu
-   */
   defaultOpenMenuId?: string | null;
-  /**
-   * Custom styles for different parts of the menubar
-   */
+  // Provides custom styling for various parts of the menubar, allowing for granular visual customization.
   views?: MenubarStyles;
-  /**
-   * Additional props to be spread to the container element
-   */
+  // Allows for additional arbitrary properties to be passed to the menubar component.
   [key: string]: any;
 }
-
+// Defines the properties for the `Menubar.Root` component, which serves as the top-level container for the menubar.
 export interface MenubarRootProps {
-  /**
-   * The content of the menubar
-   */
+  // The child elements to be rendered within the menubar root, typically `Menubar.Menu` components.
   children: React.ReactNode;
-  /**
-   * The orientation of the menubar
-   */
+  // Specifies the layout orientation for the menubar root container.
   orientation?: Orientation;
-  /**
-   * The size of the menubar items
-   */
+  // Determines the predefined size variant for the menubar root container.
   size?: Size;
-  /**
-   * The visual style variant of the menubar
-   */
+  // Defines the visual style or variant for the menubar root container.
   variant?: Variant;
-  /**
-   * Custom styles for the menubar container
-   */
+  // Custom styles specifically for the root container element of the menubar.
   views?: {
+    // Custom `ViewProps` to apply to the main container element of the `Menubar.Root`.
     container?: ViewProps;
   };
-  /**
-   * Additional props to be spread to the container element
-   */
+  // Allows for additional arbitrary properties to be passed to the root component.
   [key: string]: any;
 }
-
+// Defines the properties for the `Menubar.Menu` component, representing an individual menu that can be opened and closed.
 export interface MenubarMenuProps {
-  /**
-   * The content of the menubar menu
-   */
+  // The child elements to be rendered inside this menu, typically a `Menubar.Trigger` and `Menubar.Content`.
   children: React.ReactNode;
-  /**
-   * The ID of the menu
-   */
+  // A unique identifier for this specific menu instance.
   id: string;
-  /**
-   * Whether the menu is disabled
-   */
+  // If true, the menu will be disabled and users cannot interact with it.
   disabled?: boolean;
-  /**
-   * Custom styles for the menu
-   */
+  // Custom styles specifically for the menu element.
   views?: {
+    // Custom `ViewProps` to apply to the main menu element itself.
     menu?: ViewProps;
   };
 }
-
+// Defines the properties for the `Menubar.Trigger` component, which is responsible for opening and closing its associated menu.
 export interface MenubarTriggerProps {
-  /**
-   * The content of the menubar trigger
-   */
+  // The visible content of the trigger, such as text or an icon, that users click to open the menu.
   children: React.ReactNode;
-  /**
-   * The ID of the menu this trigger belongs to
-   */
+  // The unique ID of the `Menubar.Menu` component that this trigger controls.
   menuId: string;
-  /**
-   * Whether the trigger is disabled
-   */
+  // If true, the trigger will be disabled and cannot be activated.
   disabled?: boolean;
-  /**
-   * Custom styles for the trigger
-   */
+  // Custom styles for both the trigger element and its potential icon.
   views?: {
+    // Custom `ViewProps` to apply to the trigger button element.
     trigger?: ViewProps;
+    // Custom `ViewProps` to apply to any icon rendered within the trigger.
     icon?: ViewProps;
   };
 }
-
+// Defines the properties for the `Menubar.Content` component, which holds the actual items of an opened menu.
 export interface MenubarContentProps {
-  /**
-   * The content of the menubar dropdown
-   */
+  // The menu items or other content to be rendered within this menu's dropdown panel.
   children: React.ReactNode;
-  /**
-   * The ID of the menu this content belongs to
-   */
+  // The unique ID of the `Menubar.Menu` component that this content belongs to.
   menuId: string;
-  /**
-   * Custom styles for the content
-   */
+  // Custom styles specifically for the content container element.
   views?: {
+    // Custom `ViewProps` to apply to the content panel element itself.
     content?: ViewProps;
   };
 }
-
+// Defines the properties for the `Menubar.Item` component, representing a clickable option within a menu's content.
 export interface MenubarItemProps {
-  /**
-   * The content of the menubar item
-   */
+  // The visible content of the menu item, typically text.
   children: React.ReactNode;
-  /**
-   * The ID of the item
-   */
+  // A unique identifier for this specific menu item.
   id: string;
-  /**
-   * The icon to display next to the item
-   */
+  // An optional React node to display as an icon alongside the menu item.
   icon?: React.ReactNode;
-  /**
-   * Whether the item is disabled
-   */
+  // If true, the menu item will be disabled and non-interactive.
   disabled?: boolean;
-  /**
-   * Callback when the item is clicked
-   */
+  // A callback function that is executed when the menu item is clicked.
   onClick?: () => void;
-  /**
-   * Custom styles for the item
-   */
+  // Custom styles for both the item element and its potential icon.
   views?: {
+    // Custom `ViewProps` to apply to the menu item element itself.
     item?: ViewProps;
+    // Custom `ViewProps` to apply to any icon rendered within the menu item.
     icon?: ViewProps;
   };
 }
-
+// Defines the properties for the `Menubar.Separator` component, used to visually divide groups of items within a menu's content.
 export interface MenubarSeparatorProps {
-  /**
-   * Custom styles for the separator
-   */
+  // Custom styles specifically for the separator element.
   views?: {
+    // Custom `ViewProps` to apply to the separator element itself.
     separator?: ViewProps;
   };
 }
-
+// Defines the shape of the `Menubar` component, specifying that it is a functional component (FC) that also exposes sub-components as static properties for composition.
 export interface MenubarType extends React.FC<MenubarProps> {
-  /**
-   * The root component for the menubar
-   */
+  // The root container sub-component for the menubar.
   Root: React.FC<MenubarRootProps>;
-  /**
-   * The menu component for the menubar
-   */
+  // The individual menu sub-component within the menubar.
   Menu: React.FC<MenubarMenuProps>;
-  /**
-   * The trigger component for menubar menus
-   */
+  // The trigger sub-component for opening and closing a menu.
   Trigger: React.FC<MenubarTriggerProps>;
-  /**
-   * The content component for menubar menus
-   */
+  // The content panel sub-component that holds menu items.
   Content: React.FC<MenubarContentProps>;
-  /**
-   * The item component for menubar content
-   */
+  // The individual clickable item sub-component within a menu.
   Item: React.FC<MenubarItemProps>;
-  /**
-   * The separator component for menubar content
-   */
   Separator: React.FC<MenubarSeparatorProps>;
 }

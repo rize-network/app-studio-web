@@ -1,16 +1,12 @@
 import { ViewProps } from 'app-studio';
 import { Size, Variant, Shape } from './ColorPicker.type';
-
-/**
- * Default styles for the ColorPicker component
- */
+// This object defines the default styles for various structural parts of the ColorPicker component, such as its container, trigger, dropdown, and individual color swatches.
 export const DefaultColorPickerStyles = {
   container: {
     position: 'relative',
     display: 'inline-block',
     width: '100%',
   } as ViewProps,
-
   trigger: {
     display: 'flex',
     alignItems: 'center',
@@ -19,7 +15,6 @@ export const DefaultColorPickerStyles = {
     transition:
       'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   } as ViewProps,
-
   dropdown: {
     position: 'absolute',
     top: 'calc(100% + 8px)',
@@ -35,14 +30,12 @@ export const DefaultColorPickerStyles = {
     padding: '16px',
     minWidth: '320px',
   } as ViewProps,
-
   colorGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(6, 36px)',
     gap: '12px',
     marginBottom: '16px',
   } as ViewProps,
-
   colorSwatch: {
     width: '36px',
     height: '36px',
@@ -52,20 +45,15 @@ export const DefaultColorPickerStyles = {
     transition:
       'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   } as ViewProps,
-
   customInput: {
     marginBottom: '12px',
   } as ViewProps,
-
   recentColors: {
     borderTop: '1px solid #F3F4F6',
     paddingTop: '12px',
   } as ViewProps,
 };
-
-/**
- * Size styles for the ColorPicker component
- */
+// This object maps predefined size options (e.g., xs, sm, md) to specific styling configurations, affecting the ColorPicker's dimensions, font size, and padding.
 export const Sizes: Record<Size, ViewProps> = {
   xs: {
     height: '32px',
@@ -93,10 +81,7 @@ export const Sizes: Record<Size, ViewProps> = {
     padding: '14px 16px',
   },
 };
-
-/**
- * Shape styles for the ColorPicker component
- */
+// This object maps predefined shape options (e.g., default, square, pill) to specific border-radius styles, influencing the visual curvature of the ColorPicker's elements.
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: 8,
@@ -111,10 +96,7 @@ export const Shapes: Record<Shape, ViewProps> = {
     borderRadius: 9999,
   },
 };
-
-/**
- * Variant styles for the ColorPicker component
- */
+// This object maps predefined variant options (e.g., default, outline, filled) to distinct visual styles, altering the background, border, and text color of the ColorPicker.
 export const Variants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'color-white',
@@ -138,10 +120,7 @@ export const Variants: Record<Variant, ViewProps> = {
     color: 'color-gray-900',
   },
 };
-
-/**
- * Predefined color palette based on the design system
- */
+// This array defines the default color palette presented within the ColorPicker dropdown, providing a curated selection of colors with their names, hex values, and categories.
 export const DefaultColorPalette = [
   { name: 'Blue', value: '#1D4ED8', category: 'primary' },
   { name: 'Purple', value: '#A855F7', category: 'primary' },

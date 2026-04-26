@@ -1,70 +1,38 @@
-/**
- * Selector Styles
- *
- * Defines the styles for the Selector component following the design guidelines:
- * - Typography: Inter/Geist font, specific sizes/weights
- * - Spacing: 4px grid system
- * - Colors: Neutral palette with semantic colors
- * - Rounded corners: Consistent border radius
- * - Transitions: Subtle animations
- */
-
 import { ViewProps } from 'app-studio';
 import { Size } from './Selector.type';
-
-/**
- * Size configurations for the Selector component
- * Following the 4px grid system
- */
+// Defines a mapping of `Size` enums to `ViewProps` objects, specifying standard dimensions (height and width) for the Selector component based on its size (xs, sm, md, lg, xl).
 export const Sizes: Record<Size, ViewProps> = {
-  xs: { height: '24px', width: '24px' }, // 6 × 4px grid
-  sm: { height: '32px', width: '32px' }, // 8 × 4px grid
-  md: { height: '40px', width: '40px' }, // 10 × 4px grid
-  lg: { height: '48px', width: '48px' }, // 12 × 4px grid
-  xl: { height: '56px', width: '56px' }, // 14 × 4px grid
+  xs: { height: '24px', width: '24px' },
+  sm: { height: '32px', width: '32px' },
+  md: { height: '40px', width: '40px' },
+  lg: { height: '48px', width: '48px' },
+  xl: { height: '56px', width: '56px' },
 };
-
-/**
- * Icon sizes for the Selector component
- * Proportional to the component size
- */
+// Defines a mapping of `Size` enums to numeric values, specifying standard icon sizes that correspond to the Selector component's overall dimensions.
 export const IconSizes: Record<Size, number> = {
-  xs: 12, // 3 × 4px grid
-  sm: 16, // 4 × 4px grid
-  md: 20, // 5 × 4px grid
-  lg: 24, // 6 × 4px grid
-  xl: 28, // 7 × 4px grid
+  xs: 12,
+  sm: 16,
+  md: 20,
+  lg: 24,
+  xl: 28,
 };
-
-/**
- * Dropdown styles for the Selector component
- */
+// Defines the standard `ViewProps` for the dropdown container, including its dimensions, scroll behavior, layering, background, borders, shadow, and transition effects.
 export const dropdownStyles: ViewProps = {
-  // Layout properties
   width: '100%',
-  maxHeight: '240px', // 60 × 4px grid
+  maxHeight: '240px',
   overflowY: 'auto',
   zIndex: 1000,
-
-  // Visual properties
   backgroundColor: 'color-white',
-  borderRadius: '8px', // Consistent with design system (rounded-md)
+  borderRadius: '8px',
   borderWidth: '1px',
   borderStyle: 'solid',
   borderColor: 'color-gray-200',
-
-  // Shadow - more subtle, matching shadcn/ui
   boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.05), 0px 2px 4px rgba(0, 0, 0, 0.03)',
-
-  // Animation - specific properties only
   transition: 'opacity 0.2s ease, transform 0.2s ease',
 };
-
-/**
- * Option item styles for the Selector component
- */
+// Defines the standard `ViewProps` for individual options within the dropdown, including padding, cursor, and transition effects, along with specific styles for hover, focus, and selected states.
 export const optionStyles: ViewProps = {
-  padding: '8px 12px', // 2 × 4px and 3 × 4px grid
+  padding: '8px 12px',
   cursor: 'pointer',
   transition: 'background-color 0.15s ease, color 0.15s ease',
   _hover: {

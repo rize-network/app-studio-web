@@ -21,11 +21,7 @@ import {
   MousePointerIcon,
 } from '../../Icon/Icon';
 import type { Message } from './ChatWidget.type';
-
-/**
- * ChatWidget View Component
- * Presentational component for the ChatWidget interface
- */
+// Defines the main `ChatWidgetView` functional component, responsible for rendering the entire chat user interface based on the provided props.
 const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
   messages = [],
   inputPlaceholder = 'Type a message...',
@@ -49,43 +45,39 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
   messagesRef,
   ...props
 }) => {
-  // Combine styles
+  // Calculates the dynamic styles for the main chat widget container, merging default styles with variant-specific and any custom styles provided via props.
   const containerStyles = {
     ...DefaultChatWidgetStyles.container,
     ...Variants[variant],
     ...styles.container,
   };
-
+  // Determines the styles for the message display area, incorporating default styles, a maximum height constraint, and any custom styles provided.
   const messagesContainerStyles = {
     ...DefaultChatWidgetStyles.messagesContainer,
     maxHeight,
     ...styles.messagesContainer,
   };
-
+  // Calculates the styles for the chat input field's container, combining default styles with any custom styles provided via props.
   const inputContainerStyles = {
     ...DefaultChatWidgetStyles.inputContainer,
     ...styles.inputContainer,
   };
-
+  // Determines the styles for the chat input textarea, integrating default styles, size-specific adjustments, and custom styles from props.
   const inputStyles = {
     ...DefaultChatWidgetStyles.input,
     ...Sizes[size],
     ...styles.input,
   };
-
-  // Auto-resize textarea
+  // Handles the change event for the input textarea, dynamically adjusting its height to fit the content and updating the internal input value.
   const handleTextareaChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       handleInputChange(e.target.value);
-
-      // Auto-resize
       e.target.style.height = 'auto';
       e.target.style.height = `${e.target.scrollHeight}px`;
     },
     [handleInputChange]
   );
-
-  // Handle Enter key to submit
+  // Manages key-down events within the input textarea, specifically preventing the default 'Enter' key behavior for new lines and instead triggering message submission, unless 'Shift + Enter' is pressed.
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -95,15 +87,12 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
     },
     [handleSubmit]
   );
-
+  // A boolean flag indicating whether the internal input value contains any non-whitespace characters, used to determine if the send button should be enabled.
   const hasText = internalInputValue.trim().length > 0;
-
-  // Separate onSubmit from other props to avoid type conflict
   const { onSubmit: _, ...viewProps } = props;
-
   return (
     <View {...containerStyles} {...viewProps}>
-      {/* Messages Container */}
+      {}
       <View ref={messagesRef} {...messagesContainerStyles}>
         {messages.length === 0 ? (
           <View
@@ -136,8 +125,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
             />
           ))
         )}
-
-        {/* Loading Indicator */}
+        {}
         {isLoading && (
           <Horizontal
             justifyContent="flex-start"
@@ -158,10 +146,9 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
           </Horizontal>
         )}
       </View>
-
-      {/* Input Area */}
+      {}
       <View>
-        {/* Context Chips */}
+        {}
         {selectedContextElements.length > 0 && (
           <Horizontal
             gap={8}
@@ -201,10 +188,9 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
             ))}
           </Horizontal>
         )}
-
-        {/* Input Container */}
+        {}
         <View as="form" onSubmit={handleSubmit} {...inputContainerStyles}>
-          {/* Attachment Button */}
+          {}
           {enableAttachments && (
             <View
               as="button"
@@ -216,8 +202,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
               <AttachmentIcon widthHeight={16} color="color-gray-600" />
             </View>
           )}
-
-          {/* Textarea */}
+          {}
           <View
             as="textarea"
             ref={inputRef}
@@ -232,9 +217,8 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
               opacity: disableInput || isLoading ? 0.5 : 1,
             }}
           />
-
           <Vertical gap={4} alignItems="center">
-            {/* Context Picker Button */}
+            {}
             {enableContextPicker && (
               <View
                 as="button"
@@ -251,8 +235,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
                 <MousePointerIcon widthHeight={16} color="color-gray-600" />
               </View>
             )}
-
-            {/* Send Button */}
+            {}
             <View
               as="button"
               type="submit"
@@ -276,11 +259,6 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
     </View>
   );
 };
-
-/**
- * Chat Bubble Component
- * Renders individual chat messages
- */
 interface ChatBubbleProps {
   message: Message;
   size: 'sm' | 'md' | 'lg';
@@ -297,7 +275,6 @@ interface ChatBubbleProps {
     toolMessage?: any;
   };
 }
-
 const ChatBubble: React.FC<ChatBubbleProps> = ({
   message,
   size,
@@ -306,13 +283,10 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
 }) => {
   const [showTimestampOverlay, setShowTimestampOverlay] = React.useState(false);
   const [isReasoningOpen, setIsReasoningOpen] = React.useState(false);
-
   const isUser = message.role === 'user';
   const isSystem = message.messageType === 'system';
   const isError = message.messageType === 'error';
   const isTool = message.messageType === 'tool';
-
-  // System Message Rendering
   if (isSystem) {
     return (
       <View
@@ -331,8 +305,6 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
       </View>
     );
   }
-
-  // Tool Message Rendering
   if (isTool) {
     return (
       <View
@@ -366,13 +338,10 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
       </View>
     );
   }
-
-  // Bubble Styles construction
   const bubbleStyles = {
     ...DefaultChatWidgetStyles.bubble,
     ...BubbleSizes[size],
     ...(isUser ? UserBubbleStyles : AssistantBubbleStyles),
-    // Error styles overrides
     ...(isError
       ? {
           backgroundColor: 'color-red-50',
@@ -386,14 +355,12 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
     ...(isUser ? styles.userBubble : styles.assistantBubble),
     ...(isError ? styles.errorMessage : {}),
   };
-
   const timestampStyles = {
     ...DefaultChatWidgetStyles.timestamp,
     [isUser ? 'right' : 'left']: '8px',
     opacity: showTimestampOverlay ? 1 : 0,
     ...styles.timestamp,
   };
-
   return (
     <View
       position="relative"
@@ -403,7 +370,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
       justifyContent={isUser ? 'flex-end' : 'flex-start'}
     >
       <View {...bubbleStyles}>
-        {/* Timestamp Overlay */}
+        {}
         {showTimestamp && (
           <View {...timestampStyles}>
             {message.timestamp.toLocaleTimeString([], {
@@ -412,8 +379,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
             })}
           </View>
         )}
-
-        {/* Error Icon */}
+        {}
         {isError && (
           <Horizontal gap={6} marginBottom="4px" alignItems="center">
             <ErrorIcon widthHeight={14} color="color-red-700" />
@@ -422,8 +388,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
             </Text>
           </Horizontal>
         )}
-
-        {/* Reasoning / Thinking Block */}
+        {}
         {message.reasoning && (
           <View
             marginBottom="8px"
@@ -470,13 +435,11 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
             )}
           </View>
         )}
-
-        {/* Message Content */}
+        {}
         <View whiteSpace="pre-wrap" wordBreak="break-word">
           {message.content}
         </View>
-
-        {/* Attachments */}
+        {}
         {message.attachments && message.attachments.length > 0 && (
           <Vertical gap={4} marginTop="8px">
             {message.attachments.map((attachment) => (
@@ -497,8 +460,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
             ))}
           </Vertical>
         )}
-
-        {/* Context Elements */}
+        {}
         {message.contextElements && message.contextElements.length > 0 && (
           <Vertical gap={4} marginTop="8px">
             <Text fontSize="11px" color="color-black-500" fontWeight="600">
@@ -527,5 +489,4 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
     </View>
   );
 };
-
 export default ChatWidgetView;

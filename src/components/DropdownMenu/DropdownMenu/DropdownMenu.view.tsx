@@ -24,8 +24,7 @@ import {
   DropdownMenuItemStates,
 } from './DropdownMenu.style';
 import { ChevronIcon } from '../../Icon/Icon';
-
-// Create context for the DropdownMenu
+// Initializes the React Context for managing the dropdown menu's state, providing default values for properties like `isOpen`, `activeSubmenuId`, `size`, `variant`, and a reference to the trigger element.
 const DropdownMenuContext = createContext<DropdownMenuContextType>({
   isOpen: false,
   setIsOpen: () => {},
@@ -35,8 +34,7 @@ const DropdownMenuContext = createContext<DropdownMenuContextType>({
   variant: 'default',
   triggerRef: { current: null },
 });
-
-// Provider component for the DropdownMenu context
+// A React functional component that serves as the provider for the `DropdownMenuContext`, making the dropdown state and functions available to all its children.
 export const DropdownMenuProvider: React.FC<{
   children: React.ReactNode;
   value: DropdownMenuContextType;
@@ -47,8 +45,6 @@ export const DropdownMenuProvider: React.FC<{
     </DropdownMenuContext.Provider>
   );
 };
-
-// Hook to use the DropdownMenu context
 export const useDropdownMenuContext = () => {
   const context = useContext(DropdownMenuContext);
   if (!context) {
@@ -58,20 +54,16 @@ export const useDropdownMenuContext = () => {
   }
   return context;
 };
-
-// DropdownMenu Trigger component
 export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
   children,
   views,
   ...props
 }) => {
   const { isOpen, setIsOpen, triggerRef } = useDropdownMenuContext();
-
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsOpen(!isOpen);
   };
-
   return (
     <View
       ref={triggerRef}
@@ -87,8 +79,6 @@ export const DropdownMenuTrigger: React.FC<DropdownMenuTriggerProps> = ({
     </View>
   );
 };
-
-// DropdownMenu Content component
 export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   items,
   side = 'bottom',
@@ -97,39 +87,28 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   ...props
 }) => {
   const { isOpen, variant, triggerRef } = useDropdownMenuContext();
-
   const contentRef = useRef<HTMLDivElement>(null);
-
-  // Use useElementPosition for intelligent positioning
   const { ref: positionRef, relation } = useElementPosition({
     trackChanges: true,
     trackOnHover: true,
     trackOnScroll: true,
     trackOnResize: true,
   });
-
   const [optimalPosition, setOptimalPosition] = useState({
     x: 0,
     y: 0,
     placement: side,
   });
-
-  // Sync the position ref with the trigger ref for positioning calculations
   useEffect(() => {
     if (triggerRef.current && positionRef) {
       (positionRef as any).current = triggerRef.current;
     }
   }, [triggerRef, positionRef, isOpen]);
-
-  // Calculate optimal position using useElementPosition when the dropdown opens
   useEffect(() => {
     if (isOpen && contentRef.current && triggerRef.current) {
       const triggerRect = triggerRef.current.getBoundingClientRect();
       let placement = side;
-
-      // Use relation data to determine optimal placement
       if (relation) {
-        // If preferred side doesn't have enough space, use the side with more space
         if (side === 'bottom' && relation.space.vertical === 'top') {
           placement = 'top';
         } else if (side === 'top' && relation.space.vertical === 'bottom') {
@@ -140,19 +119,16 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
           placement = 'right';
         }
       }
-
-      // Calculate position based on optimal placement and alignment
       let x = 0;
       let y = 0;
-
       switch (placement) {
         case 'bottom':
           x =
             align === 'start'
               ? triggerRect.left
               : align === 'end'
-              ? triggerRect.right - 180 // Estimated content width
-              : triggerRect.left + triggerRect.width / 2 - 90; // Half of estimated width
+              ? triggerRect.right - 180
+              : triggerRect.left + triggerRect.width / 2 - 90;
           y = triggerRect.bottom + 8;
           break;
         case 'top':
@@ -162,7 +138,7 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
               : align === 'end'
               ? triggerRect.right - 180
               : triggerRect.left + triggerRect.width / 2 - 90;
-          y = triggerRect.top - 8; // Will be adjusted with transform
+          y = triggerRect.top - 8;
           break;
         case 'right':
           x = triggerRect.right + 8;
@@ -170,11 +146,11 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
             align === 'start'
               ? triggerRect.top
               : align === 'end'
-              ? triggerRect.bottom - 100 // Estimated content height
-              : triggerRect.top + triggerRect.height / 2 - 50; // Half of estimated height
+              ? triggerRect.bottom - 100
+              : triggerRect.top + triggerRect.height / 2 - 50;
           break;
         case 'left':
-          x = triggerRect.left - 8; // Will be adjusted with transform
+          x = triggerRect.left - 8;
           y =
             align === 'start'
               ? triggerRect.top
@@ -183,16 +159,12 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
               : triggerRect.top + triggerRect.height / 2 - 50;
           break;
       }
-
       setOptimalPosition({ x, y, placement });
     }
   }, [isOpen, side, align, triggerRef, relation]);
-
   if (!isOpen) {
     return null;
   }
-
-  // Create intelligent positioning styles with transform for better placement
   const getPositionStyles = (): React.CSSProperties => {
     const baseStyles: React.CSSProperties = {
       position: 'fixed',
@@ -200,8 +172,6 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
       top: optimalPosition.y,
       zIndex: 1000,
     };
-
-    // Add transform based on placement for better positioning
     switch (optimalPosition.placement) {
       case 'top':
         return { ...baseStyles, transform: 'translateY(-100%)' };
@@ -213,9 +183,7 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
         return baseStyles;
     }
   };
-
   const positionStyles = getPositionStyles();
-
   return (
     <View
       ref={contentRef}
@@ -232,45 +200,31 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
         if (item.divider) {
           return <DropdownMenuDivider key={`divider-${index}`} views={views} />;
         }
-
         return <DropdownMenuItem key={item.id} item={item} views={views} />;
       })}
     </View>
   );
 };
-
-// DropdownMenu Item component
 export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
   item,
   views,
   ...props
 }) => {
-  const {
-    activeSubmenuId,
-    setActiveSubmenuId,
-    size,
-    //variant
-  } = useDropdownMenuContext();
-
+  const { activeSubmenuId, setActiveSubmenuId, size } =
+    useDropdownMenuContext();
   const [isHovered, setIsHovered] = useState(false);
   const hasSubmenu = item.items && item.items.length > 0;
   const isSubmenuActive = activeSubmenuId === item.id;
   const itemRef = useRef<HTMLDivElement>(null);
-
-  // Handle mouse enter event
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (hasSubmenu) {
       setActiveSubmenuId(item.id);
     }
   };
-
-  // Handle mouse leave event
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
-
-  // Handle click event
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (item.disabled) return;
@@ -278,7 +232,6 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
       item.onClick();
     }
   };
-
   return (
     <View
       ref={itemRef}
@@ -303,9 +256,7 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
           {item.icon}
         </View>
       )}
-
       <View flexGrow={1}>{item.label}</View>
-
       {hasSubmenu && (
         <View marginLeft={8} {...views?.submenuIndicator}>
           <ChevronIcon
@@ -316,7 +267,6 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
           />
         </View>
       )}
-
       {isSubmenuActive && hasSubmenu && (
         <DropdownMenuContent
           items={item.items || []}
@@ -328,8 +278,6 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
     </View>
   );
 };
-
-// DropdownMenu Divider component
 export const DropdownMenuDivider: React.FC<DropdownMenuDividerProps> = ({
   views,
   ...props
@@ -344,8 +292,6 @@ export const DropdownMenuDivider: React.FC<DropdownMenuDividerProps> = ({
     />
   );
 };
-
-// Main DropdownMenu View component
 export const DropdownMenuView: React.FC<
   {
     trigger: React.ReactNode;
@@ -360,7 +306,6 @@ export const DropdownMenuView: React.FC<
   side = 'bottom',
   align = 'start',
   views,
-
   themeMode: elementMode,
   ...props
 }) => {
@@ -372,7 +317,6 @@ export const DropdownMenuView: React.FC<
       {...props}
     >
       <DropdownMenuTrigger views={views}>{trigger}</DropdownMenuTrigger>
-
       <DropdownMenuContent
         items={items}
         side={side}

@@ -1,9 +1,3 @@
-/**
- * Gradient Props
- *
- * Defines the props for the Gradient component following the design guidelines.
- */
-
 import { ViewProps } from 'app-studio';
 import {
   GradientType,
@@ -13,70 +7,28 @@ import {
   ColorStop,
   GradientStyles,
 } from './Gradient.type';
-
-/**
- * Props for the Gradient component
- */
+// Defines the properties available for the Gradient component, extending `ViewProps` but omitting its 'colors' property to provide a custom color definition.
 export interface GradientProps extends Omit<ViewProps, 'colors'> {
-  /**
-   * Type of gradient (linear, radial, or conic)
-   * @default 'linear'
-   */
+  // Specifies the type of gradient to be rendered, such as linear or radial.
   type?: GradientType;
-
-  /**
-   * Direction for linear gradients
-   * @default 'to-right'
-   */
+  // Defines the direction for a linear gradient, e.g., 'to top', 'to right'.
   direction?: LinearDirection;
-
-  /**
-   * Shape for radial gradients
-   * @default 'circle'
-   */
+  // Determines the shape of a radial gradient, such as 'circle' or 'ellipse'.
   shape?: RadialShape;
-
-  /**
-   * Position for radial gradients
-   * @default 'center'
-   */
+  // Sets the starting position for a radial gradient, e.g., 'center', 'farthest-corner'.
   position?: RadialPosition;
-
-  /**
-   * Starting color for simple two-color gradients
-   */
+  // Specifies the starting color of the gradient, usually in hexadecimal or RGB format. Used if 'colors' array is not provided.
   from?: string;
-
-  /**
-   * Ending color for simple two-color gradients
-   */
+  // Specifies the ending color of the gradient, usually in hexadecimal or RGB format. Used if 'colors' array is not provided.
   to?: string;
-
-  /**
-   * Array of color stops for multi-color gradients
-   * Takes precedence over from/to if provided
-   */
+  // Defines an array of color stops to create a multi-color gradient, providing more granular control over color transitions.
   colors?: ColorStop[];
-
-  /**
-   * Whether to animate the gradient
-   * @default false
-   */
+  // Controls whether the gradient should animate its colors or position over time.
   animate?: boolean;
-
-  /**
-   * Animation duration in seconds
-   * @default 3
-   */
+  // Sets the duration of the gradient animation in milliseconds.
   animationDuration?: number;
-
-  /**
-   * Children to render inside the gradient
-   */
+  // Allows rendering of child components or elements within the gradient container.
   children?: React.ReactNode;
-
-  /**
-   * Custom styles for the gradient
-   */
+  // Provides custom styles for different parts of the gradient component, allowing for theme integration or specific visual adjustments.
   views?: GradientStyles;
 }

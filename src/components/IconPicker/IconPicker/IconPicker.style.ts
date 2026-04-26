@@ -1,16 +1,12 @@
 import { ViewProps } from 'app-studio';
 import { Size, Variant, Shape } from './IconPicker.type';
-
-/**
- * Default styles for the IconPicker component
- */
+// Defines the default set of styles for various structural parts of the IconPicker component, including the container, trigger, dropdown, search input, icon grid, and individual icon items.
 export const DefaultIconPickerStyles = {
   container: {
     position: 'relative',
     display: 'inline-block',
     width: '100%',
   } as ViewProps,
-
   trigger: {
     display: 'flex',
     alignItems: 'center',
@@ -18,7 +14,6 @@ export const DefaultIconPickerStyles = {
     cursor: 'pointer',
     transition: 'all 0.2s ease-in-out',
   } as ViewProps,
-
   dropdown: {
     position: 'absolute',
     mixBlendMode: 'normal',
@@ -27,7 +22,7 @@ export const DefaultIconPickerStyles = {
     right: 0,
     zIndex: 1000,
     backgroundColor: 'color-white',
-    borderRadius: 12, // radius-lg
+    borderRadius: 12,
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
@@ -39,12 +34,10 @@ export const DefaultIconPickerStyles = {
     display: 'flex',
     flexDirection: 'column',
   } as ViewProps,
-
   searchInput: {
     marginBottom: '12px',
     flexShrink: 0,
   } as ViewProps,
-
   iconGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(6, 1fr)',
@@ -54,7 +47,6 @@ export const DefaultIconPickerStyles = {
     color: 'color-black',
     flexGrow: 1,
   } as ViewProps,
-
   iconItem: {
     width: '32px',
     height: '32px',
@@ -62,14 +54,11 @@ export const DefaultIconPickerStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     cursor: 'pointer',
-    borderRadius: 8, // radius-md
+    borderRadius: 8,
     transition: 'all 0.2s ease-in-out',
   } as ViewProps,
 };
-
-/**
- * Size styles for the IconPicker component
- */
+// A collection of predefined style objects, each representing a distinct size variant for the IconPicker component, such as extra small (xs) to extra large (xl).
 export const Sizes: Record<Size, ViewProps> = {
   xs: {
     height: '28px',
@@ -97,10 +86,7 @@ export const Sizes: Record<Size, ViewProps> = {
     padding: '12px 16px',
   },
 };
-
-/**
- * Shape styles for the IconPicker component
- */
+// A collection of predefined style objects, each representing a distinct shape variant for the IconPicker component, primarily affecting border-radius.
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: 8,
@@ -115,10 +101,7 @@ export const Shapes: Record<Shape, ViewProps> = {
     borderRadius: 9999,
   },
 };
-
-/**
- * Variant styles for the IconPicker component
- */
+// A collection of predefined style objects, each representing a distinct visual variant for the IconPicker component, affecting background, borders, and text color.
 export const Variants: Record<Variant, ViewProps> = {
   default: {
     backgroundColor: 'color-white',

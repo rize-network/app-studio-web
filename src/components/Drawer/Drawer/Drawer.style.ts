@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { Placement, Size } from './Drawer.type';
-
+// Defines a mapping of predefined sizes (e.g., xs, sm, md) to their corresponding string values, typically used for setting the width or height of the Drawer component.
 export const DrawerSizes: Record<Size, string> = {
   xs: '320px',
   sm: '380px',
@@ -9,7 +9,7 @@ export const DrawerSizes: Record<Size, string> = {
   xl: '768px',
   full: '100%',
 };
-
+// Defines styling configurations for each possible Drawer placement (e.g., left, right, top, bottom), specifying its position, dimensions, and border styles.
 export const DrawerPlacements: Record<Placement, ViewProps> = {
   left: {
     top: 0,

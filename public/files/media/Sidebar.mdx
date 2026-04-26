@@ -1,0 +1,1237 @@
+# Sidebar
+
+A versatile component displaying content typically positioned on the side, used for navigation or supplementary information.
+
+### **Import**
+```tsx
+import { Sidebar } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Sidebar } from '../Sidebar';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import {
+  HomeIcon,
+  SettingsIcon,
+  UserIcon,
+  NotificationIcon,
+  HelpIcon,
+} from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
+
+export const DefaultSidebar = () => {
+  return (
+    <View
+      height="500px"
+      position="relative"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Horizontal width="100%" height="100%">
+        <Sidebar defaultExpanded={true} fixed={false}>
+          <Sidebar.Header>
+            <Text fontWeight="bold" size="lg">
+              App Name
+            </Text>
+          </Sidebar.Header>
+          <Sidebar.Content>
+            <Vertical gap={8}>
+              <SideBarNavItem
+                icon={<HomeIcon widthHeight={20} />}
+                label="Home"
+                isActive
+              />
+              <SideBarNavItem
+                icon={<UserIcon widthHeight={20} />}
+                label="Profile"
+              />
+              <SideBarNavItem
+                icon={<NotificationIcon widthHeight={20} />}
+                label="Notifications"
+              />
+              <SideBarNavItem
+                icon={<SettingsIcon widthHeight={20} />}
+                label="Settings"
+              />
+              <SideBarNavItem
+                icon={<HelpIcon widthHeight={20} />}
+                label="Help"
+              />
+            </Vertical>
+          </Sidebar.Content>
+          <Sidebar.Footer>
+            <Text size="sm" color="color-gray-500">
+              © 2023 App Studio
+            </Text>
+          </Sidebar.Footer>
+        </Sidebar>
+        <View flex="1" padding="16px" backgroundColor="color-gray-50">
+          <Text fontWeight="bold" size="xl" marginBottom="16px">
+            Main Content
+          </Text>
+          <Text>
+            This is the main content area. It will adjust based on the sidebar
+            state.
+          </Text>
+        </View>
+      </Horizontal>
+    </View>
+  );
+};
+```
+
+### **AccessibleSidebar**
+
+```tsx
+import React from 'react';
+import { Sidebar } from '../Sidebar';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import {
+  HomeIcon,
+  SettingsIcon,
+  UserIcon,
+  HelpIcon,
+  NotificationIcon,
+} from '../../Icon/Icon';
+import { Separator } from '../../Separator/Separator';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
+
+export const AccessibleSidebar = () => {
+  return (
+    <View
+      height="500px"
+      position="relative"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Horizontal width="100%" height="100%">
+        <Sidebar
+          fixed={false}
+          variant="subtle"
+          elevation="medium"
+          transitionPreset="bounce"
+          ariaLabel="Main navigation"
+          views={{
+            container: {
+              borderRight: 'none',
+            },
+            content: {
+              padding: '12px',
+            },
+            divider: {
+              marginTop: '12px',
+            },
+            navItem: {
+              padding: '10px 12px',
+              borderRadius: '6px',
+              marginBottom: '4px',
+              transition: 'all 0.2s ease',
+            },
+            navItemActive: {
+              backgroundColor: 'color-blue-50',
+              color: 'color-blue-600',
+            },
+            navItemIcon: {
+              color: 'color-gray-500',
+              marginRight: '12px',
+            },
+            navItemText: {
+              fontWeight: 'medium',
+            },
+          }}
+        >
+          <Sidebar.Header>
+            <Text fontWeight="bold" size="lg">
+              Enhanced Sidebar
+            </Text>
+          </Sidebar.Header>
+          <Sidebar.Content>
+            <Vertical gap={2}>
+              <Text
+                color="color-gray-500"
+                fontWeight="medium"
+                marginBottom="8px"
+              >
+                MAIN NAVIGATION
+              </Text>
+
+              <SideBarNavItem
+                icon={<HomeIcon widthHeight={20} />}
+                label="Dashboard"
+                isActive
+                ariaLabel="Go to Dashboard"
+              />
+              <SideBarNavItem
+                icon={<UserIcon widthHeight={20} />}
+                label="Profile"
+                ariaLabel="Go to Profile"
+              />
+              <SideBarNavItem
+                icon={<NotificationIcon widthHeight={20} />}
+                label="Notifications"
+                ariaLabel="Go to Notifications"
+                badge={3}
+              />
+
+              <Separator marginTop="12px" />
+
+              <Text color="color-gray-500" fontWeight="medium" marginTop="8px">
+                SETTINGS
+              </Text>
+
+              <SideBarNavItem
+                icon={<SettingsIcon widthHeight={20} />}
+                label="Preferences"
+                ariaLabel="Go to Preferences"
+              />
+              <SideBarNavItem
+                icon={<HelpIcon widthHeight={20} />}
+                label="Help & Support"
+                ariaLabel="Go to Help and Support"
+              />
+            </Vertical>
+          </Sidebar.Content>
+          <Sidebar.Footer>
+            <Horizontal alignItems="center" gap={8}>
+              <View
+                width="32px"
+                height="32px"
+                borderRadius="full"
+                backgroundColor="color-blue-100"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Text fontWeight="bold" color="color-blue-600">
+                  JS
+                </Text>
+              </View>
+              <Vertical gap={0}>
+                <Text fontWeight="medium" size="sm">
+                  John Smith
+                </Text>
+                <Text size="xs" color="color-gray-500">
+                  john@example.com
+                </Text>
+              </Vertical>
+            </Horizontal>
+          </Sidebar.Footer>
+        </Sidebar>
+        <View flex="1" padding="24px" backgroundColor="color-gray-50">
+          <Text fontWeight="bold" size="xl" marginBottom="16px">
+            Enhanced Sidebar Example
+          </Text>
+          <Text marginBottom="12px">
+            This sidebar demonstrates the following enhancements:
+          </Text>
+          <Vertical gap={8} marginLeft="16px">
+            <Text>• Improved accessibility with ARIA attributes</Text>
+            <Text>• Custom animation with bounce transition preset</Text>
+            <Text>• Medium elevation shadow effect</Text>
+            <Text>• Subtle variant with section Separators</Text>
+            <Text>• Enhanced navigation items with badges</Text>
+          </Vertical>
+        </View>
+      </Horizontal>
+    </View>
+  );
+};
+```
+
+### **Controlled**
+
+```tsx
+import React, { useState } from 'react';
+import { Sidebar } from '../Sidebar';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Button } from '../../Button/Button';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
+
+export const ControlledSidebar = () => {
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  return (
+    <View>
+      <Horizontal gap={10} marginBottom={16}>
+        <Button onClick={() => setIsExpanded(true)}>Expand Sidebar</Button>
+        <Button onClick={() => setIsExpanded(false)}>Collapse Sidebar</Button>
+        <Text>Current state: {isExpanded ? 'Expanded' : 'Collapsed'}</Text>
+      </Horizontal>
+
+      <View
+        height="300px"
+        position="relative"
+        border="1px solid #e2e8f0"
+        borderRadius="8px"
+        overflow="hidden"
+      >
+        <Horizontal width="100%" height="100%">
+          <Sidebar
+            expanded={isExpanded}
+            onExpandedChange={setIsExpanded}
+            fixed={false}
+          >
+            <Sidebar.Header>
+              <Text fontWeight="bold">Controlled Sidebar</Text>
+            </Sidebar.Header>
+            <Sidebar.Content>
+              <Vertical gap={8}>
+                <SideBarNavItem
+                  icon={<HomeIcon widthHeight={20} />}
+                  label="Home"
+                  isActive
+                />
+                <SideBarNavItem
+                  icon={<UserIcon widthHeight={20} />}
+                  label="Profile"
+                />
+                <SideBarNavItem
+                  icon={<SettingsIcon widthHeight={20} />}
+                  label="Settings"
+                />
+              </Vertical>
+            </Sidebar.Content>
+            <Sidebar.Footer>
+              <Text size="sm" color="color-gray-500">
+                Controlled via state
+              </Text>
+            </Sidebar.Footer>
+          </Sidebar>
+          <View flex="1" padding="16px" backgroundColor="color-gray-50">
+            <Text>Main Content</Text>
+            <Text marginTop={8}>
+              The sidebar is controlled via external state. Use the buttons
+              above to control it.
+            </Text>
+          </View>
+        </Horizontal>
+      </View>
+    </View>
+  );
+};
+```
+
+### **Customized**
+
+```tsx
+import React from 'react';
+import { Sidebar } from '../Sidebar';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
+
+export const CustomizedSidebar = () => {
+  return (
+    <View
+      height="400px"
+      position="relative"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Horizontal width="100%" height="100%">
+        <Sidebar
+          fixed={false}
+          expandedWidth="300px"
+          collapsedWidth="80px"
+          views={{
+            container: {
+              backgroundColor: 'color-blue-800',
+              color: 'color-white',
+              borderRight: 'none',
+            },
+            header: {
+              borderBottomColor: 'color-blue-700',
+              backgroundColor: 'color-blue-900',
+            },
+            content: {
+              padding: '20px',
+            },
+            footer: {
+              borderTopColor: 'color-blue-700',
+              backgroundColor: 'color-blue-900',
+            },
+            toggleButton: {
+              backgroundColor: 'color-blue-700',
+              on: {
+                hover: { backgroundColor: 'color-blue-600' },
+              },
+            },
+            toggleButtonIcon: {
+              color: 'color-white',
+            },
+          }}
+        >
+          <Sidebar.Header>
+            <Text fontWeight="bold" size="lg">
+              Custom Theme
+            </Text>
+          </Sidebar.Header>
+          <Sidebar.Content>
+            <Vertical gap={12}>
+              <SideBarNavItem
+                icon={<HomeIcon widthHeight={20} color="white" />}
+                label="Home"
+                isActive
+              />
+              <SideBarNavItem
+                icon={<UserIcon widthHeight={20} color="white" />}
+                label="Profile"
+              />
+              <SideBarNavItem
+                icon={<SettingsIcon widthHeight={20} color="white" />}
+                label="Settings"
+              />
+            </Vertical>
+          </Sidebar.Content>
+          <Sidebar.Footer>
+            <Text size="sm" color="color-blue-300">
+              Custom themed sidebar
+            </Text>
+          </Sidebar.Footer>
+        </Sidebar>
+        <View flex="1" padding="16px" backgroundColor="color-gray-50">
+          <Text fontWeight="bold" size="xl" marginBottom="16px">
+            Main Content
+          </Text>
+          <Text>
+            This sidebar has custom styling applied through the views prop.
+          </Text>
+        </View>
+      </Horizontal>
+    </View>
+  );
+};
+```
+
+### **DesignSystem**
+
+```tsx
+/**
+ * Sidebar Examples - Design System
+ *
+ * Showcases the Sidebar component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
+
+import React from 'react';
+import { Sidebar } from '../Sidebar';
+import { Text, Vertical, View, Horizontal } from 'app-studio';
+import {
+  HomeIcon,
+  SettingsIcon,
+  UserIcon,
+  NotificationIcon,
+  HelpIcon,
+  DocumentIcon,
+  SearchIcon,
+  ChartIcon,
+  StarIcon,
+} from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
+
+export const DesignSystemSidebar = () => {
+  return (
+    <Vertical gap={32} width="100%">
+      {/* Basic Sidebar with Design System Styling */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Basic Sidebar
+        </Text>
+        <View
+          height="500px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar defaultExpanded={true} fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="600" size="lg">
+                  Design System
+                </Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<ChartIcon widthHeight={20} />}
+                    label="Dashboard"
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<NotificationIcon widthHeight={20} />}
+                    label="Notifications"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                  <SideBarNavItem
+                    icon={<DocumentIcon widthHeight={20} />}
+                    label="Documents"
+                  />
+                  <SideBarNavItem
+                    icon={<SearchIcon widthHeight={20} />}
+                    label="Search"
+                  />
+                  <SideBarNavItem
+                    icon={<StarIcon widthHeight={20} />}
+                    label="Favorites"
+                  />
+                  <SideBarNavItem
+                    icon={<HelpIcon widthHeight={20} />}
+                    label="Help"
+                    isDisabled
+                  />
+                </Vertical>
+              </Sidebar.Content>
+              <Sidebar.Footer>
+                <Text size="sm" color="color-gray-500">
+                  © 2023 Design System
+                </Text>
+              </Sidebar.Footer>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text fontWeight="600" size="xl" marginBottom="16px">
+                Main Content
+              </Text>
+              <Text>
+                This is the main content area. It will adjust based on the
+                sidebar state. The sidebar follows the design system guidelines
+                with consistent typography, spacing, colors, and animations.
+              </Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+
+      {/* Sidebar Variants */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Sidebar Variants
+        </Text>
+        <Horizontal gap={16} alignItems="flex-start">
+          {/* Default Variant */}
+          <View
+            height="400px"
+            width="250px"
+            position="relative"
+            border="1px solid #e2e8f0"
+            borderRadius="8px"
+            overflow="hidden"
+          >
+            <Sidebar
+              variant="default"
+              fixed={false}
+              defaultExpanded={true}
+              expandedWidth="250px"
+            >
+              <Sidebar.Header>
+                <Text fontWeight="600">Default</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+          </View>
+
+          {/* Filled Variant */}
+          <View
+            height="400px"
+            width="250px"
+            position="relative"
+            border="1px solid #e2e8f0"
+            borderRadius="8px"
+            overflow="hidden"
+          >
+            <Sidebar
+              variant="filled"
+              fixed={false}
+              defaultExpanded={true}
+              expandedWidth="250px"
+            >
+              <Sidebar.Header>
+                <Text fontWeight="600">Filled</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+          </View>
+
+          {/* Outline Variant */}
+          <View
+            height="400px"
+            width="250px"
+            position="relative"
+            border="1px solid #e2e8f0"
+            borderRadius="8px"
+            overflow="hidden"
+          >
+            <Sidebar
+              variant="outline"
+              fixed={false}
+              defaultExpanded={true}
+              expandedWidth="250px"
+            >
+              <Sidebar.Header>
+                <Text fontWeight="600">Outline</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+          </View>
+        </Horizontal>
+      </View>
+
+      {/* Sidebar Sizes */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Sidebar Sizes
+        </Text>
+        <Horizontal gap={16} alignItems="flex-start">
+          {/* Small Size */}
+          <View
+            height="400px"
+            width="220px"
+            position="relative"
+            border="1px solid #e2e8f0"
+            borderRadius="8px"
+            overflow="hidden"
+          >
+            <Sidebar
+              size="sm"
+              fixed={false}
+              defaultExpanded={true}
+              expandedWidth="220px"
+            >
+              <Sidebar.Header>
+                <Text fontWeight="600">Small</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={16} />}
+                    label="Home"
+                    isActive
+                    size="sm"
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={16} />}
+                    label="Profile"
+                    size="sm"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={16} />}
+                    label="Settings"
+                    size="sm"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+          </View>
+
+          {/* Medium Size */}
+          <View
+            height="400px"
+            width="280px"
+            position="relative"
+            border="1px solid #e2e8f0"
+            borderRadius="8px"
+            overflow="hidden"
+          >
+            <Sidebar
+              size="md"
+              fixed={false}
+              defaultExpanded={true}
+              expandedWidth="280px"
+            >
+              <Sidebar.Header>
+                <Text fontWeight="600">Medium</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+          </View>
+
+          {/* Large Size */}
+          <View
+            height="400px"
+            width="320px"
+            position="relative"
+            border="1px solid #e2e8f0"
+            borderRadius="8px"
+            overflow="hidden"
+          >
+            <Sidebar
+              size="lg"
+              fixed={false}
+              defaultExpanded={true}
+              expandedWidth="320px"
+            >
+              <Sidebar.Header>
+                <Text fontWeight="600">Large</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={24} />}
+                    label="Home"
+                    isActive
+                    size="lg"
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={24} />}
+                    label="Profile"
+                    size="lg"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={24} />}
+                    label="Settings"
+                    size="lg"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+          </View>
+        </Horizontal>
+      </View>
+
+      {/* Collapsed State */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Collapsed State
+        </Text>
+        <View
+          height="400px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar defaultExpanded={false} fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="600">App</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text fontWeight="600" size="xl" marginBottom="16px">
+                Main Content
+              </Text>
+              <Text>
+                The sidebar is collapsed by default. Click the toggle button to
+                expand it.
+              </Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './designSystem';
+export * from './variants';
+export * from './positions';
+export * from './sizes';
+export * from './controlled';
+export * from './customized';
+export * from './accessibleSidebar';
+```
+
+### **Positions**
+
+```tsx
+import React from 'react';
+import { Sidebar } from '../Sidebar';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
+
+export const SidebarPositions = () => {
+  return (
+    <Vertical gap={30} width="100%">
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Left Position (Default)
+        </Text>
+        <View
+          height="300px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar position="left" fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="bold">Left Sidebar</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text>Main Content</Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Right Position
+        </Text>
+        <View
+          height="300px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text>Main Content</Text>
+            </View>
+            <Sidebar position="right" fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="bold">Right Sidebar</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+          </Horizontal>
+        </View>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Sizes**
+
+```tsx
+import React from 'react';
+import { Sidebar } from '../Sidebar';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
+
+export const SidebarSizes = () => {
+  return (
+    <Vertical gap={30} width="100%">
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Small Size
+        </Text>
+        <View
+          height="300px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar size="sm" fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="bold">Small</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text>Main Content</Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Medium Size (Default)
+        </Text>
+        <View
+          height="300px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar size="md" fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="bold">Medium</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text>Main Content</Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Large Size
+        </Text>
+        <View
+          height="300px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar size="lg" fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="bold">Large</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text>Main Content</Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Variants**
+
+```tsx
+import React from 'react';
+import { Sidebar } from '../Sidebar';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+import { SideBarNavItem } from '../Sidebar/Sidebar.view';
+
+export const SidebarVariants = () => {
+  return (
+    <Vertical gap={30} width="100%">
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Default Variant
+        </Text>
+        <View
+          height="300px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar variant="default" fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="bold">Default</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text>Main Content</Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Filled Variant
+        </Text>
+        <View
+          height="300px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar variant="filled" fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="bold">Filled</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text>Main Content</Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Outline Variant
+        </Text>
+        <View
+          height="300px"
+          position="relative"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Horizontal width="100%" height="100%">
+            <Sidebar variant="outline" fixed={false}>
+              <Sidebar.Header>
+                <Text fontWeight="bold">Outline</Text>
+              </Sidebar.Header>
+              <Sidebar.Content>
+                <Vertical gap={8}>
+                  <SideBarNavItem
+                    icon={<HomeIcon widthHeight={20} />}
+                    label="Home"
+                    isActive
+                  />
+                  <SideBarNavItem
+                    icon={<UserIcon widthHeight={20} />}
+                    label="Profile"
+                  />
+                  <SideBarNavItem
+                    icon={<SettingsIcon widthHeight={20} />}
+                    label="Settings"
+                  />
+                </Vertical>
+              </Sidebar.Content>
+            </Sidebar>
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
+              <Text>Main Content</Text>
+            </View>
+          </Horizontal>
+        </View>
+      </View>
+    </Vertical>
+  );
+};
+```
+

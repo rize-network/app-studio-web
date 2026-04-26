@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { DropZoneProps, DropZoneStateProps } from './DropZone.props';
-
+// This file defines the `useDropZone` custom React hook, which encapsulates all the state management and event-handling logic for the DropZone component. It manages drag-and-drop states, processes selected files, generates image previews, and provides event handlers for user interactions.
 export const useDropZone = ({
   onFileSelect,
   onMultipleFileSelect,
@@ -13,11 +13,8 @@ export const useDropZone = ({
   const [isDragActive, setIsDragActive] = useState(false);
   const [internalPreview, setInternalPreview] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-
   const preview =
     externalPreviewUrl !== undefined ? externalPreviewUrl : internalPreview;
-
-  // Cleanup preview URL on unmount or change
   useEffect(() => {
     return () => {
       if (internalPreview) {
@@ -25,7 +22,6 @@ export const useDropZone = ({
       }
     };
   }, [internalPreview]);
-
   const handleDragEnter = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault();
@@ -35,7 +31,6 @@ export const useDropZone = ({
     },
     [disabled]
   );
-
   const handleDragLeave = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault();
@@ -45,7 +40,6 @@ export const useDropZone = ({
     },
     [disabled]
   );
-
   const handleDragOver = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault();
@@ -55,14 +49,10 @@ export const useDropZone = ({
     },
     [disabled]
   );
-
   const processFiles = useCallback(
     (files: FileList | null) => {
       if (!files || files.length === 0) return;
-
       const fileArray = Array.from(files);
-
-      // Handle preview generation for single file
       if (!multiple && fileArray.length > 0) {
         const file = fileArray[0];
         if (file.type.startsWith('image/')) {
@@ -75,7 +65,6 @@ export const useDropZone = ({
           setInternalPreview(null);
         }
       }
-
       if (multiple) {
         if (onMultipleFileSelect) {
           onMultipleFileSelect(fileArray);
@@ -88,14 +77,12 @@ export const useDropZone = ({
     },
     [multiple, onMultipleFileSelect, onFileSelect]
   );
-
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault();
       e.stopPropagation();
       setIsDragActive(false);
       if (disabled) return;
-
       if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
         processFiles(e.dataTransfer.files);
         e.dataTransfer.clearData();
@@ -103,23 +90,19 @@ export const useDropZone = ({
     },
     [disabled, processFiles]
   );
-
   const handleClick = useCallback(() => {
     if (disabled) return;
     inputRef.current?.click();
   }, [disabled]);
-
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       processFiles(e.target.files);
-      // Reset input value to allow selecting the same file again
       if (e.target.value) {
         e.target.value = '';
       }
     },
     [processFiles]
   );
-
   return {
     isDragActive,
     handleDragEnter,

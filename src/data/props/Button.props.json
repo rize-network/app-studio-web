@@ -1,27 +1,27 @@
 {
-  "componentDescription": "A versatile button component for user interaction with various styles, sizes, and interactive effects.",
+  "componentDescription": "A customizable interactive element used to trigger actions or navigate users.",
   "children": {
     "type": "React.ReactNode",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Optional React node(s) to be displayed as the button's content.",
     "defaultValue": null
   },
   "to": {
     "type": "string",
-    "typeValues": [],
-    "description": "Optional string for the navigation target URL, making the button act as a link.",
+    "typeValues": null,
+    "description": "Optional LoaderProps object to configure the appearance and behavior of the loader animation.",
     "defaultValue": null
   },
   "isLoading": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Optional boolean to indicate if the button is currently in a loading state.",
+    "typeValues": null,
+    "description": "Optional LoaderPosition to determine the location of the loader animation relative to the button content.",
     "defaultValue": false
   },
   "loaderProps": {
     "type": "LoaderProps",
-    "typeValues": [],
-    "description": "Optional LoaderProps object to configure the appearance and behavior of the loader animation.",
+    "typeValues": null,
+    "description": "Optional React node(s) defining the icon to be displayed within the button.",
     "defaultValue": null
   },
   "loaderPosition": {
@@ -30,13 +30,13 @@
       "left",
       "right"
     ],
-    "description": "Optional LoaderPosition to determine the location of the loader animation relative to the button content.",
+    "description": "Optional IconPosition to specify the icon placement inside the button relative to text.",
     "defaultValue": "left"
   },
   "icon": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "Optional React node(s) defining the icon to be displayed within the button.",
+    "typeValues": null,
+    "description": "Optional boolean to indicate if the button is non-interactive/disabled.",
     "defaultValue": null
   },
   "iconPosition": {
@@ -47,37 +47,37 @@
       "top",
       "bottom"
     ],
-    "description": "Optional IconPosition to specify the icon placement inside the button relative to text.",
+    "description": "Optional boolean to control the fill property of the button, affecting its style.",
     "defaultValue": "left"
   },
   "isDisabled": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Optional boolean to indicate if the button is non-interactive/disabled.",
+    "typeValues": null,
+    "description": "Optional boolean indicating if the button size should automatically adjust to its content.",
     "defaultValue": false
   },
   "isFilled": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Optional boolean to control the fill property of the button, affecting its style.",
+    "typeValues": null,
+    "description": "Optional boolean that adds a rounded style to the icon if present.",
     "defaultValue": false
   },
   "isAuto": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Optional boolean indicating if the button size should automatically adjust to its content.",
-    "defaultValue": false
+    "typeValues": null,
+    "description": "Optional function that will be called when the button is clicked.",
+    "defaultValue": true
   },
   "isIconRounded": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Optional boolean that adds a rounded style to the icon if present.",
+    "typeValues": null,
+    "description": "Optional Size to specify the size of the button.",
     "defaultValue": false
   },
   "onClick": {
     "type": "Function",
-    "typeValues": [],
-    "description": "Optional function that will be called when the button is clicked.",
+    "typeValues": null,
+    "description": "Optional shadow property that can be a predefined Shadow, Elevation value or custom CSSProperties to apply shadow effects to the button.",
     "defaultValue": null
   },
   "size": {
@@ -89,13 +89,13 @@
       "lg",
       "xl"
     ],
-    "description": "Optional Size to specify the size of the button.",
+    "description": "Optional Shape to specify the shape of the button (e.g., rounded or square edges).",
     "defaultValue": "md"
   },
   "shadow": {
     "type": "Shadow | Elevation | ViewProps",
-    "typeValues": [],
-    "description": "Optional shadow property that can be a predefined Shadow, Elevation value or custom CSSProperties to apply shadow effects to the button.",
+    "typeValues": null,
+    "description": "Optional string used as an accessible label for screen readers.",
     "defaultValue": null
   },
   "shape": {
@@ -105,13 +105,13 @@
       "rounded",
       "pill"
     ],
-    "description": "Optional Shape to specify the shape of the button (e.g., rounded or square edges).",
+    "description": "Optional Variant to define the stylistic variation of the button.",
     "defaultValue": "rounded"
   },
   "ariaLabel": {
     "type": "string",
-    "typeValues": [],
-    "description": "Optional string used as an accessible label for screen readers.",
+    "typeValues": null,
+    "description": "Optional effect to apply interactive effects (e.g., ripple) to the button.",
     "defaultValue": null
   },
   "variant": {
@@ -119,52 +119,80 @@
     "typeValues": [
       "filled",
       "outline",
-      "link",
+      "empty",
       "ghost",
-      "borderMoving",
-      "animatedStroke"
+      "link",
+      "subtle"
     ],
     "description": "Variant to define the stylistic variation of the button.",
     "defaultValue": "filled"
   },
+  "animation": {
+    "type": "Animation",
+    "typeValues": [
+      "borderMoving",
+      "animatedStroke",
+      "borderReveal"
+    ],
+    "description": "Optional animation to apply to the button",
+    "defaultValue": null
+  },
   "color": {
     "type": "string",
-    "typeValues": [],
-    "description": "Optional color scheme for the button.",
-    "defaultValue": null
+    "typeValues": null,
+    "description": "Main color for the button (accepts theme tokens like 'theme-primary' or color palette like 'color-blue-600')",
+    "defaultValue": "theme-primary"
+  },
+  "textColor": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Explicit text color (overrides auto-calculated color)",
+    "defaultValue": "color-white"
+  },
+  "reversed": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Whether to reverse the colors (useful for dark backgrounds)",
+    "defaultValue": false
   },
   "borderMovingDuration": {
     "type": "number",
-    "typeValues": [],
-    "description": "Duration in seconds for the border animation in the 'borderMoving' variant.",
+    "typeValues": null,
+    "description": "Props for borderMoving variant",
     "defaultValue": 2
   },
   "borderMovingGradientColors": {
     "type": "string[]",
-    "typeValues": [],
-    "description": "Array of colors for the gradient in the 'borderMoving' variant's border animation.",
+    "typeValues": null,
+    "description": "Props for borderMoving variant",
     "defaultValue": [
       "#705CFF",
       "#FF5C97",
       "#FFC75C"
     ]
   },
+  "isHovered": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Internal hover state",
+    "defaultValue": null
+  },
   "animatedStrokeAccentColor": {
     "type": "string",
-    "typeValues": [],
-    "description": "Accent color for the animated stroke effect in the 'animatedStroke' variant.",
+    "typeValues": null,
+    "description": "Props for animatedStroke variant",
     "defaultValue": "#705CFF"
   },
   "animatedStrokeTextColor": {
     "type": "string",
-    "typeValues": [],
-    "description": "Text color for the 'animatedStroke' variant.",
+    "typeValues": null,
+    "description": "Props for animatedStroke variant",
     "defaultValue": "#333333"
   },
   "views": {
     "type": "{ container?: ViewProps; content?: ViewProps; loader?: ViewProps; icon?: ViewProps; link?: ViewProps; }",
-    "typeValues": [],
-    "description": "Optional ViewProps objects to customize the styling of internal sub-components like the container, content, loader, icon, or link.",
+    "typeValues": null,
+    "description": null,
     "defaultValue": {}
   }
 }

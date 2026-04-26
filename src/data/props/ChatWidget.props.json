@@ -1,0 +1,119 @@
+{
+  "componentDescription": "A versatile chat interface for displaying messages, handling user input, and managing conversation context.",
+  "messages": {
+    "type": "Message[]",
+    "typeValues": null,
+    "description": "An optional array of message objects to be displayed within the chat widget.",
+    "defaultValue": "[]"
+  },
+  "inputValue": {
+    "type": "string",
+    "typeValues": null,
+    "description": "An optional controlled value for the chat input field.",
+    "defaultValue": null
+  },
+  "onInputChange": {
+    "type": "(value: string) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the value of the chat input field changes.",
+    "defaultValue": null
+  },
+  "onSubmit": {
+    "type": "(message: string) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when a message is submitted via the chat input.",
+    "defaultValue": null
+  },
+  "inputPlaceholder": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional placeholder text to display in the chat input field when it's empty.",
+    "defaultValue": "Type a message..."
+  },
+  "disableInput": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean flag to disable the chat input field, preventing user interaction.",
+    "defaultValue": "false"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "glassy",
+      "minimal"
+    ],
+    "description": "Specifies the visual variant or style of the chat widget.",
+    "defaultValue": "default"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Specifies the size of the chat widget (e.g., small, medium, large).",
+    "defaultValue": "md"
+  },
+  "showTimestamps": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean flag to determine whether timestamps should be displayed with each message.",
+    "defaultValue": "true"
+  },
+  "enableAttachments": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean flag to enable or disable the attachment functionality within the chat.",
+    "defaultValue": "false"
+  },
+  "enableContextPicker": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean flag to enable or disable the context picker functionality.",
+    "defaultValue": "false"
+  },
+  "selectedContextElements": {
+    "type": "Array<{ id: string; name: string }>",
+    "typeValues": null,
+    "description": "An array of selected context elements, where each element has an ID and a name.",
+    "defaultValue": "[]"
+  },
+  "onContextPickerClick": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the context picker button is clicked.",
+    "defaultValue": null
+  },
+  "onRemoveContextElement": {
+    "type": "(id: string) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when a context element is to be removed by its ID.",
+    "defaultValue": null
+  },
+  "isLoading": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean flag indicating if the chat widget is currently in a loading state.",
+    "defaultValue": "false"
+  },
+  "loadingText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional text to display when the chat widget is in a loading state.",
+    "defaultValue": "Loading..."
+  },
+  "styles": {
+    "type": "ChatWidgetStyles",
+    "typeValues": null,
+    "description": "Optional custom styles to apply to various parts of the chat widget.",
+    "defaultValue": "{}"
+  },
+  "maxHeight": {
+    "type": "string | number",
+    "typeValues": null,
+    "description": "Specifies the maximum height of the chat widget.",
+    "defaultValue": "600px"
+  }
+}

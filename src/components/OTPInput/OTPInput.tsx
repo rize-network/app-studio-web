@@ -2,16 +2,9 @@ import React from 'react';
 import { OTPInputProps } from './OTPInput/OTPInput.props';
 import { useOTPInputState } from './OTPInput/OTPInput.state';
 import OTPInputView from './OTPInput/OTPInput.view';
-
-/**
- * OTPInput component for entering one-time passwords or verification codes.
- * Provides multiple input fields for entering digits with auto-focus functionality.
- * Supports step-based input and improved accessibility.
- */
+// This file defines the main OTPInput component, responsible for orchestrating the state management (using `useOTPInputState`) and rendering the visual representation of the OTP input field (via `OTPInputView`). It acts as a container, passing all necessary props and state variables to its view component.
 const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
-  // Extract the controlled value from props if it exists
   const { value: controlledValue } = props;
-
   const {
     value,
     setValue,
@@ -33,10 +26,7 @@ const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
     handlePaste,
     handleKeyPress,
   } = useOTPInputState(props);
-
-  // Use the controlled value if it exists, otherwise use the internal state value
   const displayValue = controlledValue !== undefined ? controlledValue : value;
-
   return (
     <OTPInputView
       {...props}
@@ -63,5 +53,4 @@ const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
     />
   );
 };
-
 export const OTPInput = OTPInputComponent;

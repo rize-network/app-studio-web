@@ -1,0 +1,196 @@
+{
+  "componentDescription": "An input component for selecting colors, featuring a picker with predefined, recent, and custom color options.",
+  "id": {
+    "type": "string",
+    "typeValues": null,
+    "description": "An optional unique identifier for the input element.",
+    "defaultValue": null
+  },
+  "error": {
+    "type": "any",
+    "typeValues": null,
+    "description": "An optional error object or message to display validation feedback.",
+    "defaultValue": false
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "An optional text displayed below the input to provide additional guidance or error messages.",
+    "defaultValue": null
+  },
+  "name": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The name of the input element, typically used for form submission.",
+    "defaultValue": null
+  },
+  "label": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The label text displayed for the color input.",
+    "defaultValue": null
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The placeholder text displayed in the input field when it's empty.",
+    "defaultValue": "Select a color"
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean indicating whether the input field is read-only.",
+    "defaultValue": false
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean indicating whether the input field is disabled.",
+    "defaultValue": false
+  },
+  "isAutoFocus": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean indicating whether the input field should automatically gain focus on mount.",
+    "defaultValue": null
+  },
+  "onChange": {
+    "type": "(value: string) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the input's value changes.",
+    "defaultValue": null
+  },
+  "onBlur": {
+    "type": "(value: any) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the input loses focus.",
+    "defaultValue": null
+  },
+  "onClick": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the input is clicked.",
+    "defaultValue": null
+  },
+  "onFocus": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the input gains focus.",
+    "defaultValue": null
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "The size of the color input component, utilizing a custom `Size` type.",
+    "defaultValue": "md"
+  },
+  "shadow": {
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": null,
+    "description": "Defines the shadow style for the color input, accepting various shadow types.",
+    "defaultValue": null
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "default",
+      "square",
+      "rounded",
+      "pill"
+    ],
+    "description": "Defines the shape of the color input component.",
+    "defaultValue": "default"
+  },
+  "views": {
+    "type": "ColorInputStyles",
+    "typeValues": null,
+    "description": "Custom styles to override or extend the default appearance of the ColorInput.",
+    "defaultValue": {}
+  },
+  "value": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The current value of the color input.",
+    "defaultValue": null
+  },
+  "defaultValue": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The initial default value of the color input.",
+    "defaultValue": null
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "outline",
+      "default",
+      "none"
+    ],
+    "description": "The visual variant style of the color input.",
+    "defaultValue": "default"
+  },
+  "predefinedColors": {
+    "type": "PredefinedColor[]",
+    "typeValues": null,
+    "description": "An array of predefined colors for quick selection.",
+    "defaultValue": "DefaultColorPalette"
+  },
+  "showCustomInput": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean to control the visibility of a custom color input field within the picker.",
+    "defaultValue": true
+  },
+  "showRecentColors": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean to control the visibility of recently used colors in the picker.",
+    "defaultValue": true
+  },
+  "colorFormat": {
+    "type": "ColorFormat",
+    "typeValues": [
+      "hex",
+      "rgb",
+      "hsl"
+    ],
+    "description": "The format in which the color value should be represented (e.g., hex, rgb).",
+    "defaultValue": null
+  },
+  "maxRecentColors": {
+    "type": "number",
+    "typeValues": null,
+    "description": "The maximum number of recent colors to store and display.",
+    "defaultValue": null
+  },
+  "closeOnSelect": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean indicating whether the color picker should close automatically after a color is selected.",
+    "defaultValue": null
+  },
+  "onChangeComplete": {
+    "type": "(color: string) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the color selection process is completed (e.g., picker closes or final selection).",
+    "defaultValue": null
+  },
+  "onOpen": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the color picker dropdown opens.",
+    "defaultValue": null
+  },
+  "onClose": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the color picker dropdown closes.",
+    "defaultValue": null
+  }
+}

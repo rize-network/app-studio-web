@@ -1,102 +1,46 @@
 import { ViewProps } from 'app-studio';
 import { CardStyles, Shape, Size, Variant } from './Card.type';
-
 export interface CardProps extends ViewProps {
-  /**
-   * The visual style variant of the card
-   */
+  // Defines the visual style or theme of the card.
   variant?: Variant;
-
-  /**
-   * The size of the card, affecting padding
-   */
+  // Specifies the predefined dimensions or scale of the card.
   size?: Size;
-
-  /**
-   * The shape of the card's corners
-   */
+  // Determines the border-radius or overall physical contour of the card.
   shape?: Shape;
-
-  /**
-   * The content to be displayed inside the card
-   */
+  // Content to be rendered within the main body of the card.
   children?: React.ReactNode;
-
-  /**
-   * Optional header content for the card
-   */
+  // Content to be displayed as the card's header section.
   header?: React.ReactNode;
-
-  /**
-   * Optional footer content for the card
-   */
+  // Content to be displayed as the card's footer section.
   footer?: React.ReactNode;
-
-  /**
-   * Whether the card should take up the full width of its container
-   */
+  // If true, the card will occupy the full available width of its parent container.
   isFullWidth?: boolean;
-
-  /**
-   * Custom styles for different parts of the card
-   */
+  // Optional styling overrides for different parts of the card component.
   views?: CardStyles;
-
-  /**
-   * Optional theme mode override ('light' or 'dark')
-   * If not provided, the component will use the theme mode from context
-   */
 }
-
 export interface CardHeaderProps extends ViewProps {
-  /**
-   * The content to be displayed in the card header
-   */
+  // Content to be rendered inside the card's header.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the header
-   */
+  // Optional styling overrides for the card header container.
   views?: ViewProps;
 }
-
 export interface CardContentProps extends ViewProps {
-  /**
-   * The content to be displayed in the card body
-   */
+  // Content to be rendered inside the card's main content area.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the content
-   */
+  // Optional styling overrides for the card content container.
   views?: ViewProps;
 }
-
 export interface CardFooterProps extends ViewProps {
-  /**
-   * The content to be displayed in the card footer
-   */
+  // Content to be rendered inside the card's footer.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the footer
-   */
+  // Optional styling overrides for the card footer container.
   views?: ViewProps;
 }
-
 export interface CardType extends React.FC<CardProps> {
-  /**
-   * Card header component
-   */
+  // Represents the Card Header sub-component, accepting CardHeaderProps.
   Header: React.FC<CardHeaderProps>;
-
-  /**
-   * Card content component
-   */
+  // Represents the Card Content sub-component, accepting CardContentProps.
   Content: React.FC<CardContentProps>;
-
-  /**
-   * Card footer component
-   */
+  // Represents the Card Footer sub-component, accepting CardFooterProps.
   Footer: React.FC<CardFooterProps>;
 }

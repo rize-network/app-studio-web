@@ -1,17 +1,17 @@
 {
-  "componentDescription": "Renders a customizable gradient background with various styles and animation options.",
+  "componentDescription": "Renders visually appealing background gradients with customizable colors, directions, and animations.",
   "type": {
-    "type": "GradientType",
+    "type": "string",
     "typeValues": [
       "linear",
       "radial",
       "conic"
     ],
-    "description": "Specifies the type of gradient to be rendered (e.g., linear, radial).",
+    "description": "Specifies the type of gradient to be rendered, such as linear or radial.",
     "defaultValue": "linear"
   },
   "direction": {
-    "type": "LinearDirection",
+    "type": "string",
     "typeValues": [
       "to-right",
       "to-left",
@@ -23,20 +23,20 @@
       "to-bottom-left",
       "string"
     ],
-    "description": "Defines the direction for a linear gradient.",
+    "description": "Defines the direction for a linear gradient, e.g., 'to top', 'to right'.",
     "defaultValue": "to-right"
   },
   "shape": {
-    "type": "RadialShape",
+    "type": "string",
     "typeValues": [
       "circle",
       "ellipse"
     ],
-    "description": "Determines the shape for a radial gradient (e.g., circle, ellipse).",
+    "description": "Determines the shape of a radial gradient, such as 'circle' or 'ellipse'.",
     "defaultValue": "circle"
   },
   "position": {
-    "type": "RadialPosition",
+    "type": "string",
     "typeValues": [
       "center",
       "top",
@@ -49,49 +49,49 @@
       "bottom-left",
       "string"
     ],
-    "description": "Sets the starting position for a radial gradient.",
+    "description": "Sets the starting position for a radial gradient, e.g., 'center', 'farthest-corner'.",
     "defaultValue": "center"
   },
   "from": {
     "type": "string",
-    "typeValues": [],
-    "description": "Specifies the starting color of the gradient.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Specifies the starting color of the gradient, usually in hexadecimal or RGB format. Used if 'colors' array is not provided.",
+    "defaultValue": "N/A"
   },
   "to": {
     "type": "string",
-    "typeValues": [],
-    "description": "Specifies the ending color of the gradient.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Specifies the ending color of the gradient, usually in hexadecimal or RGB format. Used if 'colors' array is not provided.",
+    "defaultValue": "N/A"
   },
   "colors": {
     "type": "ColorStop[]",
-    "typeValues": [],
-    "description": "An array of color stops to define a multi-color gradient.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Defines an array of color stops to create a multi-color gradient, providing more granular control over color transitions.",
+    "defaultValue": "N/A"
   },
   "animate": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Enables or disables gradient animation.",
-    "defaultValue": false
+    "typeValues": "N/A",
+    "description": "Controls whether the gradient should animate its colors or position over time.",
+    "defaultValue": "false"
   },
   "animationDuration": {
     "type": "number",
-    "typeValues": [],
-    "description": "Sets the duration for the gradient animation in milliseconds.",
+    "typeValues": "N/A",
+    "description": "Sets the duration of the gradient animation in milliseconds.",
     "defaultValue": 3
   },
   "children": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "Content to be rendered inside the Gradient component.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Allows rendering of child components or elements within the gradient container.",
+    "defaultValue": "N/A"
   },
   "views": {
     "type": "GradientStyles",
-    "typeValues": [],
-    "description": "Custom styles for various parts of the Gradient component.",
-    "defaultValue": null
+    "typeValues": "N/A",
+    "description": "Provides custom styles for different parts of the gradient component, allowing for theme integration or specific visual adjustments.",
+    "defaultValue": "N/A"
   }
 }

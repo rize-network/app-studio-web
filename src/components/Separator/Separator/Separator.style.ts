@@ -1,19 +1,6 @@
-/**
- * Separator Styles
- *
- * Defines the styles for the Separator component following the design guidelines:
- * - Typography: Inter/Geist font, specific sizes/weights
- * - Spacing: 4px grid system
- * - Colors: Neutral palette with semantic colors
- * - Transitions: Subtle animations
- */
-
 import { ViewProps } from 'app-studio';
 import { Orientation, Variant, Thickness } from './Separator.type';
-
-/**
- * Orientation configurations for the Separator component
- */
+// Defines predefined styles for separator orientations (horizontal and vertical), specifying their width and height properties.
 export const SeparatorOrientations: Record<Orientation, ViewProps> = {
   horizontal: {
     width: '100%',
@@ -24,36 +11,23 @@ export const SeparatorOrientations: Record<Orientation, ViewProps> = {
     height: '100%',
   },
 };
-
-/**
- * Variant configurations for the Separator component
- */
+// A function that returns an object mapping separator variants (solid, dashed, dotted) to their corresponding CSS border styles. The `themeMode` parameter is currently not utilized.
 export const getSeparator = (themeMode: string): Record<Variant, string> => {
   return {
     solid: 'solid',
     dashed: 'dashed',
     dotted: 'dotted',
   };
-  // Add dark mode conditional styling here
 };
-
-// For backward compatibility
+// An object containing predefined separator variant styles (solid, dashed, dotted), derived from the `getSeparator` function.
 export const SeparatorVariants = getSeparator('light');
-
-/**
- * Thickness configurations for the Separator component
- * Following the 4px grid system
- */
+// Defines standard thickness values for the separator component, allowing for thin, medium, and thick options.
 export const SeparatorThicknesses: Record<Thickness, string> = {
   thin: '1px',
-  medium: '2px', // 0.5 × 4px grid
-  thick: '4px', // 1 × 4px grid
+  medium: '2px',
+  thick: '4px',
 };
-
-/**
- * Default styles for the Separator component
- * Matching shadcn/ui patterns with subtle colors
- */
+// Specifies the default inline styles for different parts of the Separator component: the container, the dividing line, and an optional label.
 export const DefaultSeparatorStyles = {
   container: {
     transition: 'opacity 0.15s ease',
@@ -66,7 +40,7 @@ export const DefaultSeparatorStyles = {
     fontSize: '14px',
     fontWeight: '500',
     color: 'color-gray-600',
-    paddingHorizontal: '8px', // 2 × 4px grid
+    paddingHorizontal: '8px',
     backgroundColor: 'color-white',
     transition: 'color 0.15s ease',
   },

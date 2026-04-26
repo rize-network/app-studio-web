@@ -1,49 +1,28 @@
-/**
- * Card Styles
- *
- * Defines the styles for the Card component following the design guidelines:
- * - Typography: Inter/Geist font, specific sizes/weights
- * - Spacing: 4px grid system
- * - Colors: Neutral palette with semantic colors
- * - Rounded corners: Consistent border radius
- * - Transitions: Subtle animations
- */
-
 import { ViewProps } from 'app-studio';
 import { CardStyles, Shape, Size, Variant } from './Card.type';
-
-/**
- * Card sizes following the 4px grid system
- */
+// Defines a mapping of various card sizes (small, medium, large) to their respective padding styles.
 export const CardSizes: Record<Size, ViewProps> = {
   sm: {
-    padding: '12px', // 3 × 4px grid
+    padding: '12px',
   },
   md: {
-    padding: '16px', // 4 × 4px grid
+    padding: '16px',
   },
   lg: {
-    padding: '24px', // 6 × 4px grid
+    padding: '24px',
   },
 };
-
-/**
- * Card shapes with consistent border radius
- */
+// Defines a mapping of various card shapes (square, rounded, pill) to their respective border-radius values.
 export const CardShapes: Record<Shape, number | string> = {
   square: 0,
-  rounded: '8px', // Consistent with design system (rounded-md)
-  pill: '24px', // Larger radius for pill-shaped cards
+  rounded: '8px',
+  pill: '24px',
 };
-
-/**
- * Get card variants with consistent styling based on theme mode
- */
+// Generates a set of card style variants (default, outlined, elevated) dynamically, adapting their appearance based on the current theme mode.
 export const getCardVariants = (
   themeMode: string
 ): Record<Variant, ViewProps> => {
   const isDark = themeMode === 'dark';
-
   return {
     default: {
       backgroundColor: isDark ? 'color-gray-900' : 'color-white',
@@ -78,14 +57,9 @@ export const getCardVariants = (
     },
   };
 };
-
-/**
- * Function to get default styles for Card components
- * @param theme - Theme object from useTheme hook
- */
+// Provides default styles for the primary card container and its distinct sections (header, content, footer), adjusting colors and borders based on the active theme.
 export const getDefaultCardStyles = (theme: any): CardStyles => {
   const isDark = theme.themeMode === 'dark';
-
   return {
     container: {
       backgroundColor: isDark ? 'color-gray-900' : 'color-white',

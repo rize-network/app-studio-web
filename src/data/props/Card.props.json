@@ -1,5 +1,5 @@
 {
-  "componentDescription": "A versatile container component to display content in a structured and visually distinct block.",
+  "componentDescription": "A versatile container component designed to group and display content with various visual styles and structures.",
   "variant": {
     "type": "Variant",
     "typeValues": [
@@ -7,7 +7,7 @@
       "outlined",
       "elevated"
     ],
-    "description": "Specifies the visual style or theme of the card, determined by the 'Variant' type.",
+    "description": "Defines the visual style or theme of the card.",
     "defaultValue": "default"
   },
   "size": {
@@ -17,7 +17,7 @@
       "md",
       "lg"
     ],
-    "description": "Determines the predefined dimensions or scale of the card, controlled by the 'Size' type.",
+    "description": "Specifies the predefined dimensions or scale of the card.",
     "defaultValue": "md"
   },
   "shape": {
@@ -27,37 +27,37 @@
       "rounded",
       "pill"
     ],
-    "description": "Defines the border radius or overall form of the card, based on the 'Shape' type.",
+    "description": "Determines the border-radius or overall physical contour of the card.",
     "defaultValue": "rounded"
   },
   "children": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "Represents the primary content to be rendered inside the card's body.",
+    "typeValues": null,
+    "description": "Content to be rendered within the main body of the card.",
     "defaultValue": null
   },
   "header": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "Optional content to be displayed in the card's header section.",
+    "typeValues": null,
+    "description": "Content to be displayed as the card's header section.",
     "defaultValue": null
   },
   "footer": {
     "type": "React.ReactNode",
-    "typeValues": [],
-    "description": "Optional content to be displayed in the card's footer section.",
+    "typeValues": null,
+    "description": "Content to be displayed as the card's footer section.",
     "defaultValue": null
   },
   "isFullWidth": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "A boolean flag indicating if the card should occupy the full width of its parent container.",
+    "typeValues": null,
+    "description": "If true, the card will occupy the full available width of its parent container.",
     "defaultValue": false
   },
   "views": {
     "type": "CardStyles",
-    "typeValues": [],
-    "description": "Defines custom styling properties for various parts of the card, overriding default appearance.",
+    "typeValues": null,
+    "description": "Optional styling overrides for different parts of the card component.",
     "defaultValue": null
   }
 }

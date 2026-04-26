@@ -1,0 +1,172 @@
+{
+  "componentDescription": "Renders a group of selectable options as buttons, managing user interactions and dynamic styling.",
+  "id": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Unique identifier for the selector input.",
+    "defaultValue": "undefined"
+  },
+  "error": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates if the selector is in an error state.",
+    "defaultValue": "undefined"
+  },
+  "name": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Name attribute for the selector input.",
+    "defaultValue": "undefined"
+  },
+  "label": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Text label for the selector.",
+    "defaultValue": "undefined"
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Supplementary text displayed below the selector.",
+    "defaultValue": "undefined"
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Placeholder text shown when no option is selected.",
+    "defaultValue": "undefined"
+  },
+  "options": {
+    "type": "Option[]",
+    "typeValues": [],
+    "description": "Array of selectable options for the component. Each Option is { label: string; value: string; color?: string; }",
+    "defaultValue": "[]"
+  },
+  "isMulti": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Determines if multiple options can be selected.",
+    "defaultValue": "undefined"
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Specifies if the selector is read-only.",
+    "defaultValue": "undefined"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Specifies if the selector is disabled.",
+    "defaultValue": "undefined"
+  },
+  "onChange": {
+    "type": "(value: any) => void",
+    "typeValues": [],
+    "description": "Callback function triggered when the selected value changes.",
+    "defaultValue": "() => {}"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "default",
+      "square",
+      "rounded",
+      "pill"
+    ],
+    "description": "Defines the visual shape of the selector (e.g., rounded, square).",
+    "defaultValue": "undefined"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "outline",
+      "default",
+      "none"
+    ],
+    "description": "Specifies the visual style or variant of the selector.",
+    "defaultValue": "undefined"
+  },
+  "views": {
+    "type": "SelectorStyles",
+    "typeValues": [],
+    "description": "Custom styles to apply to different parts of the selector.",
+    "defaultValue": "{}"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Defines the size of the selector (e.g., small, medium, large).",
+    "defaultValue": "undefined"
+  },
+  "shadow": {
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": [
+      "Shadow",
+      "Elevation",
+      "ViewProps"
+    ],
+    "description": "Applies a shadow effect to the selector.",
+    "defaultValue": "undefined"
+  },
+  "isScrollable": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Determines if the options dropdown should be scrollable.",
+    "defaultValue": "undefined"
+  },
+  "value": {
+    "type": "string | Array<string>",
+    "typeValues": [],
+    "description": "The currently selected value(s) of the selector.",
+    "defaultValue": "undefined"
+  },
+  "setValue": {
+    "type": "Function",
+    "typeValues": [],
+    "description": "Function to update the selected value(s).",
+    "defaultValue": "() => {}"
+  },
+  "hide": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Boolean indicating if the dropdown is hidden.",
+    "defaultValue": "undefined"
+  },
+  "setHide": {
+    "type": "Function",
+    "typeValues": [],
+    "description": "Function to control the visibility of the dropdown.",
+    "defaultValue": "undefined"
+  },
+  "isHovered": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Boolean indicating if the selector is currently hovered.",
+    "defaultValue": "undefined"
+  },
+  "setIsHovered": {
+    "type": "Function",
+    "typeValues": [],
+    "description": "Function to update the hover state.",
+    "defaultValue": "undefined"
+  },
+  "isFocused": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Boolean indicating if the selector is currently focused.",
+    "defaultValue": "undefined"
+  },
+  "setIsFocused": {
+    "type": "Function",
+    "typeValues": [],
+    "description": "Function to update the focus state.",
+    "defaultValue": "undefined"
+  }
+}

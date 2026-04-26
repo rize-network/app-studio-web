@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'app-studio';
 import { DragAndDropViewProps } from './DragAndDrop.props';
-
+// Defines the `DragAndDropView` functional component, responsible for rendering a list of draggable items and handling basic drag interactions.
 export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
   items,
   renderItem,

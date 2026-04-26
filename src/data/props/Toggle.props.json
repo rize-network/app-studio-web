@@ -1,7 +1,7 @@
 {
-  "componentDescription": "A versatile control allowing users to switch between two states, enabling or disabling features.",
+  "componentDescription": "A versatile interactive switch to toggle states, with customizable appearance and behavior.",
   "shape": {
-    "type": "string",
+    "type": "Shape",
     "typeValues": [
       "square",
       "rounded",
@@ -17,7 +17,7 @@
       false
     ],
     "description": "Optional boolean to define the initial toggle state.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "isDisabled": {
     "type": "boolean",
@@ -26,16 +26,16 @@
       false
     ],
     "description": "Optional boolean to set the toggle component as disabled or not.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "children": {
     "type": "React.ReactNode",
-    "typeValues": "N/A",
+    "typeValues": [],
     "description": "Children property to pass React nodes inside the toggle component.",
-    "defaultValue": "N/A"
+    "defaultValue": null
   },
   "variant": {
-    "type": "string",
+    "type": "Variant",
     "typeValues": [
       "outline",
       "link",
@@ -46,8 +46,8 @@
   },
   "onToggle": {
     "type": "(isToggled: boolean) => void",
-    "typeValues": "N/A",
+    "typeValues": [],
     "description": "Optional function that triggers when the toggle state changes, receives the new state as an argument.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   }
 }

@@ -7,194 +7,91 @@ import {
   NavigationPosition,
   SlideDirection,
 } from './Carousel.type';
-
+// Defines the interface for the main Carousel component's properties, extending ViewProps and omitting its 'position' property.
 export interface CarouselProps extends Omit<ViewProps, 'position'> {
-  /**
-   * The slides to be displayed in the carousel
-   */
+  // An array of React nodes to be rendered as slides within the carousel.
   children: React.ReactNode[];
-
-  /**
-   * The index of the initially active slide
-   */
   defaultActiveIndex?: number;
-
-  /**
-   * Controlled active index
-   */
+  // The controlled active slide index. Use with 'onChange' for controlled component behavior.
   activeIndex?: number;
-
-  /**
-   * Callback when the active slide changes
-   */
+  // Callback function triggered when the active slide changes, receiving the new index.
   onChange?: (index: number) => void;
-
-  /**
-   * Whether to show navigation buttons
-   */
+  // Determines whether navigation buttons (previous/next) are displayed.
   showNavigation?: boolean;
-
-  /**
-   * Position of the navigation buttons
-   */
+  // Specifies the position of the navigation buttons relative to the carousel.
   navigationPosition?: NavigationPosition;
-
-  /**
-   * Custom previous button element
-   */
+  // Custom React node to use for the 'previous' navigation button.
   prevButton?: React.ReactNode;
-
-  /**
-   * Custom next button element
-   */
+  // Custom React node to use for the 'next' navigation button.
   nextButton?: React.ReactNode;
-
-  /**
-   * Whether to show slide indicators
-   */
+  // Determines whether slide indicators (dots) are displayed.
   showIndicators?: boolean;
-
-  /**
-   * Position of the indicators
-   */
+  // Specifies the position of the slide indicators relative to the carousel.
   indicatorPosition?: IndicatorPosition;
-
-  /**
-   * Visual style of the indicators
-   */
+  // Defines the visual style variant for the slide indicators.
   indicatorVariant?: IndicatorVariant;
-
-  /**
-   * Whether to enable auto-play
-   */
+  // Enables or disables automatic slide progression.
   autoPlay?: boolean;
-
-  /**
-   * Interval for auto-play in milliseconds
-   */
+  // The duration in milliseconds between automatic slide transitions when autoPlay is enabled.
   autoPlayInterval?: number;
-
-  /**
-   * Whether to pause auto-play on hover
-   */
+  // Pauses auto-play when the user hovers over the carousel.
   pauseOnHover?: boolean;
-
-  /**
-   * Whether to loop the carousel
-   */
+  // Enables or disables infinite looping of the carousel slides.
   infinite?: boolean;
-
-  /**
-   * Direction of slide movement
-   */
+  // Specifies the direction of slide transitions (e.g., 'left', 'right').
   direction?: SlideDirection;
-
-  /**
-   * Duration of the slide transition in milliseconds
-   */
+  // The duration of the slide transition animation in milliseconds.
   transitionDuration?: number;
-
-  /**
-   * Array of specific slide indices to use as steps
-   * When provided, the carousel will only navigate to these indices
-   */
+  // An array of indices defining specific steps or accessible slides within the carousel.
   stepIndices?: number[];
-
-  /**
-   * Custom styles for different parts of the carousel
-   */
+  // Styling properties for various parts of the carousel component.
   views?: CarouselStyles;
 }
-
+// Defines the properties for an individual CarouselSlide component.
 export interface CarouselSlideProps extends ViewProps {
-  /**
-   * The content of the slide
-   */
+  // The content to be rendered within this specific slide.
   children: React.ReactNode;
-
-  /**
-   * Whether the slide is currently active
-   */
+  // Indicates whether this slide is currently the active one.
   isActive?: boolean;
-
-  /**
-   * Index of the slide
-   */
+  // The numerical index of the slide within the carousel.
   index?: number;
-
-  /**
-   * Custom styles for the slide
-   */
+  // Styling properties for the slide container.
   views?: ViewProps;
-
-  /**
-   * Optional theme mode override ('light' or 'dark')
-   * If not provided, the component will use the theme mode from context
-   */
 }
-
-// New compound component props
+// Defines the properties for the CarouselContent container, which wraps the slides.
 export interface CarouselContentProps extends ViewProps {
-  /**
-   * The slides, expected to be CarouselItem components
-   */
+  // The child elements to be rendered within the carousel content area.
   children: React.ReactNode;
-
-  /**
-   * Custom styling for the content wrapper
-   */
+  // Styling properties specifically for the content and inner container.
   views?: Pick<CarouselStyles, 'content' | 'innerContainer'>;
 }
-
+// Defines the properties for an individual CarouselItem, a wrapper for each slide's content.
 export interface CarouselItemProps extends ViewProps {
-  /**
-   * The content of the slide
-   */
+  // The child element representing a single item within the carousel.
   children: React.ReactNode;
-
-  /**
-   * Custom styling for the item
-   */
+  // Styling properties specifically for the carousel item.
   views?: Pick<CarouselStyles, 'item'>;
 }
-
+// Defines the properties for the 'Previous' navigation button, extending ButtonProps.
 export interface CarouselPreviousProps extends Omit<ButtonProps, 'views'> {
-  /**
-   * Custom styling for the button
-   */
+  // Styling properties specifically for the previous button.
   views?: Pick<CarouselStyles, 'prevButton'>;
 }
-
+// Defines the properties for the 'Next' navigation button, extending ButtonProps.
 export interface CarouselNextProps extends Omit<ButtonProps, 'views'> {
-  /**
-   * Custom styling for the button
-   */
+  // Styling properties specifically for the next button.
   views?: Pick<CarouselStyles, 'nextButton'>;
 }
-
+// Defines the structure of the Carousel component, including its main props and sub-components.
 export interface CarouselType extends React.FC<CarouselProps> {
-  /**
-   * Individual slide component (legacy)
-   */
+  // The sub-component for rendering individual carousel slides.
   Slide: React.FC<CarouselSlideProps>;
-
-  /**
-   * Container for carousel items (compound pattern)
-   */
+  // The sub-component for the main content area of the carousel.
   Content: React.FC<CarouselContentProps>;
-
-  /**
-   * Individual carousel item (compound pattern)
-   */
+  // The sub-component for individual items/wrappers within the carousel.
   Item: React.FC<CarouselItemProps>;
-
-  /**
-   * Previous navigation button (compound pattern)
-   */
+  // The sub-component for the 'previous' navigation button.
   Previous: React.FC<CarouselPreviousProps>;
-
-  /**
-   * Next navigation button (compound pattern)
-   */
+  // The sub-component for the 'next' navigation button.
   Next: React.FC<CarouselNextProps>;
 }

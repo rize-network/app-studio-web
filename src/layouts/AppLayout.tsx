@@ -152,7 +152,7 @@ export const AppLayout = () => {
           transition="box-shadow 0.3s ease-in-out"
           height="100vh"
           overflow="auto"
-          backgroundColor="theme-background"
+          backgroundColor="color-white"
           minWidth="250px"
           maxWidth="300px"
         >
@@ -269,7 +269,7 @@ export const AppLayout = () => {
         gap={isHomePage ? 0 : 10}
         height="100vh"
         overflow="auto"
-        backgroundColor="theme-background"
+        backgroundColor="color-white"
         id="main-content"
       >
         {/* We only show SubTitle for components to avoid double titles on standalone pages */}

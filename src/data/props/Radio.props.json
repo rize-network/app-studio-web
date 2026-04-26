@@ -1,0 +1,129 @@
+{
+  "componentDescription": "A customizable radio button for user selection in forms, offering various sizes and label positions.",
+  "id": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "Optional unique identifier for the radio input.",
+    "defaultValue": "N/A"
+  },
+  "icon": {
+    "type": "React.ReactNode",
+    "typeValues": "N/A",
+    "description": "Optional React node to be displayed as an icon within or alongside the radio.",
+    "defaultValue": "N/A"
+  },
+  "error": {
+    "type": "any",
+    "typeValues": "N/A",
+    "description": "Optional error state indicator or message for the radio.",
+    "defaultValue": false
+  },
+  "name": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "The name attribute for the radio input, used for grouping radio buttons.",
+    "defaultValue": "N/A"
+  },
+  "label": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "The text label associated with the radio input.",
+    "defaultValue": "N/A"
+  },
+  "value": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "The value associated with the radio input when selected.",
+    "defaultValue": "N/A"
+  },
+  "isChecked": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Determines if the radio button is currently checked (controlled state).",
+    "defaultValue": "N/A"
+  },
+  "defaultIsSelected": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Sets the initial selected state of the radio button (uncontrolled state).",
+    "defaultValue": false
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Indicates if the radio button is read-only, preventing user interaction.",
+    "defaultValue": false
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Indicates if the radio button is disabled, making it unclickable.",
+    "defaultValue": false
+  },
+  "labelPosition": {
+    "type": "literal union",
+    "typeValues": "'left' | 'right'",
+    "description": "Specifies the position of the label relative to the radio input.",
+    "defaultValue": "right"
+  },
+  "onChange": {
+    "type": "Function",
+    "typeValues": "N/A",
+    "description": "Callback function triggered when the radio button's checked state changes.",
+    "defaultValue": "N/A"
+  },
+  "onValueChange": {
+    "type": "Function",
+    "typeValues": "N/A",
+    "description": "Callback function triggered specifically when the radio button's value changes.",
+    "defaultValue": "N/A"
+  },
+  "views": {
+    "type": "RadioStyles",
+    "typeValues": "{ radio?: ViewProps; label?: ViewProps; infoText?: ViewProps; }",
+    "description": "Custom styles or view configurations for the radio component.",
+    "defaultValue": "{ radio: {}, label: {} }"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+    "description": "Defines the visual size of the radio component.",
+    "defaultValue": "md"
+  },
+  "shadow": {
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": "N/A",
+    "description": "Applies shadow effects or elevation styles to the radio component.",
+    "defaultValue": {}
+  },
+  "infoText": {
+    "type": "string",
+    "typeValues": "N/A",
+    "description": "Optional supplementary text providing additional information about the radio.",
+    "defaultValue": "N/A"
+  },
+  "isHovered": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Internal state property indicating if the radio component is currently hovered.",
+    "defaultValue": false
+  },
+  "setIsHovered": {
+    "type": "(hovered: boolean) => void",
+    "typeValues": "N/A",
+    "description": "Setter function to update the `isHovered` state.",
+    "defaultValue": "() => {}"
+  },
+  "isSelected": {
+    "type": "boolean",
+    "typeValues": "N/A",
+    "description": "Internal state property indicating if the radio component is currently selected.",
+    "defaultValue": false
+  },
+  "setIsSelected": {
+    "type": "(selected: boolean) => void",
+    "typeValues": "N/A",
+    "description": "Setter function to update the `isSelected` state.",
+    "defaultValue": "() => {}"
+  }
+}

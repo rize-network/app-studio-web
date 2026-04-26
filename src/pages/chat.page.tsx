@@ -87,7 +87,7 @@ const ChatInputDemo = () => {
     <View
       width="100%"
       padding={40}
-      backgroundColor="theme-background"
+      backgroundColor="color-white"
       minHeight="100vh"
     >
       <Text

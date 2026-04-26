@@ -4,69 +4,30 @@ import {
   CookieConsentStyles,
   CookieConsentVariant,
 } from './CookieConsent.type';
-
-/**
- * Props for the CookieConsent component
- */
+// Defines the properties interface for the CookieConsent component, extending common view properties while omitting the 'position' property to redefine it specifically for cookie consent.
 export interface CookieConsentProps extends Omit<ViewProps, 'position'> {
-  /**
-   * Title of the cookie consent banner
-   */
+  // Specifies the main title text displayed in the cookie consent banner.
   title?: string;
-
-  /**
-   * Description text explaining cookie usage
-   */
+  // Provides the descriptive content or message shown within the cookie consent banner.
   description?: string | React.ReactNode;
-
-  /**
-   * Text for the accept button
-   */
+  // Sets the text for the button that accepts all cookies.
   acceptButtonText?: string;
-
-  /**
-   * Text for the customize button
-   */
+  // Sets the text for the button that allows users to customize cookie preferences.
   customizeButtonText?: string;
-
-  /**
-   * Position of the banner on the screen
-   */
+  // Determines the display position of the cookie consent banner on the screen.
   position?: CookieConsentPosition;
-
-  /**
-   * Visual variant of the banner
-   */
+  // Defines the visual style or layout variant of the cookie consent banner.
   variant?: CookieConsentVariant;
-
-  /**
-   * Function called when user accepts cookies
-   */
+  // Callback function executed when the user accepts all cookies.
   onAccept?: () => void;
-
-  /**
-   * Function called when user wants to customize cookie preferences
-   */
+  // Callback function executed when the user clicks the customize button.
   onCustomize?: () => void;
-
-  /**
-   * Custom styles for the component
-   */
+  // Allows overriding default styles for specific parts of the cookie consent component.
   views?: CookieConsentStyles;
-
-  /**
-   * Whether to show the customize button
-   */
+  // A boolean flag to control the visibility of the customize cookies button.
   showCustomizeButton?: boolean;
-
-  /**
-   * Cookie expiration in days
-   */
+  // Sets the duration in days for which the cookie consent decision will be stored.
   cookieExpiration?: number;
-
-  /**
-   * Optional theme mode override ('light' or 'dark')
-   * If not provided, the component will use the theme mode from context
-   */
+  // Specifies the theme mode ('light' or 'dark') to apply to the cookie consent component.
   themeMode?: 'light' | 'dark';
 }

@@ -25,8 +25,7 @@ import {
   ContextMenuItemStates,
 } from './ContextMenu.style';
 import { ChevronIcon } from '../../Icon/Icon';
-
-// Create context for the ContextMenu
+// Initializes the React Context for the Context Menu, providing default values for its state and functions. This context enables descendant components to access and update the menu's open/close state, position, active submenu, and other shared properties.
 const ContextMenuContext = createContext<ContextMenuContextType>({
   isOpen: false,
   setIsOpen: () => {},
@@ -42,8 +41,7 @@ const ContextMenuContext = createContext<ContextMenuContextType>({
   closeMenu: () => {},
   openMenu: () => {},
 });
-
-// Provider component for the ContextMenu context
+// Provides the ContextMenuContext to its children, making the context's `value` (which contains menu state and actions) available throughout the component tree. This is essential for managing the global state of the context menu.
 export const ContextMenuProvider: React.FC<{
   children: React.ReactNode;
   value: ContextMenuContextType;
@@ -54,8 +52,6 @@ export const ContextMenuProvider: React.FC<{
     </ContextMenuContext.Provider>
   );
 };
-
-// Hook to use the ContextMenu context
 export const useContextMenuContext = () => {
   const context = useContext(ContextMenuContext);
   if (!context) {
@@ -65,8 +61,6 @@ export const useContextMenuContext = () => {
   }
   return context;
 };
-
-// ContextMenu Trigger component
 export const ContextMenuTrigger: React.FC<ContextMenuTriggerProps> = ({
   children,
   disableNativeContextMenu = true,
@@ -76,49 +70,37 @@ export const ContextMenuTrigger: React.FC<ContextMenuTriggerProps> = ({
   ...props
 }) => {
   const { triggerRef, contentId, openMenu } = useContextMenuContext();
-
   const handleContextMenu = (e: React.MouseEvent) => {
     if (isDisabled) return;
-
     if (disableNativeContextMenu) {
       e.preventDefault();
     }
-
     if (openMenu) {
       openMenu(e);
     } else {
-      // Fallback to the old way if openMenu is not available
       const { setIsOpen, setPosition } = useContextMenuContext();
       setPosition({ x: e.clientX, y: e.clientY });
       setIsOpen(true);
     }
   };
-
   const triggerProps = {
-    ref: triggerRef as React.Ref<any>, // Cast needed for different element types
+    ref: triggerRef as React.Ref<any>,
     onContextMenu: handleContextMenu,
     'aria-controls': contentId,
-    'aria-haspopup': 'menu' as const, // Indicate it triggers a menu
+    'aria-haspopup': 'menu' as const,
     'data-disabled': isDisabled ? '' : undefined,
-    // Pass disabled state down if using asChild
     ...(asChild &&
       React.isValidElement(children) &&
       children.props.isDisabled === undefined && { isDisabled }),
     ...views?.container,
     ...props,
   };
-
   if (asChild && React.isValidElement(children)) {
     const child = React.Children.only(children);
-    // Need to handle ref merging if child uses its own ref
     return React.cloneElement(child, { ...triggerProps, ...child.props });
   }
-
-  // Default: wrap children in a View
   return <View {...triggerProps}>{children}</View>;
 };
-
-// ContextMenu Content component
 export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
   items,
   children,
@@ -126,7 +108,7 @@ export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
   side = 'right',
   align = 'start',
   views,
-  style, // Capture user-provided style
+  style,
   ...props
 }) => {
   const {
@@ -136,95 +118,65 @@ export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
     contentId,
     variant,
   } = useContextMenuContext();
-
   const menuRef = useRef<HTMLDivElement>(null);
-
-  // Use contentRef if provided, otherwise use local menuRef
   const ref = contentRef || menuRef;
-
-  // Use useElementPosition for intelligent positioning
-  const { ref: positionRef, relation } = useElementPosition({
-    // trackChanges: true,
-    // trackOnHover: false,
-    // trackOnScroll: true,
-    // trackOnResize: true,
-    // throttleMs: 50,
-  });
-
+  const { ref: positionRef, relation } = useElementPosition({});
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
-
-  // Calculate the position of the menu using useElementPosition
   useEffect(() => {
     if (isOpen && ref.current) {
       const pos = position || contextPosition;
       const menuWidth = ref.current.offsetWidth;
       const menuHeight = ref.current.offsetHeight;
-
-      // Get viewport dimensions for boundary checking
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-
-      // Calculate optimal position based on available space
       let finalX = pos.x;
       let finalY = pos.y;
-
-      // Use relation data if available for smarter positioning
       if (relation) {
-        // Position based on where there's more space
         if (relation.space.horizontal === 'left') {
           finalX = pos.x - menuWidth;
         } else {
           finalX = pos.x;
         }
-
         if (relation.space.vertical === 'top') {
           finalY = pos.y - menuHeight;
         } else {
           finalY = pos.y;
         }
       }
-
-      // Ensure the menu stays within viewport bounds
       if (finalX + menuWidth > viewportWidth) {
-        finalX = viewportWidth - menuWidth - 8; // 8px margin
+        finalX = viewportWidth - menuWidth - 8;
       }
       if (finalX < 8) {
-        finalX = 8; // 8px margin
+        finalX = 8;
       }
       if (finalY + menuHeight > viewportHeight) {
-        finalY = viewportHeight - menuHeight - 8; // 8px margin
+        finalY = viewportHeight - menuHeight - 8;
       }
       if (finalY < 8) {
-        finalY = 8; // 8px margin
+        finalY = 8;
       }
-
       setMenuPosition({ x: finalX, y: finalY });
     }
   }, [isOpen, contextPosition, position, side, align, ref, relation]);
-
   if (!isOpen) {
     return null;
   }
-
-  // Intelligent positioning - place at calculated optimal position
   const positionStyles: React.CSSProperties = {
-    position: 'fixed', // Use fixed to position relative to viewport
+    position: 'fixed',
     top: `${menuPosition.y}px`,
     left: `${menuPosition.x}px`,
     zIndex: 1000,
-    transformOrigin: 'top left', // Optional: for animations
+    transformOrigin: 'top left',
   };
-
   return (
     <View
       id={contentId || 'context-menu'}
       ref={ref}
       role="menu"
-      tabIndex={-1} // Important for focus management if implemented later
+      tabIndex={-1}
       borderRadius={4}
       boxShadow="0px 2px 8px rgba(0, 0, 0, 0.15)"
       overflow="hidden"
-      // Apply default content styles + custom styles + positioning
       style={{ ...positionStyles, ...style }}
       {...ContextMenuVariants[variant]}
       {...views?.menu}
@@ -238,15 +190,12 @@ export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
               <ContextMenuDivider key={`divider-${index}`} views={views} />
             );
           }
-
           return <ContextMenuItem key={item.id} item={item} views={views} />;
         })}
       {children}
     </View>
   );
 };
-
-// ContextMenu Item component
 export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
   item,
   children,
@@ -257,29 +206,21 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
 }) => {
   const { activeSubmenuId, setActiveSubmenuId, size, closeMenu } =
     useContextMenuContext();
-
-  // For data-driven approach
   if (item) {
     const [isHovered, setIsHovered] = useState(false);
     const hasSubmenu = item.items && item.items.length > 0;
     const isSubmenuActive = activeSubmenuId === item.id;
     const [submenuPosition, setSubmenuPosition] = useState({ x: 0, y: 0 });
     const disabled = item.disabled || isDisabled;
-
-    // Handle mouse enter event
     const handleMouseEnter = () => {
       setIsHovered(true);
       if (hasSubmenu) {
         setActiveSubmenuId(item.id);
       }
     };
-
-    // Handle mouse leave event
     const handleMouseLeave = () => {
       setIsHovered(false);
     };
-
-    // Handle click event
     const handleClick = () => {
       if (disabled) return;
       if (!hasSubmenu && item.onClick) {
@@ -287,44 +228,27 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
         if (closeMenu) closeMenu();
       }
     };
-
-    // Use useElementPosition for submenu positioning
-    const { ref: itemRef, relation: submenuRelation } = useElementPosition({
-      // trackChanges: true,
-      // trackOnHover: false,
-      // trackOnScroll: true,
-      // trackOnResize: true,
-      // throttleMs: 50,
-    });
-
-    // Calculate the position of the submenu with intelligent positioning
+    const { ref: itemRef, relation: submenuRelation } = useElementPosition({});
     useEffect(() => {
       if (isSubmenuActive && itemRef.current) {
         const rect = itemRef.current.getBoundingClientRect();
         const viewportWidth = window.innerWidth;
-
-        // Estimate submenu dimensions (will be refined when submenu renders)
-        const estimatedSubmenuWidth = 200; // Default submenu width
-
-        // Use relation data for smarter positioning if available
+        const estimatedSubmenuWidth = 200;
         let useLeftSide = false;
         if (submenuRelation) {
           useLeftSide = submenuRelation.space.horizontal === 'left';
         } else {
-          // Fallback to manual calculation
           const rightSpace = viewportWidth - rect.right;
           const leftSpace = rect.left;
           useLeftSide =
             rightSpace < estimatedSubmenuWidth && leftSpace > rightSpace;
         }
-
         setSubmenuPosition({
           x: useLeftSide ? rect.left - estimatedSubmenuWidth : rect.right,
           y: rect.top,
         });
       }
     }, [isSubmenuActive, item.items, submenuRelation]);
-
     return (
       <View
         ref={itemRef}
@@ -352,9 +276,7 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
             {item.icon}
           </View>
         )}
-
         <View flexGrow={1}>{item.label}</View>
-
         {hasSubmenu && (
           <View marginLeft={8} {...views?.submenuIndicator}>
             <ChevronIcon
@@ -365,7 +287,6 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
             />
           </View>
         )}
-
         {isSubmenuActive && hasSubmenu && (
           <ContextMenuContent
             items={item.items || []}
@@ -378,16 +299,12 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
       </View>
     );
   }
-
-  // For compound component pattern
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!isDisabled) {
-      onSelect?.(event); // Call the user's handler first
-      if (closeMenu) closeMenu(); // Then close the menu
+      onSelect?.(event);
+      if (closeMenu) closeMenu();
     }
   };
-
-  // Use Button for semantics and interaction state styling
   return (
     <View
       role="menuitem"
@@ -405,8 +322,6 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
     </View>
   );
 };
-
-// ContextMenu Divider component
 export const ContextMenuDivider: React.FC<ContextMenuDividerProps> = ({
   views,
   ...props
@@ -423,8 +338,6 @@ export const ContextMenuDivider: React.FC<ContextMenuDividerProps> = ({
     />
   );
 };
-
-// ContextMenu Separator component (alias for Divider with different styling options)
 export const ContextMenuSeparator: React.FC<ContextMenuSeparatorProps> = ({
   views,
   ...props
@@ -441,8 +354,6 @@ export const ContextMenuSeparator: React.FC<ContextMenuSeparatorProps> = ({
     />
   );
 };
-
-// Main ContextMenu View component
 export const ContextMenuView: React.FC<
   {
     children: React.ReactNode;
@@ -459,16 +370,12 @@ export const ContextMenuView: React.FC<
   variant = 'default',
   disableNativeContextMenu = true,
   views,
-
   themeMode: elementMode,
   ...props
 }) => {
   if (!items || items.length === 0) {
-    // If no items are provided, just render the children (for compound component pattern)
     return <>{children}</>;
   }
-
-  // For data-driven approach
   return (
     <>
       <ContextMenuTrigger
@@ -478,7 +385,6 @@ export const ContextMenuView: React.FC<
       >
         {children}
       </ContextMenuTrigger>
-
       <ContextMenuContent items={items} views={views} />
     </>
   );

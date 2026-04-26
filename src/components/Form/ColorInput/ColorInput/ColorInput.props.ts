@@ -9,100 +9,101 @@ import {
   PredefinedColor,
   ColorFormat,
 } from './ColorInput.type';
-
-// The ColorInputProps interface extends InputProps and customizes the ColorInput component, omitting the 'size' prop from InputProps.
+// Defines the public properties available for the ColorInput component, extending standard input properties while omitting the 'size' property to use a custom one.
 export interface ColorInputProps extends Omit<InputProps, 'size'> {
-  // Optional unique identifier for the ColorInput.
+  // An optional unique identifier for the input element.
   id?: string;
-  // Optional property for error handling within the ColorInput.
+  // An optional error object or message to display validation feedback.
   error?: any;
-  // Optional helper text that appears below the ColorInput.
+  // An optional text displayed below the input to provide additional guidance or error messages.
   helperText?: string;
-  // Optional name attribute for the ColorInput, useful for form submission.
+  // The name of the input element, typically used for form submission.
   name?: string;
-  // Optional label text for the ColorInput to indicate the field's purpose.
+  // The label text displayed for the color input.
   label?: string;
-  // Optional placeholder text shown inside the ColorInput when empty.
+  // The placeholder text displayed in the input field when it's empty.
   placeholder?: string;
-  // Optional flag to set the ColorInput as read-only.
+  // A boolean indicating whether the input field is read-only.
   isReadOnly?: boolean;
-  // Optional flag to indicate whether the ColorInput is disabled.
+  // A boolean indicating whether the input field is disabled.
   isDisabled?: boolean;
-  // Optional flag to autofocus the ColorInput when it mounts.
+  // A boolean indicating whether the input field should automatically gain focus on mount.
   isAutoFocus?: boolean;
-  // Optional callback function that is called when the ColorInput value changes.
+  // Callback function triggered when the input's value changes.
   onChange?: (value: string) => void;
-  // Optional callback function that is called when the ColorInput loses focus.
+  // Callback function triggered when the input loses focus.
   onBlur?: (value: any) => void;
-  // Optional callback function that is called when the ColorInput is clicked.
+  // Callback function triggered when the input is clicked.
   onClick?: () => void;
-  // Optional callback function that is called when the ColorInput gains focus.
+  // Callback function triggered when the input gains focus.
   onFocus?: () => void;
-  // Optional Size enum to specify the size of the ColorInput.
+  // The size of the color input component, utilizing a custom `Size` type.
   size?: Size;
-  // Optional shadow property that could be of type Shadow, Elevation, or CSSProperties to give depth effect.
+  // Defines the shadow style for the color input, accepting various shadow types.
   shadow?: Shadow | Elevation | ViewProps;
-  // Optional Shape enum to specify the shape of the ColorInput's corners.
+  // Defines the shape of the color input component.
   shape?: Shape;
-  // Optional custom styles to apply to the ColorInput component.
+  // Custom styles to override or extend the default appearance of the ColorInput.
   views?: ColorInputStyles;
-  // Optional controlled value of the ColorInput, driving its current state.
+  // The current value of the color input.
   value?: string;
-  // Optional default value for uncontrolled usage.
+  // The initial default value of the color input.
   defaultValue?: string;
-  // Optional Variant enum to specify the variant of the ColorInput component.
+  // The visual variant style of the color input.
   variant?: Variant;
-
-  // Color-specific props
-  // Optional array of predefined colors to show in the picker.
+  // An array of predefined colors for quick selection.
   predefinedColors?: PredefinedColor[];
-  // Optional flag to show/hide custom color input.
+  // A boolean to control the visibility of a custom color input field within the picker.
   showCustomInput?: boolean;
-  // Optional flag to show/hide recent colors.
+  // A boolean to control the visibility of recently used colors in the picker.
   showRecentColors?: boolean;
-  // Optional color format for the input value.
+  // The format in which the color value should be represented (e.g., hex, rgb).
   colorFormat?: ColorFormat;
-  // Optional maximum number of recent colors to store.
+  // The maximum number of recent colors to store and display.
   maxRecentColors?: number;
-  // Optional flag to close dropdown on color selection.
+  // A boolean indicating whether the color picker should close automatically after a color is selected.
   closeOnSelect?: boolean;
-  // Optional callback when color selection is complete.
+  // Callback function triggered when the color selection process is completed (e.g., picker closes or final selection).
   onChangeComplete?: (color: string) => void;
-  // Optional callback when dropdown opens.
+  // Callback function triggered when the color picker dropdown opens.
   onOpen?: () => void;
-  // Optional callback when dropdown closes.
+  // Callback function triggered when the color picker dropdown closes.
   onClose?: () => void;
 }
-
-// The ColorInputViewProps interface extends ColorInputProps and adds props specific to the view-layer customization of the component.
+// Extends `ColorInputProps` to include additional properties used internally by the view component, often related to state management and UI interactions.
 export interface ColorInputViewProps extends ColorInputProps {
-  // Optional property indicating whether the ColorInput is currently focused.
+  // A boolean indicating if the input is currently focused.
   isFocused?: boolean;
-  // Optional function to update the focused state of the ColorInput.
+  // Setter function to update the `isFocused` state.
   setIsFocused?: Function;
-  // Optional property indicating whether the ColorInput is currently hovered by the mouse cursor.
+  // A boolean indicating if the input is currently hovered.
   isHovered?: boolean;
-  // Optional function to update the hovered state of the ColorInput.
+  // Setter function to update the `isHovered` state.
   setIsHovered?: Function;
-  // Optional controlled value of the ColorInput, potentially used in a state management context.
+  // The current value displayed in the input field.
   value?: string;
-  // Optional function to programmatically set the value of the ColorInput.
+  // Setter function to update the input's `value` state.
   setValue?: Function;
-
-  // State from useColorInputState
+  // A boolean indicating if the color picker dropdown is currently open.
   isOpen?: boolean;
+  // The currently selected color within the picker.
   selectedColor?: string;
+  // An array of recently used colors.
   recentColors?: string[];
+  // The value of the custom color input field.
   customColor?: string;
-
-  // Handlers from useColorInputState
+  // Function to toggle the visibility of the color picker dropdown.
   handleToggle?: () => void;
+  // Function called when a color is selected from the picker.
   handleColorSelect?: (color: string) => void;
+  // Function to handle changes in the custom color input field.
   handleCustomColorChange?: (color: string) => void;
+  // Function to handle the submission of a custom color.
   handleCustomColorSubmit?: () => void;
+  // Function to handle closing the color picker dropdown.
   handleClose?: () => void;
-
-  // Refs
+  // Ref object for the DOM element that triggers the color picker dropdown.
   triggerRef?: React.RefObject<HTMLDivElement>;
+  // Ref object for the DOM element representing the color picker dropdown itself.
   dropdownRef?: React.RefObject<HTMLDivElement>;
 }

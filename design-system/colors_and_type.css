@@ -22,7 +22,7 @@
   /* ----- Theme semantic tokens (mirror app-studio ThemeProvider) ----- */
   --theme-primary:       #1D4ED8;  /* color-blue-700 — default provider primary */
   --theme-secondary:     #A855F7;  /* color-purple-500 */
-  --theme-background:    #FFFFFF;
+  --color-white:    #FFFFFF;
   --theme-surface:       #FFFFFF;
   --theme-text:          #0A0A0A;
   --theme-text-muted:    #4B5563;  /* color-gray-600 */
@@ -117,7 +117,7 @@
 }
 
 [data-theme="dark"] {
-  --theme-background: #0B0B0E;
+  --color-white: #0B0B0E;
   --theme-surface:    #111827;   /* color-gray-900 */
   --theme-text:       #F9FAFB;
   --theme-text-muted: #D1D5DB;
@@ -137,10 +137,7 @@ html { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: var(--fs-md);
-  line-height: var(--lh-md);
-  color: var(--theme-text);
-  background: var(--theme-background);
+  background: var(--color-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

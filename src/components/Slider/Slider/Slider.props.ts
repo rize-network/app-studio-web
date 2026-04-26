@@ -1,111 +1,67 @@
 import { InputProps, ViewProps } from 'app-studio';
 import { Orientation, Shape, Size, SliderStyles, Variant } from './Slider.type';
-
 export interface SliderProps
   extends Omit<InputProps, 'size' | 'onChange' | 'onDrag'> {
-  /**
-   * The minimum value of the slider
-   */
+  // Defines the minimum allowed value for the slider.
   min?: number;
-  /**
-   * The maximum value of the slider
-   */
+  // Defines the maximum allowed value for the slider.
   max?: number;
-  /**
-   * The current value of the slider
-   */
+  // The current controlled value of the slider.
   value?: number;
-  /**
-   * The default value of the slider (uncontrolled)
-   */
+  // The initial uncontrolled value of the slider.
   defaultValue?: number;
-  /**
-   * The step value for the slider
-   */
+  // The step increment for the slider's value.
   step?: number;
-  /**
-   * Array of specific values to use as steps
-   * When provided, the slider will only allow these values
-   */
+  // An array of specific values the slider can snap to.
   stepValues?: number[];
-  /**
-   * The shape of the slider
-   */
+  // Defines the visual shape of the slider's elements (e.g., round, square).
   shape?: Shape;
-  /**
-   * The size of the slider
-   */
+  // Defines the overall size of the slider component.
   size?: Size;
-  /**
-   * The variant of the slider
-   */
+  // Specifies the visual style or variant of the slider.
   variant?: Variant;
-  /**
-   * The orientation of the slider
-   */
+  // Defines whether the slider is horizontal or vertical.
   orientation?: Orientation;
-  /**
-   * Whether the slider is disabled
-   */
+  // Indicates if the slider is disabled and non-interactive.
   isDisabled?: boolean;
-  /**
-   * Whether to show the current value label
-   */
+  // Determines whether the current slider value should be displayed.
   showValue?: boolean;
-  /**
-   * If true, a tooltip showing the current value will appear on hover/drag
-   */
+  // Determines whether a tooltip showing the value appears on hover/drag.
   showTooltip?: boolean;
-  /**
-   * Custom label for the slider
-   */
+  // A label to associate with the slider.
   label?: React.ReactNode;
-  /**
-   * Helper text to display below the slider
-   */
+  // Supplementary text to provide additional context or guidance.
   helperText?: string;
-  /**
-   * Callback function when the value changes
-   */
+  // Callback function invoked when the slider's value changes.
   onChange?: (value: number) => void;
-  /**
-   * Callback function when the slider is being dragged
-   */
+  // Callback function invoked during a slider drag operation.
   onDrag?: (value: number) => void;
-
-  /**
-   * Custom styles for the slider components
-   */
+  // Custom styles for different parts of the slider component.
   views?: SliderStyles;
-  /**
-   * Shadow effect for the slider
-   */
+  // Props for rendering a shadow effect for the slider.
   shadow?: ViewProps;
-  /**
-   * Aria-label for accessibility
-   */
+  // An ARIA label for accessibility purposes.
   ariaLabel?: string;
 }
-
 export interface SliderViewProps extends SliderProps {
-  /** The current internal value being displayed/manipulated. */
+  // The current value being displayed or dragged.
   currentValue?: number;
-  /** Flag indicating if the thumb is being dragged. */
+  // Indicates if the slider thumb is currently being dragged.
   isDragging: boolean;
-  /** Flag indicating if the component is hovered. */
+  // Indicates if the slider or its thumb is currently hovered.
   isHovered: boolean;
-  /** Reference to the track element. */
+  // Ref to the slider's track DOM element.
   trackRef: React.RefObject<HTMLDivElement>;
-  /** Reference to the thumb element. */
+  // Ref to the slider's thumb DOM element.
   thumbRef: React.RefObject<HTMLDivElement>;
-  /** Handler for mouse down / touch start on the thumb. */
+  // Event handler for mouse/touch down on the thumb.
   handleThumbMouseDown: (event: React.MouseEvent | React.TouchEvent) => void;
-  /** Handler for mouse down / touch start on the track. */
+  // Event handler for mouse/touch down on the track.
   handleTrackMouseDown: (event: React.MouseEvent | React.TouchEvent) => void;
-  /** Handler for keyboard interaction on the thumb. */
+  // Event handler for keyboard interactions with the slider.
   handleKeyDown: (event: React.KeyboardEvent) => void;
-  /** The calculated position percentage for the thumb. */
+  // The calculated position of the thumb as a percentage of the track width.
   thumbPositionPercent: number;
-  /** Callback to set hover state */
+  // Function to set the hovered state of the slider.
   setIsHovered: (hovered: boolean) => void;
 }

@@ -1,64 +1,39 @@
-/**
- * Modal Styles
- *
- * Defines the styles for the Modal component following the design guidelines:
- * - Typography: Inter/Geist font, specific sizes/weights
- * - Spacing: 4px grid system
- * - Colors: Neutral palette with semantic colors
- * - Rounded corners: Consistent border radius
- * - Transitions: Subtle animations
- */
-
 import { ViewProps } from 'app-studio';
 import { Shape, Size } from './Modal.type';
-
-/**
- * Container shape configurations for the Modal component
- * Following the 4px grid system
- */
+// Defines a mapping of modal container shapes to their corresponding border-radius styles.
 export const ContainerShapes: Record<Shape, ViewProps> = {
   square: { borderRadius: 0 },
-  rounded: { borderRadius: 8 }, // radius-md
+  rounded: { borderRadius: 8 },
 };
-/**
- * Overlay alignment configurations for the Modal component
- */
+// Specifies various alignment configurations for the modal's overlay content.
 export const OverlayAlignments: Record<string, ViewProps> = {
   center: { justifyContent: 'center', alignItems: 'center' },
   top: {
     justifyContent: 'center',
     alignItems: 'flex-start',
-  }, // 16 × 4px grid
+  },
   right: {
     justifyContent: 'flex-end',
     alignItems: 'center',
-  }, // 8 × 4px grid
+  },
   bottom: {
     justifyContent: 'center',
     alignItems: 'flex-end',
-  }, // 16 × 4px grid
+  },
   left: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-  }, // 8 × 4px grid
+  },
 };
-
-/**
- * Header icon size configurations for the Modal component
- * Following the 4px grid system
- */
+// Maps predefined size categories to specific pixel values for modal header icons.
 export const HeaderIconSizes: Record<Size, number> = {
-  xs: 12, // 3 × 4px grid
-  sm: 16, // 4 × 4px grid
-  md: 20, // 5 × 4px grid
-  lg: 24, // 6 × 4px grid
-  xl: 28, // 7 × 4px grid
+  xs: 12,
+  sm: 16,
+  md: 20,
+  lg: 24,
+  xl: 28,
 };
-
-/**
- * Animation configurations for the Modal component
- * Subtle and smooth, matching shadcn/ui patterns
- */
+// Contains keyframe definitions for the modal's entry and exit animations, including opacity and transform.
 export const ModalAnimations = {
   enter: {
     opacity: [0, 1],
@@ -71,18 +46,12 @@ export const ModalAnimations = {
     transition: 'opacity 0.15s ease-in, transform 0.15s ease-in',
   },
 };
-
-/**
- * Overlay styles for the Modal component
- */
+// Provides the default background and transition styles for the modal overlay.
 export const OverlayStyles: ViewProps = {
   backgroundColor: 'color-blackAlpha-400',
   transition: 'background-color 0.2s ease',
 };
-
-/**
- * Container base styles for the Modal component
- */
+// Sets the foundational background, shadow, and focus styles for the modal's content container.
 export const ContainerBaseStyles: ViewProps = {
   backgroundColor: 'color-white',
   boxShadow: '0 10px 30px rgba(0, 0, 0, 0.12)',
@@ -92,19 +61,16 @@ export const ContainerBaseStyles: ViewProps = {
     boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
   },
 };
-
-/**
- * Typography configurations for the Modal component
- */
+// Groups typography settings for the modal's title and body text, including font size, weight, and color.
 export const ModalTypography = {
   title: {
-    fontSize: '20px', // xl
+    fontSize: '20px',
     fontWeight: '600',
     lineHeight: '28px',
     color: 'color-gray-900',
   },
   body: {
-    fontSize: '16px', // lg
+    fontSize: '16px',
     fontWeight: '400',
     lineHeight: '24px',
     color: 'color-gray-700',

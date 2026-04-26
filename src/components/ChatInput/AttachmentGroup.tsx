@@ -4,14 +4,21 @@ import { FileIcon, AudioIcon } from '../Icon/Icon';
 import { HoverCard } from '../HoverCard/HoverCard';
 import { Text } from 'app-studio';
 import { DefaultAgentChatStyles } from './ChatInput/ChatInput.style';
-
+// Defines the properties for the AttachmentGroup component, outlining the data and functions it expects.
 interface AttachmentGroupProps {
+  // An array of File objects representing the attachments to be displayed.
   files: File[];
+  // Optional ID for a sandbox environment, if applicable to the file's context.
   sandboxId?: string;
+  // A callback function invoked when a file needs to be removed, receiving the index of the file.
   onRemove: (index: number) => void;
+  // Specifies the layout style for the attachments, either 'inline' (default) or 'grid'.
   layout?: 'inline' | 'grid';
+  // Sets the maximum height for the attachment container, limiting its vertical size.
   maxHeight?: string;
+  // Determines whether visual previews (thumbnails) of the attachments should be displayed.
   showPreviews?: boolean;
+  // An object allowing custom style overrides for various sub-components within the AttachmentGroup.
   views?: {
     container?: any;
     item?: any;
@@ -20,7 +27,7 @@ interface AttachmentGroupProps {
     removeButton?: any;
   };
 }
-
+// The main AttachmentGroup functional component, responsible for displaying a list of file attachments.
 export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
   files,
   sandboxId,
@@ -30,16 +37,17 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
   showPreviews = false,
   views = {},
 }) => {
+  // Checks if there are any files to display; if not, it renders nothing to avoid empty UI.
   if (files.length === 0) {
     return null;
   }
-
+  // A memoized callback function that converts file sizes from bytes into a human-readable format (B, KB, MB).
   const formatFileSize = useCallback((bytes: number): string => {
     if (bytes < 1024) return `${bytes} B`;
     if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
     return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
   }, []);
-
+  // A memoized callback function that returns specific background and text colors based on the file's MIME type.
   const getAttachmentAccent = useCallback((file: File) => {
     if (file.type.startsWith('image/')) {
       return { backgroundColor: '#DBEAFE', color: '#2563EB' };
@@ -52,7 +60,6 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
     }
     return { backgroundColor: '#E2E8F0', color: '#475569' };
   }, []);
-
   return (
     <View
       display="flex"
@@ -72,7 +79,6 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
         const isVideo = file.type.startsWith('video/');
         const isAudio = file.type.startsWith('audio/');
         const accent = getAttachmentAccent(file);
-
         if (!showPreviews) {
           return (
             <Horizontal
@@ -144,7 +150,6 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
             </Horizontal>
           );
         }
-
         return (
           <Vertical
             key={index}
@@ -207,7 +212,6 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
                       <FileIcon widthHeight={24} color="color-black" />
                     </Center>
                   )}
-
                   {onRemove && (
                     <Button
                       {...DefaultAgentChatStyles.attachmentRemove}

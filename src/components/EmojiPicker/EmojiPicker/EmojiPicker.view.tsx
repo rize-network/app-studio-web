@@ -10,27 +10,20 @@ import {
 } from './EmojiPicker.style';
 import { TextField } from '../../Form/TextField/TextField';
 import { ChevronIcon } from '../../Icon/Icon';
-
+// Defines the presentational component for the EmojiPicker, responsible for rendering the UI based on provided props and state. It handles the layout and visual aspects without managing internal state or complex logic.
 const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
-  // Basic props
   id,
   name,
   label,
   placeholder = 'Select an emoji',
   helperText,
-
-  // Styling
   views = {},
   size = 'md',
   shape = 'default',
   variant = 'default',
-
-  // State
   error = false,
   isDisabled = false,
   isReadOnly = false,
-
-  // Emoji options
   showSearch = true,
   showCategories = true,
   showRecentEmojis = true,
@@ -46,37 +39,29 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
     'symbols',
     'flags',
   ],
-
-  // State from hook
   isOpen,
   selectedEmoji,
   recentEmojis,
   searchQuery,
   activeCategory,
   filteredEmojis,
-
-  // Handlers from hook
   handleToggle,
   handleEmojiSelect,
   handleSearchChange,
   handleCategoryChange,
-
-  // Refs
   triggerRef,
   dropdownRef,
-
-  // Other props
   onChange,
   ...props
 }) => {
+  // Utilizes the `useTheme` hook to retrieve the `getColor` utility, allowing access to theme-defined color values for consistent styling.
   const { getColor } = useTheme();
-
-  // Combine styles
+  // Calculates the final styles for the main container by merging default container styles with any custom styles provided through the `views.container` prop.
   const containerStyles = {
     ...DefaultEmojiPickerStyles.container,
     ...views?.container,
   };
-
+  // Calculates the final styles for the emoji picker's trigger element, incorporating default styles, size, shape, variant, and dynamic adjustments based on `error` or `isDisabled` states, along with custom `views.trigger` styles.
   const triggerStyles = {
     ...DefaultEmojiPickerStyles.trigger,
     ...Sizes[size],
@@ -92,30 +77,28 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
       }),
     ...views?.trigger,
   };
-
+  // Calculates the final styles for the dropdown panel by merging default dropdown styles with any custom styles provided through the `views.dropdown` prop.
   const dropdownStyles = {
     ...DefaultEmojiPickerStyles.dropdown,
     ...views?.dropdown,
   };
-
+  // Calculates the final styles for the category tabs container by merging default styles with any custom styles provided through the `views.categoryTabs` prop.
   const categoryTabsStyles = {
     ...DefaultEmojiPickerStyles.categoryTabs,
     ...views?.categoryTabs,
   };
-
+  // Calculates the final styles for the emoji grid container by merging default styles with any custom styles provided through the `views.emojiGrid` prop.
   const emojiGridStyles = {
     ...DefaultEmojiPickerStyles.emojiGrid,
     ...views?.emojiGrid,
   };
-
-  // Filter enabled categories
+  // Filters the `enabledCategories` to determine which categories should actually be displayed. The 'recent' category is only included if `showRecentEmojis` is true and there are recent emojis available.
   const availableCategories = enabledCategories.filter((category) => {
     if (category === 'recent') {
       return showRecentEmojis && recentEmojis.length > 0;
     }
     return true;
   });
-
   return (
     <View {...containerStyles} {...props}>
       {label && (
@@ -129,7 +112,6 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
           {label}
         </Text>
       )}
-
       <View
         ref={triggerRef}
         onClick={isDisabled || isReadOnly ? undefined : handleToggle}
@@ -143,7 +125,6 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
             {selectedEmoji || placeholder}
           </Text>
         </Horizontal>
-
         {!isReadOnly && !isDisabled && (
           <ChevronIcon
             widthHeight={16}
@@ -152,10 +133,9 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
           />
         )}
       </View>
-
       {isOpen && (
         <View ref={dropdownRef} {...dropdownStyles}>
-          {/* Search input */}
+          {}
           {showSearch && (
             <View
               {...DefaultEmojiPickerStyles.searchInput}
@@ -169,8 +149,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
               />
             </View>
           )}
-
-          {/* Category tabs */}
+          {}
           {showCategories && (
             <View {...categoryTabsStyles}>
               {availableCategories.map((category) => (
@@ -191,8 +170,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
               ))}
             </View>
           )}
-
-          {/* Emoji grid */}
+          {}
           <View {...emojiGridStyles}>
             {filteredEmojis.length > 0 ? (
               filteredEmojis.map((emoji, index) => (
@@ -228,7 +206,6 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
           </View>
         </View>
       )}
-
       {helperText && (
         <Text
           color={error ? 'color-red-500' : 'color-gray-600'}
@@ -241,5 +218,4 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
     </View>
   );
 };
-
 export default EmojiPickerView;

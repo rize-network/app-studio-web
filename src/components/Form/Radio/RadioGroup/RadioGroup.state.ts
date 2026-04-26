@@ -1,43 +1,27 @@
-/**
- * RadioGroup State
- *
- * Manages the state for the RadioGroup component.
- */
-
 import React from 'react';
 import { RadioGroupProps } from './RadioGroup.props';
-
-/**
- * Custom hook to manage the state of the RadioGroup component
- */
+// This file defines the `useRadioGroupState` hook, which centralizes the state management logic for the RadioGroup component. It handles the internal selected value, manages updates from both controlled and uncontrolled props, and provides a consistent way to update the selected option.
 export const useRadioGroupState = ({
   value,
   defaultValue = '',
   onChange,
 }: RadioGroupProps) => {
-  // State for the selected value
   const [selectedValue, setSelectedValue] = React.useState<string>(
     value !== undefined ? value : defaultValue
   );
-
-  // Update selectedValue when value prop changes
   React.useEffect(() => {
     if (value !== undefined) {
       setSelectedValue(value);
     }
   }, [value]);
-
-  // Handle value change
   const handleValueChange = (newValue: string) => {
     if (value === undefined) {
       setSelectedValue(newValue);
     }
-
     if (onChange) {
       onChange(newValue);
     }
   };
-
   return {
     selectedValue,
     setSelectedValue: handleValueChange,

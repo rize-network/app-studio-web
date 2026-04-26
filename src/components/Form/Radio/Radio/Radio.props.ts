@@ -1,126 +1,53 @@
-/**
- * Radio Props
- *
- * Defines the props for the Radio component following the design guidelines.
- */
-
 import React from 'react';
 import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow } from 'app-studio';
 import { RadioStyles, Size } from './Radio.type';
 import { ViewProps } from 'app-studio';
-
-/**
- * Props for the Radio component
- */
+// Defines the core properties for the Radio component, extending base input properties while customizing the 'size' property.
 export interface RadioProps extends Omit<InputProps, 'size'> {
-  /**
-   * Optional identifier for the radio element
-   */
+  // Optional unique identifier for the radio input.
   id?: string;
-
-  /**
-   * Optional custom icon for the radio element
-   */
+  // Optional React node to be displayed as an icon within or alongside the radio.
   icon?: React.ReactNode;
-
-  /**
-   * Optional error message or state
-   */
+  // Optional error state indicator or message for the radio.
   error?: any;
-
-  /**
-   * Optional name attribute for the radio element
-   */
+  // The name attribute for the radio input, used for grouping radio buttons.
   name?: string;
-
-  /**
-   * Optional label text for the radio element
-   */
+  // The text label associated with the radio input.
   label?: string;
-
-  /**
-   * Optional value for the radio element
-   */
+  // The value associated with the radio input when selected.
   value?: string;
-
-  /**
-   * Optional checked state for the radio element
-   */
+  // Determines if the radio button is currently checked (controlled state).
   isChecked?: boolean;
-
-  /**
-   * Optional default selected state for the radio element
-   */
+  // Sets the initial selected state of the radio button (uncontrolled state).
   defaultIsSelected?: boolean;
-
-  /**
-   * Optional read-only state for the radio element
-   */
+  // Indicates if the radio button is read-only, preventing user interaction.
   isReadOnly?: boolean;
-
-  /**
-   * Optional disabled state for the radio element
-   */
+  // Indicates if the radio button is disabled, making it unclickable.
   isDisabled?: boolean;
-
-  /**
-   * Optional position for the label
-   */
+  // Specifies the position of the label relative to the radio input.
   labelPosition?: 'left' | 'right';
-
-  /**
-   * Optional callback for change events
-   */
+  // Callback function triggered when the radio button's checked state changes.
   onChange?: Function;
-
-  /**
-   * Optional callback for value change events
-   */
+  // Callback function triggered specifically when the radio button's value changes.
   onValueChange?: Function;
-
-  /**
-   * Optional custom styles for the radio element
-   */
+  // Custom styles or view configurations for the radio component.
   views?: RadioStyles;
-
-  /**
-   * Optional size for the radio element
-   */
+  // Defines the visual size of the radio component.
   size?: Size;
-
-  /**
-   * Optional shadow for the radio element
-   */
+  // Applies shadow effects or elevation styles to the radio component.
   shadow?: Shadow | Elevation | ViewProps;
-
-  /**
-   * Optional info text for the radio element
-   */
+  // Optional supplementary text providing additional information about the radio.
   infoText?: string;
 }
-
-/**
- * Props for the Radio view component
- */
+// Extends RadioProps with additional properties specific to the presentational view layer of the Radio component, often for internal state management.
 export interface RadioViewProps extends RadioProps {
-  /**
-   * Optional hover state for the radio element
-   */
+  // Internal state property indicating if the radio component is currently hovered.
   isHovered?: boolean;
-
-  /**
-   * Optional setter for the hover state
-   */
+  // Setter function to update the `isHovered` state.
   setIsHovered?: (hovered: boolean) => void;
-
-  /**
-   * Optional selected state for the radio element
-   */
+  // Internal state property indicating if the radio component is currently selected.
   isSelected?: boolean;
-
-  /**
-   * Optional setter for the selected state
-   */
+  // Setter function to update the `isSelected` state.
   setIsSelected?: (selected: boolean) => void;
 }

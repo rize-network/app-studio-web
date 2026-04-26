@@ -1,26 +1,14 @@
-/**
- * Radio Types
- *
- * Defines the types for the Radio component following the design guidelines.
- */
-
 import { ViewProps } from 'app-studio';
-
-/**
- * Size options for the Radio component
- */
+// Defines the possible size options for the Radio component, allowing for visual variations from extra small to extra large.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-
-/**
- * Style customization options for the Radio component
- */
+// Defines the type for custom styling properties that can be applied to different parts of the Radio component.
 export type RadioStyles = {
+  // Specifies styling properties for the main radio button element itself.
   radio?: ViewProps;
+  // Specifies styling properties for the label text associated with the radio button.
   label?: ViewProps;
+  // Specifies styling properties for any additional informational text displayed with the radio button.
   infoText?: ViewProps;
 };
-
-/**
- * Variant options for the Radio component
- */
+// Defines the two possible states (variants) a Radio component can have: selected or unselected.
 export type Variant = 'selected' | 'unselected';

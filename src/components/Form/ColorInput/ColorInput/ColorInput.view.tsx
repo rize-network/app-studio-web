@@ -11,64 +11,49 @@ import {
 import { TextField } from '../../TextField/TextField';
 import { ChevronIcon } from '../../../Icon/Icon';
 import { Label } from '../../Label/Label';
-
+// Defines the ColorInputView functional component, responsible for rendering the visual structure and interaction logic of the color input. It receives ColorInputViewProps to configure its appearance and behavior.
 const ColorInputView: React.FC<ColorInputViewProps> = ({
-  // Basic props
   id,
   name,
   label,
   placeholder = 'Select a color',
   helperText,
-
-  // Styling
   views = {},
   size = 'md',
   shape = 'default',
   variant = 'default',
   shadow,
-
-  // State
   error = false,
   isDisabled = false,
   isReadOnly = false,
   isFocused = false,
   isHovered = false,
-
-  // Color options
   predefinedColors = DefaultColorPalette,
   showCustomInput = true,
   showRecentColors = true,
-
-  // State from hook
   isOpen = false,
   selectedColor = '',
   recentColors = [],
   customColor = '',
-
-  // Handlers from hook
   handleToggle = () => {},
   handleColorSelect = () => {},
   handleCustomColorChange = () => {},
   handleCustomColorSubmit = () => {},
   setIsFocused = () => {},
   setIsHovered = () => {},
-
-  // Refs
   triggerRef,
   dropdownRef,
-
-  // Other props
   onChange,
   ...props
 }) => {
+  // Initializes the getColor function from the useTheme hook, allowing access to theme-defined colors for consistent styling.
   const { getColor } = useTheme();
-
-  // Combine styles
+  // Combines default container styles with any custom styles provided through the views.container prop.
   const containerStyles = {
     ...DefaultColorInputStyles.container,
     ...views?.container,
   };
-
+  // Combines default trigger styles with dynamic styles based on size, shape, variant, and component states such as error, disabled, focused, and hovered.
   const triggerStyles = {
     ...DefaultColorInputStyles.trigger,
     ...Sizes[size],
@@ -85,28 +70,26 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
     ...views?.trigger,
     ...(shadow && shadow),
   };
-
+  // Combines default dropdown styles with any custom styles provided through the views.dropdown prop.
   const dropdownStyles = {
     ...DefaultColorInputStyles.dropdown,
     ...views?.dropdown,
   };
-
+  // Combines default color grid styles with any custom styles provided through the views.colorGrid prop for displaying predefined color swatches.
   const colorGridStyles = {
     ...DefaultColorInputStyles.colorGrid,
     ...views?.colorGrid,
   };
-
+  // Combines default recent colors section styles with any custom styles provided through the views.recentColors prop.
   const recentColorsStyles = {
     ...DefaultColorInputStyles.recentColors,
     ...views?.recentColors,
   };
-
-  // Get display color for the selected color swatch
+  // Determines the color to be displayed in the current color swatch, defaulting to 'color-gray-200' if no color is currently selected.
   const displayColor = selectedColor || 'color-gray-200';
-
   return (
     <View {...containerStyles} {...props}>
-      {/* Label */}
+      {}
       {label && (
         <Label
           htmlFor={id}
@@ -118,8 +101,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           {label}
         </Label>
       )}
-
-      {/* Color Input Trigger */}
+      {}
       <View
         ref={triggerRef}
         onClick={isDisabled || isReadOnly ? undefined : handleToggle}
@@ -136,8 +118,8 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
         gap={8}
         {...triggerStyles}
       >
-        {/* <Horizontal alignItems="center" gap={8}> */}
-        {/* Color preview swatch */}
+        {}
+        {}
         <View
           width="20px"
           height="20px"
@@ -147,15 +129,8 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           borderStyle="solid"
           borderColor="color-gray-300"
         />
-        {/* <Text
-            color={selectedColor ? 'color-gray-800' : 'color-gray-500'}
-            fontSize="inherit"
-            {...views?.text}
-          >
-            {selectedColor || placeholder}
-          </Text> */}
-        {/* </Horizontal> */}
-
+        {}
+        {}
         {!isReadOnly && !isDisabled && (
           <ChevronIcon
             widthHeight={16}
@@ -164,11 +139,10 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           />
         )}
       </View>
-
-      {/* Dropdown */}
+      {}
       {isOpen && (
         <View ref={dropdownRef} {...dropdownStyles}>
-          {/* Predefined colors grid */}
+          {}
           <View {...colorGridStyles}>
             {predefinedColors.map((colorOption, index) => (
               <View
@@ -196,8 +170,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
               />
             ))}
           </View>
-
-          {/* Recent colors */}
+          {}
           {showRecentColors && recentColors.length > 0 && (
             <Vertical gap={8} marginTop="16px">
               <Text fontSize="12px" fontWeight="500" color="color-gray-600">
@@ -231,8 +204,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
               </Horizontal>
             </Vertical>
           )}
-
-          {/* Custom color input */}
+          {}
           {showCustomInput && (
             <Vertical gap={8} marginTop="16px">
               <Text fontSize="12px" fontWeight="500" color="color-gray-600">
@@ -265,8 +237,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           )}
         </View>
       )}
-
-      {/* Helper text */}
+      {}
       {helperText && (
         <Text
           fontSize="12px"
@@ -277,8 +248,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           {helperText}
         </Text>
       )}
-
-      {/* Error message */}
+      {}
       {error && typeof error === 'string' && (
         <Text
           fontSize="12px"
@@ -292,5 +262,4 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
     </View>
   );
 };
-
 export default ColorInputView;

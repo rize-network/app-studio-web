@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback, ReactNode } from 'react';
 import { ChartData, ChartDataPoint } from './Chart.type';
 import { DEFAULT_COLORS } from './Chart.style';
-
 export interface ChartStateProps {
   data?: ChartData;
   dataPoints?: ChartDataPoint[];
@@ -9,7 +8,7 @@ export interface ChartStateProps {
   animationDuration?: number;
   showTooltips?: boolean;
 }
-
+// This file defines the `ChartStateProps` interface and implements the `useChartState` custom hook. This hook centralizes all state management and derived logic for the Chart component, including animation progress, tooltip visibility and positioning, data processing, and user interaction handlers for series toggling, offering a comprehensive and reusable state layer.
 export const useChartState = ({
   data,
   dataPoints,
@@ -17,10 +16,7 @@ export const useChartState = ({
   animationDuration = 500,
   showTooltips = true,
 }: ChartStateProps) => {
-  // State for animation progress (0 to 1)
   const [animationProgress, setAnimationProgress] = useState(animated ? 0 : 1);
-
-  // State for tooltip
   const [tooltip, setTooltip] = useState<{
     visible: boolean;
     x: number;
@@ -32,46 +28,30 @@ export const useChartState = ({
     y: 0,
     content: null,
   });
-
-  // Reference to animation frame
   const animationRef = useRef<number | null>(null);
-
-  // Reference to chart container
   const containerRef = useRef<HTMLDivElement>(null);
-
-  // Handle animation
   useEffect(() => {
     if (!animated) {
       setAnimationProgress(1);
       return;
     }
-
     const startTime = Date.now();
-
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / animationDuration, 1);
-
       setAnimationProgress(progress);
-
       if (progress < 1) {
         animationRef.current = requestAnimationFrame(animate);
       }
     };
-
     animationRef.current = requestAnimationFrame(animate);
-
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
   }, [animated, animationDuration]);
-
-  // State for hidden series
   const [hiddenSeries, setHiddenSeries] = useState<Set<string>>(new Set());
-
-  // Toggle series visibility
   const toggleSeries = useCallback((seriesName: string) => {
     setHiddenSeries((prev) => {
       const next = new Set(prev);
@@ -83,8 +63,6 @@ export const useChartState = ({
       return next;
     });
   }, []);
-
-  // Process data for charts
   const processedData = useCallback(() => {
     if (data) {
       return {
@@ -96,7 +74,6 @@ export const useChartState = ({
         })),
       };
     }
-
     if (dataPoints) {
       return dataPoints.map((point, index) => ({
         ...point,
@@ -104,15 +81,11 @@ export const useChartState = ({
         hidden: hiddenSeries.has(point.label),
       }));
     }
-
     return null;
   }, [data, dataPoints, hiddenSeries]);
-
-  // Handle tooltip show
   const showTooltip = useCallback(
     (x: number, y: number, content: ReactNode) => {
       if (!showTooltips) return;
-
       setTooltip({
         visible: true,
         x,
@@ -122,25 +95,19 @@ export const useChartState = ({
     },
     [showTooltips]
   );
-
-  // Handle tooltip hide
   const hideTooltip = useCallback(() => {
     setTooltip((prev) => ({
       ...prev,
       visible: false,
     }));
   }, []);
-
-  // Calculate chart dimensions
   const getChartDimensions = useCallback(() => {
     if (!containerRef.current) {
       return { width: 0, height: 0 };
     }
-
     const { width, height } = containerRef.current.getBoundingClientRect();
     return { width, height };
   }, []);
-
   return {
     animationProgress,
     tooltip,

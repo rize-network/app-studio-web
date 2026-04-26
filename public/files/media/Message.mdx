@@ -1,0 +1,299 @@
+# Message
+
+Displays various types of messages to users with customizable content, actions, and automatic dismissal.
+
+### **Import**
+```tsx
+import { Message } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { showMessage } from '../Message/Message.store';
+// This is a functional component named 'DefaultDemo' that renders a Button component from the '../../Button/Button' path.
+export const DefaultDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'success',
+          'Scheduled: Catch up',
+          'Friday, February 10, 2023 at 5:57 PM'
+        )
+      }
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+
+### **subtitle**
+The secondary text content displayed below the title.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+
+import { showMessage } from '../Message/Message.store';
+
+export const SubtitleDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'error',
+          'Error Message',
+          'An error occurred while processing your request.'
+        )
+      }
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+
+### **variant**
+The type of message, dictating its visual style and associated icon.
+
+- **Type:** `MessageType`
+- **Possible Values:** `info, warning, error, success`
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+import { showMessage } from '../Message/Message.store';
+import { MessageType } from '../Message/Message.type';
+
+export const VariantDemo = () => {
+  return (
+    <Horizontal gap={10}>
+      {['info', 'error', 'warning', 'success'].map((variant, index) => (
+        <Button
+          key={index}
+          onClick={() =>
+            showMessage(
+              variant as MessageType,
+              `${variant.toUpperCase()} toast here!`
+            )
+          }
+          isAuto
+        >
+          Show {variant}
+        </Button>
+      ))}
+    </Horizontal>
+  );
+};
+```
+
+### **title**
+The main title or heading of the message.
+
+- **Type:** `string`
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+
+import { showMessage } from '../Message/Message.store';
+
+export const TitleDemo = () => {
+  return (
+    <Button
+      onClick={() => showMessage('info', 'Here is some important information.')}
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+
+### **isClosable**
+Determines if a close button is shown, allowing the user to manually dismiss the message.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+
+import { showMessage } from '../Message/Message.store';
+
+export const IsClosableDemo = () => {
+  return (
+    <>
+      <Horizontal gap={10} position="relative">
+        <Button
+          onClick={() =>
+            showMessage(
+              'success',
+              'Scheduled: Catch up',
+              'Friday, February 10, 2023 at 5:57 PM',
+              {
+                isClosable: true,
+              }
+            )
+          }
+        >
+          Close Button
+        </Button>
+      </Horizontal>
+    </>
+  );
+};
+```
+
+### **action**
+A callback function to be executed when the message's action button is clicked.
+
+- **Type:** `Function`
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { showMessage } from '../Message/Message.store';
+// Defines the `ActionDemo` functional component that encapsulates the button interaction logic.
+export const ActionDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'success',
+          'Scheduled: Catch up',
+          'Friday, February 10, 2023 at 5:57 PM'
+        )
+      }
+      isAuto
+    >
+      Add Calendar
+    </Button>
+  );
+};
+```
+
+### **showIcon**
+Controls the visibility of the predefined icon associated with the message variant.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+
+import { showMessage } from '../Message/Message.store';
+
+export const ShowIconDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'warning',
+          'Scheduled: Catch up',
+          'Friday, February 10, 2023 at 5:57 PM',
+          {
+            showIcon: true,
+          }
+        )
+      }
+    >
+      Add Calendar
+    </Button>
+  );
+};
+```
+
+### **timeout**
+The duration in milliseconds after which the message automatically hides itself (if not closable).
+
+- **Type:** `number`
+- **Default:** `3000`
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+
+import { showMessage } from '../Message/Message.store';
+
+export const TimeoutDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'info',
+          'Info Message',
+          'Here is some important information.',
+          {
+            timeout: 1000,
+          }
+        )
+      }
+    >
+      Add Calendar
+    </Button>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './action';
+export * from './default';
+export * from './isClosable';
+export * from './showIcon';
+export * from './styles';
+export * from './subtitle';
+export * from './timeout';
+export * from './title';
+export * from './variant';
+```
+
+### **Styles**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+
+import { showMessage } from '../Message/Message.store';
+
+export const StylesDemo = () => {
+  return (
+    <Button
+      onClick={() =>
+        showMessage(
+          'success',
+          'Scheduled: Catch up',
+          'Friday, February 10, 2023 at 5:57 PM',
+          {
+            action: () => {},
+            actionText: 'Try again',
+            views: {
+              container: {
+                borderColor: 'black',
+                backgroundColor: '#f0f0f0',
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+              },
+              title: { color: 'black' },
+              subtitle: { color: 'black' },
+              actionText: { color: 'color-black', borderColor: 'black' },
+            },
+          }
+        )
+      }
+    >
+      Show Toast
+    </Button>
+  );
+};
+```
+

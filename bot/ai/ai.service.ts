@@ -27,18 +27,20 @@ export class AiService {
   private config: any;
   private readonly MAX_RETRIES = 3;
   private readonly RETRY_DELAY = 3000; // 1 second
-  openRouter: OpenAIConnector;
+  private _openRouter?: OpenAIConnector;
 
   constructor() {
     this.config = ConfigService;
-    this.openRouter = new OpenAIConnector({
-      baseURL: 'https://openrouter.ai/api/v1',
-      apiKey: process.env['OPENROUTER_API_KEY'] as string,
-      // defaultHeaders: {
-      //   "HTTP-Referer": "<YOUR_SITE_URL>", // Optional. Site URL for rankings on openrouter.ai.
-      //   "X-Title": "<YOUR_SITE_NAME>", // Optional. Site title for rankings on openrouter.ai.
-      // }
-    });
+  }
+
+  get openRouter(): OpenAIConnector {
+    if (!this._openRouter) {
+      this._openRouter = new OpenAIConnector({
+        baseURL: 'https://openrouter.ai/api/v1',
+        apiKey: process.env['OPENROUTER_API_KEY'] as string,
+      });
+    }
+    return this._openRouter;
   }
 
   // Helper function to add language instruction to messages

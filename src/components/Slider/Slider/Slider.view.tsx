@@ -10,7 +10,7 @@ import {
   EnhancedSliderSizes,
   OrientationStyles,
 } from './Slider.style';
-
+// Defines the SliderView functional component, which renders the visual representation of the slider, memoized for performance to prevent unnecessary re-renders.
 export const SliderView: React.FC<SliderViewProps> = React.memo(
   ({
     min = 0,
@@ -55,20 +55,22 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
     onDrag,
     ...props
   }) => {
-    // Pure app-studio tokens — no hex resolution. App-studio handles theme-mode
-    // lookup itself; we just pass `themeMode={elementMode}` to the root.
+    // Assigns the `backgroundColor` prop to `themeColor` for consistent styling across different parts of the slider.
     const themeColor = backgroundColor;
+    // Defines a standard color to be used when the slider is in a disabled state.
     const disabledColor = 'theme-disabled';
+    // Determines the default background color of the slider track based on the selected `variant` from `SliderVariants`.
     const trackColor = SliderVariants[variant].backgroundColor as string;
+    // Sets the color for the active or filled portion of the track, defaulting to `disabledColor` if the slider is `isDisabled`.
     const activeTrackColor = isDisabled ? disabledColor : themeColor;
-
+    // A boolean flag indicating whether the slider's `orientation` is set to 'vertical', influencing layout and styling.
     const isVertical = orientation === 'vertical';
+    // Calculates the track's cross-axis size and the thumb's size based on the slider's `size` property, with fallbacks to default values.
     const { trackCrossAxisSize, thumbSize } = EnhancedSliderSizes[size] || {
       trackCrossAxisSize: SliderSizes[size].height as number,
       thumbSize: (ThumbSizes[size].width as number) || 16,
     };
-
-    // For backward compatibility with the old implementation
+    // Defines the JSX structure for a 'legacy' slider view, typically used for horizontal sliders without advanced tooltip functionality.
     const legacyView = (
       <Vertical
         width="100%"
@@ -89,7 +91,6 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             )}
           </Horizontal>
         )}
-
         <View
           ref={trackRef}
           position="relative"
@@ -105,7 +106,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
           {...shadow}
           {...views.track}
         >
-          {/* Step markers */}
+          {}
           {stepValues && stepValues.length > 0 && (
             <>
               {stepValues.map((stepValue) => {
@@ -128,8 +129,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
               })}
             </>
           )}
-
-          {/* Progress bar */}
+          {}
           <View
             position="absolute"
             top={0}
@@ -142,8 +142,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             {...views.progress}
             {...views.filledTrack}
           />
-
-          {/* Thumb */}
+          {}
           <View
             ref={thumbRef}
             role="slider"
@@ -176,7 +175,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             {...ThumbSizes[size]}
             {...views.thumb}
           >
-            {/* Tooltip */}
+            {}
             {showTooltip && (isHovered || isDragging) && (
               <View
                 position="absolute"
@@ -200,21 +199,17 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             )}
           </View>
         </View>
-
         {helperText && <HelperText>{helperText}</HelperText>}
       </Vertical>
     );
-
-    // Enhanced view with vertical support and other features
     const enhancedView = (
       <Center
-        // Use Center to easily manage orientation layout
         {...OrientationStyles[orientation]}
-        position="relative" // Needed for absolute positioning of thumb/tooltip
+        position="relative"
         themeMode={elementMode}
         onMouseEnter={() => !isDisabled && setIsHovered(true)}
         onMouseLeave={() => !isDisabled && setIsHovered(false)}
-        {...props} // Spread remaining view props
+        {...props}
         {...views?.container}
       >
         {label && (
@@ -234,13 +229,11 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             )}
           </Horizontal>
         )}
-
         <View
           ref={trackRef}
           position="relative"
           borderRadius={trackCrossAxisSize / 2}
           backgroundColor={isDisabled ? disabledColor : trackColor}
-          // (track stays neutral when enabled — only the filled portion uses themeColor)
           cursor={isDisabled ? 'not-allowed' : 'pointer'}
           width={isVertical ? `${trackCrossAxisSize}px` : '100%'}
           height={isVertical ? '100%' : `${trackCrossAxisSize}px`}
@@ -248,7 +241,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
           onTouchStart={handleTrackMouseDown}
           {...views?.track}
         >
-          {/* Step markers */}
+          {}
           {stepValues && stepValues.length > 0 && (
             <>
               {stepValues.map((stepValue) => {
@@ -279,7 +272,6 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
               })}
             </>
           )}
-
           <View
             position="absolute"
             borderRadius={trackCrossAxisSize / 2}
@@ -298,9 +290,8 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
                   width: `${thumbPositionPercent}%`,
                 })}
             {...views?.filledTrack}
-            {...views?.progress} // For backward compatibility
+            {...views?.progress}
           />
-
           <View
             ref={thumbRef}
             role="slider"
@@ -369,13 +360,9 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             )}
           </View>
         </View>
-
         {helperText && <HelperText marginTop={8}>{helperText}</HelperText>}
       </Center>
     );
-
-    // Use the enhanced view if orientation is vertical or showTooltip is true
-    // Otherwise use the legacy view for backward compatibility
     return isVertical || showTooltip ? enhancedView : legacyView;
   }
 );

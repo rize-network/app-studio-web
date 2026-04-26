@@ -9,35 +9,39 @@ import {
   DrawerFooterProps,
 } from './Drawer.props';
 import { DrawerPlacements, DrawerSizes } from './Drawer.style';
-
+// Renders a semi-transparent overlay that covers the screen when the drawer is open, handling background interaction and closing behavior.
 export const DrawerOverlay: React.FC<DrawerOverlayProps> = ({
+  // Indicates whether the drawer overlay is currently visible.
   isOpen,
+  // Callback function executed when the overlay or the Escape key is used to close the drawer.
   onClose,
+  // Boolean flag to prevent the drawer from closing when the overlay is clicked or the Escape key is pressed.
   isClosePrevented,
+  // Applies a CSS blur effect to the background content behind the overlay.
   blur,
+  // The content to be rendered within the DrawerOverlay, typically the DrawerContainer itself.
   children,
   ...props
 }) => {
+  // Handles clicks on the overlay to close the drawer, unless closing is explicitly prevented.
   const handleClick = () => {
     if (!isClosePrevented) onClose();
   };
-
+  // A React hook to add and remove an event listener for keyboard input, specifically handling the 'Escape' key to close the drawer.
   React.useEffect(() => {
+    // Callback function that checks if the 'Escape' key was pressed while the drawer is open and closes it if not prevented.
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isOpen && !isClosePrevented) {
         onClose();
       }
     };
-
     if (isOpen) {
       document.addEventListener('keydown', handleKeyDown);
     }
-
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, isClosePrevented, onClose]);
-
   return (
     <View
       data-testid="drawer-overlay"
@@ -62,7 +66,6 @@ export const DrawerOverlay: React.FC<DrawerOverlayProps> = ({
     </View>
   );
 };
-
 export const DrawerContainer: React.FC<DrawerContainerProps> = ({
   placement = 'right',
   size = 'md',
@@ -73,7 +76,6 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
-
   const isVertical = placement === 'top' || placement === 'bottom';
   const dimensionProps = isVertical
     ? {
@@ -84,7 +86,6 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
         width: size === 'full' ? '100vw' : DrawerSizes[size] || size,
         maxWidth: '100vw',
       };
-
   const borderRadius =
     placement === 'left'
       ? '0 12px 12px 0'
@@ -93,7 +94,6 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
       : placement === 'top'
       ? '0 0 12px 12px'
       : '12px 12px 0 0';
-
   const transform = isOpen
     ? 'translate3d(0, 0, 0)'
     : placement === 'left'
@@ -103,7 +103,6 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
     : placement === 'top'
     ? 'translate3d(0, -100%, 0)'
     : 'translate3d(0, 100%, 0)';
-
   return (
     <Vertical
       position="absolute"
@@ -122,7 +121,6 @@ export const DrawerContainer: React.FC<DrawerContainerProps> = ({
     </Vertical>
   );
 };
-
 export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
   children,
   onClose,
@@ -134,7 +132,6 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
       <CloseIcon widthHeight={20} color="color-gray-500" />
     </View>
   );
-
   return (
     <Horizontal
       paddingHorizontal={24}
@@ -151,7 +148,6 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
     </Horizontal>
   );
 };
-
 export const DrawerBody: React.FC<DrawerBodyProps> = ({
   children,
   ...props
@@ -162,7 +158,6 @@ export const DrawerBody: React.FC<DrawerBodyProps> = ({
     </Vertical>
   );
 };
-
 export const DrawerFooter: React.FC<DrawerFooterProps> = ({
   children,
   ...props

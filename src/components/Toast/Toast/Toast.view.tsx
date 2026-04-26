@@ -8,8 +8,7 @@ import { ToastProps, ToastContainerProps } from './Toast.props';
 import { Themes, ToastPositions } from './Toast.style';
 import { useToastStore } from './Toast.store';
 import { ToastPosition } from './Toast.type';
-
-// Individual Toast component
+// Defines the ToastView functional component, responsible for rendering an individual toast notification based on the provided properties.
 export const ToastView: React.FC<ToastProps> = ({
   variant,
   title,
@@ -27,23 +26,16 @@ export const ToastView: React.FC<ToastProps> = ({
   isVisible = true,
   themeMode: elementMode,
 }) => {
-  // We don't need the auto-close timer here anymore as it's handled in the store
-
+  // Initializes the `Theme` variable, prioritizing a custom `theme` if provided, otherwise defaulting to the `Themes` object for styling.
   const Theme = theme ?? Themes;
-
-  // Get the appropriate icon based on the variant
+  // A helper function that determines and returns the appropriate icon component based on the `variant` of the toast or a `customIcon`.
   const getIcon = () => {
-    // If a custom icon is provided, use it
     if (customIcon !== undefined) {
       return customIcon;
     }
-
-    // Otherwise use the default icon based on variant
-    // Get icon color from Themes configuration
     const iconColor = variant
       ? Themes[variant]?.icon?.color
       : Themes.info.icon.color;
-
     switch (variant) {
       case 'info':
         return <InfoIcon widthHeight={20} color={iconColor} />;
@@ -59,17 +51,14 @@ export const ToastView: React.FC<ToastProps> = ({
         return <InfoIcon widthHeight={20} color={Themes.info.icon.color} />;
     }
   };
-
-  // If a custom render function is provided, use it
   if (render) {
     return <>{render({ id: id || '', onClose })}</>;
   }
-
-  // Determine appropriate ARIA role and live region based on variant
+  // Sets the ARIA `role` attribute to 'alert' for error toasts, indicating an important and time-sensitive message, or 'status' for others.
   const ariaRole = variant === 'error' ? 'alert' : 'status';
+  // Determines the ARIA `aria-live` attribute, setting it to 'assertive' for error or warning toasts to announce changes immediately, or 'polite' for less urgent updates.
   const ariaLive =
     variant === 'error' || variant === 'warning' ? 'assertive' : 'polite';
-
   return (
     <Horizontal
       role={ariaRole}
@@ -98,36 +87,33 @@ export const ToastView: React.FC<ToastProps> = ({
           {getIcon()}
         </View>
       )}
-
       <Vertical gap={4} flex="1">
         <Text
           size="sm"
           lineHeight="20px"
-          fontWeight="600" // Semi-bold for better readability
+          fontWeight="600"
           color={Theme[variant].content.color}
           backgroundColor={Theme[variant].container.backgroundColor}
           {...views?.title}
         >
           {title}
         </Text>
-
         {description && (
           <Text
             size="xs"
             lineHeight="18px"
             color={Theme[variant].content.color}
-            fontWeight="400" // Regular weight
+            fontWeight="400"
             backgroundColor={Theme[variant].container.backgroundColor}
             {...views?.description}
           >
             {description}
           </Text>
         )}
-
         {action && actionText && (
           <Text
             size="sm"
-            fontWeight="600" // Semi-bold for better readability
+            fontWeight="600"
             marginTop="6px"
             cursor="pointer"
             color={Theme[variant].content.color}
@@ -144,7 +130,6 @@ export const ToastView: React.FC<ToastProps> = ({
           </Text>
         )}
       </Vertical>
-
       {isClosable && (
         <View
           as="button"
@@ -152,7 +137,7 @@ export const ToastView: React.FC<ToastProps> = ({
           backgroundColor="transparent"
           border="none"
           cursor="pointer"
-          padding="4px" // 1 × 4px grid
+          padding="4px"
           marginLeft="8px"
           marginTop="-2px"
           marginRight="-4px"
@@ -171,8 +156,6 @@ export const ToastView: React.FC<ToastProps> = ({
     </Horizontal>
   );
 };
-
-// Toast Container component
 export const ToastContainer: React.FC<ToastContainerProps> = ({
   position = 'top-right',
   gap = 8,
@@ -180,8 +163,6 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
   containerStyle,
 }) => {
   const { toasts, remove } = useToastStore();
-
-  // Group toasts by position
   const toastsByPosition = React.useMemo(() => {
     const grouped: Record<ToastPosition, typeof toasts> = {
       top: [],
@@ -191,26 +172,18 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
       'bottom-right': [],
       'bottom-left': [],
     };
-
-    // Group toasts by their position or the container's default position
     toasts.forEach((toast: any) => {
       const pos = toast.position || position;
       grouped[pos as ToastPosition].push(toast);
     });
-
-    // Apply limits to each position group
     Object.keys(grouped).forEach((pos) => {
       grouped[pos as ToastPosition] = grouped[pos as ToastPosition].slice(
         -limit
       );
     });
-
     return grouped;
   }, [toasts, position, limit]);
-
-  // Get toasts for the current position
   const visibleToasts = toastsByPosition[position];
-
   return (
     <View
       position="fixed"

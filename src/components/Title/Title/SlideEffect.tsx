@@ -1,63 +1,81 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { Element, Text as DefaultText, Animation } from 'app-studio';
-
+// Defines the properties accepted by the SlideEffect component.
 interface SlideEffectProps {
+  // The text content to be displayed and animated. This is a required prop.
   text: string;
+  // The duration of the slide animation for each word in milliseconds. Optional, defaults to 500ms.
   duration?: number;
+  // The direction of the slide animation, either 'up' or 'down'. Optional, defaults to 'up'.
   direction?: 'up' | 'down';
+  // The delay between each word's animation start, creating a staggered effect. Optional, defaults to 50ms.
   stagger?: number;
+  // Determines if words animate sequentially (one after another) or in parallel with staggered delays. Optional, defaults to false.
   sequential?: boolean;
+  // Custom CSS properties to apply to the overall text container. Optional.
   textStyle?: React.CSSProperties;
+  // The HTML element type to use for the main container. Optional, defaults to 'span' implicitly by Element component.
   as?: React.ElementType;
+  // Additional props to pass to each individual word component. Optional.
   wordProps?: any;
+  // A background color property for the text container. Optional.
   backgroundColor?: string;
+  // An optional custom React component to render each word, defaulting to `DefaultText`.
   textComponent?: any;
+  // Allows for any additional, unspecified properties to be passed down to the root element.
   [key: string]: any;
 }
-
+// Defines the possible animation phases: 'entering' (starting animation), 'visible' (animation complete), or 'exiting' (animation out).
 type AnimPhase = 'entering' | 'visible' | 'exiting';
-
+// The main SlideEffect functional component, designed to animate text words sliding in and out.
 export const SlideEffect: React.FC<SlideEffectProps> = ({
+  // The text content to be animated.
   text,
+  // The duration of each word's animation, defaulting to 500ms.
   duration = 500,
+  // The animation direction, defaulting to 'up'.
   direction = 'up',
+  // The stagger delay between words, defaulting to 50ms.
   stagger = 50,
+  // Boolean indicating sequential animation, defaulting to false.
   sequential = false,
+  // Custom styles for the text container.
   textStyle,
   as: _as,
+  // Additional props to apply to individual words.
   wordProps,
+  // The component used to render each word.
   textComponent,
+  // Captures any other remaining props to pass to the root element.
   ...props
 }) => {
+  // Manages the text string that is currently being displayed and animated.
   const [displayedText, setDisplayedText] = useState(text);
+  // Tracks the current phase of the animation ('entering', 'visible', 'exiting') to control word animations.
   const [phase, setPhase] = useState<AnimPhase>('entering');
+  // A key incremented to force re-rendering of animations when text changes, ensuring re-triggering.
   const [animKey, setAnimKey] = useState(0);
-
+  // Determines the component to render each word, using the provided `textComponent` or the `DefaultText` component.
   const TextComponent = textComponent || DefaultText;
-
+  // Holds the new text value that needs to be displayed after the current exiting animation finishes.
   const pendingTextRef = useRef<string | null>(null);
+  // Stores the reference to any active timeout, allowing it to be cleared to prevent memory leaks or incorrect state updates.
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Handle text changes
+  // Manages transitions between animation phases based on changes in the input `text` prop.
   useEffect(() => {
     if (text === displayedText && phase === 'visible') {
       return;
     }
-
     if (text !== displayedText) {
-      // New text arrived
       if (phase === 'entering' || phase === 'visible') {
-        // Store the new text and start exit animation
         pendingTextRef.current = text;
         setPhase('exiting');
       } else if (phase === 'exiting') {
-        // Already exiting, just update pending text
         pendingTextRef.current = text;
       }
     }
   }, [text, displayedText, phase]);
-
-  // Calculate animation durations
+  // Memoizes the processing of the input `displayedText` into an array of words, split by lines, and calculates the total word count for animation timing. Optimizes performance for unchanged text.
   const { lines, totalWordCount } = useMemo(() => {
     const rawLines = displayedText.split('|');
     const processedLines = rawLines.map((line) =>
@@ -69,34 +87,30 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
     const count = processedLines.reduce((acc, line) => acc + line.length, 0);
     return { lines: processedLines, totalWordCount: count };
   }, [displayedText]);
-
+  // Calculates the total duration required for all words to complete their 'entering' animation, accounting for stagger and sequential options. Memoized for efficiency.
   const totalEnterDuration = useMemo(() => {
     if (sequential) {
       return totalWordCount * (duration + stagger);
     }
     return (totalWordCount - 1) * stagger + duration;
   }, [totalWordCount, duration, stagger, sequential]);
-
+  // Calculates the total duration required for all words to complete their 'exiting' animation, accounting for stagger and sequential options. Memoized for efficiency.
   const totalExitDuration = useMemo(() => {
     if (sequential) {
       return totalWordCount * (duration + stagger);
     }
     return (totalWordCount - 1) * stagger + duration;
   }, [totalWordCount, duration, stagger, sequential]);
-
-  // Handle phase transitions
+  // Manages the progression of animation phases by setting and clearing timeouts after `totalEnterDuration` or `totalExitDuration`.
   useEffect(() => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-
     if (phase === 'entering') {
-      // After enter animation completes, go to visible
       timeoutRef.current = setTimeout(() => {
         setPhase('visible');
       }, totalEnterDuration + 50);
     } else if (phase === 'exiting') {
-      // After exit animation completes, swap text and enter again
       timeoutRef.current = setTimeout(() => {
         if (pendingTextRef.current !== null) {
           setDisplayedText(pendingTextRef.current);
@@ -106,31 +120,24 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
         setPhase('entering');
       }, totalExitDuration + 50);
     }
-
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
   }, [phase, totalEnterDuration, totalExitDuration]);
-
-  // Memoize word props extraction
+  // Extracts custom styles and any other properties specifically intended for individual words from the `wordProps` object.
   const { style: customWordStyle, ...restWordProps } = wordProps || {};
-
-  // Get animation functions based on direction
+  // A boolean flag indicating if the animation direction is 'up' for easier conditional logic.
   const isUp = direction === 'up';
-
-  // Calculate delay for each word
+  // Calculates the animation delay for a given word based on its global index, staggering, and whether the animation is sequential.
   const getDelay = (index: number) => {
     if (sequential) {
-      // Sequential: one word at a time
       return index * (duration + stagger);
     }
-    // Parallel with stagger
     return index * stagger;
   };
-
-  // Container styles
+  // Memoized style object for the main container element, combining base styles with any `textStyle` prop, ensuring efficient rendering.
   const containerStyle = useMemo<React.CSSProperties>(
     () => ({
       display: 'inline-block',
@@ -141,16 +148,16 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
     }),
     [textStyle]
   );
-
+  // Memoized style object for the container holding all lines of text, configuring it for inline flex display.
   const linesContainerStyle = useMemo<React.CSSProperties>(
     () => ({
       display: 'inline-flex',
       flexDirection: 'column',
-      alignItems: 'center', // Center lines relative to each other if they have different widths
+      alignItems: 'center',
     }),
     []
   );
-
+  // Memoized style object for individual lines of text, ensuring they are block-level and do not wrap.
   const lineStyle = useMemo<React.CSSProperties>(
     () => ({
       display: 'block',
@@ -158,10 +165,11 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
     }),
     []
   );
-
+  // A boolean flag indicating whether the component is currently in an 'entering' or 'exiting' animation phase.
   const isAnimating = phase === 'entering' || phase === 'exiting';
+  // A mutable index to track the global position of each word across all lines, used for calculating unique animation delays.
   let globalWordIndex = 0;
-
+  // Renders the animated text, iterating through lines and words to apply individual slide effects.
   return (
     <Element as="span" style={containerStyle} {...props}>
       <span style={linesContainerStyle}>
@@ -171,14 +179,10 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
               const currentGlobalIndex = globalWordIndex++;
               const delay = getDelay(currentGlobalIndex);
               const isLastInLine = wordIndex === lineWords.length - 1;
-
-              // Create animation based on phase and direction
               let wordAnimation;
               const durationStr = `${duration}ms`;
               const delayStr = `${delay}ms`;
-
               if (phase === 'entering') {
-                // Use app-studio animations for entering
                 wordAnimation = isUp
                   ? Animation.slideInUp({
                       duration: durationStr,
@@ -193,7 +197,6 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
                       fillMode: 'both',
                     });
               } else if (phase === 'exiting') {
-                // Custom animation objects for exiting
                 wordAnimation = isUp
                   ? {
                       from: { transform: 'translateY(0)', opacity: 1 },
@@ -212,7 +215,6 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
                       fillMode: 'both',
                     };
               }
-
               const wordStyle: React.CSSProperties = {
                 ...customWordStyle,
                 display: 'inline-block',
@@ -220,7 +222,6 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
                 transform: phase === 'visible' ? 'translateY(0)' : undefined,
                 opacity: phase === 'visible' ? 1 : undefined,
               };
-
               return (
                 <TextComponent
                   key={`${animKey}-${lineIndex}-${wordIndex}`}
@@ -239,5 +240,4 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
     </Element>
   );
 };
-
 export default SlideEffect;

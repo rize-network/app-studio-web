@@ -3,7 +3,25 @@
   "content": {
     "type": "string | number",
     "typeValues": null,
-    "description": "The content to be displayed within the badge.",
+    "description": "Not explicitly described in the provided files.",
+    "defaultValue": null
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Not explicitly described in the provided files.",
+    "defaultValue": null
+  },
+  "icon": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Not explicitly described in the provided files.",
+    "defaultValue": null
+  },
+  "pastil": {
+    "type": "boolean | string",
+    "typeValues": null,
+    "description": "Not explicitly described in the provided files.",
     "defaultValue": null
   },
   "variant": {

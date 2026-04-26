@@ -1,16 +1,14 @@
 {
-  "componentDescription": "A versatile component for displaying a list of interactive items in a popup, triggered by another element.",
+  "componentDescription": "A customizable overlay that displays a list of choices or actions when triggered.",
   "trigger": {
     "type": "React.ReactNode",
-    "typeValues": null,
-    "description": "Defines the element that triggers the dropdown menu.",
-    "defaultValue": null
+    "description": "Defines the element that will trigger the dropdown menu to open or close.",
+    "defaultValue": "undefined"
   },
   "items": {
     "type": "DropdownMenuItem[]",
-    "typeValues": null,
-    "description": "An array of items to be displayed within the dropdown menu.",
-    "defaultValue": null
+    "description": "An array of data representing the items to be displayed within the dropdown menu.",
+    "defaultValue": "undefined"
   },
   "size": {
     "type": "Size",
@@ -19,7 +17,7 @@
       "md",
       "lg"
     ],
-    "description": "Specifies the size of the dropdown menu.",
+    "description": "Specifies the visual size of the dropdown menu.",
     "defaultValue": "md"
   },
   "variant": {
@@ -29,7 +27,7 @@
       "filled",
       "outline"
     ],
-    "description": "Determines the visual variant or style of the dropdown menu.",
+    "description": "Defines the visual style or variant of the dropdown menu.",
     "defaultValue": "default"
   },
   "side": {
@@ -40,7 +38,7 @@
       "bottom",
       "left"
     ],
-    "description": "Controls the preferred side where the dropdown content opens relative to the trigger.",
+    "description": "Determines the preferred position of the dropdown content relative to its trigger (e.g., 'top', 'bottom', 'left', 'right').",
     "defaultValue": "bottom"
   },
   "align": {
@@ -50,19 +48,22 @@
       "center",
       "end"
     ],
-    "description": "Sets the alignment of the dropdown content relative to the trigger.",
+    "description": "Specifies the alignment of the dropdown content relative to the trigger on the specified side (e.g., 'start', 'center', 'end').",
     "defaultValue": "start"
   },
   "defaultOpen": {
     "type": "boolean",
-    "typeValues": null,
-    "description": "Indicates whether the dropdown menu should be open by default.",
-    "defaultValue": null
+    "description": "Controls the initial open state of the dropdown menu.",
+    "defaultValue": "false"
   },
   "views": {
     "type": "DropdownMenuStyles",
-    "typeValues": null,
-    "description": "Custom styles to apply to different parts of the dropdown menu.",
-    "defaultValue": null
+    "description": "Provides custom styles to be applied to different parts of the dropdown menu component.",
+    "defaultValue": "undefined"
+  },
+  "otherProps": {
+    "type": "any",
+    "description": "Allows for additional, arbitrary props to be passed to the component, providing flexibility for custom attributes.",
+    "defaultValue": "undefined"
   }
 }

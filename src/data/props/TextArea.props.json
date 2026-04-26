@@ -1,153 +1,203 @@
 {
-  "componentDescription": "A text input field for multi-line text editing with customizable features.",
-  "colorScheme": {
-    "type": "string",
-    "typeValues": [],
-    "description": "Optional color scheme for the component.",
-    "defaultValue": "theme-primary"
-  },
+  "componentDescription": "Renders a multi-line text input field with various styles and states according to the design guidelines.",
   "defaultValue": {
     "type": "string",
-    "typeValues": [],
-    "description": "The default value of the text area when initially rendered.",
-    "defaultValue": ""
+    "typeValues": null,
+    "description": "The initial value of the textarea before any user interaction.",
+    "defaultValue": null
   },
   "error": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Indicates whether the text area has an error state.",
-    "defaultValue": ""
+    "typeValues": null,
+    "description": "Indicates if the textarea is in an error state.",
+    "defaultValue": false
   },
   "isEditable": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Determines if the text area is editable.",
-    "defaultValue": "false"
+    "typeValues": null,
+    "description": "Determines if the content of the textarea can be edited by the user.",
+    "defaultValue": false
   },
   "helperText": {
     "type": "string",
-    "typeValues": [],
-    "description": "Helper text that appears below the text area.",
-    "defaultValue": ""
+    "typeValues": null,
+    "description": "Supplementary text displayed below the textarea to provide additional guidance.",
+    "defaultValue": null
   },
   "id": {
     "type": "string",
-    "typeValues": [],
-    "description": "Unique identifier for the text area.",
-    "defaultValue": ""
+    "typeValues": null,
+    "description": "A unique identifier for the textarea element.",
+    "defaultValue": null
   },
   "isReadOnly": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "If true, the text area is read-only.",
-    "defaultValue": "false"
+    "typeValues": null,
+    "description": "Specifies if the textarea's content is read-only.",
+    "defaultValue": false
   },
   "isDisabled": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "If true, the text area is disabled and cannot be interacted with.",
-    "defaultValue": "false"
+    "typeValues": null,
+    "description": "Disables the textarea, preventing user interaction.",
+    "defaultValue": false
   },
   "isAutoFocus": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "If true, the text area will automatically focus when the component is mounted.",
-    "defaultValue": "false"
+    "typeValues": null,
+    "description": "Automatically focuses the textarea when the component mounts.",
+    "defaultValue": false
   },
   "isMultiline": {
     "type": "boolean",
-    "typeValues": [],
-    "description": "Determines if the text area allows for multiple lines of input.",
-    "defaultValue": "false"
+    "typeValues": null,
+    "description": "Specifies if the input field should allow multiple lines of text.",
+    "defaultValue": false
   },
   "label": {
     "type": "string",
-    "typeValues": [],
-    "description": "The label for the text area.",
-    "defaultValue": ""
+    "typeValues": null,
+    "description": "The label text displayed for the textarea.",
+    "defaultValue": null
   },
   "maxRows": {
     "type": "number",
-    "typeValues": [],
-    "description": "Maximum number of rows the text area can expand to.",
-    "defaultValue": "3"
+    "typeValues": null,
+    "description": "The maximum number of rows the textarea can display.",
+    "defaultValue": 3
   },
   "maxCols": {
     "type": "number",
-    "typeValues": [],
-    "description": "Maximum number of columns the text area can display.",
-    "defaultValue": "30"
+    "typeValues": null,
+    "description": "The maximum number of columns the textarea can display.",
+    "defaultValue": 30
   },
   "name": {
     "type": "string",
-    "typeValues": [],
-    "description": "Name attribute of the text area element.",
-    "defaultValue": ""
+    "typeValues": null,
+    "description": "The name attribute of the textarea element.",
+    "defaultValue": null
   },
   "placeholder": {
     "type": "string",
-    "typeValues": [],
-    "description": "Placeholder text for the text area when it is empty.",
-    "defaultValue": ""
+    "typeValues": null,
+    "description": "The placeholder text displayed when the textarea is empty.",
+    "defaultValue": null
   },
   "onChange": {
-    "type": "function",
-    "typeValues": ["(value: any) => void"],
-    "description": "Callback function triggered when the value of the text area changes.",
-    "defaultValue": ""
+    "type": "(value: any) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the value of the textarea changes.",
+    "defaultValue": null
   },
   "onChangeText": {
-    "type": "function",
-    "typeValues": ["(text: string) => void"],
-    "description": "Callback function triggered when the text within the text area changes.",
-    "defaultValue": ""
+    "type": "(text: string) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the text content of the textarea changes.",
+    "defaultValue": null
   },
   "onBlur": {
-    "type": "function",
-    "typeValues": ["(value: any) => void"],
-    "description": "Callback function triggered when the text area loses focus.",
-    "defaultValue": ""
+    "type": "(value: any) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the textarea loses focus.",
+    "defaultValue": "() => {}"
   },
   "onFocus": {
-    "type": "function",
-    "typeValues": ["() => void"],
-    "description": "Callback function triggered when the text area gains focus.",
-    "defaultValue": "() => {}"
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the textarea gains focus.",
+    "defaultValue": null
   },
   "size": {
     "type": "Size",
-    "typeValues": ["sm", "md", "lg"],
-    "description": "Size of the text area, typically affecting its height.",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Defines the size of the textarea.",
     "defaultValue": "sm"
   },
   "shadow": {
-    "type": ["Shadow", "Elevation", "CSSProperties"],
-    "typeValues": [],
-    "description": "Shadow or elevation applied to the text area, or custom CSS properties for the shadow.",
-    "defaultValue": ""
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": null,
+    "description": "Applies a shadow effect to the textarea.",
+    "defaultValue": null
   },
   "shape": {
     "type": "Shape",
-    "typeValues": ["default", "rounded", "square"],
-    "description": "Shape of the text area, affecting the border-radius.",
+    "typeValues": [
+      "default",
+      "square",
+      "rounded"
+    ],
+    "description": "Defines the border shape of the textarea.",
     "defaultValue": "default"
   },
-  "styles": {
+  "views": {
     "type": "TextAreaStyles",
-    "typeValues": [],
-    "description": "Custom styles for the text area component.",
-    "defaultValue": "{ container: {}, text: {}, label: {}, helperText: {}, field: {} }"
+    "typeValues": null,
+    "description": "Custom styling options for different parts of the textarea component.",
+    "defaultValue": "{ label: {}, helperText: {} }"
   },
   "value": {
-    "type": ["string", "number"],
-    "typeValues": [],
-    "description": "The value of the text area.",
-    "defaultValue": ""
+    "type": "string | number",
+    "typeValues": null,
+    "description": "The current value of the textarea.",
+    "defaultValue": null
   },
   "variant": {
     "type": "Variant",
-    "typeValues": ["default", "filled", "outlined"],
-    "description": "Variant of the text area, typically affecting the visual style.",
+    "typeValues": [
+      "outline",
+      "default",
+      "none"
+    ],
+    "description": "Defines the visual style variant of the textarea.",
     "defaultValue": "default"
+  },
+  "hint": {
+    "type": "string",
+    "typeValues": null,
+    "description": "A hint text used as a fallback for the placeholder.",
+    "defaultValue": null
+  },
+  "setHint": {
+    "type": "Function",
+    "typeValues": null,
+    "description": "Function to update the hint text.",
+    "defaultValue": "() => {}"
+  },
+  "isHovered": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Indicates if the textarea is currently being hovered over by the mouse.",
+    "defaultValue": false
+  },
+  "setIsHovered": {
+    "type": "Function",
+    "typeValues": null,
+    "description": "Function to update the hover state of the textarea.",
+    "defaultValue": "() => {}"
+  },
+  "setValue": {
+    "type": "Function",
+    "typeValues": null,
+    "description": "Function to update the value of the textarea.",
+    "defaultValue": "() => {}"
+  },
+  "isFocused": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Indicates if the textarea is currently in focus.",
+    "defaultValue": false
+  },
+  "setIsFocused": {
+    "type": "Function",
+    "typeValues": null,
+    "description": "Function to update the focus state of the textarea.",
+    "defaultValue": "() => {}"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "componentDescription": "Displays a user's avatar, which can be an image or initials, with customizable size and styles.",
+  "componentDescription": "Displays user avatars, initials, or fallback icons with customizable sizes and styles.",
   "src": {
     "type": "string",
     "typeValues": null,

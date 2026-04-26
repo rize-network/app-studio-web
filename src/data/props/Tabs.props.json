@@ -1,28 +1,38 @@
 {
-  "componentDescription": "A versatile component for organizing and displaying content in separate, selectable sections.",
+  "componentDescription": "A versatile component for organizing and displaying content in separate, switchable sections.",
   "tabs": {
     "type": "Tab[]",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Array of tab objects to be displayed. Each tab needs a unique `value`. (Data-driven approach)",
     "defaultValue": "[]"
   },
   "defaultValue": {
     "type": "string | number",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Optional value of the tab to be active initially. Defaults to the first tab if not provided or not found.",
-    "defaultValue": "first tab if not provided or not found"
+    "defaultValue": null
   },
   "onTabChange": {
     "type": "(activeTab: Tab) => void",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Optional callback function triggered when the active tab changes. Receives the newly active tab object.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "views": {
     "type": "TabsStyles",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Optional styles object to customize the appearance of the tabs container, headers, text, and content area.",
     "defaultValue": "{}"
+  },
+  "variant": {
+    "type": "TabsVariant",
+    "typeValues": [
+      "underline",
+      "segmented",
+      "pill"
+    ],
+    "description": "Visual presentation style for the tab list.",
+    "defaultValue": "underline"
   },
   "iconPosition": {
     "type": "'left' | 'right' | 'top' | 'bottom'",
@@ -37,32 +47,32 @@
   },
   "renderTab": {
     "type": "(tab: Tab, isActive: boolean, onClick: () => void) => React.ReactNode",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Optional custom renderer for a single tab header. Receives the tab data, whether it's currently active, and an onClick handler to activate the tab.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "renderContent": {
     "type": "(activeTab: Tab) => React.ReactNode",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Optional custom renderer for the content area. Receives the currently active tab object. If not provided, the `content` property from the active tab object will be rendered.",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "value": {
-    "type": "string",
-    "typeValues": [],
+    "type": "string | number",
+    "typeValues": null,
     "description": "Current value for controlled compound component pattern",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "onValueChange": {
     "type": "(value: any) => void",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Callback when tab value changes in compound component pattern",
-    "defaultValue": "undefined"
+    "defaultValue": null
   },
   "children": {
     "type": "React.ReactNode",
-    "typeValues": [],
+    "typeValues": null,
     "description": "Children for compound component pattern",
-    "defaultValue": "undefined"
+    "defaultValue": null
   }
 }

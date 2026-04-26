@@ -6,67 +6,37 @@ import {
   Variant,
   AccordionType,
 } from './Accordion.type';
-
+// Defines the core properties for the Accordion root component, extending ViewProps and omitting conflicting properties.
 export interface AccordionProps
   extends Omit<ViewProps, 'value' | 'defaultValue' | 'onChange'> {
-  /**
-   * The content of the accordion (AccordionItem components)
-   */
+  // Specifies the child elements of the Accordion, typically a collection of AccordionItem components.
   children: React.ReactNode;
-  /**
-   * Determines whether one or multiple items can be opened at the same time
-   * @default 'single'
-   */
+  // Determines the accordion's behavior, such as allowing single or multiple items to be open simultaneously.
   type?: AccordionType;
-  /**
-   * The value of the item(s) to be opened when initially rendered (uncontrolled)
-   */
+  // Sets the initial open state of the accordion items when the component is uncontrolled.
   defaultValue?: string | string[];
-  /**
-   * The controlled value of the item(s) to be opened
-   */
+  // Controls the open state of accordion items, making the component controlled by its parent.
   value?: string | string[];
-  /**
-   * Event handler called when the value changes
-   */
+  // Callback function invoked when the open state of accordion items changes.
   onValueChange?: (value: string | string[] | undefined) => void;
-  /**
-   * When type is 'single', allows closing the currently open item
-   * @default false
-   */
+  // If true, allows all accordion items to be closed, even when `type` is set to 'single'.
   collapsible?: boolean;
-  /**
-   * The shape of the accordion items
-   * @default 'rounded'
-   */
+  // Defines the visual shape or border style for the accordion component.
   shape?: Shape;
-  /**
-   * The visual style variant of the accordion
-   * @default 'default'
-   */
+  // Specifies the visual variant or theme for the accordion component.
   variant?: Variant;
-  /**
-   * Custom styles for different parts of the accordion
-   */
+  // Customizes the styling properties for various sub-parts of the Accordion component.
   views?: AccordionStyles;
 }
-
+// Defines the properties for an individual Accordion item component.
 export interface AccordionItemProps extends Omit<ViewProps, 'value'> {
-  /**
-   * Unique identifier for the accordion item
-   */
+  // A unique string identifier for the accordion item, used for controlling its state.
   value: string;
-  /**
-   * The content of the accordion item
-   */
+  // Content to be rendered within the accordion item, usually `AccordionTrigger` and `AccordionContent`.
   children: React.ReactNode;
-  /**
-   * Whether the accordion item is disabled
-   */
+  // If true, the accordion item cannot be opened or closed by user interaction.
   isDisabled?: boolean;
-  /**
-   * Custom styles for this specific accordion item
-   */
+  // Customizes the styling for the item's container, trigger, content, and icon.
   views?: {
     item?: ViewProps;
     trigger?: ViewProps;
@@ -74,55 +44,33 @@ export interface AccordionItemProps extends Omit<ViewProps, 'value'> {
     icon?: ViewProps;
   };
 }
-
+// Defines the properties for the clickable header (trigger) of an Accordion item.
 export interface AccordionTriggerProps extends ViewProps {
-  /**
-   * The content of the accordion trigger
-   */
+  // Content to be rendered inside the Accordion trigger, typically the item's title or label.
   children: React.ReactNode;
-  /**
-   * Custom styles for the trigger
-   */
+  // Customizes the styling for the trigger's container and the expansion/collapse icon.
   views?: {
     container?: ViewProps;
     icon?: ViewProps;
-
-    /**
-     * Optional theme mode override ('light' or 'dark')
-     * If not provided, the component will use the theme mode from context
-     */
   };
-  /**
-   * If true, merges props onto the immediate child, useful for custom trigger elements
-   * @default false
-   */
+  // If true, the trigger renders as its child element, passing all its props to the child.
   asChild?: boolean;
 }
-
+// Defines the properties for the collapsible content area of an Accordion item.
 export interface AccordionContentProps {
-  /**
-   * The content to be displayed when the accordion item is expanded
-   */
+  // Content to be rendered inside the Accordion when the item is open.
   children: React.ReactNode;
-  /**
-   * Custom styles for the content
-   */
+  // Customizes the styling for the content's container.
   views?: {
     container?: ViewProps;
   };
 }
-
+// Defines the static properties and sub-components available on the Accordion component.
 export interface AccordionComponentType extends React.FC<AccordionProps> {
-  /**
-   * Individual accordion item component
-   */
+  // Represents the Accordion Item sub-component, used for grouping trigger and content.
   Item: React.FC<AccordionItemProps>;
-  /**
-   * Trigger component for accordion items
-   */
+  // Represents the Accordion Trigger sub-component, which acts as the clickable header.
   Trigger: React.FC<AccordionTriggerProps>;
-  /**
-   * Content component for accordion items
-   */
+  // Represents the Accordion Content sub-component, which holds the collapsible body.
   Content: React.FC<AccordionContentProps>;
 }

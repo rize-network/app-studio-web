@@ -1,7 +1,8 @@
 import { ViewProps } from 'app-studio';
 import { Status } from './StatusIndicator.type';
-
+// Defines a function to generate a set of styling themes for different status types (e.g., default, info, success, warning, error), applying specific background colors for indicators and text colors for labels.
 export const getThemes = (
+  // Represents the current theme mode, which could be used to adjust the returned styles (though currently not utilized in the function's logic).
   themeMode: string
 ): Record<Status, { indicator: ViewProps; label: ViewProps }> => {
   return {
@@ -27,5 +28,5 @@ export const getThemes = (
     },
   };
 };
-
+// Exports a constant `Themes` that holds the specific styling themes for the StatusIndicator, initialized by calling `getThemes` with the 'light' theme mode.
 export const Themes = getThemes('light');

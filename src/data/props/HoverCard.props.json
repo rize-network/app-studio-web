@@ -1,126 +1,116 @@
 {
-  "componentDescription": "Displays rich content on hover, with customizable trigger and content presentation.",
-  "HoverCard": {
+  "componentDescription": "A component that displays rich content on hover, providing additional information or actions.",
+  "HoverCardProps": {
     "children": {
       "type": "React.ReactNode",
-      "typeValues": null,
-      "description": "Optional React nodes to be rendered within the HoverCard component.",
+      "description": "Specifies the children (React elements) that will be rendered inside the HoverCard component.",
       "defaultValue": null
     },
     "views": {
       "type": "{ container?: ViewProps; content?: ViewProps; }",
-      "typeValues": null,
-      "description": "Optional object to pass custom view properties to specific parts of the HoverCard. It includes 'container' for the main container view and 'content' for the content view, both accepting ViewProps.",
-      "defaultValue": null
+      "description": "Allows for custom styling or view properties to be applied to different sub-components of the HoverCard.",
+      "defaultValue": null,
+      "properties": {
+        "container": {
+          "type": "ViewProps",
+          "description": "Defines view-specific properties for the main container of the HoverCard.",
+          "defaultValue": null
+        },
+        "content": {
+          "type": "ViewProps",
+          "description": "Defines view-specific properties for the content wrapper within the HoverCard.",
+          "defaultValue": null
+        }
+      }
     },
     "openDelay": {
       "type": "number",
-      "typeValues": null,
-      "description": "The delay in milliseconds before the hover card opens after the trigger is hovered.",
+      "description": "Sets the delay in milliseconds before the HoverCard opens after the trigger is hovered.",
       "defaultValue": null
     },
     "closeDelay": {
       "type": "number",
-      "typeValues": null,
-      "description": "The delay in milliseconds before the hover card closes after the trigger is no longer hovered.",
+      "description": "Sets the delay in milliseconds before the HoverCard closes after the trigger is unhovered.",
       "defaultValue": null
     }
   },
-  "HoverCard.Trigger": {
+  "HoverCardTriggerProps": {
     "children": {
       "type": "React.ReactNode",
-      "typeValues": null,
-      "description": "The React node that acts as the trigger for the hover card.",
+      "description": "Specifies the children (React elements) that serve as the trigger for the HoverCard's visibility.",
       "defaultValue": null
     },
     "views": {
       "type": "{ container?: ViewProps; }",
-      "typeValues": null,
-      "description": "Optional object to pass custom view properties to specific parts of the Trigger. It includes 'container' for the container view, accepting ViewProps.",
-      "defaultValue": null
+      "description": "Allows for custom styling or view properties to be applied to different parts of the trigger.",
+      "defaultValue": null,
+      "properties": {
+        "container": {
+          "type": "ViewProps",
+          "description": "Defines view-specific properties for the trigger's container element.",
+          "defaultValue": null
+        }
+      }
     },
     "asChild": {
       "type": "boolean",
-      "typeValues": null,
-      "description": "If true, the trigger will render its child directly without an additional DOM element.",
-      "defaultValue": "false"
+      "description": "When true, it renders the 'children' as a direct child of the component without wrapping it in an additional DOM element.",
+      "defaultValue": false
+    },
+    "arbitraryProps": {
+      "type": "any",
+      "description": "Allows any additional, arbitrary props to be passed through to the component's underlying DOM element.",
+      "defaultValue": null
     }
   },
-  "HoverCard.Content": {
+  "HoverCardContentProps": {
     "children": {
       "type": "React.ReactNode",
-      "typeValues": null,
-      "description": "The React nodes to be displayed inside the hover card content area.",
+      "description": "Specifies the children (React elements) that will be displayed within the HoverCard when it is open.",
       "defaultValue": null
     },
     "views": {
       "type": "{ container?: ViewProps; }",
-      "typeValues": null,
-      "description": "Optional object to pass custom view properties to specific parts of the Content. It includes 'container' for the container view, accepting ViewProps.",
-      "defaultValue": null
+      "description": "Allows for custom styling or view properties to be applied to different parts of the content.",
+      "defaultValue": null,
+      "properties": {
+        "container": {
+          "type": "ViewProps",
+          "description": "Defines view-specific properties for the content's container element.",
+          "defaultValue": null
+        }
+      }
     },
     "side": {
-      "type": "Side",
+      "type": "string",
       "typeValues": [
         "top",
         "right",
         "bottom",
         "left"
       ],
-      "description": "The preferred side for the content to open relative to the trigger element.",
+      "description": "Determines the preferred side ('top', 'right', 'bottom', or 'left') of the trigger to render the content.",
       "defaultValue": "bottom"
     },
     "align": {
-      "type": "Alignment",
+      "type": "string",
       "typeValues": [
         "start",
         "center",
         "end"
       ],
-      "description": "The alignment of the content along the chosen side ('start', 'center', or 'end').",
+      "description": "Specifies the alignment ('start', 'center', or 'end') of the content relative to the trigger along its chosen side.",
       "defaultValue": "center"
     },
     "sideOffset": {
       "type": "number",
-      "typeValues": null,
-      "description": "The distance in pixels between the content and the trigger element.",
-      "defaultValue": "8"
+      "description": "Sets the distance in pixels between the content and the trigger.",
+      "defaultValue": 8
     },
-    "backgroundColor": {
-      "type": "string",
-      "typeValues": null,
-      "description": "The background color of the hover card content.",
-      "defaultValue": "white"
-    },
-    "borderRadius": {
-      "type": "string",
-      "typeValues": null,
-      "description": "The border radius of the hover card content.",
-      "defaultValue": "4px"
-    },
-    "boxShadow": {
-      "type": "string",
-      "typeValues": null,
-      "description": "The box shadow applied to the hover card content.",
-      "defaultValue": "0px 2px 8px rgba(0, 0, 0, 0.15)"
-    },
-    "padding": {
-      "type": "string",
-      "typeValues": null,
-      "description": "The internal padding of the hover card content.",
-      "defaultValue": "12px"
-    },
-    "minWidth": {
-      "type": "string",
-      "typeValues": null,
-      "description": "The minimum width of the hover card content.",
-      "defaultValue": "50px"
-    },
-    "maxWidth": {
-      "type": "string",
-      "typeValues": null,
-      "description": "The maximum width of the hover card content.",
-      "defaultValue": "300px"
+    "arbitraryProps": {
+      "type": "any",
+      "description": "Allows any additional, arbitrary props to be passed through to the component's underlying DOM element.",
+      "defaultValue": null
     }
   }
 }
