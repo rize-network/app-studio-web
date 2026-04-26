@@ -4,14 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="/favicon.ico" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700&display=swap"></noscript>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#F97316" />
   <meta name="description" content="App Studio Web Components" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' ws: wss: http: https:; worker-src 'self' blob:;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob:; font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com; connect-src 'self' ws: wss: http: https:; worker-src 'self' blob:;" />
   <link rel="apple-touch-icon" href="/assets/apple-logo.png">
   <link rel="preload" as="image" href="/orange.webp" fetchpriority="high" />
   <link rel="manifest" href="/manifest.json" />
@@ -24,13 +20,30 @@
       box-sizing: border-box;
     }
 
+    html,
+    body,
+    #root {
+      min-height: 100%;
+      background: #FAFAFA;
+    }
+
     body {
       margin: 0;
-      font-family: 'Mulish', sans-serif, monospace;
+      font-family: 'Mulish', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     td {
       min-width: 200px;
+    }
+
+    input,
+    button,
+    textarea,
+    select {
+      font: inherit;
+      -webkit-font-smoothing: inherit;
     }
 
     /* Inline critical loading styles to avoid layout shift */

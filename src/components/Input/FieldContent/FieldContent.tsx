@@ -40,40 +40,29 @@ export const FieldContent: React.FC<ContentProps> = ({
 
   // Determine if the field is in an interactive state
   const isInteractive = (isHovered || isFocused) && !isDisabled;
-
-  // Set the appropriate color based on state
   const color = error
     ? 'color-red-500'
     : isInteractive
     ? 'theme-primary'
-    : isDark
-    ? 'color-gray-700'
-    : 'color-gray-200';
+    : '#E5E7EB';
 
   return (
     <Horizontal
-      // Layout properties
-      gap={8} // 2 × 4px grid
+      gap={8}
       width="100%"
       display="flex"
       flexWrap="nowrap"
       alignItems="center"
-      justifyContent="space-between"
-      // Visual properties
+      justifyContent="flex-start"
       borderStyle="solid"
       borderColor={color}
       backgroundColor={isDark ? 'color-gray-900' : 'color-white'}
       fontSize={Typography.fontSizes[size]}
-      // State properties
       cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'text'}
       opacity={isDisabled ? 0.7 : 1}
-      // Animation - unified 200ms timing for consistent feel
       transition="border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease"
-      // Apply conditional padding based on label presence
       {...(showLabel ? PadddingWithLabel : PaddingWithoutLabel)}
-      // Apply shadow if provided
       {...shadow}
-      // Apply shape, variant, and custom styles
       {...Shapes[shape]}
       {...InputVariants[variant]}
       {...views?.container}

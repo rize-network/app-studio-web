@@ -4,6 +4,9 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
 import { View, Horizontal, Vertical, ViewProps } from 'app-studio';
 import { AccordionContextType } from './Accordion.type';
@@ -197,7 +200,61 @@ export const AccordionContent: React.FC<
   views,
   ...props
 }) => {
-  if (!isExpanded) {
+  const transitionMs = 260;
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [shouldRender, setShouldRender] = useState(Boolean(isExpanded));
+  const [maxHeight, setMaxHeight] = useState(isExpanded ? 'none' : '0px');
+  const [opacity, setOpacity] = useState(isExpanded ? 1 : 0);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+
+    if (isExpanded) {
+      setShouldRender(true);
+
+      requestAnimationFrame(() => {
+        const nextHeight = contentRef.current?.scrollHeight ?? 0;
+        setMaxHeight(`${nextHeight}px`);
+        setOpacity(1);
+      });
+
+      return;
+    }
+
+    const currentHeight = contentRef.current?.scrollHeight ?? 0;
+    setMaxHeight(`${currentHeight}px`);
+    setOpacity(1);
+
+    requestAnimationFrame(() => {
+      setMaxHeight('0px');
+      setOpacity(0);
+    });
+
+    closeTimeoutRef.current = setTimeout(() => {
+      setShouldRender(false);
+    }, transitionMs);
+  }, [isExpanded, children]);
+
+  useEffect(() => {
+    if (!isExpanded || !shouldRender) return;
+
+    const nextHeight = contentRef.current?.scrollHeight ?? 0;
+    setMaxHeight(`${nextHeight}px`);
+  }, [children, isExpanded, shouldRender]);
+
+  if (!shouldRender) {
     return null;
   }
 
@@ -206,18 +263,19 @@ export const AccordionContent: React.FC<
       id={contentId}
       role="region"
       aria-labelledby={triggerId}
-      padding={16}
       backgroundColor="color-white"
-      maxHeight={isExpanded ? '1000px' : '0'}
-      transition="max-height 0.3s ease-in-out, opacity 0.3s ease-in-out"
-      opacity={1}
       overflow="hidden"
+      maxHeight={maxHeight}
+      opacity={opacity}
+      transition={`max-height ${transitionMs}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${transitionMs}ms ease`}
       data-state={isExpanded ? 'open' : 'closed'}
       data-disabled={isDisabled ? '' : undefined}
       {...views?.container}
       {...props}
     >
-      {children}
+      <View ref={contentRef} padding={16}>
+        {children}
+      </View>
     </View>
   );
 };

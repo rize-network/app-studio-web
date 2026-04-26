@@ -6,6 +6,7 @@ import React, {
   useMemo,
 } from 'react';
 import { ResponsiveProvider, ThemeProvider } from 'app-studio';
+import { GoogleFontProvider } from 'src/providers/GoogleFontProvider';
 import { RouterProvider } from 'src/providers/Router';
 
 interface ThemeModeContextType {
@@ -42,30 +43,32 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
 
   return (
     <ThemeModeContext.Provider value={themeModeValue}>
-      <ThemeProvider
-        mode={mode}
-        theme={{
-          primary: 'color-blue-700',
-          secondary: 'color-purple-500',
-        }}
-      >
-        <ResponsiveProvider
-          breakpoints={{
-            xs: 0,
-            sm: 340,
-            md: 560,
-            lg: 1080,
-            xl: 1300,
-          }}
-          devices={{
-            mobile: ['xs', 'sm'],
-            tablet: ['md', 'lg'],
-            desktop: ['lg', 'xl'],
+      <GoogleFontProvider>
+        <ThemeProvider
+          mode={mode}
+          theme={{
+            primary: 'color-blue-700',
+            secondary: 'color-purple-500',
           }}
         >
-          <RouterProvider>{children}</RouterProvider>
-        </ResponsiveProvider>
-      </ThemeProvider>
+          <ResponsiveProvider
+            breakpoints={{
+              xs: 0,
+              sm: 340,
+              md: 560,
+              lg: 1080,
+              xl: 1300,
+            }}
+            devices={{
+              mobile: ['xs', 'sm'],
+              tablet: ['md', 'lg'],
+              desktop: ['lg', 'xl'],
+            }}
+          >
+            <RouterProvider>{children}</RouterProvider>
+          </ResponsiveProvider>
+        </ThemeProvider>
+      </GoogleFontProvider>
     </ThemeModeContext.Provider>
   );
 };

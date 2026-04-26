@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text } from 'app-studio';
+import { View, Text, Vertical } from 'app-studio';
+import { AttachmentGroup } from 'src/components';
 import { Uploader } from 'src/components/Uploader/Uploader';
-import { ImageIcon, UploadIcon, VideoIcon } from 'src/components/Icon/Icon';
+import {
+  AttachmentIcon,
+  ImageIcon,
+  UploadIcon,
+  VideoIcon,
+} from 'src/components/Icon/Icon';
 
 const UploadPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [multipleFiles, setMultipleFiles] = useState<File[]>([]);
+  const [chatFiles, setChatFiles] = useState<File[]>([]);
   const [isMultipleLoading, setIsMultipleLoading] = useState(false);
   const [multipleProgress, setMultipleProgress] = useState(0);
 
@@ -207,53 +214,85 @@ const UploadPage = () => {
         </View>
 
         <View marginTop={32}>
-          <Text fontSize={16} marginBottom={8}>
-            Chat-Style Multiple Upload
-          </Text>
-          <Text fontSize={14} color="color-gray-600" marginBottom={12}>
-            This demonstrates the same functionality used in ChatInput component
-          </Text>
-          <Uploader
-            accept="*/*"
-            icon={<UploadIcon widthHeight={16} />}
-            maxSize={50 * 1024 * 1024}
-            multiple={true}
-            onMultipleFileSelect={(files) => {
-              console.log(
-                'Chat files:',
-                files.map((f) => f.name)
-              );
-              simulateMultipleUpload(files);
-            }}
-            isLoading={isMultipleLoading}
-            progress={multipleProgress}
-            text="Attachments"
-            fileType="file"
-            views={{
-              container: {
-                height: '40px',
-                padding: '0 12px',
-                borderRadius: '8px',
-                backgroundColor: 'transparent',
-                border: '1px solid',
-                borderColor: 'color-gray-300',
-                cursor: 'pointer',
-                _hover: {
-                  backgroundColor: 'color-gray-100',
+          <Vertical gap={12} alignItems="flex-start">
+            <Vertical gap={4}>
+              <Text fontSize={16} lineHeight="24px" fontWeight={600}>
+                Chat-Style Multiple Upload
+              </Text>
+              <Text fontSize={14} lineHeight="20px" color="color-gray-600">
+                This demonstrates the same compact attachment flow used by
+                ChatInput.
+              </Text>
+            </Vertical>
+
+            <Uploader
+              accept="*/*"
+              icon={<AttachmentIcon widthHeight={16} />}
+              maxSize={50 * 1024 * 1024}
+              multiple={true}
+              onMultipleFileSelect={(files) => {
+                console.log(
+                  'Chat files:',
+                  files.map((f) => f.name)
+                );
+                setChatFiles((current) => [...current, ...files]);
+              }}
+              text="Attachments"
+              fileType="file"
+              renderText={({ text, textProps }) => (
+                <Text marginTop={0} {...textProps}>
+                  {text}
+                </Text>
+              )}
+              views={{
+                container: {
+                  height: '40px',
+                  padding: '0 12px',
+                  borderRadius: '8px',
+                  backgroundColor: 'color-white',
+                  border: '1px solid #E5E7EB',
+                  cursor: 'pointer',
+                  transition:
+                    'background-color 0.2s ease, border-color 0.2s ease',
+                  _hover: {
+                    backgroundColor: '#F8FAFC',
+                    borderColor: '#CBD5E1',
+                  },
                 },
-              },
-            }}
-            containerProps={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-            }}
-            textProps={{
-              fontSize: '14px',
-              color: 'color-gray-600',
-            }}
-          />
+              }}
+              containerProps={{
+                display: 'inline-flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                width: 'fit-content',
+                minWidth: '136px',
+              }}
+              textProps={{
+                fontSize: '14px',
+                lineHeight: '20px',
+                color: 'color-gray-600',
+                marginTop: 0,
+              }}
+            />
+
+            <AttachmentGroup
+              files={chatFiles}
+              showPreviews={false}
+              onRemove={(index) =>
+                setChatFiles((current) =>
+                  current.filter((_, fileIndex) => fileIndex !== index)
+                )
+              }
+              views={{
+                container: {
+                  padding: '0',
+                  maxHeight: 'none',
+                },
+              }}
+            />
+          </Vertical>
         </View>
       </View>
     </View>

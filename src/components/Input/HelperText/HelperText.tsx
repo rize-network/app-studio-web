@@ -16,19 +16,14 @@ export const HelperText: React.FC<HelperTextProps> = ({
   ...props
 }) => (
   <Text
-    // Typography properties
-    size="xs" // 12px
-    fontWeight="400" // Regular weight
-    letterSpacing="-0.01em" // Slight negative tracking for modern look
-    lineHeight="16px" // 4 × 4px grid
-    // Layout properties
+    fontSize="11px"
+    fontWeight="400"
+    letterSpacing="-0.01em"
+    lineHeight="16px"
     marginVertical={0}
     marginHorizontal={0}
-    // Color properties
-    color="color-gray-500" // Muted color for helper text
-    // Animation
+    color="color-gray-500"
     transition="color 0.2s ease, opacity 0.2s ease"
-    // Apply custom styles
     {...(views['helperText'] as any)}
     {...props}
   >

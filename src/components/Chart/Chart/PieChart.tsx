@@ -241,7 +241,7 @@ export const PieChart: React.FC<PieChartProps> = ({
 
       {/* Pie slices */}
       {slices.map((slice, index) => {
-        const handleMouseEnter = (e: React.MouseEvent) => {
+        const handleMouseMove = (e: React.MouseEvent) => {
           const numericShare = total > 0 ? (slice.value / total) * 100 : 0;
           const remainingShare =
             total > 0 ? Math.max(0, 100 - numericShare) : null;
@@ -303,30 +303,16 @@ export const PieChart: React.FC<PieChartProps> = ({
             </View>
           );
 
-          // Use intelligent positioning based on useElementPosition relation data
-          let x = e.clientX;
-          let y = e.clientY;
+          let screenX = e.clientX;
+          let screenY = e.clientY;
 
-          if (relation && chartRef.current) {
-            const chartRect = chartRef.current.getBoundingClientRect();
-            const relativeX = e.clientX - chartRect.left;
-            const relativeY = e.clientY - chartRect.top;
-
-            // Adjust tooltip position based on available space
-            if (relation.space.horizontal === 'left') {
-              x = e.clientX - 100; // Offset tooltip to the left
-            } else {
-              x = e.clientX + 10; // Offset tooltip to the right
-            }
-
-            if (relation.space.vertical === 'top') {
-              y = e.clientY - 30; // Offset tooltip above
-            } else {
-              y = e.clientY + 10; // Offset tooltip below
-            }
+          if (chartRef.current) {
+            const svgRect = chartRef.current.getBoundingClientRect();
+            screenX = svgRect.left + slice.labelX;
+            screenY = svgRect.top + slice.labelY;
           }
 
-          showTooltip(x, y, tooltipContent);
+          showTooltip(screenX, screenY, tooltipContent);
         };
 
         const handleClick = () => {
@@ -342,7 +328,8 @@ export const PieChart: React.FC<PieChartProps> = ({
             <path
               d={slice.path}
               fill={slice.color}
-              onMouseEnter={!isPlaceholder ? handleMouseEnter : undefined}
+              onMouseEnter={!isPlaceholder ? handleMouseMove : undefined}
+              onMouseMove={!isPlaceholder ? handleMouseMove : undefined}
               onMouseLeave={!isPlaceholder ? hideTooltip : undefined}
               onClick={handleClick}
               {...PieSliceStyles}

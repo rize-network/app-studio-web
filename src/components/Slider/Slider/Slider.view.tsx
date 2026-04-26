@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { View, Text, useTheme, Center, Vertical, Horizontal } from 'app-studio';
+import React from 'react';
+import { View, Text, Center, Vertical, Horizontal } from 'app-studio';
 import { HelperText } from '../../Input/HelperText/HelperText';
 import { SliderViewProps } from './Slider.props';
 import {
@@ -55,23 +55,12 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
     onDrag,
     ...props
   }) => {
-    const { getColorHex, themeMode } = useTheme();
-    const currentMode = elementMode || themeMode;
-    const themeColor = useMemo(
-      () => getColorHex(backgroundColor, { themeMode: currentMode }),
-      [getColorHex, backgroundColor, currentMode]
-    );
-    const disabledColor = useMemo(
-      () => getColorHex('theme-disabled', { themeMode: currentMode }),
-      [getColorHex, currentMode]
-    );
-    const trackColor = useMemo(
-      () =>
-        getColorHex(SliderVariants[variant].backgroundColor as string, {
-          themeMode: currentMode,
-        }),
-      [getColorHex, variant, currentMode]
-    );
+    // Pure app-studio tokens — no hex resolution. App-studio handles theme-mode
+    // lookup itself; we just pass `themeMode={elementMode}` to the root.
+    const themeColor = backgroundColor;
+    const disabledColor = 'theme-disabled';
+    const trackColor = SliderVariants[variant].backgroundColor as string;
+    const activeTrackColor = isDisabled ? disabledColor : themeColor;
 
     const isVertical = orientation === 'vertical';
     const { trackCrossAxisSize, thumbSize } = EnhancedSliderSizes[size] || {
@@ -81,7 +70,13 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
 
     // For backward compatibility with the old implementation
     const legacyView = (
-      <Vertical width="100%" gap={8} {...views.container} {...props}>
+      <Vertical
+        width="100%"
+        gap={8}
+        themeMode={elementMode}
+        {...views.container}
+        {...props}
+      >
         {label && (
           <Horizontal justifyContent="space-between" alignItems="center">
             <Text fontSize={14} fontWeight={500} {...views.label}>
@@ -125,7 +120,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
                     width={4}
                     height={4}
                     borderRadius="50%"
-                    backgroundColor={isDisabled ? disabledColor : themeColor}
+                    backgroundColor={activeTrackColor}
                     zIndex={1}
                     {...views.stepMarks}
                   />
@@ -141,7 +136,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             left={0}
             height="100%"
             width={`${thumbPositionPercent}%`}
-            backgroundColor={isDisabled ? disabledColor : themeColor}
+            backgroundColor={activeTrackColor}
             borderRadius={SliderShapes[shape]}
             transition="width 0.1s ease-in-out"
             {...views.progress}
@@ -165,7 +160,9 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             borderRadius="50%"
             backgroundColor="color-white"
             boxShadow="0 2px 4px rgba(0, 0, 0, 0.2)"
-            border={`2px solid ${isDisabled ? disabledColor : themeColor}`}
+            borderWidth={2}
+            borderStyle="solid"
+            borderColor={activeTrackColor}
             transition={isDragging ? 'none' : 'transform 0.1s ease-in-out'}
             transform={
               isHovered
@@ -214,6 +211,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
         // Use Center to easily manage orientation layout
         {...OrientationStyles[orientation]}
         position="relative" // Needed for absolute positioning of thumb/tooltip
+        themeMode={elementMode}
         onMouseEnter={() => !isDisabled && setIsHovered(true)}
         onMouseLeave={() => !isDisabled && setIsHovered(false)}
         {...props} // Spread remaining view props
@@ -242,6 +240,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
           position="relative"
           borderRadius={trackCrossAxisSize / 2}
           backgroundColor={isDisabled ? disabledColor : trackColor}
+          // (track stays neutral when enabled — only the filled portion uses themeColor)
           cursor={isDisabled ? 'not-allowed' : 'pointer'}
           width={isVertical ? `${trackCrossAxisSize}px` : '100%'}
           height={isVertical ? '100%' : `${trackCrossAxisSize}px`}
@@ -261,7 +260,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
                     width={4}
                     height={4}
                     borderRadius="50%"
-                    backgroundColor={isDisabled ? disabledColor : themeColor}
+                    backgroundColor={activeTrackColor}
                     zIndex={1}
                     {...(isVertical
                       ? {
@@ -284,7 +283,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
           <View
             position="absolute"
             borderRadius={trackCrossAxisSize / 2}
-            backgroundColor={isDisabled ? disabledColor : themeColor}
+            backgroundColor={activeTrackColor}
             {...(isVertical
               ? {
                   bottom: 0,
@@ -316,8 +315,10 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             width={`${thumbSize}px`}
             height={`${thumbSize}px`}
             borderRadius="50%"
-            backgroundColor={isDisabled ? disabledColor : themeColor}
-            border={`2px solid color-white`}
+            backgroundColor={activeTrackColor}
+            borderWidth={2}
+            borderStyle="solid"
+            borderColor="color-white"
             boxShadow="0 1px 3px rgba(0, 0, 0, 0.2)"
             cursor={isDisabled ? 'not-allowed' : 'grab'}
             transform={isVertical ? 'translateX(-50%)' : 'translateY(-50%)'}

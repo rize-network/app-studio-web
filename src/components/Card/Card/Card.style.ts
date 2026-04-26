@@ -107,8 +107,8 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
     content: {
       padding: '16px',
       color: isDark ? 'color-gray-300' : 'color-gray-600',
-      fontSize: 14,
-      lineHeight: 15,
+      fontSize: 12,
+      lineHeight: '18px',
     },
     footer: {
       padding: '16px',

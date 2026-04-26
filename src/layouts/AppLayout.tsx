@@ -108,6 +108,7 @@ export const AppLayout = () => {
 
   const appMenuItems = [
     { name: 'Home', path: '/' },
+    { name: 'Gallery Compare', path: '/gallery-compare' },
     { name: 'Docs', path: '/docs' },
     { name: 'Theme Test', path: '/theme-test' },
   ];

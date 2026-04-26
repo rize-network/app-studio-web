@@ -267,19 +267,19 @@ export const ChartView: React.FC<ChartProps> = ({
         {renderLoadingIndicator()}
         {renderErrorIndicator()}
         {renderNoDataIndicator()}
+
+        <ChartTooltip
+          visible={showTooltips && tooltip.visible}
+          x={tooltip.x}
+          y={tooltip.y}
+          content={tooltip.content}
+          maxDistance={100}
+          views={views}
+        />
       </View>
 
       {/* Only show legend when chart content is visible */}
       {showChartContent && legendPosition === 'bottom' && renderLegend()}
-
-      <ChartTooltip
-        visible={showTooltips && tooltip.visible}
-        x={tooltip.x}
-        y={tooltip.y}
-        content={tooltip.content}
-        maxDistance={100}
-        views={views}
-      />
     </View>
   );
 };

@@ -13,17 +13,6 @@ export const TitleSizes = {
 };
 
 /**
- * Line heights for different title sizes
- */
-export const LineHeights: Record<TitleSize, number> = {
-  xs: 30,
-  sm: 38,
-  md: 57,
-  lg: 112,
-  xl: 112,
-};
-
-/**
  * Responsive typography system that maps title sizes to responsive breakpoints
  * Based on the Typography system with dynamic breakpoint sizing
  */

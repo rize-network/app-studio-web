@@ -46,51 +46,65 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   views = { label: {}, helperText: {} },
   ...props
 }) => {
-  const showLabel = !!(isFocused && label);
-  /**
-   * Styles for the textarea field
-   * Design tokens:
-   * - Typography: -0.01em letter-spacing for modern feel
-   * - Colors: Gray-900 for text, Gray-400 for disabled
-   * - Transitions: 200ms ease-out for smooth feedback
-   * - Line height: 1.5x font size for multi-line readability
-   * - Min height: 5em for comfortable editing area
-   */
+  const showLabel = !!label;
+  const fieldSizeStyles = {
+    xs: {
+      minHeight: '72px',
+      shellPaddingY: 6,
+      shellPaddingX: 10,
+      fontSize: 12,
+      lineHeight: '16px',
+    },
+    sm: {
+      minHeight: '88px',
+      shellPaddingY: 8,
+      shellPaddingX: 10,
+      fontSize: 12,
+      lineHeight: '16px',
+    },
+    md: {
+      minHeight: '104px',
+      shellPaddingY: 10,
+      shellPaddingX: 12,
+      fontSize: 14,
+      lineHeight: '20px',
+    },
+    lg: {
+      minHeight: '120px',
+      shellPaddingY: 12,
+      shellPaddingX: 14,
+      fontSize: 16,
+      lineHeight: '24px',
+    },
+    xl: {
+      minHeight: '136px',
+      shellPaddingY: 14,
+      shellPaddingX: 16,
+      fontSize: 18,
+      lineHeight: '28px',
+    },
+  } as const;
   const fieldStyles = {
-    // Layout properties
     margin: 0,
-    paddingVertical: 4, // 1 × 4px grid - matched with TextField
+    paddingVertical: 0,
     paddingHorizontal: 0,
     width: '100%',
-    minHeight: '5em', // Use minHeight instead of fixed height for flexibility
+    minHeight: fieldSizeStyles[size].minHeight,
     maxHeight: 'calc(100vh - 100px)',
     border: 'none',
-
-    // Focus state
     on: {
       focus: {
         outline: 'none',
       },
     },
-
-    // Typography properties
-    fontSize: Typography.fontSizes[size],
-    lineHeight: '1.5',
-    letterSpacing: '-0.01em', // Slight negative tracking for modern look
+    fontSize: fieldSizeStyles[size].fontSize,
+    letterSpacing: '-0.01em',
     fontWeight: 400,
-
-    // Visual properties
     backgroundColor: 'transparent',
     color: isDisabled ? 'color-gray-400' : 'color-gray-900',
-
-    // State properties
     cursor: isDisabled ? 'not-allowed' : 'text',
     opacity: isDisabled ? 0.7 : 1,
-
-    // Animation - smooth transitions for all interactive states
     transition: 'color 0.2s ease, opacity 0.2s ease',
-
-    // Apply custom field styles
     ...views['field'],
   };
   const handleHover = () => setIsHovered(!isHovered);
@@ -130,6 +144,12 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
+        alignItems="flex-start"
+        minHeight={fieldSizeStyles[size].minHeight}
+        paddingTop={fieldSizeStyles[size].shellPaddingY}
+        paddingBottom={fieldSizeStyles[size].shellPaddingY}
+        paddingLeft={fieldSizeStyles[size].shellPaddingX}
+        paddingRight={fieldSizeStyles[size].shellPaddingX}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         {...views?.content}

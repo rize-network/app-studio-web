@@ -35,10 +35,10 @@ export const Shapes: Record<Shape, ViewProps> = {
  */
 export const LabelSizes: Record<Size, string> = {
   xs: '10px',
-  sm: '12px',
-  md: '12px',
-  lg: '14px',
-  xl: '14px',
+  sm: '11px',
+  md: '11px',
+  lg: '12px',
+  xl: '12px',
 };
 
 /**
@@ -52,12 +52,12 @@ export const InputVariants: Record<Variant, ViewProps> = {
   outline: {
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color-gray-200',
+    borderColor: '#E5E7EB',
     backgroundColor: 'color-white',
     transition:
       'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
-      borderColor: 'color-gray-300',
+      borderColor: '#CBD5E1',
     },
     _focus: {
       borderColor: 'theme-primary',
@@ -73,60 +73,48 @@ export const InputVariants: Record<Variant, ViewProps> = {
     },
   },
   default: {
-    borderWidth: 0,
-    borderBottomWidth: '1.5px',
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'color-gray-200',
-    borderRadius: 0,
-    backgroundColor: 'transparent',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: '#E5E7EB',
+    borderRadius: '8px',
+    backgroundColor: 'color-white',
     transition:
-      'border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease',
+      'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
-      borderBottomColor: 'color-gray-400',
+      borderColor: '#CBD5E1',
     },
     _focus: {
-      borderBottomColor: 'theme-primary',
-      borderBottomWidth: '2px',
-      backgroundColor: 'transparent',
+      borderColor: 'theme-primary',
+      backgroundColor: 'color-white',
       outline: 'none',
+      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
     },
     _focusVisible: {
-      borderBottomColor: 'theme-primary',
-      borderBottomWidth: '2px',
-      backgroundColor: 'transparent',
+      borderColor: 'theme-primary',
+      backgroundColor: 'color-white',
       outline: 'none',
+      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
     },
   },
   none: {
     border: 'none',
     backgroundColor: 'transparent',
     transition: 'background-color 0.2s ease',
-    _hover: {
-      backgroundColor: 'color-gray-50',
-    },
-    _focus: {
-      outline: 'none',
-      backgroundColor: 'color-gray-100',
-    },
-    _focusVisible: {
-      outline: 'none',
-      backgroundColor: 'color-gray-100',
-    },
   },
 };
 
 /**
- * Padding for input with label following the 4px grid system
+ * Padding for input shells following the gallery form treatment.
  */
 export const PadddingWithLabel = {
-  paddingTop: '16px', // 4 × 4px grid
-  paddingBottom: '8px', // 2 × 4px grid
-  paddingLeft: '16px', // 4 × 4px grid
-  paddingRight: '16px', // 4 × 4px grid
+  paddingTop: '10px',
+  paddingBottom: '10px',
+  paddingLeft: '12px',
+  paddingRight: '12px',
   media: {
     mobile: {
-      paddingTop: '12px', // Smaller padding on mobile
-      paddingBottom: '6px',
+      paddingTop: '10px',
+      paddingBottom: '10px',
       paddingLeft: '12px',
       paddingRight: '12px',
     },
@@ -134,16 +122,16 @@ export const PadddingWithLabel = {
 };
 
 /**
- * Padding for input without label following the 4px grid system
+ * Padding for input shells without a label.
  */
 export const PaddingWithoutLabel = {
-  paddingTop: '12px', // 3 × 4px grid
-  paddingBottom: '12px', // 3 × 4px grid
-  paddingLeft: '16px', // 4 × 4px grid
-  paddingRight: '16px', // 4 × 4px grid
+  paddingTop: '10px',
+  paddingBottom: '10px',
+  paddingLeft: '12px',
+  paddingRight: '12px',
   media: {
     mobile: {
-      paddingTop: '10px', // Smaller padding on mobile
+      paddingTop: '10px',
       paddingBottom: '10px',
       paddingLeft: '12px',
       paddingRight: '12px',

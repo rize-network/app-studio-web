@@ -13,6 +13,8 @@ export interface AudioInputViewProps extends AudioInputProps {
   paused: boolean;
   audioBlob: Blob | null;
   analyserNode: AnalyserNode | null;
+  duration: number;
+  error: string | null;
   startRecording: () => void;
   stopRecording: () => void;
   pauseRecording: () => void;

@@ -18,9 +18,9 @@ import { Size } from './Avatar.type';
 export const AvatarSizeMap: Record<Size, number> = {
   xs: 24, // 6 × 4px grid
   sm: 32, // 8 × 4px grid
-  md: 48, // 12 × 4px grid
-  lg: 64, // 16 × 4px grid
-  xl: 80, // 20 × 4px grid
+  md: 44,
+  lg: 56,
+  xl: 72,
 };
 
 /**

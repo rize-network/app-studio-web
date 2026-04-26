@@ -5,7 +5,6 @@ import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
 import {
   HighlightStyles,
-  LineHeights,
   ResponsiveTypography,
   TitleSizes,
 } from './Title.style';
@@ -87,7 +86,6 @@ const TitleView: React.FC<TitleProps> = ({
   const baseTextStyles = {
     fontFamily: 'Mulish, Inter, Geist, system-ui, sans-serif',
     fontWeight: size === 'xl' ? 700 : 600,
-    lineHeight: LineHeights[size],
     letterSpacing: size === 'xl' ? '-1.5px' : '-0.01em',
   };
 

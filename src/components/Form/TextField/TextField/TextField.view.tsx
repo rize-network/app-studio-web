@@ -57,86 +57,64 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   const IconColor = getColor(isDisabled ? 'color-gray-400' : 'color-gray-500', {
     themeMode: elementMode ? elementMode : themeMode,
   });
-  const showLabel = !!(isFocused && label);
+  const showLabel = !!label;
   const fieldSizeStyles = {
     xs: {
-      minHeight: 28,
+      minHeight: 24,
+      shellPaddingY: 6,
       shellPaddingX: 10,
       fontSize: 12,
       lineHeight: '16px',
-      paddingY: 6,
     },
     sm: {
       minHeight: 32,
+      shellPaddingY: 8,
       shellPaddingX: 10,
-      fontSize: 13,
-      lineHeight: '18px',
-      paddingY: 7,
+      fontSize: 12,
+      lineHeight: '16px',
     },
     md: {
       minHeight: 40,
+      shellPaddingY: 10,
       shellPaddingX: 12,
       fontSize: 14,
       lineHeight: '20px',
-      paddingY: 10,
     },
     lg: {
       minHeight: 48,
+      shellPaddingY: 12,
       shellPaddingX: 14,
-      fontSize: 14,
-      lineHeight: '20px',
-      paddingY: 14,
+      fontSize: 16,
+      lineHeight: '24px',
     },
     xl: {
       minHeight: 56,
+      shellPaddingY: 14,
       shellPaddingX: 16,
-      fontSize: 16,
-      lineHeight: '24px',
-      paddingY: 16,
+      fontSize: 18,
+      lineHeight: '28px',
     },
   } as const;
-  /**
-   * Styles for the input field
-   * Design tokens:
-   * - Typography: -0.01em letter-spacing for modern feel
-   * - Colors: Gray-900 for text, Gray-400 for disabled, Gray-500 for placeholder
-   * - Transitions: 200ms ease-out for smooth feedback
-   * - Line height: 1.4x font size for optimal readability
-   */
   const fieldStyles = {
-    // Layout properties
     margin: 0,
-    paddingVertical: fieldSizeStyles[size].paddingY,
+    paddingVertical: 0,
     paddingHorizontal: 0,
     width: '100%',
-    minHeight: `${fieldSizeStyles[size].minHeight}px`,
+    minHeight: 'auto',
     border: 'none',
-
-    // Focus state
     on: {
       focus: {
         outline: 'none',
       },
     },
-
-    // Typography properties
     fontSize: fieldSizeStyles[size].fontSize,
-    lineHeight: fieldSizeStyles[size].lineHeight,
-    letterSpacing: '-0.01em', // Slight negative tracking for modern look
+    letterSpacing: '-0.01em',
     fontWeight: 400,
-
-    // Visual properties
     backgroundColor: 'transparent',
     color: isDisabled ? 'color-gray-400' : 'color-gray-900',
-
-    // State properties
     cursor: isDisabled ? 'not-allowed' : 'text',
     opacity: isDisabled ? 0.7 : 1,
-
-    // Animation - smooth transitions for all interactive states
-    transition: 'all 0.2s ease-in-out',
-
-    // Apply custom field styles
+    transition: 'color 0.2s ease, opacity 0.2s ease',
     ...views['field'],
   };
   const handleFocus = () => {
@@ -189,8 +167,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         isFocused={isFocused}
         showLabel={showLabel}
         minHeight={`${fieldSizeStyles[size].minHeight}px`}
-        paddingTop={0}
-        paddingBottom={0}
+        paddingTop={fieldSizeStyles[size].shellPaddingY}
+        paddingBottom={fieldSizeStyles[size].shellPaddingY}
         paddingLeft={fieldSizeStyles[size].shellPaddingX}
         paddingRight={fieldSizeStyles[size].shellPaddingX}
         onMouseEnter={handleMouseEnter}
@@ -232,7 +210,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
               onClick={handleClear}
               cursor="pointer"
               borderRadius="50%"
-              transition="all 0.2s ease-in-out"
+              transition="background-color 0.2s ease, transform 0.2s ease"
               _hover={{
                 backgroundColor: 'color-gray-100',
                 transform: 'scale(1.05)',

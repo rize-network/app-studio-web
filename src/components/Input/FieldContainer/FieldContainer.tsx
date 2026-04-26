@@ -17,35 +17,28 @@ export const FieldContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ children, helperText, error = false, views, ...props }, ref) => (
     <Vertical
       ref={ref}
-      // Layout properties
-      gap={8} // 2 × 4px grid
+      gap={4}
       position="relative"
       width="100%"
-      marginVertical={4}
-      // Apply custom props
+      marginVertical={0}
       {...props}
       {...views?.container}
     >
-      {/* Field content */}
       {children}
 
-      {/* Helper text (when no error) */}
       {!error && helperText && (
-        <HelperText
-          marginTop={4} // 1 × 4px grid
-          {...views?.helperText}
-        >
+        <HelperText marginTop={0} {...views?.helperText}>
           {helperText}
         </HelperText>
       )}
 
-      {/* Error message */}
       {error && (
         <Text
-          size="xs"
-          marginTop={4} // 1 × 4px grid
+          fontSize="11px"
+          lineHeight="16px"
+          marginTop={0}
           marginHorizontal={0}
-          fontWeight="500" // Medium weight for better readability
+          fontWeight="500"
           color="color-red-500"
           transition="color 0.2s ease, opacity 0.2s ease"
           {...views?.error}

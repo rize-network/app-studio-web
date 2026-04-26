@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Horizontal, Text, useTheme } from 'app-studio';
+import { View, Horizontal, Vertical, Text } from 'app-studio';
 import { ColorPickerViewProps } from './ColorPicker.props';
 import {
   DefaultColorPickerStyles,
@@ -55,9 +55,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
   onChange,
   ...props
 }) => {
-  const { getColor } = useTheme();
-
-  // Combine styles
   const containerStyles = {
     ...DefaultColorPickerStyles.container,
     ...views?.container,
@@ -101,10 +98,11 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
     <View {...containerStyles} {...props}>
       {label && (
         <Text
-          fontSize={size === 'xs' ? '12px' : size === 'sm' ? '14px' : '16px'}
+          fontSize="12px"
+          lineHeight="16px"
           fontWeight="500"
-          color="color-gray-700"
-          marginBottom="4px"
+          color="color-gray-600"
+          marginBottom="6px"
           {...views?.label}
         >
           {label}
@@ -117,19 +115,18 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
         {...triggerStyles}
       >
         <Horizontal alignItems="center" gap={8}>
-          {/* Color preview swatch */}
           <View
-            width="20px"
-            height="20px"
+            width="24px"
+            height="24px"
             borderRadius="8px"
             backgroundColor={displayColor}
             borderWidth="1px"
             borderStyle="solid"
-            borderColor="rgba(203, 213, 225, 0.95)"
+            borderColor="color-gray-200"
           />
 
           <Text
-            color={selectedColor ? 'color-gray-800' : 'color-gray-500'}
+            color={selectedColor ? 'color-gray-900' : 'color-gray-500'}
             fontSize="inherit"
           >
             {selectedColor || placeholder}
@@ -147,16 +144,15 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
 
       {isOpen && (
         <View ref={dropdownRef} {...dropdownStyles}>
-          {/* Predefined colors grid */}
           <View {...colorGridStyles}>
             {predefinedColors.map((colorOption, index) => (
               <View
                 key={index}
-                width="24px"
-                height="24px"
+                width="36px"
+                height="36px"
                 borderRadius="8px"
                 backgroundColor={colorOption.value}
-                borderWidth="2px"
+                borderWidth="1px"
                 borderStyle="solid"
                 borderColor={
                   selectedColor === colorOption.value
@@ -168,47 +164,44 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                 title={colorOption.name}
                 _hover={{
                   transform: 'scale(1.05)',
-                  borderColor: 'rgba(148, 163, 184, 0.9)',
+                  borderColor: 'color-gray-300',
                 }}
                 {...views?.colorSwatch}
               />
             ))}
           </View>
 
-          {/* Custom color input */}
           {showCustomInput && (
             <View
               {...DefaultColorPickerStyles.customInput}
               {...views?.customInput}
             >
-              {/* Native color picker */}
-              <Horizontal gap={8} alignItems="center" marginBottom="8px">
+              <Horizontal gap={8} alignItems="center" marginBottom="10px">
                 <input
                   type="color"
-                  value={customColor || '#000000'}
+                  value={customColor || '#1D4ED8'}
                   onChange={(e) => {
                     const color = e.target.value;
                     handleCustomColorChange(color);
                     handleColorSelect(color);
                   }}
                   style={{
-                    width: '40px',
-                    height: '32px',
-                    border: '1px solid #d1d5db',
+                    width: '36px',
+                    height: '36px',
+                    border: '1px solid #E5E7EB',
                     borderRadius: '8px',
                     cursor: 'pointer',
                     backgroundColor: 'transparent',
                   }}
                   title="Pick a color"
                 />
-                <Text fontSize="12px" color="color-gray-600">
-                  Use native color picker
+                <Text fontSize="12px" lineHeight="16px" color="color-gray-500">
+                  HEX
                 </Text>
               </Horizontal>
 
-              {/* Hex input field */}
               <TextField
-                placeholder="Enter hex color (e.g., #ff0000)"
+                placeholder="#1D4ED8"
                 value={customColor}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleCustomColorChange(e.target.value)
@@ -222,13 +215,13 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                 right={
                   customColor && (
                     <View
-                      width="16px"
-                      height="16px"
-                      borderRadius="4px"
+                      width="18px"
+                      height="18px"
+                      borderRadius="6px"
                       backgroundColor={customColor}
                       borderWidth="1px"
                       borderStyle="solid"
-                      borderColor="rgba(203, 213, 225, 0.95)"
+                      borderColor="color-gray-200"
                       cursor="pointer"
                       onClick={handleCustomColorSubmit}
                     />
@@ -238,30 +231,35 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
             </View>
           )}
 
-          {/* Recent colors */}
           {showRecentColors && recentColors.length > 0 && (
             <View {...recentColorsStyles}>
-              <Text fontWeight="500" color="color-gray-600" marginBottom="8px">
+              <Text
+                fontSize="11px"
+                lineHeight="16px"
+                fontWeight="500"
+                color="color-gray-500"
+                marginBottom="8px"
+              >
                 Recent Colors
               </Text>
               <Horizontal gap={8} flexWrap="wrap">
                 {recentColors.map((color, index) => (
                   <View
                     key={index}
-                    width="20px"
-                    height="20px"
+                    width="24px"
+                    height="24px"
                     borderRadius="8px"
                     backgroundColor={color}
                     borderWidth="1px"
                     borderStyle="solid"
-                    borderColor="rgba(203, 213, 225, 0.95)"
+                    borderColor="color-gray-200"
                     cursor="pointer"
                     transition="transform 0.2s ease, border-color 0.2s ease"
                     onClick={() => handleColorSelect(color)}
                     title={color}
                     _hover={{
                       transform: 'scale(1.05)',
-                      borderColor: 'rgba(148, 163, 184, 0.9)',
+                      borderColor: 'color-gray-300',
                     }}
                   />
                 ))}
@@ -273,7 +271,9 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
 
       {helperText && (
         <Text
-          color={error ? 'color-red-500' : 'color-gray-600'}
+          fontSize="11px"
+          lineHeight="16px"
+          color={error ? 'color-red-500' : 'color-gray-500'}
           marginTop="4px"
           {...views?.helperText}
         >

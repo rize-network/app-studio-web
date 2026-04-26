@@ -5,7 +5,7 @@
  */
 
 import React, { useMemo } from 'react';
-import { Element, Horizontal, Vertical, View, useTheme } from 'app-studio';
+import { Element, Horizontal, Vertical, View } from 'app-studio';
 import { Link } from '../../Link/Link';
 import { Loader } from '../../Loader/Loader';
 import { ButtonProps } from './Button.props';
@@ -14,6 +14,7 @@ import {
   ButtonShapes,
   IconSizes,
   getButtonVariants,
+  cssVar,
 } from './Button.style';
 
 // --- Helper: Button Content ---
@@ -44,15 +45,17 @@ const ButtonContent: React.FC<{
       ? Horizontal
       : Vertical;
     const sizeStyles = ButtonSizes[size];
-    const iconPad = isIconRounded ? IconSizes[size] : {};
 
     return (
       <Wrapper
         gap={8}
         alignItems="center"
         justifyContent="center"
-        {...sizeStyles}
-        {...iconPad} // Apply icon padding if needed
+        fontSize={sizeStyles.fontSize}
+        fontWeight={sizeStyles.fontWeight}
+        lineHeight={sizeStyles.lineHeight}
+        letterSpacing={sizeStyles.letterSpacing}
+        whiteSpace="nowrap"
         {...views?.content}
       >
         {isLoading && loaderPosition === 'left' && (
@@ -219,7 +222,6 @@ const StandardButton: React.FC<
     borderMovingGradientColors?: string[];
     animatedStrokeAccentColor?: string;
     animatedStrokeTextColor?: string;
-    getColor?: (color: string) => string;
   }
 > = ({
   variant,
@@ -246,7 +248,6 @@ const StandardButton: React.FC<
   borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
   animatedStrokeAccentColor = '#705CFF',
   animatedStrokeTextColor = '#333333',
-  getColor = (c: string) => c,
   ...props
 }) => {
   // --- Common Helpers ---
@@ -299,7 +300,11 @@ const StandardButton: React.FC<
         isAuto={isAuto}
         isFilled={isFilled}
         views={views}
-        background={`linear-gradient(90deg, ${borderMovingGradientColors[0]}, ${borderMovingGradientColors[1]}, ${borderMovingGradientColors[2]}, ${borderMovingGradientColors[0]})`}
+        background={`linear-gradient(90deg, ${cssVar(
+          borderMovingGradientColors[0]
+        )}, ${cssVar(borderMovingGradientColors[1])}, ${cssVar(
+          borderMovingGradientColors[2]
+        )}, ${cssVar(borderMovingGradientColors[0])})`}
         backgroundSize="200% 100%"
         animate={borderAnimation}
         {...props}
@@ -318,8 +323,9 @@ const StandardButton: React.FC<
 
   // --- Animation: Animated Stroke ---
   if (animation === 'animatedStroke') {
-    const resolvedAccentColor = getColor(animatedStrokeAccentColor);
-    const resolvedStrokeTextColor = getColor(animatedStrokeTextColor);
+    // SVG stroke / CSS color need a real CSS value — wrap tokens in var(--…).
+    const resolvedAccentColor = cssVar(animatedStrokeAccentColor);
+    const resolvedStrokeTextColor = cssVar(animatedStrokeTextColor);
     const strokePathLength = 1000;
     const strokeAnimation = {
       from: {
@@ -414,9 +420,11 @@ const StandardButton: React.FC<
   // --- Animation: Border Reveal ---
   if (animation === 'borderReveal') {
     const borderWidth = 3;
-    // Use the first color from gradient colors or fall back to mainTone
-    const activeColor =
-      borderMovingGradientColors?.[0] || mainTone || '#000000';
+    // Use the first color from gradient colors or fall back to mainTone.
+    // Wrap in var(--…) so app-studio tokens render inside CSS gradient strings.
+    const activeColor = cssVar(
+      borderMovingGradientColors?.[0] || mainTone || '#000000'
+    );
 
     // Sides duration
     // The default duration (2s) is too slow for a hover interaction.
@@ -578,47 +586,27 @@ const ButtonView = React.memo(
       },
       ref
     ) => {
-      /* theme helpers */
-      const { getColorHex } = useTheme();
-
-      /* MAIN COLOR – determines the entire palette */
-      // Priority: explicit backgroundColor/color prop -> theme-button.background -> theme-primary
-      const mainColorKey =
-        backgroundColor ?? color ?? 'theme-button-background';
-
-      // Decide which theme token to resolve based on state
-      const stateColorKey = isDisabled
+      /* MAIN COLOR – an app-studio token that drives the whole palette.
+       *   Priority: explicit backgroundColor → color → theme-primary.
+       *   State overrides: disabled → theme-disabled, loading → theme-loading.
+       *   Tokens are passed straight through to app-studio (no hex conversion). */
+      const baseColorKey = backgroundColor ?? color ?? 'theme-primary';
+      const mainColorKey = isDisabled
         ? 'theme-disabled'
         : isLoading
         ? 'theme-loading'
-        : mainColorKey;
+        : baseColorKey;
 
-      // Resolve to actual hex color-
-      // If 'theme-button-background' isn't defined, it falls back to 'theme-primary'
-      let mainTone = getColorHex(stateColorKey);
-      if (
-        mainTone === 'theme-button-background' ||
-        mainTone === 'theme-loading'
-      ) {
-        mainTone = getColorHex(isLoading ? 'color-dark-500' : 'theme-primary');
-      }
-
-      /* text color - explicitly provided or default to white */
-      // Priority: explicit textColor prop -> theme-button.text -> color-white
-      let resolvedTextColorKey = textColor ?? 'theme-button-text';
-      let resolvedTextColor = getColorHex(resolvedTextColorKey);
-
-      if (resolvedTextColor === 'theme-button-text') {
-        resolvedTextColor = getColorHex('color-white');
-      }
+      /* TEXT COLOR – token; defaults to color-white */
+      const textColorKey = textColor ?? 'color-white';
 
       /* variant palette */
       const palette = useMemo(
-        () => getButtonVariants(mainTone, resolvedTextColor, reversed),
-        [mainTone, resolvedTextColor, reversed]
+        () => getButtonVariants(mainColorKey, textColorKey, reversed),
+        [mainColorKey, textColorKey, reversed]
       );
       const base = palette[variant];
-      const finalContentColor = (base?.color as string) ?? resolvedTextColor;
+      const finalContentColor = (base?.color as string) ?? textColorKey;
 
       // Render content logic safely
       const content = (
@@ -660,12 +648,11 @@ const ButtonView = React.memo(
           resolvedTextColor={finalContentColor}
           content={content}
           size={size}
-          mainTone={mainTone}
+          mainTone={mainColorKey}
           borderMovingDuration={borderMovingDuration}
           borderMovingGradientColors={borderMovingGradientColors}
           animatedStrokeAccentColor={animatedStrokeAccentColor}
           animatedStrokeTextColor={animatedStrokeTextColor}
-          getColor={getColorHex}
           containerRef={ref}
           {...props}
         />

@@ -108,7 +108,7 @@ export const ModalContainer: React.FC<ContainerProps> = React.memo(
     isFullScreen = false,
     shape = 'rounded',
     views,
-    isOpen,
+    isOpen = true,
     ...props
   }) => {
     const defaultShadow =
@@ -199,7 +199,6 @@ export const ModalBody: React.FC<BodyProps> = React.memo(
         paddingHorizontal={24} // 6×4px grid
         fontSize={ModalTypography.body.fontSize}
         fontWeight={ModalTypography.body.fontWeight}
-        lineHeight={ModalTypography.body.lineHeight}
         color={ModalTypography.body.color}
         media={{
           mobile: {

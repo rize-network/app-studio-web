@@ -47,11 +47,10 @@ export const HomePage = () => {
       subtitle: {
         mobile: {
           fontSize: 24,
-          lineHeight: 28,
           letterSpacing: 0,
         },
-        tablet: { fontSize: 34, lineHeight: 40, letterSpacing: 0.25 },
-        desktop: { fontSize: 48, lineHeight: 57, letterSpacing: 0 },
+        tablet: { fontSize: 34, letterSpacing: 0.25 },
+        desktop: { fontSize: 48, letterSpacing: 0 },
       },
       paragraph: {
         mobile: { fontSize: 10, lineHeight: 18, width: 300, height: 100 },

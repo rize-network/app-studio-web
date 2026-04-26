@@ -137,7 +137,6 @@ export const SlideEffect: React.FC<SlideEffectProps> = ({
       position: 'relative',
       verticalAlign: 'bottom',
       whiteSpace: 'nowrap',
-      lineHeight: 'normal',
       ...textStyle,
     }),
     [textStyle]

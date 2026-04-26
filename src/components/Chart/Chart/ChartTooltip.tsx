@@ -29,60 +29,36 @@ export const ChartTooltip: React.FC<ChartTooltipProps> = ({
 
     const tooltip = tooltipRef.current;
     const tooltipRect = tooltip.getBoundingClientRect();
-    const tooltipWidth = tooltipRect.width;
-    const tooltipHeight = tooltipRect.height;
+    const tooltipWidth = tooltipRect.width || 200; // Fallback width
+    const tooltipHeight = tooltipRect.height || 100; // Fallback height
 
-    const viewportOffset = 10;
-    const cursorOffset = 15;
+    const offset = 20;
+    const viewportPadding = 16;
 
-    // Start position: top-left corner near cursor
-    let left = x - cursorOffset;
-    let top = y - cursorOffset;
+    // Default: above the element and centered horizontally
+    let left = x - tooltipWidth / 2;
+    let top = y - tooltipHeight - offset;
 
-    // Calculate the distance from cursor to tooltip edges
-    const distanceX = x - left; // Distance from cursor to left edge
-    const distanceY = y - top; // Distance from cursor to top edge
-
-    // If tooltip would be too far on X axis, adjust it
-    if (distanceX > maxDistance) {
-      left = x - maxDistance;
+    // Smart flip - Vertical (if not enough space above, flip below)
+    if (top < viewportPadding) {
+      top = y + offset;
     }
 
-    // If tooltip would be too far on Y axis, adjust it
-    if (distanceY > maxDistance) {
-      top = y - maxDistance;
+    // Smart flip - Horizontal (if going off screen right/left)
+    if (left + tooltipWidth > window.innerWidth - viewportPadding) {
+      left = window.innerWidth - tooltipWidth - viewportPadding;
+    } else if (left < viewportPadding) {
+      left = viewportPadding;
     }
 
-    // Ensure tooltip doesn't go off the right edge of viewport
-    if (left + tooltipWidth > window.innerWidth - viewportOffset) {
-      left = window.innerWidth - tooltipWidth - viewportOffset;
-      // Still respect max distance constraint
-      if (x - left > maxDistance) {
-        left = x - maxDistance;
-      }
-    }
-
-    // Ensure tooltip doesn't go off the left edge of viewport
-    if (left < viewportOffset) {
-      left = viewportOffset;
-    }
-
-    // Ensure tooltip doesn't go off the bottom edge of viewport
-    if (top + tooltipHeight > window.innerHeight - viewportOffset) {
-      top = window.innerHeight - tooltipHeight - viewportOffset;
-      // Still respect max distance constraint
-      if (y - top > maxDistance) {
-        top = y - maxDistance;
-      }
-    }
-
-    // Ensure tooltip doesn't go off the top edge of viewport
-    if (top < viewportOffset) {
-      top = viewportOffset;
-    }
+    // Final safety clamps
+    top = Math.max(
+      viewportPadding,
+      Math.min(top, window.innerHeight - tooltipHeight - viewportPadding)
+    );
 
     setPosition({ left, top });
-  }, [visible, x, y, maxDistance]);
+  }, [visible, x, y]);
 
   if (!visible) return null;
 
@@ -94,6 +70,11 @@ export const ChartTooltip: React.FC<ChartTooltipProps> = ({
       top={`${position.top}px`}
       {...TooltipStyles}
       {...views?.tooltip}
+      style={{
+        ...TooltipStyles?.style,
+        pointerEvents: 'none',
+        transition: 'all 0.1s ease-out',
+      }}
     >
       {content}
     </View>

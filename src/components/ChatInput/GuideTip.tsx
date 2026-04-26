@@ -24,10 +24,10 @@ export const GuideTip: React.FC<GuideTipProps> = ({
       position="relative"
       width="100%"
       padding="16px"
-      backgroundColor="#EFF6FF"
+      backgroundColor="color-blue-50"
       borderWidth="1px"
       borderStyle="solid"
-      borderColor="#BFDBFE"
+      borderColor="color-blue-200"
       borderRadius="12px"
       marginBottom="16px"
       animate={{
@@ -39,7 +39,7 @@ export const GuideTip: React.FC<GuideTipProps> = ({
     >
       <Text
         fontSize="14px"
-        color="#1E3A8A"
+        color="color-blue-800"
         marginBottom="8px"
         lineHeight="20px"
       >

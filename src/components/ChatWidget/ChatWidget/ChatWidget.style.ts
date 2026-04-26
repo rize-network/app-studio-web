@@ -111,7 +111,7 @@ export const DefaultChatWidgetStyles = {
     position: 'relative' as const,
     wordWrap: 'break-word' as const,
     animation: 'chatBubbleAppear 0.25s ease-out',
-    lineHeight: '1.5',
+    // lineHeight: '1.5',
   },
   timestamp: {
     position: 'absolute' as const,

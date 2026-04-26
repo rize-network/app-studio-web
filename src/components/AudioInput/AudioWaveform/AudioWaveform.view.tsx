@@ -11,31 +11,41 @@ export const AudioWaveformView: React.FC<AudioWaveformViewProps> = ({
   isPaused,
   ...viewProps
 }) => {
-  const scalingFactor = 300; // This should ideally be a constant or prop if it needs to be configurable
+  const scalingFactor = 300;
+  const placeholderHeights = [
+    6, 16, 23, 24, 18, 9, 14, 22, 24, 20, 11, 12, 20, 24, 21, 13, 9, 19, 24, 23,
+    16, 7, 17, 23, 23, 18, 8, 15, 22, 24, 20, 10,
+  ];
 
   return (
     <Horizontal
       alignItems="center"
-      minWidth={100}
-      gap={1}
-      height={32} // Fixed height for the waveform container
-      maxWidth={200}
+      minWidth={120}
+      gap={2}
+      height={24}
       width="100%"
-      marginTop={4} // Equivalent to mt-4
+      maxWidth="100%"
       {...viewProps}
     >
       {bars.map((amplitude, index) => (
         <View
           key={index}
-          width={2} // Equivalent to w-[2px]
+          width={3}
+          borderRadius={2}
           backgroundColor={
             isPaused
-              ? 'color-gray-200'
+              ? 'color-gray-300'
               : amplitude >= 0
-              ? 'color-gray-900'
-              : 'color-gray-500'
+              ? 'theme-primary'
+              : 'color-gray-300'
           }
-          style={{ height: `${clamp(amplitude * scalingFactor, 2, 32)}px` }}
+          style={{
+            height: `${
+              amplitude >= 0
+                ? clamp(amplitude * scalingFactor, 6, 24)
+                : placeholderHeights[index % placeholderHeights.length]
+            }px`,
+          }}
         />
       ))}
     </Horizontal>

@@ -6,15 +6,22 @@ import { componentList } from 'src/configs/componentList';
 // Lazy-load heavy page components to reduce initial bundle size
 const DocsPage = lazy(() => import('src/pages/docs/docs.page'));
 const HomePage = lazy(() => import('src/pages/home.page'));
+const GalleryComparePage = lazy(() => import('src/pages/galleryCompare.page'));
+const GalleryLivePage = lazy(() => import('src/pages/galleryLive.page'));
 const ThemeTestPage = lazy(() => import('src/pages/themeTest.page'));
 
 export const ComponentRouter = [
+  {
+    path: '/gallery-live',
+    element: <GalleryLivePage />,
+  },
   {
     element: <AppLayout />,
     children: [
       // { path: '/', element: <HomePage /> },
       // { path: '/home', element: <Navigate to="/" replace /> },
       { path: '/', element: <Navigate to="/accordion" replace /> },
+      { path: '/gallery-compare', element: <GalleryComparePage /> },
       { path: '/docs/:componentName?', element: <DocsPage /> },
       { path: '/docs', element: <DocsPage /> },
       { path: '/theme-test', element: <ThemeTestPage /> },

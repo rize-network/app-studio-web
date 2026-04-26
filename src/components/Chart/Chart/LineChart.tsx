@@ -35,7 +35,7 @@ export const LineChart: React.FC<LineChartProps> = ({
   // Calculate chart dimensions
   const { getColor } = useTheme();
 
-  const padding = { top: 20, right: 20, bottom: 40, left: 50 };
+  const padding = { top: 20, right: 20, bottom: 40, left: 40 };
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
 
@@ -262,7 +262,7 @@ export const LineChart: React.FC<LineChartProps> = ({
                     }${deltaValue.toLocaleString()}`
                   : null;
 
-              const handleMouseEnter = (e: React.MouseEvent) => {
+              const handleMouseMove = (e: React.MouseEvent) => {
                 const tooltipContent = (
                   <View display="flex" flexDirection="column" minWidth="200px">
                     <View
@@ -326,7 +326,13 @@ export const LineChart: React.FC<LineChartProps> = ({
                   </View>
                 );
 
-                showTooltip(e.clientX, e.clientY, tooltipContent);
+                const rect = (
+                  e.currentTarget as SVGElement
+                ).getBoundingClientRect();
+                const screenX = rect.left + rect.width / 2;
+                const screenY = rect.top + rect.height / 2;
+
+                showTooltip(screenX, screenY, tooltipContent);
               };
 
               const handleClick = () => {
@@ -341,7 +347,8 @@ export const LineChart: React.FC<LineChartProps> = ({
                   cx={x}
                   cy={y}
                   fill={lineColor}
-                  onMouseEnter={handleMouseEnter}
+                  onMouseEnter={handleMouseMove}
+                  onMouseMove={handleMouseMove}
                   onMouseLeave={hideTooltip}
                   onClick={handleClick}
                   {...PointStyles}

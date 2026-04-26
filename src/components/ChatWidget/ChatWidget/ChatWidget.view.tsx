@@ -173,8 +173,10 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
             {selectedContextElements.map((element) => (
               <Horizontal
                 key={element.id}
-                backgroundColor="#EFF6FF"
-                border="1px solid #BFDBFE"
+                backgroundColor="color-blue-50"
+                borderWidth={1}
+                borderStyle="solid"
+                borderColor="color-blue-200"
                 borderRadius="9999px"
                 padding="6px 10px"
                 alignItems="center"
@@ -343,11 +345,13 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
         <Horizontal
           gap={8}
           alignItems="center"
-          backgroundColor="#F8FAFC"
+          backgroundColor="color-gray-50"
           padding="8px 10px"
           borderRadius="8px"
           width="100%"
-          border="1px solid #E2E8F0"
+          borderWidth={1}
+          borderStyle="solid"
+          borderColor="color-gray-200"
         >
           <SettingsIcon widthHeight={14} color="color-gray-600" />
           <Vertical gap={2}>
@@ -371,9 +375,11 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
     // Error styles overrides
     ...(isError
       ? {
-          backgroundColor: '#FEF2F2',
-          border: '1px solid #FECACA',
-          color: '#b91c1c',
+          backgroundColor: 'color-red-50',
+          borderWidth: 1,
+          borderStyle: 'solid',
+          borderColor: 'color-red-200',
+          color: 'color-red-700',
         }
       : {}),
     ...styles.bubble,
@@ -410,7 +416,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
         {/* Error Icon */}
         {isError && (
           <Horizontal gap={6} marginBottom="4px" alignItems="center">
-            <ErrorIcon widthHeight={14} color="#b91c1c" />
+            <ErrorIcon widthHeight={14} color="color-red-700" />
             <Text fontWeight="600" fontSize="12px">
               Error
             </Text>
@@ -421,7 +427,9 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
         {message.reasoning && (
           <View
             marginBottom="8px"
-            borderBottom="1px solid #E2E8F0"
+            borderBottomWidth={1}
+            borderBottomStyle="solid"
+            borderBottomColor="color-gray-200"
             paddingBottom="8px"
             {...styles.reasoningContainer}
           >
@@ -447,10 +455,12 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
             {isReasoningOpen && (
               <View
                 padding="8px"
-                backgroundColor="#F8FAFC"
+                backgroundColor="color-gray-50"
                 borderRadius="8px"
                 marginTop="4px"
-                border="1px solid #E2E8F0"
+                borderWidth={1}
+                borderStyle="solid"
+                borderColor="color-gray-200"
                 {...styles.reasoningContent}
               >
                 <Text fontSize="12px" color="color-gray-600" fontStyle="italic">
@@ -474,10 +484,12 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
                 key={attachment.id}
                 gap={6}
                 padding="6px 8px"
-                backgroundColor="#F8FAFC"
+                backgroundColor="color-gray-50"
                 borderRadius="8px"
                 fontSize="12px"
-                border="1px solid #E2E8F0"
+                borderWidth={1}
+                borderStyle="solid"
+                borderColor="color-gray-200"
               >
                 <AttachmentIcon widthHeight={14} />
                 <Text>{attachment.name}</Text>
@@ -489,7 +501,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
         {/* Context Elements */}
         {message.contextElements && message.contextElements.length > 0 && (
           <Vertical gap={4} marginTop="8px">
-            <Text fontSize="11px" color="rgba(0,0,0,0.5)" fontWeight="600">
+            <Text fontSize="11px" color="color-black-500" fontWeight="600">
               Context:
             </Text>
             {message.contextElements.map((element) => (
@@ -497,10 +509,12 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
                 key={element.id}
                 gap={6}
                 padding="6px 10px"
-                backgroundColor="#EFF6FF"
+                backgroundColor="color-blue-50"
                 borderRadius="9999px"
                 fontSize="11px"
-                border="1px solid #BFDBFE"
+                borderWidth={1}
+                borderStyle="solid"
+                borderColor="color-blue-200"
               >
                 <Text color="color-blue-700" fontWeight="500">
                   {element.name}

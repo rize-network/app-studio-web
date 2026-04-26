@@ -192,7 +192,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                   : null;
               const fillColor = series.color ? getColor(series.color) : 'black';
 
-              const handleMouseEnter = (e: React.MouseEvent) => {
+              const handleMouseMove = (e: React.MouseEvent) => {
                 const tooltipContent = (
                   <View display="flex" flexDirection="column" minWidth="180px">
                     <View
@@ -246,7 +246,13 @@ export const BarChart: React.FC<BarChartProps> = ({
                   </View>
                 );
 
-                showTooltip(e.clientX, e.clientY, tooltipContent);
+                const rect = (
+                  e.currentTarget as SVGElement
+                ).getBoundingClientRect();
+                const screenX = rect.left + rect.width / 2;
+                const screenY = rect.top;
+
+                showTooltip(screenX, screenY, tooltipContent);
               };
 
               const handleClick = () => {
@@ -263,7 +269,8 @@ export const BarChart: React.FC<BarChartProps> = ({
                   width={barWidth}
                   height={barHeight}
                   fill={`url(#bar-gradient-${seriesIndex})`}
-                  onMouseEnter={handleMouseEnter}
+                  onMouseEnter={handleMouseMove}
+                  onMouseMove={handleMouseMove}
                   onMouseLeave={hideTooltip}
                   onClick={handleClick}
                   {...BarStyles}

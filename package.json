@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.10.3",
+  "version": "0.10.5",
   "main": "dist/web.cjs.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -11,7 +11,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "vite",
+    "start": "vite --port 3300",
     "prelighthouse": "vite build",
     "build": "vite build --config vite.lib.config.ts",
     "test": "vitest",

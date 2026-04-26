@@ -23,12 +23,12 @@ const PasswordComponent: React.FC<PasswordProps> = ({
           display="flex"
           alignItems="center"
           justifyContent="center"
-          width="20px"
-          height="20px"
-          minWidth="20px"
+          width="16px"
+          height="16px"
+          minWidth="16px"
           color="color-gray-500"
           cursor={props.isDisabled ? 'not-allowed' : 'pointer'}
-          transition="all 0.2s ease-in-out"
+          transition="color 0.2s ease"
           onClick={() => {
             if (!props.isDisabled) {
               setIsVisible(!isVisible);

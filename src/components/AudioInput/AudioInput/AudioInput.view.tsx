@@ -5,11 +5,16 @@ import { View, Horizontal, Vertical, Text } from 'app-studio';
 import { Uploader } from '../../Uploader/Uploader';
 import {
   AttachmentIcon,
+  CloseIcon,
   MicrophoneIcon,
-  PauseIcon,
-  PlayIcon,
   StopIcon,
 } from '../../Icon/Icon';
+
+function formatDuration(duration: number) {
+  const minutes = Math.floor(duration / 60);
+  const seconds = duration % 60;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
 
 export function AudioInputView({
   onAudio,
@@ -17,6 +22,8 @@ export function AudioInputView({
   paused,
   audioBlob,
   analyserNode,
+  duration,
+  error,
   startRecording,
   stopRecording,
   pauseRecording,
@@ -25,45 +32,71 @@ export function AudioInputView({
   handleFileChange,
   ...viewProps
 }: AudioInputViewProps) {
-  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [preview, setPreview] = useState<{ url: string; label: string } | null>(
+    null
+  );
 
   useEffect(() => {
     if (audioBlob) {
       const url = URL.createObjectURL(audioBlob);
-      setAudioUrl(url);
+      setPreview({
+        url,
+        label: `recording-${Date.now()}.webm`,
+      });
       return () => {
         URL.revokeObjectURL(url);
       };
     }
-    setAudioUrl(null);
     return () => {};
   }, [audioBlob]);
 
+  const clearPreview = () => {
+    if (preview?.url) {
+      URL.revokeObjectURL(preview.url);
+    }
+    setPreview(null);
+    resetRecording();
+  };
+
+  const handleAudioFileSelect = (file: File) => {
+    onAudio(file);
+    if (preview?.url) {
+      URL.revokeObjectURL(preview.url);
+    }
+    setPreview({
+      url: URL.createObjectURL(file),
+      label: file.name,
+    });
+  };
+
   return (
-    <Vertical
-      gap="10px"
-      padding="8px"
-      border="1px solid #E2E8F0"
-      borderRadius="12px"
-      backgroundColor="color-white"
-      {...viewProps}
-    >
-      <Horizontal gap={8} alignItems="center">
+    <Vertical gap="10px" width="100%" {...viewProps}>
+      <Horizontal
+        gap={12}
+        alignItems="center"
+        padding="12px 14px"
+        border="1px solid #E5E7EB"
+        borderRadius="12px"
+        backgroundColor="color-white"
+      >
         <Uploader
           accept="audio/*"
           icon={<AttachmentIcon widthHeight={16} />}
           maxSize={100 * 1024 * 1024}
-          onFileSelect={(file) => onAudio(file)}
+          onFileSelect={handleAudioFileSelect}
           fileType="file"
           multiple={false}
           renderError={({ errorMessage }) => null}
           views={{
             container: {
-              height: '40px',
+              width: '36px',
+              height: '36px',
               cursor: 'pointer',
-              border: '1px solid #E2E8F0',
+              border: '1px solid #E5E7EB',
               borderRadius: '10px',
               backgroundColor: 'color-white',
+              transition:
+                'background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease',
               _hover: { backgroundColor: '#F8FAFC', borderColor: '#CBD5E1' },
             },
           }}
@@ -71,13 +104,9 @@ export function AudioInputView({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 4,
             borderRadius: '10px',
-            padding: 8,
-          }}
-          textProps={{
-            fontSize: '13px',
-            color: 'color-gray-600',
+            width: '36px',
+            height: '36px',
           }}
           validateFile={(file: File) => {
             if (file.size > 100 * 1024 * 1024) {
@@ -90,117 +119,93 @@ export function AudioInputView({
           }}
         />
 
-        {/* Recording controls styled like ChatInput */}
-        {!recording ? (
-          <View
-            as="button"
-            type="button"
-            onClick={startRecording}
-            height="40px"
-            width="40px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            backgroundColor="color-white"
-            color="color-gray-600"
-            borderRadius="10px"
-            border="1px solid #E2E8F0"
-            cursor="pointer"
-            transition="background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease"
-            _hover={{ backgroundColor: '#F8FAFC', borderColor: '#CBD5E1' }}
-          >
+        <View
+          as="button"
+          type="button"
+          onClick={recording ? stopRecording : startRecording}
+          width="36px"
+          height="36px"
+          minWidth="36px"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          backgroundColor="theme-primary"
+          color="color-white"
+          borderRadius="999px"
+          border="0"
+          cursor="pointer"
+          transition="background-color 0.2s ease, opacity 0.2s ease"
+          _hover={{ opacity: 0.92 }}
+        >
+          {recording ? (
+            <StopIcon widthHeight={14} color="currentColor" filled={false} />
+          ) : (
             <MicrophoneIcon
-              widthHeight={16}
+              widthHeight={18}
               color="currentColor"
               filled={false}
             />
-          </View>
-        ) : (
-          <Horizontal gap={8} alignItems="center">
-            {/* Pause/Resume toggle */}
-            <View
-              as="button"
-              type="button"
-              onClick={paused ? resumeRecording : pauseRecording}
-              height="40px"
-              width="40px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              backgroundColor="color-white"
-              color="color-gray-600"
-              borderRadius="10px"
-              border="1px solid #E2E8F0"
-              cursor="pointer"
-              transition="background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease"
-              _hover={{ backgroundColor: '#F8FAFC', borderColor: '#CBD5E1' }}
-            >
-              {paused ? (
-                <PlayIcon
-                  widthHeight={16}
-                  color="currentColor"
-                  filled={false}
-                />
-              ) : (
-                <PauseIcon
-                  widthHeight={16}
-                  color="currentColor"
-                  filled={false}
-                />
-              )}
-            </View>
+          )}
+        </View>
 
-            {/* Stop button (red) */}
-            <View
-              as="button"
-              type="button"
-              onClick={stopRecording}
-              height="40px"
-              width="40px"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              backgroundColor="theme-primary"
-              color="color-white"
-              borderRadius="10px"
-              border="1px solid theme-primary"
-              cursor="pointer"
-              transition="background-color 0.2s ease, border-color 0.2s ease"
-              _hover={{ backgroundColor: '#1D4ED8', borderColor: '#1D4ED8' }}
-            >
-              <StopIcon widthHeight={16} color="currentColor" filled={false} />
-            </View>
+        <View flex={1} minWidth={120}>
+          <AudioWaveform
+            analyserNode={recording ? analyserNode : null}
+            isPaused={!recording || paused}
+          />
+        </View>
 
-            <View
-              minWidth={120}
-              flex={1}
-              minHeight="40px"
-              padding="4px 10px"
-              border="1px solid #E2E8F0"
-              borderRadius="10px"
-              backgroundColor="#F8FAFC"
-            >
-              {recording && (
-                <AudioWaveform analyserNode={analyserNode} isPaused={paused} />
-              )}
-            </View>
-          </Horizontal>
-        )}
+        <Text
+          fontSize="12px"
+          lineHeight="16px"
+          color="color-gray-500"
+          whiteSpace="nowrap"
+        >
+          {formatDuration(duration)}
+        </Text>
       </Horizontal>
 
-      {audioUrl && !recording && (
-        <Vertical gap="8px" paddingTop="10px" borderTop="1px solid #E2E8F0">
-          <Text fontSize="12px" lineHeight="16px" color="color-gray-500">
-            Recorded audio
-          </Text>
-          <View
-            as="audio"
-            controls
-            src={audioUrl}
-            width="100%"
-            borderRadius="10px"
-          />
+      {preview && !recording && (
+        <Vertical
+          gap="8px"
+          padding="12px 14px"
+          border="1px solid #E5E7EB"
+          borderRadius="12px"
+          backgroundColor="color-white"
+        >
+          <Horizontal
+            alignItems="center"
+            justifyContent="space-between"
+            gap={8}
+          >
+            <Text fontSize="12px" lineHeight="16px" color="color-gray-500">
+              {preview.label}
+            </Text>
+            <View
+              as="button"
+              type="button"
+              onClick={clearPreview}
+              width="24px"
+              height="24px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              border="0"
+              backgroundColor="transparent"
+              color="color-gray-500"
+              cursor="pointer"
+            >
+              <CloseIcon widthHeight={14} color="currentColor" />
+            </View>
+          </Horizontal>
+          <View as="audio" controls src={preview.url} width="100%" />
         </Vertical>
+      )}
+
+      {error && (
+        <Text fontSize="11px" lineHeight="16px" color="color-red-500">
+          {error}
+        </Text>
       )}
     </Vertical>
   );

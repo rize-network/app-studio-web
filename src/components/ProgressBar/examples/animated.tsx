@@ -19,9 +19,10 @@ export const AnimatedDemo = () => {
           value={progress}
           animated={true}
           animationDuration="0.8s"
-          height={12}
-          radius={6}
-          color="theme-accent"
+          height={16}
+          radius={8}
+          color="color-blue-500"
+          showLabel
         />
       </View>
 
@@ -34,17 +35,6 @@ export const AnimatedDemo = () => {
           showLabel
           size={60}
           color="color-purple-500"
-        />
-
-        {/* Entrance Animation Example */}
-        <ProgressBar
-          animate={Animation.fadeIn({
-            duration: '1s',
-            iterationCount: 'infinite',
-          })}
-          value={75}
-          color="color-orange-500"
-          height={10}
         />
       </View>
     </View>

@@ -11,19 +11,14 @@ export const ChartContainerStyles: ViewProps = {
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
-  padding: '16px',
-  backgroundColor: 'color-white',
-  borderRadius: '12px',
-  boxShadow:
-    '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
 };
 
 // Default styles for chart title
 export const ChartTitleStyles: ViewProps = {
-  fontSize: '20px',
+  fontSize: '18px',
   fontWeight: '700',
   marginBottom: '24px',
-  textAlign: 'left',
+  textAlign: 'center',
   color: 'color-gray-900',
 };
 
@@ -64,22 +59,19 @@ export const LegendTextStyles: ViewProps = {
   color: 'color-gray-600',
 };
 
-// Default styles for tooltip with glassmorphism
+// Default styles for tooltip
 export const TooltipStyles: ViewProps = {
   position: 'absolute',
-  backgroundColor: 'rgba(255, 255, 255, 0.8)',
-  backdropFilter: 'blur(12px)',
+  backgroundColor: 'color-white',
   padding: '12px 16px',
-  borderRadius: '10px',
-  boxShadow:
-    '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-  border: '1px solid rgba(255, 255, 255, 0.3)',
+  borderRadius: '8px',
+  boxShadow: '0px 12px 24px rgba(15, 23, 42, 0.18)',
+  border: '1px solid color-gray-200',
   fontSize: '14px',
   display: 'flex',
   flexDirection: 'column',
   pointerEvents: 'none',
-  zIndex: 50,
-  transition: 'all 0.1s ease-out',
+  zIndex: 100,
 };
 
 // Default styles for chart grid
@@ -155,9 +147,8 @@ export const OverlayBaseStyles: ViewProps = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'rgba(255, 255, 255, 0.7)',
-  backdropFilter: 'blur(4px)',
-  borderRadius: '12px',
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  borderRadius: '4px',
   zIndex: 10,
   padding: '24px',
   textAlign: 'center',

@@ -12,43 +12,52 @@
 import { ViewProps } from 'app-studio';
 import { Shape, Size, Variant } from './Button.type';
 
-const ButtonFontSize = {
-  xs: 10,
-  sm: 12,
-  md: 14,
-  lg: 16,
-  xl: 20,
-};
-const ButtonLineHeight = {
-  xs: 12,
-  sm: 16,
-  md: 20,
-  lg: 24,
-  xl: 28,
-};
-
-const getButtonSize = (size: Size) => {
-  return {
-    minHeight: ButtonLineHeight[size] * 2,
-    paddingHorizontal: ButtonLineHeight[size] / 2,
-    fontSize: ButtonFontSize[size],
+export const ButtonSizes: Record<Size, ViewProps> = {
+  xs: {
+    minHeight: 24,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    fontSize: 10,
     fontWeight: 500,
-    lineHeight: ButtonLineHeight[size],
+    lineHeight: 12,
     letterSpacing: '-0.01em',
-    paddingInline: ButtonLineHeight[size],
-    paddingBlock: ButtonLineHeight[size] / 2,
-    outlineWidth: 'medium',
-  };
-};
-
-/**
- * Button sizes following the 4px grid system
- */ export const ButtonSizes: Record<Size, ViewProps> = {
-  xs: getButtonSize('xs'),
-  sm: getButtonSize('sm'),
-  md: getButtonSize('md'),
-  lg: getButtonSize('lg'),
-  xl: getButtonSize('xl'),
+  },
+  sm: {
+    minHeight: 32,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    fontSize: 12,
+    fontWeight: 500,
+    lineHeight: 16,
+    letterSpacing: '-0.01em',
+  },
+  md: {
+    minHeight: 40,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    fontSize: 14,
+    fontWeight: 500,
+    lineHeight: 20,
+    letterSpacing: '-0.01em',
+  },
+  lg: {
+    minHeight: 48,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: 24,
+    letterSpacing: '-0.01em',
+  },
+  xl: {
+    minHeight: 56,
+    paddingHorizontal: 28,
+    paddingVertical: 14,
+    fontSize: 20,
+    fontWeight: 500,
+    lineHeight: 28,
+    letterSpacing: '-0.01em',
+  },
 };
 
 /**
@@ -91,15 +100,30 @@ export const IconSizes: Record<Size, ViewProps> = {
   },
 };
 
+/**
+ * Convert an app-studio token (`color-*`, `theme-*`, `light-*`, `dark-*`) into
+ * the equivalent CSS `var(--token)` reference so it can be embedded inside
+ * arbitrary CSS strings (box-shadow, gradients, …) where token resolution is
+ * not applied. Non-token values are returned unchanged.
+ */
+export const cssVar = (value: string) =>
+  /^(color|theme|light|dark)-/.test(value) ? `var(--${value})` : value;
+
 export const getButtonVariants = (
   color: string,
   textColor: string,
   reversed: boolean = false
 ): Record<Variant, ViewProps> => {
-  // Determine effective colors based on reversed state
+  // Determine effective tokens based on reversed state
   const effectiveBg = reversed ? textColor : color;
   const effectiveContent = reversed ? color : textColor;
   const effectiveBorder = reversed ? textColor : color;
+
+  // App-Studio alpha syntax: `{token}-{alpha}` (alpha 0–1000 → 0%–100% opacity).
+  const tint = (alpha: number) => `${effectiveBorder}-${alpha}`;
+  const focusRing = `0 0 0 2px ${cssVar('color-white')}, 0 0 0 4px ${cssVar(
+    effectiveBorder
+  )}`;
 
   return {
     filled: {
@@ -108,17 +132,11 @@ export const getButtonVariants = (
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'transparent',
-      _hover: {
-        opacity: 0.9,
-      },
-      _active: {
-        opacity: 0.95,
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBg}`,
-      },
-      transition: 'background-color 0.2s ease, opacity 0.2s ease',
+      _hover: { opacity: 0.92 },
+      _active: { opacity: 0.96 },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
+      transition:
+        'background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease',
     },
     empty: {
       backgroundColor: 'transparent',
@@ -126,16 +144,9 @@ export const getButtonVariants = (
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: effectiveBorder,
-      _hover: {
-        opacity: 0.9,
-      },
-      _active: {
-        opacity: 0.95,
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
-      },
+      _hover: { opacity: 0.9 },
+      _active: { opacity: 0.95 },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition: 'background-color 0.2s ease, opacity 0.2s ease',
     },
     outline: {
@@ -144,41 +155,22 @@ export const getButtonVariants = (
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: effectiveBorder,
-      _hover: {
-        opacity: 0.9,
-      },
-      _active: {
-        opacity: 0.95,
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
-      },
+      _hover: { backgroundColor: tint(40) },
+      _active: { backgroundColor: tint(80) },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition:
-        'background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease',
+        'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
     },
-
     ghost: {
       backgroundColor: 'transparent',
       color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'transparent',
-      _hover: {
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: effectiveBorder,
-        color: effectiveBorder,
-        opacity: 0.9,
-      },
-      _active: {
-        opacity: 0.95,
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
-      },
-      transition: 'background-color 0.2s ease, opacity 0.2s ease',
+      _hover: { backgroundColor: tint(60) },
+      _active: { backgroundColor: tint(100) },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
+      transition: 'background-color 0.2s ease, color 0.2s ease',
     },
     link: {
       backgroundColor: 'transparent',
@@ -186,44 +178,27 @@ export const getButtonVariants = (
       borderWidth: 0,
       borderStyle: 'none',
       borderColor: 'transparent',
+      minHeight: 'auto',
+      paddingHorizontal: '4px',
+      paddingVertical: '10px',
       textDecoration: 'underline',
       textUnderlineOffset: '2px',
       textDecorationThickness: '1px',
       textDecorationColor: effectiveBorder,
-      _hover: {
-        opacity: 0.8,
-      },
-      _active: {
-        opacity: 0.9,
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
-      },
+      _hover: { opacity: 0.8 },
+      _active: { opacity: 0.9 },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition: 'opacity 0.2s ease',
     },
     subtle: {
-      backgroundColor: reversed
-        ? `color-mix(in srgb, ${effectiveBorder} 20%, transparent)`
-        : `color-mix(in srgb, ${effectiveBorder} 5%, transparent)`,
+      backgroundColor: tint(reversed ? 200 : 100),
       color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: effectiveBorder,
-      _hover: {
-        backgroundColor: reversed
-          ? `color-mix(in srgb, ${effectiveBorder} 40%, transparent)`
-          : `color-mix(in srgb, ${effectiveBorder} 15%, transparent)`,
-      },
-      _active: {
-        backgroundColor: reversed
-          ? 'color-whiteAlpha-300'
-          : 'color-blackAlpha-300',
-      },
-      _focusVisible: {
-        outline: 'none',
-        boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${effectiveBorder}`,
-      },
+      _hover: { backgroundColor: tint(reversed ? 300 : 200) },
+      _active: { backgroundColor: tint(reversed ? 400 : 300) },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
     },
   };

@@ -128,21 +128,45 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
         backgroundColor={trackColor}
         borderRadius={radius}
         overflow="hidden"
+        position="relative"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
         {...views?.container}
         {...props}
       >
-        <View
-          width={`${percentage}%`}
-          height="100%"
-          backgroundColor={barColor}
-          borderRadius={radius}
+        <div
           style={{
+            height: '100%',
+            backgroundColor: barColor,
+            borderRadius: typeof radius === 'number' ? `${radius}px` : radius,
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: `${percentage}%`,
             transition: animated
               ? `width ${animationDuration} ease-in-out`
               : 'none',
+            ...(views?.bar as any),
           }}
-          {...views?.bar}
         />
+        {showLabel && (
+          <Text
+            color={labelColor}
+            fontSize={
+              typeof linearHeight === 'number' && linearHeight > 16
+                ? `${linearHeight * 0.6}px`
+                : '10px'
+            }
+            fontWeight="bold"
+            position="relative"
+            zIndex={1}
+            {...views?.text}
+          >
+            {Math.round(percentage)}%
+          </Text>
+        )}
       </View>
     );
   }
