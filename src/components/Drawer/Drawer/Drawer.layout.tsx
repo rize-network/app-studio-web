@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, Suspense, useEffect } from 'react';
 import { DrawerState, hideDrawer, useDrawerStore } from './Drawer.store';
 import { DrawerOverlay, DrawerContainer } from './Drawer.view';
 import { DrawerLayoutProps } from './Drawer.props';
@@ -64,7 +64,9 @@ export const DrawerLayout = ({
               isOpen={drawer.props.isOpen}
               {...(containerProps || {})}
             >
-              <DrawerComponent {...contentProps} />
+              <Suspense fallback={null}>
+                <DrawerComponent {...contentProps} />
+              </Suspense>
             </DrawerContainer>
           </DrawerOverlay>
         );
