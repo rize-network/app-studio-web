@@ -35,6 +35,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
   handleColorSelect,
   handleCustomColorChange,
   handleCustomColorSubmit,
+  handleClose,
   triggerRef,
   dropdownRef,
   onChange,

@@ -11,19 +11,25 @@ import {
   AccordionContent,
   AccordionView,
 } from './Accordion/Accordion.view';
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
 // Defines the main `Accordion` component, which orchestrates state management using `useAccordionState` and provides context to its sub-components (`Item`, `Trigger`, `Content`) to render a complete and functional accordion UI.
-const AccordionComponent: React.FC<AccordionProps> = ({
-  children,
-  type = 'single',
-  value,
-  defaultValue,
-  onValueChange,
-  collapsible = false,
-  shape = 'rounded',
-  variant = 'default',
-  views,
-  ...props
-}) => {
+const AccordionComponent: React.FC<AccordionProps> = (componentProps) => {
+  const mergedProps = useMergedDesignSystemComponentProps(
+    'accordion',
+    componentProps
+  );
+  const {
+    children,
+    type = 'single',
+    value,
+    defaultValue,
+    onValueChange,
+    collapsible = false,
+    shape = 'rounded',
+    variant = 'default',
+    views,
+    ...props
+  } = mergedProps;
   const legacyDefaultValue = Array.isArray(defaultValue)
     ? defaultValue
     : defaultValue

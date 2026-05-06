@@ -158,7 +158,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
             {isIndeterminate ? (
               <MinusIcon
                 widthHeight={IconSizes[size]}
-                color="white"
+                color="color-white"
                 transition="opacity 0.2s ease"
               />
             ) : (
@@ -166,7 +166,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
               (icon ?? (
                 <TickIcon
                   widthHeight={IconSizes[size]}
-                  color="white"
+                  color="color-white"
                   transition="opacity 0.2s ease"
                 />
               ))

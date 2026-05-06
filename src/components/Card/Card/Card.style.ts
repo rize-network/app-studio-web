@@ -71,9 +71,8 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
     },
     header: {
       padding: '16px',
-      borderBottomWidth: '1px',
-      borderBottomStyle: 'solid',
-      borderBottomColor: isDark ? 'color-gray-800' : 'color-gray-100',
+      borderBottom: '1px solid',
+      borderColor: isDark ? 'color-gray-800' : 'color-gray-100',
       color: 'theme-primary',
       fontWeight: 600,
       fontSize: 14,
@@ -86,9 +85,8 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
     },
     footer: {
       padding: '16px',
-      borderTopWidth: '1px',
-      borderTopStyle: 'solid',
-      borderTopColor: isDark ? 'color-gray-800' : 'color-gray-100',
+      borderTop: '1px solid',
+      borderColor: isDark ? 'color-gray-800' : 'color-gray-100',
       justifyContent: 'flex-end',
       gap: 8,
     },

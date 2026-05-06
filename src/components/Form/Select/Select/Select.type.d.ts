@@ -6,6 +6,8 @@ export type Shape = 'default' | 'square' | 'rounded' | 'pill';
 export type Variant = 'outline' | 'default' | 'none';
 // Initiates a 'SelectStyles' type outlining style properties applicable to the Select component.
 export type SelectStyles = {
+  container?: ViewProps;
+  content?: ViewProps;
   text?: ViewProps;
   icon?: ViewProps;
   dropDown?: ViewProps;

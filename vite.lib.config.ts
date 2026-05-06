@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ['src/components'],
+      include: ['src/components', 'src/design-system'],
       outDir: 'dist',
       rollupTypes: true,
     }),

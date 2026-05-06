@@ -109,18 +109,57 @@ export const IconSizes: Record<Size, ViewProps> = {
 export const cssVar = (value: string) =>
   /^(color|theme|light|dark)-/.test(value) ? `var(--${value})` : value;
 
+const normalizeHex = (value: string) => {
+  const match = value.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (!match) return null;
+
+  const hex =
+    match[1].length === 3
+      ? match[1]
+          .split('')
+          .map((char) => `${char}${char}`)
+          .join('')
+      : match[1];
+
+  return {
+    r: parseInt(hex.slice(0, 2), 16),
+    g: parseInt(hex.slice(2, 4), 16),
+    b: parseInt(hex.slice(4, 6), 16),
+  };
+};
+
+const mixHex = (value: string, alpha: number) => {
+  const color = normalizeHex(value);
+  if (!color) return value;
+
+  const target = alpha < 100 ? 255 : 0;
+  const amount = Math.min(Math.abs(100 - alpha) / 100, 0.28);
+  const toHex = (channel: number) =>
+    Math.round(channel + (target - channel) * amount)
+      .toString(16)
+      .padStart(2, '0');
+
+  return `#${toHex(color.r)}${toHex(color.g)}${toHex(color.b)}`;
+};
+
+const tintColor = (value: string, alpha: number) => mixHex(value, alpha);
+
 export const getButtonVariants = (
   color: string,
   textColor: string,
-  reversed: boolean = false
+  reversed: boolean = false,
+  theme?: any
 ): Record<Variant, ViewProps> => {
   // Determine effective tokens based on reversed state
   const effectiveBg = reversed ? textColor : color;
   const effectiveContent = reversed ? color : textColor;
   const effectiveBorder = reversed ? textColor : color;
 
+  // For filled buttons, if the background is the primary color, use onPrimary for text contrast.
+  const isPrimary = color === 'theme-primary' || (theme && color === theme.primary);
+  const filledTextColor = isPrimary && theme?.onPrimary ? theme.onPrimary : effectiveContent;
+
   // App-Studio alpha syntax: `{token}-{alpha}` (alpha 0–1000 → 0%–100% opacity).
-  const tint = (alpha: number) => `${effectiveBorder}-${alpha}`;
   const focusRing = `0 0 0 2px ${cssVar('color-white')}, 0 0 0 4px ${cssVar(
     effectiveBorder
   )}`;
@@ -128,10 +167,10 @@ export const getButtonVariants = (
   return {
     filled: {
       backgroundColor: effectiveBg,
-      color: effectiveContent,
+      color: filledTextColor,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: 'transparent',
+      borderColor: effectiveBg,
       _hover: { opacity: 0.92 },
       _active: { opacity: 0.96 },
       _focusVisible: { outline: 'none', boxShadow: focusRing },
@@ -139,65 +178,68 @@ export const getButtonVariants = (
         'background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease',
     },
     empty: {
-      backgroundColor: 'transparent',
       color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: effectiveBorder,
+      backgroundColor: 'transparent',
       _hover: { opacity: 0.9 },
       _active: { opacity: 0.95 },
       _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition: 'background-color 0.2s ease, opacity 0.2s ease',
     },
     outline: {
-      backgroundColor: 'transparent',
       color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: effectiveBorder,
-      _hover: { backgroundColor: tint(40) },
-      _active: { backgroundColor: tint(80) },
+      backgroundColor: 'transparent',
+      _hover: { opacity: 0.9 },
+      _active: { opacity: 0.95 },
       _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition:
         'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
     },
     ghost: {
-      backgroundColor: 'transparent',
       color: effectiveBorder,
-      borderWidth: 1,
+      borderWidth: 0,
       borderStyle: 'solid',
-      borderColor: 'transparent',
-      _hover: { backgroundColor: tint(60) },
-      _active: { backgroundColor: tint(100) },
+      borderColor: effectiveBorder,
+      backgroundColor: 'transparent',
+      _hover: { opacity: 0.86 },
+      _active: { opacity: 0.94 },
       _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition: 'background-color 0.2s ease, color 0.2s ease',
     },
     link: {
-      backgroundColor: 'transparent',
       color: effectiveBorder,
       borderWidth: 0,
       borderStyle: 'none',
-      borderColor: 'transparent',
+      borderColor: effectiveBorder,
       minHeight: 'auto',
       paddingHorizontal: '4px',
       paddingVertical: '10px',
       textDecoration: 'underline',
-      textUnderlineOffset: '2px',
-      textDecorationThickness: '1px',
-      textDecorationColor: effectiveBorder,
+      backgroundColor: 'transparent',
+      style: {
+        textUnderlineOffset: '2px',
+        textDecorationThickness: '1px',
+        textDecorationColor: cssVar(effectiveBorder),
+      },
       _hover: { opacity: 0.8 },
       _active: { opacity: 0.9 },
       _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition: 'opacity 0.2s ease',
     },
     subtle: {
-      backgroundColor: tint(reversed ? 200 : 100),
+      backgroundColor: effectiveBorder, // Placeholder for tint logic if needed
+      opacity: reversed ? 0.2 : 0.1,
       color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: effectiveBorder,
-      _hover: { backgroundColor: tint(reversed ? 300 : 200) },
-      _active: { backgroundColor: tint(reversed ? 400 : 300) },
+      _hover: { opacity: 0.9 },
+      _active: { opacity: 0.95 },
       _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
     },

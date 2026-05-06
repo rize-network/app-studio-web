@@ -8,6 +8,7 @@ import {
 } from './Tabs.props';
 import { TabsContextType, TabsVariant } from './Tabs.type';
 import { TabHeader } from './TabHeader';
+import { deepMerge, useDesignSystemComponentProps } from 'src/design-system';
 
 const getTabsVariantStyles = (
   variant: TabsVariant,
@@ -36,11 +37,11 @@ const getTabsVariantStyles = (
         minHeight: 44,
         padding: '0 22px',
         borderRadius: 12, // radius-lg
-        backgroundColor: 'transparent',
         color: isDark ? 'color-gray-300' : 'color-gray-600',
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: 'transparent',
+        borderColor: isDark ? 'color-gray-800' : 'color-gray-100',
+        style: { backgroundColor: 'transparent' },
       },
       activeTab: {
         backgroundColor: isDark ? 'color-gray-700' : 'color-white',
@@ -53,11 +54,8 @@ const getTabsVariantStyles = (
         fontSize: 14,
         lineHeight: '20px',
         letterSpacing: '-0.01em',
-        color: 'inherit',
       },
-      activeText: {
-        color: 'inherit',
-      },
+      activeText: {},
       content: {
         width: '100%',
       },
@@ -105,24 +103,20 @@ const getTabsVariantStyles = (
     header: {
       width: '100%',
       gap: 20,
-      borderBottomWidth: '1px',
-      borderBottomStyle: 'solid',
-      borderBottomColor: isDark ? 'color-gray-700' : 'color-gray-200',
+      borderBottom: 'none',
     },
     tab: {
       minHeight: 44,
       padding: '0 4px',
       borderRadius: 0,
-      backgroundColor: 'transparent',
       color: isDark ? 'color-gray-400' : 'color-gray-500',
-      borderBottomWidth: '3px',
-      borderBottomStyle: 'solid',
-      borderBottomColor: 'transparent',
-      marginBottom: '-1px',
+      borderBottom: '3px solid',
+      borderColor: isDark ? 'color-gray-900' : 'color-white',
+      style: { backgroundColor: 'transparent' },
     },
     activeTab: {
       color: 'theme-primary',
-      borderBottomColor: 'theme-primary',
+      borderColor: 'theme-primary',
     },
     text: {
       fontSize: 14,
@@ -135,6 +129,7 @@ const getTabsVariantStyles = (
     },
     content: {
       width: '100%',
+      paddingTop: 12,
     },
   };
 };
@@ -168,8 +163,8 @@ export const TabsView: React.FC<TabsViewProps> = ({
       {/* Horizontal layout for the tab headers/buttons */}
       <Horizontal
         alignItems="center"
-        {...views.headerTabs}
         {...variantStyles.header}
+        {...views.headerTabs}
       >
         {tabs.map((tab) => {
           // Determine if the current tab in the loop is the active one
@@ -239,12 +234,19 @@ export const TabsList: React.FC<TabsListProps> = React.memo(
     const { themeMode } = useTheme();
     const { variant = 'underline' } = useTabsContext();
     const variantStyles = getTabsVariantStyles(variant, themeMode);
+    const designSystemTabs = useDesignSystemComponentProps('tabs');
+    const mergedViews = deepMerge(
+      {
+        container: designSystemTabs.views?.headerTabs,
+      },
+      views
+    );
 
     return (
       <Horizontal
         alignItems="center"
         {...variantStyles.header}
-        {...views?.container}
+        {...mergedViews?.container}
       >
         {children}
       </Horizontal>
@@ -263,6 +265,14 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = React.memo(
     } = useTabsContext();
     const isActive = activeValue === value;
     const variantStyles = getTabsVariantStyles(variant, themeMode);
+    const designSystemTabs = useDesignSystemComponentProps('tabs');
+    const mergedViews = deepMerge(
+      {
+        trigger: designSystemTabs.views?.tab,
+        activeState: designSystemTabs.views?.activeTab,
+      },
+      views
+    );
 
     const handleClick = useCallback(() => {
       if (!disabled) {
@@ -288,8 +298,8 @@ export const TabsTrigger: React.FC<TabsTriggerProps> = React.memo(
             : {}
         }
         onClick={handleClick}
-        {...views?.trigger}
-        {...(isActive ? views?.activeState : {})}
+        {...mergedViews?.trigger}
+        {...(isActive ? mergedViews?.activeState : {})}
       >
         <View
           {...variantStyles.text}

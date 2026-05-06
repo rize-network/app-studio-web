@@ -14,6 +14,31 @@ import {
   FieldWrapper,
 } from '../../../Input';
 import { TextAreaViewProps } from './TextArea.props';
+
+const withoutFieldShellView = <T extends Record<string, any>>(views?: T): T => {
+  if (!views) return {} as T;
+  const { container, content, ...layoutViews } = views;
+  return layoutViews as T;
+};
+
+const getTextAreaRadius = (
+  radius: unknown,
+  shape: TextAreaViewProps['shape']
+): string | number | undefined => {
+  if (shape !== 'pill') return radius as string | number | undefined;
+
+  if (typeof radius === 'number') return Math.min(radius, 28);
+
+  if (typeof radius === 'string') {
+    const pxRadius = Number.parseFloat(radius);
+    if (Number.isFinite(pxRadius) && radius.trim().endsWith('px')) {
+      return `${Math.min(pxRadius, 28)}px`;
+    }
+  }
+
+  return '28px';
+};
+
 const TextAreaView: React.FC<TextAreaViewProps> = ({
   id,
   name,
@@ -84,6 +109,21 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
       lineHeight: '28px',
     },
   } as const;
+  const fieldView = views?.field || {};
+  const fieldShellView = views?.container || {};
+  const textAreaRadius = getTextAreaRadius(
+    (fieldShellView as any).borderRadius,
+    shape
+  );
+  const contentViews = {
+    ...views,
+    container: {
+      ...fieldShellView,
+      ...(textAreaRadius !== undefined ? { borderRadius: textAreaRadius } : {}),
+      overflow: 'hidden',
+    },
+  };
+  const layoutViews = withoutFieldShellView(views);
   const fieldStyles = {
     margin: 0,
     paddingVertical: 0,
@@ -100,12 +140,15 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     fontSize: fieldSizeStyles[size].fontSize,
     letterSpacing: '-0.01em',
     fontWeight: 400,
-    backgroundColor: 'transparent',
     color: isDisabled ? 'color-gray-400' : 'color-gray-900',
     cursor: isDisabled ? 'not-allowed' : 'text',
     opacity: isDisabled ? 0.7 : 1,
     transition: 'color 0.2s ease, opacity 0.2s ease',
-    ...views['field'],
+    ...fieldView,
+    style: {
+      backgroundColor: 'transparent',
+      ...(fieldView as any).style,
+    },
   };
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => {
@@ -128,13 +171,13 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
     }
   };
   return (
-    <FieldContainer helperText={helperText} error={error} views={views}>
+    <FieldContainer helperText={helperText} error={error} views={layoutViews}>
       <FieldContent
         label={label}
         size={size}
         error={error}
         shape={shape}
-        views={views}
+        views={contentViews}
         shadow={shadow}
         variant={variant}
         value={value}
@@ -152,7 +195,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
         paddingRight={fieldSizeStyles[size].shellPaddingX}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        {...views?.content}
+        {...contentViews?.content}
       >
         <FieldWrapper {...views?.warper}>
           {showLabel && (
@@ -183,6 +226,8 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             {...props}
             style={{
               resize: isDisabled || isReadOnly ? 'none' : 'vertical',
+              ...fieldStyles.style,
+              ...((props as any).style || {}),
             }}
             {...views?.textarea}
           />

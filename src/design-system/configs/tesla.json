@@ -1,0 +1,591 @@
+{
+  "metadata": {
+    "id": "tesla",
+    "label": "Tesla",
+    "sourcePath": "design.md/html/tesla.html",
+    "sourceTitle": "Design System Inspired by Tesla",
+    "defaultAppearance": "light",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#3E6AE1",
+    "secondary": "#171A20",
+    "success": "#3E6AE1",
+    "warning": "#5C5E62",
+    "error": "#171A20",
+    "canvas": "#FFFFFF",
+    "surface": "#F4F4F4",
+    "text": "#171A20",
+    "muted": "#5C5E62",
+    "border": "#D0D1D2",
+    "onPrimary": "#FFFFFF"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "electric-blue": "#3E6AE1",
+      "pure-white": "#FFFFFF",
+      "carbon-dark": "#171A20",
+      "graphite": "#393C41",
+      "pewter": "#5C5E62",
+      "silver-fog": "#8E8E8E",
+      "cloud-gray": "#EEEEEE",
+      "pale-silver": "#D0D1D2",
+      "light-ash": "#F4F4F4",
+      "frosted-glass": "rgba(255,255,255,0.75)",
+      "overlay": "rgba(128,128,128,0.65)",
+      "subtle-shadow": "rgba(0,0,0,0.05)",
+      "font-display": "'Inter', -apple-system, Arial, sans-serif",
+      "font-text": "'Inter', -apple-system, Arial, sans-serif"
+    },
+    "colors": [
+      {
+        "name": "electric-blue",
+        "value": "#3E6AE1",
+        "role": "electric blue"
+      },
+      {
+        "name": "pure-white",
+        "value": "#FFFFFF",
+        "role": "pure white"
+      },
+      {
+        "name": "carbon-dark",
+        "value": "#171A20",
+        "role": "carbon dark"
+      },
+      {
+        "name": "graphite",
+        "value": "#393C41",
+        "role": "graphite"
+      },
+      {
+        "name": "pewter",
+        "value": "#5C5E62",
+        "role": "pewter"
+      },
+      {
+        "name": "silver-fog",
+        "value": "#8E8E8E",
+        "role": "silver fog"
+      },
+      {
+        "name": "cloud-gray",
+        "value": "#EEEEEE",
+        "role": "cloud gray"
+      },
+      {
+        "name": "pale-silver",
+        "value": "#D0D1D2",
+        "role": "pale silver"
+      },
+      {
+        "name": "light-ash",
+        "value": "#F4F4F4",
+        "role": "light ash"
+      },
+      {
+        "name": "frosted-glass",
+        "value": "rgba(255,255,255,0.75)",
+        "role": "frosted glass"
+      },
+      {
+        "name": "overlay",
+        "value": "rgba(128,128,128,0.65)",
+        "role": "overlay"
+      },
+      {
+        "name": "subtle-shadow",
+        "value": "rgba(0,0,0,0.05)",
+        "role": "subtle shadow"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Inter', -apple-system, Arial, sans-serif",
+      "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      "fontSizes": [
+        "14px",
+        "40px",
+        "28px",
+        "13px",
+        "12px",
+        "11px",
+        "17px",
+        "16px"
+      ],
+      "fontWeights": [
+        "400",
+        "500",
+        "700",
+        "600"
+      ],
+      "lineHeights": [
+        "1.43",
+        "48px",
+        "20px",
+        "1.2",
+        "1.3",
+        "36px",
+        "1.35",
+        "1.4"
+      ]
+    },
+    "spacing": [
+      "4px",
+      "6px",
+      "8px",
+      "10px",
+      "12px",
+      "14px",
+      "16px",
+      "20px",
+      "24px",
+      "32px",
+      "40px",
+      "48px",
+      "56px",
+      "60px",
+      "64px",
+      "80px",
+      "100px"
+    ],
+    "radii": [
+      "4px",
+      "4px 4px 0 0",
+      "0 0 4px 4px",
+      "12px",
+      "3px"
+    ],
+    "shadows": [
+      "rgba(0,0,0,0.05)",
+      "0 1px 0 var(--pewter)"
+    ]
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "rounded",
+      "color": "#3E6AE1",
+      "textColor": "#FFFFFF",
+      "views": {
+        "container": {
+          "borderRadius": "4px",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif",
+          "fontWeight": 500,
+          "borderColor": "#3E6AE1"
+        },
+        "content": {
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif",
+          "fontWeight": 500
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#171A20",
+          "color": "#FFFFFF",
+          "borderColor": "#171A20",
+          "borderRadius": "4px",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "text": {
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "square",
+      "views": {
+        "container": {
+          "backgroundColor": "#F4F4F4",
+          "borderColor": "#D0D1D2",
+          "color": "#171A20",
+          "borderRadius": 0,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "rgba(0,0,0,0.05)"
+        },
+        "header": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "#D0D1D2"
+        },
+        "content": {
+          "color": "#5C5E62",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "footer": {
+          "borderColor": "#D0D1D2"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#D0D1D2",
+          "color": "#171A20",
+          "borderRadius": "4px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "label": {
+          "color": "#5C5E62",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "helperText": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#D0D1D2",
+          "color": "#171A20",
+          "borderRadius": "4px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "label": {
+          "color": "#5C5E62",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "helperText": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#D0D1D2",
+          "color": "#171A20",
+          "borderRadius": "4px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "label": {
+          "color": "#5C5E62",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "helperText": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "#D0D1D2",
+          "backgroundColor": "#FFFFFF",
+          "_checked": {
+            "backgroundColor": "#3E6AE1",
+            "borderColor": "#3E6AE1"
+          }
+        },
+        "label": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "infoText": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "#D0D1D2",
+          "backgroundColor": "#FFFFFF"
+        },
+        "dot": {
+          "backgroundColor": "#3E6AE1"
+        },
+        "label": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "infoText": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "#D0D1D2"
+        },
+        "circle": {
+          "backgroundColor": "#FFFFFF"
+        },
+        "label": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "#3E6AE1",
+      "views": {
+        "track": {
+          "backgroundColor": "#D0D1D2"
+        },
+        "progress": {
+          "backgroundColor": "#3E6AE1"
+        },
+        "filledTrack": {
+          "backgroundColor": "#3E6AE1"
+        },
+        "thumb": {
+          "borderColor": "#3E6AE1",
+          "backgroundColor": "#FFFFFF"
+        },
+        "label": {
+          "color": "#171A20"
+        },
+        "valueLabel": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "underline",
+      "views": {
+        "headerTabs": {
+          "borderColor": "#D0D1D2"
+        },
+        "tab": {
+          "color": "#5C5E62"
+        },
+        "activeTab": {
+          "color": "#3E6AE1",
+          "borderColor": "#3E6AE1",
+          "style": {
+            "backgroundColor": "transparent"
+          }
+        },
+        "title": {
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "activeText": {
+          "color": "#3E6AE1"
+        },
+        "content": {
+          "color": "#171A20"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "#D0D1D2",
+          "backgroundColor": "#F4F4F4",
+          "color": "#171A20"
+        },
+        "trigger": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "content": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "#FFFFFF",
+          "color": "#171A20",
+          "borderColor": "#D0D1D2"
+        },
+        "thead": {
+          "backgroundColor": "#F4F4F4",
+          "color": "#171A20"
+        },
+        "th": {
+          "color": "#5C5E62",
+          "borderColor": "#D0D1D2",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+        },
+        "tr": {
+          "borderColor": "#D0D1D2"
+        },
+        "td": {
+          "color": "#171A20",
+          "borderColor": "#D0D1D2"
+        },
+        "caption": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "#F4F4F4",
+          "borderColor": "#D0D1D2",
+          "color": "#171A20"
+        },
+        "fallback": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "#F4F4F4",
+          "borderColor": "#D0D1D2",
+          "borderRadius": "4px"
+        },
+        "title": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "description": {
+          "color": "#5C5E62",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "icon": {
+          "color": "#3E6AE1"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "#3E6AE1"
+        },
+        "label": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "#3E6AE1",
+      "backgroundColor": "#D0D1D2",
+      "radius": "4px",
+      "views": {
+        "container": {
+          "backgroundColor": "#D0D1D2"
+        },
+        "bar": {
+          "backgroundColor": "#3E6AE1"
+        },
+        "text": {
+          "color": "#171A20"
+        }
+      }
+    },
+    "loader": {
+      "color": "#3E6AE1"
+    },
+    "separator": {
+      "color": "#D0D1D2",
+      "views": {
+        "container": {
+          "borderColor": "#D0D1D2"
+        },
+        "label": {
+          "color": "#5C5E62",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#D0D1D2",
+          "color": "#171A20"
+        },
+        "item": {
+          "color": "#5C5E62"
+        },
+        "activeItem": {
+          "color": "#3E6AE1",
+          "borderColor": "#3E6AE1"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "#FFFFFF",
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "eyebrow": {
+          "color": "#5C5E62"
+        },
+        "title": {
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "description": {
+          "color": "#5C5E62"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "#FFFFFF",
+          "color": "#171A20",
+          "fontFamily": "'Inter', -apple-system, Arial, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#D0D1D2"
+        },
+        "surface": {
+          "backgroundColor": "#F4F4F4",
+          "borderColor": "#D0D1D2",
+          "color": "#171A20"
+        }
+      }
+    }
+  }
+}

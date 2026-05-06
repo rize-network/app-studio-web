@@ -1,0 +1,727 @@
+{
+  "metadata": {
+    "id": "revolut",
+    "label": "Revolut",
+    "sourcePath": "design.md/html/revolut.html",
+    "sourceTitle": "Design System Inspiration of Revolut",
+    "defaultAppearance": "light",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#494fdf",
+    "secondary": "#4f55f1",
+    "success": "#16a34a",
+    "warning": "#d97706",
+    "error": "#e61e49",
+    "canvas": "#ffffff",
+    "surface": "#f4f4f4",
+    "text": "#191c1f",
+    "muted": "#505a63",
+    "border": "#e5e7eb",
+    "onPrimary": "#ffffff"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "primary": "#494fdf",
+      "primary-bright": "#4f55f1",
+      "primary-deep": "#3a40c4",
+      "on-primary": "#ffffff",
+      "ink": "#191c1f",
+      "body": "#1f2226",
+      "charcoal": "#3a3d40",
+      "mute": "#505a63",
+      "ash": "#5c5e60",
+      "stone": "#8d969e",
+      "faint": "#c9c9cd",
+      "on-dark": "#ffffff",
+      "on-dark-mute": "rgba(255,255,255,0.72)",
+      "canvas-light": "#ffffff",
+      "canvas-dark": "#000000",
+      "surface-soft": "#f4f4f4",
+      "surface-card": "#ffffff",
+      "surface-deep": "#0a0a0a",
+      "surface-elevated": "#16181a",
+      "hairline-light": "#e2e2e7",
+      "hairline-dark": "rgba(255,255,255,0.12)",
+      "hairline-strong": "#191c1f",
+      "divider-soft": "rgba(255,255,255,0.06)",
+      "teal": "#00a87e",
+      "light-blue": "#007bc2",
+      "blue-link": "#376cd5",
+      "light-green": "#428619",
+      "green-text": "#006400",
+      "yellow": "#b09000",
+      "warning": "#ec7e00",
+      "pink": "#e61e49",
+      "danger": "#e23b4a",
+      "deep-red": "#8b0000",
+      "brown": "#936d62",
+      "font-display": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+      "font-ui": "'Inter', system-ui, sans-serif"
+    },
+    "colors": [
+      {
+        "name": "primary",
+        "value": "#494fdf",
+        "role": "primary"
+      },
+      {
+        "name": "primary-bright",
+        "value": "#4f55f1",
+        "role": "primary bright"
+      },
+      {
+        "name": "primary-deep",
+        "value": "#3a40c4",
+        "role": "primary deep"
+      },
+      {
+        "name": "on-primary",
+        "value": "#ffffff",
+        "role": "on primary"
+      },
+      {
+        "name": "ink",
+        "value": "#191c1f",
+        "role": "ink"
+      },
+      {
+        "name": "body",
+        "value": "#1f2226",
+        "role": "body"
+      },
+      {
+        "name": "charcoal",
+        "value": "#3a3d40",
+        "role": "charcoal"
+      },
+      {
+        "name": "mute",
+        "value": "#505a63",
+        "role": "mute"
+      },
+      {
+        "name": "ash",
+        "value": "#5c5e60",
+        "role": "ash"
+      },
+      {
+        "name": "stone",
+        "value": "#8d969e",
+        "role": "stone"
+      },
+      {
+        "name": "faint",
+        "value": "#c9c9cd",
+        "role": "faint"
+      },
+      {
+        "name": "on-dark",
+        "value": "#ffffff",
+        "role": "on dark"
+      },
+      {
+        "name": "on-dark-mute",
+        "value": "rgba(255,255,255,0.72)",
+        "role": "on dark mute"
+      },
+      {
+        "name": "canvas-light",
+        "value": "#ffffff",
+        "role": "canvas light"
+      },
+      {
+        "name": "canvas-dark",
+        "value": "#000000",
+        "role": "canvas dark"
+      },
+      {
+        "name": "surface-soft",
+        "value": "#f4f4f4",
+        "role": "surface soft"
+      },
+      {
+        "name": "surface-card",
+        "value": "#ffffff",
+        "role": "surface card"
+      },
+      {
+        "name": "surface-deep",
+        "value": "#0a0a0a",
+        "role": "surface deep"
+      },
+      {
+        "name": "surface-elevated",
+        "value": "#16181a",
+        "role": "surface elevated"
+      },
+      {
+        "name": "hairline-light",
+        "value": "#e2e2e7",
+        "role": "hairline light"
+      },
+      {
+        "name": "hairline-dark",
+        "value": "rgba(255,255,255,0.12)",
+        "role": "hairline dark"
+      },
+      {
+        "name": "hairline-strong",
+        "value": "#191c1f",
+        "role": "hairline strong"
+      },
+      {
+        "name": "divider-soft",
+        "value": "rgba(255,255,255,0.06)",
+        "role": "divider soft"
+      },
+      {
+        "name": "teal",
+        "value": "#00a87e",
+        "role": "teal"
+      },
+      {
+        "name": "light-blue",
+        "value": "#007bc2",
+        "role": "light blue"
+      },
+      {
+        "name": "blue-link",
+        "value": "#376cd5",
+        "role": "blue link"
+      },
+      {
+        "name": "light-green",
+        "value": "#428619",
+        "role": "light green"
+      },
+      {
+        "name": "green-text",
+        "value": "#006400",
+        "role": "green text"
+      },
+      {
+        "name": "yellow",
+        "value": "#b09000",
+        "role": "yellow"
+      },
+      {
+        "name": "warning",
+        "value": "#ec7e00",
+        "role": "warning"
+      },
+      {
+        "name": "pink",
+        "value": "#e61e49",
+        "role": "pink"
+      },
+      {
+        "name": "danger",
+        "value": "#e23b4a",
+        "role": "danger"
+      },
+      {
+        "name": "deep-red",
+        "value": "#8b0000",
+        "role": "deep red"
+      },
+      {
+        "name": "brown",
+        "value": "#936d62",
+        "role": "brown"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+      "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      "fontSizes": [
+        "16px",
+        "14px",
+        "18px",
+        "12px",
+        "96px",
+        "56px",
+        "24px",
+        "13px",
+        "32px",
+        "11px",
+        "64px",
+        "44px"
+      ],
+      "fontWeights": [
+        "600",
+        "500",
+        "700"
+      ],
+      "lineHeights": [
+        "1.5",
+        "1.0",
+        "1.56",
+        "1.4",
+        "1.33",
+        "1.19",
+        "1.6",
+        "1.2",
+        "1.35"
+      ]
+    },
+    "spacing": [
+      "4px",
+      "6px",
+      "8px",
+      "10px",
+      "12px",
+      "13px",
+      "14px",
+      "16px",
+      "20px",
+      "24px",
+      "27px",
+      "28px",
+      "32px",
+      "36px",
+      "40px",
+      "48px",
+      "56px",
+      "64px",
+      "80px",
+      "88px"
+    ],
+    "radii": [
+      "9999px",
+      "20px",
+      "28px",
+      "36px",
+      "24px",
+      "12px",
+      "3px"
+    ],
+    "shadows": []
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "pill",
+      "color": "#494fdf",
+      "textColor": "#ffffff",
+      "views": {
+        "container": {
+          "borderRadius": "9999px",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 500,
+          "borderColor": "#494fdf"
+        },
+        "content": {
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 500
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "pill",
+      "views": {
+        "container": {
+          "backgroundColor": "#4f55f1",
+          "color": "#ffffff",
+          "borderColor": "#4f55f1",
+          "borderRadius": "9999px",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "text": {
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#f4f4f4",
+          "borderColor": "#e5e7eb",
+          "color": "#191c1f",
+          "borderRadius": "24px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "0 1px 3px rgba(0, 0, 0, 0.08)"
+        },
+        "header": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "#e5e7eb"
+        },
+        "content": {
+          "color": "#505a63",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "footer": {
+          "borderColor": "#e5e7eb"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "pill",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e7eb",
+          "color": "#191c1f",
+          "borderRadius": "9999px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "label": {
+          "color": "#505a63",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "helperText": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "pill",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e7eb",
+          "color": "#191c1f",
+          "borderRadius": "9999px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "label": {
+          "color": "#505a63",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "helperText": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "pill",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e7eb",
+          "color": "#191c1f",
+          "borderRadius": "9999px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "label": {
+          "color": "#505a63",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "helperText": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "#e5e7eb",
+          "backgroundColor": "#ffffff",
+          "_checked": {
+            "backgroundColor": "#494fdf",
+            "borderColor": "#494fdf"
+          }
+        },
+        "label": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "infoText": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "#e5e7eb",
+          "backgroundColor": "#ffffff"
+        },
+        "dot": {
+          "backgroundColor": "#494fdf"
+        },
+        "label": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "infoText": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "#e5e7eb"
+        },
+        "circle": {
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "#494fdf",
+      "views": {
+        "track": {
+          "backgroundColor": "#e5e7eb"
+        },
+        "progress": {
+          "backgroundColor": "#494fdf"
+        },
+        "filledTrack": {
+          "backgroundColor": "#494fdf"
+        },
+        "thumb": {
+          "borderColor": "#494fdf",
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#191c1f"
+        },
+        "valueLabel": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "pill",
+      "views": {
+        "headerTabs": {
+          "borderColor": "#e5e7eb"
+        },
+        "tab": {
+          "color": "#505a63"
+        },
+        "activeTab": {
+          "color": "#494fdf",
+          "borderColor": "#494fdf",
+          "backgroundColor": "#494fdf"
+        },
+        "title": {
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "activeText": {
+          "color": "#ffffff"
+        },
+        "content": {
+          "color": "#191c1f"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "#e5e7eb",
+          "backgroundColor": "#f4f4f4",
+          "color": "#191c1f"
+        },
+        "trigger": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "content": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "#ffffff",
+          "color": "#191c1f",
+          "borderColor": "#e5e7eb"
+        },
+        "thead": {
+          "backgroundColor": "#f4f4f4",
+          "color": "#191c1f"
+        },
+        "th": {
+          "color": "#505a63",
+          "borderColor": "#e5e7eb",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+        },
+        "tr": {
+          "borderColor": "#e5e7eb"
+        },
+        "td": {
+          "color": "#191c1f",
+          "borderColor": "#e5e7eb"
+        },
+        "caption": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "#f4f4f4",
+          "borderColor": "#e5e7eb",
+          "color": "#191c1f"
+        },
+        "fallback": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "#f4f4f4",
+          "borderColor": "#e5e7eb",
+          "borderRadius": "24px"
+        },
+        "title": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "description": {
+          "color": "#505a63",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "icon": {
+          "color": "#494fdf"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "#16a34a"
+        },
+        "label": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "#494fdf",
+      "backgroundColor": "#e5e7eb",
+      "radius": "24px",
+      "views": {
+        "container": {
+          "backgroundColor": "#e5e7eb"
+        },
+        "bar": {
+          "backgroundColor": "#494fdf"
+        },
+        "text": {
+          "color": "#191c1f"
+        }
+      }
+    },
+    "loader": {
+      "color": "#494fdf"
+    },
+    "separator": {
+      "color": "#e5e7eb",
+      "views": {
+        "container": {
+          "borderColor": "#e5e7eb"
+        },
+        "label": {
+          "color": "#505a63",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e7eb",
+          "color": "#191c1f"
+        },
+        "item": {
+          "color": "#505a63"
+        },
+        "activeItem": {
+          "color": "#494fdf",
+          "borderColor": "#494fdf"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "eyebrow": {
+          "color": "#505a63"
+        },
+        "title": {
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "description": {
+          "color": "#505a63"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#191c1f",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e7eb"
+        },
+        "surface": {
+          "backgroundColor": "#f4f4f4",
+          "borderColor": "#e5e7eb",
+          "color": "#191c1f"
+        }
+      }
+    }
+  }
+}

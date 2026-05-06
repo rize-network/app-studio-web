@@ -17,4 +17,6 @@ export type BadgeStyles = {
   text?: ViewProps;
   icon?: ViewProps;
   pastil?: ViewProps;
+  pastilContent?: ViewProps;
+  action?: ViewProps;
 };

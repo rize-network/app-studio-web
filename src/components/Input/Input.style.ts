@@ -52,12 +52,12 @@ export const InputVariants: Record<Variant, ViewProps> = {
   outline: {
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: '#E5E7EB',
+    borderColor: 'color-gray-200',
     backgroundColor: 'color-white',
     transition:
       'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
-      borderColor: '#CBD5E1',
+      borderColor: 'color-gray-300',
     },
     _focus: {
       borderColor: 'theme-primary',
@@ -75,13 +75,13 @@ export const InputVariants: Record<Variant, ViewProps> = {
   default: {
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: '#E5E7EB',
+    borderColor: 'color-gray-200',
     borderRadius: '8px',
     backgroundColor: 'color-white',
     transition:
       'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
-      borderColor: '#CBD5E1',
+      borderColor: 'color-gray-300',
     },
     _focus: {
       borderColor: 'theme-primary',
@@ -98,7 +98,7 @@ export const InputVariants: Record<Variant, ViewProps> = {
   },
   none: {
     border: 'none',
-    backgroundColor: 'transparent',
+    style: { backgroundColor: 'transparent' },
     transition: 'background-color 0.2s ease',
   },
 };

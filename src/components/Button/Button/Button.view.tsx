@@ -16,6 +16,32 @@ import {
   getButtonVariants,
   cssVar,
 } from './Button.style';
+import { useDesignSystem, deepMerge } from 'src/design-system';
+
+const colorStyleProps = ['backgroundColor', 'borderColor', 'color'];
+
+const isRawCssColor = (value: unknown) =>
+  typeof value === 'string' &&
+  (/^(#|rgb\(|rgba\(|hsl\(|hsla\(|var\()/.test(value) ||
+    ['black', 'currentColor', 'inherit', 'transparent', 'white'].includes(
+      value
+    ));
+
+const normalizeColorStyleProps = (props?: Record<string, any>) => {
+  if (!props) return props;
+
+  const next = { ...props };
+  const style = { ...(next.style || {}) };
+
+  colorStyleProps.forEach((key) => {
+    if (isRawCssColor(next[key])) {
+      style[key] = next[key];
+      delete next[key];
+    }
+  });
+
+  return Object.keys(style).length > 0 ? { ...next, style } : next;
+};
 
 // --- Helper: Button Content ---
 // Renders the inner content: Loader, Icon, and Children.
@@ -56,6 +82,7 @@ const ButtonContent: React.FC<{
         lineHeight={sizeStyles.lineHeight}
         letterSpacing={sizeStyles.letterSpacing}
         whiteSpace="nowrap"
+        color={resolvedTextColor}
         {...views?.content}
       >
         {isLoading && loaderPosition === 'left' && (
@@ -601,11 +628,25 @@ const ButtonView = React.memo(
       const textColorKey = textColor ?? 'color-white';
 
       /* variant palette */
-      const palette = useMemo(
-        () => getButtonVariants(mainColorKey, textColorKey, reversed),
-        [mainColorKey, textColorKey, reversed]
-      );
-      const base = palette[variant];
+      const { theme } = useDesignSystem();
+      const palette = useMemo(() => {
+        const basePalette = getButtonVariants(mainColorKey, textColorKey, reversed, theme);
+        
+        // Merge with any variant overrides from config
+        if (props.config?.variants) {
+          Object.keys(props.config.variants).forEach((v) => {
+            if (basePalette[v as Variant]) {
+              basePalette[v as Variant] = deepMerge(
+                basePalette[v as Variant],
+                props.config.variants[v]
+              );
+            }
+          });
+        }
+        return basePalette;
+      }, [mainColorKey, textColorKey, reversed, theme, props.config?.variants]);
+
+      const base = normalizeColorStyleProps(palette[variant]);
       const finalContentColor = (base?.color as string) ?? textColorKey;
 
       // Render content logic safely

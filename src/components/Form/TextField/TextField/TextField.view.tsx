@@ -95,6 +95,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
       lineHeight: '28px',
     },
   } as const;
+  const fieldView = views?.field || {};
   const fieldStyles = {
     margin: 0,
     paddingVertical: 0,
@@ -110,12 +111,15 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     fontSize: fieldSizeStyles[size].fontSize,
     letterSpacing: '-0.01em',
     fontWeight: 400,
-    backgroundColor: 'transparent',
     color: isDisabled ? 'color-gray-400' : 'color-gray-900',
     cursor: isDisabled ? 'not-allowed' : 'text',
     opacity: isDisabled ? 0.7 : 1,
     transition: 'color 0.2s ease, opacity 0.2s ease',
-    ...views['field'],
+    ...fieldView,
+    style: {
+      backgroundColor: 'transparent',
+      ...(fieldView as any).style,
+    },
   };
   const handleFocus = () => {
     setIsFocused(true);
@@ -181,7 +185,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
               htmlFor={id}
               color={'theme-primary'}
               error={error}
-              {...views}
+              {...views?.label}
             >
               {label}
             </FieldLabel>

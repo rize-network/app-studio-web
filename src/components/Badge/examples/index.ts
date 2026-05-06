@@ -1,3 +1,4 @@
+export * from './announcement';
 export * from './children';
 export * from './icon';
 export * from './pastil';

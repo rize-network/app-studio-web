@@ -17,6 +17,7 @@ export interface CardProps extends ViewProps {
   isFullWidth?: boolean;
   // Optional styling overrides for different parts of the card component.
   views?: CardStyles;
+  config?: any;
 }
 export interface CardHeaderProps extends ViewProps {
   // Content to be rendered inside the card's header.

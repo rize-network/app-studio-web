@@ -24,10 +24,10 @@ export const VariantStyles: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
   },
   unselected: {
-    backgroundColor: 'transparent',
     borderWidth: '2px',
     borderStyle: 'solid',
     borderColor: 'color-gray-300',
+    style: { backgroundColor: 'transparent' },
   },
 };
 // Defines the background color for the Radio component's inner dot based on its selection state.
@@ -36,7 +36,7 @@ export const DotStyles: Record<Variant, ViewProps> = {
     backgroundColor: 'theme-primary',
   },
   unselected: {
-    backgroundColor: 'transparent',
+    style: { backgroundColor: 'transparent' },
   },
 };
 // Provides styling adjustments for the Radio component's container when it is in various interactive states such as hover, disabled, or error.
@@ -75,7 +75,7 @@ export const DotStateStyles = {
       backgroundColor: 'color-blue-600',
     },
     unselected: {
-      backgroundColor: 'transparent',
+      style: { backgroundColor: 'transparent' },
     },
   },
   disabled: {
@@ -84,8 +84,8 @@ export const DotStateStyles = {
       opacity: 0.6,
     },
     unselected: {
-      backgroundColor: 'transparent',
       opacity: 0.6,
+      style: { backgroundColor: 'transparent' },
     },
   },
   error: {
@@ -93,7 +93,7 @@ export const DotStateStyles = {
       backgroundColor: 'color-red-500',
     },
     unselected: {
-      backgroundColor: 'transparent',
+      style: { backgroundColor: 'transparent' },
     },
   },
 };

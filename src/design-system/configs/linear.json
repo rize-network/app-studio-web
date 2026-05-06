@@ -1,0 +1,636 @@
+{
+  "metadata": {
+    "id": "linear",
+    "label": "Linear",
+    "sourcePath": "design.md/html/linear.html",
+    "sourceTitle": "Design System Inspiration of Linear",
+    "defaultAppearance": "dark",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#5e6ad2",
+    "secondary": "#828fff",
+    "success": "#27a644",
+    "warning": "#5e69d1",
+    "error": "#828fff",
+    "canvas": "#010102",
+    "surface": "#0f1011",
+    "text": "#f7f8f8",
+    "muted": "#8a8f98",
+    "border": "#23252a",
+    "onPrimary": "#ffffff"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "primary": "#5e6ad2",
+      "primary-hover": "#828fff",
+      "primary-focus": "#5e69d1",
+      "on-primary": "#ffffff",
+      "ink": "#f7f8f8",
+      "ink-muted": "#d0d6e0",
+      "ink-subtle": "#8a8f98",
+      "ink-tertiary": "#62666d",
+      "canvas": "#010102",
+      "surface-1": "#0f1011",
+      "surface-2": "#141516",
+      "surface-3": "#18191a",
+      "surface-4": "#191a1b",
+      "hairline": "#23252a",
+      "hairline-strong": "#34343a",
+      "hairline-tertiary": "#3e3e44",
+      "semantic-success": "#27a644",
+      "sans": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif",
+      "mono": "'JetBrains Mono', ui-monospace, 'SF Mono', menlo, monospace"
+    },
+    "colors": [
+      {
+        "name": "primary",
+        "value": "#5e6ad2",
+        "role": "primary"
+      },
+      {
+        "name": "primary-hover",
+        "value": "#828fff",
+        "role": "primary hover"
+      },
+      {
+        "name": "primary-focus",
+        "value": "#5e69d1",
+        "role": "primary focus"
+      },
+      {
+        "name": "on-primary",
+        "value": "#ffffff",
+        "role": "on primary"
+      },
+      {
+        "name": "ink",
+        "value": "#f7f8f8",
+        "role": "ink"
+      },
+      {
+        "name": "ink-muted",
+        "value": "#d0d6e0",
+        "role": "ink muted"
+      },
+      {
+        "name": "ink-subtle",
+        "value": "#8a8f98",
+        "role": "ink subtle"
+      },
+      {
+        "name": "ink-tertiary",
+        "value": "#62666d",
+        "role": "ink tertiary"
+      },
+      {
+        "name": "canvas",
+        "value": "#010102",
+        "role": "canvas"
+      },
+      {
+        "name": "surface-1",
+        "value": "#0f1011",
+        "role": "surface 1"
+      },
+      {
+        "name": "surface-2",
+        "value": "#141516",
+        "role": "surface 2"
+      },
+      {
+        "name": "surface-3",
+        "value": "#18191a",
+        "role": "surface 3"
+      },
+      {
+        "name": "surface-4",
+        "value": "#191a1b",
+        "role": "surface 4"
+      },
+      {
+        "name": "hairline",
+        "value": "#23252a",
+        "role": "hairline"
+      },
+      {
+        "name": "hairline-strong",
+        "value": "#34343a",
+        "role": "hairline strong"
+      },
+      {
+        "name": "hairline-tertiary",
+        "value": "#3e3e44",
+        "role": "hairline tertiary"
+      },
+      {
+        "name": "semantic-success",
+        "value": "#27a644",
+        "role": "semantic success"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif",
+      "monoFamily": "'JetBrains Mono', ui-monospace, 'SF Mono', menlo, monospace",
+      "fontSizes": [
+        "16px",
+        "14px",
+        "80px",
+        "18px",
+        "13px",
+        "56px",
+        "15px",
+        "12px",
+        "11px",
+        "28px",
+        "40px",
+        "22px",
+        "10px",
+        "36px"
+      ],
+      "fontWeights": [
+        "400",
+        "500",
+        "600",
+        "700"
+      ],
+      "lineHeights": [
+        "1.50",
+        "1.05",
+        "1.20",
+        "1.10",
+        "1.5",
+        "1.6",
+        "1.25",
+        "1",
+        "1.2",
+        "1.35",
+        "1.4"
+      ]
+    },
+    "spacing": [
+      "2px",
+      "5px",
+      "6px",
+      "8px",
+      "10px",
+      "12px",
+      "14px",
+      "16px",
+      "20px",
+      "24px",
+      "28px",
+      "32px",
+      "36px",
+      "40px",
+      "48px",
+      "56px",
+      "64px",
+      "80px",
+      "96px",
+      "120px"
+    ],
+    "radii": [
+      "8px",
+      "12px",
+      "9999px",
+      "16px",
+      "4px",
+      "2px",
+      "6px",
+      "3px"
+    ],
+    "shadows": [
+      "rgba(255,255,255,0.05) 0 0.5px 0 0.5px",
+      "0 0 0 2px rgba(94,105,209,0.25)"
+    ]
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "rounded",
+      "color": "#5e6ad2",
+      "textColor": "#ffffff",
+      "views": {
+        "container": {
+          "borderRadius": "8px",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif",
+          "fontWeight": 500,
+          "borderColor": "#5e6ad2"
+        },
+        "content": {
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif",
+          "fontWeight": 500
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#828fff",
+          "color": "#ffffff",
+          "borderColor": "#828fff",
+          "borderRadius": "8px",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "text": {
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#0f1011",
+          "borderColor": "#23252a",
+          "color": "#f7f8f8",
+          "borderRadius": "12px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "rgba(255,255,255,0.05) 0 0.5px 0 0.5px"
+        },
+        "header": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "#23252a"
+        },
+        "content": {
+          "color": "#8a8f98",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "footer": {
+          "borderColor": "#23252a"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#010102",
+          "borderColor": "#23252a",
+          "color": "#f7f8f8",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "label": {
+          "color": "#8a8f98",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "helperText": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#010102",
+          "borderColor": "#23252a",
+          "color": "#f7f8f8",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "label": {
+          "color": "#8a8f98",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "helperText": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#010102",
+          "borderColor": "#23252a",
+          "color": "#f7f8f8",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "label": {
+          "color": "#8a8f98",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "helperText": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "#23252a",
+          "backgroundColor": "#010102",
+          "_checked": {
+            "backgroundColor": "#5e6ad2",
+            "borderColor": "#5e6ad2"
+          }
+        },
+        "label": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "infoText": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "#23252a",
+          "backgroundColor": "#010102"
+        },
+        "dot": {
+          "backgroundColor": "#5e6ad2"
+        },
+        "label": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "infoText": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "#23252a"
+        },
+        "circle": {
+          "backgroundColor": "#010102"
+        },
+        "label": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "#5e6ad2",
+      "views": {
+        "track": {
+          "backgroundColor": "#23252a"
+        },
+        "progress": {
+          "backgroundColor": "#5e6ad2"
+        },
+        "filledTrack": {
+          "backgroundColor": "#5e6ad2"
+        },
+        "thumb": {
+          "borderColor": "#5e6ad2",
+          "backgroundColor": "#010102"
+        },
+        "label": {
+          "color": "#f7f8f8"
+        },
+        "valueLabel": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "underline",
+      "views": {
+        "headerTabs": {
+          "borderColor": "#23252a"
+        },
+        "tab": {
+          "color": "#8a8f98"
+        },
+        "activeTab": {
+          "color": "#5e6ad2",
+          "borderColor": "#5e6ad2",
+          "style": {
+            "backgroundColor": "transparent"
+          }
+        },
+        "title": {
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "activeText": {
+          "color": "#5e6ad2"
+        },
+        "content": {
+          "color": "#f7f8f8"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "#23252a",
+          "backgroundColor": "#0f1011",
+          "color": "#f7f8f8"
+        },
+        "trigger": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "content": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "#010102",
+          "color": "#f7f8f8",
+          "borderColor": "#23252a"
+        },
+        "thead": {
+          "backgroundColor": "#0f1011",
+          "color": "#f7f8f8"
+        },
+        "th": {
+          "color": "#8a8f98",
+          "borderColor": "#23252a",
+          "fontFamily": "'JetBrains Mono', ui-monospace, 'SF Mono', menlo, monospace"
+        },
+        "tr": {
+          "borderColor": "#23252a"
+        },
+        "td": {
+          "color": "#f7f8f8",
+          "borderColor": "#23252a"
+        },
+        "caption": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "#0f1011",
+          "borderColor": "#23252a",
+          "color": "#f7f8f8"
+        },
+        "fallback": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "#0f1011",
+          "borderColor": "#23252a",
+          "borderRadius": "8px"
+        },
+        "title": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "description": {
+          "color": "#8a8f98",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "icon": {
+          "color": "#5e6ad2"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "#27a644"
+        },
+        "label": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "#5e6ad2",
+      "backgroundColor": "#23252a",
+      "radius": "8px",
+      "views": {
+        "container": {
+          "backgroundColor": "#23252a"
+        },
+        "bar": {
+          "backgroundColor": "#5e6ad2"
+        },
+        "text": {
+          "color": "#f7f8f8"
+        }
+      }
+    },
+    "loader": {
+      "color": "#5e6ad2"
+    },
+    "separator": {
+      "color": "#23252a",
+      "views": {
+        "container": {
+          "borderColor": "#23252a"
+        },
+        "label": {
+          "color": "#8a8f98",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "#010102",
+          "borderColor": "#23252a",
+          "color": "#f7f8f8"
+        },
+        "item": {
+          "color": "#8a8f98"
+        },
+        "activeItem": {
+          "color": "#5e6ad2",
+          "borderColor": "#5e6ad2"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "#010102",
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "eyebrow": {
+          "color": "#8a8f98"
+        },
+        "title": {
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "description": {
+          "color": "#8a8f98"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "#010102",
+          "color": "#f7f8f8",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "#010102",
+          "borderColor": "#23252a"
+        },
+        "surface": {
+          "backgroundColor": "#0f1011",
+          "borderColor": "#23252a",
+          "color": "#f7f8f8"
+        }
+      }
+    }
+  }
+}

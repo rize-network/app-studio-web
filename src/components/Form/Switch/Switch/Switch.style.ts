@@ -70,7 +70,7 @@ export const ColorSchemes = {
   default: {
     active: 'theme-primary',
     inactive: 'color-gray-300',
-    knob: 'white',
+    knob: 'color-white',
     disabled: 'color-gray-200',
   },
   // State-specific colors

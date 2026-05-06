@@ -1,0 +1,544 @@
+{
+  "metadata": {
+    "id": "spacex",
+    "label": "SpaceX",
+    "sourcePath": "design.md/html/spaceX.html",
+    "sourceTitle": "Design System Preview: SpaceX (Light)",
+    "defaultAppearance": "dark",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Share+Tech&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#f0f0fa",
+    "secondary": "rgba(240,240,250,0.1)",
+    "success": "#f0f0fa",
+    "warning": "rgba(240,240,250,0.35)",
+    "error": "#f0f0fa",
+    "canvas": "#000000",
+    "surface": "rgba(240,240,250,0.1)",
+    "text": "#f0f0fa",
+    "muted": "rgba(240,240,250,0.35)",
+    "border": "rgba(240,240,250,0.35)",
+    "onPrimary": "#000000"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "black": "#000000",
+      "spectral": "#f0f0fa",
+      "ghost-bg": "rgba(240,240,250,0.1)",
+      "ghost-border": "rgba(240,240,250,0.35)",
+      "overlay": "rgba(0,0,0,0.5)",
+      "font": "'Share Tech', Arial, Verdana, sans-serif"
+    },
+    "colors": [
+      {
+        "name": "black",
+        "value": "#000000",
+        "role": "black"
+      },
+      {
+        "name": "spectral",
+        "value": "#f0f0fa",
+        "role": "spectral"
+      },
+      {
+        "name": "ghost-bg",
+        "value": "rgba(240,240,250,0.1)",
+        "role": "ghost bg"
+      },
+      {
+        "name": "ghost-border",
+        "value": "rgba(240,240,250,0.35)",
+        "role": "ghost border"
+      },
+      {
+        "name": "overlay",
+        "value": "rgba(0,0,0,0.5)",
+        "role": "overlay"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+      "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      "fontSizes": [
+        "16px",
+        "13px",
+        "12px",
+        "48px",
+        "10px",
+        "32px",
+        "11px",
+        "9px",
+        "14px"
+      ],
+      "fontWeights": [
+        "700",
+        "400",
+        "600"
+      ],
+      "lineHeights": [
+        "1.50",
+        "1.00",
+        "1.70",
+        "1.2",
+        "1.35",
+        "1.4"
+      ]
+    },
+    "spacing": [
+      "8px",
+      "10px",
+      "12px",
+      "14px",
+      "16px",
+      "18px",
+      "20px",
+      "24px",
+      "28px",
+      "32px",
+      "48px",
+      "60px",
+      "64px",
+      "72px",
+      "80px",
+      "120px"
+    ],
+    "radii": [
+      "32px",
+      "4px",
+      "2px",
+      "3px"
+    ],
+    "shadows": []
+  },
+  "components": {
+    "button": {
+      "variant": "ghost",
+      "size": "md",
+      "shape": "pill",
+      "color": "#f0f0fa",
+      "textColor": "#f0f0fa",
+      "views": {
+        "container": {
+          "borderRadius": "32px",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 700,
+          "borderColor": "rgba(240,240,250,0.35)",
+          "backgroundColor": "rgba(240,240,250,0.1)",
+          "letterSpacing": "1.17px",
+          "textTransform": "uppercase"
+        },
+        "content": {
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 700
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "rgba(240,240,250,0.1)",
+          "color": "#000000",
+          "borderColor": "rgba(240,240,250,0.1)",
+          "borderRadius": 0,
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "text": {
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "square",
+      "views": {
+        "container": {
+          "backgroundColor": "rgba(240,240,250,0.1)",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "color": "#f0f0fa",
+          "borderRadius": 0,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "0 1px 3px rgba(0, 0, 0, 0.08)"
+        },
+        "header": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "rgba(240,240,250,0.35)"
+        },
+        "content": {
+          "color": "rgba(240,240,250,0.35)",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "footer": {
+          "borderColor": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#000000",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "color": "#f0f0fa",
+          "borderRadius": 0,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "label": {
+          "color": "rgba(240,240,250,0.35)",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "helperText": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#000000",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "color": "#f0f0fa",
+          "borderRadius": 0,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "label": {
+          "color": "rgba(240,240,250,0.35)",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "helperText": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#000000",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "color": "#f0f0fa",
+          "borderRadius": 0,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "label": {
+          "color": "rgba(240,240,250,0.35)",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "helperText": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "rgba(240,240,250,0.35)",
+          "backgroundColor": "#000000",
+          "_checked": {
+            "backgroundColor": "#f0f0fa",
+            "borderColor": "#f0f0fa"
+          }
+        },
+        "label": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "infoText": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "rgba(240,240,250,0.35)",
+          "backgroundColor": "#000000"
+        },
+        "dot": {
+          "backgroundColor": "#f0f0fa"
+        },
+        "label": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "infoText": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "rgba(240,240,250,0.35)"
+        },
+        "circle": {
+          "backgroundColor": "#000000"
+        },
+        "label": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "#f0f0fa",
+      "views": {
+        "track": {
+          "backgroundColor": "rgba(240,240,250,0.35)"
+        },
+        "progress": {
+          "backgroundColor": "#f0f0fa"
+        },
+        "filledTrack": {
+          "backgroundColor": "#f0f0fa"
+        },
+        "thumb": {
+          "borderColor": "#f0f0fa",
+          "backgroundColor": "#000000"
+        },
+        "label": {
+          "color": "#f0f0fa"
+        },
+        "valueLabel": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "underline",
+      "views": {
+        "headerTabs": {
+          "borderColor": "rgba(240,240,250,0.35)"
+        },
+        "tab": {
+          "color": "rgba(240,240,250,0.35)"
+        },
+        "activeTab": {
+          "color": "#f0f0fa",
+          "borderColor": "#f0f0fa",
+          "style": {
+            "backgroundColor": "transparent"
+          }
+        },
+        "title": {
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "activeText": {
+          "color": "#f0f0fa"
+        },
+        "content": {
+          "color": "#f0f0fa"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "rgba(240,240,250,0.35)",
+          "backgroundColor": "rgba(240,240,250,0.1)",
+          "color": "#f0f0fa"
+        },
+        "trigger": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "content": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "#000000",
+          "color": "#f0f0fa",
+          "borderColor": "rgba(240,240,250,0.35)"
+        },
+        "thead": {
+          "backgroundColor": "rgba(240,240,250,0.1)",
+          "color": "#f0f0fa"
+        },
+        "th": {
+          "color": "rgba(240,240,250,0.35)",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+        },
+        "tr": {
+          "borderColor": "rgba(240,240,250,0.35)"
+        },
+        "td": {
+          "color": "#f0f0fa",
+          "borderColor": "rgba(240,240,250,0.35)"
+        },
+        "caption": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "rgba(240,240,250,0.1)",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "color": "#f0f0fa"
+        },
+        "fallback": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "rgba(240,240,250,0.1)",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "borderRadius": 0
+        },
+        "title": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "description": {
+          "color": "rgba(240,240,250,0.35)",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "icon": {
+          "color": "#f0f0fa"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "#f0f0fa"
+        },
+        "label": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "#f0f0fa",
+      "backgroundColor": "rgba(240,240,250,0.35)",
+      "radius": 0,
+      "views": {
+        "container": {
+          "backgroundColor": "rgba(240,240,250,0.35)"
+        },
+        "bar": {
+          "backgroundColor": "#f0f0fa"
+        },
+        "text": {
+          "color": "#f0f0fa"
+        }
+      }
+    },
+    "loader": {
+      "color": "#f0f0fa"
+    },
+    "separator": {
+      "color": "rgba(240,240,250,0.35)",
+      "views": {
+        "container": {
+          "borderColor": "rgba(240,240,250,0.35)"
+        },
+        "label": {
+          "color": "rgba(240,240,250,0.35)",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "#000000",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "color": "#f0f0fa"
+        },
+        "item": {
+          "color": "rgba(240,240,250,0.35)"
+        },
+        "activeItem": {
+          "color": "#f0f0fa",
+          "borderColor": "#f0f0fa"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "#000000",
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "eyebrow": {
+          "color": "rgba(240,240,250,0.35)"
+        },
+        "title": {
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "description": {
+          "color": "rgba(240,240,250,0.35)"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "#000000",
+          "color": "#f0f0fa",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "#000000",
+          "borderColor": "rgba(240,240,250,0.35)"
+        },
+        "surface": {
+          "backgroundColor": "rgba(240,240,250,0.1)",
+          "borderColor": "rgba(240,240,250,0.35)",
+          "color": "#f0f0fa"
+        }
+      }
+    }
+  }
+}

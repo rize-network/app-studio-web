@@ -9,6 +9,14 @@ import {
   SeparatorThicknesses,
   DefaultSeparatorStyles,
 } from './Separator.style';
+
+const isRawCssColor = (value?: string) =>
+  typeof value === 'string' &&
+  (/^(#|rgb\(|rgba\(|hsl\(|hsla\(|var\()/.test(value) ||
+    ['black', 'currentColor', 'inherit', 'transparent', 'white'].includes(
+      value
+    ));
+
 // Defines the `SeparatorView` functional component, responsible for rendering a visual separator with various styles and orientations.
 export const SeparatorView: React.FC<SeparatorProps> = ({
   orientation = 'horizontal',
@@ -34,6 +42,10 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
   const ariaProps = decorative
     ? { 'aria-hidden': true }
     : { role: 'separator', 'aria-orientation': orientation };
+  const lineColorProps = isRawCssColor(separatorColor)
+    ? { style: { borderColor: separatorColor } }
+    : { borderColor: separatorColor };
+
   // Conditional rendering block for a horizontal separator that includes a text label.
   if (label && orientation === 'horizontal') {
     return (
@@ -48,9 +60,8 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
         <View
           height="0px"
           flexGrow={1}
-          borderTopWidth={borderWidth}
-          borderTopStyle={borderStyle as any}
-          borderTopColor={separatorColor}
+          borderTop={`${borderWidth} ${borderStyle}`}
+          {...lineColorProps}
           {...DefaultSeparatorStyles.container}
           {...views?.container}
         />
@@ -60,9 +71,8 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
         <View
           height="0px"
           flexGrow={1}
-          borderTopWidth={borderWidth}
-          borderTopStyle={borderStyle as any}
-          borderTopColor={separatorColor}
+          borderTop={`${borderWidth} ${borderStyle}`}
+          {...lineColorProps}
           {...DefaultSeparatorStyles.container}
           {...views?.container}
         />
@@ -74,10 +84,9 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
       <View
         height="0px"
         width="100%"
-        borderTopWidth={borderWidth}
-        borderTopStyle={borderStyle as any}
-        borderTopColor={separatorColor}
+        borderTop={`${borderWidth} ${borderStyle}`}
         padding={spacing}
+        {...lineColorProps}
         {...DefaultSeparatorStyles.container}
         {...ariaProps}
         {...views?.container}
@@ -89,10 +98,9 @@ export const SeparatorView: React.FC<SeparatorProps> = ({
     <View
       width="0px"
       height="100%"
-      borderLeftWidth={borderWidth}
-      borderLeftStyle={borderStyle as any}
-      borderLeftColor={separatorColor}
+      borderLeft={`${borderWidth} ${borderStyle}`}
       padding={spacing}
+      {...lineColorProps}
       {...DefaultSeparatorStyles.container}
       {...ariaProps}
       {...views?.container}

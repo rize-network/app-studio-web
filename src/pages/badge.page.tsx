@@ -12,6 +12,7 @@ import {
   ChildrenDemo,
   IconDemo,
   PastilDemo,
+  AnnouncementDemo,
 } from 'src/components/Badge/examples';
 
 const BadgePage = () => {
@@ -28,6 +29,13 @@ const BadgePage = () => {
             <td>Design System</td>
             <td>
               <DesignSystemBadges />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Announcement</td>
+            <td>
+              <AnnouncementDemo />
             </td>
           </tr>
 

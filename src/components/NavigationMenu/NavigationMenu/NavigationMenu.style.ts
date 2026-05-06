@@ -43,8 +43,8 @@ export const NavigationMenuSizes: Record<Size, ViewProps> = {
 export const NavigationMenuVariants: Record<Variant, ViewProps> = {
   // Specifies the default visual style for the navigation menu, typically a transparent background with standard text color.
   default: {
-    backgroundColor: 'transparent',
     color: 'color-gray-800',
+    style: { backgroundColor: 'transparent' },
     transition:
       'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
   },
@@ -57,11 +57,11 @@ export const NavigationMenuVariants: Record<Variant, ViewProps> = {
   },
   // Specifies styling for an 'outline' variant of the navigation menu, featuring a border around the component.
   outline: {
-    backgroundColor: 'transparent',
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
     color: 'color-gray-800',
+    style: { backgroundColor: 'transparent' },
     transition:
       'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
   },
@@ -92,9 +92,8 @@ export const NavigationMenuItemStates = {
     backgroundColor: 'color-blue-50',
     color: 'color-blue-700',
     fontWeight: '600',
-    borderLeftWidth: 3,
-    borderLeftStyle: 'solid' as const,
-    borderLeftColor: 'color-blue-600',
+    borderLeft: '3px solid',
+    borderColor: 'color-blue-600',
   },
   // Specifies styling for a navigation menu item when it is being hovered over by the user.
   hover: {

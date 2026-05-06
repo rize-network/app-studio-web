@@ -1,0 +1,646 @@
+{
+  "metadata": {
+    "id": "airbnb",
+    "label": "Airbnb",
+    "sourcePath": "design.md/html/airbnb.html",
+    "sourceTitle": "Design System Inspiration of Airbnb",
+    "defaultAppearance": "light",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#ff385c",
+    "secondary": "#222222",
+    "success": "#428bff",
+    "warning": "#460479",
+    "error": "#c13515",
+    "canvas": "#ffffff",
+    "surface": "#f7f7f7",
+    "text": "#222222",
+    "muted": "#6a6a6a",
+    "border": "#dddddd",
+    "onPrimary": "#ffffff"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "primary": "#ff385c",
+      "primary-active": "#e00b41",
+      "primary-disabled": "#ffd1da",
+      "error": "#c13515",
+      "luxe": "#460479",
+      "plus": "#92174d",
+      "ink": "#222222",
+      "body": "#3f3f3f",
+      "muted": "#6a6a6a",
+      "muted-soft": "#929292",
+      "hairline": "#dddddd",
+      "hairline-soft": "#ebebeb",
+      "border-strong": "#c1c1c1",
+      "canvas": "#ffffff",
+      "surface-soft": "#f7f7f7",
+      "surface-strong": "#f2f2f2",
+      "on-primary": "#ffffff",
+      "legal-link": "#428bff",
+      "shadow": "rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0",
+      "display": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",
+      "text": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, sans-serif"
+    },
+    "colors": [
+      {
+        "name": "primary",
+        "value": "#ff385c",
+        "role": "primary"
+      },
+      {
+        "name": "primary-active",
+        "value": "#e00b41",
+        "role": "primary active"
+      },
+      {
+        "name": "primary-disabled",
+        "value": "#ffd1da",
+        "role": "primary disabled"
+      },
+      {
+        "name": "error",
+        "value": "#c13515",
+        "role": "error"
+      },
+      {
+        "name": "luxe",
+        "value": "#460479",
+        "role": "luxe"
+      },
+      {
+        "name": "plus",
+        "value": "#92174d",
+        "role": "plus"
+      },
+      {
+        "name": "ink",
+        "value": "#222222",
+        "role": "ink"
+      },
+      {
+        "name": "body",
+        "value": "#3f3f3f",
+        "role": "body"
+      },
+      {
+        "name": "muted",
+        "value": "#6a6a6a",
+        "role": "muted"
+      },
+      {
+        "name": "muted-soft",
+        "value": "#929292",
+        "role": "muted soft"
+      },
+      {
+        "name": "hairline",
+        "value": "#dddddd",
+        "role": "hairline"
+      },
+      {
+        "name": "hairline-soft",
+        "value": "#ebebeb",
+        "role": "hairline soft"
+      },
+      {
+        "name": "border-strong",
+        "value": "#c1c1c1",
+        "role": "border strong"
+      },
+      {
+        "name": "canvas",
+        "value": "#ffffff",
+        "role": "canvas"
+      },
+      {
+        "name": "surface-soft",
+        "value": "#f7f7f7",
+        "role": "surface soft"
+      },
+      {
+        "name": "surface-strong",
+        "value": "#f2f2f2",
+        "role": "surface strong"
+      },
+      {
+        "name": "on-primary",
+        "value": "#ffffff",
+        "role": "on primary"
+      },
+      {
+        "name": "legal-link",
+        "value": "#428bff",
+        "role": "legal link"
+      },
+      {
+        "name": "shadow",
+        "value": "rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0",
+        "role": "shadow"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",
+      "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      "fontSizes": [
+        "16px",
+        "14px",
+        "48px",
+        "18px",
+        "20px",
+        "11px",
+        "28px",
+        "13px",
+        "12px",
+        "8px",
+        "64px",
+        "21px",
+        "10px",
+        "24px",
+        "36px",
+        "15px"
+      ],
+      "fontWeights": [
+        "400",
+        "600",
+        "700",
+        "500"
+      ],
+      "lineHeights": [
+        "1.5",
+        "1.1",
+        "1.43",
+        "1.25",
+        "2",
+        "1",
+        "1.2",
+        "1.35",
+        "1.4"
+      ]
+    },
+    "spacing": [
+      "2px",
+      "4px",
+      "5px",
+      "6px",
+      "7px",
+      "8px",
+      "10px",
+      "11px",
+      "12px",
+      "13px",
+      "14px",
+      "16px",
+      "20px",
+      "23px",
+      "24px",
+      "28px",
+      "32px",
+      "40px",
+      "48px",
+      "56px"
+    ],
+    "radii": [
+      "9999px",
+      "8px",
+      "14px",
+      "4px",
+      "6px",
+      "3px"
+    ],
+    "shadows": [
+      "rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0",
+      "var(--shadow)"
+    ]
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "rounded",
+      "color": "#ff385c",
+      "textColor": "#ffffff",
+      "views": {
+        "container": {
+          "borderRadius": "8px",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",
+          "fontWeight": 500,
+          "borderColor": "#ff385c"
+        },
+        "content": {
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",
+          "fontWeight": 500
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#222222",
+          "color": "#ffffff",
+          "borderColor": "#222222",
+          "borderRadius": "8px",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "text": {
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#f7f7f7",
+          "borderColor": "#dddddd",
+          "color": "#222222",
+          "borderRadius": "14px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0"
+        },
+        "header": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",
+          "fontWeight": 600,
+          "borderColor": "#dddddd"
+        },
+        "content": {
+          "color": "#6a6a6a",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "footer": {
+          "borderColor": "#dddddd"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#dddddd",
+          "color": "#222222",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0"
+        },
+        "field": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "label": {
+          "color": "#6a6a6a",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "helperText": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#dddddd",
+          "color": "#222222",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0"
+        },
+        "field": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "label": {
+          "color": "#6a6a6a",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "helperText": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#dddddd",
+          "color": "#222222",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0"
+        },
+        "field": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "label": {
+          "color": "#6a6a6a",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "helperText": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "#dddddd",
+          "backgroundColor": "#ffffff",
+          "_checked": {
+            "backgroundColor": "#ff385c",
+            "borderColor": "#ff385c"
+          }
+        },
+        "label": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "infoText": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "#dddddd",
+          "backgroundColor": "#ffffff"
+        },
+        "dot": {
+          "backgroundColor": "#ff385c"
+        },
+        "label": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "infoText": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "#dddddd"
+        },
+        "circle": {
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "#ff385c",
+      "views": {
+        "track": {
+          "backgroundColor": "#dddddd"
+        },
+        "progress": {
+          "backgroundColor": "#ff385c"
+        },
+        "filledTrack": {
+          "backgroundColor": "#ff385c"
+        },
+        "thumb": {
+          "borderColor": "#ff385c",
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#222222"
+        },
+        "valueLabel": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "underline",
+      "views": {
+        "headerTabs": {
+          "borderColor": "#dddddd"
+        },
+        "tab": {
+          "color": "#6a6a6a"
+        },
+        "activeTab": {
+          "color": "#ff385c",
+          "borderColor": "#ff385c",
+          "style": {
+            "backgroundColor": "transparent"
+          }
+        },
+        "title": {
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "activeText": {
+          "color": "#ff385c"
+        },
+        "content": {
+          "color": "#222222"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "#dddddd",
+          "backgroundColor": "#f7f7f7",
+          "color": "#222222"
+        },
+        "trigger": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "content": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "#ffffff",
+          "color": "#222222",
+          "borderColor": "#dddddd"
+        },
+        "thead": {
+          "backgroundColor": "#f7f7f7",
+          "color": "#222222"
+        },
+        "th": {
+          "color": "#6a6a6a",
+          "borderColor": "#dddddd",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+        },
+        "tr": {
+          "borderColor": "#dddddd"
+        },
+        "td": {
+          "color": "#222222",
+          "borderColor": "#dddddd"
+        },
+        "caption": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "#f7f7f7",
+          "borderColor": "#dddddd",
+          "color": "#222222"
+        },
+        "fallback": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "#f7f7f7",
+          "borderColor": "#dddddd",
+          "borderRadius": "14px"
+        },
+        "title": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "description": {
+          "color": "#6a6a6a",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "icon": {
+          "color": "#ff385c"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "#428bff"
+        },
+        "label": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "#ff385c",
+      "backgroundColor": "#dddddd",
+      "radius": "14px",
+      "views": {
+        "container": {
+          "backgroundColor": "#dddddd"
+        },
+        "bar": {
+          "backgroundColor": "#ff385c"
+        },
+        "text": {
+          "color": "#222222"
+        }
+      }
+    },
+    "loader": {
+      "color": "#ff385c"
+    },
+    "separator": {
+      "color": "#dddddd",
+      "views": {
+        "container": {
+          "borderColor": "#dddddd"
+        },
+        "label": {
+          "color": "#6a6a6a",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#dddddd",
+          "color": "#222222"
+        },
+        "item": {
+          "color": "#6a6a6a"
+        },
+        "activeItem": {
+          "color": "#ff385c",
+          "borderColor": "#ff385c"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "eyebrow": {
+          "color": "#6a6a6a"
+        },
+        "title": {
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "description": {
+          "color": "#6a6a6a"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#222222",
+          "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#dddddd"
+        },
+        "surface": {
+          "backgroundColor": "#f7f7f7",
+          "borderColor": "#dddddd",
+          "color": "#222222"
+        }
+      }
+    }
+  }
+}

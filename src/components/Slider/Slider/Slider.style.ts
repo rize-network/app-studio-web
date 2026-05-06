@@ -60,10 +60,10 @@ export const getSlider = (themeMode: string): Record<Variant, ViewProps> => {
       transition: 'background-color 0.15s ease',
     },
     outline: {
-      backgroundColor: 'transparent',
       borderWidth: 1,
       borderStyle: 'solid',
       borderColor: 'color-gray-300',
+      style: { backgroundColor: 'transparent' },
       transition: 'border-color 0.15s ease',
     },
   };

@@ -1,0 +1,769 @@
+{
+  "metadata": {
+    "id": "notion",
+    "label": "Notion",
+    "sourcePath": "design.md/html/notion.html",
+    "sourceTitle": "Design System Inspiration of Notion",
+    "defaultAppearance": "light",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#5645d4",
+    "secondary": "#ff64c8",
+    "success": "#1aae39",
+    "warning": "#dd5b00",
+    "error": "#ff64c8",
+    "canvas": "#ffffff",
+    "surface": "#fafaf9",
+    "text": "#1a1a1a",
+    "muted": "#bbb8b1",
+    "border": "#e5e3df",
+    "onPrimary": "#ffffff"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "primary": "#5645d4",
+      "primary-pressed": "#4534b3",
+      "primary-deep": "#3a2a99",
+      "on-primary": "#ffffff",
+      "brand-navy": "#0a1530",
+      "brand-navy-deep": "#070f24",
+      "link-blue": "#0075de",
+      "brand-pink": "#ff64c8",
+      "brand-orange": "#dd5b00",
+      "brand-purple": "#7b3ff2",
+      "brand-purple-800": "#391c57",
+      "brand-orange-deep": "#793400",
+      "brand-green": "#1aae39",
+      "brand-yellow": "#f5d75e",
+      "brand-teal": "#2a9d99",
+      "tint-peach": "#ffe8d4",
+      "tint-rose": "#fde0ec",
+      "tint-mint": "#d9f3e1",
+      "tint-lavender": "#e6e0f5",
+      "tint-sky": "#dcecfa",
+      "tint-yellow": "#fef7d6",
+      "tint-yellow-bold": "#f9e79f",
+      "tint-cream": "#f8f5e8",
+      "canvas": "#ffffff",
+      "surface": "#f6f5f4",
+      "surface-soft": "#fafaf9",
+      "hairline": "#e5e3df",
+      "hairline-soft": "#ede9e4",
+      "hairline-strong": "#c8c4be",
+      "hairline-dark": "rgba(255,255,255,0.16)",
+      "ink-deep": "#000000",
+      "ink": "#1a1a1a",
+      "charcoal": "#37352f",
+      "slate": "#5d5b54",
+      "steel": "#787671",
+      "stone": "#a4a097",
+      "muted": "#bbb8b1",
+      "on-dark": "#ffffff",
+      "on-dark-muted": "#a4a097"
+    },
+    "colors": [
+      {
+        "name": "primary",
+        "value": "#5645d4",
+        "role": "primary"
+      },
+      {
+        "name": "primary-pressed",
+        "value": "#4534b3",
+        "role": "primary pressed"
+      },
+      {
+        "name": "primary-deep",
+        "value": "#3a2a99",
+        "role": "primary deep"
+      },
+      {
+        "name": "on-primary",
+        "value": "#ffffff",
+        "role": "on primary"
+      },
+      {
+        "name": "brand-navy",
+        "value": "#0a1530",
+        "role": "brand navy"
+      },
+      {
+        "name": "brand-navy-deep",
+        "value": "#070f24",
+        "role": "brand navy deep"
+      },
+      {
+        "name": "link-blue",
+        "value": "#0075de",
+        "role": "link blue"
+      },
+      {
+        "name": "brand-pink",
+        "value": "#ff64c8",
+        "role": "brand pink"
+      },
+      {
+        "name": "brand-orange",
+        "value": "#dd5b00",
+        "role": "brand orange"
+      },
+      {
+        "name": "brand-purple",
+        "value": "#7b3ff2",
+        "role": "brand purple"
+      },
+      {
+        "name": "brand-purple-800",
+        "value": "#391c57",
+        "role": "brand purple 800"
+      },
+      {
+        "name": "brand-orange-deep",
+        "value": "#793400",
+        "role": "brand orange deep"
+      },
+      {
+        "name": "brand-green",
+        "value": "#1aae39",
+        "role": "brand green"
+      },
+      {
+        "name": "brand-yellow",
+        "value": "#f5d75e",
+        "role": "brand yellow"
+      },
+      {
+        "name": "brand-teal",
+        "value": "#2a9d99",
+        "role": "brand teal"
+      },
+      {
+        "name": "tint-peach",
+        "value": "#ffe8d4",
+        "role": "tint peach"
+      },
+      {
+        "name": "tint-rose",
+        "value": "#fde0ec",
+        "role": "tint rose"
+      },
+      {
+        "name": "tint-mint",
+        "value": "#d9f3e1",
+        "role": "tint mint"
+      },
+      {
+        "name": "tint-lavender",
+        "value": "#e6e0f5",
+        "role": "tint lavender"
+      },
+      {
+        "name": "tint-sky",
+        "value": "#dcecfa",
+        "role": "tint sky"
+      },
+      {
+        "name": "tint-yellow",
+        "value": "#fef7d6",
+        "role": "tint yellow"
+      },
+      {
+        "name": "tint-yellow-bold",
+        "value": "#f9e79f",
+        "role": "tint yellow bold"
+      },
+      {
+        "name": "tint-cream",
+        "value": "#f8f5e8",
+        "role": "tint cream"
+      },
+      {
+        "name": "canvas",
+        "value": "#ffffff",
+        "role": "canvas"
+      },
+      {
+        "name": "surface",
+        "value": "#f6f5f4",
+        "role": "surface"
+      },
+      {
+        "name": "surface-soft",
+        "value": "#fafaf9",
+        "role": "surface soft"
+      },
+      {
+        "name": "hairline",
+        "value": "#e5e3df",
+        "role": "hairline"
+      },
+      {
+        "name": "hairline-soft",
+        "value": "#ede9e4",
+        "role": "hairline soft"
+      },
+      {
+        "name": "hairline-strong",
+        "value": "#c8c4be",
+        "role": "hairline strong"
+      },
+      {
+        "name": "hairline-dark",
+        "value": "rgba(255,255,255,0.16)",
+        "role": "hairline dark"
+      },
+      {
+        "name": "ink-deep",
+        "value": "#000000",
+        "role": "ink deep"
+      },
+      {
+        "name": "ink",
+        "value": "#1a1a1a",
+        "role": "ink"
+      },
+      {
+        "name": "charcoal",
+        "value": "#37352f",
+        "role": "charcoal"
+      },
+      {
+        "name": "slate",
+        "value": "#5d5b54",
+        "role": "slate"
+      },
+      {
+        "name": "steel",
+        "value": "#787671",
+        "role": "steel"
+      },
+      {
+        "name": "stone",
+        "value": "#a4a097",
+        "role": "stone"
+      },
+      {
+        "name": "muted",
+        "value": "#bbb8b1",
+        "role": "muted"
+      },
+      {
+        "name": "on-dark",
+        "value": "#ffffff",
+        "role": "on dark"
+      },
+      {
+        "name": "on-dark-muted",
+        "value": "#a4a097",
+        "role": "on dark muted"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+      "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      "fontSizes": [
+        "14px",
+        "15px",
+        "12px",
+        "80px",
+        "18px",
+        "48px",
+        "16px",
+        "13px",
+        "22px",
+        "11px",
+        "56px",
+        "36px",
+        "10px",
+        "20px",
+        "28px"
+      ],
+      "fontWeights": [
+        "500",
+        "600",
+        "400",
+        "700"
+      ],
+      "lineHeights": [
+        "1.55",
+        "1",
+        "1.05",
+        "1.15",
+        "1.4",
+        "1.3",
+        "1.5",
+        "1.1",
+        "1.2",
+        "1.35"
+      ]
+    },
+    "spacing": [
+      "2px",
+      "4px",
+      "5px",
+      "6px",
+      "8px",
+      "10px",
+      "11px",
+      "12px",
+      "14px",
+      "15px",
+      "16px",
+      "18px",
+      "20px",
+      "24px",
+      "31px",
+      "32px",
+      "40px",
+      "44px",
+      "48px",
+      "56px"
+    ],
+    "radii": [
+      "6px",
+      "8px",
+      "16px",
+      "50%",
+      "12px",
+      "9999px",
+      "4px",
+      "3px"
+    ],
+    "shadows": [
+      "rgba(15, 15, 15, 0.20) 0px 24px 48px -8px",
+      "rgba(15,15,15,0.04) 0px 1px 2px 0px",
+      "rgba(15,15,15,0.08) 0px 4px 12px 0px",
+      "rgba(15,15,15,0.20) 0px 24px 48px -8px",
+      "rgba(15,15,15,0.16) 0px 16px 48px -8px"
+    ]
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "rounded",
+      "color": "#5645d4",
+      "textColor": "#ffffff",
+      "views": {
+        "container": {
+          "borderRadius": "8px",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 500,
+          "borderColor": "#5645d4"
+        },
+        "content": {
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 500
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#ff64c8",
+          "color": "#ffffff",
+          "borderColor": "#ff64c8",
+          "borderRadius": "8px",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "text": {
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#fafaf9",
+          "borderColor": "#e5e3df",
+          "color": "#1a1a1a",
+          "borderRadius": "12px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "rgba(15, 15, 15, 0.20) 0px 24px 48px -8px"
+        },
+        "header": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "#e5e3df"
+        },
+        "content": {
+          "color": "#bbb8b1",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "footer": {
+          "borderColor": "#e5e3df"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e3df",
+          "color": "#1a1a1a",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "label": {
+          "color": "#bbb8b1",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "helperText": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e3df",
+          "color": "#1a1a1a",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "label": {
+          "color": "#bbb8b1",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "helperText": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e3df",
+          "color": "#1a1a1a",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "label": {
+          "color": "#bbb8b1",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "helperText": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "#e5e3df",
+          "backgroundColor": "#ffffff",
+          "_checked": {
+            "backgroundColor": "#5645d4",
+            "borderColor": "#5645d4"
+          }
+        },
+        "label": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "infoText": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "#e5e3df",
+          "backgroundColor": "#ffffff"
+        },
+        "dot": {
+          "backgroundColor": "#5645d4"
+        },
+        "label": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "infoText": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "#e5e3df"
+        },
+        "circle": {
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "#5645d4",
+      "views": {
+        "track": {
+          "backgroundColor": "#e5e3df"
+        },
+        "progress": {
+          "backgroundColor": "#5645d4"
+        },
+        "filledTrack": {
+          "backgroundColor": "#5645d4"
+        },
+        "thumb": {
+          "borderColor": "#5645d4",
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#1a1a1a"
+        },
+        "valueLabel": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "underline",
+      "views": {
+        "headerTabs": {
+          "borderColor": "#e5e3df"
+        },
+        "tab": {
+          "color": "#bbb8b1"
+        },
+        "activeTab": {
+          "color": "#5645d4",
+          "borderColor": "#5645d4",
+          "style": {
+            "backgroundColor": "transparent"
+          }
+        },
+        "title": {
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "activeText": {
+          "color": "#5645d4"
+        },
+        "content": {
+          "color": "#1a1a1a"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "#e5e3df",
+          "backgroundColor": "#fafaf9",
+          "color": "#1a1a1a"
+        },
+        "trigger": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "content": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "#ffffff",
+          "color": "#1a1a1a",
+          "borderColor": "#e5e3df"
+        },
+        "thead": {
+          "backgroundColor": "#fafaf9",
+          "color": "#1a1a1a"
+        },
+        "th": {
+          "color": "#bbb8b1",
+          "borderColor": "#e5e3df",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+        },
+        "tr": {
+          "borderColor": "#e5e3df"
+        },
+        "td": {
+          "color": "#1a1a1a",
+          "borderColor": "#e5e3df"
+        },
+        "caption": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "#fafaf9",
+          "borderColor": "#e5e3df",
+          "color": "#1a1a1a"
+        },
+        "fallback": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "#fafaf9",
+          "borderColor": "#e5e3df",
+          "borderRadius": "8px"
+        },
+        "title": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "description": {
+          "color": "#bbb8b1",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "icon": {
+          "color": "#5645d4"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "#1aae39"
+        },
+        "label": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "#5645d4",
+      "backgroundColor": "#e5e3df",
+      "radius": "8px",
+      "views": {
+        "container": {
+          "backgroundColor": "#e5e3df"
+        },
+        "bar": {
+          "backgroundColor": "#5645d4"
+        },
+        "text": {
+          "color": "#1a1a1a"
+        }
+      }
+    },
+    "loader": {
+      "color": "#5645d4"
+    },
+    "separator": {
+      "color": "#e5e3df",
+      "views": {
+        "container": {
+          "borderColor": "#e5e3df"
+        },
+        "label": {
+          "color": "#bbb8b1",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e3df",
+          "color": "#1a1a1a"
+        },
+        "item": {
+          "color": "#bbb8b1"
+        },
+        "activeItem": {
+          "color": "#5645d4",
+          "borderColor": "#5645d4"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "eyebrow": {
+          "color": "#bbb8b1"
+        },
+        "title": {
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "description": {
+          "color": "#bbb8b1"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#1a1a1a",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e5e3df"
+        },
+        "surface": {
+          "backgroundColor": "#fafaf9",
+          "borderColor": "#e5e3df",
+          "color": "#1a1a1a"
+        }
+      }
+    }
+  }
+}

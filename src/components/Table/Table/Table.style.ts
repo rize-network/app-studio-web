@@ -36,7 +36,7 @@ export const DefaultTableStyles: TableViewStyles = {
   thead: {
     backgroundColor: 'color-gray-50',
     borderBottom: '1px solid',
-    borderBottomColor: 'color-gray-200',
+    borderColor: 'color-gray-200',
   },
   th: {
     padding: '12px 16px', // 3 × 4px and 4 × 4px grid
@@ -55,7 +55,7 @@ export const DefaultTableStyles: TableViewStyles = {
     padding: '12px 16px', // 3 × 4px and 4 × 4px grid
     fontSize: '14px',
     borderBottom: '1px solid',
-    borderBottomColor: 'color-gray-100',
+    borderColor: 'color-gray-100',
     color: 'color-gray-900',
     media: {
       mobile: {
@@ -78,7 +78,7 @@ export const DefaultTableStyles: TableViewStyles = {
     backgroundColor: 'color-gray-50',
     fontWeight: '600',
     borderTop: '2px solid',
-    borderTopColor: 'color-gray-200',
+    borderColor: 'color-gray-200',
   },
   caption: {
     margin: '8px 0', // 2 × 4px grid
@@ -131,12 +131,12 @@ export const BorderedTableStyles: TableViewStyles = {
   td: {
     ...DefaultTableStyles.td,
     borderRight: '1px solid',
-    borderRightColor: 'color-gray-100',
+    borderColor: 'color-gray-100',
   },
   th: {
     ...DefaultTableStyles.th,
     borderRight: '1px solid',
-    borderRightColor: 'color-gray-200',
+    borderColor: 'color-gray-200',
   },
 };
 
@@ -151,7 +151,7 @@ export const DarkTableStyles: TableViewStyles = {
   },
   thead: {
     backgroundColor: 'color-gray-900',
-    borderBottomColor: 'color-gray-700',
+    borderColor: 'color-gray-700',
   },
   th: {
     ...DefaultTableStyles.th,
@@ -160,7 +160,7 @@ export const DarkTableStyles: TableViewStyles = {
   td: {
     ...DefaultTableStyles.td,
     color: 'color-gray-300',
-    borderBottomColor: 'color-gray-700',
+    borderColor: 'color-gray-700',
   },
   tr: {
     ...DefaultTableStyles.tr,
@@ -171,7 +171,7 @@ export const DarkTableStyles: TableViewStyles = {
   tfoot: {
     ...DefaultTableStyles.tfoot,
     backgroundColor: 'color-gray-900',
-    borderTopColor: 'color-gray-700',
+    borderColor: 'color-gray-700',
   },
   caption: {
     ...DefaultTableStyles.caption,

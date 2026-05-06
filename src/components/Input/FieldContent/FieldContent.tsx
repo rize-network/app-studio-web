@@ -44,7 +44,7 @@ export const FieldContent: React.FC<ContentProps> = ({
     ? 'color-red-500'
     : isInteractive
     ? 'theme-primary'
-    : '#E5E7EB';
+    : 'color-gray-200';
 
   return (
     <Horizontal

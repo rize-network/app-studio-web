@@ -6,9 +6,11 @@ import {
   CardContent,
   CardFooter,
 } from './Card/Card.view';
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
 // This file defines and exports the main `Card` component, which serves as a wrapper for its sub-components like `Card.Header`, `Card.Content`, and `Card.Footer`, enabling a compound component pattern for flexible content structuring.
 const CardComponent: React.FC<CardProps> = (props) => {
-  return <CardView {...props} />;
+  const mergedProps = useMergedDesignSystemComponentProps('card', props);
+  return <CardView {...mergedProps} />;
 };
 export const Card = CardComponent as CardType;
 Card.Header = CardHeader;

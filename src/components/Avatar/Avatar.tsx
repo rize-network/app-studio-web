@@ -2,16 +2,12 @@ import React from 'react';
 import { AvatarProps } from './Avatar/Avatar.props';
 import { useAvatarState } from './Avatar/Avatar.state';
 import { AvatarView } from './Avatar/Avatar.view';
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
 
 // Defines the AvatarComponent functional component with destructured props from AvatarProps type.
-const AvatarComponent = ({
-  src,
-  size,
-  views,
-  fallback,
-  onClick,
-  children,
-}: AvatarProps) => {
+const AvatarComponent = (props: AvatarProps) => {
+  const mergedProps = useMergedDesignSystemComponentProps('avatar', props);
+  const { src, size, views, fallback, onClick, children } = mergedProps;
   // Uses custom hook useAvatarState to manage the avatar image loading error state.
   const { imageError, setImageError } = useAvatarState();
   // Begins the JSX return block for rendering the AvatarView component.

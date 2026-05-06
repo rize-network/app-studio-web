@@ -1,0 +1,643 @@
+{
+  "metadata": {
+    "id": "figma",
+    "label": "Figma",
+    "sourcePath": "design.md/html/figma.html",
+    "sourceTitle": "Design System Inspiration of Figma",
+    "defaultAppearance": "light",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#000000",
+    "secondary": "#c5b0f4",
+    "success": "#c8e6cd",
+    "warning": "#f3c9b6",
+    "error": "#efd4d4",
+    "canvas": "#ffffff",
+    "surface": "#f7f7f5",
+    "text": "#000000",
+    "muted": "#6b7280",
+    "border": "#e6e6e6",
+    "onPrimary": "#ffffff"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "primary": "#000000",
+      "on-primary": "#ffffff",
+      "ink": "#000000",
+      "canvas": "#ffffff",
+      "inverse-canvas": "#000000",
+      "inverse-ink": "#ffffff",
+      "hairline": "#e6e6e6",
+      "hairline-soft": "#f1f1f1",
+      "surface-soft": "#f7f7f5",
+      "block-lime": "#dceeb1",
+      "block-lilac": "#c5b0f4",
+      "block-cream": "#f4ecd6",
+      "block-pink": "#efd4d4",
+      "block-mint": "#c8e6cd",
+      "block-coral": "#f3c9b6",
+      "block-navy": "#1f1d3d",
+      "accent-magenta": "#ff3d8b",
+      "semantic-success": "#1ea64a",
+      "sans": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+      "mono": "'JetBrains Mono', 'figmaMono Fallback', 'SF Mono', menlo, monospace"
+    },
+    "colors": [
+      {
+        "name": "primary",
+        "value": "#000000",
+        "role": "primary"
+      },
+      {
+        "name": "on-primary",
+        "value": "#ffffff",
+        "role": "on primary"
+      },
+      {
+        "name": "ink",
+        "value": "#000000",
+        "role": "ink"
+      },
+      {
+        "name": "canvas",
+        "value": "#ffffff",
+        "role": "canvas"
+      },
+      {
+        "name": "inverse-canvas",
+        "value": "#000000",
+        "role": "inverse canvas"
+      },
+      {
+        "name": "inverse-ink",
+        "value": "#ffffff",
+        "role": "inverse ink"
+      },
+      {
+        "name": "hairline",
+        "value": "#e6e6e6",
+        "role": "hairline"
+      },
+      {
+        "name": "hairline-soft",
+        "value": "#f1f1f1",
+        "role": "hairline soft"
+      },
+      {
+        "name": "surface-soft",
+        "value": "#f7f7f5",
+        "role": "surface soft"
+      },
+      {
+        "name": "block-lime",
+        "value": "#dceeb1",
+        "role": "block lime"
+      },
+      {
+        "name": "block-lilac",
+        "value": "#c5b0f4",
+        "role": "block lilac"
+      },
+      {
+        "name": "block-cream",
+        "value": "#f4ecd6",
+        "role": "block cream"
+      },
+      {
+        "name": "block-pink",
+        "value": "#efd4d4",
+        "role": "block pink"
+      },
+      {
+        "name": "block-mint",
+        "value": "#c8e6cd",
+        "role": "block mint"
+      },
+      {
+        "name": "block-coral",
+        "value": "#f3c9b6",
+        "role": "block coral"
+      },
+      {
+        "name": "block-navy",
+        "value": "#1f1d3d",
+        "role": "block navy"
+      },
+      {
+        "name": "accent-magenta",
+        "value": "#ff3d8b",
+        "role": "accent magenta"
+      },
+      {
+        "name": "semantic-success",
+        "value": "#1ea64a",
+        "role": "semantic success"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+      "monoFamily": "'JetBrains Mono', 'figmaMono Fallback', 'SF Mono', menlo, monospace",
+      "fontSizes": [
+        "18px",
+        "16px",
+        "80px",
+        "20px",
+        "12px",
+        "40px",
+        "14px",
+        "11px",
+        "26px",
+        "24px",
+        "32px",
+        "13px",
+        "10px",
+        "56px",
+        "36px"
+      ],
+      "fontWeights": [
+        "320",
+        "330",
+        "480",
+        "600",
+        "500",
+        "700"
+      ],
+      "lineHeights": [
+        "1.45",
+        "1.0",
+        "1.4",
+        "1.1",
+        "1.6",
+        "1.35",
+        "1",
+        "1.2"
+      ]
+    },
+    "spacing": [
+      "5px",
+      "6px",
+      "8px",
+      "10px",
+      "12px",
+      "14px",
+      "16px",
+      "20px",
+      "22px",
+      "24px",
+      "28px",
+      "32px",
+      "36px",
+      "40px",
+      "44px",
+      "48px",
+      "56px",
+      "64px",
+      "96px",
+      "100px"
+    ],
+    "radii": [
+      "50px",
+      "8px",
+      "9999px",
+      "24px",
+      "6px",
+      "2px",
+      "3px"
+    ],
+    "shadows": [
+      "0 0 0 2px rgba(0,0,0,0.08)",
+      "none",
+      "0 4px 16px rgba(0,0,0,0.06)",
+      "0 12px 32px rgba(0,0,0,0.18)"
+    ]
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "rounded",
+      "color": "#000000",
+      "textColor": "#ffffff",
+      "views": {
+        "container": {
+          "borderRadius": "8px",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontWeight": 500,
+          "borderColor": "#000000"
+        },
+        "content": {
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontWeight": 500
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#c5b0f4",
+          "color": "#ffffff",
+          "borderColor": "#c5b0f4",
+          "borderRadius": "8px",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "text": {
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "#f7f7f5",
+          "borderColor": "#e6e6e6",
+          "color": "#000000",
+          "borderRadius": "12px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "0 0 0 2px rgba(0,0,0,0.08)"
+        },
+        "header": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "#e6e6e6"
+        },
+        "content": {
+          "color": "#6b7280",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "footer": {
+          "borderColor": "#e6e6e6"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e6e6e6",
+          "color": "#000000",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "label": {
+          "color": "#6b7280",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "helperText": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e6e6e6",
+          "color": "#000000",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "label": {
+          "color": "#6b7280",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "helperText": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e6e6e6",
+          "color": "#000000",
+          "borderRadius": "8px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "label": {
+          "color": "#6b7280",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "helperText": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "#e6e6e6",
+          "backgroundColor": "#ffffff",
+          "_checked": {
+            "backgroundColor": "#000000",
+            "borderColor": "#000000"
+          }
+        },
+        "label": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "infoText": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "#e6e6e6",
+          "backgroundColor": "#ffffff"
+        },
+        "dot": {
+          "backgroundColor": "#000000"
+        },
+        "label": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "infoText": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "#e6e6e6"
+        },
+        "circle": {
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "#000000",
+      "views": {
+        "track": {
+          "backgroundColor": "#e6e6e6"
+        },
+        "progress": {
+          "backgroundColor": "#000000"
+        },
+        "filledTrack": {
+          "backgroundColor": "#000000"
+        },
+        "thumb": {
+          "borderColor": "#000000",
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#000000"
+        },
+        "valueLabel": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "underline",
+      "views": {
+        "headerTabs": {
+          "borderColor": "#e6e6e6"
+        },
+        "tab": {
+          "color": "#6b7280"
+        },
+        "activeTab": {
+          "color": "#000000",
+          "borderColor": "#000000",
+          "style": {
+            "backgroundColor": "transparent"
+          }
+        },
+        "title": {
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "activeText": {
+          "color": "#000000"
+        },
+        "content": {
+          "color": "#000000"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "#e6e6e6",
+          "backgroundColor": "#f7f7f5",
+          "color": "#000000"
+        },
+        "trigger": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "content": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "#ffffff",
+          "color": "#000000",
+          "borderColor": "#e6e6e6"
+        },
+        "thead": {
+          "backgroundColor": "#f7f7f5",
+          "color": "#000000"
+        },
+        "th": {
+          "color": "#6b7280",
+          "borderColor": "#e6e6e6",
+          "fontFamily": "'JetBrains Mono', 'figmaMono Fallback', 'SF Mono', menlo, monospace"
+        },
+        "tr": {
+          "borderColor": "#e6e6e6"
+        },
+        "td": {
+          "color": "#000000",
+          "borderColor": "#e6e6e6"
+        },
+        "caption": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "#f7f7f5",
+          "borderColor": "#e6e6e6",
+          "color": "#000000"
+        },
+        "fallback": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "#f7f7f5",
+          "borderColor": "#e6e6e6",
+          "borderRadius": "8px"
+        },
+        "title": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "description": {
+          "color": "#6b7280",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "icon": {
+          "color": "#000000"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "#c8e6cd"
+        },
+        "label": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "#000000",
+      "backgroundColor": "#e6e6e6",
+      "radius": "8px",
+      "views": {
+        "container": {
+          "backgroundColor": "#e6e6e6"
+        },
+        "bar": {
+          "backgroundColor": "#000000"
+        },
+        "text": {
+          "color": "#000000"
+        }
+      }
+    },
+    "loader": {
+      "color": "#000000"
+    },
+    "separator": {
+      "color": "#e6e6e6",
+      "views": {
+        "container": {
+          "borderColor": "#e6e6e6"
+        },
+        "label": {
+          "color": "#6b7280",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e6e6e6",
+          "color": "#000000"
+        },
+        "item": {
+          "color": "#6b7280"
+        },
+        "activeItem": {
+          "color": "#000000",
+          "borderColor": "#000000"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "eyebrow": {
+          "color": "#6b7280"
+        },
+        "title": {
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "description": {
+          "color": "#6b7280"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#000000",
+          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#e6e6e6"
+        },
+        "surface": {
+          "backgroundColor": "#f7f7f5",
+          "borderColor": "#e6e6e6",
+          "color": "#000000"
+        }
+      }
+    }
+  }
+}

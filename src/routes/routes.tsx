@@ -9,6 +9,7 @@ const HomePage = lazy(() => import('src/pages/home.page'));
 const GalleryComparePage = lazy(() => import('src/pages/galleryCompare.page'));
 const GalleryLivePage = lazy(() => import('src/pages/galleryLive.page'));
 const ThemeTestPage = lazy(() => import('src/pages/themeTest.page'));
+const DesignSystemPage = lazy(() => import('src/pages/designSystem.page'));
 
 export const ComponentRouter = [
   {
@@ -22,6 +23,7 @@ export const ComponentRouter = [
       // { path: '/home', element: <Navigate to="/" replace /> },
       { path: '/', element: <Navigate to="/accordion" replace /> },
       { path: '/gallery-compare', element: <GalleryComparePage /> },
+      { path: '/design-system', element: <DesignSystemPage /> },
       { path: '/docs/:componentName?', element: <DocsPage /> },
       { path: '/docs', element: <DocsPage /> },
       { path: '/theme-test', element: <ThemeTestPage /> },

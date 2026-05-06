@@ -11,8 +11,8 @@ export const AccordionShapes: Record<Shape, ViewProps> = {
 export const AccordionVariants: Record<Variant, ViewProps> = {
   // Styles for the default variant, featuring a transparent background and no border.
   default: {
-    backgroundColor: 'transparent',
     borderWidth: 0,
+    style: { backgroundColor: 'transparent' },
     transition: 'background-color 0.15s ease',
   },
   // Styles for the outline variant, including a border, border color, and hover effects.

@@ -87,9 +87,7 @@ export const optionStyles: ViewProps = {
  * Option item state variants
  */
 export const optionStateStyles = {
-  default: {
-    backgroundColor: 'transparent',
-  },
+  default: {},
   hover: {
     backgroundColor: 'color-gray-50',
   },

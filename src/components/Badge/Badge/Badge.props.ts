@@ -7,9 +7,12 @@ export interface BadgeProps extends Omit<ViewProps, 'content'> {
   children?: React.ReactNode;
   icon?: React.ReactNode;
   pastil?: boolean | string;
+  pastilContent?: React.ReactNode;
+  action?: React.ReactNode;
   variant?: Variant;
   position?: Position;
   size?: Size;
   shape?: Shape;
   views?: BadgeStyles;
+  config?: any;
 }

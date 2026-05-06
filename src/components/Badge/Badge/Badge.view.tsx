@@ -7,9 +7,13 @@
 import React, { useMemo } from 'react';
 import { BadgeProps } from './Badge.props';
 import {
+  BadgeAnnouncementSizes,
+  BadgeAnnouncementTextSizes,
+  BadgePastilContentSizes,
   BadgeShapes,
   BadgeSizes,
   PositionStyles,
+  getBadgeAnnouncementVariant,
   getBadgeVariants,
 } from './Badge.style';
 import { Center, useTheme, View } from 'app-studio';
@@ -26,6 +30,8 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
     children,
     icon,
     pastil,
+    pastilContent,
+    action,
     position,
     shape = 'pill',
     variant = 'filled',
@@ -40,10 +46,21 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
       () => getBadgeVariants(currentThemeMode)[variant],
       [currentThemeMode, variant]
     );
+    const announcementVariantStyles = useMemo(
+      () => getBadgeAnnouncementVariant(currentThemeMode),
+      [currentThemeMode]
+    );
     const statusThemes = useMemo(
       () => getThemes(currentThemeMode),
       [currentThemeMode]
     );
+    const hasPastilContent =
+      pastilContent !== undefined && pastilContent !== null;
+    const hasAction = action !== undefined && action !== null;
+    const hasAnnouncementLayout = hasPastilContent || hasAction;
+    const contentNode =
+      children !== undefined && children !== null ? children : content;
+    const hasContent = contentNode !== undefined && contentNode !== null;
 
     // Combine styles for the badge (memoized to avoid recreation on every render)
     const combinedStyles: Record<string, any> = useMemo(
@@ -59,6 +76,8 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
         borderRadius: BadgeShapes[shape],
         ...BadgeSizes[size],
         ...variantStyles,
+        ...(hasAnnouncementLayout ? BadgeAnnouncementSizes[size] : {}),
+        ...(hasAnnouncementLayout ? announcementVariantStyles : {}),
 
         // Apply position styles if provided
         ...(position ? PositionStyles[position] : {}),
@@ -66,7 +85,15 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
         // Apply custom container styles
         ...views?.container,
       }),
-      [shape, size, variantStyles, position, views?.container]
+      [
+        shape,
+        size,
+        variantStyles,
+        hasAnnouncementLayout,
+        announcementVariantStyles,
+        position,
+        views?.container,
+      ]
     );
 
     // Determine pastil color
@@ -91,6 +118,27 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
           </View>
         )}
 
+        {hasPastilContent && (
+          <Text
+            role="badge-pastil-content"
+            backgroundColor={
+              currentThemeMode === 'dark' ? 'color-white' : 'color-gray-900'
+            }
+            borderRadius="9999px"
+            color={
+              currentThemeMode === 'dark' ? 'color-gray-900' : 'color-white'
+            }
+            fontWeight="700"
+            letterSpacing={0}
+            textTransform="uppercase"
+            whiteSpace="nowrap"
+            {...BadgePastilContentSizes[size]}
+            {...views?.pastilContent}
+          >
+            {pastilContent}
+          </Text>
+        )}
+
         {pastil && (
           <View
             role="badge-pastil"
@@ -102,16 +150,38 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
           />
         )}
 
-        {(content || children) && (
+        {hasContent && (
           <Text
             role="badgeText"
-            fontWeight="600"
+            color={
+              hasAnnouncementLayout
+                ? currentThemeMode === 'dark'
+                  ? 'color-gray-50'
+                  : 'color-gray-900'
+                : combinedStyles.color
+            }
+            fontWeight={hasAnnouncementLayout ? '700' : '600'}
             textAlign="center"
-            letterSpacing="0.02em"
+            letterSpacing={hasAnnouncementLayout ? 0 : '0.02em'}
+            whiteSpace={hasAnnouncementLayout ? 'nowrap' : undefined}
+            {...(hasAnnouncementLayout ? BadgeAnnouncementTextSizes[size] : {})}
             {...views?.text}
-            color={combinedStyles.color}
           >
-            {children || content}
+            {contentNode}
+          </Text>
+        )}
+
+        {hasAction && (
+          <Text
+            role="badge-action"
+            color="color-gray-400"
+            fontWeight="500"
+            letterSpacing={0}
+            whiteSpace="nowrap"
+            {...BadgeAnnouncementTextSizes[size]}
+            {...views?.action}
+          >
+            {action}
           </Text>
         )}
       </Center>

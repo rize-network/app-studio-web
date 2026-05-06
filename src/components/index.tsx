@@ -66,6 +66,7 @@ export * from './Background/Background';
 export * from './ChatWidget/ChatWidget';
 export * from './AttachmentGroup/AttachmentGroup';
 export * from './ChatWidget/Widget/ChatWidgetWidget';
+export * from '../design-system';
 
 export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';

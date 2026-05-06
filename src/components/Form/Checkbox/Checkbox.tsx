@@ -3,11 +3,13 @@ import React from 'react';
 import { CheckboxProps } from './Checkbox/Checkbox.props';
 import { useCheckboxState } from './Checkbox/Checkbox.state';
 import CheckboxView from './Checkbox/Checkbox.view';
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
 
 const CheckboxComponent: React.FC<CheckboxProps> = (props) => {
-  const checkboxStates = useCheckboxState(props);
+  const mergedProps = useMergedDesignSystemComponentProps('checkbox', props);
+  const checkboxStates = useCheckboxState(mergedProps);
 
-  return <CheckboxView {...checkboxStates} {...props} />;
+  return <CheckboxView {...checkboxStates} {...mergedProps} />;
 };
 
 /**

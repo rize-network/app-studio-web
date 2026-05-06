@@ -16,10 +16,13 @@ export const TableContainer: React.FC<ViewProps> = (props) => {
   return (
     <Element
       as="table"
-      borderCollapse="collapse"
       {...DefaultTableStyles.table}
       {...views?.table}
       {...props}
+      style={{
+        borderCollapse: 'collapse',
+        ...((props as any).style || {}),
+      }}
     />
   );
 };
@@ -63,13 +66,16 @@ export const TableRow: React.FC<ViewProps> = (props) => {
   );
 };
 
-export const TableCell: React.FC<ViewProps> = (props) => {
+export const TableCell: React.FC<ViewProps & { isFirstColumn?: boolean }> = ({
+  isFirstColumn,
+  ...props
+}) => {
   const { views } = useTableContext();
   return (
     <Element
       as="td"
       whiteSpace="nowrap"
-      fontWeight={props.isFirstColumn ? '500' : '400'}
+      fontWeight={isFirstColumn ? '500' : '400'}
       {...DefaultTableStyles.td}
       {...views?.td}
       {...props}

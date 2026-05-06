@@ -91,7 +91,6 @@ export const AlertView = React.memo(
               fontWeight="600"
               lineHeight="20px"
               color={themes[variant].content.color}
-              backgroundColor={themes[variant].container.backgroundColor}
               {...views?.title}
             >
               {title}
@@ -102,7 +101,6 @@ export const AlertView = React.memo(
             fontWeight="400"
             lineHeight="16px"
             color={themes[variant].content.color}
-            backgroundColor={themes[variant].container.backgroundColor}
             {...views?.description}
           >
             {description || children}

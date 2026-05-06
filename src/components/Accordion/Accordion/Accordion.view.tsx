@@ -16,6 +16,7 @@ import {
   AccordionItemProps,
 } from './Accordion.props';
 import { AccordionShapes, AccordionVariants } from './Accordion.style';
+import { deepMerge, useDesignSystemComponentProps } from 'src/design-system';
 // Initializes the Accordion context with default values, providing a centralized store for managing accordion state and functionality across all related components.
 const AccordionContext = createContext<AccordionContextType>({
   expandedItems: [],
@@ -53,6 +54,13 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   ...props
 }) => {
   const { isItemExpanded, baseId } = useAccordionContext();
+  const designSystemAccordion = useDesignSystemComponentProps('accordion');
+  const mergedViews = deepMerge(
+    {
+      item: designSystemAccordion.views?.container,
+    },
+    views
+  );
   const isExpanded = isItemExpanded(value);
   const triggerId = `${baseId}-trigger-${value}`;
   const contentId = `${baseId}-content-${value}`;
@@ -67,7 +75,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       pointerEvents={isDisabled ? 'none' : 'auto'}
       data-state={isExpanded ? 'open' : 'closed'}
       data-disabled={isDisabled ? '' : undefined}
-      {...views?.item}
+      {...mergedViews?.item}
       {...props}
     >
       {React.Children.map(children, (child) => {
@@ -106,6 +114,13 @@ export const AccordionTrigger: React.FC<
   ...props
 }) => {
   const { toggleItem } = useAccordionContext();
+  const designSystemAccordion = useDesignSystemComponentProps('accordion');
+  const mergedViews = deepMerge(
+    {
+      container: designSystemAccordion.views?.trigger,
+    },
+    views
+  );
   const handleClick = () => {
     if (value && !isDisabled) {
       toggleItem(value);
@@ -123,9 +138,9 @@ export const AccordionTrigger: React.FC<
     cursor: isDisabled ? 'not-allowed' : 'pointer',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'color-white',
     width: '100%',
-    ...views?.container,
+    style: { backgroundColor: 'transparent' },
+    ...mergedViews?.container,
     ...props,
   };
   if (asChild && isValidElement(children)) {
@@ -143,7 +158,7 @@ export const AccordionTrigger: React.FC<
         justifyContent="center"
         transition="transform 0.2s ease"
         transform={isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'}
-        {...views?.icon}
+        {...mergedViews?.icon}
       >
         <svg
           width="16"
@@ -177,6 +192,13 @@ export const AccordionContent: React.FC<
   views,
   ...props
 }) => {
+  const designSystemAccordion = useDesignSystemComponentProps('accordion');
+  const mergedViews = deepMerge(
+    {
+      container: designSystemAccordion.views?.content,
+    },
+    views
+  );
   const transitionMs = 260;
   const contentRef = useRef<HTMLDivElement | null>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -228,14 +250,14 @@ export const AccordionContent: React.FC<
       id={contentId}
       role="region"
       aria-labelledby={triggerId}
-      backgroundColor="color-white"
       overflow="hidden"
       maxHeight={maxHeight}
       opacity={opacity}
       transition={`max-height ${transitionMs}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${transitionMs}ms ease`}
       data-state={isExpanded ? 'open' : 'closed'}
       data-disabled={isDisabled ? '' : undefined}
-      {...views?.container}
+      style={{ backgroundColor: 'transparent' }}
+      {...mergedViews?.container}
       {...props}
     >
       <View ref={contentRef} padding={16}>

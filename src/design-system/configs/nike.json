@@ -1,0 +1,662 @@
+{
+  "metadata": {
+    "id": "nike",
+    "label": "Nike",
+    "sourcePath": "design.md/html/nike.html",
+    "sourceTitle": "Design System Inspiration of Nike",
+    "defaultAppearance": "light",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#111111",
+    "secondary": "#f5f5f5",
+    "success": "#007d48",
+    "warning": "#1151ff",
+    "error": "#d30005",
+    "canvas": "#ffffff",
+    "surface": "#f5f5f5",
+    "text": "#111111",
+    "muted": "#707072",
+    "border": "#cacacb",
+    "onPrimary": "#ffffff"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "ink": "#111111",
+      "on-primary": "#ffffff",
+      "canvas": "#ffffff",
+      "soft-cloud": "#f5f5f5",
+      "charcoal": "#39393b",
+      "ash": "#4b4b4d",
+      "mute": "#707072",
+      "stone": "#9e9ea0",
+      "hairline": "#cacacb",
+      "hairline-soft": "#e5e5e5",
+      "sale": "#d30005",
+      "sale-deep": "#780700",
+      "success": "#007d48",
+      "success-bright": "#1eaa52",
+      "info": "#1151ff",
+      "info-deep": "#0034e3",
+      "accent-pink": "#ed1aa0",
+      "accent-pink-soft": "#ffb0dd",
+      "accent-purple-soft": "#beaffd",
+      "accent-purple-pale": "#d6d1ff",
+      "accent-teal": "#0a7281",
+      "accent-pink-deep": "#4c012d",
+      "font-display": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+      "font-ui": "'Inter', 'Helvetica Now Text Medium', Helvetica, Arial, sans-serif",
+      "font-body": "'Inter', 'Helvetica Now Text', Helvetica, Arial, sans-serif"
+    },
+    "colors": [
+      {
+        "name": "ink",
+        "value": "#111111",
+        "role": "ink"
+      },
+      {
+        "name": "on-primary",
+        "value": "#ffffff",
+        "role": "on primary"
+      },
+      {
+        "name": "canvas",
+        "value": "#ffffff",
+        "role": "canvas"
+      },
+      {
+        "name": "soft-cloud",
+        "value": "#f5f5f5",
+        "role": "soft cloud"
+      },
+      {
+        "name": "charcoal",
+        "value": "#39393b",
+        "role": "charcoal"
+      },
+      {
+        "name": "ash",
+        "value": "#4b4b4d",
+        "role": "ash"
+      },
+      {
+        "name": "mute",
+        "value": "#707072",
+        "role": "mute"
+      },
+      {
+        "name": "stone",
+        "value": "#9e9ea0",
+        "role": "stone"
+      },
+      {
+        "name": "hairline",
+        "value": "#cacacb",
+        "role": "hairline"
+      },
+      {
+        "name": "hairline-soft",
+        "value": "#e5e5e5",
+        "role": "hairline soft"
+      },
+      {
+        "name": "sale",
+        "value": "#d30005",
+        "role": "sale"
+      },
+      {
+        "name": "sale-deep",
+        "value": "#780700",
+        "role": "sale deep"
+      },
+      {
+        "name": "success",
+        "value": "#007d48",
+        "role": "success"
+      },
+      {
+        "name": "success-bright",
+        "value": "#1eaa52",
+        "role": "success bright"
+      },
+      {
+        "name": "info",
+        "value": "#1151ff",
+        "role": "info"
+      },
+      {
+        "name": "info-deep",
+        "value": "#0034e3",
+        "role": "info deep"
+      },
+      {
+        "name": "accent-pink",
+        "value": "#ed1aa0",
+        "role": "accent pink"
+      },
+      {
+        "name": "accent-pink-soft",
+        "value": "#ffb0dd",
+        "role": "accent pink soft"
+      },
+      {
+        "name": "accent-purple-soft",
+        "value": "#beaffd",
+        "role": "accent purple soft"
+      },
+      {
+        "name": "accent-purple-pale",
+        "value": "#d6d1ff",
+        "role": "accent purple pale"
+      },
+      {
+        "name": "accent-teal",
+        "value": "#0a7281",
+        "role": "accent teal"
+      },
+      {
+        "name": "accent-pink-deep",
+        "value": "#4c012d",
+        "role": "accent pink deep"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+      "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      "fontSizes": [
+        "16px",
+        "15px",
+        "14px",
+        "96px",
+        "18px",
+        "12px",
+        "56px",
+        "13px",
+        "11px",
+        "24px",
+        "40px",
+        "64px",
+        "48px",
+        "32px"
+      ],
+      "fontWeights": [
+        "700",
+        "500",
+        "600"
+      ],
+      "lineHeights": [
+        "1.5",
+        "0.92",
+        "1",
+        "1.4",
+        "1.6",
+        "0.9",
+        "1.2",
+        "1.75",
+        "1.7",
+        "1.35"
+      ]
+    },
+    "spacing": [
+      "2px",
+      "4px",
+      "5px",
+      "6px",
+      "8px",
+      "10px",
+      "12px",
+      "14px",
+      "16px",
+      "18px",
+      "20px",
+      "24px",
+      "28px",
+      "30px",
+      "32px",
+      "36px",
+      "40px",
+      "44px",
+      "48px",
+      "56px"
+    ],
+    "radii": [
+      "9999px",
+      "24px",
+      "14px",
+      "6px",
+      "3px"
+    ],
+    "shadows": [
+      "0 0 0 12px var(--soft-cloud)",
+      "0 20px 30px -10px rgba(0,0,0,0.18)",
+      "0 0 0 2px var(--canvas), 0 0 0 4px var(--ink)",
+      "inset 0 -1px 0 var(--hairline-soft)"
+    ]
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "pill",
+      "color": "#111111",
+      "textColor": "#ffffff",
+      "views": {
+        "container": {
+          "borderRadius": "9999px",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontWeight": 500,
+          "borderColor": "#111111"
+        },
+        "content": {
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontWeight": 500
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "pill",
+      "views": {
+        "container": {
+          "backgroundColor": "#f5f5f5",
+          "color": "#ffffff",
+          "borderColor": "#f5f5f5",
+          "borderRadius": "9999px",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "text": {
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "square",
+      "views": {
+        "container": {
+          "backgroundColor": "#f5f5f5",
+          "borderColor": "#cacacb",
+          "color": "#111111",
+          "borderRadius": 0,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "0 0 0 12px var(--soft-cloud)"
+        },
+        "header": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "#cacacb"
+        },
+        "content": {
+          "color": "#707072",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "footer": {
+          "borderColor": "#cacacb"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "pill",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#cacacb",
+          "color": "#111111",
+          "borderRadius": "9999px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "label": {
+          "color": "#707072",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "helperText": {
+          "color": "#707072"
+        }
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "pill",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#cacacb",
+          "color": "#111111",
+          "borderRadius": "9999px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "label": {
+          "color": "#707072",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "helperText": {
+          "color": "#707072"
+        }
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "pill",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#cacacb",
+          "color": "#111111",
+          "borderRadius": "9999px",
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "label": {
+          "color": "#707072",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "helperText": {
+          "color": "#707072"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "#cacacb",
+          "backgroundColor": "#ffffff",
+          "_checked": {
+            "backgroundColor": "#111111",
+            "borderColor": "#111111"
+          }
+        },
+        "label": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "infoText": {
+          "color": "#707072"
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "#cacacb",
+          "backgroundColor": "#ffffff"
+        },
+        "dot": {
+          "backgroundColor": "#111111"
+        },
+        "label": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "infoText": {
+          "color": "#707072"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "#cacacb"
+        },
+        "circle": {
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "#111111",
+      "views": {
+        "track": {
+          "backgroundColor": "#cacacb"
+        },
+        "progress": {
+          "backgroundColor": "#111111"
+        },
+        "filledTrack": {
+          "backgroundColor": "#111111"
+        },
+        "thumb": {
+          "borderColor": "#111111",
+          "backgroundColor": "#ffffff"
+        },
+        "label": {
+          "color": "#111111"
+        },
+        "valueLabel": {
+          "color": "#707072"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "pill",
+      "views": {
+        "headerTabs": {
+          "borderColor": "#cacacb"
+        },
+        "tab": {
+          "color": "#707072"
+        },
+        "activeTab": {
+          "color": "#111111",
+          "borderColor": "#111111",
+          "backgroundColor": "#111111"
+        },
+        "title": {
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "activeText": {
+          "color": "#ffffff"
+        },
+        "content": {
+          "color": "#111111"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "#cacacb",
+          "backgroundColor": "#f5f5f5",
+          "color": "#111111"
+        },
+        "trigger": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "content": {
+          "color": "#707072"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "#ffffff",
+          "color": "#111111",
+          "borderColor": "#cacacb"
+        },
+        "thead": {
+          "backgroundColor": "#f5f5f5",
+          "color": "#111111"
+        },
+        "th": {
+          "color": "#707072",
+          "borderColor": "#cacacb",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+        },
+        "tr": {
+          "borderColor": "#cacacb"
+        },
+        "td": {
+          "color": "#111111",
+          "borderColor": "#cacacb"
+        },
+        "caption": {
+          "color": "#707072"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "#f5f5f5",
+          "borderColor": "#cacacb",
+          "color": "#111111"
+        },
+        "fallback": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "#f5f5f5",
+          "borderColor": "#cacacb",
+          "borderRadius": 0
+        },
+        "title": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "description": {
+          "color": "#707072",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "icon": {
+          "color": "#111111"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "#007d48"
+        },
+        "label": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "#111111",
+      "backgroundColor": "#cacacb",
+      "radius": 0,
+      "views": {
+        "container": {
+          "backgroundColor": "#cacacb"
+        },
+        "bar": {
+          "backgroundColor": "#111111"
+        },
+        "text": {
+          "color": "#111111"
+        }
+      }
+    },
+    "loader": {
+      "color": "#111111"
+    },
+    "separator": {
+      "color": "#cacacb",
+      "views": {
+        "container": {
+          "borderColor": "#cacacb"
+        },
+        "label": {
+          "color": "#707072",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#cacacb",
+          "color": "#111111"
+        },
+        "item": {
+          "color": "#707072"
+        },
+        "activeItem": {
+          "color": "#111111",
+          "borderColor": "#111111"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "eyebrow": {
+          "color": "#707072"
+        },
+        "title": {
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "description": {
+          "color": "#707072"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "#ffffff",
+          "color": "#111111",
+          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "#ffffff",
+          "borderColor": "#cacacb"
+        },
+        "surface": {
+          "backgroundColor": "#f5f5f5",
+          "borderColor": "#cacacb",
+          "color": "#111111"
+        }
+      }
+    }
+  }
+}

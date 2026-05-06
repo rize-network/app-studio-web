@@ -80,4 +80,5 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
     icon?: ViewProps;
     link?: ViewProps;
   };
+  config?: any;
 }

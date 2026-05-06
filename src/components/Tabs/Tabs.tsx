@@ -9,25 +9,27 @@ import {
   TabsContent,
 } from './Tabs/Tabs.view';
 import { Tab } from './Tabs/Tabs.type'; // Import Tab type
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
 
 /**
  * Tabs component allows users to navigate between different sections of content.
  * Supports both data-driven approach (with tabs prop) and compound component pattern.
  */
-const TabsComponent: React.FC<TabsProps> = ({
-  tabs,
-  views,
-  defaultValue,
-  onTabChange,
-  renderTab,
-  renderContent,
-  variant = 'underline',
-  iconPosition = 'left',
-
-  value,
-  onValueChange,
-  children,
-}) => {
+const TabsComponent: React.FC<TabsProps> = (props) => {
+  const mergedProps = useMergedDesignSystemComponentProps('tabs', props);
+  const {
+    tabs,
+    views,
+    defaultValue,
+    onTabChange,
+    renderTab,
+    renderContent,
+    variant = 'underline',
+    iconPosition = 'left',
+    value,
+    onValueChange,
+    children,
+  } = mergedProps;
   // For compound component pattern
   const compoundState = useTabsCompoundState(
     defaultValue,

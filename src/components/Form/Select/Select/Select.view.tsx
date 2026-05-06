@@ -28,6 +28,41 @@ import {
   chipStyles,
   scrollbarStyles,
 } from './Select.style';
+
+const withoutFieldShellView = <T extends Record<string, any>>(views?: T): T => {
+  if (!views) return {} as T;
+  const { container, content, ...layoutViews } = views;
+  return layoutViews as T;
+};
+
+const fieldSizeStyles = {
+  xs: {
+    minHeight: 24,
+    shellPaddingY: 6,
+    shellPaddingX: 10,
+  },
+  sm: {
+    minHeight: 32,
+    shellPaddingY: 8,
+    shellPaddingX: 10,
+  },
+  md: {
+    minHeight: 40,
+    shellPaddingY: 10,
+    shellPaddingX: 12,
+  },
+  lg: {
+    minHeight: 48,
+    shellPaddingY: 12,
+    shellPaddingX: 14,
+  },
+  xl: {
+    minHeight: 56,
+    shellPaddingY: 14,
+    shellPaddingX: 16,
+  },
+} as const;
+
 /**
  * Item Component
  *
@@ -120,6 +155,8 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   removeOption = () => {},
   options,
 }) => {
+  const fieldView = views?.field || {};
+  const textView = views?.text || {};
   /**
    * Styles for the select field
    */
@@ -140,7 +177,6 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
 
     // Visual properties
-    backgroundColor: 'transparent',
     color: isDisabled ? 'color-gray-400' : 'color-gray-900',
 
     // State properties
@@ -150,8 +186,13 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     transition: 'all 0.2s ease-in-out',
 
     // Apply custom styles
-    ...views['field'],
-    ...views['text'],
+    ...fieldView,
+    ...textView,
+    style: {
+      backgroundColor: 'transparent',
+      ...(fieldView as any).style,
+      ...(textView as any).style,
+    },
   };
   const option: any =
     options.length > 0 && options.find((option) => option.value === value);
@@ -433,7 +474,6 @@ const SelectView: React.FC<SelectViewProps> = ({
       document.removeEventListener('click', handleGlobalClick);
     };
   }, [id, hide, setHide]);
-  const showLabel = !!(isFocused && label);
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -478,6 +518,9 @@ const SelectView: React.FC<SelectViewProps> = ({
       setValue(newValue.length === 0 ? [] : newValue);
     }
   };
+  const showLabel = !!label;
+  const layoutViews = withoutFieldShellView(views);
+
   return (
     <FieldContainer
       ref={triggerRef as React.RefObject<HTMLDivElement>}
@@ -488,7 +531,7 @@ const SelectView: React.FC<SelectViewProps> = ({
       role="SelectBox"
       helperText={helperText}
       error={error}
-      views={views}
+      views={layoutViews}
       onClick={(e: React.MouseEvent<HTMLDivElement>) => {
         // Stop propagation to prevent clicks from bubbling up
         e.stopPropagation();
@@ -514,9 +557,15 @@ const SelectView: React.FC<SelectViewProps> = ({
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
+        minHeight={`${fieldSizeStyles[size].minHeight}px`}
+        paddingTop={fieldSizeStyles[size].shellPaddingY}
+        paddingBottom={fieldSizeStyles[size].shellPaddingY}
+        paddingLeft={fieldSizeStyles[size].shellPaddingX}
+        paddingRight={fieldSizeStyles[size].shellPaddingX}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
         position="relative"
+        {...views?.content}
       >
         <FieldWrapper>
           {showLabel && (
@@ -524,7 +573,7 @@ const SelectView: React.FC<SelectViewProps> = ({
               htmlFor={id}
               color={'theme-primary'}
               error={error}
-              {...views}
+              {...views?.label}
             >
               {label}
             </FieldLabel>

@@ -18,6 +18,13 @@ interface Props extends LoaderProps {
   };
 }
 
+const isRawCssColor = (value?: string) =>
+  typeof value === 'string' &&
+  (/^(#|rgb\(|rgba\(|hsl\(|hsla\(|var\()/.test(value) ||
+    ['black', 'currentColor', 'inherit', 'transparent', 'white'].includes(
+      value
+    ));
+
 const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   size = 'md',
   speed = 'normal',
@@ -163,8 +170,10 @@ const LoaderView: React.FC<Props> = ({
   ...props
 }) => {
   const { getColor } = useTheme();
-  loaderColor = getColor(loaderColor || props.color || 'theme-loading');
-  textColor = getColor(textColor || props.color || 'theme-loading');
+  const resolveColor = (value?: string) =>
+    isRawCssColor(value) ? value : getColor(value || 'theme-loading');
+  loaderColor = resolveColor(loaderColor || props.color || 'theme-loading');
+  textColor = resolveColor(textColor || props.color || 'theme-loading');
 
   const style = { size, speed, color: loaderColor };
 

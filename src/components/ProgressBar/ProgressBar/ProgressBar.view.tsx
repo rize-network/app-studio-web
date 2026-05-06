@@ -1,6 +1,14 @@
 import React, { useMemo } from 'react';
 import { View, Text, useTheme } from 'app-studio';
 import { ProgressBarProps } from './ProgressBar.props';
+
+const isRawCssColor = (value?: string) =>
+  typeof value === 'string' &&
+  (/^(#|rgb\(|rgba\(|hsl\(|hsla\(|var\()/.test(value) ||
+    ['black', 'currentColor', 'inherit', 'transparent', 'white'].includes(
+      value
+    ));
+
 // Defines the ProgressBarView functional component, wrapped in React.memo for performance optimization, ensuring it only re-renders when its props change. It receives props defined by ProgressBarProps.
 const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
   ({
@@ -45,14 +53,18 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
     const validValue = Math.min(max, Math.max(0, value));
     // Calculates the progress as a percentage based on the validated value and the maximum value.
     const percentage = (validValue / max) * 100;
+    const resolveColor = (value: string) =>
+      isRawCssColor(value)
+        ? value
+        : getColor(value, { themeMode: currentMode });
     // Memoizes the calculation of the track's background color, resolving it using the theme's getColor utility and the current theme mode. This prevents unnecessary recalculations on re-renders.
     const trackColor = useMemo(
-      () => getColor(backgroundColor, { themeMode: currentMode }),
+      () => resolveColor(backgroundColor),
       [getColor, backgroundColor, currentMode]
     );
     // Memoizes the calculation of the progress bar's fill color, resolving it using the theme's getColor utility and the current theme mode. This prevents unnecessary recalculations on re-renders.
     const barColor = useMemo(
-      () => getColor(color, { themeMode: currentMode }),
+      () => resolveColor(color),
       [getColor, color, currentMode]
     );
     // Checks if the progress bar should be rendered as a 'circle' shape.
@@ -137,6 +149,12 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
       );
     }
     const linearHeight = height || 8;
+    const containerStyle = {
+      backgroundColor: trackColor,
+      ...((views?.container as any)?.style || {}),
+      ...((props as any).style || {}),
+    };
+
     return (
       <View
         role="progressbar"
@@ -145,7 +163,6 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
         aria-valuemax={max}
         width="100%"
         height={linearHeight}
-        backgroundColor={trackColor}
         borderRadius={radius}
         overflow="hidden"
         position="relative"
@@ -154,6 +171,7 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
         justifyContent="center"
         {...views?.container}
         {...props}
+        style={containerStyle}
       >
         <div
           style={{

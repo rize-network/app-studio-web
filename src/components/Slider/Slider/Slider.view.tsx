@@ -10,6 +10,19 @@ import {
   EnhancedSliderSizes,
   OrientationStyles,
 } from './Slider.style';
+
+const isRawCssColor = (value?: string) =>
+  typeof value === 'string' &&
+  (/^(#|rgb\(|rgba\(|hsl\(|hsla\(|var\()/.test(value) ||
+    ['black', 'currentColor', 'inherit', 'transparent', 'white'].includes(
+      value
+    ));
+
+const colorStyleProp = (property: string, value: string) =>
+  isRawCssColor(value)
+    ? { style: { [property]: value } }
+    : { [property]: value };
+
 // Defines the SliderView functional component, which renders the visual representation of the slider, memoized for performance to prevent unnecessary re-renders.
 export const SliderView: React.FC<SliderViewProps> = React.memo(
   ({
@@ -72,13 +85,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
     };
     // Defines the JSX structure for a 'legacy' slider view, typically used for horizontal sliders without advanced tooltip functionality.
     const legacyView = (
-      <Vertical
-        width="100%"
-        gap={8}
-        themeMode={elementMode}
-        {...views.container}
-        {...props}
-      >
+      <Vertical width="100%" gap={8} {...views.container} {...props}>
         {label && (
           <Horizontal justifyContent="space-between" alignItems="center">
             <Text fontSize={14} fontWeight={500} {...views.label}>
@@ -121,8 +128,8 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
                     width={4}
                     height={4}
                     borderRadius="50%"
-                    backgroundColor={activeTrackColor}
                     zIndex={1}
+                    {...colorStyleProp('backgroundColor', activeTrackColor)}
                     {...views.stepMarks}
                   />
                 );
@@ -136,9 +143,9 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             left={0}
             height="100%"
             width={`${thumbPositionPercent}%`}
-            backgroundColor={activeTrackColor}
             borderRadius={SliderShapes[shape]}
             transition="width 0.1s ease-in-out"
+            {...colorStyleProp('backgroundColor', activeTrackColor)}
             {...views.progress}
             {...views.filledTrack}
           />
@@ -161,8 +168,8 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             boxShadow="0 2px 4px rgba(0, 0, 0, 0.2)"
             borderWidth={2}
             borderStyle="solid"
-            borderColor={activeTrackColor}
             transition={isDragging ? 'none' : 'transform 0.1s ease-in-out'}
+            {...colorStyleProp('borderColor', activeTrackColor)}
             transform={
               isHovered
                 ? 'translate(-50%, -50%) scale(1.1)'
@@ -206,7 +213,6 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
       <Center
         {...OrientationStyles[orientation]}
         position="relative"
-        themeMode={elementMode}
         onMouseEnter={() => !isDisabled && setIsHovered(true)}
         onMouseLeave={() => !isDisabled && setIsHovered(false)}
         {...props}
@@ -275,7 +281,6 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
           <View
             position="absolute"
             borderRadius={trackCrossAxisSize / 2}
-            backgroundColor={activeTrackColor}
             {...(isVertical
               ? {
                   bottom: 0,
@@ -289,6 +294,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
                   height: '100%',
                   width: `${thumbPositionPercent}%`,
                 })}
+            {...colorStyleProp('backgroundColor', activeTrackColor)}
             {...views?.filledTrack}
             {...views?.progress}
           />
@@ -306,7 +312,6 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             width={`${thumbSize}px`}
             height={`${thumbSize}px`}
             borderRadius="50%"
-            backgroundColor={activeTrackColor}
             borderWidth={2}
             borderStyle="solid"
             borderColor="color-white"
@@ -315,6 +320,7 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             transform={isVertical ? 'translateX(-50%)' : 'translateY(-50%)'}
             zIndex={2}
             transition={isDragging ? 'none' : 'left 0.1s, bottom 0.1s'}
+            {...colorStyleProp('backgroundColor', activeTrackColor)}
             {...(isVertical
               ? {
                   left: '50%',
