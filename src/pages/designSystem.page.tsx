@@ -138,7 +138,12 @@ const Section = ({
       borderColor: config.theme.border,
     }}
   >
-    <Text fontSize={18} lineHeight="24px" fontWeight="700" color={config.theme.text}>
+    <Text
+      fontSize={18}
+      lineHeight="24px"
+      fontWeight="700"
+      color={config.theme.text}
+    >
       {title}
     </Text>
     {children}
@@ -431,9 +436,20 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
           </Vertical>
 
           <AspectRatio ratio={16 / 9} borderRadius={12} overflow="hidden">
-            <View width="100%" height="100%" backgroundColor={config.theme.primary}>
-              <Vertical height="100%" alignItems="center" justifyContent="center" gap={8}>
-                <Text fontWeight="700" color={config.theme.onPrimary}>16:9 Aspect Ratio</Text>
+            <View
+              width="100%"
+              height="100%"
+              backgroundColor={config.theme.primary}
+            >
+              <Vertical
+                height="100%"
+                alignItems="center"
+                justifyContent="center"
+                gap={8}
+              >
+                <Text fontWeight="700" color={config.theme.onPrimary}>
+                  16:9 Aspect Ratio
+                </Text>
                 <Badge content="Config primary color" />
               </Vertical>
             </View>
@@ -453,7 +469,9 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
                     borderWidth={1}
                     borderStyle="solid"
                   >
-                    <Text fontSize={24} fontWeight="700">Slide {i}</Text>
+                    <Text fontSize={24} fontWeight="700">
+                      Slide {i}
+                    </Text>
                   </View>
                 </Carousel.Item>
               ))}
@@ -521,13 +539,17 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
               <HoverCard.Content>
                 <Vertical gap={4} padding={12}>
                   <Text fontWeight="700">Detailed Info</Text>
-                  <Text fontSize={12} opacity={0.8}>Hover cards provide more context.</Text>
+                  <Text fontSize={12} opacity={0.8}>
+                    Hover cards provide more context.
+                  </Text>
                 </Vertical>
               </HoverCard.Content>
             </HoverCard>
 
             <ColorPicker value={config.theme.primary} />
-            <ShareButton shareData={{ url: "https://example.com", title: "Example" }} />
+            <ShareButton
+              shareData={{ url: 'https://example.com', title: 'Example' }}
+            />
             <Link to="#">Inline Link component</Link>
           </Horizontal>
 
@@ -645,7 +667,12 @@ const Showcase = ({ config }: { config: DesignSystemConfig }) => {
                         <ComponentPreview config={config} />
                       </Vertical>
                     </View>
-                    <View flex={1} minWidth={0} height="calc(100vh - 180px)" style={{ position: 'sticky', top: 28 }}>
+                    <View
+                      flex={1}
+                      minWidth={0}
+                      height="calc(100vh - 180px)"
+                      style={{ position: 'sticky', top: 28 }}
+                    >
                       <View
                         width="100%"
                         height="100%"
@@ -714,11 +741,7 @@ const DesignSystemPage = () => {
         }}
       >
         <Vertical gap={4}>
-          <Text
-            fontSize={18}
-            lineHeight="24px"
-            fontWeight="800"
-          >
+          <Text fontSize={18} lineHeight="24px" fontWeight="800">
             Design Systems
           </Text>
           <Text

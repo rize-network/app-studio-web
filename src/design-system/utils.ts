@@ -58,11 +58,11 @@ export const mergeDesignSystemComponentProps = <T extends Record<string, any>>(
   config?: DesignSystemConfig
 ): T => {
   const { config: localConfig, ...otherProps } = props;
-  
+
   const globalConfig = getDesignSystemComponentProps(componentName, config);
-  
+
   const mergedConfig = deepMerge(globalConfig, localConfig || {});
-  
+
   return normalizeDesignSystemComponentProps(
     deepMerge<T>(mergedConfig as any, otherProps as any) as T
   );

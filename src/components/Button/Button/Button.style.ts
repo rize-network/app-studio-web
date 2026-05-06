@@ -156,8 +156,10 @@ export const getButtonVariants = (
   const effectiveBorder = reversed ? textColor : color;
 
   // For filled buttons, if the background is the primary color, use onPrimary for text contrast.
-  const isPrimary = color === 'theme-primary' || (theme && color === theme.primary);
-  const filledTextColor = isPrimary && theme?.onPrimary ? theme.onPrimary : effectiveContent;
+  const isPrimary =
+    color === 'theme-primary' || (theme && color === theme.primary);
+  const filledTextColor =
+    isPrimary && theme?.onPrimary ? theme.onPrimary : effectiveContent;
 
   // App-Studio alpha syntax: `{token}-{alpha}` (alpha 0–1000 → 0%–100% opacity).
   const focusRing = `0 0 0 2px ${cssVar('color-white')}, 0 0 0 4px ${cssVar(
