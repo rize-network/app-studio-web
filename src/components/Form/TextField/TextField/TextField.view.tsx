@@ -153,8 +153,14 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     }
     if (typeof document === 'undefined' && onChangeText) onChangeText('');
   };
+  const { container: _shellContainer, content: _shellContent, ...layoutViews } =
+    views || {};
   return (
-    <FieldContainer helperText={helperText} error={error} views={views}>
+    <FieldContainer
+      helperText={helperText}
+      error={error}
+      views={layoutViews}
+    >
       <FieldContent
         label={label}
         size={size}

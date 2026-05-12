@@ -17,6 +17,7 @@ import {
   cssVar,
 } from './Button.style';
 import { useDesignSystem, deepMerge } from 'src/design-system';
+import { Variant } from './Button.type.d';
 
 // --- Helper: Button Content ---
 // Renders the inner content: Loader, Icon, and Children.
@@ -603,7 +604,8 @@ const ButtonView = React.memo(
       const textColorKey = textColor ?? 'color-white';
 
       /* variant palette */
-      const { theme } = useDesignSystem();
+      const { config } = useDesignSystem();
+      const theme = config?.theme;
       const palette = useMemo(() => {
         const basePalette = getButtonVariants(
           mainColorKey,

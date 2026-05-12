@@ -345,18 +345,24 @@
       "variant": "filled",
       "size": "md",
       "shape": "rounded",
-      "color": "#5645d4",
-      "textColor": "#ffffff",
+      "color": "theme-primary",
+      "textColor": "theme-canvas",
       "views": {
         "container": {
-          "borderRadius": "8px",
+          "borderRadius": 9999,
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-          "fontWeight": 500,
-          "borderColor": "#5645d4"
+          "fontWeight": 400,
+          "borderColor": "theme-primary",
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-          "fontWeight": 500
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         }
       }
     },
@@ -366,11 +372,15 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "#ff64c8",
-          "color": "#ffffff",
-          "borderColor": "#ff64c8",
-          "borderRadius": "8px",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "backgroundColor": "theme-secondary",
+          "color": "theme-canvas",
+          "borderColor": "theme-secondary",
+          "borderRadius": 4,
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontWeight": 400,
+          "fontStyle": "normal"
         },
         "text": {
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
@@ -384,26 +394,26 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "#fafaf9",
-          "borderColor": "#e5e3df",
-          "color": "#1a1a1a",
-          "borderRadius": "12px",
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(15, 15, 15, 0.20) 0px 24px 48px -8px"
         },
         "header": {
-          "color": "#1a1a1a",
+          "color": "theme-text",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
           "fontWeight": 600,
-          "borderColor": "#e5e3df"
+          "borderColor": "theme-border"
         },
         "content": {
-          "color": "#bbb8b1",
+          "color": "theme-muted",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         },
         "footer": {
-          "borderColor": "#e5e3df"
+          "borderColor": "theme-border"
         }
       }
     },
@@ -413,25 +423,28 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e3df",
-          "color": "#1a1a1a",
-          "borderRadius": "8px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#1a1a1a",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "color": "theme-text",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "0em"
         },
         "label": {
-          "color": "#bbb8b1",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#bbb8b1"
-        }
+        "helperText": {}
       }
     },
     "textarea": {
@@ -440,25 +453,28 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e3df",
-          "color": "#1a1a1a",
-          "borderRadius": "8px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#1a1a1a",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "color": "theme-text",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "0em"
         },
         "label": {
-          "color": "#bbb8b1",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#bbb8b1"
-        }
+        "helperText": {}
       }
     },
     "select": {
@@ -467,24 +483,29 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e3df",
-          "color": "#1a1a1a",
-          "borderRadius": "8px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#1a1a1a",
+          "color": "theme-text",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         },
         "label": {
-          "color": "#bbb8b1",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#bbb8b1"
+        "helperText": {},
+        "text": {
+          "letterSpacing": "0em",
+          "fontStyle": "normal"
         }
       }
     },
@@ -492,19 +513,26 @@
       "size": "md",
       "views": {
         "checkbox": {
-          "borderColor": "#e5e3df",
-          "backgroundColor": "#ffffff",
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas",
           "_checked": {
-            "backgroundColor": "#5645d4",
-            "borderColor": "#5645d4"
-          }
+            "backgroundColor": "theme-primary",
+            "borderColor": "theme-primary"
+          },
+          "borderRadius": 4
         },
         "label": {
-          "color": "#1a1a1a",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "infoText": {
-          "color": "#bbb8b1"
+          "color": "theme-muted"
+        },
+        "container": {
+          "borderRadius": 4
         }
       }
     },
@@ -512,18 +540,24 @@
       "size": "md",
       "views": {
         "radio": {
-          "borderColor": "#e5e3df",
-          "backgroundColor": "#ffffff"
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas"
         },
         "dot": {
-          "backgroundColor": "#5645d4"
+          "backgroundColor": "theme-primary"
         },
         "label": {
-          "color": "#1a1a1a",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "infoText": {
-          "color": "#bbb8b1"
+          "color": "theme-muted"
+        },
+        "container": {
+          "borderRadius": "50%"
         }
       }
     },
@@ -531,38 +565,44 @@
       "size": "sm",
       "views": {
         "slider": {
-          "backgroundColor": "#e5e3df"
+          "backgroundColor": "theme-border"
         },
         "circle": {
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "theme-canvas"
         },
         "label": {
-          "color": "#1a1a1a",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "container": {
+          "borderRadius": "9999px"
         }
       }
     },
     "slider": {
-      "backgroundColor": "#5645d4",
+      "backgroundColor": "theme-primary",
       "views": {
         "track": {
-          "backgroundColor": "#e5e3df"
+          "backgroundColor": "theme-border"
         },
         "progress": {
-          "backgroundColor": "#5645d4"
+          "backgroundColor": "theme-primary"
         },
         "filledTrack": {
-          "backgroundColor": "#5645d4"
+          "backgroundColor": "theme-primary"
         },
         "thumb": {
-          "borderColor": "#5645d4",
-          "backgroundColor": "#ffffff"
+          "borderColor": "theme-primary",
+          "backgroundColor": "theme-canvas"
         },
         "label": {
-          "color": "#1a1a1a"
+          "color": "theme-text"
         },
         "valueLabel": {
-          "color": "#bbb8b1"
+          "color": "theme-muted"
         }
       }
     },
@@ -570,14 +610,18 @@
       "variant": "underline",
       "views": {
         "headerTabs": {
-          "borderColor": "#e5e3df"
+          "borderColor": "theme-border"
         },
         "tab": {
-          "color": "#bbb8b1"
+          "color": "theme-muted",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "activeTab": {
-          "color": "#5645d4",
-          "borderColor": "#5645d4",
+          "color": "theme-primary",
+          "borderColor": "theme-primary",
           "style": {
             "backgroundColor": "transparent"
           }
@@ -586,66 +630,80 @@
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         },
         "activeText": {
-          "color": "#5645d4"
+          "color": "theme-primary"
         },
         "content": {
-          "color": "#1a1a1a"
+          "color": "theme-text"
+        },
+        "container": {
+          "borderRadius": "8px"
         }
       }
     },
     "accordion": {
       "views": {
         "container": {
-          "borderColor": "#e5e3df",
-          "backgroundColor": "#fafaf9",
-          "color": "#1a1a1a"
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-surface",
+          "color": "theme-text",
+          "borderRadius": "12px"
         },
         "trigger": {
-          "color": "#1a1a1a",
+          "color": "theme-text",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         },
         "content": {
-          "color": "#bbb8b1"
+          "color": "theme-muted"
         }
       }
     },
     "table": {
       "views": {
         "table": {
-          "backgroundColor": "#ffffff",
-          "color": "#1a1a1a",
-          "borderColor": "#e5e3df"
+          "backgroundColor": "theme-canvas",
+          "color": "theme-text",
+          "borderColor": "theme-border",
+          "borderRadius": 10
         },
         "thead": {
-          "backgroundColor": "#fafaf9",
-          "color": "#1a1a1a"
+          "backgroundColor": "theme-surface",
+          "color": "theme-text"
         },
         "th": {
-          "color": "#bbb8b1",
-          "borderColor": "#e5e3df",
-          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+          "color": "theme-muted",
+          "borderColor": "theme-border",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "tr": {
-          "borderColor": "#e5e3df"
+          "borderColor": "theme-border"
         },
         "td": {
-          "color": "#1a1a1a",
-          "borderColor": "#e5e3df"
+          "color": "theme-text",
+          "borderColor": "theme-border",
+          "letterSpacing": "0em",
+          "fontStyle": "normal"
         },
         "caption": {
-          "color": "#bbb8b1"
+          "color": "theme-muted",
+          "fontStyle": "italic",
+          "letterSpacing": "0em"
         }
       }
     },
     "avatar": {
       "views": {
         "container": {
-          "backgroundColor": "#fafaf9",
-          "borderColor": "#e5e3df",
-          "color": "#1a1a1a"
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": "50%"
         },
         "fallback": {
-          "color": "#1a1a1a",
+          "color": "theme-text",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         }
       }
@@ -653,61 +711,66 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "#fafaf9",
-          "borderColor": "#e5e3df",
-          "borderRadius": "8px"
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "borderRadius": 10
         },
         "title": {
-          "color": "#1a1a1a",
-          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
+          "color": "theme-text",
+          "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+          "fontWeight": 400,
+          "letterSpacing": "0em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "description": {
-          "color": "#bbb8b1",
+          "color": "theme-muted",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         },
         "icon": {
-          "color": "#5645d4"
+          "color": "theme-primary"
         }
       }
     },
     "status": {
       "views": {
         "indicator": {
-          "backgroundColor": "#1aae39"
+          "backgroundColor": "theme-success"
         },
         "label": {
-          "color": "#1a1a1a",
+          "color": "theme-text",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         }
       }
     },
     "progress": {
-      "color": "#5645d4",
-      "backgroundColor": "#e5e3df",
+      "color": "theme-primary",
+      "backgroundColor": "theme-border",
       "radius": "8px",
       "views": {
         "container": {
-          "backgroundColor": "#e5e3df"
+          "backgroundColor": "theme-border",
+          "borderRadius": "9999px"
         },
         "bar": {
-          "backgroundColor": "#5645d4"
+          "backgroundColor": "theme-primary"
         },
         "text": {
-          "color": "#1a1a1a"
+          "color": "theme-text"
         }
       }
     },
     "loader": {
-      "color": "#5645d4"
+      "color": "theme-primary"
     },
     "separator": {
-      "color": "#e5e3df",
+      "color": "theme-border",
       "views": {
         "container": {
-          "borderColor": "#e5e3df"
+          "borderColor": "theme-border"
         },
         "label": {
-          "color": "#bbb8b1",
+          "color": "theme-muted",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         }
       }
@@ -715,55 +778,71 @@
     "navigation": {
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e3df",
-          "color": "#1a1a1a"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": "12px"
         },
         "item": {
-          "color": "#bbb8b1"
+          "color": "theme-muted"
         },
         "activeItem": {
-          "color": "#5645d4",
-          "borderColor": "#5645d4"
+          "color": "theme-primary",
+          "borderColor": "theme-primary"
         }
       }
     },
     "hero": {
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "color": "#1a1a1a",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-text",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         },
         "eyebrow": {
-          "color": "#bbb8b1"
+          "color": "theme-muted"
         },
         "title": {
-          "color": "#1a1a1a",
+          "color": "theme-text",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         },
         "description": {
-          "color": "#bbb8b1"
+          "color": "theme-muted"
         }
       }
     },
     "page": {
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "color": "#1a1a1a",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-text",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
         },
         "section": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e3df"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border"
         },
         "surface": {
-          "backgroundColor": "#fafaf9",
-          "borderColor": "#e5e3df",
-          "color": "#1a1a1a"
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-text"
         }
       }
     }
+  },
+  "personality": {
+    "cornerStyle": "soft",
+    "typeWeight": "regular",
+    "typeCase": "normal",
+    "typeStyle": "normal",
+    "letterSpacing": "0em",
+    "accentTreatment": "flat",
+    "signatureMotif": "\u25c7",
+    "density": "comfortable",
+    "surfaceTone": "paper",
+    "cardRadius": 10,
+    "pillRadius": 9999,
+    "badgeRadius": 4,
+    "voice": "thoughtful-quiet"
   }
 }

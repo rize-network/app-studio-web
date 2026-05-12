@@ -11,15 +11,15 @@
   },
   "theme": {
     "primary": "#f0f0fa",
-    "secondary": "rgba(240,240,250,0.1)",
-    "success": "#f0f0fa",
-    "warning": "rgba(240,240,250,0.35)",
-    "error": "#f0f0fa",
+    "secondary": "#a3a3a3",
+    "success": "#4ade80",
+    "warning": "#fbbf24",
+    "error": "#ef4444",
     "canvas": "#000000",
-    "surface": "rgba(240,240,250,0.1)",
+    "surface": "#0c0c12",
     "text": "#f0f0fa",
-    "muted": "rgba(240,240,250,0.35)",
-    "border": "rgba(240,240,250,0.35)",
+    "muted": "#7a7a8a",
+    "border": "#2a2a32",
     "onPrimary": "#000000"
   },
   "tokens": {
@@ -116,22 +116,26 @@
     "button": {
       "variant": "ghost",
       "size": "md",
-      "shape": "pill",
-      "color": "#f0f0fa",
-      "textColor": "#f0f0fa",
+      "shape": "square",
+      "color": "theme-primary",
+      "textColor": "theme-primary",
       "views": {
         "container": {
-          "borderRadius": "32px",
+          "borderRadius": 0,
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
-          "fontWeight": 700,
-          "borderColor": "rgba(240,240,250,0.35)",
-          "backgroundColor": "rgba(240,240,250,0.1)",
-          "letterSpacing": "1.17px",
-          "textTransform": "uppercase"
+          "fontWeight": 800,
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-surface",
+          "letterSpacing": "0.08em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
-          "fontWeight": 700
+          "fontWeight": 800,
+          "letterSpacing": "0.08em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         }
       }
     },
@@ -141,11 +145,15 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "rgba(240,240,250,0.1)",
-          "color": "#000000",
-          "borderColor": "rgba(240,240,250,0.1)",
+          "backgroundColor": "theme-surface",
+          "color": "theme-canvas",
+          "borderColor": "theme-surface",
           "borderRadius": 0,
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "letterSpacing": "0.08em",
+          "textTransform": "uppercase",
+          "fontWeight": 800,
+          "fontStyle": "normal"
         },
         "text": {
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
@@ -159,26 +167,26 @@
       "shape": "square",
       "views": {
         "container": {
-          "backgroundColor": "rgba(240,240,250,0.1)",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "color": "#f0f0fa",
-          "borderRadius": 0,
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-primary",
+          "borderRadius": 2,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "0 1px 3px rgba(0, 0, 0, 0.08)"
         },
         "header": {
-          "color": "#f0f0fa",
+          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
           "fontWeight": 600,
-          "borderColor": "rgba(240,240,250,0.35)"
+          "borderColor": "theme-border"
         },
         "content": {
-          "color": "rgba(240,240,250,0.35)",
+          "color": "theme-border",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         },
         "footer": {
-          "borderColor": "rgba(240,240,250,0.35)"
+          "borderColor": "theme-border"
         }
       }
     },
@@ -188,25 +196,28 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "color": "#f0f0fa",
-          "borderRadius": 0,
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-primary",
+          "borderRadius": 2,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#f0f0fa",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "color": "theme-primary",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "0.06em"
         },
         "label": {
-          "color": "rgba(240,240,250,0.35)",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "rgba(240,240,250,0.35)"
-        }
+        "helperText": {}
       }
     },
     "textarea": {
@@ -215,25 +226,28 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "color": "#f0f0fa",
-          "borderRadius": 0,
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-primary",
+          "borderRadius": 2,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#f0f0fa",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "color": "theme-primary",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "0.06em"
         },
         "label": {
-          "color": "rgba(240,240,250,0.35)",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "rgba(240,240,250,0.35)"
-        }
+        "helperText": {}
       }
     },
     "select": {
@@ -242,24 +256,29 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "color": "#f0f0fa",
-          "borderRadius": 0,
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-primary",
+          "borderRadius": 2,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#f0f0fa",
+          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         },
         "label": {
-          "color": "rgba(240,240,250,0.35)",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "rgba(240,240,250,0.35)"
+        "helperText": {},
+        "text": {
+          "letterSpacing": "0.06em",
+          "fontStyle": "normal"
         }
       }
     },
@@ -267,19 +286,26 @@
       "size": "md",
       "views": {
         "checkbox": {
-          "borderColor": "rgba(240,240,250,0.35)",
-          "backgroundColor": "#000000",
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas",
           "_checked": {
-            "backgroundColor": "#f0f0fa",
-            "borderColor": "#f0f0fa"
-          }
+            "backgroundColor": "theme-primary",
+            "borderColor": "theme-primary"
+          },
+          "borderRadius": 0
         },
         "label": {
-          "color": "#f0f0fa",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
         "infoText": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border"
+        },
+        "container": {
+          "borderRadius": 0
         }
       }
     },
@@ -287,18 +313,24 @@
       "size": "md",
       "views": {
         "radio": {
-          "borderColor": "rgba(240,240,250,0.35)",
-          "backgroundColor": "#000000"
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas"
         },
         "dot": {
-          "backgroundColor": "#f0f0fa"
+          "backgroundColor": "theme-primary"
         },
         "label": {
-          "color": "#f0f0fa",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
         "infoText": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border"
+        },
+        "container": {
+          "borderRadius": "50%"
         }
       }
     },
@@ -306,38 +338,44 @@
       "size": "sm",
       "views": {
         "slider": {
-          "backgroundColor": "rgba(240,240,250,0.35)"
+          "backgroundColor": "theme-border"
         },
         "circle": {
-          "backgroundColor": "#000000"
+          "backgroundColor": "theme-canvas"
         },
         "label": {
-          "color": "#f0f0fa",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
+        },
+        "container": {
+          "borderRadius": "9999px"
         }
       }
     },
     "slider": {
-      "backgroundColor": "#f0f0fa",
+      "backgroundColor": "theme-primary",
       "views": {
         "track": {
-          "backgroundColor": "rgba(240,240,250,0.35)"
+          "backgroundColor": "theme-border"
         },
         "progress": {
-          "backgroundColor": "#f0f0fa"
+          "backgroundColor": "theme-primary"
         },
         "filledTrack": {
-          "backgroundColor": "#f0f0fa"
+          "backgroundColor": "theme-primary"
         },
         "thumb": {
-          "borderColor": "#f0f0fa",
-          "backgroundColor": "#000000"
+          "borderColor": "theme-primary",
+          "backgroundColor": "theme-canvas"
         },
         "label": {
-          "color": "#f0f0fa"
+          "color": "theme-primary"
         },
         "valueLabel": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border"
         }
       }
     },
@@ -345,14 +383,18 @@
       "variant": "underline",
       "views": {
         "headerTabs": {
-          "borderColor": "rgba(240,240,250,0.35)"
+          "borderColor": "theme-border"
         },
         "tab": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
         "activeTab": {
-          "color": "#f0f0fa",
-          "borderColor": "#f0f0fa",
+          "color": "theme-primary",
+          "borderColor": "theme-primary",
           "style": {
             "backgroundColor": "transparent"
           }
@@ -361,66 +403,80 @@
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         },
         "activeText": {
-          "color": "#f0f0fa"
+          "color": "theme-primary"
         },
         "content": {
-          "color": "#f0f0fa"
+          "color": "theme-primary"
+        },
+        "container": {
+          "borderRadius": "32px"
         }
       }
     },
     "accordion": {
       "views": {
         "container": {
-          "borderColor": "rgba(240,240,250,0.35)",
-          "backgroundColor": "rgba(240,240,250,0.1)",
-          "color": "#f0f0fa"
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-surface",
+          "color": "theme-primary",
+          "borderRadius": 0
         },
         "trigger": {
-          "color": "#f0f0fa",
+          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         },
         "content": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border"
         }
       }
     },
     "table": {
       "views": {
         "table": {
-          "backgroundColor": "#000000",
-          "color": "#f0f0fa",
-          "borderColor": "rgba(240,240,250,0.35)"
+          "backgroundColor": "theme-canvas",
+          "color": "theme-primary",
+          "borderColor": "theme-border",
+          "borderRadius": 2
         },
         "thead": {
-          "backgroundColor": "rgba(240,240,250,0.1)",
-          "color": "#f0f0fa"
+          "backgroundColor": "theme-surface",
+          "color": "theme-primary"
         },
         "th": {
-          "color": "rgba(240,240,250,0.35)",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+          "color": "theme-border",
+          "borderColor": "theme-border",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
         "tr": {
-          "borderColor": "rgba(240,240,250,0.35)"
+          "borderColor": "theme-border"
         },
         "td": {
-          "color": "#f0f0fa",
-          "borderColor": "rgba(240,240,250,0.35)"
+          "color": "theme-primary",
+          "borderColor": "theme-border",
+          "letterSpacing": "0.06em",
+          "fontStyle": "normal"
         },
         "caption": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border",
+          "fontStyle": "italic",
+          "letterSpacing": "0.06em"
         }
       }
     },
     "avatar": {
       "views": {
         "container": {
-          "backgroundColor": "rgba(240,240,250,0.1)",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "color": "#f0f0fa"
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-primary",
+          "borderRadius": "50%"
         },
         "fallback": {
-          "color": "#f0f0fa",
+          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         }
       }
@@ -428,61 +484,66 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "rgba(240,240,250,0.1)",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "borderRadius": 0
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "borderRadius": 2
         },
         "title": {
-          "color": "#f0f0fa",
-          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
+          "color": "theme-primary",
+          "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase",
+          "fontStyle": "normal"
         },
         "description": {
-          "color": "rgba(240,240,250,0.35)",
+          "color": "theme-border",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         },
         "icon": {
-          "color": "#f0f0fa"
+          "color": "theme-primary"
         }
       }
     },
     "status": {
       "views": {
         "indicator": {
-          "backgroundColor": "#f0f0fa"
+          "backgroundColor": "theme-primary"
         },
         "label": {
-          "color": "#f0f0fa",
+          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         }
       }
     },
     "progress": {
-      "color": "#f0f0fa",
-      "backgroundColor": "rgba(240,240,250,0.35)",
+      "color": "theme-primary",
+      "backgroundColor": "theme-border",
       "radius": 0,
       "views": {
         "container": {
-          "backgroundColor": "rgba(240,240,250,0.35)"
+          "backgroundColor": "theme-border",
+          "borderRadius": "9999px"
         },
         "bar": {
-          "backgroundColor": "#f0f0fa"
+          "backgroundColor": "theme-primary"
         },
         "text": {
-          "color": "#f0f0fa"
+          "color": "theme-primary"
         }
       }
     },
     "loader": {
-      "color": "#f0f0fa"
+      "color": "theme-primary"
     },
     "separator": {
-      "color": "rgba(240,240,250,0.35)",
+      "color": "theme-border",
       "views": {
         "container": {
-          "borderColor": "rgba(240,240,250,0.35)"
+          "borderColor": "theme-border"
         },
         "label": {
-          "color": "rgba(240,240,250,0.35)",
+          "color": "theme-border",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         }
       }
@@ -490,55 +551,71 @@
     "navigation": {
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "color": "#f0f0fa"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-primary",
+          "borderRadius": 0
         },
         "item": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border"
         },
         "activeItem": {
-          "color": "#f0f0fa",
-          "borderColor": "#f0f0fa"
+          "color": "theme-primary",
+          "borderColor": "theme-primary"
         }
       }
     },
     "hero": {
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "color": "#f0f0fa",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         },
         "eyebrow": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border"
         },
         "title": {
-          "color": "#f0f0fa",
+          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         },
         "description": {
-          "color": "rgba(240,240,250,0.35)"
+          "color": "theme-border"
         }
       }
     },
     "page": {
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "color": "#f0f0fa",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
         },
         "section": {
-          "backgroundColor": "#000000",
-          "borderColor": "rgba(240,240,250,0.35)"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border"
         },
         "surface": {
-          "backgroundColor": "rgba(240,240,250,0.1)",
-          "borderColor": "rgba(240,240,250,0.35)",
-          "color": "#f0f0fa"
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-primary"
         }
       }
     }
+  },
+  "personality": {
+    "cornerStyle": "sharp",
+    "typeWeight": "black",
+    "typeCase": "uppercase",
+    "typeStyle": "normal",
+    "letterSpacing": "0.06em",
+    "accentTreatment": "glow",
+    "signatureMotif": "\u26a1",
+    "density": "tight",
+    "surfaceTone": "mono",
+    "cardRadius": 2,
+    "pillRadius": 0,
+    "badgeRadius": 0,
+    "voice": "technical-mission"
   }
 }

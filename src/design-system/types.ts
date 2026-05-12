@@ -77,6 +77,35 @@ export interface DesignSystemComponentConfig extends Record<string, any> {
   config?: Record<string, any>;
 }
 
+export type BrandCornerStyle = 'sharp' | 'soft' | 'pill';
+export type BrandTypeWeight = 'light' | 'regular' | 'bold' | 'black';
+export type BrandTypeCase = 'normal' | 'uppercase';
+export type BrandTypeStyle = 'normal' | 'italic';
+export type BrandAccentTreatment =
+  | 'flat'
+  | 'gradient'
+  | 'stripe'
+  | 'glow'
+  | 'halftone';
+export type BrandDensity = 'tight' | 'comfortable' | 'spacious';
+export type BrandSurfaceTone = 'paper' | 'glass' | 'matte' | 'mono';
+
+export interface BrandPersonality {
+  cornerStyle: BrandCornerStyle;
+  typeWeight: BrandTypeWeight;
+  typeCase: BrandTypeCase;
+  typeStyle: BrandTypeStyle;
+  letterSpacing: string;
+  accentTreatment: BrandAccentTreatment;
+  signatureMotif: string;
+  density: BrandDensity;
+  surfaceTone: BrandSurfaceTone;
+  cardRadius: number;
+  pillRadius: number;
+  badgeRadius: number;
+  voice: string;
+}
+
 export interface DesignSystemConfig {
   metadata: DesignSystemMetadata;
   theme: DesignSystemTheme;
@@ -84,6 +113,7 @@ export interface DesignSystemConfig {
   components: Partial<
     Record<DesignSystemComponentName, DesignSystemComponentConfig>
   >;
+  personality?: BrandPersonality;
 }
 
 export interface DesignSystemContextValue {

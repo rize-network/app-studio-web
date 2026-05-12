@@ -3,68 +3,60 @@
   "content": {
     "type": "string | number",
     "typeValues": null,
-    "description": "Not explicitly described in the provided files.",
+    "description": "Text or numeric content displayed in the main badge label.",
     "defaultValue": null
   },
   "children": {
     "type": "React.ReactNode",
     "typeValues": null,
-    "description": "Not explicitly described in the provided files.",
+    "description": "Custom React content displayed in the main badge label. When provided, children take precedence over content.",
     "defaultValue": null
   },
   "icon": {
     "type": "React.ReactNode",
     "typeValues": null,
-    "description": "Not explicitly described in the provided files.",
+    "description": "Optional leading icon rendered before the badge content.",
     "defaultValue": null
   },
   "pastil": {
     "type": "boolean | string",
     "typeValues": null,
-    "description": "Not explicitly described in the provided files.",
+    "description": "Adds a small status dot before the badge content. Pass true for the default dot color, a status key such as success, warning, or error, or any custom color value.",
+    "defaultValue": null
+  },
+  "pastilContent": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Adds a text pastil inside the badge, creating an announcement-style pill when combined with content and optional action.",
+    "defaultValue": null
+  },
+  "action": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Optional trailing action text for announcement-style badges.",
     "defaultValue": null
   },
   "variant": {
     "type": "Variant",
-    "typeValues": [
-      "filled",
-      "outline",
-      "link",
-      "ghost"
-    ],
+    "typeValues": ["filled", "outline", "link", "ghost"],
     "description": "Determines the styling variants a UI component can have, which could include filled, outlined, or ghost styles among others.",
     "defaultValue": "filled"
   },
   "position": {
     "type": "Position",
-    "typeValues": [
-      "top-right",
-      "top-left",
-      "bottom-right",
-      "bottom-left"
-    ],
+    "typeValues": ["top-right", "top-left", "bottom-right", "bottom-left"],
     "description": "Lists possible positions for UI elements that can be placed in one of the corners of a container, like notification badges.",
     "defaultValue": null
   },
   "size": {
     "type": "Size",
-    "typeValues": [
-      "xs",
-      "sm",
-      "md",
-      "lg",
-      "xl"
-    ],
+    "typeValues": ["xs", "sm", "md", "lg", "xl"],
     "description": "Specifies available sizes for UI elements, catering to a range of scalability from extra small to extra large.",
     "defaultValue": "md"
   },
   "shape": {
     "type": "Shape",
-    "typeValues": [
-      "square",
-      "rounded",
-      "pill"
-    ],
+    "typeValues": ["square", "rounded", "pill"],
     "description": "Defines possible values for the shape of a UI component such as buttons or badges.",
     "defaultValue": "pill"
   },

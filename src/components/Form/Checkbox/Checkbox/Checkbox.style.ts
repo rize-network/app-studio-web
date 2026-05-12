@@ -50,11 +50,11 @@ export const VariantStyles: Record<Variant, ViewProps> = {
       'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   },
   unselected: {
-    backgroundColor: 'color-white',
+    backgroundColor: 'transparent',
     borderWidth: '2px',
     borderStyle: 'solid',
     borderColor: 'color-gray-300',
-    color: 'color-black',
+    color: 'inherit',
     transition: 'all 0.2s ease-in-out',
   },
   indeterminate: {

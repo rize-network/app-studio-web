@@ -4,23 +4,23 @@
     "label": "Shopify",
     "sourcePath": "design.md/html/shopify.html",
     "sourceTitle": "Design System Inspired by Shopify",
-    "defaultAppearance": "dark",
+    "defaultAppearance": "light",
     "googleFontLinks": [
       "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
     ]
   },
   "theme": {
-    "primary": "#36F4A4",
-    "secondary": "#C1FBD4",
-    "success": "#36F4A4",
-    "warning": "#D4F9E0",
-    "error": "#D4D4D8",
-    "canvas": "#000000",
-    "surface": "#061A1C",
-    "text": "#FFFFFF",
-    "muted": "#A1A1AA",
-    "border": "#1E2C31",
-    "onPrimary": "#000000"
+    "primary": "#008060",
+    "secondary": "#202223",
+    "success": "#008060",
+    "warning": "#FFC453",
+    "error": "#D72C0D",
+    "canvas": "#FFFFFF",
+    "surface": "#F6F6F7",
+    "text": "#202223",
+    "muted": "#6D7175",
+    "border": "#E1E3E5",
+    "onPrimary": "#FFFFFF"
   },
   "tokens": {
     "rawCssVars": {
@@ -207,19 +207,25 @@
     "button": {
       "variant": "filled",
       "size": "md",
-      "shape": "pill",
-      "color": "#36F4A4",
-      "textColor": "#000000",
+      "shape": "rounded",
+      "color": "theme-primary",
+      "textColor": "theme-canvas",
       "views": {
         "container": {
-          "borderRadius": "9999px",
+          "borderRadius": 9999,
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
-          "fontWeight": 500,
-          "borderColor": "#36F4A4"
+          "fontWeight": 700,
+          "borderColor": "theme-primary",
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
-          "fontWeight": 500
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         }
       }
     },
@@ -229,11 +235,15 @@
       "shape": "pill",
       "views": {
         "container": {
-          "backgroundColor": "#C1FBD4",
-          "color": "#000000",
-          "borderColor": "#C1FBD4",
-          "borderRadius": "9999px",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "backgroundColor": "color-aloe",
+          "color": "theme-canvas",
+          "borderColor": "color-aloe",
+          "borderRadius": 6,
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontWeight": 700,
+          "fontStyle": "normal"
         },
         "text": {
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
@@ -247,107 +257,118 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "#061A1C",
-          "borderColor": "#1E2C31",
-          "color": "#FFFFFF",
-          "borderRadius": "24px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-secondary",
+          "borderRadius": 12,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(0,0,0,0.1) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 2px 2px 0px, rgba(0,0,0,0.1) 0px 4px 4px 0px, rgba(0,0,0,0.1) 0px 8px 8px 0px, rgba(255,255,255,0.03) 0px 1px 0px 0px inset"
         },
         "header": {
-          "color": "#FFFFFF",
+          "color": "theme-secondary",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 600,
-          "borderColor": "#1E2C31"
+          "borderColor": "theme-border"
         },
         "content": {
-          "color": "#A1A1AA",
+          "color": "color-muted",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "footer": {
-          "borderColor": "#1E2C31"
+          "borderColor": "theme-border"
         }
       }
     },
     "input": {
       "size": "md",
-      "shape": "pill",
+      "shape": "default",
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "borderColor": "#1E2C31",
-          "color": "#FFFFFF",
-          "borderRadius": "9999px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-secondary",
+          "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(0,0,0,0.1) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 2px 2px 0px, rgba(0,0,0,0.1) 0px 4px 4px 0px, rgba(0,0,0,0.1) 0px 8px 8px 0px, rgba(255,255,255,0.03) 0px 1px 0px 0px inset"
         },
         "field": {
-          "color": "#FFFFFF",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "color": "theme-secondary",
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "-0.01em"
         },
         "label": {
-          "color": "#A1A1AA",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#A1A1AA"
-        }
+        "helperText": {}
       }
     },
     "textarea": {
       "size": "md",
-      "shape": "pill",
+      "shape": "default",
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "borderColor": "#1E2C31",
-          "color": "#FFFFFF",
-          "borderRadius": "9999px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-secondary",
+          "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(0,0,0,0.1) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 2px 2px 0px, rgba(0,0,0,0.1) 0px 4px 4px 0px, rgba(0,0,0,0.1) 0px 8px 8px 0px, rgba(255,255,255,0.03) 0px 1px 0px 0px inset"
         },
         "field": {
-          "color": "#FFFFFF",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "color": "theme-secondary",
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "-0.01em"
         },
         "label": {
-          "color": "#A1A1AA",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#A1A1AA"
-        }
+        "helperText": {}
       }
     },
     "select": {
       "size": "md",
-      "shape": "pill",
+      "shape": "default",
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "borderColor": "#1E2C31",
-          "color": "#FFFFFF",
-          "borderRadius": "9999px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-secondary",
+          "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(0,0,0,0.1) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 2px 2px 0px, rgba(0,0,0,0.1) 0px 4px 4px 0px, rgba(0,0,0,0.1) 0px 8px 8px 0px, rgba(255,255,255,0.03) 0px 1px 0px 0px inset"
         },
         "field": {
-          "color": "#FFFFFF",
+          "color": "theme-secondary",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "label": {
-          "color": "#A1A1AA",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#A1A1AA"
+        "helperText": {},
+        "text": {
+          "letterSpacing": "-0.01em",
+          "fontStyle": "normal"
         }
       }
     },
@@ -355,19 +376,26 @@
       "size": "md",
       "views": {
         "checkbox": {
-          "borderColor": "#1E2C31",
-          "backgroundColor": "#000000",
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas",
           "_checked": {
-            "backgroundColor": "#36F4A4",
-            "borderColor": "#36F4A4"
-          }
+            "backgroundColor": "theme-primary",
+            "borderColor": "theme-primary"
+          },
+          "borderRadius": 4
         },
         "label": {
-          "color": "#FFFFFF",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "infoText": {
-          "color": "#A1A1AA"
+          "color": "color-muted"
+        },
+        "container": {
+          "borderRadius": 4
         }
       }
     },
@@ -375,18 +403,24 @@
       "size": "md",
       "views": {
         "radio": {
-          "borderColor": "#1E2C31",
-          "backgroundColor": "#000000"
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas"
         },
         "dot": {
-          "backgroundColor": "#36F4A4"
+          "backgroundColor": "theme-primary"
         },
         "label": {
-          "color": "#FFFFFF",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "infoText": {
-          "color": "#A1A1AA"
+          "color": "color-muted"
+        },
+        "container": {
+          "borderRadius": "50%"
         }
       }
     },
@@ -394,38 +428,44 @@
       "size": "sm",
       "views": {
         "slider": {
-          "backgroundColor": "#1E2C31"
+          "backgroundColor": "theme-border"
         },
         "circle": {
-          "backgroundColor": "#000000"
+          "backgroundColor": "theme-canvas"
         },
         "label": {
-          "color": "#FFFFFF",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "container": {
+          "borderRadius": "9999px"
         }
       }
     },
     "slider": {
-      "backgroundColor": "#36F4A4",
+      "backgroundColor": "theme-primary",
       "views": {
         "track": {
-          "backgroundColor": "#1E2C31"
+          "backgroundColor": "theme-border"
         },
         "progress": {
-          "backgroundColor": "#36F4A4"
+          "backgroundColor": "theme-primary"
         },
         "filledTrack": {
-          "backgroundColor": "#36F4A4"
+          "backgroundColor": "theme-primary"
         },
         "thumb": {
-          "borderColor": "#36F4A4",
-          "backgroundColor": "#000000"
+          "borderColor": "theme-primary",
+          "backgroundColor": "theme-canvas"
         },
         "label": {
-          "color": "#FFFFFF"
+          "color": "theme-secondary"
         },
         "valueLabel": {
-          "color": "#A1A1AA"
+          "color": "color-muted"
         }
       }
     },
@@ -433,80 +473,98 @@
       "variant": "pill",
       "views": {
         "headerTabs": {
-          "borderColor": "#1E2C31"
+          "borderColor": "theme-border"
         },
         "tab": {
-          "color": "#A1A1AA"
+          "color": "color-muted",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "activeTab": {
-          "color": "#36F4A4",
-          "borderColor": "#36F4A4",
-          "backgroundColor": "#36F4A4"
+          "color": "theme-primary",
+          "borderColor": "theme-primary",
+          "backgroundColor": "theme-primary"
         },
         "title": {
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "activeText": {
-          "color": "#000000"
+          "color": "theme-canvas"
         },
         "content": {
-          "color": "#FFFFFF"
+          "color": "theme-secondary"
+        },
+        "container": {
+          "borderRadius": "9999px"
         }
       }
     },
     "accordion": {
       "views": {
         "container": {
-          "borderColor": "#1E2C31",
-          "backgroundColor": "#061A1C",
-          "color": "#FFFFFF"
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-secondary",
+          "borderRadius": "24px"
         },
         "trigger": {
-          "color": "#FFFFFF",
+          "color": "theme-secondary",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "content": {
-          "color": "#A1A1AA"
+          "color": "color-muted"
         }
       }
     },
     "table": {
       "views": {
         "table": {
-          "backgroundColor": "#000000",
-          "color": "#FFFFFF",
-          "borderColor": "#1E2C31"
+          "backgroundColor": "theme-canvas",
+          "color": "theme-secondary",
+          "borderColor": "theme-border",
+          "borderRadius": 12
         },
         "thead": {
-          "backgroundColor": "#061A1C",
-          "color": "#FFFFFF"
+          "backgroundColor": "theme-canvas",
+          "color": "theme-secondary"
         },
         "th": {
-          "color": "#A1A1AA",
-          "borderColor": "#1E2C31",
-          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+          "color": "color-muted",
+          "borderColor": "theme-border",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "tr": {
-          "borderColor": "#1E2C31"
+          "borderColor": "theme-border"
         },
         "td": {
-          "color": "#FFFFFF",
-          "borderColor": "#1E2C31"
+          "color": "theme-secondary",
+          "borderColor": "theme-border",
+          "letterSpacing": "-0.01em",
+          "fontStyle": "normal"
         },
         "caption": {
-          "color": "#A1A1AA"
+          "color": "color-muted",
+          "fontStyle": "italic",
+          "letterSpacing": "-0.01em"
         }
       }
     },
     "avatar": {
       "views": {
         "container": {
-          "backgroundColor": "#061A1C",
-          "borderColor": "#1E2C31",
-          "color": "#FFFFFF"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-secondary",
+          "borderRadius": "50%"
         },
         "fallback": {
-          "color": "#FFFFFF",
+          "color": "theme-secondary",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         }
       }
@@ -514,61 +572,66 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "#061A1C",
-          "borderColor": "#1E2C31",
-          "borderRadius": "16px"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "borderRadius": 12
         },
         "title": {
-          "color": "#FFFFFF",
-          "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
+          "color": "theme-secondary",
+          "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "description": {
-          "color": "#A1A1AA",
+          "color": "color-muted",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "icon": {
-          "color": "#36F4A4"
+          "color": "theme-primary"
         }
       }
     },
     "status": {
       "views": {
         "indicator": {
-          "backgroundColor": "#36F4A4"
+          "backgroundColor": "theme-primary"
         },
         "label": {
-          "color": "#FFFFFF",
+          "color": "theme-secondary",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         }
       }
     },
     "progress": {
-      "color": "#36F4A4",
-      "backgroundColor": "#1E2C31",
+      "color": "theme-primary",
+      "backgroundColor": "theme-border",
       "radius": "16px",
       "views": {
         "container": {
-          "backgroundColor": "#1E2C31"
+          "backgroundColor": "theme-border",
+          "borderRadius": "9999px"
         },
         "bar": {
-          "backgroundColor": "#36F4A4"
+          "backgroundColor": "theme-primary"
         },
         "text": {
-          "color": "#FFFFFF"
+          "color": "theme-secondary"
         }
       }
     },
     "loader": {
-      "color": "#36F4A4"
+      "color": "theme-primary"
     },
     "separator": {
-      "color": "#1E2C31",
+      "color": "theme-border",
       "views": {
         "container": {
-          "borderColor": "#1E2C31"
+          "borderColor": "theme-border"
         },
         "label": {
-          "color": "#A1A1AA",
+          "color": "color-muted",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         }
       }
@@ -576,55 +639,71 @@
     "navigation": {
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "borderColor": "#1E2C31",
-          "color": "#FFFFFF"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-secondary",
+          "borderRadius": "24px"
         },
         "item": {
-          "color": "#A1A1AA"
+          "color": "color-muted"
         },
         "activeItem": {
-          "color": "#36F4A4",
-          "borderColor": "#36F4A4"
+          "color": "theme-primary",
+          "borderColor": "theme-primary"
         }
       }
     },
     "hero": {
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "color": "#FFFFFF",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-secondary",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "eyebrow": {
-          "color": "#A1A1AA"
+          "color": "color-muted"
         },
         "title": {
-          "color": "#FFFFFF",
+          "color": "theme-secondary",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "description": {
-          "color": "#A1A1AA"
+          "color": "color-muted"
         }
       }
     },
     "page": {
       "views": {
         "container": {
-          "backgroundColor": "#000000",
-          "color": "#FFFFFF",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-secondary",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "section": {
-          "backgroundColor": "#000000",
-          "borderColor": "#1E2C31"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border"
         },
         "surface": {
-          "backgroundColor": "#061A1C",
-          "borderColor": "#1E2C31",
-          "color": "#FFFFFF"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-secondary"
         }
       }
     }
+  },
+  "personality": {
+    "cornerStyle": "soft",
+    "typeWeight": "bold",
+    "typeCase": "normal",
+    "typeStyle": "normal",
+    "letterSpacing": "-0.01em",
+    "accentTreatment": "flat",
+    "signatureMotif": "\u25cf",
+    "density": "comfortable",
+    "surfaceTone": "paper",
+    "cardRadius": 12,
+    "pillRadius": 9999,
+    "badgeRadius": 6,
+    "voice": "commerce-friendly"
   }
 }

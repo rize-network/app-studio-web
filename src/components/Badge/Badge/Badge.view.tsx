@@ -63,38 +63,53 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
     const hasContent = contentNode !== undefined && contentNode !== null;
 
     // Combine styles for the badge (memoized to avoid recreation on every render)
-    const combinedStyles: Record<string, any> = useMemo(
-      () => ({
-        // Base styles
+    // For non-filled variants (outline/ghost/link), reapply the variant's color
+    // and background AFTER the brand container styles so the variant wins —
+    // otherwise a brand container.color set for filled badges (e.g. white)
+    // would also paint outline badge text white on a white surface.
+    const combinedStyles: Record<string, any> = useMemo(() => {
+      const base = {
         width: 'fit-content',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         gap: '6px',
-
-        // Apply shape, size, and variant styles
         borderRadius: BadgeShapes[shape],
         ...BadgeSizes[size],
         ...variantStyles,
         ...(hasAnnouncementLayout ? BadgeAnnouncementSizes[size] : {}),
         ...(hasAnnouncementLayout ? announcementVariantStyles : {}),
-
-        // Apply position styles if provided
         ...(position ? PositionStyles[position] : {}),
-
-        // Apply custom container styles
         ...views?.container,
-      }),
-      [
-        shape,
-        size,
-        variantStyles,
-        hasAnnouncementLayout,
-        announcementVariantStyles,
-        position,
-        views?.container,
-      ]
-    );
+      };
+      if (variant !== 'filled' && !hasAnnouncementLayout) {
+        if ((variantStyles as any).color !== undefined) {
+          (base as any).color = (variantStyles as any).color;
+        }
+        if ((variantStyles as any).borderColor !== undefined) {
+          (base as any).borderColor = (variantStyles as any).borderColor;
+        }
+        if ((variantStyles as any).backgroundColor !== undefined) {
+          (base as any).backgroundColor = (variantStyles as any).backgroundColor;
+        }
+        if (variantStyles && (variantStyles as any).style) {
+          (base as any).style = {
+            ...((base as any).style || {}),
+            ...(variantStyles as any).style,
+          };
+        }
+      }
+      return base;
+    }, [
+      shape,
+      size,
+      variant,
+      variantStyles,
+      hasAnnouncementLayout,
+      announcementVariantStyles,
+      position,
+      views?.container,
+    ]);
 
     // Determine pastil color
     let pastilColor = 'currentColor';

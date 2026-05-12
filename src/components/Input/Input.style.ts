@@ -53,7 +53,8 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderWidth: '1px',
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
-    backgroundColor: 'color-white',
+    backgroundColor: 'transparent',
+    color: 'inherit',
     transition:
       'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
@@ -61,15 +62,13 @@ export const InputVariants: Record<Variant, ViewProps> = {
     },
     _focus: {
       borderColor: 'theme-primary',
-      backgroundColor: 'color-white',
       outline: 'none',
-      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
+      boxShadow: '0 0 0 3px theme-primary',
     },
     _focusVisible: {
       borderColor: 'theme-primary',
-      backgroundColor: 'color-white',
       outline: 'none',
-      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
+      boxShadow: '0 0 0 3px theme-primary',
     },
   },
   default: {
@@ -77,7 +76,8 @@ export const InputVariants: Record<Variant, ViewProps> = {
     borderStyle: 'solid',
     borderColor: 'color-gray-200',
     borderRadius: '8px',
-    backgroundColor: 'color-white',
+    backgroundColor: 'transparent',
+    color: 'inherit',
     transition:
       'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
@@ -85,20 +85,19 @@ export const InputVariants: Record<Variant, ViewProps> = {
     },
     _focus: {
       borderColor: 'theme-primary',
-      backgroundColor: 'color-white',
       outline: 'none',
-      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
+      boxShadow: '0 0 0 3px theme-primary',
     },
     _focusVisible: {
       borderColor: 'theme-primary',
-      backgroundColor: 'color-white',
       outline: 'none',
-      boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
+      boxShadow: '0 0 0 3px theme-primary',
     },
   },
   none: {
     border: 'none',
     style: { backgroundColor: 'transparent' },
+    color: 'inherit',
     transition: 'background-color 0.2s ease',
   },
 };

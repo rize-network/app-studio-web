@@ -18,6 +18,7 @@ import { TableViewStyles } from './Table.type';
 export const DefaultTableStyles: TableViewStyles = {
   table: {
     width: '100%',
+    color: 'inherit',
     borderRadius: '8px', // 2 × 4px grid
     overflow: 'hidden',
     boxShadow:
@@ -42,7 +43,8 @@ export const DefaultTableStyles: TableViewStyles = {
     padding: '12px 16px', // 3 × 4px and 4 × 4px grid
     fontWeight: '600',
     fontSize: '14px',
-    color: 'color-gray-700',
+    color: 'inherit',
+    opacity: 0.72,
     textAlign: 'left',
     media: {
       mobile: {
@@ -56,7 +58,7 @@ export const DefaultTableStyles: TableViewStyles = {
     fontSize: '14px',
     borderBottom: '1px solid',
     borderColor: 'color-gray-100',
-    color: 'color-gray-900',
+    color: 'inherit',
     media: {
       mobile: {
         padding: '8px 12px', // Smaller padding on mobile
@@ -82,7 +84,8 @@ export const DefaultTableStyles: TableViewStyles = {
   },
   caption: {
     margin: '8px 0', // 2 × 4px grid
-    color: 'color-gray-600',
+    color: 'inherit',
+    opacity: 0.62,
     fontSize: '14px',
     fontStyle: 'italic',
     media: {

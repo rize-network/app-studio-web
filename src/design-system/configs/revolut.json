@@ -305,18 +305,24 @@
       "variant": "filled",
       "size": "md",
       "shape": "pill",
-      "color": "#494fdf",
-      "textColor": "#ffffff",
+      "color": "theme-primary",
+      "textColor": "theme-canvas",
       "views": {
         "container": {
-          "borderRadius": "9999px",
+          "borderRadius": 9999,
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
-          "fontWeight": 500,
-          "borderColor": "#494fdf"
+          "fontWeight": 700,
+          "borderColor": "theme-primary",
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
-          "fontWeight": 500
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         }
       }
     },
@@ -326,11 +332,15 @@
       "shape": "pill",
       "views": {
         "container": {
-          "backgroundColor": "#4f55f1",
-          "color": "#ffffff",
-          "borderColor": "#4f55f1",
-          "borderRadius": "9999px",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "backgroundColor": "theme-secondary",
+          "color": "theme-canvas",
+          "borderColor": "theme-secondary",
+          "borderRadius": 9999,
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontWeight": 700,
+          "fontStyle": "normal"
         },
         "text": {
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
@@ -344,107 +354,118 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "#f4f4f4",
-          "borderColor": "#e5e7eb",
-          "color": "#191c1f",
-          "borderRadius": "24px",
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": 20,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "0 1px 3px rgba(0, 0, 0, 0.08)"
         },
         "header": {
-          "color": "#191c1f",
+          "color": "theme-text",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
           "fontWeight": 600,
-          "borderColor": "#e5e7eb"
+          "borderColor": "theme-border"
         },
         "content": {
-          "color": "#505a63",
+          "color": "theme-muted",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         },
         "footer": {
-          "borderColor": "#e5e7eb"
+          "borderColor": "theme-border"
         }
       }
     },
     "input": {
       "size": "md",
-      "shape": "pill",
+      "shape": "default",
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e7eb",
-          "color": "#191c1f",
-          "borderRadius": "9999px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": 16,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#191c1f",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "color": "theme-text",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "-0.02em"
         },
         "label": {
-          "color": "#505a63",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#505a63"
-        }
+        "helperText": {}
       }
     },
     "textarea": {
       "size": "md",
-      "shape": "pill",
+      "shape": "default",
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e7eb",
-          "color": "#191c1f",
-          "borderRadius": "9999px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": 16,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#191c1f",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "color": "theme-text",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "-0.02em"
         },
         "label": {
-          "color": "#505a63",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#505a63"
-        }
+        "helperText": {}
       }
     },
     "select": {
       "size": "md",
-      "shape": "pill",
+      "shape": "default",
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e7eb",
-          "color": "#191c1f",
-          "borderRadius": "9999px",
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": 16,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "#191c1f",
+          "color": "theme-text",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         },
         "label": {
-          "color": "#505a63",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
-        "helperText": {
-          "color": "#505a63"
+        "helperText": {},
+        "text": {
+          "letterSpacing": "-0.02em",
+          "fontStyle": "normal"
         }
       }
     },
@@ -452,19 +473,26 @@
       "size": "md",
       "views": {
         "checkbox": {
-          "borderColor": "#e5e7eb",
-          "backgroundColor": "#ffffff",
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas",
           "_checked": {
-            "backgroundColor": "#494fdf",
-            "borderColor": "#494fdf"
-          }
+            "backgroundColor": "theme-primary",
+            "borderColor": "theme-primary"
+          },
+          "borderRadius": 9999
         },
         "label": {
-          "color": "#191c1f",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "infoText": {
-          "color": "#505a63"
+          "color": "theme-muted"
+        },
+        "container": {
+          "borderRadius": 9999
         }
       }
     },
@@ -472,18 +500,24 @@
       "size": "md",
       "views": {
         "radio": {
-          "borderColor": "#e5e7eb",
-          "backgroundColor": "#ffffff"
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-canvas"
         },
         "dot": {
-          "backgroundColor": "#494fdf"
+          "backgroundColor": "theme-primary"
         },
         "label": {
-          "color": "#191c1f",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "infoText": {
-          "color": "#505a63"
+          "color": "theme-muted"
+        },
+        "container": {
+          "borderRadius": "50%"
         }
       }
     },
@@ -491,38 +525,44 @@
       "size": "sm",
       "views": {
         "slider": {
-          "backgroundColor": "#e5e7eb"
+          "backgroundColor": "theme-border"
         },
         "circle": {
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "theme-canvas"
         },
         "label": {
-          "color": "#191c1f",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "container": {
+          "borderRadius": "9999px"
         }
       }
     },
     "slider": {
-      "backgroundColor": "#494fdf",
+      "backgroundColor": "theme-primary",
       "views": {
         "track": {
-          "backgroundColor": "#e5e7eb"
+          "backgroundColor": "theme-border"
         },
         "progress": {
-          "backgroundColor": "#494fdf"
+          "backgroundColor": "theme-primary"
         },
         "filledTrack": {
-          "backgroundColor": "#494fdf"
+          "backgroundColor": "theme-primary"
         },
         "thumb": {
-          "borderColor": "#494fdf",
-          "backgroundColor": "#ffffff"
+          "borderColor": "theme-primary",
+          "backgroundColor": "theme-canvas"
         },
         "label": {
-          "color": "#191c1f"
+          "color": "theme-text"
         },
         "valueLabel": {
-          "color": "#505a63"
+          "color": "theme-muted"
         }
       }
     },
@@ -530,80 +570,98 @@
       "variant": "pill",
       "views": {
         "headerTabs": {
-          "borderColor": "#e5e7eb"
+          "borderColor": "theme-border"
         },
         "tab": {
-          "color": "#505a63"
+          "color": "theme-muted",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "activeTab": {
-          "color": "#494fdf",
-          "borderColor": "#494fdf",
-          "backgroundColor": "#494fdf"
+          "color": "theme-primary",
+          "borderColor": "theme-primary",
+          "backgroundColor": "theme-primary"
         },
         "title": {
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         },
         "activeText": {
-          "color": "#ffffff"
+          "color": "theme-canvas"
         },
         "content": {
-          "color": "#191c1f"
+          "color": "theme-text"
+        },
+        "container": {
+          "borderRadius": "9999px"
         }
       }
     },
     "accordion": {
       "views": {
         "container": {
-          "borderColor": "#e5e7eb",
-          "backgroundColor": "#f4f4f4",
-          "color": "#191c1f"
+          "borderColor": "theme-border",
+          "backgroundColor": "theme-surface",
+          "color": "theme-text",
+          "borderRadius": "24px"
         },
         "trigger": {
-          "color": "#191c1f",
+          "color": "theme-text",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         },
         "content": {
-          "color": "#505a63"
+          "color": "theme-muted"
         }
       }
     },
     "table": {
       "views": {
         "table": {
-          "backgroundColor": "#ffffff",
-          "color": "#191c1f",
-          "borderColor": "#e5e7eb"
+          "backgroundColor": "theme-canvas",
+          "color": "theme-text",
+          "borderColor": "theme-border",
+          "borderRadius": 20
         },
         "thead": {
-          "backgroundColor": "#f4f4f4",
-          "color": "#191c1f"
+          "backgroundColor": "theme-surface",
+          "color": "theme-text"
         },
         "th": {
-          "color": "#505a63",
-          "borderColor": "#e5e7eb",
-          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+          "color": "theme-muted",
+          "borderColor": "theme-border",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "tr": {
-          "borderColor": "#e5e7eb"
+          "borderColor": "theme-border"
         },
         "td": {
-          "color": "#191c1f",
-          "borderColor": "#e5e7eb"
+          "color": "theme-text",
+          "borderColor": "theme-border",
+          "letterSpacing": "-0.02em",
+          "fontStyle": "normal"
         },
         "caption": {
-          "color": "#505a63"
+          "color": "theme-muted",
+          "fontStyle": "italic",
+          "letterSpacing": "-0.02em"
         }
       }
     },
     "avatar": {
       "views": {
         "container": {
-          "backgroundColor": "#f4f4f4",
-          "borderColor": "#e5e7eb",
-          "color": "#191c1f"
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": "50%"
         },
         "fallback": {
-          "color": "#191c1f",
+          "color": "theme-text",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         }
       }
@@ -611,61 +669,66 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "#f4f4f4",
-          "borderColor": "#e5e7eb",
-          "borderRadius": "24px"
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "borderRadius": 20
         },
         "title": {
-          "color": "#191c1f",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "color": "theme-text",
+          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.02em",
+          "textTransform": "none",
+          "fontStyle": "normal"
         },
         "description": {
-          "color": "#505a63",
+          "color": "theme-muted",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         },
         "icon": {
-          "color": "#494fdf"
+          "color": "theme-primary"
         }
       }
     },
     "status": {
       "views": {
         "indicator": {
-          "backgroundColor": "#16a34a"
+          "backgroundColor": "theme-success"
         },
         "label": {
-          "color": "#191c1f",
+          "color": "theme-text",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         }
       }
     },
     "progress": {
-      "color": "#494fdf",
-      "backgroundColor": "#e5e7eb",
+      "color": "theme-primary",
+      "backgroundColor": "theme-border",
       "radius": "24px",
       "views": {
         "container": {
-          "backgroundColor": "#e5e7eb"
+          "backgroundColor": "theme-border",
+          "borderRadius": "9999px"
         },
         "bar": {
-          "backgroundColor": "#494fdf"
+          "backgroundColor": "theme-primary"
         },
         "text": {
-          "color": "#191c1f"
+          "color": "theme-text"
         }
       }
     },
     "loader": {
-      "color": "#494fdf"
+      "color": "theme-primary"
     },
     "separator": {
-      "color": "#e5e7eb",
+      "color": "theme-border",
       "views": {
         "container": {
-          "borderColor": "#e5e7eb"
+          "borderColor": "theme-border"
         },
         "label": {
-          "color": "#505a63",
+          "color": "theme-muted",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         }
       }
@@ -673,55 +736,71 @@
     "navigation": {
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e7eb",
-          "color": "#191c1f"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border",
+          "color": "theme-text",
+          "borderRadius": "24px"
         },
         "item": {
-          "color": "#505a63"
+          "color": "theme-muted"
         },
         "activeItem": {
-          "color": "#494fdf",
-          "borderColor": "#494fdf"
+          "color": "theme-primary",
+          "borderColor": "theme-primary"
         }
       }
     },
     "hero": {
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "color": "#191c1f",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-text",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         },
         "eyebrow": {
-          "color": "#505a63"
+          "color": "theme-muted"
         },
         "title": {
-          "color": "#191c1f",
+          "color": "theme-text",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         },
         "description": {
-          "color": "#505a63"
+          "color": "theme-muted"
         }
       }
     },
     "page": {
       "views": {
         "container": {
-          "backgroundColor": "#ffffff",
-          "color": "#191c1f",
+          "backgroundColor": "theme-canvas",
+          "color": "theme-text",
           "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
         },
         "section": {
-          "backgroundColor": "#ffffff",
-          "borderColor": "#e5e7eb"
+          "backgroundColor": "theme-canvas",
+          "borderColor": "theme-border"
         },
         "surface": {
-          "backgroundColor": "#f4f4f4",
-          "borderColor": "#e5e7eb",
-          "color": "#191c1f"
+          "backgroundColor": "theme-surface",
+          "borderColor": "theme-border",
+          "color": "theme-text"
         }
       }
     }
+  },
+  "personality": {
+    "cornerStyle": "pill",
+    "typeWeight": "bold",
+    "typeCase": "normal",
+    "typeStyle": "normal",
+    "letterSpacing": "-0.02em",
+    "accentTreatment": "gradient",
+    "signatureMotif": "\u2605",
+    "density": "comfortable",
+    "surfaceTone": "glass",
+    "cardRadius": 20,
+    "pillRadius": 9999,
+    "badgeRadius": 9999,
+    "voice": "bold-fintech"
   }
 }

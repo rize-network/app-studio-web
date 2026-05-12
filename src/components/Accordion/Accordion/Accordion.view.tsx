@@ -69,7 +69,6 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       borderWidth={1}
       borderStyle="solid"
       borderColor="color-gray-200"
-      marginBottom={8}
       overflow="hidden"
       opacity={isDisabled ? 0.5 : 1}
       pointerEvents={isDisabled ? 'none' : 'auto'}

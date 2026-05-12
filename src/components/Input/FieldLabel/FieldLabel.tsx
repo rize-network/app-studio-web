@@ -27,7 +27,8 @@ export const FieldLabel: React.FC<LabelProps> = ({
     letterSpacing="-0.01em"
     whiteSpace="nowrap"
     fontWeight={500}
-    color={error ? 'color-red-500' : 'color-gray-600'}
+    opacity={error ? 1 : 0.72}
+    color={error ? 'color-red-500' : 'inherit'}
     transition="color 0.2s ease"
     {...views['label']}
     {...props}

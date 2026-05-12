@@ -49,7 +49,7 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
         <Text
           fontWeight="600"
           fontSize="14px"
-          color={error ? 'color-red-600' : 'color-gray-700'}
+          color={error ? 'color-red-600' : 'inherit'}
           marginBottom={4}
           {...views.label}
         >

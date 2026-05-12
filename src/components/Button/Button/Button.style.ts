@@ -234,16 +234,24 @@ export const getButtonVariants = (
       transition: 'opacity 0.2s ease',
     },
     subtle: {
-      backgroundColor: effectiveBorder, // Placeholder for tint logic if needed
-      opacity: reversed ? 0.2 : 0.1,
+      // Use app-studio alpha-token syntax: append `-{alpha}` (0–1000) to the
+      // color token, e.g. `color-green-900` → `color-green-900-300` for 30%.
+      // Background and border get translucent tints; text stays at full
+      // opacity so the label remains readable.
+      backgroundColor: `${effectiveBorder}-${reversed ? 200 : 100}`,
       color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: effectiveBorder,
-      _hover: { opacity: 0.9 },
-      _active: { opacity: 0.95 },
+      borderColor: `${effectiveBorder}-${reversed ? 400 : 250}`,
+      _hover: {
+        backgroundColor: `${effectiveBorder}-${reversed ? 300 : 180}`,
+      },
+      _active: {
+        backgroundColor: `${effectiveBorder}-${reversed ? 380 : 240}`,
+      },
       _focusVisible: { outline: 'none', boxShadow: focusRing },
-      transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
+      transition:
+        'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
     },
   };
 };

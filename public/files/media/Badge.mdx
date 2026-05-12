@@ -3,11 +3,13 @@
 Renders a badge with various styles and states according to the design guidelines.
 
 ### **Import**
+
 ```tsx
 import { Badge } from '@app-studio/web';
 ```
 
 ### **Default**
+
 ```tsx
 import React from 'react';
 import { Badge } from '../Badge';
@@ -16,7 +18,8 @@ export const DefaultDemo = () => <Badge content="default" />;
 ```
 
 ### **content**
-Not explicitly described in the provided files.
+
+Text or numeric content displayed in the main badge label.
 
 - **Type:** `string | number`
 
@@ -28,7 +31,8 @@ export const ContentDemo = () => <Badge content="content" />;
 ```
 
 ### **children**
-Not explicitly described in the provided files.
+
+Custom React content displayed in the main badge label. When provided, children take precedence over `content`.
 
 - **Type:** `React.ReactNode`
 
@@ -40,7 +44,8 @@ export const ChildrenDemo = () => <Badge>Custom Children</Badge>;
 ```
 
 ### **icon**
-Not explicitly described in the provided files.
+
+Optional leading icon rendered before the badge content.
 
 - **Type:** `React.ReactNode`
 
@@ -67,7 +72,8 @@ export const IconDemo = () => (
 ```
 
 ### **pastil**
-Not explicitly described in the provided files.
+
+Adds a small status dot before the badge content. Pass `true` for the default dot color, a status key such as `success`, `warning`, or `error`, or any custom color value.
 
 - **Type:** `boolean | string`
 
@@ -86,7 +92,48 @@ export const PastilDemo = () => (
 );
 ```
 
+### **pastilContent**
+
+Adds a text pastil inside the badge, creating an announcement-style pill when combined with `content` and optional `action`.
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Badge } from '../Badge';
+
+export const AnnouncementDemo = () => (
+  <Badge
+    pastilContent="New"
+    content="Agency Growth Platform"
+    action="Try now ›"
+    cursor="pointer"
+  />
+);
+```
+
+### **action**
+
+Optional trailing action text for announcement-style badges.
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Badge } from '../Badge';
+
+export const AnnouncementDemo = () => (
+  <Badge
+    pastilContent="New"
+    content="Agency Growth Platform"
+    action="Try now ›"
+    cursor="pointer"
+  />
+);
+```
+
 ### **variant**
+
 Determines the styling variants a UI component can have, which could include filled, outlined, or ghost styles among others.
 
 - **Type:** `Variant`
@@ -112,6 +159,7 @@ export const VariantDemo = () => (
 ```
 
 ### **position**
+
 Lists possible positions for UI elements that can be placed in one of the corners of a container, like notification badges.
 
 - **Type:** `Position`
@@ -144,6 +192,7 @@ export const PositionDemo = () => (
 ```
 
 ### **size**
+
 Specifies available sizes for UI elements, catering to a range of scalability from extra small to extra large.
 
 - **Type:** `Size`
@@ -169,6 +218,7 @@ export const SizeDemo = () => (
 ```
 
 ### **shape**
+
 Defines possible values for the shape of a UI component such as buttons or badges.
 
 - **Type:** `Shape`
@@ -394,9 +444,26 @@ export const DesignSystemBadges = () => (
 );
 ```
 
+### **Announcement**
+
+```tsx
+import React from 'react';
+import { Badge } from '../Badge';
+
+export const AnnouncementDemo = () => (
+  <Badge
+    pastilContent="New"
+    content="Agency Growth Platform"
+    action="Try now ›"
+    cursor="pointer"
+  />
+);
+```
+
 ### **Index**
 
 ```tsx
+export * from './announcement';
 export * from './children';
 export * from './icon';
 export * from './pastil';
@@ -434,4 +501,3 @@ export const StylesDemo = () => {
   );
 };
 ```
-

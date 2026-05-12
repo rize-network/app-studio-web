@@ -37,6 +37,7 @@ const PaginationPage = lazy(() => import('src/pages/pagination.page'));
 const PasswordPage = lazy(() => import('src/pages/password.page'));
 const ProgressBarPage = lazy(() => import('src/pages/progressBar.page'));
 const SelectPage = lazy(() => import('src/pages/select.page'));
+const SelectorPage = lazy(() => import('src/pages/selector.page'));
 const SeparatorPage = lazy(() => import('src/pages/separator.page'));
 const ResizablePage = lazy(() => import('src/pages/resizable.page'));
 const SidebarPage = lazy(() => import('src/pages/sidebar.page'));
@@ -207,6 +208,12 @@ export const componentList: ComponentRoute[] = [
     name: 'Select',
     path: '/select',
     element: <SelectPage />,
+    category: 'Inputs',
+  },
+  {
+    name: 'Selector',
+    path: '/selector',
+    element: <SelectorPage />,
     category: 'Inputs',
   },
   {

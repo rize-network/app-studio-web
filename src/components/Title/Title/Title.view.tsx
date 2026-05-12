@@ -164,7 +164,6 @@ const TitleView: React.FC<TitleProps> = ({
           stagger={stateHighlightSlideStagger}
           sequential={stateHighlightSlideSequential}
           direction="up"
-          fontSize={fontSize}
           wordProps={highlightProps}
         />
       );

@@ -109,7 +109,7 @@ const RadioView: React.FC<RadioViewProps> = ({
         ? 'color-red-600'
         : isDisabled
         ? 'color-gray-400'
-        : 'color-gray-700',
+        : 'inherit',
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
       opacity: isDisabled ? 0.6 : 1,
       transition: 'all 0.2s ease-in-out',
