@@ -39,6 +39,14 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
   triggerRef,
   dropdownRef,
   onChange,
+  onChangeComplete,
+  onOpen,
+  onClose,
+  colorFormat,
+  maxRecentColors,
+  closeOnSelect,
+  defaultValue,
+  value,
   ...props
 }) => {
   // Merges default container styles with any custom styles provided through props for the main component wrapper.

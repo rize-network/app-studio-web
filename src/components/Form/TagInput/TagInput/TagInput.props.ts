@@ -115,4 +115,6 @@ export interface TagInputViewProps extends Omit<TagInputProps, 'tags'> {
   isMenuOpen?: boolean;
   // Event handler for when an item from the suggestion menu is selected.
   handleMenuItemSelect?: (item: string) => void;
+  // Validator for an individual tag; returns true when the tag passes the rules.
+  validateTag?: (tag: string) => boolean;
 }

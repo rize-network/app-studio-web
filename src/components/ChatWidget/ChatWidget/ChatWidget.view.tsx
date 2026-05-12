@@ -43,6 +43,8 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
   handleSubmit,
   inputRef,
   messagesRef,
+  inputValue,
+  onInputChange,
   ...props
 }) => {
   // Calculates the dynamic styles for the main chat widget container, merging default styles with variant-specific and any custom styles provided via props.

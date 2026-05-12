@@ -6,11 +6,11 @@
     "sourceTitle": "Design System Preview: Stripe (Light)",
     "defaultAppearance": "light",
     "googleFontLinks": [
-      "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;700&display=swap"
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500;700&display=swap"
     ]
   },
   "theme": {
-    "primary": "#533afd",
+    "primary": "#635BFF",
     "secondary": "#f96bee",
     "success": "#15be53",
     "warning": "#9b6829",
@@ -266,7 +266,7 @@
       "rgba(23,23,23,0.06) 0px 3px 6px 0px",
       "var(--shadow-subtle)",
       "var(--shadow-card)",
-      "0 0 0 1px var(--purple)",
+      "0 0 0 1px theme-primary",
       "0 0 0 1px var(--ruby)"
     ]
   },
@@ -359,7 +359,7 @@
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
-          "boxShadow": "0 0 0 1px var(--purple)"
+          "boxShadow": "0 0 0 1px theme-primary"
         },
         "field": {
           "color": "theme-text",
@@ -389,7 +389,7 @@
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
-          "boxShadow": "0 0 0 1px var(--purple)"
+          "boxShadow": "0 0 0 1px theme-primary"
         },
         "field": {
           "color": "theme-text",
@@ -419,7 +419,7 @@
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
-          "boxShadow": "0 0 0 1px var(--purple)"
+          "boxShadow": "0 0 0 1px theme-primary"
         },
         "field": {
           "color": "theme-text",

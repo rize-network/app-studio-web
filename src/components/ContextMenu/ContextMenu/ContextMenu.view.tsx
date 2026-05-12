@@ -202,6 +202,29 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
   onSelect,
   isDisabled = false,
   views,
+  variant,
+  shape,
+  isLoading,
+  loaderProps,
+  loaderPosition,
+  icon,
+  iconPosition,
+  isFilled,
+  isAuto,
+  isIconRounded,
+  isHovered,
+  shadow,
+  ariaLabel,
+  animation,
+  textColor,
+  reversed,
+  borderMovingDuration,
+  borderMovingGradientColors,
+  animatedStrokeAccentColor,
+  animatedStrokeTextColor,
+  to,
+  isExternal,
+  config,
   ...props
 }) => {
   const { activeSubmenuId, setActiveSubmenuId, size, closeMenu } =
@@ -371,6 +394,7 @@ export const ContextMenuView: React.FC<
   disableNativeContextMenu = true,
   views,
   themeMode: elementMode,
+  onOpenChange,
   ...props
 }) => {
   if (!items || items.length === 0) {

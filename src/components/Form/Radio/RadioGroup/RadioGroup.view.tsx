@@ -19,6 +19,8 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
   isReadOnly = false,
   views = { container: {}, label: {}, helperText: {} },
   onChange,
+  value,
+  defaultValue,
   ...props
 }) => {
   // Dynamically selects the layout container (`Vertical` or `Horizontal`) based on the `direction` prop to arrange the radio buttons within the group.

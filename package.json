@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/web",
-  "version": "0.10.8",
+  "version": "0.10.10",
   "main": "dist/web.cjs.js",
   "typings": "dist/index.d.ts",
   "files": [
@@ -108,7 +108,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
     "@vitejs/plugin-react": "^4.7.0",
-    "app-studio": "^0.7.18",
+    "app-studio": "^0.8.3",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-named-exports-order": "^0.0.2",
@@ -182,5 +182,8 @@
     }
   ],
   "module": "dist/web.esm.js",
-  "unpkg": "dist/web.umd.js"
+  "unpkg": "dist/web.umd.js",
+  "dependencies": {
+    "react-helmet-async": "^3.0.0"
+  }
 }

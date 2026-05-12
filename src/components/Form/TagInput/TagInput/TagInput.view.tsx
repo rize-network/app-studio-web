@@ -13,7 +13,7 @@ import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 import { CloseIcon } from '../../../Icon/Icon';
 import { TagInputViewProps } from './TagInput.props';
-import { Shapes, InputVariants } from '../../../Input/Input.style';
+
 // Defines the TagChip functional component, which renders an individual tag with a customizable removal option. It accepts properties for the tag value, removal handler, removability status, size, custom view overrides, and disabled/read-only states.
 const TagChip: React.FC<{
   tag: string;
@@ -39,18 +39,19 @@ const TagChip: React.FC<{
       alignItems="center"
       gap={6}
       padding={chipSize.padding}
-      backgroundColor="rgba(var(--theme-primary-rgb), 0.1)"
+      // app-studio resolves theme-primary-N as a color-mix tint (N/1000 = alpha)
+      backgroundColor="theme-primary-100"
       borderRadius="9999px"
       borderWidth="1px"
       borderStyle="solid"
-      borderColor="rgba(var(--theme-primary-rgb), 0.2)"
+      borderColor="theme-primary-250"
       transition="all 0.15s ease-in-out"
       opacity={isDisabled ? 0.6 : 1}
       _hover={
         !isDisabled && !isReadOnly
           ? {
-              backgroundColor: 'rgba(var(--theme-primary-rgb), 0.2)',
-              borderColor: 'rgba(var(--theme-primary-rgb), 0.3)',
+              backgroundColor: 'theme-primary-180',
+              borderColor: 'theme-primary-400',
             }
           : {}
       }
@@ -122,6 +123,27 @@ const TagInputView: React.FC<TagInputViewProps> = ({
   removeTag,
   setIsHovered,
   onClick,
+  setInputValue,
+  setTags,
+  setIsFocused,
+  addTag,
+  filteredItems,
+  activeItemIndex,
+  isMenuOpen,
+  handleMenuItemSelect,
+  defaultTags,
+  onTagsChange,
+  onTagAdd,
+  onTagRemove,
+  minTagLength,
+  maxTagLength,
+  allowDuplicates,
+  separators,
+  menuItems,
+  onMenuItemSelect,
+  onFocus,
+  onBlur,
+  validateTag,
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
@@ -129,11 +151,6 @@ const TagInputView: React.FC<TagInputViewProps> = ({
     label && (isFocused || tags.length > 0 || inputValue)
   );
   const isMaxReached = maxTags && tags.length >= maxTags;
-  const containerStyles = {
-    ...Shapes[shape],
-    ...InputVariants[variant],
-    ...views?.inputContainer,
-  };
   const inputStyles = {
     border: 'none',
     outline: 'none',
@@ -165,11 +182,10 @@ const TagInputView: React.FC<TagInputViewProps> = ({
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
-        views={views}
+        views={{ ...views, container: { ...views?.container, ...views?.inputContainer } }}
         onClick={onClick}
         onMouseEnter={() => setIsHovered?.(true)}
         onMouseLeave={() => setIsHovered?.(false)}
-        {...containerStyles}
       >
         {left}
         <FieldWrapper>

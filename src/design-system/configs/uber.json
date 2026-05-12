@@ -12,7 +12,7 @@
   "theme": {
     "primary": "#000000",
     "secondary": "#efefef",
-    "success": "#000000",
+    "success": "#06C167",
     "warning": "#e2e2e2",
     "error": "#000000",
     "canvas": "#ffffff",
@@ -211,7 +211,7 @@
       "var(--shadow-card)",
       "var(--shadow-float)",
       "var(--shadow-medium)",
-      "0 0 0 1px var(--color-black)",
+      "0 0 0 1px color-black",
       "rgba(0,0,0,0.12) 0px 4px 16px 0px",
       "rgba(0,0,0,0.16) 0px 4px 16px 0px",
       "rgba(0,0,0,0.16) 0px 2px 8px 0px",
@@ -307,7 +307,7 @@
           "borderRadius": 2,
           "borderWidth": "1px",
           "borderStyle": "solid",
-          "boxShadow": "0 0 0 1px var(--color-black)"
+          "boxShadow": "0 0 0 1px color-black"
         },
         "field": {
           "color": "theme-primary",
@@ -337,7 +337,7 @@
           "borderRadius": 2,
           "borderWidth": "1px",
           "borderStyle": "solid",
-          "boxShadow": "0 0 0 1px var(--color-black)"
+          "boxShadow": "0 0 0 1px color-black"
         },
         "field": {
           "color": "theme-primary",
@@ -367,7 +367,7 @@
           "borderRadius": 2,
           "borderWidth": "1px",
           "borderStyle": "solid",
-          "boxShadow": "0 0 0 1px var(--color-black)"
+          "boxShadow": "0 0 0 1px color-black"
         },
         "field": {
           "color": "theme-primary",

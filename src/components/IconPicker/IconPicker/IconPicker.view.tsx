@@ -32,6 +32,11 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
   dropdownRef,
   handleClose,
   onChange,
+  value,
+  defaultValue,
+  onOpen,
+  onClose,
+  closeOnSelect,
   ...props
 }) => {
   const { getColor } = useTheme();

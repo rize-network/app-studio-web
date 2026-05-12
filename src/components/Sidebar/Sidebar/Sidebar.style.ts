@@ -105,7 +105,7 @@ export const SidebarTransitions: Record<TransitionPreset, string> = {
 };
 // Defines the visual styles to apply when a sidebar item is in an active state, including background color, text color, font weight, and a left border.
 export const SidebarItemActive: ViewProps = {
-  backgroundColor: 'rgba(var(--theme-primary-rgb), 0.1)',
+  backgroundColor: 'theme-primary-100',
   color: 'theme-primary',
   fontWeight: '600',
   borderLeftWidth: '2px',

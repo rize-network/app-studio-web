@@ -441,6 +441,9 @@ export const NavigationMenuLink: React.FC<NavigationMenuLinkProps> = ({
   href,
   children,
   views,
+  underline,
+  isExternal,
+  iconSize,
   ...props
 }) => {
   const { itemValue, isDisabled } = useNavigationMenuItemContext();

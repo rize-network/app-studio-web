@@ -6,6 +6,7 @@ import React, {
   useMemo,
 } from 'react';
 import { ResponsiveProvider, ThemeProvider } from 'app-studio';
+import { HelmetProvider } from 'react-helmet-async';
 import { GoogleFontProvider } from 'src/providers/GoogleFontProvider';
 import { RouterProvider } from 'src/providers/Router';
 
@@ -43,6 +44,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
 
   return (
     <ThemeModeContext.Provider value={themeModeValue}>
+      <HelmetProvider>
       <GoogleFontProvider>
         <ThemeProvider
           mode={mode}
@@ -70,6 +72,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
           </ResponsiveProvider>
         </ThemeProvider>
       </GoogleFontProvider>
+      </HelmetProvider>
     </ThemeModeContext.Provider>
   );
 };

@@ -10,14 +10,14 @@
     ]
   },
   "theme": {
-    "primary": "#171717",
+    "primary": "#000000",
     "secondary": "#0072f5",
     "success": "#0a72ef",
     "warning": "#de1d8d",
     "error": "#ff5b4f",
     "canvas": "#ffffff",
     "surface": "#fafafa",
-    "text": "#171717",
+    "text": "#000000",
     "muted": "#666666",
     "border": "#ebebeb",
     "onPrimary": "#ffffff"

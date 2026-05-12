@@ -39,11 +39,21 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
   handleColorSelect = () => {},
   handleCustomColorChange = () => {},
   handleCustomColorSubmit = () => {},
+  handleClose,
   setIsFocused = () => {},
   setIsHovered = () => {},
+  setValue,
   triggerRef,
   dropdownRef,
   onChange,
+  onChangeComplete,
+  onOpen,
+  onClose,
+  colorFormat,
+  maxRecentColors,
+  closeOnSelect,
+  value,
+  defaultValue,
   ...props
 }) => {
   // Initializes the getColor function from the useTheme hook, allowing access to theme-defined colors for consistent styling.

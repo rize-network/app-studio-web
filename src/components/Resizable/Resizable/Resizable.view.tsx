@@ -304,6 +304,8 @@ export const ResizableView: React.FC<
   collapsible = false,
   containerRef,
   autoSaveId,
+  keyboardResizeBy,
+  onLayout,
   views,
   ...props
 }) => {

@@ -10,11 +10,11 @@
     ]
   },
   "theme": {
-    "primary": "#000000",
-    "secondary": "#c5b0f4",
-    "success": "#c8e6cd",
-    "warning": "#f3c9b6",
-    "error": "#efd4d4",
+    "primary": "#F24E1E",
+    "secondary": "#A259FF",
+    "success": "#0ACF83",
+    "warning": "#FFC700",
+    "error": "#FF7262",
     "canvas": "#ffffff",
     "surface": "#f7f7f5",
     "text": "#000000",
@@ -42,13 +42,13 @@
       "block-navy": "#1f1d3d",
       "accent-magenta": "#ff3d8b",
       "semantic-success": "#1ea64a",
-      "sans": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
-      "mono": "'JetBrains Mono', 'figmaMono Fallback', 'SF Mono', menlo, monospace"
+      "sans": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
+      "mono": "'JetBrains Mono', 'SF Mono', Menlo, monospace"
     },
     "colors": [
       {
         "name": "primary",
-        "value": "#000000",
+        "value": "#F24E1E",
         "role": "primary"
       },
       {
@@ -138,8 +138,8 @@
       }
     ],
     "typography": {
-      "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
-      "monoFamily": "'JetBrains Mono', 'figmaMono Fallback', 'SF Mono', menlo, monospace",
+      "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
+      "monoFamily": "'JetBrains Mono', 'SF Mono', Menlo, monospace",
       "fontSizes": [
         "18px",
         "16px",
@@ -224,7 +224,7 @@
       "views": {
         "container": {
           "borderRadius": 9999,
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "borderColor": "theme-primary",
           "letterSpacing": "-0.01em",
@@ -232,7 +232,7 @@
           "fontStyle": "normal"
         },
         "content": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -250,14 +250,14 @@
           "color": "theme-canvas",
           "borderColor": "theme-secondary",
           "borderRadius": 4,
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "letterSpacing": "-0.01em",
           "textTransform": "none",
           "fontWeight": 700,
           "fontStyle": "normal"
         },
         "text": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 600
         }
       }
@@ -278,13 +278,13 @@
         },
         "header": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 600,
           "borderColor": "theme-border"
         },
         "content": {
           "color": "theme-muted",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         },
         "footer": {
           "borderColor": "theme-border"
@@ -307,12 +307,12 @@
         },
         "field": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.01em"
         },
         "label": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -337,12 +337,12 @@
         },
         "field": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.01em"
         },
         "label": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -367,10 +367,10 @@
         },
         "field": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         },
         "label": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -396,7 +396,7 @@
           "borderRadius": 4
         },
         "label": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -421,7 +421,7 @@
           "backgroundColor": "theme-primary"
         },
         "label": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -445,7 +445,7 @@
           "backgroundColor": "theme-canvas"
         },
         "label": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -501,7 +501,7 @@
           }
         },
         "title": {
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         },
         "activeText": {
           "color": "theme-primary"
@@ -524,7 +524,7 @@
         },
         "trigger": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         },
         "content": {
           "color": "theme-muted"
@@ -546,7 +546,7 @@
         "th": {
           "color": "theme-muted",
           "borderColor": "theme-border",
-          "fontFamily": "'JetBrains Mono', 'figmaMono Fallback', 'SF Mono', menlo, monospace",
+          "fontFamily": "'JetBrains Mono', 'SF Mono', Menlo, monospace",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -578,7 +578,7 @@
         },
         "fallback": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         }
       }
     },
@@ -591,7 +591,7 @@
         },
         "title": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif",
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -599,7 +599,7 @@
         },
         "description": {
           "color": "theme-muted",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         },
         "icon": {
           "color": "theme-primary"
@@ -613,7 +613,7 @@
         },
         "label": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         }
       }
     },
@@ -645,7 +645,7 @@
         },
         "label": {
           "color": "theme-muted",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         }
       }
     },
@@ -671,14 +671,14 @@
         "container": {
           "backgroundColor": "theme-canvas",
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         },
         "eyebrow": {
           "color": "theme-muted"
         },
         "title": {
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         },
         "description": {
           "color": "theme-muted"
@@ -690,7 +690,7 @@
         "container": {
           "backgroundColor": "theme-canvas",
           "color": "theme-primary",
-          "fontFamily": "'Inter', 'figmaSans Fallback', 'SF Pro Display', system-ui, -apple-system, helvetica, sans-serif"
+          "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
         },
         "section": {
           "backgroundColor": "theme-canvas",

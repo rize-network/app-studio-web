@@ -7,10 +7,12 @@ import { HelperTextPassword } from 'src/components/Form/Password/example/HelperT
 export const PasswordPage = () => {
   return (
     <table>
-      <tr>
-        <th>Property</th>
-        <th>App-Studio</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>App-Studio</th>
+        </tr>
+      </thead>
       <tbody>
         <tr>
           <td>Default</td>

@@ -51,6 +51,45 @@ export const SliderSizes: Record<Size, ViewProps> = {
 };
 
 /**
+ * Slider (track) sizes when the Switch has activeChild/inActiveChild content.
+ * Wider tracks ensure the text rendered alongside the knob is readable.
+ */
+export const ContentSliderSizes: Record<Size, ViewProps> = {
+  xs: {
+    height: '22px',
+    width: '52px',
+  },
+  sm: {
+    height: '26px',
+    width: '62px',
+  },
+  md: {
+    height: '30px',
+    width: '72px',
+  },
+  lg: {
+    height: '34px',
+    width: '84px',
+  },
+  xl: {
+    height: '38px',
+    width: '96px',
+  },
+};
+
+/**
+ * Default font sizes for activeChild/inActiveChild text — matched to the
+ * Switch size so the embedded label remains legible.
+ */
+export const ContentFontSizes: Record<Size, string> = {
+  xs: '9px',
+  sm: '10px',
+  md: '11px',
+  lg: '12px',
+  xl: '13px',
+};
+
+/**
  * Padding for the Switch slider - ajusté pour les nouvelles dimensions
  * Following the 4px grid system
  */

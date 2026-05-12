@@ -38,6 +38,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
   defaultIsSelected = false,
   setIsSelected = () => {},
   setIsHovered = () => {},
+  setIsChecked,
   views = { checkbox: {}, label: {} },
   infoText,
   helperText,

@@ -35,24 +35,22 @@ const ProgressBarPage = () => {
         >
           <thead>
             <tr>
-              <th
-                style={{
-                  textAlign: 'left',
-                  paddingBottom: 8,
-                  color: 'var(--theme-text-secondary)',
-                }}
+              <View
+                as="th"
+                textAlign="left"
+                paddingBottom={8}
+                color="theme-muted"
               >
                 Property
-              </th>
-              <th
-                style={{
-                  textAlign: 'left',
-                  paddingBottom: 8,
-                  color: 'var(--theme-text-secondary)',
-                }}
+              </View>
+              <View
+                as="th"
+                textAlign="left"
+                paddingBottom={8}
+                color="theme-muted"
               >
                 Example
-              </th>
+              </View>
             </tr>
           </thead>
           <tbody>

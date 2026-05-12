@@ -107,6 +107,9 @@ const OTPInputView: React.FC<
   onBlur = () => {},
   onClick = () => {},
   onFocus = () => {},
+  onKeyPress,
+  pattern,
+  pasteTransformer,
   ...props
 }) => {
   // Initializes the `useTheme` hook, providing access to the application's theme context for styling purposes.

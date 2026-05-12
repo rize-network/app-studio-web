@@ -90,7 +90,9 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
           (base as any).borderColor = (variantStyles as any).borderColor;
         }
         if ((variantStyles as any).backgroundColor !== undefined) {
-          (base as any).backgroundColor = (variantStyles as any).backgroundColor;
+          (base as any).backgroundColor = (
+            variantStyles as any
+          ).backgroundColor;
         }
         if (variantStyles && (variantStyles as any).style) {
           (base as any).style = {

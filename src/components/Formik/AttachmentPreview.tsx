@@ -159,9 +159,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                 )}
                 <Text
                   marginTop="4px"
-                  truncateText={true}
-                  textOverflow="ellipsis"
-                  overflow="hidden"
+                  maxLines={1}
                   width={'100%'}
                   fontSize={12}
                   {...views?.name}

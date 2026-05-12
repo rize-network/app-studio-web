@@ -1,299 +1,336 @@
 # Theming Guide
 
-This guide explains how to use and customize the theming system in the App Studio Web Component Library.
+This guide explains how the design-system theming layer works end-to-end: the providers, the tokens you can reference, and how brand-specific values get propagated to every component without you wiring anything per-brand.
 
-## Theme System Overview
+For the architectural overview and how to author components against this system, see [component-library.md](./component-library.md).
 
-The App Studio Web Component Library uses a theme system that provides consistent styling across all components. The theme includes:
+---
 
-- Color palette
-- Typography
-- Spacing
-- Shapes
-- Shadows
-- Transitions
+## 1. Two providers — what does what
 
-## Theme Provider
+The app uses two cooperating providers, set up once at the root in [src/providers/index.tsx](../../src/providers/index.tsx):
 
-The `ThemeProvider` component is used to provide theme context to all components:
-
-```jsx
-import React from 'react';
-import { ThemeProvider } from 'app-studio';
-import { Button, Text } from '@app-studio/web';
-
-function App() {
-  return (
-    <ThemeProvider theme={{ mode: 'light' }}>
-      <Text>Themed content</Text>
-      <Button>Themed button</Button>
+```tsx
+<ThemeModeContext.Provider value={{ mode, toggleThemeMode }}>
+  <GoogleFontProvider>
+    <ThemeProvider mode={mode} theme={{ primary: 'color-blue-700', secondary: 'color-purple-500' }}>
+      <ResponsiveProvider>
+        <RouterProvider>{children}</RouterProvider>
+      </ResponsiveProvider>
     </ThemeProvider>
-  );
+  </GoogleFontProvider>
+</ThemeModeContext.Provider>
+```
+
+| Provider              | Role                                                                                              |
+|-----------------------|---------------------------------------------------------------------------------------------------|
+| `ThemeProvider`       | App-studio's color-resolver context. Sets the global `themeMode` (`light` / `dark`) and the default `theme-primary` / `theme-secondary` colors. |
+| `ThemeModeContext`    | Local-app toggle between light and dark mode. The `useThemeMode()` hook reads this.               |
+| `GoogleFontProvider`  | Imports the Google Fonts referenced in `metadata.googleFontLinks` (per-brand fonts inject into `<Helmet>`). |
+| `DesignSystemProvider` | **Optional, brand-aware layer.** Drops into any subtree and overrides the theme tokens for that subtree with the active brand's `theme.*` values. |
+
+You can use the design system anywhere by wrapping a subtree in `<DesignSystemProvider config={airbnbConfig}>` (or `configId="airbnb"`). Components below it pick up Airbnb's brand colors via the CSS-variable layer described in §3 — without disturbing the rest of the app.
+
+---
+
+## 2. Theme modes
+
+The app-level mode is a binary `light` / `dark` switch managed by `ThemeModeContext`:
+
+```tsx
+import { useThemeMode } from 'src/providers';
+
+function ModeToggle() {
+  const { mode, toggleThemeMode } = useThemeMode();
+  return <button onClick={toggleThemeMode}>Switch to {mode === 'light' ? 'dark' : 'light'}</button>;
 }
 ```
 
-## Theme Modes
+You can also pin a single component to a specific mode using the `themeMode` prop:
 
-The library supports light and dark theme modes:
-
-```jsx
-import React from 'react';
-import { ThemeProvider } from 'app-studio';
-import { Button } from '@app-studio/web';
-
-function App() {
-  return (
-    <ThemeProvider theme={{ mode: 'dark' }}>
-      <Button>Dark theme button</Button>
-    </ThemeProvider>
-  );
-}
+```tsx
+<Button themeMode="dark">Always dark</Button>
+<Badge themeMode="light">Always light</Badge>
 ```
 
-You can also override the theme mode for specific components:
+Brand configs declare their `defaultAppearance` in `metadata` (`light` or `dark`). The design-system showcase respects that when rendering each brand on its native canvas, but also renders an inverted PaletteFrame so you can see how the brand performs on the opposite surface.
 
-```jsx
-import React from 'react';
-import { ThemeProvider } from 'app-studio';
-import { Button } from '@app-studio/web';
+---
 
-function App() {
-  return (
-    <ThemeProvider theme={{ mode: 'light' }}>
-      <Button>Light theme button</Button>
-      <Button themeMode="dark">Dark theme button</Button>
-    </ThemeProvider>
-  );
-}
+## 3. How brand tokens flow through app-studio
+
+When a `DesignSystemProvider` mounts, it does two things:
+
+1. Stores the config in React context (so hooks reach the active brand).
+2. **Delegates to app-studio's `<ThemeProvider>`** — passing `theme={config.theme}`, `mode={config.metadata.defaultAppearance}`, and `transparentWrapper` (so the inner provider doesn't repaint the page).
+
+app-studio's `<ThemeProvider>` then:
+- Iterates the `theme` object you gave it and emits one `--theme-<key>` CSS variable per slot (`--theme-primary`, `--theme-canvas`, …).
+- Registers those slots with the color resolver so `getColor('theme-primary')` returns `var(--theme-primary)`.
+- Adds `data-theme="light|dark"` on a div so `[data-theme=…]` color-scale selectors can scope properly.
+
+The DesignSystemProvider also sets `data-design-system="<id>"` and `data-appearance="light|dark"` on a `display:contents` child, purely for downstream CSS hooks.
+
+Inside the subtree, the following CSS variables are live (one per slot in your brand `theme` block):
+
+```
+--theme-primary       (e.g., #FF385C for Airbnb, #1DB954 for Spotify)
+--theme-secondary
+--theme-success
+--theme-warning
+--theme-error
+--theme-canvas
+--theme-surface
+--theme-text
+--theme-muted
+--theme-border
+--theme-onPrimary
 ```
 
-## Using Theme Values
+You don't write `var(--theme-primary)` in components — you write `'theme-primary'`. App-studio's resolver — same code path as for `color-blue-500` and any other token — turns that into `var(--theme-primary)` at render time, which the browser resolves to the brand's hex. The component code doesn't know which brand is active and doesn't have to.
 
-Within components, you can access theme values using the `useTheme` hook:
+### 3.1 Why this matters
 
-```jsx
-import React from 'react';
-import { View, useTheme } from 'app-studio';
+The resolver, not the DesignSystemProvider, is the bridge. That means every code path in app-studio that already handles `theme-*` tokens — alpha suffixes (`theme-primary-100` = 10% mix), token references in theme objects (`theme.primary: 'color-blue-700'` chains correctly), `getColor` / `getColorHex` / `getColorRGBA` helpers, the `useTheme` hook — automatically works for brand tokens too. There's no parallel resolution layer to maintain.
 
-function ThemedComponent() {
+### 3.2 Pseudo-element / browser pseudo-class styling
+
+For things that have historically required a `.css` file — `::placeholder`, `::selection`, `:-webkit-autofill`, `::-webkit-contacts-auto-fill-button`, browser spinner buttons — use app-studio's `_*` props. The resolver handles theme tokens the same way it does for regular props.
+
+```tsx
+<Input
+  _placeholder={{ color: 'color-gray-400', opacity: 1 }}
+  _focus={{ _placeholder: { opacity: 0.7 } }}
+  _selection={{ backgroundColor: 'theme-primary-200' }}
+  _webkitAutofill={{
+    boxShadow: '0 0 0 1000px theme-canvas inset',
+    WebkitTextFillColor: 'theme-text',
+  }}
+/>
+```
+
+Supported pseudos include `_hover`, `_focus`, `_active`, `_focusVisible`, `_focusWithin`, `_disabled`, `_checked`, `_placeholder`, `_selection`, `_before`, `_after`, `_marker`, `_backdrop`, `_webkitAutofill`, `_webkitContactsAutoFillButton`, `_webkitInnerSpinButton`, `_webkitOuterSpinButton`, `_webkitSearchCancelButton`, `_mozPlaceholder`, `_mozFocusInner`, plus group / peer modifiers. Pseudos nest — `_focus={{ _placeholder: {...} }}` compiles to `:focus::placeholder { ... }`.
+
+For alpha tints, prefer the resolver's `theme-primary-100`–`theme-primary-1000` alpha suffix — it generates `color-mix(in srgb, var(--theme-primary) X%, transparent)` internally and stays consistent with the rest of the resolver output.
+
+### 3.3 React inline style
+
+```tsx
+<View style={{ color: 'var(--theme-text)', backgroundColor: 'var(--theme-surface)' }}>
+  ...
+</View>
+```
+
+### 3.4 The `useTheme` hook (app-studio)
+
+```tsx
+import { useTheme } from 'app-studio';
+
+function Snippet() {
   const { getColor, themeMode } = useTheme();
-  
-  const primaryColor = getColor('theme-primary', { themeMode });
-  const textColor = getColor('theme-text', { themeMode });
-  
+  const primary = getColor('theme-primary', { themeMode });   // → 'var(--theme-primary)'
+  return <View backgroundColor={primary} />;
+}
+```
+
+---
+
+## 4. Token reference
+
+### 4.1 Semantic theme tokens (the eleven slots)
+
+| Token              | Meaning                                              |
+|--------------------|------------------------------------------------------|
+| `theme-primary`    | Brand primary — main CTAs, links, focus rings        |
+| `theme-secondary`  | Brand secondary — supporting accents                 |
+| `theme-success`    | Positive state                                       |
+| `theme-warning`    | Caution / pending state                              |
+| `theme-error`      | Destructive / failure state                          |
+| `theme-canvas`     | Page background                                      |
+| `theme-surface`    | Card / elevated surface background                   |
+| `theme-text`       | Primary ink                                          |
+| `theme-muted`      | Secondary ink (helper, captions, disabled-ish)       |
+| `theme-border`     | Hairlines, dividers, default control borders         |
+| `theme-onPrimary`  | Ink that sits on top of `theme-primary` (button text)|
+
+Every slot has matching alpha-suffix variants: `theme-primary-100` (10% primary) through `theme-primary-1000` (100%). app-studio's resolver renders these as `color-mix(in srgb, var(--theme-primary) X%, transparent)`.
+
+Every brand provides all eleven. Use them in priority over neutral-scale tokens whenever the value should respect the brand.
+
+### 4.2 Neutral / static colors
+
+For things that should stay constant across brands (utility chrome, debug overlays):
+
+- `color-white`, `color-black`
+- `color-gray-50` through `color-gray-900`
+- `color-blue-*`, `color-green-*`, `color-red-*`, `color-yellow-*`, `color-purple-*`, `color-orange-*`, etc.
+
+These don't shift with the active brand. Use them sparingly — anything user-visible should prefer `theme-*`.
+
+### 4.3 The `'inherit'` keyword
+
+For label-style text where the color should track the surrounding ink, use `color: 'inherit'`. The form controls (Checkbox, Radio, Switch, FieldLabel, StatusIndicator, Table cells) all default to `inherit` so they remain readable on any brand surface. Brand configs intentionally **omit** `label.color` to let this work — see [component-library.md §7.2](./component-library.md#72-strip-labelcolor-from-brand-component-configs).
+
+---
+
+## 5. Typography
+
+Each brand sets its own typography stack via `config.tokens.typography`:
+
+```jsonc
+"typography": {
+  "fontFamily": "'Inter', system-ui, sans-serif",
+  "monoFamily": "ui-monospace, SF Mono, monospace",
+  "fontSizes":   ["12px","14px","16px","18px","24px","32px","48px"],
+  "fontWeights": ["300","400","500","600","700","800"],
+  "lineHeights": ["1.0","1.2","1.4","1.6"]
+}
+```
+
+The web fonts those families reference must be listed in `metadata.googleFontLinks` so `<Helmet>` injects the link tag (or shipped locally — Vercel's `Geist` is loaded via Google Fonts as a custom font). Commercial brand fonts (Cereal, sohne, Aeonik, Gotham, Uber Move, Spotify Circular, Shopify Sans) gracefully fall through to Inter or system-ui in the listed chain.
+
+Usage in components:
+
+```tsx
+<Text fontSize={16} fontWeight={500}>Body text</Text>
+<Text fontSize={32} fontWeight={700} letterSpacing="-0.02em">Headline</Text>
+```
+
+Or, for brand-aware code:
+
+```tsx
+import { useDesignSystem } from 'src/design-system';
+
+function BrandedHeadline({ children }: { children: React.ReactNode }) {
+  const { config } = useDesignSystem();
   return (
-    <View backgroundColor={primaryColor} color={textColor}>
-      Themed content
-    </View>
+    <Text
+      fontFamily={config.tokens.typography.fontFamily}
+      fontWeight={config.personality?.typeWeight === 'black' ? 800 : 700}
+      letterSpacing={config.personality?.letterSpacing ?? '-0.01em'}
+    >
+      {children}
+    </Text>
   );
 }
 ```
 
-## Theme Color Reference
+---
 
-The theme includes the following color categories:
+## 6. Spacing
 
-### Semantic Colors
+The 4-px grid is the unit. Spacing tokens are exposed via `config.tokens.spacing` as a sorted array:
 
-- `theme-primary`: Primary brand color
-- `theme-secondary`: Secondary brand color
-- `theme-success`: Success state color
-- `theme-warning`: Warning state color
-- `theme-error`: Error state color
-- `theme-info`: Information state color
-- `theme-disabled`: Disabled state color
-
-### Neutral Colors
-
-- `color-white`: White
-- `color-black`: Black
-- `color-gray.50` to `color-gray-900`: Gray scale
-
-### Color Scales
-
-Each color has a scale from 50 (lightest) to 900 (darkest):
-
-- `color-blue.50` to `color-blue-900`
-- `color-green.50` to `color-green-900`
-- `color-red.50` to `color-red-900`
-- `color-yellow.50` to `color-yellow-900`
-- `color-purple.50` to `color-purple-900`
-
-## Typography
-
-The theme includes typography settings:
-
-- Font family: Inter/Geist
-- Font sizes: From 12px to 48px
-- Font weights: From 400 (regular) to 700 (bold)
-- Line heights: From 1.2 to 1.8
-
-Example usage:
-
-```jsx
-import React from 'react';
-import { Text } from '@app-studio/web';
-
-function TypographyExample() {
-  return (
-    <>
-      <Text fontSize={12} fontWeight="normal">Small text</Text>
-      <Text fontSize={16} fontWeight="normal">Normal text</Text>
-      <Text fontSize={24} fontWeight="bold">Large bold text</Text>
-    </>
-  );
-}
+```jsonc
+"spacing": ["2px","4px","8px","12px","16px","24px","32px","56px"]
 ```
 
-## Spacing
+Components should accept padding/margin via the standard `app-studio` shorthand props (`padding`, `gap`, `marginTop`, …) rather than reading the spacing array. The array is documentation/tooling material.
 
-The theme uses a 4px grid system for spacing:
-
-- 4px (extra small)
-- 8px (small)
-- 16px (medium)
-- 24px (large)
-- 32px (extra large)
-
-Example usage:
-
-```jsx
-import React from 'react';
-import { View, Horizontal } from 'app-studio';
-
-function SpacingExample() {
-  return (
-    <View padding={16}>
-      <Horizontal gap={8}>
-        <View width={50} height={50} backgroundColor="theme-primary" />
-        <View width={50} height={50} backgroundColor="theme-secondary" />
-      </Horizontal>
-    </View>
-  );
-}
+```tsx
+<View padding={16}>
+  <Horizontal gap={8}>
+    <View width={50} height={50} backgroundColor="theme-primary" />
+    <View width={50} height={50} backgroundColor="theme-secondary" />
+  </Horizontal>
+</View>
 ```
 
-## Shapes
+---
 
-The theme includes shape definitions:
+## 7. Shapes (border radius)
 
-- `sharp`: No border radius (0px)
-- `rounded`: Small border radius (4px)
-- `pillShaped`: Pill shape (9999px)
+There are three patterns the design system uses:
 
-Example usage:
+| Token                | Default | Meaning                                            |
+|----------------------|---------|----------------------------------------------------|
+| `shape="square"`     | `0`     | Sharp corners (Nike, SpaceX, Tesla, Uber, Vercel) |
+| `shape="rounded"`    | `8px`   | Soft corners (most brands)                         |
+| `shape="pill"`       | `9999px`| Fully rounded (Revolut, Spotify)                   |
 
-```jsx
-import React from 'react';
-import { Button } from '@app-studio/web';
+A component-level config can also pin its own `borderRadius` per slot, e.g., `card.views.container.borderRadius: 12`. The brand-personality block in each config carries the canonical `cardRadius`, `pillRadius`, `badgeRadius` numbers — pages and helpers consume those when assembling brand-shaped compositions.
 
-function ShapeExample() {
-  return (
-    <>
-      <Button shape="sharp">Sharp Button</Button>
-      <Button shape="rounded">Rounded Button</Button>
-      <Button shape="pillShaped">Pill Button</Button>
-    </>
-  );
-}
+```tsx
+<Button shape="square">Sharp</Button>
+<Button shape="rounded">Rounded (default)</Button>
+<Button shape="pill">Pill</Button>
 ```
 
-## Shadows
+---
 
-The theme includes shadow definitions:
+## 8. Shadows
 
-- `shadow.sm`: Small shadow
-- `shadow.md`: Medium shadow
-- `shadow.lg`: Large shadow
-- `shadow.xl`: Extra large shadow
+Shadows come from `config.tokens.shadows` (a sorted array, lightest first). Component-level configs typically pick an index. The `Shadow` prop type covers `'sm' | 'md' | 'lg' | 'xl'` for components that expose a named shadow scale:
 
-Example usage:
-
-```jsx
-import React from 'react';
-import { Card } from '@app-studio/web';
-
-function ShadowExample() {
-  return (
-    <>
-      <Card shadow="shadow.sm">Small Shadow Card</Card>
-      <Card shadow="shadow.md">Medium Shadow Card</Card>
-      <Card shadow="shadow.lg">Large Shadow Card</Card>
-    </>
-  );
-}
+```tsx
+<Card shadow="sm">Small shadow</Card>
+<Card shadow="md">Medium shadow</Card>
+<Card shadow="lg">Large shadow</Card>
 ```
 
-## Custom Theming
+For bespoke values, pass through `views.container.boxShadow` or inline `style`.
 
-You can customize the theme by providing a custom theme object to the `ThemeProvider`:
+---
 
-```jsx
-import React from 'react';
-import { ThemeProvider } from 'app-studio';
+## 9. Working with the active design-system config
 
-const customTheme = {
-  mode: 'light',
-  colors: {
-    primary: '#6200ee',
-    secondary: '#03dac6',
-    success: '#00c853',
-    warning: '#ffab00',
-    error: '#b00020',
-    info: '#2196f3',
-  },
-  typography: {
-    fontFamily: 'Roboto, sans-serif',
-    fontSize: {
-      xs: 12,
-      sm: 14,
-      md: 16,
-      lg: 20,
-      xl: 24,
-    },
-  },
-  // Add other theme customizations
-};
+For pages that need raw access to the brand:
 
-function App() {
+```tsx
+import { useDesignSystem } from 'src/design-system';
+
+function PageWithBrand() {
+  const { config, configId, isEnabled } = useDesignSystem();
+  if (!isEnabled) return null;
+
   return (
-    <ThemeProvider theme={customTheme}>
-      {/* Your app content */}
-    </ThemeProvider>
-  );
-}
-```
-
-## Component-Specific Styling
-
-You can override the theme for specific components using the `views` prop:
-
-```jsx
-import React from 'react';
-import { Button } from '@app-studio/web';
-
-function CustomStyledButton() {
-  return (
-    <Button
-      views={{
-        container: {
-          backgroundColor: '#6200ee',
-          borderRadius: 8,
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-        },
+    <View
+      style={{
+        backgroundColor: config.theme.canvas,
+        color: config.theme.text,
+        fontFamily: config.tokens.typography.fontFamily,
       }}
     >
-      Custom Styled Button
+      <Heading>{config.metadata.label}</Heading>
+    </View>
+  );
+}
+```
+
+To pre-fetch one component's brand config (to compose a custom variant manually):
+
+```tsx
+import { useDesignSystemComponentProps } from 'src/design-system';
+
+function HeroButton() {
+  const buttonConfig = useDesignSystemComponentProps('button');
+  return (
+    <Button views={{ container: { borderRadius: buttonConfig?.views?.container?.borderRadius } }}>
+      Get started
     </Button>
   );
 }
 ```
 
-## Best Practices
+For the common pattern of merging brand defaults with the user's explicit props (which is what every component does internally), use `useMergedDesignSystemComponentProps` — see [component-library.md §4.2](./component-library.md#42-public-entry--wire-up-the-design-system).
 
-- Use theme variables instead of hardcoded values
-- Use the `useTheme` hook to access theme values
-- Use the `views` prop for component-specific styling
-- Use the `themeMode` prop for component-specific theme mode
-- Follow the spacing grid system (multiples of 4px)
-- Use semantic colors for consistent meaning across the application
+---
+
+## 10. Best practices
+
+- Reference theme tokens (`theme-primary`, `theme-canvas`, …) instead of literal hex.
+- Don't lock label or helper-text color in brand configs — let `inherit` carry the cascade.
+- Use `views` to override component slots; use top-level props for layout/sizing knobs the component exposes.
+- Use `themeMode` on a single component when you intentionally need it to render light/dark against the page.
+- Follow the 4-px spacing grid.
+- Reach for `config.personality` (cornerStyle, typeWeight, accentTreatment, …) when a page needs brand cues that don't fit into 11 colors and slot styling.
+- Verify any new font is loaded via `metadata.googleFontLinks` — otherwise the chain silently falls through.
+
+---
+
+## See also
+
+- [component-library.md](./component-library.md) — how to author components and brand configs.
+- [src/design-system/types.ts](../../src/design-system/types.ts) — TypeScript types for `DesignSystemConfig`, `BrandPersonality`, all component slot maps.
+- [src/design-system/DesignSystemProvider.tsx](../../src/design-system/DesignSystemProvider.tsx) — provider source incl. CSS-var injection.
+- [src/design-system/configs/](../../src/design-system/configs/) — 15 shipped brand configs.

@@ -580,6 +580,10 @@ const ButtonView = React.memo(
         shadow,
         onClick,
         views = {},
+        animation,
+        loaderProps,
+        config: buttonConfig,
+        ariaLabel,
         /* effect props */
         borderMovingDuration = 2,
         borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
@@ -615,18 +619,18 @@ const ButtonView = React.memo(
         );
 
         // Merge with any variant overrides from config
-        if (props.config?.variants) {
-          Object.keys(props.config.variants).forEach((v) => {
+        if (buttonConfig?.variants) {
+          Object.keys(buttonConfig.variants).forEach((v) => {
             if (basePalette[v as Variant]) {
               basePalette[v as Variant] = deepMerge(
                 basePalette[v as Variant],
-                props.config.variants[v]
+                buttonConfig.variants[v]
               );
             }
           });
         }
         return basePalette;
-      }, [mainColorKey, textColorKey, reversed, theme, props.config?.variants]);
+      }, [mainColorKey, textColorKey, reversed, theme, buttonConfig?.variants]);
 
       const base = palette[variant];
       const finalContentColor = (base?.color as string) ?? textColorKey;
@@ -654,7 +658,7 @@ const ButtonView = React.memo(
       return (
         <StandardButton
           variant={variant}
-          animation={props.animation}
+          animation={animation}
           to={to}
           isDisabled={isDisabled}
           isLoading={isLoading}

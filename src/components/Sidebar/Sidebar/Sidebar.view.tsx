@@ -76,6 +76,9 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
               justifyContent="center"
               width="32px"
               height="32px"
+              borderWidth="1px"
+              borderStyle="solid"
+              borderColor="color-gray-200"
               borderRadius="4px"
               backgroundColor="transparent"
               cursor="pointer"
@@ -107,6 +110,9 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
               justifyContent="center"
               width="32px"
               height="32px"
+              borderWidth="1px"
+              borderStyle="solid"
+              borderColor="color-gray-200"
               borderRadius="4px"
               backgroundColor="transparent"
               cursor="pointer"
@@ -176,10 +182,14 @@ export const SidebarView: React.FC<SidebarProps> = ({
   hasBackdrop = true,
   expandedWidth,
   collapsedWidth,
+  breakpoint,
   breakpointBehavior = 'overlay',
   elevation = 'none',
   transitionPreset = 'normal',
   ariaLabel = 'Sidebar navigation',
+  showToggleButton,
+  toggleExpanded,
+  expand,
   isExpanded,
   isMobile,
   collapse,
@@ -255,6 +265,7 @@ export const SideBarNavItem = ({
   icon,
   label,
   isActive = false,
+  isDisabled = false,
   badge,
   views,
   ariaLabel,
@@ -269,14 +280,24 @@ export const SideBarNavItem = ({
       padding="8px 12px"
       borderRadius="4px"
       backgroundColor={isActive ? 'color-blue-50' : 'transparent'}
-      color={isActive ? 'color-blue-600' : 'color-gray-700'}
+      color={
+        isDisabled
+          ? 'color-gray-400'
+          : isActive
+          ? 'color-blue-600'
+          : 'color-gray-700'
+      }
       fontWeight={isActive ? 'bold' : 'normal'}
-      cursor="pointer"
+      cursor={isDisabled ? 'not-allowed' : 'pointer'}
+      opacity={isDisabled ? 0.6 : 1}
       aria-label={ariaLabel}
+      aria-disabled={isDisabled || undefined}
       on={{
-        hover: {
-          backgroundColor: isActive ? 'color-blue-50' : 'color-gray-100',
-        },
+        hover: isDisabled
+          ? {}
+          : {
+              backgroundColor: isActive ? 'color-blue-50' : 'color-gray-100',
+            },
       }}
       {...props}
     >

@@ -6,13 +6,13 @@
     "sourceTitle": "Design System Inspiration of Nike",
     "defaultAppearance": "light",
     "googleFontLinks": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&display=swap"
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     ]
   },
   "theme": {
     "primary": "#111111",
-    "secondary": "#f5f5f5",
-    "success": "#007d48",
+    "secondary": "#FA5400",
+    "success": "#76E0B5",
     "warning": "#1151ff",
     "error": "#d30005",
     "canvas": "#ffffff",
@@ -46,7 +46,7 @@
       "accent-purple-pale": "#d6d1ff",
       "accent-teal": "#0a7281",
       "accent-pink-deep": "#4c012d",
-      "font-display": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+      "font-display": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
       "font-ui": "'Inter', 'Helvetica Now Text Medium', Helvetica, Arial, sans-serif",
       "font-body": "'Inter', 'Helvetica Now Text', Helvetica, Arial, sans-serif"
     },
@@ -113,7 +113,7 @@
       },
       {
         "name": "success",
-        "value": "#007d48",
+        "value": "#76E0B5",
         "role": "success"
       },
       {
@@ -163,7 +163,7 @@
       }
     ],
     "typography": {
-      "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+      "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
       "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
       "fontSizes": [
         "16px",
@@ -245,7 +245,7 @@
       "views": {
         "container": {
           "borderRadius": 0,
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "borderColor": "theme-primary",
           "letterSpacing": "0.08em",
@@ -253,7 +253,7 @@
           "fontStyle": "italic"
         },
         "content": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.08em",
           "textTransform": "uppercase",
@@ -271,14 +271,14 @@
           "color": "theme-canvas",
           "borderColor": "theme-secondary",
           "borderRadius": 0,
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "letterSpacing": "0.08em",
           "textTransform": "uppercase",
           "fontWeight": 800,
           "fontStyle": "italic"
         },
         "text": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 600
         }
       }
@@ -299,13 +299,13 @@
         },
         "header": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 600,
           "borderColor": "theme-border"
         },
         "content": {
           "color": "theme-muted",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         },
         "footer": {
           "borderColor": "theme-border"
@@ -328,12 +328,12 @@
         },
         "field": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontStyle": "italic",
           "letterSpacing": "0.02em"
         },
         "label": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.02em",
           "textTransform": "uppercase",
@@ -358,12 +358,12 @@
         },
         "field": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontStyle": "italic",
           "letterSpacing": "0.02em"
         },
         "label": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.02em",
           "textTransform": "uppercase",
@@ -388,10 +388,10 @@
         },
         "field": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         },
         "label": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.02em",
           "textTransform": "uppercase",
@@ -417,7 +417,7 @@
           "borderRadius": 0
         },
         "label": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.02em",
           "textTransform": "uppercase",
@@ -442,7 +442,7 @@
           "backgroundColor": "theme-primary"
         },
         "label": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.02em",
           "textTransform": "uppercase",
@@ -466,7 +466,7 @@
           "backgroundColor": "theme-canvas"
         },
         "label": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.02em",
           "textTransform": "uppercase",
@@ -520,7 +520,7 @@
           "backgroundColor": "theme-primary"
         },
         "title": {
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         },
         "activeText": {
           "color": "theme-canvas"
@@ -543,7 +543,7 @@
         },
         "trigger": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         },
         "content": {
           "color": "theme-muted"
@@ -597,7 +597,7 @@
         },
         "fallback": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         }
       }
     },
@@ -610,7 +610,7 @@
         },
         "title": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.02em",
           "textTransform": "uppercase",
@@ -618,7 +618,7 @@
         },
         "description": {
           "color": "theme-muted",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         },
         "icon": {
           "color": "theme-primary"
@@ -632,7 +632,7 @@
         },
         "label": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         }
       }
     },
@@ -664,7 +664,7 @@
         },
         "label": {
           "color": "theme-muted",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         }
       }
     },
@@ -690,14 +690,14 @@
         "container": {
           "backgroundColor": "theme-canvas",
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         },
         "eyebrow": {
           "color": "theme-muted"
         },
         "title": {
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         },
         "description": {
           "color": "theme-muted"
@@ -709,7 +709,7 @@
         "container": {
           "backgroundColor": "theme-canvas",
           "color": "theme-primary",
-          "fontFamily": "'Bebas Neue', 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif"
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
         },
         "section": {
           "backgroundColor": "theme-canvas",

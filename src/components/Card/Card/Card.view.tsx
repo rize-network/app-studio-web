@@ -108,6 +108,7 @@ export const CardView: React.FC<CardProps> = ({
   views,
   style,
   themeMode: elementMode,
+  config,
   ...props
 }) => {
   const theme = useTheme();

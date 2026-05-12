@@ -53,7 +53,7 @@ export const EditToolbar: React.FC<EditToolbarProps> = ({
                   : 'color-gray-100'
                 : 'transparent'
             }
-            hoverStyle={{
+            _hover={{
               backgroundColor: isActive
                 ? isSpecial
                   ? 'color-gray-800'

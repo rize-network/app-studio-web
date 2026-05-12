@@ -23,6 +23,7 @@ import { CarouselContext, useCarouselContext } from './Carousel.context';
 export const CarouselSlide: React.FC<CarouselSlideProps> = ({
   children,
   isActive,
+  index,
   views,
   ...props
 }) => {

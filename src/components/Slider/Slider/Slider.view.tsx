@@ -66,6 +66,8 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
     },
     onChange,
     onDrag,
+    value,
+    defaultValue,
     ...props
   }) => {
     // Assigns the `backgroundColor` prop to `themeColor` for consistent styling across different parts of the slider.

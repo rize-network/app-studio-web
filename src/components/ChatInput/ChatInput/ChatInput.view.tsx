@@ -50,6 +50,17 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
     onAudioRecordingStart,
     onAudioRecordingStop,
 
+    // Non-DOM props from ChatInputProps that must not leak to the underlying div
+    showGuideTip,
+    guideVideoUrl,
+    onGuideClose,
+    onFileBrowse,
+    onUploadProgress,
+    onUploadSuccess,
+    onUploadError,
+    onFileUpload,
+    onPromptExampleSelect,
+
     // Props from state
     value,
     handleChange,
@@ -60,6 +71,9 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
     uploadProgress,
     isDraggingOver,
     uploadedFiles,
+    pendingFiles,
+    getPendingFiles,
+    clearPendingFiles,
     removeUploadedFile,
     setPendingFiles,
     setUploadedFiles,

@@ -40,10 +40,17 @@ import {
 } from 'src/components';
 import type { BrandPersonality } from 'src/components';
 import { Radio } from 'src/components/Form/Radio/Radio';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 type BrandTitleStyle = {
-  highlightStyle: 'background' | 'underline' | 'gradient' | 'outline' | 'glow' | 'solid' | 'default';
+  highlightStyle:
+    | 'background'
+    | 'underline'
+    | 'gradient'
+    | 'outline'
+    | 'glow'
+    | 'solid'
+    | 'default';
   fontWeight: number | string;
   letterSpacing?: string;
   fontStyle?: 'normal' | 'italic';
@@ -211,7 +218,12 @@ const PaletteFrame = ({
         borderStyle="solid"
         borderColor="rgba(0,0,0,0.15)"
       />
-      <Text fontSize={11} fontWeight="700" letterSpacing="0.08em" textTransform="uppercase">
+      <Text
+        fontSize={11}
+        fontWeight="700"
+        letterSpacing="0.08em"
+        textTransform="uppercase"
+      >
         {label}
       </Text>
     </Horizontal>
@@ -301,8 +313,7 @@ const personalitySurfaceStyle = (
       };
     case 'matte':
       return {
-        backgroundColor:
-          palette.appearance === 'dark' ? '#181818' : '#f4f4f4',
+        backgroundColor: palette.appearance === 'dark' ? '#181818' : '#f4f4f4',
       };
     case 'paper':
     default:
@@ -345,20 +356,15 @@ const personalityAccentShadow = (
   return undefined;
 };
 
-const personalityHeadingStyle = (
-  p: BrandPersonality
-): React.CSSProperties => ({
+const personalityHeadingStyle = (p: BrandPersonality): React.CSSProperties => ({
   letterSpacing: p.letterSpacing,
   textTransform: personalityTextTransform(p),
   fontStyle: p.typeStyle,
   fontWeight: personalityFontWeight(p, 'heavy'),
 });
 
-const personalityLabelStyle = (
-  p: BrandPersonality
-): React.CSSProperties => ({
-  letterSpacing:
-    p.typeCase === 'uppercase' ? '0.12em' : '0.06em',
+const personalityLabelStyle = (p: BrandPersonality): React.CSSProperties => ({
+  letterSpacing: p.typeCase === 'uppercase' ? '0.12em' : '0.06em',
   textTransform: 'uppercase',
   fontStyle: p.typeStyle,
   fontWeight: personalityFontWeight(p, 'normal'),
@@ -452,13 +458,7 @@ const componentRadius = (
   return '12px';
 };
 
-const TabIconHeader = ({
-  glyph,
-  badge,
-}: {
-  glyph: string;
-  badge?: string;
-}) => (
+const TabIconHeader = ({ glyph, badge }: { glyph: string; badge?: string }) => (
   <View position="relative" display="inline-flex">
     <View
       width={32}
@@ -629,12 +629,7 @@ const HeroSection = ({ config }: { config: DesignSystemConfig }) => {
         backgroundColor: config.theme.surface,
       }}
     >
-      <Horizontal
-        width="100%"
-        flexWrap="wrap"
-        alignItems="stretch"
-        gap={0}
-      >
+      <Horizontal width="100%" flexWrap="wrap" alignItems="stretch" gap={0}>
         <Vertical
           flex="1 1 360px"
           minWidth={0}
@@ -642,10 +637,7 @@ const HeroSection = ({ config }: { config: DesignSystemConfig }) => {
           gap={20}
           justifyContent="center"
         >
-          <Badge
-            variant="outline"
-            content={`${config.metadata.label} hero`}
-          />
+          <Badge variant="outline" content={`${config.metadata.label} hero`} />
 
           <Title
             key={`${config.metadata.id}-${t.highlightStyle}`}
@@ -675,10 +667,8 @@ const HeroSection = ({ config }: { config: DesignSystemConfig }) => {
                 color: highlightTextColor,
                 fontWeight: t.highlightFontWeight ?? t.fontWeight,
                 style: {
-                  fontStyle:
-                    t.highlightFontStyle ?? t.fontStyle ?? 'normal',
-                  letterSpacing:
-                    t.highlightLetterSpacing ?? t.letterSpacing,
+                  fontStyle: t.highlightFontStyle ?? t.fontStyle ?? 'normal',
+                  letterSpacing: t.highlightLetterSpacing ?? t.letterSpacing,
                   textTransform: t.textTransform ?? 'none',
                 },
               },
@@ -723,9 +713,9 @@ const HeroSection = ({ config }: { config: DesignSystemConfig }) => {
           position="relative"
           overflow="hidden"
           style={{
-            backgroundImage: `linear-gradient(135deg, ${config.theme.primary}, ${
-              config.theme.secondary || config.theme.primary
-            })`,
+            backgroundImage: `linear-gradient(135deg, ${
+              config.theme.primary
+            }, ${config.theme.secondary || config.theme.primary})`,
           }}
         >
           <View
@@ -1140,7 +1130,12 @@ const tierPricingPlans: PricingTier[] = [
     tagline: 'For organizations with security and scale needs.',
     price: 'Custom',
     period: '',
-    features: ['SSO & SCIM', 'Audit logs', 'Dedicated success manager', '99.99% uptime SLA'],
+    features: [
+      'SSO & SCIM',
+      'Audit logs',
+      'Dedicated success manager',
+      '99.99% uptime SLA',
+    ],
     ctaLabel: 'Contact sales',
   },
 ];
@@ -1203,7 +1198,9 @@ const TierPricingCardSample = ({
                     color={palette.onPrimary}
                     style={personalityLabelStyle(personality)}
                   >
-                    {personality.voice.includes('mission') ? 'PRIORITY' : 'POPULAR'}
+                    {personality.voice.includes('mission')
+                      ? 'PRIORITY'
+                      : 'POPULAR'}
                   </Text>
                 </Horizontal>
               </View>
@@ -1242,9 +1239,7 @@ const TierPricingCardSample = ({
               <View
                 width={18}
                 height={18}
-                borderRadius={
-                  personality.cornerStyle === 'sharp' ? 2 : 9999
-                }
+                borderRadius={personality.cornerStyle === 'sharp' ? 2 : 9999}
                 backgroundColor={
                   tier.featured ? 'rgba(255,255,255,0.22)' : palette.primary
                 }
@@ -1321,15 +1316,19 @@ const ProductPricingCardSample = ({
   const density = personalityDensityScale(personality);
   const surface = personalitySurfaceStyle(personality, palette);
   const productName =
-    personality.voice.includes('athletic') || personality.voice.includes('motion')
+    personality.voice.includes('athletic') ||
+    personality.voice.includes('motion')
       ? 'Aero Runner GT'
-      : personality.voice.includes('mission') || personality.voice.includes('futurist')
+      : personality.voice.includes('mission') ||
+        personality.voice.includes('futurist')
       ? 'Module-04 Insulated Jacket'
       : 'Linen Throw Pillow';
   const productMeta =
-    personality.voice.includes('athletic') || personality.voice.includes('motion')
+    personality.voice.includes('athletic') ||
+    personality.voice.includes('motion')
       ? 'Court Black · Mens'
-      : personality.voice.includes('mission') || personality.voice.includes('futurist')
+      : personality.voice.includes('mission') ||
+        personality.voice.includes('futurist')
       ? 'Carbon · Standard fit'
       : 'Stonewashed · Sand';
   return (
@@ -1467,28 +1466,31 @@ const FeaturedPricingCardSample = ({
   const motif = personality.signatureMotif;
   const favoriteIcon = personality.voice.includes('athletic')
     ? '★'
-    : personality.voice.includes('mission') || personality.voice.includes('futurist')
+    : personality.voice.includes('mission') ||
+      personality.voice.includes('futurist')
     ? '◉'
     : '♥';
-  const productName =
-    personality.voice.includes('athletic')
-      ? 'Velocity AirFlow 7'
-      : personality.voice.includes('mission') || personality.voice.includes('futurist')
-      ? 'Sentinel Pro Headset'
-      : personality.voice.includes('refined')
-      ? 'Pulse Studio Monitor'
-      : 'Aurora Wireless Headphones';
-  const productMeta =
-    personality.voice.includes('athletic')
-      ? 'Lightweight knit · 280g'
-      : personality.voice.includes('mission') || personality.voice.includes('futurist')
-      ? 'Mil-spec audio · 60h endurance'
-      : 'Active noise cancelling · 40h battery';
-  const bestSellerLabel =
-    personality.voice.includes('mission') ? 'MISSION PICK' :
-    personality.voice.includes('athletic') ? 'TEAM PICK' :
-    personality.voice.includes('futurist') ? 'SIGNATURE' :
-    'BEST SELLER';
+  const productName = personality.voice.includes('athletic')
+    ? 'Velocity AirFlow 7'
+    : personality.voice.includes('mission') ||
+      personality.voice.includes('futurist')
+    ? 'Sentinel Pro Headset'
+    : personality.voice.includes('refined')
+    ? 'Pulse Studio Monitor'
+    : 'Aurora Wireless Headphones';
+  const productMeta = personality.voice.includes('athletic')
+    ? 'Lightweight knit · 280g'
+    : personality.voice.includes('mission') ||
+      personality.voice.includes('futurist')
+    ? 'Mil-spec audio · 60h endurance'
+    : 'Active noise cancelling · 40h battery';
+  const bestSellerLabel = personality.voice.includes('mission')
+    ? 'MISSION PICK'
+    : personality.voice.includes('athletic')
+    ? 'TEAM PICK'
+    : personality.voice.includes('futurist')
+    ? 'SIGNATURE'
+    : 'BEST SELLER';
 
   return (
     <View position="relative" width="min(100%, 320px)">
@@ -1535,9 +1537,7 @@ const FeaturedPricingCardSample = ({
         right={12}
         width={36}
         height={36}
-        borderRadius={
-          personality.cornerStyle === 'sharp' ? 4 : 9999
-        }
+        borderRadius={personality.cornerStyle === 'sharp' ? 4 : 9999}
         borderWidth={1}
         borderStyle="solid"
         zIndex={2}
@@ -1799,13 +1799,13 @@ const tintColor = (
 ): string => {
   if (isHexColor(color)) return hexToRgba(color, alpha);
   if (color.startsWith('rgba') || color.startsWith('rgb')) {
-    return color.replace(
-      /rgba?\(([^)]+)\)/,
-      (_, inside) => {
-        const parts = inside.split(',').slice(0, 3).map((s: string) => s.trim());
-        return `rgba(${parts.join(', ')}, ${alpha})`;
-      }
-    );
+    return color.replace(/rgba?\(([^)]+)\)/, (_, inside) => {
+      const parts = inside
+        .split(',')
+        .slice(0, 3)
+        .map((s: string) => s.trim());
+      return `rgba(${parts.join(', ')}, ${alpha})`;
+    });
   }
   return appearance === 'dark'
     ? `rgba(255,255,255,${alpha})`
@@ -1841,18 +1841,25 @@ const ColorBlockContentCardSample = ({
     }
   }
 
-  if (personality.accentTreatment === 'gradient' && block.intensity === 'tint') {
+  if (
+    personality.accentTreatment === 'gradient' &&
+    block.intensity === 'tint'
+  ) {
     const a = palette[block.source as keyof SurfacePalette] as string;
     const b = palette.secondary;
     if (isHexColor(a) && isHexColor(b)) {
-      background = `linear-gradient(135deg, ${hexToRgba(a, 0.32)} 0%, ${hexToRgba(
-        b,
+      background = `linear-gradient(135deg, ${hexToRgba(
+        a,
         0.32
-      )} 100%)`;
+      )} 0%, ${hexToRgba(b, 0.32)} 100%)`;
     }
   }
   if (personality.accentTreatment === 'stripe' && block.intensity === 'tint') {
-    const a = tintColor(palette[block.source as keyof SurfacePalette] as string, 0.32, palette.appearance);
+    const a = tintColor(
+      palette[block.source as keyof SurfacePalette] as string,
+      0.32,
+      palette.appearance
+    );
     const b = tintColor(palette.secondary, 0.18, palette.appearance);
     background = `repeating-linear-gradient(135deg, ${a} 0 18px, ${b} 18px 36px)`;
   }
@@ -1878,8 +1885,7 @@ const ColorBlockContentCardSample = ({
           style={{
             ...personalityLabelStyle(personality),
             letterSpacing: '0.12em',
-            fontFamily:
-              'ui-monospace, SFMono-Regular, Menlo, monospace',
+            fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
           }}
         >
           {personality.signatureMotif} {block.slug}
@@ -2024,7 +2030,8 @@ const ContentCardWithBadgeSample = ({
       : tintColor(accent, 0.32, palette.appearance);
 
   const favoriteSymbol =
-    personality.voice.includes('mission') || personality.voice.includes('futurist')
+    personality.voice.includes('mission') ||
+    personality.voice.includes('futurist')
       ? '◉'
       : article.favorite;
   const favoriteColor =
@@ -2092,9 +2099,7 @@ const ContentCardWithBadgeSample = ({
             right={10}
             width={36}
             height={36}
-            borderRadius={
-              personality.cornerStyle === 'sharp' ? 4 : 9999
-            }
+            borderRadius={personality.cornerStyle === 'sharp' ? 4 : 9999}
             borderWidth={1}
             borderStyle="solid"
             alignItems="center"
@@ -2110,11 +2115,7 @@ const ContentCardWithBadgeSample = ({
               backdropFilter: 'blur(6px)',
             }}
           >
-            <Text
-              fontSize={16}
-              color={favoriteColor}
-              style={{ lineHeight: 1 }}
-            >
+            <Text fontSize={16} color={favoriteColor} style={{ lineHeight: 1 }}>
               {favoriteSymbol}
             </Text>
           </View>
@@ -2148,9 +2149,7 @@ const ContentCardWithBadgeSample = ({
           <View
             width={28}
             height={28}
-            borderRadius={
-              personality.cornerStyle === 'sharp' ? 4 : 9999
-            }
+            borderRadius={personality.cornerStyle === 'sharp' ? 4 : 9999}
             style={{
               backgroundColor:
                 palette.appearance === 'dark'
@@ -2197,38 +2196,37 @@ const BrandSnapshotSample = ({
     (config.tokens?.rawCssVars as any)?.display ||
     'inherit';
 
-  const heroTagline =
-    personality.voice.includes('mission')
-      ? 'MAKING LIFE MULTIPLANETARY'
-      : personality.voice.includes('athletic')
-      ? 'JUST DO IT'
-      : personality.voice.includes('refined')
-      ? 'A new standard in payments'
-      : personality.voice.includes('speed')
-      ? 'Built for the makers'
-      : personality.voice.includes('rhythmic')
-      ? 'Music for everyone'
-      : personality.voice.includes('thoughtful')
-      ? 'The connected workspace'
-      : personality.voice.includes('warm')
-      ? 'Belong anywhere'
-      : personality.voice.includes('minimal')
-      ? 'Think different'
-      : personality.voice.includes('commerce')
-      ? 'The platform commerce is built on'
-      : personality.voice.includes('bold-fintech')
-      ? 'Money for the next generation'
-      : personality.voice.includes('trustworthy')
-      ? 'The future of money'
-      : personality.voice.includes('playful')
-      ? 'Nothing great is made alone'
-      : personality.voice.includes('motion')
-      ? 'Get there'
-      : personality.voice.includes('deploy')
-      ? 'Develop. Preview. Ship.'
-      : personality.voice.includes('futurist')
-      ? 'Accelerating the world to sustainable energy'
-      : `${config.metadata.label}`;
+  const heroTagline = personality.voice.includes('mission')
+    ? 'MAKING LIFE MULTIPLANETARY'
+    : personality.voice.includes('athletic')
+    ? 'JUST DO IT'
+    : personality.voice.includes('refined')
+    ? 'A new standard in payments'
+    : personality.voice.includes('speed')
+    ? 'Built for the makers'
+    : personality.voice.includes('rhythmic')
+    ? 'Music for everyone'
+    : personality.voice.includes('thoughtful')
+    ? 'The connected workspace'
+    : personality.voice.includes('warm')
+    ? 'Belong anywhere'
+    : personality.voice.includes('minimal')
+    ? 'Think different'
+    : personality.voice.includes('commerce')
+    ? 'The platform commerce is built on'
+    : personality.voice.includes('bold-fintech')
+    ? 'Money for the next generation'
+    : personality.voice.includes('trustworthy')
+    ? 'The future of money'
+    : personality.voice.includes('playful')
+    ? 'Nothing great is made alone'
+    : personality.voice.includes('motion')
+    ? 'Get there'
+    : personality.voice.includes('deploy')
+    ? 'Develop. Preview. Ship.'
+    : personality.voice.includes('futurist')
+    ? 'Accelerating the world to sustainable energy'
+    : `${config.metadata.label}`;
 
   const ctaPrimary =
     personality.typeCase === 'uppercase' ? 'EXPLORE' : 'Get started';
@@ -2239,7 +2237,13 @@ const BrandSnapshotSample = ({
     <View
       width="100%"
       borderRadius={personality.cardRadius * 2}
-      padding={personality.density === 'spacious' ? 56 : personality.density === 'tight' ? 28 : 40}
+      padding={
+        personality.density === 'spacious'
+          ? 56
+          : personality.density === 'tight'
+          ? 28
+          : 40
+      }
       style={{
         backgroundColor: palette.canvas,
         color: palette.text,
@@ -2337,7 +2341,9 @@ const BrandSnapshotSample = ({
           style={{
             ...personalityHeadingStyle(personality),
             letterSpacing:
-              personality.typeCase === 'uppercase' ? '0.06em' : personality.letterSpacing,
+              personality.typeCase === 'uppercase'
+                ? '0.06em'
+                : personality.letterSpacing,
             maxWidth: 580,
             fontFamily: brandFont,
           }}
@@ -2346,12 +2352,8 @@ const BrandSnapshotSample = ({
         </Text>
         <Horizontal gap={12} flexWrap="wrap" alignItems="center">
           <View
-            paddingHorizontal={
-              personality.density === 'spacious' ? 32 : 24
-            }
-            paddingVertical={
-              personality.density === 'spacious' ? 16 : 14
-            }
+            paddingHorizontal={personality.density === 'spacious' ? 32 : 24}
+            paddingVertical={personality.density === 'spacious' ? 16 : 14}
             borderRadius={personality.pillRadius}
             style={{
               display: 'flex',
@@ -2499,7 +2501,9 @@ const CTACardSample = ({
       width={220}
       height={140}
       borderRadius={20}
-      backgroundColor={palette.appearance === 'dark' ? palette.canvas : palette.text}
+      backgroundColor={
+        palette.appearance === 'dark' ? palette.canvas : palette.text
+      }
       opacity={0.85}
     />
   </Vertical>
@@ -2578,16 +2582,10 @@ const ButtonsSample = ({ palette }: { palette: SurfacePalette }) => (
       </Button>
     </Horizontal>
     <Horizontal gap={12} flexWrap="wrap" alignItems="center">
-      <Button
-        variant="ghost"
-        views={{ container: { color: palette.text } }}
-      >
+      <Button variant="ghost" views={{ container: { color: palette.text } }}>
         Ghost
       </Button>
-      <Button
-        variant="link"
-        views={{ container: { color: palette.primary } }}
-      >
+      <Button variant="link" views={{ container: { color: palette.primary } }}>
         Link
       </Button>
       <Button isDisabled>Disabled</Button>
@@ -2818,11 +2816,7 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
           alignItems="start"
           gap={16}
         >
-          <TextField
-            size="md"
-            label="Name"
-            placeholder="Ada Lovelace"
-          />
+          <TextField size="md" label="Name" placeholder="Ada Lovelace" />
           <Select
             id={`design-system-select-${config.metadata.id}`}
             size="md"
@@ -3082,7 +3076,10 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
         </Horizontal>
       </Section>
 
-      <Section title="Pricing — Featured w/ Badge & Favorite (Light & Dark)" config={config}>
+      <Section
+        title="Pricing — Featured w/ Badge & Favorite (Light & Dark)"
+        config={config}
+      >
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
           <PaletteFrame palette={lightPalette} label="On light surface">
             <FeaturedPricingCardSample
@@ -3112,7 +3109,10 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
         </Horizontal>
       </Section>
 
-      <Section title="Content — Article Cards w/ Badge & Favorite (Light & Dark)" config={config}>
+      <Section
+        title="Content — Article Cards w/ Badge & Favorite (Light & Dark)"
+        config={config}
+      >
         <Vertical gap={20}>
           <PaletteFrame palette={lightPalette} label="On light surface">
             <Horizontal gap={16} flexWrap="wrap" alignItems="stretch">
@@ -3399,7 +3399,8 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
                   <Accordion.Content>
                     <Text color={config.theme.muted}>
                       {Object.keys(config.tokens.rawCssVars).length} raw CSS
-                      variables were extracted from {config.metadata.sourcePath}.
+                      variables were extracted from {config.metadata.sourcePath}
+                      .
                     </Text>
                   </Accordion.Content>
                 </Accordion.Item>

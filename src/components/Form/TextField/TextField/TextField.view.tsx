@@ -15,10 +15,6 @@ import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 import { CloseIcon } from '../../../Icon/Icon';
 import { TextFieldViewProps } from './TextField.props';
 
-/**
- * Input component for text fields
- */
-const TextFieldInput = (props: any) => <Input type="text" {...props} />;
 const TextFieldView: React.FC<TextFieldViewProps> = ({
   id,
   name,
@@ -96,6 +92,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     },
   } as const;
   const fieldView = views?.field || {};
+  const autofillShadow = '0 0 0 1000px var(--theme-canvas) inset';
   const fieldStyles = {
     margin: 0,
     paddingVertical: 0,
@@ -103,11 +100,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     width: '100%',
     minHeight: 'auto',
     border: 'none',
-    on: {
-      focus: {
-        outline: 'none',
-      },
-    },
+    backgroundColor: 'transparent',
     fontSize: fieldSizeStyles[size].fontSize,
     letterSpacing: '-0.01em',
     fontWeight: 400,
@@ -115,11 +108,34 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     cursor: isDisabled ? 'not-allowed' : 'text',
     opacity: isDisabled ? 0.7 : 1,
     transition: 'color 0.2s ease, opacity 0.2s ease',
-    ...fieldView,
-    style: {
-      backgroundColor: 'transparent',
-      ...(fieldView as any).style,
+    _focus: {
+      outline: 'none',
+      _placeholder: {
+        opacity: 0.7,
+      },
     },
+    _placeholder: {
+      color: 'color-gray-400',
+      opacity: 1,
+      transition: 'opacity 0.2s ease-out',
+    },
+    _selection: {
+      backgroundColor:
+        'color-mix(in srgb, var(--theme-primary) 20%, transparent)',
+    },
+    _webkitAutofill: {
+      boxShadow: autofillShadow,
+      WebkitBoxShadow: autofillShadow,
+      WebkitTextFillColor: 'var(--theme-text)',
+      transition: 'background-color 5000s ease-in-out 0s',
+    },
+    _webkitContactsAutoFillButton: {
+      visibility: 'hidden',
+      pointerEvents: 'none',
+      position: 'absolute',
+      right: 0,
+    },
+    ...fieldView,
   };
   const handleFocus = () => {
     setIsFocused(true);
@@ -153,14 +169,13 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     }
     if (typeof document === 'undefined' && onChangeText) onChangeText('');
   };
-  const { container: _shellContainer, content: _shellContent, ...layoutViews } =
-    views || {};
+  const {
+    container: _shellContainer,
+    content: _shellContent,
+    ...layoutViews
+  } = views || {};
   return (
-    <FieldContainer
-      helperText={helperText}
-      error={error}
-      views={layoutViews}
-    >
+    <FieldContainer helperText={helperText} error={error} views={layoutViews}>
       <FieldContent
         label={label}
         size={size}
@@ -196,7 +211,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
               {label}
             </FieldLabel>
           )}
-          <TextFieldInput
+          <Input
+            type="text"
             id={id}
             name={name}
             readOnly={isReadOnly}

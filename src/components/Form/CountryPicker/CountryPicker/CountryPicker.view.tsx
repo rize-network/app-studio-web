@@ -123,6 +123,8 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   setIsHovered = () => {},
   setIsFocused = () => {},
   setValue = () => {},
+  selected,
+  setSelected,
   views = {
     text: {},
     icon: {},

@@ -10,7 +10,7 @@
     ]
   },
   "theme": {
-    "primary": "#0066cc",
+    "primary": "#0071E3",
     "secondary": "#1d1d1f",
     "success": "#0071e3",
     "warning": "#272729",
@@ -45,13 +45,13 @@
       "surface-chip-translucent": "rgba(210, 210, 215, 0.64)",
       "on-primary": "#ffffff",
       "on-dark": "#ffffff",
-      "display": "'Inter', system-ui, -apple-system, sans-serif",
-      "text": "'Inter', system-ui, -apple-system, sans-serif"
+      "display": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
+      "text": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
     },
     "colors": [
       {
         "name": "primary",
-        "value": "#0066cc",
+        "value": "#0071E3",
         "role": "primary"
       },
       {
@@ -156,7 +156,7 @@
       }
     ],
     "typography": {
-      "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
       "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
       "fontSizes": [
         "17px",
@@ -245,7 +245,7 @@
       "views": {
         "container": {
           "borderRadius": 9999,
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "borderColor": "theme-primary",
           "letterSpacing": "-0.022em",
@@ -253,7 +253,7 @@
           "fontStyle": "normal"
         },
         "content": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -271,14 +271,14 @@
           "color": "theme-canvas",
           "borderColor": "theme-secondary",
           "borderRadius": 8,
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "letterSpacing": "-0.022em",
           "textTransform": "none",
           "fontWeight": 300,
           "fontStyle": "normal"
         },
         "text": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 600
         }
       }
@@ -299,13 +299,13 @@
         },
         "header": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 600,
           "borderColor": "theme-border"
         },
         "content": {
           "color": "theme-muted",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         },
         "footer": {
           "borderColor": "theme-border"
@@ -328,12 +328,12 @@
         },
         "field": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.022em"
         },
         "label": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -358,12 +358,12 @@
         },
         "field": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.022em"
         },
         "label": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -388,10 +388,10 @@
         },
         "field": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         },
         "label": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -417,7 +417,7 @@
           "borderRadius": 4
         },
         "label": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -442,7 +442,7 @@
           "backgroundColor": "theme-primary"
         },
         "label": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -466,7 +466,7 @@
           "backgroundColor": "theme-canvas"
         },
         "label": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -520,7 +520,7 @@
           "backgroundColor": "theme-primary"
         },
         "title": {
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         },
         "activeText": {
           "color": "theme-canvas"
@@ -543,7 +543,7 @@
         },
         "trigger": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         },
         "content": {
           "color": "theme-muted"
@@ -597,7 +597,7 @@
         },
         "fallback": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         }
       }
     },
@@ -610,7 +610,7 @@
         },
         "title": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -618,7 +618,7 @@
         },
         "description": {
           "color": "theme-muted",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         },
         "icon": {
           "color": "theme-primary"
@@ -632,7 +632,7 @@
         },
         "label": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         }
       }
     },
@@ -664,7 +664,7 @@
         },
         "label": {
           "color": "theme-muted",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         }
       }
     },
@@ -690,14 +690,14 @@
         "container": {
           "backgroundColor": "theme-canvas",
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         },
         "eyebrow": {
           "color": "theme-muted"
         },
         "title": {
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         },
         "description": {
           "color": "theme-muted"
@@ -709,7 +709,7 @@
         "container": {
           "backgroundColor": "theme-canvas",
           "color": "theme-secondary",
-          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+          "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif"
         },
         "section": {
           "backgroundColor": "theme-canvas",

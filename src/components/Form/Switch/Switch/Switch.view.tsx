@@ -15,6 +15,8 @@ import {
   KnobSizes,
   SliderPadding,
   SliderSizes,
+  ContentSliderSizes,
+  ContentFontSizes,
   ColorSchemes,
   TransitionStyles,
 } from './Switch.style';
@@ -43,9 +45,12 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   ...props
 }) => {
   const checked = typeof isChecked === 'boolean' ? isChecked : value;
+  const hasContent = Boolean(activeChild || inActiveChild);
+  const sliderDimensions = hasContent ? ContentSliderSizes[size] : SliderSizes[size];
   const knobOffset = `${SliderPadding[size].paddingHorizontal}px`;
   const contentSpace = `${SliderPadding[size].paddingHorizontal + 2}px`;
   const contentInset = `calc(${KnobSizes[size].width} + ${SliderPadding[size].paddingHorizontal}px + 4px)`;
+  const contentFontSize = ContentFontSizes[size];
 
   const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!isReadOnly && !isDisabled) {
@@ -146,7 +151,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         // Apply styles
         {...shadow}
         {...SliderPadding[size]}
-        {...SliderSizes[size]}
+        {...sliderDimensions}
         {...views['slider']}
       >
         {/* Active content */}
@@ -161,6 +166,10 @@ const SwitchView: React.FC<SwitchViewProps> = ({
             height="100%"
             width="100%"
             overflow="hidden"
+            fontSize={contentFontSize}
+            lineHeight={1}
+            color="color-white"
+            fontWeight={600}
           >
             {activeChild}
           </View>
@@ -200,6 +209,10 @@ const SwitchView: React.FC<SwitchViewProps> = ({
             height="100%"
             width="100%"
             overflow="hidden"
+            fontSize={contentFontSize}
+            lineHeight={1}
+            color="color-white"
+            fontWeight={600}
           >
             {inActiveChild}
           </View>

@@ -146,9 +146,10 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
     iconSize = 'md',
     buttonPosition = 'right',
     views,
+    onClose: onCloseProp,
     ...props
   }) => {
-    const onClose = props.onClose ? props.onClose : hideModal;
+    const onClose = onCloseProp ? onCloseProp : hideModal;
     const buttonIcon = (
       <View onClick={onClose}>
         <CloseIcon

@@ -6,12 +6,12 @@
     "sourceTitle": "Design System Inspiration of Revolut",
     "defaultAppearance": "light",
     "googleFontLinks": [
-      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600&display=swap"
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     ]
   },
   "theme": {
-    "primary": "#494fdf",
-    "secondary": "#4f55f1",
+    "primary": "#1361F0",
+    "secondary": "#101D31",
     "success": "#16a34a",
     "warning": "#d97706",
     "error": "#e61e49",
@@ -58,13 +58,13 @@
       "danger": "#e23b4a",
       "deep-red": "#8b0000",
       "brown": "#936d62",
-      "font-display": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+      "font-display": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
       "font-ui": "'Inter', system-ui, sans-serif"
     },
     "colors": [
       {
         "name": "primary",
-        "value": "#494fdf",
+        "value": "#1361F0",
         "role": "primary"
       },
       {
@@ -209,7 +209,7 @@
       },
       {
         "name": "warning",
-        "value": "#ec7e00",
+        "value": "#d97706",
         "role": "warning"
       },
       {
@@ -234,7 +234,7 @@
       }
     ],
     "typography": {
-      "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+      "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
       "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
       "fontSizes": [
         "16px",
@@ -310,7 +310,7 @@
       "views": {
         "container": {
           "borderRadius": 9999,
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "borderColor": "theme-primary",
           "letterSpacing": "-0.02em",
@@ -318,7 +318,7 @@
           "fontStyle": "normal"
         },
         "content": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -336,14 +336,14 @@
           "color": "theme-canvas",
           "borderColor": "theme-secondary",
           "borderRadius": 9999,
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "letterSpacing": "-0.02em",
           "textTransform": "none",
           "fontWeight": 700,
           "fontStyle": "normal"
         },
         "text": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 600
         }
       }
@@ -364,13 +364,13 @@
         },
         "header": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 600,
           "borderColor": "theme-border"
         },
         "content": {
           "color": "theme-muted",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "footer": {
           "borderColor": "theme-border"
@@ -393,12 +393,12 @@
         },
         "field": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.02em"
         },
         "label": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -423,12 +423,12 @@
         },
         "field": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.02em"
         },
         "label": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -453,10 +453,10 @@
         },
         "field": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "label": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -482,7 +482,7 @@
           "borderRadius": 9999
         },
         "label": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -507,7 +507,7 @@
           "backgroundColor": "theme-primary"
         },
         "label": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -531,7 +531,7 @@
           "backgroundColor": "theme-canvas"
         },
         "label": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -585,7 +585,7 @@
           "backgroundColor": "theme-primary"
         },
         "title": {
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "activeText": {
           "color": "theme-canvas"
@@ -608,7 +608,7 @@
         },
         "trigger": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "content": {
           "color": "theme-muted"
@@ -662,7 +662,7 @@
         },
         "fallback": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         }
       }
     },
@@ -675,7 +675,7 @@
         },
         "title": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif",
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -683,7 +683,7 @@
         },
         "description": {
           "color": "theme-muted",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "icon": {
           "color": "theme-primary"
@@ -697,7 +697,7 @@
         },
         "label": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         }
       }
     },
@@ -729,7 +729,7 @@
         },
         "label": {
           "color": "theme-muted",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         }
       }
     },
@@ -755,14 +755,14 @@
         "container": {
           "backgroundColor": "theme-canvas",
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "eyebrow": {
           "color": "theme-muted"
         },
         "title": {
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "description": {
           "color": "theme-muted"
@@ -774,7 +774,7 @@
         "container": {
           "backgroundColor": "theme-canvas",
           "color": "theme-text",
-          "fontFamily": "'Inter Tight', 'Aeonik Pro', system-ui, sans-serif"
+          "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "section": {
           "backgroundColor": "theme-canvas",

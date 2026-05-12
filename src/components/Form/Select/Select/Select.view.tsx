@@ -408,6 +408,7 @@ const SelectView: React.FC<SelectViewProps> = ({
   setIsFocused = () => {},
   setHighlightedIndex,
   highlightedIndex,
+  isScrollable,
   ...props
 }) => {
   const {

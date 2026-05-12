@@ -16,6 +16,14 @@ export interface LabelProps extends Omit<ViewProps, 'size'> {
   // Optional `size` prop that can either be one of the predefined `Sizes` type or a custom `number` size value.
   weight?: TextWeights;
   // Optional `weight` prop that defines the font weight of the label using the predefined `TextWeights` type.
+  htmlFor?: string;
+  // Optional `htmlFor` prop forwarded to the underlying <label> element.
+  dropDown?: any;
+  // Optional dropdown configuration passed through by parent fields (TextField, ColorInput, etc.).
+  error?: boolean;
+  // Optional `error` flag forwarded by parent fields via `views?.label` spread.
+  isDisabled?: boolean;
+  // Optional `isDisabled` flag forwarded by parent fields via `views?.label` spread.
 
   // Use index signature to allow any additional properties with `string` keys and values of `any` type, adding flexibility to the `LabelProps` interface.
 }

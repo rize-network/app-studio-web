@@ -15,8 +15,8 @@
     "success": "#27a644",
     "warning": "#5e69d1",
     "error": "#828fff",
-    "canvas": "#010102",
-    "surface": "#0f1011",
+    "canvas": "#08090A",
+    "surface": "#1C1D1F",
     "text": "#f7f8f8",
     "muted": "#8a8f98",
     "border": "#23252a",
@@ -87,7 +87,7 @@
       },
       {
         "name": "canvas",
-        "value": "#010102",
+        "value": "#08090A",
         "role": "canvas"
       },
       {

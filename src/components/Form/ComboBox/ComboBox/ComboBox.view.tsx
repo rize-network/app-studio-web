@@ -45,6 +45,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   isDropdownVisible,
   setIsDropdownVisible,
   isMulti = false,
+  searchPlaceholder,
   // Collects all further props not destructured explicitly.
   ...props
 }) => {

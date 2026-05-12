@@ -15,6 +15,8 @@ const LabelView: React.FC<LabelProps> = ({
   // Returns an Element component with the role of a label, styled dynamically based on incoming props.
   size = 'sm',
   dropDown,
+  error: _error,
+  isDisabled: _isDisabled,
   ...props
   // The fontSize prop for the Element is determined by the 'size' prop passed to LabelView.
 }) => {

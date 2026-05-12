@@ -112,10 +112,10 @@ export const optionStateStyles = {
     backgroundColor: 'color-gray-100',
   },
   selected: {
-    backgroundColor: 'rgba(var(--theme-primary-rgb), 0.1)',
+    backgroundColor: 'theme-primary-100',
   },
   selectedHighlighted: {
-    backgroundColor: 'rgba(var(--theme-primary-rgb), 0.15)',
+    backgroundColor: 'theme-primary-150',
   },
 };
 

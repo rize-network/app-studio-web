@@ -49,9 +49,18 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
   handleEmojiSelect,
   handleSearchChange,
   handleCategoryChange,
+  handleClose,
   triggerRef,
   dropdownRef,
   onChange,
+  onOpen,
+  onClose,
+  onEmojiSelect,
+  customEmojis,
+  closeOnSelect,
+  maxRecentEmojis,
+  value,
+  defaultValue,
   ...props
 }) => {
   // Utilizes the `useTheme` hook to retrieve the `getColor` utility, allowing access to theme-defined color values for consistent styling.

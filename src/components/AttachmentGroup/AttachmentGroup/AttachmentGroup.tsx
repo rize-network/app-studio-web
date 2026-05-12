@@ -131,10 +131,7 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
                 fontSize="12px"
                 lineHeight="16px"
                 color="color-gray-600"
-                truncateText={true}
-                textOverflow="ellipsis"
-                overflow="hidden"
-                whiteSpace="nowrap"
+                maxLines={1}
                 maxWidth="220px"
                 {...views?.name}
               >
@@ -260,9 +257,7 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
                   )}
                   <Text
                     marginTop="4px"
-                    truncateText={true}
-                    textOverflow="ellipsis"
-                    overflow="hidden"
+                    maxLines={1}
                     width={'100%'}
                     {...views?.name}
                   >
