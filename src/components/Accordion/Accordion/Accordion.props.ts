@@ -10,7 +10,7 @@ import {
 export interface AccordionProps
   extends Omit<ViewProps, 'value' | 'defaultValue' | 'onChange'> {
   // Specifies the child elements of the Accordion, typically a collection of AccordionItem components.
-  children: React.ReactNode;
+  children?: React.ReactNode;
   // Determines the accordion's behavior, such as allowing single or multiple items to be open simultaneously.
   type?: AccordionType;
   // Sets the initial open state of the accordion items when the component is uncontrolled.
@@ -70,7 +70,15 @@ export interface AccordionComponentType extends React.FC<AccordionProps> {
   // Represents the Accordion Item sub-component, used for grouping trigger and content.
   Item: React.FC<AccordionItemProps>;
   // Represents the Accordion Trigger sub-component, which acts as the clickable header.
-  Trigger: React.FC<AccordionTriggerProps>;
+  Trigger: React.FC<
+    AccordionTriggerProps & {
+      value?: string;
+      isExpanded?: boolean;
+      isDisabled?: boolean;
+      triggerId?: string;
+      contentId?: string;
+    }
+  >;
   // Represents the Accordion Content sub-component, which holds the collapsible body.
   Content: React.FC<AccordionContentProps>;
 }

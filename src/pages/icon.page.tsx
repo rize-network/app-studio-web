@@ -28,7 +28,7 @@ export const IconPage = () => {
         </Vertical>
 
         <View
-          component="input"
+          as="input"
           placeholder="Search icons..."
           padding={12}
           borderRadius={8}

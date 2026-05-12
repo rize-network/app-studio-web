@@ -81,6 +81,8 @@ export interface ContextMenuItemProps
   onSelect?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   // If true, the menu item will be visually disabled and unclickable.
   isDisabled?: boolean;
+  // If true (when `to` is set), the link will open in a new tab as an external URL.
+  isExternal?: boolean;
   // Customization options for the styling of various parts of the menu item.
   views?: {
     // Custom styles for the menu item's main container.

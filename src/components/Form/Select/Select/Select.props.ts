@@ -47,6 +47,8 @@ export interface SelectViewProps extends SelectProps {
   setIsHovered: Function;
   isFocused: boolean;
   setIsFocused: Function;
+  highlightedIndex?: number;
+  setHighlightedIndex?: Function;
 }
 export interface SelectBoxProps {
   options: Option[];
@@ -67,6 +69,8 @@ export interface ItemProps extends Omit<InputProps, 'size'> {
   option: Option;
   size?: Size;
   style?: SelectStyles;
+  isHovered?: boolean;
+  setIsHovered?: Function;
 }
 export interface HiddenSelectProps extends Omit<InputProps, 'size'> {
   id?: string;
@@ -83,4 +87,6 @@ export interface DropDownProps extends Omit<InputProps, 'size'> {
   callback?: Function;
   options: Option[];
   views?: SelectStyles;
+  highlightedIndex?: number;
+  setHighlightedIndex?: Function;
 }

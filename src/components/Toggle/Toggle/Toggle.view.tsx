@@ -9,7 +9,6 @@ interface Props extends ToggleViewProps {
   };
   backgroundColor?: string; // primary candidate for main color
   color?: string; // 2nd candidate for main color
-  themeMode?: 'light' | 'dark';
 }
 
 const ToggleView: React.FC<Props> = React.memo(

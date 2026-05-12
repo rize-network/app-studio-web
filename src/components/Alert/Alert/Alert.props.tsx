@@ -19,5 +19,4 @@ export interface AlertProps extends ViewProps {
    * Optional theme mode override ('light' or 'dark')
    * If not provided, the component will use the theme mode from context
    */
-  themeMode?: 'light' | 'dark';
 }

@@ -13,7 +13,7 @@ import {
 // Optional React node(s) to be displayed as the button's content.
 import { LoaderProps } from '../../Loader/Loader/Loader.props';
 // Optional string to define the color scheme of the button.
-export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
+export interface ButtonProps extends Omit<$ButtonProps, 'size' | 'onClick' | 'variant'> {
   // Optional React node(s) to be displayed as the button's content.
   children?: React.ReactNode;
   // Optional LoaderProps object to configure the appearance and behavior of the loader animation.
@@ -37,7 +37,11 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional Size to specify the size of the button.
   isIconRounded?: boolean;
   // Optional shadow property that can be a predefined Shadow, Elevation value or custom CSSProperties to apply shadow effects to the button.
-  onClick?: Function;
+  onClick?: (...args: any) => any;
+  // Optional flag indicating the link should open in an external/new tab.
+  isExternal?: boolean;
+  // Optional flag indicating the button renders only an icon (no text label).
+  isIcon?: boolean;
   // Optional Shape to specify the shape of the button (e.g., rounded or square edges).
   size?: Size;
   // Optional string used as an accessible label for screen readers.
@@ -48,7 +52,7 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   ariaLabel?: string;
 
   // Variant to define the stylistic variation of the button.
-  variant?: Variant;
+  variant?: Variant | string;
 
   // Optional animation to apply to the button
   animation?: Animation;

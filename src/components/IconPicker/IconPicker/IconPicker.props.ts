@@ -13,7 +13,7 @@ export interface IconPickerProps extends Omit<ViewProps, 'onChange'> {
   // Supplementary text displayed below the IconPicker for guidance.
   helperText?: string;
   // The currently selected icon's name (controlled component prop).
-  value?: IconName;
+  value?: IconName | string;
   // The initial selected icon's name (uncontrolled component prop).
   defaultValue?: IconName;
   // Callback function triggered when an icon is selected or the value changes.

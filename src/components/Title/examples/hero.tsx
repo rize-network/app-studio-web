@@ -14,7 +14,7 @@ export const HeroTitle = () => {
       borderRadius={8}
       width="100%"
     >
-      <Vertical gap={24} maxWidth={800} marginX="auto">
+      <Vertical gap={24} maxWidth={800} marginHorizontal="auto">
         <Title
           size="xl"
           animate={{

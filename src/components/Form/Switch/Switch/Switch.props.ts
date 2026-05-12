@@ -27,6 +27,10 @@ export interface SwitchProps extends Omit<InputProps, 'size'> {
   size?: Size;
   // The position of the label relative to the switch, either 'left' or 'right'.
   labelPosition?: 'left' | 'right';
+  // Optional visible label/text rendered next to the switch.
+  label?: React.ReactNode;
+  // Optional variant override forwarded by callers/examples.
+  variant?: string;
 }
 // Extends SwitchProps to include properties specific to the switch's view, like hover state.
 export interface SwitchViewProps extends SwitchProps {
@@ -38,4 +42,8 @@ export interface SwitchViewProps extends SwitchProps {
   value?: boolean;
   // Function to update the value of the switch.
   setValue?: Function;
+  // Current on/off state managed by the state hook.
+  on?: boolean;
+  // Setter for the on/off state managed by the state hook.
+  setOn?: Function;
 }

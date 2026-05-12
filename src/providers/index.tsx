@@ -45,33 +45,33 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
   return (
     <ThemeModeContext.Provider value={themeModeValue}>
       <HelmetProvider>
-      <GoogleFontProvider>
-        <ThemeProvider
-          mode={mode}
-          theme={{
-            primary: 'color-blue-700',
-            secondary: 'color-purple-500',
-          }}
-          data-theme={mode}
-        >
-          <ResponsiveProvider
-            breakpoints={{
-              xs: 0,
-              sm: 340,
-              md: 560,
-              lg: 1080,
-              xl: 1300,
+        <GoogleFontProvider>
+          <ThemeProvider
+            mode={mode}
+            theme={{
+              primary: 'color-blue-700',
+              secondary: 'color-purple-500',
             }}
-            devices={{
-              mobile: ['xs', 'sm'],
-              tablet: ['md', 'lg'],
-              desktop: ['lg', 'xl'],
-            }}
+            data-theme={mode}
           >
-            <RouterProvider>{children}</RouterProvider>
-          </ResponsiveProvider>
-        </ThemeProvider>
-      </GoogleFontProvider>
+            <ResponsiveProvider
+              breakpoints={{
+                xs: 0,
+                sm: 340,
+                md: 560,
+                lg: 1080,
+                xl: 1300,
+              }}
+              devices={{
+                mobile: ['xs', 'sm'],
+                tablet: ['md', 'lg'],
+                desktop: ['lg', 'xl'],
+              }}
+            >
+              <RouterProvider>{children}</RouterProvider>
+            </ResponsiveProvider>
+          </ThemeProvider>
+        </GoogleFontProvider>
       </HelmetProvider>
     </ThemeModeContext.Provider>
   );

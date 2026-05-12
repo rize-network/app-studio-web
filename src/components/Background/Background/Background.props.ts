@@ -18,7 +18,7 @@ export interface BackgroundProps extends ViewProps {
     content?: ViewProps;
   };
   // Specifies the theme mode ('light' or 'dark') to apply to the background.
-  themeMode?: 'light' | 'dark';
+
   // Defines the overall shape of the background component.
   shape?: 'square' | 'rounded' | 'pill';
   // Controls the rotation angle of any decorative elements.
@@ -31,6 +31,8 @@ export interface BackgroundProps extends ViewProps {
 export interface BackgroundLayoutProps extends BackgroundProps {
   // Overrides or specifies the shape for the background layout component.
   shape?: 'square' | 'rounded' | 'pill';
+  // Optional design system props forwarded by parent compositions.
+  designProps?: any;
   // Optional styling properties for specific sub-components within the background layout.
   views?: {
     // Optional styling properties for the main container of the layout.
@@ -92,7 +94,7 @@ export interface RipplesProps extends Omit<ViewProps, 'colors'> {
   frequency?: number;
 }
 export interface BackgroundImageProps
-  extends Omit<BackgroundProps, 'position'> {
+  extends Omit<BackgroundProps, 'position' | 'overlay'> {
   // The URL or path to the background image source.
   src: string;
   // Controls the sizing of the background image.
@@ -120,7 +122,7 @@ export interface BackgroundImageProps
   };
 }
 export interface BackgroundVideoProps
-  extends Omit<BackgroundProps, 'position'> {
+  extends Omit<BackgroundProps, 'position' | 'overlay'> {
   // The URL or path to the background video source.
   src: string;
   // A boolean to control whether the video should autoplay.

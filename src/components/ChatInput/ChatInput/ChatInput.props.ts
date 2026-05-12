@@ -338,4 +338,24 @@ export interface ChatInputViewProps extends ChatInputProps {
    * List of suggestions for auto-completion
    */
   suggestions?: Suggestion[];
+
+  /**
+   * Optional text label displayed while in loading state.
+   */
+  loadingText?: string;
+
+  /**
+   * Optional text label displayed on the attachment button / area.
+   */
+  attachmentText?: string;
+
+  /**
+   * Files staged for upload (pending) — surfaced by the state hook.
+   */
+  pendingFiles?: File[];
+
+  /**
+   * Optional error message used by some compositions (e.g. Formik wrapper).
+   */
+  error?: any;
 }

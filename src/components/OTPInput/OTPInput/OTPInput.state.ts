@@ -30,7 +30,7 @@ export const useOTPInputState = ({
   const isControlled = controlledValue !== undefined;
   const initialValue = isControlled ? controlledValue : defaultValue;
   const [value, setInternalValue] = useState<string>(
-    initialValue?.slice(0, length) || ''
+    String(initialValue ?? '').slice(0, length) || ''
   );
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -61,7 +61,7 @@ export const useOTPInputState = ({
     : null;
   useEffect(() => {
     if (isControlled && controlledValue !== value) {
-      setInternalValue(controlledValue?.slice(0, length) || '');
+      setInternalValue(String(controlledValue ?? '').slice(0, length) || '');
     }
   }, [isControlled, controlledValue, length, value]);
   const setValue = useCallback(

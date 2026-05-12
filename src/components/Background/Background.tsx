@@ -2,7 +2,7 @@ import React from 'react';
 import { BackgroundProps } from './Background/Background.props';
 import { BackgroundView } from './Background/Background.view';
 const BackgroundComponent = React.forwardRef<HTMLDivElement, BackgroundProps>(
-  (props, ref) => <BackgroundView {...props} ref={ref} />
+  (props, ref) => <BackgroundView {...(props as any)} ref={ref as any} />
 );
 BackgroundComponent.displayName = 'Background';
 // This file defines the main `Background` component, which utilizes `React.forwardRef` to pass a ref to its underlying view. It then statically extends the `Background` component by attaching various specialized background variants (such as `Layout`, `Aurora`, `Meteors`, etc.) directly from `BackgroundView`, making them accessible as `Background.VariantName` properties.

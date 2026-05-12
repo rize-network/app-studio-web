@@ -385,6 +385,8 @@ export const ContextMenuView: React.FC<
     variant?: Variant;
     disableNativeContextMenu?: boolean;
     views?: any;
+
+    onOpenChange?: (isOpen: boolean) => void;
   } & ViewProps
 > = ({
   children,

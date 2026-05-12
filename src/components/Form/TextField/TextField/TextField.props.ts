@@ -69,4 +69,5 @@ export interface TextFieldViewProps extends TextFieldProps {
   value?: string;
   // Optional function to programmatically set the value of the TextField.
   setValue?: Function;
+  // Theme mode override (light/dark).
 }

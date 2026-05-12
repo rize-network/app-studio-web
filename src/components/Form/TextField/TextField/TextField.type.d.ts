@@ -16,4 +16,6 @@ export type TextFieldStyles = {
   helperText?: CSSProperties;
   // Introduces an optional 'field' style property to modify the styling of the TextField itself.
   field?: CSSProperties;
+  // Optional styling for the inner content shell used by FieldContent.
+  content?: CSSProperties;
 };

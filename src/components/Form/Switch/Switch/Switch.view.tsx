@@ -36,7 +36,7 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   isDisabled = false,
   isReadOnly = false,
   on,
-  setOn,
+  setOn = () => {},
   onChange,
   setValue = () => {},
   setIsHovered = () => {},
@@ -46,7 +46,9 @@ const SwitchView: React.FC<SwitchViewProps> = ({
 }) => {
   const checked = typeof isChecked === 'boolean' ? isChecked : value;
   const hasContent = Boolean(activeChild || inActiveChild);
-  const sliderDimensions = hasContent ? ContentSliderSizes[size] : SliderSizes[size];
+  const sliderDimensions = hasContent
+    ? ContentSliderSizes[size]
+    : SliderSizes[size];
   const knobOffset = `${SliderPadding[size].paddingHorizontal}px`;
   const contentSpace = `${SliderPadding[size].paddingHorizontal + 2}px`;
   const contentInset = `calc(${KnobSizes[size].width} + ${SliderPadding[size].paddingHorizontal}px + 4px)`;

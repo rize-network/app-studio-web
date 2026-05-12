@@ -13,6 +13,8 @@ export interface ToggleProps extends Omit<InputProps, 'size'> {
   variant?: Variant;
   // Optional function that triggers when the toggle state changes, receives the new state as an argument.
   onToggle?: (isToggled: boolean) => void;
+  // Optional style overrides forwarded by callers.
+  views?: any;
 }
 export interface ToggleViewProps extends Omit<ToggleProps, never> {
   // Boolean to indicate whether the toggle component is hovered over by the user.

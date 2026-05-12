@@ -8,5 +8,4 @@ export interface StatusIndicatorProps extends ViewProps {
   // Provides an object to customize the styles of various sub-components within the StatusIndicator.
   views?: StatusIndicatorStyles;
   // Sets the theme mode for the component, allowing it to adapt to 'light' or 'dark' UI environments.
-  themeMode?: 'light' | 'dark';
 }

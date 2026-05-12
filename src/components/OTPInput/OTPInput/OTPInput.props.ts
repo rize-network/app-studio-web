@@ -60,6 +60,8 @@ export interface OTPInputProps extends Omit<InputProps, 'size'> {
   gap?: number;
   // Custom styles to be applied to different parts of the OTP input component.
   views?: OTPInputStyles;
+  // When true, characters are masked (similar to a password input).
+  secureTextEntry?: boolean;
 }
 // Extends OTPInputProps with additional properties specific to the view component's internal state and handlers.
 export interface OTPInputViewProps extends OTPInputProps {
@@ -75,4 +77,6 @@ export interface OTPInputViewProps extends OTPInputProps {
   setIsFocused: (isFocused: boolean) => void;
   // A function to set the hover state of the OTP input.
   setIsHovered: (isHovered: boolean) => void;
+  // Internal flag indicating whether this column is the first input cell.
+  isFirstColumn?: boolean;
 }

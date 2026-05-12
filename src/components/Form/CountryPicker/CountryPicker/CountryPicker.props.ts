@@ -66,6 +66,11 @@ export interface CountryPickerViewProps extends CountryPickerProps {
   newOptions?: Array<Country>;
   // Setter function for new options
   setNewOptions?: (newOptions: Array<Country>) => void;
+  // Current selected value managed by the state hook
+  value?: string;
+  // Setter for the value managed by the state hook
+  setValue?: Function;
+  // Theme mode override (light/dark)
 }
 // Defines properties for DropDown excluding 'size' from InputProps for customization
 export interface CountryPickerDropDownProps extends Omit<InputProps, 'size'> {

@@ -11,6 +11,8 @@ export interface ToggleGroupProps extends Omit<InputProps, 'size'> {
   variant?: Variant;
   // Optional callback function that fires when the active toggle changes, providing the IDs of active toggles.
   onToggleChange?: (activeIds: string[]) => void;
+  // Optional style overrides forwarded by callers.
+  views?: any;
 }
 // Interface extending ToggleGroup props for use in the ToggleGroupView component.
 export interface ToggleGroupViewProps extends Omit<ToggleGroupProps, ''> {

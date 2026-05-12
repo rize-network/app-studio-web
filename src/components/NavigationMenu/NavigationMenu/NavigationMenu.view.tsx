@@ -174,7 +174,7 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
     return (
       <View
         as={item.href ? 'a' : 'div'}
-        to={item.href}
+        href={item.href}
         onClick={handleClick}
         cursor={item.disabled ? 'not-allowed' : 'pointer'}
         opacity={item.disabled ? 0.6 : 1}

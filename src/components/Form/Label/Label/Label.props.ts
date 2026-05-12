@@ -24,6 +24,10 @@ export interface LabelProps extends Omit<ViewProps, 'size'> {
   // Optional `error` flag forwarded by parent fields via `views?.label` spread.
   isDisabled?: boolean;
   // Optional `isDisabled` flag forwarded by parent fields via `views?.label` spread.
+  helperText?: React.ReactNode;
+  // Optional helper text passed through by parent fields.
+  views?: any;
+  // Optional `views` style overrides forwarded by parent fields (no narrowed shape — accepts whatever the parent spreads).
 
   // Use index signature to allow any additional properties with `string` keys and values of `any` type, adding flexibility to the `LabelProps` interface.
 }

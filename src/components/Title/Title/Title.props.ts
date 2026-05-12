@@ -1,8 +1,11 @@
 import { ViewProps } from 'app-studio';
 import { HighlightStyle, TitleSize, TitleStyles } from './Title.type';
-import { AnimationProps } from 'app-studio/dist/utils/constants';
 // Defines the properties for the Title component, extending standard view properties.
 export interface TitleProps extends ViewProps {
+  // Specifies the heading level (h1-h6) for the title.
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  // Centers the title horizontally.
+  centered?: boolean;
   // Indicates whether the title component is currently visible within the viewport, often used for scroll-triggered animations.
   _isInView?: boolean;
   // The content to be rendered inside the Title component, typically text.

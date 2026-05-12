@@ -8,9 +8,13 @@ import {
   SlideDirection,
 } from './Carousel.type';
 // Defines the interface for the main Carousel component's properties, extending ViewProps and omitting its 'position' property.
-export interface CarouselProps extends Omit<ViewProps, 'position'> {
+export interface CarouselProps
+  extends Omit<
+    ViewProps,
+    'position' | 'onChange' | 'direction' | 'transitionDuration'
+  > {
   // An array of React nodes to be rendered as slides within the carousel.
-  children: React.ReactNode[];
+  children?: React.ReactNode[];
   defaultActiveIndex?: number;
   // The controlled active slide index. Use with 'onChange' for controlled component behavior.
   activeIndex?: number;

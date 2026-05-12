@@ -33,7 +33,7 @@ export const ButtonPage = () => {
                 >
                   Theme Tokens
                 </Text>
-                <Horizontal gap={12} wrap="wrap">
+                <Horizontal gap={12} flexWrap="wrap">
                   <Button color="theme-primary">Primary</Button>
                   <Button color="theme-secondary">Secondary</Button>
                   <Button color="theme-success">Success</Button>
@@ -51,7 +51,7 @@ export const ButtonPage = () => {
                 >
                   Color Palette
                 </Text>
-                <Horizontal gap={12} wrap="wrap">
+                <Horizontal gap={12} flexWrap="wrap">
                   <Button color="color-blue-500">Blue 500</Button>
                   <Button color="color-purple-500">Purple 500</Button>
                   <Button color="color-pink-500">Pink 500</Button>
@@ -71,7 +71,7 @@ export const ButtonPage = () => {
                 >
                   Explicit Text Control
                 </Text>
-                <Horizontal gap={12} wrap="wrap">
+                <Horizontal gap={12} flexWrap="wrap">
                   <Button color="color-yellow-400" textColor="color-black">
                     Yellow + Black
                   </Button>
@@ -90,7 +90,7 @@ export const ButtonPage = () => {
           ),
           'Variants & Schemes': <VariantButtons />,
           Shapes: (
-            <Horizontal gap={12} wrap="wrap">
+            <Horizontal gap={12} flexWrap="wrap">
               <Button shape="square" color="theme-primary">
                 square edges
               </Button>

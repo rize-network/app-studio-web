@@ -8,7 +8,9 @@ export interface TableProps {
   caption?: React.ReactNode;
   views?: TableViewStyles;
 }
-export interface TableViewProps extends TableProps, Omit<ViewProps, 'size'> {}
+export interface TableViewProps
+  extends TableProps,
+    Omit<ViewProps, 'size' | 'columns'> {}
 export interface TableLayoutProps {
   Head?: React.FC<any>;
   Body?: React.FC<any>;

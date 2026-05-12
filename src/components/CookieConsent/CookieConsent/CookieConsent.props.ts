@@ -29,5 +29,4 @@ export interface CookieConsentProps extends Omit<ViewProps, 'position'> {
   // Sets the duration in days for which the cookie consent decision will be stored.
   cookieExpiration?: number;
   // Specifies the theme mode ('light' or 'dark') to apply to the cookie consent component.
-  themeMode?: 'light' | 'dark';
 }

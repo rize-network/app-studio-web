@@ -23,7 +23,7 @@ const ProgressBarPage = () => {
         backgroundColor="theme-surface"
         borderRadius={12}
         padding={24}
-        shadow="md"
+        shadow={2}
         animate={fadeInOnView({ delay: '0.2s' })}
       >
         <table

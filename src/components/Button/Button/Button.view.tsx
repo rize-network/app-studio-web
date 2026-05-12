@@ -225,6 +225,8 @@ const StandardButton: React.FC<
     borderMovingGradientColors?: string[];
     animatedStrokeAccentColor?: string;
     animatedStrokeTextColor?: string;
+    resolvedTextColor?: any;
+    content?: React.ReactNode;
   }
 > = ({
   variant,
@@ -299,7 +301,7 @@ const StandardButton: React.FC<
         isDisabled={isDisabled}
         onClick={onClick}
         shadow={shadow}
-        borderWidth={borderWidth}
+        borderWidth={borderWidth as any}
         isAuto={isAuto}
         isFilled={isFilled}
         views={views}
@@ -404,10 +406,10 @@ const StandardButton: React.FC<
             strokeWidth="8px"
             strokeDasharray={`0 ${strokePathLength}`}
             strokeDashoffset={-Math.round(strokePathLength * 0.63)}
-            pathLength={strokePathLength}
+            {...({ pathLength: strokePathLength } as any)}
             on={{
               groupHover: {
-                animate: strokeAnimation,
+                animate: strokeAnimation as any,
               },
             }}
           />
@@ -673,7 +675,7 @@ const ButtonView = React.memo(
           sizeStyles={sizeStyles}
           iconPad={iconPad}
           resolvedTextColor={finalContentColor}
-          content={content}
+          content={content as any}
           size={size}
           mainTone={mainColorKey}
           borderMovingDuration={borderMovingDuration}

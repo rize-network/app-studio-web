@@ -31,7 +31,7 @@ export const PaginationView: React.FC<PaginationProps> = ({
   size = 'md',
   variant = 'default',
   shape = 'rounded',
-  visiblePageNumbers,
+  visiblePageNumbers = [],
   views,
   ...props
 }) => {
@@ -128,8 +128,8 @@ export const PaginationView: React.FC<PaginationProps> = ({
         <ChevronIcon orientation="left" widthHeight={16} />
       </View>
       {}
-      {visiblePageNumbers.map((pageNumber: number, index: number) =>
-        renderPageButton(pageNumber, index)
+      {visiblePageNumbers.map((pageNumber: string | number, index: number) =>
+        renderPageButton(pageNumber as number, index)
       )}
       {}
       <View

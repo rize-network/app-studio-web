@@ -31,4 +31,5 @@ export interface GradientProps extends Omit<ViewProps, 'colors'> {
   children?: React.ReactNode;
   // Provides custom styles for different parts of the gradient component, allowing for theme integration or specific visual adjustments.
   views?: GradientStyles;
+  // Theme mode override (light/dark).
 }

@@ -94,10 +94,10 @@ describe('design system adapters', () => {
     );
 
     expect(merged.variant).toBe('elevated');
-    expect(merged.views.container.style.backgroundColor).toBe(
+    expect((merged.views as any).container.style.backgroundColor).toBe(
       linear?.theme.surface
     );
-    expect(merged.views.container.borderRadius).toBe('32px');
+    expect((merged.views as any).container.borderRadius).toBe('32px');
   });
 });
 

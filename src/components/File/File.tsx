@@ -4,6 +4,7 @@ import { useTheme, Image, ViewProps, ImageProps, View } from 'app-studio';
 export interface FileProps extends ViewProps {
   src: string;
   color?: string;
+
   views?: {
     container?: ViewProps;
     image?: ImageProps;

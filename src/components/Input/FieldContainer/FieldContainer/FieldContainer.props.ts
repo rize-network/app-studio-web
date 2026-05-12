@@ -9,8 +9,9 @@ export interface ContainerProps extends ViewProps {
   children?: React.ReactNode;
   /**
    * Specifies whether the input field should display an error state.
+   * Accepts a boolean flag or an error message string.
    */
-  error?: boolean;
+  error?: boolean | string;
   /**
    * Provides additional information or instructions about the field.
    */

@@ -30,7 +30,7 @@ const OTPInputComponent: React.FC<OTPInputProps> = (props: OTPInputProps) => {
   return (
     <OTPInputView
       {...props}
-      value={displayValue}
+      value={String(displayValue ?? '')}
       setValue={setValue}
       isFocused={isFocused}
       setIsFocused={setIsFocused}

@@ -54,6 +54,8 @@ export interface OverlayProps extends Omit<ViewProps, 'position' | 'isOpen'> {
   isClosePrevented?: boolean;
   // Specifies the positioning strategy for the overlay.
   position?: Position;
+  // Indicates whether the overlay should cover the full screen.
+  isFullScreen?: boolean;
   // Callback function to be executed when the overlay should trigger a close action.
   onClose: () => void;
 }
@@ -74,6 +76,10 @@ export interface HeaderProps extends Omit<ViewProps, 'size'> {
   children?: React.ReactNode;
   // Sets the position of the close button within the header.
   buttonPosition?: CloseButtonPosition;
+  // Optional size override for the close button.
+  buttonSize?: any;
+  // Optional variant override forwarded by callers (tests/examples).
+  variant?: string;
   // Callback function triggered when the header's close button is activated.
   onClose?: () => void;
 }
@@ -87,7 +93,7 @@ export interface ModalLayoutProps {
   onHide?: (name?: string, props?: any) => void;
 }
 // Defines the properties for the modal's main content container.
-export interface ContainerProps extends Omit<ViewProps, 'size'> {
+export interface ContainerProps extends Omit<ViewProps, 'size' | 'position'> {
   // Optional styling properties for nested view components within the container.
   views?: {
     // Styling properties for the container's main view.
@@ -99,6 +105,24 @@ export interface ContainerProps extends Omit<ViewProps, 'size'> {
   shape?: Shape;
   // Indicates whether the container should expand to full screen.
   isFullScreen?: boolean;
+  // Controls the open/closed state of the modal container.
+  isOpen?: boolean;
+  // Callback to close the modal container.
+  onClose?: () => void;
+  // If true, prevents the container from closing the modal on outside click.
+  isClosePrevented?: boolean;
+  // Blur effect applied to the modal backdrop.
+  blur?: number;
+  // Optional variant override forwarded by callers (tests/examples).
+  variant?: string;
+  // Optional close-button size override forwarded by callers.
+  buttonSize?: any;
+  // Optional close-button color override forwarded by callers.
+  buttonColor?: any;
+  // Optional close-button position override forwarded by callers.
+  buttonPosition?: CloseButtonPosition;
+  // Specifies the directional position of the modal on screen.
+  position?: Position;
   // Defines the shadow style or elevation applied to the container.
   shadow?: Shadow | Elevation | ViewProps;
 }
@@ -109,6 +133,12 @@ export interface BodyProps extends ViewProps {
     // Styling properties for the body's main view.
     view?: ViewProps;
   };
+  // Optional close-button color override forwarded by callers (tests/examples).
+  buttonColor?: any;
+  // Optional close-button size override forwarded by callers.
+  buttonSize?: any;
+  // Optional variant override forwarded by callers.
+  variant?: string;
 }
 // Defines the properties for the modal's footer component.
 export interface FooterProps extends ViewProps {

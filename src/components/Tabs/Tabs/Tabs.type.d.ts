@@ -8,7 +8,9 @@ export type TabsVariant = 'underline' | 'segmented' | 'pill';
  */
 export type Tab = {
   /** The text displayed on the tab header/button. */
-  title: string;
+  title?: string;
+  /** Optional label used as an alternative to `title` in some compositions. */
+  label?: React.ReactNode;
   /** Unique value to identify the tab. If not provided, title will be used. */
   value?: string | number;
   /** Optional icon element to display next to the title. */

@@ -70,7 +70,7 @@ const fieldSizeStyles = {
  */
 const Item: React.FC<ItemProps & { isSelected?: boolean }> = ({
   isHovered,
-  setIsHovered,
+  setIsHovered = () => {},
   option,
   size = 'md',
   callback = () => {},
@@ -285,7 +285,7 @@ const DropDown: React.FC<
   options,
   callback = () => {},
   highlightedIndex,
-  setHighlightedIndex,
+  setHighlightedIndex = () => {},
   selectedValue,
 }) => {
   const handleCallback = (option: string) => callback(option);

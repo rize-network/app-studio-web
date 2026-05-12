@@ -94,7 +94,7 @@ test('renders Card with square shape', () => {
 });
 
 test('renders Card with different variants', () => {
-  render(<Card variant="outline">Outline Card</Card>);
+  render(<Card variant="outlined">Outline Card</Card>);
   expect(screen.getByText('Outline Card')).toBeInTheDocument();
 });
 

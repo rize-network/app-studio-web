@@ -35,4 +35,6 @@ export interface PaginationProps extends ViewProps {
   shape?: Shape;
   // Custom styling options for the pagination component. Optional.
   views?: PaginationStyles;
+  // Array of page numbers (or ellipsis markers) to display (provided by usePaginationState). Optional.
+  visiblePageNumbers?: (number | string)[];
 }
