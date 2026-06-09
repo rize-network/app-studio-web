@@ -169,7 +169,7 @@ Following these rules will help maintain the quality, consistency, and developer
 
 
 
-# Create new component for App Studio Web
+# Create new component for App Studio Components
 
 1.  **Component Structure:** Components generally follow a consistent pattern:
     *   `ComponentName/` (Root folder for the component)

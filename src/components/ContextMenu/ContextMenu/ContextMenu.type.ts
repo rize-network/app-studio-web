@@ -45,9 +45,9 @@ export interface ContextMenuContextType {
   // The visual style variant applied to the context menu and its items.
   variant: Variant;
   // An optional React ref object pointing to the DOM element that triggers the context menu.
-  triggerRef?: React.RefObject<HTMLElement>;
+  triggerRef?: React.RefObject<HTMLElement | null>;
   // An optional React ref object pointing to the DOM element containing the context menu content.
-  contentRef?: React.RefObject<HTMLDivElement>;
+  contentRef?: React.RefObject<HTMLDivElement | null>;
   // An optional ID for the context menu content element.
   contentId?: string;
   // An optional function to programmatically close the context menu.

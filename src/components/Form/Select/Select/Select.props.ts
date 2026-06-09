@@ -2,7 +2,8 @@ import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { SelectStyles, Shape, Size, Variant, Option } from './Select.type';
 // Defines the interface for Select component properties, extending from InputProps but omitting 'size'
-export interface SelectProps extends Omit<InputProps, 'size'> {
+export interface SelectProps
+  extends Omit<InputProps, 'size' | 'shadow' | 'value'> {
   // Optional string identifier for the select element
   id?: string;
   // Flag to indicate if the select has an error state
@@ -23,6 +24,12 @@ export interface SelectProps extends Omit<InputProps, 'size'> {
   isReadOnly?: boolean;
   // Boolean to disable the select element
   isDisabled?: boolean;
+  // Boolean to render a clear affordance that resets the selection
+  isClearable?: boolean;
+  // Boolean indicating the field is required for form submission
+  isRequired?: boolean;
+  // Boolean to autofocus the select when it mounts
+  isAutoFocus?: boolean;
   // Function that handles the change event when the selected option(s) change
   onChange?: (value: any) => void;
   // Determines the overall shape of the select box, e.g., rounded or square edges
@@ -37,6 +44,8 @@ export interface SelectProps extends Omit<InputProps, 'size'> {
   shadow?: Shadow | Elevation | ViewProps;
   // Boolean to control whether the select options are scrollable
   isScrollable?: boolean;
+  // Optional ViewProps applied to the field's label element
+  labelProps?: any;
 }
 export interface SelectViewProps extends SelectProps {
   value: string | Array<string>;
@@ -72,7 +81,7 @@ export interface ItemProps extends Omit<InputProps, 'size'> {
   isHovered?: boolean;
   setIsHovered?: Function;
 }
-export interface HiddenSelectProps extends Omit<InputProps, 'size'> {
+export interface HiddenSelectProps extends Omit<InputProps, 'size' | 'value'> {
   id?: string;
   name?: string;
   value: string | Array<string>;

@@ -90,12 +90,12 @@ export const ContextMenuTrigger: React.FC<ContextMenuTriggerProps> = ({
     'aria-haspopup': 'menu' as const,
     'data-disabled': isDisabled ? '' : undefined,
     ...(asChild &&
-      React.isValidElement(children) &&
+      React.isValidElement<{ isDisabled?: boolean }>(children) &&
       children.props.isDisabled === undefined && { isDisabled }),
     ...views?.container,
     ...props,
   };
-  if (asChild && React.isValidElement(children)) {
+  if (asChild && React.isValidElement<Record<string, unknown>>(children)) {
     const child = React.Children.only(children);
     return React.cloneElement(child, { ...triggerProps, ...child.props });
   }

@@ -233,7 +233,7 @@ export const DefaultAgentChatStyles = {
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    backgroundColor: 'color-white-600',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

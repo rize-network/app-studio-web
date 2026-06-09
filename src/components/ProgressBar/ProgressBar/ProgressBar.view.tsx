@@ -32,8 +32,8 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
     strokeWidth = 10,
     // Determines whether to display the progress percentage label, defaulting to false.
     showLabel = false,
-    // Sets the color of the progress label, defaulting to 'theme-text-primary'.
-    labelColor = 'theme-text-primary',
+    // Sets the color of the progress label, defaulting to 'color-black-primary'.
+    labelColor = 'color-black-primary',
     // Enables or disables animation for progress transitions, defaulting to true.
     animated = true,
     // Sets the duration of the animation for progress transitions, defaulting to '0.5s'.

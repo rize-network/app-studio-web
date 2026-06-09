@@ -1,6 +1,10 @@
 import React from 'react';
-import { Element, useInView, Text as DefaultText } from 'app-studio';
-import { AnimationProps } from 'app-studio/dist/utils/constants';
+import {
+  AnimationProps,
+  Element,
+  useInView,
+  Text as DefaultText,
+} from 'app-studio';
 import { TitleProps } from './Title.props';
 import { useTitleState } from './Title.state';
 import {

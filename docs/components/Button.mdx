@@ -4,13 +4,13 @@ A versatile button component for user interaction with various styles, sizes, sh
 
 ### **Import**
 ```tsx
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
 export const DefaultButton = () => (
   <Button onClick={() => alert('Hello, World!')}>Default</Button>
@@ -26,9 +26,9 @@ Variant to define the stylistic variation of the button.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Vertical } from 'app-studio';
-import { Variant } from '@app-studio/web';
+import { Variant } from '@app-studio/components';
 
 export const VariantButtons = () => (
   <Vertical gap={15}>
@@ -56,9 +56,9 @@ Optional Size to specify the size of the button.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Vertical } from 'app-studio';
-import { Size } from '@app-studio/web';
+import { Size } from '@app-studio/components';
 
 export const ButtonSizes = () => (
   <Vertical gap={10}>
@@ -80,9 +80,9 @@ Optional Shape to specify the border radius style of the button.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
-import { Shape } from '@app-studio/web';
+import { Shape } from '@app-studio/components';
 
 export const ShapeButtons = () => (
   <Horizontal gap={15}>
@@ -104,7 +104,7 @@ Boolean to indicate if the button is in a loading state. Shows a loader and disa
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 
 export const LoadingButtons = () => (
@@ -128,7 +128,7 @@ Apply special animation effects to the button.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 
 export const AnimatedButtons = () => (
@@ -167,7 +167,7 @@ Override the main color of the button.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const ColoredButtons = () => (
@@ -189,7 +189,7 @@ Optional React node(s) defining the icon to be displayed within the button.
 
 ```tsx
 import React from 'react';
-import { Button, DustBinIcon } from '@app-studio/web';
+import { Button, DustBinIcon } from '@app-studio/components';
 import { Center } from 'app-studio';
 
 export const IconButtons = () => (
@@ -217,7 +217,7 @@ Optional boolean to indicate if the button is non-interactive/disabled.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
 export const DisabledButton = () => (
   <Button isDisabled onClick={() => alert('Disabled')}>

@@ -53,7 +53,61 @@ You can also pin a single component to a specific mode using the `themeMode` pro
 <Badge themeMode="light">Always light</Badge>
 ```
 
-Brand configs declare their `defaultAppearance` in `metadata` (`light` or `dark`). The design-system showcase respects that when rendering each brand on its native canvas, but also renders an inverted PaletteFrame so you can see how the brand performs on the opposite surface.
+Brand configs declare their `defaultAppearance` in `metadata` (`light` or `dark`). That value only decides **which mode the config opens in** — both modes work regardless (see §2.1). The design-system showcase respects `defaultAppearance` when rendering each brand on its native canvas, but also renders an inverted PaletteFrame so you can see the brand on the opposite surface.
+
+### 2.1 One config, both modes — the adaptive rule
+
+You never write a separate dark config. A single `theme` block serves **both** light and dark, and the dark theme is **derived automatically**. What decides whether a slot flips or stays is the **form of the value** you give it — this is exactly what app-studio's `ThemeProvider` emits ([generateCSSVariables](../../../app-studio/src/providers/Theme.tsx)):
+
+| Value you write in `theme.<slot>` | What app-studio emits        | Behaviour when the mode switches |
+|-----------------------------------|------------------------------|----------------------------------|
+| A **raw hex** — `"#2563eb"`       | `--theme-<slot>: #2563eb`     | **Stays constant.** Identical in light and dark. |
+| A **`color-*` token** — `"color-black"` | `--theme-<slot>: var(--color-black)` | **Flips automatically.** `color-black` → black in light, **white** in dark; `color-white` → black in dark; the `color-gray-*` ramp inverts. |
+
+So the rule is:
+
+> **Want the color to stay the same in both modes?** Use a **hex** — your brand identity (`primary`, `secondary`, status accents, `onPrimary`).
+> **Want it to adapt when the mode flips?** Use a **`color-*` token** — your structural neutrals (`canvas`, `surface`, `text`, `muted`, `border`).
+
+Recommended mapping for a config that works in both modes out of the box:
+
+```jsonc
+"theme": {
+  "primary":   "#2563eb",        // hex  → constant brand color
+  "secondary": "#7c3aed",        // hex  → constant
+  "success":   "#16a34a",        // hex  → constant
+  "warning":   "#d97706",        // hex  → constant
+  "error":     "#dc2626",        // hex  → constant
+  "onPrimary": "#ffffff",        // hex  → constant (ink that sits on primary)
+
+  "canvas":    "color-white",    // → white in light, black in dark
+  "surface":   "color-gray-50",  // → #fafafa in light, near-black in dark
+  "text":      "color-black",    // → black in light, white in dark
+  "muted":     "color-gray-500", // → readable mid-grey in both modes
+  "border":    "color-gray-200"  // → light hairline → dark hairline
+}
+```
+
+Because `theme-canvas` / `theme-text` / `theme-surface` / `theme-border` / `theme-muted` now point at auto-flipping palette variables, **every component that references those tokens adapts for free** — no `themeMode` branching in component code, no second config to maintain.
+
+Two practical notes:
+
+- **Brand slots don't flip, so they must read in *both* modes.** A `primary` chosen only for a white canvas can wash out on black. Pick a `primary` with ≥ 3:1 contrast against both `color-white` and `color-black` (most mid-tone brand colors already pass).
+- **Use a neutral *family* for character.** Prefer a warmer or cooler grey while keeping auto-flip by swapping the family: `color-slate-*` (cool), `color-stone-*` (warm), `color-zinc-*`, `color-neutral-*`. The shade still inverts; only the hue changes.
+- **For body ink, reference `theme-text` / `theme-muted` — never a constant brand slot** like `theme-secondary`. A constant dark `secondary` used as text becomes unreadable when the canvas turns dark.
+- **`primary` and `onPrimary` must use the same *form*** — both hex, or both `color-*`. They are a fill/ink pair; if one flips and the other doesn't, the label disappears in one mode. For a black-or-white brand you may make *both* `color-*` (`primary: color-black`, `onPrimary: color-white`) so the CTA inverts authentically.
+
+### 2.2 Brand = fills, neutrals = foreground
+
+The single rule that keeps **every** brand (including pure black/white ones) coherent on both light and dark surfaces:
+
+> **Brand tokens (`theme-primary`, `theme-secondary`, …) are for *fills*** — they paint a background and pair with an `on*` ink. **Surface-contrasting foreground** (body text, outline borders, dividers, helper text) uses the **neutral** slots (`theme-text`, `theme-muted`, `theme-border`), which flip *with* the surface.
+
+Why: a filled element brings its own background, so its `onPrimary` ink is always correct. But a foreground element (an outline border, a link, an active-tab label) sits *on* the surface — if you colour it with `theme-primary` and the brand's primary happens to equal the surface (a monochrome brand: black primary on a dark card), it vanishes. Neutral ink flips with the surface, so it is always readable.
+
+A brand-coloured foreground accent (a link, an active-tab label, an alert icon) using `theme-primary` is fine **for chromatic brands**. For monochrome brands, use `theme-text` or a chromatic `theme-secondary` for those accents instead.
+
+> **Note (resolver fix).** `theme-*` tokens flip correctly in **both** modes, including inside nested, mode-pinned providers (e.g. a "show on dark surface" frame). app-studio re-declares the token-referencing `--theme-*` variables inside the `[data-theme]` blocks so they re-substitute per mode — see [generateCSSVariables](../../../app-studio/src/providers/Theme.tsx). A `theme-text` foreground is therefore as reliable as a `color-black` one.
 
 ---
 
@@ -155,17 +209,22 @@ function Snippet() {
 
 Every slot has matching alpha-suffix variants: `theme-primary-100` (10% primary) through `theme-primary-1000` (100%). app-studio's resolver renders these as `color-mix(in srgb, var(--theme-primary) X%, transparent)`.
 
-Every brand provides all eleven. Use them in priority over neutral-scale tokens whenever the value should respect the brand.
+Every brand provides all eleven. Use them in priority over neutral-scale tokens whenever the value should respect the brand. Which of these slots flip with the theme mode and which stay constant is decided by the config (see [§2.1](#21-one-config-both-modes--the-adaptive-rule)): the recommended setup makes `canvas`, `surface`, `text`, `muted`, `border` adaptive and keeps `primary`, `secondary`, `success`, `warning`, `error`, `onPrimary` constant.
 
-### 4.2 Neutral / static colors
+### 4.2 Neutral / palette colors (`color-*`)
 
-For things that should stay constant across brands (utility chrome, debug overlays):
+The `color-*` family is **brand-independent but theme-mode-aware** — the same token resolves to different values in light vs dark:
 
-- `color-white`, `color-black`
-- `color-gray-50` through `color-gray-900`
+- `color-white` (→ black in dark), `color-black` (→ white in dark)
+- `color-gray-50` … `color-gray-900` (the ramp inverts: `50` is lightest in light mode, darkest in dark mode), plus the tinted families `color-slate-*`, `color-stone-*`, `color-zinc-*`, `color-neutral-*`
 - `color-blue-*`, `color-green-*`, `color-red-*`, `color-yellow-*`, `color-purple-*`, `color-orange-*`, etc.
 
-These don't shift with the active brand. Use them sparingly — anything user-visible should prefer `theme-*`.
+You force a fixed mode with the `light-*` / `dark-*` prefix (`light-gray-100` stays light even in dark mode) — rarely needed.
+
+Two ways to use them:
+
+1. **Inside a `theme` slot** (`"text": "color-black"`) — this is how you make a brand slot *adaptive* ([§2.1](#21-one-config-both-modes--the-adaptive-rule)).
+2. **Directly in a component** (`backgroundColor="color-gray-50"`) — for utility chrome that should track the mode but not the brand. Use sparingly; anything brand-facing should prefer `theme-*`.
 
 ### 4.3 The `'inherit'` keyword
 
@@ -280,22 +339,22 @@ For pages that need raw access to the brand:
 import { useDesignSystem } from 'src/design-system';
 
 function PageWithBrand() {
-  const { config, configId, isEnabled } = useDesignSystem();
+  const { config, isEnabled } = useDesignSystem();
   if (!isEnabled) return null;
 
   return (
     <View
-      style={{
-        backgroundColor: config.theme.canvas,
-        color: config.theme.text,
-        fontFamily: config.tokens.typography.fontFamily,
-      }}
+      backgroundColor="theme-canvas"
+      color="theme-text"
+      fontFamily={config.tokens.typography.fontFamily}
     >
       <Heading>{config.metadata.label}</Heading>
     </View>
   );
 }
 ```
+
+> **Don't read `config.theme.canvas` / `config.theme.text` into a raw React `style={{}}`.** Those slots may hold token strings like `"color-white"` (adaptive), which the browser can't resolve as CSS. Pass them as app-studio **props** (`backgroundColor="theme-canvas"`) so the resolver turns them into the right per-mode value. Raw `config.theme.*` values are only safe in `style` when you know the brand pinned a literal hex.
 
 To pre-fetch one component's brand config (to compose a custom variant manually):
 
@@ -330,6 +389,7 @@ For the common pattern of merging brand defaults with the user's explicit props 
 
 ## See also
 
+- [design-system.md](./design-system.md) — **step-by-step recipe to generate a new brand config** (agent-facing build instructions).
 - [component-library.md](./component-library.md) — how to author components and brand configs.
 - [src/design-system/types.ts](../../src/design-system/types.ts) — TypeScript types for `DesignSystemConfig`, `BrandPersonality`, all component slot maps.
 - [src/design-system/DesignSystemProvider.tsx](../../src/design-system/DesignSystemProvider.tsx) — provider source incl. CSS-var injection.

@@ -4,14 +4,14 @@ Displays various types of messages with customizable content, icons, actions, an
 
 ### **Import**
 ```tsx
-import { Message } from '@app-studio/web';
+import { Message } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
-import { showMessage } from '@app-studio/web';
+import { Button } from '@app-studio/components';
+import { showMessage } from '@app-studio/components';
 // This is a functional component named 'DefaultDemo' that renders a Button component from the '../../Button/Button' path.
 export const DefaultDemo = () => {
   return (
@@ -39,9 +39,9 @@ The secondary text content of the message.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
-import { showMessage } from '@app-studio/web';
+import { showMessage } from '@app-studio/components';
 
 export const SubtitleDemo = () => {
   return (
@@ -69,10 +69,10 @@ The type or category of the message, influencing its styling.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
-import { showMessage } from '@app-studio/web';
-import { MessageType } from '@app-studio/web';
+import { showMessage } from '@app-studio/components';
+import { MessageType } from '@app-studio/components';
 
 export const VariantDemo = () => {
   return (
@@ -105,9 +105,9 @@ The main title or heading of the message.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
-import { showMessage } from '@app-studio/web';
+import { showMessage } from '@app-studio/components';
 
 export const TitleDemo = () => {
   return (
@@ -129,10 +129,10 @@ Determines if the message can be manually closed by the user.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
-import { showMessage } from '@app-studio/web';
+import { showMessage } from '@app-studio/components';
 
 export const IsClosableDemo = () => {
   return (
@@ -167,8 +167,8 @@ A callback function to execute when the action button is clicked.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
-import { showMessage } from '@app-studio/web';
+import { Button } from '@app-studio/components';
+import { showMessage } from '@app-studio/components';
 // Defines the `ActionDemo` functional component that encapsulates the button interaction logic.
 export const ActionDemo = () => {
   return (
@@ -197,9 +197,9 @@ Determines if an icon corresponding to the message variant should be displayed.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
-import { showMessage } from '@app-studio/web';
+import { showMessage } from '@app-studio/components';
 
 export const ShowIconDemo = () => {
   return (
@@ -230,9 +230,9 @@ The duration in milliseconds after which the message automatically hides.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
-import { showMessage } from '@app-studio/web';
+import { showMessage } from '@app-studio/components';
 
 export const TimeoutDemo = () => {
   return (

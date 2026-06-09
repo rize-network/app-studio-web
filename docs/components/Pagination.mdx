@@ -4,13 +4,13 @@ A pagination component for navigating through pages with customizable appearance
 
 ### **Import**
 ```tsx
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const DefaultPagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +33,7 @@ The current page number (1-based).
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 import { Text, Vertical } from 'app-studio';
 
 export const ControlledPagination = () => {
@@ -60,7 +60,7 @@ The total number of pages.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const TotalPagesPagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -83,7 +83,7 @@ Callback function when page changes.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const PageChangePagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -108,7 +108,7 @@ The number of items per page.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const PageSizePagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -134,7 +134,7 @@ Available page size options.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const PageSizeOptionsPagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -167,7 +167,7 @@ Whether to show the page size selector.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const WithPageSizeSelector = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -194,7 +194,7 @@ Whether to show the page information text.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const WithPageInfo = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -218,7 +218,7 @@ The maximum number of page buttons to show.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 
 export const MaxPageButtons = () => {
@@ -251,7 +251,7 @@ Whether to show the first and last page buttons.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const FirstLastButtons = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -276,7 +276,7 @@ The size of the pagination component.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 
 export const SizedPaginations = () => {
@@ -307,7 +307,7 @@ The visual style variant of the pagination component.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 
 export const VariantPaginations = () => {
@@ -338,7 +338,7 @@ The shape of the pagination buttons.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 
 export const ShapedPaginations = () => {
@@ -367,7 +367,7 @@ Custom styles for different parts of the pagination component.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 
 export const StyledPagination = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -399,7 +399,7 @@ A fully featured pagination with all options.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 import { Vertical, Text } from 'app-studio';
 
 export const CompletePagination = () => {
@@ -449,7 +449,7 @@ Common use case with a data table.
 
 ```tsx
 import React, { useState } from 'react';
-import { Pagination } from '@app-studio/web';
+import { Pagination } from '@app-studio/components';
 import { Vertical, Text } from 'app-studio';
 
 export const TablePagination = () => {

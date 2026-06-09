@@ -135,7 +135,7 @@ A component for rendering animated and highlighted titles in hero sections and o
 
 **Example:**
 ```tsx
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 
 const HeroTitle = () => (
   <Title
@@ -202,7 +202,7 @@ A customizable chat input field with support for file uploads, prompt examples, 
 
 **Example:**
 ```tsx
-import { ChatInput } from '@app-studio/web';
+import { ChatInput } from '@app-studio/components';
 import { useState } from 'react';
 
 const ChatExample = () => {

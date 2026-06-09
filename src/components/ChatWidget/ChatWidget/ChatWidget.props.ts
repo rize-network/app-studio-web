@@ -6,7 +6,7 @@ import type {
   ChatWidgetStyles,
 } from './ChatWidget.type';
 // Defines the public properties available for the ChatWidget component, extending from ViewProps and omitting its 'size' property.
-export interface ChatWidgetProps extends Omit<ViewProps, 'size'> {
+export interface ChatWidgetProps extends Omit<ViewProps, 'size' | 'onSubmit'> {
   // An optional array of message objects to be displayed within the chat widget.
   messages?: Message[];
   // An optional controlled value for the chat input field.
@@ -53,7 +53,7 @@ export interface ChatWidgetViewProps extends ChatWidgetProps {
   // Internal handler function to manage the submission of a chat message.
   handleSubmit: (e?: React.FormEvent) => void;
   // A React ref object to directly access the HTMLTextAreaElement of the input field.
-  inputRef: React.RefObject<HTMLTextAreaElement>;
+  inputRef: React.RefObject<HTMLTextAreaElement | null>;
   // A React ref object to directly access the HTMLDivElement containing the chat messages, often used for scrolling.
-  messagesRef: React.RefObject<HTMLDivElement>;
+  messagesRef: React.RefObject<HTMLDivElement | null>;
 }

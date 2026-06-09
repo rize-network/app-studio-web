@@ -1,0 +1,230 @@
+/**
+ * Icon (React Native) – mirrors Icon.tsx's public surface but resolves icons
+ * statically through `lucide-react-native` instead of the web-only
+ * `lucide-react/dynamicIconImports` lazy loader.
+ *
+ * All named-icon exports (UserIcon, HomeIcon, …) below are byte-for-byte
+ * identical to the web file.
+ */
+
+import { useTheme, ViewProps, View } from 'app-studio';
+import React, { useMemo } from 'react';
+import * as LucideIcons from 'lucide-react-native';
+import type { LucideProps } from 'lucide-react-native';
+
+// IconName: accept any string here – consumers using TS will still get
+// autocomplete from the web-side type definition.
+export type IconName = keyof typeof LucideIcons | string;
+
+export interface IconProps
+  extends Omit<ViewProps, 'orientation' | 'name' | 'size'> {
+  color?: string;
+  filled?: boolean;
+  orientation?: 'left' | 'right' | 'up' | 'down';
+  name?: IconName;
+  strokeWidth?: number | string;
+  size?: number | string;
+  fallback?: React.ReactNode;
+}
+
+const toPascalCase = (s: string) =>
+  s
+    .split(/[-_ ]+/)
+    .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+    .join('');
+
+const IconWrapper: React.FC<IconProps> = React.memo(
+  ({
+    widthHeight,
+    color = 'currentColor',
+    transform,
+    orientation = 'up',
+    children,
+    ...rest
+  }) => (
+    <View
+      widthHeight={widthHeight}
+      color={color}
+      alignItems="center"
+      justifyContent="center"
+      transform={
+        transform
+          ? (transform as any)
+          : orientation === 'left'
+          ? ([{ rotate: '-90deg' }] as any)
+          : orientation === 'right'
+          ? ([{ rotate: '90deg' }] as any)
+          : orientation === 'down'
+          ? ([{ rotate: '180deg' }] as any)
+          : undefined
+      }
+      {...rest}
+    >
+      {children}
+    </View>
+  )
+);
+
+export const Icon: React.FC<IconProps> = React.memo(
+  ({
+    name = 'circle',
+    widthHeight = 24,
+    color = 'currentColor',
+    filled = false,
+    strokeWidth = 1,
+    size,
+    children,
+    fallback,
+    ...props
+  }) => {
+    const { getColor } = useTheme();
+    const iconSize = (size ?? widthHeight) as any;
+
+    const lucideProps: LucideProps = useMemo(() => {
+      const themeColor = getColor(color) as string;
+      return {
+        color: themeColor,
+        fill: filled ? themeColor : 'none',
+        strokeWidth: strokeWidth as any,
+        size: typeof iconSize === 'number' ? iconSize : 24,
+      };
+    }, [filled, color, strokeWidth, iconSize, getColor]);
+
+    if (!name) {
+      return (
+        <IconWrapper widthHeight={widthHeight} color={color} {...props}>
+          {children}
+        </IconWrapper>
+      );
+    }
+
+    const pascalName = toPascalCase(String(name));
+    const LucideIcon = (LucideIcons as any)[pascalName];
+
+    if (!LucideIcon) {
+      return (
+        <IconWrapper widthHeight={iconSize} color={color} {...props}>
+          {fallback || children || null}
+        </IconWrapper>
+      );
+    }
+
+    return (
+      <IconWrapper widthHeight={iconSize} color={color} {...props}>
+        <LucideIcon {...lucideProps} />
+      </IconWrapper>
+    );
+  }
+);
+
+const createIcon = (name: IconName, defaultProps: Partial<IconProps> = {}) => {
+  const IconComponent: React.FC<Omit<IconProps, 'name'>> = (props) => (
+    <Icon name={name} {...defaultProps} {...props} />
+  );
+  IconComponent.displayName = `${String(name)}Icon`;
+  return IconComponent;
+};
+
+export const UserIcon = createIcon('user', { filled: false });
+export const HelpIcon = createIcon('circle-help', { filled: false });
+export const FolderIcon = createIcon('folder', { filled: false });
+export const ChevronIcon = createIcon('chevron-up', { filled: false });
+export const DragHandleIcon = createIcon('grip-vertical', { filled: false });
+export const FileIcon = createIcon('file', { filled: false });
+export const VideoIcon = createIcon('video', { filled: false });
+export const ImageIcon = createIcon('image', { filled: false });
+export const AudioIcon = createIcon('volume', { filled: false });
+export const TwitterIcon = createIcon('twitter', { filled: false });
+export const XIcon = createIcon('x', { filled: false });
+export const TwitchIcon = createIcon('twitch', { filled: false });
+export const CloseIcon = createIcon('x', { filled: false, strokeWidth: 2 });
+export const InstagramIcon = createIcon('instagram', { filled: false });
+export const YoutubeIcon = createIcon('youtube', { filled: false });
+export const FacebookIcon = createIcon('facebook', { filled: false });
+export const LinkedinIcon = createIcon('linkedin', { filled: false });
+export const ThreadsIcon = createIcon('at-sign', { filled: false });
+export const MinusIcon = createIcon('minus', { filled: false });
+export const InfoIcon = createIcon('info', { filled: false });
+export const PlayIcon = createIcon('play', { filled: false });
+export const PauseIcon = createIcon('pause', { filled: false });
+export const HeartIcon = createIcon('heart', { filled: false });
+export const StarIcon = createIcon('star', { filled: false });
+export const SaveIcon = createIcon('save', { filled: false });
+export const WarningIcon = createIcon('triangle-alert', { filled: false });
+export const BatteryIcon = createIcon('battery', { filled: false });
+export const BookmarkIcon = createIcon('bookmark', { filled: false });
+export const CloudIcon = createIcon('cloud', { filled: false });
+export const CopyIcon = createIcon('copy', { filled: false });
+export const DustBinIcon = createIcon('trash', { filled: false });
+export const DeleteIcon = DustBinIcon;
+export const EditIcon = createIcon('edit', { filled: false });
+export const MicrophoneIcon = createIcon('mic', { filled: false });
+export const StopIcon = createIcon('square', { filled: false });
+export const SendIcon = createIcon('send', { filled: false });
+export const LoadingSpinnerIcon = createIcon('loader', { filled: false });
+export const AttachmentIcon = createIcon('paperclip', { filled: false });
+export const SearchIcon = createIcon('search', { filled: false });
+export const HomeIcon = createIcon('home', { filled: false });
+export const SettingsIcon = createIcon('settings', { filled: false });
+export const DownloadIcon = createIcon('download', { filled: false });
+export const ShareIcon = createIcon('share', { filled: false });
+export const TickIcon = createIcon('check', { filled: false });
+export const PlusIcon = createIcon('plus', { filled: false });
+export const CloseEyeIcon = createIcon('eye-off', { filled: false });
+export const OpenEyeIcon = createIcon('eye', { filled: false });
+export const LockIcon = createIcon('lock', { filled: false });
+export const ProfileIcon = createIcon('user', { filled: false });
+export const ExternalLinkIcon = createIcon('external-link', { filled: false });
+export const SuccessIcon = createIcon('check-circle', { filled: false });
+export const ErrorIcon = createIcon('alert-circle', { filled: false });
+export const NotificationIcon = createIcon('bell', { filled: false });
+export const DocumentIcon = createIcon('file-text', { filled: false });
+export const ChartIcon = createIcon('bar-chart', { filled: false });
+export const MoonIcon = createIcon('moon', { filled: false });
+export const PanelIcon = createIcon('panel-left', { filled: false });
+export const UploadIcon = createIcon('upload', { filled: false });
+
+export const CheckIcon = TickIcon;
+export const BackIcon = (props: IconProps) => (
+  <ChevronIcon orientation="left" {...props} />
+);
+export const ZoomOutIcon = createIcon('zoom-out', { filled: false });
+export const TextIcon = createIcon('type', { filled: false });
+export const ShapeIcon = createIcon('shapes', { filled: false });
+export const RotateIcon = createIcon('rotate-cw', { filled: false });
+export const GiftIcon = createIcon('gift', { filled: false });
+export const ShieldIcon = createIcon('shield', { filled: false });
+export const LogoutIcon = createIcon('log-out', { filled: false });
+export const PowerOffIcon = createIcon('power', { filled: false });
+export const LinkIcon = createIcon('link', { filled: false });
+export const LayoutIcon = createIcon('layout', { filled: false });
+export const ZapIcon = createIcon('zap', { filled: false });
+export const CreditCardIcon = createIcon('credit-card', { filled: false });
+export const MoreIcon = createIcon('more-horizontal', { filled: false });
+export const TrashIcon = DustBinIcon;
+export const FilterIcon = createIcon('filter', { filled: false });
+export const CalendarIcon = createIcon('calendar', { filled: false });
+export const ClockIcon = createIcon('clock', { filled: false });
+export const MapPinIcon = createIcon('map-pin', { filled: false });
+export const MenuIcon = createIcon('menu', { filled: false });
+export const RefreshIcon = createIcon('refresh-cw', { filled: false });
+export const PrintIcon = createIcon('printer', { filled: false });
+export const MagicWandIcon = createIcon('wand', { filled: false });
+export const UnLikeIcon = createIcon('thumbs-down', { filled: false });
+export const LikeIcon = createIcon('thumbs-up', { filled: false });
+export const CameraIcon = createIcon('camera', { filled: false });
+export const BluetoothIcon = createIcon('bluetooth', { filled: false });
+export const UnlockIcon = createIcon('unlock', { filled: false });
+export const WifiIcon = createIcon('wifi', { filled: false });
+export const BoldArrowIcon = createIcon('arrow-right', { filled: false });
+export const ArrowIcon = createIcon('arrow-up', { filled: false });
+export const SpinnerIcon = createIcon('loader', { filled: false });
+export const SliderIcon = createIcon('sliders-horizontal', { filled: false });
+export const CropIcon = createIcon('crop', { filled: false });
+export const ZoomInIcon = createIcon('zoom-in', { filled: false });
+export const DragHandleLinesIcon = createIcon('grip-horizontal', {
+  filled: false,
+});
+export const MousePointerIcon = createIcon('mouse-pointer-2', {
+  filled: false,
+});

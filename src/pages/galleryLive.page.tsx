@@ -620,7 +620,7 @@ export const GalleryLivePage = () => {
                   from
                 </Text>{' '}
                 <Text as="span" color="#C2580B" fontFamily="monospace">
-                  '@app-studio/web'
+                  '@app-studio/components'
                 </Text>
                 ;
               </Text>
@@ -799,23 +799,23 @@ export const GalleryLivePage = () => {
       case 'Icons':
         return (
           <Horizontal gap={12} flexWrap="wrap">
-            {['sparkles', 'message-circle', 'file-text', 'settings'].map(
-              (name) => (
-                <View
-                  key={name}
-                  width="40px"
-                  height="40px"
-                  borderRadius="10px"
-                  backgroundColor="#F9FAFB"
-                  border="1px solid #E5E7EB"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Icon name={name} widthHeight={18} color="#1F2937" />
-                </View>
-              )
-            )}
+            {(
+              ['sparkles', 'message-circle', 'file-text', 'settings'] as const
+            ).map((name) => (
+              <View
+                key={name}
+                width="40px"
+                height="40px"
+                borderRadius="10px"
+                backgroundColor="#F9FAFB"
+                border="1px solid #E5E7EB"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Icon name={name} widthHeight={18} color="#1F2937" />
+              </View>
+            ))}
           </Horizontal>
         );
 

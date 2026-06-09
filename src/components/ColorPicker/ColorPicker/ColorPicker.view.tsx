@@ -65,7 +65,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
     ...(!isDisabled &&
       !isReadOnly && {
         _hover: {
-          borderColor: 'rgba(148, 163, 184, 0.9)',
+          borderColor: 'color-gray-400',
         },
       }),
     ...views?.trigger,

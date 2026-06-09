@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer';
 import { cleanup, render, screen } from '@testing-library/react';
 import { Shape } from 'src/components/ToggleGroup/ToggleGroup/ToggleGroup.type';
 import { ToggleGroup } from 'src/components/ToggleGroup/ToggleGroup';
-import { Text } from 'src/components';
+import { Text } from 'app-studio';
 
 // Additional info (mocked for testing if not imported)
 export const ToggleGroupShapes: Record<Shape, number | string> = {

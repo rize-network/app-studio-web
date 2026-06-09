@@ -33,35 +33,35 @@ export const getSidebar = (themeMode: string): Record<Variant, ViewProps> => {
   const isDark = themeMode === 'dark';
   return {
     default: {
-      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
-      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      backgroundColor: 'color-white',
+      color: 'color-gray-800',
       transition:
         'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
     },
     filled: {
-      backgroundColor: isDark ? 'color-gray-800' : 'color-gray-100',
-      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      backgroundColor: 'color-gray-100',
+      color: 'color-gray-800',
       transition:
         'background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
     },
     outline: {
-      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
+      backgroundColor: 'color-white',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: isDark ? 'color-gray-700' : 'color-gray-200',
-      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      borderColor: 'color-gray-200',
+      color: 'color-gray-800',
       transition:
         'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
     },
     subtle: {
-      backgroundColor: isDark ? 'color-gray-800' : 'color-gray-50',
-      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      backgroundColor: 'color-gray-50',
+      color: 'color-gray-800',
       transition: 'background-color 0.2s ease, color 0.2s ease',
     },
     elevated: {
-      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
+      backgroundColor: 'color-white',
       boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-      color: isDark ? 'color-gray-100' : 'color-gray-800',
+      color: 'color-gray-800',
       transition: 'all 0.2s ease-in-out',
     },
   };

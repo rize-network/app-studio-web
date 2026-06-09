@@ -1,7 +1,8 @@
 import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { SelectorStyles, Shape, Size, Variant, Option } from './Selector.type';
-export interface SelectorProps extends Omit<InputProps, 'size'> {
+export interface SelectorProps
+  extends Omit<InputProps, 'size' | 'shadow' | 'value'> {
   // Unique identifier for the selector input.
   id?: string;
   // Indicates if the selector is in an error state.
@@ -79,7 +80,7 @@ export interface MultiSelectorProps extends Omit<InputProps, 'size'> {
   // Defines the size of the multi-selector item.
   size?: Size;
 }
-export interface ItemProps extends Omit<InputProps, 'size'> {
+export interface ItemProps extends Omit<InputProps, 'size' | 'style'> {
   // Callback function to be executed when an item is interacted with.
   callback?: Function;
   // The specific option data for the item.
@@ -89,7 +90,8 @@ export interface ItemProps extends Omit<InputProps, 'size'> {
   // Custom styles to apply to the item.
   style?: SelectorStyles;
 }
-export interface HiddenSelectorProps extends Omit<InputProps, 'size'> {
+export interface HiddenSelectorProps
+  extends Omit<InputProps, 'size' | 'value'> {
   // Unique identifier for the hidden selector input.
   id?: string;
   // Name attribute for the hidden selector input.

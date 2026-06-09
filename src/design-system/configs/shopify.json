@@ -15,11 +15,11 @@
     "success": "#008060",
     "warning": "#FFC453",
     "error": "#D72C0D",
-    "canvas": "#FFFFFF",
-    "surface": "#F6F6F7",
-    "text": "#202223",
-    "muted": "#6D7175",
-    "border": "#E1E3E5",
+    "canvas": "color-white",
+    "surface": "color-gray-50",
+    "text": "color-black",
+    "muted": "color-gray-500",
+    "border": "color-gray-200",
     "onPrimary": "#FFFFFF"
   },
   "tokens": {
@@ -209,7 +209,7 @@
       "size": "md",
       "shape": "rounded",
       "color": "theme-primary",
-      "textColor": "theme-canvas",
+      "textColor": "theme-onPrimary",
       "views": {
         "container": {
           "borderRadius": 9999,
@@ -218,7 +218,8 @@
           "borderColor": "theme-primary",
           "letterSpacing": "-0.01em",
           "textTransform": "none",
-          "fontStyle": "normal"
+          "fontStyle": "normal",
+          "backgroundColor": null
         },
         "content": {
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
@@ -236,7 +237,7 @@
       "views": {
         "container": {
           "backgroundColor": "color-aloe",
-          "color": "theme-canvas",
+          "color": "color-white",
           "borderColor": "color-aloe",
           "borderRadius": 6,
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
@@ -257,26 +258,26 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 12,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(0,0,0,0.1) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 2px 2px 0px, rgba(0,0,0,0.1) 0px 4px 4px 0px, rgba(0,0,0,0.1) 0px 8px 8px 0px, rgba(255,255,255,0.03) 0px 1px 0px 0px inset"
         },
         "header": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 600,
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "content": {
           "color": "color-muted",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "footer": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         }
       }
     },
@@ -286,16 +287,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(0,0,0,0.1) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 2px 2px 0px, rgba(0,0,0,0.1) 0px 4px 4px 0px, rgba(0,0,0,0.1) 0px 8px 8px 0px, rgba(255,255,255,0.03) 0px 1px 0px 0px inset"
         },
         "field": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.01em"
@@ -316,16 +317,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(0,0,0,0.1) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 2px 2px 0px, rgba(0,0,0,0.1) 0px 4px 4px 0px, rgba(0,0,0,0.1) 0px 8px 8px 0px, rgba(255,255,255,0.03) 0px 1px 0px 0px inset"
         },
         "field": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.01em"
@@ -346,16 +347,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(0,0,0,0.1) 0px 0px 0px 1px, rgba(0,0,0,0.1) 0px 2px 2px 0px, rgba(0,0,0,0.1) 0px 4px 4px 0px, rgba(0,0,0,0.1) 0px 8px 8px 0px, rgba(255,255,255,0.03) 0px 1px 0px 0px inset"
         },
         "field": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "label": {
@@ -376,8 +377,8 @@
       "size": "md",
       "views": {
         "checkbox": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas",
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white",
           "_checked": {
             "backgroundColor": "theme-primary",
             "borderColor": "theme-primary"
@@ -403,8 +404,8 @@
       "size": "md",
       "views": {
         "radio": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas"
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white"
         },
         "dot": {
           "backgroundColor": "theme-primary"
@@ -428,10 +429,10 @@
       "size": "sm",
       "views": {
         "slider": {
-          "backgroundColor": "theme-border"
+          "backgroundColor": "color-gray-200"
         },
         "circle": {
-          "backgroundColor": "theme-canvas"
+          "backgroundColor": "color-white"
         },
         "label": {
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
@@ -449,7 +450,7 @@
       "backgroundColor": "theme-primary",
       "views": {
         "track": {
-          "backgroundColor": "theme-border"
+          "backgroundColor": "color-gray-200"
         },
         "progress": {
           "backgroundColor": "theme-primary"
@@ -459,10 +460,10 @@
         },
         "thumb": {
           "borderColor": "theme-primary",
-          "backgroundColor": "theme-canvas"
+          "backgroundColor": "color-white"
         },
         "label": {
-          "color": "theme-secondary"
+          "color": "color-black"
         },
         "valueLabel": {
           "color": "color-muted"
@@ -473,7 +474,7 @@
       "variant": "pill",
       "views": {
         "headerTabs": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "tab": {
           "color": "color-muted",
@@ -491,10 +492,10 @@
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "activeText": {
-          "color": "theme-canvas"
+          "color": "color-white"
         },
         "content": {
-          "color": "theme-secondary"
+          "color": "color-black"
         },
         "container": {
           "borderRadius": "9999px"
@@ -504,13 +505,13 @@
     "accordion": {
       "views": {
         "container": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas",
-          "color": "theme-secondary",
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "borderRadius": "24px"
         },
         "trigger": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "content": {
@@ -521,18 +522,18 @@
     "table": {
       "views": {
         "table": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-secondary",
-          "borderColor": "theme-border",
+          "backgroundColor": "color-white",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
           "borderRadius": 12
         },
         "thead": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-secondary"
+          "backgroundColor": "color-white",
+          "color": "color-black"
         },
         "th": {
           "color": "color-muted",
-          "borderColor": "theme-border",
+          "borderColor": "color-gray-200",
           "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
@@ -540,11 +541,11 @@
           "fontStyle": "normal"
         },
         "tr": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "td": {
-          "color": "theme-secondary",
-          "borderColor": "theme-border",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
           "letterSpacing": "-0.01em",
           "fontStyle": "normal"
         },
@@ -558,13 +559,13 @@
     "avatar": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": "50%"
         },
         "fallback": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         }
       }
@@ -572,12 +573,12 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
           "borderRadius": 12
         },
         "title": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
@@ -599,25 +600,25 @@
           "backgroundColor": "theme-primary"
         },
         "label": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         }
       }
     },
     "progress": {
       "color": "theme-primary",
-      "backgroundColor": "theme-border",
+      "backgroundColor": "color-gray-200",
       "radius": "16px",
       "views": {
         "container": {
-          "backgroundColor": "theme-border",
+          "backgroundColor": "color-gray-200",
           "borderRadius": "9999px"
         },
         "bar": {
           "backgroundColor": "theme-primary"
         },
         "text": {
-          "color": "theme-secondary"
+          "color": "color-black"
         }
       }
     },
@@ -625,10 +626,10 @@
       "color": "theme-primary"
     },
     "separator": {
-      "color": "theme-border",
+      "color": "color-gray-200",
       "views": {
         "container": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "label": {
           "color": "color-muted",
@@ -639,9 +640,9 @@
     "navigation": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": "24px"
         },
         "item": {
@@ -656,15 +657,15 @@
     "hero": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "eyebrow": {
           "color": "color-muted"
         },
         "title": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "description": {
@@ -675,18 +676,18 @@
     "page": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
         },
         "section": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border"
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200"
         },
         "surface": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary"
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black"
         }
       }
     }
@@ -698,7 +699,7 @@
     "typeStyle": "normal",
     "letterSpacing": "-0.01em",
     "accentTreatment": "flat",
-    "signatureMotif": "\u25cf",
+    "signatureMotif": "●",
     "density": "comfortable",
     "surfaceTone": "paper",
     "cardRadius": 12,

@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SubagentStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date -Iseconds)] SUBAGENT_START: $CLAUDE_SUBAGENT_TYPE\" >> .claude/logs/delegation.log 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date -Iseconds)] SUBAGENT_STOP: $CLAUDE_SUBAGENT_TYPE\" >> .claude/logs/delegation.log 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  }
+}

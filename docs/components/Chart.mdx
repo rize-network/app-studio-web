@@ -4,13 +4,13 @@ A comprehensive charting component for visualizing data in various formats inclu
 
 ### **Import**
 ```tsx
-import { Chart, CHART_COLORS } from '@app-studio/web';
+import { Chart, CHART_COLORS } from '@app-studio/components';
 ```
 
 ### **Quick Start (Bar Chart)**
 ```tsx
 import React from 'react';
-import { Chart, CHART_COLORS, View } from '@app-studio/web';
+import { Chart, CHART_COLORS, View } from '@app-studio/components';
 
 export const SimpleBarChart = () => (
     <View height="300px">
@@ -72,7 +72,7 @@ Handle various UI states gracefully with built-in props.
 
 ```tsx
 import React, { useState } from 'react';
-import { Chart, Button, Vertical, Horizontal } from '@app-studio/web';
+import { Chart, Button, Vertical, Horizontal } from '@app-studio/components';
 
 export const ChartStateDemo = () => {
     const [status, setStatus] = useState('normal'); 

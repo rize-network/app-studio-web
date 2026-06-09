@@ -7,7 +7,12 @@ import React, {
   useEffect,
 } from 'react';
 import { View, Text, ViewProps, useElementPosition } from 'app-studio';
-import { TooltipContextType, Position, Alignment } from './Tooltip.type';
+import {
+  TooltipContextType,
+  Position,
+  Alignment,
+  TooltipStyles,
+} from './Tooltip.type';
 import { TooltipTriggerProps, TooltipContentProps } from './Tooltip.props';
 import { TooltipSizes, TooltipVariants, getArrowStyles } from './Tooltip.style';
 // Initializes the React Context for the Tooltip, providing a way to share the tooltip's state and functions (open/close, refs, IDs) across its child components.
@@ -95,8 +100,8 @@ export const TooltipView: React.FC<
     size?: string;
     variant?: string;
     showArrow?: boolean;
-    views?: any;
-  } & Omit<ViewProps, 'position'>
+    views?: TooltipStyles;
+  } & Omit<ViewProps, 'position' | 'content' | 'size'>
 > = ({
   content,
   children,

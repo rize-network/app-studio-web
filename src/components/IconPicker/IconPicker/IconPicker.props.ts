@@ -13,7 +13,7 @@ export interface IconPickerProps extends Omit<ViewProps, 'onChange'> {
   // Supplementary text displayed below the IconPicker for guidance.
   helperText?: string;
   // The currently selected icon's name (controlled component prop).
-  value?: IconName | string;
+  value?: IconName;
   // The initial selected icon's name (uncontrolled component prop).
   defaultValue?: IconName;
   // Callback function triggered when an icon is selected or the value changes.
@@ -61,7 +61,7 @@ export interface IconPickerViewProps extends IconPickerProps {
   // Function to explicitly close the dropdown.
   handleClose: () => void;
   // Ref object attached to the component that triggers the dropdown.
-  triggerRef: React.RefObject<HTMLDivElement>;
+  triggerRef: React.RefObject<HTMLDivElement | null>;
   // Ref object attached to the dropdown container element.
-  dropdownRef: React.RefObject<HTMLDivElement>;
+  dropdownRef: React.RefObject<HTMLDivElement | null>;
 }

@@ -104,7 +104,7 @@ export const LineStyles: ViewProps = {
 export const PointStyles: ViewProps = {
   r: '5px',
   strokeWidth: '2.5px',
-  stroke: 'white',
+  stroke: 'color-white',
   cursor: 'pointer',
   transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
   _hover: {
@@ -114,7 +114,7 @@ export const PointStyles: ViewProps = {
 // Defines styles for individual slices in a pie chart, including borders and hover transformation.
 export const PieSliceStyles: ViewProps = {
   strokeWidth: '2px',
-  stroke: 'white',
+  stroke: 'color-white',
   cursor: 'pointer',
   transition: 'all 0.3s ease',
   _hover: {
@@ -131,7 +131,7 @@ export const OverlayBaseStyles: ViewProps = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  backgroundColor: 'color-white-800',
   borderRadius: '4px',
   zIndex: 10,
   padding: '24px',

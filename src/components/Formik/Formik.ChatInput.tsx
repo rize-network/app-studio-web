@@ -45,13 +45,13 @@ const ChatInputComponent: React.FC<FormikChatInputProps> = (props) => {
   const clearPendingFiles = () => setPendingFiles([]);
 
   // Get ChatInput state with our custom props
+  // (getPendingFiles / clearPendingFiles are forwarded directly to the view,
+  // not through the state hook — they're consumer-side concerns.)
   const chatInputState = useChatInputState({
     ...chatInputProps,
     value: formProps.value || '',
     onChange: handleChange,
     onSubmit: handleSubmit,
-    getPendingFiles,
-    clearPendingFiles,
   });
 
   return (

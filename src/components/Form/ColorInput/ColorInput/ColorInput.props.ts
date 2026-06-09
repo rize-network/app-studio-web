@@ -10,7 +10,8 @@ import {
   ColorFormat,
 } from './ColorInput.type';
 // Defines the public properties available for the ColorInput component, extending standard input properties while omitting the 'size' property to use a custom one.
-export interface ColorInputProps extends Omit<InputProps, 'size'> {
+export interface ColorInputProps
+  extends Omit<InputProps, 'size' | 'onChange' | 'shadow'> {
   // An optional unique identifier for the input element.
   id?: string;
   // An optional error object or message to display validation feedback.
@@ -103,7 +104,7 @@ export interface ColorInputViewProps extends ColorInputProps {
   // Function to handle closing the color picker dropdown.
   handleClose?: () => void;
   // Ref object for the DOM element that triggers the color picker dropdown.
-  triggerRef?: React.RefObject<HTMLDivElement>;
+  triggerRef?: React.RefObject<HTMLDivElement | null>;
   // Ref object for the DOM element representing the color picker dropdown itself.
-  dropdownRef?: React.RefObject<HTMLDivElement>;
+  dropdownRef?: React.RefObject<HTMLDivElement | null>;
 }

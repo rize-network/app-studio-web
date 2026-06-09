@@ -4,15 +4,15 @@ A semantic text element designed for form labels and descriptive text with compr
 
 ### **Import**
   ```tsx
-  import { Label } from '@app-studio/web';
+  import { Label } from '@app-studio/components';
   ```
 
 ### **Basic Usage**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { TextField } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { Label } from '@app-studio/components';
+import { TextField } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const BasicLabel = () => (
   <Vertical gap={8}>
@@ -25,8 +25,8 @@ export const BasicLabel = () => (
 ### **Label Sizes**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const LabelSizes = () => (
   <Vertical gap={16}>
@@ -42,8 +42,8 @@ export const LabelSizes = () => (
 ### **Label Weights**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const LabelWeights = () => (
   <Vertical gap={12}>
@@ -59,8 +59,8 @@ export const LabelWeights = () => (
 ### **Heading Labels**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const HeadingLabels = () => (
   <Vertical gap={16}>
@@ -77,8 +77,8 @@ export const HeadingLabels = () => (
 ### **Text Decorations**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const TextDecorations = () => (
   <Vertical gap={12}>
@@ -96,9 +96,9 @@ export const TextDecorations = () => (
 ### **Form Labels with Required Indicators**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { TextField, TextArea } from '@app-studio/web';
-import { Vertical, Horizontal } from '@app-studio/web';
+import { Label } from '@app-studio/components';
+import { TextField, TextArea } from '@app-studio/components';
+import { Vertical, Horizontal } from '@app-studio/components';
 
 export const FormLabels = () => (
   <Vertical gap={20}>
@@ -130,8 +130,8 @@ export const FormLabels = () => (
 ### **Section Headers**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { View, Vertical } from '@app-studio/web';
+import { Label } from '@app-studio/components';
+import { View, Vertical } from '@app-studio/components';
 
 export const SectionHeaders = () => (
   <Vertical gap={24}>
@@ -171,8 +171,8 @@ export const SectionHeaders = () => (
 ### **Colored Labels**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const ColoredLabels = () => (
   <Vertical gap={12}>
@@ -242,7 +242,7 @@ export const ColoredLabels = () => (
 **Custom Styling:**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
+import { Label } from '@app-studio/components';
 
 export const CustomStyledLabel = () => (
   <Label
@@ -263,7 +263,7 @@ export const CustomStyledLabel = () => (
 **Responsive Labels:**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
+import { Label } from '@app-studio/components';
 
 export const ResponsiveLabel = () => (
   <Label
@@ -279,7 +279,7 @@ export const ResponsiveLabel = () => (
 **Interactive Labels:**
 ```tsx
 import React, { useState } from 'react';
-import { Label } from '@app-studio/web';
+import { Label } from '@app-studio/components';
 
 export const InteractiveLabel = () => {
   const [isActive, setIsActive] = useState(false);
@@ -384,7 +384,7 @@ const StatusLabel = ({ status, children }) => {
 
 **With Form Components:**
 ```tsx
-import { FormikForm, FormikTextField } from '@app-studio/web';
+import { FormikForm, FormikTextField } from '@app-studio/components';
 
 <FormikForm>
   <Vertical gap={16}>
@@ -402,7 +402,7 @@ import { FormikForm, FormikTextField } from '@app-studio/web';
 
 **With Card Components:**
 ```tsx
-import { Card } from '@app-studio/web';
+import { Card } from '@app-studio/components';
 
 <Card>
   <Card.Header>
@@ -420,7 +420,7 @@ import { Card } from '@app-studio/web';
 
 **With Navigation:**
 ```tsx
-import { NavigationMenu } from '@app-studio/web';
+import { NavigationMenu } from '@app-studio/components';
 
 <NavigationMenu>
   <NavigationMenu.Section>

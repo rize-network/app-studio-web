@@ -1,6 +1,6 @@
 # Contributing to Documentation
 
-This guide explains how to contribute to the documentation for the App Studio Web Component Library.
+This guide explains how to contribute to the documentation for the App Studio Components Component Library.
 
 ## Documentation Structure
 
@@ -74,7 +74,7 @@ The Button component is used to trigger an action or event.
 ## Import
 
 ```jsx
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 ```
 
 ## Props

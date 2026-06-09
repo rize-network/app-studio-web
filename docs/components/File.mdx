@@ -4,13 +4,13 @@ A component for displaying file icons and images with customizable colors and th
 
 ### **Import**
 ```tsx
-import { FileSVG, FileImage } from '@app-studio/web';
+import { FileSVG, FileImage } from '@app-studio/components';
 ```
 
 ### **FileSVG - Default**
 ```tsx
 import React from 'react';
-import { FileSVG } from '@app-studio/web';
+import { FileSVG } from '@app-studio/components';
 
 export const DefaultFile = () => (
   <FileSVG src="/icons/document.svg" width={48} height={48} />
@@ -25,7 +25,7 @@ The source URL of the SVG or image file to display.
 
 ```tsx
 import React from 'react';
-import { FileSVG } from '@app-studio/web';
+import { FileSVG } from '@app-studio/components';
 
 export const FileWithSource = () => (
   <FileSVG 
@@ -44,7 +44,7 @@ Optional color to apply to the SVG file. Uses theme-aware color system.
 
 ```tsx
 import React from 'react';
-import { FileSVG } from '@app-studio/web';
+import { FileSVG } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const ColoredFiles = () => (
@@ -63,7 +63,7 @@ Custom styles for the container and image elements.
 
 ```tsx
 import React from 'react';
-import { FileSVG } from '@app-studio/web';
+import { FileSVG } from '@app-studio/components';
 
 export const StyledFile = () => (
   <FileSVG 
@@ -89,7 +89,7 @@ Display regular image files with standard image props.
 
 ```tsx
 import React from 'react';
-import { FileImage } from '@app-studio/web';
+import { FileImage } from '@app-studio/components';
 
 export const ImageFile = () => (
   <FileImage 
@@ -109,7 +109,7 @@ Override the theme mode for the file component.
 
 ```tsx
 import React from 'react';
-import { FileSVG } from '@app-studio/web';
+import { FileSVG } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const ThemedFiles = () => (

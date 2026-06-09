@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, Vertical, Horizontal, Button, useTheme } from 'app-studio';
+import { View, Text, Vertical, Horizontal, useTheme } from 'app-studio';
+import { Button } from '../components/Button/Button';
 import { ChatInput } from '../components/ChatInput';
 import { PromptExample } from '../components/ChatInput/ChatInput/ChatInput.type';
 import { AudioWaveformChatInputDemo } from '../components/ChatInput/examples/AudioWaveformChatInput';

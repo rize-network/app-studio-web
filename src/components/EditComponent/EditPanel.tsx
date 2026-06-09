@@ -1,5 +1,6 @@
 import React from 'react';
-import { Vertical, Horizontal, Text, Button, View } from 'app-studio';
+import { Vertical, Horizontal, Text, View } from 'app-studio';
+import { Button } from '../Button/Button';
 import { Icon } from '../Icon/Icon';
 // We'll assume Select is available in app-studio or we mock it.
 // Since I can't verify 'app-studio' exports easily without package inspection (which I did but 'main' helps),
@@ -84,7 +85,11 @@ export const EditPanel: React.FC<EditPanelProps> = ({
         <Text fontSize="14px" textAlign="center">
           Use these fonts every time?
         </Text>
-        <Button variant="outline" leftIcon={<Icon name="wand" size={16} />}>
+        <Button
+          variant="outline"
+          icon={<Icon name="wand" size={16} />}
+          iconPosition="left"
+        >
           Brand Studio
         </Button>
       </Vertical>

@@ -98,9 +98,9 @@ const RadioView: React.FC<RadioViewProps> = ({
   const radioStyle = {
     container: {
       gap: 8,
-      display: 'flex',
+      display: 'flex' as const,
       height: 'fit-content',
-      flexDirection: 'column',
+      flexDirection: 'column' as const,
       width: 'fit-content',
       selected: {
         borderColor: 'theme-primary',

@@ -13,7 +13,8 @@ import {
 // Optional React node(s) to be displayed as the button's content.
 import { LoaderProps } from '../../Loader/Loader/Loader.props';
 // Optional string to define the color scheme of the button.
-export interface ButtonProps extends Omit<$ButtonProps, 'size' | 'onClick' | 'variant'> {
+export interface ButtonProps
+  extends Omit<$ButtonProps, 'size' | 'onClick' | 'variant' | 'shadow'> {
   // Optional React node(s) to be displayed as the button's content.
   children?: React.ReactNode;
   // Optional LoaderProps object to configure the appearance and behavior of the loader animation.
@@ -85,4 +86,16 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size' | 'onClick' | 'va
     link?: ViewProps;
   };
   config?: any;
+  // Optional list of i18n keys passed by editor-driven button instances.
+  keys?: any[];
+  // Optional visible label rendered as the button's content (alias for children).
+  label?: React.ReactNode;
+  // Optional alias for icon rendered on the leading edge of the button.
+  leftIcon?: React.ReactNode;
+  // Optional alias for icon rendered on the trailing edge of the button.
+  rightIcon?: React.ReactNode;
+  // Alternate spelling of leftIcon for compatibility with form libraries.
+  startIcon?: React.ReactNode;
+  // Alternate spelling of rightIcon for compatibility with form libraries.
+  endIcon?: React.ReactNode;
 }

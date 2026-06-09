@@ -2,7 +2,8 @@ import { ReactNode, Dispatch, SetStateAction } from 'react';
 import { ComboBoxStyles } from './ComboBox.type';
 import { InputProps } from 'app-studio';
 // Declaration of the main properties for ComboBox component.
-export interface ComboBoxProps extends Omit<InputProps, 'size'> {
+export interface ComboBoxProps
+  extends Omit<InputProps, 'size' | 'onSelect' | 'left' | 'right'> {
   // Unique identifier for the ComboBox, required for accessibility.
   id: string;
   // Optional name attribute for the ComboBox, useful when submitted in a form.

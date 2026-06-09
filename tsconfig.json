@@ -48,5 +48,5 @@
   },
   "noEmit": false,
   "include": ["./src", "./src/types/*.d.ts"],
-  "exclude": ["./bot"]
+  "exclude": ["./bot", "**/*.native.tsx", "**/*.native.ts"]
 }

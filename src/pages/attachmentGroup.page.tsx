@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'app-studio';
+import { View, Text } from 'app-studio';
+import { Button } from 'src/components/Button/Button';
 import { AttachmentGroup } from 'src/components/AttachmentGroup/AttachmentGroup';
 
 const AttachmentGroupPage = () => {

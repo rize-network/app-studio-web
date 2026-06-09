@@ -3,7 +3,8 @@ import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../../utils/elevation';
 import { Shape, Size, TextFieldStyles, Variant } from './TextField.type';
 // The TextFieldProps interface extends InputProps and customizes the TextField component, omitting the 'size' prop from InputProps.
-export interface TextFieldProps extends Omit<InputProps, 'size'> {
+export interface TextFieldProps
+  extends Omit<InputProps, 'size' | 'shadow' | 'left' | 'right'> {
   // Optional unique identifier for the TextField.
   id?: string;
   // Optional property for error handling within the TextField.
@@ -28,6 +29,16 @@ export interface TextFieldProps extends Omit<InputProps, 'size'> {
   isClearable?: boolean;
   // Optional flag to autofocus the TextField when it mounts.
   isAutoFocus?: boolean;
+  // Optional flag indicating the field is required for form submission.
+  isRequired?: boolean;
+  // Optional flag indicating the field is required (HTML attribute alias).
+  required?: boolean;
+  // Optional adornment rendered at the right edge of the field.
+  rightIcon?: React.ReactNode;
+  // Optional adornment rendered at the left edge of the field.
+  leftIcon?: React.ReactNode;
+  // Optional ViewProps applied to the field's label element.
+  labelProps?: any;
   // Optional callback function that is called when the TextField value changes.
   onChange?: (value: any) => void;
   // Optional callback function that is called when the text in the TextField changes.
@@ -50,6 +61,10 @@ export interface TextFieldProps extends Omit<InputProps, 'size'> {
   value?: string;
   // Optional Variant enum to specify the variant of the TextField component.
   variant?: Variant;
+  // Optional flag to render the field as a multiline TextArea-style input.
+  isMultiline?: boolean;
+  // Optional number of rows when rendered in multiline mode.
+  rows?: number;
 }
 // The TextFieldViewProps interface extends TextFieldProps and adds props specific to the view-layer customization of the component.
 export interface TextFieldViewProps extends TextFieldProps {

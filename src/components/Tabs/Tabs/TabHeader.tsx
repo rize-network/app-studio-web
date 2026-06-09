@@ -50,10 +50,12 @@ export const TabHeader: React.FC<TabHeaderProps> = React.memo(
       return ['top', 'bottom'].includes(iconPosition) ? '4px' : '8px';
     };
 
-    // Clone icon to apply active styles (e.g. bold stroke) if valid
+    // Clone icon to apply active styles (e.g. bold stroke) if valid.
+    // Use isValidElement's generic to give `tab.icon.props` a concrete shape
+    // (React 19 types it as `unknown` by default).
     const iconElement =
-      tab.icon && React.isValidElement(tab.icon)
-        ? React.cloneElement(tab.icon as React.ReactElement, {
+      tab.icon && React.isValidElement<{ strokeWidth?: number }>(tab.icon)
+        ? React.cloneElement(tab.icon, {
             strokeWidth: isActive ? 2.5 : 2,
           })
         : tab.icon;

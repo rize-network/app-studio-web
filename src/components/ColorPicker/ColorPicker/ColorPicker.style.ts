@@ -25,7 +25,7 @@ export const DefaultColorPickerStyles = {
     borderRadius: 12,
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: '#E5E7EB',
+    borderColor: 'color-gray-200',
     boxShadow: '0 12px 32px rgba(15, 23, 42, 0.14)',
     padding: '16px',
     minWidth: '320px',
@@ -49,7 +49,7 @@ export const DefaultColorPickerStyles = {
     marginBottom: '12px',
   } as ViewProps,
   recentColors: {
-    borderTop: '1px solid #F3F4F6',
+    borderTop: '1px solid color-gray-100',
     paddingTop: '12px',
   } as ViewProps,
 };
@@ -102,21 +102,21 @@ export const Variants: Record<Variant, ViewProps> = {
     backgroundColor: 'color-white',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: '#E5E7EB',
+    borderColor: 'color-gray-200',
     color: 'color-gray-900',
   },
   outline: {
     backgroundColor: 'color-white',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: '#E5E7EB',
+    borderColor: 'color-gray-200',
     color: 'color-gray-900',
   },
   filled: {
-    backgroundColor: '#F8FAFC',
+    backgroundColor: 'color-gray-50',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: '#E5E7EB',
+    borderColor: 'color-gray-200',
     color: 'color-gray-900',
   },
 };

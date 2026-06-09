@@ -138,13 +138,9 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
         {hasPastilContent && (
           <Text
             role="badge-pastil-content"
-            backgroundColor={
-              currentThemeMode === 'dark' ? 'color-white' : 'color-gray-900'
-            }
+            backgroundColor={'color-gray-900'}
             borderRadius="9999px"
-            color={
-              currentThemeMode === 'dark' ? 'color-gray-900' : 'color-white'
-            }
+            color={'color-white'}
             fontWeight="700"
             letterSpacing={0}
             textTransform="uppercase"
@@ -171,11 +167,7 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
           <Text
             role="badgeText"
             color={
-              hasAnnouncementLayout
-                ? currentThemeMode === 'dark'
-                  ? 'color-gray-50'
-                  : 'color-gray-900'
-                : combinedStyles.color
+              hasAnnouncementLayout ? 'color-gray-900' : combinedStyles.color
             }
             fontWeight={hasAnnouncementLayout ? '700' : '600'}
             textAlign="center"

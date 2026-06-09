@@ -81,9 +81,9 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
     container: {
       // Layout properties
       gap: 8, // 2 × 4px grid
-      display: 'flex',
+      display: 'flex' as const,
       height: 'fit-content',
-      flexDirection: 'column',
+      flexDirection: 'column' as const,
       width: 'fit-content',
 
       // Typography properties

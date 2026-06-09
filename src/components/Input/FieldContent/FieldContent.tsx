@@ -62,7 +62,7 @@ export const FieldContent: React.FC<ContentProps> = ({
       opacity={isDisabled ? 0.7 : 1}
       transition="border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease"
       {...(showLabel ? PadddingWithLabel : PaddingWithoutLabel)}
-      {...shadow}
+      {...(typeof shadow === 'object' && shadow !== null ? shadow : {})}
       {...Shapes[shape]}
       {...InputVariants[variant]}
       {...views?.container}

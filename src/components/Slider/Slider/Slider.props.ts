@@ -1,7 +1,10 @@
 import { InputProps, ViewProps } from 'app-studio';
 import { Orientation, Shape, Size, SliderStyles, Variant } from './Slider.type';
 export interface SliderProps
-  extends Omit<InputProps, 'size' | 'onChange' | 'onDrag'> {
+  extends Omit<
+    InputProps,
+    'size' | 'onChange' | 'onDrag' | 'shadow' | 'value'
+  > {
   // Defines the minimum allowed value for the slider.
   min?: number;
   // Defines the maximum allowed value for the slider.
@@ -51,9 +54,9 @@ export interface SliderViewProps extends SliderProps {
   // Indicates if the slider or its thumb is currently hovered.
   isHovered: boolean;
   // Ref to the slider's track DOM element.
-  trackRef: React.RefObject<HTMLDivElement>;
+  trackRef: React.RefObject<HTMLDivElement | null>;
   // Ref to the slider's thumb DOM element.
-  thumbRef: React.RefObject<HTMLDivElement>;
+  thumbRef: React.RefObject<HTMLDivElement | null>;
   // Event handler for mouse/touch down on the thumb.
   handleThumbMouseDown: (event: React.MouseEvent | React.TouchEvent) => void;
   // Event handler for mouse/touch down on the track.

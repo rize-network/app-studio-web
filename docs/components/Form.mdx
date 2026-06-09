@@ -20,7 +20,7 @@ A comprehensive form system with Formik integration, providing powerful form sta
     FormikSlider,
     FormikChatInput,
     FormikTagInput
-  } from '@app-studio/web';
+  } from '@app-studio/components';
 
   // Individual form components
   import {
@@ -36,7 +36,7 @@ A comprehensive form system with Formik integration, providing powerful form sta
     ComboBox,
     Slider,
     Label
-  } from '@app-studio/web';
+  } from '@app-studio/components';
   ```
 
 ### **Basic Form with Formik**
@@ -44,9 +44,9 @@ A comprehensive form system with Formik integration, providing powerful form sta
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm, FormikTextField, FormikCheckbox } from '@app-studio/web';
-import { Button } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { FormikForm, FormikTextField, FormikCheckbox } from '@app-studio/components';
+import { Button } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const BasicForm = () => {
   const initialValues = {
@@ -132,9 +132,9 @@ import {
   FormikSlider,
   FormikSwitch,
   FormikTagInput
-} from '@app-studio/web';
-import { Button } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+} from '@app-studio/components';
+import { Button } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const AdvancedForm = () => {
   const initialValues = {
@@ -252,9 +252,9 @@ export const AdvancedForm = () => {
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm, FormikTextField, FormikPassword } from '@app-studio/web';
-import { Button } from '@app-studio/web';
-import { Vertical } from '@app-studio/web';
+import { FormikForm, FormikTextField, FormikPassword } from '@app-studio/components';
+import { Button } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const ValidationForm = () => {
   const initialValues = {
@@ -340,10 +340,10 @@ export const ValidationForm = () => {
 import React from 'react';
 import { Formik, FieldArray } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm, FormikTextField } from '@app-studio/web';
-import { Button } from '@app-studio/web';
-import { Vertical, Horizontal } from '@app-studio/web';
-import { PlusIcon, MinusIcon } from '@app-studio/web';
+import { FormikForm, FormikTextField } from '@app-studio/components';
+import { Button } from '@app-studio/components';
+import { Vertical, Horizontal } from '@app-studio/components';
+import { PlusIcon, MinusIcon } from '@app-studio/components';
 
 export const DynamicForm = () => {
   const initialValues = {
@@ -589,7 +589,7 @@ const FormStatus = () => {
 
 **Custom Field Component:**
 ```tsx
-import { useFormikInput } from '@app-studio/web';
+import { useFormikInput } from '@app-studio/components';
 
 const CustomFormikField = (props) => {
   const formProps = useFormikInput(props);
@@ -654,8 +654,8 @@ const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
 
 **With File Uploads:**
 ```tsx
-import { FormikForm, FormikTextField } from '@app-studio/web';
-import { Uploader } from '@app-studio/web';
+import { FormikForm, FormikTextField } from '@app-studio/components';
+import { Uploader } from '@app-studio/components';
 
 const FormWithUpload = () => {
   const [uploadedFile, setUploadedFile] = useState(null);

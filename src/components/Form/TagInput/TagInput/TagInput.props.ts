@@ -11,7 +11,10 @@ import {
 } from './TagInput.type';
 // Defines the public interface for the TagInput component, extending standard InputProps while omitting certain properties.
 export interface TagInputProps
-  extends Omit<InputProps, 'size' | 'value' | 'onChange'> {
+  extends Omit<
+    InputProps,
+    'size' | 'value' | 'onChange' | 'shadow' | 'left' | 'right'
+  > {
   // A unique identifier for the input element.
   id?: string;
   // The name attribute for the input element, useful for form submissions.

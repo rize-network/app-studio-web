@@ -15,11 +15,11 @@
     "success": "#16a34a",
     "warning": "#003ecc",
     "error": "#dc2626",
-    "canvas": "#ffffff",
-    "surface": "#f7f7f7",
-    "text": "#0a0b0d",
-    "muted": "#5b616e",
-    "border": "#dee1e6",
+    "canvas": "color-white",
+    "surface": "color-gray-50",
+    "text": "color-black",
+    "muted": "color-gray-500",
+    "border": "color-gray-200",
     "onPrimary": "#ffffff"
   },
   "tokens": {
@@ -234,7 +234,7 @@
       "size": "md",
       "shape": "rounded",
       "color": "theme-primary",
-      "textColor": "theme-canvas",
+      "textColor": "theme-onPrimary",
       "views": {
         "container": {
           "borderRadius": 9999,
@@ -243,7 +243,8 @@
           "borderColor": "theme-primary",
           "letterSpacing": "-0.01em",
           "textTransform": "none",
-          "fontStyle": "normal"
+          "fontStyle": "normal",
+          "backgroundColor": null
         },
         "content": {
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
@@ -261,7 +262,7 @@
       "views": {
         "container": {
           "backgroundColor": "theme-secondary",
-          "color": "theme-canvas",
+          "color": "color-white",
           "borderColor": "theme-secondary",
           "borderRadius": 6,
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
@@ -282,26 +283,26 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "theme-surface",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 12,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "0 16px 40px rgba(0,0,0,0.5)"
         },
         "header": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
           "fontWeight": 600,
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "content": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         },
         "footer": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         }
       }
     },
@@ -311,16 +312,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.01em"
@@ -341,16 +342,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.01em"
@@ -371,16 +372,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         },
         "label": {
@@ -401,8 +402,8 @@
       "size": "md",
       "views": {
         "checkbox": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas",
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white",
           "_checked": {
             "backgroundColor": "theme-primary",
             "borderColor": "theme-primary"
@@ -417,7 +418,7 @@
           "fontStyle": "normal"
         },
         "infoText": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "container": {
           "borderRadius": 4
@@ -428,8 +429,8 @@
       "size": "md",
       "views": {
         "radio": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas"
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white"
         },
         "dot": {
           "backgroundColor": "theme-primary"
@@ -442,7 +443,7 @@
           "fontStyle": "normal"
         },
         "infoText": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "container": {
           "borderRadius": "50%"
@@ -453,10 +454,10 @@
       "size": "sm",
       "views": {
         "slider": {
-          "backgroundColor": "theme-border"
+          "backgroundColor": "color-gray-200"
         },
         "circle": {
-          "backgroundColor": "theme-canvas"
+          "backgroundColor": "color-white"
         },
         "label": {
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
@@ -474,7 +475,7 @@
       "backgroundColor": "theme-primary",
       "views": {
         "track": {
-          "backgroundColor": "theme-border"
+          "backgroundColor": "color-gray-200"
         },
         "progress": {
           "backgroundColor": "theme-primary"
@@ -484,13 +485,13 @@
         },
         "thumb": {
           "borderColor": "theme-primary",
-          "backgroundColor": "theme-canvas"
+          "backgroundColor": "color-white"
         },
         "label": {
-          "color": "theme-secondary"
+          "color": "color-black"
         },
         "valueLabel": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
@@ -498,10 +499,10 @@
       "variant": "pill",
       "views": {
         "headerTabs": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "tab": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
           "textTransform": "none",
@@ -516,10 +517,10 @@
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         },
         "activeText": {
-          "color": "theme-canvas"
+          "color": "color-white"
         },
         "content": {
-          "color": "theme-secondary"
+          "color": "color-black"
         },
         "container": {
           "borderRadius": "9999px"
@@ -529,35 +530,35 @@
     "accordion": {
       "views": {
         "container": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-surface",
-          "color": "theme-secondary",
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-gray-50",
+          "color": "color-black",
           "borderRadius": "16px"
         },
         "trigger": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         },
         "content": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
     "table": {
       "views": {
         "table": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-secondary",
-          "borderColor": "theme-border",
+          "backgroundColor": "color-white",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
           "borderRadius": 12
         },
         "thead": {
-          "backgroundColor": "theme-surface",
-          "color": "theme-secondary"
+          "backgroundColor": "color-gray-50",
+          "color": "color-black"
         },
         "th": {
-          "color": "theme-muted",
-          "borderColor": "theme-border",
+          "color": "color-gray-500",
+          "borderColor": "color-gray-200",
           "fontFamily": "'JetBrains Mono', 'Coinbase Mono', monospace",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
@@ -565,16 +566,16 @@
           "fontStyle": "normal"
         },
         "tr": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "td": {
-          "color": "theme-secondary",
-          "borderColor": "theme-border",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
           "letterSpacing": "-0.01em",
           "fontStyle": "normal"
         },
         "caption": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontStyle": "italic",
           "letterSpacing": "-0.01em"
         }
@@ -583,13 +584,13 @@
     "avatar": {
       "views": {
         "container": {
-          "backgroundColor": "theme-surface",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": "50%"
         },
         "fallback": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         }
       }
@@ -597,12 +598,12 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "theme-surface",
-          "borderColor": "theme-border",
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
           "borderRadius": 12
         },
         "title": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
@@ -610,7 +611,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         },
         "icon": {
@@ -624,25 +625,25 @@
           "backgroundColor": "theme-success"
         },
         "label": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         }
       }
     },
     "progress": {
       "color": "theme-primary",
-      "backgroundColor": "theme-border",
+      "backgroundColor": "color-gray-200",
       "radius": "16px",
       "views": {
         "container": {
-          "backgroundColor": "theme-border",
+          "backgroundColor": "color-gray-200",
           "borderRadius": "9999px"
         },
         "bar": {
           "backgroundColor": "theme-primary"
         },
         "text": {
-          "color": "theme-secondary"
+          "color": "color-black"
         }
       }
     },
@@ -650,13 +651,13 @@
       "color": "theme-primary"
     },
     "separator": {
-      "color": "theme-border",
+      "color": "color-gray-200",
       "views": {
         "container": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "label": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         }
       }
@@ -664,13 +665,13 @@
     "navigation": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": "16px"
         },
         "item": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "activeItem": {
           "color": "theme-primary",
@@ -681,37 +682,37 @@
     "hero": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         },
         "eyebrow": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "title": {
-          "color": "theme-secondary",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         },
         "description": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
     "page": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-secondary",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
         },
         "section": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border"
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200"
         },
         "surface": {
-          "backgroundColor": "theme-surface",
-          "borderColor": "theme-border",
-          "color": "theme-secondary"
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black"
         }
       }
     }
@@ -723,7 +724,7 @@
     "typeStyle": "normal",
     "letterSpacing": "-0.01em",
     "accentTreatment": "flat",
-    "signatureMotif": "\u25c6",
+    "signatureMotif": "◆",
     "density": "comfortable",
     "surfaceTone": "paper",
     "cardRadius": 12,

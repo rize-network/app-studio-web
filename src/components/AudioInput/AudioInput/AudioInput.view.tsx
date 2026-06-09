@@ -120,7 +120,7 @@ export function AudioInputView({
         gap={12}
         alignItems="center"
         padding="12px 14px"
-        border="1px solid #E5E7EB"
+        border="1px solid color-gray-200"
         borderRadius="12px"
         backgroundColor="color-white"
       >
@@ -137,12 +137,15 @@ export function AudioInputView({
               width: '36px',
               height: '36px',
               cursor: 'pointer',
-              border: '1px solid #E5E7EB',
+              border: '1px solid color-gray-200',
               borderRadius: '10px',
               backgroundColor: 'color-white',
               transition:
                 'background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease',
-              _hover: { backgroundColor: '#F8FAFC', borderColor: '#CBD5E1' },
+              _hover: {
+                backgroundColor: 'color-gray-50',
+                borderColor: 'color-gray-300',
+              },
             },
           }}
           containerProps={{
@@ -210,7 +213,7 @@ export function AudioInputView({
         <Vertical
           gap="8px"
           padding="12px 14px"
-          border="1px solid #E5E7EB"
+          border="1px solid color-gray-200"
           borderRadius="12px"
           backgroundColor="color-white"
         >

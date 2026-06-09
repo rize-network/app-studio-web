@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, Horizontal, Center } from 'app-studio';
+import { View, Text, Image, Horizontal, Center, Input } from 'app-studio';
 import { UploadIcon } from '../../Icon/Icon';
 import { UploadStateProps, UploadViewProps } from './Uploader.props';
 // Defines the `UploadView` functional component, responsible for rendering the UI of the Uploader based on provided properties and internal state.
@@ -109,7 +109,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
       >
         <View
           height={4}
-          backgroundColor="rgba(0,0,0,0.1)"
+          backgroundColor="color-black-100"
           width="100%"
           borderRadius={2}
           {...views?.view}
@@ -135,7 +135,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
     <Center
       onClick={handleClick}
       cursor="pointer"
-      border="1px solid rgba(0,0,0,0.1)"
+      border="1px solid color-black-100"
       borderRadius={8}
       padding={16}
       flexDirection="column"
@@ -173,8 +173,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
       {!isLoading &&
         errorMessage &&
         renderError({ errorMessage, errorMessageProps })}
-      <View
-        as="input"
+      <Input
         type="file"
         ref={fileInputRef}
         onChange={handleFileChange}

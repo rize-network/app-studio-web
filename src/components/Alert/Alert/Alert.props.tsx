@@ -13,6 +13,12 @@ export interface AlertProps extends ViewProps {
   children?: React.ReactNode;
   // Optional variant property to determine the style of the alert
   variant?: Variant;
+  // Material-UI compatibility alias for `variant`
+  severity?: string;
+  // Chakra-UI compatibility alias for `variant`
+  status?: string;
+  // Optional callback invoked when the alert's dismiss/close affordance is activated
+  onClose?: () => void;
   // Optional styles property to apply custom styles to the alert component
   views?: AlertStyles;
   /**

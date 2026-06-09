@@ -4,7 +4,8 @@ import { InputProps, Shadow } from 'app-studio';
 import { CheckboxStyles, Size } from './Checkbox.type';
 import { ViewProps } from 'app-studio';
 
-export interface CheckboxProps extends Omit<InputProps, 'size'> {
+export interface CheckboxProps
+  extends Omit<InputProps, 'size' | 'onChange' | 'shadow'> {
   id?: string;
   icon?: React.ReactNode;
   error?: any;

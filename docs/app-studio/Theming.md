@@ -144,7 +144,7 @@ App-Studio supports multiple ways to reference colors:
 
 ```javascript
 import { View, Text } from 'app-studio';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
 function Example() {
   return (
@@ -487,3 +487,10 @@ Each palette has these shades: `50, 100, 200, 300, 400, 500, 600, 700, 800, 900`
 - **Dark Mode**: Uses `defaultDarkPalette` and `defaultDarkColors`
 - Colors automatically switch based on `themeMode` unless using `light.*` or `dark.*` prefix
 - Color values are inverted for dark mode (e.g., `color-white` becomes black in dark mode)
+
+### Making a theme slot adaptive vs constant
+The value you assign to a theme slot decides whether it follows the mode or stays fixed:
+- **Constant** — a literal value (`primary: '#2563eb'`) is emitted as-is and never changes between modes. Use for brand identity.
+- **Adaptive** — a token reference (`text: 'color-black'`, `canvas: 'color-white'`) is emitted as `var(--color-…)` and **flips with the mode** (`color-black` → white in dark). Use for structural neutrals.
+
+This is the foundation of the design-system layer's "one config, both modes" rule — see [docs/design-system/theming.md §2.1](../design-system/theming.md#21-one-config-both-modes--the-adaptive-rule).

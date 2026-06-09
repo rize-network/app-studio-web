@@ -13,9 +13,9 @@ export interface HoverCardContextType {
   // Function to cancel any pending timer that would close the hover card.
   cancelCloseTimer: () => void;
   // A ref object pointing to the DOM element that triggers the hover card.
-  triggerRef: React.RefObject<HTMLDivElement>;
+  triggerRef: React.RefObject<HTMLDivElement | null>;
   // A ref object pointing to the DOM element representing the hover card's content.
-  contentRef: React.RefObject<HTMLDivElement>;
+  contentRef: React.RefObject<HTMLDivElement | null>;
   // A unique identifier for the hover card's content element.
   contentId: string;
   // A unique identifier for the hover card's trigger element.

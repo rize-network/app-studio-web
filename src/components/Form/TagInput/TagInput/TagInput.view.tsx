@@ -182,7 +182,10 @@ const TagInputView: React.FC<TagInputViewProps> = ({
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
-        views={{ ...views, container: { ...views?.container, ...views?.inputContainer } }}
+        views={{
+          ...views,
+          container: { ...views?.container, ...views?.inputContainer },
+        }}
         onClick={onClick}
         onMouseEnter={() => setIsHovered?.(true)}
         onMouseLeave={() => setIsHovered?.(false)}

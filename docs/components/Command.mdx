@@ -4,19 +4,19 @@ A versatile component for searching, filtering, and executing commands or action
 
 ### **Import**
 ```tsx
-import { Command } from '@app-studio/web';
+import { Command } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React, { useState } from 'react';
-import { Command } from '@app-studio/web';
-import { Button } from '@app-studio/web';
+import { Command } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 import { HomeIcon,
   SettingsIcon,
   UserIcon,
   InfoIcon,
-  SearchIcon, } from '@app-studio/web';
+  SearchIcon, } from '@app-studio/components';
 
 export const DefaultCommand = () => {
   const [open, setOpen] = useState(false);
@@ -87,8 +87,8 @@ An optional array of command groups to be displayed.
 
 ```tsx
 import React, { useState } from 'react';
-import { Command } from '@app-studio/web';
-import { Button } from '@app-studio/web';
+import { Command } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 import { HomeIcon,
   SettingsIcon,
   UserIcon,
@@ -96,7 +96,7 @@ import { HomeIcon,
   DustBinIcon,
   CopyIcon,
   PlayIcon,
-  PauseIcon, } from '@app-studio/web';
+  PauseIcon, } from '@app-studio/components';
 
 export const GroupedCommand = () => {
   const [open, setOpen] = useState(false);

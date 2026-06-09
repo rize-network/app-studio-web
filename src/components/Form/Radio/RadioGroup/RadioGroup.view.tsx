@@ -27,7 +27,7 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
   const Container = direction === 'vertical' ? Vertical : Horizontal;
   // Processes each child element (expected to be `Radio` components) to inject common props such as `name`, `isChecked`, `isDisabled`, `isReadOnly`, and a unified `onChange` handler, ensuring proper group functionality.
   const processedChildren = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
+    if (React.isValidElement<RadioProps>(child)) {
       const radioProps: Partial<RadioProps> = {
         name,
         isChecked: child.props.value === selectedValue,

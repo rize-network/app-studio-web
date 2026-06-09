@@ -4,20 +4,20 @@ A floating menu that appears upon user interaction, typically a right-click or l
 
 ### **Import**
 ```tsx
-import { ContextMenu } from '@app-studio/web';
+import { ContextMenu } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { ContextMenu } from '@app-studio/web';
+import { ContextMenu } from '@app-studio/components';
 import { Text, Vertical, View } from 'app-studio';
 import { CopyIcon,
   EditIcon,
   DeleteIcon,
   DownloadIcon,
-  ShareIcon, } from '@app-studio/web';
-import { ContextMenuItem } from '@app-studio/web';
+  ShareIcon, } from '@app-studio/components';
+import { ContextMenuItem } from '@app-studio/components';
 
 export const DefaultContextMenu = () => {
   const handleCopy = () => alert('Copy clicked');

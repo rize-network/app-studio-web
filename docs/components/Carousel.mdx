@@ -4,13 +4,13 @@ A versatile component for displaying a collection of content in a rotating seque
 
 ### **Import**
 ```tsx
-import { Carousel } from '@app-studio/web';
+import { Carousel } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Carousel } from '@app-studio/web';
+import { Carousel } from '@app-studio/components';
 import { View } from 'app-studio';
 import { Text } from 'app-studio';
 
@@ -56,7 +56,7 @@ Enables or disables automatic slide progression.
 
 ```tsx
 import React from 'react';
-import { Carousel } from '@app-studio/web';
+import { Carousel } from '@app-studio/components';
 import { View } from 'app-studio';
 import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
@@ -105,11 +105,11 @@ An optional array of indices that define specific steps or points in the carouse
 
 ```tsx
 import React, { useState } from 'react';
-import { Carousel } from '@app-studio/web';
+import { Carousel } from '@app-studio/components';
 import { View } from 'app-studio';
 import { Text } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
 export const StepIndicesDemo = () => {
   const [activeIndex, setActiveIndex] = useState(0);

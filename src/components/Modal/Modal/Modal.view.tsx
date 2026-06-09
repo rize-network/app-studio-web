@@ -105,6 +105,9 @@ export const ModalContainer: React.FC<ContainerProps> = React.memo(
     shape = 'rounded',
     views,
     isOpen = true,
+    // Strip ContainerProps's domain `position` (Modal-specific enum) so it
+    // doesn't reach the underlying Vertical which expects CSS Property.Position.
+    position: _position,
     ...props
   }) => {
     const defaultShadow =

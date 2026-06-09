@@ -46,7 +46,7 @@ export interface DropZoneStateProps {
   // Parameters: `e` (React.ChangeEvent<HTMLInputElement>) - The change event object from the file input.
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   // A ref object used to directly access and manipulate the hidden file input element.
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
   // The URL of the file currently selected for preview, or `null` if no file is selected.
   preview: string | null;
 }

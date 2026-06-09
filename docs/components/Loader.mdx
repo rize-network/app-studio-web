@@ -4,13 +4,13 @@ A loading indicator component with multiple types, sizes, speeds, and text posit
 
 ### **Import**
 ```tsx
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 
 export const DefaultLoader = () => (
   <Loader />
@@ -26,7 +26,7 @@ Defines the type of the loader.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const LoaderTypes = () => (
@@ -49,7 +49,7 @@ Sets the size of the loader.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const LoaderSizes = () => (
@@ -68,7 +68,7 @@ Using pixel values for custom sizes.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const CustomSizeLoaders = () => (
@@ -88,7 +88,7 @@ Defines the color of the loader element.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const ColoredLoaders = () => (
@@ -111,7 +111,7 @@ Controls the speed of the loader's animation.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const LoaderSpeeds = () => (
@@ -130,7 +130,7 @@ Text or content to display with the loader.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 
 export const LoaderWithText = () => (
   <Loader>Loading...</Loader>
@@ -146,7 +146,7 @@ Determines the position of the text relative to the loader.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 
 export const TextPositions = () => (
@@ -166,7 +166,7 @@ Sets the color of the text displayed with the loader.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 
 export const ColoredTextLoader = () => (
   <Loader 
@@ -183,7 +183,7 @@ Common loading state patterns.
 
 ```tsx
 import React, { useState } from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Button, Vertical } from 'app-studio';
 
 export const LoadingStates = () => {
@@ -213,7 +213,7 @@ Small loader for inline use.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Text, Horizontal } from 'app-studio';
 
 export const InlineLoader = () => (
@@ -229,7 +229,7 @@ Centered loader for full page loading.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Center } from 'app-studio';
 
 export const FullPageLoader = () => (
@@ -244,8 +244,8 @@ Loader inside a card component.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
-import { Card } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
+import { Card } from '@app-studio/components';
 import { Center } from 'app-studio';
 
 export const CardLoader = () => (
@@ -262,7 +262,7 @@ Loader integrated with button.
 
 ```tsx
 import React, { useState } from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Button, Horizontal } from 'app-studio';
 
 export const ButtonLoader = () => {
@@ -290,7 +290,7 @@ Showcasing all loader types with customization.
 
 ```tsx
 import React from 'react';
-import { Loader } from '@app-studio/web';
+import { Loader } from '@app-studio/components';
 import { Vertical, Horizontal, Text } from 'app-studio';
 
 export const LoaderShowcase = () => (

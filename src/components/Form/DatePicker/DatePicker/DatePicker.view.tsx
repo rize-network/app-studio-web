@@ -67,13 +67,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
     transition: 'all 0.2s ease-in-out',
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
-    color: isDisabled
-      ? isDark
-        ? 'color-gray-500'
-        : 'color-gray-400'
-      : isDark
-      ? 'color-gray-100'
-      : 'color-gray-900',
+    color: isDisabled ? 'color-gray-400' : 'color-gray-900',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
     ...views['field'],
   };
@@ -104,7 +98,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
               htmlFor={id}
               color={'theme-primary'}
               error={error}
-              {...views}
+              views={views}
             >
               {label}
             </FieldLabel>

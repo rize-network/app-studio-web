@@ -19,7 +19,7 @@ export type Variant = 'default' | 'outline' | 'none';
  * Prompt example interface
  */
 export interface PromptExample {
-  id: string;
+  id: string | number;
   text: string;
 }
 

@@ -1,6 +1,6 @@
 # Coding Conventions
 
-This document outlines the coding conventions and standards used in the App Studio Web Component Library. Following these conventions ensures consistency across the codebase and makes it easier for developers to understand, maintain, and contribute to the project.
+This document outlines the coding conventions and standards used in the App Studio Components library. Following these conventions ensures consistency across the codebase and makes it easier for developers to understand, maintain, and contribute to the project.
 
 ## Table of Contents
 

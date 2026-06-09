@@ -18,21 +18,21 @@ export const Sizes: Record<Size, CSSProperties> = {
 // Defines a map of CSS properties for different visual variants of the chat widget, such as default, glassy, and minimal designs.
 export const Variants: Record<Variant, CSSProperties> = {
   default: {
-    backgroundColor: '#ffffff',
-    border: '1px solid #e2e8f0',
+    backgroundColor: 'color-white',
+    border: '1px solid color-gray-200',
     borderRadius: '12px',
     boxShadow: '0 12px 32px rgba(15, 23, 42, 0.08)',
   },
   glassy: {
-    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+    backgroundColor: 'color-white-900',
     backdropFilter: 'blur(10px)',
     border: '1px solid rgba(226, 232, 240, 0.9)',
     borderRadius: '12px',
     boxShadow: '0 12px 32px rgba(15, 23, 42, 0.08)',
   },
   minimal: {
-    backgroundColor: '#ffffff',
-    border: '1px solid #e2e8f0',
+    backgroundColor: 'color-white',
+    border: '1px solid color-gray-200',
     borderRadius: '12px',
   },
 };
@@ -56,24 +56,24 @@ export const BubbleSizes: Record<Size, CSSProperties> = {
 };
 // Defines the default CSS properties for chat bubbles sent by the user, including background, text color, and alignment.
 export const UserBubbleStyles: CSSProperties = {
-  backgroundColor: '#1D4ED8',
-  color: '#ffffff',
+  backgroundColor: 'theme-primary',
+  color: 'color-white',
   alignSelf: 'flex-end',
   borderBottomRightRadius: '4px',
 };
 // Defines the default CSS properties for chat bubbles sent by the assistant, including background, text color, alignment, and border.
 export const AssistantBubbleStyles: CSSProperties = {
-  backgroundColor: '#ffffff',
-  color: '#0F172A',
+  backgroundColor: 'color-white',
+  color: 'color-gray-900',
   alignSelf: 'flex-start',
   borderBottomLeftRadius: '4px',
-  border: '1px solid #E2E8F0',
+  border: '1px solid color-gray-200',
 };
 // Defines the CSS properties for the container that holds the chat input field and related controls.
 export const InputContainerStyles: CSSProperties = {
   position: 'relative',
-  backgroundColor: '#ffffff',
-  borderTop: '1px solid #E2E8F0',
+  backgroundColor: 'color-white',
+  borderTop: '1px solid color-gray-200',
   padding: '12px',
   display: 'flex',
   alignItems: 'flex-end',
@@ -96,7 +96,7 @@ export const DefaultChatWidgetStyles = {
     flexDirection: 'column' as const,
     gap: '12px',
     padding: '16px',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: 'color-gray-50',
   },
   inputContainer: InputContainerStyles,
   bubble: {
@@ -109,13 +109,13 @@ export const DefaultChatWidgetStyles = {
     position: 'absolute' as const,
     top: '-24px',
     fontSize: '12px',
-    color: '#64748B',
-    backgroundColor: 'rgba(255, 255, 255, 0.96)',
+    color: 'color-gray-500',
+    backgroundColor: 'color-white-900',
     padding: '2px 8px',
     borderRadius: '9999px',
     opacity: 0,
     transition: 'opacity 0.15s ease-out',
-    border: '1px solid #E2E8F0',
+    border: '1px solid color-gray-200',
   },
   input: {
     flex: 1,

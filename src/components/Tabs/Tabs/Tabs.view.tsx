@@ -31,21 +31,21 @@ const getTabsVariantStyles = (
         gap: 6,
         padding: 6,
         borderRadius: 16, // radius-xl
-        backgroundColor: isDark ? 'color-gray-800' : 'color-gray-100',
+        backgroundColor: 'color-gray-100',
       },
       tab: {
         minHeight: 44,
         padding: '0 22px',
         borderRadius: 12, // radius-lg
-        color: isDark ? 'color-gray-300' : 'color-gray-600',
+        color: 'color-gray-600',
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: isDark ? 'color-gray-800' : 'color-gray-100',
+        borderColor: 'color-gray-100',
         style: { backgroundColor: 'transparent' },
       },
       activeTab: {
-        backgroundColor: isDark ? 'color-gray-700' : 'color-white',
-        color: isDark ? 'color-white' : 'color-gray-900',
+        backgroundColor: 'color-white',
+        color: 'color-gray-900',
         boxShadow: isDark
           ? '0 1px 3px rgba(0, 0, 0, 0.35)'
           : '0 1px 2px rgba(0, 0, 0, 0.06)',
@@ -73,11 +73,11 @@ const getTabsVariantStyles = (
         minHeight: 44,
         padding: '0 22px',
         borderRadius: '999px',
-        backgroundColor: isDark ? 'color-gray-900' : 'color-white',
-        color: isDark ? 'color-gray-200' : 'color-gray-600',
+        backgroundColor: 'color-white',
+        color: 'color-gray-600',
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: isDark ? 'color-gray-700' : 'color-gray-200',
+        borderColor: 'color-gray-200',
       },
       activeTab: {
         backgroundColor: 'theme-primary',
@@ -109,9 +109,9 @@ const getTabsVariantStyles = (
       minHeight: 44,
       padding: '0 4px',
       borderRadius: 0,
-      color: isDark ? 'color-gray-400' : 'color-gray-500',
+      color: 'color-gray-500',
       borderBottom: '3px solid',
-      borderColor: isDark ? 'color-gray-900' : 'color-white',
+      borderColor: 'color-white',
       style: { backgroundColor: 'transparent' },
     },
     activeTab: {

@@ -252,7 +252,7 @@ const StandardButton: React.FC<
   borderMovingDuration = 2,
   borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
   animatedStrokeAccentColor = '#705CFF',
-  animatedStrokeTextColor = '#333333',
+  animatedStrokeTextColor = 'color-gray-900',
   ...props
 }) => {
   // --- Common Helpers ---
@@ -590,7 +590,7 @@ const ButtonView = React.memo(
         borderMovingDuration = 2,
         borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
         animatedStrokeAccentColor = '#705CFF',
-        animatedStrokeTextColor = '#333333',
+        animatedStrokeTextColor = 'color-gray-900',
         ...props
       },
       ref

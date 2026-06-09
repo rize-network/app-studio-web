@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Vertical, Text, Button, Horizontal } from 'app-studio';
+import { Vertical, Text, Horizontal } from 'app-studio';
+import { Button } from '../../Button/Button';
 import { Title } from '../Title';
 
 /**

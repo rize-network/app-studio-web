@@ -170,41 +170,49 @@ type SurfacePalette = {
   appearance: 'light' | 'dark';
 };
 
-const getLightPalette = (config: DesignSystemConfig): SurfacePalette => {
-  const isDark = config.metadata.defaultAppearance === 'dark';
-  if (!isDark) return { ...config.theme, appearance: 'light' };
+// Both palettes carry the brand's theme slots as CSS-ready values: a token
+// (`color-black`) becomes `var(--color-black)`, a literal (`#2563eb`) passes
+// through. The frame wraps its content in a DesignSystemProvider pinned to
+// `appearance`, so every `var(--…)` flips for that mode (`data-theme`). Because
+// the values are already CSS-ready, samples can drop them into a component prop
+// OR a raw inline `style` / gradient string and they resolve the same way — no
+// per-sample color detection, no light/dark branching. app-studio owns the flip.
+const buildPalette = (
+  config: DesignSystemConfig,
+  appearance: 'light' | 'dark'
+): SurfacePalette => {
+  const t = config.theme;
   return {
-    ...config.theme,
-    canvas: '#ffffff',
-    surface: '#f5f5f5',
-    text: '#1a1a1a',
-    muted: 'rgba(0,0,0,0.6)',
-    border: 'rgba(0,0,0,0.1)',
-    appearance: 'light',
+    canvas: toCss(t.canvas),
+    surface: toCss(t.surface),
+    text: toCss(t.text),
+    muted: toCss(t.muted),
+    border: toCss(t.border),
+    primary: toCss(t.primary),
+    secondary: toCss(t.secondary),
+    success: toCss(t.success),
+    warning: toCss(t.warning),
+    error: toCss(t.error),
+    onPrimary: toCss(t.onPrimary),
+    appearance,
   };
 };
 
-const getDarkPalette = (config: DesignSystemConfig): SurfacePalette => {
-  const isDark = config.metadata.defaultAppearance === 'dark';
-  if (isDark) return { ...config.theme, appearance: 'dark' };
-  return {
-    ...config.theme,
-    canvas: '#0d0d0d',
-    surface: '#1a1a1a',
-    text: '#ffffff',
-    muted: 'rgba(255,255,255,0.62)',
-    border: 'rgba(255,255,255,0.14)',
-    appearance: 'dark',
-  };
-};
+const getLightPalette = (config: DesignSystemConfig): SurfacePalette =>
+  buildPalette(config, 'light');
+
+const getDarkPalette = (config: DesignSystemConfig): SurfacePalette =>
+  buildPalette(config, 'dark');
 
 const PaletteFrame = ({
   palette,
   label,
+  config,
   children,
 }: {
   palette: SurfacePalette;
   label: string;
+  config: DesignSystemConfig;
   children: React.ReactNode;
 }) => (
   <Vertical gap={10} flex="1 1 320px" minWidth={0}>
@@ -227,21 +235,47 @@ const PaletteFrame = ({
         {label}
       </Text>
     </Horizontal>
-    <View
-      padding={20}
-      borderRadius={16}
-      borderWidth={1}
-      borderStyle="solid"
-      style={{
-        backgroundColor: palette.canvas,
-        borderColor: palette.border,
-        color: palette.text,
-      }}
-    >
-      {children}
-    </View>
+    {/* Pin this frame to its appearance; app-studio resolves every theme/color
+        token inside it for that mode — light tokens render light here, dark
+        tokens render dark in the sibling frame. No manual color resolution. */}
+    <DesignSystemProvider config={config} mode={palette.appearance}>
+      <View
+        padding={20}
+        borderRadius={16}
+        borderWidth={1}
+        borderStyle="solid"
+        backgroundColor="color-white"
+        borderColor="color-gray-200"
+        color="color-black"
+      >
+        {children}
+      </View>
+    </DesignSystemProvider>
   </Vertical>
 );
+
+// Token → CSS boundary. app-studio resolves design tokens (`color-*`,
+// `theme-*`, `light-*`, `dark-*`) only on component PROPS, never inside a raw
+// inline `style` object or a gradient/box-shadow string. Anything that has to
+// live in raw CSS must cross this boundary first: a token becomes the matching
+// `var(--token)` (which still flips per mode via `data-theme`), and any literal
+// (hex / rgba) passes through untouched. This is the ONLY place the showcase
+// translates a token — samples never inspect or branch on the color itself.
+const toCss = (value?: string): string => {
+  if (!value || typeof value !== 'string') return value as string;
+  return /^(color|theme|light|dark)-/.test(value) ? `var(--${value})` : value;
+};
+
+// Translucent fill from any color (token or literal) for use in raw CSS.
+// `color-mix` accepts both `var(--token)` and hex, so the result flips per mode
+// when fed a token — no light/dark branching required.
+const softCss = (value: string, percent: number): string =>
+  `color-mix(in srgb, ${toCss(value)} ${percent}%, transparent)`;
+
+// Inverse of `toCss` for DISPLAY only: turn `var(--color-black)` back into the
+// readable token name (`color-black`) when we want to show the token as text.
+const tokenLabel = (value?: string): string =>
+  value && value.startsWith('var(--') ? value.slice(6, -1) : (value as string);
 
 const defaultPersonality: BrandPersonality = {
   cornerStyle: 'soft',
@@ -309,7 +343,7 @@ const personalitySurfaceStyle = (
     case 'mono':
       return {
         backgroundColor:
-          palette.appearance === 'dark' ? '#0a0a0a' : palette.surface,
+          palette.appearance === 'dark' ? '#0a0a0a' : toCss(palette.surface),
       };
     case 'matte':
       return {
@@ -317,7 +351,8 @@ const personalitySurfaceStyle = (
       };
     case 'paper':
     default:
-      return { backgroundColor: palette.surface };
+      // `surface` already flips per mode via its token — no branching needed.
+      return { backgroundColor: toCss(palette.surface) };
   }
 };
 
@@ -325,24 +360,20 @@ const personalityAccentBackground = (
   p: BrandPersonality,
   palette: SurfacePalette
 ): string => {
+  const primary = toCss(palette.primary);
+  const secondary = toCss(palette.secondary || palette.primary);
   switch (p.accentTreatment) {
     case 'gradient':
-      return `linear-gradient(135deg, ${palette.primary} 0%, ${
-        palette.secondary || palette.primary
-      } 100%)`;
+      return `linear-gradient(135deg, ${primary} 0%, ${secondary} 100%)`;
     case 'glow':
-      return palette.primary;
+      return primary;
     case 'stripe':
-      return `repeating-linear-gradient(45deg, ${palette.primary} 0 8px, ${
-        palette.secondary || palette.primary
-      } 8px 16px)`;
+      return `repeating-linear-gradient(45deg, ${primary} 0 8px, ${secondary} 8px 16px)`;
     case 'halftone':
-      return `radial-gradient(circle at 30% 30%, ${palette.primary} 0%, ${
-        palette.secondary || palette.primary
-      } 70%)`;
+      return `radial-gradient(circle at 30% 30%, ${primary} 0%, ${secondary} 70%)`;
     case 'flat':
     default:
-      return palette.primary;
+      return primary;
   }
 };
 
@@ -351,7 +382,9 @@ const personalityAccentShadow = (
   palette: SurfacePalette
 ): string | undefined => {
   if (p.accentTreatment === 'glow') {
-    return `0 0 24px ${palette.primary}66, 0 0 4px ${palette.primary}`;
+    return `0 0 24px ${softCss(palette.primary, 40)}, 0 0 4px ${toCss(
+      palette.primary
+    )}`;
   }
   return undefined;
 };
@@ -593,10 +626,8 @@ const Section = ({
     borderWidth={1}
     borderStyle="solid"
     borderRadius={12}
-    style={{
-      backgroundColor: config.theme.canvas,
-      borderColor: config.theme.border,
-    }}
+    backgroundColor={config.theme.canvas}
+    borderColor={config.theme.border}
   >
     <Text
       fontSize={18}
@@ -625,9 +656,7 @@ const HeroSection = ({ config }: { config: DesignSystemConfig }) => {
       borderWidth={1}
       borderStyle="solid"
       borderColor={config.theme.border}
-      style={{
-        backgroundColor: config.theme.surface,
-      }}
+      backgroundColor={config.theme.surface}
     >
       <Horizontal width="100%" flexWrap="wrap" alignItems="stretch" gap={0}>
         <Vertical
@@ -1183,7 +1212,7 @@ const TierPricingCardSample = ({
                 paddingHorizontal={10}
                 paddingVertical={4}
                 borderRadius={personality.badgeRadius}
-                backgroundColor="rgba(255,255,255,0.22)"
+                backgroundColor={softCss(palette.onPrimary, 22)}
               >
                 <Horizontal gap={4} alignItems="center">
                   <Text
@@ -1209,7 +1238,9 @@ const TierPricingCardSample = ({
           <Text
             fontSize={13}
             lineHeight="18px"
-            color={tier.featured ? 'rgba(255,255,255,0.85)' : palette.muted}
+            color={
+              tier.featured ? softCss(palette.onPrimary, 85) : palette.muted
+            }
             style={{ fontStyle: personality.typeStyle }}
           >
             {tier.tagline}
@@ -1226,7 +1257,9 @@ const TierPricingCardSample = ({
           {tier.period ? (
             <Text
               fontSize={14}
-              color={tier.featured ? 'rgba(255,255,255,0.85)' : palette.muted}
+              color={
+                tier.featured ? softCss(palette.onPrimary, 85) : palette.muted
+              }
               style={{ fontStyle: personality.typeStyle }}
             >
               {tier.period}
@@ -1241,7 +1274,9 @@ const TierPricingCardSample = ({
                 height={18}
                 borderRadius={personality.cornerStyle === 'sharp' ? 2 : 9999}
                 backgroundColor={
-                  tier.featured ? 'rgba(255,255,255,0.22)' : palette.primary
+                  tier.featured
+                    ? softCss(palette.onPrimary, 22)
+                    : palette.primary
                 }
                 alignItems="center"
                 justifyContent="center"
@@ -1284,14 +1319,15 @@ const TierPricingCardSample = ({
           style={{
             display: 'flex',
             cursor: 'pointer',
-            backgroundColor: tier.featured
-              ? 'rgba(255,255,255,0.95)'
-              : palette.text,
+            // Featured card sits on `primary`, so its CTA is the inverse chip
+            // (`onPrimary` ground, `primary` ink). Both flip together with the
+            // card, so contrast holds in light AND dark with no branching.
+            backgroundColor: tier.featured ? palette.onPrimary : palette.text,
           }}
         >
           <Text
             fontSize={14}
-            color={tier.featured ? palette.text : palette.canvas}
+            color={tier.featured ? palette.primary : palette.canvas}
             style={{
               ...personalityLabelStyle(personality),
               letterSpacing:
@@ -1347,9 +1383,13 @@ const ProductPricingCardSample = ({
           style={{
             background:
               personality.accentTreatment === 'gradient'
-                ? `linear-gradient(135deg, ${palette.primary}33 0%, ${
-                    palette.secondary || palette.primary
-                  }33 100%)`
+                ? `linear-gradient(135deg, ${softCss(
+                    palette.primary,
+                    20
+                  )} 0%, ${softCss(
+                    palette.secondary || palette.primary,
+                    20
+                  )} 100%)`
                 : palette.appearance === 'dark'
                 ? 'rgba(255,255,255,0.06)'
                 : 'rgba(0,0,0,0.04)',
@@ -1581,9 +1621,13 @@ const FeaturedPricingCardSample = ({
             style={{
               background:
                 personality.accentTreatment === 'gradient'
-                  ? `linear-gradient(135deg, ${palette.primary}33 0%, ${
-                      palette.secondary || palette.primary
-                    }33 100%)`
+                  ? `linear-gradient(135deg, ${softCss(
+                      palette.primary,
+                      20
+                    )} 0%, ${softCss(
+                      palette.secondary || palette.primary,
+                      20
+                    )} 100%)`
                   : palette.appearance === 'dark'
                   ? 'rgba(255,255,255,0.06)'
                   : 'rgba(0,0,0,0.04)',
@@ -2444,7 +2488,7 @@ const BrandSnapshotSample = ({
                       'ui-monospace, SFMono-Regular, Menlo, monospace',
                   }}
                 >
-                  {swatch.value}
+                  {tokenLabel(swatch.value)}
                 </Text>
               </Vertical>
             </Horizontal>
@@ -2759,14 +2803,22 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
     <Vertical gap={24}>
       <Section title="Brand Snapshot (Light & Dark)" config={config}>
         <Vertical gap={20}>
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <BrandSnapshotSample
               palette={lightPalette}
               personality={personality}
               config={config}
             />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <BrandSnapshotSample
               palette={darkPalette}
               personality={personality}
@@ -2778,10 +2830,18 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
 
       <Section title="Buttons — Light & Dark" config={config}>
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <ButtonsSample palette={lightPalette} />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <ButtonsSample palette={darkPalette} />
           </PaletteFrame>
         </Horizontal>
@@ -2789,10 +2849,18 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
 
       <Section title="Status & Feedback — Light & Dark" config={config}>
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <StatusFeedbackSample palette={lightPalette} config={config} />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <StatusFeedbackSample palette={darkPalette} config={config} />
           </PaletteFrame>
         </Horizontal>
@@ -2800,10 +2868,18 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
 
       <Section title="Forms — Light & Dark" config={config}>
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <FormsSample palette={lightPalette} config={config} mode="light" />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <FormsSample palette={darkPalette} config={config} mode="dark" />
           </PaletteFrame>
         </Horizontal>
@@ -3021,10 +3097,18 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
 
       <Section title="Pricing — Booking (Light & Dark)" config={config}>
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <PricingCardSample palette={lightPalette} />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <PricingCardSample palette={darkPalette} />
           </PaletteFrame>
         </Horizontal>
@@ -3032,7 +3116,11 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
 
       <Section title="Pricing — SaaS Tiers (Light & Dark)" config={config}>
         <Vertical gap={20}>
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <Horizontal gap={16} flexWrap="wrap" alignItems="stretch">
               {tierPricingPlans.map((tier) => (
                 <TierPricingCardSample
@@ -3044,7 +3132,11 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
               ))}
             </Horizontal>
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <Horizontal gap={16} flexWrap="wrap" alignItems="stretch">
               {tierPricingPlans.map((tier) => (
                 <TierPricingCardSample
@@ -3061,13 +3153,21 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
 
       <Section title="Pricing — Product (Light & Dark)" config={config}>
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <ProductPricingCardSample
               palette={lightPalette}
               personality={personality}
             />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <ProductPricingCardSample
               palette={darkPalette}
               personality={personality}
@@ -3081,13 +3181,21 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
         config={config}
       >
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <FeaturedPricingCardSample
               palette={lightPalette}
               personality={personality}
             />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <FeaturedPricingCardSample
               palette={darkPalette}
               personality={personality}
@@ -3114,7 +3222,11 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
         config={config}
       >
         <Vertical gap={20}>
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <Horizontal gap={16} flexWrap="wrap" alignItems="stretch">
               {contentArticles.map((article) => (
                 <ContentCardWithBadgeSample
@@ -3126,7 +3238,11 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
               ))}
             </Horizontal>
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <Horizontal gap={16} flexWrap="wrap" alignItems="stretch">
               {contentArticles.map((article) => (
                 <ContentCardWithBadgeSample
@@ -3143,10 +3259,18 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
 
       <Section title="CTA Card — Light & Dark" config={config}>
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <CTACardSample palette={lightPalette} config={config} />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <CTACardSample palette={darkPalette} config={config} />
           </PaletteFrame>
         </Horizontal>
@@ -3154,10 +3278,18 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
 
       <Section title="Product Card — Light & Dark" config={config}>
         <Horizontal gap={20} flexWrap="wrap" alignItems="flex-start">
-          <PaletteFrame palette={lightPalette} label="On light surface">
+          <PaletteFrame
+            config={config}
+            palette={lightPalette}
+            label="On light surface"
+          >
             <ProductCardSample palette={lightPalette} config={config} />
           </PaletteFrame>
-          <PaletteFrame palette={darkPalette} label="On dark surface">
+          <PaletteFrame
+            config={config}
+            palette={darkPalette}
+            label="On dark surface"
+          >
             <ProductCardSample palette={darkPalette} config={config} />
           </PaletteFrame>
         </Horizontal>
@@ -3476,9 +3608,7 @@ const ComponentPreview = ({ config }: { config: DesignSystemConfig }) => {
   );
 };
 
-const Showcase = ({ config }: { config: DesignSystemConfig }) => {
-  const sourceHref = `/${config.metadata.sourcePath}`;
-
+export const DesignSystem = ({ config }: { config: DesignSystemConfig }) => {
   return (
     <DesignSystemProvider config={config}>
       <Helmet>
@@ -3490,9 +3620,9 @@ const Showcase = ({ config }: { config: DesignSystemConfig }) => {
         minHeight="100vh"
         padding={28}
         fontFamily={config.tokens.typography.fontFamily}
+        backgroundColor={config.theme.canvas}
+        color={config.theme.text}
         style={{
-          backgroundColor: config.theme.canvas,
-          color: config.theme.text,
           textTransform: config.metadata.id === 'spacex' ? 'uppercase' : 'none',
         }}
       >
@@ -3513,112 +3643,29 @@ const Showcase = ({ config }: { config: DesignSystemConfig }) => {
               color={config.theme.muted}
               fontFamily={config.tokens.typography.fontFamily}
             >
-              Live App Studio components rendered with config defaults from{' '}
-              <a
-                href={sourceHref}
-                target="_blank"
-                rel="noreferrer"
-                style={{ color: config.theme.primary, fontWeight: 700 }}
-              >
-                {config.metadata.sourcePath}
-              </a>
-              .
+              Live App Studio components rendered with the{' '}
+              {config.metadata.label} config defaults.
             </Text>
           </Vertical>
 
-          <Tabs
-            defaultValue="components"
-            tabs={[
-              {
-                title: 'Components',
-                value: 'components',
-                content: (
-                  <Vertical gap={28} marginTop={24}>
-                    <FoundationPreview config={config} />
-                    <ComponentPreview config={config} />
-                  </Vertical>
-                ),
-              },
-              {
-                title: 'Source HTML',
-                value: 'source',
-                content: (
-                  <View
-                    width="100%"
-                    height="calc(100vh - 180px)"
-                    borderWidth={1}
-                    borderStyle="solid"
-                    borderRadius={12}
-                    overflow="hidden"
-                    marginTop={24}
-                    borderColor={config.theme.border}
-                  >
-                    <iframe
-                      src={sourceHref}
-                      title={`${config.metadata.label} Source`}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        border: 'none',
-                        backgroundColor: '#fff',
-                      }}
-                    />
-                  </View>
-                ),
-              },
-              {
-                title: 'Compare',
-                value: 'compare',
-                content: (
-                  <Horizontal gap={24} alignItems="flex-start" marginTop={24}>
-                    <View flex={1} minWidth={0}>
-                      <Vertical gap={28}>
-                        <FoundationPreview config={config} />
-                        <ComponentPreview config={config} />
-                      </Vertical>
-                    </View>
-                    <View
-                      flex={1}
-                      minWidth={0}
-                      height="calc(100vh - 180px)"
-                      style={{ position: 'sticky', top: 28 }}
-                    >
-                      <View
-                        width="100%"
-                        height="100%"
-                        borderWidth={1}
-                        borderStyle="solid"
-                        borderRadius={12}
-                        overflow="hidden"
-                        borderColor={config.theme.border}
-                      >
-                        <iframe
-                          src={sourceHref}
-                          title={`${config.metadata.label} Source`}
-                          style={{
-                            width: '100%',
-                            height: '100%',
-                            border: 'none',
-                            backgroundColor: '#fff',
-                          }}
-                        />
-                      </View>
-                    </View>
-                  </Horizontal>
-                ),
-              },
-            ]}
-          />
+          <Vertical gap={28}>
+            <FoundationPreview config={config} />
+            <ComponentPreview config={config} />
+          </Vertical>
         </Vertical>
       </View>
     </DesignSystemProvider>
   );
 };
 
+type PageViewMode = 'components' | 'source' | 'compare';
+
 const DesignSystemPage = () => {
   const [activeConfigId, setActiveConfigId] =
     useState<DesignSystemConfigId>('airbnb');
+  const [viewMode, setViewMode] = useState<PageViewMode>('components');
   const activeConfig = designSystemConfigs[activeConfigId];
+  const sourceHref = `/${activeConfig.metadata.sourcePath}`;
 
   const groupedConfigs = useMemo(
     () =>
@@ -3629,6 +3676,73 @@ const DesignSystemPage = () => {
       })),
     []
   );
+
+  const viewModes: { value: PageViewMode; label: string }[] = [
+    { value: 'components', label: 'Components' },
+    { value: 'source', label: 'Source HTML' },
+    { value: 'compare', label: 'Compare' },
+  ];
+
+  const renderViewContent = () => {
+    if (viewMode === 'source') {
+      return (
+        <View
+          width="100%"
+          height="100vh"
+          style={{ backgroundColor: activeConfig.theme.canvas }}
+        >
+          <iframe
+            src={sourceHref}
+            title={`${activeConfig.metadata.label} Source`}
+            style={{
+              width: '100%',
+              height: '100%',
+              border: 'none',
+              backgroundColor: '#fff',
+            }}
+          />
+        </View>
+      );
+    }
+    if (viewMode === 'compare') {
+      return (
+        <Horizontal
+          width="100%"
+          height="100vh"
+          alignItems="stretch"
+          flexWrap="nowrap"
+        >
+          <View flex={1} minWidth={0} height="100%" overflow="auto">
+            <DesignSystem key={activeConfigId} config={activeConfig} />
+          </View>
+          <View
+            flex={1}
+            minWidth={0}
+            height="100%"
+            style={{
+              borderLeft: `1px solid ${activeConfig.theme.border}`,
+            }}
+          >
+            <iframe
+              src={sourceHref}
+              title={`${activeConfig.metadata.label} Source`}
+              style={{
+                width: '100%',
+                height: '100%',
+                border: 'none',
+                backgroundColor: '#fff',
+              }}
+            />
+          </View>
+        </Horizontal>
+      );
+    }
+    return (
+      <View width="100%" height="100vh" overflow="auto">
+        <DesignSystem key={activeConfigId} config={activeConfig} />
+      </View>
+    );
+  };
 
   return (
     <Horizontal
@@ -3663,7 +3777,47 @@ const DesignSystemPage = () => {
           </Text>
         </Vertical>
 
+        <Vertical gap={6}>
+          <Text
+            fontSize={11}
+            fontWeight="700"
+            letterSpacing="0.08em"
+            textTransform="uppercase"
+            color={activeConfig.theme.muted}
+          >
+            View
+          </Text>
+          {viewModes.map((mode) => {
+            const isActive = mode.value === viewMode;
+            return (
+              <Button
+                key={mode.value}
+                variant={isActive ? 'filled' : 'ghost'}
+                isFilled
+                onClick={() => setViewMode(mode.value)}
+                views={{
+                  container: {
+                    justifyContent: 'flex-start',
+                    borderRadius: 8,
+                  },
+                }}
+              >
+                {mode.label}
+              </Button>
+            );
+          })}
+        </Vertical>
+
         <Vertical gap={8}>
+          <Text
+            fontSize={11}
+            fontWeight="700"
+            letterSpacing="0.08em"
+            textTransform="uppercase"
+            color={activeConfig.theme.muted}
+          >
+            Brand
+          </Text>
           {groupedConfigs.map((item) => {
             const isActive = item.id === activeConfigId;
             return (
@@ -3696,8 +3850,8 @@ const DesignSystemPage = () => {
         </Vertical>
       </Vertical>
 
-      <View flex={1} minWidth={0} height="100vh" overflow="auto">
-        <Showcase key={activeConfigId} config={activeConfig} />
+      <View flex={1} minWidth={0} height="100vh">
+        {renderViewContent()}
       </View>
     </Horizontal>
   );

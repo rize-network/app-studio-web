@@ -66,7 +66,7 @@ export const HoverCardTrigger: React.FC<HoverCardTriggerProps> = ({
     ...views?.container,
     ...props,
   };
-  if (asChild && isValidElement(children)) {
+  if (asChild && isValidElement<Record<string, unknown>>(children)) {
     const child = Children.only(children);
     return cloneElement(child, { ...triggerProps, ...child.props });
   }
@@ -83,7 +83,7 @@ export const HoverCardContent: React.FC<HoverCardContentProps> = ({
   align = 'center',
   sideOffset = 8,
   style: userStyle,
-  backgroundColor = 'white',
+  backgroundColor = 'color-white',
   borderRadius = '4px',
   boxShadow = '0px 2px 8px rgba(0, 0, 0, 0.15)',
   padding = '12px',

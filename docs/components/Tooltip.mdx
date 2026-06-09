@@ -4,13 +4,13 @@ A tooltip component for displaying contextual information on hover or focus, wit
 
 ### **Import**
 ```tsx
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button } from 'app-studio';
 
 export const DefaultTooltip = () => (
@@ -28,7 +28,7 @@ The content to display in the tooltip.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Text, Vertical } from 'app-studio';
 
 export const TooltipContent = () => (
@@ -54,7 +54,7 @@ The preferred position of the tooltip.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Horizontal } from 'app-studio';
 
 export const TooltipPositions = () => (
@@ -84,7 +84,7 @@ The alignment of the tooltip relative to the trigger.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Vertical } from 'app-studio';
 
 export const TooltipAlignments = () => (
@@ -111,7 +111,7 @@ The size of the tooltip.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Horizontal } from 'app-studio';
 
 export const TooltipSizes = () => (
@@ -141,7 +141,7 @@ The visual style variant of the tooltip.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Horizontal } from 'app-studio';
 
 export const TooltipVariants = () => (
@@ -173,7 +173,7 @@ Delay in milliseconds before the tooltip opens on hover.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button } from 'app-studio';
 
 export const DelayedTooltip = () => (
@@ -191,7 +191,7 @@ Delay in milliseconds before the tooltip closes after hover stops.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button } from 'app-studio';
 
 export const CloseDelayTooltip = () => (
@@ -209,7 +209,7 @@ Whether to show an arrow pointing to the trigger.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Horizontal } from 'app-studio';
 
 export const TooltipArrows = () => (
@@ -232,7 +232,7 @@ Whether the tooltip is initially open.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button } from 'app-studio';
 
 export const DefaultOpenTooltip = () => (
@@ -250,7 +250,7 @@ Whether the tooltip is disabled.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button } from 'app-studio';
 
 export const DisabledTooltip = () => (
@@ -267,7 +267,7 @@ Custom styles for different parts of the tooltip.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button } from 'app-studio';
 
 export const StyledTooltip = () => (
@@ -296,8 +296,8 @@ Tooltips on icons for additional information.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
-import { InfoIcon } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
+import { InfoIcon } from '@app-studio/components';
 import { Horizontal, Text } from 'app-studio';
 
 export const IconTooltips = () => (
@@ -315,10 +315,10 @@ Tooltips for form field help text.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
-import { TextField } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
+import { TextField } from '@app-studio/components';
 import { Vertical, Horizontal, Text } from 'app-studio';
-import { InfoIcon } from '@app-studio/web';
+import { InfoIcon } from '@app-studio/components';
 
 export const FormFieldTooltips = () => (
   <Vertical gap={15}>
@@ -343,9 +343,9 @@ Tooltips for action buttons.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Horizontal } from 'app-studio';
-import { EditIcon, DeleteIcon, ShareIcon } from '@app-studio/web';
+import { EditIcon, DeleteIcon, ShareIcon } from '@app-studio/components';
 
 export const ActionTooltips = () => (
   <Horizontal gap={10}>
@@ -367,7 +367,7 @@ Tooltips with rich formatted content.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Vertical, Text, Horizontal } from 'app-studio';
 
 export const RichContentTooltip = () => (
@@ -403,8 +403,8 @@ Tooltips showing status information.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
-import { StatusIndicator } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
+import { StatusIndicator } from '@app-studio/components';
 import { Vertical, Text } from 'app-studio';
 
 export const StatusTooltip = () => (
@@ -427,7 +427,7 @@ Tooltips for truncated text.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Text } from 'app-studio';
 
 export const TruncatedTextTooltip = () => {
@@ -453,7 +453,7 @@ Tooltips on disabled elements.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button } from 'app-studio';
 
 export const DisabledElementTooltip = () => (
@@ -470,7 +470,7 @@ Tooltips with interactive content.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Vertical, Text } from 'app-studio';
 
 export const InteractiveTooltip = () => (
@@ -495,7 +495,7 @@ A comprehensive tooltip showcase.
 
 ```tsx
 import React from 'react';
-import { Tooltip } from '@app-studio/web';
+import { Tooltip } from '@app-studio/components';
 import { Button, Vertical, Horizontal, Text, Card } from 'app-studio';
 
 export const CompleteTooltipExample = () => (

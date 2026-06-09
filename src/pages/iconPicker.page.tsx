@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, Horizontal, Vertical } from 'app-studio';
 import { Separator } from 'src/components/Separator/Separator';
 import { IconPicker } from 'src/components/IconPicker/IconPicker';
-import { Icon } from 'src/components/Icon/Icon';
+import { Icon, IconName } from 'src/components/Icon/Icon';
 
 const IconPickerPage = () => {
-  const [icon, setIcon] = useState('user');
+  const [icon, setIcon] = useState<IconName>('user');
 
   return (
     <View

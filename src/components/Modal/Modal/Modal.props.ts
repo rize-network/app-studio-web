@@ -3,7 +3,8 @@ import { Elevation } from '../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
 import { CloseButtonPosition, Position, Shape, Size } from './Modal.type';
 // Defines the properties available for the Modal component, extending `ViewProps` but omitting its `size` property.
-export interface ModalProps extends Omit<ViewProps, 'size'> {
+export interface ModalProps
+  extends Omit<ViewProps, 'size' | 'shadow' | 'position'> {
   // Specifies the color of the close button.
   buttonColor?: string;
   // Determines the size of the close button icon.
@@ -26,6 +27,12 @@ export interface ModalProps extends Omit<ViewProps, 'size'> {
   position?: Position;
   // Defines the shadow style or elevation applied to the modal container.
   shadow?: Shadow | Elevation | ViewProps;
+  // Optional identifier used by modal registries / dynamic-modal renderers.
+  id?: string;
+  // Optional title rendered by modal registries / dynamic-modal renderers.
+  title?: string;
+  // Optional render function used by dynamic-modal renderers to produce the modal body.
+  render?: (ctx: any) => React.ReactNode;
 }
 // Describes the structure of the Modal component, including its sub-components.
 export interface ModalType extends React.FunctionComponent<ModalProps> {
@@ -93,7 +100,8 @@ export interface ModalLayoutProps {
   onHide?: (name?: string, props?: any) => void;
 }
 // Defines the properties for the modal's main content container.
-export interface ContainerProps extends Omit<ViewProps, 'size' | 'position'> {
+export interface ContainerProps
+  extends Omit<ViewProps, 'size' | 'position' | 'shadow'> {
   // Optional styling properties for nested view components within the container.
   views?: {
     // Styling properties for the container's main view.

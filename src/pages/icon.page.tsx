@@ -1,4 +1,4 @@
-import { Text, View, Vertical, Horizontal } from 'app-studio';
+import { Text, View, Vertical, Horizontal, Input } from 'app-studio';
 import React, { useState, useMemo } from 'react';
 import * as Icons from 'src/components/Icon/Icon';
 
@@ -27,8 +27,7 @@ export const IconPage = () => {
           </Text>
         </Vertical>
 
-        <View
-          as="input"
+        <Input
           placeholder="Search icons..."
           padding={12}
           borderRadius={8}
@@ -39,7 +38,7 @@ export const IconPage = () => {
           outline="none"
           maxWidth={400}
           value={search}
-          onChange={(e: any) => setSearch(e.target.value)}
+          onChange={(e) => setSearch((e.target as HTMLInputElement).value)}
         />
 
         <Vertical gap={20}>

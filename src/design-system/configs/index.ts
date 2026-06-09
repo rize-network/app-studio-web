@@ -1,3 +1,4 @@
+import defaultConfig from './default.json';
 import airbnb from './airbnb.json';
 import apple from './apple.json';
 import coinbase from './coinbase.json';
@@ -37,4 +38,10 @@ export type DesignSystemConfigId = keyof typeof designSystemConfigs;
 
 export const designSystemConfigList = Object.values(designSystemConfigs);
 
-export const defaultDesignSystemConfig = designSystemConfigs.airbnb;
+/**
+ * Brand-neutral, light/dark-adaptive fallback used by `DesignSystemProvider`
+ * when no `config`/`configId` is supplied. Its neutral slots reference
+ * auto-flipping `color-*` tokens, so it renders correctly in both modes.
+ * See `docs/design-system/theming.md` §2.1.
+ */
+export const defaultDesignSystemConfig = defaultConfig as DesignSystemConfig;

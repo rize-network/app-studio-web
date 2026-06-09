@@ -1,15 +1,15 @@
 # Creating a Simple Form
 
-This tutorial will guide you through creating a simple form using the App Studio Web Component Library.
+This tutorial will guide you through creating a simple form using the App Studio Components Component Library.
 
 ## Introduction
 
-Forms are a fundamental part of web applications. In this tutorial, we'll create a simple contact form with validation using the App Studio Web Component Library components.
+Forms are a fundamental part of web applications. In this tutorial, we'll create a simple contact form with validation using the App Studio Components Component Library components.
 
 ## Prerequisites
 
 - Basic knowledge of React
-- App Studio Web Component Library installed
+- App Studio Components Component Library installed
 - Formik and Yup for form handling and validation (optional)
 
 ## Step 1: Set Up the Basic Form Structure
@@ -19,7 +19,7 @@ First, let's create a basic form structure using the `View` and `Vertical` compo
 ```jsx
 import React from 'react';
 import { View, Vertical } from 'app-studio';
-import { Text, Button } from '@app-studio/web';
+import { Text, Button } from '@app-studio/components';
 
 function ContactForm() {
   return (
@@ -45,7 +45,7 @@ Now, let's add form fields using the `TextField` and `TextArea` components:
 ```jsx
 import React, { useState } from 'react';
 import { View, Vertical } from 'app-studio';
-import { Text, Button, TextField, TextArea } from '@app-studio/web';
+import { Text, Button, TextField, TextArea } from '@app-studio/components';
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -109,7 +109,7 @@ Let's add form submission logic:
 ```jsx
 import React, { useState } from 'react';
 import { View, Vertical } from 'app-studio';
-import { Text, Button, TextField, TextArea, Alert } from '@app-studio/web';
+import { Text, Button, TextField, TextArea, Alert } from '@app-studio/components';
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -216,7 +216,7 @@ Let's add basic form validation:
 ```jsx
 import React, { useState } from 'react';
 import { View, Vertical } from 'app-studio';
-import { Text, Button, TextField, TextArea, Alert } from '@app-studio/web';
+import { Text, Button, TextField, TextArea, Alert } from '@app-studio/components';
 
 function ContactForm() {
   const [formData, setFormData] = useState({
@@ -356,7 +356,7 @@ export default ContactForm;
 
 ## Step 5 (Optional): Using Formik and Yup
 
-For more advanced form handling, you can use Formik and Yup with the App Studio Web Component Library's Formik components:
+For more advanced form handling, you can use Formik and Yup with the App Studio Components Component Library's Formik components:
 
 ```jsx
 import React from 'react';
@@ -369,7 +369,7 @@ import {
   Alert,
   FormikTextField,
   FormikTextArea
-} from '@app-studio/web';
+} from '@app-studio/components';
 
 // Validation schema
 const validationSchema = Yup.object({
@@ -469,7 +469,7 @@ import {
   Alert,
   FormikTextField,
   FormikTextArea
-} from '@app-studio/web';
+} from '@app-studio/components';
 
 // Validation schema
 const validationSchema = Yup.object({

@@ -4,6 +4,8 @@ import { Placement, Size, CloseButtonPosition } from './Drawer.type';
 export interface DrawerProps extends ViewProps {
   // Defines the position where the drawer will appear (e.g., 'left', 'right', 'top', 'bottom').
   placement?: Placement;
+  // Alias for `placement` accepted for compatibility with side-based drawer APIs.
+  side?: string;
   // Specifies the size of the drawer.
   size?: Size;
   // Indicates whether the drawer is currently open or closed.

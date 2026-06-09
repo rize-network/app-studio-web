@@ -4,13 +4,13 @@ A versatile file upload component with support for images, videos, and files, fe
 
 ### **Import**
 ```tsx
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 
 export const DefaultUploader = () => (
   <Uploader 
@@ -27,7 +27,7 @@ Specifies which file types are accepted for upload.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 
 export const FileTypeUploader = () => (
@@ -59,7 +59,7 @@ Allow multiple file selection.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 
 export const MultipleUploader = () => (
   <Uploader 
@@ -79,7 +79,7 @@ Maximum file size in bytes.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 
 export const SizeLimitUploader = () => (
   <Uploader 
@@ -97,7 +97,7 @@ Custom validation function for uploaded files.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 
 export const ValidatedUploader = () => (
   <Uploader 
@@ -123,7 +123,7 @@ Show loading state during upload.
 
 ```tsx
 import React, { useState } from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 
 export const LoadingUploader = () => {
   const [loading, setLoading] = useState(false);
@@ -149,7 +149,7 @@ Upload progress percentage (0-100).
 
 ```tsx
 import React, { useState } from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 
 export const ProgressUploader = () => {
   const [progress, setProgress] = useState(0);
@@ -179,7 +179,7 @@ Explicitly set the file type for rendering.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const TypedUploaders = () => (
@@ -198,8 +198,8 @@ Custom icon to display in the uploader.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
-import { UploadIcon } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
+import { UploadIcon } from '@app-studio/components';
 
 export const CustomIconUploader = () => (
   <Uploader 
@@ -217,7 +217,7 @@ Text to display in the uploader.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 
 export const CustomTextUploader = () => (
   <Uploader 
@@ -234,7 +234,7 @@ Custom styles for different parts of the uploader.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 
 export const StyledUploader = () => (
   <Uploader 
@@ -259,7 +259,7 @@ Override default rendering for different file types.
 
 ```tsx
 import React from 'react';
-import { Uploader } from '@app-studio/web';
+import { Uploader } from '@app-studio/components';
 import { Text, View } from 'app-studio';
 
 export const CustomRenderUploader = () => (

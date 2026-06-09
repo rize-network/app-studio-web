@@ -4,7 +4,7 @@ import { Shadow, ViewProps } from 'app-studio';
 
 import { DatePickerStyles, Shape, Size, Variant } from './DatePicker.type';
 
-export interface DatePickerProps extends Omit<ViewProps, 'size'> {
+export interface DatePickerProps extends Omit<ViewProps, 'size' | 'shadow'> {
   id?: string;
   /**
    * Custom icon to display when the DatePicker is checked.

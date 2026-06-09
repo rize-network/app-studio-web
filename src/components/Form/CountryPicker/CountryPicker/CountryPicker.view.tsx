@@ -137,7 +137,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
 }) => {
   const { getColor, themeMode } = useTheme();
   const isDark = (elementMode || themeMode) === 'dark';
-  const IconColor = getColor(isDark ? 'color-gray-400' : 'color-gray-500', {
+  const IconColor = getColor('color-gray-500', {
     themeMode: elementMode ? elementMode : themeMode,
   });
 
@@ -178,13 +178,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
     transition: 'all 0.2s ease-in-out',
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
-    color: isDisabled
-      ? isDark
-        ? 'color-gray-500'
-        : 'color-gray-400'
-      : isDark
-      ? 'color-gray-100'
-      : 'color-gray-900',
+    color: isDisabled ? 'color-gray-400' : 'color-gray-900',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
     ...views['field'],
   };
@@ -223,7 +217,7 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
               htmlFor={id}
               color={'theme-primary'}
               error={error}
-              {...views}
+              views={views}
             >
               {label}
             </FieldLabel>

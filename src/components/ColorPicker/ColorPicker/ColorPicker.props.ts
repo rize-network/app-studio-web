@@ -85,7 +85,7 @@ export interface ColorPickerViewProps extends ColorPickerProps {
   // Handler to close the color picker dropdown.
   handleClose: () => void;
   // React ref object to access the DOM element that triggers the color picker dropdown.
-  triggerRef: React.RefObject<HTMLDivElement>;
+  triggerRef: React.RefObject<HTMLDivElement | null>;
   // React ref object to access the DOM element of the color picker dropdown itself.
-  dropdownRef: React.RefObject<HTMLDivElement>;
+  dropdownRef: React.RefObject<HTMLDivElement | null>;
 }

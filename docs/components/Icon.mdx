@@ -4,7 +4,7 @@ A comprehensive collection of SVG icons powered by [Lucide React](https://lucide
 
 ### **Import**
   ```tsx
-  import { Icon, UploadIcon, EditIcon } from '@app-studio/web';
+  import { Icon, UploadIcon, EditIcon } from '@app-studio/components';
   ```
 
 ### **Basic Usage**
@@ -13,8 +13,8 @@ You can use the named exports for common icons or the generic `Icon` component f
 
 ```tsx
 import React from 'react';
-import { UploadIcon, EditIcon, DeleteIcon } from '@app-studio/web';
-import { Horizontal } from '@app-studio/web';
+import { UploadIcon, EditIcon, DeleteIcon } from '@app-studio/components';
+import { Horizontal } from '@app-studio/components';
 
 export const BasicIcons = () => (
   <Horizontal gap={16}>
@@ -31,7 +31,7 @@ Access any icon from the [Lucide library](https://lucide.dev/icons) using the `n
 
 ```tsx
 import React from 'react';
-import { Icon } from '@app-studio/web';
+import { Icon } from '@app-studio/components';
 
 export const DynamicIcons = () => (
   <Icon name="camera" widthHeight={24} color="color-primary-500" />
@@ -41,8 +41,8 @@ export const DynamicIcons = () => (
 ### **Icon Sizes**
 ```tsx
 import React from 'react';
-import { StarIcon } from '@app-studio/web';
-import { Horizontal } from '@app-studio/web';
+import { StarIcon } from '@app-studio/components';
+import { Horizontal } from '@app-studio/components';
 
 export const IconSizes = () => (
   <Horizontal gap={16} alignItems="center">
@@ -58,8 +58,8 @@ export const IconSizes = () => (
 ### **Icon Colors**
 ```tsx
 import React from 'react';
-import { HeartIcon } from '@app-studio/web';
-import { Horizontal } from '@app-studio/web';
+import { HeartIcon } from '@app-studio/components';
+import { Horizontal } from '@app-studio/components';
 
 export const IconColors = () => (
   <Horizontal gap={16}>
@@ -77,8 +77,8 @@ Since we use Lucide, `filled` creates a solid style where applicable, but genera
 
 ```tsx
 import React from 'react';
-import { StarIcon, HeartIcon } from '@app-studio/web';
-import { Horizontal, Vertical, Text } from '@app-studio/web';
+import { StarIcon, HeartIcon } from '@app-studio/components';
+import { Horizontal, Vertical, Text } from '@app-studio/components';
 
 export const IconVariants = () => (
   <Vertical gap={16}>
@@ -100,8 +100,8 @@ export const IconVariants = () => (
 ### **Icon Orientations**
 ```tsx
 import React from 'react';
-import { ArrowIcon } from '@app-studio/web';
-import { Horizontal, Text } from '@app-studio/web';
+import { ArrowIcon } from '@app-studio/components';
+import { Horizontal, Text } from '@app-studio/components';
 
 export const IconOrientations = () => (
   <Horizontal gap={24} alignItems="center">
@@ -259,7 +259,7 @@ You generally don't need to create custom wrappers anymore, as you can use `<Ico
 
 ```tsx
 import React from 'react';
-import { Icon } from '@app-studio/web';
+import { Icon } from '@app-studio/components';
 
 export const MyNewIcon = (props) => <Icon name="rocket" {...props} />;
 ```
@@ -267,8 +267,8 @@ export const MyNewIcon = (props) => <Icon name="rocket" {...props} />;
 ### **Icon Grid Display**
 ```tsx
 import React from 'react';
-import * as Icons from '@app-studio/web';
-import { View, Text } from '@app-studio/web';
+import * as Icons from '@app-studio/components';
+import { View, Text } from '@app-studio/components';
 
 export const IconGrid = () => {
   const iconNames = Object.keys(Icons).filter(name =>

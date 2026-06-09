@@ -40,7 +40,7 @@ export interface DropdownMenuContextType {
   // The visual variant ('default', 'filled', 'outline') applied to the dropdown menu.
   variant: Variant;
   // A React ref object pointing to the DOM element that triggers the dropdown menu.
-  triggerRef: React.RefObject<HTMLElement>;
+  triggerRef: React.RefObject<HTMLElement | null>;
 }
 // Defines the properties for applying custom styles to various parts of the dropdown menu component.
 export interface DropdownMenuStyles {

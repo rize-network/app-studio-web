@@ -1,6 +1,6 @@
 # Component Usage Guide
 
-This guide provides an overview of how to use components from the App Studio Web Component Library in your application.
+This guide provides an overview of how to use components from the App Studio Components Component Library in your application.
 
 ## Basic Component Usage
 
@@ -8,7 +8,7 @@ Most components can be imported directly from the library and used with their de
 
 ```jsx
 import React from 'react';
-import { Button, Text } from '@app-studio/web';
+import { Button, Text } from '@app-studio/components';
 
 function MyComponent() {
   return (
@@ -34,7 +34,7 @@ Example with props:
 
 ```jsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
 function MyComponent() {
   return (
@@ -65,7 +65,7 @@ Example:
 
 ```jsx
 import React from 'react';
-import { View, Horizontal, Vertical, Center, Text, Button } from '@app-studio/web';
+import { View, Horizontal, Vertical, Center, Text, Button } from '@app-studio/components';
 
 function MyLayout() {
   return (
@@ -93,7 +93,7 @@ Form components can be used standalone or integrated with Formik:
 
 ```jsx
 import React, { useState } from 'react';
-import { TextField, Button } from '@app-studio/web';
+import { TextField, Button } from '@app-studio/components';
 
 function MyForm() {
   const [value, setValue] = useState('');
@@ -116,7 +116,7 @@ function MyForm() {
 ```jsx
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { FormikTextField, Button } from '@app-studio/web';
+import { FormikTextField, Button } from '@app-studio/components';
 
 function MyFormikForm() {
   return (
@@ -139,7 +139,7 @@ Some components use the compound component pattern, where a main component has s
 
 ```jsx
 import React from 'react';
-import { Card, Text, Button, Horizontal } from '@app-studio/web';
+import { Card, Text, Button, Horizontal } from '@app-studio/components';
 
 function MyCard() {
   return (
@@ -167,7 +167,7 @@ Components automatically use the theme from the ThemeProvider context. You can o
 
 ```jsx
 import React from 'react';
-import { ThemeProvider, Button } from '@app-studio/web';
+import { ThemeProvider, Button } from '@app-studio/components';
 
 function MyThemedApp() {
   return (
@@ -185,7 +185,7 @@ You can customize component styling using the `views` prop:
 
 ```jsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
 function MyCustomButton() {
   return (

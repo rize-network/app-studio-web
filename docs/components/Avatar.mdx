@@ -4,13 +4,13 @@ Displays a user's avatar, which can be an image or initials, with customizable s
 
 ### **Import**
 ```tsx
-import { Avatar } from '@app-studio/web';
+import { Avatar } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Avatar } from '@app-studio/web';
+import { Avatar } from '@app-studio/components';
 
 export const DefaultDemo = () => (
   <Avatar src="https://t3.ftcdn.net/jpg/06/17/13/26/360_F_617132669_YptvM7fIuczaUbYYpMe3VTLimwZwzlWf.jpg" />
@@ -27,8 +27,8 @@ Optional size of the avatar, predefined in 'Size' type.
 ```tsx
 import React from 'react';
 import { Vertical } from 'app-studio';
-import { Avatar } from '@app-studio/web';
-import { Size } from '@app-studio/web';
+import { Avatar } from '@app-studio/components';
+import { Size } from '@app-studio/components';
 
 export const SizeDemo = () => {
   return (
@@ -53,7 +53,7 @@ URL or path for the fallback image if the source fails to load.
 
 ```tsx
 import React from 'react';
-import { Avatar } from '@app-studio/web';
+import { Avatar } from '@app-studio/components';
 
 export const FallbackDemo = () => <Avatar src="" fallback="ML" />;
 ```

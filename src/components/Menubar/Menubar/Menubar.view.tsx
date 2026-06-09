@@ -94,7 +94,7 @@ export const MenubarMenu: React.FC<MenubarMenuProps> = ({
       {...views?.menu}
     >
       {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
+        if (React.isValidElement<Record<string, unknown>>(child)) {
           return React.cloneElement(child, {
             ...child.props,
             menuId: id,

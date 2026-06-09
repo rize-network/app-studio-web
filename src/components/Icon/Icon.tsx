@@ -35,8 +35,11 @@ const getLazyIcon = (
 // Type for valid Lucide icon names with autocomplete support
 export type IconName = keyof typeof dynamicIconImportsType;
 
-// Base icon interface with added transform and orientation
-export interface IconProps extends Omit<ViewProps, 'orientation'> {
+// Base icon interface with added transform and orientation.
+// `name` and `size` are explicitly Omit'd from ViewProps because Icon narrows
+// them: `name` → `IconName` (icon-id union), `size` → number | string.
+export interface IconProps
+  extends Omit<ViewProps, 'orientation' | 'name' | 'size'> {
   color?: string;
   filled?: boolean;
   orientation?: 'left' | 'right' | 'up' | 'down';
@@ -141,8 +144,13 @@ export const Icon: React.FC<IconProps> = React.memo(
 // Re-export specific icons for backward compatibility mapping to Lucide names
 // We use 'Icon' component with 'name' prop.
 
+// The specific-icon factory pins `name` to a literal, so consumers cannot pass
+// a different one. Returning `Omit<IconProps, 'name'>` also means that
+// spreading style objects typed as `ViewProps` (which now carries `name?:
+// string` via ElementProps) onto e.g. `<InfoIcon {...views.icon} />` works:
+// the `name` field is excluded from the component's prop surface.
 const createIcon = (name: IconName, defaultProps: Partial<IconProps> = {}) => {
-  const IconComponent = (props: IconProps) => (
+  const IconComponent: React.FC<Omit<IconProps, 'name'>> = (props) => (
     <Icon name={name} {...defaultProps} {...props} />
   );
   IconComponent.displayName = `${name}Icon`;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Button, Text } from 'app-studio';
+import { View, Text } from 'app-studio';
+import { Button } from '../../Button/Button';
 import { Tabs } from '../Tabs';
 
 export const ControlledTabs = () => {
@@ -65,21 +66,21 @@ export const ControlledTabs = () => {
         </Text>
         <View display="flex" flexDirection="row" gap={10}>
           <Button
-            size="small"
+            size="sm"
             variant={activeTab === 'profile' ? 'primary' : 'outline'}
             onClick={() => setActiveTab('profile')}
           >
             Select Profile
           </Button>
           <Button
-            size="small"
+            size="sm"
             variant={activeTab === 'account' ? 'primary' : 'outline'}
             onClick={() => setActiveTab('account')}
           >
             Select Account
           </Button>
           <Button
-            size="small"
+            size="sm"
             variant={activeTab === 'notifications' ? 'primary' : 'outline'}
             onClick={() => setActiveTab('notifications')}
           >

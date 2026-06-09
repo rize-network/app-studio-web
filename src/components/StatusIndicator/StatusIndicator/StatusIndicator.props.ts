@@ -1,3 +1,4 @@
+import React from 'react';
 import { ViewProps } from 'app-studio';
 import { Status, StatusIndicatorStyles } from './StatusIndicator.type';
 export interface StatusIndicatorProps extends ViewProps {
@@ -7,5 +8,13 @@ export interface StatusIndicatorProps extends ViewProps {
   status?: Status;
   // Provides an object to customize the styles of various sub-components within the StatusIndicator.
   views?: StatusIndicatorStyles;
+  // Optional leading icon rendered before the status label.
+  icon?: React.ReactNode;
+  // Optional color override or semantic color name ('success' | 'error' | 'warning' | ...).
+  color?: string;
+  // Optional size token controlling the indicator dimensions.
+  size?: string;
+  // Optional variant token controlling the visual treatment.
+  variant?: string;
   // Sets the theme mode for the component, allowing it to adapt to 'light' or 'dark' UI environments.
 }

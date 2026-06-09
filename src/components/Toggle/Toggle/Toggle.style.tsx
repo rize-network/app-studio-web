@@ -16,17 +16,17 @@ export const getToggleVariants = (
   isLight: boolean
 ): Record<Variant, ViewProps> => ({
   outline: {
-    backgroundColor: isLight ? 'color-white' : 'color-gray-900',
+    backgroundColor: 'color-white',
     color: color,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: isLight ? 'color-gray-200' : 'color-gray-600',
+    borderColor: 'color-gray-200',
     _hover: {
-      backgroundColor: isLight ? 'color-gray-50' : 'color-gray-800',
-      borderColor: isLight ? 'color-gray-300' : 'color-gray-500',
+      backgroundColor: 'color-gray-50',
+      borderColor: 'color-gray-300',
     },
     _active: {
-      backgroundColor: isLight ? 'color-gray-100' : 'color-gray-800',
+      backgroundColor: 'color-gray-100',
     },
     transition:
       'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
@@ -38,10 +38,10 @@ export const getToggleVariants = (
     borderStyle: 'none',
     borderColor: 'transparent',
     _hover: {
-      backgroundColor: isLight ? 'color-gray-50' : 'color-gray-800',
+      backgroundColor: 'color-gray-50',
     },
     _active: {
-      backgroundColor: isLight ? 'color-gray-100' : 'color-gray-800',
+      backgroundColor: 'color-gray-100',
     },
     transition: 'background-color 0.2s ease, color 0.2s ease',
   },

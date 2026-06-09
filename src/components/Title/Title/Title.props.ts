@@ -1,4 +1,4 @@
-import { ViewProps } from 'app-studio';
+import { AnimationProps, ViewProps } from 'app-studio';
 import { HighlightStyle, TitleSize, TitleStyles } from './Title.type';
 // Defines the properties for the Title component, extending standard view properties.
 export interface TitleProps extends ViewProps {

@@ -25,25 +25,25 @@ export const getCardVariants = (
   const isDark = themeMode === 'dark';
   return {
     default: {
-      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
+      backgroundColor: 'color-white',
       border: 'none',
       transition: 'background-color 0.2s ease, box-shadow 0.2s ease',
     },
     outlined: {
-      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
+      backgroundColor: 'color-white',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: isDark ? 'color-gray-700' : 'color-gray-200',
+      borderColor: 'color-gray-200',
       transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
       _hover: {
-        borderColor: isDark ? 'color-gray-600' : 'color-gray-300',
+        borderColor: 'color-gray-300',
         boxShadow: isDark
           ? '0px 1px 3px rgba(0, 0, 0, 0.3)'
           : '0px 1px 3px rgba(0, 0, 0, 0.05)',
       },
     },
     elevated: {
-      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
+      backgroundColor: 'color-white',
       boxShadow: isDark
         ? '0px 1px 3px rgba(0, 0, 0, 0.35), 0px 1px 2px rgba(0, 0, 0, 0.3)'
         : '0px 1px 3px rgba(0, 0, 0, 0.08), 0px 1px 2px rgba(0, 0, 0, 0.06)',
@@ -62,8 +62,8 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
   const isDark = theme.themeMode === 'dark';
   return {
     container: {
-      backgroundColor: isDark ? 'color-gray-900' : 'color-white',
-      color: isDark ? 'color-white' : 'color-gray-900',
+      backgroundColor: 'color-white',
+      color: 'color-gray-900',
       borderRadius: '8px',
       overflow: 'hidden',
       transition:
@@ -72,21 +72,21 @@ export const getDefaultCardStyles = (theme: any): CardStyles => {
     header: {
       padding: '16px',
       borderBottom: '1px solid',
-      borderColor: isDark ? 'color-gray-800' : 'color-gray-100',
+      borderColor: 'color-gray-100',
       color: 'theme-primary',
       fontWeight: 600,
       fontSize: 14,
     },
     content: {
       padding: '16px',
-      color: isDark ? 'color-gray-300' : 'color-gray-600',
+      color: 'color-gray-600',
       fontSize: 12,
       lineHeight: '18px',
     },
     footer: {
       padding: '16px',
       borderTop: '1px solid',
-      borderColor: isDark ? 'color-gray-800' : 'color-gray-100',
+      borderColor: 'color-gray-100',
       justifyContent: 'flex-end',
       gap: 8,
     },

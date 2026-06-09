@@ -4,13 +4,13 @@ A slide-out panel component that appears from the edge of the screen, with suppo
 
 ### **Import**
 ```tsx
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const DefaultDrawer = () => {
@@ -48,7 +48,7 @@ Controls the visibility of the drawer.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const ControlledDrawer = () => {
@@ -79,7 +79,7 @@ Callback function executed when the drawer closes.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const CloseCallbackDrawer = () => {
@@ -117,7 +117,7 @@ The placement of the drawer.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text, Horizontal } from 'app-studio';
 
 export const PlacementDrawers = () => {
@@ -162,7 +162,7 @@ The size of the drawer.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text, Horizontal } from 'app-studio';
 
 export const SizedDrawers = () => {
@@ -203,7 +203,7 @@ Prevents the drawer from closing when clicking the overlay.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const PreventCloseDrawer = () => {
@@ -240,7 +240,7 @@ The degree of blurriness applied to the overlay.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const BlurredDrawer = () => {
@@ -275,7 +275,7 @@ Position of the close button in the header.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const ButtonPositionDrawer = () => {
@@ -309,7 +309,7 @@ A common use case for navigation menus.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text, Vertical } from 'app-studio';
 
 export const NavigationDrawer = () => {
@@ -361,9 +361,9 @@ Using drawer for forms and data entry.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text, Vertical } from 'app-studio';
-import { TextField } from '@app-studio/web';
+import { TextField } from '@app-studio/components';
 
 export const FormDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -427,8 +427,8 @@ The `Drawer.Layout` component enables an imperative store-based API for opening 
 
 ```tsx
 import React from 'react';
-import { Drawer } from '@app-studio/web';
-import { showDrawer, hideDrawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
+import { showDrawer, hideDrawer } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const StoreDrawer = () => {
@@ -478,8 +478,8 @@ Reuse a single registered drawer and vary its placement dynamically by passing `
 
 ```tsx
 import React from 'react';
-import { Drawer } from '@app-studio/web';
-import { showDrawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
+import { showDrawer } from '@app-studio/components';
 import { Button, Horizontal, Vertical, Text } from 'app-studio';
 
 export const StorePlacements = () => {
@@ -524,7 +524,7 @@ Showing detailed information in a drawer.
 
 ```tsx
 import React, { useState } from 'react';
-import { Drawer } from '@app-studio/web';
+import { Drawer } from '@app-studio/components';
 import { Button, Text, Vertical, Horizontal } from 'app-studio';
 
 export const DetailsDrawer = () => {

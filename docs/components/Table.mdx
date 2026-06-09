@@ -4,7 +4,7 @@ Renders a tabular display for presenting structured data with customizable style
 
 ### **Import**
 ```tsx
-import { Table } from '@app-studio/web';
+import { Table } from '@app-studio/components';
 ```
 
 ### **Default**
@@ -16,7 +16,7 @@ import { TableContainer,
   TableRow,
   TableHeadCell,
   TableBody,
-  TableCell, } from '@app-studio/web';
+  TableCell, } from '@app-studio/components';
 
 export const DefaultDemo = () => {
   interface DataRow {
@@ -111,7 +111,7 @@ An array of data objects to be displayed in the table rows.
 
 ```tsx
 import React from 'react';
-import { Table } from '@app-studio/web';
+import { Table } from '@app-studio/components';
 
 export const DataDemo = () => {
   const cols = [
@@ -177,7 +177,7 @@ An optional array of footer cells to display at the bottom of the table.
 
 ```tsx
 import React from 'react';
-import { Table } from '@app-studio/web';
+import { Table } from '@app-studio/components';
 
 export const FooterDemo = () => {
   const cols = [
@@ -264,7 +264,7 @@ An optional caption for the table, providing a brief title or explanation.
 
 ```tsx
 import React from 'react';
-import { Table } from '@app-studio/web';
+import { Table } from '@app-studio/components';
 
 export const CaptionDemo = () => {
   const cols = [

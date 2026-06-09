@@ -18,22 +18,22 @@ files.forEach(file => {
   const originalContent = content;
   
   // Pattern 1: import { Component } from '../Component';
-  // Replace with: import { Component } from '@app-studio/web';
+  // Replace with: import { Component } from '@app-studio/components';
   const pattern1 = /import\s+{([^}]+)}\s+from\s+['"]\.\.\/([^'"]+)['"]/g;
   content = content.replace(pattern1, (match, imports, componentPath) => {
     // Extract the component name from the path (e.g., 'Button' from 'Button' or 'Button/Button')
     const componentName = componentPath.split('/')[0];
-    return `import { ${imports.trim()} } from '@app-studio/web'`;
+    return `import { ${imports.trim()} } from '@app-studio/components'`;
   });
   
   // Pattern 2: import { Component } from '../../Component/Component';
-  // Replace with: import { Component } from '@app-studio/web';
+  // Replace with: import { Component } from '@app-studio/components';
   const pattern2 = /import\s+{([^}]+)}\s+from\s+['"]\.\.\/\.\.\/([^'"]+)['"]/g;
   content = content.replace(pattern2, (match, imports, componentPath) => {
-    return `import { ${imports.trim()} } from '@app-studio/web'`;
+    return `import { ${imports.trim()} } from '@app-studio/components'`;
   });
   
-  // Pattern 3: Consolidate multiple imports from '@app-studio/web' on separate lines
+  // Pattern 3: Consolidate multiple imports from '@app-studio/components' on separate lines
   // This is a more complex pattern that we'll handle separately if needed
   
   if (content !== originalContent) {

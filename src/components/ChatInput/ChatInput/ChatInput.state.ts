@@ -130,7 +130,7 @@ export const useChatInputState = (props: UseChatInputStateProps) => {
     }
 
     // Call the onSubmit callback
-    onSubmit(message as string, {
+    onSubmit?.(message as string, {
       model_name: baseModelName,
       enable_thinking: thinkingEnabled,
     });

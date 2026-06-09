@@ -15,11 +15,11 @@
     "success": "#15be53",
     "warning": "#9b6829",
     "error": "#ea2261",
-    "canvas": "#ffffff",
-    "surface": "#ffffff",
-    "text": "#061b31",
-    "muted": "#64748d",
-    "border": "#e5edf5",
+    "canvas": "color-white",
+    "surface": "color-gray-50",
+    "text": "color-black",
+    "muted": "color-gray-500",
+    "border": "color-gray-200",
     "onPrimary": "#ffffff"
   },
   "tokens": {
@@ -276,7 +276,7 @@
       "size": "md",
       "shape": "rounded",
       "color": "theme-primary",
-      "textColor": "theme-canvas",
+      "textColor": "theme-onPrimary",
       "views": {
         "container": {
           "borderRadius": 9999,
@@ -285,7 +285,8 @@
           "borderColor": "theme-primary",
           "letterSpacing": "-0.022em",
           "textTransform": "none",
-          "fontStyle": "normal"
+          "fontStyle": "normal",
+          "backgroundColor": null
         },
         "content": {
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",
@@ -303,7 +304,7 @@
       "views": {
         "container": {
           "backgroundColor": "theme-secondary",
-          "color": "theme-canvas",
+          "color": "color-white",
           "borderColor": "theme-secondary",
           "borderRadius": 6,
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",
@@ -324,26 +325,26 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 12,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "rgba(23,23,23,0.06) 0px 3px 6px 0px"
         },
         "header": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",
           "fontWeight": 600,
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "content": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         },
         "footer": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         }
       }
     },
@@ -353,16 +354,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "0 0 0 1px theme-primary"
         },
         "field": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.022em"
@@ -383,16 +384,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "0 0 0 1px theme-primary"
         },
         "field": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.022em"
@@ -413,16 +414,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 10,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "0 0 0 1px theme-primary"
         },
         "field": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         },
         "label": {
@@ -443,8 +444,8 @@
       "size": "md",
       "views": {
         "checkbox": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas",
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white",
           "_checked": {
             "backgroundColor": "theme-primary",
             "borderColor": "theme-primary"
@@ -459,7 +460,7 @@
           "fontStyle": "normal"
         },
         "infoText": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "container": {
           "borderRadius": 4
@@ -470,8 +471,8 @@
       "size": "md",
       "views": {
         "radio": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas"
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white"
         },
         "dot": {
           "backgroundColor": "theme-primary"
@@ -484,7 +485,7 @@
           "fontStyle": "normal"
         },
         "infoText": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "container": {
           "borderRadius": "50%"
@@ -495,10 +496,10 @@
       "size": "sm",
       "views": {
         "slider": {
-          "backgroundColor": "theme-border"
+          "backgroundColor": "color-gray-200"
         },
         "circle": {
-          "backgroundColor": "theme-canvas"
+          "backgroundColor": "color-white"
         },
         "label": {
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",
@@ -516,7 +517,7 @@
       "backgroundColor": "theme-primary",
       "views": {
         "track": {
-          "backgroundColor": "theme-border"
+          "backgroundColor": "color-gray-200"
         },
         "progress": {
           "backgroundColor": "theme-primary"
@@ -526,13 +527,13 @@
         },
         "thumb": {
           "borderColor": "theme-primary",
-          "backgroundColor": "theme-canvas"
+          "backgroundColor": "color-white"
         },
         "label": {
-          "color": "theme-text"
+          "color": "color-black"
         },
         "valueLabel": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
@@ -540,10 +541,10 @@
       "variant": "underline",
       "views": {
         "headerTabs": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "tab": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontWeight": 700,
           "letterSpacing": "-0.022em",
           "textTransform": "none",
@@ -552,9 +553,7 @@
         "activeTab": {
           "color": "theme-primary",
           "borderColor": "theme-primary",
-          "style": {
-            "backgroundColor": "transparent"
-          }
+          "backgroundColor": "transparent"
         },
         "title": {
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
@@ -563,7 +562,7 @@
           "color": "theme-primary"
         },
         "content": {
-          "color": "theme-text"
+          "color": "color-black"
         },
         "container": {
           "borderRadius": "4px"
@@ -573,35 +572,35 @@
     "accordion": {
       "views": {
         "container": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas",
-          "color": "theme-text",
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "borderRadius": "6px"
         },
         "trigger": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         },
         "content": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
     "table": {
       "views": {
         "table": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-text",
-          "borderColor": "theme-border",
+          "backgroundColor": "color-white",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
           "borderRadius": 12
         },
         "thead": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-text"
+          "backgroundColor": "color-white",
+          "color": "color-black"
         },
         "th": {
-          "color": "theme-muted",
-          "borderColor": "theme-border",
+          "color": "color-gray-500",
+          "borderColor": "color-gray-200",
           "fontFamily": "'Source Code Pro', SFMono-Regular, ui-monospace, Menlo, monospace",
           "fontWeight": 700,
           "letterSpacing": "-0.022em",
@@ -609,16 +608,16 @@
           "fontStyle": "normal"
         },
         "tr": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "td": {
-          "color": "theme-text",
-          "borderColor": "theme-border",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
           "letterSpacing": "-0.022em",
           "fontStyle": "normal"
         },
         "caption": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontStyle": "italic",
           "letterSpacing": "-0.022em"
         }
@@ -627,13 +626,13 @@
     "avatar": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": "50%"
         },
         "fallback": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         }
       }
@@ -641,12 +640,12 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
           "borderRadius": 12
         },
         "title": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.022em",
@@ -654,7 +653,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         },
         "icon": {
@@ -668,25 +667,25 @@
           "backgroundColor": "theme-success"
         },
         "label": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         }
       }
     },
     "progress": {
       "color": "theme-primary",
-      "backgroundColor": "theme-border",
+      "backgroundColor": "color-gray-200",
       "radius": "6px",
       "views": {
         "container": {
-          "backgroundColor": "theme-border",
+          "backgroundColor": "color-gray-200",
           "borderRadius": "9999px"
         },
         "bar": {
           "backgroundColor": "theme-primary"
         },
         "text": {
-          "color": "theme-text"
+          "color": "color-black"
         }
       }
     },
@@ -694,13 +693,13 @@
       "color": "theme-primary"
     },
     "separator": {
-      "color": "theme-border",
+      "color": "color-gray-200",
       "views": {
         "container": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "label": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         }
       }
@@ -708,13 +707,13 @@
     "navigation": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": "6px"
         },
         "item": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "activeItem": {
           "color": "theme-primary",
@@ -725,37 +724,37 @@
     "hero": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         },
         "eyebrow": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "title": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         },
         "description": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
     "page": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif"
         },
         "section": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border"
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200"
         },
         "surface": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text"
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black"
         }
       }
     }
@@ -767,7 +766,7 @@
     "typeStyle": "normal",
     "letterSpacing": "-0.022em",
     "accentTreatment": "gradient",
-    "signatureMotif": "\u2197",
+    "signatureMotif": "↗",
     "density": "comfortable",
     "surfaceTone": "glass",
     "cardRadius": 12,

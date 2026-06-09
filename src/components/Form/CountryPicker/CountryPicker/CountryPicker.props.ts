@@ -8,7 +8,8 @@ import {
   Variant,
 } from './CountryPicker.type';
 // Defines properties for CountryPicker excluding 'size' from InputProps for customization
-export interface CountryPickerProps extends Omit<InputProps, 'size'> {
+export interface CountryPickerProps
+  extends Omit<InputProps, 'size' | 'shadow' | 'value'> {
   // Optional ID for the CountryPicker input
   id?: string;
   // Optional error flag to indicate validation state
@@ -37,8 +38,8 @@ export interface CountryPickerProps extends Omit<InputProps, 'size'> {
   views?: CountryPickerStyles;
   // Optional size of the CountryPicker for visual styles
   size?: Size;
-  // Value to be used as the current selection
-  value?: string | number;
+  // Value to be used as the current selection (country code string, e.g. 'US').
+  value?: string;
   // Variant for different visual types of CountryPicker
   variant?: Variant;
   // Shadow or Elevation styles for visual depth and perspective
@@ -84,7 +85,7 @@ export interface CountryPickerDropDownProps extends Omit<InputProps, 'size'> {
   views?: CountryPickerStyles;
 }
 // Defines properties for DropDownItem excluding 'size' from InputProps for customization
-export interface DropDownItemProps extends InputProps {
+export interface DropDownItemProps extends Omit<InputProps, 'size'> {
   // Callback function for dropdown item actions
   callback?: Function;
   // The option value for the dropdown item

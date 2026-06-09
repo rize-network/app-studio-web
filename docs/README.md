@@ -1,21 +1,29 @@
-# App Studio Web Component Library Documentation
+# App Studio Components Documentation
 
-Welcome to the comprehensive documentation for the App Studio Web Component Library. This documentation provides guides, API references, and examples to help you build high-quality components and applications.
+Welcome to the comprehensive documentation for `@app-studio/components` — a
+cross-platform component library that ships a web build and a React Native
+build with the same public API.
 
 ## 📖 Documentation Structure
 
 ### Core Documentation
-- **[Getting Started](./getting-started/introduction.md)** - Quick introduction and setup
-- **[Component Development](./component-development/guide.md)** - Building and contributing components
-- **[API Integration](./api-integration.md)** - Backend integration patterns
-- **[Design System](./design-system/theming.md)** - Theming and styling guidelines
+- **[Getting Started](./getting-started/introduction.md)** — Quick introduction and setup (web + RN)
+- **[React Native Guide](./getting-started/react-native.md)** — RN peer deps, compatibility matrix, Reanimated, Metro/tsc resolution
+- **[Component Development](./component-development/guide.md)** — Building and contributing components (including `.native.tsx` siblings)
+- **[API Integration](./api-integration.md)** — Backend integration patterns
+- **[Design System](./design-system/theming.md)** — Theming and styling guidelines
+- **[Generating a Design-System Config](./design-system/design-system.md)** — Step-by-step recipe (for agents) to author a new brand config that works in light + dark
 
 ### Specialized Documentation
-- **[ADK Components](../README-ADK.md)** - Agent Development Kit integration
-- **[Compoments Reference](./components.md)** - Summary of all component APIs
-- **[Detailed Copoments](./components/)** - Detailed component APIs
-- **[Tutorials](./tutorials/README.md)** - Step-by-step guides
-- **[Contributing](./contributing/documentation.md)** - Contribution guidelines
+- **[ADK Components](../README-ADK.md)** — Agent Development Kit integration
+- **[Components Reference](./components.md)** — Summary of all component APIs
+- **[Detailed Components](./components/)** — Per-component pages
+- **[Tutorials](./tutorials/README.md)** — Step-by-step guides
+- **[Contributing](./contributing/documentation.md)** — Contribution guidelines
+
+### Related packages
+- **[`app-studio`](../../app-studio/docs/README.md)** — The styling/theme/animation primitive this library is built on (its `Animation.md` and `Native.md` cover the cross-platform fundamentals)
+- **[`app-studio-rn-demo`](../../app-studio-rn-demo/README.md)** — Working RN sandbox app that consumes `@app-studio/components`
 
 ## 🚀 Quick Navigation
 

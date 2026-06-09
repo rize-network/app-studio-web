@@ -91,7 +91,7 @@ export interface EmojiPickerViewProps extends EmojiPickerProps {
   // Function to close the emoji picker dropdown.
   handleClose: () => void;
   // Ref object for the DOM element that triggers the emoji picker.
-  triggerRef: React.RefObject<HTMLDivElement>;
+  triggerRef: React.RefObject<HTMLDivElement | null>;
   // Ref object for the DOM element representing the emoji picker dropdown content.
-  dropdownRef: React.RefObject<HTMLDivElement>;
+  dropdownRef: React.RefObject<HTMLDivElement | null>;
 }

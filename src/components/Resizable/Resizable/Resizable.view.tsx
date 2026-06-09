@@ -291,7 +291,7 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
 };
 export const ResizableView: React.FC<
   ResizableProps & {
-    containerRef: React.RefObject<HTMLDivElement>;
+    containerRef: React.RefObject<HTMLDivElement | null>;
   }
 > = ({
   children,

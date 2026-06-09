@@ -4,13 +4,13 @@ A custom content overlay that appears on top of the main screen, with support fo
 
 ### **Import**
 ```tsx
-import { Modal, useModalStore } from '@app-studio/web';
+import { Modal, useModalStore } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const DefaultModal = () => {
@@ -45,7 +45,7 @@ Centralized modal management system for handling multiple modals.
 
 ```tsx
 import React from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Text, Button } from 'app-studio';
 
 const WelcomeModal = ({ onClose }) => (
@@ -92,7 +92,7 @@ Controls the visibility of the modal.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const ControlledModal = () => {
@@ -123,7 +123,7 @@ Callback function executed when the modal closes.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const CloseCallbackModal = () => {
@@ -160,7 +160,7 @@ Prevents the modal from closing when clicking the overlay.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const PreventCloseModal = () => {
@@ -198,7 +198,7 @@ Positioning of the modal container.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text, Horizontal } from 'app-studio';
 
 export const PositionedModals = () => {
@@ -239,7 +239,7 @@ The degree of blurriness applied to the overlay.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const BlurredModal = () => {
@@ -274,7 +274,7 @@ Determines whether the modal should have sharp or rounded edges.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text, Horizontal } from 'app-studio';
 
 export const ShapedModals = () => {
@@ -312,7 +312,7 @@ Makes the modal occupy the full width and height of the screen.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const FullScreenModal = () => {
@@ -346,7 +346,7 @@ Position of the close button in the header.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const ButtonPositionModal = () => {
@@ -382,7 +382,7 @@ Applies a shadow effect to the modal.
 
 ```tsx
 import React, { useState } from 'react';
-import { Modal } from '@app-studio/web';
+import { Modal } from '@app-studio/components';
 import { Button, Text } from 'app-studio';
 
 export const ShadowModal = () => {

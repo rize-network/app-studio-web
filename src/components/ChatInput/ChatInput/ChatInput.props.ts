@@ -12,20 +12,21 @@ import { Suggestion } from '../EditableInput';
 /**
  * Props for the ChatInput component
  */
-export interface ChatInputProps extends Omit<ViewProps, 'onChange'> {
+export interface ChatInputProps
+  extends Omit<ViewProps, 'onChange' | 'onSubmit' | 'loading'> {
   /**
    * Get the pending files
    */
-  getPendingFiles: () => File[];
+  getPendingFiles?: () => File[];
 
   /**
    * Clear the pending files
    */
-  clearPendingFiles: () => void;
+  clearPendingFiles?: () => void;
   /**
    * Callback function when the form is submitted
    */
-  onSubmit: (
+  onSubmit?: (
     message: string,
     options?: { model_name?: string; enable_thinking?: boolean }
   ) => void;
@@ -46,14 +47,49 @@ export interface ChatInputProps extends Omit<ViewProps, 'onChange'> {
   disabled?: boolean;
 
   /**
+   * Whether the input is disabled (camelCase alias for `disabled`)
+   */
+  isDisabled?: boolean;
+
+  /**
+   * Visible row count for the input
+   */
+  lines?: number;
+
+  /**
+   * Optional right-side affordance rendered inside the input
+   */
+  rightElement?: React.ReactNode;
+
+  /**
+   * Optional key handler for the editable area
+   */
+  onKeyDown?: (e: React.KeyboardEvent) => void;
+
+  /**
+   * Error state or value used by form wrappers
+   */
+  error?: any;
+
+  /**
    * Whether an agent is currently running
    */
   isAgentRunning?: boolean;
 
   /**
+   * Whether an agent is currently running (alias for `isAgentRunning`)
+   */
+  isWorkerRunning?: boolean;
+
+  /**
    * Callback function to stop the agent
    */
   onStopAgent?: () => void;
+
+  /**
+   * Callback function to stop the worker (alias for `onStopAgent`)
+   */
+  onStopWorker?: () => void;
 
   /**
    * Whether to auto focus the input
@@ -229,12 +265,12 @@ export interface ChatInputViewProps extends ChatInputProps {
   /**
    * Reference to the editable div element
    */
-  editableRef: React.RefObject<HTMLDivElement>;
+  editableRef: React.RefObject<HTMLDivElement | null>;
 
   /**
    * Reference to the file input element
    */
-  fileInputRef: React.RefObject<HTMLInputElement>;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
 
   /**
    * Whether files are being uploaded

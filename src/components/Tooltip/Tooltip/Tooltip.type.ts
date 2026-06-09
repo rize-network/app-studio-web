@@ -16,9 +16,9 @@ export interface TooltipContextType {
   // A function to programmatically close the tooltip.
   closeTooltip: () => void;
   // A ref object pointing to the DOM element that triggers the tooltip.
-  triggerRef: React.RefObject<HTMLElement>;
+  triggerRef: React.RefObject<HTMLElement | null>;
   // A ref object pointing to the DOM element containing the tooltip's content.
-  contentRef: React.RefObject<HTMLElement>;
+  contentRef: React.RefObject<HTMLElement | null>;
   // A unique identifier for the tooltip's content element, used for accessibility.
   contentId: string;
   // A unique identifier for the tooltip's trigger element, used for accessibility.

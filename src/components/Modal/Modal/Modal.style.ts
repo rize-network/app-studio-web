@@ -58,7 +58,7 @@ export const ContainerBaseStyles: ViewProps = {
   transition: 'box-shadow 0.2s ease',
   _focusVisible: {
     outline: 'none',
-    boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
+    boxShadow: '0 0 0 2px color-white, 0 0 0 4px theme-primary',
   },
 };
 // Groups typography settings for the modal's title and body text, including font size, weight, and color.

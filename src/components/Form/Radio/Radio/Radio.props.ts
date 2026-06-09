@@ -4,7 +4,8 @@ import { InputProps, Shadow } from 'app-studio';
 import { RadioStyles, Size } from './Radio.type';
 import { ViewProps } from 'app-studio';
 // Defines the core properties for the Radio component, extending base input properties while customizing the 'size' property.
-export interface RadioProps extends Omit<InputProps, 'size'> {
+export interface RadioProps
+  extends Omit<InputProps, 'size' | 'onChange' | 'shadow'> {
   // Optional unique identifier for the radio input.
   id?: string;
   // Optional React node to be displayed as an icon within or alongside the radio.

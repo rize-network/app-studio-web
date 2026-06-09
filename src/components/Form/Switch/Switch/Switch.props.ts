@@ -2,7 +2,8 @@ import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Size, SwitchStyles } from './Switch.type';
 // Defines the properties for the Switch component excluding 'size' from the InputProps to allow customization.
-export interface SwitchProps extends Omit<InputProps, 'size'> {
+export interface SwitchProps
+  extends Omit<InputProps, 'size' | 'onChange' | 'on' | 'shadow' | 'value'> {
   // The content to be displayed when the switch is in an active state.
   activeChild?: React.ReactNode;
   // Unique identifier for the switch component.
@@ -29,6 +30,8 @@ export interface SwitchProps extends Omit<InputProps, 'size'> {
   labelPosition?: 'left' | 'right';
   // Optional visible label/text rendered next to the switch.
   label?: React.ReactNode;
+  // Optional secondary text rendered below the label to describe the switch.
+  description?: React.ReactNode;
   // Optional variant override forwarded by callers/examples.
   variant?: string;
 }

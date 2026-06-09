@@ -47,8 +47,8 @@ function safeInsertRule(sheet: CSSStyleSheet, rule: string) {
 const OTPInputView: React.FC<
   OTPInputViewProps & {
     setInputRef: (ref: HTMLInputElement | null) => void;
-    inputRef: React.RefObject<HTMLInputElement>;
-    containerRef: React.RefObject<HTMLDivElement>;
+    inputRef: React.RefObject<HTMLInputElement | null>;
+    containerRef: React.RefObject<HTMLDivElement | null>;
     mirrorSelectionStart: number | null;
     mirrorSelectionEnd: number | null;
     setMirrorSelectionStart: (value: number | null) => void;

@@ -78,7 +78,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
       {...props}
     >
       {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
+        if (React.isValidElement<Record<string, unknown>>(child)) {
           return React.cloneElement(child, {
             ...child.props,
             value,
@@ -142,7 +142,7 @@ export const AccordionTrigger: React.FC<
     ...mergedViews?.container,
     ...props,
   };
-  if (asChild && isValidElement(children)) {
+  if (asChild && isValidElement<Record<string, unknown>>(children)) {
     const child = Children.only(children);
     return cloneElement(child, { ...triggerProps, ...child.props });
   }

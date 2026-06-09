@@ -187,7 +187,7 @@ export const CommandView: React.FC<
     setSelectedIndex: (index: number) => void;
     filteredCommands: CommandItemInterface[];
     filteredGroups: any[];
-    listRef: React.RefObject<HTMLDivElement>;
+    listRef: React.RefObject<HTMLDivElement | null>;
   }
 > = ({
   open,

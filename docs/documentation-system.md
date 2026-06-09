@@ -1,6 +1,6 @@
 # Documentation System
 
-This guide explains the documentation system used in the App Studio Web Component Library.
+This guide explains the documentation system used in the App Studio Components Component Library.
 
 ## Overview
 
@@ -31,7 +31,7 @@ Customizable button for user interaction
 
 ### **Import**
   ```tsx
-  import { Button } from '@app-studio/web';
+  import { Button } from '@app-studio/components';
   ```
 
 ### **Default**

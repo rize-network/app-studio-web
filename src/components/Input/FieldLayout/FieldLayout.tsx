@@ -22,7 +22,7 @@ export const FieldLayout: React.FC<FieldProps> = ({
     border="none"
     position="relative"
     fontSize={Typography.fontSizes[size]}
-    color={isDisabled ? 'theme-text-disable' : 'theme-text-normal'}
+    color={isDisabled ? 'color-black-disable' : 'color-black-normal'}
     cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer'}
     style={{ backgroundColor: 'transparent' }}
     {...views['text']}

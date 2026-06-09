@@ -3,7 +3,8 @@ import { Elevation } from '../../../utils/elevation';
 import { Shape, Size, Variant } from '../../Input/Input.type';
 import { OTPInputStyles, OTPInputType } from './OTPInput.type';
 // Defines the core properties for the OTPInput component, extending standard input properties while omitting 'size' to use a custom one.
-export interface OTPInputProps extends Omit<InputProps, 'size'> {
+export interface OTPInputProps
+  extends Omit<InputProps, 'size' | 'onChange' | 'pattern' | 'shadow'> {
   // A unique identifier for the OTP input field.
   id?: string;
   // An error object or message to display for validation feedback.

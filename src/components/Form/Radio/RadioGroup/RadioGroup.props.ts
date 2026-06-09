@@ -2,7 +2,8 @@ import React from 'react';
 import { ViewProps } from 'app-studio';
 import { Direction, RadioGroupStyles } from './RadioGroup.type';
 // Defines the properties accepted by the RadioGroup component, extending ViewProps while omitting its 'direction' property.
-export interface RadioGroupProps extends Omit<ViewProps, 'direction'> {
+export interface RadioGroupProps
+  extends Omit<ViewProps, 'direction' | 'onChange'> {
   // Specifies the children elements to be rendered within the RadioGroup, typically Radio components.
   children: React.ReactNode;
   // An optional name for the radio group, used to group related radio buttons together.

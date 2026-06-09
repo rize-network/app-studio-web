@@ -4,13 +4,13 @@ A versatile control allowing users to switch between two states, enabling or dis
 
 ### **Import**
 ```tsx
-import { Toggle } from '@app-studio/web';
+import { Toggle } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Toggle } from '@app-studio/web';
+import { Toggle } from '@app-studio/components';
 
 export const DefaultDemo = () => {
   return <Toggle>Default</Toggle>;
@@ -27,8 +27,8 @@ Optional 'shape' property to determine the shape of the toggle component.
 ```tsx
 import React from 'react';
 import { Horizontal } from 'app-studio';
-import { Toggle } from '@app-studio/web';
-import { Shape } from '@app-studio/web';
+import { Toggle } from '@app-studio/components';
+import { Shape } from '@app-studio/components';
 import { View } from 'app-studio';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>
@@ -50,7 +50,7 @@ Optional boolean to define the initial toggle state.
 
 ```tsx
 import React from 'react';
-import { Toggle } from '@app-studio/web';
+import { Toggle } from '@app-studio/components';
 
 export const IsToggledDemo = () => {
   return (
@@ -70,7 +70,7 @@ Optional boolean to set the toggle component as disabled or not.
 
 ```tsx
 import React from 'react';
-import { Toggle } from '@app-studio/web';
+import { Toggle } from '@app-studio/components';
 
 export const IsDisabledDemo = () => {
   return <Toggle isDisabled>IsDisabled</Toggle>;
@@ -86,9 +86,9 @@ Optional 'variant' to style the toggle component with predefined sets of visual 
 
 ```tsx
 import React from 'react';
-import { Toggle } from '@app-studio/web';
+import { Toggle } from '@app-studio/components';
 import { Vertical } from 'app-studio';
-import { Variant } from '@app-studio/web';
+import { Variant } from '@app-studio/components';
 
 export const VariantDemo = () => (
   <Vertical gap={15}>
@@ -111,7 +111,7 @@ Optional function that triggers when the toggle state changes, receives the new 
 ```tsx
 import React from 'react';
 import { useState } from 'react';
-import { Toggle } from '@app-studio/web';
+import { Toggle } from '@app-studio/components';
 
 export const OnToggleDemo = () => {
   const [isToggle, setIsToggled] = useState(false);

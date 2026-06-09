@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 // Image moved to public/orange.webp for stable preloading
 const LandingImage = '/orange.webp';
 import {
-  Button,
   Center,
   Horizontal,
   Text,
@@ -11,6 +10,7 @@ import {
   View,
   ImageBackground,
 } from 'app-studio';
+import { Button } from 'src/components/Button/Button';
 import { Features } from 'src/features';
 import { CookieConsent } from 'src/components/CookieConsent/CookieConsent';
 

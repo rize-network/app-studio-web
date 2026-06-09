@@ -7,7 +7,11 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ['src/components', 'src/design-system'],
+      include: [
+        'src/components',
+        'src/design-system',
+        'src/pages/designSystem.page.tsx',
+      ],
       outDir: 'dist',
       rollupTypes: true,
     }),

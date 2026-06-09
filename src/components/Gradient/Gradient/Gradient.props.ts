@@ -8,7 +8,11 @@ import {
   GradientStyles,
 } from './Gradient.type';
 // Defines the properties available for the Gradient component, extending `ViewProps` but omitting its 'colors' property to provide a custom color definition.
-export interface GradientProps extends Omit<ViewProps, 'colors'> {
+export interface GradientProps
+  extends Omit<
+    ViewProps,
+    'colors' | 'animate' | 'animationDuration' | 'direction' | 'position'
+  > {
   // Specifies the type of gradient to be rendered, such as linear or radial.
   type?: GradientType;
   // Defines the direction for a linear gradient, e.g., 'to top', 'to right'.

@@ -1,6 +1,6 @@
 # Tutorials
 
-This section provides step-by-step tutorials for common tasks using the App Studio Web Component Library.
+This section provides step-by-step tutorials for common tasks using the App Studio Components library.
 
 ## Basic Tutorials
 

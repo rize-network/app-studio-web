@@ -22,7 +22,9 @@ export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
     {items.map((item, index) => (
       <View
         key={index}
-        ref={(el) => (itemRefs.current[index] = el as HTMLDivElement)}
+        ref={(el: HTMLElement | null) => {
+          itemRefs.current[index] = el as HTMLDivElement | null;
+        }}
         onMouseDown={(e: React.MouseEvent) => handleDragStart(e, index)}
         onTouchStart={(e: React.TouchEvent) => handleDragStart(e, index)}
         position="relative"

@@ -15,11 +15,11 @@
     "success": "#16a34a",
     "warning": "#d97706",
     "error": "#e61e49",
-    "canvas": "#ffffff",
-    "surface": "#f4f4f4",
-    "text": "#191c1f",
-    "muted": "#505a63",
-    "border": "#e5e7eb",
+    "canvas": "color-white",
+    "surface": "color-gray-50",
+    "text": "color-black",
+    "muted": "color-gray-500",
+    "border": "color-gray-200",
     "onPrimary": "#ffffff"
   },
   "tokens": {
@@ -306,7 +306,7 @@
       "size": "md",
       "shape": "pill",
       "color": "theme-primary",
-      "textColor": "theme-canvas",
+      "textColor": "theme-onPrimary",
       "views": {
         "container": {
           "borderRadius": 9999,
@@ -315,7 +315,8 @@
           "borderColor": "theme-primary",
           "letterSpacing": "-0.02em",
           "textTransform": "none",
-          "fontStyle": "normal"
+          "fontStyle": "normal",
+          "backgroundColor": null
         },
         "content": {
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
@@ -333,7 +334,7 @@
       "views": {
         "container": {
           "backgroundColor": "theme-secondary",
-          "color": "theme-canvas",
+          "color": "color-white",
           "borderColor": "theme-secondary",
           "borderRadius": 9999,
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
@@ -354,26 +355,26 @@
       "shape": "rounded",
       "views": {
         "container": {
-          "backgroundColor": "theme-surface",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 20,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "0 1px 3px rgba(0, 0, 0, 0.08)"
         },
         "header": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 600,
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "content": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "footer": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         }
       }
     },
@@ -383,16 +384,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 16,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.02em"
@@ -413,16 +414,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 16,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontStyle": "normal",
           "letterSpacing": "-0.02em"
@@ -443,16 +444,16 @@
       "variant": "default",
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": 16,
           "borderWidth": "1px",
           "borderStyle": "solid",
           "boxShadow": "none"
         },
         "field": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "label": {
@@ -473,8 +474,8 @@
       "size": "md",
       "views": {
         "checkbox": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas",
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white",
           "_checked": {
             "backgroundColor": "theme-primary",
             "borderColor": "theme-primary"
@@ -489,7 +490,7 @@
           "fontStyle": "normal"
         },
         "infoText": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "container": {
           "borderRadius": 9999
@@ -500,8 +501,8 @@
       "size": "md",
       "views": {
         "radio": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-canvas"
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white"
         },
         "dot": {
           "backgroundColor": "theme-primary"
@@ -514,7 +515,7 @@
           "fontStyle": "normal"
         },
         "infoText": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "container": {
           "borderRadius": "50%"
@@ -525,10 +526,10 @@
       "size": "sm",
       "views": {
         "slider": {
-          "backgroundColor": "theme-border"
+          "backgroundColor": "color-gray-200"
         },
         "circle": {
-          "backgroundColor": "theme-canvas"
+          "backgroundColor": "color-white"
         },
         "label": {
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
@@ -546,7 +547,7 @@
       "backgroundColor": "theme-primary",
       "views": {
         "track": {
-          "backgroundColor": "theme-border"
+          "backgroundColor": "color-gray-200"
         },
         "progress": {
           "backgroundColor": "theme-primary"
@@ -556,13 +557,13 @@
         },
         "thumb": {
           "borderColor": "theme-primary",
-          "backgroundColor": "theme-canvas"
+          "backgroundColor": "color-white"
         },
         "label": {
-          "color": "theme-text"
+          "color": "color-black"
         },
         "valueLabel": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
@@ -570,10 +571,10 @@
       "variant": "pill",
       "views": {
         "headerTabs": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "tab": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
           "textTransform": "none",
@@ -588,10 +589,10 @@
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "activeText": {
-          "color": "theme-canvas"
+          "color": "color-white"
         },
         "content": {
-          "color": "theme-text"
+          "color": "color-black"
         },
         "container": {
           "borderRadius": "9999px"
@@ -601,35 +602,35 @@
     "accordion": {
       "views": {
         "container": {
-          "borderColor": "theme-border",
-          "backgroundColor": "theme-surface",
-          "color": "theme-text",
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-gray-50",
+          "color": "color-black",
           "borderRadius": "24px"
         },
         "trigger": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "content": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
     "table": {
       "views": {
         "table": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-text",
-          "borderColor": "theme-border",
+          "backgroundColor": "color-white",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
           "borderRadius": 20
         },
         "thead": {
-          "backgroundColor": "theme-surface",
-          "color": "theme-text"
+          "backgroundColor": "color-gray-50",
+          "color": "color-black"
         },
         "th": {
-          "color": "theme-muted",
-          "borderColor": "theme-border",
+          "color": "color-gray-500",
+          "borderColor": "color-gray-200",
           "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
@@ -637,16 +638,16 @@
           "fontStyle": "normal"
         },
         "tr": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "td": {
-          "color": "theme-text",
-          "borderColor": "theme-border",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
           "letterSpacing": "-0.02em",
           "fontStyle": "normal"
         },
         "caption": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontStyle": "italic",
           "letterSpacing": "-0.02em"
         }
@@ -655,13 +656,13 @@
     "avatar": {
       "views": {
         "container": {
-          "backgroundColor": "theme-surface",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": "50%"
         },
         "fallback": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         }
       }
@@ -669,12 +670,12 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "theme-surface",
-          "borderColor": "theme-border",
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
           "borderRadius": 20
         },
         "title": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
@@ -682,7 +683,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "icon": {
@@ -696,25 +697,25 @@
           "backgroundColor": "theme-success"
         },
         "label": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         }
       }
     },
     "progress": {
       "color": "theme-primary",
-      "backgroundColor": "theme-border",
+      "backgroundColor": "color-gray-200",
       "radius": "24px",
       "views": {
         "container": {
-          "backgroundColor": "theme-border",
+          "backgroundColor": "color-gray-200",
           "borderRadius": "9999px"
         },
         "bar": {
           "backgroundColor": "theme-primary"
         },
         "text": {
-          "color": "theme-text"
+          "color": "color-black"
         }
       }
     },
@@ -722,13 +723,13 @@
       "color": "theme-primary"
     },
     "separator": {
-      "color": "theme-border",
+      "color": "color-gray-200",
       "views": {
         "container": {
-          "borderColor": "theme-border"
+          "borderColor": "color-gray-200"
         },
         "label": {
-          "color": "theme-muted",
+          "color": "color-gray-500",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         }
       }
@@ -736,13 +737,13 @@
     "navigation": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
           "borderRadius": "24px"
         },
         "item": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "activeItem": {
           "color": "theme-primary",
@@ -753,37 +754,37 @@
     "hero": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "eyebrow": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         },
         "title": {
-          "color": "theme-text",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "description": {
-          "color": "theme-muted"
+          "color": "color-gray-500"
         }
       }
     },
     "page": {
       "views": {
         "container": {
-          "backgroundColor": "theme-canvas",
-          "color": "theme-text",
+          "backgroundColor": "color-white",
+          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
         },
         "section": {
-          "backgroundColor": "theme-canvas",
-          "borderColor": "theme-border"
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200"
         },
         "surface": {
-          "backgroundColor": "theme-surface",
-          "borderColor": "theme-border",
-          "color": "theme-text"
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black"
         }
       }
     }
@@ -795,7 +796,7 @@
     "typeStyle": "normal",
     "letterSpacing": "-0.02em",
     "accentTreatment": "gradient",
-    "signatureMotif": "\u2605",
+    "signatureMotif": "★",
     "density": "comfortable",
     "surfaceTone": "glass",
     "cardRadius": 20,

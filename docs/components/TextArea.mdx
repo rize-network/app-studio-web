@@ -4,14 +4,14 @@ A text input field for multi-line text editing with customizable features.
 
 ### **Import**
   ```tsx
-  import { TextArea } from '@app-studio/web';
+  import { TextArea } from '@app-studio/components';
   ```
 
 ### **Default**
 ```tsx
 import React from 'react';
 
-import { TextArea } from '@app-studio/web';
+import { TextArea } from '@app-studio/components';
 
 export const DefaultArea = () => (
   <TextArea name="comments" placeholder="Enter your thoughts" />
@@ -24,9 +24,9 @@ Optional color scheme for the component.
 
 ```tsx
 import React from 'react';
-import { Vertical } from '@app-studio/web';
+import { Vertical } from '@app-studio/components';
 
-import { TextArea } from '@app-studio/web';
+import { TextArea } from '@app-studio/components';
 
 export const ColorArea = () => {
   return (
@@ -51,10 +51,10 @@ Helper text that appears below the text area.
 import { useState } from 'react';
 import React from 'react';
 
-import { Button } from '@app-studio/web';
-import { TextArea } from '@app-studio/web';
+import { Button } from '@app-studio/components';
+import { TextArea } from '@app-studio/components';
 
-import { Vertical } from '@app-studio/web';
+import { Vertical } from '@app-studio/components';
 
 export const HelperTextArea = () => {
   const initialValues = {
@@ -108,11 +108,11 @@ Placeholder text for the text area when it is empty.
 
 ```tsx
 import React from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 
-import { Horizontal } from '@app-studio/web';
+import { Horizontal } from '@app-studio/components';
 
-import { TextArea } from '@app-studio/web';
+import { TextArea } from '@app-studio/components';
 
 export const PlaceholderArea = () => {
   const handleSubmit = (event: any) => {

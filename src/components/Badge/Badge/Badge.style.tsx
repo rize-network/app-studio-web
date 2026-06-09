@@ -163,21 +163,17 @@ export const getBadgeAnnouncementVariant = (themeMode: string): ViewProps => {
     display: 'inline-flex',
     height: 'auto',
     minWidth: 'auto',
-    backgroundColor: isDark
-      ? 'rgba(39, 39, 42, 0.68)'
-      : 'rgba(255, 255, 255, 0.6)',
-    color: isDark ? 'color-white' : 'color-gray-900',
+    backgroundColor: 'color-white-600',
+    color: 'color-gray-900',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: isDark ? 'rgba(255, 255, 255, 0.16)' : 'color-white',
+    borderColor: 'color-white',
     backdropFilter: 'blur(12px)',
     boxShadow: '0 1px 2px rgba(15, 23, 42, 0.08)',
     transition:
       'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
     _hover: {
-      backgroundColor: isDark
-        ? 'rgba(63, 63, 70, 0.76)'
-        : 'rgba(255, 255, 255, 0.8)',
+      backgroundColor: 'color-white-800',
       boxShadow: '0 2px 8px rgba(15, 23, 42, 0.1)',
     },
   };
@@ -237,14 +233,14 @@ export const getBadgeVariants = (
       },
     },
     ghost: {
-      color: isDark ? 'color-gray-300' : 'color-gray-500',
+      color: 'color-gray-500',
       borderWidth: 0,
       borderStyle: 'solid',
-      borderColor: isDark ? 'color-gray-300' : 'color-gray-500',
+      borderColor: 'color-gray-500',
       style: { backgroundColor: 'transparent' },
       transition: 'background-color 0.2s ease, color 0.2s ease',
       _hover: {
-        backgroundColor: isDark ? 'color-gray-800' : 'color-gray-100',
+        backgroundColor: 'color-gray-100',
       },
     },
   };

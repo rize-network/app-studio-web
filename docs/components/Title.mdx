@@ -4,14 +4,14 @@ Displays customizable titles with highlighting, responsive sizing, animation eff
 
 ### **Import**
 ```tsx
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
 import { Vertical } from 'app-studio';
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 
 export const DefaultTitle = () => {
   return (
@@ -31,7 +31,7 @@ Use the pipe character `|` to force a line break within the title text.
 
 ```tsx
 import React from 'react';
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 
 export const MultiLineTitle = () => (
   <Title size="lg" highlightText="Breaking">
@@ -53,7 +53,7 @@ Highlight specific words within the title text.
 ```tsx
 import React from 'react';
 import { Vertical } from 'app-studio';
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 
 export const HighlightStyles = () => (
   <Vertical gap={20}>
@@ -86,7 +86,7 @@ Controls the loop behavior of title and highlight animations.
 
 ```tsx
 import React from 'react';
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 
 export const AnimatedLoopTitle = () => (
   <Title
@@ -111,7 +111,7 @@ Adds a typewriter effect to the highlighted text.
 
 ```tsx
 import React from 'react';
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 
 export const TypewriterTitle = () => (
   <Title
@@ -134,7 +134,7 @@ Adds a sliding entry effect to the highlighted text words.
 
 ```tsx
 import React from 'react';
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 
 export const SlideTitle = () => (
   <Title
@@ -168,7 +168,7 @@ Cycles through an array of strings, replacing the highlighted text.
 
 ```tsx
 import React from 'react';
-import { Title } from '@app-studio/web';
+import { Title } from '@app-studio/components';
 
 export const RotatingTitle = () => (
   <Title

@@ -49,7 +49,8 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   }, [speed]);
 
   return (
-    <svg
+    <View
+      as="svg"
       xmlns="http://www.w3.org/2000/svg"
       width={`${sizeStyle}px`}
       height={`${sizeStyle}px`}
@@ -71,7 +72,7 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
       <g id="SVGRepo_iconCarrier">
         <path d="M21 12a9 9 0 11-6.219-8.56"></path>
       </g>
-    </svg>
+    </View>
   );
 };
 
@@ -99,7 +100,8 @@ const Dotted: React.FC<DottedProps> = ({
   }, [speed]);
 
   return (
-    <svg
+    <View
+      as="svg"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
       width={`${sizeStyle}px`}
@@ -110,7 +112,7 @@ const Dotted: React.FC<DottedProps> = ({
       <circle cx="10" cy="25" r="4" fill={colorStyle} />
       <circle cx="25" cy="25" r="4" fill={colorStyle} />
       <circle cx="40" cy="25" r="4" fill={colorStyle} />
-    </svg>
+    </View>
   );
 };
 
@@ -138,7 +140,8 @@ const Quarter: React.FC<QuarterProps> = ({
   }, [speed]);
 
   return (
-    <svg
+    <View
+      as="svg"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
       width={`${sizeStyle}px`}
@@ -155,7 +158,7 @@ const Quarter: React.FC<QuarterProps> = ({
         strokeWidth="5"
         strokeDasharray="1,10"
       />
-    </svg>
+    </View>
   );
 };
 const LoaderView: React.FC<Props> = ({

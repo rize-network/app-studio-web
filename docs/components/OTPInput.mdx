@@ -4,16 +4,16 @@ A component to securely input one-time passwords or verification codes digit by 
 
 ### **Import**
 ```tsx
-import { OTPInput } from '@app-studio/web';
+import { OTPInput } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React, { useState } from 'react';
-import { Button } from '@app-studio/web';
+import { Button } from '@app-studio/components';
 import { Vertical } from 'app-studio';
 import { Text } from 'app-studio';
-import { OTPInput } from '@app-studio/web';
+import { OTPInput } from '@app-studio/components';
 
 export const DefaultOTPInput = () => {
   const [otp, setOtp] = useState('');
@@ -95,7 +95,7 @@ Callback function triggered when all OTP fields have been filled, providing the 
 import React, { useState } from 'react';
 import { Vertical } from 'app-studio';
 import { Text } from 'app-studio';
-import { OTPInput } from '@app-studio/web';
+import { OTPInput } from '@app-studio/components';
 
 export const OnCompleteDemo = () => {
   const [otp, setOtp] = useState('');
@@ -137,7 +137,7 @@ import React, { useState } from 'react';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Text } from 'app-studio';
-import { OTPInput } from '@app-studio/web';
+import { OTPInput } from '@app-studio/components';
 
 export const StepValuesOTPInput = () => {
   const [otp, setOtp] = useState('');

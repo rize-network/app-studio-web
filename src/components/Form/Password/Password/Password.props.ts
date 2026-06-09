@@ -1,10 +1,14 @@
 import React from 'react';
 import { TextFieldProps } from '../../../Form/TextField/TextField/TextField.props';
-import { InputProps } from 'app-studio';
 
-export interface PasswordProps
-  extends TextFieldProps,
-    Omit<InputProps, 'size'> {
+/**
+ * TextFieldProps already extends Omit<InputProps, ...>, so a second extend of
+ * Omit<InputProps, ...> would conflict on every property TextField narrowed
+ * (error, helperText, label, left, right, onBlur, onChange, onClick, onFocus,
+ * shadow, value). The Password component is a TextField with a visibility
+ * toggle — extend TextFieldProps alone.
+ */
+export interface PasswordProps extends TextFieldProps {
   /**
    * The name of the input field
    */
@@ -29,7 +33,7 @@ export interface PasswordViewProps extends PasswordProps {
    */
   isVisible?: boolean;
   /**
-   * Optional callback prop to update the visibility state
+   * Optional callback to update the visibility state.
    */
-  setIsVisible?: Function;
+  setIsVisible?: (value: boolean) => void;
 }

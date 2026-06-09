@@ -229,7 +229,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
                 {...DefaultChatWidgetStyles.attachmentButton}
                 {...styles.contextPickerButton}
                 _hover={{
-                  backgroundColor: '#F1F5F9',
+                  backgroundColor: 'color-gray-100',
                   ...styles.contextPickerButton?._hover,
                 }}
                 title="Select element from page"
@@ -245,7 +245,7 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
               {...DefaultChatWidgetStyles.sendButton}
               backgroundColor={hasText ? 'theme-primary' : 'color-gray-300'}
               _hover={{
-                backgroundColor: hasText ? '#1D4ED8' : 'color-gray-300',
+                backgroundColor: hasText ? 'theme-primary' : 'color-gray-300',
               }}
               {...styles.sendButton}
               style={{

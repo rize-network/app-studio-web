@@ -1,7 +1,8 @@
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../../utils/elevation';
 import { Shape, Size, TextAreaStyles, Variant } from './TextArea.type';
-export interface TextAreaProps extends Omit<InputProps, 'size'> {
+export interface TextAreaProps
+  extends Omit<InputProps, 'size' | 'shadow' | 'value' | 'onSubmit'> {
   defaultValue?: string;
   error?: boolean;
   isEditable?: boolean;
@@ -26,6 +27,13 @@ export interface TextAreaProps extends Omit<InputProps, 'size'> {
   views?: TextAreaStyles;
   value?: string | number;
   variant?: Variant;
+  rows?: number;
+  cols?: number;
+  isRequired?: boolean;
+  required?: boolean;
+  labelProps?: any;
+  onSubmit?: (input: string) => void;
+  isWorkerRunning?: boolean;
 }
 export interface TextAreaViewProps extends TextAreaProps {
   hint?: string;

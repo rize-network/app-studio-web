@@ -4,13 +4,13 @@ Renders a badge with various styles and states according to the design guideline
 
 ### **Import**
 ```tsx
-import { Badge } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
 ```
 
 ### **Default**
 ```tsx
 import React from 'react';
-import { Badge } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
 
 export const DefaultDemo = () => <Badge content="default" />;
 ```
@@ -22,7 +22,7 @@ The content to be displayed within the badge.
 
 ```tsx
 import React from 'react';
-import { Badge } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
 
 export const ContentDemo = () => <Badge content="content" />;
 ```
@@ -38,8 +38,8 @@ Determines the styling variants a UI component can have, which could include fil
 import React from 'react';
 import { Vertical } from 'app-studio';
 
-import { Badge } from '@app-studio/web';
-import { Variant } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
+import { Variant } from '@app-studio/components';
 import { View } from 'app-studio';
 export const VariantDemo = () => (
   <Vertical gap={15}>
@@ -60,10 +60,10 @@ Lists possible positions for UI elements that can be placed in one of the corner
 
 ```tsx
 import React from 'react';
-import { Badge } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
 import { View } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Position } from '@app-studio/web';
+import { Position } from '@app-studio/components';
 
 export const PositionDemo = () => (
   <Horizontal gap={10}>
@@ -95,8 +95,8 @@ Specifies available sizes for UI elements, catering to a range of scalability fr
 import React from 'react';
 import { Vertical } from 'app-studio';
 
-import { Badge } from '@app-studio/web';
-import { Size } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
+import { Size } from '@app-studio/components';
 import { View } from 'app-studio';
 export const SizeDemo = () => (
   <Vertical gap={10}>
@@ -114,7 +114,7 @@ Renders children content inside the badge, allowing for custom compositions.
 
 ```tsx
 import React from 'react';
-import { Badge } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
 import { Text } from 'app-studio';
 
 export const ChildrenDemo = () => (
@@ -129,7 +129,7 @@ Displays an icon within the badge layout.
 
 ```tsx
 import React from 'react';
-import { Badge } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
 import { View } from 'app-studio';
 
 const Icon = () => (
@@ -151,7 +151,7 @@ Shows a status dot (pastil) inside the badge. Can be a boolean or a specific sta
 
 ```tsx
 import React from 'react';
-import { Badge } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
 import { Horizontal } from 'app-studio';
 
 export const PastilDemo = () => (
@@ -174,8 +174,8 @@ Defines possible values for the shape of a UI component such as buttons or badge
 ```tsx
 import React from 'react';
 import { Horizontal } from 'app-studio';
-import { Badge } from '@app-studio/web';
-import { Shape } from '@app-studio/web';
+import { Badge } from '@app-studio/components';
+import { Shape } from '@app-studio/components';
 import { View } from 'app-studio';
 export const ShapeDemo = () => (
   <Horizontal gap={15}>

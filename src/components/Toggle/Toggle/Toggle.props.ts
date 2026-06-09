@@ -1,6 +1,6 @@
 import { InputProps } from 'app-studio';
 import { Shape, Variant } from './Toggle.type';
-export interface ToggleProps extends Omit<InputProps, 'size'> {
+export interface ToggleProps extends Omit<InputProps, 'size' | 'onToggle'> {
   // Optional 'shape' property to determine the shape of the toggle component.
   shape?: Shape;
   // Optional boolean to define the initial toggle state.

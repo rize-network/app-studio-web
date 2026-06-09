@@ -28,9 +28,9 @@ export interface UploadStateProps {
   // An array of `File` objects when multiple file selection is enabled.
   selectedFiles: File[];
   // A React ref object pointing to the hidden HTML file input element.
-  fileInputRef: React.RefObject<HTMLInputElement>;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
   // A React ref object pointing to the HTML video element, used for video previews.
-  videoRef: React.RefObject<HTMLVideoElement>;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
 }
 // Defines the properties related to the visual presentation and custom rendering of the Uploader component.
 export interface UploadViewProps {

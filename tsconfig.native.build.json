@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.native.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": false,
+    "outDir": "./dist/native",
+    "rootDir": "./src",
+    "types": ["node", "react", "react-native"]
+  },
+  "include": [
+    "./src/components/**/*",
+    "./src/design-system/**/*",
+    "./src/pages/designSystem.page.tsx",
+    "./src/types/*.d.ts"
+  ],
+  "exclude": [
+    "./bot",
+    "**/examples/**",
+    "**/*.test.tsx",
+    "**/*.stories.tsx"
+  ]
+}

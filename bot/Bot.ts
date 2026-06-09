@@ -211,7 +211,7 @@ export class Bot {
         propsData.componentDescription || 'No description provided.'
       }\n\n`;
 
-      markdown += `### **Import**\n\`\`\`tsx\nimport { ${componentName} } from '@app-studio/web';\n\`\`\`\n\n`;
+      markdown += `### **Import**\n\`\`\`tsx\nimport { ${componentName} } from '@app-studio/components';\n\`\`\`\n\n`;
 
       // Check for the Default example
       const defaultExamplePath = path.resolve(

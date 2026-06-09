@@ -49,6 +49,7 @@ export * from './DropdownMenu/DropdownMenu';
 export * from './ColorPicker/ColorPicker';
 export * from './EmojiPicker/EmojiPicker';
 export * from './IconPicker/IconPicker';
+export * from './Gradient/Gradient';
 export * from './HoverCard/HoverCard';
 export * from './Menubar/Menubar';
 export * from './Pagination/Pagination';
@@ -67,6 +68,7 @@ export * from './ChatWidget/ChatWidget';
 export * from './AttachmentGroup/AttachmentGroup';
 export * from './ChatWidget/Widget/ChatWidgetWidget';
 export * from '../design-system';
+export { DesignSystem } from '../pages/designSystem.page';
 
 export * from './Accordion/Accordion/Accordion.props';
 export * from './Alert/Alert/Alert.props';

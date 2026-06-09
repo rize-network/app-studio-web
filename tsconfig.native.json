@@ -1,0 +1,29 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Keep `dom` in the lib so shared *.tsx files that reference HTMLDivElement
+    // / document / window still type-check. The native runtime never executes
+    // those code paths (Metro picks the `.native.tsx` sibling), but TS still
+    // needs the symbols.
+    "lib": ["dom", "esnext"],
+    "jsx": "react-native",
+    "types": ["react", "react-native"],
+    // Tell TS to prefer `<file>.native.{ts,tsx}` over `<file>.{ts,tsx}` when
+    // resolving imports — mirrors Metro's platform-extension resolution.
+    "moduleSuffixes": [".native", ""],
+    "noEmit": true
+  },
+  "include": ["./src", "./src/types/*.d.ts"],
+  // Mirror tsconfig.native.build.json's exclude: tests/stories/examples are
+  // never shipped, and test files import @testing-library/user-event whose
+  // global DOM augmentations leak unnameable symbol types into inferred hook
+  // return types (TS4023). Keep this release-gating typecheck scoped to
+  // shippable source.
+  "exclude": [
+    "./bot",
+    "**/examples/**",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.stories.tsx"
+  ]
+}

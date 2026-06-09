@@ -1,0 +1,556 @@
+{
+  "metadata": {
+    "id": "default",
+    "label": "Default",
+    "sourcePath": "",
+    "sourceTitle": "Default adaptive design system (light + dark)",
+    "defaultAppearance": "light",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "#2563eb",
+    "secondary": "#7c3aed",
+    "success": "#16a34a",
+    "warning": "#d97706",
+    "error": "#dc2626",
+    "onPrimary": "#ffffff",
+    "canvas": "color-white",
+    "surface": "color-gray-50",
+    "text": "color-black",
+    "muted": "color-gray-500",
+    "border": "color-gray-200"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "primary": "#2563eb",
+      "secondary": "#7c3aed",
+      "success": "#16a34a",
+      "warning": "#d97706",
+      "error": "#dc2626"
+    },
+    "colors": [
+      { "name": "primary", "value": "#2563eb", "role": "primary" },
+      { "name": "secondary", "value": "#7c3aed", "role": "secondary" },
+      { "name": "success", "value": "#16a34a", "role": "success" },
+      { "name": "warning", "value": "#d97706", "role": "warning" },
+      { "name": "error", "value": "#dc2626", "role": "error" }
+    ],
+    "typography": {
+      "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+      "monoFamily": "ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace",
+      "fontSizes": ["12px", "13px", "14px", "16px", "18px", "22px", "28px", "36px", "48px", "64px"],
+      "fontWeights": ["400", "500", "600", "700", "800"],
+      "lineHeights": ["1.0", "1.1", "1.2", "1.4", "1.5", "1.6"]
+    },
+    "spacing": ["2px", "4px", "8px", "12px", "16px", "24px", "32px", "48px", "64px"],
+    "radii": ["2px", "4px", "6px", "8px", "12px", "16px", "9999px"],
+    "shadows": [
+      "0 1px 2px rgba(0,0,0,0.04)",
+      "0 4px 12px rgba(0,0,0,0.08)",
+      "0 12px 32px rgba(0,0,0,0.12)"
+    ]
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "rounded",
+      "color": "theme-primary",
+      "textColor": "theme-onPrimary",
+      "views": {
+        "container": {
+          "borderRadius": 8,
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "theme-primary",
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal",
+          "backgroundColor": null
+        },
+        "content": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": null,
+          "color": null,
+          "borderColor": null,
+          "borderRadius": 6,
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontWeight": 600,
+          "fontStyle": "normal"
+        },
+        "text": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "rounded",
+      "views": {
+        "container": {
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
+          "borderRadius": 12,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "0 1px 2px rgba(0,0,0,0.04)"
+        },
+        "header": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "color-gray-200"
+        },
+        "content": {
+          "color": "color-gray-500",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        },
+        "footer": {
+          "borderColor": "color-gray-200"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
+          "borderRadius": 8,
+          "borderWidth": "1px",
+          "borderStyle": "solid"
+        },
+        "field": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "-0.01em"
+        },
+        "label": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "helperText": {}
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
+          "borderRadius": 8,
+          "borderWidth": "1px",
+          "borderStyle": "solid"
+        },
+        "field": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontStyle": "normal",
+          "letterSpacing": "-0.01em"
+        },
+        "label": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "helperText": {}
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
+          "borderRadius": 8,
+          "borderWidth": "1px",
+          "borderStyle": "solid"
+        },
+        "field": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        },
+        "label": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "helperText": {},
+        "text": {
+          "letterSpacing": "-0.01em",
+          "fontStyle": "normal"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white",
+          "_checked": {
+            "backgroundColor": "theme-primary",
+            "borderColor": "theme-primary"
+          },
+          "borderRadius": 4
+        },
+        "label": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "infoText": {
+          "color": "color-gray-500"
+        },
+        "container": {
+          "borderRadius": 4
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white"
+        },
+        "dot": {
+          "backgroundColor": "theme-primary"
+        },
+        "label": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "infoText": {
+          "color": "color-gray-500"
+        },
+        "container": {
+          "borderRadius": "50%"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "color-gray-200"
+        },
+        "circle": {
+          "backgroundColor": "color-white"
+        },
+        "label": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "container": {
+          "borderRadius": "9999px"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "theme-primary",
+      "views": {
+        "track": {
+          "backgroundColor": "color-gray-200"
+        },
+        "progress": {
+          "backgroundColor": "theme-primary"
+        },
+        "filledTrack": {
+          "backgroundColor": "theme-primary"
+        },
+        "thumb": {
+          "borderColor": "theme-primary",
+          "backgroundColor": "color-white"
+        },
+        "label": {
+          "color": "color-black"
+        },
+        "valueLabel": {
+          "color": "color-gray-500"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "underline",
+      "views": {
+        "headerTabs": {
+          "borderColor": "color-gray-200"
+        },
+        "tab": {
+          "color": "color-gray-500",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "activeTab": {
+          "color": "theme-primary",
+          "borderColor": "theme-primary",
+          "backgroundColor": "transparent"
+        },
+        "title": {
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        },
+        "activeText": {
+          "color": "theme-primary"
+        },
+        "content": {
+          "color": "color-black"
+        },
+        "container": {
+          "borderRadius": "8px"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-gray-50",
+          "color": "color-black",
+          "borderRadius": "12px"
+        },
+        "trigger": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        },
+        "content": {
+          "color": "color-gray-500"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "color-white",
+          "color": "color-black",
+          "borderColor": "color-gray-200",
+          "borderRadius": 12
+        },
+        "thead": {
+          "backgroundColor": "color-gray-50",
+          "color": "color-black"
+        },
+        "th": {
+          "color": "color-gray-500",
+          "borderColor": "color-gray-200",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 600,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "tr": {
+          "borderColor": "color-gray-200"
+        },
+        "td": {
+          "color": "color-black",
+          "borderColor": "color-gray-200",
+          "letterSpacing": "-0.01em",
+          "fontStyle": "normal"
+        },
+        "caption": {
+          "color": "color-gray-500",
+          "fontStyle": "italic",
+          "letterSpacing": "-0.01em"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
+          "borderRadius": "50%"
+        },
+        "fallback": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "borderRadius": 12
+        },
+        "title": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
+          "fontWeight": 700,
+          "letterSpacing": "-0.01em",
+          "textTransform": "none",
+          "fontStyle": "normal"
+        },
+        "description": {
+          "color": "color-gray-500",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        },
+        "icon": {
+          "color": "theme-primary"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "theme-success"
+        },
+        "label": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "theme-primary",
+      "backgroundColor": "color-gray-200",
+      "radius": "9999px",
+      "views": {
+        "container": {
+          "backgroundColor": "color-gray-200",
+          "borderRadius": "9999px"
+        },
+        "bar": {
+          "backgroundColor": "theme-primary"
+        },
+        "text": {
+          "color": "color-black"
+        }
+      }
+    },
+    "loader": {
+      "color": "theme-primary"
+    },
+    "separator": {
+      "color": "color-gray-200",
+      "views": {
+        "container": {
+          "borderColor": "color-gray-200"
+        },
+        "label": {
+          "color": "color-gray-500",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "color-black",
+          "borderRadius": "12px"
+        },
+        "item": {
+          "color": "color-gray-500"
+        },
+        "activeItem": {
+          "color": "theme-primary",
+          "borderColor": "theme-primary"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        },
+        "eyebrow": {
+          "color": "color-gray-500"
+        },
+        "title": {
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        },
+        "description": {
+          "color": "color-gray-500"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "color": "color-black",
+          "fontFamily": "'Inter', system-ui, -apple-system, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200"
+        },
+        "surface": {
+          "backgroundColor": "color-gray-50",
+          "borderColor": "color-gray-200",
+          "color": "color-black"
+        }
+      }
+    }
+  },
+  "personality": {
+    "cornerStyle": "soft",
+    "typeWeight": "regular",
+    "typeCase": "normal",
+    "typeStyle": "normal",
+    "letterSpacing": "-0.01em",
+    "accentTreatment": "flat",
+    "signatureMotif": "●",
+    "density": "comfortable",
+    "surfaceTone": "paper",
+    "cardRadius": 12,
+    "pillRadius": 9999,
+    "badgeRadius": 6,
+    "voice": "neutral-clear"
+  }
+}
