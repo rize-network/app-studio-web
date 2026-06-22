@@ -31,7 +31,8 @@ export const useColorPickerState = (props: ColorPickerProps) => {
     }
   }, [controlledIsOpen]);
   useEffect(() => {
-    if (showRecentColors) {
+    // `localStorage` is web-only; on React Native recent colors start empty.
+    if (showRecentColors && typeof localStorage !== 'undefined') {
       const stored = localStorage.getItem('colorPicker-recentColors');
       if (stored) {
         try {
@@ -41,6 +42,8 @@ export const useColorPickerState = (props: ColorPickerProps) => {
     }
   }, [showRecentColors]);
   useEffect(() => {
+    // `document` is web-only; on native the dropdown closes via selection/toggle.
+    if (typeof document === 'undefined') return;
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isOpen &&
@@ -61,10 +64,12 @@ export const useColorPickerState = (props: ColorPickerProps) => {
       setRecentColors((prev) => {
         const filtered = prev.filter((c) => c !== color);
         const newRecent = [color, ...filtered].slice(0, maxRecentColors);
-        localStorage.setItem(
-          'colorPicker-recentColors',
-          JSON.stringify(newRecent)
-        );
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem(
+            'colorPicker-recentColors',
+            JSON.stringify(newRecent)
+          );
+        }
         return newRecent;
       });
     },

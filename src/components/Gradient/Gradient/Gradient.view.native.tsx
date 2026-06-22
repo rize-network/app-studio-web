@@ -116,37 +116,40 @@ export const GradientView: React.FC<GradientProps> = ({
 
   const points = directionToPoints(direction);
 
-  // No LinearGradient peer present → flat color fallback.
-  if (!LinearGradient || type === 'conic') {
-    return (
-      <View
-        backgroundColor={resolvedColors[0] ?? 'transparent'}
-        {...DefaultGradientStyles.container}
-        {...views?.container}
-        {...props}
-      >
-        {children && (
-          <View {...DefaultGradientStyles.content} {...views?.content}>
-            {children}
-          </View>
-        )}
-      </View>
-    );
-  }
+  // No LinearGradient peer present (or conic, which RN can't render) → flat
+  // color fallback.
+  const useFlatFallback = !LinearGradient || type === 'conic';
 
+  // IMPORTANT: the size/shape props (`height="100px"`, `width="100%"`,
+  // `borderRadius="12px"`, color tokens, …) are app-studio style props, NOT raw
+  // RN styles — passing them straight to `LinearGradient`'s `style` makes RN
+  // drop `"100px"` and the box collapses to zero height (the gradient "doesn't
+  // show"). So we always render an app-studio `<View>` as the sized, clipped
+  // container (it runs every prop through `useNativeStyle`) and let
+  // `LinearGradient` absolutely fill it.
   return (
-    <LinearGradient
-      colors={resolvedColors}
-      locations={locations}
-      start={points.start}
-      end={points.end}
-      style={[DefaultGradientStyles.container, views?.container, props as any]}
+    <View
+      backgroundColor={
+        useFlatFallback ? resolvedColors[0] ?? 'transparent' : undefined
+      }
+      {...DefaultGradientStyles.container}
+      {...views?.container}
+      {...props}
     >
+      {!useFlatFallback && (
+        <LinearGradient
+          colors={resolvedColors}
+          locations={locations}
+          start={points.start}
+          end={points.end}
+          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
+        />
+      )}
       {children && (
         <View {...DefaultGradientStyles.content} {...views?.content}>
           {children}
         </View>
       )}
-    </LinearGradient>
+    </View>
   );
 };

@@ -102,6 +102,8 @@ export function useContextSelector({
   );
 
   useEffect(() => {
+    // `document` is web-only; the inspector overlay is a no-op on React Native.
+    if (typeof document === 'undefined') return;
     if (active) {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('click', handleClick, true); // Capture phase to prevent default

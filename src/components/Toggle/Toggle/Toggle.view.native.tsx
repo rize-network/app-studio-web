@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { ViewProps, Center, useTheme } from 'app-studio';
+import { ViewProps, Center, Text, useTheme } from 'app-studio';
 import { ToggleViewProps } from './Toggle.props';
 import { ToggleShapes, getToggleVariants } from './Toggle.style';
 
@@ -38,6 +38,16 @@ const ToggleView: React.FC<Props> = React.memo(
     );
     const base = palette[variant];
     const isActive = !!isToggle;
+    // On native, a raw string/number child of a View does not render as visible
+    // text (it needs a <Text>), and <Text> doesn't inherit `color` from the
+    // parent. Wrap primitive children in a <Text> with the resolved tone.
+    const textTone = isActive ? mainTone : (base as any)?.color ?? mainTone;
+    const content =
+      typeof children === 'string' || typeof children === 'number' ? (
+        <Text color={textTone}>{children}</Text>
+      ) : (
+        children
+      );
     const handleToggle = useCallback(() => {
       if (!isDisabled) {
         setIsToggled((prev) => {
@@ -69,7 +79,7 @@ const ToggleView: React.FC<Props> = React.memo(
         {...props}
         {...views?.container}
       >
-        {children}
+        {content}
       </Center>
     );
   }

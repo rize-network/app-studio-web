@@ -27,6 +27,11 @@ export const useDropdownMenuState = (defaultOpen: boolean = false) => {
         setActiveSubmenuId(null);
       }
     };
+    // `document`/`window` are web-only; on React Native there is no global
+    // event target to listen to, so skip attaching listeners (and creating a
+    // cleanup that references them).
+    if (typeof window === 'undefined' || typeof document === 'undefined')
+      return;
     document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('resize', handleResize);
     document.addEventListener('keydown', handleKeyDown);

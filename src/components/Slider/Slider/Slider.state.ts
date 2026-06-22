@@ -84,7 +84,11 @@ export const useSliderState = ({
   const handleInteraction = useCallback(
     (event: MouseEvent | TouchEvent | React.MouseEvent | React.TouchEvent) => {
       if (isDisabled || !trackRef.current) return;
-      const trackRect = trackRef.current.getBoundingClientRect();
+      const trackNode: any = trackRef.current;
+      // `getBoundingClientRect` is a DOM-only method; on React Native the ref
+      // resolves to a component instance that lacks it, so bail out gracefully.
+      if (typeof trackNode.getBoundingClientRect !== 'function') return;
+      const trackRect = trackNode.getBoundingClientRect();
       let position: number;
       if ('touches' in event) {
         position =
@@ -123,6 +127,8 @@ export const useSliderState = ({
         document.removeEventListener('touchmove', handleMouseMove);
         document.removeEventListener('touchend', handleMouseUp);
       };
+      // `document` is web-only; React Native has no global drag listeners.
+      if (typeof document === 'undefined') return;
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchmove', handleMouseMove);
@@ -132,7 +138,13 @@ export const useSliderState = ({
   );
   const handleTrackMouseDown = useCallback(
     (event: React.MouseEvent | React.TouchEvent) => {
-      if (thumbRef.current && thumbRef.current.contains(event.target as Node)) {
+      const thumbNode: any = thumbRef.current;
+      // `.contains` is a DOM-only method; skip the check on React Native.
+      if (
+        thumbNode &&
+        typeof thumbNode.contains === 'function' &&
+        thumbNode.contains(event.target as Node)
+      ) {
         return;
       }
       handleMouseDown(event);

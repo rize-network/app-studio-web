@@ -70,7 +70,7 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
     }
   }, [controlledIsOpen]);
   useEffect(() => {
-    if (showRecentEmojis) {
+    if (showRecentEmojis && typeof localStorage !== 'undefined') {
       const stored = localStorage.getItem('emojiPicker-recentEmojis');
       if (stored) {
         try {
@@ -80,6 +80,7 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
     }
   }, [showRecentEmojis]);
   useEffect(() => {
+    if (typeof document === 'undefined') return;
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isOpen &&
@@ -100,10 +101,12 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
       setRecentEmojis((prev) => {
         const filtered = prev.filter((e) => e.emoji !== emoji.emoji);
         const newRecent = [emoji, ...filtered].slice(0, maxRecentEmojis);
-        localStorage.setItem(
-          'emojiPicker-recentEmojis',
-          JSON.stringify(newRecent)
-        );
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem(
+            'emojiPicker-recentEmojis',
+            JSON.stringify(newRecent)
+          );
+        }
         return newRecent;
       });
     },

@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import { Button } from '../../Button/Button';
-import { Vertical } from 'app-studio';
+import { Vertical, View } from 'app-studio';
 import { Text } from 'app-studio';
 import { OTPInput } from '../OTPInput';
 
 export const DefaultOTPInput = () => {
   const [otp, setOtp] = useState('');
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    alert(`Entered OTP: ${otp}`);
+  const handleSubmit = () => {
+    if (typeof alert !== 'undefined') {
+      alert(`Entered OTP: ${otp}`);
+    } else {
+      console.log(`Entered OTP: ${otp}`);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <View>
       <Vertical gap={20}>
         <Text>Enter verification code:</Text>
         <OTPInput name="otp" value={otp} onChange={setOtp} isAutoFocus />
-        <Button type="submit" isAuto>
+        <Button type="button" isAuto onClick={handleSubmit}>
           Verify
         </Button>
       </Vertical>
-    </form>
+    </View>
   );
 };
 

@@ -86,10 +86,18 @@ export const AttachmentGroup: React.FC<AttachmentGroupProps> = ({
       {...views?.container}
     >
       {files.map((file, index) => {
+        // `URL.createObjectURL` exists on React Native but throws unless given a
+        // real Blob/File (e.g. "Cannot read property 'blobId' of undefined").
+        // Only call it for actual Blob instances; otherwise rely on path/url.
+        const canCreateObjectUrl =
+          typeof URL !== 'undefined' &&
+          typeof URL.createObjectURL === 'function' &&
+          typeof Blob !== 'undefined' &&
+          file instanceof Blob;
         const previewUrl =
           (file as any)?.path ||
           (file as any)?.url ||
-          (showPreviews ? URL.createObjectURL(file) : '');
+          (showPreviews && canCreateObjectUrl ? URL.createObjectURL(file) : '');
         const isImage = file.type.startsWith('image/');
         const isVideo = file.type.startsWith('video/');
         const isAudio = file.type.startsWith('audio/');

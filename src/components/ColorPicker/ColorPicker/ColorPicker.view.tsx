@@ -165,24 +165,29 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
               {...views?.customInput}
             >
               <Horizontal gap={8} alignItems="center" marginBottom="10px">
-                <input
-                  type="color"
-                  value={customColor || '#1D4ED8'}
-                  onChange={(e) => {
-                    const color = e.target.value;
-                    handleCustomColorChange(color);
-                    handleColorSelect(color);
-                  }}
-                  style={{
-                    width: '36px',
-                    height: '36px',
-                    border: '1px solid #E5E7EB',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    backgroundColor: 'transparent',
-                  }}
-                  title="Pick a color"
-                />
+                {/* Native color picker input is web-only (`<input type="color">`).
+                    On React Native it is omitted; the hex TextField below covers
+                    custom color entry there. */}
+                {typeof document !== 'undefined' && (
+                  <input
+                    type="color"
+                    value={customColor || '#1D4ED8'}
+                    onChange={(e) => {
+                      const color = e.target.value;
+                      handleCustomColorChange(color);
+                      handleColorSelect(color);
+                    }}
+                    style={{
+                      width: '36px',
+                      height: '36px',
+                      border: '1px solid #E5E7EB',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                      backgroundColor: 'transparent',
+                    }}
+                    title="Pick a color"
+                  />
+                )}
                 <Text fontSize="12px" lineHeight="16px" color="color-gray-500">
                   HEX
                 </Text>
@@ -190,8 +195,10 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
               <TextField
                 placeholder="#1D4ED8"
                 value={customColor}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleCustomColorChange(e.target.value)
+                onChange={(e: any) =>
+                  handleCustomColorChange(
+                    typeof e === 'string' ? e : e?.target?.value ?? ''
+                  )
                 }
                 onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) => {
                   if (e.key === 'Enter') {

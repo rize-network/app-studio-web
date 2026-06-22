@@ -176,6 +176,12 @@ export const useOTPInputState = ({
     if (!input || !container) {
       return;
     }
+    // `document` / `ResizeObserver` are web-only and the selection / DOM APIs
+    // below do not exist on React Native component instances. Bail out before
+    // attaching any listeners so no native-incompatible cleanup is created.
+    if (typeof document === 'undefined') {
+      return;
+    }
     if (
       initialLoadRef.current.value !== input.value &&
       initialLoadRef.current.onChange
@@ -249,26 +255,46 @@ export const useOTPInputState = ({
     });
     onDocumentSelectionChange();
     document.activeElement === input && setIsFocused(true);
+    const containerNode: any = container;
     const updateRootHeight = () => {
-      if (container) {
-        container.style.setProperty('--root-height', `${input.clientHeight}px`);
+      if (
+        containerNode &&
+        typeof containerNode.style?.setProperty === 'function'
+      ) {
+        containerNode.style.setProperty(
+          '--root-height',
+          `${input.clientHeight}px`
+        );
       }
     };
     updateRootHeight();
-    const resizeObserver = new (window as any).ResizeObserver(updateRootHeight);
-    resizeObserver.observe(input);
+    const ResizeObserverCtor =
+      typeof window !== 'undefined'
+        ? (window as any).ResizeObserver
+        : undefined;
+    const resizeObserver =
+      typeof ResizeObserverCtor === 'function'
+        ? new ResizeObserverCtor(updateRootHeight)
+        : null;
+    resizeObserver?.observe(input);
     return () => {
       document.removeEventListener(
         'selectionchange',
         onDocumentSelectionChange,
         { capture: true }
       );
-      resizeObserver.disconnect();
+      resizeObserver?.disconnect();
     };
   }, []);
   useEffect(() => {
+    // `Event` / `dispatchEvent` are web-only; skip the synthetic input event on
+    // React Native where the input ref is not a DOM node.
+    if (typeof Event === 'undefined') return;
     syncTimeouts(() => {
-      inputRef.current?.dispatchEvent(new Event('input'));
+      const node: any = inputRef.current;
+      if (node && typeof node.dispatchEvent === 'function') {
+        node.dispatchEvent(new Event('input'));
+      }
       const s = inputRef.current?.selectionStart;
       const e = inputRef.current?.selectionEnd;
       const dir = inputRef.current?.selectionDirection;

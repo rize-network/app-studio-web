@@ -116,11 +116,28 @@ export const useUpload = ({
     },
     [maxSize, onFileSelect, onMultipleFileSelect, validateFile, multiple]
   );
-  const handleClick = () => fileInputRef.current?.click();
+  const handleClick = () => {
+    // On web the hidden file input exposes `.click()`. On React Native there is
+    // no DOM file input (the ref resolves to a TextInput or null), so guard the
+    // call to keep the Uploader a safe, no-op-on-tap preview on native.
+    const input = fileInputRef.current as unknown as {
+      click?: () => void;
+    } | null;
+    if (input && typeof input.click === 'function') {
+      input.click();
+    }
+  };
   useEffect(() => {
     return () => {
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-      if (thumbnailUrl) URL.revokeObjectURL(thumbnailUrl);
+      // `URL.revokeObjectURL` is web-only; on native these URLs are never
+      // created (no file picker), so only call it when the API exists.
+      if (
+        typeof URL !== 'undefined' &&
+        typeof URL.revokeObjectURL === 'function'
+      ) {
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        if (thumbnailUrl) URL.revokeObjectURL(thumbnailUrl);
+      }
     };
   }, [previewUrl, thumbnailUrl]);
   return {

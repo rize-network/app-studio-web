@@ -84,17 +84,27 @@ export const useCommandState = ({
     [open, filteredCommands, selectedIndex, onOpenChange]
   );
   useEffect(() => {
+    // `document` is web-only; on React Native there is no global event target
+    // to listen to, so skip attaching the listener (and creating a cleanup
+    // that references it).
+    if (typeof document === 'undefined') return;
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [handleKeyDown]);
   useEffect(() => {
-    if (listRef.current && open) {
-      const selectedElement = listRef.current.querySelector(
+    // `querySelector`/`scrollIntoView` are DOM-only; on React Native the ref
+    // resolves to a component instance without these methods.
+    const node: any = listRef.current;
+    if (node && typeof node.querySelector === 'function' && open) {
+      const selectedElement = node.querySelector(
         `[data-index="${selectedIndex}"]`
       );
-      if (selectedElement) {
+      if (
+        selectedElement &&
+        typeof selectedElement.scrollIntoView === 'function'
+      ) {
         selectedElement.scrollIntoView({ block: 'nearest' });
       }
     }

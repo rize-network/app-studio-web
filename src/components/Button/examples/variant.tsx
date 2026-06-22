@@ -1,13 +1,15 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Vertical } from 'app-studio';
+import { Vertical, View, Text } from 'app-studio';
 
 import { Variant } from '../Button/Button.type';
 
 export const VariantButtons = () => (
   <Vertical gap={15}>
     <Vertical gap={10}>
-      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Colors</h3>
+      <Text fontSize="14px" fontWeight="600">
+        Colors
+      </Text>
       <Vertical gap={5}>
         <Button color="theme-primary">Primary</Button>
         <Button color="theme-secondary">Secondary</Button>
@@ -19,7 +21,9 @@ export const VariantButtons = () => (
     </Vertical>
 
     <Vertical gap={10}>
-      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Variants</h3>
+      <Text fontSize="14px" fontWeight="600">
+        Variants
+      </Text>
       {['filled', 'outline', 'empty', 'ghost', 'link', 'subtle'].map(
         (variant) => (
           <Button key={variant} variant={variant as Variant}>
@@ -30,15 +34,15 @@ export const VariantButtons = () => (
     </Vertical>
 
     <Vertical gap={10}>
-      <h3 style={{ fontSize: '14px', fontWeight: 600 }}>Reversed</h3>
-      <div
-        style={{
-          padding: 20,
-          backgroundColor: '#333',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 10,
-        }}
+      <Text fontSize="14px" fontWeight="600">
+        Reversed
+      </Text>
+      <View
+        padding={20}
+        backgroundColor="#333"
+        display="flex"
+        flexDirection="column"
+        gap={10}
       >
         <Button reversed variant="filled" color="theme-primary">
           Filled Reversed
@@ -49,7 +53,7 @@ export const VariantButtons = () => (
         <Button reversed variant="ghost" color="theme-primary">
           Ghost Reversed
         </Button>
-      </div>
+      </View>
     </Vertical>
   </Vertical>
 );

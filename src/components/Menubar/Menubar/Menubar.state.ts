@@ -34,6 +34,10 @@ export const useMenubarState = (
         setOpenMenuId(null);
       }
     };
+    // `document` is web-only; on React Native there is no global event target
+    // to listen to, so skip attaching listeners (and creating a cleanup that
+    // references them).
+    if (typeof document === 'undefined') return;
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleKeyDown);
     return () => {

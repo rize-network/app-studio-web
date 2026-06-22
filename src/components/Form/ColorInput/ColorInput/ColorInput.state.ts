@@ -28,7 +28,8 @@ export const useColorInputState = (props: ColorInputProps) => {
     }
   }, [value]);
   useEffect(() => {
-    if (showRecentColors) {
+    // `localStorage` is web-only; on React Native recent colors start empty.
+    if (showRecentColors && typeof localStorage !== 'undefined') {
       try {
         const saved = localStorage.getItem('colorInput-recentColors');
         if (saved) {
@@ -40,11 +41,14 @@ export const useColorInputState = (props: ColorInputProps) => {
     }
   }, [showRecentColors]);
   useEffect(() => {
-    if (isAutoFocus && triggerRef.current) {
-      triggerRef.current.focus();
+    const node: any = triggerRef.current;
+    if (isAutoFocus && node && typeof node.focus === 'function') {
+      node.focus();
     }
   }, [isAutoFocus]);
   useEffect(() => {
+    // `document` is web-only; on native the dropdown closes via selection/toggle.
+    if (typeof document === 'undefined') return;
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isOpen &&
@@ -66,10 +70,12 @@ export const useColorInputState = (props: ColorInputProps) => {
         const filtered = prev.filter((c) => c !== color);
         const newRecent = [color, ...filtered].slice(0, maxRecentColors);
         try {
-          localStorage.setItem(
-            'colorInput-recentColors',
-            JSON.stringify(newRecent)
-          );
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(
+              'colorInput-recentColors',
+              JSON.stringify(newRecent)
+            );
+          }
         } catch (error) {
           console.warn('Failed to save recent colors to localStorage:', error);
         }

@@ -47,6 +47,18 @@ export const PaginationView: React.FC<PaginationProps> = ({
       );
     }
     const isCurrentPage = pageNumber === currentPage;
+    // On native a `<Text>` does NOT inherit `color` from its parent `<View>`
+    // (unlike web CSS), so the active page's white number would render in the
+    // default dark color on the theme-primary background and look invisible.
+    // Resolve the intended text color/size and hand them to the `<Text>`.
+    const overrideColor = (
+      isCurrentPage ? views?.activePageButton : views?.pageButton
+    ) as any;
+    const textColor =
+      overrideColor?.color ??
+      (isCurrentPage
+        ? (ActivePageButtonStyles as any).color
+        : (PaginationVariants[variant] as any).color);
     return (
       <View
         key={`page-${pageNumber}`}
@@ -60,7 +72,12 @@ export const PaginationView: React.FC<PaginationProps> = ({
         {...(isCurrentPage ? ActivePageButtonStyles : {})}
         {...(isCurrentPage ? views?.activePageButton : views?.pageButton)}
       >
-        <Text>{pageNumber}</Text>
+        <Text
+          color={textColor}
+          fontSize={(PaginationSizes[size] as any).fontSize}
+        >
+          {pageNumber}
+        </Text>
       </View>
     );
   };

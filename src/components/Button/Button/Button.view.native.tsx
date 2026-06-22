@@ -7,7 +7,7 @@
  */
 
 import React, { useMemo } from 'react';
-import { Element, Horizontal, Vertical, View } from 'app-studio';
+import { Element, Horizontal, Vertical, View, Text } from 'app-studio';
 import { Link } from '../../Link/Link';
 import { Loader } from '../../Loader/Loader';
 import { ButtonProps } from './Button.props';
@@ -73,7 +73,13 @@ const ButtonContent: React.FC<{
           </View>
         )}
 
-        {children}
+        {React.Children.map(children, (child) =>
+          typeof child === 'string' || typeof child === 'number' ? (
+            <Text color={resolvedTextColor}>{child}</Text>
+          ) : (
+            child
+          )
+        )}
 
         {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
           <View color={resolvedTextColor} {...views?.icon}>

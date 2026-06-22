@@ -62,6 +62,7 @@ export const useTooltipState = ({
     };
   }, []);
   useEffect(() => {
+    if (typeof document === 'undefined') return;
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isOpen) {
         setIsOpen(false);

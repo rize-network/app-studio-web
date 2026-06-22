@@ -3,6 +3,7 @@ import { Orientation, PanelInfo, ResizableStorage } from './Resizable.type';
 const createDefaultStorage = (): ResizableStorage => ({
   getItem: (id: string) => {
     try {
+      if (typeof localStorage === 'undefined') return null;
       return localStorage.getItem(`resizable-${id}`);
     } catch (e) {
       console.warn('Failed to access localStorage:', e);
@@ -11,6 +12,7 @@ const createDefaultStorage = (): ResizableStorage => ({
   },
   setItem: (id: string, value: string) => {
     try {
+      if (typeof localStorage === 'undefined') return;
       localStorage.setItem(`resizable-${id}`, value);
     } catch (e) {
       console.warn('Failed to write to localStorage:', e);
@@ -238,6 +240,7 @@ export const useResizableState = (
     [isResizing, panels, orientation, onResize, endResize, keyboardResizeBy]
   );
   useEffect(() => {
+    if (typeof document === 'undefined') return;
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing) return;
       const position = orientation === 'horizontal' ? e.clientX : e.clientY;

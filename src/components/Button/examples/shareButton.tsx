@@ -9,22 +9,32 @@ export const ShareButtons = () => (
       shareData={{
         title: 'App Studio',
         text: 'Check out App Studio components.',
-        url: window.location.href,
+        url:
+          typeof window !== 'undefined' ? window.location.href : 'app-studio',
       }}
-      onUnsupported={() =>
-        alert('Native sharing is unavailable on this browser.')
-      }
+      onUnsupported={() => {
+        if (typeof alert !== 'undefined') {
+          alert('Native sharing is unavailable on this browser.');
+        } else {
+          console.log('Native sharing is unavailable on this browser.');
+        }
+      }}
     />
     <ShareButton
       variant="outline"
       shareData={{
         title: 'App Studio',
         text: 'Check out App Studio components.',
-        url: window.location.href,
+        url:
+          typeof window !== 'undefined' ? window.location.href : 'app-studio',
       }}
-      onUnsupported={() =>
-        alert('Native sharing is unavailable on this browser.')
-      }
+      onUnsupported={() => {
+        if (typeof alert !== 'undefined') {
+          alert('Native sharing is unavailable on this browser.');
+        } else {
+          console.log('Native sharing is unavailable on this browser.');
+        }
+      }}
     />
     <ShareButton
       variant="ghost"
@@ -32,11 +42,16 @@ export const ShareButtons = () => (
       shareData={{
         title: 'App Studio',
         text: 'Check out App Studio components.',
-        url: window.location.href,
+        url:
+          typeof window !== 'undefined' ? window.location.href : 'app-studio',
       }}
-      onUnsupported={() =>
-        alert('Native sharing is unavailable on this browser.')
-      }
+      onUnsupported={() => {
+        if (typeof alert !== 'undefined') {
+          alert('Native sharing is unavailable on this browser.');
+        } else {
+          console.log('Native sharing is unavailable on this browser.');
+        }
+      }}
     />
   </Vertical>
 );

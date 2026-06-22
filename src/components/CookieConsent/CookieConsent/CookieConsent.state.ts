@@ -5,6 +5,7 @@ export const useCookieConsentState = (cookieExpiration: number = 365) => {
   const [hasConsent, setHasConsent] = useState<boolean | null>(null);
   const COOKIE_CONSENT_KEY = 'app-studio-cookie-consent';
   useEffect(() => {
+    if (typeof localStorage === 'undefined') return;
     const storedConsent = localStorage.getItem(COOKIE_CONSENT_KEY);
     if (storedConsent !== null) {
       setHasConsent(storedConsent === 'true');
@@ -13,21 +14,25 @@ export const useCookieConsentState = (cookieExpiration: number = 365) => {
     }
   }, []);
   const saveConsent = (consent: boolean) => {
-    localStorage.setItem(COOKIE_CONSENT_KEY, String(consent));
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + cookieExpiration);
-    localStorage.setItem(
-      `${COOKIE_CONSENT_KEY}-expires`,
-      expirationDate.toISOString()
-    );
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(COOKIE_CONSENT_KEY, String(consent));
+      const expirationDate = new Date();
+      expirationDate.setDate(expirationDate.getDate() + cookieExpiration);
+      localStorage.setItem(
+        `${COOKIE_CONSENT_KEY}-expires`,
+        expirationDate.toISOString()
+      );
+    }
     setHasConsent(consent);
   };
   const acceptCookies = () => {
     saveConsent(true);
   };
   const resetConsent = () => {
-    localStorage.removeItem(COOKIE_CONSENT_KEY);
-    localStorage.removeItem(`${COOKIE_CONSENT_KEY}-expires`);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(COOKIE_CONSENT_KEY);
+      localStorage.removeItem(`${COOKIE_CONSENT_KEY}-expires`);
+    }
     setHasConsent(false);
   };
   return {

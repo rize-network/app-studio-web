@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Vertical, Horizontal } from 'app-studio';
+import { Vertical, Horizontal, View } from 'app-studio';
 import { EmojiPicker } from '../EmojiPicker';
 import { TextField } from '../../Form/TextField/TextField';
 import { Button } from '../../Button/Button';
@@ -10,13 +10,16 @@ export const FormIntegrationEmojiPicker = () => {
   const [emoji, setEmoji] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Title: ${emoji} ${title}\nDescription: ${description}`);
+  const handleSubmit = () => {
+    if (typeof alert !== 'undefined') {
+      alert(`Title: ${emoji} ${title}\nDescription: ${description}`);
+    } else {
+      console.log(`Title: ${emoji} ${title}\nDescription: ${description}`);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <View>
       <Vertical gap={16} width="400px">
         <Horizontal gap={12} alignItems="end">
           <EmojiPicker
@@ -64,7 +67,7 @@ export const FormIntegrationEmojiPicker = () => {
         )}
 
         <Horizontal gap={8}>
-          <Button type="submit" variant="filled">
+          <Button type="button" variant="filled" onClick={handleSubmit}>
             Create Item
           </Button>
           <Button
@@ -80,6 +83,6 @@ export const FormIntegrationEmojiPicker = () => {
           </Button>
         </Horizontal>
       </Vertical>
-    </form>
+    </View>
   );
 };

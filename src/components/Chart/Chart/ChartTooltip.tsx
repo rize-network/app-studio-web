@@ -42,6 +42,10 @@ export const ChartTooltip: React.FC<ChartTooltipProps> = ({
   useEffect(() => {
     // Exits the effect if the tooltip is not visible or the ref to its DOM element is not yet available.
     if (!visible || !tooltipRef.current) return;
+    // Guards against non-DOM environments (e.g. React Native) where window
+    // and getBoundingClientRect are unavailable.
+    if (typeof window === 'undefined') return;
+    if (typeof tooltipRef.current.getBoundingClientRect !== 'function') return;
     // Gets the current DOM element of the tooltip.
     const tooltip = tooltipRef.current;
     // Obtains the size and position of the tooltip relative to the viewport.
