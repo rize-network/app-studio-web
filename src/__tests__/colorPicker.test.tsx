@@ -1,16 +1,34 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import { cleanup, render } from '@testing-library/react';
+import { afterEach, expect, test, vi } from 'vitest';
 
-afterEach(() => {
+const renderColorPicker = async () => {
+  const { ColorPicker } = await import('src/components/ColorPicker/ColorPicker');
+
+  return render(<ColorPicker label="Theme color" isOpen />);
+};
+
+afterEach(async () => {
   cleanup();
+  vi.unstubAllGlobals();
+  vi.resetModules();
 });
 
-test('renders ColorPicker component', () => {
-  render(<input type="color" />);
+test('renders browser color input on web', async () => {
+  const { container } = await renderColorPicker();
+
+  expect(container.querySelector('input[type="color"]')).toBeInTheDocument();
 });
 
-test('ColorPicker matches snapshot', () => {
-  const tree = renderer.create(<input type="color" />).toJSON();
-  expect(tree).toMatchSnapshot();
+test('does not render browser color input in React Native runtime', async () => {
+  vi.stubGlobal('navigator', {
+    ...globalThis.navigator,
+    product: 'ReactNative',
+  });
+
+  const { container } = await renderColorPicker();
+
+  expect(
+    container.querySelector('input[type="color"]')
+  ).not.toBeInTheDocument();
 });

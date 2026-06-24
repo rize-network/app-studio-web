@@ -169,7 +169,6 @@ const SwitchView: React.FC<SwitchViewProps> = ({
             width="100%"
             overflow="hidden"
             fontSize={contentFontSize}
-            lineHeight={1}
             color="color-white"
             fontWeight={600}
           >
@@ -212,7 +211,6 @@ const SwitchView: React.FC<SwitchViewProps> = ({
             width="100%"
             overflow="hidden"
             fontSize={contentFontSize}
-            lineHeight={1}
             color="color-white"
             fontWeight={600}
           >

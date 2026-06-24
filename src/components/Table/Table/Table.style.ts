@@ -46,6 +46,9 @@ export const DefaultTableStyles: TableViewStyles = {
     color: 'inherit',
     opacity: 0.72,
     textAlign: 'left',
+    // Native has no table layout; `flex:1` lets cells share the row width
+    // (ignored on web where `as="th"` is a real table-cell).
+    flex: 1,
     media: {
       mobile: {
         padding: '8px 12px', // Smaller padding on mobile
@@ -59,6 +62,7 @@ export const DefaultTableStyles: TableViewStyles = {
     borderBottom: '1px solid',
     borderColor: 'color-gray-100',
     color: 'inherit',
+    flex: 1,
     media: {
       mobile: {
         padding: '8px 12px', // Smaller padding on mobile
@@ -67,6 +71,12 @@ export const DefaultTableStyles: TableViewStyles = {
     },
   },
   tr: {
+    // `as="tr"` is ignored on native (renders a default-column View), so the
+    // cells would stack vertically — force a horizontal row. On web this is a
+    // no-op because the element is a real table-row.
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    width: '100%',
     transition: 'background-color 0.15s ease',
     _hover: {
       backgroundColor: 'color-gray-50',

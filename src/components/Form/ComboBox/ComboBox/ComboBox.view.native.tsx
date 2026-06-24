@@ -4,15 +4,15 @@
  * The web view positions its dropdown in a `Portal` using
  * `getBoundingClientRect()` / `window.innerHeight` and a raw `<div>` trigger —
  * none of which exist on React Native. This native view keeps the same public
- * surface (search, single/multi select, chips, ticks) but renders the dropdown
- * inline as an absolutely-positioned panel within the field's relative
- * container, and toggles via `onPress`.
+ * surface (search, single/multi select, chips, ticks) but renders the options
+ * in the shared ActionSheet used by native select/menu/picker surfaces.
  */
 
 import React from 'react';
 import { View, Horizontal, Vertical, Text } from 'app-studio';
 import { ComboBoxItem, ComboBoxViewProps } from './ComboBox.props';
 import TextField from '../../../Form/TextField/TextField/TextField.view';
+import { ActionSheet } from '../../../ActionSheet/ActionSheet';
 import {
   SearchIcon,
   TickIcon,
@@ -88,8 +88,10 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
     if (isMulti) {
       return selectedItems.some((selected) => selected.value === item.value);
     }
-    return item.value === selectedItem.value;
+    return item.value === selectedItem?.value;
   };
+
+  const selectedLabel = selectedItem?.label ?? placeholder;
 
   return (
     <Horizontal
@@ -106,6 +108,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
         zIndex={isDropdownVisible ? 1000 : 0}
       >
         <View
+          onPress={() => setIsDropdownVisible(!isDropdownVisible)}
           onClick={() => setIsDropdownVisible(!isDropdownVisible)}
           width="100%"
         >
@@ -154,19 +157,19 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                 )
               ) : (
                 <>
-                  {selectedItem.icon && selectedItem.label !== placeholder && (
+                  {selectedItem?.icon && selectedLabel !== placeholder && (
                     <View>{selectedItem.icon}</View>
                   )}
                   <Text
                     flexGrow={1}
                     color={
-                      selectedItem.label === placeholder
+                      selectedLabel === placeholder
                         ? 'color-gray-500'
                         : 'color-gray-800'
                     }
                     {...views?.label}
                   >
-                    {selectedItem.label}
+                    {selectedLabel}
                   </Text>
                 </>
               )}
@@ -182,22 +185,14 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           </FieldContent>
         </View>
 
-        {isDropdownVisible && (
-          <View
-            position="absolute"
-            top="100%"
-            left={0}
-            right={0}
-            marginTop={6}
-            backgroundColor="color-white"
-            borderRadius={8}
-            borderWidth={1}
-            borderStyle="solid"
-            borderColor="color-gray-200"
-            overflow="hidden"
-            zIndex={1000}
-            {...views?.dropdown}
-          >
+        <ActionSheet
+          isOpen={isDropdownVisible}
+          onClose={() => setIsDropdownVisible(false)}
+          title={typeof label === 'string' ? label : placeholder}
+          closeOnSelect={!isMulti}
+          views={{ sheet: views?.dropdown }}
+        >
+          <View paddingHorizontal={12}>
             {searchEnabled && (
               <View
                 padding="8px"
@@ -218,7 +213,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
               </View>
             )}
             {filteredItems.length > 0 ? (
-              <View padding="4px" maxHeight={240}>
+              <Vertical paddingVertical={4}>
                 {filteredItems.map((item) => {
                   const isSelected = isItemSelected(item);
                   return (
@@ -232,6 +227,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                       backgroundColor={
                         isSelected ? 'color-blue-50' : 'transparent'
                       }
+                      onPress={() => handleSelect(item)}
                       onClick={() => handleSelect(item)}
                       {...views?.item}
                     >
@@ -252,7 +248,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                     </Horizontal>
                   );
                 })}
-              </View>
+              </Vertical>
             ) : (
               <Vertical alignItems="center" gap={4} padding="16px">
                 <SearchIcon widthHeight={24} color="color-gray-300" />
@@ -262,7 +258,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
               </Vertical>
             )}
           </View>
-        )}
+        </ActionSheet>
       </View>
     </Horizontal>
   );

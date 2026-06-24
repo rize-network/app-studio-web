@@ -4,6 +4,7 @@ import { View, Text, Horizontal, useTheme } from 'app-studio';
 import { Button } from 'src/components/Button/Button';
 import { useThemeActions } from 'src/providers';
 import { componentList } from 'src/configs/componentList';
+import { MULISH_FONT_FAMILY } from 'src/assets/fonts';
 
 const ListItem = ({ isHovered, isSelected, children, ...props }: any) => (
   <View
@@ -144,7 +145,14 @@ export const AppLayout = () => {
   const isHomePage = location.pathname === '/';
 
   return (
-    <Horizontal flexDirection="row" height="100%" flexWrap="nowrap">
+    // The component gallery uses the Mulish brand font; the home page inherits
+    // the system stack (kept off its critical render path for fast first paint).
+    <Horizontal
+      flexDirection="row"
+      height="100%"
+      flexWrap="nowrap"
+      fontFamily={isHomePage ? undefined : MULISH_FONT_FAMILY}
+    >
       {!isHomePage && (
         <View
           flexDirection="column"

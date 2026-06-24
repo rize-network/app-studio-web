@@ -4,6 +4,63 @@ import { FieldContainer } from '../../Input/FieldContainer/FieldContainer';
 import { FieldLabel } from '../../Input/FieldLabel/FieldLabel';
 import { OTPInputViewProps } from './OTPInput.props';
 
+const logOTPInput = (message: string, payload: Record<string, unknown>) => {
+  console.log(`[OTPInput.native] ${message}`, payload);
+};
+
+const summarizeValue = (value: unknown) => {
+  if (value === null || value === undefined) return value;
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean'
+  ) {
+    return value;
+  }
+  return Object.prototype.toString.call(value);
+};
+
+const getContainerProps = (props: Record<string, unknown>) => {
+  const {
+    onChange,
+    onChangeText,
+    onComplete,
+    onKeyDown,
+    onKeyPress,
+    onFocus,
+    onBlur,
+    onClick,
+    defaultValue,
+    pattern,
+    pasteTransformer,
+    stepValues,
+    setValue,
+    setIsFocused,
+    setIsHovered,
+    mirrorSelectionStart,
+    mirrorSelectionEnd,
+    setMirrorSelectionStart,
+    setMirrorSelectionEnd,
+    handlePaste,
+    handleKeyPress,
+    shadow,
+    shape,
+    variant,
+    inputMode,
+    autoComplete,
+    autoCorrect,
+    autoCapitalize,
+    keyboardType,
+    maxLength,
+    editable,
+    caretHidden,
+    selectionColor,
+    ...containerProps
+  } = props;
+
+  return containerProps;
+};
+
 export const OTPInputContext = createContext<{
   slots: Array<{
     char: string | null;
@@ -78,18 +135,34 @@ const OTPInputView: React.FC<
       ? 48
       : 56;
 
+  // Defensive: never let a non-string value (e.g. a stray event object) turn
+  // into "[object Object]" across the slots.
+  const safeValue = typeof value === 'string' ? value : String(value ?? '');
   const slots = Array.from({ length }).map((_, idx) => ({
-    char: value[idx] ?? null,
-    placeholderChar: value[0] !== undefined ? null : placeholder?.[idx] ?? null,
-    isActive: isFocused && idx === value.length,
+    char: safeValue[idx] ?? null,
+    placeholderChar:
+      safeValue[0] !== undefined ? null : placeholder?.[idx] ?? null,
+    isActive: isFocused && idx === safeValue.length,
   }));
+  const containerProps = getContainerProps(props as Record<string, unknown>);
+  logOTPInput('render slots', {
+    id,
+    name,
+    rawValue: summarizeValue(value),
+    safeValue,
+    length,
+    slotChars: slots.map((slot) => slot.char),
+    isFocused,
+    isDisabled,
+    isReadOnly,
+  });
 
   return (
     <FieldContainer
       helperText={helperText}
       error={error}
       views={views}
-      {...(props as any)}
+      {...(containerProps as any)}
     >
       {showLabel && (
         <FieldLabel
@@ -124,6 +197,7 @@ const OTPInputView: React.FC<
             >
               {slot.char ? (
                 <Text
+                  color="color-gray-900"
                   fontSize={
                     size === 'xs'
                       ? 14
@@ -148,37 +222,57 @@ const OTPInputView: React.FC<
             </View>
           ))}
         </Horizontal>
-        <View
+        {/* Transparent TextInput overlaying the slots: it must FILL the slot
+            row (not collapse to a tiny default-height box) so tapping anywhere
+            on the slots focuses it and opens the keyboard. The characters are
+            rendered in the slots above, so the real input stays invisible
+            (transparent text/caret) while remaining interactive. */}
+        <Input
+          ref={(ref: any) => setInputRef(ref)}
+          id={id || name}
+          name={name}
+          {...views.input}
           position="absolute"
           top={0}
           left={0}
           right={0}
           bottom={0}
-          opacity={0}
-        >
-          <Input
-            ref={(ref: any) => setInputRef(ref)}
-            id={id || name}
-            name={name}
-            // RN-only typed props (keyboardType, maxLength, editable,
-            // secureTextEntry) aren't on app-studio's web Input type — pass
-            // them via a single any-cast.
-            {...({
-              keyboardType: type !== 'password' ? 'number-pad' : undefined,
-              maxLength: length,
-              editable: !isReadOnly && !isDisabled,
-              secureTextEntry: type === 'password' || secureTextEntry,
-            } as any)}
-            value={value}
-            onChange={handleChange}
-            onChangeText={(text: string) =>
-              handleChange({ target: { value: text } } as any)
-            }
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            {...views.input}
-          />
-        </View>
+          width="100%"
+          height="100%"
+          backgroundColor="transparent"
+          color="transparent"
+          textAlign="center"
+          // RN-only typed props (keyboardType, maxLength, editable,
+          // secureTextEntry, caretHidden) aren't on app-studio's web Input
+          // type — pass them via a single any-cast.
+          {...({
+            keyboardType: type !== 'password' ? 'number-pad' : undefined,
+            maxLength: length,
+            editable: !isReadOnly && !isDisabled,
+            secureTextEntry: type === 'password' || secureTextEntry,
+            caretHidden: true,
+            selectionColor: 'transparent',
+          } as any)}
+          value={safeValue}
+          // Use onChangeText (plain string) ONLY. Passing onChange too made the
+          // native change-event object leak into the value ("[object Object]").
+          // Coerce defensively in case a host wraps it in an event-like object.
+          onChangeText={(text: any) => {
+            const normalizedText =
+              typeof text === 'string'
+                ? text
+                : text?.nativeEvent?.text ?? text?.target?.value ?? '';
+            logOTPInput('onChangeText', {
+              id,
+              name,
+              rawText: summarizeValue(text),
+              normalizedText,
+            });
+            handleChange(normalizedText);
+          }}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        />
       </View>
     </FieldContainer>
   );

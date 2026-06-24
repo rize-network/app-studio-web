@@ -100,7 +100,7 @@ export const CookieConsentView: React.FC<CookieConsentProps> = ({
             </Button>
           )}
           <Button
-            variant="primary"
+            variant="filled"
             onClick={handleAccept}
             size="sm"
             {...views?.acceptButton}

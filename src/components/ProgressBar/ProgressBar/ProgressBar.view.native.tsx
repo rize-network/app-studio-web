@@ -5,8 +5,18 @@
  */
 
 import React, { useMemo } from 'react';
+import { Animated, Easing } from 'react-native';
 import { View, Text, useTheme } from 'app-studio';
 import { ProgressBarProps } from './ProgressBar.props';
+
+const durationMs = (d?: string | number): number => {
+  if (typeof d === 'number') return d < 100 ? d * 1000 : d;
+  if (!d) return 500;
+  const s = String(d).trim();
+  if (s.endsWith('ms')) return parseFloat(s) || 500;
+  if (s.endsWith('s')) return (parseFloat(s) || 0.5) * 1000;
+  return parseFloat(s) || 500;
+};
 
 let Svg: any = null;
 let Circle: any = null;
@@ -61,6 +71,24 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
       () => resolveColor(color) as string,
       [color, currentMode]
     );
+
+    // Animate the linear fill with RN's built-in Animated API — independent of
+    // react-native-reanimated (which app-studio's `animate` relies on and which
+    // may be unavailable). `width` can't use the native driver, so animate a
+    // 0→100 value and interpolate to a percentage string.
+    const fillAnim = React.useRef(new Animated.Value(percentage)).current;
+    React.useEffect(() => {
+      if (_animated === false) {
+        fillAnim.setValue(percentage);
+        return;
+      }
+      Animated.timing(fillAnim, {
+        toValue: percentage,
+        duration: durationMs(_animationDuration),
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: false,
+      }).start();
+    }, [percentage, _animated, _animationDuration, fillAnim]);
 
     // --- Circle shape ---
     if (shape === 'circle' && Svg && Circle) {
@@ -148,16 +176,25 @@ const ProgressBarView: React.FC<ProgressBarProps> = React.memo(
         {...views?.container}
         {...props}
       >
-        <View
-          position="absolute"
-          left={0}
-          top={0}
-          bottom={0}
-          height="100%"
-          width={`${percentage}%`}
-          backgroundColor={barColor}
-          borderRadius={typeof radius === 'number' ? radius : 4}
-          {...(views?.bar as any)}
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              bottom: 0,
+              height: '100%',
+              backgroundColor: barColor,
+              borderRadius: typeof radius === 'number' ? radius : 4,
+              // Animated 0→100 value mapped to a width percentage string.
+              width: fillAnim.interpolate({
+                inputRange: [0, 100],
+                outputRange: ['0%', '100%'],
+                extrapolate: 'clamp',
+              }),
+            },
+            views?.bar as any,
+          ]}
         />
         {showLabel && (
           <Text

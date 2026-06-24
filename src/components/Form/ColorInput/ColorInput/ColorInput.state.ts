@@ -48,7 +48,7 @@ export const useColorInputState = (props: ColorInputProps) => {
   }, [isAutoFocus]);
   useEffect(() => {
     // `document` is web-only; on native the dropdown closes via selection/toggle.
-    if (typeof document === 'undefined') return;
+    if (typeof document?.addEventListener !== 'function') return;
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isOpen &&

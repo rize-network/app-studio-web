@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
-import { Modal, ScrollView } from 'react-native';
 import { View, Horizontal, Vertical, Text, ViewProps } from 'app-studio';
+import { ActionSheet } from '../../ActionSheet/ActionSheet';
 import {
   MenubarContextType,
   MenubarItem as MenubarItemType,
@@ -122,39 +122,41 @@ export const MenubarTrigger: React.FC<MenubarTriggerProps> = ({
   );
 };
 
-export const MenubarContent: React.FC<MenubarContentProps> = ({
-  children,
-  menuId,
-  views,
-}) => {
-  const { isMenuOpen, toggleMenu } = useMenubarContext();
+export const MenubarContent: React.FC<
+  MenubarContentProps & { items?: MenubarItemType['items']; title?: string }
+> = ({ children, menuId, items, title, views }) => {
+  const { isMenuOpen, toggleMenu, size } = useMenubarContext();
   const isOpen = isMenuOpen(menuId);
+  const close = () => menuId && toggleMenu(menuId);
+  // On native, render the menu as a bottom sheet (ActionSheet) — the same
+  // default native behaviour as DropdownMenu / ContextMenu / Select — instead
+  // of a mis-placed centred popover.
   return (
-    <Modal
-      visible={isOpen}
-      transparent
-      animationType="fade"
-      onRequestClose={() => menuId && toggleMenu(menuId)}
+    <ActionSheet
+      isOpen={isOpen}
+      onClose={close}
+      title={title}
+      size={size}
+      items={(items || []).map((subItem, index) =>
+        subItem.separator
+          ? { id: `separator-${index}`, divider: true }
+          : {
+              id: subItem.id,
+              label: subItem.label,
+              icon: subItem.icon,
+              isDisabled: subItem.disabled,
+              onPress: () => subItem.onClick?.(),
+            }
+      )}
+      views={{
+        item: views?.item,
+        itemIcon: views?.icon,
+        divider: views?.separator,
+        sheet: views?.content,
+      }}
     >
-      <View
-        flex={1}
-        backgroundColor="color-blackAlpha-400"
-        justifyContent="center"
-        alignItems="center"
-        onPress={() => menuId && toggleMenu(menuId)}
-        onClick={() => menuId && toggleMenu(menuId)}
-      >
-        <View
-          minWidth={200}
-          backgroundColor="color-white"
-          borderRadius={4}
-          overflow="hidden"
-          {...views?.content}
-        >
-          <ScrollView>{children}</ScrollView>
-        </View>
-      </View>
-    </Modal>
+      {children}
+    </ActionSheet>
   );
 };
 
@@ -165,10 +167,12 @@ export const MenubarItem: React.FC<MenubarItemProps> = ({
   onClick,
   views,
 }) => {
-  const { size } = useMenubarContext();
+  const { size, setOpenMenuId } = useMenubarContext();
   const handlePress = () => {
-    if (disabled || !onClick) return;
-    onClick();
+    if (disabled) return;
+    onClick?.();
+    // Close the open menu after selecting (compound-API usage).
+    setOpenMenuId?.(null);
   };
   return (
     <View
@@ -235,30 +239,12 @@ export const MenubarView: React.FC<
             {item.label}
           </MenubarTrigger>
           {item.items && item.items.length > 0 && (
-            <MenubarContent menuId={item.id} views={views}>
-              {item.items.map((subItem, index) => {
-                if (subItem.separator) {
-                  return (
-                    <MenubarSeparator
-                      key={`separator-${index}`}
-                      views={views}
-                    />
-                  );
-                }
-                return (
-                  <MenubarItem
-                    key={subItem.id}
-                    id={subItem.id}
-                    icon={subItem.icon}
-                    disabled={subItem.disabled}
-                    onClick={subItem.onClick}
-                    views={views}
-                  >
-                    {subItem.label}
-                  </MenubarItem>
-                );
-              })}
-            </MenubarContent>
+            <MenubarContent
+              menuId={item.id}
+              items={item.items}
+              title={typeof item.label === 'string' ? item.label : undefined}
+              views={views}
+            />
           )}
         </MenubarMenu>
       ))}

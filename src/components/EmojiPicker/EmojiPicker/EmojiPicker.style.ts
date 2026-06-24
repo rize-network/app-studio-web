@@ -37,6 +37,10 @@ export const DefaultEmojiPickerStyles = {
   } as ViewProps,
   categoryTabs: {
     display: 'flex',
+    // Web flexbox defaults to row, but React Native defaults to column — set it
+    // explicitly so the category bar is horizontal on native too.
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     borderBottom: '1px solid color-gray-100',
     marginBottom: '12px',
     overflowX: 'auto',
@@ -55,6 +59,11 @@ export const DefaultEmojiPickerStyles = {
   emojiGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(8, 1fr)',
+    // Native has no CSS grid; row + wrap of fixed-width items reproduces the
+    // grid (these flex props are ignored under `display:grid` on web).
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
     gap: '4px',
     maxHeight: '240px',
     overflowY: 'auto',

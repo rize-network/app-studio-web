@@ -10,6 +10,7 @@ import { Element, ViewProps } from 'app-studio';
 import { TableViewProps } from './Table.props';
 import { useTableContext } from './Table.context';
 import { DefaultTableStyles } from './Table.style';
+import { TableScroll } from './TableScroll';
 
 export const TableContainer: React.FC<ViewProps> = (props) => {
   const { views } = useTableContext();
@@ -126,38 +127,44 @@ export const TableView: React.FC<TableViewProps> = ({
   caption,
   themeMode: elementMode,
 }) => {
+  // Give the table a minimum width (≈140px per column) so columns stay readable;
+  // TableScroll lets it scroll horizontally on native instead of clipping the
+  // last columns. On web this min-width + overflow behaves the same.
+  const minWidth = Math.max(columns.length * 140, 320);
   return (
-    <TableContainer role="Table">
-      {caption && <TableCaption>{caption}</TableCaption>}
-      <TableHead>
-        <TableRow>
-          {columns.map((column) => (
-            <TableHeadCell key={column.field}>{column.title}</TableHeadCell>
-          ))}
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {data.map((row, index) => (
-          <TableRow key={index}>
-            {columns.map((column, columnIndex) => (
-              <TableCell key={column.field} isFirstColumn={columnIndex === 0}>
-                {row[column.field]}
-              </TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableBody>
-      {footer && (
-        <TableFooter>
+    <TableScroll>
+      <TableContainer role="Table" minWidth={minWidth}>
+        {caption && <TableCaption>{caption}</TableCaption>}
+        <TableHead>
           <TableRow>
-            {footer.map((cell, index) => (
-              <TableCell key={index} {...cell.props}>
-                {cell.value}
-              </TableCell>
+            {columns.map((column) => (
+              <TableHeadCell key={column.field}>{column.title}</TableHeadCell>
             ))}
           </TableRow>
-        </TableFooter>
-      )}
-    </TableContainer>
+        </TableHead>
+        <TableBody>
+          {data.map((row, index) => (
+            <TableRow key={index}>
+              {columns.map((column, columnIndex) => (
+                <TableCell key={column.field} isFirstColumn={columnIndex === 0}>
+                  {row[column.field]}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+        {footer && (
+          <TableFooter>
+            <TableRow>
+              {footer.map((cell, index) => (
+                <TableCell key={index} {...cell.props}>
+                  {cell.value}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableFooter>
+        )}
+      </TableContainer>
+    </TableScroll>
   );
 };

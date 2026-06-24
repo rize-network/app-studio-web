@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
-import { Modal, ScrollView } from 'react-native';
 import { View, Text, ViewProps } from 'app-studio';
+import { ActionSheet } from '../../ActionSheet/ActionSheet';
 import {
   DropdownMenuContextType,
   DropdownMenuItem as DropdownMenuItemType,
@@ -70,45 +70,34 @@ export const DropdownMenuContent: React.FC<DropdownMenuContentProps> = ({
   views,
   ...props
 }) => {
-  const { isOpen, setIsOpen, variant } = useDropdownMenuContext();
+  const { isOpen, setIsOpen, variant, size } = useDropdownMenuContext();
   return (
-    <Modal
-      visible={isOpen}
-      transparent
-      animationType="fade"
-      onRequestClose={() => setIsOpen(false)}
-    >
-      <View
-        flex={1}
-        backgroundColor="color-blackAlpha-400"
-        justifyContent="center"
-        alignItems="center"
-        onPress={() => setIsOpen(false)}
-        onClick={() => setIsOpen(false)}
-      >
-        <View
-          minWidth={200}
-          borderRadius={4}
-          overflow="hidden"
-          {...DropdownMenuVariants[variant]}
-          {...views?.menu}
-          {...props}
-        >
-          <ScrollView>
-            {items.map((item, index) => {
-              if (item.divider) {
-                return (
-                  <DropdownMenuDivider key={`divider-${index}`} views={views} />
-                );
-              }
-              return (
-                <DropdownMenuItem key={item.id} item={item} views={views} />
-              );
-            })}
-          </ScrollView>
-        </View>
-      </View>
-    </Modal>
+    <ActionSheet
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      size={size}
+      items={items.map((item, index) =>
+        item.divider
+          ? { id: `divider-${index}`, divider: true }
+          : {
+              id: item.id,
+              label: item.label,
+              icon: item.icon,
+              isDisabled: item.disabled,
+              onPress: () => item.onClick?.(),
+            }
+      )}
+      views={{
+        sheet: {
+          ...DropdownMenuVariants[variant],
+          ...views?.menu,
+          ...props,
+        },
+        item: views?.item,
+        itemIcon: views?.icon,
+        divider: views?.divider,
+      }}
+    />
   );
 };
 

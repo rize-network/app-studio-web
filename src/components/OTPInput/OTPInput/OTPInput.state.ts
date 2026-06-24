@@ -5,10 +5,26 @@ import {
   useCallback,
   ClipboardEvent,
   KeyboardEvent,
-  ChangeEvent,
 } from 'react';
 import { OTPInputProps } from './OTPInput.props';
 import { syncTimeouts } from './sync-timeouts';
+
+const logOTPInput = (message: string, payload: Record<string, unknown>) => {
+  console.log(`[OTPInput.state] ${message}`, payload);
+};
+
+const summarizeValue = (value: unknown) => {
+  if (value === null || value === undefined) return value;
+  if (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean'
+  ) {
+    return value;
+  }
+  return Object.prototype.toString.call(value);
+};
+
 // This file defines the `useOTPInputState` custom React hook, which centralizes all state management, refs, and event handlers for the OTPInput component. It encompasses logic for controlled/uncontrolled value handling, input focus and blur, selection management, paste operations, and validation.
 export const useOTPInputState = ({
   value: controlledValue,
@@ -61,7 +77,15 @@ export const useOTPInputState = ({
     : null;
   useEffect(() => {
     if (isControlled && controlledValue !== value) {
-      setInternalValue(String(controlledValue ?? '').slice(0, length) || '');
+      const nextControlledValue =
+        String(controlledValue ?? '').slice(0, length) || '';
+      logOTPInput('sync controlled value', {
+        controlledValue: summarizeValue(controlledValue),
+        previousValue: value,
+        nextControlledValue,
+        length,
+      });
+      setInternalValue(nextControlledValue);
     }
   }, [isControlled, controlledValue, length, value]);
   const setValue = useCallback(
@@ -82,6 +106,16 @@ export const useOTPInputState = ({
           valueToSet = closest.toString();
         }
       }
+      logOTPInput('setValue', {
+        incomingValue: newValue,
+        valueToSet,
+        length,
+        isControlled,
+        hasOnChange: !!onChange,
+        hasOnChangeText: !!onChangeText,
+        hasOnComplete: !!onComplete,
+        stepValues,
+      });
       setInternalValue(valueToSet);
       if (onChange) {
         onChange(valueToSet);
@@ -93,7 +127,7 @@ export const useOTPInputState = ({
         onComplete(valueToSet);
       }
     },
-    [onChange, onChangeText, onComplete, length, stepValues]
+    [onChange, onChangeText, onComplete, length, stepValues, isControlled]
   );
   const setInputRef = useCallback((ref: HTMLInputElement | null) => {
     if (ref && inputRef.current !== ref) {
@@ -104,10 +138,30 @@ export const useOTPInputState = ({
     }
   }, []);
   const handleChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const newValue = e.currentTarget.value.slice(0, length);
+    (e: any) => {
+      // Web passes a ChangeEvent (`e.currentTarget.value`); React Native passes
+      // either the raw string (onChangeText) or a native event
+      // (`e.nativeEvent.text`). Normalize so `.slice` never hits undefined.
+      const raw =
+        typeof e === 'string'
+          ? e
+          : e?.currentTarget?.value ??
+            e?.target?.value ??
+            e?.nativeEvent?.text ??
+            '';
+      const newValue = String(raw).slice(0, length);
+      logOTPInput('handleChange normalized', {
+        raw,
+        newValue,
+        length,
+        hasPattern: !!regexp,
+      });
       if (newValue.length > 0 && regexp && !regexp.test(newValue)) {
-        e.preventDefault();
+        logOTPInput('handleChange rejected by pattern', {
+          newValue,
+          pattern: String(regexp),
+        });
+        e?.preventDefault?.();
         return;
       }
       setValue(newValue);
@@ -118,13 +172,24 @@ export const useOTPInputState = ({
     [length, regexp, setValue, inputRef]
   );
   const handleFocus = useCallback(() => {
-    if (inputRef.current) {
-      const start = Math.min(inputRef.current.value.length, length - 1);
-      const end = inputRef.current.value.length;
-      inputRef.current?.setSelectionRange(start, end);
+    // `.value`/`.setSelectionRange` are web DOM APIs; on React Native the ref is
+    // a TextInput instance without them (reading `.value.length` crashed on
+    // focus). Only run selection sync on web; native handles caret itself.
+    const input: any = inputRef.current;
+    if (input && typeof input.setSelectionRange === 'function') {
+      const len = typeof input.value === 'string' ? input.value.length : 0;
+      const start = Math.min(len, length - 1);
+      const end = len;
+      input.setSelectionRange(start, end);
       setMirrorSelectionStart(start);
       setMirrorSelectionEnd(end);
     }
+    logOTPInput('focus', {
+      length,
+      refHasDomSelection: !!(
+        input && typeof input.setSelectionRange === 'function'
+      ),
+    });
     setIsFocused(true);
   }, [length]);
   const handleBlur = useCallback(() => {

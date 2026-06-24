@@ -100,6 +100,8 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
                     position="absolute"
                     top="50%"
                     left={`${stepPercentage}%`}
+                    marginTop={-2}
+                    marginLeft={-2}
                     width={4}
                     height={4}
                     borderRadius={2}
@@ -127,6 +129,11 @@ export const SliderView: React.FC<SliderViewProps> = React.memo(
             position="absolute"
             top="50%"
             left={`${thumbPositionPercent}%`}
+            // RN can't use CSS translate(-50%,-50%); offset by half the thumb
+            // size so it's centered on the track line AND on the value point
+            // (otherwise the thumb hangs below/right of the line).
+            marginTop={-thumbSize / 2}
+            marginLeft={-thumbSize / 2}
             borderRadius={thumbSize / 2}
             backgroundColor="color-white"
             borderWidth={2}

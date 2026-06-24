@@ -71,6 +71,10 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
       const base = {
         width: 'fit-content',
         display: 'flex',
+        // Web flexbox defaults to row; React Native defaults to column, which
+        // stacked the icon/pastil above the label and cramped the badge. Force
+        // a horizontal row (no-op on web).
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         gap: '6px',

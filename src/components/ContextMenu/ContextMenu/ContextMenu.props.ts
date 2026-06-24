@@ -40,6 +40,8 @@ export interface ContextMenuTriggerProps {
   views?: {
     // Custom style properties for the trigger's main container.
     container?: ViewProps;
+    // Custom style properties for the native trigger affordance indicator.
+    indicator?: ViewProps;
   };
 }
 export interface ContextMenuContentProps extends Omit<ViewProps, 'position'> {

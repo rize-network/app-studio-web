@@ -41,6 +41,11 @@ export const DefaultIconPickerStyles = {
   iconGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(6, 1fr)',
+    // Native has no CSS grid; row + wrap of fixed-width items reproduces the
+    // grid (these flex props are ignored under `display:grid` on web).
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
     gap: '8px',
     overflowY: 'auto',
     padding: '4px',

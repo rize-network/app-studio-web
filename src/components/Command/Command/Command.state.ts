@@ -87,7 +87,8 @@ export const useCommandState = ({
     // `document` is web-only; on React Native there is no global event target
     // to listen to, so skip attaching the listener (and creating a cleanup
     // that references it).
-    if (typeof document === 'undefined') return;
+    // Hermes/Expo defines a partial `document` without `addEventListener`.
+    if (typeof document?.addEventListener !== 'function') return;
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);

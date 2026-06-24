@@ -240,7 +240,7 @@ export const useResizableState = (
     [isResizing, panels, orientation, onResize, endResize, keyboardResizeBy]
   );
   useEffect(() => {
-    if (typeof document === 'undefined') return;
+    if (typeof document?.addEventListener !== 'function') return;
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing) return;
       const position = orientation === 'horizontal' ? e.clientX : e.clientY;

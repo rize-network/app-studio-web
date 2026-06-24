@@ -11,18 +11,13 @@
  * - document.addEventListener / closeAllSelects custom event
  * - cursor, hover transitions, chevron rotation transitions
  *
- * Notable simplification: the dropdown becomes a centered modal rather than
- * a popover anchored to the trigger.
+ * Native presentation uses the shared ActionSheet so selects, menus, and
+ * pickers get the same bottom-sheet interaction model.
  */
 
 import React from 'react';
-import {
-  Modal as RNModal,
-  Pressable,
-  ScrollView,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import { Typography, Horizontal, Text, View, Vertical } from 'app-studio';
+import { Typography, Horizontal, Text, View } from 'app-studio';
+import { ActionSheet } from '../../../ActionSheet/ActionSheet';
 import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';
@@ -34,12 +29,7 @@ import {
   SelectBoxProps,
   SelectViewProps,
 } from './Select.props';
-import {
-  IconSizes,
-  optionStyles,
-  optionStateStyles,
-  chipStyles,
-} from './Select.style';
+import { IconSizes, optionStyles, chipStyles } from './Select.style';
 
 const withoutFieldShellView = <T extends Record<string, any>>(views?: T): T => {
   if (!views) return {} as T;
@@ -254,78 +244,33 @@ const SelectView: React.FC<SelectViewProps> = ({
         </FieldIcons>
       </FieldContent>
 
-      <RNModal
-        visible={!hide && options.length > 0}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setHide(true)}
-      >
-        <TouchableWithoutFeedback onPress={() => setHide(true)}>
-          <View
-            flex={1}
-            backgroundColor="color-blackAlpha-500"
-            justifyContent="center"
-            alignItems="center"
-            paddingHorizontal={24}
-          >
-            <TouchableWithoutFeedback>
-              <Vertical
-                width="100%"
-                maxWidth={400}
-                maxHeight={400}
-                backgroundColor="color-white"
-                borderRadius={12}
-                paddingVertical={8}
-                paddingHorizontal={4}
-                shadowColor="rgba(0, 0, 0, 0.15)"
-                shadowOffset={{ width: 0, height: 4 }}
-                shadowOpacity={1}
-                shadowRadius={16}
-                elevation={5}
-                {...(views as any)?.dropDown}
-              >
-                <ScrollView>
-                  {options.map((option, index) => {
-                    const selected = isOptionSelected(option.value);
-                    const stateStyle = selected
-                      ? optionStateStyles.selected
-                      : optionStateStyles.default;
-                    return (
-                      <Pressable
-                        key={option.value}
-                        onPress={() => handleSelect(option.value)}
-                      >
-                        <Horizontal
-                          alignItems="center"
-                          justifyContent="space-between"
-                          {...optionStyles}
-                          {...stateStyle}
-                        >
-                          <Text
-                            fontSize={Typography.fontSizes[size]}
-                            fontWeight={selected ? '500' : '400'}
-                            color={
-                              selected ? 'color-gray-900' : 'color-gray-700'
-                            }
-                            {...(views as any)?.text}
-                          >
-                            {option.label}
-                          </Text>
-                          {selected && (
-                            <Text color="theme-primary" fontSize={14}>
-                              {'✓'}
-                            </Text>
-                          )}
-                        </Horizontal>
-                      </Pressable>
-                    );
-                  })}
-                </ScrollView>
-              </Vertical>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </RNModal>
+      <ActionSheet
+        isOpen={!hide && options.length > 0}
+        onClose={() => {
+          setHide(true);
+          setIsFocused(false);
+        }}
+        title={label}
+        value={value}
+        isMulti={isMulti}
+        closeOnSelect={!isMulti}
+        showCancel
+        size={
+          size === 'xs' || size === 'sm' ? 'sm' : size === 'xl' ? 'lg' : 'md'
+        }
+        items={options.map((option) => ({
+          id: option.value,
+          value: option.value,
+          label: option.label,
+          selected: isOptionSelected(option.value),
+          onPress: () => handleSelect(option.value),
+        }))}
+        views={{
+          sheet: (views as any)?.dropDown,
+          item: optionStyles,
+          itemLabel: (views as any)?.text,
+        }}
+      />
     </FieldContainer>
   );
 };

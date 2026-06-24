@@ -12,9 +12,11 @@ export const DefaultCookieConsent = () => {
 
   // Reset cookie consent to show the banner
   const handleShowConsent = () => {
-    // Clear localStorage to simulate a new visit
-    localStorage.removeItem('app-studio-cookie-consent');
-    localStorage.removeItem('app-studio-cookie-consent-expires');
+    // Clear localStorage to simulate a new visit (web only).
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('app-studio-cookie-consent');
+      localStorage.removeItem('app-studio-cookie-consent-expires');
+    }
     setShowConsent(true);
   };
 

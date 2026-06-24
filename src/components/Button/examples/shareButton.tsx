@@ -10,7 +10,8 @@ export const ShareButtons = () => (
         title: 'App Studio',
         text: 'Check out App Studio components.',
         url:
-          typeof window !== 'undefined' ? window.location.href : 'app-studio',
+          (typeof window !== 'undefined' && (window as any)?.location?.href) ||
+          'app-studio',
       }}
       onUnsupported={() => {
         if (typeof alert !== 'undefined') {
@@ -26,7 +27,8 @@ export const ShareButtons = () => (
         title: 'App Studio',
         text: 'Check out App Studio components.',
         url:
-          typeof window !== 'undefined' ? window.location.href : 'app-studio',
+          (typeof window !== 'undefined' && (window as any)?.location?.href) ||
+          'app-studio',
       }}
       onUnsupported={() => {
         if (typeof alert !== 'undefined') {
@@ -43,7 +45,8 @@ export const ShareButtons = () => (
         title: 'App Studio',
         text: 'Check out App Studio components.',
         url:
-          typeof window !== 'undefined' ? window.location.href : 'app-studio',
+          (typeof window !== 'undefined' && (window as any)?.location?.href) ||
+          'app-studio',
       }}
       onUnsupported={() => {
         if (typeof alert !== 'undefined') {

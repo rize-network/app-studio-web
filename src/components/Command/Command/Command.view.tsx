@@ -4,6 +4,8 @@ import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { SearchIcon } from '../../Icon/Icon';
+import { CommandOverlay } from './CommandOverlay';
+import { CommandTextInput } from './CommandTextInput';
 import {
   CommandProps,
   CommandInputProps,
@@ -69,7 +71,7 @@ export const CommandInput: React.FC<CommandInputProps> = ({
   ...props
 }) => {
   // Creates a ref to directly access the underlying HTML input element, primarily used for focusing the input.
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<any>(null);
   // A React effect hook that automatically focuses the input field when the component mounts.
   React.useEffect(() => {
     if (inputRef.current) {
@@ -79,21 +81,17 @@ export const CommandInput: React.FC<CommandInputProps> = ({
   return (
     <View {...CommandInputStyles} {...views?.container} {...props}>
       <SearchIcon widthHeight={16} color="color-gray-400" marginRight="8px" />
-      <View
-        as="input"
-        type="text"
-        value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          onValueChange(e.target.value)
-        }
-        placeholder={placeholder}
+      <CommandTextInput
         width="100%"
         border="none"
         outline="none"
         backgroundColor="transparent"
         fontSize="14px"
-        ref={inputRef}
         {...views?.input}
+        value={value}
+        onValueChange={onValueChange}
+        placeholder={placeholder}
+        ref={inputRef}
       />
     </View>
   );
@@ -141,6 +139,7 @@ export const CommandItem: React.FC<CommandItemProps> = ({
       {...CommandItemStyles}
       {...(selected ? CommandItemSelectedStyles : {})}
       {...(item.disabled ? CommandItemDisabledStyles : {})}
+      onPress={handleClick}
       onClick={handleClick}
       {...views?.container}
       {...props}
@@ -246,20 +245,7 @@ export const CommandView: React.FC<
   const hasGroups = groups.length > 0;
   const isEmpty = filteredCommands.length === 0;
   return (
-    <View
-      position="fixed"
-      top={0}
-      left={0}
-      right={0}
-      bottom={0}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      backgroundColor="color-blackAlpha-400"
-      zIndex={9999}
-      onClick={handleBackdropClick}
-      {...props}
-    >
+    <CommandOverlay onClose={() => onOpenChange(false)} {...props}>
       <CommandProvider value={contextValue}>
         <View
           borderRadius="8px"
@@ -342,6 +328,6 @@ export const CommandView: React.FC<
           )}
         </View>
       </CommandProvider>
-    </View>
+    </CommandOverlay>
   );
 };

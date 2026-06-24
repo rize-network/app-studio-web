@@ -33,6 +33,11 @@ export const DefaultColorPickerStyles = {
   colorGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(6, 36px)',
+    // Native has no CSS grid; row + wrap of fixed-width swatches reproduces the
+    // grid (these flex props are ignored under `display:grid` on web).
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
     gap: '12px',
     marginBottom: '16px',
   } as ViewProps,

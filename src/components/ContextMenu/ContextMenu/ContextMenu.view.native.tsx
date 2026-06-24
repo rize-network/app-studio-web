@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
-import { Modal, ScrollView } from 'react-native';
+import React, { createContext, useContext } from 'react';
 import { View, Text, ViewProps } from 'app-studio';
+import { ActionSheet } from '../../ActionSheet/ActionSheet';
+import { MoreIcon } from '../../Icon/Icon';
 import {
   ContextMenuContextType,
   Size,
@@ -53,28 +54,57 @@ export const useContextMenuContext = () => {
   return context;
 };
 
-export const ContextMenuTrigger: React.FC<ContextMenuTriggerProps> = ({
+export const ContextMenuTrigger: React.FC<
+  ContextMenuTriggerProps & { showIndicator?: boolean }
+> = ({
   children,
   isDisabled = false,
   views,
   asChild = false,
+  showIndicator = true,
   ...props
 }) => {
   const { openMenu, setIsOpen } = useContextMenuContext();
-  const handleLongPress = (e: any) => {
+  const handleOpen = (e: any) => {
     if (isDisabled) return;
     if (openMenu) openMenu(e);
     else setIsOpen(true);
   };
+  // On native a long-press has no visible affordance, so a context menu reads
+  // as non-interactive. Open on tap AND long-press, and overlay a small "⋯"
+  // indicator so users can see there's a menu.
   const triggerProps: any = {
-    onLongPress: handleLongPress,
+    onPress: handleOpen,
+    onClick: handleOpen,
+    onLongPress: handleOpen,
     ...views?.container,
     ...props,
   };
   if (asChild && React.isValidElement(children)) {
     return React.cloneElement(children as any, triggerProps);
   }
-  return <View {...triggerProps}>{children}</View>;
+  return (
+    <View position="relative" {...triggerProps}>
+      {children}
+      {showIndicator && !isDisabled && (
+        <View
+          position="absolute"
+          top={6}
+          right={6}
+          width={20}
+          height={20}
+          borderRadius={999}
+          alignItems="center"
+          justifyContent="center"
+          backgroundColor="color-blackAlpha-100"
+          pointerEvents="none"
+          {...views?.indicator}
+        >
+          <MoreIcon widthHeight={14} color="color-gray-600" />
+        </View>
+      )}
+    </View>
+  );
 };
 
 export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
@@ -83,51 +113,37 @@ export const ContextMenuContent: React.FC<ContextMenuContentProps> = ({
   views,
   ...props
 }) => {
-  const { isOpen, setIsOpen, variant } = useContextMenuContext();
+  const { isOpen, setIsOpen, variant, size } = useContextMenuContext();
   return (
-    <Modal
-      visible={isOpen}
-      transparent
-      animationType="fade"
-      onRequestClose={() => setIsOpen(false)}
+    <ActionSheet
+      isOpen={isOpen}
+      onClose={() => setIsOpen(false)}
+      size={size}
+      items={(items || []).map((item, index) =>
+        item.divider
+          ? { id: `divider-${index}`, divider: true }
+          : {
+              id: item.id,
+              label: item.label,
+              icon: item.icon,
+              isDisabled: item.disabled,
+              onPress: () => item.onClick?.(),
+            }
+      )}
+      views={{
+        sheet: {
+          ...ContextMenuVariants[variant],
+          ...views?.menu,
+          ...views?.content,
+          ...(props as any),
+        },
+        item: views?.item,
+        itemIcon: views?.icon,
+        divider: views?.divider,
+      }}
     >
-      <View
-        flex={1}
-        backgroundColor="color-blackAlpha-400"
-        justifyContent="center"
-        alignItems="center"
-        onPress={() => setIsOpen(false)}
-        onClick={() => setIsOpen(false)}
-      >
-        <View
-          minWidth={200}
-          borderRadius={4}
-          overflow="hidden"
-          {...ContextMenuVariants[variant]}
-          {...views?.menu}
-          {...views?.content}
-          {...(props as any)}
-        >
-          <ScrollView>
-            {items &&
-              items.map((item, index) => {
-                if (item.divider) {
-                  return (
-                    <ContextMenuDivider
-                      key={`divider-${index}`}
-                      views={views}
-                    />
-                  );
-                }
-                return (
-                  <ContextMenuItem key={item.id} item={item} views={views} />
-                );
-              })}
-            {children}
-          </ScrollView>
-        </View>
-      </View>
-    </Modal>
+      {children}
+    </ActionSheet>
   );
 };
 

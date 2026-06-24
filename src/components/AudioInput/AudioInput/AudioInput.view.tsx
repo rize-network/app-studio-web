@@ -185,11 +185,11 @@ export function AudioInputView({
           _hover={{ opacity: 0.92 }}
         >
           {recording ? (
-            <StopIcon widthHeight={14} color="currentColor" filled={false} />
+            <StopIcon widthHeight={14} color="color-white" filled={false} />
           ) : (
             <MicrophoneIcon
               widthHeight={18}
-              color="currentColor"
+              color="color-white"
               filled={false}
             />
           )}

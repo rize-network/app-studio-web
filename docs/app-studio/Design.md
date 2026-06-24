@@ -40,7 +40,7 @@ App-Studio supports CSS custom properties (CSS variables) that start with `--`. 
 <View
   style={{
     '--primary-color': 'blue',
-    '--primary-bg': 'lightblue',
+    '--primary-bg': 'blue',
     '--spacing': '15px',
   }}
   backgroundColor="var(--primary-bg)"

@@ -31,3 +31,4 @@ dist
 /cache
 /.claude
 /.github
+/build-ssr

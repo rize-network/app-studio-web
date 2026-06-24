@@ -80,8 +80,18 @@ export const Icon: React.FC<IconProps> = React.memo(
     const { getColor } = useTheme();
     const iconSize = (size ?? widthHeight) as any;
 
+    // `currentColor`/`inherit` rely on CSS color inheritance, which does not
+    // exist on React Native — they would render the icon invisible. Fall back to
+    // a readable default so bare `<XIcon />` (whose default color is
+    // `currentColor`) still shows. Call sites on colored surfaces pass an
+    // explicit color (e.g. `color-white`).
+    const resolvedColorToken =
+      color === 'currentColor' || color === 'inherit'
+        ? 'color-gray-700'
+        : color;
+
     const lucideProps: LucideProps = useMemo(() => {
-      const themeColor = getColor(color) as string;
+      const themeColor = getColor(resolvedColorToken) as string;
       return {
         color: themeColor,
         fill: filled ? themeColor : 'none',

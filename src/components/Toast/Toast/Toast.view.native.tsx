@@ -1,4 +1,5 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import { View, Text, Vertical, Horizontal } from 'app-studio';
 import { ToastProps, ToastContainerProps } from './Toast.props';
 import { Themes, ToastPositions } from './Toast.style';
@@ -29,8 +30,10 @@ export const ToastView: React.FC<ToastProps> = ({
   return (
     <Horizontal
       gap={12}
-      width="100%"
-      maxWidth={380}
+      // Concrete width that always fits the screen. `width:100%` here resolved
+      // against the auto-width absolute container and pushed the toast (and its
+      // text) off the right edge on native.
+      width={Math.min(380, Dimensions.get('window').width - 32)}
       borderWidth={1}
       borderStyle="solid"
       borderRadius={12}

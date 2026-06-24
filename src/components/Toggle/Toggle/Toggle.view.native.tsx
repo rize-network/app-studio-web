@@ -61,6 +61,11 @@ const ToggleView: React.FC<Props> = React.memo(
       <Center
         padding={shape === 'pill' ? 12 : 8}
         borderRadius={ToggleShapes[shape]}
+        // Always reserve a 1px (transparent) border so toggling the active state
+        // — which colors the border in — does not change the box size / shift layout.
+        borderWidth={1}
+        borderStyle="solid"
+        borderColor="transparent"
         onPress={handleToggle}
         onClick={handleToggle}
         {...base}

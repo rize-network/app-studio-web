@@ -1,7 +1,7 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Vertical, Horizontal, Text } from 'app-studio';
+import { View, Vertical, Horizontal, Text } from 'app-studio';
 import { FormikTagInput } from '../Formik.TagInput';
 import { Button } from '../../Button/Button';
 
@@ -49,7 +49,7 @@ export const FormikTagInputExample = () => {
         onSubmit={handleSubmit}
       >
         {({ values, errors, touched, isSubmitting }) => (
-          <Form>
+          <View>
             <Vertical gap={20}>
               {/* Skills TagInput */}
               <FormikTagInput
@@ -140,7 +140,7 @@ export const FormikTagInputExample = () => {
                 </Button>
               </Horizontal>
             </Vertical>
-          </Form>
+          </View>
         )}
       </Formik>
     </Vertical>
@@ -174,7 +174,7 @@ export const FormikTagInputAdvanced = () => {
         onSubmit={(values) => console.log('Advanced form:', values)}
       >
         {({ values }) => (
-          <Form>
+          <View>
             <Vertical gap={20}>
               <FormikTagInput
                 name="categories"
@@ -219,7 +219,7 @@ export const FormikTagInputAdvanced = () => {
                 Categories: {values.categories.join(' • ')}
               </Text>
             </Vertical>
-          </Form>
+          </View>
         )}
       </Formik>
     </Vertical>

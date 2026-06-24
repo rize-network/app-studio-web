@@ -1,4 +1,5 @@
 export * from './Accordion/Accordion';
+export * from './ActionSheet/ActionSheet';
 export * from './Alert/Alert';
 export * from './AspectRatio/AspectRatio';
 export * from './AudioInput/AudioWaveform/AudioWaveform';
@@ -71,6 +72,8 @@ export * from '../design-system';
 export { DesignSystem } from '../pages/designSystem.page';
 
 export * from './Accordion/Accordion/Accordion.props';
+export * from './ActionSheet/ActionSheet/ActionSheet.props';
+export * from './ActionSheet/ActionSheet/ActionSheet.type';
 export * from './Alert/Alert/Alert.props';
 export * from './AspectRatio/AspectRatio/AspectRatio.props';
 export * from './AudioInput/AudioInput/AudioInput.props';

@@ -62,27 +62,27 @@ export const getThemes = (themeMode: 'light' | 'dark') => {
     primary: {
       // Specifies the structural styles for the main container of the 'primary' Cookie Consent banner, including background, border, and shadow.
       container: {
-        backgroundColor: 'color-lightBlue-50',
-        borderColor: 'color-lightBlue-200',
+        backgroundColor: 'color-blue-50',
+        borderColor: 'color-blue-200',
         boxShadow:
           '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
       },
       // Defines the text styling for the content area within the 'primary' Cookie Consent banner.
       content: {
-        color: 'color-lightBlue-700',
+        color: 'color-blue-700',
       },
       // Configures the visual styles for the 'Accept' button in the 'primary' theme, including its background, text color, and hover state.
       acceptButton: {
-        backgroundColor: 'color-lightBlue-500',
+        backgroundColor: 'color-blue-500',
         color: 'color-white',
-        hoverBackgroundColor: 'color-lightBlue-600',
+        hoverBackgroundColor: 'color-blue-600',
       },
       // Sets the visual styles for the 'Customize' button in the 'primary' theme, encompassing background, text color, border, and hover effects.
       customizeButton: {
         backgroundColor: 'transparent',
-        color: 'color-lightBlue-700',
-        borderColor: 'color-lightBlue-300',
-        hoverBackgroundColor: 'color-lightBlue-100',
+        color: 'color-blue-700',
+        borderColor: 'color-blue-300',
+        hoverBackgroundColor: 'color-blue-100',
       },
     },
   };

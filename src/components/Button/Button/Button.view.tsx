@@ -634,7 +634,10 @@ const ButtonView = React.memo(
         return basePalette;
       }, [mainColorKey, textColorKey, reversed, theme, buttonConfig?.variants]);
 
-      const base = palette[variant];
+      // Fall back to the `filled` palette for any unrecognised variant so an
+      // unknown value never renders an unstyled (no-background) button — which
+      // would drop white label text onto a light surface and fail contrast.
+      const base = palette[variant] ?? palette.filled;
       const finalContentColor = (base?.color as string) ?? textColorKey;
 
       // Render content logic safely

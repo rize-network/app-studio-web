@@ -10,6 +10,13 @@ import {
 } from './ColorPicker.style';
 import { TextField } from '../../Form/TextField/TextField';
 import { ChevronIcon } from '../../Icon/Icon';
+
+const canRenderBrowserColorInput =
+  typeof navigator !== 'undefined' &&
+  navigator.product !== 'ReactNative' &&
+  typeof document !== 'undefined' &&
+  typeof document.createElement === 'function';
+
 // Defines the `ColorPickerView` functional component, responsible for rendering the UI of the color picker based on provided props.
 const ColorPickerView: React.FC<ColorPickerViewProps> = ({
   id,
@@ -168,7 +175,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                 {/* Native color picker input is web-only (`<input type="color">`).
                     On React Native it is omitted; the hex TextField below covers
                     custom color entry there. */}
-                {typeof document !== 'undefined' && (
+                {canRenderBrowserColorInput && (
                   <input
                     type="color"
                     value={customColor || '#1D4ED8'}

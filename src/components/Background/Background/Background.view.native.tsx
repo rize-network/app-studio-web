@@ -1,4 +1,5 @@
 import React, { createContext } from 'react';
+import { Animated, Easing, Dimensions } from 'react-native';
 import { View } from 'app-studio';
 import {
   BackgroundProps,
@@ -18,14 +19,85 @@ import { DefaultBackgroundStyles } from './Background.style';
 import { BackgroundContextType } from './Background.type';
 import { Gradient } from '../../Gradient/Gradient';
 
-// React Native version of Background. Most of the web background variants
-// (Aurora, Meteors, Wall, Particles, Grid, Ripples) rely on CSS gradients,
-// keyframe animations, mask-images and video tags that have no equivalent on
-// RN. We render simplified, animation-less placeholders so the component tree
-// at least mounts cleanly. Apps wanting these effects on native should swap
-// in dedicated implementations.
+// React Native version of Background. The web effects rely on CSS keyframes,
+// mask-images and <canvas>, none of which exist on RN. Here each variant is
+// re-implemented with React Native's built-in `Animated` API (looping
+// transforms/opacity, native-driver) so the effects actually MOVE without
+// depending on react-native-reanimated.
 
 const BackgroundContext = createContext<BackgroundContextType>({});
+
+const SCREEN = Dimensions.get('window');
+
+// A 0→1 value that loops forever. `delay` staggers multiple instances.
+const useLoop = (duration: number, delay = 0) => {
+  const v = React.useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    const anim = Animated.loop(
+      Animated.timing(v, {
+        toValue: 1,
+        duration,
+        delay,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      })
+    );
+    anim.start();
+    return () => anim.stop();
+  }, [duration, delay, v]);
+  return v;
+};
+
+const Layer: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
+  children ? (
+    <View
+      position="relative"
+      zIndex={2}
+      width="100%"
+      height="100%"
+      pointerEvents="box-none"
+    >
+      {children}
+    </View>
+  ) : null;
+
+// --- Aurora: soft colour blobs drifting over a dark base gradient ---
+const AuroraBlob: React.FC<{
+  color: string;
+  size: number;
+  left: number;
+  top: number;
+  dx: number;
+  dy: number;
+  duration: number;
+  delay: number;
+}> = ({ color, size, left, top, dx, dy, duration, delay }) => {
+  const t = useLoop(duration, delay);
+  const translateX = t.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, dx, 0],
+  });
+  const translateY = t.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0, dy, 0],
+  });
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={{
+        position: 'absolute',
+        left,
+        top,
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        backgroundColor: color,
+        opacity: 0.4,
+        transform: [{ translateX }, { translateY }],
+      }}
+    />
+  );
+};
 
 const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
   children,
@@ -34,72 +106,303 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
   ...props
 }) => {
   return (
-    <View
-      backgroundColor="color-gray-900"
+    <Gradient
+      type="linear"
+      direction="to-bottom-right"
+      from="color-gray-900"
+      to="color-blue-900"
       overflow="hidden"
+      width="100%"
+      minHeight={200}
+      position="relative"
       {...views?.container}
       {...props}
     >
-      {children}
-    </View>
+      <AuroraBlob
+        color="#3b82f6"
+        size={220}
+        left={-40}
+        top={-40}
+        dx={60}
+        dy={40}
+        duration={6000}
+        delay={0}
+      />
+      <AuroraBlob
+        color="#a855f7"
+        size={200}
+        left={SCREEN.width - 180}
+        top={-20}
+        dx={-50}
+        dy={50}
+        duration={7500}
+        delay={500}
+      />
+      <AuroraBlob
+        color="#2dd4bf"
+        size={180}
+        left={SCREEN.width / 2 - 90}
+        top={60}
+        dx={40}
+        dy={-30}
+        duration={9000}
+        delay={1000}
+      />
+      <Layer>{children}</Layer>
+    </Gradient>
+  );
+};
+
+// --- Meteors: thin streaks falling diagonally ---
+const Meteor: React.FC<{ left: number; duration: number; delay: number }> = ({
+  left,
+  duration,
+  delay,
+}) => {
+  const t = useLoop(duration, delay);
+  const translateY = t.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-60, 260],
+  });
+  const translateX = t.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -160],
+  });
+  const opacity = t.interpolate({
+    inputRange: [0, 0.1, 0.85, 1],
+    outputRange: [0, 1, 1, 0],
+  });
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={{
+        position: 'absolute',
+        top: 0,
+        left,
+        width: 2,
+        height: 70,
+        borderRadius: 1,
+        backgroundColor: '#cbd5e1',
+        opacity,
+        transform: [{ translateX }, { translateY }, { rotate: '215deg' }],
+      }}
+    />
   );
 };
 
 const Meteors: React.FC<MeteorsProps> = ({ children, ...props }) => {
+  const count = 12;
+  const meteors = React.useMemo(
+    () =>
+      Array.from({ length: count }).map((_, i) => ({
+        left: 40 + ((i * 97) % (SCREEN.width + 120)),
+        duration: 2200 + ((i * 313) % 1800),
+        delay: (i * 350) % 3000,
+      })),
+    []
+  );
   return (
-    <View
-      width="100%"
-      height="100%"
-      backgroundColor="black"
-      position="relative"
+    <Gradient
+      type="linear"
+      direction="to-bottom"
+      from="color-gray-900"
+      to="color-blue-900"
       overflow="hidden"
+      width="100%"
+      minHeight={200}
+      position="relative"
       {...props}
     >
-      {children && (
-        <View position="relative" zIndex={1} width="100%" height="100%">
-          {children}
-        </View>
-      )}
-    </View>
+      {meteors.map((m, i) => (
+        <Meteor key={i} {...m} />
+      ))}
+      <Layer>{children}</Layer>
+    </Gradient>
   );
 };
 
+// --- Wall: static soft gradient (no motion on web either) ---
 const Wall: React.FC<WallProps> = ({ ...props }) => {
   return (
-    <View width={400} height={300} backgroundColor="color-gray-50" {...props} />
-  );
-};
-
-const Particles: React.FC<ParticlesProps> = ({ ...props }) => {
-  return (
-    <View
-      width={400}
-      height={300}
-      backgroundColor="color-gray-900"
+    <Gradient
+      type="linear"
+      direction="to-bottom"
+      from="color-gray-100"
+      to="color-gray-50"
+      width="100%"
+      minHeight={200}
       {...props}
     />
   );
 };
 
-const Grid: React.FC<GridProps> = ({ ...props }) => {
+// --- Particles: small dots rising and fading ---
+const Particle: React.FC<{
+  left: number;
+  size: number;
+  duration: number;
+  delay: number;
+}> = ({ left, size, duration, delay }) => {
+  const t = useLoop(duration, delay);
+  const translateY = t.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -180],
+  });
+  const opacity = t.interpolate({
+    inputRange: [0, 0.2, 0.8, 1],
+    outputRange: [0, 0.9, 0.9, 0],
+  });
   return (
-    <View
-      width={400}
-      height={300}
-      backgroundColor="color-gray-900"
+    <Animated.View
+      pointerEvents="none"
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        left,
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        backgroundColor: '#e0e7ff',
+        opacity,
+        transform: [{ translateY }],
+      }}
+    />
+  );
+};
+
+const Particles: React.FC<ParticlesProps> = ({ ...props }) => {
+  const count = 22;
+  const particles = React.useMemo(
+    () =>
+      Array.from({ length: count }).map((_, i) => ({
+        left: (i * 83) % SCREEN.width,
+        size: 3 + ((i * 7) % 4),
+        duration: 4000 + ((i * 271) % 3000),
+        delay: (i * 220) % 4000,
+      })),
+    []
+  );
+  return (
+    <Gradient
+      type="linear"
+      direction="to-bottom-right"
+      from="color-gray-900"
+      to="color-indigo-900"
+      overflow="hidden"
+      width="100%"
+      minHeight={200}
+      position="relative"
       {...props}
+    >
+      {particles.map((p, i) => (
+        <Particle key={i} {...p} />
+      ))}
+    </Gradient>
+  );
+};
+
+// --- Grid: drawn lines with a slow opacity pulse ---
+const Grid: React.FC<GridProps> = ({ ...props }) => {
+  const t = useLoop(4000, 0);
+  const opacity = t.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0.15, 0.4, 0.15],
+  });
+  const cols = Math.ceil(SCREEN.width / 40);
+  const rows = 6;
+  return (
+    <Gradient
+      type="linear"
+      direction="to-bottom"
+      from="color-gray-800"
+      to="color-gray-900"
+      overflow="hidden"
+      width="100%"
+      minHeight={200}
+      position="relative"
+      {...props}
+    >
+      {Array.from({ length: cols }).map((_, i) => (
+        <Animated.View
+          key={`c${i}`}
+          pointerEvents="none"
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: i * 40,
+            width: 1,
+            backgroundColor: '#64748b',
+            opacity,
+          }}
+        />
+      ))}
+      {Array.from({ length: rows }).map((_, i) => (
+        <Animated.View
+          key={`r${i}`}
+          pointerEvents="none"
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: i * 40,
+            height: 1,
+            backgroundColor: '#64748b',
+            opacity,
+          }}
+        />
+      ))}
+    </Gradient>
+  );
+};
+
+// --- Ripples: concentric rings expanding and fading ---
+const Ripple: React.FC<{ size: number; duration: number; delay: number }> = ({
+  size,
+  duration,
+  delay,
+}) => {
+  const t = useLoop(duration, delay);
+  const scale = t.interpolate({ inputRange: [0, 1], outputRange: [0.2, 1.4] });
+  const opacity = t.interpolate({ inputRange: [0, 1], outputRange: [0.5, 0] });
+  return (
+    <Animated.View
+      pointerEvents="none"
+      style={{
+        position: 'absolute',
+        alignSelf: 'center',
+        top: '50%',
+        width: size,
+        height: size,
+        marginTop: -size / 2,
+        borderRadius: size / 2,
+        borderWidth: 2,
+        borderColor: '#3b82f6',
+        opacity,
+        transform: [{ scale }],
+      }}
     />
   );
 };
 
 const Ripples: React.FC<RipplesProps> = ({ ...props }) => {
+  const rings = [0, 1, 2, 3];
   return (
-    <View
-      width={400}
-      height={300}
-      backgroundColor="color-gray-100"
+    <Gradient
+      type="linear"
+      direction="to-bottom"
+      from="color-blue-100"
+      to="color-blue-50"
+      overflow="hidden"
+      width="100%"
+      minHeight={200}
+      position="relative"
       {...props}
-    />
+    >
+      {rings.map((i) => (
+        <Ripple key={i} size={160} duration={3200} delay={i * 800} />
+      ))}
+    </Gradient>
   );
 };
 

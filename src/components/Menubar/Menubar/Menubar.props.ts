@@ -75,13 +75,19 @@ export interface MenubarTriggerProps {
 // Defines the properties for the `Menubar.Content` component, which holds the actual items of an opened menu.
 export interface MenubarContentProps {
   // The menu items or other content to be rendered within this menu's dropdown panel.
-  children: React.ReactNode;
+  children?: React.ReactNode;
   // The unique ID of the `Menubar.Menu` component that this content belongs to.
   menuId: string;
   // Custom styles specifically for the content container element.
   views?: {
     // Custom `ViewProps` to apply to the content panel element itself.
     content?: ViewProps;
+    // Custom `ViewProps` to apply to menu items when rendered from data.
+    item?: ViewProps;
+    // Custom `ViewProps` to apply to item icons when rendered from data.
+    icon?: ViewProps;
+    // Custom `ViewProps` to apply to separators when rendered from data.
+    separator?: ViewProps;
   };
 }
 // Defines the properties for the `Menubar.Item` component, representing a clickable option within a menu's content.

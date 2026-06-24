@@ -37,7 +37,8 @@ export const useMenubarState = (
     // `document` is web-only; on React Native there is no global event target
     // to listen to, so skip attaching listeners (and creating a cleanup that
     // references them).
-    if (typeof document === 'undefined') return;
+    // Hermes/Expo defines a partial `document` without `addEventListener`.
+    if (typeof document?.addEventListener !== 'function') return;
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleKeyDown);
     return () => {

@@ -10,11 +10,25 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https: http:; media-src 'self' data: blob: https: http:; font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com; connect-src 'self' ws: wss: http: https:; worker-src 'self' blob:;" />
   <link rel="apple-touch-icon" href="/assets/apple-logo.png">
   <link rel="manifest" href="/manifest.json" />
-  <!-- Preload LCP image to improve Largest Contentful Paint -->
-  <link rel="preload" as="image" href="/orange.webp" type="image/webp" fetchpriority="high" />
+  <!-- The hero background is now a pure CSS gradient (no image), so nothing
+       image-related is on the home page's critical path. orange.webp is only
+       used by the deferred CTA section and loads lazily there. -->
+  <!-- Self-hosted Mulish (variable, weights 400–800) is the brand/app font used
+       throughout the component gallery. It is a normal same-origin file with
+       font-display:optional, NOT on the home page's critical path: the
+       above-the-fold hero text (title + tagline) is rendered in the system font
+       stack (see HomeHero) so first paint never waits on a web font. -->
   <!-- DNS prefetch for CDN domains to reduce connection latency -->
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <style>
+    @font-face {
+      font-family: 'Mulish';
+      font-style: normal;
+      font-weight: 400 800;
+      font-display: optional;
+      src: url('/fonts/mulish-subset.woff2') format('woff2');
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -28,7 +42,7 @@
 
     body {
       margin: 0;
-      font-family: 'Mulish', system-ui, sans-serif;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -55,6 +69,8 @@
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
+  <!-- The home page hero is prerendered into this container at build time by
+       scripts/prerender.mjs; the SPA hydrates it via createRoot on mount. -->
   <div id="root"></div>
   <script type="module" src="/src/index.tsx"></script>
 </body>

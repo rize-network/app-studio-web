@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import { Modal } from 'react-native';
+import { Modal, Dimensions } from 'react-native';
 import { View, Text, ViewProps } from 'app-studio';
 import {
   TooltipContextType,
@@ -76,36 +76,120 @@ export const TooltipView: React.FC<
   children,
   size = 'md',
   variant = 'default',
+  position = 'top',
   views,
   themeMode: elementMode,
   ...props
 }) => {
-  const { isOpen, closeTooltip } = useTooltipContext();
+  const { isOpen, openTooltip, closeTooltip } = useTooltipContext();
+  const triggerRef = React.useRef<any>(null);
+  const [rect, setRect] = React.useState<{
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+  } | null>(null);
+
+  // Measure the trigger in window coords so the bubble can be placed next to it
+  // (RN has no DOM rects; `measureInWindow` is the native equivalent).
+  const handlePress = () => {
+    if (isOpen) {
+      closeTooltip();
+      return;
+    }
+    const node = triggerRef.current;
+    if (node && typeof node.measureInWindow === 'function') {
+      node.measureInWindow((x: number, y: number, w: number, h: number) => {
+        setRect({ x, y, w, h });
+        openTooltip();
+      });
+    } else {
+      openTooltip();
+    }
+  };
+
+  // Measured bubble size (from onLayout) so placement uses the real height,
+  // not a guess — otherwise the bubble overlaps the trigger / neighbours.
+  const [bubble, setBubble] = React.useState({ w: 200, h: 40 });
+
+  const screen = Dimensions.get('window');
+  const GAP = 8;
+  const EDGE = 8;
+  const clampX = (x: number) =>
+    Math.max(EDGE, Math.min(x, screen.width - bubble.w - EDGE));
+  const clampY = (y: number) =>
+    Math.max(EDGE, Math.min(y, screen.height - bubble.h - EDGE));
+  let top = screen.height / 2;
+  let left = screen.width / 2 - bubble.w / 2;
+  if (rect) {
+    if (position === 'left' || position === 'right') {
+      // Beside the trigger, vertically centred. Flip side if it doesn't fit.
+      const rightLeft = rect.x + rect.w + GAP;
+      const leftLeft = rect.x - bubble.w - GAP;
+      const fitsRight = rightLeft + bubble.w <= screen.width - EDGE;
+      const fitsLeft = leftLeft >= EDGE;
+      if (position === 'right') {
+        left = fitsRight || !fitsLeft ? rightLeft : leftLeft;
+      } else {
+        left = fitsLeft || !fitsRight ? leftLeft : rightLeft;
+      }
+      left = clampX(left);
+      top = clampY(rect.y + rect.h / 2 - bubble.h / 2);
+    } else {
+      // Above/below the trigger, horizontally centred. Flip if it doesn't fit.
+      left = clampX(rect.x + rect.w / 2 - bubble.w / 2);
+      const aboveTop = rect.y - bubble.h - GAP;
+      const belowTop = rect.y + rect.h + GAP;
+      const fitsAbove = aboveTop >= EDGE;
+      const fitsBelow = belowTop + bubble.h <= screen.height - EDGE;
+      if (position === 'bottom') {
+        top = fitsBelow || !fitsAbove ? belowTop : aboveTop;
+      } else {
+        top = fitsAbove || !fitsBelow ? aboveTop : belowTop;
+      }
+      top = clampY(top);
+    }
+  }
+
+  const contentColor =
+    (views?.content as any)?.color ??
+    (TooltipVariants[variant as keyof typeof TooltipVariants] as any)?.color;
+  const contentFontSize = (
+    TooltipSizes[size as keyof typeof TooltipSizes] as any
+  )?.fontSize;
+
   return (
     <View {...views?.container} {...(props as any)}>
-      <TooltipTrigger>{children}</TooltipTrigger>
-      <Modal
-        visible={isOpen}
-        transparent
-        animationType="fade"
-        onRequestClose={closeTooltip}
-      >
-        <View
-          flex={1}
-          alignItems="center"
-          justifyContent="center"
-          backgroundColor="color-blackAlpha-400"
-          onPress={closeTooltip}
-          onClick={closeTooltip}
-        >
+      <View ref={triggerRef} onPress={handlePress} onClick={handlePress} alignSelf="flex-start">
+        {children}
+      </View>
+      <Modal visible={isOpen} transparent animationType="fade" onRequestClose={closeTooltip}>
+        {/* Transparent full-screen layer: tap anywhere to dismiss. The bubble is
+            absolutely positioned next to the measured trigger. */}
+        <View flex={1} onPress={closeTooltip} onClick={closeTooltip}>
           <View
-            borderRadius={4}
+            position="absolute"
+            top={top}
+            left={left}
+            maxWidth={280}
+            borderRadius={8}
+            onLayout={(e: any) => {
+              const { width, height } = e.nativeEvent.layout;
+              if (
+                Math.abs(width - bubble.w) > 1 ||
+                Math.abs(height - bubble.h) > 1
+              ) {
+                setBubble({ w: width, h: height });
+              }
+            }}
             {...TooltipSizes[size as keyof typeof TooltipSizes]}
             {...TooltipVariants[variant as keyof typeof TooltipVariants]}
             {...views?.content}
           >
             {typeof content === 'string' ? (
-              <Text {...views?.text}>{content}</Text>
+              <Text color={contentColor} fontSize={contentFontSize} {...views?.text}>
+                {content}
+              </Text>
             ) : (
               content
             )}

@@ -1,9 +1,18 @@
 export const GoogleFonts = ['Mulish'];
 
-export const APP_FONT_FAMILY = "'Mulish', system-ui, sans-serif";
+// App default is the system stack so the home page's critical render path never
+// waits on a web font. The Mulish brand font is applied to the component gallery
+// only (see AppLayout) via MULISH_FONT_FAMILY, keeping it off the home page.
+export const APP_FONT_FAMILY =
+  "system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
-const GOOGLE_FONT_WEIGHTS =
-  'ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800;1,900';
+export const HERO_FONT_FAMILY = APP_FONT_FAMILY;
+
+export const MULISH_FONT_FAMILY = "'Mulish', system-ui, sans-serif";
+
+// Only the weights the UI actually renders (regular → extra-bold). Kept in sync
+// with the static <link> in index.html so the browser dedupes to one request.
+const GOOGLE_FONT_WEIGHTS = 'wght@400;500;600;700;800';
 
 export const getGoogleFontHref = (font: string) =>
   `https://fonts.googleapis.com/css2?family=${font.replace(

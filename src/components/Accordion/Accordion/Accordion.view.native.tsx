@@ -4,8 +4,12 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
-import { View, Horizontal, Vertical, Text, ViewProps } from 'app-studio';
+import { Animated, Easing } from 'react-native';
+import { View, Horizontal, Vertical, ViewProps } from 'app-studio';
 import { ChevronIcon } from '../../Icon/Icon';
 import { AccordionContextType } from './Accordion.type';
 import {
@@ -112,12 +116,23 @@ export const AccordionTrigger: React.FC<
 }) => {
   const { toggleItem } = useAccordionContext();
   const designSystemAccordion = useDesignSystemComponentProps('accordion');
+  const iconProgress = useRef(new Animated.Value(isExpanded ? 1 : 0)).current;
   const mergedViews = deepMerge(
     {
       container: designSystemAccordion.views?.trigger,
     },
     views
   );
+
+  useEffect(() => {
+    Animated.timing(iconProgress, {
+      toValue: isExpanded ? 1 : 0,
+      duration: 220,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: true,
+    }).start();
+  }, [iconProgress, isExpanded]);
+
   const handlePress = () => {
     if (value && !isDisabled) {
       toggleItem(value);
@@ -140,18 +155,28 @@ export const AccordionTrigger: React.FC<
   return (
     <Horizontal {...triggerProps}>
       {children}
-      <View
-        width={24}
-        height={24}
-        alignItems="center"
-        justifyContent="center"
-        {...mergedViews?.icon}
+      <Animated.View
+        style={{
+          transform: [
+            {
+              rotate: iconProgress.interpolate({
+                inputRange: [0, 1],
+                outputRange: ['0deg', '180deg'],
+              }),
+            },
+          ],
+        }}
       >
-        <ChevronIcon
-          widthHeight={16}
-          orientation={isExpanded ? 'up' : 'down'}
-        />
-      </View>
+        <View
+          width={24}
+          height={24}
+          alignItems="center"
+          justifyContent="center"
+          {...mergedViews?.icon}
+        >
+          <ChevronIcon widthHeight={16} orientation="down" />
+        </View>
+      </Animated.View>
     </Horizontal>
   );
 };
@@ -179,13 +204,70 @@ export const AccordionContent: React.FC<
     },
     views
   );
-  if (!isExpanded) {
+
+  const transitionMs = 260;
+  const contentProgress = useRef(
+    new Animated.Value(isExpanded ? 1 : 0)
+  ).current;
+  const [shouldRender, setShouldRender] = useState(Boolean(isExpanded));
+  const [contentHeight, setContentHeight] = useState(0);
+
+  useEffect(() => {
+    if (isExpanded) {
+      setShouldRender(true);
+    }
+  }, [isExpanded]);
+
+  useEffect(() => {
+    if (!shouldRender) return;
+
+    const isOpeningWithoutMeasurement = isExpanded && contentHeight === 0;
+    if (isOpeningWithoutMeasurement) return;
+
+    const animation = Animated.timing(contentProgress, {
+      toValue: isExpanded ? 1 : 0,
+      duration: transitionMs,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: false,
+    });
+
+    animation.start(({ finished }) => {
+      if (finished && !isExpanded) {
+        setShouldRender(false);
+      }
+    });
+
+    return () => {
+      animation.stop();
+    };
+  }, [contentHeight, contentProgress, isExpanded, shouldRender]);
+
+  if (!shouldRender) {
     return null;
   }
+
   return (
-    <View overflow="hidden" {...mergedViews?.container} {...props}>
-      <View padding={16}>{children}</View>
-    </View>
+    <Animated.View
+      style={{
+        height: contentProgress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, contentHeight],
+        }),
+        opacity: contentProgress,
+        overflow: 'hidden',
+      }}
+    >
+      <View overflow="hidden" {...mergedViews?.container} {...props}>
+        <View
+          padding={16}
+          onLayout={(event: any) => {
+            setContentHeight(event.nativeEvent.layout.height);
+          }}
+        >
+          {children}
+        </View>
+      </View>
+    </Animated.View>
   );
 };
 

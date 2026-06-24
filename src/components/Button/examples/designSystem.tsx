@@ -66,16 +66,16 @@ export const DesignSystemButtons = () => (
         With Icons
       </Text>
       <Horizontal gap={16} alignItems="center" flexWrap="wrap">
-        <Button icon={<span>→</span>} iconPosition="right">
+        <Button icon={<Text>→</Text>} iconPosition="right">
           Right Icon
         </Button>
-        <Button icon={<span>←</span>} iconPosition="left">
+        <Button icon={<Text>←</Text>} iconPosition="left">
           Left Icon
         </Button>
-        <Button icon={<span>↑</span>} iconPosition="top">
+        <Button icon={<Text>↑</Text>} iconPosition="top">
           Top Icon
         </Button>
-        <Button icon={<span>↓</span>} iconPosition="bottom">
+        <Button icon={<Text>↓</Text>} iconPosition="bottom">
           Bottom Icon
         </Button>
       </Horizontal>

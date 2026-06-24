@@ -47,6 +47,16 @@ const ButtonContent: React.FC<{
       : Vertical;
     const sizeStyles = ButtonSizes[size];
 
+    // On native, `color` does NOT cascade into an icon's SVG the way it does on
+    // web — an icon whose color is `currentColor` would fall back to a dark
+    // default and vanish on a coloured button. Inject the button's text color
+    // into the icon unless it already specifies one.
+    const tintedIcon = React.isValidElement(icon)
+      ? React.cloneElement(icon as any, {
+          color: (icon as any).props?.color ?? resolvedTextColor,
+        })
+      : icon;
+
     return (
       <Wrapper
         gap={8}
@@ -69,7 +79,7 @@ const ButtonContent: React.FC<{
 
         {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
           <View color={resolvedTextColor} {...views?.icon}>
-            {icon}
+            {tintedIcon}
           </View>
         )}
 
@@ -83,7 +93,7 @@ const ButtonContent: React.FC<{
 
         {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
           <View color={resolvedTextColor} {...views?.icon}>
-            {icon}
+            {tintedIcon}
           </View>
         )}
 

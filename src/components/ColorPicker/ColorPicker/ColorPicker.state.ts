@@ -43,7 +43,12 @@ export const useColorPickerState = (props: ColorPickerProps) => {
   }, [showRecentColors]);
   useEffect(() => {
     // `document` is web-only; on native the dropdown closes via selection/toggle.
-    if (typeof document === 'undefined') return;
+    if (
+      typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function'
+    ) {
+      return;
+    }
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isOpen &&

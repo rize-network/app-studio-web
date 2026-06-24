@@ -1,4 +1,5 @@
 import React, { useMemo, useEffect, useRef } from 'react';
+import { Animated, Easing } from 'react-native';
 import { View, Horizontal, Text } from 'app-studio';
 import { Button } from '../../Button/Button';
 import {
@@ -17,6 +18,55 @@ import {
   getDefaultCarouselStyles,
 } from './Carousel.style';
 import { CarouselContext, useCarouselContext } from './Carousel.context';
+
+// Horizontal animated track: lays every slide side-by-side and slides the
+// track with RN's built-in Animated API (native-driver transform) so changing
+// the active index animates instead of snapping. Width is measured via onLayout.
+const AnimatedSlideTrack: React.FC<{
+  slides: React.ReactNode[];
+  activeIndex: number;
+  duration: number;
+  slideViews?: any;
+}> = ({ slides, activeIndex, duration, slideViews }) => {
+  const [width, setWidth] = React.useState(0);
+  const translateX = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    Animated.timing(translateX, {
+      toValue: -activeIndex * width,
+      duration,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: true,
+    }).start();
+  }, [activeIndex, width, duration, translateX]);
+  return (
+    <View
+      width="100%"
+      height="100%"
+      overflow="hidden"
+      onLayout={(e: any) => setWidth(e.nativeEvent.layout.width)}
+    >
+      <Animated.View
+        style={{
+          flexDirection: 'row',
+          height: '100%',
+          width: width ? width * slides.length : '100%',
+          transform: [{ translateX }],
+        }}
+      >
+        {slides.map((slide, index) => (
+          <View
+            key={index}
+            width={width || ('100%' as any)}
+            height="100%"
+            {...slideViews}
+          >
+            {slide}
+          </View>
+        ))}
+      </Animated.View>
+    </View>
+  );
+};
 
 export const CarouselSlide: React.FC<CarouselSlideProps> = ({
   children,
@@ -139,10 +189,15 @@ export const CarouselContentComponent: React.FC<CarouselContentProps> = ({
     ...views?.innerContainer,
   };
   const childArr = React.Children.toArray(children);
-  const activeChild = childArr[currentIndex];
   return (
     <View {...mergedContentStyles} {...props}>
-      <View {...mergedInnerStyles}>{activeChild}</View>
+      <View {...mergedInnerStyles}>
+        <AnimatedSlideTrack
+          slides={childArr}
+          activeIndex={currentIndex}
+          duration={300}
+        />
+      </View>
     </View>
   );
 };
@@ -305,16 +360,12 @@ export const CarouselView: React.FC<CarouselProps> = ({
         position="relative"
         {...views?.slideWrapper}
       >
-        {slides.map((slide, index) => (
-          <CarouselSlide
-            key={index}
-            isActive={index === activeIndex}
-            index={index}
-            views={views?.slide}
-          >
-            {slide}
-          </CarouselSlide>
-        ))}
+        <AnimatedSlideTrack
+          slides={slides}
+          activeIndex={activeIndex}
+          duration={transitionDuration}
+          slideViews={views?.slide}
+        />
       </View>
       {renderNavigation()}
       {renderIndicators()}
