@@ -5,6 +5,7 @@ import {
   WindowSizeProvider,
 } from 'app-studio';
 import { AppRootProps } from './AppRoot.types';
+import { ModalRouter } from '../Modal/Modal';
 
 export type { AppRootProps };
 
@@ -29,12 +30,24 @@ try {
  */
 export const AppRoot: React.FC<AppRootProps> = ({
   children,
+  modals,
+  onModalShow,
+  onModalHide,
   ...themeProps
 }) => {
   const tree = (
     <ThemeProvider {...themeProps}>
       <ResponsiveProvider>
-        <WindowSizeProvider>{children}</WindowSizeProvider>
+        <WindowSizeProvider>
+          {children}
+          {modals && (
+            <ModalRouter
+              modals={modals}
+              onShow={onModalShow}
+              onHide={onModalHide}
+            />
+          )}
+        </WindowSizeProvider>
       </ResponsiveProvider>
     </ThemeProvider>
   );

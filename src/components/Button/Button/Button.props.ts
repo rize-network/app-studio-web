@@ -64,6 +64,13 @@ export interface ButtonProps
   // Explicit text color (overrides auto-calculated color)
   textColor?: string;
 
+  // INTERNAL — set by the Button wrapper: content color declared by the
+  // instance itself (via `textColor`, or via the `backgroundColor` + `color`
+  // pair where `color` keeps its CSS meaning). Read from raw instance props
+  // before the design-system config merge, so config-level `textColor`
+  // defaults cannot masquerade as instance intent. Do not set manually.
+  explicitTextColor?: string;
+
   // Whether to reverse the colors (useful for dark backgrounds)
   reversed?: boolean;
 

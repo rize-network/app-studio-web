@@ -1,3 +1,5 @@
+import { ViewProps } from 'app-studio';
+
 // Defines the Size type which can be one of several predefined string values representing size categories for the component
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Defines the SwitchStyles type for styling with optional ViewProps for slider, circle, and label elements

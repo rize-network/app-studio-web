@@ -37,6 +37,7 @@ const ActionSheetView: React.FC<ActionSheetViewProps> = ({
   dismissOnBackdropPress = true,
   title,
   description,
+  header,
   children,
   items = [],
   isMulti = false,
@@ -175,6 +176,8 @@ const ActionSheetView: React.FC<ActionSheetViewProps> = ({
               )}
             </Vertical>
           )}
+
+          {header}
 
           <Vertical overflowY="auto" paddingBottom={4} {...views?.content}>
             {items.map((item, index) => {

@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 export type Variant = 'outline' | 'default' | 'none';
 
 export type Shape = 'default' | 'square' | 'rounded' | 'pill';

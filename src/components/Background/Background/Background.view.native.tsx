@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
-import { Animated, Easing, Dimensions } from 'react-native';
-import { View } from 'app-studio';
+import { Animated, Easing, useWindowDimensions } from 'react-native';
+import { View, useTheme } from 'app-studio';
 import {
   BackgroundProps,
   AuroraBackgroundProps,
@@ -27,12 +27,67 @@ import { Gradient } from '../../Gradient/Gradient';
 
 const BackgroundContext = createContext<BackgroundContextType>({});
 
-const SCREEN = Dimensions.get('window');
+const DEFAULT_HEIGHT = 200;
+const DEFAULT_WIDTH = 360;
+const EFFECT_GRADIENT_VIEWS = {
+  content: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    padding: 0,
+    zIndex: 1,
+    pointerEvents: 'box-none',
+  },
+} as any;
+
+const isRawColor = (value?: string) =>
+  typeof value === 'string' &&
+  (/^(#|rgb\(|rgba\(|hsl\(|hsla\()/.test(value) ||
+    ['black', 'transparent', 'white'].includes(value));
+
+const useColorResolver = (themeMode?: string) => {
+  const theme = useTheme();
+  const mode = themeMode ?? theme.themeMode;
+
+  return React.useCallback(
+    (value: string | undefined, fallback: string) => {
+      if (!value) return fallback;
+      if (isRawColor(value)) return value;
+      return theme.getColor(value, { themeMode: mode } as any) as string;
+    },
+    [mode, theme]
+  );
+};
+
+const durationForSpeed = (
+  speed: 'slow' | 'medium' | 'fast' | undefined,
+  values: { slow: number; medium: number; fast: number }
+) => {
+  switch (speed) {
+    case 'slow':
+      return values.slow;
+    case 'fast':
+      return values.fast;
+    default:
+      return values.medium;
+  }
+};
+
+const phaseProgress = (progress: Animated.Value, phase: number) =>
+  Animated.modulo(
+    Animated.add(progress as any, phase as any) as any,
+    1
+  ) as Animated.AnimatedInterpolation<number>;
 
 // A 0→1 value that loops forever. `delay` staggers multiple instances.
 const useLoop = (duration: number, delay = 0) => {
   const v = React.useRef(new Animated.Value(0)).current;
   React.useEffect(() => {
+    v.setValue(0);
     const anim = Animated.loop(
       Animated.timing(v, {
         toValue: 1,
@@ -40,7 +95,9 @@ const useLoop = (duration: number, delay = 0) => {
         delay,
         easing: Easing.linear,
         useNativeDriver: true,
-      })
+        isInteraction: false,
+      }),
+      { resetBeforeIteration: true }
     );
     anim.start();
     return () => anim.stop();
@@ -55,7 +112,7 @@ const Layer: React.FC<{ children?: React.ReactNode }> = ({ children }) =>
       zIndex={2}
       width="100%"
       height="100%"
-      pointerEvents="box-none"
+      pointerEvents={'box-none' as any}
     >
       {children}
     </View>
@@ -69,10 +126,11 @@ const AuroraBlob: React.FC<{
   top: number;
   dx: number;
   dy: number;
-  duration: number;
-  delay: number;
-}> = ({ color, size, left, top, dx, dy, duration, delay }) => {
-  const t = useLoop(duration, delay);
+  progress: Animated.Value;
+  phase: number;
+  opacity?: number;
+}> = ({ color, size, left, top, dx, dy, progress, phase, opacity = 0.4 }) => {
+  const t = phaseProgress(progress, phase);
   const translateX = t.interpolate({
     inputRange: [0, 0.5, 1],
     outputRange: [0, dx, 0],
@@ -92,7 +150,7 @@ const AuroraBlob: React.FC<{
         height: size,
         borderRadius: size / 2,
         backgroundColor: color,
-        opacity: 0.4,
+        opacity,
         transform: [{ translateX }, { translateY }],
       }}
     />
@@ -101,10 +159,18 @@ const AuroraBlob: React.FC<{
 
 const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
   children,
+  showRadialGradient = true,
   views,
   themeMode: elementMode,
+  type: _type,
+  animate: _animate,
+  animationDuration: _animationDuration,
   ...props
 }) => {
+  const { width } = useWindowDimensions();
+  const progress = useLoop(9000);
+  const opacity = showRadialGradient ? 0.42 : 0.28;
+
   return (
     <Gradient
       type="linear"
@@ -115,7 +181,8 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
       width="100%"
       minHeight={200}
       position="relative"
-      {...views?.container}
+      views={EFFECT_GRADIENT_VIEWS}
+      {...(views?.container as any)}
       {...props}
     >
       <AuroraBlob
@@ -125,28 +192,31 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
         top={-40}
         dx={60}
         dy={40}
-        duration={6000}
-        delay={0}
+        progress={progress}
+        phase={0}
+        opacity={opacity}
       />
       <AuroraBlob
         color="#a855f7"
         size={200}
-        left={SCREEN.width - 180}
+        left={width - 180}
         top={-20}
         dx={-50}
         dy={50}
-        duration={7500}
-        delay={500}
+        progress={progress}
+        phase={0.25}
+        opacity={opacity}
       />
       <AuroraBlob
         color="#2dd4bf"
         size={180}
-        left={SCREEN.width / 2 - 90}
+        left={width / 2 - 90}
         top={60}
         dx={40}
         dy={-30}
-        duration={9000}
-        delay={1000}
+        progress={progress}
+        phase={0.5}
+        opacity={opacity}
       />
       <Layer>{children}</Layer>
     </Gradient>
@@ -154,15 +224,15 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
 };
 
 // --- Meteors: thin streaks falling diagonally ---
-const Meteor: React.FC<{ left: number; duration: number; delay: number }> = ({
-  left,
-  duration,
-  delay,
-}) => {
-  const t = useLoop(duration, delay);
+const Meteor: React.FC<{
+  left: number;
+  progress: Animated.Value;
+  phase: number;
+}> = ({ left, progress, phase }) => {
+  const t = phaseProgress(progress, phase);
   const translateY = t.interpolate({
     inputRange: [0, 1],
-    outputRange: [-60, 260],
+    outputRange: [-80, 300],
   });
   const translateX = t.interpolate({
     inputRange: [0, 1],
@@ -190,16 +260,24 @@ const Meteor: React.FC<{ left: number; duration: number; delay: number }> = ({
   );
 };
 
-const Meteors: React.FC<MeteorsProps> = ({ children, ...props }) => {
-  const count = 12;
+const Meteors: React.FC<MeteorsProps> = ({
+  number = 12,
+  children,
+  type: _type,
+  animate: _animate,
+  animationDuration: _animationDuration,
+  ...props
+}) => {
+  const { width } = useWindowDimensions();
+  const progress = useLoop(3200);
+  const count = Math.max(1, number);
   const meteors = React.useMemo(
     () =>
       Array.from({ length: count }).map((_, i) => ({
-        left: 40 + ((i * 97) % (SCREEN.width + 120)),
-        duration: 2200 + ((i * 313) % 1800),
-        delay: (i * 350) % 3000,
+        left: 40 + ((i * 97) % (width + 120)),
+        phase: i / count,
       })),
-    []
+    [count, width]
   );
   return (
     <Gradient
@@ -211,10 +289,11 @@ const Meteors: React.FC<MeteorsProps> = ({ children, ...props }) => {
       width="100%"
       minHeight={200}
       position="relative"
+      views={EFFECT_GRADIENT_VIEWS}
       {...props}
     >
       {meteors.map((m, i) => (
-        <Meteor key={i} {...m} />
+        <Meteor key={i} progress={progress} {...m} />
       ))}
       <Layer>{children}</Layer>
     </Gradient>
@@ -222,7 +301,12 @@ const Meteors: React.FC<MeteorsProps> = ({ children, ...props }) => {
 };
 
 // --- Wall: static soft gradient (no motion on web either) ---
-const Wall: React.FC<WallProps> = ({ ...props }) => {
+const Wall: React.FC<WallProps> = ({
+  type: _type,
+  animate: _animate,
+  animationDuration: _animationDuration,
+  ...props
+}) => {
   return (
     <Gradient
       type="linear"
@@ -231,6 +315,7 @@ const Wall: React.FC<WallProps> = ({ ...props }) => {
       to="color-gray-50"
       width="100%"
       minHeight={200}
+      views={EFFECT_GRADIENT_VIEWS}
       {...props}
     />
   );
@@ -239,14 +324,22 @@ const Wall: React.FC<WallProps> = ({ ...props }) => {
 // --- Particles: small dots rising and fading ---
 const Particle: React.FC<{
   left: number;
+  bottom: number;
   size: number;
-  duration: number;
-  delay: number;
-}> = ({ left, size, duration, delay }) => {
-  const t = useLoop(duration, delay);
+  driftX: number;
+  color: string;
+  shape: 'circle' | 'square' | 'triangle';
+  progress: Animated.Value;
+  phase: number;
+}> = ({ left, bottom, size, driftX, color, shape, progress, phase }) => {
+  const t = phaseProgress(progress, phase);
+  const translateX = t.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, driftX],
+  });
   const translateY = t.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, -180],
+    outputRange: [0, -190],
   });
   const opacity = t.interpolate({
     inputRange: [0, 0.2, 0.8, 1],
@@ -257,30 +350,64 @@ const Particle: React.FC<{
       pointerEvents="none"
       style={{
         position: 'absolute',
-        bottom: 0,
+        bottom,
         left,
         width: size,
         height: size,
-        borderRadius: size / 2,
-        backgroundColor: '#e0e7ff',
+        borderRadius: shape === 'circle' ? size / 2 : 2,
+        backgroundColor: color,
         opacity,
-        transform: [{ translateY }],
+        transform: [{ translateX }, { translateY }],
       }}
     />
   );
 };
 
-const Particles: React.FC<ParticlesProps> = ({ ...props }) => {
-  const count = 22;
+const defaultParticleColors = [
+  'rgb(59, 130, 246)',
+  'rgb(147, 51, 234)',
+  'rgb(236, 72, 153)',
+  'rgb(34, 197, 94)',
+  'rgb(251, 146, 60)',
+  'rgb(168, 85, 247)',
+];
+
+const Particles: React.FC<ParticlesProps> = ({
+  children,
+  count = 22,
+  colors = defaultParticleColors,
+  speed = 'medium',
+  shapes = ['circle'],
+  themeMode: elementMode,
+  type: _type,
+  animate: _animate,
+  animationDuration: _animationDuration,
+  ...props
+}) => {
+  const { width } = useWindowDimensions();
+  const resolveColor = useColorResolver(elementMode);
+  const resolvedColors = React.useMemo(
+    () => colors.map((color) => resolveColor(color, color)),
+    [colors, resolveColor]
+  );
+  const duration = durationForSpeed(speed, {
+    slow: 9000,
+    medium: 6500,
+    fast: 4200,
+  });
+  const progress = useLoop(duration);
   const particles = React.useMemo(
     () =>
       Array.from({ length: count }).map((_, i) => ({
-        left: (i * 83) % SCREEN.width,
-        size: 3 + ((i * 7) % 4),
-        duration: 4000 + ((i * 271) % 3000),
-        delay: (i * 220) % 4000,
+        left: (i * 83) % Math.max(width, DEFAULT_WIDTH),
+        bottom: (i * 37) % 80,
+        size: 3 + ((i * 7) % 5),
+        driftX: ((i * 53) % 80) - 40,
+        color: resolvedColors[i % resolvedColors.length] ?? '#e0e7ff',
+        shape: shapes[i % shapes.length] ?? 'circle',
+        phase: i / Math.max(1, count),
       })),
-    []
+    [count, resolvedColors, shapes, width]
   );
   return (
     <Gradient
@@ -292,24 +419,53 @@ const Particles: React.FC<ParticlesProps> = ({ ...props }) => {
       width="100%"
       minHeight={200}
       position="relative"
+      views={EFFECT_GRADIENT_VIEWS}
       {...props}
     >
       {particles.map((p, i) => (
-        <Particle key={i} {...p} />
+        <Particle key={i} progress={progress} {...p} />
       ))}
+      <Layer>{children}</Layer>
     </Gradient>
   );
 };
 
 // --- Grid: drawn lines with a slow opacity pulse ---
-const Grid: React.FC<GridProps> = ({ ...props }) => {
-  const t = useLoop(4000, 0);
-  const opacity = t.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [0.15, 0.4, 0.15],
+const Grid: React.FC<GridProps> = ({
+  children,
+  gridSize = 30,
+  lineColor = 'rgba(59, 130, 246, 0.3)',
+  pulseColor = 'rgba(59, 130, 246, 0.8)',
+  animationSpeed = 'medium',
+  themeMode: elementMode,
+  type: _type,
+  animate: _animate,
+  animationDuration: _animationDuration,
+  ...props
+}) => {
+  const { width } = useWindowDimensions();
+  const resolveColor = useColorResolver(elementMode);
+  const cellSize = Math.max(8, gridSize);
+  const canvasWidth = Math.max(width, DEFAULT_WIDTH);
+  const duration = durationForSpeed(animationSpeed, {
+    slow: 5000,
+    medium: 3200,
+    fast: 1800,
   });
-  const cols = Math.ceil(SCREEN.width / 40);
-  const rows = 6;
+  const t = useLoop(duration);
+  const pulseOpacity = t.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [0.08, 0.22, 0.08],
+  });
+  const pulseTranslateX = t.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-cellSize * 2, canvasWidth],
+  });
+  const cols = Math.ceil(canvasWidth / cellSize);
+  const rows = Math.ceil(DEFAULT_HEIGHT / cellSize);
+  const resolvedLineColor = resolveColor(lineColor, lineColor);
+  const resolvedPulseColor = resolveColor(pulseColor, pulseColor);
+
   return (
     <Gradient
       type="linear"
@@ -320,64 +476,74 @@ const Grid: React.FC<GridProps> = ({ ...props }) => {
       width="100%"
       minHeight={200}
       position="relative"
+      views={EFFECT_GRADIENT_VIEWS}
       {...props}
     >
       {Array.from({ length: cols }).map((_, i) => (
-        <Animated.View
+        <View
           key={`c${i}`}
           pointerEvents="none"
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: i * 40,
-            width: 1,
-            backgroundColor: '#64748b',
-            opacity,
-          }}
+          position="absolute"
+          top={0}
+          bottom={0}
+          left={i * cellSize}
+          width={1}
+          backgroundColor={resolvedLineColor}
         />
       ))}
       {Array.from({ length: rows }).map((_, i) => (
-        <Animated.View
+        <View
           key={`r${i}`}
           pointerEvents="none"
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: i * 40,
-            height: 1,
-            backgroundColor: '#64748b',
-            opacity,
-          }}
+          position="absolute"
+          left={0}
+          right={0}
+          top={i * cellSize}
+          height={1}
+          backgroundColor={resolvedLineColor}
         />
       ))}
+      <Animated.View
+        pointerEvents="none"
+        style={{
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          width: cellSize * 2,
+          backgroundColor: resolvedPulseColor,
+          opacity: pulseOpacity,
+          transform: [{ translateX: pulseTranslateX }],
+        }}
+      />
+      <Layer>{children}</Layer>
     </Gradient>
   );
 };
 
 // --- Ripples: concentric rings expanding and fading ---
-const Ripple: React.FC<{ size: number; duration: number; delay: number }> = ({
-  size,
-  duration,
-  delay,
-}) => {
-  const t = useLoop(duration, delay);
-  const scale = t.interpolate({ inputRange: [0, 1], outputRange: [0.2, 1.4] });
+const Ripple: React.FC<{
+  size: number;
+  color: string;
+  progress: Animated.Value;
+  phase: number;
+}> = ({ size, color, progress, phase }) => {
+  const t = phaseProgress(progress, phase);
+  const scale = t.interpolate({ inputRange: [0, 1], outputRange: [0.15, 1] });
   const opacity = t.interpolate({ inputRange: [0, 1], outputRange: [0.5, 0] });
   return (
     <Animated.View
       pointerEvents="none"
       style={{
         position: 'absolute',
-        alignSelf: 'center',
+        left: '50%',
         top: '50%',
         width: size,
         height: size,
+        marginLeft: -size / 2,
         marginTop: -size / 2,
         borderRadius: size / 2,
         borderWidth: 2,
-        borderColor: '#3b82f6',
+        borderColor: color,
         opacity,
         transform: [{ scale }],
       }}
@@ -385,8 +551,42 @@ const Ripple: React.FC<{ size: number; duration: number; delay: number }> = ({
   );
 };
 
-const Ripples: React.FC<RipplesProps> = ({ ...props }) => {
-  const rings = [0, 1, 2, 3];
+const defaultRippleColors = [
+  'rgba(59, 130, 246, 0.6)',
+  'rgba(147, 51, 234, 0.6)',
+  'rgba(236, 72, 153, 0.6)',
+  'rgba(34, 197, 94, 0.6)',
+];
+
+const Ripples: React.FC<RipplesProps> = ({
+  children,
+  rippleCount = 4,
+  colors = defaultRippleColors,
+  maxSize = 220,
+  frequency = 3,
+  themeMode: elementMode,
+  type: _type,
+  animate: _animate,
+  animationDuration: _animationDuration,
+  ...props
+}) => {
+  const resolveColor = useColorResolver(elementMode);
+  const count = Math.max(1, rippleCount);
+  const duration = Math.max(2400, frequency * 1000);
+  const progress = useLoop(duration);
+  const resolvedColors = React.useMemo(
+    () => colors.map((color) => resolveColor(color, color)),
+    [colors, resolveColor]
+  );
+  const rings = React.useMemo(
+    () =>
+      Array.from({ length: count }).map((_, i) => ({
+        color: resolvedColors[i % resolvedColors.length] ?? '#3b82f6',
+        phase: i / count,
+      })),
+    [count, resolvedColors]
+  );
+
   return (
     <Gradient
       type="linear"
@@ -397,11 +597,13 @@ const Ripples: React.FC<RipplesProps> = ({ ...props }) => {
       width="100%"
       minHeight={200}
       position="relative"
+      views={EFFECT_GRADIENT_VIEWS}
       {...props}
     >
-      {rings.map((i) => (
-        <Ripple key={i} size={160} duration={3200} delay={i * 800} />
+      {rings.map((ripple, i) => (
+        <Ripple key={i} size={maxSize} progress={progress} {...ripple} />
       ))}
+      <Layer>{children}</Layer>
     </Gradient>
   );
 };

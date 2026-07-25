@@ -53,10 +53,13 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
 
   const fieldStyles = {
     margin: 0,
-    paddingVertical: 8,
+    // The field shell above already applies the vertical padding for the
+    // current size. Adding 8px here on top of it pushed a `md` DatePicker to
+    // 57px against a declared 40px.
+    paddingVertical: 0,
     paddingHorizontal: 0,
     width: '100%',
-    heigth: '100%',
+    height: '100%',
     border: 'none',
     on: {
       focus: {

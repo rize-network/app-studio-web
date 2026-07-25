@@ -160,10 +160,20 @@ export const TooltipView: React.FC<
 
   return (
     <View {...views?.container} {...(props as any)}>
-      <View ref={triggerRef} onPress={handlePress} onClick={handlePress} alignSelf="flex-start">
+      <View
+        ref={triggerRef}
+        onPress={handlePress}
+        onClick={handlePress}
+        alignSelf="flex-start"
+      >
         {children}
       </View>
-      <Modal visible={isOpen} transparent animationType="fade" onRequestClose={closeTooltip}>
+      <Modal
+        visible={isOpen}
+        transparent
+        animationType="fade"
+        onRequestClose={closeTooltip}
+      >
         {/* Transparent full-screen layer: tap anywhere to dismiss. The bubble is
             absolutely positioned next to the measured trigger. */}
         <View flex={1} onPress={closeTooltip} onClick={closeTooltip}>
@@ -187,7 +197,11 @@ export const TooltipView: React.FC<
             {...views?.content}
           >
             {typeof content === 'string' ? (
-              <Text color={contentColor} fontSize={contentFontSize} {...views?.text}>
+              <Text
+                color={contentColor}
+                fontSize={contentFontSize}
+                {...views?.text}
+              >
                 {content}
               </Text>
             ) : (

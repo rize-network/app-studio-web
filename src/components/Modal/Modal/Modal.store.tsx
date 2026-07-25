@@ -81,7 +81,6 @@ export const showModal = (
 };
 // A convenience function to programmatically hide a modal and trigger its 'onHide' callback.
 export const hideModal = (name?: string) => {
-  console.log('hideModal', name);
   // Triggers the registered 'onHide' callback for the hidden modal, allowing external effects.
   useModalStore.getState().onHide(name);
   // Calls the 'hide' action from the modal store to remove the modal from the state.

@@ -17,15 +17,21 @@ is the **physics**.
 
 ---
 
-## 0. TL;DR — the five rules that make a config coherent
+## 0. TL;DR — the six rules that make a config coherent
 
 1. **Stay vs adapt is decided by the value's *form*.**
    - **Raw hex** (`"#2563eb"`) → **constant** in both modes. Use for brand identity.
    - **`color-*` token** (`"color-black"`) → **flips** automatically. Use for structural neutrals.
+   - Corollary: **never branch on the mode to pick a color** (`isDark ? a : b`).
+     Both branches already flip, so a ternary double-inverts — or freezes if the
+     signal doesn't track the toggle. If you feel the need to branch, you picked
+     the wrong token form.
 2. **Brand colors are FILLS, not foreground.** `theme-primary` paints a
    background and pairs with `theme-onPrimary` ink. **Never** use `theme-primary`
    as the text/border color of something sitting directly on a surface — for a
-   black/white brand it collides with the surface and vanishes.
+   black/white brand it collides with the surface and vanishes. And never compute
+   the ink with luminance math — read `theme-onPrimary`; it's the
+   contrast-validated slot.
 3. **Surface-contrasting foreground uses neutrals.** Body text, borders,
    dividers, helper text → `theme-text` / `theme-muted` / `theme-border` (or the
    `color-*` neutrals). These flip with the surface, so they stay readable on any
@@ -33,12 +39,22 @@ is the **physics**.
 4. **`primary` and `onPrimary` must use the *same form*.** Both hex, or both
    `color-*`. That keeps the fill and its ink flipping together (or staying
    together) so the label never disappears.
-5. **Never put a token into a raw inline `style={{}}` or a gradient string.** The
-   resolver only runs on component **props**. Tokens in raw CSS silently break
-   (fine for hex, invisible for `color-*`). This rule is about *consuming* configs;
-   you don't hit it while authoring one, but it's why neutrals must be tokens.
+5. **Know where tokens resolve — and where they silently die.** The resolver runs
+   on component **props**, *including string props*: `border={`1px solid
+   ${token}`}`, gradient and `boxShadow` strings all get embedded tokens
+   rewritten to `var(--…)`. Tokens die in exactly three places: **raw React
+   `style={{}}` objects** (bypass the resolver), **JS pre-resolution** through
+   static/light-only maps (the result freezes to the light value), and
+   **malformed tokens built by concatenation** (rule 6). This rule is about
+   *consuming* configs; it's also why neutrals must be tokens.
+6. **Alpha is a token suffix, never blind concatenation.** `theme-primary-100` =
+   10 %, `color-blue-500-200` = 20 % (alpha 0–1000). Never append a second
+   suffix to an already-suffixed token (`color-gray-50-900-100` resolves against
+   a CSS variable that doesn't exist), and never concatenate onto a value of
+   unknown form (`${palette[0]}15` breaks the day the value is a token instead
+   of hex — route mixed-form values through a helper).
 
-Everything below is an expansion of these five rules.
+Everything below is an expansion of these six rules.
 
 ---
 
@@ -330,6 +346,7 @@ Run through every item — these map 1:1 to the failure modes this system has hi
 - [ ] `onPrimary` contrasts `primary` ≥ 4.5:1.
 - [ ] `primary` reads ≥ 3:1 on **both** white and black.
 - [ ] **No `color-*` shade outside `50…900`.** No `920/950/960`.
+- [ ] **`tokens.colors[].value` entries are hex** — they get embedded into gradients/charts where a token would break downstream.
 - [ ] **No brand slot used as body ink**; body uses `text` / `muted`.
 - [ ] **No `theme-primary` used as foreground-on-surface for a monochrome brand** (use `theme-text` / `theme-secondary`).
 - [ ] Every font in `typography` is listed in `metadata.googleFontLinks`; the stack ends in a system fallback.
@@ -341,6 +358,8 @@ Run through every item — these map 1:1 to the failure modes this system has hi
 
 ## 9. Anti-patterns (do NOT do these)
 
+Authoring a config:
+
 | ❌ Anti-pattern | Why it breaks | ✅ Instead |
 |----------------|---------------|-----------|
 | `"text": "#111111"` | Frozen dark ink → invisible on dark canvas | `"text": "color-black"` |
@@ -349,8 +368,21 @@ Run through every item — these map 1:1 to the failure modes this system has hi
 | `primary` hex + `onPrimary` `"color-white"` | Mismatched forms → label flips off the fill | Same form for both |
 | `theme-primary` as outline/link color on a **black** brand | Collides with the surface, vanishes | `theme-text` or `theme-secondary` |
 | Writing a separate `<brand>.dark.json` | Unnecessary; dark is derived | One config, adaptive tokens |
-| Adding `appearance === 'dark' ? … : …` anywhere | The system flips for you via tokens | Use the right token form |
 | `color-gray-950` | Invalid shade | `color-gray-900` |
+| `tokens.colors[].value` holding a token | Palette values get embedded in gradients/charts | Hex only in `tokens.colors[].value` |
+
+Consuming a config (component/page code) — each of these is a real production
+failure we have hit:
+
+| ❌ Anti-pattern | Why it breaks | ✅ Instead |
+|----------------|---------------|-----------|
+| `isDark ? 'color-gray-900' : 'color-gray-50'` | Both tokens already flip → the ternary double-inverts and picks the wrong one in dark | The single adaptive token |
+| Branching colors on a signal that isn't the toggle (`identity.theme`, cached mode) | The branch freezes; the section desyncs from the rest of the page when the user toggles | Adaptive tokens; mode flags only for behavior (e.g. `reversed`) |
+| Token inside raw `style={{ boxShadow: '… color-black-150' }}` | Raw `style` bypasses the resolver → declaration silently dropped | Move to the app-studio prop (`boxShadow={…}`) |
+| Pre-resolving in JS (`normalizeToHex(theme.canvas)`) and rendering the result | Static maps are light-only → value frozen to light mode | Pass the token as a prop; `getColor` only for non-app-studio consumers (charts, canvas, svg) |
+| `${palette[0]}15`, `hex + '80'`, `token + '-900'` on unknown-form values | Valid for only one form; double suffixes resolve to nonexistent variables — silent transparent | Single alpha suffix on a known token; a form-aware helper for mixed values |
+| Luminance math / hardcoded `color-white` for button ink | Discards the contrast-validated `onPrimary`; NaNs on token input | `color="theme-onPrimary"` on a `theme-primary` fill |
+| "Fixing" `border={`1px solid ${borderColor}`}` by pre-resolving it | Token-bearing **string props are valid** — the resolver rewrites them to `var(--…)` | Leave it (or use the `borderWidth`/`borderStyle`/`borderColor` prop triple) |
 
 ---
 

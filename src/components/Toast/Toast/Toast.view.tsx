@@ -89,7 +89,7 @@ export const ToastView: React.FC<ToastProps> = ({
       )}
       <Vertical gap={4} flex="1">
         <Text
-          size="sm"
+          fontSize="14px"
           lineHeight="20px"
           fontWeight="600"
           color={Theme[variant].content.color}
@@ -100,7 +100,7 @@ export const ToastView: React.FC<ToastProps> = ({
         </Text>
         {description && (
           <Text
-            size="xs"
+            fontSize="12px"
             lineHeight="18px"
             color={Theme[variant].content.color}
             fontWeight="400"
@@ -112,7 +112,7 @@ export const ToastView: React.FC<ToastProps> = ({
         )}
         {action && actionText && (
           <Text
-            size="sm"
+            fontSize="14px"
             fontWeight="600"
             marginTop="6px"
             cursor="pointer"

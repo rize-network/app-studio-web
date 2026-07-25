@@ -47,6 +47,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   onFocus,
   onBlur = () => {},
   themeMode: elementMode,
+  inputRef,
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
@@ -134,7 +135,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
       pointerEvents: 'none',
       position: 'absolute',
       right: 0,
-    },
+    } as const,
     ...fieldView,
   };
   const handleFocus = () => {
@@ -147,9 +148,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     if (onBlur) onBlur(event);
     setIsFocused(false);
   };
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement> | string
-  ) => {
+  const handleChange = (event: React.ChangeEvent<any> | string) => {
     if (typeof event === 'string') {
       setValue(event);
       if (onChangeText) onChangeText(event);
@@ -191,11 +190,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
-        minHeight={`${fieldSizeStyles[size].minHeight}px`}
-        paddingTop={fieldSizeStyles[size].shellPaddingY}
-        paddingBottom={fieldSizeStyles[size].shellPaddingY}
-        paddingLeft={fieldSizeStyles[size].shellPaddingX}
-        paddingRight={fieldSizeStyles[size].shellPaddingX}
+        // Sizing comes from FieldContent's shared scale (`Input/fieldSizes`),
+        // so every field control agrees on what `md` means.
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -212,6 +208,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
             </FieldLabel>
           )}
           <Input
+            ref={inputRef}
             type="text"
             id={id}
             name={name}

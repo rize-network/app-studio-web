@@ -3,7 +3,9 @@ import { cleanup, render } from '@testing-library/react';
 import { afterEach, expect, test, vi } from 'vitest';
 
 const renderColorPicker = async () => {
-  const { ColorPicker } = await import('src/components/ColorPicker/ColorPicker');
+  const { ColorPicker } = await import(
+    'src/components/ColorPicker/ColorPicker'
+  );
 
   return render(<ColorPicker label="Theme color" isOpen />);
 };

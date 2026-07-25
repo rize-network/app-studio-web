@@ -1,13 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  View,
-  Text,
-  Vertical,
-  Horizontal,
-  Center,
-  Image,
-} from 'app-studio';
+import { View, Text, Vertical, Horizontal, Center, Image } from 'app-studio';
 import { Button } from 'src/components/Button/Button';
 import { Features } from 'src/features';
 import { MULISH_FONT_FAMILY } from 'src/assets/fonts';
@@ -78,7 +71,13 @@ const Lead = ({ children }: any) => (
 );
 
 const Check = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
     <circle cx="12" cy="12" r="12" fill="currentColor" opacity="0.12" />
     <path
       d="M7 12.5l3.2 3.2L17 9"
@@ -302,40 +301,73 @@ export const LandingSections = () => {
             color="color-gray-100"
             whiteSpace="pre"
           >
-            <Text as="span" color="color-gray-400">{`// no stylesheet, no className\n`}</Text>
-            <Text as="span" color="color-blue-300">{'<View'}</Text>
+            <Text
+              as="span"
+              color="color-gray-400"
+            >{`// no stylesheet, no className\n`}</Text>
+            <Text as="span" color="color-blue-300">
+              {'<View'}
+            </Text>
             {`\n  `}
-            <Text as="span" color="color-orange-300">backgroundColor</Text>
+            <Text as="span" color="color-orange-300">
+              backgroundColor
+            </Text>
             {'='}
-            <Text as="span" color="color-green-300">"theme-primary"</Text>
+            <Text as="span" color="color-green-300">
+              "theme-primary"
+            </Text>
             {`\n  `}
-            <Text as="span" color="color-orange-300">padding</Text>
+            <Text as="span" color="color-orange-300">
+              padding
+            </Text>
             {'={'}
-            <Text as="span" color="color-purple-300">24</Text>
+            <Text as="span" color="color-purple-300">
+              24
+            </Text>
             {'}'}
             {`\n  `}
-            <Text as="span" color="color-orange-300">borderRadius</Text>
+            <Text as="span" color="color-orange-300">
+              borderRadius
+            </Text>
             {'={'}
-            <Text as="span" color="color-purple-300">12</Text>
+            <Text as="span" color="color-purple-300">
+              12
+            </Text>
             {'}'}
             {`\n  `}
-            <Text as="span" color="color-orange-300">_hover</Text>
+            <Text as="span" color="color-orange-300">
+              _hover
+            </Text>
             {'={{ '}
-            <Text as="span" color="color-orange-300">opacity</Text>
+            <Text as="span" color="color-orange-300">
+              opacity
+            </Text>
             {': '}
-            <Text as="span" color="color-purple-300">0.9</Text>
+            <Text as="span" color="color-purple-300">
+              0.9
+            </Text>
             {' }}'}
             {`\n  `}
-            <Text as="span" color="color-orange-300">media</Text>
+            <Text as="span" color="color-orange-300">
+              media
+            </Text>
             {'={{ '}
-            <Text as="span" color="color-orange-300">mobile</Text>
+            <Text as="span" color="color-orange-300">
+              mobile
+            </Text>
             {': { '}
-            <Text as="span" color="color-orange-300">padding</Text>
+            <Text as="span" color="color-orange-300">
+              padding
+            </Text>
             {': '}
-            <Text as="span" color="color-purple-300">12</Text>
+            <Text as="span" color="color-purple-300">
+              12
+            </Text>
             {' } }}'}
             {`\n`}
-            <Text as="span" color="color-blue-300">{'>'}</Text>
+            <Text as="span" color="color-blue-300">
+              {'>'}
+            </Text>
           </Text>
         </View>
       </Section>
@@ -367,7 +399,11 @@ export const LandingSections = () => {
       </Section>
 
       {/* ---- Final CTA --------------------------------------------------- */}
-      <Section background="color-blue-700" position="relative" overflow="hidden">
+      <Section
+        background="color-blue-700"
+        position="relative"
+        overflow="hidden"
+      >
         <Image
           src="/orange.webp"
           alt=""
@@ -439,7 +475,10 @@ export const LandingSections = () => {
             </Vertical>
             {[
               ['Components', ['Button', 'Modal', 'Accordion', 'DatePicker']],
-              ['Documentation', ['Getting started', 'Theming', 'Design system']],
+              [
+                'Documentation',
+                ['Getting started', 'Theming', 'Design system'],
+              ],
               ['Resources', ['GitHub', 'Gallery', 'Changelog']],
             ].map(([title, links]: any) => (
               <Vertical key={title} gap={12} minWidth={150}>

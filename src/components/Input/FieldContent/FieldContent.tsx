@@ -14,6 +14,7 @@ import {
   PaddingWithoutLabel,
   Shapes,
 } from '../Input.style';
+import { fieldSizeProps } from '../fieldSizes';
 import { Horizontal } from 'app-studio';
 
 import { ContentProps } from './FieldContent/FieldContent.props';
@@ -50,6 +51,11 @@ export const FieldContent: React.FC<ContentProps> = ({
     <Horizontal
       gap={8}
       width="100%"
+      // Fields set `width: 100%` and then add their own padding/border, so they
+      // only fit their container under border-box. Declared here rather than
+      // relying on a host `* { box-sizing: border-box }` reset, whose absence
+      // otherwise makes every field overflow its parent by padding + border.
+      boxSizing="border-box"
       display="flex"
       flexWrap="nowrap"
       alignItems="center"
@@ -62,6 +68,12 @@ export const FieldContent: React.FC<ContentProps> = ({
       opacity={isDisabled ? 0.7 : 1}
       transition="border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease"
       {...(showLabel ? PadddingWithLabel : PaddingWithoutLabel)}
+      // Sizing belongs to the shell, not to each field. Those padding constants
+      // above are size-independent (both are 10px/12px), so without this every
+      // field rendered at roughly `md` height whatever size was asked for.
+      // Placed after them so it wins, and before `views`/`props` so a caller can
+      // still override.
+      {...fieldSizeProps(size)}
       {...(typeof shadow === 'object' && shadow !== null ? shadow : {})}
       {...Shapes[shape]}
       {...InputVariants[variant]}

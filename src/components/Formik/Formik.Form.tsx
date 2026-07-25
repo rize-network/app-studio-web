@@ -20,23 +20,17 @@ interface CustomFormProps<T> extends FormikConfig<T> {
   initFocus?: string;
 }
 
+// A focusable input node — a web `HTMLInputElement` or a React Native
+// `TextInput` instance. Both expose a `.focus()` method, which is all the
+// focus chain relies on, so the registry is platform-agnostic.
+type FocusableInput = { focus: () => void } | null;
+
 interface FocusContextType {
   active: boolean;
   focusNextInput: (name: string) => void;
-  setInputRef: (name: string, ref: HTMLInputElement | null) => void;
+  setInputRef: (name: string, ref: FocusableInput) => void;
   handleSubmitEditing: (name: string) => void;
   getReturnKeyType: (name: string) => 'next' | 'done';
-}
-
-interface CustomFormProps<T> extends FormikConfig<T> {
-  autoFocus?: boolean;
-  initFocus?: string;
-}
-
-interface FocusContextType {
-  active: boolean;
-  focusNextInput: (name: string) => void;
-  setInputRef: (name: string, ref: HTMLInputElement | null) => void;
 }
 
 const FocusContext = createContext<FocusContextType>({
@@ -61,12 +55,12 @@ export const FormikForm = <T extends {}>({
     onChange(formik.values);
   }, [formik.values]);
 
-  const inputRefs = useRef<Record<string, HTMLInputElement | null>>({});
+  const inputRefs = useRef<Record<string, FocusableInput>>({});
   const inputNames = useRef<string[]>([]);
 
-  const setInputRef = (name: string, ref: HTMLInputElement | null) => {
+  const setInputRef = (name: string, ref: FocusableInput) => {
     inputRefs.current[name] = ref;
-    if (!inputNames.current.includes(name)) {
+    if (ref && !inputNames.current.includes(name)) {
       inputNames.current.push(name);
     }
   };
@@ -77,8 +71,11 @@ export const FormikForm = <T extends {}>({
       const nextIndex = currentIndex + 1;
       if (nextIndex < inputNames.current.length) {
         inputRefs.current[inputNames.current[nextIndex]]?.focus();
-      } else if (formik.onSubmit) {
-        formik.onSubmit(formik.values);
+      } else {
+        // Last field: submit. `useFormikContext` exposes `submitForm`, not the
+        // raw `onSubmit` handler — calling the latter (undefined) silently did
+        // nothing, so the final Return/Done key never submitted.
+        formik.submitForm?.();
       }
     }
   };

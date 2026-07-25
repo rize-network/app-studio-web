@@ -205,7 +205,11 @@ const TagInputView: React.FC<TagInputViewProps> = ({
             flexWrap="wrap"
             width="100%"
             minHeight={Typography.fontSizes[size]}
-            padding="8px 0"
+            // The field shell already applies the vertical padding for this
+            // size; adding 8px here on top of it made an empty TagInput 54px
+            // tall at `md` against a declared 40px. The container still grows
+            // freely once chips wrap, which is the point of `minHeight`.
+            padding="0"
             {...views?.tagsContainer}
           >
             {}

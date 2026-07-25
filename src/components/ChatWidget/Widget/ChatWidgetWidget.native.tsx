@@ -58,7 +58,13 @@ export const ChatWidgetWidget: React.FC<ChatWidgetWidgetProps> = ({
   };
 
   return (
-    <View position="absolute" bottom={24} right={24} zIndex={9999} alignItems="flex-end">
+    <View
+      position="absolute"
+      bottom={24}
+      right={24}
+      zIndex={9999}
+      alignItems="flex-end"
+    >
       {/* Chat panel */}
       {isOpen && (
         <View
@@ -86,7 +92,11 @@ export const ChatWidgetWidget: React.FC<ChatWidgetWidgetProps> = ({
             <Text fontWeight="700" color="color-gray-800">
               Assistant
             </Text>
-            <View onPress={() => setIsOpen(false)} padding={4} borderRadius={999}>
+            <View
+              onPress={() => setIsOpen(false)}
+              padding={4}
+              borderRadius={999}
+            >
               <CloseIcon widthHeight={18} color="color-gray-500" />
             </View>
           </Horizontal>
@@ -116,7 +126,9 @@ export const ChatWidgetWidget: React.FC<ChatWidgetWidgetProps> = ({
                     paddingVertical={8}
                     paddingHorizontal={12}
                     borderRadius={14}
-                    backgroundColor={isUser ? 'theme-primary' : 'color-gray-100'}
+                    backgroundColor={
+                      isUser ? 'theme-primary' : 'color-gray-100'
+                    }
                   >
                     <Text
                       fontSize={14}

@@ -8,7 +8,7 @@ import { useFormikInput } from './Formik.Hook';
 const TextFieldComponent: React.FC<TextFieldProps> = (
   props: TextFieldProps
 ) => {
-  const formProps = useFormikInput(props);
+  const formProps = useFormikInput(props, { focusable: true });
   const { value, ...textFieldStates } = useTextFieldState(props);
 
   return <TextFieldView {...textFieldStates} {...formProps} />;

@@ -31,6 +31,12 @@ const MessagePage = lazy(() => import('src/pages/message.page'));
 const MenubarPage = lazy(() => import('src/pages/menubar.page'));
 const ModalPage = lazy(() => import('src/pages/modal.page'));
 const DrawerPage = lazy(() => import('src/pages/drawer.page'));
+const PageLayoutPage = lazy(() => import('src/pages/pageLayout.page'));
+const KeyboardAvoidingViewPage = lazy(
+  () => import('src/pages/keyboardAvoidingView.page')
+);
+const SplashScreenPage = lazy(() => import('src/pages/splashScreen.page'));
+const RouterPage = lazy(() => import('src/pages/router.page'));
 const NavigationMenuPage = lazy(() => import('src/pages/navigationMenu.page'));
 const OTPInputPage = lazy(() => import('src/pages/otpInput.page'));
 const PaginationPage = lazy(() => import('src/pages/pagination.page'));
@@ -110,6 +116,30 @@ export const componentList: ComponentRoute[] = [
     path: '/drawer',
     element: <DrawerPage />,
     category: 'Layout',
+  },
+  {
+    name: 'PageLayout',
+    path: '/pagelayout',
+    element: <PageLayoutPage />,
+    category: 'Layout',
+  },
+  {
+    name: 'KeyboardAvoidingView',
+    path: '/keyboardavoidingview',
+    element: <KeyboardAvoidingViewPage />,
+    category: 'Layout',
+  },
+  {
+    name: 'SplashScreen',
+    path: '/splashscreen',
+    element: <SplashScreenPage />,
+    category: 'Feedback',
+  },
+  {
+    name: 'Router',
+    path: '/router',
+    element: <RouterPage />,
+    category: 'Navigation',
   },
   {
     name: 'HoverCard',

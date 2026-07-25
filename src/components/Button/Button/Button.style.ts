@@ -12,11 +12,25 @@
 import { ViewProps } from 'app-studio';
 import { Shape, Size, Variant } from './Button.type';
 
+/**
+ * Vertical padding is one pixel short of the obvious `(minHeight - lineHeight) / 2`
+ * on purpose.
+ *
+ * These boxes are `border-box`, and every bordered variant (`filled`, `outline`)
+ * draws a 1px border. Budgeting `paddingVertical * 2 + lineHeight === minHeight`
+ * leaves no room for it, so those variants rendered exactly 2px taller than the
+ * size they declare — a `md` Button came out at 42px next to a `md` TextField at
+ * 40px. Borderless variants are unaffected: their content is 2px under
+ * `minHeight`, which then floors them to the declared height anyway.
+ *
+ * The type scale is deliberately untouched; the correction is taken out of
+ * spacing rather than typography.
+ */
 export const ButtonSizes: Record<Size, ViewProps> = {
   xs: {
     minHeight: 24,
     paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingVertical: 5,
     fontSize: 10,
     fontWeight: 500,
     lineHeight: 12,
@@ -25,7 +39,7 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   sm: {
     minHeight: 32,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 7,
     fontSize: 12,
     fontWeight: 500,
     lineHeight: 16,
@@ -34,7 +48,7 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   md: {
     minHeight: 40,
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 9,
     fontSize: 14,
     fontWeight: 500,
     lineHeight: 20,
@@ -43,7 +57,7 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   lg: {
     minHeight: 48,
     paddingHorizontal: 24,
-    paddingVertical: 12,
+    paddingVertical: 11,
     fontSize: 16,
     fontWeight: 500,
     lineHeight: 24,
@@ -52,7 +66,7 @@ export const ButtonSizes: Record<Size, ViewProps> = {
   xl: {
     minHeight: 56,
     paddingHorizontal: 28,
-    paddingVertical: 14,
+    paddingVertical: 13,
     fontSize: 20,
     fontWeight: 500,
     lineHeight: 28,

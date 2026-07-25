@@ -169,10 +169,11 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   const showLabel = !!(label && (isFocused || value));
   const fieldStyles = {
     margin: 0,
-    paddingVertical: 8,
+    // The field shell already applies the vertical padding for the size.
+    paddingVertical: 0,
     paddingHorizontal: 0,
     width: '100%',
-    heigth: '100%',
+    height: '100%',
     border: 'none',
     on: { focus: { outline: 'none' } },
     transition: 'all 0.2s ease-in-out',

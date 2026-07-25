@@ -14,3 +14,4 @@ export * from './FormikTextArea';
 export * from './FormikTextField';
 export * from './FormikUploader';
 export * from './FormikSelector';
+export * from './FormikAutoFocus';

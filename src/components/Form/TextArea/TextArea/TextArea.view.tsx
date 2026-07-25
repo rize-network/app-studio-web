@@ -71,6 +71,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   onChangeText,
   onSubmit,
   isWorkerRunning,
+  inputRef,
   views = { label: {}, helperText: {} },
   ...props
 }) => {
@@ -212,6 +213,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             </FieldLabel>
           )}
           <Element
+            ref={inputRef}
             as="textarea"
             id={id}
             name={name}

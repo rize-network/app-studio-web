@@ -18,11 +18,14 @@ const LinkView = React.forwardRef<any, LinkViewProps>(
     {
       children,
       to = '/',
+      href,
       iconSize = 'sm',
       underline = 'default',
       isExternal = false,
       views = { icon: {}, text: {} },
       onPress,
+      isHovered,
+      setIsHovered,
       ...props
     },
     ref
@@ -30,9 +33,10 @@ const LinkView = React.forwardRef<any, LinkViewProps>(
     const textDecoration =
       underline === 'underline' || underline === 'hover' ? 'underline' : 'none';
 
+    const url = href ?? to;
     const handlePress = (e?: any) => {
-      if (isExternal && typeof to === 'string') {
-        Linking.openURL(to).catch(() => {
+      if ((isExternal || href) && typeof url === 'string') {
+        Linking.openURL(url).catch(() => {
           /* swallow – host may want to handle this */
         });
         return;

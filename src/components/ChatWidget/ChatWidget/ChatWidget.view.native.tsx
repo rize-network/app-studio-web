@@ -103,7 +103,9 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
                     paddingVertical={8}
                     paddingHorizontal={12}
                     borderRadius={14}
-                    backgroundColor={isUser ? 'theme-primary' : 'color-gray-100'}
+                    backgroundColor={
+                      isUser ? 'theme-primary' : 'color-gray-100'
+                    }
                   >
                     <Text
                       fontSize={(BubbleSizes as any)?.[size]?.fontSize ?? 14}
@@ -135,7 +137,12 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
 
       {/* Context chips */}
       {selectedContextElements.length > 0 && (
-        <Horizontal gap={8} flexWrap="wrap" paddingHorizontal={12} paddingBottom={8}>
+        <Horizontal
+          gap={8}
+          flexWrap="wrap"
+          paddingHorizontal={12}
+          paddingBottom={8}
+        >
           {selectedContextElements.map((element: any) => (
             <Horizontal
               key={element.id}

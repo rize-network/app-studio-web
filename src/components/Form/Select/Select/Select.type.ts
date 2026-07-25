@@ -1,3 +1,5 @@
+import { ViewProps } from 'app-studio';
+
 // Defines a 'Size' type with predefined size options for the Select component.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Declares a 'Shape' type with predefined shape options for the corners of the Select component.

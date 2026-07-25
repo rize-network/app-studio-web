@@ -22,6 +22,7 @@ export const FieldWrapper: React.FC<WrapperFieldProps> = ({
     flex={1}
     width="100%"
     maxWidth="100%"
+    boxSizing="border-box"
     {...props}
   >
     {children}

@@ -21,7 +21,7 @@ export interface LabelProps extends Omit<ViewProps, 'size'> {
   // Optional `htmlFor` prop forwarded to the underlying <label> element.
   dropDown?: ViewProps;
   // Optional dropdown styling passed through by parent fields (TextField, ColorInput, etc.).
-  error?: boolean;
+  error?: boolean | string;
   // Optional `error` flag forwarded by parent fields via `views?.label` spread.
   isDisabled?: boolean;
   // Optional `isDisabled` flag forwarded by parent fields via `views?.label` spread.

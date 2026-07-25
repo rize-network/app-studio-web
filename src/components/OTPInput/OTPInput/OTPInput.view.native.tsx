@@ -136,8 +136,10 @@ const OTPInputView: React.FC<
       : 56;
 
   // Defensive: never let a non-string value (e.g. a stray event object) turn
-  // into "[object Object]" across the slots.
-  const safeValue = typeof value === 'string' ? value : String(value ?? '');
+  // into "[object Object]" across the slots — used by both the plain OTPInput
+  // and the Formik wrapper, whose field value may briefly be a non-string.
+  const safeValue =
+    typeof value === 'string' && value !== '[object Object]' ? value : '';
   const slots = Array.from({ length }).map((_, idx) => ({
     char: safeValue[idx] ?? null,
     placeholderChar:

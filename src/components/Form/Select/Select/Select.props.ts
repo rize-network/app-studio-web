@@ -73,11 +73,11 @@ export interface MultiSelectProps extends Omit<InputProps, 'size'> {
   removeOption: Function;
   size?: Size;
 }
-export interface ItemProps extends Omit<InputProps, 'size'> {
+export interface ItemProps extends Omit<InputProps, 'size' | 'style'> {
   callback?: Function;
   option: Option;
   size?: Size;
-  style?: SelectStyles;
+  style?: ViewProps;
   isHovered?: boolean;
   setIsHovered?: Function;
 }

@@ -44,19 +44,89 @@ compatibility matrix, Reanimated wiring, and Metro/typecheck configuration.
 
 ## Quick Start
 
+Wrap your app in `ThemeProvider` — it defines the CSS variables that every
+`color-*` and `theme-*` token resolves against. Without it, tokens fall back to
+undefined variables and components render uncoloured.
+
 ```jsx
 import React from 'react';
+import { ThemeProvider, Vertical } from 'app-studio';
 import { Button, Text } from '@app-studio/components';
 
 function App() {
   return (
-    <div>
-      <Text>Hello, world!</Text>
-      <Button onClick={() => alert('Clicked!')}>Click me</Button>
-    </div>
+    <ThemeProvider>
+      <Vertical gap={12} padding={24}>
+        <Text>Hello, world!</Text>
+        <Button onClick={() => console.log('Clicked!')}>Click me</Button>
+      </Vertical>
+    </ThemeProvider>
   );
 }
 ```
+
+### Baseline document styles
+
+This library styles **components, not the document**. It ships no CSS reset, so
+the page keeps the browser's defaults until you set them yourself. On a fresh
+project that shows up immediately as:
+
+- body text in the browser's serif font, because nothing sets a `font-family`;
+- an 8px `body` margin, which makes any `100vh` shell overflow by 16px and
+  produces a scrollbar you did not ask for;
+- blue underlined `<a>` elements, including router links wrapping components.
+
+A dozen lines are enough, and none of it competes with the design system:
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+```
+
+Keep it to resets. Colours, spacing and typography should still come from the
+theme so they stay adaptive to light/dark mode.
+
+### Control sizes line up
+
+Form controls of the same `size` render at the same height, so they can sit in a
+row without extra alignment work. At `md` — the default — `TextField`, `Select`
+and `Button` are all exactly 40px:
+
+```jsx
+<Horizontal gap={10} alignItems="center">
+  <TextField name="search" placeholder="Search…" />
+  <Select name="status" placeholder="Any status" options={options} />
+  <Button variant="outline">Filter</Button>
+</Horizontal>
+```
+
+The scale is `xs` 24, `sm` 32, `md` 40, `lg` 48, `xl` 56, and it is shared: it
+lives in `Input/fieldSizes` and is applied by the field shell, so `TextField`,
+`Password`, `Select`, `DatePicker`, `TagInput` and `Button` all render exactly
+their declared height at every size — including bordered variants, which used to
+come out 2px taller.
+
+`ComboBox` is the exception: it takes no `size` prop
+(`Omit<InputProps, 'size'>`) and always renders at 40px, matching `md`.
 
 ## Component Categories
 

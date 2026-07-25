@@ -65,6 +65,11 @@ export interface TextFieldProps
   isMultiline?: boolean;
   // Optional number of rows when rendered in multiline mode.
   rows?: number;
+  // Optional callback ref to the underlying input node. Used by the Formik
+  // focus chain (FormikForm autoFocus) to register the field so Return/Next
+  // can move focus to it. A plain prop (not React `ref`) so non-text fields
+  // that ignore it stay wireable without ref warnings.
+  inputRef?: (node: { focus: () => void } | null) => void;
 }
 // The TextFieldViewProps interface extends TextFieldProps and adds props specific to the view-layer customization of the component.
 export interface TextFieldViewProps extends TextFieldProps {

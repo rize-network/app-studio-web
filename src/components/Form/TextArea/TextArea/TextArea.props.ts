@@ -34,6 +34,10 @@ export interface TextAreaProps
   labelProps?: any;
   onSubmit?: (input: string) => void;
   isWorkerRunning?: boolean;
+  // Optional callback ref to the underlying textarea/input node. Used by the
+  // Formik focus chain (FormikForm autoFocus) to register the field. A plain
+  // prop (not React `ref`) so fields that ignore it stay wireable.
+  inputRef?: (node: { focus: () => void } | null) => void;
 }
 export interface TextAreaViewProps extends TextAreaProps {
   hint?: string;

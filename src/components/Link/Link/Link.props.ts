@@ -11,15 +11,19 @@ export interface LinkProps extends Omit<ViewProps, 'size'> {
   isExternal?: boolean;
   // Optional prop to set the size of an icon if present within the link.
   iconSize?: Size;
-  // The href attribute specifying the URL the link points to.
-  to: string;
+  // Router path (or URL) the link points to. Defaults to '/'.
+  to?: string;
+  // Renders a plain anchor with this exact href, bypassing router navigation.
+  href?: string;
+  // Click handler attached to the anchor element itself.
+  onClick?: (event: React.MouseEvent) => void;
   // Optional styles object to customize the appearance using predefined style types.
   views?: Styles;
 }
 // Extends the basic LinkProps with additional properties related to the Link view.
 export interface LinkViewProps extends LinkProps {
-  // Indicates whether the link is under a hover state, which may adjust the link's style.
-  isHovered: boolean;
-  // A function to update the hover state of the link.
-  setIsHovered: Function;
+  // Legacy hover state, superseded by CSS-driven _hover styling on the anchor.
+  isHovered?: boolean;
+  // Legacy setter for the hover state.
+  setIsHovered?: Function;
 }

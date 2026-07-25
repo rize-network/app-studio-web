@@ -35,33 +35,8 @@ const withoutFieldShellView = <T extends Record<string, any>>(views?: T): T => {
   return layoutViews as T;
 };
 
-const fieldSizeStyles = {
-  xs: {
-    minHeight: 24,
-    shellPaddingY: 6,
-    shellPaddingX: 10,
-  },
-  sm: {
-    minHeight: 32,
-    shellPaddingY: 8,
-    shellPaddingX: 10,
-  },
-  md: {
-    minHeight: 40,
-    shellPaddingY: 10,
-    shellPaddingX: 12,
-  },
-  lg: {
-    minHeight: 48,
-    shellPaddingY: 12,
-    shellPaddingX: 14,
-  },
-  xl: {
-    minHeight: 56,
-    shellPaddingY: 14,
-    shellPaddingX: 16,
-  },
-} as const;
+// Field sizing now lives in `Input/fieldSizes` and is applied by FieldContent,
+// so this component no longer carries its own copy of the scale.
 
 /**
  * Item Component
@@ -166,14 +141,22 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     width: '95%',
     height: '100%',
     border: 'none',
-    paddingVertical: 4, // 3 × 4px grid
+    // No vertical padding here: the field shell above already applies
+    // `shellPaddingY` for the current size. Adding 4px on each side on top of
+    // it pushed the content box past the shell's `minHeight`, so a `md` Select
+    // rendered at 50px while a `md` TextField rendered at the intended 40px —
+    // visibly misaligning the two whenever they sit in the same row.
+    paddingVertical: 0,
     paddingHorizontal: 0,
 
     // Typography properties
     fontSize: Typography.fontSizes[size],
 
     fontWeight: '400', // Regular weight
-    lineHeight: '20px',
+    // Left to the natural line box, as TextField does. A fixed 20px line-height
+    // does not fit the shell it lives in: at `md` the shell is 40px tall with
+    // 10px of padding and a 1px border on each side, leaving 18px for content.
+    // Hard-coding 20px pushed every Select 2px past its own declared height.
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
 
     // Visual properties
@@ -558,11 +541,7 @@ const SelectView: React.FC<SelectViewProps> = ({
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
-        minHeight={`${fieldSizeStyles[size].minHeight}px`}
-        paddingTop={fieldSizeStyles[size].shellPaddingY}
-        paddingBottom={fieldSizeStyles[size].shellPaddingY}
-        paddingLeft={fieldSizeStyles[size].shellPaddingX}
-        paddingRight={fieldSizeStyles[size].shellPaddingX}
+        // Sizing comes from FieldContent's shared scale (`Input/fieldSizes`).
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
         position="relative"

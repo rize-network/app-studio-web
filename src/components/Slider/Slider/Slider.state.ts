@@ -45,7 +45,9 @@ export const useSliderState = ({
   min = 0,
   max = 100,
   step = 1,
-  value: controlledValue = 0,
+  // No default here: `value` must stay undefined in uncontrolled mode, or
+  // `isControlled` is always true and the slider is pinned to 0.
+  value: controlledValue,
   defaultValue,
   onChange,
   onDrag,
@@ -60,12 +62,13 @@ export const useSliderState = ({
   const trackRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
   const isControlled = controlledValue !== undefined;
-  const currentValue = isControlled ? controlledValue : internalValue;
+  const currentValue =
+    controlledValue !== undefined ? controlledValue : internalValue;
   useEffect(() => {
-    if (isControlled) {
+    if (controlledValue !== undefined) {
       setInternalValue(clamp(controlledValue, min, max));
     }
-  }, [controlledValue, isControlled, min, max]);
+  }, [controlledValue, min, max]);
   const updateValue = useCallback(
     (newValue: number) => {
       const clampedValue = clamp(newValue, min, max);

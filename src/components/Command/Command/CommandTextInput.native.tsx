@@ -47,6 +47,8 @@ export const CommandTextInput = React.forwardRef<any, CommandTextInputProps>(
             paddingVertical: 0,
             paddingHorizontal: 0,
             borderWidth: 0,
+            lineHeight: resolvedFontSize + 4,
+            includeFontPadding: false,
             backgroundColor:
               backgroundColor === 'transparent'
                 ? 'transparent'

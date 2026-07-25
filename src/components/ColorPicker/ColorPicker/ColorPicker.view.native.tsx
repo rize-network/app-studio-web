@@ -70,14 +70,62 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
     ...views?.trigger,
   };
   const colorGridStyles = {
-    ...DefaultColorPickerStyles.colorGrid,
+    flexDirection: 'row' as const,
+    flexWrap: 'wrap' as const,
+    justifyContent: 'flex-start' as const,
+    gap: 12,
+    paddingBottom: 16,
     ...views?.colorGrid,
   };
   const recentColorsStyles = {
-    ...DefaultColorPickerStyles.recentColors,
+    borderTopWidth: 1,
+    borderStyle: 'solid' as const,
+    borderTopColor: 'color-gray-100',
+    paddingTop: 12,
     ...views?.recentColors,
   };
   const displayColor = selectedColor || 'color-gray-200';
+  const sheetHeader = showCustomInput ? (
+    <View
+      paddingHorizontal={16}
+      paddingBottom={12}
+      {...DefaultColorPickerStyles.customInput}
+      {...views?.customInput}
+    >
+      <Horizontal gap={8} alignItems="center" marginBottom="10px">
+        <Text fontSize="12px" lineHeight="16px" color="color-gray-500">
+          HEX
+        </Text>
+      </Horizontal>
+      <TextField
+        placeholder="#1D4ED8"
+        value={customColor}
+        onChange={(e: any) =>
+          handleCustomColorChange(
+            typeof e === 'string' ? e : e?.target?.value ?? ''
+          )
+        }
+        size="sm"
+        isAutoFocus={false}
+        autoFocus={false}
+        right={
+          customColor ? (
+            <View
+              width="18px"
+              height="18px"
+              borderRadius="6px"
+              backgroundColor={customColor}
+              borderWidth="1px"
+              borderStyle="solid"
+              borderColor="color-gray-200"
+              onPress={handleCustomColorSubmit}
+              onClick={handleCustomColorSubmit}
+            />
+          ) : undefined
+        }
+      />
+    </View>
+  ) : undefined;
   return (
     <View {...containerStyles} {...props}>
       {label && (
@@ -130,23 +178,28 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
         onClose={handleClose}
         title={typeof label === 'string' ? label : 'Select a color'}
         size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+        maxHeight="82%"
+        showCancel
+        header={sheetHeader}
         views={{ sheet: views?.dropdown }}
       >
-        <View ref={dropdownRef} paddingHorizontal={16}>
+        <View ref={dropdownRef} paddingHorizontal={16} paddingBottom={12}>
           <View {...colorGridStyles}>
             {predefinedColors.map((colorOption, index) => (
               <View
                 key={index}
-                width="36px"
-                height="36px"
-                borderRadius="8px"
+                width="44px"
+                height="44px"
+                borderRadius="14px"
                 backgroundColor={colorOption.value}
-                borderWidth="1px"
+                borderWidth={
+                  selectedColor === colorOption.value ? '2px' : '1px'
+                }
                 borderStyle="solid"
                 borderColor={
                   selectedColor === colorOption.value
                     ? 'theme-primary'
-                    : 'transparent'
+                    : 'color-gray-200'
                 }
                 onPress={() => handleColorSelect(colorOption.value)}
                 onClick={() => handleColorSelect(colorOption.value)}
@@ -154,45 +207,6 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
               />
             ))}
           </View>
-          {showCustomInput && (
-            <View
-              {...DefaultColorPickerStyles.customInput}
-              {...views?.customInput}
-            >
-              <Horizontal gap={8} alignItems="center" marginBottom="10px">
-                <Text fontSize="12px" lineHeight="16px" color="color-gray-500">
-                  HEX
-                </Text>
-              </Horizontal>
-              <TextField
-                placeholder="#1D4ED8"
-                value={customColor}
-                onChange={(e: any) =>
-                  handleCustomColorChange(
-                    typeof e === 'string' ? e : e?.target?.value ?? ''
-                  )
-                }
-                size="sm"
-                isAutoFocus={false}
-                autoFocus={false}
-                right={
-                  customColor ? (
-                    <View
-                      width="18px"
-                      height="18px"
-                      borderRadius="6px"
-                      backgroundColor={customColor}
-                      borderWidth="1px"
-                      borderStyle="solid"
-                      borderColor="color-gray-200"
-                      onPress={handleCustomColorSubmit}
-                      onClick={handleCustomColorSubmit}
-                    />
-                  ) : undefined
-                }
-              />
-            </View>
-          )}
           {showRecentColors && recentColors.length > 0 && (
             <View {...recentColorsStyles}>
               <Text
@@ -208,9 +222,9 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
                 {recentColors.map((color, index) => (
                   <View
                     key={index}
-                    width="24px"
-                    height="24px"
-                    borderRadius="8px"
+                    width="32px"
+                    height="32px"
+                    borderRadius="10px"
                     backgroundColor={color}
                     borderWidth="1px"
                     borderStyle="solid"

@@ -18,7 +18,7 @@ import {
   getButtonVariants,
 } from './Button.style';
 import { useDesignSystem, deepMerge } from 'src/design-system';
-import { Variant } from './Button.type.d';
+import { Variant } from './Button.type';
 
 // --- Helper: Button Content ---
 const ButtonContent: React.FC<{
@@ -122,6 +122,7 @@ const ButtonView = React.memo(
         backgroundColor,
         color,
         textColor,
+        explicitTextColor,
         reversed = false,
         isAuto = true,
         isFilled,
@@ -146,7 +147,9 @@ const ButtonView = React.memo(
         : isLoading
         ? 'theme-loading'
         : baseColorKey;
-      const textColorKey = textColor ?? 'color-white';
+      // Mirrors Button.view.tsx: instance-declared `explicitTextColor`
+      // (resolved by the Button wrapper) wins over a config's `textColor`.
+      const textColorKey = explicitTextColor ?? textColor ?? 'color-white';
 
       const { config } = useDesignSystem();
       const theme = config?.theme;
@@ -170,7 +173,10 @@ const ButtonView = React.memo(
         return basePalette;
       }, [mainColorKey, textColorKey, reversed, theme, buttonConfig?.variants]);
 
-      const base = palette[variant];
+      const variantBase = palette[variant];
+      const base = explicitTextColor
+        ? { ...variantBase, color: explicitTextColor }
+        : variantBase;
       const finalContentColor = (base?.color as string) ?? textColorKey;
 
       const content = (

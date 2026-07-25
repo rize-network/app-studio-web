@@ -1,3 +1,5 @@
+import { ViewProps } from 'app-studio';
+
 // Defines the possible predefined sizes for the Selector component, allowing for consistent scaling.
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 // Defines the available visual shapes for the Selector component, affecting its border radius and overall appearance.

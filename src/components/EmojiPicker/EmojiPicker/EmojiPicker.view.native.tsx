@@ -84,7 +84,11 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
     ...views?.trigger,
   };
   const emojiGridStyles = {
-    ...DefaultEmojiPickerStyles.emojiGrid,
+    flexDirection: 'row' as const,
+    flexWrap: 'wrap' as const,
+    justifyContent: 'flex-start' as const,
+    gap: 8,
+    paddingVertical: 4,
     ...views?.emojiGrid,
   };
   const availableCategories = enabledCategories.filter((category) => {
@@ -93,6 +97,67 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
     }
     return true;
   });
+  const sheetHeader =
+    showSearch || showCategories ? (
+      <View paddingHorizontal={16} paddingBottom={8}>
+        {showSearch && (
+          <View paddingBottom={showCategories ? 10 : 0} {...views?.searchInput}>
+            <TextField
+              placeholder="Search emojis..."
+              value={searchQuery}
+              onChange={(e: any) =>
+                handleSearchChange(
+                  typeof e === 'string' ? e : e?.target?.value ?? ''
+                )
+              }
+              size="sm"
+              isAutoFocus={false}
+              autoFocus={false}
+            />
+          </View>
+        )}
+        {showCategories && (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+          >
+            <Horizontal gap={6} paddingBottom={4} {...views?.categoryTabs}>
+              {availableCategories.map((category) => (
+                <View
+                  key={category}
+                  minWidth={40}
+                  minHeight={36}
+                  paddingHorizontal={10}
+                  alignItems="center"
+                  justifyContent="center"
+                  borderRadius={999}
+                  backgroundColor={
+                    activeCategory === category
+                      ? 'color-blue-50'
+                      : 'color-gray-100'
+                  }
+                  onPress={() => handleCategoryChange(category)}
+                  onClick={() => handleCategoryChange(category)}
+                  {...views?.categoryTab}
+                >
+                  <Text
+                    fontSize={18}
+                    color={
+                      activeCategory === category
+                        ? 'theme-primary'
+                        : 'color-gray-700'
+                    }
+                  >
+                    {CategoryLabels[category]}
+                  </Text>
+                </View>
+              ))}
+            </Horizontal>
+          </ScrollView>
+        )}
+      </View>
+    ) : undefined;
   return (
     <View {...containerStyles} {...props}>
       {label && (
@@ -135,65 +200,26 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
         onClose={handleClose}
         title={typeof label === 'string' ? label : 'Select an emoji'}
         size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+        maxHeight="82%"
+        showCancel
+        header={sheetHeader}
         views={{ sheet: views?.dropdown }}
       >
-        <View ref={dropdownRef} paddingHorizontal={12}>
-          {showSearch && (
-            <View paddingBottom={8} {...views?.searchInput}>
-              <TextField
-                placeholder="Search emojis..."
-                value={searchQuery}
-                onChange={(e: any) =>
-                  handleSearchChange(
-                    typeof e === 'string' ? e : e?.target?.value ?? ''
-                  )
-                }
-                size="sm"
-                isAutoFocus={false}
-                autoFocus={false}
-              />
-            </View>
-          )}
-          {showCategories && (
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              keyboardShouldPersistTaps="handled"
-            >
-              <Horizontal gap={4} paddingBottom={8} {...views?.categoryTabs}>
-                {availableCategories.map((category) => (
-                  <View
-                    key={category}
-                    paddingHorizontal={10}
-                    paddingVertical={6}
-                    borderRadius={8}
-                    {...(activeCategory === category && {
-                      backgroundColor: 'color-blue-50',
-                    })}
-                    onPress={() => handleCategoryChange(category)}
-                    onClick={() => handleCategoryChange(category)}
-                    {...views?.categoryTab}
-                  >
-                    <Text
-                      color={
-                        activeCategory === category
-                          ? 'theme-primary'
-                          : 'color-gray-600'
-                      }
-                    >
-                      {CategoryLabels[category]}
-                    </Text>
-                  </View>
-                ))}
-              </Horizontal>
-            </ScrollView>
-          )}
+        <View ref={dropdownRef} paddingHorizontal={16} paddingBottom={12}>
           <View {...emojiGridStyles}>
             {filteredEmojis.length > 0 ? (
               filteredEmojis.map((emoji, index) => (
                 <View
                   key={`${emoji.emoji}-${index}`}
                   {...DefaultEmojiPickerStyles.emoji}
+                  width="44px"
+                  height="44px"
+                  borderRadius={12}
+                  backgroundColor={
+                    selectedEmoji === emoji.emoji
+                      ? 'color-blue-50'
+                      : 'transparent'
+                  }
                   onPress={() => handleEmojiSelect(emoji)}
                   onClick={() => handleEmojiSelect(emoji)}
                   {...views?.emoji}

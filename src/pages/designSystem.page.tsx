@@ -726,10 +726,10 @@ const HeroSection = ({ config }: { config: DesignSystemConfig }) => {
           </Text>
 
           <Horizontal gap={12} flexWrap="wrap">
-            <Button colorScheme="primary" size="md">
+            <Button color="theme-primary" size="md">
               Get started
             </Button>
-            <Button variant="outline" colorScheme="primary" size="md">
+            <Button variant="outline" color="theme-primary" size="md">
               View docs
             </Button>
           </Horizontal>
@@ -2606,22 +2606,24 @@ const ProductCardSample = ({
 const ButtonsSample = ({ palette }: { palette: SurfacePalette }) => (
   <Vertical gap={14}>
     <Horizontal gap={12} flexWrap="wrap" alignItems="center">
-      <Button colorScheme="primary">Primary</Button>
-      <Button colorScheme="secondary">Secondary</Button>
-      <Button colorScheme="black">Black</Button>
-      <Button colorScheme="white">White</Button>
+      <Button color="theme-primary">Primary</Button>
+      <Button color="theme-secondary">Secondary</Button>
+      <Button color="color-black">Black</Button>
+      <Button color="color-white" textColor="color-black">
+        White
+      </Button>
     </Horizontal>
     <Horizontal gap={12} flexWrap="wrap" alignItems="center">
-      <Button variant="outline" colorScheme="primary">
+      <Button variant="outline" color="theme-primary">
         Primary
       </Button>
-      <Button variant="outline" colorScheme="secondary">
+      <Button variant="outline" color="theme-secondary">
         Secondary
       </Button>
-      <Button variant="outline" colorScheme="black">
+      <Button variant="outline" color="color-black">
         Black
       </Button>
-      <Button variant="outline" colorScheme="white">
+      <Button variant="outline" color="color-white">
         White
       </Button>
     </Horizontal>

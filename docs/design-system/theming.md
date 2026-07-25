@@ -187,6 +187,44 @@ function Snippet() {
 }
 ```
 
+### 3.5 Where tokens resolve — and where they silently die
+
+The resolver runs on **app-studio component props — including string props**.
+`processStyleProperty` scans any string prop value for tokens and rewrites each
+to `var(--…)`, so all of these are valid and flip per mode:
+
+```tsx
+<View borderColor="theme-border" />                                   // plain prop
+<View border={`1px solid ${borderColor}`} />                          // token inside a shorthand string — VALID
+<View background={`linear-gradient(90deg, ${palette0}, transparent)`} /> // token inside a gradient string — VALID
+<View boxShadow={`0 10px 25px -5px color-black-300`} />               // token inside a shadow string — VALID
+```
+
+Tokens die in exactly **three** places:
+
+1. **Raw React `style={{}}` objects** (and any CSS emitted outside app-studio
+   props — `className` CSS, `<style>` strings, iframe-injected CSS). These
+   bypass the resolver; the token is invalid CSS and the whole declaration is
+   silently dropped. Symptom: missing shadow/background/border, no error.
+2. **JS pre-resolution.** Resolving a token to a hex in JS (a static token→hex
+   map, a `normalizeToHex`-style helper, `getColorHex` cached at module scope)
+   produces the **light** value and freezes it — the rendered color never flips.
+   Pass the token through as a prop instead; call `useTheme().getColor` only for
+   non-app-studio consumers (charts, canvas, svg attributes), inside the
+   component so it tracks the live mode.
+3. **Malformed tokens from concatenation.** A second alpha suffix on an
+   already-suffixed token (`color-gray-50-900` + `-100` → `color-gray-50-900-100`)
+   resolves against a CSS variable that does not exist; a suffix concatenated
+   onto a value of unknown form (`${palette[0]}15`) is valid for hex and broken
+   for tokens. Append a **single** alpha suffix to a **known** token; route
+   mixed-form values through a form-aware helper.
+
+Corollary — the mode-branching trap: never pick a color with
+`isDark ? tokenA : tokenB`. Both tokens already flip, so the ternary
+double-inverts (or freezes, if the branching signal doesn't track the toggle).
+Mode flags are for *behavior* (e.g. a Button's `reversed`), never for choosing
+a color value.
+
 ---
 
 ## 4. Token reference

@@ -10,7 +10,7 @@ export const DefaultTextArea = () => {
         rows={4}
         placeholder="Write a message…"
         value={value}
-        onChangeText={setValue}
+        onChange={(event) => setValue(event.target.value)}
       />
       <TextArea rows={3} hasError placeholder="With error state" />
       <TextArea rows={2} isDisabled value="Disabled content" />

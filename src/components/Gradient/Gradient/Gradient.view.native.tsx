@@ -10,6 +10,7 @@
  */
 
 import React, { useMemo } from 'react';
+import { Animated, Easing } from 'react-native';
 import { View, useTheme } from 'app-studio';
 import { GradientProps } from './Gradient.props';
 import { DefaultColorStops, DefaultGradientStyles } from './Gradient.style';
@@ -65,6 +66,45 @@ const parsePosition = (
   return Number.isFinite(n) ? (n > 1 ? n / 100 : n) : fallback;
 };
 
+const durationMs = (duration?: string | number): number => {
+  if (typeof duration === 'number')
+    return duration < 100 ? duration * 1000 : duration;
+  if (!duration) return 3000;
+  const value = String(duration).trim();
+  if (value.endsWith('ms')) return parseFloat(value) || 3000;
+  if (value.endsWith('s')) return (parseFloat(value) || 3) * 1000;
+  const parsed = parseFloat(value);
+  return parsed < 100 ? parsed * 1000 : parsed || 3000;
+};
+
+const useGradientMotion = (enabled: boolean, duration: number) => {
+  const progress = React.useRef(new Animated.Value(0)).current;
+
+  React.useEffect(() => {
+    if (!enabled) {
+      progress.stopAnimation();
+      progress.setValue(0);
+      return;
+    }
+
+    const animation = Animated.loop(
+      Animated.timing(progress, {
+        toValue: 1,
+        duration,
+        easing: Easing.inOut(Easing.sin),
+        useNativeDriver: true,
+        isInteraction: false,
+      }),
+      { resetBeforeIteration: true }
+    );
+
+    animation.start();
+    return () => animation.stop();
+  }, [duration, enabled, progress]);
+
+  return progress;
+};
+
 export const GradientView: React.FC<GradientProps> = ({
   type = 'linear',
   direction = 'to-right',
@@ -77,8 +117,8 @@ export const GradientView: React.FC<GradientProps> = ({
   // not honoured on native:
   shape: _shape,
   position: _position,
-  animate: _animate,
-  animationDuration: _animationDuration,
+  animate = false,
+  animationDuration = 3,
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
@@ -115,10 +155,41 @@ export const GradientView: React.FC<GradientProps> = ({
   }, [colorStops]);
 
   const points = directionToPoints(direction);
+  const animationMs = durationMs(animationDuration);
+  const progress = useGradientMotion(
+    !!animate && type !== 'conic',
+    animationMs
+  );
 
   // No LinearGradient peer present (or conic, which RN can't render) → flat
   // color fallback.
   const useFlatFallback = !LinearGradient || type === 'conic';
+
+  const animatedLayerStyle = useMemo(() => {
+    if (!animate) return undefined;
+
+    const translateX = progress.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: [-40, 40, -40],
+    });
+    const translateY = progress.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: type === 'radial' ? [-16, 16, -16] : [-10, 10, -10],
+    });
+    const scale = progress.interpolate({
+      inputRange: [0, 0.5, 1],
+      outputRange: type === 'radial' ? [1, 1.12, 1] : [1.06, 1.12, 1.06],
+    });
+
+    return {
+      position: 'absolute' as const,
+      top: -48,
+      left: -48,
+      right: -48,
+      bottom: -48,
+      transform: [{ translateX }, { translateY }, { scale }],
+    };
+  }, [animate, progress, type]);
 
   // IMPORTANT: the size/shape props (`height="100px"`, `width="100%"`,
   // `borderRadius="12px"`, color tokens, …) are app-studio style props, NOT raw
@@ -136,15 +207,32 @@ export const GradientView: React.FC<GradientProps> = ({
       {...views?.container}
       {...props}
     >
-      {!useFlatFallback && (
-        <LinearGradient
-          colors={resolvedColors}
-          locations={locations}
-          start={points.start}
-          end={points.end}
-          style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-        />
-      )}
+      {!useFlatFallback &&
+        (animate ? (
+          <Animated.View pointerEvents="none" style={animatedLayerStyle}>
+            <LinearGradient
+              colors={resolvedColors}
+              locations={locations}
+              start={points.start}
+              end={points.end}
+              style={{ flex: 1 }}
+            />
+          </Animated.View>
+        ) : (
+          <LinearGradient
+            colors={resolvedColors}
+            locations={locations}
+            start={points.start}
+            end={points.end}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}
+          />
+        ))}
       {children && (
         <View {...DefaultGradientStyles.content} {...views?.content}>
           {children}

@@ -94,10 +94,10 @@ export const CountryPickerView: React.FC<CountryPickerViewProps> = ({
   const showLabel = !!(label && (isFocused || value));
   const fieldStyles = {
     margin: 0,
-    paddingVertical: 8,
+    paddingVertical: 0,
     paddingHorizontal: 0,
     width: '100%',
-    heigth: '100%',
+    height: '100%',
     border: 'none',
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',

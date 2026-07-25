@@ -17,7 +17,7 @@ import {
   cssVar,
 } from './Button.style';
 import { useDesignSystem, deepMerge } from 'src/design-system';
-import { Variant } from './Button.type.d';
+import { Variant } from './Button.type';
 
 // --- Helper: Button Content ---
 // Renders the inner content: Loader, Icon, and Children.
@@ -204,7 +204,7 @@ const BorderWrapper: React.FC<{
     onClick={onClick}
     boxShadow={shadow}
     padding={borderWidth}
-    width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+    width={isFilled ? '100%' : isAuto ? 'fit-content' : undefined}
     {...views?.container}
     {...props}
   >
@@ -367,7 +367,7 @@ const StandardButton: React.FC<
         display="inline-flex"
         alignItems="center"
         justifyContent="center"
-        width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+        width={isFilled ? '100%' : isAuto ? 'fit-content' : undefined}
         borderRadius={ButtonShapes[shape as keyof typeof ButtonShapes]}
         boxShadow={shadow as any}
         transition="background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease"
@@ -495,7 +495,7 @@ const StandardButton: React.FC<
           backgroundPosition: bgPosEnd,
           transitionDelay: delayEnter,
         }}
-        width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+        width={isFilled ? '100%' : isAuto ? 'fit-content' : undefined}
         {...views?.container}
         {...props}
       >
@@ -535,7 +535,7 @@ const StandardButton: React.FC<
       display="inline-flex"
       alignItems="center"
       justifyContent="center"
-      width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+      width={isFilled ? '100%' : isAuto ? 'fit-content' : undefined}
       /* visuals */
       borderRadius={ButtonShapes[shape]}
       boxShadow={shadow as any}
@@ -565,6 +565,7 @@ const ButtonView = React.memo(
         backgroundColor, // Primary override for main color
         color, // Main button color (theme tokens or color palette)
         textColor, // Explicit text color
+        explicitTextColor, // Instance-declared content color (set by wrapper)
         reversed = false, // Reverse colors for dark backgrounds
         isAuto = true,
         isFilled,
@@ -606,8 +607,10 @@ const ButtonView = React.memo(
         ? 'theme-loading'
         : baseColorKey;
 
-      /* TEXT COLOR – token; defaults to color-white */
-      const textColorKey = textColor ?? 'color-white';
+      /* TEXT COLOR – instance-declared `explicitTextColor` (resolved by the
+       * Button wrapper before the design-system merge) wins over a config's
+       * `textColor`, which stays advisory. Falls back to color-white. */
+      const textColorKey = explicitTextColor ?? textColor ?? 'color-white';
 
       /* variant palette */
       const { config } = useDesignSystem();
@@ -637,7 +640,12 @@ const ButtonView = React.memo(
       // Fall back to the `filled` palette for any unrecognised variant so an
       // unknown value never renders an unstyled (no-background) button — which
       // would drop white label text onto a light surface and fail contrast.
-      const base = palette[variant] ?? palette.filled;
+      const variantBase = palette[variant] ?? palette.filled;
+      // An explicit content color overrides the variant's auto-calculated one
+      // (outline/ghost/link derive it from the main tone otherwise).
+      const base = explicitTextColor
+        ? { ...variantBase, color: explicitTextColor }
+        : variantBase;
       const finalContentColor = (base?.color as string) ?? textColorKey;
 
       // Render content logic safely

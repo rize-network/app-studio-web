@@ -37,7 +37,8 @@ export function useAudioRecording() {
           PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
           {
             title: 'Microphone permission',
-            message: 'This demo needs access to your microphone to record audio.',
+            message:
+              'This demo needs access to your microphone to record audio.',
             buttonPositive: 'Allow',
             buttonNegative: 'Deny',
           }

@@ -20,6 +20,7 @@ export const FieldContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
       gap={4}
       position="relative"
       width="100%"
+      boxSizing="border-box"
       marginVertical={0}
       {...props}
       {...views?.container}

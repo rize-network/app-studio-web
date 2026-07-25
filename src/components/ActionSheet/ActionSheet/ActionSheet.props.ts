@@ -18,6 +18,7 @@ export interface ActionSheetProps
   dismissOnBackdropPress?: boolean;
   title?: React.ReactNode;
   description?: React.ReactNode;
+  header?: React.ReactNode;
   children?: React.ReactNode;
   items?: ActionSheetItem[];
   value?: ActionSheetValue;

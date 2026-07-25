@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { PasswordProps } from './Password.props';
 import { useTextFieldState } from '../../TextField/TextField/TextField.state';
 
-export const usePasswordState = (props: PasswordProps) => {
+export const usePasswordState = (
+  props: PasswordProps
+): PasswordProps &
+  ReturnType<typeof useTextFieldState> & {
+    isVisible: boolean;
+    setIsVisible: Dispatch<SetStateAction<boolean>>;
+  } => {
   const textFieldStates = useTextFieldState(props);
   const [isVisible, setIsVisible] = useState(false);
 

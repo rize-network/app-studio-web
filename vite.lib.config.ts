@@ -10,6 +10,9 @@ export default defineConfig({
       include: [
         'src/components',
         'src/design-system',
+        'src/utils/elevation.ts',
+        'src/utils/id.ts',
+        'src/utils/generateId.ts',
         'src/pages/designSystem.page.tsx',
       ],
       outDir: 'dist',

@@ -32,7 +32,14 @@ const HeroArt = () => (
     }}
   >
     <defs>
-      <linearGradient id="haBg" x1="0" y1="0" x2="520" y2="420" gradientUnits="userSpaceOnUse">
+      <linearGradient
+        id="haBg"
+        x1="0"
+        y1="0"
+        x2="520"
+        y2="420"
+        gradientUnits="userSpaceOnUse"
+      >
         <stop stopColor="#FFFFFF" />
         <stop offset="1" stopColor="#F6F8FF" />
       </linearGradient>
@@ -42,7 +49,16 @@ const HeroArt = () => (
       </linearGradient>
     </defs>
     {/* window */}
-    <rect x="8" y="8" width="504" height="404" rx="22" fill="url(#haBg)" stroke="#E6EAF2" strokeWidth="2" />
+    <rect
+      x="8"
+      y="8"
+      width="504"
+      height="404"
+      rx="22"
+      fill="url(#haBg)"
+      stroke="#E6EAF2"
+      strokeWidth="2"
+    />
     <rect x="8" y="8" width="504" height="44" rx="22" fill="#FFFFFF" />
     <rect x="8" y="40" width="504" height="12" fill="#FFFFFF" />
     <circle cx="34" cy="30" r="6" fill="#F87171" />
@@ -51,7 +67,15 @@ const HeroArt = () => (
     <rect x="190" y="22" width="180" height="16" rx="8" fill="#EEF2F9" />
     {/* sidebar */}
     <rect x="24" y="68" width="120" height="328" rx="14" fill="#F4F6FB" />
-    <rect x="40" y="92" width="88" height="12" rx="6" fill="#1D4ED8" opacity="0.85" />
+    <rect
+      x="40"
+      y="92"
+      width="88"
+      height="12"
+      rx="6"
+      fill="#1D4ED8"
+      opacity="0.85"
+    />
     <rect x="40" y="118" width="72" height="10" rx="5" fill="#C7D2FE" />
     <rect x="40" y="140" width="80" height="10" rx="5" fill="#C7D2FE" />
     <rect x="40" y="162" width="64" height="10" rx="5" fill="#C7D2FE" />
@@ -60,21 +84,58 @@ const HeroArt = () => (
     <rect x="40" y="232" width="78" height="10" rx="5" fill="#E2E8F0" />
     <rect x="40" y="254" width="86" height="10" rx="5" fill="#E2E8F0" />
     {/* main canvas */}
-    <circle cx="300" cy="150" r="46" fill="none" stroke="url(#haRing)" strokeWidth="12" strokeLinecap="round" strokeDasharray="220 60" transform="rotate(-25 300 150)" />
+    <circle
+      cx="300"
+      cy="150"
+      r="46"
+      fill="none"
+      stroke="url(#haRing)"
+      strokeWidth="12"
+      strokeLinecap="round"
+      strokeDasharray="220 60"
+      transform="rotate(-25 300 150)"
+    />
     <rect x="364" y="120" width="120" height="16" rx="8" fill="#0F172A" />
     <rect x="364" y="146" width="96" height="11" rx="5.5" fill="#94A3B8" />
     <rect x="364" y="166" width="110" height="11" rx="5.5" fill="#94A3B8" />
     {/* buttons */}
     <rect x="170" y="232" width="120" height="40" rx="11" fill="#1D4ED8" />
     <rect x="206" y="247" width="48" height="10" rx="5" fill="#FFFFFF" />
-    <rect x="304" y="232" width="120" height="40" rx="11" fill="none" stroke="#1D4ED8" strokeWidth="2" />
+    <rect
+      x="304"
+      y="232"
+      width="120"
+      height="40"
+      rx="11"
+      fill="none"
+      stroke="#1D4ED8"
+      strokeWidth="2"
+    />
     <rect x="340" y="247" width="48" height="10" rx="5" fill="#1D4ED8" />
     {/* cards */}
-    <rect x="170" y="296" width="150" height="84" rx="14" fill="#FFFFFF" stroke="#E6EAF2" strokeWidth="2" />
+    <rect
+      x="170"
+      y="296"
+      width="150"
+      height="84"
+      rx="14"
+      fill="#FFFFFF"
+      stroke="#E6EAF2"
+      strokeWidth="2"
+    />
     <circle cx="194" cy="322" r="12" fill="#DBEAFE" />
     <rect x="184" y="344" width="92" height="9" rx="4.5" fill="#1F2937" />
     <rect x="184" y="360" width="64" height="8" rx="4" fill="#9CA3AF" />
-    <rect x="336" y="296" width="150" height="84" rx="14" fill="#FFFFFF" stroke="#E6EAF2" strokeWidth="2" />
+    <rect
+      x="336"
+      y="296"
+      width="150"
+      height="84"
+      rx="14"
+      fill="#FFFFFF"
+      stroke="#E6EAF2"
+      strokeWidth="2"
+    />
     <circle cx="360" cy="322" r="12" fill="#FFEAD5" />
     <rect x="350" y="344" width="92" height="9" rx="4.5" fill="#1F2937" />
     <rect x="350" y="360" width="64" height="8" rx="4" fill="#9CA3AF" />
@@ -126,7 +187,12 @@ export const HomeHero = () => {
         desktop: { fontSize: 72, lineHeight: 78, letterSpacing: -1.5 },
       },
       tagline: {
-        mobile: { fontSize: 16, lineHeight: 24, maxWidth: 440, textAlign: 'center' },
+        mobile: {
+          fontSize: 16,
+          lineHeight: 24,
+          maxWidth: 440,
+          textAlign: 'center',
+        },
         tablet: { fontSize: 18, lineHeight: 28, maxWidth: 480 },
         desktop: { fontSize: 20, lineHeight: 30, maxWidth: 470 },
       },

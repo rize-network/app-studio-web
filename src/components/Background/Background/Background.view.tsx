@@ -543,21 +543,47 @@ const BackgroundGradient: React.FC<BackgroundGradientProps> = ({
 }) => {
   return <Gradient {...gradientProps}>{children}</Gradient>;
 };
+const OVERLAY_TOKEN_RE = /^(color|theme|light|dark)-/;
+
+// Reduce a token that already carries an alpha suffix (`color-<name>-<shade>-<alpha>`,
+// `theme-<key>-<alpha>`; alpha 0–1000) to its base token. The overlay appends its
+// own per-stop alphas, and stacking a second suffix (`color-gray-50-900` →
+// `color-gray-50-900-100`) resolves against a CSS variable that doesn't exist,
+// which invalidates the whole gradient and silently drops the overlay.
+const stripAlphaSuffix = (value: string): string => {
+  const parts = value.split('-');
+  const alpha = parseInt(parts[parts.length - 1], 10);
+  const minParts = value.startsWith('theme-') ? 3 : 4;
+  if (
+    parts.length >= minParts &&
+    !isNaN(alpha) &&
+    alpha >= 0 &&
+    alpha <= 1000
+  ) {
+    return parts.slice(0, -1).join('-');
+  }
+  return value;
+};
+
 const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
   contentPosition,
   backgroundColor = 'color-black-900',
   ...props
 }) => {
+  const isToken = OVERLAY_TOKEN_RE.test(backgroundColor);
+  const baseColor = isToken
+    ? stripAlphaSuffix(backgroundColor)
+    : backgroundColor;
   const getDefaultOverlay = () => {
-    let ligthBackground = `${backgroundColor}-100`;
-    let darkBackground = `${backgroundColor}-900`;
-    let midBackground = `${backgroundColor}-600`;
-    let midDarkBackground = `${backgroundColor}-400`;
-    if (backgroundColor.indexOf('-') === -1) {
-      ligthBackground = `color-mix(in srgb, ${backgroundColor} 10%, transparent)`;
-      darkBackground = `color-mix(in srgb, ${backgroundColor} 90%, transparent)`;
-      midBackground = `color-mix(in srgb, ${backgroundColor} 70%, transparent)`;
-      midDarkBackground = `color-mix(in srgb, ${backgroundColor} 50%, transparent)`;
+    let ligthBackground = `${baseColor}-100`;
+    let darkBackground = `${baseColor}-900`;
+    let midBackground = `${baseColor}-600`;
+    let midDarkBackground = `${baseColor}-400`;
+    if (!isToken) {
+      ligthBackground = `color-mix(in srgb, ${baseColor} 10%, transparent)`;
+      darkBackground = `color-mix(in srgb, ${baseColor} 90%, transparent)`;
+      midBackground = `color-mix(in srgb, ${baseColor} 70%, transparent)`;
+      midDarkBackground = `color-mix(in srgb, ${baseColor} 50%, transparent)`;
     }
     switch (contentPosition) {
       case 'left':

@@ -62,8 +62,7 @@ export const ControlledTabs = () => {
         borderColor="color-blue-200"
       >
         <Text marginBottom={12}>
-          Current Active Value:{' '}
-          <Text fontWeight="bold">{activeTab}</Text>
+          Current Active Value: <Text fontWeight="bold">{activeTab}</Text>
         </Text>
         <View display="flex" flexDirection="row" gap={10}>
           <Button

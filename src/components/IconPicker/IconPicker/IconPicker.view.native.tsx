@@ -61,9 +61,27 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
     ...views?.trigger,
   };
   const iconGridStyles = {
-    ...DefaultIconPickerStyles.iconGrid,
+    flexDirection: 'row' as const,
+    flexWrap: 'wrap' as const,
+    justifyContent: 'flex-start' as const,
+    gap: 10,
+    paddingVertical: 4,
     ...views?.iconGrid,
   };
+  const sheetHeader = showSearch ? (
+    <View paddingHorizontal={16} paddingBottom={10} {...views?.searchInput}>
+      <TextField
+        placeholder="Search icons..."
+        value={searchQuery}
+        onChange={(v: any) =>
+          handleSearchChange(typeof v === 'string' ? v : v?.target?.value ?? '')
+        }
+        size="sm"
+        isAutoFocus={false}
+        autoFocus={false}
+      />
+    </View>
+  ) : undefined;
   return (
     <View {...containerStyles} {...props}>
       {label && (
@@ -112,43 +130,34 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
         onClose={handleClose}
         title={typeof label === 'string' ? label : 'Select an icon'}
         size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+        maxHeight="82%"
+        showCancel
+        header={sheetHeader}
         views={{ sheet: views?.dropdown }}
       >
-        {showSearch && (
-          <View
-            paddingHorizontal={16}
-            paddingBottom={8}
-            {...views?.searchInput}
-          >
-            <TextField
-              placeholder="Search icons..."
-              value={searchQuery}
-              onChange={(v: any) =>
-                handleSearchChange(
-                  typeof v === 'string' ? v : v?.target?.value ?? ''
-                )
-              }
-              size="sm"
-              isAutoFocus={false}
-              autoFocus={false}
-            />
-          </View>
-        )}
-        <View ref={dropdownRef} {...iconGridStyles}>
+        <View
+          ref={dropdownRef}
+          paddingHorizontal={16}
+          paddingBottom={12}
+          {...iconGridStyles}
+        >
           {filteredIcons.length > 0 ? (
             filteredIcons.map((iconName) => (
               <View
                 key={iconName}
                 {...DefaultIconPickerStyles.iconItem}
-                onPress={() => handleIconSelect(iconName)}
-                onClick={() => handleIconSelect(iconName)}
-                backgroundColor={
-                  selectedIcon === iconName ? '#EFF6FF' : 'transparent'
-                }
+                width="46px"
+                height="46px"
+                borderRadius={14}
                 borderWidth={selectedIcon === iconName ? '1px' : '0px'}
                 borderStyle="solid"
                 borderColor={
                   selectedIcon === iconName ? '#BFDBFE' : 'transparent'
+                }
+                onPress={() => handleIconSelect(iconName)}
+                onClick={() => handleIconSelect(iconName)}
+                backgroundColor={
+                  selectedIcon === iconName ? '#EFF6FF' : 'transparent'
                 }
                 {...views?.iconItem}
               >

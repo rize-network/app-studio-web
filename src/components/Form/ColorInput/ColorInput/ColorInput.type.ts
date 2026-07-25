@@ -1,4 +1,5 @@
 import { ViewProps } from 'app-studio';
+import { TextFieldStyles } from '../../TextField/TextField/TextField.type';
 // Defines the visual style variant of the ColorInput component.
 export type Variant = 'outline' | 'default' | 'none';
 // Specifies the shape of the ColorInput's visual elements, such as buttons or containers.
@@ -26,7 +27,7 @@ export type ColorInputStyles = {
   // Styles for individual color swatches within the grid.
   colorSwatch?: ViewProps;
   // Styles for the custom input field for manual color entry.
-  customInput?: ViewProps;
+  customInput?: TextFieldStyles;
   // Styles for the section displaying recently used colors.
   recentColors?: ViewProps;
 };
