@@ -19,14 +19,16 @@ export const FormikAutoFocusExample = () => {
       initialValues={initialValues}
       onSubmit={(values) => setSubmitted(JSON.stringify(values))}
     >
-      {() => (
+      {({ handleSubmit }) => (
         <FormikForm autoFocus initFocus="firstName">
           <Vertical gap={12} maxWidth={360}>
             <Text>Press Enter/Next to move through the fields.</Text>
             <FormikTextField name="firstName" label="First name" />
             <FormikTextField name="lastName" label="Last name" />
             <FormikPassword name="password" label="Password" />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
             {submitted && (
               <Text color="color-green-600">Submitted: {submitted}</Text>
             )}

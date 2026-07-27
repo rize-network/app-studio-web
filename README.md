@@ -141,6 +141,8 @@ ShareButton · Drawer · Sheet · Portal
 | Concern        | Web                              | React Native                                       |
 | -------------- | -------------------------------- | -------------------------------------------------- |
 | Routing/links  | `react-router-dom`               | `Linking.openURL` for external, `onPress` for nav  |
+| Form container | semantic `<form>`                | styled `View`; submit and validation are explicit  |
+| Grid layout    | CSS Grid                          | fixed integer columns via flex rows                |
 | Portals        | `ReactDOM.createPortal`          | `RN <Modal/>` for overlays; `<Portal/>` is inline  |
 | Icons          | `lucide-react` dynamic imports   | `lucide-react-native` (static)                     |
 | Animations     | CSS keyframes via `app-studio`   | `react-native-reanimated` (same `Animation` API)   |

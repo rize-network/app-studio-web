@@ -2,6 +2,13 @@
 
 Formik integration components for form state management and validation.
 
+> **React Native:** `FormikForm` renders through the native `Form` primitive,
+> which is a `View`, not a browser form. Keep `type="submit"`/`type="reset"` for
+> web semantics and also wire `onClick={handleSubmit}` or
+> `onClick={handleReset}` explicitly. With `autoFocus`, single-line
+> fields use `returnKeyType`/`onSubmitEditing` to advance and submit; labels,
+> validation, and accessibility still need their native component wiring.
+
 ### **Import**
   ```tsx
   import { FormikForm, FormikTextField, FormikCheckbox, FormikChatInput, FormikColorInput, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider, FormikIconPicker, FormikEmojiPicker, FormikOTPInput, FormikRadio, FormikSelector, FormikTagInput, FormikToggle, FormikToggleGroup, FormikUploader } from '@app-studio/components';

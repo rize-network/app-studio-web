@@ -101,9 +101,25 @@ export const FormikForm = <T extends {}>({
     }
   }, [autoFocus, initFocus]);
 
+  // The rules are shared, but the wiring is platform-specific. On web,
+  // app-studio's Form is a real <form>, so preserve submit/reset semantics.
+  // On React Native it is intentionally just a View; buttons and TextInputs
+  // call Formik explicitly through onClick/onSubmitEditing instead.
+  const supportsFormEvents =
+    typeof document !== 'undefined' &&
+    typeof (document as any).createElement === 'function';
+  const formEventProps = supportsFormEvents
+    ? {
+        onSubmit: formik.handleSubmit,
+        onReset: formik.handleReset,
+      }
+    : {};
+
   return (
     <FocusContext.Provider value={contextValue}>
-      <$Form {...props}>{children}</$Form>
+      <$Form {...props} {...formEventProps}>
+        {children}
+      </$Form>
     </FocusContext.Provider>
   );
 };

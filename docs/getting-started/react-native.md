@@ -123,6 +123,8 @@ and ProgressBar `shape="circle"` falls back to the linear bar.
 | Button                | ✅  | ✅  | Animations `borderMoving`/`animatedStroke`/`borderReveal` fall back to standard on RN  |
 | Text / Title          | ✅  | ✅  | Title `<br>` mapped to `\n`; typewriter/slide effects dropped on RN                    |
 | View / Horizontal / Vertical / Center | ✅ | ✅ | Direct primitives from `app-studio`                                       |
+| Grid                  | ✅  | ⚠️  | Fixed integer `columns` only; intrinsic tracks/spans are not portable                   |
+| Form                  | ✅  | ⚠️  | A styled `View` on RN; submit, validation, and label wiring are explicit                |
 | Image                 | ✅  | ✅  |                                                                                        |
 | Icon                  | ✅  | ✅  | Web uses `lucide-react` lazy imports; RN uses `lucide-react-native` static map         |
 | Link                  | ✅  | ✅  | Web: `react-router-dom`. RN: `Linking.openURL` (external) + `onPress` (internal)       |
@@ -157,6 +159,70 @@ and ProgressBar `shape="circle"` falls back to the linear bar.
 | ChatWidget / ChatInput / EditComponent | ✅ | ❌  | Author-time tools, web-only                                           |
 
 ✅ available, ⚠️ degraded, ❌ not exported on RN (importing them throws).
+
+---
+
+## Layout and form semantics on React Native
+
+The visual rules are shared across web and native, but the platform wiring is
+not. Two primitives need deliberate native usage: `Form` and `Grid`.
+
+### Form is a view
+
+On the web, `Form` renders a real `<form>`. React Native has no equivalent, so
+the same component renders a styled `View`. It does **not** provide a submit
+event, Enter-to-submit, implicit label association, or browser validation.
+
+Keep the same validation and accessibility rules on both platforms, but wire
+their native behavior explicitly:
+
+- call the form library's submit/reset handlers from button `onClick` (the RN
+  button maps it to `onPress`);
+- use `returnKeyType` and `onSubmitEditing` for keyboard progression/submission;
+- expose labels and errors through React Native accessibility props;
+- run schema or application validation instead of relying on HTML attributes.
+
+`FormikForm autoFocus` wires the single-line input return-key chain for you. A
+submit or reset button still needs an explicit handler:
+
+```tsx
+<Formik initialValues={{ email: '' }} onSubmit={save} validationSchema={schema}>
+  {({ handleSubmit, handleReset }) => (
+    <FormikForm autoFocus>
+      <FormikTextField name="email" label="Email" type="email" />
+      <Button type="submit" onClick={handleSubmit}>Save</Button>
+      <Button type="reset" onClick={handleReset}>Reset</Button>
+    </FormikForm>
+  )}
+</Formik>
+```
+
+The `type` props retain the correct web semantics; the explicit handlers are
+the native wiring. For a plain `Form`, apply the same pattern with controlled
+state and your own validation function.
+
+### Grid is fixed-count only
+
+React Native has no CSS Grid underneath. Native `Grid` uses flex rows and is
+faithful for one portable shape: a fixed integer column count.
+
+```tsx
+<Grid columns={2} gap={12}>
+  <Card />
+  <Card />
+  <Card />
+  <Card />
+</Grid>
+```
+
+Treat string templates as web-only. In particular, `auto-fit` and `auto-fill`
+collapse to one native column, and `rows` is ignored. Intrinsic sizing, named
+areas, and item spanning therefore need an explicit `Vertical`/`Horizontal`
+row composition per platform.
+
+For a scrollable card grid, prefer React Native's virtualised `FlatList` with
+`numColumns`; it avoids rendering the full collection and makes the mobile
+column count intentional.
 
 ---
 

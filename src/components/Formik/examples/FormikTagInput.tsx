@@ -48,7 +48,7 @@ export const FormikTagInputExample = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, isSubmitting }) => (
+        {({ values, errors, touched, isSubmitting, handleSubmit }) => (
           <View>
             <Vertical gap={20}>
               {/* Skills TagInput */}
@@ -135,6 +135,7 @@ export const FormikTagInputExample = () => {
                   size="md"
                   isLoading={isSubmitting}
                   isDisabled={isSubmitting}
+                  onClick={handleSubmit}
                 >
                   Submit Form
                 </Button>

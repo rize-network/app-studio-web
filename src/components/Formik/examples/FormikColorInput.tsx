@@ -29,7 +29,7 @@ export const FormikColorInputExample = () => {
         }, 400);
       }}
     >
-      {({ values, isSubmitting }) => (
+      {({ values, isSubmitting, handleSubmit, handleReset }) => (
         <FormikForm>
           <Vertical gap={16} width="400px">
             <FormikColorInput
@@ -70,10 +70,15 @@ export const FormikColorInputExample = () => {
             </Vertical>
 
             <Horizontal gap={8}>
-              <Button type="submit" variant="filled" isDisabled={isSubmitting}>
+              <Button
+                type="submit"
+                variant="filled"
+                isDisabled={isSubmitting}
+                onClick={handleSubmit}
+              >
                 {isSubmitting ? 'Saving...' : 'Save Theme'}
               </Button>
-              <Button type="reset" variant="outline">
+              <Button type="reset" variant="outline" onClick={handleReset}>
                 Reset
               </Button>
             </Horizontal>
