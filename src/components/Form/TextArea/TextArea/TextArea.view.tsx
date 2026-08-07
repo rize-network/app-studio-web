@@ -69,8 +69,6 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   setIsFocused = () => {},
   setIsHovered = () => {},
   onChangeText,
-  onSubmit,
-  isWorkerRunning,
   inputRef,
   views = { label: {}, helperText: {} },
   ...props

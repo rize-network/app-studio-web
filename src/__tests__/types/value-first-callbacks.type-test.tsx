@@ -216,6 +216,30 @@ export const TextAreaAcceptsValueHandler = () => {
   );
 };
 
+/* ------------------------------------------------------------------ *
+ * Props that were declared but never read must not come back.
+ * ------------------------------------------------------------------ */
+
+// `isWorkerRunning` and a value-first `onSubmit` were copied onto TextAreaProps
+// from ChatInput and never implemented on either platform — passing them did
+// nothing at all. Accepting a prop and ignoring it is the same silent failure
+// as mistyping one, so they are gone rather than inert.
+export const textAreaRejectsUnimplementedProps = () => {
+  const props: TextAreaProps = {
+    // @ts-expect-error TextArea has no isWorkerRunning prop.
+    isWorkerRunning: true,
+  };
+  return props;
+};
+
+export const textAreaRejectsValueFirstOnSubmit = () => {
+  const props: TextAreaProps = {
+    // @ts-expect-error onSubmit is the inherited DOM handler, not (value: string).
+    onSubmit: (input: string) => void input,
+  };
+  return props;
+};
+
 // `onBlur` is the one callback that really does receive an event-shaped
 // argument, and it stays permissive on purpose (web FocusEvent, the RN blur
 // event, and the synthetic `{ target: { name } }` from the clear button).

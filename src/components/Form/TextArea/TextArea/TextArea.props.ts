@@ -4,11 +4,12 @@ import { Shape, Size, TextAreaStyles, Variant } from './TextArea.type';
 // `onChange` is omitted from InputProps (where it is the DOM FormEventHandler)
 // because TextArea re-declares it with value-first semantics — see the prop's
 // own doc comment below.
+// `onSubmit` is NOT omitted: it used to be shadowed by a value-first
+// `(input: string) => void` that no view ever called, so passing it did
+// nothing. The standard DOM handler is inherited and forwarded to the
+// <textarea> like every other DOM prop.
 export interface TextAreaProps
-  extends Omit<
-    InputProps,
-    'size' | 'shadow' | 'value' | 'onSubmit' | 'onChange'
-  > {
+  extends Omit<InputProps, 'size' | 'shadow' | 'value' | 'onChange'> {
   defaultValue?: string;
   error?: boolean;
   isEditable?: boolean;
@@ -54,8 +55,6 @@ export interface TextAreaProps
   isRequired?: boolean;
   required?: boolean;
   labelProps?: any;
-  onSubmit?: (input: string) => void;
-  isWorkerRunning?: boolean;
   // Optional callback ref to the underlying textarea/input node. Used by the
   // Formik focus chain (FormikForm autoFocus) to register the field. A plain
   // prop (not React `ref`) so fields that ignore it stay wireable.
