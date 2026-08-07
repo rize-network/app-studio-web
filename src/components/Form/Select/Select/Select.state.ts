@@ -1,30 +1,74 @@
 import React from 'react';
 import { SelectProps } from './Select.props';
 
+// The view branches on the shape of the value: an array renders as removable
+// chips, a string as a single label. A caller passing the shape that does not
+// match the current mode (a string with `isMulti`, an array without) has to be
+// brought back in line before anything reads it, or the branch taken silently
+// disagrees with the mode the component is in.
+const normalizeValue = (
+  value: string | Array<string>,
+  isMulti?: boolean
+): string | Array<string> => {
+  if (isMulti) {
+    if (Array.isArray(value)) return value;
+    return value === '' ? [] : [value];
+  }
+  return Array.isArray(value) ? value[0] ?? '' : value;
+};
+
 // Initializes the custom hook 'useSelectState' for managing the state of the Select component
 export const useSelectState = ({
   placeholder,
   isMulti,
   options,
+  // No default value here: `undefined` is exactly what separates controlled
+  // from uncontrolled, so defaulting it would pin the select to that default
+  // and make `setValue` a permanent no-op.
+  value: controlledValue,
+  defaultValue,
   id = `select-${Math.random().toString(36).substr(2, 9)}`,
 }: SelectProps) => {
-  // Determines the default value based on the 'placeholder' and 'isMulti' props, setting to an empty array for multi-select or an empty string/single default option
-  const defaultValue = placeholder
-    ? isMulti
-      ? []
-      : '' // If there's a placeholder, set default to empty array for multi-select or empty string for single select
-    : Array.isArray(options) && options.length > 0
-    ? options[0].value
-    : isMulti
-    ? []
-    : ''; // If no placeholder, use the first option value if available, otherwise empty array for multi-select or empty string for single select
+  const isControlled = controlledValue !== undefined;
 
   // State hook for tracking mouse hover status over the Select component
   const [isHovered, setIsHovered] = React.useState(false);
   // State hook for tracking focus status of the Select input field
   const [isFocused, setIsFocused] = React.useState(false);
-  // State hook for managing the value(s) selected by the user, initialized with the default value
-  const [value, setValue] = React.useState<string | string[]>(defaultValue);
+  // Backing store for uncontrolled use. It is still initialized when the
+  // select is controlled — harmlessly — so that a component that starts
+  // controlled and later drops `value` has somewhere to land.
+  const [internalValue, setInternalValue] = React.useState<
+    string | Array<string>
+  >(() => {
+    if (defaultValue !== undefined)
+      return normalizeValue(defaultValue, isMulti);
+    // A multi-select starts empty: preselecting an option nobody asked for is
+    // a selection the user then has to undo.
+    if (isMulti) return [];
+    // A placeholder means "start empty". Without one, the first option stands
+    // in for a native <select>'s implicit first-option selection.
+    if (placeholder) return '';
+    return Array.isArray(options) && options.length > 0 ? options[0].value : '';
+  });
+
+  // The value everything downstream reads. In controlled mode it is the prop,
+  // read fresh on every render, so the selection tracks the parent's state
+  // instead of freezing at whatever it was on mount.
+  const value = isControlled
+    ? normalizeValue(controlledValue as string | Array<string>, isMulti)
+    : internalValue;
+
+  // In controlled mode the parent owns the value: the component records the
+  // intent through `onChange` and waits for the new value to come back down.
+  // Writing to internal state here would let the two copies disagree.
+  const setValue = React.useCallback(
+    (next: string | Array<string>) => {
+      if (!isControlled) setInternalValue(next);
+    },
+    [isControlled]
+  );
+
   // State hook for keeping track of the currently highlighted index in the options list
   const [highlightedIndex, setHighlightedIndex] = React.useState<number>(0);
   // State hook for managing visibility of the Select dropdown, initially set to hidden

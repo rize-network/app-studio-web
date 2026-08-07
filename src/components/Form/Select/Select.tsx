@@ -21,6 +21,10 @@ const SelectComponent: React.FC<SelectProps> = (props) => {
     <SelectView
       {...selectStates}
       {...safeProps}
+      // Restated after the props spread: `safeProps` now carries `value`, and
+      // in uncontrolled mode that is `undefined` — letting it through would
+      // blank out the selection the state hook just resolved.
+      value={selectStates.value}
       onClick={(e: React.MouseEvent<HTMLDivElement>) => {
         // Stop propagation to prevent the global click handler from closing other dropdowns
         e.stopPropagation();

@@ -1,9 +1,12 @@
 import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { SelectStyles, Shape, Size, Variant, Option } from './Select.type';
-// Defines the interface for Select component properties, extending from InputProps but omitting 'size'
+// Defines the interface for Select component properties, extending from InputProps but omitting 'size'.
+// `value`/`defaultValue` are re-declared rather than inherited: `InputProps`
+// types them after `HTMLInputElement`, where both are plain strings, and a
+// multi-select has to be able to carry an array.
 export interface SelectProps
-  extends Omit<InputProps, 'size' | 'shadow' | 'value'> {
+  extends Omit<InputProps, 'size' | 'shadow' | 'value' | 'defaultValue'> {
   // Optional string identifier for the select element
   id?: string;
   // Flag to indicate if the select has an error state
@@ -18,6 +21,14 @@ export interface SelectProps
   placeholder?: string;
   // Array of options that the user can choose from
   options: Option[];
+  // Selected option value(s). Supplying it puts the select in controlled mode:
+  // the displayed selection follows this prop and never moves on its own — the
+  // component reports every change through `onChange` and waits for the parent
+  // to pass the next value back down.
+  value?: string | Array<string>;
+  // Initial selection for uncontrolled use. Read once, on mount; ignored
+  // entirely when `value` is supplied.
+  defaultValue?: string | Array<string>;
   // Boolean to allow multi-selection
   isMulti?: boolean;
   // Boolean to set the select as read-only, preventing user modification
@@ -30,7 +41,10 @@ export interface SelectProps
   isRequired?: boolean;
   // Boolean to autofocus the select when it mounts
   isAutoFocus?: boolean;
-  // Function that handles the change event when the selected option(s) change
+  // Called with the next selection whenever it changes: the chosen option's
+  // value for a single select, the full array of selected values when
+  // `isMulti`. It has to be the *next* selection rather than the option that
+  // was just touched, otherwise a controlled parent has nothing to store.
   onChange?: (value: any) => void;
   // Determines the overall shape of the select box, e.g., rounded or square edges
   shape?: Shape;

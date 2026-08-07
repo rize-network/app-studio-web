@@ -7,6 +7,9 @@ A customizable UI component for selecting from a list of options.
 | Prop           | Type          | Description                                                                                                                               | Default |
 | ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | options          | { label: string; value: string }[] | Array of options for the select box.                                                                                                     |         |
+| value            | string \| string[] | Selected option value(s). Supplying it makes the select controlled: the selection follows this prop and only moves when the parent passes a new one. |         |
+| defaultValue     | string \| string[] | Initial selection for uncontrolled use. Read once on mount, ignored when `value` is supplied.                                       |         |
+| onChange         | (value) => void | Called with the next selection: the chosen option's value, or the full array of selected values when `isMulti`.                        |         |
 | label            | string        | Label for the select box.                                                                                                                               |         |
 | placeholder      | string        | Placeholder text for the select box.                                                                                                                      |         |
 | error            | boolean       | Flag to indicate if the select has an error state.                                                                                                       | false   |
@@ -104,6 +107,39 @@ export const ShadowSelect = () => (
   />
 );
 
+```
+
+### **Controlled**
+Pass `value` to drive the selection from state. The select then never moves on
+its own: it reports the choice through `onChange` and waits for the new value.
+Omit `value` and pass `defaultValue` instead for uncontrolled use — passing both
+is what a native `<select>` refuses, and the component keeps that rule.
+
+```tsx
+import React, { useState } from 'react';
+import { Button, Horizontal, Select } from '@app-studio/components';
+
+const options = [
+  { label: 'Item1', value: '1' },
+  { label: 'Item2', value: '2' },
+  { label: 'Item3', value: '3' },
+];
+
+export const ControlledSelect = () => {
+  const [value, setValue] = useState('2');
+
+  return (
+    <Horizontal gap={12} alignItems="center">
+      <Select
+        options={options}
+        label="Select an item"
+        value={value}
+        onChange={setValue}
+      />
+      <Button onClick={() => setValue('3')}>Jump to Item3</Button>
+    </Horizontal>
+  );
+};
 ```
 
 ### **isScrollable**

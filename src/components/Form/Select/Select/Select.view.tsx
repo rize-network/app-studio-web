@@ -76,6 +76,11 @@ const Item: React.FC<ItemProps & { isSelected?: boolean }> = ({
   return (
     <Element
       as="li"
+      // An option has to say it is one. Without the role the listbox announces
+      // a list of nothing, and anything that resolves controls by role — a
+      // screen reader, voice control, a test driver — cannot reach these at all.
+      role="option"
+      aria-selected={isSelected}
       // Layout - improved touch targets
       display="flex"
       alignItems="center"
@@ -132,6 +137,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 }) => {
   const fieldView = views?.field || {};
   const textView = views?.text || {};
+  const isMultiValue = Array.isArray(value) && value.length > 0;
   /**
    * Styles for the select field
    */
@@ -167,6 +173,19 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
     // Animation
     transition: 'all 0.2s ease-in-out',
+
+    // A single-value trigger stays on one line and ellipsises, via `Text`'s own
+    // `maxLines`. Without it a long option label wraps, which silently breaks
+    // the control's declared height — a `md` Select showing "Uma User's
+    // workspace" in a narrow sidebar became two lines tall.
+    //
+    // `minWidth: 0` is what actually lets it truncate: the trigger is a flex
+    // child, and `min-width: auto` would otherwise stop it shrinking below its
+    // content, so the clamp would never engage.
+    //
+    // Multi-select is excluded: its value renders as chips that are meant to
+    // wrap, and clamping would hide selections rather than reflow them.
+    ...(isMultiValue ? {} : { maxLines: 1, minWidth: 0 }),
 
     // Apply custom styles
     ...fieldView,
@@ -219,6 +238,13 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
   isDisabled = false,
   isReadOnly = false,
   options = [],
+  // Swallowed on purpose. `defaultValue` is the Select's own prop — the state
+  // hook has already turned it into the `value` below — but it also rides
+  // along in `...props`, and React errors on any <select> carrying both
+  // ("Select elements must be either controlled or uncontrolled"). That error
+  // fires on every render and fails test runs that treat console.error as
+  // fatal, so the element has to be given one or the other, never both.
+  defaultValue: _defaultValue,
   ...props
 }) => {
   const handleChange = (event: any) => {
@@ -392,6 +418,9 @@ const SelectView: React.FC<SelectViewProps> = ({
   setHighlightedIndex,
   highlightedIndex,
   isScrollable,
+  // Pulled out so it can name the trigger. It used to fall into `...props`,
+  // which never reaches the element a screen reader reads.
+  'aria-label': ariaLabel,
   ...props
 }) => {
   const {
@@ -479,12 +508,15 @@ const SelectView: React.FC<SelectViewProps> = ({
       // Tell all other selects to close
       document.dispatchEvent(new Event('closeAllSelects'));
 
-      // Update value based on multi-select or single-select mode
+      // Update value based on multi-select or single-select mode.
+      // `onChange` reports the *next* selection, not the option that was
+      // clicked: a controlled parent has to be able to store what it gets
+      // back, and for a multi-select that is the whole array.
       if (isMulti && Array.isArray(value)) {
         if (!value.includes(option)) {
           const newValue = [...value, option];
           setValue(newValue);
-          if (onChange) onChange(option);
+          if (onChange) onChange(newValue);
         }
       } else {
         setValue(option);
@@ -499,7 +531,11 @@ const SelectView: React.FC<SelectViewProps> = ({
   const handleRemoveOption = (valueOption: string) => {
     if (Array.isArray(value) && value.includes(valueOption)) {
       const newValue = value.filter((option) => option !== valueOption);
-      setValue(newValue.length === 0 ? [] : newValue);
+      setValue(newValue);
+      // Removing a chip is a change like any other. Without this the parent of
+      // a controlled multi-select never hears about it, so the chip comes
+      // straight back on the next render.
+      if (onChange) onChange(newValue);
     }
   };
   const showLabel = !!label;
@@ -512,10 +548,39 @@ const SelectView: React.FC<SelectViewProps> = ({
       width="100%"
       display="inline-block"
       id={id}
-      role="SelectBox"
+      // `SelectBox` is not an ARIA role, so the trigger was exposed as a plain
+      // container: not focusable, not announced, and operable only by mouse.
+      // The native `<select>` behind it is `aria-hidden` and `tabIndex={-1}`, so
+      // there was no keyboard path to this control at all.
+      role="combobox"
+      aria-haspopup="listbox"
+      aria-expanded={!hide}
+      aria-label={ariaLabel ?? (typeof label === 'string' ? label : undefined)}
+      aria-disabled={isDisabled || undefined}
+      tabIndex={isDisabled || isReadOnly ? -1 : 0}
       helperText={helperText}
       error={error}
       views={layoutViews}
+      onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (isDisabled || isReadOnly) return;
+
+        // Enter, Space and Down open the list; Escape closes it. The same keys a
+        // native select answers to, so nobody has to learn this one separately.
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (hide) {
+            document.dispatchEvent(new Event('closeAllSelects'));
+            setHide(false);
+            setIsFocused(true);
+          }
+          return;
+        }
+
+        if (e.key === 'Escape' && !hide) {
+          e.preventDefault();
+          setHide(true);
+        }
+      }}
       onClick={(e: React.MouseEvent<HTMLDivElement>) => {
         // Stop propagation to prevent clicks from bubbling up
         e.stopPropagation();

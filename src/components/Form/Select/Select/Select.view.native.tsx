@@ -158,11 +158,13 @@ const SelectView: React.FC<SelectViewProps> = ({
   };
 
   const handleSelect = (optionValue: string) => {
+    // Mirrors the web view: `onChange` carries the next selection — the whole
+    // array when `isMulti` — so a controlled parent can store what it gets.
     if (isMulti && Array.isArray(value)) {
       if (!value.includes(optionValue)) {
         const newValue = [...value, optionValue];
         setValue(newValue);
-        if (onChange) onChange(optionValue);
+        if (onChange) onChange(newValue);
       }
     } else {
       setValue(optionValue);
@@ -174,7 +176,8 @@ const SelectView: React.FC<SelectViewProps> = ({
   const handleRemoveOption = (valueOption: string) => {
     if (Array.isArray(value) && value.includes(valueOption)) {
       const newValue = value.filter((option) => option !== valueOption);
-      setValue(newValue.length === 0 ? [] : newValue);
+      setValue(newValue);
+      if (onChange) onChange(newValue);
     }
   };
 
