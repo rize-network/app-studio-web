@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ChatInput matches snapshot 1`] = `
-<input
-  placeholder="Message"
-  type="text"
-/>
-`;

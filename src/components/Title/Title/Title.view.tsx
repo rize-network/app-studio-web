@@ -54,6 +54,10 @@ const TitleView: React.FC<TitleProps> = ({
   highlightSlideDuration = 500,
   highlightSlideStagger = 50,
   highlightSlideSequential = true,
+  // `centered` and `level` were declared on TitleProps but never read here, so
+  // both were silently inert: every Title rendered left-aligned as an <h1>.
+  centered = false,
+  level = 1,
   themeMode: _elementMode,
   responsive: _responsive,
   alternateHighlightText: _alternateHighlightText,
@@ -134,8 +138,9 @@ const TitleView: React.FC<TitleProps> = ({
   const containerProps = {
     ref,
     animate: inView ? controlledAnimate : undefined,
-    as: 'h1' as const,
+    as: `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
     fontSize,
+    ...(centered ? { textAlign: 'center' as const } : {}),
     ...(_responsive ? ResponsiveTypography[size] : {}),
     ...baseTextStyles,
   };

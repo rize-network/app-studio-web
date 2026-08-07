@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Title } from 'src/components/Title/Title';
 import { cleanup, render, screen } from '@testing-library/react';
 

@@ -17,8 +17,12 @@ export interface CheckboxProps
   isDisabled?: boolean;
   isIndeterminate?: boolean;
   labelPosition?: 'left' | 'right';
-  onChange?: Function;
-  onValueChange?: Function;
+  // Called with the checkbox's next checked state — not a DOM event. Typed
+  // rather than `Function` so a DOM-shaped handler is a compile error and the
+  // argument is actually visible to callers.
+  onChange?: (checked: boolean) => void;
+  // Same argument as `onChange`; both fire on toggle.
+  onValueChange?: (checked: boolean) => void;
   views?: CheckboxStyles;
   size?: Size;
   shadow?: Shadow | Elevation | ViewProps;

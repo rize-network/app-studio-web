@@ -16,13 +16,10 @@ import { ViewProps } from 'app-studio';
  */
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export const Sizes: Record<Size, ViewProps> = {
-  xs: { minHeight: '28px', fontSize: '12px', padding: '4px 8px' },
-  sm: { minHeight: '32px', fontSize: '12px', padding: '6px 10px' },
-  md: { minHeight: '40px', fontSize: '14px', padding: '8px 12px' },
-  lg: { minHeight: '48px', fontSize: '14px', padding: '10px 14px' },
-  xl: { minHeight: '56px', fontSize: '16px', padding: '12px 16px' },
-};
+// The former `Sizes` table lived here but was never read by the view, so it
+// silently disagreed with the rest of the family (`xs` was 28px against 24px
+// everywhere else). Trigger sizing now comes from `Input/fieldSizes` via
+// FieldContent, which is the single source of truth for field heights.
 
 /**
  * Icon sizes proportional to component size

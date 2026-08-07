@@ -191,10 +191,17 @@ export const useOTPInputState = ({
       ),
     });
     setIsFocused(true);
-  }, [length]);
-  const handleBlur = useCallback(() => {
-    setIsFocused(false);
-  }, []);
+    if (onFocus) onFocus();
+  }, [length, onFocus]);
+  // `onBlur` / `onFocus` were destructured from props but never called, so both
+  // public callbacks silently never fired.
+  const handleBlur = useCallback(
+    (event?: any) => {
+      setIsFocused(false);
+      if (onBlur) onBlur(event);
+    },
+    [onBlur]
+  );
   const handleKeyDown = useCallback((_: KeyboardEvent<HTMLInputElement>) => {
     if (onKeyDown) {
       onKeyDown(_);

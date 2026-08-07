@@ -161,12 +161,13 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   };
   const handleClear = () => {
     setValue('');
-    if (onChange) {
-      onBlur({ target: { name } });
-      if (onChangeText) onChangeText('');
-      if (onChange) onChange('');
-    }
-    if (typeof document === 'undefined' && onChangeText) onChangeText('');
+    // Both change callbacks fire unconditionally — gating `onChangeText` on
+    // `onChange` being present meant the clear button was a no-op for every
+    // consumer that only passes `onChangeText` (which is what the Formik
+    // wrapper does for text fields).
+    if (onChangeText) onChangeText('');
+    if (onChange) onChange('');
+    onBlur({ target: { name } });
   };
   const {
     container: _shellContainer,

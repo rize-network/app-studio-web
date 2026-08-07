@@ -1,3 +1,4 @@
+import React from 'react';
 import { AvatarStyles, Size } from './Avatar.type';
 
 // Defines the properties for the Avatar component.
@@ -10,8 +11,9 @@ export interface AvatarProps {
   fallback?: string;
   // Optional custom styles for the avatar, defined by 'AvatarStyles'.
   views?: AvatarStyles;
-  //Optional onClick handler
-  onClick?: Function;
+  // Optional onClick handler. Wired straight to the underlying element, so it
+  // receives the mouse event; declaring no parameter is fine too.
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   children?: React.ReactNode;
 }
 // Extends 'AvatarProps' with additional view-related properties.

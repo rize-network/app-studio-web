@@ -49,7 +49,7 @@ export type ThemesType = {
 export type ShowMessageType = {
   isClosable?: boolean;
   views?: MessageViewStyles;
-  action?: Function;
+  action?: () => void;
   actionText?: string;
   showIcon?: boolean;
   timeout?: number;

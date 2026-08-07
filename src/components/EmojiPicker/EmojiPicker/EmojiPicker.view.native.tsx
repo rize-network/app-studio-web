@@ -105,11 +105,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
             <TextField
               placeholder="Search emojis..."
               value={searchQuery}
-              onChange={(e: any) =>
-                handleSearchChange(
-                  typeof e === 'string' ? e : e?.target?.value ?? ''
-                )
-              }
+              onChange={handleSearchChange}
               size="sm"
               isAutoFocus={false}
               autoFocus={false}

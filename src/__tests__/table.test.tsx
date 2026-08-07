@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from '../components/Table/Table';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { render, screen, within } from '@testing-library/react';
 
 const columns = [

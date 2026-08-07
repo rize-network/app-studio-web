@@ -34,7 +34,8 @@ export interface OTPInputProps
   // Callback function invoked when the text content of the input changes.
   onChangeText?: (value: string) => void;
   // Callback function invoked when the input field loses focus.
-  onBlur?: (value: any) => void;
+  // Called when the field loses focus, with the blur **event** (not the value).
+  onBlur?: (event: any) => void;
   // Callback function invoked when a key is pressed down and then released.
   onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   // Callback function invoked when a key is pressed down.

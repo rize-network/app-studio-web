@@ -33,7 +33,7 @@ export const FormIntegrationEmojiPicker = () => {
           <TextField
             label="Title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={setTitle}
             placeholder="Enter title"
             style={{ flex: 1 }}
           />
@@ -42,7 +42,7 @@ export const FormIntegrationEmojiPicker = () => {
         <TextField
           label="Description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={setDescription}
           placeholder="Enter description"
           helperText="Add a description for your item"
         />

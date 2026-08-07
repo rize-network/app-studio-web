@@ -25,9 +25,12 @@ export const HelperTextInput = () => {
     setFormErrors(errors);
   };
 
-  const handleChange = (event: any) => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
-  };
+  // TextField's onChange hands you the value, not a DOM event — so the field
+  // name comes from the closure rather than `event.target.name`.
+  const handleChange =
+    (field: keyof typeof initialValues) => (value: string) => {
+      setFormValues((current) => ({ ...current, [field]: value }));
+    };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -44,14 +47,14 @@ export const HelperTextInput = () => {
           placeholder="First Name"
           helperText={formErrors.firstName}
           error={!!formErrors.firstName}
-          onChange={handleChange}
+          onChange={handleChange('firstName')}
         />
         <TextField
           name="lastName"
           placeholder="Last Name"
           helperText={formErrors.lastName}
           error={!!formErrors.lastName}
-          onChange={handleChange}
+          onChange={handleChange('lastName')}
         />
         <Button type="submit" height="40px" isAuto>
           Submit

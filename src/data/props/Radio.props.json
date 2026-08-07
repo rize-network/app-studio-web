@@ -67,15 +67,15 @@
     "defaultValue": "right"
   },
   "onChange": {
-    "type": "Function",
+    "type": "(value: string) => void",
     "typeValues": "N/A",
-    "description": "Callback function triggered when the radio button's checked state changes.",
+    "description": "Called with this radio's value when it is selected. Never the DOM event.",
     "defaultValue": "N/A"
   },
   "onValueChange": {
-    "type": "Function",
+    "type": "(value: string) => void",
     "typeValues": "N/A",
-    "description": "Callback function triggered specifically when the radio button's value changes.",
+    "description": "Called with this radio's value when it is selected; fires alongside onChange.",
     "defaultValue": "N/A"
   },
   "views": {

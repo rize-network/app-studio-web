@@ -58,6 +58,19 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               type="button"
               onClick={() => handleCallback(option)}
               flex={1}
+              // Segments stay on one line and ellipsise. Without this a long
+              // option label wrapped word-by-word inside its segment, turning a
+              // single-row control into a multi-line block (three long options
+              // in a narrow column reached ~100px tall).
+              //
+              // `minWidth: 0` is required: a `flex: 1` child will not shrink
+              // below its content width while `min-width` is `auto`, so the
+              // ellipsis would never appear.
+              minWidth={0}
+              whiteSpace="nowrap"
+              overflow="hidden"
+              textOverflow="ellipsis"
+              textAlign="center"
               paddingVertical={6}
               paddingHorizontal={12}
               fontSize="12px"

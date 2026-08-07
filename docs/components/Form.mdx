@@ -39,6 +39,24 @@ A comprehensive form system with Formik integration, providing powerful form sta
   } from '@app-studio/components';
   ```
 
+### **Cross-Platform Form Semantics**
+
+`FormikForm` shares validation, field state, errors, and focus rules across web
+and React Native, but its container does not have the same platform semantics:
+
+- On web, it renders a real `<form>` and wires Formik's submit/reset handlers.
+- On React Native, it renders a styled `View`. There is no submit event,
+  Enter-to-submit, implicit label association, or browser validation.
+- Submit and reset buttons must call `handleSubmit`/`handleReset` explicitly.
+- `FormikForm autoFocus` wires single-line fields through
+  `returnKeyType`/`onSubmitEditing`; multi-line inputs retain Return for newlines.
+- Native labels, hints, and errors must be exposed through React Native
+  accessibility props, and validation must come from Formik/Yup or application
+  code rather than HTML attributes.
+
+The rule is: keep form behavior and validation shared, but branch the platform
+wiring.
+
 ### **Basic Form with Formik**
 ```tsx
 import React from 'react';
@@ -455,6 +473,8 @@ export const DynamicForm = () => {
 - Main form wrapper with Formik integration
 - Provides form context and state management
 - Supports auto-focus and form navigation
+- Preserves semantic submit/reset events on web
+- Uses explicit button and return-key handlers on React Native
 
 **FormikTextField**
 - Single-line text input with validation
@@ -608,7 +628,8 @@ const CustomFormikField = (props) => {
 ### **Best Practices**
 
 **Form Structure:**
-- Use semantic HTML structure
+- Use semantic HTML structure on web; use accessible React Native views and
+  control props on native
 - Group related fields logically
 - Provide clear labels and instructions
 - Use appropriate field types for data
@@ -652,7 +673,7 @@ const handleSubmit = async (values, { setSubmitting, setFieldError }) => {
 };
 ```
 
-**With File Uploads:**
+**With File Uploads (web only):**
 ```tsx
 import { FormikForm, FormikTextField } from '@app-studio/components';
 import { Uploader } from '@app-studio/components';
@@ -670,12 +691,18 @@ const FormWithUpload = () => {
         // Submit form data
       }}
     >
-      <FormikForm>
-        <FormikTextField name="name" label="Name" />
-        <Uploader onFileSelect={setUploadedFile} />
-        <Button type="submit">Submit</Button>
-      </FormikForm>
+      {({ handleSubmit }) => (
+        <FormikForm>
+          <FormikTextField name="name" label="Name" />
+          <Uploader onFileSelect={setUploadedFile} />
+          <Button type="submit" onClick={handleSubmit}>Submit</Button>
+        </FormikForm>
+      )}
     </Formik>
   );
 };
 ```
+
+`Uploader` uses browser `File` APIs and is not exported by the React Native
+build. Use a native document/image picker and place its result in Formik state
+for the equivalent mobile flow.

@@ -471,7 +471,10 @@ export const SplitLayout = () => (
 
 **Performance:**
 - Avoid deeply nested Vertical components when possible
-- Use CSS Grid for complex layouts instead of multiple nested flex containers
+- On web, use CSS Grid for complex layouts instead of deeply nested flex
+  containers. On React Native, `Grid` is portable only with a fixed integer
+  column count; use explicit `Horizontal` rows or a virtualised `FlatList` for
+  intrinsic sizing, spanning, or scrollable collections.
 - Consider virtualization for long lists
 
 **Accessibility:**
@@ -563,4 +566,3 @@ import { Vertical, Horizontal, Center } from '@app-studio/components';
   </Horizontal>
 </Vertical>
 ```
-

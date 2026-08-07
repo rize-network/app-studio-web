@@ -185,13 +185,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
               <Horizontal gap={8}>
                 <TextField
                   value={customColor}
-                  onChange={(event: any) =>
-                    handleCustomColorChange(
-                      typeof event === 'string'
-                        ? event
-                        : event?.target?.value ?? ''
-                    )
-                  }
+                  onChange={handleCustomColorChange}
                   placeholder="#000000 or rgb(0,0,0)"
                   size="sm"
                   style={{ flex: 1 }}

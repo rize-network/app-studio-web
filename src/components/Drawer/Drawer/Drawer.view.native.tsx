@@ -39,7 +39,7 @@ export const DrawerOverlay: React.FC<DrawerOverlayProps> = ({
     >
       <View
         flex={1}
-        backgroundColor="color-blackAlpha-500"
+        backgroundColor="color-dark-50-360"
         onPress={handleClose}
         {...props}
       >

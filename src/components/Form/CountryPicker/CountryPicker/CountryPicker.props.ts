@@ -9,7 +9,7 @@ import {
 } from './CountryPicker.type';
 // Defines properties for CountryPicker excluding 'size' from InputProps for customization
 export interface CountryPickerProps
-  extends Omit<InputProps, 'size' | 'shadow' | 'value'> {
+  extends Omit<InputProps, 'size' | 'shadow' | 'value' | 'onChange'> {
   // Optional ID for the CountryPicker input
   id?: string;
   // Optional error flag to indicate validation state
@@ -30,10 +30,14 @@ export interface CountryPickerProps
   isReadOnly?: boolean;
   // Flag to disable the CountryPicker input
   isDisabled?: boolean;
-  // Optional blur handler function
-  onBlur?: (value: any) => void;
-  // Optional change handler function
-  onChange?: (value: any) => void;
+  // Called on blur with the blur **event**, not the value.
+  onBlur?: (event: any) => void;
+  /**
+   * Called with the country name the field now holds — either the option that
+   * was picked or what the user has typed so far. Never the DOM event, so
+   * `e.target.value` is a compile error.
+   */
+  onChange?: (value: string) => void;
   // Optional styles object specific to CountryPicker
   views?: CountryPickerStyles;
   // Optional size of the CountryPicker for visual styles
@@ -70,7 +74,7 @@ export interface CountryPickerViewProps extends CountryPickerProps {
   // Current selected value managed by the state hook
   value?: string;
   // Setter for the value managed by the state hook
-  setValue?: Function;
+  setValue?: (value: string) => void;
   // Theme mode override (light/dark)
 }
 // Defines properties for DropDown excluding 'size' from InputProps for customization
@@ -78,7 +82,7 @@ export interface CountryPickerDropDownProps extends Omit<InputProps, 'size'> {
   // Optional size of the dropdown for visual styles
   size?: Size;
   // Callback function for dropdown actions
-  callback?: Function;
+  callback?: (option: string) => void;
   // Options array to populate the dropdown
   options?: Array<Country>;
   // Optional styles object specific to dropdown
@@ -87,7 +91,7 @@ export interface CountryPickerDropDownProps extends Omit<InputProps, 'size'> {
 // Defines properties for DropDownItem excluding 'size' from InputProps for customization
 export interface DropDownItemProps extends Omit<InputProps, 'size'> {
   // Callback function for dropdown item actions
-  callback?: Function;
+  callback?: (option: string) => void;
   // The option value for the dropdown item
   option?: string;
   // Optional size of the dropdown item for visual styles

@@ -2,9 +2,12 @@ import React from 'react';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Elevation } from '../../../../utils/elevation';
 import { Shape, Size, TextFieldStyles, Variant } from './TextField.type';
-// The TextFieldProps interface extends InputProps and customizes the TextField component, omitting the 'size' prop from InputProps.
+// The TextFieldProps interface extends InputProps and customizes the TextField
+// component. `onChange` is omitted from InputProps (where it is the DOM
+// FormEventHandler) because TextField re-declares it with value-first
+// semantics — see the prop's own doc comment below.
 export interface TextFieldProps
-  extends Omit<InputProps, 'size' | 'shadow' | 'left' | 'right'> {
+  extends Omit<InputProps, 'size' | 'shadow' | 'left' | 'right' | 'onChange'> {
   // Optional unique identifier for the TextField.
   id?: string;
   // Optional property for error handling within the TextField.
@@ -39,12 +42,29 @@ export interface TextFieldProps
   leftIcon?: React.ReactNode;
   // Optional ViewProps applied to the field's label element.
   labelProps?: any;
-  // Optional callback function that is called when the TextField value changes.
-  onChange?: (value: any) => void;
+  /**
+   * Called when the value changes, with the **value itself** — not the DOM
+   * event. TextField follows the value-first convention this package already
+   * exposes through `onChangeText`, so there is no `event.target` to read:
+   *
+   *     onChange={(value) => setQuery(value)}                  // ✅
+   *     onChange={(e) => setQuery(e.target.value)}             // ❌ compile error
+   *
+   * The parameter is deliberately typed `string` rather than `any`: a
+   * DOM-shaped handler is an API mistake, and typing it makes that mistake a
+   * compile error instead of an input that silently never updates. If you
+   * need the event, use `onChangeText` for the value and reach for the native
+   * `<input>` through `inputRef`.
+   */
+  onChange?: (value: string) => void;
   // Optional callback function that is called when the text in the TextField changes.
   onChangeText?: (value: string) => void;
-  // Optional callback function that is called when the TextField loses focus.
-  onBlur?: (value: any) => void;
+  /**
+   * Called when the field loses focus, with the blur **event** (not the
+   * value). Clearing the field via the clear button synthesises a minimal
+   * `{ target: { name } }` so form libraries can mark the field touched.
+   */
+  onBlur?: (event: any) => void;
   // Optional callback function that is called when the TextField is clicked.
   onClick?: () => void;
   // Optional callback function that is called when the TextField gains focus.
@@ -76,18 +96,18 @@ export interface TextFieldViewProps extends TextFieldProps {
   // Optional property to give hints to the user about how to fill in the TextField.
   hint?: string;
   // Optional function that allows changing the hint text.
-  setHint?: Function;
+  setHint?: (hint?: string) => void;
   // Optional property indicating whether the TextField is currently focused.
   isFocused?: boolean;
   // Optional function to update the focused state of the TextField.
-  setIsFocused?: Function;
+  setIsFocused?: (focused: boolean) => void;
   // Optional property indicating whether the TextField is currently hovered by the mouse cursor.
   isHovered?: boolean;
   // Optional function to update the hovered state of the TextField.
-  setIsHovered?: Function;
+  setIsHovered?: (hovered: boolean) => void;
   // Optional controlled value of the TextField, potentially used in a state management context.
   value?: string;
   // Optional function to programmatically set the value of the TextField.
-  setValue?: Function;
+  setValue?: (value: string) => void;
   // Theme mode override (light/dark).
 }

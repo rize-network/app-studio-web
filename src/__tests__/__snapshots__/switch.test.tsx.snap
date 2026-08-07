@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Switch to match snapshot 1`] = `
 <label
-  className="wh-fit-content ht-fit-content wh-fit-content fse-sm fwt-400 tdn-none gp-12px dy-flex ht-fit-content ais-center cror-default oy-1 tn-all-0p2s-ease"
-  fontStyle="normal"
+  className="wh-fit-content ht-fit-content wh-fit-content fse-sm fsee-normal fwt-400 tdn-none gp-12px dy-flex ht-fit-content ais-center cror-default oy-1 tn-all-0p2s-ease-in-out"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
+  ref={[Function]}
 >
   <input
     checked={false}
@@ -14,13 +14,16 @@ exports[`Switch to match snapshot 1`] = `
     name="name"
     onChange={[Function]}
     readOnly={true}
+    ref={[Function]}
     type="checkbox"
   />
   <div
-    className="plt-4px prt-4px ptp-4px pbm-4px dy-flex ais-center jct-flex-start mbm-4px brs-9999px bcr- ow-hidden cror-pointer tn-all-0p3s-cubic-bezier0p4-0-0p2-1 bsw-rgb249-115-22-0px-4px-14px-0px pvl-4 phl-4 ht-32px wh-68px"
+    className="plt-5px prt-5px ptp-5px pbm-5px dy-flex ais-center jct-center pn-relative mbm-4px brs-9999px bcr-red oy-1 cror-pointer tn-all-0p2s-ease-in-out bsw-rgb249-115-22-0px-4px-14px-0px pvl-5 phl-5 ht-36px wh-72px"
+    ref={[Function]}
   >
     <div
-      className="wh-24px ht-24px brs-50 bcr- bsw-0-1px-2px-rgba0-0-0-0p1 tn-all-0p3s-cubic-bezier0p4-0-0p2-1 zix-1 ht-24px wh-24px"
+      className="wh-26px ht-26px pn-absolute tp-50 lt-5px brs-50 bcr-blue bsw-0-1px-3px-rgba15-23-42-0p18 tm-translateY-50-scale1 tn-all-0p2s-ease-in-out zix-1 ht-26px wh-26px"
+      ref={[Function]}
     />
   </div>
 </label>

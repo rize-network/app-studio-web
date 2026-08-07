@@ -1,0 +1,30 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Link to have text decoration underline on hover should match snapshot 1`] = `
+<a
+  className="dy-inline-flex gp-3px ais-center fwp-nowrap cr-inherit tdn-none tdn-underline--hover"
+  href="https://www.npmjs.com/package/app-studio"
+  ref={[Function]}
+>
+  Link
+</a>
+`;
+
+exports[`Link to open external link in a new tab should match snapshot 1`] = `
+[
+  " ",
+  <a
+    className="dy-inline-flex gp-3px ais-center fwp-nowrap cr-inherit tdn-none"
+    href="https://www.npmjs.com/package/app-studio"
+    ref={[Function]}
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    External
+    <div
+      className="wh-14px ht-14px wht-14 cr-currentColor dy-flex ais-center jct-center tm-rotate0deg"
+      ref={[Function]}
+    />
+  </a>,
+]
+`;

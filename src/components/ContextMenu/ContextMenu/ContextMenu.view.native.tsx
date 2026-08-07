@@ -96,7 +96,7 @@ export const ContextMenuTrigger: React.FC<
           borderRadius={999}
           alignItems="center"
           justifyContent="center"
-          backgroundColor="color-blackAlpha-100"
+          backgroundColor="color-black-900-60"
           pointerEvents="none"
           {...views?.indicator}
         >

@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Card } from 'src/components';
 import { cleanup, render, screen } from '@testing-library/react';
 

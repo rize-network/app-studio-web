@@ -61,9 +61,9 @@
     "defaultValue": false
   },
   "onChange": {
-    "type": "(value: any) => void",
+    "type": "(value: string | string[]) => void",
     "typeValues": null,
-    "description": "Function that handles the change event when the selected option(s) change",
+    "description": "Called with the next selection: the chosen option's value for a single select, the full array when isMulti. Never the DOM event — there is no event.target to read.",
     "defaultValue": "() => {}"
   },
   "shape": {

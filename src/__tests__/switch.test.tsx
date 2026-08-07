@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Switch } from 'src/components';
 
 import { cleanup } from '@testing-library/react';

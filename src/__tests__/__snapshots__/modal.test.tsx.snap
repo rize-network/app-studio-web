@@ -2,82 +2,59 @@
 
 exports[`Modal to match snapshot 1`] = `
 <div
-  className="wh-100 ht-100 dy-flex jct-center ais-center pn-fixed tp-0px lt-0px wh-100 ht-100 zix-1000 vy-visible tn-all-0p3s-ease cror-pointer"
+  className="wh-100 ht-100 pn-fixed tp-0px lt-0px wh-100 ht-100 zix-1000 vy-visible oy-1 tn-opacity-0p2s-ease-visibility-0p2s-ease dy-flex jct-center ais-center cror-pointer"
   onClick={[Function]}
+  ref={[Function]}
 >
   <div
-    className="pn-absolute tp-0px lt-0px zix-1000 wh-100vw ht-100vh dy-flex bcr- bfr-blur10px tn-all-0p3s-ease jct-flex-start ais-center cror-pointer"
+    className="pn-absolute tp-0px lt-0px zix-1000 wh-100vw ht-100vh dy-flex bcr-color-mixin-srgb-var--color-dark-50-36-transparent bfr-blur10px tn-background-color-0p2s-ease-backdrop-filter-0p2s-ease jct-flex-start ais-center cror-pointer"
     isFullScreen={true}
     onClick={[Function]}
+    ref={[Function]}
   >
     <div
-      className="dy-flex fdn-column cror-default bcr- wh-600px ht-fit-content tn-all-0p3s-ease bsw-none brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px"
+      className="cror-default bcr-var--color-white wh-600px ht-fit-content tn-opacity-0p2s-ease-transform-0p2s-ease-box-shadow-0p2s-ease oy-1 tm-translateY0 bsw-none brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px dy-flex fdn-column"
       isClosePrevented={true}
       onClick={[Function]}
+      ref={[Function]}
       variant="square"
     >
       <div
-        borderBottomColor="color-gray-200"
-        borderBottomStyle="solid"
-        borderBottomWidth="1px"
         buttonSize="xl"
-        className="plt-24px prt-24px ptp-16px pbm-16px dy-flex fdn-row jct-space-between ais-center pvl-16 phl-24 mobile--pvl-12 mobile--phl-16"
+        className="plt-24px prt-24px ptp-16px pbm-16px jct-space-between ais-center pvl-16 phl-24 bbwh-1px bbse-solid bbcr-var--color-gray-200 mobile--plt-16px mobile--prt-16px mobile--ptp-12px mobile--pbm-12px dy-flex fdn-row"
+        ref={[Function]}
       >
         <div
           className="cror-pointer"
           onClick={[Function]}
+          ref={[Function]}
         >
           <div
-            className="wh-20px ht-20px dy-flex jct-center ais-center wht-20 lht-20px cr- tm-rotate0deg"
-          >
-            <svg
-              aria-hidden="true"
-              fill="none"
-              focusable="false"
-              stroke=""
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
-              <line
-                stroke="theme-primary"
-                x1="18"
-                x2="6"
-                y1="6"
-                y2="18"
-              />
-              <line
-                stroke="theme-primary"
-                x1="6"
-                x2="18"
-                y1="6"
-                y2="18"
-              />
-            </svg>
-          </div>
+            className="wh-20px ht-20px wht-20 cr-var--theme-primary dy-flex ais-center jct-center tm-rotate0deg"
+            ref={[Function]}
+          />
         </div>
         Modal Container
       </div>
       <div
-        className="plt-24px prt-24px ptp-16px pbm-16px pvl-16 phl-24 fse-16px fwt-400 lht-24px cr- mobile--pvl-12 mobile--phl-16 mobile--fse-14px ht-200px"
+        className="plt-24px prt-24px ptp-16px pbm-16px pvl-16 phl-24 fse-16px fwt-400 cr-var--color-gray-700 mobile--fse-14px mobile--plt-16px mobile--prt-16px mobile--ptp-12px mobile--pbm-12px ht-200px"
+        ref={[Function]}
       >
         Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum. Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.
       </div>
       <div
-        borderTopColor="color-gray-200"
-        borderTopStyle="solid"
-        borderTopWidth="1px"
-        className="plt-24px prt-24px ptp-16px pbm-16px dy-flex fdn-row mtp-auto ais-center jct-flex-end pvl-16 phl-24 gp-12px mobile--pvl-12 mobile--phl-16 mobile--gp-8px"
+        className="plt-24px prt-24px ptp-16px pbm-16px mtp-auto ais-center jct-flex-end pvl-16 phl-24 btwh-1px btse-solid btcr-var--color-gray-200 gp-12px mobile--gp-8px mobile--plt-16px mobile--prt-16px mobile--ptp-12px mobile--pbm-12px dy-flex fdn-row"
+        ref={[Function]}
       >
         <button
-          className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-8px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
+          className="plt-20px prt-20px ptp-9px pbm-9px mht-40px phl-20 pvl-9 fse-14px fwt-500 lht-20px lsg--0p01em dy-inline-flex ais-center jct-center wh-fit-content brs-8px tn-background-color-0p2s-ease-border-color-0p2s-ease-opacity-0p2s-ease cror-pointer bcr-var--theme-primary cr-var--color-white bwh-1px bsee-solid bcrr-var--theme-primary oy-0p92--hover oy-0p96--active oe-none--focus-visible bsw-0-0-0-2px-var--var--color-white-0-0-0-4px-var--var--theme-primary--focus-visible"
           disabled={false}
-          isHovered={false}
+          ref={[Function]}
           type="button"
         >
           <div
-            className="dy-flex fdn-row gp-8px ais-center jct-center cr- mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em cr---hover"
+            className="gp-8px ais-center jct-center fse-14px fwt-500 lht-20px lsg--0p01em wse-nowrap cr-var--color-white dy-flex fdn-row"
+            ref={[Function]}
           >
             Cancel
           </div>

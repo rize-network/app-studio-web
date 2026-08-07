@@ -1,15 +1,33 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ProgressBar with value 50 should match snapshot 1`] = `
 <div
   aria-valuemax={100}
   aria-valuemin={0}
   aria-valuenow={50}
-  className="wh-100 ht-8px brs-4px ow-hidden"
+  className="wh-100 ht-8px brs-4px ow-hidden pn-relative dy-flex ais-center jct-center"
+  ref={[Function]}
   role="progressbar"
+  style={
+    {
+      "backgroundColor": "var(--color-gray-200)",
+    }
+  }
 >
   <div
-    className="wh-50 ht-100 brs-4px"
+    style={
+      {
+        "backgroundColor": "var(--theme-primary)",
+        "borderRadius": "4px",
+        "bottom": 0,
+        "height": "100%",
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+        "transition": "width 0.5s ease-in-out",
+        "width": "50%",
+      }
+    }
   />
 </div>
 `;

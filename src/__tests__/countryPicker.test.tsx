@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { CountryPicker } from 'src/components';
 import countries from 'src/components/Form/CountryPicker/countries.json';
 import {
@@ -8,6 +8,7 @@ import {
 } from 'src/components/Form/CountryPicker/CountryPicker/CountryPicker.view';
 
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 afterEach(() => {
   cleanup();
@@ -35,7 +36,7 @@ describe('CountryPicker component', () => {
     expect(inputElement).toBeDisabled();
   });
   test('triggers onBlur event when the input field loses focus', () => {
-    const handleBlur = jest.fn();
+    const handleBlur = vi.fn();
     render(<CountryPicker onBlur={handleBlur} />);
     const countryInput = screen.getByRole('textbox');
     fireEvent.focus(countryInput);
@@ -44,7 +45,7 @@ describe('CountryPicker component', () => {
     expect(handleBlur).toHaveBeenCalled();
   });
   test('triggers onChange event when selecting a country', () => {
-    const handleChange = jest.fn();
+    const handleChange = vi.fn();
     render(<CountryPicker onChange={handleChange} />);
     const countryInput = screen.getByRole('textbox');
     const selectedCountry = 'United States';
@@ -91,7 +92,7 @@ describe('CountryPicker component', () => {
 
 describe('DropDown component', () => {
   const options = countries;
-  const callback = jest.fn();
+  const callback = vi.fn();
   const views = {
     dropDown: { backgroundColor: 'red' },
     text: { color: 'white' },
@@ -154,7 +155,7 @@ describe('DropDown component', () => {
   //         code: 'AL',
   //       },
   //     ];
-  //     const callback = jest.fn();
+  //     const callback = vi.fn();
   //     render(<DropDown options={options} callback={callback} views={views} />);
 
   //     const selectedOption = options[1];
@@ -180,7 +181,7 @@ describe('DropDown component', () => {
 
     // test('calls callback function when option is clicked', () => {
     //   const option = 'United States';
-    //   const callback = jest.fn();
+    //   const callback = vi.fn();
     //   render(
     //     <DropDownItem option={option} callback={callback} views={views} />
     //   );
@@ -223,7 +224,7 @@ describe('DropDown component', () => {
     // });
 
     // test('should call callback when an option is selected', () => {
-    //   const callback = jest.fn();
+    //   const callback = vi.fn();
     //   render(
     //     <DropDownItem
     //       option={option}

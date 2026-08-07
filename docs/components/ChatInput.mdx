@@ -1,0 +1,224 @@
+# ChatInput
+
+A chat composer with file attachments, prompt examples, `@` mentions, suggestions, audio recording and agent controls.
+
+### **Import**
+
+```tsx
+import { ChatInput } from '@app-studio/components';
+```
+
+### **Default**
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from '@app-studio/components';
+import { ChatInput } from '@app-studio/components';
+
+export const DefaultChatInput = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <Vertical gap={20}>
+      <ChatInput
+        value={value}
+        onChange={setValue}
+        onSubmit={(message) => {
+          console.log('submitted', message);
+          setValue('');
+        }}
+        placeholder="Type your message… use @ to mention"
+      />
+    </Vertical>
+  );
+};
+```
+
+## The input is a `contentEditable` div, not a `<textarea>`
+
+This is worth stating plainly, because it changes how you drive the component from outside React.
+
+The visible field rendered by `ChatInput` — the one you style through `views.editableInput` — is:
+
+```html
+<div contenteditable="true" role="textbox" aria-multiline="true">…</div>
+```
+
+A `contentEditable` element is a deliberate choice for a rich composer (inline mentions, pasted rich
+content, custom carets), but it is **not a form control**: it has no `value` property, it does not take
+part in native form submission, and generic code that fills or reads "an input" — test runners, session
+replay, automation, autofill, draft restoration — will silently do nothing or throw against it.
+
+So the component also renders a **hidden mirror `<textarea>`** that always carries the same text.
+
+### **Hidden mirror `<textarea>`**
+
+The mirror is rendered by default, is `aria-hidden` and not focusable (screen readers only ever see the
+real `role="textbox"`), and is marked with `data-editable-input-mirror="true"`. Give it a `name` to
+make it addressable and submittable:
+
+```tsx
+<ChatInput name="message" value={value} onChange={setValue} />
+```
+
+**Reading the value**
+
+```ts
+const field = container.querySelector('[name="message"]');
+// or, without a name:
+const field = container.querySelector('[data-editable-input-mirror]');
+
+field.value; // → current text, always in sync with what the user sees
+```
+
+**Writing the value** — set `value` then dispatch a bubbling `input` event. The component listens with a
+native DOM listener (not React's synthetic `onChange`), so the plain assignment below is honoured; you do
+not need the `HTMLTextAreaElement.prototype` value-setter trick that React's value tracker normally forces:
+
+```ts
+field.value = 'Restored draft';
+field.dispatchEvent(new Event('input', { bubbles: true }));
+```
+
+That write propagates to the `contentEditable` area, the placeholder, and `onChange`, exactly as typing
+does. Because it goes through `onChange`, a **controlled** `ChatInput` still needs its parent to apply the
+new value — the same contract as any controlled React input.
+
+The mirror also sits inside the component's `<form>`, so with a `name` the message is included in a native
+form submission and in `new FormData(form)`.
+
+Set `hiddenInput={false}` to opt out of the extra node, and style it — if you ever need to — through
+`views.hiddenInput`.
+
+### **Imperative API (`ref`)**
+
+For callers holding a React ref, the same capability is available without touching the DOM. `ChatInput`'s
+ref is a `ChatInputHandle`:
+
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { ChatInput, ChatInputHandle } from '@app-studio/components';
+
+export const ImperativeChatInput = () => {
+  const ref = useRef<ChatInputHandle>(null);
+
+  // Restore a saved draft without reimplementing DOM writes
+  useEffect(() => {
+    ref.current?.setValue(localStorage.getItem('draft') ?? '');
+  }, []);
+
+  return (
+    <ChatInput
+      ref={ref}
+      onSubmit={(message) => {
+        console.log(message);
+        ref.current?.clear();
+      }}
+    />
+  );
+};
+```
+
+| Method               | Description                                                           |
+| -------------------- | --------------------------------------------------------------------- |
+| `getValue()`         | Current text of the input.                                            |
+| `setValue(value)`    | Replaces the text. Fires `onChange` exactly like typing does.         |
+| `clear()`            | Shorthand for `setValue('')`.                                         |
+| `focus()` / `blur()` | Focuses or blurs the editable area.                                   |
+| `getElement()`       | The `contentEditable` element (`role="textbox"`).                     |
+| `getInputElement()`  | The hidden mirror `<textarea>`; `null` when `hiddenInput` is `false`. |
+
+### **Standalone `EditableInput`**
+
+`EditableInput` — the editable area on its own — takes the same `name`, `id`, `hiddenInput`,
+`hiddenInputRef` and `views.hiddenInput` props, so the mirror is available outside of `ChatInput` too:
+
+```tsx
+import React, { useRef, useState } from 'react';
+import { EditableInput } from '@app-studio/components';
+
+export const StandaloneEditableInput = () => {
+  const [value, setValue] = useState('');
+  const editableRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  return (
+    <EditableInput
+      ref={editableRef}
+      hiddenInputRef={inputRef}
+      name="message"
+      value={value}
+      onChange={setValue}
+    />
+  );
+};
+```
+
+Note that `EditableInput`'s own `ref` points at the `contentEditable` div (it is what the component uses
+internally for caret handling); the mirror is reached through `hiddenInputRef`.
+
+### **React Native**
+
+There is no DOM on native, so `EditableInput` renders a real multiline `TextInput` there and no mirror is
+created: `hiddenInput` and `hiddenInputRef` are accepted for API parity and ignored, while `name` and `id`
+are forwarded to the input. `setValue` on the handle falls back to a direct state update, so the
+imperative API behaves the same on both platforms.
+
+### **attachments, mentions and suggestions**
+
+```tsx
+import React, { useState } from 'react';
+import { ChatInput } from '@app-studio/components';
+
+export const RichChatInput = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <ChatInput
+      value={value}
+      onChange={setValue}
+      onSubmit={(message) => setValue('')}
+      mentionData={[
+        { id: '1', name: 'alice', description: 'Product' },
+        { id: '2', name: 'bob', description: 'Engineering' },
+      ]}
+      mentionTrigger="@"
+      suggestions={[
+        { id: 's1', text: 'Summarise this thread' },
+        { id: 's2', text: 'Draft a reply' },
+      ]}
+      promptExamples={[{ id: 'p1', text: 'What can you do?' }]}
+      enableAudioRecording
+      onFileUpload={(file) => console.log('upload', file.name)}
+    />
+  );
+};
+```
+
+### **size, shape, variant**
+
+```tsx
+import React from 'react';
+import { Vertical } from '@app-studio/components';
+import { ChatInput } from '@app-studio/components';
+
+export const StyledChatInput = () => (
+  <Vertical gap={20}>
+    <ChatInput size="sm" shape="rounded" variant="outline" />
+    <ChatInput size="lg" shape="square" variant="default" />
+  </Vertical>
+);
+```
+
+### **views**
+
+| Key                                                                                     | Target                              |
+| --------------------------------------------------------------------------------------- | ----------------------------------- |
+| `container`                                                                             | Outer wrapper                       |
+| `content`                                                                               | The `<form>` holding the composer   |
+| `editableInput`                                                                         | The `contentEditable` area          |
+| `hiddenInput`                                                                           | The hidden mirror `<textarea>`      |
+| `attachments`, `attachmentItem`, `attachmentName`, `attachmentSize`, `attachmentRemove` | Attachment list                     |
+| `promptExamples`, `promptExampleItem`                                                   | Prompt examples                     |
+| `submitButton`, `fileButton`, `recordButton`                                            | Action buttons                      |
+| `loadingIndicator`, `bottomTip`                                                         | Agent-running row and error message |

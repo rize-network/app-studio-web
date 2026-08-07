@@ -153,7 +153,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
               <TextField
                 placeholder="Search emojis..."
                 value={searchQuery}
-                onChange={(e) => handleSearchChange(e.target.value)}
+                onChange={handleSearchChange}
                 size="sm"
               />
             </View>

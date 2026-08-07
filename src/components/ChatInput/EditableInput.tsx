@@ -1,11 +1,17 @@
 import React, {
   forwardRef,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   useCallback,
 } from 'react';
 import { View, Text, Vertical, useElementPosition } from 'app-studio';
+// DOM synchronisation runs inside the commit rather than as a passive effect: a passive effect can land
+// after an imperative write from outside React and revert the field to an already-stale value. Falls back
+// to `useEffect` during server rendering, where layout effects do not run.
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 // Defines the structure for a suggestion object, typically used for autocomplete functionality.
 export interface Suggestion {
   // A unique identifier for the suggestion.
@@ -54,12 +60,22 @@ interface EditableInputProps {
   maxHeight?: string;
   // Sets the minimum height for the editable input area.
   minHeight?: string;
+  // Form field name applied to the hidden mirror `<textarea>`, so the value participates in native form submission.
+  name?: string;
+  // DOM id applied to the hidden mirror `<textarea>`.
+  id?: string;
+  // Renders a hidden `<textarea>` kept in sync with the editable area, so generic tooling can read/write `element.value`. Defaults to `true`.
+  hiddenInput?: boolean;
+  // Ref to the hidden mirror `<textarea>`, giving callers a real form control to read from or write to.
+  hiddenInputRef?: React.Ref<HTMLTextAreaElement>;
   // An optional object allowing custom React components to be passed for various internal parts of the `EditableInput`.
   views?: {
     // Custom view component for the main container.
     container?: any;
     // Custom view component for the editable input area itself.
     input?: any;
+    // Custom view component for the hidden mirror `<textarea>`.
+    hiddenInput?: any;
     // Custom view component for the placeholder text.
     placeholder?: any;
     // Custom view component for the container holding suggestions.
@@ -102,6 +118,14 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       maxHeight = '200px',
       // The minimum height of the editable area; defaults to '40px'.
       minHeight = '40px',
+      // Form field name for the hidden mirror `<textarea>`.
+      name,
+      // DOM id for the hidden mirror `<textarea>`.
+      id,
+      // Whether the hidden mirror `<textarea>` is rendered; defaults to `true`.
+      hiddenInput = true,
+      // Optional ref exposing the hidden mirror `<textarea>` to the caller.
+      hiddenInputRef,
       // Custom view components to override default rendering for internal elements.
       views = {},
     },
@@ -142,15 +166,65 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       x: 0,
       y: 0,
     });
-    // An effect hook that synchronizes the `textContent` of the content-editable div with the component's `value` prop and updates placeholder visibility.
-    useEffect(() => {
-      const editableDiv = ref as React.RefObject<HTMLDivElement>;
-      if (editableDiv.current && value !== lastValueRef.current) {
+    // A ref to the hidden `<textarea>` that mirrors the current value as a real form control.
+    const mirrorRef = useRef<HTMLTextAreaElement | null>(null);
+    // Assigns the mirror element to the internal ref and to any `hiddenInputRef` provided by the caller.
+    const setMirrorRef = useCallback(
+      (node: HTMLTextAreaElement | null) => {
+        mirrorRef.current = node;
+        if (typeof hiddenInputRef === 'function') {
+          hiddenInputRef(node);
+        } else if (hiddenInputRef) {
+          (
+            hiddenInputRef as React.MutableRefObject<HTMLTextAreaElement | null>
+          ).current = node;
+        }
+      },
+      [hiddenInputRef]
+    );
+    // Writes a value into the hidden mirror. The mirror is uncontrolled — it follows the `value` prop imperatively so that reading `element.value` always returns the current text.
+    const syncMirror = useCallback((next: string) => {
+      if (mirrorRef.current && mirrorRef.current.value !== next) {
+        mirrorRef.current.value = next;
+      }
+    }, []);
+    // An effect hook that synchronizes the `textContent` of the content-editable div and the hidden mirror with the component's `value` prop, and updates placeholder visibility.
+    useIsomorphicLayoutEffect(() => {
+      const editableDiv = ref as React.RefObject<HTMLDivElement> | null;
+      if (editableDiv?.current && value !== lastValueRef.current) {
         editableDiv.current.textContent = value;
         lastValueRef.current = value;
         setShowPlaceholder(!value);
       }
-    }, [value, ref]);
+      syncMirror(value);
+    }, [value, ref, syncMirror]);
+    // Applies a value that originated outside the content-editable area — a write to the hidden mirror, or an imperative `setValue` call — keeping the DOM, the placeholder and the `value` prop in sync.
+    const applyExternalValue = useCallback(
+      (next: string) => {
+        if (next === lastValueRef.current) return;
+        const editableDiv = ref as React.RefObject<HTMLDivElement> | null;
+        if (editableDiv?.current && editableDiv.current.textContent !== next) {
+          editableDiv.current.textContent = next;
+        }
+        lastValueRef.current = next;
+        setShowPlaceholder(!next);
+        syncMirror(next);
+        onChange(next);
+      },
+      [onChange, ref, syncMirror]
+    );
+    // An effect hook that listens for native `input`/`change` events on the hidden mirror. A native listener is used rather than React's synthetic `onChange` because React's value tracker swallows the common automation sequence `element.value = '…'` followed by `dispatchEvent(new Event('input', { bubbles: true }))`. Attached during the commit so the mirror is never live in the DOM without a listener behind it.
+    useIsomorphicLayoutEffect(() => {
+      const mirror = mirrorRef.current;
+      if (!mirror) return;
+      const handleMirrorInput = () => applyExternalValue(mirror.value);
+      mirror.addEventListener('input', handleMirrorInput);
+      mirror.addEventListener('change', handleMirrorInput);
+      return () => {
+        mirror.removeEventListener('input', handleMirrorInput);
+        mirror.removeEventListener('change', handleMirrorInput);
+      };
+    }, [applyExternalValue, hiddenInput]);
     // An effect hook to automatically focus the content-editable input element if the `autoFocus` prop is true when the component mounts or `autoFocus` changes.
     useEffect(() => {
       if (autoFocus && ref && typeof ref === 'object' && ref.current) {
@@ -257,6 +331,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       if (newValue !== lastValueRef.current) {
         onChange(newValue);
         lastValueRef.current = newValue;
+        syncMirror(newValue);
         setShowPlaceholder(!newValue);
         const cursorPos = getCursorPosition();
         checkForMentions(newValue, cursorPos);
@@ -275,6 +350,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             beforeMention + mentionTrigger + mention.name + ' ' + afterMention;
           onChange(newText);
           lastValueRef.current = newText;
+          syncMirror(newText);
           ref.current.textContent = newText;
           const newCursorPos =
             beforeMention.length +
@@ -313,6 +389,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
         onChange,
         onMentionSelect,
         ref,
+        syncMirror,
       ]
     );
     // A memoized callback function that handles the selection of a suggestion, invoking the `onSuggestionSelect` prop if provided and resetting the selected index.
@@ -437,6 +514,39 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             {...views?.input}
           />
         </View>
+        {/*
+          Hidden mirror of the editable area. The visible field is a `contentEditable` div — it has no
+          `value` property, so anything that drives a form control generically (test runners, replay
+          engines, autofill, draft restoration) has nothing to hold on to. This `<textarea>` carries the
+          same text: read it with `element.value`, write it with `element.value = '…'` followed by
+          `dispatchEvent(new Event('input', { bubbles: true }))`, and submit it natively via `name`.
+          It is `aria-hidden` and not focusable, so assistive technology only ever sees the real textbox.
+        */}
+        {hiddenInput && (
+          <View
+            as="textarea"
+            ref={setMirrorRef}
+            id={id}
+            name={name}
+            defaultValue={value}
+            disabled={disabled}
+            tabIndex={-1}
+            aria-hidden="true"
+            data-editable-input-mirror="true"
+            opacity={0}
+            width={1}
+            height={1}
+            padding={0}
+            border="none"
+            resize="none"
+            overflow="hidden"
+            position="absolute"
+            bottom={0}
+            left={0}
+            pointerEvents="none"
+            {...views?.hiddenInput}
+          />
+        )}
         {}
         {showMentions && filteredMentions.length > 0 && (
           <View

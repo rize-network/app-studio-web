@@ -60,12 +60,14 @@ Layout components help structure your UI. The main layout components are:
 - `Horizontal`: Horizontal flex container
 - `Vertical`: Vertical flex container
 - `Center`: Centered flex container
+- `Grid`: CSS Grid on web; fixed-count flex rows on React Native
 
 Example:
 
 ```jsx
 import React from 'react';
-import { View, Horizontal, Vertical, Center, Text, Button } from '@app-studio/components';
+import { View, Horizontal, Vertical, Center, Text } from 'app-studio';
+import { Button } from '@app-studio/components';
 
 function MyLayout() {
   return (
@@ -85,38 +87,58 @@ function MyLayout() {
 }
 ```
 
+React Native has no CSS Grid. Use `Grid columns={2}` (a fixed integer) for a
+small, non-virtualised layout. String templates such as `auto-fit`/`auto-fill`
+collapse to one native column and `rows` is ignored. Compose explicit
+`Horizontal` rows for spanning/intrinsic layouts, or use `FlatList` with
+`numColumns` for scrollable card collections.
+
 ## Form Components
 
 Form components can be used standalone or integrated with Formik:
 
-### Standalone Usage
+### Standalone Cross-Platform Usage
 
-```jsx
+`Form` is a semantic `<form>` on web and a styled `View` on React Native. Keep
+the state and validation rules shared, then wire native submission, return keys,
+labels, and accessibility explicitly:
+
+```tsx
 import React, { useState } from 'react';
+import { Form } from 'app-studio';
 import { TextField, Button } from '@app-studio/components';
 
 function MyForm() {
   const [value, setValue] = useState('');
-  
+
+  const handleSubmit = (event?: { preventDefault?: () => void }) => {
+    event?.preventDefault?.();
+    if (!value.trim()) return;
+    alert(`Submitted: ${value}`);
+  };
+
   return (
-    <form onSubmit={(e) => { e.preventDefault(); alert(`Submitted: ${value}`); }}>
-      <TextField 
+    <Form onSubmit={handleSubmit}>
+      <TextField
         label="Name"
+        accessibilityLabel="Name"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChangeText={setValue}
+        returnKeyType="done"
+        onSubmitEditing={handleSubmit}
       />
-      <Button type="submit">Submit</Button>
-    </form>
+      <Button type="submit" onClick={handleSubmit}>Submit</Button>
+    </Form>
   );
 }
 ```
 
 ### Formik Integration
 
-```jsx
+```tsx
 import React from 'react';
-import { Formik, Form } from 'formik';
-import { FormikTextField, Button } from '@app-studio/components';
+import { Formik } from 'formik';
+import { FormikForm, FormikTextField, Button } from '@app-studio/components';
 
 function MyFormikForm() {
   return (
@@ -124,10 +146,12 @@ function MyFormikForm() {
       initialValues={{ name: '' }}
       onSubmit={(values) => alert(`Submitted: ${values.name}`)}
     >
-      <Form>
-        <FormikTextField name="name" label="Name" />
-        <Button type="submit">Submit</Button>
-      </Form>
+      {({ handleSubmit }) => (
+        <FormikForm autoFocus>
+          <FormikTextField name="name" label="Name" />
+          <Button type="submit" onClick={handleSubmit}>Submit</Button>
+        </FormikForm>
+      )}
     </Formik>
   );
 }

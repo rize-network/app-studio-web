@@ -64,9 +64,9 @@
     "defaultValue": null
   },
   "onValueChange": {
-    "type": "(value: any) => void",
+    "type": "(value: string | number) => void",
     "typeValues": null,
-    "description": "Callback when tab value changes in compound component pattern",
+    "description": "Called with the newly active tab's value.",
     "defaultValue": null
   },
   "children": {

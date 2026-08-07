@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Button } from 'src/components';
 import { Modal } from 'src/components/Modal/Modal';
 

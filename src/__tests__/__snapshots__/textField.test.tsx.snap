@@ -2,41 +2,27 @@
 
 exports[`TextField to match snapshot 1`] = `
 <div
-  className="dy-flex fdn-column gp-8px pn-relative wh-100 bcr-"
+  className="mtp-0px mbm-0px gp-4px pn-relative wh-100 bsgg-border-box mvl-0 dy-flex fdn-column"
+  ref={[Function]}
 >
   <div
-    className="dy-flex fdn-row gp-8px wh-100 fwp-nowrap ais-center jct-space-between mbm-2px bsee-solid bcrr- bcr- fse-20px cror-text oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease ptp-12px pbm-12px plt-16px prt-16px mobile--brs-6px brs-8px bwh-1px cr- bcrr---hover bcrr---focus outline-none--focus bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus bcrr---focus-visible outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus-visible"
+    className="gp-8px wh-100 bsgg-border-box dy-flex fwp-nowrap ais-center jct-flex-start bsee-solid bcrr-var--color-gray-200 bcr-red fse-20px cror-text oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease-background-color-0p2s-ease mht-56px ptp-13px pbm-13px plt-16px prt-16px brs-8px bwh-1px cr-var--theme-primary bcrr-var--color-gray-300--hover bcrr-var--theme-primary--focus oe-none--focus bsw-0-0-0-3px-var--theme-primary--focus bcrr-var--theme-primary--focus-visible oe-none--focus-visible bsw-0-0-0-3px-var--theme-primary--focus-visible fdn-row"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    ref={[Function]}
   >
     <div
-      className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
-      size={12}
-    >
-      <svg
-        aria-hidden="false"
-        fill=""
-        focusable="false"
-        stroke="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1}
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M12 13c-2.67 0-8 1.34-8 4v2c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-2c0-2.66-5.33-4-8-4zm0-9c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z M12 2C9.79 2 8 3.79 8 6s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z M12 13c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4z"
-          fill="currentColor"
-        />
-         
-      </svg>
-    </div>
+      className="wh-12px ht-12px wht-12 cr-currentColor dy-flex ais-center jct-center tm-rotate0deg"
+      ref={[Function]}
+    />
     <div
-      className="dy-flex fdn-column wh-100 mwhh-100 pn-relative"
+      className="dy-flex fdn-column gp-4px fx-1 wh-100 mwhh-100 bsgg-border-box"
+      ref={[Function]}
     >
       <input
         autoComplete="off"
         autoFocus={true}
-        className="wh-100 ht-100 plt-0px prt-0px ptp-4px pbm-4px mn-0px pvl-4 phl-0 wh-100 ht-100 br-none outline-none--focus fse-20px lht-20px lsg--0p01em bcr- cr- cror-text tn-all-0p2s-ease"
+        className="plt-0px prt-0px ptp-0px pbm-0px mn-0px pvl-0 phl-0 wh-100 mht-auto br-none bcr-red fse-18px lsg--0p01em fwt-400 cr-var--color-gray-900 cror-text oy-1 tn-color-0p2s-ease-opacity-0p2s-ease opacity-0p7-focus--placeholder oe-none--focus cr-var--color-gray-400--placeholder oy-1--placeholder tn-opacity-0p2s-ease-out--placeholder bcr-var--color-mixin-srgb-var--theme-primary-20-transparent--selection bsw-0-0-0-1000px-var--var--theme-canvas-inset---webkit-autofill wbsw-0-0-0-1000px-var--var--theme-canvas-inset---webkit-autofill wtfcr-var--theme-text---webkit-autofill tn-background-color-5000s-ease-in-out-0s---webkit-autofill vy-hidden---webkit-contacts-auto-fill-button pes-none---webkit-contacts-auto-fill-button pn-absolute---webkit-contacts-auto-fill-button rt-0px---webkit-contacts-auto-fill-button"
         disabled={false}
         name="name"
         onBlur={[Function]}
@@ -44,13 +30,15 @@ exports[`TextField to match snapshot 1`] = `
         onFocus={[Function]}
         placeholder="Name"
         readOnly={false}
+        ref={[Function]}
         type="text"
       />
     </div>
   </div>
-  <div
-    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
-    fontStyle="normal"
+  <span
+    className="mlt-0px mrt-0px fsee-normal tdn-none fse-11px lht-16px mtp-0px mhl-0 fwt-500 cr-var--color-red-500 tn-color-0p2s-ease-opacity-0p2s-ease"
+    ref={[Function]}
+    style={{}}
   />
 </div>
 `;

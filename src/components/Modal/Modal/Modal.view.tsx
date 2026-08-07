@@ -73,7 +73,7 @@ export const ModalOverlay: React.FC<OverlayProps & any> = React.memo(
           width="100vw"
           height="100vh"
           display="flex"
-          backgroundColor="color-blackAlpha-500"
+          backgroundColor="color-dark-50-360"
           backdropFilter={blur ? `blur(${blur}px)` : undefined}
           transition="background-color 0.2s ease, backdrop-filter 0.2s ease"
           onClick={handleClick}
@@ -154,7 +154,7 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
   }) => {
     const onClose = onCloseProp ? onCloseProp : hideModal;
     const buttonIcon = (
-      <View onClick={onClose}>
+      <View onClick={() => onClose()}>
         <CloseIcon
           widthHeight={HeaderIconSizes[iconSize]}
           color={buttonColor}

@@ -1,9 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FieldLabel with custom color matches snapshot 1`] = `
 <label
-  className="wh-100 fse-16px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-16px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
-  fontStyle="normal"
+  className="wh-100 fse-11px fsee-normal fwt-500 tdn-none pn-static lsg--0p01em wse-nowrap oy-0p72 cr-inherit tn-color-0p2s-ease"
+  ref={[Function]}
 >
   Custom Color Label
 </label>
@@ -11,8 +11,8 @@ exports[`FieldLabel with custom color matches snapshot 1`] = `
 
 exports[`FieldLabel with custom views matches snapshot 1`] = `
 <label
-  className="wh-100 fse-18px fwt-bold tdn-none tp-0px zix--10 pn-absolute lht-16px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease ttm-uppercase"
-  fontStyle="normal"
+  className="wh-100 fse-18px fsee-normal fwt-bold tdn-none pn-static lsg--0p01em wse-nowrap oy-0p72 cr-inherit tn-color-0p2s-ease ttm-uppercase"
+  ref={[Function]}
 >
   Styled Label
 </label>
@@ -20,8 +20,8 @@ exports[`FieldLabel with custom views matches snapshot 1`] = `
 
 exports[`FieldLabel with default props matches snapshot 1`] = `
 <label
-  className="wh-100 fse-16px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-16px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
-  fontStyle="normal"
+  className="wh-100 fse-11px fsee-normal fwt-500 tdn-none pn-static lsg--0p01em wse-nowrap oy-0p72 cr-inherit tn-color-0p2s-ease"
+  ref={[Function]}
 >
   Default Label
 </label>
@@ -29,8 +29,8 @@ exports[`FieldLabel with default props matches snapshot 1`] = `
 
 exports[`FieldLabel with error state matches snapshot 1`] = `
 <label
-  className="wh-100 fse-16px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-16px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
-  fontStyle="normal"
+  className="wh-100 fse-11px fsee-normal fwt-500 tdn-none pn-static lsg--0p01em wse-nowrap oy-1 cr-var--color-red-500 tn-color-0p2s-ease"
+  ref={[Function]}
 >
   Error State Label
 </label>
@@ -38,8 +38,8 @@ exports[`FieldLabel with error state matches snapshot 1`] = `
 
 exports[`FieldLabel with large size matches snapshot 1`] = `
 <label
-  className="wh-100 fse-18px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-18px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
-  fontStyle="normal"
+  className="wh-100 fse-12px fsee-normal fwt-500 tdn-none pn-static lsg--0p01em wse-nowrap oy-0p72 cr-inherit tn-color-0p2s-ease"
+  ref={[Function]}
 >
   Large Size Label
 </label>
@@ -47,8 +47,8 @@ exports[`FieldLabel with large size matches snapshot 1`] = `
 
 exports[`FieldLabel with small size matches snapshot 1`] = `
 <label
-  className="wh-100 fse-14px fwt-400 tdn-none tp-0px zix--10 pn-absolute lht-14px lsg--0p01em wse-nowrap cr- tn-all-0p2s-ease"
-  fontStyle="normal"
+  className="wh-100 fse-11px fsee-normal fwt-500 tdn-none pn-static lsg--0p01em wse-nowrap oy-0p72 cr-inherit tn-color-0p2s-ease"
+  ref={[Function]}
 >
   Small Size Label
 </label>

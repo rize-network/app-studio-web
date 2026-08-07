@@ -89,9 +89,9 @@
     "defaultValue": "undefined"
   },
   "onBlur": {
-    "type": "(value: any) => void",
+    "type": "(event: any) => void",
     "typeValues": [],
-    "description": "Callback function invoked when the input field loses focus.",
+    "description": "Called when the field loses focus, with the blur event (not the value).",
     "defaultValue": "() => {}"
   },
   "onKeyPress": {

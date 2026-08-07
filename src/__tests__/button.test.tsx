@@ -1,10 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Button } from 'src/components/Button/Button';
 import { Shape } from 'src/components/Button/Button/Button.type';
 import { DustBinIcon } from 'src/components/Icon/Icon';
 
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 
 afterEach(() => {
   cleanup();
@@ -52,7 +53,7 @@ test('should render button component with correct class name', () => {
 // });
 
 test('button component calls onClick function when clicked', () => {
-  const handleClick = jest.fn();
+  const handleClick = vi.fn();
   render(<Button onClick={handleClick}>Button</Button>);
   const buttonElement = screen.getByRole('button');
   fireEvent.click(buttonElement);

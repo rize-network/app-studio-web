@@ -74,9 +74,24 @@ describe('design system adapters', () => {
 
   test('returns component defaults from the selected config', () => {
     const buttonProps = getDesignSystemComponentProps('button', linear);
+    const buttonConfig = linear?.components.button as any;
 
-    expect(buttonProps.color).toBe(linear?.theme.primary);
-    expect(buttonProps.views?.container?.borderRadius).toBe('8px');
+    // Defaults come through as the config's own values. Compare against the
+    // config rather than hardcoded literals — this test used to assert the raw
+    // hex `#5e6ad2` and `'8px'`, and broke the moment the config moved to
+    // semantic tokens and a new radius scale.
+    expect(buttonProps.color).toBe(buttonConfig.color);
+    expect(buttonProps.views?.container?.borderRadius).toBe(
+      buttonConfig.views.container.borderRadius
+    );
+
+    // Colours must stay semantic tokens, not resolved hex: the token is what
+    // lets a light/dark switch re-resolve them.
+    expect(buttonProps.color).toMatch(/^theme-/);
+
+    // `backgroundColor: null` in the config means "leave it to the variant",
+    // and stripNullsDeep must keep it from reaching the merged props.
+    expect(buttonProps.views?.container).not.toHaveProperty('backgroundColor');
   });
 
   test('keeps explicit props and nested views ahead of config defaults', () => {
@@ -94,9 +109,13 @@ describe('design system adapters', () => {
     );
 
     expect(merged.variant).toBe('elevated');
-    expect((merged.views as any).container.style.backgroundColor).toBe(
-      linear?.theme.surface
+    // Config defaults survive where the caller said nothing. (This read
+    // `container.style.backgroundColor` — a nesting level the config does not
+    // have — so it threw rather than asserting anything.)
+    expect((merged.views as any).container.backgroundColor).toBe(
+      (linear?.components.card as any).views.container.backgroundColor
     );
+    // ...and the caller's explicit value wins over the config default.
     expect((merged.views as any).container.borderRadius).toBe('32px');
   });
 });

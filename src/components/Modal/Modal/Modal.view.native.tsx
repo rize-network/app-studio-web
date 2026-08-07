@@ -62,7 +62,7 @@ export const ModalOverlay: React.FC<OverlayProps & any> = React.memo(
       >
         <Center
           flex={1}
-          backgroundColor="color-blackAlpha-500"
+          backgroundColor="color-dark-50-360"
           onPress={handlePress}
           {...OverlayAlignments[position]}
           {...views?.container}

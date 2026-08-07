@@ -1,6 +1,6 @@
 // Import necessary libraries and components
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { cleanup, render, screen } from '@testing-library/react';
 import { Shape } from 'src/components/ToggleGroup/ToggleGroup/ToggleGroup.type';
 import { ToggleGroup } from 'src/components/ToggleGroup/ToggleGroup';

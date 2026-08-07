@@ -1,43 +1,67 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Title Component Title with animation loop should match snapshot 1`] = `
+exports[`Title Component > Title with animation loop should match snapshot 1`] = `
 <h1
-  className="lht-100 fwt-500 tan-left mobile--fse-32px tablet--fse-40px desktop--fse-48px"
+  className="fse-96px ffy-Mulish-Inter-Geist-system-ui-sans-serif fwt-600 lsg--0p01em"
+  ref={[Function]}
 >
-  Animation 
   <span
-    backgroundColor=""
-    className="dy-inline pg-0-8px brs-4px"
+    className="fsee-normal tdn-none dy-inline"
+    ref={[Function]}
+    style={{}}
+  >
+    Animation 
+  </span>
+  <span
+    className="fsee-normal tdn-none dy-inline cr-var--theme-primary"
+    ref={[Function]}
+    style={{}}
   >
     Loop
   </span>
-   Test
+  <span
+    className="fsee-normal tdn-none dy-inline"
+    ref={[Function]}
+    style={{}}
+  >
+     Test
+  </span>
 </h1>
 `;
 
-exports[`Title Component Title with manual media queries should match snapshot 1`] = `
+exports[`Title Component > Title with manual media queries should match snapshot 1`] = `
 <h1
-  className="fse-64px lht-72px fwt-bold tan-left mobile--fse-24px tablet--fse-32px desktop--fse-40px"
+  className="fse-96px ffy-Mulish-Inter-Geist-system-ui-sans-serif fwt-600 lsg--0p01em mobile--fse-24px tablet--fse-32px desktop--fse-40px"
+  ref={[Function]}
 >
   <span
-    backgroundColor=""
-    className="dy-inline pg-0-8px brs-4px"
+    className="fsee-normal tdn-none dy-inline cr-var--theme-primary"
+    ref={[Function]}
+    style={{}}
   >
     Manual Media Title
   </span>
 </h1>
 `;
 
-exports[`Title Component Title with responsive prop should match snapshot 1`] = `
+exports[`Title Component > Title with responsive prop should match snapshot 1`] = `
 <h1
-  className="lht-100 fwt-500 tan-left mobile--fse-32px tablet--fse-40px desktop--fse-48px"
+  className="fse-96px mobile--fse-48px tablet--fse-48px desktop--fse-70px ffy-Mulish-Inter-Geist-system-ui-sans-serif fwt-600 lsg--0p01em"
+  ref={[Function]}
 >
   <span
-    backgroundColor=""
-    className="dy-inline pg-0-8px brs-4px"
+    className="fsee-normal tdn-none dy-inline cr-var--theme-primary"
+    ref={[Function]}
+    style={{}}
   >
     Responsive
   </span>
-   Title Test
+  <span
+    className="fsee-normal tdn-none dy-inline"
+    ref={[Function]}
+    style={{}}
+  >
+     Title Test
+  </span>
 </h1>
 `;

@@ -178,11 +178,7 @@ const ActionSheetView: React.FC<ActionSheetViewProps> = ({
       onRequestClose={handleClose}
     >
       <TouchableWithoutFeedback onPress={handleBackdropPress}>
-        <View
-          flex={1}
-          backgroundColor="color-blackAlpha-500"
-          {...views?.overlay}
-        >
+        <View flex={1} backgroundColor="color-dark-50-360" {...views?.overlay}>
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             keyboardVerticalOffset={0}

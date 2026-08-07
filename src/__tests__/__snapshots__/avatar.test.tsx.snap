@@ -1,20 +1,22 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Avatar to match snapshot 1`] = `
 <div
-  className="wh-48px ht-48px dy-flex jct-center ais-center wh-48px ht-48px brs-50 ow-hidden bwh-1px bsee-solid bcrr- bcr- bsw-0px-2px-4px-rgba0-0-0-0p1 tn-all-0p2s-ease cror-pointer"
+  className="wh-44px ht-44px wh-44px ht-44px brs-50 ow-hidden bwh-1px bsee-solid bcrr-transparent bcr-var--theme-primary tn-background-color-0p2s-ease-border-color-0p2s-ease-opacity-0p2s-ease dy-flex jct-center ais-center cror-pointer"
   onClick={[Function]}
+  ref={[Function]}
   role="avatar"
 >
   <img
     alt="IM"
-    className="wh-48px ht-48px wh-48px ht-48px on-error---setImageErrortrue"
+    className="wh-44px ht-44px wh-44px ht-44px"
     onError={[Function]}
+    ref={[Function]}
     src="https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/07/insert-image-html.jpg"
     style={
-      Object {
+      {
         "objectFit": "cover",
-        "transition": "all 0.2s ease",
+        "transition": "opacity 0.2s ease",
       }
     }
   />

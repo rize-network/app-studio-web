@@ -70,15 +70,15 @@
     "defaultValue": "right"
   },
   "onChange": {
-    "type": "Function",
+    "type": "(checked: boolean) => void",
     "typeValues": [],
-    "description": "Callback function triggered when the checkbox state changes.",
+    "description": "Called with the checkbox's next checked state. Never the DOM event.",
     "defaultValue": null
   },
   "onValueChange": {
-    "type": "Function",
+    "type": "(checked: boolean) => void",
     "typeValues": [],
-    "description": "Callback function triggered when the checkbox value changes.",
+    "description": "Called with the checkbox's next checked state; fires alongside onChange.",
     "defaultValue": null
   },
   "views": {

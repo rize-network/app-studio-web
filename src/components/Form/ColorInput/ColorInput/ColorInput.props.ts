@@ -32,8 +32,8 @@ export interface ColorInputProps
   isAutoFocus?: boolean;
   // Callback function triggered when the input's value changes.
   onChange?: (value: string) => void;
-  // Callback function triggered when the input loses focus.
-  onBlur?: (value: any) => void;
+  // Called when the trigger loses focus, with the blur **event** (not the value).
+  onBlur?: (event: any) => void;
   // Callback function triggered when the input is clicked.
   onClick?: () => void;
   // Callback function triggered when the input gains focus.
@@ -76,15 +76,15 @@ export interface ColorInputViewProps extends ColorInputProps {
   // A boolean indicating if the input is currently focused.
   isFocused?: boolean;
   // Setter function to update the `isFocused` state.
-  setIsFocused?: Function;
+  setIsFocused?: (focused: boolean) => void;
   // A boolean indicating if the input is currently hovered.
   isHovered?: boolean;
   // Setter function to update the `isHovered` state.
-  setIsHovered?: Function;
+  setIsHovered?: (hovered: boolean) => void;
   // The current value displayed in the input field.
   value?: string;
   // Setter function to update the input's `value` state.
-  setValue?: Function;
+  setValue?: (value: string) => void;
   // A boolean indicating if the color picker dropdown is currently open.
   isOpen?: boolean;
   // The currently selected color within the picker.

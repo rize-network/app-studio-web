@@ -1,65 +1,53 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`CountryPicker component CountryPicker to match snapshot 1`] = `
+exports[`CountryPicker component > CountryPicker to match snapshot 1`] = `
 <div
-  className="dy-flex fdn-column gp-8px pn-relative wh-100 cror-pointer"
+  className="mtp-0px mbm-0px gp-4px pn-relative wh-100 bsgg-border-box mvl-0 dy-flex fdn-column cror-pointer"
   onClick={[Function]}
+  ref={[Function]}
 >
   <div
-    className="dy-flex fdn-row gp-8px wh-100 fwp-nowrap ais-center jct-space-between mbm-2px bsee-solid bcrr- bcr- fse-20px cror-text oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease ptp-12px pbm-12px plt-16px prt-16px mobile--ptp-10px mobile--pbm-10px mobile--plt-12px mobile--prt-12px brs-9999px bwh-1px cr- bcrr---hover bcrr---focus outline-none--focus bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus bcrr---focus-visible outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px-rgba66-153-225-0p2--focus-visible"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    className="gp-8px wh-100 bsgg-border-box dy-flex fwp-nowrap ais-center jct-flex-start bsee-solid bcrr-var--color-gray-200 bcr-transparent fse-20px cror-text oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease-background-color-0p2s-ease mht-56px ptp-13px pbm-13px plt-16px prt-16px brs-9999px bwh-1px cr-var--theme-primary bcrr-var--theme-primary--focus oe-none--focus bsw-0-0-0-3px-var--theme-primary--focus bcrr-var--theme-primary--focus-visible oe-none--focus-visible bsw-0-0-0-3px-var--theme-primary--focus-visible fdn-row"
+    ref={[Function]}
   >
     <div
-      className="dy-flex fdn-column wh-100 mwhh-100 pn-relative"
+      className="dy-flex fdn-column gp-4px fx-1 wh-100 mwhh-100 bsgg-border-box"
+      ref={[Function]}
     >
       <input
         autoFocus={true}
-        className="plt-0px prt-0px ptp-8px pbm-8px mn-0px pvl-8 phl-0 wh-100 br-none outline-none--focus fse-20px bcr- cr- cror-pointer"
+        className="wh-100 ht-100 plt-0px prt-0px ptp-0px pbm-0px mn-0px pvl-0 phl-0 wh-100 ht-100 br-none oe-none--focus tn-all-0p2s-ease-in-out fse-20px bcr-transparent cr-var--color-gray-900 cror-pointer"
         disabled={false}
-        heigth="100%"
         name="name"
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
         placeholder="Name"
         readOnly={false}
+        ref={[Function]}
         type="country"
         value="Name"
       />
     </div>
     <div
-      className="dy-flex jct-center ais-center gp-10px rt-10px zix-500 fwp-nowrap"
+      className="gp-10px rt-10px zix-500 fwp-nowrap ais-center jct-flex-end dy-flex fdn-row"
+      ref={[Function]}
     >
       <div
-        className="wh-16px ht-16px dy-flex jct-center ais-center wht-16 lht-16px tm-rotate180deg"
+        className="wh-16px ht-16px wht-16 cr-var--color-gray-500 dy-flex ais-center jct-center tm-rotate180deg"
+        ref={[Function]}
         style={
-          Object {
+          {
             "width": 0.2,
           }
         }
-      >
-        <svg
-          aria-hidden="true"
-          fill=""
-          focusable="false"
-          stroke="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1}
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M7.41 15.41L12 10.83L16.59 15.41L18 14L12 8L6 14L7.41 15.41Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
+      />
     </div>
   </div>
-  <div
-    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
-    fontStyle="normal"
+  <span
+    className="mlt-0px mrt-0px fsee-normal tdn-none fse-11px lht-16px mtp-0px mhl-0 fwt-500 cr-var--color-red-500 tn-color-0p2s-ease-opacity-0p2s-ease"
+    ref={[Function]}
+    style={{}}
   />
 </div>
 `;

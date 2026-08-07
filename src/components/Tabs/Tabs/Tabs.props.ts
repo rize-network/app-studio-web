@@ -37,8 +37,12 @@ export interface TabsProps {
 
   /** Current value for controlled compound component pattern */
   value?: string | number;
-  /** Callback when tab value changes in compound component pattern */
-  onValueChange?: (value: any) => void;
+  /**
+   * Callback when tab value changes in compound component pattern. Receives
+   * the tab's value — matching `Tabs.type.ts` and `Tabs.state.ts`, which
+   * already declared `string | number` while this one said `any`.
+   */
+  onValueChange?: (value: string | number) => void;
   /** Children for compound component pattern */
   children?: React.ReactNode;
 }

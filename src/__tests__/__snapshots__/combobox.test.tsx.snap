@@ -1,26 +1,71 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Checkbox to match snapshot 1`] = `
 <div
-  className="dy-flex fdn-row fwp-nowrap gp-15px ais-center wh-100"
+  className="fwp-nowrap gp-15px ais-center wh-100 dy-flex fdn-row"
   id="combo"
+  ref={[Function]}
   role="combobox"
 >
   <div
-    className="pn-relative"
+    className="pn-relative wh-100"
+    ref={[Function]}
   >
     <div
-      className="dy-flex fdn-row cror-pointer bcr- bsw-rgba0-0-0-0p16-0px-1px-4px pg-12px ais-center brs-4px jct-space-between mwh-300px fwp-nowrap"
+      onClick={[Function]}
+      ref={
+        {
+          "current": null,
+        }
+      }
+      style={
+        {
+          "width": "100%",
+        }
+      }
     >
       <div
-        className="dy-flex fdn-row gp-15px ais-center pn-relative wh-100 cror-pointer"
-        onClick={[Function]}
+        className="gp-8px wh-100 bsgg-border-box dy-flex fwp-nowrap ais-center jct-flex-start bsee-solid bcrr-var--color-gray-200 bcr-transparent fse-14px cror-pointer oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease-background-color-0p2s-ease mht-40px ptp-9px pbm-9px plt-12px prt-12px brs-8px bwh-1px cr-inherit bcrr-var--color-gray-300--hover bcrr-var--theme-primary--focus oe-none--focus bsw-0-0-0-3px-var--theme-primary--focus bcrr-var--theme-primary--focus-visible oe-none--focus-visible bsw-0-0-0-3px-var--theme-primary--focus-visible fdn-row"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        ref={[Function]}
       >
         <div
-          className="fse-14px lht-20px fwt-500 lsg--0p01em tdn-none cr- fgw-1"
-          fontStyle="normal"
+          className="gp-10px ais-center fx-1 mwh-0px fwp-nowrap dy-flex fdn-row"
+          ref={[Function]}
         >
-          Option 1
+          <span
+            className="fsee-normal tdn-none fwt-500 fgw-1 cr-var--color-gray-800"
+            ref={[Function]}
+            style={
+              {
+                "overflow": "hidden",
+                "textOverflow": "ellipsis",
+                "whiteSpace": "nowrap",
+              }
+            }
+          >
+            Option 1
+          </span>
+        </div>
+        <div
+          className="gp-8px ais-center fsk-0 dy-flex fdn-row"
+          ref={[Function]}
+        >
+          <div
+            ref={[Function]}
+            style={
+              {
+                "transform": "rotate(0deg)",
+                "transition": "all 0.2s ease-in-out",
+              }
+            }
+          >
+            <div
+              className="wh-16px ht-16px wht-16 cr-var--color-gray-400 dy-flex ais-center jct-center tm-rotate180deg"
+              ref={[Function]}
+            />
+          </div>
         </div>
       </div>
     </div>

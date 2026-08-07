@@ -1,109 +1,24 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Loader with an a size xl where width equals to 30px should match snapshot 1`] = `
 <div
-  className="dy-flex jct-center ais-center gp-10px fdn-row"
+  className="gp-10px fdn-row dy-flex jct-center ais-center"
+  ref={[Function]}
 >
   <svg
+    className="wh-30px ht-30px wh-30px ht-30px"
     fill="none"
-    height="30px"
-    stroke=""
+    ref={[Function]}
+    stroke="var(--theme-loading)"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1"
     style={
-      Object {
+      {
         "transform": "rotate(0deg)",
       }
     }
     viewBox="0 0 24 24"
-    width="30px"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g
-      id="SVGRepo_bgCarrier"
-      strokeWidth="0"
-    />
-    <g
-      id="SVGRepo_tracerCarrier"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <g
-      id="SVGRepo_iconCarrier"
-    >
-      <path
-        d="M21 12a9 9 0 11-6.219-8.56"
-      />
-    </g>
-  </svg>
-  <div>
-    Delete
-  </div>
-</div>
-`;
-
-exports[`Loader with loader color equals to theme-primary should match snapshot 1`] = `
-<div
-  className="dy-flex jct-center ais-center gp-10px fdn-row"
->
-  <svg
-    fill="none"
-    height="22px"
-    stroke=""
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth="1"
-    style={
-      Object {
-        "transform": "rotate(0deg)",
-      }
-    }
-    viewBox="0 0 24 24"
-    width="22px"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <g
-      id="SVGRepo_bgCarrier"
-      strokeWidth="0"
-    />
-    <g
-      id="SVGRepo_tracerCarrier"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <g
-      id="SVGRepo_iconCarrier"
-    >
-      <path
-        d="M21 12a9 9 0 11-6.219-8.56"
-      />
-    </g>
-  </svg>
-  <div>
-    Loader
-  </div>
-</div>
-`;
-
-exports[`Loader with text color equals to theme-primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
-<div
-  className="dy-flex jct-center ais-center gp-10px fdn-row"
->
-  <svg
-    fill="none"
-    height="22px"
-    stroke=""
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth="1"
-    style={
-      Object {
-        "transform": "rotate(0deg)",
-      }
-    }
-    viewBox="0 0 24 24"
-    width="22px"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g
@@ -124,31 +39,33 @@ exports[`Loader with text color equals to theme-primary(rgba(249, 115, 22, 1)) s
     </g>
   </svg>
   <div
-    className="cr-"
+    className="cr-var--theme-loading"
+    ref={[Function]}
   >
-    Loader
+    Delete
   </div>
 </div>
 `;
 
-exports[`Loader with text position bottom should match snapshot 1`] = `
+exports[`Loader with loader color equals to theme-primary should match snapshot 1`] = `
 <div
-  className="dy-flex jct-center ais-center gp-10px fdn-column"
+  className="gp-10px fdn-row dy-flex jct-center ais-center"
+  ref={[Function]}
 >
   <svg
+    className="wh-22px ht-22px wh-22px ht-22px"
     fill="none"
-    height="22px"
-    stroke=""
+    ref={[Function]}
+    stroke="var(--theme-primary)"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth="1"
     style={
-      Object {
+      {
         "transform": "rotate(0deg)",
       }
     }
     viewBox="0 0 24 24"
-    width="22px"
     xmlns="http://www.w3.org/2000/svg"
   >
     <g
@@ -168,7 +85,104 @@ exports[`Loader with text position bottom should match snapshot 1`] = `
       />
     </g>
   </svg>
-  <div>
+  <div
+    className="cr-var--theme-loading"
+    ref={[Function]}
+  >
+    Loader
+  </div>
+</div>
+`;
+
+exports[`Loader with text color equals to theme-primary(rgba(249, 115, 22, 1)) should match snapshot 1`] = `
+<div
+  className="gp-10px fdn-row dy-flex jct-center ais-center"
+  ref={[Function]}
+>
+  <svg
+    className="wh-22px ht-22px wh-22px ht-22px"
+    fill="none"
+    ref={[Function]}
+    stroke="var(--theme-loading)"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1"
+    style={
+      {
+        "transform": "rotate(0deg)",
+      }
+    }
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      id="SVGRepo_bgCarrier"
+      strokeWidth="0"
+    />
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <g
+      id="SVGRepo_iconCarrier"
+    >
+      <path
+        d="M21 12a9 9 0 11-6.219-8.56"
+      />
+    </g>
+  </svg>
+  <div
+    className="cr-var--theme-primary"
+    ref={[Function]}
+  >
+    Loader
+  </div>
+</div>
+`;
+
+exports[`Loader with text position bottom should match snapshot 1`] = `
+<div
+  className="gp-10px fdn-column dy-flex jct-center ais-center"
+  ref={[Function]}
+>
+  <svg
+    className="wh-22px ht-22px wh-22px ht-22px"
+    fill="none"
+    ref={[Function]}
+    stroke="var(--theme-loading)"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1"
+    style={
+      {
+        "transform": "rotate(0deg)",
+      }
+    }
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      id="SVGRepo_bgCarrier"
+      strokeWidth="0"
+    />
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <g
+      id="SVGRepo_iconCarrier"
+    >
+      <path
+        d="M21 12a9 9 0 11-6.219-8.56"
+      />
+    </g>
+  </svg>
+  <div
+    className="cr-var--theme-loading"
+    ref={[Function]}
+  >
     Loader
   </div>
 </div>

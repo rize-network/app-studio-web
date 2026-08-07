@@ -73,9 +73,9 @@
     "defaultValue": false
   },
   "onChange": {
-    "type": "(value: any) => void",
+    "type": "(value: string) => void",
     "typeValues": [],
-    "description": "Optional callback function that is called when the TextField value changes.",
+    "description": "Called when the value changes, with the value itself — not the DOM event. There is no event.target to read; use onChangeText for the same value, or inputRef to reach the underlying input.",
     "defaultValue": "undefined"
   },
   "onChangeText": {
@@ -85,9 +85,9 @@
     "defaultValue": "undefined"
   },
   "onBlur": {
-    "type": "(value: any) => void",
+    "type": "(event: any) => void",
     "typeValues": [],
-    "description": "Optional callback function that is called when the TextField loses focus.",
+    "description": "Called when the field loses focus, with the blur event (not the value). The clear button synthesises a minimal { target: { name } }.",
     "defaultValue": "() => {}"
   },
   "onClick": {

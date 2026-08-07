@@ -57,7 +57,7 @@ export const DrawerOverlay: React.FC<DrawerOverlayProps> = ({
       onClick={handleClick}
       opacity={isOpen ? 1 : 0}
       transition="opacity 0.2s ease, visibility 0.2s ease, background-color 0.2s ease"
-      backgroundColor={isOpen ? 'color-blackAlpha-500' : 'transparent'}
+      backgroundColor={isOpen ? 'color-dark-50-360' : 'transparent'}
       backdropFilter={blur ? `blur(${blur}px)` : undefined}
       pointerEvents={isOpen ? 'auto' : 'none'}
       {...props}

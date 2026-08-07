@@ -1,17 +1,20 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Modal Overlay to match snapshot 1`] = `
 <div
-  className="wh-100 ht-100 dy-flex jct-center ais-center pn-fixed tp-0px lt-0px wh-100 ht-100 zix-1000 vy-visible tn-all-0p3s-ease cror-pointer"
+  className="wh-100 ht-100 pn-fixed tp-0px lt-0px wh-100 ht-100 zix-1000 vy-visible oy-1 tn-opacity-0p2s-ease-visibility-0p2s-ease dy-flex jct-center ais-center cror-pointer"
   onClick={[Function]}
+  ref={[Function]}
 >
   <div
-    className="pn-absolute tp-0px lt-0px zix-1000 wh-100vw ht-100vh dy-flex bcr- bfr-blur5px tn-all-0p3s-ease jct-center ais-flex-start cror-pointer"
+    className="pn-absolute tp-0px lt-0px zix-1000 wh-100vw ht-100vh dy-flex bcr-color-mixin-srgb-var--color-dark-50-36-transparent bfr-blur5px tn-background-color-0p2s-ease-backdrop-filter-0p2s-ease jct-center ais-flex-start cror-pointer"
     onClick={[Function]}
+    ref={[Function]}
   >
     <div
-      className="dy-flex fdn-column cror-default bcr- wh-600px ht-fit-content tn-all-0p3s-ease bsw-0px-4px-16px-rgba0-0-0-0p15 brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px"
+      className="cror-default bcr-var--color-white wh-600px ht-fit-content tn-opacity-0p2s-ease-transform-0p2s-ease-box-shadow-0p2s-ease oy-1 tm-translateY0 bsw-0px-4px-16px-rgba0-0-0-0p15 brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px dy-flex fdn-column"
       onClick={[Function]}
+      ref={[Function]}
     >
       Modal Content
     </div>

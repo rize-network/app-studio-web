@@ -4,7 +4,10 @@ import { Shadow, ViewProps } from 'app-studio';
 
 import { DatePickerStyles, Shape, Size, Variant } from './DatePicker.type';
 
-export interface DatePickerProps extends Omit<ViewProps, 'size' | 'shadow'> {
+// `onChange` is omitted from ViewProps (where it is the DOM ChangeEventHandler)
+// because DatePicker re-declares it with value-first semantics.
+export interface DatePickerProps
+  extends Omit<ViewProps, 'size' | 'shadow' | 'onChange'> {
   id?: string;
   /**
    * Custom icon to display when the DatePicker is checked.
@@ -40,9 +43,11 @@ export interface DatePickerProps extends Omit<ViewProps, 'size' | 'shadow'> {
    */
   label?: string;
   /**
-   * Callback function triggered when the DatePicker value changes.
+   * Called with the date string the field now holds (`yyyy-mm-dd`) — never the
+   * DOM event, so `e.target.value` is a compile error. Typed rather than `any`
+   * so a DOM-shaped handler fails to build instead of failing silently.
    */
-  onChange?: (value: any) => void;
+  onChange?: (value: string) => void;
   /**
    * Callback function triggered when the DatePicker value changes for IOS and Android.
    */

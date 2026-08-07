@@ -1,16 +1,10 @@
 // Import necessary libraries and components
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { cleanup, render, screen } from '@testing-library/react';
 import { Shape, Variant } from 'src/components/Toggle/Toggle/Toggle.type';
 import { Toggle } from 'src/components/Toggle/Toggle';
-
-// Additional info (mocked for testing if not imported)
-export const ToggleShapes: Record<Shape, number | string> = {
-  square: '0px',
-  rounded: '4px',
-  pill: '24px',
-};
+import { ToggleShapes } from 'src/components/Toggle/Toggle/Toggle.style';
 
 // Test setup and teardown
 afterEach(cleanup);
@@ -26,16 +20,18 @@ describe('Toggle Component', () => {
 
   // Shape Variants
   describe('Shape Variants', () => {
-    test.each([
-      ['square', '0px'],
-      ['rounded', '4px'],
-      ['pill', '24px'],
-    ])(
+    // Read the scale from the source rather than duplicating it: this test
+    // used to hardcode 4px/24px against a local mock and silently drifted when
+    // the design-system pass changed the real values.
+    test.each(Object.keys(ToggleShapes) as Shape[])(
       'applies correct border-radius for shape %s',
-      (shape, expectedRadius) => {
-        render(<Toggle shape={shape as Shape}>Default</Toggle>);
+      (shape) => {
+        render(<Toggle shape={shape}>Default</Toggle>);
         const toggleElement = screen.getByRole('Toggle');
-        expect(toggleElement).toHaveStyle({ borderRadius: expectedRadius });
+        const radius = ToggleShapes[shape];
+        expect(toggleElement).toHaveStyle({
+          borderRadius: typeof radius === 'number' ? `${radius}px` : radius,
+        });
       }
     );
   });

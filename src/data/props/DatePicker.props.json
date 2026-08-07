@@ -49,9 +49,9 @@
     "defaultValue": null
   },
   "onChange": {
-    "type": "(value: any) => void",
+    "type": "(value: string) => void",
     "typeValues": null,
-    "description": "Callback function triggered when the DatePicker value changes.",
+    "description": "Called with the date string the field now holds (yyyy-mm-dd). Never the DOM event — there is no event.target to read.",
     "defaultValue": null
   },
   "onChangeText": {

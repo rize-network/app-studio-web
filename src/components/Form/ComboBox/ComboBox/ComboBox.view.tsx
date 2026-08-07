@@ -19,6 +19,7 @@ import {
   emptyStateStyles,
   chevronAnimation,
   chipStyles,
+  IconSizes,
 } from './ComboBox.style';
 
 // Defines the functional component 'ComboBoxView' with destructured props.
@@ -46,6 +47,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   setIsDropdownVisible,
   isMulti = false,
   searchPlaceholder,
+  size = 'md',
   // Collects all further props not destructured explicitly.
   ...props
 }) => {
@@ -205,6 +207,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           style={{ width: '100%' }}
         >
           <FieldContent
+            size={size}
             isHovered={isHovered}
             isFocused={isDropdownVisible}
             onMouseEnter={() => setIsHovered(true)}
@@ -215,7 +218,13 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
             <Horizontal
               gap={10}
               alignItems="center"
-              width="100%"
+              // Takes the space that is left rather than claiming 100% of the
+              // shell: at `width: 100%` this row consumed the whole content box
+              // and pushed the chevron outside the field's border entirely.
+              // `minWidth: 0` lets it shrink past its own content so the label
+              // truncates instead of shoving the icons out.
+              flex={1}
+              minWidth={0}
               flexWrap={isMulti ? 'wrap' : 'nowrap'}
               {...views?.labelContainer}
             >
@@ -286,7 +295,8 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                 </>
               )}
             </Horizontal>
-            <Horizontal gap={8} alignItems="center">
+            {/* Icons keep their intrinsic width; only the label row shrinks. */}
+            <Horizontal gap={8} alignItems="center" flexShrink={0}>
               {right}
               <View
                 style={
@@ -296,7 +306,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
                 }
               >
                 <ChevronIcon
-                  widthHeight={16}
+                  widthHeight={IconSizes[size]}
                   orientation="down"
                   color={
                     isDropdownVisible ? 'color-gray-700' : 'color-gray-400'

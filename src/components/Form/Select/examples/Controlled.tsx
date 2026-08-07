@@ -18,7 +18,10 @@ export const ControlledSelect = () => {
         options={options}
         label="Select an item"
         value={value}
-        onChange={setValue}
+        // `onChange` hands back the next selection — a string here, and the
+        // whole array when `isMulti`. Never a DOM event, so there is no
+        // `e.target.value` to read.
+        onChange={(next: string) => setValue(next)}
       />
       {/* The selection follows the state, whoever moved it. */}
       <Button onClick={() => setValue('3')}>Jump to Item3</Button>

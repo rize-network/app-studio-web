@@ -1,9 +1,16 @@
 import { ReactNode, Dispatch, SetStateAction } from 'react';
 import { ComboBoxStyles } from './ComboBox.type';
+import { Size } from './ComboBox.style';
 import { InputProps } from 'app-studio';
 // Declaration of the main properties for ComboBox component.
 export interface ComboBoxProps
   extends Omit<InputProps, 'size' | 'onSelect' | 'left' | 'right'> {
+  /**
+   * Height of the trigger, on the shared field scale: `xs` 24, `sm` 32,
+   * `md` 40, `lg` 48, `xl` 56. `InputProps['size']` is omitted above because
+   * that is the numeric HTML attribute, not a design-system size.
+   */
+  size?: Size;
   // Unique identifier for the ComboBox, required for accessibility.
   id: string;
   // Optional name attribute for the ComboBox, useful when submitted in a form.

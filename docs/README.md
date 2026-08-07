@@ -8,7 +8,7 @@ build with the same public API.
 
 ### Core Documentation
 - **[Getting Started](./getting-started/introduction.md)** — Quick introduction and setup (web + RN)
-- **[React Native Guide](./getting-started/react-native.md)** — RN peer deps, compatibility matrix, Reanimated, Metro/tsc resolution
+- **[React Native Guide](./getting-started/react-native.md)** — RN peer deps, compatibility matrix, Form/Grid contracts, Reanimated, Metro/tsc resolution
 - **[Component Development](./component-development/guide.md)** — Building and contributing components (including `.native.tsx` siblings)
 - **[API Integration](./api-integration.md)** — Backend integration patterns
 - **[Design System](./design-system/theming.md)** — Theming and styling guidelines

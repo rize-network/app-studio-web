@@ -2,7 +2,7 @@ import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { SelectorStyles, Shape, Size, Variant, Option } from './Selector.type';
 export interface SelectorProps
-  extends Omit<InputProps, 'size' | 'shadow' | 'value'> {
+  extends Omit<InputProps, 'size' | 'shadow' | 'value' | 'onChange'> {
   // Unique identifier for the selector input.
   id?: string;
   // Indicates if the selector is in an error state.
@@ -23,8 +23,12 @@ export interface SelectorProps
   isReadOnly?: boolean;
   // Specifies if the selector is disabled.
   isDisabled?: boolean;
-  // Callback function triggered when the selected value changes.
-  onChange?: (value: any) => void;
+  /**
+   * Called with the selected option's `value` — never the DOM event, so
+   * `e.target.value` is a compile error. Typed rather than `any` so a
+   * DOM-shaped handler fails to build instead of failing silently.
+   */
+  onChange?: (value: string) => void;
   // Defines the visual shape of the selector (e.g., rounded, square).
   shape?: Shape;
   // Specifies the visual style or variant of the selector.
@@ -42,19 +46,19 @@ export interface SelectorViewProps extends SelectorProps {
   // The currently selected value(s) of the selector.
   value: string | Array<string>;
   // Function to update the selected value(s).
-  setValue: Function;
+  setValue: (value: string | string[]) => void;
   // Boolean indicating if the dropdown is hidden.
   hide: boolean;
   // Function to control the visibility of the dropdown.
-  setHide: Function;
+  setHide: (hide: boolean) => void;
   // Boolean indicating if the selector is currently hovered.
   isHovered: boolean;
   // Function to update the hover state.
-  setIsHovered: Function;
+  setIsHovered: (hovered: boolean) => void;
   // Boolean indicating if the selector is currently focused.
   isFocused: boolean;
   // Function to update the focus state.
-  setIsFocused: Function;
+  setIsFocused: (focused: boolean) => void;
 }
 export interface SelectorBoxProps {
   // Array of selectable options for the component.
@@ -66,7 +70,7 @@ export interface SelectorBoxProps {
   // Placeholder text shown when no option is selected.
   placeholder?: string;
   // Function to remove a selected option (for multi-select).
-  removeOption?: Function;
+  removeOption?: (value: string) => void;
   // Custom styles to apply to different parts of the selector box.
   views?: SelectorStyles;
   // Defines the size of the selector box.
@@ -76,13 +80,13 @@ export interface MultiSelectorProps extends Omit<InputProps, 'size'> {
   // The currently selected option in a multi-select context.
   option: string;
   // Function to remove a specific option from multi-selection.
-  removeOption: Function;
+  removeOption: (value: string) => void;
   // Defines the size of the multi-selector item.
   size?: Size;
 }
 export interface ItemProps extends Omit<InputProps, 'size' | 'style'> {
   // Callback function to be executed when an item is interacted with.
-  callback?: Function;
+  callback?: (option: string) => void;
   // The specific option data for the item.
   option: Option;
   // Defines the size of the item.
@@ -91,7 +95,7 @@ export interface ItemProps extends Omit<InputProps, 'size' | 'style'> {
   style?: SelectorStyles;
 }
 export interface HiddenSelectorProps
-  extends Omit<InputProps, 'size' | 'value'> {
+  extends Omit<InputProps, 'size' | 'value' | 'onChange'> {
   // Unique identifier for the hidden selector input.
   id?: string;
   // Name attribute for the hidden selector input.
@@ -105,7 +109,7 @@ export interface HiddenSelectorProps
   // Specifies if the hidden selector is disabled.
   isDisabled?: boolean;
   // Callback function triggered when the selected value changes.
-  onChange?: (value: any) => void;
+  onChange?(value: string | string[]): void;
   // Array of available options, relevant for internal value handling.
   options: Option[];
 }
@@ -113,7 +117,7 @@ export interface DropDownProps extends Omit<InputProps, 'size'> {
   // Defines the size of the dropdown.
   size?: Size;
   // Callback function to be executed when an option in the dropdown is selected.
-  callback?: Function;
+  callback?: (option: string) => void;
   // Array of options to display in the dropdown.
   options: Option[];
   // Custom styles to apply to different parts of the dropdown.

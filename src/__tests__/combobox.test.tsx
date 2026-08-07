@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ComboBox } from '../components/Form/ComboBox/ComboBox';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 
 const mockItems = [
   { label: 'Option 1', value: '1' },

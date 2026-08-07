@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Tabs } from 'src/components';
 import { cleanup, render } from '@testing-library/react';
 

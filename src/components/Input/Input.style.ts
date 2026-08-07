@@ -102,38 +102,18 @@ export const InputVariants: Record<Variant, ViewProps> = {
   },
 };
 
-/**
- * Padding for input shells following the gallery form treatment.
+/*
+ * `PadddingWithLabel` and `PaddingWithoutLabel` used to live here. They were
+ * removed rather than renamed (the first was misspelled with three d's) because
+ * they had stopped meaning anything:
+ *
+ *   - the two were byte-identical, so the `showLabel ? a : b` choice between
+ *     them had no effect;
+ *   - both were size-independent 10px/12px, which is why every field rendered
+ *     at roughly `md` height whatever size was requested;
+ *   - their `media.mobile` block repeated the same values, and being a nested
+ *     media rule it would have won over the size scale at mobile widths —
+ *     quietly pinning `xs` and `xl` fields back to `md` padding on phones.
+ *
+ * Field padding now comes from `Input/fieldSizes` via FieldContent.
  */
-export const PadddingWithLabel = {
-  paddingTop: '10px',
-  paddingBottom: '10px',
-  paddingLeft: '12px',
-  paddingRight: '12px',
-  media: {
-    mobile: {
-      paddingTop: '10px',
-      paddingBottom: '10px',
-      paddingLeft: '12px',
-      paddingRight: '12px',
-    },
-  },
-};
-
-/**
- * Padding for input shells without a label.
- */
-export const PaddingWithoutLabel = {
-  paddingTop: '10px',
-  paddingBottom: '10px',
-  paddingLeft: '12px',
-  paddingRight: '12px',
-  media: {
-    mobile: {
-      paddingTop: '10px',
-      paddingBottom: '10px',
-      paddingLeft: '12px',
-      paddingRight: '12px',
-    },
-  },
-};

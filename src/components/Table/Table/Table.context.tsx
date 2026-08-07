@@ -16,7 +16,8 @@ const defaultStyles: TableViewStyles = {};
 
 interface TableContextProps {
   views: TableViewStyles;
-  onRowClick?: Function;
+  // Wired straight to each row's onClick, so it receives the mouse event.
+  onRowClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 // Create a context that includes both styles and the onClick function
@@ -28,7 +29,7 @@ const TableContext = createContext<TableContextProps>({
 export const TableProvider: React.FC<{
   children: React.ReactNode;
   views?: TableViewStyles;
-  onRowClick?: Function; // Accept the onClick prop
+  onRowClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }> = ({ children, views = defaultStyles, onRowClick }) => (
   // Pass both styles and onClick to the context
   <TableContext.Provider value={{ views, onRowClick }}>

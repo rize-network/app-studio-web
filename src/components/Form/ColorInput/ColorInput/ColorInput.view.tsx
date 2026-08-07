@@ -47,6 +47,8 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
   dropdownRef,
   onChange,
   onChangeComplete,
+  onBlur,
+  onFocus,
   onOpen,
   onClose,
   colorFormat,
@@ -117,8 +119,16 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
         onClick={isDisabled || isReadOnly ? undefined : handleToggle}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
+        // The public `onFocus` / `onBlur` props were declared but never wired,
+        // so they silently never fired.
+        onFocus={() => {
+          setIsFocused(true);
+          if (onFocus) onFocus();
+        }}
+        onBlur={(event: any) => {
+          setIsFocused(false);
+          if (onBlur) onBlur(event);
+        }}
         tabIndex={isDisabled ? -1 : 0}
         role="button"
         aria-expanded={isOpen}
@@ -223,7 +233,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
               <Horizontal gap={8}>
                 <TextField
                   value={customColor}
-                  onChange={(e) => handleCustomColorChange(e.target.value)}
+                  onChange={handleCustomColorChange}
                   placeholder="#000000 or rgb(0,0,0)"
                   size="sm"
                   style={{ flex: 1 }}

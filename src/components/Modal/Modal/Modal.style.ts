@@ -48,7 +48,7 @@ export const ModalAnimations = {
 };
 // Provides the default background and transition styles for the modal overlay.
 export const OverlayStyles: ViewProps = {
-  backgroundColor: 'color-blackAlpha-400',
+  backgroundColor: 'color-dark-50-240',
   transition: 'background-color 0.2s ease',
 };
 // Sets the foundational background, shadow, and focus styles for the modal's content container.

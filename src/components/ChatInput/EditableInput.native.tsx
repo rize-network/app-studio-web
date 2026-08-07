@@ -49,10 +49,20 @@ interface EditableInputProps {
   maxHeight?: string;
   // Sets the minimum height for the editable input area.
   minHeight?: string;
+  // Field name forwarded to the underlying `TextInput`. Web renders a hidden mirror `<textarea>` under this name; native has a real text input already, so it is only an identifier here.
+  name?: string;
+  // DOM/native id forwarded to the underlying `TextInput`.
+  id?: string;
+  // Web-only: renders a hidden mirror `<textarea>`. Accepted here for API parity and ignored — native already exposes a real text input.
+  hiddenInput?: boolean;
+  // Web-only: ref to the hidden mirror `<textarea>`. Accepted here for API parity and never populated on native.
+  hiddenInputRef?: any;
   // An optional object allowing custom React components to be passed for various internal parts of the `EditableInput`.
   views?: {
     container?: any;
     input?: any;
+    // Web-only: styles for the hidden mirror `<textarea>`; ignored on native.
+    hiddenInput?: any;
     placeholder?: any;
     suggestionsContainer?: any;
     suggestionItem?: any;
@@ -87,6 +97,11 @@ export const EditableInput = forwardRef<any, EditableInputProps>(
       onMentionSelect,
       maxHeight = '200px',
       minHeight = '40px',
+      name,
+      id,
+      // Web-only props, accepted for API parity: native renders a real `TextInput`, so no mirror is needed.
+      hiddenInput: _hiddenInput,
+      hiddenInputRef: _hiddenInputRef,
       views = {},
     },
     ref
@@ -187,6 +202,8 @@ export const EditableInput = forwardRef<any, EditableInputProps>(
         >
           <Input
             multiline
+            id={id}
+            name={name}
             value={value}
             onChangeText={handleChangeText}
             onFocus={() => setIsFocused(true)}

@@ -32,9 +32,12 @@ export const ErrorInput = () => {
     setFormErrors(errors);
   };
 
-  const handleChange = (event: any) => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
-  };
+  // TextField's onChange hands you the value, not a DOM event — so the field
+  // name comes from the closure rather than `event.target.name`.
+  const handleChange =
+    (field: keyof typeof initialValues) => (value: string) => {
+      setFormValues((current) => ({ ...current, [field]: value }));
+    };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -52,19 +55,19 @@ export const ErrorInput = () => {
           name="firstName"
           placeholder="First Name"
           error={!!formErrors.firstName}
-          onChange={handleChange}
+          onChange={handleChange('firstName')}
         />
         <TextField
           name="lastName"
           placeholder="Last Name"
           error={!!formErrors.lastName}
-          onChange={handleChange}
+          onChange={handleChange('lastName')}
         />
         <TextField
           name="email"
           placeholder="Email"
           error={!!formErrors.email}
-          onChange={handleChange}
+          onChange={handleChange('email')}
         />
         <Button type="submit" height="40px" isAuto>
           Submit

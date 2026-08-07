@@ -61,9 +61,9 @@
     "defaultValue": "undefined"
   },
   "onChange": {
-    "type": "(value: any) => void",
+    "type": "(value: string) => void",
     "typeValues": [],
-    "description": "Callback function triggered when the selected value changes.",
+    "description": "Called with the selected option's value. Never the DOM event — there is no event.target to read.",
     "defaultValue": "() => {}"
   },
   "shape": {

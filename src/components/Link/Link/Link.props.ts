@@ -25,5 +25,5 @@ export interface LinkViewProps extends LinkProps {
   // Legacy hover state, superseded by CSS-driven _hover styling on the anchor.
   isHovered?: boolean;
   // Legacy setter for the hover state.
-  setIsHovered?: Function;
+  setIsHovered?: (hovered: boolean) => void;
 }

@@ -166,13 +166,13 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement> | string
   ) => {
-    if (typeof event === 'string') {
-      setValue(event);
-      if (onChange) onChange(event);
-    } else {
-      setValue(event.target.value);
-      if (onChange) onChange(event.target.value);
-    }
+    // `onChangeText` is part of the public props and the native view already
+    // fires it; the web view used to destructure it and never call it, so the
+    // callback was silently dropped on web only.
+    const next = typeof event === 'string' ? event : event.target.value;
+    setValue(next);
+    if (onChangeText) onChangeText(next);
+    if (onChange) onChange(next);
   };
   return (
     <FieldContainer helperText={helperText} error={error} views={layoutViews}>

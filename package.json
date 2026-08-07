@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/components",
-  "version": "0.10.23",
+  "version": "0.10.28",
   "main": "dist/web.cjs.js",
   "module": "dist/web.esm.js",
   "react-native": "dist/native/components/index.js",
@@ -80,10 +80,11 @@
     "validate-docs": "node scripts/validate-docs.js",
     "docs:app-studio": "rm -rf docs/app-studio && mkdir -p docs/app-studio && cp -R node_modules/app-studio/docs/* docs/app-studio",
     "api:local": "react-api  --useUnionTypes --input http://localhost:3000/docs/swagger.json --output ./src/services/api  && prettier --write ./src/services/api",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "typecheck:native": "tsc --noEmit -p tsconfig.native.json",
     "build:native": "rm -rf dist/native && tsc -p tsconfig.native.build.json && tsc-alias -p tsconfig.native.build.json",
     "build:native:types": "npm run build:native",
-    "build:package": "npm run build && npm run typecheck:native && npm run build:native"
+    "build:package": "npm run typecheck && npm run build && npm run typecheck:native && npm run build:native"
   },
   "eslintConfig": {
     "extends": [
@@ -192,7 +193,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.4.21",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.0.18",
+    "vitest": "^3.2.7",
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.8.0",
     "yup": "^1.5.0",

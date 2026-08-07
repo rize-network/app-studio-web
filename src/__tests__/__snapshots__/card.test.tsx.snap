@@ -1,31 +1,29 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Card with compound components matches snapshot 1`] = `
 <div
-  className="wh-auto brs-8px ow-hidden bcr- br-none tn-all-0p2s-ease cr- mobile--brs-4px"
-  style={Object {}}
+  className="wh-auto ow-hidden bcr-var--color-white br-none tn-background-color-0p2s-ease-color-0p2s-ease-box-shadow-0p2s-ease cr-var--color-gray-900 brs-8px"
+  ref={[Function]}
+  style={{}}
 >
   <div
-    borderBottomColor="color-gray-200"
-    borderBottomStyle="solid"
-    borderBottomWidth="1px"
-    className="pg-16px cr- mobile--pg-12px"
-    style={Object {}}
+    className="gp-8px pg-16px bbm-1px-solid bcrr-var--color-gray-100 cr-var--theme-primary fwt-600 fse-14px dy-flex fdn-column"
+    ref={[Function]}
+    style={{}}
   >
     Header
   </div>
   <div
-    className="pg-16px cr- mobile--pg-12px"
-    style={Object {}}
+    className="gp-12px pg-16px cr-var--color-gray-600 fse-12px lht-18px dy-flex fdn-column"
+    ref={[Function]}
+    style={{}}
   >
     Content
   </div>
   <div
-    borderTopColor="color-gray-200"
-    borderTopStyle="solid"
-    borderTopWidth="1px"
-    className="pg-16px mobile--pg-12px"
-    style={Object {}}
+    className="gp-8px pg-16px btp-1px-solid bcrr-var--color-gray-100 jct-flex-end dy-flex fdn-column"
+    ref={[Function]}
+    style={{}}
   >
     Footer
   </div>
@@ -34,26 +32,27 @@ exports[`Card with compound components matches snapshot 1`] = `
 
 exports[`Card with custom views matches snapshot 1`] = `
 <div
-  className="wh-auto brs-8px ow-hidden bcr- br-none tn-all-0p2s-ease cr- mobile--brs-4px"
-  style={Object {}}
+  className="wh-auto ow-hidden bcr-f5f5f5 br-none tn-background-color-0p2s-ease-color-0p2s-ease-box-shadow-0p2s-ease cr-var--color-gray-900 brs-8px"
+  ref={[Function]}
+  style={{}}
 >
   <div
-    className="dy-flex fdn-column"
+    className="wh-100 dy-flex fdn-column"
+    ref={[Function]}
   >
     <div
-      borderBottomColor="color-gray-200"
-      borderBottomStyle="solid"
-      borderBottomWidth="1px"
-      className="pg-16px cr- mobile--pg-12px pbm-16px"
-      style={Object {}}
+      className="gp-8px pg-16px bbm-1px-solid bcrr-var--color-gray-100 cr-var--theme-primary fwt-600 fse-14px pbm-16px dy-flex fdn-column"
+      ref={[Function]}
+      style={{}}
     >
       <div>
         Header
       </div>
     </div>
     <div
-      className="pg-16px cr- mobile--pg-12px"
-      style={Object {}}
+      className="gp-12px pg-16px cr-var--color-gray-600 fse-12px lht-18px dy-flex fdn-column"
+      ref={[Function]}
+      style={{}}
     >
       Content
     </div>
@@ -63,15 +62,18 @@ exports[`Card with custom views matches snapshot 1`] = `
 
 exports[`Card with default props matches snapshot 1`] = `
 <div
-  className="wh-auto brs-8px ow-hidden bcr- br-none tn-all-0p2s-ease cr- mobile--brs-4px"
-  style={Object {}}
+  className="wh-auto ow-hidden bcr-var--color-white br-none tn-background-color-0p2s-ease-color-0p2s-ease-box-shadow-0p2s-ease cr-var--color-gray-900 brs-8px"
+  ref={[Function]}
+  style={{}}
 >
   <div
-    className="dy-flex fdn-column"
+    className="wh-100 dy-flex fdn-column"
+    ref={[Function]}
   >
     <div
-      className="pg-16px cr- mobile--pg-12px"
-      style={Object {}}
+      className="gp-12px pg-16px cr-var--color-gray-600 fse-12px lht-18px dy-flex fdn-column"
+      ref={[Function]}
+      style={{}}
     >
       Card Content
     </div>
@@ -81,35 +83,34 @@ exports[`Card with default props matches snapshot 1`] = `
 
 exports[`Card with header and footer matches snapshot 1`] = `
 <div
-  className="wh-auto brs-8px ow-hidden bcr- br-none tn-all-0p2s-ease cr- mobile--brs-4px"
-  style={Object {}}
+  className="wh-auto ow-hidden bcr-var--color-white br-none tn-background-color-0p2s-ease-color-0p2s-ease-box-shadow-0p2s-ease cr-var--color-gray-900 brs-8px"
+  ref={[Function]}
+  style={{}}
 >
   <div
-    className="dy-flex fdn-column"
+    className="wh-100 dy-flex fdn-column"
+    ref={[Function]}
   >
     <div
-      borderBottomColor="color-gray-200"
-      borderBottomStyle="solid"
-      borderBottomWidth="1px"
-      className="pg-16px cr- mobile--pg-12px"
-      style={Object {}}
+      className="gp-8px pg-16px bbm-1px-solid bcrr-var--color-gray-100 cr-var--theme-primary fwt-600 fse-14px dy-flex fdn-column"
+      ref={[Function]}
+      style={{}}
     >
       <div>
         Header
       </div>
     </div>
     <div
-      className="pg-16px cr- mobile--pg-12px"
-      style={Object {}}
+      className="gp-12px pg-16px cr-var--color-gray-600 fse-12px lht-18px dy-flex fdn-column"
+      ref={[Function]}
+      style={{}}
     >
       Content
     </div>
     <div
-      borderTopColor="color-gray-200"
-      borderTopStyle="solid"
-      borderTopWidth="1px"
-      className="pg-16px mobile--pg-12px"
-      style={Object {}}
+      className="gp-8px pg-16px btp-1px-solid bcrr-var--color-gray-100 jct-flex-end dy-flex fdn-column"
+      ref={[Function]}
+      style={{}}
     >
       <div>
         Footer

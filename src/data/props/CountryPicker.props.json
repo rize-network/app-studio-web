@@ -66,15 +66,15 @@
     "defaultValue": "false"
   },
   "onBlur": {
-    "type": "(value: any) => void",
+    "type": "(event: any) => void",
     "typeValues": [],
-    "description": "Optional blur handler function",
+    "description": "Called when the field loses focus, with the blur event (not the value).",
     "defaultValue": "() => {}"
   },
   "onChange": {
-    "type": "(value: any) => void",
+    "type": "(value: string) => void",
     "typeValues": [],
-    "description": "Optional change handler function",
+    "description": "Called with the country name the field now holds — the option picked, or what the user has typed. Never the DOM event.",
     "defaultValue": "undefined"
   },
   "views": {

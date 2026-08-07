@@ -1,11 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Modal footer to match snapshot 1`] = `
 <div
-  borderTopColor="color-gray-200"
-  borderTopStyle="solid"
-  borderTopWidth="1px"
-  className="plt-24px prt-24px ptp-16px pbm-16px dy-flex fdn-row mtp-auto ais-center jct-flex-end pvl-16 phl-24 gp-12px mobile--pvl-12 mobile--phl-16 mobile--gp-8px"
+  className="plt-24px prt-24px ptp-16px pbm-16px mtp-auto ais-center jct-flex-end pvl-16 phl-24 btwh-1px btse-solid btcr-var--color-gray-200 gp-12px mobile--gp-8px mobile--plt-16px mobile--prt-16px mobile--ptp-12px mobile--pbm-12px dy-flex fdn-row"
+  ref={[Function]}
 >
   Modal Content
 </div>

@@ -60,6 +60,8 @@ export const useChatInputState = (props: UseChatInputStateProps) => {
   // Refs for DOM elements
   const editableRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // Ref to the hidden `<textarea>` mirroring the editable area, used for imperative reads and writes
+  const hiddenInputRef = useRef<HTMLTextAreaElement | null>(null);
 
   // State for UI features
   const [isGuideTipShown, setIsGuideTipShown] = useState(
@@ -91,6 +93,21 @@ export const useChatInputState = (props: UseChatInputStateProps) => {
     } else {
       setUncontrolledValue(newValue);
     }
+  };
+
+  // Imperatively replace the input's text.
+  // Writing to the hidden mirror and dispatching a bubbling `input` event goes through exactly the
+  // same path as an external write (the documented automation recipe), so the content-editable area,
+  // the placeholder and `onChange` all stay in sync. Falls back to a direct state update when no
+  // mirror exists (`hiddenInput={false}`, or React Native, where there is no DOM).
+  const setValue = (newValue: string) => {
+    const mirror = hiddenInputRef.current;
+    if (mirror && typeof Event !== 'undefined') {
+      mirror.value = newValue;
+      mirror.dispatchEvent(new Event('input', { bubbles: true }));
+      return;
+    }
+    handleChange(newValue);
   };
 
   // Handle form submission
@@ -264,9 +281,11 @@ export const useChatInputState = (props: UseChatInputStateProps) => {
     clearPendingFiles,
     value,
     handleChange,
+    setValue,
     handleSubmit,
     editableRef,
     fileInputRef,
+    hiddenInputRef,
     isUploading,
     uploadProgress,
     isDraggingOver,

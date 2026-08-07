@@ -8,12 +8,7 @@
 import React from 'react';
 import { Typography, useTheme } from 'app-studio';
 
-import {
-  InputVariants,
-  PadddingWithLabel,
-  PaddingWithoutLabel,
-  Shapes,
-} from '../Input.style';
+import { InputVariants, Shapes } from '../Input.style';
 import { fieldSizeProps } from '../fieldSizes';
 import { Horizontal } from 'app-studio';
 
@@ -67,12 +62,9 @@ export const FieldContent: React.FC<ContentProps> = ({
       cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'text'}
       opacity={isDisabled ? 0.7 : 1}
       transition="border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease"
-      {...(showLabel ? PadddingWithLabel : PaddingWithoutLabel)}
-      // Sizing belongs to the shell, not to each field. Those padding constants
-      // above are size-independent (both are 10px/12px), so without this every
-      // field rendered at roughly `md` height whatever size was asked for.
-      // Placed after them so it wins, and before `views`/`props` so a caller can
-      // still override.
+      // Sizing belongs to the shell, not to each field: without it every field
+      // rendered at roughly `md` height whatever size was asked for. Placed
+      // before `views`/`props` so a caller can still override.
       {...fieldSizeProps(size)}
       {...(typeof shadow === 'object' && shadow !== null ? shadow : {})}
       {...Shapes[shape]}

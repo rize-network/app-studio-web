@@ -22,9 +22,12 @@ export const ErrorArea = () => {
     setFormErrors(errors);
   };
 
-  const handleChange = (event: any) => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
-  };
+  // TextArea's onChange hands you the value, not a DOM event — so the field
+  // name comes from the closure rather than `event.target.name`.
+  const handleChange =
+    (field: keyof typeof initialValues) => (value: string) => {
+      setFormValues((current) => ({ ...current, [field]: value }));
+    };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -40,7 +43,7 @@ export const ErrorArea = () => {
           name="thoughts"
           placeholder="Write your thoughts here..."
           error={!!formErrors.thoughts}
-          onChange={handleChange}
+          onChange={handleChange('thoughts')}
         />
         <Button type="submit" height="40px" isAuto>
           Submit

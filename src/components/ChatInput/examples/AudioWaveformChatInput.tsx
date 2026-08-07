@@ -77,6 +77,8 @@ export const AudioWaveformChatInputDemo = () => {
             onSubmit={handleSubmit}
             editableRef={useRef<HTMLDivElement>(null)}
             fileInputRef={useRef<HTMLInputElement>(null)}
+            hiddenInputRef={useRef<HTMLTextAreaElement>(null)}
+            setValue={setInputValue}
             isUploading={isUploading}
             isDraggingOver={false}
             selectedModel={''}

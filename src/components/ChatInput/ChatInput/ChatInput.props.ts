@@ -10,6 +10,52 @@ import {
 import { Suggestion } from '../EditableInput';
 
 /**
+ * Imperative handle exposed on the `ChatInput` ref.
+ *
+ * The visible field is a `contentEditable` div, which has no `value` property. This handle — and the
+ * hidden mirror `<textarea>` it exposes — is the supported way to read or write the input's text from
+ * outside React (automation, replay engines, draft restoration).
+ */
+export interface ChatInputHandle {
+  /**
+   * Current text of the input.
+   */
+  getValue: () => string;
+
+  /**
+   * Replaces the text of the input. Fires `onChange` exactly like typing does, so a controlled
+   * `ChatInput` still needs its parent to apply the new value.
+   */
+  setValue: (value: string) => void;
+
+  /**
+   * Clears the input. Shorthand for `setValue('')`.
+   */
+  clear: () => void;
+
+  /**
+   * Focuses the editable area.
+   */
+  focus: () => void;
+
+  /**
+   * Blurs the editable area.
+   */
+  blur: () => void;
+
+  /**
+   * The `contentEditable` element that renders the text (`role="textbox"`).
+   */
+  getElement: () => HTMLDivElement | null;
+
+  /**
+   * The hidden mirror `<textarea>`; `null` when `hiddenInput` is `false`. Its `value` always matches
+   * the input's text and it accepts writes followed by a bubbling `input` event.
+   */
+  getInputElement: () => HTMLTextAreaElement | null;
+}
+
+/**
  * Props for the ChatInput component
  */
 export interface ChatInputProps
@@ -105,6 +151,18 @@ export interface ChatInputProps
    * Callback function when the input value changes
    */
   onChange?: (value: string) => void;
+
+  /**
+   * Form field name for the value. Applied to the hidden mirror `<textarea>`, so the message is
+   * submitted with a surrounding native `<form>` and is addressable via `[name="…"]`.
+   */
+  name?: string;
+
+  /**
+   * Whether to render the hidden `<textarea>` that mirrors the editable area's text (default `true`).
+   * It makes `element.value` work for generic tooling; set to `false` only if the extra node is a problem.
+   */
+  hiddenInput?: boolean;
 
   /**
    * Callback function when the file browser is opened
@@ -271,6 +329,16 @@ export interface ChatInputViewProps extends ChatInputProps {
    * Reference to the file input element
    */
   fileInputRef: React.RefObject<HTMLInputElement | null>;
+
+  /**
+   * Reference to the hidden mirror `<textarea>` that exposes the value as a real form control
+   */
+  hiddenInputRef: React.RefObject<HTMLTextAreaElement | null>;
+
+  /**
+   * Imperatively replaces the input's text, going through the same path as a user edit
+   */
+  setValue: (value: string) => void;
 
   /**
    * Whether files are being uploaded

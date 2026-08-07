@@ -41,6 +41,7 @@ export interface ChatInputStyles {
   container?: ViewProps;
   content?: ViewProps;
   editableInput?: ViewProps;
+  hiddenInput?: ViewProps;
   header?: ViewProps;
   title?: ViewProps;
   guideTip?: ViewProps;

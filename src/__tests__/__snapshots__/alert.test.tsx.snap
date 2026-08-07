@@ -1,220 +1,145 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Alert with error variant matches snapshot 1`] = `
 <div
-  className="dy-flex fdn-row gp-12px pg-16px fwp-nowrap ais-flex-start brs-8px bwh-1px bsee-solid bcrr- bcr- bsw-0-1px-2px-rgba239-68-68-0p05 tn-all-0p2s-ease"
+  className="gp-12px pg-12px-16px fwp-nowrap ais-flex-start brs-8px bwh-1px bsee-solid bcrr-var--color-red-200 bcr-var--color-red-50 bsw-0-1px-2px-rgba239-68-68-0p05 tn-background-color-0p2s-ease-border-color-0p2s-ease-box-shadow-0p2s-ease dy-flex fdn-row"
+  ref={[Function]}
 >
   <div
     className="asf-flex-start mtp-2px"
+    ref={[Function]}
   >
     <div
-      className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
-      size={20}
-    >
-      <svg
-        aria-hidden="false"
-        fill=""
-        focusable="false"
-        stroke="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1}
-        viewBox="0 0 24 24"
-      >
-        <circle
-          cx="12"
-          cy="12"
-          r="10"
-        />
-        <line
-          stroke="white"
-          x1="15"
-          x2="9"
-          y1="9"
-          y2="15"
-        />
-        <line
-          stroke="white"
-          x1="9"
-          x2="15"
-          y1="9"
-          y2="15"
-        />
-      </svg>
-    </div>
+      className="wh-20px ht-20px wht-20 cr-var--color-red-500 dy-flex ais-center jct-center tm-rotate0deg"
+      ref={[Function]}
+    />
   </div>
   <div
-    className="dy-flex fdn-column gp-8px"
+    className="gp-4px dy-flex fdn-column"
+    ref={[Function]}
   >
-     
-    <div
-      className="fse-16px lht-24px fwt-600 lsg--0p01em tdn-none cr- bcr-"
-      fontStyle="normal"
+    <span
+      className="fsee-normal tdn-none fse-14px fwt-600 lht-20px cr-var--color-red-700"
+      ref={[Function]}
+      style={{}}
     >
       Error
-    </div>
-    <div
-      className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none cr- bcr-"
-      fontStyle="normal"
+    </span>
+    <span
+      className="fsee-normal tdn-none fse-12px fwt-400 lht-16px cr-var--color-red-700"
+      ref={[Function]}
+      style={{}}
     >
       This is an error
-    </div>
+    </span>
   </div>
 </div>
 `;
 
 exports[`Alert with info variant matches snapshot 1`] = `
 <div
-  className="dy-flex fdn-row gp-12px pg-16px fwp-nowrap ais-flex-start brs-8px bwh-1px bsee-solid bcrr- bcr- bsw-0-1px-2px-rgba59-130-246-0p05 tn-all-0p2s-ease"
+  className="gp-12px pg-12px-16px fwp-nowrap ais-flex-start brs-8px bwh-1px bsee-solid bcrr-var--color-blue-200 bcr-var--color-blue-50 bsw-0-1px-2px-rgba59-130-246-0p05 tn-background-color-0p2s-ease-border-color-0p2s-ease-box-shadow-0p2s-ease dy-flex fdn-row"
+  ref={[Function]}
 >
   <div
     className="asf-flex-start mtp-2px"
+    ref={[Function]}
   >
     <div
-      aria-label="Information"
-      className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
-      size={20}
-    >
-      <svg
-        aria-hidden="false"
-        fill=""
-        focusable="false"
-        stroke="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1}
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-        />
-      </svg>
-    </div>
+      className="wh-20px ht-20px wht-20 cr-var--color-blue-500 dy-flex ais-center jct-center tm-rotate0deg"
+      ref={[Function]}
+    />
   </div>
   <div
-    className="dy-flex fdn-column gp-8px"
+    className="gp-4px dy-flex fdn-column"
+    ref={[Function]}
   >
-     
-    <div
-      className="fse-16px lht-24px fwt-600 lsg--0p01em tdn-none cr- bcr-"
-      fontStyle="normal"
+    <span
+      className="fsee-normal tdn-none fse-14px fwt-600 lht-20px cr-var--color-blue-700"
+      ref={[Function]}
+      style={{}}
     >
       Info
-    </div>
-    <div
-      className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none cr- bcr-"
-      fontStyle="normal"
+    </span>
+    <span
+      className="fsee-normal tdn-none fse-12px fwt-400 lht-16px cr-var--color-blue-700"
+      ref={[Function]}
+      style={{}}
     >
       This is info
-    </div>
+    </span>
   </div>
 </div>
 `;
 
 exports[`Alert with success variant matches snapshot 1`] = `
 <div
-  className="dy-flex fdn-row gp-12px pg-16px fwp-nowrap ais-flex-start brs-8px bwh-1px bsee-solid bcrr- bcr- bsw-0-1px-2px-rgba34-197-94-0p05 tn-all-0p2s-ease"
+  className="gp-12px pg-12px-16px fwp-nowrap ais-flex-start brs-8px bwh-1px bsee-solid bcrr-var--color-green-200 bcr-var--color-green-50 bsw-0-1px-2px-rgba34-197-94-0p05 tn-background-color-0p2s-ease-border-color-0p2s-ease-box-shadow-0p2s-ease dy-flex fdn-row"
+  ref={[Function]}
 >
   <div
     className="asf-flex-start mtp-2px"
+    ref={[Function]}
   >
     <div
-      className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
-      size={20}
-    >
-      <svg
-        aria-hidden="false"
-        fill=""
-        focusable="false"
-        stroke="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1}
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-        />
-      </svg>
-    </div>
+      className="wh-20px ht-20px wht-20 cr-var--color-green-500 dy-flex ais-center jct-center tm-rotate0deg"
+      ref={[Function]}
+    />
   </div>
   <div
-    className="dy-flex fdn-column gp-8px"
+    className="gp-4px dy-flex fdn-column"
+    ref={[Function]}
   >
-     
-    <div
-      className="fse-16px lht-24px fwt-600 lsg--0p01em tdn-none cr- bcr-"
-      fontStyle="normal"
+    <span
+      className="fsee-normal tdn-none fse-14px fwt-600 lht-20px cr-var--color-green-700"
+      ref={[Function]}
+      style={{}}
     >
       Success
-    </div>
-    <div
-      className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none cr- bcr-"
-      fontStyle="normal"
+    </span>
+    <span
+      className="fsee-normal tdn-none fse-12px fwt-400 lht-16px cr-var--color-green-700"
+      ref={[Function]}
+      style={{}}
     >
       This is success
-    </div>
+    </span>
   </div>
 </div>
 `;
 
 exports[`Alert with warning variant matches snapshot 1`] = `
 <div
-  className="dy-flex fdn-row gp-12px pg-16px fwp-nowrap ais-flex-start brs-8px bwh-1px bsee-solid bcrr- bcr- bsw-0-1px-2px-rgba249-115-22-0p05 tn-all-0p2s-ease"
+  className="gp-12px pg-12px-16px fwp-nowrap ais-flex-start brs-8px bwh-1px bsee-solid bcrr-var--color-orange-200 bcr-var--color-orange-50 bsw-0-1px-2px-rgba249-115-22-0p05 tn-background-color-0p2s-ease-border-color-0p2s-ease-box-shadow-0p2s-ease dy-flex fdn-row"
+  ref={[Function]}
 >
   <div
     className="asf-flex-start mtp-2px"
+    ref={[Function]}
   >
     <div
-      className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
-      size={20}
-    >
-      <svg
-        aria-hidden="false"
-        fill="none"
-        focusable="false"
-        stroke=""
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1}
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M10.29 3.86l-6.6 11.4c-.78 1.36.2 3.1 1.71 3.1h13.2c1.51 0 2.49-1.74 1.71-3.1l-6.6-11.4a2 2 0 0 0-3.42 0z"
-        />
-        <line
-          stroke="color-orange-500"
-          x1="12"
-          x2="12"
-          y1="6"
-          y2="13"
-        />
-        <line
-          stroke="color-orange-500"
-          x1="12"
-          x2="12"
-          y1="15"
-          y2="15"
-        />
-      </svg>
-    </div>
+      className="wh-20px ht-20px wht-20 cr-var--color-orange-500 dy-flex ais-center jct-center tm-rotate0deg"
+      ref={[Function]}
+    />
   </div>
   <div
-    className="dy-flex fdn-column gp-8px"
+    className="gp-4px dy-flex fdn-column"
+    ref={[Function]}
   >
-     
-    <div
-      className="fse-16px lht-24px fwt-600 lsg--0p01em tdn-none cr- bcr-"
-      fontStyle="normal"
+    <span
+      className="fsee-normal tdn-none fse-14px fwt-600 lht-20px cr-var--color-orange-700"
+      ref={[Function]}
+      style={{}}
     >
       Warning
-    </div>
-    <div
-      className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none cr- bcr-"
-      fontStyle="normal"
+    </span>
+    <span
+      className="fsee-normal tdn-none fse-12px fwt-400 lht-16px cr-var--color-orange-700"
+      ref={[Function]}
+      style={{}}
     >
       This is a warning
-    </div>
+    </span>
   </div>
 </div>
 `;

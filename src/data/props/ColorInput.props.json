@@ -61,9 +61,9 @@
     "defaultValue": null
   },
   "onBlur": {
-    "type": "(value: any) => void",
+    "type": "(event: any) => void",
     "typeValues": null,
-    "description": "Callback function triggered when the input loses focus.",
+    "description": "Called when the trigger loses focus, with the blur event (not the value).",
     "defaultValue": null
   },
   "onClick": {

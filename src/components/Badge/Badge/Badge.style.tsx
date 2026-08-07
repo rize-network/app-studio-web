@@ -15,17 +15,39 @@ import { Shape, Size, Variant } from './Badge.type';
 /**
  * Badge sizes following the 4px grid system
  */
+/**
+ * A badge is a secondary label, so its type ramp sits one step below the
+ * control ramp: `md` is 12px in a 24px pill, against 14px body text and a 40px
+ * `md` control.
+ *
+ * It used to share the control ramp exactly — `md` was 14px in a 28px pill —
+ * which made a status badge read as loudly as the row it annotated: in a user
+ * table, "SYSTEM_ADMIN" competed with the person's name rather than supporting
+ * it.
+ *
+ * `lg`/`xl` still reach the old `md`/`lg` sizes for the cases that genuinely
+ * need a prominent badge.
+ */
 export const BadgeSizes: Record<Size, ViewProps> = {
   xs: {
-    minWidth: '20px',
-    height: '20px',
-    padding: '0 6px',
-    fontSize: '10px',
+    minWidth: '16px',
+    height: '16px',
+    padding: '0 4px',
+    fontSize: '9px',
     fontWeight: '600',
     lineHeight: '12px',
     letterSpacing: '-0.01em',
   },
   sm: {
+    minWidth: '20px',
+    height: '20px',
+    padding: '0 6px',
+    fontSize: '10px',
+    fontWeight: '600',
+    lineHeight: '14px',
+    letterSpacing: '-0.01em',
+  },
+  md: {
     minWidth: '24px',
     height: '24px',
     padding: '0 8px',
@@ -34,7 +56,7 @@ export const BadgeSizes: Record<Size, ViewProps> = {
     lineHeight: '16px',
     letterSpacing: '-0.01em',
   },
-  md: {
+  lg: {
     minWidth: '28px',
     height: '28px',
     padding: '0 10px',
@@ -43,22 +65,13 @@ export const BadgeSizes: Record<Size, ViewProps> = {
     lineHeight: '20px',
     letterSpacing: '-0.01em',
   },
-  lg: {
+  xl: {
     minWidth: '32px',
     height: '32px',
     padding: '0 12px',
     fontSize: '16px',
     fontWeight: '600',
     lineHeight: '24px',
-    letterSpacing: '-0.01em',
-  },
-  xl: {
-    minWidth: '36px',
-    height: '36px',
-    padding: '0 14px',
-    fontSize: '20px',
-    fontWeight: '600',
-    lineHeight: '28px',
     letterSpacing: '-0.01em',
   },
 };

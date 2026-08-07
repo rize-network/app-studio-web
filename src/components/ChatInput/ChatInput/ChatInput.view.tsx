@@ -61,12 +61,18 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
     onFileUpload,
     onPromptExampleSelect,
 
+    // Form-control mirror props (kept off the container element)
+    name,
+    hiddenInput = true,
+
     // Props from state
     value,
     handleChange,
+    setValue,
     handleSubmit,
     editableRef,
     fileInputRef,
+    hiddenInputRef,
     isUploading,
     uploadProgress,
     isDraggingOver,
@@ -273,9 +279,13 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
               mentionData={combinedMentionData}
               mentionTrigger={mentionTrigger}
               onMentionSelect={onMentionSelect}
+              name={name}
+              hiddenInput={hiddenInput}
+              hiddenInputRef={hiddenInputRef}
               views={{
                 container: {},
                 input: views?.editableInput,
+                hiddenInput: views?.hiddenInput,
               }}
             />
 

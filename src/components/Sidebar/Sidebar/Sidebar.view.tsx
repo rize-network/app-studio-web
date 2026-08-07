@@ -162,14 +162,26 @@ export const SidebarFooter: React.FC<SidebarFooterProps> = ({
   return (
     <View
       width="100%"
-      padding="16px"
+      // Matches SidebarContent: tighter gutters on the collapsed rail.
+      padding={isExpanded ? '16px' : '8px'}
       borderTopWidth="1px"
       borderTopStyle="solid"
       borderTopColor="color-gray-200"
       {...views?.footer}
       {...props}
     >
-      {isExpanded ? children : null}
+      {/*
+        Children render in both states, as they do in SidebarHeader and
+        SidebarContent.
+
+        This used to be `isExpanded ? children : null`, which silently threw the
+        footer away on the collapsed rail: a consumer could not offer an avatar
+        or a sign-out control there at all, and what remained was an empty
+        bordered strip at the bottom of the sidebar. Deciding what a 64px
+        footer shows belongs to the consumer, which can read `isExpanded` from
+        `Sidebar.useContext()` — the same way this component does.
+      */}
+      {children}
     </View>
   );
 };
@@ -218,7 +230,7 @@ export const SidebarView: React.FC<SidebarProps> = ({
           left={0}
           width="100vw"
           height="100vh"
-          backgroundColor="color-blackAlpha-500"
+          backgroundColor="color-dark-50-360"
           zIndex={998}
           onClick={collapse}
           {...views?.backdrop}

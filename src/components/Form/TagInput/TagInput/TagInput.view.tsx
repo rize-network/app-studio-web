@@ -47,6 +47,11 @@ const TagChip: React.FC<{
       borderColor="theme-primary-250"
       transition="all 0.15s ease-in-out"
       opacity={isDisabled ? 0.6 : 1}
+      // A chip never grows past the field it lives in. Without this a single
+      // long tag pushed the chip straight out of the input's box instead of
+      // ellipsising, so the value overlapped whatever sat beside it.
+      maxWidth="100%"
+      minWidth={0}
       _hover={
         !isDisabled && !isReadOnly
           ? {
@@ -60,7 +65,11 @@ const TagChip: React.FC<{
       <Text
         fontSize={chipSize.fontSize}
         color={isDisabled ? 'color-gray-400' : 'theme-primary'}
-        whiteSpace="nowrap"
+        // One line with an ellipsis. `minWidth: 0` is what lets it shrink:
+        // as a flex child it would otherwise refuse to go below its content
+        // width and the clamp would never engage.
+        maxLines={1}
+        minWidth={0}
         {...views?.tagText}
       >
         {tag}

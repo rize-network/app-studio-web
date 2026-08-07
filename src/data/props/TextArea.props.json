@@ -85,9 +85,9 @@
     "defaultValue": null
   },
   "onChange": {
-    "type": "(value: any) => void",
+    "type": "(value: string) => void",
     "typeValues": null,
-    "description": "Callback function triggered when the value of the textarea changes.",
+    "description": "Called when the value changes, with the value itself — not the DOM event. There is no event.target to read; onChangeText receives the same value.",
     "defaultValue": null
   },
   "onChangeText": {
@@ -97,9 +97,9 @@
     "defaultValue": null
   },
   "onBlur": {
-    "type": "(value: any) => void",
+    "type": "(event: any) => void",
     "typeValues": null,
-    "description": "Callback function triggered when the textarea loses focus.",
+    "description": "Called when the textarea loses focus, with the blur event (not the value).",
     "defaultValue": "() => {}"
   },
   "onFocus": {

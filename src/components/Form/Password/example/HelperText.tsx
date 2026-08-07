@@ -25,9 +25,12 @@ export const HelperTextPassword = () => {
     setFormErrors(errors);
   };
 
-  const handleChange = (event: any) => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
-  };
+  // TextField/Password onChange hands you the value, not a DOM event — so the
+  // field name comes from the closure rather than `event.target.name`.
+  const handleChange =
+    (field: keyof typeof initialValues) => (value: string) => {
+      setFormValues((current) => ({ ...current, [field]: value }));
+    };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -46,14 +49,14 @@ export const HelperTextPassword = () => {
           label="First Name"
           helperText={formErrors.firstName}
           error={formErrors.firstName}
-          onChange={handleChange}
+          onChange={handleChange('firstName')}
         />
         <Password
           name="password"
           label="Password"
           helperText={formErrors.password}
           error={formErrors.password}
-          onChange={handleChange}
+          onChange={handleChange('password')}
         />
         <Button type="submit" height="40px">
           Submit

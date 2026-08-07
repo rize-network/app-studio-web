@@ -1,9 +1,9 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Gradient matches snapshot 1`] = `
 <div
   style={
-    Object {
+    {
       "background": "linear-gradient(to right, red, blue)",
     }
   }

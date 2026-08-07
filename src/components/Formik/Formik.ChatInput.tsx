@@ -58,6 +58,9 @@ const ChatInputComponent: React.FC<FormikChatInputProps> = (props) => {
     <ChatInputView
       {...chatInputProps}
       {...chatInputState}
+      // Carry the Formik field name onto the hidden mirror `<textarea>`, so the field stays
+      // addressable as `[name="…"]` the way any other form control would be.
+      name={name}
       value={formProps.value || ''}
       onChange={handleChange}
       onSubmit={handleSubmit}

@@ -1,51 +1,57 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`FieldContainer with custom views matches snapshot 1`] = `
 <div
-  className="dy-flex fdn-column gp-8px pn-relative wh-100 bcr- pg-16px"
+  className="mtp-0px mbm-0px gp-4px pn-relative wh-100 bsgg-border-box mvl-0 bcr-lightgray pg-16px dy-flex fdn-column"
+  ref={[Function]}
 >
   <input
     type="text"
   />
-  <div
-    className="mlt-0px mrt-0px mtp-0px mbm-0px fse-10px lht-16px fwt-400 lsg--0p01em tdn-none cr- mvl-0 mhl-0 tn-all-0p2s-ease mtp-4px"
-    fontStyle="normal"
+  <span
+    className="mlt-0px mrt-0px mtp-0px mbm-0px fsee-normal tdn-none fse-11px fwt-400 lsg--0p01em lht-16px mvl-0 mhl-0 cr-blue tn-color-0p2s-ease-opacity-0p2s-ease mtp-0px"
+    ref={[Function]}
+    style={{}}
   >
     Custom styled helper
-  </div>
+  </span>
 </div>
 `;
 
 exports[`FieldContainer with error matches snapshot 1`] = `
 <div
-  className="dy-flex fdn-column gp-8px pn-relative wh-100"
+  className="mtp-0px mbm-0px gp-4px pn-relative wh-100 bsgg-border-box mvl-0 dy-flex fdn-column"
+  ref={[Function]}
 >
   <input
     name="required-field"
     type="text"
   />
-  <div
-    className="mlt-0px mrt-0px fse-10px lht-14px fwt-500 lsg--0p01em tdn-none cr- mtp-4px mhl-0 tn-all-0p2s-ease"
-    fontStyle="normal"
+  <span
+    className="mlt-0px mrt-0px fsee-normal tdn-none fse-11px lht-16px mtp-0px mhl-0 fwt-500 cr-var--color-red-500 tn-color-0p2s-ease-opacity-0p2s-ease"
+    ref={[Function]}
+    style={{}}
   >
     This field is required
-  </div>
+  </span>
 </div>
 `;
 
 exports[`FieldContainer with helperText matches snapshot 1`] = `
 <div
-  className="dy-flex fdn-column gp-8px pn-relative wh-100"
+  className="mtp-0px mbm-0px gp-4px pn-relative wh-100 bsgg-border-box mvl-0 dy-flex fdn-column"
+  ref={[Function]}
 >
   <input
     name="name"
     type="text"
   />
-  <div
-    className="mlt-0px mrt-0px mtp-0px mbm-0px fse-10px lht-16px fwt-400 lsg--0p01em tdn-none cr- mvl-0 mhl-0 tn-all-0p2s-ease mtp-4px"
-    fontStyle="normal"
+  <span
+    className="mlt-0px mrt-0px mtp-0px mbm-0px fsee-normal tdn-none fse-11px fwt-400 lsg--0p01em lht-16px mvl-0 mhl-0 cr-var--color-gray-500 tn-color-0p2s-ease-opacity-0p2s-ease mtp-0px"
+    ref={[Function]}
+    style={{}}
   >
     Please enter your name
-  </div>
+  </span>
 </div>
 `;

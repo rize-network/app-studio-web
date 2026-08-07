@@ -19,7 +19,7 @@ export const CommandOverlay: React.FC<{
     display="flex"
     alignItems="center"
     justifyContent="center"
-    backgroundColor="color-blackAlpha-400"
+    backgroundColor="color-dark-50-240"
     zIndex={9999}
     onClick={(e: any) => {
       if (e.target === e.currentTarget) onClose?.();

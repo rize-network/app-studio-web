@@ -1,14 +1,15 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Button will a pill shape to match snapshot 1`] = `
 <button
-  className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-999px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
+  className="plt-20px prt-20px ptp-9px pbm-9px mht-40px phl-20 pvl-9 fse-14px fwt-500 lht-20px lsg--0p01em dy-inline-flex ais-center jct-center wh-fit-content brs-999px tn-background-color-0p2s-ease-border-color-0p2s-ease-opacity-0p2s-ease cror-pointer bcr-var--theme-primary cr-var--color-white bwh-1px bsee-solid bcrr-var--theme-primary oy-0p92--hover oy-0p96--active oe-none--focus-visible bsw-0-0-0-2px-var--var--color-white-0-0-0-4px-var--var--theme-primary--focus-visible"
   disabled={false}
-  isHovered={false}
+  ref={[Function]}
   type="button"
 >
   <div
-    className="dy-flex fdn-row gp-8px ais-center jct-center cr- mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em cr---hover"
+    className="gp-8px ais-center jct-center fse-14px fwt-500 lht-20px lsg--0p01em wse-nowrap cr-var--color-white dy-flex fdn-row"
+    ref={[Function]}
   >
     Pill Shape
   </div>
@@ -17,36 +18,23 @@ exports[`Button will a pill shape to match snapshot 1`] = `
 
 exports[`Button with an icon on the left to match snapshot 1`] = `
 <button
-  className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-999px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
+  className="plt-20px prt-20px ptp-9px pbm-9px mht-40px phl-20 pvl-9 fse-14px fwt-500 lht-20px lsg--0p01em dy-inline-flex ais-center jct-center wh-fit-content brs-999px tn-background-color-0p2s-ease-border-color-0p2s-ease-opacity-0p2s-ease cror-pointer bcr-var--theme-primary cr-var--color-white bwh-1px bsee-solid bcrr-var--theme-primary oy-0p92--hover oy-0p96--active oe-none--focus-visible bsw-0-0-0-2px-var--var--color-white-0-0-0-4px-var--var--theme-primary--focus-visible"
   disabled={false}
-  isHovered={false}
+  ref={[Function]}
   type="button"
 >
   <div
-    className="dy-flex fdn-row gp-8px ais-center jct-center cr- mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em cr---hover"
+    className="gp-8px ais-center jct-center fse-14px fwt-500 lht-20px lsg--0p01em wse-nowrap cr-var--color-white dy-flex fdn-row"
+    ref={[Function]}
   >
     <div
-      className="cr- cr---hover"
+      className="cr-var--color-white"
+      ref={[Function]}
     >
       <div
-        className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
-        size={24}
-      >
-        <svg
-          aria-hidden="false"
-          fill="none"
-          focusable="false"
-          stroke=""
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1}
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-          />
-        </svg>
-      </div>
+        className="wh-24px ht-24px wht-24 cr-currentColor dy-flex ais-center jct-center tm-rotate0deg"
+        ref={[Function]}
+      />
     </div>
     Delete
   </div>
@@ -55,37 +43,24 @@ exports[`Button with an icon on the left to match snapshot 1`] = `
 
 exports[`Button with an icon on the right to match snapshot 1`] = `
 <button
-  className="mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em dy-flex ais-center jct-center brs-999px tn-background-color-0p2s-ease-opacity-0p2s-ease cror-pointer cr- bwh-1px bsee-solid bcrr- oy-0p9--hover oy-0p95--active outline-none--focus-visible bsw-0-0-0-2px-rgba255-255-255-1-0-0-0-4px---focus-visible"
+  className="plt-20px prt-20px ptp-9px pbm-9px mht-40px phl-20 pvl-9 fse-14px fwt-500 lht-20px lsg--0p01em dy-inline-flex ais-center jct-center wh-fit-content brs-999px tn-background-color-0p2s-ease-border-color-0p2s-ease-opacity-0p2s-ease cror-pointer bcr-var--theme-primary cr-var--color-white bwh-1px bsee-solid bcrr-var--theme-primary oy-0p92--hover oy-0p96--active oe-none--focus-visible bsw-0-0-0-2px-var--var--color-white-0-0-0-4px-var--var--theme-primary--focus-visible"
   disabled={false}
-  isHovered={false}
+  ref={[Function]}
   type="button"
 >
   <div
-    className="dy-flex fdn-row gp-8px ais-center jct-center cr- mht-24px ptp-6px pbm-6px plt-12px prt-12px fse-14px fwt-500 lht-18px lsg--0p01em cr---hover"
+    className="gp-8px ais-center jct-center fse-14px fwt-500 lht-20px lsg--0p01em wse-nowrap cr-var--color-white dy-flex fdn-row"
+    ref={[Function]}
   >
     Delete
     <div
-      className="cr- cr---hover"
+      className="cr-var--color-white"
+      ref={[Function]}
     >
       <div
-        className="wh-24px ht-24px dy-flex jct-center ais-center wht-24 lht-24px cr- tm-rotate0deg"
-        size={24}
-      >
-        <svg
-          aria-hidden="false"
-          fill="none"
-          focusable="false"
-          stroke=""
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1}
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-          />
-        </svg>
-      </div>
+        className="wh-24px ht-24px wht-24 cr-currentColor dy-flex ais-center jct-center tm-rotate0deg"
+        ref={[Function]}
+      />
     </div>
   </div>
 </button>

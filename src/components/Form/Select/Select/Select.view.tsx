@@ -247,8 +247,16 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
   defaultValue: _defaultValue,
   ...props
 }) => {
-  const handleChange = (event: any) => {
-    if (onChange) onChange(event);
+  // The hidden <select> is the only path that produced a DOM event where every
+  // other path produced a value, so the same `onChange` prop had two different
+  // argument shapes depending on which one fired. Normalise here.
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (!onChange) return;
+    onChange(
+      isMulti
+        ? Array.from(event.target.selectedOptions, (option) => option.value)
+        : event.target.value
+    );
   };
   return (
     <Element

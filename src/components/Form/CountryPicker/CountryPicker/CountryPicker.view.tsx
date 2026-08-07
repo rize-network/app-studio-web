@@ -35,7 +35,9 @@ export const DropDownItem: React.FC<DropDownItemProps> = ({
 }) => {
   const handleOptionClick = (event: any) => {
     if (event && event.stopPropagation) event.stopPropagation();
-    callback(option);
+    // `option` is optional on DropDownItemProps; report '' rather than handing
+    // the callback an `undefined` it would have to narrow.
+    callback(option ?? '');
   };
   return (
     <CountryItem

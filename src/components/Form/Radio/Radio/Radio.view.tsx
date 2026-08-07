@@ -72,8 +72,10 @@ const RadioView: React.FC<RadioViewProps> = ({
   const handleChange = () => {
     if (!isReadOnly && !isDisabled) {
       if (setIsSelected) setIsSelected(true);
-      if (onChange) onChange(value);
-      if (onValueChange) onValueChange(value);
+      // `value` is optional on RadioProps; a radio without one reports ''
+      // rather than handing callers an `undefined` they have to narrow.
+      if (onChange) onChange(value ?? '');
+      if (onValueChange) onValueChange(value ?? '');
     }
   };
   // Determines the visual variant of the radio button based on whether it is `isChecked` (controlled) or `isSelected` (internal state). This variant ('selected' or 'unselected') is then used to apply distinct base styles.

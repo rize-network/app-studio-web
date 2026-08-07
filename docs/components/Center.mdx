@@ -372,7 +372,9 @@ export const ImagePlaceholder = () => (
 **Performance:**
 - Avoid unnecessary nesting of Center components
 - Use CSS transforms for animations instead of changing layout
-- Consider using CSS Grid for complex centered layouts
+- On web, consider CSS Grid for complex centered layouts. On React Native,
+  `Grid` supports only fixed integer columns faithfully; use explicit flex rows
+  when content needs intrinsic sizing or spanning.
 
 ### **Common Patterns**
 

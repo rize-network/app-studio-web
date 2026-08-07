@@ -58,6 +58,9 @@ const TitleView: React.FC<TitleProps> = ({
   highlightSlideDuration = 500,
   highlightSlideStagger = 50,
   highlightSlideSequential = true,
+  // `centered` was declared on TitleProps but never read here. React Native has
+  // no heading element, so `level` stays presentational-only on this platform.
+  centered = false,
   themeMode: _elementMode,
   responsive: _responsive,
   alternateHighlightText: _alternateHighlightText,
@@ -130,6 +133,7 @@ const TitleView: React.FC<TitleProps> = ({
     ref,
     animate: inView ? controlledAnimate : undefined,
     fontSize,
+    ...(centered ? { textAlign: 'center' as const } : {}),
     ...(_responsive ? ResponsiveTypography[size] : {}),
     ...baseTextStyles,
   };

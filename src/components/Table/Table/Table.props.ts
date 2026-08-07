@@ -21,5 +21,6 @@ export interface TableLayoutProps {
   TableContainer?: React.FC<any>;
   children?: React.ReactNode;
   views?: TableViewStyles;
-  onClick?: Function;
+  // Wired straight to each row's onClick, so it receives the mouse event.
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }

@@ -27,9 +27,12 @@ export const ErrorPassword = () => {
     setFormErrors(errors);
   };
 
-  const handleChange = (event: any) => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
-  };
+  // TextField/Password onChange hands you the value, not a DOM event — so the
+  // field name comes from the closure rather than `event.target.name`.
+  const handleChange =
+    (field: keyof typeof initialValues) => (value: string) => {
+      setFormValues((current) => ({ ...current, [field]: value }));
+    };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -45,14 +48,14 @@ export const ErrorPassword = () => {
           name="name"
           placeholder="Name"
           error={!!formErrors.name}
-          onChange={handleChange}
+          onChange={handleChange('name')}
           isClearable={true}
         />
         <Password
           name="password"
           placeholder="Password"
           error={!!formErrors.password}
-          onChange={handleChange}
+          onChange={handleChange('password')}
         />
         <Button type="submit" height="40px">
           Submit

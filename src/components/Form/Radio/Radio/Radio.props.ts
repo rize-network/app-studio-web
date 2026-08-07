@@ -28,10 +28,12 @@ export interface RadioProps
   isDisabled?: boolean;
   // Specifies the position of the label relative to the radio input.
   labelPosition?: 'left' | 'right';
-  // Callback function triggered when the radio button's checked state changes.
-  onChange?: Function;
-  // Callback function triggered specifically when the radio button's value changes.
-  onValueChange?: Function;
+  // Called when the radio is selected, with this radio's `value` — not a DOM
+  // event. Typed rather than `Function` so a DOM-shaped handler is a compile
+  // error and the argument is actually visible to callers.
+  onChange?: (value: string) => void;
+  // Same argument as `onChange`; both fire on selection.
+  onValueChange?: (value: string) => void;
   // Custom styles or view configurations for the radio component.
   views?: RadioStyles;
   // Defines the visual size of the radio component.

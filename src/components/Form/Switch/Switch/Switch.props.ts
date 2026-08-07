@@ -40,13 +40,13 @@ export interface SwitchViewProps extends SwitchProps {
   // Denotes if the switch component is currently hovered by the cursor.
   isHovered: boolean;
   // Function to set the hover state of the switch component.
-  setIsHovered: Function;
+  setIsHovered: (hovered: boolean) => void;
   // Controls the value or state of the switch (on/off).
   value?: boolean;
   // Function to update the value of the switch.
-  setValue?: Function;
+  setValue?: (value: boolean) => void;
   // Current on/off state managed by the state hook.
   on?: boolean;
   // Setter for the on/off state managed by the state hook.
-  setOn?: Function;
+  setOn?: (on: boolean) => void;
 }

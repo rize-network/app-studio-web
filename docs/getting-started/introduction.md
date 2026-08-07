@@ -121,12 +121,27 @@ and `Button` are all exactly 40px:
 
 The scale is `xs` 24, `sm` 32, `md` 40, `lg` 48, `xl` 56, and it is shared: it
 lives in `Input/fieldSizes` and is applied by the field shell, so `TextField`,
-`Password`, `Select`, `DatePicker`, `TagInput` and `Button` all render exactly
-their declared height at every size — including bordered variants, which used to
-come out 2px taller.
+`Password`, `Select`, `ComboBox`, `CountryPicker`, `DatePicker`, `TagInput` and
+`Button` all render exactly their declared height at every size — including
+bordered variants, which used to come out 2px taller.
 
-`ComboBox` is the exception: it takes no `size` prop
-(`Omit<InputProps, 'size'>`) and always renders at 40px, matching `md`.
+### Long values never break the layout
+
+A control that has to show text you do not control — a chosen option, a tag, a
+segment label — keeps to one line and ellipsises rather than wrapping. Wrapping
+is not a cosmetic problem: it silently breaks the height contract above, turning
+a 40px control into a 56px one.
+
+`Select`, `ComboBox`, `Selector` and `TagInput` all truncate. If you compose
+something similar yourself, note that `maxLines={1}` alone is not enough inside
+a flex row — the element also needs `minWidth={0}`, because `min-width: auto`
+stops a flex child shrinking below its content and the clamp never engages.
+
+### Badges sit one step below controls
+
+`Badge` is a secondary label, so its ramp is deliberately smaller than the
+control ramp: `md` is 12px type in a 24px pill, against 14px body text. Reach for
+`lg`/`xl` when a badge genuinely needs to carry the row.
 
 ## Component Categories
 
