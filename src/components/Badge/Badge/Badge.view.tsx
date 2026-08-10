@@ -149,16 +149,16 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
     }
 
     return (
-      <Center role="badge" {...combinedStyles} {...props}>
+      <Center data-role="badge" {...combinedStyles} {...props}>
         {icon && (
-          <View role="badge-icon" {...views?.icon}>
+          <View data-role="badge-icon" {...views?.icon}>
             {icon}
           </View>
         )}
 
         {hasPastilContent && (
           <Text
-            role="badge-pastil-content"
+            data-role="badge-pastil-content"
             backgroundColor={'color-gray-900'}
             borderRadius="9999px"
             color={'color-white'}
@@ -175,7 +175,7 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
 
         {pastil && (
           <View
-            role="badge-pastil"
+            data-role="badge-pastil"
             width="6px"
             height="6px"
             borderRadius="50%"
@@ -186,7 +186,7 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
 
         {hasContent && (
           <Text
-            role="badgeText"
+            data-role="badge-text"
             color={
               hasAnnouncementLayout ? 'color-gray-900' : combinedStyles.color
             }
@@ -203,7 +203,7 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
 
         {hasAction && (
           <Text
-            role="badge-action"
+            data-role="badge-action"
             color="color-gray-400"
             fontWeight="500"
             letterSpacing={0}

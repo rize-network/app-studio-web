@@ -32,7 +32,10 @@ export const AvatarView = ({
   // Start of the JSX returned by the AvatarView component, which uses the Center component as its root element.
   return (
     <Center
-      role="avatar"
+      // `data-role`: "avatar" is not an ARIA role and failed axe's aria-roles
+      // rule (critical) on every consumer screen. The naming, when needed,
+      // belongs to the consumer (e.g. a wrapping element with role="img").
+      data-role="avatar"
       width={avatarSize}
       height={avatarSize}
       {...DefaultAvatarStyles.container}
@@ -42,7 +45,10 @@ export const AvatarView = ({
     >
       {!imageError && src ? (
         <Image
-          alt="IM"
+          // Empty alt: the image is presentational here — the consumer names
+          // the avatar (tooltip, wrapping role="img", adjacent text). "IM"
+          // was a junk name screen readers announced verbatim.
+          alt=""
           src={src}
           style={imageStyle}
           width={avatarSize}

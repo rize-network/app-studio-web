@@ -26,12 +26,19 @@ export const StatusIndicatorView = ({
     <Horizontal
       alignItems="center"
       gap={8}
-      role="status-indicator"
+      // `status` is the ARIA role this component actually is; the previous
+      // "status-indicator" was not a role and failed axe's aria-roles rule
+      // (critical) on every consumer screen.
+      role="status"
       {...views?.container}
       {...props}
     >
       <View
-        role="status-dot"
+        // Decoration: the label carries the meaning, the dot repeats it in
+        // color. `data-role` keeps the styling/test hook without entering
+        // the accessibility tree.
+        data-role="status-dot"
+        aria-hidden="true"
         width="8px"
         height="8px"
         borderRadius="50%"
@@ -40,7 +47,7 @@ export const StatusIndicatorView = ({
       />
       {label && (
         <Text
-          role="status-label"
+          data-role="status-label"
           fontSize="14px"
           lineHeight="20px"
           {...themes[status].label}

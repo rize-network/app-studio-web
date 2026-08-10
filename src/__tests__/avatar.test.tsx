@@ -12,7 +12,9 @@ test('renders Avatar component', () => {
   render(
     <Avatar src="https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/07/insert-image-html.jpg" />
   );
-  const AvatarElement = screen.getByRole('avatar');
+  const AvatarElement = document.querySelector(
+    '[data-role="avatar"]'
+  ) as HTMLElement;
   expect(AvatarElement).toBeInTheDocument();
 });
 
@@ -20,7 +22,9 @@ test('applies the correct CSS properties', () => {
   render(
     <Avatar src="https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/07/insert-image-html.jpg" />
   );
-  const AvatarElement = screen.getByRole('avatar');
+  const AvatarElement = document.querySelector(
+    '[data-role="avatar"]'
+  ) as HTMLElement;
 
   expect(AvatarElement).toHaveStyle({
     borderRadius: '50%',

@@ -35,9 +35,18 @@ test('Badge matches snapshot', () => {
   expect(tree).toMatchSnapshot();
 });
 
+/** The badge root, by its data hook — `role="badge"` is not an ARIA role and is gone. */
+const badgeRoot = (container: HTMLElement): HTMLElement => {
+  const found = container.querySelector('[data-role="badge"]');
+  if (!found) throw new Error('no badge root in the document');
+  return found as HTMLElement;
+};
+
 test('isAuto derives the badge colors from a token content', () => {
-  renderWithTheme(<Badge isAuto content="theme-primary" />);
-  const badge = screen.getByRole('badge');
+  const { container } = renderWithTheme(
+    <Badge isAuto content="theme-primary" />
+  );
+  const badge = badgeRoot(container);
   // The token named by `content` becomes the background; the label switches
   // to white so it stays readable on the saturated brand tone.
   expect(badge.className).toContain('theme-primary');
@@ -46,8 +55,8 @@ test('isAuto derives the badge colors from a token content', () => {
 
 test('isAuto is inert when the content is not a color token', () => {
   const plain = renderWithTheme(<Badge content="42" />);
-  const plainClass = plain.getByRole('badge').className;
+  const plainClass = badgeRoot(plain.container).className;
   cleanup();
   const auto = renderWithTheme(<Badge isAuto content="42" />);
-  expect(auto.getByRole('badge').className).toBe(plainClass);
+  expect(badgeRoot(auto.container).className).toBe(plainClass);
 });

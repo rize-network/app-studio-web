@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.11.1
+
+Closes the two violation types axe still charged to this library after
+0.11.0, measured on a consuming product (serious/critical, wcag2a+aa):
+every audited screen now measures **zero**.
+
+### Accessibility — invented roles are gone (`aria-roles`, critical)
+
+`role` was being used as a styling/test hook with values that are not ARIA
+roles; every such node failed axe on every consumer screen. The hook moved
+to `data-role` (ARIA ignores it), and the one component that *is* a
+semantic thing got its real role:
+
+- **Badge**: `role="badge"`, `"badgeText"`, `"badge-icon"`, `"badge-pastil"`,
+  `"badge-pastil-content"`, `"badge-action"` → `data-role` equivalents. A
+  badge is styled text; it carries no ARIA role.
+- **StatusIndicator**: the container is now `role="status"` (the real ARIA
+  role — announced politely on change); the dot is decoration
+  (`aria-hidden`, `data-role="status-dot"`); the label is plain text.
+- **Avatar**: `role="avatar"` → `data-role="avatar"`, and the image's
+  hardcoded `alt="IM"` — a junk name screen readers announced verbatim — is
+  now `alt=""` (presentational; the consumer names the avatar).
+
+### Accessibility — field labels are readable (`color-contrast`, serious)
+
+`FieldLabel` painted every non-error label at `opacity: 0.72`; inherited ink
+at 11–12px through that filter lands under the 4.5:1 ratio. Labels are now
+full-opacity. De-emphasis, where a design wants it, belongs to a color token
+that still clears the ratio — not to an opacity filter over whatever color
+is inherited.
+
+Guard tests: `a11y-roles.test.tsx` (no invented role may return),
+`a11y-contrast.test.tsx` (no dimmed field label may return).
+
 ## 0.11.0
 
 Every form control is now findable with `getByRole(role, { name: label })` —

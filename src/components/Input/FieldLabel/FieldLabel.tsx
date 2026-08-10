@@ -27,7 +27,10 @@ export const FieldLabel: React.FC<LabelProps> = ({
     letterSpacing="-0.01em"
     whiteSpace="nowrap"
     fontWeight={500}
-    opacity={error ? 1 : 0.72}
+    // Full opacity always: dimming inherited ink to 0.72 at 11–12px lands
+    // under the 4.5:1 contrast ratio and fails axe (serious) on every form
+    // screen. De-emphasis, where a design wants it, belongs to a color token
+    // that still clears the ratio — not to an opacity filter.
     color={error ? 'color-red-500' : 'inherit'}
     transition="color 0.2s ease"
     {...views['label']}
