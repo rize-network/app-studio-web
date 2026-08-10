@@ -20,14 +20,19 @@ export interface LabelProps extends Omit<ViewProps, 'size'> {
   htmlFor?: string;
   // Optional `htmlFor` prop forwarded to the underlying <label> element.
   dropDown?: ViewProps;
-  // Optional dropdown styling passed through by parent fields (TextField, ColorInput, etc.).
+  // Accepted and ignored; consumed by the parent field layout (TextField,
+  // ColorInput, …) — the Label itself renders nothing for it.
   error?: boolean | string;
-  // Optional `error` flag forwarded by parent fields via `views?.label` spread.
+  // Optional `error` flag forwarded by parent fields via `views?.label`
+  // spread; when truthy the label is colored with the shared field error
+  // color (`color-red-500`).
   isDisabled?: boolean;
-  // Optional `isDisabled` flag forwarded by parent fields via `views?.label` spread.
+  // Optional `isDisabled` flag forwarded by parent fields via `views?.label`
+  // spread; mutes the label color and shows a `not-allowed` cursor on web.
   helperText?: React.ReactNode;
-  // Optional helper text passed through by parent fields.
+  // Accepted and ignored; consumed by the parent field layout, which renders
+  // the helper text below the field (FieldContainer), not inside the Label.
   views?: ViewProps;
-  // Optional `views` style overrides forwarded by parent fields (TextField,
-  // ColorInput, …) when they spread `views?.label`.
+  // Accepted and ignored; consumed by parent field layout when it spreads
+  // `views?.label` — kept in the interface so the spread stays type-safe.
 }

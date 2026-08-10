@@ -14,19 +14,49 @@ const SelectorView: React.FC<SelectorViewProps> = ({
   value,
   views = {},
   options = [],
+  helperText,
+  error = false,
+  isDisabled = false,
+  isReadOnly = false,
   onChange = () => {},
   setValue = () => {},
+  // Internal state plumbing and field-shell props with no DOM equivalent on
+  // this control: pulled out so they stay off the rendered elements.
+  hide,
+  setHide,
+  isHovered,
+  setIsHovered,
+  isFocused,
+  setIsFocused,
+  placeholder,
+  isMulti,
+  shape,
+  variant,
+  size,
+  shadow,
+  isScrollable,
+  // Pulled out so an explicit caller label can name the group; the visible
+  // label names it via `aria-labelledby` otherwise.
+  'aria-label': ariaLabel,
+  ...props
 }) => {
+  const generatedId = React.useId();
+  const selectorId = id ?? generatedId;
+  const labelId = `${selectorId}-label`;
+  const helperTextId = `${selectorId}-helper-text`;
+  const hasHelper = Boolean(helperText);
+
   const handleCallback = useCallback(
     (option: Option) => {
+      if (isDisabled || isReadOnly) return;
       setValue(option.value);
       if (onChange) onChange(option.value);
     },
-    [setValue, onChange]
+    [setValue, onChange, isDisabled, isReadOnly]
   );
 
   return (
-    <FieldContainer id={id} width="100%" views={views}>
+    <FieldContainer id={selectorId} width="100%" views={views} {...props}>
       {label && (
         <Horizontal
           fontSize="10px"
@@ -38,10 +68,20 @@ const SelectorView: React.FC<SelectorViewProps> = ({
           gap={6}
           style={{ textTransform: 'uppercase' }}
         >
-          <InfoIcon widthHeight={14} /> <Text>{label}</Text>
+          <InfoIcon widthHeight={14} /> <Text id={labelId}>{label}</Text>
         </Horizontal>
       )}
-      <Horizontal gap={0}>
+      <Horizontal
+        gap={0}
+        // A single-choice segmented control is a radio group: without the role
+        // the options are anonymous buttons and the group has no name at all.
+        role="radiogroup"
+        aria-labelledby={!ariaLabel && label ? labelId : undefined}
+        aria-label={ariaLabel}
+        aria-describedby={hasHelper ? helperTextId : undefined}
+        aria-readonly={isReadOnly || undefined}
+        aria-invalid={error ? true : undefined}
+      >
         {options.map((option, index, arr) => {
           const isSelected = value === option.value;
           const accent = option.color ?? 'theme-primary';
@@ -56,6 +96,9 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               key={option.value}
               as="button"
               type="button"
+              role="radio"
+              aria-checked={isSelected}
+              disabled={isDisabled}
               onClick={() => handleCallback(option)}
               flex={1}
               // Segments stay on one line and ellipsise. Without this a long
@@ -75,7 +118,9 @@ const SelectorView: React.FC<SelectorViewProps> = ({
               paddingHorizontal={12}
               fontSize="12px"
               fontWeight={isSelected ? 'bold' : 'normal'}
-              cursor="pointer"
+              cursor={
+                isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer'
+              }
               backgroundColor="transparent"
               color={textToken}
               borderStyle="solid"
@@ -98,11 +143,25 @@ const SelectorView: React.FC<SelectorViewProps> = ({
       </Horizontal>
       <input
         type="hidden"
-        id={id}
+        id={`${selectorId}-input`}
         name={name}
         value={Array.isArray(value) ? value.join(',') : value}
         onChange={() => {}}
       />
+      {hasHelper && (
+        <Text
+          id={helperTextId}
+          fontSize="11px"
+          lineHeight="16px"
+          marginTop={0}
+          fontWeight={error ? '500' : '400'}
+          color={error ? 'color-red-500' : 'color-gray-500'}
+          transition="color 0.2s ease, opacity 0.2s ease"
+          {...views.helperText}
+        >
+          {helperText}
+        </Text>
+      )}
     </FieldContainer>
   );
 };

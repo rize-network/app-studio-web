@@ -219,11 +219,9 @@
           "borderRadius": 9999,
           "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.025em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif",

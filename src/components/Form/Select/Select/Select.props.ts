@@ -38,8 +38,6 @@ export interface SelectProps
   isReadOnly?: boolean;
   // Boolean to disable the select element
   isDisabled?: boolean;
-  // Boolean to render a clear affordance that resets the selection
-  isClearable?: boolean;
   // Boolean indicating the field is required for form submission
   isRequired?: boolean;
   // Boolean to autofocus the select when it mounts
@@ -75,8 +73,6 @@ export interface SelectProps
   shadow?: Shadow | Elevation | ViewProps;
   // Boolean to control whether the select options are scrollable
   isScrollable?: boolean;
-  // Optional ViewProps applied to the field's label element
-  labelProps?: any;
 }
 export interface SelectViewProps extends SelectProps {
   value: string | Array<string>;

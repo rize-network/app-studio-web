@@ -101,7 +101,6 @@ const OTPInputView: React.FC<
   handleKeyDown,
   handleKeyPress,
   secureTextEntry,
-  isFirstColumn,
   stepValues,
   setInputRef,
   onBlur = () => {},
@@ -114,6 +113,8 @@ const OTPInputView: React.FC<
 }) => {
   // Initializes the `useTheme` hook, providing access to the application's theme context for styling purposes.
   useTheme();
+  const generatedId = React.useId();
+  const otpId = id ?? name ?? generatedId;
   // A computed variable that determines whether the input field's label should be displayed, based on the presence of the `label` prop.
   const showLabel = !!label;
   // Memoizes the context value for the `OTPInputContext` to optimize performance. It calculates the state of each individual OTP slot, including character, placeholder, active status, and fake caret visibility.
@@ -334,15 +335,10 @@ const OTPInputView: React.FC<
       <noscript>
         <style>{NOSCRIPT_CSS_FALLBACK}</style>
       </noscript>
-      <FieldContainer
-        helperText={helperText}
-        error={error}
-        views={views}
-        {...props}
-      >
+      <FieldContainer helperText={helperText} error={error} views={views}>
         {showLabel && (
           <FieldLabel
-            htmlFor={id}
+            htmlFor={otpId}
             color={'theme-primary'}
             error={error}
             {...views.label}
@@ -368,7 +364,7 @@ const OTPInputView: React.FC<
               data-input-otp-placeholder-shown={value.length === 0 || undefined}
               data-input-otp-mss={mirrorSelectionStart}
               data-input-otp-mse={mirrorSelectionEnd}
-              id={id || name}
+              id={otpId}
               name={name}
               type={type === 'password' ? 'password' : 'text'}
               inputMode={type !== 'password' ? 'numeric' : undefined}
@@ -387,8 +383,15 @@ const OTPInputView: React.FC<
               onMouseOver={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               autoComplete="one-time-code"
-              aria-label={`OTP input with ${length} digits`}
+              // aria-label beats an associated <label>; only fall back to the
+              // generic name when no visible label exists
+              aria-label={
+                showLabel ? undefined : `OTP input with ${length} digits`
+              }
               style={inputStyle}
+              // Rest props (consumer aria-*, data-testid, …) belong on the
+              // real input, not the outer container.
+              {...props}
               {...views.input}
             />
           </View>

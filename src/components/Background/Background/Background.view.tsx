@@ -490,6 +490,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
     backgroundRepeat,
     backgroundAttachment,
     opacity: imageOpacity,
+    mixBlendMode: blendMode,
   };
   return (
     <View {...BackgroundImageStyles.container} {...views?.container} {...props}>
@@ -525,7 +526,12 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
         loop={loop}
         muted={muted}
         playsInline={playsInline}
-        style={BackgroundVideoStyles.video as React.CSSProperties}
+        style={
+          {
+            ...(BackgroundVideoStyles.video as React.CSSProperties),
+            mixBlendMode: blendMode,
+          } as React.CSSProperties
+        }
         {...views?.video}
       />
       {overlay}
@@ -652,7 +658,6 @@ export const BackgroundLayout = React.forwardRef<
   (
     {
       children,
-      designProps,
       shape = 'rounded',
       decorationRotation = 5,
       decorationScale = 1,

@@ -328,6 +328,17 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
       if (closeMenu) closeMenu();
     }
   };
+  // When the item is a link (`to`), render it as a real anchor; `isExternal`
+  // opens it in a new tab with the safe rel pairing.
+  const linkProps = to
+    ? {
+        as: 'a',
+        href: to,
+        color: 'inherit',
+        textDecoration: 'none',
+        ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
+      }
+    : {};
   return (
     <View
       role="menuitem"
@@ -338,6 +349,7 @@ export const ContextMenuItem: React.FC<ContextMenuItemProps> = ({
       data-disabled={isDisabled ? '' : undefined}
       {...ContextMenuSizes[size]}
       _hover={!isDisabled ? ContextMenuItemStates.hover : {}}
+      {...linkProps}
       {...views?.item}
       {...props}
     >

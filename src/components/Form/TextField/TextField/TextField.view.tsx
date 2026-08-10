@@ -39,6 +39,11 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   isReadOnly = false,
   isClearable = true,
   isAutoFocus = false,
+  isRequired,
+  required,
+  labelProps,
+  leftIcon,
+  rightIcon,
   setHint = () => {},
   setIsFocused = () => {},
   setIsHovered = () => {},
@@ -50,6 +55,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   inputRef,
   ...props
 }) => {
+  const generatedId = React.useId();
+  const fieldId = id ?? generatedId;
   const { getColor, themeMode } = useTheme();
   const IconColor = getColor(isDisabled ? 'color-gray-400' : 'color-gray-500', {
     themeMode: elementMode ? elementMode : themeMode,
@@ -197,12 +204,14 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         onMouseLeave={handleMouseLeave}
       >
         {left}
+        {leftIcon && <FieldIcons>{leftIcon}</FieldIcons>}
         <FieldWrapper>
           {showLabel && (
             <FieldLabel
-              htmlFor={id}
+              htmlFor={fieldId}
               color={'theme-primary'}
               error={error}
+              {...labelProps}
               {...views?.label}
             >
               {label}
@@ -211,11 +220,14 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
           <Input
             ref={inputRef}
             type="text"
-            id={id}
+            id={fieldId}
             name={name}
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
+            {...(isRequired ?? required
+              ? { required: true, 'aria-required': true }
+              : {})}
             placeholder={placeholder || hint}
             onFocus={handleFocus}
             onBlur={handleBlur}
@@ -245,6 +257,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
             />
           </FieldIcons>
         )}
+        {rightIcon && <FieldIcons>{rightIcon}</FieldIcons>}
         {right}
       </FieldContent>
     </FieldContainer>

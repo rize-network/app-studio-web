@@ -215,11 +215,9 @@
           "borderRadius": 9999,
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.02em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",

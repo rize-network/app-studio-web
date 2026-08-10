@@ -12,13 +12,14 @@ export interface TextAreaProps
   extends Omit<InputProps, 'size' | 'shadow' | 'value' | 'onChange'> {
   defaultValue?: string;
   error?: boolean;
+  // Whether the textarea accepts input (default `true`); `false` renders it
+  // read-only.
   isEditable?: boolean;
   helperText?: string;
   id?: string;
   isReadOnly?: boolean;
   isDisabled?: boolean;
   isAutoFocus?: boolean;
-  isMultiline?: boolean;
   label?: string;
   maxRows?: number;
   maxCols?: number;

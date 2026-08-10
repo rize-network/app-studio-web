@@ -26,6 +26,7 @@ const TabsComponent: React.FC<TabsProps> = (props) => {
     renderContent,
     variant = 'underline',
     iconPosition = 'left',
+    keepMounted = false,
     value,
     onValueChange,
     children,
@@ -79,6 +80,7 @@ const TabsComponent: React.FC<TabsProps> = (props) => {
         renderContent={renderContent}
         variant={variant}
         iconPosition={iconPosition}
+        keepMounted={keepMounted}
       />
     );
   }

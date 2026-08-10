@@ -131,7 +131,7 @@ export const useSliderState = ({
         document.removeEventListener('touchend', handleMouseUp);
       };
       // `document` is web-only; React Native has no global drag listeners.
-      if (typeof document?.addEventListener !== 'function') return;
+      if (typeof document === 'undefined') return;
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchmove', handleMouseMove);

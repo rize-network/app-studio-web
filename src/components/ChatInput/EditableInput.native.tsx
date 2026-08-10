@@ -53,6 +53,10 @@ interface EditableInputProps {
   name?: string;
   // DOM/native id forwarded to the underlying `TextInput`.
   id?: string;
+  // Web-only: keydown hook on the contenteditable, called before internal
+  // mention/suggestion handling. Accepted here for API parity — native key
+  // events flow through the TextInput's own handlers.
+  onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void;
   // Web-only: renders a hidden mirror `<textarea>`. Accepted here for API parity and ignored — native already exposes a real text input.
   hiddenInput?: boolean;
   // Web-only: ref to the hidden mirror `<textarea>`. Accepted here for API parity and never populated on native.

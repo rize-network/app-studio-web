@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from 'app-studio';
-import { Center } from 'app-studio';
+import { Center, Input } from 'app-studio';
 import { Label } from '../../../Form/Label/Label';
 import { RadioViewProps } from './Radio.props';
 import {
@@ -66,6 +66,9 @@ const RadioView: React.FC<RadioViewProps> = ({
   helperText,
   ...props
 }) => {
+  const generatedId = React.useId();
+  const radioId = id ?? generatedId;
+  const [isFocused, setIsFocused] = React.useState(false);
   // Handles the hover event for the radio button. This function toggles the `isHovered` state, which can be used to apply hover-specific styles.
   const handleHover = () => setIsHovered(!isHovered);
   // Manages the click/change event for the radio button. If the radio is not disabled or read-only, it updates the internal selected state and triggers the provided `onChange` or `onValueChange` callbacks with the radio's current `value`.
@@ -138,20 +141,22 @@ const RadioView: React.FC<RadioViewProps> = ({
       transition: 'all 0.2s ease-in-out',
     },
   };
+  const infoTextId = `${radioId}-info`;
+  const errorId = `${radioId}-error`;
+  const describedBy =
+    [infoText ? infoTextId : '', error ? errorId : '']
+      .filter(Boolean)
+      .join(' ') || undefined;
+
   return (
-    <Label
-      htmlFor={id}
-      as="div"
-      onClick={handleChange}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
-      size={Typography.fontSizes[size]}
-      {...radioStyle.container}
-      {...props}
-    >
-      <Vertical gap={8}>
-        {' '}
-        {}
+    <Vertical {...radioStyle.container}>
+      <Label
+        htmlFor={radioId}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleHover}
+        size={Typography.fontSizes[size]}
+        cursor="inherit"
+      >
         <Horizontal gap={12} alignItems="center">
           {' '}
           {}
@@ -162,7 +167,46 @@ const RadioView: React.FC<RadioViewProps> = ({
             </Text>
           )}
           {}
-          <Center {...radioStyle.radio}>
+          <Center
+            position="relative"
+            {...radioStyle.radio}
+            {...(isFocused
+              ? {
+                  outline: 'none',
+                  boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
+                }
+              : {})}
+          >
+            {/* Real control: a transparent input covering the visible circle,
+                so the element found by role/name is the one that receives
+                clicks — and `name` gives native radio-group arrow-key moves */}
+            <Input
+              type="radio"
+              id={radioId}
+              name={name}
+              value={value ?? ''}
+              checked={Boolean(isChecked || isSelected)}
+              onChange={handleChange}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              disabled={isDisabled}
+              readOnly={isReadOnly}
+              position="absolute"
+              top={0}
+              left={0}
+              width="100%"
+              height="100%"
+              margin={0}
+              opacity={0}
+              zIndex={1}
+              cursor={
+                isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer'
+              }
+              aria-describedby={describedBy}
+              // Consumer rest props (aria-*, role, data-*) belong on the real
+              // control, not the wrapping label.
+              {...props}
+            />
             {(isChecked || isSelected) && <View {...radioStyle.dot} />}
           </Center>
           {}
@@ -172,23 +216,26 @@ const RadioView: React.FC<RadioViewProps> = ({
             </Text>
           )}
         </Horizontal>
-        {}
-        {infoText && (
-          <Text
-            marginLeft={labelPosition === 'left' ? 0 : 36}
-            color="color-gray-500"
-            size="sm"
-            fontWeight="400"
-            lineHeight="20px"
-            {...views?.infoText}
-          >
-            {infoText}
-          </Text>
-        )}
-      </Vertical>
-      {}
+      </Label>
+      {/* Info text — outside the <label> so it describes the input through
+          `aria-describedby` instead of polluting its accessible name */}
+      {infoText && (
+        <Text
+          id={infoTextId}
+          marginLeft={labelPosition === 'left' ? 0 : 36}
+          color="color-gray-500"
+          size="sm"
+          fontWeight="400"
+          lineHeight="20px"
+          {...views?.infoText}
+        >
+          {infoText}
+        </Text>
+      )}
+      {/* Error message — outside the <label> for the same reason */}
       {error && (
         <Text
+          id={errorId}
           size="xs"
           marginTop={4}
           marginHorizontal={0}
@@ -199,7 +246,7 @@ const RadioView: React.FC<RadioViewProps> = ({
           {error}
         </Text>
       )}
-    </Label>
+    </Vertical>
   );
 };
 export default RadioView;

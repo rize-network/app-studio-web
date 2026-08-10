@@ -11,8 +11,14 @@ export interface TitleProps extends ViewProps {
   // The content to be rendered inside the Title component, typically text.
   children: React.ReactNode;
   // Specifies text (or an array of texts) to be visually highlighted within the title's children.
+  // With `alternateHighlightText`, this is the placeholder word and MUST appear
+  // verbatim inside `children` — rotation replaces it in the full sentence.
   highlightText?: string | string[];
   // Provides an array of alternative texts to cycle through for highlighting, creating a dynamic effect.
+  // Requires `children` to be the complete sentence (a string) containing
+  // `highlightText`; e.g. children="Build apps fast", highlightText="apps",
+  // alternateHighlightText={["apps", "sites"]}. Otherwise rotation is disabled
+  // and a dev-mode warning is logged.
   alternateHighlightText?: string[];
   // Defines animation properties for the highlighted text, allowing for custom motion effects.
   highlightAnimate?: AnimationProps | AnimationProps[];

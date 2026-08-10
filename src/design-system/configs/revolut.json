@@ -312,11 +312,9 @@
           "borderRadius": 9999,
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.02em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",

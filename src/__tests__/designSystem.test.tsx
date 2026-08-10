@@ -34,6 +34,37 @@ const requiredComponentKeys = [
   'textarea',
 ];
 
+describe('config colors stay under the variants, never above them', () => {
+  test('no shipped config carries colors in components.button.views', () => {
+    const colorKeys = ['backgroundColor', 'background', 'borderColor', 'color'];
+    designSystemConfigList.forEach((config: any) => {
+      const views = config?.components?.button?.views ?? {};
+      Object.entries(views).forEach(([viewKey, viewValue]) => {
+        colorKeys.forEach((key) => {
+          expect(
+            (viewValue as Record<string, unknown>)?.[key] ?? null,
+            `${config?.metadata?.id}: components.button.views.${viewKey}.${key} flattens every variant`
+          ).toBeNull();
+        });
+      });
+    });
+  });
+
+  test('a config with colors in button views triggers the dev warning', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    getDesignSystemComponentProps('button', {
+      metadata: { id: 'test' },
+      components: {
+        button: { views: { container: { backgroundColor: 'color-gray-50' } } },
+      },
+    } as any);
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('config.variants')
+    );
+    warn.mockRestore();
+  });
+});
+
 describe('design system configs', () => {
   test('loads all HTML-derived configs with unique ids', () => {
     expect(designSystemConfigList).toHaveLength(15);

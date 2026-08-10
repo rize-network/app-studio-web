@@ -56,3 +56,33 @@ test('TextArea matches snapshot', () => {
   const tree = renderer.create(<textarea />).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+test('isEditable={false} renders the textarea read-only', async () => {
+  render(<TextArea name="body" value="fixed" isEditable={false} />);
+  const input = screen.getByRole('textbox');
+  expect(input).toHaveAttribute('readonly');
+  await userEvent.type(input, 'attempt to change');
+  expect(input).toHaveValue('fixed');
+}, 30000);
+
+test('a TextArea is editable by default', async () => {
+  render(<TextArea name="body" />);
+  const input = screen.getByRole('textbox');
+  expect(input).not.toHaveAttribute('readonly');
+  await userEvent.type(input, 'ok');
+  expect(input).toHaveValue('ok');
+}, 30000);
+
+test('isRequired marks the textarea required and aria-required', () => {
+  render(<TextArea name="body" isRequired />);
+  const input = screen.getByRole('textbox');
+  expect(input).toBeRequired();
+  expect(input).toHaveAttribute('aria-required', 'true');
+});
+
+test('labelProps is spread onto the field label', () => {
+  render(
+    <TextArea name="body" label="Body" labelProps={{ id: 'body-label' }} />
+  );
+  expect(screen.getByText('Body')).toHaveAttribute('id', 'body-label');
+});

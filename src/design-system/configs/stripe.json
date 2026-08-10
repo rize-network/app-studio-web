@@ -282,11 +282,9 @@
           "borderRadius": 9999,
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",
           "fontWeight": 700,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.022em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'sohne-var', 'SF Pro Display', -apple-system, system-ui, sans-serif",

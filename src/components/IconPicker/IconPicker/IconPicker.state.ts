@@ -50,7 +50,7 @@ export const useIconPickerState = (props: IconPickerProps) => {
     };
     // `document` is web-only; on React Native there is no global click target
     // to listen to (the dropdown closes on selection / explicit close instead).
-    if (typeof document?.addEventListener !== 'function') return;
+    if (typeof document === 'undefined') return;
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);

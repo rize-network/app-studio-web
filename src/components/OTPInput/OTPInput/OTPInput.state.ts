@@ -9,22 +9,6 @@ import {
 import { OTPInputProps } from './OTPInput.props';
 import { syncTimeouts } from './sync-timeouts';
 
-const logOTPInput = (message: string, payload: Record<string, unknown>) => {
-  console.log(`[OTPInput.state] ${message}`, payload);
-};
-
-const summarizeValue = (value: unknown) => {
-  if (value === null || value === undefined) return value;
-  if (
-    typeof value === 'string' ||
-    typeof value === 'number' ||
-    typeof value === 'boolean'
-  ) {
-    return value;
-  }
-  return Object.prototype.toString.call(value);
-};
-
 // This file defines the `useOTPInputState` custom React hook, which centralizes all state management, refs, and event handlers for the OTPInput component. It encompasses logic for controlled/uncontrolled value handling, input focus and blur, selection management, paste operations, and validation.
 export const useOTPInputState = ({
   value: controlledValue,
@@ -79,12 +63,6 @@ export const useOTPInputState = ({
     if (isControlled && controlledValue !== value) {
       const nextControlledValue =
         String(controlledValue ?? '').slice(0, length) || '';
-      logOTPInput('sync controlled value', {
-        controlledValue: summarizeValue(controlledValue),
-        previousValue: value,
-        nextControlledValue,
-        length,
-      });
       setInternalValue(nextControlledValue);
     }
   }, [isControlled, controlledValue, length, value]);
@@ -106,16 +84,6 @@ export const useOTPInputState = ({
           valueToSet = closest.toString();
         }
       }
-      logOTPInput('setValue', {
-        incomingValue: newValue,
-        valueToSet,
-        length,
-        isControlled,
-        hasOnChange: !!onChange,
-        hasOnChangeText: !!onChangeText,
-        hasOnComplete: !!onComplete,
-        stepValues,
-      });
       setInternalValue(valueToSet);
       if (onChange) {
         onChange(valueToSet);
@@ -150,17 +118,7 @@ export const useOTPInputState = ({
             e?.nativeEvent?.text ??
             '';
       const newValue = String(raw).slice(0, length);
-      logOTPInput('handleChange normalized', {
-        raw,
-        newValue,
-        length,
-        hasPattern: !!regexp,
-      });
       if (newValue.length > 0 && regexp && !regexp.test(newValue)) {
-        logOTPInput('handleChange rejected by pattern', {
-          newValue,
-          pattern: String(regexp),
-        });
         e?.preventDefault?.();
         return;
       }
@@ -184,12 +142,6 @@ export const useOTPInputState = ({
       setMirrorSelectionStart(start);
       setMirrorSelectionEnd(end);
     }
-    logOTPInput('focus', {
-      length,
-      refHasDomSelection: !!(
-        input && typeof input.setSelectionRange === 'function'
-      ),
-    });
     setIsFocused(true);
     if (onFocus) onFocus();
   }, [length, onFocus]);
@@ -362,7 +314,7 @@ export const useOTPInputState = ({
     // `Event` / `dispatchEvent` are web-only; skip the synthetic input event on
     // React Native where the input ref is not a DOM node.
     if (typeof Event === 'undefined') return;
-    syncTimeouts(() => {
+    const timeouts = syncTimeouts(() => {
       const node: any = inputRef.current;
       if (node && typeof node.dispatchEvent === 'function') {
         node.dispatchEvent(new Event('input'));
@@ -380,6 +332,9 @@ export const useOTPInputState = ({
         ];
       }
     });
+    // The staggered timers must not outlive the component (they fire against
+    // a torn-down test environment otherwise).
+    return () => timeouts.forEach(clearTimeout);
   }, [value, isFocused]);
   return {
     value,

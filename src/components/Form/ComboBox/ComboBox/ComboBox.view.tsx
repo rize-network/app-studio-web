@@ -51,6 +51,10 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   // Collects all further props not destructured explicitly.
   ...props
 }) => {
+  const generatedId = React.useId();
+  const comboId = (props as { id?: string }).id ?? generatedId;
+  const dropdownId = `${comboId}-dropdown`;
+  const labelId = `${comboId}-label`;
   const { ref: triggerRef, relation } = useElementPosition({
     trackChanges: true,
     trackOnScroll: true,
@@ -113,7 +117,7 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
     const handleClickOutside = (event: MouseEvent) => {
       const path = event.composedPath();
       const isOutside = !path.some(
-        (element: any) => element?.id === 'combobox-dropdown'
+        (element: any) => element?.id === dropdownId
       );
       if (
         isOutside &&
@@ -188,7 +192,6 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
   // Starts the JSX returned by the component representing the combobox.
   return (
     <Horizontal
-      role="combobox"
       flexWrap="nowrap"
       gap={15}
       alignItems="center"
@@ -196,14 +199,35 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
       {...props}
     >
       {label && (
-        <Text views={views?.label} htmlFor={props.id}>
+        <Text id={labelId} views={views?.label}>
           {label}
         </Text>
       )}
       <View position="relative" width="100%">
+        {/* The combobox role belongs on the focusable trigger, not the layout
+            row — and a click-only div is unreachable by keyboard without
+            tabIndex + key handling. */}
         <div
           ref={triggerRef as React.RefObject<HTMLDivElement>}
+          role="combobox"
+          tabIndex={0}
+          aria-expanded={isDropdownVisible}
+          aria-haspopup="listbox"
+          aria-controls={isDropdownVisible ? dropdownId : undefined}
+          aria-labelledby={label ? labelId : undefined}
           onClick={() => setIsDropdownVisible(!isDropdownVisible)}
+          onKeyDown={(event) => {
+            if (
+              event.key === 'Enter' ||
+              event.key === ' ' ||
+              event.key === 'ArrowDown'
+            ) {
+              event.preventDefault();
+              setIsDropdownVisible(true);
+            } else if (event.key === 'Escape') {
+              setIsDropdownVisible(false);
+            }
+          }}
           style={{ width: '100%' }}
         >
           <FieldContent
@@ -320,9 +344,9 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
           <Portal>
             <View
               ref={dropdownRef}
-              id="combobox-dropdown"
+              id={dropdownId}
               role="listbox"
-              aria-labelledby={props.id}
+              aria-labelledby={label ? labelId : undefined}
               {...dropdownStyles}
               style={getDropdownStyle()}
               {...views?.dropdown}
@@ -330,14 +354,19 @@ const ComboBoxView: React.FC<ComboBoxViewProps> = ({
               {searchEnabled && (
                 <View {...searchContainerStyles}>
                   <TextField
-                    id={`${props.id}-search`}
-                    name={`${props.name}-search`}
+                    id={`${comboId}-search`}
+                    name={`${
+                      (props as { name?: string }).name ?? comboId
+                    }-search`}
                     width="100%"
                     type="search"
                     autoFocus
                     value={searchQuery}
                     onChange={(value) => handleSearch(value)}
-                    hint={placeholder || 'Search...'}
+                    hint={searchPlaceholder || placeholder || 'Search...'}
+                    // TextField spreads rest props onto its <input>, so this
+                    // names a field that otherwise only has a placeholder.
+                    aria-label={searchPlaceholder || 'Search'}
                     isClearable={false}
                     left={
                       <SearchIcon widthHeight={14} color="color-gray-400" />

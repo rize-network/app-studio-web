@@ -1,6 +1,14 @@
 import React from 'react';
-import { View, Vertical, Horizontal, Text, useTheme } from 'app-studio';
+import {
+  Element,
+  View,
+  Vertical,
+  Horizontal,
+  Text,
+  useTheme,
+} from 'app-studio';
 import { ColorInputViewProps } from './ColorInput.props';
+import { formatColor } from './colorFormat';
 import {
   DefaultColorInputStyles,
   Sizes,
@@ -56,10 +64,22 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
   closeOnSelect,
   value,
   defaultValue,
+  'aria-label': ariaLabel,
   ...props
 }) => {
   // Initializes the getColor function from the useTheme hook, allowing access to theme-defined colors for consistent styling.
   const { getColor } = useTheme();
+  const generatedId = React.useId();
+  const triggerId = id ?? generatedId;
+  const labelId = `${triggerId}-label`;
+  const listboxId = `${triggerId}-listbox`;
+  const helperTextId = `${triggerId}-helper-text`;
+  const errorTextId = `${triggerId}-error-text`;
+  const hasErrorText = !!error && typeof error === 'string';
+  const describedBy =
+    [helperText ? helperTextId : null, hasErrorText ? errorTextId : null]
+      .filter(Boolean)
+      .join(' ') || undefined;
   // Combines default container styles with any custom styles provided through the views.container prop.
   const containerStyles = {
     ...DefaultColorInputStyles.container,
@@ -104,7 +124,8 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       {}
       {label && (
         <Label
-          htmlFor={id}
+          id={labelId}
+          htmlFor={triggerId}
           size={size}
           isDisabled={isDisabled}
           error={error}
@@ -113,10 +134,29 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
           {label}
         </Label>
       )}
+      {/* The trigger is a div, so the control itself never submits anything;
+          this hidden input carries the value in plain HTML forms. */}
+      {name && (
+        <input
+          type="hidden"
+          name={name}
+          value={formatColor(selectedColor, colorFormat)}
+        />
+      )}
       {}
       <View
         ref={triggerRef}
+        id={triggerId}
         onClick={isDisabled || isReadOnly ? undefined : handleToggle}
+        onKeyDown={(event: React.KeyboardEvent) => {
+          // role="button" carries no native key handling — without this,
+          // Enter/Space do nothing and the picker is unreachable by keyboard.
+          if (isDisabled || isReadOnly) return;
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            handleToggle();
+          }
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         // The public `onFocus` / `onBlur` props were declared but never wired,
@@ -133,7 +173,15 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
         role="button"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        aria-label={label || placeholder}
+        aria-controls={isOpen ? listboxId : undefined}
+        // `htmlFor` pointing at a div is inert, so the visible label names the
+        // trigger via aria-labelledby. An explicit aria-label prop still wins:
+        // labelledby is skipped for it because it outranks aria-label in the
+        // accessible-name computation.
+        aria-labelledby={!ariaLabel && label ? labelId : undefined}
+        aria-label={ariaLabel ?? (label ? undefined : placeholder)}
+        aria-describedby={describedBy}
+        aria-invalid={error ? true : undefined}
         width={'fit-content'}
         gap={8}
         {...triggerStyles}
@@ -163,10 +211,20 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       {isOpen && (
         <View ref={dropdownRef} {...dropdownStyles}>
           {}
-          <View {...colorGridStyles}>
+          <View
+            id={listboxId}
+            role="listbox"
+            aria-labelledby={label ? labelId : undefined}
+            aria-label={label ? undefined : 'Color options'}
+            {...colorGridStyles}
+          >
             {predefinedColors.map((colorOption, index) => (
               <View
                 key={index}
+                role="option"
+                aria-selected={selectedColor === colorOption.value}
+                aria-label={colorOption.name}
+                tabIndex={0}
                 width="24px"
                 height="24px"
                 borderRadius="8px"
@@ -181,6 +239,13 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                 cursor="pointer"
                 transition="transform 0.2s ease, border-color 0.2s ease"
                 onClick={() => handleColorSelect(colorOption.value)}
+                onKeyDown={(event: React.KeyboardEvent) => {
+                  // Divs with role="option" get no native key handling.
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleColorSelect(colorOption.value);
+                  }
+                }}
                 title={colorOption.name}
                 _hover={{
                   transform: 'scale(1.05)',
@@ -235,13 +300,19 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                   value={customColor}
                   onChange={handleCustomColorChange}
                   placeholder="#000000 or rgb(0,0,0)"
+                  aria-label="Custom color"
                   size="sm"
                   style={{ flex: 1 }}
                   views={views?.customInput}
                 />
-                <View
+                {/* A real button, so it is focusable and Enter/Space work
+                    natively. */}
+                <Element
+                  as="button"
+                  type="button"
                   padding="8px 12px"
                   backgroundColor="theme-primary"
+                  border="none"
                   borderRadius="8px"
                   cursor="pointer"
                   onClick={handleCustomColorSubmit}
@@ -251,7 +322,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
                   <Text color="color-white" fontSize="12px" fontWeight="500">
                     Add
                   </Text>
-                </View>
+                </Element>
               </Horizontal>
             </Vertical>
           )}
@@ -260,6 +331,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       {}
       {helperText && (
         <Text
+          id={helperTextId}
           fontSize="12px"
           color={error ? 'color-red-500' : 'color-gray-600'}
           marginTop="4px"
@@ -269,8 +341,9 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
         </Text>
       )}
       {}
-      {error && typeof error === 'string' && (
+      {hasErrorText && (
         <Text
+          id={errorTextId}
           fontSize="12px"
           color="color-red-500"
           marginTop="4px"

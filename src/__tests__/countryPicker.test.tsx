@@ -8,6 +8,7 @@ import {
 } from 'src/components/Form/CountryPicker/CountryPicker/CountryPicker.view';
 
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 afterEach(() => {
@@ -15,15 +16,51 @@ afterEach(() => {
 });
 
 describe('CountryPicker component', () => {
+  // The combobox role is baked into the component, so no `role` prop crutch
+  // is needed in these tests.
   test('renders CountryPicker component', () => {
-    render(<CountryPicker name="username" role="textbox" />);
-    const CountryPickerElement = screen.getByRole('textbox');
+    render(<CountryPicker name="username" />);
+    const CountryPickerElement = screen.getByRole('combobox');
     expect(CountryPickerElement).toBeInTheDocument();
   });
-  test('renders CountryPicker with specified role', () => {
-    render(<CountryPicker name="username" role="textbox" />);
-    const inputElement = screen.getByRole('textbox');
+  test('is found by role and accessible name from the label', () => {
+    render(<CountryPicker name="country" label="Country" />);
+    const inputElement = screen.getByRole('combobox', { name: 'Country' });
     expect(inputElement).toBeInTheDocument();
+  });
+  test('is reachable with the keyboard', async () => {
+    render(<CountryPicker name="country" label="Country" />);
+    const inputElement = screen.getByRole('combobox', { name: 'Country' });
+    await userEvent.tab();
+    expect(inputElement).toHaveFocus();
+  }, 30000);
+  test('supports the full keyboard selection path', () => {
+    const handleChange = vi.fn();
+    render(
+      <CountryPicker name="country" label="Country" onChange={handleChange} />
+    );
+    const inputElement = screen.getByRole('combobox', { name: 'Country' });
+    expect(inputElement).toHaveAttribute('aria-expanded', 'false');
+    // ArrowDown opens the listbox and highlights the first option.
+    fireEvent.keyDown(inputElement, { key: 'ArrowDown' });
+    const listbox = screen.getByRole('listbox');
+    expect(inputElement).toHaveAttribute('aria-expanded', 'true');
+    expect(inputElement).toHaveAttribute('aria-controls', listbox.id);
+    // ArrowDown again moves the highlight to the second option.
+    fireEvent.keyDown(inputElement, { key: 'ArrowDown' });
+    expect(inputElement).toHaveAttribute(
+      'aria-activedescendant',
+      `${listbox.id}-option-1`
+    );
+    // Enter selects the highlighted option and closes the list.
+    fireEvent.keyDown(inputElement, { key: 'Enter' });
+    expect(handleChange).toHaveBeenCalledWith(countries[1].name);
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    // Escape closes a reopened list.
+    fireEvent.keyDown(inputElement, { key: 'ArrowDown' });
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    fireEvent.keyDown(inputElement, { key: 'Escape' });
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
   });
   test('renders with placeholder', () => {
     render(<CountryPicker name="username" placeholder="Enter your name" />);
@@ -32,13 +69,13 @@ describe('CountryPicker component', () => {
   });
   test('renders disabled CountryPicker', () => {
     render(<CountryPicker name="username" isDisabled />);
-    const inputElement = screen.getByRole('textbox');
+    const inputElement = screen.getByRole('combobox');
     expect(inputElement).toBeDisabled();
   });
   test('triggers onBlur event when the input field loses focus', () => {
     const handleBlur = vi.fn();
     render(<CountryPicker onBlur={handleBlur} />);
-    const countryInput = screen.getByRole('textbox');
+    const countryInput = screen.getByRole('combobox');
     fireEvent.focus(countryInput);
     fireEvent.blur(countryInput);
     // Assert that the onBlur event is triggered
@@ -47,7 +84,7 @@ describe('CountryPicker component', () => {
   test('triggers onChange event when selecting a country', () => {
     const handleChange = vi.fn();
     render(<CountryPicker onChange={handleChange} />);
-    const countryInput = screen.getByRole('textbox');
+    const countryInput = screen.getByRole('combobox');
     const selectedCountry = 'United States';
     fireEvent.change(countryInput, { target: { value: selectedCountry } });
     // Assert that the onChange event is triggered with the selected country value
@@ -55,15 +92,9 @@ describe('CountryPicker component', () => {
   });
   test('renders readonly CountryPicker', () => {
     render(<CountryPicker name="username" value="readonly value" isReadOnly />);
-    const inputElement = screen.getByRole('textbox');
+    const inputElement = screen.getByRole('combobox');
     expect(inputElement).toHaveAttribute('readonly');
   });
-  // test('renders helper text', () => {
-  //   const helperText = 'This is helper text';
-  //   render(<CountryPicker name="error" helperText={helperText} error={true} />);
-  //   const helperTextElement = screen.queryByText(helperText);
-  //   expect(helperTextElement).toBeInTheDocument();
-  // });
   test('CountryPicker to match snapshot', () => {
     const tree = renderer
       .create(
@@ -92,7 +123,6 @@ describe('CountryPicker component', () => {
 
 describe('DropDown component', () => {
   const options = countries;
-  const callback = vi.fn();
   const views = {
     dropDown: { backgroundColor: 'red' },
     text: { color: 'white' },
@@ -100,15 +130,9 @@ describe('DropDown component', () => {
 
   test('renders DropDown component without crashing', () => {
     render(<DropDown options={options} views={views} />);
-    const DropDownElement = screen.getByRole('dropDown');
+    const DropDownElement = screen.getByRole('listbox');
     expect(DropDownElement).toBeInTheDocument();
   });
-
-  // test('applies custom styles to the dropdown list', () => {
-  //   render(<DropDown options={options} callback={callback} views={views} />);
-  //   const dropDownList = screen.getByRole('dropDown');
-  //   expect(dropDownList).toHaveStyle('background-color: red');
-  // });
 
   test('renders options correctly', () => {
     const options = [
@@ -131,40 +155,8 @@ describe('DropDown component', () => {
       const optionElement = screen.getByText(option.name);
       expect(optionElement).toBeInTheDocument();
     });
+    expect(screen.getAllByRole('option')).toHaveLength(options.length);
   });
-
-  // test('renders DropDown component with provided size', () => {
-  //   render(<DropDown options={options} views={views} size="md" />);
-  //   const DropDownElement = screen.getByRole('dropDown');
-  //   expect(DropDownElement).toBeInTheDocument();
-  //   expect(DropDownElement).toHaveStyle({ fontSize: 16 });
-  // });
-
-  //   test('calls callback function with selected option', () => {
-  //     const options = [
-  //       {
-  //         name: 'Aland Islands',
-  //         dial_code: '+358',
-  //         emoji: '🇦🇽',
-  //         code: 'AX',
-  //       },
-  //       {
-  //         name: 'Albania',
-  //         dial_code: '+355',
-  //         emoji: '🇦🇱',
-  //         code: 'AL',
-  //       },
-  //     ];
-  //     const callback = vi.fn();
-  //     render(<DropDown options={options} callback={callback} views={views} />);
-
-  //     const selectedOption = options[1];
-  //     const optionElement = screen.getByText(selectedOption.name);
-  //     fireEvent.click(optionElement);
-
-  //     expect(callback).toHaveBeenCalledWith(selectedOption.name);
-  //   });
-  // });
 
   describe('DropDownItem component', () => {
     const option = 'Albania';
@@ -175,65 +167,18 @@ describe('DropDown component', () => {
       render(
         <DropDownItem option={option} callback={() => {}} views={views} />
       );
-      const DropDownItemElement = screen.getByRole('DropDownItem');
+      const DropDownItemElement = screen.getByRole('option');
       expect(DropDownItemElement).toBeInTheDocument();
+      expect(DropDownItemElement).toHaveAttribute('aria-selected', 'false');
     });
 
-    // test('calls callback function when option is clicked', () => {
-    //   const option = 'United States';
-    //   const callback = vi.fn();
-    //   render(
-    //     <DropDownItem option={option} callback={callback} views={views} />
-    //   );
-
-    //   const optionElement = screen.getByText(option);
-    //   fireEvent.click(optionElement);
-
-    //   expect(callback).toHaveBeenCalledWith(option);
-    // });
-
-    // test('changes background color on hover', () => {
-    //   const option = 'United States';
-    //   render(
-    //     <DropDownItem option={option} callback={() => {}} views={views} />
-    //   );
-
-    //   const optionElement = screen.getByText(option);
-    //   fireEvent.mouseEnter(optionElement);
-
-    //   expect(optionElement).toHaveStyle('background-color: color-trueGray-100');
-
-    //   fireEvent.mouseLeave(optionElement);
-
-    //   expect(optionElement).not.toHaveStyle('background-color: color-trueGray-100');
-    // });
-
-    // test('renders DropDownItem component with provided size', () => {
-    //   render(
-    //     <DropDownItem
-    //       option={option}
-    //       selected="Option 1"
-    //       size="md"
-    //       callback={() => {}}
-    //       views={views}
-    //     />
-    //   );
-    //   const DropDownItemElement = screen.getByRole('DropDownItem');
-    //   expect(DropDownItemElement).toBeInTheDocument();
-    //   expect(DropDownItemElement).toHaveStyle({ fontSize: 16 });
-    // });
-
-    // test('should call callback when an option is selected', () => {
-    //   const callback = vi.fn();
-    //   render(
-    //     <DropDownItem
-    //       option={option}
-    //       selected="Option 2"
-    //       callback={callback}
-    //       views={views}
-    //     />
-    //   );
-    //   fireEvent.click(screen.getByRole('DropDownItem'));
-    //   expect(callback).toHaveBeenCalledTimes(1);
+    test('calls callback function when option is clicked', () => {
+      const callback = vi.fn();
+      render(
+        <DropDownItem option={option} callback={callback} views={views} />
+      );
+      fireEvent.click(screen.getByRole('option'));
+      expect(callback).toHaveBeenCalledWith(option);
+    });
   });
 });

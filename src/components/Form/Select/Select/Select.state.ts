@@ -27,8 +27,13 @@ export const useSelectState = ({
   // and make `setValue` a permanent no-op.
   value: controlledValue,
   defaultValue,
-  id = `select-${Math.random().toString(36).substr(2, 9)}`,
+  id: idProp,
 }: SelectProps) => {
+  // `useId` is stable across renders where `Math.random` was not. The
+  // delimiter characters are stripped because the view looks itself up with a
+  // `#id` selector, where `:`/`«` would make the selector invalid.
+  const reactId = React.useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const id = idProp ?? `select-${reactId}`;
   const isControlled = controlledValue !== undefined;
 
   // State hook for tracking mouse hover status over the Select component

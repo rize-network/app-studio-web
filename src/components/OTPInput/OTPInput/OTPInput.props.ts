@@ -79,6 +79,4 @@ export interface OTPInputViewProps extends OTPInputProps {
   setIsFocused: (isFocused: boolean) => void;
   // A function to set the hover state of the OTP input.
   setIsHovered: (isHovered: boolean) => void;
-  // Internal flag indicating whether this column is the first input cell.
-  isFirstColumn?: boolean;
 }

@@ -174,11 +174,9 @@
           "borderRadius": 0,
           "fontFamily": "'Inter', -apple-system, Arial, sans-serif",
           "fontWeight": 300,
-          "borderColor": "theme-primary",
           "letterSpacing": "0.08em",
           "textTransform": "uppercase",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter', -apple-system, Arial, sans-serif",

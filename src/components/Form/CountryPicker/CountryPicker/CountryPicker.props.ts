@@ -61,8 +61,6 @@ export interface CountryPickerViewProps extends CountryPickerProps {
   setIsFocused?: (focused: boolean) => void;
   // Selected item's value
   selected?: string;
-  // Setter function for selected item
-  setSelected?: (selected: string) => void;
   // Flag for toggling visibility
   hide?: boolean;
   // Setter function for visibility
@@ -85,6 +83,10 @@ export interface CountryPickerDropDownProps extends Omit<InputProps, 'size'> {
   callback?: (option: string) => void;
   // Options array to populate the dropdown
   options?: Array<Country>;
+  // Name of the currently selected option, used to mark `aria-selected`
+  selectedOption?: string;
+  // Index of the keyboard-highlighted option (-1 for none)
+  highlightedIndex?: number;
   // Optional styles object specific to dropdown
   views?: CountryPickerStyles;
 }
@@ -94,6 +96,10 @@ export interface DropDownItemProps extends Omit<InputProps, 'size'> {
   callback?: (option: string) => void;
   // The option value for the dropdown item
   option?: string;
+  // Whether this option matches the current field value (`aria-selected`)
+  isSelected?: boolean;
+  // Whether this option currently holds the keyboard highlight
+  isHighlighted?: boolean;
   // Optional size of the dropdown item for visual styles
   size?: Size;
   // Optional styles object specific to dropdown item

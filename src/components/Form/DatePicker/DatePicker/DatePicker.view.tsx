@@ -11,7 +11,6 @@ const DatePickerContent = (props: any) => <Input type="date" {...props} />;
 
 const DatePickerView: React.FC<DatePickerViewProps> = ({
   id,
-  icon,
   name,
   label,
   date,
@@ -32,11 +31,19 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
   setIsHovered = () => {},
   onChange,
   onChangeText,
+  // Consumed by the state hook; kept out of the DOM spread so they cannot
+  // fight the controlled `value={date}` binding below.
+  value,
+  defaultValue,
   ...props
 }) => {
   const { themeMode } = useTheme();
+  const generatedId = React.useId();
+  const fieldId = id ?? generatedId;
   const isDark = themeMode === 'dark';
-  const showLabel = !!(isFocused && label);
+  // The label is part of the field's accessible name; it must not disappear
+  // whenever the field loses focus.
+  const showLabel = !!label;
 
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
@@ -98,7 +105,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
         <FieldWrapper>
           {showLabel && (
             <FieldLabel
-              htmlFor={id}
+              htmlFor={fieldId}
               color={'theme-primary'}
               error={error}
               views={views}
@@ -107,8 +114,18 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
             </FieldLabel>
           )}
           <DatePickerContent
-            id={id}
+            id={fieldId}
             name={name}
+            // Native date inputs have no implicit ARIA mapping (aria-query);
+            // textbox is how VoiceOver exposes them, and it keeps the control
+            // findable by role + accessible name. Consumers can still override
+            // via the `role` prop, which arrives through {...props} below.
+            role="textbox"
+            // The visible label only renders while focused; without this the
+            // input has no accessible name at rest.
+            aria-label={
+              !showLabel && typeof label === 'string' ? label : undefined
+            }
             onFocus={handleFocus}
             disabled={isDisabled}
             readOnly={isReadOnly}
@@ -116,6 +133,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
             {...props}
             {...(onChangeText && { onChangeText: handleDateChange })}
             onChange={handleDateChange}
+            value={date}
           />
         </FieldWrapper>
       </FieldContent>

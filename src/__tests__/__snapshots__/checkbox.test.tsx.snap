@@ -2,30 +2,44 @@
 
 exports[`Checkbox to match snapshot 1`] = `
 <div
-  className="wh-fit-content ht-fit-content wh-fit-content fse-20px fsee-normal fwt-400 tdn-none gp-8px dy-flex ht-fit-content fdn-column cr-blue cror-default oy-1 tn-all-0p2s-ease-in-out"
-  onClick={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
+  className="wh-fit-content ht-fit-content gp-8px dy-flex ht-fit-content fdn-column wh-fit-content cr-blue cror-default oy-1 tn-all-0p2s-ease-in-out"
   ref={[Function]}
 >
-  <div
-    className="gp-8px dy-flex fdn-column"
+  <label
+    className="wh-100 fse-20px fsee-normal fwt-400 tdn-none cror-inherit"
+    htmlFor="_r_0_"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     ref={[Function]}
   >
-     
     <div
       className="gp-12px ais-center dy-flex fdn-row"
       ref={[Function]}
     >
        
       <div
-        className="wh-28px ht-28px bcr-red bwh-2px bsee-solid bcrr-var--color-red-500 cr-inherit tn-all-0p2s-ease-in-out brs-6px ht-28px wh-28px bsw-rgb249-115-22-0px-4px-14px-0px dy-flex jct-center ais-center"
+        className="wh-28px ht-28px pn-relative bcr-red bwh-2px bsee-solid bcrr-var--color-red-500 cr-inherit tn-all-0p2s-ease-in-out brs-6px ht-28px wh-28px bsw-rgb249-115-22-0px-4px-14px-0px dy-flex jct-center ais-center"
         ref={[Function]}
-      />
+      >
+        <input
+          aria-describedby="_r_0_-error"
+          checked={false}
+          className="wh-100 ht-100 pn-absolute tp-0px lt-0px wh-100 ht-100 mn-0px oy-0 zix-1 cror-default"
+          disabled={false}
+          id="_r_0_"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          readOnly={true}
+          ref={[Function]}
+          type="checkbox"
+        />
+      </div>
     </div>
-  </div>
+  </label>
   <span
     className="mlt-0px mrt-0px fsee-normal tdn-none fse-10px mtp-4px mhl-0 cr-var--color-red-500 fwt-500 tn-all-0p2s-ease-in-out"
+    id="_r_0_-error"
     ref={[Function]}
     style={{}}
   />

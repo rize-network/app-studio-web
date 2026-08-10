@@ -6,6 +6,9 @@ export const generateThumbnail = (
   videoFile: File,
   setThumbnailUrl: (url: string) => void
 ) => {
+  // <video>/<canvas> thumbnailing is web-only; on native there is no
+  // `document` and callers simply get no thumbnail.
+  if (typeof document === 'undefined') return;
   const video = document.createElement('video');
   video.preload = 'metadata';
   video.onloadedmetadata = () => {

@@ -35,6 +35,17 @@ export interface TabsProps {
    */
   renderContent?: (activeTab: Tab) => React.ReactNode;
 
+  /**
+   * By default only the ACTIVE tab's content is mounted — inactive tabs do
+   * not exist in the DOM (their state resets on switch, and tests must
+   * activate a tab before asserting on its content). Set `keepMounted` to
+   * mount every tab's content up front and toggle visibility with
+   * `display: none`, preserving internal state across switches. Only applies
+   * to the data-driven `tabs` path; `renderContent` still receives the active
+   * tab only.
+   */
+  keepMounted?: boolean;
+
   /** Current value for controlled compound component pattern */
   value?: string | number;
   /**
@@ -70,6 +81,8 @@ export interface TabsViewProps {
   ) => React.ReactNode;
   /** Optional custom renderer for the content area. */
   renderContent?: (activeTab: Tab) => React.ReactNode;
+  /** Mount every tab's content and hide inactive ones with display:none. */
+  keepMounted?: boolean;
 }
 
 /**

@@ -21,8 +21,8 @@ const LabelView: React.FC<LabelProps> = ({
   weight = 'normal',
   size = 'sm',
   dropDown: _dropDown,
-  error: _error,
-  isDisabled: _isDisabled,
+  error,
+  isDisabled,
   helperText: _helperText,
   views: _views,
   htmlFor: _htmlFor,
@@ -42,6 +42,12 @@ const LabelView: React.FC<LabelProps> = ({
       fontStyle={isItalic ? 'italic' : 'normal'}
       fontWeight={Typography.fontWeights[weight]}
       textDecorationLine={textDecorationLine as any}
+      // Error wins over disabled, mirroring the web view (no cursor on RN).
+      {...(error
+        ? { color: 'color-red-500' }
+        : isDisabled
+        ? { color: 'color-gray-400' }
+        : {})}
       {...headingStyles}
       {...props}
     >

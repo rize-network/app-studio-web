@@ -247,11 +247,9 @@
           "borderRadius": 0,
           "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
-          "borderColor": "theme-primary",
           "letterSpacing": "0.08em",
           "textTransform": "uppercase",
-          "fontStyle": "italic",
-          "backgroundColor": null
+          "fontStyle": "italic"
         },
         "content": {
           "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",

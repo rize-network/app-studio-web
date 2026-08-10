@@ -56,6 +56,9 @@ interface EditableInputProps {
   mentionTrigger?: string;
   // Callback function triggered when a mention is selected, passing the chosen mention.
   onMentionSelect?: (mention: MentionData) => void;
+  // Optional key handler forwarded from the parent; runs before the internal
+  // mention/suggestion keyboard handling.
+  onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void;
   // Sets the maximum height for the editable input area, allowing it to grow up to this limit.
   maxHeight?: string;
   // Sets the minimum height for the editable input area.
@@ -114,6 +117,8 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       mentionTrigger = '@',
       // Optional callback executed when a mention is selected.
       onMentionSelect,
+      // Optional parent key handler, invoked before internal key handling.
+      onKeyDown,
       // The maximum height of the editable area; defaults to '200px'.
       maxHeight = '200px',
       // The minimum height of the editable area; defaults to '40px'.
@@ -404,6 +409,13 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
     );
     // Handles keyboard events within the content-editable div, enabling navigation (ArrowUp/Down) and selection (Tab/Enter/Escape) for both mention and suggestion dropdowns.
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+      // Give the parent's handler first look at the event; when it consumes
+      // the key (preventDefault) the internal dropdown navigation stays out
+      // of the way.
+      if (onKeyDown) {
+        onKeyDown(e);
+        if (e.defaultPrevented) return;
+      }
       if (showMentions && filteredMentions.length > 0) {
         if (e.key === 'ArrowDown') {
           e.preventDefault();

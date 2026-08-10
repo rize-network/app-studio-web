@@ -54,11 +54,14 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   variant = 'default',
   isHovered = false,
   isFocused = false,
-  isEditable = false,
+  // Editable by default; `isEditable={false}` renders the textarea read-only.
+  isEditable = true,
   isReadOnly = false,
   isDisabled = false,
   isAutoFocus = false,
-  isMultiline = false,
+  isRequired,
+  required,
+  labelProps,
   maxRows = 3,
   maxCols = 30,
   onBlur = () => {},
@@ -73,6 +76,8 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   views = { label: {}, helperText: {} },
   ...props
 }) => {
+  const generatedId = React.useId();
+  const fieldId = id ?? generatedId;
   const showLabel = !!label;
   const fieldSizeStyles = {
     xs: {
@@ -202,9 +207,10 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
         <FieldWrapper {...views?.warper}>
           {showLabel && (
             <FieldLabel
-              htmlFor={id}
+              htmlFor={fieldId}
               color={'theme-primary'}
               error={error}
+              {...labelProps}
               {...views?.label}
             >
               {label}
@@ -213,14 +219,17 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
           <Element
             ref={inputRef}
             as="textarea"
-            id={id}
+            id={fieldId}
             name={name}
             rows={maxRows}
             cols={maxCols}
             value={value}
-            readOnly={isReadOnly}
+            readOnly={isReadOnly || !isEditable}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
+            {...(isRequired ?? required
+              ? { required: true, 'aria-required': true }
+              : {})}
             placeholder={placeholder || hint}
             onBlur={handleBlur}
             onFocus={handleFocus}
@@ -228,7 +237,8 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             {...fieldStyles}
             {...props}
             style={{
-              resize: isDisabled || isReadOnly ? 'none' : 'vertical',
+              resize:
+                isDisabled || isReadOnly || !isEditable ? 'none' : 'vertical',
               ...fieldStyles.style,
               ...((props as any).style || {}),
             }}

@@ -10,6 +10,7 @@ import { Input } from 'app-studio';
 import { Label } from '../../../Form/Label/Label';
 import { View } from 'app-studio';
 import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
 import { SwitchViewProps } from './Switch.props';
 import {
   KnobSizes,
@@ -41,9 +42,13 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   setValue = () => {},
   setIsHovered = () => {},
   helperText,
+  description,
   views = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
+  const generatedId = React.useId();
+  const switchId = id ?? generatedId;
+  const [isFocused, setIsFocused] = React.useState(false);
   const checked = typeof isChecked === 'boolean' ? isChecked : value;
   const hasContent = Boolean(activeChild || inActiveChild);
   const sliderDimensions = hasContent
@@ -64,6 +69,17 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   };
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    let visible = true;
+    try {
+      visible = event.target.matches(':focus-visible');
+    } catch {
+      // engines without :focus-visible support: always show the ring
+    }
+    setIsFocused(visible);
+  };
+  const handleBlur = () => setIsFocused(false);
+  const descriptionId = `${switchId}-description`;
   /**
    * Styles for the switch component
    */
@@ -89,26 +105,15 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       ...views.label,
     },
   };
-  return (
+  // Rest props are routed to the input only: spreading them here as well
+  // landed consumer `aria-*`/`id` attributes on two elements at once.
+  const control = (
     <Label
-      htmlFor={id}
+      htmlFor={switchId}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       {...switchStyle.container}
-      {...props}
     >
-      <SwitchContent
-        id={id}
-        name={name}
-        opacity={0}
-        width={0}
-        height={0}
-        checked={checked}
-        onChange={handleToggle}
-        disabled={isDisabled}
-        readOnly={isReadOnly}
-        {...props}
-      />
       {/* Label on the left side */}
       {labelPosition === 'left' && label && (
         <Text
@@ -155,7 +160,39 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         {...SliderPadding[size]}
         {...sliderDimensions}
         {...views['slider']}
+        {...(isFocused
+          ? checked
+            ? ColorSchemes.states.focus.active
+            : ColorSchemes.states.focus.inactive
+          : {})}
       >
+        {/* Real control: a transparent input covering the whole track, so the
+            element found by role/name is the one that receives clicks */}
+        <SwitchContent
+          id={switchId}
+          name={name}
+          role="switch"
+          aria-checked={checked}
+          position="absolute"
+          top={0}
+          left={0}
+          width="100%"
+          height="100%"
+          margin={0}
+          opacity={0}
+          zIndex={2}
+          cursor={
+            isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer'
+          }
+          checked={checked}
+          onChange={handleToggle}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          disabled={isDisabled}
+          readOnly={isReadOnly}
+          aria-describedby={description ? descriptionId : undefined}
+          {...props}
+        />
         {/* Active content */}
         {activeChild && checked && (
           <View
@@ -230,6 +267,24 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         </Text>
       )}
     </Label>
+  );
+
+  if (!description) return control;
+
+  // The description sits outside the <label> so it describes the input via
+  // `aria-describedby` instead of polluting its accessible name.
+  return (
+    <Vertical gap={4} width="fit-content">
+      {control}
+      <Text
+        id={descriptionId}
+        color="color-gray-500"
+        fontSize="14px"
+        lineHeight="20px"
+      >
+        {description}
+      </Text>
+    </Vertical>
   );
 };
 export default SwitchView;

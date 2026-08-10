@@ -10,6 +10,7 @@
  */
 
 import { ViewProps } from 'app-studio';
+import { alphaColor } from '../../../utils/colors';
 import { Shape, Size, Variant } from './Button.type';
 
 /**
@@ -248,20 +249,20 @@ export const getButtonVariants = (
       transition: 'opacity 0.2s ease',
     },
     subtle: {
-      // Use app-studio alpha-token syntax: append `-{alpha}` (0–1000) to the
-      // color token, e.g. `color-green-900` → `color-green-900-300` for 30%.
-      // Background and border get translucent tints; text stays at full
-      // opacity so the label remains readable.
-      backgroundColor: `${effectiveBorder}-${reversed ? 200 : 100}`,
+      // Translucent tints via `alphaColor`: tokens get the app-studio
+      // `-{alpha}` suffix (0–1000), raw CSS colors (`#hex`, `rgb()`, keywords
+      // — e.g. a caller's `backgroundColor`) get an equivalent `color-mix()`.
+      // Text stays at full opacity so the label remains readable.
+      backgroundColor: alphaColor(effectiveBorder, reversed ? 200 : 100),
       color: effectiveBorder,
       borderWidth: 1,
       borderStyle: 'solid',
-      borderColor: `${effectiveBorder}-${reversed ? 400 : 250}`,
+      borderColor: alphaColor(effectiveBorder, reversed ? 400 : 250),
       _hover: {
-        backgroundColor: `${effectiveBorder}-${reversed ? 300 : 180}`,
+        backgroundColor: alphaColor(effectiveBorder, reversed ? 300 : 180),
       },
       _active: {
-        backgroundColor: `${effectiveBorder}-${reversed ? 380 : 240}`,
+        backgroundColor: alphaColor(effectiveBorder, reversed ? 380 : 240),
       },
       _focusVisible: { outline: 'none', boxShadow: focusRing },
       transition:

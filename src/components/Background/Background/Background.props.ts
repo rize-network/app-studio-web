@@ -31,8 +31,6 @@ export interface BackgroundProps extends ViewProps {
 export interface BackgroundLayoutProps extends BackgroundProps {
   // Overrides or specifies the shape for the background layout component.
   shape?: 'square' | 'rounded' | 'pill';
-  // Optional design system props forwarded by parent compositions.
-  designProps?: any;
   // Optional styling properties for specific sub-components within the background layout.
   views?: {
     // Optional styling properties for the main container of the layout.

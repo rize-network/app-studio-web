@@ -43,8 +43,25 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
   closeOnSelect,
   value,
   defaultValue,
+  onFocus,
+  onBlur,
   ...props
 }) => {
+  // The trigger is a plain RN View driven by onPress, which has no focus
+  // events, so the public onFocus/onBlur are proxied onto the popup
+  // lifecycle: opening the sheet reports focus, closing it reports blur.
+  // The effect covers every close path (toggle, backdrop, closeOnSelect).
+  const wasOpenRef = React.useRef(isOpen);
+  React.useEffect(() => {
+    if (wasOpenRef.current === isOpen) return;
+    wasOpenRef.current = isOpen;
+    if (isOpen) {
+      onFocus?.();
+    } else {
+      // `onBlur` receives the blur event on web; there is none here.
+      onBlur?.(undefined);
+    }
+  }, [isOpen, onFocus, onBlur]);
   const containerStyles = {
     ...DefaultColorInputStyles.container,
     ...views?.container,

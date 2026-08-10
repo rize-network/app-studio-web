@@ -1,4 +1,3 @@
-import React from 'react';
 import { Elevation } from '../../../../utils/elevation';
 import { Shadow, ViewProps } from 'app-studio';
 
@@ -9,10 +8,6 @@ import { DatePickerStyles, Shape, Size, Variant } from './DatePicker.type';
 export interface DatePickerProps
   extends Omit<ViewProps, 'size' | 'shadow' | 'onChange'> {
   id?: string;
-  /**
-   * Custom icon to display when the DatePicker is checked.
-   */
-  icon?: React.ReactNode;
   /**
    * Indicates whether the DatePicker has an error.
    */

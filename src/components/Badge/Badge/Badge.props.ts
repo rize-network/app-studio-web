@@ -15,9 +15,13 @@ export interface BadgeProps extends Omit<ViewProps, 'content' | 'position'> {
   shape?: Shape;
   views?: BadgeStyles;
   /**
-   * Auto-derive a foreground color from the badge's background color
-   * (used by examples that loop over theme tokens for the `content` prop).
+   * When the badge's `content` is a color token (`theme-*` / `color-*`),
+   * auto-derive the badge colors from it: the token becomes the background
+   * and the label switches to white (used by examples that loop over theme
+   * tokens for the `content` prop).
    */
   isAuto?: boolean;
+  // Per-instance design-system config override; consumed by
+  // `useMergedDesignSystemComponentProps('badge', …)` before rendering.
   config?: Record<string, unknown>;
 }

@@ -32,8 +32,6 @@ export interface SwitchProps
   label?: React.ReactNode;
   // Optional secondary text rendered below the label to describe the switch.
   description?: React.ReactNode;
-  // Optional variant override forwarded by callers/examples.
-  variant?: string;
 }
 // Extends SwitchProps to include properties specific to the switch's view, like hover state.
 export interface SwitchViewProps extends SwitchProps {

@@ -37,20 +37,27 @@ export interface DesignSystemMetadata {
 
 /**
  * The eleven semantic theme slots. A single config serves **both** light and
- * dark mode — the dark theme is derived automatically. The *form* of each value
- * decides whether the slot flips or stays when the theme mode switches:
+ * dark mode — the dark theme is derived automatically by app-studio's
+ * ThemeProvider. The *form* of each value decides how the slot behaves when
+ * the theme mode switches:
  *
- * - A **raw hex** (`"#2563eb"`) is emitted as `--theme-<slot>: #2563eb` and
- *   **stays constant** across modes. Use it for brand identity — the colours
- *   you want to look the same in light and dark.
  * - A **`color-*` token** (`"color-black"`) is emitted as
  *   `--theme-<slot>: var(--color-black)` and **flips automatically**:
  *   `color-black` → black in light / white in dark, `color-white` → black in
  *   dark, and the `color-gray-*` ramp inverts. Use it for structural neutrals.
+ * - A **parseable literal** (`"#2563eb"`, `rgb(...)`) is **snapped to the
+ *   nearest palette token** (`normalizeThemeColors` in app-studio), so it
+ *   also adapts to dark mode — brand hexes get the dark-mode variant of the
+ *   closest palette shade rather than staying frozen.
+ * - An **unparseable literal** (a CSS named colour, a gradient) stays
+ *   constant across modes. For the neutral slots (canvas, surface, text,
+ *   muted, border) app-studio warns about this in development, because a
+ *   frozen neutral reads as a dark-mode regression.
  *
- * Rule of thumb: **stay → hex (primary, accents); adapt → `color-*` token
- * (canvas, text, surface, muted, border).** See `docs/design-system/theming.md`
- * §2.1 for the full mapping.
+ * Rule of thumb: **use `color-*` tokens for the structural neutrals (canvas,
+ * text, surface, muted, border) and hex for brand accents (primary,
+ * secondary, states) — knowing the hex will be palette-snapped so it stays
+ * legible in dark mode.** See `docs/design-system/theming.md` §2.1.
  */
 export interface DesignSystemTheme {
   /** Brand primary (CTAs, links, focus). Constant → use a **hex**. */
@@ -101,6 +108,15 @@ export interface DesignSystemTokens {
 }
 
 export interface DesignSystemComponentConfig extends Record<string, any> {
+  /**
+   * Per-slot style defaults applied ABOVE the component's variant styles.
+   * Contract: shape + typography only (radius, font, letterSpacing, casing…).
+   * Never put colors here for variant-driven components (Button): a
+   * `views.container.backgroundColor` flattens ghost/outline/subtle into
+   * solid blocks. Colors go through the top-level `color`/`textColor` keys,
+   * or `config.variants.<variant>` for per-variant overrides (merged UNDER
+   * each variant's own styles).
+   */
   views?: Record<string, DesignSystemViewProps>;
   config?: Record<string, any>;
 }

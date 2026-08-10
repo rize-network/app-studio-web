@@ -229,11 +229,9 @@
           "borderRadius": 9999,
           "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",
           "fontWeight": 700,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.01em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",

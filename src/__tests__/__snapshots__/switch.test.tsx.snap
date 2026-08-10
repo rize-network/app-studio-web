@@ -3,24 +3,30 @@
 exports[`Switch to match snapshot 1`] = `
 <label
   className="wh-fit-content ht-fit-content wh-fit-content fse-sm fsee-normal fwt-400 tdn-none gp-12px dy-flex ht-fit-content ais-center cror-default oy-1 tn-all-0p2s-ease-in-out"
+  htmlFor="_r_0_"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
   ref={[Function]}
 >
-  <input
-    checked={false}
-    className="wh-0px ht-0px oy-0 wh-0px ht-0px"
-    disabled={false}
-    name="name"
-    onChange={[Function]}
-    readOnly={true}
-    ref={[Function]}
-    type="checkbox"
-  />
   <div
     className="plt-5px prt-5px ptp-5px pbm-5px dy-flex ais-center jct-center pn-relative mbm-4px brs-9999px bcr-red oy-1 cror-pointer tn-all-0p2s-ease-in-out bsw-rgb249-115-22-0px-4px-14px-0px pvl-5 phl-5 ht-36px wh-72px"
     ref={[Function]}
   >
+    <input
+      aria-checked={false}
+      checked={false}
+      className="wh-100 ht-100 pn-absolute tp-0px lt-0px wh-100 ht-100 mn-0px oy-0 zix-2 cror-default"
+      disabled={false}
+      id="_r_0_"
+      name="name"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      readOnly={true}
+      ref={[Function]}
+      role="switch"
+      type="checkbox"
+    />
     <div
       className="wh-26px ht-26px pn-absolute tp-50 lt-5px brs-50 bcr-blue bsw-0-1px-3px-rgba15-23-42-0p18 tm-translateY-50-scale1 tn-all-0p2s-ease-in-out zix-1 ht-26px wh-26px"
       ref={[Function]}

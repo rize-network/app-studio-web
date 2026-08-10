@@ -10,8 +10,6 @@ export interface DropZoneProps extends UseUploadProps {
   text?: string;
   // Defines styling and layout properties for the text displayed within the `DropZone`.
   textProps?: TextProps;
-  // Allows passing a CSS class name to style the `DropZone` component.
-  className?: string;
   // Indicates whether the `DropZone` component is in a disabled state, preventing user interaction.
   disabled?: boolean;
   // Defines properties for any image displayed within the `DropZone`, such as a preview image.

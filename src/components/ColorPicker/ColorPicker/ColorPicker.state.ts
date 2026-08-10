@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ColorPickerProps } from './ColorPicker.props';
+import { formatColor } from '../../Form/ColorInput/ColorInput/colorFormat';
 // This custom React hook encapsulates all state management and logic for the ColorPicker component, handling its open/close state, selected color, recent colors, and various user interactions.
 export const useColorPickerState = (props: ColorPickerProps) => {
   const {
@@ -13,6 +14,7 @@ export const useColorPickerState = (props: ColorPickerProps) => {
     closeOnSelect = true,
     maxRecentColors = 8,
     showRecentColors = true,
+    colorFormat,
   } = props;
   const [isOpen, setIsOpen] = useState(controlledIsOpen ?? false);
   const [selectedColor, setSelectedColor] = useState(value ?? defaultValue);
@@ -93,14 +95,24 @@ export const useColorPickerState = (props: ColorPickerProps) => {
     (color: string) => {
       setSelectedColor(color);
       addToRecentColors(color);
-      onChange?.(color);
-      onChangeComplete?.(color);
+      // `colorFormat` controls the representation handed to consumers; the
+      // internal state keeps the raw picked value.
+      const reported = formatColor(color, colorFormat);
+      onChange?.(reported);
+      onChangeComplete?.(reported);
       if (closeOnSelect) {
         setIsOpen(false);
         onClose?.();
       }
     },
-    [onChange, onChangeComplete, closeOnSelect, onClose, addToRecentColors]
+    [
+      onChange,
+      onChangeComplete,
+      closeOnSelect,
+      onClose,
+      addToRecentColors,
+      colorFormat,
+    ]
   );
   const handleCustomColorChange = useCallback((color: string) => {
     setCustomColor(color);

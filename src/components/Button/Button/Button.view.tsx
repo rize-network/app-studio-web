@@ -9,6 +9,7 @@ import { Element, Horizontal, Vertical, View } from 'app-studio';
 import { Link } from '../../Link/Link';
 import { Loader } from '../../Loader/Loader';
 import { ButtonProps } from './Button.props';
+import { LoaderProps } from '../../Loader/Loader/Loader.props';
 import {
   ButtonSizes,
   ButtonShapes,
@@ -24,23 +25,29 @@ import { Variant } from './Button.type';
 const ButtonContent: React.FC<{
   children: React.ReactNode;
   icon?: React.ReactNode;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
   isLoading?: boolean;
   iconPosition?: string;
   loaderPosition?: string;
   size?: string;
   resolvedTextColor: string;
   isIconRounded?: boolean;
+  loaderProps?: LoaderProps;
   views?: any;
 }> = React.memo(
   ({
     children,
     icon,
+    leftIcon,
+    rightIcon,
     isLoading,
     iconPosition = 'left',
     loaderPosition = 'left',
     size = 'md',
     resolvedTextColor,
     isIconRounded,
+    loaderProps,
     views,
   }) => {
     const Wrapper = ['left', 'right'].includes(iconPosition)
@@ -65,8 +72,15 @@ const ButtonContent: React.FC<{
           <Loader
             size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
             color={resolvedTextColor}
+            {...loaderProps}
             {...views?.loader}
           />
+        )}
+
+        {leftIcon && (
+          <View color={resolvedTextColor} {...views?.icon}>
+            {leftIcon}
+          </View>
         )}
 
         {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
@@ -83,10 +97,17 @@ const ButtonContent: React.FC<{
           </View>
         )}
 
+        {rightIcon && (
+          <View color={resolvedTextColor} {...views?.icon}>
+            {rightIcon}
+          </View>
+        )}
+
         {isLoading && loaderPosition === 'right' && (
           <Loader
             size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
             color={resolvedTextColor}
+            {...loaderProps}
             {...views?.loader}
           />
         )}
@@ -572,9 +593,14 @@ const ButtonView = React.memo(
         isDisabled,
         isLoading,
         isIconRounded,
+        isIcon,
         isHovered,
         /* content */
         icon,
+        leftIcon,
+        rightIcon,
+        startIcon,
+        endIcon,
         children,
         /* nav */
         to,
@@ -652,12 +678,18 @@ const ButtonView = React.memo(
       const content = (
         <ButtonContent
           icon={icon}
+          // `startIcon` / `endIcon` are compatibility aliases for
+          // `leftIcon` / `rightIcon`; the left/right spelling wins when both
+          // are provided.
+          leftIcon={leftIcon ?? startIcon}
+          rightIcon={rightIcon ?? endIcon}
           isLoading={isLoading}
           iconPosition={iconPosition}
           loaderPosition={loaderPosition}
           size={size}
           resolvedTextColor={finalContentColor}
           isIconRounded={isIconRounded}
+          loaderProps={loaderProps}
           views={views}
         >
           {children}
@@ -666,7 +698,9 @@ const ButtonView = React.memo(
 
       // Standard variants (filled, outline, ghost, link)
       const sizeStyles = ButtonSizes[size];
-      const iconPad = isIconRounded ? IconSizes[size] : {};
+      // `isIcon` marks an icon-only button: reuse the square icon padding
+      // scale (the same slot `isIconRounded` uses) so the button stays compact.
+      const iconPad = isIconRounded || isIcon ? IconSizes[size] : {};
 
       return (
         <StandardButton
@@ -694,6 +728,7 @@ const ButtonView = React.memo(
           animatedStrokeAccentColor={animatedStrokeAccentColor}
           animatedStrokeTextColor={animatedStrokeTextColor}
           containerRef={ref}
+          {...(ariaLabel !== undefined ? { 'aria-label': ariaLabel } : {})}
           {...props}
         />
       );

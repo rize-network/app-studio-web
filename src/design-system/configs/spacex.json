@@ -114,6 +114,14 @@
   },
   "components": {
     "button": {
+        "config": {
+          "variants": {
+            "ghost": {
+              "backgroundColor": "color-gray-50",
+              "borderColor": "color-gray-200"
+            }
+          }
+        },
       "variant": "ghost",
       "size": "md",
       "shape": "square",
@@ -124,8 +132,6 @@
           "borderRadius": 0,
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
           "fontWeight": 800,
-          "borderColor": "color-gray-200",
-          "backgroundColor": "color-gray-50",
           "letterSpacing": "0.08em",
           "textTransform": "uppercase",
           "fontStyle": "normal"

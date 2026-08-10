@@ -208,10 +208,20 @@ export const useChatInputState = (props: UseChatInputStateProps) => {
       const nextFile = uploadQueue[0];
       currentUploadRef.current = nextFile;
       setUploadProgress(0);
+      onUploadProgress?.(0);
 
       // Execute user-provided upload function
       try {
         onFileUpload(nextFile);
+        // The upload function was handed the file without throwing — report
+        // completion for this file and advance the queue so the next file can
+        // be processed.
+        setUploadQueue((prev) => prev.slice(1));
+        setIsProcessingQueue(false);
+        currentUploadRef.current = null;
+        setUploadProgress(100);
+        onUploadProgress?.(100);
+        onUploadSuccess?.({ file: nextFile });
       } catch (err) {
         // Handle synchronous errors
         setUploadQueue((prev) => prev.slice(1));
@@ -232,6 +242,8 @@ export const useChatInputState = (props: UseChatInputStateProps) => {
     onFileUpload,
     isUploading,
     onUploadError,
+    onUploadProgress,
+    onUploadSuccess,
   ]);
 
   // Effect: process whenever queue changes

@@ -5,8 +5,12 @@ export const useSelectorState = ({
   placeholder,
   isMulti,
   options,
-  id = `selector-${Math.random().toString(36).substr(2, 9)}`,
+  id: idProp,
 }: SelectorProps) => {
+  // `useId` is stable across renders where `Math.random` was not; the
+  // delimiter characters are stripped so derived ids stay selector-safe.
+  const reactId = React.useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const id = idProp ?? `selector-${reactId}`;
   const defaultValue = placeholder
     ? isMulti
       ? []
@@ -19,7 +23,6 @@ export const useSelectorState = ({
   const [isHovered, setIsHovered] = React.useState(false);
   const [isFocused, setIsFocused] = React.useState(false);
   const [value, setValue] = React.useState<string | string[]>(defaultValue);
-  const [highlightedIndex, setHighlightedIndex] = React.useState<number>(0);
   const [hide, setHide] = React.useState(true);
   return {
     id,
@@ -31,8 +34,6 @@ export const useSelectorState = ({
     setIsHovered,
     isFocused,
     setIsFocused,
-    highlightedIndex,
-    setHighlightedIndex,
   };
 };
 export const useItemState = () => {

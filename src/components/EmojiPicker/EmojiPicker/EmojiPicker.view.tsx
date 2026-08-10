@@ -109,7 +109,7 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
     return true;
   });
   return (
-    <View {...containerStyles} {...props}>
+    <View id={id} {...containerStyles} {...props}>
       {label && (
         <Text
           fontSize={size === 'xs' ? '12px' : size === 'sm' ? '14px' : '16px'}

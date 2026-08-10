@@ -17,6 +17,8 @@ export interface CardProps extends ViewProps {
   isFullWidth?: boolean;
   // Optional styling overrides for different parts of the card component.
   views?: CardStyles;
+  // Per-instance design-system config override; consumed by
+  // `useMergedDesignSystemComponentProps('card', …)` before rendering.
   config?: any;
 }
 export interface CardHeaderProps extends ViewProps {

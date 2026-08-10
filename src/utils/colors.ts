@@ -1,5 +1,44 @@
 export type ColorPalette = Record<string, Record<number, string>>;
 
+const COLOR_TOKEN_RE = /^(color|theme|light|dark)-/;
+
+/** True for app-studio color tokens (`color-*`, `theme-*`, `light-*`, `dark-*`). */
+export const isColorToken = (value: string): boolean =>
+  COLOR_TOKEN_RE.test(value);
+
+/**
+ * Reduce a token that already carries an alpha suffix
+ * (`color-<name>-<shade>-<alpha>`, `theme-<key>-<alpha>`; alpha 0–1000) to its
+ * base token. Appending a second alpha (`color-gray-900-50` →
+ * `color-gray-900-50-100`) resolves against a CSS variable that doesn't exist
+ * and silently drops the color.
+ */
+export const stripAlphaSuffix = (value: string): string => {
+  const parts = value.split('-');
+  const alpha = parseInt(parts[parts.length - 1], 10);
+  const minParts = value.startsWith('theme-') ? 3 : 4;
+  if (
+    parts.length >= minParts &&
+    !isNaN(alpha) &&
+    alpha >= 0 &&
+    alpha <= 1000
+  ) {
+    return parts.slice(0, -1).join('-');
+  }
+  return value;
+};
+
+/**
+ * Apply an app-studio alpha (0–1000) to any color value. Tokens get the
+ * `-<alpha>` suffix (after stripping an existing one); raw CSS colors
+ * (`#hex`, `rgb()`, keywords) get an equivalent `color-mix()` so callers can
+ * pass either form — appending `-100` to `#22c55e` produced garbage before.
+ */
+export const alphaColor = (value: string, alpha: number): string =>
+  isColorToken(value)
+    ? `${stripAlphaSuffix(value)}-${alpha}`
+    : `color-mix(in srgb, ${value} ${Math.round(alpha / 10)}%, transparent)`;
+
 export type ColorSingleton = Record<
   string,
   | {

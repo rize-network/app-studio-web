@@ -65,12 +65,8 @@ export interface SelectorBoxProps {
   options: Option[];
   // The currently selected value(s) of the selector.
   value?: string | Array<string>;
-  // Specifies if the selector box is disabled.
-  isDisabled?: boolean;
   // Placeholder text shown when no option is selected.
   placeholder?: string;
-  // Function to remove a selected option (for multi-select).
-  removeOption?: (value: string) => void;
   // Custom styles to apply to different parts of the selector box.
   views?: SelectorStyles;
   // Defines the size of the selector box.
@@ -79,14 +75,10 @@ export interface SelectorBoxProps {
 export interface MultiSelectorProps extends Omit<InputProps, 'size'> {
   // The currently selected option in a multi-select context.
   option: string;
-  // Function to remove a specific option from multi-selection.
-  removeOption: (value: string) => void;
   // Defines the size of the multi-selector item.
   size?: Size;
 }
 export interface ItemProps extends Omit<InputProps, 'size' | 'style'> {
-  // Callback function to be executed when an item is interacted with.
-  callback?: (option: string) => void;
   // The specific option data for the item.
   option: Option;
   // Defines the size of the item.
@@ -104,10 +96,6 @@ export interface HiddenSelectorProps
   value: string | Array<string>;
   // Determines if multiple options can be selected, affecting how value is handled.
   isMulti?: boolean;
-  // Specifies if the hidden selector is read-only.
-  isReadOnly?: boolean;
-  // Specifies if the hidden selector is disabled.
-  isDisabled?: boolean;
   // Callback function triggered when the selected value changes.
   onChange?(value: string | string[]): void;
   // Array of available options, relevant for internal value handling.
@@ -116,8 +104,6 @@ export interface HiddenSelectorProps
 export interface DropDownProps extends Omit<InputProps, 'size'> {
   // Defines the size of the dropdown.
   size?: Size;
-  // Callback function to be executed when an option in the dropdown is selected.
-  callback?: (option: string) => void;
   // Array of options to display in the dropdown.
   options: Option[];
   // Custom styles to apply to different parts of the dropdown.

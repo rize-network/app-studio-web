@@ -31,8 +31,6 @@ export interface ModalProps
   id?: string;
   // Optional title rendered by modal registries / dynamic-modal renderers.
   title?: string;
-  // Optional render function used by dynamic-modal renderers to produce the modal body.
-  render?: (ctx: any) => React.ReactNode;
 }
 // Describes the structure of the Modal component, including its sub-components.
 export interface ModalType extends React.FunctionComponent<ModalProps> {
@@ -83,8 +81,9 @@ export interface HeaderProps extends Omit<ViewProps, 'size'> {
   children?: React.ReactNode;
   // Sets the position of the close button within the header.
   buttonPosition?: CloseButtonPosition;
-  // Optional size override for the close button.
-  buttonSize?: any;
+  // Size of the close button icon; alias of `iconSize` (wins when both are
+  // provided).
+  buttonSize?: Size;
   // Optional variant override forwarded by callers (tests/examples).
   variant?: string;
   // Callback function triggered when the header's close button is activated.
@@ -123,8 +122,6 @@ export interface ContainerProps
   blur?: number;
   // Optional variant override forwarded by callers (tests/examples).
   variant?: string;
-  // Optional close-button size override forwarded by callers.
-  buttonSize?: any;
   // Optional close-button color override forwarded by callers.
   buttonColor?: any;
   // Optional close-button position override forwarded by callers.
@@ -143,8 +140,6 @@ export interface BodyProps extends ViewProps {
   };
   // Optional close-button color override forwarded by callers (tests/examples).
   buttonColor?: any;
-  // Optional close-button size override forwarded by callers.
-  buttonSize?: any;
   // Optional variant override forwarded by callers.
   variant?: string;
 }

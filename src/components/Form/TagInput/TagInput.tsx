@@ -6,6 +6,9 @@ import TagInputView from './TagInput/TagInput.view';
 const TagInputComponent: React.FC<TagInputProps> = (props: TagInputProps) => {
   const tagInputState = useTagInputState(props);
   const { tags: _, ...restProps } = props;
-  return <TagInputView {...tagInputState} {...restProps} />;
+  // `setTags` is internal state-hook machinery: it is deliberately not part of
+  // `TagInputViewProps`, so keep it off the view (and therefore off the DOM).
+  const { setTags: _setTags, ...viewState } = tagInputState;
+  return <TagInputView {...viewState} {...restProps} />;
 };
 export const TagInput = TagInputComponent;

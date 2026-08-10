@@ -147,6 +147,7 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
     children,
     buttonColor = 'theme-primary',
     iconSize = 'md',
+    buttonSize,
     buttonPosition = 'right',
     views,
     onClose: onCloseProp,
@@ -156,7 +157,7 @@ export const ModalHeader: React.FC<HeaderProps> = React.memo(
     const buttonIcon = (
       <View onClick={() => onClose()}>
         <CloseIcon
-          widthHeight={HeaderIconSizes[iconSize]}
+          widthHeight={HeaderIconSizes[buttonSize ?? iconSize]}
           color={buttonColor}
         />
       </View>

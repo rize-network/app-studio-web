@@ -295,7 +295,11 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
  * Renders the dropdown list of options for the select component
  */
 const DropDown: React.FC<
-  DropDownProps & { selectedValue?: string | string[] }
+  DropDownProps & {
+    selectedValue?: string | string[];
+    listboxId?: string;
+    getOptionId?: (index: number) => string;
+  }
 > = ({
   size,
   views = {},
@@ -304,6 +308,8 @@ const DropDown: React.FC<
   highlightedIndex,
   setHighlightedIndex = () => {},
   selectedValue,
+  listboxId,
+  getOptionId,
 }) => {
   const handleCallback = (option: string) => callback(option);
 
@@ -319,6 +325,7 @@ const DropDown: React.FC<
     <Element
       as="ul"
       role="listbox"
+      id={listboxId}
       display="flex"
       flexDirection="column"
       margin={0}
@@ -332,6 +339,7 @@ const DropDown: React.FC<
         options.map((option, index) => (
           <Item
             key={option.value}
+            id={getOptionId ? getOptionId(index) : undefined}
             size={size}
             style={views['text']}
             option={option}
@@ -377,17 +385,28 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
         {option}
       </Text>
 
-      <CloseIcon
-        role="close-button"
-        color="color-gray-500"
-        widthHeight={IconSizes[size]}
+      {/* A real button: `close-button` is not an ARIA role, so the remover was
+          invisible to assistive tech and unreachable by keyboard. */}
+      <Element
+        as="button"
+        type="button"
+        aria-label={`Remove ${option}`}
         onClick={handleClick}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        padding={0}
+        border="none"
+        backgroundColor="transparent"
+        color="color-gray-500"
         cursor="pointer"
         transition="all 0.2s ease-in-out"
         _hover={{
           color: 'color-gray-700',
         }}
-      />
+      >
+        <CloseIcon color="inherit" widthHeight={IconSizes[size]} />
+      </Element>
     </Horizontal>
   );
 };
@@ -405,6 +424,8 @@ const SelectView: React.FC<SelectViewProps> = ({
   isHovered = false,
   isDisabled = false,
   isReadOnly = false,
+  isRequired = false,
+  isAutoFocus = false,
   options = [],
   shadow = {},
   size = 'md',
@@ -431,6 +452,19 @@ const SelectView: React.FC<SelectViewProps> = ({
   'aria-label': ariaLabel,
   ...props
 }) => {
+  const generatedId = React.useId();
+  // One id per element: the focusable combobox keeps the public `id`; the
+  // aria-hidden native <select>, the label, the listbox and its options get
+  // derived ids — the combobox and the native <select> used to share the same
+  // `id`, which is invalid HTML and made `htmlFor` ambiguous. The `useId`
+  // fallback is stripped of its delimiters because the id is used in `#id`
+  // selector lookups below.
+  const selectId = id ?? `select-${generatedId.replace(/[^a-zA-Z0-9_-]/g, '')}`;
+  const nativeSelectId = `${selectId}-native`;
+  const labelId = `${selectId}-label`;
+  const listboxId = `${selectId}-listbox`;
+  const getOptionId = (index: number) => `${selectId}-option-${index}`;
+
   const {
     ref: triggerRef,
     relation,
@@ -480,12 +514,21 @@ const SelectView: React.FC<SelectViewProps> = ({
       document.removeEventListener('closeAllSelects', handleCloseAll);
   }, [setHide]);
 
+  // Mount-only autofocus, mirroring the native `autofocus` attribute: the
+  // focusable element is the combobox trigger, not the aria-hidden <select>.
+  React.useEffect(() => {
+    if (isAutoFocus && !isDisabled && !isReadOnly) {
+      triggerRef.current?.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Add a global click handler to close the dropdown when clicking outside
   React.useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       // Only close if clicking outside of this specific select component
-      if (!target.closest(`#${id}`) && !hide) {
+      if (!target.closest(`#${selectId}`) && !hide) {
         setHide(true);
       }
     };
@@ -494,7 +537,7 @@ const SelectView: React.FC<SelectViewProps> = ({
     return () => {
       document.removeEventListener('click', handleGlobalClick);
     };
-  }, [id, hide, setHide]);
+  }, [selectId, hide, setHide]);
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -555,7 +598,7 @@ const SelectView: React.FC<SelectViewProps> = ({
       position="relative"
       width="100%"
       display="inline-block"
-      id={id}
+      id={selectId}
       // `SelectBox` is not an ARIA role, so the trigger was exposed as a plain
       // container: not focusable, not announced, and operable only by mouse.
       // The native `<select>` behind it is `aria-hidden` and `tabIndex={-1}`, so
@@ -563,20 +606,33 @@ const SelectView: React.FC<SelectViewProps> = ({
       role="combobox"
       aria-haspopup="listbox"
       aria-expanded={!hide}
-      aria-label={ariaLabel ?? (typeof label === 'string' ? label : undefined)}
+      // The visible label names the combobox via `aria-labelledby`; an explicit
+      // `aria-label` prop wins when the caller provides one.
+      aria-labelledby={!ariaLabel && showLabel ? labelId : undefined}
+      aria-label={ariaLabel}
+      aria-controls={listboxId}
+      aria-activedescendant={
+        !hide && options.length > 0
+          ? getOptionId(highlightedIndex ?? 0)
+          : undefined
+      }
       aria-disabled={isDisabled || undefined}
+      aria-required={isRequired || undefined}
       tabIndex={isDisabled || isReadOnly ? -1 : 0}
       helperText={helperText}
       error={error}
       views={layoutViews}
       onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
         if (isDisabled || isReadOnly) return;
+        // Keys pressed on descendants (the chip-remove buttons) must keep
+        // their native activation instead of being hijacked by the trigger.
+        if (e.target !== e.currentTarget) return;
 
-        // Enter, Space and Down open the list; Escape closes it. The same keys a
+        // Closed: Enter, Space and Down open the list — the same keys a
         // native select answers to, so nobody has to learn this one separately.
-        if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
-          e.preventDefault();
-          if (hide) {
+        if (hide) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+            e.preventDefault();
             document.dispatchEvent(new Event('closeAllSelects'));
             setHide(false);
             setIsFocused(true);
@@ -584,7 +640,19 @@ const SelectView: React.FC<SelectViewProps> = ({
           return;
         }
 
-        if (e.key === 'Escape' && !hide) {
+        // Open: arrows move the highlight, Enter commits it, Escape closes.
+        const currentIndex = highlightedIndex ?? 0;
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setHighlightedIndex?.(Math.min(currentIndex + 1, options.length - 1));
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setHighlightedIndex?.(Math.max(currentIndex - 1, 0));
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          const option = options[currentIndex];
+          if (option) handleCallback(option.value);
+        } else if (e.key === 'Escape') {
           e.preventDefault();
           setHide(true);
         }
@@ -623,7 +691,8 @@ const SelectView: React.FC<SelectViewProps> = ({
         <FieldWrapper>
           {showLabel && (
             <FieldLabel
-              htmlFor={id}
+              id={labelId}
+              htmlFor={nativeSelectId}
               color={'theme-primary'}
               error={error}
               {...views?.label}
@@ -632,7 +701,7 @@ const SelectView: React.FC<SelectViewProps> = ({
             </FieldLabel>
           )}
           <HiddenSelect
-            id={id}
+            id={nativeSelectId}
             name={name}
             options={options}
             onChange={onChange}
@@ -640,6 +709,10 @@ const SelectView: React.FC<SelectViewProps> = ({
             isDisabled={isDisabled}
             isReadOnly={isReadOnly}
             isMulti={isMulti}
+            // Real form semantics live on the native element: `required`
+            // makes submission enforcement work even though the visible
+            // combobox is a div.
+            required={isRequired || undefined}
             onFocus={handleFocus}
             {...props}
           />
@@ -688,6 +761,8 @@ const SelectView: React.FC<SelectViewProps> = ({
                 highlightedIndex={highlightedIndex}
                 setHighlightedIndex={setHighlightedIndex}
                 selectedValue={value}
+                listboxId={listboxId}
+                getOptionId={getOptionId}
               />
             </Element>
           </Portal>

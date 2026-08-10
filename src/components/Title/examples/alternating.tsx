@@ -3,7 +3,12 @@ import { Vertical, Text } from 'app-studio';
 import { Title } from '../Title';
 
 /**
- * Examples of Title with alternating highlight text
+ * Examples of Title with alternating highlight text.
+ *
+ * Contract: `children` is the COMPLETE sentence and must contain
+ * `highlightText` verbatim — rotation works by replacing that word inside the
+ * sentence (here "changing" in "Our changing solution…"). If the word is
+ * absent from `children`, Title warns in dev and rotation is disabled.
  */
 export const AlternatingTitle = () => {
   return (

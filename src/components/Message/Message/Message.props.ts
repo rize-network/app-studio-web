@@ -6,7 +6,6 @@ import {
 } from './Message.type';
 
 export interface MessageLayoutProps {
-  icons?: { [x: string]: string };
   container?: any;
   theme?: ThemesType;
   position?: Position;

@@ -63,7 +63,7 @@ export const useTooltipState = ({
   }, []);
   useEffect(() => {
     // Hermes/Expo defines a partial `document` without `addEventListener`.
-    if (typeof document?.addEventListener !== 'function') return;
+    if (typeof document === 'undefined') return;
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isOpen) {
         setIsOpen(false);

@@ -260,6 +260,14 @@ const ButtonView: React.FC<ButtonProps> = ({ children, isDisabled, ...props }) =
 
 ## Styling Conventions
 
+### Typography Scales
+
+Three scales ship with the library — the control scale (`FontSizes`,
+10–20px, for dense UI), the heading scale (`HeadingSizes`, `h6`–`h1`), and
+the display scale (`TitleSizes`, hero surfaces only). See
+[typography.md](./typography.md) for which one to reach for; do not use
+`Title` inside application chrome.
+
 ### App-Studio Layout Components
 
 Use the layout components from `app-studio` for consistent layout:
@@ -386,6 +394,26 @@ Card.Content = CardContent;
 Card.Footer = CardFooter;
 ```
 
+### Interactive Controls
+
+The real form control must be the element the user sees and clicks — never a
+decorative `<div>` layered over a hidden input.
+
+- Never collapse the native input to `width: 0; height: 0`. An element with no
+  box receives no clicks: assistive technology, keyboard users, and automated
+  drivers all find the control by role/name, then fail to interact with it.
+- If the control's look is drawn by styled elements (track, knob, swatch…),
+  render the native input as a transparent overlay covering the visible
+  control: `position: absolute`, full width/height of the visual, `opacity: 0`.
+  Click, tap, focus and `getByRole(...)` then all land on the same element.
+- Give the input the semantics of the widget it represents (`role="switch"`
+  and `aria-checked` for a toggle) and always associate the visible label
+  (`htmlFor`/`id`, or wrap the input in the `<label>`).
+- Controls must accept a controlled `value`/`isChecked` prop; a component that
+  can only display its internal state is decoration, not a control.
+
+`Switch` and `Select` follow this contract; use them as references.
+
 ## Documentation Conventions
 
 ### JSDoc Comments
@@ -506,6 +534,22 @@ describe('Button', () => {
   });
 });
 ```
+
+### Styling Props Compile to Atomic Classes — Never Assert on `style`
+
+`app-studio` compiles styling props into atomic class names, not inline
+styles: `<Text fontSize={13}>` renders as `class="fse-13px"` with an empty
+`style` attribute. Practical consequences for tests:
+
+- Reading `element.style.*` (or `toHaveStyle` on a styling prop) on an App
+  Studio component silently misses — the value lives in a generated
+  stylesheet, keyed by class.
+- Assert behavior and semantics instead: roles, accessible names, attributes,
+  and user interactions.
+- When a visual fact must be checked and behavior can't capture it, assert on
+  the presence (or absence) of the atomic class token, e.g.
+  `expect(input.className).not.toMatch(/wh-0px/)` — and treat this as a last
+  resort, since token names are an implementation detail.
 
 ## Git Conventions
 

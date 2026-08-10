@@ -88,8 +88,6 @@ export interface TagInputViewProps extends Omit<TagInputProps, 'tags'> {
   setInputValue?: (value: string) => void;
   // An array of `Tag` objects, representing the internal state of tags.
   tags?: Tag[];
-  // Function to update the internal array of `Tag` objects.
-  setTags?: (tags: Tag[]) => void;
   // Boolean indicating whether the input field is currently focused.
   isFocused?: boolean;
   // Function to set the focus state of the input field.
@@ -110,14 +108,6 @@ export interface TagInputViewProps extends Omit<TagInputProps, 'tags'> {
   handleFocus?: () => void;
   // Event handler for when the input field loses focus.
   handleBlur?: () => void;
-  // An array of suggested items filtered based on the current input value.
-  filteredItems?: string[];
-  // The index of the currently active (e.g., highlighted) item in the suggestion menu.
-  activeItemIndex?: number;
-  // Boolean indicating whether the suggestion menu is currently open.
-  isMenuOpen?: boolean;
-  // Event handler for when an item from the suggestion menu is selected.
-  handleMenuItemSelect?: (item: string) => void;
   // Validator for an individual tag; returns true when the tag passes the rules.
   validateTag?: (tag: string) => boolean;
 }

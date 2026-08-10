@@ -13,6 +13,9 @@ export const ChatInput = forwardRef<ChatInputHandle, ChatInputProps>(
       ...rawProps,
       isAgentRunning: rawProps.isAgentRunning ?? rawProps.isWorkerRunning,
       onStopAgent: rawProps.onStopAgent ?? rawProps.onStopWorker,
+      // `isDisabled` is the camelCase alias of `disabled`; resolve it here so
+      // the state hook and the view both see a single canonical prop.
+      disabled: rawProps.disabled ?? rawProps.isDisabled,
     };
     const state = useChatInputState(props);
     // The visible field is a `contentEditable` div and therefore has no `value` property. The ref

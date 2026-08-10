@@ -88,7 +88,7 @@ export const useCommandState = ({
     // to listen to, so skip attaching the listener (and creating a cleanup
     // that references it).
     // Hermes/Expo defines a partial `document` without `addEventListener`.
-    if (typeof document?.addEventListener !== 'function') return;
+    if (typeof document === 'undefined') return;
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('keydown', handleKeyDown);

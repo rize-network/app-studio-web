@@ -63,6 +63,7 @@ export const EditComponent: React.FC<EditComponentProps> = ({
   // Force re-render on scroll to update position
   const [, forceUpdate] = useState(0);
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     const handleScroll = () => forceUpdate((n) => n + 1);
     window.addEventListener('scroll', handleScroll, true);
     window.addEventListener('resize', handleScroll);
@@ -78,7 +79,7 @@ export const EditComponent: React.FC<EditComponentProps> = ({
   >(null);
 
   useEffect(() => {
-    if (targetElement) {
+    if (targetElement && typeof window !== 'undefined') {
       const rect = targetElement.getBoundingClientRect();
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;

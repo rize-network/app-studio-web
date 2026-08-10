@@ -108,6 +108,56 @@ test('the clear button notifies onChangeText even without onChange', async () =>
 //   expect(helperTextElement).toBeInTheDocument();
 // });
 
+test('isRequired marks the input required and aria-required', () => {
+  render(<TextField name="username" isRequired />);
+  const inputElement = screen.getByRole('textbox');
+  expect(inputElement).toBeRequired();
+  expect(inputElement).toHaveAttribute('aria-required', 'true');
+});
+
+test('a TextField without isRequired is not required', () => {
+  render(<TextField name="username" />);
+  const inputElement = screen.getByRole('textbox');
+  expect(inputElement).not.toBeRequired();
+  expect(inputElement).not.toHaveAttribute('aria-required');
+});
+
+test('leftIcon and rightIcon render inside the field shell', () => {
+  render(
+    <TextField
+      name="username"
+      leftIcon={<span data-testid="left-adornment" />}
+      rightIcon={<span data-testid="right-adornment" />}
+    />
+  );
+  const inputElement = screen.getByRole('textbox');
+  const left = screen.getByTestId('left-adornment');
+  const right = screen.getByTestId('right-adornment');
+  expect(left).toBeInTheDocument();
+  expect(right).toBeInTheDocument();
+  // The left adornment precedes the input, the right one follows it.
+  expect(
+    left.compareDocumentPosition(inputElement) &
+      Node.DOCUMENT_POSITION_FOLLOWING
+  ).toBeTruthy();
+  expect(
+    inputElement.compareDocumentPosition(right) &
+      Node.DOCUMENT_POSITION_FOLLOWING
+  ).toBeTruthy();
+});
+
+test('labelProps is spread onto the field label', () => {
+  render(
+    <TextField
+      name="username"
+      label="Username"
+      labelProps={{ id: 'username-label' }}
+    />
+  );
+  const label = screen.getByText('Username');
+  expect(label).toHaveAttribute('id', 'username-label');
+});
+
 test('TextField to match snapshot', () => {
   const tree = renderer
     .create(

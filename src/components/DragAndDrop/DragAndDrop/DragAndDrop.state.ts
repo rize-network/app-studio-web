@@ -66,7 +66,7 @@ export const useDragAndDropState = ({
   useEffect(() => {
     // `window` exists on Hermes/Expo but lacks `addEventListener`; guard both
     // the attach and the cleanup so native never calls a missing method.
-    if (typeof window?.addEventListener !== 'function') return;
+    if (typeof window === 'undefined') return;
     if (draggedIndex !== null) {
       window.addEventListener('mousemove', handleDragMove);
       window.addEventListener('touchmove', handleDragMove);

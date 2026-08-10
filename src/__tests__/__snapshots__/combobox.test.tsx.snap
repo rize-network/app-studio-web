@@ -5,24 +5,28 @@ exports[`Checkbox to match snapshot 1`] = `
   className="fwp-nowrap gp-15px ais-center wh-100 dy-flex fdn-row"
   id="combo"
   ref={[Function]}
-  role="combobox"
 >
   <div
     className="pn-relative wh-100"
     ref={[Function]}
   >
     <div
+      aria-expanded={false}
+      aria-haspopup="listbox"
       onClick={[Function]}
+      onKeyDown={[Function]}
       ref={
         {
           "current": null,
         }
       }
+      role="combobox"
       style={
         {
           "width": "100%",
         }
       }
+      tabIndex={0}
     >
       <div
         className="gp-8px wh-100 bsgg-border-box dy-flex fwp-nowrap ais-center jct-flex-start bsee-solid bcrr-var--color-gray-200 bcr-transparent fse-14px cror-pointer oy-1 tn-border-color-0p2s-ease-box-shadow-0p2s-ease-background-color-0p2s-ease mht-40px ptp-9px pbm-9px plt-12px prt-12px brs-8px bwh-1px cr-inherit bcrr-var--color-gray-300--hover bcrr-var--theme-primary--focus oe-none--focus bsw-0-0-0-3px-var--theme-primary--focus bcrr-var--theme-primary--focus-visible oe-none--focus-visible bsw-0-0-0-3px-var--theme-primary--focus-visible fdn-row"
@@ -64,7 +68,26 @@ exports[`Checkbox to match snapshot 1`] = `
             <div
               className="wh-16px ht-16px wht-16 cr-var--color-gray-400 dy-flex ais-center jct-center tm-rotate180deg"
               ref={[Function]}
-            />
+            >
+              <svg
+                aria-hidden="true"
+                className="lucide lucide-chevron-up"
+                fill="none"
+                height={16}
+                ref={null}
+                stroke="var(--color-gray-400)"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                viewBox="0 0 24 24"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="m18 15-6-6-6 6"
+                />
+              </svg>
+            </div>
           </div>
         </div>
       </div>

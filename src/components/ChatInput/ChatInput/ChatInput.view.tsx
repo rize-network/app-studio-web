@@ -27,6 +27,11 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
     placeholder = 'Type your message… use @ to mention',
     loading = false,
     disabled = false,
+    // Alias already collapsed into `disabled` by the ChatInput wrapper;
+    // destructured here only so it never leaks onto the DOM container.
+    isDisabled,
+    rightElement,
+    onKeyDown,
     isAgentRunning = false,
     enableAudioRecording = false,
     leftButtons,
@@ -271,6 +276,7 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
               placeholder={placeholder}
               disabled={disabled && !isAgentRunning}
               autoFocus={autoFocus}
+              onKeyDown={onKeyDown}
               suggestions={suggestions || []}
               showSuggestions={suggestions && suggestions.length > 0 && !value}
               onSuggestionSelect={(suggestion) => {
@@ -298,57 +304,80 @@ const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
               <Horizontal gap={8} alignItems="center">
                 {/* File Upload Button */}
                 {!hideAttachments && (
-                  <Uploader
-                    accept="*/*"
-                    icon={<AttachmentIcon widthHeight={16} />}
-                    maxSize={50 * 1024 * 1024} // 50MB limit
-                    multiple={true}
-                    onMultipleFileSelect={handleMultipleFileUpload}
-                    isLoading={isUploading}
-                    progress={uploadProgress || 0}
-                    text={attachmentText}
-                    fileType="file"
-                    renderError={({ errorMessage }) => null}
-                    views={{
-                      container: {
-                        height: '36px',
-                        //margin: '0 12px',
-                        // borderRadius: '8px',
-                        // backgroundColor: 'transparent',
-                        // border: '1px solid',
-                        // borderColor: 'color-gray-300',
-                        cursor: 'pointer',
-                        _hover: {
-                          backgroundColor: 'color-gray-100',
+                  // `display: contents` keeps the wrapper out of layout; it
+                  // only exists to observe activation of the file-browse
+                  // affordance. The Uploader opens the dialog by clicking its
+                  // hidden file input, so that programmatic click — the one
+                  // whose target is the input itself — is the single reliable
+                  // "file browser opened" signal (the user's surface click
+                  // bubbles here too, but with a different target).
+                  <View
+                    display="contents"
+                    onClickCapture={
+                      onFileBrowse
+                        ? (event: React.MouseEvent) => {
+                            if (
+                              (event.target as HTMLElement).tagName === 'INPUT'
+                            ) {
+                              onFileBrowse();
+                            }
+                          }
+                        : undefined
+                    }
+                  >
+                    <Uploader
+                      accept="*/*"
+                      icon={<AttachmentIcon widthHeight={16} />}
+                      maxSize={50 * 1024 * 1024} // 50MB limit
+                      multiple={true}
+                      onMultipleFileSelect={handleMultipleFileUpload}
+                      isLoading={isUploading}
+                      progress={uploadProgress || 0}
+                      text={attachmentText}
+                      fileType="file"
+                      renderError={({ errorMessage }) => null}
+                      views={{
+                        container: {
+                          height: '36px',
+                          //margin: '0 12px',
+                          // borderRadius: '8px',
+                          // backgroundColor: 'transparent',
+                          // border: '1px solid',
+                          // borderColor: 'color-gray-300',
+                          cursor: 'pointer',
+                          _hover: {
+                            backgroundColor: 'color-gray-100',
+                          },
+                          ...views?.fileButton,
                         },
-                        ...views?.fileButton,
-                      },
-                    }}
-                    containerProps={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 4,
-                      borderRadius: shape === 'rounded' ? '50%' : 4,
-                      padding: 10,
-                    }}
-                    textProps={{
-                      fontSize: '14px',
-                      color: 'color-gray-600',
-                    }}
-                    validateFile={(file: File) => {
-                      if (file.size > 50 * 1024 * 1024) {
-                        return 'File size exceeds 50MB limit';
-                      }
-                      return null;
-                    }}
-                  />
+                      }}
+                      containerProps={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 4,
+                        borderRadius: shape === 'rounded' ? '50%' : 4,
+                        padding: 10,
+                      }}
+                      textProps={{
+                        fontSize: '14px',
+                        color: 'color-gray-600',
+                      }}
+                      validateFile={(file: File) => {
+                        if (file.size > 50 * 1024 * 1024) {
+                          return 'File size exceeds 50MB limit';
+                        }
+                        return null;
+                      }}
+                    />
+                  </View>
                 )}
                 {leftButtons}
               </Horizontal>
 
               {/* Submit Button */}
               <Horizontal gap={8} alignItems="center">
+                {rightElement}
                 {enableAudioRecording && (
                   <AudioRecorder
                     onRecordingStart={onAudioRecordingStart}

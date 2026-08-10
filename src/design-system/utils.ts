@@ -64,13 +64,53 @@ const stripNullsDeep = <T>(value: T): T => {
   return out as T;
 };
 
+// Components whose colors are computed per-variant. A config block's `views`
+// sits ABOVE the variant palette, so a color there flattens every variant
+// (ghost/outline/subtle all render as solid blocks). Colors for these
+// components belong in `config.variants.<variant>` (merged UNDER each
+// variant) or the top-level `color`/`textColor` keys.
+const VARIANT_DRIVEN_COMPONENTS: ReadonlySet<string> = new Set(['button']);
+const VIEW_COLOR_KEYS = [
+  'backgroundColor',
+  'background',
+  'borderColor',
+  'color',
+] as const;
+const warnedViewColorBlocks = new Set<string>();
+
+const warnOnViewColors = (
+  componentName: string,
+  views: Record<string, Record<string, unknown>> | undefined
+) => {
+  if (process.env.NODE_ENV === 'production') return;
+  if (!views || !VARIANT_DRIVEN_COMPONENTS.has(componentName)) return;
+  if (warnedViewColorBlocks.has(componentName)) return;
+  for (const [viewKey, viewValue] of Object.entries(views)) {
+    if (!isPlainObject(viewValue)) continue;
+    const offenders = VIEW_COLOR_KEYS.filter((k) => viewValue[k] != null);
+    if (offenders.length > 0) {
+      warnedViewColorBlocks.add(componentName);
+      console.warn(
+        `[design-system] components.${componentName}.views.${viewKey} sets ` +
+          `${offenders.join(', ')} — view styles apply above every variant, ` +
+          'so this flattens ghost/outline/subtle into solid blocks. Move ' +
+          `colors to components.${componentName}.config.variants.<variant> ` +
+          '(merged under each variant); keep views to shape and typography.'
+      );
+      return;
+    }
+  }
+};
+
 export const getDesignSystemComponentProps = (
   componentName: DesignSystemComponentName,
   config?: DesignSystemConfig
 ): DesignSystemComponentConfig => {
   if (!config) return {};
   const raw = config.components[componentName] || {};
-  return normalizeDesignSystemComponentProps(stripNullsDeep(raw));
+  const cleaned = normalizeDesignSystemComponentProps(stripNullsDeep(raw));
+  warnOnViewColors(componentName, cleaned.views);
+  return cleaned;
 };
 
 export const mergeDesignSystemComponentProps = <T extends Record<string, any>>(

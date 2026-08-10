@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ColorInputProps } from './ColorInput.props';
+import { formatColor } from './colorFormat';
 // This file defines the useColorInputState custom hook, centralizing all state management and core logic for the ColorInput component, including dropdown visibility, color selection, custom color input, recent color persistence via localStorage, and external event handling.
 export const useColorInputState = (props: ColorInputProps) => {
   const {
@@ -13,6 +14,7 @@ export const useColorInputState = (props: ColorInputProps) => {
     maxRecentColors = 8,
     showRecentColors = true,
     isAutoFocus = false,
+    colorFormat,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(value ?? defaultValue);
@@ -48,7 +50,7 @@ export const useColorInputState = (props: ColorInputProps) => {
   }, [isAutoFocus]);
   useEffect(() => {
     // `document` is web-only; on native the dropdown closes via selection/toggle.
-    if (typeof document?.addEventListener !== 'function') return;
+    if (typeof document === 'undefined') return;
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isOpen &&
@@ -97,14 +99,24 @@ export const useColorInputState = (props: ColorInputProps) => {
     (color: string) => {
       setSelectedColor(color);
       addToRecentColors(color);
-      onChange?.(color);
-      onChangeComplete?.(color);
+      // `colorFormat` controls the representation handed to consumers; the
+      // internal state keeps the raw picked value.
+      const reported = formatColor(color, colorFormat);
+      onChange?.(reported);
+      onChangeComplete?.(reported);
       if (closeOnSelect) {
         setIsOpen(false);
         onClose?.();
       }
     },
-    [onChange, onChangeComplete, closeOnSelect, onClose, addToRecentColors]
+    [
+      onChange,
+      onChangeComplete,
+      closeOnSelect,
+      onClose,
+      addToRecentColors,
+      colorFormat,
+    ]
   );
   const handleCustomColorChange = useCallback((color: string) => {
     setCustomColor(color);
@@ -122,9 +134,9 @@ export const useColorInputState = (props: ColorInputProps) => {
   const setValue = useCallback(
     (newValue: string) => {
       setSelectedColor(newValue);
-      onChange?.(newValue);
+      onChange?.(formatColor(newValue, colorFormat));
     },
-    [onChange]
+    [onChange, colorFormat]
   );
   return {
     isOpen,

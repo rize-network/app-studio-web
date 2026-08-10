@@ -15,17 +15,23 @@ exports[`CountryPicker component > CountryPicker to match snapshot 1`] = `
       ref={[Function]}
     >
       <input
+        aria-autocomplete="list"
+        aria-expanded={false}
+        aria-haspopup="listbox"
         autoFocus={true}
         className="wh-100 ht-100 plt-0px prt-0px ptp-0px pbm-0px mn-0px pvl-0 phl-0 wh-100 ht-100 br-none oe-none--focus tn-all-0p2s-ease-in-out fse-20px bcr-transparent cr-var--color-gray-900 cror-pointer"
         disabled={false}
+        id="_r_0_"
         name="name"
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        onKeyDown={[Function]}
         placeholder="Name"
         readOnly={false}
         ref={[Function]}
-        type="country"
+        role="combobox"
+        type="text"
         value="Name"
       />
     </div>
@@ -41,7 +47,26 @@ exports[`CountryPicker component > CountryPicker to match snapshot 1`] = `
             "width": 0.2,
           }
         }
-      />
+      >
+        <svg
+          aria-hidden="true"
+          className="lucide lucide-chevron-up"
+          fill="none"
+          height={16}
+          ref={null}
+          stroke="var(--color-gray-500)"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={1}
+          viewBox="0 0 24 24"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m18 15-6-6-6 6"
+          />
+        </svg>
+      </div>
     </div>
   </div>
   <span

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Horizontal, Vertical, Text } from 'app-studio';
+import { View, Horizontal, Text } from 'app-studio';
 import { ColorPickerViewProps } from './ColorPicker.props';
 import {
   DefaultColorPickerStyles,
@@ -95,7 +95,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
   // Determines the color to be visually displayed in the trigger, using the `selectedColor` or a default gray if none is selected.
   const displayColor = selectedColor || 'color-gray-200';
   return (
-    <View {...containerStyles} {...props}>
+    <View id={id} {...containerStyles} {...props}>
       {label && (
         <Text
           fontSize="12px"

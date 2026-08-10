@@ -242,11 +242,9 @@
           "borderRadius": 4,
           "fontFamily": "var(--font-sans)",
           "fontWeight": 700,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.04em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "var(--font-sans)",

@@ -44,11 +44,25 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
     }
     return child;
   });
+  const generatedId = React.useId();
+  const labelId = `${generatedId}-label`;
+  const helperTextId = `${generatedId}-helper`;
+  const hasHelper = Boolean(helperText || error);
   return (
-    <Vertical gap={spacing} width="100%" {...views.container} {...props}>
+    <Vertical
+      gap={spacing}
+      width="100%"
+      role="radiogroup"
+      aria-labelledby={label ? labelId : undefined}
+      aria-describedby={hasHelper ? helperTextId : undefined}
+      aria-invalid={error ? true : undefined}
+      {...views.container}
+      {...props}
+    >
       {}
       {label && (
         <Text
+          id={labelId}
           fontWeight="600"
           fontSize="14px"
           color={error ? 'color-red-600' : 'inherit'}
@@ -61,8 +75,9 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
       {}
       <Container gap={spacing}>{processedChildren}</Container>
       {}
-      {(helperText || error) && (
+      {hasHelper && (
         <Text
+          id={helperTextId}
           fontWeight={error ? '500' : '400'}
           fontSize="14px"
           lineHeight="20px"

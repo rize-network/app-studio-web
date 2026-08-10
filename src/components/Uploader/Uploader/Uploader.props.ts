@@ -40,10 +40,6 @@ export interface UploadViewProps {
   containerProps?: ViewProps;
   // Props to be passed to the `Text` component displaying error messages.
   errorMessageProps?: TextProps;
-  // Props to be passed to the `View` component wrapping the thumbnail display.
-  thumbnailContainerProps?: ViewProps;
-  // Props to be passed to the `View` component for the loading indicator.
-  loadingProps?: ViewProps;
   // Props to be passed to the `View` component for the progress display.
   progressProps?: ViewProps;
   // Props to be passed to the `View` component containing the video preview.

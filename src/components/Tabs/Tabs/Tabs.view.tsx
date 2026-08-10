@@ -146,6 +146,7 @@ export const TabsView: React.FC<TabsViewProps> = ({
   renderContent,
   variant = 'underline',
   iconPosition = 'left', // Default to left
+  keepMounted = false,
 }) => {
   const { themeMode } = useTheme();
   const variantStyles = getTabsVariantStyles(variant, themeMode);
@@ -209,6 +210,24 @@ export const TabsView: React.FC<TabsViewProps> = ({
         {/* Use the custom renderContent function if provided */}
         {renderContent
           ? renderContent(activeTab)
+          : keepMounted
+          ? // All panes stay mounted so their internal state survives tab
+            // switches; inactive ones are hidden, not unmounted.
+            tabs.map((tab) => {
+              const tabId = tab.value !== undefined ? tab.value : tab.title;
+              const activeId =
+                activeTab.value !== undefined
+                  ? activeTab.value
+                  : activeTab.title;
+              return (
+                <View
+                  key={tab.title}
+                  display={tabId === activeId ? 'contents' : 'none'}
+                >
+                  {tab.content}
+                </View>
+              );
+            })
           : // Otherwise, render the content property from the active tab object
             activeTab.content}
       </View>

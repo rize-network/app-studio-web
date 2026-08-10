@@ -31,10 +31,7 @@ export const useDropdownMenuState = (defaultOpen: boolean = false) => {
     // AND `document` can be partially defined globals WITHOUT `addEventListener`,
     // so a `typeof … === 'undefined'` check is not enough — verify the method
     // itself exists before attaching listeners (and the cleanup that uses them).
-    if (
-      typeof document?.addEventListener !== 'function' ||
-      typeof window?.addEventListener !== 'function'
-    )
+    if (typeof document === 'undefined' || typeof window === 'undefined')
       return;
     document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('resize', handleResize);

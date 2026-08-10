@@ -240,11 +240,9 @@
           "borderRadius": 9999,
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
           "fontWeight": 700,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.01em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",

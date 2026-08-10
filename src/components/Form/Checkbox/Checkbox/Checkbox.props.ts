@@ -32,7 +32,6 @@ export interface CheckboxViewProps extends CheckboxProps {
   isHovered?: boolean;
   setIsHovered?: (hovered: boolean) => void;
   isChecked?: boolean;
-  setIsChecked?: (selected: boolean) => void;
   isSelected?: boolean;
   setIsSelected?: (selected: boolean) => void;
 }

@@ -8,6 +8,17 @@ afterEach(() => {
   cleanup();
 });
 
+// jsdom ships no object-URL implementation; the attachment previews call it
+// once a file lands in the upload pipeline.
+beforeAll(() => {
+  if (typeof URL.createObjectURL !== 'function') {
+    URL.createObjectURL = () => 'blob:mock';
+  }
+  if (typeof URL.revokeObjectURL !== 'function') {
+    URL.revokeObjectURL = () => {};
+  }
+});
+
 test('renders ChatInput component', () => {
   render(<ChatInput placeholder="Message" autoFocus={false} />);
   expect(screen.getByRole('textbox')).toBeInTheDocument();
@@ -191,6 +202,123 @@ describe('ChatInput value access', () => {
     expect(handleRef.current!.getValue()).toBe('no mirror here');
     expect(getEditable(container).textContent).toBe('no mirror here');
   });
+});
+
+test('isDisabled disables the editable input and the send button', () => {
+  const { container } = render(
+    <ChatInput isDisabled autoFocus={false} value="draft" onChange={() => {}} />
+  );
+
+  const editable = container.querySelector(
+    '[role="textbox"]'
+  ) as HTMLDivElement;
+  expect(editable.getAttribute('contenteditable')).toBe('false');
+
+  // The send button is the last button in the input row.
+  const buttons = screen.getAllByRole('button');
+  expect(buttons[buttons.length - 1]).toBeDisabled();
+});
+
+test('the upload pipeline reports progress and success around onFileUpload', async () => {
+  // The state hook hands each queued file to the consumer-provided
+  // `onFileUpload` service; mock it and observe the callbacks fired around it.
+  const onFileUpload = vi.fn();
+  const onUploadProgress = vi.fn();
+  const onUploadSuccess = vi.fn();
+  const { container } = render(
+    <ChatInput
+      autoFocus={false}
+      onFileUpload={onFileUpload}
+      onUploadProgress={onUploadProgress}
+      onUploadSuccess={onUploadSuccess}
+    />
+  );
+
+  const file = new File(['hello'], 'hello.txt', { type: 'text/plain' });
+  const fileInput = container.querySelector(
+    'input[type="file"]'
+  ) as HTMLInputElement;
+  await act(async () => {
+    Object.defineProperty(fileInput, 'files', { value: [file] });
+    fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+
+  expect(onFileUpload).toHaveBeenCalledWith(file);
+  expect(onUploadSuccess).toHaveBeenCalledWith({ file });
+  expect(onUploadProgress).toHaveBeenCalledWith(0);
+  expect(onUploadProgress).toHaveBeenCalledWith(100);
+}, 30000);
+
+test('the upload pipeline reports onUploadError when the upload service throws', async () => {
+  const failure = new Error('service down');
+  const onFileUpload = vi.fn(() => {
+    throw failure;
+  });
+  const onUploadError = vi.fn();
+  const onUploadSuccess = vi.fn();
+  const { container } = render(
+    <ChatInput
+      autoFocus={false}
+      onFileUpload={onFileUpload}
+      onUploadError={onUploadError}
+      onUploadSuccess={onUploadSuccess}
+    />
+  );
+
+  const file = new File(['x'], 'x.txt', { type: 'text/plain' });
+  const fileInput = container.querySelector(
+    'input[type="file"]'
+  ) as HTMLInputElement;
+  await act(async () => {
+    Object.defineProperty(fileInput, 'files', { value: [file] });
+    fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+
+  expect(onUploadError).toHaveBeenCalledWith(failure);
+  expect(onUploadSuccess).not.toHaveBeenCalled();
+}, 30000);
+
+test('onFileBrowse fires when the attach affordance is activated', () => {
+  const onFileBrowse = vi.fn();
+  const { container } = render(
+    <ChatInput autoFocus={false} onFileBrowse={onFileBrowse} />
+  );
+
+  const fileInput = container.querySelector(
+    'input[type="file"]'
+  ) as HTMLInputElement;
+  const attachButton = fileInput.parentElement as HTMLElement;
+  act(() => {
+    attachButton.click();
+  });
+
+  expect(onFileBrowse).toHaveBeenCalledTimes(1);
+});
+
+test('rightElement renders in the input row', () => {
+  render(
+    <ChatInput
+      autoFocus={false}
+      rightElement={<span data-testid="right-element" />}
+    />
+  );
+  expect(screen.getByTestId('right-element')).toBeInTheDocument();
+});
+
+test('onKeyDown is forwarded to the editable input', () => {
+  const onKeyDown = vi.fn();
+  const { container } = render(
+    <ChatInput autoFocus={false} onKeyDown={onKeyDown} />
+  );
+  const editable = container.querySelector(
+    '[role="textbox"]'
+  ) as HTMLDivElement;
+  act(() => {
+    editable.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })
+    );
+  });
+  expect(onKeyDown).toHaveBeenCalled();
 });
 
 test('the isWorkerRunning / onStopWorker aliases reach the agent props', () => {

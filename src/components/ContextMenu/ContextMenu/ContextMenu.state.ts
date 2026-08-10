@@ -61,10 +61,7 @@ export const useContextMenuState = (props?: {
     // cleanup that references them).
     // Hermes/Expo can define partial `window`/`document` globals WITHOUT
     // `addEventListener`; check the method itself, not just `typeof … undefined`.
-    if (
-      typeof document?.addEventListener !== 'function' ||
-      typeof window?.addEventListener !== 'function'
-    )
+    if (typeof document === 'undefined' || typeof window === 'undefined')
       return;
     document.addEventListener('mousedown', handleClickOutside);
     window.addEventListener('resize', handleResize);

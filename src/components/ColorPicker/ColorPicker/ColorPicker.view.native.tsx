@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Horizontal, Vertical, Text } from 'app-studio';
+import { View, Horizontal, Text } from 'app-studio';
 import { ColorPickerViewProps } from './ColorPicker.props';
 import {
   DefaultColorPickerStyles,
@@ -127,7 +127,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
     </View>
   ) : undefined;
   return (
-    <View {...containerStyles} {...props}>
+    <View id={id} {...containerStyles} {...props}>
       {label && (
         <Text
           fontSize="12px"

@@ -247,11 +247,9 @@
           "borderRadius": 9999,
           "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",
           "fontWeight": 300,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.022em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif",

@@ -8,6 +8,51 @@ afterEach(() => {
 });
 
 describe('Title Component', () => {
+  test('renders as the requested heading level, centered', () => {
+    render(
+      <Title level={2} centered>
+        Section
+      </Title>
+    );
+    const titleElement = screen.getByRole('heading', { level: 2 });
+    expect(titleElement.tagName).toBe('H2');
+  });
+
+  test('warns and keeps static text when children lack the highlight placeholder', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <Title
+        highlightText="apps"
+        alternateHighlightText={['apps', 'sites']}
+        alternateAnimation
+      >
+        Build for the web
+      </Title>
+    );
+    expect(screen.getByText(/Build for the web/)).toBeInTheDocument();
+    warn.mockRestore();
+  });
+
+  test('warns in dev when a static highlightText is not a substring of children', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Title highlightText="cloud">Build for the web</Title>);
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('not a substring')
+    );
+    warn.mockRestore();
+  });
+
+  test('does not warn when highlightText appears in children', () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    render(<Title highlightText="web">Build for the web</Title>);
+    const highlightWarnings = warn.mock.calls.filter(
+      ([message]) =>
+        typeof message === 'string' && message.includes('not a substring')
+    );
+    expect(highlightWarnings).toHaveLength(0);
+    warn.mockRestore();
+  });
+
   test('should render Title component without crashing', () => {
     render(<Title>Test Title</Title>);
   });

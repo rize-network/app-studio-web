@@ -230,11 +230,9 @@
           "borderRadius": 0,
           "fontFamily": "'DM Sans', system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif",
           "fontWeight": 700,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.01em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'DM Sans', system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif",

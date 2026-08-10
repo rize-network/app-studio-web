@@ -20,7 +20,6 @@ exports[`Modal to match snapshot 1`] = `
       variant="square"
     >
       <div
-        buttonSize="xl"
         className="plt-24px prt-24px ptp-16px pbm-16px jct-space-between ais-center pvl-16 phl-24 bbwh-1px bbse-solid bbcr-var--color-gray-200 mobile--plt-16px mobile--prt-16px mobile--ptp-12px mobile--pbm-12px dy-flex fdn-row"
         ref={[Function]}
       >
@@ -30,7 +29,7 @@ exports[`Modal to match snapshot 1`] = `
           ref={[Function]}
         >
           <div
-            className="wh-20px ht-20px wht-20 cr-var--theme-primary dy-flex ais-center jct-center tm-rotate0deg"
+            className="wh-28px ht-28px wht-28 cr-var--theme-primary dy-flex ais-center jct-center tm-rotate0deg"
             ref={[Function]}
           />
         </div>

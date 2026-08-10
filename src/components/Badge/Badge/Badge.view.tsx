@@ -36,6 +36,7 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
     shape = 'pill',
     variant = 'filled',
     size = 'md',
+    isAuto = false,
     views,
     themeMode: elementMode,
     ...props
@@ -67,6 +68,16 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
     // and background AFTER the brand container styles so the variant wins —
     // otherwise a brand container.color set for filled badges (e.g. white)
     // would also paint outline badge text white on a white surface.
+    // `isAuto` auto-derives the badge colors from its own `content` when the
+    // content is a color token (the color-scheme demo loops theme tokens as
+    // `content`): the token becomes the background and the label switches to
+    // white so it stays readable on the saturated brand tones.
+    const autoColorToken =
+      isAuto &&
+      typeof contentNode === 'string' &&
+      /^(color|theme|light|dark)-/.test(contentNode)
+        ? contentNode
+        : undefined;
     const combinedStyles: Record<string, any> = useMemo(() => {
       const base = {
         width: 'fit-content',
@@ -105,6 +116,11 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
           };
         }
       }
+      if (autoColorToken) {
+        (base as any).backgroundColor = autoColorToken;
+        (base as any).borderColor = autoColorToken;
+        (base as any).color = 'color-white';
+      }
       return base;
     }, [
       shape,
@@ -114,6 +130,7 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
       hasAnnouncementLayout,
       announcementVariantStyles,
       position,
+      autoColorToken,
       views?.container,
     ]);
 

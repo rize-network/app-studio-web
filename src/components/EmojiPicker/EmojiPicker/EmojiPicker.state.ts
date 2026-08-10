@@ -80,7 +80,7 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
     }
   }, [showRecentEmojis]);
   useEffect(() => {
-    if (typeof document?.addEventListener !== 'function') return;
+    if (typeof document === 'undefined') return;
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isOpen &&

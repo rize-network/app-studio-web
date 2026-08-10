@@ -64,11 +64,9 @@
           "borderRadius": 8,
           "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 600,
-          "borderColor": "theme-primary",
           "letterSpacing": "-0.01em",
           "textTransform": "none",
-          "fontStyle": "normal",
-          "backgroundColor": null
+          "fontStyle": "normal"
         },
         "content": {
           "fontFamily": "'Inter', system-ui, -apple-system, sans-serif",

@@ -38,7 +38,7 @@ export const useMenubarState = (
     // to listen to, so skip attaching listeners (and creating a cleanup that
     // references them).
     // Hermes/Expo defines a partial `document` without `addEventListener`.
-    if (typeof document?.addEventListener !== 'function') return;
+    if (typeof document === 'undefined') return;
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleKeyDown);
     return () => {

@@ -1,9 +1,5 @@
 import React, { createContext, ReactNode, useContext, useMemo } from 'react';
-import {
-  ThemeProvider,
-  useTheme,
-  type Theme as AppStudioTheme,
-} from 'app-studio';
+import { ThemeProvider, useTheme } from 'app-studio';
 import {
   defaultDesignSystemConfig,
   designSystemConfigs,
@@ -73,8 +69,10 @@ export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
   // (nested under another ThemeProvider) and keeps the page layout intact.
   return (
     <DesignSystemContext.Provider value={value}>
+      {/* No cast: app-studio's `theme` prop accepts ThemeSlots, which
+          DesignSystemTheme satisfies structurally. */}
       <ThemeProvider
-        theme={resolvedConfig.theme as Partial<AppStudioTheme>}
+        theme={resolvedConfig.theme}
         mode={effectiveMode}
         transparentWrapper
       >
