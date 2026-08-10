@@ -54,6 +54,20 @@ control scale instead.
 - Titling a card, panel, or page → `heading="h4…h6"`.
 - Above the fold on a landing page → `Title`.
 
-There is no `T*`/`C*` token scale in this library; if your product's design
-tokens use that naming, they map onto the tables above (a "T2 ≈ 28px desktop"
-sits between `h4` and `h5` — app screens should round it down to `h5`).
+## If your product tokens use `T*`/`C*` naming
+
+There is no `T*`/`C*` token scale in this library — that vocabulary lives in
+product design tokens. It maps onto the scales above as **T\* = titles →
+heading scale** and **C\* = controls/content → control scale**:
+
+| product tier | intended use | library equivalent |
+| ------------ | ------------ | ------------------ |
+| `T1` (~34px+) | page/hero title | `heading="h4"` and up, or `Title` on marketing surfaces |
+| `T2` (~28px) | section title — **too large for dense controls** | round down to `heading="h5"` (24px) in app chrome |
+| `T3` (~20px) | card/panel title | `heading="h6"` or control `xl` |
+| `C1` (~14px) | default control & body text | control `md` |
+| `C2` (~12px) | helper text, meta, chips | control `sm` |
+
+The recurring trap is reaching for a `T*` tier inside a field, row, or menu:
+dense UI never goes above the control scale (`size`), which is why "T2 in a
+toolbar" always ends up rebuilt as `C1`/`C2`.

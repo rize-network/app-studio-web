@@ -70,6 +70,8 @@
     "prerelease": "npm run build:package",
     "prepublishOnly": "npm run build:package",
     "release": "release-it",
+    "postpublish": "npm run promote:latest",
+    "promote:latest": "npm dist-tag add \"${npm_package_name}@${npm_package_version}\" latest && npm dist-tag ls \"${npm_package_name}\"",
     "bot-doc": "ts-node bot/index.ts",
     "create-docs": "ts-node scripts/create-docs.ts",
     "create-structure": "ts-node scripts/create-structure.ts",

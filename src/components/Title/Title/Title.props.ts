@@ -9,6 +9,10 @@ export interface TitleProps extends ViewProps {
   // Indicates whether the title component is currently visible within the viewport, often used for scroll-triggered animations.
   _isInView?: boolean;
   // The content to be rendered inside the Title component, typically text.
+  // Note: a literal `|` in a string child is the LINE-BREAK character (it
+  // renders as <br />) — never use it as a visual separator when composing
+  // children, and with highlight rotation pass the full sentence containing
+  // `highlightText` (see slideHighlight.tsx for correct/incorrect examples).
   children: React.ReactNode;
   // Specifies text (or an array of texts) to be visually highlighted within the title's children.
   // With `alternateHighlightText`, this is the placeholder word and MUST appear

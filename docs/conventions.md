@@ -508,6 +508,19 @@ export const VariantButtons = () => (
 - Test component edge cases
 - Test component accessibility
 
+### Lazy-mounted components (Tabs)
+
+`Tabs` mounts **only the active tab's content** by default — inactive panes
+do not exist in the DOM. Two consequences for consumers:
+
+- A spec asserting on a non-active tab's content must activate that tab
+  first (click its header), or render with `keepMounted` — which mounts
+  every pane and hides inactive ones with `display: none`, preserving their
+  internal state across switches.
+- Any module mock of `@app-studio/components` must export `Tabs` (and keep
+  its lazy-mount behavior in mind), or content assertions will pass/fail
+  for the wrong reason.
+
 Example:
 
 ```typescript
