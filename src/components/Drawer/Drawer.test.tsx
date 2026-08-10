@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
 import { Drawer } from './Drawer';
 import { vi } from 'vitest';
 // Defines a test suite for the Drawer component, grouping all related tests for its functionality.

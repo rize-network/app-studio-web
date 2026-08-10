@@ -37,17 +37,22 @@ const requiredComponentKeys = [
 describe('config colors stay under the variants, never above them', () => {
   test('no shipped config carries colors in components.button.views', () => {
     const colorKeys = ['backgroundColor', 'background', 'borderColor', 'color'];
+    // A color here sits above every variant and flattens ghost/outline/subtle
+    // into solid blocks; colors belong in config.variants.<variant>.
+    const offenders: string[] = [];
     designSystemConfigList.forEach((config: any) => {
       const views = config?.components?.button?.views ?? {};
       Object.entries(views).forEach(([viewKey, viewValue]) => {
         colorKeys.forEach((key) => {
-          expect(
-            (viewValue as Record<string, unknown>)?.[key] ?? null,
-            `${config?.metadata?.id}: components.button.views.${viewKey}.${key} flattens every variant`
-          ).toBeNull();
+          if ((viewValue as Record<string, unknown>)?.[key] != null) {
+            offenders.push(
+              `${config?.metadata?.id}: components.button.views.${viewKey}.${key}`
+            );
+          }
         });
       });
     });
+    expect(offenders).toEqual([]);
   });
 
   test('a config with colors in button views triggers the dev warning', () => {

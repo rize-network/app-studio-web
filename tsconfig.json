@@ -32,7 +32,10 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
 
-    "types": ["node"],
+    // `vitest/globals` mirrors vite.config.ts `test.globals: true`: the
+    // runtime injects test/expect/describe/vi as globals, so the typecheck
+    // must know them too — without it every test file fails tsc with TS2593.
+    "types": ["node", "vitest/globals"],
     "baseUrl": "./",
     "rootDir": "./",
     "paths": {

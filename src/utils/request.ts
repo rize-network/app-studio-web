@@ -1,9 +1,20 @@
 //import * as message from 'src/utils/message';
-import queryString, { stringify } from 'qs';
 import { API_URL, DEFAULT_LANGUAGE } from 'src/configs/AppConfig';
 import { read } from './localstorage';
 import { isBrowser } from 'src/utils/env';
 import { OpenAPI } from 'src/services/api/core/OpenAPI';
+
+// `qs` used to be imported here without ever being declared in package.json —
+// a phantom dependency. Every call site serializes a flat key/value map, which
+// URLSearchParams covers without any dependency.
+const stringify = (params: Record<string, unknown>): string => {
+  const search = new URLSearchParams();
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === undefined || value === null) return;
+    search.append(key, String(value));
+  });
+  return search.toString();
+};
 
 async function checkStatus(
   response: any,
@@ -290,7 +301,7 @@ const googleApiUrl = 'https://maps.googleapis.com/maps/api';
 
 export const googleApi = {
   details(params: any) {
-    const query = queryString.stringify({
+    const query = stringify({
       ...params,
       radius: '50000',
       language: 'fr',
@@ -311,7 +322,7 @@ export const googleApi = {
     });
   },
   autocomplete(params: any) {
-    const query = queryString.stringify({
+    const query = stringify({
       ...params,
       radius: '50000',
       language: 'fr',
@@ -331,7 +342,7 @@ export const googleApi = {
     });
   },
   geocode(params: any) {
-    const query = queryString.stringify({
+    const query = stringify({
       ...params,
       key: 'AIzaSyCdV54dOszL-uIsWABe5m-74LUd-NUdMN8',
     });
