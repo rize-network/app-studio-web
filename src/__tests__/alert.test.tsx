@@ -7,8 +7,9 @@ afterEach(() => {
   cleanup();
 });
 
-test('renders Alert component without crashing', () => {
-  render(<Alert />);
+test('renders default Alert without a live-region role', () => {
+  const { container } = render(<Alert />);
+  expect(container.firstChild).not.toHaveAttribute('role');
 });
 
 test('renders Alert with title', () => {
@@ -29,22 +30,30 @@ test('renders Alert with children', () => {
   expect(contentElement).toBeInTheDocument();
 });
 
-test('renders Alert with info variant', () => {
+test('renders info Alert with status role', () => {
   render(<Alert title="Info Alert" variant="info" />);
-  const alertElement = screen.getByText('Info Alert').closest('div');
-  expect(alertElement).toBeInTheDocument();
+  expect(screen.getByRole('status')).toBeInTheDocument();
 });
 
-test('renders Alert with success variant', () => {
+test('renders success Alert with status role', () => {
   render(<Alert title="Success Alert" variant="success" />);
-  const alertElement = screen.getByText('Success Alert').closest('div');
-  expect(alertElement).toBeInTheDocument();
+  expect(screen.getByRole('status')).toBeInTheDocument();
 });
 
-test('renders Alert with error variant', () => {
+test('renders error Alert with alert role', () => {
   render(<Alert title="Error Alert" variant="error" />);
-  const alertElement = screen.getByText('Error Alert').closest('div');
-  expect(alertElement).toBeInTheDocument();
+  expect(screen.getByRole('alert')).toBeInTheDocument();
+});
+
+test('renders warning Alert with alert role', () => {
+  render(<Alert title="Warning Alert" variant="warning" />);
+  expect(screen.getByRole('alert')).toBeInTheDocument();
+});
+
+test('allows an explicit role to override the variant default', () => {
+  render(<Alert title="Polite error" variant="error" role="status" />);
+  expect(screen.getByRole('status')).toBeInTheDocument();
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 });
 
 test('Alert with warning variant matches snapshot', () => {

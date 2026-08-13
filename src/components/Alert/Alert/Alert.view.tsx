@@ -12,6 +12,15 @@ import { Horizontal } from 'app-studio';
 import { WarningIcon, InfoIcon, ErrorIcon, SuccessIcon } from '../../Icon/Icon';
 import { AlertProps } from './Alert.props';
 import { getThemes } from './Alert.style';
+import { Variant } from './Alert.type';
+
+const defaultRoles: Record<Variant, AlertProps['role']> = {
+  default: undefined,
+  info: 'status',
+  success: 'status',
+  error: 'alert',
+  warning: 'alert',
+};
 
 /**
  * Alert component that displays important messages to users
@@ -60,6 +69,7 @@ export const AlertView = React.memo(
 
     return (
       <Horizontal
+        role={defaultRoles[variant]}
         // Layout properties
         gap={12}
         padding="12px 16px"
