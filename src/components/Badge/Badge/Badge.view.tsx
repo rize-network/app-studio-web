@@ -39,6 +39,14 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
     isAuto = false,
     views,
     themeMode: elementMode,
+    // Extraits plutôt que laissés dans `...props` : la variante décide du fond,
+    // du texte et du liseré ensemble, et une couleur passée par l'appelant
+    // n'atteignait que le conteneur. L'étiquette, elle, lit
+    // `combinedStyles.color` — donc elle restait celle de la variante, et une
+    // pastille verte gardait un texte et un liseré de la variante par défaut.
+    backgroundColor,
+    color,
+    borderColor,
     ...props
   }) => {
     const { themeMode } = useTheme();
@@ -116,6 +124,34 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
           };
         }
       }
+      // Une pastille qui ne peut pas être cliquée ne réagit pas au survol.
+      //
+      // `filled` portait `_hover` et `_active`, donc **toute** pastille
+      // s'assombrissait sous le pointeur — une étiquette d'état autant qu'une
+      // puce actionnable. L'élément est un `div` nu : pas de rôle, pas de
+      // gestionnaire, curseur inchangé. Une promesse, non tenue.
+      //
+      // Elle pèse davantage depuis qu'un appelant peut colorer la pastille par
+      // son sens : la réaction se pose sur ce qui vient de devenir le plus
+      // attirant de la ligne.
+      const isInteractive = hasAction || props.onClick !== undefined;
+      if (!isInteractive) {
+        delete (base as any)._hover;
+        delete (base as any)._active;
+      }
+
+      // Ce que l'appelant demande gagne sur la variante — et gagne *ensemble*.
+      // Donner un fond sans donner de liseré laissait l'anneau de la variante
+      // par défaut : invisible tant que les deux valaient `theme-primary`, et
+      // franchement visible dès qu'un écran colorait le fond.
+      if (backgroundColor !== undefined) {
+        (base as any).backgroundColor = backgroundColor;
+        if (borderColor === undefined)
+          (base as any).borderColor = backgroundColor;
+      }
+      if (borderColor !== undefined) (base as any).borderColor = borderColor;
+      if (color !== undefined) (base as any).color = color;
+
       if (autoColorToken) {
         (base as any).backgroundColor = autoColorToken;
         (base as any).borderColor = autoColorToken;
@@ -123,6 +159,11 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
       }
       return base;
     }, [
+      hasAction,
+      props.onClick,
+      backgroundColor,
+      color,
+      borderColor,
       shape,
       size,
       variant,
