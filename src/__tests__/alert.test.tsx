@@ -7,9 +7,9 @@ afterEach(() => {
   cleanup();
 });
 
-test('renders default Alert without a live-region role', () => {
-  const { container } = render(<Alert />);
-  expect(container.firstChild).not.toHaveAttribute('role');
+test('renders default Alert with alert role', () => {
+  render(<Alert title="Default Alert" />);
+  expect(screen.getByRole('alert')).toBeInTheDocument();
 });
 
 test('renders Alert with title', () => {

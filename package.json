@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/components",
-  "version": "0.11.3",
+  "version": "0.11.4",
   "main": "dist/web.cjs.js",
   "module": "dist/web.esm.js",
   "react-native": "dist/native/components/index.js",

@@ -234,7 +234,7 @@ const BadgeView: React.FC<BadgeProps> = React.memo(
             fontWeight={hasAnnouncementLayout ? '700' : '600'}
             textAlign="center"
             letterSpacing={hasAnnouncementLayout ? 0 : '0.02em'}
-            whiteSpace={hasAnnouncementLayout ? 'nowrap' : undefined}
+            whiteSpace="nowrap"
             {...(hasAnnouncementLayout ? BadgeAnnouncementTextSizes[size] : {})}
             {...views?.text}
           >

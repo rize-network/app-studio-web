@@ -15,7 +15,7 @@ import { getThemes } from './Alert.style';
 import { Variant } from './Alert.type';
 
 const defaultRoles: Record<Variant, AlertProps['role']> = {
-  default: undefined,
+  default: 'alert',
   info: 'status',
   success: 'status',
   error: 'alert',

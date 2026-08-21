@@ -152,3 +152,9 @@ test('still lets an explicit border win over the background', () => {
 
   expect(badgeRoot(container).className).toContain('color-gray-900');
 });
+
+test('badge text does not wrap so it stays within the fixed-height pill', () => {
+  renderWithTheme(<Badge content="3/7 étapes" />);
+  const text = screen.getByText('3/7 étapes');
+  expect(text.className).toContain('nowrap');
+});
