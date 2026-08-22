@@ -109,6 +109,13 @@ const Item: React.FC<ItemProps & { isSelected?: boolean }> = ({
       {isSelected && (
         <Element
           as="span"
+          // Decoration, and hidden as such. `aria-selected` above already
+          // carries this meaning in the way assistive technology reads it,
+          // whereas a visible ✓ joins the option's accessible name and turns
+          // "Alpha" into "Alpha ✓" — so a screen reader announces the wrong
+          // name, voice control loses "click Alpha", and anything resolving
+          // the option by its exact label stops finding it at all.
+          aria-hidden="true"
           color="theme-primary"
           fontSize="14px"
           marginLeft={8}
