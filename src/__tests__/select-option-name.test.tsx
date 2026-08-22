@@ -33,11 +33,11 @@ test('a selected option is still named by its label alone', () => {
   // The exact name, not a substring: this is the assertion a caller writes.
   expect(screen.getByRole('option', { name: 'Alpha' })).toHaveAttribute(
     'aria-selected',
-    'true',
+    'true'
   );
   expect(screen.getByRole('option', { name: 'Beta' })).toHaveAttribute(
     'aria-selected',
-    'false',
+    'false'
   );
 });
 
@@ -51,6 +51,6 @@ test('picking an option by its exact name selects it', () => {
   // Beta is now the selected one, and it is still called Beta.
   expect(screen.getByRole('option', { name: 'Beta' })).toHaveAttribute(
     'aria-selected',
-    'true',
+    'true'
   );
 });
