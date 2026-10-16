@@ -3,6 +3,8 @@ import { splitEditorBlock, mergeEditorBlock } from './BlockEditor.transactions';
 import {
   BlockEditorProps,
   defaultBlockEditorLabels,
+  EditorMediaFile,
+  EditorMediaResult,
 } from './BlockEditor.props';
 import {
   Block,
@@ -14,13 +16,25 @@ import {
   parseDocument,
   replaceRange,
   safeEditorUrl,
+  safeImageUrl,
   transformBlock,
 } from './BlockEditor.model';
 
 type Snapshot = { value: string; selection: EditorSelection };
+type MediaDraft = {
+  target: Snapshot;
+  revision: number;
+  type: EditorMediaResult['type'];
+  url: string;
+  description: string;
+  phase: 'idle' | 'picking' | 'loading' | 'error' | 'stale';
+  file?: EditorMediaFile;
+  error?: string;
+};
 type Proposal = {
   scope: 'selection' | 'section';
   target: Snapshot;
+  origin: EditorSelection;
   revision: number;
   fragment: string;
   prompt: string;
@@ -51,6 +65,19 @@ export function useBlockEditorState(props: BlockEditorProps) {
   const [link, setLink] = useState('');
   const [message, setMessage] = useState('');
   const [ai, setAi] = useState<Proposal | null>(null);
+  const [media, setMedia] = useState<MediaDraft | null>(null);
+  const mediaRef = useRef<MediaDraft | null>(null);
+  const mediaRequest = useRef(0);
+  const mediaAbort = useRef<AbortController | null>(null);
+  const updateMedia = (next: MediaDraft | null) => {
+    mediaRef.current = next;
+    setMedia(next);
+  };
+  const abortMedia = () => {
+    mediaRequest.current++;
+    mediaAbort.current?.abort();
+    mediaAbort.current = null;
+  };
   const [historyVersion, setHistoryVersion] = useState(0);
   const labels = { ...defaultBlockEditorLabels, ...props.labels };
   const locked = !!(props.isDisabled || props.isReadOnly);
@@ -76,6 +103,7 @@ export function useBlockEditorState(props: BlockEditorProps) {
     return () => {
       mounted.current = false;
       request.current++;
+      abortMedia();
     };
   }, []);
 
@@ -103,6 +131,10 @@ export function useBlockEditorState(props: BlockEditorProps) {
     setRestoreVersion((version) => version + 1);
   };
   const install = (next: Snapshot, restore = true, editedId?: string) => {
+    if (mediaRef.current) {
+      abortMedia();
+      updateMedia({ ...mediaRef.current, phase: 'stale', error: undefined });
+    }
     const nextDocument = parseDocument(
       next.value,
       parsed.current.blocks,
@@ -132,6 +164,7 @@ export function useBlockEditorState(props: BlockEditorProps) {
     setCommandId(null);
     setLinkOpen(false);
     linkTarget.current = null;
+    updateMedia(null);
     setActiveId(null);
     setHistoryVersion((v) => v + 1);
   }, [props.value]);
@@ -143,6 +176,8 @@ export function useBlockEditorState(props: BlockEditorProps) {
     setAi(null);
     setCommandId(null);
     setLinkOpen(false);
+    abortMedia();
+    updateMedia(null);
   }, [locked]);
 
   const commit = (
@@ -319,6 +354,7 @@ export function useBlockEditorState(props: BlockEditorProps) {
   };
   const openLink = () => {
     if (locked) return;
+    if (mediaRef.current) closeMedia(false);
     linkTarget.current = {
       value: current.current.value,
       selection: { ...current.current.selection },
@@ -336,6 +372,195 @@ export function useBlockEditorState(props: BlockEditorProps) {
     setMessage('');
     if (restore && target?.value === current.current.value)
       restoreSelection(target.selection);
+  };
+  const closeMedia = (restore = true) => {
+    const target = mediaRef.current?.target;
+    abortMedia();
+    updateMedia(null);
+    holdSelection.current = false;
+    if (restore && target?.value === current.current.value)
+      restoreSelection(target.selection);
+  };
+  const openMedia = () => {
+    if (locked || mediaRef.current) return;
+    closeLink(false);
+    request.current++;
+    setAi(null);
+    holdSelection.current = true;
+    updateMedia({
+      target: {
+        value: current.current.value,
+        selection: { ...current.current.selection },
+      },
+      revision: revision.current,
+      type: 'image',
+      url: '',
+      description: '',
+      phase: 'idle',
+    });
+  };
+  const changeMedia = (
+    fields: Partial<Pick<MediaDraft, 'url' | 'description' | 'type'>>
+  ) => {
+    const draft = mediaRef.current;
+    if (
+      locked ||
+      !draft ||
+      ['loading', 'picking', 'stale'].includes(draft.phase)
+    )
+      return;
+    updateMedia({
+      ...draft,
+      ...fields,
+      phase: 'idle',
+      error: undefined,
+      file: undefined,
+    });
+  };
+  const mediaIsCurrent = (draft: MediaDraft) =>
+    mounted.current &&
+    !callbacks.current.isDisabled &&
+    !callbacks.current.isReadOnly &&
+    draft.revision === revision.current &&
+    draft.target.value === current.current.value &&
+    mediaRef.current === draft;
+  const insertMedia = (
+    result?: EditorMediaResult,
+    draft = mediaRef.current
+  ) => {
+    if (
+      !draft ||
+      !mediaIsCurrent(draft) ||
+      draft.phase === 'stale' ||
+      (!result && ['loading', 'picking'].includes(draft.phase))
+    )
+      return;
+    const url = (result?.url ?? draft.url).trim();
+    const type = result?.type ?? draft.type;
+    if (!safeImageUrl(url) || !['image', 'video'].includes(type)) {
+      updateMedia({ ...draft, phase: 'error', error: labels.invalidMedia });
+      return;
+    }
+    const caption = (draft.description || draft.file?.name || type)
+      .replace(/[\r\n]+/g, ' ')
+      .replace(/[\\`*{}\[\]()#+.!_>~|]/g, '\\$&');
+    const destination = url.replace(
+      /[()"'<>]/g,
+      (character) => `%${character.charCodeAt(0).toString(16).toUpperCase()}`
+    );
+    const syntax =
+      type === 'image'
+        ? `![${caption}](${destination})`
+        : `[${caption}](${destination} "video")`;
+    const target = draft.target.selection;
+    const before = draft.target.value.slice(0, target.start);
+    const after = draft.target.value.slice(target.end);
+    // Video syntax is a standalone paragraph; surrounding source is preserved exactly.
+    const text =
+      type === 'video'
+        ? `${
+            before && !before.endsWith('\n\n')
+              ? before.endsWith('\n')
+                ? '\n'
+                : '\n\n'
+              : ''
+          }${syntax}${
+            after && !after.startsWith('\n\n')
+              ? after.startsWith('\n')
+                ? '\n'
+                : '\n\n'
+              : ''
+          }`
+        : syntax;
+    closeMedia(false);
+    replace(text, target);
+  };
+  const uploadFile = async (file: EditorMediaFile, pickedRequest?: number) => {
+    let draft = mediaRef.current;
+    const upload = callbacks.current.uploadMedia;
+    if (
+      !draft ||
+      !upload ||
+      !mediaIsCurrent(draft) ||
+      (pickedRequest === undefined &&
+        ['loading', 'picking'].includes(draft.phase)) ||
+      (pickedRequest !== undefined && pickedRequest !== mediaRequest.current)
+    )
+      return;
+    const type = /^(image|video)\//.exec(file.type)?.[1] as
+      | EditorMediaResult['type']
+      | undefined;
+    if (!type) {
+      updateMedia({ ...draft, phase: 'error', error: labels.invalidMedia });
+      return;
+    }
+    const id = ++mediaRequest.current;
+    const controller = new AbortController();
+    mediaAbort.current = controller;
+    draft = { ...draft, file, type, phase: 'loading', error: undefined };
+    updateMedia(draft);
+    try {
+      const result = await upload(file, { signal: controller.signal });
+      if (
+        controller.signal.aborted ||
+        id !== mediaRequest.current ||
+        !mediaIsCurrent(draft)
+      )
+        return;
+      if (
+        !result ||
+        result.type !== type ||
+        typeof result.url !== 'string' ||
+        !safeImageUrl(result.url)
+      ) {
+        updateMedia({ ...draft, phase: 'error', error: labels.invalidMedia });
+        return;
+      }
+      insertMedia(result, draft);
+    } catch {
+      if (
+        !controller.signal.aborted &&
+        id === mediaRequest.current &&
+        mediaIsCurrent(draft)
+      )
+        updateMedia({ ...draft, phase: 'error', error: labels.uploadError });
+    } finally {
+      if (mediaAbort.current === controller) mediaAbort.current = null;
+    }
+  };
+  const chooseMedia = async () => {
+    const draft = mediaRef.current;
+    const picker = callbacks.current.pickMedia;
+    if (
+      !picker ||
+      !callbacks.current.uploadMedia ||
+      !draft ||
+      !mediaIsCurrent(draft) ||
+      ['loading', 'picking'].includes(draft.phase)
+    )
+      return;
+    const id = ++mediaRequest.current;
+    const pending: MediaDraft = {
+      ...draft,
+      phase: 'picking',
+      error: undefined,
+    };
+    updateMedia(pending);
+    try {
+      const file = await picker();
+      if (id !== mediaRequest.current || !mediaIsCurrent(pending)) return;
+      if (!file) updateMedia({ ...pending, phase: 'idle' });
+      else await uploadFile(file, id);
+    } catch {
+      if (id === mediaRequest.current && mediaIsCurrent(pending))
+        updateMedia({ ...pending, phase: 'error', error: labels.uploadError });
+    }
+  };
+  const cancelMediaUpload = () => {
+    const draft = mediaRef.current;
+    if (!draft) return;
+    abortMedia();
+    updateMedia({ ...draft, phase: 'idle', error: undefined });
   };
   const format = (kind: Inline['kind'], url?: string) => {
     if (locked) return;
@@ -378,6 +603,7 @@ export function useBlockEditorState(props: BlockEditorProps) {
   };
   const openAi = (scope: 'selection' | 'section') => {
     if (locked || !callbacks.current.generate) return;
+    if (mediaRef.current) closeMedia(false);
     const selected =
       scope === 'section'
         ? { start: 0, end: current.current.value.length }
@@ -386,21 +612,31 @@ export function useBlockEditorState(props: BlockEditorProps) {
       setMessage(labels.selectionRequired);
       return;
     }
+    closeLink(false);
+    holdSelection.current = true;
     request.current++;
     setAi({
       scope,
       target: { value: current.current.value, selection: { ...selected } },
+      origin: { ...current.current.selection },
       revision: revision.current,
       fragment: current.current.value.slice(selected.start, selected.end),
       prompt: '',
       state: 'prompt',
     });
   };
-  const closeAi = () => {
+  const closeAi = (restore = true) => {
+    const proposal = generation.current;
     request.current++;
+    generation.current = null;
     setAi(null);
-    restoreRequested.current = true;
-    setRestoreVersion((v) => v + 1);
+    holdSelection.current = false;
+    if (
+      restore &&
+      proposal?.target.value === current.current.value &&
+      proposal.revision === revision.current
+    )
+      restoreSelection(proposal.origin);
   };
   const runAi = async () => {
     const proposal = generation.current;
@@ -439,7 +675,7 @@ export function useBlockEditorState(props: BlockEditorProps) {
     )
       return;
     replace(proposal.result, proposal.target.selection);
-    closeAi();
+    closeAi(false);
   };
   const toggleSource = () => {
     setManualSource((previous) => !previous);
@@ -468,6 +704,14 @@ export function useBlockEditorState(props: BlockEditorProps) {
     linkOpen,
     openLink,
     closeLink,
+    media,
+    openMedia,
+    closeMedia,
+    changeMedia,
+    insertMedia,
+    uploadFile,
+    chooseMedia,
+    cancelMediaUpload,
     link,
     setLink,
     message,

@@ -342,3 +342,195 @@ test.each(['isDisabled', 'isReadOnly'] as const)(
     expect(screen.queryByRole('dialog')).toBeNull();
   }
 );
+
+test('AI editing uses the same anchored opaque popover as link editing', () => {
+  const change = vi.fn();
+  render(
+    <BlockEditor
+      label="Editor"
+      defaultValue={'Keep\n\nSelect me\n\nTail'}
+      generate={async () => 'Proposal'}
+      onChange={change}
+    />
+  );
+  caret(fields()[1], 0, 6);
+  fireEvent.click(
+    screen.getByRole('button', { name: 'Edit document with AI' })
+  );
+  const instruction = screen.getByRole('textbox', {
+    name: 'Describe the change',
+  });
+  expect(instruction).toBeInTheDocument();
+  expect(change).not.toHaveBeenCalled();
+  const popover = instruction.closest('[data-editor-selection-toolbar]');
+  expect(popover).not.toBeNull();
+  expect(popover).toHaveStyle({
+    position: 'fixed',
+    left: '100px',
+    borderWidth: '1px',
+  });
+  // JSDOM does not resolve the design system's CSS-variable colors.
+  expect(popover).toHaveClass('bcr-var--color-white');
+  fireEvent.keyDown(instruction, { key: 'Escape' });
+  expect(
+    screen.queryByRole('textbox', { name: 'Describe the change' })
+  ).toBeNull();
+  expect(readEditorSelection(fields()[1])).toEqual({ start: 6, end: 12 });
+  expect(change).not.toHaveBeenCalled();
+});
+
+test('media popover keeps its captured target while URL/description fields own focus', () => {
+  const change = vi.fn();
+  render(
+    <BlockEditor
+      label="Editor"
+      defaultValue={'Keep\n\nSelect me\n\nTail'}
+      onChange={change}
+    />
+  );
+  caret(fields()[1], 0, 6);
+  fireEvent.click(
+    screen.getByRole('button', { name: 'Insert image or video' })
+  );
+  const dialog = screen.getByRole('dialog', { name: 'Insert image or video' });
+  expect(dialog).toHaveStyle({ position: 'fixed', left: '100px' });
+  const address = screen.getByRole('textbox', { name: 'Media address' });
+  expect(address).toHaveFocus();
+  expect(dialog).toHaveTextContent('switches this document to Markdown source');
+  document.getSelection()!.removeAllRanges();
+  fireEvent(document, new Event('selectionchange'));
+  fireEvent.change(address, { target: { value: '/safe.png' } });
+  fireEvent.change(
+    screen.getByRole('textbox', { name: 'Description / alternative text' }),
+    { target: { value: 'Caption' } }
+  );
+  fireEvent.submit(address.closest('form')!);
+  expect(change).toHaveBeenCalledExactlyOnceWith(
+    'Keep\n\n![Caption](/safe.png) me\n\nTail'
+  );
+  expect(screen.queryByRole('dialog')).toBeNull();
+});
+
+test('AI popover follows scroll/resize and reclamps after its proposal grows', () => {
+  let anchor = { top: 200, bottom: 220, left: 100, height: 20 };
+  let panel = { width: 240, height: 80 };
+  let resized: ResizeObserverCallback | undefined;
+  const disconnect = vi.fn();
+  vi.stubGlobal(
+    'ResizeObserver',
+    class {
+      constructor(callback: ResizeObserverCallback) {
+        resized = callback;
+      }
+      observe() {}
+      disconnect = disconnect;
+    }
+  );
+  const rect = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect');
+  rect.mockImplementation(function () {
+    return {
+      x: 0,
+      y: 0,
+      top: 0,
+      bottom: panel.height,
+      left: 0,
+      right: panel.width,
+      ...panel,
+      toJSON: () => ({}),
+    } as DOMRect;
+  });
+  vi.spyOn(Range.prototype, 'getBoundingClientRect').mockImplementation(
+    () =>
+      ({
+        ...anchor,
+        x: anchor.left,
+        y: anchor.top,
+        width: 100,
+        right: anchor.left + 100,
+        toJSON: () => ({}),
+      } as DOMRect)
+  );
+  try {
+    const mounted = render(
+      <BlockEditor
+        label="Editor"
+        defaultValue="Select me"
+        generate={async () => 'Proposal'}
+      />
+    );
+    caret(fields()[0], 0, 6);
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Edit document with AI' })
+    );
+    const dialog = screen.getByRole('dialog', { name: 'AI proposal' });
+    expect(dialog).toHaveStyle({
+      top: '112px',
+      left: '100px',
+      maxHeight: 'calc(100vh - 16px)',
+      overflow: 'auto',
+    });
+    anchor = { top: 10, bottom: 30, left: 100, height: 20 };
+    fireEvent.scroll(window);
+    expect(dialog).toHaveStyle({ top: '38px' });
+    anchor = {
+      top: 200,
+      bottom: 220,
+      left: window.innerWidth - 10,
+      height: 20,
+    };
+    fireEvent.resize(window);
+    expect(dialog).toHaveStyle({ left: `${window.innerWidth - 248}px` });
+    panel = { width: 240, height: window.innerHeight + 100 };
+    act(() => resized!([], {} as ResizeObserver));
+    expect(dialog).toHaveStyle({ top: '8px' });
+    mounted.unmount();
+    expect(disconnect).toHaveBeenCalled();
+  } finally {
+    vi.unstubAllGlobals();
+  }
+});
+
+test('AI prompt focus preserves the fragment; Discard restores it and outside dismissal preserves new focus', async () => {
+  const generate = vi.fn(async () => 'Replacement');
+  const change = vi.fn();
+  render(
+    <>
+      <BlockEditor
+        label="Editor"
+        defaultValue={'Keep\n\nSelect me\n\nTail'}
+        generate={generate}
+        onChange={change}
+      />
+      <button>Outside</button>
+    </>
+  );
+  caret(fields()[1], 0, 6);
+  fireEvent.click(
+    screen.getByRole('button', { name: 'Edit selection with AI' })
+  );
+  const prompt = screen.getByRole('textbox', { name: 'Describe the change' });
+  expect(prompt).toHaveFocus();
+  document.getSelection()!.removeAllRanges();
+  fireEvent(document, new Event('selectionchange'));
+  fireEvent.change(prompt, { target: { value: 'Improve' } });
+  await act(async () => {
+    fireEvent.click(screen.getByRole('button', { name: 'Generate' }));
+  });
+  expect(generate).toHaveBeenCalledExactlyOnceWith(
+    'Improve',
+    'Select',
+    'selection'
+  );
+  expect(change).not.toHaveBeenCalled();
+  fireEvent.click(screen.getByRole('button', { name: 'Discard' }));
+  expect(readEditorSelection(fields()[1])).toEqual({ start: 6, end: 12 });
+  fireEvent.click(
+    screen.getByRole('button', { name: 'Edit document with AI' })
+  );
+  const outside = screen.getByRole('button', { name: 'Outside' });
+  fireEvent.pointerDown(outside);
+  outside.focus();
+  expect(screen.queryByRole('dialog')).toBeNull();
+  expect(outside).toHaveFocus();
+  expect(change).not.toHaveBeenCalled();
+});

@@ -9,7 +9,9 @@ import { Markdown } from '@app-studio/components';
 export const Document = () => (
   <Markdown
     label="Notes du projet"
-    value={'# Mon document\n\nUn texte **en gras**, avec un [lien](https://example.com).'}
+    value={
+      '# Mon document\n\nUn texte **en gras**, avec un [lien](https://example.com).'
+    }
   />
 );
 ```
@@ -38,11 +40,11 @@ L'exemple du catalogue est accessible sur `/markdown` et relie l'éditeur à son
 
 ## Syntaxe prise en charge
 
-Le rendu couvre les paragraphes, titres de niveaux 1 à 3, listes à puces et numérotées avec indentation, citations, blocs de code délimités et tableaux à séparateurs `|`. Les tableaux conservent l'alignement de leurs colonnes et défilent horizontalement lorsqu'ils dépassent la largeur disponible.
+Le rendu couvre les paragraphes, titres de niveaux 1 à 6, séparateurs horizontaux, images, listes de tâches, listes à puces et numérotées avec indentation, citations, blocs de code délimités et tableaux à séparateurs `|`. Les tableaux conservent l'alignement de leurs colonnes et défilent horizontalement lorsqu'ils dépassent la largeur disponible.
 
-Le formatage en ligne comprend gras, italique, barré, code, liens et les extensions de l'éditeur : souligné avec `<u>…</u>` et saut de ligne avec `<br>`. Ces deux extensions sont interprétées comme du formatage connu ; aucun HTML fourni n'est injecté dans le DOM. Le code utilise une police monospace, sans exécution ni moteur de coloration.
+Le formatage en ligne comprend gras, italique, barré, code, liens avec destination parenthésée équilibrée et titre optionnel, sauts de ligne Markdown (deux espaces ou antislash en fin de ligne), et les extensions de l'éditeur : souligné avec `<u>…</u>` et saut de ligne avec `<br>`. Ces deux extensions sont interprétées comme du formatage connu ; aucun HTML fourni n'est injecté dans le DOM. Le code utilise une police monospace, sans exécution ni moteur de coloration.
 
-Ce composant couvre le même sous-ensemble que `BlockEditor`. Il n'implémente pas tout CommonMark ou MDX. Les images, titres de niveaux 4 à 6, listes de tâches, frontmatter, liens par référence, notes de bas de page, HTML/MDX et constructions de blocs imbriquées non prises en charge provoquent un affichage du **document entier en texte source**. Le message visible explique ce choix. La chaîne originale, y compris ses retours à la ligne, est conservée dans cet affichage ; aucune expression MDX, balise HTML ni URL dangereuse n'est exécutée.
+La lecture couvre davantage de syntaxes que l'édition visuelle. `BlockEditor` conserve son mode source pour les images, tâches, titres 4–6 et séparateurs afin de ne pas perdre leur syntaxe pendant une transaction. Le composant n'implémente pas tout CommonMark ou MDX. Frontmatter, liens par référence, notes de bas de page, HTML/MDX et constructions de blocs imbriquées non prises en charge provoquent un affichage du **document entier en texte source**. Le message visible explique ce choix. La chaîne originale, y compris ses retours à la ligne, est conservée dans cet affichage ; aucune expression MDX, balise HTML ni URL dangereuse n'est exécutée.
 
 Personnalisez le message avec `labels.sourceFallback` :
 
@@ -53,7 +55,10 @@ import { Markdown } from '@app-studio/components';
 export const PreservedSource = () => (
   <Markdown
     value={'<CustomComponent value={42} />'}
-    labels={{ sourceFallback: 'Syntaxe non prise en charge : affichage du texte source.' }}
+    labels={{
+      sourceFallback:
+        'Syntaxe non prise en charge : affichage du texte source.',
+    }}
   />
 );
 ```
@@ -62,7 +67,7 @@ export const PreservedSource = () => (
 
 Seuls les liens `http:`, `https:`, `mailto:`, `tel:` et les adresses relatives sont acceptés. Sur le web, ils sont des liens normaux, accessibles au clavier avec un focus visible. Sur React Native, les liens sont des textes pressables et s'ouvrent avec `Linking.openURL`. Si la plateforme refuse l'ouverture, le document reste affiché.
 
-`onLinkPress(url)` remplace la navigation par défaut. Utilisez-le notamment pour relier les adresses relatives à la navigation de votre application native, ou pour gérer vous-même les erreurs d'ouverture. Le callback n'est appelé qu'à l'activation du lien, une fois par activation.
+`onLinkPress(url)` remplace la navigation au clic par défaut. Utilisez-le notamment pour relier les adresses relatives à la navigation de votre application native, ou pour gérer vous-même les erreurs d'ouverture. Le callback n'est appelé qu'à l'activation du lien, une fois par activation.
 
 ```tsx
 import React from 'react';
@@ -71,20 +76,74 @@ import { Markdown } from '@app-studio/components';
 export const RoutedDocument = () => (
   <Markdown
     value={'[Ouvrir les notes](/notes)'}
-    onLinkPress={(url) => console.log('Navigation gérée par l’application', url)}
+    onLinkPress={(url) =>
+      console.log('Navigation gérée par l’application', url)
+    }
   />
 );
 ```
 
+`renderLink(url, children)` permet de remplacer entièrement un lien par du contenu applicatif. Retournez `undefined` pour le rendu sûr par défaut, ou `children` pour supprimer toute navigation, y compris le clic central et le menu contextuel. Les URL de référence avec un schéma personnalisé peuvent être rendues par ce callback après validation par l’application ; elles ne naviguent jamais par défaut. Les schémas exécutables ne sont jamais transmis au callback.
+
+## Images
+
+Les images utilisent leur texte alternatif et une URL http(s) ou relative. Les protocoles `data:`, `javascript:`, `file:` et les autres schémas non HTTP sont refusés. Une image refusée ou en erreur affiche son texte alternatif (ou sa destination si ce texte est vide). `allowImages={false}` affiche ce même texte sans charger de ressource ; utile pour un aperçu de contenu non fiable. Aucun SVG ou HTML n'est injecté comme balisage.
+
+Le web utilise un chargement différé et une largeur maximale de 100 %. Le rendu natif utilise une image contenue dans une zone de 240 × 160, y compris dans le texte ou les listes.
+
+## Vidéos
+
+Une vidéo utilise un paragraphe autonome : `[Description](https://example.com/clip.mp4 "video")`. Le titre exact `"video"` sert de marqueur portable ; dans un texte en ligne, une liste ou un tableau, ce lien reste un lien normal. Les liens vidéo ne sont pas reconnus automatiquement selon leur extension. Aucun HTML, iframe ou lecteur externe n'est exécuté.
+
+Sur le web, le lecteur utilise les contrôles natifs, `playsInline` et `preload="none"`, sans lecture automatique, avec une largeur adaptée au document et une légende visible. Une erreur ou une adresse refusée affiche la description, ou l'adresse si elle est vide. Seules les URL http(s) et relatives sûres sont acceptées, comme pour les images.
+
+Sur React Native, fournissez `renderVideo(url, caption)` pour votre lecteur applicatif. Sans ce callback (ou s'il retourne `undefined`), la vidéo reste un vrai lien accessible utilisant `onLinkPress` ou `Linking.openURL`. La bibliothèque n'ajoute pas de dépendance vidéo native.
+
+`allowVideos={false}` affiche seulement la description, sans lecteur, chargement, callback de rendu ou navigation. Pour un aperçu totalement inerte, combinez `allowVideos={false}`, `allowImages={false}` et `renderLink={(_url, children) => children}`. Un `onLinkPress` vide seul ne supprime pas les destinations des liens web.
+
+`BlockEditor` conserve ces vidéos en édition source afin d'éviter des transactions visuelles qui perdraient leur syntaxe.
+
+## Typing et streaming
+
+```tsx
+<Markdown
+  value={content}
+  typing={{ charsPerTick: 3, intervalMs: 16 }}
+  isStreaming={requestIsActive}
+  onTypingComplete={handleCompleted}
+/>
+```
+
+`typing` vaut `false` par défaut ; `true` utilise trois graphèmes toutes les 16 ms. Une valeur qui s’allonge reprend après le dernier graphème affiché, même après une pause réseau. Une valeur remplacée recommence l’animation. Pendant le flux, le dernier graphème attend le chunk suivant ou la fin pour ne pas couper un accent combiné ou une séquence emoji encore incomplète. `isStreaming` maintient le curseur pendant l’attente et retarde la complétion jusqu’à la fin du flux et du rattrapage. Le callback final n'est pas répété par de simples rendus React. Un bloc de code dont la clôture n'est pas encore arrivée reste du code ; les blocs précédents restent rendus.
+
+La préférence système de réduction des animations affiche immédiatement le texte. `Intl.Segmenter` évite de couper un emoji composé ou une lettre accentuée ; sans cette API, le composant affiche le texte immédiatement, sans animation de découpage. Les timers et abonnements sont libérés au démontage.
+
+Pour conserver une politique applicative de défilement ou de curseur, utilisez le même hook exporté et rendez `displayedText` avec un `Markdown` sans `typing` :
+
+```tsx
+const { displayedText, isTyping } = useMarkdownTyping(content, {
+  typing: true,
+  isStreaming: requestIsActive,
+  onTypingComplete: handleCompleted,
+});
+```
+
 ## Props et styles
 
-| Prop | Description |
-| --- | --- |
-| `value: string` | Document Markdown à afficher. |
-| `label?: string` | Nom accessible du document. |
-| `onLinkPress?: (url: string) => void` | Navigation fournie par l'application. |
-| `labels?: { sourceFallback?: string }` | Message de repli en texte source. |
-| `views` | Styles `container`, `block`, `source` et `notice`. |
+| Prop                                                                 | Description                                                 |
+| -------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `value: string`                                                      | Document Markdown à afficher.                               |
+| `label?: string`                                                     | Nom accessible du document.                                 |
+| `onLinkPress?: (url: string) => void`                                | Navigation fournie par l'application.                       |
+| `renderLink?: (url, children) => ReactNode`                          | Remplacement applicatif du lien, sans navigation implicite. |
+| `allowImages?: boolean`                                              | Charger les images sûres ; `true` par défaut.               |
+| `allowVideos?: boolean`                                              | Charger les vidéos sûres ; `false` garde leur description sans navigation. |
+| `renderVideo?: (url, caption) => ReactNode`                            | Lecteur applicatif optionnel ; `undefined` conserve le rendu par défaut. |
+| `typing?: boolean \| { charsPerTick?: number; intervalMs?: number }` | Révélation progressive optionnelle.                         |
+| `isStreaming?: boolean`                                              | Attente de contenu supplémentaire.                          |
+| `onTypingComplete?: () => void`                                      | Fin du flux et du rattrapage.                               |
+| `labels?: { sourceFallback?: string }`                               | Message de repli en texte source.                           |
+| `views`                                                              | Styles `container`, `block`, `source` et `notice`.          |
 
 Les props de vue App Studio s'appliquent au conteneur. `MarkdownProps` est exporté depuis `@app-studio/components`. Le modèle de blocs reste interne.
 
@@ -94,6 +153,8 @@ Sur React Native, le rendu utilise les primitives App Studio, sans WebView. Le c
 
 Les tests ciblés couvrent le rendu web sans édition, les mises à jour de props, l'isolation entre composants, le code inerte, les tableaux, l'indentation, les liens sûrs, le repli en source et les accents/emojis. Les tests de l'adaptateur natif utilisent des hôtes simulés et vérifient les textes en ligne, la police et les callbacks de navigation ; ils ne remplacent pas une vérification sur appareil.
 
-Les 74 tests ciblés du rendu Markdown et de l'éditeur passent, ainsi que les vérifications TypeScript et les builds du package web/native. L'aperçu en direct, les accents/emojis, le callback de lien et le code inerte ont été vérifiés dans le navigateur intégré de Codex.
+QA du 2026-10-16 : les campagnes ciblées sont vertes avec 203 tests de bibliothèque et 15 tests Startup ; la campagne de l'exemple typing passe 26/26. La preuve porte sur le runtime `0.11.9`, paquet `8c9e4033…`, et la source incluant la démo typing `bd7c4b…`.
 
-Les interactions réelles dans Chrome, Firefox, Safari, iOS et Android restent à vérifier pour ce composant. Le rendu des liens et des tableaux sur appareils constitue la principale limite de validation.
+Dans Chrome 155.0.8059.80, via CUA sur le catalogue local au port 3340, la première section « Démo typing » de `/markdown` a été observée partiellement révélée puis terminée. « Rejouer le typing », les formats, les accents et l'emoji famille avec ZWJ passent. La lecture vidéo réelle passe aussi : `readyState=4`, temps de lecture de 0,015 à 5,042 s, dimensions 960 × 540. Aucune erreur console n'a été observée pendant ce passage. Les preuves locales JPEG et GIF se trouvent dans le répertoire Startup ignoré `reports/scenarios/markdown-components-chrome/` ; le GIF contient 24 images sur 5,28 s en 1512 × 948.
+
+La preuve du pilote Lightpanda natif reste partielle, sans résultat de succès : les nouveaux parcours best/worst expirent à `open-media-panel`, le pilote ne prend pas en charge l'upload et `figcaption` n'est pas reconnu. Firefox, Safari, iOS et Android restent non vérifiés, ainsi que le vrai IME et le sélecteur de fichiers du système. La réduction des animations est couverte par les tests unitaires existants, sans émulation dans ce passage Chrome. Les démonstrations IA et upload utilisent des callbacks simulés ; elles ne valident aucun stockage durable.

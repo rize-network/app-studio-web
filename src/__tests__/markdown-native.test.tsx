@@ -81,3 +81,38 @@ test('native code uses the platform monospace font and unsafe source has no link
   expect(screen.queryByRole('link')).toBeNull();
   expect(container.querySelector('script,input,textarea')).toBeNull();
 });
+
+test('native standalone video uses safe navigation or an app renderer, and refusal is inert', () => {
+  const player = vi.fn((_url: string, caption: string) => (
+    <span>Player: {caption}</span>
+  ));
+  const { container, rerender } = render(
+    <MarkdownView value={'[Clip](/clip.mp4 "video")'} />
+  );
+  fireEvent.click(screen.getByRole('link', { name: 'Clip' }));
+  expect(Linking.openURL).toHaveBeenCalledExactlyOnceWith('/clip.mp4');
+  rerender(
+    <MarkdownView value={'[Clip](/clip.mp4 "video")'} renderVideo={player} />
+  );
+  expect(player).toHaveBeenCalledWith('/clip.mp4', 'Clip');
+  expect(screen.getByText('Player: Clip')).toBeInTheDocument();
+  player.mockClear();
+  rerender(
+    <MarkdownView
+      value={'[Clip](/clip.mp4 "video")'}
+      allowVideos={false}
+      renderVideo={player}
+    />
+  );
+  expect(screen.queryByRole('link')).toBeNull();
+  expect(player).not.toHaveBeenCalled();
+  expect(container.textContent).toBe('Clip');
+  rerender(
+    <MarkdownView
+      value={'[Bad](javascript:bad() "video")'}
+      renderVideo={player}
+    />
+  );
+  expect(screen.queryByRole('link')).toBeNull();
+  expect(player).not.toHaveBeenCalled();
+});

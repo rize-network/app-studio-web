@@ -1,20 +1,43 @@
-import React, { useMemo } from 'react';
-import { Text, Vertical, View } from 'app-studio';
+import React, { useMemo, useRef } from 'react';
+import { Animation, Text, Vertical, View } from 'app-studio';
 import { BlockContent } from '../../BlockEditor/BlockEditor/BlockEditor.content';
-import { parseDocument } from '../../BlockEditor/BlockEditor/BlockEditor.model';
+import {
+  DisplayBlock,
+  parseDocument,
+} from '../../BlockEditor/BlockEditor/BlockEditor.model';
 import { MarkdownProps } from './Markdown.props';
+import { useMarkdownTyping } from './useMarkdownTyping';
 
 export function MarkdownContent({
   value,
   label,
   onLinkPress,
+  renderLink,
+  allowImages = true,
+  allowVideos = true,
+  renderVideo,
+  typing,
+  isStreaming,
+  onTypingComplete,
   labels,
   views = {},
   native = false,
   codeFontFamily = 'monospace',
   ...props
 }: MarkdownProps & { native?: boolean; codeFontFamily?: string }) {
-  const document = useMemo(() => parseDocument(value), [value]);
+  const { displayedText, isTyping } = useMarkdownTyping(value, {
+    typing,
+    isStreaming,
+    onTypingComplete,
+  });
+  const previous = useRef<DisplayBlock[]>([]);
+  const document = useMemo(() => {
+    const parsed = parseDocument(displayedText, previous.current, undefined, {
+      display: true,
+    });
+    previous.current = parsed.blocks;
+    return parsed;
+  }, [displayedText]);
   return (
     <Vertical
       gap={12}
@@ -40,7 +63,7 @@ export function MarkdownContent({
                 })}
             {...views.source}
           >
-            {value}
+            {displayedText}
           </Text>
         </>
       ) : (
@@ -54,9 +77,28 @@ export function MarkdownContent({
                 codeFontFamily={codeFontFamily}
                 isDisplay
                 onLinkPress={onLinkPress}
+                renderLink={renderLink}
+                allowImages={allowImages}
+                allowVideos={allowVideos}
+                renderVideo={renderVideo}
               />
             </View>
           ))
+      )}
+      {isTyping && (
+        <View
+          as="span"
+          width={2}
+          height={16}
+          backgroundColor="color-gray-700"
+          {...(native
+            ? { accessibilityElementsHidden: true }
+            : { 'aria-hidden': true })}
+          animate={Animation.flash({
+            duration: '0.8s',
+            iterationCount: 'infinite',
+          })}
+        />
       )}
     </Vertical>
   );

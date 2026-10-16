@@ -8,6 +8,7 @@ import { TextArea } from '../../Form/TextArea/TextArea';
 import { BlockEditorProps } from './BlockEditor.props';
 import { BlockEditorState } from './BlockEditor.state';
 import { Inline } from './BlockEditor.model';
+import { BlockEditorUpload } from './BlockEditor.upload';
 
 export function BlockEditorControls({
   state: s,
@@ -96,6 +97,7 @@ export function BlockEditorControls({
         <>
           {button('undo', () => s.undo(), !s.canUndo)}
           {button('redo', () => s.undo(true), !s.canRedo)}
+          {button('media', s.openMedia)}
           {button(
             'source',
             s.toggleSource,
@@ -141,12 +143,14 @@ export function BlockEditorPanels({
   state: s,
   views,
   floating = false,
+  uploadEnabled = false,
 }: {
   state: BlockEditorState;
   views?: BlockEditorProps['views'];
   floating?: boolean;
+  uploadEnabled?: boolean;
 }) {
-  if (!s.ai && !s.linkOpen) return null;
+  if (!s.ai && !s.linkOpen && !s.media) return null;
   return (
     <Vertical
       padding={16}
@@ -156,6 +160,108 @@ export function BlockEditorPanels({
       borderRadius={12}
       {...views?.panel}
     >
+      {s.media && (
+        <Vertical
+          as={floating ? 'form' : undefined}
+          role="group"
+          aria-label={s.labels.media}
+          gap={8}
+          minWidth={floating ? 280 : undefined}
+          onSubmit={
+            floating
+              ? (event: React.FormEvent) => {
+                  event.preventDefault();
+                  if (!['loading', 'picking', 'stale'].includes(s.media!.phase))
+                    s.insertMedia();
+                }
+              : undefined
+          }
+        >
+          <Text>{s.labels.mediaSource}</Text>
+          <Horizontal gap={8}>
+            {(['image', 'video'] as const).map((type) => (
+              <Button
+                key={type}
+                type="button"
+                variant={s.media!.type === type ? 'solid' : 'outline'}
+                aria-pressed={s.media!.type === type}
+                isDisabled={
+                  s.locked ||
+                  ['loading', 'picking', 'stale'].includes(s.media!.phase)
+                }
+                onClick={() => s.changeMedia({ type })}
+              >
+                {s.labels[type]}
+              </Button>
+            ))}
+          </Horizontal>
+          <TextField
+            label={s.labels.mediaUrl}
+            value={s.media.url}
+            isAutoFocus
+            isDisabled={
+              s.locked ||
+              ['loading', 'picking', 'stale'].includes(s.media.phase)
+            }
+            onChange={(url) => s.changeMedia({ url })}
+          />
+          <TextField
+            label={s.labels.mediaDescription}
+            value={s.media.description}
+            isDisabled={
+              s.locked ||
+              ['loading', 'picking', 'stale'].includes(s.media.phase)
+            }
+            onChange={(description) => s.changeMedia({ description })}
+          />
+          {s.media.error && <Text role="alert">{s.media.error}</Text>}
+          {s.media.phase === 'stale' && (
+            <Text role="status">{s.labels.mediaStale}</Text>
+          )}
+          {['loading', 'picking'].includes(s.media.phase) ? (
+            <>
+              <Text role="status">
+                {s.media.phase === 'picking'
+                  ? s.labels.pickingMedia
+                  : s.labels.uploading}
+              </Text>
+              <Button type="button" onClick={s.cancelMediaUpload}>
+                {s.labels.cancelUpload}
+              </Button>
+            </>
+          ) : (
+            <Horizontal gap={8} flexWrap="wrap">
+              <Button
+                type={floating ? 'submit' : 'button'}
+                isDisabled={
+                  s.locked || s.media.phase === 'stale' || !s.media.url.trim()
+                }
+                onClick={floating ? undefined : () => s.insertMedia()}
+              >
+                {s.labels.apply}
+              </Button>
+              {uploadEnabled && (
+                <BlockEditorUpload
+                  state={s}
+                  disabled={s.locked || s.media.phase === 'stale'}
+                />
+              )}
+              {s.media.phase === 'error' && s.media.file && uploadEnabled && (
+                <Button
+                  type="button"
+                  isDisabled={s.locked}
+                  onClick={() => void s.uploadFile(s.media!.file!)}
+                >
+                  {s.labels.retry}
+                </Button>
+              )}
+            </Horizontal>
+          )}
+          <Button type="button" variant="ghost" onClick={() => s.closeMedia()}>
+            {s.labels.cancel}
+          </Button>
+        </Vertical>
+      )}
       {s.linkOpen && (
         <Vertical
           as={floating ? 'form' : undefined}
@@ -255,7 +361,7 @@ export function BlockEditorPanels({
                 ? s.labels.retry
                 : s.labels.generate}
             </Button>
-            <Button type="button" variant="ghost" onClick={s.closeAi}>
+            <Button type="button" variant="ghost" onClick={() => s.closeAi()}>
               {s.labels.discard}
             </Button>
           </Horizontal>

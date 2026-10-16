@@ -6,6 +6,8 @@
     "declarationMap": false,
     "outDir": "./dist/native",
     "rootDir": "./src",
+    // Keep React as a package import; its type lookup alias is not a runtime path.
+    "paths": { "src/*": ["./src/*"] },
     "types": ["node", "react", "react-native"]
   },
   "include": [
@@ -14,10 +16,5 @@
     "./src/pages/designSystem.page.tsx",
     "./src/types/*.d.ts"
   ],
-  "exclude": [
-    "./bot",
-    "**/examples/**",
-    "**/*.test.tsx",
-    "**/*.stories.tsx"
-  ]
+  "exclude": ["./bot", "**/examples/**", "**/*.test.tsx", "**/*.stories.tsx"]
 }

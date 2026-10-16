@@ -42,9 +42,16 @@ vi.mock('../components/ActionSheet/ActionSheet', () => ({
 }));
 vi.mock('../components/BlockEditor/BlockEditor/BlockEditor.controls', () => ({
   BlockEditorControls: ({ state }: any) => (
-    <button onClick={() => state.format('bold')}>Bold</button>
+    <>
+      <button onClick={() => state.format('bold')}>Bold</button>
+      <button onClick={state.openMedia}>Media</button>
+    </>
   ),
-  BlockEditorPanels: () => null,
+  BlockEditorPanels: ({ uploadEnabled }: any) => (
+    <span data-testid="native-upload-policy">
+      {uploadEnabled ? 'enabled' : 'hidden'}
+    </span>
+  ),
 }));
 vi.mock('../components/BlockEditor/BlockEditor/BlockEditor.content', () => ({
   BlockContent: ({ block }: any) => <span>{block.body}</span>,
@@ -158,4 +165,27 @@ test('native Enter splits prose and Backspace at the start merges it in one tran
   fireEvent.keyDown(second, { key: 'Backspace' });
   expect(change).toHaveBeenLastCalledWith('Hello world');
   expect(change).toHaveBeenCalledTimes(2);
+});
+
+test('native upload action requires both an uploader and a real picker adapter', () => {
+  const uploadMedia = vi.fn();
+  const { rerender } = render(
+    <NativeHost defaultValue="Keep" uploadMedia={uploadMedia} />
+  );
+  fireEvent.click(screen.getAllByText('Media')[0]);
+  expect(screen.getByTestId('native-upload-policy')).toHaveTextContent(
+    'hidden'
+  );
+  rerender(
+    <NativeHost
+      defaultValue="Keep"
+      uploadMedia={uploadMedia}
+      pickMedia={async () => null}
+    />
+  );
+  expect(screen.getByTestId('native-upload-policy')).toHaveTextContent(
+    'enabled'
+  );
+  expect(document.querySelector('input[type="file"]')).toBeNull();
+  expect(uploadMedia).not.toHaveBeenCalled();
 });

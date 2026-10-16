@@ -70,6 +70,7 @@ export * from './BlockEditor/BlockEditor';
 export * from './BlockEditor/BlockEditor/BlockEditor.props';
 export * from './Markdown/Markdown';
 export * from './Markdown/Markdown/Markdown.props';
+export * from './Markdown/Markdown/useMarkdownTyping';
 export * from './IconPicker/IconPicker';
 export * from './Gradient/Gradient';
 export * from './HoverCard/HoverCard';

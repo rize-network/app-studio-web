@@ -7,6 +7,8 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
+      // Export React package imports, never paths into this checkout's @types directory.
+      compilerOptions: { paths: { 'src/*': ['./src/*'] } },
       include: [
         'src/components',
         'src/design-system',

@@ -18,7 +18,7 @@ export const DocumentEditor = () => {
 
 Use `defaultValue` for an uncontrolled editor. `onChange` receives the Markdown string. Loading a different controlled `value` clears undo history and invalidates pending AI proposals; echoing the emitted value keeps the cursor and history.
 
-To display this value without editing controls and with activatable links, use `<Markdown value={markdown} />`. See [Markdown](./Markdown.mdx) for the shared syntax, native navigation and source fallback.
+To display this value without editing controls and with activatable links, use `<Markdown value={markdown} />`. See [Markdown](./Markdown.mdx) for display syntax, native navigation and source fallback. Read-only rendering supports additional syntax; that does not enable visual editing of it.
 
 ## Blocks and editing
 
@@ -85,6 +85,33 @@ export const SimulatedAIEditor = () => (
 
 The example is simulated and sends no network request. Your application supplies `generate(prompt, fragment, scope)`, returning `Promise<string>`; scope is `selection` or `section` (the whole editor). The library previews the result and requires Apply before changing the document. Errors, cancellation, empty responses and stale proposals preserve the current text. Without `generate`, AI actions are hidden.
 
+On web, document and selection AI use the same anchored, opaque popover as link editing, including source mode. The insertion/selection target stays frozen while the prompt has focus. The popover follows scrolling and resizing and reclamps when loading, errors or a proposal change its size. Escape or Discard restores the original selection; clicking outside dismisses without stealing focus. Apply keeps the selection produced by its undoable edit. Native retains the ActionSheet.
+
+The primary `/blockeditor` and `/markdown` catalog editors supply the same explicitly simulated callback. The document AI action is in the main toolbar; selection AI appears after selecting text (or in the source toolbar). To connect a real LLM, supply `generate` from your application's authenticated service and return only its proposed Markdown. Provider configuration, credentials, requests and authorization belong to the application; this component has no provider settings or hidden network calls.
+
+## Images, video and optional upload
+
+The media toolbar action opens an anchored panel on web and an ActionSheet on native. Choose image or video, a URL and a description. Images insert `![description](url)`; videos insert a standalone `[description](url "video")` paragraph. The panel explains before insertion that media uses source editing. Existing source, including code/table selections, is retained; syntax inserted inside code remains literal code. There is no atomic media editing surface.
+
+URLs work without an upload callback. To offer file selection on web, supply:
+
+```tsx
+<BlockEditor
+  value={markdown}
+  onChange={setMarkdown}
+  uploadMedia={async (file, { signal }) => {
+    // Your authenticated storage service; return a durable http(s) or relative URL.
+    return applicationUpload(file, { signal }); // { url, type: 'image' | 'video' }
+  }}
+/>
+```
+
+`EditorMediaFile` is a web `File` or a native `NativeMediaDescriptor` (`uri`, `name`, MIME `type`, optional `size`). `EditorMediaResult` contains `url` and `type: 'image' | 'video'`. These types are exported. On native, provide both `uploadMedia` and `pickMedia: () => Promise<EditorMediaFile | null>` using your application's real picker; `null` cancels normally. Without a picker the native upload button is hidden, and URL insertion remains available. No picker, storage vendor or runtime dependency is bundled.
+
+One selected image/video is uploaded at a time. Loading, Cancel, error and manual Retry are visible; a retry calls the callback again. A valid success inserts once at the selection captured before the panel opened, as one undoable change. Editing, external content replacement, locking, closing and unmounting invalidate the pending operation. Cancellation aborts its signal and ignores any late result. Echoing the same controlled content does not invalidate it. Rejected MIME types, invalid destinations and failures preserve the document. The application must enforce file/content limits and storage permissions; a client MIME label is not a security boundary. No placeholder, blob URL or selected file bytes are persisted by this component.
+
+The catalog uses a real user file selection with a **simulated upload callback**: selected bytes are never sent or stored. It waits briefly and inserts a fixed example image or video URL, regardless of the selected file's content. This demonstrates the callback and cancellation, not durable storage.
+
 ## React Native
 
 The same component and Markdown contract work on React Native. Inactive blocks render visually; the active block uses a native multiline input showing its Markdown markers. Menus and AI proposals open in an ActionSheet. Selection formatting operates inside the active input. Enter in prose uses the shared split command; Backspace at the start of the active Markdown input merges with the preceding block. Code and table inputs retain their source editing behavior. No DOM, browser editor or WebView is required.
@@ -104,3 +131,7 @@ The updated Cmd+A/C/X/V/Z/Shift+Z flow, formatting across blocks, floating toolb
 Chrome interactions were checked for typing, accents, formatting, history, block dragging, keyboard commands, AI preview/application and quick reactions. Firefox, Safari, iOS and Android were not verified in real browsers or devices. Real IME and native cursor/keyboard behavior still need platform validation.
 
 The live-gap behavior has DOM regression tests, including variable block heights and drag-image capture timing. Its latest real drag validation was interrupted when the host Mac locked; Chrome, Firefox and Safari gesture validation remains pending for this behavior.
+
+QA on 2026-10-16 added a bounded media/AI popover check in Chrome 155.0.8059.80 through CUA on the local catalog at port 3340, using runtime `0.11.9` package `8c9e4033…`. Media and AI selection, AI prompt/proposal, Apply/Undo, Escape and outside dismissal passed. Scroll and resize to 640 × 600 retained viewport clamping and the opaque bordered surface with its shadow. No console errors were observed during this pass. The targeted campaigns passed 203 library tests and 15 Startup tests; the typing example campaign passed 26/26. Local JPEG/GIF evidence is under Startup's ignored `reports/scenarios/markdown-components-chrome/` directory (24-frame GIF, 5.28 s, 1512 × 948).
+
+These checks used simulated AI/upload callbacks and do not validate durable storage or the OS file picker. The fresh native Lightpanda best/worst attempts timed out at `open-media-panel`; its driver lacks upload support and did not recognize `figcaption`, so that evidence remains partial rather than passed. This check did not revalidate drag gestures or real IME. Firefox, Safari, iOS and Android remain unverified for this increment; reduced motion retains existing unit coverage and was not emulated in Chrome.

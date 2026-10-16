@@ -1,6 +1,16 @@
 import React from 'react';
 import { ViewProps } from 'app-studio';
 
+export type NativeMediaDescriptor = {
+  uri: string;
+  name: string;
+  /** MIME type supplied by the application's picker. */
+  type: string;
+  size?: number;
+};
+export type EditorMediaFile = File | NativeMediaDescriptor;
+export type EditorMediaResult = { url: string; type: 'image' | 'video' };
+
 export interface BlockEditorProps
   extends Omit<ViewProps, 'onChange' | 'value' | 'defaultValue'> {
   value?: string;
@@ -10,6 +20,13 @@ export interface BlockEditorProps
   isDisabled?: boolean;
   isReadOnly?: boolean;
   onSave?: () => void;
+  /** Upload one user-selected file. The application owns storage and authorization. */
+  uploadMedia?: (
+    file: EditorMediaFile,
+    options: { signal: AbortSignal }
+  ) => Promise<EditorMediaResult>;
+  /** Native applications supply their real picker; null means user cancellation. */
+  pickMedia?: () => Promise<EditorMediaFile | null>;
   generate?: (
     prompt: string,
     fragment: string,
@@ -54,6 +71,22 @@ export const defaultBlockEditorLabels = {
   link: 'Link',
   linkUrl: 'Link address',
   invalidLink: 'Enter an http, https, mailto, tel or relative link.',
+  media: 'Insert image or video',
+  image: 'Image',
+  video: 'Video',
+  mediaUrl: 'Media address',
+  mediaDescription: 'Description / alternative text',
+  mediaSource:
+    'Inserting media switches this document to Markdown source editing.',
+  invalidMedia:
+    'Choose an image or video and a safe http, https or relative address.',
+  upload: 'Upload a file',
+  uploading: 'Uploading…',
+  pickingMedia: 'Choose a file…',
+  uploadError: 'Upload failed. Your document is unchanged.',
+  cancelUpload: 'Cancel upload',
+  mediaStale:
+    'The document has changed. Close this panel and choose the insertion point again.',
   undo: 'Undo',
   redo: 'Redo',
   source: 'Markdown source',

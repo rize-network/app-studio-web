@@ -13,7 +13,7 @@ import { TextArea } from '../../Form/TextArea/TextArea';
 import { Portal } from '../../Portal/Portal';
 import { DragHandleIcon } from '../../Icon/Icon';
 import { BlockContent } from './BlockEditor.content';
-import { BlockEditorControls, BlockEditorPanels } from './BlockEditor.controls';
+import { BlockEditorControls } from './BlockEditor.controls';
 import {
   readEditorSelection,
   restoreEditorSelection,
@@ -143,6 +143,8 @@ export function BlockEditorView({
     defaultValue: _default,
     onChange: _change,
     generate: _generate,
+    uploadMedia: _uploadMedia,
+    pickMedia: _pickMedia,
     onSave,
     label = s.labels.document,
     isDisabled,
@@ -170,7 +172,7 @@ export function BlockEditorView({
     !!props.generate
   );
   useLayoutEffect(() => {
-    if (!s.linkOpen || !host.current) {
+    if ((!s.linkOpen && !s.media && !s.ai) || !host.current) {
       setLinkAnchor(null);
       return;
     }
@@ -202,7 +204,7 @@ export function BlockEditorView({
       window.removeEventListener('scroll', update, true);
       window.removeEventListener('resize', update);
     };
-  }, [s.linkOpen]);
+  }, [s.linkOpen, !!s.media, !!s.ai]);
   const dragged = useRef<string | null>(null);
   const dragPreview = useRef<HTMLElement | null>(null);
   const dragFrame = useRef<number | null>(null);
@@ -451,6 +453,7 @@ export function BlockEditorView({
           s.setCommandId(null);
           if (s.linkOpen) s.closeLink();
           if (s.ai) s.closeAi();
+          if (s.media) s.closeMedia();
           setFloating(null);
         }
         keyboard.onKeyDown(event);
@@ -762,12 +765,11 @@ export function BlockEditorView({
           ))}
         </Vertical>
       )}
-      {(s.linkOpen ? linkAnchor : !s.source && floating) &&
-        !s.locked &&
-        !s.ai && (
+      {(s.linkOpen || s.media || s.ai ? linkAnchor : !s.source && floating) &&
+        !s.locked && (
           <Portal>
             <BlockEditorSelection
-              rect={(s.linkOpen ? linkAnchor : floating)!}
+              rect={(s.linkOpen || s.media || s.ai ? linkAnchor : floating)!}
               state={s}
               props={props}
               preserve={preserve}
@@ -788,7 +790,6 @@ export function BlockEditorView({
           },
         }))}
       />
-      {s.ai && <BlockEditorPanels state={s} views={views} />}
       {status}
     </Vertical>
   );

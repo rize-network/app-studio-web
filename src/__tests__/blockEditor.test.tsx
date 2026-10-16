@@ -463,3 +463,265 @@ test('unsupported HTML stays inert and original source is available', () => {
   expect(container.querySelector('script,img,iframe')).toBeNull();
   expect(onChange).not.toHaveBeenCalled();
 });
+
+const deferredMedia = <T,>() => {
+  let resolve!: (value: T) => void;
+  let reject!: (reason: unknown) => void;
+  const promise = new Promise<T>((done, fail) => {
+    resolve = done;
+    reject = fail;
+  });
+  return { promise, resolve, reject };
+};
+
+test('upload replaces captured selection once, escapes video syntax and preserves surrounding source/history', async () => {
+  const initial =
+    'Before REPLACE after\r\n\r\n```ts\r\nconst x = 1;\r\n```\r\n\r\n| A | B |\r\n| --- | --- |\r\n| 1 | 2 |';
+  const pending = deferredMedia<{ url: string; type: 'video' }>();
+  const uploadMedia = vi.fn().mockReturnValue(pending.promise);
+  const onChange = vi.fn();
+  const { result, rerender } = renderHook(
+    ({ value }) => useBlockEditorState({ value, uploadMedia, onChange }),
+    { initialProps: { value: initial } }
+  );
+  act(() => result.current.capture({ start: 7, end: 14 }));
+  act(() => result.current.openMedia());
+  act(() =>
+    result.current.changeMedia({
+      type: 'video',
+      description: String.raw`A [label] \ é`,
+    })
+  );
+  act(() => result.current.capture({ start: 0, end: 0 }));
+  const file = new File(['video'], 'clip.mp4', { type: 'video/mp4' });
+  let request!: Promise<void>;
+  act(() => {
+    request = result.current.uploadFile(file);
+    void result.current.uploadFile(file);
+  });
+  expect(uploadMedia).toHaveBeenCalledTimes(1);
+  expect(uploadMedia.mock.calls[0][0]).toBe(file);
+  expect(uploadMedia.mock.calls[0][1].signal).toBeInstanceOf(AbortSignal);
+  expect(onChange).not.toHaveBeenCalled();
+  rerender({ value: initial });
+  expect(uploadMedia.mock.calls[0][1].signal.aborted).toBe(false);
+  await act(async () => {
+    pending.resolve({ url: '/clip(1).mp4', type: 'video' });
+    await request;
+  });
+  const value = result.current.value;
+  expect(value.startsWith('Before \n\n')).toBe(true);
+  expect(value.endsWith(initial.slice(14))).toBe(true);
+  expect(value).toContain('/clip%281%29.mp4 "video")');
+  const video = value.split('\n\n')[1];
+  expect(
+    parseInline(video, 0, 0, true)[0]
+      .children?.map((part) => part.text)
+      .join('')
+  ).toBe(String.raw`A [label] \ é`);
+  expect(result.current.source).toBe(true);
+  expect(onChange).toHaveBeenCalledTimes(1);
+  rerender({ value });
+  act(() => result.current.undo());
+  expect(result.current.value).toBe(initial);
+  expect(result.current.selection).toMatchObject({ start: 0, end: 0 });
+  act(() => result.current.undo(true));
+  expect(result.current.value).toBe(value);
+});
+
+test.each([
+  'close',
+  'cancel',
+  'external',
+  'edit',
+  'disabled',
+  'readOnly',
+  'unmount',
+])('late upload cannot mutate after %s', async (interrupt) => {
+  const pending = deferredMedia<{ url: string; type: 'image' }>();
+  const uploadMedia = vi.fn().mockReturnValue(pending.promise);
+  const onChange = vi.fn();
+  const { result, rerender, unmount } = renderHook(
+    ({ value, isDisabled, isReadOnly }) =>
+      useBlockEditorState({
+        value,
+        isDisabled,
+        isReadOnly,
+        uploadMedia,
+        onChange,
+      }),
+    {
+      initialProps: { value: 'Original', isDisabled: false, isReadOnly: false },
+    }
+  );
+  act(() => result.current.openMedia());
+  let request!: Promise<void>;
+  act(() => {
+    request = result.current.uploadFile({
+      uri: 'file:///picked.png',
+      name: 'picked.png',
+      type: 'image/png',
+    });
+  });
+  const signal = uploadMedia.mock.calls[0][1].signal;
+  if (interrupt === 'close') act(() => result.current.closeMedia());
+  if (interrupt === 'cancel') act(() => result.current.cancelMediaUpload());
+  if (interrupt === 'external')
+    rerender({ value: 'External', isDisabled: false, isReadOnly: false });
+  if (interrupt === 'edit')
+    act(() => result.current.replace('Edit', { start: 0, end: 8 }));
+  if (interrupt === 'disabled')
+    rerender({ value: 'Original', isDisabled: true, isReadOnly: false });
+  if (interrupt === 'readOnly')
+    rerender({ value: 'Original', isDisabled: false, isReadOnly: true });
+  if (interrupt === 'unmount') unmount();
+  expect(signal.aborted).toBe(true);
+  const value = result.current.value;
+  const count = onChange.mock.calls.length;
+  await act(async () => {
+    pending.resolve({ url: '/picked.png', type: 'image' });
+    await request;
+  });
+  expect(result.current.value).toBe(value);
+  expect(onChange).toHaveBeenCalledTimes(count);
+});
+
+test('picker cancellation, upload error and retry use fresh attempts without prior mutation', async () => {
+  const descriptor = {
+    uri: 'file:///native.mp4',
+    name: 'native.mp4',
+    type: 'video/mp4',
+  };
+  const pickMedia = vi
+    .fn()
+    .mockResolvedValueOnce(null)
+    .mockResolvedValue(descriptor);
+  const uploadMedia = vi
+    .fn()
+    .mockRejectedValueOnce(new Error('offline'))
+    .mockResolvedValue({ url: '/native.mp4', type: 'video' });
+  const onChange = vi.fn();
+  const { result } = renderHook(() =>
+    useBlockEditorState({
+      defaultValue: 'Keep',
+      pickMedia,
+      uploadMedia,
+      onChange,
+    })
+  );
+  act(() => result.current.openMedia());
+  await act(() => result.current.chooseMedia());
+  expect(result.current.media?.phase).toBe('idle');
+  expect(uploadMedia).not.toHaveBeenCalled();
+  await act(() => result.current.chooseMedia());
+  expect(uploadMedia.mock.calls[0][0]).toBe(descriptor);
+  expect(result.current.media?.phase).toBe('error');
+  expect(result.current.value).toBe('Keep');
+  expect(onChange).not.toHaveBeenCalled();
+  const firstSignal = uploadMedia.mock.calls[0][1].signal;
+  await act(() => result.current.uploadFile(result.current.media!.file!));
+  expect(uploadMedia.mock.calls[1][1].signal).not.toBe(firstSignal);
+  expect(
+    parseInline(result.current.value.split('\n\n')[0], 0, 0, true)[0]
+      .children?.map((part) => part.text)
+      .join('')
+  ).toBe('native.mp4');
+  expect(onChange).toHaveBeenCalledTimes(1);
+});
+
+test.each([
+  null,
+  { url: 'javascript:bad()', type: 'image' },
+  { url: '/safe.png', type: 'video' },
+  { url: 3, type: 'image' },
+])(
+  'invalid upload result is refused without document/history mutation: %j',
+  async (response) => {
+    const uploadMedia = vi.fn().mockResolvedValue(response);
+    const change = vi.fn();
+    const { result } = renderHook(() =>
+      useBlockEditorState({
+        defaultValue: 'Original',
+        uploadMedia,
+        onChange: change,
+      })
+    );
+    act(() => result.current.openMedia());
+    await act(() =>
+      result.current.uploadFile(new File(['x'], 'x.png', { type: 'image/png' }))
+    );
+    expect(result.current.value).toBe('Original');
+    expect(result.current.media?.phase).toBe('error');
+    expect(result.current.canUndo).toBe(false);
+    expect(change).not.toHaveBeenCalled();
+  }
+);
+
+test('cancelled native picker and stale pending upload cannot target a reopened panel', async () => {
+  const picker = deferredMedia<{ uri: string; name: string; type: string }>();
+  const uploadMedia = vi
+    .fn()
+    .mockResolvedValue({ url: '/image.png', type: 'image' });
+  const { result } = renderHook(() =>
+    useBlockEditorState({
+      defaultValue: 'Keep',
+      pickMedia: () => picker.promise,
+      uploadMedia,
+    })
+  );
+  act(() => result.current.openMedia());
+  let request!: Promise<void>;
+  act(() => {
+    request = result.current.chooseMedia();
+  });
+  act(() => {
+    result.current.closeMedia();
+    result.current.openMedia();
+  });
+  await act(async () => {
+    picker.resolve({
+      uri: 'file:///old.png',
+      name: 'old.png',
+      type: 'image/png',
+    });
+    await request;
+  });
+  expect(uploadMedia).not.toHaveBeenCalled();
+  expect(result.current.value).toBe('Keep');
+  expect(result.current.media?.phase).toBe('idle');
+});
+
+test('web file input passes the selected File once and undo restores the document', async () => {
+  const uploadMedia = vi
+    .fn()
+    .mockResolvedValue({ url: '/uploaded.png', type: 'image' });
+  const change = vi.fn();
+  const { container } = render(
+    <BlockEditor
+      label="Upload editor"
+      defaultValue="Keep"
+      uploadMedia={uploadMedia}
+      onChange={change}
+    />
+  );
+  expect(
+    screen.queryByRole('button', { name: 'Edit document with AI' })
+  ).toBeNull();
+  fireEvent.click(
+    screen.getByRole('button', { name: 'Insert image or video' })
+  );
+  const input = container.ownerDocument.querySelector('input[type="file"]')!;
+  expect(input).toHaveAttribute('accept', 'image/*,video/*');
+  const file = new File(['pixels'], 'selected.png', { type: 'image/png' });
+  await act(async () => {
+    fireEvent.change(input, { target: { files: [file] } });
+  });
+  expect(uploadMedia).toHaveBeenCalledTimes(1);
+  expect(uploadMedia.mock.calls[0][0]).toBe(file);
+  expect(change).toHaveBeenCalledTimes(1);
+  expect(screen.getByRole('textbox', { name: 'Upload editor' })).toHaveValue(
+    change.mock.calls[0][0]
+  );
+  fireEvent.click(screen.getByRole('button', { name: 'Undo' }));
+  expect(change).toHaveBeenLastCalledWith('Keep');
+});

@@ -28,6 +28,8 @@ export function BlockEditorView({
     defaultValue: _default,
     onChange: _change,
     generate: _generate,
+    uploadMedia: _uploadMedia,
+    pickMedia: _pickMedia,
     onSave: _save,
     label = s.labels.document,
     isDisabled,
@@ -255,15 +257,22 @@ export function BlockEditorView({
         }}
       />
       <ActionSheet
-        isOpen={!!s.ai || s.linkOpen}
-        title={s.ai ? s.labels.aiPanel : s.labels.link}
+        isOpen={!!s.ai || s.linkOpen || !!s.media}
+        title={
+          s.media ? s.labels.media : s.ai ? s.labels.aiPanel : s.labels.link
+        }
         onClose={() => {
           if (s.linkOpen) s.closeLink();
           if (s.ai) s.closeAi();
+          if (s.media) s.closeMedia();
         }}
         maxHeight="85%"
       >
-        <BlockEditorPanels state={s} views={views} />
+        <BlockEditorPanels
+          state={s}
+          views={views}
+          uploadEnabled={!!props.uploadMedia && !!props.pickMedia}
+        />
       </ActionSheet>
       {status}
     </Vertical>

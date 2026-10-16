@@ -25,6 +25,9 @@ export type Block = {
   bodyStart: number;
   language?: string;
 };
+export type DisplayBlock = Omit<Block, 'kind'> & {
+  kind: BlockKind | 'h4' | 'h5' | 'h6' | 'hr';
+};
 export type Inline = {
   kind:
     | 'text'
@@ -34,11 +37,13 @@ export type Inline = {
     | 'strikethrough'
     | 'code'
     | 'link'
+    | 'image'
     | 'break';
   start: number;
   end: number;
   text?: string;
   url?: string;
+  title?: string;
   contentStart?: number;
   children?: Inline[];
 };
@@ -64,7 +69,56 @@ export function safeEditorUrl(value: string): boolean {
 }
 
 /** Offsets always refer to the original Markdown, including escaped characters. */
-export function parseInline(value: string, offset = 0, depth = 0): Inline[] {
+function displayLink(value: string) {
+  const match = /^(!?)\[((?:\\.|[^\]\\\n])*)\]\(/.exec(value);
+  if (!match) return null;
+  let end = match[0].length;
+  const start = end;
+  let nesting = 0;
+  for (; end < value.length; end++) {
+    if (value[end] === '\\') {
+      end++;
+      continue;
+    }
+    if (value[end] === '(') nesting++;
+    else if (value[end] === ')') {
+      if (!nesting) break;
+      nesting--;
+    } else if (/\s/.test(value[end])) break;
+  }
+  const url = value.slice(start, end).replace(/\\([()\\])/g, '$1');
+  const suffix = /^(?:[ \t]+(?:"([^"\n]*)"|'([^'\n]*)'))?\)/.exec(
+    value.slice(end)
+  );
+  return suffix
+    ? {
+        image: !!match[1],
+        label: match[2],
+        url,
+        title: suffix[1] ?? suffix[2],
+        labelStart: match[1].length + 1,
+        length: end + suffix[0].length,
+      }
+    : null;
+}
+
+export function safeImageUrl(value: string): boolean {
+  return safeEditorUrl(value) && !/^(?:mailto|tel):/i.test(value.trim());
+}
+
+export function customReferenceUrl(value: string): boolean {
+  return (
+    /^[a-z][a-z\d+.-]*:\/\/[^\s\\]+$/i.test(value) &&
+    !/^(?:javascript|vbscript|data|file|blob):/i.test(value)
+  );
+}
+
+export function parseInline(
+  value: string,
+  offset = 0,
+  depth = 0,
+  display = false
+): Inline[] {
   if (depth > 20)
     return [
       { kind: 'text', text: value, start: offset, end: offset + value.length },
@@ -79,6 +133,16 @@ export function parseInline(value: string, offset = 0, depth = 0): Inline[] {
       end: offset + end,
     });
   while (i < value.length) {
+    const hardBreak = display && /^(?: {2,}|\\)\r?\n/.exec(value.slice(i));
+    if (hardBreak) {
+      nodes.push({
+        kind: 'break',
+        start: offset + i,
+        end: offset + i + hardBreak[0].length,
+      });
+      i += hardBreak[0].length;
+      continue;
+    }
     if (
       value[i] === '\\' &&
       /[\\`*{}\[\]()#+.!_>~|]/.test(value[i + 1] || '')
@@ -112,7 +176,31 @@ export function parseInline(value: string, offset = 0, depth = 0): Inline[] {
         continue;
       }
     }
-    const link = /^\[([^\]\n]+)\]\(([^\s()]*)\)/.exec(value.slice(i));
+    const richLink = display && displayLink(value.slice(i));
+    if (richLink) {
+      nodes.push({
+        kind: richLink.image ? 'image' : 'link',
+        start: offset + i,
+        end: offset + i + richLink.length,
+        url: richLink.url,
+        title: richLink.title,
+        text: richLink.image
+          ? richLink.label.replace(/\\([\\`*{}\[\]()#+.!_>~|])/g, '$1')
+          : undefined,
+        children: richLink.image
+          ? undefined
+          : parseInline(
+              richLink.label,
+              offset + i + richLink.labelStart,
+              depth + 1,
+              display
+            ),
+      });
+      i += richLink.length;
+      continue;
+    }
+    const link =
+      !display && /^\[([^\]\n]+)\]\(([^\s()]*)\)/.exec(value.slice(i));
     if (link) {
       nodes.push({
         kind: 'link',
@@ -169,7 +257,7 @@ export function parseInline(value: string, offset = 0, depth = 0): Inline[] {
       let children =
         kind === 'code'
           ? undefined
-          : parseInline(body, offset + i + open.length, depth + 1);
+          : parseInline(body, offset + i + open.length, depth + 1, display);
       if (open === '***')
         children = [
           {
@@ -212,24 +300,55 @@ export function parseInline(value: string, offset = 0, depth = 0): Inline[] {
 
 export function parseDocument(
   value: string,
-  previous: Block[] = [],
+  previous?: Block[],
   editedId?: string
-): { blocks: Block[]; sourceMode: boolean } {
+): { blocks: Block[]; sourceMode: boolean };
+export function parseDocument(
+  value: string,
+  previous: DisplayBlock[] | undefined,
+  editedId: string | undefined,
+  options: { display: true }
+): { blocks: DisplayBlock[]; sourceMode: boolean };
+export function parseDocument(
+  value: string,
+  previous: DisplayBlock[] = [],
+  editedId?: string,
+  { display = false }: { display?: boolean } = {}
+): { blocks: DisplayBlock[]; sourceMode: boolean } {
   const prose = value
-    .replace(/^ {0,3}(`{3,}|~{3,})[^\n]*\n[\s\S]*?^ {0,3}\1\s*$/gm, '')
+    .replace(
+      display
+        ? /^ {0,3}(`{3,}|~{3,})[^\n]*\n[\s\S]*?(?:^ {0,3}\1[ \t]*$|(?![\s\S]))/gm
+        : /^ {0,3}(`{3,}|~{3,})[^\n]*\n[\s\S]*?^ {0,3}\1\s*$/gm,
+      ''
+    )
     .replace(/`[^`\n]*`/g, '');
   // shortcut: visual mode covers the documented subset, extend it when another construct needs visual editing.
-  const unsupported =
-    /^(?:import |export |-{3,}\s*$|\+\+\+\s*$|\s*:::|\s*\[.+\]:|\s*#{4,}\s|\s*(?:\*\s*){3,}$|\s*(?:-\s*){3,}$|\s*(?:_\s*){3,}$|\s*={3,}\s*$)|!\[|\[\^[^\]]+\]|\$\$|\{[^}\n]*\}|<(?!(?:\/?u>|br\s*\/?>))\/?[A-Za-z!]|&(?:#\w+|\w+);/m.test(
+  const unsupported = display
+    ? /^(?:import |export |\s*:::|\s*\[.+\]:|\s*={3,}\s*$)|\[\^[^\]]+\]|\$\$|\{[^}\n]*\}|<(?!(?:\/?u>|br\s*\/?>))\/?[A-Za-z!]|&(?:#\w+|\w+);/m.test(
+        prose
+      ) ||
+      /^(?:---|\+\+\+)[ \t]*\r?\n[ \t]*[\w-]+:/.test(value) ||
+      /^(?:>[ \t]*>| {1,3}#{1,6}\s|#{1,6}\t|[ \t]{2,}(?:>|#{1,6}\s|\|))|^[ \t]{2,}(?:`{3,}|~{3,})/m.test(
+        prose
+      )
+    : /^(?:import |export |-{3,}\s*$|\+\+\+\s*$|\s*:::|\s*\[.+\]:|\s*#{4,}\s|\s*(?:\*\s*){3,}$|\s*(?:-\s*){3,}$|\s*(?:_\s*){3,}$|\s*={3,}\s*$)|!\[|\[\^[^\]]+\]|\$\$|\{[^}\n]*\}|<(?!(?:\/?u>|br\s*\/?>))\/?[A-Za-z!]|&(?:#\w+|\w+);/m.test(
+        prose
+      ) ||
+      /^[ \t]{2,}(?:`{3,}|~{3,})/m.test(value) ||
+      /^(?:>[ \t]*>| {1,3}#{1,6}\s|#{1,6}\t|[ \t]{2,}(?:>|#{1,6}\s|\|)|[ \t]*(?:[-*+] |\d+[.)] )\[[ xX]\])|(?: {2,}|\\)\r?$/m.test(
+        prose
+      ) ||
+      Array.from(prose.matchAll(/\[[^\]\n]+\]\(([^)\n]*)\)/g)).some(
+        (match) => /[\s(]/.test(match[1]) || !safeEditorUrl(match[1])
+      ) ||
       prose
-    ) ||
-    /^[ \t]{2,}(?:`{3,}|~{3,})/m.test(value) ||
-    /^(?:>[ \t]*>| {1,3}#{1,6}\s|#{1,6}\t|[ \t]{2,}(?:>|#{1,6}\s|\|)|[ \t]*(?:[-*+] |\d+[.)] )\[[ xX]\])|(?: {2,}|\\)\r?$/m.test(
-      prose
-    ) ||
-    Array.from(prose.matchAll(/\[[^\]\n]+\]\(([^)\n]*)\)/g)).some(
-      (match) => /[\s(]/.test(match[1]) || !safeEditorUrl(match[1])
-    );
+        .split(/\r?\n/)
+        .some((line) =>
+          parseInline(line.trim(), 0, 0, true).some(
+            (node) => node.kind === 'link' && node.title === 'video'
+          )
+        );
   const lines: Array<{ text: string; start: number; end: number }> = [];
   const re = /[^\r\n]+|\r\n|\n|\r/g;
   let start = 0;
@@ -245,11 +364,13 @@ export function parseDocument(
   }
   if (start < value.length || !lines.length)
     lines.push({ text: value.slice(start), start, end: value.length });
-  const blocks: Block[] = [];
+  const blocks: DisplayBlock[] = [];
   const used = new Set<string>();
   let sourceMode = unsupported;
   const list = /^\s*(?:[-*+] |\d+[.)] )/;
   const tableRule = /^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$/;
+  const thematicBreak =
+    /^ {0,3}(?:(?:\*[ \t]*){3,}|(?:-[ \t]*){3,}|(?:_[ \t]*){3,})$/;
   for (let i = 0; i < lines.length; ) {
     if (!lines[i].text.trim()) {
       const firstBlank = i;
@@ -283,13 +404,18 @@ export function parseDocument(
     }
     const first = lines[i];
     let last = i;
-    let kind: BlockKind = 'paragraph';
+    let kind: DisplayBlock['kind'] = 'paragraph';
     let prefix = 0;
     let language: string | undefined;
-    const heading = /^(#{1,3}) (.*)$/.exec(first.text);
+    const heading = (display ? /^(#{1,6}) (.*)$/ : /^(#{1,3}) (.*)$/).exec(
+      first.text
+    );
     const fence = /^ {0,3}(`{3,}|~{3,})([\w+-]*)\s*$/.exec(first.text);
-    if (heading) {
-      kind = `h${heading[1].length}` as BlockKind;
+    let unclosed = false;
+    if (display && thematicBreak.test(first.text)) {
+      kind = 'hr';
+    } else if (heading) {
+      kind = `h${heading[1].length}` as DisplayBlock['kind'];
       prefix = heading[1].length + 1;
     } else if (fence) {
       kind = 'codeBlock';
@@ -303,7 +429,8 @@ export function parseDocument(
       )
         last++;
       if (last >= lines.length) {
-        sourceMode = true;
+        if (!display) sourceMode = true;
+        unclosed = true;
         last = lines.length - 1;
       }
       prefix =
@@ -343,6 +470,7 @@ export function parseDocument(
         last + 1 < lines.length &&
         lines[last + 1].text.trim() &&
         !/^(?:#{1,6} |>|`{3}|~{3})/.test(lines[last + 1].text) &&
+        !(display && thematicBreak.test(lines[last + 1].text)) &&
         !list.test(lines[last + 1].text)
       )
         last++;
@@ -366,7 +494,10 @@ export function parseDocument(
     let body = raw.slice(prefix);
     if (kind === 'codeBlock')
       body = value
-        .slice(first.start + prefix, lines[last].start)
+        .slice(
+          first.start + prefix,
+          unclosed ? lines[last].end : lines[last].start
+        )
         .replace(/\r?\n$/, '');
     blocks.push({
       id,
