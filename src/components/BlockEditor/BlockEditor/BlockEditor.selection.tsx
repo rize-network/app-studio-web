@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { View, useTheme } from 'app-studio';
-import { BlockEditorControls } from './BlockEditor.controls';
+import { BlockEditorControls, BlockEditorPanels } from './BlockEditor.controls';
 import { BlockEditorProps } from './BlockEditor.props';
 import { BlockEditorState } from './BlockEditor.state';
 
@@ -33,15 +33,29 @@ export function BlockEditorSelection({
         )
       ),
     });
-  }, [rect]);
+  }, [rect, state.linkOpen, state.message]);
+  useEffect(() => {
+    if (!state.linkOpen) return;
+    const outside = (event: Event) => {
+      if (event.target instanceof Node && !ref.current?.contains(event.target))
+        state.closeLink(false);
+    };
+    document.addEventListener('pointerdown', outside, true);
+    return () => document.removeEventListener('pointerdown', outside, true);
+  }, [state.linkOpen]);
   return (
     <View
       ref={ref}
       data-editor-selection-toolbar="true"
+      data-editor-link-popover={state.linkOpen ? 'true' : undefined}
+      role={state.linkOpen ? 'dialog' : undefined}
+      aria-label={state.linkOpen ? state.labels.link : undefined}
       position="fixed"
       top={position.top}
       left={position.left}
       maxWidth="calc(100vw - 16px)"
+      maxHeight="calc(100vh - 16px)"
+      overflow="auto"
       backgroundColor={themeMode === 'dark' ? 'color-gray-900' : 'color-white'}
       borderWidth={1}
       borderStyle="solid"
@@ -51,12 +65,16 @@ export function BlockEditorSelection({
       padding={6}
       zIndex={1000}
     >
-      <BlockEditorControls
-        state={state}
-        props={props}
-        formatting
-        preserve={preserve}
-      />
+      {state.linkOpen ? (
+        <BlockEditorPanels state={state} views={props.views} floating />
+      ) : (
+        <BlockEditorControls
+          state={state}
+          props={props}
+          formatting
+          preserve={preserve}
+        />
+      )}
     </View>
   );
 }

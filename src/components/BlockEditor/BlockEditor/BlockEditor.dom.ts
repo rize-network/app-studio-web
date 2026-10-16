@@ -2,7 +2,10 @@ import { EditorSelection } from './BlockEditor.model';
 
 const sourcePositions = new WeakMap<Node, number[]>();
 
-export function readEditorSelection(host: HTMLElement): EditorSelection | null {
+export function readEditorSelection(
+  host: HTMLElement,
+  directional = false
+): EditorSelection | null {
   const selected = host.ownerDocument.getSelection();
   if (
     !selected?.anchorNode ||
@@ -11,53 +14,70 @@ export function readEditorSelection(host: HTMLElement): EditorSelection | null {
     !host.contains(selected.focusNode)
   )
     return null;
-  const offset = (node: Node, position: number): number | null => {
-    const element =
-      node.nodeType === 1 ? (node as Element) : node.parentElement;
-    const block = element?.closest<HTMLElement>('[data-block-start]');
-    const positions = sourcePositions.get(node);
-    if (positions?.[position] !== undefined)
-      return Number(block?.dataset.blockStart || 0) + positions[position];
-    const leaf = element?.closest<HTMLElement>('[data-source-start]');
-    if (leaf && host.contains(leaf)) {
-      const range = host.ownerDocument.createRange();
-      range.selectNodeContents(leaf);
-      range.setEnd(node, position);
-      return Number(leaf.dataset.sourceStart) + range.toString().length;
-    }
-    if (!block) return null;
-    if (node.nodeType === 1) {
-      const child = node.childNodes[position] || node.childNodes[position - 1];
-      if (child?.nodeType === 1) {
-        const element = child as HTMLElement;
-        const leaves = element.matches('[data-source-start]')
-          ? [element]
-          : Array.from(
-              element.querySelectorAll<HTMLElement>('[data-source-start]')
-            );
-        const after = position === node.childNodes.length;
-        const leaf = after ? leaves[leaves.length - 1] : leaves[0];
-        if (leaf)
-          return Number(
-            after ? leaf.dataset.sourceEnd : leaf.dataset.sourceStart
-          );
-      }
-    }
-    const leaves = Array.from(
-      block.querySelectorAll<HTMLElement>('[data-source-start]')
-    );
-    return position === 0
-      ? Number(leaves[0]?.dataset.sourceStart ?? block.dataset.blockStart)
-      : Number(
-          leaves[leaves.length - 1]?.dataset.sourceEnd ??
-            block.dataset.blockStart
-        );
-  };
-  const anchor = offset(selected.anchorNode, selected.anchorOffset);
-  const focus = offset(selected.focusNode, selected.focusOffset);
+  const anchor = editorSourceOffset(
+    host,
+    selected.anchorNode,
+    selected.anchorOffset
+  );
+  const focus = editorSourceOffset(
+    host,
+    selected.focusNode,
+    selected.focusOffset
+  );
   return anchor === null || focus === null
     ? null
-    : { start: Math.min(anchor, focus), end: Math.max(anchor, focus) };
+    : {
+        start: Math.min(anchor, focus),
+        end: Math.max(anchor, focus),
+        ...(directional && focus < anchor ? { backward: true } : {}),
+      };
+}
+
+export function editorSourceOffset(
+  host: HTMLElement,
+  node: Node,
+  position: number
+): number | null {
+  const element = node.nodeType === 1 ? (node as Element) : node.parentElement;
+  const block = element?.closest<HTMLElement>('[data-block-start]');
+  const positions = sourcePositions.get(node);
+  if (positions?.[position] !== undefined)
+    return Number(block?.dataset.blockStart || 0) + positions[position];
+  const leaf = element?.closest<HTMLElement>('[data-source-start]');
+  if (leaf && host.contains(leaf)) {
+    if (node.nodeType === 3 && leaf.childNodes.length === 1)
+      return Number(leaf.dataset.sourceStart) + position;
+    const range = host.ownerDocument.createRange();
+    range.selectNodeContents(leaf);
+    range.setEnd(node, position);
+    return Number(leaf.dataset.sourceStart) + range.toString().length;
+  }
+  if (!block) return null;
+  if (node.nodeType === 1) {
+    const child = node.childNodes[position] || node.childNodes[position - 1];
+    if (child?.nodeType === 1) {
+      const element = child as HTMLElement;
+      const leaves = element.matches('[data-source-start]')
+        ? [element]
+        : Array.from(
+            element.querySelectorAll<HTMLElement>('[data-source-start]')
+          );
+      const after = position === node.childNodes.length;
+      const leaf = after ? leaves[leaves.length - 1] : leaves[0];
+      if (leaf)
+        return Number(
+          after ? leaf.dataset.sourceEnd : leaf.dataset.sourceStart
+        );
+    }
+  }
+  const leaves = Array.from(
+    block.querySelectorAll<HTMLElement>('[data-source-start]')
+  );
+  return position === 0
+    ? Number(leaves[0]?.dataset.sourceStart ?? block.dataset.blockStart)
+    : Number(
+        leaves[leaves.length - 1]?.dataset.sourceEnd ?? block.dataset.blockStart
+      );
 }
 
 export function restoreEditorSelection(
@@ -85,6 +105,13 @@ export function restoreEditorSelection(
       }
     }
     if (!best) return null;
+    if (best.tagName === 'BR' && best.parentNode) {
+      const index = Array.from(best.parentNode.childNodes).indexOf(best);
+      return [
+        best.parentNode,
+        index + (position >= Number(best.dataset.sourceEnd) ? 1 : 0),
+      ];
+    }
     const text = best.firstChild;
     return text?.nodeType === 3
       ? [
@@ -106,13 +133,23 @@ export function restoreEditorSelection(
   range.setStart(...start);
   range.setEnd(...end);
   (
-    start[0].parentElement?.closest(
+    (selection.backward ? start : end)[0].parentElement?.closest(
       '[contenteditable="true"]'
     ) as HTMLElement | null
   )?.focus({ preventScroll: true });
   const selected = host.ownerDocument.getSelection();
-  selected?.removeAllRanges();
-  selected?.addRange(range);
+  if (selected?.setBaseAndExtent) {
+    const anchor = selection.backward ? end : start;
+    const focus = selection.backward ? start : end;
+    selected.setBaseAndExtent(...anchor, ...focus);
+  } else {
+    selected?.removeAllRanges();
+    selected?.addRange(range);
+    if (selection.backward && selected?.extend) {
+      selected.collapse(...end);
+      selected.extend(...start);
+    }
+  }
   return true;
 }
 
@@ -210,8 +247,8 @@ export function serializeEditorDom(root: HTMLElement): {
         'ol',
         'table',
       ].includes(tag) && node !== root;
-    if (block && output && !output.endsWith('\n\n'))
-      write(output.endsWith('\n') ? '\n' : '\n\n');
+    if (block && output && !output.endsWith(code ? '\n' : '\n\n'))
+      write(code || output.endsWith('\n') ? '\n' : '\n\n');
     if (/^h[123]$/.test(tag)) write('#'.repeat(Number(tag[1])) + ' ');
     if (tag === 'blockquote') write('> ');
     if (tag === 'li') {
@@ -247,7 +284,7 @@ export function serializeEditorDom(root: HTMLElement): {
       });
       return;
     }
-    if (wrap[tag] && element.textContent) write(wrap[tag][0]);
+    if (!code && wrap[tag] && element.textContent) write(wrap[tag][0]);
     const children = Array.from(node.childNodes);
     children.forEach((child, index) => {
       boundary(node, index);
@@ -259,9 +296,9 @@ export function serializeEditorDom(root: HTMLElement): {
       );
     });
     boundary(node, children.length);
-    if (wrap[tag] && element.textContent) write(wrap[tag][1]);
+    if (!code && wrap[tag] && element.textContent) write(wrap[tag][1]);
   };
-  walk(root);
+  walk(root, '', root.hasAttribute('data-code-block'));
   return {
     text: output,
     selection: {

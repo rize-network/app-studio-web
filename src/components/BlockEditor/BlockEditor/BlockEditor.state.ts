@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import { splitEditorBlock, mergeEditorBlock } from './BlockEditor.transactions';
 import {
   BlockEditorProps,
   defaultBlockEditorLabels,
@@ -63,6 +64,7 @@ export function useBlockEditorState(props: BlockEditorProps) {
   const revision = useRef(0);
   const restoreRequested = useRef(false);
   const holdSelection = useRef(false);
+  const linkTarget = useRef<Snapshot | null>(null);
   const request = useRef(0);
   const callbacks = useRef(props);
   callbacks.current = props;
@@ -81,12 +83,14 @@ export function useBlockEditorState(props: BlockEditorProps) {
     const bounded = {
       start: Math.max(0, Math.min(next.start, current.current.value.length)),
       end: Math.max(0, Math.min(next.end, current.current.value.length)),
+      ...(next.backward ? { backward: true } : {}),
     };
     if (bounded.end < bounded.start)
       [bounded.start, bounded.end] = [bounded.end, bounded.start];
     if (
       bounded.start === current.current.selection.start &&
-      bounded.end === current.current.selection.end
+      bounded.end === current.current.selection.end &&
+      !!bounded.backward === !!current.current.selection.backward
     )
       return;
     history.current.lastInput = 0;
@@ -127,12 +131,14 @@ export function useBlockEditorState(props: BlockEditorProps) {
     setAi(null);
     setCommandId(null);
     setLinkOpen(false);
+    linkTarget.current = null;
     setActiveId(null);
     setHistoryVersion((v) => v + 1);
   }, [props.value]);
   useEffect(() => {
     if (!locked) return;
     holdSelection.current = false;
+    linkTarget.current = null;
     request.current++;
     setAi(null);
     setCommandId(null);
@@ -195,6 +201,29 @@ export function useBlockEditorState(props: BlockEditorProps) {
       restore,
       block.id
     );
+  };
+  const breakBlock = (soft = false) => {
+    if (locked || manualSource || parsed.current.sourceMode) return false;
+    const result = splitEditorBlock(
+      current.current.value,
+      parsed.current.blocks,
+      current.current.selection,
+      soft
+    );
+    if (!result) return false;
+    commit(result.value, result.selection);
+    return true;
+  };
+  const mergeBackward = (id: string) => {
+    if (locked || manualSource || parsed.current.sourceMode) return false;
+    const result = mergeEditorBlock(
+      current.current.value,
+      parsed.current.blocks,
+      id
+    );
+    if (!result) return false;
+    commit(result.value, result.selection);
+    return true;
   };
   const undo = (redo = false) => {
     if (locked) return;
@@ -288,6 +317,26 @@ export function useBlockEditorState(props: BlockEditorProps) {
     );
     setCommandId(null);
   };
+  const openLink = () => {
+    if (locked) return;
+    linkTarget.current = {
+      value: current.current.value,
+      selection: { ...current.current.selection },
+    };
+    holdSelection.current = true;
+    setLink('');
+    setMessage('');
+    setLinkOpen(true);
+  };
+  const closeLink = (restore = true) => {
+    const target = linkTarget.current;
+    linkTarget.current = null;
+    holdSelection.current = false;
+    setLinkOpen(false);
+    setMessage('');
+    if (restore && target?.value === current.current.value)
+      restoreSelection(target.selection);
+  };
   const format = (kind: Inline['kind'], url?: string) => {
     if (locked) return;
     if (
@@ -295,6 +344,13 @@ export function useBlockEditorState(props: BlockEditorProps) {
       current.current.selection.start === current.current.selection.end
     )
       return;
+    if (kind === 'link' && linkTarget.current) {
+      if (linkTarget.current.value !== current.current.value) {
+        closeLink(false);
+        return;
+      }
+      capture(linkTarget.current.selection);
+    }
     if (kind === 'link' && !safeEditorUrl(url || '')) {
       setMessage(labels.invalidLink);
       return;
@@ -317,7 +373,7 @@ export function useBlockEditorState(props: BlockEditorProps) {
             url
           );
     commit(result.value, result.selection);
-    setLinkOpen(false);
+    if (kind === 'link') closeLink(false);
     setMessage('');
   };
   const openAi = (scope: 'selection' | 'section') => {
@@ -410,7 +466,8 @@ export function useBlockEditorState(props: BlockEditorProps) {
     setCommandId,
     closeCommand,
     linkOpen,
-    setLinkOpen,
+    openLink,
+    closeLink,
     link,
     setLink,
     message,
@@ -424,6 +481,8 @@ export function useBlockEditorState(props: BlockEditorProps) {
     commit,
     replace,
     editBlock,
+    breakBlock,
+    mergeBackward,
     undo,
     move,
     action,

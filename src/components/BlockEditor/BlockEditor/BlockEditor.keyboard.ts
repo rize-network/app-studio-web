@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { readEditorSelection } from './BlockEditor.dom';
+import { readEditorSelection, restoreEditorSelection } from './BlockEditor.dom';
+import { moveEditorSelection } from './BlockEditor.navigation';
 import { deletionRange, EditorSelection } from './BlockEditor.model';
 import { BlockEditorState } from './BlockEditor.state';
+import { mergeEditorBlock, splitEditorBlock } from './BlockEditor.transactions';
 
 /** Browser editing commands stay inside document fields, outside prompt/link inputs. */
 export function useBlockEditorKeyboard(
@@ -12,11 +14,13 @@ export function useBlockEditorKeyboard(
   hasAI = false
 ) {
   const all = useRef(false);
+  const preferredX = useRef<number | null>(null);
   const [selectedDocument, setSelectedDocument] = useState(false);
   const composition = useRef<EditorSelection | null>(null);
   const pendingInput = useRef<{ target: EditorSelection; text: string } | null>(
     null
   );
+  const pendingBoundary = useRef<ReturnType<typeof splitEditorBlock>>(null);
   const clearAll = () => {
     all.current = false;
     setSelectedDocument(false);
@@ -39,8 +43,10 @@ export function useBlockEditorKeyboard(
       s.current.current.selection.start === s.current.current.selection.end
     )
       clearAll();
+    preferredX.current = null;
     composition.current = null;
     pendingInput.current = null;
+    pendingBoundary.current = null;
   }, [s.value, s.source, s.locked]);
   const inputFor = (target: EventTarget | null) => {
     const input =
@@ -50,7 +56,12 @@ export function useBlockEditorKeyboard(
     return input && host.current?.contains(input) ? input : null;
   };
   const selection = (input?: HTMLElement | null) => {
-    if (all.current) return { start: 0, end: s.current.current.value.length };
+    if (all.current)
+      return {
+        start: 0,
+        end: s.current.current.value.length,
+        ...(s.current.current.selection.backward ? { backward: true } : {}),
+      };
     if (input?.tagName === 'TEXTAREA') {
       const field = input as HTMLTextAreaElement;
       const offset = Number(field.dataset.editorOffset || 0);
@@ -59,13 +70,49 @@ export function useBlockEditorKeyboard(
         end: offset + field.selectionEnd,
       };
     }
-    return host.current ? readEditorSelection(host.current) : null;
+    return host.current ? readEditorSelection(host.current, true) : null;
   };
   const acrossBlocks = (target: EditorSelection) =>
     all.current ||
     s.document.blocks.filter(
       (block) => target.start < block.end && target.end > block.start
     ).length > 1;
+  const boundaryTransaction = (
+    input: HTMLElement,
+    type: string,
+    target: EditorSelection
+  ) => {
+    if (s.source || input.tagName === 'TEXTAREA') return null;
+    if (type === 'insertParagraph' || type === 'insertLineBreak')
+      return splitEditorBlock(
+        s.current.current.value,
+        s.document.blocks,
+        target,
+        type === 'insertLineBreak'
+      );
+    const first = input.querySelector<HTMLElement>('[data-source-start]');
+    if (type === 'deleteContentBackward' && target.start === target.end) {
+      const item = Array.from(input.querySelectorAll<HTMLElement>('li')).find(
+        (row) =>
+          Number(
+            row.querySelector<HTMLElement>('[data-source-start]')?.dataset
+              .sourceStart
+          ) === target.start
+      );
+      if (target.start === Number(first?.dataset.sourceStart) || item)
+        return (
+          mergeEditorBlock(
+            s.current.current.value,
+            s.document.blocks,
+            input.dataset.blockId || '',
+            item && target.start !== Number(first?.dataset.sourceStart)
+              ? target.start
+              : undefined
+          ) ?? { value: s.current.current.value, selection: target }
+        );
+    }
+    return null;
+  };
   const capture = () => {
     const active = host.current?.ownerDocument.activeElement;
     if (active?.tagName === 'INPUT' || active?.tagName === 'TEXTAREA') {
@@ -74,6 +121,16 @@ export function useBlockEditorKeyboard(
         const next = selection(input);
         if (next) s.capture(next);
       }
+      return null;
+    }
+    const dom = host.current?.ownerDocument.getSelection();
+    if (
+      !dom?.anchorNode ||
+      !dom.focusNode ||
+      !host.current?.contains(dom.anchorNode) ||
+      !host.current.contains(dom.focusNode)
+    ) {
+      if (all.current) clearAll();
       return null;
     }
     const next = selection();
@@ -135,6 +192,13 @@ export function useBlockEditorKeyboard(
         'escape',
       ].includes(key)
     ) {
+      if (event.shiftKey && host.current) {
+        restoreEditorSelection(host.current, {
+          start: 0,
+          end: s.current.current.value.length,
+          ...(s.current.current.selection.backward ? { backward: true } : {}),
+        });
+      }
       clearAll();
       if (!event.shiftKey) {
         event.preventDefault();
@@ -147,8 +211,30 @@ export function useBlockEditorKeyboard(
           : last.end;
         s.restoreSelection({ start: position, end: position });
       }
-      return;
+      if (!event.shiftKey) return;
     }
+    if (
+      !s.source &&
+      !s.locked &&
+      !modifier &&
+      !event.altKey &&
+      input.tagName !== 'TEXTAREA' &&
+      ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key) &&
+      host.current
+    ) {
+      const moved = moveEditorSelection(
+        host.current,
+        event.key,
+        event.shiftKey,
+        preferredX.current
+      );
+      if (moved) {
+        event.preventDefault();
+        preferredX.current = moved.x;
+        s.capture(moved.selection);
+        return;
+      }
+    } else preferredX.current = null;
     if (s.locked) return;
     if (modifier) {
       if (key === 'z' || key === 'y') {
@@ -170,11 +256,27 @@ export function useBlockEditorKeyboard(
         );
       } else if (key === 'k') {
         event.preventDefault();
-        s.setLink('');
-        s.setLinkOpen(true);
+        s.openLink();
       }
       // C/X/V use the browser's clipboard events, including context-menu actions.
       return;
+    }
+    if (!event.altKey && target && ['enter', 'backspace'].includes(key)) {
+      const result = boundaryTransaction(
+        input,
+        key === 'enter'
+          ? event.shiftKey
+            ? 'insertLineBreak'
+            : 'insertParagraph'
+          : 'deleteContentBackward',
+        target
+      );
+      if (result) {
+        event.preventDefault();
+        s.commit(result.value, result.selection);
+        clearAll();
+        return;
+      }
     }
     if (
       input.tagName !== 'TEXTAREA' &&
@@ -218,6 +320,18 @@ export function useBlockEditorKeyboard(
       return;
     }
     const target = selection(input);
+    if (target) {
+      const result = boundaryTransaction(input, native.inputType, target);
+      if (result) {
+        s.capture(target);
+        if (native.cancelable) {
+          native.preventDefault();
+          s.commit(result.value, result.selection);
+          clearAll();
+        } else pendingBoundary.current = result;
+        return;
+      }
+    }
     if (!target || !acrossBlocks(target)) return;
     const text = native.inputType?.startsWith('delete')
       ? ''
@@ -243,6 +357,18 @@ export function useBlockEditorKeyboard(
     const input = inputFor(event.target);
     const native = event.nativeEvent as InputEvent;
     if (!input || s.locked || native.isComposing || composition.current) return;
+    const boundary =
+      pendingBoundary.current ??
+      boundaryTransaction(input, native.inputType, s.current.current.selection);
+    if (boundary) {
+      event.stopPropagation();
+      pendingBoundary.current = null;
+      if (boundary.value === s.current.current.value)
+        s.restoreSelection(boundary.selection);
+      else s.commit(boundary.value, boundary.selection);
+      clearAll();
+      return;
+    }
     if (
       native.inputType === 'historyUndo' ||
       native.inputType === 'historyRedo'
@@ -289,6 +415,7 @@ export function useBlockEditorKeyboard(
       clearAll();
     },
     onPointerDownCapture: (event: React.PointerEvent) => {
+      preferredX.current = null;
       if (inputFor(event.target)) clearAll();
     },
     onCompositionStartCapture: (event: React.CompositionEvent) => {

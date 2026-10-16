@@ -10,7 +10,11 @@ export type BlockKind =
   | 'quote'
   | 'codeBlock'
   | 'table';
-export type EditorSelection = { start: number; end: number };
+export type EditorSelection = {
+  start: number;
+  end: number;
+  backward?: boolean;
+};
 export type Block = {
   id: string;
   kind: BlockKind;
@@ -248,12 +252,19 @@ export function parseDocument(
   const tableRule = /^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$/;
   for (let i = 0; i < lines.length; ) {
     if (!lines[i].text.trim()) {
-      if (
-        blocks.length &&
-        (i === lines.length - 1 ||
-          (i > 0 && !lines[i - 1].text.trim() && lines[i + 1]?.text.trim()))
-      ) {
-        const position = i === lines.length - 1 ? value.length : lines[i].start;
+      const firstBlank = i;
+      while (i < lines.length && !lines[i].text.trim()) i++;
+      const count = i - firstBlank;
+      const leading = !blocks.length;
+      const emptyCount = leading
+        ? Math.floor(count / 2) + (i === lines.length ? 1 : 0)
+        : i === lines.length
+        ? Math.ceil(count / 2)
+        : Math.floor(count / 2);
+      for (let empty = 0; empty < emptyCount; empty++) {
+        const position =
+          lines[firstBlank + empty * 2 + (leading ? 0 : 1)]?.start ??
+          value.length;
         const id =
           previous.find((b) => !b.raw && !used.has(b.id))?.id ||
           generateId('block');
@@ -268,7 +279,6 @@ export function parseDocument(
           bodyStart: position,
         });
       }
-      i++;
       continue;
     }
     const first = lines[i];

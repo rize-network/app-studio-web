@@ -141,17 +141,22 @@ export function BlockContent({
   isDisplay?: boolean;
   onLinkPress?: (url: string) => void;
 }) {
-  const inline = (text: string, offset: number) => (
-    <InlineContent
-      nodes={parseInline(text, offset)}
-      native={native}
-      codeFontFamily={codeFontFamily}
-      isDisplay={isDisplay}
-      onLinkPress={onLinkPress}
-    />
-  );
+  const inline = (text: string, offset: number) =>
+    !text && !native && !isDisplay ? (
+      <span data-source-start={offset} data-source-end={offset}>
+        <br />
+      </span>
+    ) : (
+      <InlineContent
+        nodes={parseInline(text, offset)}
+        native={native}
+        codeFontFamily={codeFontFamily}
+        isDisplay={isDisplay}
+        onLinkPress={onLinkPress}
+      />
+    );
   if (block.kind === 'codeBlock') {
-    if (isDisplay && !native)
+    if (!native)
       return (
         <Element
           as="pre"
@@ -162,7 +167,16 @@ export function BlockContent({
           fontFamily={codeFontFamily}
           style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}
         >
-          <code>{block.body}</code>
+          {isDisplay ? (
+            <code>{block.body}</code>
+          ) : (
+            <span
+              data-source-start={block.bodyStart}
+              data-source-end={block.bodyStart + block.body.length}
+            >
+              {block.body || <br />}
+            </span>
+          )}
         </Element>
       );
     return (

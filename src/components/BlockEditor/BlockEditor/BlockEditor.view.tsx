@@ -51,6 +51,24 @@ function RichBlock({
   const synchronize = () => {
     if (!ref.current || composing.current || s.locked) return;
     const next = serializeEditorDom(ref.current);
+    if (block.kind === 'codeBlock') {
+      const prefix = block.bodyStart - block.start;
+      s.editBlock(
+        block,
+        replaceRange(
+          block.raw,
+          { start: prefix, end: prefix + block.body.length },
+          next.text
+        ),
+        {
+          start: prefix + next.selection.start,
+          end: prefix + next.selection.end,
+        },
+        true,
+        false
+      );
+      return;
+    }
     const parsed = parseDocument(next.text);
     s.editBlock(
       block,
@@ -65,7 +83,10 @@ function RichBlock({
       ref={ref}
       key={s.restoreVersion}
       data-block-id={block.id}
-      data-block-start={block.start}
+      data-block-start={
+        block.kind === 'codeBlock' ? block.bodyStart : block.start
+      }
+      data-code-block={block.kind === 'codeBlock' ? block.id : undefined}
       data-editor-input="true"
       contentEditable={!s.locked}
       suppressContentEditableWarning
@@ -80,7 +101,7 @@ function RichBlock({
       onFocus={() => s.setActiveId(block.id)}
       onBeforeInput={(event: React.FormEvent<HTMLElement>) => {
         if (event.defaultPrevented) return;
-        const selected = ref.current && readEditorSelection(ref.current);
+        const selected = ref.current && readEditorSelection(ref.current, true);
         if (selected) s.capture(selected);
       }}
       onInput={(event: React.FormEvent<HTMLElement>) => {
@@ -95,7 +116,7 @@ function RichBlock({
       }}
       onKeyDown={(event: React.KeyboardEvent) => {
         if (event.nativeEvent.isComposing || s.locked) return;
-        const selected = ref.current && readEditorSelection(ref.current);
+        const selected = ref.current && readEditorSelection(ref.current, true);
         if (selected) s.capture(selected);
         if (
           event.key === '/' &&
@@ -105,22 +126,6 @@ function RichBlock({
         ) {
           event.preventDefault();
           s.setCommandId(block.id);
-        }
-        if (
-          event.key === 'Backspace' &&
-          selected?.start === block.bodyStart &&
-          selected.start === selected.end
-        ) {
-          const index = s.document.blocks.findIndex((b) => b.id === block.id);
-          const previous = s.document.blocks[index - 1];
-          if (
-            previous &&
-            previous.kind === 'paragraph' &&
-            block.kind === 'paragraph'
-          ) {
-            event.preventDefault();
-            s.replace('', { start: previous.end, end: block.start });
-          }
         }
       }}
     >
@@ -154,6 +159,7 @@ export function BlockEditorView({
     bottom: number;
     left: number;
   } | null>(null);
+  const [linkAnchor, setLinkAnchor] = useState<typeof floating>(null);
   const blockList = useRef<HTMLDivElement>(null);
   const sourceRef = useRef<HTMLTextAreaElement | null>(null);
   const keyboard = useBlockEditorKeyboard(
@@ -163,6 +169,40 @@ export function BlockEditorView({
     onSave,
     !!props.generate
   );
+  useLayoutEffect(() => {
+    if (!s.linkOpen || !host.current) {
+      setLinkAnchor(null);
+      return;
+    }
+    const selected = host.current.ownerDocument.getSelection();
+    const range =
+      selected?.rangeCount &&
+      selected.anchorNode &&
+      host.current.contains(selected.anchorNode)
+        ? selected.getRangeAt(0).cloneRange()
+        : null;
+    const target =
+      sourceRef.current ??
+      host.current.querySelector<HTMLElement>(
+        `[data-block-id="${s.activeId}"]`
+      ) ??
+      blockList.current ??
+      host.current;
+    const update = () => {
+      const selectionRect = range?.getBoundingClientRect();
+      const rect = selectionRect?.height
+        ? selectionRect
+        : target.getBoundingClientRect();
+      setLinkAnchor({ top: rect.top, bottom: rect.bottom, left: rect.left });
+    };
+    update();
+    window.addEventListener('scroll', update, true);
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update, true);
+      window.removeEventListener('resize', update);
+    };
+  }, [s.linkOpen]);
   const dragged = useRef<string | null>(null);
   const dragPreview = useRef<HTMLElement | null>(null);
   const dragFrame = useRef<number | null>(null);
@@ -278,7 +318,7 @@ export function BlockEditorView({
     const capture = () => {
       const owner = host.current;
       if (!owner) return;
-      if (s.holdSelection.current) return;
+      if (s.holdSelection.current || s.linkOpen) return;
       if (dragged.current) {
         setFloating(null);
         return;
@@ -308,7 +348,8 @@ export function BlockEditorView({
         outside &&
         !outside.isCollapsed &&
         outside.anchorNode &&
-        !owner.contains(outside.anchorNode)
+        !owner.contains(outside.anchorNode) &&
+        !outside.anchorNode.parentElement?.closest('[data-editor-block-list]')
       ) {
         const caret = s.current.current.selection.end;
         s.capture({ start: caret, end: caret });
@@ -322,40 +363,28 @@ export function BlockEditorView({
       window.removeEventListener('scroll', capture, true);
       window.removeEventListener('resize', capture);
     };
-  }, [s.locked, s.source]);
+  }, [s.locked, s.source, s.linkOpen]);
   useLayoutEffect(() => {
     if (!s.restoreVersion || !host.current || !s.restoreRequested.current)
       return;
     s.restoreRequested.current = false;
     if (s.source && sourceRef.current) {
       sourceRef.current.focus({ preventScroll: true });
-      sourceRef.current.setSelectionRange(s.selection.start, s.selection.end);
-    } else {
-      const block = s.document.blocks.find(
-        (b) =>
-          b.kind === 'codeBlock' &&
-          s.selection.start >= b.bodyStart &&
-          s.selection.end <= b.bodyStart + b.body.length
+      sourceRef.current.setSelectionRange(
+        s.selection.start,
+        s.selection.end,
+        s.selection.backward ? 'backward' : 'forward'
       );
-      const input =
-        block &&
-        host.current.querySelector<HTMLTextAreaElement>(
-          `textarea[data-code-block="${block.id}"]`
-        );
-      if (input && block) {
-        input.focus({ preventScroll: true });
-        input.setSelectionRange(
-          s.selection.start - block.bodyStart,
-          s.selection.end - block.bodyStart
-        );
-      } else restoreEditorSelection(host.current, s.selection);
-    }
+    } else restoreEditorSelection(host.current, s.selection);
   }, [s.restoreVersion, s.source]);
   const sourceSelection = () => {
     if (sourceRef.current)
       s.capture({
         start: sourceRef.current.selectionStart,
         end: sourceRef.current.selectionEnd,
+        ...(sourceRef.current.selectionDirection === 'backward'
+          ? { backward: true }
+          : {}),
       });
   };
   return (
@@ -420,8 +449,7 @@ export function BlockEditorView({
         if (event.key === 'Escape') {
           stopDrag();
           s.setCommandId(null);
-          s.setLinkOpen(false);
-          if (s.linkOpen) s.restoreSelection();
+          if (s.linkOpen) s.closeLink();
           if (s.ai) s.closeAi();
           setFloating(null);
         }
@@ -459,7 +487,7 @@ export function BlockEditorView({
           {s.labels.sourceFallback}
         </Text>
       )}
-      {s.message && (
+      {s.message && !s.linkOpen && (
         <Text role="status" {...views.notice}>
           {s.message}
         </Text>
@@ -724,77 +752,28 @@ export function BlockEditorView({
                   ]}
                 />
               )}
-              {block.kind === 'codeBlock' ? (
-                <TextArea
-                  data-code-block={block.id}
-                  data-editor-input="true"
-                  data-editor-offset={block.bodyStart}
-                  label={s.labels.codeBlock}
-                  value={block.body}
-                  variant="none"
-                  isDisabled={isDisabled}
-                  isReadOnly={isReadOnly}
-                  onFocus={() => s.setActiveId(block.id)}
-                  onSelect={(
-                    event: React.SyntheticEvent<HTMLTextAreaElement>
-                  ) =>
-                    s.capture({
-                      start:
-                        block.bodyStart + event.currentTarget.selectionStart,
-                      end: block.bodyStart + event.currentTarget.selectionEnd,
-                    })
-                  }
-                  onChange={(text) => {
-                    const input =
-                      host.current?.querySelector<HTMLTextAreaElement>(
-                        `textarea[data-code-block="${block.id}"]`
-                      );
-                    const raw = replaceRange(
-                      block.raw,
-                      {
-                        start: block.bodyStart - block.start,
-                        end: block.bodyStart - block.start + block.body.length,
-                      },
-                      text
-                    );
-                    s.editBlock(block, raw, {
-                      start:
-                        block.bodyStart -
-                        block.start +
-                        (input?.selectionStart ?? text.length),
-                      end:
-                        block.bodyStart -
-                        block.start +
-                        (input?.selectionEnd ?? text.length),
-                    });
-                  }}
-                  views={{
-                    textarea: { fontFamily: 'monospace', minHeight: 100 },
-                    container: { flex: 1, borderWidth: 0 },
-                  }}
-                />
-              ) : (
-                <RichBlock
-                  block={block}
-                  state={s}
-                  label={label}
-                  views={views}
-                />
-              )}
+              <RichBlock
+                block={block}
+                state={s}
+                label={block.kind === 'codeBlock' ? s.labels.codeBlock : label}
+                views={views}
+              />
             </Horizontal>
           ))}
         </Vertical>
       )}
-      {floating && !s.source && !s.locked && !s.ai && !s.linkOpen && (
-        <Portal>
-          <BlockEditorSelection
-            rect={floating}
-            state={s}
-            props={props}
-            preserve={preserve}
-          />
-        </Portal>
-      )}
+      {(s.linkOpen ? linkAnchor : !s.source && floating) &&
+        !s.locked &&
+        !s.ai && (
+          <Portal>
+            <BlockEditorSelection
+              rect={(s.linkOpen ? linkAnchor : floating)!}
+              state={s}
+              props={props}
+              preserve={preserve}
+            />
+          </Portal>
+        )}
       <Command
         open={!!s.commandId && !s.locked}
         onOpenChange={(open) => {
@@ -809,7 +788,7 @@ export function BlockEditorView({
           },
         }))}
       />
-      <BlockEditorPanels state={s} views={views} />
+      {s.ai && <BlockEditorPanels state={s} views={views} />}
       {status}
     </Vertical>
   );

@@ -216,9 +216,9 @@ test('Ctrl+Z in code and source inputs uses the editor history once', () => {
   render(
     <BlockEditor label="Editor" defaultValue={source} onChange={onChange} />
   );
-  fireEvent.change(screen.getByRole('textbox', { name: 'Code block' }), {
-    target: { value: 'edited', selectionStart: 6, selectionEnd: 6 },
-  });
+  const codeField = screen.getByRole('textbox', { name: 'Code block' });
+  codeField.querySelector('[data-source-start]')!.textContent = 'edited';
+  fireEvent.input(codeField);
   fireEvent.keyDown(screen.getByRole('textbox', { name: 'Code block' }), {
     key: 'z',
     ctrlKey: true,
@@ -522,10 +522,11 @@ test('selecting code in another editor cannot change this editor selection', () 
   expect(screen.getByTestId('selection')).toHaveTextContent('1:2');
   const code = screen.getByRole('textbox', {
     name: 'Code block',
-  }) as HTMLTextAreaElement;
-  act(() => code.focus());
-  code.setSelectionRange(0, 4);
-  fireEvent.select(code);
+  });
+  act(() => {
+    code.focus();
+    document.getSelection()!.selectAllChildren(code);
+  });
   fireEvent(document, new Event('selectionchange'));
   expect(screen.getByTestId('selection')).toHaveTextContent('1:2');
 });

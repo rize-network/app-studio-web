@@ -123,10 +123,47 @@ export function BlockEditorView({
                 isAutoFocus
                 isDisabled={isDisabled}
                 {...selectionProps(block.start, block.id)}
+                onKeyPress={(event: { nativeEvent: { key: string } }) => {
+                  if (
+                    event.nativeEvent.key === 'Backspace' &&
+                    localSelection.current.start === 0 &&
+                    localSelection.current.end === 0
+                  )
+                    s.mergeBackward(block.id);
+                }}
                 onChange={(text) => {
                   if (text === '/' && !block.raw.trim()) {
                     s.setCommandId(block.id);
                     return;
+                  }
+                  if (
+                    block.kind !== 'codeBlock' &&
+                    block.kind !== 'table' &&
+                    text !== block.raw
+                  ) {
+                    let start = 0;
+                    while (
+                      start < Math.min(text.length, block.raw.length) &&
+                      text[start] === block.raw[start]
+                    )
+                      start++;
+                    let end = block.raw.length;
+                    let nextEnd = text.length;
+                    while (
+                      end > start &&
+                      nextEnd > start &&
+                      block.raw[end - 1] === text[nextEnd - 1]
+                    ) {
+                      end--;
+                      nextEnd--;
+                    }
+                    if (text.slice(start, nextEnd) === '\n') {
+                      s.capture({
+                        start: block.start + start,
+                        end: block.start + end,
+                      });
+                      if (s.breakBlock()) return;
+                    }
                   }
                   s.editBlock(block, text, localSelection.current);
                 }}
@@ -221,8 +258,8 @@ export function BlockEditorView({
         isOpen={!!s.ai || s.linkOpen}
         title={s.ai ? s.labels.aiPanel : s.labels.link}
         onClose={() => {
-          s.setLinkOpen(false);
-          s.closeAi();
+          if (s.linkOpen) s.closeLink();
+          if (s.ai) s.closeAi();
         }}
         maxHeight="85%"
       >

@@ -7,8 +7,12 @@ import React, { useState } from 'react';
 import { BlockEditor } from '@app-studio/components';
 
 export const DocumentEditor = () => {
-  const [markdown, setMarkdown] = useState('# My document\n\nStart writing here.');
-  return <BlockEditor label="My document" value={markdown} onChange={setMarkdown} />;
+  const [markdown, setMarkdown] = useState(
+    '# My document\n\nStart writing here.'
+  );
+  return (
+    <BlockEditor label="My document" value={markdown} onChange={setMarkdown} />
+  );
 };
 ```
 
@@ -28,23 +32,39 @@ Select text to open the floating formatting toolbar. Its opaque surface, border 
 
 ## Clipboard, selection and keyboard on web
 
-| Shortcut | Behavior |
-| --- | --- |
-| Ctrl/Cmd+A | Select the whole document from a visual text block, including code and tables. In source/code textareas, use the platform's field selection. |
-| Ctrl/Cmd+C | Copy the selection as Markdown, preserving block syntax when the whole document is selected. |
-| Ctrl/Cmd+X | Cut the selection in one undoable transaction. Empty inline formatting markers are removed with their selected text. |
-| Ctrl/Cmd+V | Paste plain-text Markdown over the selection. HTML is never imported or executed. |
-| Ctrl/Cmd+Z | Undo typing or a command, with cursor/selection restoration. |
-| Ctrl/Cmd+Shift+Z or Ctrl+Y | Redo. |
-| Ctrl/Cmd+B, I, U | Bold, italic or underline. Multi-block formatting preserves headings, list markers, code fences and table separators. |
-| Ctrl/Cmd+K | Open the link panel for the current selection. |
-| Ctrl/Cmd+S | Call the optional `onSave` callback. |
-| Ctrl/Cmd+Shift+A | Open selection AI when `generate` is provided. |
-| Escape | Close the current panel or selection toolbar. |
+| Shortcut                   | Behavior                                                                                                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Ctrl/Cmd+A                 | Select the whole document from a visual text block, including code and tables. In the source textarea, use the platform's field selection. |
+| ← / →                      | Move by visible character, including composed emojis, and cross block boundaries.                                                          |
+| ↑ / ↓                      | Move by visual line, retaining the horizontal position through shorter blocks.                                                             |
+| Shift+arrows               | Extend or shrink the selection across blocks; reversing direction keeps its original anchor.                                               |
+| Enter                      | Split a prose block; continue list items; insert a newline in code or a line break in a table cell.                                        |
+| Shift+Enter                | Insert a line break inside the current prose block.                                                                                        |
+| Backspace at block start   | Merge with the previous block and keep the cursor at the join; tables remain separate.                                                     |
+| Ctrl/Cmd+C                 | Copy the selection as Markdown, preserving block syntax when the whole document is selected.                                               |
+| Ctrl/Cmd+X                 | Cut the selection in one undoable transaction. Empty inline formatting markers are removed with their selected text.                       |
+| Ctrl/Cmd+V                 | Paste plain-text Markdown over the selection. HTML is never imported or executed.                                                          |
+| Ctrl/Cmd+Z                 | Undo typing or a command, with cursor/selection restoration.                                                                               |
+| Ctrl/Cmd+Shift+Z or Ctrl+Y | Redo.                                                                                                                                      |
+| Ctrl/Cmd+B, I, U           | Bold, italic or underline. Multi-block formatting preserves headings, list markers, code fences and table separators.                      |
+| Ctrl/Cmd+K                 | Open the anchored link popover with focus in the address field.                                                                            |
+| Ctrl/Cmd+S                 | Call the optional `onSave` callback.                                                                                                       |
+| Ctrl/Cmd+Shift+A           | Open selection AI when `generate` is provided.                                                                                             |
+| Escape                     | Close the current panel or selection toolbar.                                                                                              |
+
+Enter splits a prose block at the cursor or replaces its selection with a block boundary. Headings continue as a paragraph; quotes keep their style when split in the middle. Inline formatting and links remain balanced on both sides. Empty blocks at the start or end remain editable. Each split and merge is one undoable command, restoring the cursor.
+
+Backspace at the first visible position joins a block to the previous one and places the cursor at the join. The previous block keeps its style. Code merged into prose stays inline code, and prose merged into code becomes literal text. Tables retain their cell boundaries and do not merge into neighboring blocks.
+
+Enter continues bullet/numbered list items; an empty nested item outdents, and an empty top-level item exits the list. Backspace at the start of a following list item joins it to the previous item and updates later numbering. Shift+Enter inserts a line break inside a prose block. Enter in code inserts a literal newline; inside a table cell it inserts a line break. Source mode retains native textarea behavior.
+
+The link popover uses the selection position instead of the bottom of the document. Its opaque surface, border and shadow match the floating toolbar. The target selection stays frozen while the address has focus, including when its text is selected. Enter or Apply inserts the link; Escape or Close restores the original selection; clicking outside dismisses it without stealing focus. Invalid URLs stay visible in the popover, and external document replacements close it. The panel follows scrolling/resizing and stays within the viewport.
 
 Use Ctrl on Windows/Linux and Cmd on macOS. Copy, cut and paste use the browser's clipboard events, so context-menu actions work too. Typing, deletion, paste or IME input can replace a multi-block selection without modifying another editor on the page. An HTML-only clipboard does not erase the selected text.
 
-Source and code fields share the editor's undo history. Link fields, AI prompts, emoji search and command search retain their own native text-editing shortcuts. Undo history holds the last 100 transactions; consecutive typing is grouped over 750 ms, and moving the cursor starts a new group.
+On web, code uses the same contentEditable selection surface as other visual blocks, with literal monospace text and preserved Markdown fences. Selections can pass through code, lists and table cells. The floating toolbar remains available for a text selection. Source fields retain native arrow selection; Alt/Ctrl/Cmd navigation is delegated to the platform. Cross-block arrows use `Intl.Segmenter` to preserve composed characters; engines without it retain native arrow handling.
+
+Source and code fields share the editor's undo history, including the direction of restored selections. Link fields, AI prompts, emoji search and command search retain their own native text-editing shortcuts. Undo history holds the last 100 transactions; consecutive typing is grouped over 750 ms, and moving the cursor starts a new group.
 
 ## Optional AI
 
@@ -56,7 +76,9 @@ export const SimulatedAIEditor = () => (
   <BlockEditor
     label="AI demo"
     defaultValue="Select a sentence to change."
-    generate={async (prompt, fragment, scope) => `${fragment}\n\nSuggestion: ${prompt}`}
+    generate={async (prompt, fragment, scope) =>
+      `${fragment}\n\nSuggestion: ${prompt}`
+    }
   />
 );
 ```
@@ -65,7 +87,7 @@ The example is simulated and sends no network request. Your application supplies
 
 ## React Native
 
-The same component and Markdown contract work on React Native. Inactive blocks render visually; the active block uses a native multiline input showing its Markdown markers. Menus and AI proposals open in an ActionSheet. Selection formatting operates inside the active input. No DOM, browser editor or WebView is required.
+The same component and Markdown contract work on React Native. Inactive blocks render visually; the active block uses a native multiline input showing its Markdown markers. Menus and AI proposals open in an ActionSheet. Selection formatting operates inside the active input. Enter in prose uses the shared split command; Backspace at the start of the active Markdown input merges with the preceding block. Code and table inputs retain their source editing behavior. No DOM, browser editor or WebView is required.
 
 ## Other props
 
@@ -75,9 +97,9 @@ Override strings with `labels` and styles with `views.container`, `toolbar`, `bl
 
 ## Validation
 
-The targeted suite covers the shared Markdown engine, web DOM adapter, clipboard/keyboard commands, multi-block selection, formatting, native adapter, Markdown rendering, EmojiPicker and Formik integration. Native adapter and IME tests use host mocks; they do not validate a device keyboard. Web and native TypeScript checks and package builds pass.
+The targeted suite covers the shared Markdown engine, web DOM adapter, clipboard/keyboard commands, multi-block selection and direction reversal, visual-line navigation, grapheme movement, code/table boundaries, formatting, native adapter, Markdown rendering, EmojiPicker and Formik integration. Native adapter and IME tests use host mocks; they do not validate a device keyboard. Web and native TypeScript checks and package builds pass.
 
-The updated Cmd+A/C/X/V/Z/Shift+Z flow, formatting across blocks, floating toolbar surface and emoji insertion were verified in the Codex in-app browser. The emoji icon's horizontal and vertical center match the button's center. These updates still need verification in Chrome, Firefox, Safari and on iOS/Android, including real IME and hardware keyboards.
+The updated Cmd+A/C/X/V/Z/Shift+Z flow, formatting across blocks, floating toolbar surface and emoji insertion were verified in the Codex in-app browser. Arrow/Shift+arrow selection was also checked across blocks and code, including backward selection, reversal and wrapped visual lines. Literal multiline code entry and undo restored the original document. Enter/Backspace split and merge, their undo flow, list-item joins, Shift+Enter caret placement, link popover placement, address entry and Enter-to-apply were also verified in the in-app browser. The emoji icon's horizontal and vertical center match the button's center. These updates still need verification in Chrome, Firefox, Safari and on iOS/Android, including real IME and hardware keyboards.
 
 Chrome interactions were checked for typing, accents, formatting, history, block dragging, keyboard commands, AI preview/application and quick reactions. Firefox, Safari, iOS and Android were not verified in real browsers or devices. Real IME and native cursor/keyboard behavior still need platform validation.
 

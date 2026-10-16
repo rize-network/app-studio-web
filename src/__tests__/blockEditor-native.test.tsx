@@ -55,6 +55,7 @@ vi.mock('../components/Form/TextArea/TextArea', () => ({
     label,
     onChange,
     onSelectionChange,
+    onKeyPress,
     inputRef,
     isDisabled,
     isReadOnly,
@@ -68,6 +69,7 @@ vi.mock('../components/Form/TextArea/TextArea', () => ({
       readOnly={isReadOnly}
       style={{ fontFamily: views?.field?.fontFamily }}
       onChange={(event) => onChange(event.target.value)}
+      onKeyDown={(event) => onKeyPress?.({ nativeEvent: { key: event.key } })}
       onSelect={(event) =>
         onSelectionChange({
           nativeEvent: {
@@ -137,4 +139,23 @@ test('native iOS code editing uses an available monospace font', () => {
   expect(screen.getByRole('textbox', { name: 'Code block' })).toHaveStyle({
     fontFamily: 'Menlo',
   });
+});
+
+test('native Enter splits prose and Backspace at the start merges it in one transaction', () => {
+  const change = vi.fn();
+  render(<NativeHost defaultValue="Hello world" onChange={change} />);
+  fireEvent.click(screen.getByText('Hello world'));
+  fireEvent.change(screen.getByRole('textbox', { name: 'Paragraph' }), {
+    target: { value: 'Hello\n world' },
+  });
+  expect(change).toHaveBeenCalledExactlyOnceWith('Hello\n\n world');
+  const second = screen.getByRole('textbox', {
+    name: 'Paragraph',
+  }) as HTMLTextAreaElement;
+  expect(second).toHaveValue(' world');
+  second.setSelectionRange(0, 0);
+  fireEvent.select(second);
+  fireEvent.keyDown(second, { key: 'Backspace' });
+  expect(change).toHaveBeenLastCalledWith('Hello world');
+  expect(change).toHaveBeenCalledTimes(2);
 });

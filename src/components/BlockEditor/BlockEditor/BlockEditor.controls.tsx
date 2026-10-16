@@ -88,10 +88,7 @@ export function BlockEditorControls({
               text
             )
           )}
-          {button('link', () => {
-            s.setLink('');
-            s.setLinkOpen(true);
-          })}
+          {button('link', s.openLink)}
           {props.generate &&
             button('askSelection', () => s.openAi('selection'), !selected)}
         </>
@@ -143,33 +140,52 @@ export function BlockEditorControls({
 export function BlockEditorPanels({
   state: s,
   views,
+  floating = false,
 }: {
   state: BlockEditorState;
   views?: BlockEditorProps['views'];
+  floating?: boolean;
 }) {
   if (!s.ai && !s.linkOpen) return null;
   return (
     <Vertical
       padding={16}
       gap={12}
-      borderWidth={1}
+      borderWidth={floating ? 0 : 1}
       borderColor="color-gray-200"
       borderRadius={12}
       {...views?.panel}
     >
       {s.linkOpen && (
-        <Vertical role="group" aria-label={s.labels.link} gap={8}>
+        <Vertical
+          as={floating ? 'form' : undefined}
+          role="group"
+          aria-label={s.labels.link}
+          gap={8}
+          minWidth={floating ? 260 : undefined}
+          onSubmit={
+            floating
+              ? (event: React.FormEvent) => {
+                  event.preventDefault();
+                  s.format('link', s.link.trim());
+                }
+              : undefined
+          }
+        >
           <TextField
             label={s.labels.linkUrl}
             value={s.link}
             isAutoFocus
             onChange={s.setLink}
           />
+          {s.message && <Text role="alert">{s.message}</Text>}
           <Horizontal gap={8}>
             <Button
-              type="button"
+              type={floating ? 'submit' : 'button'}
               isDisabled={s.locked}
-              onClick={() => s.format('link', s.link.trim())}
+              onClick={
+                floating ? undefined : () => s.format('link', s.link.trim())
+              }
             >
               {s.labels.apply}
             </Button>
@@ -177,8 +193,7 @@ export function BlockEditorPanels({
               type="button"
               variant="ghost"
               onClick={() => {
-                s.setLinkOpen(false);
-                s.restoreSelection();
+                s.closeLink();
               }}
             >
               {s.labels.cancel}
