@@ -1,14 +1,12 @@
 import React from 'react';
 import { NavigatorShareData, ShareButtonProps } from './ShareButton.props';
-
+// This file manages the state and logic for the ShareButton component, including browser Web Share API feature detection, handling sharing operations, and managing various sharing outcomes and states.
 const getNavigator = (): Navigator | undefined =>
   typeof navigator === 'undefined' ? undefined : navigator;
-
 const canShareData = (nav: Navigator | undefined, data: NavigatorShareData) => {
   if (!nav || typeof nav.share !== 'function') {
     return false;
   }
-
   if (typeof (nav as any).canShare === 'function') {
     try {
       return (nav as any).canShare(data);
@@ -16,17 +14,14 @@ const canShareData = (nav: Navigator | undefined, data: NavigatorShareData) => {
       return false;
     }
   }
-
   return true;
 };
-
 const getErrorName = (error: unknown) => {
   if (typeof error === 'object' && error !== null && 'name' in error) {
     return String((error as { name?: string }).name);
   }
   return undefined;
 };
-
 export const useShareButton = (props: ShareButtonProps) => {
   const {
     shareData,
@@ -37,29 +32,22 @@ export const useShareButton = (props: ShareButtonProps) => {
     onShareCancel,
     onShareError,
   } = props;
-
   const [isSharing, setIsSharing] = React.useState(false);
-
   const isSupported = React.useMemo(
     () => canShareData(getNavigator(), shareData),
     [shareData]
   );
-
   const handleShare = React.useCallback(
     (...args: unknown[]) => {
       onClick?.(...args);
-
       const nav = getNavigator();
-
       if (!nav || typeof nav.share !== 'function') {
         onUnsupported?.();
         return;
       }
-
       if (isSharing) {
         return;
       }
-
       if (typeof (nav as any).canShare === 'function') {
         try {
           if (!(nav as any).canShare(shareData)) {
@@ -71,10 +59,8 @@ export const useShareButton = (props: ShareButtonProps) => {
           return;
         }
       }
-
       setIsSharing(true);
       onShareStart?.();
-
       try {
         void nav
           .share(shareData)
@@ -83,12 +69,10 @@ export const useShareButton = (props: ShareButtonProps) => {
           })
           .catch((error: unknown) => {
             const errorName = getErrorName(error);
-
             if (errorName === 'AbortError') {
               onShareCancel?.();
               return;
             }
-
             onShareError?.(error);
           })
           .finally(() => {
@@ -110,7 +94,6 @@ export const useShareButton = (props: ShareButtonProps) => {
       shareData,
     ]
   );
-
   return {
     isSupported,
     isSharing,

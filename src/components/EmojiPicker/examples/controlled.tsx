@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Vertical, Horizontal } from 'app-studio';
 import { EmojiPicker } from '../EmojiPicker';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const ControlledEmojiPicker = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,7 @@ export const ControlledEmojiPicker = () => {
         </Button>
       </Horizontal>
 
-      <Text fontSize="14px" color="color.gray.600">
+      <Text fontSize="14px" color="color-gray-600">
         Selected emoji: {selectedEmoji}
       </Text>
     </Vertical>

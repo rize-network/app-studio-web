@@ -1,28 +1,31 @@
 import React from 'react';
 import { Horizontal, Text, View, useTheme } from 'app-studio';
 import { PromptExample } from './ChatInput/ChatInput.type';
-
+// Defines the properties expected by the PromptExamples component.
 interface PromptExamplesProps {
+  // An array of prompt examples to be displayed.
   examples: PromptExample[];
+  // A callback function invoked when a prompt example is selected.
   onSelect: (example: PromptExample) => void;
+  // Optional custom component overrides for different parts of the PromptExamples component.
   views?: {
     container?: any;
     item?: any;
     text?: any;
   };
 }
-
+// Defines the PromptExamples functional component, which displays a list of clickable prompt examples.
 export const PromptExamples: React.FC<PromptExamplesProps> = ({
   examples,
   onSelect,
   views = {},
 }) => {
+  // Retrieves the `getColor` utility function from the current theme context for consistent styling.
   const { getColor } = useTheme();
-
+  // Conditionally renders nothing if no examples are provided or if the examples array is empty.
   if (!examples || examples.length === 0) {
     return null;
   }
-
   return (
     <Horizontal
       gap={8}
@@ -37,18 +40,19 @@ export const PromptExamples: React.FC<PromptExamplesProps> = ({
           as="button"
           type="button"
           padding="8px 12px"
-          borderRadius="4px"
-          backgroundColor="color.gray.100"
-          border="none"
+          borderRadius="9999px"
+          backgroundColor="color-white"
+          border="1px solid #E2E8F0"
           cursor="pointer"
-          transition="all 0.2s ease"
+          transition="background-color 0.2s ease, border-color 0.2s ease"
           onClick={() => onSelect(example)}
           _hover={{
-            backgroundColor: 'color.gray.200',
+            backgroundColor: '#F8FAFC',
+            borderColor: '#CBD5E1',
           }}
           {...views?.item}
         >
-          <Text fontSize="14px" color="color.gray.700" {...views?.text}>
+          <Text fontSize="14px" color="color-gray-700" {...views?.text}>
             {example.text}
           </Text>
         </View>

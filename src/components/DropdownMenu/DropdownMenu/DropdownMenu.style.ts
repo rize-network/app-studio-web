@@ -1,6 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { Size, Variant, Position, Alignment } from './DropdownMenu.type';
-
+// Defines various size configurations (sm, md, lg) for dropdown menu items, specifying padding, font size, and minimum width.
 export const DropdownMenuSizes: Record<Size, ViewProps> = {
   sm: {
     padding: '6px 8px',
@@ -18,43 +18,38 @@ export const DropdownMenuSizes: Record<Size, ViewProps> = {
     minWidth: '200px',
   },
 };
-
+// Specifies different visual variants (default, filled, outline) for the dropdown menu, controlling background color, text color, and border styles.
 export const DropdownMenuVariants: Record<Variant, ViewProps> = {
   default: {
-    backgroundColor: 'color.white',
-    color: 'color.gray.800',
+    backgroundColor: 'color-white',
+    color: 'color-gray-800',
   },
   filled: {
-    backgroundColor: 'color.gray.100',
-    color: 'color.gray.800',
+    backgroundColor: 'color-gray-100',
+    color: 'color-gray-800',
   },
   outline: {
-    backgroundColor: 'color.white',
+    backgroundColor: 'color-white',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-200',
+    color: 'color-gray-800',
   },
 };
-
+// Defines styles for interactive states (hover, active, disabled) of dropdown menu items, providing visual feedback.
 export const DropdownMenuItemStates = {
   hover: {
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-100',
   },
   active: {
-    backgroundColor: 'color.gray.200',
+    backgroundColor: 'color-gray-200',
   },
   disabled: {
     opacity: 0.5,
     cursor: 'not-allowed',
   },
 };
-
-// Note: Static positioning logic has been replaced with intelligent viewport-aware
-// positioning in the DropdownMenu component that automatically chooses optimal placement
-// based on available space and prevents content from going off-screen.
-
-// Legacy positioning function - kept for backward compatibility if needed
+// A utility function that calculates and returns the CSS properties required to position the dropdown menu based on the specified `side` (e.g., top, bottom) and `align` (e.g., start, center).
 export const getDropdownPosition = (
   side: Position = 'bottom',
   align: Alignment = 'start'
@@ -89,6 +84,5 @@ export const getDropdownPosition = (
       ...(align === 'end' && { bottom: 0 }),
     },
   };
-
   return positions[side];
 };

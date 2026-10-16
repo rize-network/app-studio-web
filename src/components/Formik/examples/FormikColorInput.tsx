@@ -5,7 +5,7 @@ import { Vertical, Horizontal } from 'app-studio';
 import { FormikForm } from '../Formik.Form';
 import { FormikColorInput } from '../Formik.ColorInput';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 const validationSchema = Yup.object({
   backgroundColor: Yup.string().required('Background color is required'),
@@ -17,9 +17,9 @@ export const FormikColorInputExample = () => {
   return (
     <Formik
       initialValues={{
-        backgroundColor: 'color.blue.500',
-        textColor: 'color.white',
-        accentColor: 'color.orange.500',
+        backgroundColor: 'color-blue-500',
+        textColor: 'color-white',
+        accentColor: 'color-orange-500',
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
@@ -29,7 +29,7 @@ export const FormikColorInputExample = () => {
         }, 400);
       }}
     >
-      {({ values, isSubmitting }) => (
+      {({ values, isSubmitting, handleSubmit, handleReset }) => (
         <FormikForm>
           <Vertical gap={16} width="400px">
             <FormikColorInput
@@ -70,10 +70,14 @@ export const FormikColorInputExample = () => {
             </Vertical>
 
             <Horizontal gap={8}>
-              <Button type="submit" variant="filled" isDisabled={isSubmitting}>
+              <Button
+                variant="filled"
+                isDisabled={isSubmitting}
+                onClick={handleSubmit}
+              >
                 {isSubmitting ? 'Saving...' : 'Save Theme'}
               </Button>
-              <Button type="reset" variant="outline">
+              <Button type="reset" variant="outline" onClick={handleReset}>
                 Reset
               </Button>
             </Horizontal>

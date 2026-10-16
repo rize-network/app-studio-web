@@ -1,0 +1,220 @@
+{
+  "componentDescription": "A component for selecting emojis from a categorized list, including search and recent options.",
+  "id": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional unique identifier for the component.",
+    "defaultValue": null
+  },
+  "name": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional name attribute for form compatibility.",
+    "defaultValue": null
+  },
+  "label": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional text label displayed with the picker.",
+    "defaultValue": null
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional placeholder text for the search input field.",
+    "defaultValue": "Select an emoji"
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional helper text displayed below the picker for guidance.",
+    "defaultValue": null
+  },
+  "value": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The current selected emoji as a string.",
+    "defaultValue": null
+  },
+  "defaultValue": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The initial selected emoji when the component mounts.",
+    "defaultValue": null
+  },
+  "onChange": {
+    "type": "(emoji: string) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when an emoji is selected, returning the emoji as a string.",
+    "defaultValue": null
+  },
+  "onEmojiSelect": {
+    "type": "(emoji: Emoji) => void",
+    "typeValues": null,
+    "description": "Callback function triggered when an emoji is selected, providing the full Emoji object.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "EmojiPickerStyles",
+    "typeValues": {
+      "container": "ViewProps",
+      "trigger": "ViewProps",
+      "dropdown": "ViewProps",
+      "searchInput": "ViewProps",
+      "categoryTabs": "ViewProps",
+      "categoryTab": "ViewProps",
+      "emojiGrid": "ViewProps",
+      "emoji": "ViewProps",
+      "recentEmojis": "ViewProps",
+      "label": "ViewProps",
+      "helperText": "ViewProps"
+    },
+    "description": "Custom styles to be applied to various parts of the EmojiPicker.",
+    "defaultValue": {}
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Defines the size of the EmojiPicker component.",
+    "defaultValue": "md"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "default",
+      "square",
+      "rounded",
+      "pill"
+    ],
+    "description": "Defines the shape variant of the EmojiPicker component.",
+    "defaultValue": "default"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "outline",
+      "default",
+      "filled"
+    ],
+    "description": "Defines the visual variant of the EmojiPicker component.",
+    "defaultValue": "default"
+  },
+  "error": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Indicates if the component is in an error state, typically for validation feedback.",
+    "defaultValue": false
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, the EmojiPicker will be disabled and non-interactive.",
+    "defaultValue": false
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, the EmojiPicker will be read-only, preventing user input but remaining interactable for display.",
+    "defaultValue": false
+  },
+  "showSearch": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether the emoji search input field should be displayed.",
+    "defaultValue": true
+  },
+  "showCategories": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether emoji categories should be displayed for navigation.",
+    "defaultValue": true
+  },
+  "showRecentEmojis": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether the section for recently used emojis should be displayed.",
+    "defaultValue": true
+  },
+  "maxRecentEmojis": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Sets the maximum number of recent emojis to display.",
+    "defaultValue": null
+  },
+  "enabledCategories": {
+    "type": "EmojiCategory[]",
+    "typeValues": [
+      "recent",
+      "smileys",
+      "people",
+      "animals",
+      "food",
+      "activities",
+      "travel",
+      "objects",
+      "symbols",
+      "flags"
+    ],
+    "description": "An array of EmojiCategory values to specify which categories are enabled and visible.",
+    "defaultValue": [
+      "recent",
+      "smileys",
+      "people",
+      "animals",
+      "food",
+      "activities",
+      "travel",
+      "objects",
+      "symbols",
+      "flags"
+    ]
+  },
+  "customEmojis": {
+    "type": "Emoji[]",
+    "typeValues": null,
+    "description": "An array of custom Emoji objects to be included in the picker.",
+    "defaultValue": null
+  },
+  "isOpen": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Controls the open/closed state of the emoji picker dropdown.",
+    "defaultValue": null
+  },
+  "onOpen": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the emoji picker dropdown opens.",
+    "defaultValue": null
+  },
+  "onClose": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the emoji picker dropdown closes.",
+    "defaultValue": null
+  },
+  "closeOnSelect": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, the picker will automatically close after an emoji is selected.",
+    "defaultValue": null
+  },
+  "aria-label": {
+    "type": "string",
+    "typeValues": null,
+    "description": "ARIA attribute for accessibility, providing a descriptive label for the component.",
+    "defaultValue": null
+  },
+  "aria-describedby": {
+    "type": "string",
+    "typeValues": null,
+    "description": "ARIA attribute for accessibility, linking the component to an element that describes it.",
+    "defaultValue": null
+  }
+}

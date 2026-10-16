@@ -12,7 +12,7 @@ export const SizesColorInput = () => {
           label={`Size ${size.toUpperCase()}`}
           size={size}
           placeholder="Select a color"
-          defaultValue="color.green.500"
+          defaultValue="color-green-500"
         />
       ))}
     </Vertical>

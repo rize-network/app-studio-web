@@ -12,7 +12,7 @@
 import React from 'react';
 import { Select } from '../Select';
 import { Vertical } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 
 // Sample options for all examples
@@ -92,9 +92,9 @@ export const DesignSystemSelects = () => (
         />
 
         <Select
-          shape="sharp"
+          shape="square"
           options={sampleOptions}
-          placeholder="Sharp Corners"
+          placeholder="square Corners"
         />
 
         <Select
@@ -104,7 +104,7 @@ export const DesignSystemSelects = () => (
         />
 
         <Select
-          shape="pillShaped"
+          shape="pill"
           options={sampleOptions}
           placeholder="Pill Shaped"
         />
@@ -240,15 +240,15 @@ export const DesignSystemSelects = () => (
           placeholder="Primary Theme"
           views={{
             selectBox: {
-              borderColor: 'theme.primary',
+              borderColor: 'theme-primary',
               borderWidth: '2px',
             },
             label: {
-              color: 'theme.primary',
+              color: 'theme-primary',
               fontWeight: '600',
             },
             text: {
-              color: 'theme.primary',
+              color: 'theme-primary',
             },
           }}
         />
@@ -259,12 +259,12 @@ export const DesignSystemSelects = () => (
           views={{
             selectBox: {
               borderRadius: '16px',
-              borderColor: 'color.purple.400',
-              backgroundColor: 'color.purple.50',
+              borderColor: 'color-purple-400',
+              backgroundColor: 'color-purple-50',
             },
             dropDown: {
               borderRadius: '16px',
-              borderColor: 'color.purple.400',
+              borderColor: 'color-purple-400',
             },
           }}
         />
@@ -279,7 +279,7 @@ export const DesignSystemSelects = () => (
           views={{
             selectBox: {
               borderRadius: '8px',
-              backgroundColor: 'color.white',
+              backgroundColor: 'color-white',
               transition: 'all 0.3s ease',
               _hover: {
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',

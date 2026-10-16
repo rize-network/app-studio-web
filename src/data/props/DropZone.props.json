@@ -1,0 +1,63 @@
+{
+  "componentDescription": "A component for users to upload files via drag-and-drop or selection from their local system.",
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Represents the content to be rendered inside the `DropZone`.",
+    "defaultValue": null
+  },
+  "containerProps": {
+    "type": "ViewProps",
+    "typeValues": [],
+    "description": "Defines styling and layout properties for the main container of the `DropZone` component.",
+    "defaultValue": null
+  },
+  "text": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Specifies the main text to be displayed within the `DropZone`.",
+    "defaultValue": "Drop files here or click to upload"
+  },
+  "textProps": {
+    "type": "TextProps",
+    "typeValues": [],
+    "description": "Defines styling and layout properties for the text displayed within the `DropZone`.",
+    "defaultValue": null
+  },
+  "className": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Allows passing a CSS class name to style the `DropZone` component.",
+    "defaultValue": null
+  },
+  "disabled": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the `DropZone` component is in a disabled state, preventing user interaction.",
+    "defaultValue": null
+  },
+  "imageProps": {
+    "type": "ImageProps",
+    "typeValues": [],
+    "description": "Defines properties for any image displayed within the `DropZone`, such as a preview image.",
+    "defaultValue": null
+  },
+  "previewUrl": {
+    "type": "string | null",
+    "typeValues": [],
+    "description": "The URL of an image to be displayed as a preview in the `DropZone`.",
+    "defaultValue": null
+  },
+  "selectedFiles": {
+    "type": "File[]",
+    "typeValues": [],
+    "description": "An array of `File` objects representing the files currently selected or uploaded in the `DropZone`.",
+    "defaultValue": null
+  },
+  "onRemove": {
+    "type": "(index: number) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when a file needs to be removed from the `DropZone`.",
+    "defaultValue": "() => {}"
+  }
+}

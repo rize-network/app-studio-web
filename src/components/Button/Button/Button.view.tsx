@@ -1,258 +1,367 @@
 /**
  * ButtonView component – minimal and design‑system aligned.
- * - Chooses a **main color** with priority: `backgroundColor` → `color` → `theme.primary`.
+ * - Chooses a **main color** with priority: `backgroundColor` → `color` → `theme-primary`.
  * - Uses `getButtonVariants` to derive base/hover/active styles per variant.
  */
 
 import React, { useMemo } from 'react';
-import { Element, Horizontal, Vertical, View, useTheme } from 'app-studio';
+import { Element, Horizontal, Vertical, View } from 'app-studio';
 import { Link } from '../../Link/Link';
 import { Loader } from '../../Loader/Loader';
 import { ButtonProps } from './Button.props';
+import { LoaderProps } from '../../Loader/Loader/Loader.props';
 import {
   ButtonSizes,
   ButtonShapes,
   IconSizes,
   getButtonVariants,
-  generateOffsetPath,
+  cssVar,
 } from './Button.style';
-import contrast from 'contrast';
+import { useDesignSystem, deepMerge } from 'src/design-system';
+import { Variant } from './Button.type';
 
-const ButtonView: React.FC<ButtonProps> = ({
-  /* behaviour */
-  variant = 'filled',
-  size = 'md',
-  shape = 'rounded',
-  iconPosition = 'left',
-  loaderPosition = 'left',
-  backgroundColor, // primary candidate for main color
-  color, // 2nd candidate for main color (NOT text‑color)
-  isAuto,
-  isFilled,
+// --- Helper: Button Content ---
+// Renders the inner content: Loader, Icon, and Children.
+const ButtonContent: React.FC<{
+  children: React.ReactNode;
+  icon?: React.ReactNode;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  isLoading?: boolean;
+  iconPosition?: string;
+  loaderPosition?: string;
+  size?: string;
+  resolvedTextColor: string;
+  isIconRounded?: boolean;
+  loaderProps?: LoaderProps;
+  views?: any;
+}> = React.memo(
+  ({
+    children,
+    icon,
+    leftIcon,
+    rightIcon,
+    isLoading,
+    iconPosition = 'left',
+    loaderPosition = 'left',
+    size = 'md',
+    resolvedTextColor,
+    isIconRounded,
+    loaderProps,
+    views,
+  }) => {
+    const Wrapper = ['left', 'right'].includes(iconPosition)
+      ? Horizontal
+      : Vertical;
+    const sizeStyles = ButtonSizes[size];
+
+    return (
+      <Wrapper
+        gap={8}
+        alignItems="center"
+        justifyContent="center"
+        fontSize={sizeStyles.fontSize}
+        fontWeight={sizeStyles.fontWeight}
+        lineHeight={sizeStyles.lineHeight}
+        letterSpacing={sizeStyles.letterSpacing}
+        whiteSpace="nowrap"
+        color={resolvedTextColor}
+        {...views?.content}
+      >
+        {isLoading && loaderPosition === 'left' && (
+          <Loader
+            size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+            color={resolvedTextColor}
+            {...loaderProps}
+            {...views?.loader}
+          />
+        )}
+
+        {leftIcon && (
+          <View color={resolvedTextColor} {...views?.icon}>
+            {leftIcon}
+          </View>
+        )}
+
+        {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
+          <View color={resolvedTextColor} {...views?.icon}>
+            {icon}
+          </View>
+        )}
+
+        {children}
+
+        {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
+          <View color={resolvedTextColor} {...views?.icon}>
+            {icon}
+          </View>
+        )}
+
+        {rightIcon && (
+          <View color={resolvedTextColor} {...views?.icon}>
+            {rightIcon}
+          </View>
+        )}
+
+        {isLoading && loaderPosition === 'right' && (
+          <Loader
+            size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+            color={resolvedTextColor}
+            {...loaderProps}
+            {...views?.loader}
+          />
+        )}
+      </Wrapper>
+    );
+  }
+);
+
+// --- Animation Logic moved to StandardButton ---
+
+// --- Variant: Standard Button ---
+// --- Helpers ---
+
+// Helper to calculate numeric border radius
+const getNumericBorderRadius = (shape: string): number => {
+  const shapeValue = ButtonShapes[shape as keyof typeof ButtonShapes];
+  if (typeof shapeValue === 'number') return shapeValue;
+  if (typeof shapeValue === 'string') return parseInt(shapeValue, 10) || 0;
+  return 0;
+};
+
+// Common Inner Button Surface
+const InnerButton: React.FC<{
+  asComponent: any;
+  isDisabled?: boolean;
+  isLoading?: boolean;
+  isWrapped?: boolean;
+  borderRadius?: any;
+  width?: any;
+  height?: any;
+  baseStyles?: any;
+  sizeStyles?: any;
+  iconPad?: any;
+  mainTone?: string;
+  resolvedTextColor?: any;
+  children?: React.ReactNode;
+  borderWidth?: number;
+  [x: string]: any;
+}> = ({
+  asComponent,
   isDisabled,
   isLoading,
-  isIconRounded,
-  /* content */
-  icon,
+  isWrapped = false,
+  borderRadius,
+  width,
+  height,
+  baseStyles,
+  sizeStyles,
+  iconPad,
+  mainTone,
+  resolvedTextColor,
   children,
-  /* nav */
+  borderWidth = 0,
+  ...props
+}) => {
+  return (
+    <Element
+      as={asComponent}
+      disabled={Boolean(isDisabled || isLoading)}
+      display={isWrapped ? 'flex' : 'inline-flex'}
+      alignItems="center"
+      justifyContent="center"
+      borderRadius={borderRadius}
+      width={width}
+      height={height}
+      {...baseStyles}
+      {...sizeStyles}
+      {...iconPad}
+      // Ensure background is solid for wrapped buttons if baseStyles doesn't provide it
+      backgroundColor={
+        baseStyles?.backgroundColor || (isWrapped ? mainTone : undefined)
+      }
+      color={resolvedTextColor}
+      borderWidth={isWrapped ? 0 : undefined}
+      cursor={isDisabled ? 'default' : 'pointer'}
+      {...props}
+    >
+      {children}
+    </Element>
+  );
+};
+
+// Common Header for Border Animations
+const BorderWrapper: React.FC<{
+  shape: string;
+  isDisabled?: boolean;
+  onClick?: any;
+  shadow?: any;
+  borderWidth: number;
+  isAuto?: boolean;
+  isFilled?: boolean;
+  views?: any;
+  children: React.ReactNode;
+  [x: string]: any;
+}> = ({
+  shape,
+  isDisabled,
+  onClick,
+  shadow,
+  borderWidth,
+  isAuto,
+  isFilled,
+  views,
+  children,
+  ...props
+}) => (
+  <Element
+    as="div"
+    position="relative"
+    display="inline-flex"
+    alignItems="center"
+    justifyContent="center"
+    borderRadius={ButtonShapes[shape as keyof typeof ButtonShapes]}
+    cursor={isDisabled ? 'default' : 'pointer'}
+    onClick={onClick}
+    boxShadow={shadow}
+    padding={borderWidth}
+    width={isFilled ? '100%' : isAuto ? 'fit-content' : undefined}
+    {...views?.container}
+    {...props}
+  >
+    {children}
+  </Element>
+);
+
+// --- Variant: Standard Button ---
+const StandardButton: React.FC<
+  ButtonProps & {
+    baseStyles: any;
+    sizeStyles: any;
+    iconPad: any;
+    containerRef?: React.Ref<HTMLElement>;
+    // Extra props passed from ButtonView
+    mainTone?: string;
+    borderMovingDuration?: number;
+    borderMovingGradientColors?: string[];
+    animatedStrokeAccentColor?: string;
+    animatedStrokeTextColor?: string;
+    resolvedTextColor?: any;
+    content?: React.ReactNode;
+  }
+> = ({
+  variant,
+  animation,
   to,
+  isDisabled,
+  isLoading,
+  isAuto,
+  isFilled,
   isExternal,
-  /* misc */
+  shape = 'rounded',
   shadow,
   onClick,
-  views = {},
-  themeMode: elementMode,
-  /* effect props */
+  views,
+  baseStyles,
+  sizeStyles,
+  iconPad,
+  containerRef,
+  resolvedTextColor,
+  content,
+  size,
+  mainTone,
   borderMovingDuration = 2,
   borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
   animatedStrokeAccentColor = '#705CFF',
-  animatedStrokeTextColor = '#333333',
+  animatedStrokeTextColor = 'color-gray-900',
   ...props
 }) => {
-  /* theme helpers */
-  const { getColor, themeMode } = useTheme();
-  const mode = elementMode ?? themeMode;
+  // --- Common Helpers ---
+  const numericBorderRadius = getNumericBorderRadius(shape);
 
-  /* MAIN COLOR – determines the entire palette */
-  const mainColorKey = backgroundColor ?? color ?? 'theme.primary';
-  const mainTone = getColor(isDisabled ? 'theme.disabled' : mainColorKey, {
-    themeMode: mode,
-  });
-  const tone = contrast(mainTone);
-
-  /* variant palette */
-  const palette = useMemo(
-    () => getButtonVariants(mainTone, tone == 'light'),
-    [mainTone, tone]
-  );
-  const base = palette[variant];
-
-  /* layout helpers */
-  const Wrapper = ['left', 'right'].includes(iconPosition)
-    ? Horizontal
-    : Vertical;
-  const sizeStyles = ButtonSizes[size];
-  const iconPad = isIconRounded ? IconSizes[size] : {};
-
-  const content = (
-    <Wrapper
-      gap={8}
-      alignItems="center"
-      justifyContent="center"
-      color={'inherit'}
-      _hover={{
-        color: 'inherit',
-      }}
-      {...sizeStyles}
-      {...views?.content}
+  const linkOrContent = to ? (
+    <Link
+      to={to}
+      isExternal={isExternal}
+      color="currentColor"
+      textDecoration="inherit"
+      _hover={{ color: 'currentColor' }}
+      {...views?.link}
     >
-      {isLoading && loaderPosition === 'left' && (
-        <Loader
-          size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
-          color={'inherit'}
-          _hover={{
-            color: 'inherit',
-          }}
-          {...views?.loader}
-        />
-      )}
-
-      {icon && ['left', 'top'].includes(iconPosition) && !isLoading && (
-        <View
-          color={'inherit'}
-          _hover={{
-            color: 'inherit',
-          }}
-          {...views?.icon}
-        >
-          {icon}
-        </View>
-      )}
-
-      {children}
-
-      {icon && ['right', 'bottom'].includes(iconPosition) && !isLoading && (
-        <View
-          color={'inherit'}
-          _hover={{
-            color: 'inherit',
-          }}
-          {...views?.icon}
-        >
-          {icon}
-        </View>
-      )}
-
-      {isLoading && loaderPosition === 'right' && (
-        <Loader
-          size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
-          color={'inherit'}
-          _hover={{
-            color: 'inherit',
-          }}
-          {...views?.loader}
-        />
-      )}
-    </Wrapper>
+      {content}
+    </Link>
+  ) : (
+    content
   );
 
-  // Handle special effect variants
-  if (variant === 'borderMoving') {
-    const borderWidth = 5;
-    const numericWidth =
-      typeof sizeStyles.width === 'number' ? sizeStyles.width : 300;
-    const numericHeight =
-      typeof sizeStyles.height === 'number' ? sizeStyles.height : 64;
-    const numericBorderRadius = (() => {
-      const shapeValue = ButtonShapes[shape];
-      if (typeof shapeValue === 'number') {
-        return shapeValue;
-      }
-      if (typeof shapeValue === 'string') {
-        return parseInt(shapeValue, 10) || 50;
-      }
-      return 50;
-    })();
-    const path = generateOffsetPath(
-      numericWidth as number,
-      numericHeight as number,
-      numericBorderRadius as number
-    );
+  const innerProps = {
+    isDisabled,
+    isLoading,
+    baseStyles,
+    sizeStyles,
+    iconPad,
+    resolvedTextColor,
+    mainTone,
+    children: linkOrContent,
+  };
 
-    // Determine background color from props or use mainTone
-    const containerBg = mainTone;
-    // Calculate text color with proper contrast
-    const borderMovingTextColor = tone === 'light' ? '#000000' : '#FFFFFF';
+  // --- Animation: Border Moving ---
+  if (animation === 'borderMoving' && borderMovingGradientColors) {
+    const borderWidth = 3;
+    const borderAnimation = {
+      from: { backgroundPosition: '0% 50%' },
+      to: { backgroundPosition: '200% 50%' },
+      duration: `${borderMovingDuration}s`,
+      timingFunction: 'linear',
+      iterationCount: 'infinite',
+    };
 
     return (
-      <View
-        width={numericWidth}
-        height={numericHeight}
-        position="relative"
-        backgroundColor={containerBg}
-        overflow="hidden"
-        borderRadius={ButtonShapes[shape]}
-        cursor={isDisabled ? 'default' : 'pointer'}
+      <BorderWrapper
+        shape={shape}
+        isDisabled={isDisabled}
         onClick={onClick}
-        {...views?.container}
+        shadow={shadow}
+        borderWidth={borderWidth as any}
+        isAuto={isAuto}
+        isFilled={isFilled}
+        views={views}
+        background={`linear-gradient(90deg, ${cssVar(
+          borderMovingGradientColors[0]
+        )}, ${cssVar(borderMovingGradientColors[1])}, ${cssVar(
+          borderMovingGradientColors[2]
+        )}, ${cssVar(borderMovingGradientColors[0])})`}
+        backgroundSize="200% 100%"
+        animate={borderAnimation}
         {...props}
       >
-        <svg
-          width={numericWidth}
-          height={numericHeight}
-          style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
-        >
-          <defs>
-            <linearGradient
-              id="circleGradient"
-              x1="0%"
-              y1="100%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="transparent" />
-              <stop offset="30%" stopColor={borderMovingGradientColors[0]} />
-              <stop offset="60%" stopColor={borderMovingGradientColors[1]} />
-              <stop offset="100%" stopColor={borderMovingGradientColors[2]} />
-            </linearGradient>
-            <path id="uniqueId" d={path} fill="none" stroke="transparent" />
-          </defs>
-          <circle r="30" fill="url(#circleGradient)">
-            <animateMotion
-              dur={borderMovingDuration + 's'}
-              repeatCount="indefinite"
-              path={path}
-            />
-          </circle>
-        </svg>
-
-        <View
-          position="absolute"
-          backgroundColor={containerBg}
-          borderRadius={Math.max(0, numericBorderRadius - 1)}
-          top={borderWidth}
-          bottom={borderWidth}
-          left={borderWidth}
-          right={borderWidth}
-          zIndex={2}
-        />
-
-        <View
-          position="relative"
+        <InnerButton
+          asComponent={to ? 'div' : 'button'}
+          isWrapped={true}
+          borderRadius={Math.max(0, numericBorderRadius - borderWidth)}
           width="100%"
           height="100%"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          color={borderMovingTextColor}
-          fontSize={14}
-          zIndex={3}
-          style={{ cursor: 'pointer' }}
-        >
-          {content}
-        </View>
-      </View>
+          {...innerProps}
+        />
+      </BorderWrapper>
     );
   }
 
-  if (variant === 'animatedStroke') {
-    const resolvedAccentColor = getColor(animatedStrokeAccentColor);
-    const resolvedTextColor = getColor(animatedStrokeTextColor);
-    const numericWidth =
-      typeof sizeStyles.width === 'number' ? sizeStyles.width : 300;
-    const numericHeight =
-      typeof sizeStyles.height === 'number' ? sizeStyles.height : 60;
-
+  // --- Animation: Animated Stroke ---
+  if (animation === 'animatedStroke') {
+    // SVG stroke / CSS color need a real CSS value — wrap tokens in var(--…).
+    const resolvedAccentColor = cssVar(animatedStrokeAccentColor);
+    const resolvedStrokeTextColor = cssVar(animatedStrokeTextColor);
+    const strokePathLength = 1000;
     const strokeAnimation = {
       from: {
         strokeWidth: '8px',
-        strokeDasharray: '0 500',
-        strokeDashoffset: -454,
+        strokeDasharray: `0 ${strokePathLength}`,
+        strokeDashoffset: -Math.round(strokePathLength * 0.63),
       },
       to: {
         strokeWidth: '3px',
-        strokeDasharray: '760',
+        strokeDasharray: `${strokePathLength}`,
         strokeDashoffset: 0,
       },
       duration: '0.9s',
@@ -260,111 +369,371 @@ const ButtonView: React.FC<ButtonProps> = ({
       fillMode: 'forwards',
     };
 
+    const mergedClassName = [
+      'group',
+      (views?.container as any)?.className,
+      (props as any)?.className,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
     return (
-      <View
-        as={to ? 'a' : 'div'}
-        href={to ? to : undefined}
+      <Element
+        ref={containerRef}
+        as={to ? 'div' : 'button'}
+        type={to ? undefined : 'button'}
+        disabled={Boolean(!to && (isDisabled || isLoading))}
         onClick={onClick}
-        display="inline-block"
-        maxWidth="20rem"
-        margin="0 auto"
-        textAlign="center"
-        textDecoration="none"
         position="relative"
-        cursor="pointer"
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
+        width={isFilled ? '100%' : isAuto ? 'fit-content' : undefined}
+        borderRadius={ButtonShapes[shape as keyof typeof ButtonShapes]}
+        boxShadow={shadow as any}
+        transition="background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease"
+        cursor={isDisabled ? 'default' : 'pointer'}
+        color={resolvedStrokeTextColor}
+        backgroundColor="transparent"
+        borderWidth={0}
         {...views?.container}
         {...props}
+        className={mergedClassName}
       >
         <View
           as="svg"
-          display="block"
-          height={numericHeight}
-          width={numericWidth}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <View
-            as="rect"
-            height={numericHeight}
-            width={numericWidth}
-            fill="transparent"
-            stroke={resolvedAccentColor}
-            strokeWidth="8px"
-            strokeDasharray="120 500"
-            strokeDashoffset={-454}
-            on={{
-              hover: {
-                animate: strokeAnimation,
-              },
-            }}
-          />
-        </View>
-
-        <View
           position="absolute"
           top={0}
           right={0}
           bottom={0}
           left={0}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          paddingX={16}
-          paddingY={8}
-          fontSize="22px"
-          lineHeight="1.3"
-          letterSpacing="0.3rem"
-          textAlign="center"
-          textTransform="uppercase"
-          whiteSpace="normal"
-          wordBreak="break-word"
+          width="100%"
+          height="100%"
+          xmlns="http://www.w3.org/2000/svg"
           pointerEvents="none"
-          userSelect="none"
-          color={resolvedTextColor}
+          zIndex={1}
+          aria-hidden="true"
         >
-          {children}
+          <View
+            as="rect"
+            x="0"
+            y="0"
+            height="100%"
+            width="100%"
+            rx={numericBorderRadius}
+            ry={numericBorderRadius}
+            fill="transparent"
+            stroke={resolvedAccentColor}
+            strokeWidth="8px"
+            strokeDasharray={`0 ${strokePathLength}`}
+            strokeDashoffset={-Math.round(strokePathLength * 0.63)}
+            {...({ pathLength: strokePathLength } as any)}
+            on={{
+              groupHover: {
+                animate: strokeAnimation as any,
+              },
+            }}
+          />
         </View>
-      </View>
+
+        <View position="relative" zIndex={0}>
+          {linkOrContent}
+        </View>
+      </Element>
     );
   }
 
+  // --- Animation: Border Reveal ---
+  if (animation === 'borderReveal') {
+    const borderWidth = 3;
+    // Use the first color from gradient colors or fall back to mainTone.
+    // Wrap in var(--…) so app-studio tokens render inside CSS gradient strings.
+    const activeColor = cssVar(
+      borderMovingGradientColors?.[0] || mainTone || '#000000'
+    );
+
+    // Sides duration
+    // The default duration (2s) is too slow for a hover interaction.
+    // We scale it by 0.25 to make it responsive (0.5s total).
+    const effectiveDuration = borderMovingDuration * 0.75;
+    const sideDuration = effectiveDuration / 4;
+
+    // Gradients for each side (color 50%, transparent 50%)
+    const topGrad = `linear-gradient(90deg, ${activeColor} 50%, transparent 50%)`;
+    const rightGrad = `linear-gradient(180deg, ${activeColor} 50%, transparent 50%)`;
+    const bottomGrad = `linear-gradient(270deg, ${activeColor} 50%, transparent 50%)`;
+    const leftGrad = `linear-gradient(0deg, ${activeColor} 50%, transparent 50%)`;
+
+    // Coordinates:
+    // Top (L->R): 100% 0 -> 0 0
+    // Right (T->B): 100% 100% -> 100% 0
+    // Bottom (R->L): 0 100% -> 100% 100%
+    // Left (B->T): 0 0 -> 0 100%
+    const bgPosStart = `100% 0, 100% 100%, 0 100%, 0 0`;
+    const bgPosEnd = `0 0, 100% 0, 100% 100%, 0 100%`;
+
+    // Delays:
+    // Enter (Forward): Top(0), Right(1), Bottom(2), Left(3)
+    const delayEnter = `0s, ${sideDuration}s, ${sideDuration * 2}s, ${
+      sideDuration * 2
+    }s`;
+    // Exit (Reverse): Top(3), Right(2), Bottom(1), Left(0)
+    const delayExit = `${sideDuration * 2}s, ${
+      sideDuration * 2
+    }s, ${sideDuration}s, 0s`;
+
+    // Use slightly larger gradient size to overlap with button content (avoid gaps)
+    const gradientSize = borderWidth + 1;
+
+    return (
+      <Element
+        ref={containerRef}
+        as="div"
+        position="relative"
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
+        borderRadius={ButtonShapes[shape]}
+        cursor={isDisabled ? 'default' : 'pointer'}
+        onClick={onClick}
+        boxShadow={shadow as any}
+        padding={borderWidth}
+        background={`
+          ${topGrad} no-repeat,
+          ${rightGrad} no-repeat,
+          ${bottomGrad} no-repeat,
+          ${leftGrad} no-repeat
+        `}
+        backgroundSize={`200% ${gradientSize}px, ${gradientSize}px 200%, 200% ${gradientSize}px, ${gradientSize}px 200%`}
+        // Default State (Hidden)
+        backgroundPosition={bgPosStart}
+        transitionProperty="background-position"
+        transitionDuration={`${sideDuration}s`}
+        transitionTimingFunction="linear"
+        transitionDelay={delayExit}
+        // Hover State (Visible)
+        _hover={{
+          backgroundPosition: bgPosEnd,
+          transitionDelay: delayEnter,
+        }}
+        width={isFilled ? '100%' : isAuto ? 'fit-content' : undefined}
+        {...views?.container}
+        {...props}
+      >
+        <View
+          as={to ? 'div' : 'button'}
+          disabled={Boolean(isDisabled || isLoading)}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          borderRadius={Math.max(0, numericBorderRadius - borderWidth)}
+          width="100%"
+          height="100%"
+          {...baseStyles}
+          {...sizeStyles}
+          {...iconPad}
+          backgroundColor={baseStyles?.backgroundColor || mainTone}
+          color={resolvedTextColor}
+          borderWidth={0}
+          cursor={isDisabled ? 'default' : 'pointer'}
+        >
+          {linkOrContent}
+        </View>
+      </Element>
+    );
+  }
+
+  // --- Default: Standard Button ---
   return (
     <Element
+      ref={containerRef}
       as={variant === 'link' && to ? 'div' : 'button'}
       type={variant === 'link' && to ? undefined : 'button'}
       disabled={Boolean(isDisabled || isLoading)}
       /* sizing */
       {...sizeStyles}
-      {...iconPad}
-      display="flex"
+      {...iconPad} // Apply icon padding if needed
+      display="inline-flex"
       alignItems="center"
       justifyContent="center"
-      // width={isAuto ? 'fit-content' : isFilled ? '100%' : undefined}
+      width={isFilled ? '100%' : isAuto ? 'fit-content' : undefined}
       /* visuals */
       borderRadius={ButtonShapes[shape]}
-      boxShadow={shadow}
-      transition="all 0.2s ease"
+      boxShadow={shadow as any}
+      transition="background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease"
       cursor={isDisabled ? 'default' : 'pointer'}
       onClick={onClick}
-      {...base}
+      {...baseStyles}
       {...views?.container}
       {...props}
     >
-      {to ? (
-        <Link
-          to={to}
-          isExternal={isExternal}
-          color={'inherit'}
-          textDecoration={'inherit'}
-          textDecorationColor={'inherit'} // Link underline color matches text color
-          {...views?.link}
-        >
-          {content}
-        </Link>
-      ) : (
-        content
-      )}
+      {linkOrContent}
     </Element>
   );
 };
+
+// --- Main Component ---
+const ButtonView = React.memo(
+  React.forwardRef<HTMLElement, ButtonProps>(
+    (
+      {
+        /* behaviour */
+        variant = 'filled',
+        size = 'md',
+        shape = 'rounded',
+        iconPosition = 'left',
+        loaderPosition = 'left',
+        backgroundColor, // Primary override for main color
+        color, // Main button color (theme tokens or color palette)
+        textColor, // Explicit text color
+        explicitTextColor, // Instance-declared content color (set by wrapper)
+        reversed = false, // Reverse colors for dark backgrounds
+        isAuto = true,
+        isFilled,
+        isDisabled,
+        isLoading,
+        isIconRounded,
+        isIcon,
+        isHovered,
+        /* content */
+        icon,
+        leftIcon,
+        rightIcon,
+        startIcon,
+        endIcon,
+        children,
+        /* nav */
+        to,
+        isExternal,
+        /* misc */
+        shadow,
+        onClick,
+        views = {},
+        animation,
+        loaderProps,
+        config: buttonConfig,
+        ariaLabel,
+        /* effect props */
+        borderMovingDuration = 2,
+        borderMovingGradientColors = ['#705CFF', '#FF5C97', '#FFC75C'],
+        animatedStrokeAccentColor = '#705CFF',
+        animatedStrokeTextColor = 'color-gray-900',
+        ...props
+      },
+      ref
+    ) => {
+      /* MAIN COLOR – an app-studio token that drives the whole palette.
+       *   Priority: explicit backgroundColor → color → theme-primary.
+       *   State overrides: disabled → theme-disabled, loading → theme-loading.
+       *   Tokens are passed straight through to app-studio (no hex conversion). */
+      const baseColorKey = backgroundColor ?? color ?? 'theme-primary';
+      const mainColorKey = isDisabled
+        ? 'theme-disabled'
+        : isLoading
+        ? 'theme-loading'
+        : baseColorKey;
+
+      /* TEXT COLOR – instance-declared `explicitTextColor` (resolved by the
+       * Button wrapper before the design-system merge) wins over a config's
+       * `textColor`, which stays advisory. Falls back to color-white. */
+      const textColorKey = explicitTextColor ?? textColor ?? 'color-white';
+
+      /* variant palette */
+      const { config } = useDesignSystem();
+      const theme = config?.theme;
+      const palette = useMemo(() => {
+        const basePalette = getButtonVariants(
+          mainColorKey,
+          textColorKey,
+          reversed,
+          theme
+        );
+
+        // Merge with any variant overrides from config
+        if (buttonConfig?.variants) {
+          Object.keys(buttonConfig.variants).forEach((v) => {
+            if (basePalette[v as Variant]) {
+              basePalette[v as Variant] = deepMerge(
+                basePalette[v as Variant],
+                buttonConfig.variants[v]
+              );
+            }
+          });
+        }
+        return basePalette;
+      }, [mainColorKey, textColorKey, reversed, theme, buttonConfig?.variants]);
+
+      // Fall back to the `filled` palette for any unrecognised variant so an
+      // unknown value never renders an unstyled (no-background) button — which
+      // would drop white label text onto a light surface and fail contrast.
+      const variantBase = palette[variant] ?? palette.filled;
+      // An explicit content color overrides the variant's auto-calculated one
+      // (outline/ghost/link derive it from the main tone otherwise).
+      const base = explicitTextColor
+        ? { ...variantBase, color: explicitTextColor }
+        : variantBase;
+      const finalContentColor = (base?.color as string) ?? textColorKey;
+
+      // Render content logic safely
+      const content = (
+        <ButtonContent
+          icon={icon}
+          // `startIcon` / `endIcon` are compatibility aliases for
+          // `leftIcon` / `rightIcon`; the left/right spelling wins when both
+          // are provided.
+          leftIcon={leftIcon ?? startIcon}
+          rightIcon={rightIcon ?? endIcon}
+          isLoading={isLoading}
+          iconPosition={iconPosition}
+          loaderPosition={loaderPosition}
+          size={size}
+          resolvedTextColor={finalContentColor}
+          isIconRounded={isIconRounded}
+          loaderProps={loaderProps}
+          views={views}
+        >
+          {children}
+        </ButtonContent>
+      );
+
+      // Standard variants (filled, outline, ghost, link)
+      const sizeStyles = ButtonSizes[size];
+      // `isIcon` marks an icon-only button: reuse the square icon padding
+      // scale (the same slot `isIconRounded` uses) so the button stays compact.
+      const iconPad = isIconRounded || isIcon ? IconSizes[size] : {};
+
+      return (
+        <StandardButton
+          variant={variant}
+          animation={animation}
+          to={to}
+          isDisabled={isDisabled}
+          isLoading={isLoading}
+          isAuto={isAuto}
+          isFilled={isFilled}
+          isExternal={isExternal}
+          shape={shape}
+          shadow={shadow}
+          onClick={onClick}
+          views={views}
+          baseStyles={base}
+          sizeStyles={sizeStyles}
+          iconPad={iconPad}
+          resolvedTextColor={finalContentColor}
+          content={content as any}
+          size={size}
+          mainTone={mainColorKey}
+          borderMovingDuration={borderMovingDuration}
+          borderMovingGradientColors={borderMovingGradientColors}
+          animatedStrokeAccentColor={animatedStrokeAccentColor}
+          animatedStrokeTextColor={animatedStrokeTextColor}
+          containerRef={ref}
+          {...(ariaLabel !== undefined ? { 'aria-label': ariaLabel } : {})}
+          {...props}
+        />
+      );
+    }
+  )
+);
 
 export default ButtonView;

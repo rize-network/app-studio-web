@@ -1,51 +1,58 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ToggleGroup Component ToggleGroup to match snapshot 1`] = `
+exports[`ToggleGroup Component > ToggleGroup to match snapshot 1`] = `
 <div
-  className="dy-flex fdn-row gp-5px"
+  className="dy-flex gp-8px fwp-wrap fdn-row"
+  ref={[Function]}
   role="ToggleGroup"
 >
   <div
-    className="dy-flex jct-center ais-center pg-8px wh-fit-content cror-pointer brs-4px bcr- bwh-0px bsee-none bcrr- tn-all-0p2s-ease cr---hover tm-translateY-1px--hover cr---active tm-translateY0--active"
+    className="pg-8px wh-fit-content cror-pointer brs-8px bcr-transparent cr-var--theme-primary bwh-0px bsee-none bcrr-transparent bcr-var--color-gray-50--hover bcr-var--color-gray-100--active tn-background-color-0p2s-ease-color-0p2s-ease dy-flex jct-center ais-center"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    ref={[Function]}
     role="toggle-B"
   >
-    <div
-      className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none"
-      fontStyle="normal"
+    <span
+      className="fsee-normal tdn-none"
+      ref={[Function]}
+      style={{}}
     >
       B
-    </div>
+    </span>
   </div>
   <div
-    className="dy-flex jct-center ais-center pg-8px wh-fit-content cror-pointer brs-4px cr- bwh-0px bsee-none bcrr- tn-all-0p2s-ease cr---hover tm-translateY-1px--hover cr---active tm-translateY0--active"
+    className="pg-8px wh-fit-content cror-pointer brs-8px bcr-var--color-blue-50 cr-var--theme-primary bwh-1px bsee-solid bcrr-var--color-blue-200 bcr-var--color-gray-50--hover bcr-var--color-gray-100--active tn-background-color-0p2s-ease-color-0p2s-ease dy-flex jct-center ais-center"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    ref={[Function]}
     role="toggle-C"
   >
-    <div
-      className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none"
-      fontStyle="normal"
+    <span
+      className="fsee-normal tdn-none"
+      ref={[Function]}
+      style={{}}
     >
       C
-    </div>
+    </span>
   </div>
   <div
-    className="dy-flex jct-center ais-center pg-8px wh-fit-content cror-not-allowed brs-4px bcr- bwh-0px bsee-none bcrr- tn-all-0p2s-ease cr---hover tm-translateY-1px--hover cr---active tm-translateY0--active"
+    className="pg-8px wh-fit-content cror-not-allowed brs-8px bcr-transparent cr-var--theme-disabled bwh-0px bsee-none bcrr-transparent bcr-var--color-gray-50--hover bcr-var--color-gray-100--active tn-background-color-0p2s-ease-color-0p2s-ease dy-flex jct-center ais-center"
     onClick={[Function]}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
+    ref={[Function]}
     role="toggle-D"
   >
-    <div
-      className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none"
-      fontStyle="normal"
+    <span
+      className="fsee-normal tdn-none"
+      ref={[Function]}
+      style={{}}
     >
       D
-    </div>
+    </span>
   </div>
 </div>
 `;

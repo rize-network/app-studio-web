@@ -1,8 +1,9 @@
 import React, { useCallback, useRef } from 'react';
+import { Portal } from '../../../Portal/Portal';
 import { Element, useElementPosition } from 'app-studio';
 import { Typography } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';
@@ -17,23 +18,42 @@ import {
   SelectBoxProps,
   SelectViewProps,
 } from './Select.props';
-import { useItemState } from './Select.state';
-import { IconSizes } from './Select.style';
+import {
+  IconSizes,
+  dropdownStyles,
+  dropdownAnimation,
+  optionStyles,
+  optionStateStyles,
+  chevronAnimation,
+  chipStyles,
+  scrollbarStyles,
+} from './Select.style';
+
+const withoutFieldShellView = <T extends Record<string, any>>(views?: T): T => {
+  if (!views) return {} as T;
+  const { container, content, ...layoutViews } = views;
+  return layoutViews as T;
+};
+
+// Field sizing now lives in `Input/fieldSizes` and is applied by FieldContent,
+// so this component no longer carries its own copy of the scale.
+
 /**
  * Item Component
  *
  * Renders an individual option item in the select dropdown
  */
-const Item: React.FC<ItemProps> = ({
+const Item: React.FC<ItemProps & { isSelected?: boolean }> = ({
   isHovered,
-  setIsHovered,
+  setIsHovered = () => {},
   option,
   size = 'md',
   callback = () => {},
   style,
+  isSelected = false,
   ...props
 }) => {
-  // Handles the click event on an option by invoking the callback with the selected option's value
+  // Handles the click event on an option
   const handleOptionClick = (e: React.MouseEvent, option: string) => {
     e.stopPropagation();
     e.preventDefault();
@@ -45,37 +65,66 @@ const Item: React.FC<ItemProps> = ({
   // Toggles the hover state on the item
   const handleHover = () => setIsHovered(!isHovered);
 
+  // Get background color based on state priority
+  const getStateStyle = () => {
+    if (isSelected && isHovered) return optionStateStyles.selectedHighlighted;
+    if (isSelected) return optionStateStyles.selected;
+    if (isHovered) return optionStateStyles.highlighted;
+    return optionStateStyles.default;
+  };
+
   return (
     <Element
       as="li"
-      // Layout properties
-      margin={0}
-      paddingVertical={8} // 2 × 4px grid
-      paddingHorizontal={8} // 2 × 4px grid
+      // An option has to say it is one. Without the role the listbox announces
+      // a list of nothing, and anything that resolves controls by role — a
+      // screen reader, voice control, a test driver — cannot reach these at all.
+      role="option"
+      aria-selected={isSelected}
+      // Layout - improved touch targets
+      display="flex"
+      alignItems="center"
+      justifyContent="space-between"
       listStyleType="none"
-      cursor="pointer"
+      // Apply option styles from design tokens
+      {...optionStyles}
+      {...getStateStyle()}
       // Event handlers
       onMouseEnter={handleHover}
       onMouseLeave={handleHover}
       onClick={(e: React.MouseEvent) => handleOptionClick(e, option.value)}
-      // Visual properties
-      backgroundColor={isHovered ? 'color.gray.100' : 'transparent'}
-      borderRadius="4px" // Subtle rounded corners for items
-      // Animation
-      transition="all 0.15s ease"
       // Apply custom props
       {...props}
     >
       <Text
-        // Typography properties
         fontSize={Typography.fontSizes[size]}
-        fontWeight="400" // Regular weight
-        lineHeight="1.5"
-        // Apply custom styles
+        fontWeight={isSelected ? '500' : '400'}
+        lineHeight="14px"
+        color={isSelected ? 'color-gray-900' : 'color-gray-700'}
         {...style}
       >
         {option.label}
       </Text>
+      {/* Selected indicator */}
+      {isSelected && (
+        <Element
+          as="span"
+          // Decoration, and hidden as such. `aria-selected` above already
+          // carries this meaning in the way assistive technology reads it,
+          // whereas a visible ✓ joins the option's accessible name and turns
+          // "Alpha" into "Alpha ✓" — so a screen reader announces the wrong
+          // name, voice control loses "click Alpha", and anything resolving
+          // the option by its exact label stops finding it at all.
+          aria-hidden="true"
+          color="theme-primary"
+          fontSize="14px"
+          marginLeft={8}
+          display="flex"
+          alignItems="center"
+        >
+          ✓
+        </Element>
+      )}
     </Element>
   );
 };
@@ -93,6 +142,9 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   removeOption = () => {},
   options,
 }) => {
+  const fieldView = views?.field || {};
+  const textView = views?.text || {};
+  const isMultiValue = Array.isArray(value) && value.length > 0;
   /**
    * Styles for the select field
    */
@@ -102,29 +154,54 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     width: '95%',
     height: '100%',
     border: 'none',
-    paddingVertical: 4, // 3 × 4px grid
+    // No vertical padding here: the field shell above already applies
+    // `shellPaddingY` for the current size. Adding 4px on each side on top of
+    // it pushed the content box past the shell's `minHeight`, so a `md` Select
+    // rendered at 50px while a `md` TextField rendered at the intended 40px —
+    // visibly misaligning the two whenever they sit in the same row.
+    paddingVertical: 0,
     paddingHorizontal: 0,
 
     // Typography properties
     fontSize: Typography.fontSizes[size],
 
     fontWeight: '400', // Regular weight
-    lineHeight: '1.5',
+    // Left to the natural line box, as TextField does. A fixed 20px line-height
+    // does not fit the shell it lives in: at `md` the shell is 40px tall with
+    // 10px of padding and a 1px border on each side, leaving 18px for content.
+    // Hard-coding 20px pushed every Select 2px past its own declared height.
     letterSpacing: '-0.01em', // Slight negative tracking for modern look
 
     // Visual properties
-    backgroundColor: 'transparent',
-    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+    color: isDisabled ? 'color-gray-400' : 'color-gray-900',
 
     // State properties
     cursor: isDisabled ? 'not-allowed' : 'pointer',
 
     // Animation
-    transition: 'all 0.2s ease',
+    transition: 'all 0.2s ease-in-out',
+
+    // A single-value trigger stays on one line and ellipsises, via `Text`'s own
+    // `maxLines`. Without it a long option label wraps, which silently breaks
+    // the control's declared height — a `md` Select showing "Uma User's
+    // workspace" in a narrow sidebar became two lines tall.
+    //
+    // `minWidth: 0` is what actually lets it truncate: the trigger is a flex
+    // child, and `min-width: auto` would otherwise stop it shrinking below its
+    // content, so the clamp would never engage.
+    //
+    // Multi-select is excluded: its value renders as chips that are meant to
+    // wrap, and clamping would hide selections rather than reflow them.
+    ...(isMultiValue ? {} : { maxLines: 1, minWidth: 0 }),
 
     // Apply custom styles
-    ...views['field'],
-    ...views['text'],
+    ...fieldView,
+    ...textView,
+    style: {
+      backgroundColor: 'transparent',
+      ...(fieldView as any).style,
+      ...(textView as any).style,
+    },
   };
   const option: any =
     options.length > 0 && options.find((option) => option.value === value);
@@ -168,10 +245,25 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
   isDisabled = false,
   isReadOnly = false,
   options = [],
+  // Swallowed on purpose. `defaultValue` is the Select's own prop — the state
+  // hook has already turned it into the `value` below — but it also rides
+  // along in `...props`, and React errors on any <select> carrying both
+  // ("Select elements must be either controlled or uncontrolled"). That error
+  // fires on every render and fails test runs that treat console.error as
+  // fatal, so the element has to be given one or the other, never both.
+  defaultValue: _defaultValue,
   ...props
 }) => {
-  const handleChange = (event: any) => {
-    if (onChange) onChange(event);
+  // The hidden <select> is the only path that produced a DOM event where every
+  // other path produced a value, so the same `onChange` prop had two different
+  // argument shapes depending on which one fired. Normalise here.
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (!onChange) return;
+    onChange(
+      isMulti
+        ? Array.from(event.target.selectedOptions, (option) => option.value)
+        : event.target.value
+    );
   };
   return (
     <Element
@@ -179,9 +271,13 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
       name={name}
       as="select"
       opacity={0}
-      width={0}
-      height={0}
+      width={1}
+      height={1}
+      overflow="hidden"
       position="absolute"
+      pointerEvents="none"
+      tabIndex={-1}
+      aria-hidden="true"
       value={value}
       disabled={isDisabled}
       readOnly={isReadOnly}
@@ -205,43 +301,44 @@ const HiddenSelect: React.FC<HiddenSelectProps> = ({
  *
  * Renders the dropdown list of options for the select component
  */
-const DropDown: React.FC<DropDownProps> = ({
+const DropDown: React.FC<
+  DropDownProps & {
+    selectedValue?: string | string[];
+    listboxId?: string;
+    getOptionId?: (index: number) => string;
+  }
+> = ({
   size,
   views = {},
   options,
   callback = () => {},
   highlightedIndex,
-  setHighlightedIndex,
+  setHighlightedIndex = () => {},
+  selectedValue,
+  listboxId,
+  getOptionId,
 }) => {
-  const itemStates = useItemState();
   const handleCallback = (option: string) => callback(option);
 
-  // Shadow styles for the dropdown - now applied directly in the Element
+  // Check if an option is selected
+  const isOptionSelected = (optionValue: string) => {
+    if (Array.isArray(selectedValue)) {
+      return selectedValue.includes(optionValue);
+    }
+    return selectedValue === optionValue;
+  };
 
   return (
     <Element
       as="ul"
-      role="dropdown"
-      width="100%"
+      role="listbox"
+      id={listboxId}
       display="flex"
       flexDirection="column"
-      backgroundColor="color.white"
-      transition="all 0.2s ease"
       margin={0}
-      style={{
-        scrollbarWidth: 'thin',
-        scrollbarColor: 'rgba(0, 0, 0, 0.2) transparent',
-        '&::-webkit-scrollbar': {
-          width: '4px',
-        },
-        '&::-webkit-scrollbar-track': {
-          background: 'transparent',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          background: 'rgba(0, 0, 0, 0.2)',
-          borderRadius: '4px',
-        },
-      }}
+      padding="4px"
+      {...dropdownStyles}
+      style={scrollbarStyles}
       {...views?.dropDown}
     >
       {options &&
@@ -249,15 +346,15 @@ const DropDown: React.FC<DropDownProps> = ({
         options.map((option, index) => (
           <Item
             key={option.value}
+            id={getOptionId ? getOptionId(index) : undefined}
             size={size}
             style={views['text']}
             option={option}
             callback={handleCallback}
-            backgroundColor={
-              index === highlightedIndex ? 'color.gray.100' : 'transparent'
-            }
+            isSelected={isOptionSelected(option.value)}
+            isHovered={index === highlightedIndex}
+            setIsHovered={() => {}}
             onMouseEnter={() => setHighlightedIndex(index)}
-            {...itemStates}
           />
         ))}
     </Element>
@@ -278,33 +375,45 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 
   return (
     <Horizontal
-      gap={8}
-      padding={8}
+      gap={6}
       alignItems="center"
-      borderRadius="6px"
-      backgroundColor="color.gray.200"
-      fontSize={Typography.fontSizes[size]}
       onClick={(event: any) => event.stopPropagation()}
-      transition="all 0.2s ease"
+      {...chipStyles}
+      _hover={{
+        backgroundColor: 'color-gray-200',
+      }}
       {...props}
     >
       <Text
-        size={size}
-        fontWeight="500" // Medium weight
+        fontSize={Typography.fontSizes[size]}
+        fontWeight="500"
+        color="color-gray-700"
       >
         {option}
       </Text>
 
-      <CloseIcon
-        role="close-button"
-        color="inherit"
-        widthHeight={IconSizes[size]}
+      {/* A real button: `close-button` is not an ARIA role, so the remover was
+          invisible to assistive tech and unreachable by keyboard. */}
+      <Element
+        as="button"
+        type="button"
+        aria-label={`Remove ${option}`}
         onClick={handleClick}
-        transition="all 0.2s ease"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        padding={0}
+        border="none"
+        backgroundColor="transparent"
+        color="color-gray-500"
+        cursor="pointer"
+        transition="all 0.2s ease-in-out"
         _hover={{
-          opacity: 0.7,
+          color: 'color-gray-700',
         }}
-      />
+      >
+        <CloseIcon color="inherit" widthHeight={IconSizes[size]} />
+      </Element>
     </Horizontal>
   );
 };
@@ -322,6 +431,8 @@ const SelectView: React.FC<SelectViewProps> = ({
   isHovered = false,
   isDisabled = false,
   isReadOnly = false,
+  isRequired = false,
+  isAutoFocus = false,
   options = [],
   shadow = {},
   size = 'md',
@@ -342,52 +453,63 @@ const SelectView: React.FC<SelectViewProps> = ({
   setIsFocused = () => {},
   setHighlightedIndex,
   highlightedIndex,
+  isScrollable,
+  // Pulled out so it can name the trigger. It used to fall into `...props`,
+  // which never reaches the element a screen reader reads.
+  'aria-label': ariaLabel,
   ...props
 }) => {
+  const generatedId = React.useId();
+  // One id per element: the focusable combobox keeps the public `id`; the
+  // aria-hidden native <select>, the label, the listbox and its options get
+  // derived ids — the combobox and the native <select> used to share the same
+  // `id`, which is invalid HTML and made `htmlFor` ambiguous. The `useId`
+  // fallback is stripped of its delimiters because the id is used in `#id`
+  // selector lookups below.
+  const selectId = id ?? `select-${generatedId.replace(/[^a-zA-Z0-9_-]/g, '')}`;
+  const nativeSelectId = `${selectId}-native`;
+  const labelId = `${selectId}-label`;
+  const listboxId = `${selectId}-listbox`;
+  const getOptionId = (index: number) => `${selectId}-option-${index}`;
+
   const {
     ref: triggerRef,
     relation,
     updateRelation,
   } = useElementPosition({
     trackChanges: true,
-    throttleMs: 100,
+    trackOnScroll: true,
+    trackOnResize: true,
+    throttleMs: 10,
   });
 
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Get optimal positioning style based on available space
+  // Get optimal positioning style based on available space
   const getDropdownStyle = () => {
-    if (!relation) {
-      // Default positioning when relation is not available
-      return {
-        position: 'absolute' as const,
-        top: '100%',
-        marginTop: '8px',
-        left: 0,
-        right: 0,
-        zIndex: 10000,
-      };
-    }
+    if (!triggerRef.current) return {};
 
-    const baseStyle = {
-      position: 'absolute' as const,
-      left: 0,
-      right: 0,
+    const rect = triggerRef.current.getBoundingClientRect();
+    const baseStyle: React.CSSProperties = {
+      position: 'fixed',
+      left: rect.left,
+      width: rect.width,
       zIndex: 10000,
     };
 
-    // Place dropdown where there's more space vertically
-    if (relation.space.vertical === 'top') {
+    // Use relation to determine vertical placement if available, otherwise default to bottom
+    const isTop = relation?.space?.vertical === 'top';
+
+    if (isTop) {
       return {
         ...baseStyle,
-        bottom: '100%',
-        marginBottom: '8px',
+        bottom: window.innerHeight - rect.top + 8, // 8px gap
       };
     } else {
       return {
         ...baseStyle,
-        top: '100%',
-        marginTop: '8px',
+        top: rect.bottom + 8, // 8px gap
       };
     }
   };
@@ -399,12 +521,21 @@ const SelectView: React.FC<SelectViewProps> = ({
       document.removeEventListener('closeAllSelects', handleCloseAll);
   }, [setHide]);
 
+  // Mount-only autofocus, mirroring the native `autofocus` attribute: the
+  // focusable element is the combobox trigger, not the aria-hidden <select>.
+  React.useEffect(() => {
+    if (isAutoFocus && !isDisabled && !isReadOnly) {
+      triggerRef.current?.focus();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Add a global click handler to close the dropdown when clicking outside
   React.useEffect(() => {
     const handleGlobalClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       // Only close if clicking outside of this specific select component
-      if (!target.closest(`#${id}`) && !hide) {
+      if (!target.closest(`#${selectId}`) && !hide) {
         setHide(true);
       }
     };
@@ -413,8 +544,7 @@ const SelectView: React.FC<SelectViewProps> = ({
     return () => {
       document.removeEventListener('click', handleGlobalClick);
     };
-  }, [id, hide, setHide]);
-  const showLabel = !!(isFocused && label);
+  }, [selectId, hide, setHide]);
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -436,12 +566,15 @@ const SelectView: React.FC<SelectViewProps> = ({
       // Tell all other selects to close
       document.dispatchEvent(new Event('closeAllSelects'));
 
-      // Update value based on multi-select or single-select mode
+      // Update value based on multi-select or single-select mode.
+      // `onChange` reports the *next* selection, not the option that was
+      // clicked: a controlled parent has to be able to store what it gets
+      // back, and for a multi-select that is the whole array.
       if (isMulti && Array.isArray(value)) {
         if (!value.includes(option)) {
           const newValue = [...value, option];
           setValue(newValue);
-          if (onChange) onChange(option);
+          if (onChange) onChange(newValue);
         }
       } else {
         setValue(option);
@@ -456,20 +589,81 @@ const SelectView: React.FC<SelectViewProps> = ({
   const handleRemoveOption = (valueOption: string) => {
     if (Array.isArray(value) && value.includes(valueOption)) {
       const newValue = value.filter((option) => option !== valueOption);
-      setValue(newValue.length === 0 ? [] : newValue);
+      setValue(newValue);
+      // Removing a chip is a change like any other. Without this the parent of
+      // a controlled multi-select never hears about it, so the chip comes
+      // straight back on the next render.
+      if (onChange) onChange(newValue);
     }
   };
+  const showLabel = !!label;
+  const layoutViews = withoutFieldShellView(views);
+
   return (
     <FieldContainer
       ref={triggerRef as React.RefObject<HTMLDivElement>}
       position="relative"
       width="100%"
       display="inline-block"
-      id={id}
-      role="SelectBox"
+      id={selectId}
+      // `SelectBox` is not an ARIA role, so the trigger was exposed as a plain
+      // container: not focusable, not announced, and operable only by mouse.
+      // The native `<select>` behind it is `aria-hidden` and `tabIndex={-1}`, so
+      // there was no keyboard path to this control at all.
+      role="combobox"
+      aria-haspopup="listbox"
+      aria-expanded={!hide}
+      // The visible label names the combobox via `aria-labelledby`; an explicit
+      // `aria-label` prop wins when the caller provides one.
+      aria-labelledby={!ariaLabel && showLabel ? labelId : undefined}
+      aria-label={ariaLabel}
+      aria-controls={listboxId}
+      aria-activedescendant={
+        !hide && options.length > 0
+          ? getOptionId(highlightedIndex ?? 0)
+          : undefined
+      }
+      aria-disabled={isDisabled || undefined}
+      aria-required={isRequired || undefined}
+      tabIndex={isDisabled || isReadOnly ? -1 : 0}
       helperText={helperText}
       error={error}
-      views={views}
+      views={layoutViews}
+      onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (isDisabled || isReadOnly) return;
+        // Keys pressed on descendants (the chip-remove buttons) must keep
+        // their native activation instead of being hijacked by the trigger.
+        if (e.target !== e.currentTarget) return;
+
+        // Closed: Enter, Space and Down open the list — the same keys a
+        // native select answers to, so nobody has to learn this one separately.
+        if (hide) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            document.dispatchEvent(new Event('closeAllSelects'));
+            setHide(false);
+            setIsFocused(true);
+          }
+          return;
+        }
+
+        // Open: arrows move the highlight, Enter commits it, Escape closes.
+        const currentIndex = highlightedIndex ?? 0;
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          setHighlightedIndex?.(Math.min(currentIndex + 1, options.length - 1));
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          setHighlightedIndex?.(Math.max(currentIndex - 1, 0));
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          const option = options[currentIndex];
+          if (option) handleCallback(option.value);
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          setHide(true);
+        }
+      }}
       onClick={(e: React.MouseEvent<HTMLDivElement>) => {
         // Stop propagation to prevent clicks from bubbling up
         e.stopPropagation();
@@ -489,29 +683,32 @@ const SelectView: React.FC<SelectViewProps> = ({
         shadow={shadow}
         variant={variant}
         value={value}
-        color={'theme.primary'}
+        color={'theme-primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
+        // Sizing comes from FieldContent's shared scale (`Input/fieldSizes`).
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
         position="relative"
+        {...views?.content}
       >
         <FieldWrapper>
           {showLabel && (
             <FieldLabel
-              htmlFor={id}
-              color={'theme.primary'}
+              id={labelId}
+              htmlFor={nativeSelectId}
+              color={'theme-primary'}
               error={error}
-              {...views}
+              {...views?.label}
             >
               {label}
             </FieldLabel>
           )}
           <HiddenSelect
-            id={id}
+            id={nativeSelectId}
             name={name}
             options={options}
             onChange={onChange}
@@ -519,6 +716,10 @@ const SelectView: React.FC<SelectViewProps> = ({
             isDisabled={isDisabled}
             isReadOnly={isReadOnly}
             isMulti={isMulti}
+            // Real form semantics live on the native element: `required`
+            // makes submission enforcement work even though the visible
+            // combobox is a div.
+            required={isRequired || undefined}
             onFocus={handleFocus}
             {...props}
           />
@@ -534,50 +735,44 @@ const SelectView: React.FC<SelectViewProps> = ({
         </FieldWrapper>
         <FieldIcons>
           {!isReadOnly && !isDisabled && (
-            <>
-              {hide ? (
-                <ChevronIcon
-                  color="inherit"
-                  widthHeight={IconSizes[size]}
-                  style={views.icon}
-                  orientation="down"
-                />
-              ) : (
-                <ChevronIcon
-                  color="inherit"
-                  orientation="up"
-                  widthHeight={IconSizes[size]}
-                  style={views.icon}
-                />
-              )}
-            </>
+            <Element
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              style={hide ? chevronAnimation.closed : chevronAnimation.open}
+            >
+              <ChevronIcon
+                color="inherit"
+                widthHeight={IconSizes[size]}
+                style={views.icon}
+                orientation="down"
+              />
+            </Element>
           )}
         </FieldIcons>
         {!hide && options.length > 0 && (
-          <Element
-            ref={dropdownRef}
-            onClick={(e: React.MouseEvent) => e.stopPropagation()}
-            style={getDropdownStyle()}
-          >
-            <DropDown
-              size={size}
-              views={{
-                ...views,
-                dropDown: {
-                  borderRadius: '6px',
-                  border: '1px solid color.gray.200',
-                  boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
-                  padding: '8px',
-                  maxHeight: '240px',
-                  overflowY: 'auto',
-                },
+          <Portal>
+            <Element
+              ref={dropdownRef}
+              onClick={(e: React.MouseEvent) => e.stopPropagation()}
+              style={{
+                ...getDropdownStyle(),
+                ...dropdownAnimation.enter,
               }}
-              options={options}
-              callback={handleCallback}
-              highlightedIndex={highlightedIndex}
-              setHighlightedIndex={setHighlightedIndex}
-            />
-          </Element>
+            >
+              <DropDown
+                size={size}
+                views={views}
+                options={options}
+                callback={handleCallback}
+                highlightedIndex={highlightedIndex}
+                setHighlightedIndex={setHighlightedIndex}
+                selectedValue={value}
+                listboxId={listboxId}
+                getOptionId={getOptionId}
+              />
+            </Element>
+          </Portal>
         )}
       </FieldContent>
     </FieldContainer>

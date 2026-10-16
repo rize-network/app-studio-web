@@ -1,16 +1,16 @@
 import React from 'react';
 import { Carousel } from '../Carousel';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { Button } from '../../Button/Button';
 
 export const NavigationDemo = () => {
   // Create an array of slides with different background colors
   const slides = [
-    { color: 'color.blue.500', text: 'Slide 1' },
-    { color: 'color.green.500', text: 'Slide 2' },
-    { color: 'color.purple.500', text: 'Slide 3' },
+    { color: 'color-blue-500', text: 'Slide 1' },
+    { color: 'color-green-500', text: 'Slide 2' },
+    { color: 'color-purple-500', text: 'Slide 3' },
   ];
 
   return (

@@ -1,16 +1,16 @@
 import React from 'react';
 import { Carousel } from '../Carousel';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 export const AutoPlayDemo = () => {
   // Create an array of slides with different background colors
   const slides = [
-    { color: 'color.red.500', text: 'Auto-play Slide 1' },
-    { color: 'color.yellow.500', text: 'Auto-play Slide 2' },
-    { color: 'color.teal.500', text: 'Auto-play Slide 3' },
-    { color: 'color.pink.500', text: 'Auto-play Slide 4' },
+    { color: 'color-red-500', text: 'Auto-play Slide 1' },
+    { color: 'color-yellow-500', text: 'Auto-play Slide 2' },
+    { color: 'color-teal-500', text: 'Auto-play Slide 3' },
+    { color: 'color-pink-500', text: 'Auto-play Slide 4' },
   ];
 
   return (

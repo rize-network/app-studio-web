@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, Image, Horizontal, Center } from 'app-studio';
+import { View, Text, Image, Horizontal, Center, Input } from 'app-studio';
 import { UploadIcon } from '../../Icon/Icon';
 import { UploadStateProps, UploadViewProps } from './Uploader.props';
-
+// Defines the `UploadView` functional component, responsible for rendering the UI of the Uploader based on provided properties and internal state.
 export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   accept,
   isLoading = false,
@@ -28,6 +28,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   textProps,
   fileType,
   previewUrl: externalPreviewUrl,
+  // Renders an error message with customizable styling when an upload fails or an issue occurs.
   renderError = ({
     errorMessage,
     errorMessageProps,
@@ -65,13 +66,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
       </Center>
     ) : null;
   },
-  renderVideo = ({
-    selectedFile,
-    // thumbnailUrl,
-    videoRef,
-    videoProps,
-    // imageProps,
-  }) => {
+  renderVideo = ({ selectedFile, videoRef, videoProps }) => {
     return (
       <View width="100%" height="100%" position="relative" {...views?.view}>
         <View
@@ -114,7 +109,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
       >
         <View
           height={4}
-          backgroundColor="rgba(0,0,0,0.1)"
+          backgroundColor="color-black-100"
           width="100%"
           borderRadius={2}
           {...views?.view}
@@ -123,7 +118,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
             height={4}
             width={`${progress}%`}
             borderRadius={2}
-            backgroundColor="#000"
+            backgroundColor="color-dark-50"
             {...views?.view}
           />
         </View>
@@ -136,20 +131,11 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
   views = {},
 }) => {
   const finalPreviewUrl = externalPreviewUrl || previewUrl;
-
-  // Debug log to help troubleshoot
-  // console.log('Uploader state:', {
-  //   fileType,
-  //   finalPreviewUrl,
-  //   selectedFile: selectedFile?.name,
-  //   progress,
-  // });
-
   return (
     <Center
       onClick={handleClick}
       cursor="pointer"
-      border="1px solid rgba(0,0,0,0.1)"
+      border="1px solid color-black-100"
       borderRadius={8}
       padding={16}
       flexDirection="column"
@@ -159,13 +145,12 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
       {...containerProps}
       {...views?.container}
     >
-      {/* Image Preview */}
+      {}
       {progress === 100 &&
         fileType === 'image' &&
         finalPreviewUrl &&
         renderImage({ previewUrl: finalPreviewUrl, imageProps })}
-
-      {/* Video Preview */}
+      {}
       {progress === 100 &&
         fileType === 'video' &&
         thumbnailUrl &&
@@ -176,8 +161,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
           videoProps,
           imageProps,
         })}
-
-      {/* File Preview */}
+      {}
       {progress === 100 &&
         fileType === 'file' &&
         selectedFile &&
@@ -189,8 +173,7 @@ export const UploadView: React.FC<UploadViewProps & UploadStateProps> = ({
       {!isLoading &&
         errorMessage &&
         renderError({ errorMessage, errorMessageProps })}
-      <View
-        as="input"
+      <Input
         type="file"
         ref={fileInputRef}
         onChange={handleFileChange}

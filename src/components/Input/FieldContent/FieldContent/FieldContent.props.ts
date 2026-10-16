@@ -1,8 +1,15 @@
 import React from 'react';
 import { Shape, Size, TextFieldStyles, Variant } from '../../Input.type';
-import { ViewProps } from 'app-studio';
+import { Shadow, ViewProps } from 'app-studio';
+import { Elevation } from '../../../../utils/elevation';
 
-export interface ContentProps extends Omit<ViewProps, 'size'> {
+export interface ContentProps extends Omit<ViewProps, 'size' | 'shadow'> {
+  /**
+   * Shadow applied to the field shell. Accepts the design-system primitives
+   * (boolean / number / Shadow), the consumer's elevation token, or a raw
+   * ViewProps-shaped style object used as a shadow descriptor.
+   */
+  shadow?: boolean | number | Shadow | Elevation | ViewProps;
   /**
    * The color of the Content component.
    */
@@ -40,9 +47,11 @@ export interface ContentProps extends Omit<ViewProps, 'size'> {
    */
   label?: string;
   /**
-   * The default value of the field.
+   * The default value of the field. Accepts the same shape as
+   * HTMLInputElement.value (including `readonly string[]` for compatibility
+   * with React 19's stricter Input typing).
    */
-  value?: string | Array<string> | number;
+  value?: string | number | readonly string[];
   /**
    * Changes the Input style
    */

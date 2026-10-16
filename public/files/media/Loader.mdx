@@ -1,0 +1,161 @@
+# Loader
+
+A versatile component to indicate loading states with various visual styles and customizable appearance.
+
+### **Import**
+```tsx
+import { Loader } from '@app-studio/web';
+```
+
+### **ColorLoader**
+
+```tsx
+import React from 'react';
+import { Loader } from '../../Loader/Loader';
+import { Horizontal } from 'app-studio';
+
+export const StyleLoader = () => (
+  <Horizontal gap={15} flexWrap="nowrap">
+    <Loader loaderColor="black" textColor="black">
+      Submitting
+    </Loader>
+    <Loader
+      loaderColor="theme-primary"
+      textColor="theme-primary"
+      textPosition="left"
+    >
+      Submitting
+    </Loader>
+  </Horizontal>
+);
+```
+
+### **DefaultLoader**
+
+```tsx
+import React from 'react';
+import { Loader } from '../../Loader/Loader';
+
+export const DefaultLoader = () => <Loader />;
+```
+
+### **PositionLoader**
+
+```tsx
+import React from 'react';
+import { Loader } from '../../Loader/Loader';
+import { Vertical } from 'app-studio';
+
+export const PositionLoader = () => (
+  <Vertical gap={15}>
+    <Loader loaderColor="black" textColor="black">
+      Submitting
+    </Loader>
+    <Loader
+      loaderColor="theme-primary"
+      textColor="theme-primary"
+      textPosition="top"
+    >
+      Submitting
+    </Loader>
+    <Loader
+      loaderColor="theme-primary"
+      textColor="theme-primary"
+      textPosition="bottom"
+    >
+      Submitting
+    </Loader>
+    <Loader
+      loaderColor="theme-primary"
+      textColor="theme-primary"
+      textPosition="left"
+    >
+      Submitting
+    </Loader>
+  </Vertical>
+);
+```
+
+### **SizeLoader**
+
+```tsx
+import React from 'react';
+import { Loader } from '../../Loader/Loader';
+import { Vertical } from 'app-studio';
+
+import { Size } from '../Loader/Loader.type';
+
+export const SizeLoader = () => (
+  <Vertical flexWrap="nowrap">
+    {['xs', 'sm', 'md', 'lg', 'xl'].map((size) => (
+      <Loader key={size} size={size as Size} />
+    ))}
+  </Vertical>
+);
+```
+
+### **SpeedLoader**
+
+```tsx
+import React from 'react';
+import { Loader } from '../../Loader/Loader';
+import { Horizontal } from 'app-studio';
+
+import { Speed } from '../Loader/Loader.type';
+
+export const SpeedLoader = () => (
+  <Horizontal justifyContent="space-evenly">
+    {['slow', 'normal', 'fast'].map((speed) => (
+      <Loader key={speed} speed={speed as Speed} />
+    ))}
+  </Horizontal>
+);
+```
+
+### **TextLoader**
+
+```tsx
+import React from 'react';
+import { Loader } from '../../Loader/Loader';
+
+export const TextLoader = () => (
+  <Loader
+    textColor="theme-secondary"
+    textPosition="left"
+    loaderColor="theme-secondary"
+  >
+    Loader
+  </Loader>
+);
+```
+
+### **VariantLoader**
+
+```tsx
+import React from 'react';
+import { Loader } from '../../Loader/Loader';
+import { Horizontal } from 'app-studio';
+
+import { LoaderType } from '../Loader/Loader.type';
+
+export const TypeLoader = () => (
+  <Horizontal justifyContent="space-evenly">
+    {['default', 'quarter', 'dotted'].map((type) => (
+      <Loader key={type} type={type as LoaderType} />
+    ))}
+  </Horizontal>
+);
+```
+
+### **Index**
+
+```tsx
+export * from './ColorLoader';
+export * from './DefaultLoader';
+export * from './PositionLoader';
+export * from './SizeLoader';
+export * from './SpeedLoader';
+export * from './TextLoader';
+export * from './VariantLoader';
+```
+

@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'app-studio';
-import { Center } from 'app-studio';
 import { AspectRatioProps } from './AspectRatio.props';
 
 // Declaration of a functional component named AspectRatioView.
@@ -13,7 +12,7 @@ export const AspectRatioView = ({
   // Spread the rest of the props to inherit additional properties.
   ...props
 }: AspectRatioProps) => (
-  <Center
+  <View
     width={'100%'}
     position="relative"
     overflow="hidden"
@@ -32,5 +31,5 @@ export const AspectRatioView = ({
     >
       {children}
     </View>
-  </Center>
+  </View>
 );

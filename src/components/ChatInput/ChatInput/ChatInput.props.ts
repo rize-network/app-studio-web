@@ -10,22 +10,69 @@ import {
 import { Suggestion } from '../EditableInput';
 
 /**
+ * Imperative handle exposed on the `ChatInput` ref.
+ *
+ * The visible field is a `contentEditable` div, which has no `value` property. This handle — and the
+ * hidden mirror `<textarea>` it exposes — is the supported way to read or write the input's text from
+ * outside React (automation, replay engines, draft restoration).
+ */
+export interface ChatInputHandle {
+  /**
+   * Current text of the input.
+   */
+  getValue: () => string;
+
+  /**
+   * Replaces the text of the input. Fires `onChange` exactly like typing does, so a controlled
+   * `ChatInput` still needs its parent to apply the new value.
+   */
+  setValue: (value: string) => void;
+
+  /**
+   * Clears the input. Shorthand for `setValue('')`.
+   */
+  clear: () => void;
+
+  /**
+   * Focuses the editable area.
+   */
+  focus: () => void;
+
+  /**
+   * Blurs the editable area.
+   */
+  blur: () => void;
+
+  /**
+   * The `contentEditable` element that renders the text (`role="textbox"`).
+   */
+  getElement: () => HTMLDivElement | null;
+
+  /**
+   * The hidden mirror `<textarea>`; `null` when `hiddenInput` is `false`. Its `value` always matches
+   * the input's text and it accepts writes followed by a bubbling `input` event.
+   */
+  getInputElement: () => HTMLTextAreaElement | null;
+}
+
+/**
  * Props for the ChatInput component
  */
-export interface ChatInputProps extends ViewProps {
+export interface ChatInputProps
+  extends Omit<ViewProps, 'onChange' | 'onSubmit' | 'loading'> {
   /**
    * Get the pending files
    */
-  getPendingFiles: () => File[];
+  getPendingFiles?: () => File[];
 
   /**
    * Clear the pending files
    */
-  clearPendingFiles: () => void;
+  clearPendingFiles?: () => void;
   /**
    * Callback function when the form is submitted
    */
-  onSubmit: (
+  onSubmit?: (
     message: string,
     options?: { model_name?: string; enable_thinking?: boolean }
   ) => void;
@@ -46,14 +93,49 @@ export interface ChatInputProps extends ViewProps {
   disabled?: boolean;
 
   /**
+   * Whether the input is disabled (camelCase alias for `disabled`)
+   */
+  isDisabled?: boolean;
+
+  /**
+   * Visible row count for the input
+   */
+  lines?: number;
+
+  /**
+   * Optional right-side affordance rendered inside the input
+   */
+  rightElement?: React.ReactNode;
+
+  /**
+   * Optional key handler for the editable area
+   */
+  onKeyDown?: (e: React.KeyboardEvent) => void;
+
+  /**
+   * Error state or value used by form wrappers
+   */
+  error?: any;
+
+  /**
    * Whether an agent is currently running
    */
   isAgentRunning?: boolean;
 
   /**
+   * Whether an agent is currently running (alias for `isAgentRunning`)
+   */
+  isWorkerRunning?: boolean;
+
+  /**
    * Callback function to stop the agent
    */
   onStopAgent?: () => void;
+
+  /**
+   * Callback function to stop the worker (alias for `onStopAgent`)
+   */
+  onStopWorker?: () => void;
 
   /**
    * Whether to auto focus the input
@@ -71,6 +153,18 @@ export interface ChatInputProps extends ViewProps {
   onChange?: (value: string) => void;
 
   /**
+   * Form field name for the value. Applied to the hidden mirror `<textarea>`, so the message is
+   * submitted with a surrounding native `<form>` and is addressable via `[name="…"]`.
+   */
+  name?: string;
+
+  /**
+   * Whether to render the hidden `<textarea>` that mirrors the editable area's text (default `true`).
+   * It makes `element.value` work for generic tooling; set to `false` only if the extra node is a problem.
+   */
+  hiddenInput?: boolean;
+
+  /**
    * Callback function when the file browser is opened
    */
   onFileBrowse?: () => void;
@@ -79,6 +173,27 @@ export interface ChatInputProps extends ViewProps {
    * ID of the sandbox
    */
   sandboxId?: string;
+
+  /**
+   * Callback when file upload progress changes
+   */
+  onUploadProgress?: (progress: number) => void;
+
+  /**
+   * Callback when file upload succeeds
+   */
+  onUploadSuccess?: (data: any) => void;
+
+  /**
+   * Callback when file upload fails
+   */
+  onUploadError?: (error: any) => void;
+
+  /**
+   * Function to execute file upload. Parent should provide this.
+   * Should return an object with a loading property.
+   */
+  onFileUpload?: (file: File) => void;
 
   /**
    * Whether to hide the attachment button
@@ -208,12 +323,22 @@ export interface ChatInputViewProps extends ChatInputProps {
   /**
    * Reference to the editable div element
    */
-  editableRef: React.RefObject<HTMLDivElement>;
+  editableRef: React.RefObject<HTMLDivElement | null>;
 
   /**
    * Reference to the file input element
    */
-  fileInputRef: React.RefObject<HTMLInputElement>;
+  fileInputRef: React.RefObject<HTMLInputElement | null>;
+
+  /**
+   * Reference to the hidden mirror `<textarea>` that exposes the value as a real form control
+   */
+  hiddenInputRef: React.RefObject<HTMLTextAreaElement | null>;
+
+  /**
+   * Imperatively replaces the input's text, going through the same path as a user edit
+   */
+  setValue: (value: string) => void;
 
   /**
    * Whether files are being uploaded
@@ -317,4 +442,24 @@ export interface ChatInputViewProps extends ChatInputProps {
    * List of suggestions for auto-completion
    */
   suggestions?: Suggestion[];
+
+  /**
+   * Optional text label displayed while in loading state.
+   */
+  loadingText?: string;
+
+  /**
+   * Optional text label displayed on the attachment button / area.
+   */
+  attachmentText?: string;
+
+  /**
+   * Files staged for upload (pending) — surfaced by the state hook.
+   */
+  pendingFiles?: File[];
+
+  /**
+   * Optional error message used by some compositions (e.g. Formik wrapper).
+   */
+  error?: any;
 }

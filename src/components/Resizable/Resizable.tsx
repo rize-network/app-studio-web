@@ -7,10 +7,7 @@ import {
   ResizableHandle,
   ResizableView,
 } from './Resizable/Resizable.view';
-
-/**
- * Resizable component for creating resizable panel groups and layouts.
- */
+// This file defines the main `Resizable` component, which orchestrates the functionality for resizable panels. It utilizes the `useResizableState` hook to manage all resizing logic and state, then exposes this context through `ResizableProvider` to its sub-components. The visual layout is rendered by `ResizableView`, and convenience sub-components like `Resizable.Panel` and `Resizable.Handle` are attached for structured usage.
 const ResizableComponent: React.FC<ResizableProps> = ({
   children,
   orientation = 'horizontal',
@@ -51,7 +48,6 @@ const ResizableComponent: React.FC<ResizableProps> = ({
     storage,
     keyboardResizeBy
   );
-
   return (
     <ResizableProvider
       value={{
@@ -90,9 +86,6 @@ const ResizableComponent: React.FC<ResizableProps> = ({
     </ResizableProvider>
   );
 };
-
 export const Resizable = ResizableComponent as ResizableType;
-
-// Assign the sub-components to the main component
 Resizable.Panel = ResizablePanel;
 Resizable.Handle = ResizableHandle;

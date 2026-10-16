@@ -8,8 +8,8 @@ export const StyleLoader = () => (
       Submitting
     </Loader>
     <Loader
-      loaderColor="theme.primary"
-      textColor="theme.primary"
+      loaderColor="theme-primary"
+      textColor="theme-primary"
       textPosition="left"
     >
       Submitting

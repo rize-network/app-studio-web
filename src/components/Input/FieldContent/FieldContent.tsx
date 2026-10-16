@@ -6,14 +6,10 @@
  */
 
 import React from 'react';
-import { Typography } from 'app-studio';
+import { Typography, useTheme } from 'app-studio';
 
-import {
-  InputVariants,
-  PadddingWithLabel,
-  PaddingWithoutLabel,
-  Shapes,
-} from '../Input.style';
+import { InputVariants, Shapes } from '../Input.style';
+import { fieldSizeProps } from '../fieldSizes';
 import { Horizontal } from 'app-studio';
 
 import { ContentProps } from './FieldContent/FieldContent.props';
@@ -35,44 +31,45 @@ export const FieldContent: React.FC<ContentProps> = ({
   views = { pickerBox: {} },
   ...props
 }) => {
+  const { themeMode } = useTheme();
+  const isDark = themeMode === 'dark';
+
   // Determine if the field is in an interactive state
   const isInteractive = (isHovered || isFocused) && !isDisabled;
-
-  // Set the appropriate color based on state
   const color = error
-    ? 'color.red.500'
+    ? 'color-red-500'
     : isInteractive
-    ? 'theme.primary'
-    : 'color.gray.300';
+    ? 'theme-primary'
+    : 'color-gray-200';
 
   return (
     <Horizontal
-      // Layout properties
-      gap={8} // 2 × 4px grid
+      gap={8}
       width="100%"
+      // Fields set `width: 100%` and then add their own padding/border, so they
+      // only fit their container under border-box. Declared here rather than
+      // relying on a host `* { box-sizing: border-box }` reset, whose absence
+      // otherwise makes every field overflow its parent by padding + border.
+      boxSizing="border-box"
       display="flex"
       flexWrap="nowrap"
       alignItems="center"
-      justifyContent="space-between"
-      marginBottom={2} // 2 × 4px grid
-      // Visual properties
+      justifyContent="flex-start"
       borderStyle="solid"
       borderColor={color}
-      backgroundColor="color.white"
+      backgroundColor={isDark ? 'color-gray-900' : 'color-white'}
       fontSize={Typography.fontSizes[size]}
-      // State properties
       cursor={isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'text'}
-      opacity={isDisabled ? 0.6 : 1}
-      // Animation
-      transition="all 0.2s ease"
-      // Apply conditional padding based on label presence
-      {...(showLabel ? PadddingWithLabel : PaddingWithoutLabel)}
-      // Apply shadow if provided
-      {...shadow}
-      // Apply shape, variant, and custom styles
+      opacity={isDisabled ? 0.7 : 1}
+      transition="border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease"
+      // Sizing belongs to the shell, not to each field: without it every field
+      // rendered at roughly `md` height whatever size was asked for. Placed
+      // before `views`/`props` so a caller can still override.
+      {...fieldSizeProps(size)}
+      {...(typeof shadow === 'object' && shadow !== null ? shadow : {})}
       {...Shapes[shape]}
       {...InputVariants[variant]}
-      {...views['box']}
+      {...views?.container}
       {...props}
     >
       {children}

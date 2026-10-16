@@ -6,7 +6,6 @@ import {
 } from './Message.type';
 
 export interface MessageLayoutProps {
-  icons?: { [x: string]: string };
   container?: any;
   theme?: ThemesType;
   position?: Position;
@@ -14,7 +13,8 @@ export interface MessageLayoutProps {
 export interface ShowMessageProps {
   isClosable?: boolean;
   views?: MessageViewStyles;
-  action?: Function;
+  // Invoked when the action button is pressed.
+  action?: () => void;
   actionText?: string;
   showIcon?: boolean;
   timeout?: number;
@@ -23,7 +23,7 @@ export interface MessageProps extends ShowMessageProps {
   subtitle?: string;
   variant: MessageType;
   show?: boolean;
-  hide: Function;
+  hide: () => void;
   title: string;
   theme?: ThemesType;
 }
@@ -35,7 +35,7 @@ export interface MessageState {
   subtitle: string;
   isClosable?: boolean;
   views?: MessageViewStyles;
-  action?: Function;
+  action?: () => void;
   actionText?: string;
   showIcon?: boolean;
   timeout?: number;
@@ -45,7 +45,7 @@ export interface MessageState {
     subtitle?: string,
     isClosable?: boolean,
     views?: MessageViewStyles,
-    action?: Function,
+    action?: () => void,
     actionText?: string,
     showIcon?: boolean,
     timeout?: number

@@ -1,182 +1,136 @@
 import { ViewProps } from 'app-studio';
 import { Size, Variant, Shape } from './ColorPicker.type';
-
-/**
- * Default styles for the ColorPicker component
- */
+// This object defines the default styles for various structural parts of the ColorPicker component, such as its container, trigger, dropdown, and individual color swatches.
 export const DefaultColorPickerStyles = {
   container: {
     position: 'relative',
     display: 'inline-block',
     width: '100%',
   } as ViewProps,
-
   trigger: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     cursor: 'pointer',
-    transition: 'all 0.2s ease',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   } as ViewProps,
-
   dropdown: {
     position: 'absolute',
-    top: 'calc(100% + 4px)',
+    top: 'calc(100% + 8px)',
     left: 0,
     right: 0,
     zIndex: 1000,
-    backgroundColor: 'color.white',
-    borderRadius: '8px',
+    backgroundColor: 'color-white',
+    borderRadius: 12,
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    boxShadow: '0 8px 16px rgba(0,0,0,0.1)',
+    borderColor: 'color-gray-200',
+    boxShadow: '0 12px 32px rgba(15, 23, 42, 0.14)',
     padding: '16px',
-    minWidth: '280px',
+    minWidth: '320px',
   } as ViewProps,
-
   colorGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(8, 1fr)',
-    gap: '8px',
+    gridTemplateColumns: 'repeat(6, 36px)',
+    // Native has no CSS grid; row + wrap of fixed-width swatches reproduces the
+    // grid (these flex props are ignored under `display:grid` on web).
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    gap: '12px',
     marginBottom: '16px',
   } as ViewProps,
-
   colorSwatch: {
-    width: '24px',
-    height: '24px',
-    borderRadius: '4px',
+    width: '36px',
+    height: '36px',
+    borderRadius: 8,
     cursor: 'pointer',
-    border: '2px solid transparent',
-    transition: 'all 0.2s ease',
+    border: '1px solid transparent',
+    transition:
+      'transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
   } as ViewProps,
-
   customInput: {
     marginBottom: '12px',
   } as ViewProps,
-
   recentColors: {
-    borderTop: '1px solid color.gray.200',
+    borderTop: '1px solid color-gray-100',
     paddingTop: '12px',
   } as ViewProps,
 };
-
-/**
- * Size styles for the ColorPicker component
- */
+// This object maps predefined size options (e.g., xs, sm, md) to specific styling configurations, affecting the ColorPicker's dimensions, font size, and padding.
 export const Sizes: Record<Size, ViewProps> = {
   xs: {
-    height: '28px',
+    height: '32px',
     fontSize: '12px',
     padding: '4px 8px',
   },
   sm: {
-    height: '32px',
-    fontSize: '14px',
-    padding: '6px 10px',
+    height: '40px',
+    fontSize: '12px',
+    padding: '8px 10px',
   },
   md: {
-    height: '40px',
-    fontSize: '16px',
-    padding: '8px 12px',
+    height: '44px',
+    fontSize: '14px',
+    padding: '10px 12px',
   },
   lg: {
     height: '48px',
-    fontSize: '18px',
-    padding: '10px 16px',
+    fontSize: '16px',
+    padding: '12px 14px',
   },
   xl: {
     height: '56px',
-    fontSize: '20px',
-    padding: '12px 20px',
+    fontSize: '18px',
+    padding: '14px 16px',
   },
 };
-
-/**
- * Shape styles for the ColorPicker component
- */
+// This object maps predefined shape options (e.g., default, square, pill) to specific border-radius styles, influencing the visual curvature of the ColorPicker's elements.
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
-    borderRadius: '8px',
+    borderRadius: 8,
   },
-  sharp: {
+  square: {
     borderRadius: 0,
   },
   rounded: {
-    borderRadius: '8px',
+    borderRadius: 8,
   },
-  pillShaped: {
-    borderRadius: '9999px',
+  pill: {
+    borderRadius: 9999,
   },
 };
-
-/**
- * Variant styles for the ColorPicker component
- */
+// This object maps predefined variant options (e.g., default, outline, filled) to distinct visual styles, altering the background, border, and text color of the ColorPicker.
 export const Variants: Record<Variant, ViewProps> = {
   default: {
-    backgroundColor: 'color.white',
+    backgroundColor: 'color-white',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.300',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-200',
+    color: 'color-gray-900',
   },
   outline: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'color-white',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.300',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-200',
+    color: 'color-gray-900',
   },
   filled: {
-    backgroundColor: 'color.gray.100',
+    backgroundColor: 'color-gray-50',
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    color: 'color.gray.800',
+    borderColor: 'color-gray-200',
+    color: 'color-gray-900',
   },
 };
-
-/**
- * Predefined color palette based on the design system
- */
+// This array defines the default color palette presented within the ColorPicker dropdown, providing a curated selection of colors with their names, hex values, and categories.
 export const DefaultColorPalette = [
-  // Primary colors
-  { name: 'Blue 500', value: 'color.blue.500', category: 'primary' },
-  { name: 'Purple 500', value: 'color.purple.500', category: 'primary' },
-  { name: 'Pink 500', value: 'color.pink.500', category: 'primary' },
-  { name: 'Red 500', value: 'color.red.500', category: 'primary' },
-  { name: 'Orange 500', value: 'color.orange.500', category: 'primary' },
-  { name: 'Yellow 500', value: 'color.yellow.500', category: 'primary' },
-  { name: 'Green 500', value: 'color.green.500', category: 'primary' },
-  { name: 'Teal 500', value: 'color.teal.500', category: 'primary' },
-
-  // Light variants
-  { name: 'Blue 300', value: 'color.blue.300', category: 'light' },
-  { name: 'Purple 300', value: 'color.purple.300', category: 'light' },
-  { name: 'Pink 300', value: 'color.pink.300', category: 'light' },
-  { name: 'Red 300', value: 'color.red.300', category: 'light' },
-  { name: 'Orange 300', value: 'color.orange.300', category: 'light' },
-  { name: 'Yellow 300', value: 'color.yellow.300', category: 'light' },
-  { name: 'Green 300', value: 'color.green.300', category: 'light' },
-  { name: 'Teal 300', value: 'color.teal.300', category: 'light' },
-
-  // Dark variants
-  { name: 'Blue 700', value: 'color.blue.700', category: 'dark' },
-  { name: 'Purple 700', value: 'color.purple.700', category: 'dark' },
-  { name: 'Pink 700', value: 'color.pink.700', category: 'dark' },
-  { name: 'Red 700', value: 'color.red.700', category: 'dark' },
-  { name: 'Orange 700', value: 'color.orange.700', category: 'dark' },
-  { name: 'Yellow 700', value: 'color.yellow.700', category: 'dark' },
-  { name: 'Green 700', value: 'color.green.700', category: 'dark' },
-  { name: 'Teal 700', value: 'color.teal.700', category: 'dark' },
-
-  // Grays
-  { name: 'Gray 100', value: 'color.gray.100', category: 'neutral' },
-  { name: 'Gray 300', value: 'color.gray.300', category: 'neutral' },
-  { name: 'Gray 500', value: 'color.gray.500', category: 'neutral' },
-  { name: 'Gray 700', value: 'color.gray.700', category: 'neutral' },
-  { name: 'Gray 900', value: 'color.gray.900', category: 'neutral' },
-  { name: 'Black', value: 'color.black', category: 'neutral' },
-  { name: 'White', value: 'color.white', category: 'neutral' },
+  { name: 'Blue', value: '#1D4ED8', category: 'primary' },
+  { name: 'Purple', value: '#A855F7', category: 'primary' },
+  { name: 'Green', value: '#22C55E', category: 'primary' },
+  { name: 'Orange', value: '#F97316', category: 'primary' },
+  { name: 'Red', value: '#EF4444', category: 'primary' },
+  { name: 'Ink', value: '#111827', category: 'neutral' },
 ];

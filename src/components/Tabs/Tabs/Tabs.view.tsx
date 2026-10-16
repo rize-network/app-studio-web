@@ -1,13 +1,138 @@
-import React, { createContext, useContext } from 'react';
-import { View, Horizontal, Vertical } from 'app-studio';
+import React, { createContext, useCallback, useContext, useMemo } from 'react';
+import { View, Horizontal, Vertical, useTheme, ViewProps } from 'app-studio';
 import {
   TabsViewProps,
   TabsListProps,
   TabsTriggerProps,
   TabsContentProps,
 } from './Tabs.props';
-import { TabsContextType } from './Tabs.type';
+import { TabsContextType, TabsVariant } from './Tabs.type';
 import { TabHeader } from './TabHeader';
+import { deepMerge, useDesignSystemComponentProps } from 'src/design-system';
+
+const getTabsVariantStyles = (
+  variant: TabsVariant,
+  themeMode: string
+): {
+  header: ViewProps;
+  tab: ViewProps;
+  activeTab: ViewProps;
+  text: ViewProps;
+  activeText: ViewProps;
+  content: ViewProps;
+} => {
+  const isDark = themeMode === 'dark';
+
+  if (variant === 'segmented') {
+    return {
+      header: {
+        width: 'fit-content',
+        alignSelf: 'flex-start',
+        gap: 6,
+        padding: 6,
+        borderRadius: 16, // radius-xl
+        backgroundColor: 'color-gray-100',
+      },
+      tab: {
+        minHeight: 44,
+        padding: '0 22px',
+        borderRadius: 12, // radius-lg
+        color: 'color-gray-600',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'color-gray-100',
+        style: { backgroundColor: 'transparent' },
+      },
+      activeTab: {
+        backgroundColor: 'color-white',
+        color: 'color-gray-900',
+        boxShadow: isDark
+          ? '0 1px 3px rgba(0, 0, 0, 0.35)'
+          : '0 1px 2px rgba(0, 0, 0, 0.06)',
+      },
+      text: {
+        fontSize: 14,
+        lineHeight: '20px',
+        letterSpacing: '-0.01em',
+      },
+      activeText: {},
+      content: {
+        width: '100%',
+      },
+    };
+  }
+
+  if (variant === 'pill') {
+    return {
+      header: {
+        width: '100%',
+        flexWrap: 'wrap',
+        gap: 12,
+      },
+      tab: {
+        minHeight: 44,
+        padding: '0 22px',
+        borderRadius: '999px',
+        backgroundColor: 'color-white',
+        color: 'color-gray-600',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: 'color-gray-200',
+      },
+      activeTab: {
+        backgroundColor: 'theme-primary',
+        color: 'color-white',
+        borderColor: 'theme-primary',
+      },
+      text: {
+        fontSize: 14,
+        lineHeight: '20px',
+        letterSpacing: '-0.01em',
+        color: 'inherit',
+      },
+      activeText: {
+        color: 'inherit',
+      },
+      content: {
+        width: '100%',
+      },
+    };
+  }
+
+  return {
+    header: {
+      width: '100%',
+      gap: 20,
+      borderBottom: 'none',
+    },
+    tab: {
+      minHeight: 44,
+      padding: '0 4px',
+      borderRadius: 0,
+      color: 'color-gray-500',
+      borderBottom: '3px solid',
+      borderColor: 'color-white',
+      style: { backgroundColor: 'transparent' },
+    },
+    activeTab: {
+      color: 'theme-primary',
+      borderColor: 'theme-primary',
+    },
+    text: {
+      fontSize: 14,
+      lineHeight: '20px',
+      letterSpacing: '-0.01em',
+      color: 'inherit',
+    },
+    activeText: {
+      color: 'inherit',
+    },
+    content: {
+      width: '100%',
+      paddingTop: 12,
+    },
+  };
+};
 
 /**
  * The presentation component for Tabs. Renders the UI based on props.
@@ -19,8 +144,13 @@ export const TabsView: React.FC<TabsViewProps> = ({
   views = {}, // Default to empty object
   renderTab,
   renderContent,
+  variant = 'underline',
   iconPosition = 'left', // Default to left
+  keepMounted = false,
 }) => {
+  const { themeMode } = useTheme();
+  const variantStyles = getTabsVariantStyles(variant, themeMode);
+
   // If there's no active tab (e.g., tabs array is empty), render nothing or a placeholder
   if (!activeTab) {
     // Optionally render a placeholder when no tabs are active/available
@@ -32,10 +162,16 @@ export const TabsView: React.FC<TabsViewProps> = ({
     // Use Vertical layout for overall structure (tabs header above content)
     <Vertical width="100%" height={'100%'} {...views.container}>
       {/* Horizontal layout for the tab headers/buttons */}
-      <Horizontal {...views.headerTabs}>
+      <Horizontal
+        alignItems="center"
+        {...variantStyles.header}
+        {...views.headerTabs}
+      >
         {tabs.map((tab) => {
           // Determine if the current tab in the loop is the active one
-          const isActive = tab.title === activeTab.title;
+          const isActive =
+            (tab.value !== undefined ? tab.value : tab.title) ===
+            (activeTab.value !== undefined ? activeTab.value : activeTab.title);
           // Prepare the onClick handler for this specific tab
           const onClick = () => handleTabClick(tab);
 
@@ -53,11 +189,15 @@ export const TabsView: React.FC<TabsViewProps> = ({
               onClick={onClick}
               iconPosition={iconPosition}
               tabStyles={{
+                ...variantStyles.tab,
                 ...views.tab,
+                ...(isActive ? variantStyles.activeTab : {}),
                 ...(isActive ? views.activeTab : {}),
               }}
               textStyles={{
+                ...variantStyles.text,
                 ...views.title,
+                ...(isActive ? variantStyles.activeText : {}),
                 ...(isActive ? views.activeText : {}),
               }}
             />
@@ -66,10 +206,28 @@ export const TabsView: React.FC<TabsViewProps> = ({
       </Horizontal>
 
       {/* Content area */}
-      <View width={'100%'} height="100%" {...views.content}>
+      <View height="100%" {...variantStyles.content} {...views.content}>
         {/* Use the custom renderContent function if provided */}
         {renderContent
           ? renderContent(activeTab)
+          : keepMounted
+          ? // All panes stay mounted so their internal state survives tab
+            // switches; inactive ones are hidden, not unmounted.
+            tabs.map((tab) => {
+              const tabId = tab.value !== undefined ? tab.value : tab.title;
+              const activeId =
+                activeTab.value !== undefined
+                  ? activeTab.value
+                  : activeTab.title;
+              return (
+                <View
+                  key={tab.title}
+                  display={tabId === activeId ? 'contents' : 'none'}
+                >
+                  {tab.content}
+                </View>
+              );
+            })
           : // Otherwise, render the content property from the active tab object
             activeTab.content}
       </View>
@@ -90,70 +248,102 @@ export const useTabsContext = () => {
 };
 
 // TabsList compound component
-export const TabsList: React.FC<TabsListProps> = ({ children, views }) => {
-  return (
-    <Horizontal
-      width="100%"
-      borderBottom="1px solid"
-      borderBottomColor="color.gray.200"
-      {...views?.container}
-    >
-      {children}
-    </Horizontal>
-  );
-};
+export const TabsList: React.FC<TabsListProps> = React.memo(
+  ({ children, views }) => {
+    const { themeMode } = useTheme();
+    const { variant = 'underline' } = useTabsContext();
+    const variantStyles = getTabsVariantStyles(variant, themeMode);
+    const designSystemTabs = useDesignSystemComponentProps('tabs');
+    const mergedViews = deepMerge(
+      {
+        container: designSystemTabs.views?.headerTabs,
+      },
+      views
+    );
+
+    return (
+      <Horizontal
+        alignItems="center"
+        {...variantStyles.header}
+        {...mergedViews?.container}
+      >
+        {children}
+      </Horizontal>
+    );
+  }
+);
 
 // TabsTrigger compound component
-export const TabsTrigger: React.FC<TabsTriggerProps> = ({
-  value,
-  children,
-  disabled = false,
-  views,
-}) => {
-  const { activeValue, setActiveValue } = useTabsContext();
-  const isActive = activeValue === value;
+export const TabsTrigger: React.FC<TabsTriggerProps> = React.memo(
+  ({ value, children, disabled = false, views }) => {
+    const { themeMode } = useTheme();
+    const {
+      activeValue,
+      setActiveValue,
+      variant = 'underline',
+    } = useTabsContext();
+    const isActive = activeValue === value;
+    const variantStyles = getTabsVariantStyles(variant, themeMode);
+    const designSystemTabs = useDesignSystemComponentProps('tabs');
+    const mergedViews = deepMerge(
+      {
+        trigger: designSystemTabs.views?.tab,
+        activeState: designSystemTabs.views?.activeTab,
+      },
+      views
+    );
 
-  const handleClick = () => {
-    if (!disabled) {
-      setActiveValue(value);
-    }
-  };
+    const handleClick = useCallback(() => {
+      if (!disabled) {
+        setActiveValue(value);
+      }
+    }, [disabled, value, setActiveValue]);
 
-  return (
-    <View
-      cursor={disabled ? 'not-allowed' : 'pointer'}
-      opacity={disabled ? 0.6 : 1}
-      padding="12px 16px"
-      borderBottom="2px solid"
-      borderBottomColor={isActive ? 'theme.primary' : 'transparent'}
-      color={isActive ? 'theme.primary' : 'color.gray.600'}
-      fontWeight={isActive ? '600' : '400'}
-      transition="all 0.2s ease"
-      _hover={!disabled ? { color: 'theme.primary' } : {}}
-      onClick={handleClick}
-      {...views?.trigger}
-      {...(isActive ? views?.activeState : {})}
-    >
-      {children}
-    </View>
-  );
-};
+    return (
+      <View
+        cursor={disabled ? 'not-allowed' : 'pointer'}
+        opacity={disabled ? 0.6 : 1}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        transition="all 0.2s ease-in-out"
+        {...variantStyles.tab}
+        {...(isActive ? variantStyles.activeTab : {})}
+        _hover={
+          !disabled
+            ? variant === 'underline'
+              ? { color: 'theme-primary' }
+              : { opacity: 0.9 }
+            : {}
+        }
+        onClick={handleClick}
+        {...mergedViews?.trigger}
+        {...(isActive ? mergedViews?.activeState : {})}
+      >
+        <View
+          {...variantStyles.text}
+          {...(isActive ? variantStyles.activeText : {})}
+        >
+          {children}
+        </View>
+      </View>
+    );
+  }
+);
 
 // TabsContent compound component
-export const TabsContent: React.FC<TabsContentProps> = ({
-  value,
-  children,
-  views,
-}) => {
-  const { activeValue } = useTabsContext();
+export const TabsContent: React.FC<TabsContentProps> = React.memo(
+  ({ value, children, views }) => {
+    const { activeValue } = useTabsContext();
 
-  if (activeValue !== value) {
-    return null;
+    if (activeValue !== value) {
+      return null;
+    }
+
+    return (
+      <View width="100%" padding="24px" {...views?.content}>
+        {children}
+      </View>
+    );
   }
-
-  return (
-    <View width="100%" padding="24px" {...views?.content}>
-      {children}
-    </View>
-  );
-};
+);

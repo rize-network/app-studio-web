@@ -10,19 +10,15 @@ export const EmojiPickerShapes = () => (
       placeholder="Default corners"
     />
     <EmojiPicker
-      label="Sharp shape"
-      shape="sharp"
-      placeholder="Sharp corners"
+      label="square shape"
+      shape="square"
+      placeholder="square corners"
     />
     <EmojiPicker
       label="Rounded shape"
       shape="rounded"
       placeholder="Rounded corners"
     />
-    <EmojiPicker
-      label="Pill shaped"
-      shape="pillShaped"
-      placeholder="Pill shaped"
-    />
+    <EmojiPicker label="Pill shaped" shape="pill" placeholder="Pill shaped" />
   </Vertical>
 );

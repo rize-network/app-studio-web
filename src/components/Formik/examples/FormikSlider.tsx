@@ -5,7 +5,7 @@ import { Button } from '../../Button/Button';
 import { FormikForm } from '../Formik.Form';
 import { FormikSlider } from '../Formik.Slider';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const FormikSliderExample = () => {
   // Define initial values
@@ -70,19 +70,19 @@ export const FormikSliderExample = () => {
                 showTooltip
                 views={{
                   track: {
-                    backgroundColor: 'color.blue.100',
+                    backgroundColor: 'color-blue-100',
                     height: 8,
                   },
                   progress: {
-                    backgroundColor: 'color.blue.500',
+                    backgroundColor: 'color-blue-500',
                   },
                   thumb: {
-                    backgroundColor: 'color.white',
-                    border: '2px solid color.blue.500',
+                    backgroundColor: 'color-white',
+                    border: '2px solid color-blue-500',
                   },
                   tooltip: {
-                    backgroundColor: 'color.blue.500',
-                    color: 'color.white',
+                    backgroundColor: 'color-blue-500',
+                    color: 'color-white',
                   },
                 }}
               />
@@ -102,7 +102,7 @@ export const FormikSliderExample = () => {
             {/* Display current values */}
             <Vertical
               padding={16}
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               borderRadius={8}
             >
               <Text fontWeight="bold">Current Values:</Text>
@@ -112,9 +112,7 @@ export const FormikSliderExample = () => {
             </Vertical>
 
             {/* Submit button */}
-            <Button type="submit" onClick={handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={handleSubmit}>Submit</Button>
           </Vertical>
         </FormikForm>
       )}

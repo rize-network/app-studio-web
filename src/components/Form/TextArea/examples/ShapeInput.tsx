@@ -7,7 +7,7 @@ import { Shape } from '../TextArea/TextArea.type';
 export const ShapesArea = () => {
   return (
     <Vertical gap={10} width="300px">
-      {['default', 'sharp', 'rounded'].map((shape, index) => (
+      {['default', 'square', 'rounded'].map((shape, index) => (
         <TextArea
           key={index}
           name={shape}

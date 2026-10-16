@@ -4,12 +4,7 @@ import { Button } from '../../Button/Button';
 import { CookieConsentProps } from './CookieConsent.props';
 import { useCookieConsentState } from './CookieConsent.state';
 import { getThemes } from './CookieConsent.style';
-
-/**
- * CookieConsent View Component
- *
- * Renders a cookie consent banner with customizable styling, position, and content.
- */
+// Defines the main functional component for displaying the cookie consent banner, accepting various props to customize its appearance and behavior.
 export const CookieConsentView: React.FC<CookieConsentProps> = ({
   title = 'Nous utilisons des cookies',
   description = 'Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer sur ce site, vous acceptez notre utilisation des cookies conformément à notre politique de confidentialité.',
@@ -25,75 +20,69 @@ export const CookieConsentView: React.FC<CookieConsentProps> = ({
   themeMode: propThemeMode,
   ...props
 }) => {
-  // Get theme context
+  // Extracts the current theme mode from the application's theme context using the `useTheme` hook.
   const { themeMode: contextThemeMode } = useTheme();
-
-  // Use provided theme mode or fall back to context
+  // Determines the active theme mode, prioritizing a theme mode passed via props, then the context theme mode, and defaulting to 'light' if neither is provided.
   const themeMode = propThemeMode || contextThemeMode || 'light';
-
-  // Get state and functions from custom hook
+  // Initializes the cookie consent state using the `useCookieConsentState` hook, providing `hasConsent` to check current consent status and `acceptCookies` to set consent. The `cookieExpiration` prop determines the cookie's lifespan.
   const { hasConsent, acceptCookies } = useCookieConsentState(cookieExpiration);
-
-  // Get theme-based styles
+  // Retrieves the appropriate theme styles based on the determined `themeMode` from the `getThemes` utility function.
   const themes = getThemes(themeMode);
+  // Selects the specific style variations from the loaded themes based on the `variant` prop for the current component.
   const themeStyles = themes[variant];
-
-  // If user has already given consent, don't show the banner
   if (hasConsent) {
     return null;
   }
-
-  // Handle accept button click
+  // Defines the handler function executed when the 'Accept' button is clicked. It calls `acceptCookies` to record consent and then triggers the optional `onAccept` callback.
   const handleAccept = () => {
     acceptCookies();
     if (onAccept) {
       onAccept();
     }
   };
-
-  // Handle customize button click
+  // Defines the handler function executed when the 'Customize' button is clicked, triggering the `onCustomize` callback if it has been provided as a prop.
   const handleCustomize = () => {
     if (onCustomize) {
       onCustomize();
     }
   };
-
   return (
     <View
-      position="fixed"
-      left={16}
-      right={16}
-      zIndex={1000}
+      style={{
+        position: 'fixed',
+        left: 16,
+        right: 16,
+        zIndex: 1000,
+        ...(position === 'bottom' ? { bottom: 16 } : { top: 16 }),
+      }}
       padding={16}
       borderWidth="1px"
       borderStyle="solid"
       borderRadius={8}
       maxWidth="800px"
-      marginX="auto"
-      // boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
-      {...(position === 'bottom' ? { bottom: 16 } : { top: 16 })}
+      marginLeft="auto"
+      marginRight="auto"
+      transition="opacity 0.3s ease, transform 0.3s ease"
       {...themeStyles.container}
       {...views?.container}
       {...props}
     >
-      <Vertical gap={12} maxWidth={1200} marginX="auto">
+      <Vertical gap={12} maxWidth={1200} marginLeft="auto" marginRight="auto">
         {title && (
           <Text
             fontWeight="bold"
             fontSize={18}
-            color="color.black"
+            color="color-black"
             {...views?.title}
           >
             {title}
           </Text>
         )}
-
         {description && (
-          <Text fontSize={14} color="color.black" {...views?.description}>
+          <Text fontSize={14} color="color-black" {...views?.description}>
             {typeof description === 'string' ? description : description}
           </Text>
         )}
-
         <Horizontal
           gap={12}
           justifyContent="flex-end"
@@ -110,9 +99,8 @@ export const CookieConsentView: React.FC<CookieConsentProps> = ({
               {customizeButtonText}
             </Button>
           )}
-
           <Button
-            variant="primary"
+            variant="filled"
             onClick={handleAccept}
             size="sm"
             {...views?.acceptButton}

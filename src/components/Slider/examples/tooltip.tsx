@@ -1,7 +1,7 @@
 import React from 'react';
 import { Slider } from '../Slider';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 

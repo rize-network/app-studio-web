@@ -11,15 +11,10 @@ import {
   removeAllToasts,
 } from './Toast/Toast.store';
 import { useToast as useToastHook } from './Toast/Toast.hook';
-
-/**
- * Toast component for displaying temporary notifications
- */
+// This file serves as the primary export for the Toast component system, consolidating its core view, management functions (show, hide, various types), and the `useToast` hook into a single, unified interface for easy consumption throughout the application.
 const ToastComponent: React.FC<ToastProps> = (props) => {
   return <ToastView {...props} />;
 };
-
-// Create a Toast object with static methods
 const Toast = Object.assign(ToastComponent, {
   Container: (props: ToastContainerProps) => <ToastContainer {...props} />,
   show: showToast,
@@ -30,8 +25,5 @@ const Toast = Object.assign(ToastComponent, {
   remove: removeToast,
   removeAll: removeAllToasts,
 });
-
-// Export the hook for component usage
 export const useToast = useToastHook;
-
 export { Toast, showToast };

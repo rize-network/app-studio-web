@@ -1,9 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Modal body to match snapshot 1`] = `
 <div
   buttonColor="black"
-  className="plt-24px prt-24px ptp-16px pbm-16px pvl-16 phl-24 fse-16px fwt-400 lht-24px cr- mobile--pvl-12 mobile--phl-16 mobile--fse-14px"
+  className="plt-24px prt-24px ptp-16px pbm-16px pvl-16 phl-24 fse-16px fwt-400 cr-var--color-gray-700 mobile--fse-14px mobile--plt-16px mobile--prt-16px mobile--ptp-12px mobile--pbm-12px"
+  ref={[Function]}
 >
   Modal Content
 </div>

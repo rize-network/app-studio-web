@@ -7,129 +7,63 @@ import {
   Variant,
   TooltipStyles,
 } from './Tooltip.type';
-
+// Defines the properties available for the main Tooltip component, controlling its behavior and appearance.
 export interface TooltipProps {
-  /**
-   * The content to display in the tooltip
-   */
+  // Specifies the actual content to be displayed inside the tooltip, which can be any React node.
   content: React.ReactNode;
-
-  /**
-   * The element that triggers the tooltip
-   */
+  // Defines the element that triggers the tooltip's visibility, typically a button or icon.
   children: React.ReactNode;
-
-  /**
-   * The preferred position of the tooltip
-   * @default 'top'
-   */
+  // Determines the preferred placement of the tooltip relative to its trigger element (e.g., 'top', 'bottom', 'left', 'right').
   position?: Position;
-
-  /**
-   * The alignment of the tooltip relative to the trigger
-   * @default 'center'
-   */
+  // Specifies the alignment of the tooltip's content along its defined position (e.g., 'start', 'center', 'end').
   align?: Alignment;
-
-  /**
-   * The size of the tooltip
-   * @default 'md'
-   */
+  // Sets a predefined size for the tooltip, affecting its overall dimensions.
   size?: Size;
-
-  /**
-   * The visual style variant of the tooltip
-   * @default 'default'
-   */
+  // Defines the visual style or variant of the tooltip, allowing for different design themes.
   variant?: Variant;
-
-  /**
-   * Delay in milliseconds before the tooltip opens on hover
-   * @default 200
-   */
+  // Sets the delay in milliseconds before the tooltip appears when hovered over or focused.
   openDelay?: number;
-
-  /**
-   * Delay in milliseconds before the tooltip closes after hover stops
-   * @default 200
-   */
+  // Sets the delay in milliseconds before the tooltip disappears after the trigger is no longer hovered or focused.
   closeDelay?: number;
-
-  /**
-   * Whether to show an arrow pointing to the trigger
-   * @default true
-   */
+  // A boolean flag to determine whether an arrow pointing to the trigger should be displayed on the tooltip.
   showArrow?: boolean;
-
-  /**
-   * Whether the tooltip is initially open
-   * @default false
-   */
   defaultOpen?: boolean;
-
-  /**
-   * Whether the tooltip is disabled
-   * @default false
-   */
+  // If true, the tooltip functionality will be entirely disabled, preventing it from opening.
   isDisabled?: boolean;
-
-  /**
-   * Custom styles for different parts of the tooltip
-   */
+  // Provides an object to customize the styling of various internal parts of the tooltip component.
   views?: TooltipStyles;
-
-  /**
-   * Additional props to be spread to the container element
-   */
+  // Allows for passing any additional, non-explicitly defined properties to the underlying root DOM element of the tooltip.
   [key: string]: any;
 }
-
+// Defines the properties specific to the TooltipTrigger sub-component, controlling how the tooltip is activated.
 export interface TooltipTriggerProps {
-  /**
-   * The element that triggers the tooltip
-   */
+  // The content or element that acts as the trigger for displaying the tooltip.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the trigger container
-   */
+  // Provides an object to customize the styling of the trigger's container element.
   views?: {
     container?: ViewProps;
   };
-
-  /**
-   * Whether to preserve the child element's props
-   * @default false
-   */
+  // If true, the trigger will render its child directly without wrapping it in an additional DOM element.
   asChild?: boolean;
-
-  /**
-   * Additional props to be spread to the container element
-   */
+  // Allows for passing any additional, non-explicitly defined properties to the underlying root DOM element of the trigger.
   [key: string]: any;
 }
-
+// Defines the properties specific to the TooltipContent sub-component, controlling the display of the tooltip's message.
 export interface TooltipContentProps {
-  /**
-   * The content to display in the tooltip
-   */
+  // The actual content to be displayed inside the tooltip's pop-up bubble.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the content container
-   */
+  // Provides an object to customize the styling of the content's container and its optional arrow.
   views?: {
     container?: ViewProps;
     arrow?: ViewProps;
   };
-
-  /**
-   * Additional props to be spread to the container element
-   */
+  // Allows for passing any additional, non-explicitly defined properties to the underlying root DOM element of the content.
   [key: string]: any;
 }
-
+// Defines the overall structure of the Tooltip component, including its sub-components (Trigger, Content) as static properties.
 export interface TooltipType extends React.FC<TooltipProps> {
+  // Represents the sub-component responsible for handling the element that opens and closes the tooltip.
   Trigger: React.FC<TooltipTriggerProps>;
+  // Represents the sub-component responsible for rendering the actual visual content of the tooltip.
   Content: React.FC<TooltipContentProps>;
 }

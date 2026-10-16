@@ -1,7 +1,7 @@
 import React from 'react';
 import { Background } from '../Background';
 import { Vertical, Center } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Button } from '../../Button/Button';
 
 export const AuroraDemo = () => (
@@ -11,7 +11,7 @@ export const AuroraDemo = () => (
     </Text>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         With Radial Gradient
       </Text>
       <Background.Aurora height="300px" showRadialGradient={true}>
@@ -23,7 +23,7 @@ export const AuroraDemo = () => (
             <Text color="white" fontSize={16} textAlign="center">
               Beautiful animated gradient effect
             </Text>
-            <Button backgroundColor="color.white" color="color.blue.600">
+            <Button backgroundColor="color-white" color="color-blue-600">
               Get Started
             </Button>
           </Vertical>
@@ -32,7 +32,7 @@ export const AuroraDemo = () => (
     </Vertical>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Without Radial Gradient
       </Text>
       <Background.Aurora height="200px" showRadialGradient={false}>
@@ -45,7 +45,7 @@ export const AuroraDemo = () => (
     </Vertical>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Custom Height
       </Text>
       <Background.Aurora height="150px" showRadialGradient={true}>

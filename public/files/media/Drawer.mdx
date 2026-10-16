@@ -1,0 +1,233 @@
+# Drawer
+
+A temporary side panel that slides in from the edge of the screen to display content.
+
+### **Import**
+```tsx
+import { Drawer } from '@app-studio/web';
+```
+
+### **DefaultDrawer**
+
+```tsx
+import React, { useState } from 'react';
+import { Button, Drawer } from '../..';
+import { Vertical, Text } from 'app-studio';
+
+export const DefaultDrawer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Vertical>
+      <Button onClick={() => setIsOpen(true)}>Open Drawer</Button>
+      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Drawer.Header onClose={() => setIsOpen(false)}>
+          <Text fontWeight="bold">Drawer Title</Text>
+        </Drawer.Header>
+        <Drawer.Body>
+          <Text>This is the body of the drawer.</Text>
+        </Drawer.Body>
+        <Drawer.Footer>
+          <Button variant="outline" onClick={() => setIsOpen(false)}>
+            Cancel
+          </Button>
+          <Button onClick={() => setIsOpen(false)}>Save</Button>
+        </Drawer.Footer>
+      </Drawer>
+    </Vertical>
+  );
+};
+```
+
+### **DrawerPlacements**
+
+```tsx
+import React, { useState } from 'react';
+import { Button, Drawer } from '../..';
+import { Placement } from '../Drawer/Drawer.type';
+import { Horizontal, Vertical, Text } from 'app-studio';
+
+export const DrawerPlacements = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [placement, setPlacement] = useState<Placement>('right');
+
+  const openDrawer = (newPlacement: Placement) => {
+    setPlacement(newPlacement);
+    setIsOpen(true);
+  };
+
+  return (
+    <Vertical gap={10}>
+      <Horizontal gap={10}>
+        <Button onClick={() => openDrawer('left')}>Left</Button>
+        <Button onClick={() => openDrawer('right')}>Right</Button>
+        <Button onClick={() => openDrawer('top')}>Top</Button>
+        <Button onClick={() => openDrawer('bottom')}>Bottom</Button>
+      </Horizontal>
+
+      <Drawer
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        placement={placement}
+      >
+        <Drawer.Header onClose={() => setIsOpen(false)}>
+          <Text fontWeight="bold">Drawer ({placement})</Text>
+        </Drawer.Header>
+        <Drawer.Body>
+          <Text>This drawer slides from the {placement}.</Text>
+        </Drawer.Body>
+      </Drawer>
+    </Vertical>
+  );
+};
+```
+
+### **DrawerSizes**
+
+```tsx
+import React, { useState } from 'react';
+import { Button, Drawer } from '../..';
+import { Size } from '../Drawer/Drawer.type';
+import { Horizontal, Vertical, Text } from 'app-studio';
+
+export const DrawerSizes = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [size, setSize] = useState<Size>('md');
+
+  const openDrawer = (newSize: Size) => {
+    setSize(newSize);
+    setIsOpen(true);
+  };
+
+  return (
+    <Vertical gap={10}>
+      <Horizontal gap={10} flexWrap="wrap">
+        <Button onClick={() => openDrawer('xs')}>xs</Button>
+        <Button onClick={() => openDrawer('sm')}>sm</Button>
+        <Button onClick={() => openDrawer('md')}>md</Button>
+        <Button onClick={() => openDrawer('lg')}>lg</Button>
+        <Button onClick={() => openDrawer('xl')}>xl</Button>
+        <Button onClick={() => openDrawer('full')}>full</Button>
+      </Horizontal>
+
+      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} size={size}>
+        <Drawer.Header onClose={() => setIsOpen(false)}>
+          <Text fontWeight="bold">Drawer Size: {size}</Text>
+        </Drawer.Header>
+        <Drawer.Body>
+          <Text>This drawer has a size of {size}.</Text>
+        </Drawer.Body>
+      </Drawer>
+    </Vertical>
+  );
+};
+```
+
+### **StoreDrawer**
+
+```tsx
+import React from 'react';
+import { Text } from 'app-studio';
+import { Button } from '../../Button/Button';
+import { Drawer } from '../Drawer';
+import { hideDrawer, showDrawer } from '../Drawer/Drawer.store';
+
+export const StoreDrawer = () => {
+  return (
+    <>
+      <Button
+        onClick={() =>
+          showDrawer('StoreDrawer', { placement: 'right', size: 'md' })
+        }
+        isAuto
+      >
+        Open Store Drawer
+      </Button>
+      <Drawer.Layout
+        drawers={{
+          StoreDrawer: () => (
+            <>
+              <Drawer.Header>
+                <Text size="lg" weight="semiBold">
+                  Store Drawer
+                </Text>
+              </Drawer.Header>
+              <Drawer.Body>
+                <Text>
+                  This drawer is opened via the store API, the same way the
+                  Modal works. Call showDrawer(&apos;StoreDrawer&apos;) to open
+                  it and hideDrawer() to close it.
+                </Text>
+              </Drawer.Body>
+              <Drawer.Footer>
+                <Button variant="outline" onClick={() => hideDrawer()}>
+                  Cancel
+                </Button>
+                <Button onClick={() => hideDrawer()}>Save</Button>
+              </Drawer.Footer>
+            </>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **StorePlacements**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Drawer } from '../Drawer';
+import { type Placement } from '../Drawer/Drawer.type';
+import { Horizontal, Vertical, Text } from 'app-studio';
+import { showDrawer } from '../Drawer/Drawer.store';
+
+export const StorePlacements = () => {
+  const openDrawer = (placement: Placement) => {
+    showDrawer('StorePlacementDrawer', { placement, size: 'md' });
+  };
+
+  return (
+    <Vertical gap={10}>
+      <Horizontal gap={10}>
+        <Button onClick={() => openDrawer('left')}>Left</Button>
+        <Button onClick={() => openDrawer('right')}>Right</Button>
+        <Button onClick={() => openDrawer('top')}>Top</Button>
+        <Button onClick={() => openDrawer('bottom')}>Bottom</Button>
+      </Horizontal>
+
+      <Drawer.Layout
+        drawers={{
+          StorePlacementDrawer: () => (
+            <>
+              <Drawer.Header>
+                <Text fontWeight="bold">Store Drawer</Text>
+              </Drawer.Header>
+              <Drawer.Body>
+                <Text>
+                  This drawer is opened via the store with different placements
+                  using showDrawer(&apos;StorePlacementDrawer&apos;, {'{'}
+                  placement, size{'}'}).
+                </Text>
+              </Drawer.Body>
+            </>
+          ),
+        }}
+      />
+    </Vertical>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './DefaultDrawer';
+export * from './DrawerPlacements';
+export * from './DrawerSizes';
+export * from './StoreDrawer';
+export * from './StorePlacements';
+```
+

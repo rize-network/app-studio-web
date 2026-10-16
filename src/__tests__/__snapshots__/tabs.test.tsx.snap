@@ -1,26 +1,49 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Tabs matches snapshot 1`] = `
 <div
-  className="wh-100 ht-100 dy-flex fdn-column wh-100 ht-100"
+  className="wh-100 ht-100 wh-100 ht-100 dy-flex fdn-column"
+  ref={[Function]}
 >
   <div
-    className="dy-flex fdn-row"
+    className="ais-center wh-100 gp-20px bbm-none dy-flex fdn-row"
+    ref={[Function]}
   >
     <div
       aria-selected={true}
-      borderBottomColor="transparent"
-      className="dy-flex ais-center jct-center pg-10px-16px cror-pointer btlrs-4px btrrs-4px bblrs-0px bbrrs-0px bwh-1px bsee-solid bcrr- bcr- cr- fwt-normal pn-relative cr---hover fdn-row gp-8px"
+      className="dy-flex ais-center jct-center cror-pointer tn-background-color-0p2s-ease-color-0p2s-ease-border-color-0p2s-ease-box-shadow-0p2s-ease-opacity-0p2s-ease mht-44px pg-0-4px brs-0px cr-var--theme-primary bbm-3px-solid bcrr-var--theme-primary fdn-row gp-8px"
       data-state="active"
       onClick={[Function]}
+      ref={[Function]}
       role="tab"
+      style={
+        {
+          "backgroundColor": "transparent",
+        }
+      }
       tabIndex={0}
     >
-      <span />
+      <div
+        className="dy-grid ais-center jct-center"
+        ref={[Function]}
+      >
+        <span
+          aria-hidden="true"
+          className="fsee-normal tdn-none fse-14px lht-20px lsg--0p01em cr-inherit fwt-600 vy-hidden gcn-1 grw-1"
+          ref={[Function]}
+          style={{}}
+        />
+        <span
+          className="fsee-normal tdn-none fse-14px lht-20px lsg--0p01em cr-inherit fwt-600 gcn-1 grw-1"
+          ref={[Function]}
+          style={{}}
+        />
+      </div>
     </div>
   </div>
   <div
-    className="wh-100 ht-100 wh-100 ht-100"
+    className="wh-100 ht-100 ht-100 wh-100 ptp-12px"
+    ref={[Function]}
   >
     Content 1
   </div>

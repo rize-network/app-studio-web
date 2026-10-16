@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
-import { Vertical, Horizontal } from 'app-studio';
+import { Vertical, Horizontal, View } from 'app-studio';
 import { ColorPicker } from '../ColorPicker';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const FormIntegrationColorPicker = () => {
-  const [backgroundColor, setBackgroundColor] = useState('color.blue.500');
-  const [textColor, setTextColor] = useState('color.white');
+  const [backgroundColor, setBackgroundColor] = useState('color-blue-500');
+  const [textColor, setTextColor] = useState('color-white');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Background: ${backgroundColor}, Text: ${textColor}`);
+  const handleSubmit = () => {
+    if (typeof alert !== 'undefined') {
+      alert(`Background: ${backgroundColor}, Text: ${textColor}`);
+    } else {
+      console.log(`Background: ${backgroundColor}, Text: ${textColor}`);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <View>
       <Vertical gap={16} width="300px">
         <ColorPicker
           label="Background Color"
@@ -43,21 +46,21 @@ export const FormIntegrationColorPicker = () => {
         </Vertical>
 
         <Horizontal gap={8}>
-          <Button type="submit" variant="filled">
+          <Button type="button" variant="filled" onClick={handleSubmit}>
             Apply Theme
           </Button>
           <Button
             type="button"
             variant="outline"
             onClick={() => {
-              setBackgroundColor('color.blue.500');
-              setTextColor('color.white');
+              setBackgroundColor('color-blue-500');
+              setTextColor('color-white');
             }}
           >
             Reset
           </Button>
         </Horizontal>
       </Vertical>
-    </form>
+    </View>
   );
 };

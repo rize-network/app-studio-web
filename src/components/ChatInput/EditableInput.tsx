@@ -1,120 +1,245 @@
 import React, {
   forwardRef,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   useCallback,
 } from 'react';
 import { View, Text, Vertical, useElementPosition } from 'app-studio';
-
+// DOM synchronisation runs inside the commit rather than as a passive effect: a passive effect can land
+// after an imperative write from outside React and revert the field to an already-stale value. Falls back
+// to `useEffect` during server rendering, where layout effects do not run.
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+// Defines the structure for a suggestion object, typically used for autocomplete functionality.
 export interface Suggestion {
+  // A unique identifier for the suggestion.
   id: string;
+  // The main text content of the suggestion.
   text: string;
+  // An optional additional description for the suggestion, providing more context.
   description?: string;
 }
-
+// Defines the structure for a mentionable user or item, used in features like @-mentions.
 interface MentionData {
+  // A unique identifier for the mention item.
   id: string;
+  // The name of the mentionable item or user.
   name: string;
+  // An optional URL for the mentionable item's avatar or icon.
   avatar?: string;
+  // An optional additional description for the mention item.
   description?: string;
 }
-
+// Defines the properties accepted by the `EditableInput` component, specifying its configurable behavior and data.
 interface EditableInputProps {
+  // The current string value displayed in the content-editable input.
   value: string;
+  // Callback function triggered when the input's content changes, providing the new value.
   onChange: (value: string) => void;
+  // Optional placeholder text to display when the input is empty.
   placeholder?: string;
+  // Boolean flag to disable user interaction with the input.
   disabled?: boolean;
+  // Boolean flag to automatically focus the input field on component mount.
   autoFocus?: boolean;
+  // An array of `Suggestion` objects to display for autocomplete.
   suggestions?: Suggestion[];
+  // Callback function triggered when a suggestion is selected, passing the chosen suggestion.
   onSuggestionSelect?: (suggestion: Suggestion) => void;
+  // Boolean flag to control the visibility of the suggestion dropdown.
   showSuggestions?: boolean;
+  // An array of `MentionData` objects available for @-mentions.
   mentionData?: MentionData[];
+  // The character (e.g., '@') that initiates the mention selection process.
   mentionTrigger?: string;
+  // Callback function triggered when a mention is selected, passing the chosen mention.
   onMentionSelect?: (mention: MentionData) => void;
+  // Optional key handler forwarded from the parent; runs before the internal
+  // mention/suggestion keyboard handling.
+  onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void;
+  // Sets the maximum height for the editable input area, allowing it to grow up to this limit.
   maxHeight?: string;
+  // Sets the minimum height for the editable input area.
   minHeight?: string;
+  // Form field name applied to the hidden mirror `<textarea>`, so the value participates in native form submission.
+  name?: string;
+  // DOM id applied to the hidden mirror `<textarea>`.
+  id?: string;
+  // Renders a hidden `<textarea>` kept in sync with the editable area, so generic tooling can read/write `element.value`. Defaults to `true`.
+  hiddenInput?: boolean;
+  // Ref to the hidden mirror `<textarea>`, giving callers a real form control to read from or write to.
+  hiddenInputRef?: React.Ref<HTMLTextAreaElement>;
+  // An optional object allowing custom React components to be passed for various internal parts of the `EditableInput`.
   views?: {
+    // Custom view component for the main container.
     container?: any;
+    // Custom view component for the editable input area itself.
     input?: any;
+    // Custom view component for the hidden mirror `<textarea>`.
+    hiddenInput?: any;
+    // Custom view component for the placeholder text.
     placeholder?: any;
+    // Custom view component for the container holding suggestions.
     suggestionsContainer?: any;
+    // Custom view component for individual suggestion items.
     suggestionItem?: any;
+    // Custom view component for the container holding mentions.
     mentionContainer?: any;
+    // Custom view component for individual mention items.
     mentionItem?: any;
   };
 }
-
+// Defines the `EditableInput` functional component, which is wrapped with `forwardRef` to allow parent components to get a direct reference to the DOM element.
 export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
   (
     {
+      // The current string content of the editable input.
       value,
+      // A callback function triggered when the input value changes.
       onChange,
+      // The placeholder text to display when the input is empty; defaults to 'Type your message...'.
       placeholder = 'Type your message...',
+      // Boolean flag indicating if the input is disabled; defaults to `false`.
       disabled = false,
+      // Boolean flag to automatically focus the input on mount; defaults to `true`.
       autoFocus = true,
+      // An array of `Suggestion` objects for autocomplete; defaults to an empty array.
       suggestions = [],
+      // Optional callback executed when a suggestion is selected.
       onSuggestionSelect,
+      // Boolean flag to control the visibility of suggestions; defaults to `false`.
       showSuggestions = false,
+      // An array of `MentionData` objects for @-mentions; defaults to an empty array.
       mentionData = [],
+      // The character that triggers mention suggestions; defaults to '@'.
       mentionTrigger = '@',
+      // Optional callback executed when a mention is selected.
       onMentionSelect,
+      // Optional parent key handler, invoked before internal key handling.
+      onKeyDown,
+      // The maximum height of the editable area; defaults to '200px'.
       maxHeight = '200px',
+      // The minimum height of the editable area; defaults to '40px'.
       minHeight = '40px',
+      // Form field name for the hidden mirror `<textarea>`.
+      name,
+      // DOM id for the hidden mirror `<textarea>`.
+      id,
+      // Whether the hidden mirror `<textarea>` is rendered; defaults to `true`.
+      hiddenInput = true,
+      // Optional ref exposing the hidden mirror `<textarea>` to the caller.
+      hiddenInputRef,
+      // Custom view components to override default rendering for internal elements.
       views = {},
     },
+    // The forwarded ref, allowing a parent component to access the underlying `HTMLDivElement`.
     ref
   ) => {
+    // A mutable ref object to store the last known `value` prop, used to track changes and prevent unnecessary DOM updates when the prop is identical.
     const lastValueRef = useRef(value);
+    // State variable to keep track of the currently highlighted suggestion's index for keyboard navigation.
     const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
+    // State variable to control the visibility of the placeholder text based on whether the input has content.
     const [showPlaceholder, setShowPlaceholder] = useState(!value);
+    // A ref to the main container `View` element, used for calculating the position of dropdowns.
     const containerRef = useRef<HTMLDivElement>(null);
+    // State variable to track whether the input field currently has focus.
     const [isFocused, setIsFocused] = useState(false);
-
-    // Mention-specific state
+    // State variable to control the visibility of the mention dropdown list.
     const [showMentions, setShowMentions] = useState(false);
+    // State variable to store the text being typed after the mention trigger (e.g., 'joh' in '@joh').
     const [mentionQuery, setMentionQuery] = useState('');
+    // State variable to store the starting character index of the mention trigger in the input text.
     const [mentionStartPos, setMentionStartPos] = useState(-1);
+    // State variable to keep track of the currently highlighted mention's index for keyboard navigation.
     const [selectedMentionIndex, setSelectedMentionIndex] = useState(-1);
+    // State variable holding the list of `MentionData` objects filtered by the current `mentionQuery`.
     const [filteredMentions, setFilteredMentions] = useState<MentionData[]>([]);
-
-    // Use useElementPosition for intelligent dropdown positioning
+    // A custom hook from 'app-studio' used to track the position and available space around the input container, essential for positioning floating elements like dropdowns.
     const { ref: positionRef, relation } = useElementPosition({
       trackChanges: true,
       trackOnHover: true,
       trackOnScroll: true,
       trackOnResize: true,
     });
-
-    // Positioning state for dropdowns
+    // State variable to store the calculated `x` and `y` coordinates for positioning the mention dropdown.
     const [mentionPosition, setMentionPosition] = useState({ x: 0, y: 0 });
+    // State variable to store the calculated `x` and `y` coordinates for positioning the suggestion dropdown.
     const [suggestionPosition, setSuggestionPosition] = useState({
       x: 0,
       y: 0,
     });
-
-    // Update the content of the editable div when the value prop changes
-    useEffect(() => {
-      const editableDiv = ref as React.RefObject<HTMLDivElement>;
-      if (editableDiv.current && value !== lastValueRef.current) {
+    // A ref to the hidden `<textarea>` that mirrors the current value as a real form control.
+    const mirrorRef = useRef<HTMLTextAreaElement | null>(null);
+    // Assigns the mirror element to the internal ref and to any `hiddenInputRef` provided by the caller.
+    const setMirrorRef = useCallback(
+      (node: HTMLTextAreaElement | null) => {
+        mirrorRef.current = node;
+        if (typeof hiddenInputRef === 'function') {
+          hiddenInputRef(node);
+        } else if (hiddenInputRef) {
+          (
+            hiddenInputRef as React.MutableRefObject<HTMLTextAreaElement | null>
+          ).current = node;
+        }
+      },
+      [hiddenInputRef]
+    );
+    // Writes a value into the hidden mirror. The mirror is uncontrolled — it follows the `value` prop imperatively so that reading `element.value` always returns the current text.
+    const syncMirror = useCallback((next: string) => {
+      if (mirrorRef.current && mirrorRef.current.value !== next) {
+        mirrorRef.current.value = next;
+      }
+    }, []);
+    // An effect hook that synchronizes the `textContent` of the content-editable div and the hidden mirror with the component's `value` prop, and updates placeholder visibility.
+    useIsomorphicLayoutEffect(() => {
+      const editableDiv = ref as React.RefObject<HTMLDivElement> | null;
+      if (editableDiv?.current && value !== lastValueRef.current) {
         editableDiv.current.textContent = value;
         lastValueRef.current = value;
         setShowPlaceholder(!value);
       }
-    }, [value, ref]);
-
-    // Auto-focus effect
+      syncMirror(value);
+    }, [value, ref, syncMirror]);
+    // Applies a value that originated outside the content-editable area — a write to the hidden mirror, or an imperative `setValue` call — keeping the DOM, the placeholder and the `value` prop in sync.
+    const applyExternalValue = useCallback(
+      (next: string) => {
+        if (next === lastValueRef.current) return;
+        const editableDiv = ref as React.RefObject<HTMLDivElement> | null;
+        if (editableDiv?.current && editableDiv.current.textContent !== next) {
+          editableDiv.current.textContent = next;
+        }
+        lastValueRef.current = next;
+        setShowPlaceholder(!next);
+        syncMirror(next);
+        onChange(next);
+      },
+      [onChange, ref, syncMirror]
+    );
+    // An effect hook that listens for native `input`/`change` events on the hidden mirror. A native listener is used rather than React's synthetic `onChange` because React's value tracker swallows the common automation sequence `element.value = '…'` followed by `dispatchEvent(new Event('input', { bubbles: true }))`. Attached during the commit so the mirror is never live in the DOM without a listener behind it.
+    useIsomorphicLayoutEffect(() => {
+      const mirror = mirrorRef.current;
+      if (!mirror) return;
+      const handleMirrorInput = () => applyExternalValue(mirror.value);
+      mirror.addEventListener('input', handleMirrorInput);
+      mirror.addEventListener('change', handleMirrorInput);
+      return () => {
+        mirror.removeEventListener('input', handleMirrorInput);
+        mirror.removeEventListener('change', handleMirrorInput);
+      };
+    }, [applyExternalValue, hiddenInput]);
+    // An effect hook to automatically focus the content-editable input element if the `autoFocus` prop is true when the component mounts or `autoFocus` changes.
     useEffect(() => {
       if (autoFocus && ref && typeof ref === 'object' && ref.current) {
         ref.current.focus();
       }
     }, [autoFocus, ref]);
-
-    // Get cursor position
+    // A utility function to accurately determine the current cursor (caret) position within the content-editable div.
     const getCursorPosition = () => {
       const selection = window.getSelection();
       if (!selection || selection.rangeCount === 0) return -1;
-
       const range = selection.getRangeAt(0);
       const preCaretRange = range.cloneRange();
       preCaretRange.selectNodeContents(
@@ -125,36 +250,29 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       preCaretRange.setEnd(range.endContainer, range.endOffset);
       return preCaretRange.toString().length;
     };
-
-    // Check for mention trigger and filter mentions
+    // A memoized callback function that analyzes the input text for mention triggers and filters `mentionData` accordingly, updating mention-related states.
     const checkForMentions = useCallback(
       (text: string, cursorPos: number) => {
         const beforeCursor = text.substring(0, cursorPos);
         const triggerIndex = beforeCursor.lastIndexOf(mentionTrigger);
-
         if (triggerIndex !== -1) {
           const afterTrigger = beforeCursor.substring(triggerIndex + 1);
           const hasSpaceAfterTrigger = afterTrigger.includes(' ');
-
           if (!hasSpaceAfterTrigger) {
             const query = afterTrigger.toLowerCase();
             const filtered = mentionData.filter((mention) =>
               mention.name.toLowerCase().includes(query)
             );
-
             setMentionQuery(query);
             setMentionStartPos(triggerIndex);
             setFilteredMentions(filtered);
             setShowMentions(filtered.length > 0);
             setSelectedMentionIndex(0);
-
-            // Calculate position for mentions dropdown
             const position = calculateDropdownPosition();
             setMentionPosition(position);
             return;
           }
         }
-
         setShowMentions(false);
         setMentionQuery('');
         setMentionStartPos(-1);
@@ -162,22 +280,17 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       },
       [mentionData, mentionTrigger]
     );
-
-    // Sync the position ref with the container ref for positioning calculations
+    // An effect hook to assign the component's `containerRef.current` to the `positionRef` from the `useElementPosition` hook, allowing it to track the main input container.
     useEffect(() => {
       if (containerRef.current && positionRef) {
         (positionRef as any).current = containerRef.current;
       }
     }, [containerRef, positionRef]);
-
-    // Calculate optimal position for dropdowns using useElementPosition
+    // A memoized callback function to calculate the optimal `x` and `y` position for a dropdown (mentions or suggestions) relative to the input container and viewport.
     const calculateDropdownPosition = useCallback(
       (dropdownHeight: number = 200) => {
         if (!containerRef.current) return { x: 0, y: 0 };
-
         const containerRect = containerRef.current.getBoundingClientRect();
-
-        // Use relation data for intelligent positioning if available
         if (relation) {
           const useTopPlacement = relation.space.vertical === 'top';
           return {
@@ -187,18 +300,14 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
               : containerRect.bottom + 8,
           };
         }
-
-        // Fallback to manual calculation if relation data is not available
         const viewportHeight = window.innerHeight;
         const availableSpace = {
           top: containerRect.top,
           bottom: viewportHeight - containerRect.bottom,
         };
-
         const useTopPlacement =
           availableSpace.bottom < dropdownHeight + 8 &&
           availableSpace.top > availableSpace.bottom;
-
         return {
           x: containerRect.left,
           y: useTopPlacement
@@ -208,38 +317,32 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       },
       [relation]
     );
-
-    // Handle focus events
+    // A memoized callback function that sets the `isFocused` state to true and calculates the suggestion dropdown's position when the input gains focus.
     const handleFocus = useCallback(() => {
       setIsFocused(true);
-      // Calculate position for suggestions when focused
       const position = calculateDropdownPosition();
       setSuggestionPosition(position);
     }, [calculateDropdownPosition]);
-
+    // A memoized callback function that sets `isFocused` to false and resets the `selectedSuggestionIndex` after a short delay when the input loses focus, allowing for click events on dropdowns to register.
     const handleBlur = useCallback(() => {
-      // Delay hiding to allow for dropdown interactions
       setTimeout(() => {
         setIsFocused(false);
         setSelectedSuggestionIndex(-1);
       }, 150);
     }, []);
-
-    // Handle input events
+    // Handles the `onInput` event for the content-editable div, updating the component's value, placeholder, and checking for mentions.
     const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
       const newValue = e.currentTarget.textContent || '';
       if (newValue !== lastValueRef.current) {
         onChange(newValue);
         lastValueRef.current = newValue;
+        syncMirror(newValue);
         setShowPlaceholder(!newValue);
-
-        // Check for mentions
         const cursorPos = getCursorPosition();
         checkForMentions(newValue, cursorPos);
       }
     };
-
-    // Handle mention selection
+    // A memoized callback function responsible for inserting a selected mention into the input text, updating the value, and repositioning the cursor.
     const handleMentionSelect = useCallback(
       (mention: MentionData) => {
         if (ref && typeof ref === 'object' && ref.current) {
@@ -250,12 +353,10 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
           );
           const newText =
             beforeMention + mentionTrigger + mention.name + ' ' + afterMention;
-
           onChange(newText);
           lastValueRef.current = newText;
+          syncMirror(newText);
           ref.current.textContent = newText;
-
-          // Set cursor position after the mention
           const newCursorPos =
             beforeMention.length +
             mentionTrigger.length +
@@ -278,12 +379,10 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             }
           }, 0);
         }
-
         setShowMentions(false);
         setMentionQuery('');
         setMentionStartPos(-1);
         setSelectedMentionIndex(-1);
-
         if (onMentionSelect) {
           onMentionSelect(mention);
         }
@@ -295,10 +394,10 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
         onChange,
         onMentionSelect,
         ref,
+        syncMirror,
       ]
     );
-
-    // Handle suggestion selection
+    // A memoized callback function that handles the selection of a suggestion, invoking the `onSuggestionSelect` prop if provided and resetting the selected index.
     const handleSuggestionSelect = useCallback(
       (suggestion: Suggestion) => {
         if (onSuggestionSelect) {
@@ -308,10 +407,15 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
       },
       [onSuggestionSelect]
     );
-
-    // Handle key down events
+    // Handles keyboard events within the content-editable div, enabling navigation (ArrowUp/Down) and selection (Tab/Enter/Escape) for both mention and suggestion dropdowns.
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-      // Handle mention navigation
+      // Give the parent's handler first look at the event; when it consumes
+      // the key (preventDefault) the internal dropdown navigation stays out
+      // of the way.
+      if (onKeyDown) {
+        onKeyDown(e);
+        if (e.defaultPrevented) return;
+      }
       if (showMentions && filteredMentions.length > 0) {
         if (e.key === 'ArrowDown') {
           e.preventDefault();
@@ -341,8 +445,6 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
           return;
         }
       }
-
-      // Handle suggestion navigation
       if (showSuggestions && suggestions.length > 0) {
         if (e.key === 'ArrowDown') {
           e.preventDefault();
@@ -368,11 +470,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
           return;
         }
       }
-
-      // Allow Enter for line breaks (remove submission on Enter)
-      // Submission should only happen via the send button
     };
-
     return (
       <View
         ref={containerRef}
@@ -380,7 +478,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
         position="relative"
         {...views?.container}
       >
-        {/* Input Container */}
+        {}
         <View
           width="100%"
           minHeight={minHeight}
@@ -388,24 +486,22 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
           overflowY="auto"
           position="relative"
         >
-          {/* Placeholder */}
+          {}
           {showPlaceholder && (
             <Text
               position="absolute"
               top="8px"
               left="8px"
-              color="color.gray.400"
+              color="color-gray-400"
               pointerEvents="none"
               fontSize="14px"
-              lineHeight="1.5"
               zIndex={1}
               {...views?.placeholder}
             >
               {placeholder}
             </Text>
           )}
-
-          {/* Editable Input */}
+          {}
           <View
             as="div"
             ref={ref}
@@ -425,23 +521,54 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             whiteSpace="pre-wrap"
             wordBreak="break-word"
             fontSize="14px"
-            lineHeight="1.5"
-            color="color.gray.900"
+            color="color-gray-900"
             backgroundColor="transparent"
             {...views?.input}
           />
         </View>
-
-        {/* Mentions Dropdown */}
+        {/*
+          Hidden mirror of the editable area. The visible field is a `contentEditable` div — it has no
+          `value` property, so anything that drives a form control generically (test runners, replay
+          engines, autofill, draft restoration) has nothing to hold on to. This `<textarea>` carries the
+          same text: read it with `element.value`, write it with `element.value = '…'` followed by
+          `dispatchEvent(new Event('input', { bubbles: true }))`, and submit it natively via `name`.
+          It is `aria-hidden` and not focusable, so assistive technology only ever sees the real textbox.
+        */}
+        {hiddenInput && (
+          <View
+            as="textarea"
+            ref={setMirrorRef}
+            id={id}
+            name={name}
+            defaultValue={value}
+            disabled={disabled}
+            tabIndex={-1}
+            aria-hidden="true"
+            data-editable-input-mirror="true"
+            opacity={0}
+            width={1}
+            height={1}
+            padding={0}
+            border="none"
+            resize="none"
+            overflow="hidden"
+            position="absolute"
+            bottom={0}
+            left={0}
+            pointerEvents="none"
+            {...views?.hiddenInput}
+          />
+        )}
+        {}
         {showMentions && filteredMentions.length > 0 && (
           <View
             position="fixed"
             left={mentionPosition.x}
             top={mentionPosition.y}
             width={containerRef.current?.offsetWidth || 300}
-            backgroundColor="color.white"
+            backgroundColor="color-white"
             border="2px solid"
-            borderColor="color.blue.300"
+            borderColor="color-blue-300"
             borderRadius="8px"
             boxShadow="0 8px 24px rgba(0, 0, 0, 0.15)"
             zIndex={9999}
@@ -459,7 +586,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                   padding="12px 16px"
                   backgroundColor={
                     index === selectedMentionIndex
-                      ? 'color.blue.50'
+                      ? 'color-blue-50'
                       : 'transparent'
                   }
                   border="none"
@@ -469,28 +596,28 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                   onClick={() => handleMentionSelect(mention)}
                   onMouseEnter={() => setSelectedMentionIndex(index)}
                   _hover={{
-                    backgroundColor: 'color.blue.50',
+                    backgroundColor: 'color-blue-50',
                   }}
                   {...views?.mentionItem}
                 >
                   <Vertical gap={4}>
                     <Text
                       fontSize="14px"
-                      color="color.gray.900"
+                      color="color-gray-900"
                       fontWeight="medium"
                     >
                       {mentionTrigger}
                       {mention.name}
                     </Text>
                     {mention.description && (
-                      <Text fontSize="12px" color="color.gray.600">
+                      <Text fontSize="12px" color="color-gray-600">
                         {mention.description}
                       </Text>
                     )}
                   </Vertical>
                 </View>
               ))}
-              {/* Debug info - can be removed in production */}
+              {}
               {process.env.NODE_ENV === 'development' && (
                 <div style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}>
                   Mentions (Trigger: {mentionTrigger})
@@ -506,8 +633,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
             </Vertical>
           </View>
         )}
-
-        {/* Suggestions Dropdown - Only show on focus and when no value */}
+        {}
         {showSuggestions &&
           suggestions.length > 0 &&
           !showMentions &&
@@ -518,9 +644,9 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
               left={suggestionPosition.x}
               top={suggestionPosition.y}
               width={containerRef.current?.offsetWidth || 300}
-              backgroundColor="color.white"
+              backgroundColor="color-white"
               border="2px solid"
-              borderColor="color.green.300"
+              borderColor="color-green-300"
               borderRadius="8px"
               boxShadow="0 8px 24px rgba(0, 0, 0, 0.15)"
               zIndex={9998}
@@ -538,7 +664,7 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                     padding="12px 16px"
                     backgroundColor={
                       index === selectedSuggestionIndex
-                        ? 'color.blue.50'
+                        ? 'color-blue-50'
                         : 'transparent'
                     }
                     border="none"
@@ -548,27 +674,27 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
                     onClick={() => handleSuggestionSelect(suggestion)}
                     onMouseEnter={() => setSelectedSuggestionIndex(index)}
                     _hover={{
-                      backgroundColor: 'color.blue.50',
+                      backgroundColor: 'color-blue-50',
                     }}
                     {...views?.suggestionItem}
                   >
                     <Vertical gap={4}>
                       <Text
                         fontSize="14px"
-                        color="color.gray.900"
+                        color="color-gray-900"
                         fontWeight="medium"
                       >
                         {suggestion.text}
                       </Text>
                       {suggestion.description && (
-                        <Text fontSize="12px" color="color.gray.600">
+                        <Text fontSize="12px" color="color-gray-600">
                           {suggestion.description}
                         </Text>
                       )}
                     </Vertical>
                   </View>
                 ))}
-                {/* Debug info - can be removed in production */}
+                {}
                 {process.env.NODE_ENV === 'development' && (
                   <div
                     style={{ fontSize: '8px', opacity: 0.7, padding: '4px' }}
@@ -590,5 +716,4 @@ export const EditableInput = forwardRef<HTMLDivElement, EditableInputProps>(
     );
   }
 );
-
 EditableInput.displayName = 'EditableInput';

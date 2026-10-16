@@ -2,10 +2,7 @@ import React from 'react';
 import { PaginationProps } from './Pagination/Pagination.props';
 import { usePaginationState } from './Pagination/Pagination.state';
 import { PaginationView } from './Pagination/Pagination.view';
-
-/**
- * Pagination component for navigating through pages of content.
- */
+// This file defines the main Pagination component. It serves as the top-level orchestrator, integrating the pagination logic from `usePaginationState` and presenting the UI through `PaginationView`, while accepting and passing all necessary props.
 const PaginationComponent: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
@@ -28,7 +25,6 @@ const PaginationComponent: React.FC<PaginationProps> = ({
     totalPages,
     maxPageButtons
   );
-
   return (
     <PaginationView
       currentPage={currentPage}
@@ -50,5 +46,4 @@ const PaginationComponent: React.FC<PaginationProps> = ({
     />
   );
 };
-
 export const Pagination = PaginationComponent;

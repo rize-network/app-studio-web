@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { ViewProps, Center, useTheme } from 'app-studio';
 import { ToggleViewProps } from './Toggle.props';
 import { ToggleShapes, getToggleVariants } from './Toggle.style';
-import contrast from 'contrast';
 
 interface Props extends ToggleViewProps {
   views?: {
@@ -10,81 +9,91 @@ interface Props extends ToggleViewProps {
   };
   backgroundColor?: string; // primary candidate for main color
   color?: string; // 2nd candidate for main color
-  themeMode?: 'light' | 'dark';
 }
 
-const ToggleView: React.FC<Props> = ({
-  children,
-  shape = 'rounded',
-  variant = 'ghost',
-  isHovered,
-  setIsHovered,
-  isDisabled,
-  isToggle,
-  setIsToggled,
-  onToggle,
-  views,
-  backgroundColor, // primary candidate for main color
-  color, // 2nd candidate for main color
-  themeMode: elementMode,
-  ...props
-}) => {
-  /* theme helpers */
-  const { getColor, themeMode } = useTheme();
-  const mode = elementMode ?? themeMode;
+const ToggleView: React.FC<Props> = React.memo(
+  ({
+    children,
+    shape = 'rounded',
+    variant = 'ghost',
+    isHovered,
+    setIsHovered,
+    isDisabled,
+    isToggle,
+    setIsToggled,
+    onToggle,
+    views,
+    backgroundColor, // primary candidate for main color
+    color, // 2nd candidate for main color
+    themeMode: elementMode,
+    ...props
+  }) => {
+    /* theme helpers */
+    const { getColor, themeMode } = useTheme();
+    const mode = elementMode ?? themeMode;
 
-  /* MAIN COLOR – determines the entire palette */
-  const mainColorKey = backgroundColor ?? color ?? 'theme.primary';
-  const mainTone = getColor(isDisabled ? 'theme.disabled' : mainColorKey, {
-    themeMode: mode,
-  });
-  const tone = contrast(mainTone);
+    /* MAIN COLOR – determines the entire palette */
+    const mainColorKey = backgroundColor ?? color ?? 'theme-primary';
+    const mainTone = getColor(isDisabled ? 'theme-disabled' : mainColorKey, {
+      themeMode: mode,
+    });
 
-  /* variant palette */
-  const palette = useMemo(
-    () => getToggleVariants(mainTone, tone === 'light'),
-    [mainTone, tone]
-  );
-  const base = palette[variant];
+    /* variant palette (memoized to avoid recreation on every render) */
+    const palette = useMemo(
+      () => getToggleVariants(mainTone, mode === 'light'),
+      [mainTone, mode]
+    );
 
-  const isActive = !!(isToggle || isHovered);
+    const base = palette[variant];
 
-  const handleHover = () => setIsHovered(!isHovered);
+    const isActive = !!isToggle;
 
-  const handleToggle = () => {
-    if (!isDisabled) {
-      setIsToggled((prev) => {
-        const newState = !prev;
-        if (onToggle) {
-          onToggle(newState);
-        }
-        return newState;
-      });
-    }
-  };
+    const handleHover = useCallback(() => setIsHovered(true), [setIsHovered]);
 
-  return (
-    <Center
-      role="Toggle"
-      padding={shape === 'pillShaped' ? '10px 12px' : '8px'}
-      width="fit-content"
-      cursor={isDisabled ? 'not-allowed' : 'pointer'}
-      borderRadius={ToggleShapes[shape]}
-      onClick={handleToggle}
-      onMouseEnter={handleHover}
-      onMouseLeave={() => setIsHovered(false)}
-      /* Apply base variant styles */
-      {...base}
-      /* Override with active state if toggled */
-      {...(isActive && {
-        backgroundColor: mainTone,
-        color: tone === 'light' ? 'color.black' : 'color.white',
-      })}
-      {...props}
-      {...views?.container}
-    >
-      {children}
-    </Center>
-  );
-};
+    const handleToggle = useCallback(() => {
+      if (!isDisabled) {
+        setIsToggled((prev) => {
+          const newState = !prev;
+          if (onToggle) {
+            onToggle(newState);
+          }
+          return newState;
+        });
+      }
+    }, [isDisabled, setIsToggled, onToggle]);
+
+    return (
+      <Center
+        role="Toggle"
+        padding={shape === 'pill' ? '8px 12px' : '8px'}
+        width="fit-content"
+        cursor={isDisabled ? 'not-allowed' : 'pointer'}
+        borderRadius={ToggleShapes[shape]}
+        onClick={handleToggle}
+        onMouseEnter={handleHover}
+        onMouseLeave={() => setIsHovered(false)}
+        /* Apply base variant styles */
+        {...base}
+        /* Override with active state if toggled */
+        {...(isActive && {
+          ...(variant === 'link'
+            ? {
+                backgroundColor: 'transparent',
+              }
+            : {
+                backgroundColor: 'color-blue-50',
+                borderWidth: 1,
+                borderStyle: 'solid',
+                borderColor: 'color-blue-200',
+              }),
+          color: mainTone,
+        })}
+        {...props}
+        {...views?.container}
+      >
+        {children}
+      </Center>
+    );
+  }
+);
 export default ToggleView;

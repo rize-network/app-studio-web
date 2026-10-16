@@ -15,7 +15,7 @@ export const Placeholder = () => {
     <form onSubmit={handleSubmit}>
       <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
         <TextField name="surname" placeholder="Surname" />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

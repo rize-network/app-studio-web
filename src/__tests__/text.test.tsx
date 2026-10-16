@@ -1,6 +1,6 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { Text } from 'src/components/Text/Text';
+import renderer from './actRenderer.test-utils';
+import { Text } from 'app-studio';
 
 import { cleanup, render, screen } from '@testing-library/react';
 

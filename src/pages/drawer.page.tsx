@@ -1,11 +1,10 @@
-import { Vertical } from 'app-studio';
+import { Vertical, Text } from 'app-studio';
 import React from 'react';
-import { Text } from 'src/components';
 import {
   DefaultDrawer,
   DrawerPlacements,
   DrawerSizes,
-} from 'src/components/Drawer/Examples';
+} from 'src/components/Drawer/examples';
 
 const Section = ({
   title,
@@ -18,7 +17,7 @@ const Section = ({
     gap={8}
     paddingBottom={24}
     borderBottomWidth="1px"
-    borderBottomColor="color.gray.200"
+    borderBottomColor="color-gray-200"
   >
     <Text as="h3" fontWeight="bold" fontSize="lg">
       {title}

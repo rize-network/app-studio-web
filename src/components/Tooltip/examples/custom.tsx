@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip } from '../Tooltip';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 export const CustomTooltip = () => {
@@ -17,12 +17,12 @@ export const CustomTooltip = () => {
         }
         views={{
           content: {
-            backgroundColor: 'theme.primary',
-            color: 'color.white',
+            backgroundColor: 'theme-primary',
+            color: 'color-white',
             borderRadius: '8px',
           },
           arrow: {
-            backgroundColor: 'theme.primary',
+            backgroundColor: 'theme-primary',
           },
         }}
       >

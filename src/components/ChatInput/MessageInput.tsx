@@ -2,43 +2,69 @@ import React, { forwardRef } from 'react';
 import { Button, Element, Horizontal, View, useTheme } from 'app-studio';
 import { ChatUploader } from './ChatUploader';
 import { ModelOption } from './ChatInput/ChatInput.type';
-
+// Defines the properties required for the MessageInput component.
 interface MessageInputProps {
+  // The current value of the input text area.
   value: string;
+  // Callback function triggered when the text area value changes.
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  // Callback function triggered when the form is submitted.
   onSubmit: (e: React.FormEvent) => void;
+  // Optional placeholder text for the input text area.
   placeholder?: string;
+  // Indicates if a loading state is active, typically disabling the submit button.
   loading?: boolean;
+  // Indicates if the input and related controls should be disabled.
   disabled?: boolean;
+  // Indicates if an agent process is currently running.
   isAgentRunning?: boolean;
+  // Callback function to stop an active agent process.
   onStopAgent?: () => void;
+  // Indicates if a file is currently being dragged over the input area.
   isDraggingOver?: boolean;
+  // An array of files that have been successfully uploaded.
   uploadedFiles: File[];
-
+  // A ref object for accessing the underlying file input DOM element.
   fileInputRef: React.RefObject<HTMLInputElement>;
+  // Indicates if files are currently in the process of being uploaded.
   isUploading: boolean;
+  // Optional ID for the sandbox environment related to file uploads.
   sandboxId?: string;
+  // Setter function for managing files pending upload.
   setPendingFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  // Setter function for managing successfully uploaded files.
   setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  // Setter function for managing the file upload status.
   setIsUploading: React.Dispatch<React.SetStateAction<boolean>>;
+  // Determines whether the attachment input (ChatUploader) should be hidden.
   hideAttachments?: boolean;
-
+  // The currently selected model for the chat.
   selectedModel: string;
+  // Callback function triggered when the selected model changes.
   onModelChange: (model: string) => void;
+  // An array of available model options for selection.
   modelOptions: ModelOption[];
+  // Optional status of the user's subscription.
   subscriptionStatus?: string;
+  // Function to check if the user has access to a specific model.
   canAccessModel: (model: string) => boolean;
-
+  // Optional object to override default styling properties for various sub-components.
   views?: {
+    // Custom styles for the main container view.
     container?: any;
+    // Custom styles for the textarea element.
     textarea?: any;
+    // Custom styles for the horizontal button group.
     buttonGroup?: any;
+    // Custom styles for the submit button.
     submitButton?: any;
+    // Custom styles for the submit button's icon.
     submitIcon?: any;
+    // Custom styles for the model selection dropdown.
     modelSelector?: any;
   };
 }
-
+// The MessageInput component provides a chat input field with features like file uploads, model selection, and dynamic resizing, forwarded with a ref to the textarea element.
 export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
   (
     {
@@ -52,7 +78,6 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
       onStopAgent,
       isDraggingOver = false,
       uploadedFiles,
-
       fileInputRef,
       isUploading,
       sandboxId,
@@ -60,20 +85,18 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
       setUploadedFiles,
       setIsUploading,
       hideAttachments = true,
-
       selectedModel,
       onModelChange,
       modelOptions,
       subscriptionStatus,
       canAccessModel,
-
       views = {},
     },
     ref
   ) => {
+    // Retrieves the 'getColor' function from the application's theme context for consistent styling.
     const { getColor } = useTheme();
-
-    // Handle textarea resize
+    // Handles the automatic resizing of the textarea to fit its content, up to a maximum height of 200px.
     const handleTextareaResize = (
       e: React.ChangeEvent<HTMLTextAreaElement>
     ) => {
@@ -81,28 +104,25 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
       textarea.style.height = 'auto';
       textarea.style.height = `${Math.min(textarea.scrollHeight, 200)}px`;
     };
-
-    // Handle combined change event
+    // Combines the external 'onChange' prop with the internal 'handleTextareaResize' for a unified change event.
     const handleCombinedChange = (
       e: React.ChangeEvent<HTMLTextAreaElement>
     ) => {
       onChange(e);
       handleTextareaResize(e);
     };
-
-    // Handle key down event
+    // Handles keyboard events in the textarea, specifically preventing new lines on 'Enter' and triggering form submission when 'Enter' is pressed without 'Shift'.
     const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         onSubmit(e as unknown as React.FormEvent);
       }
     };
-
     return (
       <View
         width="100%"
         position="relative"
-        backgroundColor={isDraggingOver ? 'color.blue.50' : undefined}
+        backgroundColor={isDraggingOver ? 'color-blue-50' : undefined}
         transition="background-color 0.2s ease"
         {...views?.container}
       >
@@ -119,8 +139,8 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
           maxHeight="200px"
           padding="8px 12px"
           fontSize="14px"
-          lineHeight="1.5"
-          color="color.gray.900"
+          lineHeight="15px"
+          color="color-gray-900"
           backgroundColor="transparent"
           border="none"
           outline="none"
@@ -128,7 +148,6 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
           overflow="auto"
           {...views?.textarea}
         />
-
         <Horizontal
           justifyContent="space-between"
           alignItems="center"
@@ -148,8 +167,7 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               setIsUploading={setIsUploading}
               hideAttachments={hideAttachments}
             />
-
-            {/* Model selector */}
+            {}
             <View
               as="select"
               value={selectedModel}
@@ -160,13 +178,13 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               padding="0 12px"
               borderRadius="8px"
               backgroundColor="transparent"
-              color="color.gray.500"
+              color="color-gray-500"
               border="none"
               outline="none"
               cursor="pointer"
-              transition="all 0.2s ease"
+              transition="background-color 0.2s ease, color 0.2s ease"
               _hover={{
-                backgroundColor: 'color.gray.100',
+                backgroundColor: '#F8FAFC',
               }}
               {...views?.modelSelector}
             >
@@ -177,25 +195,21 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
               ))}
             </View>
           </Horizontal>
-
           <Button
-            type="submit"
             onClick={onSubmit}
             height="36px"
             minWidth="36px"
             padding="0 12px"
             borderRadius="8px"
-            backgroundColor={isAgentRunning ? 'theme.error' : 'theme.primary'}
-            color="color.white"
+            backgroundColor={isAgentRunning ? 'theme-error' : 'theme-primary'}
+            color="color-white"
             disabled={
               (!value.trim() && uploadedFiles.length === 0) ||
               loading ||
               (disabled && !isAgentRunning)
             }
             _hover={{
-              backgroundColor: isAgentRunning
-                ? 'color.red.600'
-                : 'color.blue.600',
+              backgroundColor: isAgentRunning ? 'color-red-600' : '#1D4ED8',
             }}
             {...views?.submitButton}
           >
@@ -257,5 +271,4 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
     );
   }
 );
-
 MessageInput.displayName = 'MessageInput';

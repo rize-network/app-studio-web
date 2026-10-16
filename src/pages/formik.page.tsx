@@ -14,6 +14,7 @@ import {
   FormikOTPInputExample,
   FormikTagInputExample,
   FormikUploaderExample,
+  FormikSelectorExample,
 } from '../components/Formik/examples';
 import { FormikComboBoxDemo } from '../components/Formik/examples/FormikComboBox';
 
@@ -108,6 +109,12 @@ export const FormikPage = () => {
             <td>Uploader</td>
             <td>
               <FormikUploaderExample />
+            </td>
+          </tr>
+          <tr>
+            <td>Selector</td>
+            <td>
+              <FormikSelectorExample />
             </td>
           </tr>
         </tbody>

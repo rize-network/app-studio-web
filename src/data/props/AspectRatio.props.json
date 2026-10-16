@@ -1,33 +1,21 @@
 {
-  "componentDescription": "Maintains a set aspect ratio for child content",
+  "componentDescription": "A utility component to render content while maintaining a specific aspect ratio.",
   "ratio": {
-    "type": [
-      "number"
-    ],
-    "typeValues": [
-      "any number"
-    ],
-    "description": "specifying the aspect ratio",
-    "defaultValue": "16/9"
+    "type": "number",
+    "typeValues": "N/A",
+    "description": "Sets the aspect ratio for the content. For example, 16/9 for a widescreen format.",
+    "defaultValue": "16 / 9"
   },
   "children": {
-    "type": [
-      "React.ReactNode"
-    ],
-    "typeValues": [
-      "any valid React node"
-    ],
-    "description": "defining the child components",
-    "defaultValue": "undefined"
+    "type": "React.ReactNode",
+    "typeValues": "N/A",
+    "description": "The content to be rendered within the aspect ratio container.",
+    "defaultValue": "N/A"
   },
-  "[x: string]": {
-    "type": [
-      "any"
-    ],
-    "typeValues": [
-      "any value"
-    ],
-    "description": "Allows for an indefinite number of additional properties with any types, adding flexibility to the props",
-    "defaultValue": "undefined"
+  "views": {
+    "type": "object",
+    "typeValues": "{ center?: object; view?: object; }",
+    "description": "Allows customizing props for the internal wrapper View (center) and content View (view) components.",
+    "defaultValue": "N/A"
   }
 }

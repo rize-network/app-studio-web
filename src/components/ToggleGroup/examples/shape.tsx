@@ -15,7 +15,7 @@ export const ShapeDemo = () => {
   ];
   return (
     <Horizontal gap={15}>
-      {['sharp', 'rounded', 'pillShaped'].map((border, index) => (
+      {['square', 'rounded', 'pill'].map((border, index) => (
         <View position="relative" key={index}>
           <ToggleGroup items={items} shape={border as Shape} />
         </View>

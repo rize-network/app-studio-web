@@ -9,13 +9,17 @@ import React from 'react';
 import { Input } from 'app-studio';
 import { Label } from '../../../Form/Label/Label';
 import { View } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
 import { SwitchViewProps } from './Switch.props';
 import {
   KnobSizes,
   SliderPadding,
   SliderSizes,
+  ContentSliderSizes,
+  ContentFontSizes,
   ColorSchemes,
+  TransitionStyles,
 } from './Switch.style';
 const SwitchContent = (props: any) => <Input type="checkbox" {...props} />;
 const SwitchView: React.FC<SwitchViewProps> = ({
@@ -33,14 +37,28 @@ const SwitchView: React.FC<SwitchViewProps> = ({
   isDisabled = false,
   isReadOnly = false,
   on,
-  setOn,
+  setOn = () => {},
   onChange,
   setValue = () => {},
   setIsHovered = () => {},
   helperText,
+  description,
   views = { slider: {}, circle: {}, label: {} },
   ...props
 }) => {
+  const generatedId = React.useId();
+  const switchId = id ?? generatedId;
+  const [isFocused, setIsFocused] = React.useState(false);
+  const checked = typeof isChecked === 'boolean' ? isChecked : value;
+  const hasContent = Boolean(activeChild || inActiveChild);
+  const sliderDimensions = hasContent
+    ? ContentSliderSizes[size]
+    : SliderSizes[size];
+  const knobOffset = `${SliderPadding[size].paddingHorizontal}px`;
+  const contentSpace = `${SliderPadding[size].paddingHorizontal + 2}px`;
+  const contentInset = `calc(${KnobSizes[size].width} + ${SliderPadding[size].paddingHorizontal}px + 4px)`;
+  const contentFontSize = ContentFontSizes[size];
+
   const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!isReadOnly && !isDisabled) {
       const newValue = event.target.checked;
@@ -49,7 +67,19 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       if (onChange) onChange(newValue);
     }
   };
-  const handleHover = () => setIsHovered(!isHovered);
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    let visible = true;
+    try {
+      visible = event.target.matches(':focus-visible');
+    } catch {
+      // engines without :focus-visible support: always show the ring
+    }
+    setIsFocused(visible);
+  };
+  const handleBlur = () => setIsFocused(false);
+  const descriptionId = `${switchId}-description`;
   /**
    * Styles for the switch component
    */
@@ -69,38 +99,27 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       opacity: isDisabled ? 0.6 : 1,
 
       // Animation
-      transition: 'all 0.2s ease',
+      transition: 'all 0.2s ease-in-out',
 
       // Apply custom styles
       ...views.label,
     },
   };
-  return (
+  // Rest props are routed to the input only: spreading them here as well
+  // landed consumer `aria-*`/`id` attributes on two elements at once.
+  const control = (
     <Label
-      htmlFor={id}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
+      htmlFor={switchId}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       {...switchStyle.container}
-      {...props}
     >
-      <SwitchContent
-        id={id}
-        name={name}
-        opacity={0}
-        width={0}
-        height={0}
-        checked={value}
-        onChange={handleToggle}
-        disabled={isDisabled}
-        readOnly={isReadOnly}
-        {...props}
-      />
       {/* Label on the left side */}
       {labelPosition === 'left' && label && (
         <Text
           fontWeight="500" // Medium weight for better readability
-          color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
-          transition="all 0.2s ease"
+          color={isDisabled ? 'color-gray-400' : 'inherit'}
+          transition="color 0.2s ease, opacity 0.2s ease"
         >
           {label}
         </Text>
@@ -111,22 +130,15 @@ const SwitchView: React.FC<SwitchViewProps> = ({
         // Layout properties
         display="flex"
         alignItems="center"
-        justifyContent={
-          value
-            ? activeChild
-              ? 'space-between'
-              : 'flex-end'
-            : inActiveChild
-            ? 'space-between'
-            : 'flex-start'
-        }
+        justifyContent="center"
+        position="relative"
         marginBottom={4} // 1 × 4px grid
         // Visual properties
         borderRadius="9999px" // Full rounded for pill shape
         backgroundColor={
           isDisabled
             ? ColorSchemes.default.disabled
-            : value
+            : checked
             ? isHovered
               ? ColorSchemes.states.hover.active
               : ColorSchemes.default.active
@@ -134,27 +146,68 @@ const SwitchView: React.FC<SwitchViewProps> = ({
             ? ColorSchemes.states.hover.inactive
             : ColorSchemes.default.inactive
         }
-        overflow="hidden"
+        opacity={
+          !isDisabled && checked && isHovered
+            ? ColorSchemes.states.hover.activeOpacity
+            : 1
+        }
         // State properties
         cursor="pointer"
         // Animation
-        transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+        {...TransitionStyles.slider}
         // Apply styles
         {...shadow}
         {...SliderPadding[size]}
-        {...SliderSizes[size]}
+        {...sliderDimensions}
         {...views['slider']}
+        {...(isFocused
+          ? checked
+            ? ColorSchemes.states.focus.active
+            : ColorSchemes.states.focus.inactive
+          : {})}
       >
+        {/* Real control: a transparent input covering the whole track, so the
+            element found by role/name is the one that receives clicks */}
+        <SwitchContent
+          id={switchId}
+          name={name}
+          role="switch"
+          aria-checked={checked}
+          position="absolute"
+          top={0}
+          left={0}
+          width="100%"
+          height="100%"
+          margin={0}
+          opacity={0}
+          zIndex={2}
+          cursor={
+            isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer'
+          }
+          checked={checked}
+          onChange={handleToggle}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          disabled={isDisabled}
+          readOnly={isReadOnly}
+          aria-describedby={description ? descriptionId : undefined}
+          {...props}
+        />
         {/* Active content */}
-        {activeChild && value && (
+        {activeChild && checked && (
           <View
-            marginLeft={8} // 2 × 4px grid
-            marginRight={4} // 1 × 4px grid
-            transition="all 0.3s ease"
+            marginLeft={contentSpace}
+            marginRight={contentInset}
+            transition="all 0.2s ease-in-out"
             display="flex"
             alignItems="center"
             justifyContent="center"
             height="100%"
+            width="100%"
+            overflow="hidden"
+            fontSize={contentFontSize}
+            color="color-white"
+            fontWeight={600}
           >
             {activeChild}
           </View>
@@ -162,25 +215,41 @@ const SwitchView: React.FC<SwitchViewProps> = ({
 
         {/* Knob */}
         <View
+          position="absolute"
+          top="50%"
+          left={checked ? undefined : knobOffset}
+          right={checked ? knobOffset : undefined}
           borderRadius="50%"
           backgroundColor={ColorSchemes.default.knob}
-          boxShadow="0 1px 2px rgba(0, 0, 0, 0.1)"
-          transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+          boxShadow={
+            isHovered
+              ? '0 4px 10px rgba(15, 23, 42, 0.18)'
+              : '0 1px 3px rgba(15, 23, 42, 0.18)'
+          }
+          transform={`translateY(-50%) ${
+            isHovered ? 'scale(1.05)' : 'scale(1)'
+          }`}
+          {...TransitionStyles.knob}
           zIndex={1} // Ensure knob is above content
           {...KnobSizes[size]}
           {...views['circle']}
         />
 
         {/* Inactive content */}
-        {inActiveChild && !value && (
+        {inActiveChild && !checked && (
           <View
-            marginRight={8} // 2 × 4px grid
-            marginLeft={4} // 1 × 4px grid
-            transition="all 0.3s ease"
+            marginLeft={contentInset}
+            marginRight={contentSpace}
+            transition="all 0.2s ease-in-out"
             display="flex"
             alignItems="center"
             justifyContent="center"
             height="100%"
+            width="100%"
+            overflow="hidden"
+            fontSize={contentFontSize}
+            color="color-white"
+            fontWeight={600}
           >
             {inActiveChild}
           </View>
@@ -191,13 +260,31 @@ const SwitchView: React.FC<SwitchViewProps> = ({
       {labelPosition === 'right' && label && (
         <Text
           fontWeight="500" // Medium weight for better readability
-          color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
-          transition="all 0.2s ease"
+          color={isDisabled ? 'color-gray-400' : 'inherit'}
+          transition="all 0.2s ease-in-out"
         >
           {label}
         </Text>
       )}
     </Label>
+  );
+
+  if (!description) return control;
+
+  // The description sits outside the <label> so it describes the input via
+  // `aria-describedby` instead of polluting its accessible name.
+  return (
+    <Vertical gap={4} width="fit-content">
+      {control}
+      <Text
+        id={descriptionId}
+        color="color-gray-500"
+        fontSize="14px"
+        lineHeight="20px"
+      >
+        {description}
+      </Text>
+    </Vertical>
   );
 };
 export default SwitchView;

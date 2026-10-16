@@ -1,107 +1,105 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View, ViewProps } from 'app-studio';
-
+import { TooltipStyles } from './Chart.style';
+// Defines the shape of properties accepted by the ChartTooltip component.
 interface ChartTooltipProps {
+  // Determines whether the tooltip should be displayed.
   visible: boolean;
+  // Specifies the X-coordinate for positioning the tooltip's anchor.
   x: number;
+  // Specifies the Y-coordinate for positioning the tooltip's anchor.
   y: number;
+  // The content to be rendered inside the tooltip.
   content: React.ReactNode;
+  // An optional property indicating the maximum distance from the anchor point (not directly used in this code snippet).
   maxDistance?: number;
+  // An optional object to pass custom props to internal View components.
   views?: {
+    // Optional props to apply to the main tooltip View component.
     tooltip?: ViewProps;
   };
 }
-
+// The ChartTooltip component displays a customizable tooltip at specified coordinates, adjusting its position to stay within the viewport.
 export const ChartTooltip: React.FC<ChartTooltipProps> = ({
+  // Destructures the 'visible' prop from ChartTooltipProps.
   visible,
+  // Destructures the 'x' prop from ChartTooltipProps.
   x,
+  // Destructures the 'y' prop from ChartTooltipProps.
   y,
+  // Destructures the 'content' prop from ChartTooltipProps.
   content,
+  // Destructures the 'maxDistance' prop, providing a default value if not specified.
   maxDistance = 100,
+  // Destructures the 'views' prop from ChartTooltipProps.
   views,
 }) => {
+  // Creates a ref to attach to the tooltip's DOM element for direct measurements.
   const tooltipRef = useRef<HTMLDivElement>(null);
+  // Initializes state to store the calculated `left` and `top` CSS positions of the tooltip.
   const [position, setPosition] = useState({ left: 0, top: 0 });
-
+  // A React hook to recalculate and update the tooltip's position whenever its visibility or coordinates change.
   useEffect(() => {
+    // Exits the effect if the tooltip is not visible or the ref to its DOM element is not yet available.
     if (!visible || !tooltipRef.current) return;
-
+    // Guards against non-DOM environments (e.g. React Native) where window
+    // and getBoundingClientRect are unavailable.
+    if (typeof window === 'undefined') return;
+    if (typeof tooltipRef.current.getBoundingClientRect !== 'function') return;
+    // Gets the current DOM element of the tooltip.
     const tooltip = tooltipRef.current;
+    // Obtains the size and position of the tooltip relative to the viewport.
     const tooltipRect = tooltip.getBoundingClientRect();
-    const tooltipWidth = tooltipRect.width;
-    const tooltipHeight = tooltipRect.height;
-
-    const viewportOffset = 10;
-    const cursorOffset = 15;
-
-    // Start position: top-left corner near cursor
-    let left = x - cursorOffset;
-    let top = y - cursorOffset;
-
-    // Calculate the distance from cursor to tooltip edges
-    const distanceX = x - left; // Distance from cursor to left edge
-    const distanceY = y - top; // Distance from cursor to top edge
-
-    // If tooltip would be too far on X axis, adjust it
-    if (distanceX > maxDistance) {
-      left = x - maxDistance;
+    // Determines the tooltip's width, falling back to 200px if not available.
+    const tooltipWidth = tooltipRect.width || 200;
+    // Determines the tooltip's height, falling back to 100px if not available.
+    const tooltipHeight = tooltipRect.height || 100;
+    // Defines a spacing offset for positioning the tooltip relative to its anchor point.
+    const offset = 20;
+    // Defines a padding value to keep the tooltip away from the viewport edges.
+    const viewportPadding = 16;
+    // Calculates the initial horizontal position to center the tooltip around the `x` coordinate.
+    let left = x - tooltipWidth / 2;
+    // Calculates the initial vertical position, placing the tooltip above the `y` coordinate.
+    let top = y - tooltipHeight - offset;
+    // Checks if the tooltip's calculated top position is too high (collides with the top viewport padding).
+    if (top < viewportPadding) {
+      // If the tooltip is too high, repositions it to appear below the `y` coordinate.
+      top = y + offset;
     }
-
-    // If tooltip would be too far on Y axis, adjust it
-    if (distanceY > maxDistance) {
-      top = y - maxDistance;
+    // Checks if the tooltip extends beyond the right edge of the viewport.
+    if (left + tooltipWidth > window.innerWidth - viewportPadding) {
+      // Adjusts the `left` position to ensure the tooltip remains within the right viewport boundary.
+      left = window.innerWidth - tooltipWidth - viewportPadding;
+      // Checks if the tooltip extends beyond the left edge of the viewport.
+    } else if (left < viewportPadding) {
+      // Adjusts the `left` position to ensure the tooltip remains within the left viewport boundary.
+      left = viewportPadding;
     }
-
-    // Ensure tooltip doesn't go off the right edge of viewport
-    if (left + tooltipWidth > window.innerWidth - viewportOffset) {
-      left = window.innerWidth - tooltipWidth - viewportOffset;
-      // Still respect max distance constraint
-      if (x - left > maxDistance) {
-        left = x - maxDistance;
-      }
-    }
-
-    // Ensure tooltip doesn't go off the left edge of viewport
-    if (left < viewportOffset) {
-      left = viewportOffset;
-    }
-
-    // Ensure tooltip doesn't go off the bottom edge of viewport
-    if (top + tooltipHeight > window.innerHeight - viewportOffset) {
-      top = window.innerHeight - tooltipHeight - viewportOffset;
-      // Still respect max distance constraint
-      if (y - top > maxDistance) {
-        top = y - maxDistance;
-      }
-    }
-
-    // Ensure tooltip doesn't go off the top edge of viewport
-    if (top < viewportOffset) {
-      top = viewportOffset;
-    }
-
+    // Clamps the `top` position to ensure the tooltip stays within the vertical viewport boundaries.
+    top = Math.max(
+      viewportPadding,
+      Math.min(top, window.innerHeight - tooltipHeight - viewportPadding)
+    );
+    // Updates the component's state with the final calculated `left` and `top` positions, triggering a re-render.
     setPosition({ left, top });
-  }, [visible, x, y, maxDistance]);
-
+    // Dependencies array for `useEffect`, ensuring the position recalculation runs when `visible`, `x`, or `y` change.
+  }, [visible, x, y]);
+  // If the `visible` prop is false, the component renders nothing.
   if (!visible) return null;
-
   return (
     <View
       ref={tooltipRef}
       position="fixed"
       left={`${position.left}px`}
       top={`${position.top}px`}
-      backgroundColor="color.white"
-      padding="12px 16px"
-      borderRadius="8px"
-      boxShadow="0px 12px 24px rgba(15, 23, 42, 0.18)"
-      border="1px solid color.gray.200"
-      fontSize="14px"
-      display="flex"
-      flexDirection="column"
-      pointerEvents="none"
-      zIndex={10}
+      {...TooltipStyles}
       {...views?.tooltip}
+      style={{
+        ...TooltipStyles?.style,
+        pointerEvents: 'none',
+        transition: 'all 0.1s ease-out',
+      }}
     >
       {content}
     </View>

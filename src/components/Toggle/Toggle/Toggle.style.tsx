@@ -2,9 +2,9 @@ import { ViewProps } from 'app-studio';
 import { Shape, Variant } from './Toggle.type';
 
 export const ToggleShapes: Record<Shape, number | string> = {
-  sharp: 0,
-  rounded: 4,
-  pillShaped: 24,
+  square: 0,
+  rounded: 8,
+  pill: 999,
 };
 
 /**
@@ -16,22 +16,20 @@ export const getToggleVariants = (
   isLight: boolean
 ): Record<Variant, ViewProps> => ({
   outline: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'color-white',
     color: color,
     borderWidth: 1,
     borderStyle: 'solid',
-    borderColor: color,
+    borderColor: 'color-gray-200',
     _hover: {
-      backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
-      transform: 'translateY(-1px)',
+      backgroundColor: 'color-gray-50',
+      borderColor: 'color-gray-300',
     },
     _active: {
-      backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
-      transform: 'translateY(0)',
+      backgroundColor: 'color-gray-100',
     },
-    transition: 'all 0.2s ease',
+    transition:
+      'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
   },
   ghost: {
     backgroundColor: 'transparent',
@@ -40,16 +38,12 @@ export const getToggleVariants = (
     borderStyle: 'none',
     borderColor: 'transparent',
     _hover: {
-      backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
-      transform: 'translateY(-1px)',
+      backgroundColor: 'color-gray-50',
     },
     _active: {
-      backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
-      transform: 'translateY(0)',
+      backgroundColor: 'color-gray-100',
     },
-    transition: 'all 0.2s ease',
+    transition: 'background-color 0.2s ease, color 0.2s ease',
   },
   link: {
     backgroundColor: 'transparent',
@@ -61,15 +55,11 @@ export const getToggleVariants = (
     textUnderlineOffset: '1px',
     textDecorationThickness: '1px',
     _hover: {
-      borderColor: color,
-      textDecorationThickness: '2px',
-      transform: 'translateY(-1px)',
+      opacity: 0.8,
     },
     _active: {
-      borderColor: color,
-      textDecorationThickness: '2px',
-      transform: 'translateY(0)',
+      opacity: 0.9,
     },
-    transition: 'all 0.2s ease',
+    transition: 'opacity 0.2s ease',
   },
 });

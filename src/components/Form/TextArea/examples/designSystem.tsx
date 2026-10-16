@@ -12,7 +12,7 @@
 import React from 'react';
 import { TextArea } from '../TextArea';
 import { Vertical } from 'app-studio';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 
 export const DesignSystemTextAreas = () => (
@@ -43,7 +43,7 @@ export const DesignSystemTextAreas = () => (
       <Vertical gap={16}>
         <TextArea shape="default" placeholder="Default Shape (Rounded)" />
 
-        <TextArea shape="sharp" placeholder="Sharp Corners" />
+        <TextArea shape="square" placeholder="square Corners" />
 
         <TextArea shape="rounded" placeholder="Rounded Corners" />
       </Vertical>
@@ -137,15 +137,15 @@ export const DesignSystemTextAreas = () => (
           placeholder="Primary Theme"
           views={{
             container: {
-              borderColor: 'theme.primary',
+              borderColor: 'theme-primary',
               borderWidth: '2px',
             },
             label: {
-              color: 'theme.primary',
+              color: 'theme-primary',
               fontWeight: '600',
             },
             field: {
-              color: 'theme.primary',
+              color: 'theme-primary',
             },
           }}
         />
@@ -155,8 +155,8 @@ export const DesignSystemTextAreas = () => (
           views={{
             container: {
               borderRadius: '16px',
-              borderColor: 'color.purple.400',
-              backgroundColor: 'color.purple.50',
+              borderColor: 'color-purple-400',
+              backgroundColor: 'color-purple-50',
             },
           }}
         />
@@ -170,7 +170,7 @@ export const DesignSystemTextAreas = () => (
           views={{
             container: {
               borderRadius: '8px',
-              backgroundColor: 'color.white',
+              backgroundColor: 'color-white',
               transition: 'all 0.3s ease',
               _hover: {
                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',

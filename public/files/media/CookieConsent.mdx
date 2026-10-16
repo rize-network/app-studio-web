@@ -1,0 +1,263 @@
+# CookieConsent
+
+A component to display a cookie consent banner, allowing users to accept or customize cookie preferences.
+
+### **Import**
+```tsx
+import { CookieConsent } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text, View } from 'app-studio';
+import { CookieConsent } from '../CookieConsent';
+
+/**
+ * Default CookieConsent example
+ */
+export const DefaultCookieConsent = () => {
+  // State to control visibility for demo purposes
+  const [showConsent, setShowConsent] = React.useState(false);
+
+  // Reset cookie consent to show the banner
+  const handleShowConsent = () => {
+    // Clear localStorage to simulate a new visit
+    localStorage.removeItem('app-studio-cookie-consent');
+    localStorage.removeItem('app-studio-cookie-consent-expires');
+    setShowConsent(true);
+  };
+
+  return (
+    <View width="100%" maxWidth={600}>
+      <Text marginBottom={16}>
+        Cliquez sur le bouton ci-dessous pour afficher la bannière de
+        consentement des cookies
+      </Text>
+
+      <Button onClick={handleShowConsent}>
+        Afficher le consentement des cookies
+      </Button>
+
+      {showConsent && (
+        <CookieConsent
+          onAccept={() => setShowConsent(false)}
+          onCustomize={() => alert('Préférences de personnalisation cliquées')}
+        />
+      )}
+    </View>
+  );
+};
+```
+
+### **Custom**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text, View } from 'app-studio';
+import { CookieConsent } from '../CookieConsent';
+
+/**
+ * Custom styled CookieConsent example
+ */
+export const CustomCookieConsent = () => {
+  // State to control visibility for demo purposes
+  const [showConsent, setShowConsent] = React.useState(false);
+
+  // Reset cookie consent to show the banner
+  const handleShowConsent = () => {
+    // Clear localStorage to simulate a new visit
+    localStorage.removeItem('app-studio-cookie-consent');
+    localStorage.removeItem('app-studio-cookie-consent-expires');
+    setShowConsent(true);
+  };
+
+  return (
+    <View width="100%" maxWidth={600}>
+      <Text marginBottom={16}>
+        Click the button to show a custom styled cookie consent banner
+      </Text>
+
+      <Button onClick={handleShowConsent}>Show Custom Cookie Consent</Button>
+
+      {showConsent && (
+        <CookieConsent
+          title="Privacy Settings"
+          description="We use cookies to provide you with the best possible experience. By continuing to use our site, you agree to our use of cookies."
+          acceptButtonText="I Understand"
+          customizeButtonText="Preferences"
+          onAccept={() => setShowConsent(false)}
+          onCustomize={() => alert('Customize preferences clicked')}
+          views={{
+            container: {
+              backgroundColor: 'color-purple-50',
+              borderColor: 'color-purple-200',
+              borderRadius: '8px',
+              margin: '16px',
+              position: 'static', // Override fixed position for demo
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+            },
+            title: {
+              color: 'color-purple-800',
+              fontSize: 20,
+            },
+            description: {
+              color: 'color-purple-700',
+            },
+            acceptButton: {
+              backgroundColor: 'color-purple-600',
+              _hover: {
+                backgroundColor: 'color-purple-700',
+              },
+            },
+            customizeButton: {
+              borderColor: 'color-purple-300',
+              color: 'color-purple-700',
+            },
+          }}
+        />
+      )}
+    </View>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './variants';
+export * from './positions';
+export * from './custom';
+```
+
+### **Positions**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text, View, Vertical } from 'app-studio';
+import { CookieConsent } from '../CookieConsent';
+
+/**
+ * CookieConsent positions example
+ */
+export const CookieConsentPositions = () => {
+  // State to control which position to show
+  const [activePosition, setActivePosition] = React.useState<string | null>(
+    null
+  );
+
+  // Reset cookie consent to show the banner
+  const handleShowPosition = (position: string) => {
+    // Clear localStorage to simulate a new visit
+    localStorage.removeItem('app-studio-cookie-consent');
+    localStorage.removeItem('app-studio-cookie-consent-expires');
+    setActivePosition(position);
+  };
+
+  return (
+    <View width="100%" maxWidth={600}>
+      <Text marginBottom={16}>
+        Click a button to show cookie consent in different positions
+      </Text>
+
+      <Vertical gap={8} marginBottom={16}>
+        <Button onClick={() => handleShowPosition('bottom')}>
+          Bottom Position (Default)
+        </Button>
+
+        <Button onClick={() => handleShowPosition('top')}>Top Position</Button>
+      </Vertical>
+
+      {activePosition === 'bottom' && (
+        <CookieConsent
+          position="bottom"
+          onAccept={() => setActivePosition(null)}
+          onCustomize={() => alert('Customize preferences clicked')}
+        />
+      )}
+
+      {activePosition === 'top' && (
+        <CookieConsent
+          position="top"
+          onAccept={() => setActivePosition(null)}
+          onCustomize={() => alert('Customize preferences clicked')}
+        />
+      )}
+    </View>
+  );
+};
+```
+
+### **Variants**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text, View, Vertical } from 'app-studio';
+import { CookieConsent } from '../CookieConsent';
+
+/**
+ * CookieConsent variants example
+ */
+export const CookieConsentVariants = () => {
+  // State to control which variant to show
+  const [activeVariant, setActiveVariant] = React.useState<string | null>(null);
+
+  // Reset cookie consent to show the banner
+  const handleShowVariant = (variant: string) => {
+    // Clear localStorage to simulate a new visit
+    localStorage.removeItem('app-studio-cookie-consent');
+    localStorage.removeItem('app-studio-cookie-consent-expires');
+    setActiveVariant(variant);
+  };
+
+  return (
+    <View width="100%" maxWidth={600}>
+      <Text marginBottom={16}>
+        Click a button to show different cookie consent variants
+      </Text>
+
+      <Vertical gap={8} marginBottom={16}>
+        <Button onClick={() => handleShowVariant('default')}>
+          Default Variant
+        </Button>
+
+        <Button onClick={() => handleShowVariant('info')}>Info Variant</Button>
+
+        <Button onClick={() => handleShowVariant('primary')}>
+          Primary Variant
+        </Button>
+      </Vertical>
+
+      {activeVariant === 'default' && (
+        <CookieConsent
+          variant="default"
+          onAccept={() => setActiveVariant(null)}
+          onCustomize={() => alert('Customize preferences clicked')}
+        />
+      )}
+
+      {activeVariant === 'info' && (
+        <CookieConsent
+          variant="info"
+          onAccept={() => setActiveVariant(null)}
+          onCustomize={() => alert('Customize preferences clicked')}
+        />
+      )}
+
+      {activeVariant === 'primary' && (
+        <CookieConsent
+          variant="primary"
+          onAccept={() => setActiveVariant(null)}
+          onCustomize={() => alert('Customize preferences clicked')}
+        />
+      )}
+    </View>
+  );
+};
+```
+

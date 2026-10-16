@@ -1,0 +1,129 @@
+{
+  "componentDescription": "Displays transient, non-disruptive messages to inform users about system changes or actions.",
+  "id": {
+    "type": "string",
+    "typeValues": null,
+    "description": "An optional unique identifier for the toast instance.",
+    "defaultValue": null
+  },
+  "variant": {
+    "type": "string",
+    "typeValues": [
+      "info",
+      "success",
+      "warning",
+      "error"
+    ],
+    "description": "Specifies the visual style or semantic type of the toast (e.g., success, error, warning).",
+    "defaultValue": null
+  },
+  "title": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The main heading or title text displayed on the toast.",
+    "defaultValue": null
+  },
+  "description": {
+    "type": "string",
+    "typeValues": null,
+    "description": "An optional detailed message or descriptive text for the toast.",
+    "defaultValue": null
+  },
+  "onClose": {
+    "type": "function",
+    "typeValues": "() => void",
+    "description": "A callback function invoked when the toast is dismissed or closed.",
+    "defaultValue": null
+  },
+  "isClosable": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Indicates whether the user can manually close the toast.",
+    "defaultValue": "true"
+  },
+  "action": {
+    "type": "function",
+    "typeValues": "() => void",
+    "description": "An optional callback function to execute when an action button within the toast is clicked.",
+    "defaultValue": null
+  },
+  "actionText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The text label for the optional action button.",
+    "defaultValue": null
+  },
+  "showIcon": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines if a default icon associated with the variant should be displayed.",
+    "defaultValue": "true"
+  },
+  "theme": {
+    "type": "object",
+    "typeValues": "ThemesType",
+    "description": "The theme to apply to the toast component for styling.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "object",
+    "typeValues": "ToastStyles",
+    "description": "Optional custom styles for various parts of the toast component, overriding default views.",
+    "defaultValue": null
+  },
+  "duration": {
+    "type": "number",
+    "typeValues": null,
+    "description": "The duration in milliseconds after which the toast automatically disappears.",
+    "defaultValue": null
+  },
+  "render": {
+    "type": "function",
+    "typeValues": "(props: { id: string; onClose: () => void }) => React.ReactNode",
+    "description": "A custom render function to provide entirely custom content for the toast.",
+    "defaultValue": null
+  },
+  "icon": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "An optional custom React node to be used as the toast's icon.",
+    "defaultValue": null
+  },
+  "isVisible": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Controls the visibility state of the individual toast instance.",
+    "defaultValue": "true"
+  },
+  "position": {
+    "type": "string",
+    "typeValues": [
+      "top",
+      "top-right",
+      "top-left",
+      "bottom",
+      "bottom-right",
+      "bottom-left"
+    ],
+    "description": "The desired screen position for the toast container (e.g., 'top-right', 'bottom-left').",
+    "defaultValue": "top-right"
+  },
+  "gap": {
+    "type": "number",
+    "typeValues": null,
+    "description": "The spacing in pixels between individual toasts within the container.",
+    "defaultValue": "8"
+  },
+  "limit": {
+    "type": "number",
+    "typeValues": null,
+    "description": "The maximum number of toasts that can be displayed simultaneously in the container.",
+    "defaultValue": "5"
+  },
+  "containerStyle": {
+    "type": "React.CSSProperties",
+    "typeValues": null,
+    "description": "Optional custom CSS styles to apply to the toast container.",
+    "defaultValue": null
+  }
+}

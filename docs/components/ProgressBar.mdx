@@ -1,0 +1,143 @@
+# ProgressBar
+
+A progress bar component for displaying progress or completion status with customizable colors, shapes (linear or circular), and styling.
+
+### **Import**
+```tsx
+import { ProgressBar } from '@app-studio/components';
+```
+
+### **Linear Progress (Default)**
+```tsx
+import React from 'react';
+import { ProgressBar } from '@app-studio/components';
+import { Vertical } from 'app-studio';
+
+export const LinearExamples = () => (
+  <Vertical gap={20}>
+    <ProgressBar value={30} />
+    <ProgressBar value={60} color="color-blue-500" height={8} radius={4} />
+    <ProgressBar value={90} color="color-green-500" height={12} radius={6} />
+  </Vertical>
+);
+```
+
+### **Circular Progress**
+Display progress in a circular format.
+
+```tsx
+import React from 'react';
+import { ProgressBar } from '@app-studio/components';
+import { Horizontal } from 'app-studio';
+
+export const CircularExamples = () => (
+  <Horizontal gap={30}>
+    <ProgressBar 
+      shape="circle" 
+      value={45} 
+      size={60} 
+    />
+    <ProgressBar 
+      shape="circle" 
+      value={75} 
+      size={80} 
+      color="color-purple-500" 
+      strokeWidth={8}
+      showLabel 
+    />
+    <ProgressBar 
+      shape="circle" 
+      value={90} 
+      size={100} 
+      color="color-orange-500" 
+      strokeWidth={10} 
+      backgroundColor="color-orange-100"
+      showLabel
+      labelColor="color-orange-700"
+    />
+  </Horizontal>
+);
+```
+
+### **Props**
+
+#### **Common Props**
+- **value** (`number`): Current progress value (default: 0).
+- **max** (`number`): Maximum progress value (default: 100).
+- **color** (`string`): Color of the filled portion.
+- **backgroundColor** (`string`): Background color of the track.
+- **animated** (`boolean`): Whether to animate the progress change (default: true).
+- **animationDuration** (`string`): Duration of the animation (e.g., '0.5s').
+- **views** (`ProgressBarStyles`): Custom styles object.
+
+#### **Linear Props**
+- **height** (`number | string`): Height of the bar.
+- **radius** (`number | string`): Border radius for rounded corners.
+
+#### **Circular Props (shape="circle")**
+- **size** (`number`): Diameter of the circle.
+- **strokeWidth** (`number`): Width of the progress stroke.
+- **showLabel** (`boolean`): Whether to show the percentage label in the center.
+- **labelColor** (`string`): Color of the label text.
+
+### **Animated & Dynamic**
+```tsx
+import React, { useState, useEffect } from 'react';
+import { ProgressBar } from '@app-studio/components';
+import { Vertical, Button, Text } from 'app-studio';
+
+export const DynamicProgress = () => {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => (prev >= 100 ? 0 : prev + 10));
+    }, 800);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <Vertical gap={20}>
+      <Text>Uploading... {progress}%</Text>
+      <ProgressBar value={progress} color="color-blue-600" animated />
+      
+      <Horizontal gap={20} marginTop={20}>
+        <ProgressBar 
+          shape="circle" 
+          value={progress} 
+          size={50} 
+          showLabel 
+          color="color-blue-600" 
+        />
+      </Horizontal>
+    </Vertical>
+  );
+};
+```
+
+### **Custom Styling (Views)**
+Customize internal parts using the `views` prop.
+
+```tsx
+import React from 'react';
+import { ProgressBar } from '@app-studio/components';
+
+export const CustomStyle = () => (
+  <ProgressBar 
+    value={70} 
+    height={20}
+    views={{
+      container: { 
+        borderColor: 'color-gray-300', 
+        borderWidth: 1, 
+        padding: 2, 
+        borderRadius: 12 
+      },
+      bar: { 
+        borderRadius: 10,
+        background: 'linear-gradient(90deg, #FF5C97, #705CFF)' 
+      }
+    }} 
+  />
+);
+```

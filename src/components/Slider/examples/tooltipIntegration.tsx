@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Slider } from '../Slider';
 import { Tooltip } from '../../Tooltip/Tooltip';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { InfoIcon } from '../../Icon/Icon';

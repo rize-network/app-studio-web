@@ -15,7 +15,7 @@ export const LabelArea = () => {
     <form onSubmit={handleSubmit}>
       <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
         <TextArea name="description" label="Description" />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

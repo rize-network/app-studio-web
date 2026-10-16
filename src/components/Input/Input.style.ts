@@ -18,24 +18,14 @@ import { Shape, Size, Variant } from './Input.type';
 export const Shapes: Record<Shape, ViewProps> = {
   default: {
     borderRadius: '8px', // Consistent with design system (rounded-md)
-    media: {
-      mobile: {
-        borderRadius: '6px',
-      },
-    },
   },
-  sharp: {
+  square: {
     borderRadius: 0,
   },
   rounded: {
     borderRadius: '8px', // Consistent with design system (rounded-md)
-    media: {
-      mobile: {
-        borderRadius: '6px',
-      },
-    },
   },
-  pillShaped: {
+  pill: {
     borderRadius: '9999px', // Full rounded for pill shape
   },
 };
@@ -44,104 +34,86 @@ export const Shapes: Record<Shape, ViewProps> = {
  * Label sizes following the 4px grid system
  */
 export const LabelSizes: Record<Size, string> = {
-  xs: '12px', // 3 × 4px grid
-  sm: '14px', // 3.5 × 4px grid
-  md: '16px', // 4 × 4px grid
-  lg: '18px', // 4.5 × 4px grid
-  xl: '20px', // 5 × 4px grid
+  xs: '10px',
+  sm: '11px',
+  md: '11px',
+  lg: '12px',
+  xl: '12px',
 };
 
 /**
  * Input variants with consistent styling
+ * Design tokens:
+ * - Transitions: 200ms ease-out for smooth, natural feel
+ * - Focus ring: 3px offset with 15% opacity primary color
+ * - Hover: Subtle background tint for better affordance
  */
 export const InputVariants: Record<Variant, ViewProps> = {
   outline: {
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: 'color.gray.200',
-    backgroundColor: 'color.white',
-    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
+    borderColor: 'color-gray-200',
+    backgroundColor: 'transparent',
+    color: 'inherit',
+    transition:
+      'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
-      borderColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
     },
     _focus: {
-      borderColor: 'theme.primary',
+      borderColor: 'theme-primary',
       outline: 'none',
-      boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
+      boxShadow: '0 0 0 3px theme-primary',
     },
     _focusVisible: {
-      borderColor: 'theme.primary',
+      borderColor: 'theme-primary',
       outline: 'none',
-      boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(66, 153, 225, 0.2)',
+      boxShadow: '0 0 0 3px theme-primary',
     },
   },
   default: {
-    borderWidth: 0,
-    borderBottomWidth: '1px',
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'color.gray.200',
-    borderRadius: 0,
-    backgroundColor: 'color.white',
-    transition: 'border-color 0.2s ease',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'color-gray-200',
+    borderRadius: '8px',
+    backgroundColor: 'transparent',
+    color: 'inherit',
+    transition:
+      'border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     _hover: {
-      borderBottomColor: 'color.gray.300',
+      borderColor: 'color-gray-300',
     },
     _focus: {
-      borderBottomColor: 'theme.primary',
+      borderColor: 'theme-primary',
       outline: 'none',
+      boxShadow: '0 0 0 3px theme-primary',
     },
     _focusVisible: {
-      borderBottomColor: 'theme.primary',
+      borderColor: 'theme-primary',
       outline: 'none',
+      boxShadow: '0 0 0 3px theme-primary',
     },
   },
   none: {
     border: 'none',
-    backgroundColor: 'transparent',
+    style: { backgroundColor: 'transparent' },
+    color: 'inherit',
     transition: 'background-color 0.2s ease',
-    _focus: {
-      outline: 'none',
-    },
-    _focusVisible: {
-      outline: 'none',
-    },
   },
 };
 
-/**
- * Padding for input with label following the 4px grid system
+/*
+ * `PadddingWithLabel` and `PaddingWithoutLabel` used to live here. They were
+ * removed rather than renamed (the first was misspelled with three d's) because
+ * they had stopped meaning anything:
+ *
+ *   - the two were byte-identical, so the `showLabel ? a : b` choice between
+ *     them had no effect;
+ *   - both were size-independent 10px/12px, which is why every field rendered
+ *     at roughly `md` height whatever size was requested;
+ *   - their `media.mobile` block repeated the same values, and being a nested
+ *     media rule it would have won over the size scale at mobile widths —
+ *     quietly pinning `xs` and `xl` fields back to `md` padding on phones.
+ *
+ * Field padding now comes from `Input/fieldSizes` via FieldContent.
  */
-export const PadddingWithLabel = {
-  paddingTop: '16px', // 4 × 4px grid
-  paddingBottom: '8px', // 2 × 4px grid
-  paddingLeft: '16px', // 4 × 4px grid
-  paddingRight: '16px', // 4 × 4px grid
-  media: {
-    mobile: {
-      paddingTop: '12px', // Smaller padding on mobile
-      paddingBottom: '6px',
-      paddingLeft: '12px',
-      paddingRight: '12px',
-    },
-  },
-};
-
-/**
- * Padding for input without label following the 4px grid system
- */
-export const PaddingWithoutLabel = {
-  paddingTop: '12px', // 3 × 4px grid
-  paddingBottom: '12px', // 3 × 4px grid
-  paddingLeft: '16px', // 4 × 4px grid
-  paddingRight: '16px', // 4 × 4px grid
-  media: {
-    mobile: {
-      paddingTop: '10px', // Smaller padding on mobile
-      paddingBottom: '10px',
-      paddingLeft: '12px',
-      paddingRight: '12px',
-    },
-  },
-};

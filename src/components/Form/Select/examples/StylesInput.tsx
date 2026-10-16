@@ -12,7 +12,7 @@ export const StyledSelect = () => (
     views={{
       selectBox: { borderRadius: 10, border: '1px solid purple' },
       text: { color: 'red', fontSize: 12 },
-      label: { fontWeight: 'bold', color: 'theme.primary' },
+      label: { fontWeight: 'bold', color: 'theme-primary' },
     }}
   />
 );

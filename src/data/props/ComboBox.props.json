@@ -1,113 +1,98 @@
 {
-  "componentDescription": "A customizable dropdown list with optional search functionality.",
+  "componentDescription": "A versatile input component allowing users to select one or multiple options from a predefined list.",
   "id": {
-    "type": [
-      "string"
-    ],
-    "typeValues": [],
+    "type": "string",
+    "typeValues": null,
     "description": "Unique identifier for the ComboBox, required for accessibility.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "name": {
-    "type": [
-      "string"
-    ],
-    "typeValues": [],
+    "type": "string",
+    "typeValues": null,
     "description": "Optional name attribute for the ComboBox, useful when submitted in a form.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "items": {
-    "type": [
-      "ComboBoxItem[]"
-    ],
-    "typeValues": [],
+    "type": "ComboBoxItem[]",
+    "typeValues": {
+      "label": "string",
+      "value": "string",
+      "icon": "ReactNode"
+    },
     "description": "Array of ComboBox items that the user can select from.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "onSelect": {
-    "type": [
-      "function"
-    ],
-    "typeValues": [
-      "(item: ComboBoxItem) => void"
-    ],
+    "type": "(item: ComboBoxItem | ComboBoxItem[]) => void",
+    "typeValues": {
+      "item": {
+        "label": "string",
+        "value": "string",
+        "icon": "ReactNode"
+      }
+    },
     "description": "Optional callback function triggered when an item is selected.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "searchEnabled": {
-    "type": [
-      "boolean"
-    ],
-    "typeValues": [],
+    "type": "boolean",
+    "typeValues": "true | false",
     "description": "Flag to enable search functionality within the ComboBox.",
-    "defaultValue": [
-      "true"
-    ]
+    "defaultValue": "true"
   },
   "left": {
-    "type": [
-      "ReactNode"
-    ],
-    "typeValues": [],
+    "type": "ReactNode",
+    "typeValues": null,
     "description": "Optional element to display on the left side of the ComboBox.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "right": {
-    "type": [
-      "ReactNode"
-    ],
-    "typeValues": [],
+    "type": "ReactNode",
+    "typeValues": null,
     "description": "Optional element to display on the right side of the ComboBox.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "label": {
-    "type": [
-      "string"
-    ],
-    "typeValues": [],
+    "type": "string",
+    "typeValues": null,
     "description": "Optional label to describe the purpose of the ComboBox.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "showTick": {
-    "type": [
-      "boolean"
-    ],
-    "typeValues": [],
+    "type": "boolean",
+    "typeValues": "true | false",
     "description": "Flag to show a tick mark next to selected items.",
-    "defaultValue": [
-      "true"
-    ]
+    "defaultValue": "true"
   },
   "placeholder": {
-    "type": [
-      "string"
-    ],
-    "typeValues": [],
+    "type": "string",
+    "typeValues": null,
     "description": "Text to display when nothing has been selected in the ComboBox.",
-    "defaultValue": []
+    "defaultValue": null
   },
-  "styles": {
-    "type": [
-      "ComboBoxStyles"
-    ],
-    "typeValues": [],
+  "views": {
+    "type": "ComboBoxStyles",
+    "typeValues": {
+      "container": "React.CSSProperties",
+      "label": "any",
+      "dropdown": "React.CSSProperties",
+      "item": "React.CSSProperties",
+      "labelContainer": "React.CSSProperties",
+      "text": "any"
+    },
     "description": "Optional custom styles to apply to the ComboBox.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "searchPlaceholder": {
-    "type": [
-      "string"
-    ],
-    "typeValues": [],
+    "type": "string",
+    "typeValues": null,
     "description": "Placeholder text for the search input when search is enabled.",
-    "defaultValue": []
+    "defaultValue": null
   },
-  "[x: string]": {
-    "type": [
-      "any"
-    ],
-    "typeValues": [],
-    "description": "Allows the ComboBox to receive any additional properties.",
-    "defaultValue": []
+  "isMulti": {
+    "type": "boolean",
+    "typeValues": "true | false",
+    "description": "Flag to enable multi-select mode.",
+    "defaultValue": "false"
   }
 }

@@ -4,6 +4,9 @@ import React, {
   Children,
   cloneElement,
   isValidElement,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
 import { View, Horizontal, Vertical, ViewProps } from 'app-studio';
 import { AccordionContextType } from './Accordion.type';
@@ -13,8 +16,8 @@ import {
   AccordionItemProps,
 } from './Accordion.props';
 import { AccordionShapes, AccordionVariants } from './Accordion.style';
-
-// Create context for the Accordion
+import { deepMerge, useDesignSystemComponentProps } from 'src/design-system';
+// Initializes the Accordion context with default values, providing a centralized store for managing accordion state and functionality across all related components.
 const AccordionContext = createContext<AccordionContextType>({
   expandedItems: [],
   toggleItem: () => {},
@@ -23,8 +26,7 @@ const AccordionContext = createContext<AccordionContextType>({
   collapsible: false,
   baseId: '',
 });
-
-// Provider component for the Accordion context
+// The AccordionProvider component makes the Accordion context available to its children, encapsulating the state and logic for accordion behavior.
 export const AccordionProvider: React.FC<{
   children: React.ReactNode;
   value: AccordionContextType;
@@ -35,8 +37,6 @@ export const AccordionProvider: React.FC<{
     </AccordionContext.Provider>
   );
 };
-
-// Hook to use the Accordion context
 export const useAccordionContext = () => {
   const context = useContext(AccordionContext);
   if (!context) {
@@ -46,8 +46,6 @@ export const useAccordionContext = () => {
   }
   return context;
 };
-
-// Accordion Item component
 export const AccordionItem: React.FC<AccordionItemProps> = ({
   value,
   children,
@@ -55,34 +53,32 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
   views,
   ...props
 }) => {
-  const {
-    isItemExpanded,
-    baseId,
-    //toggleItem
-  } = useAccordionContext();
+  const { isItemExpanded, baseId } = useAccordionContext();
+  const designSystemAccordion = useDesignSystemComponentProps('accordion');
+  const mergedViews = deepMerge(
+    {
+      item: designSystemAccordion.views?.container,
+    },
+    views
+  );
   const isExpanded = isItemExpanded(value);
-
-  // Generate unique IDs for ARIA attributes
   const triggerId = `${baseId}-trigger-${value}`;
   const contentId = `${baseId}-content-${value}`;
-
   return (
     <View
       borderWidth={1}
       borderStyle="solid"
-      borderColor="color.gray.200"
-      marginBottom={8}
+      borderColor="color-gray-200"
       overflow="hidden"
       opacity={isDisabled ? 0.5 : 1}
       pointerEvents={isDisabled ? 'none' : 'auto'}
       data-state={isExpanded ? 'open' : 'closed'}
       data-disabled={isDisabled ? '' : undefined}
-      {...views?.item}
+      {...mergedViews?.item}
       {...props}
     >
       {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          // Pass the necessary props to AccordionTrigger and AccordionContent
+        if (React.isValidElement<Record<string, unknown>>(child)) {
           return React.cloneElement(child, {
             ...child.props,
             value,
@@ -97,8 +93,6 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
     </View>
   );
 };
-
-// Accordion Trigger component
 export const AccordionTrigger: React.FC<
   AccordionTriggerProps & {
     value?: string;
@@ -119,13 +113,18 @@ export const AccordionTrigger: React.FC<
   ...props
 }) => {
   const { toggleItem } = useAccordionContext();
-
+  const designSystemAccordion = useDesignSystemComponentProps('accordion');
+  const mergedViews = deepMerge(
+    {
+      container: designSystemAccordion.views?.trigger,
+    },
+    views
+  );
   const handleClick = () => {
     if (value && !isDisabled) {
       toggleItem(value);
     }
   };
-
   const triggerProps = {
     id: triggerId,
     'aria-expanded': isExpanded,
@@ -138,18 +137,15 @@ export const AccordionTrigger: React.FC<
     cursor: isDisabled ? 'not-allowed' : 'pointer',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'color.white',
     width: '100%',
-    ...views?.container,
+    style: { backgroundColor: 'transparent' },
+    ...mergedViews?.container,
     ...props,
   };
-
-  // If asChild is true, clone the child element and merge props
-  if (asChild && isValidElement(children)) {
+  if (asChild && isValidElement<Record<string, unknown>>(children)) {
     const child = Children.only(children);
     return cloneElement(child, { ...triggerProps, ...child.props });
   }
-
   return (
     <Horizontal {...triggerProps}>
       {children}
@@ -161,7 +157,7 @@ export const AccordionTrigger: React.FC<
         justifyContent="center"
         transition="transform 0.2s ease"
         transform={isExpanded ? 'rotate(180deg)' : 'rotate(0deg)'}
-        {...views?.icon}
+        {...mergedViews?.icon}
       >
         <svg
           width="16"
@@ -179,8 +175,6 @@ export const AccordionTrigger: React.FC<
     </Horizontal>
   );
 };
-
-// Accordion Content component
 export const AccordionContent: React.FC<
   AccordionContentProps & {
     isExpanded?: boolean;
@@ -197,36 +191,84 @@ export const AccordionContent: React.FC<
   views,
   ...props
 }) => {
-  if (!isExpanded) {
+  const designSystemAccordion = useDesignSystemComponentProps('accordion');
+  const mergedViews = deepMerge(
+    {
+      container: designSystemAccordion.views?.content,
+    },
+    views
+  );
+  const transitionMs = 260;
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [shouldRender, setShouldRender] = useState(Boolean(isExpanded));
+  const [maxHeight, setMaxHeight] = useState(isExpanded ? 'none' : '0px');
+  const [opacity, setOpacity] = useState(isExpanded ? 1 : 0);
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+  useEffect(() => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    if (isExpanded) {
+      setShouldRender(true);
+      requestAnimationFrame(() => {
+        const nextHeight = contentRef.current?.scrollHeight ?? 0;
+        setMaxHeight(`${nextHeight}px`);
+        setOpacity(1);
+      });
+      return;
+    }
+    const currentHeight = contentRef.current?.scrollHeight ?? 0;
+    setMaxHeight(`${currentHeight}px`);
+    setOpacity(1);
+    requestAnimationFrame(() => {
+      setMaxHeight('0px');
+      setOpacity(0);
+    });
+    closeTimeoutRef.current = setTimeout(() => {
+      setShouldRender(false);
+    }, transitionMs);
+  }, [isExpanded, children]);
+  useEffect(() => {
+    if (!isExpanded || !shouldRender) return;
+    const nextHeight = contentRef.current?.scrollHeight ?? 0;
+    setMaxHeight(`${nextHeight}px`);
+  }, [children, isExpanded, shouldRender]);
+  if (!shouldRender) {
     return null;
   }
-
   return (
     <View
       id={contentId}
       role="region"
       aria-labelledby={triggerId}
-      padding={16}
-      backgroundColor="color.white"
-      maxHeight={isExpanded ? '1000px' : '0'}
-      transition="max-height 0.3s ease-in-out, opacity 0.3s ease-in-out"
-      opacity={1}
       overflow="hidden"
+      maxHeight={maxHeight}
+      opacity={opacity}
+      transition={`max-height ${transitionMs}ms cubic-bezier(0.22, 1, 0.36, 1), opacity ${transitionMs}ms ease`}
       data-state={isExpanded ? 'open' : 'closed'}
       data-disabled={isDisabled ? '' : undefined}
-      {...views?.container}
+      style={{ backgroundColor: 'transparent' }}
+      {...mergedViews?.container}
       {...props}
     >
-      {children}
+      <View ref={contentRef} padding={16}>
+        {children}
+      </View>
     </View>
   );
 };
-
-// Main Accordion View component
 export const AccordionView: React.FC<
   {
     children: React.ReactNode;
-    shape?: 'sharp' | 'rounded';
+    shape?: 'square' | 'rounded';
     variant?: 'default' | 'outline' | 'filled';
     views?: any;
     baseId: string;

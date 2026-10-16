@@ -14,7 +14,11 @@ const LabelView: React.FC<LabelProps> = ({
   weight = 'normal',
   // Returns an Element component with the role of a label, styled dynamically based on incoming props.
   size = 'sm',
-  dropDown,
+  dropDown: _dropDown,
+  error,
+  isDisabled,
+  helperText: _helperText,
+  views: _views,
   ...props
   // The fontSize prop for the Element is determined by the 'size' prop passed to LabelView.
 }) => {
@@ -35,6 +39,15 @@ const LabelView: React.FC<LabelProps> = ({
       textDecoration={
         isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'
       }
+      // Error wins over disabled: `color-red-500` is the same token sibling
+      // field labels use (see Input/FieldLabel); disabled mutes the label the
+      // way disabled field text is muted (`color-gray-400`).
+      {...(error
+        ? { color: 'color-red-500' }
+        : isDisabled
+        ? { color: 'color-gray-400' }
+        : {})}
+      {...(isDisabled ? { cursor: 'not-allowed' } : {})}
       {...headingStyles}
       {...props}
     >

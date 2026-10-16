@@ -1,0 +1,74 @@
+{
+  "componentDescription": "Displays various types of messages to users with customizable content, actions, and automatic dismissal.",
+  "subtitle": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The secondary text content displayed below the title.",
+    "defaultValue": null
+  },
+  "variant": {
+    "type": "MessageType",
+    "typeValues": [
+      "info",
+      "warning",
+      "error",
+      "success"
+    ],
+    "description": "The type of message, dictating its visual style and associated icon.",
+    "defaultValue": null
+  },
+  "hide": {
+    "type": "Function",
+    "typeValues": null,
+    "description": "A callback function to trigger the dismissal or hiding of the message.",
+    "defaultValue": null
+  },
+  "title": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The main title or heading of the message.",
+    "defaultValue": null
+  },
+  "theme": {
+    "type": "ThemesType",
+    "typeValues": null,
+    "description": "Custom theme styles to override the default appearance for different message variants.",
+    "defaultValue": "Themes (from './Message.style')"
+  },
+  "isClosable": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines if a close button is shown, allowing the user to manually dismiss the message.",
+    "defaultValue": false
+  },
+  "views": {
+    "type": "MessageViewStyles",
+    "typeValues": null,
+    "description": "An object containing custom styling properties for various parts of the message component.",
+    "defaultValue": null
+  },
+  "action": {
+    "type": "Function",
+    "typeValues": null,
+    "description": "A callback function to be executed when the message's action button is clicked.",
+    "defaultValue": null
+  },
+  "actionText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The text label displayed on the interactive action button.",
+    "defaultValue": null
+  },
+  "showIcon": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Controls the visibility of the predefined icon associated with the message variant.",
+    "defaultValue": false
+  },
+  "timeout": {
+    "type": "number",
+    "typeValues": null,
+    "description": "The duration in milliseconds after which the message automatically hides itself (if not closable).",
+    "defaultValue": 3000
+  }
+}

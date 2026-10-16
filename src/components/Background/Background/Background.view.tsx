@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { View, Horizontal, useTheme } from 'app-studio';
+import { View, Horizontal } from 'app-studio';
 import {
   BackgroundProps,
   AuroraBackgroundProps,
@@ -11,6 +11,8 @@ import {
   BackgroundImageProps,
   BackgroundVideoProps,
   BackgroundGradientProps,
+  BackgroundOverlayProps,
+  BackgroundLayoutProps,
 } from './Background.props';
 import {
   DefaultBackgroundStyles,
@@ -20,13 +22,9 @@ import {
 } from './Background.style';
 import { BackgroundContextType } from './Background.type';
 import { Gradient } from '../../Gradient/Gradient';
-
-// Background Context
+// Initializes a React Context to share background-related data across components, though it's currently used with an empty object.
 const BackgroundContext = createContext<BackgroundContextType>({});
-
-/**
- * Aurora Background Component
- */
+// Defines the `AuroraBackground` functional component, which renders a dynamically animated aurora-like background effect.
 const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
   children,
   showRadialGradient = true,
@@ -34,19 +32,20 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
   themeMode: elementMode,
   ...props
 }) => {
+  // Defines a set of color variables for creating the radial and linear gradients within the aurora effect.
   const gradientColors = {
     white: 'rgba(255,255,255,1)',
     transparent: 'rgba(255,255,255,0)',
   };
-
+  // An array of colors used to generate the repeating linear gradient, creating the vibrant aurora bands.
   const auroraColors = [
-    'rgb(59, 130, 246)', // blue-500
-    'rgb(196, 181, 253)', // indigo-300
-    'rgb(147, 197, 253)', // blue-300
-    'rgb(221, 214, 254)', // violet-200
-    'rgb(96, 165, 250)', // blue-400
+    'rgb(59, 130, 246)',
+    'rgb(196, 181, 253)',
+    'rgb(147, 197, 253)',
+    'rgb(221, 214, 254)',
+    'rgb(96, 165, 250)',
   ];
-
+  // Calculates the CSS properties for the aurora gradient, combining repeating linear gradients and an optional radial mask.
   const gradientStyle: React.CSSProperties = {
     ...AuroraStyles.gradient,
     backgroundImage: `
@@ -65,7 +64,6 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
         }
       : {}),
   };
-
   return (
     <View {...AuroraStyles.container} {...views?.container} {...props}>
       <View style={gradientStyle} />
@@ -82,17 +80,12 @@ const AuroraBackground: React.FC<AuroraBackgroundProps> = ({
     </View>
   );
 };
-
-/**
- * Meteors Component
- */
 const Meteors: React.FC<MeteorsProps> = ({
   number = 20,
   children,
   ...props
 }) => {
   const meteors = Array.from({ length: number }, (_, i) => i);
-
   return (
     <View
       width="100%"
@@ -107,7 +100,6 @@ const Meteors: React.FC<MeteorsProps> = ({
         const delaySec = 0.2 + ((idx * 13) % 6) * 0.1 + 's';
         const durSec = (1 + ((idx * 7) % 9)) / 2 + 's';
         const target = 300 + ((idx * 17) % 100) + 'px';
-
         return (
           <View
             key={idx}
@@ -152,24 +144,18 @@ const Meteors: React.FC<MeteorsProps> = ({
     </View>
   );
 };
-
-/**
- * Wall Component
- */
 const colors = [
-  'rgb(186, 230, 253)', // sky-300
-  'rgb(249, 168, 212)', // pink-300
-  'rgb(134, 239, 172)', // green-300
-  'rgb(253, 224, 71)', // yellow-300
-  'rgb(252, 165, 165)', // red-300
-  'rgb(216, 180, 254)', // purple-300
-  'rgb(147, 197, 253)', // blue-300
-  'rgb(165, 180, 252)', // indigo-300
-  'rgb(196, 181, 253)', // violet-300
+  'rgb(186, 230, 253)',
+  'rgb(249, 168, 212)',
+  'rgb(134, 239, 172)',
+  'rgb(253, 224, 71)',
+  'rgb(252, 165, 165)',
+  'rgb(216, 180, 254)',
+  'rgb(147, 197, 253)',
+  'rgb(165, 180, 252)',
+  'rgb(196, 181, 253)',
 ];
-
 const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
-
 const Wall: React.FC<WallProps> = ({
   rows = 15,
   cols = 10,
@@ -178,7 +164,6 @@ const Wall: React.FC<WallProps> = ({
 }) => {
   const rowsArray = Array(rows).fill(1);
   const colsArray = Array(cols).fill(1);
-
   return (
     <View
       padding={16}
@@ -186,7 +171,7 @@ const Wall: React.FC<WallProps> = ({
       height={300}
       position="relative"
       overflow="hidden"
-      backgroundColor="color.gray.50"
+      backgroundColor="color-gray-50"
       zIndex={0}
       transform="skewX(-48deg) skewY(14deg) scale(0.675) rotate(0deg) translateZ(0)"
       {...props}
@@ -199,7 +184,7 @@ const Wall: React.FC<WallProps> = ({
               height={squareSize / 3}
               width={squareSize}
               borderStyle="solid"
-              borderColor="color.gray.200"
+              borderColor="color-gray-200"
               borderWidth={0.5}
               backgroundColor="transparent"
               cursor="pointer"
@@ -216,19 +201,14 @@ const Wall: React.FC<WallProps> = ({
     </View>
   );
 };
-
-/**
- * Particles Component
- */
 const defaultParticleColors = [
-  'rgb(59, 130, 246)', // blue-500
-  'rgb(147, 51, 234)', // purple-600
-  'rgb(236, 72, 153)', // pink-500
-  'rgb(34, 197, 94)', // green-500
-  'rgb(251, 146, 60)', // orange-400
-  'rgb(168, 85, 247)', // violet-500
+  'rgb(59, 130, 246)',
+  'rgb(147, 51, 234)',
+  'rgb(236, 72, 153)',
+  'rgb(34, 197, 94)',
+  'rgb(251, 146, 60)',
+  'rgb(168, 85, 247)',
 ];
-
 const Particles: React.FC<ParticlesProps> = ({
   count = 50,
   colors = defaultParticleColors,
@@ -237,7 +217,6 @@ const Particles: React.FC<ParticlesProps> = ({
   ...props
 }) => {
   const particles = Array.from({ length: count }, (_, i) => i);
-
   const getSpeedMultiplier = () => {
     switch (speed) {
       case 'slow':
@@ -248,32 +227,29 @@ const Particles: React.FC<ParticlesProps> = ({
         return 1;
     }
   };
-
   const getRandomShape = () =>
     shapes[Math.floor(Math.random() * shapes.length)];
   const getRandomColor = () =>
     colors[Math.floor(Math.random() * colors.length)];
-
   return (
     <View
       width={400}
       height={300}
       position="relative"
       overflow="hidden"
-      backgroundColor="color.gray.900"
+      backgroundColor="color-gray-900"
       {...props}
     >
       {particles.map((idx) => {
-        const size = Math.random() * 8 + 4; // 4-12px
+        const size = Math.random() * 8 + 4;
         const startX = Math.random() * 400;
         const startY = Math.random() * 300;
         const endX = Math.random() * 400;
         const endY = Math.random() * 300;
-        const duration = (Math.random() * 10 + 5) / getSpeedMultiplier(); // 5-15s adjusted by speed
-        const delay = Math.random() * 5; // 0-5s delay
+        const duration = (Math.random() * 10 + 5) / getSpeedMultiplier();
+        const delay = Math.random() * 5;
         const shape = getRandomShape();
         const color = getRandomColor();
-
         const shapeStyles = {
           circle: { borderRadius: '50%' },
           square: { borderRadius: '2px' },
@@ -282,7 +258,6 @@ const Particles: React.FC<ParticlesProps> = ({
             clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
           },
         };
-
         return (
           <View
             key={idx}
@@ -319,10 +294,6 @@ const Particles: React.FC<ParticlesProps> = ({
     </View>
   );
 };
-
-/**
- * Grid Component
- */
 const Grid: React.FC<GridProps> = ({
   gridSize = 30,
   lineColor = 'rgba(59, 130, 246, 0.3)',
@@ -340,22 +311,20 @@ const Grid: React.FC<GridProps> = ({
         return 2;
     }
   };
-
   const cols = Math.floor(400 / gridSize);
   const rows = Math.floor(300 / gridSize);
   const totalCells = cols * rows;
   const cells = Array.from({ length: totalCells }, (_, i) => i);
-
   return (
     <View
       width={400}
       height={300}
       position="relative"
       overflow="hidden"
-      backgroundColor="color.gray.900"
+      backgroundColor="color-gray-900"
       {...props}
     >
-      {/* Vertical lines */}
+      {}
       {Array.from({ length: cols + 1 }, (_, i) => (
         <View
           key={`v-line-${i}`}
@@ -367,8 +336,7 @@ const Grid: React.FC<GridProps> = ({
           backgroundColor={lineColor}
         />
       ))}
-
-      {/* Horizontal lines */}
+      {}
       {Array.from({ length: rows + 1 }, (_, i) => (
         <View
           key={`h-line-${i}`}
@@ -380,13 +348,11 @@ const Grid: React.FC<GridProps> = ({
           backgroundColor={lineColor}
         />
       ))}
-
-      {/* Pulsing cells */}
+      {}
       {cells.map((cellIndex) => {
         const col = cellIndex % cols;
         const row = Math.floor(cellIndex / cols);
-        const delay = (col + row) * 0.1; // Diagonal wave effect
-
+        const delay = (col + row) * 0.1;
         return (
           <View
             key={cellIndex}
@@ -411,17 +377,12 @@ const Grid: React.FC<GridProps> = ({
     </View>
   );
 };
-
-/**
- * Ripples Component
- */
 const defaultRippleColors = [
-  'rgba(59, 130, 246, 0.6)', // blue-500
-  'rgba(147, 51, 234, 0.6)', // purple-600
-  'rgba(236, 72, 153, 0.6)', // pink-500
-  'rgba(34, 197, 94, 0.6)', // green-500
+  'rgba(59, 130, 246, 0.6)',
+  'rgba(147, 51, 234, 0.6)',
+  'rgba(236, 72, 153, 0.6)',
+  'rgba(34, 197, 94, 0.6)',
 ];
-
 const Ripples: React.FC<RipplesProps> = ({
   rippleCount = 5,
   colors = defaultRippleColors,
@@ -435,16 +396,15 @@ const Ripples: React.FC<RipplesProps> = ({
     y: Math.random() * 300,
     color: colors[i % colors.length],
     delay: i * (frequency / rippleCount),
-    duration: 3 + Math.random() * 2, // 3-5 seconds
+    duration: 3 + Math.random() * 2,
   }));
-
   return (
     <View
       width={400}
       height={300}
       position="relative"
       overflow="hidden"
-      backgroundColor="color.gray.100"
+      backgroundColor="color-gray-100"
       {...props}
     >
       {ripples.map((ripple) => (
@@ -476,8 +436,7 @@ const Ripples: React.FC<RipplesProps> = ({
           }}
         />
       ))}
-
-      {/* Add secondary ripples for more complex effect */}
+      {}
       {ripples.map((ripple) => (
         <View
           key={`secondary-${ripple.id}`}
@@ -509,10 +468,6 @@ const Ripples: React.FC<RipplesProps> = ({
     </View>
   );
 };
-
-/**
- * Background Image Component
- */
 const BackgroundImage: React.FC<BackgroundImageProps> = ({
   children,
   src,
@@ -521,14 +476,12 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
   backgroundRepeat = 'no-repeat',
   backgroundAttachment = 'scroll',
   imageOpacity = 1,
-  overlay,
+  overlay = null,
   blendMode = 'normal',
   views,
   themeMode: elementMode,
   ...props
 }) => {
-  const { getColor } = useTheme();
-
   const imageStyle: React.CSSProperties = {
     ...BackgroundImageStyles.image,
     backgroundImage: `url(${src})`,
@@ -537,23 +490,12 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
     backgroundRepeat,
     backgroundAttachment,
     opacity: imageOpacity,
+    mixBlendMode: blendMode,
   };
-
-  const overlayStyle: React.CSSProperties = overlay
-    ? {
-        ...BackgroundImageStyles.overlay,
-        backgroundColor: getColor(
-          overlay,
-          elementMode ? { themeMode: elementMode } : undefined
-        ),
-        mixBlendMode: blendMode as any,
-      }
-    : {};
-
   return (
     <View {...BackgroundImageStyles.container} {...views?.container} {...props}>
       <View style={imageStyle} {...views?.image} />
-      {overlay && <View style={overlayStyle} />}
+      {overlay}
       {children && (
         <View {...BackgroundImageStyles.content} {...views?.content}>
           {children}
@@ -562,10 +504,6 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
     </View>
   );
 };
-
-/**
- * Background Video Component
- */
 const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   children,
   src,
@@ -573,25 +511,12 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   loop = true,
   muted = true,
   playsInline = true,
-  overlay,
+  overlay = null,
   blendMode = 'normal',
   views,
   themeMode: elementMode,
   ...props
 }) => {
-  const { getColor } = useTheme();
-
-  const overlayStyle: React.CSSProperties = overlay
-    ? {
-        ...BackgroundVideoStyles.overlay,
-        backgroundColor: getColor(
-          overlay,
-          elementMode ? { themeMode: elementMode } : undefined
-        ),
-        mixBlendMode: blendMode as any,
-      }
-    : {};
-
   return (
     <View {...BackgroundVideoStyles.container} {...views?.container} {...props}>
       <View
@@ -601,10 +526,15 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
         loop={loop}
         muted={muted}
         playsInline={playsInline}
-        style={BackgroundVideoStyles.video as React.CSSProperties}
+        style={
+          {
+            ...(BackgroundVideoStyles.video as React.CSSProperties),
+            mixBlendMode: blendMode,
+          } as React.CSSProperties
+        }
         {...views?.video}
       />
-      {overlay && <View style={overlayStyle} {...views?.overlay} />}
+      {overlay}
       {children && (
         <View {...BackgroundVideoStyles.content} {...views?.content}>
           {children}
@@ -613,21 +543,84 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
     </View>
   );
 };
-
-/**
- * Background Gradient Component
- * Uses the existing Gradient component as a background
- */
 const BackgroundGradient: React.FC<BackgroundGradientProps> = ({
   children,
   ...gradientProps
 }) => {
   return <Gradient {...gradientProps}>{children}</Gradient>;
 };
+const OVERLAY_TOKEN_RE = /^(color|theme|light|dark)-/;
 
-/**
- * Main Background View Component with compound pattern
- */
+// Reduce a token that already carries an alpha suffix (`color-<name>-<shade>-<alpha>`,
+// `theme-<key>-<alpha>`; alpha 0–1000) to its base token. The overlay appends its
+// own per-stop alphas, and stacking a second suffix (`color-gray-50-900` →
+// `color-gray-50-900-100`) resolves against a CSS variable that doesn't exist,
+// which invalidates the whole gradient and silently drops the overlay.
+const stripAlphaSuffix = (value: string): string => {
+  const parts = value.split('-');
+  const alpha = parseInt(parts[parts.length - 1], 10);
+  const minParts = value.startsWith('theme-') ? 3 : 4;
+  if (
+    parts.length >= minParts &&
+    !isNaN(alpha) &&
+    alpha >= 0 &&
+    alpha <= 1000
+  ) {
+    return parts.slice(0, -1).join('-');
+  }
+  return value;
+};
+
+const BackgroundOverlay: React.FC<BackgroundOverlayProps> = ({
+  contentPosition,
+  backgroundColor = 'color-black-900',
+  ...props
+}) => {
+  const isToken = OVERLAY_TOKEN_RE.test(backgroundColor);
+  const baseColor = isToken
+    ? stripAlphaSuffix(backgroundColor)
+    : backgroundColor;
+  const getDefaultOverlay = () => {
+    let ligthBackground = `${baseColor}-100`;
+    let darkBackground = `${baseColor}-900`;
+    let midBackground = `${baseColor}-600`;
+    let midDarkBackground = `${baseColor}-400`;
+    if (!isToken) {
+      ligthBackground = `color-mix(in srgb, ${baseColor} 10%, transparent)`;
+      darkBackground = `color-mix(in srgb, ${baseColor} 90%, transparent)`;
+      midBackground = `color-mix(in srgb, ${baseColor} 70%, transparent)`;
+      midDarkBackground = `color-mix(in srgb, ${baseColor} 50%, transparent)`;
+    }
+    switch (contentPosition) {
+      case 'left':
+        return `radial-gradient(circle at 70% 50%, ${ligthBackground} 0%, ${ligthBackground} 100%), linear-gradient(to right, ${darkBackground} 0%, ${midBackground} 65%, ${ligthBackground} 100%)`;
+      case 'right':
+        return `radial-gradient(circle at 30% 50%, ${ligthBackground} 0%, ${ligthBackground} 100%), linear-gradient(to left, ${darkBackground} 0%, ${midBackground} 65%, ${ligthBackground} 100%)`;
+      case 'top':
+        return `radial-gradient(circle at 50% 40%, ${ligthBackground} 0%, ${ligthBackground} 100%), linear-gradient(to bottom, ${darkBackground} 0%, ${midBackground} 60%, ${ligthBackground} 100%)`;
+      case 'bottom':
+        return `radial-gradient(circle at 50% 60%, ${ligthBackground} 0%, ${ligthBackground} 100%), linear-gradient(to top, ${darkBackground} 0%, ${midBackground} 60%, ${ligthBackground} 100%)`;
+      case 'center':
+        return `radial-gradient(circle at 50% 70%, ${darkBackground} 0%, ${ligthBackground} 100%)`;
+      default:
+        return midDarkBackground;
+    }
+  };
+  const background = getDefaultOverlay();
+  return (
+    <View
+      position="absolute"
+      top={0}
+      left={0}
+      width="100%"
+      height="100%"
+      background={background}
+      pointerEvents="none"
+      zIndex={1}
+      {...props}
+    />
+  );
+};
 interface BackgroundViewComponent extends React.FC<BackgroundProps> {
   Aurora: React.FC<AuroraBackgroundProps>;
   Meteors: React.FC<MeteorsProps>;
@@ -638,8 +631,9 @@ interface BackgroundViewComponent extends React.FC<BackgroundProps> {
   Image: React.FC<BackgroundImageProps>;
   Video: React.FC<BackgroundVideoProps>;
   Gradient: React.FC<BackgroundGradientProps>;
+  Overlay: React.FC<BackgroundOverlayProps>;
+  Layout: React.FC<BackgroundLayoutProps>;
 }
-
 const BackgroundViewBase: React.FC<BackgroundProps> = ({
   children,
   views,
@@ -657,11 +651,96 @@ const BackgroundViewBase: React.FC<BackgroundProps> = ({
     </BackgroundContext.Provider>
   );
 };
-
-// Create the compound component
+export const BackgroundLayout = React.forwardRef<
+  HTMLDivElement,
+  BackgroundLayoutProps
+>(
+  (
+    {
+      children,
+      shape = 'rounded',
+      decorationRotation = 5,
+      decorationScale = 1,
+      decorationOpacity = 0.8,
+      views,
+      ...props
+    },
+    ref
+  ) => {
+    const getBorderRadius = (shape: string) => {
+      switch (shape) {
+        case 'square':
+          return '0px';
+        case 'pill':
+          return '9999px';
+        case 'rounded':
+        default:
+          return '16px';
+      }
+    };
+    const radius = getBorderRadius(shape);
+    const rotationRad = Math.abs(decorationRotation) * (Math.PI / 180);
+    const rotationOffset = Math.sin(rotationRad) * 100;
+    const scaleOffset = ((decorationScale - 1) * 100) / 2;
+    const extraPadding = Math.ceil(rotationOffset + scaleOffset);
+    const backgroundColor = props.backgroundColor ?? 'theme-primary';
+    return (
+      <View
+        {...props}
+        ref={ref}
+        backgroundColor={'transparent'}
+        position="relative"
+        overflow="visible"
+        {...views?.container}
+      >
+        <View
+          padding={props.padding ?? `${96 + extraPadding}px ${extraPadding}px`}
+          position="relative"
+          overflow="visible"
+        >
+          <View
+            position="absolute"
+            top={extraPadding}
+            left={extraPadding}
+            right={extraPadding}
+            bottom={extraPadding}
+            backgroundColor={backgroundColor}
+            borderRadius={radius}
+            opacity={decorationOpacity / 1.5}
+            transform={`scale(${decorationScale})`}
+            pointerEvents="none"
+            zIndex={1}
+            {...views?.back}
+          />
+          <View
+            position="absolute"
+            top={extraPadding}
+            left={extraPadding}
+            right={extraPadding}
+            bottom={extraPadding}
+            transform={`rotate(${decorationRotation}deg) scale(${decorationScale})`}
+            opacity={decorationOpacity / 1.2}
+            backgroundColor={backgroundColor}
+            borderRadius={radius}
+            pointerEvents="none"
+            zIndex={2}
+            {...views?.front}
+          />
+          <View
+            margin="0 auto"
+            position="relative"
+            zIndex={3}
+            {...views?.content}
+          >
+            {children}
+          </View>
+        </View>
+      </View>
+    );
+  }
+);
+BackgroundLayout.displayName = 'Background.Layout';
 export const BackgroundView = BackgroundViewBase as BackgroundViewComponent;
-
-// Attach compound components
 BackgroundView.Aurora = AuroraBackground;
 BackgroundView.Meteors = Meteors;
 BackgroundView.Wall = Wall;
@@ -671,3 +750,5 @@ BackgroundView.Ripples = Ripples;
 BackgroundView.Image = BackgroundImage;
 BackgroundView.Video = BackgroundVideo;
 BackgroundView.Gradient = BackgroundGradient;
+BackgroundView.Overlay = BackgroundOverlay;
+BackgroundView.Layout = BackgroundLayout;

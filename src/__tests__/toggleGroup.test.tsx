@@ -1,16 +1,16 @@
 // Import necessary libraries and components
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { cleanup, render, screen } from '@testing-library/react';
 import { Shape } from 'src/components/ToggleGroup/ToggleGroup/ToggleGroup.type';
 import { ToggleGroup } from 'src/components/ToggleGroup/ToggleGroup';
-import { Text } from 'src/components';
+import { Text } from 'app-studio';
 
 // Additional info (mocked for testing if not imported)
 export const ToggleGroupShapes: Record<Shape, number | string> = {
-  sharp: '0px',
+  square: '0px',
   rounded: '4px',
-  pillShaped: '24px',
+  pill: '24px',
 };
 
 const items = [

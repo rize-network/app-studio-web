@@ -1,51 +1,68 @@
 {
-  "componentDescription": "Stylable text element supporting various typographic options",
+  "componentDescription": "This component displays text content with customizable styling for appearance, emphasis, and hierarchy.",
   "children": {
     "type": "React.ReactNode",
     "typeValues": [],
-    "description": "Accepts any element that can be rendered by React, like a string, number, or JSX.",
-    "defaultValue": []
+    "description": "Declare `children` prop, which is of type `React.ReactNode` to accept any element that can be rendered by React, like a string, number, or JSX.",
+    "defaultValue": null
   },
   "heading": {
     "type": "Headings",
-    "typeValues": ["h1", "h2", "h3", "h4", "h5", "h6"],
-    "description": "Specifies the heading level for the label.",
-    "defaultValue": []
+    "typeValues": [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6"
+    ],
+    "description": "Optional `heading` prop allowing to specify the heading level, which should be one of the predefined `Headings` type.",
+    "defaultValue": null
   },
   "isItalic": {
     "type": "boolean",
-    "typeValues": ["true", "false"],
-    "description": "Determines if the label text should be italicized.",
-    "defaultValue": "false"
+    "typeValues": [],
+    "description": "Optional `isItalic` boolean prop to determine if the label text should be italicized.",
+    "defaultValue": false
   },
   "isStriked": {
     "type": "boolean",
-    "typeValues": ["true", "false"],
-    "description": "Determines if the label text should have a strikethrough.",
-    "defaultValue": "false"
+    "typeValues": [],
+    "description": "Optional `isStriked` boolean prop to determine if the label text should have a strikethrough.",
+    "defaultValue": false
   },
   "isUnderlined": {
     "type": "boolean",
-    "typeValues": ["true", "false"],
-    "description": "Determines if the label text should be underlined.",
-    "defaultValue": "false"
+    "typeValues": [],
+    "description": "Optional `isUnderlined` boolean prop to determine if the label text should be underlined.",
+    "defaultValue": false
   },
   "size": {
-    "type": ["Sizes", "number"],
-    "typeValues": ["sm", "md", "lg", "xl"],
-    "description": "Defines the font size of the label; can be a predefined size or a custom number value.",
+    "type": "Sizes | number",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Optional `size` prop that can either be one of the predefined `Sizes` type or a custom `number` size value.",
     "defaultValue": "sm"
   },
   "weight": {
     "type": "TextWeights",
-    "typeValues": ["normal", "bold", "bolder", "lighter"],
-    "description": "Defines the font weight of the label.",
+    "typeValues": [
+      "hairline",
+      "thin",
+      "light",
+      "normal",
+      "medium",
+      "semiBold",
+      "bold",
+      "extraBold",
+      "black"
+    ],
+    "description": "Optional `weight` prop that defines the font weight of the label using the predefined `TextWeights` type.",
     "defaultValue": "normal"
-  },
-  "[x: string]": {
-    "type": "any",
-    "typeValues": [],
-    "description": "Allows any additional string-keyed properties to be passed.",
-    "defaultValue": []
   }
 }

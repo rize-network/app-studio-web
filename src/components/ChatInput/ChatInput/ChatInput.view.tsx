@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Horizontal, Text, View, useTheme } from 'app-studio';
 import { ChatInputViewProps } from './ChatInput.props';
 import {
@@ -20,134 +20,149 @@ import {
 } from '../../Icon/Icon';
 import { AudioRecorder } from '../AudioRecorder';
 
-const ChatInputView: React.FC<ChatInputViewProps> = ({
-  // Props from parent
-  onSubmit,
-  placeholder = 'Say what you want and Kimmy will surprise you',
-  loading = false,
-  disabled = false,
-  isAgentRunning = false,
-  enableAudioRecording = false,
-  leftButtons,
-  rightButtons,
-  onStopAgent,
-  loadingText = 'Agent is working...',
-  autoFocus = true,
-  sandboxId,
-  hideAttachments = false,
-  attachmentText = '',
-  promptExamples = [],
-  suggestions = [],
-  errorMessage,
-  size = 'md',
-  shape = 'rounded',
-  variant = 'default',
-  views = {},
-  mentionData = [],
-  mentionTrigger = '@',
-  onMentionSelect,
-  onAudioRecordingStart,
-  onAudioRecordingStop,
+const ChatInputView: React.FC<ChatInputViewProps> = React.memo(
+  ({
+    // Props from parent
+    onSubmit,
+    placeholder = 'Type your message… use @ to mention',
+    loading = false,
+    disabled = false,
+    // Alias already collapsed into `disabled` by the ChatInput wrapper;
+    // destructured here only so it never leaks onto the DOM container.
+    isDisabled,
+    rightElement,
+    onKeyDown,
+    isAgentRunning = false,
+    enableAudioRecording = false,
+    leftButtons,
+    rightButtons,
+    onStopAgent,
+    loadingText = 'Agent is working...',
+    autoFocus = true,
+    sandboxId,
+    hideAttachments = false,
+    attachmentText = '',
+    promptExamples = [],
+    suggestions = [],
+    errorMessage,
+    size = 'md',
+    shape = 'rounded',
+    variant = 'default',
+    views = {},
+    mentionData = [],
+    mentionTrigger = '@',
+    onMentionSelect,
+    onAudioRecordingStart,
+    onAudioRecordingStop,
 
-  // Props from state
-  value,
-  handleChange,
-  handleSubmit,
-  editableRef,
-  fileInputRef,
-  isUploading,
-  uploadProgress,
-  isDraggingOver,
-  uploadedFiles,
-  removeUploadedFile,
-  setPendingFiles,
-  setUploadedFiles,
-  setIsUploading,
-  startUpload,
-  selectedModel,
-  handleModelChange,
-  modelOptions,
-  subscriptionStatus,
-  canAccessModel,
-  isGuideTipShown,
-  hideGuideTip,
-  handlePromptExampleSelect,
-  handleDragOver,
-  handleDragLeave,
+    // Non-DOM props from ChatInputProps that must not leak to the underlying div
+    showGuideTip,
+    guideVideoUrl,
+    onGuideClose,
+    onFileBrowse,
+    onUploadProgress,
+    onUploadSuccess,
+    onUploadError,
+    onFileUpload,
+    onPromptExampleSelect,
 
-  // Other props
-  ...props
-}) => {
-  const {
-    /* getColor */
-  } = useTheme();
+    // Form-control mirror props (kept off the container element)
+    name,
+    hiddenInput = true,
 
-  // Combine styles
-  const containerStyles = {
-    ...DefaultChatInputStyles.container,
-    ...Shapes[shape],
-    ...views?.container,
-  };
+    // Props from state
+    value,
+    handleChange,
+    setValue,
+    handleSubmit,
+    editableRef,
+    fileInputRef,
+    hiddenInputRef,
+    isUploading,
+    uploadProgress,
+    isDraggingOver,
+    uploadedFiles,
+    pendingFiles,
+    getPendingFiles,
+    clearPendingFiles,
+    removeUploadedFile,
+    setPendingFiles,
+    setUploadedFiles,
+    setIsUploading,
+    startUpload,
+    selectedModel,
+    handleModelChange,
+    modelOptions,
+    subscriptionStatus,
+    canAccessModel,
+    isGuideTipShown,
+    hideGuideTip,
+    handlePromptExampleSelect,
+    handleDragOver,
+    handleDragLeave,
+    onChange,
 
-  const contentStyles = {
-    ...DefaultChatInputStyles.content,
-    ...Sizes[size],
-    ...Variants[variant],
-    ...views?.content,
-  };
+    // Other props
+    ...props
+  }) => {
+    const {
+      /* getColor */
+    } = useTheme();
 
-  // Determine if the submit button should be enabled
-  const hasText = (value?.trim().length ?? 0) > 0 || uploadedFiles.length > 0;
+    // Combine styles (memoized to avoid recreation on every render)
+    const containerStyles = useMemo(
+      () => ({
+        ...DefaultChatInputStyles.container,
+        ...Shapes[shape],
+        ...views?.container,
+      }),
+      [shape, views?.container]
+    );
 
-  const handleRecordingComplete = useCallback(
-    (file: File) => {
-      // Enqueue and upload the recorded file
-      startUpload([file]);
-      onAudioRecordingStop?.(file);
-    },
-    [startUpload, onAudioRecordingStop]
-  );
+    const contentStyles = useMemo(
+      () => ({
+        ...DefaultChatInputStyles.content,
+        ...Sizes[size],
+        ...Variants[variant],
+        ...views?.content,
+      }),
+      [size, variant, views?.content]
+    );
 
-  // Handle multiple file uploads for the Uploader component
-  const handleMultipleFileUpload = useCallback(
-    (files: File[]) => {
-      // Filter files that exceed size limit (50MB)
-      const filteredFiles = files.filter((file) => {
-        if (file.size > 50 * 1024 * 1024) {
-          console.error(`File size exceeds 50MB limit: ${file.name}`);
-          return false;
+    // Determine if the submit button should be enabled
+    const hasText = (value?.trim().length ?? 0) > 0 || uploadedFiles.length > 0;
+
+    const handleRecordingComplete = useCallback(
+      (file: File) => {
+        // Enqueue and upload the recorded file
+        startUpload([file]);
+        onAudioRecordingStop?.(file);
+      },
+      [startUpload, onAudioRecordingStop]
+    );
+
+    // Handle multiple file uploads for the Uploader component
+    const handleMultipleFileUpload = useCallback(
+      (files: File[]) => {
+        // Filter files that exceed size limit (50MB)
+        const filteredFiles = files.filter((file) => {
+          if (file.size > 50 * 1024 * 1024) {
+            console.error(`File size exceeds 50MB limit: ${file.name}`);
+            return false;
+          }
+          return true;
+        });
+
+        if (filteredFiles.length > 0) {
+          // Enqueue and start upload for the batch
+          startUpload(filteredFiles);
         }
-        return true;
-      });
+      },
+      [startUpload]
+    );
 
-      if (filteredFiles.length > 0) {
-        // Enqueue and start upload for the batch
-        startUpload(filteredFiles);
-      }
-    },
-    [startUpload]
-  );
-
-  // Combine mention data with uploaded files
-  const combinedMentionData = [
-    ...(mentionData || []),
-    ...uploadedFiles.map((file, index) => ({
-      id: `file-${index}`,
-      name: file.name,
-    })),
-  ];
-
-  return (
-    <View
-      display="flex"
-      flexDirection="column"
-      // Width and maxWidth will come from containerStyles
-      boxSizing="border-box"
-      {...containerStyles}
-      {...props}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={(e: React.DragEvent<HTMLDivElement>) => {
+    const handleDrop = useCallback(
+      (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         e.stopPropagation();
         handleDragLeave(e);
@@ -156,230 +171,290 @@ const ChatInputView: React.FC<ChatInputViewProps> = ({
           const files = Array.from(e.dataTransfer.files) as File[];
           handleMultipleFileUpload(files);
         }
-      }}
-    >
-      {/* Prompt Examples */}
-      {promptExamples.length > 0 && (
-        <PromptExamples
-          examples={promptExamples}
-          onSelect={handlePromptExampleSelect}
-          views={{
-            container: views?.promptExamples,
-            item: views?.promptExampleItem,
-          }}
-        />
-      )}
+      },
+      [handleDragLeave, handleMultipleFileUpload]
+    );
 
-      {isAgentRunning && (
-        <Horizontal
-          justifyContent="center"
-          alignItems="center"
-          gap={8}
-          padding="8px 0"
-          animate={{
-            from: { opacity: 0, y: -10 },
-            to: { opacity: 1, y: 0 },
-            duration: '0.3s',
-          }}
-          // animationDuration="0.3s"
-          {...views?.loadingIndicator}
-        >
-          <LoadingSpinnerIcon
-            widthHeight={12}
-            color="currentColor"
-            filled={false}
-            style={{ animation: 'spin 1s linear infinite' }}
-          />
-          <Text color="color.gray.500">{loadingText}</Text>
-        </Horizontal>
-      )}
+    // Combine mention data with uploaded files (memoized to avoid recreation on every render)
+    const combinedMentionData = useMemo(
+      () => [
+        ...(mentionData || []),
+        ...uploadedFiles.map((file, index) => ({
+          id: `file-${index}`,
+          name: file.name,
+        })),
+      ],
+      [mentionData, uploadedFiles]
+    );
 
-      <View position="relative" width="100%" overflow="visible">
-        {/* Input Area */}
-        <View
-          as="form"
-          onSubmit={handleSubmit}
-          overflow="visible"
-          display="flex"
-          flexDirection="column"
-          position="relative"
-          // transition="background-color 0.2s ease"
-          // Apply base styles first, then override with conditional background color
-
-          {...contentStyles}
-          {...containerStyles}
-          paddingHorizontal={16}
-          paddingVertical={10}
-          backgroundColor={isDraggingOver ? 'color.blue.50' : undefined}
-        >
-          {/* Attachments */}
-          <AttachmentGroup
-            files={uploadedFiles}
-            sandboxId={sandboxId}
-            onRemove={removeUploadedFile}
-            showPreviews={true}
+    return (
+      <View
+        display="flex"
+        flexDirection="column"
+        // Width and maxWidth will come from containerStyles
+        boxSizing="border-box"
+        {...containerStyles}
+        {...props}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+      >
+        {/* Prompt Examples */}
+        {promptExamples.length > 0 && (
+          <PromptExamples
+            examples={promptExamples}
+            onSelect={handlePromptExampleSelect}
             views={{
-              container: views?.attachments,
-              item: views?.attachmentItem,
-              name: views?.attachmentName,
-              size: views?.attachmentSize,
-              removeButton: views?.attachmentRemove,
+              container: views?.promptExamples,
+              item: views?.promptExampleItem,
             }}
           />
+        )}
 
-          {/* Editable Input */}
-          <EditableInput
-            ref={editableRef}
-            value={value || ''}
-            onChange={handleChange}
-            placeholder={placeholder}
-            disabled={disabled && !isAgentRunning}
-            autoFocus={autoFocus}
-            suggestions={suggestions || []}
-            showSuggestions={suggestions && suggestions.length > 0 && !value}
-            onSuggestionSelect={(suggestion) => {
-              handleChange(suggestion.text);
-            }}
-            mentionData={combinedMentionData}
-            mentionTrigger={mentionTrigger}
-            onMentionSelect={onMentionSelect}
-            views={{
-              container: {},
-              input: views?.editableInput,
-            }}
-          />
-
-          {/* Bottom Controls */}
+        {isAgentRunning && (
           <Horizontal
-            justifyContent="space-between"
+            justifyContent="center"
             alignItems="center"
-            marginTop="8px"
+            gap={8}
+            padding="8px 0"
+            animate={{
+              from: { opacity: 0, y: -10 },
+              to: { opacity: 1, y: 0 },
+              duration: '0.3s',
+            }}
+            // animationDuration="0.3s"
+            {...views?.loadingIndicator}
           >
-            <Horizontal gap={8} alignItems="center">
-              {/* File Upload Button */}
-              {!hideAttachments && (
-                <Uploader
-                  accept="*/*"
-                  icon={<AttachmentIcon widthHeight={16} />}
-                  maxSize={50 * 1024 * 1024} // 50MB limit
-                  multiple={true}
-                  onMultipleFileSelect={handleMultipleFileUpload}
-                  isLoading={isUploading}
-                  progress={uploadProgress || 0}
-                  text={attachmentText}
-                  fileType="file"
-                  renderError={({ errorMessage }) => null}
-                  views={{
-                    container: {
-                      height: '36px',
-                      //margin: '0 12px',
-                      // borderRadius: '8px',
-                      // backgroundColor: 'transparent',
-                      // border: '1px solid',
-                      // borderColor: 'color.gray.300',
-                      cursor: 'pointer',
-                      _hover: {
-                        backgroundColor: 'color.gray.100',
-                      },
-                      ...views?.fileButton,
-                    },
-                  }}
-                  containerProps={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 4,
-                    borderRadius: shape === 'rounded' ? '50%' : 4,
-                    padding: 10,
-                  }}
-                  textProps={{
-                    fontSize: '14px',
-                    color: 'color.gray.600',
-                  }}
-                  validateFile={(file: File) => {
-                    if (file.size > 50 * 1024 * 1024) {
-                      return 'File size exceeds 50MB limit';
-                    }
-                    return null;
-                  }}
-                />
-              )}
-              {leftButtons}
-            </Horizontal>
+            <LoadingSpinnerIcon
+              widthHeight={12}
+              color="currentColor"
+              filled={false}
+              style={{ animation: 'spin 1s linear infinite' }}
+            />
+            <Text color="color-gray-500">{loadingText}</Text>
+          </Horizontal>
+        )}
 
-            {/* Submit Button */}
-            <Horizontal gap={8} alignItems="center">
-              {enableAudioRecording && (
-                <AudioRecorder
-                  onRecordingStart={onAudioRecordingStart}
-                  onRecordingComplete={handleRecordingComplete}
-                  views={{ button: views?.recordButton }}
-                />
-              )}
-              <View
-                as="button"
-                type="button"
-                onClick={handleSubmit}
-                height="40px"
-                width="40px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                backgroundColor={
-                  isAgentRunning
-                    ? 'theme.error'
-                    : hasText
-                    ? 'theme.primary'
-                    : 'color.gray.300'
-                }
-                color="color.white"
-                borderRadius={shape === 'rounded' ? '50%' : 4}
-                border="none"
-                cursor={hasText ? 'pointer' : 'not-allowed'}
-                disabled={!hasText || loading || (disabled && !isAgentRunning)}
-                transition="all 0.2s ease"
-                _hover={{
-                  backgroundColor: isAgentRunning
-                    ? 'color.red.600'
-                    : hasText
-                    ? 'color.blue.600'
-                    : 'color.gray.300',
-                }}
-                {...views?.submitButton}
-              >
-                {isAgentRunning ? (
-                  <StopIcon
-                    widthHeight={16}
-                    color="currentColor"
-                    filled={false}
-                  />
-                ) : loading ? (
-                  <Loader type="quarter" size={16} color="color.white" />
-                ) : (
-                  <SendIcon
-                    widthHeight={16}
-                    color="currentColor"
-                    filled={false}
+        <View position="relative" width="100%" overflow="visible">
+          {/* Input Area */}
+          <View
+            as="form"
+            onSubmit={handleSubmit}
+            overflow="visible"
+            display="flex"
+            flexDirection="column"
+            position="relative"
+            // transition="background-color 0.2s ease"
+            // Apply base styles first, then override with conditional background color
+
+            {...contentStyles}
+            {...containerStyles}
+            paddingHorizontal={16}
+            paddingVertical={10}
+            backgroundColor={isDraggingOver ? 'color-blue-50' : undefined}
+          >
+            {/* Attachments */}
+            <AttachmentGroup
+              files={uploadedFiles}
+              sandboxId={sandboxId}
+              onRemove={removeUploadedFile}
+              showPreviews={true}
+              views={{
+                container: views?.attachments,
+                item: views?.attachmentItem,
+                name: views?.attachmentName,
+                size: views?.attachmentSize,
+                removeButton: views?.attachmentRemove,
+              }}
+            />
+
+            {/* Editable Input */}
+            <EditableInput
+              ref={editableRef}
+              value={value || ''}
+              onChange={handleChange}
+              placeholder={placeholder}
+              disabled={disabled && !isAgentRunning}
+              autoFocus={autoFocus}
+              onKeyDown={onKeyDown}
+              suggestions={suggestions || []}
+              showSuggestions={suggestions && suggestions.length > 0 && !value}
+              onSuggestionSelect={(suggestion) => {
+                handleChange(suggestion.text);
+              }}
+              mentionData={combinedMentionData}
+              mentionTrigger={mentionTrigger}
+              onMentionSelect={onMentionSelect}
+              name={name}
+              hiddenInput={hiddenInput}
+              hiddenInputRef={hiddenInputRef}
+              views={{
+                container: {},
+                input: views?.editableInput,
+                hiddenInput: views?.hiddenInput,
+              }}
+            />
+
+            {/* Bottom Controls */}
+            <Horizontal
+              justifyContent="space-between"
+              alignItems="center"
+              marginTop="8px"
+            >
+              <Horizontal gap={8} alignItems="center">
+                {/* File Upload Button */}
+                {!hideAttachments && (
+                  // `display: contents` keeps the wrapper out of layout; it
+                  // only exists to observe activation of the file-browse
+                  // affordance. The Uploader opens the dialog by clicking its
+                  // hidden file input, so that programmatic click — the one
+                  // whose target is the input itself — is the single reliable
+                  // "file browser opened" signal (the user's surface click
+                  // bubbles here too, but with a different target).
+                  <View
+                    display="contents"
+                    onClickCapture={
+                      onFileBrowse
+                        ? (event: React.MouseEvent) => {
+                            if (
+                              (event.target as HTMLElement).tagName === 'INPUT'
+                            ) {
+                              onFileBrowse();
+                            }
+                          }
+                        : undefined
+                    }
+                  >
+                    <Uploader
+                      accept="*/*"
+                      icon={<AttachmentIcon widthHeight={16} />}
+                      maxSize={50 * 1024 * 1024} // 50MB limit
+                      multiple={true}
+                      onMultipleFileSelect={handleMultipleFileUpload}
+                      isLoading={isUploading}
+                      progress={uploadProgress || 0}
+                      text={attachmentText}
+                      fileType="file"
+                      renderError={({ errorMessage }) => null}
+                      views={{
+                        container: {
+                          height: '36px',
+                          //margin: '0 12px',
+                          // borderRadius: '8px',
+                          // backgroundColor: 'transparent',
+                          // border: '1px solid',
+                          // borderColor: 'color-gray-300',
+                          cursor: 'pointer',
+                          _hover: {
+                            backgroundColor: 'color-gray-100',
+                          },
+                          ...views?.fileButton,
+                        },
+                      }}
+                      containerProps={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 4,
+                        borderRadius: shape === 'rounded' ? '50%' : 4,
+                        padding: 10,
+                      }}
+                      textProps={{
+                        fontSize: '14px',
+                        color: 'color-gray-600',
+                      }}
+                      validateFile={(file: File) => {
+                        if (file.size > 50 * 1024 * 1024) {
+                          return 'File size exceeds 50MB limit';
+                        }
+                        return null;
+                      }}
+                    />
+                  </View>
+                )}
+                {leftButtons}
+              </Horizontal>
+
+              {/* Submit Button */}
+              <Horizontal gap={8} alignItems="center">
+                {rightElement}
+                {enableAudioRecording && (
+                  <AudioRecorder
+                    onRecordingStart={onAudioRecordingStart}
+                    onRecordingComplete={handleRecordingComplete}
+                    views={{ button: views?.recordButton }}
                   />
                 )}
-              </View>
+                <View
+                  as="button"
+                  type="button"
+                  onClick={handleSubmit}
+                  height="40px"
+                  width="40px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  backgroundColor={
+                    isAgentRunning
+                      ? 'theme-error'
+                      : hasText
+                      ? 'theme-primary'
+                      : 'color-gray-300'
+                  }
+                  color="color-white"
+                  borderRadius={shape === 'rounded' ? '50%' : 4}
+                  border="none"
+                  cursor={hasText ? 'pointer' : 'not-allowed'}
+                  disabled={
+                    !hasText || loading || (disabled && !isAgentRunning)
+                  }
+                  transition="background-color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease"
+                  _hover={{
+                    opacity: hasText || isAgentRunning ? 0.9 : 1,
+                  }}
+                  _active={{
+                    opacity: hasText || isAgentRunning ? 0.95 : 1,
+                  }}
+                  _focusVisible={{
+                    outline: 'none',
+                    boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
+                  }}
+                  {...views?.submitButton}
+                >
+                  {isAgentRunning ? (
+                    <StopIcon
+                      widthHeight={16}
+                      color="currentColor"
+                      filled={false}
+                    />
+                  ) : loading ? (
+                    <Loader type="quarter" size={16} color="color-white" />
+                  ) : (
+                    <SendIcon
+                      widthHeight={16}
+                      color="currentColor"
+                      filled={false}
+                    />
+                  )}
+                </View>
 
-              {rightButtons}
+                {rightButtons}
+              </Horizontal>
             </Horizontal>
-          </Horizontal>
+          </View>
         </View>
+
+        {/* Bottom Tip (Error Message) */}
+        {errorMessage && (
+          <Text color="theme-error" marginTop="4px" {...views?.bottomTip}>
+            {errorMessage}
+          </Text>
+        )}
+
+        {/* Agent Running Indicator */}
       </View>
-
-      {/* Bottom Tip (Error Message) */}
-      {errorMessage && (
-        <Text color="theme.error" marginTop="4px" {...views?.bottomTip}>
-          {errorMessage}
-        </Text>
-      )}
-
-      {/* Agent Running Indicator */}
-    </View>
-  );
-};
+    );
+  }
+);
 
 export default ChatInputView;

@@ -1,63 +1,64 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`should render a subscript text to match snapshot 1`] = `
-<div
-  className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none"
-  fontStyle="normal"
+<span
+  className="fsee-normal tdn-none"
+  ref={[Function]}
+  style={{}}
 >
   H
-  <div
-    className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none dy-inline"
-    fontStyle="normal"
+  <sub
+    className="fsee-normal tdn-none dy-inline fse-75 lht-0 pn-relative bm--0p25em"
+    ref={[Function]}
+    style={{}}
   >
-    <sub
-      className="fse-75 lht-0 pn-relative bm--0p25em"
-    >
-      2
-    </sub>
-  </div>
+    2
+  </sub>
   O
-</div>
+</span>
 `;
 
 exports[`should render a superscript text to match snapshot 1`] = `
-<div
-  className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none"
-  fontStyle="normal"
+<span
+  className="fsee-normal tdn-none"
+  ref={[Function]}
+  style={{}}
 >
   H
-  <div
-    className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-none dy-inline"
-    fontStyle="normal"
+  <sup
+    className="fsee-normal tdn-none dy-inline fse-75 lht-0 pn-relative tp--0p5em"
+    ref={[Function]}
+    style={{}}
   >
-    <sup
-      className="fse-75 lht-0 pn-relative tp--0p5em"
-    >
-      2
-    </sup>
-  </div>
+    2
+  </sup>
   O
-</div>
+</span>
 `;
 
 exports[`should render one truncated text line to match snapshot 1`] = `
-<div
-  className="fse-14px lht-20px fwt-400 lsg--0p01em tdn-underline"
-  fontStyle="normal"
+<span
+  className="fsee-normal tdn-underline"
+  ref={[Function]}
+  style={
+    {
+      "WebkitBoxOrient": "vertical",
+      "WebkitLineClamp": 2,
+      "display": "-webkit-box",
+      "overflow": "hidden",
+    }
+  }
 >
-  <span
-    className="ow-hidden"
-  >
-    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
-  </span>
-</div>
+  Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.
+</span>
 `;
 
 exports[`text to match snapshot 1`] = `
-<div
-  className="fse-36px lht-40px fwt-700 lsg--0p02em tdn-line-through cr- mbm-24px tn-color-0p15s-ease"
-  fontStyle="normal"
+<h1
+  className="fsee-normal tdn-line-through fse-36px fwt-700 lht-1p2"
+  ref={[Function]}
+  style={{}}
 >
   Some text here
-</div>
+</h1>
 `;

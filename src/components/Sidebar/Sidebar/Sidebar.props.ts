@@ -10,186 +10,92 @@ import {
   TransitionPreset,
   SidebarContextType,
 } from './Sidebar.type';
-
 export interface SidebarProps {
-  /**
-   * The content of the sidebar
-   */
+  // Content to be rendered inside the Sidebar component.
   children: React.ReactNode;
-
-  /**
-   * The position of the sidebar
-   */
+  // Defines the placement of the sidebar relative to its parent container (e.g., 'left', 'right').
   position?: Position;
-
-  /**
-   * The size of the sidebar
-   */
+  // Specifies the predefined size of the sidebar, which can affect its width or height.
   size?: Size;
-
-  /**
-   * The visual style variant of the sidebar
-   */
+  // Determines the visual style or behavior of the sidebar, such as 'temporary', 'permanent', or 'persistent'.
   variant?: Variant;
-
-  /**
-   * Whether the sidebar is initially expanded
-   */
+  // Initial expansion state of the sidebar when it is first rendered (uncontrolled mode).
   defaultExpanded?: boolean;
-
-  /**
-   * Whether the sidebar is expanded (controlled)
-   */
+  // Controls the expansion state of the sidebar (controlled mode). If provided, it overrides `defaultExpanded`.
   expanded?: boolean;
-
-  /**
-   * Callback when the expanded state changes
-   */
+  // Callback function triggered when the sidebar's expanded state changes, providing the new state.
   onExpandedChange?: (expanded: boolean) => void;
-
-  /**
-   * Whether the sidebar is fixed (always visible) or floating
-   */
+  // If true, the sidebar will be fixed in position, not scrolling with the content.
   fixed?: boolean;
-
-  /**
-   * Whether to show a backdrop when the sidebar is expanded in mobile view
-   */
+  // If true, a backdrop will be displayed behind the sidebar when it's open, typically used for temporary variants.
   hasBackdrop?: boolean;
-
-  /**
-   * Whether to show a toggle button
-   */
+  // Controls the visibility of the expand/collapse toggle button in the sidebar header.
   showToggleButton?: boolean;
-
-  /**
-   * The width of the sidebar when expanded
-   */
+  // Specifies the width of the sidebar when it is in the expanded state.
   expandedWidth?: string | number;
-
-  /**
-   * The width of the sidebar when collapsed
-   */
+  // Specifies the width of the sidebar when it is in the collapsed state.
   collapsedWidth?: string | number;
-
-  /**
-   * The breakpoint at which the sidebar changes behavior
-   */
+  // A numerical value (e.g., screen width) at which the sidebar's behavior or layout might change.
   breakpoint?: number;
-
-  /**
-   * The behavior of the sidebar at the breakpoint
-   */
+  // Defines how the sidebar behaves when the screen size crosses the specified `breakpoint`.
   breakpointBehavior?: BreakpointBehavior;
-
-  /**
-   * The elevation level of the sidebar (shadow depth)
-   */
+  // Applies a shadow effect to the sidebar, indicating its depth or layering relative to other elements.
   elevation?: Elevation;
-
-  /**
-   * The transition preset for the sidebar animations
-   */
+  // Determines the animation preset to use when the sidebar transitions between states (e.g., expanding/collapsing).
   transitionPreset?: TransitionPreset;
-
-  /**
-   * ARIA label for the sidebar for accessibility
-   */
+  // Provides an accessible label for the sidebar, improving usability for screen reader users.
   ariaLabel?: string;
-
-  /**
-   * Custom styles for different parts of the sidebar
-   */
+  // Allows for custom styling or overriding default styles for various parts of the sidebar.
   views?: SidebarStyles;
-
-  /**
-   * Additional props to be spread to the container element
-   */
+  // Allows for additional, arbitrary props to be passed to the sidebar component.
   [key: string]: any;
 }
-
 export interface SidebarHeaderProps {
-  /**
-   * The content of the sidebar header
-   */
+  // Content to be rendered inside the Sidebar header.
   children: React.ReactNode;
-
-  /**
-   * Whether to show the toggle button in the header
-   */
+  // Controls the visibility of the expand/collapse toggle button within the header.
   showToggleButton?: boolean;
-
-  /**
-   * Custom styles for the header
-   */
+  // Allows for custom styling or overriding default styles for the header and its sub-elements.
   views?: {
+    // Custom view properties for the header container.
     header?: ViewProps;
+    // Custom view properties for the toggle button itself.
     toggleButton?: ViewProps;
+    // Custom view properties for the icon inside the toggle button.
     toggleButtonIcon?: ViewProps;
   };
-
-  /**
-   * Additional props to be spread to the header element
-   */
+  // Allows for additional, arbitrary props to be passed to the sidebar header component.
   [key: string]: any;
 }
-
 export interface SidebarContentProps {
-  /**
-   * The content of the sidebar content area
-   */
+  // Content to be rendered inside the Sidebar's main content area.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the content area
-   */
+  // Allows for custom styling or overriding default styles for the content area.
   views?: {
+    // Custom view properties for the content container.
     content?: ViewProps;
   };
-
-  /**
-   * Additional props to be spread to the content element
-   */
+  // Allows for additional, arbitrary props to be passed to the sidebar content component.
   [key: string]: any;
 }
-
 export interface SidebarFooterProps {
-  /**
-   * The content of the sidebar footer
-   */
+  // Content to be rendered inside the Sidebar footer.
   children: React.ReactNode;
-
-  /**
-   * Custom styles for the footer
-   */
+  // Allows for custom styling or overriding default styles for the footer area.
   views?: {
+    // Custom view properties for the footer container.
     footer?: ViewProps;
   };
-
-  /**
-   * Additional props to be spread to the footer element
-   */
+  // Allows for additional, arbitrary props to be passed to the sidebar footer component.
   [key: string]: any;
 }
-
 export interface SidebarType extends React.FC<SidebarProps> {
-  /**
-   * The header component for the sidebar
-   */
+  // Represents the Sidebar Header sub-component, used to display top content or controls.
   Header: React.FC<SidebarHeaderProps>;
-
-  /**
-   * The content component for the sidebar
-   */
+  // Represents the Sidebar Content sub-component, where the main content of the sidebar resides.
   Content: React.FC<SidebarContentProps>;
-
-  /**
-   * The footer component for the sidebar
-   */
+  // Represents the Sidebar Footer sub-component, used for bottom content like actions or information.
   Footer: React.FC<SidebarFooterProps>;
-
-  /**
-   * Hook to access the sidebar context
-   */
+  // A hook to access the current Sidebar context, providing state and methods related to the sidebar's behavior.
   useContext: () => SidebarContextType;
 }

@@ -1,36 +1,31 @@
 import React from 'react';
 import { ButtonProps } from '../../Button/Button/Button.props';
-
+// Defines a type alias for the data structure used by the Web Share API's `navigator.share` method.
 export type NavigatorShareData = Parameters<Navigator['share']>[0];
-/**
- * Properties for the ShareButton component.
- * Extends the design-system Button while wiring the Web Share API workflow.
- */
+// Defines the main properties for the ShareButton component, extending standard button properties while customizing the click handler.
 export interface ShareButtonProps extends Omit<ButtonProps, 'onClick'> {
-  /** Data passed to the `navigator.share` call. */
+  // Specifies the data (e.g., URL, text, title) to be shared using the Web Share API.
   shareData: NavigatorShareData;
-  /** Optional label rendered when no custom children are provided. Defaults to "Share". */
+  // Defines the content displayed within the share button, which can be any React node.
   label?: React.ReactNode;
-  /** Called immediately before invoking the Web Share API. */
+  // A callback function executed just before the sharing process is initiated.
   onShareStart?: () => void;
-  /** Called when the share sheet completes successfully. */
+  // A callback function executed when the sharing operation successfully completes.
   onShareSuccess?: () => void;
-  /** Called when the user dismisses the native share sheet. */
+  // A callback function executed if the user cancels the sharing dialog.
   onShareCancel?: () => void;
-  /** Called when the share operation throws an unexpected error. */
+  // A callback function executed if an error occurs during the sharing process, providing the error object.
   onShareError?: (error: unknown) => void;
-  /** Called when the Web Share API is not available for the provided data. */
+  // A callback function executed if the Web Share API is not supported by the user's browser.
   onUnsupported?: () => void;
-  /**
-   * When true the button is disabled if the Web Share API is unavailable.
-   * Defaults to true to avoid misleading interactions.
-   */
+  // A boolean property that determines whether the share button should be disabled if the Web Share API is unsupported.
   disableWhenUnsupported?: boolean;
-  /** Additional click handler fired alongside the share workflow. */
+  // An optional click handler for the button, overriding the default `onClick` from `ButtonProps`.
   onClick?: ButtonProps['onClick'];
 }
-
+// Defines the properties specifically for the presentational view component of the ShareButton.
 export interface ShareButtonViewProps
+  // Extends `ShareButtonProps` but omits properties handled by the container component, simplifying the view's responsibilities.
   extends Omit<
     ShareButtonProps,
     | 'shareData'
@@ -41,10 +36,10 @@ export interface ShareButtonViewProps
     | 'onUnsupported'
     | 'onClick'
   > {
-  /** Flag indicating if the current environment can use the Web Share API. */
+  // A boolean indicating whether the Web Share API is supported in the current browser environment.
   isSupported: boolean;
-  /** True while awaiting the native share sheet to resolve. */
+  // A boolean indicating if a sharing operation is currently active (e.g., the share dialog is open).
   isSharing: boolean;
-  /** Internal handler that triggers the sharing flow. */
+  // The event handler triggered when the view's button is clicked, initiating the sharing action.
   onShare: ButtonProps['onClick'];
 }

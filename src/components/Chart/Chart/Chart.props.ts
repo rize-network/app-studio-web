@@ -5,125 +5,54 @@ import {
   ChartDataPoint,
   ChartStyles,
 } from './Chart.type';
-
+// Defines the properties for the Chart component, extending basic view properties and omitting its own animationDuration property.
 export interface ChartProps extends Omit<ViewProps, 'animationDuration'> {
-  /**
-   * The type of chart to render
-   */
+  // Specifies the type of chart to be rendered (e.g., bar, line, pie).
   type: ChartType;
-
-  /**
-   * Data for the chart (for multi-series charts like bar, line, area)
-   */
+  // Optional primary data structure for the chart, typically used for simpler charts.
   data?: ChartData;
-
-  /**
-   * Data points for single series charts (like pie, donut)
-   */
+  // Optional array of individual data points for the chart, offering more granular data representation.
   dataPoints?: ChartDataPoint[];
-
-  /**
-   * The title of the chart
-   */
+  // Optional title to display above the chart.
   title?: string;
-
-  /**
-   * Whether to show the legend
-   */
+  // Determines whether the chart legend should be visible.
   showLegend?: boolean;
-
-  /**
-   * Position of the legend
-   */
+  // Specifies the position of the chart legend when `showLegend` is true.
   legendPosition?: 'top' | 'right' | 'bottom' | 'left';
-
-  /**
-   * Whether to show grid lines
-   */
+  // Determines whether grid lines should be displayed on the chart.
   showGrid?: boolean;
-
-  /**
-   * Whether to show tooltips on hover
-   */
+  // Determines whether interactive tooltips should appear on hover.
   showTooltips?: boolean;
-
-  /**
-   * Whether the chart is animated
-   */
+  // Enables or disables animation for the chart's rendering or updates.
   animated?: boolean;
-
-  /**
-   * Duration of the animation in milliseconds
-   */
+  // Sets the duration of chart animations in milliseconds.
   animationDuration?: number;
-
-  /**
-   * Whether the chart is responsive
-   */
+  // Determines if the chart should resize automatically to fit its container.
   responsive?: boolean;
-
-  /**
-   * The aspect ratio of the chart (width/height)
-   */
+  // Defines the aspect ratio (width / height) of the chart when `responsive` is true.
   aspectRatio?: number;
-
-  /**
-   * The width of the chart
-   */
+  // Specifies the fixed width of the chart. Can be a number (pixels) or a string (e.g., '100%').
   width?: number | string;
-
-  /**
-   * The height of the chart
-   */
+  // Specifies the fixed height of the chart. Can be a number (pixels) or a string (e.g., '100%').
   height?: number | string;
-
-  /**
-   * Custom styles for different parts of the chart
-   */
+  // Optional styles object to customize the appearance of different chart elements.
   views?: ChartStyles;
-
-  /**
-   * Callback when a data point is clicked
-   */
+  // Callback function triggered when a data point on the chart is clicked.
   onDataPointClick?: (dataPoint: ChartDataPoint | null, index: number) => void;
-
-  /**
-   * Callback when a series is clicked
-   */
+  // Callback function triggered when a data series (e.g., a line in a line chart) is clicked.
   onSeriesClick?: (seriesName: string, index: number) => void;
-
-  /**
-   * If true, displays a loading indicator overlay
-   */
+  // Indicates if the chart is currently loading data.
   isLoading?: boolean;
-
-  /**
-   * If provided, displays an error message overlay. Takes precedence over isLoading.
-   */
+  // Optional error message or component to display when an error occurs.
   error?: React.ReactNode;
-
-  /**
-   * If true and not loading/error, displays a "no data" message. Can also be custom content.
-   */
+  // Determines if a 'no data' message should be shown, or provides a custom component for it.
   noData?: boolean | React.ReactNode;
-
-  /**
-   * Custom placeholder for the loading state
-   */
+  // Optional custom component to display as a loading indicator.
   loadingIndicator?: React.ReactNode;
-
-  /**
-   * Custom placeholder for the error state
-   */
+  // Optional custom component to display when an error occurs.
   errorIndicator?: React.ReactNode;
-
-  /**
-   * Custom placeholder for the no data state
-   */
+  // Optional custom component to display when there is no data.
   noDataIndicator?: React.ReactNode;
-
-  /**
-   * Aria-label for the chart region. Defaults to the title if provided.
-   */
+  // Provides an accessible label for the chart component, used by screen readers.
   'aria-label'?: string;
 }

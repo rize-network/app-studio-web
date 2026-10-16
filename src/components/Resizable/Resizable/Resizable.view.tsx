@@ -14,8 +14,7 @@ import {
   HandleIconStyles,
 } from './Resizable.style';
 import { ResizableContextType } from './Resizable.type';
-
-// Create context for the Resizable component
+// Initializes the React Context for the Resizable component, providing default values for managing resizable panels' state and actions.
 const ResizableContext = createContext<ResizableContextType>({
   orientation: 'horizontal',
   size: 'md',
@@ -32,11 +31,9 @@ const ResizableContext = createContext<ResizableContextType>({
   onResize: () => {},
   endResize: () => {},
 });
-
-// Hook to use the Resizable context
+// A custom hook to access the Resizable context, allowing child components to interact with the global state and functions of the resizable container.
 export const useResizableContext = () => useContext(ResizableContext);
-
-// Provider component for the Resizable context
+// Provides the Resizable context to its children, making the resizable state and functions available throughout the component tree.
 export const ResizableProvider: React.FC<{
   value: ResizableContextType;
   children: React.ReactNode;
@@ -47,8 +44,6 @@ export const ResizableProvider: React.FC<{
     </ResizableContext.Provider>
   );
 };
-
-// Resizable Panel component
 export const ResizablePanel: React.FC<ResizablePanelProps> = ({
   children,
   id,
@@ -69,16 +64,12 @@ export const ResizablePanel: React.FC<ResizablePanelProps> = ({
     isPanelCollapsed,
     togglePanelCollapse,
   } = useResizableContext();
-
-  // Convert percentage to pixels if needed
   const initialSize =
     typeof defaultSize === 'string' && defaultSize.endsWith('%')
-      ? 0 // Will be calculated in the state hook
+      ? 0
       : typeof defaultSize === 'number'
       ? defaultSize
       : 0;
-
-  // Register panel on mount
   useEffect(() => {
     registerPanel(id, initialSize, minSize, maxSize, collapsible);
     return () => unregisterPanel(id);
@@ -91,33 +82,25 @@ export const ResizablePanel: React.FC<ResizablePanelProps> = ({
     registerPanel,
     unregisterPanel,
   ]);
-
-  // Get current panel size and collapsed state
   const size = getPanelSize(id);
   const isCollapsed = isPanelCollapsed(id);
-
-  // Handle collapse state changes
   useEffect(() => {
     if (onCollapseChange && isCollapsed !== undefined) {
       onCollapseChange(isCollapsed);
     }
   }, [isCollapsed, onCollapseChange]);
-
-  // Apply default collapsed state on mount if specified
   useEffect(() => {
     if (collapsible && defaultCollapsed && !isCollapsed) {
       togglePanelCollapse(id);
     }
   }, [id, collapsible, defaultCollapsed, isCollapsed, togglePanelCollapse]);
-
-  // If panel is collapsed, render a minimal version
   if (isCollapsed) {
     return (
       <View
         flex="0 0 auto"
         width={orientation === 'horizontal' ? '10px' : '100%'}
         height={orientation === 'vertical' ? '10px' : '100%'}
-        backgroundColor="color.gray.200"
+        backgroundColor="color-gray-200"
         cursor="pointer"
         onClick={() => togglePanelCollapse(id)}
         aria-label={`Expand panel ${id}`}
@@ -128,7 +111,6 @@ export const ResizablePanel: React.FC<ResizablePanelProps> = ({
       />
     );
   }
-
   return (
     <View
       flex={size > 0 ? '0 0 auto' : '1'}
@@ -142,8 +124,6 @@ export const ResizablePanel: React.FC<ResizablePanelProps> = ({
     </View>
   );
 };
-
-// Resizable Handle component
 export const ResizableHandle: React.FC<ResizableHandleProps> = ({
   id,
   position = 'both',
@@ -162,33 +142,22 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
     isPanelCollapsed,
     togglePanelCollapse,
   } = useResizableContext();
-
-  // Determine which panel to collapse when the collapse button is clicked
-  // By default, it's the panel before this handle (if any)
   const getPanelToCollapse = () => {
     if (collapseTarget) return collapseTarget;
-
-    // Extract panel index from handle ID (assuming handle IDs follow a pattern like 'handle1')
     const handleNumMatch = id.match(/\d+$/);
     if (!handleNumMatch) return '';
-
     const handleIndex = parseInt(handleNumMatch[0], 10);
     if (isNaN(handleIndex)) return '';
-
-    // Target the panel before this handle
     return `panel${handleIndex}`;
   };
-
   const panelToCollapse = getPanelToCollapse();
   const isTargetPanelCollapsed = isPanelCollapsed(panelToCollapse);
-
   const handleMouseDown = (e: React.MouseEvent) => {
     if (disabled) return;
     e.preventDefault();
     const clientPosition = orientation === 'horizontal' ? e.clientX : e.clientY;
     startResize(id, clientPosition);
   };
-
   const handleTouchStart = (e: React.TouchEvent) => {
     if (disabled || e.touches.length === 0) return;
     e.preventDefault();
@@ -197,23 +166,20 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
       orientation === 'horizontal' ? touch.clientX : touch.clientY;
     startResize(id, clientPosition);
   };
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (disabled) return;
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      const clientPosition = 0; // Starting position for keyboard navigation
+      const clientPosition = 0;
       startResize(id, clientPosition);
     }
   };
-
   const handleCollapseClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent triggering resize
+    e.stopPropagation();
     if (panelToCollapse) {
       togglePanelCollapse(panelToCollapse);
     }
   };
-
   return (
     <View
       role="separator"
@@ -259,7 +225,6 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
           )}
         </View>
       )}
-
       {withCollapseButton && panelToCollapse && (
         <View
           position="absolute"
@@ -273,9 +238,9 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
           width="16px"
           height="16px"
           borderRadius="full"
-          backgroundColor="color.gray.100"
+          backgroundColor="color-gray-100"
           border="1px solid"
-          borderColor="color.gray.300"
+          borderColor="color-gray-300"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -290,10 +255,10 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
           role="button"
           tabIndex={0}
           pointerEvents="auto"
-          _hover={{ backgroundColor: 'color.gray.200' }}
+          _hover={{ backgroundColor: 'color-gray-200' }}
           {...views?.collapseIcon}
         >
-          {/* Collapse/expand icon */}
+          {}
           <View
             width="8px"
             height="8px"
@@ -302,23 +267,21 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
             justifyContent="center"
           >
             {isTargetPanelCollapsed ? (
-              /* Expand icon (plus) */
               <Horizontal>
                 <View
                   width="6px"
                   height="2px"
-                  backgroundColor="color.gray.600"
+                  backgroundColor="color-gray-600"
                 />
                 <View
                   width="2px"
                   height="6px"
-                  backgroundColor="color.gray.600"
+                  backgroundColor="color-gray-600"
                   position="absolute"
                 />
               </Horizontal>
             ) : (
-              /* Collapse icon (minus) */
-              <View width="6px" height="2px" backgroundColor="color.gray.600" />
+              <View width="6px" height="2px" backgroundColor="color-gray-600" />
             )}
           </View>
         </View>
@@ -326,11 +289,9 @@ export const ResizableHandle: React.FC<ResizableHandleProps> = ({
     </View>
   );
 };
-
-// Main Resizable View component
 export const ResizableView: React.FC<
   ResizableProps & {
-    containerRef: React.RefObject<HTMLDivElement>;
+    containerRef: React.RefObject<HTMLDivElement | null>;
   }
 > = ({
   children,
@@ -343,11 +304,12 @@ export const ResizableView: React.FC<
   collapsible = false,
   containerRef,
   autoSaveId,
+  keyboardResizeBy,
+  onLayout,
   views,
   ...props
 }) => {
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
-
   return (
     <Container
       ref={containerRef}

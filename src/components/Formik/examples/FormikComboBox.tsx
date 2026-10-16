@@ -36,9 +36,7 @@ export const FormikComboBoxDemo = () => {
               searchEnabled={false}
               items={languages}
             />
-            <Button type="submit" onClick={props.handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={props.handleSubmit}>Submit</Button>
           </Vertical>
         </FormikForm>
       )}

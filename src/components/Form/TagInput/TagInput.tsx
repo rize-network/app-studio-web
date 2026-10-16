@@ -2,24 +2,13 @@ import React from 'react';
 import { useTagInputState } from './TagInput/TagInput.state';
 import { TagInputProps } from './TagInput/TagInput.props';
 import TagInputView from './TagInput/TagInput.view';
-
-/**
- * TagInput Component
- *
- * A form input component for managing a list of tags.
- * Users can add tags by typing and pressing Enter or comma,
- * and remove them by clicking the X button or using backspace.
- */
+// This file defines the main TagInput component, integrating its state management logic with the presentational view component.
 const TagInputComponent: React.FC<TagInputProps> = (props: TagInputProps) => {
-  // Initialize state management with the custom hook
   const tagInputState = useTagInputState(props);
-
-  // Separate the tags prop to avoid type conflicts
   const { tags: _, ...restProps } = props;
-
-  // Render the view component with combined props and state
-  return <TagInputView {...tagInputState} {...restProps} />;
+  // `setTags` is internal state-hook machinery: it is deliberately not part of
+  // `TagInputViewProps`, so keep it off the view (and therefore off the DOM).
+  const { setTags: _setTags, ...viewState } = tagInputState;
+  return <TagInputView {...viewState} {...restProps} />;
 };
-
-// Export the component
 export const TagInput = TagInputComponent;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { InfoIcon, PlayIcon, DustBinIcon, CloseIcon } from '../../Icon/Icon';
@@ -8,8 +8,7 @@ import { ToastProps, ToastContainerProps } from './Toast.props';
 import { Themes, ToastPositions } from './Toast.style';
 import { useToastStore } from './Toast.store';
 import { ToastPosition } from './Toast.type';
-
-// Individual Toast component
+// Defines the ToastView functional component, responsible for rendering an individual toast notification based on the provided properties.
 export const ToastView: React.FC<ToastProps> = ({
   variant,
   title,
@@ -27,48 +26,39 @@ export const ToastView: React.FC<ToastProps> = ({
   isVisible = true,
   themeMode: elementMode,
 }) => {
-  // We don't need the auto-close timer here anymore as it's handled in the store
-
+  // Initializes the `Theme` variable, prioritizing a custom `theme` if provided, otherwise defaulting to the `Themes` object for styling.
   const Theme = theme ?? Themes;
-
-  // Get the appropriate icon based on the variant
+  // A helper function that determines and returns the appropriate icon component based on the `variant` of the toast or a `customIcon`.
   const getIcon = () => {
-    // If a custom icon is provided, use it
     if (customIcon !== undefined) {
       return customIcon;
     }
-
-    // Otherwise use the default icon based on variant
+    const iconColor = variant
+      ? Themes[variant]?.icon?.color
+      : Themes.info.icon.color;
     switch (variant) {
       case 'info':
-        return <InfoIcon widthHeight={20} color={Theme.info.icon.color} />;
+        return <InfoIcon widthHeight={20} color={iconColor} />;
       case 'success':
-        return <PlayIcon widthHeight={20} color={Theme.success.icon.color} />;
+        return <PlayIcon widthHeight={20} color={iconColor} />;
       case 'warning':
         return (
-          <InfoIcon
-            widthHeight={20}
-            color={Theme.warning.icon.color}
-            orientation="down"
-          />
+          <InfoIcon widthHeight={20} color={iconColor} orientation="down" />
         );
       case 'error':
-        return <DustBinIcon widthHeight={20} color={Theme.error.icon.color} />;
+        return <DustBinIcon widthHeight={20} color={iconColor} />;
       default:
-        return <InfoIcon widthHeight={20} color={Theme.info.icon.color} />;
+        return <InfoIcon widthHeight={20} color={Themes.info.icon.color} />;
     }
   };
-
-  // If a custom render function is provided, use it
   if (render) {
     return <>{render({ id: id || '', onClose })}</>;
   }
-
-  // Determine appropriate ARIA role and live region based on variant
+  // Sets the ARIA `role` attribute to 'alert' for error toasts, indicating an important and time-sensitive message, or 'status' for others.
   const ariaRole = variant === 'error' ? 'alert' : 'status';
+  // Determines the ARIA `aria-live` attribute, setting it to 'assertive' for error or warning toasts to announce changes immediately, or 'polite' for less urgent updates.
   const ariaLive =
     variant === 'error' || variant === 'warning' ? 'assertive' : 'polite';
-
   return (
     <Horizontal
       role={ariaRole}
@@ -77,19 +67,19 @@ export const ToastView: React.FC<ToastProps> = ({
       data-state={isVisible ? 'open' : 'closed'}
       gap={12}
       width="100%"
-      maxWidth="400px"
+      maxWidth="380px"
       borderWidth="1px"
       borderStyle="solid"
-      borderRadius="8px" // 2 × 4px grid
-      padding="12px 16px" // 3 × 4px grid and 4 × 4px grid
+      borderRadius="12px"
+      padding="12px 14px"
       alignItems="flex-start"
       position="relative"
       backgroundColor={Theme[variant].container.backgroundColor}
       borderColor={Theme[variant].container.border}
-      boxShadow="0 4px 12px rgba(0, 0, 0, 0.08)" // Subtle shadow
+      boxShadow="0 12px 32px rgba(15, 23, 42, 0.12)"
       opacity={isVisible ? 1 : 0}
-      transform={isVisible ? 'scale(1)' : 'scale(0.95)'}
-      transition="all 0.3s ease"
+      transform={isVisible ? 'translateY(0)' : 'translateY(4px)'}
+      transition="opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease"
       {...views?.container}
     >
       {showIcon && (
@@ -97,53 +87,49 @@ export const ToastView: React.FC<ToastProps> = ({
           {getIcon()}
         </View>
       )}
-
       <Vertical gap={4} flex="1">
         <Text
-          size="md"
-          fontWeight="600" // Semi-bold for better readability
+          fontSize="14px"
+          lineHeight="20px"
+          fontWeight="600"
           color={Theme[variant].content.color}
-          lineHeight="1.4"
-          bgColor={Theme[variant].container.backgroundColor}
+          backgroundColor={Theme[variant].container.backgroundColor}
           {...views?.title}
         >
           {title}
         </Text>
-
         {description && (
           <Text
-            size="sm"
+            fontSize="12px"
+            lineHeight="18px"
             color={Theme[variant].content.color}
-            fontWeight="400" // Regular weight
-            lineHeight="1.5"
-            bgColor={Theme[variant].container.backgroundColor}
+            fontWeight="400"
+            backgroundColor={Theme[variant].container.backgroundColor}
             {...views?.description}
           >
             {description}
           </Text>
         )}
-
         {action && actionText && (
           <Text
-            size="sm"
-            fontWeight="600" // Semi-bold for better readability
-            marginTop="8px" // 2 × 4px grid
+            fontSize="14px"
+            fontWeight="600"
+            marginTop="6px"
             cursor="pointer"
             color={Theme[variant].content.color}
-            bgColor={Theme[variant].container.backgroundColor}
+            backgroundColor={Theme[variant].container.backgroundColor}
             onClick={(e: React.MouseEvent) => {
               e.stopPropagation();
               action();
             }}
             _hover={{ textDecoration: 'underline' }}
-            transition="all 0.2s ease"
+            transition="opacity 0.2s ease, color 0.2s ease"
             {...views?.actionButton}
           >
             {actionText}
           </Text>
         )}
       </Vertical>
-
       {isClosable && (
         <View
           as="button"
@@ -151,17 +137,17 @@ export const ToastView: React.FC<ToastProps> = ({
           backgroundColor="transparent"
           border="none"
           cursor="pointer"
-          padding="4px" // 1 × 4px grid
-          marginLeft="8px" // 2 × 4px grid
-          marginTop="-4px" // 1 × 4px grid
-          marginRight="-8px" // 2 × 4px grid
-          borderRadius="4px" // 1 × 4px grid
+          padding="4px"
+          marginLeft="8px"
+          marginTop="-2px"
+          marginRight="-4px"
+          borderRadius="9999px"
           onClick={(e: React.MouseEvent) => {
             e.stopPropagation();
             onClose();
           }}
-          _hover={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}
-          transition="all 0.2s ease"
+          _hover={{ backgroundColor: 'color-black-900-60' }}
+          transition="background-color 0.2s ease, opacity 0.2s ease"
           {...views?.closeButton}
         >
           <CloseIcon widthHeight={16} color={Theme[variant].content.color} />
@@ -170,8 +156,6 @@ export const ToastView: React.FC<ToastProps> = ({
     </Horizontal>
   );
 };
-
-// Toast Container component
 export const ToastContainer: React.FC<ToastContainerProps> = ({
   position = 'top-right',
   gap = 8,
@@ -179,8 +163,6 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
   containerStyle,
 }) => {
   const { toasts, remove } = useToastStore();
-
-  // Group toasts by position
   const toastsByPosition = React.useMemo(() => {
     const grouped: Record<ToastPosition, typeof toasts> = {
       top: [],
@@ -190,26 +172,18 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
       'bottom-right': [],
       'bottom-left': [],
     };
-
-    // Group toasts by their position or the container's default position
     toasts.forEach((toast: any) => {
       const pos = toast.position || position;
       grouped[pos as ToastPosition].push(toast);
     });
-
-    // Apply limits to each position group
     Object.keys(grouped).forEach((pos) => {
       grouped[pos as ToastPosition] = grouped[pos as ToastPosition].slice(
         -limit
       );
     });
-
     return grouped;
   }, [toasts, position, limit]);
-
-  // Get toasts for the current position
   const visibleToasts = toastsByPosition[position];
-
   return (
     <View
       position="fixed"

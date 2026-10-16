@@ -12,9 +12,11 @@ export const CustomCookieConsent = () => {
 
   // Reset cookie consent to show the banner
   const handleShowConsent = () => {
-    // Clear localStorage to simulate a new visit
-    localStorage.removeItem('app-studio-cookie-consent');
-    localStorage.removeItem('app-studio-cookie-consent-expires');
+    // Clear localStorage to simulate a new visit (web only).
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('app-studio-cookie-consent');
+      localStorage.removeItem('app-studio-cookie-consent-expires');
+    }
     setShowConsent(true);
   };
 
@@ -36,29 +38,29 @@ export const CustomCookieConsent = () => {
           onCustomize={() => alert('Customize preferences clicked')}
           views={{
             container: {
-              backgroundColor: 'color.purple.50',
-              borderColor: 'color.purple.200',
+              backgroundColor: 'color-purple-50',
+              borderColor: 'color-purple-200',
               borderRadius: '8px',
               margin: '16px',
               position: 'static', // Override fixed position for demo
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
             },
             title: {
-              color: 'color.purple.800',
+              color: 'color-purple-800',
               fontSize: 20,
             },
             description: {
-              color: 'color.purple.700',
+              color: 'color-purple-700',
             },
             acceptButton: {
-              backgroundColor: 'color.purple.600',
+              backgroundColor: 'color-purple-600',
               _hover: {
-                backgroundColor: 'color.purple.700',
+                backgroundColor: 'color-purple-700',
               },
             },
             customizeButton: {
-              borderColor: 'color.purple.300',
-              color: 'color.purple.700',
+              borderColor: 'color-purple-300',
+              color: 'color-purple-700',
             },
           }}
         />

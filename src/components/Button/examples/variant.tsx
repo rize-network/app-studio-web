@@ -1,27 +1,59 @@
 import React from 'react';
 import { Button } from '../Button';
-import { Vertical } from 'app-studio';
+import { Vertical, View, Text } from 'app-studio';
 
 import { Variant } from '../Button/Button.type';
 
 export const VariantButtons = () => (
   <Vertical gap={15}>
-    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-      <Button
-        key={index}
-        to="https://www.npmjs.com/package/app-studio"
-        variant={variant as Variant}
+    <Vertical gap={10}>
+      <Text fontSize="14px" fontWeight="600">
+        Colors
+      </Text>
+      <Vertical gap={5}>
+        <Button color="theme-primary">Primary</Button>
+        <Button color="theme-secondary">Secondary</Button>
+        <Button color="color-black">Black</Button>
+        <Button color="color-white" textColor="color-black">
+          White
+        </Button>
+      </Vertical>
+    </Vertical>
+
+    <Vertical gap={10}>
+      <Text fontSize="14px" fontWeight="600">
+        Variants
+      </Text>
+      {['filled', 'outline', 'empty', 'ghost', 'link', 'subtle'].map(
+        (variant) => (
+          <Button key={variant} variant={variant as Variant}>
+            {variant.charAt(0).toUpperCase() + variant.slice(1)} Variant
+          </Button>
+        )
+      )}
+    </Vertical>
+
+    <Vertical gap={10}>
+      <Text fontSize="14px" fontWeight="600">
+        Reversed
+      </Text>
+      <View
+        padding={20}
+        backgroundColor="#333"
+        display="flex"
+        flexDirection="column"
+        gap={10}
       >
-        App Studio Link {variant}
-      </Button>
-    ))}
-    {['filled', 'outline', 'link', 'ghost'].map((variant, index) => (
-      <Button key={index} variant={variant as Variant}>
-        {variant}
-      </Button>
-    ))}
-    {/* Effect variants */}
-    <Button variant="borderMoving">Border Moving Effect</Button>
-    <Button variant="animatedStroke">Animated Stroke Effect</Button>
+        <Button reversed variant="filled" color="theme-primary">
+          Filled Reversed
+        </Button>
+        <Button reversed variant="outline" color="theme-primary">
+          Outline Reversed
+        </Button>
+        <Button reversed variant="ghost" color="theme-primary">
+          Ghost Reversed
+        </Button>
+      </View>
+    </Vertical>
   </Vertical>
 );

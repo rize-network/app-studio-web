@@ -15,9 +15,7 @@ export const FormikSwitchExemple = () => {
         <FormikForm>
           <FormikSwitch name="carrot" label="carrot" />
           <FormikSwitch name="onion" label="onion" />
-          <Button type="submit" onClick={props.handleSubmit}>
-            Submit
-          </Button>
+          <Button onClick={props.handleSubmit}>Submit</Button>
         </FormikForm>
       )}
     </Formik>

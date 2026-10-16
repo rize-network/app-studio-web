@@ -1,0 +1,92 @@
+{
+  "componentDescription": "A flexible container component for arranging and resizing child panels dynamically.",
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Defines the content to be rendered inside the Resizable component.",
+    "defaultValue": null
+  },
+  "orientation": {
+    "type": "Orientation",
+    "typeValues": [
+      "horizontal",
+      "vertical"
+    ],
+    "description": "Specifies the orientation of the resizable panels (horizontal or vertical).",
+    "defaultValue": "horizontal"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Sets a predefined size configuration for the resizable panels.",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "subtle",
+      "prominent"
+    ],
+    "description": "Determines the visual style or behavior variant of the resizable component.",
+    "defaultValue": "default"
+  },
+  "defaultSizes": {
+    "type": "(number | string)[]",
+    "typeValues": [],
+    "description": "Provides initial sizes for the panels when the component first renders.",
+    "defaultValue": null
+  },
+  "onSizesChange": {
+    "type": "(sizes: number[]) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when the sizes of the panels change.",
+    "defaultValue": null
+  },
+  "minSize": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Sets the minimum overall size allowed for the resizable container.",
+    "defaultValue": null
+  },
+  "maxSize": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Sets the maximum overall size allowed for the resizable container.",
+    "defaultValue": null
+  },
+  "collapsible": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Enables or disables the ability for panels to be collapsed.",
+    "defaultValue": false
+  },
+  "autoSaveId": {
+    "type": "string",
+    "typeValues": [],
+    "description": "An ID used to automatically save and restore panel sizes.",
+    "defaultValue": null
+  },
+  "storage": {
+    "type": "ResizableStorage",
+    "typeValues": [],
+    "description": "Specifies the storage mechanism for saving and restoring panel states.",
+    "defaultValue": null
+  },
+  "keyboardResizeBy": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Defines the step size for resizing panels using keyboard input.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "ResizableStyles",
+    "typeValues": [],
+    "description": "Allows custom styling for different parts of the Resizable component.",
+    "defaultValue": null
+  }
+}

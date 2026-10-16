@@ -1,0 +1,29 @@
+# ShareButton
+
+A button that allows users to share content from the web application using the device's native sharing capabilities.
+
+### **Import**
+```tsx
+import { ShareButton } from '@app-studio/components';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { ShareButton } from '@app-studio/components';
+
+export const DefaultShareButton = () => (
+  <ShareButton
+    label="Share this page"
+    shareData={{
+      title: 'App Studio',
+      text: 'Découvrez les composants App Studio.',
+      url: 'https://appstudio.example.com',
+    }}
+    onUnsupported={() =>
+      alert('Le partage natif est indisponible sur ce navigateur.')
+    }
+  />
+);
+```
+

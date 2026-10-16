@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Carousel matches snapshot 1`] = `
 <div
@@ -11,13 +11,15 @@ exports[`Carousel matches snapshot 1`] = `
   onTouchEnd={[Function]}
   onTouchMove={[Function]}
   onTouchStart={[Function]}
+  ref={[Function]}
 >
   <div
     className="wh-100 ht-100 wh-100 ht-100 pn-relative"
+    ref={[Function]}
   >
     <div
       className="wh-100 ht-100 fsk-0 wh-100 ht-100 dy-block"
-      index={0}
+      ref={[Function]}
     >
       <div>
         Slide 1
@@ -25,7 +27,7 @@ exports[`Carousel matches snapshot 1`] = `
     </div>
     <div
       className="wh-100 ht-100 fsk-0 wh-100 ht-100 dy-none"
-      index={1}
+      ref={[Function]}
     >
       <div>
         Slide 2
@@ -35,10 +37,12 @@ exports[`Carousel matches snapshot 1`] = `
   <div
     className="pn-absolute tp-50 tm-translateY-50 lt-10px cror-pointer oy-1"
     onClick={[Function]}
+    ref={[Function]}
   >
     <button
       aria-label="Previous slide"
-      className="wh-40px ht-40px wh-40px ht-40px brs-50 bcr- cr- dy-flex ais-center jct-center cror-pointer bsw-0-2px-5px-rgba0-0-0-0p1 zix-1 tn-background-color-0p3s-ease bcr---hover"
+      className="wh-40px ht-40px wh-40px ht-40px brs-50 bcr-var--color-white cr-var--color-gray-800 dy-flex ais-center jct-center cror-pointer bsw-0-2px-5px-rgba0-0-0-0p1 zix-1 tn-background-color-0p3s-ease bcr-var--color-gray-100--hover"
+      ref={[Function]}
     >
       ❮
     </button>
@@ -46,24 +50,29 @@ exports[`Carousel matches snapshot 1`] = `
   <div
     className="pn-absolute tp-50 tm-translateY-50 rt-10px cror-pointer oy-1"
     onClick={[Function]}
+    ref={[Function]}
   >
     <button
       aria-label="Next slide"
-      className="wh-40px ht-40px wh-40px ht-40px brs-50 bcr- cr- dy-flex ais-center jct-center cror-pointer bsw-0-2px-5px-rgba0-0-0-0p1 zix-1 tn-background-color-0p3s-ease bcr---hover"
+      className="wh-40px ht-40px wh-40px ht-40px brs-50 bcr-var--color-white cr-var--color-gray-800 dy-flex ais-center jct-center cror-pointer bsw-0-2px-5px-rgba0-0-0-0p1 zix-1 tn-background-color-0p3s-ease bcr-var--color-gray-100--hover"
+      ref={[Function]}
     >
       ❯
     </button>
   </div>
   <div
-    className="dy-flex fdn-row pn-absolute lt-0 rt-0 jct-center bm-10px"
+    className="pn-absolute lt-0 rt-0 jct-center bm-10px dy-flex fdn-row"
+    ref={[Function]}
   >
     <div
-      className="wh-10px ht-10px cror-pointer wh-10px ht-10px brs-50 bcr- mn-0-4px tn-background-color-0p3s-ease"
+      className="wh-10px ht-10px cror-pointer wh-10px ht-10px brs-50 bcr-var--theme-primary mn-0-4px tn-background-color-0p3s-ease"
       onClick={[Function]}
+      ref={[Function]}
     />
     <div
-      className="wh-10px ht-10px cror-pointer wh-10px ht-10px brs-50 bcr- mn-0-4px tn-background-color-0p3s-ease"
+      className="wh-10px ht-10px cror-pointer wh-10px ht-10px brs-50 bcr-var--color-gray-300 mn-0-4px tn-background-color-0p3s-ease"
       onClick={[Function]}
+      ref={[Function]}
     />
   </div>
 </div>

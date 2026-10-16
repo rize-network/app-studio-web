@@ -1,0 +1,7 @@
+[shell_environment_policy]
+inherit = "core"
+
+[shell_environment_policy.set]
+CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS = "1"
+STARTUP_STUDIO_FCB_PATH = "./knowledge/features"
+STARTUP_STUDIO_REPORTS_PATH = "./reports/startup-studio"

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Vertical, View, Image, Center, Button } from 'app-studio';
 import { FileIcon, AudioIcon } from '../Icon/Icon';
 import { HoverCard } from '../HoverCard/HoverCard';
-import { Text } from '../Text/Text';
+import { Text } from 'app-studio';
 
 interface AttachmentPreviewProps {
   files: Array<{ name: string; size: number; type: string; url?: string }>;
@@ -36,7 +36,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
     <View
       display="flex"
       flexWrap="wrap"
-      gap="6px"
+      gap="8px"
       padding="8px 0"
       maxHeight={maxHeight}
       overflowY="auto"
@@ -53,9 +53,10 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
             key={index}
             alignItems="center"
             gap="6px"
-            padding="4px 8px"
-            borderRadius="6px"
-            backgroundColor="color.gray.100"
+            padding="6px 10px"
+            borderRadius="8px"
+            border="1px solid #E2E8F0"
+            backgroundColor="color-white"
             position="relative"
             animate={{
               from: { opacity: 0, scale: 0.9 },
@@ -74,7 +75,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       width="60px"
                       height="60px"
                       objectFit="cover"
-                      borderRadius="4px"
+                      borderRadius="8px"
                     />
                   )}
                   {isVideo && previewUrl && (
@@ -87,27 +88,27 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       width="60px"
                       height="60px"
                       objectFit="cover"
-                      borderRadius="4px"
+                      borderRadius="8px"
                     />
                   )}
                   {isAudio && (
                     <Center
                       width="60px"
                       height="60px"
-                      backgroundColor="color.gray.200"
-                      borderRadius="4px"
+                      backgroundColor="color-gray-100"
+                      borderRadius="8px"
                     >
-                      <AudioIcon widthHeight={24} color="color.black" />
+                      <AudioIcon widthHeight={24} color="color-black" />
                     </Center>
                   )}
                   {!isImage && !isVideo && !isAudio && (
                     <Center
                       width="60px"
                       height="60px"
-                      backgroundColor="color.gray.200"
-                      borderRadius="4px"
+                      backgroundColor="color-gray-100"
+                      borderRadius="8px"
                     >
-                      <FileIcon widthHeight={24} color="color.black" />
+                      <FileIcon widthHeight={24} color="color-black" />
                     </Center>
                   )}
 
@@ -121,7 +122,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       minWidth="20px"
                       minHeight="20px"
                       borderRadius="50%"
-                      backgroundColor="color.red.500"
+                      backgroundColor="color-red-500"
                       color="white"
                       fontSize={14}
                       fontWeight="bold"
@@ -131,8 +132,9 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                       justifyContent="center"
                       cursor="pointer"
                       border="2px solid white"
+                      transition="background-color 0.2s ease, opacity 0.2s ease"
                       _hover={{
-                        backgroundColor: 'color.red.600',
+                        backgroundColor: '#DC2626',
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -157,9 +159,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({
                 )}
                 <Text
                   marginTop="4px"
-                  truncateText={true}
-                  textOverflow="ellipsis"
-                  overflow="hidden"
+                  maxLines={1}
                   width={'100%'}
                   fontSize={12}
                   {...views?.name}

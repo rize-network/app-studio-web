@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'app-studio';
 import { DragAndDropViewProps } from './DragAndDrop.props';
-
+// Defines the `DragAndDropView` functional component, responsible for rendering a list of draggable items and handling basic drag interactions.
 export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
   items,
   renderItem,
@@ -22,15 +22,14 @@ export const DragAndDropView: React.FC<DragAndDropViewProps> = ({
     {items.map((item, index) => (
       <View
         key={index}
-        ref={(el) => (itemRefs.current[index] = el as HTMLDivElement)}
+        ref={(el: HTMLElement | null) => {
+          itemRefs.current[index] = el as HTMLDivElement | null;
+        }}
         onMouseDown={(e: React.MouseEvent) => handleDragStart(e, index)}
         onTouchStart={(e: React.TouchEvent) => handleDragStart(e, index)}
         position="relative"
         cursor="grab"
         transition="transform 0.2s"
-        backgroundColor={
-          draggedIndex === index ? 'color.gray.100' : 'transparent'
-        }
         {...itemProps}
         {...views?.item}
       >

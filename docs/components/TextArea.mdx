@@ -4,14 +4,14 @@ A text input field for multi-line text editing with customizable features.
 
 ### **Import**
   ```tsx
-  import { TextArea } from '@app-studio/web';
+  import { TextArea } from '@app-studio/components';
   ```
 
 ### **Default**
 ```tsx
 import React from 'react';
 
-import { TextArea } from '../TextArea';
+import { TextArea } from '@app-studio/components';
 
 export const DefaultArea = () => (
   <TextArea name="comments" placeholder="Enter your thoughts" />
@@ -24,18 +24,18 @@ Optional color scheme for the component.
 
 ```tsx
 import React from 'react';
-import { Vertical } from 'app-studio';
+import { Vertical } from '@app-studio/components';
 
-import { TextArea } from '../TextArea';
+import { TextArea } from '@app-studio/components';
 
 export const ColorArea = () => {
   return (
     <Vertical gap={10}>
-      <TextArea name="surname" label="Surname" colorScheme="theme.secondary" />
+      <TextArea name="surname" label="Surname" colorScheme="theme-secondary" />
       <TextArea
         name="name"
         label="Name"
-        colorScheme="theme.primary"
+        colorScheme="theme-primary"
         variant="outline"
       />
     </Vertical>
@@ -51,10 +51,10 @@ Helper text that appears below the text area.
 import { useState } from 'react';
 import React from 'react';
 
-import { Button } from '../../../Button/Button';
-import { TextArea } from '../../../Form/TextArea/TextArea';
+import { Button } from '@app-studio/components';
+import { TextArea } from '@app-studio/components';
 
-import { Vertical } from 'app-studio';
+import { Vertical } from '@app-studio/components';
 
 export const HelperTextArea = () => {
   const initialValues = {
@@ -72,9 +72,12 @@ export const HelperTextArea = () => {
     setFormErrors(errors);
   };
 
-  const handleChange = (event: any) => {
-    setFormValues({ ...formValues, [event.target.name]: event.target.value });
-  };
+  // TextArea's onChange hands you the value, not a DOM event — so the field
+  // name comes from the closure rather than `event.target.name`.
+  const handleChange =
+    (field: keyof typeof initialValues) => (value: string) => {
+      setFormValues((current) => ({ ...current, [field]: value }));
+    };
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -91,9 +94,9 @@ export const HelperTextArea = () => {
           placeholder="Write here..."
           helperText={formErrors.guess}
           error={!!formErrors.guess}
-          onChange={handleChange}
+          onChange={handleChange('guess')}
         />
-        <Button type="submit" height="40px" isAuto>
+        <Button  height="40px" isAuto>
           Submit
         </Button>
       </Vertical>
@@ -108,11 +111,11 @@ Placeholder text for the text area when it is empty.
 
 ```tsx
 import React from 'react';
-import { Button } from '../../../Button/Button';
+import { Button } from '@app-studio/components';
 
-import { Horizontal } from 'app-studio';
+import { Horizontal } from '@app-studio/components';
 
-import { TextArea } from '../TextArea';
+import { TextArea } from '@app-studio/components';
 
 export const PlaceholderArea = () => {
   const handleSubmit = (event: any) => {
@@ -124,7 +127,7 @@ export const PlaceholderArea = () => {
     <form onSubmit={handleSubmit}>
       <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
         <TextArea name="comment" placeholder="Type your comment here..." />
-        <Button type="submit" height="40px" isAuto>
+        <Button  height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

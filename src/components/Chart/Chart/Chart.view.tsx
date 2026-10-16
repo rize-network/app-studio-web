@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Center } from 'app-studio';
 import { Loader } from '../../Loader/Loader';
@@ -21,7 +21,7 @@ import { BarChart } from './BarChart';
 import { LineChart } from './LineChart';
 import { PieChart } from './PieChart';
 import { ChartTooltip } from './ChartTooltip';
-
+// Defines the main ChartView functional component, responsible for rendering different chart types, legends, and various status indicators based on its provided properties.
 export const ChartView: React.FC<ChartProps> = ({
   type,
   data,
@@ -47,11 +47,10 @@ export const ChartView: React.FC<ChartProps> = ({
   errorIndicator,
   noDataIndicator,
   'aria-label': ariaLabel,
-
   themeMode: elementMode,
   ...props
 }) => {
-  // Use chart state hook
+  // Destructures state variables and utility functions from the `useChartState` hook, managing animation progress, tooltip visibility, container references, and processed data for the chart.
   const {
     animationProgress,
     tooltip,
@@ -60,6 +59,7 @@ export const ChartView: React.FC<ChartProps> = ({
     showTooltip: showTooltipState,
     hideTooltip: hideTooltipState,
     getChartDimensions,
+    toggleSeries,
   } = useChartState({
     data,
     dataPoints,
@@ -67,65 +67,69 @@ export const ChartView: React.FC<ChartProps> = ({
     animationDuration,
     showTooltips,
   });
-
-  // Get processed data
+  // Retrieves the processed and formatted chart data from the state hook, which is then used by the specific chart components for rendering.
   const chartData = processedData();
-
-  // Calculate dimensions
+  // Destructures the dynamically calculated width and height of the chart's containing element.
   const { width: containerWidth, height: containerHeight } =
     getChartDimensions();
+  // Determines the effective width of the chart, prioritizing the `propWidth` if provided, otherwise using the calculated `containerWidth`.
   const width = propWidth || containerWidth;
+  // Calculates the effective height of the chart, considering `propHeight`, responsive behavior based on aspect ratio, or falling back to `containerHeight`.
   const height =
     propHeight || (responsive ? containerWidth / aspectRatio : containerHeight);
-
-  // Render legend
+  // A utility function to render the chart legend, which displays color-coded labels for data series or points and supports interactive toggling of series visibility.
   const renderLegend = () => {
     if (!showLegend || !chartData) return null;
-
     let items: any[] = [];
-
     if (type === 'pie' || type === 'donut') {
-      // For pie/donut charts, use dataPoints
       if (Array.isArray(chartData)) {
         items = chartData as any[];
       }
     } else {
-      // For other charts, use data.series
       if (chartData && (chartData as any).series) {
         items = (chartData as any).series;
       }
     }
-
-    // If no items to display, don't render the legend
     if (!items || items.length === 0) return null;
-
     return (
       <Horizontal
         flexWrap="wrap"
-        justifyContent="center"
+        justifyContent="flex-start"
         marginTop={legendPosition === 'bottom' ? '16px' : 0}
         marginBottom={legendPosition === 'top' ? '16px' : 0}
         {...ChartLegendStyles}
         {...views?.legend}
       >
-        {items.map((item: any, index: number) => (
-          <View
-            key={`legend-${index}`}
-            {...LegendItemStyles}
-            {...views?.legendItem}
-          >
-            <View backgroundColor={item.color} {...LegendColorStyles} />
-            <Text {...LegendTextStyles}>{item.name || item.label}</Text>
-          </View>
-        ))}
+        {items.map((item: any, index: number) => {
+          const isHidden = item.hidden;
+          const label = item.name || item.label;
+          return (
+            <View
+              key={`legend-${index}`}
+              {...LegendItemStyles}
+              onClick={() => toggleSeries(label)}
+              opacity={isHidden ? 0.4 : 1}
+              {...views?.legendItem}
+            >
+              <View
+                backgroundColor={item.color}
+                {...LegendColorStyles}
+                opacity={isHidden ? 0.3 : 1}
+              />
+              <Text
+                {...LegendTextStyles}
+                textDecoration={isHidden ? 'line-through' : 'none'}
+              >
+                {label}
+              </Text>
+            </View>
+          );
+        })}
       </Horizontal>
     );
   };
-
-  // Render chart based on type
   const renderChart = () => {
     if (!chartData) return null;
-
     switch (type) {
       case 'bar':
         return (
@@ -175,11 +179,8 @@ export const ChartView: React.FC<ChartProps> = ({
         return null;
     }
   };
-
-  // Default loading indicator
   const renderLoadingIndicator = () => {
     if (!isLoading) return null;
-
     return (
       <View {...LoadingOverlayStyles} {...views?.loadingOverlay}>
         {loadingIndicator || (
@@ -190,11 +191,8 @@ export const ChartView: React.FC<ChartProps> = ({
       </View>
     );
   };
-
-  // Default error indicator
   const renderErrorIndicator = () => {
     if (!error) return null;
-
     return (
       <View {...ErrorOverlayStyles} {...views?.errorOverlay}>
         {errorIndicator || (
@@ -205,11 +203,8 @@ export const ChartView: React.FC<ChartProps> = ({
       </View>
     );
   };
-
-  // Default no data indicator
   const renderNoDataIndicator = () => {
     if (!noData) return null;
-
     return (
       <View {...NoDataOverlayStyles} {...views?.noDataOverlay}>
         {noDataIndicator || (
@@ -220,14 +215,9 @@ export const ChartView: React.FC<ChartProps> = ({
       </View>
     );
   };
-
-  // Determine effective aria-label
   const effectiveAriaLabel =
     ariaLabel ?? (typeof title === 'string' ? title : 'Chart');
-
-  // Determine if we should show the chart content
   const showChartContent = !error && !isLoading && !noData;
-
   return (
     <View
       ref={containerRef}
@@ -239,30 +229,25 @@ export const ChartView: React.FC<ChartProps> = ({
       {...props}
     >
       {title && <Text {...ChartTitleStyles}>{title}</Text>}
-
-      {/* Only show legend when chart content is visible */}
+      {}
       {showChartContent && legendPosition === 'top' && renderLegend()}
-
       <View flex={1} width="100%" position="relative" {...views?.chart}>
         {showChartContent && renderChart()}
-
-        {/* Render overlays */}
+        {}
         {renderLoadingIndicator()}
         {renderErrorIndicator()}
         {renderNoDataIndicator()}
+        <ChartTooltip
+          visible={showTooltips && tooltip.visible}
+          x={tooltip.x}
+          y={tooltip.y}
+          content={tooltip.content}
+          maxDistance={100}
+          views={views}
+        />
       </View>
-
-      {/* Only show legend when chart content is visible */}
+      {}
       {showChartContent && legendPosition === 'bottom' && renderLegend()}
-
-      <ChartTooltip
-        visible={showTooltips && tooltip.visible}
-        x={tooltip.x}
-        y={tooltip.y}
-        content={tooltip.content}
-        maxDistance={100}
-        views={views}
-      />
     </View>
   );
 };

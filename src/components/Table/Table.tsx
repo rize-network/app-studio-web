@@ -12,10 +12,16 @@ import {
 } from './Table/Table.view';
 import { TableProvider } from './Table/Table.context';
 import { TableLayoutProps } from './Table/Table.props';
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
 
 export const Table = ({ children, views, onClick }: TableLayoutProps) => {
+  const mergedProps = useMergedDesignSystemComponentProps('table', {
+    views,
+    onClick,
+  });
+
   return (
-    <TableProvider views={views} onRowClick={onClick}>
+    <TableProvider views={mergedProps.views} onRowClick={mergedProps.onClick}>
       {children}
     </TableProvider>
   );

@@ -1,0 +1,149 @@
+{
+  "componentDescription": "A versatile UI component for selecting a single value or range from a predefined set by dragging a thumb.",
+  "min": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Defines the minimum allowed value for the slider.",
+    "defaultValue": 0
+  },
+  "max": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Defines the maximum allowed value for the slider.",
+    "defaultValue": 100
+  },
+  "value": {
+    "type": "number",
+    "typeValues": null,
+    "description": "The current controlled value of the slider.",
+    "defaultValue": null
+  },
+  "defaultValue": {
+    "type": "number",
+    "typeValues": null,
+    "description": "The initial uncontrolled value of the slider.",
+    "defaultValue": null
+  },
+  "step": {
+    "type": "number",
+    "typeValues": null,
+    "description": "The step increment for the slider's value.",
+    "defaultValue": 1
+  },
+  "stepValues": {
+    "type": "number[]",
+    "typeValues": null,
+    "description": "An array of specific values the slider can snap to.",
+    "defaultValue": null
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "square",
+      "rounded",
+      "pill"
+    ],
+    "description": "Defines the visual shape of the slider's elements (e.g., round, square).",
+    "defaultValue": "rounded"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Defines the overall size of the slider component.",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "outline"
+    ],
+    "description": "Specifies the visual style or variant of the slider.",
+    "defaultValue": "default"
+  },
+  "orientation": {
+    "type": "Orientation",
+    "typeValues": [
+      "horizontal",
+      "vertical"
+    ],
+    "description": "Defines whether the slider is horizontal or vertical.",
+    "defaultValue": "horizontal"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Indicates if the slider is disabled and non-interactive.",
+    "defaultValue": false
+  },
+  "showValue": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether the current slider value should be displayed.",
+    "defaultValue": false
+  },
+  "showTooltip": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Determines whether a tooltip showing the value appears on hover/drag.",
+    "defaultValue": false
+  },
+  "label": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "A label to associate with the slider.",
+    "defaultValue": null
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Supplementary text to provide additional context or guidance.",
+    "defaultValue": null
+  },
+  "onChange": {
+    "type": "(value: number) => void",
+    "typeValues": null,
+    "description": "Callback function invoked when the slider's value changes.",
+    "defaultValue": null
+  },
+  "onDrag": {
+    "type": "(value: number) => void",
+    "typeValues": null,
+    "description": "Callback function invoked during a slider drag operation.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "SliderStyles",
+    "typeValues": null,
+    "description": "Custom styles for different parts of the slider component.",
+    "defaultValue": {
+      "container": {},
+      "track": {},
+      "progress": {},
+      "filledTrack": {},
+      "thumb": {},
+      "label": {},
+      "valueLabel": {},
+      "stepMarks": {},
+      "tooltip": {}
+    }
+  },
+  "shadow": {
+    "type": "ViewProps",
+    "typeValues": null,
+    "description": "Props for rendering a shadow effect for the slider.",
+    "defaultValue": {}
+  },
+  "ariaLabel": {
+    "type": "string",
+    "typeValues": null,
+    "description": "An ARIA label for accessibility purposes.",
+    "defaultValue": "Slider"
+  }
+}

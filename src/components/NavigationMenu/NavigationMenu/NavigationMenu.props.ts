@@ -8,83 +8,44 @@ import {
   Size,
   Variant,
 } from './NavigationMenu.type';
-
 export interface NavigationMenuProps {
-  /**
-   * The items to display in the navigation menu (for data-driven approach)
-   */
+  // An optional array of `NavigationItem` objects, used to define the structure and content of the navigation menu.
   items?: NavigationItem[];
-  /**
-   * The content of the navigation menu (for compound component pattern)
-   */
+  // An optional React node that can be rendered inside the `NavigationMenu` component, allowing for flexible content placement.
   children?: React.ReactNode;
-  /**
-   * The orientation of the navigation menu
-   */
+  // Defines the visual orientation of the navigation menu, such as 'horizontal' or 'vertical'.
   orientation?: Orientation;
-  /**
-   * The size of the navigation menu items
-   */
+  // Specifies the visual size of the navigation menu, affecting its overall dimensions.
   size?: Size;
-  /**
-   * The visual style variant of the navigation menu
-   */
+  // Determines the visual style or variant of the navigation menu, allowing for different appearances.
   variant?: Variant;
-  /**
-   * The ID of the initially active item
-   */
   defaultActiveItemId?: string;
-  /**
-   * The IDs of the initially expanded items (for items with sub-items)
-   */
   defaultExpandedItemIds?: string[];
-  /**
-   * Callback when an item is activated
-   */
+  // A callback function triggered when a navigation item is activated, providing the ID of the activated item as a parameter.
   onItemActivate?: (itemId: string) => void;
-  /**
-   * Custom styles for different parts of the navigation menu
-   */
+  // An optional object used to apply custom styling to different parts of the navigation menu component.
   views?: NavigationMenuStyles;
-  /**
-   * Additional props to be spread to the container element
-   */
+  // Allows for additional, arbitrary props to be passed to the component, providing extensibility.
   [key: string]: any;
 }
-
 export interface NavigationMenuListProps {
-  /**
-   * The content of the navigation menu list
-   */
+  // Required React node children to be rendered within the navigation menu list container.
   children: React.ReactNode;
-  /**
-   * Custom styles for the list
-   */
+  // An optional object for applying custom styles specifically to the list container.
   views?: {
     container?: ViewProps;
   };
 }
-
 export interface NavigationMenuItemProps {
-  /**
-   * The navigation item data
-   */
+  // An optional `NavigationItem` object containing data and configuration for the individual menu item.
   item?: NavigationItem;
-  /**
-   * The unique value for the item (used for compound component pattern)
-   */
+  // An optional string value associated with the menu item, often used for identification or state management.
   value?: string;
-  /**
-   * Whether the item is disabled
-   */
+  // A boolean flag indicating whether the menu item is disabled and therefore not interactive.
   isDisabled?: boolean;
-  /**
-   * The content of the item (used for compound component pattern)
-   */
+  // Optional React node children to be rendered within the menu item, providing its content.
   children?: React.ReactNode;
-  /**
-   * Custom styles for the item
-   */
+  // An optional object for applying custom styles to various sub-parts of the navigation menu item.
   views?: {
     item?: ViewProps;
     trigger?: ViewProps;
@@ -93,23 +54,14 @@ export interface NavigationMenuItemProps {
     indicator?: ViewProps;
   };
 }
-
 export interface NavigationMenuTriggerProps {
-  /**
-   * The content of the navigation menu trigger
-   */
+  // Required React node or element children that act as the visible trigger for the menu item (e.g., a button or label).
   children: React.ReactNode | React.ReactElement;
-  /**
-   * The ID of the item this trigger belongs to
-   */
+  // Required unique identifier for the menu item associated with this trigger.
   itemId: string;
-  /**
-   * Whether the item is disabled
-   */
+  // An optional boolean flag indicating whether the trigger element is disabled.
   disabled?: boolean;
-  /**
-   * Custom styles for the trigger
-   */
+  // An optional object for applying custom styles to various sub-parts of the navigation menu trigger.
   views?: {
     container?: ViewProps;
     icon?: ViewProps;
@@ -117,61 +69,36 @@ export interface NavigationMenuTriggerProps {
     indicator?: ViewProps;
   };
 }
-
 export interface NavigationMenuContentProps {
-  /**
-   * The content to be displayed
-   */
+  // Required React node children to be rendered as the content when the associated menu item is expanded.
   children: React.ReactNode;
-  /**
-   * The ID of the item this content belongs to
-   */
+  // Required unique identifier for the menu item this content belongs to.
   itemId: string;
-  /**
-   * Custom styles for the content
-   */
+  // An optional object for applying custom styles specifically to the content container.
   views?: {
     container?: ViewProps;
   };
 }
-
 export interface NavigationMenuLinkProps extends Omit<LinkProps, 'to'> {
-  /**
-   * The URL the link points to
-   */
+  // An optional string URL for the navigation link, used when the component functions as a clickable link.
   href?: string;
-  /**
-   * The content of the link
-   */
+  // Required React node children to be rendered as the visible content of the navigation link.
   children: React.ReactNode;
-  /**
-   * Custom styles for the link
-   */
+  // An optional object for applying custom styles to various sub-parts of the navigation link.
   views?: {
     container?: ViewProps;
     icon?: ViewProps;
   };
 }
-
 export interface NavigationMenuType extends React.FC<NavigationMenuProps> {
-  /**
-   * The list component for the navigation menu
-   */
+  // Represents the `List` sub-component of `NavigationMenu`, typed with its specific `NavigationMenuListProps`.
   List: React.FC<NavigationMenuListProps>;
-  /**
-   * The item component for the navigation menu
-   */
+  // Represents the `Item` sub-component of `NavigationMenu`, typed with its specific `NavigationMenuItemProps`.
   Item: React.FC<NavigationMenuItemProps>;
-  /**
-   * The trigger component for navigation menu items with sub-items
-   */
+  // Represents the `Trigger` sub-component of `NavigationMenu`, typed with its specific `NavigationMenuTriggerProps`.
   Trigger: React.FC<NavigationMenuTriggerProps>;
-  /**
-   * The content component for navigation menu items with sub-items
-   */
+  // Represents the `Content` sub-component of `NavigationMenu`, typed with its specific `NavigationMenuContentProps`.
   Content: React.FC<NavigationMenuContentProps>;
-  /**
-   * The link component for navigation menu items
-   */
+  // Represents the `Link` sub-component of `NavigationMenu`, typed with its specific `NavigationMenuLinkProps`.
   Link: React.FC<NavigationMenuLinkProps>;
 }

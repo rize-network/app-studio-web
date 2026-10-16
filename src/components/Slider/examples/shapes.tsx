@@ -4,7 +4,7 @@ import { Slider } from '../Slider';
 import { Shape } from '../Slider/Slider.type';
 
 export const ShapesDemo = () => {
-  const shapes: Shape[] = ['sharp', 'rounded', 'pillShaped'];
+  const shapes: Shape[] = ['square', 'rounded', 'pill'];
 
   return (
     <Vertical gap={30} width="100%" maxWidth={400}>

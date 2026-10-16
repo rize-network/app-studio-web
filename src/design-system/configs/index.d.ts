@@ -1,0 +1,21 @@
+import { DesignSystemConfig } from '../types';
+export declare const designSystemConfigs: {
+  airbnb: DesignSystemConfig;
+  apple: DesignSystemConfig;
+  coinbase: DesignSystemConfig;
+  figma: DesignSystemConfig;
+  linear: DesignSystemConfig;
+  nike: DesignSystemConfig;
+  notion: DesignSystemConfig;
+  revolut: DesignSystemConfig;
+  shopify: DesignSystemConfig;
+  spacex: DesignSystemConfig;
+  spotify: DesignSystemConfig;
+  stripe: DesignSystemConfig;
+  tesla: DesignSystemConfig;
+  uber: DesignSystemConfig;
+  vercel: DesignSystemConfig;
+};
+export type DesignSystemConfigId = keyof typeof designSystemConfigs;
+export declare const designSystemConfigList: DesignSystemConfig[];
+export declare const defaultDesignSystemConfig: DesignSystemConfig;

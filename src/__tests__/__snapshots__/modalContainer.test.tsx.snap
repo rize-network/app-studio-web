@@ -1,9 +1,10 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Modal Container to match snapshot 1`] = `
 <div
-  className="wh-100 ht-100 dy-flex fdn-column cror-default bcr- wh-100 ht-100 tn-all-0p3s-ease bsw-none brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px"
+  className="wh-100 ht-100 cror-default bcr-var--color-white wh-100 ht-100 tn-opacity-0p2s-ease-transform-0p2s-ease-box-shadow-0p2s-ease oy-1 tm-translateY0 bsw-none brs-8px mobile--wh-90 mobile--mwhh-100 mobile--mn-16px dy-flex fdn-column"
   onClick={[Function]}
+  ref={[Function]}
   role="container"
 >
   <div>

@@ -24,11 +24,7 @@ export const FormikSelectExemple = () => {
         <FormikForm>
           <Vertical gap={10}>
             <FormikSelect id="formik" name="formik" options={options} />
-            <Button
-              type="submit"
-              alignSelf="center"
-              onClick={props.handleSubmit}
-            >
+            <Button alignSelf="center" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Vertical>

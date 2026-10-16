@@ -1,0 +1,153 @@
+{
+  "componentDescription": "A versatile component for displaying headlines and text with various styling and animation options.",
+  "_isInView": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the title component is currently visible within the viewport, often used for scroll-triggered animations.",
+    "defaultValue": "undefined"
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "The content to be rendered inside the Title component, typically text.",
+    "defaultValue": "undefined"
+  },
+  "highlightText": {
+    "type": "string | string[]",
+    "typeValues": [],
+    "description": "Specifies text (or an array of texts) to be visually highlighted within the title's children.",
+    "defaultValue": "undefined"
+  },
+  "alternateHighlightText": {
+    "type": "string[]",
+    "typeValues": [],
+    "description": "Provides an array of alternative texts to cycle through for highlighting, creating a dynamic effect.",
+    "defaultValue": "undefined"
+  },
+  "highlightAnimate": {
+    "type": "AnimationProps | AnimationProps[]",
+    "typeValues": [],
+    "description": "Defines animation properties for the highlighted text, allowing for custom motion effects.",
+    "defaultValue": "undefined"
+  },
+  "highlightTypewriter": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Enables a typewriter effect for the highlighted text, revealing it character by character.",
+    "defaultValue": "false"
+  },
+  "highlightTypewriterDuration": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Sets the duration (in milliseconds) for the typewriter animation effect.",
+    "defaultValue": "3000"
+  },
+  "highlightSlide": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Enables a slide-in effect for the highlighted text.",
+    "defaultValue": "false"
+  },
+  "highlightSlideDuration": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Sets the duration (in milliseconds) for the slide-in animation effect.",
+    "defaultValue": "500"
+  },
+  "highlightSlideStagger": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Specifies a stagger delay (in milliseconds) for each character or word in the slide-in animation.",
+    "defaultValue": "50"
+  },
+  "highlightSlideSequential": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Determines if highlighted slides appear one after another sequentially, rather than all at once.",
+    "defaultValue": "true"
+  },
+  "highlightStyle": {
+    "type": "HighlightStyle",
+    "typeValues": [
+      "underline",
+      "background",
+      "gradient",
+      "outline",
+      "glow",
+      "solid",
+      "default"
+    ],
+    "description": "Defines the visual style for the highlighted text (e.g., underline, background fill).",
+    "defaultValue": "solid"
+  },
+  "highlightColor": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Sets the primary color for the highlight effect.",
+    "defaultValue": "theme-primary"
+  },
+  "highlightSecondaryColor": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Sets a secondary color for complex highlight styles that may involve gradients or dual-color effects.",
+    "defaultValue": "undefined"
+  },
+  "animate": {
+    "type": "AnimationProps | AnimationProps[]",
+    "typeValues": [],
+    "description": "Defines general animation properties for the entire title component, not just the highlighted parts.",
+    "defaultValue": "undefined"
+  },
+  "animationLoop": {
+    "type": "number | 'infinite'",
+    "typeValues": [],
+    "description": "Controls how many times the main animation should loop, or 'infinite' for continuous looping.",
+    "defaultValue": "1"
+  },
+  "highlightAnimationLoop": {
+    "type": "number | 'infinite'",
+    "typeValues": [],
+    "description": "Controls how many times the highlight animation should loop, or 'infinite' for continuous looping.",
+    "defaultValue": "1"
+  },
+  "size": {
+    "type": "TitleSize",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Specifies the predefined size of the title (e.g., 'small', 'medium', 'large').",
+    "defaultValue": "lg"
+  },
+  "responsive": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Enables or disables responsive behavior for the title, adapting its appearance to different screen sizes.",
+    "defaultValue": "undefined"
+  },
+  "views": {
+    "type": "TitleStyles",
+    "typeValues": {
+      "container": "ViewProps",
+      "text": "ViewProps",
+      "highlight": "ViewProps"
+    },
+    "description": "Allows custom styling to be applied to different parts or states of the title component.",
+    "defaultValue": "undefined"
+  },
+  "alternateAnimation": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Enables an alternative animation sequence or style for the component.",
+    "defaultValue": "undefined"
+  },
+  "alternateDuration": {
+    "type": "number",
+    "typeValues": [],
+    "description": "Sets the duration (in milliseconds) for the alternate animation effect.",
+    "defaultValue": "undefined"
+  }
+}

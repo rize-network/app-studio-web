@@ -15,56 +15,138 @@ import { Shape, Size, Variant } from './Badge.type';
 /**
  * Badge sizes following the 4px grid system
  */
+/**
+ * A badge is a secondary label, so its type ramp sits one step below the
+ * control ramp: `md` is 12px in a 24px pill, against 14px body text and a 40px
+ * `md` control.
+ *
+ * It used to share the control ramp exactly — `md` was 14px in a 28px pill —
+ * which made a status badge read as loudly as the row it annotated: in a user
+ * table, "SYSTEM_ADMIN" competed with the person's name rather than supporting
+ * it.
+ *
+ * `lg`/`xl` still reach the old `md`/`lg` sizes for the cases that genuinely
+ * need a prominent badge.
+ */
 export const BadgeSizes: Record<Size, ViewProps> = {
   xs: {
-    // Height: 20px (5 × 4px)
+    minWidth: '16px',
+    height: '16px',
+    padding: '0 4px',
+    fontSize: '9px',
+    fontWeight: '600',
+    lineHeight: '12px',
+    letterSpacing: '-0.01em',
+  },
+  sm: {
     minWidth: '20px',
     height: '20px',
     padding: '0 6px',
-    // Typography
-    fontSize: '10px', // Harmonized font size
-    fontWeight: '500', // Medium weight for better readability
-    lineHeight: '20px', // Match height for vertical centering
+    fontSize: '10px',
+    fontWeight: '600',
+    lineHeight: '14px',
+    letterSpacing: '-0.01em',
   },
-  sm: {
-    // Height: 24px (6 × 4px)
+  md: {
     minWidth: '24px',
     height: '24px',
     padding: '0 8px',
-    // Typography
-    fontSize: '12px', // Harmonized font size
-    fontWeight: '500', // Medium weight
-    lineHeight: '24px',
+    fontSize: '12px',
+    fontWeight: '600',
+    lineHeight: '16px',
+    letterSpacing: '-0.01em',
   },
-  md: {
-    // Height: 28px (7 × 4px)
+  lg: {
     minWidth: '28px',
     height: '28px',
     padding: '0 10px',
-    // Typography
-    fontSize: '14px', // Harmonized font size
-    fontWeight: '500', // Medium weight
-    lineHeight: '28px',
+    fontSize: '14px',
+    fontWeight: '600',
+    lineHeight: '20px',
+    letterSpacing: '-0.01em',
   },
-  lg: {
-    // Height: 32px (8 × 4px)
+  xl: {
     minWidth: '32px',
     height: '32px',
     padding: '0 12px',
-    // Typography
-    fontSize: '16px', // Harmonized font size
-    fontWeight: '500', // Medium weight
-    lineHeight: '32px',
+    fontSize: '16px',
+    fontWeight: '600',
+    lineHeight: '24px',
+    letterSpacing: '-0.01em',
+  },
+};
+
+export const BadgeAnnouncementSizes: Record<Size, ViewProps> = {
+  xs: {
+    gap: '6px',
+    padding: '3px 8px 3px 3px',
+  },
+  sm: {
+    gap: '8px',
+    padding: '4px 10px 4px 4px',
+  },
+  md: {
+    gap: '12px',
+    padding: '6px 16px 6px 6px',
+  },
+  lg: {
+    gap: '12px',
+    padding: '7px 18px 7px 7px',
   },
   xl: {
-    // Height: 36px (9 × 4px)
-    minWidth: '36px',
-    height: '36px',
-    padding: '0 14px',
-    // Typography
-    fontSize: '20px', // Harmonized font size
-    fontWeight: '500', // Medium weight
-    lineHeight: '36px',
+    gap: '14px',
+    padding: '8px 20px 8px 8px',
+  },
+};
+
+export const BadgePastilContentSizes: Record<Size, ViewProps> = {
+  xs: {
+    padding: '2px 6px',
+    fontSize: '9px',
+    lineHeight: '12px',
+  },
+  sm: {
+    padding: '3px 8px',
+    fontSize: '10px',
+    lineHeight: '14px',
+  },
+  md: {
+    padding: '6px 12px',
+    fontSize: '11px',
+    lineHeight: '14px',
+  },
+  lg: {
+    padding: '7px 14px',
+    fontSize: '12px',
+    lineHeight: '16px',
+  },
+  xl: {
+    padding: '8px 16px',
+    fontSize: '13px',
+    lineHeight: '18px',
+  },
+};
+
+export const BadgeAnnouncementTextSizes: Record<Size, ViewProps> = {
+  xs: {
+    fontSize: '11px',
+    lineHeight: '14px',
+  },
+  sm: {
+    fontSize: '12px',
+    lineHeight: '16px',
+  },
+  md: {
+    fontSize: '13px',
+    lineHeight: '18px',
+  },
+  lg: {
+    fontSize: '14px',
+    lineHeight: '20px',
+  },
+  xl: {
+    fontSize: '15px',
+    lineHeight: '22px',
   },
 };
 
@@ -72,9 +154,9 @@ export const BadgeSizes: Record<Size, ViewProps> = {
  * Badge shapes with consistent border radius
  */
 export const BadgeShapes: Record<Shape, number | string> = {
-  sharp: 0,
+  square: 0,
   rounded: '8px', // Consistent with design system (rounded-md)
-  pillShaped: '9999px', // Full rounded for pill shape
+  pill: '9999px', // Full rounded for pill shape
 };
 
 /**
@@ -87,46 +169,92 @@ export const PositionStyles: { [key: string]: React.CSSProperties } = {
   'bottom-left': { bottom: '4px', left: '4px', position: 'absolute' },
 };
 
+export const getBadgeAnnouncementVariant = (themeMode: string): ViewProps => {
+  const isDark = themeMode === 'dark';
+
+  return {
+    display: 'inline-flex',
+    height: 'auto',
+    minWidth: 'auto',
+    backgroundColor: 'color-white-600',
+    color: 'color-gray-900',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'color-white',
+    backdropFilter: 'blur(12px)',
+    boxShadow: '0 1px 2px rgba(15, 23, 42, 0.08)',
+    transition:
+      'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
+    _hover: {
+      backgroundColor: 'color-white-800',
+      boxShadow: '0 2px 8px rgba(15, 23, 42, 0.1)',
+    },
+  };
+};
+
 /**
  * Get badge variants with consistent styling based on theme mode
  */
 export const getBadgeVariants = (
   themeMode: string
 ): Record<Variant, ViewProps> => {
+  const isDark = themeMode === 'dark';
+
   return {
     filled: {
-      backgroundColor: 'theme.primary',
-      color: 'color.white',
+      backgroundColor: 'theme-primary',
+      color: 'color-white',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'transparent',
-      transition: 'all 0.2s ease',
+      borderColor: 'theme-primary',
+      transition: 'background-color 0.2s ease, opacity 0.2s ease',
+      _hover: {
+        opacity: 0.9,
+      },
+      _active: {
+        opacity: 0.95,
+      },
     },
     outline: {
-      backgroundColor: 'transparent',
       borderWidth: '1px',
       borderStyle: 'solid',
-      borderColor: 'theme.primary',
-      color: 'theme.primary',
-      transition: 'all 0.2s ease',
+      borderColor: 'theme-primary',
+      color: 'theme-primary',
+      style: { backgroundColor: 'transparent' },
+      transition: 'border-color 0.2s ease, opacity 0.2s ease',
+      _hover: {
+        opacity: 0.9,
+      },
+      _active: {
+        opacity: 0.95,
+      },
     },
     link: {
-      backgroundColor: 'transparent',
-      borderWidth: '1px',
-      borderStyle: 'solid',
-      borderColor: 'transparent',
-      color: 'theme.primary',
+      borderWidth: 0,
+      borderStyle: 'none',
+      borderColor: 'theme-primary',
+      color: 'theme-primary',
       textDecoration: 'underline',
-      textUnderlineOffset: '2px',
-      transition: 'all 0.2s ease',
+      style: {
+        backgroundColor: 'transparent',
+        textUnderlineOffset: '2px',
+        textDecorationThickness: '1px',
+      },
+      transition: 'opacity 0.2s ease',
+      _hover: {
+        opacity: 0.8,
+      },
     },
     ghost: {
-      backgroundColor: 'transparent',
-      color: 'color.gray.500',
-      borderWidth: '1px',
+      color: 'color-gray-500',
+      borderWidth: 0,
       borderStyle: 'solid',
-      borderColor: 'transparent',
-      transition: 'all 0.2s ease',
+      borderColor: 'color-gray-500',
+      style: { backgroundColor: 'transparent' },
+      transition: 'background-color 0.2s ease, color 0.2s ease',
+      _hover: {
+        backgroundColor: 'color-gray-100',
+      },
     },
   };
 };

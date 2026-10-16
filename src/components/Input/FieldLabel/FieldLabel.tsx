@@ -16,26 +16,23 @@ export const FieldLabel: React.FC<LabelProps> = ({
   children,
   size = 'md',
   error = false,
-  color = 'theme.primary',
+  color = 'theme-primary',
   views = { label: {} },
   helperText,
   ...props
 }) => (
   <Label
-    // Position properties
-    top={0} // 2 × 4px grid
-    zIndex={-10}
-    position="absolute"
-    // Typography properties
+    position="static"
     fontSize={LabelSizes[size]}
-    lineHeight={LabelSizes[size]}
-    letterSpacing="-0.01em" // Slight negative tracking for modern look
+    letterSpacing="-0.01em"
     whiteSpace="nowrap"
-    // Color properties
-    color={error ? 'color.red.500' : color}
-    // Animation
-    transition="all 0.2s ease"
-    // Apply custom styles
+    fontWeight={500}
+    // Full opacity always: dimming inherited ink to 0.72 at 11–12px lands
+    // under the 4.5:1 contrast ratio and fails axe (serious) on every form
+    // screen. De-emphasis, where a design wants it, belongs to a color token
+    // that still clears the ratio — not to an opacity filter.
+    color={error ? 'color-red-500' : 'inherit'}
+    transition="color 0.2s ease"
     {...views['label']}
     {...props}
   >

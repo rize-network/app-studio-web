@@ -15,7 +15,7 @@ export const PlaceholderArea = () => {
     <form onSubmit={handleSubmit}>
       <Horizontal gap={10} alignItems="center" flexWrap="nowrap">
         <TextArea name="comment" placeholder="Type your comment here..." />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

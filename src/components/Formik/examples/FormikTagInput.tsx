@@ -1,7 +1,7 @@
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Vertical, Horizontal, Text } from 'app-studio';
+import { View, Vertical, Horizontal, Text } from 'app-studio';
 import { FormikTagInput } from '../Formik.TagInput';
 import { Button } from '../../Button/Button';
 
@@ -48,8 +48,8 @@ export const FormikTagInputExample = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ values, errors, touched, isSubmitting }) => (
-          <Form>
+        {({ values, errors, touched, isSubmitting, handleSubmit }) => (
+          <View>
             <Vertical gap={20}>
               {/* Skills TagInput */}
               <FormikTagInput
@@ -79,7 +79,7 @@ export const FormikTagInputExample = () => {
                 allowDuplicates={true}
                 separators={['enter', 'comma']}
                 variant="outline"
-                shape="pillShaped"
+                shape="pill"
                 size="md"
               />
 
@@ -87,7 +87,7 @@ export const FormikTagInputExample = () => {
               <Vertical
                 gap={10}
                 padding={16}
-                backgroundColor="color.gray.50"
+                backgroundColor="color-gray-50"
                 borderRadius="8px"
               >
                 <Text fontWeight="bold">Current Form Values:</Text>
@@ -108,19 +108,19 @@ export const FormikTagInputExample = () => {
                 <Vertical
                   gap={5}
                   padding={16}
-                  backgroundColor="color.red.50"
+                  backgroundColor="color-red-50"
                   borderRadius="8px"
                 >
-                  <Text fontWeight="bold" color="color.red.600">
+                  <Text fontWeight="bold" color="color-red-600">
                     Validation Errors:
                   </Text>
                   {errors.skills && touched.skills && (
-                    <Text fontSize={14} color="color.red.600">
+                    <Text fontSize={14} color="color-red-600">
                       Skills: {errors.skills}
                     </Text>
                   )}
                   {errors.interests && touched.interests && (
-                    <Text fontSize={14} color="color.red.600">
+                    <Text fontSize={14} color="color-red-600">
                       Interests: {errors.interests}
                     </Text>
                   )}
@@ -130,17 +130,17 @@ export const FormikTagInputExample = () => {
               {/* Submit Button */}
               <Horizontal justifyContent="flex-start">
                 <Button
-                  type="submit"
                   variant="filled"
                   size="md"
                   isLoading={isSubmitting}
                   isDisabled={isSubmitting}
+                  onClick={handleSubmit}
                 >
                   Submit Form
                 </Button>
               </Horizontal>
             </Vertical>
-          </Form>
+          </View>
         )}
       </Formik>
     </Vertical>
@@ -174,7 +174,7 @@ export const FormikTagInputAdvanced = () => {
         onSubmit={(values) => console.log('Advanced form:', values)}
       >
         {({ values }) => (
-          <Form>
+          <View>
             <Vertical gap={20}>
               <FormikTagInput
                 name="categories"
@@ -192,16 +192,16 @@ export const FormikTagInputAdvanced = () => {
                 shadow={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px' }}
                 views={{
                   inputContainer: {
-                    borderColor: 'theme.primary',
+                    borderColor: 'theme-primary',
                     borderWidth: '2px',
-                    backgroundColor: 'color.blue.50',
+                    backgroundColor: 'color-blue-50',
                   },
                   tag: {
-                    backgroundColor: 'theme.primary',
-                    borderColor: 'theme.primary',
+                    backgroundColor: 'theme-primary',
+                    borderColor: 'theme-primary',
                   },
                   tagText: {
-                    color: 'color.white',
+                    color: 'color-white',
                   },
                   tagRemove: {
                     _hover: {
@@ -209,17 +209,17 @@ export const FormikTagInputAdvanced = () => {
                     },
                   },
                   label: {
-                    color: 'theme.primary',
+                    color: 'theme-primary',
                     fontWeight: 'bold',
                   },
                 }}
               />
 
-              <Text fontSize={14} color="color.gray.600">
+              <Text fontSize={14} color="color-gray-600">
                 Categories: {values.categories.join(' • ')}
               </Text>
             </Vertical>
-          </Form>
+          </View>
         )}
       </Formik>
     </Vertical>

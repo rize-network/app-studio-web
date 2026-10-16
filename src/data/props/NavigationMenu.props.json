@@ -1,0 +1,68 @@
+{
+  "componentDescription": "A versatile component for building structured and interactive navigation menus for web applications.",
+  "items": {
+    "type": "NavigationItem[]",
+    "typeValues": [],
+    "description": "An optional array of `NavigationItem` objects, used to define the structure and content of the navigation menu.",
+    "defaultValue": "undefined"
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "An optional React node that can be rendered inside the `NavigationMenu` component, allowing for flexible content placement.",
+    "defaultValue": "undefined"
+  },
+  "orientation": {
+    "type": "Orientation",
+    "typeValues": [
+      "horizontal",
+      "vertical"
+    ],
+    "description": "Defines the visual orientation of the navigation menu, such as 'horizontal' or 'vertical'.",
+    "defaultValue": "vertical"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Specifies the visual size of the navigation menu, affecting its overall dimensions.",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "filled",
+      "outline"
+    ],
+    "description": "Determines the visual style or variant of the navigation menu, allowing for different appearances.",
+    "defaultValue": "default"
+  },
+  "defaultActiveItemId": {
+    "type": "string",
+    "typeValues": [],
+    "description": "",
+    "defaultValue": "undefined"
+  },
+  "defaultExpandedItemIds": {
+    "type": "string[]",
+    "typeValues": [],
+    "description": "",
+    "defaultValue": "undefined"
+  },
+  "onItemActivate": {
+    "type": "(itemId: string) => void",
+    "typeValues": [],
+    "description": "A callback function triggered when a navigation item is activated, providing the ID of the activated item as a parameter.",
+    "defaultValue": "undefined"
+  },
+  "views": {
+    "type": "NavigationMenuStyles",
+    "typeValues": [],
+    "description": "An optional object used to apply custom styling to different parts of the navigation menu component.",
+    "defaultValue": "undefined"
+  }
+}

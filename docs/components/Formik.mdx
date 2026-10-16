@@ -2,9 +2,16 @@
 
 Formik integration components for form state management and validation.
 
+> **React Native:** `FormikForm` renders through the native `Form` primitive,
+> which is a `View`, not a browser form. Keep ``/`type="reset"` for
+> web semantics and also wire `onClick={handleSubmit}` or
+> `onClick={handleReset}` explicitly. With `autoFocus`, single-line
+> fields use `returnKeyType`/`onSubmitEditing` to advance and submit; labels,
+> validation, and accessibility still need their native component wiring.
+
 ### **Import**
   ```tsx
-  import { FormikForm, FormikTextField, FormikCheckbox, FormikChatInput, FormikColorInput, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider } from '@app-studio/web';
+  import { FormikForm, FormikTextField, FormikCheckbox, FormikChatInput, FormikColorInput, FormikSelect, FormikSwitch, FormikTextArea, FormikDatePicker, FormikCountryPicker, FormikPassword, FormikComboBox, FormikSlider, FormikIconPicker, FormikEmojiPicker, FormikOTPInput, FormikRadio, FormikSelector, FormikTagInput, FormikToggle, FormikToggleGroup, FormikUploader } from '@app-studio/components';
   ```
 
 ### **Basic Form**
@@ -14,11 +21,11 @@ A basic form with Formik integration.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikTextField } from '../Formik.TextField';
-import { FormikCheckbox } from '../Formik.Checkbox';
-import { Button } from '../../Button/Button';
-import { Vertical } from 'app-studio';
+import { FormikForm } from '@app-studio/components';
+import { FormikTextField } from '@app-studio/components';
+import { FormikCheckbox } from '@app-studio/components';
+import { Button } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const BasicFormExample = () => {
   // Define initial values
@@ -72,7 +79,7 @@ export const BasicFormExample = () => {
               name="agreeToTerms"
               label="I agree to the terms and conditions"
             />
-            <Button type="submit" onClick={handleSubmit}>
+            <Button  onClick={handleSubmit}>
               Submit
             </Button>
           </Vertical>
@@ -90,9 +97,9 @@ Text input field integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikTextField } from '../Formik.TextField';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikTextField } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikTextFieldExample = () => {
   return (
@@ -111,7 +118,7 @@ export const FormikTextFieldExample = () => {
             placeholder="Enter username"
             helperText="Your unique username"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -128,9 +135,9 @@ Multi-line text input integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikTextArea } from '../Formik.TextArea';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikTextArea } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikTextAreaExample = () => {
   return (
@@ -149,7 +156,7 @@ export const FormikTextAreaExample = () => {
             placeholder="Enter your comments"
             rows={4}
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -166,9 +173,9 @@ Checkbox input integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikCheckbox } from '../Formik.Checkbox';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikCheckbox } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikCheckboxExample = () => {
   return (
@@ -185,7 +192,7 @@ export const FormikCheckboxExample = () => {
             name="subscribe"
             label="Subscribe to newsletter"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -202,9 +209,9 @@ Chat input with file upload, mentions, and auto-completion integrated with Formi
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikChatInput } from '../Formik.ChatInput';
-import { Button, Vertical, Text } from 'app-studio';
+import { FormikForm } from '@app-studio/components';
+import { FormikChatInput } from '@app-studio/components';
+import { Button, Vertical, Text } from '@app-studio/components';
 
 export const FormikChatInputExample = () => {
   const mentionData = [
@@ -245,7 +252,7 @@ export const FormikChatInputExample = () => {
                   <Text
                     key={index}
                     padding={8}
-                    backgroundColor="color.gray.100"
+                    backgroundColor="color-gray-100"
                     borderRadius={8}
                   >
                     {msg}
@@ -268,7 +275,7 @@ export const FormikChatInputExample = () => {
             />
 
             <Button
-              type="submit"
+              
               onClick={handleSubmit}
               disabled={!values.message?.trim()}
             >
@@ -289,16 +296,16 @@ Color picker input integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikColorInput } from '../Formik.ColorInput';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikColorInput } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikColorInputExample = () => {
   return (
     <Formik
       initialValues={{
-        backgroundColor: 'color.blue.500',
-        textColor: 'color.white'
+        backgroundColor: 'color-blue-500',
+        textColor: 'color-white'
       }}
       validationSchema={Yup.object({
         backgroundColor: Yup.string().required('Background color is required'),
@@ -332,7 +339,7 @@ export const FormikColorInputExample = () => {
             Preview: This is how your colors will look
           </div>
 
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -349,9 +356,9 @@ Select dropdown integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikSelect } from '../Formik.Select';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikSelect } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikSelectExample = () => {
   const options = [
@@ -376,7 +383,7 @@ export const FormikSelectExample = () => {
             options={options}
             placeholder="Select a fruit"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -392,9 +399,9 @@ Toggle switch integrated with Formik.
 ```tsx
 import React from 'react';
 import { Formik } from 'formik';
-import { FormikForm } from '../Formik.Form';
-import { FormikSwitch } from '../Formik.Switch';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikSwitch } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikSwitchExample = () => {
   return (
@@ -408,7 +415,7 @@ export const FormikSwitchExample = () => {
             name="darkMode"
             label="Dark Mode"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -425,9 +432,9 @@ Date picker integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikDatePicker } from '../Formik.DatePicker';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikDatePicker } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikDatePickerExample = () => {
   return (
@@ -445,7 +452,7 @@ export const FormikDatePickerExample = () => {
             label="Birthdate"
             placeholder="Select your birthdate"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -462,9 +469,9 @@ Country selection dropdown integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikCountryPicker } from '../Formik.CountryPicker';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikCountryPicker } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikCountryPickerExample = () => {
   return (
@@ -482,7 +489,7 @@ export const FormikCountryPickerExample = () => {
             label="Country"
             placeholder="Select your country"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -499,9 +506,9 @@ Password input with show/hide toggle integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikPassword } from '../Formik.Password';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikPassword } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikPasswordExample = () => {
   return (
@@ -521,7 +528,7 @@ export const FormikPasswordExample = () => {
             label="Password"
             placeholder="Enter your password"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -538,9 +545,9 @@ Combobox with search functionality integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikComboBox } from '../Formik.ComboBox';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikComboBox } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikComboBoxExample = () => {
   const items = [
@@ -566,7 +573,7 @@ export const FormikComboBoxExample = () => {
             placeholder="Select or search for a framework"
             items={items}
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -583,9 +590,9 @@ Slider component integrated with Formik.
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FormikForm } from '../Formik.Form';
-import { FormikSlider } from '../Formik.Slider';
-import { Button } from '../../Button/Button';
+import { FormikForm } from '@app-studio/components';
+import { FormikSlider } from '@app-studio/components';
+import { Button } from '@app-studio/components';
 
 export const FormikSliderExample = () => {
   return (
@@ -610,7 +617,7 @@ export const FormikSliderExample = () => {
             showValue
             helperText="Adjust the volume level"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -618,4 +625,273 @@ export const FormikSliderExample = () => {
     </Formik>
   );
 };
+```
+
+### **FormikIconPicker**
+Icon picker integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikIconPicker, Button } from '@app-studio/components';
+
+export const FormikIconPickerExample = () => (
+  <Formik
+    initialValues={{ icon: 'user' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikIconPicker
+          name="icon"
+          label="Select Icon"
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikEmojiPicker**
+Emoji picker integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikEmojiPicker, Button } from '@app-studio/components';
+
+export const FormikEmojiPickerExample = () => (
+  <Formik
+    initialValues={{ emoji: '👍' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikEmojiPicker
+          name="emoji"
+          label="Select Emoji"
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikOTPInput**
+OTP input integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikOTPInput, Button } from '@app-studio/components';
+
+export const FormikOTPInputExample = () => (
+  <Formik
+    initialValues={{ otp: '' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikOTPInput
+          name="otp"
+          label="Verification Code"
+          length={6}
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Verify
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikRadio**
+Radio button group integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikRadio, Button } from '@app-studio/components';
+
+export const FormikRadioExample = () => (
+  <Formik
+    initialValues={{ gender: '' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikRadio
+          name="gender"
+          label="Gender"
+          options={[
+            { label: 'Male', value: 'male' },
+            { label: 'Female', value: 'female' },
+            { label: 'Other', value: 'other' },
+          ]}
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikSelector**
+Selector component integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikSelector, Button } from '@app-studio/components';
+
+export const FormikSelectorExample = () => (
+  <Formik
+    initialValues={{ plan: 'basic' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikSelector
+          name="plan"
+          label="Subscription Plan"
+          options={[
+            { label: 'Basic', value: 'basic', description: 'Basic plan description' },
+            { label: 'Pro', value: 'pro', description: 'Pro plan description' },
+          ]}
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikTagInput**
+Tag input integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikTagInput, Button } from '@app-studio/components';
+
+export const FormikTagInputExample = () => (
+  <Formik
+    initialValues={{ tags: [] }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikTagInput
+          name="tags"
+          label="Tags"
+          placeholder="Type and press enter..."
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikToggle**
+Toggle switch integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikToggle, Button } from '@app-studio/components';
+
+export const FormikToggleExample = () => (
+  <Formik
+    initialValues={{ notifications: true }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikToggle
+          name="notifications"
+          label="Enable Notifications"
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikToggleGroup**
+Group of toggles integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikToggleGroup, Button } from '@app-studio/components';
+
+export const FormikToggleGroupExample = () => (
+  <Formik
+    initialValues={{ alignment: 'left' }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikToggleGroup
+          name="alignment"
+          label="Text Alignment"
+          options={[
+            { label: 'Left', value: 'left' },
+            { label: 'Center', value: 'center' },
+            { label: 'Right', value: 'right' },
+          ]}
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
+```
+
+### **FormikUploader**
+File uploader integrated with Formik.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { FormikForm, FormikUploader, Button } from '@app-studio/components';
+
+export const FormikUploaderExample = () => (
+  <Formik
+    initialValues={{ files: [] }}
+    onSubmit={(values) => alert(JSON.stringify(values))}
+  >
+    {({ handleSubmit }) => (
+      <FormikForm>
+        <FormikUploader
+          name="files"
+          label="Upload Files"
+          multiple
+        />
+        <Button  onClick={handleSubmit} marginTop={16}>
+          Submit
+        </Button>
+      </FormikForm>
+    )}
+  </Formik>
+);
 ```

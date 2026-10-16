@@ -1,39 +1,17 @@
 import { ViewProps } from 'app-studio';
 import { TitleSize, HighlightStyle } from './Title.type';
-
-/**
- * Font sizes for different title sizes
- */
+// Defines a mapping of abstract title sizes (xs, sm, md, lg, xl) to their corresponding fixed pixel values for consistent sizing across the component.
 export const TitleSizes = {
   xs: 24,
-  sm: 36,
+  sm: 32,
   md: 48,
-  lg: 64,
-  xl: 72,
+  lg: 96,
+  xl: 110,
 };
-
-/**
- * Line heights for different title sizes
- */
-export const LineHeights: Record<TitleSize, number> = {
-  xs: 32,
-  sm: 48,
-  md: 56,
-  lg: 72,
-  xl: 80,
-};
-
-/**
- * Responsive typography system that maps title sizes to responsive breakpoints
- * Based on the Typography system with dynamic breakpoint sizing
- */
+// Provides a comprehensive set of responsive typography settings. It maps each defined `TitleSize` to specific font sizes and optional width constraints tailored for various device breakpoints (mobile, tablet, desktop).
 export const ResponsiveTypography: Record<
   TitleSize,
   {
-    lineHeight: string;
-    fontWeight: number;
-    marginBottom?: number;
-    letterSpacing?: number;
     media: {
       mobile: { fontSize: number; width?: string; minWidth?: string };
       tablet: { fontSize: number; width?: string; minWidth?: string };
@@ -41,65 +19,43 @@ export const ResponsiveTypography: Record<
     };
   }
 > = {
-  // xl maps to H1 - Largest heading
   xl: {
-    lineHeight: '120%',
-    fontWeight: 500,
-    marginBottom: 20,
-    letterSpacing: 1.25,
     media: {
-      mobile: { fontSize: 42, width: '100%' },
-      tablet: { fontSize: 50, width: '100%' },
-      desktop: { fontSize: 58, minWidth: '60%' },
+      mobile: { fontSize: 48 },
+      tablet: { fontSize: 96 },
+      desktop: { fontSize: 110 },
     },
   },
-  // lg maps to H2 - Large heading
   lg: {
-    lineHeight: '100%',
-    fontWeight: 500,
+    media: {
+      mobile: { fontSize: 48 },
+      tablet: { fontSize: 48 },
+      desktop: { fontSize: 70 },
+    },
+  },
+  md: {
     media: {
       mobile: { fontSize: 32 },
       tablet: { fontSize: 40 },
-      desktop: { fontSize: 48 },
+      desktop: { fontSize: 56 },
     },
   },
-  // md maps to H3 - Medium heading
-  md: {
-    lineHeight: '100%',
-    fontWeight: 500,
+  sm: {
     media: {
       mobile: { fontSize: 20 },
-      tablet: { fontSize: 30 },
-      desktop: { fontSize: 40 },
-    },
-  },
-  // sm maps to T1 - Title text
-  sm: {
-    lineHeight: '100%',
-    fontWeight: 400,
-    letterSpacing: -0.2,
-    media: {
-      mobile: { fontSize: 16 },
-      tablet: { fontSize: 28 },
+      tablet: { fontSize: 24 },
       desktop: { fontSize: 32 },
     },
   },
-  // xs maps to S1 - Subtitle text
   xs: {
-    lineHeight: '120%',
-    fontWeight: 400,
-    letterSpacing: -0.2,
     media: {
-      mobile: { fontSize: 12 },
+      mobile: { fontSize: 14 },
       tablet: { fontSize: 18 },
-      desktop: { fontSize: 24 },
+      desktop: { fontSize: 20 },
     },
   },
 };
-
-/**
- * Default styles for different highlight types
- */
+// Contains a collection of functions, each representing a distinct text highlight style. These functions accept primary and optional secondary color parameters and return `ViewProps` objects with the necessary CSS-like properties to apply the chosen highlight effect.
 export const HighlightStyles: Record<
   HighlightStyle,
   (color: string, secondaryColor?: string) => ViewProps
@@ -112,22 +68,22 @@ export const HighlightStyles: Record<
   }),
   background: (color) => ({
     backgroundColor: color,
-    color: 'color.white',
+    color: 'color-white',
     padding: '0 8px',
     borderRadius: '4px',
   }),
   gradient: (color, secondaryColor) => ({
     background: `linear-gradient(135deg, ${color}, ${secondaryColor || color})`,
-    backgroundClip: 'text !important',
-    webkitBackgroundClip: 'text !important',
+    backgroundClip: 'text',
+    WebkitBackgroundClip: 'text !important',
+    WebkitTextFillColor: 'transparent',
     color: 'transparent',
-    webkitTextFillColor: 'transparent',
     display: 'inline-block',
     textShadow: 'none',
   }),
   outline: (color) => ({
-    webkitTextStroke: `1px ${color}`,
-    webkitTextFillColor: 'transparent',
+    WebkitTextStroke: `1px ${color}`,
+    WebkitTextFillColor: 'transparent !important',
     color: 'transparent',
     textShadow: 'none',
   }),
@@ -135,4 +91,8 @@ export const HighlightStyles: Record<
     color: color,
     textShadow: `0 0 10px ${color}80, 0 0 20px ${color}40, 0 0 30px ${color}20`,
   }),
+  solid: (color) => ({
+    color: color,
+  }),
+  default: () => ({}),
 };

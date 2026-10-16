@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '../../Button/Button';
 import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { OTPInput } from '../OTPInput';
 
 export const PasswordOTPInput = () => {
@@ -32,7 +32,7 @@ export const PasswordOTPInput = () => {
         onComplete={handleComplete}
         isAutoFocus
       />
-      {isComplete && <Text color="theme.success">PIN entry complete!</Text>}
+      {isComplete && <Text color="theme-success">PIN entry complete!</Text>}
       <Horizontal gap={10}>
         <Button onClick={resetOTP} isAuto variant="outline">
           Reset

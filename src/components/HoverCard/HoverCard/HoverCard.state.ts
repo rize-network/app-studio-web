@@ -1,10 +1,8 @@
 import { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import { HoverCardProps } from './HoverCard.props';
-
-// Generate a unique ID for ARIA attributes
 const generateId = (prefix: string) =>
   `${prefix}-${Math.random().toString(36).substring(2, 9)}`;
-
+// This file encapsulates the entire state management logic for the HoverCard component, including its open/close state, delay timers, and DOM references, exposed via the `useHoverCardState` hook.
 export const useHoverCardState = ({
   openDelay = 200,
   closeDelay = 300,
@@ -12,15 +10,10 @@ export const useHoverCardState = ({
   const [isOpen, setIsOpen] = useState(false);
   const openTimerRef = useRef<NodeJS.Timeout | null>(null);
   const closeTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Refs for trigger and content elements for positioning
   const triggerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  // Unique IDs for ARIA attributes
   const contentId = useMemo(() => generateId('hovercard-content'), []);
   const triggerId = useMemo(() => generateId('hovercard-trigger'), []);
-
   const clearTimers = useCallback(() => {
     if (openTimerRef.current) {
       clearTimeout(openTimerRef.current);
@@ -31,38 +24,31 @@ export const useHoverCardState = ({
       closeTimerRef.current = null;
     }
   }, []);
-
   const openCard = useCallback(() => {
-    clearTimers(); // Clear any pending close
+    clearTimers();
     if (!isOpen) {
       openTimerRef.current = setTimeout(() => {
         setIsOpen(true);
       }, openDelay);
     }
   }, [isOpen, openDelay, clearTimers]);
-
   const closeCard = useCallback(() => {
-    clearTimers(); // Clear any pending open
+    clearTimers();
     if (isOpen) {
       closeTimerRef.current = setTimeout(() => {
         setIsOpen(false);
       }, closeDelay);
     }
   }, [isOpen, closeDelay, clearTimers]);
-
-  // Function specifically to cancel the close timer (e.g., when mouse enters content)
   const cancelCloseTimer = useCallback(() => {
     if (closeTimerRef.current) {
       clearTimeout(closeTimerRef.current);
       closeTimerRef.current = null;
     }
   }, []);
-
-  // Cleanup timers on unmount
   useEffect(() => {
     return () => clearTimers();
   }, [clearTimers]);
-
   return {
     isOpen,
     openCard,

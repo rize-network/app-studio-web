@@ -13,7 +13,7 @@ import React from 'react';
 import { Button } from '../Button';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { View } from 'app-studio';
 
 export const DesignSystemButtons = () => (
@@ -52,7 +52,7 @@ export const DesignSystemButtons = () => (
         Shape Variants
       </Text>
       <Horizontal gap={16} alignItems="center" flexWrap="wrap">
-        {['sharp', 'rounded', 'pillShaped'].map((shape) => (
+        {['square', 'rounded', 'pill'].map((shape) => (
           <Button key={shape} shape={shape as any}>
             {shape}
           </Button>
@@ -66,16 +66,16 @@ export const DesignSystemButtons = () => (
         With Icons
       </Text>
       <Horizontal gap={16} alignItems="center" flexWrap="wrap">
-        <Button icon={<span>→</span>} iconPosition="right">
+        <Button icon={<Text>→</Text>} iconPosition="right">
           Right Icon
         </Button>
-        <Button icon={<span>←</span>} iconPosition="left">
+        <Button icon={<Text>←</Text>} iconPosition="left">
           Left Icon
         </Button>
-        <Button icon={<span>↑</span>} iconPosition="top">
+        <Button icon={<Text>↑</Text>} iconPosition="top">
           Top Icon
         </Button>
-        <Button icon={<span>↓</span>} iconPosition="bottom">
+        <Button icon={<Text>↓</Text>} iconPosition="bottom">
           Bottom Icon
         </Button>
       </Horizontal>
@@ -105,11 +105,11 @@ export const DesignSystemButtons = () => (
         <Button
           views={{
             container: {
-              backgroundColor: 'color.blue.500',
-              color: 'color.white',
+              backgroundColor: 'color-blue-500',
+              color: 'color-white',
               on: {
                 hover: {
-                  backgroundColor: 'color.blue.600',
+                  backgroundColor: 'color-blue-600',
                 },
               },
             },
@@ -120,8 +120,8 @@ export const DesignSystemButtons = () => (
         <Button
           views={{
             container: {
-              backgroundColor: 'color.green.500',
-              color: 'color.white',
+              backgroundColor: 'color-green-500',
+              color: 'color-white',
               borderRadius: '16px',
               boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
             },
@@ -132,8 +132,8 @@ export const DesignSystemButtons = () => (
         <Button
           views={{
             container: {
-              backgroundColor: 'color.purple.500',
-              color: 'color.white',
+              backgroundColor: 'color-purple-500',
+              color: 'color-white',
               paddingLeft: '32px',
               paddingRight: '32px',
               fontSize: '20px',

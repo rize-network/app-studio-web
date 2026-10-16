@@ -105,6 +105,15 @@ export const MODEL_INFO: Record<string, ModelInfos> = {
       completion_token: 10.5,
     },
   },
+  'gemini-2.5-flash': {
+    provider: 'google',
+    creditCost: 11,
+    tokenLimit: 1048576,
+    cost: {
+      prompt_token: 0.3,
+      completion_token: 2.5,
+    },
+  },
   'claude-3-5-sonnet-latest': {
     provider: 'anthropic',
     creditCost: 20,

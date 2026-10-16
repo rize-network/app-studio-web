@@ -1,0 +1,524 @@
+# Tabs
+
+A versatile component for organizing and displaying content in separate, switchable sections.
+
+### **Import**
+```tsx
+import { Tabs } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Text, Vertical, View } from 'app-studio';
+import { Tabs } from '../Tabs';
+
+const EmptyContent = () => <View minHeight={8} />;
+
+export const Default = () => {
+  const topTabs = [
+    { title: 'Overview', value: 'overview', content: <EmptyContent /> },
+    { title: 'Activity', value: 'activity', content: <EmptyContent /> },
+    { title: 'Files', value: 'files', content: <EmptyContent /> },
+    { title: 'Settings', value: 'settings', content: <EmptyContent /> },
+  ];
+
+  const periodTabs = [
+    { title: 'Day', value: 'day', content: <EmptyContent /> },
+    { title: 'Week', value: 'week', content: <EmptyContent /> },
+    { title: 'Month', value: 'month', content: <EmptyContent /> },
+    { title: 'Year', value: 'year', content: <EmptyContent /> },
+  ];
+
+  const categoryTabs = [
+    { title: 'All', value: 'all', content: <EmptyContent /> },
+    { title: 'Buttons', value: 'buttons', content: <EmptyContent /> },
+    { title: 'Forms', value: 'forms', content: <EmptyContent /> },
+    { title: 'Overlays', value: 'overlays', content: <EmptyContent /> },
+    { title: 'Feedback', value: 'feedback', content: <EmptyContent /> },
+  ];
+
+  return (
+    <Vertical gap={28} width="100%" padding={24}>
+      <Vertical gap={12}>
+        <Text fontSize={12} color="color-gray-500" textTransform="uppercase">
+          Underline
+        </Text>
+        <Tabs
+          tabs={topTabs}
+          defaultValue="overview"
+          variant="underline"
+          views={{
+            container: { width: '100%' },
+            headerTabs: { gap: 36 },
+            content: { display: 'none' },
+          }}
+        />
+      </Vertical>
+
+      <Vertical gap={12}>
+        <Text fontSize={12} color="color-gray-500" textTransform="uppercase">
+          Segmented
+        </Text>
+        <Tabs
+          tabs={periodTabs}
+          defaultValue="week"
+          variant="segmented"
+          views={{
+            content: { display: 'none' },
+          }}
+        />
+      </Vertical>
+
+      <Vertical gap={12}>
+        <Text fontSize={12} color="color-gray-500" textTransform="uppercase">
+          Pill
+        </Text>
+        <Tabs
+          tabs={categoryTabs}
+          defaultValue="all"
+          variant="pill"
+          views={{
+            content: { display: 'none' },
+          }}
+        />
+      </Vertical>
+    </Vertical>
+  );
+};
+```
+
+### **ControlledTabs**
+
+```tsx
+import React, { useState } from 'react';
+import { View, Button, Text } from 'app-studio';
+import { Tabs } from '../Tabs';
+
+export const ControlledTabs = () => {
+  const [activeTab, setActiveTab] = useState<string | number>('profile');
+
+  const tabs = [
+    {
+      title: 'Profile',
+      value: 'profile',
+      content: (
+        <View padding={20}>
+          <Text fontWeight="600" marginBottom={12} fontSize={18}>
+            Profile Settings
+          </Text>
+          <Text color="color-gray-600">
+            Manage your public profile, bio, and avatar.
+          </Text>
+        </View>
+      ),
+    },
+    {
+      title: 'Account',
+      value: 'account',
+      content: (
+        <View padding={20}>
+          <Text fontWeight="600" marginBottom={12} fontSize={18}>
+            Account Details
+          </Text>
+          <Text color="color-gray-600">
+            Update your email, password, and security preferences.
+          </Text>
+        </View>
+      ),
+    },
+    {
+      title: 'Notifications',
+      value: 'notifications',
+      content: (
+        <View padding={20}>
+          <Text fontWeight="600" marginBottom={12} fontSize={18}>
+            Notification Preferences
+          </Text>
+          <Text color="color-gray-600">
+            Configure how and when you want to be notified.
+          </Text>
+        </View>
+      ),
+    },
+  ];
+
+  return (
+    <View width="100%">
+      <View
+        marginBottom={20}
+        padding={16}
+        backgroundColor="color-blue-50"
+        borderRadius={8}
+        border="1px dashed"
+        borderColor="color-blue-200"
+      >
+        <Text marginBottom={12}>
+          Current Active Value: <strong>{activeTab}</strong>
+        </Text>
+        <View display="flex" flexDirection="row" gap={10}>
+          <Button
+            size="small"
+            variant={activeTab === 'profile' ? 'primary' : 'outline'}
+            onClick={() => setActiveTab('profile')}
+          >
+            Select Profile
+          </Button>
+          <Button
+            size="small"
+            variant={activeTab === 'account' ? 'primary' : 'outline'}
+            onClick={() => setActiveTab('account')}
+          >
+            Select Account
+          </Button>
+          <Button
+            size="small"
+            variant={activeTab === 'notifications' ? 'primary' : 'outline'}
+            onClick={() => setActiveTab('notifications')}
+          >
+            Select Notifications
+          </Button>
+        </View>
+      </View>
+
+      <Tabs
+        tabs={tabs}
+        value={activeTab}
+        onTabChange={(tab) => {
+          console.log('Tab changed:', tab);
+          if (tab.value) setActiveTab(tab.value);
+        }}
+      />
+    </View>
+  );
+};
+```
+
+### **Compound**
+
+```tsx
+import React from 'react';
+import { View, Text } from 'app-studio';
+import { Tabs } from '../Tabs';
+
+/**
+ * Example demonstrating the compound component pattern for Tabs
+ */
+export const CompoundTabs = () => {
+  return (
+    <View
+      border="1px solid"
+      borderColor="color-gray-200"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Tabs defaultValue="default">
+        <Tabs.List>
+          <Tabs.Trigger value="default">Default Usage</Tabs.Trigger>
+          <Tabs.Trigger value="minimal">Minimal</Tabs.Trigger>
+          <Tabs.Trigger value="customized">Customized</Tabs.Trigger>
+          <Tabs.Trigger value="functions">Function Calls</Tabs.Trigger>
+        </Tabs.List>
+
+        <Tabs.Content value="default">
+          <View>
+            <Text fontSize={18} fontWeight="600" marginBottom={16}>
+              Default Usage
+            </Text>
+            <Text color="color-gray-600">
+              This demonstrates the default usage of the AgentChat component
+              with all standard features enabled. The component provides a
+              complete chat interface for interacting with ADK agents.
+            </Text>
+          </View>
+        </Tabs.Content>
+
+        <Tabs.Content value="minimal">
+          <View>
+            <Text fontSize={18} fontWeight="600" marginBottom={16}>
+              Minimal Configuration
+            </Text>
+            <Text color="color-gray-600">
+              This shows a minimal setup with only the essential features
+              enabled. Perfect for simple chat interfaces where you don&apos;t
+              need advanced features.
+            </Text>
+          </View>
+        </Tabs.Content>
+
+        <Tabs.Content value="customized">
+          <View>
+            <Text fontSize={18} fontWeight="600" marginBottom={16}>
+              Customized Styling
+            </Text>
+            <Text color="color-gray-600">
+              This example demonstrates how to customize the appearance and
+              behavior of the AgentChat component to match your
+              application&apos;s design system.
+            </Text>
+          </View>
+        </Tabs.Content>
+
+        <Tabs.Content value="functions">
+          <View>
+            <Text fontSize={18} fontWeight="600" marginBottom={16}>
+              Function Calls Demo
+            </Text>
+            <Text color="color-gray-600">
+              This showcases the function calling capabilities of the AgentChat
+              component, including visualization of function calls and their
+              results.
+            </Text>
+          </View>
+        </Tabs.Content>
+      </Tabs>
+    </View>
+  );
+};
+```
+
+### **CustomHeader**
+
+```tsx
+import React from 'react';
+import { View, Text } from 'app-studio';
+import { Tabs } from '../Tabs';
+import { HomeIcon, SettingsIcon, UserIcon } from '../../Icon/Icon';
+
+export const CustomHeaderExample = () => {
+  const tabs = [
+    {
+      title: 'Home',
+      icon: <HomeIcon widthHeight={16} />,
+      content: (
+        <View padding={20}>
+          <Text fontWeight="bold">Home Content</Text>
+          <Text marginTop={10}>This is the home tab content.</Text>
+        </View>
+      ),
+    },
+    {
+      title: 'Profile',
+      icon: <UserIcon widthHeight={16} />,
+      content: (
+        <View padding={20}>
+          <Text fontWeight="bold">Profile Content</Text>
+          <Text marginTop={10}>This is the profile tab content.</Text>
+        </View>
+      ),
+    },
+    {
+      title: 'Settings',
+      icon: <SettingsIcon widthHeight={16} />,
+      content: (
+        <View padding={20}>
+          <Text fontWeight="bold">Settings Content</Text>
+          <Text marginTop={10}>This is the settings tab content.</Text>
+        </View>
+      ),
+    },
+  ];
+
+  return (
+    <View border="1px solid color-gray-200" borderRadius={4} overflow="hidden">
+      <Tabs
+        tabs={tabs}
+        iconPosition="left"
+        views={{
+          container: {
+            height: 300,
+          },
+          headerTabs: {
+            backgroundColor: 'color-gray-100',
+            padding: '8px 8px 0',
+          },
+          tab: {
+            minWidth: 120,
+            textAlign: 'center',
+          },
+          activeTab: {
+            backgroundColor: 'color-white',
+            borderColor: 'color-gray-200',
+          },
+          activeText: {
+            color: 'theme-primary',
+            fontWeight: 'bold',
+          },
+          content: {
+            backgroundColor: 'color-white',
+            padding: 16,
+          },
+        }}
+      />
+    </View>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './styles';
+export * from './customHeader';
+export * from './compound';
+export * from './ControlledTabs';
+```
+
+### **Styles**
+
+```tsx
+import React from 'react';
+import { Text, useTheme } from 'app-studio'; // Adjust path as needed
+import { Tabs } from '../../Tabs/Tabs'; // Adjust path as needed
+
+// Example demonstrating how to style the Tabs component using the 'styles' prop.
+export const StylesTabs = () => {
+  const { themeMode } = useTheme();
+
+  // Custom styling tokens based on theme
+  const customColors =
+    themeMode === 'light'
+      ? {
+          containerBg: 'color-indigo-50',
+          headerBg: 'color-indigo-100',
+          tabColor: 'color-indigo-600',
+          activeTabBg: 'color-white',
+          activeTabColor: 'color-indigo-600',
+          contentBg: 'color-white',
+          contentBorder: 'color-indigo-200',
+        }
+      : {
+          containerBg: 'color-gray-900',
+          headerBg: 'color-gray-800',
+          tabColor: 'color-gray-400',
+          activeTabBg: 'color-gray-700',
+          activeTabColor: 'color-white',
+          contentBg: 'color-gray-800',
+          contentBorder: 'color-gray-700',
+        };
+
+  const tabs = [
+    {
+      title: 'Product',
+      value: 'product',
+      content: (
+        <Text
+          heading="h5"
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
+        >
+          Product Tab Content
+        </Text>
+      ),
+    },
+    {
+      title: 'Services',
+      value: 'services',
+      content: (
+        <Text
+          heading="h5"
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
+        >
+          Services Tab Content
+        </Text>
+      ),
+    },
+    {
+      title: 'Playground',
+      value: 'playground',
+      content: (
+        <Text
+          heading="h5"
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
+        >
+          Playground Tab Content
+        </Text>
+      ),
+    },
+    {
+      title: 'Content',
+      value: 'content',
+      content: (
+        <Text
+          heading="h5"
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
+        >
+          Content Tab Content
+        </Text>
+      ),
+    },
+    {
+      title: 'Random',
+      value: 'random',
+      content: (
+        <Text
+          heading="h5"
+          color={themeMode === 'light' ? 'color-gray-800' : 'color-white'}
+        >
+          Random Tab Content
+        </Text>
+      ),
+    },
+  ];
+
+  return (
+    <Tabs
+      tabs={tabs}
+      defaultValue="playground"
+      views={{
+        container: {
+          backgroundColor: customColors.containerBg,
+          borderRadius: '16px',
+          padding: '8px',
+          border: '1px solid',
+          borderColor: customColors.contentBorder,
+        },
+        headerTabs: {
+          backgroundColor: customColors.headerBg,
+          width: '100%',
+          borderRadius: '12px',
+          padding: '4px',
+          display: 'flex',
+          gap: '4px',
+        },
+        // Styles for each individual tab button (inactive state)
+        tab: {
+          borderRadius: '8px',
+          backgroundColor: 'transparent',
+          color: customColors.tabColor,
+          flexGrow: 1,
+          padding: '8px 16px',
+          transition: 'all 0.2s',
+        },
+        // Styles specifically for the active tab button (merged with 'tab' styles)
+        activeTab: {
+          backgroundColor: customColors.activeTabBg,
+          color: customColors.activeTabColor,
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        },
+        // Styles for the text inside any tab button
+        title: {
+          fontWeight: '500',
+        },
+        // Styles specifically for the text inside the active tab button (merged with 'title' styles)
+        activeText: {
+          fontWeight: '600',
+        },
+        // Styles for the content area below the tabs
+        content: {
+          height: '200px',
+          marginTop: '16px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: customColors.contentBg,
+          borderRadius: '12px',
+          border: '1px solid',
+          borderColor: customColors.contentBorder,
+        },
+      }}
+    />
+  );
+};
+```
+

@@ -8,55 +8,31 @@ import {
   removeToast,
   removeAllToasts,
 } from './Toast.store';
-
-/**
- * Hook for using Toast functionality within components
- * @returns Object with methods to show and manage toasts
- */
+// Defines and exports the `useToast` custom React hook, providing an interface to interact with the Toast notification system.
 export const useToast = () => {
   return {
-    /**
-     * Show a toast with the specified variant
-     */
+    // A generic method to display a toast notification with specified `variant`, `title`, optional `description`, and `options`.
     toast: (
       variant: ToastVariant,
       title: string,
       description?: string,
       options?: ToastOptions
     ) => showToast(variant, title, description, options),
-
-    /**
-     * Show an info toast
-     */
+    // Displays an information toast notification with a `title`, optional `description`, and `options`.
     info: (title: string, description?: string, options?: ToastOptions) =>
       showInfoToast(title, description, options),
-
-    /**
-     * Show a success toast
-     */
+    // Displays a success toast notification with a `title`, optional `description`, and `options`.
     success: (title: string, description?: string, options?: ToastOptions) =>
       showSuccessToast(title, description, options),
-
-    /**
-     * Show a warning toast
-     */
+    // Displays a warning toast notification with a `title`, optional `description`, and `options`.
     warning: (title: string, description?: string, options?: ToastOptions) =>
       showWarningToast(title, description, options),
-
-    /**
-     * Show an error toast
-     */
+    // Displays an error toast notification with a `title`, optional `description`, and `options`.
     error: (title: string, description?: string, options?: ToastOptions) =>
       showErrorToast(title, description, options),
-
-    /**
-     * Remove a specific toast by ID
-     */
+    // Removes a specific toast notification from display using its unique `id`.
     remove: (id: string) => removeToast(id),
-
-    /**
-     * Remove all toasts
-     */
+    // Clears all currently displayed toast notifications.
     removeAll: () => removeAllToasts(),
   };
 };

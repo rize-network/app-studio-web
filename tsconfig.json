@@ -32,15 +32,25 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
 
-    "types": ["react-scripts"],
+    // `vitest/globals` mirrors vite.config.ts `test.globals: true`: the
+    // runtime injects test/expect/describe/vi as globals, so the typecheck
+    // must know them too — without it every test file fails tsc with TS2593.
+    "types": ["node", "vitest/globals"],
     "baseUrl": "./",
     "rootDir": "./",
     "paths": {
+      "react": ["./node_modules/@types/react"],
       "src/*": ["./src/*"],
     },
     "strict": true,
     "noImplicitAny": false,
   },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
   "noEmit": false,
-  "include": ["./src", "./src/types/*.d.ts"]
+  "include": ["./src", "./src/types/*.d.ts"],
+  "exclude": ["./bot", "**/*.native.tsx", "**/*.native.ts", "**/*-native.test.tsx"]
 }

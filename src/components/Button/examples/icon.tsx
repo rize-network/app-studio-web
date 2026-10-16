@@ -14,7 +14,7 @@ export const IconButtons = () => (
     <Button
       size="md"
       icon={<DustBinIcon widthHeight={16} />}
-      shape={'pillShaped' as Shape}
+      shape={'pill' as Shape}
       iconPosition="right"
     >
       Delete
@@ -30,7 +30,7 @@ export const IconButtons = () => (
     <Button
       size="md"
       icon={<DustBinIcon widthHeight={16} />}
-      shape={'pillShaped' as Shape}
+      shape={'pill' as Shape}
       iconPosition="bottom"
     >
       Delete

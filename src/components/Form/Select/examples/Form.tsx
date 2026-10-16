@@ -23,9 +23,7 @@ export const FormSelect = () => {
           ]}
           placeholder="Select an item..."
         />
-        <Button type="submit" alignSelf="center">
-          Submit
-        </Button>
+        <Button alignSelf="center">Submit</Button>
       </Vertical>
     </form>
   );

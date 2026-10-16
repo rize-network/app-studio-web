@@ -1,0 +1,102 @@
+{
+  "componentDescription": "Enables sharing content via the Web Share API with a customizable button.",
+  "shareData": {
+    "type": "NavigatorShareData",
+    "typeValues": [],
+    "description": "Specifies the data (e.g., URL, text, title) to be shared using the Web Share API.",
+    "defaultValue": "undefined"
+  },
+  "label": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "Defines the content displayed within the share button, which can be any React node.",
+    "defaultValue": "\"Share\""
+  },
+  "onShareStart": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "A callback function executed just before the sharing process is initiated.",
+    "defaultValue": "undefined"
+  },
+  "onShareSuccess": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "A callback function executed when the sharing operation successfully completes.",
+    "defaultValue": "undefined"
+  },
+  "onShareCancel": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "A callback function executed if the user cancels the sharing dialog.",
+    "defaultValue": "undefined"
+  },
+  "onShareError": {
+    "type": "(error: unknown) => void",
+    "typeValues": [],
+    "description": "A callback function executed if an error occurs during the sharing process, providing the error object.",
+    "defaultValue": "undefined"
+  },
+  "onUnsupported": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "A callback function executed if the Web Share API is not supported by the user's browser.",
+    "defaultValue": "undefined"
+  },
+  "disableWhenUnsupported": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean property that determines whether the share button should be disabled if the Web Share API is unsupported.",
+    "defaultValue": "true"
+  },
+  "onClick": {
+    "type": "React.MouseEventHandler<HTMLButtonElement>",
+    "typeValues": [],
+    "description": "An optional click handler for the button, overriding the default `onClick` from `ButtonProps`.",
+    "defaultValue": "undefined"
+  },
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "React children to be rendered inside the button, providing a flexible way to add content and overriding the 'label' prop.",
+    "defaultValue": "\"Share\""
+  },
+  "icon": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "A custom icon component to render within the button. If not provided, a default ShareIcon will be used.",
+    "defaultValue": "ShareIcon component"
+  },
+  "size": {
+    "type": "'xs' | 'sm' | 'md' | 'lg' | 'xl'",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Specifies the predefined size of the button and its default icon.",
+    "defaultValue": "'md'"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean prop that explicitly disables the button, preventing user interaction.",
+    "defaultValue": "false"
+  },
+  "isLoading": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "A boolean prop that, when true, displays a loading spinner within the button.",
+    "defaultValue": "false"
+  },
+  "iconPosition": {
+    "type": "'left' | 'right'",
+    "typeValues": [
+      "left",
+      "right"
+    ],
+    "description": "Determines the placement of the icon relative to the button's text.",
+    "defaultValue": "'left'"
+  }
+}

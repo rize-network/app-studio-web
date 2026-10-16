@@ -1,10 +1,3 @@
-/**
- * TagInput View Component
- *
- * Renders a tags input field with chips for each tag
- * according to the design guidelines.
- */
-
 import React from 'react';
 import {
   Input,
@@ -20,11 +13,8 @@ import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
 import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 import { CloseIcon } from '../../../Icon/Icon';
 import { TagInputViewProps } from './TagInput.props';
-import { Shapes, InputVariants } from '../../../Input/Input.style';
 
-/**
- * Individual tag chip component
- */
+// Defines the TagChip functional component, which renders an individual tag with a customizable removal option. It accepts properties for the tag value, removal handler, removability status, size, custom view overrides, and disabled/read-only states.
 const TagChip: React.FC<{
   tag: string;
   onRemove: () => void;
@@ -34,32 +24,39 @@ const TagChip: React.FC<{
   isDisabled: boolean;
   isReadOnly: boolean;
 }> = ({ tag, onRemove, isRemovable, size, views, isDisabled, isReadOnly }) => {
-  const { getColor } = useTheme();
-
+  // Manages the hover state for the remove icon within a tag chip, allowing for visual feedback when the user hovers over it.
+  const [isRemoveHovered, setIsRemoveHovered] = React.useState(false);
+  // Calculates dynamic styling properties (padding, font size, icon size) for the tag chip based on the `size` prop, with a default for 'md'.
   const chipSize = {
-    xs: { padding: '2px 6px', fontSize: '10px', iconSize: 10 },
-    sm: { padding: '4px 8px', fontSize: '12px', iconSize: 12 },
-    md: { padding: '6px 10px', fontSize: '14px', iconSize: 14 },
-    lg: { padding: '8px 12px', fontSize: '16px', iconSize: 16 },
-    xl: { padding: '10px 14px', fontSize: '18px', iconSize: 18 },
-  }[size] || { padding: '6px 10px', fontSize: '14px', iconSize: 14 };
-
+    xs: { padding: '2px 8px', fontSize: '10px', iconSize: 10 },
+    sm: { padding: '4px 10px', fontSize: '12px', iconSize: 12 },
+    md: { padding: '6px 14px', fontSize: '14px', iconSize: 14 },
+    lg: { padding: '8px 16px', fontSize: '16px', iconSize: 16 },
+    xl: { padding: '10px 18px', fontSize: '18px', iconSize: 18 },
+  }[size] || { padding: '6px 14px', fontSize: '14px', iconSize: 14 };
   return (
     <Horizontal
       alignItems="center"
-      gap={4}
+      gap={6}
       padding={chipSize.padding}
-      backgroundColor="color.gray.100"
-      borderRadius="16px"
-      border="1px solid"
-      borderColor="color.gray.200"
-      transition="all 0.2s ease"
+      // app-studio resolves theme-primary-N as a color-mix tint (N/1000 = alpha)
+      backgroundColor="theme-primary-100"
+      borderRadius="9999px"
+      borderWidth="1px"
+      borderStyle="solid"
+      borderColor="theme-primary-250"
+      transition="all 0.15s ease-in-out"
       opacity={isDisabled ? 0.6 : 1}
+      // A chip never grows past the field it lives in. Without this a single
+      // long tag pushed the chip straight out of the input's box instead of
+      // ellipsising, so the value overlapped whatever sat beside it.
+      maxWidth="100%"
+      minWidth={0}
       _hover={
         !isDisabled && !isReadOnly
           ? {
-              backgroundColor: 'color.gray.200',
-              borderColor: 'color.gray.300',
+              backgroundColor: 'theme-primary-180',
+              borderColor: 'theme-primary-400',
             }
           : {}
       }
@@ -67,36 +64,44 @@ const TagChip: React.FC<{
     >
       <Text
         fontSize={chipSize.fontSize}
-        color={isDisabled ? 'color.gray.400' : 'color.gray.700'}
-        fontWeight="500"
-        whiteSpace="nowrap"
+        color={isDisabled ? 'color-gray-400' : 'theme-primary'}
+        // One line with an ellipsis. `minWidth: 0` is what lets it shrink:
+        // as a flex child it would otherwise refuse to go below its content
+        // width and the clamp would never engage.
+        maxLines={1}
+        minWidth={0}
         {...views?.tagText}
       >
         {tag}
       </Text>
-
       {isRemovable && !isDisabled && !isReadOnly && (
         <View
           cursor="pointer"
           padding="2px"
           borderRadius="50%"
-          transition="all 0.2s ease"
-          _hover={{
-            backgroundColor: 'color.gray.300',
+          transition="all 0.15s ease-in-out"
+          backgroundColor={isRemoveHovered ? 'color-red-100' : 'transparent'}
+          opacity={isRemoveHovered ? 1 : 0.7}
+          onMouseEnter={() => setIsRemoveHovered(true)}
+          onMouseLeave={() => setIsRemoveHovered(false)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove();
           }}
-          onClick={onRemove}
+          _hover={{
+            backgroundColor: 'color-red-100',
+          }}
           {...views?.tagRemove}
         >
-          <CloseIcon widthHeight={chipSize.iconSize} color="color.gray.500" />
+          <CloseIcon
+            widthHeight={chipSize.iconSize}
+            color={isRemoveHovered ? 'color-red-500' : 'color-gray-400'}
+          />
         </View>
       )}
     </Horizontal>
   );
 };
-
-/**
- * Main TagInput view component
- */
 const TagInputView: React.FC<TagInputViewProps> = ({
   id,
   name,
@@ -127,37 +132,40 @@ const TagInputView: React.FC<TagInputViewProps> = ({
   removeTag,
   setIsHovered,
   onClick,
+  setInputValue,
+  setIsFocused,
+  addTag,
+  defaultTags,
+  onTagsChange,
+  onTagAdd,
+  onTagRemove,
+  minTagLength,
+  maxTagLength,
+  allowDuplicates,
+  separators,
+  menuItems,
+  onMenuItemSelect,
+  onFocus,
+  onBlur,
+  validateTag,
   ...props
 }) => {
   const { getColor, themeMode } = useTheme();
-
-  // Determine if we should show the label
   const showLabel = Boolean(
     label && (isFocused || tags.length > 0 || inputValue)
   );
-
-  // Calculate if max tags reached
   const isMaxReached = maxTags && tags.length >= maxTags;
-
-  // Container styles
-  const containerStyles = {
-    ...Shapes[shape],
-    ...InputVariants[variant],
-    ...views?.inputContainer,
-  };
-
-  // Input styles
   const inputStyles = {
     border: 'none',
     outline: 'none',
     backgroundColor: 'transparent',
     fontSize: Typography.fontSizes[size],
-    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
+    color: isDisabled ? 'color-gray-400' : 'color-gray-800',
     flex: 1,
     minWidth: '120px',
+    transition: 'all 0.2s ease-in-out',
     ...views?.input,
   };
-
   return (
     <FieldContainer
       error={!!error}
@@ -178,33 +186,37 @@ const TagInputView: React.FC<TagInputViewProps> = ({
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
-        views={views}
+        views={{
+          ...views,
+          container: { ...views?.container, ...views?.inputContainer },
+        }}
         onClick={onClick}
         onMouseEnter={() => setIsHovered?.(true)}
         onMouseLeave={() => setIsHovered?.(false)}
-        {...containerStyles}
       >
         {left}
-
         <FieldWrapper>
-          {/* Label */}
+          {}
           {label && (
             <FieldLabel size={size} error={!!error} views={views}>
               {label}
             </FieldLabel>
           )}
-
-          {/* Tags and Input Container */}
+          {}
           <Horizontal
             alignItems="center"
-            gap={4}
+            gap={8}
             flexWrap="wrap"
             width="100%"
             minHeight={Typography.fontSizes[size]}
-            padding="8px 0"
+            // The field shell already applies the vertical padding for this
+            // size; adding 8px here on top of it made an empty TagInput 54px
+            // tall at `md` against a declared 40px. The container still grows
+            // freely once chips wrap, which is the point of `minHeight`.
+            padding="0"
             {...views?.tagsContainer}
           >
-            {/* Existing Tags */}
+            {}
             {tags.map((tag, index) => (
               <TagChip
                 key={tag.id}
@@ -217,8 +229,7 @@ const TagInputView: React.FC<TagInputViewProps> = ({
                 isReadOnly={isReadOnly}
               />
             ))}
-
-            {/* Input Field */}
+            {}
             {!isMaxReached && (
               <Input
                 id={id}
@@ -237,12 +248,11 @@ const TagInputView: React.FC<TagInputViewProps> = ({
                 {...inputStyles}
               />
             )}
-
-            {/* Max tags reached message */}
+            {}
             {isMaxReached && (
               <Text
                 fontSize={Typography.fontSizes[size]}
-                color="color.gray.500"
+                color="color-gray-500"
                 fontStyle="italic"
                 {...views?.placeholder}
               >
@@ -251,11 +261,9 @@ const TagInputView: React.FC<TagInputViewProps> = ({
             )}
           </Horizontal>
         </FieldWrapper>
-
         {right}
       </FieldContent>
     </FieldContainer>
   );
 };
-
 export default TagInputView;

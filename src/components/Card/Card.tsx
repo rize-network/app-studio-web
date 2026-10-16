@@ -6,19 +6,13 @@ import {
   CardContent,
   CardFooter,
 } from './Card/Card.view';
-
-/**
- * Card component for displaying content in a contained, styled box.
- * Can be used with Card.Header, Card.Content, and Card.Footer for structured layout,
- * or with direct children for simpler usage.
- */
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
+// This file defines and exports the main `Card` component, which serves as a wrapper for its sub-components like `Card.Header`, `Card.Content`, and `Card.Footer`, enabling a compound component pattern for flexible content structuring.
 const CardComponent: React.FC<CardProps> = (props) => {
-  return <CardView {...props} />;
+  const mergedProps = useMergedDesignSystemComponentProps('card', props);
+  return <CardView {...mergedProps} />;
 };
-
 export const Card = CardComponent as CardType;
-
-// Assign the sub-components to the main component
 Card.Header = CardHeader;
 Card.Content = CardContent;
 Card.Footer = CardFooter;

@@ -1,17 +1,10 @@
-/**
- * RadioGroup View Component
- *
- * Renders a group of radio buttons with various styles and states
- * according to the design guidelines.
- */
-
 import React from 'react';
 import { RadioGroupViewProps } from './RadioGroup.props';
 import { RadioProps } from '../Radio/Radio.props';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../../Text/Text';
-
+import { Text } from 'app-studio';
+// Defines the `RadioGroupView` functional component, responsible for rendering the visual structure of the radio group, including its label, helper text, and the layout of its radio children.
 const RadioGroupView: React.FC<RadioGroupViewProps> = ({
   children,
   name,
@@ -21,19 +14,20 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
   selectedValue,
   setSelectedValue,
   direction = 'vertical',
-  spacing = 8, // 2 × 4px grid
+  spacing = 8,
   isDisabled = false,
   isReadOnly = false,
   views = { container: {}, label: {}, helperText: {} },
+  onChange,
+  value,
+  defaultValue,
   ...props
 }) => {
-  // Container component based on direction
+  // Dynamically selects the layout container (`Vertical` or `Horizontal`) based on the `direction` prop to arrange the radio buttons within the group.
   const Container = direction === 'vertical' ? Vertical : Horizontal;
-
-  // Process children to add necessary props
+  // Processes each child element (expected to be `Radio` components) to inject common props such as `name`, `isChecked`, `isDisabled`, `isReadOnly`, and a unified `onChange` handler, ensuring proper group functionality.
   const processedChildren = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      // Create props object with the correct type
+    if (React.isValidElement<RadioProps>(child)) {
       const radioProps: Partial<RadioProps> = {
         name,
         isChecked: child.props.value === selectedValue,
@@ -46,40 +40,50 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
           }
         },
       };
-
-      // Clone element with properly typed props
       return React.cloneElement(child, radioProps);
     }
     return child;
   });
-
+  const generatedId = React.useId();
+  const labelId = `${generatedId}-label`;
+  const helperTextId = `${generatedId}-helper`;
+  const hasHelper = Boolean(helperText || error);
   return (
-    <Vertical gap={spacing} width="100%" {...views.container} {...props}>
-      {/* Label */}
+    <Vertical
+      gap={spacing}
+      width="100%"
+      role="radiogroup"
+      aria-labelledby={label ? labelId : undefined}
+      aria-describedby={hasHelper ? helperTextId : undefined}
+      aria-invalid={error ? true : undefined}
+      {...views.container}
+      {...props}
+    >
+      {}
       {label && (
         <Text
-          fontWeight="600" // Semi-bold for better readability
-          fontSize="16px" // 4 × 4px grid
-          color={error ? 'color.red.600' : 'color.gray.700'}
-          marginBottom={4} // 1 × 4px grid
+          id={labelId}
+          fontWeight="600"
+          fontSize="14px"
+          color={error ? 'color-red-600' : 'inherit'}
+          marginBottom={4}
           {...views.label}
         >
           {label}
         </Text>
       )}
-
-      {/* Radio buttons */}
+      {}
       <Container gap={spacing}>{processedChildren}</Container>
-
-      {/* Helper text or error message */}
-      {(helperText || error) && (
+      {}
+      {hasHelper && (
         <Text
-          fontWeight={error ? '500' : '400'} // Medium weight for error, regular for helper text
-          fontSize="14px" // 3.5 × 4px grid
-          lineHeight="20px" // 5 × 4px grid
-          color={error ? 'color.red.500' : 'color.gray.500'}
-          marginTop={4} // 1 × 4px grid
-          transition="all 0.2s ease"
+          id={helperTextId}
+          fontWeight={error ? '500' : '400'}
+          fontSize="14px"
+          lineHeight="20px"
+          color={error ? 'color-red-500' : 'color-gray-500'}
+          marginTop={4}
+          transition="color 0.2s ease, opacity 0.2s ease"
           {...views.helperText}
         >
           {error || helperText}
@@ -88,5 +92,4 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
     </Vertical>
   );
 };
-
 export default RadioGroupView;

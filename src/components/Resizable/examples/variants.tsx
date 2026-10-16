@@ -1,7 +1,7 @@
 import React from 'react';
 import { Resizable } from '../Resizable';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 export const ResizableVariants = () => {
@@ -22,7 +22,7 @@ export const ResizableVariants = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.gray.50"
+                backgroundColor="color-gray-50"
               >
                 <Text>Left Panel</Text>
               </View>
@@ -34,7 +34,7 @@ export const ResizableVariants = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.gray.50"
+                backgroundColor="color-gray-50"
               >
                 <Text>Right Panel</Text>
               </View>
@@ -58,7 +58,7 @@ export const ResizableVariants = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.gray.50"
+                backgroundColor="color-gray-50"
               >
                 <Text>Left Panel</Text>
               </View>
@@ -70,7 +70,7 @@ export const ResizableVariants = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.gray.50"
+                backgroundColor="color-gray-50"
               >
                 <Text>Right Panel</Text>
               </View>
@@ -94,7 +94,7 @@ export const ResizableVariants = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.gray.50"
+                backgroundColor="color-gray-50"
               >
                 <Text>Left Panel</Text>
               </View>
@@ -106,7 +106,7 @@ export const ResizableVariants = () => {
               <View
                 padding="16px"
                 height="100%"
-                backgroundColor="color.gray.50"
+                backgroundColor="color-gray-50"
               >
                 <Text>Right Panel</Text>
               </View>

@@ -7,7 +7,7 @@ import { Shape } from '../TextField/TextField.type';
 export const ShapesInput = () => {
   return (
     <Vertical gap={10} width="300px">
-      {['default', 'sharp', 'rounded', 'pillShaped'].map((shape, index) => (
+      {['default', 'square', 'rounded', 'pill'].map((shape, index) => (
         <TextField
           key={index}
           name={shape}

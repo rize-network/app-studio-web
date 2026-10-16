@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToggleGroup } from '../ToggleGroup';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const ColorSchemeDemo = () => {
   const items = [
@@ -12,11 +12,11 @@ export const ColorSchemeDemo = () => {
   return (
     <Vertical gap={10}>
       {[
-        'theme.primary',
-        'theme.secondary',
-        'theme.warning',
-        'theme.success',
-        'theme.error',
+        'theme-primary',
+        'theme-secondary',
+        'theme-warning',
+        'theme-success',
+        'theme-error',
       ].map((color, index) => (
         <ToggleGroup key={index} items={items} />
       ))}

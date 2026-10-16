@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { ColorInputProps } from './ColorInput.props';
-
+import { formatColor } from './colorFormat';
+// This file defines the useColorInputState custom hook, centralizing all state management and core logic for the ColorInput component, including dropdown visibility, color selection, custom color input, recent color persistence via localStorage, and external event handling.
 export const useColorInputState = (props: ColorInputProps) => {
   const {
     value,
@@ -13,30 +14,24 @@ export const useColorInputState = (props: ColorInputProps) => {
     maxRecentColors = 8,
     showRecentColors = true,
     isAutoFocus = false,
+    colorFormat,
   } = props;
-
-  // State management
   const [isOpen, setIsOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState(value ?? defaultValue);
   const [customColor, setCustomColor] = useState('');
   const [recentColors, setRecentColors] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
-  // Refs
   const triggerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Sync with controlled value
   useEffect(() => {
     if (value !== undefined) {
       setSelectedColor(value);
     }
   }, [value]);
-
-  // Load recent colors from localStorage on mount
   useEffect(() => {
-    if (showRecentColors) {
+    // `localStorage` is web-only; on React Native recent colors start empty.
+    if (showRecentColors && typeof localStorage !== 'undefined') {
       try {
         const saved = localStorage.getItem('colorInput-recentColors');
         if (saved) {
@@ -47,16 +42,15 @@ export const useColorInputState = (props: ColorInputProps) => {
       }
     }
   }, [showRecentColors]);
-
-  // Auto focus
   useEffect(() => {
-    if (isAutoFocus && triggerRef.current) {
-      triggerRef.current.focus();
+    const node: any = triggerRef.current;
+    if (isAutoFocus && node && typeof node.focus === 'function') {
+      node.focus();
     }
   }, [isAutoFocus]);
-
-  // Click outside to close
   useEffect(() => {
+    // `document` is web-only; on native the dropdown closes via selection/toggle.
+    if (typeof document === 'undefined') return;
     const handleClickOutside = (event: MouseEvent) => {
       if (
         isOpen &&
@@ -68,98 +62,89 @@ export const useColorInputState = (props: ColorInputProps) => {
         handleClose();
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
-
-  // Add color to recent colors
   const addToRecentColors = useCallback(
     (color: string) => {
       if (!showRecentColors) return;
-
       setRecentColors((prev) => {
         const filtered = prev.filter((c) => c !== color);
         const newRecent = [color, ...filtered].slice(0, maxRecentColors);
-
-        // Save to localStorage
         try {
-          localStorage.setItem(
-            'colorInput-recentColors',
-            JSON.stringify(newRecent)
-          );
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(
+              'colorInput-recentColors',
+              JSON.stringify(newRecent)
+            );
+          }
         } catch (error) {
           console.warn('Failed to save recent colors to localStorage:', error);
         }
-
         return newRecent;
       });
     },
     [showRecentColors, maxRecentColors]
   );
-
-  // Handlers
   const handleToggle = useCallback(() => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
-
     if (newIsOpen) {
       onOpen?.();
     } else {
       onClose?.();
     }
   }, [isOpen, onOpen, onClose]);
-
   const handleColorSelect = useCallback(
     (color: string) => {
       setSelectedColor(color);
       addToRecentColors(color);
-
-      onChange?.(color);
-      onChangeComplete?.(color);
-
+      // `colorFormat` controls the representation handed to consumers; the
+      // internal state keeps the raw picked value.
+      const reported = formatColor(color, colorFormat);
+      onChange?.(reported);
+      onChangeComplete?.(reported);
       if (closeOnSelect) {
         setIsOpen(false);
         onClose?.();
       }
     },
-    [onChange, onChangeComplete, closeOnSelect, onClose, addToRecentColors]
+    [
+      onChange,
+      onChangeComplete,
+      closeOnSelect,
+      onClose,
+      addToRecentColors,
+      colorFormat,
+    ]
   );
-
   const handleCustomColorChange = useCallback((color: string) => {
     setCustomColor(color);
   }, []);
-
   const handleCustomColorSubmit = useCallback(() => {
     if (customColor) {
       handleColorSelect(customColor);
       setCustomColor('');
     }
   }, [customColor, handleColorSelect]);
-
   const handleClose = useCallback(() => {
     setIsOpen(false);
     onClose?.();
   }, [onClose]);
-
   const setValue = useCallback(
     (newValue: string) => {
       setSelectedColor(newValue);
-      onChange?.(newValue);
+      onChange?.(formatColor(newValue, colorFormat));
     },
-    [onChange]
+    [onChange, colorFormat]
   );
-
   return {
-    // State
     isOpen,
     selectedColor,
     recentColors,
     customColor,
     isFocused,
     isHovered,
-
-    // Handlers
     handleToggle,
     handleColorSelect,
     handleCustomColorChange,
@@ -168,8 +153,6 @@ export const useColorInputState = (props: ColorInputProps) => {
     setIsFocused,
     setIsHovered,
     setValue,
-
-    // Refs
     triggerRef,
     dropdownRef,
   };

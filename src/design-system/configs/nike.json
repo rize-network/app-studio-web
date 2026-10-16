@@ -1,0 +1,740 @@
+{
+  "metadata": {
+    "id": "nike",
+    "label": "Nike",
+    "sourcePath": "design.md/html/nike.html",
+    "sourceTitle": "Design System Inspiration of Nike",
+    "defaultAppearance": "light",
+    "googleFontLinks": [
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    ]
+  },
+  "theme": {
+    "primary": "color-black",
+    "secondary": "#FA5400",
+    "success": "#76E0B5",
+    "warning": "#1151ff",
+    "error": "#d30005",
+    "canvas": "color-white",
+    "surface": "color-gray-50",
+    "text": "color-black",
+    "muted": "color-gray-500",
+    "border": "color-gray-200",
+    "onPrimary": "color-white"
+  },
+  "tokens": {
+    "rawCssVars": {
+      "ink": "#111111",
+      "on-primary": "#ffffff",
+      "canvas": "#ffffff",
+      "soft-cloud": "#f5f5f5",
+      "charcoal": "#39393b",
+      "ash": "#4b4b4d",
+      "mute": "#707072",
+      "stone": "#9e9ea0",
+      "hairline": "#cacacb",
+      "hairline-soft": "#e5e5e5",
+      "sale": "#d30005",
+      "sale-deep": "#780700",
+      "success": "#007d48",
+      "success-bright": "#1eaa52",
+      "info": "#1151ff",
+      "info-deep": "#0034e3",
+      "accent-pink": "#ed1aa0",
+      "accent-pink-soft": "#ffb0dd",
+      "accent-purple-soft": "#beaffd",
+      "accent-purple-pale": "#d6d1ff",
+      "accent-teal": "#0a7281",
+      "accent-pink-deep": "#4c012d",
+      "font-display": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+      "font-ui": "'Inter', 'Helvetica Now Text Medium', Helvetica, Arial, sans-serif",
+      "font-body": "'Inter', 'Helvetica Now Text', Helvetica, Arial, sans-serif"
+    },
+    "colors": [
+      {
+        "name": "ink",
+        "value": "#111111",
+        "role": "ink"
+      },
+      {
+        "name": "on-primary",
+        "value": "#ffffff",
+        "role": "on primary"
+      },
+      {
+        "name": "canvas",
+        "value": "#ffffff",
+        "role": "canvas"
+      },
+      {
+        "name": "soft-cloud",
+        "value": "#f5f5f5",
+        "role": "soft cloud"
+      },
+      {
+        "name": "charcoal",
+        "value": "#39393b",
+        "role": "charcoal"
+      },
+      {
+        "name": "ash",
+        "value": "#4b4b4d",
+        "role": "ash"
+      },
+      {
+        "name": "mute",
+        "value": "#707072",
+        "role": "mute"
+      },
+      {
+        "name": "stone",
+        "value": "#9e9ea0",
+        "role": "stone"
+      },
+      {
+        "name": "hairline",
+        "value": "#cacacb",
+        "role": "hairline"
+      },
+      {
+        "name": "hairline-soft",
+        "value": "#e5e5e5",
+        "role": "hairline soft"
+      },
+      {
+        "name": "sale",
+        "value": "#d30005",
+        "role": "sale"
+      },
+      {
+        "name": "sale-deep",
+        "value": "#780700",
+        "role": "sale deep"
+      },
+      {
+        "name": "success",
+        "value": "#76E0B5",
+        "role": "success"
+      },
+      {
+        "name": "success-bright",
+        "value": "#1eaa52",
+        "role": "success bright"
+      },
+      {
+        "name": "info",
+        "value": "#1151ff",
+        "role": "info"
+      },
+      {
+        "name": "info-deep",
+        "value": "#0034e3",
+        "role": "info deep"
+      },
+      {
+        "name": "accent-pink",
+        "value": "#ed1aa0",
+        "role": "accent pink"
+      },
+      {
+        "name": "accent-pink-soft",
+        "value": "#ffb0dd",
+        "role": "accent pink soft"
+      },
+      {
+        "name": "accent-purple-soft",
+        "value": "#beaffd",
+        "role": "accent purple soft"
+      },
+      {
+        "name": "accent-purple-pale",
+        "value": "#d6d1ff",
+        "role": "accent purple pale"
+      },
+      {
+        "name": "accent-teal",
+        "value": "#0a7281",
+        "role": "accent teal"
+      },
+      {
+        "name": "accent-pink-deep",
+        "value": "#4c012d",
+        "role": "accent pink deep"
+      }
+    ],
+    "typography": {
+      "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+      "monoFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+      "fontSizes": [
+        "16px",
+        "15px",
+        "14px",
+        "96px",
+        "18px",
+        "12px",
+        "56px",
+        "13px",
+        "11px",
+        "24px",
+        "40px",
+        "64px",
+        "48px",
+        "32px"
+      ],
+      "fontWeights": [
+        "700",
+        "500",
+        "600"
+      ],
+      "lineHeights": [
+        "1.5",
+        "0.92",
+        "1",
+        "1.4",
+        "1.6",
+        "0.9",
+        "1.2",
+        "1.75",
+        "1.7",
+        "1.35"
+      ]
+    },
+    "spacing": [
+      "2px",
+      "4px",
+      "5px",
+      "6px",
+      "8px",
+      "10px",
+      "12px",
+      "14px",
+      "16px",
+      "18px",
+      "20px",
+      "24px",
+      "28px",
+      "30px",
+      "32px",
+      "36px",
+      "40px",
+      "44px",
+      "48px",
+      "56px"
+    ],
+    "radii": [
+      "9999px",
+      "24px",
+      "14px",
+      "6px",
+      "3px"
+    ],
+    "shadows": [
+      "0 0 0 12px var(--soft-cloud)",
+      "0 20px 30px -10px rgba(0,0,0,0.18)",
+      "0 0 0 2px var(--canvas), 0 0 0 4px var(--ink)",
+      "inset 0 -1px 0 var(--hairline-soft)"
+    ]
+  },
+  "components": {
+    "button": {
+      "variant": "filled",
+      "size": "md",
+      "shape": "square",
+      "color": "theme-primary",
+      "textColor": "theme-onPrimary",
+      "views": {
+        "container": {
+          "borderRadius": 0,
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.08em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "content": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.08em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        }
+      }
+    },
+    "badge": {
+      "variant": "filled",
+      "size": "sm",
+      "shape": "pill",
+      "views": {
+        "container": {
+          "backgroundColor": "theme-secondary",
+          "color": "color-white",
+          "borderColor": "theme-secondary",
+          "borderRadius": 0,
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "letterSpacing": "0.08em",
+          "textTransform": "uppercase",
+          "fontWeight": 800,
+          "fontStyle": "italic"
+        },
+        "text": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 600
+        }
+      }
+    },
+    "card": {
+      "variant": "outlined",
+      "size": "md",
+      "shape": "square",
+      "views": {
+        "container": {
+          "backgroundColor": "theme-secondary",
+          "borderColor": "color-gray-200",
+          "color": "theme-primary",
+          "borderRadius": 4,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "0 0 0 12px var(--soft-cloud)"
+        },
+        "header": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 600,
+          "borderColor": "color-gray-200"
+        },
+        "content": {
+          "color": "color-gray-500",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        },
+        "footer": {
+          "borderColor": "color-gray-200"
+        }
+      }
+    },
+    "input": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "theme-primary",
+          "borderRadius": 2,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontStyle": "italic",
+          "letterSpacing": "0.02em"
+        },
+        "label": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "helperText": {}
+      }
+    },
+    "textarea": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "theme-primary",
+          "borderRadius": 2,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontStyle": "italic",
+          "letterSpacing": "0.02em"
+        },
+        "label": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "helperText": {}
+      }
+    },
+    "select": {
+      "size": "md",
+      "shape": "default",
+      "variant": "default",
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "theme-primary",
+          "borderRadius": 2,
+          "borderWidth": "1px",
+          "borderStyle": "solid",
+          "boxShadow": "none"
+        },
+        "field": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        },
+        "label": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "helperText": {},
+        "text": {
+          "letterSpacing": "0.02em",
+          "fontStyle": "italic"
+        }
+      }
+    },
+    "checkbox": {
+      "size": "md",
+      "views": {
+        "checkbox": {
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white",
+          "_checked": {
+            "backgroundColor": "theme-primary",
+            "borderColor": "theme-primary"
+          },
+          "borderRadius": 0
+        },
+        "label": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "infoText": {
+          "color": "color-gray-500"
+        },
+        "container": {
+          "borderRadius": 0
+        }
+      }
+    },
+    "radio": {
+      "size": "md",
+      "views": {
+        "radio": {
+          "borderColor": "color-gray-200",
+          "backgroundColor": "color-white"
+        },
+        "dot": {
+          "backgroundColor": "theme-primary"
+        },
+        "label": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "infoText": {
+          "color": "color-gray-500"
+        },
+        "container": {
+          "borderRadius": "50%"
+        }
+      }
+    },
+    "switch": {
+      "size": "sm",
+      "views": {
+        "slider": {
+          "backgroundColor": "color-gray-200"
+        },
+        "circle": {
+          "backgroundColor": "color-white"
+        },
+        "label": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "container": {
+          "borderRadius": "9999px"
+        }
+      }
+    },
+    "slider": {
+      "backgroundColor": "theme-primary",
+      "views": {
+        "track": {
+          "backgroundColor": "color-gray-200"
+        },
+        "progress": {
+          "backgroundColor": "theme-primary"
+        },
+        "filledTrack": {
+          "backgroundColor": "theme-primary"
+        },
+        "thumb": {
+          "borderColor": "theme-primary",
+          "backgroundColor": "color-white"
+        },
+        "label": {
+          "color": "theme-primary"
+        },
+        "valueLabel": {
+          "color": "color-gray-500"
+        }
+      }
+    },
+    "tabs": {
+      "variant": "pill",
+      "views": {
+        "headerTabs": {
+          "borderColor": "color-gray-200"
+        },
+        "tab": {
+          "color": "color-gray-500",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "activeTab": {
+          "color": "theme-primary",
+          "borderColor": "theme-primary",
+          "backgroundColor": "theme-primary"
+        },
+        "title": {
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        },
+        "activeText": {
+          "color": "color-white"
+        },
+        "content": {
+          "color": "theme-primary"
+        },
+        "container": {
+          "borderRadius": "9999px"
+        }
+      }
+    },
+    "accordion": {
+      "views": {
+        "container": {
+          "borderColor": "color-gray-200",
+          "backgroundColor": "theme-secondary",
+          "color": "theme-primary",
+          "borderRadius": 0
+        },
+        "trigger": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        },
+        "content": {
+          "color": "color-gray-500"
+        }
+      }
+    },
+    "table": {
+      "views": {
+        "table": {
+          "backgroundColor": "color-white",
+          "color": "theme-primary",
+          "borderColor": "color-gray-200",
+          "borderRadius": 4
+        },
+        "thead": {
+          "backgroundColor": "theme-secondary",
+          "color": "theme-primary"
+        },
+        "th": {
+          "color": "color-gray-500",
+          "borderColor": "color-gray-200",
+          "fontFamily": "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "tr": {
+          "borderColor": "color-gray-200"
+        },
+        "td": {
+          "color": "theme-primary",
+          "borderColor": "color-gray-200",
+          "letterSpacing": "0.02em",
+          "fontStyle": "italic"
+        },
+        "caption": {
+          "color": "color-gray-500",
+          "fontStyle": "italic",
+          "letterSpacing": "0.02em"
+        }
+      }
+    },
+    "avatar": {
+      "views": {
+        "container": {
+          "backgroundColor": "theme-secondary",
+          "borderColor": "color-gray-200",
+          "color": "theme-primary",
+          "borderRadius": "50%"
+        },
+        "fallback": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        }
+      }
+    },
+    "alert": {
+      "views": {
+        "container": {
+          "backgroundColor": "theme-secondary",
+          "borderColor": "color-gray-200",
+          "borderRadius": 4
+        },
+        "title": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
+          "fontWeight": 800,
+          "letterSpacing": "0.02em",
+          "textTransform": "uppercase",
+          "fontStyle": "italic"
+        },
+        "description": {
+          "color": "color-gray-500",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        },
+        "icon": {
+          "color": "theme-primary"
+        }
+      }
+    },
+    "status": {
+      "views": {
+        "indicator": {
+          "backgroundColor": "theme-success"
+        },
+        "label": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        }
+      }
+    },
+    "progress": {
+      "color": "theme-primary",
+      "backgroundColor": "color-gray-200",
+      "radius": 0,
+      "views": {
+        "container": {
+          "backgroundColor": "color-gray-200",
+          "borderRadius": "9999px"
+        },
+        "bar": {
+          "backgroundColor": "theme-primary"
+        },
+        "text": {
+          "color": "theme-primary"
+        }
+      }
+    },
+    "loader": {
+      "color": "theme-primary"
+    },
+    "separator": {
+      "color": "color-gray-200",
+      "views": {
+        "container": {
+          "borderColor": "color-gray-200"
+        },
+        "label": {
+          "color": "color-gray-500",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        }
+      }
+    },
+    "navigation": {
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200",
+          "color": "theme-primary",
+          "borderRadius": 0
+        },
+        "item": {
+          "color": "color-gray-500"
+        },
+        "activeItem": {
+          "color": "theme-primary",
+          "borderColor": "theme-primary"
+        }
+      }
+    },
+    "hero": {
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        },
+        "eyebrow": {
+          "color": "color-gray-500"
+        },
+        "title": {
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        },
+        "description": {
+          "color": "color-gray-500"
+        }
+      }
+    },
+    "page": {
+      "views": {
+        "container": {
+          "backgroundColor": "color-white",
+          "color": "theme-primary",
+          "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
+        },
+        "section": {
+          "backgroundColor": "color-white",
+          "borderColor": "color-gray-200"
+        },
+        "surface": {
+          "backgroundColor": "theme-secondary",
+          "borderColor": "color-gray-200",
+          "color": "theme-primary"
+        }
+      }
+    }
+  },
+  "personality": {
+    "cornerStyle": "sharp",
+    "typeWeight": "black",
+    "typeCase": "uppercase",
+    "typeStyle": "italic",
+    "letterSpacing": "0.02em",
+    "accentTreatment": "flat",
+    "signatureMotif": "▶",
+    "density": "tight",
+    "surfaceTone": "mono",
+    "cardRadius": 4,
+    "pillRadius": 0,
+    "badgeRadius": 0,
+    "voice": "athletic-bold"
+  }
+}

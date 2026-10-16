@@ -1,0 +1,106 @@
+---
+title: ChatWidget
+description: A comprehensive chat interface component with support for various message types, attachments, and context integration.
+---
+
+# ChatWidget
+
+The `ChatWidget` provides a polished, interactive chat UI. It supports user and assistant messages, rich content types (including reasoning blocks and tool outputs), file attachments, and context-aware inputs.
+
+## Usage
+
+```tsx
+import { ChatWidget } from 'app-studio';
+import { useState } from 'react';
+
+const MyChat = () => {
+  const [messages, setMessages] = useState([
+    { id: '1', role: 'assistant', content: 'Hello! How can I help you?', timestamp: new Date() }
+  ]);
+
+  const handleSend = (text: string) => {
+    // Add user message
+    const userMsg = { id: Date.now().toString(), role: 'user', content: text, timestamp: new Date() };
+    setMessages(prev => [...prev, userMsg]);
+    
+    // Simulate reponse
+    setTimeout(() => {
+        setMessages(prev => [...prev, { 
+            id: (Date.now() + 1).toString(), 
+            role: 'assistant', 
+            content: 'I received your message!', 
+            timestamp: new Date() 
+        }]);
+    }, 1000);
+  };
+
+  return (
+    <div style={{ height: 500, width: 400 }}>
+      <ChatWidget
+        messages={messages}
+        onSubmit={handleSend}
+        variant="default"
+        inputPlaceholder="Type a message..."
+      />
+    </div>
+  );
+};
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `messages` | `Message[]` | `[]` | Array of message objects to display. |
+| `inputValue` | `string` | - | Value for the message input (controlled mode). |
+| `onInputChange` | `(value: string) => void` | - | Callback when input value changes. |
+| `onSubmit` | `(message: string) => void` | - | Callback when a message is sent. |
+| `inputPlaceholder` | `string` | - | Placeholder text for the input area. |
+| `disableInput` | `boolean` | `false` | Whether the input area is disabled. |
+| `variant` | `'default' \| 'glassy' \| 'minimal'` | `'default'` | Visual style variant of the widget. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | General size scale of the widget. |
+| `showTimestamps` | `boolean` | `false` | Whether to display timestamps below messages. |
+| `enableAttachments` | `boolean` | `false` | Shows the attachment (paperclip) button. |
+| `enableContextPicker` | `boolean` | `false` | Shows the context picker (+ button) in the input area. |
+| `selectedContextElements` | `ContextElement[]` | `[]` | List of context elements currently selected/attached to the input. |
+| `isLoading` | `boolean` | `false` | Displays a loading indicator if true. |
+| `loadingText` | `string` | - | Text to display alongside the loading indicator. |
+| `maxHeight` | `string \| number` | - | Maximum height for the messages display area. |
+
+## Types
+
+### Message
+
+```typescript
+type MessageRole = 'user' | 'assistant';
+type MessageType = 'text' | 'error' | 'system' | 'tool';
+
+interface Message {
+  id: string;
+  role: MessageRole;
+  content: string;
+  timestamp: Date;
+  reasoning?: string; // Collapsible "thinking" process block
+  messageType?: MessageType; // Defaults to 'text'
+  attachments?: Attachment[];
+  contextElements?: ContextElement[];
+}
+```
+
+### ContextElement
+
+```typescript
+interface ContextElement {
+  id: string;
+  name: string;
+  tagName: string;
+  rect?: DOMRect;
+}
+```
+
+## Variants
+
+- **default**: Standard solid background appearance.
+- **glassy**: Semi-transparent background with blur effects (requires appropriate container/background).
+- **minimal**: Stripped down appearance, suitable for embedding in tighter spaces.
+

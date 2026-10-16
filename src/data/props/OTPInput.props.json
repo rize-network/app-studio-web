@@ -1,0 +1,194 @@
+{
+  "componentDescription": "A customizable component for entering One-Time Passwords with visual feedback and detailed styling options.",
+  "id": {
+    "type": "string",
+    "typeValues": [],
+    "description": "A unique identifier for the OTP input field.",
+    "defaultValue": "undefined"
+  },
+  "error": {
+    "type": "any",
+    "typeValues": [],
+    "description": "An error object or message to display for validation feedback.",
+    "defaultValue": "false"
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Supplemental text to guide the user or provide additional information.",
+    "defaultValue": "undefined"
+  },
+  "name": {
+    "type": "string",
+    "typeValues": [],
+    "description": "The name attribute for the input field, useful for form submission.",
+    "defaultValue": "undefined"
+  },
+  "label": {
+    "type": "string",
+    "typeValues": [],
+    "description": "A descriptive label for the OTP input component.",
+    "defaultValue": "undefined"
+  },
+  "length": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The total number of digits/characters expected in the OTP.",
+    "defaultValue": "6"
+  },
+  "placeholder": {
+    "type": "string",
+    "typeValues": [],
+    "description": "Placeholder text displayed when the input field is empty.",
+    "defaultValue": ""
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the input field should be read-only.",
+    "defaultValue": "false"
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Indicates whether the input field should be disabled.",
+    "defaultValue": "false"
+  },
+  "isAutoFocus": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Determines if the input field should automatically gain focus on component mount.",
+    "defaultValue": "false"
+  },
+  "type": {
+    "type": "OTPInputType",
+    "typeValues": [
+      "text",
+      "password",
+      "number"
+    ],
+    "description": "Specifies the type of OTP input (e.g., numeric, alphanumeric).",
+    "defaultValue": "text"
+  },
+  "onComplete": {
+    "type": "(value: string) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when all OTP digits have been entered.",
+    "defaultValue": "undefined"
+  },
+  "onChange": {
+    "type": "(value: string) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when the value of the input changes.",
+    "defaultValue": "undefined"
+  },
+  "onChangeText": {
+    "type": "(value: string) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when the text content of the input changes.",
+    "defaultValue": "undefined"
+  },
+  "onBlur": {
+    "type": "(event: any) => void",
+    "typeValues": [],
+    "description": "Called when the field loses focus, with the blur event (not the value).",
+    "defaultValue": "() => {}"
+  },
+  "onKeyPress": {
+    "type": "(e: React.KeyboardEvent<HTMLInputElement>) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when a key is pressed down and then released.",
+    "defaultValue": "undefined"
+  },
+  "onKeyDown": {
+    "type": "(e: React.KeyboardEvent<HTMLInputElement>) => void",
+    "typeValues": [],
+    "description": "Callback function invoked when a key is pressed down.",
+    "defaultValue": "undefined"
+  },
+  "onClick": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Callback function invoked when the input field is clicked.",
+    "defaultValue": "() => {}"
+  },
+  "onFocus": {
+    "type": "() => void",
+    "typeValues": [],
+    "description": "Callback function invoked when the input field gains focus.",
+    "defaultValue": "() => {}"
+  },
+  "pattern": {
+    "type": "RegExp | string",
+    "typeValues": [],
+    "description": "A regular expression or string pattern to validate the input.",
+    "defaultValue": "undefined"
+  },
+  "pasteTransformer": {
+    "type": "(pasted: string) => string",
+    "typeValues": [],
+    "description": "A function to transform pasted content before it's processed by the input.",
+    "defaultValue": "undefined"
+  },
+  "stepValues": {
+    "type": "number[]",
+    "typeValues": [],
+    "description": "An array of numbers used for specific stepping behavior, if applicable.",
+    "defaultValue": "undefined"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Determines the visual size of the OTP input component.",
+    "defaultValue": "md"
+  },
+  "shadow": {
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": [],
+    "description": "Applies shadow styling to the OTP input, supporting various shadow types.",
+    "defaultValue": "undefined"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "rounded",
+      "square",
+      "circular"
+    ],
+    "description": "Defines the visual shape of the OTP input fields (e.g., rounded, square).",
+    "defaultValue": "rounded"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "outline",
+      "filled",
+      "ghost"
+    ],
+    "description": "Specifies the visual variant of the OTP input (e.g., filled, outlined).",
+    "defaultValue": "outline"
+  },
+  "gap": {
+    "type": "number",
+    "typeValues": [],
+    "description": "The spacing in pixels between individual OTP digit input fields.",
+    "defaultValue": "8"
+  },
+  "views": {
+    "type": "OTPInputStyles",
+    "typeValues": {
+      "input": "ViewProps",
+      "container": "ViewProps",
+      "text": "ViewProps",
+      "label": "ViewProps",
+      "helperText": "ViewProps"
+    },
+    "description": "Custom styles to be applied to different parts of the OTP input component.",
+    "defaultValue": "{}"
+  }
+}

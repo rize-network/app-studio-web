@@ -5,7 +5,7 @@ import { useDatePickerState } from './DatePicker/DatePicker.state';
 import DatePickerView from './DatePicker/DatePicker.view';
 
 const DatePickerComponent: React.FC<DatePickerProps> = (props) => {
-  const datePickerStates = useDatePickerState();
+  const datePickerStates = useDatePickerState(props);
   return <DatePickerView {...datePickerStates} {...props} />;
 };
 

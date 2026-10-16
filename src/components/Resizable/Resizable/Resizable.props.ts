@@ -8,194 +8,81 @@ import {
   ResizableStyles,
   ResizableStorage,
 } from './Resizable.type';
-
 export interface ResizableProps {
-  /**
-   * The content of the resizable container
-   */
+  // Defines the content to be rendered inside the Resizable component.
   children: React.ReactNode;
-
-  /**
-   * The orientation of the resizable container
-   */
+  // Specifies the orientation of the resizable panels (horizontal or vertical).
   orientation?: Orientation;
-
-  /**
-   * The size of the resize handles
-   */
+  // Sets a predefined size configuration for the resizable panels.
   size?: Size;
-
-  /**
-   * The visual style variant of the resize handles
-   */
+  // Determines the visual style or behavior variant of the resizable component.
   variant?: Variant;
-
-  /**
-   * The default sizes of the panels in pixels or percentages
-   * If not provided, panels will have equal sizes
-   */
+  // Provides initial sizes for the panels when the component first renders.
   defaultSizes?: (number | string)[];
-
-  /**
-   * Callback when panel sizes change
-   */
+  // Callback function invoked when the sizes of the panels change.
   onSizesChange?: (sizes: number[]) => void;
-
-  /**
-   * Minimum size of any panel in pixels
-   */
+  // Sets the minimum overall size allowed for the resizable container.
   minSize?: number;
-
-  /**
-   * Maximum size of any panel in pixels
-   */
+  // Sets the maximum overall size allowed for the resizable container.
   maxSize?: number;
-
-  /**
-   * Whether to collapse panels when they reach minSize
-   */
+  // Enables or disables the ability for panels to be collapsed.
   collapsible?: boolean;
-
-  /**
-   * Unique ID for persisting panel sizes in storage
-   */
+  // An ID used to automatically save and restore panel sizes.
   autoSaveId?: string;
-
-  /**
-   * Storage mechanism for persisting panel sizes
-   * Defaults to localStorage if not provided
-   */
+  // Specifies the storage mechanism for saving and restoring panel states.
   storage?: ResizableStorage;
-
-  /**
-   * Amount to resize by when using keyboard navigation (in pixels)
-   * Defaults to 10px
-   */
+  // Defines the step size for resizing panels using keyboard input.
   keyboardResizeBy?: number;
-
-  /**
-   * Custom styles for different parts of the resizable component
-   */
+  // Allows custom styling for different parts of the Resizable component.
   views?: ResizableStyles;
-
-  /**
-   * Additional props to be spread to the container element
-   */
   [key: string]: any;
 }
-
 export interface ResizablePanelProps {
-  /**
-   * The content of the panel
-   */
+  // Defines the content to be rendered inside the ResizablePanel component.
   children: React.ReactNode;
-
-  /**
-   * The id of the panel
-   */
+  // A unique identifier for the resizable panel.
   id: string;
-
-  /**
-   * The default size of the panel in pixels or percentage
-   */
+  // Sets the initial size for this specific panel.
   defaultSize?: number | string;
-
-  /**
-   * The minimum size of the panel in pixels
-   */
+  // Sets the minimum size allowed for this panel.
   minSize?: number;
-
-  /**
-   * The maximum size of the panel in pixels
-   */
+  // Sets the maximum size allowed for this panel.
   maxSize?: number;
-
-  /**
-   * Whether the panel can be collapsed
-   */
+  // Enables or disables the ability for this panel to be collapsed.
   collapsible?: boolean;
-
-  /**
-   * Whether the panel is initially collapsed
-   * Only works if collapsible is true
-   */
+  // Specifies if the panel should be collapsed by default on initial render.
   defaultCollapsed?: boolean;
-
-  /**
-   * Callback when panel collapse state changes
-   */
+  // Callback function invoked when the collapsed state of the panel changes.
   onCollapseChange?: (collapsed: boolean) => void;
-
-  /**
-   * Custom styles for the panel
-   */
+  // Allows custom styling for the panel and its collapsed state.
   views?: {
     panel?: ViewProps;
     collapsedPanel?: ViewProps;
   };
-
-  /**
-   * Additional props to be spread to the panel element
-   */
   [key: string]: any;
 }
-
 export interface ResizableHandleProps {
-  /**
-   * The id of the handle
-   */
+  // A unique identifier for the resizable handle.
   id: string;
-
-  /**
-   * The position of the handle
-   */
+  // Specifies the position of the handle relative to the panel it controls.
   position?: HandlePosition;
-
-  /**
-   * Whether the handle is disabled
-   */
+  // Disables the handle, preventing interaction and resizing.
   disabled?: boolean;
-
-  /**
-   * Whether to show a visual indicator when hovering over the handle
-   */
+  // Determines if the handle should display a visual indicator during resize.
   withVisualIndicator?: boolean;
-
-  /**
-   * Whether to show a collapse button for adjacent panels
-   * Only works if the adjacent panel has collapsible=true
-   */
+  // Enables or disables the collapse button on the handle.
   withCollapseButton?: boolean;
-
-  /**
-   * The panel ID to collapse when clicking the collapse button
-   * If not provided, will collapse the panel before this handle
-   */
+  // Specifies which panel this handle should collapse when its button is pressed.
   collapseTarget?: string;
-
-  /**
-   * Custom styles for the handle
-   */
+  // Allows custom styling for the handle, its icon, and the collapse icon.
   views?: {
     handle?: ViewProps;
     handleIcon?: ViewProps;
     collapseIcon?: ViewProps;
   };
-
-  /**
-   * Additional props to be spread to the handle element
-   */
   [key: string]: any;
 }
-
 export interface ResizableType extends React.FC<ResizableProps> {
-  /**
-   * The panel component for the resizable container
-   */
   Panel: React.FC<ResizablePanelProps>;
-
-  /**
-   * The handle component for resizing panels
-   */
   Handle: React.FC<ResizableHandleProps>;
 }

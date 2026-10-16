@@ -12,7 +12,7 @@ const PasswordComponent: React.FC<PasswordProps> = ({
   hiddenIcon = <CloseEyeIcon widthHeight={14} />,
   ...props
 }) => {
-  const formProps = useFormikInput(props);
+  const formProps = useFormikInput(props, { focusable: true });
 
   const { isVisible, setIsVisible, ...passwordProps } =
     usePasswordState(formProps);

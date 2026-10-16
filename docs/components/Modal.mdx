@@ -1,533 +1,409 @@
-### **Import**
+# Modal
 
+A custom content overlay that appears on top of the main screen, with support for headers, bodies, footers, and flexible positioning.
+
+### **Import**
 ```tsx
-import { Modal } from 'app-studio';
+import { Modal, useModalStore } from '@app-studio/components';
 ```
 
 ### **Default**
-
-It uses the isOpen and onClose properties to display the modal.
-
 ```tsx
-import { Button } from '../Button/Button';
-import { useState } from 'react';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)} isAuto>
-    Open Modal
-  </Button>
-  <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
-    <Modal.Container>
-      <Modal.Header>Title</Modal.Header>
-      <Modal.Body>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-        nisl consectetur et.
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => setShow(false)}>Cancel</Button>
-      </Modal.Footer>
-    </Modal.Container>
-  </Modal.Overlay>
-</>;
-```
-
-## **Modal Overlay**
-
-It represents the overlay or backdrop that appears behind the modal content when the modal is displayed.
-
-### **Props**
-
-| Prop             | Type          | Description                                                                                                                               | Default |
-| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| isOpen           | boolean       | Whether the modal overlay is open.                                                                                                       | false   |
-| onClose          | function      | Callback function to close the modal.                                                                                                     |         |
-| position         | Position      | Positions the modal overlay ('top', 'left', 'right', 'bottom', 'center').                                                                 | 'center' |
-| blur             | number        | Adds a blur effect on the modal overlay.                                                                                                |         |
-| isClosePrevented | boolean       | Prevents the user from closing the modal when clicking outside of it.                                                                   | false   |
-| styles           | CSSProperties | Optional custom styles for the ModalOverlay.                                                                                              |         |
-| className        | string        | Optional className for the ModalOverlay container.                                                                                        |         |
-
-### **Props**
-
-| Prop             | Type          | Description                                                                                                                               | Default |
-| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| isOpen           | boolean       | Whether the modal overlay is open.                                                                                                       | false   |
-| onClose          | function      | Callback function to close the modal.                                                                                                     |         |
-| position         | Position      | Positions the modal overlay ('top', 'left', 'right', 'bottom', 'center').                                                                 | 'center' |
-| blur             | number        | Adds a blur effect on the modal overlay.                                                                                                |         |
-| isClosePrevented | boolean       | Prevents the user from closing the modal when clicking outside of it.                                                                   | false   |
-| styles           | CSSProperties | Optional custom styles for the ModalOverlay.                                                                                              |         |
-| className        | string        | Optional className for the ModalOverlay container.                                                                                        |         |
-
-### **FullScreen**
-
-“**is*fullScreen***” property changes the width and height of the modal so that it fits the entire screen.
-
-```tsx
-import { Button } from '../Button/Button';
-import { useState } from 'react';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)} isAuto>
-    Full Screen
-  </Button>
-  <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
-    <Modal.Container isFullScreen>
-      <Modal.Header>Title</Modal.Header>
-      <Modal.Body>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-        nisl consectetur et.
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => setShow(false)}>Cancel</Button>
-      </Modal.Footer>
-    </Modal.Container>
-  </Modal.Overlay>
-</>;
-```
-
-### **Position**
-
-“**_position_**” places the modal in the specified direction. It has a default positioning of “center”.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
-
-const [showTop, setShowTop] = useState(false);
-const [showBottom, setShowBottom] = useState(false);
-const [showRight, setShowRight] = useState(false);
-const [showLeft, setShowLeft] = useState(false);
-const [showCenter, setShowCenter] = useState(false);
-
-<>
-  <Horizontal gap={10} flexWrap="nowrap">
-    <Button onClick={() => setShowTop(true)}>Top</Button>
-    <Button onClick={() => setShowBottom(true)}>Bottom</Button>
-    <Button onClick={() => setShowRight(true)}>Right</Button>
-    <Button onClick={() => setShowLeft(true)}>Left</Button>
-    <Button onClick={() => setShowCenter(true)}>Center</Button>
-  </Horizontal>
-
-  {showBottom && (
-    <Modal.Overlay isOpen={showBottom} onClose={() => setShowBottom(false)} position="bottom">
-      <Modal.Container>
-        <Modal.Header>Title</Modal.Header>
-        <Modal.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShowBottom(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-  {showTop && (
-    <Modal.Overlay isOpen={showTop} onClose={() => setShowTop(false)} position="top">
-      <Modal.Container>
-        <Modal.Header>Title</Modal.Header>
-        <Modal.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShowTop(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-  {showLeft && (
-    <Modal.Overlay isOpen={showLeft} onClose={() => setShowLeft(false)} position="left">
-      <Modal.Container>
-        <Modal.Header>Title</Modal.Header>
-        <Modal.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShowLeft(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-  {showRight && (
-    <Modal.Overlay isOpen={showRight} onClose={() => setShowRight(false)} position="right">
-      <Modal.Container>
-        <Modal.Header>Title</Modal.Header>
-        <Modal.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShowRight(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-  {showCenter && (
-    <Modal.Overlay isOpen={showCenter} onClose={() => setShowCenter(false)} position="center">
-      <Modal.Container>
-        <Modal.Header>Title</Modal.Header>
-        <Modal.Body>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-          Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-          nisl consectetur et.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShowCenter(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-</>;
-```
-
-### **Blur**
-
-“**_blur_**” adds a blur effect on the modal overlay.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Blur Overlay</Button>
-  <Modal.Overlay isOpen={show} onClose={() => setShow(false)} blur={10}>
-    <Modal.Container>
-      <Modal.Header>Title</Modal.Header>
-      <Modal.Body>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-        nisl consectetur et.
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => setShow(false)}>Cancel</Button>
-      </Modal.Footer>
-    </Modal.Container>
-  </Modal.Overlay>
-</>;
-```
-
-### **Prevent Close**
-
-“**_isClosePrevented_**” prevents the user from closing the modal when clicking outside of it.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)} isAuto>
-    Prevent Close on Overlay
-  </Button>
-  <Modal.Overlay isOpen={show} onClose={() => setShow(false)} isClosePrevented>
-    <Modal.Container>
-      <Modal.Header>Title</Modal.Header>
-      <Modal.Body>
-        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-        Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque
-        nisl consectetur et.
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => setShow(false)}>Cancel</Button>
-      </Modal.Footer>
-    </Modal.Container>
-  </Modal.Overlay>
-</>;
-```
-
-## **Modal Container**
-
-It represents the main container or wrapper that holds all the content and components of a modal.
-
-### **Shapes**
-
-“**_shape_**” gives a sharp or rounded edges to the modal container.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Text } from '../Text/Text';
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
-
-const [showSharp, setShowSharp] = useState(false);
-const [showRounded, setShowRounded] = useState(false);
-
-<>
-  <Horizontal gap={10}>
-    <Button onClick={() => setShowSharp(true)}>Sharp</Button>
-    <Button onClick={() => setShowRounded(true)}>Rounded</Button>
-  </Horizontal>
-
-  {showSharp && (
-    <Modal.Overlay isOpen={showSharp} onClose={() => setShowSharp(false)}>
-      <Modal.Container variant="sharp">
-        <Modal.Body>
-          <Text  maxLines={2}>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
-            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et.
-          </Text>
-        </Modal.Body>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-  {showRounded && (
-    <Modal.Overlay isOpen={showRounded} onClose={() => setShowRounded(false)}>
-      <Modal.Container variant="rounded">
-        <Modal.Body>
-          <Text  maxLines={2}>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
-            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et.
-          </Text>
-        </Modal.Body>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-</>;
-```
-
-### **Shadow**
-
-“**_shadow_**” adds a shadow effect on the modal container.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Text } from '../Text/Text';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Shadow</Button>
-
-  {show && (
-    <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
-      <Modal.Container shadow={{ boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.6)' }}>
-        <Modal.Body>
-          <Text  maxLines={2}>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
-            quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel
-            scelerisque nisl consectetur et.
-          </Text>
-        </Modal.Body>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-</>;
-```
-
-## **Modal Header**
-
-It represents the header section of a modal, which typically contains a title or heading and optionally other elements such as a close button or additional controls.
-
-### **Close Button Alignment**
-
-“**_buttonPosition_**” places the closing button found in the header modal in the specified direction. It has a default position of “**right**”.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Horizontal } from '../Layout/Horizontal/Horizontal';
-
-const [showRight, setShowRight] = useState(false);
-const [showWithout, setShowWithout] = useState(false);
-const [showLeft, setShowLeft] = useState(false);
-
-<>
-  <Horizontal gap={10}>
-    <Button onClick={() => setShowRight(true)} isAuto>
-      Close button on the right
-    </Button>
-    <Button onClick={() => setShowWithout(true)} isAuto>
-      Without Close Button
-    </Button>
-    <Button onClick={() => setShowLeft(true)} isAuto>
-      Without Close left
-    </Button>
-  </Horizontal>
-  {showRight && (
-    <Modal.Overlay isOpen={showRight} onClose={() => setShowRight(false)}>
-      <Modal.Container>
-        <Modal.Header> Close Button</Modal.Header>
-        <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShowRight(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-  {showWithout && (
-    <Modal.Overlay isOpen={showWithout} onClose={() => setShowWithout(false)}>
-      <Modal.Container>
-        <Modal.Header buttonPosition="none"> Close Button</Modal.Header>
-        <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShowWithout(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-  {showLeft && (
-    <Modal.Overlay isOpen={showLeft} onClose={() => setShowLeft(false)}>
-      <Modal.Container>
-        <Modal.Header buttonPosition="left">Close Button</Modal.Header>
-        <Modal.Body>Cras mattis consectetur purus sit amet fermentum.</Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShowLeft(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-</>;
-```
-
-## **Modal Body**
-
-It represents the main content area of a modal, where the primary information or user interaction elements are displayed.
-
-### **LargeContent**
-
-A vertical scroll is displayed, if the content height exceed the body height.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Text } from '../Text/Text';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Scroll</Button>
-  {show && (
-    <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
-      <Modal.Container>
-        <Modal.Header buttonPosition="none">
-          <Text size="lg" weight="semibold">
-            Title
-          </Text>
-        </Modal.Header>
-        <Modal.Body height="200px">
-          Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
-          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
-          purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit
-          amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet Cras
-          mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
-          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
-          purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit
-          amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet
-          fermentum.Cras mattis consectetur purus sit amet fermentum.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShow(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-</>;
-```
-
-## **Modal Footer**
-
-It represents the footer section of a modal, which typically contains buttons or controls for actions related to the modal's content.
-
-```tsx
-import { useState } from 'react';
-import { Button } from '../Button/Button';
-import { Text } from '../Text/Text';
-
-const [show, setShow] = useState(false);
-
-<>
-  <Button onClick={() => setShow(true)}>Footer</Button>
-  {show && (
-    <Modal.Overlay isOpen={show} onClose={() => setShow(false)}>
-      <Modal.Container>
-        <Modal.Header buttonPosition="none">
-          <Text size="lg" weight="semibold">
-            Title
-          </Text>
-        </Modal.Header>
-        <Modal.Body height="200px">
-          Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis
-          consectetur purus sit amet fermentum.Cras mattis consectetur purus sit amet fermentum.Cras mattis consectetur
-          purus sit amet fermentum.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setShow(false)}>Cancel</Button>
-        </Modal.Footer>
-      </Modal.Container>
-    </Modal.Overlay>
-  )}
-</>;
-```
-
-## **Types**
-
-```tsx
-type Position = 'top' | 'left' | 'right' | 'bottom' | 'center';
-```
-
-```tsx
-type Shape = 'sharp' | 'rounded';
-```
-
-```tsx
-type CloseButtonPosition = 'left' | 'right' | 'none';
-```
-
-```tsx
-type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-```
-
-## **Default Styles**
-
-#### **OverlayAlignments**
-
-```tsx
-const OverlayAlignments: Record<Position, CSSProperties> = {
-  center: { justifyContent: 'center', alignItems: 'center' },
-  top: { justifyContent: 'center' },
-  right: { justifyContent: 'flex-end', alignItems: 'center' },
-  bottom: { justifyContent: 'center', alignItems: 'flex-end' },
-  left: { alignItems: 'center' },
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text } from 'app-studio';
+
+export const DefaultModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
+      
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container>
+            <Modal.Header onClose={() => setIsOpen(false)}>
+              <Text>Modal Title</Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>Modal content goes here</Text>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={() => setIsOpen(false)}>Close</Button>
+            </Modal.Footer>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
 };
 ```
 
-#### **ContainerShapes**
+### **Modal.Layout**
+Centralized modal management system for handling multiple modals.
 
 ```tsx
-const ContainerShapes: Record<Shape, CSSProperties> = {
-  sharp: { borderRadius: 0 },
-  rounded: { borderRadius: 4 },
+import React from 'react';
+import { Modal } from '@app-studio/components';
+import { Text, Button } from 'app-studio';
+
+const WelcomeModal = ({ onClose }) => (
+  <Modal.Container>
+    <Modal.Header onClose={onClose}>
+      <Text>Welcome</Text>
+    </Modal.Header>
+    <Modal.Body>
+      <Text>Welcome to our application!</Text>
+    </Modal.Body>
+  </Modal.Container>
+);
+
+const ConfirmModal = ({ onClose }) => (
+  <Modal.Container>
+    <Modal.Header onClose={onClose}>
+      <Text>Confirm</Text>
+    </Modal.Header>
+    <Modal.Body>
+      <Text>Are you sure?</Text>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button onClick={onClose}>Cancel</Button>
+      <Button onClick={onClose}>Confirm</Button>
+    </Modal.Footer>
+  </Modal.Container>
+);
+
+export const ModalLayoutExample = () => (
+  <Modal.Layout 
+    modals={{
+      welcome: WelcomeModal,
+      confirm: ConfirmModal,
+    }}
+  />
+);
+```
+
+### **isOpen**
+Controls the visibility of the modal.
+
+- **Type:** `boolean`
+- **Required:** `true`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text } from 'app-studio';
+
+export const ControlledModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container>
+            <Modal.Body>
+              <Text>Controlled Modal</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
 };
 ```
 
-#### **HeaderIconSizes**
+### **onClose**
+Callback function executed when the modal closes.
+
+- **Type:** `() => void`
+- **Required:** `true`
 
 ```tsx
-const HeaderIconSizes: Record<Size, number> = {
-  xs: 12,
-  sm: 16,
-  md: 20,
-  lg: 24,
-  xl: 28,
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text } from 'app-studio';
+
+export const CloseCallbackModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay 
+          isOpen={isOpen} 
+          onClose={() => {
+            console.log('Modal closing');
+            setIsOpen(false);
+          }}
+        >
+          <Modal.Container>
+            <Modal.Body>
+              <Text>Click outside to close</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
 };
 ```
+
+### **isClosePrevented**
+Prevents the modal from closing when clicking the overlay.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text } from 'app-studio';
+
+export const PreventCloseModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay 
+          isOpen={isOpen} 
+          onClose={() => setIsOpen(false)}
+          isClosePrevented
+        >
+          <Modal.Container>
+            <Modal.Header onClose={() => setIsOpen(false)}>
+              <Text>Must use close button</Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>Click outside won't close this modal</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **position**
+Positioning of the modal container.
+
+- **Type:** `Position`
+- **Possible Values:** `'center' | 'top' | 'bottom' | 'left' | 'right'`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text, Horizontal } from 'app-studio';
+
+export const PositionedModals = () => {
+  const [position, setPosition] = useState<string | null>(null);
+  
+  return (
+    <>
+      <Horizontal gap={10}>
+        {['center', 'top', 'bottom', 'left', 'right'].map((pos) => (
+          <Button key={pos} onClick={() => setPosition(pos)}>
+            {pos}
+          </Button>
+        ))}
+      </Horizontal>
+      
+      <Modal>
+        <Modal.Overlay 
+          isOpen={!!position} 
+          onClose={() => setPosition(null)}
+          position={position as any}
+        >
+          <Modal.Container>
+            <Modal.Body>
+              <Text>Positioned at {position}</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **blur**
+The degree of blurriness applied to the overlay.
+
+- **Type:** `number`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text } from 'app-studio';
+
+export const BlurredModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Blurred Modal</Button>
+      <Modal>
+        <Modal.Overlay 
+          isOpen={isOpen} 
+          onClose={() => setIsOpen(false)}
+          blur={10}
+        >
+          <Modal.Container>
+            <Modal.Body>
+              <Text>Background is blurred</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **shape**
+Determines whether the modal should have sharp or rounded edges.
+
+- **Type:** `Shape`
+- **Possible Values:** `'sharp' | 'rounded' | 'pillShaped'`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text, Horizontal } from 'app-studio';
+
+export const ShapedModals = () => {
+  const [shape, setShape] = useState<string | null>(null);
+  
+  return (
+    <>
+      <Horizontal gap={10}>
+        {['sharp', 'rounded', 'pillShaped'].map((s) => (
+          <Button key={s} onClick={() => setShape(s)}>
+            {s}
+          </Button>
+        ))}
+      </Horizontal>
+      
+      <Modal>
+        <Modal.Overlay isOpen={!!shape} onClose={() => setShape(null)}>
+          <Modal.Container shape={shape as any}>
+            <Modal.Body>
+              <Text>Shape: {shape}</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **isFullScreen**
+Makes the modal occupy the full width and height of the screen.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text } from 'app-studio';
+
+export const FullScreenModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open Fullscreen</Button>
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container isFullScreen>
+            <Modal.Header onClose={() => setIsOpen(false)}>
+              <Text>Fullscreen Modal</Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>This modal takes up the entire screen</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **buttonPosition**
+Position of the close button in the header.
+
+- **Type:** `CloseButtonPosition`
+- **Possible Values:** `'left' | 'right' | 'none'`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text } from 'app-studio';
+
+export const ButtonPositionModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container>
+            <Modal.Header 
+              onClose={() => setIsOpen(false)}
+              buttonPosition="left"
+            >
+              <Text>Close button on left</Text>
+            </Modal.Header>
+            <Modal.Body>
+              <Text>Modal content</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+
+### **shadow**
+Applies a shadow effect to the modal.
+
+- **Type:** `Shadow | Elevation | ViewProps`
+
+```tsx
+import React, { useState } from 'react';
+import { Modal } from '@app-studio/components';
+import { Button, Text } from 'app-studio';
+
+export const ShadowModal = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <>
+      <Button onClick={() => setIsOpen(true)}>Open</Button>
+      <Modal>
+        <Modal.Overlay isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Container 
+            shadow={{ boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}
+          >
+            <Modal.Body>
+              <Text>Modal with custom shadow</Text>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
+      </Modal>
+    </>
+  );
+};
+```
+

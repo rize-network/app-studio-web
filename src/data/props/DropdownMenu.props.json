@@ -1,0 +1,69 @@
+{
+  "componentDescription": "A customizable overlay that displays a list of choices or actions when triggered.",
+  "trigger": {
+    "type": "React.ReactNode",
+    "description": "Defines the element that will trigger the dropdown menu to open or close.",
+    "defaultValue": "undefined"
+  },
+  "items": {
+    "type": "DropdownMenuItem[]",
+    "description": "An array of data representing the items to be displayed within the dropdown menu.",
+    "defaultValue": "undefined"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Specifies the visual size of the dropdown menu.",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "filled",
+      "outline"
+    ],
+    "description": "Defines the visual style or variant of the dropdown menu.",
+    "defaultValue": "default"
+  },
+  "side": {
+    "type": "Position",
+    "typeValues": [
+      "top",
+      "right",
+      "bottom",
+      "left"
+    ],
+    "description": "Determines the preferred position of the dropdown content relative to its trigger (e.g., 'top', 'bottom', 'left', 'right').",
+    "defaultValue": "bottom"
+  },
+  "align": {
+    "type": "Alignment",
+    "typeValues": [
+      "start",
+      "center",
+      "end"
+    ],
+    "description": "Specifies the alignment of the dropdown content relative to the trigger on the specified side (e.g., 'start', 'center', 'end').",
+    "defaultValue": "start"
+  },
+  "defaultOpen": {
+    "type": "boolean",
+    "description": "Controls the initial open state of the dropdown menu.",
+    "defaultValue": "false"
+  },
+  "views": {
+    "type": "DropdownMenuStyles",
+    "description": "Provides custom styles to be applied to different parts of the dropdown menu component.",
+    "defaultValue": "undefined"
+  },
+  "otherProps": {
+    "type": "any",
+    "description": "Allows for additional, arbitrary props to be passed to the component, providing flexibility for custom attributes.",
+    "defaultValue": "undefined"
+  }
+}

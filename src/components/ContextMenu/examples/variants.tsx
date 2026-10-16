@@ -37,7 +37,7 @@ export const ContextMenuVariants = () => {
           <ContextMenu items={items} variant="default">
             <View
               padding={20}
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               borderRadius={8}
               textAlign="center"
               cursor="context-menu"
@@ -54,7 +54,7 @@ export const ContextMenuVariants = () => {
           <ContextMenu items={items} variant="filled">
             <View
               padding={20}
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               borderRadius={8}
               textAlign="center"
               cursor="context-menu"
@@ -71,7 +71,7 @@ export const ContextMenuVariants = () => {
           <ContextMenu items={items} variant="outline">
             <View
               padding={20}
-              backgroundColor="color.gray.100"
+              backgroundColor="color-gray-100"
               borderRadius={8}
               textAlign="center"
               cursor="context-menu"

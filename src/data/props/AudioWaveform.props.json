@@ -1,0 +1,18 @@
+{
+  "componentDescription": "Generates and displays a real-time audio waveform visualization from an AnalyserNode.",
+  "analyserNode": {
+    "type": "AnalyserNode | null",
+    "typeValues": [],
+    "description": "Specifies the AnalyserNode used to get frequency data for the waveform visualization. It can be null if not yet initialized.",
+    "defaultValue": "null"
+  },
+  "isPaused": {
+    "type": "boolean",
+    "typeValues": [
+      true,
+      false
+    ],
+    "description": "Indicates whether the audio playback is currently paused, affecting waveform visualization updates.",
+    "defaultValue": "false"
+  }
+}

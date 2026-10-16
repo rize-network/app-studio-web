@@ -1,0 +1,873 @@
+# Resizable
+
+A flexible container component for arranging and resizing child panels dynamically.
+
+### **Import**
+```tsx
+import { Resizable } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const DefaultResizable = () => {
+  return (
+    <View
+      height="400px"
+      width="100%"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Resizable>
+        <Resizable.Panel id="panel1" defaultSize="30%">
+          <View padding="16px" height="100%" backgroundColor="color-blue-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Panel 1
+            </Text>
+            <Text>This is the first panel. Drag the handle to resize.</Text>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle1" withVisualIndicator />
+
+        <Resizable.Panel id="panel2" defaultSize="40%">
+          <View padding="16px" height="100%" backgroundColor="color-green-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Panel 2
+            </Text>
+            <Text>This is the second panel. Drag the handle to resize.</Text>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle2" withVisualIndicator />
+
+        <Resizable.Panel id="panel3" defaultSize="30%">
+          <View padding="16px" height="100%" backgroundColor="color-purple-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Panel 3
+            </Text>
+            <Text>This is the third panel. Drag the handle to resize.</Text>
+          </View>
+        </Resizable.Panel>
+      </Resizable>
+    </View>
+  );
+};
+```
+
+### **collapsible**
+Enables or disables the ability for panels to be collapsed.
+
+- **Type:** `boolean`
+- **Default:** `false`
+- **Possible Values:** ``
+
+```tsx
+import React from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const CollapsibleResizable = () => {
+  return (
+    <View
+      height="400px"
+      width="100%"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Resizable
+        collapsible={true}
+        autoSaveId="collapsible-example"
+        keyboardResizeBy={20}
+      >
+        <Resizable.Panel
+          id="panel1"
+          defaultSize="25%"
+          collapsible={true}
+          minSize={100}
+          maxSize={300}
+        >
+          <View padding="16px" height="100%" backgroundColor="color-blue-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Collapsible Panel
+            </Text>
+            <Text>
+              This panel can be collapsed using the button on the handle. It
+              also has min (100px) and max (300px) constraints.
+            </Text>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle1" withVisualIndicator withCollapseButton />
+
+        <Resizable.Panel id="panel2" defaultSize="50%">
+          <View padding="16px" height="100%" backgroundColor="color-green-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Main Panel
+            </Text>
+            <Text>
+              This is the main content panel. Try using keyboard navigation with
+              arrow keys to resize panels. Home/End keys make larger jumps.
+            </Text>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle
+          id="handle2"
+          withVisualIndicator
+          withCollapseButton
+          collapseTarget="panel3"
+        />
+
+        <Resizable.Panel
+          id="panel3"
+          defaultSize="25%"
+          collapsible={true}
+          defaultCollapsed={true}
+        >
+          <View padding="16px" height="100%" backgroundColor="color-purple-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Initially Collapsed Panel
+            </Text>
+            <Text>
+              This panel starts collapsed. The layout is persisted in
+              localStorage so your changes will be remembered when you return.
+            </Text>
+          </View>
+        </Resizable.Panel>
+      </Resizable>
+    </View>
+  );
+};
+```
+
+### **CodeEditor**
+
+```tsx
+import React from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const CodeEditorLayout = () => {
+  return (
+    <View
+      height="600px"
+      width="100%"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Resizable>
+        {/* File Explorer */}
+        <Resizable.Panel
+          id="explorer"
+          defaultSize="20%"
+          minSize={150}
+          maxSize={300}
+        >
+          <View padding="8px" height="100%" backgroundColor="color-gray-100">
+            <Text fontWeight="bold" marginBottom="8px">
+              Explorer
+            </Text>
+            <Vertical gap={4}>
+              <View
+                padding="4px 8px"
+                borderRadius="4px"
+                backgroundColor="color-blue-100"
+              >
+                <Text>src/</Text>
+              </View>
+              <View padding="4px 8px" marginLeft="12px" borderRadius="4px">
+                <Text>components/</Text>
+              </View>
+              <View
+                padding="4px 8px"
+                marginLeft="24px"
+                borderRadius="4px"
+                backgroundColor="color-blue-100"
+              >
+                <Text>Resizable/</Text>
+              </View>
+              <View padding="4px 8px" marginLeft="36px" borderRadius="4px">
+                <Text>Resizable.tsx</Text>
+              </View>
+              <View padding="4px 8px" marginLeft="36px" borderRadius="4px">
+                <Text>Resizable.props.ts</Text>
+              </View>
+              <View padding="4px 8px" marginLeft="36px" borderRadius="4px">
+                <Text>Resizable.view.tsx</Text>
+              </View>
+            </Vertical>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle1" withVisualIndicator />
+
+        {/* Main Editor Area */}
+        <Resizable.Panel id="editor" defaultSize="60%">
+          <Resizable orientation="vertical">
+            {/* Code Editor */}
+            <Resizable.Panel id="code" defaultSize="70%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-900"
+                color="white"
+                fontFamily="monospace"
+              >
+                <Text
+                  fontWeight="bold"
+                  marginBottom="8px"
+                  color="color-gray-300"
+                >
+                  Resizable.tsx
+                </Text>
+                <Text color="color-blue-300">import</Text>
+                <Text color="white"> React </Text>
+                <Text color="color-blue-300">from</Text>
+                <Text color="color-green-300"> react</Text>
+                <Text color="white">;</Text>
+                <Text></Text>
+                <Text color="color-blue-300">import</Text>
+                <Text color="white"> {'{'} </Text>
+                <Text color="white">ResizableProps,</Text>
+                <Text color="white">ResizableType,</Text>
+                <Text color="white">{'}'} </Text>
+                <Text color="color-blue-300">from</Text>
+                <Text color="color-green-300"> </Text>
+                <Text color="white">;</Text>
+                <Text></Text>
+                <Text color="color-purple-300">const</Text>
+                <Text color="color-yellow-300"> ResizableComponent</Text>
+                <Text color="white">: React.FC</Text>
+                <Text color="color-gray-300">{'<'}</Text>
+                <Text color="color-yellow-300">ResizableProps</Text>
+                <Text color="color-gray-300">{'>'}</Text>
+                <Text color="white">{'}'}</Text>
+              </View>
+            </Resizable.Panel>
+
+            <Resizable.Handle id="handle2" withVisualIndicator />
+
+            {/* Terminal */}
+            <Resizable.Panel id="terminal" defaultSize="30%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-800"
+                color="white"
+                fontFamily="monospace"
+              >
+                <Text
+                  fontWeight="bold"
+                  marginBottom="8px"
+                  color="color-gray-300"
+                >
+                  Terminal
+                </Text>
+                <Text color="color-green-300">$ </Text>
+                <Text color="white">npm run build</Text>
+                <Text color="color-blue-300">Building project...</Text>
+                <Text color="color-green-300">
+                  Build completed successfully!
+                </Text>
+              </View>
+            </Resizable.Panel>
+          </Resizable>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle3" withVisualIndicator />
+
+        {/* Preview/Properties */}
+        <Resizable.Panel
+          id="preview"
+          defaultSize="20%"
+          minSize={150}
+          maxSize={300}
+        >
+          <View padding="16px" height="100%" backgroundColor="color-gray-100">
+            <Text fontWeight="bold" marginBottom="8px">
+              Properties
+            </Text>
+            <Vertical gap={8}>
+              <View
+                padding="8px"
+                borderRadius="4px"
+                backgroundColor="color-white"
+              >
+                <Text fontWeight="bold" color="color-gray-500">
+                  COMPONENT
+                </Text>
+                <Text>Resizable</Text>
+              </View>
+              <View
+                padding="8px"
+                borderRadius="4px"
+                backgroundColor="color-white"
+              >
+                <Text fontWeight="bold" color="color-gray-500">
+                  ORIENTATION
+                </Text>
+                <Text>horizontal</Text>
+              </View>
+              <View
+                padding="8px"
+                borderRadius="4px"
+                backgroundColor="color-white"
+              >
+                <Text fontWeight="bold" color="color-gray-500">
+                  SIZE
+                </Text>
+                <Text>md</Text>
+              </View>
+              <View
+                padding="8px"
+                borderRadius="4px"
+                backgroundColor="color-white"
+              >
+                <Text fontWeight="bold" color="color-gray-500">
+                  VARIANT
+                </Text>
+                <Text>default</Text>
+              </View>
+            </Vertical>
+          </View>
+        </Resizable.Panel>
+      </Resizable>
+    </View>
+  );
+};
+```
+
+### **Controlled**
+
+```tsx
+import React, { useState } from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+
+export const ControlledResizable = () => {
+  const [sizes, setSizes] = useState([33.33, 33.33, 33.33]);
+
+  const handleSizesChange = (newSizes: number[]) => {
+    setSizes(newSizes);
+  };
+
+  const resetSizes = () => {
+    setSizes([33.33, 33.33, 33.33]);
+  };
+
+  const maximizeFirst = () => {
+    setSizes([60, 20, 20]);
+  };
+
+  const maximizeMiddle = () => {
+    setSizes([20, 60, 20]);
+  };
+
+  const maximizeLast = () => {
+    setSizes([20, 20, 60]);
+  };
+
+  return (
+    <View>
+      <Horizontal gap={10} marginBottom={16}>
+        <Button onClick={resetSizes}>Reset</Button>
+        <Button onClick={maximizeFirst}>Maximize First</Button>
+        <Button onClick={maximizeMiddle}>Maximize Middle</Button>
+        <Button onClick={maximizeLast}>Maximize Last</Button>
+      </Horizontal>
+
+      <Text marginBottom={10}>
+        Current sizes: [{sizes.map((size) => Math.round(size)).join('%, ')}%]
+      </Text>
+
+      <View
+        height="300px"
+        width="100%"
+        border="1px solid #e2e8f0"
+        borderRadius="8px"
+        overflow="hidden"
+      >
+        <Resizable defaultSizes={sizes} onSizesChange={handleSizesChange}>
+          <Resizable.Panel id="panel1" defaultSize={`${sizes[0]}%`}>
+            <View padding="16px" height="100%" backgroundColor="color-blue-50">
+              <Text fontWeight="bold" marginBottom="8px">
+                Panel 1
+              </Text>
+              <Text>Size: {Math.round(sizes[0])}%</Text>
+            </View>
+          </Resizable.Panel>
+
+          <Resizable.Handle id="handle1" withVisualIndicator />
+
+          <Resizable.Panel id="panel2" defaultSize={`${sizes[1]}%`}>
+            <View padding="16px" height="100%" backgroundColor="color-green-50">
+              <Text fontWeight="bold" marginBottom="8px">
+                Panel 2
+              </Text>
+              <Text>Size: {Math.round(sizes[1])}%</Text>
+            </View>
+          </Resizable.Panel>
+
+          <Resizable.Handle id="handle2" withVisualIndicator />
+
+          <Resizable.Panel id="panel3" defaultSize={`${sizes[2]}%`}>
+            <View
+              padding="16px"
+              height="100%"
+              backgroundColor="color-purple-50"
+            >
+              <Text fontWeight="bold" marginBottom="8px">
+                Panel 3
+              </Text>
+              <Text>Size: {Math.round(sizes[2])}%</Text>
+            </View>
+          </Resizable.Panel>
+        </Resizable>
+      </View>
+    </View>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './vertical';
+export * from './nested';
+export * from './variants';
+export * from './sizes';
+export * from './codeEditor';
+export * from './controlled';
+export * from './collapsible';
+export * from './test';
+```
+
+### **Nested**
+
+```tsx
+import React from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const NestedResizable = () => {
+  return (
+    <View
+      height="500px"
+      width="100%"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Resizable>
+        <Resizable.Panel id="left" defaultSize="30%">
+          <View padding="16px" height="100%" backgroundColor="color-blue-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Left Panel
+            </Text>
+            <Text>This is the left panel.</Text>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle1" withVisualIndicator />
+
+        <Resizable.Panel id="right" defaultSize="70%">
+          {/* Nested vertical resizable */}
+          <Resizable orientation="vertical">
+            <Resizable.Panel id="top" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-green-50"
+              >
+                <Text fontWeight="bold" marginBottom="8px">
+                  Top Right Panel
+                </Text>
+                <Text>This is the top right panel in a nested layout.</Text>
+              </View>
+            </Resizable.Panel>
+
+            <Resizable.Handle id="handle2" withVisualIndicator />
+
+            <Resizable.Panel id="bottom" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-purple-50"
+              >
+                <Text fontWeight="bold" marginBottom="8px">
+                  Bottom Right Panel
+                </Text>
+                <Text>This is the bottom right panel in a nested layout.</Text>
+              </View>
+            </Resizable.Panel>
+          </Resizable>
+        </Resizable.Panel>
+      </Resizable>
+    </View>
+  );
+};
+```
+
+### **Sizes**
+
+```tsx
+import React from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const ResizableSizes = () => {
+  return (
+    <Vertical gap={30} width="100%">
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Small Size
+        </Text>
+        <View
+          height="200px"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Resizable size="sm">
+            <Resizable.Panel id="left" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Left Panel</Text>
+              </View>
+            </Resizable.Panel>
+
+            <Resizable.Handle id="handle1" withVisualIndicator />
+
+            <Resizable.Panel id="right" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Right Panel</Text>
+              </View>
+            </Resizable.Panel>
+          </Resizable>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Medium Size (Default)
+        </Text>
+        <View
+          height="200px"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Resizable size="md">
+            <Resizable.Panel id="left" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Left Panel</Text>
+              </View>
+            </Resizable.Panel>
+
+            <Resizable.Handle id="handle1" withVisualIndicator />
+
+            <Resizable.Panel id="right" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Right Panel</Text>
+              </View>
+            </Resizable.Panel>
+          </Resizable>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Large Size
+        </Text>
+        <View
+          height="200px"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Resizable size="lg">
+            <Resizable.Panel id="left" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Left Panel</Text>
+              </View>
+            </Resizable.Panel>
+
+            <Resizable.Handle id="handle1" withVisualIndicator />
+
+            <Resizable.Panel id="right" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Right Panel</Text>
+              </View>
+            </Resizable.Panel>
+          </Resizable>
+        </View>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Test**
+
+```tsx
+import React from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const ResizableTest = () => {
+  return (
+    <View
+      height="300px"
+      width="100%"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Resizable>
+        <Resizable.Panel id="panel1" defaultSize="30%">
+          <View padding="16px" height="100%" backgroundColor="color-blue-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Panel 1
+            </Text>
+            <Text>This is the first panel. Drag the handle to resize.</Text>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle1" withVisualIndicator />
+
+        <Resizable.Panel id="panel2" defaultSize="70%">
+          <View padding="16px" height="100%" backgroundColor="color-green-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Panel 2
+            </Text>
+            <Text>This is the second panel. Drag the handle to resize.</Text>
+          </View>
+        </Resizable.Panel>
+      </Resizable>
+    </View>
+  );
+};
+```
+
+### **Variants**
+
+```tsx
+import React from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const ResizableVariants = () => {
+  return (
+    <Vertical gap={30} width="100%">
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Default Variant
+        </Text>
+        <View
+          height="200px"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Resizable variant="default">
+            <Resizable.Panel id="left" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Left Panel</Text>
+              </View>
+            </Resizable.Panel>
+
+            <Resizable.Handle id="handle1" withVisualIndicator />
+
+            <Resizable.Panel id="right" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Right Panel</Text>
+              </View>
+            </Resizable.Panel>
+          </Resizable>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Subtle Variant
+        </Text>
+        <View
+          height="200px"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Resizable variant="subtle">
+            <Resizable.Panel id="left" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Left Panel</Text>
+              </View>
+            </Resizable.Panel>
+
+            <Resizable.Handle id="handle1" withVisualIndicator />
+
+            <Resizable.Panel id="right" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Right Panel</Text>
+              </View>
+            </Resizable.Panel>
+          </Resizable>
+        </View>
+      </View>
+
+      <View>
+        <Text fontWeight="bold" marginBottom={10}>
+          Prominent Variant
+        </Text>
+        <View
+          height="200px"
+          border="1px solid #e2e8f0"
+          borderRadius="8px"
+          overflow="hidden"
+        >
+          <Resizable variant="prominent">
+            <Resizable.Panel id="left" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Left Panel</Text>
+              </View>
+            </Resizable.Panel>
+
+            <Resizable.Handle id="handle1" withVisualIndicator />
+
+            <Resizable.Panel id="right" defaultSize="50%">
+              <View
+                padding="16px"
+                height="100%"
+                backgroundColor="color-gray-50"
+              >
+                <Text>Right Panel</Text>
+              </View>
+            </Resizable.Panel>
+          </Resizable>
+        </View>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Vertical**
+
+```tsx
+import React from 'react';
+import { Resizable } from '../Resizable';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const VerticalResizable = () => {
+  return (
+    <View
+      height="500px"
+      width="100%"
+      border="1px solid #e2e8f0"
+      borderRadius="8px"
+      overflow="hidden"
+    >
+      <Resizable orientation="vertical">
+        <Resizable.Panel id="top" defaultSize="30%">
+          <View padding="16px" height="100%" backgroundColor="color-yellow-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Top Panel
+            </Text>
+            <Text>This is the top panel. Drag the handle below to resize.</Text>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle1" withVisualIndicator />
+
+        <Resizable.Panel id="middle" defaultSize="40%">
+          <View padding="16px" height="100%" backgroundColor="color-orange-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Middle Panel
+            </Text>
+            <Text>This is the middle panel. Drag the handles to resize.</Text>
+          </View>
+        </Resizable.Panel>
+
+        <Resizable.Handle id="handle2" withVisualIndicator />
+
+        <Resizable.Panel id="bottom" defaultSize="30%">
+          <View padding="16px" height="100%" backgroundColor="color-red-50">
+            <Text fontWeight="bold" marginBottom="8px">
+              Bottom Panel
+            </Text>
+            <Text>
+              This is the bottom panel. Drag the handle above to resize.
+            </Text>
+          </View>
+        </Resizable.Panel>
+      </Resizable>
+    </View>
+  );
+};
+```
+

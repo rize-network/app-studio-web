@@ -1,0 +1,36 @@
+{
+  "componentDescription": "A visual component to display an item's status with an optional label and customizable appearance.",
+  "label": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Defines the optional text label to be displayed next to the status indicator.",
+    "defaultValue": null
+  },
+  "status": {
+    "type": "Status",
+    "typeValues": [
+      "default",
+      "info",
+      "success",
+      "warning",
+      "error"
+    ],
+    "description": "Specifies the current status of the item, which determines the indicator's visual representation (e.g., 'success', 'warning', 'error').",
+    "defaultValue": "default"
+  },
+  "views": {
+    "type": "StatusIndicatorStyles",
+    "typeValues": null,
+    "description": "Provides an object to customize the styles of various sub-components within the StatusIndicator.",
+    "defaultValue": null
+  },
+  "themeMode": {
+    "type": "'light' | 'dark'",
+    "typeValues": [
+      "light",
+      "dark"
+    ],
+    "description": "Sets the theme mode for the component, allowing it to adapt to 'light' or 'dark' UI environments.",
+    "defaultValue": null
+  }
+}

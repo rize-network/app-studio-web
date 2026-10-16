@@ -1,0 +1,58 @@
+{
+  "componentDescription": "A container component that provides a visually distinct background with customizable layers and decorative elements.",
+  "children": {
+    "type": "ReactNode",
+    "typeValues": null,
+    "description": "Optional React nodes to be rendered as children within the Background component.",
+    "defaultValue": null
+  },
+  "designProps": {
+    "type": "any",
+    "typeValues": null,
+    "description": "Additional design-related properties.",
+    "defaultValue": null
+  },
+  "shape": {
+    "type": "'square' | 'rounded' | 'pill'",
+    "typeValues": [
+      "square",
+      "rounded",
+      "pill"
+    ],
+    "description": "Overrides or specifies the shape for the background layout component.",
+    "defaultValue": "rounded"
+  },
+  "decorationRotation": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Controls the rotation angle of any decorative elements.",
+    "defaultValue": 5
+  },
+  "decorationScale": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Adjusts the scale factor of any decorative elements.",
+    "defaultValue": 1
+  },
+  "decorationOpacity": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Sets the opacity level for any decorative elements.",
+    "defaultValue": 0.8
+  },
+  "views": {
+    "type": "{ container?: ViewProps; content?: ViewProps; back?: ViewProps; front?: ViewProps; }",
+    "typeValues": null,
+    "description": "Optional styling properties for specific sub-components within the background layout.",
+    "defaultValue": null
+  },
+  "themeMode": {
+    "type": "'light' | 'dark'",
+    "typeValues": [
+      "light",
+      "dark"
+    ],
+    "description": "Specifies the theme mode ('light' or 'dark') to apply to the background.",
+    "defaultValue": null
+  }
+}

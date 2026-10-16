@@ -55,5 +55,5 @@
     },
     "noEmit": false,
     "include": ["./src"],
-    "exclude": ["./src/**/examples"]
+    "exclude": ["./src/**/examples", "./bot"]
   }

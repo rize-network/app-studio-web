@@ -18,10 +18,17 @@ interface Props extends LoaderProps {
   };
 }
 
+const isRawCssColor = (value?: string) =>
+  typeof value === 'string' &&
+  (/^(#|rgb\(|rgba\(|hsl\(|hsla\(|var\()/.test(value) ||
+    ['black', 'currentColor', 'inherit', 'transparent', 'white'].includes(
+      value
+    ));
+
 const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   size = 'md',
   speed = 'normal',
-  color = 'theme.loading',
+  color = 'theme-loading',
   themeMode: elementMode,
   ...props
 }) => {
@@ -42,7 +49,8 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
   }, [speed]);
 
   return (
-    <svg
+    <View
+      as="svg"
       xmlns="http://www.w3.org/2000/svg"
       width={`${sizeStyle}px`}
       height={`${sizeStyle}px`}
@@ -64,14 +72,14 @@ const DefaultSpinner: React.FC<DefaultSpinnerProps> = ({
       <g id="SVGRepo_iconCarrier">
         <path d="M21 12a9 9 0 11-6.219-8.56"></path>
       </g>
-    </svg>
+    </View>
   );
 };
 
 const Dotted: React.FC<DottedProps> = ({
   size = 'md',
   speed = 'normal',
-  color = 'theme.loading',
+  color = 'theme-loading',
   themeMode: elementMode,
   ...props
 }) => {
@@ -92,7 +100,8 @@ const Dotted: React.FC<DottedProps> = ({
   }, [speed]);
 
   return (
-    <svg
+    <View
+      as="svg"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
       width={`${sizeStyle}px`}
@@ -103,14 +112,14 @@ const Dotted: React.FC<DottedProps> = ({
       <circle cx="10" cy="25" r="4" fill={colorStyle} />
       <circle cx="25" cy="25" r="4" fill={colorStyle} />
       <circle cx="40" cy="25" r="4" fill={colorStyle} />
-    </svg>
+    </View>
   );
 };
 
 const Quarter: React.FC<QuarterProps> = ({
   size = 'md',
   speed = 'normal',
-  color = 'theme.loading',
+  color = 'theme-loading',
   themeMode: elementMode,
   ...props
 }) => {
@@ -131,7 +140,8 @@ const Quarter: React.FC<QuarterProps> = ({
   }, [speed]);
 
   return (
-    <svg
+    <View
+      as="svg"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
       width={`${sizeStyle}px`}
@@ -148,7 +158,7 @@ const Quarter: React.FC<QuarterProps> = ({
         strokeWidth="5"
         strokeDasharray="1,10"
       />
-    </svg>
+    </View>
   );
 };
 const LoaderView: React.FC<Props> = ({
@@ -162,6 +172,12 @@ const LoaderView: React.FC<Props> = ({
   views,
   ...props
 }) => {
+  const { getColor } = useTheme();
+  const resolveColor = (value?: string) =>
+    isRawCssColor(value) ? value : getColor(value || 'theme-loading');
+  loaderColor = resolveColor(loaderColor || props.color || 'theme-loading');
+  textColor = resolveColor(textColor || props.color || 'theme-loading');
+
   const style = { size, speed, color: loaderColor };
 
   const variants = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Typography } from 'app-studio';
+import { Input, Typography, useTheme } from 'app-studio';
 import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 import { FieldLabel } from '../../../Input/FieldLabel/FieldLabel';
@@ -11,7 +11,6 @@ const DatePickerContent = (props: any) => <Input type="date" {...props} />;
 
 const DatePickerView: React.FC<DatePickerViewProps> = ({
   id,
-  icon,
   name,
   label,
   date,
@@ -32,9 +31,19 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
   setIsHovered = () => {},
   onChange,
   onChangeText,
+  // Consumed by the state hook; kept out of the DOM spread so they cannot
+  // fight the controlled `value={date}` binding below.
+  value,
+  defaultValue,
   ...props
 }) => {
-  const showLabel = !!(isFocused && label);
+  const { themeMode } = useTheme();
+  const generatedId = React.useId();
+  const fieldId = id ?? generatedId;
+  const isDark = themeMode === 'dark';
+  // The label is part of the field's accessible name; it must not disappear
+  // whenever the field loses focus.
+  const showLabel = !!label;
 
   const handleHover = () => setIsHovered(!isHovered);
   const handleFocus = () => setIsFocused(true);
@@ -51,10 +60,13 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
 
   const fieldStyles = {
     margin: 0,
-    paddingVertical: 8,
+    // The field shell above already applies the vertical padding for the
+    // current size. Adding 8px here on top of it pushed a `md` DatePicker to
+    // 57px against a declared 40px.
+    paddingVertical: 0,
     paddingHorizontal: 0,
     width: '100%',
-    heigth: '100%',
+    height: '100%',
     border: 'none',
     on: {
       focus: {
@@ -62,9 +74,10 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
         backgroundColor: 'transparent',
       },
     },
+    transition: 'all 0.2s ease-in-out',
     fontSize: Typography.fontSizes[size],
     backgroundColor: 'transparent',
-    color: isDisabled ? 'color.trueGray.600' : 'color.blueGray.700',
+    color: isDisabled ? 'color-gray-400' : 'color-gray-900',
     cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'auto' : 'pointer',
     ...views['field'],
   };
@@ -78,7 +91,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
         shape={shape}
         views={views}
         shadow={shadow}
-        color={'theme.primary'}
+        color={'theme-primary'}
         variant={variant}
         value={date}
         isHovered={isHovered}
@@ -92,17 +105,27 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
         <FieldWrapper>
           {showLabel && (
             <FieldLabel
-              htmlFor={id}
-              color={'theme.primary'}
+              htmlFor={fieldId}
+              color={'theme-primary'}
               error={error}
-              {...views}
+              views={views}
             >
               {label}
             </FieldLabel>
           )}
           <DatePickerContent
-            id={id}
+            id={fieldId}
             name={name}
+            // Native date inputs have no implicit ARIA mapping (aria-query);
+            // textbox is how VoiceOver exposes them, and it keeps the control
+            // findable by role + accessible name. Consumers can still override
+            // via the `role` prop, which arrives through {...props} below.
+            role="textbox"
+            // The visible label only renders while focused; without this the
+            // input has no accessible name at rest.
+            aria-label={
+              !showLabel && typeof label === 'string' ? label : undefined
+            }
             onFocus={handleFocus}
             disabled={isDisabled}
             readOnly={isReadOnly}
@@ -110,6 +133,7 @@ const DatePickerView: React.FC<DatePickerViewProps> = ({
             {...props}
             {...(onChangeText && { onChangeText: handleDateChange })}
             onChange={handleDateChange}
+            value={date}
           />
         </FieldWrapper>
       </FieldContent>

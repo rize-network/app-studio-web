@@ -8,7 +8,7 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 /**
  * Shape options for the ChatInput component
  */
-export type Shape = 'default' | 'sharp' | 'rounded';
+export type Shape = 'default' | 'square' | 'rounded';
 
 /**
  * Variant options for the ChatInput component
@@ -19,7 +19,7 @@ export type Variant = 'default' | 'outline' | 'none';
  * Prompt example interface
  */
 export interface PromptExample {
-  id: string;
+  id: string | number;
   text: string;
 }
 
@@ -41,6 +41,7 @@ export interface ChatInputStyles {
   container?: ViewProps;
   content?: ViewProps;
   editableInput?: ViewProps;
+  hiddenInput?: ViewProps;
   header?: ViewProps;
   title?: ViewProps;
   guideTip?: ViewProps;

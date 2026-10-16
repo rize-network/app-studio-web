@@ -11,43 +11,30 @@ import {
   AccordionContent,
   AccordionView,
 } from './Accordion/Accordion.view';
-
-/**
- * Accordion component for displaying collapsible content panels.
- *
- * @example
- * ```tsx
- * <Accordion type="single" defaultValue="item-1" collapsible>
- *   <Accordion.Item value="item-1">
- *     <Accordion.Trigger>Section 1</Accordion.Trigger>
- *     <Accordion.Content>Content for section 1</Accordion.Content>
- *   </Accordion.Item>
- *   <Accordion.Item value="item-2">
- *     <Accordion.Trigger>Section 2</Accordion.Trigger>
- *     <Accordion.Content>Content for section 2</Accordion.Content>
- *   </Accordion.Item>
- * </Accordion>
- * ```
- */
-const AccordionComponent: React.FC<AccordionProps> = ({
-  children,
-  type = 'single',
-  value,
-  defaultValue,
-  onValueChange,
-  collapsible = false,
-  shape = 'rounded',
-  variant = 'default',
-  views,
-  ...props
-}) => {
-  // For backward compatibility
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
+// Defines the main `Accordion` component, which orchestrates state management using `useAccordionState` and provides context to its sub-components (`Item`, `Trigger`, `Content`) to render a complete and functional accordion UI.
+const AccordionComponent: React.FC<AccordionProps> = (componentProps) => {
+  const mergedProps = useMergedDesignSystemComponentProps(
+    'accordion',
+    componentProps
+  );
+  const {
+    children,
+    type = 'single',
+    value,
+    defaultValue,
+    onValueChange,
+    collapsible = false,
+    shape = 'rounded',
+    variant = 'default',
+    views,
+    ...props
+  } = mergedProps;
   const legacyDefaultValue = Array.isArray(defaultValue)
     ? defaultValue
     : defaultValue
     ? [defaultValue]
     : undefined;
-
   const accordionState = useAccordionState({
     type,
     value,
@@ -55,7 +42,6 @@ const AccordionComponent: React.FC<AccordionProps> = ({
     onValueChange,
     collapsible,
   });
-
   return (
     <AccordionProvider
       value={{
@@ -81,10 +67,7 @@ const AccordionComponent: React.FC<AccordionProps> = ({
     </AccordionProvider>
   );
 };
-
 export const Accordion = AccordionComponent as AccordionComponentType;
-
-// Assign the sub-components to the main component
 Accordion.Item = AccordionItem;
 Accordion.Trigger = AccordionTrigger;
 Accordion.Content = AccordionContent;

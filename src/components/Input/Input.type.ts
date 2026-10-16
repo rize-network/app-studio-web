@@ -2,7 +2,7 @@ import { ViewProps } from 'app-studio';
 
 export type Variant = 'outline' | 'default' | 'none';
 
-export type Shape = 'default' | 'sharp' | 'rounded' | 'pillShaped';
+export type Shape = 'default' | 'square' | 'rounded' | 'pill';
 
 export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 

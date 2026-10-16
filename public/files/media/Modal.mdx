@@ -1,0 +1,795 @@
+# Modal
+
+A versatile component for displaying content in a separate, layered window with customizable appearance and behavior.
+
+### **Import**
+```tsx
+import { Modal } from '@app-studio/web';
+```
+
+### **BlurModal**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Modal } from '../Modal';
+import { hideModal, showModal } from '../Modal/Modal.store';
+export const BlurModal = () => {
+  return (
+    <>
+      <Button onClick={() => showModal('BlurModal')} isAuto>
+        Blur Overlay
+      </Button>
+      <Modal.Layout
+        modals={{
+          BlurModal: () => (
+            <Modal.Container>
+              <Modal.Header buttonPosition="none">
+                <Text size="lg" weight="semiBold">
+                  Title
+                </Text>
+              </Modal.Header>
+              <Modal.Body>
+                <Text maxLines={2}>
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                </Text>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={() => hideModal()}>Cancel</Button>
+              </Modal.Footer>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **CloseButtonModal**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Horizontal } from 'app-studio';
+
+import { Modal } from '../Modal';
+import { hideModal, showModal } from '../Modal/Modal.store';
+
+export const CloseButtonModal = () => {
+  return (
+    <>
+      <Horizontal gap={10}>
+        <Button
+          onClick={() => showModal('CloseButtonModal', { canClose: true })}
+          isAuto
+        >
+          With Close Button
+        </Button>
+        <Button
+          onClick={() => showModal('CloseButtonModal', { canClose: false })}
+          isAuto
+        >
+          Without Close Button
+        </Button>
+      </Horizontal>
+      <Modal.Layout
+        modals={{
+          CloseButtonModal: ({ canClose = false }: any) => (
+            <Modal.Container>
+              {canClose && <Modal.Header buttonPosition="left" />}
+              {canClose && (
+                <Modal.Header buttonPosition="none">
+                  Without Close Button
+                </Modal.Header>
+              )}
+
+              <Modal.Body>
+                Cras mattis consectetur purus sit amet fermentum.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={hideModal}>Cancel</Button>
+              </Modal.Footer>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **DefaultModal**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+
+import { Modal } from '../Modal';
+import { hideModal, showModal } from '../Modal/Modal.store';
+
+export const DefaultModal = () => {
+  return (
+    <>
+      <Button onClick={() => showModal('DefaultModal')} isAuto>
+        Blur Overlay
+      </Button>
+      <Modal.Layout
+        modals={{
+          DefaultModal: () => (
+            <Modal.Container>
+              <Modal.Header>
+                <Text size="lg" weight="semiBold">
+                  Title
+                </Text>
+              </Modal.Header>
+              <Modal.Body>
+                <Text>
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                </Text>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={hideModal}>Cancel</Button>
+              </Modal.Footer>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **FullScreenModal**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+
+import { Modal } from '../Modal';
+import { hideModal, showModal } from '../Modal/Modal.store';
+
+export const FullScreenModal = () => {
+  return (
+    <>
+      <Button onClick={() => showModal('FullScreenModal')} isAuto>
+        Full Screen
+      </Button>
+      <Modal.Layout
+        modals={{
+          FullScreenModal: () => (
+            <Modal.Container isFullScreen>
+              <Modal.Header>Title</Modal.Header>
+              <Modal.Body>
+                Cras mattis consectetur purus sit amet fermentum. Cras justo
+                odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                commodo cursus magna, vel scelerisque nisl consectetur et.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={hideModal}>Cancel</Button>
+              </Modal.Footer>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **ModalPosition**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Horizontal } from 'app-studio';
+
+import { Modal } from '../Modal';
+import { showModal } from '../Modal/Modal.store';
+
+export const ModalPosition = () => {
+  return (
+    <>
+      <Horizontal gap={10} flexWrap="nowrap">
+        <Button
+          onClick={() => showModal('ModalPosition', {}, { position: 'top' })}
+        >
+          Top
+        </Button>
+        <Button
+          onClick={() => showModal('ModalPosition', {}, { position: 'bottom' })}
+        >
+          Bottom
+        </Button>
+        <Button
+          onClick={() => showModal('ModalPosition', {}, { position: 'right' })}
+        >
+          Right
+        </Button>
+        <Button
+          onClick={() => showModal('ModalPosition', {}, { position: 'left' })}
+        >
+          Left
+        </Button>
+        <Button
+          onClick={() => showModal('ModalPosition', {}, { position: 'center' })}
+        >
+          Center
+        </Button>
+      </Horizontal>
+      <Modal.Layout
+        modals={{
+          ModalPosition: () => (
+            <Modal.Container width="fit-content">
+              <Modal.Body>
+                <Text color="theme-error" weight="bold">
+                  Unknown Error
+                </Text>
+              </Modal.Body>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **PreventCloseModal**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+
+import { Modal } from '../Modal';
+import { hideModal, showModal } from '../Modal/Modal.store';
+
+export const PreventClose = () => {
+  return (
+    <>
+      <Button
+        onClick={() =>
+          showModal('PreventClose', {}, { isClosePrevented: true })
+        }
+        isAuto
+      >
+        Prevent Close Button on Overlay
+      </Button>
+      <Modal.Layout
+        modals={{
+          PreventClose: () => (
+            <Modal.Container>
+              <Modal.Header> Prevent Close Button on Overlay</Modal.Header>
+              <Modal.Body>
+                Cras mattis consectetur purus sit amet fermentum.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={hideModal}>Cancel</Button>
+              </Modal.Footer>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **ScrollModal**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+
+import { Modal } from '../Modal';
+import { hideModal, showModal } from '../Modal/Modal.store';
+
+export const ScrollModal = () => {
+  return (
+    <>
+      <Button onClick={() => showModal('ScrollModal')} isAuto>
+        Scroll
+      </Button>
+      <Modal.Layout
+        modals={{
+          ScrollModal: () => (
+            <Modal.Container>
+              <Modal.Header buttonPosition="none">
+                <Text size="lg" weight="semiBold">
+                  Title
+                </Text>
+              </Modal.Header>
+              <Modal.Body height="200px">
+                Cras mattis consectetur purus sit amet fermentum.Cras mattis
+                consectetur purus sit amet fermentum.Cras mattis consectetur
+                purus sit amet fermentum.Cras mattis consectetur purus sit amet
+                fermentum.Cras mattis consectetur purus sit amet fermentum.Cras
+                mattis consectetur purus sit amet fermentum.Cras mattis
+                consectetur purus sit amet fermentum.Cras mattis consectetur
+                purus sit amet fermentum.Cras mattis consectetur purus sit amet
+                Cras mattis consectetur purus sit amet fermentum.Cras mattis
+                consectetur purus sit amet fermentum.Cras mattis consectetur
+                purus sit amet fermentum.Cras mattis consectetur purus sit amet
+                fermentum.Cras mattis consectetur purus sit amet fermentum.Cras
+                mattis consectetur purus sit amet fermentum.Cras mattis
+                consectetur purus sit amet fermentum.Cras mattis consectetur
+                purus sit amet fermentum.Cras mattis consectetur purus sit amet
+                fermentum.Cras mattis consectetur purus sit amet fermentum.
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={hideModal}>Cancel</Button>
+              </Modal.Footer>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **ShadowModal**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+
+import { Modal } from '../Modal';
+import { showModal } from '../Modal/Modal.store';
+
+export const ShadowModal = () => {
+  return (
+    <>
+      <Button onClick={() => showModal('ShadowModal')} isAuto>
+        Shadow
+      </Button>
+      <Modal.Layout
+        modals={{
+          ShadowModal: () => (
+            <Modal.Container
+              views={{
+                container: {
+                  boxShadow: '0px 7px 8px rgba(0, 0, 0, 0.6)',
+                },
+              }}
+            >
+              <Modal.Body>
+                <Text maxLines={2}>
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                </Text>
+              </Modal.Body>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **VariantModal**
+
+```tsx
+import React from 'react';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Horizontal } from 'app-studio';
+
+import { Modal } from '../Modal';
+import { showModal } from '../Modal/Modal.store';
+
+export const VariantModal = () => {
+  return (
+    <>
+      <Horizontal gap={10}>
+        <Button
+          onClick={() => showModal('squareModal', { shape: 'rounded' })}
+          isAuto
+        >
+          square
+        </Button>
+        <Button
+          onClick={() => showModal('RoundedModal', { shape: 'square' })}
+          isAuto
+        >
+          Rounded
+        </Button>
+      </Horizontal>
+      <Modal.Layout
+        modals={{
+          squareModal: () => (
+            <Modal.Container>
+              <Modal.Body>
+                <Text maxLines={2}>
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                </Text>
+              </Modal.Body>
+            </Modal.Container>
+          ),
+          RoundedModal: () => (
+            <Modal.Container shape="rounded">
+              <Modal.Body>
+                <Text maxLines={2}>
+                  Cras mattis consectetur purus sit amet fermentum. Cras justo
+                  odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
+                  risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                  commodo cursus magna, vel scelerisque nisl consectetur et.
+                </Text>
+              </Modal.Body>
+            </Modal.Container>
+          ),
+        }}
+      />
+    </>
+  );
+};
+```
+
+### **DesignSystem**
+
+```tsx
+/**
+ * Modal Examples - Design System
+ *
+ * Showcases the Modal component following the design guidelines:
+ * - Typography: Inter/Geist font, specific sizes/weights
+ * - Spacing: 4px grid system
+ * - Colors: Neutral palette with semantic colors
+ * - Rounded corners: Consistent border radius
+ * - Transitions: Subtle animations
+ */
+
+import React, { useState } from 'react';
+import { Modal } from '../Modal';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
+
+export const DesignSystemModal = () => {
+  const [isBasicModalOpen, setIsBasicModalOpen] = useState(false);
+  const [isHeaderFooterModalOpen, setIsHeaderFooterModalOpen] = useState(false);
+  const [isFullscreenModalOpen, setIsFullscreenModalOpen] = useState(false);
+  const [isPositionModalOpen, setIsPositionModalOpen] = useState(false);
+  const [isBlurredModalOpen, setIsBlurredModalOpen] = useState(false);
+  const [isCustomModalOpen, setIsCustomModalOpen] = useState(false);
+  const [position, setPosition] = useState<
+    'center' | 'top' | 'right' | 'bottom' | 'left'
+  >('center');
+
+  return (
+    <Vertical gap={32}>
+      {/* Basic Modal */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Basic Modal
+        </Text>
+        <Button onClick={() => setIsBasicModalOpen(true)}>
+          Open Basic Modal
+        </Button>
+        <Modal.Container
+          isOpen={isBasicModalOpen}
+          onClose={() => setIsBasicModalOpen(false)}
+        >
+          <Modal.Body>
+            <Vertical gap={16}>
+              <Text size="xl" fontWeight="600">
+                Basic Modal
+              </Text>
+              <Text>
+                This is a basic modal following the design system guidelines. It
+                has consistent typography, spacing based on a 4px grid system,
+                and subtle animations.
+              </Text>
+              <Horizontal justifyContent="flex-end" marginTop={16}>
+                <Button onClick={() => setIsBasicModalOpen(false)}>
+                  Close
+                </Button>
+              </Horizontal>
+            </Vertical>
+          </Modal.Body>
+        </Modal.Container>
+      </View>
+
+      {/* Modal with Header and Footer */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Modal with Header and Footer
+        </Text>
+        <Button onClick={() => setIsHeaderFooterModalOpen(true)}>
+          Open Modal with Header and Footer
+        </Button>
+        <Modal.Container
+          isOpen={isHeaderFooterModalOpen}
+          onClose={() => setIsHeaderFooterModalOpen(false)}
+        >
+          <Modal.Header>
+            <Text size="xl" fontWeight="600">
+              Modal with Header and Footer
+            </Text>
+          </Modal.Header>
+          <Modal.Body>
+            <Text>
+              This modal has a header with a close button and a footer with
+              action buttons. The header and footer have subtle borders to
+              separate them from the content.
+            </Text>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="outline"
+              onClick={() => setIsHeaderFooterModalOpen(false)}
+              marginRight={8}
+            >
+              Cancel
+            </Button>
+            <Button onClick={() => setIsHeaderFooterModalOpen(false)}>
+              Confirm
+            </Button>
+          </Modal.Footer>
+        </Modal.Container>
+      </View>
+
+      {/* Fullscreen Modal */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Fullscreen Modal
+        </Text>
+        <Button onClick={() => setIsFullscreenModalOpen(true)}>
+          Open Fullscreen Modal
+        </Button>
+        <Modal.Container
+          isOpen={isFullscreenModalOpen}
+          onClose={() => setIsFullscreenModalOpen(false)}
+          isFullScreen
+        >
+          <Modal.Header>
+            <Text size="xl" fontWeight="600">
+              Fullscreen Modal
+            </Text>
+          </Modal.Header>
+          <Modal.Body>
+            <Vertical gap={16} height="100%">
+              <Text>
+                This modal takes up the full screen. Its useful for complex
+                forms or detailed content that requires more space.
+              </Text>
+              <View
+                flex={1}
+                backgroundColor="color-gray-50"
+                borderRadius="8px"
+                padding={16}
+                marginVertical={16}
+              >
+                <Text>Content area with flexible height</Text>
+              </View>
+            </Vertical>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setIsFullscreenModalOpen(false)}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal.Container>
+      </View>
+
+      {/* Modal Positions */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Modal Positions
+        </Text>
+        <Horizontal gap={8} flexWrap="wrap">
+          <Button
+            onClick={() => {
+              setPosition('center');
+              setIsPositionModalOpen(true);
+            }}
+          >
+            Center
+          </Button>
+          <Button
+            onClick={() => {
+              setPosition('top');
+              setIsPositionModalOpen(true);
+            }}
+          >
+            Top
+          </Button>
+          <Button
+            onClick={() => {
+              setPosition('right');
+              setIsPositionModalOpen(true);
+            }}
+          >
+            Right
+          </Button>
+          <Button
+            onClick={() => {
+              setPosition('bottom');
+              setIsPositionModalOpen(true);
+            }}
+          >
+            Bottom
+          </Button>
+          <Button
+            onClick={() => {
+              setPosition('left');
+              setIsPositionModalOpen(true);
+            }}
+          >
+            Left
+          </Button>
+        </Horizontal>
+        <Modal.Container
+          isOpen={isPositionModalOpen}
+          onClose={() => setIsPositionModalOpen(false)}
+          position={position}
+        >
+          <Modal.Header>
+            <Text size="xl" fontWeight="600">
+              {position.charAt(0).toUpperCase() + position.slice(1)} Position
+            </Text>
+          </Modal.Header>
+          <Modal.Body>
+            <Text>
+              This modal is positioned at the {position} of the screen.
+            </Text>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setIsPositionModalOpen(false)}>Close</Button>
+          </Modal.Footer>
+        </Modal.Container>
+      </View>
+
+      {/* Blurred Background Modal */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Blurred Background Modal
+        </Text>
+        <Button onClick={() => setIsBlurredModalOpen(true)}>
+          Open Blurred Modal
+        </Button>
+        <Modal.Container
+          isOpen={isBlurredModalOpen}
+          onClose={() => setIsBlurredModalOpen(false)}
+          blur={8}
+        >
+          <Modal.Header>
+            <Text size="xl" fontWeight="600">
+              Blurred Background
+            </Text>
+          </Modal.Header>
+          <Modal.Body>
+            <Text>
+              This modal has a blurred background effect, creating a frosted
+              glass appearance that follows the design systems aesthetic.
+            </Text>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setIsBlurredModalOpen(false)}>Close</Button>
+          </Modal.Footer>
+        </Modal.Container>
+      </View>
+
+      {/* Custom Styled Modal */}
+      <View>
+        <Text marginBottom={8} fontWeight="600">
+          Custom Styled Modal
+        </Text>
+        <Button onClick={() => setIsCustomModalOpen(true)}>
+          Open Custom Modal
+        </Button>
+        <Modal.Container
+          isOpen={isCustomModalOpen}
+          onClose={() => setIsCustomModalOpen(false)}
+          views={{
+            container: {
+              backgroundColor: 'color-blue-50',
+              borderRadius: '16px',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
+            },
+          }}
+        >
+          <Modal.Header
+            buttonColor="color-blue-600"
+            views={{
+              header: {
+                backgroundColor: 'color-blue-100',
+                borderBottomColor: 'color-blue-200',
+              },
+            }}
+          >
+            <Text size="xl" fontWeight="600" color="color-blue-800">
+              Custom Styled Modal
+            </Text>
+          </Modal.Header>
+          <Modal.Body
+            views={{
+              view: {
+                color: 'color-blue-800',
+              },
+            }}
+          >
+            <Text>
+              This modal has custom styling while still following the design
+              systems principles. It uses the blue color palette with consistent
+              spacing and typography.
+            </Text>
+          </Modal.Body>
+          <Modal.Footer
+            views={{
+              container: {
+                backgroundColor: 'color-blue-100',
+                borderTopColor: 'color-blue-200',
+              },
+            }}
+          >
+            <Button
+              backgroundColor="color-blue-600"
+              _hover={{ backgroundColor: 'color-blue-700' }}
+              onClick={() => setIsCustomModalOpen(false)}
+            >
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal.Container>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './BlurModal';
+export * from './CloseButtonModal';
+export * from './DefaultModal';
+export * from './designSystem';
+export * from './FullScreenModal';
+export * from './ModalPosition';
+export * from './PreventCloseModal';
+export * from './ScrollModal';
+export * from './ShadowModal';
+export * from './VariantModal';
+```
+

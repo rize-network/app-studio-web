@@ -1,0 +1,411 @@
+# ContextMenu
+
+A versatile component for displaying a contextual menu, typically on right-click, offering various actions.
+
+### **Import**
+```tsx
+import { ContextMenu } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { ContextMenu } from '../ContextMenu';
+import { Text, Vertical, View } from 'app-studio';
+import {
+  CopyIcon,
+  EditIcon,
+  DeleteIcon,
+  DownloadIcon,
+  ShareIcon,
+} from '../../Icon/Icon';
+import { ContextMenuItem } from '../ContextMenu/ContextMenu.type';
+
+export const DefaultContextMenu = () => {
+  const handleCopy = () => alert('Copy clicked');
+  const handleEdit = () => alert('Edit clicked');
+  const handleDelete = () => alert('Delete clicked');
+  const handleDownload = () => alert('Download clicked');
+  const handleShare = () => alert('Share clicked');
+
+  const items: ContextMenuItem[] = [
+    {
+      id: 'copy',
+      label: 'Copy',
+      icon: <CopyIcon widthHeight={16} />,
+      onClick: handleCopy,
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <EditIcon widthHeight={16} />,
+      onClick: handleEdit,
+    },
+    // {
+    //   id: 'divider-1',
+    //   divider: true
+    // },
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: <DeleteIcon widthHeight={16} />,
+      onClick: handleDelete,
+    },
+    {
+      id: 'more',
+      label: 'More Options',
+      items: [
+        {
+          id: 'download',
+          label: 'Download',
+          icon: <DownloadIcon widthHeight={16} />,
+          onClick: handleDownload,
+        },
+        {
+          id: 'share',
+          label: 'Share',
+          icon: <ShareIcon widthHeight={16} />,
+          onClick: handleShare,
+        },
+      ],
+    },
+    {
+      id: 'disabled',
+      label: 'Disabled Option',
+      disabled: true,
+    },
+  ];
+
+  return (
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <Text marginBottom={10}>Default Context Menu</Text>
+      <ContextMenu items={items}>
+        <View
+          padding={20}
+          backgroundColor="color-gray-100"
+          borderRadius={8}
+          textAlign="center"
+          cursor="context-menu"
+        >
+          <Text>Right-click here to open the context menu</Text>
+        </View>
+      </ContextMenu>
+    </Vertical>
+  );
+};
+```
+
+### **Compound**
+
+```tsx
+import React from 'react';
+import { ContextMenu } from '../ContextMenu';
+import { View } from 'app-studio';
+
+export const CompoundContextMenu = () => {
+  const handleSelect = (action: string) => {
+    alert(`Action selected: ${action}`);
+  };
+
+  return (
+    <View
+      padding={10}
+      height={200}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      <ContextMenu>
+        <ContextMenu.Trigger>
+          <View
+            padding={8}
+            bg="color-blue-100"
+            color="color-blue-800"
+            borderRadius="sm"
+            cursor="context-menu"
+          >
+            Right-click here (Compound Pattern)
+          </View>
+        </ContextMenu.Trigger>
+        <ContextMenu.Content>
+          <ContextMenu.Item onSelect={() => handleSelect('Edit')}>
+            Edit
+          </ContextMenu.Item>
+          <ContextMenu.Item onSelect={() => handleSelect('Duplicate')}>
+            Duplicate
+          </ContextMenu.Item>
+          <ContextMenu.Separator />
+          <ContextMenu.Item onSelect={() => handleSelect('Share')} isDisabled>
+            Share... (Disabled)
+          </ContextMenu.Item>
+          <ContextMenu.Item onSelect={() => handleSelect('Delete')}>
+            Delete
+          </ContextMenu.Item>
+        </ContextMenu.Content>
+      </ContextMenu>
+    </View>
+  );
+};
+```
+
+### **Custom**
+
+```tsx
+import React from 'react';
+import { ContextMenu } from '../ContextMenu';
+import { Text, Vertical, View } from 'app-studio';
+import { CopyIcon, EditIcon, DeleteIcon } from '../../Icon/Icon';
+import { ContextMenuItem } from '../ContextMenu/ContextMenu.type';
+
+export const CustomContextMenu = () => {
+  const items: ContextMenuItem[] = [
+    {
+      id: 'copy',
+      label: 'Copy',
+      icon: <CopyIcon widthHeight={16} />,
+      onClick: () => alert('Copy clicked'),
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <EditIcon widthHeight={16} />,
+      onClick: () => alert('Edit clicked'),
+    },
+    // {
+    //   id: 'divider-1',
+    //   divider: true,
+    // },
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: <DeleteIcon widthHeight={16} />,
+      onClick: () => alert('Delete clicked'),
+    },
+  ];
+
+  return (
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <Text marginBottom={10}>Custom Styled Context Menu</Text>
+      <ContextMenu
+        items={items}
+        views={{
+          menu: {
+            backgroundColor: 'color-blue',
+            color: 'color-white',
+            borderRadius: '8px',
+          },
+          item: {
+            _hover: {
+              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            },
+          },
+          divider: {
+            backgroundColor: 'rgba(255, 255, 255, 0.3)',
+          },
+        }}
+      >
+        <View
+          padding={20}
+          backgroundColor="color-blue-100"
+          borderRadius={8}
+          textAlign="center"
+          cursor="context-menu"
+        >
+          <Text>Right-click here to open the custom styled context menu</Text>
+        </View>
+      </ContextMenu>
+    </Vertical>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './variants';
+export * from './sizes';
+export * from './custom';
+export * from './compound';
+```
+
+### **Sizes**
+
+```tsx
+import React from 'react';
+import { ContextMenu } from '../ContextMenu';
+import { Text, Vertical, View, Horizontal } from 'app-studio';
+import { CopyIcon, EditIcon, DeleteIcon } from '../../Icon/Icon';
+
+export const ContextMenuSizes = () => {
+  const items = [
+    {
+      id: 'copy',
+      label: 'Copy',
+      icon: <CopyIcon widthHeight={16} />,
+      onClick: () => alert('Copy clicked'),
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <EditIcon widthHeight={16} />,
+      onClick: () => alert('Edit clicked'),
+    },
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: <DeleteIcon widthHeight={16} />,
+      onClick: () => alert('Delete clicked'),
+    },
+  ];
+
+  return (
+    <Vertical gap={30} width="100%" maxWidth={600}>
+      <Horizontal gap={20}>
+        <Vertical flex={1}>
+          <Text fontWeight="bold" marginBottom={10}>
+            Small Size
+          </Text>
+          <ContextMenu items={items} size="sm">
+            <View
+              padding={20}
+              backgroundColor="color-gray-100"
+              borderRadius={8}
+              textAlign="center"
+              cursor="context-menu"
+            >
+              <Text>Right-click here</Text>
+            </View>
+          </ContextMenu>
+        </Vertical>
+
+        <Vertical flex={1}>
+          <Text fontWeight="bold" marginBottom={10}>
+            Medium Size (Default)
+          </Text>
+          <ContextMenu items={items} size="md">
+            <View
+              padding={20}
+              backgroundColor="color-gray-100"
+              borderRadius={8}
+              textAlign="center"
+              cursor="context-menu"
+            >
+              <Text>Right-click here</Text>
+            </View>
+          </ContextMenu>
+        </Vertical>
+
+        <Vertical flex={1}>
+          <Text fontWeight="bold" marginBottom={10}>
+            Large Size
+          </Text>
+          <ContextMenu items={items} size="lg">
+            <View
+              padding={20}
+              backgroundColor="color-gray-100"
+              borderRadius={8}
+              textAlign="center"
+              cursor="context-menu"
+            >
+              <Text>Right-click here</Text>
+            </View>
+          </ContextMenu>
+        </Vertical>
+      </Horizontal>
+    </Vertical>
+  );
+};
+```
+
+### **Variants**
+
+```tsx
+import React from 'react';
+import { ContextMenu } from '../ContextMenu';
+import { Text, Vertical, View, Horizontal } from 'app-studio';
+import { CopyIcon, EditIcon, DeleteIcon } from '../../Icon/Icon';
+import { ContextMenuItem } from '../ContextMenu/ContextMenu.type';
+
+export const ContextMenuVariants = () => {
+  const items: ContextMenuItem[] = [
+    {
+      id: 'copy',
+      label: 'Copy',
+      icon: <CopyIcon widthHeight={16} />,
+      onClick: () => alert('Copy clicked'),
+    },
+    {
+      id: 'edit',
+      label: 'Edit',
+      icon: <EditIcon widthHeight={16} />,
+      onClick: () => alert('Edit clicked'),
+    },
+
+    {
+      id: 'delete',
+      label: 'Delete',
+      icon: <DeleteIcon widthHeight={16} />,
+      onClick: () => alert('Delete clicked'),
+    },
+  ];
+
+  return (
+    <Vertical gap={30} width="100%" maxWidth={600}>
+      <Horizontal gap={20}>
+        <Vertical flex={1}>
+          <Text fontWeight="bold" marginBottom={10}>
+            Default Variant
+          </Text>
+          <ContextMenu items={items} variant="default">
+            <View
+              padding={20}
+              backgroundColor="color-gray-100"
+              borderRadius={8}
+              textAlign="center"
+              cursor="context-menu"
+            >
+              <Text>Right-click here</Text>
+            </View>
+          </ContextMenu>
+        </Vertical>
+
+        <Vertical flex={1}>
+          <Text fontWeight="bold" marginBottom={10}>
+            Filled Variant
+          </Text>
+          <ContextMenu items={items} variant="filled">
+            <View
+              padding={20}
+              backgroundColor="color-gray-100"
+              borderRadius={8}
+              textAlign="center"
+              cursor="context-menu"
+            >
+              <Text>Right-click here</Text>
+            </View>
+          </ContextMenu>
+        </Vertical>
+
+        <Vertical flex={1}>
+          <Text fontWeight="bold" marginBottom={10}>
+            Outline Variant
+          </Text>
+          <ContextMenu items={items} variant="outline">
+            <View
+              padding={20}
+              backgroundColor="color-gray-100"
+              borderRadius={8}
+              textAlign="center"
+              cursor="context-menu"
+            >
+              <Text>Right-click here</Text>
+            </View>
+          </ContextMenu>
+        </Vertical>
+      </Horizontal>
+    </Vertical>
+  );
+};
+```
+

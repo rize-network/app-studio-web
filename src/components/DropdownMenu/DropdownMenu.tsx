@@ -12,10 +12,7 @@ import {
   DropdownMenuDivider,
   DropdownMenuView,
 } from './DropdownMenu/DropdownMenu.view';
-
-/**
- * DropdownMenu component for displaying a menu when clicking on a trigger element.
- */
+// This file defines the main DropdownMenu component, integrating state management, context provision, and view rendering to create a reusable and configurable dropdown menu system. It also exports sub-components for building the menu's structure and content.
 const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
   trigger,
   items,
@@ -29,9 +26,7 @@ const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
 }) => {
   const { isOpen, setIsOpen, activeSubmenuId, setActiveSubmenuId } =
     useDropdownMenuState(defaultOpen);
-
   const triggerRef = useRef<HTMLElement>(null);
-
   return (
     <DropdownMenuProvider
       value={{
@@ -55,10 +50,7 @@ const DropdownMenuComponent: React.FC<DropdownMenuProps> = ({
     </DropdownMenuProvider>
   );
 };
-
 export const DropdownMenu = DropdownMenuComponent as DropdownMenuType;
-
-// Assign the sub-components to the main component
 DropdownMenu.Trigger = DropdownMenuTrigger;
 DropdownMenu.Content = DropdownMenuContent;
 DropdownMenu.Item = DropdownMenuItem;

@@ -21,79 +21,96 @@ export interface TabHeaderProps {
  * TabHeader component renders a single tab in the tab navigation.
  * It's designed to be a lightweight alternative to using Button components.
  */
-export const TabHeader: React.FC<TabHeaderProps> = ({
-  tab,
-  isActive,
-  onClick,
-  iconPosition = 'left',
-  tabStyles,
-  textStyles,
-}) => {
-  // Base styles for the tab header
-  const baseStyles: ViewProps = {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '10px 16px',
-    cursor: 'pointer',
-    borderTopLeftRadius: '4px',
-    borderTopRightRadius: '4px',
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    borderWidth: '1px',
-    borderStyle: 'solid',
-    borderColor: isActive ? 'theme.primary' : 'transparent',
-    borderBottomColor: isActive ? 'transparent' : 'color.gray.200',
-    backgroundColor: isActive ? 'color.white' : 'transparent',
-    color: isActive ? 'theme.primary' : 'color.gray.600',
-    fontWeight: 'normal',
-    position: 'relative',
-    // If active, show a bottom border that matches the background color
-    // to create the illusion that the tab is connected to the content
+export const TabHeader: React.FC<TabHeaderProps> = React.memo(
+  ({
+    tab,
+    isActive,
+    onClick,
+    iconPosition = 'left',
+    tabStyles,
+    textStyles,
+  }) => {
+    // Determine the flex direction based on icon position
+    const getFlexDirection = () => {
+      switch (iconPosition) {
+        case 'top':
+          return 'column';
+        case 'bottom':
+          return 'column-reverse';
+        case 'right':
+          return 'row-reverse';
+        case 'left':
+        default:
+          return 'row';
+      }
+    };
 
-    // Hover state
-    on: {
-      hover: {
-        color: 'theme.primary',
-      },
-    },
-  };
+    // Determine the gap based on icon position
+    const getGap = () => {
+      return ['top', 'bottom'].includes(iconPosition) ? '4px' : '8px';
+    };
 
-  // Determine the flex direction based on icon position
-  const getFlexDirection = () => {
-    switch (iconPosition) {
-      case 'top':
-        return 'column';
-      case 'bottom':
-        return 'column-reverse';
-      case 'right':
-        return 'row-reverse';
-      case 'left':
-      default:
-        return 'row';
-    }
-  };
+    // Clone icon to apply active styles (e.g. bold stroke) if valid.
+    // Use isValidElement's generic to give `tab.icon.props` a concrete shape
+    // (React 19 types it as `unknown` by default).
+    const iconElement =
+      tab.icon && React.isValidElement<{ strokeWidth?: number }>(tab.icon)
+        ? React.cloneElement(tab.icon, {
+            strokeWidth: isActive ? 2.5 : 2,
+          })
+        : tab.icon;
 
-  // Determine the gap based on icon position
-  const getGap = () => {
-    return ['top', 'bottom'].includes(iconPosition) ? '4px' : '8px';
-  };
+    return (
+      <Element
+        as="div"
+        role="tab"
+        aria-selected={isActive}
+        tabIndex={isActive ? 0 : -1}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        cursor="pointer"
+        transition="background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease"
+        {...tabStyles}
+        flexDirection={getFlexDirection()}
+        gap={getGap()}
+        onClick={onClick}
+        data-state={isActive ? 'active' : 'inactive'}
+      >
+        {/* 
+        Force icon remount when active state changes to ensure strokeWidth prop is applied 
+        even if the Icon component doesn't handle prop updates correctly.
+      */}
+        {iconElement && (
+          <Element key={isActive ? 'active-icon' : 'inactive-icon'}>
+            {iconElement}
+          </Element>
+        )}
 
-  return (
-    <Element
-      as="div"
-      role="tab"
-      aria-selected={isActive}
-      tabIndex={isActive ? 0 : -1}
-      {...baseStyles}
-      {...tabStyles}
-      flexDirection={getFlexDirection()}
-      gap={getGap()}
-      onClick={onClick}
-      data-state={isActive ? 'active' : 'inactive'}
-    >
-      {tab.icon && <Element>{tab.icon}</Element>}
-      <Text {...textStyles}>{tab.title}</Text>
-    </Element>
-  );
-};
+        {/* Grid wrapper to prevent layout shift when font weight changes */}
+        <Element display="grid" alignItems="center" justifyContent="center">
+          {/* Invisible bold text to reserve space */}
+          <Text
+            {...textStyles}
+            fontWeight="600"
+            visibility="hidden"
+            gridColumn="1"
+            gridRow="1"
+            aria-hidden="true"
+          >
+            {tab.title}
+          </Text>
+          {/* Visible text */}
+          <Text
+            {...textStyles}
+            fontWeight={isActive ? '600' : '500'}
+            gridColumn="1"
+            gridRow="1"
+          >
+            {tab.title}
+          </Text>
+        </Element>
+      </Element>
+    );
+  }
+);

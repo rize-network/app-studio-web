@@ -17,7 +17,7 @@ export const LinkBaseStyles: ViewProps = {
   textDecoration: 'underline',
   textUnderlineOffset: '2px',
   textDecorationThickness: '1px',
-  transition: 'color 0.15s ease, opacity 0.15s ease',
+  transition: 'all 0.15s ease-in-out',
   _hover: {
     opacity: 0.8,
   },
@@ -26,8 +26,7 @@ export const LinkBaseStyles: ViewProps = {
     opacity: 0.8,
   },
   _focusVisible: {
-    outline: 'none',
-    boxShadow: '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.1)',
-    borderRadius: '2px',
+    boxShadow: '0 0 0 2px white, 0 0 0 4px theme-primary',
+    borderRadius: 4, // radius-xs
   },
 };

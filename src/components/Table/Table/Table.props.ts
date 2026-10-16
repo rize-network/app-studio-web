@@ -8,7 +8,9 @@ export interface TableProps {
   caption?: React.ReactNode;
   views?: TableViewStyles;
 }
-export interface TableViewProps extends TableProps, Omit<ViewProps, 'size'> {}
+export interface TableViewProps
+  extends TableProps,
+    Omit<ViewProps, 'size' | 'columns'> {}
 export interface TableLayoutProps {
   Head?: React.FC<any>;
   Body?: React.FC<any>;
@@ -19,5 +21,6 @@ export interface TableLayoutProps {
   TableContainer?: React.FC<any>;
   children?: React.ReactNode;
   views?: TableViewStyles;
-  onClick?: Function;
+  // Wired straight to each row's onClick, so it receives the mouse event.
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }

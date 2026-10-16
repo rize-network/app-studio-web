@@ -25,4 +25,8 @@ export interface LabelProps extends Omit<ViewProps, 'size'> {
    * CSS styles applied to the Label
    */
   views?: { label?: ViewProps };
+  /**
+   * Helper text rendered below the label (hint / error / explanation).
+   */
+  helperText?: React.ReactNode;
 }

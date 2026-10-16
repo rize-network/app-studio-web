@@ -1,0 +1,88 @@
+{
+  "componentDescription": "A versatile component for displaying content in a separate, layered window with customizable appearance and behavior.",
+  "buttonColor": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Specifies the color of the close button.",
+    "defaultValue": "theme-primary"
+  },
+  "iconSize": {
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
+    "description": "Determines the size of the close button icon.",
+    "defaultValue": "md"
+  },
+  "shape": {
+    "type": "Shape",
+    "typeValues": [
+      "square",
+      "rounded"
+    ],
+    "description": "Defines the overall shape style of the modal container.",
+    "defaultValue": "rounded"
+  },
+  "isFullScreen": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Indicates whether the modal should occupy the full screen.",
+    "defaultValue": false
+  },
+  "buttonPosition": {
+    "type": "CloseButtonPosition",
+    "typeValues": [
+      "left",
+      "right",
+      "none"
+    ],
+    "description": "Sets the position of the close button within the modal.",
+    "defaultValue": "right"
+  },
+  "onClose": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function triggered when the modal is requested to close.",
+    "defaultValue": null
+  },
+  "blur": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Applies a blur effect to the modal's background overlay.",
+    "defaultValue": null
+  },
+  "isOpen": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "Controls the visibility state of the modal.",
+    "defaultValue": false
+  },
+  "isClosePrevented": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "If true, prevents the modal from closing when clicking outside or pressing escape.",
+    "defaultValue": false
+  },
+  "position": {
+    "type": "Position",
+    "typeValues": [
+      "top",
+      "left",
+      "right",
+      "bottom",
+      "center"
+    ],
+    "description": "Specifies the position of the modal on the screen.",
+    "defaultValue": "center"
+  },
+  "shadow": {
+    "type": "Shadow | Elevation | ViewProps",
+    "typeValues": null,
+    "description": "Defines the shadow style or elevation applied to the modal container.",
+    "defaultValue": "Platform-dependent (webShadow or nativeShadow)"
+  }
+}

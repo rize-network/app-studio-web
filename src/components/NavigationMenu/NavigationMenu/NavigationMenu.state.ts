@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-
+// This file defines a custom React hook, `useNavigationMenuState`, which encapsulates and manages the entire local state and logic for the Navigation Menu component, including active item tracking, expanded sub-menus, and element references.
 export const useNavigationMenuState = (
   defaultActiveItemId: string | null = null,
   defaultExpandedItemIds: string[] = []
@@ -11,26 +11,19 @@ export const useNavigationMenuState = (
     defaultExpandedItemIds
   );
   const triggerRefs = useRef<Record<string, HTMLDivElement>>({});
-
   const toggleExpandedItem = (itemId: string) => {
     setExpandedItemIds((prevExpandedItemIds) => {
-      // Check if the item is already expanded
       const isExpanded = prevExpandedItemIds.includes(itemId);
-
       if (isExpanded) {
-        // If expanded, remove it from the list
         return prevExpandedItemIds.filter((id) => id !== itemId);
       } else {
-        // If not expanded, add it to the list
         return [...prevExpandedItemIds, itemId];
       }
     });
   };
-
   const isItemExpanded = (itemId: string) => {
     return expandedItemIds.includes(itemId);
   };
-
   return {
     activeItemId,
     setActiveItemId,

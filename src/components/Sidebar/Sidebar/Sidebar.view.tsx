@@ -2,7 +2,7 @@ import React, { createContext, useContext } from 'react';
 import { View } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { ChevronIcon } from '../../Icon/Icon';
 import {
   SidebarProps,
@@ -19,8 +19,7 @@ import {
 } from './Sidebar.style';
 import { SidebarContextType } from './Sidebar.type';
 import { Badge } from '../../Badge/Badge';
-
-// Create context for the Sidebar
+// Initializes the React context for the Sidebar component, providing a way to share the sidebar's state and functions throughout the component tree with default values.
 const SidebarContext = createContext<SidebarContextType>({
   isExpanded: true,
   toggleExpanded: () => {},
@@ -30,11 +29,9 @@ const SidebarContext = createContext<SidebarContextType>({
   size: 'md',
   variant: 'default',
 });
-
-// Hook to use the Sidebar context
+// Custom hook that allows components to easily consume the `SidebarContext` and access its shared values like `isExpanded` and `toggleExpanded`.
 export const useSidebarContext = () => useContext(SidebarContext);
-
-// Provider component for the Sidebar context
+// Provides the `SidebarContext` value to its children, making the sidebar's state and actions available to all descendant components within its scope.
 export const SidebarProvider: React.FC<{
   value: SidebarContextType;
   children: React.ReactNode;
@@ -43,23 +40,22 @@ export const SidebarProvider: React.FC<{
     <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>
   );
 };
-
-// Sidebar Header component
+// Renders the header section of the Sidebar, optionally including a toggle button to expand or collapse the sidebar based on its current state.
 export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
   children,
   showToggleButton = true,
   views,
   ...props
 }) => {
+  // Retrieves the current expansion state, toggle function, and position from the `SidebarContext` to control the header's appearance and behavior.
   const { isExpanded, toggleExpanded, position } = useSidebarContext();
-
   return (
     <Horizontal
       width="100%"
       padding="16px"
       borderBottomWidth="1px"
       borderBottomStyle="solid"
-      borderBottomColor="color.gray.200"
+      borderBottomColor="color-gray-200"
       alignItems="center"
       justifyContent="space-between"
       {...views?.header}
@@ -80,10 +76,13 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
               justifyContent="center"
               width="32px"
               height="32px"
+              borderWidth="1px"
+              borderStyle="solid"
+              borderColor="color-gray-200"
               borderRadius="4px"
               backgroundColor="transparent"
               cursor="pointer"
-              _hover={{ backgroundColor: 'color.gray.100' }}
+              _hover={{ backgroundColor: 'color-gray-100' }}
               onClick={toggleExpanded}
               aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
               {...views?.toggleButton}
@@ -111,10 +110,13 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
               justifyContent="center"
               width="32px"
               height="32px"
+              borderWidth="1px"
+              borderStyle="solid"
+              borderColor="color-gray-200"
               borderRadius="4px"
               backgroundColor="transparent"
               cursor="pointer"
-              _hover={{ backgroundColor: 'color.gray.100' }}
+              _hover={{ backgroundColor: 'color-gray-100' }}
               onClick={toggleExpanded}
               aria-label={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
               {...views?.toggleButton}
@@ -131,15 +133,12 @@ export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
     </Horizontal>
   );
 };
-
-// Sidebar Content component
 export const SidebarContent: React.FC<SidebarContentProps> = ({
   children,
   views,
   ...props
 }) => {
   const { isExpanded } = useSidebarContext();
-
   return (
     <View
       flex="1"
@@ -154,31 +153,38 @@ export const SidebarContent: React.FC<SidebarContentProps> = ({
     </View>
   );
 };
-
-// Sidebar Footer component
 export const SidebarFooter: React.FC<SidebarFooterProps> = ({
   children,
   views,
   ...props
 }) => {
   const { isExpanded } = useSidebarContext();
-
   return (
     <View
       width="100%"
-      padding="16px"
+      // Matches SidebarContent: tighter gutters on the collapsed rail.
+      padding={isExpanded ? '16px' : '8px'}
       borderTopWidth="1px"
       borderTopStyle="solid"
-      borderTopColor="color.gray.200"
+      borderTopColor="color-gray-200"
       {...views?.footer}
       {...props}
     >
-      {isExpanded ? children : null}
+      {/*
+        Children render in both states, as they do in SidebarHeader and
+        SidebarContent.
+
+        This used to be `isExpanded ? children : null`, which silently threw the
+        footer away on the collapsed rail: a consumer could not offer an avatar
+        or a sign-out control there at all, and what remained was an empty
+        bordered strip at the bottom of the sidebar. Deciding what a 64px
+        footer shows belongs to the consumer, which can read `isExpanded` from
+        `Sidebar.useContext()` — the same way this component does.
+      */}
+      {children}
     </View>
   );
 };
-
-// Main Sidebar View component
 export const SidebarView: React.FC<SidebarProps> = ({
   children,
   position = 'left',
@@ -186,45 +192,37 @@ export const SidebarView: React.FC<SidebarProps> = ({
   variant = 'default',
   fixed = false,
   hasBackdrop = true,
-  // showToggleButton = true,
   expandedWidth,
   collapsedWidth,
-  // breakpoint = 768,
+  breakpoint,
   breakpointBehavior = 'overlay',
   elevation = 'none',
   transitionPreset = 'normal',
   ariaLabel = 'Sidebar navigation',
+  showToggleButton,
+  toggleExpanded,
+  expand,
   isExpanded,
   isMobile,
-  // toggleExpanded,
-  // expand,
   collapse,
   views,
   themeMode: elementMode,
   ...props
 }) => {
-  // Determine width based on expanded state and size
   const sizeConfig = SidebarSizes[size];
   const width = isExpanded
     ? expandedWidth || sizeConfig.expandedWidth
     : collapsedWidth || sizeConfig.collapsedWidth;
-
-  // Determine if sidebar should be visible based on mobile state and breakpoint behavior
   const isVisible = !isMobile || (isMobile && breakpointBehavior !== 'hide');
-
-  // Determine if sidebar should be fixed or absolute based on mobile state and breakpoint behavior
   const position_type =
     fixed || (isMobile && breakpointBehavior === 'overlay')
       ? 'fixed'
       : 'relative';
-
-  // Determine if backdrop should be shown
   const showBackdrop =
     hasBackdrop && isMobile && isExpanded && breakpointBehavior === 'overlay';
-
   return (
     <>
-      {/* Backdrop */}
+      {}
       {showBackdrop && (
         <View
           position="fixed"
@@ -232,14 +230,13 @@ export const SidebarView: React.FC<SidebarProps> = ({
           left={0}
           width="100vw"
           height="100vh"
-          backgroundColor="color.blackAlpha.500"
+          backgroundColor="color-dark-50-360"
           zIndex={998}
           onClick={collapse}
           {...views?.backdrop}
         />
       )}
-
-      {/* Sidebar */}
+      {}
       {isVisible && (
         <Vertical
           position={position_type}
@@ -276,19 +273,17 @@ interface SideBarNavItemProps {
   ariaLabel?: string;
   badge?: number;
 }
-
 export const SideBarNavItem = ({
   icon,
   label,
   isActive = false,
+  isDisabled = false,
   badge,
   views,
   ariaLabel,
   ...props
 }: SideBarNavItemProps & any) => {
-  // Get sidebar context to check if it's expanded
   const { isExpanded } = useSidebarContext();
-
   return (
     <Horizontal
       alignItems="center"
@@ -296,15 +291,25 @@ export const SideBarNavItem = ({
       gap={12}
       padding="8px 12px"
       borderRadius="4px"
-      backgroundColor={isActive ? 'color.blue.50' : 'transparent'}
-      color={isActive ? 'color.blue.600' : 'color.gray.700'}
+      backgroundColor={isActive ? 'color-blue-50' : 'transparent'}
+      color={
+        isDisabled
+          ? 'color-gray-400'
+          : isActive
+          ? 'color-blue-600'
+          : 'color-gray-700'
+      }
       fontWeight={isActive ? 'bold' : 'normal'}
-      cursor="pointer"
+      cursor={isDisabled ? 'not-allowed' : 'pointer'}
+      opacity={isDisabled ? 0.6 : 1}
       aria-label={ariaLabel}
+      aria-disabled={isDisabled || undefined}
       on={{
-        hover: {
-          backgroundColor: isActive ? 'color.blue.50' : 'color.gray.100',
-        },
+        hover: isDisabled
+          ? {}
+          : {
+              backgroundColor: isActive ? 'color-blue-50' : 'color-gray-100',
+            },
       }}
       {...props}
     >

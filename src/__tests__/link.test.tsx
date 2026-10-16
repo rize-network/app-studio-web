@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Link } from 'src/components/Link/Link';
 
 import { cleanup, render, screen } from '@testing-library/react';

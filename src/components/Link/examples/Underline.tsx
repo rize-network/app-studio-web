@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 import { Link } from '../Link';
@@ -15,8 +15,8 @@ export const UnderlineLink = () => (
     <Link
       to={'https://www.npmjs.com/package/app-studio'}
       underline="underline"
-      color="theme.primary"
-      textDecorationColor="theme.primary"
+      color="theme-primary"
+      textDecorationColor="theme-primary"
     >
       <Text>Underline</Text>
     </Link>

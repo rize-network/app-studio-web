@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Input, Typography, useTheme } from 'app-studio';
+import { Input, useTheme } from 'app-studio';
 import { FieldContainer } from '../../../Input/FieldContainer/FieldContainer';
 import { FieldContent } from '../../../Input/FieldContent/FieldContent';
 import { FieldIcons } from '../../../Input/FieldIcons/FieldIcons';
@@ -15,10 +15,6 @@ import { FieldWrapper } from '../../../Input/FieldWrapper/FieldWrapper';
 import { CloseIcon } from '../../../Icon/Icon';
 import { TextFieldViewProps } from './TextField.props';
 
-/**
- * Input component for text fields
- */
-const TextFieldInput = (props: any) => <Input type="text" {...props} />;
 const TextFieldView: React.FC<TextFieldViewProps> = ({
   id,
   name,
@@ -43,6 +39,11 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   isReadOnly = false,
   isClearable = true,
   isAutoFocus = false,
+  isRequired,
+  required,
+  labelProps,
+  leftIcon,
+  rightIcon,
   setHint = () => {},
   setIsFocused = () => {},
   setIsHovered = () => {},
@@ -51,63 +52,110 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   onFocus,
   onBlur = () => {},
   themeMode: elementMode,
+  inputRef,
   ...props
 }) => {
+  const generatedId = React.useId();
+  const fieldId = id ?? generatedId;
   const { getColor, themeMode } = useTheme();
-  const IconColor = getColor('color.blueGray.700', {
+  const IconColor = getColor(isDisabled ? 'color-gray-400' : 'color-gray-500', {
     themeMode: elementMode ? elementMode : themeMode,
   });
-  const showLabel = !!(isFocused && label);
-  /**
-   * Styles for the input field
-   */
+  const showLabel = !!label;
+  const fieldSizeStyles = {
+    xs: {
+      minHeight: 24,
+      shellPaddingY: 6,
+      shellPaddingX: 10,
+      fontSize: 12,
+      lineHeight: '16px',
+    },
+    sm: {
+      minHeight: 32,
+      shellPaddingY: 8,
+      shellPaddingX: 10,
+      fontSize: 12,
+      lineHeight: '16px',
+    },
+    md: {
+      minHeight: 40,
+      shellPaddingY: 10,
+      shellPaddingX: 12,
+      fontSize: 14,
+      lineHeight: '20px',
+    },
+    lg: {
+      minHeight: 48,
+      shellPaddingY: 12,
+      shellPaddingX: 14,
+      fontSize: 16,
+      lineHeight: '24px',
+    },
+    xl: {
+      minHeight: 56,
+      shellPaddingY: 14,
+      shellPaddingX: 16,
+      fontSize: 18,
+      lineHeight: '28px',
+    },
+  } as const;
+  const fieldView = views?.field || {};
+  const autofillShadow = '0 0 0 1000px var(--theme-canvas) inset';
   const fieldStyles = {
-    // Layout properties
     margin: 0,
-    paddingVertical: 4, // 2 × 4px grid
+    paddingVertical: 0,
     paddingHorizontal: 0,
     width: '100%',
-    height: '100%',
+    minHeight: 'auto',
     border: 'none',
-
-    // Focus state
-    on: {
-      focus: {
-        outline: 'none',
+    backgroundColor: 'transparent',
+    fontSize: fieldSizeStyles[size].fontSize,
+    letterSpacing: '-0.01em',
+    fontWeight: 400,
+    color: isDisabled ? 'color-gray-400' : 'color-gray-900',
+    cursor: isDisabled ? 'not-allowed' : 'text',
+    opacity: isDisabled ? 0.7 : 1,
+    transition: 'color 0.2s ease, opacity 0.2s ease',
+    _focus: {
+      outline: 'none',
+      _placeholder: {
+        opacity: 0.7,
       },
     },
-
-    // Typography properties
-    fontSize: Typography.fontSizes[size],
-    lineHeight: Typography.fontSizes[size],
-
-    letterSpacing: '-0.01em', // Slight negative tracking for modern look
-
-    // Visual properties
-    backgroundColor: 'transparent',
-    color: isDisabled ? 'color.gray.400' : 'color.gray.900',
-
-    // State properties
-    cursor: isDisabled ? 'not-allowed' : 'text',
-
-    // Animation
-    transition: 'all 0.2s ease',
-
-    // Apply custom field styles
-    ...views['field'],
+    _placeholder: {
+      color: 'color-gray-400',
+      opacity: 1,
+      transition: 'opacity 0.2s ease-out',
+    },
+    _selection: {
+      backgroundColor:
+        'color-mix(in srgb, var(--theme-primary) 20%, transparent)',
+    },
+    _webkitAutofill: {
+      boxShadow: autofillShadow,
+      WebkitBoxShadow: autofillShadow,
+      WebkitTextFillColor: 'var(--theme-text)',
+      transition: 'background-color 5000s ease-in-out 0s',
+    },
+    _webkitContactsAutoFillButton: {
+      visibility: 'hidden',
+      pointerEvents: 'none',
+      position: 'absolute',
+      right: 0,
+    } as const,
+    ...fieldView,
   };
   const handleFocus = () => {
     setIsFocused(true);
     if (onFocus) onFocus();
   };
-  const handleHover = () => setIsHovered(!isHovered);
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
   const handleBlur = (event: any) => {
     if (onBlur) onBlur(event);
     setIsFocused(false);
   };
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement> | string
-  ) => {
+  const handleChange = (event: React.ChangeEvent<any> | string) => {
     if (typeof event === 'string') {
       setValue(event);
       if (onChangeText) onChangeText(event);
@@ -120,15 +168,21 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   };
   const handleClear = () => {
     setValue('');
-    if (onChange) {
-      onBlur({ target: { name } });
-      if (onChangeText) onChangeText('');
-      if (onChange) onChange('');
-    }
-    if (typeof document === 'undefined' && onChangeText) onChangeText('');
+    // Both change callbacks fire unconditionally — gating `onChangeText` on
+    // `onChange` being present meant the clear button was a no-op for every
+    // consumer that only passes `onChangeText` (which is what the Formik
+    // wrapper does for text fields).
+    if (onChangeText) onChangeText('');
+    if (onChange) onChange('');
+    onBlur({ target: { name } });
   };
+  const {
+    container: _shellContainer,
+    content: _shellContent,
+    ...layoutViews
+  } = views || {};
   return (
-    <FieldContainer helperText={helperText} error={error} views={views}>
+    <FieldContainer helperText={helperText} error={error} views={layoutViews}>
       <FieldContent
         label={label}
         size={size}
@@ -138,34 +192,43 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         shadow={shadow}
         variant={variant}
         value={value}
-        color={'theme.primary'}
+        color={'theme-primary'}
         isHovered={isHovered}
         isDisabled={isDisabled}
         isReadOnly={isReadOnly}
         isFocused={isFocused}
         showLabel={showLabel}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
+        // Sizing comes from FieldContent's shared scale (`Input/fieldSizes`),
+        // so every field control agrees on what `md` means.
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {left}
+        {leftIcon && <FieldIcons>{leftIcon}</FieldIcons>}
         <FieldWrapper>
           {showLabel && (
             <FieldLabel
-              htmlFor={id}
-              color={'theme.primary'}
+              htmlFor={fieldId}
+              color={'theme-primary'}
               error={error}
-              {...views}
+              {...labelProps}
+              {...views?.label}
             >
               {label}
             </FieldLabel>
           )}
-          <TextFieldInput
-            id={id}
+          <Input
+            ref={inputRef}
+            type="text"
+            id={fieldId}
             name={name}
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
-            placeholder={hint}
+            {...(isRequired ?? required
+              ? { required: true, 'aria-required': true }
+              : {})}
+            placeholder={placeholder || hint}
             onFocus={handleFocus}
             onBlur={handleBlur}
             autoComplete="off"
@@ -178,12 +241,23 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
         {isClearable && value && !isReadOnly && !isDisabled && (
           <FieldIcons>
             <CloseIcon
-              widthHeight={Typography.fontSizes[size]}
+              size={20}
               color={IconColor}
               onClick={handleClear}
+              cursor="pointer"
+              borderRadius="50%"
+              transition="background-color 0.2s ease, transform 0.2s ease"
+              _hover={{
+                backgroundColor: 'color-gray-100',
+                transform: 'scale(1.05)',
+              }}
+              _active={{
+                transform: 'scale(0.95)',
+              }}
             />
           </FieldIcons>
         )}
+        {rightIcon && <FieldIcons>{rightIcon}</FieldIcons>}
         {right}
       </FieldContent>
     </FieldContainer>

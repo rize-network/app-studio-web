@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Avatar } from 'src/components';
 
 import { cleanup, render, screen } from '@testing-library/react';
@@ -12,7 +12,9 @@ test('renders Avatar component', () => {
   render(
     <Avatar src="https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/07/insert-image-html.jpg" />
   );
-  const AvatarElement = screen.getByRole('avatar');
+  const AvatarElement = document.querySelector(
+    '[data-role="avatar"]'
+  ) as HTMLElement;
   expect(AvatarElement).toBeInTheDocument();
 });
 
@@ -20,7 +22,9 @@ test('applies the correct CSS properties', () => {
   render(
     <Avatar src="https://d27jswm5an3efw.cloudfront.net/app/uploads/2019/07/insert-image-html.jpg" />
   );
-  const AvatarElement = screen.getByRole('avatar');
+  const AvatarElement = document.querySelector(
+    '[data-role="avatar"]'
+  ) as HTMLElement;
 
   expect(AvatarElement).toHaveStyle({
     borderRadius: '50%',

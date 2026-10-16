@@ -36,7 +36,18 @@ const getInputTypeProps = (type: string) => {
       return {};
   }
 };
-export const useFormikInput = ({ name, type, ...props }: any) => {
+interface FormikInputOptions {
+  // Opt the field into the keyboard focus chain (Return/Next moves to the next
+  // field, last field submits). Only single-line text inputs set this — a
+  // TextArea must keep Enter for newlines, and non-text controls have no
+  // focusable text node to register.
+  focusable?: boolean;
+}
+
+export const useFormikInput = (
+  { name, type, ...props }: any,
+  options: FormikInputOptions = {}
+) => {
   const focus = useFormFocus();
   const {
     touched,
@@ -73,14 +84,41 @@ export const useFormikInput = ({ name, type, ...props }: any) => {
     getIn(touched, name) || submitCount > 0 ? getIn(errors, name) : undefined;
   const value = getIn(values, name);
 
+  // app-studio runs on the web when the DOM is real. The RN entry ships a
+  // `document` shim that deliberately omits `createElement`, so this same
+  // check is how the rest of the library distinguishes web from native.
+  const isWeb =
+    typeof document !== 'undefined' &&
+    typeof (document as any).createElement === 'function';
+
+  // When the parent <FormikForm autoFocus> is active, wire the input into the
+  // focus chain. On web we advance on Enter (`onKeyPress`); on native we use
+  // the TextInput contract (`returnKeyType` + `onSubmitEditing`, with
+  // `blurOnSubmit: false` so focus can hop to the next field without the
+  // keyboard flickering). `inputRef` (a plain prop, not React `ref`) registers
+  // the focusable node so the chain can call `.focus()` on the next field;
+  // non-text views that ignore `inputRef` are simply skipped.
+  const inFocusChain = !!options.focusable && focus.active;
+  const focusProps = inFocusChain
+    ? isWeb
+      ? { onKeyPress: handleKeyPress }
+      : {
+          returnKeyType: focus.getReturnKeyType(name),
+          onSubmitEditing: () => focus.handleSubmitEditing(name),
+          blurOnSubmit: false,
+        }
+    : {};
+
   return {
     ...getInputTypeProps(type),
     ...props,
     value,
     error,
     onBlur: handleBlur,
-    onKeyPress: handleKeyPress,
     ...(isText ? { onChangeText } : { onChange }),
-    ...(focus.active ? { handleKeyPress } : {}),
+    ...focusProps,
+    ...(inFocusChain
+      ? { inputRef: (node: any) => focus.setInputRef(name, node) }
+      : {}),
   };
 };

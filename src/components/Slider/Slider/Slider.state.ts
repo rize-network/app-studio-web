@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { SliderProps } from './Slider.props';
-
-// Clamp value between min and max
+// This file encapsulates the core state management logic and utility functions for the Slider component, handling value calculation, user interactions, and controlled/uncontrolled behavior.
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max);
-
-// Calculate value based on position, track dimensions, min, max, step
 const calculateValue = (
   position: number,
   trackRect: DOMRect,
@@ -17,26 +14,19 @@ const calculateValue = (
 ): number => {
   const range = max - min;
   let percentage: number;
-
   if (orientation === 'horizontal') {
     const trackLength = trackRect.width;
     const relativePosition = position - trackRect.left;
     percentage = clamp(relativePosition / trackLength, 0, 1);
   } else {
-    // Vertical: top is max, bottom is min (reversed from the provided code)
     const trackLength = trackRect.height;
-    const relativePosition = trackRect.bottom - position; // Y position relative to track bottom
+    const relativePosition = trackRect.bottom - position;
     percentage = clamp(relativePosition / trackLength, 0, 1);
   }
-
-  // If stepValues are provided, find the closest value in the array
   if (stepValues && stepValues.length > 0) {
     const rawValue = min + percentage * range;
-
-    // Find the closest value in stepValues
     let closestValue = stepValues[0];
     let minDistance = Math.abs(rawValue - closestValue);
-
     for (let i = 1; i < stepValues.length; i++) {
       const distance = Math.abs(rawValue - stepValues[i]);
       if (distance < minDistance) {
@@ -44,22 +34,20 @@ const calculateValue = (
         closestValue = stepValues[i];
       }
     }
-
     return closestValue;
   } else {
-    // Use regular step logic
     const rawValue = min + percentage * range;
     const steppedValue = Math.round(rawValue / step) * step;
-    // Final clamp to ensure step rounding doesn't exceed bounds
     return clamp(steppedValue, min, max);
   }
 };
-
 export const useSliderState = ({
   min = 0,
   max = 100,
   step = 1,
-  value: controlledValue = 0,
+  // No default here: `value` must stay undefined in uncontrolled mode, or
+  // `isControlled` is always true and the slider is pinned to 0.
+  value: controlledValue,
   defaultValue,
   onChange,
   onDrag,
@@ -71,19 +59,16 @@ export const useSliderState = ({
   const [internalValue, setInternalValue] = useState(initialValue);
   const [isDragging, setIsDragging] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
   const trackRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
   const isControlled = controlledValue !== undefined;
-  const currentValue = isControlled ? controlledValue : internalValue;
-
-  // Update internal state if controlled value changes
+  const currentValue =
+    controlledValue !== undefined ? controlledValue : internalValue;
   useEffect(() => {
-    if (isControlled) {
+    if (controlledValue !== undefined) {
       setInternalValue(clamp(controlledValue, min, max));
     }
-  }, [controlledValue, isControlled, min, max]);
-
+  }, [controlledValue, min, max]);
   const updateValue = useCallback(
     (newValue: number) => {
       const clampedValue = clamp(newValue, min, max);
@@ -99,14 +84,15 @@ export const useSliderState = ({
     },
     [isControlled, min, max, onChange, currentValue, isDragging, onDrag]
   );
-
   const handleInteraction = useCallback(
     (event: MouseEvent | TouchEvent | React.MouseEvent | React.TouchEvent) => {
       if (isDisabled || !trackRef.current) return;
-
-      const trackRect = trackRef.current.getBoundingClientRect();
+      const trackNode: any = trackRef.current;
+      // `getBoundingClientRect` is a DOM-only method; on React Native the ref
+      // resolves to a component instance that lacks it, so bail out gracefully.
+      if (typeof trackNode.getBoundingClientRect !== 'function') return;
+      const trackRect = trackNode.getBoundingClientRect();
       let position: number;
-
       if ('touches' in event) {
         position =
           orientation === 'horizontal'
@@ -115,7 +101,6 @@ export const useSliderState = ({
       } else {
         position = orientation === 'horizontal' ? event.clientX : event.clientY;
       }
-
       const newValue = calculateValue(
         position,
         trackRect,
@@ -129,18 +114,15 @@ export const useSliderState = ({
     },
     [min, max, step, orientation, updateValue, isDisabled, stepValues]
   );
-
   const handleMouseDown = useCallback(
     (event: React.MouseEvent | React.TouchEvent) => {
       if (isDisabled) return;
-      event.preventDefault(); // Prevent text selection during drag
+      event.preventDefault();
       setIsDragging(true);
-      handleInteraction(event); // Update value immediately on click/touch
-
+      handleInteraction(event);
       const handleMouseMove = (moveEvent: MouseEvent | TouchEvent) => {
         handleInteraction(moveEvent);
       };
-
       const handleMouseUp = () => {
         setIsDragging(false);
         document.removeEventListener('mousemove', handleMouseMove);
@@ -148,7 +130,8 @@ export const useSliderState = ({
         document.removeEventListener('touchmove', handleMouseMove);
         document.removeEventListener('touchend', handleMouseUp);
       };
-
+      // `document` is web-only; React Native has no global drag listeners.
+      if (typeof document === 'undefined') return;
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
       document.addEventListener('touchmove', handleMouseMove);
@@ -156,19 +139,21 @@ export const useSliderState = ({
     },
     [handleInteraction, isDisabled]
   );
-
-  // Allow clicking directly on the track
   const handleTrackMouseDown = useCallback(
     (event: React.MouseEvent | React.TouchEvent) => {
-      // Prevent triggering if click is on the thumb itself
-      if (thumbRef.current && thumbRef.current.contains(event.target as Node)) {
+      const thumbNode: any = thumbRef.current;
+      // `.contains` is a DOM-only method; skip the check on React Native.
+      if (
+        thumbNode &&
+        typeof thumbNode.contains === 'function' &&
+        thumbNode.contains(event.target as Node)
+      ) {
         return;
       }
       handleMouseDown(event);
     },
     [handleMouseDown]
   );
-
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
       if (isDisabled) return;
@@ -189,18 +174,16 @@ export const useSliderState = ({
           newValue = max;
           break;
         default:
-          return; // Exit if key is not handled
+          return;
       }
-      event.preventDefault(); // Prevent page scroll
+      event.preventDefault();
       updateValue(newValue);
     },
     [currentValue, min, max, step, updateValue, isDisabled]
   );
-
   const range = max - min;
   const thumbPositionPercent =
     range === 0 ? 0 : ((currentValue - min) / range) * 100;
-
   return {
     currentValue,
     isDragging,

@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import { Vertical, Horizontal } from 'app-studio';
+import { Vertical, Horizontal, View } from 'app-studio';
 import { EmojiPicker } from '../EmojiPicker';
 import { TextField } from '../../Form/TextField/TextField';
 import { Button } from '../../Button/Button';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const FormIntegrationEmojiPicker = () => {
   const [title, setTitle] = useState('');
   const [emoji, setEmoji] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Title: ${emoji} ${title}\nDescription: ${description}`);
+  const handleSubmit = () => {
+    if (typeof alert !== 'undefined') {
+      alert(`Title: ${emoji} ${title}\nDescription: ${description}`);
+    } else {
+      console.log(`Title: ${emoji} ${title}\nDescription: ${description}`);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <View>
       <Vertical gap={16} width="400px">
         <Horizontal gap={12} alignItems="end">
           <EmojiPicker
@@ -30,7 +33,7 @@ export const FormIntegrationEmojiPicker = () => {
           <TextField
             label="Title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={setTitle}
             placeholder="Enter title"
             style={{ flex: 1 }}
           />
@@ -39,7 +42,7 @@ export const FormIntegrationEmojiPicker = () => {
         <TextField
           label="Description"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={setDescription}
           placeholder="Enter description"
           helperText="Add a description for your item"
         />
@@ -50,21 +53,21 @@ export const FormIntegrationEmojiPicker = () => {
             gap={8}
             padding="16px"
             borderRadius="8px"
-            backgroundColor="color.gray.50"
+            backgroundColor="color-gray-50"
             borderWidth="1px"
             borderStyle="solid"
-            borderColor="color.gray.200"
+            borderColor="color-gray-200"
           >
             <Text fontWeight="bold">Preview</Text>
             <Text fontSize="18px" fontWeight="600">
               {emoji} {title || 'Untitled'}
             </Text>
-            {description && <Text color="color.gray.600">{description}</Text>}
+            {description && <Text color="color-gray-600">{description}</Text>}
           </Vertical>
         )}
 
         <Horizontal gap={8}>
-          <Button type="submit" variant="filled">
+          <Button type="button" variant="filled" onClick={handleSubmit}>
             Create Item
           </Button>
           <Button
@@ -80,6 +83,6 @@ export const FormIntegrationEmojiPicker = () => {
           </Button>
         </Horizontal>
       </Vertical>
-    </form>
+    </View>
   );
 };

@@ -1,5 +1,6 @@
 import { ViewProps } from 'app-studio';
 import { Headings, Sizes, TextWeights } from './Label.type';
+
 export interface LabelProps extends Omit<ViewProps, 'size'> {
   // Define an interface called `LabelProps` to type-check the props that can be passed to Label component.
   children: React.ReactNode;
@@ -16,6 +17,22 @@ export interface LabelProps extends Omit<ViewProps, 'size'> {
   // Optional `size` prop that can either be one of the predefined `Sizes` type or a custom `number` size value.
   weight?: TextWeights;
   // Optional `weight` prop that defines the font weight of the label using the predefined `TextWeights` type.
-
-  // Use index signature to allow any additional properties with `string` keys and values of `any` type, adding flexibility to the `LabelProps` interface.
+  htmlFor?: string;
+  // Optional `htmlFor` prop forwarded to the underlying <label> element.
+  dropDown?: ViewProps;
+  // Accepted and ignored; consumed by the parent field layout (TextField,
+  // ColorInput, …) — the Label itself renders nothing for it.
+  error?: boolean | string;
+  // Optional `error` flag forwarded by parent fields via `views?.label`
+  // spread; when truthy the label is colored with the shared field error
+  // color (`color-red-500`).
+  isDisabled?: boolean;
+  // Optional `isDisabled` flag forwarded by parent fields via `views?.label`
+  // spread; mutes the label color and shows a `not-allowed` cursor on web.
+  helperText?: React.ReactNode;
+  // Accepted and ignored; consumed by the parent field layout, which renders
+  // the helper text below the field (FieldContainer), not inside the Label.
+  views?: ViewProps;
+  // Accepted and ignored; consumed by parent field layout when it spreads
+  // `views?.label` — kept in the interface so the spread stays type-safe.
 }

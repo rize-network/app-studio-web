@@ -16,11 +16,13 @@ export const FieldWrapper: React.FC<WrapperFieldProps> = ({
   ...props
 }) => (
   <Vertical
-    // Layout properties
+    display="flex"
+    flexDirection="column"
+    gap={4}
+    flex={1}
     width="100%"
     maxWidth="100%"
-    position="relative"
-    // Apply custom props
+    boxSizing="border-box"
     {...props}
   >
     {children}

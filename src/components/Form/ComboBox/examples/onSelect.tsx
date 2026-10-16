@@ -32,7 +32,9 @@ export const OnSelectDemo = () => {
         id="onSelect"
         items={items}
         onSelect={(item) => {
-          showMessage('success', `Item selected: ${item.label}`);
+          if (!Array.isArray(item)) {
+            showMessage('success', `Item selected: ${item.label}`);
+          }
         }}
       />
       <MessageLayout position="bottomRight" />

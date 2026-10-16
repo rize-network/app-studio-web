@@ -80,7 +80,7 @@ export const EnhancedEditableInputDemo = () => {
         Enhanced Editable Input Demo
       </Text>
 
-      <Text fontSize="14px" color="color.gray.600">
+      <Text fontSize="14px" color="color-gray-600">
         Features: • Visible placeholder text • Auto-growing height • Line breaks
         with Enter key • Auto-completion suggestions • Submit only via button
         (not Enter key)
@@ -88,10 +88,10 @@ export const EnhancedEditableInputDemo = () => {
 
       <View
         border="1px solid"
-        borderColor="color.gray.300"
+        borderColor="color-gray-300"
         borderRadius="8px"
         padding="16px"
-        backgroundColor="color.white"
+        backgroundColor="color-white"
       >
         <Vertical gap={12}>
           <EditableInput
@@ -111,17 +111,17 @@ export const EnhancedEditableInputDemo = () => {
               onClick={handleSubmit}
               padding="8px 16px"
               backgroundColor={
-                inputValue.trim() ? 'color.blue.500' : 'color.gray.300'
+                inputValue.trim() ? 'color-blue-500' : 'color-gray-300'
               }
-              color="color.white"
+              color="color-white"
               border="none"
               borderRadius="6px"
               cursor={inputValue.trim() ? 'pointer' : 'not-allowed'}
               disabled={!inputValue.trim()}
               _hover={{
                 backgroundColor: inputValue.trim()
-                  ? 'color.blue.600'
-                  : 'color.gray.300',
+                  ? 'color-blue-600'
+                  : 'color-gray-300',
               }}
             >
               Send Message
@@ -133,17 +133,17 @@ export const EnhancedEditableInputDemo = () => {
       {submittedMessage && (
         <View
           padding="12px"
-          backgroundColor="color.green.50"
+          backgroundColor="color-green-50"
           border="1px solid"
-          borderColor="color.green.200"
+          borderColor="color-green-200"
           borderRadius="6px"
         >
-          <Text fontSize="14px" fontWeight="medium" color="color.green.800">
+          <Text fontSize="14px" fontWeight="medium" color="color-green-800">
             Submitted Message:
           </Text>
           <Text
             fontSize="14px"
-            color="color.green.700"
+            color="color-green-700"
             marginTop="4px"
             whiteSpace="pre-wrap"
           >

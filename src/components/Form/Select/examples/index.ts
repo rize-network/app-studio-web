@@ -1,4 +1,5 @@
 export * from './Color';
+export * from './Controlled';
 export * from './Default';
 export * from './designSystem';
 export * from './Disabled';

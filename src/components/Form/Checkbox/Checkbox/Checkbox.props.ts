@@ -4,7 +4,8 @@ import { InputProps, Shadow } from 'app-studio';
 import { CheckboxStyles, Size } from './Checkbox.type';
 import { ViewProps } from 'app-studio';
 
-export interface CheckboxProps extends Omit<InputProps, 'size'> {
+export interface CheckboxProps
+  extends Omit<InputProps, 'size' | 'onChange' | 'shadow'> {
   id?: string;
   icon?: React.ReactNode;
   error?: any;
@@ -16,8 +17,12 @@ export interface CheckboxProps extends Omit<InputProps, 'size'> {
   isDisabled?: boolean;
   isIndeterminate?: boolean;
   labelPosition?: 'left' | 'right';
-  onChange?: Function;
-  onValueChange?: Function;
+  // Called with the checkbox's next checked state — not a DOM event. Typed
+  // rather than `Function` so a DOM-shaped handler is a compile error and the
+  // argument is actually visible to callers.
+  onChange?: (checked: boolean) => void;
+  // Same argument as `onChange`; both fire on toggle.
+  onValueChange?: (checked: boolean) => void;
   views?: CheckboxStyles;
   size?: Size;
   shadow?: Shadow | Elevation | ViewProps;
@@ -27,5 +32,6 @@ export interface CheckboxViewProps extends CheckboxProps {
   isHovered?: boolean;
   setIsHovered?: (hovered: boolean) => void;
   isChecked?: boolean;
-  setIsChecked?: (selected: boolean) => void;
+  isSelected?: boolean;
+  setIsSelected?: (selected: boolean) => void;
 }

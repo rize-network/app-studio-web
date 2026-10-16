@@ -5,51 +5,21 @@ import {
   Thickness,
   SeparatorStyles,
 } from './Separator.type';
-
 export interface SeparatorProps extends ViewProps {
-  /**
-   * The orientation of the separator
-   */
+  // Defines the orientation of the separator, either horizontal or vertical.
   orientation?: Orientation;
-
-  /**
-   * The visual style variant of the separator
-   */
+  // Specifies the visual variant of the separator, such as solid, dashed, or dotted.
   variant?: Variant;
-
-  /**
-   * The thickness of the separator
-   */
+  // Sets the thickness of the separator line.
   thickness?: Thickness;
-
-  /**
-   * The color of the separator
-   */
+  // Determines the color of the separator line.
   color?: string;
-
-  /**
-   * The spacing around the separator
-   */
+  // Controls the space around the separator.
   spacing?: number | string;
-
-  /**
-   * Optional label to display in the middle of the separator
-   */
+  // Provides content to be displayed within or alongside the separator, often text or an icon.
   label?: React.ReactNode;
-
-  /**
-   * Whether the separator has decorative purpose only
-   * If true, the separator will be hidden from screen readers
-   */
+  // Indicates whether the separator is purely decorative (true) or has semantic meaning (false).
   decorative?: boolean;
-
-  /**
-   * Custom styles for different parts of the separator
-   */
+  // Allows for custom styling of different parts of the separator component.
   views?: SeparatorStyles;
-
-  /**
-   * Optional theme mode override ('light' or 'dark')
-   * If not provided, the component will use the theme mode from context
-   */
 }

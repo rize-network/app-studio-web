@@ -26,8 +26,7 @@ import {
   NavigationMenuItemStates,
 } from './NavigationMenu.style';
 import { ChevronIcon } from '../../Icon/Icon';
-
-// Create context for the NavigationMenu
+// Initializes the NavigationMenuContext, providing a mechanism to share active item state, expanded item IDs, orientation, size, variant, and trigger refs across all navigation components. It sets default values for the context's state and functions.
 const NavigationMenuContext = createContext<NavigationMenuContextType>({
   activeItemId: null,
   setActiveItemId: () => {},
@@ -39,8 +38,7 @@ const NavigationMenuContext = createContext<NavigationMenuContextType>({
   variant: 'default',
   triggerRefs: { current: {} },
 });
-
-// Provider component for the NavigationMenu context
+// The NavigationMenuProvider component makes the context value available to all its child components. This is crucial for maintaining a centralized state for the navigation menu, allowing any descendant to access or modify shared properties.
 export const NavigationMenuProvider: React.FC<{
   children: React.ReactNode;
   value: NavigationMenuContextType;
@@ -51,8 +49,6 @@ export const NavigationMenuProvider: React.FC<{
     </NavigationMenuContext.Provider>
   );
 };
-
-// Hook to use the NavigationMenu context
 export const useNavigationMenuContext = () => {
   const context = useContext(NavigationMenuContext);
   if (!context) {
@@ -62,36 +58,28 @@ export const useNavigationMenuContext = () => {
   }
   return context;
 };
-
-// NavigationMenu List component
 export const NavigationMenuList: React.FC<NavigationMenuListProps> = ({
   children,
   views,
 }) => {
   const { orientation } = useNavigationMenuContext();
-
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
-
   return (
     <Container
       width="100%"
       {...NavigationMenuOrientations[orientation]}
-      transition="all 0.2s ease"
-      borderRadius="4px"
+      transition="background-color 0.2s ease, border-color 0.2s ease"
+      borderRadius="8px"
       {...views?.container}
     >
       {children}
     </Container>
   );
 };
-
-// Create a context for NavigationMenuItem
 const NavigationMenuItemContext = createContext<{
   itemValue: string | null;
   isDisabled: boolean;
 }>({ itemValue: null, isDisabled: false });
-
-// Hook to use the NavigationMenuItem context
 export const useNavigationMenuItemContext = () => {
   const context = useContext(NavigationMenuItemContext);
   if (!context) {
@@ -101,8 +89,6 @@ export const useNavigationMenuItemContext = () => {
   }
   return context;
 };
-
-// NavigationMenu Item component
 export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
   item,
   value,
@@ -118,16 +104,12 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
     variant,
     onItemActivate,
   } = useNavigationMenuContext();
-
-  // Handle both data-driven and compound component patterns
   const itemId = item?.id || value;
   const isActive = activeItemId === itemId;
   const hasSubItems = item?.items && item.items.length > 0;
   const disabled = item?.disabled || isDisabled;
-
   const handleClick = () => {
     if (disabled) return;
-
     if (itemId) {
       setActiveItemId(itemId);
       if (onItemActivate) {
@@ -135,10 +117,7 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
       }
     }
   };
-
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
-
-  // For compound component pattern
   if (children) {
     return (
       <NavigationMenuItemContext.Provider
@@ -148,8 +127,8 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
           width="100%"
           cursor={disabled ? 'not-allowed' : 'pointer'}
           opacity={disabled ? 0.6 : 1}
-          borderRadius="4px"
-          transition="all 0.2s ease"
+          borderRadius="8px"
+          transition="background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease"
           {...NavigationMenuSizes[size]}
           {...NavigationMenuVariants[variant]}
           {...(isActive ? NavigationMenuItemStates.active : {})}
@@ -161,8 +140,6 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
       </NavigationMenuItemContext.Provider>
     );
   }
-
-  // For data-driven pattern with sub-items
   if (hasSubItems && item) {
     return (
       <Container
@@ -183,7 +160,6 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
           )}
           {item.label}
         </NavigationMenuTrigger>
-
         <NavigationMenuContent itemId={item.id}>
           <NavigationMenuList>
             {item.items?.map((subItem) => (
@@ -194,21 +170,19 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
       </Container>
     );
   }
-
-  // For data-driven pattern without sub-items
   if (item) {
     return (
       <View
         as={item.href ? 'a' : 'div'}
-        to={item.href}
+        href={item.href}
         onClick={handleClick}
         cursor={item.disabled ? 'not-allowed' : 'pointer'}
         opacity={item.disabled ? 0.6 : 1}
         width="100%"
         display="flex"
         alignItems="center"
-        borderRadius="4px"
-        transition="all 0.2s ease"
+        borderRadius="8px"
+        transition="background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease"
         gap="8px"
         {...NavigationMenuSizes[size]}
         {...NavigationMenuVariants[variant]}
@@ -225,11 +199,8 @@ export const NavigationMenuItem: React.FC<NavigationMenuItemProps> = ({
       </View>
     );
   }
-
   return null;
 };
-
-// NavigationMenu Trigger component
 export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
   children,
   itemId,
@@ -244,12 +215,9 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
     variant,
     triggerRefs,
   } = useNavigationMenuContext();
-
   const triggerRef = useRef<HTMLDivElement>(null);
   const isActive = activeItemId === itemId;
   const isExpanded = isItemExpanded(itemId);
-
-  // Store the trigger ref in the context
   useEffect(() => {
     if (triggerRef.current && itemId) {
       triggerRefs.current[itemId] = triggerRef.current;
@@ -260,13 +228,11 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
       }
     };
   }, [itemId, triggerRefs]);
-
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (disabled) return;
     toggleExpandedItem(itemId);
   };
-
   return (
     <View
       ref={triggerRef}
@@ -277,7 +243,7 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      borderRadius={4}
+      borderRadius={8}
       transition="background-color 0.2s ease"
       {...NavigationMenuSizes[size]}
       {...NavigationMenuVariants[variant]}
@@ -303,8 +269,6 @@ export const NavigationMenuTrigger: React.FC<NavigationMenuTriggerProps> = ({
     </View>
   );
 };
-
-// NavigationMenu Content component
 export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
   children,
   itemId,
@@ -312,17 +276,13 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
 }) => {
   const { isItemExpanded, orientation, triggerRefs } =
     useNavigationMenuContext();
-
   const contentRef = useRef<HTMLDivElement>(null);
   const [optimalPosition, setOptimalPosition] = useState({
     x: 0,
     y: 0,
     placement: orientation === 'horizontal' ? 'bottom' : 'right',
   });
-
   const isExpanded = isItemExpanded(itemId);
-
-  // Calculate optimal position when the menu expands
   useEffect(() => {
     if (
       isExpanded &&
@@ -333,28 +293,19 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
     ) {
       const contentRect = contentRef.current.getBoundingClientRect();
       const triggerRect = triggerRefs.current[itemId]!.getBoundingClientRect();
-
-      // Get content dimensions
       const contentWidth = Math.max(contentRect.width || 200, 200);
       const contentHeight = Math.max(contentRect.height || 150, 150);
-
-      // Get viewport dimensions
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
-
-      // Calculate available space on all sides from the trigger
       const availableSpace = {
         top: triggerRect.top,
         right: viewportWidth - triggerRect.right,
         bottom: viewportHeight - triggerRect.bottom,
         left: triggerRect.left,
       };
-
-      // Determine optimal placement based on orientation and available space
       const placements =
         orientation === 'horizontal'
           ? [
-              // For horizontal navigation menu, prefer bottom placement
               {
                 placement: 'bottom' as const,
                 space: availableSpace.bottom,
@@ -385,7 +336,6 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
               },
             ]
           : [
-              // For vertical navigation menu, prefer right placement
               {
                 placement: 'right' as const,
                 space: availableSpace.right,
@@ -415,8 +365,6 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
                 y: triggerRect.top - contentHeight - 8,
               },
             ];
-
-      // Find the best fitting placement
       const fittingPlacement = placements.find((p) => p.fits);
       if (fittingPlacement) {
         setOptimalPosition({
@@ -426,16 +374,11 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
         });
         return;
       }
-
-      // If nothing fits, choose the placement with the most space
       const bestPlacement = placements.reduce((best, current) =>
         current.space > best.space ? current : best
       );
-
-      // Ensure the content stays within viewport bounds
       let finalX = bestPlacement.x;
       let finalY = bestPlacement.y;
-
       if (finalX + contentWidth > viewportWidth) {
         finalX = viewportWidth - contentWidth - 8;
       }
@@ -448,7 +391,6 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
       if (finalY < 8) {
         finalY = 8;
       }
-
       setOptimalPosition({
         x: finalX,
         y: finalY,
@@ -456,12 +398,9 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
       });
     }
   }, [isExpanded, orientation, itemId, triggerRefs]);
-
   if (!isExpanded) {
     return null;
   }
-
-  // For vertical orientation, keep the original relative positioning
   if (orientation === 'vertical') {
     return (
       <View
@@ -475,21 +414,18 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
       </View>
     );
   }
-
-  // For horizontal orientation, use fixed positioning with intelligent placement
   const positionStyles: React.CSSProperties = {
     position: 'fixed',
     left: optimalPosition.x,
     top: optimalPosition.y,
     zIndex: 1000,
   };
-
   return (
     <View
       ref={contentRef}
       role="menu"
       minWidth="200px"
-      backgroundColor="color.white"
+      backgroundColor="color-white"
       borderRadius={4}
       boxShadow="0px 2px 8px rgba(0, 0, 0, 0.15)"
       overflow="hidden"
@@ -500,42 +436,35 @@ export const NavigationMenuContent: React.FC<NavigationMenuContentProps> = ({
     </View>
   );
 };
-
-// Main NavigationMenu View component
-// NavigationMenu Link component
 import { NavigationMenuLinkProps } from './NavigationMenu.props';
-
 export const NavigationMenuLink: React.FC<NavigationMenuLinkProps> = ({
   href,
   children,
   views,
+  underline,
+  isExternal,
+  iconSize,
   ...props
 }) => {
   const { itemValue, isDisabled } = useNavigationMenuItemContext();
   const { activeItemId, setActiveItemId, onItemActivate } =
     useNavigationMenuContext();
-
   const isActive = activeItemId === itemValue;
-
   const handleClick = (e: React.MouseEvent) => {
     if (isDisabled) {
       e.preventDefault();
       return;
     }
-
     if (itemValue) {
       setActiveItemId(itemValue);
       if (onItemActivate) {
         onItemActivate(itemValue);
       }
     }
-
-    // Allow the user's onClick handler to run
     if (props.onClick) {
       props.onClick(e);
     }
   };
-
   return (
     <View
       as="a"
@@ -558,7 +487,6 @@ export const NavigationMenuLink: React.FC<NavigationMenuLinkProps> = ({
     </View>
   );
 };
-
 export const NavigationMenuView: React.FC<
   {
     items?: NavigationItem[];
@@ -567,19 +495,11 @@ export const NavigationMenuView: React.FC<
     variant: Variant;
     views?: any;
   } & ViewProps
-> = ({
-  items,
-  orientation,
-  //size, variant,
-  views,
-  themeMode: elementMode,
-}) => {
+> = ({ items, orientation, views, themeMode: elementMode }) => {
   const Container = orientation === 'horizontal' ? Horizontal : Vertical;
-
   if (!items || items.length === 0) {
     return null;
   }
-
   return (
     <Container
       width="100%"

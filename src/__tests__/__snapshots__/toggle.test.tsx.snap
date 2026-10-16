@@ -1,11 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Toggle to match snapshot 1`] = `
 <div
-  className="dy-flex jct-center ais-center pg-8px wh-fit-content cror-pointer brs-4px bcr- bwh-0px bsee-none bcrr- tn-all-0p2s-ease cr---hover tm-translateY-1px--hover cr---active tm-translateY0--active"
+  className="pg-8px wh-fit-content cror-pointer brs-8px bcr-transparent cr-var--theme-primary bwh-0px bsee-none bcrr-transparent bcr-var--color-gray-50--hover bcr-var--color-gray-100--active tn-background-color-0p2s-ease-color-0p2s-ease dy-flex jct-center ais-center"
   onClick={[Function]}
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
+  ref={[Function]}
   role="Toggle"
 >
   Default

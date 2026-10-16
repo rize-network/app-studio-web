@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Modal } from 'src/components/Modal/Modal';
 
 import { cleanup, render } from '@testing-library/react';
@@ -29,7 +29,7 @@ test('Modal Overlay renders without errors when isOpen prop is true', () => {
 
 // test('Modal Overlay applies custom styles using props spread', () => {
 //   render(
-//     <Modal.Overlay isOpen={true} onClose={() => {}} color="color.red">
+//     <Modal.Overlay isOpen={true} onClose={() => {}} color="color-red">
 //       Modal Content
 //     </Modal.Overlay>
 //   );

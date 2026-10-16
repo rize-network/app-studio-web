@@ -2,7 +2,7 @@ import React from 'react';
 import { Gradient } from '../Gradient';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const DirectionsDemo = () => (
   <Vertical gap={16}>
@@ -24,8 +24,8 @@ export const DirectionsDemo = () => (
           <Gradient
             type="linear"
             direction={direction}
-            from="color.blue.500"
-            to="color.purple.500"
+            from="color-blue-500"
+            to="color-purple-500"
             height="100px"
             width="100%"
           />

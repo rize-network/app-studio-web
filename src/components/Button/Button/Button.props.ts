@@ -6,13 +6,15 @@ import {
   Shape,
   Size,
   Variant,
+  Animation,
   LoaderPosition,
   // Defines the types and structure required for the ButtonProps interface, used as a contract for Button component properties.
 } from './Button.type';
 // Optional React node(s) to be displayed as the button's content.
 import { LoaderProps } from '../../Loader/Loader/Loader.props';
 // Optional string to define the color scheme of the button.
-export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
+export interface ButtonProps
+  extends Omit<$ButtonProps, 'size' | 'onClick' | 'variant' | 'shadow'> {
   // Optional React node(s) to be displayed as the button's content.
   children?: React.ReactNode;
   // Optional LoaderProps object to configure the appearance and behavior of the loader animation.
@@ -36,7 +38,11 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   // Optional Size to specify the size of the button.
   isIconRounded?: boolean;
   // Optional shadow property that can be a predefined Shadow, Elevation value or custom CSSProperties to apply shadow effects to the button.
-  onClick?: Function;
+  onClick?: (...args: any) => any;
+  // Optional flag indicating the link should open in an external/new tab.
+  isExternal?: boolean;
+  // Optional flag indicating the button renders only an icon (no text label).
+  isIcon?: boolean;
   // Optional Shape to specify the shape of the button (e.g., rounded or square edges).
   size?: Size;
   // Optional string used as an accessible label for screen readers.
@@ -47,14 +53,33 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
   ariaLabel?: string;
 
   // Variant to define the stylistic variation of the button.
-  variant?: Variant;
+  variant?: Variant | string;
 
-  // Optional color scheme for the button
+  // Optional animation to apply to the button
+  animation?: Animation;
+
+  // Main color for the button (accepts theme tokens like 'theme-primary' or color palette like 'color-blue-600')
   color?: string;
+
+  // Explicit text color (overrides auto-calculated color)
+  textColor?: string;
+
+  // INTERNAL — set by the Button wrapper: content color declared by the
+  // instance itself (via `textColor`, or via the `backgroundColor` + `color`
+  // pair where `color` keeps its CSS meaning). Read from raw instance props
+  // before the design-system config merge, so config-level `textColor`
+  // defaults cannot masquerade as instance intent. Do not set manually.
+  explicitTextColor?: string;
+
+  // Whether to reverse the colors (useful for dark backgrounds)
+  reversed?: boolean;
 
   // Props for borderMoving variant
   borderMovingDuration?: number;
   borderMovingGradientColors?: string[];
+
+  // Internal hover state
+  isHovered?: boolean;
 
   // Props for animatedStroke variant
   animatedStrokeAccentColor?: string;
@@ -67,4 +92,17 @@ export interface ButtonProps extends Omit<$ButtonProps, 'size'> {
     icon?: ViewProps;
     link?: ViewProps;
   };
+  config?: any;
+  // Optional list of i18n keys passed by editor-driven button instances.
+  keys?: any[];
+  // Optional visible label rendered as the button's content (alias for children).
+  label?: React.ReactNode;
+  // Optional alias for icon rendered on the leading edge of the button.
+  leftIcon?: React.ReactNode;
+  // Optional alias for icon rendered on the trailing edge of the button.
+  rightIcon?: React.ReactNode;
+  // Alternate spelling of leftIcon for compatibility with form libraries.
+  startIcon?: React.ReactNode;
+  // Alternate spelling of rightIcon for compatibility with form libraries.
+  endIcon?: React.ReactNode;
 }

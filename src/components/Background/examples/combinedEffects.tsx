@@ -2,7 +2,7 @@ import React from 'react';
 import { Background } from '../Background';
 import { Button } from '../../Button/Button';
 import { Vertical, Center, Horizontal } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 
 export const CombinedEffectsDemo = () => (
   <Vertical gap={32}>
@@ -11,7 +11,7 @@ export const CombinedEffectsDemo = () => (
     </Text>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Aurora with Interactive Elements
       </Text>
       <Background.Aurora height="400px" showRadialGradient={true}>
@@ -31,12 +31,17 @@ export const CombinedEffectsDemo = () => (
             </Text>
 
             <Horizontal gap={16} flexWrap="wrap">
-              <Button variant="borderMoving" borderMovingDuration={2}>
+              <Button
+                animation="borderMoving"
+                variant="filled"
+                borderMovingDuration={2}
+              >
                 Get Started
               </Button>
 
               <Button
-                variant="animatedStroke"
+                animation="animatedStroke"
+                variant="ghost"
                 animatedStrokeAccentColor="white"
                 animatedStrokeTextColor="white"
               >
@@ -49,7 +54,7 @@ export const CombinedEffectsDemo = () => (
     </Vertical>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Meteors with Content Overlay
       </Text>
       <Background.Meteors number={25} width={600} height={300}>
@@ -62,7 +67,11 @@ export const CombinedEffectsDemo = () => (
           <Text color="white" fontSize={20} fontWeight="600">
             Shooting Stars
           </Text>
-          <Button variant="borderMoving" borderMovingDuration={3}>
+          <Button
+            animation="borderMoving"
+            variant="filled"
+            borderMovingDuration={3}
+          >
             Explore
           </Button>
         </Vertical>
@@ -70,12 +79,13 @@ export const CombinedEffectsDemo = () => (
     </Vertical>
 
     <Vertical gap={24}>
-      <Text fontSize={14} color="color.gray.600">
+      <Text fontSize={14} color="color-gray-600">
         Multiple Interactive Elements
       </Text>
       <Horizontal gap={16} flexWrap="wrap" justifyContent="center">
         <Button
-          variant="borderMoving"
+          animation="borderMoving"
+          variant="filled"
           borderMovingDuration={1.5}
           borderMovingGradientColors={['#FF6B6B', '#4ECDC4', '#45B7D1']}
         >
@@ -83,15 +93,17 @@ export const CombinedEffectsDemo = () => (
         </Button>
 
         <Button
-          variant="animatedStroke"
-          animatedStrokeAccentColor="color.purple.500"
-          animatedStrokeTextColor="color.purple.700"
+          animation="animatedStroke"
+          variant="ghost"
+          animatedStrokeAccentColor="color-purple-500"
+          animatedStrokeTextColor="color-purple-700"
         >
           Hover Effect
         </Button>
 
         <Button
-          variant="borderMoving"
+          animation="borderMoving"
+          variant="filled"
           borderMovingDuration={3}
           borderMovingGradientColors={['#FFD93D', '#6BCF7F', '#4D96FF']}
         >

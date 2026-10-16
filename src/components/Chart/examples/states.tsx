@@ -3,7 +3,7 @@ import { Chart } from '../Chart';
 import { View } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Button } from '../../Button/Button';
 import { CHART_COLORS } from '../Chart/ChartColors';
 
@@ -117,7 +117,7 @@ export const ChartStatesDemo = () => {
       <View
         padding={16}
         borderWidth={1}
-        borderColor="color.gray.200"
+        borderColor="color-gray-200"
         borderRadius={8}
       >
         <Vertical gap={16}>
@@ -175,8 +175,8 @@ export const ChartStatesDemo = () => {
           isLoading={true}
           loadingIndicator={
             <Vertical alignItems="center" gap={10}>
-              <Text color="color.blue">Custom Loading...</Text>
-              <Text color="color.gray.500">
+              <Text color="color-blue">Custom Loading...</Text>
+              <Text color="color-gray-500">
                 Please wait while we prepare your data
               </Text>
             </Vertical>

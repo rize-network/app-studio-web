@@ -22,15 +22,15 @@ export const StyledInput = () => {
           views={{
             container: {
               borderRadius: 8,
-              borderColor: 'theme.primary',
+              borderColor: 'theme-primary',
               borderStyle: 'solid',
               borderWidth: 1,
             },
-            text: { color: 'theme.primary' },
-            label: { color: 'theme.primary' },
+            text: { color: 'theme-primary' },
+            label: { color: 'theme-primary' },
           }}
         />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { OTPInput } from '../OTPInput';
 
 export const OnCompleteDemo = () => {
@@ -22,7 +22,7 @@ export const OnCompleteDemo = () => {
         isAutoFocus
       />
       {message && (
-        <Text color="theme.success" fontWeight="medium">
+        <Text color="theme-success" fontWeight="medium">
           {message}
         </Text>
       )}

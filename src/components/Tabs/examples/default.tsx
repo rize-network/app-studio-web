@@ -1,101 +1,77 @@
 import React from 'react';
-import {
-  MoonIcon,
-  ShareIcon,
-  PanelIcon,
-  SaveIcon,
-  PauseIcon,
-} from '../../Icon/Icon'; // Assuming components are exported from index
-import { Text, View } from 'app-studio';
+import { Text, Vertical, View } from 'app-studio';
 import { Tabs } from '../Tabs';
 
-// Example demonstrating basic usage of the Tabs component.
-export const Default = () => (
-  <Tabs
-    // Add a unique 'value' to each tab
-    tabs={[
-      {
-        title: 'Product',
-        icon: <MoonIcon />,
-        content: (
-          <View backgroundColor={'purple'} padding="20px 20px 0">
-            <Text heading="h5" color="white">
-              Product Tab Content
-            </Text>
-            <DummyContent />
-          </View>
-        ),
-      },
-      {
-        title: 'Services',
-        icon: <ShareIcon />,
-        content: (
-          <View backgroundColor={'purple'} padding="20px 20px 0">
-            <Text heading="h5" color="white">
-              Services Tab Content
-            </Text>
-            <DummyContent />
-          </View>
-        ),
-      },
-      {
-        title: 'Playground',
-        icon: <PanelIcon />,
-        content: (
-          <View backgroundColor={'purple'} padding="20px 20px 0">
-            <Text heading="h5" color="white">
-              Playground Tab Content
-            </Text>
-            <DummyContent />
-          </View>
-        ),
-      },
-      {
-        title: 'Content',
-        icon: <SaveIcon />,
-        content: (
-          <View backgroundColor={'purple'} padding="20px 20px 0">
-            <Text heading="h5" color="white">
-              Content Tab Content
-            </Text>
-            <DummyContent />
-          </View>
-        ),
-      },
-      {
-        title: 'Random',
-        icon: <PauseIcon />,
-        content: (
-          <View backgroundColor={'purple'} padding="20px 20px 0">
-            <Text heading="h5" color="white">
-              Random Tab Content
-            </Text>
-            <DummyContent />
-          </View>
-        ),
-      },
-    ]}
-    // Optionally set the initially active tab
-    defaultValue="Services"
-    // Optionally listen for tab changes
-    onTabChange={(activeTab) => console.log('Active Tab:', activeTab.title)}
-  />
-);
+const EmptyContent = () => <View minHeight={8} />;
 
-// Simple placeholder content component
-const DummyContent = () => {
+export const Default = () => {
+  const topTabs = [
+    { title: 'Overview', value: 'overview', content: <EmptyContent /> },
+    { title: 'Activity', value: 'activity', content: <EmptyContent /> },
+    { title: 'Files', value: 'files', content: <EmptyContent /> },
+    { title: 'Settings', value: 'settings', content: <EmptyContent /> },
+  ];
+
+  const periodTabs = [
+    { title: 'Day', value: 'day', content: <EmptyContent /> },
+    { title: 'Week', value: 'week', content: <EmptyContent /> },
+    { title: 'Month', value: 'month', content: <EmptyContent /> },
+    { title: 'Year', value: 'year', content: <EmptyContent /> },
+  ];
+
+  const categoryTabs = [
+    { title: 'All', value: 'all', content: <EmptyContent /> },
+    { title: 'Buttons', value: 'buttons', content: <EmptyContent /> },
+    { title: 'Forms', value: 'forms', content: <EmptyContent /> },
+    { title: 'Overlays', value: 'overlays', content: <EmptyContent /> },
+    { title: 'Feedback', value: 'feedback', content: <EmptyContent /> },
+  ];
+
   return (
-    <View
-      marginTop="20px"
-      borderRadius="8px"
-      height="300px"
-      backgroundColor={'black'}
-      // Added content for visibility
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Text color="grey">Dummy Content Area</Text>
-    </View>
+    <Vertical gap={28} width="100%" padding={24}>
+      <Vertical gap={12}>
+        <Text fontSize={12} color="color-gray-500" textTransform="uppercase">
+          Underline
+        </Text>
+        <Tabs
+          tabs={topTabs}
+          defaultValue="overview"
+          variant="underline"
+          views={{
+            container: { width: '100%' },
+            headerTabs: { gap: 36 },
+            content: { display: 'none' },
+          }}
+        />
+      </Vertical>
+
+      <Vertical gap={12}>
+        <Text fontSize={12} color="color-gray-500" textTransform="uppercase">
+          Segmented
+        </Text>
+        <Tabs
+          tabs={periodTabs}
+          defaultValue="week"
+          variant="segmented"
+          views={{
+            content: { display: 'none' },
+          }}
+        />
+      </Vertical>
+
+      <Vertical gap={12}>
+        <Text fontSize={12} color="color-gray-500" textTransform="uppercase">
+          Pill
+        </Text>
+        <Tabs
+          tabs={categoryTabs}
+          defaultValue="all"
+          variant="pill"
+          views={{
+            content: { display: 'none' },
+          }}
+        />
+      </Vertical>
+    </Vertical>
   );
 };

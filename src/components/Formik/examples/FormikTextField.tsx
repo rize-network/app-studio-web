@@ -21,9 +21,7 @@ export const FormikTextFieldExemple = () => {
             <FormikTextField name="firstName" placeholder="First Name" />
             <FormikTextField name="lastName" placeholder="Last Name" />
             <FormikTextField type="email" name="email" placeholder="Email" />
-            <Button type="submit" onClick={props.handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={props.handleSubmit}>Submit</Button>
           </Vertical>
         </FormikForm>
       )}

@@ -1,22 +1,53 @@
 {
-  "name": "@app-studio/web",
-  "version": "0.9.37",
-  "main": "dist/index.js",
-  "typings": "dist/components/index.d.ts",
+  "name": "@app-studio/components",
+  "version": "0.11.9",
+  "main": "dist/web.cjs.js",
+  "module": "dist/web.esm.js",
+  "react-native": "dist/native/components/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "docs"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "react-native": {
+        "types": "./dist/native/components/index.d.ts",
+        "import": "./dist/native/components/index.js",
+        "default": "./dist/native/components/index.js"
+      },
+      "browser": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/web.esm.js",
+        "require": "./dist/web.cjs.js",
+        "default": "./dist/web.esm.js"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/web.esm.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/web.cjs.js"
+      },
+      "default": "./dist/web.esm.js"
+    }
+  },
   "engines": {
     "node": ">=10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build:web": "react-scripts build",
-    "build": "tsdx build --format cjs,esm,umd --entry ./src/components/index.tsx --tsconfig tsconfig.build.json",
-    "test": "react-scripts test",
-    "test:unwatch": "react-scripts test --watchAll=false",
-    "eject": "react-scripts eject",
+    "start": "vite --port 3300",
+    "build:web": "vite build && vite build --config vite.ssr.config.ts && node scripts/prerender.mjs",
+    "prerender": "vite build --config vite.ssr.config.ts && node scripts/prerender.mjs",
+    "prelighthouse": "npm run build:web",
+    "build": "vite build --config vite.lib.config.ts",
+    "test": "vitest",
+    "test:unwatch": "vitest run",
+    "preview": "vite preview",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "styleguide": "styleguidist server",
@@ -31,14 +62,16 @@
     "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx, json}\"",
     "prettier:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx, json}\"",
     "prepare": "husky install",
-    "prepublishOnly": "npm run build",
     "commit:lint": "npm run lint:fix",
-    "lighthouse": "lighthouse http://localhost:3000 --view --budget-path=./budget.json",
+    "lighthouse": "npx --yes kill-port 4173; npx --yes start-server-and-test preview http://localhost:4173 \"node scripts/warm.mjs http://localhost:4173 && lighthouse http://localhost:4173 --view --budget-path=./budget.json\"",
     "bundle-analyzer": "node ./scripts/analyse.js",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "prerelease": "npm run build",
+    "prerelease": "npm run build:package",
+    "prepublishOnly": "npm run build:package",
     "release": "release-it",
+    "postpublish": "npm run promote:latest",
+    "promote:latest": "npm dist-tag add \"${npm_package_name}@${npm_package_version}\" latest && npm dist-tag ls \"${npm_package_name}\"",
     "bot-doc": "ts-node bot/index.ts",
     "create-docs": "ts-node scripts/create-docs.ts",
     "create-structure": "ts-node scripts/create-structure.ts",
@@ -47,7 +80,13 @@
     "page-imports": "ts-node scripts/generate-page-imports.ts",
     "create-pages": "npm run create-indices && ts-node scripts/create-pages.ts && npm run page-imports",
     "validate-docs": "node scripts/validate-docs.js",
-    "api:local": "react-api  --useUnionTypes --input http://localhost:3000/docs/swagger.json --output ./src/services/api  && prettier --write ./src/services/api"
+    "docs:app-studio": "rm -rf docs/app-studio && mkdir -p docs/app-studio && cp -R node_modules/app-studio/docs/* docs/app-studio",
+    "api:local": "react-api  --useUnionTypes --input http://localhost:3000/docs/swagger.json --output ./src/services/api  && prettier --write ./src/services/api",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck:native": "tsc --noEmit -p tsconfig.native.json",
+    "build:native": "rm -rf dist/native && tsc -p tsconfig.native.build.json && tsc-alias -p tsconfig.native.build.json",
+    "build:native:types": "npm run build:native",
+    "build:package": "npm run typecheck && npm run build && npm run typecheck:native && npm run build:native"
   },
   "eslintConfig": {
     "extends": [
@@ -77,19 +116,13 @@
       "last 1 safari version"
     ]
   },
-  "dependencies": {
-    "contrast": "^1.0.1",
-    "date-fns": "^2.30.0",
-    "formik": "^2.4.6",
-    "typescript": "^4.9.5",
-    "zustand": "^4.3.8"
-  },
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
     "@app-studio/react-api": "^0.15.28",
     "@app-studio/react-request": "^0.1.3",
     "@babel/cli": "^7.25.9",
     "@babel/core": "^7.26.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/preset-typescript": "^7.26.0",
@@ -100,79 +133,117 @@
     "@huggingface/inference": "^3.6.2",
     "@mdx-js/mdx": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
-    "@mdxeditor/editor": "^3.21.0",
     "@size-limit/preset-small-lib": "^10.0.2",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^14.0.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/compression": "^1.8.1",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.14",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@types/react-test-renderer": "^18.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/react-test-renderer": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",
-    "app-studio": "^0.6.21",
-    "async-mutex": "^0.5.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "app-studio": "file:../app-studio",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-named-exports-order": "^0.0.2",
     "babel-plugin-react-require": "^4.0.0",
-    "brotli-webpack-plugin": "^1.1.0",
     "cheerio": "^1.0.0-rc.12",
     "commitlint": "^18.2.0",
-    "compression": "^1.7.4",
-    "compression-webpack-plugin": "^10.0.0",
+    "compression": "^1.8.1",
     "css-loader": "^6.7.4",
+    "date-fns": "^2.30.0",
     "dotenv": "^16.4.5",
-    "env-cmd": "^10.1.0",
     "eslint": "^8.57.1",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^4.1.4",
-    "express": "^4.18.2",
-    "groq-sdk": "^0.17.0",
+    "formik": "^2.4.6",
+    "groq-sdk": "^1.1.2",
     "husky": "^8.0.0",
+    "jsdom": "^27.4.0",
     "lighthouse": "^11.6.0",
     "lint-staged": "^13.2.2",
-    "markdown-loader": "^8.0.0",
-    "npm": "^10.5.0",
+    "lucide-react": "^0.562.0",
+    "lucide-react-native": "^1.16.0",
     "openai": "^4.91.1",
     "prettier": "^2.8.8",
-    "react": "^18.2.0",
-    "react-docgen-typescript": "^2.2.2",
-    "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0",
-    "react-live": "^4.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-native": "^0.85.3",
+    "react-native-linear-gradient": "^2.8.3",
+    "react-native-reanimated": "^4.3.1",
+    "react-native-svg": "^15.15.5",
     "react-router-dom": "^6.11.1",
-    "react-scripts": "^5.0.1",
-    "react-styleguidist": "^13.1.1",
-    "react-test-renderer": "^18.2.0",
+    "react-test-renderer": "^19.0.0",
     "release-it": "^16.2.1",
     "replicate": "^1.0.1",
-    "router": "^1.3.8",
     "simple-git": "^3.22.0",
     "store": "^2.0.12",
-    "style-loader": "^3.3.2",
     "tiktoken": "^1.0.20",
     "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.8",
-    "tsdx": "^0.14.1",
     "tslib": "^2.8.1",
-    "web-vitals": "^2.1.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.4.21",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.2.7",
     "webpack": "^5.89.0",
     "webpack-bundle-analyzer": "^4.8.0",
-    "webpack-cli": "^5.1.3",
-    "yup": "^1.5.0"
+    "yup": "^1.5.0",
+    "zustand": "^4.3.8"
   },
   "peerDependencies": {
-    "react": ">= 17"
+    "app-studio": ">=0.9.0",
+    "formik": ">=2",
+    "lucide-react": "*",
+    "lucide-react-native": "*",
+    "react": ">= 18",
+    "react-dom": ">= 18",
+    "react-native": ">= 0.71",
+    "react-native-linear-gradient": ">= 2.6",
+    "react-native-reanimated": ">= 3",
+    "react-native-svg": ">= 13",
+    "react-router-dom": ">= 6",
+    "typescript": ">=4",
+    "zustand": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "lucide-react": {
+      "optional": true
+    },
+    "lucide-react-native": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    },
+    "react-native-linear-gradient": {
+      "optional": true
+    },
+    "react-native-reanimated": {
+      "optional": true
+    },
+    "react-native-svg": {
+      "optional": true
+    },
+    "react-router-dom": {
+      "optional": true
+    }
   },
   "size-limit": [
     {
-      "path": "dist/web.cjs.production.min.js",
+      "path": "dist/web.cjs.js",
       "limit": "100 KB"
     },
     {
@@ -180,10 +251,12 @@
       "limit": "100 KB"
     },
     {
-      "path": "dist/web.umd.production.min.js",
+      "path": "dist/web.umd.js",
       "limit": "100 KB"
     }
   ],
-  "module": "dist/web.esm.js",
-  "unpkg": "dist/web.umd.production.min.js"
+  "unpkg": "dist/web.umd.js",
+  "dependencies": {
+    "react-helmet-async": "^3.0.0"
+  }
 }

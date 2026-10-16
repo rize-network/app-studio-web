@@ -7,11 +7,7 @@ import {
   TooltipContent,
   TooltipView,
 } from './Tooltip/Tooltip.view';
-
-/**
- * Tooltip component for displaying additional information when hovering over an element.
- * Supports configurable positions, delays, and styling.
- */
+// Defines the main Tooltip component, a customizable overlay for displaying contextual information. It manages tooltip state using `useTooltipState` and renders the `TooltipView` within a `TooltipProvider`, supporting a compound component pattern.
 const TooltipComponent: React.FC<TooltipProps> = ({
   content,
   children,
@@ -33,7 +29,6 @@ const TooltipComponent: React.FC<TooltipProps> = ({
     closeDelay,
     isDisabled,
   });
-
   return (
     <TooltipProvider value={tooltipState}>
       <TooltipView
@@ -51,9 +46,6 @@ const TooltipComponent: React.FC<TooltipProps> = ({
     </TooltipProvider>
   );
 };
-
 export const Tooltip = TooltipComponent as TooltipType;
-
-// Assign the sub-components to the main component
 Tooltip.Trigger = TooltipTrigger;
 Tooltip.Content = TooltipContent;

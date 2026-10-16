@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { cleanup, render } from '@testing-library/react';
 
 afterEach(() => {

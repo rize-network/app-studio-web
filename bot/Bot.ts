@@ -5,12 +5,11 @@ import { Cache } from './Cache';
 import { FileHandler } from './FileHandler';
 import { APPLICATION_SETTINGS } from './Config'; // Keep config for cache etc.
 import { extractJsonCode } from './extractors';
-// Removed ProjectPrompt as init is removed: import { ProjectPrompt } from './prompt/1-project';
 import { RespondPrompt } from './prompt/2-response';
 
 // Define default model/provider or fetch from config
-const DEFAULT_MODEL = 'gpt-4o-mini'; // Example default
-const DEFAULT_PROVIDER: ProviderType = 'openai'; // Example default
+const DEFAULT_MODEL = 'gemini-2.5-flash'; // Example default
+const DEFAULT_PROVIDER: ProviderType = 'google'; // Example default
 
 export class Bot {
   public readonly aiService: AiService; // Use AiService
@@ -36,7 +35,12 @@ export class Bot {
     model: string = DEFAULT_MODEL,
     provider: ProviderType = DEFAULT_PROVIDER
   ): Promise<any> {
-    const componentPath = `${componentFolder}/${componentName}`;
+    const nestedPath = `${componentFolder}/${componentName}`;
+    const componentPath =
+      this.fileHandler.pathExists(nestedPath) &&
+      this.fileHandler.readFiles(nestedPath).length > 0
+        ? nestedPath
+        : componentFolder;
     const cachePath = `${this.cacheKey}/${componentName}/props`; // More specific cache key
 
     const cachedResponse = this.cache.getJsonFromCache(cachePath);
@@ -61,12 +65,21 @@ export class Bot {
 
         // Check the file type and read content accordingly
         if (file.endsWith('.props.ts')) {
-          propsContent = await this.fileHandler.readFile(filePath);
+          propsContent += (await this.fileHandler.readFile(filePath)) + '\n';
         } else if (file.endsWith('.view.tsx')) {
-          viewContent = await this.fileHandler.readFile(filePath);
+          viewContent += (await this.fileHandler.readFile(filePath)) + '\n';
         } else if (file.endsWith('.type.d.ts') || file.endsWith('.type.ts')) {
           // Allow .type.ts too
-          typeContent = await this.fileHandler.readFile(filePath);
+          typeContent += (await this.fileHandler.readFile(filePath)) + '\n';
+        } else if (
+          file === `${componentName}.tsx` ||
+          file === `${componentName}.ts`
+        ) {
+          // Handle standard component naming (e.g. Button.tsx)
+          viewContent += (await this.fileHandler.readFile(filePath)) + '\n';
+        } else if (file === 'index.tsx' || file === 'index.ts') {
+          // Handle index files
+          viewContent += (await this.fileHandler.readFile(filePath)) + '\n';
         }
       }
 
@@ -109,8 +122,26 @@ export class Bot {
       // Log the raw response for debugging
       // console.log('Raw AI response for props:', responseString);
 
-      const propsJson =
-        extractJsonCode(responseString) || JSON.parse(responseString); // Try direct parse as fallback
+      let propsJson;
+      try {
+        propsJson = extractJsonCode(responseString);
+        if (!propsJson) {
+          // Fallback: try parsing the entire string
+          try {
+            propsJson = JSON.parse(responseString);
+          } catch (e) {
+            // Fallback 2: try parsing entire string with comments removed
+            const cleaned = responseString.replace(/\/\/.*$/gm, '');
+            propsJson = JSON.parse(cleaned);
+          }
+        }
+      } catch (parseError) {
+        console.error(
+          `Failed to parse JSON for ${componentName}. Response:`,
+          responseString
+        );
+        throw parseError;
+      }
 
       // Validate the response structure
       if (!this.isValidPropsStructure(propsJson)) {
@@ -180,7 +211,7 @@ export class Bot {
         propsData.componentDescription || 'No description provided.'
       }\n\n`;
 
-      markdown += `### **Import**\n\`\`\`tsx\nimport { ${componentName} } from '@app-studio/web';\n\`\`\`\n\n`;
+      markdown += `### **Import**\n\`\`\`tsx\nimport { ${componentName} } from '@app-studio/components';\n\`\`\`\n\n`;
 
       // Check for the Default example
       const defaultExamplePath = path.resolve(
@@ -202,10 +233,15 @@ export class Bot {
       }
 
       // Generate documentation for each prop found in examples
-      let examplesFound = false;
-      const exampleFiles = this.fileHandler.readFiles(
+      const exampleFiles = await this.fileHandler.readFiles(
         path.join(componentFolder, 'examples')
       );
+      const usedExamples = new Set<string>();
+
+      // Add default.tsx to used examples if it exists
+      if (this.fileHandler.pathExists(defaultExamplePath)) {
+        usedExamples.add('default.tsx');
+      }
 
       for (const propName in propsData) {
         if (propName === 'componentDescription') continue; // Skip description
@@ -220,7 +256,7 @@ export class Bot {
         );
 
         if (this.fileHandler.pathExists(exampleFilePath)) {
-          examplesFound = true;
+          usedExamples.add(exampleFileName);
           const exampleCode = await this.fileHandler.readFile(exampleFilePath);
           markdown += `### **${propName}**\n`;
           // Safely access description, provide fallback
@@ -248,14 +284,28 @@ export class Bot {
         }
       }
 
-      if (
-        !examplesFound &&
-        exampleFiles.filter((f) => f !== 'default.tsx').length === 0
-      ) {
-        // Only warn if there are no example files other than default
-        console.warn(
-          `Warning: No specific prop examples found for ${componentName}.`
-        );
+      // Add remaining examples that weren't matched to a prop
+      for (const file of exampleFiles) {
+        if (
+          !usedExamples.has(file) &&
+          (file.endsWith('.tsx') || file.endsWith('.ts'))
+        ) {
+          const exampleFilePath = path.resolve(
+            componentFolder,
+            'examples',
+            file
+          );
+          const exampleCode = await this.fileHandler.readFile(exampleFilePath);
+          const exampleName = file.replace(/\.(tsx|ts)$/, '');
+          // Capitalize first letter for title
+          const title =
+            exampleName.charAt(0).toUpperCase() + exampleName.slice(1);
+
+          markdown += `### **${title}**\n`;
+          markdown += '\n```tsx\n';
+          markdown += exampleCode.trim();
+          markdown += '\n```\n\n';
+        }
       }
 
       // Write markdown content to specified file

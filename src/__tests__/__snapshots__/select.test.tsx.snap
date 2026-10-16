@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Select matches snapshot 1`] = `
-<select>
-  <option>
-    Option 1
-  </option>
-</select>
-`;

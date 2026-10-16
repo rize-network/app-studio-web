@@ -1,10 +1,12 @@
 import React, { Suspense } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { useRoutes, useLocation } from 'react-router-dom';
 import { ComponentRouter } from 'src/routes/routes';
 import { View, Text } from 'app-studio';
 
 export const App: React.FC = () => {
   const location = useLocation();
+  const content = useRoutes(ComponentRouter, location);
+
   return (
     <Suspense
       fallback={
@@ -18,11 +20,7 @@ export const App: React.FC = () => {
         </View>
       }
     >
-      <Routes location={location}>
-        {ComponentRouter.map((item, index) => (
-          <Route key={index} path={item.path} element={item.element} />
-        ))}
-      </Routes>
+      {content}
     </Suspense>
   );
 };

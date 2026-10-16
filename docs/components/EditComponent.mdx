@@ -1,0 +1,76 @@
+---
+title: EditComponent
+description: A floating or overlay toolbar designed for contextual editing of elements, with support for custom tools and positioning.
+---
+
+# EditComponent
+
+The `EditComponent` is a versatile toolbar that positions itself relative to a target element. It is commonly used for inline editing interfaces, providing a set of tools (icons) that can trigger actions or open sub-panels.
+
+## Usage
+
+```tsx
+import { EditComponent } from 'app-studio';
+import { useRef, useState } from 'react';
+
+const MyComponent = () => {
+  const [target, setTarget] = useState<HTMLElement | null>(null);
+
+  return (
+    <>
+      <div 
+        onClick={(e) => setTarget(e.currentTarget)} 
+        style={{ width: 100, height: 100, background: 'red' }}
+      >
+        Click me
+      </div>
+
+      <EditComponent 
+        targetElement={target}
+        onClose={() => setTarget(null)}
+        side="right"
+        sideOffset={12}
+        variant="floating"
+        onToolAction={(toolId) => console.log('Action:', toolId)}
+      />
+    </>
+  );
+};
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `targetElement` | `HTMLElement \| null` | - | The DOM element to which the toolbar should be anchored. If `null`, the component is hidden. |
+| `defaultToolId` | `string` | - | The ID of the tool that should be active/open by default. |
+| `onClose` | `() => void` | - | Callback function triggered when the toolbar or its active panel requests to close. |
+| `side` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'right'` | The preferred side of the target element to place the toolbar. |
+| `sideOffset` | `number` | `12` | The distance (in pixels) between the target element and the toolbar. |
+| `variant` | `'floating' \| 'overlay'` | `'floating'` | The display mode. `'floating'` places the toolbar outside the element, while `'overlay'` positions it inside/on top of the element. |
+| `items` | `ToolbarItem[]` | `[...]` | Configuration for the toolbar items/icons. See `ToolbarItem` definition. |
+| `onToolAction` | `(id: string) => void` | - | Callback triggered when a tool with `actionOnly: true` is clicked. |
+
+### ToolbarItem Interface
+
+```typescript
+interface ToolbarItem {
+  id: string; // Unique identifier for the tool
+  icon: string; // Icon name to display
+  label?: string; // Optional tooltip label
+  special?: boolean; // If true, applies special styling (e.g., dark background)
+  actionOnly?: boolean; // If true, clicking triggers onToolAction without opening a panel
+}
+```
+
+## Positioning Behavior
+
+The component uses an intelligent positioning system (`useElementPosition`) that tracks the target element's position on scroll and resize.
+
+- **Floating**: Attempts to stick to the specified `side`. If there isn't enough space, it may flip or adjust (though currently typically locks to the initial best side upon opening).
+- **Overlay**: Fixed positioning relative to the top-left of the target element (plus offset).
+
+## Panels
+
+When a tool is selected (and is not `actionOnly`), the `EditComponent` renders an `EditPanel` component. This panel is positioned adjacent to the toolbar based on the toolbar's orientation and position.
+

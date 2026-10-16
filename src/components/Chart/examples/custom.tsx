@@ -29,7 +29,7 @@ export const CustomChartDemo = () => {
         animated
         views={{
           container: {
-            backgroundColor: 'color.gray.50',
+            backgroundColor: 'color-gray-50',
             padding: '16px',
             borderRadius: '8px',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
@@ -43,19 +43,19 @@ export const CustomChartDemo = () => {
             // Using series colors instead of a fixed color
           },
           grid: {
-            stroke: 'color.gray.300',
+            stroke: 'color-gray-300',
             strokeDasharray: '4',
           },
           axis: {
-            stroke: 'color.gray.400',
+            stroke: 'color-gray-400',
             strokeWidth: '2px',
           },
           axisLabel: {
-            fill: 'color.gray.700',
+            fill: 'color-gray-700',
             fontWeight: 'bold',
           },
           legend: {
-            backgroundColor: 'color.white',
+            backgroundColor: 'color-white',
             padding: '8px',
             borderRadius: '4px',
           },
@@ -63,8 +63,8 @@ export const CustomChartDemo = () => {
             padding: '4px 8px',
           },
           tooltip: {
-            backgroundColor: 'color.blue',
-            color: 'color.white',
+            backgroundColor: 'color-blue',
+            color: 'color-white',
             fontWeight: 'bold',
           },
         }}

@@ -10,7 +10,7 @@ import {
   ScrollModal,
   ShadowModal,
   VariantModal,
-} from 'src/components/Modal/Examples';
+} from 'src/components/Modal/examples';
 
 export const ModalPage = () => (
   <table>

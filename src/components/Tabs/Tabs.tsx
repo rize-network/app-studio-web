@@ -9,24 +9,28 @@ import {
   TabsContent,
 } from './Tabs/Tabs.view';
 import { Tab } from './Tabs/Tabs.type'; // Import Tab type
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
 
 /**
  * Tabs component allows users to navigate between different sections of content.
  * Supports both data-driven approach (with tabs prop) and compound component pattern.
  */
-const TabsComponent: React.FC<TabsProps> = ({
-  tabs,
-  views,
-  defaultValue,
-  onTabChange,
-  renderTab,
-  renderContent,
-  iconPosition = 'left',
-
-  value,
-  onValueChange,
-  children,
-}) => {
+const TabsComponent: React.FC<TabsProps> = (props) => {
+  const mergedProps = useMergedDesignSystemComponentProps('tabs', props);
+  const {
+    tabs,
+    views,
+    defaultValue,
+    onTabChange,
+    renderTab,
+    renderContent,
+    variant = 'underline',
+    iconPosition = 'left',
+    keepMounted = false,
+    value,
+    onValueChange,
+    children,
+  } = mergedProps;
   // For compound component pattern
   const compoundState = useTabsCompoundState(
     defaultValue,
@@ -35,12 +39,12 @@ const TabsComponent: React.FC<TabsProps> = ({
   );
 
   // For data-driven pattern
-  const dataState = useTabsState(tabs || [], defaultValue);
+  const dataState = useTabsState(tabs || [], defaultValue, value);
 
   // If using compound component pattern (children provided)
   if (children) {
     return (
-      <TabsContext.Provider value={compoundState}>
+      <TabsContext.Provider value={{ ...compoundState, variant }}>
         {children}
       </TabsContext.Provider>
     );
@@ -50,8 +54,13 @@ const TabsComponent: React.FC<TabsProps> = ({
   if (tabs) {
     // Handler function to change the active tab and trigger the callback
     const handleTabClick = (tab: Tab) => {
+      const getTabId = (t: Tab) => (t.value !== undefined ? t.value : t.title);
+
       // Only update state and call callback if the clicked tab is different from the current one
-      if (dataState.activeTab?.title !== tab.title) {
+      if (
+        !dataState.activeTab ||
+        getTabId(dataState.activeTab) !== getTabId(tab)
+      ) {
         dataState.setActiveTab(tab);
         // Call the onTabChange callback if provided
         if (onTabChange) {
@@ -69,7 +78,9 @@ const TabsComponent: React.FC<TabsProps> = ({
         handleTabClick={handleTabClick} // Pass the click handler
         renderTab={renderTab}
         renderContent={renderContent}
+        variant={variant}
         iconPosition={iconPosition}
+        keepMounted={keepMounted}
       />
     );
   }

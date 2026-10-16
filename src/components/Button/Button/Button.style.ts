@@ -10,64 +10,67 @@
  */
 
 import { ViewProps } from 'app-studio';
+import { alphaColor } from '../../../utils/colors';
 import { Shape, Size, Variant } from './Button.type';
 
 /**
- * Button sizes following the 4px grid system
- */ export const ButtonSizes: Record<Size, ViewProps> = {
+ * Vertical padding is one pixel short of the obvious `(minHeight - lineHeight) / 2`
+ * on purpose.
+ *
+ * These boxes are `border-box`, and every bordered variant (`filled`, `outline`)
+ * draws a 1px border. Budgeting `paddingVertical * 2 + lineHeight === minHeight`
+ * leaves no room for it, so those variants rendered exactly 2px taller than the
+ * size they declare — a `md` Button came out at 42px next to a `md` TextField at
+ * 40px. Borderless variants are unaffected: their content is 2px under
+ * `minHeight`, which then floors them to the declared height anyway.
+ *
+ * The type scale is deliberately untouched; the correction is taken out of
+ * spacing rather than typography.
+ */
+export const ButtonSizes: Record<Size, ViewProps> = {
   xs: {
-    minHeight: 3 * 4, // 24px -> 12px
-    paddingTop: 1,
-    paddingBottom: 1,
-    paddingLeft: 2,
-    paddingRight: 2,
+    minHeight: 24,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
     fontSize: 10,
-    fontWeight: '500',
-    lineHeight: 14,
+    fontWeight: 500,
+    lineHeight: 12,
     letterSpacing: '-0.01em',
   },
   sm: {
-    minHeight: 4 * 4, // 32px -> 16px
-    paddingTop: 4,
-    paddingBottom: 4,
-    paddingLeft: 8,
-    paddingRight: 8,
+    minHeight: 32,
+    paddingHorizontal: 16,
+    paddingVertical: 7,
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: 500,
     lineHeight: 16,
     letterSpacing: '-0.01em',
   },
   md: {
-    minHeight: 6 * 4, // 40px -> 24px
-    paddingTop: 6,
-    paddingBottom: 6,
-    paddingLeft: 12,
-    paddingRight: 12,
+    minHeight: 40,
+    paddingHorizontal: 20,
+    paddingVertical: 9,
     fontSize: 14,
-    fontWeight: '500',
-    lineHeight: 18,
+    fontWeight: 500,
+    lineHeight: 20,
     letterSpacing: '-0.01em',
   },
   lg: {
-    minHeight: 8 * 4, // 48px -> 32px
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 16,
-    paddingRight: 16,
+    minHeight: 48,
+    paddingHorizontal: 24,
+    paddingVertical: 11,
     fontSize: 16,
-    fontWeight: '500',
-    lineHeight: 18,
+    fontWeight: 500,
+    lineHeight: 24,
     letterSpacing: '-0.01em',
   },
   xl: {
-    minHeight: 10 * 4, // 60px -> 40px
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
+    minHeight: 56,
+    paddingHorizontal: 28,
+    paddingVertical: 13,
     fontSize: 20,
-    fontWeight: '500',
-    lineHeight: 22,
+    fontWeight: 500,
+    lineHeight: 28,
     letterSpacing: '-0.01em',
   },
 };
@@ -76,9 +79,9 @@ import { Shape, Size, Variant } from './Button.type';
  * Button shapes with consistent border radius
  */
 export const ButtonShapes: Record<Shape, number | string> = {
-  sharp: 0,
+  square: 0,
   rounded: 8,
-  pillShaped: 999, // Full rounded for pill shape
+  pill: 999, // Full rounded for pill shape
 };
 
 /**
@@ -112,126 +115,161 @@ export const IconSizes: Record<Size, ViewProps> = {
   },
 };
 
+/**
+ * Convert an app-studio token (`color-*`, `theme-*`, `light-*`, `dark-*`) into
+ * the equivalent CSS `var(--token)` reference so it can be embedded inside
+ * arbitrary CSS strings (box-shadow, gradients, …) where token resolution is
+ * not applied. Non-token values are returned unchanged.
+ */
+export const cssVar = (value: string) =>
+  /^(color|theme|light|dark)-/.test(value) ? `var(--${value})` : value;
+
+const normalizeHex = (value: string) => {
+  const match = value.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (!match) return null;
+
+  const hex =
+    match[1].length === 3
+      ? match[1]
+          .split('')
+          .map((char) => `${char}${char}`)
+          .join('')
+      : match[1];
+
+  return {
+    r: parseInt(hex.slice(0, 2), 16),
+    g: parseInt(hex.slice(2, 4), 16),
+    b: parseInt(hex.slice(4, 6), 16),
+  };
+};
+
+const mixHex = (value: string, alpha: number) => {
+  const color = normalizeHex(value);
+  if (!color) return value;
+
+  const target = alpha < 100 ? 255 : 0;
+  const amount = Math.min(Math.abs(100 - alpha) / 100, 0.28);
+  const toHex = (channel: number) =>
+    Math.round(channel + (target - channel) * amount)
+      .toString(16)
+      .padStart(2, '0');
+
+  return `#${toHex(color.r)}${toHex(color.g)}${toHex(color.b)}`;
+};
+
+const tintColor = (value: string, alpha: number) => mixHex(value, alpha);
+
 export const getButtonVariants = (
   color: string,
-  isLight: boolean
-): Record<Variant, ViewProps> => ({
-  filled: {
-    backgroundColor: color,
-    color: isLight ? 'color.black' : 'color.white',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'transparent',
-    _hover: {
-      opacity: 0.9,
+  textColor: string,
+  reversed: boolean = false,
+  theme?: any
+): Record<Variant, ViewProps> => {
+  // Determine effective tokens based on reversed state
+  const effectiveBg = reversed ? textColor : color;
+  const effectiveContent = reversed ? color : textColor;
+  const effectiveBorder = reversed ? textColor : color;
+
+  // For filled buttons, if the background is the primary color, use onPrimary for text contrast.
+  const isPrimary =
+    color === 'theme-primary' || (theme && color === theme.primary);
+  const filledTextColor =
+    isPrimary && theme?.onPrimary ? theme.onPrimary : effectiveContent;
+
+  // App-Studio alpha syntax: `{token}-{alpha}` (alpha 0–1000 → 0%–100% opacity).
+  const focusRing = `0 0 0 2px ${cssVar('color-white')}, 0 0 0 4px ${cssVar(
+    effectiveBorder
+  )}`;
+
+  return {
+    filled: {
+      backgroundColor: effectiveBg,
+      color: filledTextColor,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: effectiveBg,
+      _hover: { opacity: 0.92 },
+      _active: { opacity: 0.96 },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
+      transition:
+        'background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease',
     },
-    _active: {
-      opacity: 0.95,
+    empty: {
+      color: effectiveBorder,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: alphaColor(effectiveBorder, reversed ? 400 : 250),
+      backgroundColor: 'transparent',
+      _hover: { opacity: 0.9 },
+      _active: { opacity: 0.95 },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
+      transition: 'background-color 0.2s ease, opacity 0.2s ease',
     },
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    outline: {
+      color: effectiveBorder,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: alphaColor(effectiveBorder, reversed ? 400 : 250),
+      backgroundColor: 'transparent',
+      _hover: { opacity: 0.9 },
+      _active: { opacity: 0.95 },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
+      transition:
+        'background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease',
     },
-    transition: 'background-color 0.2s ease, opacity 0.2s ease',
-  },
-  outline: {
-    backgroundColor: 'transparent',
-    color: color,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: color,
-    _hover: {
-      backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
-      opacity: 0.9,
+    ghost: {
+      color: effectiveBorder,
+      borderWidth: 0,
+      borderStyle: 'solid',
+      borderColor: effectiveBorder,
+      backgroundColor: 'transparent',
+      _hover: { opacity: 0.86 },
+      _active: { opacity: 0.94 },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
+      transition: 'background-color 0.2s ease, color 0.2s ease',
     },
-    _active: {
-      backgroundColor: color,
-      color: isLight ? 'color.black' : 'color.white',
-      opacity: 0.95,
+    link: {
+      color: effectiveBorder,
+      borderWidth: 0,
+      borderStyle: 'none',
+      borderColor: effectiveBorder,
+      minHeight: 'auto',
+      paddingHorizontal: '4px',
+      paddingVertical: '10px',
+      textDecoration: 'underline',
+      backgroundColor: 'transparent',
+      style: {
+        textUnderlineOffset: '2px',
+        textDecorationThickness: '1px',
+        textDecorationColor: cssVar(effectiveBorder),
+      },
+      _hover: { opacity: 0.8 },
+      _active: { opacity: 0.9 },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
+      transition: 'opacity 0.2s ease',
     },
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
+    subtle: {
+      // Translucent tints via `alphaColor`: tokens get the app-studio
+      // `-{alpha}` suffix (0–1000), raw CSS colors (`#hex`, `rgb()`, keywords
+      // — e.g. a caller's `backgroundColor`) get an equivalent `color-mix()`.
+      // Text stays at full opacity so the label remains readable.
+      backgroundColor: alphaColor(effectiveBorder, reversed ? 200 : 100),
+      color: effectiveBorder,
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderColor: alphaColor(effectiveBorder, reversed ? 400 : 250),
+      _hover: {
+        backgroundColor: alphaColor(effectiveBorder, reversed ? 300 : 180),
+      },
+      _active: {
+        backgroundColor: alphaColor(effectiveBorder, reversed ? 380 : 240),
+      },
+      _focusVisible: { outline: 'none', boxShadow: focusRing },
+      transition:
+        'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
     },
-    transition:
-      'background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease',
-  },
-  ghost: {
-    backgroundColor: 'transparent',
-    color: color,
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderColor: 'transparent',
-    _hover: {
-      backgroundColor: isLight ? 'color.gray.100' : 'color.gray.800',
-      opacity: 0.9,
-    },
-    _active: {
-      backgroundColor: isLight ? 'color.gray.200' : 'color.gray.700',
-      opacity: 0.95,
-    },
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-    },
-    transition: 'background-color 0.2s ease, opacity 0.2s ease',
-  },
-  link: {
-    backgroundColor: 'transparent',
-    color: isLight ? color : 'color.black',
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderColor: 'transparent',
-    textDecoration: 'underline',
-    textUnderlineOffset: '2px',
-    textDecorationThickness: '1px',
-    _hover: {
-      opacity: 0.8,
-    },
-    _active: {
-      opacity: 0.9,
-    },
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-    },
-    transition: 'opacity 0.2s ease',
-  },
-  borderMoving: {
-    position: 'relative',
-    backgroundColor: 'black',
-    overflow: 'hidden',
-    color: 'white',
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderColor: 'transparent',
-    _focusVisible: {
-      outline: 'none',
-      boxShadow:
-        '0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 0.8)',
-    },
-    transition: 'opacity 0.2s ease',
-  },
-  animatedStroke: {
-    display: 'inline-block',
-    maxWidth: '20rem',
-    margin: '0 auto',
-    textAlign: 'center',
-    textDecoration: 'none',
-    position: 'relative',
-    cursor: 'pointer',
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    borderStyle: 'none',
-    borderColor: 'transparent',
-    _focusVisible: {
-      outline: 'none',
-      boxShadow: `0 0 0 2px rgba(255, 255, 255, 1), 0 0 0 4px ${color}`,
-    },
-    transition: 'opacity 0.2s ease',
-  },
-});
+  };
+};
 
 /**
  * Generate offset path for border animation

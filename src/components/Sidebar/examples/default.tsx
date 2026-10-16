@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sidebar } from '../Sidebar';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import {
@@ -55,12 +55,12 @@ export const DefaultSidebar = () => {
             </Vertical>
           </Sidebar.Content>
           <Sidebar.Footer>
-            <Text size="sm" color="color.gray.500">
+            <Text size="sm" color="color-gray-500">
               © 2023 App Studio
             </Text>
           </Sidebar.Footer>
         </Sidebar>
-        <View flex="1" padding="16px" backgroundColor="color.gray.50">
+        <View flex="1" padding="16px" backgroundColor="color-gray-50">
           <Text fontWeight="bold" size="xl" marginBottom="16px">
             Main Content
           </Text>

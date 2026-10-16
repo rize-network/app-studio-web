@@ -13,23 +13,22 @@ import {
   NavigationMenuView,
   NavigationMenuLink,
 } from './NavigationMenu/NavigationMenu.view';
-
-/**
- * NavigationMenu component for creating navigation menus with optional nested items.
- * Supports both data-driven approach (with items prop) and compound component pattern.
- */
-const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
-  items,
-  children,
-  orientation = 'vertical',
-  size = 'md',
-  variant = 'default',
-  defaultActiveItemId = null,
-  defaultExpandedItemIds = [],
-  onItemActivate,
-  views,
-  ...props
-}) => {
+import { useMergedDesignSystemComponentProps } from 'src/design-system';
+// This file defines the core `NavigationMenu` component, serving as the main entry point for the navigation system. It orchestrates state management using `useNavigationMenuState` to control active and expanded menu items, and provides these states and props via `NavigationMenuProvider`. The component offers flexible rendering, either by processing an `items` array to render a default `NavigationMenuView` or by rendering `children` for custom compositions. It also exposes sub-components like `List`, `Item`, and `Trigger` as static properties, facilitating a compound component pattern.
+const NavigationMenuComponent: React.FC<NavigationMenuProps> = (props) => {
+  const mergedProps = useMergedDesignSystemComponentProps('navigation', props);
+  const {
+    items,
+    children,
+    orientation = 'vertical',
+    size = 'md',
+    variant = 'default',
+    defaultActiveItemId = null,
+    defaultExpandedItemIds = [],
+    onItemActivate,
+    views,
+    ...restProps
+  } = mergedProps;
   const {
     activeItemId,
     setActiveItemId,
@@ -38,7 +37,6 @@ const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
     isItemExpanded,
     triggerRefs,
   } = useNavigationMenuState(defaultActiveItemId, defaultExpandedItemIds);
-
   return (
     <NavigationMenuProvider
       value={{
@@ -61,7 +59,7 @@ const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
           size={size}
           variant={variant}
           views={views}
-          {...props}
+          {...restProps}
         />
       ) : (
         children
@@ -69,10 +67,7 @@ const NavigationMenuComponent: React.FC<NavigationMenuProps> = ({
     </NavigationMenuProvider>
   );
 };
-
 export const NavigationMenu = NavigationMenuComponent as NavigationMenuType;
-
-// Assign the sub-components to the main component
 NavigationMenu.List = NavigationMenuList;
 NavigationMenu.Item = NavigationMenuItem;
 NavigationMenu.Trigger = NavigationMenuTrigger;

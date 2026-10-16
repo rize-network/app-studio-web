@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Vertical } from 'app-studio';
 import { Horizontal } from 'app-studio';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Themes } from './Message.style';
 import { MessageProps } from './Message.props';
 import {
@@ -47,8 +47,9 @@ export const MessageView = ({
   const containerStyle = {
     borderWidth: 1,
     borderStyle: 'solid',
-    borderRadius: 8,
+    borderRadius: 12,
     borderColor: `${Theme[variant].container.border}`,
+    boxShadow: '0 8px 24px rgba(15, 23, 42, 0.06)',
   };
 
   const iconColor = {
@@ -74,13 +75,13 @@ export const MessageView = ({
   return (
     <Horizontal
       role="messageContent"
-      gap={16}
-      width={400}
-      // safe={true}
+      gap={12}
+      width="100%"
+      maxWidth={520}
       flexWrap="nowrap"
-      position={'relative'}
-      alignItems="center"
-      padding="14px 24px 14px 14px"
+      position="relative"
+      alignItems="flex-start"
+      padding="12px 14px"
       color={`${Theme[variant].content.color}`}
       backgroundColor={`${Theme[variant].container.backgroundColor}`}
       onClick={
@@ -91,22 +92,19 @@ export const MessageView = ({
             }
       }
       {...containerStyle}
+      transition="background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease"
       {...views?.container}
     >
       {isShowIcon && iconComponent}
-      <Vertical gap={8} width="100%">
-        <Text
-          size="md"
-          weight="semiBold"
-          bgColor={Theme[variant].container.backgroundColor}
-          {...views?.title}
-        >
+      <Vertical gap={4} width="100%">
+        <Text size="md" weight="semiBold" {...views?.title}>
           {title}
         </Text>
         {subtitle && (
           <Text
             size="sm"
-            bgColor={Theme[variant].container.backgroundColor}
+            lineHeight="20px"
+            color={Theme[variant].content.color}
             {...views?.subtitle}
           >
             {subtitle}
@@ -114,32 +112,48 @@ export const MessageView = ({
         )}
       </Vertical>
       {showAction && (
-        <Text
-          marginRight={10}
+        <View
+          as="button"
+          type="button"
           onClick={action}
-          padding="6px 10px"
-          whiteSpace="nowrap"
-          bgColor={Theme[variant].container.backgroundColor}
-          {...containerStyle}
+          backgroundColor="color-white"
+          borderWidth="1px"
+          borderStyle="solid"
+          borderColor={Theme[variant].container.border}
+          borderRadius="9999px"
+          padding="6px 12px"
+          cursor="pointer"
+          transition="background-color 0.2s ease, border-color 0.2s ease"
           {...views?.actionText}
         >
-          {actionText}
-        </Text>
+          <Text
+            whiteSpace="nowrap"
+            size="sm"
+            weight="semiBold"
+            color={Theme[variant].content.color}
+          >
+            {actionText}
+          </Text>
+        </View>
       )}
       {isClosable && (
         <View
           position="absolute"
           zIndex={10000}
           right={8}
-          top={6}
+          top={8}
           onClick={() => {
             hide();
           }}
+          cursor="pointer"
+          padding="4px"
+          borderRadius="9999px"
+          transition="background-color 0.2s ease"
           {...views?.closingIcon?.container}
         >
           <CloseIcon
-            widthHeight={18}
-            color={iconColor}
+            widthHeight={16}
+            color={Theme[variant].close.color}
             {...views?.closingIcon?.icon}
           />
         </View>

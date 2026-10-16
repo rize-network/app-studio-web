@@ -1,0 +1,116 @@
+{
+  "componentDescription": "A component that displays rich content on hover, providing additional information or actions.",
+  "HoverCardProps": {
+    "children": {
+      "type": "React.ReactNode",
+      "description": "Specifies the children (React elements) that will be rendered inside the HoverCard component.",
+      "defaultValue": null
+    },
+    "views": {
+      "type": "{ container?: ViewProps; content?: ViewProps; }",
+      "description": "Allows for custom styling or view properties to be applied to different sub-components of the HoverCard.",
+      "defaultValue": null,
+      "properties": {
+        "container": {
+          "type": "ViewProps",
+          "description": "Defines view-specific properties for the main container of the HoverCard.",
+          "defaultValue": null
+        },
+        "content": {
+          "type": "ViewProps",
+          "description": "Defines view-specific properties for the content wrapper within the HoverCard.",
+          "defaultValue": null
+        }
+      }
+    },
+    "openDelay": {
+      "type": "number",
+      "description": "Sets the delay in milliseconds before the HoverCard opens after the trigger is hovered.",
+      "defaultValue": null
+    },
+    "closeDelay": {
+      "type": "number",
+      "description": "Sets the delay in milliseconds before the HoverCard closes after the trigger is unhovered.",
+      "defaultValue": null
+    }
+  },
+  "HoverCardTriggerProps": {
+    "children": {
+      "type": "React.ReactNode",
+      "description": "Specifies the children (React elements) that serve as the trigger for the HoverCard's visibility.",
+      "defaultValue": null
+    },
+    "views": {
+      "type": "{ container?: ViewProps; }",
+      "description": "Allows for custom styling or view properties to be applied to different parts of the trigger.",
+      "defaultValue": null,
+      "properties": {
+        "container": {
+          "type": "ViewProps",
+          "description": "Defines view-specific properties for the trigger's container element.",
+          "defaultValue": null
+        }
+      }
+    },
+    "asChild": {
+      "type": "boolean",
+      "description": "When true, it renders the 'children' as a direct child of the component without wrapping it in an additional DOM element.",
+      "defaultValue": false
+    },
+    "arbitraryProps": {
+      "type": "any",
+      "description": "Allows any additional, arbitrary props to be passed through to the component's underlying DOM element.",
+      "defaultValue": null
+    }
+  },
+  "HoverCardContentProps": {
+    "children": {
+      "type": "React.ReactNode",
+      "description": "Specifies the children (React elements) that will be displayed within the HoverCard when it is open.",
+      "defaultValue": null
+    },
+    "views": {
+      "type": "{ container?: ViewProps; }",
+      "description": "Allows for custom styling or view properties to be applied to different parts of the content.",
+      "defaultValue": null,
+      "properties": {
+        "container": {
+          "type": "ViewProps",
+          "description": "Defines view-specific properties for the content's container element.",
+          "defaultValue": null
+        }
+      }
+    },
+    "side": {
+      "type": "string",
+      "typeValues": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "description": "Determines the preferred side ('top', 'right', 'bottom', or 'left') of the trigger to render the content.",
+      "defaultValue": "bottom"
+    },
+    "align": {
+      "type": "string",
+      "typeValues": [
+        "start",
+        "center",
+        "end"
+      ],
+      "description": "Specifies the alignment ('start', 'center', or 'end') of the content relative to the trigger along its chosen side.",
+      "defaultValue": "center"
+    },
+    "sideOffset": {
+      "type": "number",
+      "description": "Sets the distance in pixels between the content and the trigger.",
+      "defaultValue": 8
+    },
+    "arbitraryProps": {
+      "type": "any",
+      "description": "Allows any additional, arbitrary props to be passed through to the component's underlying DOM element.",
+      "defaultValue": null
+    }
+  }
+}

@@ -1,373 +1,224 @@
 # ChatInput
 
+A chat composer with file attachments, prompt examples, `@` mentions, suggestions, audio recording and agent controls.
 
 ### **Import**
-  ```tsx
-  import { ChatInput } from '@app-studio/web';
-  ```
 
-### **Basic Usage**
+```tsx
+import { ChatInput } from '@app-studio/components';
+```
+
+### **Default**
+
 ```tsx
 import React, { useState } from 'react';
-import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { Vertical } from '@app-studio/components';
+import { ChatInput } from '@app-studio/components';
 
-export const BasicChatInput = () => {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleSubmit = (message) => {
-    console.log('Message submitted:', message);
-    setInputValue('');
-  };
+export const DefaultChatInput = () => {
+  const [value, setValue] = useState('');
 
   return (
-    <View width="100%">
+    <Vertical gap={20}>
       <ChatInput
-        onSubmit={handleSubmit}
-        value={inputValue}
-        onChange={setInputValue}
-        placeholder="Type your message here..."
+        value={value}
+        onChange={setValue}
+        onSubmit={(message) => {
+          console.log('submitted', message);
+          setValue('');
+        }}
+        placeholder="Type your message… use @ to mention"
       />
-    </View>
+    </Vertical>
   );
 };
 ```
 
-### **File Upload & Attachments**
+## The input is a `contentEditable` div, not a `<textarea>`
 
-The ChatInput component uses the integrated Uploader component for seamless file handling:
+This is worth stating plainly, because it changes how you drive the component from outside React.
+
+The visible field rendered by `ChatInput` — the one you style through `views.editableInput` — is:
+
+```html
+<div contenteditable="true" role="textbox" aria-multiline="true">…</div>
+```
+
+A `contentEditable` element is a deliberate choice for a rich composer (inline mentions, pasted rich
+content, custom carets), but it is **not a form control**: it has no `value` property, it does not take
+part in native form submission, and generic code that fills or reads "an input" — test runners, session
+replay, automation, autofill, draft restoration — will silently do nothing or throw against it.
+
+So the component also renders a **hidden mirror `<textarea>`** that always carries the same text.
+
+### **Hidden mirror `<textarea>`**
+
+The mirror is rendered by default, is `aria-hidden` and not focusable (screen readers only ever see the
+real `role="textbox"`), and is marked with `data-editable-input-mirror="true"`. Give it a `name` to
+make it addressable and submittable:
 
 ```tsx
-import React, { useState } from 'react';
-import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+<ChatInput name="message" value={value} onChange={setValue} />
+```
 
-export const ChatInputWithFileUploads = () => {
-  const [inputValue, setInputValue] = useState('');
+**Reading the value**
 
-  const handleSubmit = (message, options) => {
-    console.log('Message submitted:', message);
-    console.log('Options:', options);
-    // Message will include file information automatically
-  };
+```ts
+const field = container.querySelector('[name="message"]');
+// or, without a name:
+const field = container.querySelector('[data-editable-input-mirror]');
+
+field.value; // → current text, always in sync with what the user sees
+```
+
+**Writing the value** — set `value` then dispatch a bubbling `input` event. The component listens with a
+native DOM listener (not React's synthetic `onChange`), so the plain assignment below is honoured; you do
+not need the `HTMLTextAreaElement.prototype` value-setter trick that React's value tracker normally forces:
+
+```ts
+field.value = 'Restored draft';
+field.dispatchEvent(new Event('input', { bubbles: true }));
+```
+
+That write propagates to the `contentEditable` area, the placeholder, and `onChange`, exactly as typing
+does. Because it goes through `onChange`, a **controlled** `ChatInput` still needs its parent to apply the
+new value — the same contract as any controlled React input.
+
+The mirror also sits inside the component's `<form>`, so with a `name` the message is included in a native
+form submission and in `new FormData(form)`.
+
+Set `hiddenInput={false}` to opt out of the extra node, and style it — if you ever need to — through
+`views.hiddenInput`.
+
+### **Imperative API (`ref`)**
+
+For callers holding a React ref, the same capability is available without touching the DOM. `ChatInput`'s
+ref is a `ChatInputHandle`:
+
+```tsx
+import React, { useEffect, useRef } from 'react';
+import { ChatInput, ChatInputHandle } from '@app-studio/components';
+
+export const ImperativeChatInput = () => {
+  const ref = useRef<ChatInputHandle>(null);
+
+  // Restore a saved draft without reimplementing DOM writes
+  useEffect(() => {
+    ref.current?.setValue(localStorage.getItem('draft') ?? '');
+  }, []);
 
   return (
-    <View width="100%">
-      <ChatInput
-        onSubmit={handleSubmit}
-        value={inputValue}
-        onChange={setInputValue}
-        placeholder="Upload files and send a message..."
-        hideAttachments={false} // Show attachment button
-      />
-    </View>
+    <ChatInput
+      ref={ref}
+      onSubmit={(message) => {
+        console.log(message);
+        ref.current?.clear();
+      }}
+    />
   );
 };
 ```
 
-**File Upload Features:**
-- **Multiple File Selection**: Select multiple files at once using Ctrl/Cmd + click
-- **Drag & Drop Support**: Drop files directly into the chat input area
-- **File Size Validation**: 50MB maximum file size with automatic validation
-- **File Type Support**: All file types supported (images, documents, videos, etc.)
-- **Preview & Management**: View uploaded files and remove them before sending
-### **With Prompt Examples**
+| Method               | Description                                                           |
+| -------------------- | --------------------------------------------------------------------- |
+| `getValue()`         | Current text of the input.                                            |
+| `setValue(value)`    | Replaces the text. Fires `onChange` exactly like typing does.         |
+| `clear()`            | Shorthand for `setValue('')`.                                         |
+| `focus()` / `blur()` | Focuses or blurs the editable area.                                   |
+| `getElement()`       | The `contentEditable` element (`role="textbox"`).                     |
+| `getInputElement()`  | The hidden mirror `<textarea>`; `null` when `hiddenInput` is `false`. |
+
+### **Standalone `EditableInput`**
+
+`EditableInput` — the editable area on its own — takes the same `name`, `id`, `hiddenInput`,
+`hiddenInputRef` and `views.hiddenInput` props, so the mirror is available outside of `ChatInput` too:
+
 ```tsx
-import React, { useState } from 'react';
-import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
-import { PromptExample } from '@app-studio/web';
+import React, { useRef, useState } from 'react';
+import { EditableInput } from '@app-studio/components';
 
-export const ChatInputWithPromptExamples = () => {
-  const [inputValue, setInputValue] = useState('');
-
-  // Example prompt suggestions
-  const promptExamples: PromptExample[] = [
-    { id: '1', text: 'Tell me a joke' },
-    { id: '2', text: 'What is the weather today?' },
-    { id: '3', text: 'How do I create a React component?' },
-    { id: '4', text: 'Write a poem about coding' },
-  ];
-
-  const handleSubmit = (message) => {
-    console.log('Message submitted:', message);
-    setInputValue('');
-  };
-
-  const handlePromptSelect = (example) => {
-    console.log('Prompt selected:', example);
-  };
+export const StandaloneEditableInput = () => {
+  const [value, setValue] = useState('');
+  const editableRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   return (
-    <View width="100%">
-      <ChatInput
-        onSubmit={handleSubmit}
-        value={inputValue}
-        onChange={setInputValue}
-        promptExamples={promptExamples}
-        onPromptExampleSelect={handlePromptSelect}
-      />
-    </View>
+    <EditableInput
+      ref={editableRef}
+      hiddenInputRef={inputRef}
+      name="message"
+      value={value}
+      onChange={setValue}
+    />
   );
 };
 ```
 
-### **Drag & Drop File Upload**
+Note that `EditableInput`'s own `ref` points at the `contentEditable` div (it is what the component uses
+internally for caret handling); the mirror is reached through `hiddenInputRef`.
 
-The ChatInput supports drag & drop functionality for easy file uploads:
+### **React Native**
+
+There is no DOM on native, so `EditableInput` renders a real multiline `TextInput` there and no mirror is
+created: `hiddenInput` and `hiddenInputRef` are accepted for API parity and ignored, while `name` and `id`
+are forwarded to the input. `setValue` on the handle falls back to a direct state update, so the
+imperative API behaves the same on both platforms.
+
+### **attachments, mentions and suggestions**
 
 ```tsx
 import React, { useState } from 'react';
-import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { ChatInput } from '@app-studio/components';
 
-export const ChatInputWithDragDrop = () => {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleSubmit = (message, options) => {
-    console.log('Message with files:', message);
-    // Files are automatically processed and included
-  };
+export const RichChatInput = () => {
+  const [value, setValue] = useState('');
 
   return (
-    <View width="100%">
-      <ChatInput
-        onSubmit={handleSubmit}
-        value={inputValue}
-        onChange={setInputValue}
-        placeholder="Drag files here or click the attachment button..."
-      />
-    </View>
+    <ChatInput
+      value={value}
+      onChange={setValue}
+      onSubmit={(message) => setValue('')}
+      mentionData={[
+        { id: '1', name: 'alice', description: 'Product' },
+        { id: '2', name: 'bob', description: 'Engineering' },
+      ]}
+      mentionTrigger="@"
+      suggestions={[
+        { id: 's1', text: 'Summarise this thread' },
+        { id: 's2', text: 'Draft a reply' },
+      ]}
+      promptExamples={[{ id: 'p1', text: 'What can you do?' }]}
+      enableAudioRecording
+      onFileUpload={(file) => console.log('upload', file.name)}
+    />
   );
 };
 ```
 
-**Drag & Drop Features:**
-- **Visual Feedback**: Input area highlights when files are dragged over
-- **Multiple Files**: Drop multiple files at once for batch upload
-- **File Validation**: Automatic size and type validation during drop
-- **Error Handling**: Clear feedback for invalid files or size limits
+### **size, shape, variant**
 
-### **Custom Styling**
 ```tsx
 import React from 'react';
-import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+import { Vertical } from '@app-studio/components';
+import { ChatInput } from '@app-studio/components';
 
-export const StyledChatInput = () => {
-  const handleSubmit = (message) => {
-    console.log('Message submitted:', message);
-  };
-
-  return (
-    <View width="100%">
-      <ChatInput
-        onSubmit={handleSubmit}
-        placeholder="Type a message..."
-        shape="pillShaped"
-        variant="outline"
-        views={{
-          container: {
-            backgroundColor: 'color.purple.50',
-          },
-          content: {
-            borderColor: 'color.purple.200',
-          },
-          submitButton: {
-            backgroundColor: 'color.purple.500',
-          },
-        }}
-      />
-    </View>
-  );
-};
+export const StyledChatInput = () => (
+  <Vertical gap={20}>
+    <ChatInput size="sm" shape="rounded" variant="outline" />
+    <ChatInput size="lg" shape="square" variant="default" />
+  </Vertical>
+);
 ```
 
-### **With Agent Controls**
-```tsx
-import React, { useState } from 'react';
-import { ChatInput } from '@app-studio/web';
-import { View } from 'app-studio';
+### **views**
 
-export const ChatInputWithAgent = () => {
-  const [isAgentRunning, setIsAgentRunning] = useState(false);
-
-  const handleSubmit = (message, options) => {
-    console.log('Message submitted:', message);
-    console.log('Options:', options);
-
-    // Start the agent
-    setIsAgentRunning(true);
-
-    // Simulate agent running for 5 seconds
-    setTimeout(() => {
-      setIsAgentRunning(false);
-    }, 5000);
-  };
-
-  const handleStopAgent = () => {
-    console.log('Agent stopped');
-    setIsAgentRunning(false);
-  };
-
-  return (
-    <View width="100%">
-      <ChatInput
-        onSubmit={handleSubmit}
-        isAgentRunning={isAgentRunning}
-        onStopAgent={handleStopAgent}
-      />
-    </View>
-  );
-};
-```
-
-### **Props**
-
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| onSubmit | `(message: string, options?: { model_name?: string; enable_thinking?: boolean }) => void` | required | Callback function when the form is submitted |
-| placeholder | string | 'Say what you want and Kimmy will surprise you' | Placeholder text for the input |
-| loading | boolean | false | Whether the input is in a loading state |
-| disabled | boolean | false | Whether the input is disabled |
-| isAgentRunning | boolean | false | Whether an agent is currently running |
-| onStopAgent | `() => void` | undefined | Callback function to stop the agent |
-| autoFocus | boolean | true | Whether to auto focus the input |
-| value | string | undefined | Controlled value for the input |
-| onChange | `(value: string) => void` | undefined | Callback function when the input value changes |
-| onFileBrowse | `() => void` | undefined | Callback function when the file browser is opened |
-| sandboxId | string | undefined | ID of the sandbox |
-| hideAttachments | boolean | false | Whether to hide the attachment button |
-| title | string | undefined | Title for the chat input |
-| showGuideTip | boolean | false | Whether to show the guide tip |
-| guideVideoUrl | string | undefined | URL for the guide video |
-| onGuideClose | `() => void` | undefined | Callback function when the guide tip is closed |
-| promptExamples | `PromptExample[]` | [] | List of prompt examples |
-| onPromptExampleSelect | `(example: PromptExample) => void` | undefined | Callback function when a prompt example is selected |
-| size | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl'` | 'md' | Size of the chat input |
-| shape | `'default' \| 'sharp' \| 'rounded' \| 'pillShaped'` | 'rounded' | Shape of the chat input |
-| variant | `'default' \| 'outline' \| 'none'` | 'default' | Visual variant of the chat input |
-| views | object | {} | Custom styling for different parts of the component |
-
-### **File Upload Integration**
-
-The ChatInput component integrates seamlessly with the Uploader component:
-
-- **Automatic File Processing**: Files are automatically processed and added to the message
-- **File Size Validation**: 50MB maximum file size with clear error messages
-- **Multiple File Support**: Upload multiple files simultaneously
-- **Drag & Drop Integration**: Full drag and drop support with visual feedback
-
-### **Customization**
-
-The ChatInput component can be customized using the `views` prop:
-
-```tsx
-<ChatInput
-  // ...other props
-  views={{
-    container: { /* styles for the main container */ },
-    content: { /* styles for the content wrapper */ },
-    editableInput: { /* styles for the editable input */ },
-    header: { /* styles for the header */ },
-    title: { /* styles for the title */ },
-    guideTip: { /* styles for the guide tip */ },
-    promptExamples: { /* styles for the prompt examples container */ },
-    promptExampleItem: { /* styles for each prompt example item */ },
-    attachments: { /* styles for the attachments container */ },
-    attachmentItem: { /* styles for each attachment item */ },
-    attachmentName: { /* styles for attachment file names */ },
-    attachmentSize: { /* styles for attachment file sizes */ },
-    attachmentRemove: { /* styles for attachment remove buttons */ },
-    submitButton: { /* styles for the submit button */ },
-    fileButton: { /* styles for the file upload button */ },
-  }}
-/>
-```
-
-### **Accessibility**
-
-The ChatInput component implements the following accessibility features:
-
-- Keyboard navigation for submitting messages (Enter key)
-- ARIA attributes for interactive elements
-- Focus management for the input field
-- Proper contrast for text and buttons
-
-### **Best Practices**
-
-**General Usage:**
-- Provide clear placeholder text to guide users
-- Use the `loading` state to indicate when a message is being processed
-- Implement proper error handling for message submission
-- Provide feedback to users when messages are sent successfully
-
-**File Upload Best Practices:**
-- Handle file uploads appropriately on the server side
-- Validate file types and sizes on both client and server
-- Provide clear feedback for file upload errors
-- Consider implementing file preview functionality
-
-
-**Accessibility Considerations:**
-- Ensure file upload buttons are keyboard accessible
-- Use proper ARIA labels for interactive elements
-- Test with screen readers for file upload functionality
-
-### **Demo & Testing**
-
-The ChatInput component includes a demo page with simulate upload functionality for testing:
-
-```tsx
-// Available in src/pages/chat.page.tsx
-import React, { useState } from 'react';
-import { ChatInput } from '@app-studio/web';
-import { Button } from 'app-studio';
-
-export const ChatInputDemo = () => {
-  const [isSimulatingUpload, setIsSimulatingUpload] = useState(false);
-  const [simulationProgress, setSimulationProgress] = useState(0);
-
-  const simulateUpload = () => {
-    // Creates mock files for testing
-    const mockFiles = [
-      new File(['content'], 'document.pdf', { type: 'application/pdf' }),
-      new File(['content'], 'image.jpg', { type: 'image/jpeg' }),
-      new File(['content'], 'spreadsheet.xlsx', { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
-    ];
-
-    setIsSimulatingUpload(true);
-    setSimulationProgress(0);
-
-    const interval = setInterval(() => {
-      setSimulationProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setIsSimulatingUpload(false);
-          console.log('Upload simulation completed!');
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 300);
-  };
-
-  return (
-    <>
-      <Button onClick={simulateUpload} disabled={isSimulatingUpload}>
-        {isSimulatingUpload ? `Uploading... ${simulationProgress}%` : 'Simulate Upload'}
-      </Button>
-
-      <ChatInput
-        onSubmit={(message) => console.log('Message:', message)}
-      />
-    </>
-  );
-};
-```
-
-**Demo Features:**
-- **Simulate Upload**: Test file upload functionality without real files
-- **Progress Tracking**: Visual progress indication during simulation
-- **Mock File Generation**: Creates realistic test files with proper MIME types
-- **Console Logging**: Detailed logging for debugging and testing
+| Key                                                                                     | Target                              |
+| --------------------------------------------------------------------------------------- | ----------------------------------- |
+| `container`                                                                             | Outer wrapper                       |
+| `content`                                                                               | The `<form>` holding the composer   |
+| `editableInput`                                                                         | The `contentEditable` area          |
+| `hiddenInput`                                                                           | The hidden mirror `<textarea>`      |
+| `attachments`, `attachmentItem`, `attachmentName`, `attachmentSize`, `attachmentRemove` | Attachment list                     |
+| `promptExamples`, `promptExampleItem`                                                   | Prompt examples                     |
+| `submitButton`, `fileButton`, `recordButton`                                            | Action buttons                      |
+| `loadingIndicator`, `bottomTip`                                                         | Agent-running row and error message |

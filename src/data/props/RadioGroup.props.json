@@ -1,0 +1,88 @@
+{
+  "componentDescription": "A group of radio buttons that allows a user to select a single option from a list.",
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": null,
+    "description": "Specifies the children elements to be rendered within the RadioGroup, typically Radio components.",
+    "defaultValue": null
+  },
+  "name": {
+    "type": "string",
+    "typeValues": null,
+    "description": "An optional name for the radio group, used to group related radio buttons together.",
+    "defaultValue": null
+  },
+  "label": {
+    "type": "string",
+    "typeValues": null,
+    "description": "An optional label displayed for the radio group, providing context to the user.",
+    "defaultValue": null
+  },
+  "helperText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Optional helper text displayed below the radio group, offering additional guidance or information.",
+    "defaultValue": null
+  },
+  "error": {
+    "type": "any",
+    "typeValues": null,
+    "description": "An optional error message or state to indicate validation issues.",
+    "defaultValue": null
+  },
+  "value": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The currently selected value of the radio group, making it a controlled component.",
+    "defaultValue": null
+  },
+  "defaultValue": {
+    "type": "string",
+    "typeValues": null,
+    "description": "The initial selected value of the radio group when it is uncontrolled.",
+    "defaultValue": null
+  },
+  "onChange": {
+    "type": "(value: string) => void",
+    "typeValues": null,
+    "description": "A callback function triggered when the selected radio button changes, receiving the new value.",
+    "defaultValue": null
+  },
+  "direction": {
+    "type": "Direction",
+    "typeValues": [
+      "horizontal",
+      "vertical"
+    ],
+    "description": "Specifies the layout direction of the radio buttons within the group (e.g., row or column).",
+    "defaultValue": "vertical"
+  },
+  "spacing": {
+    "type": "number",
+    "typeValues": null,
+    "description": "An optional number representing the spacing between individual radio buttons.",
+    "defaultValue": 8
+  },
+  "isDisabled": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean flag to disable all radio buttons within the group, preventing user interaction.",
+    "defaultValue": false
+  },
+  "isReadOnly": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean flag to make all radio buttons within the group read-only, allowing selection but preventing changes.",
+    "defaultValue": false
+  },
+  "views": {
+    "type": "RadioGroupStyles",
+    "typeValues": null,
+    "description": "Optional styles object to customize the visual appearance of different parts of the RadioGroup.",
+    "defaultValue": {
+      "container": {},
+      "label": {},
+      "helperText": {}
+    }
+  }
+}

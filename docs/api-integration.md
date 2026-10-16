@@ -342,10 +342,10 @@ if (fetchDataRequest.error) {
 
 ### Using showToast for User Feedback
 
-You can use the `showToast` function from `@app-studio/web` to display error messages:
+You can use the `showToast` function from `@app-studio/components` to display error messages:
 
 ```typescript
-import { showToast } from '@app-studio/web';
+import { showToast } from '@app-studio/components';
 
 // In the onError callback
 onError: (error) => {
@@ -359,7 +359,7 @@ For consistent error handling across your application, create a centralized erro
 
 ```typescript
 // utils/errorHandler.ts
-import { showToast } from '@app-studio/web';
+import { showToast } from '@app-studio/components';
 import { ApiError } from 'src/services/api';
 
 export const handleApiError = (error: any, title = 'Error') => {

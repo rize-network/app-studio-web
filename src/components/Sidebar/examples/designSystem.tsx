@@ -90,12 +90,12 @@ export const DesignSystemSidebar = () => {
                 </Vertical>
               </Sidebar.Content>
               <Sidebar.Footer>
-                <Text size="sm" color="color.gray.500">
+                <Text size="sm" color="color-gray-500">
                   © 2023 Design System
                 </Text>
               </Sidebar.Footer>
             </Sidebar>
-            <View flex="1" padding="16px" backgroundColor="color.gray.50">
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
               <Text fontWeight="600" size="xl" marginBottom="16px">
                 Main Content
               </Text>
@@ -394,7 +394,7 @@ export const DesignSystemSidebar = () => {
                 </Vertical>
               </Sidebar.Content>
             </Sidebar>
-            <View flex="1" padding="16px" backgroundColor="color.gray.50">
+            <View flex="1" padding="16px" backgroundColor="color-gray-50">
               <Text fontWeight="600" size="xl" marginBottom="16px">
                 Main Content
               </Text>

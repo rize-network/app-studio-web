@@ -2,7 +2,8 @@ import { Elevation } from '../../../../utils/elevation';
 import { InputProps, Shadow, ViewProps } from 'app-studio';
 import { Size, SwitchStyles } from './Switch.type';
 // Defines the properties for the Switch component excluding 'size' from the InputProps to allow customization.
-export interface SwitchProps extends Omit<InputProps, 'size'> {
+export interface SwitchProps
+  extends Omit<InputProps, 'size' | 'onChange' | 'on' | 'shadow' | 'value'> {
   // The content to be displayed when the switch is in an active state.
   activeChild?: React.ReactNode;
   // Unique identifier for the switch component.
@@ -27,15 +28,23 @@ export interface SwitchProps extends Omit<InputProps, 'size'> {
   size?: Size;
   // The position of the label relative to the switch, either 'left' or 'right'.
   labelPosition?: 'left' | 'right';
+  // Optional visible label/text rendered next to the switch.
+  label?: React.ReactNode;
+  // Optional secondary text rendered below the label to describe the switch.
+  description?: React.ReactNode;
 }
 // Extends SwitchProps to include properties specific to the switch's view, like hover state.
 export interface SwitchViewProps extends SwitchProps {
   // Denotes if the switch component is currently hovered by the cursor.
   isHovered: boolean;
   // Function to set the hover state of the switch component.
-  setIsHovered: Function;
+  setIsHovered: (hovered: boolean) => void;
   // Controls the value or state of the switch (on/off).
   value?: boolean;
   // Function to update the value of the switch.
-  setValue?: Function;
+  setValue?: (value: boolean) => void;
+  // Current on/off state managed by the state hook.
+  on?: boolean;
+  // Setter for the on/off state managed by the state hook.
+  setOn?: (on: boolean) => void;
 }

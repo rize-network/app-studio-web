@@ -9,10 +9,7 @@ import {
   CommandItem as CommandItemView,
   CommandEmpty,
 } from './Command/Command.view';
-
-/**
- * Command component for displaying a command palette with search functionality.
- */
+// This file defines the main Command component, which acts as a container for a searchable list of commands. It manages its internal state (like search input and selection) using the `useCommandState` hook and orchestrates the rendering of its various sub-components such as input, list, groups, and items.
 const CommandComponent: React.FC<CommandProps> = ({
   open,
   onOpenChange,
@@ -42,7 +39,6 @@ const CommandComponent: React.FC<CommandProps> = ({
     commands,
     filter,
   });
-
   return (
     <CommandView
       open={open}
@@ -66,10 +62,7 @@ const CommandComponent: React.FC<CommandProps> = ({
     />
   );
 };
-
 export const Command = CommandComponent as CommandType;
-
-// Assign the sub-components to the main component
 Command.Input = CommandInput;
 Command.List = CommandList;
 Command.Group = CommandGroup;

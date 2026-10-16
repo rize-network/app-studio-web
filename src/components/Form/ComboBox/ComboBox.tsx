@@ -21,8 +21,16 @@ const ComboBoxComponent: React.FC<ComboBoxProps> = ({
   // Initializes ComboBox state using custom hook with items and placeholders
   const state = useComboBoxState(items, placeholder, searchPlaceholder);
   return (
-    // Render ComboBoxView with passed and state props
-    <ComboBoxView id={id} name={name} items={items} {...state} {...props} />
+    // Render ComboBoxView with passed and state props. `searchPlaceholder` is
+    // forwarded so the search field can use it as its accessible name.
+    <ComboBoxView
+      id={id}
+      name={name}
+      items={items}
+      searchPlaceholder={searchPlaceholder}
+      {...state}
+      {...props}
+    />
   );
 };
 // Exports the ComboBoxComponent as ComboBox

@@ -9,6 +9,10 @@ import {
   SizeDemo,
   StylesDemo,
   VariantDemo,
+  ChildrenDemo,
+  IconDemo,
+  PastilDemo,
+  AnnouncementDemo,
 } from 'src/components/Badge/examples';
 
 const BadgePage = () => {
@@ -25,6 +29,34 @@ const BadgePage = () => {
             <td>Design System</td>
             <td>
               <DesignSystemBadges />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Announcement</td>
+            <td>
+              <AnnouncementDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Children</td>
+            <td>
+              <ChildrenDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Icon</td>
+            <td>
+              <IconDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Pastil</td>
+            <td>
+              <PastilDemo />
             </td>
           </tr>
 

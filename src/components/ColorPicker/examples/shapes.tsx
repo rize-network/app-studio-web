@@ -10,19 +10,15 @@ export const ColorPickerShapes = () => (
       placeholder="Default corners"
     />
     <ColorPicker
-      label="Sharp shape"
-      shape="sharp"
-      placeholder="Sharp corners"
+      label="square shape"
+      shape="square"
+      placeholder="square corners"
     />
     <ColorPicker
       label="Rounded shape"
       shape="rounded"
       placeholder="Rounded corners"
     />
-    <ColorPicker
-      label="Pill shaped"
-      shape="pillShaped"
-      placeholder="Pill shaped"
-    />
+    <ColorPicker label="Pill shaped" shape="pill" placeholder="Pill shaped" />
   </Vertical>
 );

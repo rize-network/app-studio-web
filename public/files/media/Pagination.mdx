@@ -1,0 +1,356 @@
+# Pagination
+
+A UI control for navigating through content divided into multiple pages.
+
+### **Import**
+```tsx
+import { Pagination } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '../Pagination';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+
+export const DefaultPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  return (
+    <View width="100%">
+      <Text marginBottom={10}>Default Pagination</Text>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </View>
+  );
+};
+```
+
+### **Advanced**
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '../Pagination';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const AdvancedPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const totalItems = 235;
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePageSizeChange = (size: number) => {
+    setPageSize(size);
+    // Reset to first page when changing page size
+    setCurrentPage(1);
+  };
+
+  return (
+    <Vertical gap={20} width="100%">
+      <View>
+        <Text marginBottom={10}>
+          Advanced Pagination with Page Size Selector
+        </Text>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+          pageSize={pageSize}
+          onPageSizeChange={handlePageSizeChange}
+          showPageSizeSelector={true}
+          showFirstLastButtons={true}
+          variant="outline"
+        />
+      </View>
+
+      <View>
+        <Text>
+          Showing items {(currentPage - 1) * pageSize + 1} to{' '}
+          {Math.min(currentPage * pageSize, totalItems)} of {totalItems}
+        </Text>
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './variants';
+export * from './sizes';
+export * from './shapes';
+export * from './advanced';
+export * from './table';
+```
+
+### **Shapes**
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '../Pagination';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const PaginationShapes = () => {
+  const [currentPage1, setCurrentPage1] = useState(1);
+  const [currentPage2, setCurrentPage2] = useState(1);
+  const [currentPage3, setCurrentPage3] = useState(1);
+  const totalPages = 10;
+
+  return (
+    <Vertical gap={20} width="100%">
+      <View>
+        <Text marginBottom={10}>Rounded Shape (Default)</Text>
+        <Pagination
+          currentPage={currentPage1}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage1}
+          shape="rounded"
+          variant="outline"
+        />
+      </View>
+
+      <View>
+        <Text marginBottom={10}>Square Shape</Text>
+        <Pagination
+          currentPage={currentPage2}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage2}
+          shape="square"
+          variant="outline"
+        />
+      </View>
+
+      <View>
+        <Text marginBottom={10}>Circular Shape</Text>
+        <Pagination
+          currentPage={currentPage3}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage3}
+          shape="circular"
+          variant="outline"
+        />
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Sizes**
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '../Pagination';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const PaginationSizes = () => {
+  const [currentPage1, setCurrentPage1] = useState(1);
+  const [currentPage2, setCurrentPage2] = useState(1);
+  const [currentPage3, setCurrentPage3] = useState(1);
+  const totalPages = 10;
+
+  return (
+    <Vertical gap={20} width="100%">
+      <View>
+        <Text marginBottom={10}>Small Size</Text>
+        <Pagination
+          currentPage={currentPage1}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage1}
+          size="sm"
+          variant="outline"
+        />
+      </View>
+
+      <View>
+        <Text marginBottom={10}>Medium Size (Default)</Text>
+        <Pagination
+          currentPage={currentPage2}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage2}
+          size="md"
+          variant="outline"
+        />
+      </View>
+
+      <View>
+        <Text marginBottom={10}>Large Size</Text>
+        <Pagination
+          currentPage={currentPage3}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage3}
+          size="lg"
+          variant="outline"
+        />
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Table**
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '../Pagination';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Table } from '../../Table/Table';
+
+export const TableWithPagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
+
+  // Sample data
+  const allData = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User' },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User' },
+    { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'Manager' },
+    {
+      id: 5,
+      name: 'Charlie Wilson',
+      email: 'charlie@example.com',
+      role: 'User',
+    },
+    { id: 6, name: 'Diana Miller', email: 'diana@example.com', role: 'Admin' },
+    { id: 7, name: 'Edward Davis', email: 'edward@example.com', role: 'User' },
+    { id: 8, name: 'Fiona Clark', email: 'fiona@example.com', role: 'Manager' },
+    { id: 9, name: 'George White', email: 'george@example.com', role: 'User' },
+    {
+      id: 10,
+      name: 'Hannah Moore',
+      email: 'hannah@example.com',
+      role: 'Admin',
+    },
+    { id: 11, name: 'Ian Taylor', email: 'ian@example.com', role: 'User' },
+    {
+      id: 12,
+      name: 'Julia Adams',
+      email: 'julia@example.com',
+      role: 'Manager',
+    },
+  ];
+
+  const totalItems = allData.length;
+  const totalPages = Math.ceil(totalItems / pageSize);
+
+  // Get current page data
+  const getCurrentPageData = () => {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return allData.slice(startIndex, endIndex);
+  };
+
+  const columns = [
+    { title: 'ID', field: 'id' },
+    { title: 'Name', field: 'name' },
+    { title: 'Email', field: 'email' },
+    { title: 'Role', field: 'role' },
+  ];
+
+  return (
+    <View width="100%">
+      <Text marginBottom={10}>Table with Pagination</Text>
+
+      <Table.Template columns={columns} data={getCurrentPageData()} />
+
+      <View
+        marginTop={16}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Text>
+          Showing {(currentPage - 1) * pageSize + 1} to{' '}
+          {Math.min(currentPage * pageSize, totalItems)} of {totalItems} entries
+        </Text>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          pageSize={pageSize}
+          onPageSizeChange={setPageSize}
+          showPageSizeSelector={true}
+          showPageInfo={false}
+          variant="outline"
+          size="sm"
+        />
+      </View>
+    </View>
+  );
+};
+```
+
+### **Variants**
+
+```tsx
+import React, { useState } from 'react';
+import { Pagination } from '../Pagination';
+import { View } from 'app-studio';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const PaginationVariants = () => {
+  const [currentPage1, setCurrentPage1] = useState(1);
+  const [currentPage2, setCurrentPage2] = useState(1);
+  const [currentPage3, setCurrentPage3] = useState(1);
+  const totalPages = 10;
+
+  return (
+    <Vertical gap={20} width="100%">
+      <View>
+        <Text marginBottom={10}>Default Variant</Text>
+        <Pagination
+          currentPage={currentPage1}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage1}
+          variant="default"
+        />
+      </View>
+
+      <View>
+        <Text marginBottom={10}>Filled Variant</Text>
+        <Pagination
+          currentPage={currentPage2}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage2}
+          variant="filled"
+        />
+      </View>
+
+      <View>
+        <Text marginBottom={10}>Outline Variant</Text>
+        <Pagination
+          currentPage={currentPage3}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage3}
+          variant="outline"
+        />
+      </View>
+    </Vertical>
+  );
+};
+```
+

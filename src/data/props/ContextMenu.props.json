@@ -1,0 +1,59 @@
+{
+  "componentDescription": "A versatile component for displaying a contextual menu, typically on right-click, offering various actions.",
+  "children": {
+    "type": "React.ReactNode",
+    "typeValues": [],
+    "description": "The content to be rendered inside the context menu, typically the element that triggers the menu.",
+    "defaultValue": "undefined"
+  },
+  "items": {
+    "type": "ContextMenuItem[]",
+    "typeValues": [],
+    "description": "An optional array of configuration objects for each menu item, defining its text, action, etc.",
+    "defaultValue": "undefined"
+  },
+  "size": {
+    "type": "Size",
+    "typeValues": [
+      "sm",
+      "md",
+      "lg"
+    ],
+    "description": "Defines the size variant of the context menu components.",
+    "defaultValue": "md"
+  },
+  "variant": {
+    "type": "Variant",
+    "typeValues": [
+      "default",
+      "filled",
+      "outline"
+    ],
+    "description": "Specifies the visual styling variant for the context menu.",
+    "defaultValue": "default"
+  },
+  "disableNativeContextMenu": {
+    "type": "boolean",
+    "typeValues": [],
+    "description": "Controls whether the browser's native context menu is disabled when right-clicking.",
+    "defaultValue": "true"
+  },
+  "onOpenChange": {
+    "type": "(isOpen: boolean) => void",
+    "typeValues": [],
+    "description": "A callback function invoked when the context menu's open state changes.",
+    "defaultValue": "undefined"
+  },
+  "views": {
+    "type": "ContextMenuStyles",
+    "typeValues": [],
+    "description": "Allows customization of the context menu's internal component styles.",
+    "defaultValue": "undefined"
+  },
+  "additionalProps": {
+    "type": "any",
+    "typeValues": [],
+    "description": "Enables additional arbitrary properties to be passed to the component.",
+    "defaultValue": "undefined"
+  }
+}

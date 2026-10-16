@@ -8,6 +8,7 @@ import {
   DonutChartDemo,
   CustomChartDemo,
   ChartStatesDemo,
+  ZeroStateDemo,
   DesignSystemCharts,
 } from 'src/components/Chart/examples';
 
@@ -74,6 +75,13 @@ const ChartPage = () => {
             <td>Chart States</td>
             <td>
               <ChartStatesDemo />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Zero State</td>
+            <td>
+              <ZeroStateDemo />
             </td>
           </tr>
         </tbody>

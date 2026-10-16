@@ -1,62 +1,52 @@
 {
-  "componentDescription": "Enables users to navigate to specified URLs or paths.",
+  "componentDescription": "A component for navigation, displaying content that links to internal or external resources with optional styling.",
   "children": {
-    "type": ["React.ReactNode"],
+    "type": "React.ReactNode",
     "typeValues": [],
     "description": "Represents the content within the Link component which can be any valid React node.",
-    "defaultValue": []
+    "defaultValue": null
   },
   "underline": {
-    "type": ["TextDecorationStyle"],
-    "typeValues": ["default", "hover", "underline"],
+    "type": "TextDecorationStyle",
+    "typeValues": [
+      "default",
+      "hover",
+      "underline"
+    ],
     "description": "Optional prop to define the text decoration style of the link as underline views.",
-    "defaultValue": ["default"]
+    "defaultValue": "default"
   },
   "isExternal": {
-    "type": ["boolean"],
+    "type": "boolean",
     "typeValues": [],
     "description": "Optional boolean indicating whether the link points to an external resource. Default behavior may vary based on this value.",
-    "defaultValue": [false]
+    "defaultValue": false
   },
   "iconSize": {
-    "type": ["Size"],
-    "typeValues": ["xs", "sm", "md", "lg", "xl"],
+    "type": "Size",
+    "typeValues": [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl"
+    ],
     "description": "Optional prop to set the size of an icon if present within the link.",
-    "defaultValue": ["sm"]
+    "defaultValue": "sm"
   },
-  "colorScheme": {
-    "type": ["string"],
-    "typeValues": [],
-    "description": "Optional prop to set the color scheme of the link which might influence its appearance.",
-    "defaultValue": []
-  },
-  "href": {
-    "type": ["string"],
+  "to": {
+    "type": "string",
     "typeValues": [],
     "description": "The href attribute specifying the URL the link points to.",
-    "defaultValue": ["/"]
+    "defaultValue": "/"
   },
-  "styles": {
-    "type": ["Styles"],
-    "typeValues": ["CSSProperties"],
-    "description": "Optional styles object to customize the appearance using predefined style types.",
-    "defaultValue": [
-      {
-        "icon": {},
-        "text": {}
-      }
-    ]
-  },
-  "isHovered": {
-    "type": ["boolean"],
+  "views": {
+    "type": "Styles",
     "typeValues": [],
-    "description": "Indicates whether the link is under a hover state, which may adjust the link's style.",
-    "defaultValue": [false]
-  },
-  "setIsHovered": {
-    "type": ["Function"],
-    "typeValues": [],
-    "description": "A function to update the hover state of the link.",
-    "defaultValue": ["noop function"]
+    "description": "Optional styles object to customize the appearance using predefined style types. It can include 'icon' and 'text' properties, both of type 'ViewProps'.",
+    "defaultValue": {
+      "icon": {},
+      "text": {}
+    }
   }
 }

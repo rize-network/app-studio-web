@@ -99,15 +99,11 @@ export const FormikUploaderExample = () => {
               />
             )}
 
-            <Text fontSize={12} color="color.gray.600">
+            <Text fontSize={12} color="color-gray-600">
               Uploaded {uploadedFiles.length} file(s)
             </Text>
 
-            <Button
-              type="submit"
-              alignSelf="flex-start"
-              onClick={props.handleSubmit}
-            >
+            <Button alignSelf="flex-start" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Vertical>

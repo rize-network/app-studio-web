@@ -1,0 +1,307 @@
+# Tooltip
+
+Displays informative text or content when a user interacts with an element.
+
+### **Import**
+```tsx
+import { Tooltip } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Tooltip } from '../Tooltip';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const DefaultTooltip = () => {
+  return (
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <Text marginBottom={10}>
+        <Tooltip content="This is a tooltip">
+          <Button>Hover Me</Button>
+        </Tooltip>
+        Default Tooltip
+      </Text>
+    </Vertical>
+  );
+};
+```
+
+### **Custom**
+
+```tsx
+import React from 'react';
+import { Tooltip } from '../Tooltip';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+
+export const CustomTooltip = () => {
+  return (
+    <Vertical gap={20} width="100%" maxWidth={400}>
+      <Text marginBottom={10}>Custom Styled Tooltip</Text>
+      <Tooltip
+        content={
+          <Vertical padding={5}>
+            <Text fontWeight="bold">Custom Tooltip</Text>
+            <Text>With rich content and styling</Text>
+          </Vertical>
+        }
+        views={{
+          content: {
+            backgroundColor: 'theme-primary',
+            color: 'color-white',
+            borderRadius: '8px',
+          },
+          arrow: {
+            backgroundColor: 'theme-primary',
+          },
+        }}
+      >
+        <Button variant="outline">Hover for Custom Tooltip</Button>
+      </Tooltip>
+    </Vertical>
+  );
+};
+```
+
+### **Index**
+
+```tsx
+export * from './default';
+export * from './positions';
+export * from './variants';
+export * from './sizes';
+export * from './custom';
+export * from './integration';
+```
+
+### **Integration**
+
+```tsx
+import React from 'react';
+import { Tooltip } from '../Tooltip';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+import { View } from 'app-studio';
+import { InfoIcon } from '../../Icon/Icon';
+import { Slider } from '../../Slider/Slider';
+import { Alert } from '../../Alert/Alert';
+
+export const TooltipIntegration = () => {
+  return (
+    <Vertical gap={30} width="100%" maxWidth={600}>
+      <Text fontWeight="bold" marginBottom={10}>
+        Integration with Button
+      </Text>
+
+      <Horizontal gap={20}>
+        <Button>
+          Save
+          <Tooltip content="Save your changes" position="top">
+            <InfoIcon size={16} marginLeft={5} />
+          </Tooltip>
+        </Button>
+      </Horizontal>
+
+      <Text fontWeight="bold" marginTop={20} marginBottom={10}>
+        Integration with Alert
+      </Text>
+
+      <Alert
+        title="Important Notice"
+        description={
+          'This action cannot be undone'
+          // <Horizontal alignItems="center">
+          //   <Text></Text>
+          //   <Tooltip content="Once deleted, you cannot recover this item">
+          //     <InfoIcon size={16} marginLeft={5} cursor="pointer" />
+          //   </Tooltip>
+          // </Horizontal>
+        }
+        variant="warning"
+      />
+
+      <Text fontWeight="bold" marginTop={20} marginBottom={10}>
+        Integration with Slider
+      </Text>
+
+      <View width="100%" maxWidth={400}>
+        <Horizontal alignItems="center" marginBottom={10}>
+          <Text>Volume</Text>
+          <Tooltip content="Adjust the volume level" position="right">
+            <InfoIcon size={16} marginLeft={5} cursor="pointer" />
+          </Tooltip>
+        </Horizontal>
+        <Slider defaultValue={50} />
+      </View>
+    </Vertical>
+  );
+};
+```
+
+### **Positions**
+
+```tsx
+import React from 'react';
+import { Tooltip } from '../Tooltip';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+
+export const TooltipPositions = () => {
+  return (
+    <Vertical gap={30} width="100%" maxWidth={600}>
+      <Text fontWeight="bold" marginBottom={10}>
+        Different Positions
+      </Text>
+
+      <Horizontal gap={20} flexWrap="wrap">
+        <Vertical gap={10} alignItems="center">
+          <Text>Top Position</Text>
+          <Tooltip content="Tooltip on top" position="top">
+            <Button>Top</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>Right Position</Text>
+          <Tooltip content="Tooltip on right" position="right">
+            <Button>Right</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>Bottom Position</Text>
+          <Tooltip content="Tooltip on bottom" position="bottom">
+            <Button>Bottom</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>Left Position</Text>
+          <Tooltip content="Tooltip on left" position="left">
+            <Button>Left</Button>
+          </Tooltip>
+        </Vertical>
+      </Horizontal>
+
+      <Text fontWeight="bold" marginTop={20} marginBottom={10}>
+        Different Alignments
+      </Text>
+
+      <Horizontal gap={20} flexWrap="wrap">
+        <Vertical gap={10} alignItems="center">
+          <Text>Start Alignment</Text>
+          <Tooltip content="Start aligned tooltip" align="start">
+            <Button>Start</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>Center Alignment</Text>
+          <Tooltip content="Center aligned tooltip" align="center">
+            <Button>Center</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>End Alignment</Text>
+          <Tooltip content="End aligned tooltip" align="end">
+            <Button>End</Button>
+          </Tooltip>
+        </Vertical>
+      </Horizontal>
+    </Vertical>
+  );
+};
+```
+
+### **Sizes**
+
+```tsx
+import React from 'react';
+import { Tooltip } from '../Tooltip';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+
+export const TooltipSizes = () => {
+  return (
+    <Vertical gap={30} width="100%" maxWidth={600}>
+      <Horizontal gap={20}>
+        <Vertical gap={10} alignItems="center">
+          <Text>Small Size</Text>
+          <Tooltip content="Small tooltip" size="sm">
+            <Button>Small</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>Medium Size (Default)</Text>
+          <Tooltip content="Medium tooltip" size="md">
+            <Button>Medium</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>Large Size</Text>
+          <Tooltip
+            content="Large tooltip with more content that might wrap to multiple lines"
+            size="lg"
+          >
+            <Button>Large</Button>
+          </Tooltip>
+        </Vertical>
+      </Horizontal>
+    </Vertical>
+  );
+};
+```
+
+### **Variants**
+
+```tsx
+import React from 'react';
+import { Tooltip } from '../Tooltip';
+import { Button } from '../../Button/Button';
+import { Text } from 'app-studio';
+import { Vertical } from 'app-studio';
+import { Horizontal } from 'app-studio';
+
+export const TooltipVariants = () => {
+  return (
+    <Vertical gap={30} width="100%" maxWidth={600}>
+      <Horizontal gap={20}>
+        <Vertical gap={10} alignItems="center">
+          <Text>Default Variant</Text>
+          <Tooltip content="Default tooltip style" variant="default">
+            <Button>Default</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>Light Variant</Text>
+          <Tooltip content="Light tooltip style" variant="light">
+            <Button>Light</Button>
+          </Tooltip>
+        </Vertical>
+
+        <Vertical gap={10} alignItems="center">
+          <Text>Dark Variant</Text>
+          <Tooltip content="Dark tooltip style" variant="dark">
+            <Button>Dark</Button>
+          </Tooltip>
+        </Vertical>
+      </Horizontal>
+    </Vertical>
+  );
+};
+```
+

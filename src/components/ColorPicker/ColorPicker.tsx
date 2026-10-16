@@ -2,16 +2,11 @@ import React from 'react';
 import { ColorPickerProps } from './ColorPicker/ColorPicker.props';
 import { useColorPickerState } from './ColorPicker/ColorPicker.state';
 import ColorPickerView from './ColorPicker/ColorPicker.view';
-
+// This file defines the main ColorPicker component, acting as the entry point that integrates state management with the visual presentation, combining the state logic and the UI view.
 const ColorPickerComponent: React.FC<ColorPickerProps> = (
   props: ColorPickerProps
 ) => {
-  // Initialize the colorPickerStates with state-management logic and relevant properties from useColorPickerState hook
   const colorPickerStates = useColorPickerState(props);
-
-  // Render the ColorPickerView component with the spread attributes from both colorPickerStates and props
   return <ColorPickerView {...colorPickerStates} {...props} />;
 };
-
-// Export ColorPickerComponent as ColorPicker
 export const ColorPicker = ColorPickerComponent;

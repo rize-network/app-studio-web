@@ -9,7 +9,7 @@ export const CompoundTabs = () => {
   return (
     <View
       border="1px solid"
-      borderColor="color.gray.200"
+      borderColor="color-gray-200"
       borderRadius="8px"
       overflow="hidden"
     >
@@ -26,7 +26,7 @@ export const CompoundTabs = () => {
             <Text fontSize={18} fontWeight="600" marginBottom={16}>
               Default Usage
             </Text>
-            <Text color="color.gray.600">
+            <Text color="color-gray-600">
               This demonstrates the default usage of the AgentChat component
               with all standard features enabled. The component provides a
               complete chat interface for interacting with ADK agents.
@@ -39,7 +39,7 @@ export const CompoundTabs = () => {
             <Text fontSize={18} fontWeight="600" marginBottom={16}>
               Minimal Configuration
             </Text>
-            <Text color="color.gray.600">
+            <Text color="color-gray-600">
               This shows a minimal setup with only the essential features
               enabled. Perfect for simple chat interfaces where you don&apos;t
               need advanced features.
@@ -52,7 +52,7 @@ export const CompoundTabs = () => {
             <Text fontSize={18} fontWeight="600" marginBottom={16}>
               Customized Styling
             </Text>
-            <Text color="color.gray.600">
+            <Text color="color-gray-600">
               This example demonstrates how to customize the appearance and
               behavior of the AgentChat component to match your
               application&apos;s design system.
@@ -65,7 +65,7 @@ export const CompoundTabs = () => {
             <Text fontSize={18} fontWeight="600" marginBottom={16}>
               Function Calls Demo
             </Text>
-            <Text color="color.gray.600">
+            <Text color="color-gray-600">
               This showcases the function calling capabilities of the AgentChat
               component, including visualization of function calls and their
               results.

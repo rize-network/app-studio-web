@@ -1,7 +1,65 @@
+/**
+ * TextArea Component Styles
+ *
+ * Design tokens:
+ * - Placeholder color: Gray-400 for subtle visibility
+ * - Transition: 200ms for consistent feel
+ * - Selection: Theme primary with 20% opacity
+ * - Resize handle: Subtle styling
+ */
+
+/* Hide Safari autofill button */
 input::-webkit-contacts-auto-fill-button {
   visibility: hidden;
   display: none !important;
   pointer-events: none;
   position: absolute;
   right: 0;
+}
+
+/* Placeholder styling */
+textarea::placeholder {
+  color: #9ca3af; /* color-gray-400 */
+  opacity: 1;
+  transition: opacity 200ms ease-out;
+}
+
+textarea:focus::placeholder {
+  opacity: 0.7;
+}
+
+/* Selection styling */
+textarea::selection {
+  background-color: rgba(59, 130, 246, 0.2); /* theme-primary with 20% opacity */
+}
+
+/* Custom scrollbar for textarea */
+textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #d1d5db; /* color-gray-300 */
+  border-radius: 3px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af; /* color-gray-400 */
+}
+
+/* Resize handle styling */
+textarea::-webkit-resizer {
+  background: transparent;
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  textarea,
+  textarea::placeholder {
+    transition: none;
+  }
 }

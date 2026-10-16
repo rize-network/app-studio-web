@@ -34,7 +34,7 @@ const VALIDATION_RULES = {
   
   // Content that should not be duplicated
   DUPLICATE_CONTENT_CHECKS: [
-    'npm install @app-studio/web',
+    'npm install @app-studio/components',
     'Quick Start',
     'Installation'
   ]

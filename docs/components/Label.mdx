@@ -4,15 +4,15 @@ A semantic text element designed for form labels and descriptive text with compr
 
 ### **Import**
   ```tsx
-  import { Label } from '@app-studio/web';
+  import { Label } from '@app-studio/components';
   ```
 
 ### **Basic Usage**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { TextField } from '@app-studio/web';
-import { Vertical } from 'app-studio';
+import { Label } from '@app-studio/components';
+import { TextField } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const BasicLabel = () => (
   <Vertical gap={8}>
@@ -25,8 +25,8 @@ export const BasicLabel = () => (
 ### **Label Sizes**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from 'app-studio';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const LabelSizes = () => (
   <Vertical gap={16}>
@@ -42,8 +42,8 @@ export const LabelSizes = () => (
 ### **Label Weights**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from 'app-studio';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const LabelWeights = () => (
   <Vertical gap={12}>
@@ -59,8 +59,8 @@ export const LabelWeights = () => (
 ### **Heading Labels**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from 'app-studio';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const HeadingLabels = () => (
   <Vertical gap={16}>
@@ -77,8 +77,8 @@ export const HeadingLabels = () => (
 ### **Text Decorations**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from 'app-studio';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const TextDecorations = () => (
   <Vertical gap={12}>
@@ -96,16 +96,16 @@ export const TextDecorations = () => (
 ### **Form Labels with Required Indicators**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { TextField, TextArea } from '@app-studio/web';
-import { Vertical, Horizontal } from 'app-studio';
+import { Label } from '@app-studio/components';
+import { TextField, TextArea } from '@app-studio/components';
+import { Vertical, Horizontal } from '@app-studio/components';
 
 export const FormLabels = () => (
   <Vertical gap={20}>
     <Vertical gap={8}>
       <Horizontal alignItems="center" gap={4}>
         <Label weight="medium">Full Name</Label>
-        <Label color="color.red.500" size="sm">*</Label>
+        <Label color="color-red-500" size="sm">*</Label>
       </Horizontal>
       <TextField placeholder="Enter your full name" required />
     </Vertical>
@@ -113,14 +113,14 @@ export const FormLabels = () => (
     <Vertical gap={8}>
       <Horizontal alignItems="center" gap={4}>
         <Label weight="medium">Email Address</Label>
-        <Label color="color.red.500" size="sm">*</Label>
+        <Label color="color-red-500" size="sm">*</Label>
       </Horizontal>
       <TextField type="email" placeholder="Enter your email" required />
     </Vertical>
 
     <Vertical gap={8}>
       <Label weight="medium">Additional Comments</Label>
-      <Label size="sm" color="color.gray.600">Optional</Label>
+      <Label size="sm" color="color-gray-600">Optional</Label>
       <TextArea placeholder="Enter any additional comments" rows={3} />
     </Vertical>
   </Vertical>
@@ -130,8 +130,8 @@ export const FormLabels = () => (
 ### **Section Headers**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { View, Vertical } from 'app-studio';
+import { Label } from '@app-studio/components';
+import { View, Vertical } from '@app-studio/components';
 
 export const SectionHeaders = () => (
   <Vertical gap={24}>
@@ -139,8 +139,8 @@ export const SectionHeaders = () => (
       <Label heading="h2" weight="bold" marginBottom={8}>
         Personal Information
       </Label>
-      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
-      <Label color="color.gray.600">
+      <View height={1} backgroundColor="color-gray-200" marginBottom={16} />
+      <Label color="color-gray-600">
         Please provide your personal details below.
       </Label>
     </View>
@@ -149,8 +149,8 @@ export const SectionHeaders = () => (
       <Label heading="h2" weight="bold" marginBottom={8}>
         Contact Details
       </Label>
-      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
-      <Label color="color.gray.600">
+      <View height={1} backgroundColor="color-gray-200" marginBottom={16} />
+      <Label color="color-gray-600">
         How can we reach you?
       </Label>
     </View>
@@ -159,8 +159,8 @@ export const SectionHeaders = () => (
       <Label heading="h2" weight="bold" marginBottom={8}>
         Preferences
       </Label>
-      <View height={1} backgroundColor="color.gray.200" marginBottom={16} />
-      <Label color="color.gray.600">
+      <View height={1} backgroundColor="color-gray-200" marginBottom={16} />
+      <Label color="color-gray-600">
         Customize your experience.
       </Label>
     </View>
@@ -171,18 +171,18 @@ export const SectionHeaders = () => (
 ### **Colored Labels**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
-import { Vertical } from 'app-studio';
+import { Label } from '@app-studio/components';
+import { Vertical } from '@app-studio/components';
 
 export const ColoredLabels = () => (
   <Vertical gap={12}>
-    <Label color="color.blue.600">Primary Label</Label>
-    <Label color="color.green.600">Success Label</Label>
-    <Label color="color.yellow.600">Warning Label</Label>
-    <Label color="color.red.600">Error Label</Label>
-    <Label color="color.gray.600">Muted Label</Label>
-    <Label color="theme.primary">Theme Primary</Label>
-    <Label color="theme.secondary">Theme Secondary</Label>
+    <Label color="color-blue-600">Primary Label</Label>
+    <Label color="color-green-600">Success Label</Label>
+    <Label color="color-yellow-600">Warning Label</Label>
+    <Label color="color-red-600">Error Label</Label>
+    <Label color="color-gray-600">Muted Label</Label>
+    <Label color="theme-primary">Theme Primary</Label>
+    <Label color="theme-secondary">Theme Secondary</Label>
   </Vertical>
 );
 ```
@@ -232,7 +232,7 @@ export const ColoredLabels = () => (
   type="email"
   aria-describedby="email-help"
 />
-<Label id="email-help" size="sm" color="color.gray.600">
+<Label id="email-help" size="sm" color="color-gray-600">
   We'll never share your email with anyone else.
 </Label>
 ```
@@ -242,16 +242,16 @@ export const ColoredLabels = () => (
 **Custom Styling:**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
+import { Label } from '@app-studio/components';
 
 export const CustomStyledLabel = () => (
   <Label
     weight="bold"
-    color="color.blue.600"
+    color="color-blue-600"
     textTransform="uppercase"
     letterSpacing="0.05em"
     borderBottom="2px solid"
-    borderColor="color.blue.600"
+    borderColor="color-blue-600"
     paddingBottom={4}
     display="inline-block"
   >
@@ -263,13 +263,13 @@ export const CustomStyledLabel = () => (
 **Responsive Labels:**
 ```tsx
 import React from 'react';
-import { Label } from '@app-studio/web';
+import { Label } from '@app-studio/components';
 
 export const ResponsiveLabel = () => (
   <Label
     size={{ mobile: 'sm', tablet: 'md', desktop: 'lg' }}
     weight={{ mobile: 'normal', desktop: 'bold' }}
-    color={{ mobile: 'color.gray.700', desktop: 'color.blue.600' }}
+    color={{ mobile: 'color-gray-700', desktop: 'color-blue-600' }}
   >
     Responsive Label
   </Label>
@@ -279,7 +279,7 @@ export const ResponsiveLabel = () => (
 **Interactive Labels:**
 ```tsx
 import React, { useState } from 'react';
-import { Label } from '@app-studio/web';
+import { Label } from '@app-studio/components';
 
 export const InteractiveLabel = () => {
   const [isActive, setIsActive] = useState(false);
@@ -287,12 +287,12 @@ export const InteractiveLabel = () => {
   return (
     <Label
       cursor="pointer"
-      color={isActive ? 'color.blue.600' : 'color.gray.700'}
+      color={isActive ? 'color-blue-600' : 'color-gray-700'}
       weight={isActive ? 'bold' : 'normal'}
       onClick={() => setIsActive(!isActive)}
       transition="all 0.2s ease"
       _hover={{
-        color: 'color.blue.600',
+        color: 'color-blue-600',
       }}
     >
       Click me to toggle
@@ -351,9 +351,9 @@ export const InteractiveLabel = () => {
 ```tsx
 const StatusLabel = ({ status, children }) => {
   const colors = {
-    active: 'color.green.600',
-    pending: 'color.yellow.600',
-    inactive: 'color.red.600',
+    active: 'color-green-600',
+    pending: 'color-yellow-600',
+    inactive: 'color-red-600',
   };
 
   return (
@@ -374,7 +374,7 @@ const StatusLabel = ({ status, children }) => {
 <Vertical gap={4}>
   <Label weight="medium">Password</Label>
   <TextField type="password" />
-  <Label size="sm" color="color.gray.600">
+  <Label size="sm" color="color-gray-600">
     Must be at least 8 characters with uppercase, lowercase, and numbers
   </Label>
 </Vertical>
@@ -384,7 +384,7 @@ const StatusLabel = ({ status, children }) => {
 
 **With Form Components:**
 ```tsx
-import { FormikForm, FormikTextField } from '@app-studio/web';
+import { FormikForm, FormikTextField } from '@app-studio/components';
 
 <FormikForm>
   <Vertical gap={16}>
@@ -402,7 +402,7 @@ import { FormikForm, FormikTextField } from '@app-studio/web';
 
 **With Card Components:**
 ```tsx
-import { Card } from '@app-studio/web';
+import { Card } from '@app-studio/components';
 
 <Card>
   <Card.Header>
@@ -411,7 +411,7 @@ import { Card } from '@app-studio/web';
     </Label>
   </Card.Header>
   <Card.Body>
-    <Label color="color.gray.600">
+    <Label color="color-gray-600">
       Card description text
     </Label>
   </Card.Body>
@@ -420,14 +420,14 @@ import { Card } from '@app-studio/web';
 
 **With Navigation:**
 ```tsx
-import { NavigationMenu } from '@app-studio/web';
+import { NavigationMenu } from '@app-studio/components';
 
 <NavigationMenu>
   <NavigationMenu.Section>
     <Label
       size="xs"
       weight="bold"
-      color="color.gray.500"
+      color="color-gray-500"
       textTransform="uppercase"
       letterSpacing="0.05em"
     >

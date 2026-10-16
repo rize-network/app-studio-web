@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Switch } from '../../../Form/Switch/Switch';
-import { Text } from '../../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 export const ChildSwitch = () => {

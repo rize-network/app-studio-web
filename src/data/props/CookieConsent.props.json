@@ -1,0 +1,92 @@
+{
+  "componentDescription": "A component to display a cookie consent banner, allowing users to accept or customize cookie preferences.",
+  "title": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Specifies the main title text displayed in the cookie consent banner.",
+    "defaultValue": "Nous utilisons des cookies"
+  },
+  "description": {
+    "type": "string | React.ReactNode",
+    "typeValues": null,
+    "description": "Provides the descriptive content or message shown within the cookie consent banner.",
+    "defaultValue": "Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer sur ce site, vous acceptez notre utilisation des cookies conformément à notre politique de confidentialité."
+  },
+  "acceptButtonText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Sets the text for the button that accepts all cookies.",
+    "defaultValue": "Accepter"
+  },
+  "customizeButtonText": {
+    "type": "string",
+    "typeValues": null,
+    "description": "Sets the text for the button that allows users to customize cookie preferences.",
+    "defaultValue": "Personnaliser"
+  },
+  "position": {
+    "type": "CookieConsentPosition",
+    "typeValues": [
+      "bottom",
+      "top"
+    ],
+    "description": "Determines the display position of the cookie consent banner on the screen.",
+    "defaultValue": "bottom"
+  },
+  "variant": {
+    "type": "CookieConsentVariant",
+    "typeValues": [
+      "default",
+      "info",
+      "primary"
+    ],
+    "description": "Defines the visual style or layout variant of the cookie consent banner.",
+    "defaultValue": "default"
+  },
+  "onAccept": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function executed when the user accepts all cookies.",
+    "defaultValue": null
+  },
+  "onCustomize": {
+    "type": "() => void",
+    "typeValues": null,
+    "description": "Callback function executed when the user clicks the customize button.",
+    "defaultValue": null
+  },
+  "views": {
+    "type": "CookieConsentStyles",
+    "typeValues": {
+      "container": "any",
+      "title": "any",
+      "description": "any",
+      "buttonGroup": "any",
+      "acceptButton": "any",
+      "customizeButton": "any"
+    },
+    "description": "Allows overriding default styles for specific parts of the cookie consent component.",
+    "defaultValue": null
+  },
+  "showCustomizeButton": {
+    "type": "boolean",
+    "typeValues": null,
+    "description": "A boolean flag to control the visibility of the customize cookies button.",
+    "defaultValue": true
+  },
+  "cookieExpiration": {
+    "type": "number",
+    "typeValues": null,
+    "description": "Sets the duration in days for which the cookie consent decision will be stored.",
+    "defaultValue": 365
+  },
+  "themeMode": {
+    "type": "'light' | 'dark'",
+    "typeValues": [
+      "light",
+      "dark"
+    ],
+    "description": "Specifies the theme mode ('light' or 'dark') to apply to the cookie consent component.",
+    "defaultValue": null
+  }
+}

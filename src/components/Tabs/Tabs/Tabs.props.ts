@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabsStyles, Tab } from './Tabs.type';
+import { TabsStyles, TabsVariant, Tab } from './Tabs.type';
 import { ViewProps } from 'app-studio';
 
 /**
@@ -15,6 +15,8 @@ export interface TabsProps {
   onTabChange?: (activeTab: Tab) => void;
   /** Optional styles object to customize the appearance of the tabs container, headers, text, and content area. */
   views?: TabsStyles;
+  /** Visual presentation style for the tab list. */
+  variant?: TabsVariant;
   /** Optional position of the icon relative to the text in tab headers. */
   iconPosition?: 'left' | 'right' | 'top' | 'bottom';
   /**
@@ -33,10 +35,25 @@ export interface TabsProps {
    */
   renderContent?: (activeTab: Tab) => React.ReactNode;
 
+  /**
+   * By default only the ACTIVE tab's content is mounted — inactive tabs do
+   * not exist in the DOM (their state resets on switch, and tests must
+   * activate a tab before asserting on its content). Set `keepMounted` to
+   * mount every tab's content up front and toggle visibility with
+   * `display: none`, preserving internal state across switches. Only applies
+   * to the data-driven `tabs` path; `renderContent` still receives the active
+   * tab only.
+   */
+  keepMounted?: boolean;
+
   /** Current value for controlled compound component pattern */
-  value?: string;
-  /** Callback when tab value changes in compound component pattern */
-  onValueChange?: (value: any) => void;
+  value?: string | number;
+  /**
+   * Callback when tab value changes in compound component pattern. Receives
+   * the tab's value — matching `Tabs.type.ts` and `Tabs.state.ts`, which
+   * already declared `string | number` while this one said `any`.
+   */
+  onValueChange?: (value: string | number) => void;
   /** Children for compound component pattern */
   children?: React.ReactNode;
 }
@@ -46,6 +63,7 @@ export interface TabsProps {
  * These props are derived or passed down from the main Tabs component.
  */
 export interface TabsViewProps {
+  variant?: TabsVariant;
   iconPosition?: 'left' | 'right' | 'bottom' | 'top'; // Added iconPosition prop
   /** The original array of tab objects. */
   tabs: Tab[];
@@ -63,6 +81,8 @@ export interface TabsViewProps {
   ) => React.ReactNode;
   /** Optional custom renderer for the content area. */
   renderContent?: (activeTab: Tab) => React.ReactNode;
+  /** Mount every tab's content and hide inactive ones with display:none. */
+  keepMounted?: boolean;
 }
 
 /**

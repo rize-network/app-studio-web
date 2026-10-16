@@ -1,0 +1,29 @@
+# ShareButton
+
+Enables sharing content via the Web Share API with a customizable button.
+
+### **Import**
+```tsx
+import { ShareButton } from '@app-studio/web';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { ShareButton } from '../ShareButton';
+
+export const DefaultShareButton = () => (
+  <ShareButton
+    label="Share this page"
+    shareData={{
+      title: 'App Studio',
+      text: 'Découvrez les composants App Studio.',
+      url: 'https://appstudio.example.com',
+    }}
+    onUnsupported={() =>
+      alert('Le partage natif est indisponible sur ce navigateur.')
+    }
+  />
+);
+```
+

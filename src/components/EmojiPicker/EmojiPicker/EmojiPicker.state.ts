@@ -1,7 +1,37 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { EmojiPickerProps } from './EmojiPicker.props';
+import {
+  defaultEmojiPickerLabels,
+  EmojiPickerProps,
+} from './EmojiPicker.props';
 import { Emoji, EmojiCategory } from './EmojiPicker.type';
-import { DefaultEmojiData } from './EmojiPicker.style';
+import { DefaultEmojiData, QuickReactionEmojis } from './EmojiPicker.data';
+
+const categories: EmojiCategory[] = [
+  'recent',
+  'smileys',
+  'people',
+  'animals',
+  'food',
+  'activities',
+  'travel',
+  'objects',
+  'symbols',
+  'flags',
+];
+const normalize = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/œ/g, 'oe')
+    .replace(/æ/g, 'ae')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+const validEmoji = (value: any): value is Emoji =>
+  value &&
+  typeof value.emoji === 'string' &&
+  typeof value.name === 'string' &&
+  categories.includes(value.category) &&
+  Array.isArray(value.keywords) &&
+  value.keywords.every((word: unknown) => typeof word === 'string');
 
 export const useEmojiPickerState = (props: EmojiPickerProps) => {
   const {
@@ -14,207 +44,196 @@ export const useEmojiPickerState = (props: EmojiPickerProps) => {
     onClose,
     closeOnSelect = true,
     maxRecentEmojis = 16,
-    showRecentEmojis = true,
-    enabledCategories = [
-      'recent',
-      'smileys',
-      'people',
-      'animals',
-      'food',
-      'activities',
-      'travel',
-      'objects',
-      'symbols',
-      'flags',
-    ],
+    mode = 'picker',
+    showRecentEmojis = mode !== 'reaction',
+    enabledCategories = categories,
     customEmojis = [],
+    isDisabled,
+    isReadOnly,
   } = props;
-
-  // State management
-  const [isOpen, setIsOpen] = useState(controlledIsOpen ?? false);
-  const [selectedEmoji, setSelectedEmoji] = useState(value ?? defaultValue);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = controlledIsOpen ?? internalOpen;
+  const [internalEmoji, setInternalEmoji] = useState(defaultValue);
+  const selectedEmoji = value ?? internalEmoji;
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] =
-    useState<EmojiCategory>('smileys');
+  const [activeCategory, setActiveCategory] = useState<EmojiCategory>(
+    enabledCategories.find((category) => category !== 'recent') || 'recent'
+  );
   const [recentEmojis, setRecentEmojis] = useState<Emoji[]>([]);
-
-  // Refs
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Combine default emojis with custom emojis
-  const allEmojis = useMemo(() => {
-    return [...DefaultEmojiData, ...customEmojis];
-  }, [customEmojis]);
-
-  // Filter emojis based on search query and active category
+  const [expanded, setExpanded] = useState(mode !== 'reaction');
+  const triggerRef = useRef<any>(null);
+  const dropdownRef = useRef<any>(null);
+  const text = { ...defaultEmojiPickerLabels, ...props.labels };
+  const allEmojis = useMemo(
+    () =>
+      Array.from(
+        new Map(
+          [...DefaultEmojiData, ...customEmojis].map((emoji) => [
+            emoji.emoji,
+            emoji,
+          ])
+        ).values()
+      ),
+    [customEmojis]
+  );
+  const quickEmojiData = useMemo(
+    () =>
+      (props.quickEmojis ?? QuickReactionEmojis).map(
+        (symbol) =>
+          allEmojis.find((emoji) => emoji.emoji === symbol) ?? {
+            emoji: symbol,
+            name: symbol,
+            category: 'symbols' as const,
+            keywords: [],
+          }
+      ),
+    [allEmojis, props.quickEmojis]
+  );
   const filteredEmojis = useMemo(() => {
-    let emojis = allEmojis;
-
-    // Filter by category
-    if (activeCategory !== 'recent') {
-      emojis = emojis.filter((emoji) => emoji.category === activeCategory);
-    } else {
-      emojis = recentEmojis;
-    }
-
-    // Filter by search query
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      emojis = emojis.filter(
-        (emoji) =>
-          emoji.name.toLowerCase().includes(query) ||
-          emoji.keywords.some((keyword) =>
-            keyword.toLowerCase().includes(query)
-          )
+    const eligible = allEmojis.filter((emoji) =>
+      enabledCategories.includes(emoji.category)
+    );
+    if (searchQuery.trim()) {
+      const query = normalize(searchQuery.trim());
+      return eligible.filter((emoji) =>
+        normalize(
+          `${emoji.emoji} ${emoji.name} ${emoji.keywords.join(' ')}`
+        ).includes(query)
       );
     }
-
-    return emojis;
-  }, [allEmojis, activeCategory, recentEmojis, searchQuery]);
-
-  // Sync with controlled value
+    return activeCategory === 'recent'
+      ? recentEmojis.filter((emoji) =>
+          enabledCategories.includes(emoji.category)
+        )
+      : eligible.filter((emoji) => emoji.category === activeCategory);
+  }, [allEmojis, activeCategory, recentEmojis, searchQuery, enabledCategories]);
   useEffect(() => {
-    if (value !== undefined) {
-      setSelectedEmoji(value);
+    if (!showRecentEmojis || typeof localStorage === 'undefined') return;
+    try {
+      const stored: unknown = JSON.parse(
+        localStorage.getItem('emojiPicker-recentEmojis') || '[]'
+      );
+      if (Array.isArray(stored))
+        setRecentEmojis(stored.filter(validEmoji).slice(0, maxRecentEmojis));
+    } catch {
+      /* Storage may be disabled; selection remains usable. */
     }
-  }, [value]);
-
-  // Sync with controlled isOpen
+  }, [showRecentEmojis, maxRecentEmojis]);
   useEffect(() => {
-    if (controlledIsOpen !== undefined) {
-      setIsOpen(controlledIsOpen);
-    }
-  }, [controlledIsOpen]);
-
-  // Load recent emojis from localStorage
-  useEffect(() => {
-    if (showRecentEmojis) {
-      const stored = localStorage.getItem('emojiPicker-recentEmojis');
-      if (stored) {
-        try {
-          setRecentEmojis(JSON.parse(stored));
-        } catch (e) {
-          // Ignore invalid JSON
-        }
-      }
-    }
-  }, [showRecentEmojis]);
-
-  // Handle outside click to close dropdown
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        isOpen &&
-        triggerRef.current &&
-        dropdownRef.current &&
-        !triggerRef.current.contains(event.target as Node) &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        handleClose();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isOpen]);
-
-  // Add emoji to recent emojis
-  const addToRecentEmojis = useCallback(
-    (emoji: Emoji) => {
-      if (!showRecentEmojis) return;
-
-      setRecentEmojis((prev) => {
-        const filtered = prev.filter((e) => e.emoji !== emoji.emoji);
-        const newRecent = [emoji, ...filtered].slice(0, maxRecentEmojis);
-
-        // Save to localStorage
-        localStorage.setItem(
-          'emojiPicker-recentEmojis',
-          JSON.stringify(newRecent)
-        );
-
-        return newRecent;
-      });
-    },
-    [showRecentEmojis, maxRecentEmojis]
-  );
-
-  // Handlers
-  const handleToggle = useCallback(() => {
-    const newIsOpen = !isOpen;
-    setIsOpen(newIsOpen);
-
-    if (newIsOpen) {
-      onOpen?.();
-      // Reset search when opening
-      setSearchQuery('');
-      // Set active category to recent if we have recent emojis, otherwise smileys
-      if (showRecentEmojis && recentEmojis.length > 0) {
-        setActiveCategory('recent');
-      } else {
-        setActiveCategory('smileys');
-      }
-    } else {
-      onClose?.();
-    }
-  }, [isOpen, onOpen, onClose, showRecentEmojis, recentEmojis.length]);
-
-  const handleEmojiSelect = useCallback(
-    (emoji: Emoji) => {
-      setSelectedEmoji(emoji.emoji);
-      addToRecentEmojis(emoji);
-
-      onChange?.(emoji.emoji);
-      onEmojiSelect?.(emoji);
-
-      if (closeOnSelect) {
-        setIsOpen(false);
-        onClose?.();
-      }
-    },
-    [onChange, onEmojiSelect, closeOnSelect, onClose, addToRecentEmojis]
-  );
-
-  const handleSearchChange = useCallback(
-    (query: string) => {
-      setSearchQuery(query);
-      // When searching, show all categories
-      if (query && activeCategory === 'recent') {
-        setActiveCategory('smileys');
-      }
-    },
-    [activeCategory]
-  );
-
-  const handleCategoryChange = useCallback((category: EmojiCategory) => {
-    setActiveCategory(category);
-    setSearchQuery(''); // Clear search when changing category
-  }, []);
-
+    if (!enabledCategories.includes(activeCategory))
+      setActiveCategory(
+        enabledCategories.find((category) => category !== 'recent') || 'recent'
+      );
+  }, [enabledCategories, activeCategory]);
   const handleClose = useCallback(() => {
-    setIsOpen(false);
+    setInternalOpen(false);
     onClose?.();
   }, [onClose]);
-
+  const handleToggle = useCallback(() => {
+    if (isDisabled || isReadOnly) return;
+    if (isOpen) {
+      handleClose();
+      return;
+    }
+    setInternalOpen(true);
+    setSearchQuery('');
+    setExpanded(mode !== 'reaction');
+    setActiveCategory(
+      showRecentEmojis &&
+        recentEmojis.length &&
+        enabledCategories.includes('recent')
+        ? 'recent'
+        : enabledCategories.find((category) => category !== 'recent') ||
+            'recent'
+    );
+    onOpen?.();
+  }, [
+    isOpen,
+    isDisabled,
+    isReadOnly,
+    handleClose,
+    mode,
+    showRecentEmojis,
+    recentEmojis.length,
+    enabledCategories,
+    onOpen,
+  ]);
+  const handleEmojiSelect = useCallback(
+    (emoji: Emoji) => {
+      if (isDisabled || isReadOnly) return;
+      setInternalEmoji(emoji.emoji);
+      if (showRecentEmojis) {
+        const recent = [
+          emoji,
+          ...recentEmojis.filter((item) => item.emoji !== emoji.emoji),
+        ].slice(0, Math.max(0, maxRecentEmojis));
+        setRecentEmojis(recent);
+        if (typeof localStorage !== 'undefined') {
+          try {
+            localStorage.setItem(
+              'emojiPicker-recentEmojis',
+              JSON.stringify(recent)
+            );
+          } catch {
+            /* Optional persistence. */
+          }
+        }
+      }
+      onChange?.(emoji.emoji);
+      onEmojiSelect?.(emoji);
+      if (closeOnSelect) handleClose();
+    },
+    [
+      isDisabled,
+      isReadOnly,
+      showRecentEmojis,
+      recentEmojis,
+      maxRecentEmojis,
+      onChange,
+      onEmojiSelect,
+      closeOnSelect,
+      handleClose,
+    ]
+  );
+  useEffect(() => {
+    if (
+      !isOpen ||
+      typeof document === 'undefined' ||
+      typeof document.addEventListener !== 'function'
+    )
+      return;
+    const outside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current?.contains &&
+        triggerRef.current?.contains &&
+        !dropdownRef.current.contains(event.target) &&
+        !triggerRef.current.contains(event.target)
+      )
+        handleClose();
+    };
+    document.addEventListener('mousedown', outside);
+    return () => document.removeEventListener('mousedown', outside);
+  }, [isOpen, handleClose]);
   return {
-    // State
     isOpen,
     selectedEmoji,
     recentEmojis,
     searchQuery,
     activeCategory,
     filteredEmojis,
-
-    // Handlers
     handleToggle,
     handleEmojiSelect,
-    handleSearchChange,
-    handleCategoryChange,
+    handleSearchChange: setSearchQuery,
+    handleCategoryChange: (category: EmojiCategory) => {
+      setActiveCategory(category);
+      setSearchQuery('');
+    },
     handleClose,
-
-    // Refs
     triggerRef,
     dropdownRef,
+    expanded,
+    setExpanded,
+    quickEmojiData,
+    text,
   };
 };

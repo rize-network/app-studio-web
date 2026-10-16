@@ -1,6 +1,6 @@
 import React from 'react';
 import { Separator } from '../Separator';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Card } from '../../Card/Card';
 import { Vertical } from 'app-studio';
 
@@ -32,7 +32,7 @@ export const SeparatorInCard = () => {
         </Vertical>
       </Card.Content>
       <Card.Footer>
-        <Text size="sm" color="color.gray.500">
+        <Text size="sm" color="color-gray-500">
           Card Footer
         </Text>
       </Card.Footer>

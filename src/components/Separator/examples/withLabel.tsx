@@ -1,7 +1,7 @@
 import React from 'react';
 import { Separator } from '../Separator';
 import { View } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 export const SeparatorWithLabel = () => {
@@ -19,7 +19,7 @@ export const SeparatorWithLabel = () => {
           views={{
             label: {
               fontWeight: 'bold',
-              color: 'color.blue.500',
+              color: 'color-blue-500',
               textTransform: 'uppercase',
             },
           }}
@@ -30,12 +30,12 @@ export const SeparatorWithLabel = () => {
         <Text marginBottom={8}>Separator with Custom Color and Label</Text>
         <Separator
           label="IMPORTANT"
-          color="color.red.500"
+          color="color-red-500"
           thickness="medium"
           views={{
             label: {
               fontWeight: 'bold',
-              color: 'color.red.500',
+              color: 'color-red-500',
             },
           }}
         />

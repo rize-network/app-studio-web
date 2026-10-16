@@ -16,5 +16,8 @@
     },
   "npm": {
     "publish": true
+  },
+  "hooks": {
+    "after:release": "npm run promote:latest"
   }
 }

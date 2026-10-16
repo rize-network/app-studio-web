@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
 import { Button } from '../../Button/Button';
-import { Vertical } from 'app-studio';
-import { Text } from '../../Text/Text';
+import { Vertical, View } from 'app-studio';
+import { Text } from 'app-studio';
 import { OTPInput } from '../OTPInput';
 
 export const DefaultOTPInput = () => {
   const [otp, setOtp] = useState('');
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    alert(`Entered OTP: ${otp}`);
+  const handleSubmit = () => {
+    if (typeof alert !== 'undefined') {
+      alert(`Entered OTP: ${otp}`);
+    } else {
+      console.log(`Entered OTP: ${otp}`);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <View>
       <Vertical gap={20}>
         <Text>Enter verification code:</Text>
         <OTPInput name="otp" value={otp} onChange={setOtp} isAutoFocus />
-        <Button type="submit" isAuto>
+        <Button type="button" isAuto onClick={handleSubmit}>
           Verify
         </Button>
       </Vertical>
-    </form>
+    </View>
   );
 };
 
@@ -36,18 +39,18 @@ export const CustomizedOTPInput = () => {
         value={otp}
         onChange={setOtp}
         length={4}
-        shape="pillShaped"
+        shape="pill"
         variant="outline"
         size="lg"
         gap={12}
         shadow={{ boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px' }}
         views={{
           container: {
-            borderColor: 'theme.primary',
-            backgroundColor: 'color.gray.50',
+            borderColor: 'theme-primary',
+            backgroundColor: 'color-gray-50',
           },
           input: {
-            color: 'theme.primary',
+            color: 'theme-primary',
             fontWeight: 'bold',
           },
         }}

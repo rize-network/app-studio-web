@@ -14,8 +14,6 @@ import { evaluate } from '@mdx-js/mdx';
 import { SideMenu } from './components/docs.elements';
 import CustomLiveCode from './components/CustomLiveCode.component';
 
-import '@mdxeditor/editor/style.css';
-
 const DocsPage = () => {
   const { componentName } = useParams<{ componentName: string }>();
 
@@ -141,13 +139,12 @@ const DocsPage = () => {
         setErrorInfo(null);
         setContent(null);
         try {
-          const response = await fetch(doc.path);
-          if (!response.ok) {
+          const text: string = doc.content ?? '';
+          if (!text) {
             throw new Error(
-              `Failed to fetch MDX file: ${response.status} ${response.statusText} for ${doc.path}`
+              `MDX content is empty for ${doc.path}. Did the docsLoader glob match?`
             );
           }
-          const text = await response.text();
 
           // console.log('Evaluating MDX for:', componentName);
           // console.log('MDX text preview:', text.substring(0, 200) + '...');
@@ -209,17 +206,7 @@ const DocsPage = () => {
               (error.location
                 ? ` (Line: ${error.location.line}, Column: ${error.location.column})`
                 : '');
-          let mdxPreview = 'Could not fetch MDX content for error display.';
-          if (doc.path) {
-            try {
-              const errorMdxResponse = await fetch(doc.path);
-              if (errorMdxResponse.ok) {
-                mdxPreview = (await errorMdxResponse.text()).substring(0, 1000);
-              }
-            } catch (fetchErr) {
-              console.error('Could not fetch MDX for error preview:', fetchErr);
-            }
-          }
+          const mdxPreview = (doc.content ?? '').substring(0, 1000);
           setErrorInfo({
             message:
               error.message ||

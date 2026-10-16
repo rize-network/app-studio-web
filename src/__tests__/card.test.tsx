@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer from './actRenderer.test-utils';
 import { Card } from 'src/components';
 import { cleanup, render, screen } from '@testing-library/react';
 
@@ -94,7 +94,7 @@ test('renders Card with square shape', () => {
 });
 
 test('renders Card with different variants', () => {
-  render(<Card variant="outline">Outline Card</Card>);
+  render(<Card variant="outlined">Outline Card</Card>);
   expect(screen.getByText('Outline Card')).toBeInTheDocument();
 });
 

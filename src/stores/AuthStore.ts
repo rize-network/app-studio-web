@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import * as AsyncStorage from 'src/utils/localstorage';
-import { AuthService } from 'src/services/api';
+import * as AuthService from 'src/services/api/services/AuthService';
 import { setToken } from 'src/utils/request';
 import { setApiToken, clearApiToken } from 'src/utils/apiConfig';
 
