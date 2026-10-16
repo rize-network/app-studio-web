@@ -152,7 +152,10 @@ and ProgressBar `shape="circle"` falls back to the linear bar.
 | Toggle / ToggleGroup  | ✅  | ✅  |                                                                                        |
 | Alert / Avatar / Badge / Card / Separator / AspectRatio / Resizable / StatusIndicator | ✅ | ✅ | Use only portable primitives                              |
 | Chart                 | ✅  | ❌  | Recharts is web-only                                                                   |
-| EmojiPicker / ColorPicker / IconPicker | ✅ | ❌  | Web-only                                                              |
+| EmojiPicker           | ✅  | ✅  | ActionSheet picker, search, categories and quick reactions                             |
+| BlockEditor           | ✅  | ✅  | Visual blocks; the active native block edits its Markdown source                       |
+| Markdown              | ✅  | ✅  | Read-only block rendering, inline links and inert source fallback                      |
+| ColorPicker / IconPicker | ✅ | ❌  | Web-only                                                              |
 | Command               | ✅  | ❌  | `cmdk` is web-only                                                                     |
 | DragAndDrop / DropZone / Uploader / File / AudioInput / MediaPreview | ✅ | ❌ | DOM `File` / `MediaStream`         |
 | CookieConsent         | ✅  | ❌  | Cookies do not apply on RN                                                             |
@@ -190,7 +193,7 @@ submit or reset button still needs an explicit handler:
   {({ handleSubmit, handleReset }) => (
     <FormikForm autoFocus>
       <FormikTextField name="email" label="Email" type="email" />
-      <Button type="submit" onClick={handleSubmit}>Save</Button>
+      <Button  onClick={handleSubmit}>Save</Button>
       <Button type="reset" onClick={handleReset}>Reset</Button>
     </FormikForm>
   )}
@@ -307,3 +310,11 @@ Then copy `app-studio-rn-demo/App.tsx` to `MyApp/App.tsx` as a starter.
 | `<Gradient/>` renders as a flat color                    | `npm install react-native-linear-gradient` (+ pod install)                                                |
 | `animate={…}` doesn't move                               | `npm install react-native-reanimated` and add `'react-native-reanimated/plugin'` to `babel.config.js`     |
 | Build error about `HTMLDivElement` / `document`          | These are typed in shared `.tsx` files but never executed on RN — make sure your tsconfig has `lib: ["dom", "esnext"]` (RN never runs that code, TS just needs the symbols). |
+
+### BlockEditor
+
+BlockEditor uses the same Markdown value/onChange contract on web and native. Inactive blocks render visually; the active native block shows Markdown markers in TextArea. Menus and optional AI proposals use ActionSheet; move-up/down buttons replace web dragging. See [BlockEditor](../components/BlockEditor.mdx) for its supported syntax and source fallback.
+
+### Markdown
+
+`Markdown` displays the same supported Markdown subset without editor controls. Native inline links use pressable Text and `Linking.openURL`; supply `onLinkPress(url)` to route relative links through your application. Unsupported documents are displayed as selectable, inert source. Tables scroll horizontally. See [Markdown](../components/Markdown.mdx) for the API and validation limits.

@@ -19,6 +19,8 @@ const CountryPickerPage = lazy(() => import('src/pages/countryPicker.page'));
 const DatePickerPage = lazy(() => import('src/pages/datePicker.page'));
 const DropdownMenuPage = lazy(() => import('src/pages/dropdownMenu.page'));
 const EmojiPickerPage = lazy(() => import('src/pages/emojiPicker.page'));
+const BlockEditorPage = lazy(() => import('src/pages/blockEditor.page'));
+const MarkdownPage = lazy(() => import('src/pages/markdown.page'));
 const FormikPage = lazy(() => import('src/pages/formik.page'));
 const HomePage = lazy(() => import('src/pages/home.page'));
 const HoverCardPage = lazy(() => import('src/pages/hoverCard.page'));
@@ -168,6 +170,12 @@ export const componentList: ComponentRoute[] = [
   },
 
   // Inputs
+  {
+    name: 'BlockEditor',
+    path: '/blockeditor',
+    element: <BlockEditorPage />,
+    category: 'Inputs',
+  },
   {
     name: 'Audio Input',
     path: '/audio-input',
@@ -346,6 +354,12 @@ export const componentList: ComponentRoute[] = [
   },
 
   // Data Display
+  {
+    name: 'Markdown',
+    path: '/markdown',
+    element: <MarkdownPage />,
+    category: 'Data Display',
+  },
   {
     name: 'AttachmentGroup',
     path: '/attachment-group',

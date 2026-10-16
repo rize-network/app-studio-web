@@ -29,11 +29,7 @@ export const FormikSelectorExample = () => {
               options={options}
               size="md"
             />
-            <Button
-              type="submit"
-              alignSelf="center"
-              onClick={props.handleSubmit}
-            >
+            <Button alignSelf="center" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Vertical>

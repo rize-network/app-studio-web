@@ -13,6 +13,7 @@ const EmojiPickerComponent: React.FC<EmojiPickerProps> = (props) => {
   const propsWithValue = {
     ...props,
     value: formProps.value ?? props.value ?? props.defaultValue,
+    onChange: formProps.onChange,
   };
 
   const emojiPickerStates = useEmojiPickerState(propsWithValue);
@@ -20,8 +21,6 @@ const EmojiPickerComponent: React.FC<EmojiPickerProps> = (props) => {
   // Handle emoji selection
   const handleEmojiSelect = (emoji: Emoji) => {
     emojiPickerStates.handleEmojiSelect(emoji);
-    formProps.onChange(emoji.emoji);
-    props.onEmojiSelect?.(emoji);
   };
 
   return (

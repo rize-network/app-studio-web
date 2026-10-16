@@ -34,9 +34,7 @@ export const FormCheckbox = () => {
             <View>Choose your vegetables:</View>
             <FormikCheckbox name="onion" label="onion" />
             <FormikCheckbox name="carrot" label="carrot" />
-            <Button type="submit" onClick={props.handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={props.handleSubmit}>Submit</Button>
           </Vertical>
         </FormikForm>
       )}

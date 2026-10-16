@@ -28,7 +28,7 @@ export const StyledSwitch = () => {
             circle: { backgroundColor: 'theme-primary' },
           }}
         />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

@@ -1,0 +1,99 @@
+# Markdown
+
+`Markdown` affiche un document sur le web et React Native avec les primitives App Studio. Il partage le moteur de rendu de `BlockEditor`, sans ajouter de dépendance ni de surface d'édition.
+
+```tsx
+import React from 'react';
+import { Markdown } from '@app-studio/components';
+
+export const Document = () => (
+  <Markdown
+    label="Notes du projet"
+    value={'# Mon document\n\nUn texte **en gras**, avec un [lien](https://example.com).'}
+  />
+);
+```
+
+## Affichage et édition
+
+`value` est la chaîne Markdown à afficher. Les changements de cette prop actualisent le rendu. Le composant ne modifie pas la chaîne et n'affiche aucun bouton, menu ou champ d'édition. Pour éditer le même document, utilisez `BlockEditor` avec le même état.
+
+```tsx
+import React, { useState } from 'react';
+import { Vertical } from 'app-studio';
+import { BlockEditor, Markdown } from '@app-studio/components';
+
+export const EditorWithPreview = () => {
+  const [value, setValue] = useState('# Notes\n\nCommencez ici.');
+  return (
+    <Vertical gap={24}>
+      <BlockEditor label="Édition" value={value} onChange={setValue} />
+      <Markdown label="Aperçu" value={value} />
+    </Vertical>
+  );
+};
+```
+
+L'exemple du catalogue est accessible sur `/markdown` et relie l'éditeur à son aperçu. Il contient aussi les neuf types de blocs, les accents, les emojis composés, les liens et un document affiché en source.
+
+## Syntaxe prise en charge
+
+Le rendu couvre les paragraphes, titres de niveaux 1 à 3, listes à puces et numérotées avec indentation, citations, blocs de code délimités et tableaux à séparateurs `|`. Les tableaux conservent l'alignement de leurs colonnes et défilent horizontalement lorsqu'ils dépassent la largeur disponible.
+
+Le formatage en ligne comprend gras, italique, barré, code, liens et les extensions de l'éditeur : souligné avec `<u>…</u>` et saut de ligne avec `<br>`. Ces deux extensions sont interprétées comme du formatage connu ; aucun HTML fourni n'est injecté dans le DOM. Le code utilise une police monospace, sans exécution ni moteur de coloration.
+
+Ce composant couvre le même sous-ensemble que `BlockEditor`. Il n'implémente pas tout CommonMark ou MDX. Les images, titres de niveaux 4 à 6, listes de tâches, frontmatter, liens par référence, notes de bas de page, HTML/MDX et constructions de blocs imbriquées non prises en charge provoquent un affichage du **document entier en texte source**. Le message visible explique ce choix. La chaîne originale, y compris ses retours à la ligne, est conservée dans cet affichage ; aucune expression MDX, balise HTML ni URL dangereuse n'est exécutée.
+
+Personnalisez le message avec `labels.sourceFallback` :
+
+```tsx
+import React from 'react';
+import { Markdown } from '@app-studio/components';
+
+export const PreservedSource = () => (
+  <Markdown
+    value={'<CustomComponent value={42} />'}
+    labels={{ sourceFallback: 'Syntaxe non prise en charge : affichage du texte source.' }}
+  />
+);
+```
+
+## Liens
+
+Seuls les liens `http:`, `https:`, `mailto:`, `tel:` et les adresses relatives sont acceptés. Sur le web, ils sont des liens normaux, accessibles au clavier avec un focus visible. Sur React Native, les liens sont des textes pressables et s'ouvrent avec `Linking.openURL`. Si la plateforme refuse l'ouverture, le document reste affiché.
+
+`onLinkPress(url)` remplace la navigation par défaut. Utilisez-le notamment pour relier les adresses relatives à la navigation de votre application native, ou pour gérer vous-même les erreurs d'ouverture. Le callback n'est appelé qu'à l'activation du lien, une fois par activation.
+
+```tsx
+import React from 'react';
+import { Markdown } from '@app-studio/components';
+
+export const RoutedDocument = () => (
+  <Markdown
+    value={'[Ouvrir les notes](/notes)'}
+    onLinkPress={(url) => console.log('Navigation gérée par l’application', url)}
+  />
+);
+```
+
+## Props et styles
+
+| Prop | Description |
+| --- | --- |
+| `value: string` | Document Markdown à afficher. |
+| `label?: string` | Nom accessible du document. |
+| `onLinkPress?: (url: string) => void` | Navigation fournie par l'application. |
+| `labels?: { sourceFallback?: string }` | Message de repli en texte source. |
+| `views` | Styles `container`, `block`, `source` et `notice`. |
+
+Les props de vue App Studio s'appliquent au conteneur. `MarkdownProps` est exporté depuis `@app-studio/components`. Le modèle de blocs reste interne.
+
+Sur React Native, le rendu utilise les primitives App Studio, sans WebView. Le code et la source utilisent Menlo sur iOS et monospace sur Android. L'affichage source est sélectionnable. Les liens en ligne restent dans les primitives de texte pour respecter la mise en page native.
+
+## Validation
+
+Les tests ciblés couvrent le rendu web sans édition, les mises à jour de props, l'isolation entre composants, le code inerte, les tableaux, l'indentation, les liens sûrs, le repli en source et les accents/emojis. Les tests de l'adaptateur natif utilisent des hôtes simulés et vérifient les textes en ligne, la police et les callbacks de navigation ; ils ne remplacent pas une vérification sur appareil.
+
+Les 74 tests ciblés du rendu Markdown et de l'éditeur passent, ainsi que les vérifications TypeScript et les builds du package web/native. L'aperçu en direct, les accents/emojis, le callback de lien et le code inerte ont été vérifiés dans le navigateur intégré de Codex.
+
+Les interactions réelles dans Chrome, Firefox, Safari, iOS et Android restent à vérifier pour ce composant. Le rendu des liens et des tableaux sur appareils constitue la principale limite de validation.

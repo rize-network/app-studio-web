@@ -26,9 +26,7 @@ export const FormikAutoFocusExample = () => {
             <FormikTextField name="firstName" label="First name" />
             <FormikTextField name="lastName" label="Last name" />
             <FormikPassword name="password" label="Password" />
-            <Button type="submit" onClick={handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={handleSubmit}>Submit</Button>
             {submitted && (
               <Text color="color-green-600">Submitted: {submitted}</Text>
             )}

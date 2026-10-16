@@ -127,7 +127,7 @@ function MyForm() {
         returnKeyType="done"
         onSubmitEditing={handleSubmit}
       />
-      <Button type="submit" onClick={handleSubmit}>Submit</Button>
+      <Button  onClick={handleSubmit}>Submit</Button>
     </Form>
   );
 }
@@ -149,7 +149,7 @@ function MyFormikForm() {
       {({ handleSubmit }) => (
         <FormikForm autoFocus>
           <FormikTextField name="name" label="Name" />
-          <Button type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button  onClick={handleSubmit}>Submit</Button>
         </FormikForm>
       )}
     </Formik>

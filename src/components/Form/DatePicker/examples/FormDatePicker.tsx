@@ -15,9 +15,7 @@ export const FormDatePicker = () => {
     <form onSubmit={handleSubmit}>
       <Horizontal gap={10}>
         <DatePicker id="date" name="datePicker" />
-        <Button type="submit" marginTop={10}>
-          Submit
-        </Button>
+        <Button marginTop={10}>Submit</Button>
       </Horizontal>
     </form>
   );

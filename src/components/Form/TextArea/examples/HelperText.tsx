@@ -46,7 +46,7 @@ export const HelperTextArea = () => {
           error={!!formErrors.guess}
           onChange={handleChange('guess')}
         />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Vertical>

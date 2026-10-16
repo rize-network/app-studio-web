@@ -7,6 +7,6 @@ export const ExternalButton = () => (
     <Button type="button" autofocus>
       Button
     </Button>
-    <Button type="submit">Button</Button>
+    <Button>Button</Button>
   </Horizontal>
 );

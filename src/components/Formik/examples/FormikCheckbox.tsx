@@ -23,9 +23,7 @@ export const FormCheckboxExemple = () => {
         <FormikForm margin={10}>
           <Vertical gap={10}>
             <FormikCheckbox name="acceptTerms" label="Terms and conditions" />
-            <Button type="submit" onClick={props.handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={props.handleSubmit}>Submit</Button>
           </Vertical>
         </FormikForm>
       )}

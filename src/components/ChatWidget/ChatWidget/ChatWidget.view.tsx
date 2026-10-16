@@ -240,7 +240,6 @@ const ChatWidgetView: React.FC<ChatWidgetViewProps> = ({
             {}
             <View
               as="button"
-              type="submit"
               disabled={!hasText || disableInput || isLoading}
               {...DefaultChatWidgetStyles.sendButton}
               backgroundColor={hasText ? 'theme-primary' : 'color-gray-300'}

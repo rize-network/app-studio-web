@@ -103,11 +103,7 @@ export const FormikUploaderExample = () => {
               Uploaded {uploadedFiles.length} file(s)
             </Text>
 
-            <Button
-              type="submit"
-              alignSelf="flex-start"
-              onClick={props.handleSubmit}
-            >
+            <Button alignSelf="flex-start" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Vertical>

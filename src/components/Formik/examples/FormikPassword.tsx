@@ -18,9 +18,7 @@ export const FormikPasswordExemple = () => {
           <Vertical gap={10}>
             <FormikPassword name="password" label="Password" />
 
-            <Button type="submit" onClick={props.handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={props.handleSubmit}>Submit</Button>
           </Vertical>
         </FormikForm>
       )}

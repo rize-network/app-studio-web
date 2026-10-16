@@ -71,7 +71,6 @@ export const FormikColorInputExample = () => {
 
             <Horizontal gap={8}>
               <Button
-                type="submit"
                 variant="filled"
                 isDisabled={isSubmitting}
                 onClick={handleSubmit}

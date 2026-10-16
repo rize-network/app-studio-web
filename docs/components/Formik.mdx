@@ -3,7 +3,7 @@
 Formik integration components for form state management and validation.
 
 > **React Native:** `FormikForm` renders through the native `Form` primitive,
-> which is a `View`, not a browser form. Keep `type="submit"`/`type="reset"` for
+> which is a `View`, not a browser form. Keep ``/`type="reset"` for
 > web semantics and also wire `onClick={handleSubmit}` or
 > `onClick={handleReset}` explicitly. With `autoFocus`, single-line
 > fields use `returnKeyType`/`onSubmitEditing` to advance and submit; labels,
@@ -79,7 +79,7 @@ export const BasicFormExample = () => {
               name="agreeToTerms"
               label="I agree to the terms and conditions"
             />
-            <Button type="submit" onClick={handleSubmit}>
+            <Button  onClick={handleSubmit}>
               Submit
             </Button>
           </Vertical>
@@ -118,7 +118,7 @@ export const FormikTextFieldExample = () => {
             placeholder="Enter username"
             helperText="Your unique username"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -156,7 +156,7 @@ export const FormikTextAreaExample = () => {
             placeholder="Enter your comments"
             rows={4}
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -192,7 +192,7 @@ export const FormikCheckboxExample = () => {
             name="subscribe"
             label="Subscribe to newsletter"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -275,7 +275,7 @@ export const FormikChatInputExample = () => {
             />
 
             <Button
-              type="submit"
+              
               onClick={handleSubmit}
               disabled={!values.message?.trim()}
             >
@@ -339,7 +339,7 @@ export const FormikColorInputExample = () => {
             Preview: This is how your colors will look
           </div>
 
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -383,7 +383,7 @@ export const FormikSelectExample = () => {
             options={options}
             placeholder="Select a fruit"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -415,7 +415,7 @@ export const FormikSwitchExample = () => {
             name="darkMode"
             label="Dark Mode"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -452,7 +452,7 @@ export const FormikDatePickerExample = () => {
             label="Birthdate"
             placeholder="Select your birthdate"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -489,7 +489,7 @@ export const FormikCountryPickerExample = () => {
             label="Country"
             placeholder="Select your country"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -528,7 +528,7 @@ export const FormikPasswordExample = () => {
             label="Password"
             placeholder="Enter your password"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -573,7 +573,7 @@ export const FormikComboBoxExample = () => {
             placeholder="Select or search for a framework"
             items={items}
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -617,7 +617,7 @@ export const FormikSliderExample = () => {
             showValue
             helperText="Adjust the volume level"
           />
-          <Button type="submit" onClick={handleSubmit} marginTop={16}>
+          <Button  onClick={handleSubmit} marginTop={16}>
             Submit
           </Button>
         </FormikForm>
@@ -646,7 +646,7 @@ export const FormikIconPickerExample = () => (
           name="icon"
           label="Select Icon"
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Submit
         </Button>
       </FormikForm>
@@ -674,7 +674,7 @@ export const FormikEmojiPickerExample = () => (
           name="emoji"
           label="Select Emoji"
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Submit
         </Button>
       </FormikForm>
@@ -703,7 +703,7 @@ export const FormikOTPInputExample = () => (
           label="Verification Code"
           length={6}
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Verify
         </Button>
       </FormikForm>
@@ -736,7 +736,7 @@ export const FormikRadioExample = () => (
             { label: 'Other', value: 'other' },
           ]}
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Submit
         </Button>
       </FormikForm>
@@ -768,7 +768,7 @@ export const FormikSelectorExample = () => (
             { label: 'Pro', value: 'pro', description: 'Pro plan description' },
           ]}
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Submit
         </Button>
       </FormikForm>
@@ -797,7 +797,7 @@ export const FormikTagInputExample = () => (
           label="Tags"
           placeholder="Type and press enter..."
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Submit
         </Button>
       </FormikForm>
@@ -825,7 +825,7 @@ export const FormikToggleExample = () => (
           name="notifications"
           label="Enable Notifications"
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Submit
         </Button>
       </FormikForm>
@@ -858,7 +858,7 @@ export const FormikToggleGroupExample = () => (
             { label: 'Right', value: 'right' },
           ]}
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Submit
         </Button>
       </FormikForm>
@@ -887,7 +887,7 @@ export const FormikUploaderExample = () => (
           label="Upload Files"
           multiple
         />
-        <Button type="submit" onClick={handleSubmit} marginTop={16}>
+        <Button  onClick={handleSubmit} marginTop={16}>
           Submit
         </Button>
       </FormikForm>

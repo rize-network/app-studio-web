@@ -41,7 +41,7 @@ export const FormikOTPInputExample = () => {
               size="lg"
               isAutoFocus
             />
-            <Button type="submit" onClick={handleSubmit} isAuto>
+            <Button onClick={handleSubmit} isAuto>
               Verify
             </Button>
           </Vertical>
@@ -91,7 +91,7 @@ export const FormikCustomOTPInputExample = () => {
                 },
               }}
             />
-            <Button type="submit" onClick={handleSubmit} isAuto>
+            <Button onClick={handleSubmit} isAuto>
               Submit
             </Button>
           </Vertical>
@@ -136,7 +136,7 @@ export const FormikPasswordOTPExample = () => {
               onComplete={handleComplete}
               isAutoFocus
             />
-            <Button type="submit" onClick={handleSubmit} isAuto>
+            <Button onClick={handleSubmit} isAuto>
               Verify PIN
             </Button>
           </Vertical>
@@ -204,7 +204,7 @@ export const FormikStepValuesOTPExample = () => {
               set
             </Text>
 
-            <Button type="submit" onClick={handleSubmit} isAuto>
+            <Button onClick={handleSubmit} isAuto>
               Submit PIN
             </Button>
           </Vertical>

@@ -39,6 +39,7 @@
     "baseUrl": "./",
     "rootDir": "./",
     "paths": {
+      "react": ["./node_modules/@types/react"],
       "src/*": ["./src/*"],
     },
     "strict": true,
@@ -51,5 +52,5 @@
   },
   "noEmit": false,
   "include": ["./src", "./src/types/*.d.ts"],
-  "exclude": ["./bot", "**/*.native.tsx", "**/*.native.ts"]
+  "exclude": ["./bot", "**/*.native.tsx", "**/*.native.ts", "**/*-native.test.tsx"]
 }

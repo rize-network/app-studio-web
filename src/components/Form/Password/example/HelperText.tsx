@@ -58,9 +58,7 @@ export const HelperTextPassword = () => {
           error={formErrors.password}
           onChange={handleChange('password')}
         />
-        <Button type="submit" height="40px">
-          Submit
-        </Button>
+        <Button height="40px">Submit</Button>
       </Vertical>
     </form>
   );

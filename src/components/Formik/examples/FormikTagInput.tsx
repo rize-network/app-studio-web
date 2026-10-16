@@ -130,7 +130,6 @@ export const FormikTagInputExample = () => {
               {/* Submit Button */}
               <Horizontal justifyContent="flex-start">
                 <Button
-                  type="submit"
                   variant="filled"
                   size="md"
                   isLoading={isSubmitting}

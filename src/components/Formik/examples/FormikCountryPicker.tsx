@@ -21,11 +21,7 @@ export const FormikCountryPickerExemple = () => {
               name="country"
               placeholder="CountryPicker an item..."
             />
-            <Button
-              type="submit"
-              alignSelf="center"
-              onClick={props.handleSubmit}
-            >
+            <Button alignSelf="center" onClick={props.handleSubmit}>
               Submit
             </Button>
           </Vertical>

@@ -119,7 +119,7 @@ export const BasicForm = () => {
               label="I agree to the terms and conditions"
             />
             <Button
-              type="submit"
+              
               onClick={handleSubmit}
               isLoading={isSubmitting}
               disabled={isSubmitting}
@@ -254,7 +254,7 @@ export const AdvancedForm = () => {
               label="Publish immediately"
             />
 
-            <Button type="submit" onClick={handleSubmit}>
+            <Button  onClick={handleSubmit}>
               Create Article
             </Button>
           </Vertical>
@@ -342,7 +342,7 @@ export const ValidationForm = () => {
               error={touched.confirmPassword && errors.confirmPassword}
             />
 
-            <Button type="submit" onClick={handleSubmit}>
+            <Button  onClick={handleSubmit}>
               Register
             </Button>
           </Vertical>
@@ -456,7 +456,7 @@ export const DynamicForm = () => {
               )}
             </FieldArray>
 
-            <Button type="submit" onClick={handleSubmit}>
+            <Button  onClick={handleSubmit}>
               Create Project
             </Button>
           </Vertical>
@@ -695,7 +695,7 @@ const FormWithUpload = () => {
         <FormikForm>
           <FormikTextField name="name" label="Name" />
           <Uploader onFileSelect={setUploadedFile} />
-          <Button type="submit" onClick={handleSubmit}>Submit</Button>
+          <Button  onClick={handleSubmit}>Submit</Button>
         </FormikForm>
       )}
     </Formik>

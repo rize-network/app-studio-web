@@ -69,7 +69,7 @@ export const ErrorInput = () => {
           error={!!formErrors.email}
           onChange={handleChange('email')}
         />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Vertical>

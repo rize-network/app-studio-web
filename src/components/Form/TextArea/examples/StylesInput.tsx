@@ -30,7 +30,7 @@ export const StyledArea = () => {
             label: { color: 'theme-primary' },
           }}
         />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Horizontal>

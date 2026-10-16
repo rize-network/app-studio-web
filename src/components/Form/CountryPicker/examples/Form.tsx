@@ -19,9 +19,7 @@ export const FormCountryPicker = () => {
           name="formItem"
           placeholder="CountryPicker an item..."
         />
-        <Button type="submit" alignSelf="center">
-          Submit
-        </Button>
+        <Button alignSelf="center">Submit</Button>
       </Vertical>
     </form>
   );

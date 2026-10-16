@@ -112,9 +112,7 @@ export const FormikSliderExample = () => {
             </Vertical>
 
             {/* Submit button */}
-            <Button type="submit" onClick={handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={handleSubmit}>Submit</Button>
           </Vertical>
         </FormikForm>
       )}

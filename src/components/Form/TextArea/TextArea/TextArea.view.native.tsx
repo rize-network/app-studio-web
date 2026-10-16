@@ -51,6 +51,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
   setIsFocused = () => {},
   setIsHovered = () => {},
   onChangeText,
+  inputRef,
   views = { label: {}, helperText: {} },
   ...props
 }) => {
@@ -137,6 +138,7 @@ const TextAreaView: React.FC<TextAreaViewProps> = ({
             </FieldLabel>
           )}
           <Input
+            ref={inputRef}
             id={id}
             name={name}
             multiline

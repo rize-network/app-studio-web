@@ -760,7 +760,7 @@ const schema = Yup.object({
         <FormikTextField name="lastName" label="Last Name" placeholder="Enter your last name" />
         <FormikTextField name="email" label="Email" placeholder="Enter your email" type="email" />
         <FormikCheckbox name="agreeToTerms" label="I agree to the terms and conditions" />
-        <Button type="submit" onClick={handleSubmit} isLoading={isSubmitting}>
+        <Button  onClick={handleSubmit} isLoading={isSubmitting}>
           Submit
         </Button>
       </Vertical>
@@ -798,7 +798,7 @@ const schema = Yup.object({
         <FormikSlider name="priority" label="Priority (1-10)" min={1} max={10} step={1} />
         <FormikTagInput name="tags" label="Tags" placeholder="Add tags..." />
         <FormikSwitch name="isPublished" label="Publish immediately" />
-        <Button type="submit" onClick={handleSubmit}>Create Article</Button>
+        <Button  onClick={handleSubmit}>Create Article</Button>
       </Vertical>
     </FormikForm>
   )}
@@ -1086,7 +1086,7 @@ import { ThemeProvider } from 'app-studio';
             <FormikTextField name="name" label="Name" placeholder="Your name" />
             <FormikTextField name="email" label="Email" type="email" placeholder="your@email.com" />
             <FormikTextArea name="message" label="Message" placeholder="Your message" maxRows={6} />
-            <Button type="submit" onClick={handleSubmit} isLoading={isSubmitting} isFullWidth>
+            <Button  onClick={handleSubmit} isLoading={isSubmitting} isFullWidth>
               Send Message
             </Button>
           </Vertical>
@@ -1171,7 +1171,7 @@ Group related components together and use proper hierarchy:
   {({ handleSubmit, isSubmitting, errors }) => (
     <FormikForm>
       <FormikTextField name="email" label="Email" error={errors.email} />
-      <Button type="submit" onClick={handleSubmit} isLoading={isSubmitting} disabled={isSubmitting}>
+      <Button  onClick={handleSubmit} isLoading={isSubmitting} disabled={isSubmitting}>
         {isSubmitting ? 'Submitting...' : 'Submit'}
       </Button>
     </FormikForm>
@@ -1250,3 +1250,7 @@ For detailed documentation on each component, refer to:
 - Set `animationLoop="infinite"` for infinite loops
 - Set `animationLoop={3}` for specific number of loops
 - Ensure `animate` prop is properly configured
+
+BlockEditor: Markdown block editing on web and React Native without an external editor engine. Supports value/defaultValue, onChange(markdown), isDisabled/isReadOnly, optional generate(prompt, fragment, selection|section), labels/views and source fallback. See docs/components/BlockEditor.mdx.
+Markdown: displays the BlockEditor Markdown subset on web and React Native, without editing controls or external dependencies. Supports value, label, onLinkPress(url), labels.sourceFallback and views. Safe links activate; unsupported HTML/MDX and other constructs are shown as inert source. See docs/components/Markdown.mdx and /markdown in the example catalogue.
+EmojiPicker: shared DefaultEmojiData and QuickReactionEmojis; mode="reaction", trigger, quickEmojis, selectedEmojis and labels support reusable conversation reactions. See docs/components/EmojiPicker.mdx.

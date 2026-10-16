@@ -1,5 +1,11 @@
-import React from 'react';
-import { View, Horizontal, Text, useTheme } from 'app-studio';
+import React, {
+  useCallback,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import { View, Horizontal, Text } from 'app-studio';
 import { EmojiPickerViewProps } from './EmojiPicker.props';
 import {
   DefaultEmojiPickerStyles,
@@ -9,13 +15,14 @@ import {
   CategoryLabels,
 } from './EmojiPicker.style';
 import { TextField } from '../../Form/TextField/TextField';
-import { ChevronIcon } from '../../Icon/Icon';
-// Defines the presentational component for the EmojiPicker, responsible for rendering the UI based on provided props and state. It handles the layout and visual aspects without managing internal state or complex logic.
+import { Portal } from '../../Portal/Portal';
+import { Emoji } from './EmojiPicker.type';
+
 const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
   id,
   name,
   label,
-  placeholder = 'Select an emoji',
+  placeholder,
   helperText,
   views = {},
   size = 'md',
@@ -52,174 +59,358 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
   handleClose,
   triggerRef,
   dropdownRef,
-  onChange,
-  onOpen,
-  onClose,
-  onEmojiSelect,
-  customEmojis,
-  closeOnSelect,
-  maxRecentEmojis,
-  value,
-  defaultValue,
+  mode = 'picker',
+  trigger,
+  quickEmojis: _quick,
+  selectedEmojis = [],
+  expanded,
+  setExpanded,
+  quickEmojiData,
+  text,
+  labels: _labels,
+  onChange: _change,
+  onOpen: _open,
+  onClose: _close,
+  onEmojiSelect: _select,
+  customEmojis: _custom,
+  closeOnSelect: _closeOnSelect,
+  maxRecentEmojis: _max,
+  value: _value,
+  defaultValue: _default,
   ...props
 }) => {
-  // Utilizes the `useTheme` hook to retrieve the `getColor` utility, allowing access to theme-defined color values for consistent styling.
-  const { getColor } = useTheme();
-  // Calculates the final styles for the main container by merging default container styles with any custom styles provided through the `views.container` prop.
-  const containerStyles = {
-    ...DefaultEmojiPickerStyles.container,
-    ...views?.container,
-  };
-  // Calculates the final styles for the emoji picker's trigger element, incorporating default styles, size, shape, variant, and dynamic adjustments based on `error` or `isDisabled` states, along with custom `views.trigger` styles.
-  const triggerStyles = {
-    ...DefaultEmojiPickerStyles.trigger,
-    ...Sizes[size],
-    ...Shapes[shape],
-    ...Variants[variant],
-    ...(error && { borderColor: 'color-red-500' }),
-    ...(isDisabled && { opacity: 0.6, cursor: 'not-allowed' }),
-    ...(!isDisabled &&
-      !isReadOnly && {
-        _hover: {
-          borderColor: 'color-gray-300',
-        },
-      }),
-    ...views?.trigger,
-  };
-  // Calculates the final styles for the dropdown panel by merging default dropdown styles with any custom styles provided through the `views.dropdown` prop.
-  const dropdownStyles = {
-    ...DefaultEmojiPickerStyles.dropdown,
-    ...views?.dropdown,
-  };
-  // Calculates the final styles for the category tabs container by merging default styles with any custom styles provided through the `views.categoryTabs` prop.
-  const categoryTabsStyles = {
-    ...DefaultEmojiPickerStyles.categoryTabs,
-    ...views?.categoryTabs,
-  };
-  // Calculates the final styles for the emoji grid container by merging default styles with any custom styles provided through the `views.emojiGrid` prop.
-  const emojiGridStyles = {
-    ...DefaultEmojiPickerStyles.emojiGrid,
-    ...views?.emojiGrid,
-  };
-  // Filters the `enabledCategories` to determine which categories should actually be displayed. The 'recent' category is only included if `showRecentEmojis` is true and there are recent emojis available.
-  const availableCategories = enabledCategories.filter((category) => {
-    if (category === 'recent') {
-      return showRecentEmojis && recentEmojis.length > 0;
-    }
-    return true;
+  const generatedId = useId();
+  const panelId = `${id || generatedId}-panel`;
+  const previousOpen = useRef(false);
+  const setPanelRef = useCallback(
+    (node: HTMLElement | null) => {
+      dropdownRef.current = node;
+      node
+        ?.querySelector<HTMLElement>('input,button')
+        ?.focus({ preventScroll: true });
+    },
+    [dropdownRef]
+  );
+  const [position, setPosition] = useState({
+    top: 0,
+    left: 0,
+    width: 320,
+    maxHeight: 400,
   });
+  const availableCategories = enabledCategories.filter(
+    (category) =>
+      category !== 'recent' || (showRecentEmojis && recentEmojis.length > 0)
+  );
+  useLayoutEffect(() => {
+    if (!isOpen) {
+      if (
+        previousOpen.current &&
+        (document.activeElement === document.body ||
+          dropdownRef.current?.contains(document.activeElement))
+      )
+        triggerRef.current?.focus({ preventScroll: true });
+      previousOpen.current = false;
+      return;
+    }
+    const locate = () => {
+      const rect = triggerRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      const viewport = window.visualViewport;
+      const width = Math.min(320, (viewport?.width ?? window.innerWidth) - 16);
+      const left = viewport?.offsetLeft ?? 0;
+      const top = viewport?.offsetTop ?? 0;
+      const bottom = top + (viewport?.height ?? window.innerHeight) - 8;
+      if (rect.bottom < top || rect.top > bottom) {
+        handleClose();
+        return;
+      }
+      const height = expanded ? 400 : 64;
+      const above = rect.top - top - 16;
+      const below = bottom - rect.bottom - 8;
+      const upward = below < height && above > below;
+      const maxHeight = Math.min(height, Math.max(64, upward ? above : below));
+      setPosition({
+        width,
+        maxHeight,
+        left: Math.max(
+          left + 8,
+          Math.min(
+            rect.left,
+            left + (viewport?.width ?? window.innerWidth) - width - 8
+          )
+        ),
+        top: upward
+          ? Math.max(top + 8, rect.top - maxHeight - 8)
+          : rect.bottom + 8,
+      });
+    };
+    locate();
+    if (!previousOpen.current)
+      (
+        dropdownRef.current?.querySelector('input,button') as HTMLElement | null
+      )?.focus({ preventScroll: true });
+    previousOpen.current = true;
+    window.addEventListener('scroll', locate, true);
+    window.addEventListener('resize', locate);
+    window.visualViewport?.addEventListener('resize', locate);
+    return () => {
+      window.removeEventListener('scroll', locate, true);
+      window.removeEventListener('resize', locate);
+      window.visualViewport?.removeEventListener('resize', locate);
+    };
+  }, [isOpen, expanded]);
+  const choose = (emoji: Emoji) => handleEmojiSelect(emoji);
+  const emojiButton = (emoji: Emoji, quick = false) => (
+    <View
+      key={emoji.emoji}
+      as="button"
+      type="button"
+      data-emoji-choice={emoji.emoji}
+      aria-label={emoji.name}
+      aria-pressed={
+        mode === 'reaction'
+          ? selectedEmojis.includes(emoji.emoji)
+          : selectedEmoji === emoji.emoji
+      }
+      disabled={isDisabled || isReadOnly}
+      {...DefaultEmojiPickerStyles.emoji}
+      width={40}
+      height={44}
+      flex={quick ? 1 : undefined}
+      borderWidth={0}
+      backgroundColor={
+        selectedEmojis.includes(emoji.emoji) ? 'color-blue-50' : 'transparent'
+      }
+      _hover={{ backgroundColor: 'color-gray-100' }}
+      _focusVisible={{ outline: '2px solid', outlineColor: 'theme-primary' }}
+      {...views.emoji}
+      onClick={() => choose(emoji)}
+      title={emoji.name}
+    >
+      {emoji.emoji}
+    </View>
+  );
   return (
-    <View id={id} {...containerStyles} {...props}>
+    <View
+      id={id}
+      {...DefaultEmojiPickerStyles.container}
+      {...views.container}
+      {...props}
+    >
       {label && (
-        <Text
-          fontSize={size === 'xs' ? '12px' : size === 'sm' ? '14px' : '16px'}
-          fontWeight="500"
-          color="color-gray-700"
-          marginBottom="4px"
-          {...views?.label}
-        >
+        <Text marginBottom={4} {...views.label}>
           {label}
         </Text>
       )}
       <View
         ref={triggerRef}
-        onClick={isDisabled || isReadOnly ? undefined : handleToggle}
-        {...triggerStyles}
+        as="button"
+        type="button"
+        name={name}
+        disabled={isDisabled || isReadOnly}
+        aria-label={
+          props['aria-label'] ||
+          label ||
+          (mode === 'reaction' ? text.reaction : text.select)
+        }
+        aria-haspopup="dialog"
+        aria-expanded={isOpen}
+        aria-controls={isOpen ? panelId : undefined}
+        {...DefaultEmojiPickerStyles.trigger}
+        {...Sizes[size]}
+        {...Shapes[shape]}
+        {...Variants[variant]}
+        borderColor={error ? 'theme-error' : 'color-gray-200'}
+        opacity={isDisabled ? 0.6 : 1}
+        _focusVisible={{ outline: '2px solid', outlineColor: 'theme-primary' }}
+        {...views.trigger}
+        onClick={handleToggle}
       >
-        <Horizontal alignItems="center" gap={8}>
-          <Text
-            color={selectedEmoji ? 'color-gray-800' : 'color-gray-500'}
-            fontSize="inherit"
-          >
-            {selectedEmoji || placeholder}
-          </Text>
-        </Horizontal>
-        {!isReadOnly && !isDisabled && (
-          <ChevronIcon
-            widthHeight={16}
-            color="color-gray-500"
-            orientation={isOpen ? 'up' : 'down'}
-          />
+        {trigger ?? (
+          <Horizontal gap={8}>
+            <Text>
+              {mode === 'reaction'
+                ? '☺ +'
+                : selectedEmoji || placeholder || text.select}
+            </Text>
+            {mode !== 'reaction' && (
+              <Text aria-hidden="true">{isOpen ? '▴' : '▾'}</Text>
+            )}
+          </Horizontal>
         )}
       </View>
       {isOpen && (
-        <View ref={dropdownRef} {...dropdownStyles}>
-          {}
-          {showSearch && (
-            <View
-              {...DefaultEmojiPickerStyles.searchInput}
-              {...views?.searchInput}
-            >
-              <TextField
-                placeholder="Search emojis..."
-                value={searchQuery}
-                onChange={handleSearchChange}
-                size="sm"
-              />
-            </View>
-          )}
-          {}
-          {showCategories && (
-            <View {...categoryTabsStyles}>
-              {availableCategories.map((category) => (
+        <Portal>
+          <View
+            ref={setPanelRef}
+            id={panelId}
+            role="dialog"
+            aria-label={mode === 'reaction' ? text.reaction : text.select}
+            {...DefaultEmojiPickerStyles.dropdown}
+            {...views.dropdown}
+            position="fixed"
+            top={position.top}
+            left={position.left}
+            right="auto"
+            width={position.width}
+            minWidth={0}
+            maxHeight={position.maxHeight}
+            overflowY="auto"
+            padding={mode === 'reaction' && !expanded ? 8 : 12}
+            zIndex={1100}
+            onKeyDown={(event: React.KeyboardEvent) => {
+              if (event.key === 'Escape') {
+                event.preventDefault();
+                event.stopPropagation();
+                handleClose();
+                triggerRef.current?.focus();
+                return;
+              }
+              const buttons = Array.from(
+                dropdownRef.current?.querySelectorAll(
+                  'button:not(:disabled)'
+                ) || []
+              ) as HTMLButtonElement[];
+              const current = buttons.indexOf(
+                document.activeElement as HTMLButtonElement
+              );
+              if (event.key === 'Tab') {
+                if (
+                  (event.shiftKey && current <= 0) ||
+                  (!event.shiftKey && current === buttons.length - 1)
+                )
+                  handleClose();
+                return;
+              }
+              if (
+                ![
+                  'ArrowLeft',
+                  'ArrowRight',
+                  'ArrowUp',
+                  'ArrowDown',
+                  'Home',
+                  'End',
+                ].includes(event.key) ||
+                !buttons.length
+              )
+                return;
+              if (
+                (event.target as HTMLElement).tagName === 'INPUT' &&
+                event.key !== 'ArrowDown'
+              )
+                return;
+              event.preventDefault();
+              const inGrid = (
+                document.activeElement as HTMLElement | null
+              )?.closest('[data-emoji-grid]');
+              const step =
+                ['ArrowUp', 'ArrowDown'].includes(event.key) && inGrid ? 8 : 1;
+              const next =
+                event.key === 'Home'
+                  ? 0
+                  : event.key === 'End'
+                  ? buttons.length - 1
+                  : (current +
+                      (['ArrowLeft', 'ArrowUp'].includes(event.key)
+                        ? -step
+                        : step) +
+                      buttons.length) %
+                    buttons.length;
+              buttons[next]?.focus();
+              buttons[next]?.scrollIntoView?.({ block: 'nearest' });
+            }}
+          >
+            {mode === 'reaction' && (
+              <Horizontal gap={2}>
+                {quickEmojiData.map((emoji) => emojiButton(emoji, true))}
                 <View
-                  key={category}
-                  {...DefaultEmojiPickerStyles.categoryTab}
-                  {...(activeCategory === category && {
-                    borderBottomColor: 'theme-primary',
-                    color: 'theme-primary',
-                    backgroundColor: 'color-blue-50',
-                  })}
-                  onClick={() => handleCategoryChange(category)}
-                  title={category.charAt(0).toUpperCase() + category.slice(1)}
-                  {...views?.categoryTab}
+                  as="button"
+                  type="button"
+                  disabled={isDisabled || isReadOnly}
+                  aria-label={text.more}
+                  aria-expanded={expanded}
+                  minWidth={40}
+                  minHeight={44}
+                  borderWidth={0}
+                  borderRadius={8}
+                  onClick={() => setExpanded(!expanded)}
                 >
-                  {CategoryLabels[category]}
+                  +
                 </View>
-              ))}
-            </View>
-          )}
-          {}
-          <View {...emojiGridStyles}>
-            {filteredEmojis.length > 0 ? (
-              filteredEmojis.map((emoji, index) => (
+              </Horizontal>
+            )}
+            {expanded && (
+              <>
+                {showSearch && (
+                  <View marginBottom={8} {...views.searchInput}>
+                    <TextField
+                      value={searchQuery}
+                      onChange={handleSearchChange}
+                      placeholder={text.search}
+                      aria-label={text.search}
+                      isDisabled={isDisabled || isReadOnly}
+                      size="sm"
+                    />
+                  </View>
+                )}
+                {showCategories && (
+                  <View
+                    role="tablist"
+                    aria-label={text.select}
+                    {...DefaultEmojiPickerStyles.categoryTabs}
+                    {...views.categoryTabs}
+                  >
+                    {availableCategories.map((category) => (
+                      <View
+                        key={category}
+                        as="button"
+                        type="button"
+                        role="tab"
+                        aria-label={text[category]}
+                        aria-selected={category === activeCategory}
+                        disabled={isDisabled || isReadOnly}
+                        title={text[category]}
+                        {...DefaultEmojiPickerStyles.categoryTab}
+                        borderWidth={0}
+                        minHeight={44}
+                        padding={8}
+                        backgroundColor={
+                          category === activeCategory
+                            ? 'color-blue-50'
+                            : 'transparent'
+                        }
+                        {...views.categoryTab}
+                        onClick={() => handleCategoryChange(category)}
+                      >
+                        {CategoryLabels[category]}
+                      </View>
+                    ))}
+                  </View>
+                )}
                 <View
-                  key={`${emoji.emoji}-${index}`}
-                  {...DefaultEmojiPickerStyles.emoji}
-                  onClick={() => handleEmojiSelect(emoji)}
-                  title={emoji.name}
-                  _hover={{
-                    backgroundColor: 'color-gray-50',
-                    transform: 'scale(1.05)',
-                  }}
-                  color="color-gray-800"
-                  {...views?.emoji}
+                  data-emoji-grid="true"
+                  role="group"
+                  aria-label={text.select}
+                  {...DefaultEmojiPickerStyles.emojiGrid}
+                  gridTemplateColumns="repeat(8, minmax(0, 1fr))"
+                  {...views.emojiGrid}
                 >
-                  {emoji.emoji}
+                  {filteredEmojis.map((emoji) => emojiButton(emoji))}
+                  {!filteredEmojis.length && (
+                    <Text gridColumn="1 / -1">
+                      {searchQuery ? text.empty : text.categoryEmpty}
+                    </Text>
+                  )}
                 </View>
-              ))
-            ) : (
-              <View
-                gridColumn="1 / -1"
-                padding="20px"
-                textAlign="center"
-                color="color-gray-500"
-              >
-                <Text fontSize="14px">
-                  {searchQuery
-                    ? 'No emojis found'
-                    : 'No emojis in this category'}
-                </Text>
-              </View>
+              </>
             )}
           </View>
-        </View>
+        </Portal>
       )}
       {helperText && (
         <Text
-          color={error ? 'color-red-500' : 'color-gray-600'}
-          marginTop="4px"
-          {...views?.helperText}
+          color={error ? 'theme-error' : 'theme-muted'}
+          {...views.helperText}
         >
           {helperText}
         </Text>

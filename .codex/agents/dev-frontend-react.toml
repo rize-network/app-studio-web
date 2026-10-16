@@ -2141,7 +2141,7 @@ export const MyForm = () => (
   <Modal.Container>
     <Modal.Body>
       <TextField label="Name" />
-      <Button type="submit">Save</Button>
+      <Button >Save</Button>
     </Modal.Body>
   </Modal.Container>
 )

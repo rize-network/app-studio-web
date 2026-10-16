@@ -2,6 +2,26 @@
 
 A user-friendly tool for selecting and inserting emojis into text inputs or forms.
 
+## Shared catalogue and reactions
+
+`DefaultEmojiData`, `QuickReactionEmojis`, `Emoji` and `EmojiCategory` are exported from the package. The catalogue combines the library, document editor and conversation palettes, preserving complete Unicode sequences. Search includes French and English keywords, ignores accents and searches all enabled categories. A custom emoji with the same exact Unicode string replaces its built-in record.
+
+```tsx
+import React, { useState } from 'react';
+import { EmojiPicker } from '@app-studio/components';
+
+export const Reactions = () => {
+  const [selected, setSelected] = useState(['👍']);
+  return <EmojiPicker mode="reaction" selectedEmojis={selected} onChange={emoji =>
+    setSelected(previous => previous.includes(emoji) ? previous.filter(item => item !== emoji) : [...previous, emoji])
+  } />;
+};
+```
+
+`mode` defaults to `picker`. Reaction mode opens a compact row with 👍 ❤️ 🙌 😂 😢 😮 and a More button. Set `quickEmojis` to customize the row, `selectedEmojis` to indicate your active reactions, and `trigger` to supply trigger content. Counts, requests and pending state belong to the application; use `isDisabled` while a request is pending. Recent selections are disabled by default in reaction mode.
+
+Use `labels` to translate the search, trigger, category and empty-state text. Web panels render in a portal, stay within the viewport and support keyboard navigation and Escape. Native panels use ActionSheet. Existing `value`, `onChange`, `onEmojiSelect`, controlled opening and Formik usage remain supported.
+
 ### **Import**
 ```tsx
 import { EmojiPicker } from '@app-studio/components';

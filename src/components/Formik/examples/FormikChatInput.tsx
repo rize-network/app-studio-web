@@ -89,7 +89,6 @@ export const FormikChatInputExample = () => {
               />
 
               <Button
-                type="submit"
                 onClick={formikProps.handleSubmit}
                 disabled={!formikProps.values.message?.trim()}
               >
@@ -129,9 +128,7 @@ export const FormikChatInputSimpleExample = () => {
                 shape="rounded"
               />
 
-              <Button type="submit" onClick={props.handleSubmit}>
-                Submit Feedback
-              </Button>
+              <Button onClick={props.handleSubmit}>Submit Feedback</Button>
             </Vertical>
           </FormikForm>
         )}

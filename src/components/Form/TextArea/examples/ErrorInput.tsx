@@ -45,7 +45,7 @@ export const ErrorArea = () => {
           error={!!formErrors.thoughts}
           onChange={handleChange('thoughts')}
         />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Vertical>

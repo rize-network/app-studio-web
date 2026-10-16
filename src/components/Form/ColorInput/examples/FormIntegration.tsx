@@ -56,9 +56,7 @@ export const FormIntegrationColorInput = () => {
         </Vertical>
 
         <Horizontal gap={8}>
-          <Button type="submit" variant="filled">
-            Apply Theme
-          </Button>
+          <Button variant="filled">Apply Theme</Button>
           <Button
             type="button"
             variant="outline"

@@ -56,7 +56,7 @@ export const HelperTextInput = () => {
           error={!!formErrors.lastName}
           onChange={handleChange('lastName')}
         />
-        <Button type="submit" height="40px" isAuto>
+        <Button height="40px" isAuto>
           Submit
         </Button>
       </Vertical>

@@ -1,28 +1,17 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { View, Horizontal, Text } from 'app-studio';
+import { Horizontal, Text, View } from 'app-studio';
 import { EmojiPickerViewProps } from './EmojiPicker.props';
-import {
-  DefaultEmojiPickerStyles,
-  Sizes,
-  Shapes,
-  Variants,
-  CategoryLabels,
-} from './EmojiPicker.style';
-import { TextField } from '../../Form/TextField/TextField';
-import { ChevronIcon } from '../../Icon/Icon';
+import { Sizes, Shapes, Variants, CategoryLabels } from './EmojiPicker.style';
 import { ActionSheet } from '../../ActionSheet/ActionSheet';
+import { TextField } from '../../Form/TextField/TextField';
+import { Emoji } from './EmojiPicker.type';
 
-const nativeNoInitialFocusProps = { focusable: false } as any;
-
-// React Native EmojiPicker: trigger stays inline, the picker opens as a bottom
-// sheet (ActionSheet) — the default native overlay behaviour. Category tabs are
-// a horizontal scroller; the search handler tolerates a plain string.
 const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
   id,
-  name,
+  name: _name,
   label,
-  placeholder = 'Select an emoji',
+  placeholder,
   helperText,
   views = {},
   size = 'md',
@@ -59,190 +48,193 @@ const EmojiPickerView: React.FC<EmojiPickerViewProps> = ({
   handleClose,
   triggerRef,
   dropdownRef,
-  onChange,
-  onOpen,
-  onClose,
-  onEmojiSelect,
-  customEmojis,
-  closeOnSelect,
-  maxRecentEmojis,
-  value,
-  defaultValue,
+  mode = 'picker',
+  trigger,
+  quickEmojis: _quick,
+  selectedEmojis = [],
+  expanded,
+  setExpanded,
+  quickEmojiData,
+  text,
+  labels: _labels,
+  onChange: _change,
+  onOpen: _open,
+  onClose: _close,
+  onEmojiSelect: _select,
+  customEmojis: _custom,
+  closeOnSelect: _closeOnSelect,
+  maxRecentEmojis: _max,
+  value: _value,
+  defaultValue: _default,
   ...props
 }) => {
-  const containerStyles = {
-    ...DefaultEmojiPickerStyles.container,
-    ...views?.container,
-  };
-  const triggerStyles = {
-    ...DefaultEmojiPickerStyles.trigger,
-    ...Sizes[size],
-    ...Shapes[shape],
-    ...Variants[variant],
-    ...(error && { borderColor: 'color-red-500' }),
-    ...(isDisabled && { opacity: 0.6 }),
-    ...views?.trigger,
-  };
-  const emojiGridStyles = {
-    flexDirection: 'row' as const,
-    flexWrap: 'wrap' as const,
-    justifyContent: 'flex-start' as const,
-    gap: 8,
-    paddingVertical: 4,
-    ...views?.emojiGrid,
-  };
-  const availableCategories = enabledCategories.filter((category) => {
-    if (category === 'recent') {
-      return showRecentEmojis && recentEmojis.length > 0;
-    }
-    return true;
-  });
-  const sheetHeader =
-    showSearch || showCategories ? (
-      <View paddingHorizontal={16} paddingBottom={8}>
-        {showSearch && (
-          <View paddingBottom={showCategories ? 10 : 0} {...views?.searchInput}>
-            <TextField
-              placeholder="Search emojis..."
-              value={searchQuery}
-              onChange={handleSearchChange}
-              size="sm"
-              isAutoFocus={false}
-              autoFocus={false}
-            />
-          </View>
-        )}
-        {showCategories && (
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-          >
-            <Horizontal gap={6} paddingBottom={4} {...views?.categoryTabs}>
-              {availableCategories.map((category) => (
-                <View
-                  key={category}
-                  minWidth={40}
-                  minHeight={36}
-                  paddingHorizontal={10}
-                  alignItems="center"
-                  justifyContent="center"
-                  borderRadius={999}
-                  backgroundColor={
-                    activeCategory === category
-                      ? 'color-blue-50'
-                      : 'color-gray-100'
-                  }
-                  onPress={() => handleCategoryChange(category)}
-                  onClick={() => handleCategoryChange(category)}
-                  {...views?.categoryTab}
-                >
-                  <Text
-                    fontSize={18}
-                    color={
-                      activeCategory === category
-                        ? 'theme-primary'
-                        : 'color-gray-700'
-                    }
-                  >
-                    {CategoryLabels[category]}
-                  </Text>
-                </View>
-              ))}
-            </Horizontal>
-          </ScrollView>
-        )}
-      </View>
-    ) : undefined;
+  const emojiButton = (emoji: Emoji) => (
+    <View
+      key={emoji.emoji}
+      accessibilityRole="button"
+      accessibilityLabel={emoji.name}
+      accessibilityState={{
+        disabled: isDisabled || isReadOnly,
+        selected: selectedEmojis.includes(emoji.emoji),
+      }}
+      minWidth={44}
+      minHeight={44}
+      borderRadius={8}
+      alignItems="center"
+      justifyContent="center"
+      backgroundColor={
+        selectedEmojis.includes(emoji.emoji) ? 'color-blue-50' : 'transparent'
+      }
+      {...views.emoji}
+      onPress={
+        isDisabled || isReadOnly ? undefined : () => handleEmojiSelect(emoji)
+      }
+    >
+      <Text fontSize={24}>{emoji.emoji}</Text>
+    </View>
+  );
   return (
-    <View id={id} {...containerStyles} {...props}>
+    <View id={id} {...views.container} {...props}>
       {label && (
-        <Text
-          fontSize={size === 'xs' ? '12px' : size === 'sm' ? '14px' : '16px'}
-          fontWeight="500"
-          color="color-gray-700"
-          marginBottom="4px"
-          {...views?.label}
-        >
+        <Text marginBottom={4} {...views.label}>
           {label}
         </Text>
       )}
       <View
         ref={triggerRef}
+        accessibilityRole="button"
+        accessibilityLabel={
+          props['aria-label'] ||
+          label ||
+          (mode === 'reaction' ? text.reaction : text.select)
+        }
+        accessibilityState={{
+          disabled: isDisabled || isReadOnly,
+          expanded: isOpen,
+        }}
+        minHeight={44}
+        alignItems="center"
+        justifyContent="center"
+        {...Sizes[size]}
+        {...Shapes[shape]}
+        {...Variants[variant]}
+        {...views.trigger}
         onPress={isDisabled || isReadOnly ? undefined : handleToggle}
-        onClick={isDisabled || isReadOnly ? undefined : handleToggle}
-        {...triggerStyles}
-        {...nativeNoInitialFocusProps}
       >
-        <Horizontal alignItems="center" gap={8}>
-          <Text
-            color={selectedEmoji ? 'color-gray-800' : 'color-gray-500'}
-            fontSize="inherit"
-          >
-            {selectedEmoji || placeholder}
+        {trigger !== undefined ? (
+          typeof trigger === 'string' ? (
+            <Text>{trigger}</Text>
+          ) : (
+            trigger
+          )
+        ) : (
+          <Text>
+            {mode === 'reaction'
+              ? '☺ +'
+              : selectedEmoji || placeholder || text.select}
           </Text>
-        </Horizontal>
-        {!isReadOnly && !isDisabled && (
-          <ChevronIcon
-            widthHeight={16}
-            color="color-gray-500"
-            orientation={isOpen ? 'up' : 'down'}
-          />
         )}
       </View>
-
       <ActionSheet
         isOpen={isOpen}
         onClose={handleClose}
-        title={typeof label === 'string' ? label : 'Select an emoji'}
-        size={size === 'xs' || size === 'sm' ? 'sm' : 'md'}
+        title={label || (mode === 'reaction' ? text.reaction : text.select)}
         maxHeight="82%"
         showCancel
-        header={sheetHeader}
-        views={{ sheet: views?.dropdown }}
+        views={{ sheet: views.dropdown }}
       >
-        <View ref={dropdownRef} paddingHorizontal={16} paddingBottom={12}>
-          <View {...emojiGridStyles}>
-            {filteredEmojis.length > 0 ? (
-              filteredEmojis.map((emoji, index) => (
-                <View
-                  key={`${emoji.emoji}-${index}`}
-                  {...DefaultEmojiPickerStyles.emoji}
-                  width="44px"
-                  height="44px"
-                  borderRadius={12}
-                  backgroundColor={
-                    selectedEmoji === emoji.emoji
-                      ? 'color-blue-50'
-                      : 'transparent'
-                  }
-                  onPress={() => handleEmojiSelect(emoji)}
-                  onClick={() => handleEmojiSelect(emoji)}
-                  {...views?.emoji}
-                >
-                  <Text fontSize={22} color="color-gray-800">
-                    {emoji.emoji}
-                  </Text>
-                </View>
-              ))
-            ) : (
-              <View padding="20px" alignItems="center" width="100%">
-                <Text fontSize="14px" color="color-gray-500">
-                  {searchQuery
-                    ? 'No emojis found'
-                    : 'No emojis in this category'}
-                </Text>
+        <View ref={dropdownRef} padding={12}>
+          {mode === 'reaction' && (
+            <Horizontal gap={2} flexWrap="wrap">
+              {quickEmojiData.map(emojiButton)}
+              <View
+                accessibilityRole="button"
+                accessibilityLabel={text.more}
+                accessibilityState={{ disabled: isDisabled || isReadOnly }}
+                minWidth={44}
+                minHeight={44}
+                onPress={
+                  isDisabled || isReadOnly
+                    ? undefined
+                    : () => setExpanded(!expanded)
+                }
+              >
+                <Text fontSize={24}>+</Text>
               </View>
-            )}
-          </View>
+            </Horizontal>
+          )}
+          {expanded && (
+            <>
+              {showSearch && (
+                <View marginBottom={8} {...views.searchInput}>
+                  <TextField
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                    placeholder={text.search}
+                    aria-label={text.search}
+                    isDisabled={isDisabled || isReadOnly}
+                  />
+                </View>
+              )}
+              {showCategories && (
+                <ScrollView horizontal keyboardShouldPersistTaps="handled">
+                  <Horizontal gap={4} {...views.categoryTabs}>
+                    {enabledCategories
+                      .filter(
+                        (category) =>
+                          category !== 'recent' ||
+                          (showRecentEmojis && recentEmojis.length)
+                      )
+                      .map((category) => (
+                        <View
+                          key={category}
+                          accessibilityRole="tab"
+                          accessibilityLabel={text[category]}
+                          accessibilityState={{
+                            selected: category === activeCategory,
+                          }}
+                          minWidth={44}
+                          minHeight={44}
+                          alignItems="center"
+                          justifyContent="center"
+                          borderRadius={8}
+                          backgroundColor={
+                            category === activeCategory
+                              ? 'color-blue-50'
+                              : 'transparent'
+                          }
+                          {...views.categoryTab}
+                          onPress={
+                            isDisabled || isReadOnly
+                              ? undefined
+                              : () => handleCategoryChange(category)
+                          }
+                        >
+                          <Text fontSize={20}>{CategoryLabels[category]}</Text>
+                        </View>
+                      ))}
+                  </Horizontal>
+                </ScrollView>
+              )}
+              <View
+                flexDirection="row"
+                flexWrap="wrap"
+                gap={4}
+                {...views.emojiGrid}
+              >
+                {filteredEmojis.map(emojiButton)}
+                {!filteredEmojis.length && (
+                  <Text>{searchQuery ? text.empty : text.categoryEmpty}</Text>
+                )}
+              </View>
+            </>
+          )}
         </View>
       </ActionSheet>
-
       {helperText && (
         <Text
-          color={error ? 'color-red-500' : 'color-gray-600'}
-          marginTop="4px"
-          {...views?.helperText}
+          color={error ? 'theme-error' : 'theme-muted'}
+          {...views.helperText}
         >
           {helperText}
         </Text>

@@ -16,7 +16,7 @@ export const FormSwitch = () => {
       <Vertical gap={10}>
         <Label> Without Formik</Label>
         <Switch id="toggleFormik" name="toggleFormik" />
-        <Button type="submit">Submit</Button>
+        <Button>Submit</Button>
       </Vertical>
     </form>
   );

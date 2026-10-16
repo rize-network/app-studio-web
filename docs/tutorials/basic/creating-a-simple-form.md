@@ -196,7 +196,7 @@ function ContactForm() {
               isRequired
             />
             
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button  isLoading={isSubmitting}>
               Submit
             </Button>
           </Vertical>
@@ -341,7 +341,7 @@ function ContactForm() {
               error={errors.message}
             />
             
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button  isLoading={isSubmitting}>
               Submit
             </Button>
           </Vertical>
@@ -439,7 +439,7 @@ function ContactForm() {
                   isRequired
                 />
                 
-                <Button type="submit" isLoading={isSubmitting}>
+                <Button  isLoading={isSubmitting}>
                   Submit
                 </Button>
               </Vertical>
@@ -540,7 +540,7 @@ function ContactForm() {
                   isRequired
                 />
                 
-                <Button type="submit" isLoading={isSubmitting} isFilled>
+                <Button  isLoading={isSubmitting} isFilled>
                   Submit
                 </Button>
               </Vertical>

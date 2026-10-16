@@ -196,7 +196,6 @@ export const MessageInput = forwardRef<HTMLTextAreaElement, MessageInputProps>(
             </View>
           </Horizontal>
           <Button
-            type="submit"
             onClick={onSubmit}
             height="36px"
             minWidth="36px"

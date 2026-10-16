@@ -55,6 +55,21 @@ export * from './DropZone/DropZone';
 export * from './DropdownMenu/DropdownMenu';
 export * from './ColorPicker/ColorPicker';
 export * from './EmojiPicker/EmojiPicker';
+export * from './EmojiPicker/EmojiPicker/EmojiPicker.data';
+export type {
+  EmojiPickerProps,
+  EmojiPickerLabels,
+} from './EmojiPicker/EmojiPicker/EmojiPicker.props';
+export type {
+  Emoji,
+  EmojiCategory,
+  EmojiData,
+  EmojiPickerStyles,
+} from './EmojiPicker/EmojiPicker/EmojiPicker.type';
+export * from './BlockEditor/BlockEditor';
+export * from './BlockEditor/BlockEditor/BlockEditor.props';
+export * from './Markdown/Markdown';
+export * from './Markdown/Markdown/Markdown.props';
 export * from './IconPicker/IconPicker';
 export * from './Gradient/Gradient';
 export * from './HoverCard/HoverCard';

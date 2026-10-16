@@ -18,9 +18,7 @@ export const FormikDatePickerExemple = () => {
         <FormikForm>
           <Horizontal gap={10}>
             <FormikDatePicker id="selectDate" name="selectDate" />
-            <Button type="submit" onClick={props.handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={props.handleSubmit}>Submit</Button>
           </Horizontal>
         </FormikForm>
       )}

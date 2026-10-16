@@ -288,7 +288,7 @@ function MyForm() {
     <Form onSubmit={handleSubmit} display="flex" flexDirection="column" gap={12}>
       <Input name="username" placeholder="Username" padding={8} borderRadius={4} border="1px solid color-gray-300" />
       <Input name="password" type="password" placeholder="Password" padding={8} borderRadius={4} border="1px solid color-gray-300" />
-      <Button type="submit" backgroundColor="color-blue-500" color="color-white" padding={10} borderRadius={4} cursor="pointer">
+      <Button  backgroundColor="color-blue-500" color="color-white" padding={10} borderRadius={4} cursor="pointer">
         Log In
       </Button>
     </Form>

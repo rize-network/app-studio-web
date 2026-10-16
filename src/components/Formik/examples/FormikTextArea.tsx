@@ -21,9 +21,7 @@ export const FormikTextAreaExemple = () => {
             name="thoughts"
             placeholder="Write your thoughts here..."
           />
-          <Button type="submit" onClick={props.handleSubmit}>
-            Submit
-          </Button>
+          <Button onClick={props.handleSubmit}>Submit</Button>
         </FormikForm>
       )}
     </Formik>

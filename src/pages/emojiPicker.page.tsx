@@ -1,4 +1,5 @@
 import React from 'react';
+import { ReactionPickerExample } from '../components/BlockEditor/examples';
 import { View, Vertical, Text } from 'app-studio';
 import {
   DefaultEmojiPicker,
@@ -19,6 +20,12 @@ export const EmojiPickerPage = () => {
         </Text>
 
         <Vertical gap={24}>
+          <Vertical gap={16}>
+            <Text fontSize="24px" fontWeight="600">
+              Reactions
+            </Text>
+            <ReactionPickerExample />
+          </Vertical>
           <Vertical gap={16}>
             <Text fontSize="24px" fontWeight="600" color="color-gray-800">
               Default

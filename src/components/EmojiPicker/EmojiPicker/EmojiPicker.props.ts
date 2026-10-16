@@ -9,6 +9,11 @@ import {
 } from './EmojiPicker.type';
 // Defines the interface for the EmojiPicker component's properties, extending basic ViewProps while omitting its 'onChange' to provide a specific emoji-related handler.
 export interface EmojiPickerProps extends Omit<ViewProps, 'onChange'> {
+  mode?: 'picker' | 'reaction';
+  trigger?: React.ReactNode;
+  quickEmojis?: string[];
+  selectedEmojis?: string[];
+  labels?: Partial<EmojiPickerLabels>;
   // Optional unique identifier for the component.
   id?: string;
   // Optional name attribute for form compatibility.
@@ -91,7 +96,31 @@ export interface EmojiPickerViewProps extends EmojiPickerProps {
   // Function to close the emoji picker dropdown.
   handleClose: () => void;
   // Ref object for the DOM element that triggers the emoji picker.
-  triggerRef: React.RefObject<HTMLDivElement | null>;
+  triggerRef: React.RefObject<any>;
   // Ref object for the DOM element representing the emoji picker dropdown content.
-  dropdownRef: React.RefObject<HTMLDivElement | null>;
+  dropdownRef: React.RefObject<any>;
+  expanded: boolean;
+  setExpanded: (expanded: boolean) => void;
+  quickEmojiData: Emoji[];
+  text: EmojiPickerLabels;
 }
+
+export const defaultEmojiPickerLabels = {
+  select: 'Select an emoji',
+  reaction: 'Add reaction',
+  search: 'Search emojis…',
+  more: 'More emojis',
+  empty: 'No emojis found',
+  categoryEmpty: 'No emojis in this category',
+  recent: 'Recent',
+  smileys: 'Smileys',
+  people: 'People',
+  animals: 'Animals',
+  food: 'Food',
+  activities: 'Activities',
+  travel: 'Travel',
+  objects: 'Objects',
+  symbols: 'Symbols',
+  flags: 'Flags',
+};
+export type EmojiPickerLabels = typeof defaultEmojiPickerLabels;
