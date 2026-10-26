@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Drawer } from '../..';
+import { Button } from '../../Button/Button';
+import { Drawer } from '../Drawer';
 import { Vertical, Text } from 'app-studio';
 
 export const DefaultDrawer = () => {

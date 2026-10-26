@@ -1,0 +1,35 @@
+# StatePanel
+
+A centred message for a region that is not showing its content. `state="error"`
+is announced (`role="alert"` on web, an assertive `alert` on React Native).
+The panel carries `data-testid="state-<state>"` and `data-state` on web,
+`testID="state-<state>"` on React Native.
+
+### **Import**
+```tsx
+import { StatePanel } from '@app-studio/components';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Button, StatePanel } from '@app-studio/components';
+
+export const EmptyNotes = () => (
+  <StatePanel
+    state="empty"
+    title="No notes yet"
+    description="Notes you write appear here."
+    action={<Button onClick={() => {}}>Write a note</Button>}
+  />
+);
+```
+
+### **Props**
+| Prop | Type | Description |
+|---|---|---|
+| `state` | `'loading' \| 'empty' \| 'error' \| 'forbidden' \| 'gone' \| 'populated'` | The region's state |
+| `title` | `string` | What happened |
+| `description` | `string?` | Why, or what to do next |
+| `action` | `ReactNode?` | The one way out (retry, create, sign in) |
+| `views` | `{ container?, title?, description?, action? }` | Style overrides |

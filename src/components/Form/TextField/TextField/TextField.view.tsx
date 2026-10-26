@@ -42,6 +42,9 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   isRequired,
   required,
   labelProps,
+  isMultiline,
+  multiline,
+  rows,
   leftIcon,
   rightIcon,
   setHint = () => {},
@@ -57,6 +60,9 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
 }) => {
   const generatedId = React.useId();
   const fieldId = id ?? generatedId;
+  const isTextArea = isMultiline ?? multiline ?? false;
+  // A message (not a bare `true`) is rendered under the field: point to it.
+  const errorId = error && error !== true ? `${fieldId}-error` : undefined;
   const { getColor, themeMode } = useTheme();
   const IconColor = getColor(isDisabled ? 'color-gray-400' : 'color-gray-500', {
     themeMode: elementMode ? elementMode : themeMode,
@@ -182,7 +188,12 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     ...layoutViews
   } = views || {};
   return (
-    <FieldContainer helperText={helperText} error={error} views={layoutViews}>
+    <FieldContainer
+      helperText={helperText}
+      error={error}
+      errorId={errorId}
+      views={layoutViews}
+    >
       <FieldContent
         label={label}
         size={size}
@@ -219,12 +230,16 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
           )}
           <Input
             ref={inputRef}
-            type="text"
+            {...(isTextArea
+              ? { as: 'textarea', rows: rows ?? 5 }
+              : { type: 'text' })}
             id={fieldId}
             name={name}
             readOnly={isReadOnly}
             disabled={isDisabled}
             autoFocus={isAutoFocus}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={errorId}
             {...(isRequired ?? required
               ? { required: true, 'aria-required': true }
               : {})}

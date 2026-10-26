@@ -14,3 +14,4 @@ export * from './StylesInput';
 export * from './VariantsInputs';
 export * from './ColorScheme';
 export * from './isClearable';
+export * from './Multiline';

@@ -1,0 +1,62 @@
+# DataState
+
+Renders a data-backed region from its query: loading, empty, error (with
+Retry), forbidden and gone look and behave the same everywhere, on web and
+React Native.
+
+| Query | Renders |
+|---|---|
+| `status: 'loading'` | a polite live region with a Loader and `labels.loading` |
+| `status: 'error'`, `error.status` 401 | `forbidden`, "Sign in to continue." |
+| `status: 'error'`, `error.status` 403 | `forbidden`, "Ask an administrator for access." |
+| `status: 'error'`, `error.status` 404 | `gone` |
+| `status: 'error'`, no numeric `error.status` | `error` with the network message and Retry |
+| `status: 'error'`, any other status | `error` with Retry (`query.reload`) |
+| `status: 'success'` and `isEmpty(data)` | `empty` from `empty` (or `labels.emptyTitle`) |
+| `status: 'success'` | `children(data)` |
+
+### **Import**
+```tsx
+import { DataState } from '@app-studio/components';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { Text } from 'app-studio';
+import { DataState, DataStateQuery } from '@app-studio/components';
+
+type Note = { id: string; title: string };
+
+export const NoteList = ({ query }: { query: DataStateQuery<Note[]> }) => (
+  <DataState
+    query={query}
+    isEmpty={(notes) => notes.length === 0}
+    empty={{ title: 'No notes yet', description: 'Write your first one.' }}
+  >
+    {(notes) => notes.map((note) => <Text key={note.id}>{note.title}</Text>)}
+  </DataState>
+);
+```
+
+### **labels**
+Every word has an English default (`DataStateDefaultLabels`); pass any subset
+to translate it.
+
+```tsx
+<DataState query={query} labels={{ retry: 'Réessayer', loading: 'Chargement…' }}>
+  {(data) => <Text>{data.title}</Text>}
+</DataState>
+```
+
+### **Props**
+| Prop | Type | Description |
+|---|---|---|
+| `query` | `DataStateQuery<T>` | `{ status, data?, error?, reload() }` |
+| `isEmpty` | `(data: T) => boolean` | When loaded data counts as empty |
+| `empty` | `{ title, description?, action? }` | The empty state |
+| `children` | `(data: T) => ReactNode` | Renders the data |
+| `labels` | `Partial<DataStateLabels>` | Words overriding the English defaults |
+| `views` | `{ loading?, content? }` | Style overrides of the two regions |
+
+`classifyDataStateError(error)` exposes the same error classification.

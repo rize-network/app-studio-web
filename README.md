@@ -22,6 +22,10 @@ automatically.
 - **Full TypeScript Support** — exports are split via package.json
   `exports`/`react-native` conditions; `customConditions: ["react-native"]`
   lets `tsc` resolve the right typings for consumers
+- **Safe React Native root** — on RN, `@app-studio/components` never pulls
+  zustand, formik, date-fns or react-dom; the components that need them are
+  explicit subpaths (`@app-studio/components/native/Modal`…), see the
+  [React Native guide](./docs/getting-started/react-native.md#the-native-root-entry-stays-runnable-on-a-plain-react-native-runtime)
 - **Production Ready** — battle-tested in real apps
 
 ## 📚 Documentation
@@ -108,7 +112,7 @@ installed.
 ## Component Categories
 
 ### Layout
-View · Center · Horizontal · Vertical · AspectRatio · Separator · Resizable
+View · Center · Horizontal · Vertical · AspectRatio · Separator · Resizable · PageHeader
 
 ### Form
 Checkbox · Radio · Select · Switch · TextArea · TextField · Password ·
@@ -119,7 +123,7 @@ Selector · TagInput
 Accordion · Menubar · NavigationMenu · Pagination · Sidebar · Tabs
 
 ### Feedback
-Alert · Modal · Toast · Tooltip
+Alert · Modal · Toast · Tooltip · StatePanel · DataState
 
 ### Data Display
 Avatar · Badge · Card · Table · Chart¹ · ProgressBar · StatusIndicator

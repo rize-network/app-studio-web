@@ -3,7 +3,7 @@ import { useHref, useInRouterContext, useNavigate } from 'react-router-dom';
 import { Element } from 'app-studio';
 import { ExternalLinkIcon } from '../../Icon/Icon';
 import { LinkViewProps } from './Link.props';
-import { IconSizes } from './Link.style';
+import { IconSizes, LinkActiveStyles } from './Link.style';
 
 // URLs react-router cannot navigate to client-side (scheme or protocol-relative).
 const ABSOLUTE_URL_REGEX = /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i;
@@ -21,6 +21,7 @@ const Anchor = React.forwardRef<HTMLAnchorElement, AnchorViewProps>(
       iconSize = 'sm',
       underline = 'default',
       isExternal = false,
+      isActive = false,
       views = {},
       to,
       isHovered,
@@ -46,6 +47,9 @@ const Anchor = React.forwardRef<HTMLAnchorElement, AnchorViewProps>(
           : _hover
       }
       {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      {...(isActive
+        ? { 'aria-current': 'page', ...LinkActiveStyles, ...views.active }
+        : {})}
       {...views.text}
       {...props}
     >

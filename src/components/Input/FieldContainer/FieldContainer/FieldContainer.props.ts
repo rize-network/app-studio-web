@@ -17,6 +17,11 @@ export interface ContainerProps extends ViewProps {
    */
   helperText?: string;
   /**
+   * Id given to the rendered error message, so the field can reference it
+   * through `aria-describedby`.
+   */
+  errorId?: string;
+  /**
    * CSS styles for the select box and dropdown.
    */
   views?: TextFieldStyles;

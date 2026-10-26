@@ -1,9 +1,9 @@
 {
   "name": "@app-studio/components",
-  "version": "0.11.9",
+  "version": "0.11.10-composer.1",
   "main": "dist/web.cjs.js",
   "module": "dist/web.esm.js",
-  "react-native": "dist/native/components/index.js",
+  "react-native": "dist/native/components/index.native.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -15,9 +15,9 @@
   "exports": {
     ".": {
       "react-native": {
-        "types": "./dist/native/components/index.d.ts",
-        "import": "./dist/native/components/index.js",
-        "default": "./dist/native/components/index.js"
+        "types": "./dist/native/components/index.native.d.ts",
+        "import": "./dist/native/components/index.native.js",
+        "default": "./dist/native/components/index.native.js"
       },
       "browser": {
         "types": "./dist/index.d.ts",
@@ -34,6 +34,54 @@
         "default": "./dist/web.cjs.js"
       },
       "default": "./dist/web.esm.js"
+    },
+    "./native/AudioInput": {
+      "types": "./dist/native/components/AudioInput/AudioInput.d.ts",
+      "default": "./dist/native/components/AudioInput/AudioInput.js"
+    },
+    "./native/ChatInput": {
+      "types": "./dist/native/components/ChatInput/ChatInput.d.ts",
+      "default": "./dist/native/components/ChatInput/ChatInput.js"
+    },
+    "./native/DatePicker": {
+      "types": "./dist/native/components/Form/DatePicker/DatePicker.d.ts",
+      "default": "./dist/native/components/Form/DatePicker/DatePicker.js"
+    },
+    "./native/DesignSystem": {
+      "types": "./dist/native/pages/designSystem.page.d.ts",
+      "default": "./dist/native/pages/designSystem.page.js"
+    },
+    "./native/Drawer": {
+      "types": "./dist/native/components/Drawer/Drawer.d.ts",
+      "default": "./dist/native/components/Drawer/Drawer.js"
+    },
+    "./native/Formik": {
+      "types": "./dist/native/components/Formik/index.d.ts",
+      "default": "./dist/native/components/Formik/index.js"
+    },
+    "./native/Message": {
+      "types": "./dist/native/components/Message/Message.d.ts",
+      "default": "./dist/native/components/Message/Message.js"
+    },
+    "./native/Modal": {
+      "types": "./dist/native/components/Modal/Modal.d.ts",
+      "default": "./dist/native/components/Modal/Modal.js"
+    },
+    "./native/Router": {
+      "types": "./dist/native/components/Router/index.d.ts",
+      "default": "./dist/native/components/Router/index.js"
+    },
+    "./native/SplashScreen": {
+      "types": "./dist/native/components/SplashScreen/index.d.ts",
+      "default": "./dist/native/components/SplashScreen/index.js"
+    },
+    "./native/Toast": {
+      "types": "./dist/native/components/Toast/Toast.d.ts",
+      "default": "./dist/native/components/Toast/Toast.js"
+    },
+    "./native/Uploader": {
+      "types": "./dist/native/components/Uploader/Uploader.d.ts",
+      "default": "./dist/native/components/Uploader/Uploader.js"
     }
   },
   "engines": {
@@ -86,7 +134,8 @@
     "typecheck:native": "tsc --noEmit -p tsconfig.native.json",
     "build:native": "rm -rf dist/native && tsc -p tsconfig.native.build.json && tsc-alias -p tsconfig.native.build.json",
     "build:native:types": "npm run build:native",
-    "build:package": "npm run typecheck && npm run build && npm run typecheck:native && npm run build:native"
+    "build:package": "npm run typecheck && npm run build && npm run typecheck:native && npm run build:native && npm run check:native-entry",
+    "check:native-entry": "node scripts/check-native-entry.mjs"
   },
   "eslintConfig": {
     "extends": [

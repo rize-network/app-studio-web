@@ -11,6 +11,14 @@ export const IconSizes: Record<Size, number> = {
 };
 
 /**
+ * Style of the link to the current page (`isActive`), on web and native.
+ */
+export const LinkActiveStyles: ViewProps = {
+  color: 'theme-primary',
+  fontWeight: '600',
+};
+
+/**
  * Link base styles matching shadcn/ui patterns
  */
 export const LinkBaseStyles: ViewProps = {

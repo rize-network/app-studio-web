@@ -43,7 +43,8 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
   isReadOnly = false,
   isClearable = true,
   isAutoFocus = false,
-  isMultiline = false,
+  isMultiline,
+  multiline,
   rows,
   setHint = () => {},
   setIsFocused = () => {},
@@ -60,6 +61,7 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
     themeMode: elementMode ? elementMode : themeMode,
   });
   const showLabel = !!label;
+  const isTextArea = isMultiline ?? multiline ?? false;
 
   const fieldSizeStyles = {
     xs: { minHeight: 24, shellPaddingY: 6, shellPaddingX: 10, fontSize: 12 },
@@ -161,8 +163,12 @@ const TextFieldView: React.FC<TextFieldViewProps> = ({
               themeMode: elementMode ? elementMode : themeMode,
             })}
             secureTextEntry={secureTextEntry}
-            multiline={isMultiline}
-            numberOfLines={isMultiline ? rows : undefined}
+            accessibilityLabel={label}
+            accessibilityHint={
+              error && error !== true ? String(error) : undefined
+            }
+            multiline={isTextArea}
+            numberOfLines={isTextArea ? rows : undefined}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChangeText={handleChangeText}

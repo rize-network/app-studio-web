@@ -226,3 +226,34 @@ export const IsClearableDemo = () => {
 
 ```
 
+
+### **multiline** / **isMultiline**
+Renders a `<textarea>` on web (`rows`, default 5) and a multiline `TextInput`
+on React Native.
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+### **error** (accessibility)
+When `error` is a message, it is rendered under the field and linked to it:
+`aria-invalid` and `aria-describedby` on web; on React Native the field gets
+`accessibilityLabel={label}` and the message as `accessibilityHint`.
+
+```tsx
+import React, { useState } from 'react';
+import { TextField } from '@app-studio/components';
+
+export const MultilineInput = () => {
+  const [body, setBody] = useState('');
+  return (
+    <TextField
+      label="Body"
+      name="body"
+      value={body}
+      onChange={setBody}
+      multiline
+      error={body.length > 200 ? 'At most 200 characters.' : undefined}
+    />
+  );
+};
+```

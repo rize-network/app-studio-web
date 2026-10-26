@@ -1,15 +1,15 @@
 import React, { useMemo, useState } from 'react';
+import { AudioInput } from 'src/components/AudioInput/AudioInput';
+import { ChatInput } from 'src/components/ChatInput/ChatInput';
 import { Horizontal, Text, Vertical, View } from 'app-studio';
 import {
   Alert,
-  AudioInput,
   AspectRatio,
   AttachmentGroup,
   Avatar,
   Badge,
   Button,
   Card,
-  ChatInput,
   ColorPicker,
   Icon,
   Link,

@@ -241,3 +241,18 @@ The destination URL or path for a link button. Renders as a `<a>` or routing lin
 <Button to="/dashboard">Go to Dashboard</Button>
 <Button to="https://google.com" isExternal>Open Google</Button>
 ```
+
+### **ref**
+`Button` forwards its `ref`: to the rendered `<button>` on web (the wrapping
+element when `to` is set) and to the underlying view on React Native. The
+`ButtonElement` type names that node on each platform.
+
+```tsx
+import React from 'react';
+import { Button, ButtonElement } from '@app-studio/components';
+
+export const FocusableButton = () => {
+  const ref = React.useRef<ButtonElement>(null);
+  return <Button ref={ref} onClick={() => {}}>Save</Button>;
+};
+```

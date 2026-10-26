@@ -53,16 +53,59 @@ Tooltip, Gradient, ProgressBar, Pagination and three Animation presets.
   "exports": {
     ".": {
       "react-native": {
-        "types":   "./dist/native/components/index.d.ts",
-        "import":  "./dist/native/components/index.js",
-        "require": "./dist/native/components/index.cjs",
-        "default": "./dist/native/components/index.js"
+        "types":   "./dist/native/components/index.native.d.ts",
+        "import":  "./dist/native/components/index.native.js",
+        "default": "./dist/native/components/index.native.js"
       },
       "browser": { /* … web build … */ }
+    },
+    "./native/Modal": {
+      "types":   "./dist/native/components/Modal/Modal.d.ts",
+      "default": "./dist/native/components/Modal/Modal.js"
     }
   }
 }
 ```
+
+#### The native root entry stays runnable on a plain React Native runtime
+
+`@app-studio/components` on React Native (`src/components/index.native.tsx`)
+exports only components whose native code needs nothing beyond `react`,
+`react-native`, `app-studio`, `react-native-svg`, `lucide-react-native`,
+`react-native-safe-area-context`, `react-native-reanimated`,
+`react-native-worklets` and `react-native-linear-gradient`. Importing it never
+pulls `zustand`, `formik`, `date-fns`, `react-dom` or `react-router-dom`, so it
+runs in a host that ships no extra native or JS module.
+
+The components that need more stay on the web root and are explicit subpaths
+on native — install their dependency, then import them by name:
+
+| Subpath | Needs |
+|---|---|
+| `@app-studio/components/native/AudioInput` | `zustand` |
+| `@app-studio/components/native/ChatInput` | `zustand` |
+| `@app-studio/components/native/DatePicker` | `date-fns` |
+| `@app-studio/components/native/DesignSystem` | `react-helmet-async`, the whole kit |
+| `@app-studio/components/native/Drawer` | `zustand` |
+| `@app-studio/components/native/Formik` | `formik`, `zustand`, `date-fns` |
+| `@app-studio/components/native/Message` | `zustand` |
+| `@app-studio/components/native/Modal` | `zustand` |
+| `@app-studio/components/native/Router` | `zustand` |
+| `@app-studio/components/native/SplashScreen` | `zustand` |
+| `@app-studio/components/native/Toast` | `zustand` |
+| `@app-studio/components/native/Uploader` | `zustand` |
+
+```tsx
+import { Button, PageHeader } from '@app-studio/components'; // safe root
+import { Modal } from '@app-studio/components/native/Modal'; // needs zustand
+```
+
+`npm run check:native-entry` (part of `build:package`) walks the built
+graph from `dist/native/components/index.native.js` the way Metro resolves it
+(`.native.js` first) and fails on any other package. Shared exports live in
+`src/components/index.shared.tsx`; add a component there only when the check
+stays green, otherwise add it to `index.tsx` (web) and a `./native/<Name>`
+subpath.
 
 At **runtime** Metro picks the `react-native` branch.  
 At **typecheck** time, set `moduleResolution: "bundler"` and
