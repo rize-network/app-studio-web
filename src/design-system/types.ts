@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export type DesignSystemAppearance = 'light' | 'dark';
 
 export type DesignSystemComponentName =
@@ -166,4 +168,10 @@ export interface DesignSystemContextValue {
   config?: DesignSystemConfig;
   configId?: string;
   isEnabled: boolean;
+}
+
+export interface DesignSystemScopeProps {
+  children: ReactNode;
+  id: string;
+  appearance: DesignSystemAppearance;
 }

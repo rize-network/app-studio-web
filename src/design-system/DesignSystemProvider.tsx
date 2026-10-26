@@ -5,6 +5,7 @@ import {
   designSystemConfigs,
   DesignSystemConfigId,
 } from './configs';
+import { DesignSystemScope } from './DesignSystemScope';
 import {
   DesignSystemAppearance,
   DesignSystemComponentConfig,
@@ -76,13 +77,12 @@ export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
         mode={effectiveMode}
         transparentWrapper
       >
-        <div
-          data-design-system={resolvedConfig.metadata.id}
-          data-appearance={effectiveMode}
-          style={{ display: 'contents' }}
+        <DesignSystemScope
+          id={resolvedConfig.metadata.id}
+          appearance={effectiveMode}
         >
           {children}
-        </div>
+        </DesignSystemScope>
       </ThemeProvider>
     </DesignSystemContext.Provider>
   );
