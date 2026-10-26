@@ -1,0 +1,115 @@
+# Styling & composition
+
+Use the same styling foundation across your own primitives and the ready-made library. Keep layout close to the component and customize only what you need.
+
+## Start with style props
+
+```tsx
+import React from 'react';
+import { View, Text } from 'app-studio';
+
+export function Callout() {
+  return (
+    <View
+      padding={24}
+      borderRadius={12}
+      backgroundColor="color-blue-50"
+      borderWidth={1}
+      borderStyle="solid"
+      borderColor="color-blue-200"
+    >
+      <Text color="color-blue-900">
+        A consistent foundation, with room for your design.
+      </Text>
+    </View>
+  );
+}
+```
+
+Resolve tokens through `ThemeProvider`. Numeric spacing values represent pixels on web and native layout units on React Native.
+
+## Choose a built-in variant
+
+Before overriding internal styles, check the component's `variant`, `size`, and other documented props.
+
+```tsx
+import React from 'react';
+import { Horizontal } from 'app-studio';
+import { Button } from '@app-studio/components';
+
+export function Actions() {
+  return (
+    <Horizontal gap={12} flexWrap="wrap">
+      <Button variant="filled" size="sm">
+        Save
+      </Button>
+      <Button variant="outline" size="sm">
+        Cancel
+      </Button>
+      <Button variant="ghost" size="sm">
+        More options
+      </Button>
+    </Horizontal>
+  );
+}
+```
+
+Variant names differ between components. Use each component's TypeScript props and examples rather than assuming every control accepts the same names.
+
+## Customize internal views
+
+`views` exposes named internal parts. Button exposes `container`, `content`, and icon and loader parts. The available names are component-specific.
+
+```tsx
+import React from 'react';
+import { Button } from '@app-studio/components';
+
+export function CustomButton() {
+  return (
+    <Button
+      variant="outline"
+      views={{
+        container: { borderRadius: 12 },
+        content: { letterSpacing: 0.5 },
+      }}
+    >
+      Your brand
+    </Button>
+  );
+}
+```
+
+Preserve labels, focus indicators, disabled behavior, and hit areas when overriding views.
+
+## Interaction states on the web
+
+Primitives support state styles such as `_hover`, `_active`, and `_focus`. Use a semantic interactive element and keep keyboard focus visible.
+
+```tsx
+import React from 'react';
+import { View } from 'app-studio';
+
+export function StateExample() {
+  return (
+    <View
+      as="button"
+      padding={12}
+      borderRadius={8}
+      backgroundColor="color-blue-900"
+      color="color-white"
+      _hover={{ backgroundColor: 'color-blue-800' }}
+      _focus={{ outline: '3px solid #93c5fd', outlineOffset: 3 }}
+    >
+      Focus or hover me
+    </View>
+  );
+}
+```
+
+Browser selectors and pseudo-elements are web-only. On native, use supported platform events and accessibility behavior. See [platform differences](/docs/react-native).
+
+## Compose ordinary React components
+
+Extract a component when layout or behavior repeats. A single visual adjustment can stay as props at the call site. Configure [theme tokens](/docs/theming) before copying raw colors across your app.
+
+The [framework styling reference](https://github.com/rize-network/app-studio/blob/main/docs/Styling.md) documents more states and selectors.

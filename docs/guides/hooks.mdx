@@ -1,0 +1,92 @@
+# Hooks
+
+Use framework hooks when React needs to know about the environment or an interaction. Prefer style props for visual changes that do not need application logic.
+
+## Read the current theme
+
+`useTheme()` exposes `themeMode`, `setThemeMode`, `theme`, and color helpers. The provider accepts `mode`; the hook's state is named `themeMode`.
+
+```tsx
+import React from 'react';
+import { useTheme, Text } from 'app-studio';
+
+export function CurrentTheme() {
+  const { themeMode } = useTheme();
+  return <Text color="theme-primary">Current theme: {themeMode}</Text>;
+}
+```
+
+Components resolve color tokens automatically. Use `getColor` for a CSS value or `getColorHex` when an external tool requires a literal color. See [Colors & theming](/docs/theming).
+
+## Respond to device state
+
+`useResponsive()` reads the configuration from `ResponsiveProvider`. Use `on('mobile')` for device-aware logic. A hook-driven decision re-renders when its state changes; use the `media` prop for purely visual overrides.
+
+```tsx
+import React from 'react';
+import { useResponsive, Text } from 'app-studio';
+
+export function DeviceHint() {
+  const { on } = useResponsive();
+  return <Text>{on('mobile') ? 'Compact viewport' : 'Larger viewport'}</Text>;
+}
+```
+
+Avoid removing essential content just because a viewport is smaller. See [Responsive layouts](/docs/responsive).
+
+## Track hover for a visual detail
+
+```tsx
+import React from 'react';
+import { useHover, View, Text } from 'app-studio';
+
+export function HoverDetail() {
+  const [ref, hovered] = useHover<HTMLDivElement>();
+  return (
+    <View
+      ref={ref}
+      padding={24}
+      borderRadius={12}
+      backgroundColor={hovered ? 'color-violet-100' : 'color-blue-50'}
+    >
+      <Text>
+        Hover changes this surface; the information is always available.
+      </Text>
+    </View>
+  );
+}
+```
+
+Hover is a browser interaction, not a native touch interaction. Keep actions and information available to keyboard, touch, and assistive-technology users.
+
+## Read window dimensions
+
+Wrap consumers of `useWindowSize()` in `WindowSizeProvider`:
+
+```tsx
+import React from 'react';
+import { WindowSizeProvider, useWindowSize, Text } from 'app-studio';
+
+function Dimensions() {
+  const { width, height } = useWindowSize();
+  return (
+    <Text>
+      Window: {width} × {height}
+    </Text>
+  );
+}
+
+export function WindowExample() {
+  return (
+    <WindowSizeProvider>
+      <Dimensions />
+    </WindowSizeProvider>
+  );
+}
+```
+
+Window dimensions describe the window, not necessarily a component's available width. On native, verify rotation and split-screen behavior on the target platform.
+
+## Further hooks
+
+The framework also exposes hooks for focus, visibility, scrolling, and element position. Consult the [hook reference](https://github.com/rize-network/app-studio/blob/main/docs/Hooks.md) and current TypeScript signatures for their options and platform differences.

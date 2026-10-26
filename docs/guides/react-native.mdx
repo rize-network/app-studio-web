@@ -1,0 +1,53 @@
+# React Native
+
+Both packages ship dedicated native builds. Sharing an API reduces repetition, but each platform still needs its own setup and verification.
+
+## Requirements and installation
+
+Use an existing React Native project with package exports enabled. The current core package declares React Native 0.79 or newer. Keep the React version required by your native project.
+
+For the framework alone:
+
+```bash
+npm install app-studio
+```
+
+For the ready-made component library:
+
+```bash
+npm install app-studio @app-studio/components lucide-react-native
+```
+
+The native app provides `react` and `react-native`. Do not add React DOM or React Router just to use native primitives.
+
+## Package resolution
+
+Import from `app-studio` and `@app-studio/components` as usual. Metro uses the `react-native` export condition to choose native implementations. Do not import browser bundle paths into a native screen.
+
+For a native TypeScript consumer, follow your framework's configuration and the libraries' native guide. If the wrong typings are selected, check package-export support and the `react-native` custom condition rather than suppressing errors.
+
+## Providers
+
+Use `ThemeProvider` for tokens and `ResponsiveProvider` for responsive rules, as on web. Put them near your native app's root. Text content should use the library's text components rather than assuming a DOM container can render text.
+
+## Optional native features
+
+- `react-native-reanimated` enables supported animation presets.
+- `react-native-svg` is used by components that render SVG.
+- `react-native-linear-gradient` supports native gradients.
+- `lucide-react-native` supplies native icons where used.
+
+Install only the peers required by the components you use. Follow their version-specific setup and run pod installation when your iOS project requires it.
+
+## Differences to plan for
+
+- **Availability:** some components are web-only. Check the compatibility matrix before importing a screen's controls.
+- **Layout:** CSS Grid maps to supported fixed-column native layouts, not the entire CSS Grid feature set.
+- **Interaction:** browser hover selectors and pseudo-elements do not apply to touch interfaces.
+- **Forms:** submission, return keys, and focus need explicit native wiring.
+- **Navigation:** use your native navigation setup; browser link behavior is not a native route model.
+- **Accessibility:** test native labels, roles, focus, and screen-reader behavior separately.
+
+## Compatibility reference
+
+Use the [component compatibility matrix and setup guide](https://github.com/rize-network/app-studio-components/blob/main/docs/getting-started/react-native.md) and the [framework native mappings](https://github.com/rize-network/app-studio/blob/main/docs/Native.md). The previews on this documentation site run in a browser and do not prove native compatibility.

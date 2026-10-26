@@ -21,7 +21,7 @@ export default defineConfig({
     },
   },
   ssr: {
-    noExternal: ['app-studio', 'react-router-dom'],
+    noExternal: ['app-studio', 'react-router-dom', 'date-fns'],
   },
   build: {
     ssr: 'src/entry-hero.tsx',

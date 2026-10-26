@@ -1,0 +1,79 @@
+# Forms & validation
+
+Choose controlled inputs for a small interaction or Formik wrappers for a larger form. Your application owns validation, submission, loading, and server errors.
+
+## Use value-first callbacks
+
+`TextField` calls `onChange` with a string. `Checkbox` and `Switch` call it with a boolean. Their callbacks do not receive DOM change events.
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { TextField, Checkbox } from '@app-studio/components';
+
+export function ControlledFields() {
+  const [name, setName] = React.useState('');
+  const [updates, setUpdates] = React.useState(false);
+  return (
+    <Vertical gap={16}>
+      <TextField label="Project name" value={name} onChange={setName} />
+      <Checkbox
+        label="Receive project updates"
+        isChecked={updates}
+        onChange={setUpdates}
+      />
+    </Vertical>
+  );
+}
+```
+
+## Connect Formik
+
+Formik is a web peer dependency of the component library. Its named wrappers connect field names to form state. This example validates a required value and displays a local confirmation; it does not call an API.
+
+```tsx
+import React from 'react';
+import { Formik } from 'formik';
+import { Vertical, Text } from 'app-studio';
+import { FormikForm, FormikTextField, Button } from '@app-studio/components';
+
+export function ProjectForm() {
+  const [message, setMessage] = React.useState('');
+  return (
+    <Formik
+      initialValues={{ name: '' }}
+      validate={(values) =>
+        values.name.trim() ? {} : { name: 'Enter a project name.' }
+      }
+      onSubmit={(values, { setSubmitting }) => {
+        setMessage(`Ready: ${values.name.trim()}`);
+        setSubmitting(false);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <FormikForm>
+          <Vertical gap={16}>
+            <FormikTextField name="name" label="Project name" />
+            <Button type="submit" isLoading={isSubmitting}>
+              Check project
+            </Button>
+            <Text role="status">{message}</Text>
+          </Vertical>
+        </FormikForm>
+      )}
+    </Formik>
+  );
+}
+```
+
+For a real asynchronous request, return or await the request in `onSubmit`. Keep submitted data until the save is confirmed, surface failures, and prevent duplicate submissions. Local validation does not replace server validation.
+
+## Labels, errors, and focus
+
+Use a visible label for every field. Keep error text close to its input and programmatically associated with it. After validation fails, help the user reach the first invalid field without losing their values.
+
+Check keyboard submission as well as pointer interaction. Avoid using placeholder text as the only label. See [Accessibility](/docs/accessibility).
+
+## Native forms
+
+Native does not have browser form semantics. Wire submission, return keys, focus, and validation explicitly. See [React Native](/docs/react-native) before sharing a form screen.

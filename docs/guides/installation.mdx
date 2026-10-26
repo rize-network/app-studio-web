@@ -1,0 +1,96 @@
+# Installation
+
+Start with an existing React project. Choose the component library for ready-made controls, or the framework alone for your own component system.
+
+## Requirements
+
+- React 18 or newer. Keep `react` and `react-dom` on matching versions in a web app.
+- A React build setup that resolves package exports, such as Vite or your existing framework.
+- TypeScript is supported; JavaScript projects can use the same components.
+- For React Native, follow [native setup](/docs/react-native). The core package declares React Native 0.79 or newer.
+
+## Install the component library
+
+The library depends on App Studio for styling. Install both:
+
+```bash
+npm install @app-studio/components app-studio
+```
+
+Install the web peer dependencies you do not already have:
+
+```bash
+npm install react react-dom react-router-dom formik zustand lucide-react
+```
+
+Keep existing compatible versions. React Router supports router-dependent components, Formik powers its form wrappers, and Zustand and the icon package support components that use them. Do not use `--force` to hide incompatible peer versions in a consuming application.
+
+With another package manager, use the same package names with `pnpm add` or `yarn add`.
+
+## Use the framework on its own
+
+If you only need layout primitives, style props, tokens, and motion:
+
+```bash
+npm install app-studio
+```
+
+You do not need the component library or its Formik, Zustand, and icon peers for this starting point. A web app still needs React and React DOM.
+
+## Configure the providers
+
+`ThemeProvider` defines the color variables behind `theme-*` and `color-*` tokens. `ResponsiveProvider` supplies the device and breakpoint configuration used by `media` and responsive hooks.
+
+```tsx
+import React from 'react';
+import { ThemeProvider, ResponsiveProvider, Vertical, Text } from 'app-studio';
+
+export default function App() {
+  return (
+    <ThemeProvider theme={{ primary: 'color-blue-900' }}>
+      <ResponsiveProvider>
+        <Vertical padding={24} gap={12}>
+          <Text fontSize={24} color="theme-primary">
+            App Studio is ready.
+          </Text>
+          <Text>Add your application's components here.</Text>
+        </Vertical>
+      </ResponsiveProvider>
+    </ThemeProvider>
+  );
+}
+```
+
+Mount providers near the root. Keep your existing router, data fetching, and state providers; App Studio does not replace them.
+
+## Add document defaults
+
+The library styles components, not the browser document. Add these defaults to your application's stylesheet:
+
+```css
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+```
+
+There is no separate component stylesheet to import for these examples.
+
+## When routing is needed
+
+Router-dependent components need your app's React Router context. A simple `Button` with `onClick` does not need a router. Internal routing links and navigation components can require one.
+
+## Verify your setup
+
+Start your development server. Confirm that the example renders, `theme-primary` has a color, and changing the viewport affects a component with `media` rules.
+
+Continue with the [Quick start](/docs/quick-start). If colors or imports are missing, use [Troubleshooting](/docs/troubleshooting).

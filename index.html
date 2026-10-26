@@ -3,21 +3,15 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="/favicon.ico" />
+  <link rel="icon" href="/favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#F97316" />
-  <meta name="description" content="App Studio Web Components" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="description" content="Build React and React Native interfaces with typed style props, responsive layouts, theme tokens, and animations. Discover the App Studio styling engine." />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https: http:; media-src 'self' data: blob: https: http:; font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com; connect-src 'self' ws: wss: http: https:; worker-src 'self' blob:;" />
-  <link rel="apple-touch-icon" href="/assets/apple-logo.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
   <link rel="manifest" href="/manifest.json" />
-  <!-- The hero background is now a pure CSS gradient (no image), so nothing
-       image-related is on the home page's critical path. orange.webp is only
-       used by the deferred CTA section and loads lazily there. -->
-  <!-- Self-hosted Mulish (variable, weights 400–800) is the brand/app font used
-       throughout the component gallery. It is a normal same-origin file with
-       font-display:optional, NOT on the home page's critical path: the
-       above-the-fold hero text (title + tagline) is rendered in the system font
-       stack (see HomeHero) so first paint never waits on a web font. -->
+  <!-- Self-hosted brand font; the system fallback renders without waiting. -->
   <!-- DNS prefetch for CDN domains to reduce connection latency -->
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
   <style>
@@ -64,13 +58,12 @@
       min-height: 100vh;
     }
   </style>
-  <title>App Studio</title>
+  <title>App Studio — Your styles. Your components. One API.</title>
 </head>
 
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <!-- The home page hero is prerendered into this container at build time by
-       scripts/prerender.mjs; the SPA hydrates it via createRoot on mount. -->
+  <noscript>Enable JavaScript for interactive examples and component documentation.</noscript>
+  <!-- Public pages are prerendered at build time and hydrated on mount. -->
   <div id="root"></div>
   <script type="module" src="/src/index.tsx"></script>
 </body>

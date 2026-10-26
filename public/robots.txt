@@ -1,3 +1,8 @@
-# https://www.robotstxt.org/robotstxt.html
+# Public documentation is accessible to search and assistant crawlers.
+# This includes Googlebot, bingbot, OAI-SearchBot, Claude-SearchBot, and PerplexityBot.
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://app-studio-6167b.web.app/sitemap.xml
+
+# Agent-readable documentation: https://app-studio-6167b.web.app/llms.txt

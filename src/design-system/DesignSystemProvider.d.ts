@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { DesignSystemConfigId } from './configs';
 import {
+  DesignSystemAppearance,
   DesignSystemComponentConfig,
   DesignSystemComponentName,
   DesignSystemConfig,
@@ -10,6 +11,8 @@ export interface DesignSystemProviderProps {
   children: ReactNode;
   config?: DesignSystemConfig;
   configId?: DesignSystemConfigId | string;
+  mode?: DesignSystemAppearance;
+  targetWindow?: Window;
 }
 export declare const DesignSystemProvider: React.FC<DesignSystemProviderProps>;
 export declare const useDesignSystem: () => DesignSystemContextValue;

@@ -1,0 +1,51 @@
+# Providers
+
+Providers share configuration through React context. Start with the theme and responsive providers; add optional contexts only when your app consumes them.
+
+## The usual starting point
+
+```tsx
+import React from 'react';
+import { ThemeProvider, ResponsiveProvider, Vertical, Text } from 'app-studio';
+
+export function ProviderSetup() {
+  return (
+    <ThemeProvider mode="light" theme={{ primary: 'color-blue-900' }}>
+      <ResponsiveProvider>
+        <Vertical padding={24} gap={12}>
+          <Text color="theme-primary" fontWeight="bold">
+            Shared configuration
+          </Text>
+          <Text>Your application's screens belong inside these providers.</Text>
+        </Vertical>
+      </ResponsiveProvider>
+    </ThemeProvider>
+  );
+}
+```
+
+Keep this setup near your app's root. Your router, state, and data providers remain ordinary React providers alongside it.
+
+## ThemeProvider
+
+`theme` maps semantic tokens such as `primary` to colors. `mode` selects `light` or `dark`. The optional `light` and `dark` props customize palette configuration.
+
+The hook API uses different names: `useTheme()` returns `themeMode` and `setThemeMode`, as well as color resolution helpers. See [Colors & theming](/docs/theming) and [Hooks](/docs/hooks).
+
+## ResponsiveProvider
+
+`breakpoints` defines screen sizes and `devices` groups them into names such as `mobile`. Descendants use that configuration through `media` or `useResponsive()`.
+
+Keep device names consistent with the rules in your components. See [Responsive layouts](/docs/responsive).
+
+## Optional providers
+
+**`WindowSizeProvider`** supplies dimensions to `useWindowSize()`. Add it around the consumers that need window measurements. Responsive styling does not require you to add window measurements to every component.
+
+**`AnalyticsProvider`** accepts a `trackEvent` callback. Wire it only if your application needs event tracking; it is not required for basic styling or component rendering.
+
+## Scope configuration deliberately
+
+React context follows the component tree. Keep shared configuration at the root and use nested providers for a deliberate local variation. Test portaled controls, such as dialogs, when a local theme differs from the surrounding app.
+
+The native build exposes the corresponding providers with platform-specific dimension tracking. See [React Native](/docs/react-native).

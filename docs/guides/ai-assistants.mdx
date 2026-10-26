@@ -1,0 +1,43 @@
+# App Studio with AI & coding assistants
+
+App Studio publishes the same documentation for people and coding assistants. Use the [documentation index](/llms.txt) to find a topic, then fetch its Markdown page for the actual API and examples. These files are regenerated with the website so the two formats stay aligned.
+
+## Choose the right package
+
+- **`app-studio`** is the styling framework. Import `View`, `Horizontal`, `Vertical`, `Text`, `ThemeProvider`, and `ResponsiveProvider` from this package. Install it on its own when building your own component system.
+- **`@app-studio/components`** provides ready-made controls built on the framework. Install both packages when using these controls. Check the component's Import section: repository-only modules are explicitly identified.
+- Web and React Native use dedicated builds. Shared imports do not guarantee identical platform support; check [React Native setup](/docs/react-native) and the component reference.
+
+## Give your assistant the documentation
+
+Start with [llms.txt](/llms.txt), a compact index of the framework, setup guides, and component references. Every public page has a Markdown alternative: for example, [installation.md](/docs/installation.md) and [Button.md](/docs/Button.md). The page's HTML head also links to this alternative.
+
+The [complete Markdown export](/llms-full.txt) combines the public pages in one file. It is larger; fetch individual pages when your assistant only needs one API or setup step.
+
+Use this starting prompt with a coding assistant that can fetch URLs:
+
+```text
+Read https://app-studio-6167b.web.app/llms.txt.
+Use its installation, quick-start, styling, and relevant component references.
+Build a React screen with App Studio using the documented imports and callbacks.
+Check required props, provider setup, peer dependencies, and platform limitations.
+Link the reference pages you used and identify anything the docs do not establish.
+```
+
+If the assistant cannot fetch websites, paste the relevant Markdown page into its context. In an existing repository, include your installed package versions and target platform so the assistant can compare the documentation with your local types.
+
+## Check generated code
+
+1. Follow [Installation](/docs/installation) before adding controls. Keep existing compatible peers rather than forcing an installation.
+2. Mount `ThemeProvider` when using `theme-*` and `color-*` tokens. Use `ResponsiveProvider` for named responsive rules.
+3. Use the props documented for the actual component. Required flags, literal defaults, and compound parts are listed in the reference; defaults can be overridden by your design system.
+4. Controlled input callbacks receive values: `TextField` returns a string, while `Checkbox` and `Switch` return booleans. Keep that value in React or form state.
+5. Try the generated result in the component playground and run your application's type checks, keyboard checks, and platform tests. A code example does not establish support for every browser or native platform.
+
+Continue with [Quick start](/docs/quick-start), [Styling & composition](/docs/styling), and [Accessibility](/docs/accessibility).
+
+## Verify source and licensing
+
+The [framework repository](https://github.com/rize-network/app-studio) and [component repository](https://github.com/rize-network/app-studio-components) provide the implementation behind the docs. Component references link to their source declarations. Check the `LICENSE` included with the version you adopt; the two packages have separate terms.
+
+These exports make documentation easier to retrieve. They do not guarantee that a search engine or assistant will index, recommend, or cite the project.

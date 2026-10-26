@@ -1,0 +1,58 @@
+# Animation
+
+Use motion to explain a change or draw attention to new content. Keep important content and controls usable without animation.
+
+## Add an animation preset
+
+Import `Animation` from `app-studio` and pass a preset to `animate`:
+
+```tsx
+import React from 'react';
+import { View, Text, Animation } from 'app-studio';
+import { Button } from '@app-studio/components';
+
+export function MotionExample() {
+  const [version, setVersion] = React.useState(0);
+  return (
+    <View gap={16} display="flex" flexDirection="column">
+      <View
+        key={version}
+        className="app-motion"
+        padding={24}
+        borderRadius={12}
+        backgroundColor="color-violet-50"
+        animate={Animation.fadeIn({ duration: '0.4s' })}
+      >
+        <Text color="color-violet-900">New content, gently introduced.</Text>
+      </View>
+      <Button variant="outline" onClick={() => setVersion(version + 1)}>
+        Replay
+      </Button>
+    </View>
+  );
+}
+```
+
+The React key remounts the animated content for this demonstration. Do not remount an entire form or screen merely to replay motion; that can reset user state.
+
+## Respect reduced motion
+
+On web, add a reduced-motion rule for the region your app animates:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .app-motion,
+  .app-motion * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+```
+
+Do not make completion, navigation, or access to information depend on an animation finishing. Check your native app's reduced-motion behavior separately.
+
+## Native setup
+
+Web presets use CSS keyframes. Native presets use the optional `react-native-reanimated` peer. Without it, animation props are ignored. Follow the peer's platform setup, including the configuration required by your installed version.
+
+See [native setup](/docs/react-native) and the [animation reference](https://github.com/rize-network/app-studio/blob/main/docs/Animation.md) for supported presets and options.

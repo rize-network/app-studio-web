@@ -1,153 +1,113 @@
-/**
- * Post-build prerender step.
- *
- * Server-renders the whole app at "/" (via the SSR bundle from
- * vite.ssr.config.ts) and injects the result into the built index.html so the
- * home page hero is present in the initial HTML response — First/Largest
- * Contentful Paint happen during HTML parsing instead of waiting for the SPA
- * bundle. The client hydrates this markup (src/index.tsx), reusing the DOM
- * rather than repainting it, which keeps the hero off the JS-gated critical path.
- *
- * Two adjustments make hydration clean and the critical HTML small:
- *   1. ThemeProvider renders its CSS-variable <style> only when there is no
- *      window (i.e. during SSR). The browser ThemeProvider injects the same
- *      variables via an effect instead, so that <style> must NOT remain inside
- *      #root or hydration would mismatch. We lift it into <head> (and prune it
- *      to just the variables the hero references — the full palette is ~60KB).
- *   2. The subset Mulish font is inlined as a data URI so the brand font ships
- *      inside the document with no separate, bandwidth-competing request.
- * (The hero background image is inlined as a data URI via the `?inline`-style
- * build, so it likewise needs no network request.)
- */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import assert from 'node:assert/strict';
+import { pageMarkdown, writeAiDocuments } from './ai-docs.mjs';
+import { load } from 'cheerio';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const root = resolve(__dirname, '..');
-
-const { renderHero } = await import(
-  pathToFileURL(resolve(root, 'build-ssr/entry-hero.js')).href
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const { renderPage, publicPaths, SITE_URL, getPageMetadata, markdownPath } =
+  await import(pathToFileURL(resolve(root, 'build-ssr/entry-hero.js')).href);
+const template = readFileSync(resolve(root, 'build/index.html'), 'utf8');
+assert(
+  template.includes('<div id="root"></div>'),
+  'Run npm run build:web to generate a fresh HTML template.'
 );
 
-const { html: rawHtml, css } = renderHero();
-
-// Lift the ThemeProvider <style> out of the body markup and prune it. `html` is
-// the #root content the client will hydrate (no theme <style>); `themeCss` goes
-// into <head>.
-const { html, themeCss } = liftThemeVars(rawHtml, css);
-
-const indexPath = resolve(root, 'build/index.html');
-let index = readFileSync(indexPath, 'utf8');
-
-// Inject app-studio utility CSS + the pruned theme variables into <head>.
-const headStyles =
-  `<style id="app-studio-ssr">${css}</style>` +
-  (themeCss ? `<style id="app-studio-theme">${themeCss}</style>` : '');
-index = index.replace('</head>', `${headStyles}\n</head>`);
-
-// Drop Vite's modulepreload hints. The page is prerendered and hydrated, so the
-// bundle is not needed for first paint; preheating it only contends for the
-// initial connection bandwidth and delays FCP/LCP.
-index = index.replace(/\s*<link rel="modulepreload"[^>]*>/g, '');
-
-// Boot strategy. The home page ("/") is a fully static prerendered document —
-// hero text + SVG + real <a> CTAs — so it needs ZERO JavaScript to render or to
-// navigate. The ~100KB hydration bundle is what otherwise gates the homepage LCP
-// (mobile Perf 99). So we replace Vite's eager entry <script> with a tiny inline
-// bootstrap that, on "/", loads the bundle only on the first user interaction
-// (Lighthouse never interacts → it measures the static page → mobile 100; real
-// users get full interactivity the moment they engage). Every OTHER route loads
-// the bundle immediately so the SPA renders it.
-const entryRe = /<script type="module"[^>]*\ssrc="([^"]+)"[^>]*><\/script>/;
-const em = index.match(entryRe);
-if (em) {
-  const src = em[1];
-  const bootstrap =
-    `<script>(function(){var S=${JSON.stringify(src)},done=false;` +
-    `function load(){if(done)return;done=true;var s=document.createElement('script');` +
-    `s.type='module';s.crossOrigin='anonymous';s.src=S;document.head.appendChild(s);}` +
-    `var p=location.pathname;` +
-    `if(p!=='/'&&p!=='/index.html'){load();return;}` +
-    `var E=['pointerdown','mousedown','keydown','touchstart','wheel','scroll','mousemove'];` +
-    `function go(){E.forEach(function(e){window.removeEventListener(e,go,true);});load();}` +
-    `E.forEach(function(e){window.addEventListener(e,go,{capture:true,passive:true});});` +
-    `})();</script>`;
-  index = index.replace(entryRe, bootstrap);
-} else {
-  console.warn('prerender: entry <script type="module"> not found — bundle not deferred');
+// Each public page serves its content and metadata before JavaScript loads.
+const pages = [];
+for (const route of publicPaths) {
+  const { html: rawHtml, css, head } = await renderPage(route);
+  assert(!/<!--\$[!?]-->/.test(rawHtml), `Incomplete server render: ${route}`);
+  assert(rawHtml.includes('<h1'), `Missing page content: ${route}`);
+  const { html, themeCss } = liftThemeVars(rawHtml, css);
+  const output = template
+    .replace(/<title>[\s\S]*?<\/title>/, '')
+    .replace(/<meta name="description"[^>]*>/, '')
+    .replace(
+      '</head>',
+      `${head}<style id="app-studio-ssr">${css}</style><style id="app-studio-theme">${themeCss}</style></head>`
+    )
+    .replace(
+      '<div id="root"></div>',
+      `<div id="root" data-prerendered-path="${route}">${html}</div>`
+    );
+  const directory = resolve(root, 'build', route.slice(1));
+  mkdirSync(directory, { recursive: true });
+  writeFileSync(resolve(directory, 'index.html'), output);
+  const description = load(html)('.docs-reference-heading p').first().text();
+  pages.push({
+    ...getPageMetadata(route),
+    ...(description ? { description } : {}),
+    markdown: pageMarkdown(html, SITE_URL + route),
+  });
+  console.log(`prerender: ${route} — ${html.length} bytes HTML`);
 }
-
-
-// Inject the prerendered markup into #root.
-const rootRe = /<div id="root">[\s\S]*?<\/div>(?=\s*<script)/;
-if (rootRe.test(index)) {
-  index = index.replace(rootRe, `<div id="root">${html}</div>`);
-} else {
-  index = index.replace('<div id="root"></div>', `<div id="root">${html}</div>`);
-}
-
-writeFileSync(indexPath, index);
-console.log(
-  `prerender: injected ${html.length} bytes HTML + ${css.length} bytes CSS + ${themeCss.length} bytes theme vars`
+writeAiDocuments({
+  pages,
+  site: SITE_URL,
+  output: resolve(root, 'build'),
+  markdownPath,
+});
+writeFileSync(
+  resolve(root, 'build/sitemap.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${publicPaths
+    .map((path) => `<url><loc>${SITE_URL}${path}</loc></url>`)
+    .join('')}</urlset>\n`
 );
 
-/**
- * Remove the ThemeProvider-emitted `<style>:root{…}</style>` from the rendered
- * HTML and return it separately, pruned to only the CSS variables the markup /
- * utility CSS actually reference (following `var(--x): var(--y)` transitively).
- */
+// ThemeProvider emits its palette in SSR. Move only referenced variables into head
+// so hydration sees the same component tree without shipping the entire palette.
 function liftThemeVars(htmlStr, utilityCss) {
   const styleRe = /<style>(:root\{[\s\S]*?)<\/style>/;
-  const m = htmlStr.match(styleRe);
-  if (!m) return { html: htmlStr, themeCss: '' };
-  const themeCss = m[1];
-  const htmlWithout = htmlStr.replace(styleRe, '');
-
-  const blocks = [...themeCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map((b) => ({
-    selector: b[1],
-    decls: b[2]
-      .split(';')
-      .map((d) => d.trim())
-      .filter(Boolean)
-      .map((d) => {
-        const i = d.indexOf(':');
-        return { name: d.slice(0, i).trim(), value: d.slice(i + 1).trim() };
-      }),
-  }));
-
-  const varsIn = (str) =>
-    [...str.matchAll(/var\(\s*(--[\w-]+)\s*\)/g)].map((x) => x[1]);
-
-  // Seed from the markup + utility CSS, then pull in referenced vars transitively.
-  const used = new Set(varsIn(htmlWithout + utilityCss));
+  const match = htmlStr.match(styleRe);
+  if (!match) return { html: htmlStr, themeCss: '' };
+  const html = htmlStr.replace(styleRe, '');
+  const blocks = [...match[1].matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(
+    (block) => ({
+      selector: block[1],
+      declarations: block[2]
+        .split(';')
+        .map((declaration) => declaration.trim())
+        .filter(Boolean)
+        .map((declaration) => {
+          const separator = declaration.indexOf(':');
+          return {
+            name: declaration.slice(0, separator).trim(),
+            value: declaration.slice(separator + 1).trim(),
+          };
+        }),
+    })
+  );
+  const variables = (value) =>
+    [...value.matchAll(/var\(\s*(--[\w-]+)\s*\)/g)].map((item) => item[1]);
+  const used = new Set(variables(html + utilityCss));
   let changed = true;
   while (changed) {
     changed = false;
     for (const block of blocks) {
-      for (const d of block.decls) {
-        if (used.has(d.name)) {
-          for (const ref of varsIn(d.value)) {
-            if (!used.has(ref)) {
-              used.add(ref);
-              changed = true;
-            }
+      for (const declaration of block.declarations) {
+        if (!used.has(declaration.name)) continue;
+        for (const reference of variables(declaration.value)) {
+          if (!used.has(reference)) {
+            used.add(reference);
+            changed = true;
           }
         }
       }
     }
   }
-
-  const pruned = blocks
+  const themeCss = blocks
     .map((block) => {
-      const kept = block.decls.filter((d) => used.has(d.name));
+      const kept = block.declarations.filter((declaration) =>
+        used.has(declaration.name)
+      );
       return kept.length
         ? `${block.selector}{${kept
-            .map((d) => `${d.name}:${d.value}`)
+            .map(({ name, value }) => `${name}:${value}`)
             .join(';')}}`
         : '';
     })
     .join('');
-
-  return { html: htmlWithout, themeCss: pruned };
+  return { html, themeCss };
 }

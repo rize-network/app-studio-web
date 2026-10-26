@@ -1,0 +1,51 @@
+# Accessibility
+
+Components are a starting point. The accessibility of your product also depends on composition, labels, content, styling overrides, and platform behavior.
+
+## Give controls a clear name
+
+Use visible labels for fields and meaningful text for actions. An icon-only button needs an accessible name. Avoid using a placeholder as the only field label.
+
+```tsx
+import React from 'react';
+import { Vertical } from 'app-studio';
+import { TextField, Button } from '@app-studio/components';
+
+export function LabeledControls() {
+  return (
+    <Vertical gap={16}>
+      <TextField
+        label="Project name"
+        placeholder="For example, Design system"
+      />
+      <Button ariaLabel="Create project">Create project</Button>
+    </Vertical>
+  );
+}
+```
+
+## Preserve semantics and keyboard behavior
+
+Use buttons for actions and links for navigation. When using primitives on web, choose the appropriate `as` element. Keep a visible focus indicator and do not recreate a button with a clickable generic container.
+
+Check Tab order, Enter and Space activation, Escape behavior for overlays, and focus return after a dialog closes. Test each component's supported keyboard behavior before composing a new interaction.
+
+## Communicate state and errors
+
+Make disabled, selected, loading, success, and error states understandable without color alone. Associate error text with the corresponding field. Announce relevant asynchronous results without moving focus unnecessarily.
+
+Do not add ARIA roles that conflict with a control's native semantics. The appropriate API differs between the web and native implementations.
+
+## Check colors and motion
+
+Verify contrast in light and dark mode and after applying theme or view overrides. Ensure focus indicators remain visible against the actual surface. Respect reduced motion as described in [Animation](/docs/animation).
+
+## Test the composed experience
+
+1. Complete the main task using only a keyboard.
+2. Check names, roles, state, and reading order with a screen reader.
+3. Enlarge text and test narrow layouts without losing content or controls.
+4. Test invalid and loading states, not only the successful path.
+5. Repeat platform-specific checks on a real native target when sharing a screen.
+
+Automated checks can catch some problems. They do not establish full conformance or replace testing your product's real workflows.

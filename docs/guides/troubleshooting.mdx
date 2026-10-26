@@ -1,0 +1,45 @@
+# Troubleshooting
+
+Start with the smallest component that reproduces the issue. Check the installed package versions and your provider setup before adding overrides.
+
+## Colors are missing
+
+Confirm that `ThemeProvider` wraps the component and the token exists. `theme-primary` and `color-*` props resolve through the provider's variables. A raw color and a token follow different resolution paths.
+
+Inspect the rendered element and its computed color. Check whether a local `views` override or surrounding stylesheet changes the value. See [Colors & theming](/docs/theming).
+
+## Responsive props do nothing
+
+Mount `ResponsiveProvider`. Check its breakpoint and device configuration, and confirm which viewport or container drives the rule. Do not assume a narrow panel automatically counts as the `mobile` device.
+
+See [Responsive layouts](/docs/responsive).
+
+## Input state does not update
+
+Use value-first handlers. `TextField` returns a string; `Checkbox` and `Switch` return booleans. Use `onChange={setValue}` for controlled state rather than reading `event.target.value` from these component callbacks.
+
+Keep the controlled value and handler on the same component. See [Forms & validation](/docs/forms).
+
+## An import or peer dependency fails
+
+Check the package's exported entry points and the peer versions used by your app. Install compatible peers instead of forcing an incompatible dependency tree. Keep React and its renderer compatible.
+
+If you develop these repositories locally, build the sibling `app-studio` package before consuming its generated entry points. That source-checkout step is separate from installing the published package in an application.
+
+## A routing component throws
+
+Check whether the component depends on React Router and whether it is inside your application's router. A component's navigation behavior is different from a simple action button with an `onClick` handler.
+
+## Native rendering differs from the web preview
+
+The site's previews are browser examples. Check component availability, Metro export resolution, optional native peers, and native-specific setup. Browser selectors, form semantics, and navigation do not map directly to native.
+
+Start with [React Native](/docs/react-native) and the linked compatibility matrix.
+
+## An older reference differs from the API
+
+Individual component pages contain existing reference material. Confirm the current TypeScript props and compare the [interactive examples](/docs/components) before copying an older prop value. Report the exact page, package versions, platform, and minimal reproduction when opening an issue.
+
+## Where to ask or contribute
+
+Use the [component repository](https://github.com/rize-network/app-studio-components/issues) for ready-made UI issues and the [framework repository](https://github.com/rize-network/app-studio/issues) for primitives and styling behavior. Include the error message and a small reproduction without credentials or private application data.

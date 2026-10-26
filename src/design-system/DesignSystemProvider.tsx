@@ -32,6 +32,8 @@ export interface DesignSystemProviderProps {
    * only when there is no surrounding ThemeProvider.
    */
   mode?: DesignSystemAppearance;
+  /** Document that owns the subtree and its theme stylesheet (for iframe portals). */
+  targetWindow?: Window;
 }
 
 export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
@@ -39,6 +41,7 @@ export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
   config,
   configId,
   mode,
+  targetWindow,
 }) => {
   const resolvedConfig =
     config ||
@@ -74,6 +77,7 @@ export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
       <ThemeProvider
         theme={resolvedConfig.theme}
         mode={effectiveMode}
+        targetWindow={targetWindow}
         transparentWrapper
       >
         <div

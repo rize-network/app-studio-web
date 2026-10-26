@@ -1,0 +1,53 @@
+# Build with App Studio
+
+A shared foundation for React and React Native. Start with ready-made UI, or build your own components with the styling framework underneath it.
+
+<div className="docs-start-grid">
+  <a href="/docs/installation">
+    <span className="docs-label">START HERE</span>
+    <strong>Install the packages</strong>
+    <span>Requirements, peer dependencies, and provider setup.</span>
+  </a>
+  <a href="/docs/components">
+    <span className="docs-label">EXPLORE THE LIBRARY</span>
+    <strong>Find a component</strong>
+    <span>Browse categories, try controls, and open working examples.</span>
+  </a>
+</div>
+
+## Two packages, one foundation
+
+**`app-studio`** is the framework: layout primitives such as `View`, `Horizontal`, and `Vertical`, typed style props, theme tokens, responsive rules, hooks, and animation presets.
+
+**`@app-studio/components`** is the component library built on that framework: buttons, inputs, navigation, feedback, overlays, and other interface controls.
+
+Use the framework on its own when you want to create your own controls. Install both packages when you want ready-made components. You do not need to replace your existing React state management or application architecture.
+
+## Your path to a first interface
+
+1. **Install:** choose your platform and add compatible dependencies in [Installation](/docs/installation).
+2. **Configure:** wrap the app in `ThemeProvider` and `ResponsiveProvider`.
+3. **Build:** follow the [Quick start](/docs/quick-start) to connect real state to your first controls.
+4. **Customize:** learn [styling](/docs/styling), [themes](/docs/theming), and [responsive layouts](/docs/responsive).
+5. **Explore:** use the [component browser](/docs/components) to find reference material and existing examples.
+
+## Conventions to know
+
+- Import layout primitives and providers from `app-studio`.
+- Import ready-made controls from `@app-studio/components`.
+- Pass familiar styling properties directly as props.
+- Resolve `theme-*` and `color-*` tokens through `ThemeProvider`.
+- Input callbacks use values: `TextField` returns a string; `Checkbox` and `Switch` return booleans.
+- Platform support depends on the component. Read [React Native](/docs/react-native) before sharing a screen.
+
+## How to use this documentation
+
+**Getting started** takes you from installation to your first working interface. **Foundations** explains the styling model. **Guides** covers common implementation decisions.
+
+The **component library** is grouped by category. A component's **Reference** page contains its existing documentation, while **Examples** opens its interactive demonstration page. The component browser exposes both, so you can inspect behavior before using it.
+
+Component references include import instructions, interactive examples with copyable source, and searchable props tables. Required props, literal implementation defaults, and compound parts are listed together. Shared styling props link back to the foundations guides.
+
+## Build in the open
+
+Explore [the component source](https://github.com/rize-network/app-studio-components) and [the framework source](https://github.com/rize-network/app-studio). Refer to each package's included `LICENSE` for its terms of use.

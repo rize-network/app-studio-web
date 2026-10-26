@@ -1,0 +1,68 @@
+# App Studio foundations
+
+`app-studio` is the framework underneath `@app-studio/components`. It provides a common way to describe layout and styling in React and React Native.
+
+## Layout primitives
+
+- `View` is a general-purpose container.
+- `Vertical` stacks children in a column.
+- `Horizontal` places children in a row.
+- `Center` centers its children.
+- `Text` renders text with typography and color props.
+- `Grid` uses CSS Grid on web and a fixed-column Flexbox mapping on native.
+
+```tsx
+import React from 'react';
+import { Vertical, Horizontal, Text } from 'app-studio';
+
+export function ProjectSummary() {
+  return (
+    <Vertical
+      gap={16}
+      padding={24}
+      backgroundColor="color-blue-50"
+      borderRadius={12}
+    >
+      <Text fontSize={22} fontWeight="bold">
+        Project overview
+      </Text>
+      <Horizontal gap={12} alignItems="center">
+        <Text color="theme-primary">Ready to build</Text>
+        <Text color="color-gray-600">React + Native</Text>
+      </Horizontal>
+    </Vertical>
+  );
+}
+```
+
+## Style props
+
+Pass familiar properties such as `padding`, `gap`, `borderRadius`, and `backgroundColor` directly to a primitive. Numbers represent pixels on web and native layout units on React Native.
+
+On web, use semantic elements through `as`, for example `Text as="h2"` or `View as="section"`. Native accessibility semantics need platform-specific props and behavior; browser tags are not native accessibility roles.
+
+## Providers and tokens
+
+`ThemeProvider` resolves color tokens. `ResponsiveProvider` configures named devices and breakpoints. Keep them near the root so screens share the same foundation.
+
+- `theme-primary` expresses a semantic role you configure.
+- `color-blue-900` selects a palette entry.
+- `media={{ mobile: { padding: 16 } }}` changes styles for a configured device.
+
+Use [Colors & theming](/docs/theming) and [Responsive layouts](/docs/responsive) for practical examples.
+
+## Composition stays in React
+
+Extract reusable components, pass props and children, and use hooks as you would in a React app. Routing, application state, data fetching, and validation stay with your chosen tools.
+
+The ready-made library adds props such as `variant`, `size`, and `views`. See [Styling & composition](/docs/styling) before creating wrappers around every control.
+
+## What changes between platforms
+
+Package exports select separate web and native implementations. Many props and conventions are shared, but browser selectors, form semantics, navigation, and CSS Grid do not map one-to-one.
+
+Read [React Native](/docs/react-native) before assuming a web example can be shared unchanged.
+
+## Further reference
+
+The framework repository has detailed references for [primitives](https://github.com/rize-network/app-studio/blob/main/docs/Components.md), [providers](https://github.com/rize-network/app-studio/blob/main/docs/Providers.md), and [hooks](https://github.com/rize-network/app-studio/blob/main/docs/Hooks.md).

@@ -1,0 +1,71 @@
+# Quick start
+
+Build a small interface with real React state. Complete [Installation](/docs/installation) first; this example needs both packages and their web peers.
+
+## Start with a working screen
+
+Copy this into your app's entry component. Edit the name, toggle notifications, and press the button. This example updates local state only; it does not save data to a server.
+
+```tsx
+import React from 'react';
+import { ThemeProvider, ResponsiveProvider, Vertical, Text } from 'app-studio';
+import { Button, TextField, Switch } from '@app-studio/components';
+
+export default function App() {
+  const [name, setName] = React.useState('My project');
+  const [notifications, setNotifications] = React.useState(true);
+  const [message, setMessage] = React.useState('');
+  return (
+    <ThemeProvider theme={{ primary: 'color-blue-900' }}>
+      <ResponsiveProvider>
+        <Vertical
+          gap={16}
+          padding={32}
+          maxWidth={480}
+          media={{ mobile: { padding: 16 } }}
+        >
+          <Text as="h2" fontSize={28} fontWeight="bold">
+            Your first interface
+          </Text>
+          <TextField label="Project name" value={name} onChange={setName} />
+          <Switch
+            label="Enable notifications"
+            isChecked={notifications}
+            onChange={setNotifications}
+          />
+          <Button
+            isDisabled={!name.trim()}
+            onClick={() =>
+              setMessage(
+                `${name.trim()}: notifications ${notifications ? 'on' : 'off'}.`
+              )
+            }
+          >
+            Preview settings
+          </Button>
+          <Text role="status">{message}</Text>
+        </Vertical>
+      </ResponsiveProvider>
+    </ThemeProvider>
+  );
+}
+```
+
+## Understand the imports
+
+`ThemeProvider`, `ResponsiveProvider`, `Vertical`, and `Text` come from the framework. `Button`, `TextField`, and `Switch` come from the ready-made component library.
+
+`Vertical` stacks children. `gap` sets space between them. `padding` and the `media` override describe the layout alongside its structure.
+
+## Connect state with values
+
+`TextField` calls `onChange` with the new string. `Switch` and `Checkbox` call it with a boolean. Pass your setter directly, or transform the value in your callback. These callbacks do not pass a DOM change event.
+
+The empty-name check disables the button. Your app remains responsible for validation and persistence; a styled control does not save data automatically.
+
+## Make one change at a time
+
+- Change `theme.primary` in [Colors & theming](/docs/theming).
+- Choose variants or customize internal views in [Styling & composition](/docs/styling).
+- Connect a complete form in [Forms & validation](/docs/forms).
+- Use the [component browser](/docs/components) to find your next building block.

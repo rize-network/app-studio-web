@@ -1,0 +1,70 @@
+# Colors & theming
+
+Connect your interface to shared color tokens. Put `ThemeProvider` near the root so primitives and ready-made components resolve the same palette.
+
+## Theme tokens and palette tokens
+
+`theme-primary` is a semantic role. You decide which palette entry it points to. `color-blue-900` is a specific palette entry. Both are resolved through the provider.
+
+```tsx
+import React from 'react';
+import { ThemeProvider, Vertical, Text } from 'app-studio';
+import { Button } from '@app-studio/components';
+
+export function BrandExample() {
+  return (
+    <ThemeProvider theme={{ primary: 'color-violet-700' }}>
+      <Vertical gap={16} padding={24}>
+        <Text color="theme-primary" fontWeight="bold">
+          Your brand, shared.
+        </Text>
+        <Button>Primary action</Button>
+        <Button variant="outline">Secondary action</Button>
+      </Vertical>
+    </ThemeProvider>
+  );
+}
+```
+
+Use semantic tokens for roles that should change together. Use palette tokens when a deliberate fixed color is appropriate.
+
+## Light and dark mode
+
+Control the provider's `mode` prop with React state. It selects the light or dark palette; it does not automatically redesign every custom color or browser document style in your application.
+
+```tsx
+import React from 'react';
+import { ThemeProvider, Vertical, Text } from 'app-studio';
+import { Button } from '@app-studio/components';
+
+export function ThemeExample() {
+  const [dark, setDark] = React.useState(false);
+  return (
+    <ThemeProvider mode={dark ? 'dark' : 'light'}>
+      <Vertical
+        padding={24}
+        gap={16}
+        backgroundColor="color-white"
+        borderRadius={12}
+      >
+        <Text color="color-gray-900">A shared color system.</Text>
+        <Button onClick={() => setDark(!dark)}>
+          Switch to {dark ? 'light' : 'dark'} mode
+        </Button>
+      </Vertical>
+    </ThemeProvider>
+  );
+}
+```
+
+Check text contrast, surfaces, borders, disabled states, and focus rings in each mode. Raw hex colors keep their literal value rather than following the palette.
+
+## Per-component colors
+
+Button supports `backgroundColor` for its surface and `textColor` for explicit content color. Other components have their own color props and internal `views` parts. Check the current TypeScript props before copying an override across components.
+
+## Custom palettes and external tools
+
+The provider also accepts `light` and `dark` palette configurations. `useTheme` exposes helpers such as `getColor` for CSS variables and `getColorHex` when another library needs a literal color.
+
+See the [full theming reference](https://github.com/rize-network/app-studio/blob/main/docs/Theming.md) for palette structure and resolution rules. Start with a few semantic tokens before replacing the entire palette.

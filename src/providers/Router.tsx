@@ -6,14 +6,16 @@ import { APP_FONT_FAMILY } from 'src/assets/fonts';
 
 interface RouterProps {
   children: React.ReactNode;
+  location?: string;
 }
 
-// During the build-time prerender (no window) use a StaticRouter at "/", so the
-// same tree the client hydrates can be rendered server-side. In the browser use
-// BrowserRouter as before.
+// The static router receives the public route being prerendered at build time.
 const isServer = typeof window === 'undefined';
 
-export const RouterProvider: FC<RouterProps> = ({ children }) => {
+export const RouterProvider: FC<RouterProps> = ({
+  children,
+  location = '/',
+}) => {
   const inner = (
     <View
       backgroundColor="#FAFAFA"
@@ -30,7 +32,7 @@ export const RouterProvider: FC<RouterProps> = ({ children }) => {
   );
 
   if (isServer) {
-    return <StaticRouter location="/">{inner}</StaticRouter>;
+    return <StaticRouter location={location}>{inner}</StaticRouter>;
   }
 
   return (

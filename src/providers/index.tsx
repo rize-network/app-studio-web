@@ -28,9 +28,10 @@ export const useThemeActions = () => {
 
 interface WrapperProps {
   children: ReactNode;
+  location?: string;
 }
 
-const Wrapper: React.FC<WrapperProps> = ({ children }) => {
+const Wrapper: React.FC<WrapperProps> = ({ children, location }) => {
   const [mode, setMode] = useState<'light' | 'dark'>('light');
 
   const themeModeValue = useMemo(
@@ -68,7 +69,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
                 desktop: ['lg', 'xl'],
               }}
             >
-              <RouterProvider>{children}</RouterProvider>
+              <RouterProvider location={location}>{children}</RouterProvider>
             </ResponsiveProvider>
           </ThemeProvider>
         </GoogleFontProvider>

@@ -1,7 +1,9 @@
 // File: src/pages/docs/components/CustomLiveCode.component.tsx
 import React, { useState, useEffect, useRef, Fragment } from 'react';
 import type { BabelFileResult, TransformOptions } from '@babel/standalone';
-import { View, Text } from 'app-studio';
+import { Button } from 'src/components/Button/Button';
+import { CopyCode } from 'src/pages/marketing/MarketingLayout';
+import { HighlightedCode } from 'src/pages/code/HighlightedCode';
 
 // Lazy-load @babel/standalone to keep it out of the main bundle (~534KB)
 let cachedTransform: typeof import('@babel/standalone').transform | null = null;
@@ -19,6 +21,8 @@ interface CustomLiveCodeProps {
   scope: Record<string, any>;
   language?: string;
   mainComponentName?: string | null;
+  preview?: React.ReactNode;
+  modules?: Record<string, unknown>;
 }
 
 const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
@@ -27,12 +31,21 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
   scope,
   language = 'jsx',
   mainComponentName,
+  preview: compiledPreview,
+  modules,
 }) => {
+  const [activeView, setActiveView] = useState('preview');
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const [renderedElement, setRenderedElement] = useState<React.ReactNode>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoadingBabel, setIsLoadingBabel] = useState(false);
+  const hasCompiledPreview = compiledPreview !== undefined;
+  const sourceRef = useRef(originalCode);
+  sourceRef.current = originalCode;
 
   useEffect(() => {
+    if (hasCompiledPreview) return;
     if (!code || typeof code !== 'string' || !code.trim()) {
       setRenderedElement(null);
       setError(null);
@@ -55,10 +68,13 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
             ['typescript', { allExtensions: true, isTSX: true }],
           ],
           filename: 'live-code.tsx',
+          ...(modules ? { plugins: ['transform-modules-commonjs'] } : {}),
         };
 
         const babelResult: BabelFileResult | null = transform(
-          code,
+          !mainComponentName && code.trim().startsWith('<')
+            ? `<>${code.trim().replace(/;\s*$/, '')}</>`
+            : code,
           babelOptions
         );
         transpiledCode = babelResult?.code;
@@ -78,31 +94,37 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
         const scopeValues = scopeKeys.map((key) => completeScope[key]);
 
         let executionBody: string;
-        if (mainComponentName) {
+        if (modules) {
+          executionBody = `${transpiledCode}; return exports[${JSON.stringify(
+            mainComponentName || 'default'
+          )}];`;
+        } else if (mainComponentName) {
           executionBody = `
           ${transpiledCode};
           if (typeof ${mainComponentName} !== 'undefined') {
             return ${mainComponentName};
           } else {
-            const allDefined = this;
-            if (allDefined && typeof allDefined['${mainComponentName}'] !== 'undefined') {
-                return allDefined['${mainComponentName}'];
-            }
-            for (const key in allDefined) {
-                if (typeof allDefined[key] === 'function' && key !== 'React' && key !== 'Fragment' && !scopeKeys.includes(key)) {
-                    console.warn("Fallback: Rendering first available function found in code: ", key);
-                    return allDefined[key];
-                }
-            }
             throw new Error("Component '${mainComponentName}' was not defined or found in the provided code.");
           }
         `;
         } else {
-          executionBody = `return (${transpiledCode});`;
+          executionBody = `return (${transpiledCode.replace(/;\s*$/, '')});`;
         }
 
-        const evaluatedFunc = new Function(...scopeKeys, executionBody);
-        const result = evaluatedFunc.apply({}, scopeValues);
+        const evaluatedFunc = new Function(
+          ...scopeKeys,
+          ...(modules ? ['require', 'exports'] : []),
+          executionBody
+        );
+        const requireModule = (name: string) => {
+          if (!modules || !Object.prototype.hasOwnProperty.call(modules, name))
+            throw new Error(`Unsupported example import: ${name}`);
+          return modules[name];
+        };
+        const result = evaluatedFunc(
+          ...scopeValues,
+          ...(modules ? [requireModule, {}] : [])
+        );
 
         if (cancelled) return;
 
@@ -137,11 +159,11 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
           errorMessage += `\nStack: ${e.stack.substring(0, 500)}...`;
         }
 
-        errorMessage += `\n\n--- Original Code (from MDX) ---\n${originalCode.substring(
+        errorMessage += `\n\n--- Original Code (from MDX) ---\n${sourceRef.current.substring(
           0,
           500
         )}...`;
-        if (code !== originalCode) {
+        if (code !== sourceRef.current) {
           errorMessage += `\n\n--- Processed Code (passed to Babel) ---\n${code.substring(
             0,
             500
@@ -163,90 +185,100 @@ const CustomLiveCode: React.FC<CustomLiveCodeProps> = ({
     return () => {
       cancelled = true;
     };
-  }, [code, originalCode, scope, mainComponentName]);
+  }, [code, scope, mainComponentName, hasCompiledPreview, modules]);
 
-  // Basic styling for the component parts. Customize as needed.
-  const containerStyle: React.CSSProperties = {
-    margin: '1em 0',
-    border: '1px solid #e0e0e0',
-    borderRadius: '4px',
-    overflow: 'hidden',
-    fontFamily: 'sans-serif',
-  };
-  const headerStyle: React.CSSProperties = {
-    padding: '8px 12px',
-    backgroundColor: '#f5f5f5',
-    borderBottom: '1px solid #e0e0e0',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  };
-  const headerTextStyle: React.CSSProperties = {
-    margin: 0,
-    fontSize: '0.9em',
-    fontWeight: '600',
-    color: '#333',
-  };
-  const codeBlockStyle: React.CSSProperties = {
-    backgroundColor: '#2d2d2d',
-    color: '#f8f8f2',
-    padding: '12px',
-    fontSize: '0.85em',
-    overflowX: 'auto',
-    fontFamily: 'monospace',
-    maxHeight: '300px',
-  };
-  const preStyle: React.CSSProperties = {
-    margin: 0,
-    whiteSpace: 'pre-wrap',
-    wordBreak: 'break-all',
-  };
-  const previewStyle: React.CSSProperties = {
-    padding: '15px',
-    borderTop: '1px solid #e0e0e0',
-    minHeight: '40px',
-  };
-  const errorStyle: React.CSSProperties = {
-    color: '#d8000c',
-    backgroundColor: '#ffeded',
-    padding: '10px',
-    whiteSpace: 'pre-wrap',
-    fontSize: '0.85em',
-    borderRadius: '3px',
-    fontFamily: 'monospace',
-    overflowX: 'auto',
-  };
-
+  const preview =
+    !mounted || isLoadingBabel ? (
+      <p className="docs-example-message" role="status">
+        Loading preview…
+      </p>
+    ) : error ? (
+      <div className="docs-example-error" role="alert">
+        <strong>This example could not be rendered.</strong>
+        <p>
+          The code is still available. You can also use the component's Examples
+          page.
+        </p>
+        <details>
+          <summary>Error details</summary>
+          <pre>{error}</pre>
+        </details>
+      </div>
+    ) : (
+      <ExampleBoundary key={code}>
+        {compiledPreview ?? renderedElement}
+      </ExampleBoundary>
+    );
   return (
-    <View style={containerStyle}>
-      <View style={headerStyle}>
-        <Text as="h4" style={headerTextStyle}>
-          Live Example
-        </Text>
-        {mainComponentName && (
-          <Text style={{ fontSize: '0.8em', color: '#666' }}>
-            Rendering: {mainComponentName}
-          </Text>
-        )}
-      </View>
-      <View style={codeBlockStyle}>
-        <pre style={preStyle}>
-          <code>{originalCode}</code> {/* Show original code from MDX */}
-        </pre>
-      </View>
-      <View style={previewStyle}>
-        {isLoadingBabel ? (
-          <Text style={{ color: '#666', fontStyle: 'italic' }}>
-            Loading transpiler...
-          </Text>
-        ) : error ? (
-          <pre style={errorStyle}>{error}</pre>
-        ) : (
-          renderedElement
-        )}
-      </View>
-    </View>
+    <div className="docs-example">
+      <div className="docs-example-toolbar">
+        <span>INTERACTIVE EXAMPLE</span>
+        <CopyCode code={originalCode} />
+      </div>
+      <div
+        className="docs-example-view-controls"
+        role="group"
+        aria-label="Example view"
+      >
+        <Button
+          size="sm"
+          variant={activeView === 'preview' ? 'filled' : 'ghost'}
+          aria-pressed={activeView === 'preview'}
+          onClick={() => setActiveView('preview')}
+        >
+          Preview
+        </Button>
+        <Button
+          size="sm"
+          variant={activeView === 'code' ? 'filled' : 'ghost'}
+          aria-pressed={activeView === 'code'}
+          onClick={() => setActiveView('code')}
+        >
+          Code
+        </Button>
+      </div>
+      {activeView === 'preview' ? (
+        <div className="docs-example-preview">{preview}</div>
+      ) : null}
+      <pre
+        className="docs-example-code"
+        tabIndex={0}
+        hidden={activeView !== 'code'}
+        data-language={language}
+      >
+        <HighlightedCode code={originalCode} language={language} />
+      </pre>
+    </div>
   );
 };
+
+export class ExampleBoundary extends React.Component<
+  { children: React.ReactNode; resetKey?: unknown },
+  { error: string; resetKey?: unknown }
+> {
+  state = { error: '', resetKey: this.props.resetKey };
+  static getDerivedStateFromProps(
+    props: { resetKey?: unknown },
+    state: { resetKey?: unknown }
+  ) {
+    return props.resetKey !== state.resetKey
+      ? { error: '', resetKey: props.resetKey }
+      : null;
+  }
+  static getDerivedStateFromError(error: Error) {
+    return { error: error.message };
+  }
+  render() {
+    if (this.state.error)
+      return (
+        <div className="docs-example-error" role="alert">
+          <strong>This example needs an update.</strong>
+          <p>{this.state.error}</p>
+          <p>Open the Code tab or the component's Examples page to continue.</p>
+        </div>
+      );
+    return this.props.children;
+  }
+}
 
 export default CustomLiveCode;

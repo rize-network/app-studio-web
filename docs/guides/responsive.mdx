@@ -1,0 +1,65 @@
+# Responsive layouts
+
+Use the `media` prop for layout and style changes. Use responsive hooks when the rendered behavior or content must change. Configure both through `ResponsiveProvider`.
+
+## Adapt a layout with media
+
+```tsx
+import React from 'react';
+import { Horizontal, Vertical, Text } from 'app-studio';
+import { Button } from '@app-studio/components';
+
+export function ResponsiveActions() {
+  return (
+    <Horizontal
+      gap={24}
+      padding={24}
+      alignItems="center"
+      justifyContent="space-between"
+      media={{
+        mobile: { flexDirection: 'column', alignItems: 'stretch', padding: 16 },
+      }}
+    >
+      <Vertical gap={8}>
+        <Text fontSize={22} fontWeight="bold">
+          Ready for any screen
+        </Text>
+        <Text>Resize the viewport to change the layout.</Text>
+      </Vertical>
+      <Button>Continue</Button>
+    </Horizontal>
+  );
+}
+```
+
+Named devices such as `mobile` depend on your provider configuration. They are not independent magic widths. On web, style overrides use media queries rather than requiring a hook-driven render.
+
+## Configure breakpoints
+
+The shipped defaults use `xs: 0`, `sm: 340`, `md: 560`, `lg: 1080`, and `xl: 1300`. You can supply explicit project breakpoints and device groups:
+
+```ts
+const breakpoints = { xs: 0, sm: 480, md: 768, lg: 1024, xl: 1440 };
+const devices = {
+  mobile: ['xs', 'sm'],
+  tablet: ['md'],
+  desktop: ['lg', 'xl'],
+};
+// Pass both objects to ResponsiveProvider near the root.
+```
+
+Keep this configuration shared across screens. Changing it changes every named-device rule beneath that provider.
+
+## When to use a hook
+
+`useResponsive()` exposes helpers such as `on('mobile')` for device-aware logic. Hook-driven decisions re-render when the responsive state changes. Prefer `media` for purely visual changes and avoid hiding essential content on small screens.
+
+## Native and constrained layouts
+
+Native responsive state follows window dimensions, including rotation and split-screen. CSS Grid does not exist on native: use a fixed integer column count for the supported mapping or explicit Flexbox layouts.
+
+A browser-window breakpoint is not the same as the width of a narrow panel. The framework's [responsive reference](https://github.com/rize-network/app-studio/blob/main/docs/Responsive.md) also covers container-scoped responsiveness.
+
+## Verify the result
+
+Test a narrow phone, a tablet-sized viewport, a wide screen, and enlarged text. Check focus visibility and code overflow as well as visual alignment.
