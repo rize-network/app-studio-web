@@ -33,6 +33,13 @@ export interface DesignSystemProviderProps {
    * only when there is no surrounding ThemeProvider.
    */
   mode?: DesignSystemAppearance;
+  /**
+   * Render no ThemeProvider of its own: colours and mode come from the
+   * surrounding ThemeProvider (an app's `brand`), and this provider only
+   * supplies the component configuration. Without it (the default), the
+   * config's `theme` is applied through a nested ThemeProvider.
+   */
+  inheritTheme?: boolean;
 }
 
 export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
@@ -40,6 +47,7 @@ export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
   config,
   configId,
   mode,
+  inheritTheme = false,
 }) => {
   const resolvedConfig =
     config ||
@@ -68,6 +76,23 @@ export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
   // with its color resolver, so `theme-primary`, `theme-canvas`, etc. work
   // anywhere a component uses them. `transparentWrapper` is auto-inferred
   // (nested under another ThemeProvider) and keeps the page layout intact.
+  const scoped = (
+    <DesignSystemScope
+      id={resolvedConfig.metadata.id}
+      appearance={effectiveMode}
+    >
+      {children}
+    </DesignSystemScope>
+  );
+
+  if (inheritTheme) {
+    return (
+      <DesignSystemContext.Provider value={value}>
+        {scoped}
+      </DesignSystemContext.Provider>
+    );
+  }
+
   return (
     <DesignSystemContext.Provider value={value}>
       {/* No cast: app-studio's `theme` prop accepts ThemeSlots, which
@@ -77,12 +102,7 @@ export const DesignSystemProvider: React.FC<DesignSystemProviderProps> = ({
         mode={effectiveMode}
         transparentWrapper
       >
-        <DesignSystemScope
-          id={resolvedConfig.metadata.id}
-          appearance={effectiveMode}
-        >
-          {children}
-        </DesignSystemScope>
+        {scoped}
       </ThemeProvider>
     </DesignSystemContext.Provider>
   );
