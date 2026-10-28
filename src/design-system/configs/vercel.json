@@ -598,12 +598,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-gray-50",
-          "borderColor": "color-gray-200",
           "borderRadius": 4
         },
         "title": {
-          "color": "theme-primary",
           "fontFamily": "var(--font-sans)",
           "fontWeight": 700,
           "letterSpacing": "-0.04em",
@@ -611,11 +608,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "var(--font-sans)"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },

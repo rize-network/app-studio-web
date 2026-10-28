@@ -585,12 +585,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-gray-50",
-          "borderColor": "color-gray-200",
           "borderRadius": 16
         },
         "title": {
-          "color": "color-black",
           "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
@@ -598,11 +595,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "'Inter', 'Airbnb Cereal VF', Circular, -apple-system, system-ui, Roboto, 'Helvetica Neue', sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },

@@ -708,12 +708,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-gray-50",
-          "borderColor": "color-gray-200",
           "borderRadius": 10
         },
         "title": {
-          "color": "color-black",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
           "fontWeight": 400,
           "letterSpacing": "0em",
@@ -721,11 +718,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },

@@ -668,12 +668,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-gray-50",
-          "borderColor": "color-gray-200",
           "borderRadius": 20
         },
         "title": {
-          "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.02em",
@@ -681,11 +678,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },

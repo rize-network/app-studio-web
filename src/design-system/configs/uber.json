@@ -586,12 +586,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-white",
-          "borderColor": "theme-warning",
           "borderRadius": 4
         },
         "title": {
-          "color": "theme-primary",
           "fontFamily": "'DM Sans', system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
@@ -599,11 +596,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "'DM Sans', system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },

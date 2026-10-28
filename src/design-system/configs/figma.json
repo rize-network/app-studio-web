@@ -582,12 +582,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-gray-50",
-          "borderColor": "color-gray-200",
           "borderRadius": 8
         },
         "title": {
-          "color": "theme-primary",
           "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
@@ -595,11 +592,7 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, Helvetica, sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },
