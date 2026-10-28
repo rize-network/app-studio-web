@@ -29,7 +29,7 @@ exports[`FieldLabel with default props matches snapshot 1`] = `
 
 exports[`FieldLabel with error state matches snapshot 1`] = `
 <label
-  className="wh-100 fse-11px fsee-normal fwt-500 tdn-none pn-static lsg--0p01em wse-nowrap cr-var--color-red-500 tn-color-0p2s-ease"
+  className="wh-100 fse-11px fsee-normal fwt-500 tdn-none pn-static lsg--0p01em wse-nowrap cr-var--theme-error tn-color-0p2s-ease"
   ref={[Function]}
 >
   Error State Label
