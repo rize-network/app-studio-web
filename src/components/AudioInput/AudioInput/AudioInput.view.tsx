@@ -246,7 +246,7 @@ export function AudioInputView({
         </Vertical>
       )}
       {error && (
-        <Text fontSize="11px" lineHeight="16px" color="color-red-500">
+        <Text fontSize="11px" lineHeight="16px" color="theme-error">
           {error}
         </Text>
       )}

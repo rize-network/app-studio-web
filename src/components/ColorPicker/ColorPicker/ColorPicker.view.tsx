@@ -272,7 +272,7 @@ const ColorPickerView: React.FC<ColorPickerViewProps> = ({
         <Text
           fontSize="11px"
           lineHeight="16px"
-          color={error ? 'color-red-500' : 'color-gray-500'}
+          color={error ? 'theme-error' : 'color-gray-500'}
           marginTop="4px"
           {...views?.helperText}
         >

@@ -176,7 +176,7 @@ const IconPickerView: React.FC<IconPickerViewProps> = ({
 
       {helperText && (
         <Text
-          color={error ? 'color-red-500' : 'color-gray-600'}
+          color={error ? 'theme-error' : 'color-gray-600'}
           marginTop="4px"
           {...views?.helperText}
         >

@@ -228,7 +228,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       {helperText && (
         <Text
           fontSize="12px"
-          color={error ? 'color-red-500' : 'color-gray-600'}
+          color={error ? 'theme-error' : 'color-gray-600'}
           marginTop="4px"
           {...views?.helperText}
         >
@@ -239,7 +239,7 @@ const ColorInputView: React.FC<ColorInputViewProps> = ({
       {error && typeof error === 'string' && (
         <Text
           fontSize="12px"
-          color="color-red-500"
+          color="theme-error"
           marginTop="4px"
           {...views?.error}
         >

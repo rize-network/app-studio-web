@@ -25,7 +25,7 @@ export interface LabelProps extends Omit<ViewProps, 'size'> {
   error?: boolean | string;
   // Optional `error` flag forwarded by parent fields via `views?.label`
   // spread; when truthy the label is colored with the shared field error
-  // color (`color-red-500`).
+  // color (`theme-error`).
   isDisabled?: boolean;
   // Optional `isDisabled` flag forwarded by parent fields via `views?.label`
   // spread; mutes the label color and shows a `not-allowed` cursor on web.

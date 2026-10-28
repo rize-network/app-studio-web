@@ -31,7 +31,7 @@ export const FieldLabel: React.FC<LabelProps> = ({
     // under the 4.5:1 contrast ratio and fails axe (serious) on every form
     // screen. De-emphasis, where a design wants it, belongs to a color token
     // that still clears the ratio — not to an opacity filter.
-    color={error ? 'color-red-500' : 'inherit'}
+    color={error ? 'theme-error' : 'inherit'}
     transition="color 0.2s ease"
     {...views['label']}
     {...props}

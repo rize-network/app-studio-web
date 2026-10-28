@@ -254,7 +254,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           size="xs"
           marginTop={4} // 1 × 4px grid
           marginHorizontal={0}
-          color="color-red-500"
+          color="theme-error"
           fontWeight="500" // Medium weight for better readability
           transition="all 0.2s ease-in-out"
         >

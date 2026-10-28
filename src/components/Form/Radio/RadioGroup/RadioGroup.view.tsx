@@ -81,7 +81,7 @@ const RadioGroupView: React.FC<RadioGroupViewProps> = ({
           fontWeight={error ? '500' : '400'}
           fontSize="14px"
           lineHeight="20px"
-          color={error ? 'color-red-500' : 'color-gray-500'}
+          color={error ? 'theme-error' : 'color-gray-500'}
           marginTop={4}
           transition="color 0.2s ease, opacity 0.2s ease"
           {...views.helperText}

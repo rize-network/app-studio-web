@@ -127,7 +127,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           size="xs"
           marginTop={4}
           marginHorizontal={0}
-          color="color-red-500"
+          color="theme-error"
           fontWeight="500"
         >
           {error}
