@@ -602,9 +602,6 @@
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-primary"
-        },
         "label": {
           "color": "theme-primary",
           "fontFamily": "'DM Sans', system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif"

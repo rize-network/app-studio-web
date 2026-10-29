@@ -724,9 +724,6 @@
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-success"
-        },
         "label": {
           "color": "color-black",
           "fontFamily": "'Inter', -apple-system, BlinkMacSystemFont, sans-serif"

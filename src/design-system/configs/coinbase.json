@@ -612,9 +612,6 @@
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-success"
-        },
         "label": {
           "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"

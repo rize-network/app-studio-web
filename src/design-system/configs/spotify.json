@@ -587,9 +587,6 @@
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-primary"
-        },
         "label": {
           "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"

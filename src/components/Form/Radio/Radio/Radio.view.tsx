@@ -111,7 +111,7 @@ const RadioView: React.FC<RadioViewProps> = ({
         borderColor: 'theme-primary',
       },
       color: error
-        ? 'color-red-600'
+        ? 'theme-error'
         : isDisabled
         ? 'color-gray-400'
         : 'inherit',

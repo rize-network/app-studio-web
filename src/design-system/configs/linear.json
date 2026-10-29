@@ -591,9 +591,6 @@
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-success"
-        },
         "label": {
           "color": "color-black",
           "fontFamily": "'Inter', 'SF Pro Display', system-ui, -apple-system, sans-serif"

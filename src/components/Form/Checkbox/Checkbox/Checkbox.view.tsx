@@ -100,7 +100,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
 
       // Visual properties — inherit so the brand/page ink shows on every surface
       color: error
-        ? 'color-red-600'
+        ? 'theme-error'
         : isDisabled
         ? 'color-gray-400'
         : 'inherit',

@@ -684,9 +684,6 @@
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-success"
-        },
         "label": {
           "color": "color-black",
           "fontFamily": "'Aeonik Pro', 'Inter', system-ui, -apple-system, sans-serif"

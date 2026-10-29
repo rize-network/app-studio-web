@@ -504,9 +504,6 @@
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-primary"
-        },
         "label": {
           "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"

@@ -614,9 +614,6 @@
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-success"
-        },
         "label": {
           "color": "theme-primary",
           "fontFamily": "var(--font-sans)"
