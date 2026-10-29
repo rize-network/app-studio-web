@@ -7,11 +7,11 @@ exports[`Alert with error variant matches snapshot 1`] = `
   role="alert"
 >
   <div
-    className="asf-flex-start mtp-2px"
+    className="asf-flex-start mtp-2px cr-var--color-red-600"
     ref={[Function]}
   >
     <div
-      className="wh-20px ht-20px wht-20 cr-var--color-red-500 dy-flex ais-center jct-center tm-rotate0deg"
+      className="wh-20px ht-20px wht-20 cr-currentColor dy-flex ais-center jct-center tm-rotate0deg"
       ref={[Function]}
     />
   </div>
@@ -44,11 +44,11 @@ exports[`Alert with info variant matches snapshot 1`] = `
   role="status"
 >
   <div
-    className="asf-flex-start mtp-2px"
+    className="asf-flex-start mtp-2px cr-var--color-blue-600"
     ref={[Function]}
   >
     <div
-      className="wh-20px ht-20px wht-20 cr-var--color-blue-500 dy-flex ais-center jct-center tm-rotate0deg"
+      className="wh-20px ht-20px wht-20 cr-currentColor dy-flex ais-center jct-center tm-rotate0deg"
       ref={[Function]}
     />
   </div>
@@ -81,11 +81,11 @@ exports[`Alert with success variant matches snapshot 1`] = `
   role="status"
 >
   <div
-    className="asf-flex-start mtp-2px"
+    className="asf-flex-start mtp-2px cr-var--color-green-600"
     ref={[Function]}
   >
     <div
-      className="wh-20px ht-20px wht-20 cr-var--color-green-500 dy-flex ais-center jct-center tm-rotate0deg"
+      className="wh-20px ht-20px wht-20 cr-currentColor dy-flex ais-center jct-center tm-rotate0deg"
       ref={[Function]}
     />
   </div>
@@ -118,11 +118,11 @@ exports[`Alert with warning variant matches snapshot 1`] = `
   role="alert"
 >
   <div
-    className="asf-flex-start mtp-2px"
+    className="asf-flex-start mtp-2px cr-var--color-orange-600"
     ref={[Function]}
   >
     <div
-      className="wh-20px ht-20px wht-20 cr-var--color-orange-500 dy-flex ais-center jct-center tm-rotate0deg"
+      className="wh-20px ht-20px wht-20 cr-currentColor dy-flex ais-center jct-center tm-rotate0deg"
       ref={[Function]}
     />
   </div>
