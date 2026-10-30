@@ -14,7 +14,7 @@ import { Text } from 'app-studio';
 import { Vertical } from 'app-studio';
 
 export const FieldContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
-  ({ children, helperText, error = false, views, ...props }, ref) => (
+  ({ children, helperText, error = false, errorId, views, ...props }, ref) => (
     <Vertical
       ref={ref}
       gap={4}
@@ -35,12 +35,13 @@ export const FieldContainer = React.forwardRef<HTMLDivElement, ContainerProps>(
 
       {error && (
         <Text
+          id={errorId}
           fontSize="11px"
           lineHeight="16px"
           marginTop={0}
           marginHorizontal={0}
           fontWeight="500"
-          color="color-red-500"
+          color="theme-error"
           transition="color 0.2s ease, opacity 0.2s ease"
           {...views?.error}
         >

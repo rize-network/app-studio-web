@@ -596,12 +596,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-gray-50",
-          "borderColor": "color-gray-200",
           "borderRadius": 12
         },
         "title": {
-          "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif",
           "fontWeight": 700,
           "letterSpacing": "-0.01em",
@@ -609,19 +606,12 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-success"
-        },
         "label": {
           "color": "color-black",
           "fontFamily": "'Inter', 'Coinbase Display', -apple-system, system-ui, sans-serif"

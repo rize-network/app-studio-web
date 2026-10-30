@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, Vertical, Horizontal, View } from 'app-studio';
-import { Button, Router, useHistory } from '../..';
+import { Button } from '../../Button/Button';
+import { Router, useHistory } from '..';
 
 const Home = () => {
   const { push } = useHistory();

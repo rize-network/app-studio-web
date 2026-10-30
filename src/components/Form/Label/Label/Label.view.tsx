@@ -39,11 +39,11 @@ const LabelView: React.FC<LabelProps> = ({
       textDecoration={
         isStriked ? 'line-through' : isUnderlined ? 'underline' : 'none'
       }
-      // Error wins over disabled: `color-red-500` is the same token sibling
+      // Error wins over disabled: `theme-error` is the same token sibling
       // field labels use (see Input/FieldLabel); disabled mutes the label the
       // way disabled field text is muted (`color-gray-400`).
       {...(error
-        ? { color: 'color-red-500' }
+        ? { color: 'theme-error' }
         : isDisabled
         ? { color: 'color-gray-400' }
         : {})}

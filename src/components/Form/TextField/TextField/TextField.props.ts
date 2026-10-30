@@ -81,8 +81,11 @@ export interface TextFieldProps
   value?: string;
   // Optional Variant enum to specify the variant of the TextField component.
   variant?: Variant;
-  // Optional flag to render the field as a multiline TextArea-style input.
+  // Optional flag to render the field as a multiline input (a <textarea> on
+  // web, a multiline TextInput on native).
   isMultiline?: boolean;
+  // Alias of `isMultiline`.
+  multiline?: boolean;
   // Optional number of rows when rendered in multiline mode.
   rows?: number;
   // Optional callback ref to the underlying input node. Used by the Formik

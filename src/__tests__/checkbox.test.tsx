@@ -55,6 +55,18 @@ test('infoText and error stay out of the accessible name', () => {
   expect(input).toHaveAccessibleDescription('You can opt out later Required');
 });
 
+// composer.6: an error label takes the theme's error tone (an app may set it), never a fixed palette red.
+test("an error Checkbox's label uses the theme's error tone", () => {
+  render(<Checkbox label="Accept terms" error="Required" />);
+  // The colour sits on the checkbox's container; the label text inherits it.
+  const classes: string[] = [];
+  for (let node: HTMLElement | null = screen.getByText('Accept terms'); node; node = node.parentElement) {
+    classes.push(node.className);
+  }
+  expect(classes.join(' ')).toContain('cr-var--theme-error');
+  expect(classes.join(' ')).not.toContain('red-600');
+});
+
 test('is reachable via Tab', async () => {
   render(<Checkbox label="Accept terms" />);
   await userEvent.tab();

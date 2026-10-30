@@ -8,6 +8,8 @@ export type Styles = {
   icon?: ViewProps;
   // Optional 'text' property of type 'CSSProperties' to define styles for the text within the link.
   text?: ViewProps;
+  // Optional styles applied on top of the active style when `isActive` is set.
+  active?: ViewProps;
 };
 // Begins the declaration of a 'Size' type to dictate allowable size options for the Link component.
 export type Size =

@@ -11,7 +11,7 @@ import { Linking } from 'react-native';
 import { Horizontal } from 'app-studio';
 import { ExternalLinkIcon } from '../../Icon/Icon';
 import { LinkViewProps } from './Link.props';
-import { IconSizes } from './Link.style';
+import { IconSizes, LinkActiveStyles } from './Link.style';
 
 const LinkView = React.forwardRef<any, LinkViewProps>(
   (
@@ -22,8 +22,10 @@ const LinkView = React.forwardRef<any, LinkViewProps>(
       iconSize = 'sm',
       underline = 'default',
       isExternal = false,
+      isActive = false,
       views = { icon: {}, text: {} },
       onPress,
+      accessibilityState,
       isHovered,
       setIsHovered,
       ...props
@@ -52,6 +54,10 @@ const LinkView = React.forwardRef<any, LinkViewProps>(
         alignItems="center"
         flexWrap="nowrap"
         textDecorationLine={textDecoration}
+        accessibilityState={
+          isActive ? { ...accessibilityState, selected: true } : accessibilityState
+        }
+        {...(isActive ? { ...LinkActiveStyles, ...views.active } : {})}
         {...views.text}
         {...props}
       >

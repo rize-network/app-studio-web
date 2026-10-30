@@ -44,7 +44,7 @@ const LabelView: React.FC<LabelProps> = ({
       textDecorationLine={textDecorationLine as any}
       // Error wins over disabled, mirroring the web view (no cursor on RN).
       {...(error
-        ? { color: 'color-red-500' }
+        ? { color: 'theme-error' }
         : isDisabled
         ? { color: 'color-gray-400' }
         : {})}

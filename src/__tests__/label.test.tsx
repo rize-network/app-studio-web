@@ -33,10 +33,12 @@ test('renders a label element with its text', () => {
   expect(label.tagName).toBe('LABEL');
 });
 
-test('error colors the label with the shared field error color', () => {
+test("error colors the label with the theme's error tone", () => {
   render(<Label error>Username</Label>);
   const label = screen.getByText('Username');
-  expect(styleFor(label)).toContain('color-red-500');
+  // The theme's error slot (an app may set it), never a fixed palette red.
+  expect(styleFor(label)).toContain('theme-error');
+  expect(styleFor(label)).not.toContain('color-red-500');
 });
 
 test('isDisabled mutes the label and shows a not-allowed cursor', () => {
@@ -51,6 +53,6 @@ test('a plain label carries neither the error nor the disabled treatment', () =>
   render(<Label>Username</Label>);
   const label = screen.getByText('Username');
   const css = styleFor(label);
-  expect(css).not.toContain('color-red-500');
+  expect(css).not.toContain('theme-error');
   expect(css).not.toContain('not-allowed');
 });

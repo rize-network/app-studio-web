@@ -110,3 +110,30 @@ test('RadioGroup error text describes the group and flags it invalid', () => {
   expect(group).toHaveAccessibleDescription('Pick a plan');
   expect(group).toHaveAttribute('aria-invalid', 'true');
 });
+
+// composer.6: an error label takes the theme's error tone (an app may set it), never a fixed palette red.
+/** The class names of an element and of every ancestor it inherits its text colour from. */
+const inheritedClasses = (element: HTMLElement) => {
+  const classes: string[] = [];
+  for (let node: HTMLElement | null = element; node; node = node.parentElement) classes.push(node.className);
+  return classes.join(' ');
+};
+
+test("an error Radio's label uses the theme's error tone", () => {
+  render(<Radio label="Weekly" name="frequency" value="weekly" error="Pick a frequency" />);
+  // The colour sits on the radio's container; the label text inherits it.
+  const classes = inheritedClasses(screen.getByText('Weekly'));
+  expect(classes).toContain('cr-var--theme-error');
+  expect(classes).not.toContain('red-600');
+});
+
+test("an error RadioGroup's label uses the theme's error tone", () => {
+  render(
+    <RadioGroup name="plan" label="Billing plan" error="Pick a plan">
+      <Radio label="Monthly" value="monthly" />
+    </RadioGroup>
+  );
+  const label = screen.getByText('Billing plan');
+  expect(label.className).toContain('theme-error');
+  expect(label.className).not.toContain('red-600');
+});

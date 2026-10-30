@@ -1,0 +1,47 @@
+# PageHeader
+
+The top of a page: one title, an optional description and at most one primary
+action. The title is the page's `<h1>` on web and a `header`-role text on
+React Native.
+
+### **Import**
+```tsx
+import { PageHeader } from '@app-studio/components';
+```
+
+### **Default**
+```tsx
+import React from 'react';
+import { PageHeader } from '@app-studio/components';
+
+export const DefaultPageHeader = () => (
+  <PageHeader title="Notes" description="Everything you wrote down." />
+);
+```
+
+### **action**
+One primary action (a button that creates, a link that starts the main task).
+
+- **Type:** `React.ReactNode`
+
+```tsx
+import React from 'react';
+import { Button, PageHeader } from '@app-studio/components';
+
+export const PageHeaderWithAction = () => (
+  <PageHeader
+    title="Notes"
+    action={<Button onClick={() => {}}>New note</Button>}
+  />
+);
+```
+
+### **Props**
+| Prop | Type | Description |
+|---|---|---|
+| `title` | `string` | Page title (h1 / header role) |
+| `description` | `string?` | Sentence under the title |
+| `action` | `ReactNode?` | The one primary action |
+| `views` | `{ container?, title?, description?, action? }` | Style overrides |
+
+Other `ViewProps` apply to the container row.

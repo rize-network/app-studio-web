@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View } from 'app-studio';
-import { Button, SplashScreen } from '../..';
+import { Button } from '../../Button/Button';
+import { SplashScreen } from '..';
 
 /**
  * Demonstrates the controlled `isLoaded` flow inside a bordered frame. "Reload"

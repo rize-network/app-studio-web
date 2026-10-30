@@ -42,16 +42,17 @@ export const AlertView = React.memo(
       () => getThemes(currentThemeMode),
       [currentThemeMode]
     );
+    // The icon's colour, from the theme: set on its wrapper (below), which the SVG inherits.
+    const iconColor = views?.icon?.color ?? themes[variant].icon.color;
     // Select the appropriate icon based on the variant
     const getIcon = () => {
       if (icon) return icon;
 
-      // Use the theme color directly from themes
-      const iconColor = views?.icon?.color ?? themes[variant].icon.color;
-
       const iconProps = {
         size: 20,
-        color: iconColor,
+        // The wrapper sets the CSS colour from the token; the SVG strokes it as currentColor, which every
+        // engine paints (Lightpanda does not resolve var() inside the stroke attribute).
+        color: 'currentColor',
       };
 
       switch (variant) {
@@ -89,7 +90,12 @@ export const AlertView = React.memo(
         {...props}
       >
         {/* Icon */}
-        <View alignSelf="flex-start" marginTop="2px" {...views?.icon}>
+        <View
+          alignSelf="flex-start"
+          marginTop="2px"
+          color={iconColor}
+          {...views?.icon}
+        >
           {getIcon()}
         </View>
 

@@ -65,7 +65,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
 
   const containerStyle = {
     gap: 8,
-    color: error ? 'color-red-600' : isDisabled ? 'color-gray-400' : 'inherit',
+    color: error ? 'theme-error' : isDisabled ? 'color-gray-400' : 'inherit',
     opacity: isDisabled ? 0.6 : 1,
     ...views['label'],
   };
@@ -127,7 +127,7 @@ const CheckboxView: React.FC<CheckboxViewProps> = ({
           size="xs"
           marginTop={4}
           marginHorizontal={0}
-          color="color-red-500"
+          color="theme-error"
           fontWeight="500"
         >
           {error}

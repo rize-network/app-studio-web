@@ -488,12 +488,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-gray-50",
-          "borderColor": "color-gray-200",
           "borderRadius": 2
         },
         "title": {
-          "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.06em",
@@ -501,19 +498,12 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-200",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-primary"
-        },
         "label": {
           "color": "theme-primary",
           "fontFamily": "'Share Tech', Arial, Verdana, sans-serif"

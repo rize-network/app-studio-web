@@ -51,7 +51,7 @@ export const getThemes = (
         color: 'color-blue-700',
       },
       icon: {
-        color: 'color-blue-500',
+        color: 'color-blue-600',
       },
     },
     success: {
@@ -66,7 +66,7 @@ export const getThemes = (
         color: 'color-green-700',
       },
       icon: {
-        color: 'color-green-500',
+        color: 'color-green-600',
       },
     },
     error: {
@@ -81,7 +81,7 @@ export const getThemes = (
         color: 'color-red-700',
       },
       icon: {
-        color: 'color-red-500',
+        color: 'color-red-600',
       },
     },
     warning: {
@@ -96,7 +96,7 @@ export const getThemes = (
         color: 'color-orange-700',
       },
       icon: {
-        color: 'color-orange-500',
+        color: 'color-orange-600',
       },
     },
   };

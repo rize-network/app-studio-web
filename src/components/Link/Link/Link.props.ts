@@ -7,6 +7,10 @@ export interface LinkProps extends Omit<ViewProps, 'size'> {
   children: React.ReactNode;
   // Optional prop to define the text decoration style of the link as underline views.
   underline?: TextDecorationStyle;
+  // Optional flag marking the link as the current page: `aria-current="page"`
+  // on web, `accessibilityState.selected` on native, and the active style
+  // (`LinkActiveStyles`, overridable through `views.active`) on both.
+  isActive?: boolean;
   // Optional boolean indicating whether the link points to an external resource. Default behavior may vary based on this value.
   isExternal?: boolean;
   // Optional prop to set the size of an icon if present within the link.

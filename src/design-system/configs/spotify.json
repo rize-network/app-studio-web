@@ -571,12 +571,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "color-gray-50",
-          "borderColor": "color-gray-200",
           "borderRadius": 8
         },
         "title": {
-          "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "-0.02em",
@@ -584,19 +581,12 @@
           "fontStyle": "normal"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-primary"
-        },
         "label": {
           "color": "color-black",
           "fontFamily": "'Inter', Helvetica, Arial, sans-serif"

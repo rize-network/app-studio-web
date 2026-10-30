@@ -603,12 +603,9 @@
     "alert": {
       "views": {
         "container": {
-          "backgroundColor": "theme-secondary",
-          "borderColor": "color-gray-200",
           "borderRadius": 4
         },
         "title": {
-          "color": "theme-primary",
           "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif",
           "fontWeight": 800,
           "letterSpacing": "0.02em",
@@ -616,19 +613,12 @@
           "fontStyle": "italic"
         },
         "description": {
-          "color": "color-gray-500",
           "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
-        },
-        "icon": {
-          "color": "theme-primary"
         }
       }
     },
     "status": {
       "views": {
-        "indicator": {
-          "backgroundColor": "theme-success"
-        },
         "label": {
           "color": "theme-primary",
           "fontFamily": "'Helvetica Now Display', 'Helvetica Neue', 'Inter', Helvetica, Arial, sans-serif"
