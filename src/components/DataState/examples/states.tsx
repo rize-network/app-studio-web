@@ -24,7 +24,9 @@ export const DataStateStates = () => (
         isEmpty={(notes) => notes.length === 0}
         empty={{ title: 'No notes yet', description: 'Write your first one.' }}
       >
-        {(notes) => notes.map((note) => <Text key={note.id}>{note.title}</Text>)}
+        {(notes) =>
+          notes.map((note) => <Text key={note.id}>{note.title}</Text>)
+        }
       </DataState>
     ))}
   </Vertical>

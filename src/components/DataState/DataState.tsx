@@ -54,7 +54,9 @@ export const DataState = <T,>({
       <StatePanel
         state="error"
         title={words.errorTitle}
-        description={failure.kind === 'network' ? words.networkError : undefined}
+        description={
+          failure.kind === 'network' ? words.networkError : undefined
+        }
         action={<Button onClick={query.reload}>{words.retry}</Button>}
       />
     );

@@ -55,7 +55,9 @@ const LinkView = React.forwardRef<any, LinkViewProps>(
         flexWrap="nowrap"
         textDecorationLine={textDecoration}
         accessibilityState={
-          isActive ? { ...accessibilityState, selected: true } : accessibilityState
+          isActive
+            ? { ...accessibilityState, selected: true }
+            : accessibilityState
         }
         {...(isActive ? { ...LinkActiveStyles, ...views.active } : {})}
         {...views.text}

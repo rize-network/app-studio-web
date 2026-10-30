@@ -1,7 +1,11 @@
 import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import { StatusIndicator } from 'src/components';
-import { DesignSystemProvider, defaultDesignSystemConfig, designSystemConfigList } from 'src/design-system';
+import {
+  DesignSystemProvider,
+  defaultDesignSystemConfig,
+  designSystemConfigList,
+} from 'src/design-system';
 
 afterEach(() => {
   cleanup();
@@ -31,7 +35,10 @@ test('no shipped design-system config overrides the status dot colour', () => {
   const configs = [defaultDesignSystemConfig, ...designSystemConfigList];
   expect(configs).toHaveLength(16);
   const offenders = configs
-    .filter((config: any) => config?.components?.status?.views?.indicator?.backgroundColor != null)
+    .filter(
+      (config: any) =>
+        config?.components?.status?.views?.indicator?.backgroundColor != null
+    )
     .map((config: any) => config?.metadata?.id);
   expect(offenders).toEqual([]);
 });

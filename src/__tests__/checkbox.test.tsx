@@ -60,7 +60,11 @@ test("an error Checkbox's label uses the theme's error tone", () => {
   render(<Checkbox label="Accept terms" error="Required" />);
   // The colour sits on the checkbox's container; the label text inherits it.
   const classes: string[] = [];
-  for (let node: HTMLElement | null = screen.getByText('Accept terms'); node; node = node.parentElement) {
+  for (
+    let node: HTMLElement | null = screen.getByText('Accept terms');
+    node;
+    node = node.parentElement
+  ) {
     classes.push(node.className);
   }
   expect(classes.join(' ')).toContain('cr-var--theme-error');

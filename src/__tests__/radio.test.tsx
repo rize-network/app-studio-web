@@ -115,12 +115,20 @@ test('RadioGroup error text describes the group and flags it invalid', () => {
 /** The class names of an element and of every ancestor it inherits its text colour from. */
 const inheritedClasses = (element: HTMLElement) => {
   const classes: string[] = [];
-  for (let node: HTMLElement | null = element; node; node = node.parentElement) classes.push(node.className);
+  for (let node: HTMLElement | null = element; node; node = node.parentElement)
+    classes.push(node.className);
   return classes.join(' ');
 };
 
 test("an error Radio's label uses the theme's error tone", () => {
-  render(<Radio label="Weekly" name="frequency" value="weekly" error="Pick a frequency" />);
+  render(
+    <Radio
+      label="Weekly"
+      name="frequency"
+      value="weekly"
+      error="Pick a frequency"
+    />
+  );
   // The colour sits on the radio's container; the label text inherits it.
   const classes = inheritedClasses(screen.getByText('Weekly'));
   expect(classes).toContain('cr-var--theme-error');

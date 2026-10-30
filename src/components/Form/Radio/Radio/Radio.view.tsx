@@ -110,11 +110,7 @@ const RadioView: React.FC<RadioViewProps> = ({
       selected: {
         borderColor: 'theme-primary',
       },
-      color: error
-        ? 'theme-error'
-        : isDisabled
-        ? 'color-gray-400'
-        : 'inherit',
+      color: error ? 'theme-error' : isDisabled ? 'color-gray-400' : 'inherit',
       cursor: isDisabled ? 'not-allowed' : isReadOnly ? 'default' : 'pointer',
       opacity: isDisabled ? 0.6 : 1,
       transition: 'all 0.2s ease-in-out',
