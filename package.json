@@ -1,6 +1,6 @@
 {
   "name": "@app-studio/components",
-  "version": "0.11.10",
+  "version": "0.11.11",
   "main": "dist/web.cjs.js",
   "module": "dist/web.esm.js",
   "react-native": "dist/native/components/index.js",
@@ -88,8 +88,11 @@
     "validate-docs": "node scripts/validate-docs.js",
     "docs:app-studio": "rm -rf docs/app-studio && mkdir -p docs/app-studio && cp -R node_modules/app-studio/docs/* docs/app-studio",
     "api:local": "react-api  --useUnionTypes --input http://localhost:3000/docs/swagger.json --output ./src/services/api  && prettier --write ./src/services/api",
+    "pretypecheck": "npm run prepare:app-studio",
     "typecheck": "tsc --noEmit -p tsconfig.json",
+    "pretypecheck:native": "npm run prepare:app-studio",
     "typecheck:native": "tsc --noEmit -p tsconfig.native.json",
+    "prepare:app-studio": "npm --prefix ../app-studio run build && mkdir -p node_modules/app-studio/dist && cp -R ../app-studio/dist/. node_modules/app-studio/dist/",
     "build:native": "rm -rf dist/native && tsc -p tsconfig.native.build.json && tsc-alias -p tsconfig.native.build.json",
     "build:native:types": "npm run build:native",
     "build:package": "npm run typecheck && npm run build && npm run typecheck:native && npm run build:native"

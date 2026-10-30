@@ -133,6 +133,7 @@ export interface ContainerProps
 }
 // Defines the properties for the modal's body content area.
 export interface BodyProps extends ViewProps {
+  children?: React.ReactNode;
   // Optional styling properties for nested view components within the body.
   views?: {
     // Styling properties for the body's main view.
@@ -145,6 +146,7 @@ export interface BodyProps extends ViewProps {
 }
 // Defines the properties for the modal's footer component.
 export interface FooterProps extends ViewProps {
+  children?: React.ReactNode;
   // Optional styling properties for nested view components within the footer.
   views?: {
     // Styling properties for the footer's container view.

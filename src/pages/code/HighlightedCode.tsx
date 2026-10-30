@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import type { RootContent } from 'hast';
 import { refractor } from 'refractor/core';
 import tsx from 'refractor/tsx';
 import css from 'refractor/css';
@@ -9,7 +8,9 @@ import './syntax.css';
 
 for (const syntax of [tsx, css, json, bash]) refractor.register(syntax);
 
-function renderToken(node: RootContent, key: number): React.ReactNode {
+type HighlightNode = ReturnType<typeof refractor.highlight>['children'][number];
+
+function renderToken(node: HighlightNode, key: number): React.ReactNode {
   if (node.type === 'text') return node.value;
   if (node.type !== 'element') return null;
   const classes = node.properties.className;
