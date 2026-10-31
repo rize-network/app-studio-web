@@ -69,11 +69,14 @@
   "Gradient",
   "Center",
   "ColorInput",
+  "DataState",
   "File",
   "Form",
   "Horizontal",
   "Label",
+  "PageHeader",
   "ShareButton",
+  "StatePanel",
   "Text",
   "Vertical"
 ]
